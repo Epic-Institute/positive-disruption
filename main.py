@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from podi.tasks import cdr
+from podi.tasks import climate_data
 
 
-cdr.run_cdr()
+print(climate_data.read_climate_data())
