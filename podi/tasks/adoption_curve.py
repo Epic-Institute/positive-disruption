@@ -1,83 +1,77 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import numpy, scipy, matplotlib
-import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
-from scipy.optimize import differential_evolution
 import warnings
 
-def adoption_curve(xData,yData):
-
-    def func(x, a, b, c, d):
-        return a / (1.0 + numpy.exp(-c * (x - d))) + b
-
-
-    # function for genetic algorithm to minimize (sum of squared error)
-    def sumOfSquaredError(parameterTuple):
-        warnings.filterwarnings("ignore") # do not print warnings by genetic algorithm
-        val = func(xData, *parameterTuple)
-        return numpy.sum((yData - val) ** 2.0)
+import numpy
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit, differential_evolution
 
 
-    def generate_Initial_Parameters():
-        parameterBounds = []
-        parameterBounds.append([0.0, 100.0]) # search bounds for a
-        parameterBounds.append([-10.0, 0.0]) # search bounds for b
-        parameterBounds.append([0.0, 10.0]) # search bounds for c
-        parameterBounds.append([0.0, 10.0]) # search bounds for d
+def func(x, a, b, c, d):
+    return a / (1.0 + numpy.exp(-c * (x - d))) + b
 
-        # "seed" the numpy random number generator for repeatable results
-        result = differential_evolution(sumOfSquaredError, parameterBounds, seed=3)
-        return result.x
 
-    # by default, differential_evolution completes by calling curve_fit() using parameter bounds
-    geneticParameters = generate_Initial_Parameters()
+def model_and_scatter_plot(x_data, y_data, fitted_parameters, width, height):
+    f = plt.figure(figsize=(width / 100.0, height / 100.0), dpi=100)
+    axes = f.add_subplot(111)
 
-    # now call curve_fit without passing bounds from the genetic algorithm,
+    # Plot the raw data as a scatter plot.
+    axes.plot(x_data, y_data, "D")
+
+    # Create data for the fitted equation plot.
+    x_model = numpy.linspace(min(x_data), max(x_data))
+    y_model = func(x_model, *fitted_parameters)
+
+    # Plot the model as a line plot.
+    axes.plot(x_model, y_model)
+
+    axes.set_xlabel("X Data")
+    axes.set_ylabel("Y Data")
+
+    plt.show()
+    plt.close("all")
+
+
+def adoption_curve(x_data, y_data):
+    def sum_of_squared_error(parameters):
+        """Function for genetic algorithm to minimize (sum of squared error)."""
+        # Do not print warnings by genetic algorithm.
+        warnings.filterwarnings("ignore")
+        val = func(x_data, *parameters)
+        return numpy.sum((y_data - val) ** 2.0)
+
+    # By default, differential_evolution completes by calling curve_fit()
+    # using parameter bounds.
+    search_bounds = [
+        [0.0, 100.0],  # a
+        [-10.0, 0.0],  # b
+        [0.0, 10.0],  # c
+        [0.0, 10.0],  # d
+    ]
+    # "seed" the numpy random number generator for repeatable results.
+    genetic_parameters = differential_evolution(
+        sum_of_squared_error, search_bounds, seed=3
+    ).x
+
+    # Now call curve_fit without passing bounds from the genetic algorithm,
     # just in case the best fit parameters are aoutside those bounds
-    fittedParameters, pcov = curve_fit(func, xData, yData, geneticParameters)
-    print('Fitted parameters:', fittedParameters)
+    fitted_parameters, _ = curve_fit(func, x_data, y_data, genetic_parameters)
+    print("Fitted parameters:", fitted_parameters)
     print()
 
-    modelPredictions = func(xData, *fittedParameters)
+    model_predictions = func(x_data, *fitted_parameters)
 
-    absError = modelPredictions - yData
+    abs_error = model_predictions - y_data
 
-    SE = numpy.square(absError) # squared errors
-    MSE = numpy.mean(SE) # mean squared errors
-    RMSE = numpy.sqrt(MSE) # Root Mean Squared Error, RMSE
-    Rsquared = 1.0 - (numpy.var(absError) / numpy.var(yData))
-
-    print()
-    print('RMSE:', RMSE)
-    print('R-squared:', Rsquared)
+    sqaured_errors = numpy.square(abs_error)
+    mean_squared_errors = numpy.mean(sqaured_errors)
+    root_mean_squared_error = numpy.sqrt(mean_squared_errors)
+    r_squared = 1.0 - (numpy.var(abs_error) / numpy.var(y_data))
 
     print()
+    print("RMSE:", root_mean_squared_error)
+    print("R-squared:", r_squared)
+    print()
 
-
-    ##########################################################
-    # graphics output section
-    def ModelAndScatterPlot(graphWidth, graphHeight):
-        f = plt.figure(figsize=(graphWidth/100.0, graphHeight/100.0), dpi=100)
-        axes = f.add_subplot(111)
-
-        # first the raw data as a scatter plot
-        axes.plot(xData, yData,  'D')
-
-        # create data for the fitted equation plot
-        xModel = numpy.linspace(min(xData), max(xData))
-        yModel = func(xModel, *fittedParameters)
-
-        # now the model as a line plot
-        axes.plot(xModel, yModel)
-
-        axes.set_xlabel('X Data') # X axis data label
-        axes.set_ylabel('Y Data') # Y axis data label
-
-        plt.show()
-        plt.close('all') # clean up after using pyplot
-
-    graphWidth = 800
-    graphHeight = 600
-    ModelAndScatterPlot(graphWidth, graphHeight)
+    model_and_scatter_plot(x_data, y_data, fitted_parameters, width=800, height=600)
