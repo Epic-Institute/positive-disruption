@@ -3,8 +3,8 @@
 
 import warnings
 
-import numpy
 import matplotlib.pyplot as plt
+import numpy
 from scipy.optimize import curve_fit, differential_evolution
 
 
