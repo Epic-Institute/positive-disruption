@@ -16,6 +16,7 @@ rstcheck = "*"
 sphinx = "*"
 
 [packages]
+matplotlib = "*"
 pandas = "*"
 scipy = "*"
 xlrd = "*"
