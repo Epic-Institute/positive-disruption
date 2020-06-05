@@ -308,4 +308,4 @@ energy_demand_projection = energy_demand_projection.loc[:, :"Year"].join(
     energy_demand_projection.loc[:, "Value"].mul(11.63).astype(int)
 )
 
-energy_demand_projection.to_csv("energy_demand_baseline.csv")
+energy_demand_projection.to_csv(conf.DATA_DIR / "energy_demand_baseline.csv")
