@@ -4,9 +4,9 @@ import pandas as pd
 
 from numpy import NaN
 
-df = pd.read_excel(
-    "/Volumes/GoogleDrive/My Drive/PD21/positive-disruption/data/iea_weo_data.xlsx"
-)
+from podi import conf
+
+df = pd.read_excel(conf.DATA_DIR / "iea_weo_data.xlsx")
 
 df = df.drop(df.index[0:3])
 df.columns = df.iloc[0]
@@ -139,9 +139,7 @@ weo_demand_projection.iloc[:, 19:25] = (
 )
 weo_demand_projection.head(10)
 
-gcam_demand_projection = pd.read_excel(
-    "/Volumes/GoogleDrive/My Drive/PD21/positive-disruption/data/gcam_data.xlsx"
-)
+gcam_demand_projection = pd.read_excel(conf.DATA_DIR / "gcam_data.xlsx")
 
 gcam_demand_projection.insert(4, "2006", NaN)
 gcam_demand_projection.insert(5, "2007", NaN)
@@ -269,9 +267,7 @@ gcam_demand_projection.iloc[:, 88:99] = gcam_demand_projection.iloc[
     :, 88:99
 ].interpolate(axis=1)
 
-iea_weo_dict = pd.read_excel(
-    "/Volumes/GoogleDrive/My Drive/PD21/positive-disruption/data/weo_gcam_dict.xlsx"
-)
+iea_weo_dict = pd.read_excel(conf.DATA_DIR / "weo_gcam_dict.xlsx")
 
 gcam_demand_projection = gcam_demand_projection[
     (gcam_demand_projection.REGION == "World")
