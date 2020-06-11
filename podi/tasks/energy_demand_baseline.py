@@ -89,9 +89,11 @@ energy_demand_history.iloc[:, 2:10] = (
     energy_demand_history.iloc[:, 2:10].interpolate(axis=1).astype(int)
 )
 
-weo_demand_projection_sps = energy_demand_history.iloc[:, 0:2].join(df.iloc[:, 3:8])
+weo_demand_projection_cps = (
+    energy_demand_history.iloc[:, 0:2].join(df.iloc[:, 3]).join(df.iloc[:, 14:18])
+)
 
-weo_demand_projection_sps.columns = [
+weo_demand_projection_cps.columns = [
     "Sector",
     "Metric",
     "2018",
@@ -101,40 +103,44 @@ weo_demand_projection_sps.columns = [
     "2040",
 ]
 
-weo_demand_projection_sps.insert(3, "2019", NaN)
-weo_demand_projection_sps.insert(4, "2020", NaN)
-weo_demand_projection_sps.insert(5, "2021", NaN)
-weo_demand_projection_sps.insert(6, "2022", NaN)
-weo_demand_projection_sps.insert(7, "2023", NaN)
-weo_demand_projection_sps.insert(8, "2024", NaN)
-weo_demand_projection_sps.insert(10, "2026", NaN)
-weo_demand_projection_sps.insert(11, "2027", NaN)
-weo_demand_projection_sps.insert(12, "2028", NaN)
-weo_demand_projection_sps.insert(13, "2029", NaN)
-weo_demand_projection_sps.insert(15, "2031", NaN)
-weo_demand_projection_sps.insert(16, "2032", NaN)
-weo_demand_projection_sps.insert(17, "2033", NaN)
-weo_demand_projection_sps.insert(18, "2034", NaN)
-weo_demand_projection_sps.insert(20, "2036", NaN)
-weo_demand_projection_sps.insert(21, "2037", NaN)
-weo_demand_projection_sps.insert(22, "2038", NaN)
-weo_demand_projection_sps.insert(23, "2039", NaN)
+weo_demand_projection_cps.insert(3, "2019", NaN)
+weo_demand_projection_cps.insert(4, "2020", NaN)
+weo_demand_projection_cps.insert(5, "2021", NaN)
+weo_demand_projection_cps.insert(6, "2022", NaN)
+weo_demand_projection_cps.insert(7, "2023", NaN)
+weo_demand_projection_cps.insert(8, "2024", NaN)
+weo_demand_projection_cps.insert(10, "2026", NaN)
+weo_demand_projection_cps.insert(11, "2027", NaN)
+weo_demand_projection_cps.insert(12, "2028", NaN)
+weo_demand_projection_cps.insert(13, "2029", NaN)
+weo_demand_projection_cps.insert(15, "2031", NaN)
+weo_demand_projection_cps.insert(16, "2032", NaN)
+weo_demand_projection_cps.insert(17, "2033", NaN)
+weo_demand_projection_cps.insert(18, "2034", NaN)
+weo_demand_projection_cps.insert(20, "2036", NaN)
+weo_demand_projection_cps.insert(21, "2037", NaN)
+weo_demand_projection_cps.insert(22, "2038", NaN)
+weo_demand_projection_cps.insert(23, "2039", NaN)
 
-weo_demand_projection_sps.iloc[:, 2:10] = (
-    weo_demand_projection_sps.iloc[:, 2:10].interpolate(axis=1).astype(int)
+weo_demand_projection_cps["2025"] = pd.to_numeric(
+    weo_demand_projection_cps["2025"]
+).astype(float)
+
+weo_demand_projection_cps.iloc[:, 2:10] = (
+    weo_demand_projection_cps.iloc[:, 2:10].interpolate(axis=1).astype(int)
 )
-weo_demand_projection_sps.iloc[:, 9:15] = (
-    weo_demand_projection_sps.iloc[:, 9:15].interpolate(axis=1).astype(int)
+weo_demand_projection_cps.iloc[:, 9:15] = (
+    weo_demand_projection_cps.iloc[:, 9:15].interpolate(axis=1).astype(int)
 )
-weo_demand_projection_sps.iloc[:, 14:20] = (
-    weo_demand_projection_sps.iloc[:, 14:20].interpolate(axis=1).astype(int)
+weo_demand_projection_cps.iloc[:, 14:20] = (
+    weo_demand_projection_cps.iloc[:, 14:20].interpolate(axis=1).astype(int)
 )
-weo_demand_projection_sps.iloc[:, 19:25] = (
-    weo_demand_projection_sps.iloc[:, 19:25].interpolate(axis=1).astype(int)
+weo_demand_projection_cps.iloc[:, 19:25] = (
+    weo_demand_projection_cps.iloc[:, 19:25].interpolate(axis=1).astype(int)
 )
 
-energy_demand_baseline = energy_demand_history.join(
-    weo_demand_projection_sps.loc[:, "2019":]
+energy_demand_cps_baseline = energy_demand_history.join(
+    weo_demand_projection_cps.loc[:, "2019":]
 )
 
 gcam_demand_projection = pd.read_excel(conf.DATA_DIR / "gcam_data.xlsx")
@@ -264,37 +270,38 @@ gcam_demand_projection = gcam_demand_projection[
 ]
 
 gcam_yoychange = gcam_demand_projection.iloc[:, 3:].pct_change(axis="columns")
-gcam_yoychange = gcam_yoychange + 1
 gcam_yoychange = gcam_demand_projection.iloc[:, 0:3].join(
-    gcam_yoychange.loc[:, "2041":]
+    gcam_yoychange.loc[:, "2041":].fillna(0).apply(lambda x: x + 1, axis=1)
 )
 
 gcam_yoychange_merge = iea_weo_dict.merge(
     gcam_yoychange, right_on="VARIABLE", left_on="GCAM Value"
 )
-
-energy_demand_projection = energy_demand_baseline.merge(
+energy_demand_cps_projection = energy_demand_cps_baseline.merge(
     gcam_yoychange_merge,
     right_on=["WEO Sector", "WEO Metric"],
     left_on=["Sector", "Metric"],
 )
 
-energy_demand_projection = energy_demand_projection.drop(
+energy_demand_cps_projection = energy_demand_cps_projection.drop(
     columns=["WEO Sector", "WEO Metric", "GCAM Value", "REGION", "VARIABLE", "UNIT"]
 )
 
-energy_demand_projection = energy_demand_projection.loc[:, :"2039"].join(
-    energy_demand_projection.loc[:, "2040":].cumprod(axis=1).fillna(0).astype(int)
+energy_demand_cps_projection = energy_demand_cps_projection.loc[:, :"2039"].join(
+    energy_demand_cps_projection.loc[:, "2040":].cumprod(axis=1).fillna(0).astype(int)
 )
 
-
-energy_demand_projection = pd.melt(
-    energy_demand_projection, ["Sector", "Metric"], var_name="Year", value_name="Value"
+energy_demand_cps_projection = pd.melt(
+    energy_demand_cps_projection,
+    ["Sector", "Metric"],
+    var_name="Year",
+    value_name="Value",
 )
 
-
-energy_demand_projection = energy_demand_projection.loc[:, :"Year"].join(
-    energy_demand_projection.loc[:, "Value"].mul(11.63).astype(int)
+energy_demand_cps_projection = energy_demand_cps_projection.loc[:, :"Year"].join(
+    energy_demand_cps_projection.loc[:, "Value"].mul(11.63).astype(int)
 )
 
-energy_demand_projection.to_csv("output_data/energy_demand_baseline.csv")
+energy_demand_cps_projection["Year"] = energy_demand_cps_projection["Year"].astype(int)
+
+energy_demand_cps_projection.to_csv("output_data/energy_demand_cps_baseline.csv")
