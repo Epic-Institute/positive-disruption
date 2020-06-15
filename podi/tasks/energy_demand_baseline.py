@@ -6,7 +6,7 @@ from numpy import NaN
 
 from podi import conf
 
-df = pd.read_excel(conf.DATA_DIR / "iea_weo_data.xlsx")
+df = pd.read_excel("iea_weo_data.xlsx")
 
 df = df.drop(df.index[0:3])
 df.columns = df.iloc[0]
@@ -25,16 +25,16 @@ df.insert(
         "TPED",
         "TPED",
         "TPED",
-        "Power Sector",
-        "Power Sector",
-        "Power Sector",
-        "Power Sector",
-        "Power Sector",
-        "Power Sector",
-        "Power Sector",
-        "Power Sector",
-        "Other Energy Sector",
-        "Other Energy Sector",
+        "Power sector",
+        "Power sector",
+        "Power sector",
+        "Power sector",
+        "Power sector",
+        "Power sector",
+        "Power sector",
+        "Power sector",
+        "Other energy sector",
+        "Other energy sector",
         "TFC",
         "TFC",
         "TFC",
@@ -143,7 +143,7 @@ energy_demand_cps_baseline = energy_demand_history.join(
     weo_demand_projection_cps.loc[:, "2019":]
 )
 
-gcam_demand_projection = pd.read_excel(conf.DATA_DIR / "gcam_data.xlsx")
+gcam_demand_projection = pd.read_excel("gcam_data.xlsx")
 
 gcam_demand_projection.insert(4, "2006", NaN)
 gcam_demand_projection.insert(5, "2007", NaN)
@@ -262,7 +262,7 @@ gcam_demand_projection.iloc[:, 88:99] = gcam_demand_projection.iloc[
     :, 88:99
 ].interpolate(axis=1)
 
-iea_weo_dict = pd.read_excel(conf.DATA_DIR / "weo_gcam_dict.xlsx")
+iea_weo_dict = pd.read_excel("weo_gcam_dict.xlsx")
 
 gcam_demand_projection = gcam_demand_projection[
     (gcam_demand_projection.REGION == "World")
@@ -304,4 +304,4 @@ energy_demand_cps_projection = energy_demand_cps_projection.loc[:, :"Year"].join
 
 energy_demand_cps_projection["Year"] = energy_demand_cps_projection["Year"].astype(int)
 
-energy_demand_cps_projection.to_csv("output_data/energy_demand_cps_baseline.csv")
+energy_demand_cps_projection.to_csv("energy_demand_cps_baseline.csv")
