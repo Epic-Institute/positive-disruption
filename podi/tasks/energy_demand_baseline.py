@@ -98,9 +98,16 @@ weo_demand_projection_cps.columns = [
     "2040",
 ]
 
-for i in range(3, 24):
+for i in range(3, 9):
+    weo_demand_projection_cps.insert(i, i + 2016, NaN)
+for i in range(10, 14):
+    weo_demand_projection_cps.insert(i, i + 2016, NaN)
+for i in range(15, 19):
+    weo_demand_projection_cps.insert(i, i + 2016, NaN)
+for i in range(20, 24):
     weo_demand_projection_cps.insert(i, i + 2016, NaN)
 
+weo_demand_projection_cps.columns = weo_demand_projection_cps.columns.astype(str)
 weo_demand_projection_cps["2025"] = pd.to_numeric(weo_demand_projection_cps["2025"]).astype(float)
 
 weo_demand_projection_cps.iloc[:, 2:10] = (
@@ -120,8 +127,27 @@ energy_demand_cps_baseline = energy_demand_history.join(weo_demand_projection_cp
 
 gcam_demand_projection = pd.read_excel("gcam_data.xlsx")
 
-for i in range(4, 97):
+for i in range(4, 8):
     gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(9, 18):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(19, 28):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(29, 38):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(39, 48):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(49, 58):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(59, 68):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(69, 78):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(79, 88):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(89, 98):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+gcam_demand_projection.columns = gcam_demand_projection.columns.astype(str)
 
 gcam_demand_projection.iloc[:, 3:9] = gcam_demand_projection.iloc[:, 3:9].interpolate(axis=1)
 gcam_demand_projection.iloc[:, 8:19] = gcam_demand_projection.iloc[:, 8:19].interpolate(axis=1)
@@ -172,3 +198,4 @@ energy_demand_cps_projection = energy_demand_cps_projection.loc[:, :"Year"].join
 energy_demand_cps_projection["Year"] = energy_demand_cps_projection["Year"].astype(int)
 
 energy_demand_cps_projection.to_csv("refactored_1_energy_demand_cps_baseline.csv")
+
