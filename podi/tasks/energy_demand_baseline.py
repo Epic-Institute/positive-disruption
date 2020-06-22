@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
 import pandas as pd
-
 from numpy import NaN
 
-from podi import conf
+# from podi import conf
 
 df = pd.read_excel("iea_weo_data.xlsx")
 
@@ -78,12 +77,8 @@ energy_demand_history["2010"] = pd.to_numeric(energy_demand_history["2010"]).ast
 energy_demand_history["2017"] = pd.to_numeric(energy_demand_history["2017"]).astype(int)
 energy_demand_history["2018"] = pd.to_numeric(energy_demand_history["2018"]).astype(int)
 
-energy_demand_history.insert(3, "2011", NaN)
-energy_demand_history.insert(4, "2012", NaN)
-energy_demand_history.insert(5, "2013", NaN)
-energy_demand_history.insert(6, "2014", NaN)
-energy_demand_history.insert(7, "2015", NaN)
-energy_demand_history.insert(8, "2016", NaN)
+for i in range(3, 9):
+    energy_demand_history.insert(i, 2008 + i, NaN)
 
 energy_demand_history.iloc[:, 2:10] = (
     energy_demand_history.iloc[:, 2:10].interpolate(axis=1).astype(int)
@@ -103,28 +98,17 @@ weo_demand_projection_cps.columns = [
     "2040",
 ]
 
-weo_demand_projection_cps.insert(3, "2019", NaN)
-weo_demand_projection_cps.insert(4, "2020", NaN)
-weo_demand_projection_cps.insert(5, "2021", NaN)
-weo_demand_projection_cps.insert(6, "2022", NaN)
-weo_demand_projection_cps.insert(7, "2023", NaN)
-weo_demand_projection_cps.insert(8, "2024", NaN)
-weo_demand_projection_cps.insert(10, "2026", NaN)
-weo_demand_projection_cps.insert(11, "2027", NaN)
-weo_demand_projection_cps.insert(12, "2028", NaN)
-weo_demand_projection_cps.insert(13, "2029", NaN)
-weo_demand_projection_cps.insert(15, "2031", NaN)
-weo_demand_projection_cps.insert(16, "2032", NaN)
-weo_demand_projection_cps.insert(17, "2033", NaN)
-weo_demand_projection_cps.insert(18, "2034", NaN)
-weo_demand_projection_cps.insert(20, "2036", NaN)
-weo_demand_projection_cps.insert(21, "2037", NaN)
-weo_demand_projection_cps.insert(22, "2038", NaN)
-weo_demand_projection_cps.insert(23, "2039", NaN)
+for i in range(3, 9):
+    weo_demand_projection_cps.insert(i, i + 2016, NaN)
+for i in range(10, 14):
+    weo_demand_projection_cps.insert(i, i + 2016, NaN)
+for i in range(15, 19):
+    weo_demand_projection_cps.insert(i, i + 2016, NaN)
+for i in range(20, 24):
+    weo_demand_projection_cps.insert(i, i + 2016, NaN)
 
-weo_demand_projection_cps["2025"] = pd.to_numeric(
-    weo_demand_projection_cps["2025"]
-).astype(float)
+weo_demand_projection_cps.columns = weo_demand_projection_cps.columns.astype(str)
+weo_demand_projection_cps["2025"] = pd.to_numeric(weo_demand_projection_cps["2025"]).astype(float)
 
 weo_demand_projection_cps.iloc[:, 2:10] = (
     weo_demand_projection_cps.iloc[:, 2:10].interpolate(axis=1).astype(int)
@@ -139,128 +123,42 @@ weo_demand_projection_cps.iloc[:, 19:25] = (
     weo_demand_projection_cps.iloc[:, 19:25].interpolate(axis=1).astype(int)
 )
 
-energy_demand_cps_baseline = energy_demand_history.join(
-    weo_demand_projection_cps.loc[:, "2019":]
-)
+energy_demand_cps_baseline = energy_demand_history.join(weo_demand_projection_cps.loc[:, "2019":])
 
 gcam_demand_projection = pd.read_excel("gcam_data.xlsx")
 
-gcam_demand_projection.insert(4, "2006", NaN)
-gcam_demand_projection.insert(5, "2007", NaN)
-gcam_demand_projection.insert(6, "2008", NaN)
-gcam_demand_projection.insert(7, "2009", NaN)
-gcam_demand_projection.insert(9, "2011", NaN)
-gcam_demand_projection.insert(10, "2012", NaN)
-gcam_demand_projection.insert(11, "2013", NaN)
-gcam_demand_projection.insert(12, "2014", NaN)
-gcam_demand_projection.insert(13, "2015", NaN)
-gcam_demand_projection.insert(14, "2016", NaN)
-gcam_demand_projection.insert(15, "2017", NaN)
-gcam_demand_projection.insert(16, "2018", NaN)
-gcam_demand_projection.insert(17, "2019", NaN)
-gcam_demand_projection.insert(19, "2021", NaN)
-gcam_demand_projection.insert(20, "2022", NaN)
-gcam_demand_projection.insert(21, "2023", NaN)
-gcam_demand_projection.insert(22, "2024", NaN)
-gcam_demand_projection.insert(23, "2025", NaN)
-gcam_demand_projection.insert(24, "2026", NaN)
-gcam_demand_projection.insert(25, "2027", NaN)
-gcam_demand_projection.insert(26, "2028", NaN)
-gcam_demand_projection.insert(27, "2029", NaN)
-gcam_demand_projection.insert(29, "2031", NaN)
-gcam_demand_projection.insert(30, "2032", NaN)
-gcam_demand_projection.insert(31, "2033", NaN)
-gcam_demand_projection.insert(32, "2034", NaN)
-gcam_demand_projection.insert(33, "2035", NaN)
-gcam_demand_projection.insert(34, "2036", NaN)
-gcam_demand_projection.insert(35, "2037", NaN)
-gcam_demand_projection.insert(36, "2038", NaN)
-gcam_demand_projection.insert(37, "2039", NaN)
-gcam_demand_projection.insert(39, "2041", NaN)
-gcam_demand_projection.insert(40, "2042", NaN)
-gcam_demand_projection.insert(41, "2043", NaN)
-gcam_demand_projection.insert(42, "2044", NaN)
-gcam_demand_projection.insert(43, "2045", NaN)
-gcam_demand_projection.insert(44, "2046", NaN)
-gcam_demand_projection.insert(45, "2047", NaN)
-gcam_demand_projection.insert(46, "2048", NaN)
-gcam_demand_projection.insert(47, "2049", NaN)
-gcam_demand_projection.insert(49, "2051", NaN)
-gcam_demand_projection.insert(50, "2052", NaN)
-gcam_demand_projection.insert(51, "2053", NaN)
-gcam_demand_projection.insert(52, "2054", NaN)
-gcam_demand_projection.insert(53, "2055", NaN)
-gcam_demand_projection.insert(54, "2056", NaN)
-gcam_demand_projection.insert(55, "2057", NaN)
-gcam_demand_projection.insert(56, "2058", NaN)
-gcam_demand_projection.insert(57, "2059", NaN)
-gcam_demand_projection.insert(59, "2061", NaN)
-gcam_demand_projection.insert(60, "2062", NaN)
-gcam_demand_projection.insert(61, "2063", NaN)
-gcam_demand_projection.insert(62, "2064", NaN)
-gcam_demand_projection.insert(63, "2065", NaN)
-gcam_demand_projection.insert(64, "2066", NaN)
-gcam_demand_projection.insert(65, "2067", NaN)
-gcam_demand_projection.insert(66, "2068", NaN)
-gcam_demand_projection.insert(67, "2069", NaN)
-gcam_demand_projection.insert(69, "2071", NaN)
-gcam_demand_projection.insert(70, "2072", NaN)
-gcam_demand_projection.insert(71, "2073", NaN)
-gcam_demand_projection.insert(72, "2074", NaN)
-gcam_demand_projection.insert(73, "2075", NaN)
-gcam_demand_projection.insert(74, "2076", NaN)
-gcam_demand_projection.insert(75, "2077", NaN)
-gcam_demand_projection.insert(76, "2078", NaN)
-gcam_demand_projection.insert(77, "2079", NaN)
-gcam_demand_projection.insert(79, "2081", NaN)
-gcam_demand_projection.insert(80, "2082", NaN)
-gcam_demand_projection.insert(81, "2083", NaN)
-gcam_demand_projection.insert(82, "2084", NaN)
-gcam_demand_projection.insert(83, "2085", NaN)
-gcam_demand_projection.insert(84, "2086", NaN)
-gcam_demand_projection.insert(85, "2087", NaN)
-gcam_demand_projection.insert(86, "2088", NaN)
-gcam_demand_projection.insert(87, "2089", NaN)
-gcam_demand_projection.insert(89, "2091", NaN)
-gcam_demand_projection.insert(90, "2092", NaN)
-gcam_demand_projection.insert(91, "2093", NaN)
-gcam_demand_projection.insert(92, "2094", NaN)
-gcam_demand_projection.insert(93, "2095", NaN)
-gcam_demand_projection.insert(94, "2096", NaN)
-gcam_demand_projection.insert(95, "2097", NaN)
-gcam_demand_projection.insert(96, "2098", NaN)
-gcam_demand_projection.insert(97, "2099", NaN)
+for i in range(4, 8):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(9, 18):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(19, 28):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(29, 38):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(39, 48):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(49, 58):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(59, 68):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(69, 78):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(79, 88):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(89, 98):
+    gcam_demand_projection.insert(i, i + 2002, NaN)
+gcam_demand_projection.columns = gcam_demand_projection.columns.astype(str)
 
-gcam_demand_projection.iloc[:, 3:9] = gcam_demand_projection.iloc[:, 3:9].interpolate(
-    axis=1
-)
-gcam_demand_projection.iloc[:, 8:19] = gcam_demand_projection.iloc[:, 8:19].interpolate(
-    axis=1
-)
-gcam_demand_projection.iloc[:, 18:29] = gcam_demand_projection.iloc[
-    :, 18:29
-].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 28:39] = gcam_demand_projection.iloc[
-    :, 28:39
-].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 38:49] = gcam_demand_projection.iloc[
-    :, 38:49
-].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 48:59] = gcam_demand_projection.iloc[
-    :, 48:59
-].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 58:69] = gcam_demand_projection.iloc[
-    :, 58:69
-].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 68:79] = gcam_demand_projection.iloc[
-    :, 68:79
-].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 78:89] = gcam_demand_projection.iloc[
-    :, 78:89
-].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 88:99] = gcam_demand_projection.iloc[
-    :, 88:99
-].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 3:9] = gcam_demand_projection.iloc[:, 3:9].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 8:19] = gcam_demand_projection.iloc[:, 8:19].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 18:29] = gcam_demand_projection.iloc[:, 18:29].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 28:39] = gcam_demand_projection.iloc[:, 28:39].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 38:49] = gcam_demand_projection.iloc[:, 38:49].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 48:59] = gcam_demand_projection.iloc[:, 48:59].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 58:69] = gcam_demand_projection.iloc[:, 58:69].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 68:79] = gcam_demand_projection.iloc[:, 68:79].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 78:89] = gcam_demand_projection.iloc[:, 78:89].interpolate(axis=1)
+gcam_demand_projection.iloc[:, 88:99] = gcam_demand_projection.iloc[:, 88:99].interpolate(axis=1)
 
 iea_weo_dict = pd.read_excel("weo_gcam_dict.xlsx")
 
@@ -278,9 +176,7 @@ gcam_yoychange_merge = iea_weo_dict.merge(
     gcam_yoychange, right_on="VARIABLE", left_on="GCAM Value"
 )
 energy_demand_cps_projection = energy_demand_cps_baseline.merge(
-    gcam_yoychange_merge,
-    right_on=["WEO Sector", "WEO Metric"],
-    left_on=["Sector", "Metric"],
+    gcam_yoychange_merge, right_on=["WEO Sector", "WEO Metric"], left_on=["Sector", "Metric"],
 )
 
 energy_demand_cps_projection = energy_demand_cps_projection.drop(
@@ -292,10 +188,7 @@ energy_demand_cps_projection = energy_demand_cps_projection.loc[:, :"2039"].join
 )
 
 energy_demand_cps_projection = pd.melt(
-    energy_demand_cps_projection,
-    ["Sector", "Metric"],
-    var_name="Year",
-    value_name="Value",
+    energy_demand_cps_projection, ["Sector", "Metric"], var_name="Year", value_name="Value",
 )
 
 energy_demand_cps_projection = energy_demand_cps_projection.loc[:, :"Year"].join(
@@ -304,4 +197,5 @@ energy_demand_cps_projection = energy_demand_cps_projection.loc[:, :"Year"].join
 
 energy_demand_cps_projection["Year"] = energy_demand_cps_projection["Year"].astype(int)
 
-energy_demand_cps_projection.to_csv("energy_demand_cps_baseline.csv")
+energy_demand_cps_projection.to_csv("refactored_1_energy_demand_cps_baseline.csv")
+
