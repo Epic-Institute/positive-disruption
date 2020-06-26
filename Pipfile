@@ -21,6 +21,8 @@ matplotlib = "*"
 pandas = "*"
 scipy = "*"
 xlrd = "*"
+plotly = "==4.8.1"
+black = "*"
 
 [requires]
 python_version = "3.8"
