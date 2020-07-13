@@ -3,14 +3,35 @@
 import pandas as pd
 from numpy import NaN
 
-df = pd.ExcelFile("iea_weo_data.xlsx")
+region_list = (
+    "World",
+    "NAM",
+    "US",
+    "CSAM",
+    "BRAZIL",
+    "EUR",
+    "EU",
+    "Africa",
+    "SAFR",
+    "ME",
+    "EURASIA",
+    "RUS",
+    "ASIAPAC",
+    "CHINA",
+    "INDIA",
+    "JPN",
+    "ASEAN",
+    "OECD",
+    "NonOECD",
+    "DevelopingECO",
+    "AdvancedECO",
+)
 
-region_list = ("World", "NAM", "US", "CSAM", "BRAZIL", "EUR", "EU", "AFRICA", "SAFR", )
+input_data = pd.ExcelFile("iea_weo_data.xlsx")
 
-#for each sheet, run the code below
-def iea_weo_etl(*regions):
-    for i in regions
-    df = pd.read_excel(df, regions)
+
+def iea_weo_etl(region_list_i):
+    df = pd.read_excel(input_data, region_list_i + "_Balance")
     df = df.drop(df.index[0:3])
     df.columns = df.iloc[0]
     df = df.drop(df.index[0])
@@ -59,7 +80,6 @@ def iea_weo_etl(*regions):
             "Transport",
             "Transport",
             "Transport",
-            "Transport",
             "Buildings",
             "Buildings",
             "Buildings",
@@ -95,7 +115,9 @@ def iea_weo_etl(*regions):
     )
 
     energy_demand_projection = (
-        energy_demand_historical.iloc[:, 0:2].join(df.iloc[:, 4]).join(df.iloc[:, 14:18])
+        energy_demand_historical.iloc[:, 0:2]
+        .join(df.iloc[:, 4])
+        .join(df.iloc[:, 14:18])
     )
 
     energy_demand_projection.columns = [
@@ -144,6 +166,17 @@ def iea_weo_etl(*regions):
         energy_demand_historical.loc[:, "2010":].mul(11.63).astype(int)
     )
 
-    #prevent overwrite on each region
-    energy_demand_historical.to_csv("energy_demand_historical.csv", index=False)
-    return
+    return energy_demand_historical
+
+
+energy_demand_historical = dict()
+
+for i in range(0, len(region_list) - 1):
+    energy_demand_historical[i] = iea_weo_etl(region_list[i])
+
+    energy_demand_historical[i].insert(0, "Region", region_list[i])
+
+
+pd.DataFrame.from_dict(energy_demand_historical, orient="index").to_csv(
+    "energy_demand_historical.csv", index=False
+)
