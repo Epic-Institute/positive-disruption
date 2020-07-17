@@ -71,4 +71,4 @@ results_analysis = results_analysis(
     ],
 )
 
-charts(energy_demand_baseline)
+charts(energy_demand_baseline, energy_demand_pathway)

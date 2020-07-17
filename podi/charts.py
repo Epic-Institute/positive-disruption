@@ -9,32 +9,9 @@ from IPython.display import HTML
 from podi.data.iea_weo_etl import region_list
 
 
-def charts(energy_demand_baseline):
+def charts(energy_demand_baseline, energy_demand_pathway):
 
     # adoption curves (add annual adoption curve to look like PD20 Fig.1)
-
-    x = np.linspace(1980, 2100, 121)
-    fig, ax = plt.subplots()
-    plt.plot(x, y)
-    ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
-
-    # adoption curve animation
-
-    result = list(de2(rmse, [(-5, 5)] * 6, its=2000))
-
-    fig, ax = plt.subplots()
-
-    def animate(i):
-        ax.clear()
-        ax.set_ylim([-2, 2])
-        ax.scatter(x, y)
-        pop, fit, idx = result[i]
-        for ind in pop:
-            data = fmodel(x, ind)
-            ax.plot(x, data, alpha=0.3)
-
-    anim = animation.FuncAnimation(fig, animate, frames=2000, interval=20)
-    HTML(anim.to_html5_video())
 
     # historical analogies adoption curves
 
