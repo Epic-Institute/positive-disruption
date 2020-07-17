@@ -59,11 +59,11 @@ gcam_demand_projection.iloc[:, 88:99] = gcam_demand_projection.iloc[
     :, 88:99
 ].interpolate(axis=1)
 
-iea_weo_dict = pd.read_excel("weo_gcam_dict.xlsx")
+iea_weo_dict_metrics = pd.read_excel("weo_gcam_dict.xlsx", "Metrics")
+iea_weo_dict_regions = pd.read_excel("weo_gcam_dict.xlsx", "Regions")
 
 gcam_demand_projection = gcam_demand_projection[
-    (gcam_demand_projection.REGION == "World")
-    & (gcam_demand_projection.VARIABLE.isin(iea_weo_dict.loc[:, "GCAM Value"]))
+    gcam_demand_projection.VARIABLE.isin(iea_weo_dict_metrics.loc[:, "GCAM Value"])
 ]
 
 gcam_pct_change = gcam_demand_projection.iloc[:, 3:].pct_change(axis="columns")
@@ -71,7 +71,7 @@ gcam_pct_change = gcam_demand_projection.iloc[:, 0:3].join(
     gcam_pct_change.loc[:, "2041":].fillna(0).apply(lambda x: x + 1, axis=1)
 )
 
-gcam_pct_change = iea_weo_dict.merge(
+gcam_pct_change = iea_weo_dict_metrics.merge(
     gcam_pct_change, right_on="VARIABLE", left_on="GCAM Value"
 )
 

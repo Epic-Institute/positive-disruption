@@ -2,11 +2,11 @@
 
 import pandas as pd
 
-emissions_factors = pd.read_excel("data/emissions_factors.xlsx")
+emissions_factors = pd.read_excel("podi/data/emissions_factors.xlsx")
 
-energy_supply = pd.read_csv("data/energy_supply.csv")
+energy_supply = pd.read_csv("podi/data/energy_supply.csv")
 
-additional_emissions = pd.read_excel("data/additional_emissions.xlsx")
+additional_emissions = pd.read_excel("podi/data/additional_emissions.xlsx")
 
 energy_supply_emitters = "filter to coal, oil, gas, alternative fuels"
 

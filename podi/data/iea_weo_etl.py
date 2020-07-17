@@ -27,7 +27,31 @@ region_list = (
     "AdvancedECO",
 )
 
-input_data = pd.ExcelFile("iea_weo_data.xlsx")
+REGION_list = (
+    "World",
+    "OECD90",
+    "OECD90",
+    "LAM",
+    "LAM",
+    "OECD90",
+    "OECD90",
+    "MAF",
+    "MAF",
+    "MAF",
+    "ASIA",
+    "ASIA",
+    "ASIA",
+    "ASIA",
+    "ASIA",
+    "ASIA",
+    "ASIA",
+    "OECD90",
+    "World",
+    "World",
+    "World",
+)
+
+input_data = pd.ExcelFile("podi/data/iea_weo_data.xlsx")
 
 
 def iea_weo_etl(region_list_i):
@@ -171,12 +195,36 @@ def iea_weo_etl(region_list_i):
 
 energy_demand_historical = dict()
 
-for i in range(0, len(region_list) - 1):
+for i in range(0, len(region_list)):
     energy_demand_historical[i] = iea_weo_etl(region_list[i])
 
     energy_demand_historical[i].insert(0, "Region", region_list[i])
+    energy_demand_historical[i].insert(0, "REGION", REGION_list[i])
 
-
-pd.DataFrame.from_dict(energy_demand_historical, orient="index").to_csv(
-    "energy_demand_historical.csv", index=False
+energy_demand_historical = pd.concat(
+    [
+        energy_demand_historical[0],
+        energy_demand_historical[1],
+        energy_demand_historical[2],
+        energy_demand_historical[3],
+        energy_demand_historical[4],
+        energy_demand_historical[5],
+        energy_demand_historical[6],
+        energy_demand_historical[7],
+        energy_demand_historical[8],
+        energy_demand_historical[9],
+        energy_demand_historical[10],
+        energy_demand_historical[11],
+        energy_demand_historical[12],
+        energy_demand_historical[13],
+        energy_demand_historical[14],
+        energy_demand_historical[15],
+        energy_demand_historical[16],
+        energy_demand_historical[17],
+        energy_demand_historical[18],
+        energy_demand_historical[19],
+        energy_demand_historical[20],
+    ]
 )
+
+energy_demand_historical.to_csv("energy_demand_historical.csv", index=False)
