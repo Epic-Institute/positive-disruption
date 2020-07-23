@@ -10,10 +10,10 @@ def eia_etl(data_source):
 
     electricity_generation_total = (
         electricity_generation[
-            (electricity_generation["API"].str.contains("WORL"))
-            & (electricity_generation["World"].str.contains("Generation"))
+            electricity_generation["World"].str.contains("Generation")
         ]
         .set_index(["API", "World"])
+        .replace("--", "0")
         .astype(float)
     )
 
