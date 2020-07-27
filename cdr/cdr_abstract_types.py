@@ -17,6 +17,7 @@ import cdr.cdr_util as util
 from abc import ABC, abstractmethod
 import inspect
 import math
+import numpy as np
 
 
 class CDRStrategy(ABC):
@@ -28,14 +29,16 @@ class CDRStrategy(ABC):
     All concrete CDR subclasses must implement the four remaining abstract functions.
     """
 
-    curr_year = util.START_YEAR  # available to all CDR types
+    start_year = curr_year = util.START_YEAR  # available to all CDR types
 
     default_lifetime = None  # to be overridden by subclasses
+    levelizing_lifetime = None  # for subclasses with infinite (float('inf')) lifetimes
 
     # values from model, to be set when the CDR process actual runs
-    GRID_EM_INTENSITY = None
-    TRANSPORT_EM_INTENSITY = None
-    LIQ_FUEL_EM_INTENSITY = None
+    GRID_EM = None
+    HEAT_EM = None
+    TRANSPORT_EM = None
+    FUEL_EM = None
 
     def __init__(self, capacity=1):
         # capacity is in MtCO2/yr
@@ -56,11 +59,6 @@ class CDRStrategy(ABC):
         self.lifetime = self.__class__.default_lifetime
         self.age = 0
 
-        # retain project characteristics to avoid duplicate future calculations
-        self.energy = self.marginal_energy_use()
-        self.cost = self.marginal_cost()
-        self.emissions = self.incidental_emissions()
-
     def __init_subclass__(cls, **kwargs):
         """ Allow each CDR strategy to track its own deployment
             and adoption limits at the class level """
@@ -69,7 +67,10 @@ class CDRStrategy(ABC):
             # each concrete class gets its own counter
             cls.cumul_deployment = 0
             # and its own annual deployment tracker
-            cls.remaining_deployment = math.ceil(cls.adopt_limits())
+            if cls.adopt_limits() == float('inf'):
+                cls.remaining_deployment = float('inf')  # to avoid overflow errors with math.ceil
+            else:
+                cls.remaining_deployment = math.ceil(cls.adopt_limits())
 
     @staticmethod
     def advance_year():
@@ -124,6 +125,29 @@ class CDRStrategy(ABC):
         """Computes incidental emissions (tCO2 emitted/tCO2 captured)"""
         return NotImplemented
 
+    def get_eff_factor(self):
+        em = self.incidental_emissions()
+        if em > 1:
+            raise util.StrategyNotImplementedError(f'The strategy {self.__class__.__name__} emits more than '
+                                                   f'one tCO2 per tCO2 captured. This is either an implementation '
+                                                   f'error or a flawed CDR strategy.')
+        return 1 - self.incidental_emissions()
+
+    def get_adjusted_cost(self):
+        """ Returns cost of this project, adjusted for incidental emissions
+        so as to only count CDR on a net CO2 basis """
+        return self.marginal_cost() / self.get_eff_factor()
+
+    def get_adjusted_energy(self):
+        eff_factor = self.get_eff_factor()
+        return tuple(x / eff_factor for x in self.marginal_energy_use())
+
+    def get_levelizing_lifetime(self):
+        if self.__class__.levelizing_lifetime is not None:
+            return self.__class__.levelizing_lifetime
+        else:
+            return self.lifetime
+
 
 class NCS(CDRStrategy):
     """
@@ -132,7 +156,7 @@ class NCS(CDRStrategy):
     def is_engineered(self) -> bool:
         return False
 
-    def incidental_emissions(self, cumul_deploy) -> float:
+    def incidental_emissions(self) -> float:
         # All NCS CO2 values are already computed on a net basis.
         return 0.0
 
@@ -143,3 +167,12 @@ class ECR(CDRStrategy):
     """
     def is_engineered(self) -> bool:
         return True
+
+    def incidental_emissions(self) -> float:
+        """ Default behavior is simply adding the energy use in each sector
+         by its respective emissions rate. """
+        energy_basis = self.marginal_energy_use()
+        yr = CDRStrategy.curr_year - CDRStrategy.start_year
+        em_basis = self.__class__.GRID_EM[yr], self.__class__.HEAT_EM[yr], \
+            self.__class__.TRANSPORT_EM[yr], self.__class__.FUEL_EM[yr]
+        return np.dot(energy_basis, em_basis)
