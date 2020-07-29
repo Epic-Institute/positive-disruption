@@ -6,11 +6,12 @@ Allows CDR strategies to keep track of their characteristics
 at the class and instance level.
 
 If you are simply defining new CDR strategies, do that in
-cdr_types.py instead.
+ecr_types.py (for engineered projects) or
+ncs_types.py (for natural projects) instead.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "07.23.20"
+__version__ = "07.29.20"
 
 
 import cdr.cdr_util as util
@@ -39,6 +40,7 @@ class CDRStrategy(ABC):
     HEAT_EM = None
     TRANSPORT_EM = None
     FUEL_EM = None
+    DEFAULT_EM_BASIS = None
 
     def __init__(self, capacity=1):
         # capacity is in MtCO2/yr
@@ -125,19 +127,24 @@ class CDRStrategy(ABC):
         """Computes incidental emissions (tCO2 emitted/tCO2 captured)"""
         return NotImplemented
 
+    @util.once_per_year
     def get_eff_factor(self):
         em = self.incidental_emissions()
         if em > 1:
-            raise util.StrategyNotImplementedError(f'The strategy {self.__class__.__name__} emits more than '
-                                                   f'one tCO2 per tCO2 captured. This is either an implementation '
-                                                   f'error or a flawed CDR strategy.')
-        return 1 - self.incidental_emissions()
+            raise util.StrategyNotImplementedError(
+                f'The strategy {self.__class__.__name__} emits more than '
+                f'one tCO2 per tCO2 captured. This is either an implementation '
+                f'error or a flawed CDR strategy.'
+            )
+        return 1 - em
 
+    @util.once_per_year
     def get_adjusted_cost(self):
         """ Returns cost of this project, adjusted for incidental emissions
         so as to only count CDR on a net CO2 basis """
         return self.marginal_cost() / self.get_eff_factor()
 
+    @util.once_per_year
     def get_adjusted_energy(self):
         eff_factor = self.get_eff_factor()
         return tuple(x / eff_factor for x in self.marginal_energy_use())
@@ -168,11 +175,10 @@ class ECR(CDRStrategy):
     def is_engineered(self) -> bool:
         return True
 
+    @util.once_per_year
     def incidental_emissions(self) -> float:
-        """ Default behavior is simply adding the energy use in each sector
-         by its respective emissions rate. """
+        """ Default behavior is simply multiplying the energy use in each sector
+         by its respective emissions rate and summing across sectors. """
         energy_basis = self.marginal_energy_use()
         yr = CDRStrategy.curr_year - CDRStrategy.start_year
-        em_basis = self.__class__.GRID_EM[yr], self.__class__.HEAT_EM[yr], \
-            self.__class__.TRANSPORT_EM[yr], self.__class__.FUEL_EM[yr]
-        return np.dot(energy_basis, em_basis)
+        return np.dot(energy_basis, CDRStrategy.DEFAULT_EM_BASIS[yr])

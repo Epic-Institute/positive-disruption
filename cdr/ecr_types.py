@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cdr_types.py
+ncs_types.py
 Implements behavior of all individual CDR strategies, including both natural
 natural and engineered CDR strategies. All strategies provide info about
 their (1) adoption limits/potential, (2) cost, (3) energy use, and
@@ -12,51 +12,40 @@ to be put under consideration when developing the cost-optimal CDR mix.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "07.23.20"
+__version__ = "07.29.20"
 
 import cdr.cdr_util as util
-from cdr.cdr_abstract_types import CDRStrategy, NCS, ECR
+from cdr.cdr_abstract_types import CDRStrategy, ECR
 import math
 from scipy import integrate
 
-###########################################
-# DEFINE NEW SPECIFIC CDR STRATEGIES HERE #
-# as NCS (natural) or ECR (engineered)    #
 ###################################################################
-# EACH STRATEGY MUST HAVE:                                        #
+# DEFINE NEW SPECIFIC ECR (engineered) STRATEGIES HERE.           #
+# EACH ECR STRATEGY MUST HAVE:                                    #
 #    1. annual adoption limits (MtCO2/yr), with the header        #
 #          @classmethod                                           #
 #          def adopt_limits(cls) -> float:                        #
 #                                                                 #
 #    2. marginal_cost ($/tCO2), with the header                   #
+#          @util.cacheit                                          #
 #          def marginal_cost(self) -> float:                      #
 #                                                                 #
 #    3. marginal_energy_use (kWh/tCO2), with the header           #
+#          @util.cacheit                                          #
 #          def marginal_energy_use(self) -> tuple:                #
 #       returning a tuple containing the energy used from         #
 #       (electricity, heat, transportation, non-transport fuels)  #
 #                                                                 #
 #    And for ECR only:                                            #
 #    4. incidental emissions (tCO2/tCO2), with the header         #
-#        def incidental_emissions(self) -> float:                 #
+#          @util.once_per_year                                    #
+#          def incidental_emissions(self) -> float:               #
 #                                                                 #
 #    5. A default project lifetime (yrs), defined at the class    #
 #       level as:                                                 #
 #          default_lifetime = ___                                 #
 ###################################################################
 
-#############################
-#   NATURAL CDR STRATEGIES  #
-#    (subclasses of NCS)    #
-#############################
-
-""" TODO - waiting for TNC """
-
-
-#############################
-# ENGINEERED CDR STRATEGIES #
-#    (subclasses of ECR)    #
-#############################
 # *********************************
 # * EXAMPLE SKELETON ECR PROJECT: *
 # *********************************
@@ -74,6 +63,7 @@ from scipy import integrate
 #          in the absence of any other competing CDR strategies. """
 #         pass
 #
+#     @util.cacheit
 #     def marginal_cost(self) -> float:
 #         """ Returns the $/tCO2 cost of this project based on self.deployment_level,
 #          but NOT adjusted for impacts of incidental emissions or CDR credits.
@@ -83,16 +73,19 @@ from scipy import integrate
 #          at the time of its deployment. """
 #         pass
 #
+#     @util.cacheit
 #     def marginal_energy_use(self) -> tuple:
 #         """ Returns kWh used/tCO2 captured as a tuple:
 #          (electricity, heat, transportation, non-transportation fuels) """
 #         pass
 #
+#     @util.once_per_year
 #     def incidental_emissions(self) -> float:
 #         """ Returns tCO2 emitted/tCO2 captured """
 #         pass
 #
 ##################################
+
 
 class LTSSDAC(ECR):
     """ Low-temperature Solid Sorbent Direct Air Capture
@@ -110,6 +103,7 @@ class LTSSDAC(ECR):
             vertical_shift = 57.134346 - util.LTSSDAC_FIRST_DEPLOYMENT
             return util.logistic_inverse_slope(23500, -8.636, 0.1746, cls.cumul_deployment + vertical_shift)
 
+    @util.cacheit
     def marginal_cost(self) -> float:
         capex = self._capex_new() * util.crf(n_yrs=self.get_levelizing_lifetime()) / util.LTSSDAC_UTILIZATION
         opex = self._capex_new() * 0.037
@@ -119,9 +113,11 @@ class LTSSDAC(ECR):
         )
         return capex + opex + energy
 
+    @util.cacheit
     def marginal_energy_use(self) -> tuple:
         learning = util.learning(self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.137)
-        return 303 * learning, 1330 * learning, 0, 0
+        # theoretical min energy use (20 kJ/mol) of electricity cannot be learned away
+        return 176.76 * learning + 126.24, 1330 * learning, 0, 0
 
     # LTSSDAC uses default ECR incidental_emissions function
 
@@ -144,6 +140,7 @@ class HTLSDAC(ECR):
             vertical_shift = 880.6986515 - util.HTLSDAC_FIRST_DEPLOYMENT
             return util.logistic_inverse_slope(11500, -3.407, 0.0917, cls.cumul_deployment + vertical_shift)
 
+    @util.cacheit
     def marginal_cost(self) -> float:
         capex = self._capex_new() * util.crf(n_yrs=self.get_levelizing_lifetime()) / util.LTSSDAC_UTILIZATION
         opex = self._capex_new() * 0.037
@@ -173,18 +170,20 @@ class ExSituEW(ECR):
         # M, a, b, and vertical shift derivation outlined in adoption curve writeup
         return util.logistic_inverse_slope(4500, -6.258, 0.0994, cls.cumul_deployment + 9.5)
 
+    @util.cacheit
     def marginal_cost(self) -> float:
         """Returns $/tCO2 for this project.
         It is 'marginal' in the sense that this project was
         on the margin of EW at the time of its deployment. """
 
-        tCO2 = self.capacity * (10 ** 6)  # capacity is in MtCO2 but we need tCO2
+        tCO2 = self.capacity * 1000000  # capacity is in MtCO2 but we need tCO2 (10 ** 6)
         total_cost = ExSituEW._rock_needed(tCO2) * self._cost_per_t_rock()
 
         # compute levelized $/tCO2
         return total_cost / tCO2 * \
             (util.crf(n_yrs=self.get_levelizing_lifetime()) + ExSituEW._d(util.GRAIN_SIZE))
 
+    @util.cacheit
     def marginal_energy_use(self) -> tuple:
         """ Returns (electricity, heat, transport, non-transport fuel) energy in kWh/tCO2.
         It is 'marginal' in the sense that this project was on the margin of EW
@@ -228,6 +227,7 @@ class ExSituEW(ECR):
         denom = util.CO2_PER_ROCK * ExSituEW._d(util.GRAIN_SIZE) * (0.95 * util.A_WARM / util.A_TEMP + 0.35)
         return num / denom
 
+    @util.cacheit
     def _total_transport_per_t_rock(self) -> float:
         """Computes total t*km of transportation required for this project
         to achieve its stated tCO2/yr capacity in its first year"""
@@ -284,6 +284,7 @@ class GeologicStorage(ECR):
     def adopt_limits(cls) -> float:
         return float('inf')  # assuming no limits on geologic storage
 
+    @util.cacheit
     def marginal_cost(self) -> float:
         if self.compress_temp is not None:
             compress_capex_opex = (100.8 * util.crf(self.get_levelizing_lifetime()) + 3.9) / 10
@@ -293,6 +294,7 @@ class GeologicStorage(ECR):
             compress_cost = 0  # no compression needed
         return compress_cost + util.PIPELINE_COST + util.INJECTION_COST
 
+    @util.cacheit
     def marginal_energy_use(self) -> tuple:
         # calculate individual compression, pipeline, and injection energy usage
         if self.compress_temp is not None:
@@ -312,6 +314,7 @@ class GeologicStorage(ECR):
         total_fuel = pipeline_fuel
         return total_elec, 0, total_transport, total_fuel
 
+    @util.once_per_year
     def incidental_emissions(self) -> float:
         """ Emissions are energy emissions plus pipeline leakage """
         pipeline_leakage = util.PIPELINE_LEAKAGE * util.PIPELINE_LENGTH / util.PIPELINE_CAPACITY
