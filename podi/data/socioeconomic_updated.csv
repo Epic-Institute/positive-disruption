@@ -1,0 +1,287 @@
+Region,Variable,Unit,Model,Year,Value
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2005,"5,362"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2010,"7,271"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2020,"13,066"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2030,"21,340"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2040,"32,389"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2050,"46,308"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2060,"63,614"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2070,"85,030"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2080,"111,569"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2090,"142,255"
+ASIA,GDP|MER,billion US$2005/yr,Baseline,2100,"172,200"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2005,"5,362"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2010,"7,271"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2020,"13,066"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2030,"21,340"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2040,"32,389"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2050,"46,308"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2060,"63,614"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2070,"85,030"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2080,"111,569"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2090,"142,255"
+ASIA,GDP|MER,billion US$2005/yr,Pathway,2100,"172,200"
+ASIA,Population,million,Baseline,2005,"3,445"
+ASIA,Population,million,Baseline,2010,"3,688"
+ASIA,Population,million,Baseline,2020,"4,054"
+ASIA,Population,million,Baseline,2030,"4,327"
+ASIA,Population,million,Baseline,2040,"4,498"
+ASIA,Population,million,Baseline,2050,"4,584"
+ASIA,Population,million,Baseline,2060,"4,593"
+ASIA,Population,million,Baseline,2070,"4,532"
+ASIA,Population,million,Baseline,2080,"4,410"
+ASIA,Population,million,Baseline,2090,"4,239"
+ASIA,Population,million,Baseline,2100,"4,043"
+ASIA,Population,million,Pathway,2005,"3,445"
+ASIA,Population,million,Pathway,2010,"3,688"
+ASIA,Population,million,Pathway,2020,"4,054"
+ASIA,Population,million,Pathway,2030,"4,327"
+ASIA,Population,million,Pathway,2040,"4,498"
+ASIA,Population,million,Pathway,2050,"4,584"
+ASIA,Population,million,Pathway,2060,"4,593"
+ASIA,Population,million,Pathway,2070,"4,532"
+ASIA,Population,million,Pathway,2080,"4,410"
+ASIA,Population,million,Pathway,2090,"4,239"
+ASIA,Population,million,Pathway,2100,"4,043"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2005,"2,649"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2010,"3,083"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2020,"4,070"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2030,"5,291"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2040,"6,726"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2050,"8,606"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2060,"11,068"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2070,"14,819"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2080,"20,313"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2090,"27,269"
+LAM,GDP|MER,billion US$2005/yr,Baseline,2100,"34,379"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2005,"2,649"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2010,"3,083"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2020,"4,070"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2030,"5,291"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2040,"6,726"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2050,"8,606"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2060,"11,068"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2070,"14,819"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2080,"20,313"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2090,"27,269"
+LAM,GDP|MER,billion US$2005/yr,Pathway,2100,"34,379"
+LAM,Population,million,Baseline,2005,550
+LAM,Population,million,Baseline,2010,584
+LAM,Population,million,Baseline,2020,655
+LAM,Population,million,Baseline,2030,717
+LAM,Population,million,Baseline,2040,770
+LAM,Population,million,Baseline,2050,815
+LAM,Population,million,Baseline,2060,851
+LAM,Population,million,Baseline,2070,882
+LAM,Population,million,Baseline,2080,908
+LAM,Population,million,Baseline,2090,923
+LAM,Population,million,Baseline,2100,926
+LAM,Population,million,Pathway,2005,550
+LAM,Population,million,Pathway,2010,584
+LAM,Population,million,Pathway,2020,655
+LAM,Population,million,Pathway,2030,717
+LAM,Population,million,Pathway,2040,770
+LAM,Population,million,Pathway,2050,815
+LAM,Population,million,Pathway,2060,851
+LAM,Population,million,Pathway,2070,882
+LAM,Population,million,Pathway,2080,908
+LAM,Population,million,Pathway,2090,923
+LAM,Population,million,Pathway,2100,926
+MAF,GDP|MER,billion US$2005/yr,Baseline,2005,"1,714"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2010,"2,113"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2020,"3,046"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2030,"4,167"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2040,"5,501"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2050,"7,231"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2060,"9,560"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2070,"12,736"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2080,"16,793"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2090,"21,717"
+MAF,GDP|MER,billion US$2005/yr,Baseline,2100,"27,492"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2005,"1,714"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2010,"2,113"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2020,"3,046"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2030,"4,167"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2040,"5,501"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2050,"7,231"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2060,"9,560"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2070,"12,736"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2080,"16,793"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2090,"21,717"
+MAF,GDP|MER,billion US$2005/yr,Pathway,2100,"27,492"
+MAF,Population,million,Baseline,2005,"1,108"
+MAF,Population,million,Baseline,2010,"1,243"
+MAF,Population,million,Baseline,2020,"1,479"
+MAF,Population,million,Baseline,2030,"1,697"
+MAF,Population,million,Baseline,2040,"1,890"
+MAF,Population,million,Baseline,2050,"2,048"
+MAF,Population,million,Baseline,2060,"2,200"
+MAF,Population,million,Baseline,2070,"2,303"
+MAF,Population,million,Baseline,2080,"2,357"
+MAF,Population,million,Baseline,2090,"2,366"
+MAF,Population,million,Baseline,2100,"2,335"
+MAF,Population,million,Pathway,2005,"1,108"
+MAF,Population,million,Pathway,2010,"1,243"
+MAF,Population,million,Pathway,2020,"1,479"
+MAF,Population,million,Pathway,2030,"1,697"
+MAF,Population,million,Pathway,2040,"1,890"
+MAF,Population,million,Pathway,2050,"2,048"
+MAF,Population,million,Pathway,2060,"2,200"
+MAF,Population,million,Pathway,2070,"2,303"
+MAF,Population,million,Pathway,2080,"2,357"
+MAF,Population,million,Pathway,2090,"2,366"
+MAF,Population,million,Pathway,2100,"2,335"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2005,"30,453"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2010,"31,258"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2020,"37,115"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2030,"43,363"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2040,"50,175"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2050,"58,226"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2060,"67,181"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2070,"77,554"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2080,"89,232"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2090,"102,743"
+OECD90,GDP|MER,billion US$2005/yr,Baseline,2100,"119,856"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2005,"30,453"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2010,"31,258"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2020,"37,115"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2030,"43,363"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2040,"50,175"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2050,"58,226"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2060,"67,181"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2070,"77,554"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2080,"89,232"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2090,"102,743"
+OECD90,GDP|MER,billion US$2005/yr,Pathway,2100,"119,856"
+OECD90,Population,million,Baseline,2005,958
+OECD90,Population,million,Baseline,2010,994
+OECD90,Population,million,Baseline,2020,"1,033"
+OECD90,Population,million,Baseline,2030,"1,065"
+OECD90,Population,million,Baseline,2040,"1,088"
+OECD90,Population,million,Baseline,2050,"1,103"
+OECD90,Population,million,Baseline,2060,"1,114"
+OECD90,Population,million,Baseline,2070,"1,116"
+OECD90,Population,million,Baseline,2080,"1,115"
+OECD90,Population,million,Baseline,2090,"1,117"
+OECD90,Population,million,Baseline,2100,"1,131"
+OECD90,Population,million,Pathway,2005,958
+OECD90,Population,million,Pathway,2010,994
+OECD90,Population,million,Pathway,2020,"1,033"
+OECD90,Population,million,Pathway,2030,"1,065"
+OECD90,Population,million,Pathway,2040,"1,088"
+OECD90,Population,million,Pathway,2050,"1,103"
+OECD90,Population,million,Pathway,2060,"1,114"
+OECD90,Population,million,Pathway,2070,"1,116"
+OECD90,Population,million,Pathway,2080,"1,115"
+OECD90,Population,million,Pathway,2090,"1,117"
+OECD90,Population,million,Pathway,2100,"1,131"
+REF,GDP|MER,billion US$2005/yr,Baseline,2005,"1,154"
+REF,GDP|MER,billion US$2005/yr,Baseline,2010,"1,324"
+REF,GDP|MER,billion US$2005/yr,Baseline,2020,"1,833"
+REF,GDP|MER,billion US$2005/yr,Baseline,2030,"2,400"
+REF,GDP|MER,billion US$2005/yr,Baseline,2040,"3,123"
+REF,GDP|MER,billion US$2005/yr,Baseline,2050,"4,087"
+REF,GDP|MER,billion US$2005/yr,Baseline,2060,"5,178"
+REF,GDP|MER,billion US$2005/yr,Baseline,2070,"6,501"
+REF,GDP|MER,billion US$2005/yr,Baseline,2080,"8,063"
+REF,GDP|MER,billion US$2005/yr,Baseline,2090,"10,041"
+REF,GDP|MER,billion US$2005/yr,Baseline,2100,"12,796"
+REF,GDP|MER,billion US$2005/yr,Pathway,2005,"1,154"
+REF,GDP|MER,billion US$2005/yr,Pathway,2010,"1,324"
+REF,GDP|MER,billion US$2005/yr,Pathway,2020,"1,833"
+REF,GDP|MER,billion US$2005/yr,Pathway,2030,"2,400"
+REF,GDP|MER,billion US$2005/yr,Pathway,2040,"3,123"
+REF,GDP|MER,billion US$2005/yr,Pathway,2050,"4,087"
+REF,GDP|MER,billion US$2005/yr,Pathway,2060,"5,178"
+REF,GDP|MER,billion US$2005/yr,Pathway,2070,"6,501"
+REF,GDP|MER,billion US$2005/yr,Pathway,2080,"8,063"
+REF,GDP|MER,billion US$2005/yr,Pathway,2090,"10,041"
+REF,GDP|MER,billion US$2005/yr,Pathway,2100,"12,796"
+REF,Population,million,Baseline,2005,403
+REF,Population,million,Baseline,2010,402
+REF,Population,million,Baseline,2020,400
+REF,Population,million,Baseline,2030,397
+REF,Population,million,Baseline,2040,393
+REF,Population,million,Baseline,2050,387
+REF,Population,million,Baseline,2060,375
+REF,Population,million,Baseline,2070,361
+REF,Population,million,Baseline,2080,346
+REF,Population,million,Baseline,2090,336
+REF,Population,million,Baseline,2100,334
+REF,Population,million,Pathway,2005,403
+REF,Population,million,Pathway,2010,402
+REF,Population,million,Pathway,2020,400
+REF,Population,million,Pathway,2030,397
+REF,Population,million,Pathway,2040,393
+REF,Population,million,Pathway,2050,387
+REF,Population,million,Pathway,2060,375
+REF,Population,million,Pathway,2070,361
+REF,Population,million,Pathway,2080,346
+REF,Population,million,Pathway,2090,336
+REF,Population,million,Pathway,2100,334
+World,GDP|MER,billion US$2005/yr,Baseline,2005,"41,332"
+World,GDP|MER,billion US$2005/yr,Baseline,2010,"45,049"
+World,GDP|MER,billion US$2005/yr,Baseline,2020,"59,132"
+World,GDP|MER,billion US$2005/yr,Baseline,2030,"76,562"
+World,GDP|MER,billion US$2005/yr,Baseline,2040,"97,915"
+World,GDP|MER,billion US$2005/yr,Baseline,2050,"124,459"
+World,GDP|MER,billion US$2005/yr,Baseline,2060,"156,601"
+World,GDP|MER,billion US$2005/yr,Baseline,2070,"196,639"
+World,GDP|MER,billion US$2005/yr,Baseline,2080,"245,969"
+World,GDP|MER,billion US$2005/yr,Baseline,2090,"304,024"
+World,GDP|MER,billion US$2005/yr,Baseline,2100,"366,724"
+World,GDP|MER,billion US$2005/yr,Pathway,2005,"41,332"
+World,GDP|MER,billion US$2005/yr,Pathway,2010,"45,049"
+World,GDP|MER,billion US$2005/yr,Pathway,2020,"59,132"
+World,GDP|MER,billion US$2005/yr,Pathway,2030,"76,562"
+World,GDP|MER,billion US$2005/yr,Pathway,2040,"97,915"
+World,GDP|MER,billion US$2005/yr,Pathway,2050,"124,459"
+World,GDP|MER,billion US$2005/yr,Pathway,2060,"156,601"
+World,GDP|MER,billion US$2005/yr,Pathway,2070,"196,639"
+World,GDP|MER,billion US$2005/yr,Pathway,2080,"245,969"
+World,GDP|MER,billion US$2005/yr,Pathway,2090,"304,024"
+World,GDP|MER,billion US$2005/yr,Pathway,2100,"366,724"
+World,Population,million,Baseline,2005,"6,464"
+World,Population,million,Baseline,2010,"6,911"
+World,Population,million,Baseline,2020,"7,620"
+World,Population,million,Baseline,2030,"8,203"
+World,Population,million,Baseline,2040,"8,639"
+World,Population,million,Baseline,2050,"8,937"
+World,Population,million,Baseline,2060,"9,133"
+World,Population,million,Baseline,2070,"9,194"
+World,Population,million,Baseline,2080,"9,135"
+World,Population,million,Baseline,2090,"8,981"
+World,Population,million,Baseline,2100,"8,769"
+World,Population,million,Pathway,2005,"6,464"
+World,Population,million,Pathway,2010,"6,911"
+World,Population,million,Pathway,2020,"7,620"
+World,Population,million,Pathway,2030,"8,203"
+World,Population,million,Pathway,2040,"8,639"
+World,Population,million,Pathway,2050,"8,937"
+World,Population,million,Pathway,2060,"9,133"
+World,Population,million,Pathway,2070,"9,194"
+World,Population,million,Pathway,2080,"9,135"
+World,Population,million,Pathway,2090,"8,981"
+World,Population,million,Pathway,2100,"8,769"
+World,Price|Carbon,US$2005/t CO2,Baseline,2005,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2010,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2020,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2030,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2040,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2050,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2060,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2070,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2080,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2090,-
+World,Price|Carbon,US$2005/t CO2,Baseline,2100,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2005,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2010,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2020,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2030,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2040,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2050,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2060,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2070,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2080,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2090,-
+World,Price|Carbon,US$2005/t CO2,Pathway,2100,-
