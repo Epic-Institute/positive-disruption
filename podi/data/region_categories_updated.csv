@@ -1,0 +1,944 @@
+﻿Country,IEA WEO Grouping,BNEF NEO Grouping,IIASA Grouping
+Canada,NAM,North America,OECD | CAN
+Mexico,NAM,Latin America,LAM | MEX
+United States,NAM,North America,OECD | USA
+Argentina,CSAM,Latin America | Other,LAM | LAM-M
+Bolivia,CSAM,Latin America | Other,LAM | LAM-M
+Venezuela,CSAM,Latin America | Other,LAM | LAM-M
+Brazil,CSAM,Latin America,LAM | BRA
+Chile,CSAM,Latin America | Other,LAM | LAM-M
+Colombia,CSAM,Latin America | Other,LAM | LAM-M
+Costa Rica,CSAM,Latin America | Other,LAM | LAM-M
+Cuba,CSAM,Latin America | Other,LAM | LAM-M
+Curacao,CSAM,Rest of World,
+Dominican Republic,CSAM,Rest of World,LAM | LAM-M
+Ecuador,CSAM,Latin America | Other,LAM | LAM-M
+El Salvador,CSAM,Latin America | Other,LAM | LAM-M
+Guatemala,CSAM,Latin America | Other,LAM | LAM-L
+Haiti,CSAM,Latin America | Other,LAM | LAM-L
+Honduras,CSAM,Latin America | Other,LAM | LAM-M
+Jamaica,CSAM,Latin America | Other,LAM | LAM-M
+Nicaragua,CSAM,Latin America | Other,LAM | LAM-L
+Panama,CSAM,Latin America | Other,LAM | LAM-M
+Paraguay,CSAM,Latin America | Other,LAM | LAM-M
+Peru,CSAM,Latin America | Other,LAM | LAM-M
+Suriname,CSAM,Rest of World,LAM | LAM-M
+Trinidad and Tobago,CSAM,Latin America | Other,LAM | LAM-M
+Uruguay,CSAM,Latin America | Other,LAM | LAM-M
+Barbados,CSAM,Rest of World,LAM | LAM-M
+Antigua and Barbuda,CSAM,Rest of World,LAM | LAM-M
+Aruba,CSAM,Rest of World,LAM
+Bahamas,CSAM,Rest of World,LAM | LAM-M
+Belize,CSAM,Latin America,LAM | LAM-L
+British Virgin Islands,CSAM,Rest of World,LAM
+Cayman Islands,CSAM,Rest of World,LAM
+Dominica,CSAM,Rest of World,LAM | LAM-M
+Grenada,CSAM,Rest of World,LAM | LAM-M
+Guadeloupe,CSAM,Rest of World,LAM | LAM-M
+Martinique,CSAM,Rest of World,LAM | LAM-M
+Montserrat,CSAM,Rest of World,LAM
+St Lucia,CSAM,Rest of World,LAM | LAM-M
+St Vincent and Grenadines,CSAM,Rest of World,LAM | LAM-M
+St. Kitts and Nevis,CSAM,Rest of World,LAM | LAM-M
+Wake Island,CSAM,Rest of World,LAM
+Falkland Islands,CSAM,Rest of World,LAM
+Guyana,CSAM,Rest of World,LAM | LAM-M
+French Guiana,CSAM,Rest of World,LAM | LAM-M
+Austria,EUR | EU,Europe | Other,OECD | EU15
+Belgium,EUR | EU,Europe | Other,OECD | EU15
+Bulgaria,EUR | EU,Europe | Other,OECD | EU12-M
+Croatia,EUR | EU,Europe | Other,OECD | EEU
+Cyprus,EUR | EU,Europe | Other,OECD | EU12-H
+Czech Republic,EUR | EU,Europe | Other,OECD | EU12-H
+Denmark,EUR | EU,Europe | North,OECD | EU15
+Estonia,EUR | EU,Europe | North,OECD | EU12-H
+Finland,EUR | EU,Europe | North,OECD | EU15
+France,EUR | EU,Europe,OECD | EU15
+Germany,EUR | EU,Europe,OECD | EU15
+Greece,EUR | EU,Europe | Other,OECD | EU15
+Hungary,EUR | EU,Europe | Other,OECD | EU12-H
+Ireland,EUR | EU,Europe | Other,OECD | EU15
+Italy,EUR | EU,Europe,OECD | EU15
+Latvia,EUR | EU,Europe | North,OECD | EU12-M
+Lithuania,EUR | EU,Europe | North,OECD | EU12-M
+Luxembourg,EUR | EU,Europe | Other,OECD | EU15
+Malta,EUR | EU,Europe | Other,OECD | EU12-H
+Netherlands,EUR | EU,Europe | Other,OECD | EU15
+Poland,EUR | EU,Europe | Other,OECD | EU12-H
+Portugal,EUR | EU,Europe | Iberia,OECD | EU15
+Romania,EUR | EU,Europe | Other,OECD | EU12-M
+Slovak Republic,EUR | EU,Europe | Other,OECD | EU12-H
+Slovenia,EUR | EU,Europe | Other,OECD | EU12-H
+Spain,EUR | EU,Europe | Iberia,OECD | EU15
+Sweden,EUR | EU,Europe | North,OECD | EU15
+United Kingdom,EUR | EU,Europe,OECD | EU15
+Albania,EUR,Rest of World,OECD | EEU
+Belarus,EUR,Rest of World,OECD | EEU-FSU
+Bosnia and Herzegovina,EUR,Rest of World,OECD | EEU
+Gibraltar,EUR,Rest of World,OECD
+Iceland,EUR,Europe | Other,OECD | EFTA
+Israel,EUR,META | MENA,MAF | MEA-H
+Kosovo,EUR,Rest of World,
+Czech Republic,EUR,Rest of World,OECD | EEU
+Norway,EUR,Europe | North,OECD | EFTA
+Serbia,EUR,Rest of World,OECD | EEU
+Switzerland,EUR,Europe | Other,OECD | EFTA
+the Former Yugoslav Republic of Macedonia,EUR,Rest of World,OECD | EEU
+Republic of Moldova,EUR,Rest of World,REF | EEU-RSA
+Turkey,EUR,META,OECD | TUR
+Ukraine,EUR,Rest of World,REF|EEU-FSU
+Algeria,Africa,META | MENA,MAF | NAF
+Egypt,Africa,META | MENA,MAF | NAF
+Libya,Africa,META | MENA,MAF | NAF
+Morocco,Africa,META | MENA,MAF | NAF
+Tunisia,Africa,META | MENA,MAF | NAF
+Angola,Africa,META | Sub-Saharan Africa,MAF | SSA-M
+Benin,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Botswana,Africa,META | Sub-Saharan Africa,MAF | SSA-M
+Cameroon,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Republic of the Congo,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Côte d’Ivoire,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Democratic Republic of the Congo,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Eritrea,Africa,Rest of World,MAF | SSA-L
+Ethiopia,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Gabon,Africa,META | Sub-Saharan Africa,MAF | SSA-M
+Ghana,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Kenya,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Mauritius,Africa,META | Sub-Saharan Africa,MAF | SSA-M
+Mozambique,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Namibia,Africa,META | Sub-Saharan Africa,MAF | SSA-M
+Niger,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Nigeria,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Senegal,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+South Africa,Africa,META | Sub-Saharan Africa,MAF | SAF
+South Sudan,Africa,Rest of World,MAF | SSA-L
+Sudan,Africa,Rest of World,MAF | SSA-L
+United Republic of Tanzania,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Togo,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Zambia,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Zimbabwe,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Burkina Faso,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Burundi,Africa,Rest of World,MAF | SSA-L
+Cabo Verde,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Central African Republic,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Chad,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Comoros,Africa,Rest of World,MAF | SSA-L
+Djibouti,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Equatorial Guinea,Africa,META | Sub-Saharan Africa,MAF | SSA-M
+Gambia,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Guinea,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Guinea-Bissau,Africa,Rest of World,MAF | SSA-L
+Lesotho,Africa,Rest of World,MAF | SSA-L
+Liberia,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Madagascar,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Malawai,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Mali,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Mauritania,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Réunion,Africa,Rest of World,MAF | SSA-M
+Rwanda,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Sao Tome and Principe,Africa,Rest of World,MAF | SSA-L
+Seychelles,Africa,META | Sub-Saharan Africa,MAF | SSA-M
+Sierra Leone,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Somalia,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Swaziland,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Uganda,Africa,META | Sub-Saharan Africa,MAF | SSA-L
+Western Sahara,Africa,Rest of World,MAF | NAF
+Bahrain,ME,META | MENA,MAF | MEA-H
+Islamic Republic of Iran,ME,META | MENA,MAF | MEA-M
+Iraq,ME,META | MENA,MAF | MEA-M
+Jordan,ME,META | MENA,MAF | MEA-M
+Kuwait,ME,META | MENA,MAF | MEA-H
+Lebanon,ME,META | MENA,MAF | MEA-M
+Oman,ME,META | MENA,MAF | MEA-H
+Qatar,ME,META | MENA,MAF | MEA-H
+Saudi Arabia,ME,META | MENA,MAF | MEA-H
+Syrian Arab Republic,ME,META | MENA,MAF | MEA-M
+United Arab Emirates,ME,META | MENA,MAF | MEA-H
+Yemen,ME,META | MENA,MAF | MEA-M
+Armenia,EURASIA,,REF | CAS
+Azerbaijan,EURASIA,,REF | CAS
+Georgia,EURASIA,,REF | CAS
+Kazakhstan,EURASIA,,REF | CAS
+Kyrgyzstan,EURASIA,,REF | CAS
+Tajikistan,EURASIA,,REF | CAS
+Turkmenistan,EURASIA,,REF | CAS
+Uzbekistan,EURASIA,,REF | CAS
+Russian Federation,EURASIA,,REF | RUS
+Brunei Darussalam,ASIAPAC | ASEAN,Rest of World,ASIA | OAS-M
+Cambodia,ASIAPAC | ASEAN,Rest of World,ASIA | OAS-CPA
+Indonesia,ASIAPAC | ASEAN,Asia Pacific|Southeast Asia,ASIA | IDN
+Lao People’s Democratic Republic,ASIAPAC | ASEAN,Rest of World,ASIA | OAS-CPA
+Malaysia,ASIAPAC | ASEAN,Asia Pacific|Southeast Asia,ASIA | OAS-M
+Myanmar,ASIAPAC | ASEAN,Rest of World,ASIA | OAS-L
+Philippines,ASIAPAC | ASEAN,Asia Pacific|Southeast Asia,ASIA | OAS-L
+Singapore,ASIAPAC | ASEAN,Rest of World,ASIA | OAS-M
+Thailand,ASIAPAC | ASEAN,Asia Pacific|Southeast Asia,ASIA | OAS-M
+Viet Nam,ASIAPAC | ASEAN,Rest of World,ASIA | OAS-CPA
+Australia,ASIAPAC,Asia Pacific,OECD | ANUZ
+Bangladesh,ASIAPAC,Rest of World,ASIA | OAS-L
+China,ASIAPAC,Asia Pacific,ASIA | CHN
+Chinese Taipei,ASIAPAC,Rest of World,
+India,ASIAPAC,Asia Pacific,ASIA | IND
+Japan,ASIAPAC,Asia Pacific,OECD | JPN
+Korea,ASIAPAC,Asia Pacific,ASIA | KOR
+Democratic People’s Republic of Korea,ASIAPAC,Rest of World,ASIA | OAS-L
+Mongolia,ASIAPAC,Rest of World,ASIA | OAS-CPA
+Nepal,ASIAPAC,Rest of World,ASIA | OAS-L
+New Zealand,ASIAPAC,Rest of World,OECD | ANUZ
+Pakistan,ASIAPAC,Rest of World,ASIA | PAK
+Sri Lanka,ASIAPAC,Rest of World,ASIA | OAS-M
+Afghanistan,ASIAPAC,Rest of World,ASIA | PAK
+Bhutan,ASIAPAC,Rest of World,ASIA | OAS-M
+Cook Islands,ASIAPAC,Rest of World,OECD
+Fiji,ASIAPAC,Rest of World,ASIA | OAS-L
+French Polynesia,ASIAPAC,Rest of World,ASIA | OAS-M
+Macau (China),ASIAPAC,Rest of World,ASIA | CHN
+Kiribati,ASIAPAC,Rest of World,OECD
+Maldives,ASIAPAC,Rest of World,ASIA | OAS-M
+New Caledonia,ASIAPAC,Rest of World,ASIA | OAS-M
+Palau,ASIAPAC,Rest of World,OECD
+Papua New Guinea,ASIAPAC,Rest of World,ASIA | OAS-L
+Samoa,ASIAPAC,Rest of World,ASIA | OAS-L
+Solomon Islands,ASIAPAC,Rest of World,ASIA | OAS-L
+Timor-Leste,ASIAPAC,Rest of World,ASIA | OAS-L
+Tonga,ASIAPAC,Rest of World,OECD | OAS-L
+Vanuatu,ASIAPAC,Rest of World,OECD | OAS-L
+Antilles,,Rest of World,LAM | LAM-M
+Puerto Rico,,Rest of World,LAM | USA
+Anguilla,,Rest of World,LAM
+U.S. Virgin Islands,,Rest of World,LAM | USA
+St. Helena,,Rest of World,MAF
+Nauru,,Rest of World,OECD
+Niue,,Rest of World,OECD
+Northern Mariana Islands,,Rest of World,OECD
+Micronesia,,Rest of World,OECD | OAS-L
+Marshall Islands,,Rest of World,OECD
+Pitcarin,,Rest of World,OECD
+Tokelau,,Rest of World,OECD
+Tuvalu,,Rest of World,OECD
+Wallis ans Futuna Island,,Rest of World,OECD
+Andorra,,Rest of World,OECD
+Vatican,,Rest of World,OECD
+Liectenstein,,Rest of World,OECD
+Monaco,,Rest of World,OECD
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
