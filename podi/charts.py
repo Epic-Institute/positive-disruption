@@ -12,6 +12,17 @@ from podi.data.iea_weo_etl import region_list
 def charts(energy_demand_baseline, energy_demand_pathway):
 
     # adoption curves (add annual adoption curve to look like PD20 Fig.1)
+    for i in range(0, len(region_list)):
+        fig = percent_adoption[i]
+
+        plt.figure(i)
+        plt.line(fig.T.index, fig, labels=fig.index)
+        plt.legend(loc=2, fontsize="small")
+        plt.ylabel("Adoption (%)")
+        plt.xlim([1980, 2100])
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+        plt.xticks(np.arange(10, 100, 10))
+        plt.title("Percent Adoption " + technology[i] + region_list[i])
 
     # historical analogies adoption curves
 

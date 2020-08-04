@@ -2,18 +2,13 @@
 
 import pandas as pd
 
-emissions_factors = pd.read_excel("podi/data/emissions_factors.xlsx")
 
-energy_supply = pd.read_csv("podi/data/energy_supply.csv")
+def emissions(energy_supply, afolu_emissions):
+    energy_supply_emitters = 
+    emissions_factors = pd.read_excel("podi/data/emissions_factors.xlsx").reindex(energy_supply_emitters.index)
 
-additional_emissions = pd.read_excel("podi/data/additional_emissions.xlsx")
+    emissions = energy_supply.mul(
+        emissions_factors[emissions_factors.Value].loc[:, 2018:]
+    )
 
-energy_supply_emitters = "filter to coal, oil, gas, alternative fuels"
-
-emissions = energy_supply_emitters.mul(
-    emissions_factors[emissions_factors.Value].loc[:, 2018:]
-)
-
-cement_emissions = additional_emissions[additional_emissions.source == "cement"]
-
-emissions = emissions.append(additional_emissions.Cement)
+    return emissions

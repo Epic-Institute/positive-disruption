@@ -6,15 +6,13 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import curve_fit, differential_evolution
 
-"TODO: parameterize start and end years"
-
 
 def func(x, a, b, c):
     return 1 / (1.0 + a * np.exp(-c * x)) ** (1 / b)
 
 
 def adoption_curve(value):
-    x_data = np.arange(len(value.columns))
+    x_data = np.arange(len(value))
     y_data = value.to_numpy()[~np.isnan(value)]
 
     def sum_of_squared_error(parameters):
@@ -47,6 +45,6 @@ def adoption_curve(value):
 
     x = np.arange(121)
     y = np.array(func(x, *fitted_parameters))
-    years = np.linspace(1980, 2100, 121)
+    years = np.linspace(1980, 2100, 121).astype(int)
 
     return pd.DataFrame(data=y, index=years)

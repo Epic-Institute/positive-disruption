@@ -3,11 +3,12 @@
 from podi.socioeconomic import socioeconomic
 from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply
-from podi.afolu import afolu
-from podi.emissions import emissions
-from podi.cdr import cdr
-from podi.climate import climate
-from podi.results_analysis import results_analysis
+
+# from podi.afolu import afolu
+# from podi.emissions import emissions
+# from podi.cdr import cdr
+# from podi.climate import climate
+# from podi.results_analysis import results_analysis
 from podi.charts import charts
 
 socioeconomic_baseline = socioeconomic("podi/data/socioeconomic_baseline.csv")

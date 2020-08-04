@@ -13,16 +13,17 @@ def energy_supply(energy_demand):
     )
     electricity_generation_data = eia_etl("podi/data/eia_electricity_generation.csv")
     heat_generation_data = heat_etl("podi/data/heat_generation.csv")
+    TFC_gen_ratio = 0.88
 
     def historical_electricity_generation(region, technology):
-        electricity_generation = (
+        return pd.DataFrame(
             electricity_generation_data.loc[
                 electricity_generation_data["IEA Region"].str.contains(region, na=False)
             ][electricity_generation_data["Variable"] == technology]
             .set_index(["IEA Region", "Region", "Variable", "Unit"])
+            .mul(TFC_gen_ratio)
             .sum()
-        )
-        return electricity_generation
+        ).T
 
     def historical_percent_electricity_generation(
         region, historical_electricity_generation
@@ -33,17 +34,22 @@ def energy_supply(energy_demand):
             ][electricity_generation_data["Variable"] == "Generation"]
             .set_index(["IEA Region", "Region", "Variable", "Unit"])
             .sum()
-        ).dropna()
+            .T
+        ).fillna(0)
 
     def projected_percent_generation(
         percent_adoption, region, technology, scenario, metric
     ):
-        return percent_adoption.loc[:, 2018:].mul(
-            (
-                saturation_points.loc[
-                    region, technology, scenario, slice(None), metric
-                ].Value
+        return (
+            percent_adoption.loc[2018:, :]
+            .mul(
+                (
+                    saturation_points.loc[
+                        region, technology, scenario, slice(None), metric
+                    ].Value.iat[0]
+                )
             )
+            .T
         )
 
     def projected_electricity_generation(region, projected_percent_generation):
@@ -52,31 +58,17 @@ def energy_supply(energy_demand):
         )
 
     def generation(historical_electricity_generation, projected_generation):
-        return pd.concat(
-            [
-                historical_electricity_generation.reset_index(drop=True),
-                projected_generation.iloc[
-                    :, len(historical_electricity_generation) :
-                ].reset_index(drop=True),
-            ],
-            axis=1,
-        )
+        return historical_electricity_generation.join(projected_generation)
 
     def percent_generation(historical_percent_generation, projected_percent_generation):
-        return pd.concat(
-            [
-                historical_percent_generation.reset_index(drop=True),
-                projected_percent_generation.loc[:, 2018:].reset_index(drop=True),
-            ],
-            axis=1,
-        )
+        return historical_percent_generation.join(projected_percent_generation)
 
     def generation_total(region, technology, technology2, scenario, metric):
         percent_adoption = adoption_curve(
             historical_percent_electricity_generation(
                 region, historical_electricity_generation(region, technology)
             )
-        ).transpose(copy=True)
+        )
 
         generation_total = generation(
             historical_electricity_generation(region, technology),
@@ -87,14 +79,12 @@ def energy_supply(energy_demand):
                 ),
             ),
         )
+
+        generation_total.index = [region]
+
         return generation_total
 
-    #    def prepare_adoption_curve_data(historical_percent_generation):
-    #        year = np.arange(len(historical_percent_generation.columns))
-    #        percent_adoption = historical_percent_generation.to_numpy()[
-    #            ~np.isnan(historical_percent_generation)
-    #        ]
-    #        return (year, percent_adoption)
+    ###############
 
     def historical_heat_generation(region, sector, technology):
         return heat_generation_data.loc[region, sector, technology, slice(None)]
@@ -156,10 +146,16 @@ def energy_supply(energy_demand):
         )
         return heat_generation_total
 
+    solarpv_generation = []
+
     for i in range(0, len(region_list)):
-        solarpv_generation = generation_total(
-            region_list[i], "Solar", "Solar PV", "Pathway", "Saturation Point"
-        ).rename(index={0: "Solar PV"})
+        solarpv_generation.append(
+            pd.DataFrame(
+                generation_total(
+                    region_list[i], "Solar", "Solar PV", "Pathway", "Saturation Point"
+                )
+            )
+        )
 
         wind_generation = generation_total(
             region_list[i], "Wind", "Wind", "Pathway", "Saturation Point"
