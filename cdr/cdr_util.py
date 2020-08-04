@@ -6,13 +6,14 @@ used in the cdr optimization module.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "07.29.20"
+__version__ = "08.04.20"
 
-import math
-import numpy as np
 from functools import wraps
+import math
 
-DEBUG_MODE = True  # True suppresses adoption limitations
+import numpy as np
+
+DEBUG_MODE = True  # True deploys a catch-all "deficit" CDRStrategy to account for a CDR deficit rather than crashing
 
 ####################
 # Global constants #
@@ -108,6 +109,10 @@ LTSSDAC_FIRST_DEPLOYMENT = HTLSDAC_FIRST_DEPLOYMENT = 1
 
 LTSSDAC_UTILIZATION = HTLSDAC_UTILIZATION = 0.9  # assume 90% utilization
 
+MAX_LTSSDAC = 23500  # MtCO2/yr deployment
+
+MAX_HTLSDAC = 11500  # MtCO2/yr deployment
+
 #################################
 # Enhanced weathering constants #
 #################################
@@ -120,6 +125,8 @@ SPREADING_DENSITY = 15000  # t rock/km2 ag land (M)
 CO2_PER_ROCK = 0.3  # tCO2/t rock for basalt (P)
 
 GRAIN_SIZE = 20  # micrometers in diameter
+
+MAX_EX_SITU_EW = 4500  # MtCO2/yr deployment
 
 
 #########################
@@ -157,10 +164,10 @@ def logistic_inverse_slope(M: float, a: float, b: float, cumul_adopt: int) -> fl
     return b * (cumul_adopt - cumul_adopt**2 / M)
 
 
-def learning(cumul_deploy: int, init_deploy: float, LR: float) -> float:
+def learning(cumul_deploy: int, init_deploy: float, LR: float, floor: float = 0.0) -> float:
     """Returns the fractional amount (for cost, energy use, etc.) remaining
     after one-factor learning for the given cumulative deployment"""
-    return (1 - LR) ** (math.log2(cumul_deploy / init_deploy))
+    return max(floor, (1 - LR) ** (math.log2(cumul_deploy / init_deploy)))
 
 
 def crf(n_yrs, d=DISCOUNT_RATE) -> float:
@@ -197,6 +204,8 @@ class PQEntry:
 ###################################################################
 
 def once_per_year(f):
+    """ For expensive functions that will return the same value in each
+        individual year and are unique to each CDRProject instance. """
     prev_info = dict()  # self --> (age, value) of last function call
 
     @wraps(f)
@@ -209,10 +218,13 @@ def once_per_year(f):
             result = f(self, *args, **kwargs)
             prev_info[self] = (self.age, result)
             return result
+
     return wrapper
 
 
 def cacheit(f):
+    """ For expensive functions that will return the same value every time
+        but are unique to each CDRProject instance. """
     cache = dict()
 
     @wraps(f)
@@ -224,4 +236,5 @@ def cacheit(f):
             result = f(self, *args, **kwargs)
             cache[self] = result
             return result
+
     return wrapper

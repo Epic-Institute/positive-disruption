@@ -12,12 +12,14 @@ to be put under consideration when developing the cost-optimal CDR mix.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "07.29.20"
+__version__ = "08.04.20"
 
-import cdr.cdr_util as util
-from cdr.cdr_abstract_types import CDRStrategy, ECR
 import math
+
 from scipy import integrate
+
+from cdr.cdr_abstract_types import CDRStrategy, ECR
+import cdr.cdr_util as util
 
 ###################################################################
 # DEFINE NEW SPECIFIC ECR (engineered) STRATEGIES HERE.           #
@@ -59,8 +61,9 @@ from scipy import integrate
 #     @classmethod
 #     def adopt_limits(cls) -> float:
 #         """ Returns the maximum MtCO2/yr capacity that can be installed
-#          in a year, given the current cls.cumul_deployment (MtCO2/yr),
-#          in the absence of any other competing CDR strategies. """
+#          in a year, given the current cls.active_deployment (MtCO2/yr)
+#          and cls.cumul_deployment (MtCO2/yr), in the absence of any other
+#          competing CDR strategies. """
 #         pass
 #
 #     @util.cacheit
@@ -87,30 +90,53 @@ from scipy import integrate
 ##################################
 
 
+class Deficit(ECR):
+    """ Catch-all CDR "strategy" used in debugging mode, which fills
+    any deficits in the CDR budget that cannot be met with existing
+    CDR strategies. Indicates a need for more CDR in the years when
+    it is used. Allows the model to run to completion in debug mode
+    without crashing. """
+    default_lifetime = 1  # "deployed" on a yearly basis
+
+    @classmethod
+    def adopt_limits(cls):
+        return float('inf')  # No limits on the deficit
+
+    def marginal_cost(self) -> float:
+        return 0.0
+
+    def marginal_energy_use(self) -> tuple:
+        return 0.0, 0.0, 0.0, 0.0
+
+    def incidental_emissions(self) -> float:
+        return 0.0
+
+
 class LTSSDAC(ECR):
     """ Low-temperature Solid Sorbent Direct Air Capture
         (Climeworks and Global Thermostat approach) """
     default_lifetime = 20
-    cumul_deployment = util.LTSSDAC_FIRST_DEPLOYMENT  # assumed starting in 2025
+    cumul_deployment = active_deployment = util.LTSSDAC_FIRST_DEPLOYMENT  # assumed starting in 2025
 
     @classmethod
     def adopt_limits(cls) -> float:
         # LTSSDAC adoption is assumed to be logistic.
         # M, a, b, and vertical shift derivation outlined in adoption curve writeup
-        if CDRStrategy.curr_year < util.DAC_FIRST_YEAR:
+        if CDRStrategy.curr_year < util.DAC_FIRST_YEAR or cls.active_deployment >= util.MAX_LTSSDAC:
             return 0
         else:
             vertical_shift = 57.134346 - util.LTSSDAC_FIRST_DEPLOYMENT
-            return util.logistic_inverse_slope(23500, -8.636, 0.1746, cls.cumul_deployment + vertical_shift)
+            return max(1.0, util.logistic_inverse_slope(
+                util.MAX_LTSSDAC, -8.636, 0.1746, cls.active_deployment + vertical_shift
+            ))
 
     @util.cacheit
     def marginal_cost(self) -> float:
-        capex = self._capex_new() * util.crf(n_yrs=self.get_levelizing_lifetime()) / util.LTSSDAC_UTILIZATION
-        opex = self._capex_new() * 0.037
+        capex_new = self._capex_new()
+        capex = capex_new * util.crf(n_yrs=self.get_levelizing_lifetime()) / util.LTSSDAC_UTILIZATION
+        opex = capex_new * 0.037
         energy_basis = self.marginal_energy_use()
-        energy = util.learning(self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.137) * (
-            energy_basis[0] * util.ELEC_COST + energy_basis[1] * util.HEAT_COST
-        )
+        energy = energy_basis[0] * util.ELEC_COST + energy_basis[1] * util.HEAT_COST
         return capex + opex + energy
 
     @util.cacheit
@@ -123,6 +149,7 @@ class LTSSDAC(ECR):
 
     def _capex_new(self):
         """ Returns current CAPEX, adjusted for one-factor learning """
+        # TODO - add capex cost floor for LTSS-DAC
         return 979 * util.learning(self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.15)
 
 
@@ -130,20 +157,23 @@ class HTLSDAC(ECR):
     """ High-temperature Liquid Solvent Direct Air Capture
             (Carbon Engineering approach) """
     default_lifetime = 25
-    cumul_deployment = util.HTLSDAC_FIRST_DEPLOYMENT  # assumed starting in 2025
+    cumul_deployment = active_deployment = util.HTLSDAC_FIRST_DEPLOYMENT  # assumed starting in 2025
 
     @classmethod
     def adopt_limits(cls) -> float:
-        if CDRStrategy.curr_year < util.DAC_FIRST_YEAR:
+        if CDRStrategy.curr_year < util.DAC_FIRST_YEAR or cls.active_deployment >= util.MAX_HTLSDAC:
             return 0
         else:
             vertical_shift = 880.6986515 - util.HTLSDAC_FIRST_DEPLOYMENT
-            return util.logistic_inverse_slope(11500, -3.407, 0.0917, cls.cumul_deployment + vertical_shift)
+            return max(1.0, util.logistic_inverse_slope(
+                util.MAX_HTLSDAC, -3.407, 0.0917, cls.active_deployment + vertical_shift
+            ))
 
     @util.cacheit
     def marginal_cost(self) -> float:
-        capex = self._capex_new() * util.crf(n_yrs=self.get_levelizing_lifetime()) / util.LTSSDAC_UTILIZATION
-        opex = self._capex_new() * 0.037
+        capex_new = self._capex_new()
+        capex = capex_new * util.crf(n_yrs=self.get_levelizing_lifetime()) / util.LTSSDAC_UTILIZATION
+        opex = capex_new * 0.037
         energy_basis = self.marginal_energy_use()
         energy = energy_basis[0] * util.ELEC_COST + energy_basis[1] * util.HEAT_COST
         return capex + opex + energy
@@ -155,6 +185,7 @@ class HTLSDAC(ECR):
 
     def _capex_new(self):
         """ Returns current CAPEX, adjusted for one-factor learning """
+        # TODO - add capex cost floor for HTLS-DAC
         return 1132 * util.learning(self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.1)
 
 
@@ -168,7 +199,12 @@ class ExSituEW(ECR):
     def adopt_limits(cls) -> float:
         # EW adoption is assumed to be logistic.
         # M, a, b, and vertical shift derivation outlined in adoption curve writeup
-        return util.logistic_inverse_slope(4500, -6.258, 0.0994, cls.cumul_deployment + 9.5)
+        if cls.active_deployment >= util.MAX_EX_SITU_EW:
+            return 0
+        else:
+            return max(1.0, util.logistic_inverse_slope(
+                util.MAX_EX_SITU_EW, -6.258, 0.0994, cls.active_deployment + 9.5
+            ))
 
     @util.cacheit
     def marginal_cost(self) -> float:

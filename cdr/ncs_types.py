@@ -12,10 +12,10 @@ to be put under consideration when developing the cost-optimal CDR mix.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "07.29.20"
+__version__ = "08.04.20"
 
-import cdr.cdr_util as util
 from cdr.cdr_abstract_types import CDRStrategy, NCS
+import cdr.cdr_util as util
 
 ###################################################################
 # DEFINE NEW SPECIFIC NCS STRATEGIES HERE.                        #
@@ -61,6 +61,7 @@ from cdr.cdr_abstract_types import CDRStrategy, NCS
 #          in the absence of any other competing CDR strategies. """
 #         pass
 #
+#     @util.cacheit
 #     def marginal_cost(self) -> float:
 #         """ Returns the $/tCO2 cost of this project based on self.deployment_level,
 #          but NOT adjusted for impacts of incidental emissions or CDR credits.
@@ -70,11 +71,14 @@ from cdr.cdr_abstract_types import CDRStrategy, NCS
 #          at the time of its deployment. """
 #         pass
 #
+#     @util.cacheit
 #     def marginal_energy_use(self) -> tuple:
 #         """ Returns kWh used/tCO2 captured as a tuple:
 #          (electricity, heat, transportation, non-transportation fuels) """
 #         pass
 #
+#     # ONLY IF ABOVE CALCULATIONS ARE NOT ALREADY ON A NET BASIS
+#     @util.once_per_year
 #     def incidental_emissions(self) -> float:
 #         """ Returns tCO2 emitted/tCO2 captured """
 #         pass

@@ -11,14 +11,15 @@ ncs_types.py (for natural projects) instead.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "07.29.20"
+__version__ = "08.04.20"
 
 
-import cdr.cdr_util as util
 from abc import ABC, abstractmethod
 import inspect
 import math
 import numpy as np
+
+import cdr.cdr_util as util
 
 
 class CDRStrategy(ABC):
@@ -49,13 +50,14 @@ class CDRStrategy(ABC):
         if self.__class__.default_lifetime is None:
             raise util.StrategyNotImplementedError(f'The CDR strategy {self.__class__.__name__} '
                                                    f'has not defined a default project lifetime.')
-        if not util.DEBUG_MODE and self.__class__.remaining_deployment < capacity:
+        if self.__class__.remaining_deployment < capacity:
             raise util.StrategyNotAvailableError(f'The CDR strategy {self.__class__.__name__} does not '
                                                  f'have enough adoption potential left for this year.')
 
         # record the deployment of this project
         self.__class__.cumul_deployment += capacity
         self.__class__.remaining_deployment -= capacity
+        self.__class__.active_deployment += capacity
         self.capacity = capacity
         self.deployment_level = self.__class__.cumul_deployment  # includes this project
         self.lifetime = self.__class__.default_lifetime
@@ -66,8 +68,10 @@ class CDRStrategy(ABC):
             and adoption limits at the class level """
         super().__init_subclass__(**kwargs)
         if not inspect.isabstract(cls):
-            # each concrete class gets its own counter
-            cls.cumul_deployment = 0
+            # each concrete class gets its own deployment counter
+            cls.cumul_deployment = 0  # all capacity ever deployed
+            cls.active_deployment = 0  # all capacity currently deployed
+            cls.cdr_performed = 0  # total MtCO2 captured by this strategy
             # and its own annual deployment tracker
             if cls.adopt_limits() == float('inf'):
                 cls.remaining_deployment = float('inf')  # to avoid overflow errors with math.ceil
@@ -81,7 +85,10 @@ class CDRStrategy(ABC):
     @classmethod
     def reset_adoption_limits(cls):
         """Resets remaining deployment limits for a new year"""
-        cls.remaining_deployment = math.ceil(cls.adopt_limits())
+        limits = cls.adopt_limits()
+        if limits != float('inf'):
+            cls.remaining_deployment = math.ceil(cls.adopt_limits())
+        cls.cdr_performed += cls.active_deployment
 
     def advance_age(self):
         self.age += 1
@@ -90,6 +97,11 @@ class CDRStrategy(ABC):
         """ Must call advance_age before this check to avoid being off by one
         (as self.age starts at 0). """
         return self.age >= self.lifetime
+
+    def retire(self):
+        """ This method can be called any time (regardless of return value of
+        should_be_retired), in case projects need to be retired early. """
+        self.__class__.active_deployment -= self.capacity
 
     @abstractmethod
     def is_engineered(self) -> bool:
@@ -101,7 +113,7 @@ class CDRStrategy(ABC):
     def adopt_limits(cls) -> float:
         """Computes annual adoption/deployment limit (MtCO2 capacity/yr)
         based on current cumulative deployment of this technology using
-        cls.cumul_deployment (MtCO2/yr)"""
+        cls.cumul_deployment (MtCO2/yr) and/or CDRStrategy.curr_year """
         return NotImplemented
 
     @abstractmethod
@@ -163,6 +175,12 @@ class NCS(CDRStrategy):
     def is_engineered(self) -> bool:
         return False
 
+    def __init_subclass__(cls, **kwargs):
+        """ Allow each NCS strategy to track its own additional
+            characteristics at the class level, if desired in the future """
+        super().__init_subclass__(**kwargs)
+        # initialize any NCS-specific class variables here
+
     def incidental_emissions(self) -> float:
         # All NCS CO2 values are already computed on a net basis.
         return 0.0
@@ -175,10 +193,16 @@ class ECR(CDRStrategy):
     def is_engineered(self) -> bool:
         return True
 
+    def __init_subclass__(cls, **kwargs):
+        """ Allow each ECR strategy to track its own additional
+            characteristics at the class level, if desired in the future """
+        super().__init_subclass__(**kwargs)
+        # initialize any ECR-specific class variables here
+
     @util.once_per_year
     def incidental_emissions(self) -> float:
         """ Default behavior is simply multiplying the energy use in each sector
          by its respective emissions rate and summing across sectors. """
         energy_basis = self.marginal_energy_use()
         yr = CDRStrategy.curr_year - CDRStrategy.start_year
-        return np.dot(energy_basis, CDRStrategy.DEFAULT_EM_BASIS[yr])
+        return float(np.dot(energy_basis, CDRStrategy.DEFAULT_EM_BASIS[yr]))
