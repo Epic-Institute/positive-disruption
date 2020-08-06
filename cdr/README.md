@@ -8,6 +8,14 @@ The following files play the following roles:
 4. **ecr_types.py:** implements behavior of specific ECR CDR strategies.
 5. **ncs_types.py:** implements behavior of specific NCS CDR strategies.
 
+# Module inputs and outputs
+
+Inputs | Outputs
+------ | -------
+Annual MtCO2 CDR requirements | Cost-optimal mix of CDR capacity in each year, by CDR technology (MtCO2/yr)
+Start year and end year | Total cost in each year (MM$), adjusted for CDR credits
+Emissions intensity of: 1) Grid electricity (tCO2/TWh), 2) Heat production (tCO2/MWh), 3) Transportation (tCO2/t*km), 4) Liquid fuels (tCO2/MWh) | Annual energy use (TWh), separated into: 1) Grid electricity, 2) Heat use, 3) Transportation, 4) Liquid fuels
+
 # Optimization Process
 
 Here is the basic logic and the underlying set of assumptions for the current process to determine an approximately cost-optimal mix of CDR technologies in each year.
@@ -30,18 +38,19 @@ Here is the basic logic and the underlying set of assumptions for the current pr
 * Effective CDR factor for a project (i.e. net tCO2 removed per tCO2 capacity) = `1-x`
     * x is tons incidental CO2 emissions (e.g. from energy production) per ton CO2 removed.
 * Costs are based on each 1 MtCO2/yr project’s levelized cost, their net CDR efficiency (accounting for incidental emissions), and the annual carbon price.
-    * ![cost equation](https://latex.codecogs.com/svg.latex?\frac{new&space;cost}{tCO_2}=\left\(\frac{cost}{tCO_2}\right\)_{baseline}*\frac{1}{effective&space;CDR&space;factor}-\frac{1}{T}*\sum_{y=y_0}^{y_0&plus;T}\frac{credit&space;price(y)}{(1&plus;r)^{(y-y_0)}})
+    * ![cost equation](https://latex.codecogs.com/svg.latex?\frac{new\&space;cost}{tCO_2}=\left\(\frac{cost}{tCO_2}\right\)_{baseline}*\frac{1}{\textup{effective&space;CDR&space;factor}}-\frac{1}{T}*\sum_{y=y_0}^{y_0&plus;T}\frac{\textup{credit&space;price}(y)}{(1&plus;r)^{(y-y_0)}})
     * *T* is lifetime, *y_0* is project deployment year, *r* is discount rate.
 * Energy use is based on each 1 MtCO2/yr project’s base energy use (per tCO2) and adjusted for its net CDR efficiency. Split into electricity/heat/transportation/fuels.
-    * ![energy equation](https://latex.codecogs.com/svg.latex?\frac{new&space;energy}{tCO_2}=\left\(\frac{energy}{tCO_2}\right\)_{baseline}*\frac{1}{effective&space;CDR&space;&space;factor})
+    * ![energy equation](https://latex.codecogs.com/svg.latex?\frac{new\&space;energy}{tCO_2}=\left\(\frac{energy}{tCO_2}\right\)_{baseline}*\frac{1}{\textup{effective&space;CDR&space;factor}})
 * Max annual adoption potential (limit to how much new capacity can be deployed in a year) for each technology is the slope of its market penetration curve, in the absence of competing CDR technologies, at its current deployment level.
     * For example, given a logistic adoption function ![logistic equation](https://latex.codecogs.com/svg.latex?N(t)=M\left\[\frac{e^{(a&plus;bt)}}{1&plus;e^{(a&plus;bt)}}\right\])
-    and some current adoption level *n*, the slope of this logistic curve at the point where the adoption level (y-value) equals *n* is ![slope equation](https://latex.codecogs.com/svg.latex?b*\left\(n-\frac{n^2}{M}\right\)=slope&space;of&space;N(t)&space;where&space;N&space;equals&space;n), which is the value of ![prime inverse equation](https://latex.codecogs.com/svg.latex?N'\left\(N^{-1}(n)\right\)), i.e. the adoption slope at the time on the logistic graph corresponding to adoption level n.
+    and some current adoption level *n*, the slope of this logistic curve at the point where the adoption level (y-value) equals *n* is ![slope equation](https://latex.codecogs.com/svg.latex?b*\left\(n-\frac{n^2}{M}\right\)=\textup{slope&space;of&space;}N(t)\textup{&space;where&space;}N\textup{&space;equals&space;}n), which is the value of ![prime inverse equation](https://latex.codecogs.com/svg.latex?N'\left\(N^{-1}(n)\right\)), i.e. the adoption slope at the time on the logistic graph corresponding to adoption level n.
 
 ## Assumptions
 * CDR is simultaneously deployed all at once at the beginning of each year.
 * 5% discount rate.
 * The capture step is assumed to be the limiting step, so geologic storage is assumed to have unlimited potential.
+* DAC projects can achieve up to a 90% reduction in CAPEX via learning.
 * Storage projects are levelized using the same lifetime as their paired capture project.
 * Transportation mix has a (trucking : shipping : rail) split of (30.7 : 10.5 : 2.4).
 * Default energy source emissions intensity assumptions described in cdr_util.

@@ -149,8 +149,8 @@ class LTSSDAC(ECR):
 
     def _capex_new(self):
         """ Returns current CAPEX, adjusted for one-factor learning """
-        # TODO - add capex cost floor for LTSS-DAC
-        return 979 * util.learning(self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.15)
+        # assume maximum of 90% overall capex cost reductions via learning (10% capex floor)
+        return 979 * util.learning(self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.15, floor=0.1)
 
 
 class HTLSDAC(ECR):
@@ -185,8 +185,8 @@ class HTLSDAC(ECR):
 
     def _capex_new(self):
         """ Returns current CAPEX, adjusted for one-factor learning """
-        # TODO - add capex cost floor for HTLS-DAC
-        return 1132 * util.learning(self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.1)
+        # assume maximum of 90% overall capex cost reductions via learning (10% capex floor)
+        return 1132 * util.learning(self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.1, floor=0.1)
 
 
 class ExSituEW(ECR):

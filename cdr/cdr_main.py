@@ -90,6 +90,7 @@ def cdr_mix(cdr_reqs: list = util.CDR_NEEDED_DEF, grid_em: list = util.GRID_EM_D
     if start != util.START_YEAR:
         abstract_types.CDRStrategy.start_year = abstract_types.CDRStrategy.curr_year = start
         _reset_tech_adopt_limits()
+    assert len(cdr_reqs) == (end - start + 1)  # year counts must match up
     _setup_emissions_intensities(grid_em, heat_em, transport_em, fuel_em)
 
     tech_mix = []  # list of {tech --> deployment} in each year
@@ -132,14 +133,17 @@ def cdr_mix(cdr_reqs: list = util.CDR_NEEDED_DEF, grid_em: list = util.GRID_EM_D
 
 def cdr_credit(yr: int) -> float:
     """
-    Returns the credit price or tax credit for CDR in a given year ($/tCO2)
+    Returns the credit price or tax credit for CDR in a given year ($/tCO2),
+    based on a linear regression of median carbon prices used in a range of
+    other existing IAMs: AIM/CGE 2.0/2.1, GCAM 4.2, GENeSYS-MOD 1.0,
+    IMAGE 3.0.1/2, MERGE-ETL 6.0, MESSAGE V.3, MESSAGE-GLOBIOM 1.0,
+    MESSAGEix-GLOBIOM 1.0, POLES ADVANCE, POLES CD-LINKS, POLES EMF33,
+    REMIND 1.5/1.7, REMIND-MAgPIE 1.5/1.7-3.0, WITCH-GLOBIOM 3.1/4.2/4.4.
+    Regression yields $3.656 + $9.167/yr, starting in 2020.
     :param yr: absolute year number, e.g. 2020
     :return: $/tCO2 credit price in specific year
     """
-    # assume initial credit price of $50/tCO2 (based on 45Q tax credit)
-    # and a 4% per year increase
-    # TODO - revisit this in comparison to other existing models
-    return 50 * (1.04 ** (yr - util.START_YEAR))
+    return max(0.0, 3.656 + 9.167 * (yr - util.START_YEAR))
 
 
 def get_prospective_cost(capture_project: abstract_types.CDRStrategy, yr: int,
@@ -231,7 +235,7 @@ def _advance_cdr_mix(addl_cdr, yr) -> set:
     cheapest technology.
     """
     if util.DEBUG_MODE:
-        print(f'\r** DEBUG ** Starting _advance_cdr_mix for year {yr}...', end='')
+        print(f'\r** CDR DEBUG MODE ** Starting _advance_cdr_mix for year {yr}...', end='')
     new_projects = set()
     options = _set_up_pq(yr)
 
