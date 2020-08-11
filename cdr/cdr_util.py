@@ -6,14 +6,16 @@ used in the cdr optimization module.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "08.04.20"
+__version__ = "08.10.20"
 
 from functools import wraps
 import math
 
 import numpy as np
 
-DEBUG_MODE = True  # True deploys a catch-all "deficit" CDRStrategy to account for a CDR deficit rather than crashing
+# Setting the ACCEPT_DEFICIT flag to True deploys a catch-all "deficit" CDRStrategy
+# to account for a CDR deficit in a year rather than throwing a NotEnoughCDRError.
+ACCEPT_DEFICIT = True
 
 ####################
 # Global constants #
