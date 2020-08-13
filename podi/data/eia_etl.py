@@ -11,6 +11,6 @@ def eia_etl(data_source):
 
     electricity_generation = electricity_generation.merge(
         region_categories, right_on=["Region"], left_on=["Region"]
-    )
+    ).set_index(["Region", "IEA Region", "Metric", "Scenario", "Unit"])
 
     return electricity_generation

@@ -4,6 +4,7 @@ import pandas as pd
 
 
 def energy_demand(
+    scenario,
     demand_historical,
     demand_projection,
     energy_efficiency,
@@ -15,24 +16,36 @@ def energy_demand(
 
     energy_demand_historical = pd.read_csv(demand_historical)
     energy_demand_projection = pd.read_csv(demand_projection)
-
-    energy_demand = energy_demand_historical.merge(
-        energy_demand_projection,
-        right_on=["WEO Sector", "WEO Metric", "REGION"],
-        left_on=["Sector", "Metric", "REGION"],
-    ).drop(
-        columns=["WEO Sector", "WEO Metric", "GCAM Value", "VARIABLE", "UNIT", "REGION"]
-    )
+    energy_demand_projection = energy_demand_projection[
+        energy_demand_projection["Scenario"] == scenario
+    ]
 
     energy_demand = (
-        energy_demand.loc[:, :"2039"]
-        .join(energy_demand.loc[:, "2040":].cumprod(axis=1).fillna(0).astype(int))
-        .set_index(["Region", "Sector", "Metric"])
+        energy_demand_historical.merge(
+            energy_demand_projection,
+            right_on=["WEO Sector", "WEO Metric", "GCAM Region"],
+            left_on=["Sector", "Metric", "GCAM Region"],
+        )
+        .drop(
+            columns=[
+                "WEO Sector",
+                "WEO Metric",
+                "GCAM Metric",
+                "Variable",
+                "Unit",
+                "GCAM Region",
+            ]
+        )
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+    )
+
+    energy_demand = energy_demand.loc[:, :"2039"].join(
+        energy_demand.loc[:, "2040":].cumprod(axis=1).fillna(0).astype(int)
     )
 
     energy_efficiency = (
         pd.read_csv(energy_efficiency)
-        .set_index(["Region", "Sector", "Metric"])
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
         .fillna(0)
     )
 
@@ -41,7 +54,9 @@ def energy_demand(
     energy_demand_post_efficiency = energy_demand * energy_efficiency.values
 
     heat_pumps = (
-        pd.read_csv(heat_pumps).set_index(["Region", "Sector", "Metric"]).fillna(0)
+        pd.read_csv(heat_pumps)
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+        .fillna(0)
     )
 
     heat_pumps = heat_pumps.apply(lambda x: x + 1, axis=1)
@@ -52,7 +67,7 @@ def energy_demand(
 
     transport_efficiency = (
         pd.read_csv(transport_efficiency)
-        .set_index(["Region", "Sector", "Metric"])
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
         .fillna(0)
     )
     transport_efficiency = transport_efficiency.apply(lambda x: x + 1, axis=1)
@@ -62,7 +77,9 @@ def energy_demand(
     )
 
     solar_thermal = (
-        pd.read_csv(solar_thermal).set_index(["Region", "Sector", "Metric"]).fillna(0)
+        pd.read_csv(solar_thermal)
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+        .fillna(0)
     )
     solar_thermal = solar_thermal.apply(lambda x: x + 1, axis=1)
     solar_thermal = solar_thermal.reindex(energy_demand.index)
@@ -70,7 +87,11 @@ def energy_demand(
         energy_demand_post_efficiency_heatpumps_transport * solar_thermal.values
     )
 
-    biofuels = pd.read_csv(biofuels).set_index(["Region", "Sector", "Metric"]).fillna(0)
+    biofuels = (
+        pd.read_csv(biofuels)
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+        .fillna(0)
+    )
     biofuels = biofuels.apply(lambda x: x + 1, axis=1)
     biofuels = biofuels.reindex(energy_demand.index)
     energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels = (

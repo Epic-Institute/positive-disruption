@@ -3,76 +3,83 @@
 import pandas as pd
 from numpy import NaN
 
-gcam_demand_projection = pd.read_excel("gcam_data.xlsx")
+gcam_demand_projection = (
+    pd.read_csv("gcam.csv")
+    .replace(" -   ", 0)
+    .set_index(["Region", "Variable", "Unit"])
+    .astype(float)
+)
 
-for i in range(4, 8):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(9, 18):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(19, 28):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(29, 38):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(39, 48):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(49, 58):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(59, 68):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(69, 78):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(79, 88):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
-for i in range(89, 98):
-    gcam_demand_projection.insert(i, i + 2002, NaN)
+for i in range(1, 5):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(6, 15):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(16, 25):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(26, 35):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(36, 45):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(46, 55):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(56, 65):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(66, 75):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(76, 85):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
+for i in range(86, 95):
+    gcam_demand_projection.insert(i, i + 2005, NaN)
 
 gcam_demand_projection.columns = gcam_demand_projection.columns.astype(str)
 
-gcam_demand_projection.iloc[:, 3:9] = gcam_demand_projection.iloc[:, 3:9].interpolate(
+gcam_demand_projection.iloc[:, 0:6] = gcam_demand_projection.iloc[:, 0:6].interpolate(
     axis=1
 )
-gcam_demand_projection.iloc[:, 8:19] = gcam_demand_projection.iloc[:, 8:19].interpolate(
+gcam_demand_projection.iloc[:, 5:16] = gcam_demand_projection.iloc[:, 5:16].interpolate(
     axis=1
 )
-gcam_demand_projection.iloc[:, 18:29] = gcam_demand_projection.iloc[
-    :, 18:29
+gcam_demand_projection.iloc[:, 15:26] = gcam_demand_projection.iloc[
+    :, 15:26
 ].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 28:39] = gcam_demand_projection.iloc[
-    :, 28:39
+gcam_demand_projection.iloc[:, 25:36] = gcam_demand_projection.iloc[
+    :, 25:36
 ].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 38:49] = gcam_demand_projection.iloc[
-    :, 38:49
+gcam_demand_projection.iloc[:, 35:46] = gcam_demand_projection.iloc[
+    :, 35:46
 ].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 48:59] = gcam_demand_projection.iloc[
-    :, 48:59
+gcam_demand_projection.iloc[:, 45:56] = gcam_demand_projection.iloc[
+    :, 45:56
 ].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 58:69] = gcam_demand_projection.iloc[
-    :, 58:69
+gcam_demand_projection.iloc[:, 55:66] = gcam_demand_projection.iloc[
+    :, 55:66
 ].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 68:79] = gcam_demand_projection.iloc[
-    :, 68:79
+gcam_demand_projection.iloc[:, 65:76] = gcam_demand_projection.iloc[
+    :, 65:76
 ].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 78:89] = gcam_demand_projection.iloc[
-    :, 78:89
+gcam_demand_projection.iloc[:, 75:86] = gcam_demand_projection.iloc[
+    :, 75:86
 ].interpolate(axis=1)
-gcam_demand_projection.iloc[:, 88:99] = gcam_demand_projection.iloc[
-    :, 88:99
+gcam_demand_projection.iloc[:, 85:96] = gcam_demand_projection.iloc[
+    :, 85:96
 ].interpolate(axis=1)
 
-iea_weo_dict_metrics = pd.read_excel("weo_gcam_dict.xlsx", "Metrics")
-iea_weo_dict_regions = pd.read_excel("weo_gcam_dict.xlsx", "Regions")
+metrics = pd.read_csv("metric_categories.csv")
 
-gcam_demand_projection = gcam_demand_projection[
-    gcam_demand_projection.VARIABLE.isin(iea_weo_dict_metrics.loc[:, "GCAM Value"])
+gcam_demand_projection = gcam_demand_projection.loc[
+    (slice(None), metrics.loc[:, "GCAM Metric"], slice(None)), :
 ]
 
-gcam_pct_change = gcam_demand_projection.iloc[:, 3:].pct_change(axis="columns")
-gcam_pct_change = gcam_demand_projection.iloc[:, 0:3].join(
-    gcam_pct_change.loc[:, "2041":].fillna(0).apply(lambda x: x + 1, axis=1)
-)
-
-gcam_pct_change = iea_weo_dict_metrics.merge(
-    gcam_pct_change, right_on="VARIABLE", left_on="GCAM Value"
+gcam_pct_change = (
+    gcam_demand_projection.pct_change(axis="columns")
+    .loc[:, "2041":]
+    .fillna(0)
+    .apply(lambda x: x + 1, axis=1)
+    .reset_index()
+    .merge(metrics, right_on="GCAM Metric", left_on="Variable")
+    .set_index(
+        ["Region", "Variable", "Unit", "WEO Sector", "WEO Metric", "GCAM Metric"]
+    )
 )
 
 gcam_pct_change.to_csv("energy_demand_projection_baseline.csv", index=False)

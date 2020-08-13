@@ -1,0 +1,52 @@
+﻿WEO Sector,WEO Metric,GCAM Metric
+TPED,Total primary demand,Primary Energy
+TPED,Coal,Primary Energy|Coal
+TPED,Oil,Primary Energy|Oil
+TPED,Natural gas,Primary Energy|Gas
+TPED,Nuclear,Primary Energy|Nuclear
+TPED,Hydro,Primary Energy|Hydro
+TPED,Bioenergy,Primary Energy|Biomass
+TPED,Other renewables,Primary Energy|Non-Biomass Renewables
+Power sector,Power sector,Secondary Energy|Electricity
+Power sector,Coal,Secondary Energy|Electricity|Coal
+Power sector,Oil,Secondary Energy|Electricity|Oil
+Power sector,Natural gas,Secondary Energy|Electricity|Gas
+Power sector,Nuclear,Secondary Energy|Electricity|Nuclear
+Power sector,Hydro,Secondary Energy|Electricity|Hydro
+Power sector,Bioenergy,Secondary Energy|Electricity|Biomass
+Power sector,Other renewables,Secondary Energy|Electricity|Non-Biomass Renewables
+Other energy sector,Other energy sector,Secondary Energy|Liquids|Fossil
+Other energy sector,Electricity,Secondary Energy|Electricity
+TFC,Total final consumption,Final Energy
+TFC,Coal,Final Energy|Coal
+TFC,Oil,Final Energy|Oil
+TFC,Natural gas,Final Energy|Gases
+TFC,Electricity,Final Energy|Electricity
+TFC,Heat,Final Energy|Heat
+TFC,Bioenergy,Final Energy|Solids|Biomass
+TFC,Other renewables,Final Energy|Electricity
+Industry,Industry,Final Energy|Industry
+Industry,Coal,Final Energy|Industry|Solids|Coal
+Industry,Oil,Final Energy|Industry|Liquids
+Industry,Natural gas,Final Energy|Industry|Gases
+Industry,Electricity,Final Energy|Industry|Electricity
+Industry,Heat,Final Energy|Industry|Heat
+Industry,Bioenergy,Final Energy|Industry|Solids|Biomass
+Industry,Other renewables,Final Energy|Industry|Electricity
+Transport,Transport,Final Energy|Transportation
+Transport,Oil,Final Energy|Transportation|Liquids
+Transport,International bunkers,Final Energy|Transportation|Freight
+Transport,Electricity,Final Energy|Transportation|Electricity
+Transport,Biofuels,Final Energy|Transportation|Liquids
+Transport,Other fuels,Final Energy|Transportation|Liquids
+Buildings,Buildings,Final Energy|Residential and Commercial
+Buildings,Coal,Final Energy|Residential and Commercial|Solids|Coal
+Buildings,Oil,Final Energy|Residential and Commercial|Liquids
+Buildings,Natural gas,Final Energy|Residential and Commercial|Gases
+Buildings,Electricity,Final Energy|Residential and Commercial|Electricity
+Buildings,Heat,Final Energy|Residential and Commercial|Heat
+Buildings,Bioenergy,Final Energy|Residential and Commercial|Solids|Biomass
+Buildings,Traditional biomass,Final Energy|Residential and Commercial|Solids|Biomass
+Buildings,Other renewables,Final Energy|Residential and Commercial|Electricity
+Other,Other,Final Energy
+Other,Petrochem. feedstock,Secondary Energy|Liquids|Fossil

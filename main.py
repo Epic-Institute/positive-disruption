@@ -11,34 +11,57 @@ from podi.energy_supply import energy_supply
 # from podi.results_analysis import results_analysis
 from podi.charts import charts
 
-socioeconomic_baseline = socioeconomic("podi/data/socioeconomic_baseline.csv")
-socioeconomic_pathway = socioeconomic("podi/data/socioeconomic_pathway.csv")
+
+##################
+# SOCIOECONOMICS #
+##################
+
+socioeconomic_baseline = socioeconomic("Baseline", "podi/data/socioeconomic.csv")
+socioeconomic_pathway = socioeconomic("Pathway", "podi/data/socioeconomic.csv")
+
+#################
+# ENERGY DEMAND #
+#################
 
 energy_demand_baseline = energy_demand(
+    "Baseline",
     "podi/data/energy_demand_historical.csv",
-    "podi/data/energy_demand_projection_baseline.csv",
-    "podi/data/energy_efficiency_baseline.csv",
-    "podi/data/heat_pumps_baseline.csv",
-    "podi/data/transport_efficiency_baseline.csv",
-    "podi/data/solar_thermal_baseline.csv",
-    "podi/data/biofuels_baseline.csv",
+    "podi/data/energy_demand_projection.csv",
+    "podi/data/energy_efficiency.csv",
+    "podi/data/heat_pumps.csv",
+    "podi/data/transport_efficiency.csv",
+    "podi/data/solar_thermal.csv",
+    "podi/data/biofuels.csv",
 )
 
 energy_demand_pathway = energy_demand(
+    "Pathway",
     "podi/data/energy_demand_historical.csv",
-    "podi/data/energy_demand_projection_pathway.csv",
-    "podi/data/energy_efficiency_pathway.csv",
-    "podi/data/heat_pumps_pathway.csv",
-    "podi/data/transport_efficiency_pathway.csv",
-    "podi/data/solar_thermal_ pathway.csv",
-    "podi/data/biofuels_pathway.csv",
+    "podi/data/energy_demand_projection.csv",
+    "podi/data/energy_efficiency.csv",
+    "podi/data/heat_pumps.csv",
+    "podi/data/transport_efficiency.csv",
+    "podi/data/solar_thermal.csv",
+    "podi/data/biofuels.csv",
 )
 
-energy_supply_baseline = energy_supply(energy_demand_baseline)
-energy_supply_pathway = energy_supply(energy_demand_pathway)
+#################
+# ENERGY SUPPLY #
+#################
 
-afolu_baseline = afolu("podi/data/afolu_baseline.csv")
-afolu_pathway = afolu("podi/data/afolu_pathway.csv")
+energy_supply_baseline = energy_supply("Baseline", energy_demand_baseline)
+energy_supply_pathway = energy_supply("Pathway", energy_demand_pathway)
+
+#########
+# AFOLU #
+#########
+
+afolu_baseline = afolu("podi/data/afolu.csv")
+afolu_pathway = afolu("podi/data/afolu.csv")
+
+#############
+# EMISSIONS #
+#############
 
 emissions_baseline = emissions(
     energy_supply_baseline, afolu_baseline, "additional_emissions_baseline.csv"
@@ -47,11 +70,23 @@ emissions_pathway = emissions(
     energy_supply_pathway, afolu_pathway, "additional_emissions_pathway.csv"
 )
 
+#######
+# CDR #
+#######
+
 cdr_baseline = cdr(emissions_baseline)
 cdr_pathway = cdr(emissions_pathway)
 
+###########
+# CLIMATE #
+###########
+
 climate_baseline = climate(emissions_baseline, cdr_baseline)
 climate_pathway = climate(emissions_pathway, cdr_pathway)
+
+####################
+# RESULTS ANALYSIS #
+####################
 
 results_analysis = results_analysis(
     [
@@ -71,5 +106,9 @@ results_analysis = results_analysis(
         climate_pathway,
     ],
 )
+
+##########
+# CHARTS #
+##########
 
 charts(energy_demand_baseline, energy_demand_pathway)

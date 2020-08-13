@@ -3,7 +3,11 @@
 import pandas as pd
 from numpy import NaN
 
-region_list = (
+iea_regions = pd.read_csv("podi/data/region_categories.csv")[
+    "IEA Region"
+]  # unused, complete to build iea_region_list and gcam_region_list from this
+
+iea_region_list = (
     "World",
     "NAM",
     "US",
@@ -27,7 +31,7 @@ region_list = (
     "AdvancedECO",
 )
 
-REGION_list = (
+gcam_region_list = (
     "World",
     "OECD90",
     "OECD90",
@@ -51,11 +55,11 @@ REGION_list = (
     "World",
 )
 
-input_data = pd.ExcelFile("podi/data/iea_weo_data.xlsx")
+input_data = pd.ExcelFile("podi/data/iea_weo.xlsx")
 
 
-def iea_weo_etl(region_list_i):
-    df = pd.read_excel(input_data, region_list_i + "_Balance")
+def iea_weo_etl(iea_region_list_i):
+    df = pd.read_excel(input_data, iea_region_list_i + "_Balance")
     df = df.drop(df.index[0:3])
     df.columns = df.iloc[0]
     df = df.drop(df.index[0])
@@ -195,11 +199,11 @@ def iea_weo_etl(region_list_i):
 
 energy_demand_historical = dict()
 
-for i in range(0, len(region_list)):
-    energy_demand_historical[i] = iea_weo_etl(region_list[i])
+for i in range(0, len(iea_region_list)):
+    energy_demand_historical[i] = iea_weo_etl(iea_region_list[i])
 
-    energy_demand_historical[i].insert(0, "Region", region_list[i])
-    energy_demand_historical[i].insert(0, "REGION", REGION_list[i])
+    energy_demand_historical[i].insert(0, "IEA Region", iea_region_list[i])
+    energy_demand_historical[i].insert(0, "GCAM Region", gcam_region_list[i])
 
 energy_demand_historical = pd.concat(
     [

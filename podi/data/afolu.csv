@@ -1,0 +1,295 @@
+﻿Region,Variable,Unit,Scenario,2005,2010,2020,2030,2040,2050,2060,2070,2080,2090,2100
+World,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+World,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+World,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+World,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+World,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+World,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+World,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+NAM,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+NAM,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+NAM,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+NAM,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+NAM,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+NAM,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+NAM,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+US,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+US,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+US,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+US,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+US,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+US,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+US,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+CSAM,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+CSAM,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+CSAM,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+CSAM,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+CSAM,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+CSAM,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+CSAM,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+BRAZIL,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+BRAZIL,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+BRAZIL,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+BRAZIL,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+BRAZIL,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+BRAZIL,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+BRAZIL,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+EUR,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+EUR,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+EUR,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+EUR,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+EUR,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+EUR,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+EUR,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+EU,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+EU,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+EU,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+EU,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+EU,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+EU,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+EU,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+Africa,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+Africa,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+Africa,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+Africa,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+Africa,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+Africa,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+Africa,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+SAFR,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+SAFR,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+SAFR,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+SAFR,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+SAFR,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+SAFR,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+SAFR,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+ME,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+ME,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+ME,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+ME,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+ME,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+ME,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+ME,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+EURASIA,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+EURASIA,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+EURASIA,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+EURASIA,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+EURASIA,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+EURASIA,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+EURASIA,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+RUS,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+RUS,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+RUS,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+RUS,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+RUS,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+RUS,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+RUS,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+ASIAPAC,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+ASIAPAC,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+ASIAPAC,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+ASIAPAC,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+ASIAPAC,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+ASIAPAC,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+ASIAPAC,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+CHINA,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+CHINA,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+CHINA,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+CHINA,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+CHINA,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+CHINA,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+CHINA,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+INDIA,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+INDIA,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+INDIA,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+INDIA,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+INDIA,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+INDIA,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+INDIA,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+JPN,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+JPN,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+JPN,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+JPN,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+JPN,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+JPN,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+JPN,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+ASEAN,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+ASEAN,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+ASEAN,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+ASEAN,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+ASEAN,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+ASEAN,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+ASEAN,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+OECD,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+OECD,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+OECD,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+OECD,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+OECD,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+OECD,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+OECD,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+NonOECD,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+NonOECD,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+NonOECD,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+NonOECD,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+NonOECD,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+NonOECD,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+NonOECD,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+DevelopingECO,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+DevelopingECO,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+DevelopingECO,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+DevelopingECO,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+DevelopingECO,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+DevelopingECO,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+DevelopingECO,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+AdvancedECO,Land Cover,million Ha/yr,Baseline,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+AdvancedECO,Land Cover|Cropland,million Ha/yr,Baseline,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+AdvancedECO,Land Cover|Cropland|Energy Crops,million Ha/yr,Baseline, -   , -   ,23,95,126,162,196,187,181,177,172
+AdvancedECO,Land Cover|Forest,million Ha/yr,Baseline,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+AdvancedECO,Land Cover|Other Arable Land,million Ha/yr,Baseline,480,470,450,421,406,392,385,390,397,405,416
+AdvancedECO,Land Cover|Other Land,million Ha/yr,Baseline,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+AdvancedECO,Land Cover|Pasture,million Ha/yr,Baseline,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+World,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+World,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+World,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+World,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+World,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+World,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+World,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+NAM,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+NAM,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+NAM,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+NAM,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+NAM,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+NAM,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+NAM,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+US,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+US,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+US,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+US,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+US,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+US,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+US,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+CSAM,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+CSAM,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+CSAM,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+CSAM,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+CSAM,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+CSAM,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+CSAM,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+BRAZIL,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+BRAZIL,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+BRAZIL,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+BRAZIL,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+BRAZIL,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+BRAZIL,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+BRAZIL,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+EUR,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+EUR,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+EUR,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+EUR,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+EUR,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+EUR,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+EUR,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+EU,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+EU,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+EU,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+EU,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+EU,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+EU,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+EU,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+Africa,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+Africa,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+Africa,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+Africa,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+Africa,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+Africa,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+Africa,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+SAFR,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+SAFR,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+SAFR,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+SAFR,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+SAFR,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+SAFR,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+SAFR,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+ME,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+ME,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+ME,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+ME,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+ME,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+ME,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+ME,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+EURASIA,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+EURASIA,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+EURASIA,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+EURASIA,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+EURASIA,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+EURASIA,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+EURASIA,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+RUS,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+RUS,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+RUS,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+RUS,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+RUS,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+RUS,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+RUS,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+ASIAPAC,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+ASIAPAC,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+ASIAPAC,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+ASIAPAC,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+ASIAPAC,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+ASIAPAC,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+ASIAPAC,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+CHINA,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+CHINA,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+CHINA,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+CHINA,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+CHINA,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+CHINA,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+CHINA,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+INDIA,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+INDIA,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+INDIA,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+INDIA,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+INDIA,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+INDIA,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+INDIA,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+JPN,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+JPN,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+JPN,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+JPN,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+JPN,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+JPN,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+JPN,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+ASEAN,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+ASEAN,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+ASEAN,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+ASEAN,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+ASEAN,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+ASEAN,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+ASEAN,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+OECD,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+OECD,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+OECD,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+OECD,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+OECD,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+OECD,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+OECD,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+NonOECD,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+NonOECD,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+NonOECD,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+NonOECD,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+NonOECD,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+NonOECD,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+NonOECD,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+DevelopingECO,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+DevelopingECO,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+DevelopingECO,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+DevelopingECO,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+DevelopingECO,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+DevelopingECO,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+DevelopingECO,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
+AdvancedECO,Land Cover,million Ha/yr,Pathway,"12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824","12,824"
+AdvancedECO,Land Cover|Cropland,million Ha/yr,Pathway,"1,043","1,079","1,163","1,287","1,355","1,420","1,455","1,426","1,384","1,340","1,284"
+AdvancedECO,Land Cover|Cropland|Energy Crops,million Ha/yr,Pathway, -   , -   ,23,95,126,162,196,187,181,177,172
+AdvancedECO,Land Cover|Forest,million Ha/yr,Pathway,"4,139","4,132","4,107","4,063","4,040","4,015","4,001","4,015","4,033","4,050","4,072"
+AdvancedECO,Land Cover|Other Arable Land,million Ha/yr,Pathway,480,470,450,421,406,392,385,390,397,405,416
+AdvancedECO,Land Cover|Other Land,million Ha/yr,Pathway,"3,856","3,845","3,821","3,792","3,772","3,754","3,747","3,751","3,759","3,768","3,780"
+AdvancedECO,Land Cover|Pasture,million Ha/yr,Pathway,"3,306","3,299","3,284","3,262","3,251","3,242","3,235","3,242","3,251","3,261","3,272"
