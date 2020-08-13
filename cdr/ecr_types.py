@@ -12,7 +12,7 @@ to be put under consideration when developing the cost-optimal CDR mix.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "08.04.20"
+__version__ = "08.10.20"
 
 import math
 
@@ -23,29 +23,42 @@ import cdr.cdr_util as util
 
 ###################################################################
 # DEFINE NEW SPECIFIC ECR (engineered) STRATEGIES HERE.           #
-# EACH ECR STRATEGY MUST HAVE:                                    #
+# EACH CDR STRATEGY MUST HAVE:                                    #
 #    1. annual adoption limits (MtCO2/yr), with the header        #
 #          @classmethod                                           #
 #          def adopt_limits(cls) -> float:                        #
 #                                                                 #
-#    2. marginal_cost ($/tCO2), with the header                   #
-#          @util.cacheit                                          #
-#          def marginal_cost(self) -> float:                      #
+#    2. curr_year_cost ($/tCO2), with the header                  #
+#          @util.once_per_year                                    #
+#          def marginal_annualized_cost(self) -> float:           #
 #                                                                 #
-#    3. marginal_energy_use (kWh/tCO2), with the header           #
+#    3. marginal_annualized_cost ($/tCO2), with the header        #
+#          @util.cacheit                                          #
+#          def marginal_annualized_cost(self) -> float:           #
+#                                                                 #
+#    4. marginal_energy_use (kWh/tCO2), with the header           #
 #          @util.cacheit                                          #
 #          def marginal_energy_use(self) -> tuple:                #
 #       returning a tuple containing the energy used from         #
 #       (electricity, heat, transportation, non-transport fuels)  #
 #                                                                 #
-#    And for ECR only:                                            #
-#    4. incidental emissions (tCO2/tCO2), with the header         #
-#          @util.once_per_year                                    #
-#          def incidental_emissions(self) -> float:               #
-#                                                                 #
 #    5. A default project lifetime (yrs), defined at the class    #
 #       level as:                                                 #
 #          default_lifetime = ___                                 #
+#                                                                 #
+#    And for ECR only:                                            #
+#    6. incidental emissions (tCO2/tCO2), with the header         #
+#          @util.once_per_year                                    #
+#          def incidental_emissions(self) -> float:               #
+#                                                                 #
+#    Also, if you desire a project capacity/granularity other     #
+#    than the default defined in crd_util.PROJECT_SIZE, then      #
+#    override __init__ as                                         #
+#          def __init__(self, capacity=new_default_capacity):     #
+#              super().__init(capacity=new_default_capacity)      #
+#    replacing new_default_capacity with                          #
+#    with your desired numerical value.                           #
+#                                                                 #
 ###################################################################
 
 # *********************************
@@ -66,14 +79,28 @@ import cdr.cdr_util as util
 #          competing CDR strategies. """
 #         pass
 #
+#     @util.once_per_year
+#     def curr_year_cost(self) -> float:
+#         """ Returns the raw $/tCO2 (in 2020$) cost of the project in the year given
+#          by self.age. This is not adjusted for the impacts of incidental emissions
+#          or CDR credits and, in addition to being based on the project’s current age,
+#          is likely based on the project’s capacity (self.capacity) and its original
+#          deployment level (self.deployment_level), which represents the technology’s
+#          cumulative deployment (MtCO2/yr) at the time of this project’s creation.
+#          In theory, levelizing each of the yearly costs from this function over the
+#          lifetime of the project should yield the same result as the
+#          marginal_levelized_cost function. """
+#         pass
+#
 #     @util.cacheit
-#     def marginal_cost(self) -> float:
-#         """ Returns the $/tCO2 cost of this project based on self.deployment_level,
-#          but NOT adjusted for impacts of incidental emissions or CDR credits.
-#          self.deployment_level represents this strategy's cumulative deployment
-#          (MtCO2/yr) at the time this project was deployed.
-#          It is 'marginal' in the sense that this project was the marginal project
-#          at the time of its deployment. """
+#     def marginal_annualized_cost(self) -> float:
+#         """ Returns the single "sticker price" $/tCO2 (in 2020$) of the project, used for
+#          comparison with other CDR projects. This is not adjusted for the impacts of
+#          incidental emissions or CDR credits and is based on the project’s capacity
+#          (self.capacity) and its original deployment level (self.deployment_level),
+#          which represents the technology’s cumulative deployment (MtCO2/yr) at the
+#          time of this project’s creation. It is 'marginal' in the sense that this
+#          project was the marginal project at the time of its deployment. """
 #         pass
 #
 #     @util.cacheit
@@ -91,18 +118,21 @@ import cdr.cdr_util as util
 
 
 class Deficit(ECR):
-    """ Catch-all CDR "strategy" used in debugging mode, which fills
-    any deficits in the CDR budget that cannot be met with existing
-    CDR strategies. Indicates a need for more CDR in the years when
-    it is used. Allows the model to run to completion in debug mode
-    without crashing. """
+    """ Catch-all CDR "strategy" used in ACCEPT_DEFICIT mode, which fills
+    any deficits in the CDR budget that cannot be met with existing CDR
+    strategies. Indicates a need for more CDR in the years when it is
+    used. Allows the model to run to completion without crashing when
+    not enough CDR is available. """
     default_lifetime = 1  # "deployed" on a yearly basis
 
     @classmethod
     def adopt_limits(cls):
         return float('inf')  # No limits on the deficit
 
-    def marginal_cost(self) -> float:
+    def curr_year_cost(self) -> float:
+        return 0.0
+
+    def marginal_annualized_cost(self) -> float:
         return 0.0
 
     def marginal_energy_use(self) -> tuple:
@@ -130,8 +160,13 @@ class LTSSDAC(ECR):
                 util.MAX_LTSSDAC, -8.636, 0.1746, cls.active_deployment + vertical_shift
             ))
 
+    @util.once_per_year
+    def curr_year_cost(self) -> float:
+        # LTSSDAC assumed to have constant costs throughout its lifetime
+        return self.marginal_annualized_cost()
+
     @util.cacheit
-    def marginal_cost(self) -> float:
+    def marginal_annualized_cost(self) -> float:
         capex_new = self._capex_new()
         capex = capex_new * util.crf(n_yrs=self.get_levelizing_lifetime()) / util.LTSSDAC_UTILIZATION
         opex = capex_new * 0.037
@@ -169,8 +204,13 @@ class HTLSDAC(ECR):
                 util.MAX_HTLSDAC, -3.407, 0.0917, cls.active_deployment + vertical_shift
             ))
 
+    @util.once_per_year
+    def curr_year_cost(self) -> float:
+        # HTLSDAC assumed to have constant costs throughout its lifetime
+        return self.marginal_annualized_cost()
+
     @util.cacheit
-    def marginal_cost(self) -> float:
+    def marginal_annualized_cost(self) -> float:
         capex_new = self._capex_new()
         capex = capex_new * util.crf(n_yrs=self.get_levelizing_lifetime()) / util.LTSSDAC_UTILIZATION
         opex = capex_new * 0.037
@@ -206,8 +246,17 @@ class ExSituEW(ECR):
                 util.MAX_EX_SITU_EW, -6.258, 0.0994, cls.active_deployment + 9.5
             ))
 
+    @util.once_per_year
+    def curr_year_cost(self) -> float:
+        # full rock spreading required in first year, but only d(x) fractional replacement
+        # required after that
+        if self.age == 0:
+            return self.marginal_annualized_cost()
+        else:
+            return ExSituEW._d(util.GRAIN_SIZE) * self.marginal_annualized_cost()
+
     @util.cacheit
-    def marginal_cost(self) -> float:
+    def marginal_annualized_cost(self) -> float:
         """Returns $/tCO2 for this project.
         It is 'marginal' in the sense that this project was
         on the margin of EW at the time of its deployment. """
@@ -306,7 +355,7 @@ class GeologicStorage(ECR):
     default_lifetime = float('inf')  # lifetime depends on paired project from __init__
 
     def __init__(self, paired_project: CDRStrategy, compress_t: float = None, compress_p1: float = None):
-        super().__init__(paired_project.capacity)
+        super().__init__(capacity=paired_project.capacity)
         if (compress_t is None) != (compress_p1 is None):
             raise TypeError('Both or neither of the compress_t and compress_p1 arguments to '
                             'GeologicStorage __init__ must be None.')
@@ -320,8 +369,12 @@ class GeologicStorage(ECR):
     def adopt_limits(cls) -> float:
         return float('inf')  # assuming no limits on geologic storage
 
+    @util.once_per_year
+    def curr_year_cost(self) -> float:
+        return self.marginal_annualized_cost()
+
     @util.cacheit
-    def marginal_cost(self) -> float:
+    def marginal_annualized_cost(self) -> float:
         if self.compress_temp is not None:
             compress_capex_opex = (100.8 * util.crf(self.get_levelizing_lifetime()) + 3.9) / 10
             compress_energy = self._calc_compression_energy(self.compress_temp, self.compress_pres) * util.ELEC_COST

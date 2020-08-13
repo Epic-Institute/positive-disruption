@@ -11,7 +11,7 @@ ncs_types.py (for natural projects) instead.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "08.04.20"
+__version__ = "08.10.20"
 
 
 from abc import ABC, abstractmethod
@@ -43,7 +43,7 @@ class CDRStrategy(ABC):
     FUEL_EM = None
     DEFAULT_EM_BASIS = None
 
-    def __init__(self, capacity=1):
+    def __init__(self, capacity=util.PROJECT_SIZE):
         # capacity is in MtCO2/yr
 
         # ensure subclass is set up correctly
@@ -117,9 +117,27 @@ class CDRStrategy(ABC):
         return NotImplemented
 
     @abstractmethod
-    def marginal_cost(self) -> float:
-        """Computes marginal cost ($/tCO2) as a function of cumulative deployment (MtCO2/yr).
-        Cumulative deployment is accessible via self.deployment_level"""
+    def curr_year_cost(self) -> float:
+        """ Returns the raw $/tCO2 (in 2020$) cost of the project in the year given
+        by self.age. This is not adjusted for the impacts of incidental emissions
+        or CDR credits and, in addition to being based on the project’s current age,
+        is likely based on the project’s capacity (self.capacity) and its original
+        deployment level (self.deployment_level), which represents the technology’s
+        cumulative deployment (MtCO2/yr) at the time of this project’s creation.
+        In theory, levelizing each of the yearly costs from this function over the
+        lifetime of the project should yield the same result as the
+        marginal_levelized_cost function. """
+        return NotImplemented
+
+    @abstractmethod
+    def marginal_annualized_cost(self) -> float:
+        """ Returns the single "sticker price" $/tCO2 (in 2020$) of the project, used for
+        comparison with other CDR projects. This is not adjusted for the impacts of
+        incidental emissions or CDR credits and is based on the project’s capacity
+        (self.capacity) and its original deployment level (self.deployment_level),
+        which represents the technology’s cumulative deployment (MtCO2/yr) at the
+        time of this project’s creation. It is 'marginal' in the sense that this
+        project was the marginal project at the time of its deployment. """
         return NotImplemented
 
     @abstractmethod
@@ -151,10 +169,14 @@ class CDRStrategy(ABC):
         return 1 - em
 
     @util.once_per_year
-    def get_adjusted_cost(self):
+    def get_adjusted_annualized_cost(self):
+        return self.marginal_annualized_cost() / self.get_eff_factor()
+
+    @util.once_per_year
+    def get_adjusted_curr_year_cost(self):
         """ Returns cost of this project, adjusted for incidental emissions
         so as to only count CDR on a net CO2 basis """
-        return self.marginal_cost() / self.get_eff_factor()
+        return self.curr_year_cost() / self.get_eff_factor()
 
     @util.once_per_year
     def get_adjusted_energy(self):
