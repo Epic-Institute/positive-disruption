@@ -86,3 +86,72 @@ These components are run sequentially through main.py, and are meant to compare 
 7. charts
 ==========
 - Produces charts of results
+
+Input Files
+=============
+
+The following files, located in podi/data, serve as inputs to the model scripts.
+
+1. afolu.csv
+- Consists of time series of AFOLU data from 2005 to 2100 in 10 year increments
+- Used in afolu.py to provide data for baseline and pathway projections of AFOLU vector
+2. biofuels.csv
+- Consists of time series of energy consumption data by sector and energy type from 2010 to 2100
+- Used in energy_demand.py where values are shifted and combined with data on energy efficiency, demand, heat pumps, transport efficiency, and solar thermal
+3. bnef.csv
+- Consists of BNEF data on energy demand and consumption for all countries in a time series from 2012 to 2100
+- Not currently used in any .py file
+4. cdr.csv
+- Consists of CDR data for baseline and pathway scenarios in time series from 2020 to 2100
+- Not currently used in model .py files
+5. climate.csv
+- Consists of climate data (CO2 emissions, atm concentration, temp change) in time series from 1900 to 2100
+- Not currently used in model .py files
+6. electricity.csv
+- Consists of data on electricity generation in time series from 1980 to 2024
+- Used in energy_supply.py to generate the historical and projected percent of electricity consumption met by given technologies and then to generate projections for the total amount of electricity consumption met by each technology 
+7. emissions.csv
+- Consists of data on greenhouse gas emissions in time series from 2010 to 2090
+- Not currently used in model .py files
+8. emissions_factors.csv
+- Consists of emissions factors for different regions and fuel types in time series from 2010 to 2100
+- Not currently used in .py files
+9. energy_demand_historical.csv
+- Consists of data on energy demand for different regions and fuels in time series from 2010 to 2040
+- Used in energy_demand.py where it’s combined with energy_demand_projection.csv and then combined with data on energy efficiency, heat pumps, transport efficiency, solar thermal, and biofuels
+10. energy_demand_projection.csv
+- Consists of data on energy demand for different regions and fuels in time series from 2041 to 2100
+- Used in energy_demand.py where it’s combined with energy_demand_historical.csv and then combined with data on energy efficiency, heat pumps, transport efficiency, solar thermal, and biofuels
+11. energy_efficiency.csv
+- Consists of data on energy efficiency factors for different regions, sectors, and fuels in time series from 2010 to 2100 for baseline and pathway scenarios
+- Used in energy_demand.py where it’s combined with data on energy demand, heat pumps, transport efficiency, solar thermal, and biofuels
+12. iea_weo.xlsx
+- Consists of data on energy demand for WEO regions
+- Used in iea_weo_etl.py where it is transformed into energy_demand_historical.csv
+13. gcam.csv
+- Consists of data on emissions and energy consumption in time series from 2005 to 2100 in ten-year increments
+- Used in gcam_etl.py, which transforms gcam.csv into appropriate format for use in mode .py files and generates energy_demand_projection_baseline.csv
+14. heat.csv
+- Consists of data on heat generation for buildings and industry by different sources in time series from 2000 to 2015
+- Used in energy_supply.py to generate projections for heat generation by energy source and sector 
+15. heat_pump.csv
+- Consists of data on heat pumps by energy source and sector in time series from 2010 to 2100  for baseline and pathway scenarios
+- Used in energy_demand.py where it’s combined with data on energy demand, energy efficiency, transport efficiency, solar thermal, and biofuels
+16. metric_categories.csv
+- Consists of table showing relationship between WEO sectors, WEO metrics, and GCAM metrics
+- Used in gcam_etl.py to index gcam_demand_projections
+17. region_categories.csv
+- Consists of table showing which countries are in which regions (IEA, BNEF, IIASA, R32, CAIT, GCAM)
+- Used in eia_etl.py to set index for electricity_generation
+- Used in iea_weo_etl.py to create iea_region_list and gcam_region_list used to transform iea_weo.xlsx into energy_demand_historical.csv
+18. socioeconomic.csv
+- Consists of data on GDP, population, and carbon price in time series from 2005 to 2100 in ten-year increments for baseline and pathway scenarios
+- Used in socioeconomic.py to create data frame socioeconomic
+19. solar_thermal.csv
+- Consists of data on energy generation by different sources and sectors in time series from 2010 to 2100
+- Used in energy_demand.py where it’s combined with data on energy demand, energy efficiency, transport efficiency, heat pump, and biofuels
+20. transport_efficiency.csv
+- Consists of data on energy demand by different sources and sectors in time series from 2010 to 2100 for baseline and pathways scenarios
+- Used in energy_demand.py where it’s combined with data on energy demand, energy efficiency, solar thermal, heat pump, and biofuels
+
+
