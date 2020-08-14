@@ -48,11 +48,15 @@ class CDRStrategy(ABC):
 
         # ensure subclass is set up correctly
         if self.__class__.default_lifetime is None:
-            raise util.StrategyNotImplementedError(f'The CDR strategy {self.__class__.__name__} '
-                                                   f'has not defined a default project lifetime.')
+            raise util.StrategyNotImplementedError(
+                f"The CDR strategy {self.__class__.__name__} "
+                f"has not defined a default project lifetime."
+            )
         if self.__class__.remaining_deployment < capacity:
-            raise util.StrategyNotAvailableError(f'The CDR strategy {self.__class__.__name__} does not '
-                                                 f'have enough adoption potential left for this year.')
+            raise util.StrategyNotAvailableError(
+                f"The CDR strategy {self.__class__.__name__} does not "
+                f"have enough adoption potential left for this year."
+            )
 
         # record the deployment of this project
         self.__class__.cumul_deployment += capacity
@@ -73,8 +77,10 @@ class CDRStrategy(ABC):
             cls.active_deployment = 0  # all capacity currently deployed
             cls.cdr_performed = 0  # total MtCO2 captured by this strategy
             # and its own annual deployment tracker
-            if cls.adopt_limits() == float('inf'):
-                cls.remaining_deployment = float('inf')  # to avoid overflow errors with math.ceil
+            if cls.adopt_limits() == float("inf"):
+                cls.remaining_deployment = float(
+                    "inf"
+                )  # to avoid overflow errors with math.ceil
             else:
                 cls.remaining_deployment = math.ceil(cls.adopt_limits())
 
@@ -86,7 +92,7 @@ class CDRStrategy(ABC):
     def reset_adoption_limits(cls):
         """Resets remaining deployment limits for a new year"""
         limits = cls.adopt_limits()
-        if limits != float('inf'):
+        if limits != float("inf"):
             cls.remaining_deployment = math.ceil(cls.adopt_limits())
         cls.cdr_performed += cls.active_deployment
 
@@ -130,7 +136,7 @@ class CDRStrategy(ABC):
         return NotImplemented
 
     @abstractmethod
-    def marginal_annualized_cost(self) -> float:
+    def marginal_cost(self) -> float:
         """ Returns the single "sticker price" $/tCO2 (in 2020$) of the project, used for
         comparison with other CDR projects. This is not adjusted for the impacts of
         incidental emissions or CDR credits and is based on the project’s capacity
@@ -162,15 +168,15 @@ class CDRStrategy(ABC):
         em = self.incidental_emissions()
         if em > 1:
             raise util.StrategyNotImplementedError(
-                f'The strategy {self.__class__.__name__} emits more than '
-                f'one tCO2 per tCO2 captured. This is either an implementation '
-                f'error or a flawed CDR strategy.'
+                f"The strategy {self.__class__.__name__} emits more than "
+                f"one tCO2 per tCO2 captured. This is either an implementation "
+                f"error or a flawed CDR strategy."
             )
         return 1 - em
 
     @util.once_per_year
     def get_adjusted_annualized_cost(self):
-        return self.marginal_annualized_cost() / self.get_eff_factor()
+        return self.marginal_cost() / self.get_eff_factor()
 
     @util.once_per_year
     def get_adjusted_curr_year_cost(self):
@@ -194,6 +200,7 @@ class NCS(CDRStrategy):
     """
     NCS represents a natural cdr technique (Natural Climate Solution).
     """
+
     def is_engineered(self) -> bool:
         return False
 
@@ -212,6 +219,7 @@ class ECR(CDRStrategy):
     """
     ECR represents an Engineered Carbon Removal technique.
     """
+
     def is_engineered(self) -> bool:
         return True
 

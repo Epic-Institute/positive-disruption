@@ -74,7 +74,7 @@ All new CDR strategies should be implemented as concrete subclasses of ECR (in e
 
 If a capture strategy requires storage paired with it to truly be CDR, then add that relationship to the `STORAGE_PAIRINGS` dict in cdr_main.py, along with any parameters that would need to be supplied to the paired storage project's `__init__`. This is the case for DAC, for example, as DAC without storing the captured CO2 underground is not actually carbon dioxide removal.
 
-Each concrete CDR strategy must implement the following features:
+Each CDR strategy must implement the following features:
 
 1. **Annual adoption limits (MtCO2/yr)**, returning the maximum MtCO2/yr of new capacity of this technology that can be deployed in the current year in the absence of any competing CDR strategies, based on its current active deployment level in MtCO2/yr (accessible via `cls.active_deployment`), its cumulative deployment (`cls.cumul_deployment`), and for resources that are time-sensitive its total MtCO2 captured across years (`cls.cdr_performed`).
     * Values can go negative if a carbon sink is saturating and can capture less CO2 this year than it could in the previous year.
@@ -91,7 +91,7 @@ Each concrete CDR strategy must implement the following features:
     def curr_year_cost(self) -> float:
 ```
 
-3. **Project’s annualized cost ($/tCO2)**, returning single the “sticker price” $/tCO2 (in 2020$) of the project used for comparison with other CDR projects. This is not adjusted for the impacts of incidental emissions or CDR credits and is based on the project’s capacity (`self.capacity`) and its original deployment level (`self.deployment_level`). Has the header:
+3. **Project’s annualized cost ($/tCO2)**, returning the “sticker price” $/tCO2 (in 2020$) of the project used for comparison with other CDR projects. This is not adjusted for the impacts of incidental emissions or CDR credits and is based on the project’s capacity (`self.capacity`) and its original deployment level (`self.deployment_level`).
     * Should account for cost declines via learning curves, if applicable.
     * Has the header:
 ```
@@ -99,7 +99,7 @@ Each concrete CDR strategy must implement the following features:
     def marginal_cost(self) -> float:
 ```
 
-4. Project’s energy use (kWh/tCO2), returning the project’s energy use, in kWh/tCO2, separated into (electricity, heat, transportation, fuel).
+4. **Project’s energy use (kWh/tCO2)**, returning the project’s energy use, in kWh/tCO2, separated into (electricity, heat, transportation, fuel).
     * Should account for energy efficiency improvements via learning curves, if applicable.
     * Has the header:
 ```
@@ -107,14 +107,14 @@ Each concrete CDR strategy must implement the following features:
     def marginal_energy_use(self) -> tuple:
 ```
 
-5. A default project lifetime (years), representing the number of years until the model automatically retires individual projects of this type of old age, defined at the class level as:
+5. **A default project lifetime (years)**, representing the number of years until the model automatically retires individual projects of this type of old age, defined at the class level as:
 ```
     default_lifetime = ___ (insert lifetime here, as int)
 ```
 
 And for ECR only:
 
-6. Project’s incidental emissions (tCO2/tCO2), returning the tCO2 emitted per tCO2 captured.
+6. **Project’s incidental emissions (tCO2/tCO2)**, returning the tCO2 emitted per tCO2 captured.
     * If the only incidental emissions are from energy use, then this function can be omitted in order to simply use the default function defined in ECR.
     * This may be omitted for NCS because those calculations are assumed to already be done on a net basis
     * Has the header:

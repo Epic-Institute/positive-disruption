@@ -26,11 +26,11 @@ import cdr.cdr_util as util
 #                                                                 #
 #    2. curr_year_cost ($/tCO2), with the header                  #
 #          @util.once_per_year                                    #
-#          def marginal_annualized_cost(self) -> float:           #
+#          def marginal_cost(self) -> float:           #
 #                                                                 #
-#    3. marginal_annualized_cost ($/tCO2), with the header        #
+#    3. marginal_cost ($/tCO2), with the header        #
 #          @util.cacheit                                          #
-#          def marginal_annualized_cost(self) -> float:           #
+#          def marginal_cost(self) -> float:           #
 #                                                                 #
 #    4. marginal_energy_use (kWh/tCO2), with the header           #
 #          @util.cacheit                                          #
@@ -89,7 +89,7 @@ import cdr.cdr_util as util
 #         pass
 #
 #     @util.cacheit
-#     def marginal_annualized_cost(self) -> float:
+#     def marginal_cost(self) -> float:
 #         """ Returns the single "sticker price" $/tCO2 (in 2020$) of the project, used for
 #          comparison with other CDR projects. This is not adjusted for the impacts of
 #          incidental emissions or CDR credits and is based on the project’s capacity
