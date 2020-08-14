@@ -38,12 +38,12 @@ Here is the basic logic and the underlying set of assumptions for the current pr
 * Effective CDR factor for a project (i.e. net tCO2 removed per tCO2 capacity) = `1-x`
     * x is tons incidental CO2 emissions (e.g. from energy production) per ton CO2 removed.
 * Costs are based on each 1 MtCO2/yr project’s levelized cost, their net CDR efficiency (accounting for incidental emissions), and the annual carbon price.
-    * ![cost equation](https://latex.codecogs.com/svg.latex?\frac{\textup{new\&space;cost}}{tCO_2}=\left\(\frac{cost}{tCO_2}\right\)_{baseline}*\frac{1}{\textup{effective&space;CDR&space;factor}}-\frac{1}{T}*\sum_{y=y_0}^{y_0&plus;T}\frac{\textup{credit&space;price}(y)}{(1&plus;r)^{(y-y_0)}})
+    * ![cost equation](https://latex.codecogs.com/svg.latex?%5Cfrac%7B%5Ctextup%7Bnew%5C%26space%3Bcost%7D%7D%7BtCO_2%7D%3D%5Cleft%5C%28%5Cfrac%7Bcost%7D%7BtCO_2%7D%5Cright%5C%29_%7Bbaseline%7D%2A%5Cfrac%7B1%7D%7B%5Ctextup%7Beffective%26space%3BCDR%26space%3Bfactor%7D%7D-%5Cfrac%7B1%7D%7BT%7D%2A%5Csum_%7By%3Dy_0%7D%5E%7By_0%26plus%3BT%7D%5Cfrac%7B%5Ctextup%7Bcredit%26space%3Bprice%7D%28y%29%7D%7B%281%26plus%3Br%29%5E%7B%28y-y_0%29%7D%7D)
     * *T* is lifetime, *y_0* is project deployment year, *r* is discount rate.
 * Energy use is based on each 1 MtCO2/yr project’s base energy use (per tCO2) and adjusted for its net CDR efficiency. Split into electricity/heat/transportation/fuels.
-    * ![energy equation](https://latex.codecogs.com/svg.latex?\frac{\textup{new\&space;energy}}{tCO_2}=\left\(\frac{energy}{tCO_2}\right\)_{baseline}*\frac{1}{\textup{effective&space;CDR&space;factor}})
+    * ![energy equation](https://latex.codecogs.com/svg.latex?%5Cfrac%7B%5Ctextup%7Bnew%5C%26space%3Benergy%7D%7D%7BtCO_2%7D%3D%5Cleft%5C%28%5Cfrac%7Benergy%7D%7BtCO_2%7D%5Cright%5C%29_%7Bbaseline%7D%2A%5Cfrac%7B1%7D%7B%5Ctextup%7Beffective%26space%3BCDR%26space%3Bfactor%7D%7D)
 * Max annual adoption potential (limit to how much new capacity can be deployed in a year) for each technology is the slope of its market penetration curve, in the absence of competing CDR technologies, at its current deployment level.
-    * For example, given a logistic adoption function ![logistic equation](https://latex.codecogs.com/svg.latex?N(t)=M\left\[\frac{e^{(a&plus;bt)}}{1&plus;e^{(a&plus;bt)}}\right\]) and some current adoption level *n*, the slope of this logistic curve at the point where the adoption level (y-value) equals *n* is ![slope equation](https://latex.codecogs.com/svg.latex?b*\left\(n-\frac{n^2}{M}\right\)=\textup{slope&space;of&space;}N(t)\textup{&space;where&space;}N\textup{&space;equals&space;}n), which is the value of ![prime inverse equation](https://latex.codecogs.com/svg.latex?N'\left\(N^{-1}(n)\right\)), i.e. the adoption slope at the time on the logistic graph corresponding to adoption level n.
+    * For example, given a logistic adoption function ![logistic equation](https://latex.codecogs.com/svg.latex?N%28t%29%3DM%5Cleft%5C%5B%5Cfrac%7Be%5E%7B%28a%26plus%3Bbt%29%7D%7D%7B1%26plus%3Be%5E%7B%28a%26plus%3Bbt%29%7D%7D%5Cright%5C%5D) and some current adoption level *n*, the slope of this logistic curve at the point where the adoption level (y-value) equals *n* is ![slope equation](https://latex.codecogs.com/svg.latex?b%2A%5Cleft%5C%28n-%5Cfrac%7Bn%5E2%7D%7BM%7D%5Cright%5C%29%3D%5Ctextup%7Bslope%26space%3Bof%26space%3B%7DN%28t%29%5Ctextup%7B%26space%3Bwhere%26space%3B%7DN%5Ctextup%7B%26space%3Bequals%26space%3B%7Dn), which is the value of ![prime inverse equation](https://latex.codecogs.com/svg.latex?N%27%5Cleft%5C%28N%5E%7B-1%7D%28n%29%5Cright%5C%29), i.e. the adoption slope at the time on the logistic graph corresponding to adoption level *n*.
 
 ## Assumptions
 * CDR is simultaneously deployed all at once at the beginning of each year.
@@ -91,12 +91,12 @@ Each CDR strategy must implement the following features:
     def curr_year_cost(self) -> float:
 ```
 
-3. **Project’s annualized cost ($/tCO2)**, returning the “sticker price” $/tCO2 (in 2020$) of the project used for comparison with other CDR projects. This is not adjusted for the impacts of incidental emissions or CDR credits and is based on the project’s capacity (`self.capacity`) and its original deployment level (`self.deployment_level`).
+3. **Project’s levelized cost ($/tCO2)**, returning the “sticker price” $/tCO2 (in 2020$) of the project used for comparison with other CDR projects. This is not adjusted for the impacts of incidental emissions or CDR credits and is based on the project’s capacity (`self.capacity`) and its original deployment level (`self.deployment_level`).
     * Should account for cost declines via learning curves, if applicable.
     * Has the header:
 ```
     @util.cacheit
-    def marginal_cost(self) -> float:
+    def marginal_levelized_cost(self) -> float:
 ```
 
 4. **Project’s energy use (kWh/tCO2)**, returning the project’s energy use, in kWh/tCO2, separated into (electricity, heat, transportation, fuel).
@@ -127,28 +127,15 @@ Additionally, if you desire a project capacity/granularity for a CDR strategy ot
 ```
 def __init__(self, capacity=new_default_capacity):
     super().__init__(capacity=new_default_capacity)
+    # along with any further necessary initialization here
 ```
 
 ## Updating optimization process
 
 The optimization takes place in `cdr_main.py` and relies on the CDR strategy framework built up in `cdr_abstract_types.py`, `ecr_types.py`, and `ncs_types.py`. Technologies are selected for deployment in the `_advance_cdr_mix` function, and yearly statistics (cost, energy, deployment) are tabulated in `_add_next_year`. Look in those two places to extend or refine optimization functionality and refer to the documentation in the code for specifics.
 
-Also see the “Model accuracy and performance” section below for an outline of a couple areas that can still be improved.
+Additionally, here are a couple areas with known potential for improvement:
 
-# Current Outstanding Questions and Issues
+1. This optimization problem is NP-hard, so any exact solution would take impractically long to compute. Therefore, the results of this module are approximate, under the simplifying assumptions outlined above. The nature of the current greedy algorithm (always deploying the cheapest available technology) may also cause it to miss truly optimal solutions within an individual year. For example, if DAC gets cheaper with each MtCO2 deployment, then deploying 100% DAC in a year may be the cost-optimal strategy, even if DAC was not originally the cheapest technology in that year.
 
-## Treatment of NCS projects?
-
-Currently all CDR deployment is done in discrete 1 MtCO2/yr increments, implemented in the form of individual project objects. However, this approach may be more suited for ECR strategies than for NCS. Engineered projects can operate independently, whereas NCS may tend to operate more at the sector level.
-
-The question here is whether this discrete 1 MtCO2/yr-at-a-time approach makes sense and will work for NCS, given the model’s treatment of technological de-adoption above (forcibly “retiring” the oldest projects of technologies that have negative adoption potentials in the current year), as well as the self-tracking elements made available to each CDR class in this framework.
-
-Given the tools and data that have been made available in the CDRStrategy and optimization framework (active_deployment, cumul_deployment, cdr_performed), keeping the same treatment for ECR and NCS should be alright and is likely feasible, even though NCS strategies would not be deployed as individual 1 MtCO2/yr projects in practice. The 1 MtCO2/yr increment is a reasonable increment for ECR (given Carbon Engineering’s target of a 1 Mt plant in the next couple years) and is fine-grained enough to allow the model to detect when one technology becomes cheaper than another without overshooting adoption rate limits. Also, deploying NCS in 1 Mt increments should not have any ill effects here even if 1 MtCO2 is smaller than their deployment increments in real life, because the deployment increment does not affect the behavior of the cost curve itself. Therefore, the relative cheapness and adoption of each technology should still occur as otherwise expected.
-
-Regardless, this is something worth discussing before moving too far forward. If there are strong reasons for why the existing 1 MtCO2/yr-at-a-time approach will not work for NCS strategies, or any other reasons that would require major adjustments to the optimization approach, then these should come from people at TNC, who have more experience in the area.
-
-## Module accuracy and performance
-
-This optimization problem is NP-hard, so any exact solution would take impractically long to compute. Therefore, the results of this module are approximate, under the simplifying assumptions outlined above. The nature of the current greedy algorithm (always deploying the cheapest available technology) may also cause it to miss truly optimal solutions within an individual year. For example, if DAC gets cheaper with each MtCO2 deployment, then deploying 100% DAC in a year may be the cost-optimal strategy, even if DAC was not originally the cheapest technology in that year.
-
-The optimization model currently runs in about 30 seconds for the full 2020-2100 range when dealing with LTSS-DAC, HTLS-DAC, ExSituEW, and GeologicStorage. At the moment, the cost and energy calculation step in `_add_next_year` (not the technology selection step) take up the most processing time. Future improvements to efficiency should look here first.
+2. The optimization model currently runs in about 30 seconds for the full 2020-2100 range when dealing with LTSS-DAC, HTLS-DAC, ExSituEW, and GeologicStorage. At the moment, the cost and energy calculation step in `_add_next_year` (not the technology selection step) take up the most processing time. Future improvements to efficiency should look here first.

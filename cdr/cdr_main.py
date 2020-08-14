@@ -33,7 +33,7 @@ import cdr.ecr_types as ecr
 import cdr.ncs_types as ncs
 
 __author__ = "Zach Birnholz"
-__version__ = "08.10.20"
+__version__ = "08.14.20"
 
 """
 Stores all CDR approaches available for use in this module.
@@ -86,10 +86,9 @@ def cdr_mix(cdr_reqs: list = util.CDR_NEEDED_DEF, grid_em: list = util.GRID_EM_D
         1. annual cost (list of float, MM$/yr),
         2. annual energy requirement (list of tuple of float, TWh/yr split into sectors)
     """
-    # 0. set up framework
-    if start != util.START_YEAR:
-        abstract_types.CDRStrategy.start_year = abstract_types.CDRStrategy.curr_year = start
-        _reset_tech_adopt_limits()
+    # 0. set up framework and allow for multiple sequential runs
+    abstract_types.CDRStrategy.start_year = abstract_types.CDRStrategy.curr_year = start
+    _reset_tech_adopt_limits()
     assert len(cdr_reqs) == (end - start + 1)  # year counts must match up
     _setup_emissions_intensities(grid_em, heat_em, transport_em, fuel_em)
 
@@ -125,7 +124,7 @@ def cdr_mix(cdr_reqs: list = util.CDR_NEEDED_DEF, grid_em: list = util.GRID_EM_D
             projects.update(addl_projects)
             scaling_factor = 1  # all installed CDR is needed this year
 
-        # 5/ add to existing CDR mix
+        # 5. add to existing CDR mix
         _add_next_year(projects, tech_mix, cost, energy, start + y, scaling_factor)
 
     return tech_mix, cost, energy
@@ -148,7 +147,7 @@ def cdr_credit(yr: int) -> float:
 
 def get_prospective_cost(capture_project: abstract_types.CDRStrategy, yr: int,
                          storage_pairing: abstract_types.CDRStrategy = None):
-    """ Calculates the prospective annualized $/tCO2 cost of a CDR project over its
+    """ Calculates the prospective levelized $/tCO2 cost of a CDR project over its
     lifetime, adjusted for incidental emissions, carbon credits, and CO2 storage costs.
     :param capture_project: the specific capture project in question
     :param yr: deployment year of the project as an absolute year number, e.g. 2020
@@ -158,8 +157,8 @@ def get_prospective_cost(capture_project: abstract_types.CDRStrategy, yr: int,
     for y in range(yr, yr + capture_project.get_levelizing_lifetime()):
         credit_reduction += cdr_credit(y) / ((1 + util.DISCOUNT_RATE) ** (y - yr))
     credit_reduction /= capture_project.get_levelizing_lifetime()
-    return capture_project.get_adjusted_annualized_cost() + \
-        (storage_pairing.get_adjusted_annualized_cost() if storage_pairing is not None else 0) \
+    return capture_project.get_adjusted_levelized_cost() + \
+        (storage_pairing.get_adjusted_levelized_cost() if storage_pairing is not None else 0) \
         - credit_reduction
 
 
@@ -193,8 +192,8 @@ def _reset_tech_adopt_limits():
 
 def _set_up_pq(yr):
     """ Creates a priority queue containing each capture/storage pairing,
-     enqueued by adjusted annualized cost for the given years.
-     Note that we use the annualized cost (sticker price) for CDR comparison here,
+     enqueued by adjusted levelized cost for the given years.
+     Note that we use the levelized cost (sticker price) for CDR comparison here,
      but it is the true curr_year_cost that actually gets billed and tallied
      in _add_next_year. """
     options = PriorityQueue()
@@ -315,7 +314,7 @@ def _add_next_year(projects: set, tech_mix: list, cost: list, energy: list, yr: 
     for proj in projects:  # these are (capture_project, storage_project)
         # 1. add project's cost
         # note that capacity is in MtCO2, not tCO2 (10 ** 6), but we return in MM$ (10 ** -6), so there is no conversion
-        # Although adjusted_annualized_cost was used for the basis of comparing the cheapest technologies,
+        # Although adjusted_levelized_cost was used for the basis of comparing the cheapest technologies,
         # we use adjusted_curr_year_cost here to reflect the amounts that are actually billed in each year.
         new_cost += proj[0].get_adjusted_curr_year_cost() * proj[0].capacity + \
             (proj[1].get_adjusted_curr_year_cost() * proj[1].capacity if proj[1] is not None else 0)

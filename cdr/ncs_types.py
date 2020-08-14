@@ -3,8 +3,8 @@
 ncs_types.py
 Implements behavior of all individual NCS (natural CDR) strategies.
 All NCS strategies provide info about their (1) adoption limits/potential,
-(2) cost, (3) energy use, and (4) incidental emissions. #4 is not necessary
-if calculations for 1-3 are already done on a net CO2 basis.
+(2) cost, (3) energy use, (4) project lifetime, and (5) incidental emissions.
+#5 is not necessary if calculations for 1-3 are already done on a net CO2 basis.
 One instance of each class represents one deployed CDR project.
 
 All classes defined here must be added to CDR_TECHS in cdr_main.py in order
@@ -12,13 +12,13 @@ to be put under consideration when developing the cost-optimal CDR mix.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "08.10.20"
+__version__ = "08.14.20"
 
 from cdr.cdr_abstract_types import CDRStrategy, NCS
 import cdr.cdr_util as util
 
 ###################################################################
-# DEFINE NEW SPECIFIC NCS (natural) STRATEGIES HERE.              #
+# THIS FILE IS FOR SPECIFIC NCS (natural) STRATEGIES.             #
 # EACH CDR STRATEGY MUST HAVE:                                    #
 #    1. annual adoption limits (MtCO2/yr), with the header        #
 #          @classmethod                                           #
@@ -26,11 +26,11 @@ import cdr.cdr_util as util
 #                                                                 #
 #    2. curr_year_cost ($/tCO2), with the header                  #
 #          @util.once_per_year                                    #
-#          def marginal_cost(self) -> float:           #
+#          def marginal_levelized_cost(self) -> float:           #
 #                                                                 #
-#    3. marginal_cost ($/tCO2), with the header        #
+#    3. marginal_levelized_cost ($/tCO2), with the header        #
 #          @util.cacheit                                          #
-#          def marginal_cost(self) -> float:           #
+#          def marginal_levelized_cost(self) -> float:           #
 #                                                                 #
 #    4. marginal_energy_use (kWh/tCO2), with the header           #
 #          @util.cacheit                                          #
@@ -51,7 +51,7 @@ import cdr.cdr_util as util
 #    than the default defined in crd_util.PROJECT_SIZE, then      #
 #    override __init__ as                                         #
 #          def __init__(self, capacity=new_default_capacity):     #
-#              super().__init(capacity=new_default_capacity)      #
+#              super().__init__(capacity=new_default_capacity)    #
 #    replacing new_default_capacity with                          #
 #    with your desired numerical value.                           #
 #                                                                 #
@@ -89,14 +89,14 @@ import cdr.cdr_util as util
 #         pass
 #
 #     @util.cacheit
-#     def marginal_cost(self) -> float:
-#         """ Returns the single "sticker price" $/tCO2 (in 2020$) of the project, used for
-#          comparison with other CDR projects. This is not adjusted for the impacts of
-#          incidental emissions or CDR credits and is based on the project’s capacity
-#          (self.capacity) and its original deployment level (self.deployment_level),
-#          which represents the technology’s cumulative deployment (MtCO2/yr) at the
-#          time of this project’s creation. It is 'marginal' in the sense that this
-#          project was the marginal project at the time of its deployment. """
+#     def marginal_levelized_cost(self) -> float:
+#         """ Returns the single levelized "sticker price" $/tCO2 (in 2020$) of the
+#          project, used for comparison with other CDR projects. This is not adjusted
+#          for the impacts of incidental emissions or CDR credits and is based on the
+#          project’s capacity (self.capacity) and its original deployment level
+#          (self.deployment_level), which represents the technology’s cumulative deployment
+#          (MtCO2/yr) at the time of this project’s creation. It is 'marginal' in the
+#          sense that this project was the marginal project at the time of its deployment. """
 #         pass
 #
 #     @util.cacheit
@@ -113,4 +113,5 @@ import cdr.cdr_util as util
 #
 ##################################
 
-""" TODO - waiting for TNC """
+""" Add NCS classes here """
+# TODO

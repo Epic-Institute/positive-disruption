@@ -11,7 +11,7 @@ ncs_types.py (for natural projects) instead.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "08.10.20"
+__version__ = "08.14.20"
 
 
 from abc import ABC, abstractmethod
@@ -136,7 +136,7 @@ class CDRStrategy(ABC):
         return NotImplemented
 
     @abstractmethod
-    def marginal_cost(self) -> float:
+    def marginal_levelized_cost(self) -> float:
         """ Returns the single "sticker price" $/tCO2 (in 2020$) of the project, used for
         comparison with other CDR projects. This is not adjusted for the impacts of
         incidental emissions or CDR credits and is based on the project’s capacity
@@ -175,8 +175,8 @@ class CDRStrategy(ABC):
         return 1 - em
 
     @util.once_per_year
-    def get_adjusted_annualized_cost(self):
-        return self.marginal_cost() / self.get_eff_factor()
+    def get_adjusted_levelized_cost(self):
+        return self.marginal_levelized_cost() / self.get_eff_factor()
 
     @util.once_per_year
     def get_adjusted_curr_year_cost(self):
