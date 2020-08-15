@@ -3,10 +3,14 @@
 from podi.socioeconomic import socioeconomic
 from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply
+import podi.data.iea_weo_etl
+import podi.data.gcam_etl
+
 
 # from podi.afolu import afolu
-# from podi.emissions import emissions
-# from podi.cdr import cdr
+from podi.emissions import emissions
+from cdr.cdr_main import cdr_mix
+
 # from podi.climate import climate
 # from podi.results_analysis import results_analysis
 from podi.charts import charts
@@ -22,6 +26,9 @@ socioeconomic_pathway = socioeconomic("Pathway", "podi/data/socioeconomic.csv")
 #################
 # ENERGY DEMAND #
 #################
+
+podi.data.gcam_etl
+podi.data.iea_weo_etl
 
 energy_demand_baseline = energy_demand(
     "Baseline",
@@ -49,8 +56,12 @@ energy_demand_pathway = energy_demand(
 # ENERGY SUPPLY #
 #################
 
-energy_supply_baseline = energy_supply("Baseline", energy_demand_baseline)
-energy_supply_pathway = energy_supply("Pathway", energy_demand_pathway)
+energy_supply_baseline, consump_cdr_baseline = energy_supply(
+    "Baseline", energy_demand_baseline
+)
+energy_supply_pathway, consump_cdr_pathway = energy_supply(
+    "Pathway", energy_demand_pathway
+)
 
 #########
 # AFOLU #
@@ -63,19 +74,39 @@ afolu_pathway = afolu("podi/data/afolu.csv")
 # EMISSIONS #
 #############
 
-emissions_baseline = emissions(
-    energy_supply_baseline, afolu_baseline, "additional_emissions_baseline.csv"
+em_baseline, ef_baseline = emissions(
+    "Baseline", energy_supply_baseline, afolu_baseline, "emissions.csv"
 )
-emissions_pathway = emissions(
-    energy_supply_pathway, afolu_pathway, "additional_emissions_pathway.csv"
+em_pathway, ef_pathway = emissions(
+    "Pathway", energy_supply_pathway, afolu_pathway, "emissions.csv"
 )
 
 #######
 # CDR #
 #######
 
-cdr_baseline = cdr(emissions_baseline)
-cdr_pathway = cdr(emissions_pathway)
+cdr_baseline, cdr_cost_baseline, cdr_energy_baseline = cdr_mix(
+    em_baseline,
+    ef_baseline.loc["Grid"],
+    ef_baseline.loc["Heat"],
+    ef_baseline.loc["Transport"],
+    em_baseline.loc["Fuels"],
+)
+cdr_pathway, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
+    em_pathway.loc["Grid"],
+    ef_pathway.loc["Heat"],
+    ef_pathway.loc["Transport"],
+    em_pathway.loc["Fuels"],
+)
+
+# check if energy oversupply is at least energy demand needed for CDR
+
+if consump_cdr_baseline > cdr_energy_baseline:
+    print(
+        "Electricity oversupply does not meet CDR energy demand for Baseline Scenario"
+    )
+if consump_cdr_pathway > cdr_energy_pathway:
+    print("Electricity oversupply does not meet CDR energy demand for Pathway Scenario")
 
 ###########
 # CLIMATE #

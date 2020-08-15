@@ -2,6 +2,8 @@
 
 import pandas as pd
 
+# from cdr.cdr_main import cdr_energy_demand
+
 
 def energy_demand(
     scenario,
@@ -14,35 +16,37 @@ def energy_demand(
     biofuels,
 ):
 
+    # load energy demand historical data (TWh) and projections (% change)
     energy_demand_historical = pd.read_csv(demand_historical)
     energy_demand_projection = pd.read_csv(demand_projection)
-    energy_demand_projection = energy_demand_projection[
-        energy_demand_projection["Scenario"] == scenario
-    ]
 
-    energy_demand = (
-        energy_demand_historical.merge(
-            energy_demand_projection,
-            right_on=["WEO Sector", "WEO Metric", "GCAM Region"],
-            left_on=["Sector", "Metric", "GCAM Region"],
-        )
-        .drop(
-            columns=[
-                "WEO Sector",
-                "WEO Metric",
-                "GCAM Metric",
-                "Variable",
-                "Unit",
-                "GCAM Region",
-            ]
-        )
-        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+    # define energy demand as timeseries consisting of historical data (TWh) and projections (% change)
+    energy_demand = energy_demand_historical.merge(
+        energy_demand_projection,
+        right_on=["WEO Sector", "WEO Metric", "Region"],
+        left_on=["Sector", "Metric", "GCAM Region"],
+    ).drop(
+        columns=[
+            "WEO Sector",
+            "WEO Metric",
+            "GCAM Metric",
+            "Variable",
+            "Unit",
+            "GCAM Region",
+            "Region",
+        ]
+    )
+    energy_demand["Scenario"] = scenario
+    energy_demand.set_index(
+        ["IEA Region", "Sector", "Metric", "Scenario"], inplace=True
     )
 
+    # calculate projections as TWh by cumulative product
     energy_demand = energy_demand.loc[:, :"2039"].join(
         energy_demand.loc[:, "2040":].cumprod(axis=1).fillna(0).astype(int)
     )
 
+    # apply percentage reduction attributed to energy efficiency measures
     energy_efficiency = (
         pd.read_csv(energy_efficiency)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -53,6 +57,7 @@ def energy_demand(
     energy_efficiency = energy_efficiency.reindex(energy_demand.index)
     energy_demand_post_efficiency = energy_demand * energy_efficiency.values
 
+    # apply percentage reduction & shift to electrification attributed to heat pumps
     heat_pumps = (
         pd.read_csv(heat_pumps)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -65,6 +70,7 @@ def energy_demand(
         energy_demand_post_efficiency * heat_pumps.values
     )
 
+    # apply percentage reduction & shift to electrification attributed to transportation improvements
     transport_efficiency = (
         pd.read_csv(transport_efficiency)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -76,6 +82,7 @@ def energy_demand(
         energy_demand_post_efficiency_heat_pumps * transport_efficiency.values
     )
 
+    # apply percentage reduction attributed to solar thermal
     solar_thermal = (
         pd.read_csv(solar_thermal)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -87,6 +94,7 @@ def energy_demand(
         energy_demand_post_efficiency_heatpumps_transport * solar_thermal.values
     )
 
+    # apply shift attributed to biofuels
     biofuels = (
         pd.read_csv(biofuels)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -97,5 +105,8 @@ def energy_demand(
     energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels = (
         energy_demand_post_efficiency_heatpumps_transport_solarthermal * biofuels.values
     )
+
+    # add energy demand from CDR
+    # energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels_cdr = energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels + cdr_energy_demand
 
     return energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels

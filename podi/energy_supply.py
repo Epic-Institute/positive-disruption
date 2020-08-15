@@ -10,6 +10,9 @@ data_end_year = "2017"
 proj_start_year = "2018"
 proj_end_year = "2100"
 
+# set energy oversupply proportion, to estimate amount needed to meed CDR energy demand
+energy_oversupply_prop = 0.10
+
 
 def energy_supply(scenario, energy_demand):
     saturation_points = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
@@ -110,15 +113,27 @@ def energy_supply(scenario, energy_demand):
             hist_elec_consump(region, technology, scenario),
             proj_elec_consump(
                 region, scenario, proj_per_elec_consump(percent_adoption),
-            ),
+            )
+            * (1 + energy_oversupply_prop),
+        )
+
+        consump_cdr = consump(
+            hist_elec_consump(region, technology, scenario) * 0,
+            proj_elec_consump(
+                region, scenario, proj_per_elec_consump(percent_adoption),
+            )
+            * (energy_oversupply_prop),
         )
 
         consump_total.index = [region]
+        consump_cdr.index = [region]
         percent_adoption.columns = [region]
 
-        return consump_total, percent_adoption.T
+        return consump_total, percent_adoption.T, consump_cdr
 
-    ###############
+    ##########
+    #  HEAT  #
+    ##########
 
     def historical_heat_generation(region, sector, scenario, technology):
         return heat_generation_data.loc[
@@ -196,17 +211,23 @@ def energy_supply(scenario, energy_demand):
     wind_generation = []
     wind_percent_adoption = []
     solar_thermal_generation = []
+    consump_cdr = []
 
     for i in range(0, len(iea_region_list)):
         solarpv_generation = pd.DataFrame(solarpv_generation).append(
             consump_total(
-                iea_region_list[i], "Solar", "Solar PV", scenario, "Saturation Point"
+                iea_region_list[i], "Solar", "Solar PV", scenario, "Saturation Point",
             )[0]
         )
         solarpv_percent_adoption = pd.DataFrame(solarpv_percent_adoption).append(
             consump_total(
                 iea_region_list[i], "Solar", "Solar PV", scenario, "Saturation Point",
             )[1]
+        )
+        consump_cdr = pd.DataFrame(consump_cdr).append(
+            consump_total(
+                iea_region_list[i], "Solar", "Solar PV", scenario, "Saturation Point",
+            )[2]
         )
 
         # wind_generation = pd.DataFrame(wind_generation).append(
@@ -253,4 +274,4 @@ def energy_supply(scenario, energy_demand):
         #    ]
         # )
 
-    return solarpv_generation
+    return solarpv_generation, consump_cdr

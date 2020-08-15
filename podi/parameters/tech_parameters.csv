@@ -1,1577 +1,1577 @@
 ﻿IEA Region,Technology,Scenario,Sector,Metric,Value
-World,Solar PV,Baseline,,Saturation Point,35.92171153
-World,Solar PV,Baseline,,Parameter a,-7.460042634
-World,Solar PV,Baseline,,Parameter b,0.179152221
-World,Solar PV,Baseline,,Starting Year,1990
-World,Solar PV,Pathway,,Saturation Point,35.9
-World,Solar PV,Pathway,,Parameter a,-11.5
-World,Solar PV,Pathway,,Parameter b,0.32
-World,Solar PV,Pathway,,Starting Year,1990
-World,Wind,Baseline,,Saturation Point,38.51155202
-World,Wind,Baseline,,Parameter a,-5.656659517
-World,Wind,Baseline,,Parameter b,0.129329828
-World,Wind,Baseline,,Starting Year,1990
-World,Wind,Pathway,,Saturation Point,38.51155202
-World,Wind,Pathway,,Parameter a,-6.801027663
-World,Wind,Pathway,,Parameter b,0.179156118
-World,Wind,Pathway,,Starting Year,1990
-World,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-World,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-World,Solar PV,Baseline,,Useful Life in Start Year,25
-World,Solar PV,Baseline,,Useful Life in End Year,45
-World,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-World,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-World,Solar PV,Pathway,,Useful Life in Start Year,25
-World,Solar PV,Pathway,,Useful Life in End Year,45
-World,Wind,Baseline,,"Start Year, Retirement Trend",1990
-World,Wind,Baseline,,"End Year, Retirement Trend",2100
-World,Wind,Baseline,,Useful Life in Start Year,15
-World,Wind,Baseline,,Useful Life in End Year,30
-World,Wind,Pathway,,"Start Year, Retirement Trend",1990
-World,Wind,Pathway,,"End Year, Retirement Trend",2100
-World,Wind,Pathway,,Useful Life in Start Year,15
-World,Wind,Pathway,,Useful Life in End Year,30
-World,Biofuels,Baseline,,Saturation Point,100
-World,Biofuels,Baseline,,Parameter a,-5.017849236
-World,Biofuels,Baseline,,Parameter b,0.107417845
-World,Biofuels,Baseline,,Starting Year,2000
-World,Nuclear,Pathway,,Saturation Point,10
-World,Solar Thermal,Baseline,Industry,Saturation Point,10
-World,Solar Thermal,Baseline,Buildings,Saturation Point,100
-World,Biochar,Baseline,Industry,Saturation Point,23
-World,Biochar,Pathway,Industry,Saturation Point,23
-World,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-World,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-World,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-World,Wind | Onshore,Baseline,,% of total wind generation,75%
-World,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-World,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-World,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-World,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-World,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-World,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-World,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-World,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-World,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-World,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-World,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-World,Grid,Baseline,,Consumption:Generation,0.88
-World,Solar Thermal,Pathway,Industry,Saturation Point,38
-World,Solar Thermal,Pathway,Buildings,Saturation Point,100
-World,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-World,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-World,Wind | Onshore,Pathway,,% of total wind generation,75%
-World,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-World,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-World,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-World,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-World,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-World,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-World,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-World,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-World,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-World,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-World,Grid,Pathway,,Consumption:Generation,0.88
-World,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-World,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-US,Solar PV,Baseline,,Saturation Point,35.92171153
-US,Solar PV,Baseline,,Parameter a,-7.460042634
-US,Solar PV,Baseline,,Parameter b,0.179152221
-US,Solar PV,Baseline,,Starting Year,1990
-US,Solar PV,Pathway,,Saturation Point,35.9
-US,Solar PV,Pathway,,Parameter a,-11.5
-US,Solar PV,Pathway,,Parameter b,0.32
-US,Solar PV,Pathway,,Starting Year,1990
-US,Wind,Baseline,,Saturation Point,38.51155202
-US,Wind,Baseline,,Parameter a,-5.656659517
-US,Wind,Baseline,,Parameter b,0.129329828
-US,Wind,Baseline,,Starting Year,1990
-US,Wind,Pathway,,Saturation Point,38.51155202
-US,Wind,Pathway,,Parameter a,-6.801027663
-US,Wind,Pathway,,Parameter b,0.179156118
-US,Wind,Pathway,,Starting Year,1990
-US,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-US,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-US,Solar PV,Baseline,,Useful Life in Start Year,25
-US,Solar PV,Baseline,,Useful Life in End Year,45
-US,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-US,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-US,Solar PV,Pathway,,Useful Life in Start Year,25
-US,Solar PV,Pathway,,Useful Life in End Year,45
-US,Wind,Baseline,,"Start Year, Retirement Trend",1990
-US,Wind,Baseline,,"End Year, Retirement Trend",2100
-US,Wind,Baseline,,Useful Life in Start Year,15
-US,Wind,Baseline,,Useful Life in End Year,30
-US,Wind,Pathway,,"Start Year, Retirement Trend",1990
-US,Wind,Pathway,,"End Year, Retirement Trend",2100
-US,Wind,Pathway,,Useful Life in Start Year,15
-US,Wind,Pathway,,Useful Life in End Year,30
-US,Biofuels,Baseline,,Saturation Point,100
-US,Biofuels,Baseline,,Parameter a,-5.017849236
-US,Biofuels,Baseline,,Parameter b,0.107417845
-US,Biofuels,Baseline,,Starting Year,2000
-US,Nuclear,Pathway,,Saturation Point,10
-US,Biochar,Baseline,Industry,Saturation Point,23
-US,Biochar,Pathway,Industry,Saturation Point,23
-US,Solar Thermal,Baseline,Industry,Saturation Point,10
-US,Solar Thermal,Baseline,Buildings,Saturation Point,100
-US,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-US,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-US,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-US,Wind | Onshore,Baseline,,% of total wind generation,75%
-US,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-US,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-US,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-US,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-US,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-US,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-US,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-US,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-US,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-US,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-US,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-US,Grid,Baseline,,Consumption:Generation,0.88
-US,Solar Thermal,Pathway,Industry,Saturation Point,38
-US,Solar Thermal,Pathway,Buildings,Saturation Point,100
-US,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-US,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-US,Wind | Onshore,Pathway,,% of total wind generation,75%
-US,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-US,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-US,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-US,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-US,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-US,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-US,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-US,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-US,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-US,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-US,Grid,Pathway,,Consumption:Generation,0.88
-US,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-US,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-SAFR,Solar PV,Baseline,,Saturation Point,35.9217115
-SAFR,Solar PV,Baseline,,Parameter a,-7.4600426
-SAFR,Solar PV,Baseline,,Parameter b,0.17915222
-SAFR,Solar PV,Baseline,,Starting Year,1990
-SAFR,Solar PV,Pathway,,Saturation Point,35.9
-SAFR,Solar PV,Pathway,,Parameter a,-11.5
-SAFR,Solar PV,Pathway,,Parameter b,0.32
-SAFR,Solar PV,Pathway,,Starting Year,1990
-SAFR,Wind,Baseline,,Saturation Point,38.5
-SAFR,Wind,Baseline,,Parameter a,-5.66
-SAFR,Wind,Baseline,,Parameter b,0.13
-SAFR,Wind,Baseline,,Starting Year,1990
-SAFR,Wind,Pathway,,Saturation Point,38.5
-SAFR,Wind,Pathway,,Parameter a,-6.8010277
-SAFR,Wind,Pathway,,Parameter b,0.17915612
-SAFR,Wind,Pathway,,Starting Year,1990
-SAFR,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-SAFR,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-SAFR,Solar PV,Baseline,,Useful Life in Start Year,25
-SAFR,Solar PV,Baseline,,Useful Life in End Year,45
-SAFR,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-SAFR,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-SAFR,Solar PV,Pathway,,Useful Life in Start Year,25
-SAFR,Solar PV,Pathway,,Useful Life in End Year,45
-SAFR,Wind,Baseline,,"Start Year, Retirement Trend",1990
-SAFR,Wind,Baseline,,"End Year, Retirement Trend",2100
-SAFR,Wind,Baseline,,Useful Life in Start Year,15
-SAFR,Wind,Baseline,,Useful Life in End Year,30
-SAFR,Wind,Pathway,,"Start Year, Retirement Trend",1990
-SAFR,Wind,Pathway,,"End Year, Retirement Trend",2100
-SAFR,Wind,Pathway,,Useful Life in Start Year,15
-SAFR,Wind,Pathway,,Useful Life in End Year,30
-SAFR,Biofuels,Baseline,,Saturation Point,100
-SAFR,Biofuels,Baseline,,Parameter a,-5.0178492
-SAFR,Biofuels,Baseline,,Parameter b,0.10741785
-SAFR,Nuclear,Pathway,,Saturation Point,10
-SAFR,Biochar,Baseline,Industry,Saturation Point,23
-SAFR,Biochar,Pathway,Industry,Saturation Point,23
-SAFR,Biofuels,Baseline,,Starting Year,2000
-SAFR,Solar Thermal,Baseline,Industry,Saturation Point,10
-SAFR,Solar Thermal,Baseline,Buildings,Saturation Point,100
-SAFR,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-SAFR,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-SAFR,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-SAFR,Wind | Onshore,Baseline,,% of total wind generation,75%
-SAFR,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-SAFR,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-SAFR,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-SAFR,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-SAFR,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-SAFR,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-SAFR,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-SAFR,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-SAFR,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-SAFR,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-SAFR,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-SAFR,Grid,Baseline,,Consumption:Generation,0.88
-SAFR,Solar Thermal,Pathway,Industry,Saturation Point,38
-SAFR,Solar Thermal,Pathway,Buildings,Saturation Point,100
-SAFR,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-SAFR,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-SAFR,Wind | Onshore,Pathway,,% of total wind generation,75%
-SAFR,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-SAFR,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-SAFR,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-SAFR,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-SAFR,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-SAFR,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-SAFR,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-SAFR,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-SAFR,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-SAFR,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-SAFR,Grid,Pathway,,Consumption:Generation,0.88
-SAFR,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-SAFR,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-RUS,Solar PV,Baseline,,Saturation Point,35.9217115
-RUS,Solar PV,Baseline,,Parameter a,-7.4600426
-RUS,Solar PV,Baseline,,Parameter b,0.17915222
-RUS,Solar PV,Baseline,,Starting Year,1990
-RUS,Solar PV,Pathway,,Saturation Point,35.9
-RUS,Solar PV,Pathway,,Parameter a,-11.5
-RUS,Solar PV,Pathway,,Parameter b,0.32
-RUS,Solar PV,Pathway,,Starting Year,1990
-RUS,Wind,Baseline,,Saturation Point,38.5
-RUS,Wind,Baseline,,Parameter a,-5.66
-RUS,Wind,Baseline,,Parameter b,0.13
-RUS,Wind,Baseline,,Starting Year,1990
-RUS,Wind,Pathway,,Saturation Point,38.5
-RUS,Wind,Pathway,,Parameter a,-6.8010277
-RUS,Wind,Pathway,,Parameter b,0.17915612
-RUS,Wind,Pathway,,Starting Year,1990
-RUS,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-RUS,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-RUS,Solar PV,Baseline,,Useful Life in Start Year,25
-RUS,Solar PV,Baseline,,Useful Life in End Year,45
-RUS,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-RUS,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-RUS,Solar PV,Pathway,,Useful Life in Start Year,25
-RUS,Solar PV,Pathway,,Useful Life in End Year,45
-RUS,Wind,Baseline,,"Start Year, Retirement Trend",1990
-RUS,Wind,Baseline,,"End Year, Retirement Trend",2100
-RUS,Wind,Baseline,,Useful Life in Start Year,15
-RUS,Wind,Baseline,,Useful Life in End Year,30
-RUS,Wind,Pathway,,"Start Year, Retirement Trend",1990
-RUS,Wind,Pathway,,"End Year, Retirement Trend",2100
-RUS,Wind,Pathway,,Useful Life in Start Year,15
-RUS,Wind,Pathway,,Useful Life in End Year,30
-RUS,Biofuels,Baseline,,Saturation Point,100
-RUS,Biofuels,Baseline,,Parameter a,-5.0178492
-RUS,Nuclear,Pathway,,Saturation Point,10
-RUS,Biochar,Baseline,Industry,Saturation Point,23
-RUS,Biochar,Pathway,Industry,Saturation Point,23
-RUS,Biofuels,Baseline,,Parameter b,0.10741785
-RUS,Biofuels,Baseline,,Starting Year,2000
-RUS,Solar Thermal,Baseline,Industry,Saturation Point,10
-RUS,Solar Thermal,Baseline,Buildings,Saturation Point,100
-RUS,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-RUS,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-RUS,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-RUS,Wind | Onshore,Baseline,,% of total wind generation,75%
-RUS,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-RUS,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-RUS,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-RUS,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-RUS,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-RUS,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-RUS,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-RUS,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-RUS,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-RUS,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-RUS,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-RUS,Grid,Baseline,,Consumption:Generation,0.88
-RUS,Solar Thermal,Pathway,Industry,Saturation Point,38
-RUS,Solar Thermal,Pathway,Buildings,Saturation Point,100
-RUS,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-RUS,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-RUS,Wind | Onshore,Pathway,,% of total wind generation,75%
-RUS,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-RUS,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-RUS,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-RUS,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-RUS,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-RUS,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-RUS,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-RUS,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-RUS,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-RUS,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-RUS,Grid,Pathway,,Consumption:Generation,0.88
-RUS,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-RUS,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-OECD,Solar PV,Baseline,,Saturation Point,35.9217115
-OECD,Solar PV,Baseline,,Parameter a,-7.4600426
-OECD,Solar PV,Baseline,,Parameter b,0.17915222
-OECD,Solar PV,Baseline,,Starting Year,1990
-OECD,Solar PV,Pathway,,Saturation Point,35.9
-OECD,Solar PV,Pathway,,Parameter a,-11.5
-OECD,Solar PV,Pathway,,Parameter b,0.32
-OECD,Solar PV,Pathway,,Starting Year,1990
-OECD,Wind,Baseline,,Saturation Point,38.5
-OECD,Wind,Baseline,,Parameter a,-5.66
-OECD,Wind,Baseline,,Parameter b,0.13
-OECD,Wind,Baseline,,Starting Year,1990
-OECD,Wind,Pathway,,Saturation Point,38.5
-OECD,Wind,Pathway,,Parameter a,-6.8010277
-OECD,Wind,Pathway,,Parameter b,0.17915612
-OECD,Wind,Pathway,,Starting Year,1990
-OECD,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-OECD,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-OECD,Solar PV,Baseline,,Useful Life in Start Year,25
-OECD,Solar PV,Baseline,,Useful Life in End Year,45
-OECD,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-OECD,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-OECD,Solar PV,Pathway,,Useful Life in Start Year,25
-OECD,Solar PV,Pathway,,Useful Life in End Year,45
-OECD,Wind,Baseline,,"Start Year, Retirement Trend",1990
-OECD,Wind,Baseline,,"End Year, Retirement Trend",2100
-OECD,Wind,Baseline,,Useful Life in Start Year,15
-OECD,Wind,Baseline,,Useful Life in End Year,30
-OECD,Wind,Pathway,,"Start Year, Retirement Trend",1990
-OECD,Wind,Pathway,,"End Year, Retirement Trend",2100
-OECD,Wind,Pathway,,Useful Life in Start Year,15
-OECD,Wind,Pathway,,Useful Life in End Year,30
-OECD,Biofuels,Baseline,,Saturation Point,100
-OECD,Nuclear,Pathway,,Saturation Point,10
-OECD,Biochar,Baseline,Industry,Saturation Point,23
-OECD,Biochar,Pathway,Industry,Saturation Point,23
-OECD,Biofuels,Baseline,,Parameter a,-5.0178492
-OECD,Biofuels,Baseline,,Parameter b,0.10741785
-OECD,Biofuels,Baseline,,Starting Year,2000
-OECD,Solar Thermal,Baseline,Industry,Saturation Point,10
-OECD,Solar Thermal,Baseline,Buildings,Saturation Point,100
-OECD,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-OECD,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-OECD,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-OECD,Solar Thermal,Pathway,Industry,Saturation Point,38
-OECD,Solar Thermal,Pathway,Buildings,Saturation Point,100
-OECD,Wind | Onshore,Baseline,,% of total wind generation,75%
-OECD,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-OECD,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-OECD,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-OECD,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-OECD,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-OECD,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-OECD,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-OECD,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-OECD,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-OECD,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-OECD,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-OECD,Grid,Baseline,,Consumption:Generation,0.88
-OECD,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-OECD,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-OECD,Wind | Onshore,Pathway,,% of total wind generation,75%
-OECD,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-OECD,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-OECD,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-OECD,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-OECD,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-OECD,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-OECD,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-OECD,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-OECD,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-OECD,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-OECD,Grid,Pathway,,Consumption:Generation,0.88
-OECD,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-OECD,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-NonOECD,Solar PV,Baseline,,Saturation Point,35.9217115
-NonOECD,Solar PV,Baseline,,Parameter a,-7.4600426
-NonOECD,Solar PV,Baseline,,Parameter b,0.17915222
-NonOECD,Solar PV,Baseline,,Starting Year,1990
-NonOECD,Solar PV,Pathway,,Saturation Point,35.9
-NonOECD,Solar PV,Pathway,,Parameter a,-11.5
-NonOECD,Solar PV,Pathway,,Parameter b,0.32
-NonOECD,Solar PV,Pathway,,Starting Year,1990
-NonOECD,Wind,Baseline,,Saturation Point,38.5
-NonOECD,Wind,Baseline,,Parameter a,-5.66
-NonOECD,Wind,Baseline,,Parameter b,0.13
-NonOECD,Wind,Baseline,,Starting Year,1990
-NonOECD,Wind,Pathway,,Saturation Point,38.5
-NonOECD,Wind,Pathway,,Parameter a,-6.8010277
-NonOECD,Wind,Pathway,,Parameter b,0.17915612
-NonOECD,Wind,Pathway,,Starting Year,1990
-NonOECD,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-NonOECD,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-NonOECD,Solar PV,Baseline,,Useful Life in Start Year,25
-NonOECD,Solar PV,Baseline,,Useful Life in End Year,45
-NonOECD,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-NonOECD,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-NonOECD,Solar PV,Pathway,,Useful Life in Start Year,25
-NonOECD,Solar PV,Pathway,,Useful Life in End Year,45
-NonOECD,Wind,Baseline,,"Start Year, Retirement Trend",1990
-NonOECD,Wind,Baseline,,"End Year, Retirement Trend",2100
-NonOECD,Wind,Baseline,,Useful Life in Start Year,15
-NonOECD,Wind,Baseline,,Useful Life in End Year,30
-NonOECD,Wind,Pathway,,"Start Year, Retirement Trend",1990
-NonOECD,Wind,Pathway,,"End Year, Retirement Trend",2100
-NonOECD,Wind,Pathway,,Useful Life in Start Year,15
-NonOECD,Wind,Pathway,,Useful Life in End Year,30
-NonOECD,Nuclear,Pathway,,Saturation Point,10
-NonOECD,Biochar,Baseline,Industry,Saturation Point,23
-NonOECD,Biochar,Pathway,Industry,Saturation Point,23
-NonOECD,Biofuels,Baseline,,Saturation Point,100
-NonOECD,Biofuels,Baseline,,Parameter a,-5.0178492
-NonOECD,Biofuels,Baseline,,Parameter b,0.10741785
-NonOECD,Biofuels,Baseline,,Starting Year,2000
-NonOECD,Solar Thermal,Baseline,Industry,Saturation Point,10
-NonOECD,Solar Thermal,Baseline,Buildings,Saturation Point,100
-NonOECD,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-NonOECD,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-NonOECD,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-NonOECD,Solar Thermal,Pathway,Industry,Saturation Point,38
-NonOECD,Solar Thermal,Pathway,Buildings,Saturation Point,100
-NonOECD,Wind | Onshore,Baseline,,% of total wind generation,75%
-NonOECD,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-NonOECD,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-NonOECD,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-NonOECD,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-NonOECD,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-NonOECD,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-NonOECD,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-NonOECD,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-NonOECD,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-NonOECD,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-NonOECD,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-NonOECD,Grid,Baseline,,Consumption:Generation,0.88
-NonOECD,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-NonOECD,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-NonOECD,Wind | Onshore,Pathway,,% of total wind generation,75%
-NonOECD,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-NonOECD,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-NonOECD,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-NonOECD,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-NonOECD,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-NonOECD,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-NonOECD,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-NonOECD,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-NonOECD,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-NonOECD,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-NonOECD,Grid,Pathway,,Consumption:Generation,0.88
-NonOECD,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-NonOECD,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-NAM,Solar PV,Baseline,,Saturation Point,35.92171153
-NAM,Solar PV,Baseline,,Parameter a,-7.460042634
-NAM,Solar PV,Baseline,,Parameter b,0.179152221
-NAM,Solar PV,Baseline,,Starting Year,1990
-NAM,Solar PV,Pathway,,Saturation Point,35.9
-NAM,Solar PV,Pathway,,Parameter a,-11.5
-NAM,Solar PV,Pathway,,Parameter b,0.32
-NAM,Solar PV,Pathway,,Starting Year,1990
-NAM,Wind,Baseline,,Saturation Point,38.51155202
-NAM,Wind,Baseline,,Parameter a,-5.656659517
-NAM,Wind,Baseline,,Parameter b,0.129329828
-NAM,Wind,Baseline,,Starting Year,1990
-NAM,Wind,Pathway,,Saturation Point,38.51155202
-NAM,Wind,Pathway,,Parameter a,-6.801027663
-NAM,Wind,Pathway,,Parameter b,0.179156118
-NAM,Wind,Pathway,,Starting Year,1990
-NAM,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-NAM,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-NAM,Solar PV,Baseline,,Useful Life in Start Year,25
-NAM,Solar PV,Baseline,,Useful Life in End Year,45
-NAM,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-NAM,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-NAM,Solar PV,Pathway,,Useful Life in Start Year,25
-NAM,Solar PV,Pathway,,Useful Life in End Year,45
-NAM,Wind,Baseline,,"Start Year, Retirement Trend",1990
-NAM,Wind,Baseline,,"End Year, Retirement Trend",2100
-NAM,Wind,Baseline,,Useful Life in Start Year,15
-NAM,Wind,Baseline,,Useful Life in End Year,30
-NAM,Wind,Pathway,,"Start Year, Retirement Trend",1990
-NAM,Wind,Pathway,,"End Year, Retirement Trend",2100
-NAM,Wind,Pathway,,Useful Life in Start Year,15
-NAM,Wind,Pathway,,Useful Life in End Year,30
-NAM,Nuclear,Pathway,,Saturation Point,10
-NAM,Biochar,Baseline,Industry,Saturation Point,23
-NAM,Biochar,Pathway,Industry,Saturation Point,23
-NAM,Biofuels,Baseline,,Saturation Point,100
-NAM,Biofuels,Baseline,,Parameter a,-5.017849236
-NAM,Biofuels,Baseline,,Parameter b,0.107417845
-NAM,Biofuels,Baseline,,Starting Year,2000
-NAM,Solar Thermal,Baseline,Industry,Saturation Point,10
-NAM,Solar Thermal,Baseline,Buildings,Saturation Point,100
-NAM,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-NAM,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-NAM,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-NAM,Wind | Onshore,Baseline,,% of total wind generation,75%
-NAM,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-NAM,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-NAM,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-NAM,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-NAM,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-NAM,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-NAM,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-NAM,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-NAM,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-NAM,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-NAM,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-NAM,Grid,Baseline,,Consumption:Generation,0.88
-NAM,Solar Thermal,Pathway,Industry,Saturation Point,38
-NAM,Solar Thermal,Pathway,Buildings,Saturation Point,100
-NAM,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-NAM,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-NAM,Wind | Onshore,Pathway,,% of total wind generation,75%
-NAM,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-NAM,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-NAM,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-NAM,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-NAM,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-NAM,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-NAM,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-NAM,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-NAM,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-NAM,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-NAM,Grid,Pathway,,Consumption:Generation,0.88
-NAM,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-NAM,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-ME,Solar PV,Baseline,,Saturation Point,35.9217115
-ME,Solar PV,Baseline,,Parameter a,-7.4600426
-ME,Solar PV,Baseline,,Parameter b,0.17915222
-ME,Solar PV,Baseline,,Starting Year,1990
-ME,Solar PV,Pathway,,Saturation Point,35.9
-ME,Solar PV,Pathway,,Parameter a,-11.5
-ME,Solar PV,Pathway,,Parameter b,0.32
-ME,Solar PV,Pathway,,Starting Year,1990
-ME,Wind,Baseline,,Saturation Point,38.5
-ME,Wind,Baseline,,Parameter a,-5.66
-ME,Wind,Baseline,,Parameter b,0.13
-ME,Wind,Baseline,,Starting Year,1990
-ME,Wind,Pathway,,Saturation Point,38.5
-ME,Wind,Pathway,,Parameter a,-6.8010277
-ME,Wind,Pathway,,Parameter b,0.17915612
-ME,Wind,Pathway,,Starting Year,1990
-ME,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-ME,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-ME,Solar PV,Baseline,,Useful Life in Start Year,25
-ME,Solar PV,Baseline,,Useful Life in End Year,45
-ME,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-ME,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-ME,Solar PV,Pathway,,Useful Life in Start Year,25
-ME,Solar PV,Pathway,,Useful Life in End Year,45
-ME,Wind,Baseline,,"Start Year, Retirement Trend",1990
-ME,Wind,Baseline,,"End Year, Retirement Trend",2100
-ME,Wind,Baseline,,Useful Life in Start Year,15
-ME,Wind,Baseline,,Useful Life in End Year,30
-ME,Wind,Pathway,,"Start Year, Retirement Trend",1990
-ME,Wind,Pathway,,"End Year, Retirement Trend",2100
-ME,Wind,Pathway,,Useful Life in Start Year,15
-ME,Wind,Pathway,,Useful Life in End Year,30
-ME,Nuclear,Pathway,,Saturation Point,10
-ME,Biochar,Baseline,Industry,Saturation Point,23
-ME,Biochar,Pathway,Industry,Saturation Point,23
-ME,Biofuels,Baseline,,Saturation Point,100
-ME,Biofuels,Baseline,,Parameter a,-5.0178492
-ME,Biofuels,Baseline,,Parameter b,0.10741785
-ME,Biofuels,Baseline,,Starting Year,2000
-ME,Solar Thermal,Baseline,Industry,Saturation Point,10
-ME,Solar Thermal,Baseline,Buildings,Saturation Point,100
-ME,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-ME,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-ME,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-ME,Solar Thermal,Pathway,Industry,Saturation Point,38
-ME,Solar Thermal,Pathway,Buildings,Saturation Point,100
-ME,Wind | Onshore,Baseline,,% of total wind generation,75%
-ME,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-ME,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-ME,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-ME,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-ME,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-ME,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-ME,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-ME,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-ME,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-ME,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-ME,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-ME,Grid,Baseline,,Consumption:Generation,0.88
-ME,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-ME,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-ME,Wind | Onshore,Pathway,,% of total wind generation,75%
-ME,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-ME,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-ME,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-ME,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-ME,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-ME,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-ME,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-ME,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-ME,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-ME,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-ME,Grid,Pathway,,Consumption:Generation,0.88
-ME,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-ME,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-JPN,Solar PV,Baseline,,Saturation Point,35.9217115
-JPN,Solar PV,Baseline,,Parameter a,-7.4600426
-JPN,Solar PV,Baseline,,Parameter b,0.17915222
-JPN,Solar PV,Baseline,,Starting Year,1990
-JPN,Solar PV,Pathway,,Saturation Point,35.9
-JPN,Solar PV,Pathway,,Parameter a,-11.5
-JPN,Solar PV,Pathway,,Parameter b,0.32
-JPN,Solar PV,Pathway,,Starting Year,1990
-JPN,Wind,Baseline,,Saturation Point,38.5
-JPN,Wind,Baseline,,Parameter a,-5.66
-JPN,Wind,Baseline,,Parameter b,0.13
-JPN,Wind,Baseline,,Starting Year,1990
-JPN,Wind,Pathway,,Saturation Point,38.5
-JPN,Wind,Pathway,,Parameter a,-6.8010277
-JPN,Wind,Pathway,,Parameter b,0.17915612
-JPN,Wind,Pathway,,Starting Year,1990
-JPN,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-JPN,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-JPN,Solar PV,Baseline,,Useful Life in Start Year,25
-JPN,Solar PV,Baseline,,Useful Life in End Year,45
-JPN,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-JPN,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-JPN,Solar PV,Pathway,,Useful Life in Start Year,25
-JPN,Solar PV,Pathway,,Useful Life in End Year,45
-JPN,Wind,Baseline,,"Start Year, Retirement Trend",1990
-JPN,Wind,Baseline,,"End Year, Retirement Trend",2100
-JPN,Wind,Baseline,,Useful Life in Start Year,15
-JPN,Wind,Baseline,,Useful Life in End Year,30
-JPN,Wind,Pathway,,"Start Year, Retirement Trend",1990
-JPN,Wind,Pathway,,"End Year, Retirement Trend",2100
-JPN,Wind,Pathway,,Useful Life in Start Year,15
-JPN,Wind,Pathway,,Useful Life in End Year,30
-JPN,Nuclear,Pathway,,Saturation Point,10
-JPN,Biochar,Baseline,Industry,Saturation Point,23
-JPN,Biochar,Pathway,Industry,Saturation Point,23
-JPN,Biofuels,Baseline,,Saturation Point,100
-JPN,Biofuels,Baseline,,Parameter a,-5.0178492
-JPN,Biofuels,Baseline,,Parameter b,0.10741785
-JPN,Biofuels,Baseline,,Starting Year,2000
-JPN,Solar Thermal,Baseline,Industry,Saturation Point,10
-JPN,Solar Thermal,Baseline,Buildings,Saturation Point,100
-JPN,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-JPN,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-JPN,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-JPN,Solar Thermal,Pathway,Industry,Saturation Point,38
-JPN,Solar Thermal,Pathway,Buildings,Saturation Point,100
-JPN,Wind | Onshore,Baseline,,% of total wind generation,75%
-JPN,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-JPN,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-JPN,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-JPN,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-JPN,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-JPN,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-JPN,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-JPN,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-JPN,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-JPN,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-JPN,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-JPN,Grid,Baseline,,Consumption:Generation,0.88
-JPN,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-JPN,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-JPN,Wind | Onshore,Pathway,,% of total wind generation,75%
-JPN,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-JPN,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-JPN,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-JPN,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-JPN,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-JPN,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-JPN,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-JPN,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-JPN,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-JPN,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-JPN,Grid,Pathway,,Consumption:Generation,0.88
-JPN,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-JPN,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-INDIA,Solar PV,Baseline,,Saturation Point,35.9217115
-INDIA,Solar PV,Baseline,,Parameter a,-7.4600426
-INDIA,Solar PV,Baseline,,Parameter b,0.17915222
-INDIA,Solar PV,Baseline,,Starting Year,1990
-INDIA,Solar PV,Pathway,,Saturation Point,35.9
-INDIA,Solar PV,Pathway,,Parameter a,-11.5
-INDIA,Solar PV,Pathway,,Parameter b,0.32
-INDIA,Solar PV,Pathway,,Starting Year,1990
-INDIA,Wind,Baseline,,Saturation Point,38.5
-INDIA,Wind,Baseline,,Parameter a,-5.66
-INDIA,Wind,Baseline,,Parameter b,0.13
-INDIA,Wind,Baseline,,Starting Year,1990
-INDIA,Wind,Pathway,,Saturation Point,38.5
-INDIA,Wind,Pathway,,Parameter a,-6.8010277
-INDIA,Wind,Pathway,,Parameter b,0.17915612
-INDIA,Wind,Pathway,,Starting Year,1990
-INDIA,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-INDIA,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-INDIA,Solar PV,Baseline,,Useful Life in Start Year,25
-INDIA,Solar PV,Baseline,,Useful Life in End Year,45
-INDIA,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-INDIA,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-INDIA,Solar PV,Pathway,,Useful Life in Start Year,25
-INDIA,Solar PV,Pathway,,Useful Life in End Year,45
-INDIA,Wind,Baseline,,"Start Year, Retirement Trend",1990
-INDIA,Wind,Baseline,,"End Year, Retirement Trend",2100
-INDIA,Wind,Baseline,,Useful Life in Start Year,15
-INDIA,Wind,Baseline,,Useful Life in End Year,30
-INDIA,Wind,Pathway,,"Start Year, Retirement Trend",1990
-INDIA,Wind,Pathway,,"End Year, Retirement Trend",2100
-INDIA,Wind,Pathway,,Useful Life in Start Year,15
-INDIA,Wind,Pathway,,Useful Life in End Year,30
-INDIA,Nuclear,Pathway,,Saturation Point,10
-INDIA,Biochar,Baseline,Industry,Saturation Point,23
-INDIA,Biochar,Pathway,Industry,Saturation Point,23
-INDIA,Biofuels,Baseline,,Saturation Point,100
-INDIA,Biofuels,Baseline,,Parameter a,-5.0178492
-INDIA,Biofuels,Baseline,,Parameter b,0.10741785
-INDIA,Biofuels,Baseline,,Starting Year,2000
-INDIA,Solar Thermal,Baseline,Industry,Saturation Point,10
-INDIA,Solar Thermal,Baseline,Buildings,Saturation Point,100
-INDIA,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-INDIA,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-INDIA,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-INDIA,Solar Thermal,Pathway,Industry,Saturation Point,38
-INDIA,Solar Thermal,Pathway,Buildings,Saturation Point,100
-INDIA,Wind | Onshore,Baseline,,% of total wind generation,75%
-INDIA,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-INDIA,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-INDIA,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-INDIA,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-INDIA,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-INDIA,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-INDIA,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-INDIA,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-INDIA,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-INDIA,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-INDIA,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-INDIA,Grid,Baseline,,Consumption:Generation,0.88
-INDIA,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-INDIA,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-INDIA,Wind | Onshore,Pathway,,% of total wind generation,75%
-INDIA,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-INDIA,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-INDIA,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-INDIA,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-INDIA,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-INDIA,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-INDIA,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-INDIA,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-INDIA,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-INDIA,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-INDIA,Grid,Pathway,,Consumption:Generation,0.88
-INDIA,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-INDIA,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-EURASIA,Solar PV,Baseline,,Saturation Point,35.9217115
-EURASIA,Solar PV,Baseline,,Parameter a,-7.4600426
-EURASIA,Solar PV,Baseline,,Parameter b,0.17915222
-EURASIA,Solar PV,Baseline,,Starting Year,1990
-EURASIA,Solar PV,Pathway,,Saturation Point,35.9
-EURASIA,Solar PV,Pathway,,Parameter a,-11.5
-EURASIA,Solar PV,Pathway,,Parameter b,0.32
-EURASIA,Solar PV,Pathway,,Starting Year,1990
-EURASIA,Wind,Baseline,,Saturation Point,38.5
-EURASIA,Wind,Baseline,,Parameter a,-5.66
-EURASIA,Wind,Baseline,,Parameter b,0.13
-EURASIA,Wind,Baseline,,Starting Year,1990
-EURASIA,Wind,Pathway,,Saturation Point,38.5
-EURASIA,Wind,Pathway,,Parameter a,-6.8010277
-EURASIA,Wind,Pathway,,Parameter b,0.17915612
-EURASIA,Wind,Pathway,,Starting Year,1990
-EURASIA,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-EURASIA,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-EURASIA,Solar PV,Baseline,,Useful Life in Start Year,25
-EURASIA,Solar PV,Baseline,,Useful Life in End Year,45
-EURASIA,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-EURASIA,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-EURASIA,Solar PV,Pathway,,Useful Life in Start Year,25
-EURASIA,Solar PV,Pathway,,Useful Life in End Year,45
-EURASIA,Wind,Baseline,,"Start Year, Retirement Trend",1990
-EURASIA,Wind,Baseline,,"End Year, Retirement Trend",2100
-EURASIA,Wind,Baseline,,Useful Life in Start Year,15
-EURASIA,Wind,Baseline,,Useful Life in End Year,30
-EURASIA,Wind,Pathway,,"Start Year, Retirement Trend",1990
-EURASIA,Wind,Pathway,,"End Year, Retirement Trend",2100
-EURASIA,Wind,Pathway,,Useful Life in Start Year,15
-EURASIA,Wind,Pathway,,Useful Life in End Year,30
-EURASIA,Nuclear,Pathway,,Saturation Point,10
-EURASIA,Biochar,Baseline,Industry,Saturation Point,23
-EURASIA,Biochar,Pathway,Industry,Saturation Point,23
-EURASIA,Biofuels,Baseline,,Saturation Point,100
-EURASIA,Biofuels,Baseline,,Parameter a,-5.0178492
-EURASIA,Biofuels,Baseline,,Parameter b,0.10741785
-EURASIA,Biofuels,Baseline,,Starting Year,2000
-EURASIA,Solar Thermal,Baseline,Industry,Saturation Point,10
-EURASIA,Solar Thermal,Pathway,Industry,Saturation Point,38
-EURASIA,Solar Thermal,Baseline,Buildings,Saturation Point,100
-EURASIA,Solar Thermal,Pathway,Buildings,Saturation Point,100
-EURASIA,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-EURASIA,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-EURASIA,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-EURASIA,Wind | Onshore,Baseline,,% of total wind generation,75%
-EURASIA,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-EURASIA,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-EURASIA,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-EURASIA,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-EURASIA,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-EURASIA,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-EURASIA,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-EURASIA,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-EURASIA,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-EURASIA,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-EURASIA,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-EURASIA,Grid,Baseline,,Consumption:Generation,0.88
-EURASIA,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-EURASIA,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-EURASIA,Wind | Onshore,Pathway,,% of total wind generation,75%
-EURASIA,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-EURASIA,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-EURASIA,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-EURASIA,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-EURASIA,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-EURASIA,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-EURASIA,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-EURASIA,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-EURASIA,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-EURASIA,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-EURASIA,Grid,Pathway,,Consumption:Generation,0.88
-EURASIA,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-EURASIA,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-EUR,Solar PV,Baseline,,Saturation Point,35.9217115
-EUR,Solar PV,Baseline,,Parameter a,-7.4600426
-EUR,Solar PV,Baseline,,Parameter b,0.17915222
-EUR,Solar PV,Baseline,,Starting Year,1990
-EUR,Solar PV,Pathway,,Saturation Point,35.9
-EUR,Solar PV,Pathway,,Parameter a,-11.5
-EUR,Solar PV,Pathway,,Parameter b,0.32
-EUR,Solar PV,Pathway,,Starting Year,1990
-EUR,Wind,Baseline,,Saturation Point,38.5
-EUR,Wind,Baseline,,Parameter a,-5.66
-EUR,Wind,Baseline,,Parameter b,0.13
-EUR,Wind,Baseline,,Starting Year,1990
-EUR,Wind,Pathway,,Saturation Point,38.5
-EUR,Wind,Pathway,,Parameter a,-6.8010277
-EUR,Wind,Pathway,,Parameter b,0.17915612
-EUR,Wind,Pathway,,Starting Year,1990
-EUR,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-EUR,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-EUR,Solar PV,Baseline,,Useful Life in Start Year,25
-EUR,Solar PV,Baseline,,Useful Life in End Year,45
-EUR,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-EUR,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-EUR,Solar PV,Pathway,,Useful Life in Start Year,25
-EUR,Solar PV,Pathway,,Useful Life in End Year,45
-EUR,Wind,Baseline,,"Start Year, Retirement Trend",1990
-EUR,Wind,Baseline,,"End Year, Retirement Trend",2100
-EUR,Wind,Baseline,,Useful Life in Start Year,15
-EUR,Wind,Baseline,,Useful Life in End Year,30
-EUR,Wind,Pathway,,"Start Year, Retirement Trend",1990
-EUR,Wind,Pathway,,"End Year, Retirement Trend",2100
-EUR,Wind,Pathway,,Useful Life in Start Year,15
-EUR,Wind,Pathway,,Useful Life in End Year,30
-EUR,Nuclear,Pathway,,Saturation Point,10
-EUR,Biochar,Baseline,Industry,Saturation Point,23
-EUR,Biochar,Pathway,Industry,Saturation Point,23
-EUR,Biofuels,Baseline,,Saturation Point,100
-EUR,Biofuels,Baseline,,Parameter a,-5.0178492
-EUR,Biofuels,Baseline,,Parameter b,0.10741785
-EUR,Biofuels,Baseline,,Starting Year,2000
-EUR,Solar Thermal,Pathway,Industry,Saturation Point,38
-EUR,Solar Thermal,Pathway,Buildings,Saturation Point,100
-EUR,Solar Thermal,Baseline,Industry,Saturation Point,10
-EUR,Solar Thermal,Baseline,Buildings,Saturation Point,100
-EUR,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-EUR,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-EUR,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-EUR,Wind | Onshore,Baseline,,% of total wind generation,75%
-EUR,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-EUR,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-EUR,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-EUR,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-EUR,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-EUR,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-EUR,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-EUR,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-EUR,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-EUR,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-EUR,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-EUR,Grid,Baseline,,Consumption:Generation,0.88
-EUR,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-EUR,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-EUR,Wind | Onshore,Pathway,,% of total wind generation,75%
-EUR,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-EUR,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-EUR,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-EUR,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-EUR,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-EUR,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-EUR,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-EUR,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-EUR,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-EUR,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-EUR,Grid,Pathway,,Consumption:Generation,0.88
-EUR,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-EUR,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-EU,Solar PV,Baseline,,Saturation Point,35.9217115
-EU,Solar PV,Baseline,,Parameter a,-7.4600426
-EU,Solar PV,Baseline,,Parameter b,0.17915222
-EU,Solar PV,Baseline,,Starting Year,1990
-EU,Solar PV,Pathway,,Saturation Point,35.9
-EU,Solar PV,Pathway,,Parameter a,-11.5
-EU,Solar PV,Pathway,,Parameter b,0.32
-EU,Solar PV,Pathway,,Starting Year,1990
-EU,Wind,Baseline,,Saturation Point,38.5
-EU,Wind,Baseline,,Parameter a,-5.66
-EU,Wind,Baseline,,Parameter b,0.13
-EU,Wind,Baseline,,Starting Year,1990
-EU,Wind,Pathway,,Saturation Point,38.5
-EU,Wind,Pathway,,Parameter a,-6.8010277
-EU,Wind,Pathway,,Parameter b,0.17915612
-EU,Wind,Pathway,,Starting Year,1990
-EU,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-EU,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-EU,Solar PV,Baseline,,Useful Life in Start Year,25
-EU,Solar PV,Baseline,,Useful Life in End Year,45
-EU,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-EU,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-EU,Solar PV,Pathway,,Useful Life in Start Year,25
-EU,Solar PV,Pathway,,Useful Life in End Year,45
-EU,Wind,Baseline,,"Start Year, Retirement Trend",1990
-EU,Wind,Baseline,,"End Year, Retirement Trend",2100
-EU,Wind,Baseline,,Useful Life in Start Year,15
-EU,Wind,Baseline,,Useful Life in End Year,30
-EU,Wind,Pathway,,"Start Year, Retirement Trend",1990
-EU,Wind,Pathway,,"End Year, Retirement Trend",2100
-EU,Wind,Pathway,,Useful Life in Start Year,15
-EU,Wind,Pathway,,Useful Life in End Year,30
-EU,Nuclear,Pathway,,Saturation Point,10
-EU,Biochar,Baseline,Industry,Saturation Point,23
-EU,Biochar,Pathway,Industry,Saturation Point,23
-EU,Biofuels,Baseline,,Saturation Point,100
-EU,Biofuels,Baseline,,Parameter a,-5.0178492
-EU,Biofuels,Baseline,,Parameter b,0.10741785
-EU,Biofuels,Baseline,,Starting Year,2000
-EU,Solar Thermal,Pathway,Industry,Saturation Point,38
-EU,Solar Thermal,Pathway,Buildings,Saturation Point,100
-EU,Solar Thermal,Baseline,Industry,Saturation Point,10
-EU,Solar Thermal,Baseline,Buildings,Saturation Point,100
-EU,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-EU,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-EU,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-EU,Wind | Onshore,Baseline,,% of total wind generation,75%
-EU,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-EU,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-EU,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-EU,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-EU,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-EU,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-EU,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-EU,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-EU,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-EU,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-EU,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-EU,Grid,Baseline,,Consumption:Generation,0.88
-EU,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-EU,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-EU,Wind | Onshore,Pathway,,% of total wind generation,75%
-EU,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-EU,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-EU,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-EU,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-EU,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-EU,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-EU,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-EU,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-EU,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-EU,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-EU,Grid,Pathway,,Consumption:Generation,0.88
-EU,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-EU,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-DevelopingECO,Solar PV,Baseline,,Saturation Point,35.9217115
-DevelopingECO,Solar PV,Baseline,,Parameter a,-7.4600426
-DevelopingECO,Solar PV,Baseline,,Parameter b,0.17915222
-DevelopingECO,Solar PV,Baseline,,Starting Year,1990
-DevelopingECO,Solar PV,Pathway,,Saturation Point,35.9
-DevelopingECO,Solar PV,Pathway,,Parameter a,-11.5
-DevelopingECO,Solar PV,Pathway,,Parameter b,0.32
-DevelopingECO,Solar PV,Pathway,,Starting Year,1990
-DevelopingECO,Wind,Baseline,,Saturation Point,38.5
-DevelopingECO,Wind,Baseline,,Parameter a,-5.66
-DevelopingECO,Wind,Baseline,,Parameter b,0.13
-DevelopingECO,Wind,Baseline,,Starting Year,1990
-DevelopingECO,Wind,Pathway,,Saturation Point,38.5
-DevelopingECO,Wind,Pathway,,Parameter a,-6.8010277
-DevelopingECO,Wind,Pathway,,Parameter b,0.17915612
-DevelopingECO,Wind,Pathway,,Starting Year,1990
-DevelopingECO,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-DevelopingECO,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-DevelopingECO,Solar PV,Baseline,,Useful Life in Start Year,25
-DevelopingECO,Solar PV,Baseline,,Useful Life in End Year,45
-DevelopingECO,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-DevelopingECO,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-DevelopingECO,Solar PV,Pathway,,Useful Life in Start Year,25
-DevelopingECO,Solar PV,Pathway,,Useful Life in End Year,45
-DevelopingECO,Wind,Baseline,,"Start Year, Retirement Trend",1990
-DevelopingECO,Wind,Baseline,,"End Year, Retirement Trend",2100
-DevelopingECO,Wind,Baseline,,Useful Life in Start Year,15
-DevelopingECO,Wind,Baseline,,Useful Life in End Year,30
-DevelopingECO,Wind,Pathway,,"Start Year, Retirement Trend",1990
-DevelopingECO,Wind,Pathway,,"End Year, Retirement Trend",2100
-DevelopingECO,Wind,Pathway,,Useful Life in Start Year,15
-DevelopingECO,Wind,Pathway,,Useful Life in End Year,30
-DevelopingECO,Nuclear,Pathway,,Saturation Point,10
-DevelopingECO,Biochar,Baseline,Industry,Saturation Point,23
-DevelopingECO,Biochar,Pathway,Industry,Saturation Point,23
-DevelopingECO,Solar Thermal,Pathway,Industry,Saturation Point,38
-DevelopingECO,Solar Thermal,Pathway,Buildings,Saturation Point,100
-DevelopingECO,Biofuels,Baseline,,Saturation Point,100
-DevelopingECO,Biofuels,Baseline,,Parameter a,-5.0178492
-DevelopingECO,Biofuels,Baseline,,Parameter b,0.10741785
-DevelopingECO,Biofuels,Baseline,,Starting Year,2000
-DevelopingECO,Solar Thermal,Baseline,Industry,Saturation Point,10
-DevelopingECO,Solar Thermal,Baseline,Buildings,Saturation Point,100
-DevelopingECO,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-DevelopingECO,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-DevelopingECO,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-DevelopingECO,Wind | Onshore,Baseline,,% of total wind generation,75%
-DevelopingECO,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-DevelopingECO,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-DevelopingECO,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-DevelopingECO,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-DevelopingECO,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-DevelopingECO,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-DevelopingECO,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-DevelopingECO,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-DevelopingECO,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-DevelopingECO,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-DevelopingECO,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-DevelopingECO,Grid,Baseline,,Consumption:Generation,0.88
-DevelopingECO,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-DevelopingECO,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-DevelopingECO,Wind | Onshore,Pathway,,% of total wind generation,75%
-DevelopingECO,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-DevelopingECO,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-DevelopingECO,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-DevelopingECO,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-DevelopingECO,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-DevelopingECO,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-DevelopingECO,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-DevelopingECO,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-DevelopingECO,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-DevelopingECO,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-DevelopingECO,Grid,Pathway,,Consumption:Generation,0.88
-DevelopingECO,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-DevelopingECO,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-CSAM,Solar Thermal,Pathway,Industry,Saturation Point,38
-CSAM,Solar Thermal,Pathway,Buildings,Saturation Point,100
-CSAM,Solar PV,Baseline,,Saturation Point,35.92171153
-CSAM,Solar PV,Baseline,,Parameter a,-7.460042634
-CSAM,Solar PV,Baseline,,Parameter b,0.179152221
-CSAM,Solar PV,Baseline,,Starting Year,1990
-CSAM,Solar PV,Pathway,,Saturation Point,35.9
-CSAM,Solar PV,Pathway,,Parameter a,-11.5
-CSAM,Solar PV,Pathway,,Parameter b,0.32
-CSAM,Solar PV,Pathway,,Starting Year,1990
-CSAM,Wind,Baseline,,Saturation Point,38.51155202
-CSAM,Wind,Baseline,,Parameter a,-5.656659517
-CSAM,Wind,Baseline,,Parameter b,0.129329828
-CSAM,Wind,Baseline,,Starting Year,1990
-CSAM,Wind,Pathway,,Saturation Point,38.51155202
-CSAM,Wind,Pathway,,Parameter a,-6.801027663
-CSAM,Wind,Pathway,,Parameter b,0.179156118
-CSAM,Wind,Pathway,,Starting Year,1990
-CSAM,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-CSAM,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-CSAM,Solar PV,Baseline,,Useful Life in Start Year,25
-CSAM,Solar PV,Baseline,,Useful Life in End Year,45
-CSAM,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-CSAM,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-CSAM,Solar PV,Pathway,,Useful Life in Start Year,25
-CSAM,Solar PV,Pathway,,Useful Life in End Year,45
-CSAM,Wind,Baseline,,"Start Year, Retirement Trend",1990
-CSAM,Wind,Baseline,,"End Year, Retirement Trend",2100
-CSAM,Wind,Baseline,,Useful Life in Start Year,15
-CSAM,Wind,Baseline,,Useful Life in End Year,30
-CSAM,Wind,Pathway,,"Start Year, Retirement Trend",1990
-CSAM,Wind,Pathway,,"End Year, Retirement Trend",2100
-CSAM,Wind,Pathway,,Useful Life in Start Year,15
-CSAM,Wind,Pathway,,Useful Life in End Year,30
-CSAM,Nuclear,Pathway,,Saturation Point,10
-CSAM,Biochar,Baseline,Industry,Saturation Point,23
-CSAM,Biochar,Pathway,Industry,Saturation Point,23
-CSAM,Biofuels,Baseline,,Saturation Point,100
-CSAM,Biofuels,Baseline,,Parameter a,-5.017849236
-CSAM,Biofuels,Baseline,,Parameter b,0.107417845
-CSAM,Biofuels,Baseline,,Starting Year,2000
-CSAM,Biofuels,Baseline,,Saturation Point,100
-CSAM,Wind | Onshore,Baseline,,% of total wind generation,75%
-CSAM,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-CSAM,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-CSAM,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-CSAM,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-CSAM,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-CSAM,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-CSAM,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-CSAM,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-CSAM,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-CSAM,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-CSAM,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-CSAM,Grid,Baseline,,Consumption:Generation,0.88
-CSAM,Solar Thermal,Baseline,Industry,Saturation Point,10
-CSAM,Solar Thermal,Baseline,Buildings,Saturation Point,100
-CSAM,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-CSAM,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-CSAM,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-CSAM,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-CSAM,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-CSAM,Wind | Onshore,Pathway,,% of total wind generation,75%
-CSAM,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-CSAM,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-CSAM,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-CSAM,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-CSAM,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-CSAM,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-CSAM,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-CSAM,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-CSAM,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-CSAM,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-CSAM,Grid,Pathway,,Consumption:Generation,0.88
-CSAM,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-CSAM,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-CHINA,Solar Thermal,Pathway,Industry,Saturation Point,38
-CHINA,Solar Thermal,Pathway,Buildings,Saturation Point,100
-CHINA,Solar PV,Baseline,,Saturation Point,35.9217115
-CHINA,Solar PV,Baseline,,Parameter a,-7.4600426
-CHINA,Solar PV,Baseline,,Parameter b,0.17915222
-CHINA,Solar PV,Baseline,,Starting Year,1990
-CHINA,Solar PV,Pathway,,Saturation Point,35.9
-CHINA,Solar PV,Pathway,,Parameter a,-11.5
-CHINA,Solar PV,Pathway,,Parameter b,0.32
-CHINA,Solar PV,Pathway,,Starting Year,1990
-CHINA,Wind,Baseline,,Saturation Point,38.5
-CHINA,Wind,Baseline,,Parameter a,-5.66
-CHINA,Wind,Baseline,,Parameter b,0.13
-CHINA,Wind,Baseline,,Starting Year,1990
-CHINA,Wind,Pathway,,Saturation Point,38.5
-CHINA,Wind,Pathway,,Parameter a,-6.8010277
-CHINA,Wind,Pathway,,Parameter b,0.17915612
-CHINA,Wind,Pathway,,Starting Year,1990
-CHINA,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-CHINA,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-CHINA,Solar PV,Baseline,,Useful Life in Start Year,25
-CHINA,Solar PV,Baseline,,Useful Life in End Year,45
-CHINA,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-CHINA,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-CHINA,Solar PV,Pathway,,Useful Life in Start Year,25
-CHINA,Solar PV,Pathway,,Useful Life in End Year,45
-CHINA,Wind,Baseline,,"Start Year, Retirement Trend",1990
-CHINA,Wind,Baseline,,"End Year, Retirement Trend",2100
-CHINA,Wind,Baseline,,Useful Life in Start Year,15
-CHINA,Wind,Baseline,,Useful Life in End Year,30
-CHINA,Wind,Pathway,,"Start Year, Retirement Trend",1990
-CHINA,Wind,Pathway,,"End Year, Retirement Trend",2100
-CHINA,Wind,Pathway,,Useful Life in Start Year,15
-CHINA,Wind,Pathway,,Useful Life in End Year,30
-CHINA,Nuclear,Pathway,,Saturation Point,10
-CHINA,Biochar,Baseline,Industry,Saturation Point,23
-CHINA,Biochar,Pathway,Industry,Saturation Point,23
-CHINA,Biofuels,Baseline,,Saturation Point,100
-CHINA,Biofuels,Baseline,,Parameter a,-5.0178492
-CHINA,Biofuels,Baseline,,Parameter b,0.10741785
-CHINA,Biofuels,Baseline,,Starting Year,2000
-CHINA,Solar Thermal,Baseline,Industry,Saturation Point,10
-CHINA,Solar Thermal,Baseline,Buildings,Saturation Point,100
-CHINA,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-CHINA,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-CHINA,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-CHINA,Wind | Onshore,Baseline,,% of total wind generation,75%
-CHINA,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-CHINA,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-CHINA,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-CHINA,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-CHINA,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-CHINA,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-CHINA,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-CHINA,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-CHINA,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-CHINA,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-CHINA,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-CHINA,Grid,Baseline,,Consumption:Generation,0.88
-CHINA,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-CHINA,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-CHINA,Wind | Onshore,Pathway,,% of total wind generation,75%
-CHINA,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-CHINA,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-CHINA,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-CHINA,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-CHINA,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-CHINA,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-CHINA,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-CHINA,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-CHINA,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-CHINA,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-CHINA,Grid,Pathway,,Consumption:Generation,0.88
-CHINA,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-CHINA,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-BRAZIL,Solar Thermal,Pathway,Industry,Saturation Point,38
-BRAZIL,Solar Thermal,Pathway,Buildings,Saturation Point,100
-BRAZIL,Solar PV,Baseline,,Saturation Point,35.9217115
-BRAZIL,Solar PV,Baseline,,Parameter a,-7.4600426
-BRAZIL,Solar PV,Baseline,,Parameter b,0.17915222
-BRAZIL,Solar PV,Baseline,,Starting Year,1990
-BRAZIL,Solar PV,Pathway,,Saturation Point,35.9
-BRAZIL,Solar PV,Pathway,,Parameter a,-11.5
-BRAZIL,Solar PV,Pathway,,Parameter b,0.32
-BRAZIL,Solar PV,Pathway,,Starting Year,1990
-BRAZIL,Wind,Baseline,,Saturation Point,38.5
-BRAZIL,Wind,Baseline,,Parameter a,-5.66
-BRAZIL,Wind,Baseline,,Parameter b,0.13
-BRAZIL,Wind,Baseline,,Starting Year,1990
-BRAZIL,Wind,Pathway,,Saturation Point,38.5
-BRAZIL,Wind,Pathway,,Parameter a,-6.8010277
-BRAZIL,Wind,Pathway,,Parameter b,0.17915612
-BRAZIL,Wind,Pathway,,Starting Year,1990
-BRAZIL,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-BRAZIL,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-BRAZIL,Solar PV,Baseline,,Useful Life in Start Year,25
-BRAZIL,Solar PV,Baseline,,Useful Life in End Year,45
-BRAZIL,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-BRAZIL,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-BRAZIL,Solar PV,Pathway,,Useful Life in Start Year,25
-BRAZIL,Solar PV,Pathway,,Useful Life in End Year,45
-BRAZIL,Wind,Baseline,,"Start Year, Retirement Trend",1990
-BRAZIL,Wind,Baseline,,"End Year, Retirement Trend",2100
-BRAZIL,Wind,Baseline,,Useful Life in Start Year,15
-BRAZIL,Wind,Baseline,,Useful Life in End Year,30
-BRAZIL,Wind,Pathway,,"Start Year, Retirement Trend",1990
-BRAZIL,Wind,Pathway,,"End Year, Retirement Trend",2100
-BRAZIL,Wind,Pathway,,Useful Life in Start Year,15
-BRAZIL,Wind,Pathway,,Useful Life in End Year,30
-BRAZIL,Nuclear,Pathway,,Saturation Point,10
-BRAZIL,Biochar,Baseline,Industry,Saturation Point,23
-BRAZIL,Biochar,Pathway,Industry,Saturation Point,23
-BRAZIL,Biofuels,Baseline,,Saturation Point,100
-BRAZIL,Biofuels,Baseline,,Parameter a,-5.0178492
-BRAZIL,Biofuels,Baseline,,Parameter b,0.10741785
-BRAZIL,Biofuels,Baseline,,Starting Year,2000
-BRAZIL,Wind | Onshore,Baseline,,% of total wind generation,75%
-BRAZIL,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-BRAZIL,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-BRAZIL,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-BRAZIL,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-BRAZIL,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-BRAZIL,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-BRAZIL,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-BRAZIL,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-BRAZIL,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-BRAZIL,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-BRAZIL,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-BRAZIL,Grid,Baseline,,Consumption:Generation,0.88
-BRAZIL,Solar Thermal,Baseline,Industry,Saturation Point,10
-BRAZIL,Solar Thermal,Baseline,Buildings,Saturation Point,100
-BRAZIL,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-BRAZIL,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-BRAZIL,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-BRAZIL,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-BRAZIL,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-BRAZIL,Wind | Onshore,Pathway,,% of total wind generation,75%
-BRAZIL,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-BRAZIL,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-BRAZIL,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-BRAZIL,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-BRAZIL,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-BRAZIL,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-BRAZIL,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-BRAZIL,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-BRAZIL,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-BRAZIL,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-BRAZIL,Grid,Pathway,,Consumption:Generation,0.88
-BRAZIL,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-BRAZIL,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-ASIAPAC,Solar Thermal,Pathway,Industry,Saturation Point,38
-ASIAPAC,Solar Thermal,Pathway,Buildings,Saturation Point,100
-ASIAPAC,Solar PV,Baseline,,Saturation Point,35.9217115
-ASIAPAC,Solar PV,Baseline,,Parameter a,-7.4600426
-ASIAPAC,Solar PV,Baseline,,Parameter b,0.17915222
-ASIAPAC,Solar PV,Baseline,,Starting Year,1990
-ASIAPAC,Solar PV,Pathway,,Saturation Point,35.9
-ASIAPAC,Solar PV,Pathway,,Parameter a,-11.5
-ASIAPAC,Solar PV,Pathway,,Parameter b,0.32
-ASIAPAC,Solar PV,Pathway,,Starting Year,1990
-ASIAPAC,Wind,Baseline,,Saturation Point,38.5
-ASIAPAC,Wind,Baseline,,Parameter a,-5.66
-ASIAPAC,Wind,Baseline,,Parameter b,0.13
-ASIAPAC,Wind,Baseline,,Starting Year,1990
-ASIAPAC,Wind,Pathway,,Saturation Point,38.5
-ASIAPAC,Wind,Pathway,,Parameter a,-6.8010277
-ASIAPAC,Wind,Pathway,,Parameter b,0.17915612
-ASIAPAC,Wind,Pathway,,Starting Year,1990
-ASIAPAC,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-ASIAPAC,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-ASIAPAC,Solar PV,Baseline,,Useful Life in Start Year,25
-ASIAPAC,Solar PV,Baseline,,Useful Life in End Year,45
-ASIAPAC,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-ASIAPAC,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-ASIAPAC,Solar PV,Pathway,,Useful Life in Start Year,25
-ASIAPAC,Solar PV,Pathway,,Useful Life in End Year,45
-ASIAPAC,Wind,Baseline,,"Start Year, Retirement Trend",1990
-ASIAPAC,Wind,Baseline,,"End Year, Retirement Trend",2100
-ASIAPAC,Wind,Baseline,,Useful Life in Start Year,15
-ASIAPAC,Wind,Baseline,,Useful Life in End Year,30
-ASIAPAC,Wind,Pathway,,"Start Year, Retirement Trend",1990
-ASIAPAC,Wind,Pathway,,"End Year, Retirement Trend",2100
-ASIAPAC,Wind,Pathway,,Useful Life in Start Year,15
-ASIAPAC,Wind,Pathway,,Useful Life in End Year,30
-ASIAPAC,Nuclear,Pathway,,Saturation Point,10
-ASIAPAC,Biochar,Baseline,Industry,Saturation Point,23
-ASIAPAC,Biochar,Pathway,Industry,Saturation Point,23
-ASIAPAC,Biofuels,Baseline,,Saturation Point,100
-ASIAPAC,Biofuels,Baseline,,Parameter a,-5.0178492
-ASIAPAC,Biofuels,Baseline,,Parameter b,0.10741785
-ASIAPAC,Biofuels,Baseline,,Starting Year,2000
-ASIAPAC,Wind | Onshore,Baseline,,% of total wind generation,75%
-ASIAPAC,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-ASIAPAC,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-ASIAPAC,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-ASIAPAC,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-ASIAPAC,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-ASIAPAC,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-ASIAPAC,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-ASIAPAC,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-ASIAPAC,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-ASIAPAC,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-ASIAPAC,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-ASIAPAC,Grid,Baseline,,Consumption:Generation,0.88
-ASIAPAC,Solar Thermal,Baseline,Industry,Saturation Point,10
-ASIAPAC,Solar Thermal,Baseline,Buildings,Saturation Point,100
-ASIAPAC,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-ASIAPAC,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-ASIAPAC,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-ASIAPAC,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-ASIAPAC,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-ASIAPAC,Wind | Onshore,Pathway,,% of total wind generation,75%
-ASIAPAC,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-ASIAPAC,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-ASIAPAC,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-ASIAPAC,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-ASIAPAC,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-ASIAPAC,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-ASIAPAC,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-ASIAPAC,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-ASIAPAC,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-ASIAPAC,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-ASIAPAC,Grid,Pathway,,Consumption:Generation,0.88
-ASIAPAC,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-ASIAPAC,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-ASEAN,Solar Thermal,Pathway,Industry,Saturation Point,38
-ASEAN,Solar Thermal,Pathway,Buildings,Saturation Point,100
-ASEAN,Solar PV,Baseline,,Saturation Point,35.9217115
-ASEAN,Solar PV,Baseline,,Parameter a,-7.4600426
-ASEAN,Solar PV,Baseline,,Parameter b,0.17915222
-ASEAN,Solar PV,Baseline,,Starting Year,1990
-ASEAN,Solar PV,Pathway,,Saturation Point,35.9
-ASEAN,Solar PV,Pathway,,Parameter a,-11.5
-ASEAN,Solar PV,Pathway,,Parameter b,0.32
-ASEAN,Solar PV,Pathway,,Starting Year,1990
-ASEAN,Wind,Baseline,,Saturation Point,38.5
-ASEAN,Wind,Baseline,,Parameter a,-5.66
-ASEAN,Wind,Baseline,,Parameter b,0.13
-ASEAN,Wind,Baseline,,Starting Year,1990
-ASEAN,Wind,Pathway,,Saturation Point,38.5
-ASEAN,Wind,Pathway,,Parameter a,-6.8010277
-ASEAN,Wind,Pathway,,Parameter b,0.17915612
-ASEAN,Wind,Pathway,,Starting Year,1990
-ASEAN,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-ASEAN,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-ASEAN,Solar PV,Baseline,,Useful Life in Start Year,25
-ASEAN,Solar PV,Baseline,,Useful Life in End Year,45
-ASEAN,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-ASEAN,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-ASEAN,Solar PV,Pathway,,Useful Life in Start Year,25
-ASEAN,Solar PV,Pathway,,Useful Life in End Year,45
-ASEAN,Wind,Baseline,,"Start Year, Retirement Trend",1990
-ASEAN,Wind,Baseline,,"End Year, Retirement Trend",2100
-ASEAN,Wind,Baseline,,Useful Life in Start Year,15
-ASEAN,Wind,Baseline,,Useful Life in End Year,30
-ASEAN,Wind,Pathway,,"Start Year, Retirement Trend",1990
-ASEAN,Wind,Pathway,,"End Year, Retirement Trend",2100
-ASEAN,Wind,Pathway,,Useful Life in Start Year,15
-ASEAN,Wind,Pathway,,Useful Life in End Year,30
-ASEAN,Nuclear,Pathway,,Saturation Point,10
-ASEAN,Biochar,Baseline,Industry,Saturation Point,23
-ASEAN,Biochar,Pathway,Industry,Saturation Point,23
-ASEAN,Biofuels,Baseline,,Saturation Point,100
-ASEAN,Biofuels,Baseline,,Parameter a,-5.0178492
-ASEAN,Biofuels,Baseline,,Parameter b,0.10741785
-ASEAN,Biofuels,Baseline,,Starting Year,2000
-ASEAN,Solar Thermal,Baseline,Industry,Saturation Point,10
-ASEAN,Solar Thermal,Baseline,Buildings,Saturation Point,100
-ASEAN,Wind | Onshore,Baseline,,% of total wind generation,75%
-ASEAN,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-ASEAN,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-ASEAN,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-ASEAN,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-ASEAN,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-ASEAN,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-ASEAN,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-ASEAN,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-ASEAN,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-ASEAN,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-ASEAN,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-ASEAN,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-ASEAN,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-ASEAN,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-ASEAN,Grid,Baseline,,Consumption:Generation,0.88
-ASEAN,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-ASEAN,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-ASEAN,Wind | Onshore,Pathway,,% of total wind generation,75%
-ASEAN,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-ASEAN,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-ASEAN,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-ASEAN,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-ASEAN,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-ASEAN,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-ASEAN,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-ASEAN,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-ASEAN,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-ASEAN,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-ASEAN,Grid,Pathway,,Consumption:Generation,0.88
-ASEAN,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-ASEAN,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-Africa,Solar Thermal,Pathway,Industry,Saturation Point,38
-Africa,Solar Thermal,Pathway,Buildings,Saturation Point,100
-Africa,Solar PV,Baseline,,Saturation Point,35.9217115
-Africa,Solar PV,Baseline,,Parameter a,-7.4600426
-Africa,Solar PV,Baseline,,Parameter b,0.17915222
-Africa,Solar PV,Baseline,,Starting Year,1990
-Africa,Solar PV,Pathway,,Saturation Point,35.9
-Africa,Solar PV,Pathway,,Parameter a,-11.5
-Africa,Solar PV,Pathway,,Parameter b,0.32
-Africa,Solar PV,Pathway,,Starting Year,1990
-Africa,Wind,Baseline,,Saturation Point,38.5
-Africa,Wind,Baseline,,Parameter a,-5.66
-Africa,Wind,Baseline,,Parameter b,0.13
-Africa,Wind,Baseline,,Starting Year,1990
-Africa,Wind,Pathway,,Saturation Point,38.5
-Africa,Wind,Pathway,,Parameter a,-6.8010277
-Africa,Wind,Pathway,,Parameter b,0.17915612
-Africa,Wind,Pathway,,Starting Year,1990
-Africa,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-Africa,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-Africa,Solar PV,Baseline,,Useful Life in Start Year,25
-Africa,Solar PV,Baseline,,Useful Life in End Year,45
-Africa,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-Africa,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-Africa,Solar PV,Pathway,,Useful Life in Start Year,25
-Africa,Solar PV,Pathway,,Useful Life in End Year,45
-Africa,Wind,Baseline,,"Start Year, Retirement Trend",1990
-Africa,Wind,Baseline,,"End Year, Retirement Trend",2100
-Africa,Wind,Baseline,,Useful Life in Start Year,15
-Africa,Wind,Baseline,,Useful Life in End Year,30
-Africa,Wind,Pathway,,"Start Year, Retirement Trend",1990
-Africa,Wind,Pathway,,"End Year, Retirement Trend",2100
-Africa,Wind,Pathway,,Useful Life in Start Year,15
-Africa,Wind,Pathway,,Useful Life in End Year,30
-Africa,Nuclear,Pathway,,Saturation Point,10
-Africa,Biochar,Baseline,Industry,Saturation Point,23
-Africa,Biochar,Pathway,Industry,Saturation Point,23
-Africa,Wind | Onshore,Baseline,,% of total wind generation,75%
-Africa,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-Africa,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-Africa,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-Africa,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-Africa,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-Africa,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-Africa,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-Africa,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-Africa,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-Africa,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-Africa,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-Africa,Grid,Baseline,,Consumption:Generation,0.88
-Africa,Biofuels,Baseline,,Saturation Point,100
-Africa,Biofuels,Baseline,,Parameter a,-5.0178492
-Africa,Biofuels,Baseline,,Parameter b,0.10741785
-Africa,Biofuels,Baseline,,Starting Year,2000
-Africa,Solar Thermal,Baseline,Industry,Saturation Point,10
-Africa,Solar Thermal,Baseline,Buildings,Saturation Point,100
-Africa,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-Africa,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-Africa,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-Africa,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-Africa,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-Africa,Wind | Onshore,Pathway,,% of total wind generation,75%
-Africa,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-Africa,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-Africa,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-Africa,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-Africa,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-Africa,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-Africa,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-Africa,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-Africa,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-Africa,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-Africa,Grid,Pathway,,Consumption:Generation,0.88
-Africa,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-Africa,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-AdvancedECO,Solar Thermal,Pathway,Industry,Saturation Point,38
-AdvancedECO,Solar Thermal,Pathway,Buildings,Saturation Point,100
-AdvancedECO,Solar PV,Baseline,,Saturation Point,35.9217115
-AdvancedECO,Solar PV,Baseline,,Parameter a,-7.4600426
-AdvancedECO,Solar PV,Baseline,,Parameter b,0.17915222
-AdvancedECO,Solar PV,Baseline,,Starting Year,1990
-AdvancedECO,Solar PV,Pathway,,Saturation Point,35.9
-AdvancedECO,Solar PV,Pathway,,Parameter a,-11.5
-AdvancedECO,Solar PV,Pathway,,Parameter b,0.32
-AdvancedECO,Solar PV,Pathway,,Starting Year,1990
-AdvancedECO,Wind,Baseline,,Saturation Point,38.5
-AdvancedECO,Wind,Baseline,,Parameter a,-5.66
-AdvancedECO,Wind,Baseline,,Parameter b,0.13
-AdvancedECO,Wind,Baseline,,Starting Year,1990
-AdvancedECO,Wind,Pathway,,Saturation Point,38.5
-AdvancedECO,Wind,Pathway,,Parameter a,-6.8010277
-AdvancedECO,Wind,Pathway,,Parameter b,0.17915612
-AdvancedECO,Wind,Pathway,,Starting Year,1990
-AdvancedECO,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
-AdvancedECO,Solar PV,Baseline,,"End Year, Retirement Trend",2100
-AdvancedECO,Solar PV,Baseline,,Useful Life in Start Year,25
-AdvancedECO,Solar PV,Baseline,,Useful Life in End Year,45
-AdvancedECO,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
-AdvancedECO,Solar PV,Pathway,,"End Year, Retirement Trend",2100
-AdvancedECO,Solar PV,Pathway,,Useful Life in Start Year,25
-AdvancedECO,Solar PV,Pathway,,Useful Life in End Year,45
-AdvancedECO,Wind,Baseline,,"Start Year, Retirement Trend",1990
-AdvancedECO,Wind,Baseline,,"End Year, Retirement Trend",2100
-AdvancedECO,Wind,Baseline,,Useful Life in Start Year,15
-AdvancedECO,Wind,Baseline,,Useful Life in End Year,30
-AdvancedECO,Wind,Pathway,,"Start Year, Retirement Trend",1990
-AdvancedECO,Wind,Pathway,,"End Year, Retirement Trend",2100
-AdvancedECO,Wind,Pathway,,Useful Life in Start Year,15
-AdvancedECO,Wind,Pathway,,Useful Life in End Year,30
-AdvancedECO,Nuclear,Pathway,,Saturation Point,10
-AdvancedECO,Biochar,Baseline,Industry,Saturation Point,23
-AdvancedECO,Biochar,Pathway,Industry,Saturation Point,23
-AdvancedECO,Biofuels,Baseline,,Saturation Point,100
-AdvancedECO,Biofuels,Baseline,,Parameter a,-5.0178492
-AdvancedECO,Biofuels,Baseline,,Parameter b,0.10741785
-AdvancedECO,Solar Thermal,Baseline,Industry,Saturation Point,10
-AdvancedECO,Biofuels,Baseline,,Starting Year,2000
-AdvancedECO,Solar Thermal,Baseline,Buildings,Saturation Point,100
-AdvancedECO,Wind | Onshore,Baseline,,% of total wind generation,75%
-AdvancedECO,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
-AdvancedECO,Wind | Onshore,Baseline,,"Capacity factor, start year",25
-AdvancedECO,Wind | Offshore,Baseline,,"Capacity factor, end year",30
-AdvancedECO,Wind | Onshore,Baseline,,"Capacity factor, start year",40
-AdvancedECO,Wind | Offshore,Baseline,,"Capacity factor, end year",45
-AdvancedECO,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
-AdvancedECO,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
-AdvancedECO,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
-AdvancedECO,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
-AdvancedECO,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
-AdvancedECO,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
-AdvancedECO,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
-AdvancedECO,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
-AdvancedECO,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
-AdvancedECO,Grid,Baseline,,Consumption:Generation,0.88
-AdvancedECO,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
-AdvancedECO,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
-AdvancedECO,Wind | Onshore,Pathway,,% of total wind generation,75%
-AdvancedECO,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
-AdvancedECO,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
-AdvancedECO,Wind | Offshore,Pathway,,"Capacity factor, end year",30
-AdvancedECO,Wind | Offshore,Pathway,,"Capacity factor, end year",45
-AdvancedECO,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
-AdvancedECO,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
-AdvancedECO,Wind | Onshore,Pathway,,"Capacity factor, start year",25
-AdvancedECO,Wind | Onshore,Pathway,,"Capacity factor, start year",40
-AdvancedECO,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
-AdvancedECO,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
-AdvancedECO,Grid,Pathway,,Consumption:Generation,0.88
-AdvancedECO,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
-AdvancedECO,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+World ,Solar PV,Baseline,,Saturation Point,35.92171153
+World ,Solar PV,Baseline,,Parameter a,-7.460042634
+World ,Solar PV,Baseline,,Parameter b,0.179152221
+World ,Solar PV,Baseline,,Starting Year,1990
+World ,Solar PV,Pathway,,Saturation Point,35.9
+World ,Solar PV,Pathway,,Parameter a,-11.5
+World ,Solar PV,Pathway,,Parameter b,0.32
+World ,Solar PV,Pathway,,Starting Year,1990
+World ,Wind,Baseline,,Saturation Point,38.51155202
+World ,Wind,Baseline,,Parameter a,-5.656659517
+World ,Wind,Baseline,,Parameter b,0.129329828
+World ,Wind,Baseline,,Starting Year,1990
+World ,Wind,Pathway,,Saturation Point,38.51155202
+World ,Wind,Pathway,,Parameter a,-6.801027663
+World ,Wind,Pathway,,Parameter b,0.179156118
+World ,Wind,Pathway,,Starting Year,1990
+World ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+World ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+World ,Solar PV,Baseline,,Useful Life in Start Year,25
+World ,Solar PV,Baseline,,Useful Life in End Year,45
+World ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+World ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+World ,Solar PV,Pathway,,Useful Life in Start Year,25
+World ,Solar PV,Pathway,,Useful Life in End Year,45
+World ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+World ,Wind,Baseline,,"End Year, Retirement Trend",2100
+World ,Wind,Baseline,,Useful Life in Start Year,15
+World ,Wind,Baseline,,Useful Life in End Year,30
+World ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+World ,Wind,Pathway,,"End Year, Retirement Trend",2100
+World ,Wind,Pathway,,Useful Life in Start Year,15
+World ,Wind,Pathway,,Useful Life in End Year,30
+World ,Biofuels,Baseline,,Saturation Point,100
+World ,Biofuels,Baseline,,Parameter a,-5.017849236
+World ,Biofuels,Baseline,,Parameter b,0.107417845
+World ,Biofuels,Baseline,,Starting Year,2000
+World ,Nuclear,Pathway,,Saturation Point,10
+World ,Solar Thermal,Baseline,Industry,Saturation Point,10
+World ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+World ,Biochar,Baseline,Industry,Saturation Point,23
+World ,Biochar,Pathway,Industry,Saturation Point,23
+World ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+World ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+World ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+World ,Wind | Onshore,Baseline,,% of total wind generation,75%
+World ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+World ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+World ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+World ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+World ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+World ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+World ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+World ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+World ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+World ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+World ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+World ,Grid,Baseline,,Consumption:Generation,0.88
+World ,Solar Thermal,Pathway,Industry,Saturation Point,38
+World ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+World ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+World ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+World ,Wind | Onshore,Pathway,,% of total wind generation,75%
+World ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+World ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+World ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+World ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+World ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+World ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+World ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+World ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+World ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+World ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+World ,Grid,Pathway,,Consumption:Generation,0.88
+World ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+World ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+US ,Solar PV,Baseline,,Saturation Point,35.92171153
+US ,Solar PV,Baseline,,Parameter a,-7.460042634
+US ,Solar PV,Baseline,,Parameter b,0.179152221
+US ,Solar PV,Baseline,,Starting Year,1990
+US ,Solar PV,Pathway,,Saturation Point,35.9
+US ,Solar PV,Pathway,,Parameter a,-11.5
+US ,Solar PV,Pathway,,Parameter b,0.32
+US ,Solar PV,Pathway,,Starting Year,1990
+US ,Wind,Baseline,,Saturation Point,38.51155202
+US ,Wind,Baseline,,Parameter a,-5.656659517
+US ,Wind,Baseline,,Parameter b,0.129329828
+US ,Wind,Baseline,,Starting Year,1990
+US ,Wind,Pathway,,Saturation Point,38.51155202
+US ,Wind,Pathway,,Parameter a,-6.801027663
+US ,Wind,Pathway,,Parameter b,0.179156118
+US ,Wind,Pathway,,Starting Year,1990
+US ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+US ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+US ,Solar PV,Baseline,,Useful Life in Start Year,25
+US ,Solar PV,Baseline,,Useful Life in End Year,45
+US ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+US ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+US ,Solar PV,Pathway,,Useful Life in Start Year,25
+US ,Solar PV,Pathway,,Useful Life in End Year,45
+US ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+US ,Wind,Baseline,,"End Year, Retirement Trend",2100
+US ,Wind,Baseline,,Useful Life in Start Year,15
+US ,Wind,Baseline,,Useful Life in End Year,30
+US ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+US ,Wind,Pathway,,"End Year, Retirement Trend",2100
+US ,Wind,Pathway,,Useful Life in Start Year,15
+US ,Wind,Pathway,,Useful Life in End Year,30
+US ,Biofuels,Baseline,,Saturation Point,100
+US ,Biofuels,Baseline,,Parameter a,-5.017849236
+US ,Biofuels,Baseline,,Parameter b,0.107417845
+US ,Biofuels,Baseline,,Starting Year,2000
+US ,Nuclear,Pathway,,Saturation Point,10
+US ,Biochar,Baseline,Industry,Saturation Point,23
+US ,Biochar,Pathway,Industry,Saturation Point,23
+US ,Solar Thermal,Baseline,Industry,Saturation Point,10
+US ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+US ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+US ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+US ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+US ,Wind | Onshore,Baseline,,% of total wind generation,75%
+US ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+US ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+US ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+US ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+US ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+US ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+US ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+US ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+US ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+US ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+US ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+US ,Grid,Baseline,,Consumption:Generation,0.88
+US ,Solar Thermal,Pathway,Industry,Saturation Point,38
+US ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+US ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+US ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+US ,Wind | Onshore,Pathway,,% of total wind generation,75%
+US ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+US ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+US ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+US ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+US ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+US ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+US ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+US ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+US ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+US ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+US ,Grid,Pathway,,Consumption:Generation,0.88
+US ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+US ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+SAFR ,Solar PV,Baseline,,Saturation Point,35.9217115
+SAFR ,Solar PV,Baseline,,Parameter a,-7.4600426
+SAFR ,Solar PV,Baseline,,Parameter b,0.17915222
+SAFR ,Solar PV,Baseline,,Starting Year,1990
+SAFR ,Solar PV,Pathway,,Saturation Point,35.9
+SAFR ,Solar PV,Pathway,,Parameter a,-11.5
+SAFR ,Solar PV,Pathway,,Parameter b,0.32
+SAFR ,Solar PV,Pathway,,Starting Year,1990
+SAFR ,Wind,Baseline,,Saturation Point,38.5
+SAFR ,Wind,Baseline,,Parameter a,-5.66
+SAFR ,Wind,Baseline,,Parameter b,0.13
+SAFR ,Wind,Baseline,,Starting Year,1990
+SAFR ,Wind,Pathway,,Saturation Point,38.5
+SAFR ,Wind,Pathway,,Parameter a,-6.8010277
+SAFR ,Wind,Pathway,,Parameter b,0.17915612
+SAFR ,Wind,Pathway,,Starting Year,1990
+SAFR ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+SAFR ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+SAFR ,Solar PV,Baseline,,Useful Life in Start Year,25
+SAFR ,Solar PV,Baseline,,Useful Life in End Year,45
+SAFR ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+SAFR ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+SAFR ,Solar PV,Pathway,,Useful Life in Start Year,25
+SAFR ,Solar PV,Pathway,,Useful Life in End Year,45
+SAFR ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+SAFR ,Wind,Baseline,,"End Year, Retirement Trend",2100
+SAFR ,Wind,Baseline,,Useful Life in Start Year,15
+SAFR ,Wind,Baseline,,Useful Life in End Year,30
+SAFR ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+SAFR ,Wind,Pathway,,"End Year, Retirement Trend",2100
+SAFR ,Wind,Pathway,,Useful Life in Start Year,15
+SAFR ,Wind,Pathway,,Useful Life in End Year,30
+SAFR ,Biofuels,Baseline,,Saturation Point,100
+SAFR ,Biofuels,Baseline,,Parameter a,-5.0178492
+SAFR ,Biofuels,Baseline,,Parameter b,0.10741785
+SAFR ,Nuclear,Pathway,,Saturation Point,10
+SAFR ,Biochar,Baseline,Industry,Saturation Point,23
+SAFR ,Biochar,Pathway,Industry,Saturation Point,23
+SAFR ,Biofuels,Baseline,,Starting Year,2000
+SAFR ,Solar Thermal,Baseline,Industry,Saturation Point,10
+SAFR ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+SAFR ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+SAFR ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+SAFR ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+SAFR ,Wind | Onshore,Baseline,,% of total wind generation,75%
+SAFR ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+SAFR ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+SAFR ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+SAFR ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+SAFR ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+SAFR ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+SAFR ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+SAFR ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+SAFR ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+SAFR ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+SAFR ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+SAFR ,Grid,Baseline,,Consumption:Generation,0.88
+SAFR ,Solar Thermal,Pathway,Industry,Saturation Point,38
+SAFR ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+SAFR ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+SAFR ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+SAFR ,Wind | Onshore,Pathway,,% of total wind generation,75%
+SAFR ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+SAFR ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+SAFR ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+SAFR ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+SAFR ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+SAFR ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+SAFR ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+SAFR ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+SAFR ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+SAFR ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+SAFR ,Grid,Pathway,,Consumption:Generation,0.88
+SAFR ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+SAFR ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+RUS ,Solar PV,Baseline,,Saturation Point,35.9217115
+RUS ,Solar PV,Baseline,,Parameter a,-7.4600426
+RUS ,Solar PV,Baseline,,Parameter b,0.17915222
+RUS ,Solar PV,Baseline,,Starting Year,1990
+RUS ,Solar PV,Pathway,,Saturation Point,35.9
+RUS ,Solar PV,Pathway,,Parameter a,-11.5
+RUS ,Solar PV,Pathway,,Parameter b,0.32
+RUS ,Solar PV,Pathway,,Starting Year,1990
+RUS ,Wind,Baseline,,Saturation Point,38.5
+RUS ,Wind,Baseline,,Parameter a,-5.66
+RUS ,Wind,Baseline,,Parameter b,0.13
+RUS ,Wind,Baseline,,Starting Year,1990
+RUS ,Wind,Pathway,,Saturation Point,38.5
+RUS ,Wind,Pathway,,Parameter a,-6.8010277
+RUS ,Wind,Pathway,,Parameter b,0.17915612
+RUS ,Wind,Pathway,,Starting Year,1990
+RUS ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+RUS ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+RUS ,Solar PV,Baseline,,Useful Life in Start Year,25
+RUS ,Solar PV,Baseline,,Useful Life in End Year,45
+RUS ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+RUS ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+RUS ,Solar PV,Pathway,,Useful Life in Start Year,25
+RUS ,Solar PV,Pathway,,Useful Life in End Year,45
+RUS ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+RUS ,Wind,Baseline,,"End Year, Retirement Trend",2100
+RUS ,Wind,Baseline,,Useful Life in Start Year,15
+RUS ,Wind,Baseline,,Useful Life in End Year,30
+RUS ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+RUS ,Wind,Pathway,,"End Year, Retirement Trend",2100
+RUS ,Wind,Pathway,,Useful Life in Start Year,15
+RUS ,Wind,Pathway,,Useful Life in End Year,30
+RUS ,Biofuels,Baseline,,Saturation Point,100
+RUS ,Biofuels,Baseline,,Parameter a,-5.0178492
+RUS ,Nuclear,Pathway,,Saturation Point,10
+RUS ,Biochar,Baseline,Industry,Saturation Point,23
+RUS ,Biochar,Pathway,Industry,Saturation Point,23
+RUS ,Biofuels,Baseline,,Parameter b,0.10741785
+RUS ,Biofuels,Baseline,,Starting Year,2000
+RUS ,Solar Thermal,Baseline,Industry,Saturation Point,10
+RUS ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+RUS ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+RUS ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+RUS ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+RUS ,Wind | Onshore,Baseline,,% of total wind generation,75%
+RUS ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+RUS ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+RUS ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+RUS ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+RUS ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+RUS ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+RUS ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+RUS ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+RUS ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+RUS ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+RUS ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+RUS ,Grid,Baseline,,Consumption:Generation,0.88
+RUS ,Solar Thermal,Pathway,Industry,Saturation Point,38
+RUS ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+RUS ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+RUS ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+RUS ,Wind | Onshore,Pathway,,% of total wind generation,75%
+RUS ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+RUS ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+RUS ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+RUS ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+RUS ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+RUS ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+RUS ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+RUS ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+RUS ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+RUS ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+RUS ,Grid,Pathway,,Consumption:Generation,0.88
+RUS ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+RUS ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+OECD ,Solar PV,Baseline,,Saturation Point,35.9217115
+OECD ,Solar PV,Baseline,,Parameter a,-7.4600426
+OECD ,Solar PV,Baseline,,Parameter b,0.17915222
+OECD ,Solar PV,Baseline,,Starting Year,1990
+OECD ,Solar PV,Pathway,,Saturation Point,35.9
+OECD ,Solar PV,Pathway,,Parameter a,-11.5
+OECD ,Solar PV,Pathway,,Parameter b,0.32
+OECD ,Solar PV,Pathway,,Starting Year,1990
+OECD ,Wind,Baseline,,Saturation Point,38.5
+OECD ,Wind,Baseline,,Parameter a,-5.66
+OECD ,Wind,Baseline,,Parameter b,0.13
+OECD ,Wind,Baseline,,Starting Year,1990
+OECD ,Wind,Pathway,,Saturation Point,38.5
+OECD ,Wind,Pathway,,Parameter a,-6.8010277
+OECD ,Wind,Pathway,,Parameter b,0.17915612
+OECD ,Wind,Pathway,,Starting Year,1990
+OECD ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+OECD ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+OECD ,Solar PV,Baseline,,Useful Life in Start Year,25
+OECD ,Solar PV,Baseline,,Useful Life in End Year,45
+OECD ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+OECD ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+OECD ,Solar PV,Pathway,,Useful Life in Start Year,25
+OECD ,Solar PV,Pathway,,Useful Life in End Year,45
+OECD ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+OECD ,Wind,Baseline,,"End Year, Retirement Trend",2100
+OECD ,Wind,Baseline,,Useful Life in Start Year,15
+OECD ,Wind,Baseline,,Useful Life in End Year,30
+OECD ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+OECD ,Wind,Pathway,,"End Year, Retirement Trend",2100
+OECD ,Wind,Pathway,,Useful Life in Start Year,15
+OECD ,Wind,Pathway,,Useful Life in End Year,30
+OECD ,Biofuels,Baseline,,Saturation Point,100
+OECD ,Nuclear,Pathway,,Saturation Point,10
+OECD ,Biochar,Baseline,Industry,Saturation Point,23
+OECD ,Biochar,Pathway,Industry,Saturation Point,23
+OECD ,Biofuels,Baseline,,Parameter a,-5.0178492
+OECD ,Biofuels,Baseline,,Parameter b,0.10741785
+OECD ,Biofuels,Baseline,,Starting Year,2000
+OECD ,Solar Thermal,Baseline,Industry,Saturation Point,10
+OECD ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+OECD ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+OECD ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+OECD ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+OECD ,Solar Thermal,Pathway,Industry,Saturation Point,38
+OECD ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+OECD ,Wind | Onshore,Baseline,,% of total wind generation,75%
+OECD ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+OECD ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+OECD ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+OECD ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+OECD ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+OECD ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+OECD ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+OECD ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+OECD ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+OECD ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+OECD ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+OECD ,Grid,Baseline,,Consumption:Generation,0.88
+OECD ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+OECD ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+OECD ,Wind | Onshore,Pathway,,% of total wind generation,75%
+OECD ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+OECD ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+OECD ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+OECD ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+OECD ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+OECD ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+OECD ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+OECD ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+OECD ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+OECD ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+OECD ,Grid,Pathway,,Consumption:Generation,0.88
+OECD ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+OECD ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+NonOECD ,Solar PV,Baseline,,Saturation Point,35.9217115
+NonOECD ,Solar PV,Baseline,,Parameter a,-7.4600426
+NonOECD ,Solar PV,Baseline,,Parameter b,0.17915222
+NonOECD ,Solar PV,Baseline,,Starting Year,1990
+NonOECD ,Solar PV,Pathway,,Saturation Point,35.9
+NonOECD ,Solar PV,Pathway,,Parameter a,-11.5
+NonOECD ,Solar PV,Pathway,,Parameter b,0.32
+NonOECD ,Solar PV,Pathway,,Starting Year,1990
+NonOECD ,Wind,Baseline,,Saturation Point,38.5
+NonOECD ,Wind,Baseline,,Parameter a,-5.66
+NonOECD ,Wind,Baseline,,Parameter b,0.13
+NonOECD ,Wind,Baseline,,Starting Year,1990
+NonOECD ,Wind,Pathway,,Saturation Point,38.5
+NonOECD ,Wind,Pathway,,Parameter a,-6.8010277
+NonOECD ,Wind,Pathway,,Parameter b,0.17915612
+NonOECD ,Wind,Pathway,,Starting Year,1990
+NonOECD ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+NonOECD ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+NonOECD ,Solar PV,Baseline,,Useful Life in Start Year,25
+NonOECD ,Solar PV,Baseline,,Useful Life in End Year,45
+NonOECD ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+NonOECD ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+NonOECD ,Solar PV,Pathway,,Useful Life in Start Year,25
+NonOECD ,Solar PV,Pathway,,Useful Life in End Year,45
+NonOECD ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+NonOECD ,Wind,Baseline,,"End Year, Retirement Trend",2100
+NonOECD ,Wind,Baseline,,Useful Life in Start Year,15
+NonOECD ,Wind,Baseline,,Useful Life in End Year,30
+NonOECD ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+NonOECD ,Wind,Pathway,,"End Year, Retirement Trend",2100
+NonOECD ,Wind,Pathway,,Useful Life in Start Year,15
+NonOECD ,Wind,Pathway,,Useful Life in End Year,30
+NonOECD ,Nuclear,Pathway,,Saturation Point,10
+NonOECD ,Biochar,Baseline,Industry,Saturation Point,23
+NonOECD ,Biochar,Pathway,Industry,Saturation Point,23
+NonOECD ,Biofuels,Baseline,,Saturation Point,100
+NonOECD ,Biofuels,Baseline,,Parameter a,-5.0178492
+NonOECD ,Biofuels,Baseline,,Parameter b,0.10741785
+NonOECD ,Biofuels,Baseline,,Starting Year,2000
+NonOECD ,Solar Thermal,Baseline,Industry,Saturation Point,10
+NonOECD ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+NonOECD ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+NonOECD ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+NonOECD ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+NonOECD ,Solar Thermal,Pathway,Industry,Saturation Point,38
+NonOECD ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+NonOECD ,Wind | Onshore,Baseline,,% of total wind generation,75%
+NonOECD ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+NonOECD ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+NonOECD ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+NonOECD ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+NonOECD ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+NonOECD ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+NonOECD ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+NonOECD ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+NonOECD ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+NonOECD ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+NonOECD ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+NonOECD ,Grid,Baseline,,Consumption:Generation,0.88
+NonOECD ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+NonOECD ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+NonOECD ,Wind | Onshore,Pathway,,% of total wind generation,75%
+NonOECD ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+NonOECD ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+NonOECD ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+NonOECD ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+NonOECD ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+NonOECD ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+NonOECD ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+NonOECD ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+NonOECD ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+NonOECD ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+NonOECD ,Grid,Pathway,,Consumption:Generation,0.88
+NonOECD ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+NonOECD ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+NAM ,Solar PV,Baseline,,Saturation Point,35.92171153
+NAM ,Solar PV,Baseline,,Parameter a,-7.460042634
+NAM ,Solar PV,Baseline,,Parameter b,0.179152221
+NAM ,Solar PV,Baseline,,Starting Year,1990
+NAM ,Solar PV,Pathway,,Saturation Point,35.9
+NAM ,Solar PV,Pathway,,Parameter a,-11.5
+NAM ,Solar PV,Pathway,,Parameter b,0.32
+NAM ,Solar PV,Pathway,,Starting Year,1990
+NAM ,Wind,Baseline,,Saturation Point,38.51155202
+NAM ,Wind,Baseline,,Parameter a,-5.656659517
+NAM ,Wind,Baseline,,Parameter b,0.129329828
+NAM ,Wind,Baseline,,Starting Year,1990
+NAM ,Wind,Pathway,,Saturation Point,38.51155202
+NAM ,Wind,Pathway,,Parameter a,-6.801027663
+NAM ,Wind,Pathway,,Parameter b,0.179156118
+NAM ,Wind,Pathway,,Starting Year,1990
+NAM ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+NAM ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+NAM ,Solar PV,Baseline,,Useful Life in Start Year,25
+NAM ,Solar PV,Baseline,,Useful Life in End Year,45
+NAM ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+NAM ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+NAM ,Solar PV,Pathway,,Useful Life in Start Year,25
+NAM ,Solar PV,Pathway,,Useful Life in End Year,45
+NAM ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+NAM ,Wind,Baseline,,"End Year, Retirement Trend",2100
+NAM ,Wind,Baseline,,Useful Life in Start Year,15
+NAM ,Wind,Baseline,,Useful Life in End Year,30
+NAM ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+NAM ,Wind,Pathway,,"End Year, Retirement Trend",2100
+NAM ,Wind,Pathway,,Useful Life in Start Year,15
+NAM ,Wind,Pathway,,Useful Life in End Year,30
+NAM ,Nuclear,Pathway,,Saturation Point,10
+NAM ,Biochar,Baseline,Industry,Saturation Point,23
+NAM ,Biochar,Pathway,Industry,Saturation Point,23
+NAM ,Biofuels,Baseline,,Saturation Point,100
+NAM ,Biofuels,Baseline,,Parameter a,-5.017849236
+NAM ,Biofuels,Baseline,,Parameter b,0.107417845
+NAM ,Biofuels,Baseline,,Starting Year,2000
+NAM ,Solar Thermal,Baseline,Industry,Saturation Point,10
+NAM ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+NAM ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+NAM ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+NAM ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+NAM ,Wind | Onshore,Baseline,,% of total wind generation,75%
+NAM ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+NAM ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+NAM ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+NAM ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+NAM ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+NAM ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+NAM ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+NAM ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+NAM ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+NAM ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+NAM ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+NAM ,Grid,Baseline,,Consumption:Generation,0.88
+NAM ,Solar Thermal,Pathway,Industry,Saturation Point,38
+NAM ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+NAM ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+NAM ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+NAM ,Wind | Onshore,Pathway,,% of total wind generation,75%
+NAM ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+NAM ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+NAM ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+NAM ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+NAM ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+NAM ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+NAM ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+NAM ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+NAM ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+NAM ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+NAM ,Grid,Pathway,,Consumption:Generation,0.88
+NAM ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+NAM ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+ME ,Solar PV,Baseline,,Saturation Point,35.9217115
+ME ,Solar PV,Baseline,,Parameter a,-7.4600426
+ME ,Solar PV,Baseline,,Parameter b,0.17915222
+ME ,Solar PV,Baseline,,Starting Year,1990
+ME ,Solar PV,Pathway,,Saturation Point,35.9
+ME ,Solar PV,Pathway,,Parameter a,-11.5
+ME ,Solar PV,Pathway,,Parameter b,0.32
+ME ,Solar PV,Pathway,,Starting Year,1990
+ME ,Wind,Baseline,,Saturation Point,38.5
+ME ,Wind,Baseline,,Parameter a,-5.66
+ME ,Wind,Baseline,,Parameter b,0.13
+ME ,Wind,Baseline,,Starting Year,1990
+ME ,Wind,Pathway,,Saturation Point,38.5
+ME ,Wind,Pathway,,Parameter a,-6.8010277
+ME ,Wind,Pathway,,Parameter b,0.17915612
+ME ,Wind,Pathway,,Starting Year,1990
+ME ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+ME ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+ME ,Solar PV,Baseline,,Useful Life in Start Year,25
+ME ,Solar PV,Baseline,,Useful Life in End Year,45
+ME ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+ME ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+ME ,Solar PV,Pathway,,Useful Life in Start Year,25
+ME ,Solar PV,Pathway,,Useful Life in End Year,45
+ME ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+ME ,Wind,Baseline,,"End Year, Retirement Trend",2100
+ME ,Wind,Baseline,,Useful Life in Start Year,15
+ME ,Wind,Baseline,,Useful Life in End Year,30
+ME ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+ME ,Wind,Pathway,,"End Year, Retirement Trend",2100
+ME ,Wind,Pathway,,Useful Life in Start Year,15
+ME ,Wind,Pathway,,Useful Life in End Year,30
+ME ,Nuclear,Pathway,,Saturation Point,10
+ME ,Biochar,Baseline,Industry,Saturation Point,23
+ME ,Biochar,Pathway,Industry,Saturation Point,23
+ME ,Biofuels,Baseline,,Saturation Point,100
+ME ,Biofuels,Baseline,,Parameter a,-5.0178492
+ME ,Biofuels,Baseline,,Parameter b,0.10741785
+ME ,Biofuels,Baseline,,Starting Year,2000
+ME ,Solar Thermal,Baseline,Industry,Saturation Point,10
+ME ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+ME ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+ME ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+ME ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+ME ,Solar Thermal,Pathway,Industry,Saturation Point,38
+ME ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+ME ,Wind | Onshore,Baseline,,% of total wind generation,75%
+ME ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+ME ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+ME ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+ME ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+ME ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+ME ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+ME ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+ME ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+ME ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+ME ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+ME ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+ME ,Grid,Baseline,,Consumption:Generation,0.88
+ME ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+ME ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+ME ,Wind | Onshore,Pathway,,% of total wind generation,75%
+ME ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+ME ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+ME ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+ME ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+ME ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+ME ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+ME ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+ME ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+ME ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+ME ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+ME ,Grid,Pathway,,Consumption:Generation,0.88
+ME ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+ME ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+JPN ,Solar PV,Baseline,,Saturation Point,35.9217115
+JPN ,Solar PV,Baseline,,Parameter a,-7.4600426
+JPN ,Solar PV,Baseline,,Parameter b,0.17915222
+JPN ,Solar PV,Baseline,,Starting Year,1990
+JPN ,Solar PV,Pathway,,Saturation Point,35.9
+JPN ,Solar PV,Pathway,,Parameter a,-11.5
+JPN ,Solar PV,Pathway,,Parameter b,0.32
+JPN ,Solar PV,Pathway,,Starting Year,1990
+JPN ,Wind,Baseline,,Saturation Point,38.5
+JPN ,Wind,Baseline,,Parameter a,-5.66
+JPN ,Wind,Baseline,,Parameter b,0.13
+JPN ,Wind,Baseline,,Starting Year,1990
+JPN ,Wind,Pathway,,Saturation Point,38.5
+JPN ,Wind,Pathway,,Parameter a,-6.8010277
+JPN ,Wind,Pathway,,Parameter b,0.17915612
+JPN ,Wind,Pathway,,Starting Year,1990
+JPN ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+JPN ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+JPN ,Solar PV,Baseline,,Useful Life in Start Year,25
+JPN ,Solar PV,Baseline,,Useful Life in End Year,45
+JPN ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+JPN ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+JPN ,Solar PV,Pathway,,Useful Life in Start Year,25
+JPN ,Solar PV,Pathway,,Useful Life in End Year,45
+JPN ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+JPN ,Wind,Baseline,,"End Year, Retirement Trend",2100
+JPN ,Wind,Baseline,,Useful Life in Start Year,15
+JPN ,Wind,Baseline,,Useful Life in End Year,30
+JPN ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+JPN ,Wind,Pathway,,"End Year, Retirement Trend",2100
+JPN ,Wind,Pathway,,Useful Life in Start Year,15
+JPN ,Wind,Pathway,,Useful Life in End Year,30
+JPN ,Nuclear,Pathway,,Saturation Point,10
+JPN ,Biochar,Baseline,Industry,Saturation Point,23
+JPN ,Biochar,Pathway,Industry,Saturation Point,23
+JPN ,Biofuels,Baseline,,Saturation Point,100
+JPN ,Biofuels,Baseline,,Parameter a,-5.0178492
+JPN ,Biofuels,Baseline,,Parameter b,0.10741785
+JPN ,Biofuels,Baseline,,Starting Year,2000
+JPN ,Solar Thermal,Baseline,Industry,Saturation Point,10
+JPN ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+JPN ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+JPN ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+JPN ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+JPN ,Solar Thermal,Pathway,Industry,Saturation Point,38
+JPN ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+JPN ,Wind | Onshore,Baseline,,% of total wind generation,75%
+JPN ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+JPN ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+JPN ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+JPN ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+JPN ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+JPN ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+JPN ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+JPN ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+JPN ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+JPN ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+JPN ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+JPN ,Grid,Baseline,,Consumption:Generation,0.88
+JPN ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+JPN ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+JPN ,Wind | Onshore,Pathway,,% of total wind generation,75%
+JPN ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+JPN ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+JPN ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+JPN ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+JPN ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+JPN ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+JPN ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+JPN ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+JPN ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+JPN ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+JPN ,Grid,Pathway,,Consumption:Generation,0.88
+JPN ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+JPN ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+INDIA ,Solar PV,Baseline,,Saturation Point,35.9217115
+INDIA ,Solar PV,Baseline,,Parameter a,-7.4600426
+INDIA ,Solar PV,Baseline,,Parameter b,0.17915222
+INDIA ,Solar PV,Baseline,,Starting Year,1990
+INDIA ,Solar PV,Pathway,,Saturation Point,35.9
+INDIA ,Solar PV,Pathway,,Parameter a,-11.5
+INDIA ,Solar PV,Pathway,,Parameter b,0.32
+INDIA ,Solar PV,Pathway,,Starting Year,1990
+INDIA ,Wind,Baseline,,Saturation Point,38.5
+INDIA ,Wind,Baseline,,Parameter a,-5.66
+INDIA ,Wind,Baseline,,Parameter b,0.13
+INDIA ,Wind,Baseline,,Starting Year,1990
+INDIA ,Wind,Pathway,,Saturation Point,38.5
+INDIA ,Wind,Pathway,,Parameter a,-6.8010277
+INDIA ,Wind,Pathway,,Parameter b,0.17915612
+INDIA ,Wind,Pathway,,Starting Year,1990
+INDIA ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+INDIA ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+INDIA ,Solar PV,Baseline,,Useful Life in Start Year,25
+INDIA ,Solar PV,Baseline,,Useful Life in End Year,45
+INDIA ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+INDIA ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+INDIA ,Solar PV,Pathway,,Useful Life in Start Year,25
+INDIA ,Solar PV,Pathway,,Useful Life in End Year,45
+INDIA ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+INDIA ,Wind,Baseline,,"End Year, Retirement Trend",2100
+INDIA ,Wind,Baseline,,Useful Life in Start Year,15
+INDIA ,Wind,Baseline,,Useful Life in End Year,30
+INDIA ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+INDIA ,Wind,Pathway,,"End Year, Retirement Trend",2100
+INDIA ,Wind,Pathway,,Useful Life in Start Year,15
+INDIA ,Wind,Pathway,,Useful Life in End Year,30
+INDIA ,Nuclear,Pathway,,Saturation Point,10
+INDIA ,Biochar,Baseline,Industry,Saturation Point,23
+INDIA ,Biochar,Pathway,Industry,Saturation Point,23
+INDIA ,Biofuels,Baseline,,Saturation Point,100
+INDIA ,Biofuels,Baseline,,Parameter a,-5.0178492
+INDIA ,Biofuels,Baseline,,Parameter b,0.10741785
+INDIA ,Biofuels,Baseline,,Starting Year,2000
+INDIA ,Solar Thermal,Baseline,Industry,Saturation Point,10
+INDIA ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+INDIA ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+INDIA ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+INDIA ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+INDIA ,Solar Thermal,Pathway,Industry,Saturation Point,38
+INDIA ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+INDIA ,Wind | Onshore,Baseline,,% of total wind generation,75%
+INDIA ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+INDIA ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+INDIA ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+INDIA ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+INDIA ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+INDIA ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+INDIA ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+INDIA ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+INDIA ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+INDIA ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+INDIA ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+INDIA ,Grid,Baseline,,Consumption:Generation,0.88
+INDIA ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+INDIA ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+INDIA ,Wind | Onshore,Pathway,,% of total wind generation,75%
+INDIA ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+INDIA ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+INDIA ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+INDIA ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+INDIA ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+INDIA ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+INDIA ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+INDIA ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+INDIA ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+INDIA ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+INDIA ,Grid,Pathway,,Consumption:Generation,0.88
+INDIA ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+INDIA ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+EURASIA ,Solar PV,Baseline,,Saturation Point,35.9217115
+EURASIA ,Solar PV,Baseline,,Parameter a,-7.4600426
+EURASIA ,Solar PV,Baseline,,Parameter b,0.17915222
+EURASIA ,Solar PV,Baseline,,Starting Year,1990
+EURASIA ,Solar PV,Pathway,,Saturation Point,35.9
+EURASIA ,Solar PV,Pathway,,Parameter a,-11.5
+EURASIA ,Solar PV,Pathway,,Parameter b,0.32
+EURASIA ,Solar PV,Pathway,,Starting Year,1990
+EURASIA ,Wind,Baseline,,Saturation Point,38.5
+EURASIA ,Wind,Baseline,,Parameter a,-5.66
+EURASIA ,Wind,Baseline,,Parameter b,0.13
+EURASIA ,Wind,Baseline,,Starting Year,1990
+EURASIA ,Wind,Pathway,,Saturation Point,38.5
+EURASIA ,Wind,Pathway,,Parameter a,-6.8010277
+EURASIA ,Wind,Pathway,,Parameter b,0.17915612
+EURASIA ,Wind,Pathway,,Starting Year,1990
+EURASIA ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+EURASIA ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+EURASIA ,Solar PV,Baseline,,Useful Life in Start Year,25
+EURASIA ,Solar PV,Baseline,,Useful Life in End Year,45
+EURASIA ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+EURASIA ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+EURASIA ,Solar PV,Pathway,,Useful Life in Start Year,25
+EURASIA ,Solar PV,Pathway,,Useful Life in End Year,45
+EURASIA ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+EURASIA ,Wind,Baseline,,"End Year, Retirement Trend",2100
+EURASIA ,Wind,Baseline,,Useful Life in Start Year,15
+EURASIA ,Wind,Baseline,,Useful Life in End Year,30
+EURASIA ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+EURASIA ,Wind,Pathway,,"End Year, Retirement Trend",2100
+EURASIA ,Wind,Pathway,,Useful Life in Start Year,15
+EURASIA ,Wind,Pathway,,Useful Life in End Year,30
+EURASIA ,Nuclear,Pathway,,Saturation Point,10
+EURASIA ,Biochar,Baseline,Industry,Saturation Point,23
+EURASIA ,Biochar,Pathway,Industry,Saturation Point,23
+EURASIA ,Biofuels,Baseline,,Saturation Point,100
+EURASIA ,Biofuels,Baseline,,Parameter a,-5.0178492
+EURASIA ,Biofuels,Baseline,,Parameter b,0.10741785
+EURASIA ,Biofuels,Baseline,,Starting Year,2000
+EURASIA ,Solar Thermal,Baseline,Industry,Saturation Point,10
+EURASIA ,Solar Thermal,Pathway,Industry,Saturation Point,38
+EURASIA ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+EURASIA ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+EURASIA ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+EURASIA ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+EURASIA ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+EURASIA ,Wind | Onshore,Baseline,,% of total wind generation,75%
+EURASIA ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+EURASIA ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+EURASIA ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+EURASIA ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+EURASIA ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+EURASIA ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+EURASIA ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+EURASIA ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+EURASIA ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+EURASIA ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+EURASIA ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+EURASIA ,Grid,Baseline,,Consumption:Generation,0.88
+EURASIA ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+EURASIA ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+EURASIA ,Wind | Onshore,Pathway,,% of total wind generation,75%
+EURASIA ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+EURASIA ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+EURASIA ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+EURASIA ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+EURASIA ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+EURASIA ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+EURASIA ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+EURASIA ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+EURASIA ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+EURASIA ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+EURASIA ,Grid,Pathway,,Consumption:Generation,0.88
+EURASIA ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+EURASIA ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+EUR ,Solar PV,Baseline,,Saturation Point,35.9217115
+EUR ,Solar PV,Baseline,,Parameter a,-7.4600426
+EUR ,Solar PV,Baseline,,Parameter b,0.17915222
+EUR ,Solar PV,Baseline,,Starting Year,1990
+EUR ,Solar PV,Pathway,,Saturation Point,35.9
+EUR ,Solar PV,Pathway,,Parameter a,-11.5
+EUR ,Solar PV,Pathway,,Parameter b,0.32
+EUR ,Solar PV,Pathway,,Starting Year,1990
+EUR ,Wind,Baseline,,Saturation Point,38.5
+EUR ,Wind,Baseline,,Parameter a,-5.66
+EUR ,Wind,Baseline,,Parameter b,0.13
+EUR ,Wind,Baseline,,Starting Year,1990
+EUR ,Wind,Pathway,,Saturation Point,38.5
+EUR ,Wind,Pathway,,Parameter a,-6.8010277
+EUR ,Wind,Pathway,,Parameter b,0.17915612
+EUR ,Wind,Pathway,,Starting Year,1990
+EUR ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+EUR ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+EUR ,Solar PV,Baseline,,Useful Life in Start Year,25
+EUR ,Solar PV,Baseline,,Useful Life in End Year,45
+EUR ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+EUR ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+EUR ,Solar PV,Pathway,,Useful Life in Start Year,25
+EUR ,Solar PV,Pathway,,Useful Life in End Year,45
+EUR ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+EUR ,Wind,Baseline,,"End Year, Retirement Trend",2100
+EUR ,Wind,Baseline,,Useful Life in Start Year,15
+EUR ,Wind,Baseline,,Useful Life in End Year,30
+EUR ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+EUR ,Wind,Pathway,,"End Year, Retirement Trend",2100
+EUR ,Wind,Pathway,,Useful Life in Start Year,15
+EUR ,Wind,Pathway,,Useful Life in End Year,30
+EUR ,Nuclear,Pathway,,Saturation Point,10
+EUR ,Biochar,Baseline,Industry,Saturation Point,23
+EUR ,Biochar,Pathway,Industry,Saturation Point,23
+EUR ,Biofuels,Baseline,,Saturation Point,100
+EUR ,Biofuels,Baseline,,Parameter a,-5.0178492
+EUR ,Biofuels,Baseline,,Parameter b,0.10741785
+EUR ,Biofuels,Baseline,,Starting Year,2000
+EUR ,Solar Thermal,Pathway,Industry,Saturation Point,38
+EUR ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+EUR ,Solar Thermal,Baseline,Industry,Saturation Point,10
+EUR ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+EUR ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+EUR ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+EUR ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+EUR ,Wind | Onshore,Baseline,,% of total wind generation,75%
+EUR ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+EUR ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+EUR ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+EUR ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+EUR ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+EUR ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+EUR ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+EUR ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+EUR ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+EUR ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+EUR ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+EUR ,Grid,Baseline,,Consumption:Generation,0.88
+EUR ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+EUR ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+EUR ,Wind | Onshore,Pathway,,% of total wind generation,75%
+EUR ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+EUR ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+EUR ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+EUR ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+EUR ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+EUR ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+EUR ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+EUR ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+EUR ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+EUR ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+EUR ,Grid,Pathway,,Consumption:Generation,0.88
+EUR ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+EUR ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+EU ,Solar PV,Baseline,,Saturation Point,35.9217115
+EU ,Solar PV,Baseline,,Parameter a,-7.4600426
+EU ,Solar PV,Baseline,,Parameter b,0.17915222
+EU ,Solar PV,Baseline,,Starting Year,1990
+EU ,Solar PV,Pathway,,Saturation Point,35.9
+EU ,Solar PV,Pathway,,Parameter a,-11.5
+EU ,Solar PV,Pathway,,Parameter b,0.32
+EU ,Solar PV,Pathway,,Starting Year,1990
+EU ,Wind,Baseline,,Saturation Point,38.5
+EU ,Wind,Baseline,,Parameter a,-5.66
+EU ,Wind,Baseline,,Parameter b,0.13
+EU ,Wind,Baseline,,Starting Year,1990
+EU ,Wind,Pathway,,Saturation Point,38.5
+EU ,Wind,Pathway,,Parameter a,-6.8010277
+EU ,Wind,Pathway,,Parameter b,0.17915612
+EU ,Wind,Pathway,,Starting Year,1990
+EU ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+EU ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+EU ,Solar PV,Baseline,,Useful Life in Start Year,25
+EU ,Solar PV,Baseline,,Useful Life in End Year,45
+EU ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+EU ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+EU ,Solar PV,Pathway,,Useful Life in Start Year,25
+EU ,Solar PV,Pathway,,Useful Life in End Year,45
+EU ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+EU ,Wind,Baseline,,"End Year, Retirement Trend",2100
+EU ,Wind,Baseline,,Useful Life in Start Year,15
+EU ,Wind,Baseline,,Useful Life in End Year,30
+EU ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+EU ,Wind,Pathway,,"End Year, Retirement Trend",2100
+EU ,Wind,Pathway,,Useful Life in Start Year,15
+EU ,Wind,Pathway,,Useful Life in End Year,30
+EU ,Nuclear,Pathway,,Saturation Point,10
+EU ,Biochar,Baseline,Industry,Saturation Point,23
+EU ,Biochar,Pathway,Industry,Saturation Point,23
+EU ,Biofuels,Baseline,,Saturation Point,100
+EU ,Biofuels,Baseline,,Parameter a,-5.0178492
+EU ,Biofuels,Baseline,,Parameter b,0.10741785
+EU ,Biofuels,Baseline,,Starting Year,2000
+EU ,Solar Thermal,Pathway,Industry,Saturation Point,38
+EU ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+EU ,Solar Thermal,Baseline,Industry,Saturation Point,10
+EU ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+EU ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+EU ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+EU ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+EU ,Wind | Onshore,Baseline,,% of total wind generation,75%
+EU ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+EU ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+EU ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+EU ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+EU ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+EU ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+EU ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+EU ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+EU ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+EU ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+EU ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+EU ,Grid,Baseline,,Consumption:Generation,0.88
+EU ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+EU ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+EU ,Wind | Onshore,Pathway,,% of total wind generation,75%
+EU ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+EU ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+EU ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+EU ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+EU ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+EU ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+EU ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+EU ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+EU ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+EU ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+EU ,Grid,Pathway,,Consumption:Generation,0.88
+EU ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+EU ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+DevelopingECO ,Solar PV,Baseline,,Saturation Point,35.9217115
+DevelopingECO ,Solar PV,Baseline,,Parameter a,-7.4600426
+DevelopingECO ,Solar PV,Baseline,,Parameter b,0.17915222
+DevelopingECO ,Solar PV,Baseline,,Starting Year,1990
+DevelopingECO ,Solar PV,Pathway,,Saturation Point,35.9
+DevelopingECO ,Solar PV,Pathway,,Parameter a,-11.5
+DevelopingECO ,Solar PV,Pathway,,Parameter b,0.32
+DevelopingECO ,Solar PV,Pathway,,Starting Year,1990
+DevelopingECO ,Wind,Baseline,,Saturation Point,38.5
+DevelopingECO ,Wind,Baseline,,Parameter a,-5.66
+DevelopingECO ,Wind,Baseline,,Parameter b,0.13
+DevelopingECO ,Wind,Baseline,,Starting Year,1990
+DevelopingECO ,Wind,Pathway,,Saturation Point,38.5
+DevelopingECO ,Wind,Pathway,,Parameter a,-6.8010277
+DevelopingECO ,Wind,Pathway,,Parameter b,0.17915612
+DevelopingECO ,Wind,Pathway,,Starting Year,1990
+DevelopingECO ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+DevelopingECO ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+DevelopingECO ,Solar PV,Baseline,,Useful Life in Start Year,25
+DevelopingECO ,Solar PV,Baseline,,Useful Life in End Year,45
+DevelopingECO ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+DevelopingECO ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+DevelopingECO ,Solar PV,Pathway,,Useful Life in Start Year,25
+DevelopingECO ,Solar PV,Pathway,,Useful Life in End Year,45
+DevelopingECO ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+DevelopingECO ,Wind,Baseline,,"End Year, Retirement Trend",2100
+DevelopingECO ,Wind,Baseline,,Useful Life in Start Year,15
+DevelopingECO ,Wind,Baseline,,Useful Life in End Year,30
+DevelopingECO ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+DevelopingECO ,Wind,Pathway,,"End Year, Retirement Trend",2100
+DevelopingECO ,Wind,Pathway,,Useful Life in Start Year,15
+DevelopingECO ,Wind,Pathway,,Useful Life in End Year,30
+DevelopingECO ,Nuclear,Pathway,,Saturation Point,10
+DevelopingECO ,Biochar,Baseline,Industry,Saturation Point,23
+DevelopingECO ,Biochar,Pathway,Industry,Saturation Point,23
+DevelopingECO ,Solar Thermal,Pathway,Industry,Saturation Point,38
+DevelopingECO ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+DevelopingECO ,Biofuels,Baseline,,Saturation Point,100
+DevelopingECO ,Biofuels,Baseline,,Parameter a,-5.0178492
+DevelopingECO ,Biofuels,Baseline,,Parameter b,0.10741785
+DevelopingECO ,Biofuels,Baseline,,Starting Year,2000
+DevelopingECO ,Solar Thermal,Baseline,Industry,Saturation Point,10
+DevelopingECO ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+DevelopingECO ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+DevelopingECO ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+DevelopingECO ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+DevelopingECO ,Wind | Onshore,Baseline,,% of total wind generation,75%
+DevelopingECO ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+DevelopingECO ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+DevelopingECO ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+DevelopingECO ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+DevelopingECO ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+DevelopingECO ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+DevelopingECO ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+DevelopingECO ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+DevelopingECO ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+DevelopingECO ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+DevelopingECO ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+DevelopingECO ,Grid,Baseline,,Consumption:Generation,0.88
+DevelopingECO ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+DevelopingECO ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+DevelopingECO ,Wind | Onshore,Pathway,,% of total wind generation,75%
+DevelopingECO ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+DevelopingECO ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+DevelopingECO ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+DevelopingECO ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+DevelopingECO ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+DevelopingECO ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+DevelopingECO ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+DevelopingECO ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+DevelopingECO ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+DevelopingECO ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+DevelopingECO ,Grid,Pathway,,Consumption:Generation,0.88
+DevelopingECO ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+DevelopingECO ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+CSAM ,Solar Thermal,Pathway,Industry,Saturation Point,38
+CSAM ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+CSAM ,Solar PV,Baseline,,Saturation Point,35.92171153
+CSAM ,Solar PV,Baseline,,Parameter a,-7.460042634
+CSAM ,Solar PV,Baseline,,Parameter b,0.179152221
+CSAM ,Solar PV,Baseline,,Starting Year,1990
+CSAM ,Solar PV,Pathway,,Saturation Point,35.9
+CSAM ,Solar PV,Pathway,,Parameter a,-11.5
+CSAM ,Solar PV,Pathway,,Parameter b,0.32
+CSAM ,Solar PV,Pathway,,Starting Year,1990
+CSAM ,Wind,Baseline,,Saturation Point,38.51155202
+CSAM ,Wind,Baseline,,Parameter a,-5.656659517
+CSAM ,Wind,Baseline,,Parameter b,0.129329828
+CSAM ,Wind,Baseline,,Starting Year,1990
+CSAM ,Wind,Pathway,,Saturation Point,38.51155202
+CSAM ,Wind,Pathway,,Parameter a,-6.801027663
+CSAM ,Wind,Pathway,,Parameter b,0.179156118
+CSAM ,Wind,Pathway,,Starting Year,1990
+CSAM ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+CSAM ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+CSAM ,Solar PV,Baseline,,Useful Life in Start Year,25
+CSAM ,Solar PV,Baseline,,Useful Life in End Year,45
+CSAM ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+CSAM ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+CSAM ,Solar PV,Pathway,,Useful Life in Start Year,25
+CSAM ,Solar PV,Pathway,,Useful Life in End Year,45
+CSAM ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+CSAM ,Wind,Baseline,,"End Year, Retirement Trend",2100
+CSAM ,Wind,Baseline,,Useful Life in Start Year,15
+CSAM ,Wind,Baseline,,Useful Life in End Year,30
+CSAM ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+CSAM ,Wind,Pathway,,"End Year, Retirement Trend",2100
+CSAM ,Wind,Pathway,,Useful Life in Start Year,15
+CSAM ,Wind,Pathway,,Useful Life in End Year,30
+CSAM ,Nuclear,Pathway,,Saturation Point,10
+CSAM ,Biochar,Baseline,Industry,Saturation Point,23
+CSAM ,Biochar,Pathway,Industry,Saturation Point,23
+CSAM ,Biofuels,Baseline,,Saturation Point,100
+CSAM ,Biofuels,Baseline,,Parameter a,-5.017849236
+CSAM ,Biofuels,Baseline,,Parameter b,0.107417845
+CSAM ,Biofuels,Baseline,,Starting Year,2000
+CSAM ,Biofuels,Baseline,,Saturation Point,100
+CSAM ,Wind | Onshore,Baseline,,% of total wind generation,75%
+CSAM ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+CSAM ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+CSAM ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+CSAM ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+CSAM ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+CSAM ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+CSAM ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+CSAM ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+CSAM ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+CSAM ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+CSAM ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+CSAM ,Grid,Baseline,,Consumption:Generation,0.88
+CSAM ,Solar Thermal,Baseline,Industry,Saturation Point,10
+CSAM ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+CSAM ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+CSAM ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+CSAM ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+CSAM ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+CSAM ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+CSAM ,Wind | Onshore,Pathway,,% of total wind generation,75%
+CSAM ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+CSAM ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+CSAM ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+CSAM ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+CSAM ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+CSAM ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+CSAM ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+CSAM ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+CSAM ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+CSAM ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+CSAM ,Grid,Pathway,,Consumption:Generation,0.88
+CSAM ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+CSAM ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+CHINA ,Solar Thermal,Pathway,Industry,Saturation Point,38
+CHINA ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+CHINA ,Solar PV,Baseline,,Saturation Point,35.9217115
+CHINA ,Solar PV,Baseline,,Parameter a,-7.4600426
+CHINA ,Solar PV,Baseline,,Parameter b,0.17915222
+CHINA ,Solar PV,Baseline,,Starting Year,1990
+CHINA ,Solar PV,Pathway,,Saturation Point,35.9
+CHINA ,Solar PV,Pathway,,Parameter a,-11.5
+CHINA ,Solar PV,Pathway,,Parameter b,0.32
+CHINA ,Solar PV,Pathway,,Starting Year,1990
+CHINA ,Wind,Baseline,,Saturation Point,38.5
+CHINA ,Wind,Baseline,,Parameter a,-5.66
+CHINA ,Wind,Baseline,,Parameter b,0.13
+CHINA ,Wind,Baseline,,Starting Year,1990
+CHINA ,Wind,Pathway,,Saturation Point,38.5
+CHINA ,Wind,Pathway,,Parameter a,-6.8010277
+CHINA ,Wind,Pathway,,Parameter b,0.17915612
+CHINA ,Wind,Pathway,,Starting Year,1990
+CHINA ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+CHINA ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+CHINA ,Solar PV,Baseline,,Useful Life in Start Year,25
+CHINA ,Solar PV,Baseline,,Useful Life in End Year,45
+CHINA ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+CHINA ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+CHINA ,Solar PV,Pathway,,Useful Life in Start Year,25
+CHINA ,Solar PV,Pathway,,Useful Life in End Year,45
+CHINA ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+CHINA ,Wind,Baseline,,"End Year, Retirement Trend",2100
+CHINA ,Wind,Baseline,,Useful Life in Start Year,15
+CHINA ,Wind,Baseline,,Useful Life in End Year,30
+CHINA ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+CHINA ,Wind,Pathway,,"End Year, Retirement Trend",2100
+CHINA ,Wind,Pathway,,Useful Life in Start Year,15
+CHINA ,Wind,Pathway,,Useful Life in End Year,30
+CHINA ,Nuclear,Pathway,,Saturation Point,10
+CHINA ,Biochar,Baseline,Industry,Saturation Point,23
+CHINA ,Biochar,Pathway,Industry,Saturation Point,23
+CHINA ,Biofuels,Baseline,,Saturation Point,100
+CHINA ,Biofuels,Baseline,,Parameter a,-5.0178492
+CHINA ,Biofuels,Baseline,,Parameter b,0.10741785
+CHINA ,Biofuels,Baseline,,Starting Year,2000
+CHINA ,Solar Thermal,Baseline,Industry,Saturation Point,10
+CHINA ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+CHINA ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+CHINA ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+CHINA ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+CHINA ,Wind | Onshore,Baseline,,% of total wind generation,75%
+CHINA ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+CHINA ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+CHINA ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+CHINA ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+CHINA ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+CHINA ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+CHINA ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+CHINA ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+CHINA ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+CHINA ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+CHINA ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+CHINA ,Grid,Baseline,,Consumption:Generation,0.88
+CHINA ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+CHINA ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+CHINA ,Wind | Onshore,Pathway,,% of total wind generation,75%
+CHINA ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+CHINA ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+CHINA ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+CHINA ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+CHINA ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+CHINA ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+CHINA ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+CHINA ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+CHINA ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+CHINA ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+CHINA ,Grid,Pathway,,Consumption:Generation,0.88
+CHINA ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+CHINA ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+BRAZIL ,Solar Thermal,Pathway,Industry,Saturation Point,38
+BRAZIL ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+BRAZIL ,Solar PV,Baseline,,Saturation Point,35.9217115
+BRAZIL ,Solar PV,Baseline,,Parameter a,-7.4600426
+BRAZIL ,Solar PV,Baseline,,Parameter b,0.17915222
+BRAZIL ,Solar PV,Baseline,,Starting Year,1990
+BRAZIL ,Solar PV,Pathway,,Saturation Point,35.9
+BRAZIL ,Solar PV,Pathway,,Parameter a,-11.5
+BRAZIL ,Solar PV,Pathway,,Parameter b,0.32
+BRAZIL ,Solar PV,Pathway,,Starting Year,1990
+BRAZIL ,Wind,Baseline,,Saturation Point,38.5
+BRAZIL ,Wind,Baseline,,Parameter a,-5.66
+BRAZIL ,Wind,Baseline,,Parameter b,0.13
+BRAZIL ,Wind,Baseline,,Starting Year,1990
+BRAZIL ,Wind,Pathway,,Saturation Point,38.5
+BRAZIL ,Wind,Pathway,,Parameter a,-6.8010277
+BRAZIL ,Wind,Pathway,,Parameter b,0.17915612
+BRAZIL ,Wind,Pathway,,Starting Year,1990
+BRAZIL ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+BRAZIL ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+BRAZIL ,Solar PV,Baseline,,Useful Life in Start Year,25
+BRAZIL ,Solar PV,Baseline,,Useful Life in End Year,45
+BRAZIL ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+BRAZIL ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+BRAZIL ,Solar PV,Pathway,,Useful Life in Start Year,25
+BRAZIL ,Solar PV,Pathway,,Useful Life in End Year,45
+BRAZIL ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+BRAZIL ,Wind,Baseline,,"End Year, Retirement Trend",2100
+BRAZIL ,Wind,Baseline,,Useful Life in Start Year,15
+BRAZIL ,Wind,Baseline,,Useful Life in End Year,30
+BRAZIL ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+BRAZIL ,Wind,Pathway,,"End Year, Retirement Trend",2100
+BRAZIL ,Wind,Pathway,,Useful Life in Start Year,15
+BRAZIL ,Wind,Pathway,,Useful Life in End Year,30
+BRAZIL ,Nuclear,Pathway,,Saturation Point,10
+BRAZIL ,Biochar,Baseline,Industry,Saturation Point,23
+BRAZIL ,Biochar,Pathway,Industry,Saturation Point,23
+BRAZIL ,Biofuels,Baseline,,Saturation Point,100
+BRAZIL ,Biofuels,Baseline,,Parameter a,-5.0178492
+BRAZIL ,Biofuels,Baseline,,Parameter b,0.10741785
+BRAZIL ,Biofuels,Baseline,,Starting Year,2000
+BRAZIL ,Wind | Onshore,Baseline,,% of total wind generation,75%
+BRAZIL ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+BRAZIL ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+BRAZIL ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+BRAZIL ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+BRAZIL ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+BRAZIL ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+BRAZIL ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+BRAZIL ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+BRAZIL ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+BRAZIL ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+BRAZIL ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+BRAZIL ,Grid,Baseline,,Consumption:Generation,0.88
+BRAZIL ,Solar Thermal,Baseline,Industry,Saturation Point,10
+BRAZIL ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+BRAZIL ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+BRAZIL ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+BRAZIL ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+BRAZIL ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+BRAZIL ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+BRAZIL ,Wind | Onshore,Pathway,,% of total wind generation,75%
+BRAZIL ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+BRAZIL ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+BRAZIL ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+BRAZIL ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+BRAZIL ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+BRAZIL ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+BRAZIL ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+BRAZIL ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+BRAZIL ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+BRAZIL ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+BRAZIL ,Grid,Pathway,,Consumption:Generation,0.88
+BRAZIL ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+BRAZIL ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+ASIAPAC ,Solar Thermal,Pathway,Industry,Saturation Point,38
+ASIAPAC ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+ASIAPAC ,Solar PV,Baseline,,Saturation Point,35.9217115
+ASIAPAC ,Solar PV,Baseline,,Parameter a,-7.4600426
+ASIAPAC ,Solar PV,Baseline,,Parameter b,0.17915222
+ASIAPAC ,Solar PV,Baseline,,Starting Year,1990
+ASIAPAC ,Solar PV,Pathway,,Saturation Point,35.9
+ASIAPAC ,Solar PV,Pathway,,Parameter a,-11.5
+ASIAPAC ,Solar PV,Pathway,,Parameter b,0.32
+ASIAPAC ,Solar PV,Pathway,,Starting Year,1990
+ASIAPAC ,Wind,Baseline,,Saturation Point,38.5
+ASIAPAC ,Wind,Baseline,,Parameter a,-5.66
+ASIAPAC ,Wind,Baseline,,Parameter b,0.13
+ASIAPAC ,Wind,Baseline,,Starting Year,1990
+ASIAPAC ,Wind,Pathway,,Saturation Point,38.5
+ASIAPAC ,Wind,Pathway,,Parameter a,-6.8010277
+ASIAPAC ,Wind,Pathway,,Parameter b,0.17915612
+ASIAPAC ,Wind,Pathway,,Starting Year,1990
+ASIAPAC ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+ASIAPAC ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+ASIAPAC ,Solar PV,Baseline,,Useful Life in Start Year,25
+ASIAPAC ,Solar PV,Baseline,,Useful Life in End Year,45
+ASIAPAC ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+ASIAPAC ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+ASIAPAC ,Solar PV,Pathway,,Useful Life in Start Year,25
+ASIAPAC ,Solar PV,Pathway,,Useful Life in End Year,45
+ASIAPAC ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+ASIAPAC ,Wind,Baseline,,"End Year, Retirement Trend",2100
+ASIAPAC ,Wind,Baseline,,Useful Life in Start Year,15
+ASIAPAC ,Wind,Baseline,,Useful Life in End Year,30
+ASIAPAC ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+ASIAPAC ,Wind,Pathway,,"End Year, Retirement Trend",2100
+ASIAPAC ,Wind,Pathway,,Useful Life in Start Year,15
+ASIAPAC ,Wind,Pathway,,Useful Life in End Year,30
+ASIAPAC ,Nuclear,Pathway,,Saturation Point,10
+ASIAPAC ,Biochar,Baseline,Industry,Saturation Point,23
+ASIAPAC ,Biochar,Pathway,Industry,Saturation Point,23
+ASIAPAC ,Biofuels,Baseline,,Saturation Point,100
+ASIAPAC ,Biofuels,Baseline,,Parameter a,-5.0178492
+ASIAPAC ,Biofuels,Baseline,,Parameter b,0.10741785
+ASIAPAC ,Biofuels,Baseline,,Starting Year,2000
+ASIAPAC ,Wind | Onshore,Baseline,,% of total wind generation,75%
+ASIAPAC ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+ASIAPAC ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+ASIAPAC ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+ASIAPAC ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+ASIAPAC ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+ASIAPAC ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+ASIAPAC ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+ASIAPAC ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+ASIAPAC ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+ASIAPAC ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+ASIAPAC ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+ASIAPAC ,Grid,Baseline,,Consumption:Generation,0.88
+ASIAPAC ,Solar Thermal,Baseline,Industry,Saturation Point,10
+ASIAPAC ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+ASIAPAC ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+ASIAPAC ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+ASIAPAC ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+ASIAPAC ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+ASIAPAC ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+ASIAPAC ,Wind | Onshore,Pathway,,% of total wind generation,75%
+ASIAPAC ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+ASIAPAC ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+ASIAPAC ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+ASIAPAC ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+ASIAPAC ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+ASIAPAC ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+ASIAPAC ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+ASIAPAC ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+ASIAPAC ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+ASIAPAC ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+ASIAPAC ,Grid,Pathway,,Consumption:Generation,0.88
+ASIAPAC ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+ASIAPAC ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+ASEAN ,Solar Thermal,Pathway,Industry,Saturation Point,38
+ASEAN ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+ASEAN ,Solar PV,Baseline,,Saturation Point,35.9217115
+ASEAN ,Solar PV,Baseline,,Parameter a,-7.4600426
+ASEAN ,Solar PV,Baseline,,Parameter b,0.17915222
+ASEAN ,Solar PV,Baseline,,Starting Year,1990
+ASEAN ,Solar PV,Pathway,,Saturation Point,35.9
+ASEAN ,Solar PV,Pathway,,Parameter a,-11.5
+ASEAN ,Solar PV,Pathway,,Parameter b,0.32
+ASEAN ,Solar PV,Pathway,,Starting Year,1990
+ASEAN ,Wind,Baseline,,Saturation Point,38.5
+ASEAN ,Wind,Baseline,,Parameter a,-5.66
+ASEAN ,Wind,Baseline,,Parameter b,0.13
+ASEAN ,Wind,Baseline,,Starting Year,1990
+ASEAN ,Wind,Pathway,,Saturation Point,38.5
+ASEAN ,Wind,Pathway,,Parameter a,-6.8010277
+ASEAN ,Wind,Pathway,,Parameter b,0.17915612
+ASEAN ,Wind,Pathway,,Starting Year,1990
+ASEAN ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+ASEAN ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+ASEAN ,Solar PV,Baseline,,Useful Life in Start Year,25
+ASEAN ,Solar PV,Baseline,,Useful Life in End Year,45
+ASEAN ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+ASEAN ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+ASEAN ,Solar PV,Pathway,,Useful Life in Start Year,25
+ASEAN ,Solar PV,Pathway,,Useful Life in End Year,45
+ASEAN ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+ASEAN ,Wind,Baseline,,"End Year, Retirement Trend",2100
+ASEAN ,Wind,Baseline,,Useful Life in Start Year,15
+ASEAN ,Wind,Baseline,,Useful Life in End Year,30
+ASEAN ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+ASEAN ,Wind,Pathway,,"End Year, Retirement Trend",2100
+ASEAN ,Wind,Pathway,,Useful Life in Start Year,15
+ASEAN ,Wind,Pathway,,Useful Life in End Year,30
+ASEAN ,Nuclear,Pathway,,Saturation Point,10
+ASEAN ,Biochar,Baseline,Industry,Saturation Point,23
+ASEAN ,Biochar,Pathway,Industry,Saturation Point,23
+ASEAN ,Biofuels,Baseline,,Saturation Point,100
+ASEAN ,Biofuels,Baseline,,Parameter a,-5.0178492
+ASEAN ,Biofuels,Baseline,,Parameter b,0.10741785
+ASEAN ,Biofuels,Baseline,,Starting Year,2000
+ASEAN ,Solar Thermal,Baseline,Industry,Saturation Point,10
+ASEAN ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+ASEAN ,Wind | Onshore,Baseline,,% of total wind generation,75%
+ASEAN ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+ASEAN ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+ASEAN ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+ASEAN ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+ASEAN ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+ASEAN ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+ASEAN ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+ASEAN ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+ASEAN ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+ASEAN ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+ASEAN ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+ASEAN ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+ASEAN ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+ASEAN ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+ASEAN ,Grid,Baseline,,Consumption:Generation,0.88
+ASEAN ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+ASEAN ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+ASEAN ,Wind | Onshore,Pathway,,% of total wind generation,75%
+ASEAN ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+ASEAN ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+ASEAN ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+ASEAN ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+ASEAN ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+ASEAN ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+ASEAN ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+ASEAN ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+ASEAN ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+ASEAN ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+ASEAN ,Grid,Pathway,,Consumption:Generation,0.88
+ASEAN ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+ASEAN ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+Africa ,Solar Thermal,Pathway,Industry,Saturation Point,38
+Africa ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+Africa ,Solar PV,Baseline,,Saturation Point,35.9217115
+Africa ,Solar PV,Baseline,,Parameter a,-7.4600426
+Africa ,Solar PV,Baseline,,Parameter b,0.17915222
+Africa ,Solar PV,Baseline,,Starting Year,1990
+Africa ,Solar PV,Pathway,,Saturation Point,35.9
+Africa ,Solar PV,Pathway,,Parameter a,-11.5
+Africa ,Solar PV,Pathway,,Parameter b,0.32
+Africa ,Solar PV,Pathway,,Starting Year,1990
+Africa ,Wind,Baseline,,Saturation Point,38.5
+Africa ,Wind,Baseline,,Parameter a,-5.66
+Africa ,Wind,Baseline,,Parameter b,0.13
+Africa ,Wind,Baseline,,Starting Year,1990
+Africa ,Wind,Pathway,,Saturation Point,38.5
+Africa ,Wind,Pathway,,Parameter a,-6.8010277
+Africa ,Wind,Pathway,,Parameter b,0.17915612
+Africa ,Wind,Pathway,,Starting Year,1990
+Africa ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+Africa ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+Africa ,Solar PV,Baseline,,Useful Life in Start Year,25
+Africa ,Solar PV,Baseline,,Useful Life in End Year,45
+Africa ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+Africa ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+Africa ,Solar PV,Pathway,,Useful Life in Start Year,25
+Africa ,Solar PV,Pathway,,Useful Life in End Year,45
+Africa ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+Africa ,Wind,Baseline,,"End Year, Retirement Trend",2100
+Africa ,Wind,Baseline,,Useful Life in Start Year,15
+Africa ,Wind,Baseline,,Useful Life in End Year,30
+Africa ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+Africa ,Wind,Pathway,,"End Year, Retirement Trend",2100
+Africa ,Wind,Pathway,,Useful Life in Start Year,15
+Africa ,Wind,Pathway,,Useful Life in End Year,30
+Africa ,Nuclear,Pathway,,Saturation Point,10
+Africa ,Biochar,Baseline,Industry,Saturation Point,23
+Africa ,Biochar,Pathway,Industry,Saturation Point,23
+Africa ,Wind | Onshore,Baseline,,% of total wind generation,75%
+Africa ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+Africa ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+Africa ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+Africa ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+Africa ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+Africa ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+Africa ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+Africa ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+Africa ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+Africa ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+Africa ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+Africa ,Grid,Baseline,,Consumption:Generation,0.88
+Africa ,Biofuels,Baseline,,Saturation Point,100
+Africa ,Biofuels,Baseline,,Parameter a,-5.0178492
+Africa ,Biofuels,Baseline,,Parameter b,0.10741785
+Africa ,Biofuels,Baseline,,Starting Year,2000
+Africa ,Solar Thermal,Baseline,Industry,Saturation Point,10
+Africa ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+Africa ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+Africa ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+Africa ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+Africa ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+Africa ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+Africa ,Wind | Onshore,Pathway,,% of total wind generation,75%
+Africa ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+Africa ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+Africa ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+Africa ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+Africa ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+Africa ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+Africa ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+Africa ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+Africa ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+Africa ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+Africa ,Grid,Pathway,,Consumption:Generation,0.88
+Africa ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+Africa ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
+AdvancedECO ,Solar Thermal,Pathway,Industry,Saturation Point,38
+AdvancedECO ,Solar Thermal,Pathway,Buildings,Saturation Point,100
+AdvancedECO ,Solar PV,Baseline,,Saturation Point,35.9217115
+AdvancedECO ,Solar PV,Baseline,,Parameter a,-7.4600426
+AdvancedECO ,Solar PV,Baseline,,Parameter b,0.17915222
+AdvancedECO ,Solar PV,Baseline,,Starting Year,1990
+AdvancedECO ,Solar PV,Pathway,,Saturation Point,35.9
+AdvancedECO ,Solar PV,Pathway,,Parameter a,-11.5
+AdvancedECO ,Solar PV,Pathway,,Parameter b,0.32
+AdvancedECO ,Solar PV,Pathway,,Starting Year,1990
+AdvancedECO ,Wind,Baseline,,Saturation Point,38.5
+AdvancedECO ,Wind,Baseline,,Parameter a,-5.66
+AdvancedECO ,Wind,Baseline,,Parameter b,0.13
+AdvancedECO ,Wind,Baseline,,Starting Year,1990
+AdvancedECO ,Wind,Pathway,,Saturation Point,38.5
+AdvancedECO ,Wind,Pathway,,Parameter a,-6.8010277
+AdvancedECO ,Wind,Pathway,,Parameter b,0.17915612
+AdvancedECO ,Wind,Pathway,,Starting Year,1990
+AdvancedECO ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
+AdvancedECO ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
+AdvancedECO ,Solar PV,Baseline,,Useful Life in Start Year,25
+AdvancedECO ,Solar PV,Baseline,,Useful Life in End Year,45
+AdvancedECO ,Solar PV,Pathway,,"Start Year, Retirement Trend",1990
+AdvancedECO ,Solar PV,Pathway,,"End Year, Retirement Trend",2100
+AdvancedECO ,Solar PV,Pathway,,Useful Life in Start Year,25
+AdvancedECO ,Solar PV,Pathway,,Useful Life in End Year,45
+AdvancedECO ,Wind,Baseline,,"Start Year, Retirement Trend",1990
+AdvancedECO ,Wind,Baseline,,"End Year, Retirement Trend",2100
+AdvancedECO ,Wind,Baseline,,Useful Life in Start Year,15
+AdvancedECO ,Wind,Baseline,,Useful Life in End Year,30
+AdvancedECO ,Wind,Pathway,,"Start Year, Retirement Trend",1990
+AdvancedECO ,Wind,Pathway,,"End Year, Retirement Trend",2100
+AdvancedECO ,Wind,Pathway,,Useful Life in Start Year,15
+AdvancedECO ,Wind,Pathway,,Useful Life in End Year,30
+AdvancedECO ,Nuclear,Pathway,,Saturation Point,10
+AdvancedECO ,Biochar,Baseline,Industry,Saturation Point,23
+AdvancedECO ,Biochar,Pathway,Industry,Saturation Point,23
+AdvancedECO ,Biofuels,Baseline,,Saturation Point,100
+AdvancedECO ,Biofuels,Baseline,,Parameter a,-5.0178492
+AdvancedECO ,Biofuels,Baseline,,Parameter b,0.10741785
+AdvancedECO ,Solar Thermal,Baseline,Industry,Saturation Point,10
+AdvancedECO ,Biofuels,Baseline,,Starting Year,2000
+AdvancedECO ,Solar Thermal,Baseline,Buildings,Saturation Point,100
+AdvancedECO ,Wind | Onshore,Baseline,,% of total wind generation,75%
+AdvancedECO ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
+AdvancedECO ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
+AdvancedECO ,Wind | Offshore,Baseline,,"Capacity factor, end year",30
+AdvancedECO ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
+AdvancedECO ,Wind | Offshore,Baseline,,"Capacity factor, end year",45
+AdvancedECO ,Solar PV | Rooftop,Baseline,,"Capacity factor, start year",10
+AdvancedECO ,Solar PV | Utility,Baseline,,"Capacity factor, start year",25
+AdvancedECO ,Solar PV | Rooftop,Baseline,,"Capacity factor, end year",28
+AdvancedECO ,Solar PV | Utility,Baseline,,"Capacity factor, end year",30
+AdvancedECO ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
+AdvancedECO ,Solar Thermal,Baseline,,GW-th per million meters squared,0.69625
+AdvancedECO ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
+AdvancedECO ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
+AdvancedECO ,Solar Thermal,Baseline,Industry,% demand below 200° C ,38
+AdvancedECO ,Grid,Baseline,,Consumption:Generation,0.88
+AdvancedECO ,Solar Thermal,Pathway,Industry,% demand below 200° C ,38
+AdvancedECO ,Solar PV | Rooftop,Pathway,,% of total solar PV generation,30%
+AdvancedECO ,Wind | Onshore,Pathway,,% of total wind generation,75%
+AdvancedECO ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2050,62
+AdvancedECO ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
+AdvancedECO ,Wind | Offshore,Pathway,,"Capacity factor, end year",30
+AdvancedECO ,Wind | Offshore,Pathway,,"Capacity factor, end year",45
+AdvancedECO ,Solar PV | Rooftop,Pathway,,"Capacity factor, end year",28
+AdvancedECO ,Solar PV | Utility,Pathway,,"Capacity factor, end year",30
+AdvancedECO ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
+AdvancedECO ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+AdvancedECO ,Solar PV | Rooftop,Pathway,,"Capacity factor, start year",10
+AdvancedECO ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
+AdvancedECO ,Grid,Pathway,,Consumption:Generation,0.88
+AdvancedECO ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
+AdvancedECO ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336

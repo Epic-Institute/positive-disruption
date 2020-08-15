@@ -4,7 +4,7 @@ import pandas as pd
 from numpy import NaN
 
 gcam_demand_projection = (
-    pd.read_csv("gcam.csv")
+    pd.read_csv("podi/data/gcam.csv")
     .replace(" -   ", 0)
     .set_index(["Region", "Variable", "Unit"])
     .astype(float)
@@ -64,7 +64,7 @@ gcam_demand_projection.iloc[:, 85:96] = gcam_demand_projection.iloc[
     :, 85:96
 ].interpolate(axis=1)
 
-metrics = pd.read_csv("metric_categories.csv")
+metrics = pd.read_csv("podi/data/metric_categories.csv")
 
 gcam_demand_projection = gcam_demand_projection.loc[
     (slice(None), metrics.loc[:, "GCAM Metric"], slice(None)), :
@@ -82,4 +82,4 @@ gcam_pct_change = (
     )
 )
 
-gcam_pct_change.to_csv("energy_demand_projection_baseline.csv", index=False)
+gcam_pct_change.to_csv("podi/data/energy_demand_projection.csv", index=True)
