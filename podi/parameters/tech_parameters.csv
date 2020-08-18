@@ -1,20 +1,20 @@
 ﻿IEA Region,Technology,Scenario,Sector,Metric,Value
-World ,Solar PV,Baseline,,Saturation Point,35.92171153
-World ,Solar PV,Baseline,,Parameter a,-7.460042634
-World ,Solar PV,Baseline,,Parameter b,0.179152221
-World ,Solar PV,Baseline,,Starting Year,1990
-World ,Solar PV,Pathway,,Saturation Point,35.9
-World ,Solar PV,Pathway,,Parameter a,-11.5
-World ,Solar PV,Pathway,,Parameter b,0.32
-World ,Solar PV,Pathway,,Starting Year,1990
-World ,Wind,Baseline,,Saturation Point,38.51155202
-World ,Wind,Baseline,,Parameter a,-5.656659517
-World ,Wind,Baseline,,Parameter b,0.129329828
-World ,Wind,Baseline,,Starting Year,1990
-World ,Wind,Pathway,,Saturation Point,38.51155202
-World ,Wind,Pathway,,Parameter a,-6.801027663
-World ,Wind,Pathway,,Parameter b,0.179156118
-World ,Wind,Pathway,,Starting Year,1990
+World ,Solar PV,Baseline,,Saturation Point,5
+World ,Solar PV,Baseline,,Parameter a,5
+World ,Solar PV,Baseline,,Parameter b,100
+World ,Solar PV,Baseline,,Max annual growth,100
+World ,Solar PV,Pathway,,Saturation Point,36
+World ,Solar PV,Pathway,,Parameter a,5
+World ,Solar PV,Pathway,,Parameter b,100
+World ,Solar PV,Pathway,,Max annual growth,100
+World ,Wind,Baseline,,Saturation Point,38
+World ,Wind,Baseline,,Parameter a,5
+World ,Wind,Baseline,,Parameter b,100
+World ,Wind,Baseline,,Max annual growth,100
+World ,Wind,Pathway,,Saturation Point,38
+World ,Wind,Pathway,,Parameter a,5
+World ,Wind,Pathway,,Parameter b,100
+World ,Wind,Pathway,,Max annual growth,100
 World ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 World ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 World ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -32,9 +32,9 @@ World ,Wind,Pathway,,"End Year, Retirement Trend",2100
 World ,Wind,Pathway,,Useful Life in Start Year,15
 World ,Wind,Pathway,,Useful Life in End Year,30
 World ,Biofuels,Baseline,,Saturation Point,100
-World ,Biofuels,Baseline,,Parameter a,-5.017849236
-World ,Biofuels,Baseline,,Parameter b,0.107417845
-World ,Biofuels,Baseline,,Starting Year,2000
+World ,Biofuels,Baseline,,Parameter a,5
+World ,Biofuels,Baseline,,Parameter b,100
+World ,Biofuels,Baseline,,Max annual growth,100
 World ,Nuclear,Pathway,,Saturation Point,10
 World ,Solar Thermal,Baseline,Industry,Saturation Point,10
 World ,Solar Thermal,Baseline,Buildings,Saturation Point,100
@@ -74,22 +74,22 @@ World ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 World ,Grid,Pathway,,Consumption:Generation,0.88
 World ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 World ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-US ,Solar PV,Baseline,,Saturation Point,35.92171153
-US ,Solar PV,Baseline,,Parameter a,-7.460042634
-US ,Solar PV,Baseline,,Parameter b,0.179152221
-US ,Solar PV,Baseline,,Starting Year,1990
-US ,Solar PV,Pathway,,Saturation Point,35.9
-US ,Solar PV,Pathway,,Parameter a,-11.5
-US ,Solar PV,Pathway,,Parameter b,0.32
-US ,Solar PV,Pathway,,Starting Year,1990
-US ,Wind,Baseline,,Saturation Point,38.51155202
-US ,Wind,Baseline,,Parameter a,-5.656659517
-US ,Wind,Baseline,,Parameter b,0.129329828
-US ,Wind,Baseline,,Starting Year,1990
-US ,Wind,Pathway,,Saturation Point,38.51155202
-US ,Wind,Pathway,,Parameter a,-6.801027663
-US ,Wind,Pathway,,Parameter b,0.179156118
-US ,Wind,Pathway,,Starting Year,1990
+US ,Solar PV,Baseline,,Saturation Point,36
+US ,Solar PV,Baseline,,Parameter a,5
+US ,Solar PV,Baseline,,Parameter b,100
+US ,Solar PV,Baseline,,Max annual growth,100
+US ,Solar PV,Pathway,,Saturation Point,36
+US ,Solar PV,Pathway,,Parameter a,5
+US ,Solar PV,Pathway,,Parameter b,100
+US ,Solar PV,Pathway,,Max annual growth,100
+US ,Wind,Baseline,,Saturation Point,38
+US ,Wind,Baseline,,Parameter a,5
+US ,Wind,Baseline,,Parameter b,100
+US ,Wind,Baseline,,Max annual growth,100
+US ,Wind,Pathway,,Saturation Point,38
+US ,Wind,Pathway,,Parameter a,5
+US ,Wind,Pathway,,Parameter b,100
+US ,Wind,Pathway,,Max annual growth,100
 US ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 US ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 US ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -107,9 +107,9 @@ US ,Wind,Pathway,,"End Year, Retirement Trend",2100
 US ,Wind,Pathway,,Useful Life in Start Year,15
 US ,Wind,Pathway,,Useful Life in End Year,30
 US ,Biofuels,Baseline,,Saturation Point,100
-US ,Biofuels,Baseline,,Parameter a,-5.017849236
-US ,Biofuels,Baseline,,Parameter b,0.107417845
-US ,Biofuels,Baseline,,Starting Year,2000
+US ,Biofuels,Baseline,,Parameter a,5
+US ,Biofuels,Baseline,,Parameter b,100
+US ,Biofuels,Baseline,,Max annual growth,100
 US ,Nuclear,Pathway,,Saturation Point,10
 US ,Biochar,Baseline,Industry,Saturation Point,23
 US ,Biochar,Pathway,Industry,Saturation Point,23
@@ -149,22 +149,22 @@ US ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 US ,Grid,Pathway,,Consumption:Generation,0.88
 US ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 US ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-SAFR ,Solar PV,Baseline,,Saturation Point,35.9217115
-SAFR ,Solar PV,Baseline,,Parameter a,-7.4600426
-SAFR ,Solar PV,Baseline,,Parameter b,0.17915222
-SAFR ,Solar PV,Baseline,,Starting Year,1990
-SAFR ,Solar PV,Pathway,,Saturation Point,35.9
-SAFR ,Solar PV,Pathway,,Parameter a,-11.5
-SAFR ,Solar PV,Pathway,,Parameter b,0.32
-SAFR ,Solar PV,Pathway,,Starting Year,1990
-SAFR ,Wind,Baseline,,Saturation Point,38.5
-SAFR ,Wind,Baseline,,Parameter a,-5.66
-SAFR ,Wind,Baseline,,Parameter b,0.13
-SAFR ,Wind,Baseline,,Starting Year,1990
-SAFR ,Wind,Pathway,,Saturation Point,38.5
-SAFR ,Wind,Pathway,,Parameter a,-6.8010277
-SAFR ,Wind,Pathway,,Parameter b,0.17915612
-SAFR ,Wind,Pathway,,Starting Year,1990
+SAFR ,Solar PV,Baseline,,Saturation Point,36
+SAFR ,Solar PV,Baseline,,Parameter a,5
+SAFR ,Solar PV,Baseline,,Parameter b,100
+SAFR ,Solar PV,Baseline,,Max annual growth,100
+SAFR ,Solar PV,Pathway,,Saturation Point,36
+SAFR ,Solar PV,Pathway,,Parameter a,5
+SAFR ,Solar PV,Pathway,,Parameter b,100
+SAFR ,Solar PV,Pathway,,Max annual growth,100
+SAFR ,Wind,Baseline,,Saturation Point,38
+SAFR ,Wind,Baseline,,Parameter a,5
+SAFR ,Wind,Baseline,,Parameter b,100
+SAFR ,Wind,Baseline,,Max annual growth,100
+SAFR ,Wind,Pathway,,Saturation Point,38
+SAFR ,Wind,Pathway,,Parameter a,5
+SAFR ,Wind,Pathway,,Parameter b,100
+SAFR ,Wind,Pathway,,Max annual growth,100
 SAFR ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 SAFR ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 SAFR ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -182,12 +182,12 @@ SAFR ,Wind,Pathway,,"End Year, Retirement Trend",2100
 SAFR ,Wind,Pathway,,Useful Life in Start Year,15
 SAFR ,Wind,Pathway,,Useful Life in End Year,30
 SAFR ,Biofuels,Baseline,,Saturation Point,100
-SAFR ,Biofuels,Baseline,,Parameter a,-5.0178492
-SAFR ,Biofuels,Baseline,,Parameter b,0.10741785
+SAFR ,Biofuels,Baseline,,Parameter a,5
+SAFR ,Biofuels,Baseline,,Parameter b,100
 SAFR ,Nuclear,Pathway,,Saturation Point,10
 SAFR ,Biochar,Baseline,Industry,Saturation Point,23
 SAFR ,Biochar,Pathway,Industry,Saturation Point,23
-SAFR ,Biofuels,Baseline,,Starting Year,2000
+SAFR ,Biofuels,Baseline,,Max annual growth,100
 SAFR ,Solar Thermal,Baseline,Industry,Saturation Point,10
 SAFR ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 SAFR ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -224,22 +224,22 @@ SAFR ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 SAFR ,Grid,Pathway,,Consumption:Generation,0.88
 SAFR ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 SAFR ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-RUS ,Solar PV,Baseline,,Saturation Point,35.9217115
-RUS ,Solar PV,Baseline,,Parameter a,-7.4600426
-RUS ,Solar PV,Baseline,,Parameter b,0.17915222
-RUS ,Solar PV,Baseline,,Starting Year,1990
-RUS ,Solar PV,Pathway,,Saturation Point,35.9
-RUS ,Solar PV,Pathway,,Parameter a,-11.5
-RUS ,Solar PV,Pathway,,Parameter b,0.32
-RUS ,Solar PV,Pathway,,Starting Year,1990
-RUS ,Wind,Baseline,,Saturation Point,38.5
-RUS ,Wind,Baseline,,Parameter a,-5.66
-RUS ,Wind,Baseline,,Parameter b,0.13
-RUS ,Wind,Baseline,,Starting Year,1990
-RUS ,Wind,Pathway,,Saturation Point,38.5
-RUS ,Wind,Pathway,,Parameter a,-6.8010277
-RUS ,Wind,Pathway,,Parameter b,0.17915612
-RUS ,Wind,Pathway,,Starting Year,1990
+RUS ,Solar PV,Baseline,,Saturation Point,36
+RUS ,Solar PV,Baseline,,Parameter a,5
+RUS ,Solar PV,Baseline,,Parameter b,100
+RUS ,Solar PV,Baseline,,Max annual growth,100
+RUS ,Solar PV,Pathway,,Saturation Point,36
+RUS ,Solar PV,Pathway,,Parameter a,5
+RUS ,Solar PV,Pathway,,Parameter b,100
+RUS ,Solar PV,Pathway,,Max annual growth,100
+RUS ,Wind,Baseline,,Saturation Point,38
+RUS ,Wind,Baseline,,Parameter a,5
+RUS ,Wind,Baseline,,Parameter b,100
+RUS ,Wind,Baseline,,Max annual growth,100
+RUS ,Wind,Pathway,,Saturation Point,38
+RUS ,Wind,Pathway,,Parameter a,5
+RUS ,Wind,Pathway,,Parameter b,100
+RUS ,Wind,Pathway,,Max annual growth,100
 RUS ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 RUS ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 RUS ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -257,12 +257,12 @@ RUS ,Wind,Pathway,,"End Year, Retirement Trend",2100
 RUS ,Wind,Pathway,,Useful Life in Start Year,15
 RUS ,Wind,Pathway,,Useful Life in End Year,30
 RUS ,Biofuels,Baseline,,Saturation Point,100
-RUS ,Biofuels,Baseline,,Parameter a,-5.0178492
+RUS ,Biofuels,Baseline,,Parameter a,5
 RUS ,Nuclear,Pathway,,Saturation Point,10
 RUS ,Biochar,Baseline,Industry,Saturation Point,23
 RUS ,Biochar,Pathway,Industry,Saturation Point,23
-RUS ,Biofuels,Baseline,,Parameter b,0.10741785
-RUS ,Biofuels,Baseline,,Starting Year,2000
+RUS ,Biofuels,Baseline,,Parameter b,100
+RUS ,Biofuels,Baseline,,Max annual growth,100
 RUS ,Solar Thermal,Baseline,Industry,Saturation Point,10
 RUS ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 RUS ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -299,22 +299,22 @@ RUS ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 RUS ,Grid,Pathway,,Consumption:Generation,0.88
 RUS ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 RUS ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-OECD ,Solar PV,Baseline,,Saturation Point,35.9217115
-OECD ,Solar PV,Baseline,,Parameter a,-7.4600426
-OECD ,Solar PV,Baseline,,Parameter b,0.17915222
-OECD ,Solar PV,Baseline,,Starting Year,1990
-OECD ,Solar PV,Pathway,,Saturation Point,35.9
-OECD ,Solar PV,Pathway,,Parameter a,-11.5
-OECD ,Solar PV,Pathway,,Parameter b,0.32
-OECD ,Solar PV,Pathway,,Starting Year,1990
-OECD ,Wind,Baseline,,Saturation Point,38.5
-OECD ,Wind,Baseline,,Parameter a,-5.66
-OECD ,Wind,Baseline,,Parameter b,0.13
-OECD ,Wind,Baseline,,Starting Year,1990
-OECD ,Wind,Pathway,,Saturation Point,38.5
-OECD ,Wind,Pathway,,Parameter a,-6.8010277
-OECD ,Wind,Pathway,,Parameter b,0.17915612
-OECD ,Wind,Pathway,,Starting Year,1990
+OECD ,Solar PV,Baseline,,Saturation Point,36
+OECD ,Solar PV,Baseline,,Parameter a,5
+OECD ,Solar PV,Baseline,,Parameter b,100
+OECD ,Solar PV,Baseline,,Max annual growth,100
+OECD ,Solar PV,Pathway,,Saturation Point,36
+OECD ,Solar PV,Pathway,,Parameter a,5
+OECD ,Solar PV,Pathway,,Parameter b,100
+OECD ,Solar PV,Pathway,,Max annual growth,100
+OECD ,Wind,Baseline,,Saturation Point,38
+OECD ,Wind,Baseline,,Parameter a,5
+OECD ,Wind,Baseline,,Parameter b,100
+OECD ,Wind,Baseline,,Max annual growth,100
+OECD ,Wind,Pathway,,Saturation Point,38
+OECD ,Wind,Pathway,,Parameter a,5
+OECD ,Wind,Pathway,,Parameter b,100
+OECD ,Wind,Pathway,,Max annual growth,100
 OECD ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 OECD ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 OECD ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -335,9 +335,9 @@ OECD ,Biofuels,Baseline,,Saturation Point,100
 OECD ,Nuclear,Pathway,,Saturation Point,10
 OECD ,Biochar,Baseline,Industry,Saturation Point,23
 OECD ,Biochar,Pathway,Industry,Saturation Point,23
-OECD ,Biofuels,Baseline,,Parameter a,-5.0178492
-OECD ,Biofuels,Baseline,,Parameter b,0.10741785
-OECD ,Biofuels,Baseline,,Starting Year,2000
+OECD ,Biofuels,Baseline,,Parameter a,5
+OECD ,Biofuels,Baseline,,Parameter b,100
+OECD ,Biofuels,Baseline,,Max annual growth,100
 OECD ,Solar Thermal,Baseline,Industry,Saturation Point,10
 OECD ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 OECD ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -374,22 +374,22 @@ OECD ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 OECD ,Grid,Pathway,,Consumption:Generation,0.88
 OECD ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 OECD ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-NonOECD ,Solar PV,Baseline,,Saturation Point,35.9217115
-NonOECD ,Solar PV,Baseline,,Parameter a,-7.4600426
-NonOECD ,Solar PV,Baseline,,Parameter b,0.17915222
-NonOECD ,Solar PV,Baseline,,Starting Year,1990
-NonOECD ,Solar PV,Pathway,,Saturation Point,35.9
-NonOECD ,Solar PV,Pathway,,Parameter a,-11.5
-NonOECD ,Solar PV,Pathway,,Parameter b,0.32
-NonOECD ,Solar PV,Pathway,,Starting Year,1990
-NonOECD ,Wind,Baseline,,Saturation Point,38.5
-NonOECD ,Wind,Baseline,,Parameter a,-5.66
-NonOECD ,Wind,Baseline,,Parameter b,0.13
-NonOECD ,Wind,Baseline,,Starting Year,1990
-NonOECD ,Wind,Pathway,,Saturation Point,38.5
-NonOECD ,Wind,Pathway,,Parameter a,-6.8010277
-NonOECD ,Wind,Pathway,,Parameter b,0.17915612
-NonOECD ,Wind,Pathway,,Starting Year,1990
+NonOECD ,Solar PV,Baseline,,Saturation Point,36
+NonOECD ,Solar PV,Baseline,,Parameter a,5
+NonOECD ,Solar PV,Baseline,,Parameter b,100
+NonOECD ,Solar PV,Baseline,,Max annual growth,100
+NonOECD ,Solar PV,Pathway,,Saturation Point,36
+NonOECD ,Solar PV,Pathway,,Parameter a,5
+NonOECD ,Solar PV,Pathway,,Parameter b,100
+NonOECD ,Solar PV,Pathway,,Max annual growth,100
+NonOECD ,Wind,Baseline,,Saturation Point,38
+NonOECD ,Wind,Baseline,,Parameter a,5
+NonOECD ,Wind,Baseline,,Parameter b,100
+NonOECD ,Wind,Baseline,,Max annual growth,100
+NonOECD ,Wind,Pathway,,Saturation Point,38
+NonOECD ,Wind,Pathway,,Parameter a,5
+NonOECD ,Wind,Pathway,,Parameter b,100
+NonOECD ,Wind,Pathway,,Max annual growth,100
 NonOECD ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 NonOECD ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 NonOECD ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -410,9 +410,9 @@ NonOECD ,Nuclear,Pathway,,Saturation Point,10
 NonOECD ,Biochar,Baseline,Industry,Saturation Point,23
 NonOECD ,Biochar,Pathway,Industry,Saturation Point,23
 NonOECD ,Biofuels,Baseline,,Saturation Point,100
-NonOECD ,Biofuels,Baseline,,Parameter a,-5.0178492
-NonOECD ,Biofuels,Baseline,,Parameter b,0.10741785
-NonOECD ,Biofuels,Baseline,,Starting Year,2000
+NonOECD ,Biofuels,Baseline,,Parameter a,5
+NonOECD ,Biofuels,Baseline,,Parameter b,100
+NonOECD ,Biofuels,Baseline,,Max annual growth,100
 NonOECD ,Solar Thermal,Baseline,Industry,Saturation Point,10
 NonOECD ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 NonOECD ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -449,22 +449,22 @@ NonOECD ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 NonOECD ,Grid,Pathway,,Consumption:Generation,0.88
 NonOECD ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 NonOECD ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-NAM ,Solar PV,Baseline,,Saturation Point,35.92171153
-NAM ,Solar PV,Baseline,,Parameter a,-7.460042634
-NAM ,Solar PV,Baseline,,Parameter b,0.179152221
-NAM ,Solar PV,Baseline,,Starting Year,1990
-NAM ,Solar PV,Pathway,,Saturation Point,35.9
-NAM ,Solar PV,Pathway,,Parameter a,-11.5
-NAM ,Solar PV,Pathway,,Parameter b,0.32
-NAM ,Solar PV,Pathway,,Starting Year,1990
-NAM ,Wind,Baseline,,Saturation Point,38.51155202
-NAM ,Wind,Baseline,,Parameter a,-5.656659517
-NAM ,Wind,Baseline,,Parameter b,0.129329828
-NAM ,Wind,Baseline,,Starting Year,1990
-NAM ,Wind,Pathway,,Saturation Point,38.51155202
-NAM ,Wind,Pathway,,Parameter a,-6.801027663
-NAM ,Wind,Pathway,,Parameter b,0.179156118
-NAM ,Wind,Pathway,,Starting Year,1990
+NAM ,Solar PV,Baseline,,Saturation Point,36
+NAM ,Solar PV,Baseline,,Parameter a,5
+NAM ,Solar PV,Baseline,,Parameter b,100
+NAM ,Solar PV,Baseline,,Max annual growth,100
+NAM ,Solar PV,Pathway,,Saturation Point,36
+NAM ,Solar PV,Pathway,,Parameter a,5
+NAM ,Solar PV,Pathway,,Parameter b,100
+NAM ,Solar PV,Pathway,,Max annual growth,100
+NAM ,Wind,Baseline,,Saturation Point,38
+NAM ,Wind,Baseline,,Parameter a,5
+NAM ,Wind,Baseline,,Parameter b,100
+NAM ,Wind,Baseline,,Max annual growth,100
+NAM ,Wind,Pathway,,Saturation Point,38
+NAM ,Wind,Pathway,,Parameter a,5
+NAM ,Wind,Pathway,,Parameter b,100
+NAM ,Wind,Pathway,,Max annual growth,100
 NAM ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 NAM ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 NAM ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -485,9 +485,9 @@ NAM ,Nuclear,Pathway,,Saturation Point,10
 NAM ,Biochar,Baseline,Industry,Saturation Point,23
 NAM ,Biochar,Pathway,Industry,Saturation Point,23
 NAM ,Biofuels,Baseline,,Saturation Point,100
-NAM ,Biofuels,Baseline,,Parameter a,-5.017849236
-NAM ,Biofuels,Baseline,,Parameter b,0.107417845
-NAM ,Biofuels,Baseline,,Starting Year,2000
+NAM ,Biofuels,Baseline,,Parameter a,5
+NAM ,Biofuels,Baseline,,Parameter b,100
+NAM ,Biofuels,Baseline,,Max annual growth,100
 NAM ,Solar Thermal,Baseline,Industry,Saturation Point,10
 NAM ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 NAM ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -524,22 +524,22 @@ NAM ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 NAM ,Grid,Pathway,,Consumption:Generation,0.88
 NAM ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 NAM ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-ME ,Solar PV,Baseline,,Saturation Point,35.9217115
-ME ,Solar PV,Baseline,,Parameter a,-7.4600426
-ME ,Solar PV,Baseline,,Parameter b,0.17915222
-ME ,Solar PV,Baseline,,Starting Year,1990
-ME ,Solar PV,Pathway,,Saturation Point,35.9
-ME ,Solar PV,Pathway,,Parameter a,-11.5
-ME ,Solar PV,Pathway,,Parameter b,0.32
-ME ,Solar PV,Pathway,,Starting Year,1990
-ME ,Wind,Baseline,,Saturation Point,38.5
-ME ,Wind,Baseline,,Parameter a,-5.66
-ME ,Wind,Baseline,,Parameter b,0.13
-ME ,Wind,Baseline,,Starting Year,1990
-ME ,Wind,Pathway,,Saturation Point,38.5
-ME ,Wind,Pathway,,Parameter a,-6.8010277
-ME ,Wind,Pathway,,Parameter b,0.17915612
-ME ,Wind,Pathway,,Starting Year,1990
+ME ,Solar PV,Baseline,,Saturation Point,36
+ME ,Solar PV,Baseline,,Parameter a,5
+ME ,Solar PV,Baseline,,Parameter b,100
+ME ,Solar PV,Baseline,,Max annual growth,100
+ME ,Solar PV,Pathway,,Saturation Point,36
+ME ,Solar PV,Pathway,,Parameter a,5
+ME ,Solar PV,Pathway,,Parameter b,100
+ME ,Solar PV,Pathway,,Max annual growth,100
+ME ,Wind,Baseline,,Saturation Point,38
+ME ,Wind,Baseline,,Parameter a,5
+ME ,Wind,Baseline,,Parameter b,100
+ME ,Wind,Baseline,,Max annual growth,100
+ME ,Wind,Pathway,,Saturation Point,38
+ME ,Wind,Pathway,,Parameter a,5
+ME ,Wind,Pathway,,Parameter b,100
+ME ,Wind,Pathway,,Max annual growth,100
 ME ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 ME ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 ME ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -560,9 +560,9 @@ ME ,Nuclear,Pathway,,Saturation Point,10
 ME ,Biochar,Baseline,Industry,Saturation Point,23
 ME ,Biochar,Pathway,Industry,Saturation Point,23
 ME ,Biofuels,Baseline,,Saturation Point,100
-ME ,Biofuels,Baseline,,Parameter a,-5.0178492
-ME ,Biofuels,Baseline,,Parameter b,0.10741785
-ME ,Biofuels,Baseline,,Starting Year,2000
+ME ,Biofuels,Baseline,,Parameter a,5
+ME ,Biofuels,Baseline,,Parameter b,100
+ME ,Biofuels,Baseline,,Max annual growth,100
 ME ,Solar Thermal,Baseline,Industry,Saturation Point,10
 ME ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 ME ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -599,22 +599,22 @@ ME ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 ME ,Grid,Pathway,,Consumption:Generation,0.88
 ME ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 ME ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-JPN ,Solar PV,Baseline,,Saturation Point,35.9217115
-JPN ,Solar PV,Baseline,,Parameter a,-7.4600426
-JPN ,Solar PV,Baseline,,Parameter b,0.17915222
-JPN ,Solar PV,Baseline,,Starting Year,1990
-JPN ,Solar PV,Pathway,,Saturation Point,35.9
-JPN ,Solar PV,Pathway,,Parameter a,-11.5
-JPN ,Solar PV,Pathway,,Parameter b,0.32
-JPN ,Solar PV,Pathway,,Starting Year,1990
-JPN ,Wind,Baseline,,Saturation Point,38.5
-JPN ,Wind,Baseline,,Parameter a,-5.66
-JPN ,Wind,Baseline,,Parameter b,0.13
-JPN ,Wind,Baseline,,Starting Year,1990
-JPN ,Wind,Pathway,,Saturation Point,38.5
-JPN ,Wind,Pathway,,Parameter a,-6.8010277
-JPN ,Wind,Pathway,,Parameter b,0.17915612
-JPN ,Wind,Pathway,,Starting Year,1990
+JPN ,Solar PV,Baseline,,Saturation Point,36
+JPN ,Solar PV,Baseline,,Parameter a,5
+JPN ,Solar PV,Baseline,,Parameter b,100
+JPN ,Solar PV,Baseline,,Max annual growth,100
+JPN ,Solar PV,Pathway,,Saturation Point,36
+JPN ,Solar PV,Pathway,,Parameter a,5
+JPN ,Solar PV,Pathway,,Parameter b,100
+JPN ,Solar PV,Pathway,,Max annual growth,100
+JPN ,Wind,Baseline,,Saturation Point,38
+JPN ,Wind,Baseline,,Parameter a,5
+JPN ,Wind,Baseline,,Parameter b,100
+JPN ,Wind,Baseline,,Max annual growth,100
+JPN ,Wind,Pathway,,Saturation Point,38
+JPN ,Wind,Pathway,,Parameter a,5
+JPN ,Wind,Pathway,,Parameter b,100
+JPN ,Wind,Pathway,,Max annual growth,100
 JPN ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 JPN ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 JPN ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -635,9 +635,9 @@ JPN ,Nuclear,Pathway,,Saturation Point,10
 JPN ,Biochar,Baseline,Industry,Saturation Point,23
 JPN ,Biochar,Pathway,Industry,Saturation Point,23
 JPN ,Biofuels,Baseline,,Saturation Point,100
-JPN ,Biofuels,Baseline,,Parameter a,-5.0178492
-JPN ,Biofuels,Baseline,,Parameter b,0.10741785
-JPN ,Biofuels,Baseline,,Starting Year,2000
+JPN ,Biofuels,Baseline,,Parameter a,5
+JPN ,Biofuels,Baseline,,Parameter b,100
+JPN ,Biofuels,Baseline,,Max annual growth,100
 JPN ,Solar Thermal,Baseline,Industry,Saturation Point,10
 JPN ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 JPN ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -674,22 +674,22 @@ JPN ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 JPN ,Grid,Pathway,,Consumption:Generation,0.88
 JPN ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 JPN ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-INDIA ,Solar PV,Baseline,,Saturation Point,35.9217115
-INDIA ,Solar PV,Baseline,,Parameter a,-7.4600426
-INDIA ,Solar PV,Baseline,,Parameter b,0.17915222
-INDIA ,Solar PV,Baseline,,Starting Year,1990
-INDIA ,Solar PV,Pathway,,Saturation Point,35.9
-INDIA ,Solar PV,Pathway,,Parameter a,-11.5
-INDIA ,Solar PV,Pathway,,Parameter b,0.32
-INDIA ,Solar PV,Pathway,,Starting Year,1990
-INDIA ,Wind,Baseline,,Saturation Point,38.5
-INDIA ,Wind,Baseline,,Parameter a,-5.66
-INDIA ,Wind,Baseline,,Parameter b,0.13
-INDIA ,Wind,Baseline,,Starting Year,1990
-INDIA ,Wind,Pathway,,Saturation Point,38.5
-INDIA ,Wind,Pathway,,Parameter a,-6.8010277
-INDIA ,Wind,Pathway,,Parameter b,0.17915612
-INDIA ,Wind,Pathway,,Starting Year,1990
+INDIA ,Solar PV,Baseline,,Saturation Point,36
+INDIA ,Solar PV,Baseline,,Parameter a,5
+INDIA ,Solar PV,Baseline,,Parameter b,100
+INDIA ,Solar PV,Baseline,,Max annual growth,100
+INDIA ,Solar PV,Pathway,,Saturation Point,36
+INDIA ,Solar PV,Pathway,,Parameter a,5
+INDIA ,Solar PV,Pathway,,Parameter b,100
+INDIA ,Solar PV,Pathway,,Max annual growth,100
+INDIA ,Wind,Baseline,,Saturation Point,38
+INDIA ,Wind,Baseline,,Parameter a,5
+INDIA ,Wind,Baseline,,Parameter b,100
+INDIA ,Wind,Baseline,,Max annual growth,100
+INDIA ,Wind,Pathway,,Saturation Point,38
+INDIA ,Wind,Pathway,,Parameter a,5
+INDIA ,Wind,Pathway,,Parameter b,100
+INDIA ,Wind,Pathway,,Max annual growth,100
 INDIA ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 INDIA ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 INDIA ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -710,9 +710,9 @@ INDIA ,Nuclear,Pathway,,Saturation Point,10
 INDIA ,Biochar,Baseline,Industry,Saturation Point,23
 INDIA ,Biochar,Pathway,Industry,Saturation Point,23
 INDIA ,Biofuels,Baseline,,Saturation Point,100
-INDIA ,Biofuels,Baseline,,Parameter a,-5.0178492
-INDIA ,Biofuels,Baseline,,Parameter b,0.10741785
-INDIA ,Biofuels,Baseline,,Starting Year,2000
+INDIA ,Biofuels,Baseline,,Parameter a,5
+INDIA ,Biofuels,Baseline,,Parameter b,100
+INDIA ,Biofuels,Baseline,,Max annual growth,100
 INDIA ,Solar Thermal,Baseline,Industry,Saturation Point,10
 INDIA ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 INDIA ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -749,22 +749,22 @@ INDIA ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 INDIA ,Grid,Pathway,,Consumption:Generation,0.88
 INDIA ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 INDIA ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-EURASIA ,Solar PV,Baseline,,Saturation Point,35.9217115
-EURASIA ,Solar PV,Baseline,,Parameter a,-7.4600426
-EURASIA ,Solar PV,Baseline,,Parameter b,0.17915222
-EURASIA ,Solar PV,Baseline,,Starting Year,1990
-EURASIA ,Solar PV,Pathway,,Saturation Point,35.9
-EURASIA ,Solar PV,Pathway,,Parameter a,-11.5
-EURASIA ,Solar PV,Pathway,,Parameter b,0.32
-EURASIA ,Solar PV,Pathway,,Starting Year,1990
-EURASIA ,Wind,Baseline,,Saturation Point,38.5
-EURASIA ,Wind,Baseline,,Parameter a,-5.66
-EURASIA ,Wind,Baseline,,Parameter b,0.13
-EURASIA ,Wind,Baseline,,Starting Year,1990
-EURASIA ,Wind,Pathway,,Saturation Point,38.5
-EURASIA ,Wind,Pathway,,Parameter a,-6.8010277
-EURASIA ,Wind,Pathway,,Parameter b,0.17915612
-EURASIA ,Wind,Pathway,,Starting Year,1990
+EURASIA ,Solar PV,Baseline,,Saturation Point,36
+EURASIA ,Solar PV,Baseline,,Parameter a,5
+EURASIA ,Solar PV,Baseline,,Parameter b,100
+EURASIA ,Solar PV,Baseline,,Max annual growth,100
+EURASIA ,Solar PV,Pathway,,Saturation Point,36
+EURASIA ,Solar PV,Pathway,,Parameter a,5
+EURASIA ,Solar PV,Pathway,,Parameter b,100
+EURASIA ,Solar PV,Pathway,,Max annual growth,100
+EURASIA ,Wind,Baseline,,Saturation Point,38
+EURASIA ,Wind,Baseline,,Parameter a,5
+EURASIA ,Wind,Baseline,,Parameter b,100
+EURASIA ,Wind,Baseline,,Max annual growth,100
+EURASIA ,Wind,Pathway,,Saturation Point,38
+EURASIA ,Wind,Pathway,,Parameter a,5
+EURASIA ,Wind,Pathway,,Parameter b,100
+EURASIA ,Wind,Pathway,,Max annual growth,100
 EURASIA ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 EURASIA ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 EURASIA ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -785,9 +785,9 @@ EURASIA ,Nuclear,Pathway,,Saturation Point,10
 EURASIA ,Biochar,Baseline,Industry,Saturation Point,23
 EURASIA ,Biochar,Pathway,Industry,Saturation Point,23
 EURASIA ,Biofuels,Baseline,,Saturation Point,100
-EURASIA ,Biofuels,Baseline,,Parameter a,-5.0178492
-EURASIA ,Biofuels,Baseline,,Parameter b,0.10741785
-EURASIA ,Biofuels,Baseline,,Starting Year,2000
+EURASIA ,Biofuels,Baseline,,Parameter a,5
+EURASIA ,Biofuels,Baseline,,Parameter b,100
+EURASIA ,Biofuels,Baseline,,Max annual growth,100
 EURASIA ,Solar Thermal,Baseline,Industry,Saturation Point,10
 EURASIA ,Solar Thermal,Pathway,Industry,Saturation Point,38
 EURASIA ,Solar Thermal,Baseline,Buildings,Saturation Point,100
@@ -824,22 +824,22 @@ EURASIA ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 EURASIA ,Grid,Pathway,,Consumption:Generation,0.88
 EURASIA ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 EURASIA ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-EUR ,Solar PV,Baseline,,Saturation Point,35.9217115
-EUR ,Solar PV,Baseline,,Parameter a,-7.4600426
-EUR ,Solar PV,Baseline,,Parameter b,0.17915222
-EUR ,Solar PV,Baseline,,Starting Year,1990
-EUR ,Solar PV,Pathway,,Saturation Point,35.9
-EUR ,Solar PV,Pathway,,Parameter a,-11.5
-EUR ,Solar PV,Pathway,,Parameter b,0.32
-EUR ,Solar PV,Pathway,,Starting Year,1990
-EUR ,Wind,Baseline,,Saturation Point,38.5
-EUR ,Wind,Baseline,,Parameter a,-5.66
-EUR ,Wind,Baseline,,Parameter b,0.13
-EUR ,Wind,Baseline,,Starting Year,1990
-EUR ,Wind,Pathway,,Saturation Point,38.5
-EUR ,Wind,Pathway,,Parameter a,-6.8010277
-EUR ,Wind,Pathway,,Parameter b,0.17915612
-EUR ,Wind,Pathway,,Starting Year,1990
+EUR ,Solar PV,Baseline,,Saturation Point,36
+EUR ,Solar PV,Baseline,,Parameter a,5
+EUR ,Solar PV,Baseline,,Parameter b,100
+EUR ,Solar PV,Baseline,,Max annual growth,100
+EUR ,Solar PV,Pathway,,Saturation Point,36
+EUR ,Solar PV,Pathway,,Parameter a,5
+EUR ,Solar PV,Pathway,,Parameter b,100
+EUR ,Solar PV,Pathway,,Max annual growth,100
+EUR ,Wind,Baseline,,Saturation Point,38
+EUR ,Wind,Baseline,,Parameter a,5
+EUR ,Wind,Baseline,,Parameter b,100
+EUR ,Wind,Baseline,,Max annual growth,100
+EUR ,Wind,Pathway,,Saturation Point,38
+EUR ,Wind,Pathway,,Parameter a,5
+EUR ,Wind,Pathway,,Parameter b,100
+EUR ,Wind,Pathway,,Max annual growth,100
 EUR ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 EUR ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 EUR ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -860,9 +860,9 @@ EUR ,Nuclear,Pathway,,Saturation Point,10
 EUR ,Biochar,Baseline,Industry,Saturation Point,23
 EUR ,Biochar,Pathway,Industry,Saturation Point,23
 EUR ,Biofuels,Baseline,,Saturation Point,100
-EUR ,Biofuels,Baseline,,Parameter a,-5.0178492
-EUR ,Biofuels,Baseline,,Parameter b,0.10741785
-EUR ,Biofuels,Baseline,,Starting Year,2000
+EUR ,Biofuels,Baseline,,Parameter a,5
+EUR ,Biofuels,Baseline,,Parameter b,100
+EUR ,Biofuels,Baseline,,Max annual growth,100
 EUR ,Solar Thermal,Pathway,Industry,Saturation Point,38
 EUR ,Solar Thermal,Pathway,Buildings,Saturation Point,100
 EUR ,Solar Thermal,Baseline,Industry,Saturation Point,10
@@ -899,22 +899,22 @@ EUR ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 EUR ,Grid,Pathway,,Consumption:Generation,0.88
 EUR ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 EUR ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-EU ,Solar PV,Baseline,,Saturation Point,35.9217115
-EU ,Solar PV,Baseline,,Parameter a,-7.4600426
-EU ,Solar PV,Baseline,,Parameter b,0.17915222
-EU ,Solar PV,Baseline,,Starting Year,1990
-EU ,Solar PV,Pathway,,Saturation Point,35.9
-EU ,Solar PV,Pathway,,Parameter a,-11.5
-EU ,Solar PV,Pathway,,Parameter b,0.32
-EU ,Solar PV,Pathway,,Starting Year,1990
-EU ,Wind,Baseline,,Saturation Point,38.5
-EU ,Wind,Baseline,,Parameter a,-5.66
-EU ,Wind,Baseline,,Parameter b,0.13
-EU ,Wind,Baseline,,Starting Year,1990
-EU ,Wind,Pathway,,Saturation Point,38.5
-EU ,Wind,Pathway,,Parameter a,-6.8010277
-EU ,Wind,Pathway,,Parameter b,0.17915612
-EU ,Wind,Pathway,,Starting Year,1990
+EU ,Solar PV,Baseline,,Saturation Point,36
+EU ,Solar PV,Baseline,,Parameter a,5
+EU ,Solar PV,Baseline,,Parameter b,100
+EU ,Solar PV,Baseline,,Max annual growth,100
+EU ,Solar PV,Pathway,,Saturation Point,36
+EU ,Solar PV,Pathway,,Parameter a,5
+EU ,Solar PV,Pathway,,Parameter b,100
+EU ,Solar PV,Pathway,,Max annual growth,100
+EU ,Wind,Baseline,,Saturation Point,38
+EU ,Wind,Baseline,,Parameter a,5
+EU ,Wind,Baseline,,Parameter b,100
+EU ,Wind,Baseline,,Max annual growth,100
+EU ,Wind,Pathway,,Saturation Point,38
+EU ,Wind,Pathway,,Parameter a,5
+EU ,Wind,Pathway,,Parameter b,100
+EU ,Wind,Pathway,,Max annual growth,100
 EU ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 EU ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 EU ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -935,9 +935,9 @@ EU ,Nuclear,Pathway,,Saturation Point,10
 EU ,Biochar,Baseline,Industry,Saturation Point,23
 EU ,Biochar,Pathway,Industry,Saturation Point,23
 EU ,Biofuels,Baseline,,Saturation Point,100
-EU ,Biofuels,Baseline,,Parameter a,-5.0178492
-EU ,Biofuels,Baseline,,Parameter b,0.10741785
-EU ,Biofuels,Baseline,,Starting Year,2000
+EU ,Biofuels,Baseline,,Parameter a,5
+EU ,Biofuels,Baseline,,Parameter b,100
+EU ,Biofuels,Baseline,,Max annual growth,100
 EU ,Solar Thermal,Pathway,Industry,Saturation Point,38
 EU ,Solar Thermal,Pathway,Buildings,Saturation Point,100
 EU ,Solar Thermal,Baseline,Industry,Saturation Point,10
@@ -974,22 +974,22 @@ EU ,Solar PV | Utility,Pathway,,"Capacity factor, start year",25
 EU ,Grid,Pathway,,Consumption:Generation,0.88
 EU ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 EU ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
-DevelopingECO ,Solar PV,Baseline,,Saturation Point,35.9217115
-DevelopingECO ,Solar PV,Baseline,,Parameter a,-7.4600426
-DevelopingECO ,Solar PV,Baseline,,Parameter b,0.17915222
-DevelopingECO ,Solar PV,Baseline,,Starting Year,1990
-DevelopingECO ,Solar PV,Pathway,,Saturation Point,35.9
-DevelopingECO ,Solar PV,Pathway,,Parameter a,-11.5
-DevelopingECO ,Solar PV,Pathway,,Parameter b,0.32
-DevelopingECO ,Solar PV,Pathway,,Starting Year,1990
-DevelopingECO ,Wind,Baseline,,Saturation Point,38.5
-DevelopingECO ,Wind,Baseline,,Parameter a,-5.66
-DevelopingECO ,Wind,Baseline,,Parameter b,0.13
-DevelopingECO ,Wind,Baseline,,Starting Year,1990
-DevelopingECO ,Wind,Pathway,,Saturation Point,38.5
-DevelopingECO ,Wind,Pathway,,Parameter a,-6.8010277
-DevelopingECO ,Wind,Pathway,,Parameter b,0.17915612
-DevelopingECO ,Wind,Pathway,,Starting Year,1990
+DevelopingECO ,Solar PV,Baseline,,Saturation Point,36
+DevelopingECO ,Solar PV,Baseline,,Parameter a,5
+DevelopingECO ,Solar PV,Baseline,,Parameter b,100
+DevelopingECO ,Solar PV,Baseline,,Max annual growth,100
+DevelopingECO ,Solar PV,Pathway,,Saturation Point,36
+DevelopingECO ,Solar PV,Pathway,,Parameter a,5
+DevelopingECO ,Solar PV,Pathway,,Parameter b,100
+DevelopingECO ,Solar PV,Pathway,,Max annual growth,100
+DevelopingECO ,Wind,Baseline,,Saturation Point,38
+DevelopingECO ,Wind,Baseline,,Parameter a,5
+DevelopingECO ,Wind,Baseline,,Parameter b,100
+DevelopingECO ,Wind,Baseline,,Max annual growth,100
+DevelopingECO ,Wind,Pathway,,Saturation Point,38
+DevelopingECO ,Wind,Pathway,,Parameter a,5
+DevelopingECO ,Wind,Pathway,,Parameter b,100
+DevelopingECO ,Wind,Pathway,,Max annual growth,100
 DevelopingECO ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 DevelopingECO ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 DevelopingECO ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -1012,9 +1012,9 @@ DevelopingECO ,Biochar,Pathway,Industry,Saturation Point,23
 DevelopingECO ,Solar Thermal,Pathway,Industry,Saturation Point,38
 DevelopingECO ,Solar Thermal,Pathway,Buildings,Saturation Point,100
 DevelopingECO ,Biofuels,Baseline,,Saturation Point,100
-DevelopingECO ,Biofuels,Baseline,,Parameter a,-5.0178492
-DevelopingECO ,Biofuels,Baseline,,Parameter b,0.10741785
-DevelopingECO ,Biofuels,Baseline,,Starting Year,2000
+DevelopingECO ,Biofuels,Baseline,,Parameter a,5
+DevelopingECO ,Biofuels,Baseline,,Parameter b,100
+DevelopingECO ,Biofuels,Baseline,,Max annual growth,100
 DevelopingECO ,Solar Thermal,Baseline,Industry,Saturation Point,10
 DevelopingECO ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 DevelopingECO ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -1051,22 +1051,22 @@ DevelopingECO ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 DevelopingECO ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
 CSAM ,Solar Thermal,Pathway,Industry,Saturation Point,38
 CSAM ,Solar Thermal,Pathway,Buildings,Saturation Point,100
-CSAM ,Solar PV,Baseline,,Saturation Point,35.92171153
-CSAM ,Solar PV,Baseline,,Parameter a,-7.460042634
-CSAM ,Solar PV,Baseline,,Parameter b,0.179152221
-CSAM ,Solar PV,Baseline,,Starting Year,1990
-CSAM ,Solar PV,Pathway,,Saturation Point,35.9
-CSAM ,Solar PV,Pathway,,Parameter a,-11.5
-CSAM ,Solar PV,Pathway,,Parameter b,0.32
-CSAM ,Solar PV,Pathway,,Starting Year,1990
-CSAM ,Wind,Baseline,,Saturation Point,38.51155202
-CSAM ,Wind,Baseline,,Parameter a,-5.656659517
-CSAM ,Wind,Baseline,,Parameter b,0.129329828
-CSAM ,Wind,Baseline,,Starting Year,1990
-CSAM ,Wind,Pathway,,Saturation Point,38.51155202
-CSAM ,Wind,Pathway,,Parameter a,-6.801027663
-CSAM ,Wind,Pathway,,Parameter b,0.179156118
-CSAM ,Wind,Pathway,,Starting Year,1990
+CSAM ,Solar PV,Baseline,,Saturation Point,36
+CSAM ,Solar PV,Baseline,,Parameter a,5
+CSAM ,Solar PV,Baseline,,Parameter b,100
+CSAM ,Solar PV,Baseline,,Max annual growth,100
+CSAM ,Solar PV,Pathway,,Saturation Point,36
+CSAM ,Solar PV,Pathway,,Parameter a,5
+CSAM ,Solar PV,Pathway,,Parameter b,100
+CSAM ,Solar PV,Pathway,,Max annual growth,100
+CSAM ,Wind,Baseline,,Saturation Point,38
+CSAM ,Wind,Baseline,,Parameter a,5
+CSAM ,Wind,Baseline,,Parameter b,100
+CSAM ,Wind,Baseline,,Max annual growth,100
+CSAM ,Wind,Pathway,,Saturation Point,38
+CSAM ,Wind,Pathway,,Parameter a,5
+CSAM ,Wind,Pathway,,Parameter b,100
+CSAM ,Wind,Pathway,,Max annual growth,100
 CSAM ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 CSAM ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 CSAM ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -1087,9 +1087,9 @@ CSAM ,Nuclear,Pathway,,Saturation Point,10
 CSAM ,Biochar,Baseline,Industry,Saturation Point,23
 CSAM ,Biochar,Pathway,Industry,Saturation Point,23
 CSAM ,Biofuels,Baseline,,Saturation Point,100
-CSAM ,Biofuels,Baseline,,Parameter a,-5.017849236
-CSAM ,Biofuels,Baseline,,Parameter b,0.107417845
-CSAM ,Biofuels,Baseline,,Starting Year,2000
+CSAM ,Biofuels,Baseline,,Parameter a,5
+CSAM ,Biofuels,Baseline,,Parameter b,100
+CSAM ,Biofuels,Baseline,,Max annual growth,100
 CSAM ,Biofuels,Baseline,,Saturation Point,100
 CSAM ,Wind | Onshore,Baseline,,% of total wind generation,75%
 CSAM ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
@@ -1127,22 +1127,22 @@ CSAM ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 CSAM ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
 CHINA ,Solar Thermal,Pathway,Industry,Saturation Point,38
 CHINA ,Solar Thermal,Pathway,Buildings,Saturation Point,100
-CHINA ,Solar PV,Baseline,,Saturation Point,35.9217115
-CHINA ,Solar PV,Baseline,,Parameter a,-7.4600426
-CHINA ,Solar PV,Baseline,,Parameter b,0.17915222
-CHINA ,Solar PV,Baseline,,Starting Year,1990
-CHINA ,Solar PV,Pathway,,Saturation Point,35.9
-CHINA ,Solar PV,Pathway,,Parameter a,-11.5
-CHINA ,Solar PV,Pathway,,Parameter b,0.32
-CHINA ,Solar PV,Pathway,,Starting Year,1990
-CHINA ,Wind,Baseline,,Saturation Point,38.5
-CHINA ,Wind,Baseline,,Parameter a,-5.66
-CHINA ,Wind,Baseline,,Parameter b,0.13
-CHINA ,Wind,Baseline,,Starting Year,1990
-CHINA ,Wind,Pathway,,Saturation Point,38.5
-CHINA ,Wind,Pathway,,Parameter a,-6.8010277
-CHINA ,Wind,Pathway,,Parameter b,0.17915612
-CHINA ,Wind,Pathway,,Starting Year,1990
+CHINA ,Solar PV,Baseline,,Saturation Point,36
+CHINA ,Solar PV,Baseline,,Parameter a,5
+CHINA ,Solar PV,Baseline,,Parameter b,100
+CHINA ,Solar PV,Baseline,,Max annual growth,100
+CHINA ,Solar PV,Pathway,,Saturation Point,36
+CHINA ,Solar PV,Pathway,,Parameter a,5
+CHINA ,Solar PV,Pathway,,Parameter b,100
+CHINA ,Solar PV,Pathway,,Max annual growth,100
+CHINA ,Wind,Baseline,,Saturation Point,38
+CHINA ,Wind,Baseline,,Parameter a,5
+CHINA ,Wind,Baseline,,Parameter b,100
+CHINA ,Wind,Baseline,,Max annual growth,100
+CHINA ,Wind,Pathway,,Saturation Point,38
+CHINA ,Wind,Pathway,,Parameter a,5
+CHINA ,Wind,Pathway,,Parameter b,100
+CHINA ,Wind,Pathway,,Max annual growth,100
 CHINA ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 CHINA ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 CHINA ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -1163,9 +1163,9 @@ CHINA ,Nuclear,Pathway,,Saturation Point,10
 CHINA ,Biochar,Baseline,Industry,Saturation Point,23
 CHINA ,Biochar,Pathway,Industry,Saturation Point,23
 CHINA ,Biofuels,Baseline,,Saturation Point,100
-CHINA ,Biofuels,Baseline,,Parameter a,-5.0178492
-CHINA ,Biofuels,Baseline,,Parameter b,0.10741785
-CHINA ,Biofuels,Baseline,,Starting Year,2000
+CHINA ,Biofuels,Baseline,,Parameter a,5
+CHINA ,Biofuels,Baseline,,Parameter b,100
+CHINA ,Biofuels,Baseline,,Max annual growth,100
 CHINA ,Solar Thermal,Baseline,Industry,Saturation Point,10
 CHINA ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 CHINA ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -1202,22 +1202,22 @@ CHINA ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 CHINA ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
 BRAZIL ,Solar Thermal,Pathway,Industry,Saturation Point,38
 BRAZIL ,Solar Thermal,Pathway,Buildings,Saturation Point,100
-BRAZIL ,Solar PV,Baseline,,Saturation Point,35.9217115
-BRAZIL ,Solar PV,Baseline,,Parameter a,-7.4600426
-BRAZIL ,Solar PV,Baseline,,Parameter b,0.17915222
-BRAZIL ,Solar PV,Baseline,,Starting Year,1990
-BRAZIL ,Solar PV,Pathway,,Saturation Point,35.9
-BRAZIL ,Solar PV,Pathway,,Parameter a,-11.5
-BRAZIL ,Solar PV,Pathway,,Parameter b,0.32
-BRAZIL ,Solar PV,Pathway,,Starting Year,1990
-BRAZIL ,Wind,Baseline,,Saturation Point,38.5
-BRAZIL ,Wind,Baseline,,Parameter a,-5.66
-BRAZIL ,Wind,Baseline,,Parameter b,0.13
-BRAZIL ,Wind,Baseline,,Starting Year,1990
-BRAZIL ,Wind,Pathway,,Saturation Point,38.5
-BRAZIL ,Wind,Pathway,,Parameter a,-6.8010277
-BRAZIL ,Wind,Pathway,,Parameter b,0.17915612
-BRAZIL ,Wind,Pathway,,Starting Year,1990
+BRAZIL ,Solar PV,Baseline,,Saturation Point,36
+BRAZIL ,Solar PV,Baseline,,Parameter a,5
+BRAZIL ,Solar PV,Baseline,,Parameter b,100
+BRAZIL ,Solar PV,Baseline,,Max annual growth,100
+BRAZIL ,Solar PV,Pathway,,Saturation Point,36
+BRAZIL ,Solar PV,Pathway,,Parameter a,5
+BRAZIL ,Solar PV,Pathway,,Parameter b,100
+BRAZIL ,Solar PV,Pathway,,Max annual growth,100
+BRAZIL ,Wind,Baseline,,Saturation Point,38
+BRAZIL ,Wind,Baseline,,Parameter a,5
+BRAZIL ,Wind,Baseline,,Parameter b,100
+BRAZIL ,Wind,Baseline,,Max annual growth,100
+BRAZIL ,Wind,Pathway,,Saturation Point,38
+BRAZIL ,Wind,Pathway,,Parameter a,5
+BRAZIL ,Wind,Pathway,,Parameter b,100
+BRAZIL ,Wind,Pathway,,Max annual growth,100
 BRAZIL ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 BRAZIL ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 BRAZIL ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -1238,9 +1238,9 @@ BRAZIL ,Nuclear,Pathway,,Saturation Point,10
 BRAZIL ,Biochar,Baseline,Industry,Saturation Point,23
 BRAZIL ,Biochar,Pathway,Industry,Saturation Point,23
 BRAZIL ,Biofuels,Baseline,,Saturation Point,100
-BRAZIL ,Biofuels,Baseline,,Parameter a,-5.0178492
-BRAZIL ,Biofuels,Baseline,,Parameter b,0.10741785
-BRAZIL ,Biofuels,Baseline,,Starting Year,2000
+BRAZIL ,Biofuels,Baseline,,Parameter a,5
+BRAZIL ,Biofuels,Baseline,,Parameter b,100
+BRAZIL ,Biofuels,Baseline,,Max annual growth,100
 BRAZIL ,Wind | Onshore,Baseline,,% of total wind generation,75%
 BRAZIL ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
 BRAZIL ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
@@ -1277,22 +1277,22 @@ BRAZIL ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 BRAZIL ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
 ASIAPAC ,Solar Thermal,Pathway,Industry,Saturation Point,38
 ASIAPAC ,Solar Thermal,Pathway,Buildings,Saturation Point,100
-ASIAPAC ,Solar PV,Baseline,,Saturation Point,35.9217115
-ASIAPAC ,Solar PV,Baseline,,Parameter a,-7.4600426
-ASIAPAC ,Solar PV,Baseline,,Parameter b,0.17915222
-ASIAPAC ,Solar PV,Baseline,,Starting Year,1990
-ASIAPAC ,Solar PV,Pathway,,Saturation Point,35.9
-ASIAPAC ,Solar PV,Pathway,,Parameter a,-11.5
-ASIAPAC ,Solar PV,Pathway,,Parameter b,0.32
-ASIAPAC ,Solar PV,Pathway,,Starting Year,1990
-ASIAPAC ,Wind,Baseline,,Saturation Point,38.5
-ASIAPAC ,Wind,Baseline,,Parameter a,-5.66
-ASIAPAC ,Wind,Baseline,,Parameter b,0.13
-ASIAPAC ,Wind,Baseline,,Starting Year,1990
-ASIAPAC ,Wind,Pathway,,Saturation Point,38.5
-ASIAPAC ,Wind,Pathway,,Parameter a,-6.8010277
-ASIAPAC ,Wind,Pathway,,Parameter b,0.17915612
-ASIAPAC ,Wind,Pathway,,Starting Year,1990
+ASIAPAC ,Solar PV,Baseline,,Saturation Point,36
+ASIAPAC ,Solar PV,Baseline,,Parameter a,5
+ASIAPAC ,Solar PV,Baseline,,Parameter b,100
+ASIAPAC ,Solar PV,Baseline,,Max annual growth,100
+ASIAPAC ,Solar PV,Pathway,,Saturation Point,36
+ASIAPAC ,Solar PV,Pathway,,Parameter a,5
+ASIAPAC ,Solar PV,Pathway,,Parameter b,100
+ASIAPAC ,Solar PV,Pathway,,Max annual growth,100
+ASIAPAC ,Wind,Baseline,,Saturation Point,38
+ASIAPAC ,Wind,Baseline,,Parameter a,5
+ASIAPAC ,Wind,Baseline,,Parameter b,100
+ASIAPAC ,Wind,Baseline,,Max annual growth,100
+ASIAPAC ,Wind,Pathway,,Saturation Point,38
+ASIAPAC ,Wind,Pathway,,Parameter a,5
+ASIAPAC ,Wind,Pathway,,Parameter b,100
+ASIAPAC ,Wind,Pathway,,Max annual growth,100
 ASIAPAC ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 ASIAPAC ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 ASIAPAC ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -1313,9 +1313,9 @@ ASIAPAC ,Nuclear,Pathway,,Saturation Point,10
 ASIAPAC ,Biochar,Baseline,Industry,Saturation Point,23
 ASIAPAC ,Biochar,Pathway,Industry,Saturation Point,23
 ASIAPAC ,Biofuels,Baseline,,Saturation Point,100
-ASIAPAC ,Biofuels,Baseline,,Parameter a,-5.0178492
-ASIAPAC ,Biofuels,Baseline,,Parameter b,0.10741785
-ASIAPAC ,Biofuels,Baseline,,Starting Year,2000
+ASIAPAC ,Biofuels,Baseline,,Parameter a,5
+ASIAPAC ,Biofuels,Baseline,,Parameter b,100
+ASIAPAC ,Biofuels,Baseline,,Max annual growth,100
 ASIAPAC ,Wind | Onshore,Baseline,,% of total wind generation,75%
 ASIAPAC ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%
 ASIAPAC ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
@@ -1352,22 +1352,22 @@ ASIAPAC ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 ASIAPAC ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
 ASEAN ,Solar Thermal,Pathway,Industry,Saturation Point,38
 ASEAN ,Solar Thermal,Pathway,Buildings,Saturation Point,100
-ASEAN ,Solar PV,Baseline,,Saturation Point,35.9217115
-ASEAN ,Solar PV,Baseline,,Parameter a,-7.4600426
-ASEAN ,Solar PV,Baseline,,Parameter b,0.17915222
-ASEAN ,Solar PV,Baseline,,Starting Year,1990
-ASEAN ,Solar PV,Pathway,,Saturation Point,35.9
-ASEAN ,Solar PV,Pathway,,Parameter a,-11.5
-ASEAN ,Solar PV,Pathway,,Parameter b,0.32
-ASEAN ,Solar PV,Pathway,,Starting Year,1990
-ASEAN ,Wind,Baseline,,Saturation Point,38.5
-ASEAN ,Wind,Baseline,,Parameter a,-5.66
-ASEAN ,Wind,Baseline,,Parameter b,0.13
-ASEAN ,Wind,Baseline,,Starting Year,1990
-ASEAN ,Wind,Pathway,,Saturation Point,38.5
-ASEAN ,Wind,Pathway,,Parameter a,-6.8010277
-ASEAN ,Wind,Pathway,,Parameter b,0.17915612
-ASEAN ,Wind,Pathway,,Starting Year,1990
+ASEAN ,Solar PV,Baseline,,Saturation Point,36
+ASEAN ,Solar PV,Baseline,,Parameter a,5
+ASEAN ,Solar PV,Baseline,,Parameter b,100
+ASEAN ,Solar PV,Baseline,,Max annual growth,100
+ASEAN ,Solar PV,Pathway,,Saturation Point,36
+ASEAN ,Solar PV,Pathway,,Parameter a,5
+ASEAN ,Solar PV,Pathway,,Parameter b,100
+ASEAN ,Solar PV,Pathway,,Max annual growth,100
+ASEAN ,Wind,Baseline,,Saturation Point,38
+ASEAN ,Wind,Baseline,,Parameter a,5
+ASEAN ,Wind,Baseline,,Parameter b,100
+ASEAN ,Wind,Baseline,,Max annual growth,100
+ASEAN ,Wind,Pathway,,Saturation Point,38
+ASEAN ,Wind,Pathway,,Parameter a,5
+ASEAN ,Wind,Pathway,,Parameter b,100
+ASEAN ,Wind,Pathway,,Max annual growth,100
 ASEAN ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 ASEAN ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 ASEAN ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -1388,9 +1388,9 @@ ASEAN ,Nuclear,Pathway,,Saturation Point,10
 ASEAN ,Biochar,Baseline,Industry,Saturation Point,23
 ASEAN ,Biochar,Pathway,Industry,Saturation Point,23
 ASEAN ,Biofuels,Baseline,,Saturation Point,100
-ASEAN ,Biofuels,Baseline,,Parameter a,-5.0178492
-ASEAN ,Biofuels,Baseline,,Parameter b,0.10741785
-ASEAN ,Biofuels,Baseline,,Starting Year,2000
+ASEAN ,Biofuels,Baseline,,Parameter a,5
+ASEAN ,Biofuels,Baseline,,Parameter b,100
+ASEAN ,Biofuels,Baseline,,Max annual growth,100
 ASEAN ,Solar Thermal,Baseline,Industry,Saturation Point,10
 ASEAN ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 ASEAN ,Wind | Onshore,Baseline,,% of total wind generation,75%
@@ -1427,22 +1427,22 @@ ASEAN ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 ASEAN ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
 Africa ,Solar Thermal,Pathway,Industry,Saturation Point,38
 Africa ,Solar Thermal,Pathway,Buildings,Saturation Point,100
-Africa ,Solar PV,Baseline,,Saturation Point,35.9217115
-Africa ,Solar PV,Baseline,,Parameter a,-7.4600426
-Africa ,Solar PV,Baseline,,Parameter b,0.17915222
-Africa ,Solar PV,Baseline,,Starting Year,1990
-Africa ,Solar PV,Pathway,,Saturation Point,35.9
-Africa ,Solar PV,Pathway,,Parameter a,-11.5
-Africa ,Solar PV,Pathway,,Parameter b,0.32
-Africa ,Solar PV,Pathway,,Starting Year,1990
-Africa ,Wind,Baseline,,Saturation Point,38.5
-Africa ,Wind,Baseline,,Parameter a,-5.66
-Africa ,Wind,Baseline,,Parameter b,0.13
-Africa ,Wind,Baseline,,Starting Year,1990
-Africa ,Wind,Pathway,,Saturation Point,38.5
-Africa ,Wind,Pathway,,Parameter a,-6.8010277
-Africa ,Wind,Pathway,,Parameter b,0.17915612
-Africa ,Wind,Pathway,,Starting Year,1990
+Africa ,Solar PV,Baseline,,Saturation Point,36
+Africa ,Solar PV,Baseline,,Parameter a,5
+Africa ,Solar PV,Baseline,,Parameter b,100
+Africa ,Solar PV,Baseline,,Max annual growth,100
+Africa ,Solar PV,Pathway,,Saturation Point,36
+Africa ,Solar PV,Pathway,,Parameter a,5
+Africa ,Solar PV,Pathway,,Parameter b,100
+Africa ,Solar PV,Pathway,,Max annual growth,100
+Africa ,Wind,Baseline,,Saturation Point,38
+Africa ,Wind,Baseline,,Parameter a,5
+Africa ,Wind,Baseline,,Parameter b,100
+Africa ,Wind,Baseline,,Max annual growth,100
+Africa ,Wind,Pathway,,Saturation Point,38
+Africa ,Wind,Pathway,,Parameter a,5
+Africa ,Wind,Pathway,,Parameter b,100
+Africa ,Wind,Pathway,,Max annual growth,100
 Africa ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 Africa ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 Africa ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -1476,9 +1476,9 @@ Africa ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
 Africa ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
 Africa ,Grid,Baseline,,Consumption:Generation,0.88
 Africa ,Biofuels,Baseline,,Saturation Point,100
-Africa ,Biofuels,Baseline,,Parameter a,-5.0178492
-Africa ,Biofuels,Baseline,,Parameter b,0.10741785
-Africa ,Biofuels,Baseline,,Starting Year,2000
+Africa ,Biofuels,Baseline,,Parameter a,5
+Africa ,Biofuels,Baseline,,Parameter b,100
+Africa ,Biofuels,Baseline,,Max annual growth,100
 Africa ,Solar Thermal,Baseline,Industry,Saturation Point,10
 Africa ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 Africa ,Solar Thermal,Baseline,,TWh per million meters squared ,0.47336
@@ -1502,22 +1502,22 @@ Africa ,Solar Thermal,Pathway,,GW-th per million meters squared,0.69625
 Africa ,Solar Thermal,Pathway,,TWh per million meters squared ,0.47336
 AdvancedECO ,Solar Thermal,Pathway,Industry,Saturation Point,38
 AdvancedECO ,Solar Thermal,Pathway,Buildings,Saturation Point,100
-AdvancedECO ,Solar PV,Baseline,,Saturation Point,35.9217115
-AdvancedECO ,Solar PV,Baseline,,Parameter a,-7.4600426
-AdvancedECO ,Solar PV,Baseline,,Parameter b,0.17915222
-AdvancedECO ,Solar PV,Baseline,,Starting Year,1990
-AdvancedECO ,Solar PV,Pathway,,Saturation Point,35.9
-AdvancedECO ,Solar PV,Pathway,,Parameter a,-11.5
-AdvancedECO ,Solar PV,Pathway,,Parameter b,0.32
-AdvancedECO ,Solar PV,Pathway,,Starting Year,1990
-AdvancedECO ,Wind,Baseline,,Saturation Point,38.5
-AdvancedECO ,Wind,Baseline,,Parameter a,-5.66
-AdvancedECO ,Wind,Baseline,,Parameter b,0.13
-AdvancedECO ,Wind,Baseline,,Starting Year,1990
-AdvancedECO ,Wind,Pathway,,Saturation Point,38.5
-AdvancedECO ,Wind,Pathway,,Parameter a,-6.8010277
-AdvancedECO ,Wind,Pathway,,Parameter b,0.17915612
-AdvancedECO ,Wind,Pathway,,Starting Year,1990
+AdvancedECO ,Solar PV,Baseline,,Saturation Point,36
+AdvancedECO ,Solar PV,Baseline,,Parameter a,5
+AdvancedECO ,Solar PV,Baseline,,Parameter b,100
+AdvancedECO ,Solar PV,Baseline,,Max annual growth,100
+AdvancedECO ,Solar PV,Pathway,,Saturation Point,36
+AdvancedECO ,Solar PV,Pathway,,Parameter a,5
+AdvancedECO ,Solar PV,Pathway,,Parameter b,100
+AdvancedECO ,Solar PV,Pathway,,Max annual growth,100
+AdvancedECO ,Wind,Baseline,,Saturation Point,38
+AdvancedECO ,Wind,Baseline,,Parameter a,5
+AdvancedECO ,Wind,Baseline,,Parameter b,100
+AdvancedECO ,Wind,Baseline,,Max annual growth,100
+AdvancedECO ,Wind,Pathway,,Saturation Point,38
+AdvancedECO ,Wind,Pathway,,Parameter a,5
+AdvancedECO ,Wind,Pathway,,Parameter b,100
+AdvancedECO ,Wind,Pathway,,Max annual growth,100
 AdvancedECO ,Solar PV,Baseline,,"Start Year, Retirement Trend",1990
 AdvancedECO ,Solar PV,Baseline,,"End Year, Retirement Trend",2100
 AdvancedECO ,Solar PV,Baseline,,Useful Life in Start Year,25
@@ -1538,10 +1538,10 @@ AdvancedECO ,Nuclear,Pathway,,Saturation Point,10
 AdvancedECO ,Biochar,Baseline,Industry,Saturation Point,23
 AdvancedECO ,Biochar,Pathway,Industry,Saturation Point,23
 AdvancedECO ,Biofuels,Baseline,,Saturation Point,100
-AdvancedECO ,Biofuels,Baseline,,Parameter a,-5.0178492
-AdvancedECO ,Biofuels,Baseline,,Parameter b,0.10741785
+AdvancedECO ,Biofuels,Baseline,,Parameter a,5
+AdvancedECO ,Biofuels,Baseline,,Parameter b,100
 AdvancedECO ,Solar Thermal,Baseline,Industry,Saturation Point,10
-AdvancedECO ,Biofuels,Baseline,,Starting Year,2000
+AdvancedECO ,Biofuels,Baseline,,Max annual growth,100
 AdvancedECO ,Solar Thermal,Baseline,Buildings,Saturation Point,100
 AdvancedECO ,Wind | Onshore,Baseline,,% of total wind generation,75%
 AdvancedECO ,Solar PV | Rooftop,Baseline,,% of total solar PV generation,30%

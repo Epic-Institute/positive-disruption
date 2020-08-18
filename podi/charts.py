@@ -22,6 +22,17 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.xlim([1980, 2100])
         plt.title("Percent Adoption, Solar PV " + iea_region_list[i])
 
+    # YOY adoption percent growth
+
+    for i in range(0, len(iea_region_list)):
+        fig = solarpv_adoption_growth.loc[iea_region_list[i]]
+
+        plt.figure(i)
+        plt.scatter(fig.T.index.values, fig.values * 100)
+        plt.ylabel("Change (%)")
+        plt.xlim([1980, 2100])
+        plt.title("YOY Adoption Growth, Solar PV " + iea_region_list[i])
+
     # historical analogies adoption curves
 
     # mitigation wedges curve
@@ -203,6 +214,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # energy supply by source and end-use (TWh)
 
+    # solar PV
     for i in range(0, len(iea_region_list)):
         plt.figure(i)
         plt.plot(
@@ -212,15 +224,16 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.ylabel("TFC (TWh)")
         plt.title("Energy Supply, Solar PV " + iea_region_list[i])
 
-    for i in range(0, len(iea_region_list)):
-        plt.figure(i)
-        plt.scatter(
-            wind_generation.columns.astype(int),
-            wind_generation.loc[iea_region_list[i]].values,
-            s=0.1,
-        )
-        plt.ylabel("TFC (TWh)")
-        plt.title("Energy Supply, Wind " + iea_region_list[i])
+    # wind
+    # for i in range(0, len(iea_region_list)):
+    #    plt.figure(i)
+    #    plt.scatter(
+    #        wind_generation.columns.astype(int),
+    #        wind_generation.loc[iea_region_list[i]].values,
+    #        s=0.1,
+    #    )
+    #    plt.ylabel("TFC (TWh)")
+    #    plt.title("Energy Supply, Wind " + iea_region_list[i])
 
     # electricity generation by source (TWh)
 

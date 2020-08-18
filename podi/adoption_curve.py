@@ -5,6 +5,7 @@ import warnings
 import pandas as pd
 import numpy as np
 from scipy.optimize import curve_fit, differential_evolution
+from numpy import NaN
 
 
 def func(x, a, b, c):
@@ -13,7 +14,7 @@ def func(x, a, b, c):
     return c / (1 + np.exp(-a * (x - b)))
 
 
-def adoption_curve(value, c):
+def adoption_curve(value, max_growth, a, b, c):
     x_data = np.arange(len(value.T))
     y_data = value.to_numpy()[~np.isnan(value)]
 
@@ -25,8 +26,8 @@ def adoption_curve(value, c):
     # By default, differential_evolution completes by calling curve_fit()
     # using parameter bounds.
     search_bounds = [
-        [0.0, 5.0],
-        [0.0, 100],
+        [0.0, a.astype(float)],
+        [0.0, b.astype(float)],
         [c.astype(float), c.astype(float)],
     ]  # a  # b  # c
     # "seed" the numpy random number generator for repeatable results.
@@ -68,4 +69,25 @@ def adoption_curve(value, c):
         2100 - value.columns.astype(int).values[0] + 1,
     ).astype(int)
 
-    return pd.DataFrame(data=y, index=years)
+    # set maximum annual growth rate
+    y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
+    for i in range(1, len(y_data)):
+        y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
+        if y_growth[0][i].astype(float) <= 0:
+            y_growth[0][i] = 0
+            y_data[i] = y_data[i - 1]
+            genetic_parameters = differential_evolution(
+                sum_of_squared_error, search_bounds, seed=3
+            ).x
+            y = np.array(func(x, *genetic_parameters))
+        elif y_growth[0][i].astype(float) > max_growth.astype(float):
+            y_growth[0][i] = max_growth
+            y_data[i] = y_data[i - 1] * (1 + max_growth)
+            genetic_parameters = differential_evolution(
+                sum_of_squared_error, search_bounds, seed=3
+            ).x
+            y = np.array(func(x, *genetic_parameters))
+
+    y_growth = np.array(y_growth)
+
+    return pd.DataFrame(data=y, index=years), pd.DataFrame(data=y_growth, index=years)
