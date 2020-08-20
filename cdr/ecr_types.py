@@ -12,7 +12,7 @@ to be put under consideration when developing the cost-optimal CDR mix.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "08.14.20"
+__version__ = "08.20.20"
 
 import math
 
@@ -22,7 +22,7 @@ from cdr.cdr_abstract_types import CDRStrategy, ECR
 import cdr.cdr_util as util
 
 ###################################################################
-# THIS FILE IS FOR SPECIFIC ECR (engineered) STRATEGIES HERE.     #
+# THIS FILE IS FOR SPECIFIC ECR (engineered) STRATEGIES.          #
 # EACH CDR STRATEGY MUST HAVE:                                    #
 #    1. annual adoption limits (MtCO2/yr), with the header        #
 #          @classmethod                                           #
@@ -30,11 +30,11 @@ import cdr.cdr_util as util
 #                                                                 #
 #    2. curr_year_cost ($/tCO2), with the header                  #
 #          @util.once_per_year                                    #
-#          def marginal_levelized_cost(self) -> float:           #
+#          def marginal_levelized_cost(self) -> float:            #
 #                                                                 #
-#    3. marginal_levelized_cost ($/tCO2), with the header        #
+#    3. marginal_levelized_cost ($/tCO2), with the header         #
 #          @util.cacheit                                          #
-#          def marginal_levelized_cost(self) -> float:           #
+#          def marginal_levelized_cost(self) -> float:            #
 #                                                                 #
 #    4. marginal_energy_use (kWh/tCO2), with the header           #
 #          @util.cacheit                                          #
@@ -192,7 +192,7 @@ class LTSSDAC(ECR):
     @util.cacheit
     def marginal_energy_use(self) -> tuple:
         learning = util.learning(
-            self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.137
+            self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.2
         )
         # theoretical min energy use (20 kJ/mol) of electricity cannot be learned away
         return 176.76 * learning + 126.24, 1330 * learning, 0, 0
@@ -244,7 +244,7 @@ class HTLSDAC(ECR):
         capex = (
             capex_new
             * util.crf(n_yrs=self.get_levelizing_lifetime())
-            / util.LTSSDAC_UTILIZATION
+            / util.HTLSDAC_UTILIZATION
         )
         opex = capex_new * 0.037
         energy_basis = self.marginal_energy_use()
@@ -374,8 +374,11 @@ class ExSituEW(ECR):
     @staticmethod
     def _rock_needed(tCO2) -> float:
         """Returns tonnes of rock needed to capture the given tCO2 in one year.
-        Calculated using m_rock = (A_warm + A_temp) * M
-        and R_CO2 = (0.95 * A_warm + 0.35 * A_temp) * M * P * d(x) """
+        Calculated using:
+        (1) m_rock = (A_warm + A_temp) * M
+        (2) R_CO2 = (0.95 * A_warm + 0.35 * A_temp) * M * P * d(x)
+        (3) A_warm / A_temp = util.A_WARM / util.A_TEMP
+            (i.e. rock is applied to land regions proportionally to their availability) """
         num = tCO2 * (1 + util.A_WARM / util.A_TEMP)
         denom = (
             util.CO2_PER_ROCK
@@ -489,7 +492,7 @@ class GeologicStorage(ECR):
         pipeline_elec = 837900 * transport_scale_factor
         pipeline_transport = (
             494940 * util.TRANSPORT_KWH_PER_TKM / self.lifetime * transport_scale_factor
-        )
+        ) # 1.5 * 2.26 * 10^5 (sh ton-mile) = 494940 tonne*km
         pipeline_fuel = (
             5343.16 * util.KWH_PER_GJ / self.lifetime * transport_scale_factor
         )

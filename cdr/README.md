@@ -27,7 +27,7 @@ Here is the basic logic and the underlying set of assumptions for the current pr
         * Remove capacity for de-adopting technologies (e.g. natural carbon sinks that are saturating or other technologies with negative growth curves)
             * The capacity that is removed for de-adopting technologies is that of the oldest installed plants for that technology. These are either the most expensive or the closest to retirement anyways.
     * Determine how much additional CDR needs to be deployed in that year
-	* Computed as the difference between the previous year’s existing global CDR capacity and the current year’s required CDR capacity, plus any retirements listed above or CO2 leakage from geologic storage.
+	    * Computed as the difference between the previous year’s existing global CDR capacity and the current year’s required CDR capacity, plus any retirements listed above or CO2 leakage from geologic storage.
     * Rank each available technology by cost, using a priority queue.
     * Deploy 1 MtCO2 of CDR at a time from the cheapest technology until it either runs out or is no longer the cheapest technology, or until the required CDR quota has been filled.
         * Note that the currently cheapest technology may change during a year if one technology is exhausted or becomes more expensive.
@@ -35,8 +35,8 @@ Here is the basic logic and the underlying set of assumptions for the current pr
     * This yields a technology mix that minimizes the cost in each consecutive year, where each decision is made with no consideration given to following years.
 
 ## Calculations
-* Effective CDR factor for a project (i.e. net tCO2 removed per tCO2 capacity) = `1-x`
-    * x is tons incidental CO2 emissions (e.g. from energy production) per ton CO2 removed.
+* *Effective CDR factor* for a project (i.e. net tCO2 removed per tCO2 capacity) = `1-x`
+    * *x* is tons incidental CO2 emissions (e.g. from energy production) per ton CO2 removed.
 * Costs are based on each 1 MtCO2/yr project’s levelized cost, their net CDR efficiency (accounting for incidental emissions), and the annual carbon price.
     * ![cost equation](https://latex.codecogs.com/svg.latex?%5Cfrac%7B%5Ctextup%7Bnew%5C%26space%3Bcost%7D%7D%7BtCO_2%7D%3D%5Cleft%5C%28%5Cfrac%7Bcost%7D%7BtCO_2%7D%5Cright%5C%29_%7Bbaseline%7D%2A%5Cfrac%7B1%7D%7B%5Ctextup%7Beffective%26space%3BCDR%26space%3Bfactor%7D%7D-%5Cfrac%7B1%7D%7BT%7D%2A%5Csum_%7By%3Dy_0%7D%5E%7By_0%26plus%3BT%7D%5Cfrac%7B%5Ctextup%7Bcredit%26space%3Bprice%7D%28y%29%7D%7B%281%26plus%3Br%29%5E%7B%28y-y_0%29%7D%7D)
     * *T* is lifetime, *y_0* is project deployment year, *r* is discount rate.
@@ -52,7 +52,7 @@ Here is the basic logic and the underlying set of assumptions for the current pr
 * The capture step is assumed to be the limiting step, so geologic storage is assumed to have unlimited potential.
 * DAC projects can achieve up to a 90% reduction in CAPEX via learning.
 * Storage projects are levelized using the same lifetime as their paired capture project.
-* Transportation mix has a (trucking : shipping : rail) split of (30.7 : 10.5 : 2.4), based on relative global energy use of freight transport modes based on the [EIA 2019 energy outlook.](https://www.eia.gov/outlooks/aeo/data/browser/#/?id=51-IEO2019)
+* Transportation mix has a (trucking : shipping : rail) split of (30.7 : 10.5 : 2.4), based on the relative global energy use of freight transport modes in the [EIA 2019 energy outlook.](https://www.eia.gov/outlooks/aeo/data/browser/#/?id=51-IEO2019)
 * Default energy source emissions intensity assumptions described in cdr_util.
 * All electricity is assumed to come from the grid.
 * All liquid fuels are assumed to be diesel.
@@ -84,14 +84,14 @@ Each CDR strategy must implement the following features:
     def adopt_limits(cls) -> float:
 ```
 
-2. **Project’s cost in a particular year ($/tCO2)**, returning the raw $/tCO2 (in 2020$) cost of the project in the year given by `self.age`. This is not adjusted for the impacts of incidental emissions or CDR credits and, in addition to being based on the project’s current age, is likely based on the project’s capacity (self.capacity) and its original deployment level (`self.deployment_level`), which represents the technology’s cumulative deployment (MtCO2/yr) at the time of this project’s creation. Has the header:
+2. **Project’s cost in a particular year ($/tCO2)**, returning the raw $/tCO2 (in 2020$) cost of the project in the year given by `self.age`. This is **not** adjusted for the impacts of incidental emissions or CDR credits and, in addition to being based on the project’s current age, is likely based on the project’s capacity (self.capacity) and its original deployment level (`self.deployment_level`), which represents the technology’s cumulative deployment (MtCO2/yr) at the time of this project’s creation. Has the header:
     * In theory, levelizing each of the yearly costs from this function over the lifetime of the project should yield the same result as the marginal_levelized_cost function below.
 ```
     @util.once_per_year
     def curr_year_cost(self) -> float:
 ```
 
-3. **Project’s levelized cost ($/tCO2)**, returning the “sticker price” $/tCO2 (in 2020$) of the project used for comparison with other CDR projects. This is not adjusted for the impacts of incidental emissions or CDR credits and is based on the project’s capacity (`self.capacity`) and its original deployment level (`self.deployment_level`).
+3. **Project’s levelized cost ($/tCO2)**, returning the “sticker price” $/tCO2 (in 2020$) of the project used for comparison with other CDR projects. This is **not** adjusted for the impacts of incidental emissions or CDR credits and is based on the project’s capacity (`self.capacity`) and its original deployment level (`self.deployment_level`).
     * Should account for cost declines via learning curves, if applicable.
     * Has the header:
 ```

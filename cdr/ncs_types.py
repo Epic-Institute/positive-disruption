@@ -12,7 +12,7 @@ to be put under consideration when developing the cost-optimal CDR mix.
 """
 
 __author__ = "Zach Birnholz"
-__version__ = "08.14.20"
+__version__ = "08.20.20"
 
 from cdr.cdr_abstract_types import CDRStrategy, NCS
 import cdr.cdr_util as util
@@ -26,11 +26,11 @@ import cdr.cdr_util as util
 #                                                                 #
 #    2. curr_year_cost ($/tCO2), with the header                  #
 #          @util.once_per_year                                    #
-#          def marginal_levelized_cost(self) -> float:           #
+#          def marginal_levelized_cost(self) -> float:            #
 #                                                                 #
-#    3. marginal_levelized_cost ($/tCO2), with the header        #
+#    3. marginal_levelized_cost ($/tCO2), with the header         #
 #          @util.cacheit                                          #
-#          def marginal_levelized_cost(self) -> float:           #
+#          def marginal_levelized_cost(self) -> float:            #
 #                                                                 #
 #    4. marginal_energy_use (kWh/tCO2), with the header           #
 #          @util.cacheit                                          #
