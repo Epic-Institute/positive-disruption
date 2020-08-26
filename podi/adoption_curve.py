@@ -95,7 +95,9 @@ def adoption_curve(value, region, technology, scenario):
     x = np.arange(2100 - pd.to_numeric(value.index[0]))
     y = np.array(func(x, *genetic_parameters))
     years = np.linspace(
-        pd.to_numeric(value.index[0]), 2100, 2100 - pd.to_numeric(value.index[0]),
+        pd.to_numeric(value.index[0]),
+        2100,
+        2100 - pd.to_numeric(value.index[0]),
     ).astype(int)
 
     # set maximum annual growth rate
@@ -128,4 +130,4 @@ def adoption_curve(value, region, technology, scenario):
 
     y_growth = np.array(y_growth)
     """
-    return pd.DataFrame(data=y, index=years), pd.DataFrame(data=y, index=years)
+    return pd.DataFrame(data=y, index=years)

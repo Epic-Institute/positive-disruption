@@ -56,11 +56,20 @@ def energy_supply(scenario, energy_demand):
 
     # project percent of total electricity consumption met by a given technology (proportion)
     def proj_per_elec_consump(percent_adoption):
+        return hist_per_elec_consump.apply(
+            adoption_curve,
+            axis=1,
+            result_type="expand",
+            args=([region, hist_per_elec_consump.index.values[0], scenario]),
+        )
+
+        """
         return (
             pd.DataFrame(percent_adoption.loc[proj_start_year:, :])
             .set_index(percent_adoption.loc[proj_start_year:, :].index)
             .T
         )
+        """
 
     # project electricity consumption met by a given technology
     def proj_elec_consump(region, scenario, proj_per_elec_consump):
@@ -87,7 +96,9 @@ def energy_supply(scenario, energy_demand):
     def consump_total(region, technology, scenario):
         percent_adoption, yoy_adoption_growth = adoption_curve(
             hist_per_elec_consump(
-                region, scenario, hist_elec_consump(region, scenario),
+                region,
+                scenario,
+                hist_elec_consump(region, scenario),
             ),
             region,
             technology,
@@ -97,7 +108,9 @@ def energy_supply(scenario, energy_demand):
         consump_total = consump(
             hist_elec_consump(region, technology, scenario),
             proj_elec_consump(
-                region, scenario, proj_per_elec_consump(percent_adoption),
+                region,
+                scenario,
+                proj_per_elec_consump(percent_adoption),
             )
             * (1 + energy_oversupply_prop),
         )
@@ -105,7 +118,9 @@ def energy_supply(scenario, energy_demand):
         consump_cdr = consump(
             hist_elec_consump(region, technology, scenario) * 0,
             proj_elec_consump(
-                region, scenario, proj_per_elec_consump(percent_adoption),
+                region,
+                scenario,
+                proj_per_elec_consump(percent_adoption),
             )
             * (energy_oversupply_prop),
         )
@@ -213,9 +228,7 @@ def energy_supply(scenario, energy_demand):
 
     for i in range(0, len(iea_region_list)):
         solarpv_generation = pd.DataFrame(solarpv_generation).append(
-            consump_total(
-                iea_region_list[i], "Solar PV", scenario, "Saturation Point",
-            )[0]
+            consump_total(iea_region_list[i], "Solar PV", scenario)[0]
         )
         solarpv_percent_adoption = pd.DataFrame(solarpv_percent_adoption).append(
             consump_total(iea_region_list[i], "Solar PV", scenario)[1]
