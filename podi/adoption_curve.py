@@ -14,7 +14,11 @@ def func(x, a, b, c):
     return c / (1 + np.exp(-a * (x - b)))
 
 
-def adoption_curve(value, max_growth, a, b, c):
+def adoption_curve(value, region, technology, scenario):
+    parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
+        ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
+    )
+
     x_data = np.arange(len(value.T))
     y_data = value.to_numpy()[~np.isnan(value)]
 
@@ -26,9 +30,36 @@ def adoption_curve(value, max_growth, a, b, c):
     # By default, differential_evolution completes by calling curve_fit()
     # using parameter bounds.
     search_bounds = [
-        [0.0, a.astype(float)],
-        [0.0, b.astype(float)],
-        [c.astype(float), c.astype(float)],
+        [
+            0.0,
+            pd.to_numeric(
+                parameters.loc[
+                    region, technology, scenario, slice(None), "Parameter a"
+                ].Value[0]
+            ),
+        ],
+        [
+            0.0,
+            pd.to_numeric(
+                parameters.loc[
+                    region, technology, scenario, slice(None), "Parameter b"
+                ].Value[0]
+            ),
+        ],
+        [
+            pd.to_numeric(
+                parameters.loc[
+                    region, technology, scenario, slice(None), "Saturation Point"
+                ].Value[0]
+            )
+            / 100,
+            pd.to_numeric(
+                parameters.loc[
+                    region, technology, scenario, slice(None), "Saturation Point"
+                ].Value[0]
+            )
+            / 100,
+        ],
     ]  # a  # b  # c
     # "seed" the numpy random number generator for repeatable results.
     genetic_parameters = differential_evolution(
@@ -61,15 +92,22 @@ def adoption_curve(value, max_growth, a, b, c):
     # r_squared = 1.0 - (np.var(abs_error) / np.var(y_data))
     # print("r_squared = ", r_squared)
 
-    x = np.arange(2100 - value.columns.astype(int).values[0] + 1)
+    x = np.arange(2100 - pd.to_numeric(value.index[0]))
     y = np.array(func(x, *genetic_parameters))
     years = np.linspace(
-        value.columns.astype(int).values[0],
-        2100,
-        2100 - value.columns.astype(int).values[0] + 1,
+        pd.to_numeric(value.index[0]), 2100, 2100 - pd.to_numeric(value.index[0]),
     ).astype(int)
 
     # set maximum annual growth rate
+    max_growth = (
+        pd.to_numeric(
+            parameters.loc[
+                region, technology, scenario, slice(None), "Max annual growth"
+            ].Value[0]
+        )
+        / 100
+    )
+    """
     y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
     for i in range(1, len(y_data)):
         y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
@@ -89,5 +127,5 @@ def adoption_curve(value, max_growth, a, b, c):
             y = np.array(func(x, *genetic_parameters))
 
     y_growth = np.array(y_growth)
-
-    return pd.DataFrame(data=y, index=years), pd.DataFrame(data=y_growth, index=years)
+    """
+    return pd.DataFrame(data=y, index=years), pd.DataFrame(data=y, index=years)

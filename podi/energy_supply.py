@@ -19,52 +19,42 @@ def energy_supply(scenario, energy_demand):
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
 
-    electricity_generation_data = eia_etl("podi/data/electricity.csv").loc[
-        :, data_start_year:data_end_year
-    ]
-    heat_generation_data = (
-        pd.read_csv("podi/data/heat.csv")
-        .fillna(0)
-        .set_index(["IEA Region", "Sector", "Metric", "Scenario", "Unit"])
+    ###############
+    # ELECTRICITY #
+    ###############
+    elec_gen_data = pd.DataFrame(
+        eia_etl("podi/data/electricity.csv").loc[:, data_start_year:data_end_year]
     )
 
     # historical electricity consumption (TWh)
-    def hist_elec_consump(region, technology, scenario):
+    def hist_elec_consump(region, scenario):
         consump_gen_ratio = pd.to_numeric(
             parameters.loc[
                 region, "Grid", scenario, slice(None), "Consumption:Generation"
             ]["Value"].iat[0]
         )
-        return pd.DataFrame(
-            electricity_generation_data.iloc[
-                electricity_generation_data.index.get_level_values(1).str.contains(
-                    region, na=False
-                )
+        return (
+            elec_gen_data.iloc[
+                elec_gen_data.index.get_level_values(1).str.contains(region, na=False)
             ]
-            .loc[(slice(None), slice(None), technology, scenario, slice(None)), :]
+            .loc[(slice(None), slice(None), slice(None), scenario, slice(None)), :]
             .mul(consump_gen_ratio)
+            .groupby(["Metric"])
             .sum()
-        ).T
+        )
 
     # historical percent of total electricity consumption met by a given technology (propotion)
-    def hist_per_elec_consump(region, scenario, metric, hist_elec_consump):
+    def hist_per_elec_consump(region, scenario, hist_elec_consump):
         consump_gen_ratio = pd.to_numeric(
             parameters.loc[
                 region, "Grid", scenario, slice(None), "Consumption:Generation"
             ]["Value"].iat[0]
         )
-        return hist_elec_consump.div(
-            electricity_generation_data.iloc[
-                electricity_generation_data.index.get_level_values(1).str.contains(
-                    region, na=False
-                )
-            ]
-            .loc[(slice(None), slice(None), "Generation", scenario, slice(None)), :]
-            .mul(consump_gen_ratio)
-            .sum()
-        ).fillna(0)
+        return hist_elec_consump.div(hist_elec_consump.loc["Generation"]).mul(
+            consump_gen_ratio
+        )
 
-    # projected percent of total electricity consumption met by a given technology (proportion)
+    # project percent of total electricity consumption met by a given technology (proportion)
     def proj_per_elec_consump(percent_adoption):
         return (
             pd.DataFrame(percent_adoption.loc[proj_start_year:, :])
@@ -72,7 +62,7 @@ def energy_supply(scenario, energy_demand):
             .T
         )
 
-    # projected electricity consumption met by a given technology
+    # project electricity consumption met by a given technology
     def proj_elec_consump(region, scenario, proj_per_elec_consump):
         proj_elec_consump = pd.DataFrame(
             proj_per_elec_consump.values
@@ -85,45 +75,23 @@ def energy_supply(scenario, energy_demand):
 
         return proj_elec_consump
 
-    # joined timeseries of historical and projected electricity consumption met by a given technology
+    # join timeseries of historical and projected electricity consumption met by a given technology
     def consump(hist_elec_consump, proj_elec_consump):
         return hist_elec_consump.join(proj_elec_consump)
 
-    # joined timeseries of historical and projected percent total electricity consumption met by a given technology
+    # join timeseries of historical and projected percent total electricity consumption met by a given technology
     def per_consump(hist_per_elec_consump, proj_per_elec_consump):
         return hist_per_elec_consump.join(proj_per_elec_consump)
 
-    # combine and run above functions to get electricity consumption met by a given technology
-    def consump_total(region, technology, technology2, scenario, metric):
+    # combine above functions to get electricity consumption met by a given technology
+    def consump_total(region, technology, scenario):
         percent_adoption, yoy_adoption_growth = adoption_curve(
             hist_per_elec_consump(
-                region,
-                scenario,
-                metric,
-                hist_elec_consump(region, technology, scenario),
+                region, scenario, hist_elec_consump(region, scenario),
             ),
-            pd.to_numeric(
-                parameters.loc[
-                    region, technology2, scenario, slice(None), "Max annual growth"
-                ].Value.iat[0]
-            )
-            / 100,
-            pd.to_numeric(
-                parameters.loc[
-                    region, technology2, scenario, slice(None), "Parameter a"
-                ].Value.iat[0]
-            ),
-            pd.to_numeric(
-                parameters.loc[
-                    region, technology2, scenario, slice(None), "Parameter b"
-                ].Value.iat[0]
-            ),
-            pd.to_numeric(
-                parameters.loc[
-                    region, technology2, scenario, slice(None), "Saturation Point"
-                ].Value.iat[0]
-            )
-            / 100,
+            region,
+            technology,
+            scenario,
         )
 
         consump_total = consump(
@@ -152,6 +120,12 @@ def energy_supply(scenario, energy_demand):
     ##########
     #  HEAT  #
     ##########
+
+    heat_generation_data = (
+        pd.read_csv("podi/data/heat.csv")
+        .fillna(0)
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario", "Unit"])
+    )
 
     def historical_heat_generation(region, sector, scenario, technology):
         return heat_generation_data.loc[
@@ -224,80 +198,40 @@ def energy_supply(scenario, energy_demand):
         )
         return heat_generation_total
 
+    ###########################
+    #  NONELECTRIC TRANSPORT  #
+    ###########################
+
+    ############
+    #  OUTPUT  #
+    ############
+
     solarpv_generation = []
     solarpv_percent_adoption = []
     solarpv_adoption_growth = []
-    wind_generation = []
-    wind_percent_adoption = []
-    solar_thermal_generation = []
     consump_cdr = []
 
     for i in range(0, len(iea_region_list)):
         solarpv_generation = pd.DataFrame(solarpv_generation).append(
             consump_total(
-                iea_region_list[i], "Solar", "Solar PV", scenario, "Saturation Point",
+                iea_region_list[i], "Solar PV", scenario, "Saturation Point",
             )[0]
         )
         solarpv_percent_adoption = pd.DataFrame(solarpv_percent_adoption).append(
-            consump_total(
-                iea_region_list[i], "Solar", "Solar PV", scenario, "Saturation Point",
-            )[1]
+            consump_total(iea_region_list[i], "Solar PV", scenario)[1]
         )
 
         solarpv_adoption_growth = pd.DataFrame(solarpv_adoption_growth).append(
-            consump_total(
-                iea_region_list[i], "Solar", "Solar PV", scenario, "Saturation Point",
-            )[2]
+            consump_total(iea_region_list[i], "Solar PV", scenario)[2]
         )
 
         consump_cdr = pd.DataFrame(consump_cdr).append(
-            consump_total(
-                iea_region_list[i], "Solar", "Solar PV", scenario, "Saturation Point",
-            )[3]
+            consump_total(iea_region_list[i], "Solar PV", scenario)[3]
         )
 
-        # wind_generation = pd.DataFrame(wind_generation).append(
-        #    generation_total(
-        #        iea_region_list[i], "Wind", "Wind", scenario, "Saturation Point"
-        #    )[0]
-        # )
-        # wind_percent_adoption = pd.DataFrame(wind_percent_adoption).append(
-        #    generation_total(
-        #        iea_region_list[i], "Wind", "Wind", scenario, "Saturation Point"
-        #    )[1]
-        # )
-
-        #    ff_generation = total electricity generation - sum(
-        #        solarpv_generation, wind_generation
-        #    )
-
-        # solar_thermal_generation = heat_generation_total(
-        #    iea_region_list[i], "Solar Thermal", scenario, "Industry",
-        # ).append(
-        #    heat_generation_total(
-        #        iea_region_list[i], "Solar Thermal", scenario, "Buildings"
-        #    )
-        # )
-
-        #    biochar_generation = heat_generation_total(iea_region_list[i], "Biochar")
-
-        #    bioenergy_generation = heat_generation_total(iea_region_list[i], "Bioenergy")
-
-        #    ff_heat_generation = heat_generation_total(iea_region_list[i], "")
-
-        #    nonelectric_transport = nonelectric_transport(iea_region_list[i])
-
-        # energy_supply_output = pd.concat(
-        #    [
-        #        solarpv_generation,
-        #        wind_generation,
-        #            ff_generation,
-        #        solar_thermal_generation
-        #            biochar_generation,
-        #            bioenergy_generation,
-        #            ff_heat_generation,
-        #            nonelectric_transport,
-        #    ]
-        # )
-
-    return solarpv_generation, consump_cdr
+    return (
+        solarpv_generation,
+        solarpv_percent_adoption,
+        solarpv_adoption_growth,
+        consump_cdr,
+    )
