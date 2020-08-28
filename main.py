@@ -56,10 +56,10 @@ energy_demand_pathway = energy_demand(
 # ENERGY SUPPLY #
 #################
 
-generation, percent_adoption, adoption_growth, consump_cdr = energy_supply(
+elec_consump, elec_percent_consump, elec_consump_cdr = energy_supply(
     "Baseline", energy_demand_baseline
 )
-generation, percent_adoption, adoption_growth, consump_cdr = energy_supply(
+elec_consump, elec_percent_consump, elec_consump_cdr = energy_supply(
     "Pathway", energy_demand_pathway
 )
 

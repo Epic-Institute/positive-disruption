@@ -218,8 +218,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     for i in range(0, len(iea_region_list)):
         plt.figure(i)
         plt.plot(
-            solarpv_generation.columns.astype(int),
-            solarpv_generation.loc[iea_region_list[i]].values,
+            generation.columns.astype(int),
+            generation.loc[iea_region_list[i]].values,
         )
         plt.ylabel("TFC (TWh)")
         plt.title("Energy Supply, Solar PV " + iea_region_list[i])
