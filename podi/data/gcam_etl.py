@@ -78,7 +78,7 @@ gcam_pct_change = (
     .reset_index()
     .merge(metrics, right_on="GCAM Metric", left_on="Variable")
     .set_index(
-        ["Region", "Variable", "Unit", "WEO Sector", "WEO Metric", "GCAM Metric"]
+        ["Region", "Variable", "Unit", "IEA Sector", "IEA Metric", "GCAM Metric"]
     )
 )
 

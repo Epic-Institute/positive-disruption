@@ -7,43 +7,62 @@ from matplotlib.ticker import PercentFormatter
 import matplotlib.animation as animation
 from IPython.display import HTML
 from podi.data.iea_weo_etl import iea_region_list
+import pyam
+from scipy.interpolate import make_interp_spline, BSpline
 
 
 def charts(energy_demand_baseline, energy_demand_pathway):
 
-    # adoption curves (add annual adoption curve to look like PD20 Fig.1)
-
+    # Fig. 3: Projected Market Diffusion Curves for the V7
     for i in range(0, len(iea_region_list)):
-        fig = solarpv_percent_adoption.loc[iea_region_list[i]]
+        # fig = dataframe of percent of max mitigation for each vector
 
         plt.figure(i)
-        plt.plot(fig.T.index.values, fig.values * 100)
-        plt.ylabel("Adoption (%)")
-        plt.xlim([1980, 2100])
-        plt.title("Percent Adoption, Solar PV " + iea_region_list[i])
+        plt.plot(fig.columns.astype(int).values, fig.T * 100)
+        plt.ylabel("(%)")
+        plt.xlim([data_start_year, long_proj_end_year])
+        plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
+        plt.legend(
+            fig.index,
+            loc=2,
+            fontsize="small",
+            bbox_to_anchor=(1.05, 1),
+            borderaxespad=0.0,
+        )
 
-    # YOY adoption percent growth
+    # Fig. 4: Mitigation Wedges Curve
+    # https://pyam-iamc.readthedocs.io/en/stable/examples/plot_stack.html#sphx-glr-examples-plot-stack-py
 
     for i in range(0, len(iea_region_list)):
-        fig = solarpv_adoption_growth.loc[iea_region_list[i]]
+
+        # fig = dataframe of percent of max mitigation for each vector
 
         plt.figure(i)
-        plt.scatter(fig.T.index.values, fig.values * 100)
-        plt.ylabel("Change (%)")
-        plt.xlim([1980, 2100])
-        plt.title("YOY Adoption Growth, Solar PV " + iea_region_list[i])
+        plt.plot(fig.columns.astype(int).values, fig.T)
+        plt.ylabel("Gt CO2e/yr")
+        plt.xlim([data_start_year, long_proj_end_year])
+        plt.title("Mitigation Wedges, " + iea_region_list[i])
+        plt.legend(
+            fig.index,
+            loc=2,
+            fontsize="small",
+            bbox_to_anchor=(1.05, 1),
+            borderaxespad=0.0,
+        )
 
-    # historical analogies adoption curves
+    # Fig. 5: Projected average global temperature increase above pre-industrial
+    # https://github.com/openscm/pymagicc
 
-    # mitigation wedges curve
+    # Fig. 6: Projected greenhouse gas atmospheric concentration
+    # https://github.com/openscm/pymagicc
 
-    # projected average global temperature increase above pre-industrial
+    # Fig. 7: Projected CO2 atmospheric concentration
+    # https://github.com/openscm/pymagicc
 
-    # projected greenhouse gas atmospheric concentration (ppm CO2e)
+    # Fig. 16: Actual vs. Projected Adoption Curves
 
-    # projected CO2 atmospheric concentration
+    # Fig. 19: Energy demand by sector and end-use
 
-    # energy demand by sector and end-use (TWh)
     # Baseline
     for i in range(0, len(iea_region_list)):
         energy_demand_baseline_i = energy_demand_baseline.loc[
@@ -208,36 +227,69 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.xticks(np.arange(10, 100, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
 
-    # energy demand mitigation wedges (TWh)
+    # Fig. 20: Energy Demand Mitigation Wedges
 
-    # energy intensity projections (TWh/GDP)
+    # Fig. 21: Energy Intensity Projections
 
-    # energy supply by source and end-use (TWh)
+    # Fig. 24: Energy Supply by Source and End-use
 
-    # solar PV
+    # Fig. 25: Electricity Generation by Source
+    tech_list = [
+        "Biomass and waste",
+        "Fossil fuels",
+        "Geothermal",
+        "Hydroelectricity",
+        "Nuclear",
+        "Solar",
+        "Wind",
+    ]
+
     for i in range(0, len(iea_region_list)):
+        fig = elec_consump.loc[iea_region_list[i], slice(None)]
+        fig = fig[fig.index.isin(tech_list)]
         plt.figure(i)
-        plt.plot(
-            generation.columns.astype(int),
-            generation.loc[iea_region_list[i]].values,
-        )
+        plt.stackplot(fig.columns.astype(int), fig, labels=fig.index)
         plt.ylabel("TFC (TWh)")
-        plt.title("Energy Supply, Solar PV " + iea_region_list[i])
+        plt.title("Electricity Generation by Source, " + iea_region_list[i])
+        plt.legend(loc=2, fontsize="small")
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
-    # wind
-    # for i in range(0, len(iea_region_list)):
-    #    plt.figure(i)
-    #    plt.scatter(
-    #        wind_generation.columns.astype(int),
-    #        wind_generation.loc[iea_region_list[i]].values,
-    #        s=0.1,
-    #    )
-    #    plt.ylabel("TFC (TWh)")
-    #    plt.title("Energy Supply, Wind " + iea_region_list[i])
+    # Fig. 25.1: Electricity Generation by Source (%)
+    # Line plot
+    for i in range(0, len(iea_region_list)):
+        fig = elec_percent_adoption.loc[iea_region_list[i], slice(None)]
+        fig = fig[fig.index.isin(tech_list)]
+        plt.figure(i)
+        plt.plot(fig.columns.astype(int).values, fig.T * 100)
+        plt.ylabel("(%)")
+        plt.xlim([data_start_year, long_proj_end_year])
+        plt.title("Percent of Total Electricity Generation, " + iea_region_list[i])
+        plt.legend(
+            fig.index,
+            loc=2,
+            fontsize="small",
+            bbox_to_anchor=(1.05, 1),
+            borderaxespad=0.0,
+        )
 
-    # electricity generation by source (TWh)
+    # Stacked plot
+    for i in range(0, len(iea_region_list)):
+        fig = elec_percent_adoption.loc[iea_region_list[i], slice(None)]
+        fig = fig[fig.index.isin(tech_list)]
+        plt.figure(i)
+        plt.stackplot(fig.columns.astype(int).values, fig * 100, labels=fig.index)
+        plt.ylabel("(%)")
+        plt.xlim([data_start_year, long_proj_end_year])
+        plt.title("Percent of Total Electricity Generation, " + iea_region_list[i])
+        plt.legend(
+            fig.index,
+            loc=2,
+            fontsize="small",
+            bbox_to_anchor=(1.05, 1),
+            borderaxespad=0.0,
+        )
 
-    # electricity demand by sector (TWh)
+    # Fig. 26: Electricity Demand by Sector (TWh)
     # Baseline
     for i in range(0, len(iea_region_list)):
         energy_demand_baseline_i = energy_demand_baseline.loc[
@@ -402,19 +454,24 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.xticks(np.arange(10, 100, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
 
-    # buildings energy supply by source (TWh)
+    # Fig. 27: Buildings Energy Supply
 
-    # industry energy demand by end-use (TWh)
+    # Fig. 28: Industry Energy Demand by End-Use
 
-    # industry heat supply by source (TWh)
+    # Fig. 29: Industry Heat Supply
 
-    # transportation energy demand by source (TWh)
+    # Fig. 30: Transportation Energy Demand
 
-    # regenerative agriculture subvector mitigation wedges
+    # Fig. 31: Electrification of Vehicles
 
-    # forests & wetlands subvector mitigation wedges
+    # Fig. 32: Transportation Energy Demand Reduction from Design Improvements
 
-    # afolu subvector mitigation wedges
+    # Fig. 33: Regenerative Agriculture Subvector Mitigation Wedges
 
-    # annual CO2 removed from CDR
+    # Fig. 34: Forests & Wetlands Subvector Mitigation Wedges
+
+    # Fig. 35: AFOLU Subvector Mitigation Wedges
+
+    # Fig. 40: Annual CO2 Removed via CDR
+
     return

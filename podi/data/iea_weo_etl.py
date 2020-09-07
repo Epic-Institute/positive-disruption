@@ -15,7 +15,7 @@ iea_region_list = (
     "BRAZIL ",
     "EUR ",
     "EU ",
-    "Africa ",
+    "AFRICA ",
     "SAFR ",
     "ME ",
     "EURASIA ",

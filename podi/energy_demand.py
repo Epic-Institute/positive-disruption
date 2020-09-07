@@ -23,17 +23,20 @@ def energy_demand(
     # define energy demand as timeseries consisting of historical data (TWh) and projections (% change)
     energy_demand = energy_demand_historical.merge(
         energy_demand_projection,
-        right_on=["WEO Sector", "WEO Metric", "Region"],
+        right_on=["IEA Sector", "IEA Metric", "Region"],
         left_on=["Sector", "Metric", "GCAM Region"],
     ).drop(
         columns=[
-            "WEO Sector",
-            "WEO Metric",
+            "IEA Sector",
+            "IEA Metric",
             "GCAM Metric",
             "Variable",
             "Unit",
             "GCAM Region",
             "Region",
+            "EIA Metric",
+            "BNEF Metric",
+            "WWS Metric",
         ]
     )
     energy_demand["Scenario"] = scenario

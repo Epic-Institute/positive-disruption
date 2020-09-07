@@ -2,15 +2,28 @@
 
 import pandas as pd
 
+metric_list = [
+    "Biomass and waste",
+    "Fossil fuels",
+    "Generation",
+    "Geothermal",
+    "Hydroelectricity",
+    "Nuclear",
+    "Solar",
+    "Wind",
+]
+
 
 def eia_etl(data_source):
-    electricity_generation = pd.read_csv(data_source).fillna(0)
+    elec_gen = pd.read_csv(data_source).fillna(0)
     region_categories = pd.read_csv(
         "podi/data/region_categories.csv", usecols=["Region", "IEA Region"]
     ).set_index("Region")
 
-    electricity_generation = electricity_generation.merge(
+    elec_gen = elec_gen.merge(
         region_categories, right_on=["Region"], left_on=["Region"]
     ).set_index(["Region", "IEA Region", "Metric", "Scenario", "Unit"])
 
-    return electricity_generation
+    elec_gen = elec_gen[elec_gen.index.isin(metric_list, level=2)]
+
+    return elec_gen

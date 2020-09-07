@@ -8,13 +8,13 @@ from scipy.optimize import curve_fit, differential_evolution
 from numpy import NaN
 
 
-def func(x, a, b, c):
+def func(x, a, b, c, d):
     # return 1 / (1.0 + a * np.exp(-c * x)) ** (1 / b)
     # return np.exp(a + b * x) / (1.0 + np.exp(a + b * x))
-    return c / (1 + np.exp(-a * (x - b)))
+    return c / (1 + np.exp(-a * (x - b))) + d
 
 
-def adoption_curve(value, region, technology, scenario):
+def adoption_curve(value, region, scenario):
     parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
@@ -31,31 +31,69 @@ def adoption_curve(value, region, technology, scenario):
     # using parameter bounds.
     search_bounds = [
         [
-            0.0,
             pd.to_numeric(
                 parameters.loc[
-                    region, technology, scenario, slice(None), "Parameter a"
+                    region, value.name, scenario, slice(None), "Parameter a, min"
+                ].Value[0]
+            ),
+            pd.to_numeric(
+                parameters.loc[
+                    region, value.name, scenario, slice(None), "Parameter a, max"
                 ].Value[0]
             ),
         ],
         [
-            0.0,
             pd.to_numeric(
                 parameters.loc[
-                    region, technology, scenario, slice(None), "Parameter b"
+                    region, value.name, scenario, slice(None), "Parameter b, min"
+                ].Value[0]
+            ),
+            pd.to_numeric(
+                parameters.loc[
+                    region, value.name, scenario, slice(None), "Parameter b, max"
                 ].Value[0]
             ),
         ],
         [
             pd.to_numeric(
                 parameters.loc[
-                    region, technology, scenario, slice(None), "Saturation Point"
+                    region,
+                    value.name,
+                    scenario,
+                    slice(None),
+                    "Saturation Point",
                 ].Value[0]
             )
             / 100,
             pd.to_numeric(
                 parameters.loc[
-                    region, technology, scenario, slice(None), "Saturation Point"
+                    region,
+                    value.name,
+                    scenario,
+                    slice(None),
+                    "Saturation Point",
+                ].Value[0]
+            )
+            / 100,
+        ],
+        [
+            pd.to_numeric(
+                parameters.loc[
+                    region,
+                    value.name,
+                    scenario,
+                    slice(None),
+                    "Floor",
+                ].Value[0]
+            )
+            / 100,
+            pd.to_numeric(
+                parameters.loc[
+                    region,
+                    value.name,
+                    scenario,
+                    slice(None),
+                    "Floor",
                 ].Value[0]
             )
             / 100,
@@ -66,6 +104,7 @@ def adoption_curve(value, region, technology, scenario):
         sum_of_squared_error, search_bounds, seed=3
     ).x
 
+    """
     # Now call curve_fit without passing bounds from the genetic algorithm,
     # just in case the best fit parameters are outside those bounds
     # fitted_parameters, _ = curve_fit(
@@ -91,6 +130,7 @@ def adoption_curve(value, region, technology, scenario):
 
     # r_squared = 1.0 - (np.var(abs_error) / np.var(y_data))
     # print("r_squared = ", r_squared)
+    """
 
     x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
     y = np.array(func(x, *genetic_parameters))
@@ -104,12 +144,14 @@ def adoption_curve(value, region, technology, scenario):
     max_growth = (
         pd.to_numeric(
             parameters.loc[
-                region, technology, scenario, slice(None), "Max annual growth"
+                region, value.name, scenario, slice(None), "Max annual growth"
             ].Value[0]
         )
         / 100
     )
+
     """
+    # might need axis=1 in pct_change?
     y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
     for i in range(1, len(y_data)):
         y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)

@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-black = "==19.10b0"
+black = "*"
 docutils = "*"
 doc8 = "*"
 flake8 = "*"
@@ -23,6 +23,11 @@ scipy = "*"
 xlrd = "*"
 plotly = "==4.8.1"
 black = "*"
+ipykernel = "*"
+pyam-iamc = "*"
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
