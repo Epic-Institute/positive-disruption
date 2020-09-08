@@ -99,60 +99,6 @@ AdvancedECO ,Solar,Pathway,,Max annual growth,100
 AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 AdvancedECO ,Tide and wave,Pathway,,Max annual growth,100
 AdvancedECO ,Wind,Pathway,,Max annual growth,100
-AdvancedECO ,Biofuels,Baseline,,Parameter a,5
-AdvancedECO ,Biomass and waste,Baseline,,Parameter a,5
-AdvancedECO ,Fossil fuels,Baseline,,Parameter a,5
-AdvancedECO ,Generation,Baseline,,Parameter a,5
-AdvancedECO ,Geothermal,Baseline,,Parameter a,5
-AdvancedECO ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-AdvancedECO ,Hydroelectricity,Baseline,,Parameter a,5
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-AdvancedECO ,Nuclear,Baseline,,Parameter a,5
-AdvancedECO ,Renewables,Baseline,,Parameter a,5
-AdvancedECO ,Solar,Baseline,,Parameter a,5
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-AdvancedECO ,Tide and wave,Baseline,,Parameter a,5
-AdvancedECO ,Wind,Baseline,,Parameter a,5
-AdvancedECO ,Biomass and waste,Pathway,,Parameter a,5
-AdvancedECO ,Fossil fuels,Pathway,,Parameter a,5
-AdvancedECO ,Generation,Pathway,,Parameter a,5
-AdvancedECO ,Geothermal,Pathway,,Parameter a,5
-AdvancedECO ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-AdvancedECO ,Hydroelectricity,Pathway,,Parameter a,5
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-AdvancedECO ,Nuclear,Pathway,,Parameter a,5
-AdvancedECO ,Renewables,Pathway,,Parameter a,5
-AdvancedECO ,Solar,Pathway,,Parameter a,5
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-AdvancedECO ,Tide and wave,Pathway,,Parameter a,5
-AdvancedECO ,Wind,Pathway,,Parameter a,5
-AdvancedECO ,Biofuels,Baseline,,Parameter b,100
-AdvancedECO ,Biomass and waste,Baseline,,Parameter b,100
-AdvancedECO ,Fossil fuels,Baseline,,Parameter b,100
-AdvancedECO ,Generation,Baseline,,Parameter b,100
-AdvancedECO ,Geothermal,Baseline,,Parameter b,100
-AdvancedECO ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-AdvancedECO ,Hydroelectricity,Baseline,,Parameter b,100
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-AdvancedECO ,Nuclear,Baseline,,Parameter b,100
-AdvancedECO ,Renewables,Baseline,,Parameter b,100
-AdvancedECO ,Solar,Baseline,,Parameter b,100
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-AdvancedECO ,Tide and wave,Baseline,,Parameter b,100
-AdvancedECO ,Wind,Baseline,,Parameter b,100
-AdvancedECO ,Biomass and waste,Pathway,,Parameter b,100
-AdvancedECO ,Fossil fuels,Pathway,,Parameter b,100
-AdvancedECO ,Generation,Pathway,,Parameter b,100
-AdvancedECO ,Geothermal,Pathway,,Parameter b,100
-AdvancedECO ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-AdvancedECO ,Hydroelectricity,Pathway,,Parameter b,100
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-AdvancedECO ,Nuclear,Pathway,,Parameter b,100
-AdvancedECO ,Renewables,Pathway,,Parameter b,100
-AdvancedECO ,Solar,Pathway,,Parameter b,100
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-AdvancedECO ,Tide and wave,Pathway,,Parameter b,100
-AdvancedECO ,Wind,Pathway,,Parameter b,100
 AdvancedECO ,Biochar,Baseline,Industry,Saturation Point,5
 AdvancedECO ,Biofuels,Baseline,,Saturation Point,10
 AdvancedECO ,Biomass and waste,Baseline,,Saturation Point,5
@@ -367,60 +313,6 @@ AFRICA ,Solar,Pathway,,Max annual growth,100
 AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 AFRICA ,Tide and wave,Pathway,,Max annual growth,100
 AFRICA ,Wind,Pathway,,Max annual growth,100
-AFRICA ,Biofuels,Baseline,,Parameter a,5
-AFRICA ,Biomass and waste,Baseline,,Parameter a,5
-AFRICA ,Fossil fuels,Baseline,,Parameter a,5
-AFRICA ,Generation,Baseline,,Parameter a,5
-AFRICA ,Geothermal,Baseline,,Parameter a,5
-AFRICA ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-AFRICA ,Hydroelectricity,Baseline,,Parameter a,5
-AFRICA ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-AFRICA ,Nuclear,Baseline,,Parameter a,5
-AFRICA ,Renewables,Baseline,,Parameter a,5
-AFRICA ,Solar,Baseline,,Parameter a,5
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-AFRICA ,Tide and wave,Baseline,,Parameter a,5
-AFRICA ,Wind,Baseline,,Parameter a,5
-AFRICA ,Biomass and waste,Pathway,,Parameter a,5
-AFRICA ,Fossil fuels,Pathway,,Parameter a,5
-AFRICA ,Generation,Pathway,,Parameter a,5
-AFRICA ,Geothermal,Pathway,,Parameter a,5
-AFRICA ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-AFRICA ,Hydroelectricity,Pathway,,Parameter a,5
-AFRICA ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-AFRICA ,Nuclear,Pathway,,Parameter a,5
-AFRICA ,Renewables,Pathway,,Parameter a,5
-AFRICA ,Solar,Pathway,,Parameter a,5
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-AFRICA ,Tide and wave,Pathway,,Parameter a,5
-AFRICA ,Wind,Pathway,,Parameter a,5
-AFRICA ,Biofuels,Baseline,,Parameter b,100
-AFRICA ,Biomass and waste,Baseline,,Parameter b,100
-AFRICA ,Fossil fuels,Baseline,,Parameter b,100
-AFRICA ,Generation,Baseline,,Parameter b,100
-AFRICA ,Geothermal,Baseline,,Parameter b,100
-AFRICA ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-AFRICA ,Hydroelectricity,Baseline,,Parameter b,100
-AFRICA ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-AFRICA ,Nuclear,Baseline,,Parameter b,100
-AFRICA ,Renewables,Baseline,,Parameter b,100
-AFRICA ,Solar,Baseline,,Parameter b,100
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-AFRICA ,Tide and wave,Baseline,,Parameter b,100
-AFRICA ,Wind,Baseline,,Parameter b,100
-AFRICA ,Biomass and waste,Pathway,,Parameter b,100
-AFRICA ,Fossil fuels,Pathway,,Parameter b,100
-AFRICA ,Generation,Pathway,,Parameter b,100
-AFRICA ,Geothermal,Pathway,,Parameter b,100
-AFRICA ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-AFRICA ,Hydroelectricity,Pathway,,Parameter b,100
-AFRICA ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-AFRICA ,Nuclear,Pathway,,Parameter b,100
-AFRICA ,Renewables,Pathway,,Parameter b,100
-AFRICA ,Solar,Pathway,,Parameter b,100
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-AFRICA ,Tide and wave,Pathway,,Parameter b,100
-AFRICA ,Wind,Pathway,,Parameter b,100
 AFRICA ,Biochar,Baseline,Industry,Saturation Point,5
 AFRICA ,Biofuels,Baseline,,Saturation Point,10
 AFRICA ,Biomass and waste,Baseline,,Saturation Point,5
@@ -635,60 +527,6 @@ ASEAN ,Solar,Pathway,,Max annual growth,100
 ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 ASEAN ,Tide and wave,Pathway,,Max annual growth,100
 ASEAN ,Wind,Pathway,,Max annual growth,100
-ASEAN ,Biofuels,Baseline,,Parameter a,5
-ASEAN ,Biomass and waste,Baseline,,Parameter a,5
-ASEAN ,Fossil fuels,Baseline,,Parameter a,5
-ASEAN ,Generation,Baseline,,Parameter a,5
-ASEAN ,Geothermal,Baseline,,Parameter a,5
-ASEAN ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-ASEAN ,Hydroelectricity,Baseline,,Parameter a,5
-ASEAN ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-ASEAN ,Nuclear,Baseline,,Parameter a,5
-ASEAN ,Renewables,Baseline,,Parameter a,5
-ASEAN ,Solar,Baseline,,Parameter a,5
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-ASEAN ,Tide and wave,Baseline,,Parameter a,5
-ASEAN ,Wind,Baseline,,Parameter a,5
-ASEAN ,Biomass and waste,Pathway,,Parameter a,5
-ASEAN ,Fossil fuels,Pathway,,Parameter a,5
-ASEAN ,Generation,Pathway,,Parameter a,5
-ASEAN ,Geothermal,Pathway,,Parameter a,5
-ASEAN ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-ASEAN ,Hydroelectricity,Pathway,,Parameter a,5
-ASEAN ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-ASEAN ,Nuclear,Pathway,,Parameter a,5
-ASEAN ,Renewables,Pathway,,Parameter a,5
-ASEAN ,Solar,Pathway,,Parameter a,5
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-ASEAN ,Tide and wave,Pathway,,Parameter a,5
-ASEAN ,Wind,Pathway,,Parameter a,5
-ASEAN ,Biofuels,Baseline,,Parameter b,100
-ASEAN ,Biomass and waste,Baseline,,Parameter b,100
-ASEAN ,Fossil fuels,Baseline,,Parameter b,100
-ASEAN ,Generation,Baseline,,Parameter b,100
-ASEAN ,Geothermal,Baseline,,Parameter b,100
-ASEAN ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-ASEAN ,Hydroelectricity,Baseline,,Parameter b,100
-ASEAN ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-ASEAN ,Nuclear,Baseline,,Parameter b,100
-ASEAN ,Renewables,Baseline,,Parameter b,100
-ASEAN ,Solar,Baseline,,Parameter b,100
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-ASEAN ,Tide and wave,Baseline,,Parameter b,100
-ASEAN ,Wind,Baseline,,Parameter b,100
-ASEAN ,Biomass and waste,Pathway,,Parameter b,100
-ASEAN ,Fossil fuels,Pathway,,Parameter b,100
-ASEAN ,Generation,Pathway,,Parameter b,100
-ASEAN ,Geothermal,Pathway,,Parameter b,100
-ASEAN ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-ASEAN ,Hydroelectricity,Pathway,,Parameter b,100
-ASEAN ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-ASEAN ,Nuclear,Pathway,,Parameter b,100
-ASEAN ,Renewables,Pathway,,Parameter b,100
-ASEAN ,Solar,Pathway,,Parameter b,100
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-ASEAN ,Tide and wave,Pathway,,Parameter b,100
-ASEAN ,Wind,Pathway,,Parameter b,100
 ASEAN ,Biochar,Baseline,Industry,Saturation Point,5
 ASEAN ,Biofuels,Baseline,,Saturation Point,10
 ASEAN ,Biomass and waste,Baseline,,Saturation Point,5
@@ -903,60 +741,6 @@ ASIAPAC ,Solar,Pathway,,Max annual growth,100
 ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 ASIAPAC ,Tide and wave,Pathway,,Max annual growth,100
 ASIAPAC ,Wind,Pathway,,Max annual growth,100
-ASIAPAC ,Biofuels,Baseline,,Parameter a,5
-ASIAPAC ,Biomass and waste,Baseline,,Parameter a,5
-ASIAPAC ,Fossil fuels,Baseline,,Parameter a,5
-ASIAPAC ,Generation,Baseline,,Parameter a,5
-ASIAPAC ,Geothermal,Baseline,,Parameter a,5
-ASIAPAC ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-ASIAPAC ,Hydroelectricity,Baseline,,Parameter a,5
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-ASIAPAC ,Nuclear,Baseline,,Parameter a,5
-ASIAPAC ,Renewables,Baseline,,Parameter a,5
-ASIAPAC ,Solar,Baseline,,Parameter a,5
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-ASIAPAC ,Tide and wave,Baseline,,Parameter a,5
-ASIAPAC ,Wind,Baseline,,Parameter a,5
-ASIAPAC ,Biomass and waste,Pathway,,Parameter a,5
-ASIAPAC ,Fossil fuels,Pathway,,Parameter a,5
-ASIAPAC ,Generation,Pathway,,Parameter a,5
-ASIAPAC ,Geothermal,Pathway,,Parameter a,5
-ASIAPAC ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-ASIAPAC ,Hydroelectricity,Pathway,,Parameter a,5
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-ASIAPAC ,Nuclear,Pathway,,Parameter a,5
-ASIAPAC ,Renewables,Pathway,,Parameter a,5
-ASIAPAC ,Solar,Pathway,,Parameter a,5
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-ASIAPAC ,Tide and wave,Pathway,,Parameter a,5
-ASIAPAC ,Wind,Pathway,,Parameter a,5
-ASIAPAC ,Biofuels,Baseline,,Parameter b,100
-ASIAPAC ,Biomass and waste,Baseline,,Parameter b,100
-ASIAPAC ,Fossil fuels,Baseline,,Parameter b,100
-ASIAPAC ,Generation,Baseline,,Parameter b,100
-ASIAPAC ,Geothermal,Baseline,,Parameter b,100
-ASIAPAC ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-ASIAPAC ,Hydroelectricity,Baseline,,Parameter b,100
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-ASIAPAC ,Nuclear,Baseline,,Parameter b,100
-ASIAPAC ,Renewables,Baseline,,Parameter b,100
-ASIAPAC ,Solar,Baseline,,Parameter b,100
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-ASIAPAC ,Tide and wave,Baseline,,Parameter b,100
-ASIAPAC ,Wind,Baseline,,Parameter b,100
-ASIAPAC ,Biomass and waste,Pathway,,Parameter b,100
-ASIAPAC ,Fossil fuels,Pathway,,Parameter b,100
-ASIAPAC ,Generation,Pathway,,Parameter b,100
-ASIAPAC ,Geothermal,Pathway,,Parameter b,100
-ASIAPAC ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-ASIAPAC ,Hydroelectricity,Pathway,,Parameter b,100
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-ASIAPAC ,Nuclear,Pathway,,Parameter b,100
-ASIAPAC ,Renewables,Pathway,,Parameter b,100
-ASIAPAC ,Solar,Pathway,,Parameter b,100
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-ASIAPAC ,Tide and wave,Pathway,,Parameter b,100
-ASIAPAC ,Wind,Pathway,,Parameter b,100
 ASIAPAC ,Biochar,Baseline,Industry,Saturation Point,5
 ASIAPAC ,Biofuels,Baseline,,Saturation Point,10
 ASIAPAC ,Biomass and waste,Baseline,,Saturation Point,5
@@ -1171,60 +955,6 @@ BRAZIL ,Solar,Pathway,,Max annual growth,100
 BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 BRAZIL ,Tide and wave,Pathway,,Max annual growth,100
 BRAZIL ,Wind,Pathway,,Max annual growth,100
-BRAZIL ,Biofuels,Baseline,,Parameter a,5
-BRAZIL ,Biomass and waste,Baseline,,Parameter a,5
-BRAZIL ,Fossil fuels,Baseline,,Parameter a,5
-BRAZIL ,Generation,Baseline,,Parameter a,5
-BRAZIL ,Geothermal,Baseline,,Parameter a,5
-BRAZIL ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-BRAZIL ,Hydroelectricity,Baseline,,Parameter a,5
-BRAZIL ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-BRAZIL ,Nuclear,Baseline,,Parameter a,5
-BRAZIL ,Renewables,Baseline,,Parameter a,5
-BRAZIL ,Solar,Baseline,,Parameter a,5
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-BRAZIL ,Tide and wave,Baseline,,Parameter a,5
-BRAZIL ,Wind,Baseline,,Parameter a,5
-BRAZIL ,Biomass and waste,Pathway,,Parameter a,5
-BRAZIL ,Fossil fuels,Pathway,,Parameter a,5
-BRAZIL ,Generation,Pathway,,Parameter a,5
-BRAZIL ,Geothermal,Pathway,,Parameter a,5
-BRAZIL ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-BRAZIL ,Hydroelectricity,Pathway,,Parameter a,5
-BRAZIL ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-BRAZIL ,Nuclear,Pathway,,Parameter a,5
-BRAZIL ,Renewables,Pathway,,Parameter a,5
-BRAZIL ,Solar,Pathway,,Parameter a,5
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-BRAZIL ,Tide and wave,Pathway,,Parameter a,5
-BRAZIL ,Wind,Pathway,,Parameter a,5
-BRAZIL ,Biofuels,Baseline,,Parameter b,100
-BRAZIL ,Biomass and waste,Baseline,,Parameter b,100
-BRAZIL ,Fossil fuels,Baseline,,Parameter b,100
-BRAZIL ,Generation,Baseline,,Parameter b,100
-BRAZIL ,Geothermal,Baseline,,Parameter b,100
-BRAZIL ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-BRAZIL ,Hydroelectricity,Baseline,,Parameter b,100
-BRAZIL ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-BRAZIL ,Nuclear,Baseline,,Parameter b,100
-BRAZIL ,Renewables,Baseline,,Parameter b,100
-BRAZIL ,Solar,Baseline,,Parameter b,100
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-BRAZIL ,Tide and wave,Baseline,,Parameter b,100
-BRAZIL ,Wind,Baseline,,Parameter b,100
-BRAZIL ,Biomass and waste,Pathway,,Parameter b,100
-BRAZIL ,Fossil fuels,Pathway,,Parameter b,100
-BRAZIL ,Generation,Pathway,,Parameter b,100
-BRAZIL ,Geothermal,Pathway,,Parameter b,100
-BRAZIL ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-BRAZIL ,Hydroelectricity,Pathway,,Parameter b,100
-BRAZIL ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-BRAZIL ,Nuclear,Pathway,,Parameter b,100
-BRAZIL ,Renewables,Pathway,,Parameter b,100
-BRAZIL ,Solar,Pathway,,Parameter b,100
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-BRAZIL ,Tide and wave,Pathway,,Parameter b,100
-BRAZIL ,Wind,Pathway,,Parameter b,100
 BRAZIL ,Biochar,Baseline,Industry,Saturation Point,5
 BRAZIL ,Biofuels,Baseline,,Saturation Point,10
 BRAZIL ,Biomass and waste,Baseline,,Saturation Point,5
@@ -1439,60 +1169,6 @@ CHINA ,Solar,Pathway,,Max annual growth,100
 CHINA ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 CHINA ,Tide and wave,Pathway,,Max annual growth,100
 CHINA ,Wind,Pathway,,Max annual growth,100
-CHINA ,Biofuels,Baseline,,Parameter a,5
-CHINA ,Biomass and waste,Baseline,,Parameter a,5
-CHINA ,Fossil fuels,Baseline,,Parameter a,5
-CHINA ,Generation,Baseline,,Parameter a,5
-CHINA ,Geothermal,Baseline,,Parameter a,5
-CHINA ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-CHINA ,Hydroelectricity,Baseline,,Parameter a,5
-CHINA ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-CHINA ,Nuclear,Baseline,,Parameter a,5
-CHINA ,Renewables,Baseline,,Parameter a,5
-CHINA ,Solar,Baseline,,Parameter a,5
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-CHINA ,Tide and wave,Baseline,,Parameter a,5
-CHINA ,Wind,Baseline,,Parameter a,5
-CHINA ,Biomass and waste,Pathway,,Parameter a,5
-CHINA ,Fossil fuels,Pathway,,Parameter a,5
-CHINA ,Generation,Pathway,,Parameter a,5
-CHINA ,Geothermal,Pathway,,Parameter a,5
-CHINA ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-CHINA ,Hydroelectricity,Pathway,,Parameter a,5
-CHINA ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-CHINA ,Nuclear,Pathway,,Parameter a,5
-CHINA ,Renewables,Pathway,,Parameter a,5
-CHINA ,Solar,Pathway,,Parameter a,5
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-CHINA ,Tide and wave,Pathway,,Parameter a,5
-CHINA ,Wind,Pathway,,Parameter a,5
-CHINA ,Biofuels,Baseline,,Parameter b,100
-CHINA ,Biomass and waste,Baseline,,Parameter b,100
-CHINA ,Fossil fuels,Baseline,,Parameter b,100
-CHINA ,Generation,Baseline,,Parameter b,100
-CHINA ,Geothermal,Baseline,,Parameter b,100
-CHINA ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-CHINA ,Hydroelectricity,Baseline,,Parameter b,100
-CHINA ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-CHINA ,Nuclear,Baseline,,Parameter b,100
-CHINA ,Renewables,Baseline,,Parameter b,100
-CHINA ,Solar,Baseline,,Parameter b,100
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-CHINA ,Tide and wave,Baseline,,Parameter b,100
-CHINA ,Wind,Baseline,,Parameter b,100
-CHINA ,Biomass and waste,Pathway,,Parameter b,100
-CHINA ,Fossil fuels,Pathway,,Parameter b,100
-CHINA ,Generation,Pathway,,Parameter b,100
-CHINA ,Geothermal,Pathway,,Parameter b,100
-CHINA ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-CHINA ,Hydroelectricity,Pathway,,Parameter b,100
-CHINA ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-CHINA ,Nuclear,Pathway,,Parameter b,100
-CHINA ,Renewables,Pathway,,Parameter b,100
-CHINA ,Solar,Pathway,,Parameter b,100
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-CHINA ,Tide and wave,Pathway,,Parameter b,100
-CHINA ,Wind,Pathway,,Parameter b,100
 CHINA ,Biochar,Baseline,Industry,Saturation Point,5
 CHINA ,Biofuels,Baseline,,Saturation Point,10
 CHINA ,Biomass and waste,Baseline,,Saturation Point,5
@@ -1707,60 +1383,6 @@ CSAM ,Solar,Pathway,,Max annual growth,100
 CSAM ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 CSAM ,Tide and wave,Pathway,,Max annual growth,100
 CSAM ,Wind,Pathway,,Max annual growth,100
-CSAM ,Biofuels,Baseline,,Parameter a,5
-CSAM ,Biomass and waste,Baseline,,Parameter a,5
-CSAM ,Fossil fuels,Baseline,,Parameter a,5
-CSAM ,Generation,Baseline,,Parameter a,5
-CSAM ,Geothermal,Baseline,,Parameter a,5
-CSAM ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-CSAM ,Hydroelectricity,Baseline,,Parameter a,5
-CSAM ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-CSAM ,Nuclear,Baseline,,Parameter a,5
-CSAM ,Renewables,Baseline,,Parameter a,5
-CSAM ,Solar,Baseline,,Parameter a,5
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-CSAM ,Tide and wave,Baseline,,Parameter a,5
-CSAM ,Wind,Baseline,,Parameter a,5
-CSAM ,Biomass and waste,Pathway,,Parameter a,5
-CSAM ,Fossil fuels,Pathway,,Parameter a,5
-CSAM ,Generation,Pathway,,Parameter a,5
-CSAM ,Geothermal,Pathway,,Parameter a,5
-CSAM ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-CSAM ,Hydroelectricity,Pathway,,Parameter a,5
-CSAM ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-CSAM ,Nuclear,Pathway,,Parameter a,5
-CSAM ,Renewables,Pathway,,Parameter a,5
-CSAM ,Solar,Pathway,,Parameter a,5
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-CSAM ,Tide and wave,Pathway,,Parameter a,5
-CSAM ,Wind,Pathway,,Parameter a,5
-CSAM ,Biofuels,Baseline,,Parameter b,100
-CSAM ,Biomass and waste,Baseline,,Parameter b,100
-CSAM ,Fossil fuels,Baseline,,Parameter b,100
-CSAM ,Generation,Baseline,,Parameter b,100
-CSAM ,Geothermal,Baseline,,Parameter b,100
-CSAM ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-CSAM ,Hydroelectricity,Baseline,,Parameter b,100
-CSAM ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-CSAM ,Nuclear,Baseline,,Parameter b,100
-CSAM ,Renewables,Baseline,,Parameter b,100
-CSAM ,Solar,Baseline,,Parameter b,100
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-CSAM ,Tide and wave,Baseline,,Parameter b,100
-CSAM ,Wind,Baseline,,Parameter b,100
-CSAM ,Biomass and waste,Pathway,,Parameter b,100
-CSAM ,Fossil fuels,Pathway,,Parameter b,100
-CSAM ,Generation,Pathway,,Parameter b,100
-CSAM ,Geothermal,Pathway,,Parameter b,100
-CSAM ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-CSAM ,Hydroelectricity,Pathway,,Parameter b,100
-CSAM ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-CSAM ,Nuclear,Pathway,,Parameter b,100
-CSAM ,Renewables,Pathway,,Parameter b,100
-CSAM ,Solar,Pathway,,Parameter b,100
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-CSAM ,Tide and wave,Pathway,,Parameter b,100
-CSAM ,Wind,Pathway,,Parameter b,100
 CSAM ,Biochar,Baseline,Industry,Saturation Point,5
 CSAM ,Biofuels,Baseline,,Saturation Point,10
 CSAM ,Biofuels,Baseline,,Saturation Point,10
@@ -1977,60 +1599,6 @@ DevelopingECO ,Solar,Pathway,,Max annual growth,100
 DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 DevelopingECO ,Tide and wave,Pathway,,Max annual growth,100
 DevelopingECO ,Wind,Pathway,,Max annual growth,100
-DevelopingECO ,Biofuels,Baseline,,Parameter a,5
-DevelopingECO ,Biomass and waste,Baseline,,Parameter a,5
-DevelopingECO ,Fossil fuels,Baseline,,Parameter a,5
-DevelopingECO ,Generation,Baseline,,Parameter a,5
-DevelopingECO ,Geothermal,Baseline,,Parameter a,5
-DevelopingECO ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-DevelopingECO ,Hydroelectricity,Baseline,,Parameter a,5
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-DevelopingECO ,Nuclear,Baseline,,Parameter a,5
-DevelopingECO ,Renewables,Baseline,,Parameter a,5
-DevelopingECO ,Solar,Baseline,,Parameter a,5
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-DevelopingECO ,Tide and wave,Baseline,,Parameter a,5
-DevelopingECO ,Wind,Baseline,,Parameter a,5
-DevelopingECO ,Biomass and waste,Pathway,,Parameter a,5
-DevelopingECO ,Fossil fuels,Pathway,,Parameter a,5
-DevelopingECO ,Generation,Pathway,,Parameter a,5
-DevelopingECO ,Geothermal,Pathway,,Parameter a,5
-DevelopingECO ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-DevelopingECO ,Hydroelectricity,Pathway,,Parameter a,5
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-DevelopingECO ,Nuclear,Pathway,,Parameter a,5
-DevelopingECO ,Renewables,Pathway,,Parameter a,5
-DevelopingECO ,Solar,Pathway,,Parameter a,5
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-DevelopingECO ,Tide and wave,Pathway,,Parameter a,5
-DevelopingECO ,Wind,Pathway,,Parameter a,5
-DevelopingECO ,Biofuels,Baseline,,Parameter b,100
-DevelopingECO ,Biomass and waste,Baseline,,Parameter b,100
-DevelopingECO ,Fossil fuels,Baseline,,Parameter b,100
-DevelopingECO ,Generation,Baseline,,Parameter b,100
-DevelopingECO ,Geothermal,Baseline,,Parameter b,100
-DevelopingECO ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-DevelopingECO ,Hydroelectricity,Baseline,,Parameter b,100
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-DevelopingECO ,Nuclear,Baseline,,Parameter b,100
-DevelopingECO ,Renewables,Baseline,,Parameter b,100
-DevelopingECO ,Solar,Baseline,,Parameter b,100
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-DevelopingECO ,Tide and wave,Baseline,,Parameter b,100
-DevelopingECO ,Wind,Baseline,,Parameter b,100
-DevelopingECO ,Biomass and waste,Pathway,,Parameter b,100
-DevelopingECO ,Fossil fuels,Pathway,,Parameter b,100
-DevelopingECO ,Generation,Pathway,,Parameter b,100
-DevelopingECO ,Geothermal,Pathway,,Parameter b,100
-DevelopingECO ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-DevelopingECO ,Hydroelectricity,Pathway,,Parameter b,100
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-DevelopingECO ,Nuclear,Pathway,,Parameter b,100
-DevelopingECO ,Renewables,Pathway,,Parameter b,100
-DevelopingECO ,Solar,Pathway,,Parameter b,100
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-DevelopingECO ,Tide and wave,Pathway,,Parameter b,100
-DevelopingECO ,Wind,Pathway,,Parameter b,100
 DevelopingECO ,Biochar,Baseline,Industry,Saturation Point,5
 DevelopingECO ,Biofuels,Baseline,,Saturation Point,10
 DevelopingECO ,Biomass and waste,Baseline,,Saturation Point,5
@@ -2245,60 +1813,6 @@ EU ,Solar,Pathway,,Max annual growth,100
 EU ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 EU ,Tide and wave,Pathway,,Max annual growth,100
 EU ,Wind,Pathway,,Max annual growth,100
-EU ,Biofuels,Baseline,,Parameter a,5
-EU ,Biomass and waste,Baseline,,Parameter a,5
-EU ,Fossil fuels,Baseline,,Parameter a,5
-EU ,Generation,Baseline,,Parameter a,5
-EU ,Geothermal,Baseline,,Parameter a,5
-EU ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-EU ,Hydroelectricity,Baseline,,Parameter a,5
-EU ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-EU ,Nuclear,Baseline,,Parameter a,5
-EU ,Renewables,Baseline,,Parameter a,5
-EU ,Solar,Baseline,,Parameter a,5
-EU ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-EU ,Tide and wave,Baseline,,Parameter a,5
-EU ,Wind,Baseline,,Parameter a,5
-EU ,Biomass and waste,Pathway,,Parameter a,5
-EU ,Fossil fuels,Pathway,,Parameter a,5
-EU ,Generation,Pathway,,Parameter a,5
-EU ,Geothermal,Pathway,,Parameter a,5
-EU ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-EU ,Hydroelectricity,Pathway,,Parameter a,5
-EU ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-EU ,Nuclear,Pathway,,Parameter a,5
-EU ,Renewables,Pathway,,Parameter a,5
-EU ,Solar,Pathway,,Parameter a,5
-EU ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-EU ,Tide and wave,Pathway,,Parameter a,5
-EU ,Wind,Pathway,,Parameter a,5
-EU ,Biofuels,Baseline,,Parameter b,100
-EU ,Biomass and waste,Baseline,,Parameter b,100
-EU ,Fossil fuels,Baseline,,Parameter b,100
-EU ,Generation,Baseline,,Parameter b,100
-EU ,Geothermal,Baseline,,Parameter b,100
-EU ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-EU ,Hydroelectricity,Baseline,,Parameter b,100
-EU ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-EU ,Nuclear,Baseline,,Parameter b,100
-EU ,Renewables,Baseline,,Parameter b,100
-EU ,Solar,Baseline,,Parameter b,100
-EU ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-EU ,Tide and wave,Baseline,,Parameter b,100
-EU ,Wind,Baseline,,Parameter b,100
-EU ,Biomass and waste,Pathway,,Parameter b,100
-EU ,Fossil fuels,Pathway,,Parameter b,100
-EU ,Generation,Pathway,,Parameter b,100
-EU ,Geothermal,Pathway,,Parameter b,100
-EU ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-EU ,Hydroelectricity,Pathway,,Parameter b,100
-EU ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-EU ,Nuclear,Pathway,,Parameter b,100
-EU ,Renewables,Pathway,,Parameter b,100
-EU ,Solar,Pathway,,Parameter b,100
-EU ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-EU ,Tide and wave,Pathway,,Parameter b,100
-EU ,Wind,Pathway,,Parameter b,100
 EU ,Biochar,Baseline,Industry,Saturation Point,5
 EU ,Biofuels,Baseline,,Saturation Point,10
 EU ,Biomass and waste,Baseline,,Saturation Point,5
@@ -2513,60 +2027,6 @@ EUR ,Solar,Pathway,,Max annual growth,100
 EUR ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 EUR ,Tide and wave,Pathway,,Max annual growth,100
 EUR ,Wind,Pathway,,Max annual growth,100
-EUR ,Biofuels,Baseline,,Parameter a,5
-EUR ,Biomass and waste,Baseline,,Parameter a,5
-EUR ,Fossil fuels,Baseline,,Parameter a,5
-EUR ,Generation,Baseline,,Parameter a,5
-EUR ,Geothermal,Baseline,,Parameter a,5
-EUR ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-EUR ,Hydroelectricity,Baseline,,Parameter a,5
-EUR ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-EUR ,Nuclear,Baseline,,Parameter a,5
-EUR ,Renewables,Baseline,,Parameter a,5
-EUR ,Solar,Baseline,,Parameter a,5
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-EUR ,Tide and wave,Baseline,,Parameter a,5
-EUR ,Wind,Baseline,,Parameter a,5
-EUR ,Biomass and waste,Pathway,,Parameter a,5
-EUR ,Fossil fuels,Pathway,,Parameter a,5
-EUR ,Generation,Pathway,,Parameter a,5
-EUR ,Geothermal,Pathway,,Parameter a,5
-EUR ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-EUR ,Hydroelectricity,Pathway,,Parameter a,5
-EUR ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-EUR ,Nuclear,Pathway,,Parameter a,5
-EUR ,Renewables,Pathway,,Parameter a,5
-EUR ,Solar,Pathway,,Parameter a,5
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-EUR ,Tide and wave,Pathway,,Parameter a,5
-EUR ,Wind,Pathway,,Parameter a,5
-EUR ,Biofuels,Baseline,,Parameter b,100
-EUR ,Biomass and waste,Baseline,,Parameter b,100
-EUR ,Fossil fuels,Baseline,,Parameter b,100
-EUR ,Generation,Baseline,,Parameter b,100
-EUR ,Geothermal,Baseline,,Parameter b,100
-EUR ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-EUR ,Hydroelectricity,Baseline,,Parameter b,100
-EUR ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-EUR ,Nuclear,Baseline,,Parameter b,100
-EUR ,Renewables,Baseline,,Parameter b,100
-EUR ,Solar,Baseline,,Parameter b,100
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-EUR ,Tide and wave,Baseline,,Parameter b,100
-EUR ,Wind,Baseline,,Parameter b,100
-EUR ,Biomass and waste,Pathway,,Parameter b,100
-EUR ,Fossil fuels,Pathway,,Parameter b,100
-EUR ,Generation,Pathway,,Parameter b,100
-EUR ,Geothermal,Pathway,,Parameter b,100
-EUR ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-EUR ,Hydroelectricity,Pathway,,Parameter b,100
-EUR ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-EUR ,Nuclear,Pathway,,Parameter b,100
-EUR ,Renewables,Pathway,,Parameter b,100
-EUR ,Solar,Pathway,,Parameter b,100
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-EUR ,Tide and wave,Pathway,,Parameter b,100
-EUR ,Wind,Pathway,,Parameter b,100
 EUR ,Biochar,Baseline,Industry,Saturation Point,5
 EUR ,Biofuels,Baseline,,Saturation Point,10
 EUR ,Biomass and waste,Baseline,,Saturation Point,5
@@ -2781,60 +2241,6 @@ EURASIA ,Solar,Pathway,,Max annual growth,100
 EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 EURASIA ,Tide and wave,Pathway,,Max annual growth,100
 EURASIA ,Wind,Pathway,,Max annual growth,100
-EURASIA ,Biofuels,Baseline,,Parameter a,5
-EURASIA ,Biomass and waste,Baseline,,Parameter a,5
-EURASIA ,Fossil fuels,Baseline,,Parameter a,5
-EURASIA ,Generation,Baseline,,Parameter a,5
-EURASIA ,Geothermal,Baseline,,Parameter a,5
-EURASIA ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-EURASIA ,Hydroelectricity,Baseline,,Parameter a,5
-EURASIA ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-EURASIA ,Nuclear,Baseline,,Parameter a,5
-EURASIA ,Renewables,Baseline,,Parameter a,5
-EURASIA ,Solar,Baseline,,Parameter a,5
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-EURASIA ,Tide and wave,Baseline,,Parameter a,5
-EURASIA ,Wind,Baseline,,Parameter a,5
-EURASIA ,Biomass and waste,Pathway,,Parameter a,5
-EURASIA ,Fossil fuels,Pathway,,Parameter a,5
-EURASIA ,Generation,Pathway,,Parameter a,5
-EURASIA ,Geothermal,Pathway,,Parameter a,5
-EURASIA ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-EURASIA ,Hydroelectricity,Pathway,,Parameter a,5
-EURASIA ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-EURASIA ,Nuclear,Pathway,,Parameter a,5
-EURASIA ,Renewables,Pathway,,Parameter a,5
-EURASIA ,Solar,Pathway,,Parameter a,5
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-EURASIA ,Tide and wave,Pathway,,Parameter a,5
-EURASIA ,Wind,Pathway,,Parameter a,5
-EURASIA ,Biofuels,Baseline,,Parameter b,100
-EURASIA ,Biomass and waste,Baseline,,Parameter b,100
-EURASIA ,Fossil fuels,Baseline,,Parameter b,100
-EURASIA ,Generation,Baseline,,Parameter b,100
-EURASIA ,Geothermal,Baseline,,Parameter b,100
-EURASIA ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-EURASIA ,Hydroelectricity,Baseline,,Parameter b,100
-EURASIA ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-EURASIA ,Nuclear,Baseline,,Parameter b,100
-EURASIA ,Renewables,Baseline,,Parameter b,100
-EURASIA ,Solar,Baseline,,Parameter b,100
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-EURASIA ,Tide and wave,Baseline,,Parameter b,100
-EURASIA ,Wind,Baseline,,Parameter b,100
-EURASIA ,Biomass and waste,Pathway,,Parameter b,100
-EURASIA ,Fossil fuels,Pathway,,Parameter b,100
-EURASIA ,Generation,Pathway,,Parameter b,100
-EURASIA ,Geothermal,Pathway,,Parameter b,100
-EURASIA ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-EURASIA ,Hydroelectricity,Pathway,,Parameter b,100
-EURASIA ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-EURASIA ,Nuclear,Pathway,,Parameter b,100
-EURASIA ,Renewables,Pathway,,Parameter b,100
-EURASIA ,Solar,Pathway,,Parameter b,100
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-EURASIA ,Tide and wave,Pathway,,Parameter b,100
-EURASIA ,Wind,Pathway,,Parameter b,100
 EURASIA ,Biochar,Baseline,Industry,Saturation Point,5
 EURASIA ,Biofuels,Baseline,,Saturation Point,10
 EURASIA ,Biomass and waste,Baseline,,Saturation Point,5
@@ -3049,60 +2455,6 @@ INDIA ,Solar,Pathway,,Max annual growth,100
 INDIA ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 INDIA ,Tide and wave,Pathway,,Max annual growth,100
 INDIA ,Wind,Pathway,,Max annual growth,100
-INDIA ,Biofuels,Baseline,,Parameter a,5
-INDIA ,Biomass and waste,Baseline,,Parameter a,5
-INDIA ,Fossil fuels,Baseline,,Parameter a,5
-INDIA ,Generation,Baseline,,Parameter a,5
-INDIA ,Geothermal,Baseline,,Parameter a,5
-INDIA ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-INDIA ,Hydroelectricity,Baseline,,Parameter a,5
-INDIA ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-INDIA ,Nuclear,Baseline,,Parameter a,5
-INDIA ,Renewables,Baseline,,Parameter a,5
-INDIA ,Solar,Baseline,,Parameter a,5
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-INDIA ,Tide and wave,Baseline,,Parameter a,5
-INDIA ,Wind,Baseline,,Parameter a,5
-INDIA ,Biomass and waste,Pathway,,Parameter a,5
-INDIA ,Fossil fuels,Pathway,,Parameter a,5
-INDIA ,Generation,Pathway,,Parameter a,5
-INDIA ,Geothermal,Pathway,,Parameter a,5
-INDIA ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-INDIA ,Hydroelectricity,Pathway,,Parameter a,5
-INDIA ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-INDIA ,Nuclear,Pathway,,Parameter a,5
-INDIA ,Renewables,Pathway,,Parameter a,5
-INDIA ,Solar,Pathway,,Parameter a,5
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-INDIA ,Tide and wave,Pathway,,Parameter a,5
-INDIA ,Wind,Pathway,,Parameter a,5
-INDIA ,Biofuels,Baseline,,Parameter b,100
-INDIA ,Biomass and waste,Baseline,,Parameter b,100
-INDIA ,Fossil fuels,Baseline,,Parameter b,100
-INDIA ,Generation,Baseline,,Parameter b,100
-INDIA ,Geothermal,Baseline,,Parameter b,100
-INDIA ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-INDIA ,Hydroelectricity,Baseline,,Parameter b,100
-INDIA ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-INDIA ,Nuclear,Baseline,,Parameter b,100
-INDIA ,Renewables,Baseline,,Parameter b,100
-INDIA ,Solar,Baseline,,Parameter b,100
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-INDIA ,Tide and wave,Baseline,,Parameter b,100
-INDIA ,Wind,Baseline,,Parameter b,100
-INDIA ,Biomass and waste,Pathway,,Parameter b,100
-INDIA ,Fossil fuels,Pathway,,Parameter b,100
-INDIA ,Generation,Pathway,,Parameter b,100
-INDIA ,Geothermal,Pathway,,Parameter b,100
-INDIA ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-INDIA ,Hydroelectricity,Pathway,,Parameter b,100
-INDIA ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-INDIA ,Nuclear,Pathway,,Parameter b,100
-INDIA ,Renewables,Pathway,,Parameter b,100
-INDIA ,Solar,Pathway,,Parameter b,100
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-INDIA ,Tide and wave,Pathway,,Parameter b,100
-INDIA ,Wind,Pathway,,Parameter b,100
 INDIA ,Biochar,Baseline,Industry,Saturation Point,5
 INDIA ,Biofuels,Baseline,,Saturation Point,10
 INDIA ,Biomass and waste,Baseline,,Saturation Point,5
@@ -3317,60 +2669,6 @@ JPN ,Solar,Pathway,,Max annual growth,100
 JPN ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 JPN ,Tide and wave,Pathway,,Max annual growth,100
 JPN ,Wind,Pathway,,Max annual growth,100
-JPN ,Biofuels,Baseline,,Parameter a,5
-JPN ,Biomass and waste,Baseline,,Parameter a,5
-JPN ,Fossil fuels,Baseline,,Parameter a,5
-JPN ,Generation,Baseline,,Parameter a,5
-JPN ,Geothermal,Baseline,,Parameter a,5
-JPN ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-JPN ,Hydroelectricity,Baseline,,Parameter a,5
-JPN ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-JPN ,Nuclear,Baseline,,Parameter a,5
-JPN ,Renewables,Baseline,,Parameter a,5
-JPN ,Solar,Baseline,,Parameter a,5
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-JPN ,Tide and wave,Baseline,,Parameter a,5
-JPN ,Wind,Baseline,,Parameter a,5
-JPN ,Biomass and waste,Pathway,,Parameter a,5
-JPN ,Fossil fuels,Pathway,,Parameter a,5
-JPN ,Generation,Pathway,,Parameter a,5
-JPN ,Geothermal,Pathway,,Parameter a,5
-JPN ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-JPN ,Hydroelectricity,Pathway,,Parameter a,5
-JPN ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-JPN ,Nuclear,Pathway,,Parameter a,5
-JPN ,Renewables,Pathway,,Parameter a,5
-JPN ,Solar,Pathway,,Parameter a,5
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-JPN ,Tide and wave,Pathway,,Parameter a,5
-JPN ,Wind,Pathway,,Parameter a,5
-JPN ,Biofuels,Baseline,,Parameter b,100
-JPN ,Biomass and waste,Baseline,,Parameter b,100
-JPN ,Fossil fuels,Baseline,,Parameter b,100
-JPN ,Generation,Baseline,,Parameter b,100
-JPN ,Geothermal,Baseline,,Parameter b,100
-JPN ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-JPN ,Hydroelectricity,Baseline,,Parameter b,100
-JPN ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-JPN ,Nuclear,Baseline,,Parameter b,100
-JPN ,Renewables,Baseline,,Parameter b,100
-JPN ,Solar,Baseline,,Parameter b,100
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-JPN ,Tide and wave,Baseline,,Parameter b,100
-JPN ,Wind,Baseline,,Parameter b,100
-JPN ,Biomass and waste,Pathway,,Parameter b,100
-JPN ,Fossil fuels,Pathway,,Parameter b,100
-JPN ,Generation,Pathway,,Parameter b,100
-JPN ,Geothermal,Pathway,,Parameter b,100
-JPN ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-JPN ,Hydroelectricity,Pathway,,Parameter b,100
-JPN ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-JPN ,Nuclear,Pathway,,Parameter b,100
-JPN ,Renewables,Pathway,,Parameter b,100
-JPN ,Solar,Pathway,,Parameter b,100
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-JPN ,Tide and wave,Pathway,,Parameter b,100
-JPN ,Wind,Pathway,,Parameter b,100
 JPN ,Biochar,Baseline,Industry,Saturation Point,5
 JPN ,Biofuels,Baseline,,Saturation Point,10
 JPN ,Biomass and waste,Baseline,,Saturation Point,5
@@ -3585,60 +2883,6 @@ ME ,Solar,Pathway,,Max annual growth,100
 ME ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 ME ,Tide and wave,Pathway,,Max annual growth,100
 ME ,Wind,Pathway,,Max annual growth,100
-ME ,Biofuels,Baseline,,Parameter a,5
-ME ,Biomass and waste,Baseline,,Parameter a,5
-ME ,Fossil fuels,Baseline,,Parameter a,5
-ME ,Generation,Baseline,,Parameter a,5
-ME ,Geothermal,Baseline,,Parameter a,5
-ME ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-ME ,Hydroelectricity,Baseline,,Parameter a,5
-ME ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-ME ,Nuclear,Baseline,,Parameter a,5
-ME ,Renewables,Baseline,,Parameter a,5
-ME ,Solar,Baseline,,Parameter a,5
-ME ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-ME ,Tide and wave,Baseline,,Parameter a,5
-ME ,Wind,Baseline,,Parameter a,5
-ME ,Biomass and waste,Pathway,,Parameter a,5
-ME ,Fossil fuels,Pathway,,Parameter a,5
-ME ,Generation,Pathway,,Parameter a,5
-ME ,Geothermal,Pathway,,Parameter a,5
-ME ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-ME ,Hydroelectricity,Pathway,,Parameter a,5
-ME ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-ME ,Nuclear,Pathway,,Parameter a,5
-ME ,Renewables,Pathway,,Parameter a,5
-ME ,Solar,Pathway,,Parameter a,5
-ME ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-ME ,Tide and wave,Pathway,,Parameter a,5
-ME ,Wind,Pathway,,Parameter a,5
-ME ,Biofuels,Baseline,,Parameter b,100
-ME ,Biomass and waste,Baseline,,Parameter b,100
-ME ,Fossil fuels,Baseline,,Parameter b,100
-ME ,Generation,Baseline,,Parameter b,100
-ME ,Geothermal,Baseline,,Parameter b,100
-ME ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-ME ,Hydroelectricity,Baseline,,Parameter b,100
-ME ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-ME ,Nuclear,Baseline,,Parameter b,100
-ME ,Renewables,Baseline,,Parameter b,100
-ME ,Solar,Baseline,,Parameter b,100
-ME ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-ME ,Tide and wave,Baseline,,Parameter b,100
-ME ,Wind,Baseline,,Parameter b,100
-ME ,Biomass and waste,Pathway,,Parameter b,100
-ME ,Fossil fuels,Pathway,,Parameter b,100
-ME ,Generation,Pathway,,Parameter b,100
-ME ,Geothermal,Pathway,,Parameter b,100
-ME ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-ME ,Hydroelectricity,Pathway,,Parameter b,100
-ME ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-ME ,Nuclear,Pathway,,Parameter b,100
-ME ,Renewables,Pathway,,Parameter b,100
-ME ,Solar,Pathway,,Parameter b,100
-ME ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-ME ,Tide and wave,Pathway,,Parameter b,100
-ME ,Wind,Pathway,,Parameter b,100
 ME ,Biochar,Baseline,Industry,Saturation Point,5
 ME ,Biofuels,Baseline,,Saturation Point,10
 ME ,Biomass and waste,Baseline,,Saturation Point,5
@@ -3853,60 +3097,6 @@ NAM ,Solar,Pathway,,Max annual growth,100
 NAM ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 NAM ,Tide and wave,Pathway,,Max annual growth,100
 NAM ,Wind,Pathway,,Max annual growth,100
-NAM ,Biofuels,Baseline,,Parameter a,5
-NAM ,Biomass and waste,Baseline,,Parameter a,5
-NAM ,Fossil fuels,Baseline,,Parameter a,5
-NAM ,Generation,Baseline,,Parameter a,5
-NAM ,Geothermal,Baseline,,Parameter a,5
-NAM ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-NAM ,Hydroelectricity,Baseline,,Parameter a,5
-NAM ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-NAM ,Nuclear,Baseline,,Parameter a,5
-NAM ,Renewables,Baseline,,Parameter a,5
-NAM ,Solar,Baseline,,Parameter a,5
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-NAM ,Tide and wave,Baseline,,Parameter a,5
-NAM ,Wind,Baseline,,Parameter a,5
-NAM ,Biomass and waste,Pathway,,Parameter a,5
-NAM ,Fossil fuels,Pathway,,Parameter a,5
-NAM ,Generation,Pathway,,Parameter a,5
-NAM ,Geothermal,Pathway,,Parameter a,5
-NAM ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-NAM ,Hydroelectricity,Pathway,,Parameter a,5
-NAM ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-NAM ,Nuclear,Pathway,,Parameter a,5
-NAM ,Renewables,Pathway,,Parameter a,5
-NAM ,Solar,Pathway,,Parameter a,5
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-NAM ,Tide and wave,Pathway,,Parameter a,5
-NAM ,Wind,Pathway,,Parameter a,5
-NAM ,Biofuels,Baseline,,Parameter b,100
-NAM ,Biomass and waste,Baseline,,Parameter b,100
-NAM ,Fossil fuels,Baseline,,Parameter b,100
-NAM ,Generation,Baseline,,Parameter b,100
-NAM ,Geothermal,Baseline,,Parameter b,100
-NAM ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-NAM ,Hydroelectricity,Baseline,,Parameter b,100
-NAM ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-NAM ,Nuclear,Baseline,,Parameter b,100
-NAM ,Renewables,Baseline,,Parameter b,100
-NAM ,Solar,Baseline,,Parameter b,100
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-NAM ,Tide and wave,Baseline,,Parameter b,100
-NAM ,Wind,Baseline,,Parameter b,100
-NAM ,Biomass and waste,Pathway,,Parameter b,100
-NAM ,Fossil fuels,Pathway,,Parameter b,100
-NAM ,Generation,Pathway,,Parameter b,100
-NAM ,Geothermal,Pathway,,Parameter b,100
-NAM ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-NAM ,Hydroelectricity,Pathway,,Parameter b,100
-NAM ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-NAM ,Nuclear,Pathway,,Parameter b,100
-NAM ,Renewables,Pathway,,Parameter b,100
-NAM ,Solar,Pathway,,Parameter b,100
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-NAM ,Tide and wave,Pathway,,Parameter b,100
-NAM ,Wind,Pathway,,Parameter b,100
 NAM ,Biochar,Baseline,Industry,Saturation Point,5
 NAM ,Biofuels,Baseline,,Saturation Point,10
 NAM ,Biomass and waste,Baseline,,Saturation Point,5
@@ -4121,60 +3311,6 @@ NonOECD ,Solar,Pathway,,Max annual growth,100
 NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 NonOECD ,Tide and wave,Pathway,,Max annual growth,100
 NonOECD ,Wind,Pathway,,Max annual growth,100
-NonOECD ,Biofuels,Baseline,,Parameter a,5
-NonOECD ,Biomass and waste,Baseline,,Parameter a,5
-NonOECD ,Fossil fuels,Baseline,,Parameter a,5
-NonOECD ,Generation,Baseline,,Parameter a,5
-NonOECD ,Geothermal,Baseline,,Parameter a,5
-NonOECD ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-NonOECD ,Hydroelectricity,Baseline,,Parameter a,5
-NonOECD ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-NonOECD ,Nuclear,Baseline,,Parameter a,5
-NonOECD ,Renewables,Baseline,,Parameter a,5
-NonOECD ,Solar,Baseline,,Parameter a,5
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-NonOECD ,Tide and wave,Baseline,,Parameter a,5
-NonOECD ,Wind,Baseline,,Parameter a,5
-NonOECD ,Biomass and waste,Pathway,,Parameter a,5
-NonOECD ,Fossil fuels,Pathway,,Parameter a,5
-NonOECD ,Generation,Pathway,,Parameter a,5
-NonOECD ,Geothermal,Pathway,,Parameter a,5
-NonOECD ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-NonOECD ,Hydroelectricity,Pathway,,Parameter a,5
-NonOECD ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-NonOECD ,Nuclear,Pathway,,Parameter a,5
-NonOECD ,Renewables,Pathway,,Parameter a,5
-NonOECD ,Solar,Pathway,,Parameter a,5
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-NonOECD ,Tide and wave,Pathway,,Parameter a,5
-NonOECD ,Wind,Pathway,,Parameter a,5
-NonOECD ,Biofuels,Baseline,,Parameter b,100
-NonOECD ,Biomass and waste,Baseline,,Parameter b,100
-NonOECD ,Fossil fuels,Baseline,,Parameter b,100
-NonOECD ,Generation,Baseline,,Parameter b,100
-NonOECD ,Geothermal,Baseline,,Parameter b,100
-NonOECD ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-NonOECD ,Hydroelectricity,Baseline,,Parameter b,100
-NonOECD ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-NonOECD ,Nuclear,Baseline,,Parameter b,100
-NonOECD ,Renewables,Baseline,,Parameter b,100
-NonOECD ,Solar,Baseline,,Parameter b,100
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-NonOECD ,Tide and wave,Baseline,,Parameter b,100
-NonOECD ,Wind,Baseline,,Parameter b,100
-NonOECD ,Biomass and waste,Pathway,,Parameter b,100
-NonOECD ,Fossil fuels,Pathway,,Parameter b,100
-NonOECD ,Generation,Pathway,,Parameter b,100
-NonOECD ,Geothermal,Pathway,,Parameter b,100
-NonOECD ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-NonOECD ,Hydroelectricity,Pathway,,Parameter b,100
-NonOECD ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-NonOECD ,Nuclear,Pathway,,Parameter b,100
-NonOECD ,Renewables,Pathway,,Parameter b,100
-NonOECD ,Solar,Pathway,,Parameter b,100
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-NonOECD ,Tide and wave,Pathway,,Parameter b,100
-NonOECD ,Wind,Pathway,,Parameter b,100
 NonOECD ,Biochar,Baseline,Industry,Saturation Point,5
 NonOECD ,Biofuels,Baseline,,Saturation Point,10
 NonOECD ,Biomass and waste,Baseline,,Saturation Point,5
@@ -4389,60 +3525,6 @@ OECD ,Solar,Pathway,,Max annual growth,100
 OECD ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 OECD ,Tide and wave,Pathway,,Max annual growth,100
 OECD ,Wind,Pathway,,Max annual growth,100
-OECD ,Biofuels,Baseline,,Parameter a,5
-OECD ,Biomass and waste,Baseline,,Parameter a,5
-OECD ,Fossil fuels,Baseline,,Parameter a,5
-OECD ,Generation,Baseline,,Parameter a,5
-OECD ,Geothermal,Baseline,,Parameter a,5
-OECD ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-OECD ,Hydroelectricity,Baseline,,Parameter a,5
-OECD ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-OECD ,Nuclear,Baseline,,Parameter a,5
-OECD ,Renewables,Baseline,,Parameter a,5
-OECD ,Solar,Baseline,,Parameter a,5
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-OECD ,Tide and wave,Baseline,,Parameter a,5
-OECD ,Wind,Baseline,,Parameter a,5
-OECD ,Biomass and waste,Pathway,,Parameter a,5
-OECD ,Fossil fuels,Pathway,,Parameter a,5
-OECD ,Generation,Pathway,,Parameter a,5
-OECD ,Geothermal,Pathway,,Parameter a,5
-OECD ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-OECD ,Hydroelectricity,Pathway,,Parameter a,5
-OECD ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-OECD ,Nuclear,Pathway,,Parameter a,5
-OECD ,Renewables,Pathway,,Parameter a,5
-OECD ,Solar,Pathway,,Parameter a,5
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-OECD ,Tide and wave,Pathway,,Parameter a,5
-OECD ,Wind,Pathway,,Parameter a,5
-OECD ,Biofuels,Baseline,,Parameter b,100
-OECD ,Biomass and waste,Baseline,,Parameter b,100
-OECD ,Fossil fuels,Baseline,,Parameter b,100
-OECD ,Generation,Baseline,,Parameter b,100
-OECD ,Geothermal,Baseline,,Parameter b,100
-OECD ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-OECD ,Hydroelectricity,Baseline,,Parameter b,100
-OECD ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-OECD ,Nuclear,Baseline,,Parameter b,100
-OECD ,Renewables,Baseline,,Parameter b,100
-OECD ,Solar,Baseline,,Parameter b,100
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-OECD ,Tide and wave,Baseline,,Parameter b,100
-OECD ,Wind,Baseline,,Parameter b,100
-OECD ,Biomass and waste,Pathway,,Parameter b,100
-OECD ,Fossil fuels,Pathway,,Parameter b,100
-OECD ,Generation,Pathway,,Parameter b,100
-OECD ,Geothermal,Pathway,,Parameter b,100
-OECD ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-OECD ,Hydroelectricity,Pathway,,Parameter b,100
-OECD ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-OECD ,Nuclear,Pathway,,Parameter b,100
-OECD ,Renewables,Pathway,,Parameter b,100
-OECD ,Solar,Pathway,,Parameter b,100
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-OECD ,Tide and wave,Pathway,,Parameter b,100
-OECD ,Wind,Pathway,,Parameter b,100
 OECD ,Biochar,Baseline,Industry,Saturation Point,5
 OECD ,Biofuels,Baseline,,Saturation Point,10
 OECD ,Biomass and waste,Baseline,,Saturation Point,5
@@ -4661,60 +3743,6 @@ RUS ,Solar,Pathway,,Max annual growth,100
 RUS ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 RUS ,Tide and wave,Pathway,,Max annual growth,100
 RUS ,Wind,Pathway,,Max annual growth,100
-RUS ,Biofuels,Baseline,,Parameter a,5
-RUS ,Biomass and waste,Baseline,,Parameter a,5
-RUS ,Fossil fuels,Baseline,,Parameter a,5
-RUS ,Generation,Baseline,,Parameter a,5
-RUS ,Geothermal,Baseline,,Parameter a,5
-RUS ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-RUS ,Hydroelectricity,Baseline,,Parameter a,5
-RUS ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-RUS ,Nuclear,Baseline,,Parameter a,5
-RUS ,Renewables,Baseline,,Parameter a,5
-RUS ,Solar,Baseline,,Parameter a,5
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-RUS ,Tide and wave,Baseline,,Parameter a,5
-RUS ,Wind,Baseline,,Parameter a,5
-RUS ,Biomass and waste,Pathway,,Parameter a,5
-RUS ,Fossil fuels,Pathway,,Parameter a,5
-RUS ,Generation,Pathway,,Parameter a,5
-RUS ,Geothermal,Pathway,,Parameter a,5
-RUS ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-RUS ,Hydroelectricity,Pathway,,Parameter a,5
-RUS ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-RUS ,Nuclear,Pathway,,Parameter a,5
-RUS ,Renewables,Pathway,,Parameter a,5
-RUS ,Solar,Pathway,,Parameter a,5
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-RUS ,Tide and wave,Pathway,,Parameter a,5
-RUS ,Wind,Pathway,,Parameter a,5
-RUS ,Biofuels,Baseline,,Parameter b,100
-RUS ,Biomass and waste,Baseline,,Parameter b,100
-RUS ,Fossil fuels,Baseline,,Parameter b,100
-RUS ,Generation,Baseline,,Parameter b,100
-RUS ,Geothermal,Baseline,,Parameter b,100
-RUS ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-RUS ,Hydroelectricity,Baseline,,Parameter b,100
-RUS ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-RUS ,Nuclear,Baseline,,Parameter b,100
-RUS ,Renewables,Baseline,,Parameter b,100
-RUS ,Solar,Baseline,,Parameter b,100
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-RUS ,Tide and wave,Baseline,,Parameter b,100
-RUS ,Wind,Baseline,,Parameter b,100
-RUS ,Biomass and waste,Pathway,,Parameter b,100
-RUS ,Fossil fuels,Pathway,,Parameter b,100
-RUS ,Generation,Pathway,,Parameter b,100
-RUS ,Geothermal,Pathway,,Parameter b,100
-RUS ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-RUS ,Hydroelectricity,Pathway,,Parameter b,100
-RUS ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-RUS ,Nuclear,Pathway,,Parameter b,100
-RUS ,Renewables,Pathway,,Parameter b,100
-RUS ,Solar,Pathway,,Parameter b,100
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-RUS ,Tide and wave,Pathway,,Parameter b,100
-RUS ,Wind,Pathway,,Parameter b,100
 RUS ,Biochar,Baseline,Industry,Saturation Point,5
 RUS ,Biofuels,Baseline,,Saturation Point,10
 RUS ,Biomass and waste,Baseline,,Saturation Point,5
@@ -4929,60 +3957,6 @@ SAFR ,Solar,Pathway,,Max annual growth,100
 SAFR ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 SAFR ,Tide and wave,Pathway,,Max annual growth,100
 SAFR ,Wind,Pathway,,Max annual growth,100
-SAFR ,Biofuels,Baseline,,Parameter a,5
-SAFR ,Biomass and waste,Baseline,,Parameter a,5
-SAFR ,Fossil fuels,Baseline,,Parameter a,5
-SAFR ,Generation,Baseline,,Parameter a,5
-SAFR ,Geothermal,Baseline,,Parameter a,5
-SAFR ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-SAFR ,Hydroelectricity,Baseline,,Parameter a,5
-SAFR ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-SAFR ,Nuclear,Baseline,,Parameter a,5
-SAFR ,Renewables,Baseline,,Parameter a,5
-SAFR ,Solar,Baseline,,Parameter a,5
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-SAFR ,Tide and wave,Baseline,,Parameter a,5
-SAFR ,Wind,Baseline,,Parameter a,5
-SAFR ,Biomass and waste,Pathway,,Parameter a,5
-SAFR ,Fossil fuels,Pathway,,Parameter a,5
-SAFR ,Generation,Pathway,,Parameter a,5
-SAFR ,Geothermal,Pathway,,Parameter a,5
-SAFR ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-SAFR ,Hydroelectricity,Pathway,,Parameter a,5
-SAFR ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-SAFR ,Nuclear,Pathway,,Parameter a,5
-SAFR ,Renewables,Pathway,,Parameter a,5
-SAFR ,Solar,Pathway,,Parameter a,5
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-SAFR ,Tide and wave,Pathway,,Parameter a,5
-SAFR ,Wind,Pathway,,Parameter a,5
-SAFR ,Biofuels,Baseline,,Parameter b,100
-SAFR ,Biomass and waste,Baseline,,Parameter b,100
-SAFR ,Fossil fuels,Baseline,,Parameter b,100
-SAFR ,Generation,Baseline,,Parameter b,100
-SAFR ,Geothermal,Baseline,,Parameter b,100
-SAFR ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-SAFR ,Hydroelectricity,Baseline,,Parameter b,100
-SAFR ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-SAFR ,Nuclear,Baseline,,Parameter b,100
-SAFR ,Renewables,Baseline,,Parameter b,100
-SAFR ,Solar,Baseline,,Parameter b,100
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-SAFR ,Tide and wave,Baseline,,Parameter b,100
-SAFR ,Wind,Baseline,,Parameter b,100
-SAFR ,Biomass and waste,Pathway,,Parameter b,100
-SAFR ,Fossil fuels,Pathway,,Parameter b,100
-SAFR ,Generation,Pathway,,Parameter b,100
-SAFR ,Geothermal,Pathway,,Parameter b,100
-SAFR ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-SAFR ,Hydroelectricity,Pathway,,Parameter b,100
-SAFR ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-SAFR ,Nuclear,Pathway,,Parameter b,100
-SAFR ,Renewables,Pathway,,Parameter b,100
-SAFR ,Solar,Pathway,,Parameter b,100
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-SAFR ,Tide and wave,Pathway,,Parameter b,100
-SAFR ,Wind,Pathway,,Parameter b,100
 SAFR ,Biochar,Baseline,Industry,Saturation Point,5
 SAFR ,Biofuels,Baseline,,Saturation Point,10
 SAFR ,Biomass and waste,Baseline,,Saturation Point,5
@@ -5197,20 +4171,6 @@ US ,Solar,Pathway,,Max annual growth,100
 US ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 US ,Tide and wave,Pathway,,Max annual growth,100
 US ,Wind,Pathway,,Max annual growth,100
-US ,Biofuels,Baseline,,Parameter a,5
-US ,Biomass and waste,Baseline,,Parameter a,5
-US ,Fossil fuels,Baseline,,Parameter a,5
-US ,Generation,Baseline,,Parameter a,5
-US ,Geothermal,Baseline,,Parameter a,5
-US ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-US ,Hydroelectricity,Baseline,,Parameter a,5
-US ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-US ,Nuclear,Baseline,,Parameter a,5
-US ,Renewables,Baseline,,Parameter a,5
-US ,Solar,Baseline,,Parameter a,5
-US ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-US ,Tide and wave,Baseline,,Parameter a,5
-US ,Wind,Baseline,,Parameter a,5
 US ,Biomass and waste,Pathway,,"Parameter a, max",5
 US ,Fossil fuels,Pathway,,"Parameter a, max",5
 US ,Generation,Pathway,,"Parameter a, max",5
@@ -5237,20 +4197,6 @@ US ,Solar,Pathway,,"Parameter a, min",0
 US ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
 US ,Tide and wave,Pathway,,"Parameter a, min",0
 US ,Wind,Pathway,,"Parameter a, min",0
-US ,Biofuels,Baseline,,Parameter b,100
-US ,Biomass and waste,Baseline,,Parameter b,100
-US ,Fossil fuels,Baseline,,Parameter b,100
-US ,Generation,Baseline,,Parameter b,100
-US ,Geothermal,Baseline,,Parameter b,100
-US ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-US ,Hydroelectricity,Baseline,,Parameter b,100
-US ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-US ,Nuclear,Baseline,,Parameter b,100
-US ,Renewables,Baseline,,Parameter b,100
-US ,Solar,Baseline,,Parameter b,100
-US ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-US ,Tide and wave,Baseline,,Parameter b,100
-US ,Wind,Baseline,,Parameter b,100
 US ,Biomass and waste,Pathway,,"Parameter b, max",100
 US ,Fossil fuels,Pathway,,"Parameter b, max",100
 US ,Generation,Pathway,,"Parameter b, max",100
@@ -5452,7 +4398,7 @@ World ,Fossil fuels,Pathway,,Floor,0
 World ,Generation,Pathway,,Floor,100
 World ,Geothermal,Pathway,,Floor,0
 World ,Hydroelectric pumped storage,Pathway,,Floor,0
-World ,Hydroelectricity,Pathway,,Floor,0
+World ,Hydroelectricity,Pathway,,Floor,6
 World ,Non-hydroelectric renewables,Pathway,,Floor,0
 World ,Nuclear,Pathway,,Floor,0
 World ,Renewables,Pathway,,Floor,0
@@ -5491,60 +4437,58 @@ World ,Solar,Pathway,,Max annual growth,100
 World ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
 World ,Tide and wave,Pathway,,Max annual growth,100
 World ,Wind,Pathway,,Max annual growth,100
-World ,Biofuels,Baseline,,Parameter a,5
-World ,Biomass and waste,Baseline,,Parameter a,5
-World ,Fossil fuels,Baseline,,Parameter a,5
-World ,Generation,Baseline,,Parameter a,5
-World ,Geothermal,Baseline,,Parameter a,5
-World ,Hydroelectric pumped storage,Baseline,,Parameter a,5
-World ,Hydroelectricity,Baseline,,Parameter a,5
-World ,Non-hydroelectric renewables,Baseline,,Parameter a,5
-World ,Nuclear,Baseline,,Parameter a,5
-World ,Renewables,Baseline,,Parameter a,5
-World ,Solar,Baseline,,Parameter a,5
-World ,"Solar, tide, wave, fuel cell",Baseline,,Parameter a,5
-World ,Tide and wave,Baseline,,Parameter a,5
-World ,Wind,Baseline,,Parameter a,5
-World ,Biomass and waste,Pathway,,Parameter a,5
-World ,Fossil fuels,Pathway,,Parameter a,5
-World ,Generation,Pathway,,Parameter a,5
-World ,Geothermal,Pathway,,Parameter a,5
-World ,Hydroelectric pumped storage,Pathway,,Parameter a,5
-World ,Hydroelectricity,Pathway,,Parameter a,5
-World ,Non-hydroelectric renewables,Pathway,,Parameter a,5
-World ,Nuclear,Pathway,,Parameter a,5
-World ,Renewables,Pathway,,Parameter a,5
-World ,Solar,Pathway,,Parameter a,5
-World ,"Solar, tide, wave, fuel cell",Pathway,,Parameter a,5
-World ,Tide and wave,Pathway,,Parameter a,5
-World ,Wind,Pathway,,Parameter a,5
-World ,Biofuels,Baseline,,Parameter b,100
-World ,Biomass and waste,Baseline,,Parameter b,100
-World ,Fossil fuels,Baseline,,Parameter b,100
-World ,Generation,Baseline,,Parameter b,100
-World ,Geothermal,Baseline,,Parameter b,100
-World ,Hydroelectric pumped storage,Baseline,,Parameter b,100
-World ,Hydroelectricity,Baseline,,Parameter b,100
-World ,Non-hydroelectric renewables,Baseline,,Parameter b,100
-World ,Nuclear,Baseline,,Parameter b,100
-World ,Renewables,Baseline,,Parameter b,100
-World ,Solar,Baseline,,Parameter b,100
-World ,"Solar, tide, wave, fuel cell",Baseline,,Parameter b,100
-World ,Tide and wave,Baseline,,Parameter b,100
-World ,Wind,Baseline,,Parameter b,100
-World ,Biomass and waste,Pathway,,Parameter b,100
-World ,Fossil fuels,Pathway,,Parameter b,100
-World ,Generation,Pathway,,Parameter b,100
-World ,Geothermal,Pathway,,Parameter b,100
-World ,Hydroelectric pumped storage,Pathway,,Parameter b,100
-World ,Hydroelectricity,Pathway,,Parameter b,100
-World ,Non-hydroelectric renewables,Pathway,,Parameter b,100
-World ,Nuclear,Pathway,,Parameter b,100
-World ,Renewables,Pathway,,Parameter b,100
-World ,Solar,Pathway,,Parameter b,100
-World ,"Solar, tide, wave, fuel cell",Pathway,,Parameter b,100
-World ,Tide and wave,Pathway,,Parameter b,100
-World ,Wind,Pathway,,Parameter b,100
+World ,Biomass and waste,Pathway,,"Parameter a, max",5
+World ,Fossil fuels,Pathway,,"Parameter a, max",5
+World ,Generation,Pathway,,"Parameter a, max",0
+World ,Geothermal,Pathway,,"Parameter a, max",5
+World ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+World ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+World ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+World ,Nuclear,Pathway,,"Parameter a, max",-0.1
+World ,Renewables,Pathway,,"Parameter a, max",5
+World ,Solar,Pathway,,"Parameter a, max",5
+World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+World ,Tide and wave,Pathway,,"Parameter a, max",5
+World ,Wind,Pathway,,"Parameter a, max",5
+World ,Biomass and waste,Pathway,,"Parameter a, min",0
+World ,Fossil fuels,Pathway,,"Parameter a, min",0
+World ,Generation,Pathway,,"Parameter a, min",0
+World ,Geothermal,Pathway,,"Parameter a, min",0
+World ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+World ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+World ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+World ,Nuclear,Pathway,,"Parameter a, min",-0.1
+World ,Renewables,Pathway,,"Parameter a, min",0
+World ,Solar,Pathway,,"Parameter a, min",0
+World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+World ,Tide and wave,Pathway,,"Parameter a, min",0
+World ,Wind,Pathway,,"Parameter a, min",0
+World ,Biomass and waste,Pathway,,"Parameter b, max",100
+World ,Fossil fuels,Pathway,,"Parameter b, max",100
+World ,Generation,Pathway,,"Parameter b, max",100
+World ,Geothermal,Pathway,,"Parameter b, max",100
+World ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+World ,Hydroelectricity,Pathway,,"Parameter b, max",18
+World ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+World ,Nuclear,Pathway,,"Parameter b, max",43
+World ,Renewables,Pathway,,"Parameter b, max",100
+World ,Solar,Pathway,,"Parameter b, max",100
+World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+World ,Tide and wave,Pathway,,"Parameter b, max",100
+World ,Wind,Pathway,,"Parameter b, max",100
+World ,Biomass and waste,Pathway,,"Parameter b, min",0
+World ,Fossil fuels,Pathway,,"Parameter b, min",0
+World ,Generation,Pathway,,"Parameter b, min",0
+World ,Geothermal,Pathway,,"Parameter b, min",0
+World ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+World ,Hydroelectricity,Pathway,,"Parameter b, min",18
+World ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+World ,Nuclear,Pathway,,"Parameter b, min",43
+World ,Renewables,Pathway,,"Parameter b, min",0
+World ,Solar,Pathway,,"Parameter b, min",0
+World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+World ,Tide and wave,Pathway,,"Parameter b, min",0
+World ,Wind,Pathway,,"Parameter b, min",0
 World ,Biochar,Baseline,Industry,Saturation Point,5
 World ,Biofuels,Baseline,,Saturation Point,10
 World ,Biomass and waste,Baseline,,Saturation Point,5
@@ -5564,10 +4508,10 @@ World ,Tide and wave,Baseline,,Saturation Point,5
 World ,Wind,Baseline,,Saturation Point,5
 World ,Biochar,Pathway,Industry,Saturation Point,23
 World ,Biofuels,Pathway,,Saturation Point,100
-World ,Biomass and waste,Pathway,,Saturation Point,5
+World ,Biomass and waste,Pathway,,Saturation Point,3.6
 World ,Fossil fuels,Pathway,,Saturation Point,0
-World ,Generation,Pathway,,Saturation Point,100
-World ,Geothermal,Pathway,,Saturation Point,2
+World ,Generation,Pathway,,Saturation Point,0
+World ,Geothermal,Pathway,,Saturation Point,3
 World ,Hydroelectric pumped storage,Pathway,,Saturation Point,15
 World ,Hydroelectricity,Pathway,,Saturation Point,20
 World ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
@@ -5659,55 +4603,991 @@ World ,Solar,Pathway,,Useful Life in Start Year,25
 World ,"Solar, tide, wave, fuel cell",Pathway,,Useful Life in Start Year,25
 World ,Tide and wave,Pathway,,Useful Life in Start Year,25
 World ,Wind,Pathway,,Useful Life in Start Year,15
-World ,Biomass and waste,Pathway,,"Parameter a, max",5
-World ,Fossil fuels,Pathway,,"Parameter a, max",5
-World ,Generation,Pathway,,"Parameter a, max",5
-World ,Geothermal,Pathway,,"Parameter a, max",5
-World ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
-World ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
-World ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-World ,Nuclear,Pathway,,"Parameter a, max",-0.1
-World ,Renewables,Pathway,,"Parameter a, max",5
-World ,Solar,Pathway,,"Parameter a, max",5
-World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-World ,Tide and wave,Pathway,,"Parameter a, max",5
-World ,Wind,Pathway,,"Parameter a, max",5
-World ,Biomass and waste,Pathway,,"Parameter a, min",0
-World ,Fossil fuels,Pathway,,"Parameter a, min",0
-World ,Generation,Pathway,,"Parameter a, min",0
-World ,Geothermal,Pathway,,"Parameter a, min",0
-World ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
-World ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
-World ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-World ,Nuclear,Pathway,,"Parameter a, min",-0.1
-World ,Renewables,Pathway,,"Parameter a, min",0
-World ,Solar,Pathway,,"Parameter a, min",0
-World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-World ,Tide and wave,Pathway,,"Parameter a, min",0
-World ,Wind,Pathway,,"Parameter a, min",0
-World ,Biomass and waste,Pathway,,"Parameter b, max",100
-World ,Fossil fuels,Pathway,,"Parameter b, max",100
-World ,Generation,Pathway,,"Parameter b, max",100
-World ,Geothermal,Pathway,,"Parameter b, max",100
-World ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
-World ,Hydroelectricity,Pathway,,"Parameter b, max",26
-World ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-World ,Nuclear,Pathway,,"Parameter b, max",43
-World ,Renewables,Pathway,,"Parameter b, max",100
-World ,Solar,Pathway,,"Parameter b, max",100
-World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-World ,Tide and wave,Pathway,,"Parameter b, max",100
-World ,Wind,Pathway,,"Parameter b, max",100
-World ,Biomass and waste,Pathway,,"Parameter b, min",0
-World ,Fossil fuels,Pathway,,"Parameter b, min",0
-World ,Generation,Pathway,,"Parameter b, min",0
-World ,Geothermal,Pathway,,"Parameter b, min",0
-World ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
-World ,Hydroelectricity,Pathway,,"Parameter b, min",26
-World ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-World ,Nuclear,Pathway,,"Parameter b, min",43
-World ,Renewables,Pathway,,"Parameter b, min",0
-World ,Solar,Pathway,,"Parameter b, min",0
-World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-World ,Tide and wave,Pathway,,"Parameter b, min",0
-World ,Wind,Pathway,,"Parameter b, min",0
+NAM ,Biomass and waste,Pathway,,"Parameter a, max",5
+NAM ,Fossil fuels,Pathway,,"Parameter a, max",5
+NAM ,Generation,Pathway,,"Parameter a, max",0
+NAM ,Geothermal,Pathway,,"Parameter a, max",5
+NAM ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+NAM ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+NAM ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+NAM ,Nuclear,Pathway,,"Parameter a, max",-0.1
+NAM ,Renewables,Pathway,,"Parameter a, max",5
+NAM ,Solar,Pathway,,"Parameter a, max",5
+NAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+NAM ,Tide and wave,Pathway,,"Parameter a, max",5
+NAM ,Wind,Pathway,,"Parameter a, max",5
+NAM ,Biomass and waste,Pathway,,"Parameter a, min",0
+NAM ,Fossil fuels,Pathway,,"Parameter a, min",0
+NAM ,Generation,Pathway,,"Parameter a, min",0
+NAM ,Geothermal,Pathway,,"Parameter a, min",0
+NAM ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+NAM ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+NAM ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+NAM ,Nuclear,Pathway,,"Parameter a, min",-0.1
+NAM ,Renewables,Pathway,,"Parameter a, min",0
+NAM ,Solar,Pathway,,"Parameter a, min",0
+NAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+NAM ,Tide and wave,Pathway,,"Parameter a, min",0
+NAM ,Wind,Pathway,,"Parameter a, min",0
+NAM ,Biomass and waste,Pathway,,"Parameter b, max",100
+NAM ,Fossil fuels,Pathway,,"Parameter b, max",100
+NAM ,Generation,Pathway,,"Parameter b, max",100
+NAM ,Geothermal,Pathway,,"Parameter b, max",100
+NAM ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+NAM ,Hydroelectricity,Pathway,,"Parameter b, max",18
+NAM ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+NAM ,Nuclear,Pathway,,"Parameter b, max",43
+NAM ,Renewables,Pathway,,"Parameter b, max",100
+NAM ,Solar,Pathway,,"Parameter b, max",100
+NAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+NAM ,Tide and wave,Pathway,,"Parameter b, max",100
+NAM ,Wind,Pathway,,"Parameter b, max",100
+NAM ,Biomass and waste,Pathway,,"Parameter b, min",0
+NAM ,Fossil fuels,Pathway,,"Parameter b, min",0
+NAM ,Generation,Pathway,,"Parameter b, min",0
+NAM ,Geothermal,Pathway,,"Parameter b, min",0
+NAM ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+NAM ,Hydroelectricity,Pathway,,"Parameter b, min",18
+NAM ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+NAM ,Nuclear,Pathway,,"Parameter b, min",43
+NAM ,Renewables,Pathway,,"Parameter b, min",0
+NAM ,Solar,Pathway,,"Parameter b, min",0
+NAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+NAM ,Tide and wave,Pathway,,"Parameter b, min",0
+NAM ,Wind,Pathway,,"Parameter b, min",0
+CSAM ,Biomass and waste,Pathway,,"Parameter a, max",5
+CSAM ,Fossil fuels,Pathway,,"Parameter a, max",5
+CSAM ,Generation,Pathway,,"Parameter a, max",0
+CSAM ,Geothermal,Pathway,,"Parameter a, max",5
+CSAM ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+CSAM ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+CSAM ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+CSAM ,Nuclear,Pathway,,"Parameter a, max",-0.1
+CSAM ,Renewables,Pathway,,"Parameter a, max",5
+CSAM ,Solar,Pathway,,"Parameter a, max",5
+CSAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+CSAM ,Tide and wave,Pathway,,"Parameter a, max",5
+CSAM ,Wind,Pathway,,"Parameter a, max",5
+CSAM ,Biomass and waste,Pathway,,"Parameter a, min",0
+CSAM ,Fossil fuels,Pathway,,"Parameter a, min",0
+CSAM ,Generation,Pathway,,"Parameter a, min",0
+CSAM ,Geothermal,Pathway,,"Parameter a, min",0
+CSAM ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+CSAM ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+CSAM ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+CSAM ,Nuclear,Pathway,,"Parameter a, min",-0.1
+CSAM ,Renewables,Pathway,,"Parameter a, min",0
+CSAM ,Solar,Pathway,,"Parameter a, min",0
+CSAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+CSAM ,Tide and wave,Pathway,,"Parameter a, min",0
+CSAM ,Wind,Pathway,,"Parameter a, min",0
+CSAM ,Biomass and waste,Pathway,,"Parameter b, max",100
+CSAM ,Fossil fuels,Pathway,,"Parameter b, max",100
+CSAM ,Generation,Pathway,,"Parameter b, max",100
+CSAM ,Geothermal,Pathway,,"Parameter b, max",100
+CSAM ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+CSAM ,Hydroelectricity,Pathway,,"Parameter b, max",18
+CSAM ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+CSAM ,Nuclear,Pathway,,"Parameter b, max",43
+CSAM ,Renewables,Pathway,,"Parameter b, max",100
+CSAM ,Solar,Pathway,,"Parameter b, max",100
+CSAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+CSAM ,Tide and wave,Pathway,,"Parameter b, max",100
+CSAM ,Wind,Pathway,,"Parameter b, max",100
+CSAM ,Biomass and waste,Pathway,,"Parameter b, min",0
+CSAM ,Fossil fuels,Pathway,,"Parameter b, min",0
+CSAM ,Generation,Pathway,,"Parameter b, min",0
+CSAM ,Geothermal,Pathway,,"Parameter b, min",0
+CSAM ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+CSAM ,Hydroelectricity,Pathway,,"Parameter b, min",18
+CSAM ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+CSAM ,Nuclear,Pathway,,"Parameter b, min",43
+CSAM ,Renewables,Pathway,,"Parameter b, min",0
+CSAM ,Solar,Pathway,,"Parameter b, min",0
+CSAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+CSAM ,Tide and wave,Pathway,,"Parameter b, min",0
+CSAM ,Wind,Pathway,,"Parameter b, min",0
+BRAZIL ,Biomass and waste,Pathway,,"Parameter a, max",5
+BRAZIL ,Fossil fuels,Pathway,,"Parameter a, max",5
+BRAZIL ,Generation,Pathway,,"Parameter a, max",0
+BRAZIL ,Geothermal,Pathway,,"Parameter a, max",5
+BRAZIL ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+BRAZIL ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+BRAZIL ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+BRAZIL ,Nuclear,Pathway,,"Parameter a, max",-0.1
+BRAZIL ,Renewables,Pathway,,"Parameter a, max",5
+BRAZIL ,Solar,Pathway,,"Parameter a, max",5
+BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+BRAZIL ,Tide and wave,Pathway,,"Parameter a, max",5
+BRAZIL ,Wind,Pathway,,"Parameter a, max",5
+BRAZIL ,Biomass and waste,Pathway,,"Parameter a, min",0
+BRAZIL ,Fossil fuels,Pathway,,"Parameter a, min",0
+BRAZIL ,Generation,Pathway,,"Parameter a, min",0
+BRAZIL ,Geothermal,Pathway,,"Parameter a, min",0
+BRAZIL ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+BRAZIL ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+BRAZIL ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+BRAZIL ,Nuclear,Pathway,,"Parameter a, min",-0.1
+BRAZIL ,Renewables,Pathway,,"Parameter a, min",0
+BRAZIL ,Solar,Pathway,,"Parameter a, min",0
+BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+BRAZIL ,Tide and wave,Pathway,,"Parameter a, min",0
+BRAZIL ,Wind,Pathway,,"Parameter a, min",0
+BRAZIL ,Biomass and waste,Pathway,,"Parameter b, max",100
+BRAZIL ,Fossil fuels,Pathway,,"Parameter b, max",100
+BRAZIL ,Generation,Pathway,,"Parameter b, max",100
+BRAZIL ,Geothermal,Pathway,,"Parameter b, max",100
+BRAZIL ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+BRAZIL ,Hydroelectricity,Pathway,,"Parameter b, max",18
+BRAZIL ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+BRAZIL ,Nuclear,Pathway,,"Parameter b, max",43
+BRAZIL ,Renewables,Pathway,,"Parameter b, max",100
+BRAZIL ,Solar,Pathway,,"Parameter b, max",100
+BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+BRAZIL ,Tide and wave,Pathway,,"Parameter b, max",100
+BRAZIL ,Wind,Pathway,,"Parameter b, max",100
+BRAZIL ,Biomass and waste,Pathway,,"Parameter b, min",0
+BRAZIL ,Fossil fuels,Pathway,,"Parameter b, min",0
+BRAZIL ,Generation,Pathway,,"Parameter b, min",0
+BRAZIL ,Geothermal,Pathway,,"Parameter b, min",0
+BRAZIL ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+BRAZIL ,Hydroelectricity,Pathway,,"Parameter b, min",18
+BRAZIL ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+BRAZIL ,Nuclear,Pathway,,"Parameter b, min",43
+BRAZIL ,Renewables,Pathway,,"Parameter b, min",0
+BRAZIL ,Solar,Pathway,,"Parameter b, min",0
+BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+BRAZIL ,Tide and wave,Pathway,,"Parameter b, min",0
+BRAZIL ,Wind,Pathway,,"Parameter b, min",0
+EUR ,Biomass and waste,Pathway,,"Parameter a, max",5
+EUR ,Fossil fuels,Pathway,,"Parameter a, max",5
+EUR ,Generation,Pathway,,"Parameter a, max",0
+EUR ,Geothermal,Pathway,,"Parameter a, max",5
+EUR ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+EUR ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+EUR ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+EUR ,Nuclear,Pathway,,"Parameter a, max",-0.1
+EUR ,Renewables,Pathway,,"Parameter a, max",5
+EUR ,Solar,Pathway,,"Parameter a, max",5
+EUR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+EUR ,Tide and wave,Pathway,,"Parameter a, max",5
+EUR ,Wind,Pathway,,"Parameter a, max",5
+EUR ,Biomass and waste,Pathway,,"Parameter a, min",0
+EUR ,Fossil fuels,Pathway,,"Parameter a, min",0
+EUR ,Generation,Pathway,,"Parameter a, min",0
+EUR ,Geothermal,Pathway,,"Parameter a, min",0
+EUR ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+EUR ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+EUR ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+EUR ,Nuclear,Pathway,,"Parameter a, min",-0.1
+EUR ,Renewables,Pathway,,"Parameter a, min",0
+EUR ,Solar,Pathway,,"Parameter a, min",0
+EUR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+EUR ,Tide and wave,Pathway,,"Parameter a, min",0
+EUR ,Wind,Pathway,,"Parameter a, min",0
+EUR ,Biomass and waste,Pathway,,"Parameter b, max",100
+EUR ,Fossil fuels,Pathway,,"Parameter b, max",100
+EUR ,Generation,Pathway,,"Parameter b, max",100
+EUR ,Geothermal,Pathway,,"Parameter b, max",100
+EUR ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+EUR ,Hydroelectricity,Pathway,,"Parameter b, max",18
+EUR ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+EUR ,Nuclear,Pathway,,"Parameter b, max",43
+EUR ,Renewables,Pathway,,"Parameter b, max",100
+EUR ,Solar,Pathway,,"Parameter b, max",100
+EUR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+EUR ,Tide and wave,Pathway,,"Parameter b, max",100
+EUR ,Wind,Pathway,,"Parameter b, max",100
+EUR ,Biomass and waste,Pathway,,"Parameter b, min",0
+EUR ,Fossil fuels,Pathway,,"Parameter b, min",0
+EUR ,Generation,Pathway,,"Parameter b, min",0
+EUR ,Geothermal,Pathway,,"Parameter b, min",0
+EUR ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+EUR ,Hydroelectricity,Pathway,,"Parameter b, min",18
+EUR ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+EUR ,Nuclear,Pathway,,"Parameter b, min",43
+EUR ,Renewables,Pathway,,"Parameter b, min",0
+EUR ,Solar,Pathway,,"Parameter b, min",0
+EUR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+EUR ,Tide and wave,Pathway,,"Parameter b, min",0
+EUR ,Wind,Pathway,,"Parameter b, min",0
+EU ,Biomass and waste,Pathway,,"Parameter a, max",5
+EU ,Fossil fuels,Pathway,,"Parameter a, max",5
+EU ,Generation,Pathway,,"Parameter a, max",0
+EU ,Geothermal,Pathway,,"Parameter a, max",5
+EU ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+EU ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+EU ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+EU ,Nuclear,Pathway,,"Parameter a, max",-0.1
+EU ,Renewables,Pathway,,"Parameter a, max",5
+EU ,Solar,Pathway,,"Parameter a, max",5
+EU ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+EU ,Tide and wave,Pathway,,"Parameter a, max",5
+EU ,Wind,Pathway,,"Parameter a, max",5
+EU ,Biomass and waste,Pathway,,"Parameter a, min",0
+EU ,Fossil fuels,Pathway,,"Parameter a, min",0
+EU ,Generation,Pathway,,"Parameter a, min",0
+EU ,Geothermal,Pathway,,"Parameter a, min",0
+EU ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+EU ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+EU ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+EU ,Nuclear,Pathway,,"Parameter a, min",-0.1
+EU ,Renewables,Pathway,,"Parameter a, min",0
+EU ,Solar,Pathway,,"Parameter a, min",0
+EU ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+EU ,Tide and wave,Pathway,,"Parameter a, min",0
+EU ,Wind,Pathway,,"Parameter a, min",0
+EU ,Biomass and waste,Pathway,,"Parameter b, max",100
+EU ,Fossil fuels,Pathway,,"Parameter b, max",100
+EU ,Generation,Pathway,,"Parameter b, max",100
+EU ,Geothermal,Pathway,,"Parameter b, max",100
+EU ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+EU ,Hydroelectricity,Pathway,,"Parameter b, max",18
+EU ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+EU ,Nuclear,Pathway,,"Parameter b, max",43
+EU ,Renewables,Pathway,,"Parameter b, max",100
+EU ,Solar,Pathway,,"Parameter b, max",100
+EU ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+EU ,Tide and wave,Pathway,,"Parameter b, max",100
+EU ,Wind,Pathway,,"Parameter b, max",100
+EU ,Biomass and waste,Pathway,,"Parameter b, min",0
+EU ,Fossil fuels,Pathway,,"Parameter b, min",0
+EU ,Generation,Pathway,,"Parameter b, min",0
+EU ,Geothermal,Pathway,,"Parameter b, min",0
+EU ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+EU ,Hydroelectricity,Pathway,,"Parameter b, min",18
+EU ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+EU ,Nuclear,Pathway,,"Parameter b, min",43
+EU ,Renewables,Pathway,,"Parameter b, min",0
+EU ,Solar,Pathway,,"Parameter b, min",0
+EU ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+EU ,Tide and wave,Pathway,,"Parameter b, min",0
+EU ,Wind,Pathway,,"Parameter b, min",0
+AFRICA ,Biomass and waste,Pathway,,"Parameter a, max",5
+AFRICA ,Fossil fuels,Pathway,,"Parameter a, max",5
+AFRICA ,Generation,Pathway,,"Parameter a, max",0
+AFRICA ,Geothermal,Pathway,,"Parameter a, max",5
+AFRICA ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+AFRICA ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+AFRICA ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+AFRICA ,Nuclear,Pathway,,"Parameter a, max",-0.1
+AFRICA ,Renewables,Pathway,,"Parameter a, max",5
+AFRICA ,Solar,Pathway,,"Parameter a, max",5
+AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+AFRICA ,Tide and wave,Pathway,,"Parameter a, max",5
+AFRICA ,Wind,Pathway,,"Parameter a, max",5
+AFRICA ,Biomass and waste,Pathway,,"Parameter a, min",0
+AFRICA ,Fossil fuels,Pathway,,"Parameter a, min",0
+AFRICA ,Generation,Pathway,,"Parameter a, min",0
+AFRICA ,Geothermal,Pathway,,"Parameter a, min",0
+AFRICA ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+AFRICA ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+AFRICA ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+AFRICA ,Nuclear,Pathway,,"Parameter a, min",-0.1
+AFRICA ,Renewables,Pathway,,"Parameter a, min",0
+AFRICA ,Solar,Pathway,,"Parameter a, min",0
+AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+AFRICA ,Tide and wave,Pathway,,"Parameter a, min",0
+AFRICA ,Wind,Pathway,,"Parameter a, min",0
+AFRICA ,Biomass and waste,Pathway,,"Parameter b, max",100
+AFRICA ,Fossil fuels,Pathway,,"Parameter b, max",100
+AFRICA ,Generation,Pathway,,"Parameter b, max",100
+AFRICA ,Geothermal,Pathway,,"Parameter b, max",100
+AFRICA ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+AFRICA ,Hydroelectricity,Pathway,,"Parameter b, max",18
+AFRICA ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+AFRICA ,Nuclear,Pathway,,"Parameter b, max",43
+AFRICA ,Renewables,Pathway,,"Parameter b, max",100
+AFRICA ,Solar,Pathway,,"Parameter b, max",100
+AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+AFRICA ,Tide and wave,Pathway,,"Parameter b, max",100
+AFRICA ,Wind,Pathway,,"Parameter b, max",100
+AFRICA ,Biomass and waste,Pathway,,"Parameter b, min",0
+AFRICA ,Fossil fuels,Pathway,,"Parameter b, min",0
+AFRICA ,Generation,Pathway,,"Parameter b, min",0
+AFRICA ,Geothermal,Pathway,,"Parameter b, min",0
+AFRICA ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+AFRICA ,Hydroelectricity,Pathway,,"Parameter b, min",18
+AFRICA ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+AFRICA ,Nuclear,Pathway,,"Parameter b, min",43
+AFRICA ,Renewables,Pathway,,"Parameter b, min",0
+AFRICA ,Solar,Pathway,,"Parameter b, min",0
+AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+AFRICA ,Tide and wave,Pathway,,"Parameter b, min",0
+AFRICA ,Wind,Pathway,,"Parameter b, min",0
+SAFR ,Biomass and waste,Pathway,,"Parameter a, max",5
+SAFR ,Fossil fuels,Pathway,,"Parameter a, max",5
+SAFR ,Generation,Pathway,,"Parameter a, max",0
+SAFR ,Geothermal,Pathway,,"Parameter a, max",5
+SAFR ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+SAFR ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+SAFR ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+SAFR ,Nuclear,Pathway,,"Parameter a, max",-0.1
+SAFR ,Renewables,Pathway,,"Parameter a, max",5
+SAFR ,Solar,Pathway,,"Parameter a, max",5
+SAFR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+SAFR ,Tide and wave,Pathway,,"Parameter a, max",5
+SAFR ,Wind,Pathway,,"Parameter a, max",5
+SAFR ,Biomass and waste,Pathway,,"Parameter a, min",0
+SAFR ,Fossil fuels,Pathway,,"Parameter a, min",0
+SAFR ,Generation,Pathway,,"Parameter a, min",0
+SAFR ,Geothermal,Pathway,,"Parameter a, min",0
+SAFR ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+SAFR ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+SAFR ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+SAFR ,Nuclear,Pathway,,"Parameter a, min",-0.1
+SAFR ,Renewables,Pathway,,"Parameter a, min",0
+SAFR ,Solar,Pathway,,"Parameter a, min",0
+SAFR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+SAFR ,Tide and wave,Pathway,,"Parameter a, min",0
+SAFR ,Wind,Pathway,,"Parameter a, min",0
+SAFR ,Biomass and waste,Pathway,,"Parameter b, max",100
+SAFR ,Fossil fuels,Pathway,,"Parameter b, max",100
+SAFR ,Generation,Pathway,,"Parameter b, max",100
+SAFR ,Geothermal,Pathway,,"Parameter b, max",100
+SAFR ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+SAFR ,Hydroelectricity,Pathway,,"Parameter b, max",18
+SAFR ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+SAFR ,Nuclear,Pathway,,"Parameter b, max",43
+SAFR ,Renewables,Pathway,,"Parameter b, max",100
+SAFR ,Solar,Pathway,,"Parameter b, max",100
+SAFR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+SAFR ,Tide and wave,Pathway,,"Parameter b, max",100
+SAFR ,Wind,Pathway,,"Parameter b, max",100
+SAFR ,Biomass and waste,Pathway,,"Parameter b, min",0
+SAFR ,Fossil fuels,Pathway,,"Parameter b, min",0
+SAFR ,Generation,Pathway,,"Parameter b, min",0
+SAFR ,Geothermal,Pathway,,"Parameter b, min",0
+SAFR ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+SAFR ,Hydroelectricity,Pathway,,"Parameter b, min",18
+SAFR ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+SAFR ,Nuclear,Pathway,,"Parameter b, min",43
+SAFR ,Renewables,Pathway,,"Parameter b, min",0
+SAFR ,Solar,Pathway,,"Parameter b, min",0
+SAFR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+SAFR ,Tide and wave,Pathway,,"Parameter b, min",0
+SAFR ,Wind,Pathway,,"Parameter b, min",0
+ME ,Biomass and waste,Pathway,,"Parameter a, max",5
+ME ,Fossil fuels,Pathway,,"Parameter a, max",5
+ME ,Generation,Pathway,,"Parameter a, max",0
+ME ,Geothermal,Pathway,,"Parameter a, max",5
+ME ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+ME ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+ME ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+ME ,Nuclear,Pathway,,"Parameter a, max",-0.1
+ME ,Renewables,Pathway,,"Parameter a, max",5
+ME ,Solar,Pathway,,"Parameter a, max",5
+ME ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+ME ,Tide and wave,Pathway,,"Parameter a, max",5
+ME ,Wind,Pathway,,"Parameter a, max",5
+ME ,Biomass and waste,Pathway,,"Parameter a, min",0
+ME ,Fossil fuels,Pathway,,"Parameter a, min",0
+ME ,Generation,Pathway,,"Parameter a, min",0
+ME ,Geothermal,Pathway,,"Parameter a, min",0
+ME ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+ME ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+ME ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+ME ,Nuclear,Pathway,,"Parameter a, min",-0.1
+ME ,Renewables,Pathway,,"Parameter a, min",0
+ME ,Solar,Pathway,,"Parameter a, min",0
+ME ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+ME ,Tide and wave,Pathway,,"Parameter a, min",0
+ME ,Wind,Pathway,,"Parameter a, min",0
+ME ,Biomass and waste,Pathway,,"Parameter b, max",100
+ME ,Fossil fuels,Pathway,,"Parameter b, max",100
+ME ,Generation,Pathway,,"Parameter b, max",100
+ME ,Geothermal,Pathway,,"Parameter b, max",100
+ME ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+ME ,Hydroelectricity,Pathway,,"Parameter b, max",18
+ME ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+ME ,Nuclear,Pathway,,"Parameter b, max",43
+ME ,Renewables,Pathway,,"Parameter b, max",100
+ME ,Solar,Pathway,,"Parameter b, max",100
+ME ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+ME ,Tide and wave,Pathway,,"Parameter b, max",100
+ME ,Wind,Pathway,,"Parameter b, max",100
+ME ,Biomass and waste,Pathway,,"Parameter b, min",0
+ME ,Fossil fuels,Pathway,,"Parameter b, min",0
+ME ,Generation,Pathway,,"Parameter b, min",0
+ME ,Geothermal,Pathway,,"Parameter b, min",0
+ME ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+ME ,Hydroelectricity,Pathway,,"Parameter b, min",18
+ME ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+ME ,Nuclear,Pathway,,"Parameter b, min",43
+ME ,Renewables,Pathway,,"Parameter b, min",0
+ME ,Solar,Pathway,,"Parameter b, min",0
+ME ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+ME ,Tide and wave,Pathway,,"Parameter b, min",0
+ME ,Wind,Pathway,,"Parameter b, min",0
+EURASIA ,Biomass and waste,Pathway,,"Parameter a, max",5
+EURASIA ,Fossil fuels,Pathway,,"Parameter a, max",5
+EURASIA ,Generation,Pathway,,"Parameter a, max",0
+EURASIA ,Geothermal,Pathway,,"Parameter a, max",5
+EURASIA ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+EURASIA ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+EURASIA ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+EURASIA ,Nuclear,Pathway,,"Parameter a, max",-0.1
+EURASIA ,Renewables,Pathway,,"Parameter a, max",5
+EURASIA ,Solar,Pathway,,"Parameter a, max",5
+EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+EURASIA ,Tide and wave,Pathway,,"Parameter a, max",5
+EURASIA ,Wind,Pathway,,"Parameter a, max",5
+EURASIA ,Biomass and waste,Pathway,,"Parameter a, min",0
+EURASIA ,Fossil fuels,Pathway,,"Parameter a, min",0
+EURASIA ,Generation,Pathway,,"Parameter a, min",0
+EURASIA ,Geothermal,Pathway,,"Parameter a, min",0
+EURASIA ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+EURASIA ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+EURASIA ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+EURASIA ,Nuclear,Pathway,,"Parameter a, min",-0.1
+EURASIA ,Renewables,Pathway,,"Parameter a, min",0
+EURASIA ,Solar,Pathway,,"Parameter a, min",0
+EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+EURASIA ,Tide and wave,Pathway,,"Parameter a, min",0
+EURASIA ,Wind,Pathway,,"Parameter a, min",0
+EURASIA ,Biomass and waste,Pathway,,"Parameter b, max",100
+EURASIA ,Fossil fuels,Pathway,,"Parameter b, max",100
+EURASIA ,Generation,Pathway,,"Parameter b, max",100
+EURASIA ,Geothermal,Pathway,,"Parameter b, max",100
+EURASIA ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+EURASIA ,Hydroelectricity,Pathway,,"Parameter b, max",18
+EURASIA ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+EURASIA ,Nuclear,Pathway,,"Parameter b, max",43
+EURASIA ,Renewables,Pathway,,"Parameter b, max",100
+EURASIA ,Solar,Pathway,,"Parameter b, max",100
+EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+EURASIA ,Tide and wave,Pathway,,"Parameter b, max",100
+EURASIA ,Wind,Pathway,,"Parameter b, max",100
+EURASIA ,Biomass and waste,Pathway,,"Parameter b, min",0
+EURASIA ,Fossil fuels,Pathway,,"Parameter b, min",0
+EURASIA ,Generation,Pathway,,"Parameter b, min",0
+EURASIA ,Geothermal,Pathway,,"Parameter b, min",0
+EURASIA ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+EURASIA ,Hydroelectricity,Pathway,,"Parameter b, min",18
+EURASIA ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+EURASIA ,Nuclear,Pathway,,"Parameter b, min",43
+EURASIA ,Renewables,Pathway,,"Parameter b, min",0
+EURASIA ,Solar,Pathway,,"Parameter b, min",0
+EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+EURASIA ,Tide and wave,Pathway,,"Parameter b, min",0
+EURASIA ,Wind,Pathway,,"Parameter b, min",0
+RUS ,Biomass and waste,Pathway,,"Parameter a, max",5
+RUS ,Fossil fuels,Pathway,,"Parameter a, max",5
+RUS ,Generation,Pathway,,"Parameter a, max",0
+RUS ,Geothermal,Pathway,,"Parameter a, max",5
+RUS ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+RUS ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+RUS ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+RUS ,Nuclear,Pathway,,"Parameter a, max",-0.1
+RUS ,Renewables,Pathway,,"Parameter a, max",5
+RUS ,Solar,Pathway,,"Parameter a, max",5
+RUS ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+RUS ,Tide and wave,Pathway,,"Parameter a, max",5
+RUS ,Wind,Pathway,,"Parameter a, max",5
+RUS ,Biomass and waste,Pathway,,"Parameter a, min",0
+RUS ,Fossil fuels,Pathway,,"Parameter a, min",0
+RUS ,Generation,Pathway,,"Parameter a, min",0
+RUS ,Geothermal,Pathway,,"Parameter a, min",0
+RUS ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+RUS ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+RUS ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+RUS ,Nuclear,Pathway,,"Parameter a, min",-0.1
+RUS ,Renewables,Pathway,,"Parameter a, min",0
+RUS ,Solar,Pathway,,"Parameter a, min",0
+RUS ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+RUS ,Tide and wave,Pathway,,"Parameter a, min",0
+RUS ,Wind,Pathway,,"Parameter a, min",0
+RUS ,Biomass and waste,Pathway,,"Parameter b, max",100
+RUS ,Fossil fuels,Pathway,,"Parameter b, max",100
+RUS ,Generation,Pathway,,"Parameter b, max",100
+RUS ,Geothermal,Pathway,,"Parameter b, max",100
+RUS ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+RUS ,Hydroelectricity,Pathway,,"Parameter b, max",18
+RUS ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+RUS ,Nuclear,Pathway,,"Parameter b, max",43
+RUS ,Renewables,Pathway,,"Parameter b, max",100
+RUS ,Solar,Pathway,,"Parameter b, max",100
+RUS ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+RUS ,Tide and wave,Pathway,,"Parameter b, max",100
+RUS ,Wind,Pathway,,"Parameter b, max",100
+RUS ,Biomass and waste,Pathway,,"Parameter b, min",0
+RUS ,Fossil fuels,Pathway,,"Parameter b, min",0
+RUS ,Generation,Pathway,,"Parameter b, min",0
+RUS ,Geothermal,Pathway,,"Parameter b, min",0
+RUS ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+RUS ,Hydroelectricity,Pathway,,"Parameter b, min",18
+RUS ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+RUS ,Nuclear,Pathway,,"Parameter b, min",43
+RUS ,Renewables,Pathway,,"Parameter b, min",0
+RUS ,Solar,Pathway,,"Parameter b, min",0
+RUS ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+RUS ,Tide and wave,Pathway,,"Parameter b, min",0
+RUS ,Wind,Pathway,,"Parameter b, min",0
+ASIAPAC ,Biomass and waste,Pathway,,"Parameter a, max",5
+ASIAPAC ,Fossil fuels,Pathway,,"Parameter a, max",5
+ASIAPAC ,Generation,Pathway,,"Parameter a, max",0
+ASIAPAC ,Geothermal,Pathway,,"Parameter a, max",5
+ASIAPAC ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+ASIAPAC ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+ASIAPAC ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+ASIAPAC ,Nuclear,Pathway,,"Parameter a, max",-0.1
+ASIAPAC ,Renewables,Pathway,,"Parameter a, max",5
+ASIAPAC ,Solar,Pathway,,"Parameter a, max",5
+ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+ASIAPAC ,Tide and wave,Pathway,,"Parameter a, max",5
+ASIAPAC ,Wind,Pathway,,"Parameter a, max",5
+ASIAPAC ,Biomass and waste,Pathway,,"Parameter a, min",0
+ASIAPAC ,Fossil fuels,Pathway,,"Parameter a, min",0
+ASIAPAC ,Generation,Pathway,,"Parameter a, min",0
+ASIAPAC ,Geothermal,Pathway,,"Parameter a, min",0
+ASIAPAC ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+ASIAPAC ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+ASIAPAC ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+ASIAPAC ,Nuclear,Pathway,,"Parameter a, min",-0.1
+ASIAPAC ,Renewables,Pathway,,"Parameter a, min",0
+ASIAPAC ,Solar,Pathway,,"Parameter a, min",0
+ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+ASIAPAC ,Tide and wave,Pathway,,"Parameter a, min",0
+ASIAPAC ,Wind,Pathway,,"Parameter a, min",0
+ASIAPAC ,Biomass and waste,Pathway,,"Parameter b, max",100
+ASIAPAC ,Fossil fuels,Pathway,,"Parameter b, max",100
+ASIAPAC ,Generation,Pathway,,"Parameter b, max",100
+ASIAPAC ,Geothermal,Pathway,,"Parameter b, max",100
+ASIAPAC ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+ASIAPAC ,Hydroelectricity,Pathway,,"Parameter b, max",18
+ASIAPAC ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+ASIAPAC ,Nuclear,Pathway,,"Parameter b, max",43
+ASIAPAC ,Renewables,Pathway,,"Parameter b, max",100
+ASIAPAC ,Solar,Pathway,,"Parameter b, max",100
+ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+ASIAPAC ,Tide and wave,Pathway,,"Parameter b, max",100
+ASIAPAC ,Wind,Pathway,,"Parameter b, max",100
+ASIAPAC ,Biomass and waste,Pathway,,"Parameter b, min",0
+ASIAPAC ,Fossil fuels,Pathway,,"Parameter b, min",0
+ASIAPAC ,Generation,Pathway,,"Parameter b, min",0
+ASIAPAC ,Geothermal,Pathway,,"Parameter b, min",0
+ASIAPAC ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+ASIAPAC ,Hydroelectricity,Pathway,,"Parameter b, min",18
+ASIAPAC ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+ASIAPAC ,Nuclear,Pathway,,"Parameter b, min",43
+ASIAPAC ,Renewables,Pathway,,"Parameter b, min",0
+ASIAPAC ,Solar,Pathway,,"Parameter b, min",0
+ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+ASIAPAC ,Tide and wave,Pathway,,"Parameter b, min",0
+ASIAPAC ,Wind,Pathway,,"Parameter b, min",0
+CHINA ,Biomass and waste,Pathway,,"Parameter a, max",5
+CHINA ,Fossil fuels,Pathway,,"Parameter a, max",5
+CHINA ,Generation,Pathway,,"Parameter a, max",0
+CHINA ,Geothermal,Pathway,,"Parameter a, max",5
+CHINA ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+CHINA ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+CHINA ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+CHINA ,Nuclear,Pathway,,"Parameter a, max",-0.1
+CHINA ,Renewables,Pathway,,"Parameter a, max",5
+CHINA ,Solar,Pathway,,"Parameter a, max",5
+CHINA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+CHINA ,Tide and wave,Pathway,,"Parameter a, max",5
+CHINA ,Wind,Pathway,,"Parameter a, max",5
+CHINA ,Biomass and waste,Pathway,,"Parameter a, min",0
+CHINA ,Fossil fuels,Pathway,,"Parameter a, min",0
+CHINA ,Generation,Pathway,,"Parameter a, min",0
+CHINA ,Geothermal,Pathway,,"Parameter a, min",0
+CHINA ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+CHINA ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+CHINA ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+CHINA ,Nuclear,Pathway,,"Parameter a, min",-0.1
+CHINA ,Renewables,Pathway,,"Parameter a, min",0
+CHINA ,Solar,Pathway,,"Parameter a, min",0
+CHINA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+CHINA ,Tide and wave,Pathway,,"Parameter a, min",0
+CHINA ,Wind,Pathway,,"Parameter a, min",0
+CHINA ,Biomass and waste,Pathway,,"Parameter b, max",100
+CHINA ,Fossil fuels,Pathway,,"Parameter b, max",100
+CHINA ,Generation,Pathway,,"Parameter b, max",100
+CHINA ,Geothermal,Pathway,,"Parameter b, max",100
+CHINA ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+CHINA ,Hydroelectricity,Pathway,,"Parameter b, max",18
+CHINA ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+CHINA ,Nuclear,Pathway,,"Parameter b, max",43
+CHINA ,Renewables,Pathway,,"Parameter b, max",100
+CHINA ,Solar,Pathway,,"Parameter b, max",100
+CHINA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+CHINA ,Tide and wave,Pathway,,"Parameter b, max",100
+CHINA ,Wind,Pathway,,"Parameter b, max",100
+CHINA ,Biomass and waste,Pathway,,"Parameter b, min",0
+CHINA ,Fossil fuels,Pathway,,"Parameter b, min",0
+CHINA ,Generation,Pathway,,"Parameter b, min",0
+CHINA ,Geothermal,Pathway,,"Parameter b, min",0
+CHINA ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+CHINA ,Hydroelectricity,Pathway,,"Parameter b, min",18
+CHINA ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+CHINA ,Nuclear,Pathway,,"Parameter b, min",43
+CHINA ,Renewables,Pathway,,"Parameter b, min",0
+CHINA ,Solar,Pathway,,"Parameter b, min",0
+CHINA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+CHINA ,Tide and wave,Pathway,,"Parameter b, min",0
+CHINA ,Wind,Pathway,,"Parameter b, min",0
+INDIA ,Biomass and waste,Pathway,,"Parameter a, max",5
+INDIA ,Fossil fuels,Pathway,,"Parameter a, max",5
+INDIA ,Generation,Pathway,,"Parameter a, max",0
+INDIA ,Geothermal,Pathway,,"Parameter a, max",5
+INDIA ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+INDIA ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+INDIA ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+INDIA ,Nuclear,Pathway,,"Parameter a, max",-0.1
+INDIA ,Renewables,Pathway,,"Parameter a, max",5
+INDIA ,Solar,Pathway,,"Parameter a, max",5
+INDIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+INDIA ,Tide and wave,Pathway,,"Parameter a, max",5
+INDIA ,Wind,Pathway,,"Parameter a, max",5
+INDIA ,Biomass and waste,Pathway,,"Parameter a, min",0
+INDIA ,Fossil fuels,Pathway,,"Parameter a, min",0
+INDIA ,Generation,Pathway,,"Parameter a, min",0
+INDIA ,Geothermal,Pathway,,"Parameter a, min",0
+INDIA ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+INDIA ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+INDIA ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+INDIA ,Nuclear,Pathway,,"Parameter a, min",-0.1
+INDIA ,Renewables,Pathway,,"Parameter a, min",0
+INDIA ,Solar,Pathway,,"Parameter a, min",0
+INDIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+INDIA ,Tide and wave,Pathway,,"Parameter a, min",0
+INDIA ,Wind,Pathway,,"Parameter a, min",0
+INDIA ,Biomass and waste,Pathway,,"Parameter b, max",100
+INDIA ,Fossil fuels,Pathway,,"Parameter b, max",100
+INDIA ,Generation,Pathway,,"Parameter b, max",100
+INDIA ,Geothermal,Pathway,,"Parameter b, max",100
+INDIA ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+INDIA ,Hydroelectricity,Pathway,,"Parameter b, max",18
+INDIA ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+INDIA ,Nuclear,Pathway,,"Parameter b, max",43
+INDIA ,Renewables,Pathway,,"Parameter b, max",100
+INDIA ,Solar,Pathway,,"Parameter b, max",100
+INDIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+INDIA ,Tide and wave,Pathway,,"Parameter b, max",100
+INDIA ,Wind,Pathway,,"Parameter b, max",100
+INDIA ,Biomass and waste,Pathway,,"Parameter b, min",0
+INDIA ,Fossil fuels,Pathway,,"Parameter b, min",0
+INDIA ,Generation,Pathway,,"Parameter b, min",0
+INDIA ,Geothermal,Pathway,,"Parameter b, min",0
+INDIA ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+INDIA ,Hydroelectricity,Pathway,,"Parameter b, min",18
+INDIA ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+INDIA ,Nuclear,Pathway,,"Parameter b, min",43
+INDIA ,Renewables,Pathway,,"Parameter b, min",0
+INDIA ,Solar,Pathway,,"Parameter b, min",0
+INDIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+INDIA ,Tide and wave,Pathway,,"Parameter b, min",0
+INDIA ,Wind,Pathway,,"Parameter b, min",0
+JPN ,Biomass and waste,Pathway,,"Parameter a, max",5
+JPN ,Fossil fuels,Pathway,,"Parameter a, max",5
+JPN ,Generation,Pathway,,"Parameter a, max",0
+JPN ,Geothermal,Pathway,,"Parameter a, max",5
+JPN ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+JPN ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+JPN ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+JPN ,Nuclear,Pathway,,"Parameter a, max",-0.1
+JPN ,Renewables,Pathway,,"Parameter a, max",5
+JPN ,Solar,Pathway,,"Parameter a, max",5
+JPN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+JPN ,Tide and wave,Pathway,,"Parameter a, max",5
+JPN ,Wind,Pathway,,"Parameter a, max",5
+JPN ,Biomass and waste,Pathway,,"Parameter a, min",0
+JPN ,Fossil fuels,Pathway,,"Parameter a, min",0
+JPN ,Generation,Pathway,,"Parameter a, min",0
+JPN ,Geothermal,Pathway,,"Parameter a, min",0
+JPN ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+JPN ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+JPN ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+JPN ,Nuclear,Pathway,,"Parameter a, min",-0.1
+JPN ,Renewables,Pathway,,"Parameter a, min",0
+JPN ,Solar,Pathway,,"Parameter a, min",0
+JPN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+JPN ,Tide and wave,Pathway,,"Parameter a, min",0
+JPN ,Wind,Pathway,,"Parameter a, min",0
+JPN ,Biomass and waste,Pathway,,"Parameter b, max",100
+JPN ,Fossil fuels,Pathway,,"Parameter b, max",100
+JPN ,Generation,Pathway,,"Parameter b, max",100
+JPN ,Geothermal,Pathway,,"Parameter b, max",100
+JPN ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+JPN ,Hydroelectricity,Pathway,,"Parameter b, max",18
+JPN ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+JPN ,Nuclear,Pathway,,"Parameter b, max",43
+JPN ,Renewables,Pathway,,"Parameter b, max",100
+JPN ,Solar,Pathway,,"Parameter b, max",100
+JPN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+JPN ,Tide and wave,Pathway,,"Parameter b, max",100
+JPN ,Wind,Pathway,,"Parameter b, max",100
+JPN ,Biomass and waste,Pathway,,"Parameter b, min",0
+JPN ,Fossil fuels,Pathway,,"Parameter b, min",0
+JPN ,Generation,Pathway,,"Parameter b, min",0
+JPN ,Geothermal,Pathway,,"Parameter b, min",0
+JPN ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+JPN ,Hydroelectricity,Pathway,,"Parameter b, min",18
+JPN ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+JPN ,Nuclear,Pathway,,"Parameter b, min",43
+JPN ,Renewables,Pathway,,"Parameter b, min",0
+JPN ,Solar,Pathway,,"Parameter b, min",0
+JPN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+JPN ,Tide and wave,Pathway,,"Parameter b, min",0
+JPN ,Wind,Pathway,,"Parameter b, min",0
+ASEAN ,Biomass and waste,Pathway,,"Parameter a, max",5
+ASEAN ,Fossil fuels,Pathway,,"Parameter a, max",5
+ASEAN ,Generation,Pathway,,"Parameter a, max",0
+ASEAN ,Geothermal,Pathway,,"Parameter a, max",5
+ASEAN ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+ASEAN ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+ASEAN ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+ASEAN ,Nuclear,Pathway,,"Parameter a, max",-0.1
+ASEAN ,Renewables,Pathway,,"Parameter a, max",5
+ASEAN ,Solar,Pathway,,"Parameter a, max",5
+ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+ASEAN ,Tide and wave,Pathway,,"Parameter a, max",5
+ASEAN ,Wind,Pathway,,"Parameter a, max",5
+ASEAN ,Biomass and waste,Pathway,,"Parameter a, min",0
+ASEAN ,Fossil fuels,Pathway,,"Parameter a, min",0
+ASEAN ,Generation,Pathway,,"Parameter a, min",0
+ASEAN ,Geothermal,Pathway,,"Parameter a, min",0
+ASEAN ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+ASEAN ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+ASEAN ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+ASEAN ,Nuclear,Pathway,,"Parameter a, min",-0.1
+ASEAN ,Renewables,Pathway,,"Parameter a, min",0
+ASEAN ,Solar,Pathway,,"Parameter a, min",0
+ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+ASEAN ,Tide and wave,Pathway,,"Parameter a, min",0
+ASEAN ,Wind,Pathway,,"Parameter a, min",0
+ASEAN ,Biomass and waste,Pathway,,"Parameter b, max",100
+ASEAN ,Fossil fuels,Pathway,,"Parameter b, max",100
+ASEAN ,Generation,Pathway,,"Parameter b, max",100
+ASEAN ,Geothermal,Pathway,,"Parameter b, max",100
+ASEAN ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+ASEAN ,Hydroelectricity,Pathway,,"Parameter b, max",18
+ASEAN ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+ASEAN ,Nuclear,Pathway,,"Parameter b, max",43
+ASEAN ,Renewables,Pathway,,"Parameter b, max",100
+ASEAN ,Solar,Pathway,,"Parameter b, max",100
+ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+ASEAN ,Tide and wave,Pathway,,"Parameter b, max",100
+ASEAN ,Wind,Pathway,,"Parameter b, max",100
+ASEAN ,Biomass and waste,Pathway,,"Parameter b, min",0
+ASEAN ,Fossil fuels,Pathway,,"Parameter b, min",0
+ASEAN ,Generation,Pathway,,"Parameter b, min",0
+ASEAN ,Geothermal,Pathway,,"Parameter b, min",0
+ASEAN ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+ASEAN ,Hydroelectricity,Pathway,,"Parameter b, min",18
+ASEAN ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+ASEAN ,Nuclear,Pathway,,"Parameter b, min",43
+ASEAN ,Renewables,Pathway,,"Parameter b, min",0
+ASEAN ,Solar,Pathway,,"Parameter b, min",0
+ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+ASEAN ,Tide and wave,Pathway,,"Parameter b, min",0
+ASEAN ,Wind,Pathway,,"Parameter b, min",0
+OECD ,Biomass and waste,Pathway,,"Parameter a, max",5
+OECD ,Fossil fuels,Pathway,,"Parameter a, max",5
+OECD ,Generation,Pathway,,"Parameter a, max",0
+OECD ,Geothermal,Pathway,,"Parameter a, max",5
+OECD ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+OECD ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+OECD ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+OECD ,Nuclear,Pathway,,"Parameter a, max",-0.1
+OECD ,Renewables,Pathway,,"Parameter a, max",5
+OECD ,Solar,Pathway,,"Parameter a, max",5
+OECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+OECD ,Tide and wave,Pathway,,"Parameter a, max",5
+OECD ,Wind,Pathway,,"Parameter a, max",5
+OECD ,Biomass and waste,Pathway,,"Parameter a, min",0
+OECD ,Fossil fuels,Pathway,,"Parameter a, min",0
+OECD ,Generation,Pathway,,"Parameter a, min",0
+OECD ,Geothermal,Pathway,,"Parameter a, min",0
+OECD ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+OECD ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+OECD ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+OECD ,Nuclear,Pathway,,"Parameter a, min",-0.1
+OECD ,Renewables,Pathway,,"Parameter a, min",0
+OECD ,Solar,Pathway,,"Parameter a, min",0
+OECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+OECD ,Tide and wave,Pathway,,"Parameter a, min",0
+OECD ,Wind,Pathway,,"Parameter a, min",0
+OECD ,Biomass and waste,Pathway,,"Parameter b, max",100
+OECD ,Fossil fuels,Pathway,,"Parameter b, max",100
+OECD ,Generation,Pathway,,"Parameter b, max",100
+OECD ,Geothermal,Pathway,,"Parameter b, max",100
+OECD ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+OECD ,Hydroelectricity,Pathway,,"Parameter b, max",18
+OECD ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+OECD ,Nuclear,Pathway,,"Parameter b, max",43
+OECD ,Renewables,Pathway,,"Parameter b, max",100
+OECD ,Solar,Pathway,,"Parameter b, max",100
+OECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+OECD ,Tide and wave,Pathway,,"Parameter b, max",100
+OECD ,Wind,Pathway,,"Parameter b, max",100
+OECD ,Biomass and waste,Pathway,,"Parameter b, min",0
+OECD ,Fossil fuels,Pathway,,"Parameter b, min",0
+OECD ,Generation,Pathway,,"Parameter b, min",0
+OECD ,Geothermal,Pathway,,"Parameter b, min",0
+OECD ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+OECD ,Hydroelectricity,Pathway,,"Parameter b, min",18
+OECD ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+OECD ,Nuclear,Pathway,,"Parameter b, min",43
+OECD ,Renewables,Pathway,,"Parameter b, min",0
+OECD ,Solar,Pathway,,"Parameter b, min",0
+OECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+OECD ,Tide and wave,Pathway,,"Parameter b, min",0
+OECD ,Wind,Pathway,,"Parameter b, min",0
+NonOECD ,Biomass and waste,Pathway,,"Parameter a, max",5
+NonOECD ,Fossil fuels,Pathway,,"Parameter a, max",5
+NonOECD ,Generation,Pathway,,"Parameter a, max",0
+NonOECD ,Geothermal,Pathway,,"Parameter a, max",5
+NonOECD ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+NonOECD ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+NonOECD ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+NonOECD ,Nuclear,Pathway,,"Parameter a, max",-0.1
+NonOECD ,Renewables,Pathway,,"Parameter a, max",5
+NonOECD ,Solar,Pathway,,"Parameter a, max",5
+NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+NonOECD ,Tide and wave,Pathway,,"Parameter a, max",5
+NonOECD ,Wind,Pathway,,"Parameter a, max",5
+NonOECD ,Biomass and waste,Pathway,,"Parameter a, min",0
+NonOECD ,Fossil fuels,Pathway,,"Parameter a, min",0
+NonOECD ,Generation,Pathway,,"Parameter a, min",0
+NonOECD ,Geothermal,Pathway,,"Parameter a, min",0
+NonOECD ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+NonOECD ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+NonOECD ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+NonOECD ,Nuclear,Pathway,,"Parameter a, min",-0.1
+NonOECD ,Renewables,Pathway,,"Parameter a, min",0
+NonOECD ,Solar,Pathway,,"Parameter a, min",0
+NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+NonOECD ,Tide and wave,Pathway,,"Parameter a, min",0
+NonOECD ,Wind,Pathway,,"Parameter a, min",0
+NonOECD ,Biomass and waste,Pathway,,"Parameter b, max",100
+NonOECD ,Fossil fuels,Pathway,,"Parameter b, max",100
+NonOECD ,Generation,Pathway,,"Parameter b, max",100
+NonOECD ,Geothermal,Pathway,,"Parameter b, max",100
+NonOECD ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+NonOECD ,Hydroelectricity,Pathway,,"Parameter b, max",18
+NonOECD ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+NonOECD ,Nuclear,Pathway,,"Parameter b, max",43
+NonOECD ,Renewables,Pathway,,"Parameter b, max",100
+NonOECD ,Solar,Pathway,,"Parameter b, max",100
+NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+NonOECD ,Tide and wave,Pathway,,"Parameter b, max",100
+NonOECD ,Wind,Pathway,,"Parameter b, max",100
+NonOECD ,Biomass and waste,Pathway,,"Parameter b, min",0
+NonOECD ,Fossil fuels,Pathway,,"Parameter b, min",0
+NonOECD ,Generation,Pathway,,"Parameter b, min",0
+NonOECD ,Geothermal,Pathway,,"Parameter b, min",0
+NonOECD ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+NonOECD ,Hydroelectricity,Pathway,,"Parameter b, min",18
+NonOECD ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+NonOECD ,Nuclear,Pathway,,"Parameter b, min",43
+NonOECD ,Renewables,Pathway,,"Parameter b, min",0
+NonOECD ,Solar,Pathway,,"Parameter b, min",0
+NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+NonOECD ,Tide and wave,Pathway,,"Parameter b, min",0
+NonOECD ,Wind,Pathway,,"Parameter b, min",0
+DevelopingECO ,Biomass and waste,Pathway,,"Parameter a, max",5
+DevelopingECO ,Fossil fuels,Pathway,,"Parameter a, max",5
+DevelopingECO ,Generation,Pathway,,"Parameter a, max",0
+DevelopingECO ,Geothermal,Pathway,,"Parameter a, max",5
+DevelopingECO ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+DevelopingECO ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+DevelopingECO ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+DevelopingECO ,Nuclear,Pathway,,"Parameter a, max",-0.1
+DevelopingECO ,Renewables,Pathway,,"Parameter a, max",5
+DevelopingECO ,Solar,Pathway,,"Parameter a, max",5
+DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+DevelopingECO ,Tide and wave,Pathway,,"Parameter a, max",5
+DevelopingECO ,Wind,Pathway,,"Parameter a, max",5
+DevelopingECO ,Biomass and waste,Pathway,,"Parameter a, min",0
+DevelopingECO ,Fossil fuels,Pathway,,"Parameter a, min",0
+DevelopingECO ,Generation,Pathway,,"Parameter a, min",0
+DevelopingECO ,Geothermal,Pathway,,"Parameter a, min",0
+DevelopingECO ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+DevelopingECO ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+DevelopingECO ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+DevelopingECO ,Nuclear,Pathway,,"Parameter a, min",-0.1
+DevelopingECO ,Renewables,Pathway,,"Parameter a, min",0
+DevelopingECO ,Solar,Pathway,,"Parameter a, min",0
+DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+DevelopingECO ,Tide and wave,Pathway,,"Parameter a, min",0
+DevelopingECO ,Wind,Pathway,,"Parameter a, min",0
+DevelopingECO ,Biomass and waste,Pathway,,"Parameter b, max",100
+DevelopingECO ,Fossil fuels,Pathway,,"Parameter b, max",100
+DevelopingECO ,Generation,Pathway,,"Parameter b, max",100
+DevelopingECO ,Geothermal,Pathway,,"Parameter b, max",100
+DevelopingECO ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+DevelopingECO ,Hydroelectricity,Pathway,,"Parameter b, max",18
+DevelopingECO ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+DevelopingECO ,Nuclear,Pathway,,"Parameter b, max",43
+DevelopingECO ,Renewables,Pathway,,"Parameter b, max",100
+DevelopingECO ,Solar,Pathway,,"Parameter b, max",100
+DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+DevelopingECO ,Tide and wave,Pathway,,"Parameter b, max",100
+DevelopingECO ,Wind,Pathway,,"Parameter b, max",100
+DevelopingECO ,Biomass and waste,Pathway,,"Parameter b, min",0
+DevelopingECO ,Fossil fuels,Pathway,,"Parameter b, min",0
+DevelopingECO ,Generation,Pathway,,"Parameter b, min",0
+DevelopingECO ,Geothermal,Pathway,,"Parameter b, min",0
+DevelopingECO ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+DevelopingECO ,Hydroelectricity,Pathway,,"Parameter b, min",18
+DevelopingECO ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+DevelopingECO ,Nuclear,Pathway,,"Parameter b, min",43
+DevelopingECO ,Renewables,Pathway,,"Parameter b, min",0
+DevelopingECO ,Solar,Pathway,,"Parameter b, min",0
+DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+DevelopingECO ,Tide and wave,Pathway,,"Parameter b, min",0
+DevelopingECO ,Wind,Pathway,,"Parameter b, min",0
+AdvancedECO ,Biomass and waste,Pathway,,"Parameter a, max",5
+AdvancedECO ,Fossil fuels,Pathway,,"Parameter a, max",5
+AdvancedECO ,Generation,Pathway,,"Parameter a, max",0
+AdvancedECO ,Geothermal,Pathway,,"Parameter a, max",5
+AdvancedECO ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
+AdvancedECO ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
+AdvancedECO ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
+AdvancedECO ,Nuclear,Pathway,,"Parameter a, max",-0.1
+AdvancedECO ,Renewables,Pathway,,"Parameter a, max",5
+AdvancedECO ,Solar,Pathway,,"Parameter a, max",5
+AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
+AdvancedECO ,Tide and wave,Pathway,,"Parameter a, max",5
+AdvancedECO ,Wind,Pathway,,"Parameter a, max",5
+AdvancedECO ,Biomass and waste,Pathway,,"Parameter a, min",0
+AdvancedECO ,Fossil fuels,Pathway,,"Parameter a, min",0
+AdvancedECO ,Generation,Pathway,,"Parameter a, min",0
+AdvancedECO ,Geothermal,Pathway,,"Parameter a, min",0
+AdvancedECO ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
+AdvancedECO ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
+AdvancedECO ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
+AdvancedECO ,Nuclear,Pathway,,"Parameter a, min",-0.1
+AdvancedECO ,Renewables,Pathway,,"Parameter a, min",0
+AdvancedECO ,Solar,Pathway,,"Parameter a, min",0
+AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
+AdvancedECO ,Tide and wave,Pathway,,"Parameter a, min",0
+AdvancedECO ,Wind,Pathway,,"Parameter a, min",0
+AdvancedECO ,Biomass and waste,Pathway,,"Parameter b, max",100
+AdvancedECO ,Fossil fuels,Pathway,,"Parameter b, max",100
+AdvancedECO ,Generation,Pathway,,"Parameter b, max",100
+AdvancedECO ,Geothermal,Pathway,,"Parameter b, max",100
+AdvancedECO ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
+AdvancedECO ,Hydroelectricity,Pathway,,"Parameter b, max",18
+AdvancedECO ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
+AdvancedECO ,Nuclear,Pathway,,"Parameter b, max",43
+AdvancedECO ,Renewables,Pathway,,"Parameter b, max",100
+AdvancedECO ,Solar,Pathway,,"Parameter b, max",100
+AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
+AdvancedECO ,Tide and wave,Pathway,,"Parameter b, max",100
+AdvancedECO ,Wind,Pathway,,"Parameter b, max",100
+AdvancedECO ,Biomass and waste,Pathway,,"Parameter b, min",0
+AdvancedECO ,Fossil fuels,Pathway,,"Parameter b, min",0
+AdvancedECO ,Generation,Pathway,,"Parameter b, min",0
+AdvancedECO ,Geothermal,Pathway,,"Parameter b, min",0
+AdvancedECO ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
+AdvancedECO ,Hydroelectricity,Pathway,,"Parameter b, min",18
+AdvancedECO ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
+AdvancedECO ,Nuclear,Pathway,,"Parameter b, min",43
+AdvancedECO ,Renewables,Pathway,,"Parameter b, min",0
+AdvancedECO ,Solar,Pathway,,"Parameter b, min",0
+AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
+AdvancedECO ,Tide and wave,Pathway,,"Parameter b, min",0
+AdvancedECO ,Wind,Pathway,,"Parameter b, min",0
