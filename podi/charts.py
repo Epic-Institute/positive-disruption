@@ -8,22 +8,25 @@ import matplotlib.animation as animation
 from IPython.display import HTML
 from podi.data.iea_weo_etl import iea_region_list
 import pyam
-from scipy.interpolate import make_interp_spline, BSpline
+from scipy.interpolate import interp1d, UnivariateSpline
 
 
 def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Fig. 3: Projected Market Diffusion Curves for the V7
-    for i in range(0, len(iea_region_list)):
-        # fig = dataframe of percent of max mitigation for each vector
+    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 20)
 
+    for i in range(0, len(iea_region_list)):
+        fig = adoption_curves.apply(
+            lambda x: interp1d(adoption_curves.columns.values, x, kind="cubic"), axis=1
+        )
         plt.figure(i)
-        plt.plot(fig.columns.astype(int).values, fig.T * 100)
-        plt.ylabel("(%)")
-        plt.xlim([data_start_year, long_proj_end_year])
+        fig.apply(lambda x: plt.plot(x(xnew) * 100, linestyle=":"))
+        plt.ylabel("% Adoption")
+        # plt.xlim([acurve_start, acurve_end])
         plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
         plt.legend(
-            fig.index,
+            adoption_curves.index,
             loc=2,
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
@@ -471,6 +474,24 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # Fig. 34: Forests & Wetlands Subvector Mitigation Wedges
 
     # Fig. 35: AFOLU Subvector Mitigation Wedges
+
+    # Stacked plot
+    for i in range(0, len(iea_region_list)):
+        fig = afolu_em_mitigated.loc[
+            iea_region_list[i], slice(None), slice(None), slice(None)
+        ]
+        plt.figure(i)
+        plt.stackplot(fig.columns.astype(int).values, fig / 1e6, labels=this.values)
+        plt.ylabel("Gt CO2/yr")
+        plt.xlim([data_start_year, long_proj_end_year])
+        plt.title("AFOLU Emissions Mitigated, " + iea_region_list[i])
+        plt.legend(
+            this.values,
+            loc=2,
+            fontsize="small",
+            bbox_to_anchor=(1.05, 1),
+            borderaxespad=0.0,
+        )
 
     # Fig. 40: Annual CO2 Removed via CDR
 

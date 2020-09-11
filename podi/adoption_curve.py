@@ -172,4 +172,5 @@ def adoption_curve(value, region, scenario):
 
     y_growth = np.array(y_growth)
     """
+
     return pd.DataFrame(data=y, index=years)
