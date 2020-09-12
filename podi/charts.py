@@ -17,7 +17,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 20)
 
     for i in range(0, len(iea_region_list)):
-        fig = adoption_curves.apply(
+        fig = em_miti.apply(
             lambda x: interp1d(adoption_curves.columns.values, x, kind="cubic"), axis=1
         )
         plt.figure(i)
@@ -159,7 +159,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             .append(
                 pd.DataFrame(
                     energy_demand_pathway_i.loc["Transport"]
-                    .loc[["Oil", "Biofuels", "Other fuels"], :]
+                    .loc[["Oil", "Other fuels"], :]
                     .sum()
                 ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
             )
@@ -248,7 +248,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     ]
 
     for i in range(0, len(iea_region_list)):
-        fig = elec_consump.loc[iea_region_list[i], slice(None)]
+        fig = em.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(tech_list)]
         plt.figure(i)
         plt.stackplot(fig.columns.astype(int), fig, labels=fig.index)
@@ -462,6 +462,35 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # Fig. 28: Industry Energy Demand by End-Use
 
     # Fig. 29: Industry Heat Supply
+
+    # heat generation by source
+    heat_tech_list = [
+        "Biofuels",
+        "Coal",
+        "Geothermal",
+        "Natural gas",
+        "Nuclear",
+        "Oil",
+        "Other sources",
+        "Solar thermal",
+        "Waste",
+    ]
+
+    for i in range(0, len(iea_region_list)):
+        fig = heat_percent_adoption.loc[iea_region_list[i], slice(None)]
+        fig = fig[fig.index.isin(heat_tech_list)]
+        plt.figure(i)
+        plt.plot(fig.columns.astype(int).values, fig.T * 100)
+        plt.ylabel("(%)")
+        plt.xlim([data_start_year, long_proj_end_year])
+        plt.title("Percent of Total Heat Generation, " + iea_region_list[i])
+        plt.legend(
+            fig.index,
+            loc=2,
+            fontsize="small",
+            bbox_to_anchor=(1.05, 1),
+            borderaxespad=0.0,
+        )
 
     # Fig. 30: Transportation Energy Demand
 

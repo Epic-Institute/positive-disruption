@@ -6,6 +6,7 @@ from podi.energy_supply import energy_supply
 import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
+from cdr.cdr_util import CDR_NEEDED_DEF
 
 # from podi.afolu import afolu
 from podi.emissions import emissions
@@ -56,12 +57,16 @@ energy_demand_pathway = energy_demand(
 # ENERGY SUPPLY #
 #################
 
-elec_consump, elec_percent_consump, elec_consump_cdr = energy_supply(
-    "Baseline", energy_demand_baseline
-)
-elec_consump, elec_percent_consump, elec_consump_cdr = energy_supply(
-    "Pathway", energy_demand_pathway
-)
+(
+    elec_consump_baseline,
+    elec_per_consump_baseline,
+    elec_consump_cdr_baseline,
+) = energy_supply("Baseline", energy_demand_baseline)
+(
+    elec_consump_pathway,
+    elec_per_consump_pathway,
+    elec_consump_cdr_pathway,
+) = energy_supply("Pathway", energy_demand_pathway)
 
 #########
 # AFOLU #
@@ -140,8 +145,9 @@ grid_decarb = (
     elec_consump.loc[elec_consump.index.isin(decarb, level=1)]
     .sum()
     .div(elec_consump.groupby("Region", axis=0, level=1).sum())
-    .loc[:, acurve_start:acurve_end]
 )
+grid_decarb.columns = grid_decarb.columns.astype(int)
+grid_decarb = grid_decarb.loc[:, acurve_start:acurve_end]
 grid_decarb.rename(index={"World ": "Grid"}, inplace=True)
 
 # Transportation Decarb
