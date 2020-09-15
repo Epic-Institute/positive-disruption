@@ -40,6 +40,8 @@ energy_demand_baseline = energy_demand(
     "podi/data/transport_efficiency.csv",
     "podi/data/solar_thermal.csv",
     "podi/data/biofuels.csv",
+    "podi/data/cdr_energy.csv",
+    "podi/data/bunker.csv",
 )
 
 energy_demand_pathway = energy_demand(
@@ -51,6 +53,8 @@ energy_demand_pathway = energy_demand(
     "podi/data/transport_efficiency.csv",
     "podi/data/solar_thermal.csv",
     "podi/data/biofuels.csv",
+    "podi/data/cdr_energy.csv",
+    "podi/data/bunker.csv",
 )
 
 #################

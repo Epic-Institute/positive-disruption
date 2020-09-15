@@ -17,7 +17,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 20)
 
     for i in range(0, len(iea_region_list)):
-        fig = em_miti.apply(
+        fig = adoption_curves.apply(
             lambda x: interp1d(adoption_curves.columns.values, x, kind="cubic"), axis=1
         )
         plt.figure(i)
@@ -148,7 +148,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.xticks(np.arange(10, 100, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
 
-    # Pathway
+    # Pathway (World)
     for i in range(0, len(iea_region_list)):
         energy_demand_pathway_i = energy_demand_pathway.loc[
             iea_region_list[i], slice(None), slice(None), "Pathway"
@@ -159,7 +159,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             .append(
                 pd.DataFrame(
                     energy_demand_pathway_i.loc["Transport"]
-                    .loc[["Oil", "Other fuels"], :]
+                    .loc[["Oil", "Biofuels", "Other fuels"], :]
                     .sum()
                 ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
             )
@@ -190,6 +190,111 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                             "Natural gas",
                             "Heat",
                             "Bioenergy",
+                            "Other renewables",
+                        ],
+                        :,
+                    ]
+                    .sum()
+                ).T.rename(index={0: ("Industry", "Heat")})
+            )
+            .reindex(
+                [
+                    ("Transport", "Nonelectric Transport"),
+                    ("Transport", "Electricity"),
+                    ("Buildings", "Heat"),
+                    ("Buildings", "Electricity"),
+                    ("Industry", "Heat"),
+                    ("Industry", "Electricity"),
+                ]
+            )
+        )
+
+        plt.figure(i)
+        plt.stackplot(
+            fig.T.index,
+            fig,
+            labels=fig.index,
+            colors=(
+                "darkgreen",
+                "rebeccapurple",
+                "lightcoral",
+                "midnightblue",
+                "darkred",
+                "cornflowerblue",
+            ),
+        )
+        plt.legend(loc=2, fontsize="small")
+        plt.ylabel("TFC (TWh)")
+        plt.xlim([10, 90])
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+        plt.xticks(np.arange(10, 100, 10))
+        plt.title("Energy Demand, " + iea_region_list[i])
+
+    # Pathway (Sum OECD/NonOECD)
+    for i in range(0, len(iea_region_list)):
+        energy_demand_pathway_i = energy_demand_pathway.loc[
+            ["OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
+        ]
+        fig = (
+            energy_demand_pathway_i.loc[
+                (slice(None), slice(None), "Electricity", slice(None)), :
+            ]
+            .groupby(["Sector"])
+            .sum()
+            .drop("TFC")
+            .rename(
+                index={
+                    "Buildings": ("Buildings", "Electricity"),
+                    "Industry": ("Industry", "Electricity"),
+                    "Transport": ("Transport", "Electricity"),
+                }
+            )
+            .append(
+                pd.DataFrame(
+                    energy_demand_pathway_i.loc[
+                        slice(None), "Transport", slice(None), slice(None)
+                    ]
+                    .groupby(["Metric"])
+                    .sum()
+                    .loc[["Oil", "Biofuels", "Other fuels", "International bunkers"], :]
+                    .sum()
+                ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
+            )
+            .append(
+                pd.DataFrame(
+                    energy_demand_pathway_i.loc[
+                        slice(None), "Buildings", slice(None), slice(None)
+                    ]
+                    .groupby(["Metric"])
+                    .sum()
+                    .loc[
+                        [
+                            "Coal",
+                            "Oil",
+                            "Natural gas",
+                            "Bioenergy",
+                            "Heat",
+                            "Other renewables",
+                        ],
+                        :,
+                    ]
+                    .sum()
+                ).T.rename(index={0: ("Buildings", "Heat")})
+            )
+            .append(
+                pd.DataFrame(
+                    energy_demand_pathway_i.loc[
+                        slice(None), "Industry", slice(None), slice(None)
+                    ]
+                    .groupby(["Metric"])
+                    .sum()
+                    .loc[
+                        [
+                            "Coal",
+                            "Oil",
+                            "Natural gas",
+                            "Bioenergy",
+                            "Heat",
                             "Other renewables",
                         ],
                         :,
@@ -475,7 +580,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         "Solar thermal",
         "Waste",
     ]
-
+    # percent adoption
     for i in range(0, len(iea_region_list)):
         fig = heat_percent_adoption.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(heat_tech_list)]
@@ -484,6 +589,23 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.ylabel("(%)")
         plt.xlim([data_start_year, long_proj_end_year])
         plt.title("Percent of Total Heat Generation, " + iea_region_list[i])
+        plt.legend(
+            fig.index,
+            loc=2,
+            fontsize="small",
+            bbox_to_anchor=(1.05, 1),
+            borderaxespad=0.0,
+        )
+
+    # TWh
+    for i in range(0, len(iea_region_list)):
+        fig = heat_consump2.loc[iea_region_list[i], slice(None)]
+        fig = fig[fig.index.isin(heat_tech_list)]
+        plt.figure(i)
+        plt.plot(fig.columns.astype(int).values, fig.T * 100)
+        plt.ylabel("TWh")
+        plt.xlim([data_start_year, long_proj_end_year])
+        plt.title("Total Heat Generation, " + iea_region_list[i])
         plt.legend(
             fig.index,
             loc=2,

@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 import pandas as pd
+from podi.adoption_curve import adoption_curve
+import numpy as np
+from podi.data.iea_weo_etl import iea_region_list
 
 # from cdr.cdr_main import cdr_energy_demand
 
@@ -14,6 +17,8 @@ def energy_demand(
     transport_efficiency,
     solar_thermal,
     biofuels,
+    cdr,
+    bunker,
 ):
 
     # load energy demand historical data (TWh) and projections (% change)
@@ -58,7 +63,10 @@ def energy_demand(
 
     energy_efficiency = energy_efficiency.apply(lambda x: x + 1, axis=1)
     energy_efficiency = energy_efficiency.reindex(energy_demand.index)
-    energy_demand_post_efficiency = energy_demand * energy_efficiency.values
+    # energy_demand_post_efficiency = energy_demand * energy_efficiency.values
+    energy_demand_post_efficiency = energy_demand - (
+        energy_demand * energy_efficiency.values
+    )
 
     # apply percentage reduction & shift to electrification attributed to heat pumps
     heat_pumps = (
@@ -69,9 +77,12 @@ def energy_demand(
 
     heat_pumps = heat_pumps.apply(lambda x: x + 1, axis=1)
     heat_pumps = heat_pumps.reindex(energy_demand.index)
+    """
     energy_demand_post_efficiency_heat_pumps = (
         energy_demand_post_efficiency * heat_pumps.values
     )
+    """
+    energy_demand_post_heat_pumps = energy_demand - (energy_demand * heat_pumps.values)
 
     # apply percentage reduction & shift to electrification attributed to transportation improvements
     transport_efficiency = (
@@ -81,8 +92,13 @@ def energy_demand(
     )
     transport_efficiency = transport_efficiency.apply(lambda x: x + 1, axis=1)
     transport_efficiency = transport_efficiency.reindex(energy_demand.index)
+    """
     energy_demand_post_efficiency_heatpumps_transport = (
         energy_demand_post_efficiency_heat_pumps * transport_efficiency.values
+    )
+    """
+    energy_demand_post_transport = energy_demand - (
+        energy_demand * transport_efficiency.values
     )
 
     # apply percentage reduction attributed to solar thermal
@@ -93,8 +109,13 @@ def energy_demand(
     )
     solar_thermal = solar_thermal.apply(lambda x: x + 1, axis=1)
     solar_thermal = solar_thermal.reindex(energy_demand.index)
+    """
     energy_demand_post_efficiency_heatpumps_transport_solarthermal = (
         energy_demand_post_efficiency_heatpumps_transport * solar_thermal.values
+    )
+    """
+    energy_demand_post_solarthermal = energy_demand - (
+        energy_demand * solar_thermal.values
     )
 
     # apply shift attributed to biofuels
@@ -105,11 +126,83 @@ def energy_demand(
     )
     biofuels = biofuels.apply(lambda x: x + 1, axis=1)
     biofuels = biofuels.reindex(energy_demand.index)
+    """
     energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels = (
         energy_demand_post_efficiency_heatpumps_transport_solarthermal * biofuels.values
     )
+    """
+    energy_demand_post_biofuels = energy_demand - (energy_demand * biofuels.values)
 
     # add energy demand from CDR
-    # energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels_cdr = energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels + cdr_energy_demand
+    cdr = (
+        pd.read_csv(cdr)
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+        .fillna(0)
+    )
+    cdr = cdr.reindex(energy_demand.index)
+    cdr = cdr.apply(lambda x: x + 1, axis=1)
+    energy_demand_post_cdr = energy_demand - (energy_demand * cdr.values)
 
-    return energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels
+    # add energy demand from international bunker
+    bunker = (
+        pd.read_csv(bunker)
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+        .fillna(0)
+    )
+    bunker = bunker.reindex(energy_demand.index)
+    bunker = bunker.apply(lambda x: x + 1, axis=1)
+    energy_demand_post_bunker = energy_demand - (energy_demand * bunker.values)
+
+    energy_demand = (
+        energy_demand
+        - energy_demand_post_efficiency
+        - energy_demand_post_heat_pumps
+        - energy_demand_post_transport
+        - energy_demand_post_solarthermal
+        - energy_demand_post_biofuels
+        - energy_demand_post_cdr
+        - energy_demand_post_bunker
+    )
+
+    """
+    xnew = np.linspace(
+        energy_demand.columns.values.astype(int).min(),
+        energy_demand.columns.values.astype(int).max(),
+        11,
+    )
+    energy_demand = energy_demand.apply(
+        lambda x: proj_demand(energy_demand.columns.values.astype(int), x),
+        axis=1,
+    )
+    energy_demand = energy_demand.apply(lambda x: x(xnew))
+    energy_demand = pd.DataFrame(energy_demand)
+    """
+    """
+    def proj_demand(region, hist_demand):
+        foo = hist_demand.loc[region,slice(None),slice(None),slice(None)].droplevel(['Scenario']).apply(
+            adoption_curve,
+            axis=1,
+            args=(
+                [
+                    region,
+                    scenario,
+                ]
+            ),
+        )
+
+        perc = []
+        for i in range(0, len(foo.index)):
+            perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
+
+        perc = pd.DataFrame(perc).set_index(foo.index)
+        return perc
+
+    en_demand = []
+
+    for i in range(0, len(iea_region_list)):
+        en_demand = pd.DataFrame(en_demand).append(
+            proj_demand(iea_region_list[i], energy_demand)
+        )
+    """
+
+    return energy_demand
