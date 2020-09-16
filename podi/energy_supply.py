@@ -4,6 +4,7 @@ import pandas as pd
 from podi.adoption_curve import adoption_curve
 from podi.data.eia_etl import eia_etl
 from podi.data.bnef_etl import bnef_etl
+from podi.data.heat_etl import heat_etl
 from podi.data.iea_weo_etl import iea_region_list
 from numpy import NaN
 
@@ -442,6 +443,182 @@ def energy_supply(scenario, energy_demand):
     ###########################
     #  NONELECTRIC TRANSPORT  #
     ###########################
+
+    transport_data = (
+        energy_demand.loc[
+            slice(None), "Transport", ["Oil", "Biofuels", "Other fuels"], scenario
+        ]
+        .loc[:, str(data_start_year) : str(data_end_year)]
+        .droplevel(["Sector", "Scenario"])
+    )
+    transport_data.columns = transport_data.columns.astype(int)
+
+    # historical transport consumption (TWh)
+    def hist_transport_consump(region, scenario):
+        return transport_data.iloc[
+            transport_data.index.get_level_values(0).str.contains(region, na=False)
+        ].loc[region, ["Oil", "Biofuels", "Other fuels"], :]
+
+    # historical percent of total transport consumption met by a given technology (propotion)
+    def hist_per_transport_consump(region, scenario, hist_transport_consump):
+        return hist_transport_consump.div(hist_transport_consump.sum())
+
+    # nearterm projected transport consumption
+    def near_proj_transport_consump(region, scenario):
+        near_proj_start_year = data_end_year
+        long_proj_start_year = data_end_year + 1
+        near_proj_end_year = data_end_year
+        return hist_transport_consump(region, scenario)
+
+    # nearterm projected percent of total transport consumption met by a given technology (proportion)
+    def near_proj_per_transport_consump(
+        region,
+        scenario,
+        hist_transport_consump,
+        hist_per_transport_consump,
+        near_proj_transport_consump,
+    ):
+        foo = hist_per_transport_consump.droplevel(["IEA Region"])
+        return foo
+
+    # longterm projected percent of total transport consumption met by a given technology (proportion)
+    def proj_per_transport_consump(region, near_proj_per_transport_consump):
+        foo = near_proj_per_transport_consump.apply(
+            adoption_curve,
+            axis=1,
+            args=(
+                [
+                    region,
+                    scenario,
+                ]
+            ),
+        )
+
+        perc = []
+        for i in range(0, len(foo.index)):
+            perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
+
+        perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
+
+        # set fossil fuel generation to fill balance
+        perc.loc["Oil"] = perc.sum().apply(lambda x: (1 - x)).clip(lower=0)
+
+        return perc
+
+    # project transport consumption met by a given technology
+    def proj_transport_consump(region, scenario, proj_per_transport_consump):
+        proj_consump = proj_per_transport_consump.apply(
+            lambda x: x
+            * (
+                energy_demand.loc[
+                    region, "Transport", ["Oil", "Biofuels", "Other fuels"], scenario
+                ]
+                .sum()
+                .loc[str(near_proj_start_year) :]
+                .values.T
+            ),
+            axis=1,
+        )
+        return proj_consump
+
+    # join timeseries of historical and projected transport consumption met by a given technology
+    def transport_consump(hist_transport_consump, proj_transport_consump):
+        return hist_transport_consump.join(proj_transport_consump)
+
+    # join timeseries of historical and projected percent total transport consumption met by a given technology
+    def transport_per_consump(hist_per_transport_consump, proj_per_transport_consump):
+        return hist_per_transport_consump.join(proj_per_transport_consump)
+
+    # combine above functions to get transport consumption met by a given technology
+    def transport_consump_total(region, scenario):
+        transport_consump_total = transport_consump(
+            hist_transport_consump(region, scenario),
+            proj_transport_consump(
+                region,
+                scenario,
+                proj_per_transport_consump(
+                    region,
+                    near_proj_per_transport_consump(
+                        region,
+                        scenario,
+                        hist_transport_consump(region, scenario),
+                        hist_per_transport_consump(
+                            region, scenario, hist_transport_consump(region, scenario)
+                        ),
+                        near_proj_transport_consump(region, scenario),
+                    ),
+                ),
+            )
+            * (1 + energy_oversupply_prop),
+        )
+        transport_consump_total = pd.concat(
+            [transport_consump_total], keys=[region], names=["Region"]
+        )
+
+        percent_adoption = transport_per_consump(
+            hist_per_transport_consump(
+                region, scenario, hist_transport_consump(region, scenario)
+            ),
+            proj_per_transport_consump(
+                region,
+                near_proj_per_transport_consump(
+                    region,
+                    scenario,
+                    hist_transport_consump(region, scenario),
+                    hist_per_transport_consump(
+                        region, scenario, hist_transport_consump(region, scenario)
+                    ),
+                    near_proj_transport_consump(region, scenario),
+                ),
+            ),
+        )
+        percent_adoption = pd.concat(
+            [percent_adoption], keys=[region], names=["Region"]
+        )
+
+        consump_cdr = transport_consump(
+            hist_transport_consump(region, scenario) * 0,
+            proj_transport_consump(
+                region,
+                scenario,
+                proj_per_transport_consump(
+                    region,
+                    near_proj_per_transport_consump(
+                        region,
+                        scenario,
+                        hist_transport_consump(region, scenario),
+                        hist_per_transport_consump(
+                            region, scenario, hist_transport_consump(region, scenario)
+                        ),
+                        near_proj_transport_consump(region, scenario),
+                    ),
+                ),
+            )
+            * (energy_oversupply_prop),
+        )
+        consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
+
+        return (transport_consump_total, percent_adoption, consump_cdr)
+
+    parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
+        ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
+    )
+
+    transport_consump2 = []
+    transport_percent_adoption = []
+    transport_consump_cdr = []
+
+    for i in range(0, len(iea_region_list)):
+        transport_consump2 = pd.DataFrame(transport_consump2).append(
+            transport_consump_total(iea_region_list[i], scenario)[0]
+        )
+        transport_percent_adoption = pd.DataFrame(transport_percent_adoption).append(
+            transport_consump_total(iea_region_list[i], scenario)[1]
+        )
+
+        transport_consump_cdr = pd.DataFrame(transport_consump_cdr).append(
+            transport_consump_total(iea_region_list[i], scenario)[2]
+        )
 
     return (
         elec_consump,

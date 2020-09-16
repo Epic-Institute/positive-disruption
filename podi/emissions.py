@@ -2,6 +2,16 @@
 
 import pandas as pd
 
+tech_list = [
+    "Biomass and waste",
+    "Fossil fuels",
+    "Geothermal",
+    "Hydroelectricity",
+    "Nuclear",
+    "Solar",
+    "Wind",
+]
+
 
 def emissions(scenario, energy_supply, afolu_emissions, additional_emissions):
     em_factors = pd.read_csv("podi/data/emissions_factors.csv")
@@ -18,7 +28,7 @@ def emissions(scenario, energy_supply, afolu_emissions, additional_emissions):
         em_factors.index.get_level_values(1).isin(tech_list)
     ].droplevel(["Variable", "Unit"])
 
-    # elec_consump.drop(labels="Generation", level=1, inplace=True)
+    elec_consump.drop(labels="Generation", level=1, inplace=True)
     elec_consump.columns = elec_consump.columns.astype(int)
 
     em = []
@@ -40,7 +50,13 @@ def emissions(scenario, energy_supply, afolu_emissions, additional_emissions):
     em = em.append(heat_em)
 
     # add transportation emissions
-    # transport_em =
+
+    # filter for transportation technologies
+    transport_em_factors = em_factors[
+        em_factors.index.get_level_values(1).isin(["Oil", "Other fuels"])
+    ].droplevel(["Variable", "Unit"])
+
+    transport_em = (transport_consump2 * transport_em_factors).fillna(0)
     em = em.append(transport_em)
 
     # add AFOLU emissions

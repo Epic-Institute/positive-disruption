@@ -3,6 +3,7 @@
 from podi.socioeconomic import socioeconomic
 from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply
+from podi.afolu import afolu
 import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
@@ -77,7 +78,7 @@ energy_demand_pathway = energy_demand(
 #########
 
 afolu_baseline = afolu("Baseline")
-afolu_pathway = afolu("PD21")
+afolu_pathway = afolu("Pathway")
 
 afolu_em_mitigated = afolu_pathway - afolu_baseline
 
@@ -155,75 +156,256 @@ grid_decarb = grid_decarb.loc[:, acurve_start:acurve_end]
 grid_decarb.rename(index={"World ": "Grid"}, inplace=True)
 
 # Transportation Decarb
-transport_decarb = transport_efficiency.loc[
-    "World ", "Transport", ["Oil", "International bunkers", "Electricity"], slice(None)
-]
-transport_decarb = transport_decarb.loc[
-    transport_decarb.index.isin(["Electricity"], level=2)
-]
-transport_decarb.columns = transport_decarb.columns.astype(int)
+transport_consump2.columns = transport_consump2.columns.astype(int)
+
 transport_decarb = (
-    (transport_decarb / transport_decarb.max(axis=1).values[0])
-    .droplevel(["Sector", "Metric", "Scenario"])
-    .loc[:, acurve_start:acurve_end]
-)
-transport_decarb.rename(index={"World ": "Transport"}, inplace=True)
+    transport_consump2.loc[region, region, ["Biofuels"]]
+    .droplevel(["Region", "IEA Region"])
+    .append(energy_demand_pathway.loc[region, "Transport", "Electricity"])
+    .sum()
+    .div(
+        max(
+            transport_consump2.loc[region, region, ["Biofuels"]]
+            .droplevel(["Region", "IEA Region"])
+            .append(energy_demand_pathway.loc[region, "Transport", "Electricity"])
+            .sum()
+            .values
+        )
+    )
+    + (
+        (
+            energy_demand_baseline.loc[
+                region,
+                "Transport",
+                ["Oil", "Electricity", "Biofuels", "Other fuels"],
+            ].sum()
+            - energy_demand_pathway.loc[
+                region,
+                "Transport",
+                ["Oil", "Electricity", "Biofuels", "Other fuels"],
+            ].sum()
+        )
+        / (
+            energy_demand_baseline.loc[
+                region,
+                "Transport",
+                ["Oil", "Electricity", "Biofuels", "Other fuels"],
+            ]
+            .sum()
+            .sum()
+            - energy_demand_pathway.loc[
+                region,
+                "Transport",
+                ["Oil", "Electricity", "Biofuels", "Other fuels"],
+            ]
+            .sum()
+            .sum()
+        )
+    ).cumsum()
+) / 2
+
+transport_decarb = pd.DataFrame(transport_decarb).T.loc[:, acurve_start:acurve_end]
+transport_decarb.rename(index={0: "Transport"}, inplace=True)
 
 # Buildings Decarb
-building_decarb = energy_efficiency.loc["World ", "Buildings", ["Electricity"]].apply(
-    lambda x: 1 - x, axis=1
-)
-building_decarb.columns = building_decarb.columns.astype(int)
+heat_consump2 = heat_consump2.loc[:, acurve_start:acurve_end]
+
 building_decarb = (
-    (building_decarb / building_decarb.max(axis=1).values[0])
-    .droplevel(["Sector", "Metric", "Scenario"])
-    .loc[:, acurve_start:acurve_end]
-)
+    energy_demand_pathway.loc[
+        region, "Buildings", ["Electricity", "Bioenergy", "Other renewables"]
+    ]
+    .droplevel(["IEA Region", "Sector", "Scenario"])
+    .append(
+        heat_consump2.loc[
+            region, ["Biofuels", "Geothermal", "Nuclear", "Solar thermal", "Waste"], :
+        ]
+    )
+    .sum()
+    .div(
+        max(
+            energy_demand_pathway.loc[
+                region,
+                "Buildings",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            .values
+        )
+    )
+    + (
+        (
+            energy_demand_baseline.loc[
+                region,
+                "Buildings",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Natural gas",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            - energy_demand_pathway.loc[
+                region,
+                "Buildings",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Natural gas",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+        )
+        / (
+            energy_demand_baseline.loc[
+                region,
+                "Buildings",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Natural gas",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            .sum()
+            - energy_demand_pathway.loc[
+                region,
+                "Buildings",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Natural gas",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            .sum()
+        )
+    ).cumsum()
+) / 2
 
-heatpump_decarb = heat_pumps.loc["World ", "Buildings", ["Heat"]].apply(
-    lambda x: 1 - x, axis=1
-)
-heatpump_decarb.columns = heatpump_decarb.columns.astype(int)
-heatpump_decarb = (
-    (heatpump_decarb / heatpump_decarb.max(axis=1).values[0])
-    .droplevel(["Sector", "Metric", "Scenario"])
-    .loc[:, acurve_start:acurve_end]
-)
-
-solart_decarb = solar_thermal.loc["World ", "Buildings", ["Heat"]].apply(
-    lambda x: 1 - x, axis=1
-)
-solart_decarb.columns = solart_decarb.columns.astype(int)
-solart_decarb = (
-    (solart_decarb / solart_decarb.max(axis=1).values[0])
-    .droplevel(["Sector", "Metric", "Scenario"])
-    .loc[:, acurve_start:acurve_end]
-)
-building_decarb = pd.DataFrame((building_decarb.append(solart_decarb)).sum()).T
+building_decarb = pd.DataFrame(building_decarb).T.loc[:, acurve_start:acurve_end]
 building_decarb.rename(index={0: "Buildings"}, inplace=True)
 
 # Industry Decarb
-industry_decarb = energy_efficiency.loc["World ", "Industry", ["Electricity"]].apply(
-    lambda x: 1 - x, axis=1
-)
-industry_decarb.columns = industry_decarb.columns.astype(int)
+heat_consump2 = heat_consump2.loc[:, acurve_start:acurve_end]
+
+
 industry_decarb = (
-    (industry_decarb / industry_decarb.max(axis=1).values[0])
-    .droplevel(["Sector", "Metric", "Scenario"])
-    .loc[:, acurve_start:acurve_end]
-)
+    (
+        energy_demand_pathway.loc[
+            region, "Industry", ["Electricity", "Bioenergy", "Other renewables", "Heat"]
+        ].append(
+            heat_consump2.loc[
+                region,
+                ["Biofuels", "Geothermal", "Nuclear", "Solar thermal", "Waste"],
+                :,
+            ]
+        )
+    )
+    .sum()
+    .div(
+        max(
+            energy_demand_pathway.loc[
+                region,
+                "Industry",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Oil",
+                    "Natural gas",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            .values
+        )
+    )
+    + (
+        (
+            energy_demand_baseline.loc[
+                region,
+                "Industry",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            - energy_demand_pathway.loc[
+                region,
+                "Industry",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+        )
+        / (
+            energy_demand_baseline.loc[
+                region,
+                "Industry",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            .sum()
+            - energy_demand_pathway.loc[
+                region,
+                "Industry",
+                [
+                    "Electricity",
+                    "Bioenergy",
+                    "Coal",
+                    "Oil",
+                    "Other renewables",
+                ],
+            ]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            .sum()
+        )
+    ).cumsum()
+) / 2
 
-solart_decarb = solar_thermal.loc["World ", "Industry", ["Heat"]].apply(
-    lambda x: 1 - x, axis=1
-)
-solart_decarb.columns = solart_decarb.columns.astype(int)
-solart_decarb = (
-    (solart_decarb / solart_decarb.max(axis=1).values[0])
-    .droplevel(["Sector", "Metric", "Scenario"])
-    .loc[:, acurve_start:acurve_end]
-)
-industry_decarb = pd.DataFrame((industry_decarb.append(solart_decarb)).sum()).T
-
+industry_decarb = pd.DataFrame(industry_decarb).T.loc[:, acurve_start:acurve_end]
 industry_decarb.rename(index={0: "Industry"}, inplace=True)
 
 # Regenerative Agriculture Decarb

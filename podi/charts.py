@@ -14,16 +14,16 @@ from scipy.interpolate import interp1d, UnivariateSpline
 def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Fig. 3: Projected Market Diffusion Curves for the V7
-    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 20)
+    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 19)
 
     for i in range(0, len(iea_region_list)):
         fig = adoption_curves.apply(
             lambda x: interp1d(adoption_curves.columns.values, x, kind="cubic"), axis=1
         )
         plt.figure(i)
-        fig.apply(lambda x: plt.plot(x(xnew) * 100, linestyle=":"))
+        fig.apply(lambda x: plt.plot(xnew, x(xnew) * 100, linestyle="--"))
         plt.ylabel("% Adoption")
-        # plt.xlim([acurve_start, acurve_end])
+        plt.xlim([adoption_curves.columns.min(), adoption_curves.columns.max()])
         plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
         plt.legend(
             adoption_curves.index,
@@ -342,15 +342,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # Fig. 24: Energy Supply by Source and End-use
 
     # Fig. 25: Electricity Generation by Source
-    tech_list = [
-        "Biomass and waste",
-        "Fossil fuels",
-        "Geothermal",
-        "Hydroelectricity",
-        "Nuclear",
-        "Solar",
-        "Wind",
-    ]
 
     for i in range(0, len(iea_region_list)):
         fig = em.loc[iea_region_list[i], slice(None)]

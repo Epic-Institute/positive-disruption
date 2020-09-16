@@ -3,6 +3,7 @@
 import pandas as pd
 from podi.data.iea_weo_etl import iea_region_list
 import numpy
+from podi.adoption_curve import adoption_curve
 
 
 def afolu(scenario):
