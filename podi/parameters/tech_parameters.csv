@@ -201,8 +201,8 @@ World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Hi
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter b, min",75
+World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter b, max",75
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -215,8 +215,8 @@ World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical an
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter b, min",75
+World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter b, max",75
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -229,8 +229,8 @@ World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | H
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter b, min",75
+World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter b, max",75
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -243,8 +243,8 @@ World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter b, min",75
+World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter b, max",75
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -257,8 +257,8 @@ World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical 
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter b, min",50
+World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter b, max",50
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -425,10 +425,10 @@ World ,Fossil fuels,Baseline,,"Parameter a, max",5
 World ,Fossil fuels,Baseline,,"Parameter a, min",0
 World ,Fossil fuels,Baseline,,"Parameter b, max",100
 World ,Fossil fuels,Baseline,,"Parameter b, min",0
-World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,"Parameter a, min",0.0598
-World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,"Parameter a, max",0.0598
-World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,"Parameter b, min",34.75
-World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,"Parameter b, max",34.75
+World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,"Parameter a, min",0.08
+World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,"Parameter a, max",0.08
+World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,"Parameter b, min",60
+World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,"Parameter b, max",60
 World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,Floor,0
 World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -441,8 +441,8 @@ World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical an
 World ,Forests & Wetlands | Reforestation | Natural Regeneration | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,"Parameter a, min",0.11599
 World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,"Parameter a, max",0.11599
-World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,"Parameter b, min",39.84
-World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,"Parameter b, max",39.84
+World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,"Parameter b, min",41
+World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,"Parameter b, max",41
 World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,Floor,0
 World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -455,8 +455,8 @@ World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Basel
 World ,Forests & Wetlands | Peat Restoration | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,"Parameter a, min",0.11776
 World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,"Parameter a, max",0.11776
-World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,"Parameter b, min",37.1
-World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,"Parameter b, max",37.1
+World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,"Parameter b, min",39
+World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,"Parameter b, max",39
 World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,Floor,0
 World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -469,8 +469,8 @@ World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,B
 World ,Forests & Wetlands | Improved Forest Mgmt | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,"Parameter a, min",0.1157
 World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,"Parameter a, max",0.1157
-World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,"Parameter b, min",40.46
-World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,"Parameter b, max",40.46
+World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,"Parameter b, min",42
+World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,"Parameter b, max",42
 World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,Floor,0
 World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -482,10 +482,10 @@ World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Ba
 World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Baseline,,Floor,0
 World ,Forests & Wetlands | Coastal Restoration | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,"Parameter a, min",0
-World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,"Parameter a, max",0.0263
-World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,"Parameter b, min",0
-World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,"Parameter b, max",100
-World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,Saturation Point,100
+World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,"Parameter a, max",0.05
+World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,"Parameter b, min",110
+World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,"Parameter b, max",110
+World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,Saturation Point,225
 World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,Floor,0
 World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Pathway,,Max annual growth,100
 World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Baseline,,"Parameter a, min",0
@@ -496,10 +496,10 @@ World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,B
 World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Baseline,,Floor,0
 World ,Forests & Wetlands | Avoided Peat Impacts | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,"Parameter a, min",0
-World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,"Parameter a, max",0.0263
-World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,"Parameter b, min",0
-World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,"Parameter b, max",100
-World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,Saturation Point,100
+World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,"Parameter a, max",0.05
+World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,"Parameter b, min",110
+World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,"Parameter b, max",110
+World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,Saturation Point,225
 World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,Floor,0
 World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Pathway,,Max annual growth,100
 World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Baseline,,"Parameter a, min",0
@@ -510,10 +510,10 @@ World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adopt
 World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Baseline,,Floor,0
 World ,Forests & Wetlands | Avoided Forest Conversion | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,"Parameter a, min",0
-World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,"Parameter a, max",0.0263
-World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,"Parameter b, min",0
-World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,"Parameter b, max",100
-World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,Saturation Point,100
+World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,"Parameter a, max",0.05
+World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,"Parameter b, min",110
+World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,"Parameter b, max",110
+World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,Saturation Point,225
 World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,Floor,0
 World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Pathway,,Max annual growth,100
 World ,Forests & Wetlands | Avoided Coastal Impacts | Historical analogy adoption,Baseline,,"Parameter a, min",0

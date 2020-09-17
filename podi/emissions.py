@@ -38,7 +38,6 @@ def emissions(scenario, energy_supply, afolu_emissions, additional_emissions):
     em = pd.DataFrame(em).append(elec_em)
 
     # add heat emissions
-    # heat_consump2.drop(labels="Generation", level=1, inplace=True)
 
     # filter for electricity technologies
     em_factors.columns = em_factors.columns.astype(int)

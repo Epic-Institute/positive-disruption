@@ -16,6 +16,18 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # Fig. 3: Projected Market Diffusion Curves for the V7
     xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 19)
 
+    color = pd.DataFrame(
+        {
+            "Grid": [(0.120, 0.107, 0.155)],
+            "Transport": [(0.93, 0.129, 0.180)],
+            "Buildings": [(0.225, 0.156, 0.98)],
+            "Industry": [(0.44, 0.74, 0.114)],
+            "Regenerative Agriculture": [(0.130, 0.143, 0.81)],
+            "Forests & Wetlands": [(0.138, 0.188, 0.175)],
+            "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
+        }
+    ).T
+
     for i in range(0, len(iea_region_list)):
         fig = adoption_curves.apply(
             lambda x: interp1d(adoption_curves.columns.values, x, kind="cubic"), axis=1
@@ -32,6 +44,22 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_to_anchor=(1.05, 1),
             borderaxespad=0.0,
         )
+
+    for i in range(0, len(iea_region_list)):
+        for j in range(0, len(adoption_curves.index)):
+            fig = interp1d(
+                adoption_curves.columns.values, adoption_curves.iloc[j], kind="cubic"
+            )
+            plt.figure(j)
+            plt.plot(xnew, fig(xnew) * 100, linestyle="--")
+            plt.ylabel("% Adoption")
+            plt.xlim([adoption_curves.columns.min(), adoption_curves.columns.max()])
+            plt.title(
+                "Percent of Total PD Adoption, "
+                + adoption_curves.index[j]
+                + ", "
+                + iea_region_list[i]
+            )
 
     # Fig. 4: Mitigation Wedges Curve
     # https://pyam-iamc.readthedocs.io/en/stable/examples/plot_stack.html#sphx-glr-examples-plot-stack-py

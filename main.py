@@ -157,6 +157,8 @@ grid_decarb.rename(index={"World ": "Grid"}, inplace=True)
 
 # Transportation Decarb
 transport_consump2.columns = transport_consump2.columns.astype(int)
+energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
+energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
 transport_decarb = (
     transport_consump2.loc[region, region, ["Biofuels"]]
@@ -172,6 +174,7 @@ transport_decarb = (
             .values
         )
     )
+    / 1.4
     + (
         (
             energy_demand_baseline.loc[
@@ -202,7 +205,8 @@ transport_decarb = (
             .sum()
         )
     ).cumsum()
-) / 2
+    / 3.3
+)
 
 transport_decarb = pd.DataFrame(transport_decarb).T.loc[:, acurve_start:acurve_end]
 transport_decarb.rename(index={0: "Transport"}, inplace=True)
@@ -313,97 +317,92 @@ heat_consump2 = heat_consump2.loc[:, acurve_start:acurve_end]
 
 
 industry_decarb = (
-    (
+    energy_demand_pathway.loc[
+        region, "Industry", ["Electricity", "Bioenergy", "Other renewables", "Heat"]
+    ].append(
+        heat_consump2.loc[
+            region,
+            ["Biofuels", "Geothermal", "Nuclear", "Solar thermal", "Waste"],
+            :,
+        ]
+    )
+).sum().div(
+    max(
         energy_demand_pathway.loc[
-            region, "Industry", ["Electricity", "Bioenergy", "Other renewables", "Heat"]
-        ].append(
-            heat_consump2.loc[
-                region,
-                ["Biofuels", "Geothermal", "Nuclear", "Solar thermal", "Waste"],
-                :,
-            ]
-        )
+            region,
+            "Industry",
+            [
+                "Electricity",
+                "Bioenergy",
+                "Oil",
+                "Natural gas",
+                "Other renewables",
+            ],
+        ]
+        .droplevel(["IEA Region", "Sector", "Scenario"])
+        .sum()
+        .values
     )
-    .sum()
-    .div(
-        max(
-            energy_demand_pathway.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Oil",
-                    "Natural gas",
-                    "Other renewables",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-            .values
-        )
+) / 1.8 + (
+    (
+        energy_demand_baseline.loc[
+            region,
+            "Industry",
+            [
+                "Electricity",
+                "Bioenergy",
+                "Coal",
+                "Oil",
+                "Other renewables",
+            ],
+        ]
+        .droplevel(["IEA Region", "Sector", "Scenario"])
+        .sum()
+        - energy_demand_pathway.loc[
+            region,
+            "Industry",
+            [
+                "Electricity",
+                "Bioenergy",
+                "Coal",
+                "Oil",
+                "Other renewables",
+            ],
+        ]
+        .droplevel(["IEA Region", "Sector", "Scenario"])
+        .sum()
     )
-    + (
-        (
-            energy_demand_baseline.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Coal",
-                    "Oil",
-                    "Other renewables",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-            - energy_demand_pathway.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Coal",
-                    "Oil",
-                    "Other renewables",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-        )
-        / (
-            energy_demand_baseline.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Coal",
-                    "Oil",
-                    "Other renewables",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-            .sum()
-            - energy_demand_pathway.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Coal",
-                    "Oil",
-                    "Other renewables",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-            .sum()
-        )
-    ).cumsum()
-) / 2
+    / (
+        energy_demand_baseline.loc[
+            region,
+            "Industry",
+            [
+                "Electricity",
+                "Bioenergy",
+                "Coal",
+                "Oil",
+                "Other renewables",
+            ],
+        ]
+        .droplevel(["IEA Region", "Sector", "Scenario"])
+        .sum()
+        .sum()
+        - energy_demand_pathway.loc[
+            region,
+            "Industry",
+            [
+                "Electricity",
+                "Bioenergy",
+                "Coal",
+                "Oil",
+                "Other renewables",
+            ],
+        ]
+        .droplevel(["IEA Region", "Sector", "Scenario"])
+        .sum()
+        .sum()
+    )
+).cumsum() / 1.45
 
 industry_decarb = pd.DataFrame(industry_decarb).T.loc[:, acurve_start:acurve_end]
 industry_decarb.rename(index={0: "Industry"}, inplace=True)
@@ -441,6 +440,7 @@ fw_decarb = afolu_per_adoption.loc[
         " Avoided Peat Impacts ",
         " Coastal Restoration ",
         " Improved Forest Mgmt ",
+        " Peat Restoration ",
         " Natural Regeneration ",
     ],
     slice(None),
@@ -450,6 +450,7 @@ fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
 )
 fw_decarb.columns = fw_decarb.columns.astype(int)
 fw_decarb = fw_decarb.loc[:, acurve_start:acurve_end]
+fw_decarb.columns = ra_decarb.columns
 
 # CDR Decarb
 cdr_decarb = pd.DataFrame(
