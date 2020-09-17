@@ -174,7 +174,7 @@ transport_decarb = (
             .values
         )
     )
-    / 1.4
+    / 1.8
     + (
         (
             energy_demand_baseline.loc[
@@ -205,7 +205,7 @@ transport_decarb = (
             .sum()
         )
     ).cumsum()
-    / 3.3
+    / 2.5
 )
 
 transport_decarb = pd.DataFrame(transport_decarb).T.loc[:, acurve_start:acurve_end]

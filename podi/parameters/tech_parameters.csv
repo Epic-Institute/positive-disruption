@@ -145,8 +145,8 @@ World ,Renewables,Baseline,,"Parameter b, max",100
 World ,Renewables,Baseline,,"Parameter b, min",0
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,"Parameter b, min",30
+World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,"Parameter b, max",30
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -159,8 +159,8 @@ World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | H
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,"Parameter b, min",45
+World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,"Parameter b, max",45
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -173,8 +173,8 @@ World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgm
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Optimal intensity | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,"Parameter b, min",40
+World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,"Parameter b, max",40
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -187,8 +187,8 @@ World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgm
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Grazing Land Mgmt | Legumes | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,"Parameter b, min",60.52
-World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,"Parameter b, max",60.52
+World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,"Parameter b, min",45
+World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,"Parameter b, max",45
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -201,8 +201,8 @@ World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Hi
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Animal Mgmt | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter b, min",75
-World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter b, max",75
+World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter b, min",55
+World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,"Parameter b, max",55
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -215,8 +215,8 @@ World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical an
 World ,Regenerative Agriculture | Croplands | Trees in Croplands | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter b, min",75
-World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter b, max",75
+World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter b, min",50
+World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,"Parameter b, max",50
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -229,8 +229,8 @@ World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | H
 World ,Regenerative Agriculture | Croplands | Nitrogen Fertilizer Management | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter b, min",75
-World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter b, max",75
+World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter b, min",60
+World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,"Parameter b, max",60
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -243,8 +243,8 @@ World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy
 World ,Regenerative Agriculture | Croplands | Improved Rice | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter b, min",75
-World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter b, max",75
+World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter b, min",60
+World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,"Parameter b, max",60
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Pathway,,Max annual growth,100
@@ -257,8 +257,8 @@ World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical 
 World ,Regenerative Agriculture | Croplands | Cropland Soil Health | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter a, min",0.10618
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter a, max",0.10618
-World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter b, min",50
-World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter b, max",50
+World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter b, min",70
+World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,"Parameter b, max",70
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,Saturation Point,100
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Biochar | Historical analogy adoption,Pathway,,Max annual growth,100

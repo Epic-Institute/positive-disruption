@@ -284,7 +284,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                     ]
                     .groupby(["Metric"])
                     .sum()
-                    .loc[["Oil", "Biofuels", "Other fuels", "International bunkers"], :]
+                    .loc[
+                        [
+                            "Oil",
+                            "Biofuels",
+                            "Other fuels",
+                        ],
+                        :,
+                    ]
                     .sum()
                 ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
             )
@@ -406,7 +413,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.figure(i)
         plt.stackplot(fig.columns.astype(int).values, fig * 100, labels=fig.index)
         plt.ylabel("(%)")
-        plt.xlim([data_start_year, long_proj_end_year])
+        plt.xlim([2020, long_proj_end_year])
         plt.title("Percent of Total Electricity Generation, " + iea_region_list[i])
         plt.legend(
             fig.index,
