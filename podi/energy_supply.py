@@ -24,20 +24,62 @@ def energy_supply(scenario, energy_demand):
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
 
-    ###############
-    # ELECTRICITY #
-    ###############
     elec_gen_data = pd.DataFrame(
         eia_etl("podi/data/electricity.csv").loc[
             :, str(data_start_year) : str(data_end_year)
         ]
     )
-
     near_elec_proj_data = pd.DataFrame(
         bnef_etl("podi/data/bnef.csv", "elec").loc[
             :, str(near_proj_start_year - 1) : str(near_proj_end_year)
         ]
     )
+    heat_gen_data = heat_etl("podi/data/heat.csv", scenario).loc[
+        :, str(data_start_year) : str(data_end_year)
+    ]
+    heat_gen_data.columns = heat_gen_data.columns.astype(int)
+    transport_data = (
+        energy_demand.loc[
+            slice(None), "Transport", ["Oil", "Biofuels", "Other fuels"], scenario
+        ]
+        .loc[:, str(data_start_year) : str(data_end_year)]
+        .droplevel(["Sector", "Scenario"])
+    )
+    transport_data.columns = transport_data.columns.astype(int)
+
+    elec_consump = []
+    elec_percent_adoption = []
+    elec_consump_cdr = []
+    heat_consump2 = []
+    heat_percent_adoption = []
+    heat_consump_cdr = []
+    transport_consump2 = []
+    transport_percent_adoption = []
+    transport_consump_cdr = []
+
+    for i in range(17, 19):
+        elec_consump = pd.DataFrame(elec_consump).append(
+            consump_total(iea_region_list[i], scenario)[0]
+        )
+        heat_consump2 = pd.DataFrame(heat_consump2).append(
+            heat_consump_total(iea_region_list[i], scenario)[0]
+        )
+        transport_consump2 = pd.DataFrame(transport_consump2).append(
+            transport_consump_total(iea_region_list[i], scenario)[0]
+        )
+        elec_percent_adoption = pd.DataFrame(elec_percent_adoption).append(
+            consump_total(iea_region_list[i], scenario)[1]
+        )
+        heat_percent_adoption = pd.DataFrame(heat_percent_adoption).append(
+            heat_consump_total(iea_region_list[i], scenario)[1]
+        )
+        transport_percent_adoption = pd.DataFrame(transport_percent_adoption).append(
+            transport_consump_total(iea_region_list[i], scenario)[1]
+        )
+
+    ###############
+    # ELECTRICITY #
+    ###############
 
     # historical electricity consumption (TWh)
     def hist_elec_consump(region, scenario):
@@ -82,7 +124,7 @@ def energy_supply(scenario, energy_demand):
                     )
                 ]
                 .loc[(slice(None), slice(None), slice(None), scenario, slice(None)), :]
-                .mul(consump_gen_ratio)
+                # .mul(consump_gen_ratio)
                 .groupby(["Metric"])
                 .sum()
             )
@@ -124,6 +166,7 @@ def energy_supply(scenario, energy_demand):
                     ).cumprod(axis=1)
                 )
             )
+            foo.drop(labels="Generation", inplace=True)
             return foo
 
     # longterm projected percent of total electricity consumption met by a given technology (proportion)
@@ -145,10 +188,8 @@ def energy_supply(scenario, energy_demand):
 
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
-        # set nuclear to be constant
-
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: (2 - x)).clip(lower=0)
+        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: max(1.2 - x, 0))
 
         return perc
 
@@ -167,6 +208,7 @@ def energy_supply(scenario, energy_demand):
 
     # join timeseries of historical and projected electricity consumption met by a given technology
     def consump(hist_elec_consump, proj_elec_consump):
+        hist_elec_consump.drop(labels="Generation", inplace=True)
         return hist_elec_consump.join(proj_elec_consump)
 
     # join timeseries of historical and projected percent total electricity consumption met by a given technology
@@ -196,6 +238,7 @@ def energy_supply(scenario, energy_demand):
             * (1 + energy_oversupply_prop),
         )
         consump_total = pd.concat([consump_total], keys=[region], names=["Region"])
+        # consump_total.drop(labels="Generation", level=1, inplace=True)
 
         percent_adoption = per_consump(
             hist_per_elec_consump(
@@ -217,6 +260,7 @@ def energy_supply(scenario, energy_demand):
         percent_adoption = pd.concat(
             [percent_adoption], keys=[region], names=["Region"]
         )
+        # percent_adoption.drop(labels="Generation", level=1, inplace=True)
 
         consump_cdr = consump(
             hist_elec_consump(region, scenario) * 0,
@@ -239,33 +283,13 @@ def energy_supply(scenario, energy_demand):
             * (energy_oversupply_prop),
         )
         consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
+        # consump_cdr.drop(labels="Generation", level=1, inplace=True)
 
         return (consump_total, percent_adoption, consump_cdr)
-
-    elec_consump = []
-    elec_percent_adoption = []
-    elec_consump_cdr = []
-
-    for i in range(0, len(iea_region_list)):
-        elec_consump = pd.DataFrame(elec_consump).append(
-            consump_total(iea_region_list[i], scenario)[0]
-        )
-        elec_percent_adoption = pd.DataFrame(elec_percent_adoption).append(
-            consump_total(iea_region_list[i], scenario)[1]
-        )
-
-        elec_consump_cdr = pd.DataFrame(elec_consump_cdr).append(
-            consump_total(iea_region_list[i], scenario)[2]
-        )
 
     ##########
     #  HEAT  #
     ##########
-
-    heat_gen_data = heat_etl("podi/data/heat.csv", scenario).loc[
-        :, str(data_start_year) : str(data_end_year)
-    ]
-    heat_gen_data.columns = heat_gen_data.columns.astype(int)
 
     # historical heat consumption (TWh)
     def hist_heat_consump(region, scenario):
@@ -327,8 +351,7 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: (2 - x)).clip(lower=0)
-
+        perc.loc["Coal"] = perc.sum().apply(lambda x: (2 - x)).clip(lower=0)
         return perc
 
     # project heat consumption met by a given technology
@@ -423,35 +446,9 @@ def energy_supply(scenario, energy_demand):
 
         return (heat_consump_total, percent_adoption, consump_cdr)
 
-    heat_consump2 = []
-    heat_percent_adoption = []
-    heat_consump_cdr = []
-
-    for i in range(0, len(iea_region_list)):
-        heat_consump2 = pd.DataFrame(heat_consump2).append(
-            heat_consump_total(iea_region_list[i], scenario)[0]
-        )
-
-        heat_percent_adoption = pd.DataFrame(heat_percent_adoption).append(
-            heat_consump_total(iea_region_list[i], scenario)[1]
-        )
-
-        heat_consump_cdr = pd.DataFrame(heat_consump_cdr).append(
-            heat_consump_total(iea_region_list[i], scenario)[2]
-        )
-
     ###########################
     #  NONELECTRIC TRANSPORT  #
     ###########################
-
-    transport_data = (
-        energy_demand.loc[
-            slice(None), "Transport", ["Oil", "Biofuels", "Other fuels"], scenario
-        ]
-        .loc[:, str(data_start_year) : str(data_end_year)]
-        .droplevel(["Sector", "Scenario"])
-    )
-    transport_data.columns = transport_data.columns.astype(int)
 
     # historical transport consumption (TWh)
     def hist_transport_consump(region, scenario):
@@ -599,26 +596,6 @@ def energy_supply(scenario, energy_demand):
         consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
 
         return (transport_consump_total, percent_adoption, consump_cdr)
-
-    parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
-        ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
-    )
-
-    transport_consump2 = []
-    transport_percent_adoption = []
-    transport_consump_cdr = []
-
-    for i in range(0, len(iea_region_list)):
-        transport_consump2 = pd.DataFrame(transport_consump2).append(
-            transport_consump_total(iea_region_list[i], scenario)[0]
-        )
-        transport_percent_adoption = pd.DataFrame(transport_percent_adoption).append(
-            transport_consump_total(iea_region_list[i], scenario)[1]
-        )
-
-        transport_consump_cdr = pd.DataFrame(transport_consump_cdr).append(
-            transport_consump_total(iea_region_list[i], scenario)[2]
-        )
 
     return (
         elec_consump,

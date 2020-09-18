@@ -54,6 +54,19 @@ def energy_demand(
         energy_demand.loc[:, "2040":].cumprod(axis=1).fillna(0).astype(int)
     )
 
+    # reallocate 'Other' energy demand from ag/non-energy use to industry
+    energy_demand.loc[:, ["Other renewables"]] = (
+        energy_demand.loc[
+            :,
+            slice(None),
+            ["Other", "Industry"],
+            ["Other", "Other renewables"],
+            slice(None),
+        ]
+        .groupby("Region")
+        .sum()
+    )
+
     # apply percentage reduction attributed to energy efficiency measures
     energy_efficiency = (
         pd.read_csv(energy_efficiency)

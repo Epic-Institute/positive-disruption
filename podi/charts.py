@@ -376,14 +376,104 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Fig. 24: Energy Supply by Source and End-use
 
+    tech_list = [
+        ("Electricity", "Solar"),
+        ("Electricity", "Wind"),
+        ("Electricity", "Nuclear"),
+        ("Electricity", "Other renewables"),
+        ("Heat", "Solar thermal"),
+        ("Heat", "Biochar"),
+        ("Heat", "Bioenergy"),
+        ("Transport", "Biofuels"),
+        ("Electricity", "Fossil fuels"),
+        ("Heat", "Fossil fuels"),
+        ("Transport", "Fossil fuels"),
+    ]
+
+    group_keys = {
+        ("Electricity", "Biomass and waste"): ("Electricity", "Other renewables"),
+        ("Electricity", "Fossil fuels"): ("Electricity", "Fossil fuels"),
+        ("Electricity", "Geothermal"): ("Electricity", "Other renewables"),
+        ("Electricity", "Hydroelectricity"): ("Electricity", "Other renewables"),
+        ("Electricity", "Nuclear"): ("Electricity", "Nuclear"),
+        ("Electricity", "Solar"): ("Electricity", "Solar"),
+        ("Electricity", "Wind"): ("Electricity", "Wind"),
+        ("Heat", "Biofuels"): ("Heat", "Bioenergy"),
+        ("Heat", "Coal"): ("Heat", "Fossil fuels"),
+        ("Heat", "Geothermal"): ("Heat", "Bioenergy"),
+        ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
+        ("Heat", "Nuclear"): ("Heat", "Fossil fuels"),
+        ("Heat", "Oil"): ("Heat", "Fossil fuels"),
+        ("Heat", "Other sources"): ("Heat", "Fossil fuels"),
+        ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),
+        ("Heat", "Waste"): ("Heat", "Biochar"),
+        ("Transport", "Oil"): ("Transport", "Fossil fuels"),
+        ("Transport", "Biofuels"): ("Transport", "Biofuels"),
+        ("Transport", "Other fuels"): ("Transport", "Fossil fuels"),
+    }
+
+    color2 = (
+        (0.645, 0.342, 0.138),
+        (0.285, 0.429, 0.621),
+        (0.564, 0.114, 0.078),
+        (0.603, 0.651, 0.717),
+        (0.747, 0.720, 0.240),
+        (0.624, 0.459, 0.450),
+        (0.594, 0.462, 0.153),
+        (0.165, 0.375, 0.102),
+        (0.000, 0.000, 0.000),
+        (0.267, 0.267, 0.267),
+        (0.651, 0.651, 0.651),
+    )
+
+    for i in range(0, len(iea_region_list)):
+        elec_consump.columns = elec_consump.columns.astype(int)
+        elec_consump = (
+            elec_consump.loc[["OECD ", "NonOECD "], slice(None)].groupby("Metric").sum()
+        )
+        elec_consump = pd.concat([elec_consump], keys=["Electricity"], names=["Sector"])
+        heat_consump2 = (
+            heat_consump2.loc[["OECD ", "NonOECD "], slice(None)]
+            .groupby("Metric")
+            .sum()
+        )
+        heat_consump2 = pd.concat([heat_consump2], keys=["Heat"], names=["Sector"])
+        transport_consump2 = (
+            transport_consump2.loc[
+                ["OECD ", "NonOECD "],
+                ["OECD ", "NonOECD "],
+                slice(None),
+            ]
+            .groupby("Metric")
+            .sum()
+        )
+        transport_consump2 = pd.concat(
+            [transport_consump2], keys=["Transport"], names=["Sector"]
+        )
+        fig = pd.DataFrame(
+            (elec_consump.append(heat_consump2).append(transport_consump2)).loc[
+                :, 2010:2100
+            ]
+        )
+        fig = fig.groupby(group_keys).sum()
+        fig = fig.reindex(tech_list)
+        plt.figure(i)
+        plt.stackplot(fig.columns.astype(int), fig, labels=fig.index, colors=color2)
+        plt.ylabel("TFC (TWh)")
+        plt.xlim([2020, 2100])
+        plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
+        plt.legend(loc=2, fontsize="small")
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+
     # Fig. 25: Electricity Generation by Source
 
     for i in range(0, len(iea_region_list)):
-        fig = em.loc[iea_region_list[i], slice(None)]
+        fig = elec_consump.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(tech_list)]
         plt.figure(i)
         plt.stackplot(fig.columns.astype(int), fig, labels=fig.index)
         plt.ylabel("TFC (TWh)")
+        plt.xlim([data_start_year, long_proj_end_year])
         plt.title("Electricity Generation by Source, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
@@ -406,14 +496,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
 
-    # Stacked plot
+    # Stacked 100% plot
     for i in range(0, len(iea_region_list)):
         fig = elec_percent_adoption.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(tech_list)]
         plt.figure(i)
         plt.stackplot(fig.columns.astype(int).values, fig * 100, labels=fig.index)
         plt.ylabel("(%)")
-        plt.xlim([2020, long_proj_end_year])
+        plt.xlim([data_start_year, long_proj_end_year])
         plt.title("Percent of Total Electricity Generation, " + iea_region_list[i])
         plt.legend(
             fig.index,

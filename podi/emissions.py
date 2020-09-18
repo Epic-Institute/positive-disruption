@@ -28,7 +28,6 @@ def emissions(scenario, energy_supply, afolu_emissions, additional_emissions):
         em_factors.index.get_level_values(1).isin(tech_list)
     ].droplevel(["Variable", "Unit"])
 
-    elec_consump.drop(labels="Generation", level=1, inplace=True)
     elec_consump.columns = elec_consump.columns.astype(int)
 
     em = []
