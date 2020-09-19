@@ -55,16 +55,69 @@ def energy_demand(
     )
 
     # reallocate 'Other' energy demand from ag/non-energy use to industry
-    energy_demand.loc[:, ["Other renewables"]] = (
-        energy_demand.loc[
-            :,
-            slice(None),
-            ["Other", "Industry"],
-            ["Other", "Other renewables"],
-            slice(None),
-        ]
-        .groupby("Region")
-        .sum()
+    energy_demand.loc[slice(None), "Industry", "Other renewables", scenario] = (
+        energy_demand.loc[slice(None), "Industry", "Other renewables", scenario]
+        .add(
+            energy_demand.loc[
+                slice(None),
+                ["Other"],
+                ["Other"],
+                slice(None),
+            ]
+            .groupby("IEA Region")
+            .sum()
+            .reindex(
+                energy_demand.loc[
+                    slice(None), "Industry", "Other renewables", scenario
+                ].index
+            ),
+            axis=1,
+        )
+        .values
+    )
+
+    # reallocate heat demand within industry
+    energy_demand.loc[slice(None), "Industry", "Heat", scenario] = (
+        energy_demand.loc[slice(None), "Industry", "Heat", scenario]
+        .add(
+            energy_demand.loc[
+                slice(None),
+                ["Industry"],
+                ["Coal", "Oil", "Natural gas", "Bioenergy", "Other renewables"],
+                slice(None),
+            ]
+            .groupby("IEA Region")
+            .sum()
+            .reindex(
+                energy_demand.loc[
+                    slice(None), "Industry", "Other renewables", scenario
+                ].index
+            ),
+            axis=1,
+        )
+        .values
+    )
+
+    # reallocate heat demand within buildings
+    energy_demand.loc[slice(None), "Buildings", "Heat", scenario] = (
+        energy_demand.loc[slice(None), "Buildings", "Heat", scenario]
+        .add(
+            energy_demand.loc[
+                slice(None),
+                ["Buildings"],
+                ["Coal", "Oil", "Natural gas", "Bioenergy", "Other renewables"],
+                slice(None),
+            ]
+            .groupby("IEA Region")
+            .sum()
+            .reindex(
+                energy_demand.loc[
+                    slice(None), "Industry", "Other renewables", scenario
+                ].index
+            ),
+            axis=1,
+        )
+        .values
     )
 
     # apply percentage reduction attributed to energy efficiency measures

@@ -6,7 +6,7 @@ metric_list = [
     "Coal",
     "Oil",
     "Natural gas",
-    "Biofuels",
+    "Bioenergy",
     "Waste",
     "Nuclear",
     "Geothermal",

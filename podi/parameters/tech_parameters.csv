@@ -211,13 +211,13 @@ NAM ,Biochar,Baseline,,Max annual growth,100
 NAM ,Biochar,Pathway,,Max annual growth,100
 NonOECD ,Biochar,Pathway,Industry,Floor,0
 NonOECD ,Biochar,Baseline,Industry,Saturation Point,5
-NonOECD ,Biochar,Pathway,Industry,Saturation Point,23
+NonOECD ,Biochar,Pathway,Industry,Saturation Point,100
 NonOECD ,Biochar,Baseline,Industry,Floor,0
-NonOECD ,Biochar,Pathway,,"Parameter a, min",0
+NonOECD ,Biochar,Pathway,,"Parameter a, min",0.1
 NonOECD ,Biochar,Baseline,,"Parameter a, min",0
-NonOECD ,Biochar,Pathway,,"Parameter a, max",5
-NonOECD ,Biochar,Pathway,,"Parameter b, max",100
-NonOECD ,Biochar,Pathway,,"Parameter b, min",0
+NonOECD ,Biochar,Pathway,,"Parameter a, max",0.1
+NonOECD ,Biochar,Pathway,,"Parameter b, max",40
+NonOECD ,Biochar,Pathway,,"Parameter b, min",40
 NonOECD ,Biochar,Baseline,,"Parameter a, max",5
 NonOECD ,Biochar,Baseline,,"Parameter b, max",100
 NonOECD ,Biochar,Baseline,,"Parameter b, min",0
@@ -225,13 +225,13 @@ NonOECD ,Biochar,Baseline,,Max annual growth,100
 NonOECD ,Biochar,Pathway,,Max annual growth,100
 OECD ,Biochar,Pathway,Industry,Floor,0
 OECD ,Biochar,Baseline,Industry,Saturation Point,5
-OECD ,Biochar,Pathway,Industry,Saturation Point,23
+OECD ,Biochar,Pathway,Industry,Saturation Point,100
 OECD ,Biochar,Baseline,Industry,Floor,0
-OECD ,Biochar,Pathway,,"Parameter a, min",0
+OECD ,Biochar,Pathway,,"Parameter a, min",0.1
 OECD ,Biochar,Baseline,,"Parameter a, min",0
-OECD ,Biochar,Pathway,,"Parameter a, max",5
-OECD ,Biochar,Pathway,,"Parameter b, max",100
-OECD ,Biochar,Pathway,,"Parameter b, min",0
+OECD ,Biochar,Pathway,,"Parameter a, max",0.1
+OECD ,Biochar,Pathway,,"Parameter b, max",40
+OECD ,Biochar,Pathway,,"Parameter b, min",40
 OECD ,Biochar,Baseline,,"Parameter a, max",5
 OECD ,Biochar,Baseline,,"Parameter b, max",100
 OECD ,Biochar,Baseline,,"Parameter b, min",0
@@ -9502,14 +9502,14 @@ NonOECD ,Solar thermal,Baseline,,"Parameter a, min",0
 NonOECD ,Solar thermal,Baseline,,"Parameter b, max",100
 NonOECD ,Solar thermal,Baseline,,"Parameter b, min",0
 NonOECD ,Solar thermal,Baseline,,Max annual growth,100
-NonOECD ,Solar thermal,Pathway,Industry,Floor,0
-NonOECD ,Solar thermal,Pathway,Buildings,Floor,0
-NonOECD ,Solar thermal,Pathway,Industry,Saturation Point,38
-NonOECD ,Solar thermal,Pathway,Buildings,Saturation Point,100
-NonOECD ,Solar thermal,Pathway,,"Parameter a, max",5
-NonOECD ,Solar thermal,Pathway,,"Parameter a, min",0
-NonOECD ,Solar thermal,Pathway,,"Parameter b, max",100
-NonOECD ,Solar thermal,Pathway,,"Parameter b, min",0
+NonOECD ,Solar thermal,Pathway,Industry,Floor,4
+NonOECD ,Solar thermal,Pathway,Buildings,Floor,4
+NonOECD ,Solar thermal,Pathway,Industry,Saturation Point,40
+NonOECD ,Solar thermal,Pathway,Buildings,Saturation Point,40
+NonOECD ,Solar thermal,Pathway,,"Parameter a, max",0.3
+NonOECD ,Solar thermal,Pathway,,"Parameter a, min",0.3
+NonOECD ,Solar thermal,Pathway,,"Parameter b, max",45
+NonOECD ,Solar thermal,Pathway,,"Parameter b, min",45
 NonOECD ,Solar thermal,Pathway,,Max annual growth,100
 NonOECD ,Solar thermal,Pathway,Industry,Consumption:Generation,1
 NonOECD ,Solar thermal,Pathway,Buildings,Consumption:Generation,1
@@ -9528,14 +9528,14 @@ OECD ,Solar thermal,Baseline,,"Parameter a, min",0
 OECD ,Solar thermal,Baseline,,"Parameter b, max",100
 OECD ,Solar thermal,Baseline,,"Parameter b, min",0
 OECD ,Solar thermal,Baseline,,Max annual growth,100
-OECD ,Solar thermal,Pathway,Industry,Floor,0
-OECD ,Solar thermal,Pathway,Buildings,Floor,0
-OECD ,Solar thermal,Pathway,Industry,Saturation Point,38
-OECD ,Solar thermal,Pathway,Buildings,Saturation Point,100
-OECD ,Solar thermal,Pathway,,"Parameter a, max",5
-OECD ,Solar thermal,Pathway,,"Parameter a, min",0
-OECD ,Solar thermal,Pathway,,"Parameter b, max",100
-OECD ,Solar thermal,Pathway,,"Parameter b, min",0
+OECD ,Solar thermal,Pathway,Industry,Floor,4
+OECD ,Solar thermal,Pathway,Buildings,Floor,4
+OECD ,Solar thermal,Pathway,Industry,Saturation Point,40
+OECD ,Solar thermal,Pathway,Buildings,Saturation Point,40
+OECD ,Solar thermal,Pathway,,"Parameter a, max",0.3
+OECD ,Solar thermal,Pathway,,"Parameter a, min",0.3
+OECD ,Solar thermal,Pathway,,"Parameter b, max",45
+OECD ,Solar thermal,Pathway,,"Parameter b, min",45
 OECD ,Solar thermal,Pathway,,Max annual growth,100
 OECD ,Solar thermal,Pathway,Industry,Consumption:Generation,1
 OECD ,Solar thermal,Pathway,Buildings,Consumption:Generation,1
@@ -10563,19 +10563,19 @@ World ,Tide and wave,Baseline,,"Parameter b, max",100
 World ,Tide and wave,Baseline,,"Parameter b, min",0
 NonOECD ,Waste,Pathway,,Floor,0
 NonOECD ,Waste,Pathway,,Max annual growth,100
-NonOECD ,Waste,Pathway,,"Parameter a, max",5
-NonOECD ,Waste,Pathway,,"Parameter a, min",0
-NonOECD ,Waste,Pathway,,"Parameter b, max",100
-NonOECD ,Waste,Pathway,,"Parameter b, min",0
-NonOECD ,Waste,Pathway,,Saturation Point,3.6
+NonOECD ,Waste,Pathway,,"Parameter a, max",0.05
+NonOECD ,Waste,Pathway,,"Parameter a, min",0.05
+NonOECD ,Waste,Pathway,,"Parameter b, max",40
+NonOECD ,Waste,Pathway,,"Parameter b, min",40
+NonOECD ,Waste,Pathway,,Saturation Point,23
 NonOECD ,Waste,Pathway,,Consumption:Generation,1
 OECD ,Waste,Pathway,,Floor,0
 OECD ,Waste,Pathway,,Max annual growth,100
-OECD ,Waste,Pathway,,"Parameter a, max",5
-OECD ,Waste,Pathway,,"Parameter a, min",0
-OECD ,Waste,Pathway,,"Parameter b, max",100
-OECD ,Waste,Pathway,,"Parameter b, min",0
-OECD ,Waste,Pathway,,Saturation Point,3.6
+OECD ,Waste,Pathway,,"Parameter a, max",0.05
+OECD ,Waste,Pathway,,"Parameter a, min",0.05
+OECD ,Waste,Pathway,,"Parameter b, max",40
+OECD ,Waste,Pathway,,"Parameter b, min",40
+OECD ,Waste,Pathway,,Saturation Point,23
 OECD ,Waste,Pathway,,Consumption:Generation,1
 World ,Waste,Pathway,,Floor,0
 World ,Waste,Baseline,,Max annual growth,100
@@ -11274,3 +11274,26 @@ World ,Wind | Onshore,Baseline,,"Capacity factor, start year",25
 World ,Wind | Onshore,Baseline,,"Capacity factor, start year",40
 World ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
 World ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+NonOECD ,Bioenergy,Pathway,,Floor,10
+NonOECD ,Bioenergy,Pathway,,Max annual growth,100
+NonOECD ,Bioenergy,Pathway,,"Parameter a, max",0.1074
+NonOECD ,Bioenergy,Pathway,,"Parameter a, min",0.1074
+NonOECD ,Bioenergy,Pathway,,"Parameter b, max",30
+NonOECD ,Bioenergy,Pathway,,"Parameter b, min",20
+NonOECD ,Bioenergy,Pathway,,Saturation Point,50
+NonOECD ,Bioenergy,Pathway,,Consumption:Generation,1
+OECD ,Bioenergy,Pathway,,Floor,10
+OECD ,Bioenergy,Pathway,,Max annual growth,100
+OECD ,Bioenergy,Pathway,,"Parameter a, max",0.1074
+OECD ,Bioenergy,Pathway,,"Parameter a, min",0.1074
+OECD ,Bioenergy,Pathway,,"Parameter b, max",30
+OECD ,Bioenergy,Pathway,,"Parameter b, min",20
+OECD ,Bioenergy,Pathway,,Saturation Point,50
+OECD ,Bioenergy,Pathway,,Consumption:Generation,1

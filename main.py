@@ -221,7 +221,7 @@ building_decarb = (
     .droplevel(["IEA Region", "Sector", "Scenario"])
     .append(
         heat_consump2.loc[
-            region, ["Biofuels", "Geothermal", "Nuclear", "Solar thermal", "Waste"], :
+            region, ["Bioenergy", "Geothermal", "Nuclear", "Solar thermal", "Waste"], :
         ]
     )
     .sum()
@@ -322,7 +322,7 @@ industry_decarb = (
     ].append(
         heat_consump2.loc[
             region,
-            ["Biofuels", "Geothermal", "Nuclear", "Solar thermal", "Waste"],
+            ["Bioenergy", "Geothermal", "Nuclear", "Solar thermal", "Waste"],
             :,
         ]
     )

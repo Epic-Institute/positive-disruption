@@ -17,6 +17,18 @@ long_proj_end_year = 2100
 
 # set energy oversupply proportion, to estimate CDR energy demand
 energy_oversupply_prop = 0.0
+region = "World "
+scenario = "Pathway"
+energy_demand = energy_demand_pathway
+demand_historical = "podi/data/energy_demand_historical.csv"
+demand_projection = "podi/data/energy_demand_projection.csv"
+energy_efficiency = "podi/data/energy_efficiency.csv"
+heat_pumps = "podi/data/heat_pumps.csv"
+transport_efficiency = "podi/data/transport_efficiency.csv"
+solar_thermal = "podi/data/solar_thermal.csv"
+biofuels = "podi/data/biofuels.csv"
+cdr = "podi/data/cdr_energy.csv"
+bunker = "podi/data/bunker.csv"
 
 
 def energy_supply(scenario, energy_demand):
@@ -318,6 +330,7 @@ def energy_supply(scenario, energy_demand):
         near_proj_start_year = data_end_year
         long_proj_start_year = data_end_year + 1
         near_proj_end_year = data_end_year
+
         return hist_heat_consump(region, scenario)
 
     # nearterm projected percent of total heat consumption met by a given technology (proportion)
@@ -351,7 +364,7 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Coal"] = perc.sum().apply(lambda x: (2 - x)).clip(lower=0)
+        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: max(1 - x, 0))
         return perc
 
     # project heat consumption met by a given technology
@@ -360,19 +373,48 @@ def energy_supply(scenario, energy_demand):
             lambda x: x
             * (
                 energy_demand.loc[region, "TFC", "Heat", scenario]
+                .add(
+                    energy_demand.loc[
+                        region,
+                        "Industry",
+                        ["Other renewables", "Coal", "Oil", "Natural gas", "Bioenergy"],
+                        scenario,
+                    ].sum()
+                )
                 .loc[str(near_proj_start_year) :]
                 .values.T
             ),
             axis=1,
         )
+        
+        proj_consump.loc["Solar thermal"] = (
+            (
+                proj_per_heat_consump.loc["Solar thermal"].values
+                * energy_demand.loc[region, "Buildings", "Heat"].loc[
+                    :, str(near_proj_start_year) :
+                ]
+            ).add(
+                proj_per_heat_consump.loc["Solar thermal"].values
+                * energy_demand.loc[region, "Industry", "Heat"].loc[
+                    :, str(near_proj_start_year) :
+                ]
+            )
+        ).values
+        
         return proj_consump
 
     # join timeseries of historical and projected heat consumption met by a given technology
     def heat_consump(hist_heat_consump, proj_heat_consump):
+        hist_heat_consump.loc["Fossil fuels"] = hist_heat_consump.loc[
+            ["Coal", "Oil", "Natural gas"]
+        ].sum()
         return hist_heat_consump.join(proj_heat_consump)
 
     # join timeseries of historical and projected percent total heat consumption met by a given technology
     def heat_per_consump(hist_per_heat_consump, proj_per_heat_consump):
+        hist_per_heat_consump.loc["Fossil fuels"] = hist_per_heat_consump.loc[
+            ["Coal", "Oil", "Natural gas"]
+        ].sum()
         return hist_per_heat_consump.join(proj_per_heat_consump)
 
     # combine above functions to get heat consumption met by a given technology
