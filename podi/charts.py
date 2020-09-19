@@ -411,6 +411,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         ("Transport", "Oil"): ("Transport", "Fossil fuels"),
         ("Transport", "Biofuels"): ("Transport", "Biofuels"),
         ("Transport", "Other fuels"): ("Transport", "Fossil fuels"),
+        ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
     }
 
     color2 = (
