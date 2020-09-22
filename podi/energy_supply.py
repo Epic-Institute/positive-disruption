@@ -8,7 +8,7 @@ from podi.data.heat_etl import heat_etl
 from podi.data.iea_weo_etl import iea_region_list
 from numpy import NaN
 
-data_start_year = 2000
+data_start_year = 2010
 data_end_year = 2017
 near_proj_start_year = data_end_year + 1
 near_proj_end_year = 2025
@@ -201,7 +201,18 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: max(1.2 - x, 0))
+        perc.loc["Fossil fuels"] = perc.sum().apply(
+            lambda x: max(
+                1
+                - 0.03 * (x ** 2)
+                - 0.73 * x
+                - 0.004 * (x ** 4)
+                - 0.02 * (x ** 6)
+                - 0.006 * (x ** 7),
+                0,
+            )
+        )
+        perc.loc["Fossil fuels"].loc[2060:] = 0
 
         return perc
 
@@ -364,7 +375,7 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: max(1 - x, 0))
+        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: max(1.35 - x, 0))
         return perc
 
     # project heat consumption met by a given technology
@@ -390,17 +401,25 @@ def energy_supply(scenario, energy_demand):
         proj_consump.loc["Solar thermal"] = (
             (
                 proj_per_heat_consump.loc["Solar thermal"].values
-                * energy_demand.loc[region, "Buildings", "Buildings"].loc[
+                * energy_demand.loc[region, "Buildings", "Heat"].loc[
                     :, str(near_proj_start_year) :
                 ]
             ).add(
                 proj_per_heat_consump.loc["Solar thermal"].values
-                * energy_demand.loc[region, "Industry", "Industry"].loc[
-                    :, str(near_proj_start_year) :
+                * energy_demand.loc[
+                    region,
+                    "Industry",
+                    ["Other renewables", "Coal", "Oil", "Natural gas", "Bioenergy"],
                 ]
+                .loc[:, str(near_proj_start_year) :]
+                .sum()
+                * 0.2
             )
         ).values
 
+        """
+
+        """
         return proj_consump
 
     # join timeseries of historical and projected heat consumption met by a given technology
@@ -540,7 +559,9 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: max(1 - x, 0))
+        perc.loc["Fossil fuels"] = perc.sum().apply(
+            lambda x: max(1 - 1.2 * x - 0.1 * x ** 2, 0)
+        )
 
         return perc
 
@@ -561,11 +582,10 @@ def energy_supply(scenario, energy_demand):
         return proj_consump
 
     # join timeseries of historical and projected transport consumption met by a given technology
-    def transport_consump(hist_transport_consump, proj_transport_consump):
-        hist_transport_consump.loc["Fossil fuels"] = hist_transport_consump.loc[
-            slice(None), ["Oil"]
-        ].sum()
-        return hist_transport_consump.join(proj_transport_consump)
+    def transport_consump(region, hist_transport_consump, proj_transport_consump):
+        hist_transport_consump = hist_transport_consump.droplevel(["IEA Region"])
+        hist_transport_consump.loc["Fossil fuels"] = hist_transport_consump.loc["Oil"]
+        return hist_transport_consump.join(proj_transport_consump) * 1.4
 
     # join timeseries of historical and projected percent total transport consumption met by a given technology
     def transport_per_consump(hist_per_transport_consump, proj_per_transport_consump):
@@ -574,6 +594,7 @@ def energy_supply(scenario, energy_demand):
     # combine above functions to get transport consumption met by a given technology
     def transport_consump_total(region, scenario):
         transport_consump_total = transport_consump(
+            region,
             hist_transport_consump(region, scenario),
             proj_transport_consump(
                 region,
@@ -619,6 +640,7 @@ def energy_supply(scenario, energy_demand):
         )
 
         consump_cdr = transport_consump(
+            region,
             hist_transport_consump(region, scenario) * 0,
             proj_transport_consump(
                 region,

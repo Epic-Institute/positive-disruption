@@ -134,7 +134,7 @@ def energy_demand(
         energy_demand * energy_efficiency.values
     )
 
-    # apply percentage reduction & shift to electrification attributed to heat pumps
+    # apply percentage reduction & shift to electrification attributed to heat pumps and electrification of industry
     heat_pumps = (
         pd.read_csv(heat_pumps)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -143,11 +143,6 @@ def energy_demand(
 
     heat_pumps = heat_pumps.apply(lambda x: x + 1, axis=1)
     heat_pumps = heat_pumps.reindex(energy_demand.index)
-    """
-    energy_demand_post_efficiency_heat_pumps = (
-        energy_demand_post_efficiency * heat_pumps.values
-    )
-    """
     energy_demand_post_heat_pumps = energy_demand - (energy_demand * heat_pumps.values)
 
     # apply percentage reduction & shift to electrification attributed to transportation improvements
@@ -158,11 +153,6 @@ def energy_demand(
     )
     transport_efficiency = transport_efficiency.apply(lambda x: x + 1, axis=1)
     transport_efficiency = transport_efficiency.reindex(energy_demand.index)
-    """
-    energy_demand_post_efficiency_heatpumps_transport = (
-        energy_demand_post_efficiency_heat_pumps * transport_efficiency.values
-    )
-    """
     energy_demand_post_transport = energy_demand - (
         energy_demand * transport_efficiency.values
     )
@@ -175,11 +165,6 @@ def energy_demand(
     )
     solar_thermal = solar_thermal.apply(lambda x: x + 1, axis=1)
     solar_thermal = solar_thermal.reindex(energy_demand.index)
-    """
-    energy_demand_post_efficiency_heatpumps_transport_solarthermal = (
-        energy_demand_post_efficiency_heatpumps_transport * solar_thermal.values
-    )
-    """
     energy_demand_post_solarthermal = energy_demand - (
         energy_demand * solar_thermal.values
     )
@@ -192,11 +177,6 @@ def energy_demand(
     )
     biofuels = biofuels.apply(lambda x: x + 1, axis=1)
     biofuels = biofuels.reindex(energy_demand.index)
-    """
-    energy_demand_post_efficiency_heatpumps_transport_solarthermal_biofuels = (
-        energy_demand_post_efficiency_heatpumps_transport_solarthermal * biofuels.values
-    )
-    """
     energy_demand_post_biofuels = energy_demand - (energy_demand * biofuels.values)
 
     # add energy demand from CDR

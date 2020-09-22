@@ -9,6 +9,7 @@ from IPython.display import HTML
 from podi.data.iea_weo_etl import iea_region_list
 import pyam
 from scipy.interpolate import interp1d, UnivariateSpline
+from matplotlib.animation import FuncAnimation
 
 
 def charts(energy_demand_baseline, energy_demand_pathway):
@@ -391,7 +392,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     ]
 
     group_keys = {
-        ("Electricity", "Biomass and waste"): ("Electricity", "Other renewables"),
+        ("Electricity", "Biomass and waste"): ("Electricity", "Biomass and waste"),
         ("Electricity", "Fossil fuels"): ("Electricity", "Fossil fuels"),
         ("Electricity", "Geothermal"): ("Electricity", "Other renewables"),
         ("Electricity", "Hydroelectricity"): ("Electricity", "Other renewables"),
@@ -405,12 +406,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
         ("Heat", "Nuclear"): ("Heat", "Fossil fuels"),
         ("Heat", "Oil"): ("Heat", "Fossil fuels"),
-        ("Heat", "Other sources"): ("Heat", "Fossil fuels"),
+        ("Heat", "Other sources"): ("Heat", "Other sources"),
         ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),
         ("Heat", "Waste"): ("Heat", "Biochar"),
-        ("Transport", "Oil"): ("Transport", "Fossil fuels"),
+        ("Transport", "Oil"): ("Transport", "Oil"),
         ("Transport", "Biofuels"): ("Transport", "Biofuels"),
-        ("Transport", "Other fuels"): ("Transport", "Fossil fuels"),
+        ("Transport", "Other fuels"): ("Transport", "Other fuels"),
         ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
     }
 
@@ -442,7 +443,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         heat_consump2 = pd.concat([heat_consump2], keys=["Heat"], names=["Sector"])
         transport_consump2 = (
             transport_consump2.loc[
-                ["OECD ", "NonOECD "],
                 ["OECD ", "NonOECD "],
                 slice(None),
             ]

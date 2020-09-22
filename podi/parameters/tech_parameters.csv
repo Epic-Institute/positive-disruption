@@ -7779,15 +7779,15 @@ NonOECD ,Bioenergy,Pathway,,Max annual growth,100
 NonOECD ,Bioenergy,Pathway,,Floor,0
 NonOECD ,Bioenergy,Pathway,,Consumption:Generation,1
 NonOECD ,Biofuels,Baseline,,Saturation Point,10
-NonOECD ,Biofuels,Pathway,,Saturation Point,100
-NonOECD ,Biofuels,Pathway,,"Parameter b, min",20
+NonOECD ,Biofuels,Pathway,,Saturation Point,65
+NonOECD ,Biofuels,Pathway,,"Parameter b, min",30
 NonOECD ,Biofuels,Pathway,,"Parameter b, max",30
-NonOECD ,Biofuels,Pathway,,"Parameter a, min",0.1074
-NonOECD ,Biofuels,Pathway,,"Parameter a, max",0.1074
+NonOECD ,Biofuels,Pathway,,"Parameter a, min",0.3
+NonOECD ,Biofuels,Pathway,,"Parameter a, max",0.3
 NonOECD ,Biofuels,Baseline,,Max annual growth,100
 NonOECD ,Biofuels,Pathway,,Max annual growth,100
 NonOECD ,Biofuels,Baseline,,Floor,0
-NonOECD ,Biofuels,Pathway,,Floor,0
+NonOECD ,Biofuels,Pathway,,Floor,4
 NonOECD ,Biofuels,Pathway,,Consumption:Generation,1
 NonOECD ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
 NonOECD ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
@@ -7953,13 +7953,13 @@ NonOECD ,Geothermal,Pathway,,"Start Year, Retirement Trend",1990
 NonOECD ,Geothermal,Baseline,,Saturation Point,5
 NonOECD ,Geothermal,Pathway,,Saturation Point,10
 NonOECD ,Geothermal,Baseline,,"Parameter b, min",0
-NonOECD ,Geothermal,Pathway,,"Parameter b, min",0
+NonOECD ,Geothermal,Pathway,,"Parameter b, min",30
 NonOECD ,Geothermal,Baseline,,"Parameter b, max",100
-NonOECD ,Geothermal,Pathway,,"Parameter b, max",100
+NonOECD ,Geothermal,Pathway,,"Parameter b, max",30
 NonOECD ,Geothermal,Baseline,,"Parameter a, min",0
-NonOECD ,Geothermal,Pathway,,"Parameter a, min",0
+NonOECD ,Geothermal,Pathway,,"Parameter a, min",0.4
 NonOECD ,Geothermal,Baseline,,"Parameter a, max",5
-NonOECD ,Geothermal,Pathway,,"Parameter a, max",5
+NonOECD ,Geothermal,Pathway,,"Parameter a, max",0.4
 NonOECD ,Geothermal,Baseline,,Max annual growth,100
 NonOECD ,Geothermal,Pathway,,Max annual growth,100
 NonOECD ,Geothermal,Baseline,,Floor,0
@@ -8006,9 +8006,9 @@ NonOECD ,Hydroelectricity,Pathway,,"Parameter b, min",0
 NonOECD ,Hydroelectricity,Baseline,,"Parameter b, min",18
 NonOECD ,Hydroelectricity,Pathway,,"Parameter b, max",400
 NonOECD ,Hydroelectricity,Baseline,,"Parameter b, max",18
-NonOECD ,Hydroelectricity,Pathway,,"Parameter a, min",-0.01
+NonOECD ,Hydroelectricity,Pathway,,"Parameter a, min",-0.02
 NonOECD ,Hydroelectricity,Baseline,,"Parameter a, min",-0.19
-NonOECD ,Hydroelectricity,Pathway,,"Parameter a, max",-0.01
+NonOECD ,Hydroelectricity,Pathway,,"Parameter a, max",-0.02
 NonOECD ,Hydroelectricity,Baseline,,"Parameter a, max",-0.19
 NonOECD ,Hydroelectricity,Baseline,,Max annual growth,100
 NonOECD ,Hydroelectricity,Pathway,,Max annual growth,100
@@ -8060,7 +8060,7 @@ NonOECD ,Nuclear,Pathway,,Useful Life in End Year,45
 NonOECD ,Nuclear,Baseline,,"Start Year, Retirement Trend",1990
 NonOECD ,Nuclear,Pathway,,"Start Year, Retirement Trend",1990
 NonOECD ,Nuclear,Baseline,,Saturation Point,20
-NonOECD ,Nuclear,Pathway,,Saturation Point,15
+NonOECD ,Nuclear,Pathway,,Saturation Point,10
 NonOECD ,Nuclear,Baseline,,"Parameter b, min",43
 NonOECD ,Nuclear,Pathway,,"Parameter b, min",43
 NonOECD ,Nuclear,Baseline,,"Parameter b, max",43
@@ -8079,11 +8079,11 @@ NonOECD ,Nuclear,Pathway,,Consumption:Generation,1
 NonOECD ,Oil,Baseline,,Saturation Point,100
 NonOECD ,Oil,Pathway,,Saturation Point,0
 NonOECD ,Oil,Baseline,,"Parameter b, min",0
-NonOECD ,Oil,Pathway,,"Parameter b, min",0
+NonOECD ,Oil,Pathway,,"Parameter b, min",10
 NonOECD ,Oil,Baseline,,"Parameter b, max",100
-NonOECD ,Oil,Pathway,,"Parameter b, max",50
+NonOECD ,Oil,Pathway,,"Parameter b, max",10
 NonOECD ,Oil,Baseline,,"Parameter a, min",0
-NonOECD ,Oil,Pathway,,"Parameter a, min",-1
+NonOECD ,Oil,Pathway,,"Parameter a, min",-0.5
 NonOECD ,Oil,Baseline,,"Parameter a, max",5
 NonOECD ,Oil,Pathway,,"Parameter a, max",0
 NonOECD ,Oil,Baseline,,Max annual growth,100
@@ -8099,11 +8099,11 @@ NonOECD ,Other fuels,Pathway,,"Parameter a, max",-0.1
 NonOECD ,Other fuels,Pathway,,Max annual growth,100
 NonOECD ,Other fuels,Pathway,,Floor,0
 NonOECD ,Other fuels,Pathway,,Consumption:Generation,1
-NonOECD ,Other sources,Pathway,,Saturation Point,0
+NonOECD ,Other sources,Pathway,,Saturation Point,100
 NonOECD ,Other sources,Pathway,,"Parameter b, min",0
 NonOECD ,Other sources,Pathway,,"Parameter b, max",50
-NonOECD ,Other sources,Pathway,,"Parameter a, min",-1
-NonOECD ,Other sources,Pathway,,"Parameter a, max",0
+NonOECD ,Other sources,Pathway,,"Parameter a, min",0.05
+NonOECD ,Other sources,Pathway,,"Parameter a, max",0.05
 NonOECD ,Other sources,Pathway,,Max annual growth,100
 NonOECD ,Other sources,Pathway,,Floor,0
 NonOECD ,Other sources,Pathway,,Consumption:Generation,1
@@ -8226,7 +8226,7 @@ NonOECD ,Solar,Pathway,,Useful Life in End Year,45
 NonOECD ,Solar,Baseline,,"Start Year, Retirement Trend",1990
 NonOECD ,Solar,Pathway,,"Start Year, Retirement Trend",1990
 NonOECD ,Solar,Baseline,,Saturation Point,5
-NonOECD ,Solar,Pathway,,Saturation Point,46
+NonOECD ,Solar,Pathway,,Saturation Point,42
 NonOECD ,Solar,Pathway,,"Parameter b, min",0
 NonOECD ,Solar,Baseline,,"Parameter b, min",0
 NonOECD ,Solar,Pathway,,"Parameter b, max",100
@@ -8256,16 +8256,16 @@ NonOECD ,Solar thermal,Baseline,,TWh per million meters squared ,0.47336
 NonOECD ,Solar thermal,Pathway,,TWh per million meters squared ,0.47336
 NonOECD ,Solar thermal,Baseline,Industry,Saturation Point,10
 NonOECD ,Solar thermal,Baseline,Buildings,Saturation Point,10
-NonOECD ,Solar thermal,Pathway,Industry,Saturation Point,20
-NonOECD ,Solar thermal,Pathway,Buildings,Saturation Point,20
+NonOECD ,Solar thermal,Pathway,Industry,Saturation Point,55
+NonOECD ,Solar thermal,Pathway,Buildings,Saturation Point,55
 NonOECD ,Solar thermal,Baseline,,"Parameter b, min",0
-NonOECD ,Solar thermal,Pathway,,"Parameter b, min",45
+NonOECD ,Solar thermal,Pathway,,"Parameter b, min",30
 NonOECD ,Solar thermal,Baseline,,"Parameter b, max",100
-NonOECD ,Solar thermal,Pathway,,"Parameter b, max",45
+NonOECD ,Solar thermal,Pathway,,"Parameter b, max",30
 NonOECD ,Solar thermal,Baseline,,"Parameter a, min",0
-NonOECD ,Solar thermal,Pathway,,"Parameter a, min",0.2
+NonOECD ,Solar thermal,Pathway,,"Parameter a, min",0.4
 NonOECD ,Solar thermal,Baseline,,"Parameter a, max",5
-NonOECD ,Solar thermal,Pathway,,"Parameter a, max",0.2
+NonOECD ,Solar thermal,Pathway,,"Parameter a, max",0.4
 NonOECD ,Solar thermal,Baseline,,Max annual growth,100
 NonOECD ,Solar thermal,Pathway,,Max annual growth,100
 NonOECD ,Solar thermal,Baseline,,GW-th per million meters squared,0.69625
@@ -8337,7 +8337,7 @@ NonOECD ,Wind,Pathway,,Useful Life in End Year,30
 NonOECD ,Wind,Baseline,,"Start Year, Retirement Trend",1990
 NonOECD ,Wind,Pathway,,"Start Year, Retirement Trend",1990
 NonOECD ,Wind,Baseline,,Saturation Point,5
-NonOECD ,Wind,Pathway,,Saturation Point,44
+NonOECD ,Wind,Pathway,,Saturation Point,42
 NonOECD ,Wind,Pathway,,"Parameter b, min",0
 NonOECD ,Wind,Baseline,,"Parameter b, min",0
 NonOECD ,Wind,Pathway,,"Parameter b, max",100
@@ -8386,15 +8386,15 @@ OECD ,Bioenergy,Pathway,,Max annual growth,100
 OECD ,Bioenergy,Pathway,,Floor,0
 OECD ,Bioenergy,Pathway,,Consumption:Generation,1
 OECD ,Biofuels,Baseline,,Saturation Point,10
-OECD ,Biofuels,Pathway,,Saturation Point,100
-OECD ,Biofuels,Pathway,,"Parameter b, min",20
+OECD ,Biofuels,Pathway,,Saturation Point,65
+OECD ,Biofuels,Pathway,,"Parameter b, min",30
 OECD ,Biofuels,Pathway,,"Parameter b, max",30
-OECD ,Biofuels,Pathway,,"Parameter a, min",0.1074
-OECD ,Biofuels,Pathway,,"Parameter a, max",0.1074
+OECD ,Biofuels,Pathway,,"Parameter a, min",0.3
+OECD ,Biofuels,Pathway,,"Parameter a, max",0.3
 OECD ,Biofuels,Baseline,,Max annual growth,100
 OECD ,Biofuels,Pathway,,Max annual growth,100
 OECD ,Biofuels,Baseline,,Floor,0
-OECD ,Biofuels,Pathway,,Floor,0
+OECD ,Biofuels,Pathway,,Floor,4
 OECD ,Biofuels,Pathway,,Consumption:Generation,1
 OECD ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
 OECD ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
@@ -8560,13 +8560,13 @@ OECD ,Geothermal,Pathway,,"Start Year, Retirement Trend",1990
 OECD ,Geothermal,Baseline,,Saturation Point,5
 OECD ,Geothermal,Pathway,,Saturation Point,10
 OECD ,Geothermal,Baseline,,"Parameter b, min",0
-OECD ,Geothermal,Pathway,,"Parameter b, min",0
+OECD ,Geothermal,Pathway,,"Parameter b, min",30
 OECD ,Geothermal,Baseline,,"Parameter b, max",100
-OECD ,Geothermal,Pathway,,"Parameter b, max",100
+OECD ,Geothermal,Pathway,,"Parameter b, max",30
 OECD ,Geothermal,Baseline,,"Parameter a, min",0
-OECD ,Geothermal,Pathway,,"Parameter a, min",0
+OECD ,Geothermal,Pathway,,"Parameter a, min",0.4
 OECD ,Geothermal,Baseline,,"Parameter a, max",5
-OECD ,Geothermal,Pathway,,"Parameter a, max",5
+OECD ,Geothermal,Pathway,,"Parameter a, max",0.4
 OECD ,Geothermal,Baseline,,Max annual growth,100
 OECD ,Geothermal,Pathway,,Max annual growth,100
 OECD ,Geothermal,Baseline,,Floor,0
@@ -8613,9 +8613,9 @@ OECD ,Hydroelectricity,Pathway,,"Parameter b, min",0
 OECD ,Hydroelectricity,Baseline,,"Parameter b, min",18
 OECD ,Hydroelectricity,Pathway,,"Parameter b, max",400
 OECD ,Hydroelectricity,Baseline,,"Parameter b, max",18
-OECD ,Hydroelectricity,Pathway,,"Parameter a, min",-0.01
+OECD ,Hydroelectricity,Pathway,,"Parameter a, min",-0.02
 OECD ,Hydroelectricity,Baseline,,"Parameter a, min",-0.19
-OECD ,Hydroelectricity,Pathway,,"Parameter a, max",-0.01
+OECD ,Hydroelectricity,Pathway,,"Parameter a, max",-0.02
 OECD ,Hydroelectricity,Baseline,,"Parameter a, max",-0.19
 OECD ,Hydroelectricity,Baseline,,Max annual growth,100
 OECD ,Hydroelectricity,Pathway,,Max annual growth,100
@@ -8667,7 +8667,7 @@ OECD ,Nuclear,Pathway,,Useful Life in End Year,45
 OECD ,Nuclear,Baseline,,"Start Year, Retirement Trend",1990
 OECD ,Nuclear,Pathway,,"Start Year, Retirement Trend",1990
 OECD ,Nuclear,Baseline,,Saturation Point,20
-OECD ,Nuclear,Pathway,,Saturation Point,15
+OECD ,Nuclear,Pathway,,Saturation Point,10
 OECD ,Nuclear,Baseline,,"Parameter b, min",43
 OECD ,Nuclear,Pathway,,"Parameter b, min",43
 OECD ,Nuclear,Baseline,,"Parameter b, max",43
@@ -8686,11 +8686,11 @@ OECD ,Nuclear,Pathway,,Consumption:Generation,1
 OECD ,Oil,Baseline,,Saturation Point,100
 OECD ,Oil,Pathway,,Saturation Point,0
 OECD ,Oil,Baseline,,"Parameter b, min",0
-OECD ,Oil,Pathway,,"Parameter b, min",0
+OECD ,Oil,Pathway,,"Parameter b, min",10
 OECD ,Oil,Baseline,,"Parameter b, max",100
-OECD ,Oil,Pathway,,"Parameter b, max",50
+OECD ,Oil,Pathway,,"Parameter b, max",10
 OECD ,Oil,Baseline,,"Parameter a, min",0
-OECD ,Oil,Pathway,,"Parameter a, min",-1
+OECD ,Oil,Pathway,,"Parameter a, min",-0.5
 OECD ,Oil,Baseline,,"Parameter a, max",5
 OECD ,Oil,Pathway,,"Parameter a, max",0
 OECD ,Oil,Baseline,,Max annual growth,100
@@ -8706,11 +8706,11 @@ OECD ,Other fuels,Pathway,,"Parameter a, max",-0.1
 OECD ,Other fuels,Pathway,,Max annual growth,100
 OECD ,Other fuels,Pathway,,Floor,0
 OECD ,Other fuels,Pathway,,Consumption:Generation,1
-OECD ,Other sources,Pathway,,Saturation Point,0
+OECD ,Other sources,Pathway,,Saturation Point,100
 OECD ,Other sources,Pathway,,"Parameter b, min",0
 OECD ,Other sources,Pathway,,"Parameter b, max",50
-OECD ,Other sources,Pathway,,"Parameter a, min",-1
-OECD ,Other sources,Pathway,,"Parameter a, max",0
+OECD ,Other sources,Pathway,,"Parameter a, min",0.05
+OECD ,Other sources,Pathway,,"Parameter a, max",0.05
 OECD ,Other sources,Pathway,,Max annual growth,100
 OECD ,Other sources,Pathway,,Floor,0
 OECD ,Other sources,Pathway,,Consumption:Generation,1
@@ -8833,7 +8833,7 @@ OECD ,Solar,Pathway,,Useful Life in End Year,45
 OECD ,Solar,Baseline,,"Start Year, Retirement Trend",1990
 OECD ,Solar,Pathway,,"Start Year, Retirement Trend",1990
 OECD ,Solar,Baseline,,Saturation Point,5
-OECD ,Solar,Pathway,,Saturation Point,44
+OECD ,Solar,Pathway,,Saturation Point,42
 OECD ,Solar,Pathway,,"Parameter b, min",0
 OECD ,Solar,Baseline,,"Parameter b, min",0
 OECD ,Solar,Pathway,,"Parameter b, max",100
@@ -8863,16 +8863,16 @@ OECD ,Solar thermal,Baseline,,TWh per million meters squared ,0.47336
 OECD ,Solar thermal,Pathway,,TWh per million meters squared ,0.47336
 OECD ,Solar thermal,Baseline,Industry,Saturation Point,10
 OECD ,Solar thermal,Baseline,Buildings,Saturation Point,10
-OECD ,Solar thermal,Pathway,Industry,Saturation Point,20
-OECD ,Solar thermal,Pathway,Buildings,Saturation Point,20
+OECD ,Solar thermal,Pathway,Industry,Saturation Point,55
+OECD ,Solar thermal,Pathway,Buildings,Saturation Point,55
 OECD ,Solar thermal,Baseline,,"Parameter b, min",0
-OECD ,Solar thermal,Pathway,,"Parameter b, min",45
+OECD ,Solar thermal,Pathway,,"Parameter b, min",30
 OECD ,Solar thermal,Baseline,,"Parameter b, max",100
-OECD ,Solar thermal,Pathway,,"Parameter b, max",45
+OECD ,Solar thermal,Pathway,,"Parameter b, max",30
 OECD ,Solar thermal,Baseline,,"Parameter a, min",0
-OECD ,Solar thermal,Pathway,,"Parameter a, min",0.2
+OECD ,Solar thermal,Pathway,,"Parameter a, min",0.4
 OECD ,Solar thermal,Baseline,,"Parameter a, max",5
-OECD ,Solar thermal,Pathway,,"Parameter a, max",0.2
+OECD ,Solar thermal,Pathway,,"Parameter a, max",0.4
 OECD ,Solar thermal,Baseline,,Max annual growth,100
 OECD ,Solar thermal,Pathway,,Max annual growth,100
 OECD ,Solar thermal,Baseline,,GW-th per million meters squared,0.69625
@@ -8944,7 +8944,7 @@ OECD ,Wind,Pathway,,Useful Life in End Year,30
 OECD ,Wind,Baseline,,"Start Year, Retirement Trend",1990
 OECD ,Wind,Pathway,,"Start Year, Retirement Trend",1990
 OECD ,Wind,Baseline,,Saturation Point,5
-OECD ,Wind,Pathway,,Saturation Point,44
+OECD ,Wind,Pathway,,Saturation Point,42
 OECD ,Wind,Pathway,,"Parameter b, min",0
 OECD ,Wind,Baseline,,"Parameter b, min",0
 OECD ,Wind,Pathway,,"Parameter b, max",100
@@ -10907,11 +10907,11 @@ World ,Oil,Baseline,,Saturation Point,100
 World ,Oil,Pathway,,Saturation Point,0
 World ,Oil,Pathway,,"Parameter b, min",0
 World ,Oil,Baseline,,"Parameter b, min",0
-World ,Oil,Pathway,,"Parameter b, max",100
+World ,Oil,Pathway,,"Parameter b, max",50
 World ,Oil,Baseline,,"Parameter b, max",100
-World ,Oil,Pathway,,"Parameter a, min",0
+World ,Oil,Pathway,,"Parameter a, min",-0.01
 World ,Oil,Baseline,,"Parameter a, min",0
-World ,Oil,Pathway,,"Parameter a, max",5
+World ,Oil,Pathway,,"Parameter a, max",0
 World ,Oil,Baseline,,"Parameter a, max",5
 World ,Oil,Baseline,,Max annual growth,100
 World ,Oil,Pathway,,Max annual growth,100
