@@ -404,7 +404,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         ("Heat", "Coal"): ("Heat", "Fossil fuels"),
         ("Heat", "Geothermal"): ("Heat", "Bioenergy"),
         ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
-        ("Heat", "Nuclear"): ("Heat", "Fossil fuels"),
+        ("Heat", "Nuclear"): ("Heat", "Bioenergy"),
         ("Heat", "Oil"): ("Heat", "Fossil fuels"),
         ("Heat", "Other sources"): ("Heat", "Other sources"),
         ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),

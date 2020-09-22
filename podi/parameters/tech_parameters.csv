@@ -8226,7 +8226,7 @@ NonOECD ,Solar,Pathway,,Useful Life in End Year,45
 NonOECD ,Solar,Baseline,,"Start Year, Retirement Trend",1990
 NonOECD ,Solar,Pathway,,"Start Year, Retirement Trend",1990
 NonOECD ,Solar,Baseline,,Saturation Point,5
-NonOECD ,Solar,Pathway,,Saturation Point,42
+NonOECD ,Solar,Pathway,,Saturation Point,44
 NonOECD ,Solar,Pathway,,"Parameter b, min",0
 NonOECD ,Solar,Baseline,,"Parameter b, min",0
 NonOECD ,Solar,Pathway,,"Parameter b, max",100
@@ -8337,7 +8337,7 @@ NonOECD ,Wind,Pathway,,Useful Life in End Year,30
 NonOECD ,Wind,Baseline,,"Start Year, Retirement Trend",1990
 NonOECD ,Wind,Pathway,,"Start Year, Retirement Trend",1990
 NonOECD ,Wind,Baseline,,Saturation Point,5
-NonOECD ,Wind,Pathway,,Saturation Point,42
+NonOECD ,Wind,Pathway,,Saturation Point,44
 NonOECD ,Wind,Pathway,,"Parameter b, min",0
 NonOECD ,Wind,Baseline,,"Parameter b, min",0
 NonOECD ,Wind,Pathway,,"Parameter b, max",100
@@ -8833,7 +8833,7 @@ OECD ,Solar,Pathway,,Useful Life in End Year,45
 OECD ,Solar,Baseline,,"Start Year, Retirement Trend",1990
 OECD ,Solar,Pathway,,"Start Year, Retirement Trend",1990
 OECD ,Solar,Baseline,,Saturation Point,5
-OECD ,Solar,Pathway,,Saturation Point,42
+OECD ,Solar,Pathway,,Saturation Point,44
 OECD ,Solar,Pathway,,"Parameter b, min",0
 OECD ,Solar,Baseline,,"Parameter b, min",0
 OECD ,Solar,Pathway,,"Parameter b, max",100
@@ -8944,7 +8944,7 @@ OECD ,Wind,Pathway,,Useful Life in End Year,30
 OECD ,Wind,Baseline,,"Start Year, Retirement Trend",1990
 OECD ,Wind,Pathway,,"Start Year, Retirement Trend",1990
 OECD ,Wind,Baseline,,Saturation Point,5
-OECD ,Wind,Pathway,,Saturation Point,42
+OECD ,Wind,Pathway,,Saturation Point,44
 OECD ,Wind,Pathway,,"Parameter b, min",0
 OECD ,Wind,Baseline,,"Parameter b, min",0
 OECD ,Wind,Pathway,,"Parameter b, max",100

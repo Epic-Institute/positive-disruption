@@ -203,12 +203,11 @@ def energy_supply(scenario, energy_demand):
         # set fossil fuel generation to fill balance
         perc.loc["Fossil fuels"] = perc.sum().apply(
             lambda x: max(
-                1
+                0.9
+                - 0.515 * x
                 - 0.03 * (x ** 2)
-                - 0.73 * x
-                - 0.004 * (x ** 4)
-                - 0.02 * (x ** 6)
-                - 0.006 * (x ** 7),
+                - 0.0405 * (x ** 8)
+                - 0.0014 * (x ** 9),
                 0,
             )
         )
@@ -375,7 +374,14 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(lambda x: max(1.35 - x, 0))
+        perc.loc["Fossil fuels"] = perc.sum().apply(
+            lambda x: max(
+                1.35 - 0.84 * x - 0.05 * x ** 1.2,
+                0,
+            )
+        )
+        perc.loc["Fossil fuels"].loc[2070:] = 0
+
         return perc
 
     # project heat consumption met by a given technology
@@ -560,9 +566,9 @@ def energy_supply(scenario, energy_demand):
 
         # set fossil fuel generation to fill balance
         perc.loc["Fossil fuels"] = perc.sum().apply(
-            lambda x: max(1 - 1.2 * x - 0.1 * x ** 2, 0)
+            lambda x: max(0.88 - 1.1 * x - 0.1 * x ** 1.1, 0)
         )
-
+        perc.loc["Fossil fuels"].loc[2070:] = 0
         return perc
 
     # project transport consumption met by a given technology
