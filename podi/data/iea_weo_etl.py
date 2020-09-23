@@ -3,9 +3,7 @@
 import pandas as pd
 from numpy import NaN
 
-iea_regions = pd.read_csv("podi/data/region_categories.csv")[
-    "IEA Region"
-]  # unused, complete to build iea_region_list and gcam_region_list from this
+iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
 
 iea_region_list = (
     "World ",

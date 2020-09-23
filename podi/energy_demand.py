@@ -81,6 +81,7 @@ def energy_demand(
     )
 
     # Reallocate heat demand within industry
+    """
     energy_demand.loc[slice(None), "Industry", "Heat", scenario] = (
         energy_demand.loc[slice(None), "Industry", "Heat", scenario]
         .add(
@@ -101,7 +102,7 @@ def energy_demand(
         )
         .values
     )
-
+    """
     # Reallocate heat demand within buildings
     """
     energy_demand.loc[slice(None), "Buildings", "Heat", scenario] = (
@@ -256,5 +257,6 @@ def energy_demand(
             proj_demand(iea_region_list[i], energy_demand)
         )
     """
+    energy_demand.columns = energy_demand.columns.astype(int)
 
     return energy_demand

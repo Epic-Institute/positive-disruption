@@ -414,9 +414,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
         plt.legend(loc=2, fontsize="small")
         plt.ylabel("TFC (TWh)")
-        plt.xlim([10, 90])
+        plt.xlim([2020, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-        plt.xticks(np.arange(10, 100, 10))
+        plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Energy Demand, " + iea_region_list[i])
 
     # endregion
