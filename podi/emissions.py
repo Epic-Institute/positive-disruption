@@ -14,6 +14,7 @@ tech_list = [
 
 
 def emissions(scenario, energy_supply, afolu_emissions, additional_emissions):
+
     em_factors = pd.read_csv("podi/data/emissions_factors.csv")
 
     # filter for Region

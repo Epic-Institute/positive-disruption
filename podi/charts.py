@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+# region
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,10 +12,16 @@ import pyam
 from scipy.interpolate import interp1d, UnivariateSpline
 from matplotlib.animation import FuncAnimation
 
+# endregion
+
 
 def charts(energy_demand_baseline, energy_demand_pathway):
 
-    # Fig. 3: Projected Market Diffusion Curves for the V7
+    #########################################################
+    # FIG. 3 : PROJECTED MARKET DIFFUSION CURVES FOR THE V7 #
+    #########################################################
+
+    # region
     xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 19)
 
     color = pd.DataFrame(
@@ -61,8 +68,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                 + ", "
                 + iea_region_list[i]
             )
+    # endregion
 
-    # Fig. 4: Mitigation Wedges Curve
+    ####################################
+    # FIG. 4 : MITIGATION WEDGES CURVE #    ####################################
+
+    # region
+
     # https://pyam-iamc.readthedocs.io/en/stable/examples/plot_stack.html#sphx-glr-examples-plot-stack-py
 
     for i in range(0, len(iea_region_list)):
@@ -82,20 +94,54 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
 
-    # Fig. 5: Projected average global temperature increase above pre-industrial
+    # endregion
+
+    ###############################################################
+    # FIG. 5 : PROJECECTD AVERAGE GLOBAL TEMPERATURE INCREASE ABOVE PRE-INDUSTRIAL #
+    ###############################################################
+
+    # region
+
     # https://github.com/openscm/pymagicc
 
-    # Fig. 6: Projected greenhouse gas atmospheric concentration
+    # endregion
+
+    ################################################################
+    # FIG. 6 : PROJECECTD GREENHOUSE GAS ATMOSPHERIC CONCENTRATION #
+    ################################################################
+
+    # region
+
     # https://github.com/openscm/pymagicc
 
-    # Fig. 7: Projected CO2 atmospheric concentration
+    # endregion
+
+    #####################################################
+    # FIG. 7 : PROJECECTD CO2 ATMOSPHERIC CONCENTRATION #
+    #####################################################
+
+    # region
+
     # https://github.com/openscm/pymagicc
 
-    # Fig. 16: Actual vs. Projected Adoption Curves
+    # endregion
 
-    # Fig. 19: Energy demand by sector and end-use
+    ##################################################
+    # FIG. 16 : ACTUAL VS. PROJECTED ADOPTION CURVES #
+    ##################################################
+
+    # region
+
+    # endregion
+
+    #################################################
+    # FIG. 19 : ENERGY DEMAND BY SECTOR AND END-USE #
+    #################################################
+
+    # region
 
     # Baseline
+
     for i in range(0, len(iea_region_list)):
         energy_demand_baseline_i = energy_demand_baseline.loc[
             iea_region_list[i], slice(None), slice(None), "Baseline"
@@ -178,6 +224,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.title("Energy Demand, " + iea_region_list[i])
 
     # Pathway (World)
+
     for i in range(0, len(iea_region_list)):
         energy_demand_pathway_i = energy_demand_pathway.loc[
             iea_region_list[i], slice(None), slice(None), "Pathway"
@@ -260,6 +307,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.title("Energy Demand, " + iea_region_list[i])
 
     # Pathway (Sum OECD/NonOECD)
+
     for i in range(0, len(iea_region_list)):
         energy_demand_pathway_i = energy_demand_pathway.loc[
             ["OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
@@ -371,11 +419,29 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.xticks(np.arange(10, 100, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
 
-    # Fig. 20: Energy Demand Mitigation Wedges
+    # endregion
 
-    # Fig. 21: Energy Intensity Projections
+    #############################################
+    # FIG. 20 : ENERGY DEMAND MITIGATION WEDGES #
+    #############################################
 
-    # Fig. 24: Energy Supply by Source and End-use
+    # region
+
+    # endregion
+
+    ##########################################
+    # FIG. 21 : ENERGY INTENSITY PROJECTIONS #
+    ##########################################
+
+    # region
+
+    # endregion
+
+    ###############################################
+    # FIG. 24 : ENERGY SUPPLY BY SOURCE & END-USE #
+    ###############################################
+
+    # region
 
     tech_list = [
         ("Electricity", "Solar"),
@@ -467,7 +533,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
-    # Fig. 25: Electricity Generation by Source
+    # endregion
+
+    ##############################################
+    # FIG. 25 : ELECTRICITY GENERATION BY SOURCE #
+    ##############################################
+
+    # region
 
     for i in range(0, len(iea_region_list)):
         fig = elec_consump.loc[iea_region_list[i], slice(None)]
@@ -480,8 +552,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
-    # Fig. 25.1: Electricity Generation by Source (%)
-    # Line plot
+    # Line plot (%)
+
     for i in range(0, len(iea_region_list)):
         fig = elec_percent_adoption.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(tech_list)]
@@ -499,6 +571,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
 
     # Stacked 100% plot
+
     for i in range(0, len(iea_region_list)):
         fig = elec_percent_adoption.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(tech_list)]
@@ -515,8 +588,16 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
 
-    # Fig. 26: Electricity Demand by Sector (TWh)
+    # endregion
+
+    ################################################
+    # FIG. 26 : ELECTRICITY DEMAND BY SECTOR (TWH) #
+    ################################################
+
+    # region
+
     # Baseline
+
     for i in range(0, len(iea_region_list)):
         energy_demand_baseline_i = energy_demand_baseline.loc[
             iea_region_list[i], slice(None), slice(None), "Baseline"
@@ -599,6 +680,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.title("Energy Demand, " + iea_region_list[i])
 
     # Pathway
+
     for i in range(0, len(iea_region_list)):
         energy_demand_pathway_i = energy_demand_pathway.loc[
             iea_region_list[i], slice(None), slice(None), "Pathway"
@@ -680,13 +762,32 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.xticks(np.arange(10, 100, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
 
-    # Fig. 27: Buildings Energy Supply
+    # endregion
 
-    # Fig. 28: Industry Energy Demand by End-Use
+    #####################################
+    # FIG. 27 : BUILDINGS ENERGY SUPPLY #
+    #####################################
 
-    # Fig. 29: Industry Heat Supply
+    # region
 
-    # heat generation by source
+    # endregion
+
+    ###############################################
+    # FIG. 28 : INDUSTRY ENERGY DEMAND BY END-USE #
+    ###############################################
+
+    # region
+
+    # endregion
+
+    ##################################
+    # FIG. 29 : INDUSTRY HEAT SUPPLY #
+    ##################################
+
+    # region
+
+    # Heat generation by source
+
     heat_tech_list = [
         "Biofuels",
         "Coal",
@@ -698,7 +799,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         "Solar thermal",
         "Waste",
     ]
-    # percent adoption
+    # Percent adoption
+
     for i in range(0, len(iea_region_list)):
         fig = heat_percent_adoption.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(heat_tech_list)]
@@ -716,6 +818,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
 
     # TWh
+
     for i in range(0, len(iea_region_list)):
         fig = heat_consump2.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(heat_tech_list)]
@@ -732,19 +835,56 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
 
-    # Fig. 30: Transportation Energy Demand
+    # endregion
 
-    # Fig. 31: Electrification of Vehicles
+    ##########################################
+    # FIG. 30 : TRANSPORTATION ENERGY DEMAND #
+    ##########################################
 
-    # Fig. 32: Transportation Energy Demand Reduction from Design Improvements
+    # region
 
-    # Fig. 33: Regenerative Agriculture Subvector Mitigation Wedges
+    # endregion
 
-    # Fig. 34: Forests & Wetlands Subvector Mitigation Wedges
+    #########################################
+    # FIG. 31 : ELECTRIFICATION OF VEHICLES #
+    #########################################
 
-    # Fig. 35: AFOLU Subvector Mitigation Wedges
+    # region
+
+    # endregion
+
+    ##############################################################
+    # FIG. 32 : TRANSPORTATION ENERGY DEMAND REDUCTION FROM DESIGN IMPROVEMENTS #
+    ##############################################################
+
+    # region
+
+    # endregion
+
+    ##################################################################
+    # FIG. 33 : REGENERATIVE AGRICULTURE SUBVECTOR MITIGATION WEDGES #
+    ##################################################################
+
+    # region
+
+    # endregion
+
+    ############################################################
+    # FIG. 34 : FORESTS & WETLANDS SUBVECTOR MITIGATION WEDGES #
+    ############################################################
+
+    # region
+
+    # endregion
+
+    ###############################################
+    # FIG. 35 : AFOLU SUBVECTOR MITIGATION WEDGES #
+    ###############################################
+
+    # region
 
     # Stacked plot
+
     for i in range(0, len(iea_region_list)):
         fig = afolu_em_mitigated.loc[
             iea_region_list[i], slice(None), slice(None), slice(None)
@@ -762,6 +902,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
 
-    # Fig. 40: Annual CO2 Removed via CDR
+    # endregion
+
+    ########################################
+    # FIG. 40 : ANNUAL CO2 REMOVED VIA CDR #
+    ########################################
+
+    # region
+
+    # endregion
 
     return

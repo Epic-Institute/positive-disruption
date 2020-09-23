@@ -8576,7 +8576,6 @@ OECD ,Geothermal,Pathway,,"End Year, Retirement Trend",2100
 OECD ,Geothermal,Pathway,,Consumption:Generation,1
 OECD ,Grid,Baseline,,Consumption:Generation,0.88
 OECD ,Grid,Pathway,,Consumption:Generation,0.88
-OECD ,Grid,Pathway,,Consumption:Generation,0.88
 OECD ,Heat,Baseline,,Consumption:Generation,0.88
 OECD ,Heat,Pathway,,Consumption:Generation,1
 OECD ,Hydroelectric pumped storage,Baseline,,Useful Life in Start Year,25
@@ -10526,41 +10525,33 @@ US ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
 US ,Wind | Onshore,Baseline,,% of total wind generation,75%
 US ,Wind | Onshore,Pathway,,% of total wind generation,75%
 World ,Biochar,Baseline,Industry,Saturation Point,5
-World ,Biochar,Pathway,Industry,Saturation Point,23
-World ,Biochar,Pathway,,"Parameter b, min",0
+World ,Biochar,Pathway,Industry,Saturation Point,100
+World ,Biochar,Pathway,,"Parameter b, min",40
 World ,Biochar,Baseline,,"Parameter b, min",0
-World ,Biochar,Pathway,,"Parameter b, max",100
+World ,Biochar,Pathway,,"Parameter b, max",40
 World ,Biochar,Baseline,,"Parameter b, max",100
-World ,Biochar,Pathway,,"Parameter a, min",0
+World ,Biochar,Pathway,,"Parameter a, min",0.1
 World ,Biochar,Baseline,,"Parameter a, min",0
-World ,Biochar,Pathway,,"Parameter a, max",5
+World ,Biochar,Pathway,,"Parameter a, max",0.1
 World ,Biochar,Baseline,,"Parameter a, max",5
 World ,Biochar,Baseline,,Max annual growth,100
 World ,Biochar,Pathway,,Max annual growth,100
 World ,Biochar,Pathway,Industry,Floor,0
 World ,Biochar,Baseline,Industry,Floor,0
 World ,Biofuels,Baseline,,Saturation Point,5
-World ,Biofuels,Pathway,,Saturation Point,100
 World ,Biofuels,Baseline,,Saturation Point,5
-World ,Biofuels,Pathway,,"Parameter b, min",20
 World ,Biofuels,Baseline,,"Parameter b, min",0
 World ,Biofuels,Baseline,,"Parameter b, min",0
-World ,Biofuels,Pathway,,"Parameter b, max",30
 World ,Biofuels,Baseline,,"Parameter b, max",100
 World ,Biofuels,Baseline,,"Parameter b, max",100
-World ,Biofuels,Pathway,,"Parameter a, min",0.1074
 World ,Biofuels,Baseline,,"Parameter a, min",0
 World ,Biofuels,Baseline,,"Parameter a, min",0
-World ,Biofuels,Pathway,,"Parameter a, max",0.1074
 World ,Biofuels,Baseline,,"Parameter a, max",5
 World ,Biofuels,Baseline,,"Parameter a, max",5
 World ,Biofuels,Baseline,,Max annual growth,100
-World ,Biofuels,Pathway,,Max annual growth,100
 World ,Biofuels,Baseline,,Max annual growth,100
-World ,Biofuels,Pathway,,Floor,0
 World ,Biofuels,Baseline,,Floor,0
 World ,Biofuels,Baseline,,Floor,0
-World ,Biofuels,Pathway,,Consumption:Generation,1
 World ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2100,50
 World ,Biofuels | Ethanol,Pathway,,% share of biofuels in 2100,50
 World ,Biofuels | Ethanol,Baseline,,% share of biofuels in 2050,62
@@ -10572,32 +10563,25 @@ World ,Biomass and waste,Pathway,,Useful Life in End Year,45
 World ,Biomass and waste,Baseline,,"Start Year, Retirement Trend",1990
 World ,Biomass and waste,Pathway,,"Start Year, Retirement Trend",1990
 World ,Biomass and waste,Baseline,,Saturation Point,5
-World ,Biomass and waste,Pathway,,Saturation Point,3.6
+World ,Biomass and waste,Pathway,,Saturation Point,5
 World ,Biomass and waste,Baseline,,Saturation Point,5
-World ,Biomass and waste,Pathway,,Saturation Point,3.6
 World ,Biomass and waste,Pathway,,"Parameter b, min",0
 World ,Biomass and waste,Baseline,,"Parameter b, min",0
-World ,Biomass and waste,Pathway,,"Parameter b, min",0
 World ,Biomass and waste,Baseline,,"Parameter b, min",0
 World ,Biomass and waste,Pathway,,"Parameter b, max",100
 World ,Biomass and waste,Baseline,,"Parameter b, max",100
-World ,Biomass and waste,Pathway,,"Parameter b, max",100
 World ,Biomass and waste,Baseline,,"Parameter b, max",100
 World ,Biomass and waste,Pathway,,"Parameter a, min",0
 World ,Biomass and waste,Baseline,,"Parameter a, min",0
-World ,Biomass and waste,Pathway,,"Parameter a, min",0
 World ,Biomass and waste,Baseline,,"Parameter a, min",0
 World ,Biomass and waste,Pathway,,"Parameter a, max",5
 World ,Biomass and waste,Baseline,,"Parameter a, max",5
-World ,Biomass and waste,Pathway,,"Parameter a, max",5
 World ,Biomass and waste,Baseline,,"Parameter a, max",5
 World ,Biomass and waste,Baseline,,Max annual growth,100
 World ,Biomass and waste,Pathway,,Max annual growth,100
 World ,Biomass and waste,Baseline,,Max annual growth,100
-World ,Biomass and waste,Pathway,,Max annual growth,100
 World ,Biomass and waste,Pathway,,Floor,0
 World ,Biomass and waste,Baseline,,Floor,0
-World ,Biomass and waste,Pathway,,Floor,0
 World ,Biomass and waste,Baseline,,Floor,0
 World ,Biomass and waste,Baseline,,"End Year, Retirement Trend",2100
 World ,Biomass and waste,Pathway,,"End Year, Retirement Trend",2100
@@ -10738,11 +10722,11 @@ World ,Fossil fuels,Baseline,,Saturation Point,100
 World ,Fossil fuels,Pathway,,Saturation Point,0
 World ,Fossil fuels,Pathway,,"Parameter b, min",0
 World ,Fossil fuels,Baseline,,"Parameter b, min",0
-World ,Fossil fuels,Pathway,,"Parameter b, max",100
+World ,Fossil fuels,Pathway,,"Parameter b, max",50
 World ,Fossil fuels,Baseline,,"Parameter b, max",100
-World ,Fossil fuels,Pathway,,"Parameter a, min",0
+World ,Fossil fuels,Pathway,,"Parameter a, min",-1
 World ,Fossil fuels,Baseline,,"Parameter a, min",0
-World ,Fossil fuels,Pathway,,"Parameter a, max",5
+World ,Fossil fuels,Pathway,,"Parameter a, max",0
 World ,Fossil fuels,Baseline,,"Parameter a, max",5
 World ,Fossil fuels,Baseline,,Max annual growth,100
 World ,Fossil fuels,Pathway,,Max annual growth,100
@@ -10757,7 +10741,7 @@ World ,Generation,Pathway,,Useful Life in End Year,45
 World ,Generation,Baseline,,"Start Year, Retirement Trend",1990
 World ,Generation,Pathway,,"Start Year, Retirement Trend",1990
 World ,Generation,Baseline,,Saturation Point,100
-World ,Generation,Pathway,,Saturation Point,0
+World ,Generation,Pathway,,Saturation Point,100
 World ,Generation,Pathway,,"Parameter b, min",0
 World ,Generation,Baseline,,"Parameter b, min",0
 World ,Generation,Pathway,,"Parameter b, max",100
@@ -10779,14 +10763,14 @@ World ,Geothermal,Pathway,,Useful Life in End Year,45
 World ,Geothermal,Baseline,,"Start Year, Retirement Trend",1990
 World ,Geothermal,Pathway,,"Start Year, Retirement Trend",1990
 World ,Geothermal,Baseline,,Saturation Point,5
-World ,Geothermal,Pathway,,Saturation Point,3
-World ,Geothermal,Pathway,,"Parameter b, min",0
+World ,Geothermal,Pathway,,Saturation Point,10
+World ,Geothermal,Pathway,,"Parameter b, min",30
 World ,Geothermal,Baseline,,"Parameter b, min",0
-World ,Geothermal,Pathway,,"Parameter b, max",100
+World ,Geothermal,Pathway,,"Parameter b, max",30
 World ,Geothermal,Baseline,,"Parameter b, max",100
-World ,Geothermal,Pathway,,"Parameter a, min",0
+World ,Geothermal,Pathway,,"Parameter a, min",0.4
 World ,Geothermal,Baseline,,"Parameter a, min",0
-World ,Geothermal,Pathway,,"Parameter a, max",5
+World ,Geothermal,Pathway,,"Parameter a, max",0.4
 World ,Geothermal,Baseline,,"Parameter a, max",5
 World ,Geothermal,Baseline,,Max annual growth,100
 World ,Geothermal,Pathway,,Max annual growth,100
@@ -10798,7 +10782,7 @@ World ,Geothermal,Pathway,,Consumption:Generation,1
 World ,Grid,Baseline,,Consumption:Generation,0.88
 World ,Grid,Pathway,,Consumption:Generation,0.88
 World ,Heat,Baseline,,Consumption:Generation,0.88
-World ,Heat,Pathway,,Consumption:Generation,0.88
+World ,Heat,Pathway,,Consumption:Generation,1
 World ,Hydroelectric pumped storage,Baseline,,Useful Life in Start Year,25
 World ,Hydroelectric pumped storage,Pathway,,Useful Life in Start Year,25
 World ,Hydroelectric pumped storage,Baseline,,Useful Life in End Year,45
@@ -10887,14 +10871,14 @@ World ,Nuclear,Pathway,,Useful Life in End Year,45
 World ,Nuclear,Baseline,,"Start Year, Retirement Trend",1990
 World ,Nuclear,Pathway,,"Start Year, Retirement Trend",1990
 World ,Nuclear,Baseline,,Saturation Point,20
-World ,Nuclear,Pathway,,Saturation Point,11
+World ,Nuclear,Pathway,,Saturation Point,10
 World ,Nuclear,Pathway,,"Parameter b, min",43
 World ,Nuclear,Baseline,,"Parameter b, min",43
 World ,Nuclear,Pathway,,"Parameter b, max",43
 World ,Nuclear,Baseline,,"Parameter b, max",43
-World ,Nuclear,Pathway,,"Parameter a, min",-0.1
+World ,Nuclear,Pathway,,"Parameter a, min",-0.02
 World ,Nuclear,Baseline,,"Parameter a, min",-0.1
-World ,Nuclear,Pathway,,"Parameter a, max",-0.1
+World ,Nuclear,Pathway,,"Parameter a, max",-0.02
 World ,Nuclear,Baseline,,"Parameter a, max",-0.1
 World ,Nuclear,Baseline,,Max annual growth,100
 World ,Nuclear,Pathway,,Max annual growth,100
@@ -11274,3 +11258,19 @@ World ,Wind | Onshore,Pathway,,"Capacity factor, start year",25
 World ,Wind | Onshore,Pathway,,"Capacity factor, start year",40
 World ,Wind | Onshore,Baseline,,% of total wind generation,75%
 World ,Wind | Onshore,Pathway,,% of total wind generation,75%
+World ,Bioenergy,Pathway,,Saturation Point,50
+World ,Bioenergy,Pathway,,"Parameter b, min",40
+World ,Bioenergy,Pathway,,"Parameter b, max",40
+World ,Bioenergy,Pathway,,"Parameter a, min",-0.04
+World ,Bioenergy,Pathway,,"Parameter a, max",-0.04
+World ,Bioenergy,Pathway,,Max annual growth,100
+World ,Bioenergy,Pathway,,Floor,0
+World ,Bioenergy,Pathway,,Consumption:Generation,1
+World ,Biofuels,Pathway,,Saturation Point,65
+World ,Biofuels,Pathway,,"Parameter b, min",30
+World ,Biofuels,Pathway,,"Parameter b, max",30
+World ,Biofuels,Pathway,,"Parameter a, min",0.3
+World ,Biofuels,Pathway,,"Parameter a, max",0.3
+World ,Biofuels,Pathway,,Max annual growth,100
+World ,Biofuels,Pathway,,Floor,4
+World ,Biofuels,Pathway,,Consumption:Generation,1

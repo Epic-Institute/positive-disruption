@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
+# region
+
 import pandas as pd
 from podi.adoption_curve import adoption_curve
 import numpy as np
 from podi.data.iea_weo_etl import iea_region_list
 
 # from cdr.cdr_main import cdr_energy_demand
+
+# endregion
 
 
 def energy_demand(
@@ -21,11 +25,11 @@ def energy_demand(
     bunker,
 ):
 
-    # load energy demand historical data (TWh) and projections (% change)
+    # Load energy demand historical data (TWh) and projections (% change)
     energy_demand_historical = pd.read_csv(demand_historical)
     energy_demand_projection = pd.read_csv(demand_projection)
 
-    # define energy demand as timeseries consisting of historical data (TWh) and projections (% change)
+    # Define energy demand as timeseries consisting of historical data (TWh) and projections (% change)
     energy_demand = energy_demand_historical.merge(
         energy_demand_projection,
         right_on=["IEA Sector", "IEA Metric", "Region"],
@@ -49,12 +53,12 @@ def energy_demand(
         ["IEA Region", "Sector", "Metric", "Scenario"], inplace=True
     )
 
-    # calculate projections as TWh by cumulative product
+    # Calculate projections as TWh by cumulative product
     energy_demand = energy_demand.loc[:, :"2039"].join(
         energy_demand.loc[:, "2040":].cumprod(axis=1).fillna(0).astype(int)
     )
 
-    # reallocate 'Other' energy demand from ag/non-energy use to industry
+    # Reallocate 'Other' energy demand from ag/non-energy use to industry
     energy_demand.loc[slice(None), "Industry", "Other renewables", scenario] = (
         energy_demand.loc[slice(None), "Industry", "Other renewables", scenario]
         .add(
@@ -76,7 +80,7 @@ def energy_demand(
         .values
     )
 
-    # reallocate heat demand within industry
+    # Reallocate heat demand within industry
     energy_demand.loc[slice(None), "Industry", "Heat", scenario] = (
         energy_demand.loc[slice(None), "Industry", "Heat", scenario]
         .add(
@@ -98,7 +102,8 @@ def energy_demand(
         .values
     )
 
-    # reallocate heat demand within buildings
+    # Reallocate heat demand within buildings
+    """
     energy_demand.loc[slice(None), "Buildings", "Heat", scenario] = (
         energy_demand.loc[slice(None), "Buildings", "Heat", scenario]
         .add(
@@ -119,8 +124,9 @@ def energy_demand(
         )
         .values
     )
+    """
 
-    # apply percentage reduction attributed to energy efficiency measures
+    # Apply percentage reduction attributed to energy efficiency measures
     energy_efficiency = (
         pd.read_csv(energy_efficiency)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -129,12 +135,11 @@ def energy_demand(
 
     energy_efficiency = energy_efficiency.apply(lambda x: x + 1, axis=1)
     energy_efficiency = energy_efficiency.reindex(energy_demand.index)
-    # energy_demand_post_efficiency = energy_demand * energy_efficiency.values
     energy_demand_post_efficiency = energy_demand - (
         energy_demand * energy_efficiency.values
     )
 
-    # apply percentage reduction & shift to electrification attributed to heat pumps and electrification of industry
+    # Apply percentage reduction & shift to electrification attributed to heat pumps and electrification of industry
     heat_pumps = (
         pd.read_csv(heat_pumps)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -145,7 +150,7 @@ def energy_demand(
     heat_pumps = heat_pumps.reindex(energy_demand.index)
     energy_demand_post_heat_pumps = energy_demand - (energy_demand * heat_pumps.values)
 
-    # apply percentage reduction & shift to electrification attributed to transportation improvements
+    # Apply percentage reduction & shift to electrification attributed to transportation improvements
     transport_efficiency = (
         pd.read_csv(transport_efficiency)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -157,7 +162,7 @@ def energy_demand(
         energy_demand * transport_efficiency.values
     )
 
-    # apply percentage reduction attributed to solar thermal
+    # Apply percentage reduction attributed to solar thermal
     solar_thermal = (
         pd.read_csv(solar_thermal)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -169,7 +174,7 @@ def energy_demand(
         energy_demand * solar_thermal.values
     )
 
-    # apply shift attributed to biofuels
+    # Apply shift attributed to biofuels
     biofuels = (
         pd.read_csv(biofuels)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -179,7 +184,7 @@ def energy_demand(
     biofuels = biofuels.reindex(energy_demand.index)
     energy_demand_post_biofuels = energy_demand - (energy_demand * biofuels.values)
 
-    # add energy demand from CDR
+    # Add energy demand from CDR
     cdr = (
         pd.read_csv(cdr)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -189,7 +194,7 @@ def energy_demand(
     cdr = cdr.apply(lambda x: x + 1, axis=1)
     energy_demand_post_cdr = energy_demand - (energy_demand * cdr.values)
 
-    # add energy demand from international bunker
+    # Add energy demand from international bunker
     bunker = (
         pd.read_csv(bunker)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -223,6 +228,7 @@ def energy_demand(
     energy_demand = energy_demand.apply(lambda x: x(xnew))
     energy_demand = pd.DataFrame(energy_demand)
     """
+
     """
     def proj_demand(region, hist_demand):
         foo = hist_demand.loc[region,slice(None),slice(None),slice(None)].droplevel(['Scenario']).apply(

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# region
+
 import pandas as pd
 from podi.adoption_curve import adoption_curve
 from podi.data.eia_etl import eia_etl
@@ -7,6 +9,9 @@ from podi.data.bnef_etl import bnef_etl
 from podi.data.heat_etl import heat_etl
 from podi.data.iea_weo_etl import iea_region_list
 from numpy import NaN
+from main import energy_demand_pathway
+
+# endregion
 
 data_start_year = 2010
 data_end_year = 2017
@@ -32,6 +37,8 @@ bunker = "podi/data/bunker.csv"
 
 
 def energy_supply(scenario, energy_demand):
+
+    # region
     parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
@@ -69,7 +76,7 @@ def energy_supply(scenario, energy_demand):
     transport_percent_adoption = []
     transport_consump_cdr = []
 
-    for i in range(17, 19):
+    for i in range(0, 1):
         elec_consump = pd.DataFrame(elec_consump).append(
             consump_total(iea_region_list[i], scenario)[0]
         )
@@ -88,10 +95,13 @@ def energy_supply(scenario, energy_demand):
         transport_percent_adoption = pd.DataFrame(transport_percent_adoption).append(
             transport_consump_total(iea_region_list[i], scenario)[1]
         )
+    # endregion
 
     ###############
     # ELECTRICITY #
     ###############
+
+    # region
 
     # historical electricity consumption (TWh)
     def hist_elec_consump(region, scenario):
@@ -203,15 +213,17 @@ def energy_supply(scenario, energy_demand):
         # set fossil fuel generation to fill balance
         perc.loc["Fossil fuels"] = perc.sum().apply(
             lambda x: max(
-                0.9
-                - 0.515 * x
-                - 0.03 * (x ** 2)
-                - 0.0405 * (x ** 8)
-                - 0.0014 * (x ** 9),
+                1.14 - x,
                 0,
             )
         )
-        perc.loc["Fossil fuels"].loc[2060:] = 0
+        """
+               0.9 - 0.515 * x
+                - 0.03 * (x ** 2)
+                - 0.0405 * (x ** 8)
+                - 0.0014 * (x ** 9),
+        """
+        # perc.loc["Fossil fuels"].loc[2060:] = 0
 
         return perc
 
@@ -309,9 +321,13 @@ def energy_supply(scenario, energy_demand):
 
         return (consump_total, percent_adoption, consump_cdr)
 
+    # endregion
+
     ##########
     #  HEAT  #
     ##########
+
+    # region
 
     # historical heat consumption (TWh)
     def hist_heat_consump(region, scenario):
@@ -513,9 +529,13 @@ def energy_supply(scenario, energy_demand):
 
         return (heat_consump_total, percent_adoption, consump_cdr)
 
+    # endregion
+
     ###########################
     #  NONELECTRIC TRANSPORT  #
     ###########################
+
+    # region
 
     # historical transport consumption (TWh)
     def hist_transport_consump(region, scenario):
@@ -669,6 +689,8 @@ def energy_supply(scenario, energy_demand):
         consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
 
         return (transport_consump_total, percent_adoption, consump_cdr)
+
+    # endregion
 
     return (
         elec_consump,
