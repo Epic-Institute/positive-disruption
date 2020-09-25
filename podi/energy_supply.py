@@ -9,7 +9,6 @@ from podi.data.bnef_etl import bnef_etl
 from podi.data.heat_etl import heat_etl
 from podi.data.iea_weo_etl import iea_region_list
 from numpy import NaN
-from main import energy_demand_pathway
 
 # endregion
 
@@ -22,18 +21,6 @@ long_proj_end_year = 2100
 
 # set energy oversupply proportion, to estimate CDR energy demand
 energy_oversupply_prop = 0.0
-region = "World "
-scenario = "Pathway"
-energy_demand = energy_demand_pathway
-demand_historical = "podi/data/energy_demand_historical.csv"
-demand_projection = "podi/data/energy_demand_projection.csv"
-energy_efficiency = "podi/data/energy_efficiency.csv"
-heat_pumps = "podi/data/heat_pumps.csv"
-transport_efficiency = "podi/data/transport_efficiency.csv"
-solar_thermal = "podi/data/solar_thermal.csv"
-biofuels = "podi/data/biofuels.csv"
-cdr = "podi/data/cdr_energy.csv"
-bunker = "podi/data/bunker.csv"
 
 
 def energy_supply(scenario, energy_demand):
@@ -76,7 +63,7 @@ def energy_supply(scenario, energy_demand):
     transport_percent_adoption = []
     transport_consump_cdr = []
 
-    for i in range(0, 1):
+    for i in [0, 17, 19]:
         elec_consump = pd.DataFrame(elec_consump).append(
             consump_total(iea_region_list[i], scenario)[0]
         )
@@ -95,6 +82,7 @@ def energy_supply(scenario, energy_demand):
         transport_percent_adoption = pd.DataFrame(transport_percent_adoption).append(
             transport_consump_total(iea_region_list[i], scenario)[1]
         )
+
     # endregion
 
     ###############
@@ -146,7 +134,7 @@ def energy_supply(scenario, energy_demand):
                     )
                 ]
                 .loc[(slice(None), slice(None), slice(None), scenario, slice(None)), :]
-                # .mul(consump_gen_ratio)
+                .mul(consump_gen_ratio)
                 .groupby(["Metric"])
                 .sum()
             )
@@ -189,6 +177,8 @@ def energy_supply(scenario, energy_demand):
                 )
             )
             foo.drop(labels="Generation", inplace=True)
+            hist_elec_consump.drop(labels="Generation", inplace=True)
+
             return foo
 
     # longterm projected percent of total electricity consumption met by a given technology (proportion)
@@ -211,21 +201,18 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(
-            lambda x: max(
-                1.14 - x,
-                0,
-            )
-        )
         """
+        perc.loc["Fossil fuels"] = perc.sum().apply(
+            lambda x: max((1 - x), 0)
+        )
+
                0.9 - 0.515 * x
                 - 0.03 * (x ** 2)
                 - 0.0405 * (x ** 8)
                 - 0.0014 * (x ** 9),
         """
-        # perc.loc["Fossil fuels"].loc[2060:] = 0
 
-        return perc
+        return perc * 1.05
 
     # project electricity consumption met by a given technology
     def proj_elec_consump(region, scenario, proj_per_elec_consump):
@@ -247,6 +234,7 @@ def energy_supply(scenario, energy_demand):
 
     # join timeseries of historical and projected percent total electricity consumption met by a given technology
     def per_consump(hist_per_elec_consump, proj_per_elec_consump):
+        hist_per_elec_consump.drop(labels="Generation", inplace=True)
         return hist_per_elec_consump.join(proj_per_elec_consump)
 
     # combine above functions to get electricity consumption met by a given technology
@@ -318,6 +306,10 @@ def energy_supply(scenario, energy_demand):
         )
         consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
         # consump_cdr.drop(labels="Generation", level=1, inplace=True)
+
+        consump_total.columns = consump_total.columns.astype(int)
+        percent_adoption.columns = percent_adoption.columns.astype(int)
+        consump_cdr.columns = consump_cdr.columns.astype(int)
 
         return (consump_total, percent_adoption, consump_cdr)
 
@@ -527,6 +519,10 @@ def energy_supply(scenario, energy_demand):
         )
         consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
 
+        heat_consump_total.columns = heat_consump_total.columns.astype(int)
+        percent_adoption.columns = percent_adoption.columns.astype(int)
+        consump_cdr.columns = consump_cdr.columns.astype(int)
+
         return (heat_consump_total, percent_adoption, consump_cdr)
 
     # endregion
@@ -585,10 +581,11 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(
-            lambda x: max(0.88 - 1.1 * x - 0.1 * x ** 1.1, 0)
-        )
-        perc.loc["Fossil fuels"].loc[2070:] = 0
+        perc.loc["Fossil fuels"] = perc.loc[["Oil", "Other fuels"]].sum()
+
+        # perc.sum().apply(lambda x: max(1 - x, 0))
+        # max(0.88 - 1.1 * x - 0.1 * x ** 1.1, 0)
+        # perc.loc["Fossil fuels"].loc[2070:] = 0
         return perc
 
     # project transport consumption met by a given technology
@@ -687,6 +684,10 @@ def energy_supply(scenario, energy_demand):
             * (energy_oversupply_prop),
         )
         consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
+
+        transport_consump_total.columns = transport_consump_total.columns.astype(int)
+        percent_adoption.columns = percent_adoption.columns.astype(int)
+        consump_cdr.columns = consump_cdr.columns.astype(int)
 
         return (transport_consump_total, percent_adoption, consump_cdr)
 

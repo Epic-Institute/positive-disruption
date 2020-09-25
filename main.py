@@ -9,6 +9,7 @@ import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
 from cdr.cdr_util import CDR_NEEDED_DEF
+from podi.charts import charts
 
 # from podi.afolu import afolu
 from podi.emissions import emissions
@@ -16,7 +17,7 @@ from cdr.cdr_main import cdr_mix
 
 # from podi.climate import climate
 # from podi.results_analysis import results_analysis
-from podi.charts import charts
+
 
 pd.set_option("mode.use_inf_as_na", True)
 

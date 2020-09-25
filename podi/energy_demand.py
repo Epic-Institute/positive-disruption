@@ -6,6 +6,7 @@ import pandas as pd
 from podi.adoption_curve import adoption_curve
 import numpy as np
 from podi.data.iea_weo_etl import iea_region_list
+from scipy.interpolate import interp1d
 
 # from cdr.cdr_main import cdr_energy_demand
 
@@ -103,6 +104,7 @@ def energy_demand(
         .values
     )
     """
+
     # Reallocate heat demand within buildings
     """
     energy_demand.loc[slice(None), "Buildings", "Heat", scenario] = (
@@ -126,6 +128,22 @@ def energy_demand(
         .values
     )
     """
+
+    # Reallocate international bunkers from Transport - Oil
+    energy_demand.loc["World ", "Transport", "Oil"] = (
+        energy_demand.loc["World ", "Transport", "Oil"] * 0.84
+    ).values
+
+    bunkers = pd.concat(
+        [energy_demand.loc["World ", "Transport", "Oil"] * 0.16],
+        keys=["International bunkers"],
+        names=["Metric"],
+    )
+    bunkers["IEA Region"] = "World "
+    bunkers["Sector"] = "Transport"
+    bunkers.reset_index(inplace=True)
+    bunkers.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
+    energy_demand = energy_demand.append(bunkers)
 
     # Apply percentage reduction attributed to energy efficiency measures
     energy_efficiency = (
@@ -185,15 +203,20 @@ def energy_demand(
     biofuels = biofuels.reindex(energy_demand.index)
     energy_demand_post_biofuels = energy_demand - (energy_demand * biofuels.values)
 
-    # Add energy demand from CDR
-    cdr = (
-        pd.read_csv(cdr)
-        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
-        .fillna(0)
+    # Estimate energy demand from CDR
+    cdr_energy = pd.concat(
+        [energy_demand.loc["World ", "Industry", "Electricity"] * 0.5],
+        keys=["CDR"],
+        names=["Metric"],
     )
-    cdr = cdr.reindex(energy_demand.index)
-    cdr = cdr.apply(lambda x: x + 1, axis=1)
-    energy_demand_post_cdr = energy_demand - (energy_demand * cdr.values)
+    cdr_energy["IEA Region"] = "World "
+    cdr_energy["Sector"] = "Industry"
+    cdr_energy.reset_index(inplace=True)
+    cdr_energy.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
+    energy_demand = energy_demand.append(cdr_energy)
+    energy_demand.loc["OECD ", "Industry", "Electricity"] = (
+        energy_demand.loc["OECD ", "Industry", "Electricity"].add(cdr_energy).values
+    )
 
     # Add energy demand from international bunker
     bunker = (
@@ -212,24 +235,25 @@ def energy_demand(
         - energy_demand_post_transport
         - energy_demand_post_solarthermal
         - energy_demand_post_biofuels
-        - energy_demand_post_cdr
         - energy_demand_post_bunker
     )
-
     """
+    # Smooth energy demand curves
+
     xnew = np.linspace(
         energy_demand.columns.values.astype(int).min(),
         energy_demand.columns.values.astype(int).max(),
         11,
     )
     energy_demand = energy_demand.apply(
-        lambda x: proj_demand(energy_demand.columns.values.astype(int), x),
+        lambda x: interp1d(energy_demand.columns.values.astype(int), x, kind="cubic"),
         axis=1,
     )
     energy_demand = energy_demand.apply(lambda x: x(xnew))
     energy_demand = pd.DataFrame(energy_demand)
-    """
 
+    # Apply adoption_curves to energy demand
+    """
     """
     def proj_demand(region, hist_demand):
         foo = hist_demand.loc[region,slice(None),slice(None),slice(None)].droplevel(['Scenario']).apply(
@@ -258,5 +282,6 @@ def energy_demand(
         )
     """
     energy_demand.columns = energy_demand.columns.astype(int)
+    energy_demand.clip(lower=0, inplace=True)
 
     return energy_demand
