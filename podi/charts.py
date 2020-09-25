@@ -53,7 +53,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
 
-
     for i in range(0, len(iea_region_list)):
         for j in range(0, len(adoption_curves.index)):
             fig = interp1d(
@@ -69,11 +68,11 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                 + ", "
                 + iea_region_list[i]
             )
-                    """
-                ax2 = ax1.twinx()
-                ax2.set_ylabel('Label')
-                ax2.plot()
-                """
+            """
+            ax2 = ax1.twinx()
+            ax2.set_ylabel('Label')
+            ax2.plot()
+            """
     # endregion
 
     ####################################

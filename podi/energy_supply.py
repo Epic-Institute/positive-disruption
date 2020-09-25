@@ -63,7 +63,7 @@ def energy_supply(scenario, energy_demand):
     transport_percent_adoption = []
     transport_consump_cdr = []
 
-    for i in [0, 17, 19]:
+    for i in range(17, 19):
         elec_consump = pd.DataFrame(elec_consump).append(
             consump_total(iea_region_list[i], scenario)[0]
         )
