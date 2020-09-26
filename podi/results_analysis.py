@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
 import pandas as pd
-import numpy as np
-from podi.energy_supply import data_start_year, data_end_year, long_proj_end_year
-from main import energy_demand_pathway
-from main import energy_demand_baseline
+from podi.energy_supply import data_start_year, long_proj_end_year
 
 
 def results_analysis(
@@ -37,13 +34,22 @@ def results_analysis(
         "Tide and wave",
     ]
 
-    grid_decarb = (
-        elec_consump.loc[elec_consump.index.isin(decarb, level=1)]
-        .sum()
-        .div(elec_consump.groupby("Region", axis=0, level=1).sum())
+    grid_decarb = energy_demand_pathway.loc[region,'TFC','Electricity'].sum()
     )
+    grid_decarb = pd.DataFrame(grid_decarb).T
     grid_decarb.columns = grid_decarb.columns.astype(int)
-    grid_decarb.rename(index={"World ": "Grid"}, inplace=True)
+    grid_decarb.rename(index={0: "Grid"}, inplace=True)
+    grid_decarb.loc[:, 2010:2018] = [
+        0.25,
+        0.258,
+        0.275,
+        0.289,
+        0.303,
+        0.325,
+        0.355,
+        0.373,
+        0.385,
+    ]
 
     # endregion
 
@@ -62,46 +68,50 @@ def results_analysis(
         .sum()
         .div(
             max(
-                pd.DataFrame(transport_consump2.loc[region, "Biofuels"])
-                .T.droplevel(level=0)
-                .append(energy_demand_pathway.loc[region, "Transport", "Electricity"])
-                .sum()
-                .values
+                energy_demand_pathway.loc[
+                    region,
+                    "Transport",
+                    [
+                        "Oil",
+                        "Electricity",
+                        "Biofuels",
+                        "Other fuels",
+                        "International bunkers",
+                    ],
+                ].sum()
             )
         )
-        / 1.8
         + (
             (
                 energy_demand_baseline.loc[
                     region,
                     "Transport",
-                    ["Oil", "Electricity", "Biofuels", "Other fuels"],
+                    ["Oil", "Electricity", "Biofuels"],
                 ].sum()
                 - energy_demand_pathway.loc[
                     region,
                     "Transport",
-                    ["Oil", "Electricity", "Biofuels", "Other fuels"],
+                    ["Oil", "Electricity", "Biofuels"],
                 ].sum()
             )
             / (
                 energy_demand_baseline.loc[
                     region,
                     "Transport",
-                    ["Oil", "Electricity", "Biofuels", "Other fuels"],
+                    ["Oil", "Electricity", "Biofuels"],
                 ]
                 .sum()
                 .sum()
                 - energy_demand_pathway.loc[
                     region,
                     "Transport",
-                    ["Oil", "Electricity", "Biofuels", "Other fuels"],
+                    ["Oil", "Electricity", "Biofuels"],
                 ]
                 .sum()
                 .sum()
             )
         ).cumsum()
-        / 2.5
-    )
+    ) / 2
 
     transport_decarb = pd.DataFrame(transport_decarb).T
     transport_decarb.rename(index={0: "Transport"}, inplace=True)

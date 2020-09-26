@@ -6,6 +6,7 @@ from podi.socioeconomic import socioeconomic
 from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply
 from podi.afolu import afolu
+from podi.results_analysis import results_analysis
 import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
@@ -122,11 +123,11 @@ afolu_em_mitigated = afolu_pathway - afolu_baseline
 # region
 
 em_baseline, ef_baseline = emissions(
-    "Baseline", energy_supply_baseline, afolu_baseline, "emissions.csv"
+    "Baseline", elec_supply_baseline, afolu_baseline, "emissions.csv"
 )
 
 em_pathway, ef_pathway = emissions(
-    "Pathway", energy_supply_pathway, afolu_pathway, "emissions.csv"
+    "Pathway", elec_supply_pathway, afolu_pathway, "emissions.csv"
 )
 
 em_mitigated = em_baseline - em_pathway
@@ -182,7 +183,7 @@ climate_pathway = climate(emissions_pathway, cdr_pathway)
 
 # region
 
-for i in range(0, 1):
+for i in range(17, 19):
     adoption_curves = results_analysis(
         iea_region_list[i],
         energy_demand_baseline,

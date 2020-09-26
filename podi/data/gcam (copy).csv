@@ -13,9 +13,9 @@ MAF ,Emissions | CO2,Mt CO2/yr,3417,3687,4702,5645,6690,8098,9150,10824,12676,14
 OECD90 ,Emissions | CO2,Mt CO2/yr,11887,12408,13343,14325,15054,16176,16633,17042,17416,17555,18285
 World ,Emissions | CO2,Mt CO2/yr,31474,34744,44027,52940,60430,69266,75285,81659,88117,92125,95617
 World ,Emissions | CO2 | Carbon Capture and Storage,Mt CO2/yr, -   , -   , -   , -   , -   , -   , -   , -   , -   , -   , -   
-ASIA ,Emissions | CO2 | Fossil Fuels and Industry,Mt CO2/yr,16557,19913,27558,35281,42995,50819,57678,64825,71218,75412,78523
-LAM ,Emissions | CO2 | Fossil Fuels and Industry,Mt CO2/yr,16557,19913,27558,35281,42995,50819,57678,64825,71218,75412,78523
-MAF ,Emissions | CO2 | Fossil Fuels and Industry,Mt CO2/yr,16557,19913,27558,35281,42995,50819,57678,64825,71218,75412,78523
+ASIA ,Emissions | CO2 | Fossil Fuels and Industry,Mt CO2/yr,9466,11888,17588,23497,29252,34738,39397,43555,46790,48225,48265
+LAM ,Emissions | CO2 | Fossil Fuels and Industry,Mt CO2/yr,1475,1646,2011,2420,2873,3407,3965,4823,5844,6804,7610
+MAF ,Emissions | CO2 | Fossil Fuels and Industry,Mt CO2/yr,2402,2806,3798,4784,5922,7373,8857,10824,12825,14495,16341
 OECD90 ,Emissions | CO2 | Fossil Fuels and Industry,Mt CO2/yr,12117,12421,13178,13945,14841,15919,16468,17123,17513,17687,18446
 World ,Emissions | CO2 | Fossil Fuels and Industry,Mt CO2/yr,28674,32334,40736,49226,57836,66738,74146,81948,88731,93099,96969
 World ,Emissions | CO2 | Fossil Fuels and Industry | Energy Demand,Mt CO2/yr,16664,18322,22480,25749,28561,30756,33294,35776,37459,38672,38945
@@ -53,9 +53,9 @@ LAM ,Energy Service | Transportation | Passenger,bn pkm/yr,2523,2849,3563,4328,5
 MAF ,Energy Service | Transportation | Passenger,bn pkm/yr,4137,5005,6933,9018,11324,14111,17580,21777,26414,31061,35755
 OECD90 ,Energy Service | Transportation | Passenger,bn pkm/yr,20530,21302,23346,25163,26877,28694,30366,31835,33049,34173,35570
 World ,Energy Service | Transportation | Passenger,bn pkm/yr,37274,41259,51411,62194,73576,85904,98603,111615,124330,136243,147327
-ASIA ,Final Energy,EJ/yr,190,220,290,361,431,499,569,635,697,745,779
-LAM ,Final Energy,EJ/yr,190,220,290,361,431,499,569,635,697,745,779
-MAF ,Final Energy,EJ/yr,190,220,290,361,431,499,569,635,697,745,779
+ASIA ,Final Energy,EJ/yr,100,119,163,210,255,297,337,372,401,419,427
+LAM ,Final Energy,EJ/yr,23,25,31,36,42,48,55,64,76,88,98
+MAF ,Final Energy,EJ/yr,37,43,58,74,89,106,125,146,165,182,196
 OECD90 ,Final Energy,EJ/yr,154,156,163,168,169,170,171,171,169,168,168
 World ,Final Energy,EJ/yr,344,376,453,529,600,669,740,806,866,913,947
 World ,Final Energy | Electricity,EJ/yr,56,66,86,113,144,180,206,234,264,286,308
@@ -73,9 +73,9 @@ OECD90 ,Final Energy | Heat,EJ/yr,10,10,13,14,15,16,16,15,14,13,12
 LAM ,Final Energy | Heat,EJ/yr,10,10,13,14,15,16,16,15,14,13,12
 MAF ,Final Energy | Heat,EJ/yr,10,10,13,14,15,16,16,15,14,13,12
 ASIA ,Final Energy | Heat,EJ/yr,10,10,13,14,15,16,16,15,14,13,12
-ASIA ,Final Energy | Industry,EJ/yr,96,113,151,189,225,261,294,324,351,370,384
-LAM ,Final Energy | Industry,EJ/yr,96,113,151,189,225,261,294,324,351,370,384
-MAF ,Final Energy | Industry,EJ/yr,96,113,151,189,225,261,294,324,351,370,384
+ASIA ,Final Energy | Industry,EJ/yr,53,64,89,113,136,157,175,189,200,207,210
+LAM ,Final Energy | Industry,EJ/yr,11,12,15,18,21,24,27,31,35,41,45
+MAF ,Final Energy | Industry,EJ/yr,13,17,26,35,44,55,67,79,90,98,104
 OECD90 ,Final Energy | Industry,EJ/yr,56,57,58,58,57,55,54,52,50,49,48
 World ,Final Energy | Industry,EJ/yr,152,170,209,247,282,316,348,376,401,419,432
 World ,Final Energy | Industry | Electricity,EJ/yr,24,29,36,44,53,63,70,78,89,96,105
@@ -118,9 +118,9 @@ OECD90 ,Final Energy | Residential and Commercial,EJ/yr,113,124,150,177,201,224,
 LAM ,Final Energy | Residential and Commercial,EJ/yr,113,124,150,177,201,224,245,265,280,292,295
 MAF ,Final Energy | Residential and Commercial,EJ/yr,113,124,150,177,201,224,245,265,280,292,295
 ASIA ,Final Energy | Residential and Commercial,EJ/yr,113,124,150,177,201,224,245,265,280,292,295
-ASIA ,Final Energy | Residential and Commercial | Electricity,EJ/yr,10,15,24,38,54,73,90,107,124,138,148
-LAM ,Final Energy | Residential and Commercial | Electricity,EJ/yr,10,15,24,38,54,73,90,107,124,138,148
-MAF ,Final Energy | Residential and Commercial | Electricity,EJ/yr,10,15,24,38,54,73,90,107,124,138,148
+ASIA ,Final Energy | Residential and Commercial | Electricity,EJ/yr,5,7,14,24,36,50,62,74,84,91,95
+LAM ,Final Energy | Residential and Commercial | Electricity,EJ/yr,2,2,2,3,5,6,8,10,13,16,18
+MAF ,Final Energy | Residential and Commercial | Electricity,EJ/yr,2,3,4,6,8,10,12,15,19,22,26
 OECD90 ,Final Energy | Residential and Commercial | Electricity,EJ/yr,19,20,22,25,28,30,32,33,34,35,36
 World ,Final Energy | Residential and Commercial | Electricity,EJ/yr,29,35,46,63,82,103,122,140,158,173,184
 World ,Final Energy | Residential and Commercial | Gases,EJ/yr,25,27,33,38,41,42,44,44,44,44,47
@@ -148,9 +148,9 @@ OECD90 ,Final Energy | Residential and Commercial | Solids | Coal,EJ/yr,4,5,7,8,
 LAM ,Final Energy | Residential and Commercial | Solids | Coal,EJ/yr,4,5,7,8,8,8,7,6,5,4,3
 MAF ,Final Energy | Residential and Commercial | Solids | Coal,EJ/yr,4,5,7,8,8,8,7,6,5,4,3
 ASIA ,Final Energy | Residential and Commercial | Solids | Coal,EJ/yr,4,5,7,8,8,8,7,6,5,4,3
-ASIA ,Final Energy | Transportation,EJ/yr,35,40,52,63,75,89,104,121,138,155,169
-LAM ,Final Energy | Transportation,EJ/yr,35,40,52,63,75,89,104,121,138,155,169
-MAF ,Final Energy | Transportation,EJ/yr,35,40,52,63,75,89,104,121,138,155,169
+ASIA ,Final Energy | Transportation,EJ/yr,15,18,24,31,39,46,55,63,71,78,82
+LAM ,Final Energy | Transportation,EJ/yr,7,8,9,11,12,13,15,17,20,24,26
+MAF ,Final Energy | Transportation,EJ/yr,8,9,11,14,16,19,23,27,32,37,42
 OECD90 ,Final Energy | Transportation,EJ/yr,53,53,54,56,57,57,59,60,61,62,63
 World ,Final Energy | Transportation,EJ/yr,88,93,106,119,132,146,163,181,199,217,232
 World ,Final Energy | Transportation | Electricity,EJ/yr,1,1,2,4,7,11,12,13,14,15,17

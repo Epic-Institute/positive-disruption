@@ -88,7 +88,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             # secax.set_ylabel(axis_label[j])
             plt.xlim([adoption_curves.columns.min(), adoption_curves.columns.max()])
             plt.ylim(0, 105)
-            plt.grid(which="major", linestyle=":", axis="y")
+            plt.grid(which="major", linestyle=":", axis="both")
             plt.title(
                 "Percent of Total PD Adoption, "
                 + adoption_curves.index[j]
