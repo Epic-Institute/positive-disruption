@@ -34,7 +34,10 @@ def results_analysis(
         "Tide and wave",
     ]
 
-    grid_decarb = energy_demand_pathway.loc[region,'TFC','Electricity'].sum()
+    grid_decarb = (
+        elec_consump.loc[elec_consump.index.isin(decarb, level=1)]
+        .sum()
+        .div(elec_consump.drop("Nuclear", level=1).sum())
     )
     grid_decarb = pd.DataFrame(grid_decarb).T
     grid_decarb.columns = grid_decarb.columns.astype(int)

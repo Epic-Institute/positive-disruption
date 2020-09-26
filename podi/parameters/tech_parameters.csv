@@ -420,8 +420,8 @@ NAM ,Biofuels,Pathway,,Floor,0
 NAM ,Biofuels,Baseline,,Floor,0
 NonOECD ,Biofuels,Baseline,,Saturation Point,10
 NonOECD ,Biofuels,Pathway,,Saturation Point,100
-NonOECD ,Biofuels,Pathway,,"Parameter b, min",30
-NonOECD ,Biofuels,Pathway,,"Parameter b, max",30
+NonOECD ,Biofuels,Pathway,,"Parameter b, min",50
+NonOECD ,Biofuels,Pathway,,"Parameter b, max",50
 NonOECD ,Biofuels,Pathway,,"Parameter a, min",0.1074
 NonOECD ,Biofuels,Pathway,,"Parameter a, max",0.1074
 NonOECD ,Biofuels,Baseline,,Max annual growth,100
@@ -435,8 +435,8 @@ NonOECD ,Biofuels,Baseline,,"Parameter a, min",0
 NonOECD ,Biofuels,Baseline,,"Parameter a, max",5
 OECD ,Biofuels,Baseline,,Saturation Point,10
 OECD ,Biofuels,Pathway,,Saturation Point,100
-OECD ,Biofuels,Pathway,,"Parameter b, min",30
-OECD ,Biofuels,Pathway,,"Parameter b, max",30
+OECD ,Biofuels,Pathway,,"Parameter b, min",50
+OECD ,Biofuels,Pathway,,"Parameter b, max",50
 OECD ,Biofuels,Pathway,,"Parameter a, min",0.1074
 OECD ,Biofuels,Pathway,,"Parameter a, max",0.1074
 OECD ,Biofuels,Baseline,,Max annual growth,100
@@ -2554,32 +2554,32 @@ NAM ,Fossil fuels,Pathway,,Max annual growth,100
 NAM ,Fossil fuels,Pathway,,Floor,0
 NAM ,Fossil fuels,Baseline,,Floor,0
 NonOECD ,Fossil fuels,Baseline,,Saturation Point,100
-NonOECD ,Fossil fuels,Pathway,,Saturation Point,70
-NonOECD ,Fossil fuels,Pathway,,"Parameter b, min",20
+NonOECD ,Fossil fuels,Pathway,Transport,Saturation Point,70
+NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",20
 NonOECD ,Fossil fuels,Baseline,,"Parameter b, min",0
-NonOECD ,Fossil fuels,Pathway,,"Parameter b, max",20
+NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",20
 NonOECD ,Fossil fuels,Baseline,,"Parameter b, max",100
-NonOECD ,Fossil fuels,Pathway,,"Parameter a, min",-0.179
+NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 NonOECD ,Fossil fuels,Baseline,,"Parameter a, min",0
-NonOECD ,Fossil fuels,Pathway,,"Parameter a, max",-0.179
+NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 NonOECD ,Fossil fuels,Baseline,,"Parameter a, max",5
 NonOECD ,Fossil fuels,Baseline,,Max annual growth,100
-NonOECD ,Fossil fuels,Pathway,,Max annual growth,100
-NonOECD ,Fossil fuels,Pathway,,Floor,0
+NonOECD ,Fossil fuels,Pathway,Transport,Max annual growth,100
+NonOECD ,Fossil fuels,Pathway,Transport,Floor,0
 NonOECD ,Fossil fuels,Baseline,,Floor,0
 OECD ,Fossil fuels,Baseline,,Saturation Point,100
-OECD ,Fossil fuels,Pathway,,Saturation Point,70
-OECD ,Fossil fuels,Pathway,,"Parameter b, min",20
+OECD ,Fossil fuels,Pathway,Transport,Saturation Point,70
+OECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",20
 OECD ,Fossil fuels,Baseline,,"Parameter b, min",0
-OECD ,Fossil fuels,Pathway,,"Parameter b, max",20
+OECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",20
 OECD ,Fossil fuels,Baseline,,"Parameter b, max",100
-OECD ,Fossil fuels,Pathway,,"Parameter a, min",-0.179
+OECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 OECD ,Fossil fuels,Baseline,,"Parameter a, min",0
-OECD ,Fossil fuels,Pathway,,"Parameter a, max",-0.179
+OECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 OECD ,Fossil fuels,Baseline,,"Parameter a, max",5
 OECD ,Fossil fuels,Baseline,,Max annual growth,100
-OECD ,Fossil fuels,Pathway,,Max annual growth,100
-OECD ,Fossil fuels,Pathway,,Floor,0
+OECD ,Fossil fuels,Pathway,Transport,Max annual growth,100
+OECD ,Fossil fuels,Pathway,Transport,Floor,0
 OECD ,Fossil fuels,Baseline,,Floor,0
 RUS ,Fossil fuels,Baseline,,Saturation Point,100
 RUS ,Fossil fuels,Pathway,,Saturation Point,0
@@ -7640,3 +7640,17 @@ NonOECD ,Electricity,Pathway,,"Parameter a, min",0
 NonOECD ,Electricity,Pathway,,"Parameter a, max",5
 NonOECD ,Electricity,Pathway,,Max annual growth,100
 NonOECD ,Electricity,Pathway,,Floor,0
+NonOECD ,Fossil fuels,Pathway,Electricity,Saturation Point,70
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",20
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",20
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.179
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.179
+NonOECD ,Fossil fuels,Pathway,Electricity,Max annual growth,100
+NonOECD ,Fossil fuels,Pathway,Electricity,Floor,0
+OECD ,Fossil fuels,Pathway,Electricity,Saturation Point,70
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",20
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",20
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.179
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.179
+OECD ,Fossil fuels,Pathway,Electricity,Max annual growth,100
+OECD ,Fossil fuels,Pathway,Electricity,Floor,0
