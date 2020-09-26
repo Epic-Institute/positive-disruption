@@ -46,7 +46,17 @@ FUEL_COST = 0.179  # $/kWh for fuel
 """
 Default MtCO2/yr of CDR needed, from Epic PD21 model.
 """
-CDR_NEEDED_DEF = [
+cdr_needed_def = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
     0,
     0,

@@ -309,6 +309,14 @@ OECD ,Bioenergy,Pathway,,"Parameter a, max",-0.04
 OECD ,Bioenergy,Pathway,,Max annual growth,100
 OECD ,Bioenergy,Pathway,,Floor,0
 OECD ,Bioenergy,Pathway,,Consumption:Generation,1
+World ,Bioenergy,Baseline,,Saturation Point,50
+World ,Bioenergy,Baseline,,"Parameter b, min",40
+World ,Bioenergy,Baseline,,"Parameter b, max",40
+World ,Bioenergy,Baseline,,"Parameter a, min",-0.04
+World ,Bioenergy,Baseline,,"Parameter a, max",-0.04
+World ,Bioenergy,Baseline,,Max annual growth,100
+World ,Bioenergy,Baseline,,Floor,0
+World ,Bioenergy,Baseline,,Consumption:Generation,1
 World ,Bioenergy,Pathway,,Saturation Point,50
 World ,Bioenergy,Pathway,,"Parameter b, min",40
 World ,Bioenergy,Pathway,,"Parameter b, max",40
@@ -432,18 +440,11 @@ US ,Biofuels,Baseline,,Max annual growth,100
 US ,Biofuels,Pathway,,Floor,0
 US ,Biofuels,Baseline,,Floor,0
 World ,Biofuels,Baseline,,Saturation Point,5
-World ,Biofuels,Baseline,,Saturation Point,5
-World ,Biofuels,Baseline,,"Parameter b, min",0
 World ,Biofuels,Baseline,,"Parameter b, min",0
 World ,Biofuels,Baseline,,"Parameter b, max",100
-World ,Biofuels,Baseline,,"Parameter b, max",100
-World ,Biofuels,Baseline,,"Parameter a, min",0
 World ,Biofuels,Baseline,,"Parameter a, min",0
 World ,Biofuels,Baseline,,"Parameter a, max",5
-World ,Biofuels,Baseline,,"Parameter a, max",5
 World ,Biofuels,Baseline,,Max annual growth,100
-World ,Biofuels,Baseline,,Max annual growth,100
-World ,Biofuels,Baseline,,Floor,0
 World ,Biofuels,Baseline,,Floor,0
 World ,Biofuels,Pathway,,Saturation Point,85
 World ,Biofuels,Pathway,,"Parameter b, min",39
@@ -2592,10 +2593,10 @@ US ,Fossil fuels,Pathway,,Max annual growth,100
 US ,Fossil fuels,Pathway,,Floor,0
 US ,Fossil fuels,Baseline,,Floor,0
 World ,Fossil fuels,Baseline,,Saturation Point,100
-World ,Fossil fuels,Pathway,,Saturation Point,60
-World ,Fossil fuels,Pathway,,"Parameter b, min",25
+World ,Fossil fuels,Pathway,,Saturation Point,70
+World ,Fossil fuels,Pathway,,"Parameter b, min",20
 World ,Fossil fuels,Baseline,,"Parameter b, min",0
-World ,Fossil fuels,Pathway,,"Parameter b, max",25
+World ,Fossil fuels,Pathway,,"Parameter b, max",20
 World ,Fossil fuels,Baseline,,"Parameter b, max",100
 World ,Fossil fuels,Pathway,,"Parameter a, min",-0.179
 World ,Fossil fuels,Baseline,,"Parameter a, min",0
@@ -3184,13 +3185,13 @@ US ,Geothermal,Pathway,,Floor,0
 US ,Geothermal,Baseline,,Floor,0
 World ,Geothermal,Baseline,,Saturation Point,5
 World ,Geothermal,Pathway,,Saturation Point,10
-World ,Geothermal,Pathway,,"Parameter b, min",30
+World ,Geothermal,Pathway,,"Parameter b, min",0
 World ,Geothermal,Baseline,,"Parameter b, min",0
-World ,Geothermal,Pathway,,"Parameter b, max",30
+World ,Geothermal,Pathway,,"Parameter b, max",35
 World ,Geothermal,Baseline,,"Parameter b, max",100
-World ,Geothermal,Pathway,,"Parameter a, min",0.4
+World ,Geothermal,Pathway,,"Parameter a, min",0.1
 World ,Geothermal,Baseline,,"Parameter a, min",0
-World ,Geothermal,Pathway,,"Parameter a, max",0.4
+World ,Geothermal,Pathway,,"Parameter a, max",0.1
 World ,Geothermal,Baseline,,"Parameter a, max",5
 World ,Geothermal,Baseline,,Max annual growth,100
 World ,Geothermal,Pathway,,Max annual growth,100
@@ -3861,7 +3862,7 @@ World ,Hydroelectricity,Baseline,,Saturation Point,5
 World ,Hydroelectricity,Pathway,,Saturation Point,20
 World ,Hydroelectricity,Pathway,,"Parameter b, min",0
 World ,Hydroelectricity,Baseline,,"Parameter b, min",18
-World ,Hydroelectricity,Pathway,,"Parameter b, max",400
+World ,Hydroelectricity,Pathway,,"Parameter b, max",1000
 World ,Hydroelectricity,Baseline,,"Parameter b, max",18
 World ,Hydroelectricity,Pathway,,"Parameter a, min",-0.02
 World ,Hydroelectricity,Baseline,,"Parameter a, min",-0.19
@@ -3916,300 +3917,6 @@ World ,Natural gas,Pathway,,Max annual growth,100
 World ,Natural gas,Pathway,,Floor,0
 World ,Natural gas,Baseline,,Floor,0
 World ,Natural gas,Pathway,,Consumption:Generation,1
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-AdvancedECO ,Non-hydroelectric renewables,Pathway,,Floor,0
-AdvancedECO ,Non-hydroelectric renewables,Baseline,,Floor,0
-AFRICA ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-AFRICA ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-AFRICA ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-AFRICA ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-AFRICA ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-AFRICA ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-AFRICA ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-AFRICA ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-AFRICA ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-AFRICA ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-AFRICA ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-AFRICA ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-AFRICA ,Non-hydroelectric renewables,Pathway,,Floor,0
-AFRICA ,Non-hydroelectric renewables,Baseline,,Floor,0
-ASEAN ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-ASEAN ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-ASEAN ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-ASEAN ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-ASEAN ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-ASEAN ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-ASEAN ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-ASEAN ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-ASEAN ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-ASEAN ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-ASEAN ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-ASEAN ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-ASEAN ,Non-hydroelectric renewables,Pathway,,Floor,0
-ASEAN ,Non-hydroelectric renewables,Baseline,,Floor,0
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-ASIAPAC ,Non-hydroelectric renewables,Pathway,,Floor,0
-ASIAPAC ,Non-hydroelectric renewables,Baseline,,Floor,0
-BRAZIL ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-BRAZIL ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-BRAZIL ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-BRAZIL ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-BRAZIL ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-BRAZIL ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-BRAZIL ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-BRAZIL ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-BRAZIL ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-BRAZIL ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-BRAZIL ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-BRAZIL ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-BRAZIL ,Non-hydroelectric renewables,Pathway,,Floor,0
-BRAZIL ,Non-hydroelectric renewables,Baseline,,Floor,0
-CHINA ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-CHINA ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-CHINA ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-CHINA ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-CHINA ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-CHINA ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-CHINA ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-CHINA ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-CHINA ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-CHINA ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-CHINA ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-CHINA ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-CHINA ,Non-hydroelectric renewables,Pathway,,Floor,0
-CHINA ,Non-hydroelectric renewables,Baseline,,Floor,0
-CSAM ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-CSAM ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-CSAM ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-CSAM ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-CSAM ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-CSAM ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-CSAM ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-CSAM ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-CSAM ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-CSAM ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-CSAM ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-CSAM ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-CSAM ,Non-hydroelectric renewables,Pathway,,Floor,0
-CSAM ,Non-hydroelectric renewables,Baseline,,Floor,0
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-DevelopingECO ,Non-hydroelectric renewables,Pathway,,Floor,0
-DevelopingECO ,Non-hydroelectric renewables,Baseline,,Floor,0
-EU ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-EU ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-EU ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-EU ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-EU ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-EU ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-EU ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-EU ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-EU ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-EU ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-EU ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-EU ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-EU ,Non-hydroelectric renewables,Pathway,,Floor,0
-EU ,Non-hydroelectric renewables,Baseline,,Floor,0
-EUR ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-EUR ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-EUR ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-EUR ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-EUR ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-EUR ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-EUR ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-EUR ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-EUR ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-EUR ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-EUR ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-EUR ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-EUR ,Non-hydroelectric renewables,Pathway,,Floor,0
-EUR ,Non-hydroelectric renewables,Baseline,,Floor,0
-EURASIA ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-EURASIA ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-EURASIA ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-EURASIA ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-EURASIA ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-EURASIA ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-EURASIA ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-EURASIA ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-EURASIA ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-EURASIA ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-EURASIA ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-EURASIA ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-EURASIA ,Non-hydroelectric renewables,Pathway,,Floor,0
-EURASIA ,Non-hydroelectric renewables,Baseline,,Floor,0
-INDIA ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-INDIA ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-INDIA ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-INDIA ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-INDIA ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-INDIA ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-INDIA ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-INDIA ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-INDIA ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-INDIA ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-INDIA ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-INDIA ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-INDIA ,Non-hydroelectric renewables,Pathway,,Floor,0
-INDIA ,Non-hydroelectric renewables,Baseline,,Floor,0
-JPN ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-JPN ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-JPN ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-JPN ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-JPN ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-JPN ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-JPN ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-JPN ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-JPN ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-JPN ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-JPN ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-JPN ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-JPN ,Non-hydroelectric renewables,Pathway,,Floor,0
-JPN ,Non-hydroelectric renewables,Baseline,,Floor,0
-ME ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-ME ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-ME ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-ME ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-ME ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-ME ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-ME ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-ME ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-ME ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-ME ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-ME ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-ME ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-ME ,Non-hydroelectric renewables,Pathway,,Floor,0
-ME ,Non-hydroelectric renewables,Baseline,,Floor,0
-NAM ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-NAM ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-NAM ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-NAM ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-NAM ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-NAM ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-NAM ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-NAM ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-NAM ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-NAM ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-NAM ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-NAM ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-NAM ,Non-hydroelectric renewables,Pathway,,Floor,0
-NAM ,Non-hydroelectric renewables,Baseline,,Floor,0
-NonOECD ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-NonOECD ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-NonOECD ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-NonOECD ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-NonOECD ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-NonOECD ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-NonOECD ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-NonOECD ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-NonOECD ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-NonOECD ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-NonOECD ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-NonOECD ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-NonOECD ,Non-hydroelectric renewables,Pathway,,Floor,0
-NonOECD ,Non-hydroelectric renewables,Baseline,,Floor,0
-OECD ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-OECD ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-OECD ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-OECD ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-OECD ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-OECD ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-OECD ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-OECD ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-OECD ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-OECD ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-OECD ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-OECD ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-OECD ,Non-hydroelectric renewables,Pathway,,Floor,0
-OECD ,Non-hydroelectric renewables,Baseline,,Floor,0
-RUS ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-RUS ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-RUS ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-RUS ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-RUS ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-RUS ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-RUS ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-RUS ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-RUS ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-RUS ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-RUS ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-RUS ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-RUS ,Non-hydroelectric renewables,Pathway,,Floor,0
-RUS ,Non-hydroelectric renewables,Baseline,,Floor,0
-SAFR ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-SAFR ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-SAFR ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-SAFR ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-SAFR ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-SAFR ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-SAFR ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-SAFR ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-SAFR ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-SAFR ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-SAFR ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-SAFR ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-SAFR ,Non-hydroelectric renewables,Pathway,,Floor,0
-SAFR ,Non-hydroelectric renewables,Baseline,,Floor,0
-US ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-US ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-US ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-US ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-US ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-US ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-US ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-US ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-US ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-US ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-US ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-US ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-US ,Non-hydroelectric renewables,Pathway,,Floor,0
-US ,Non-hydroelectric renewables,Baseline,,Floor,0
-World ,Non-hydroelectric renewables,Baseline,,Saturation Point,5
-World ,Non-hydroelectric renewables,Pathway,,Saturation Point,36
-World ,Non-hydroelectric renewables,Pathway,,"Parameter b, min",0
-World ,Non-hydroelectric renewables,Baseline,,"Parameter b, min",0
-World ,Non-hydroelectric renewables,Pathway,,"Parameter b, max",100
-World ,Non-hydroelectric renewables,Baseline,,"Parameter b, max",100
-World ,Non-hydroelectric renewables,Pathway,,"Parameter a, min",0
-World ,Non-hydroelectric renewables,Baseline,,"Parameter a, min",0
-World ,Non-hydroelectric renewables,Pathway,,"Parameter a, max",5
-World ,Non-hydroelectric renewables,Baseline,,"Parameter a, max",5
-World ,Non-hydroelectric renewables,Baseline,,Max annual growth,100
-World ,Non-hydroelectric renewables,Pathway,,Max annual growth,100
-World ,Non-hydroelectric renewables,Pathway,,Floor,0
-World ,Non-hydroelectric renewables,Baseline,,Floor,0
 AdvancedECO ,Nuclear,Baseline,,Saturation Point,20
 AdvancedECO ,Nuclear,Pathway,,Saturation Point,10
 AdvancedECO ,Nuclear,Pathway,,"Parameter b, min",43
@@ -4493,10 +4200,10 @@ US ,Nuclear,Pathway,,Max annual growth,100
 US ,Nuclear,Pathway,,Floor,0
 US ,Nuclear,Baseline,,Floor,0
 World ,Nuclear,Baseline,,Saturation Point,20
-World ,Nuclear,Pathway,,Saturation Point,12
-World ,Nuclear,Pathway,,"Parameter b, min",43
+World ,Nuclear,Pathway,,Saturation Point,11
+World ,Nuclear,Pathway,,"Parameter b, min",0
 World ,Nuclear,Baseline,,"Parameter b, min",43
-World ,Nuclear,Pathway,,"Parameter b, max",43
+World ,Nuclear,Pathway,,"Parameter b, max",100
 World ,Nuclear,Baseline,,"Parameter b, max",43
 World ,Nuclear,Pathway,,"Parameter a, min",-0.02
 World ,Nuclear,Baseline,,"Parameter a, min",-0.1
@@ -6554,300 +6261,6 @@ World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | H
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Baseline,,Max annual growth,100
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Pathway,,Floor,0
 World ,Regenerative Agriculture | Grazing Lands & Animal Mgmt | Silvopasture | Historical analogy adoption,Baseline,,Floor,0
-AdvancedECO ,Renewables,Baseline,,Saturation Point,5
-AdvancedECO ,Renewables,Pathway,,Saturation Point,36
-AdvancedECO ,Renewables,Pathway,,"Parameter b, min",0
-AdvancedECO ,Renewables,Baseline,,"Parameter b, min",0
-AdvancedECO ,Renewables,Pathway,,"Parameter b, max",100
-AdvancedECO ,Renewables,Baseline,,"Parameter b, max",100
-AdvancedECO ,Renewables,Pathway,,"Parameter a, min",0
-AdvancedECO ,Renewables,Baseline,,"Parameter a, min",0
-AdvancedECO ,Renewables,Pathway,,"Parameter a, max",5
-AdvancedECO ,Renewables,Baseline,,"Parameter a, max",5
-AdvancedECO ,Renewables,Baseline,,Max annual growth,100
-AdvancedECO ,Renewables,Pathway,,Max annual growth,100
-AdvancedECO ,Renewables,Pathway,,Floor,0
-AdvancedECO ,Renewables,Baseline,,Floor,0
-AFRICA ,Renewables,Baseline,,Saturation Point,5
-AFRICA ,Renewables,Pathway,,Saturation Point,36
-AFRICA ,Renewables,Pathway,,"Parameter b, min",0
-AFRICA ,Renewables,Baseline,,"Parameter b, min",0
-AFRICA ,Renewables,Pathway,,"Parameter b, max",100
-AFRICA ,Renewables,Baseline,,"Parameter b, max",100
-AFRICA ,Renewables,Pathway,,"Parameter a, min",0
-AFRICA ,Renewables,Baseline,,"Parameter a, min",0
-AFRICA ,Renewables,Pathway,,"Parameter a, max",5
-AFRICA ,Renewables,Baseline,,"Parameter a, max",5
-AFRICA ,Renewables,Baseline,,Max annual growth,100
-AFRICA ,Renewables,Pathway,,Max annual growth,100
-AFRICA ,Renewables,Pathway,,Floor,0
-AFRICA ,Renewables,Baseline,,Floor,0
-ASEAN ,Renewables,Baseline,,Saturation Point,5
-ASEAN ,Renewables,Pathway,,Saturation Point,36
-ASEAN ,Renewables,Pathway,,"Parameter b, min",0
-ASEAN ,Renewables,Baseline,,"Parameter b, min",0
-ASEAN ,Renewables,Pathway,,"Parameter b, max",100
-ASEAN ,Renewables,Baseline,,"Parameter b, max",100
-ASEAN ,Renewables,Pathway,,"Parameter a, min",0
-ASEAN ,Renewables,Baseline,,"Parameter a, min",0
-ASEAN ,Renewables,Pathway,,"Parameter a, max",5
-ASEAN ,Renewables,Baseline,,"Parameter a, max",5
-ASEAN ,Renewables,Baseline,,Max annual growth,100
-ASEAN ,Renewables,Pathway,,Max annual growth,100
-ASEAN ,Renewables,Pathway,,Floor,0
-ASEAN ,Renewables,Baseline,,Floor,0
-ASIAPAC ,Renewables,Baseline,,Saturation Point,5
-ASIAPAC ,Renewables,Pathway,,Saturation Point,36
-ASIAPAC ,Renewables,Pathway,,"Parameter b, min",0
-ASIAPAC ,Renewables,Baseline,,"Parameter b, min",0
-ASIAPAC ,Renewables,Pathway,,"Parameter b, max",100
-ASIAPAC ,Renewables,Baseline,,"Parameter b, max",100
-ASIAPAC ,Renewables,Pathway,,"Parameter a, min",0
-ASIAPAC ,Renewables,Baseline,,"Parameter a, min",0
-ASIAPAC ,Renewables,Pathway,,"Parameter a, max",5
-ASIAPAC ,Renewables,Baseline,,"Parameter a, max",5
-ASIAPAC ,Renewables,Baseline,,Max annual growth,100
-ASIAPAC ,Renewables,Pathway,,Max annual growth,100
-ASIAPAC ,Renewables,Pathway,,Floor,0
-ASIAPAC ,Renewables,Baseline,,Floor,0
-BRAZIL ,Renewables,Baseline,,Saturation Point,5
-BRAZIL ,Renewables,Pathway,,Saturation Point,36
-BRAZIL ,Renewables,Pathway,,"Parameter b, min",0
-BRAZIL ,Renewables,Baseline,,"Parameter b, min",0
-BRAZIL ,Renewables,Pathway,,"Parameter b, max",100
-BRAZIL ,Renewables,Baseline,,"Parameter b, max",100
-BRAZIL ,Renewables,Pathway,,"Parameter a, min",0
-BRAZIL ,Renewables,Baseline,,"Parameter a, min",0
-BRAZIL ,Renewables,Pathway,,"Parameter a, max",5
-BRAZIL ,Renewables,Baseline,,"Parameter a, max",5
-BRAZIL ,Renewables,Baseline,,Max annual growth,100
-BRAZIL ,Renewables,Pathway,,Max annual growth,100
-BRAZIL ,Renewables,Pathway,,Floor,0
-BRAZIL ,Renewables,Baseline,,Floor,0
-CHINA ,Renewables,Baseline,,Saturation Point,5
-CHINA ,Renewables,Pathway,,Saturation Point,36
-CHINA ,Renewables,Pathway,,"Parameter b, min",0
-CHINA ,Renewables,Baseline,,"Parameter b, min",0
-CHINA ,Renewables,Pathway,,"Parameter b, max",100
-CHINA ,Renewables,Baseline,,"Parameter b, max",100
-CHINA ,Renewables,Pathway,,"Parameter a, min",0
-CHINA ,Renewables,Baseline,,"Parameter a, min",0
-CHINA ,Renewables,Pathway,,"Parameter a, max",5
-CHINA ,Renewables,Baseline,,"Parameter a, max",5
-CHINA ,Renewables,Baseline,,Max annual growth,100
-CHINA ,Renewables,Pathway,,Max annual growth,100
-CHINA ,Renewables,Pathway,,Floor,0
-CHINA ,Renewables,Baseline,,Floor,0
-CSAM ,Renewables,Baseline,,Saturation Point,5
-CSAM ,Renewables,Pathway,,Saturation Point,36
-CSAM ,Renewables,Pathway,,"Parameter b, min",0
-CSAM ,Renewables,Baseline,,"Parameter b, min",0
-CSAM ,Renewables,Pathway,,"Parameter b, max",100
-CSAM ,Renewables,Baseline,,"Parameter b, max",100
-CSAM ,Renewables,Pathway,,"Parameter a, min",0
-CSAM ,Renewables,Baseline,,"Parameter a, min",0
-CSAM ,Renewables,Pathway,,"Parameter a, max",5
-CSAM ,Renewables,Baseline,,"Parameter a, max",5
-CSAM ,Renewables,Baseline,,Max annual growth,100
-CSAM ,Renewables,Pathway,,Max annual growth,100
-CSAM ,Renewables,Pathway,,Floor,0
-CSAM ,Renewables,Baseline,,Floor,0
-DevelopingECO ,Renewables,Baseline,,Saturation Point,5
-DevelopingECO ,Renewables,Pathway,,Saturation Point,36
-DevelopingECO ,Renewables,Pathway,,"Parameter b, min",0
-DevelopingECO ,Renewables,Baseline,,"Parameter b, min",0
-DevelopingECO ,Renewables,Pathway,,"Parameter b, max",100
-DevelopingECO ,Renewables,Baseline,,"Parameter b, max",100
-DevelopingECO ,Renewables,Pathway,,"Parameter a, min",0
-DevelopingECO ,Renewables,Baseline,,"Parameter a, min",0
-DevelopingECO ,Renewables,Pathway,,"Parameter a, max",5
-DevelopingECO ,Renewables,Baseline,,"Parameter a, max",5
-DevelopingECO ,Renewables,Baseline,,Max annual growth,100
-DevelopingECO ,Renewables,Pathway,,Max annual growth,100
-DevelopingECO ,Renewables,Pathway,,Floor,0
-DevelopingECO ,Renewables,Baseline,,Floor,0
-EU ,Renewables,Baseline,,Saturation Point,5
-EU ,Renewables,Pathway,,Saturation Point,36
-EU ,Renewables,Pathway,,"Parameter b, min",0
-EU ,Renewables,Baseline,,"Parameter b, min",0
-EU ,Renewables,Pathway,,"Parameter b, max",100
-EU ,Renewables,Baseline,,"Parameter b, max",100
-EU ,Renewables,Pathway,,"Parameter a, min",0
-EU ,Renewables,Baseline,,"Parameter a, min",0
-EU ,Renewables,Pathway,,"Parameter a, max",5
-EU ,Renewables,Baseline,,"Parameter a, max",5
-EU ,Renewables,Baseline,,Max annual growth,100
-EU ,Renewables,Pathway,,Max annual growth,100
-EU ,Renewables,Pathway,,Floor,0
-EU ,Renewables,Baseline,,Floor,0
-EUR ,Renewables,Baseline,,Saturation Point,5
-EUR ,Renewables,Pathway,,Saturation Point,36
-EUR ,Renewables,Pathway,,"Parameter b, min",0
-EUR ,Renewables,Baseline,,"Parameter b, min",0
-EUR ,Renewables,Pathway,,"Parameter b, max",100
-EUR ,Renewables,Baseline,,"Parameter b, max",100
-EUR ,Renewables,Pathway,,"Parameter a, min",0
-EUR ,Renewables,Baseline,,"Parameter a, min",0
-EUR ,Renewables,Pathway,,"Parameter a, max",5
-EUR ,Renewables,Baseline,,"Parameter a, max",5
-EUR ,Renewables,Baseline,,Max annual growth,100
-EUR ,Renewables,Pathway,,Max annual growth,100
-EUR ,Renewables,Pathway,,Floor,0
-EUR ,Renewables,Baseline,,Floor,0
-EURASIA ,Renewables,Baseline,,Saturation Point,5
-EURASIA ,Renewables,Pathway,,Saturation Point,36
-EURASIA ,Renewables,Pathway,,"Parameter b, min",0
-EURASIA ,Renewables,Baseline,,"Parameter b, min",0
-EURASIA ,Renewables,Pathway,,"Parameter b, max",100
-EURASIA ,Renewables,Baseline,,"Parameter b, max",100
-EURASIA ,Renewables,Pathway,,"Parameter a, min",0
-EURASIA ,Renewables,Baseline,,"Parameter a, min",0
-EURASIA ,Renewables,Pathway,,"Parameter a, max",5
-EURASIA ,Renewables,Baseline,,"Parameter a, max",5
-EURASIA ,Renewables,Baseline,,Max annual growth,100
-EURASIA ,Renewables,Pathway,,Max annual growth,100
-EURASIA ,Renewables,Pathway,,Floor,0
-EURASIA ,Renewables,Baseline,,Floor,0
-INDIA ,Renewables,Baseline,,Saturation Point,5
-INDIA ,Renewables,Pathway,,Saturation Point,36
-INDIA ,Renewables,Pathway,,"Parameter b, min",0
-INDIA ,Renewables,Baseline,,"Parameter b, min",0
-INDIA ,Renewables,Pathway,,"Parameter b, max",100
-INDIA ,Renewables,Baseline,,"Parameter b, max",100
-INDIA ,Renewables,Pathway,,"Parameter a, min",0
-INDIA ,Renewables,Baseline,,"Parameter a, min",0
-INDIA ,Renewables,Pathway,,"Parameter a, max",5
-INDIA ,Renewables,Baseline,,"Parameter a, max",5
-INDIA ,Renewables,Baseline,,Max annual growth,100
-INDIA ,Renewables,Pathway,,Max annual growth,100
-INDIA ,Renewables,Pathway,,Floor,0
-INDIA ,Renewables,Baseline,,Floor,0
-JPN ,Renewables,Baseline,,Saturation Point,5
-JPN ,Renewables,Pathway,,Saturation Point,36
-JPN ,Renewables,Pathway,,"Parameter b, min",0
-JPN ,Renewables,Baseline,,"Parameter b, min",0
-JPN ,Renewables,Pathway,,"Parameter b, max",100
-JPN ,Renewables,Baseline,,"Parameter b, max",100
-JPN ,Renewables,Pathway,,"Parameter a, min",0
-JPN ,Renewables,Baseline,,"Parameter a, min",0
-JPN ,Renewables,Pathway,,"Parameter a, max",5
-JPN ,Renewables,Baseline,,"Parameter a, max",5
-JPN ,Renewables,Baseline,,Max annual growth,100
-JPN ,Renewables,Pathway,,Max annual growth,100
-JPN ,Renewables,Pathway,,Floor,0
-JPN ,Renewables,Baseline,,Floor,0
-ME ,Renewables,Baseline,,Saturation Point,5
-ME ,Renewables,Pathway,,Saturation Point,36
-ME ,Renewables,Pathway,,"Parameter b, min",0
-ME ,Renewables,Baseline,,"Parameter b, min",0
-ME ,Renewables,Pathway,,"Parameter b, max",100
-ME ,Renewables,Baseline,,"Parameter b, max",100
-ME ,Renewables,Pathway,,"Parameter a, min",0
-ME ,Renewables,Baseline,,"Parameter a, min",0
-ME ,Renewables,Pathway,,"Parameter a, max",5
-ME ,Renewables,Baseline,,"Parameter a, max",5
-ME ,Renewables,Baseline,,Max annual growth,100
-ME ,Renewables,Pathway,,Max annual growth,100
-ME ,Renewables,Pathway,,Floor,0
-ME ,Renewables,Baseline,,Floor,0
-NAM ,Renewables,Baseline,,Saturation Point,5
-NAM ,Renewables,Pathway,,Saturation Point,36
-NAM ,Renewables,Pathway,,"Parameter b, min",0
-NAM ,Renewables,Baseline,,"Parameter b, min",0
-NAM ,Renewables,Pathway,,"Parameter b, max",100
-NAM ,Renewables,Baseline,,"Parameter b, max",100
-NAM ,Renewables,Pathway,,"Parameter a, min",0
-NAM ,Renewables,Baseline,,"Parameter a, min",0
-NAM ,Renewables,Pathway,,"Parameter a, max",5
-NAM ,Renewables,Baseline,,"Parameter a, max",5
-NAM ,Renewables,Baseline,,Max annual growth,100
-NAM ,Renewables,Pathway,,Max annual growth,100
-NAM ,Renewables,Pathway,,Floor,0
-NAM ,Renewables,Baseline,,Floor,0
-NonOECD ,Renewables,Baseline,,Saturation Point,5
-NonOECD ,Renewables,Pathway,,Saturation Point,36
-NonOECD ,Renewables,Pathway,,"Parameter b, min",0
-NonOECD ,Renewables,Baseline,,"Parameter b, min",0
-NonOECD ,Renewables,Pathway,,"Parameter b, max",100
-NonOECD ,Renewables,Baseline,,"Parameter b, max",100
-NonOECD ,Renewables,Pathway,,"Parameter a, min",0
-NonOECD ,Renewables,Baseline,,"Parameter a, min",0
-NonOECD ,Renewables,Pathway,,"Parameter a, max",5
-NonOECD ,Renewables,Baseline,,"Parameter a, max",5
-NonOECD ,Renewables,Baseline,,Max annual growth,100
-NonOECD ,Renewables,Pathway,,Max annual growth,100
-NonOECD ,Renewables,Pathway,,Floor,0
-NonOECD ,Renewables,Baseline,,Floor,0
-OECD ,Renewables,Baseline,,Saturation Point,5
-OECD ,Renewables,Pathway,,Saturation Point,36
-OECD ,Renewables,Pathway,,"Parameter b, min",0
-OECD ,Renewables,Baseline,,"Parameter b, min",0
-OECD ,Renewables,Pathway,,"Parameter b, max",100
-OECD ,Renewables,Baseline,,"Parameter b, max",100
-OECD ,Renewables,Pathway,,"Parameter a, min",0
-OECD ,Renewables,Baseline,,"Parameter a, min",0
-OECD ,Renewables,Pathway,,"Parameter a, max",5
-OECD ,Renewables,Baseline,,"Parameter a, max",5
-OECD ,Renewables,Baseline,,Max annual growth,100
-OECD ,Renewables,Pathway,,Max annual growth,100
-OECD ,Renewables,Pathway,,Floor,0
-OECD ,Renewables,Baseline,,Floor,0
-RUS ,Renewables,Baseline,,Saturation Point,5
-RUS ,Renewables,Pathway,,Saturation Point,36
-RUS ,Renewables,Pathway,,"Parameter b, min",0
-RUS ,Renewables,Baseline,,"Parameter b, min",0
-RUS ,Renewables,Pathway,,"Parameter b, max",100
-RUS ,Renewables,Baseline,,"Parameter b, max",100
-RUS ,Renewables,Pathway,,"Parameter a, min",0
-RUS ,Renewables,Baseline,,"Parameter a, min",0
-RUS ,Renewables,Pathway,,"Parameter a, max",5
-RUS ,Renewables,Baseline,,"Parameter a, max",5
-RUS ,Renewables,Baseline,,Max annual growth,100
-RUS ,Renewables,Pathway,,Max annual growth,100
-RUS ,Renewables,Pathway,,Floor,0
-RUS ,Renewables,Baseline,,Floor,0
-SAFR ,Renewables,Baseline,,Saturation Point,5
-SAFR ,Renewables,Pathway,,Saturation Point,36
-SAFR ,Renewables,Pathway,,"Parameter b, min",0
-SAFR ,Renewables,Baseline,,"Parameter b, min",0
-SAFR ,Renewables,Pathway,,"Parameter b, max",100
-SAFR ,Renewables,Baseline,,"Parameter b, max",100
-SAFR ,Renewables,Pathway,,"Parameter a, min",0
-SAFR ,Renewables,Baseline,,"Parameter a, min",0
-SAFR ,Renewables,Pathway,,"Parameter a, max",5
-SAFR ,Renewables,Baseline,,"Parameter a, max",5
-SAFR ,Renewables,Baseline,,Max annual growth,100
-SAFR ,Renewables,Pathway,,Max annual growth,100
-SAFR ,Renewables,Pathway,,Floor,0
-SAFR ,Renewables,Baseline,,Floor,0
-US ,Renewables,Baseline,,Saturation Point,5
-US ,Renewables,Pathway,,Saturation Point,36
-US ,Renewables,Pathway,,"Parameter b, min",0
-US ,Renewables,Baseline,,"Parameter b, min",0
-US ,Renewables,Pathway,,"Parameter b, max",100
-US ,Renewables,Baseline,,"Parameter b, max",100
-US ,Renewables,Pathway,,"Parameter a, min",0
-US ,Renewables,Baseline,,"Parameter a, min",0
-US ,Renewables,Pathway,,"Parameter a, max",5
-US ,Renewables,Baseline,,"Parameter a, max",5
-US ,Renewables,Baseline,,Max annual growth,100
-US ,Renewables,Pathway,,Max annual growth,100
-US ,Renewables,Pathway,,Floor,0
-US ,Renewables,Baseline,,Floor,0
-World ,Renewables,Baseline,,Saturation Point,5
-World ,Renewables,Pathway,,Saturation Point,36
-World ,Renewables,Pathway,,"Parameter b, min",0
-World ,Renewables,Baseline,,"Parameter b, min",0
-World ,Renewables,Pathway,,"Parameter b, max",100
-World ,Renewables,Baseline,,"Parameter b, max",100
-World ,Renewables,Pathway,,"Parameter a, min",0
-World ,Renewables,Baseline,,"Parameter a, min",0
-World ,Renewables,Pathway,,"Parameter a, max",5
-World ,Renewables,Baseline,,"Parameter a, max",5
-World ,Renewables,Baseline,,Max annual growth,100
-World ,Renewables,Pathway,,Max annual growth,100
-World ,Renewables,Pathway,,Floor,0
-World ,Renewables,Baseline,,Floor,0
 AdvancedECO ,Solar,Baseline,,Saturation Point,5
 AdvancedECO ,Solar,Pathway,,Saturation Point,45
 AdvancedECO ,Solar,Pathway,,"Parameter b, min",0
@@ -7529,300 +6942,6 @@ World ,Solar thermal,Baseline,Industry,Floor,0
 World ,Solar thermal,Baseline,Buildings,Floor,0
 World ,Solar thermal,Pathway,Industry,Consumption:Generation,1
 World ,Solar thermal,Pathway,Buildings,Consumption:Generation,1
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-AdvancedECO ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-AdvancedECO ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-AFRICA ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-AFRICA ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-ASEAN ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-ASEAN ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-ASIAPAC ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-ASIAPAC ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-BRAZIL ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-BRAZIL ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-CHINA ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-CHINA ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-CSAM ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-CSAM ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-DevelopingECO ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-DevelopingECO ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-EU ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-EU ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-EU ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-EU ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-EU ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-EU ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-EU ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-EU ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-EU ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-EU ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-EU ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-EU ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-EU ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-EU ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-EUR ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-EUR ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-EURASIA ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-EURASIA ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-INDIA ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-INDIA ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-JPN ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-JPN ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-ME ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-ME ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-ME ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-ME ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-ME ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-ME ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-ME ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-ME ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-ME ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-ME ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-ME ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-ME ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-ME ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-ME ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-NAM ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-NAM ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-NonOECD ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-NonOECD ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-OECD ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-OECD ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-RUS ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-RUS ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-SAFR ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-SAFR ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-US ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-US ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-US ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-US ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-US ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-US ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-US ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-US ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-US ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-US ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-US ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-US ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-US ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-US ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
-World ,"Solar, tide, wave, fuel cell",Baseline,,Saturation Point,5
-World ,"Solar, tide, wave, fuel cell",Pathway,,Saturation Point,36
-World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, min",0
-World ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, min",0
-World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter b, max",100
-World ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter b, max",100
-World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, min",0
-World ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, min",0
-World ,"Solar, tide, wave, fuel cell",Pathway,,"Parameter a, max",5
-World ,"Solar, tide, wave, fuel cell",Baseline,,"Parameter a, max",5
-World ,"Solar, tide, wave, fuel cell",Baseline,,Max annual growth,100
-World ,"Solar, tide, wave, fuel cell",Pathway,,Max annual growth,100
-World ,"Solar, tide, wave, fuel cell",Pathway,,Floor,0
-World ,"Solar, tide, wave, fuel cell",Baseline,,Floor,0
 AdvancedECO ,Tide and wave,Baseline,,Saturation Point,5
 AdvancedECO ,Tide and wave,Pathway,,Saturation Point,10
 AdvancedECO ,Tide and wave,Pathway,,"Parameter b, min",0
@@ -8107,11 +7226,11 @@ World ,Tide and wave,Baseline,,Saturation Point,5
 World ,Tide and wave,Pathway,,Saturation Point,10
 World ,Tide and wave,Pathway,,"Parameter b, min",0
 World ,Tide and wave,Baseline,,"Parameter b, min",0
-World ,Tide and wave,Pathway,,"Parameter b, max",100
+World ,Tide and wave,Pathway,,"Parameter b, max",150
 World ,Tide and wave,Baseline,,"Parameter b, max",100
-World ,Tide and wave,Pathway,,"Parameter a, min",0
+World ,Tide and wave,Pathway,,"Parameter a, min",0.1
 World ,Tide and wave,Baseline,,"Parameter a, min",0
-World ,Tide and wave,Pathway,,"Parameter a, max",5
+World ,Tide and wave,Pathway,,"Parameter a, max",0.1
 World ,Tide and wave,Baseline,,"Parameter a, max",5
 World ,Tide and wave,Baseline,,Max annual growth,100
 World ,Tide and wave,Pathway,,Max annual growth,100

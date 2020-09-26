@@ -2,21 +2,20 @@
 
 import pandas as pd
 import numpy as np
+from podi.energy_supply import data_start_year, data_end_year, long_proj_end_year
+from main import energy_demand_pathway
+from main import energy_demand_baseline
 
 
 def results_analysis(
+    region,
     energy_demand_baseline,
-    energy_supply_baseline,
-    afolu_baseline,
-    emissions_baseline,
-    cdr_baseline,
-    climate_baseline,
     energy_demand_pathway,
-    energy_supply_pathway,
-    afolu_pathway,
-    emissions_pathway,
-    cdr_pathway,
-    climate_pathway,
+    elec_consump,
+    heat_consump2,
+    transport_consump2,
+    afolu_per_adoption,
+    cdr_needed_def,
 ):
 
     ###################
@@ -24,9 +23,6 @@ def results_analysis(
     ###################
 
     # region
-
-    acurve_start = 2020
-    acurve_end = 2100
 
     # GRID DECARB
 
@@ -36,9 +32,9 @@ def results_analysis(
         "Biomass and waste",
         "Geothermal",
         "Hydroelectricity",
-        "Nuclear",
         "Solar",
         "Wind",
+        "Tide and wave",
     ]
 
     grid_decarb = (
@@ -47,7 +43,6 @@ def results_analysis(
         .div(elec_consump.groupby("Region", axis=0, level=1).sum())
     )
     grid_decarb.columns = grid_decarb.columns.astype(int)
-    grid_decarb = grid_decarb.loc[:, acurve_start:acurve_end]
     grid_decarb.rename(index={"World ": "Grid"}, inplace=True)
 
     # endregion
@@ -108,7 +103,7 @@ def results_analysis(
         / 2.5
     )
 
-    transport_decarb = pd.DataFrame(transport_decarb).T.loc[:, acurve_start:acurve_end]
+    transport_decarb = pd.DataFrame(transport_decarb).T
     transport_decarb.rename(index={0: "Transport"}, inplace=True)
 
     # endregion
@@ -117,7 +112,6 @@ def results_analysis(
 
     # region
 
-    heat_consump2 = heat_consump2.loc[:, acurve_start:acurve_end]
     renewable_elec = (
         elec_consump.loc[
             region,
@@ -219,7 +213,7 @@ def results_analysis(
         ).cumsum()
     ) / 2
 
-    building_decarb = pd.DataFrame(building_decarb).T.loc[:, acurve_start:acurve_end]
+    building_decarb = pd.DataFrame(building_decarb).T
     building_decarb.rename(index={0: "Buildings"}, inplace=True)
 
     # endregion
@@ -227,8 +221,6 @@ def results_analysis(
     # INDUSTRY DECARB
 
     # region
-
-    heat_consump2 = heat_consump2.loc[:, acurve_start:acurve_end]
 
     industry_decarb = (
         energy_demand_pathway.loc[
@@ -259,7 +251,7 @@ def results_analysis(
             .sum()
             .values
         )
-    ) / 1.8 + (
+    ) + (
         (
             energy_demand_baseline.loc[
                 region,
@@ -326,9 +318,9 @@ def results_analysis(
             .sum()
             .sum()
         )
-    ).cumsum() / 1.45
+    ).cumsum() / 2
 
-    industry_decarb = pd.DataFrame(industry_decarb).T.loc[:, acurve_start:acurve_end]
+    industry_decarb = pd.DataFrame(industry_decarb).T
     industry_decarb.rename(index={0: "Industry"}, inplace=True)
 
     # endregion
@@ -357,7 +349,6 @@ def results_analysis(
         index={0: "Regenerative Agriculture"}
     )
     ra_decarb.columns = ra_decarb.columns.astype(int)
-    ra_decarb = ra_decarb.loc[:, acurve_start:acurve_end]
 
     # endregion
 
@@ -383,7 +374,6 @@ def results_analysis(
         index={0: "Forests & Wetlands"}
     )
     fw_decarb.columns = fw_decarb.columns.astype(int)
-    fw_decarb = fw_decarb.loc[:, acurve_start:acurve_end]
     fw_decarb.columns = ra_decarb.columns
 
     # endregion
@@ -393,20 +383,32 @@ def results_analysis(
     # region
 
     cdr_decarb = pd.DataFrame(
-        pd.DataFrame(CDR_NEEDED_DEF) / pd.DataFrame(CDR_NEEDED_DEF).max()
+        pd.DataFrame(cdr_needed_def) / pd.DataFrame(cdr_needed_def).max()
     ).T
-    cdr_decarb.columns = np.arange(acurve_start, acurve_end + 1)
+    cdr_decarb.columns = grid_decarb.columns
     cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
 
     # endregion
 
-    adoption_curves = grid_decarb.append(transport_decarb)
-    adoption_curves = adoption_curves.append(building_decarb)
-    adoption_curves = adoption_curves.append(industry_decarb)
-    adoption_curves = adoption_curves.append(ra_decarb)
-    adoption_curves = adoption_curves.append(fw_decarb)
-    adoption_curves = adoption_curves.append(cdr_decarb)
+    adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
+        transport_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        building_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        industry_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        ra_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        fw_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        cdr_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
 
     # endregion
 
-    return results_analysis
+    return adoption_curves

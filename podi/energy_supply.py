@@ -18,14 +18,12 @@ near_proj_start_year = data_end_year + 1
 near_proj_end_year = 2025
 long_proj_start_year = near_proj_end_year + 1
 long_proj_end_year = 2100
-
-# set energy oversupply proportion, to estimate CDR energy demand
 energy_oversupply_prop = 0.0
 
 
 def energy_supply(scenario, energy_demand):
-
     # region
+
     parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
@@ -52,36 +50,6 @@ def energy_supply(scenario, energy_demand):
         .droplevel(["Sector", "Scenario"])
     )
     transport_data.columns = transport_data.columns.astype(int)
-
-    elec_consump = []
-    elec_percent_adoption = []
-    elec_consump_cdr = []
-    heat_consump2 = []
-    heat_percent_adoption = []
-    heat_consump_cdr = []
-    transport_consump2 = []
-    transport_percent_adoption = []
-    transport_consump_cdr = []
-
-    for i in range(17, 19):
-        elec_consump = pd.DataFrame(elec_consump).append(
-            consump_total(iea_region_list[i], scenario)[0]
-        )
-        heat_consump2 = pd.DataFrame(heat_consump2).append(
-            heat_consump_total(iea_region_list[i], scenario)[0]
-        )
-        transport_consump2 = pd.DataFrame(transport_consump2).append(
-            transport_consump_total(iea_region_list[i], scenario)[0]
-        )
-        elec_percent_adoption = pd.DataFrame(elec_percent_adoption).append(
-            consump_total(iea_region_list[i], scenario)[1]
-        )
-        heat_percent_adoption = pd.DataFrame(heat_percent_adoption).append(
-            heat_consump_total(iea_region_list[i], scenario)[1]
-        )
-        transport_percent_adoption = pd.DataFrame(transport_percent_adoption).append(
-            transport_consump_total(iea_region_list[i], scenario)[1]
-        )
 
     # endregion
 
@@ -212,7 +180,7 @@ def energy_supply(scenario, energy_demand):
                 - 0.0014 * (x ** 9),
         """
 
-        return perc * 1.05
+        return perc
 
     # project electricity consumption met by a given technology
     def proj_elec_consump(region, scenario, proj_per_elec_consump):
@@ -693,6 +661,39 @@ def energy_supply(scenario, energy_demand):
 
     # endregion
 
+    # region
+    elec_consump = []
+    elec_per_adoption = []
+    elec_consump_cdr = []
+    heat_consump2 = []
+    heat_per_adoption = []
+    heat_consump_cdr = []
+    transport_consump2 = []
+    transport_per_adoption = []
+    transport_consump_cdr = []
+
+    for i in range(0, 1):
+        elec_consump = pd.DataFrame(elec_consump).append(
+            consump_total(iea_region_list[i], scenario)[0]
+        )
+        heat_consump2 = pd.DataFrame(heat_consump2).append(
+            heat_consump_total(iea_region_list[i], scenario)[0]
+        )
+        transport_consump2 = pd.DataFrame(transport_consump2).append(
+            transport_consump_total(iea_region_list[i], scenario)[0]
+        )
+        elec_per_adoption = pd.DataFrame(elec_per_adoption).append(
+            consump_total(iea_region_list[i], scenario)[1]
+        )
+        heat_per_adoption = pd.DataFrame(heat_per_adoption).append(
+            heat_consump_total(iea_region_list[i], scenario)[1]
+        )
+        transport_per_adoption = pd.DataFrame(transport_per_adoption).append(
+            transport_consump_total(iea_region_list[i], scenario)[1]
+        )
+
+    # endregion
+
     return (
         elec_consump,
         elec_per_adoption,
@@ -700,7 +701,7 @@ def energy_supply(scenario, energy_demand):
         heat_consump2,
         heat_per_adoption,
         heat_consump_cdr,
-        transport_consump,
+        transport_consump2,
         transport_per_adoption,
         transport_consump_cdr,
     )

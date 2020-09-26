@@ -65,9 +65,16 @@ STORAGE_PAIRINGS = {
 #  Primary public-facing functions  #
 #####################################
 
-def cdr_mix(cdr_reqs: list = util.CDR_NEEDED_DEF, grid_em: list = util.GRID_EM_DEF, heat_em: list = util.HEAT_EM_DEF,
-            transport_em: list = util.TRANSPORT_EM_DEF, fuel_em: list = util.FUEL_EM_DEF,
-            start: int = util.START_YEAR, end: int = util.END_YEAR) -> tuple:
+
+def cdr_mix(
+    cdr_reqs: list = util.cdr_needed_def,
+    grid_em: list = util.GRID_EM_DEF,
+    heat_em: list = util.HEAT_EM_DEF,
+    transport_em: list = util.TRANSPORT_EM_DEF,
+    fuel_em: list = util.FUEL_EM_DEF,
+    start: int = util.START_YEAR,
+    end: int = util.END_YEAR,
+) -> tuple:
     """
     Main exported function of the module. Generates a nearly cost-optimal mix
     of CDR technologies to meet the required yearly CDR targets, optimized for
@@ -93,8 +100,8 @@ def cdr_mix(cdr_reqs: list = util.CDR_NEEDED_DEF, grid_em: list = util.GRID_EM_D
     _setup_emissions_intensities(grid_em, heat_em, transport_em, fuel_em)
 
     tech_mix = []  # list of {tech --> deployment} in each year
-    cost = []      # list of cost (float) in each year
-    energy = []    # list of (elec, heat, transport, non-transport fuel) in each year
+    cost = []  # list of cost (float) in each year
+    energy = []  # list of (elec, heat, transport, non-transport fuel) in each year
 
     # 1. greedily compute locally optimal CDR mix to cover first year
     projects = _advance_cdr_mix(cdr_reqs[0], start)
@@ -145,26 +152,36 @@ def cdr_credit(yr: int) -> float:
     return max(0.0, 3.656 + 9.167 * (yr - util.START_YEAR))
 
 
-def get_prospective_cost(capture_project: abstract_types.CDRStrategy, yr: int,
-                         storage_pairing: abstract_types.CDRStrategy = None):
-    """ Calculates the prospective levelized $/tCO2 cost of a CDR project over its
+def get_prospective_cost(
+    capture_project: abstract_types.CDRStrategy,
+    yr: int,
+    storage_pairing: abstract_types.CDRStrategy = None,
+):
+    """Calculates the prospective levelized $/tCO2 cost of a CDR project over its
     lifetime, adjusted for incidental emissions, carbon credits, and CO2 storage costs.
     :param capture_project: the specific capture project in question
     :param yr: deployment year of the project as an absolute year number, e.g. 2020
-    :param storage_pairing: the CO2 storage project paired with the capture project, if any """
+    :param storage_pairing: the CO2 storage project paired with the capture project, if any"""
     # credits reduce cost by: sum from y=yr to yr+lifetime of credit_price(y)/(1 + d)^(y-y0)
     credit_reduction = 0
     for y in range(yr, yr + capture_project.get_levelizing_lifetime()):
         credit_reduction += cdr_credit(y) / ((1 + util.DISCOUNT_RATE) ** (y - yr))
     credit_reduction /= capture_project.get_levelizing_lifetime()
-    return capture_project.get_adjusted_levelized_cost() + \
-        (storage_pairing.get_adjusted_levelized_cost() if storage_pairing is not None else 0) \
+    return (
+        capture_project.get_adjusted_levelized_cost()
+        + (
+            storage_pairing.get_adjusted_levelized_cost()
+            if storage_pairing is not None
+            else 0
+        )
         - credit_reduction
+    )
 
 
 ##################################
 #  Helper functions for cdr_mix  #
 ##################################
+
 
 def _setup_emissions_intensities(grid_em, heat_em, transport_em, fuel_em):
     """ Standardizes units and communicates emissions intensities to CDRStrategy hierarchy """
@@ -180,22 +197,24 @@ def _setup_emissions_intensities(grid_em, heat_em, transport_em, fuel_em):
     abstract_types.CDRStrategy.HEAT_EM = heat_em
     abstract_types.CDRStrategy.TRANSPORT_EM = transport_em
     abstract_types.CDRStrategy.FUEL_EM = fuel_em
-    abstract_types.CDRStrategy.DEFAULT_EM_BASIS = list(zip(grid_em, heat_em, transport_em, fuel_em))
+    abstract_types.CDRStrategy.DEFAULT_EM_BASIS = list(
+        zip(grid_em, heat_em, transport_em, fuel_em)
+    )
 
 
 def _reset_tech_adopt_limits():
-    """ Called when advancing years in the CDR adoption game.
-    Allows more of each CDR technology to be deployed in each year. """
+    """Called when advancing years in the CDR adoption game.
+    Allows more of each CDR technology to be deployed in each year."""
     for tech in CDR_TECHS:
         tech.reset_adoption_limits()
 
 
 def _set_up_pq(yr):
-    """ Creates a priority queue containing each capture/storage pairing,
-     enqueued by adjusted levelized cost for the given years.
-     Note that we use the levelized cost (sticker price) for CDR comparison here,
-     but it is the true curr_year_cost that actually gets billed and tallied
-     in _add_next_year. """
+    """Creates a priority queue containing each capture/storage pairing,
+    enqueued by adjusted levelized cost for the given years.
+    Note that we use the levelized cost (sticker price) for CDR comparison here,
+    but it is the true curr_year_cost that actually gets billed and tallied
+    in _add_next_year."""
     options = PriorityQueue()
     for tech in CDR_TECHS:
         # Enqueue all tech/storage pairings with initial costs as priority
@@ -208,7 +227,9 @@ def _set_up_pq(yr):
         tech.remaining_deployment += util.PROJECT_SIZE
 
         # pair capture tech with all listed available storage pairings
-        storage_pairings = STORAGE_PAIRINGS.get(tech, [(None, [])])  # data is [(storage tech, [init params])
+        storage_pairings = STORAGE_PAIRINGS.get(
+            tech, [(None, [])]
+        )  # data is [(storage tech, [init params])
         for storage_info in storage_pairings:
             if storage_info[0] is not None:
                 try:  # deploy test storage project
@@ -236,7 +257,9 @@ def _advance_cdr_mix(addl_cdr, yr) -> set:
     technology reaches its annual deployment limit or until it is no longer the
     cheapest technology.
     """
-    print(f'\r** CDR OPTIMIZATION ** Starting _advance_cdr_mix for year {yr}...', end='')
+    print(
+        f"\r** CDR OPTIMIZATION ** Starting _advance_cdr_mix for year {yr}...", end=""
+    )
     new_projects = set()
     options = _set_up_pq(yr)
 
@@ -244,7 +267,9 @@ def _advance_cdr_mix(addl_cdr, yr) -> set:
     while mtco2_deployed < addl_cdr:
         # get cheapest project type
         try:
-            next_project_type = options.get_nowait()[1]  # (cost, (capture class, storage class, [storage init params]))
+            next_project_type = options.get_nowait()[
+                1
+            ]  # (cost, (capture class, storage class, [storage init params]))
         except Empty:
             # there are no more available project types -- we're out of CDR for this year
             if util.ACCEPT_DEFICIT:
@@ -253,10 +278,12 @@ def _advance_cdr_mix(addl_cdr, yr) -> set:
                 new_projects.add((deficit_proj, None))
                 mtco2_deployed += deficit_proj.capacity
             else:
-                raise util.NotEnoughCDRError(f'There was not enough CDR available to meet the {addl_cdr} MtCO2 '
-                                             f'required in year {yr}. Only {mtco2_deployed} MtCO2 of CDR was deployed. '
-                                             f'To allow the model to run to completion anyways under these conditions, '
-                                             f'set the cdr_util.ACCEPT_DEFICIT flag to True.')
+                raise util.NotEnoughCDRError(
+                    f"There was not enough CDR available to meet the {addl_cdr} MtCO2 "
+                    f"required in year {yr}. Only {mtco2_deployed} MtCO2 of CDR was deployed. "
+                    f"To allow the model to run to completion anyways under these conditions, "
+                    f"set the cdr_util.ACCEPT_DEFICIT flag to True."
+                )
         else:
             # generate project instance
             try:
@@ -270,7 +297,12 @@ def _advance_cdr_mix(addl_cdr, yr) -> set:
             mtco2_deployed += capture_proj.capacity
 
             # re-enqueue it in options with its new adjusted cost
-            options.put((get_prospective_cost(capture_proj, yr, storage_proj), next_project_type))
+            options.put(
+                (
+                    get_prospective_cost(capture_proj, yr, storage_proj),
+                    next_project_type,
+                )
+            )
 
     return new_projects
 
@@ -285,10 +317,14 @@ def _generate_next_project(next_project_type: util.PQEntry) -> tuple:
     # deploy paired storage project, if needed and available
     if next_project_type.storage_class:
         try:
-            storage_proj = next_project_type.storage_class(capture_proj, *next_project_type.storage_params)
+            storage_proj = next_project_type.storage_class(
+                capture_proj, *next_project_type.storage_params
+            )
         except util.StrategyNotAvailableError as e2:
             # undo capture deployment
-            next_project_type.capture_class.remaining_deployment += capture_proj.capacity
+            next_project_type.capture_class.remaining_deployment += (
+                capture_proj.capacity
+            )
             # can't use this project type anymore due to unavailability of storage, so don't re-enqueue
             raise e2
     else:
@@ -297,7 +333,14 @@ def _generate_next_project(next_project_type: util.PQEntry) -> tuple:
     return capture_proj, storage_proj
 
 
-def _add_next_year(projects: set, tech_mix: list, cost: list, energy: list, yr: int, scaling_factor: float = 1):
+def _add_next_year(
+    projects: set,
+    tech_mix: list,
+    cost: list,
+    energy: list,
+    yr: int,
+    scaling_factor: float = 1,
+):
     """
     Updates tech_mix, cost, and energy with information about the next year's projects.
     :param projects: the projects running in the next year (set of (capture_proj, storage_proj))
@@ -316,14 +359,22 @@ def _add_next_year(projects: set, tech_mix: list, cost: list, energy: list, yr: 
         # note that capacity is in MtCO2, not tCO2 (10 ** 6), but we return in MM$ (10 ** -6), so there is no conversion
         # Although adjusted_levelized_cost was used for the basis of comparing the cheapest technologies,
         # we use adjusted_curr_year_cost here to reflect the amounts that are actually billed in each year.
-        new_cost += proj[0].get_adjusted_curr_year_cost() * proj[0].capacity + \
-            (proj[1].get_adjusted_curr_year_cost() * proj[1].capacity if proj[1] is not None else 0)
+        new_cost += proj[0].get_adjusted_curr_year_cost() * proj[0].capacity + (
+            proj[1].get_adjusted_curr_year_cost() * proj[1].capacity
+            if proj[1] is not None
+            else 0
+        )
 
         # 2. add project's energy use
         # note that capacity is in MtCO2, not tCO2 (10 ** 6) but we want TWh, not kWh (10 ** -9), hence the (10 ** -3)
-        p0_energy = tuple(x * proj[0].capacity / 1000 for x in proj[0].get_adjusted_energy())
-        p1_energy = tuple(x * proj[1].capacity / 1000 for x in proj[1].get_adjusted_energy()) if proj[1] is not None \
+        p0_energy = tuple(
+            x * proj[0].capacity / 1000 for x in proj[0].get_adjusted_energy()
+        )
+        p1_energy = (
+            tuple(x * proj[1].capacity / 1000 for x in proj[1].get_adjusted_energy())
+            if proj[1] is not None
             else (0, 0, 0, 0)
+        )
         for i in range(len(new_energy)):
             new_energy[i] += p0_energy[i] + p1_energy[i]
 
@@ -331,20 +382,25 @@ def _add_next_year(projects: set, tech_mix: list, cost: list, energy: list, yr: 
         # (assuming that the reduction in utilization is applied evenly across all projects regardless of cost)
         classes = proj[0].__class__, proj[1].__class__ if proj[1] is not None else None
         if classes in new_tech_deployment:
-            new_tech_deployment[classes] += scaling_factor * proj[0].capacity  # only count capture project capacity
+            new_tech_deployment[classes] += (
+                scaling_factor * proj[0].capacity
+            )  # only count capture project capacity
         else:
             new_tech_deployment[classes] = scaling_factor * proj[0].capacity
 
     # 4. Add info for new year to cost, energy, and tech_mix.
     # If there is too much CDR installed (scaling_factor < 1), then don't count the excess variable O&M/energy use
     # but still pay the CAPEX and fixed O&M for those non-operating projects (we assume this is 1/2 of total cost)
-    cost.append(new_cost * (1 + 2 * scaling_factor) / 2 - sum(new_tech_deployment.values()) * cdr_credit(yr))
+    cost.append(
+        new_cost * (1 + 2 * scaling_factor) / 2
+        - sum(new_tech_deployment.values()) * cdr_credit(yr)
+    )
     energy.append(tuple(x * scaling_factor for x in new_energy))
     tech_mix.append(new_tech_deployment)
 
 
 def _retire_projects(projects: set) -> int:
-    """ Removes projects that have reached the end of their lifetimes as well as the
+    """Removes projects that have reached the end of their lifetimes as well as the
     oldest projects from the mix for technologies with negative adoption curves in
     order to not exceed those technologies' potential adoption.
     The oldest projects technologies that are scaling down are retired here rather
@@ -353,7 +409,9 @@ def _retire_projects(projects: set) -> int:
     (2) for NCS - the specific projects/CO2 sinks that are reaching saturation
     :return: The CDR capacity that was retired (MtCO2/yr)
     """
-    projects_by_age = sorted(projects, key=lambda p: p[0].age, reverse=True)  # sorted by capture proj age, oldest first
+    projects_by_age = sorted(
+        projects, key=lambda p: p[0].age, reverse=True
+    )  # sorted by capture proj age, oldest first
     adoption_limits = {tech: tech.adopt_limits() for tech in CDR_TECHS}
     if util.ACCEPT_DEFICIT:
         adoption_limits[ecr.Deficit] = ecr.Deficit.adopt_limits()
@@ -363,7 +421,10 @@ def _retire_projects(projects: set) -> int:
     for proj_pair in projects_by_age:
         capture_proj = proj_pair[0]
         capture_proj.advance_age()
-        if adoption_limits[capture_proj.__class__] < 0 or capture_proj.should_be_retired():
+        if (
+            adoption_limits[capture_proj.__class__] < 0
+            or capture_proj.should_be_retired()
+        ):
             proj_capacity = _retire_project_pair(proj_pair, retiring_projects)
             retiring_capacity += proj_capacity
             adoption_limits[capture_proj.__class__] += proj_capacity
@@ -373,8 +434,8 @@ def _retire_projects(projects: set) -> int:
 
 
 def _retire_project_pair(proj_pair, retiring_projects) -> int:
-    """ Retires the capture/storage projects in the given project pair.
-    Adds the pair to retiring_projects. Returns the capacity retired. """
+    """Retires the capture/storage projects in the given project pair.
+    Adds the pair to retiring_projects. Returns the capacity retired."""
     retiring_capacity = proj_pair[0].capacity
     retiring_projects.add(proj_pair)
     proj_pair[0].retire()
@@ -395,20 +456,26 @@ def _get_geologic_storage_leakage(tech_mix):
 def main():
     # Test run
     result = cdr_mix()
-    print('\n\n === CDR MODULE OUTPUT === \n')
+    print("\n\n === CDR MODULE OUTPUT === \n")
     for yr in range(len(result[0])):
-        print(f'** Year {yr + util.START_YEAR} **')
-        print('Technologies: ')
+        print(f"** Year {yr + util.START_YEAR} **")
+        print("Technologies: ")
         for k, v in sorted(result[0][yr].items(), key=lambda item: item[0][0].__name__):
-            print(f'  {k[0].__name__} --> {k[1].__name__ if k[1] else "(None)"}: {round(v, 2)}')
-        print(f'Total CDR deployed (MtCO2/yr): {round(sum(result[0][yr].values()), 2)}')
-        print(f'Total cost (MM$), including carbon credit benefit: {round(result[1][yr], 2)}')
-        print(f'  $/tCO2: {round(result[1][yr] / util.CDR_NEEDED_DEF[yr], 2)}')
-        print('Energy use: ')
-        for i, energy in enumerate(['Electricity (TWh)', 'Heat (TWh)', 'Transport (TWh)', 'Fuels (TWh)']):
-            print(f'  {energy}: {round(result[2][yr][i], 2)}')
+            print(
+                f'  {k[0].__name__} --> {k[1].__name__ if k[1] else "(None)"}: {round(v, 2)}'
+            )
+        print(f"Total CDR deployed (MtCO2/yr): {round(sum(result[0][yr].values()), 2)}")
+        print(
+            f"Total cost (MM$), including carbon credit benefit: {round(result[1][yr], 2)}"
+        )
+        print(f"  $/tCO2: {round(result[1][yr] / util.cdr_needed_def[yr], 2)}")
+        print("Energy use: ")
+        for i, energy in enumerate(
+            ["Electricity (TWh)", "Heat (TWh)", "Transport (TWh)", "Fuels (TWh)"]
+        ):
+            print(f"  {energy}: {round(result[2][yr][i], 2)}")
         print()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

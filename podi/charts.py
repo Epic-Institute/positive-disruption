@@ -11,6 +11,12 @@ from podi.data.iea_weo_etl import iea_region_list
 import pyam
 from scipy.interpolate import interp1d, UnivariateSpline
 from matplotlib.animation import FuncAnimation
+from podi.energy_supply import (
+    data_end_year,
+    data_start_year,
+    long_proj_start_year,
+    long_proj_end_year,
+)
 
 # endregion
 
@@ -22,7 +28,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     #########################################################
 
     # region
-    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 19)
+    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 91)
 
     color = pd.DataFrame(
         {
@@ -53,26 +59,43 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
 
-    for i in range(0, len(iea_region_list)):
+    axis_label = [
+        "% TFC met by renewables",
+        "Buildings electricity demand as % \of Buildings TFC",
+        "Transport electricity demand as % \of Transport TFC",
+        "Industry electricity demand as % \of Industry TFC",
+        "MHa",
+        "MHa",
+        "GtCO2 removed",
+    ]
+
+    for i in range(0, 1):
         for j in range(0, len(adoption_curves.index)):
             fig = interp1d(
                 adoption_curves.columns.values, adoption_curves.iloc[j], kind="cubic"
             )
-            plt.figure(j)
-            plt.plot(xnew, fig(xnew) * 100, linestyle="--")
-            plt.ylabel("% Adoption")
+            fig2, ax = plt.subplots()
+            y = fig(xnew) * 100
+            ax.plot(xnew, y, linestyle="--", color=(0.560, 0.792, 0.740))
+            ax.plot(
+                xnew[0 : (data_end_year - data_start_year) + 1],
+                y[0 : (data_end_year - data_start_year) + 1],
+                linestyle="-",
+                color=(0, 0, 0),
+            )
+            ax.set_ylabel("% Adoption")
+            # secax = ax.secondary_yaxis("right")
+            # secax.set_ylabel(axis_label[j])
             plt.xlim([adoption_curves.columns.min(), adoption_curves.columns.max()])
+            plt.ylim(0, 105)
+            plt.grid(which="major", linestyle=":", axis="y")
             plt.title(
                 "Percent of Total PD Adoption, "
                 + adoption_curves.index[j]
                 + ", "
                 + iea_region_list[i]
             )
-            """
-            ax2 = ax1.twinx()
-            ax2.set_ylabel('Label')
-            ax2.plot()
-            """
+
     # endregion
 
     ####################################
@@ -80,6 +103,21 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     ####################################
 
     # region
+
+    color = (
+        (0.560, 0.516, 0.640),
+        (0.488, 0.672, 0.736),
+        (0.904, 0.620, 0.384),
+        (0.384, 0.460, 0.560),
+        (0.536, 0.576, 0.432),
+        (0.572, 0.792, 0.744),
+        (0.688, 0.472, 0.460),
+        (0.928, 0.828, 0.824),
+        (0.748, 0.232, 0.204),
+        (0.384, 0.664, 0.600),
+        (0.284, 0.700, 0.936),
+        (0.999, 0.976, 0.332),
+    )
 
     # https://pyam-iamc.readthedocs.io/en/stable/examples/plot_stack.html#sphx-glr-examples-plot-stack-py
 
@@ -625,7 +663,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # Line plot (%)
 
     for i in range(0, len(iea_region_list)):
-        fig = elec_percent_adoption.loc[iea_region_list[i], slice(None)]
+        fig = elec_per_adoption.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(tech_list)]
         plt.figure(i)
         plt.plot(fig.columns.astype(int).values, fig.T * 100)
@@ -643,7 +681,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # Stacked 100% plot
 
     for i in range(0, len(iea_region_list)):
-        fig = elec_percent_adoption.loc[iea_region_list[i], slice(None)]
+        fig = elec_per_adoption.loc[iea_region_list[i], slice(None)]
         fig = fig[fig.index.isin(tech_list)]
         plt.figure(i)
         plt.stackplot(fig.columns.astype(int).values, fig * 100, labels=fig.index)

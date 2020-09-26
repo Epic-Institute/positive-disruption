@@ -11,6 +11,7 @@ metric_list = [
     "Nuclear",
     "Solar",
     "Wind",
+    "Tide and wave",
 ]
 
 

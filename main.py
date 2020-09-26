@@ -4,20 +4,19 @@
 
 from podi.socioeconomic import socioeconomic
 from podi.energy_demand import energy_demand
+from podi.energy_supply import energy_supply
 from podi.afolu import afolu
 import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
-from cdr.cdr_util import CDR_NEEDED_DEF
+from cdr.cdr_util import cdr_needed_def
 from podi.charts import charts
-
-# from podi.afolu import afolu
+from podi.data.iea_weo_etl import iea_region_list
+from podi.adoption_curve import adoption_curve
 from podi.emissions import emissions
 from cdr.cdr_main import cdr_mix
 
 # from podi.climate import climate
-# from podi.results_analysis import results_analysis
-
 
 pd.set_option("mode.use_inf_as_na", True)
 
@@ -79,14 +78,26 @@ energy_demand_pathway = energy_demand(
 
 (
     elec_consump_baseline,
-    elec_per_consump_baseline,
+    elec_per_adoption_baseline,
     elec_consump_cdr_baseline,
+    heat_consump_baseline,
+    heat_per_adoption_baseline,
+    heat_consump_cdr_baseline,
+    transport_consump_baseline,
+    transport_per_adoption_baseline,
+    transport_consump_cdr_baseline,
 ) = energy_supply("Baseline", energy_demand_baseline)
 
 (
     elec_consump_pathway,
-    elec_per_consump_pathway,
+    elec_per_adoption_pathway,
     elec_consump_cdr_pathway,
+    heat_consump_pathway,
+    heat_per_adoption_pathway,
+    heat_consump_cdr_pathway,
+    transport_consump_pathway,
+    transport_per_adoption_pathway,
+    transport_consump_cdr_pathway,
 ) = energy_supply("Pathway", energy_demand_pathway)
 
 # endregion
@@ -97,8 +108,8 @@ energy_demand_pathway = energy_demand(
 
 # region
 
-afolu_baseline = afolu("Baseline")
-afolu_pathway = afolu("Pathway")
+afolu_baseline, afolu_per_adoption_baseline = afolu("Baseline")
+afolu_pathway, afolu_per_adoption_pathway = afolu("Pathway")
 
 afolu_em_mitigated = afolu_pathway - afolu_baseline
 
@@ -171,24 +182,17 @@ climate_pathway = climate(emissions_pathway, cdr_pathway)
 
 # region
 
-results_analysis = results_analysis(
-    [
+for i in range(0, 1):
+    adoption_curves = results_analysis(
+        iea_region_list[i],
         energy_demand_baseline,
-        energy_supply_baseline,
-        afolu_baseline,
-        emissions_baseline,
-        cdr_baseline,
-        climate_baseline,
-    ],
-    [
         energy_demand_pathway,
-        energy_supply_pathway,
-        afolu_pathway,
-        emissions_pathway,
-        cdr_pathway,
-        climate_pathway,
-    ],
-)
+        elec_consump_pathway,
+        heat_consump_pathway,
+        transport_consump_pathway,
+        afolu_per_adoption_pathway,
+        cdr_needed_def,
+    )
 
 # endregion
 

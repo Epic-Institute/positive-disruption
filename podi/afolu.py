@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 import pandas as pd
-from podi.data.iea_weo_etl import iea_region_list
-import numpy
 from podi.adoption_curve import adoption_curve
 
 
@@ -13,6 +11,7 @@ def afolu(scenario):
     afolu = afolu.loc[afolu["Scenario"] == scenario]
 
     afolu = afolu.loc[afolu["Region"] == "World "]
+    region = "World "
 
     # get parameters from historical analogy adoption and compute adoption curve
     proj_per_adoption = (
@@ -87,4 +86,4 @@ def afolu(scenario):
     afolu_adoption = proj_adoption.droplevel(["Scenario"])
     afolu_per_adoption = per.droplevel(["Scenario"])
 
-    return afolu_adoption
+    return afolu_adoption, afolu_per_adoption

@@ -7,7 +7,7 @@ TPED,Nuclear,Hydroelectricity,Hydro,Primary Energy | Nuclear,Hydroelectric plant
 TPED,Hydro,Non-hydroelectric renewables,Onshore wind | Offshore wind | Utility-scale PV | Small-scale PV | Geothermal | Biomass,Primary Energy | Hydro,
 TPED,Bioenergy,Geothermal,Geothermal,Primary Energy | Biomass,Geothermal electric plant
 TPED,Other renewables,"Solar, tide, wave, fuel cell",Utility-scale PV | Small-scale PV | Other,Primary Energy | Non-Biomass Renewables,
-Power sector,Power sector,Tide and wave,Other,Secondary Energy | Electricity,Tidal turbine
+Power sector,Power sector,Tide and wave,Hydro,Secondary Energy | Electricity,Tidal turbine
 Power sector,Coal,Biomass and waste,Biomass,Secondary Energy | Electricity | Coal,
 Power sector,Oil,Hydroelectric pumped storage,Pumped hydro,Secondary Energy | Electricity | Oil,
 Power sector,Natural gas,Wind,Onshore wind,Secondary Energy | Electricity | Gas,Onshore wind
@@ -19,7 +19,7 @@ Other energy sector,Other energy sector,Wind,Offshore wind,Secondary Energy | Li
 Other energy sector,Electricity,Solar,Small-scale PV,Secondary Energy | Electricity,Res. roof PV system
 TFC,Total final consumption,Solar,Small-scale PV,Final Energy,Com/gov/Indus roof PV system
 TFC,Coal,Solar,Utility-scale PV,Final Energy | Coal,CSP plant
-TFC,Oil,Tide and wave,Other,Final Energy | Oil,Wave device
+TFC,Oil,Tide and wave,Hydro,Final Energy | Oil,Wave device
 TFC,Natural gas,,,Final Energy | Gases,
 TFC,Electricity,,,Final Energy | Electricity,
 TFC,Heat,,,Final Energy | Heat,
