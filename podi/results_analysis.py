@@ -9,8 +9,8 @@ def results_analysis(
     energy_demand_baseline,
     energy_demand_pathway,
     elec_consump,
-    heat_consump2,
-    transport_consump2,
+    heat_consump_pathway,
+    transport_consump_pathway,
     afolu_per_adoption,
     cdr_needed_def,
 ):
@@ -60,12 +60,12 @@ def results_analysis(
 
     # region
 
-    transport_consump2.columns = transport_consump2.columns.astype(int)
+    transport_consump_pathway.columns = transport_consump_pathway.columns.astype(int)
     energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
     energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
     transport_decarb = (
-        pd.DataFrame(transport_consump2.loc[region, "Biofuels"])
+        pd.DataFrame(transport_consump_pathway.loc[region, "Biofuels"])
         .T.droplevel(level=0)
         .append(energy_demand_pathway.loc[region, "Transport", "Electricity"])
         .sum()
@@ -79,41 +79,95 @@ def results_analysis(
                         "Electricity",
                         "Biofuels",
                         "Other fuels",
-                        "International bunkers",
                     ],
-                ].sum()
+                ]
+                .sum()
+                .add(
+                    energy_demand_pathway.loc[
+                        "World ", "Transport", ["International bunkers"]
+                    ]
+                )
+                .sum()
             )
         )
+        / 0.9
         + (
             (
                 energy_demand_baseline.loc[
                     region,
                     "Transport",
-                    ["Oil", "Electricity", "Biofuels"],
-                ].sum()
+                    [
+                        "Oil",
+                        "Electricity",
+                        "Biofuels",
+                        "Other fuels",
+                    ],
+                ]
+                .sum()
+                .add(
+                    energy_demand_pathway.loc[
+                        "World ", "Transport", ["International bunkers"]
+                    ]
+                )
+                .sum()
                 - energy_demand_pathway.loc[
                     region,
                     "Transport",
-                    ["Oil", "Electricity", "Biofuels"],
-                ].sum()
+                    [
+                        "Oil",
+                        "Electricity",
+                        "Biofuels",
+                        "Other fuels",
+                    ],
+                ]
+                .sum()
+                .add(
+                    energy_demand_pathway.loc[
+                        "World ", "Transport", ["International bunkers"]
+                    ]
+                )
+                .sum()
             )
             / (
                 energy_demand_baseline.loc[
                     region,
                     "Transport",
-                    ["Oil", "Electricity", "Biofuels"],
+                    [
+                        "Oil",
+                        "Electricity",
+                        "Biofuels",
+                        "Other fuels",
+                    ],
                 ]
+                .sum()
+                .add(
+                    energy_demand_pathway.loc[
+                        "World ", "Transport", ["International bunkers"]
+                    ]
+                )
                 .sum()
                 .sum()
                 - energy_demand_pathway.loc[
                     region,
                     "Transport",
-                    ["Oil", "Electricity", "Biofuels"],
+                    [
+                        "Oil",
+                        "Electricity",
+                        "Biofuels",
+                        "Other fuels",
+                    ],
                 ]
+                .sum()
+                .add(
+                    energy_demand_pathway.loc[
+                        "World ", "Transport", ["International bunkers"]
+                    ]
+                )
                 .sum()
                 .sum()
             )
         ).cumsum()
+        / 1.05
     ) / 2
 
     transport_decarb = pd.DataFrame(transport_decarb).T
@@ -134,6 +188,7 @@ def results_analysis(
                 "Hydroelectricity",
                 "Nuclear",
                 "Solar",
+                "Tide and wave",
                 "Wind",
             ],
             :,
@@ -143,19 +198,29 @@ def results_analysis(
     )
 
     building_decarb = (
-        energy_demand_pathway.loc[region, "Buildings", ["Electricity"]]
-        .droplevel(["IEA Region", "Sector", "Scenario"])
-        .multiply(renewable_elec)
-        .div(
-            (
-                energy_demand_pathway.loc[region, "Buildings", ["Electricity"]]
-                .droplevel(["IEA Region", "Sector", "Scenario"])
-                .multiply(renewable_elec)
+        (
+            energy_demand_pathway.loc[region, "Buildings", ["Electricity", "Bioenergy"]]
+            .droplevel(["IEA Region", "Sector", "Scenario"])
+            .sum()
+            .div(
+                max(
+                    energy_demand_pathway.loc[
+                        region,
+                        "Buildings",
+                        [
+                            "Coal",
+                            "Electricity",
+                            "Heat",
+                            "Natural gas",
+                            "Oil",
+                            "Other renewables",
+                        ],
+                    ]
+                    .droplevel(["IEA Region", "Sector", "Scenario"])
+                    .sum()
+                )
             )
-            .max(axis=1)
-            .values[0]
         )
-        .values[0]
         + (
             (
                 energy_demand_baseline.loc[
@@ -239,7 +304,7 @@ def results_analysis(
         energy_demand_pathway.loc[
             region, "Industry", ["Electricity", "Bioenergy", "Other renewables"]
         ].append(
-            heat_consump2.loc[
+            heat_consump_pathway.loc[
                 region,
                 ["Bioenergy", "Geothermal", "Nuclear", "Solar thermal", "Waste"],
                 :,

@@ -27,7 +27,7 @@ def afolu(scenario):
     ).fillna(0)
 
     proj_per_adoption = proj_per_adoption.apply(
-        adoption_curve, axis=1, args=([region, scenario])
+        adoption_curve, axis=1, args=([region, scenario]), sector="AFOLU"
     )
 
     per = []

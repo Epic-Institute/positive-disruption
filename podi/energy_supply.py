@@ -42,6 +42,14 @@ def energy_supply(scenario, energy_demand):
         :, str(data_start_year) : str(data_end_year)
     ]
     heat_gen_data.columns = heat_gen_data.columns.astype(int)
+    heat_gen_data.loc[slice(None), slice(None), "Bioenergy", scenario] = (
+        energy_demand.loc[
+            ["World ", "OECD ", "NonOECD "], "Buildings", "Bioenergy", slice(None)
+        ]
+        .loc[:, data_start_year:data_end_year]
+        .values
+    )
+
     transport_data = (
         energy_demand.loc[
             slice(None),
@@ -163,6 +171,7 @@ def energy_supply(scenario, energy_demand):
                     scenario,
                 ]
             ),
+            sector="Electricity",
         )
 
         perc = []
@@ -344,6 +353,7 @@ def energy_supply(scenario, energy_demand):
                     scenario,
                 ]
             ),
+            sector="Heat",
         )
 
         perc = []
@@ -353,13 +363,9 @@ def energy_supply(scenario, energy_demand):
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.sum().apply(
-            lambda x: max(
-                1.35 - 0.84 * x - 0.05 * x ** 1.2,
-                0,
-            )
+        perc.loc["Fossil fuels"] = perc.apply(
+            lambda x: x.loc[["Coal", "Oil", "Natural gas"]].sum()
         )
-        perc.loc["Fossil fuels"].loc[2070:] = 0
 
         return perc
 
@@ -402,9 +408,6 @@ def energy_supply(scenario, energy_demand):
             )
         ).values
 
-        """
-
-        """
         return proj_consump
 
     # join timeseries of historical and projected heat consumption met by a given technology
@@ -543,6 +546,7 @@ def energy_supply(scenario, energy_demand):
                     scenario,
                 ]
             ),
+            sector="Transport",
         )
 
         perc = []

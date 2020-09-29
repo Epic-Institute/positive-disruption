@@ -262,6 +262,7 @@ def energy_demand(
             args=(
                 [
                     region,
+                    'Electricity',
                     scenario,
                 ]
             ),

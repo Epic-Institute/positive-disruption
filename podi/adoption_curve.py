@@ -14,7 +14,7 @@ def func(x, a, b, c, d):
     return c / (1 + np.exp(-a * (x - b))) + d
 
 
-def adoption_curve(value, region, scenario):
+def adoption_curve(value, region, scenario, sector):
     parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
@@ -29,28 +29,29 @@ def adoption_curve(value, region, scenario):
 
     # By default, differential_evolution completes by calling curve_fit()
     # using parameter bounds.
+
     search_bounds = [
         [
             pd.to_numeric(
                 parameters.loc[
-                    region, value.name, scenario, slice(None), "Parameter a, min"
+                    region, value.name, scenario, sector, "Parameter a, min"
                 ].Value[0]
             ),
             pd.to_numeric(
                 parameters.loc[
-                    region, value.name, scenario, slice(None), "Parameter a, max"
+                    region, value.name, scenario, sector, "Parameter a, max"
                 ].Value[0]
             ),
         ],
         [
             pd.to_numeric(
                 parameters.loc[
-                    region, value.name, scenario, slice(None), "Parameter b, min"
+                    region, value.name, scenario, sector, "Parameter b, min"
                 ].Value[0]
             ),
             pd.to_numeric(
                 parameters.loc[
-                    region, value.name, scenario, slice(None), "Parameter b, max"
+                    region, value.name, scenario, sector, "Parameter b, max"
                 ].Value[0]
             ),
         ],
@@ -60,7 +61,7 @@ def adoption_curve(value, region, scenario):
                     region,
                     value.name,
                     scenario,
-                    slice(None),
+                    sector,
                     "Saturation Point",
                 ].Value[0]
             )
@@ -70,7 +71,7 @@ def adoption_curve(value, region, scenario):
                     region,
                     value.name,
                     scenario,
-                    slice(None),
+                    sector,
                     "Saturation Point",
                 ].Value[0]
             )
@@ -82,7 +83,7 @@ def adoption_curve(value, region, scenario):
                     region,
                     value.name,
                     scenario,
-                    slice(None),
+                    sector,
                     "Floor",
                 ].Value[0]
             )
@@ -92,7 +93,7 @@ def adoption_curve(value, region, scenario):
                     region,
                     value.name,
                     scenario,
-                    slice(None),
+                    sector,
                     "Floor",
                 ].Value[0]
             )
@@ -144,7 +145,7 @@ def adoption_curve(value, region, scenario):
     max_growth = (
         pd.to_numeric(
             parameters.loc[
-                region, value.name, scenario, slice(None), "Max annual growth"
+                region, value.name, scenario, sector, "Max annual growth"
             ].Value[0]
         )
         / 100
