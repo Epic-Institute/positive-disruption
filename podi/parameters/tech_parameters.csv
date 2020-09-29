@@ -3424,7 +3424,7 @@ NonOECD ,Oil,Pathway,Electricity,Floor,0
 NonOECD ,Oil,Pathway,Electricity,Consumption:Generation,1
 World ,Oil,Baseline,Heat,Saturation Point,100
 World ,Oil,Pathway,Heat,Saturation Point,2.6
-World ,Oil,Pathway,Heat,"Parameter b, min",20
+World ,Oil,Pathway,Heat,"Parameter b, min",10
 World ,Oil,Baseline,Heat,"Parameter b, min",0
 World ,Oil,Pathway,Heat,"Parameter b, max",20
 World ,Oil,Baseline,Heat,"Parameter b, max",100
@@ -3440,7 +3440,7 @@ World ,Oil,Pathway,Heat,Consumption:Generation,1
 OECD ,Oil,Baseline,Heat,Saturation Point,100
 OECD ,Oil,Pathway,Heat,Saturation Point,2.6
 OECD ,Oil,Baseline,Heat,"Parameter b, min",0
-OECD ,Oil,Pathway,Heat,"Parameter b, min",20
+OECD ,Oil,Pathway,Heat,"Parameter b, min",10
 OECD ,Oil,Baseline,Heat,"Parameter b, max",100
 OECD ,Oil,Pathway,Heat,"Parameter b, max",20
 OECD ,Oil,Baseline,Heat,"Parameter a, min",0
@@ -3455,7 +3455,7 @@ OECD ,Oil,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Oil,Baseline,Heat,Saturation Point,100
 NonOECD ,Oil,Pathway,Heat,Saturation Point,2.6
 NonOECD ,Oil,Baseline,Heat,"Parameter b, min",0
-NonOECD ,Oil,Pathway,Heat,"Parameter b, min",20
+NonOECD ,Oil,Pathway,Heat,"Parameter b, min",10
 NonOECD ,Oil,Baseline,Heat,"Parameter b, max",100
 NonOECD ,Oil,Pathway,Heat,"Parameter b, max",20
 NonOECD ,Oil,Baseline,Heat,"Parameter a, min",0
@@ -3901,13 +3901,13 @@ NonOECD ,Natural gas,Pathway,Electricity,Floor,0
 NonOECD ,Natural gas,Pathway,Electricity,Consumption:Generation,1
 World ,Natural gas,Baseline,Heat,Saturation Point,100
 World ,Natural gas,Pathway,Heat,Saturation Point,29
-World ,Natural gas,Pathway,Heat,"Parameter b, min",20
+World ,Natural gas,Pathway,Heat,"Parameter b, min",3
 World ,Natural gas,Baseline,Heat,"Parameter b, min",0
-World ,Natural gas,Pathway,Heat,"Parameter b, max",20
+World ,Natural gas,Pathway,Heat,"Parameter b, max",5
 World ,Natural gas,Baseline,Heat,"Parameter b, max",100
-World ,Natural gas,Pathway,Heat,"Parameter a, min",-0.15
+World ,Natural gas,Pathway,Heat,"Parameter a, min",-0.3
 World ,Natural gas,Baseline,Heat,"Parameter a, min",0
-World ,Natural gas,Pathway,Heat,"Parameter a, max",-0.15
+World ,Natural gas,Pathway,Heat,"Parameter a, max",-0.12
 World ,Natural gas,Baseline,Heat,"Parameter a, max",5
 World ,Natural gas,Baseline,Heat,Max annual growth,100
 World ,Natural gas,Pathway,Heat,Max annual growth,100
@@ -3917,13 +3917,13 @@ World ,Natural gas,Pathway,Heat,Consumption:Generation,1
 OECD ,Natural gas,Baseline,Heat,Saturation Point,100
 OECD ,Natural gas,Pathway,Heat,Saturation Point,29
 OECD ,Natural gas,Baseline,Heat,"Parameter b, min",0
-OECD ,Natural gas,Pathway,Heat,"Parameter b, min",10
+OECD ,Natural gas,Pathway,Heat,"Parameter b, min",3
 OECD ,Natural gas,Baseline,Heat,"Parameter b, max",100
-OECD ,Natural gas,Pathway,Heat,"Parameter b, max",10
+OECD ,Natural gas,Pathway,Heat,"Parameter b, max",5
 OECD ,Natural gas,Baseline,Heat,"Parameter a, min",0
-OECD ,Natural gas,Pathway,Heat,"Parameter a, min",-0.15
+OECD ,Natural gas,Pathway,Heat,"Parameter a, min",-0.3
 OECD ,Natural gas,Baseline,Heat,"Parameter a, max",5
-OECD ,Natural gas,Pathway,Heat,"Parameter a, max",-0.15
+OECD ,Natural gas,Pathway,Heat,"Parameter a, max",-0.12
 OECD ,Natural gas,Baseline,Heat,Max annual growth,100
 OECD ,Natural gas,Pathway,Heat,Max annual growth,100
 OECD ,Natural gas,Baseline,Heat,Floor,0
@@ -3932,13 +3932,13 @@ OECD ,Natural gas,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Natural gas,Baseline,Heat,Saturation Point,100
 NonOECD ,Natural gas,Pathway,Heat,Saturation Point,29
 NonOECD ,Natural gas,Baseline,Heat,"Parameter b, min",0
-NonOECD ,Natural gas,Pathway,Heat,"Parameter b, min",10
+NonOECD ,Natural gas,Pathway,Heat,"Parameter b, min",3
 NonOECD ,Natural gas,Baseline,Heat,"Parameter b, max",100
-NonOECD ,Natural gas,Pathway,Heat,"Parameter b, max",10
+NonOECD ,Natural gas,Pathway,Heat,"Parameter b, max",5
 NonOECD ,Natural gas,Baseline,Heat,"Parameter a, min",0
-NonOECD ,Natural gas,Pathway,Heat,"Parameter a, min",-0.15
+NonOECD ,Natural gas,Pathway,Heat,"Parameter a, min",-0.3
 NonOECD ,Natural gas,Baseline,Heat,"Parameter a, max",5
-NonOECD ,Natural gas,Pathway,Heat,"Parameter a, max",-0.15
+NonOECD ,Natural gas,Pathway,Heat,"Parameter a, max",-0.12
 NonOECD ,Natural gas,Baseline,Heat,Max annual growth,100
 NonOECD ,Natural gas,Pathway,Heat,Max annual growth,100
 NonOECD ,Natural gas,Baseline,Heat,Floor,0
@@ -7171,13 +7171,13 @@ NonOECD ,Coal,Pathway,Electricity,Floor,0
 NonOECD ,Coal,Pathway,Electricity,Consumption:Generation,1
 World ,Coal,Baseline,Heat,Saturation Point,100
 World ,Coal,Pathway,Heat,Saturation Point,29
-World ,Coal,Pathway,Heat,"Parameter b, min",10
+World ,Coal,Pathway,Heat,"Parameter b, min",3
 World ,Coal,Baseline,Heat,"Parameter b, min",0
-World ,Coal,Pathway,Heat,"Parameter b, max",10
+World ,Coal,Pathway,Heat,"Parameter b, max",5
 World ,Coal,Baseline,Heat,"Parameter b, max",100
-World ,Coal,Pathway,Heat,"Parameter a, min",-0.15
+World ,Coal,Pathway,Heat,"Parameter a, min",-0.3
 World ,Coal,Baseline,Heat,"Parameter a, min",0
-World ,Coal,Pathway,Heat,"Parameter a, max",-0.15
+World ,Coal,Pathway,Heat,"Parameter a, max",-0.12
 World ,Coal,Baseline,Heat,"Parameter a, max",5
 World ,Coal,Baseline,Heat,Max annual growth,100
 World ,Coal,Pathway,Heat,Max annual growth,100
@@ -7187,13 +7187,13 @@ World ,Coal,Pathway,Heat,Consumption:Generation,1
 OECD ,Coal,Baseline,Heat,Saturation Point,100
 OECD ,Coal,Pathway,Heat,Saturation Point,29
 OECD ,Coal,Baseline,Heat,"Parameter b, min",0
-OECD ,Coal,Pathway,Heat,"Parameter b, min",10
+OECD ,Coal,Pathway,Heat,"Parameter b, min",3
 OECD ,Coal,Baseline,Heat,"Parameter b, max",100
-OECD ,Coal,Pathway,Heat,"Parameter b, max",10
+OECD ,Coal,Pathway,Heat,"Parameter b, max",5
 OECD ,Coal,Baseline,Heat,"Parameter a, min",0
-OECD ,Coal,Pathway,Heat,"Parameter a, min",-0.15
+OECD ,Coal,Pathway,Heat,"Parameter a, min",-0.3
 OECD ,Coal,Baseline,Heat,"Parameter a, max",5
-OECD ,Coal,Pathway,Heat,"Parameter a, max",-0.15
+OECD ,Coal,Pathway,Heat,"Parameter a, max",-0.12
 OECD ,Coal,Baseline,Heat,Max annual growth,100
 OECD ,Coal,Pathway,Heat,Max annual growth,100
 OECD ,Coal,Baseline,Heat,Floor,0
@@ -7202,13 +7202,13 @@ OECD ,Coal,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Coal,Baseline,Heat,Saturation Point,100
 NonOECD ,Coal,Pathway,Heat,Saturation Point,29
 NonOECD ,Coal,Baseline,Heat,"Parameter b, min",0
-NonOECD ,Coal,Pathway,Heat,"Parameter b, min",10
+NonOECD ,Coal,Pathway,Heat,"Parameter b, min",3
 NonOECD ,Coal,Baseline,Heat,"Parameter b, max",100
-NonOECD ,Coal,Pathway,Heat,"Parameter b, max",10
+NonOECD ,Coal,Pathway,Heat,"Parameter b, max",5
 NonOECD ,Coal,Baseline,Heat,"Parameter a, min",0
-NonOECD ,Coal,Pathway,Heat,"Parameter a, min",-0.15
+NonOECD ,Coal,Pathway,Heat,"Parameter a, min",-0.3
 NonOECD ,Coal,Baseline,Heat,"Parameter a, max",5
-NonOECD ,Coal,Pathway,Heat,"Parameter a, max",-0.15
+NonOECD ,Coal,Pathway,Heat,"Parameter a, max",-0.12
 NonOECD ,Coal,Baseline,Heat,Max annual growth,100
 NonOECD ,Coal,Pathway,Heat,Max annual growth,100
 NonOECD ,Coal,Baseline,Heat,Floor,0

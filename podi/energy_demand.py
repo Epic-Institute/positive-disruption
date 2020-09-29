@@ -237,6 +237,26 @@ def energy_demand(
         - energy_demand_post_biofuels
         - energy_demand_post_bunker
     )
+
+    # Update sector-level and end-use level demand estimates
+
+    energy_demand.loc[slice(None), "Industry", "Industry"] = (
+        energy_demand.loc[slice(None), "Industry", ["Electricity", "Heat"]]
+        .groupby("IEA Region")
+        .sum()
+        .values
+    )
+
+    # for buildings
+
+    # for transport
+
+    # for Electricity
+
+    # for Heat
+
+    # for Nonelectric transport
+
     """
     # Smooth energy demand curves
 

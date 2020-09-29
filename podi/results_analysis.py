@@ -180,7 +180,7 @@ def results_analysis(
     # region
 
     renewable_elec = (
-        elec_consump.loc[
+        elec_consump_pathway.loc[
             region,
             [
                 "Biomass and waste",
@@ -194,7 +194,7 @@ def results_analysis(
             :,
         ]
         .sum()
-        .div(elec_consump.loc[region, slice(None), :].sum())
+        .div(elec_consump_pathway.loc[region, slice(None), :].sum())
     )
 
     building_decarb = (
@@ -203,22 +203,14 @@ def results_analysis(
             .droplevel(["IEA Region", "Sector", "Scenario"])
             .sum()
             .div(
-                max(
-                    energy_demand_pathway.loc[
-                        region,
-                        "Buildings",
-                        [
-                            "Coal",
-                            "Electricity",
-                            "Heat",
-                            "Natural gas",
-                            "Oil",
-                            "Other renewables",
-                        ],
-                    ]
-                    .droplevel(["IEA Region", "Sector", "Scenario"])
-                    .sum()
-                )
+                energy_demand_pathway.loc[
+                    region,
+                    "Buildings",
+                    ["Bioenergy", "Electricity"],
+                ]
+                .droplevel(["IEA Region", "Sector", "Scenario"])
+                .sum()
+                .loc[2100]
             )
         )
         + (
