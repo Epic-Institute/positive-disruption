@@ -8,7 +8,7 @@ def results_analysis(
     region,
     energy_demand_baseline,
     energy_demand_pathway,
-    elec_consump,
+    elec_consump_pathway,
     heat_consump_pathway,
     transport_consump_pathway,
     afolu_per_adoption,
@@ -29,15 +29,16 @@ def results_analysis(
         "Biomass and waste",
         "Geothermal",
         "Hydroelectricity",
+        "Nuclear",
         "Solar",
         "Wind",
         "Tide and wave",
     ]
 
     grid_decarb = (
-        elec_consump.loc[elec_consump.index.isin(decarb, level=1)]
+        elec_consump_pathway.loc[elec_consump_pathway.index.isin(decarb, level=1)]
         .sum()
-        .div(elec_consump.drop("Nuclear", level=1).sum())
+        .div(elec_consump_pathway.drop("Nuclear", level=1).sum())
     )
     grid_decarb = pd.DataFrame(grid_decarb).T
     grid_decarb.columns = grid_decarb.columns.astype(int)
@@ -197,20 +198,38 @@ def results_analysis(
         .div(elec_consump_pathway.loc[region, slice(None), :].sum())
     )
 
+    renewable_heat = (
+        heat_consump_pathway.loc[
+            region,
+            ["Bioenergy" "Geothermal", "Nuclear", "Solar thermal", "Waste"],
+            :,
+        ]
+        .sum()
+        .div(heat_consump_pathway.loc[region, slice(None), :].sum())
+    )
+
     building_decarb = (
         (
-            energy_demand_pathway.loc[region, "Buildings", ["Electricity", "Bioenergy"]]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
+            (
+                energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()
+                * renewable_elec
+            )
+            .add(
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
+                * renewable_heat
+            )
             .div(
-                energy_demand_pathway.loc[
-                    region,
-                    "Buildings",
-                    ["Bioenergy", "Electricity"],
-                ]
-                .droplevel(["IEA Region", "Sector", "Scenario"])
-                .sum()
-                .loc[2100]
+                max(
+                    (
+                        energy_demand_pathway.loc[
+                            region, "Buildings", ["Electricity"]
+                        ].sum()
+                        * renewable_elec
+                    ).add(
+                        energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
+                        * renewable_heat
+                    )
+                )
             )
         )
         + (
@@ -218,30 +237,14 @@ def results_analysis(
                 energy_demand_baseline.loc[
                     region,
                     "Buildings",
-                    [
-                        "Bioenergy",
-                        "Coal",
-                        "Electricity",
-                        "Heat",
-                        "Natural gas",
-                        "Oil",
-                        "Other renewables",
-                    ],
+                    ["Electricity", "Heat"],
                 ]
                 .droplevel(["IEA Region", "Sector", "Scenario"])
                 .sum()
                 - energy_demand_pathway.loc[
                     region,
                     "Buildings",
-                    [
-                        "Bioenergy",
-                        "Coal",
-                        "Electricity",
-                        "Heat",
-                        "Natural gas",
-                        "Oil",
-                        "Other renewables",
-                    ],
+                    ["Electricity", "Heat"],
                 ]
                 .droplevel(["IEA Region", "Sector", "Scenario"])
                 .sum()
@@ -250,15 +253,7 @@ def results_analysis(
                 energy_demand_baseline.loc[
                     region,
                     "Buildings",
-                    [
-                        "Bioenergy",
-                        "Coal",
-                        "Electricity",
-                        "Heat",
-                        "Natural gas",
-                        "Oil",
-                        "Other renewables",
-                    ],
+                    ["Electricity", "Heat"],
                 ]
                 .droplevel(["IEA Region", "Sector", "Scenario"])
                 .sum()
@@ -266,15 +261,7 @@ def results_analysis(
                 - energy_demand_pathway.loc[
                     region,
                     "Buildings",
-                    [
-                        "Bioenergy",
-                        "Coal",
-                        "Electricity",
-                        "Heat",
-                        "Natural gas",
-                        "Oil",
-                        "Other renewables",
-                    ],
+                    ["Electricity", "Heat"],
                 ]
                 .droplevel(["IEA Region", "Sector", "Scenario"])
                 .sum()
@@ -293,102 +280,66 @@ def results_analysis(
     # region
 
     industry_decarb = (
-        energy_demand_pathway.loc[
-            region, "Industry", ["Electricity", "Bioenergy", "Other renewables"]
-        ].append(
-            heat_consump_pathway.loc[
-                region,
-                ["Bioenergy", "Geothermal", "Nuclear", "Solar thermal", "Waste"],
-                :,
-            ]
-        )
-    ).sum().div(
-        max(
-            energy_demand_pathway.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Oil",
-                    "Natural gas",
-                    "Other renewables",
-                    "Heat",
-                    "Coal",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-            .values
-        )
-    ) + (
         (
-            energy_demand_baseline.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Coal",
-                    "Oil",
-                    "Other renewables",
-                    "Heat",
-                    "Coal",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-            - energy_demand_pathway.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Coal",
-                    "Oil",
-                    "Other renewables",
-                    "Heat",
-                    "Coal",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
+            (
+                energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()
+                * renewable_elec
+            )
+            .add(
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
+                * renewable_heat
+            )
+            .div(
+                max(
+                    (
+                        energy_demand_pathway.loc[
+                            region, "Industry", ["Electricity"]
+                        ].sum()
+                        * renewable_elec
+                    ).add(
+                        energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
+                        * renewable_heat
+                    )
+                )
+            )
         )
-        / (
-            energy_demand_baseline.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Coal",
-                    "Oil",
-                    "Other renewables",
-                    "Heat",
-                    "Coal",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-            .sum()
-            - energy_demand_pathway.loc[
-                region,
-                "Industry",
-                [
-                    "Electricity",
-                    "Bioenergy",
-                    "Coal",
-                    "Oil",
-                    "Other renewables",
-                    "Heat",
-                    "Coal",
-                ],
-            ]
-            .droplevel(["IEA Region", "Sector", "Scenario"])
-            .sum()
-            .sum()
-        )
-    ).cumsum() / 2
+        + (
+            (
+                energy_demand_baseline.loc[
+                    region,
+                    "Industry",
+                    ["Electricity", "Heat"],
+                ]
+                .droplevel(["IEA Region", "Sector", "Scenario"])
+                .sum()
+                - energy_demand_pathway.loc[
+                    region,
+                    "Industry",
+                    ["Electricity", "Heat"],
+                ]
+                .droplevel(["IEA Region", "Sector", "Scenario"])
+                .sum()
+            )
+            / (
+                energy_demand_baseline.loc[
+                    region,
+                    "Industry",
+                    ["Electricity", "Heat"],
+                ]
+                .droplevel(["IEA Region", "Sector", "Scenario"])
+                .sum()
+                .sum()
+                - energy_demand_pathway.loc[
+                    region,
+                    "Industry",
+                    ["Electricity", "Heat"],
+                ]
+                .droplevel(["IEA Region", "Sector", "Scenario"])
+                .sum()
+                .sum()
+            )
+        ).cumsum()
+    ) / 2
 
     industry_decarb = pd.DataFrame(industry_decarb).T
     industry_decarb.rename(index={0: "Industry"}, inplace=True)

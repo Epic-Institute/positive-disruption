@@ -3292,9 +3292,9 @@ World ,Other sources,Pathway,Heat,"Parameter b, min",0
 World ,Other sources,Baseline,Heat,"Parameter b, min",0
 World ,Other sources,Pathway,Heat,"Parameter b, max",50
 World ,Other sources,Baseline,Heat,"Parameter b, max",100
-World ,Other sources,Pathway,Heat,"Parameter a, min",0.05
+World ,Other sources,Pathway,Heat,"Parameter a, min",-0.5
 World ,Other sources,Baseline,Heat,"Parameter a, min",0
-World ,Other sources,Pathway,Heat,"Parameter a, max",0.05
+World ,Other sources,Pathway,Heat,"Parameter a, max",0
 World ,Other sources,Baseline,Heat,"Parameter a, max",5
 World ,Other sources,Pathway,Heat,Max annual growth,100
 World ,Other sources,Baseline,Heat,Max annual growth,100
@@ -3304,8 +3304,8 @@ World ,Other sources,Pathway,Heat,Consumption:Generation,1
 OECD ,Other sources,Pathway,Heat,Saturation Point,2.1
 OECD ,Other sources,Pathway,Heat,"Parameter b, min",0
 OECD ,Other sources,Pathway,Heat,"Parameter b, max",50
-OECD ,Other sources,Pathway,Heat,"Parameter a, min",0.05
-OECD ,Other sources,Pathway,Heat,"Parameter a, max",0.05
+OECD ,Other sources,Pathway,Heat,"Parameter a, min",-0.5
+OECD ,Other sources,Pathway,Heat,"Parameter a, max",0
 OECD ,Other sources,Pathway,Heat,Max annual growth,100
 OECD ,Other sources,Pathway,Heat,Floor,0
 OECD ,Other sources,Pathway,Heat,Consumption:Generation,1
@@ -3319,8 +3319,8 @@ OECD ,Other sources,Baseline,Heat,Floor,0
 NonOECD ,Other sources,Pathway,Heat,Saturation Point,2.1
 NonOECD ,Other sources,Pathway,Heat,"Parameter b, min",0
 NonOECD ,Other sources,Pathway,Heat,"Parameter b, max",50
-NonOECD ,Other sources,Pathway,Heat,"Parameter a, min",0.05
-NonOECD ,Other sources,Pathway,Heat,"Parameter a, max",0.05
+NonOECD ,Other sources,Pathway,Heat,"Parameter a, min",-0.5
+NonOECD ,Other sources,Pathway,Heat,"Parameter a, max",0
 NonOECD ,Other sources,Pathway,Heat,Max annual growth,100
 NonOECD ,Other sources,Pathway,Heat,Floor,0
 NonOECD ,Other sources,Pathway,Heat,Consumption:Generation,1

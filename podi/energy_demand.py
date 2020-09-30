@@ -19,7 +19,6 @@ def energy_demand(
     demand_projection,
     energy_efficiency,
     heat_pumps,
-    transport_efficiency,
     solar_thermal,
     biofuels,
     cdr,
@@ -145,7 +144,7 @@ def energy_demand(
     bunkers.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
     energy_demand = energy_demand.append(bunkers)
 
-    # Apply percentage reduction attributed to energy efficiency measures
+    # Apply percentage reduction attributed to energy efficiency measures (in buildings, industry, and transport)
     energy_efficiency = (
         pd.read_csv(energy_efficiency)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -158,7 +157,7 @@ def energy_demand(
         energy_demand * energy_efficiency.values
     )
 
-    # Apply percentage reduction & shift to electrification attributed to heat pumps and electrification of industry
+    # Apply percentage reduction & shift to electrification attributed to heat pumps
     heat_pumps = (
         pd.read_csv(heat_pumps)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -169,19 +168,8 @@ def energy_demand(
     heat_pumps = heat_pumps.reindex(energy_demand.index)
     energy_demand_post_heat_pumps = energy_demand - (energy_demand * heat_pumps.values)
 
-    # Apply percentage reduction & shift to electrification attributed to transportation improvements
-    transport_efficiency = (
-        pd.read_csv(transport_efficiency)
-        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
-        .fillna(0)
-    )
-    transport_efficiency = transport_efficiency.apply(lambda x: x + 1, axis=1)
-    transport_efficiency = transport_efficiency.reindex(energy_demand.index)
-    energy_demand_post_transport = energy_demand - (
-        energy_demand * transport_efficiency.values
-    )
-
     # Apply percentage reduction attributed to solar thermal
+    """
     solar_thermal = (
         pd.read_csv(solar_thermal)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -192,8 +180,10 @@ def energy_demand(
     energy_demand_post_solarthermal = energy_demand - (
         energy_demand * solar_thermal.values
     )
+    """
 
     # Apply shift attributed to biofuels
+    """
     biofuels = (
         pd.read_csv(biofuels)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -202,6 +192,7 @@ def energy_demand(
     biofuels = biofuels.apply(lambda x: x + 1, axis=1)
     biofuels = biofuels.reindex(energy_demand.index)
     energy_demand_post_biofuels = energy_demand - (energy_demand * biofuels.values)
+    """
 
     # Estimate energy demand from CDR
     cdr_energy = pd.concat(
@@ -232,9 +223,6 @@ def energy_demand(
         energy_demand
         - energy_demand_post_efficiency
         - energy_demand_post_heat_pumps
-        - energy_demand_post_transport
-        - energy_demand_post_solarthermal
-        - energy_demand_post_biofuels
         - energy_demand_post_bunker
     )
 
@@ -247,15 +235,54 @@ def energy_demand(
         .values
     )
 
-    # for buildings
+    energy_demand.loc[slice(None), "Buildings", "Buildings"] = (
+        energy_demand.loc[slice(None), "Buildings", ["Electricity", "Heat"]]
+        .groupby("IEA Region")
+        .sum()
+        .values
+    )
 
-    # for transport
+    energy_demand.loc[slice(None), "Transport", "Transport"] = (
+        energy_demand.loc[
+            slice(None), "Transport", ["Electricity", "Oil", "Biofuels", "Other fuels"]
+        ]
+        .groupby("IEA Region")
+        .sum()
+        .values
+    )
 
-    # for Electricity
+    energy_demand.loc[slice(None), "TFC", "Electricity"] = (
+        energy_demand.loc[
+            slice(None), ["Industry", "Buildings", "Transport"], ["Electricity"]
+        ]
+        .groupby("IEA Region")
+        .sum()
+        .values
+    )
 
-    # for Heat
-
-    # for Nonelectric transport
+    energy_demand.loc[slice(None), "TFC", "Heat"] = (
+        energy_demand.loc[slice(None), ["Industry", "Buildings", "Transport"], ["Heat"]]
+        .groupby("IEA Region")
+        .sum()
+        .values
+    )
+    """
+    energy_demand.loc[slice(None), 'TFC', 'Nonelec Transport'] = (
+        energy_demand.loc[
+            slice(None), ["Transport"], ["Oil", "Biofuels", "Other fuels"]        ]        .groupby("IEA Region")        .sum()
+        .values
+    )
+    """
+    energy_demand.loc[slice(None), "TFC", "Total final consumption"] = (
+        energy_demand.loc[
+            slice(None),
+            ["Industry", "Buildings", "Transport"],
+            ["Industry", "Buildings", "Transport"],
+        ]
+        .groupby("IEA Region")
+        .sum()
+        .values
+    )
 
     """
     # Smooth energy demand curves

@@ -28,7 +28,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     #########################################################
 
     # region
-    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 91)
+    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 19)
 
     color = pd.DataFrame(
         {
@@ -48,6 +48,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
         plt.figure(i)
         fig.apply(lambda x: plt.plot(xnew, x(xnew) * 100, linestyle="--"))
+        fig.apply(
+            lambda x: plt.plot(
+                xnew[0 : (data_end_year - data_start_year) + 1],
+                x(xnew)[0 : (data_end_year - data_start_year) + 1] * 100,
+                linestyle="-",
+                color=(0, 0, 0),
+            )
+        )
         plt.ylabel("% Adoption")
         plt.xlim([adoption_curves.columns.min(), adoption_curves.columns.max()])
         plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
@@ -68,6 +76,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         "MHa",
         "GtCO2 removed",
     ]
+
+    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 91)
 
     for i in range(0, 1):
         for j in range(0, len(adoption_curves.index)):
@@ -186,7 +196,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Baseline
 
-    for i in range(0, len(iea_region_list)):
+    for i in range(0, 1):
         energy_demand_baseline_i = energy_demand_baseline.loc[
             iea_region_list[i], slice(None), slice(None), "Baseline"
         ]
