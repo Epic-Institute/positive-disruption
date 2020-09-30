@@ -400,11 +400,10 @@ def energy_supply(scenario, energy_demand):
                 * energy_demand.loc[
                     region,
                     "Industry",
-                    ["Other renewables", "Coal", "Oil", "Natural gas", "Bioenergy"],
+                    ["Heat"],
                 ]
                 .loc[:, str(near_proj_start_year) :]
                 .sum()
-                * 0.2
             )
         ).values
 

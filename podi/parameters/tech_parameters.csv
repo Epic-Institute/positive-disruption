@@ -1,6 +1,6 @@
 IEA Region,Technology,Scenario,Sector,Metric,Value
 World ,Wind,Baseline,Electricity,Saturation Point,5
-World ,Wind,Pathway,Electricity,Saturation Point,44
+World ,Wind,Pathway,Electricity,Saturation Point,38.5
 World ,Wind,Pathway,Electricity,"Parameter b, min",0
 World ,Wind,Baseline,Electricity,"Parameter b, min",0
 World ,Wind,Pathway,Electricity,"Parameter b, max",100
@@ -58,7 +58,7 @@ RUS ,Wind,Pathway,,Floor,0
 RUS ,Wind,Baseline,,Floor,0
 Other ,Wind,Pathway,,Saturation Point,44
 OECD ,Wind,Baseline,Electricity,Saturation Point,5
-OECD ,Wind,Pathway,Electricity,Saturation Point,44
+OECD ,Wind,Pathway,Electricity,Saturation Point,38.5
 OECD ,Wind,Pathway,Electricity,"Parameter b, min",0
 OECD ,Wind,Baseline,Electricity,"Parameter b, min",0
 OECD ,Wind,Pathway,Electricity,"Parameter b, max",100
@@ -73,7 +73,7 @@ OECD ,Wind,Pathway,Electricity,Floor,0
 OECD ,Wind,Baseline,Electricity,Floor,0
 OECD ,Wind,Pathway,Electricity,Consumption:Generation,0.88
 NonOECD ,Wind,Baseline,Electricity,Saturation Point,5
-NonOECD ,Wind,Pathway,Electricity,Saturation Point,44
+NonOECD ,Wind,Pathway,Electricity,Saturation Point,38.5
 NonOECD ,Wind,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Wind,Baseline,Electricity,"Parameter b, min",0
 NonOECD ,Wind,Pathway,Electricity,"Parameter b, max",100
@@ -695,7 +695,6 @@ World ,Solar thermal,Baseline,Heat,"Parameter a, max",5
 World ,Solar thermal,Baseline,Heat,Max annual growth,100
 World ,Solar thermal,Pathway,Heat,Max annual growth,100
 World ,Solar thermal,Pathway,Heat,Floor,2
-World ,Solar thermal,Pathway,Heat,Floor,2
 World ,Solar thermal,Baseline,Heat,Floor,0
 World ,Solar thermal,Baseline,Heat,Floor,0
 World ,Solar thermal,Pathway,Heat,Consumption:Generation,1
@@ -770,8 +769,6 @@ OECD ,Solar thermal,Pathway,Heat,Max annual growth,100
 OECD ,Solar thermal,Baseline,Heat,Floor,0
 OECD ,Solar thermal,Baseline,Heat,Floor,0
 OECD ,Solar thermal,Pathway,Heat,Floor,2
-OECD ,Solar thermal,Pathway,Heat,Floor,2
-OECD ,Solar thermal,Pathway,Heat,Consumption:Generation,1
 OECD ,Solar thermal,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Solar thermal,Baseline,Heat,Saturation Point,100
 NonOECD ,Solar thermal,Baseline,Heat,Saturation Point,100
@@ -789,8 +786,6 @@ NonOECD ,Solar thermal,Pathway,Heat,Max annual growth,100
 NonOECD ,Solar thermal,Baseline,Heat,Floor,0
 NonOECD ,Solar thermal,Baseline,Heat,Floor,0
 NonOECD ,Solar thermal,Pathway,Heat,Floor,2
-NonOECD ,Solar thermal,Pathway,Heat,Floor,2
-NonOECD ,Solar thermal,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Solar thermal,Pathway,Heat,Consumption:Generation,1
 NAM ,Solar thermal,Baseline,Industry,Saturation Point,10
 NAM ,Solar thermal,Baseline,Buildings,Saturation Point,10
@@ -1063,7 +1058,7 @@ AdvancedECO ,Solar thermal,Pathway,Buildings,Floor,0
 AdvancedECO ,Solar thermal,Baseline,Industry,Floor,0
 AdvancedECO ,Solar thermal,Baseline,Buildings,Floor,0
 World ,Solar,Baseline,Electricity,Saturation Point,5
-World ,Solar,Pathway,Electricity,Saturation Point,44
+World ,Solar,Pathway,Electricity,Saturation Point,35.9
 World ,Solar,Pathway,Electricity,"Parameter b, min",0
 World ,Solar,Baseline,Electricity,"Parameter b, min",0
 World ,Solar,Pathway,Electricity,"Parameter b, max",100
@@ -1121,7 +1116,7 @@ RUS ,Solar,Pathway,,Floor,0
 RUS ,Solar,Baseline,,Floor,0
 Other ,Solar,Pathway,,Saturation Point,56
 OECD ,Solar,Baseline,Electricity,Saturation Point,5
-OECD ,Solar,Pathway,Electricity,Saturation Point,44
+OECD ,Solar,Pathway,Electricity,Saturation Point,35.9
 OECD ,Solar,Pathway,Electricity,"Parameter b, min",0
 OECD ,Solar,Baseline,Electricity,"Parameter b, min",0
 OECD ,Solar,Pathway,Electricity,"Parameter b, max",100
@@ -1136,7 +1131,7 @@ OECD ,Solar,Pathway,Electricity,Floor,0
 OECD ,Solar,Baseline,Electricity,Floor,0
 OECD ,Solar,Pathway,Electricity,Consumption:Generation,0.88
 NonOECD ,Solar,Baseline,Electricity,Saturation Point,5
-NonOECD ,Solar,Pathway,Electricity,Saturation Point,44
+NonOECD ,Solar,Pathway,Electricity,Saturation Point,35.9
 NonOECD ,Solar,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Solar,Baseline,Electricity,"Parameter b, min",0
 NonOECD ,Solar,Pathway,Electricity,"Parameter b, max",100
@@ -3570,7 +3565,7 @@ RUS ,Nuclear,Pathway,,Max annual growth,100
 RUS ,Nuclear,Pathway,,Floor,0
 RUS ,Nuclear,Baseline,,Floor,0
 OECD ,Nuclear,Baseline,Electricity,Saturation Point,20
-OECD ,Nuclear,Pathway,Electricity,Saturation Point,14.5
+OECD ,Nuclear,Pathway,Electricity,Saturation Point,10.1
 OECD ,Nuclear,Baseline,Electricity,"Parameter b, min",43
 OECD ,Nuclear,Pathway,Electricity,"Parameter b, min",0
 OECD ,Nuclear,Baseline,Electricity,"Parameter b, max",43
@@ -3585,7 +3580,7 @@ OECD ,Nuclear,Baseline,Electricity,Floor,0
 OECD ,Nuclear,Pathway,Electricity,Floor,0
 OECD ,Nuclear,Pathway,Electricity,Consumption:Generation,1
 NonOECD ,Nuclear,Baseline,Electricity,Saturation Point,20
-NonOECD ,Nuclear,Pathway,Electricity,Saturation Point,14.5
+NonOECD ,Nuclear,Pathway,Electricity,Saturation Point,4.5
 NonOECD ,Nuclear,Baseline,Electricity,"Parameter b, min",43
 NonOECD ,Nuclear,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Nuclear,Baseline,Electricity,"Parameter b, max",43
@@ -4002,28 +3997,28 @@ RUS ,Hydroelectricity,Pathway,,Floor,0
 RUS ,Hydroelectricity,Baseline,,Floor,0
 Other ,Hydroelectricity,Pathway,,Saturation Point,0
 OECD ,Hydroelectricity,Baseline,Electricity,Saturation Point,5
-OECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,20
+OECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,17
 OECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, min",0
 OECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, min",18
 OECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, max",1000
 OECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, max",18
-OECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, min",-0.02
+OECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, min",-0.01
 OECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, min",-0.19
-OECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, max",-0.02
+OECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, max",0.01
 OECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, max",-0.19
 OECD ,Hydroelectricity,Baseline,Electricity,Max annual growth,100
 OECD ,Hydroelectricity,Pathway,Electricity,Max annual growth,100
 OECD ,Hydroelectricity,Pathway,Electricity,Floor,0
 OECD ,Hydroelectricity,Baseline,Electricity,Floor,0
 NonOECD ,Hydroelectricity,Baseline,Electricity,Saturation Point,5
-NonOECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,34
+NonOECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,18
 NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, min",18
 NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, max",1000
 NonOECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, max",18
-NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, min",-0.02
+NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, min",-0.01
 NonOECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, min",-0.19
-NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, max",-0.02
+NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, max",0.01
 NonOECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, max",-0.19
 NonOECD ,Hydroelectricity,Baseline,Electricity,Max annual growth,100
 NonOECD ,Hydroelectricity,Pathway,Electricity,Max annual growth,100
@@ -4681,7 +4676,7 @@ OECD ,Geothermal,Pathway,Electricity,Saturation Point,5
 OECD ,Geothermal,Baseline,Electricity,"Parameter b, min",0
 OECD ,Geothermal,Pathway,Electricity,"Parameter b, min",0
 OECD ,Geothermal,Baseline,Electricity,"Parameter b, max",100
-OECD ,Geothermal,Pathway,Electricity,"Parameter b, max",15
+OECD ,Geothermal,Pathway,Electricity,"Parameter b, max",40
 OECD ,Geothermal,Baseline,Electricity,"Parameter a, min",0
 OECD ,Geothermal,Pathway,Electricity,"Parameter a, min",0.01
 OECD ,Geothermal,Baseline,Electricity,"Parameter a, max",5
@@ -4696,7 +4691,7 @@ NonOECD ,Geothermal,Pathway,Electricity,Saturation Point,5
 NonOECD ,Geothermal,Baseline,Electricity,"Parameter b, min",0
 NonOECD ,Geothermal,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Geothermal,Baseline,Electricity,"Parameter b, max",100
-NonOECD ,Geothermal,Pathway,Electricity,"Parameter b, max",15
+NonOECD ,Geothermal,Pathway,Electricity,"Parameter b, max",40
 NonOECD ,Geothermal,Baseline,Electricity,"Parameter a, min",0
 NonOECD ,Geothermal,Pathway,Electricity,"Parameter a, min",0.01
 NonOECD ,Geothermal,Baseline,Electricity,"Parameter a, max",5
@@ -7712,8 +7707,8 @@ World ,Bioenergy,Pathway,Heat,Consumption:Generation,1
 OECD ,Bioenergy,Pathway,Heat,Saturation Point,70
 OECD ,Bioenergy,Pathway,Heat,"Parameter b, min",37
 OECD ,Bioenergy,Pathway,Heat,"Parameter b, max",37
-OECD ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.14
-OECD ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.14
+OECD ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.04
+OECD ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.04
 OECD ,Bioenergy,Pathway,Heat,Max annual growth,100
 OECD ,Bioenergy,Pathway,Heat,Floor,0
 OECD ,Bioenergy,Pathway,Heat,Consumption:Generation,1
@@ -7728,8 +7723,8 @@ OECD ,Bioenergy,Baseline,Heat,Consumption:Generation,1
 NonOECD ,Bioenergy,Pathway,Heat,Saturation Point,70
 NonOECD ,Bioenergy,Pathway,Heat,"Parameter b, min",37
 NonOECD ,Bioenergy,Pathway,Heat,"Parameter b, max",37
-NonOECD ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.14
-NonOECD ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.14
+NonOECD ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.04
+NonOECD ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.04
 NonOECD ,Bioenergy,Pathway,Heat,Max annual growth,100
 NonOECD ,Bioenergy,Pathway,Heat,Floor,0
 NonOECD ,Bioenergy,Pathway,Heat,Consumption:Generation,1
