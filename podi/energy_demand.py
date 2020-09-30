@@ -60,73 +60,52 @@ def energy_demand(
 
     # Reallocate 'Other' energy demand from ag/non-energy use to industry
     energy_demand.loc[slice(None), "Industry", "Other renewables", scenario] = (
-        energy_demand.loc[slice(None), "Industry", "Other renewables", scenario]
-        .add(
-            energy_demand.loc[
-                slice(None),
-                ["Other"],
-                ["Other"],
-                slice(None),
-            ]
-            .groupby("IEA Region")
-            .sum()
-            .reindex(
+        (
+            (
                 energy_demand.loc[
-                    slice(None), "Industry", "Other renewables", scenario
-                ].index
-            ),
-            axis=1,
+                    slice(None),
+                    ["Industry", "Other"],
+                    ["Other renewables", "Other"],
+                    scenario,
+                ].groupby("IEA Region")
+            ).sum()
+            * 0.29
+        )
+        .reindex_like(
+            energy_demand.loc[slice(None), "Industry", "Other renewables", scenario]
         )
         .values
     )
 
     # Reallocate heat demand within industry
-    """
     energy_demand.loc[slice(None), "Industry", "Heat", scenario] = (
-        energy_demand.loc[slice(None), "Industry", "Heat", scenario]
-        .add(
+        (
             energy_demand.loc[
                 slice(None),
-                ["Industry"],
+                "Industry",
                 ["Coal", "Oil", "Natural gas", "Bioenergy", "Other renewables"],
-                slice(None),
-            ]
-            .groupby("IEA Region")
-            .sum()
-            .reindex(
-                energy_demand.loc[
-                    slice(None), "Industry", "Other renewables", scenario
-                ].index
-            ),
-            axis=1,
+                scenario,
+            ].groupby("IEA Region")
         )
+        .sum()
+        .reindex_like(energy_demand.loc[slice(None), "Industry", "Heat", scenario])
         .values
     )
-    """
 
     # Reallocate heat demand within buildings
-    """
     energy_demand.loc[slice(None), "Buildings", "Heat", scenario] = (
-        energy_demand.loc[slice(None), "Buildings", "Heat", scenario]
-        .add(
+        (
             energy_demand.loc[
                 slice(None),
-                ["Buildings"],
+                "Buildings",
                 ["Coal", "Oil", "Natural gas", "Bioenergy", "Other renewables"],
-                slice(None),
-            ]
-            .groupby("IEA Region")
-            .sum()
-            .reindex(
-                energy_demand.loc[
-                    slice(None), "Industry", "Other renewables", scenario
-                ].index
-            ),
-            axis=1,
+                scenario,
+            ].groupby("IEA Region")
         )
+        .sum()
+        .reindex_like(energy_demand.loc[slice(None), "Buildings", "Heat", scenario])
         .values
     )
-    """
 
     # Reallocate international bunkers from Transport - Oil
     energy_demand.loc["World ", "Transport", "Oil"] = (
@@ -229,57 +208,70 @@ def energy_demand(
     # Update sector-level and end-use level demand estimates
 
     energy_demand.loc[slice(None), "Industry", "Industry"] = (
-        energy_demand.loc[slice(None), "Industry", ["Electricity", "Heat"]]
-        .groupby("IEA Region")
+        (
+            energy_demand.loc[slice(None), "Industry", ["Electricity", "Heat"]].groupby(
+                "IEA Region"
+            )
+        )
         .sum()
         .values
     )
 
     energy_demand.loc[slice(None), "Buildings", "Buildings"] = (
-        energy_demand.loc[slice(None), "Buildings", ["Electricity", "Heat"]]
-        .groupby("IEA Region")
+        (
+            energy_demand.loc[
+                slice(None), "Buildings", ["Electricity", "Heat"]
+            ].groupby("IEA Region")
+        )
         .sum()
         .values
     )
 
     energy_demand.loc[slice(None), "Transport", "Transport"] = (
-        energy_demand.loc[
-            slice(None), "Transport", ["Electricity", "Oil", "Biofuels", "Other fuels"]
-        ]
-        .groupby("IEA Region")
+        (
+            energy_demand.loc[
+                slice(None),
+                "Transport",
+                ["Electricity", "Oil", "Biofuels", "Other fuels"],
+            ].groupby("IEA Region")
+        )
         .sum()
         .values
     )
 
     energy_demand.loc[slice(None), "TFC", "Electricity"] = (
-        energy_demand.loc[
-            slice(None), ["Industry", "Buildings", "Transport"], ["Electricity"]
-        ]
-        .groupby("IEA Region")
+        (
+            energy_demand.loc[
+                slice(None), ["Industry", "Buildings", "Transport"], ["Electricity"]
+            ].groupby("IEA Region")
+        )
         .sum()
         .values
     )
 
     energy_demand.loc[slice(None), "TFC", "Heat"] = (
-        energy_demand.loc[slice(None), ["Industry", "Buildings", "Transport"], ["Heat"]]
-        .groupby("IEA Region")
+        (
+            energy_demand.loc[
+                slice(None), ["Industry", "Buildings", "Transport"], ["Heat"]
+            ].groupby("IEA Region")
+        )
         .sum()
         .values
     )
     """
     energy_demand.loc[slice(None), 'TFC', 'Nonelec Transport'] = (
         energy_demand.loc[
-            slice(None), ["Transport"], ["Oil", "Biofuels", "Other fuels"]        ]        .groupby("IEA Region")        .sum()
+            slice(None), ["Transport"], ["Oil", "Biofuels", "Other fuels"]        ]        .groupby("IEA Region")        ).sum()
         .values
-    )
     """
     energy_demand.loc[slice(None), "TFC", "Total final consumption"] = (
-        energy_demand.loc[
-            slice(None),
-            ["Industry", "Buildings", "Transport"],
-            ["Industry", "Buildings", "Transport"],
-        ]
-        .groupby("IEA Region")
+        (
+            energy_demand.loc[
+                slice(None),
+                ["Industry", "Buildings", "Transport"],
+                ["Industry", "Buildings", "Transport"],
+            ].groupby("IEA Region")
+        )
         .sum()
         .values
     )

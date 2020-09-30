@@ -450,12 +450,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                     .sum()
                     .loc[
                         [
-                            "Coal",
-                            "Oil",
-                            "Natural gas",
-                            "Bioenergy",
                             "Heat",
-                            "Other renewables",
                         ],
                         :,
                     ]
@@ -471,10 +466,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                     .sum()
                     .loc[
                         [
-                            "Coal",
-                            "Oil",
-                            "Natural gas",
-                            "Bioenergy",
                             "Heat",
                         ],
                         :,
