@@ -180,18 +180,6 @@ def energy_supply(scenario, energy_demand):
 
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
-        # set fossil fuel generation to fill balance
-        """
-        perc.loc["Fossil fuels"] = perc.sum().apply(
-            lambda x: max((1 - x), 0)
-        )
-
-               0.9 - 0.515 * x
-                - 0.03 * (x ** 2)
-                - 0.0405 * (x ** 8)
-                - 0.0014 * (x ** 9),
-        """
-
         return perc
 
     # project electricity consumption met by a given technology
@@ -404,6 +392,7 @@ def energy_supply(scenario, energy_demand):
                 ]
                 .loc[:, str(near_proj_start_year) :]
                 .sum()
+                * 0.2
             )
         ).values
 
@@ -557,9 +546,6 @@ def energy_supply(scenario, energy_demand):
         # set fossil fuel generation to fill balance
         perc.loc["Fossil fuels"] = perc.loc[["Oil", "Other fuels"]].sum()
 
-        # perc.sum().apply(lambda x: max(1 - x, 0))
-        # max(0.88 - 1.1 * x - 0.1 * x ** 1.1, 0)
-        # perc.loc["Fossil fuels"].loc[2070:] = 0
         return perc
 
     # project transport consumption met by a given technology
@@ -582,7 +568,8 @@ def energy_supply(scenario, energy_demand):
     def transport_consump(region, hist_transport_consump, proj_transport_consump):
         hist_transport_consump = hist_transport_consump.droplevel(["IEA Region"])
         hist_transport_consump.loc["Fossil fuels"] = hist_transport_consump.loc["Oil"]
-        return hist_transport_consump.join(proj_transport_consump) * 1.4
+
+        return hist_transport_consump.join(proj_transport_consump) * 1.7
 
     # join timeseries of historical and projected percent total transport consumption met by a given technology
     def transport_per_consump(hist_per_transport_consump, proj_per_transport_consump):

@@ -38,7 +38,7 @@ def results_analysis(
     grid_decarb = (
         elec_consump_pathway.loc[elec_consump_pathway.index.isin(decarb, level=1)]
         .sum()
-        .div(elec_consump_pathway.drop("Nuclear", level=1).sum())
+        .div(elec_consump_pathway.sum())
     )
     grid_decarb = pd.DataFrame(grid_decarb).T
     grid_decarb.columns = grid_decarb.columns.astype(int)
