@@ -142,16 +142,20 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         .sum()
     )
 
+    # need to add in electricity to these?
     em_mit_transport = (
-        em_mitigated.loc[slice(None), "Heat", [""]].groupby("Metric").sum().sum()
+        em_mitigated.loc[slice(None), "Transport", ["Fossil fuels"]]
+        .groupby("Metric")
+        .sum()
+        .sum()
     )
 
     em_mit_buildings = (
-        em_mitigated.loc[slice(None), "Heat", [""]].groupby("Metric").sum().sum()
+        em_mitigated.loc[slice(None), "Heat", ['Solar thermal']].groupby("Metric").sum().sum()
     )
 
     em_mit_industry = (
-        em_mitigated.loc[slice(None), "Industry", slice(None)]
+        em_mitigated.loc[slice(None), "Heat", ['Solar thermal', 'Waste'])]
         .groupby("Metric")
         .sum()
         .sum()
@@ -197,6 +201,16 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     em_mit_cdr = cdr_needed_def
 
+    em_mit = em_mit_electricity.append(
+        em_mit_transport,
+        em_mit_buildings,
+        em_mit_industry,
+        em_mit_fw,
+        em_mit_ra,
+        em_mit_othergas,
+        em_mit_cdr,
+    )
+
     for i in range(0, 1):
         fig = em.loc[["OECD ", "NonOECD "]].groupby("Metric").sum()
         plt.figure(i)
@@ -216,7 +230,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # endregion
 
     ###############################################################
-    # FIG. 5 : PROJECECTD AVERAGE GLOBAL TEMPERATURE INCREASE ABOVE PRE-INDUSTRIAL #
+    # FIG. 5 : PROJECTED AVERAGE GLOBAL TEMPERATURE INCREASE ABOVE PRE-INDUSTRIAL #
     ###############################################################
 
     # region
@@ -246,7 +260,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # endregion
 
     ################################################################
-    # FIG. 6 : PROJECECTD GREENHOUSE GAS ATMOSPHERIC CONCENTRATION #
+    # FIG. 6 : PROJECTED GREENHOUSE GAS ATMOSPHERIC CONCENTRATION #
     ################################################################
 
     # region
@@ -256,7 +270,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # endregion
 
     #####################################################
-    # FIG. 7 : PROJECECTD CO2 ATMOSPHERIC CONCENTRATION #
+    # FIG. 7 : PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
     #####################################################
 
     # region
