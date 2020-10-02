@@ -110,7 +110,7 @@ energy_demand_pathway = energy_demand(
 afolu_em_baseline, afolu_per_adoption_baseline = afolu("Baseline")
 afolu_em_pathway, afolu_per_adoption_pathway = afolu("Pathway")
 
-afolu_em_mitigated = afolu_pathway - afolu_baseline
+afolu_em_mitigated = afolu_em_pathway - afolu_em_baseline
 
 # endregion
 

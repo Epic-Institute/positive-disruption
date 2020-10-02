@@ -19,7 +19,6 @@ from podi.energy_supply import (
 )
 import pymagicc
 from pymagicc import scenarios
-from podi.emissions import em, em_targets
 
 # endregion
 
@@ -151,11 +150,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     )
 
     em_mit_buildings = (
-        em_mitigated.loc[slice(None), "Heat", ['Solar thermal']].groupby("Metric").sum().sum()
+        em_mitigated.loc[slice(None), "Heat", ["Solar thermal"]]
+        .groupby("Metric")
+        .sum()
+        .sum()
     )
 
     em_mit_industry = (
-        em_mitigated.loc[slice(None), "Heat", ['Solar thermal', 'Waste'])]
+        em_mitigated.loc[slice(None), "Heat", ["Solar thermal", "Waste"]]
         .groupby("Metric")
         .sum()
         .sum()
@@ -199,33 +201,49 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         .sum()
     )
 
-    em_mit_cdr = cdr_needed_def
+    em_mit_cdr = pd.Series(
+        cdr_needed_def, index=np.arange(data_start_year, long_proj_end_year + 1)
+    )
 
-    em_mit = em_mit_electricity.append(
-        em_mit_transport,
-        em_mit_buildings,
-        em_mit_industry,
-        em_mit_fw,
-        em_mit_ra,
-        em_mit_othergas,
-        em_mit_cdr,
+    em_mit = pd.DataFrame(
+        [
+            em_mit_electricity,
+            em_mit_transport,
+            em_mit_buildings,
+            em_mit_industry,
+            em_mit_fw,
+            em_mit_ra,
+            em_mit_othergas,
+            em_mit_cdr,
+        ]
+    ).rename(
+        index={
+            0: "Electricity",
+            1: "Transport",
+            2: "Buildings",
+            3: "Industry",
+            4: "Forests & Wetlands",
+            5: "Agriculture",
+            6: "Other Gases",
+            7: "CDR",
+        }
     )
 
     for i in range(0, 1):
-        fig = em.loc[["OECD ", "NonOECD "]].groupby("Metric").sum()
+        fig = em_mit
         plt.figure(i)
-        plt.plot(fig.columns.astype(int).values, fig.T)
-        plt.plot(fig.columns.values, em_targets, linestyle="-", colors=color2)
-        plt.ylabel("Gt CO2e/yr")
-        plt.xlim([data_start_year, long_proj_end_year])
-        plt.title("Mitigation Wedges, " + iea_region_list[i])
-        plt.legend(
-            fig.index,
-            loc=2,
-            fontsize="small",
-            bbox_to_anchor=(1.05, 1),
-            borderaxespad=0.0,
+        plt.stackplot(
+            fig.T.index,
+            fig,
+            labels=fig.index,
+            colors=(color),
         )
+        plt.legend(loc=2, fontsize="small")
+        plt.ylabel("Gt CO2")
+        plt.xlim([2020, energy_demand_pathway.columns.max()])
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+        plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
+        plt.title("Emissions Mitigated, " + iea_region_list[i])
 
     # endregion
 

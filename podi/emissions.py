@@ -34,7 +34,7 @@ def emissions(
     em_factors = (
         pd.read_csv("podi/data/emissions_factors.csv")
         .drop(columns=["Unit"])
-        .set_index(["Region", "Metric"])
+        .set_index(["Region", "Sector", "Metric"])
     )
 
     em_factors.columns = em_factors.columns.astype(int)
@@ -47,29 +47,24 @@ def emissions(
     #################
 
     # region
-
+    elec_consump = pd.concat(
+        [elec_consump], keys=["Electricity"], names=["Sector"]
+    ).reorder_levels(["Region", "Sector", "Metric"])
     elec_em = (
         elec_consump * em_factors[em_factors.index.isin(elec_consump.index.values)]
     )
 
-    elec_em = pd.concat(
-        [elec_em], keys=["Electricity"], names=["Sector"]
-    ).reorder_levels(["Region", "Sector", "Metric"])
-
     # endregion
 
-    #################
-    #  ELECTRICITY  #
-    #################
+    ##########
+    #  Heat  #
+    ##########
 
     # region
+    heat_consump = pd.concat([heat_consump], keys=["Heat"], names=["Sector"])
 
     heat_em = (
         heat_consump * em_factors[em_factors.index.isin(heat_consump.index.values)]
-    )
-
-    heat_em = pd.concat([heat_em], keys=["Heat"], names=["Sector"]).reorder_levels(
-        ["Region", "Sector", "Metric"]
     )
 
     # endregion
@@ -79,15 +74,14 @@ def emissions(
     ###########################
 
     # region
+    transport_consump = pd.concat(
+        [transport_consump], keys=["Transport"], names=["Sector"]
+    )
 
     transport_em = (
         transport_consump
         * em_factors[em_factors.index.isin(transport_consump.index.values)]
     )
-
-    transport_em = pd.concat(
-        [transport_em], keys=["Transport"], names=["Sector"]
-    ).reorder_levels(["Region", "Sector", "Metric"])
 
     # endregion
 
