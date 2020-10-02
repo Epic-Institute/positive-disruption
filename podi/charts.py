@@ -19,6 +19,7 @@ from podi.energy_supply import (
 )
 import pymagicc
 from pymagicc import scenarios
+from podi.emissions import em, em_targets
 
 # endregion
 
@@ -125,20 +126,82 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.572, 0.792, 0.744),
         (0.688, 0.472, 0.460),
         (0.928, 0.828, 0.824),
+    )
+
+    color2 = (
         (0.748, 0.232, 0.204),
         (0.384, 0.664, 0.600),
         (0.284, 0.700, 0.936),
         (0.999, 0.976, 0.332),
     )
 
-    # https://pyam-iamc.readthedocs.io/en/stable/examples/plot_stack.html#sphx-glr-examples-plot-stack-py
+    em_mit_electricity = (
+        em_mitigated.loc[slice(None), "Electricity", slice(None)]
+        .groupby("Metric")
+        .sum()
+        .sum()
+    )
 
-    for i in range(0, len(iea_region_list)):
+    em_mit_transport = (
+        em_mitigated.loc[slice(None), "Heat", [""]].groupby("Metric").sum().sum()
+    )
 
-        # fig = dataframe of percent of max mitigation for each vector
+    em_mit_buildings = (
+        em_mitigated.loc[slice(None), "Heat", [""]].groupby("Metric").sum().sum()
+    )
 
+    em_mit_industry = (
+        em_mitigated.loc[slice(None), "Industry", slice(None)]
+        .groupby("Metric")
+        .sum()
+        .sum()
+    )
+
+    # note for AFOLU using em not em_mitigated
+    em_mit_ra = em.loc[
+        slice(None),
+        "AFOLU",
+        [
+            " Biochar ",
+            " Cropland Soil Health ",
+            " Improved Rice ",
+            " Nitrogen Fertilizer Management ",
+            " Trees in Croplands ",
+            " Animal Mgmt ",
+            " Legumes ",
+            " Optimal intensity ",
+            " Silvopasture ",
+        ],
+    ].sum()
+
+    em_mit_fw = em.loc[
+        slice(None),
+        "AFOLU",
+        [
+            " Avoided Coastal Impacts ",
+            " Avoided Forest Conversion ",
+            " Avoided Peat Impacts ",
+            " Coastal Restoration ",
+            " Improved Forest Mgmt ",
+            " Peat Restoration ",
+            " Natural Regeneration ",
+        ],
+    ].sum()
+
+    em_mit_othergas = (
+        em_mitigated.loc[slice(None), "Industry", ["CH4", "N2O", "F-Gases"]]
+        .groupby("Metric")
+        .sum()
+        .sum()
+    )
+
+    em_mit_cdr = cdr_needed_def
+
+    for i in range(0, 1):
+        fig = em.loc[["OECD ", "NonOECD "]].groupby("Metric").sum()
         plt.figure(i)
         plt.plot(fig.columns.astype(int).values, fig.T)
+        plt.plot(fig.columns.values, em_targets, linestyle="-", colors=color2)
         plt.ylabel("Gt CO2e/yr")
         plt.xlim([data_start_year, long_proj_end_year])
         plt.title("Mitigation Wedges, " + iea_region_list[i])

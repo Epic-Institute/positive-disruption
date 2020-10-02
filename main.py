@@ -107,8 +107,8 @@ energy_demand_pathway = energy_demand(
 
 # region
 
-afolu_baseline, afolu_per_adoption_baseline = afolu("Baseline")
-afolu_pathway, afolu_per_adoption_pathway = afolu("Pathway")
+afolu_em_baseline, afolu_per_adoption_baseline = afolu("Baseline")
+afolu_em_pathway, afolu_per_adoption_pathway = afolu("Pathway")
 
 afolu_em_mitigated = afolu_pathway - afolu_baseline
 
@@ -120,13 +120,26 @@ afolu_em_mitigated = afolu_pathway - afolu_baseline
 
 # region
 
-em_baseline, ef_baseline = emissions(
-    "Baseline", elec_supply_baseline, afolu_baseline, "emissions.csv"
+em_baseline, em_targets_baseline = emissions(
+    "Baseline",
+    elec_consump_baseline,
+    heat_consump_baseline,
+    transport_consump_baseline,
+    afolu_em_baseline,
+    "podi/data/emissions_additional.csv",
+    "podi/data/emissions_targets.csv",
 )
 
-em_pathway, ef_pathway = emissions(
-    "Pathway", elec_supply_pathway, afolu_pathway, "emissions.csv"
+em_pathway, em_targets_pathway = emissions(
+    "Pathway",
+    elec_consump_pathway,
+    heat_consump_pathway,
+    transport_consump_pathway,
+    afolu_em_pathway,
+    "podi/data/emissions_additional.csv",
+    "podi/data/emissions_targets.csv",
 )
+
 
 em_mitigated = em_baseline - em_pathway
 
@@ -170,8 +183,8 @@ if consump_cdr_pathway > cdr_energy_pathway:
 
 # region
 
-climate_baseline = climate(emissions_baseline, cdr_baseline)
-climate_pathway = climate(emissions_pathway, cdr_pathway)
+climate_baseline = climate("Baseline", emissions_baseline, cdr_baseline)
+climate_pathway = climate("Pathway", emissions_pathway, cdr_pathway)
 
 # endregion
 

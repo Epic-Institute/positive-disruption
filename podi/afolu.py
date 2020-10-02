@@ -75,10 +75,10 @@ def afolu(scenario):
         )
     )
 
-    proj_adoption["Variable2"] = this.values
+    proj_adoption["Metric"] = this.values
     proj_adoption.reset_index(inplace=True)
     proj_adoption.set_index(
-        ["Region", "Variable", "Variable2", "Unit", "Scenario"], inplace=True
+        ["Region", "Variable", "Metric", "Unit", "Scenario"], inplace=True
     )
 
     per.set_index(proj_adoption.index, inplace=True)
