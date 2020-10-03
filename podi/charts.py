@@ -116,6 +116,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
+    # region
+
     color = (
         (0.560, 0.516, 0.640),
         (0.488, 0.672, 0.736),
@@ -133,6 +135,10 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.284, 0.700, 0.936),
         (0.999, 0.976, 0.332),
     )
+
+    # endregion
+
+    # region
 
     em_mit_electricity = (
         em_mitigated.loc[slice(None), "Electricity", slice(None)]
@@ -163,8 +169,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         .sum()
     )
 
-    # note for AFOLU using em not em_mitigated
-    em_mit_ra = em.loc[
+    em_mit_ra = em_mitigated.loc[
         slice(None),
         "AFOLU",
         [
@@ -180,7 +185,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         ],
     ].sum()
 
-    em_mit_fw = em.loc[
+    em_mit_fw = em_mitigated.loc[
         slice(None),
         "AFOLU",
         [
@@ -200,6 +205,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         .sum()
         .sum()
     )
+    """
+    em_mit_cdr = (
+        pd.Series(pd.read_csv(cdr_emissions).loc[data_start_year, long_proj_end_year])
+        .groupby("Metric")
+        .sum()
+    )
+    """
 
     em_mit_cdr = pd.Series(
         cdr_needed_def, index=np.arange(data_start_year, long_proj_end_year + 1)
@@ -224,25 +236,28 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             3: "Industry",
             4: "Forests & Wetlands",
             5: "Agriculture",
-            6: "Other Gases",
+            6: "CH4, N2O, F-gases",
             7: "CDR",
         }
     )
 
+    # endregion
+
     for i in range(0, 1):
-        fig = em_mit
+        fig = em_mit / 1000
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
             fig,
             labels=fig.index,
-            colors=(color),
+            colors=color,
         )
+        plt.plot(fig.T.index, em_targets_pathway.T / 1000, LineStyle="--")
         plt.legend(loc=2, fontsize="small")
-        plt.ylabel("Gt CO2")
-        plt.xlim([2020, energy_demand_pathway.columns.max()])
+        plt.ylabel("GtCO2e/yr")
+        plt.xlim([2020, 2100])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-        plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
+        plt.xticks(np.arange(2020, 2110, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
 
     # endregion
@@ -314,94 +329,11 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # Baseline
 
     for i in range(0, 1):
-        energy_demand_baseline_i = energy_demand_baseline.loc[
-            iea_region_list[i], slice(None), slice(None), "Baseline"
+        energy_demand_i = energy_demand_baseline.loc[
+            ["OECD ", "NonOECD "], slice(None), slice(None), "Baseline"
         ]
         fig = (
-            energy_demand_baseline_i.loc[(slice(None), "Electricity", slice(None)), :]
-            .drop("TFC")
-            .append(
-                pd.DataFrame(
-                    energy_demand_baseline_i.loc["Transport"]
-                    .loc[["Oil", "Biofuels", "Other fuels"], :]
-                    .sum()
-                ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
-            )
-            .append(
-                pd.DataFrame(
-                    energy_demand_baseline_i.loc["Buildings"]
-                    .loc[
-                        [
-                            "Coal",
-                            "Oil",
-                            "Natural gas",
-                            "Heat",
-                            "Bioenergy",
-                            "Other renewables",
-                        ],
-                        :,
-                    ]
-                    .sum()
-                ).T.rename(index={0: ("Buildings", "Heat")})
-            )
-            .append(
-                pd.DataFrame(
-                    energy_demand_baseline_i.loc["Industry"]
-                    .loc[
-                        [
-                            "Coal",
-                            "Oil",
-                            "Natural gas",
-                            "Heat",
-                            "Bioenergy",
-                            "Other renewables",
-                        ],
-                        :,
-                    ]
-                    .sum()
-                ).T.rename(index={0: ("Industry", "Heat")})
-            )
-            .reindex(
-                [
-                    ("Transport", "Nonelectric Transport"),
-                    ("Transport", "Electricity"),
-                    ("Buildings", "Heat"),
-                    ("Buildings", "Electricity"),
-                    ("Industry", "Heat"),
-                    ("Industry", "Electricity"),
-                ]
-            )
-        )
-
-        plt.figure(i)
-        plt.stackplot(
-            fig.T.index,
-            fig,
-            labels=fig.index,
-            colors=(
-                "darkgreen",
-                "rebeccapurple",
-                "lightcoral",
-                "midnightblue",
-                "darkred",
-                "cornflowerblue",
-            ),
-        )
-        plt.legend(loc=2, fontsize="small")
-        plt.ylabel("TFC (TWh)")
-        plt.xlim([10, 90])
-        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-        plt.xticks(np.arange(10, 100, 10))
-        plt.title("Energy Demand, " + iea_region_list[i])
-
-    # Pathway (World)
-
-    for i in range(0, 1):
-        energy_demand_pathway_i = energy_demand_pathway.loc[
-            ["World "], slice(None), slice(None), "Pathway"
-        ]
-        fig = (
-            energy_demand_pathway_i.loc[
+            energy_demand_i.loc[
                 (slice(None), slice(None), "Electricity", slice(None)), :
             ]
             .groupby(["Sector"])
@@ -416,7 +348,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_pathway_i.loc[
+                    energy_demand_i.loc[
                         slice(None), "Transport", slice(None), slice(None)
                     ]
                     .groupby(["Metric"])
@@ -432,7 +364,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                     .sum()
                     .add(
                         pd.DataFrame(
-                            energy_demand_pathway.loc[
+                            energy_demand_baseline.loc[
                                 "World ", "Transport", "International bunkers"
                             ]
                         ).sum()
@@ -441,19 +373,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_pathway_i.loc[
+                    energy_demand_i.loc[
                         slice(None), "Buildings", slice(None), slice(None)
                     ]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
                         [
-                            "Coal",
-                            "Oil",
-                            "Natural gas",
-                            "Bioenergy",
                             "Heat",
-                            "Other renewables",
                         ],
                         :,
                     ]
@@ -462,17 +389,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_pathway_i.loc[
+                    energy_demand_i.loc[
                         slice(None), "Industry", slice(None), slice(None)
                     ]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
                         [
-                            "Coal",
-                            "Oil",
-                            "Natural gas",
-                            "Bioenergy",
                             "Heat",
                         ],
                         :,
@@ -508,19 +431,19 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
         plt.legend(loc=2, fontsize="small")
         plt.ylabel("TFC (TWh)")
-        plt.xlim([2020, energy_demand_pathway.columns.max()])
+        plt.xlim([2020, energy_demand_baseline.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-        plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
+        plt.xticks(np.arange(2020, energy_demand_baseline.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
 
     # Pathway (Sum OECD/NonOECD)
 
     for i in range(0, 1):
-        energy_demand_pathway_i = energy_demand_pathway.loc[
+        energy_demand_i = energy_demand_pathway.loc[
             ["OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
         ]
         fig = (
-            energy_demand_pathway_i.loc[
+            energy_demand_i.loc[
                 (slice(None), slice(None), "Electricity", slice(None)), :
             ]
             .groupby(["Sector"])
@@ -535,7 +458,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_pathway_i.loc[
+                    energy_demand_i.loc[
                         slice(None), "Transport", slice(None), slice(None)
                     ]
                     .groupby(["Metric"])
@@ -560,7 +483,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_pathway_i.loc[
+                    energy_demand_i.loc[
                         slice(None), "Buildings", slice(None), slice(None)
                     ]
                     .groupby(["Metric"])
@@ -576,7 +499,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_pathway_i.loc[
+                    energy_demand_i.loc[
                         slice(None), "Industry", slice(None), slice(None)
                     ]
                     .groupby(["Metric"])
@@ -620,7 +543,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.ylabel("TFC (TWh)")
         plt.xlim([2020, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-        plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
+        plt.xticks(np.arange(2020, energy_demand_pathway.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
 
     # endregion
@@ -700,6 +623,59 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.651, 0.651, 0.651),
     )
 
+    # endregion
+
+    # Baseline
+
+    # region
+
+    for i in range(0, 1):
+        elec_consump_i = (
+            elec_consump_baseline.loc[["OECD ", "NonOECD "], slice(None)]
+            .groupby("Metric")
+            .sum()
+        )
+        elec_consump_i = pd.concat(
+            [elec_consump_i], keys=["Electricity"], names=["Sector"]
+        )
+        heat_consump_i = (
+            heat_consump_baseline.loc[["OECD ", "NonOECD "], slice(None)]
+            .groupby("Metric")
+            .sum()
+        )
+        heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
+        transport_consump_i = (
+            transport_consump_baseline.loc[
+                ["OECD ", "NonOECD "],
+                slice(None),
+            ]
+            .groupby("Metric")
+            .sum()
+        )
+        transport_consump_i = pd.concat(
+            [transport_consump_i], keys=["Transport"], names=["Sector"]
+        )
+        fig = pd.DataFrame(
+            (elec_consump_i.append(heat_consump_i).append(transport_consump_i)).loc[
+                :, 2010:2100
+            ]
+        )
+        fig = fig.groupby(group_keys).sum()
+        fig = fig.reindex(tech_list)
+        plt.figure(i)
+        plt.stackplot(fig.columns.astype(int), fig, labels=fig.index, colors=color2)
+        plt.ylabel("TFC (TWh)")
+        plt.xlim([2010, 2100])
+        plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
+        plt.legend(loc=2, fontsize="small")
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+
+    # endregion
+
+    # Pathway
+
+    # region
+
     for i in range(0, 1):
         elec_consump_pathway_i = (
             elec_consump_pathway.loc[["OECD ", "NonOECD "], slice(None)]
@@ -740,7 +716,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.figure(i)
         plt.stackplot(fig.columns.astype(int), fig, labels=fig.index, colors=color2)
         plt.ylabel("TFC (TWh)")
-        plt.xlim([2020, 2100])
+        plt.xlim([2010, 2100])
         plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
@@ -773,6 +749,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.267, 0.267, 0.267),
     )
 
+    # endregion
+
+    # Stacked Area (TWh)
+
+    # region
+
     for i in range(0, 1):
         fig = (
             elec_consump_pathway.loc[["OECD ", "NonOECD "], slice(None)]
@@ -791,10 +773,18 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
+    # endregion
+
     # Line plot (%)
 
-    for i in range(0, len(iea_region_list)):
-        fig = elec_per_adoption_pathway.loc[iea_region_list[i], slice(None)]
+    # region
+
+    for i in range(0, 1):
+        fig = (
+            elec_per_adoption_pathway.loc[["OECD ", "NonOECD "], slice(None)]
+            .groupby("Metric")
+            .sum()
+        )
         fig = fig[fig.index.isin(tech_list)]
         plt.figure(i)
         plt.plot(fig.columns.astype(int).values, fig.T * 100)
@@ -809,7 +799,11 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
 
+    # endregion
+
     # Stacked 100% plot
+
+    # region
 
     for i in range(0, 1):
         fig = (
@@ -830,6 +824,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_to_anchor=(1.05, 1),
             borderaxespad=0.0,
         )
+
+    # endregion
 
     # endregion
 

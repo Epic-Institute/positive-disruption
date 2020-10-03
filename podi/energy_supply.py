@@ -24,7 +24,7 @@ energy_oversupply_prop = 0.0
 def energy_supply(scenario, energy_demand):
     # region
 
-    parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
+    parameters = pd.read_csv("podi/data/tech_parameters.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
 
@@ -32,7 +32,7 @@ def energy_supply(scenario, energy_demand):
         eia_etl("podi/data/electricity.csv").loc[
             :, str(data_start_year) : str(data_end_year)
         ]
-    )
+    ).drop(columns=["Sector"])
     near_elec_proj_data = pd.DataFrame(
         bnef_etl("podi/data/bnef.csv", "elec").loc[
             :, str(near_proj_start_year - 1) : str(near_proj_end_year)
@@ -569,7 +569,14 @@ def energy_supply(scenario, energy_demand):
         hist_transport_consump = hist_transport_consump.droplevel(["IEA Region"])
         hist_transport_consump.loc["Fossil fuels"] = hist_transport_consump.loc["Oil"]
 
-        return hist_transport_consump.join(proj_transport_consump) * 1.7
+        if scenario == "Pathway":
+            transport_consump = (
+                hist_transport_consump.join(proj_transport_consump) * 1.7
+            )
+        else:
+            transport_consump = hist_transport_consump.join(proj_transport_consump)
+
+        return transport_consump
 
     # join timeseries of historical and projected percent total transport consumption met by a given technology
     def transport_per_consump(hist_per_transport_consump, proj_per_transport_consump):

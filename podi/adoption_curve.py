@@ -15,7 +15,7 @@ def func(x, a, b, c, d):
 
 
 def adoption_curve(value, region, scenario, sector):
-    parameters = pd.read_csv("podi/parameters/tech_parameters.csv").set_index(
+    parameters = pd.read_csv("podi/data/tech_parameters.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
 

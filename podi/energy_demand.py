@@ -3,12 +3,6 @@
 # region
 
 import pandas as pd
-from podi.adoption_curve import adoption_curve
-import numpy as np
-from podi.data.iea_weo_etl import iea_region_list
-from scipy.interpolate import interp1d
-
-# from cdr.cdr_main import cdr_energy_demand
 
 # endregion
 
@@ -20,10 +14,14 @@ def energy_demand(
     energy_efficiency,
     heat_pumps,
     solar_thermal,
-    biofuels,
-    cdr,
-    bunker,
+    cdr_demand,
 ):
+
+    ##################################
+    #  DEFINE AND REALLOCATE DEMAND  #
+    ##################################
+
+    # region
 
     # Load energy demand historical data (TWh) and projections (% change)
     energy_demand_historical = pd.read_csv(demand_historical)
@@ -123,6 +121,14 @@ def energy_demand(
     bunkers.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
     energy_demand = energy_demand.append(bunkers)
 
+    # endregion
+
+    #######################################
+    #  ENERGY DEMAND REDUCTIONS & SHIFTS  #
+    #######################################
+
+    # region
+
     # Apply percentage reduction attributed to energy efficiency measures (in buildings, industry, and transport)
     energy_efficiency = (
         pd.read_csv(energy_efficiency)
@@ -161,17 +167,13 @@ def energy_demand(
     )
     """
 
-    # Apply shift attributed to biofuels
-    """
-    biofuels = (
-        pd.read_csv(biofuels)
-        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
-        .fillna(0)
-    )
-    biofuels = biofuels.apply(lambda x: x + 1, axis=1)
-    biofuels = biofuels.reindex(energy_demand.index)
-    energy_demand_post_biofuels = energy_demand - (energy_demand * biofuels.values)
-    """
+    # endregion
+
+    #########
+    #  CDR  #
+    #########
+
+    # region
 
     # Estimate energy demand from CDR
     cdr_energy = pd.concat(
@@ -188,24 +190,17 @@ def energy_demand(
         energy_demand.loc["OECD ", "Industry", "Electricity"].add(cdr_energy).values
     )
 
-    # Add energy demand from international bunker
-    bunker = (
-        pd.read_csv(bunker)
-        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
-        .fillna(0)
-    )
-    bunker = bunker.reindex(energy_demand.index)
-    bunker = bunker.apply(lambda x: x + 1, axis=1)
-    energy_demand_post_bunker = energy_demand - (energy_demand * bunker.values)
+    # endregion
+
+    #################################################
+    #  COMBINE, RECALCULATE SECTOR & END-USE DEMAND #
+    #################################################
+
+    # region
 
     energy_demand = (
-        energy_demand
-        - energy_demand_post_efficiency
-        - energy_demand_post_heat_pumps
-        - energy_demand_post_bunker
+        energy_demand - energy_demand_post_efficiency - energy_demand_post_heat_pumps
     )
-
-    # Update sector-level and end-use level demand estimates
 
     energy_demand.loc[slice(None), "Industry", "Industry"] = (
         (
@@ -276,6 +271,17 @@ def energy_demand(
         .values
     )
 
+    energy_demand.columns = energy_demand.columns.astype(int)
+    energy_demand.clip(lower=0, inplace=True)
+
+    # endregion
+
+    ###################
+    #  SMOOTH CURVES  #
+    ###################
+
+    # region
+
     """
     # Smooth energy demand curves
 
@@ -321,7 +327,6 @@ def energy_demand(
             proj_demand(iea_region_list[i], energy_demand)
         )
     """
-    energy_demand.columns = energy_demand.columns.astype(int)
-    energy_demand.clip(lower=0, inplace=True)
+    # endregion
 
     return energy_demand

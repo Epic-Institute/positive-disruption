@@ -69,8 +69,8 @@ def wws_etl(data_source):
     ]
 
     # add to tech_parameters
-    tech_parameters = pd.read_csv("podi/parameters/tech_parameters.csv")
+    tech_parameters = pd.read_csv("podi/data/tech_parameters.csv")
     tech_parameters = tech_parameters.append(elec_gen)
-    tech_parameters.to_csv("podi/parameters/tech_parameters.csv", index=False)
+    tech_parameters.to_csv("podi/data/tech_parameters.csv", index=False)
 
     return tech_parameters

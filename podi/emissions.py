@@ -5,17 +5,6 @@
 import pandas as pd
 from podi.energy_supply import data_start_year, long_proj_end_year
 
-tech_list = [
-    "Biomass and waste",
-    "Fossil fuels",
-    "Geothermal",
-    "Hydroelectricity",
-    "Nuclear",
-    "Solar",
-    "Wind",
-    "Tide and wave",
-]
-
 # endregion
 
 
@@ -61,7 +50,9 @@ def emissions(
     ##########
 
     # region
-    heat_consump = pd.concat([heat_consump], keys=["Heat"], names=["Sector"])
+    heat_consump = pd.concat(
+        [heat_consump], keys=["Heat"], names=["Sector"]
+    ).reorder_levels(["Region", "Sector", "Metric"])
 
     heat_em = (
         heat_consump * em_factors[em_factors.index.isin(heat_consump.index.values)]
@@ -76,7 +67,7 @@ def emissions(
     # region
     transport_consump = pd.concat(
         [transport_consump], keys=["Transport"], names=["Sector"]
-    )
+    ).reorder_levels(["Region", "Sector", "Metric"])
 
     transport_em = (
         transport_consump

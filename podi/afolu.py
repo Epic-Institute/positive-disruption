@@ -56,26 +56,14 @@ def afolu(scenario):
 
     foo.columns = foo.columns.astype(int)
 
-    proj_adoption = proj_per_adoption.apply(lambda x: x * foo, axis=1)[0]
-    this = pd.DataFrame(
+    proj_adoption = proj_per_adoption.apply(lambda x: x * foo / 10e2, axis=1)[0]
+    metric = pd.DataFrame(
         pd.DataFrame(proj_per_adoption.index.levels[1]).apply(
             lambda x: x.str.split(pat="|", expand=True).values[0][-2], axis=1
         )
     )
 
-    this2 = pd.DataFrame(
-        pd.DataFrame(proj_adoption.index.levels[1]).apply(
-            lambda x: x.str.split(pat="|", expand=True).values[0][1], axis=1
-        )
-    )
-
-    this3 = pd.DataFrame(
-        pd.DataFrame(proj_adoption.index.levels[1]).apply(
-            lambda x: x.str.split(pat="|", expand=True).values[0][0], axis=1
-        )
-    )
-
-    proj_adoption["Metric"] = this.values
+    proj_adoption["Metric"] = metric.values
     proj_adoption.reset_index(inplace=True)
     proj_adoption.set_index(
         ["Region", "Variable", "Metric", "Unit", "Scenario"], inplace=True
@@ -85,5 +73,10 @@ def afolu(scenario):
 
     afolu_adoption = proj_adoption.droplevel(["Scenario"])
     afolu_per_adoption = per.droplevel(["Scenario"])
+
+    if scenario == "Baseline":
+        afolu_adoption = afolu = pd.read_csv(
+            "podi/data/afolu_input_baseline.csv"
+        ).set_index(["Region", "Variable", "Metric", "Unit"])
 
     return afolu_adoption, afolu_per_adoption

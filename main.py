@@ -16,8 +16,7 @@ from podi.data.iea_weo_etl import iea_region_list
 from podi.adoption_curve import adoption_curve
 from podi.emissions import emissions
 from cdr.cdr_main import cdr_mix
-
-# from podi.climate import climate
+from podi.climate import climate
 
 pd.set_option("mode.use_inf_as_na", True)
 
@@ -50,9 +49,7 @@ energy_demand_baseline = energy_demand(
     "podi/data/energy_efficiency.csv",
     "podi/data/heat_pumps.csv",
     "podi/data/solar_thermal.csv",
-    "podi/data/biofuels.csv",
     "podi/data/cdr_energy.csv",
-    "podi/data/bunker.csv",
 )
 
 energy_demand_pathway = energy_demand(
@@ -62,9 +59,7 @@ energy_demand_pathway = energy_demand(
     "podi/data/energy_efficiency.csv",
     "podi/data/heat_pumps.csv",
     "podi/data/solar_thermal.csv",
-    "podi/data/biofuels.csv",
     "podi/data/cdr_energy.csv",
-    "podi/data/bunker.csv",
 )
 
 # endregion
@@ -110,7 +105,7 @@ energy_demand_pathway = energy_demand(
 afolu_em_baseline, afolu_per_adoption_baseline = afolu("Baseline")
 afolu_em_pathway, afolu_per_adoption_pathway = afolu("Pathway")
 
-afolu_em_mitigated = afolu_em_pathway - afolu_em_baseline
+afolu_em_mitigated = afolu_em_pathway
 
 # endregion
 
@@ -150,7 +145,7 @@ em_mitigated = em_baseline - em_pathway
 #######
 
 # region
-
+"""
 cdr_baseline, cdr_cost_baseline, cdr_energy_baseline = cdr_mix(
     em_baseline,
     ef_baseline.loc["Grid"],
@@ -174,7 +169,7 @@ if consump_cdr_baseline > cdr_energy_baseline:
     )
 if consump_cdr_pathway > cdr_energy_pathway:
     print("Electricity oversupply does not meet CDR energy demand for Pathway Scenario")
-
+"""
 # endregion
 
 ###########
@@ -183,8 +178,12 @@ if consump_cdr_pathway > cdr_energy_pathway:
 
 # region
 
-climate_baseline = climate("Baseline", emissions_baseline, cdr_baseline)
-climate_pathway = climate("Pathway", emissions_pathway, cdr_pathway)
+conc_baseline, temp_baseline, sea_lvl_baseline = climate(
+    "Baseline", "podi/data/climate.csv"
+)
+conc_pathway, temp_pathway, sea_lvl_pathway = climate(
+    "Pathway", "podi/data/climate.csv"
+)
 
 # endregion
 
@@ -205,15 +204,5 @@ for i in range(17, 19):
         afolu_per_adoption_pathway,
         cdr_needed_def,
     )
-
-# endregion
-
-##########
-# CHARTS #
-##########
-
-# region
-
-charts(energy_demand_baseline, energy_demand_pathway)
 
 # endregion
