@@ -16,7 +16,7 @@ metric_list = [
 
 
 def eia_etl(data_source):
-    elec_gen = pd.read_csv(data_source).fillna(0)
+    elec_gen = pd.read_csv(data_source).fillna(0).drop(columns=["Sector"])
     region_categories = pd.read_csv(
         "podi/data/region_categories.csv", usecols=["Region", "IEA Region"]
     ).set_index("Region")

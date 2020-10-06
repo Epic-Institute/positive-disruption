@@ -56,7 +56,7 @@ def emissions(
 
     heat_em = (
         heat_consump * em_factors[em_factors.index.isin(heat_consump.index.values)]
-    )
+    ).drop(index=["Fossil fuels"], level=2)
 
     # endregion
 
@@ -72,7 +72,7 @@ def emissions(
     transport_em = (
         transport_consump
         * em_factors[em_factors.index.isin(transport_consump.index.values)]
-    )
+    ).drop(index=["Fossil fuels"], level=2)
 
     # endregion
 
@@ -115,5 +115,6 @@ def emissions(
 
     # Add emissions targets
     em_targets = pd.read_csv(targets_em).set_index("Scenario")
+    em_targets.columns = em_targets.columns.astype(int)
 
     return em, em_targets

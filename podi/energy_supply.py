@@ -32,7 +32,7 @@ def energy_supply(scenario, energy_demand):
         eia_etl("podi/data/electricity.csv").loc[
             :, str(data_start_year) : str(data_end_year)
         ]
-    ).drop(columns=["Sector"])
+    )
     near_elec_proj_data = pd.DataFrame(
         bnef_etl("podi/data/bnef.csv", "elec").loc[
             :, str(near_proj_start_year - 1) : str(near_proj_end_year)
@@ -349,11 +349,6 @@ def energy_supply(scenario, energy_demand):
             perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
 
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
-
-        # set fossil fuel generation to fill balance
-        perc.loc["Fossil fuels"] = perc.apply(
-            lambda x: x.loc[["Coal", "Oil", "Natural gas"]].sum()
-        )
 
         return perc
 
