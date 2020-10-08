@@ -1946,7 +1946,6 @@ SAFR ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 US ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
 US ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 World ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
-World ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
 World ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 World ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Electricity,Baseline,Electricity,Max annual growth,100
@@ -2616,7 +2615,6 @@ US ,Silvopasture,Pathway,AFOLU,Max annual growth,100
 US ,Silvopasture,Baseline,AFOLU,Max annual growth,100
 World ,Silvopasture,Pathway,AFOLU,Max annual growth,100
 World ,Silvopasture,Baseline,AFOLU,Max annual growth,100
-World ,Silvopasture,Pathway,AFOLU,Max annual growth,100
 World ,Silvopasture,Baseline,AFOLU,Max annual growth,100
 AdvancedECO ,Solar,Baseline,,Max annual growth,100
 AdvancedECO ,Solar,Pathway,,Max annual growth,100
@@ -2786,7 +2784,6 @@ US ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
 US ,Trees in Croplands,Baseline,AFOLU,Max annual growth,100
 World ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
 World ,Trees in Croplands,Baseline,AFOLU,Max annual growth,100
-World ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
 World ,Trees in Croplands,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Waste,Pathway,Electricity,Max annual growth,100
 NonOECD ,Waste,Baseline,Electricity,Max annual growth,100
@@ -2956,9 +2953,9 @@ ME ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
 ME ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
 NAM ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
-NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
+NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.025
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
+OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.025
 OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
@@ -2966,7 +2963,7 @@ SAFR ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
 SAFR ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
 US ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
 US ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
-World ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.05
+World ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.025
 World ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
 AdvancedECO ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
 AdvancedECO ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, max",0
@@ -3645,9 +3642,9 @@ ME ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.0598
 ME ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
 NAM ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.0598
 NAM ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
-NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.0598
+NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.08
 NonOECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.0598
+OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.08
 OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.0598
 RUS ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
@@ -4928,9 +4925,9 @@ ME ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.0598
 ME ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
 NAM ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.0598
 NAM ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
-NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.0598
+NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.08
 NonOECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.0598
+OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.08
 OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.0598
 RUS ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
@@ -5438,9 +5435,9 @@ ME ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
@@ -5448,7 +5445,7 @@ SAFR ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 SAFR ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 US ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 US ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
-World ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",45
+World ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",50
 World ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 AdvancedECO ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, max",100
 AdvancedECO ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, max",100
@@ -5522,9 +5519,9 @@ ME ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 ME ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",110
+NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",110
+OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
 OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
@@ -5532,7 +5529,7 @@ SAFR ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 SAFR ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 US ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 US ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
-World ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",110
+World ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
 World ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 AdvancedECO ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, max",100
 AdvancedECO ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, max",100
@@ -5638,11 +5635,11 @@ NAM ,Biochar,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Biochar,Pathway,Industry,"Parameter b, max",40
 NonOECD ,Biochar,Baseline,Industry,"Parameter b, max",100
-NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 OECD ,Biochar,Pathway,Industry,"Parameter b, max",40
 OECD ,Biochar,Baseline,Industry,"Parameter b, max",100
-OECD ,Biochar,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Biochar,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Biochar,Pathway,,"Parameter b, max",100
 RUS ,Biochar,Baseline,,"Parameter b, max",100
@@ -5658,7 +5655,7 @@ US ,Biochar,Pathway,AFOLU,"Parameter b, max",60.52
 US ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 World ,Biochar,Pathway,Industry,"Parameter b, max",40
 World ,Biochar,Baseline,Industry,"Parameter b, max",100
-World ,Biochar,Pathway,AFOLU,"Parameter b, max",70
+World ,Biochar,Pathway,AFOLU,"Parameter b, max",50
 World ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Bioenergy,Pathway,Electricity,"Parameter b, max",40
 NonOECD ,Bioenergy,Baseline,Electricity,"Parameter b, max",40
@@ -5804,9 +5801,9 @@ ME ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
@@ -5814,7 +5811,7 @@ SAFR ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 SAFR ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 US ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 US ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
-World ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60
+World ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
 World ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Electricity,Baseline,Electricity,"Parameter b, max",100
 NonOECD ,Electricity,Pathway,Electricity,"Parameter b, max",100
@@ -6115,9 +6112,9 @@ ME ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Improved Rice,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Improved Rice,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
@@ -6125,7 +6122,7 @@ SAFR ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
 SAFR ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
 US ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
 US ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
-World ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60
+World ,Improved Rice,Pathway,AFOLU,"Parameter b, max",50
 World ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
 AdvancedECO ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 AdvancedECO ,Legumes,Baseline,AFOLU,"Parameter b, max",100
@@ -6157,9 +6154,9 @@ ME ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Legumes,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Legumes,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Legumes,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Legumes,Baseline,AFOLU,"Parameter b, max",100
@@ -6167,7 +6164,7 @@ SAFR ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 SAFR ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 US ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 US ,Legumes,Baseline,AFOLU,"Parameter b, max",100
-World ,Legumes,Pathway,AFOLU,"Parameter b, max",40
+World ,Legumes,Pathway,AFOLU,"Parameter b, max",50
 World ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Natural gas,Baseline,Electricity,"Parameter b, max",100
 NonOECD ,Natural gas,Pathway,Electricity,"Parameter b, max",50
@@ -6211,9 +6208,9 @@ ME ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",34.75
 ME ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",34.75
 NAM ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",34.75
+NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",60
 NonOECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",34.75
+OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",60
 OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",34.75
 RUS ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
@@ -6253,9 +6250,9 @@ ME ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
@@ -6361,9 +6358,9 @@ ME ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
@@ -6371,7 +6368,7 @@ SAFR ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 SAFR ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 US ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 US ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
-World ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",45
+World ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
 World ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Other fuels,Pathway,Transport,"Parameter b, max",10
 NonOECD ,Other fuels,Baseline,Transport,"Parameter b, max",-100
@@ -6458,9 +6455,9 @@ ME ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
@@ -6468,7 +6465,7 @@ SAFR ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 SAFR ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 US ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 US ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
-World ,Silvopasture,Pathway,AFOLU,"Parameter b, max",30
+World ,Silvopasture,Pathway,AFOLU,"Parameter b, max",50
 World ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 AdvancedECO ,Solar,Pathway,,"Parameter b, max",100
 AdvancedECO ,Solar,Baseline,,"Parameter b, max",100
@@ -6626,9 +6623,9 @@ ME ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
+NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
+OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
 OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
@@ -6636,7 +6633,7 @@ SAFR ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 SAFR ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 US ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 US ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
-World ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",55
+World ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
 World ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Waste,Pathway,Electricity,"Parameter b, max",40
 NonOECD ,Waste,Baseline,Electricity,"Parameter b, max",100
@@ -6722,9 +6719,9 @@ ME ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
@@ -6732,7 +6729,7 @@ SAFR ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 SAFR ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 US ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 US ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
-World ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",45
+World ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",50
 World ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 AdvancedECO ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, min",0
 AdvancedECO ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, min",0
@@ -6806,9 +6803,9 @@ ME ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 ME ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",110
+NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",110
+OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
@@ -6816,7 +6813,7 @@ SAFR ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 SAFR ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
 US ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 US ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
-World ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",110
+World ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 World ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
 AdvancedECO ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, min",0
 AdvancedECO ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, min",0
@@ -6922,11 +6919,11 @@ NAM ,Biochar,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Biochar,Pathway,Industry,"Parameter b, min",40
 NonOECD ,Biochar,Baseline,Industry,"Parameter b, min",0
-NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 OECD ,Biochar,Pathway,Industry,"Parameter b, min",40
 OECD ,Biochar,Baseline,Industry,"Parameter b, min",0
-OECD ,Biochar,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Biochar,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Biochar,Pathway,,"Parameter b, min",0
 RUS ,Biochar,Baseline,,"Parameter b, min",0
@@ -6942,7 +6939,7 @@ US ,Biochar,Pathway,AFOLU,"Parameter b, min",60.52
 US ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 World ,Biochar,Pathway,Industry,"Parameter b, min",40
 World ,Biochar,Baseline,Industry,"Parameter b, min",0
-World ,Biochar,Pathway,AFOLU,"Parameter b, min",70
+World ,Biochar,Pathway,AFOLU,"Parameter b, min",50
 World ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Bioenergy,Pathway,Electricity,"Parameter b, min",40
 NonOECD ,Bioenergy,Baseline,Electricity,"Parameter b, min",40
@@ -7088,9 +7085,9 @@ ME ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
@@ -7098,7 +7095,7 @@ SAFR ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 SAFR ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 US ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 US ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
-World ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60
+World ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
 World ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Electricity,Baseline,Electricity,"Parameter b, min",0
 NonOECD ,Electricity,Pathway,Electricity,"Parameter b, min",0
@@ -7399,9 +7396,9 @@ ME ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Improved Rice,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Improved Rice,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
@@ -7409,7 +7406,7 @@ SAFR ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
 SAFR ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
 US ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
 US ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
-World ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60
+World ,Improved Rice,Pathway,AFOLU,"Parameter b, min",50
 World ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
 AdvancedECO ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 AdvancedECO ,Legumes,Baseline,AFOLU,"Parameter b, min",0
@@ -7441,9 +7438,9 @@ ME ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Legumes,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Legumes,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Legumes,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Legumes,Baseline,AFOLU,"Parameter b, min",0
@@ -7451,7 +7448,7 @@ SAFR ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 SAFR ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 US ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 US ,Legumes,Baseline,AFOLU,"Parameter b, min",0
-World ,Legumes,Pathway,AFOLU,"Parameter b, min",40
+World ,Legumes,Pathway,AFOLU,"Parameter b, min",50
 World ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Natural gas,Baseline,Electricity,"Parameter b, min",100
 NonOECD ,Natural gas,Pathway,Electricity,"Parameter b, min",0
@@ -7495,9 +7492,9 @@ ME ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",34.75
 ME ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",34.75
 NAM ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",34.75
+NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",60
 NonOECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",34.75
+OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",60
 OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",34.75
 RUS ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
@@ -7537,9 +7534,9 @@ ME ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
@@ -7645,9 +7642,9 @@ ME ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
@@ -7655,7 +7652,7 @@ SAFR ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 SAFR ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 US ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 US ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
-World ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",45
+World ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
 World ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Other fuels,Pathway,Transport,"Parameter b, min",10
 NonOECD ,Other fuels,Baseline,Transport,"Parameter b, min",-100
@@ -7741,9 +7738,9 @@ ME ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
@@ -7751,7 +7748,7 @@ SAFR ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 SAFR ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 US ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 US ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
-World ,Silvopasture,Pathway,AFOLU,"Parameter b, min",30
+World ,Silvopasture,Pathway,AFOLU,"Parameter b, min",50
 World ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 AdvancedECO ,Solar,Pathway,,"Parameter b, min",0
 AdvancedECO ,Solar,Baseline,,"Parameter b, min",0
@@ -7909,9 +7906,9 @@ ME ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
+NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
+OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",50
 OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
@@ -7919,7 +7916,7 @@ SAFR ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 SAFR ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 US ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 US ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
-World ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",55
+World ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",50
 World ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Waste,Pathway,Electricity,"Parameter b, min",40
 NonOECD ,Waste,Baseline,Electricity,"Parameter b, min",0
@@ -8432,7 +8429,7 @@ World ,Natural gas,Baseline,Electricity,Saturation Point,100
 World ,Natural gas,Pathway,Electricity,Saturation Point,0
 World ,Natural gas,Baseline,Heat,Saturation Point,100
 World ,Natural gas,Pathway,Heat,Saturation Point,29
-World ,Natural Regeneration,Pathway,AFOLU,Saturation Point,100
+World ,Natural Regeneration,Pathway,AFOLU,Saturation Point,90
 World ,Natural Regeneration,Baseline,AFOLU,Saturation Point,100
 World ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,100
 World ,Nitrogen Fertilizer Management,Baseline,AFOLU,Saturation Point,100
@@ -8744,11 +8741,11 @@ World ,Wind,Pathway,Electricity,Saturation Point,38.5
 World ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 World ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 World ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,100
+OECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,200
 OECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 OECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 OECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
-NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,100
+NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,200
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
@@ -8762,7 +8759,7 @@ OECD ,Improved Rice,Pathway,AFOLU,Saturation Point,100
 OECD ,Improved Rice,Baseline,AFOLU,Saturation Point,100
 OECD ,Legumes,Pathway,AFOLU,Saturation Point,100
 OECD ,Legumes,Baseline,AFOLU,Saturation Point,100
-OECD ,Natural Regeneration,Pathway,AFOLU,Saturation Point,100
+OECD ,Natural Regeneration,Pathway,AFOLU,Saturation Point,90
 OECD ,Natural Regeneration,Baseline,AFOLU,Saturation Point,100
 OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,100
 OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Saturation Point,100
@@ -8787,7 +8784,7 @@ NonOECD ,Improved Rice,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Improved Rice,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Legumes,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Legumes,Baseline,AFOLU,Saturation Point,100
-NonOECD ,Natural Regeneration,Pathway,AFOLU,Saturation Point,100
+NonOECD ,Natural Regeneration,Pathway,AFOLU,Saturation Point,90
 NonOECD ,Natural Regeneration,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Saturation Point,100

@@ -108,6 +108,11 @@ def emissions(
 
     # endregion
 
+    if scenario == "Baseline":
+        elec_em = 
+        heat_em = 
+        transport_em = 
+
     em = elec_em.append(heat_em).append(transport_em).append(afolu_em).append(addtl_em)
 
     # Add emissions targets
