@@ -82,10 +82,7 @@ def emissions(
 
     # region
 
-    afolu_em = afolu_em.droplevel(["Variable", "Unit"])
-    afolu_em = pd.concat([afolu_em], keys=["AFOLU"], names=["Sector"]).reorder_levels(
-        ["Region", "Sector", "Metric"]
-    )
+    afolu_em = afolu_em.droplevel(["Unit"])
     afolu_em.columns = afolu_em.columns.astype(int)
     afolu_em = afolu_em.loc[:, data_start_year:long_proj_end_year]
 

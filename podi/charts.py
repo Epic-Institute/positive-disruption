@@ -19,7 +19,7 @@ from podi.energy_supply import (
 )
 import pymagicc
 from pymagicc import scenarios
-from matplotlib.lines import Line2D|
+from matplotlib.lines import Line2D
 
 # endregion
 
@@ -131,7 +131,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.560, 0.516, 0.640),
         (0.284, 0.700, 0.936),
         (0.384, 0.664, 0.600),
-        (0.999, 0.976, 0.332),    
+        (0.999, 0.976, 0.332),
         (0.748, 0.232, 0.204),
     )
 
@@ -148,54 +148,50 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # need to add in electricity to these?
     em_mit_transport = (
-        em_mitigated.loc[slice(None), "Transport", ['Oil', 'Other fuels']]
+        em_mitigated.loc[slice(None), "Transport", ["Oil", "Other fuels"]]
         .groupby("Metric")
         .sum()
         .sum()
     )
 
     em_mit_buildings = (
-        em_mitigated.loc[slice(None), "Heat", ["Solar thermal"]]
-        .groupby("Metric")
-        .sum()
-        .sum()
+        em_mitigated.loc[slice(None), "Heat", slice(None)].groupby("Metric").sum().sum()
     )
 
     em_mit_industry = (
-        em_mitigated.loc[slice(None), "Heat", ["Solar thermal", "Waste"]]
-        .groupby("Metric")
-        .sum()
-        .sum()
+        em_mitigated.loc[slice(None), "Heat", slice(None)].groupby("Metric").sum().sum()
     )
 
-    em_mit_ra = em_mitigated.loc[
+    em_mit_ra = afolu_em_mitigated.loc[
         slice(None),
-        "AFOLU",
         [
-            " Biochar ",
-            " Cropland Soil Health ",
-            " Improved Rice ",
-            " Nitrogen Fertilizer Management ",
-            " Trees in Croplands ",
-            " Animal Mgmt ",
-            " Legumes ",
-            " Optimal intensity ",
-            " Silvopasture ",
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Trees in Croplands",
+            "Animal Mgmt",
+            "Legumes",
+            "Optimal Intensity",
+            "Silvopasture",
         ],
+        slice(None),
+        slice(None),
     ].sum()
 
-    em_mit_fw = em_mitigated.loc[
+    em_mit_fw = afolu_em_mitigated.loc[
         slice(None),
-        "AFOLU",
         [
-            " Avoided Coastal Impacts ",
-            " Avoided Forest Conversion ",
-            " Avoided Peat Impacts ",
-            " Coastal Restoration ",
-            " Improved Forest Mgmt ",
-            " Peat Restoration ",
-            " Natural Regeneration ",
+            "Avoided Coastal Impacts",
+            "Avoided Forest Conversion",
+            "Avoided Peat Impacts",
+            "Coastal Restoration",
+            "Improved Forest Mgmt",
+            "Peat Restoration",
+            "Natural Regeneration",
         ],
+        slice(None),
+        slice(None),
     ].sum()
 
     em_mit_othergas = (
@@ -222,8 +218,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             em_mit_transport,
             em_mit_buildings,
             em_mit_industry,
-            em_mit_fw,
             em_mit_ra,
+            em_mit_fw,
             em_mit_othergas,
             em_mit_cdr,
         ]
@@ -242,7 +238,20 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     spacer = em_targets_pathway.loc["Pathway PD20"]
 
-    custom_legend = [Line2D([0], [0], color=color[8], linewidth=4), Line2D([0], [0], color=color[7], linewidth=4), Line2D([0], [0], color=color[6], linewidth=4), Line2D([0], [0], color=color[5], linewidth=4), Line2D([0], [0], color=color[4], linewidth=4), Line2D([0], [0], color=color[3], linewidth=4), Line2D([0], [0], color=color[2], linewidth=4), Line2D([0], [0], color=color[1], linewidth=4), Line2D([0], [0], color=color[12], linewidth=4, linestyle='--'), Line2D([0], [0], color=color[10], linewidth=4, linestyle='--'), Line2D([0], [0], color=color[11], linewidth=4, linestyle='--'), Line2D([0], [0], color=color[9], linewidth=4, linestyle='--')]
+    custom_legend = [
+        Line2D([0], [0], color=color[8], linewidth=4),
+        Line2D([0], [0], color=color[7], linewidth=4),
+        Line2D([0], [0], color=color[6], linewidth=4),
+        Line2D([0], [0], color=color[5], linewidth=4),
+        Line2D([0], [0], color=color[4], linewidth=4),
+        Line2D([0], [0], color=color[3], linewidth=4),
+        Line2D([0], [0], color=color[2], linewidth=4),
+        Line2D([0], [0], color=color[1], linewidth=4),
+        Line2D([0], [0], color=color[12], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
+    ]
 
     # endregion
 
@@ -268,12 +277,34 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             colors=color,
         )
         plt.plot(fig.T.index, em_targets_pathway.T / 1000, LineStyle="--")
-        plt.legend(loc=2, fontsize="small", )
+        plt.legend(
+            loc=2,
+            fontsize="small",
+        )
         plt.axhline(y=0, color=(0, 0, 0), linestyle=":")
         plt.ylabel("GtCO2e/yr")
         plt.xlim([2020, 2100])
         plt.grid(which="major", linestyle=":", axis="y")
-        plt.legend(custom_legend, ["Electricity", "Transport", "Buildings", "Industry", "Agriculture", "Forests & Wetlands", "CH4, N2O, F-gases", "CDR", "Baseline", "Positive Disruption", "SSP2-RCP1.9", "SSP2-RCP2.6"], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+        plt.legend(
+            custom_legend,
+            [
+                "Electricity",
+                "Transport",
+                "Buildings",
+                "Industry",
+                "Agriculture",
+                "Forests & Wetlands",
+                "CH4, N2O, F-gases",
+                "CDR",
+                "Baseline",
+                "Positive Disruption",
+                "SSP2-RCP1.9",
+                "SSP2-RCP2.6",
+            ],
+            bbox_to_anchor=(1.05, 1),
+            loc=2,
+            borderaxespad=0.0,
+        )
         plt.xticks(np.arange(2020, 2110, 10))
         plt.yticks(np.arange(-25, 95, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])

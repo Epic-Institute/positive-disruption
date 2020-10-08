@@ -351,18 +351,18 @@ def results_analysis(
     # region
 
     ra_decarb = afolu_per_adoption.loc[
-        "World ",
+        ["OECD ", "NonOECD "],
         slice(None),
         [
-            " Biochar ",
-            " Cropland Soil Health ",
-            " Improved Rice ",
-            " Nitrogen Fertilizer Management ",
-            " Trees in Croplands ",
-            " Animal Mgmt ",
-            " Legumes ",
-            " Optimal intensity ",
-            " Silvopasture ",
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Trees in Croplands",
+            "Animal Mgmt",
+            "Legumes",
+            "Optimal Intensity",
+            "Silvopasture",
         ],
         slice(None),
     ]
@@ -378,7 +378,7 @@ def results_analysis(
     # region
 
     fw_decarb = afolu_per_adoption.loc[
-        "World ",
+        ["OECD ", "NonOECD "],
         slice(None),
         [
             " Avoided Coastal Impacts ",
