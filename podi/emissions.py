@@ -113,7 +113,9 @@ def emissions(
     industry_consump = (
         industry_consump
         * heat_per_adoption.loc[
-            ["OECD ", "NonOECD "], ["Coal", "Natural gas", "Oil"], slice(None)
+            ["OECD ", "NonOECD "],
+            ["Coal", "Natural gas", "Oil", "Bioenergy", "Biochar"],
+            slice(None),
         ]
         .groupby("Region")
         .sum()
@@ -144,7 +146,7 @@ def emissions(
     transport_em = (
         transport_consump
         * em_factors[em_factors.index.isin(transport_consump.index.values)]
-    ).drop(index=["Fossil fuels"], level=2)
+    ).drop(index=["Biofuels", "Oil", "Other fuels"], level=2)
 
     # endregion
 
@@ -185,7 +187,13 @@ def emissions(
             pd.read_csv("podi/data/emissions_baseline.csv")
             .set_index(["Region", "Sector", "Unit"])
             .droplevel(["Unit"])
+            .loc[["OECD ", "NonOECD "]]
         )
+        em.columns = em.columns.astype(int)
+        em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
+            ["Region", "Sector", "Metric"]
+        )
+        em = (em.append(afolu_em).append(addtl_em)) * 0.84
     else:
         em = (
             elec_em.loc[slice(None), slice(None), "Fossil fuels"]
@@ -194,6 +202,9 @@ def emissions(
             .append(industry_em)
             .append(afolu_em)
             .append(addtl_em)
+        )
+        em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
+            ["Region", "Sector", "Metric"]
         )
 
     # Add emissions targets

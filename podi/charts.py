@@ -139,28 +139,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    em_mit_electricity = (
-        em_mitigated.loc[slice(None), "Electricity", slice(None)]
-        .groupby("Metric")
-        .sum()
-        .sum()
-    )
+    em_mit_electricity = em_mitigated.loc[slice(None), "Electricity", slice(None)].sum()
 
     # need to add in electricity to these?
-    em_mit_transport = (
-        em_mitigated.loc[slice(None), "Transport", ["Oil", "Other fuels"]]
-        .groupby("Metric")
-        .sum()
-        .sum()
-    )
+    em_mit_transport = em_mitigated.loc[slice(None), "Transport", slice(None)].sum()
 
-    em_mit_buildings = (
-        em_mitigated.loc[slice(None), "Heat", slice(None)].groupby("Metric").sum().sum()
-    )
+    em_mit_buildings = em_mitigated.loc[slice(None), "Buildings", slice(None)].sum()
 
-    em_mit_industry = (
-        em_mitigated.loc[slice(None), "Heat", slice(None)].groupby("Metric").sum().sum()
-    )
+    em_mit_industry = em_mitigated.loc[slice(None), "Industry", slice(None)].sum()
 
     em_mit_ra = afolu_em_mitigated.loc[
         slice(None),
@@ -194,12 +180,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         slice(None),
     ].sum()
 
-    em_mit_othergas = (
-        em_mitigated.loc[slice(None), "Industry", ["CH4", "N2O", "F-Gases"]]
-        .groupby("Metric")
-        .sum()
-        .sum()
-    )
+    em_mit_othergas = em_mitigated.loc[slice(None), "Other gases", :].sum()
     """
     em_mit_cdr = (
         pd.Series(pd.read_csv(cdr_emissions).loc[data_start_year, long_proj_end_year])

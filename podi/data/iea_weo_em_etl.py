@@ -187,8 +187,8 @@ def iea_weo_em_etl(iea_region_list_i):
 em_baseline = dict()
 
 for i in range(0, len(iea_region_list)):
-    em_baseline[i] = iea_weo_em_etl(iea_region_list[i])
-    # em_baseline[i].insert(0, "IEA Region", iea_region_list[i])
+    em_baseline[i] = iea_weo_em_etl(iea_region_list[i]).droplevel("Region")
+    em_baseline[i].insert(0, "Region", iea_region_list[i])
     # em_baseline[i].insert(0, "GCAM Region", gcam_region_list[i])
 
 
