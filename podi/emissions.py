@@ -4,14 +4,17 @@
 
 import pandas as pd
 from podi.energy_supply import data_start_year, long_proj_end_year
+from podi.data import iea_weo_em_etl
 
 # endregion
 
 
 def emissions(
     scenario,
+    energy_demand,
     elec_consump,
     heat_consump,
+    heat_per_adoption,
     transport_consump,
     afolu_em,
     addtl_em,
@@ -46,7 +49,7 @@ def emissions(
     # endregion
 
     ##########
-    #  Heat  #
+    #  HEAT  #
     ##########
 
     # region
@@ -58,6 +61,75 @@ def emissions(
         heat_consump * em_factors[em_factors.index.isin(heat_consump.index.values)]
     ).drop(index=["Fossil fuels"], level=2)
 
+    # endregion
+
+    ###############
+    #  BUILDINGS  #
+    ###############
+
+    # region
+    buildings_consump = (
+        energy_demand.loc[["OECD ", "NonOECD "], "Buildings", slice(None)]
+        .groupby("IEA Region")
+        .sum()
+    )
+    buildings_consump.index.name = "Region"
+
+    buildings_consump = (
+        buildings_consump
+        * heat_per_adoption.loc[
+            ["OECD ", "NonOECD "], ["Coal", "Natural gas", "Oil"], slice(None)
+        ]
+        .groupby("Region")
+        .sum()
+    )
+
+    buildings_consump = pd.concat(
+        [buildings_consump], keys=["Buildings"], names=["Sector"]
+    )
+    buildings_consump = pd.concat(
+        [buildings_consump], keys=["Fossil fuels"], names=["Metric"]
+    ).reorder_levels(["Region", "Sector", "Metric"])
+
+    buildings_em = (
+        buildings_consump
+        * em_factors[em_factors.index.isin(buildings_consump.index.values)]
+    )
+
+    # endregion
+
+    ###############
+    #  INDUSTRY  #
+    ###############
+
+    # region
+    industry_consump = (
+        energy_demand.loc[["OECD ", "NonOECD "], "Industry", slice(None)]
+        .groupby("IEA Region")
+        .sum()
+    )
+    industry_consump.index.name = "Region"
+
+    industry_consump = (
+        industry_consump
+        * heat_per_adoption.loc[
+            ["OECD ", "NonOECD "], ["Coal", "Natural gas", "Oil"], slice(None)
+        ]
+        .groupby("Region")
+        .sum()
+    )
+
+    industry_consump = pd.concat(
+        [industry_consump], keys=["Industry"], names=["Sector"]
+    )
+    industry_consump = pd.concat(
+        [industry_consump], keys=["Fossil fuels"], names=["Metric"]
+    ).reorder_levels(["Region", "Sector", "Metric"])
+
+    industry_em = (
+        industry_consump
+        * em_factors[em_factors.index.isin(industry_consump.index.values)]
+    )
     # endregion
 
     ###########################
@@ -109,11 +181,20 @@ def emissions(
     # endregion
 
     if scenario == "Baseline":
-        elec_em = 
-        heat_em = 
-        transport_em = 
-
-    em = elec_em.append(heat_em).append(transport_em).append(afolu_em).append(addtl_em)
+        em = (
+            pd.read_csv("podi/data/emissions_baseline.csv")
+            .set_index(["Region", "Sector", "Unit"])
+            .droplevel(["Unit"])
+        )
+    else:
+        em = (
+            elec_em.loc[slice(None), slice(None), "Fossil fuels"]
+            .append(transport_em)
+            .append(buildings_em)
+            .append(industry_em)
+            .append(afolu_em)
+            .append(addtl_em)
+        )
 
     # Add emissions targets
     em_targets = pd.read_csv(targets_em).set_index("Scenario")

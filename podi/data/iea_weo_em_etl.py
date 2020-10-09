@@ -56,177 +56,166 @@ gcam_region_list = (
 input_data = pd.ExcelFile("podi/data/iea_weo.xlsx")
 
 
-def iea_weo_etl(iea_region_list_i):
-    df = pd.read_excel(input_data, (iea_region_list_i + "_Balance").replace(" ", ""))
-    df = df.drop(df.index[0:3])
-    df.columns = df.iloc[0]
-    df = df.drop(df.index[0])
-    df.drop(df.tail(1).index, inplace=True)
-    df.rename(columns={df.columns[0]: "Metric"}, inplace=True)
-    df.insert(
-        0,
-        "Sector",
-        [
-            "TPED",
-            "TPED",
-            "TPED",
-            "TPED",
-            "TPED",
-            "TPED",
-            "TPED",
-            "TPED",
-            "Power sector",
-            "Power sector",
-            "Power sector",
-            "Power sector",
-            "Power sector",
-            "Power sector",
-            "Power sector",
-            "Power sector",
-            "Other energy sector",
-            "Other energy sector",
-            "TFC",
-            "TFC",
-            "TFC",
-            "TFC",
-            "TFC",
-            "TFC",
-            "TFC",
-            "TFC",
-            "Industry",
-            "Industry",
-            "Industry",
-            "Industry",
-            "Industry",
-            "Industry",
-            "Industry",
-            "Industry",
-            "Transport",
-            "Transport",
-            "Transport",
-            "Transport",
-            "Transport",
-            "Buildings",
-            "Buildings",
-            "Buildings",
-            "Buildings",
-            "Buildings",
-            "Buildings",
-            "Buildings",
-            "Buildings",
-            "Buildings",
-            "Other",
-            "Other",
-        ],
-        True,
-    )
+def iea_weo_em_etl(iea_region_list_i):
+    df = pd.read_excel(input_data, (iea_region_list_i + "_El_CO2_Ind").replace(" ", ""))
+    df.columns = df.loc[37, :]
 
-    energy_demand_historical = df.iloc[:, 0:5]
-    energy_demand_historical.columns = ["Sector", "Metric", "2010", "2017", "2018"]
-    energy_demand_historical["2010"] = pd.to_numeric(
-        energy_demand_historical["2010"]
-    ).astype(int)
-    energy_demand_historical["2017"] = pd.to_numeric(
-        energy_demand_historical["2017"]
-    ).astype(int)
-    energy_demand_historical["2018"] = pd.to_numeric(
-        energy_demand_historical["2018"]
-    ).astype(int)
+    df = (
+        pd.DataFrame(df.loc[42, :].iloc[1:4]).append(
+            pd.DataFrame(df.loc[42, :].iloc[13:17])
+        )
+    ).T.append((df.loc[51:53, :].iloc[:, 1:4]).join(df.loc[51:53, :].iloc[:, 13:17]))
+    df = df.astype(float)
+    df.columns = df.columns.astype(int)
+    df.rename(
+        index={42: "Electricity", 51: "Industry", 52: "Transport", 53: "Buildings"},
+        inplace=True,
+    )
+    df.index.name = "Sector"
 
     for i in range(3, 9):
-        energy_demand_historical.insert(i, 2008 + i, NaN)
+        df.insert(i - 2, 2008 + i, NaN)
+    for i in range(10, 16):
+        df.insert(i - 1, i + 2009, NaN)
+    for i in range(17, 21):
+        df.insert(i - 1, i + 2009, NaN)
+    for i in range(22, 26):
+        df.insert(i - 1, i + 2009, NaN)
+    for i in range(27, 31):
+        df.insert(i - 1, i + 2009, NaN)
 
-    energy_demand_historical.iloc[:, 2:10] = (
-        energy_demand_historical.iloc[:, 2:10].interpolate(axis=1).astype(int)
+    df.iloc[:, 0:8] = df.iloc[:, 0:8].interpolate(axis=1).astype(int)
+    df.iloc[:, 8:16] = df.iloc[:, 8:16].interpolate(axis=1).astype(int)
+    df.iloc[:, 15:21] = df.iloc[:, 15:21].interpolate(axis=1).astype(int)
+    df.iloc[:, 20:26] = df.iloc[:, 20:26].interpolate(axis=1).astype(int)
+    df.iloc[:, 25:31] = df.iloc[:, 25:31].interpolate(axis=1).astype(int)
+
+    # GCAM for 2040-2100
+
+    gcam_demand_projection = (
+        pd.read_csv("podi/data/gcam.csv")
+        .replace(" -   ", 0)
+        .set_index(["Region", "Variable", "Unit"])
+        .astype(float)
     )
+    gcam_demand_projection.index.rename(["Region", "Sector", "Unit"], inplace=True)
 
-    energy_demand_projection = (
-        energy_demand_historical.iloc[:, 0:2]
-        .join(df.iloc[:, 4])
-        .join(df.iloc[:, 14:18])
-    )
+    for i in range(1, 5):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(6, 15):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(16, 25):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(26, 35):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(36, 45):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(46, 55):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(56, 65):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(66, 75):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(76, 85):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
+    for i in range(86, 95):
+        gcam_demand_projection.insert(i, i + 2005, NaN)
 
-    energy_demand_projection.columns = [
-        "Sector",
-        "Metric",
-        "2018",
-        "2025",
-        "2030",
-        "2035",
-        "2040",
+    gcam_demand_projection.columns = gcam_demand_projection.columns.astype(str)
+
+    gcam_demand_projection.iloc[:, 0:6] = gcam_demand_projection.iloc[
+        :, 0:6
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 5:16] = gcam_demand_projection.iloc[
+        :, 5:16
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 15:26] = gcam_demand_projection.iloc[
+        :, 15:26
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 25:36] = gcam_demand_projection.iloc[
+        :, 25:36
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 35:46] = gcam_demand_projection.iloc[
+        :, 35:46
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 45:56] = gcam_demand_projection.iloc[
+        :, 45:56
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 55:66] = gcam_demand_projection.iloc[
+        :, 55:66
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 65:76] = gcam_demand_projection.iloc[
+        :, 65:76
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 75:86] = gcam_demand_projection.iloc[
+        :, 75:86
+    ].interpolate(axis=1)
+    gcam_demand_projection.iloc[:, 85:96] = gcam_demand_projection.iloc[
+        :, 85:96
+    ].interpolate(axis=1)
+
+    metrics = pd.read_csv("podi/data/metric_categories_em.csv")
+
+    gcam_demand_projection = gcam_demand_projection.loc[
+        (slice(None), metrics.loc[:, "GCAM Metric"].dropna(axis=0), slice(None)), :
     ]
 
-    for i in range(3, 9):
-        energy_demand_projection.insert(i, i + 2016, NaN)
-    for i in range(10, 14):
-        energy_demand_projection.insert(i, i + 2016, NaN)
-    for i in range(15, 19):
-        energy_demand_projection.insert(i, i + 2016, NaN)
-    for i in range(20, 24):
-        energy_demand_projection.insert(i, i + 2016, NaN)
-
-    energy_demand_projection.columns = energy_demand_projection.columns.astype(str)
-
-    energy_demand_projection["2025"] = pd.to_numeric(
-        energy_demand_projection["2025"]
-    ).astype(float)
-
-    energy_demand_projection.iloc[:, 2:10] = (
-        energy_demand_projection.iloc[:, 2:10].interpolate(axis=1).astype(int)
+    gcam_pct_change = (
+        gcam_demand_projection.pct_change(axis="columns")
+        .loc[:, "2041":]
+        .fillna(0)
+        .apply(lambda x: x + 1, axis=1)
     )
-    energy_demand_projection.iloc[:, 9:15] = (
-        energy_demand_projection.iloc[:, 9:15].interpolate(axis=1).astype(int)
+    gcam_pct_change.rename(
+        index={
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Industry": "Electricity",
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Residential and Commercial": "Industry",
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Transportation": "Transport",
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Supply | Electricity": "Buildings",
+        },
+        inplace=True,
     )
-    energy_demand_projection.iloc[:, 14:20] = (
-        energy_demand_projection.iloc[:, 14:20].interpolate(axis=1).astype(int)
-    )
-    energy_demand_projection.iloc[:, 19:25] = (
-        energy_demand_projection.iloc[:, 19:25].interpolate(axis=1).astype(int)
-    )
+    gcam_pct_change.droplevel(["Region", "Unit"])
 
-    energy_demand_historical = energy_demand_historical.join(
-        energy_demand_projection.loc[:, "2019":]
-    )
+    df = df.join(gcam_pct_change)
+    df.columns = df.columns.astype(int)
+    df = df.loc[:, :2039].join(df.loc[:, 2040:].cumprod(axis=1).fillna(0).astype(int))
 
-    energy_demand_historical.loc[:, "2010":] = (
-        energy_demand_historical.loc[:, "2010":].mul(11.63).astype(int)
-    )
-
-    return energy_demand_historical
+    return df
 
 
-energy_demand_historical = dict()
+em_baseline = dict()
 
 for i in range(0, len(iea_region_list)):
-    energy_demand_historical[i] = iea_weo_etl(iea_region_list[i])
+    em_baseline[i] = iea_weo_em_etl(iea_region_list[i])
+    # em_baseline[i].insert(0, "IEA Region", iea_region_list[i])
+    # em_baseline[i].insert(0, "GCAM Region", gcam_region_list[i])
 
-    energy_demand_historical[i].insert(0, "IEA Region", iea_region_list[i])
-    energy_demand_historical[i].insert(0, "GCAM Region", gcam_region_list[i])
 
-energy_demand_historical = pd.concat(
+em_baseline = pd.concat(
     [
-        energy_demand_historical[0],
-        energy_demand_historical[1],
-        energy_demand_historical[2],
-        energy_demand_historical[3],
-        energy_demand_historical[4],
-        energy_demand_historical[5],
-        energy_demand_historical[6],
-        energy_demand_historical[7],
-        energy_demand_historical[8],
-        energy_demand_historical[9],
-        energy_demand_historical[10],
-        energy_demand_historical[11],
-        energy_demand_historical[12],
-        energy_demand_historical[13],
-        energy_demand_historical[14],
-        energy_demand_historical[15],
-        energy_demand_historical[16],
-        energy_demand_historical[17],
-        energy_demand_historical[18],
-        energy_demand_historical[19],
-        energy_demand_historical[20],
+        em_baseline[0],
+        em_baseline[1],
+        em_baseline[2],
+        em_baseline[3],
+        em_baseline[4],
+        em_baseline[5],
+        em_baseline[6],
+        em_baseline[7],
+        em_baseline[8],
+        em_baseline[9],
+        em_baseline[10],
+        em_baseline[11],
+        em_baseline[12],
+        em_baseline[13],
+        em_baseline[14],
+        em_baseline[15],
+        em_baseline[16],
+        em_baseline[17],
+        em_baseline[18],
+        em_baseline[19],
+        em_baseline[20],
     ]
 )
 
-energy_demand_historical.to_csv("podi/data/energy_demand_historical.csv", index=False)
+em_baseline.to_csv("podi/data/emissions_baseline.csv")

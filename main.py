@@ -115,10 +115,14 @@ afolu_em_mitigated = afolu_em_pathway
 
 # region
 
+podi.data.iea_weo_em_etl
+
 em_baseline, em_targets_baseline = emissions(
     "Baseline",
+    energy_demand_baseline,
     elec_consump_baseline,
     heat_consump_baseline,
+    heat_per_adoption_baseline,
     transport_consump_baseline,
     afolu_em_baseline,
     "podi/data/emissions_additional.csv",
@@ -127,8 +131,10 @@ em_baseline, em_targets_baseline = emissions(
 
 em_pathway, em_targets_pathway = emissions(
     "Pathway",
+    energy_demand_pathway,
     elec_consump_pathway,
     heat_consump_pathway,
+    heat_per_adoption_pathway,
     transport_consump_pathway,
     afolu_em_pathway,
     "podi/data/emissions_additional.csv",
