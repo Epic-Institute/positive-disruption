@@ -143,8 +143,8 @@ em_pathway, em_targets_pathway = emissions(
 
 
 em_mitigated = (
-    em_baseline.groupby(["Region", "Sector"]).sum().loc[["OECD ", "NonOECD "]]
-    - em_pathway.groupby(["Region", "Sector"]).sum().loc[["OECD ", "NonOECD "]]
+    em_baseline.groupby(["Region", "Sector"]).sum().loc[[" OECD ", "NonOECD "]]
+    - em_pathway.groupby(["Region", "Sector"]).sum().loc[[" OECD ", "NonOECD "]]
 )
 
 # endregion

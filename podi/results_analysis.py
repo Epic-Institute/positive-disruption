@@ -351,7 +351,7 @@ def results_analysis(
     # region
 
     ra_decarb = afolu_per_adoption.loc[
-        ["OECD ", "NonOECD "],
+        [" OECD ", "NonOECD "],
         slice(None),
         [
             "Biochar",
@@ -378,7 +378,7 @@ def results_analysis(
     # region
 
     fw_decarb = afolu_per_adoption.loc[
-        ["OECD ", "NonOECD "],
+        [" OECD ", "NonOECD "],
         slice(None),
         [
             " Avoided Coastal Impacts ",

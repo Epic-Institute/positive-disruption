@@ -23,7 +23,7 @@ def afolu(scenario):
             .droplevel(["Metric", "Unit"])
         )
         .fillna(0)
-        .loc[["OECD ", "NonOECD "], slice(None), scenario]
+        .loc[[" OECD ", "NonOECD "], slice(None), scenario]
         .droplevel(["Scenario"])
     )
 
@@ -50,7 +50,7 @@ def afolu(scenario):
         afolu.loc[afolu["Metric"].str.contains("Max extent", na=False)]
         .set_index(["Region", "Sector", "Metric", "Unit", "Scenario"])
         .loc[:, per.columns.values.astype(str)]
-        .loc[["OECD ", "NonOECD "], slice(None), slice(None), slice(None), scenario]
+        .loc[[" OECD ", "NonOECD "], slice(None), slice(None), slice(None), scenario]
         .droplevel(["Metric", "Unit", "Scenario"])
     )
     max_extent.columns = max_extent.columns.astype(int)
@@ -64,7 +64,7 @@ def afolu(scenario):
         ]
         .set_index(["Region", "Sector", "Metric", "Unit", "Scenario"])
         .loc[:, per.columns.values.astype(str)]
-        .loc[["OECD ", "NonOECD "], slice(None), slice(None), slice(None), scenario]
+        .loc[[" OECD ", "NonOECD "], slice(None), slice(None), slice(None), scenario]
         .droplevel(["Scenario"])
     )
     avg_flux.columns = avg_flux.columns.astype(int)

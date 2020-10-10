@@ -23,7 +23,7 @@ iea_region_list = (
     "INDIA ",
     "JPN ",
     "ASEAN ",
-    "OECD ",
+    " OECD ",
     "NonOECD ",
     "DevelopingECO ",
     "AdvancedECO ",

@@ -360,7 +360,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         energy_demand_i = energy_demand_baseline.loc[
-            ["OECD ", "NonOECD "], slice(None), slice(None), "Baseline"
+            [" OECD ", "NonOECD "], slice(None), slice(None), "Baseline"
         ]
         fig = (
             energy_demand_i.loc[
@@ -470,7 +470,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         energy_demand_i = energy_demand_pathway.loc[
-            ["OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
+            [" OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
         ]
         fig = (
             energy_demand_i.loc[
@@ -661,7 +661,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         elec_consump_i = (
-            elec_consump_baseline.loc[["OECD ", "NonOECD "], slice(None)]
+            elec_consump_baseline.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
@@ -669,14 +669,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             [elec_consump_i], keys=["Electricity"], names=["Sector"]
         )
         heat_consump_i = (
-            heat_consump_baseline.loc[["OECD ", "NonOECD "], slice(None)]
+            heat_consump_baseline.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
         heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
         transport_consump_i = (
             transport_consump_baseline.loc[
-                ["OECD ", "NonOECD "],
+                [" OECD ", "NonOECD "],
                 slice(None),
             ]
             .groupby("Metric")
@@ -708,7 +708,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         elec_consump_pathway_i = (
-            elec_consump_pathway.loc[["OECD ", "NonOECD "], slice(None)]
+            elec_consump_pathway.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
@@ -716,7 +716,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             [elec_consump_pathway_i], keys=["Electricity"], names=["Sector"]
         )
         heat_consump_pathway_i = (
-            heat_consump_pathway.loc[["OECD ", "NonOECD "], slice(None)]
+            heat_consump_pathway.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
@@ -725,7 +725,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
         transport_consump_pathway_i = (
             transport_consump_pathway.loc[
-                ["OECD ", "NonOECD "],
+                [" OECD ", "NonOECD "],
                 slice(None),
             ]
             .groupby("Metric")
@@ -787,7 +787,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         fig = (
-            elec_consump_pathway.loc[["OECD ", "NonOECD "], slice(None)]
+            elec_consump_pathway.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
@@ -811,7 +811,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         fig = (
-            elec_per_adoption_pathway.loc[["OECD ", "NonOECD "], slice(None)]
+            elec_per_adoption_pathway.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
@@ -837,7 +837,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         fig = (
-            elec_per_adoption_pathway.loc[["OECD ", "NonOECD "], slice(None)]
+            elec_per_adoption_pathway.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
@@ -871,7 +871,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         energy_demand_pathway_i = energy_demand_pathway.loc[
-            ["OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
+            [" OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
         ]
         fig = (
             energy_demand_pathway_i.loc[
@@ -940,7 +940,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         energy_demand_pathway_i = energy_demand_pathway.loc[
-            ["OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
+            [" OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
         ]
         fig = (
             energy_demand_pathway_i.loc[
@@ -1020,7 +1020,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, len(iea_region_list)):
         energy_demand_pathway_i = energy_demand_pathway.loc[
-            ["OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
+            [" OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
         ]
         fig = (
             energy_demand_pathway_i.loc[
@@ -1105,12 +1105,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # Pathway
     for i in range(0, 1):
         energy_demand_pathway_i = energy_demand_pathway.loc[
-            ["OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
+            [" OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
         ]
 
         fig = (
             energy_demand_pathway_i.loc[
-                (["OECD ", "NonOECD "], "Industry", "Electricity", slice(None)), :
+                ([" OECD ", "NonOECD "], "Industry", "Electricity", slice(None)), :
             ]
             .groupby(["Sector"])
             .sum()
@@ -1122,7 +1122,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             .append(
                 pd.DataFrame(
                     energy_demand_pathway_i.loc[
-                        ["OECD ", "NonOECD "], "Industry", slice(None)
+                        [" OECD ", "NonOECD "], "Industry", slice(None)
                     ]
                     .groupby(["Metric"])
                     .sum()
@@ -1179,7 +1179,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for i in range(0, 1):
         energy_demand_pathway_i = energy_demand_pathway.loc[
-            ["OECD ", "NonOECD "], "Transport", slice(None), "Pathway"
+            [" OECD ", "NonOECD "], "Transport", slice(None), "Pathway"
         ]
         fig = (
             energy_demand_pathway_i.loc[
@@ -1191,7 +1191,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             .append(
                 pd.DataFrame(
                     transport_consump_pathway.loc[
-                        ["OECD ", "NonOECD "],
+                        [" OECD ", "NonOECD "],
                         slice(None),
                     ]
                     .groupby("Metric")
@@ -1203,7 +1203,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             .append(
                 pd.DataFrame(
                     transport_consump_pathway.loc[
-                        ["OECD ", "NonOECD "],
+                        [" OECD ", "NonOECD "],
                         slice(None),
                     ]
                     .groupby("Metric")

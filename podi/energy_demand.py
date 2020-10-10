@@ -186,8 +186,8 @@ def energy_demand(
     cdr_energy.reset_index(inplace=True)
     cdr_energy.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
     energy_demand = energy_demand.append(cdr_energy)
-    energy_demand.loc["OECD ", "Industry", "Electricity"] = (
-        energy_demand.loc["OECD ", "Industry", "Electricity"].add(cdr_energy).values
+    energy_demand.loc[" OECD ", "Industry", "Electricity"] = (
+        energy_demand.loc[" OECD ", "Industry", "Electricity"].add(cdr_energy).values
     )
 
     # endregion

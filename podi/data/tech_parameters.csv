@@ -3,27 +3,27 @@ NonOECD ,Bioenergy,Pathway,Electricity,Consumption:Generation,1
 NonOECD ,Bioenergy,Baseline,Electricity,Consumption:Generation,1
 NonOECD ,Bioenergy,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Bioenergy,Baseline,Heat,Consumption:Generation,1
-OECD ,Bioenergy,Pathway,Electricity,Consumption:Generation,1
-OECD ,Bioenergy,Baseline,Electricity,Consumption:Generation,1
-OECD ,Bioenergy,Pathway,Heat,Consumption:Generation,1
-OECD ,Bioenergy,Baseline,Heat,Consumption:Generation,1
+ OECD ,Bioenergy,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Bioenergy,Baseline,Electricity,Consumption:Generation,1
+ OECD ,Bioenergy,Pathway,Heat,Consumption:Generation,1
+ OECD ,Bioenergy,Baseline,Heat,Consumption:Generation,1
 World ,Bioenergy,Baseline,Electricity,Consumption:Generation,1
 World ,Bioenergy,Pathway,Electricity,Consumption:Generation,1
 World ,Bioenergy,Baseline,Heat,Consumption:Generation,1
 World ,Bioenergy,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Biofuels,Pathway,Transport,Consumption:Generation,1
-OECD ,Biofuels,Pathway,Transport,Consumption:Generation,1
+ OECD ,Biofuels,Pathway,Transport,Consumption:Generation,1
 World ,Biofuels,Pathway,Transport,Consumption:Generation,1
 NonOECD ,Coal,Pathway,Electricity,Consumption:Generation,1
 NonOECD ,Coal,Pathway,Heat,Consumption:Generation,1
-OECD ,Coal,Pathway,Electricity,Consumption:Generation,1
-OECD ,Coal,Pathway,Heat,Consumption:Generation,1
+ OECD ,Coal,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Coal,Pathway,Heat,Consumption:Generation,1
 World ,Coal,Pathway,Electricity,Consumption:Generation,1
 World ,Coal,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Geothermal,Pathway,Electricity,Consumption:Generation,1
 NonOECD ,Geothermal,Pathway,Heat,Consumption:Generation,1
-OECD ,Geothermal,Pathway,Electricity,Consumption:Generation,1
-OECD ,Geothermal,Pathway,Heat,Consumption:Generation,1
+ OECD ,Geothermal,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Geothermal,Pathway,Heat,Consumption:Generation,1
 World ,Geothermal,Pathway,Electricity,Consumption:Generation,1
 World ,Geothermal,Pathway,Heat,Consumption:Generation,1
 AdvancedECO ,Grid,Baseline,,Consumption:Generation,0.88
@@ -58,8 +58,8 @@ NAM ,Grid,Baseline,,Consumption:Generation,0.88
 NAM ,Grid,Pathway,,Consumption:Generation,0.88
 NonOECD ,Grid,Baseline,Electricity,Consumption:Generation,1
 NonOECD ,Grid,Pathway,Electricity,Consumption:Generation,1
-OECD ,Grid,Baseline,Electricity,Consumption:Generation,1
-OECD ,Grid,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Grid,Baseline,Electricity,Consumption:Generation,1
+ OECD ,Grid,Pathway,Electricity,Consumption:Generation,1
 RUS ,Grid,Baseline,,Consumption:Generation,0.88
 RUS ,Grid,Pathway,,Consumption:Generation,0.88
 SAFR ,Grid,Baseline,,Consumption:Generation,0.88
@@ -68,90 +68,90 @@ US ,Grid,Baseline,,Consumption:Generation,0.88
 US ,Grid,Pathway,,Consumption:Generation,0.88
 World ,Grid,Baseline,Electricity,Consumption:Generation,0.88
 World ,Grid,Pathway,Electricity,Consumption:Generation,0.88
-AdvancedECO ,Heat,Baseline,,Consumption:Generation,0.88
-AdvancedECO ,Heat,Pathway,,Consumption:Generation,0.88
-AFRICA ,Heat,Baseline,,Consumption:Generation,0.88
-AFRICA ,Heat,Pathway,,Consumption:Generation,0.88
-ASEAN ,Heat,Baseline,,Consumption:Generation,0.88
-ASEAN ,Heat,Pathway,,Consumption:Generation,0.88
-ASIAPAC ,Heat,Baseline,,Consumption:Generation,0.88
-ASIAPAC ,Heat,Pathway,,Consumption:Generation,0.88
-BRAZIL ,Heat,Baseline,,Consumption:Generation,0.88
-BRAZIL ,Heat,Pathway,,Consumption:Generation,0.88
-CHINA ,Heat,Baseline,,Consumption:Generation,0.88
-CHINA ,Heat,Pathway,,Consumption:Generation,0.88
-CSAM ,Heat,Baseline,,Consumption:Generation,0.88
-CSAM ,Heat,Pathway,,Consumption:Generation,0.88
-DevelopingECO ,Heat,Baseline,,Consumption:Generation,0.88
-DevelopingECO ,Heat,Pathway,,Consumption:Generation,0.88
-EU ,Heat,Baseline,,Consumption:Generation,0.88
-EU ,Heat,Pathway,,Consumption:Generation,0.88
-EUR ,Heat,Baseline,,Consumption:Generation,0.88
-EUR ,Heat,Pathway,,Consumption:Generation,0.88
-EURASIA ,Heat,Baseline,,Consumption:Generation,0.88
-EURASIA ,Heat,Pathway,,Consumption:Generation,0.88
-INDIA ,Heat,Baseline,,Consumption:Generation,0.88
-INDIA ,Heat,Pathway,,Consumption:Generation,0.88
-JPN ,Heat,Baseline,,Consumption:Generation,0.88
-JPN ,Heat,Pathway,,Consumption:Generation,0.88
-ME ,Heat,Baseline,,Consumption:Generation,0.88
-ME ,Heat,Pathway,,Consumption:Generation,0.88
-NAM ,Heat,Baseline,,Consumption:Generation,0.88
-NAM ,Heat,Pathway,,Consumption:Generation,0.88
+AdvancedECO ,Heat,Baseline,,Consumption:Generation,1
+AdvancedECO ,Heat,Pathway,,Consumption:Generation,1
+AFRICA ,Heat,Baseline,,Consumption:Generation,1
+AFRICA ,Heat,Pathway,,Consumption:Generation,1
+ASEAN ,Heat,Baseline,,Consumption:Generation,1
+ASEAN ,Heat,Pathway,,Consumption:Generation,1
+ASIAPAC ,Heat,Baseline,,Consumption:Generation,1
+ASIAPAC ,Heat,Pathway,,Consumption:Generation,1
+BRAZIL ,Heat,Baseline,,Consumption:Generation,1
+BRAZIL ,Heat,Pathway,,Consumption:Generation,1
+CHINA ,Heat,Baseline,,Consumption:Generation,1
+CHINA ,Heat,Pathway,,Consumption:Generation,1
+CSAM ,Heat,Baseline,,Consumption:Generation,1
+CSAM ,Heat,Pathway,,Consumption:Generation,1
+DevelopingECO ,Heat,Baseline,,Consumption:Generation,1
+DevelopingECO ,Heat,Pathway,,Consumption:Generation,1
+EU ,Heat,Baseline,,Consumption:Generation,1
+EU ,Heat,Pathway,,Consumption:Generation,1
+EUR ,Heat,Baseline,,Consumption:Generation,1
+EUR ,Heat,Pathway,,Consumption:Generation,1
+EURASIA ,Heat,Baseline,,Consumption:Generation,1
+EURASIA ,Heat,Pathway,,Consumption:Generation,1
+INDIA ,Heat,Baseline,,Consumption:Generation,1
+INDIA ,Heat,Pathway,,Consumption:Generation,1
+JPN ,Heat,Baseline,,Consumption:Generation,1
+JPN ,Heat,Pathway,,Consumption:Generation,1
+ME ,Heat,Baseline,,Consumption:Generation,1
+ME ,Heat,Pathway,,Consumption:Generation,1
+NAM ,Heat,Baseline,,Consumption:Generation,1
+NAM ,Heat,Pathway,,Consumption:Generation,1
 NonOECD ,Heat,Baseline,Heat,Consumption:Generation,1
 NonOECD ,Heat,Pathway,Heat,Consumption:Generation,1
-OECD ,Heat,Baseline,Heat,Consumption:Generation,1
-OECD ,Heat,Pathway,Heat,Consumption:Generation,1
-RUS ,Heat,Baseline,,Consumption:Generation,0.88
-RUS ,Heat,Pathway,,Consumption:Generation,0.88
-SAFR ,Heat,Baseline,,Consumption:Generation,0.88
-SAFR ,Heat,Pathway,,Consumption:Generation,0.88
-US ,Heat,Baseline,,Consumption:Generation,0.88
-US ,Heat,Pathway,,Consumption:Generation,0.88
-World ,Heat,Baseline,Heat,Consumption:Generation,0.88
+ OECD ,Heat,Baseline,Heat,Consumption:Generation,1
+ OECD ,Heat,Pathway,Heat,Consumption:Generation,1
+RUS ,Heat,Baseline,,Consumption:Generation,1
+RUS ,Heat,Pathway,,Consumption:Generation,1
+SAFR ,Heat,Baseline,,Consumption:Generation,1
+SAFR ,Heat,Pathway,,Consumption:Generation,1
+US ,Heat,Baseline,,Consumption:Generation,1
+US ,Heat,Pathway,,Consumption:Generation,1
+World ,Heat,Baseline,Heat,Consumption:Generation,1
 World ,Heat,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Natural gas,Pathway,Electricity,Consumption:Generation,1
 NonOECD ,Natural gas,Pathway,Heat,Consumption:Generation,1
-OECD ,Natural gas,Pathway,Electricity,Consumption:Generation,1
-OECD ,Natural gas,Pathway,Heat,Consumption:Generation,1
+ OECD ,Natural gas,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Natural gas,Pathway,Heat,Consumption:Generation,1
 World ,Natural gas,Pathway,Electricity,Consumption:Generation,1
 World ,Natural gas,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Nuclear,Pathway,Electricity,Consumption:Generation,1
 NonOECD ,Nuclear,Pathway,Heat,Consumption:Generation,1
-OECD ,Nuclear,Pathway,Electricity,Consumption:Generation,1
-OECD ,Nuclear,Pathway,Heat,Consumption:Generation,1
+ OECD ,Nuclear,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Nuclear,Pathway,Heat,Consumption:Generation,1
 World ,Nuclear,Pathway,Electricity,Consumption:Generation,1
 World ,Nuclear,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Oil,Pathway,Electricity,Consumption:Generation,1
 NonOECD ,Oil,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Oil,Pathway,Transport,Consumption:Generation,1
-OECD ,Oil,Pathway,Electricity,Consumption:Generation,1
-OECD ,Oil,Pathway,Heat,Consumption:Generation,1
-OECD ,Oil,Pathway,Transport,Consumption:Generation,1
+ OECD ,Oil,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Oil,Pathway,Heat,Consumption:Generation,1
+ OECD ,Oil,Pathway,Transport,Consumption:Generation,1
 World ,Oil,Pathway,Electricity,Consumption:Generation,1
 World ,Oil,Pathway,Heat,Consumption:Generation,1
 World ,Oil,Pathway,Transport,Consumption:Generation,1
 NonOECD ,Other fuels,Pathway,Transport,Consumption:Generation,1
-OECD ,Other fuels,Pathway,Transport,Consumption:Generation,1
+ OECD ,Other fuels,Pathway,Transport,Consumption:Generation,1
 World ,Other fuels,Pathway,Transport,Consumption:Generation,1
 NonOECD ,Other sources,Pathway,Heat,Consumption:Generation,1
-OECD ,Other sources,Pathway,Heat,Consumption:Generation,1
+ OECD ,Other sources,Pathway,Heat,Consumption:Generation,1
 World ,Other sources,Pathway,Heat,Consumption:Generation,1
-NonOECD ,Solar,Pathway,Electricity,Consumption:Generation,1
-OECD ,Solar,Pathway,Electricity,Consumption:Generation,1
+NonOECD ,Solar,Pathway,Electricity,Consumption:Generation,0.88
+ OECD ,Solar,Pathway,Electricity,Consumption:Generation,0.88
 World ,Solar,Pathway,Electricity,Consumption:Generation,0.88
 NonOECD ,Solar thermal,Pathway,Heat,Consumption:Generation,1
-OECD ,Solar thermal,Pathway,Heat,Consumption:Generation,1
+ OECD ,Solar thermal,Pathway,Heat,Consumption:Generation,1
 World ,Solar thermal,Pathway,Heat,Consumption:Generation,1
 World ,Solar thermal,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Waste,Pathway,Electricity,Consumption:Generation,1
 NonOECD ,Waste,Pathway,Heat,Consumption:Generation,1
-OECD ,Waste,Pathway,Electricity,Consumption:Generation,1
-OECD ,Waste,Pathway,Heat,Consumption:Generation,1
+ OECD ,Waste,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Waste,Pathway,Heat,Consumption:Generation,1
 World ,Waste,Pathway,Electricity,Consumption:Generation,1
 World ,Waste,Pathway,Heat,Consumption:Generation,1
 NonOECD ,Wind,Pathway,Electricity,Consumption:Generation,1
-OECD ,Wind,Pathway,Electricity,Consumption:Generation,1
+ OECD ,Wind,Pathway,Electricity,Consumption:Generation,1
 World ,Wind,Pathway,Electricity,Consumption:Generation,0.88
 AdvancedECO ,Animal Mgmt,Pathway,AFOLU,Floor,0
 AdvancedECO ,Animal Mgmt,Baseline,AFOLU,Floor,0
@@ -185,8 +185,8 @@ NAM ,Animal Mgmt,Pathway,AFOLU,Floor,0
 NAM ,Animal Mgmt,Baseline,AFOLU,Floor,0
 NonOECD ,Animal Mgmt,Pathway,AFOLU,Floor,0
 NonOECD ,Animal Mgmt,Baseline,AFOLU,Floor,0
-OECD ,Animal Mgmt,Pathway,AFOLU,Floor,0
-OECD ,Animal Mgmt,Baseline,AFOLU,Floor,0
+ OECD ,Animal Mgmt,Pathway,AFOLU,Floor,0
+ OECD ,Animal Mgmt,Baseline,AFOLU,Floor,0
 RUS ,Animal Mgmt,Pathway,AFOLU,Floor,0
 RUS ,Animal Mgmt,Baseline,AFOLU,Floor,0
 SAFR ,Animal Mgmt,Pathway,AFOLU,Floor,0
@@ -227,8 +227,8 @@ NAM ,Avoided Coastal Impacts,Pathway,AFOLU,Floor,0
 NAM ,Avoided Coastal Impacts,Baseline,AFOLU,Floor,0
 NonOECD ,Avoided Coastal Impacts,Pathway,AFOLU,Floor,0
 NonOECD ,Avoided Coastal Impacts,Baseline,AFOLU,Floor,0
-OECD ,Avoided Coastal Impacts,Pathway,AFOLU,Floor,0
-OECD ,Avoided Coastal Impacts,Baseline,AFOLU,Floor,0
+ OECD ,Avoided Coastal Impacts,Pathway,AFOLU,Floor,0
+ OECD ,Avoided Coastal Impacts,Baseline,AFOLU,Floor,0
 RUS ,Avoided Coastal Impacts,Pathway,AFOLU,Floor,0
 RUS ,Avoided Coastal Impacts,Baseline,AFOLU,Floor,0
 SAFR ,Avoided Coastal Impacts,Pathway,AFOLU,Floor,0
@@ -269,8 +269,8 @@ NAM ,Avoided Forest Conversion,Pathway,AFOLU,Floor,0
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,Floor,0
 NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,Floor,0
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,Floor,0
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,Floor,0
-OECD ,Avoided Forest Conversion,Baseline,AFOLU,Floor,0
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,Floor,0
+ OECD ,Avoided Forest Conversion,Baseline,AFOLU,Floor,0
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,Floor,0
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,Floor,0
 SAFR ,Avoided Forest Conversion,Pathway,AFOLU,Floor,0
@@ -311,8 +311,8 @@ NAM ,Avoided Peat Impacts,Pathway,AFOLU,Floor,0
 NAM ,Avoided Peat Impacts,Baseline,AFOLU,Floor,0
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,Floor,0
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Floor,0
-OECD ,Avoided Peat Impacts,Pathway,AFOLU,Floor,0
-OECD ,Avoided Peat Impacts,Baseline,AFOLU,Floor,0
+ OECD ,Avoided Peat Impacts,Pathway,AFOLU,Floor,0
+ OECD ,Avoided Peat Impacts,Baseline,AFOLU,Floor,0
 RUS ,Avoided Peat Impacts,Pathway,AFOLU,Floor,0
 RUS ,Avoided Peat Impacts,Baseline,AFOLU,Floor,0
 SAFR ,Avoided Peat Impacts,Pathway,AFOLU,Floor,0
@@ -385,10 +385,10 @@ NonOECD ,Biochar,Pathway,Industry,Floor,0
 NonOECD ,Biochar,Baseline,Industry,Floor,0
 NonOECD ,Biochar,Pathway,AFOLU,Floor,0
 NonOECD ,Biochar,Baseline,AFOLU,Floor,0
-OECD ,Biochar,Pathway,Industry,Floor,0
-OECD ,Biochar,Baseline,Industry,Floor,0
-OECD ,Biochar,Pathway,AFOLU,Floor,0
-OECD ,Biochar,Baseline,AFOLU,Floor,0
+ OECD ,Biochar,Pathway,Industry,Floor,0
+ OECD ,Biochar,Baseline,Industry,Floor,0
+ OECD ,Biochar,Pathway,AFOLU,Floor,0
+ OECD ,Biochar,Baseline,AFOLU,Floor,0
 RUS ,Biochar,Pathway,Industry,Floor,0
 RUS ,Biochar,Baseline,Industry,Floor,0
 RUS ,Biochar,Pathway,AFOLU,Floor,0
@@ -409,10 +409,10 @@ NonOECD ,Bioenergy,Pathway,Electricity,Floor,0
 NonOECD ,Bioenergy,Baseline,Electricity,Floor,0
 NonOECD ,Bioenergy,Pathway,Heat,Floor,0
 NonOECD ,Bioenergy,Baseline,Heat,Floor,0
-OECD ,Bioenergy,Pathway,Electricity,Floor,0
-OECD ,Bioenergy,Baseline,Electricity,Floor,0
-OECD ,Bioenergy,Pathway,Heat,Floor,0
-OECD ,Bioenergy,Baseline,Heat,Floor,0
+ OECD ,Bioenergy,Pathway,Electricity,Floor,0
+ OECD ,Bioenergy,Baseline,Electricity,Floor,0
+ OECD ,Bioenergy,Pathway,Heat,Floor,0
+ OECD ,Bioenergy,Baseline,Heat,Floor,0
 World ,Bioenergy,Baseline,Electricity,Floor,0
 World ,Bioenergy,Pathway,Electricity,Floor,0
 World ,Bioenergy,Baseline,Heat,Floor,0
@@ -449,8 +449,8 @@ NAM ,Biofuels,Pathway,,Floor,0
 NAM ,Biofuels,Baseline,,Floor,0
 NonOECD ,Biofuels,Baseline,Transport,Floor,0
 NonOECD ,Biofuels,Pathway,Transport,Floor,0
-OECD ,Biofuels,Baseline,Transport,Floor,0
-OECD ,Biofuels,Pathway,Transport,Floor,0
+ OECD ,Biofuels,Baseline,Transport,Floor,0
+ OECD ,Biofuels,Pathway,Transport,Floor,0
 RUS ,Biofuels,Pathway,,Floor,0
 RUS ,Biofuels,Baseline,,Floor,0
 SAFR ,Biofuels,Pathway,,Floor,0
@@ -491,8 +491,8 @@ NAM ,Biomass and waste,Pathway,,Floor,0
 NAM ,Biomass and waste,Baseline,,Floor,0
 NonOECD ,Biomass and waste,Pathway,Electricity,Floor,0
 NonOECD ,Biomass and waste,Baseline,Electricity,Floor,0
-OECD ,Biomass and waste,Pathway,Electricity,Floor,0
-OECD ,Biomass and waste,Baseline,Electricity,Floor,0
+ OECD ,Biomass and waste,Pathway,Electricity,Floor,0
+ OECD ,Biomass and waste,Baseline,Electricity,Floor,0
 RUS ,Biomass and waste,Pathway,,Floor,0
 RUS ,Biomass and waste,Baseline,,Floor,0
 SAFR ,Biomass and waste,Pathway,,Floor,0
@@ -505,10 +505,10 @@ NonOECD ,Coal,Baseline,Electricity,Floor,0
 NonOECD ,Coal,Pathway,Electricity,Floor,0
 NonOECD ,Coal,Baseline,Heat,Floor,0
 NonOECD ,Coal,Pathway,Heat,Floor,0
-OECD ,Coal,Baseline,Electricity,Floor,0
-OECD ,Coal,Pathway,Electricity,Floor,0
-OECD ,Coal,Baseline,Heat,Floor,0
-OECD ,Coal,Pathway,Heat,Floor,0
+ OECD ,Coal,Baseline,Electricity,Floor,0
+ OECD ,Coal,Pathway,Electricity,Floor,0
+ OECD ,Coal,Baseline,Heat,Floor,0
+ OECD ,Coal,Pathway,Heat,Floor,0
 World ,Coal,Pathway,Electricity,Floor,0
 World ,Coal,Baseline,Electricity,Floor,0
 World ,Coal,Pathway,Heat,Floor,0
@@ -545,8 +545,8 @@ NAM ,Coastal Restoration,Pathway,AFOLU,Floor,0
 NAM ,Coastal Restoration,Baseline,AFOLU,Floor,0
 NonOECD ,Coastal Restoration,Pathway,AFOLU,Floor,0
 NonOECD ,Coastal Restoration,Baseline,AFOLU,Floor,0
-OECD ,Coastal Restoration,Pathway,AFOLU,Floor,0
-OECD ,Coastal Restoration,Baseline,AFOLU,Floor,0
+ OECD ,Coastal Restoration,Pathway,AFOLU,Floor,0
+ OECD ,Coastal Restoration,Baseline,AFOLU,Floor,0
 RUS ,Coastal Restoration,Pathway,AFOLU,Floor,0
 RUS ,Coastal Restoration,Baseline,AFOLU,Floor,0
 SAFR ,Coastal Restoration,Pathway,AFOLU,Floor,0
@@ -587,8 +587,8 @@ NAM ,Cropland Soil Health,Pathway,AFOLU,Floor,0
 NAM ,Cropland Soil Health,Baseline,AFOLU,Floor,0
 NonOECD ,Cropland Soil Health,Pathway,AFOLU,Floor,0
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,Floor,0
-OECD ,Cropland Soil Health,Pathway,AFOLU,Floor,0
-OECD ,Cropland Soil Health,Baseline,AFOLU,Floor,0
+ OECD ,Cropland Soil Health,Pathway,AFOLU,Floor,0
+ OECD ,Cropland Soil Health,Baseline,AFOLU,Floor,0
 RUS ,Cropland Soil Health,Pathway,AFOLU,Floor,0
 RUS ,Cropland Soil Health,Baseline,AFOLU,Floor,0
 SAFR ,Cropland Soil Health,Pathway,AFOLU,Floor,0
@@ -599,8 +599,8 @@ World ,Cropland Soil Health,Pathway,AFOLU,Floor,0
 World ,Cropland Soil Health,Baseline,AFOLU,Floor,0
 NonOECD ,Electricity,Baseline,Electricity,Floor,0
 NonOECD ,Electricity,Pathway,Electricity,Floor,0
-OECD ,Electricity,Baseline,Electricity,Floor,0
-OECD ,Electricity,Pathway,Electricity,Floor,0
+ OECD ,Electricity,Baseline,Electricity,Floor,0
+ OECD ,Electricity,Pathway,Electricity,Floor,0
 World ,Electricity,Pathway,Electricity,Floor,0
 World ,Electricity,Baseline,Electricity,Floor,0
 AdvancedECO ,Fossil fuels,Pathway,,Floor,0
@@ -637,10 +637,10 @@ NonOECD ,Fossil fuels,Pathway,Transport,Floor,0
 NonOECD ,Fossil fuels,Baseline,Transport,Floor,0
 NonOECD ,Fossil fuels,Pathway,Electricity,Floor,0
 NonOECD ,Fossil fuels,Baseline,Electricity,Floor,0
-OECD ,Fossil fuels,Pathway,Transport,Floor,0
-OECD ,Fossil fuels,Baseline,Transport,Floor,0
-OECD ,Fossil fuels,Pathway,Electricity,Floor,0
-OECD ,Fossil fuels,Baseline,Electricity,Floor,0
+ OECD ,Fossil fuels,Pathway,Transport,Floor,0
+ OECD ,Fossil fuels,Baseline,Transport,Floor,0
+ OECD ,Fossil fuels,Pathway,Electricity,Floor,0
+ OECD ,Fossil fuels,Baseline,Electricity,Floor,0
 RUS ,Fossil fuels,Pathway,,Floor,0
 RUS ,Fossil fuels,Baseline,,Floor,0
 SAFR ,Fossil fuels,Pathway,,Floor,0
@@ -682,8 +682,8 @@ NAM ,Generation,Pathway,,Floor,100
 NAM ,Generation,Baseline,,Floor,100
 NonOECD ,Generation,Pathway,Electricity,Floor,100
 NonOECD ,Generation,Baseline,Electricity,Floor,100
-OECD ,Generation,Pathway,Electricity,Floor,100
-OECD ,Generation,Baseline,Electricity,Floor,100
+ OECD ,Generation,Pathway,Electricity,Floor,100
+ OECD ,Generation,Baseline,Electricity,Floor,100
 RUS ,Generation,Pathway,,Floor,100
 RUS ,Generation,Baseline,,Floor,100
 SAFR ,Generation,Pathway,,Floor,100
@@ -726,10 +726,10 @@ NonOECD ,Geothermal,Baseline,Electricity,Floor,0
 NonOECD ,Geothermal,Pathway,Electricity,Floor,0
 NonOECD ,Geothermal,Baseline,Heat,Floor,0
 NonOECD ,Geothermal,Pathway,Heat,Floor,0
-OECD ,Geothermal,Baseline,Electricity,Floor,0
-OECD ,Geothermal,Pathway,Electricity,Floor,0
-OECD ,Geothermal,Baseline,Heat,Floor,0
-OECD ,Geothermal,Pathway,Heat,Floor,0
+ OECD ,Geothermal,Baseline,Electricity,Floor,0
+ OECD ,Geothermal,Pathway,Electricity,Floor,0
+ OECD ,Geothermal,Baseline,Heat,Floor,0
+ OECD ,Geothermal,Pathway,Heat,Floor,0
 RUS ,Geothermal,Pathway,,Floor,0
 RUS ,Geothermal,Baseline,,Floor,0
 SAFR ,Geothermal,Pathway,,Floor,0
@@ -772,8 +772,8 @@ NAM ,Hydroelectric pumped storage,Pathway,,Floor,0
 NAM ,Hydroelectric pumped storage,Baseline,,Floor,0
 NonOECD ,Hydroelectric pumped storage,Pathway,Electricity,Floor,0
 NonOECD ,Hydroelectric pumped storage,Baseline,Electricity,Floor,0
-OECD ,Hydroelectric pumped storage,Pathway,Electricity,Floor,0
-OECD ,Hydroelectric pumped storage,Baseline,Electricity,Floor,0
+ OECD ,Hydroelectric pumped storage,Pathway,Electricity,Floor,0
+ OECD ,Hydroelectric pumped storage,Baseline,Electricity,Floor,0
 RUS ,Hydroelectric pumped storage,Pathway,,Floor,0
 RUS ,Hydroelectric pumped storage,Baseline,,Floor,0
 SAFR ,Hydroelectric pumped storage,Pathway,,Floor,0
@@ -814,8 +814,8 @@ NAM ,Hydroelectricity,Pathway,,Floor,0
 NAM ,Hydroelectricity,Baseline,,Floor,0
 NonOECD ,Hydroelectricity,Pathway,Electricity,Floor,0
 NonOECD ,Hydroelectricity,Baseline,Electricity,Floor,0
-OECD ,Hydroelectricity,Pathway,Electricity,Floor,0
-OECD ,Hydroelectricity,Baseline,Electricity,Floor,0
+ OECD ,Hydroelectricity,Pathway,Electricity,Floor,0
+ OECD ,Hydroelectricity,Baseline,Electricity,Floor,0
 RUS ,Hydroelectricity,Pathway,,Floor,0
 RUS ,Hydroelectricity,Baseline,,Floor,0
 SAFR ,Hydroelectricity,Pathway,,Floor,0
@@ -856,8 +856,8 @@ NAM ,Improved Forest Mgmt,Pathway,AFOLU,Floor,0
 NAM ,Improved Forest Mgmt,Baseline,AFOLU,Floor,0
 NonOECD ,Improved Forest Mgmt,Pathway,AFOLU,Floor,0
 NonOECD ,Improved Forest Mgmt,Baseline,AFOLU,Floor,0
-OECD ,Improved Forest Mgmt,Pathway,AFOLU,Floor,0
-OECD ,Improved Forest Mgmt,Baseline,AFOLU,Floor,0
+ OECD ,Improved Forest Mgmt,Pathway,AFOLU,Floor,0
+ OECD ,Improved Forest Mgmt,Baseline,AFOLU,Floor,0
 RUS ,Improved Forest Mgmt,Pathway,AFOLU,Floor,0
 RUS ,Improved Forest Mgmt,Baseline,AFOLU,Floor,0
 SAFR ,Improved Forest Mgmt,Pathway,AFOLU,Floor,0
@@ -898,8 +898,8 @@ NAM ,Improved Rice,Pathway,AFOLU,Floor,0
 NAM ,Improved Rice,Baseline,AFOLU,Floor,0
 NonOECD ,Improved Rice,Pathway,AFOLU,Floor,0
 NonOECD ,Improved Rice,Baseline,AFOLU,Floor,0
-OECD ,Improved Rice,Pathway,AFOLU,Floor,0
-OECD ,Improved Rice,Baseline,AFOLU,Floor,0
+ OECD ,Improved Rice,Pathway,AFOLU,Floor,0
+ OECD ,Improved Rice,Baseline,AFOLU,Floor,0
 RUS ,Improved Rice,Pathway,AFOLU,Floor,0
 RUS ,Improved Rice,Baseline,AFOLU,Floor,0
 SAFR ,Improved Rice,Pathway,AFOLU,Floor,0
@@ -940,8 +940,8 @@ NAM ,Legumes,Pathway,AFOLU,Floor,0
 NAM ,Legumes,Baseline,AFOLU,Floor,0
 NonOECD ,Legumes,Pathway,AFOLU,Floor,0
 NonOECD ,Legumes,Baseline,AFOLU,Floor,0
-OECD ,Legumes,Pathway,AFOLU,Floor,0
-OECD ,Legumes,Baseline,AFOLU,Floor,0
+ OECD ,Legumes,Pathway,AFOLU,Floor,0
+ OECD ,Legumes,Baseline,AFOLU,Floor,0
 RUS ,Legumes,Pathway,AFOLU,Floor,0
 RUS ,Legumes,Baseline,AFOLU,Floor,0
 SAFR ,Legumes,Pathway,AFOLU,Floor,0
@@ -954,10 +954,10 @@ NonOECD ,Natural gas,Baseline,Electricity,Floor,0
 NonOECD ,Natural gas,Pathway,Electricity,Floor,0
 NonOECD ,Natural gas,Baseline,Heat,Floor,0
 NonOECD ,Natural gas,Pathway,Heat,Floor,0
-OECD ,Natural gas,Baseline,Electricity,Floor,0
-OECD ,Natural gas,Pathway,Electricity,Floor,0
-OECD ,Natural gas,Baseline,Heat,Floor,0
-OECD ,Natural gas,Pathway,Heat,Floor,0
+ OECD ,Natural gas,Baseline,Electricity,Floor,0
+ OECD ,Natural gas,Pathway,Electricity,Floor,0
+ OECD ,Natural gas,Baseline,Heat,Floor,0
+ OECD ,Natural gas,Pathway,Heat,Floor,0
 World ,Natural gas,Pathway,Electricity,Floor,0
 World ,Natural gas,Baseline,Electricity,Floor,0
 World ,Natural gas,Pathway,Heat,Floor,0
@@ -994,8 +994,8 @@ NAM ,Natural Regeneration,Pathway,AFOLU,Floor,0
 NAM ,Natural Regeneration,Baseline,AFOLU,Floor,0
 NonOECD ,Natural Regeneration,Pathway,AFOLU,Floor,0
 NonOECD ,Natural Regeneration,Baseline,AFOLU,Floor,0
-OECD ,Natural Regeneration,Pathway,AFOLU,Floor,0
-OECD ,Natural Regeneration,Baseline,AFOLU,Floor,0
+ OECD ,Natural Regeneration,Pathway,AFOLU,Floor,0
+ OECD ,Natural Regeneration,Baseline,AFOLU,Floor,0
 RUS ,Natural Regeneration,Pathway,AFOLU,Floor,0
 RUS ,Natural Regeneration,Baseline,AFOLU,Floor,0
 SAFR ,Natural Regeneration,Pathway,AFOLU,Floor,0
@@ -1036,8 +1036,8 @@ NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,Floor,0
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,Floor,0
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Floor,0
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Floor,0
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Floor,0
-OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Floor,0
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Floor,0
+ OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Floor,0
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,Floor,0
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,Floor,0
 SAFR ,Nitrogen Fertilizer Management,Pathway,AFOLU,Floor,0
@@ -1080,10 +1080,10 @@ NonOECD ,Nuclear,Baseline,Electricity,Floor,0
 NonOECD ,Nuclear,Pathway,Electricity,Floor,0
 NonOECD ,Nuclear,Baseline,Heat,Floor,0
 NonOECD ,Nuclear,Pathway,Heat,Floor,0
-OECD ,Nuclear,Baseline,Electricity,Floor,0
-OECD ,Nuclear,Pathway,Electricity,Floor,0
-OECD ,Nuclear,Baseline,Heat,Floor,0
-OECD ,Nuclear,Pathway,Heat,Floor,0
+ OECD ,Nuclear,Baseline,Electricity,Floor,0
+ OECD ,Nuclear,Pathway,Electricity,Floor,0
+ OECD ,Nuclear,Baseline,Heat,Floor,0
+ OECD ,Nuclear,Pathway,Heat,Floor,0
 RUS ,Nuclear,Pathway,,Floor,0
 RUS ,Nuclear,Baseline,,Floor,0
 SAFR ,Nuclear,Pathway,,Floor,0
@@ -1100,12 +1100,12 @@ NonOECD ,Oil,Baseline,Heat,Floor,0
 NonOECD ,Oil,Pathway,Heat,Floor,0
 NonOECD ,Oil,Baseline,Transport,Floor,0
 NonOECD ,Oil,Pathway,Transport,Floor,0
-OECD ,Oil,Baseline,Electricity,Floor,0
-OECD ,Oil,Pathway,Electricity,Floor,0
-OECD ,Oil,Baseline,Heat,Floor,0
-OECD ,Oil,Pathway,Heat,Floor,0
-OECD ,Oil,Baseline,Transport,Floor,0
-OECD ,Oil,Pathway,Transport,Floor,0
+ OECD ,Oil,Baseline,Electricity,Floor,0
+ OECD ,Oil,Pathway,Electricity,Floor,0
+ OECD ,Oil,Baseline,Heat,Floor,0
+ OECD ,Oil,Pathway,Heat,Floor,0
+ OECD ,Oil,Baseline,Transport,Floor,0
+ OECD ,Oil,Pathway,Transport,Floor,0
 World ,Oil,Pathway,Electricity,Floor,0
 World ,Oil,Baseline,Electricity,Floor,0
 World ,Oil,Pathway,Heat,Floor,0
@@ -1144,8 +1144,8 @@ NAM ,Optimal Intensity,Pathway,AFOLU,Floor,0
 NAM ,Optimal Intensity,Baseline,AFOLU,Floor,0
 NonOECD ,Optimal Intensity,Pathway,AFOLU,Floor,0
 NonOECD ,Optimal Intensity,Baseline,AFOLU,Floor,0
-OECD ,Optimal Intensity,Pathway,AFOLU,Floor,0
-OECD ,Optimal Intensity,Baseline,AFOLU,Floor,0
+ OECD ,Optimal Intensity,Pathway,AFOLU,Floor,0
+ OECD ,Optimal Intensity,Baseline,AFOLU,Floor,0
 RUS ,Optimal Intensity,Pathway,AFOLU,Floor,0
 RUS ,Optimal Intensity,Baseline,AFOLU,Floor,0
 SAFR ,Optimal Intensity,Pathway,AFOLU,Floor,0
@@ -1156,14 +1156,14 @@ World ,Optimal Intensity,Pathway,AFOLU,Floor,0
 World ,Optimal Intensity,Baseline,AFOLU,Floor,0
 NonOECD ,Other fuels,Pathway,Transport,Floor,0
 NonOECD ,Other fuels,Baseline,Transport,Floor,0
-OECD ,Other fuels,Pathway,Transport,Floor,0
-OECD ,Other fuels,Baseline,Transport,Floor,0
+ OECD ,Other fuels,Pathway,Transport,Floor,0
+ OECD ,Other fuels,Baseline,Transport,Floor,0
 World ,Other fuels,Pathway,Transport,Floor,0
 World ,Other fuels,Baseline,Transport,Floor,0
 NonOECD ,Other sources,Pathway,Heat,Floor,0
 NonOECD ,Other sources,Baseline,Heat,Floor,0
-OECD ,Other sources,Pathway,Heat,Floor,0
-OECD ,Other sources,Baseline,Heat,Floor,0
+ OECD ,Other sources,Pathway,Heat,Floor,0
+ OECD ,Other sources,Baseline,Heat,Floor,0
 World ,Other sources,Pathway,Heat,Floor,0
 World ,Other sources,Baseline,Heat,Floor,0
 AdvancedECO ,Peat Restoration,Pathway,AFOLU,Floor,0
@@ -1198,8 +1198,8 @@ NAM ,Peat Restoration,Pathway,AFOLU,Floor,0
 NAM ,Peat Restoration,Baseline,AFOLU,Floor,0
 NonOECD ,Peat Restoration,Pathway,AFOLU,Floor,0
 NonOECD ,Peat Restoration,Baseline,AFOLU,Floor,0
-OECD ,Peat Restoration,Pathway,AFOLU,Floor,0
-OECD ,Peat Restoration,Baseline,AFOLU,Floor,0
+ OECD ,Peat Restoration,Pathway,AFOLU,Floor,0
+ OECD ,Peat Restoration,Baseline,AFOLU,Floor,0
 RUS ,Peat Restoration,Pathway,AFOLU,Floor,0
 RUS ,Peat Restoration,Baseline,AFOLU,Floor,0
 SAFR ,Peat Restoration,Pathway,AFOLU,Floor,0
@@ -1240,8 +1240,8 @@ NAM ,Silvopasture,Pathway,AFOLU,Floor,0
 NAM ,Silvopasture,Baseline,AFOLU,Floor,0
 NonOECD ,Silvopasture,Pathway,AFOLU,Floor,0
 NonOECD ,Silvopasture,Baseline,AFOLU,Floor,0
-OECD ,Silvopasture,Pathway,AFOLU,Floor,0
-OECD ,Silvopasture,Baseline,AFOLU,Floor,0
+ OECD ,Silvopasture,Pathway,AFOLU,Floor,0
+ OECD ,Silvopasture,Baseline,AFOLU,Floor,0
 RUS ,Silvopasture,Pathway,AFOLU,Floor,0
 RUS ,Silvopasture,Baseline,AFOLU,Floor,0
 SAFR ,Silvopasture,Pathway,AFOLU,Floor,0
@@ -1282,8 +1282,8 @@ NAM ,Solar,Pathway,,Floor,0
 NAM ,Solar,Baseline,,Floor,0
 NonOECD ,Solar,Pathway,Electricity,Floor,0
 NonOECD ,Solar,Baseline,Electricity,Floor,0
-OECD ,Solar,Pathway,Electricity,Floor,0
-OECD ,Solar,Baseline,Electricity,Floor,0
+ OECD ,Solar,Pathway,Electricity,Floor,0
+ OECD ,Solar,Baseline,Electricity,Floor,0
 RUS ,Solar,Pathway,,Floor,0
 RUS ,Solar,Baseline,,Floor,0
 SAFR ,Solar,Pathway,,Floor,0
@@ -1354,9 +1354,9 @@ NAM ,Solar thermal,Baseline,Industry,Floor,0
 NAM ,Solar thermal,Baseline,Buildings,Floor,0
 NonOECD ,Solar thermal,Baseline,Heat,Floor,0
 NonOECD ,Solar thermal,Pathway,Heat,Floor,2
-OECD ,Solar thermal,Baseline,Heat,Floor,0
-OECD ,Solar thermal,Baseline,Heat,Floor,0
-OECD ,Solar thermal,Pathway,Heat,Floor,2
+ OECD ,Solar thermal,Baseline,Heat,Floor,0
+ OECD ,Solar thermal,Baseline,Heat,Floor,0
+ OECD ,Solar thermal,Pathway,Heat,Floor,2
 RUS ,Solar thermal,Pathway,Industry,Floor,0
 RUS ,Solar thermal,Pathway,Buildings,Floor,0
 RUS ,Solar thermal,Baseline,Industry,Floor,0
@@ -1404,8 +1404,8 @@ NAM ,Tide and wave,Pathway,,Floor,0
 NAM ,Tide and wave,Baseline,,Floor,0
 NonOECD ,Tide and wave,Pathway,Electricity,Floor,0
 NonOECD ,Tide and wave,Baseline,Electricity,Floor,0
-OECD ,Tide and wave,Pathway,Electricity,Floor,0
-OECD ,Tide and wave,Baseline,Electricity,Floor,0
+ OECD ,Tide and wave,Pathway,Electricity,Floor,0
+ OECD ,Tide and wave,Baseline,Electricity,Floor,0
 RUS ,Tide and wave,Pathway,,Floor,0
 RUS ,Tide and wave,Baseline,,Floor,0
 SAFR ,Tide and wave,Pathway,,Floor,0
@@ -1446,8 +1446,8 @@ NAM ,Trees in Croplands,Pathway,AFOLU,Floor,0
 NAM ,Trees in Croplands,Baseline,AFOLU,Floor,0
 NonOECD ,Trees in Croplands,Pathway,AFOLU,Floor,0
 NonOECD ,Trees in Croplands,Baseline,AFOLU,Floor,0
-OECD ,Trees in Croplands,Pathway,AFOLU,Floor,0
-OECD ,Trees in Croplands,Baseline,AFOLU,Floor,0
+ OECD ,Trees in Croplands,Pathway,AFOLU,Floor,0
+ OECD ,Trees in Croplands,Baseline,AFOLU,Floor,0
 RUS ,Trees in Croplands,Pathway,AFOLU,Floor,0
 RUS ,Trees in Croplands,Baseline,AFOLU,Floor,0
 SAFR ,Trees in Croplands,Pathway,AFOLU,Floor,0
@@ -1460,10 +1460,10 @@ NonOECD ,Waste,Pathway,Electricity,Floor,0
 NonOECD ,Waste,Baseline,Electricity,Floor,0
 NonOECD ,Waste,Pathway,Heat,Floor,0
 NonOECD ,Waste,Baseline,Heat,Floor,0
-OECD ,Waste,Pathway,Electricity,Floor,0
-OECD ,Waste,Baseline,Electricity,Floor,0
-OECD ,Waste,Pathway,Heat,Floor,0
-OECD ,Waste,Baseline,Heat,Floor,0
+ OECD ,Waste,Pathway,Electricity,Floor,0
+ OECD ,Waste,Baseline,Electricity,Floor,0
+ OECD ,Waste,Pathway,Heat,Floor,0
+ OECD ,Waste,Baseline,Heat,Floor,0
 World ,Waste,Pathway,Electricity,Floor,0
 World ,Waste,Baseline,Electricity,Floor,0
 World ,Waste,Pathway,Heat,Floor,0
@@ -1500,8 +1500,8 @@ NAM ,Wind,Pathway,,Floor,0
 NAM ,Wind,Baseline,,Floor,0
 NonOECD ,Wind,Pathway,Electricity,Floor,0
 NonOECD ,Wind,Baseline,Electricity,Floor,0
-OECD ,Wind,Pathway,Electricity,Floor,0
-OECD ,Wind,Baseline,Electricity,Floor,0
+ OECD ,Wind,Pathway,Electricity,Floor,0
+ OECD ,Wind,Baseline,Electricity,Floor,0
 RUS ,Wind,Pathway,,Floor,0
 RUS ,Wind,Baseline,,Floor,0
 SAFR ,Wind,Pathway,,Floor,0
@@ -1542,8 +1542,8 @@ NAM ,Animal Mgmt,Pathway,AFOLU,Max annual growth,100
 NAM ,Animal Mgmt,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Animal Mgmt,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Animal Mgmt,Baseline,AFOLU,Max annual growth,100
-OECD ,Animal Mgmt,Pathway,AFOLU,Max annual growth,100
-OECD ,Animal Mgmt,Baseline,AFOLU,Max annual growth,100
+ OECD ,Animal Mgmt,Pathway,AFOLU,Max annual growth,100
+ OECD ,Animal Mgmt,Baseline,AFOLU,Max annual growth,100
 RUS ,Animal Mgmt,Pathway,AFOLU,Max annual growth,100
 RUS ,Animal Mgmt,Baseline,AFOLU,Max annual growth,100
 SAFR ,Animal Mgmt,Pathway,AFOLU,Max annual growth,100
@@ -1586,8 +1586,8 @@ NAM ,Avoided Coastal Impacts,Pathway,AFOLU,Max annual growth,100
 NAM ,Avoided Coastal Impacts,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Avoided Coastal Impacts,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Avoided Coastal Impacts,Baseline,AFOLU,Max annual growth,100
-OECD ,Avoided Coastal Impacts,Pathway,AFOLU,Max annual growth,100
-OECD ,Avoided Coastal Impacts,Baseline,AFOLU,Max annual growth,100
+ OECD ,Avoided Coastal Impacts,Pathway,AFOLU,Max annual growth,100
+ OECD ,Avoided Coastal Impacts,Baseline,AFOLU,Max annual growth,100
 RUS ,Avoided Coastal Impacts,Pathway,AFOLU,Max annual growth,100
 RUS ,Avoided Coastal Impacts,Baseline,AFOLU,Max annual growth,100
 SAFR ,Avoided Coastal Impacts,Pathway,AFOLU,Max annual growth,100
@@ -1630,8 +1630,8 @@ NAM ,Avoided Forest Conversion,Pathway,AFOLU,Max annual growth,100
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,Max annual growth,100
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,Max annual growth,100
-OECD ,Avoided Forest Conversion,Baseline,AFOLU,Max annual growth,100
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,Max annual growth,100
+ OECD ,Avoided Forest Conversion,Baseline,AFOLU,Max annual growth,100
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,Max annual growth,100
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,Max annual growth,100
 SAFR ,Avoided Forest Conversion,Pathway,AFOLU,Max annual growth,100
@@ -1673,8 +1673,8 @@ NAM ,Avoided Peat Impacts,Pathway,AFOLU,Max annual growth,100
 NAM ,Avoided Peat Impacts,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Max annual growth,100
-OECD ,Avoided Peat Impacts,Pathway,AFOLU,Max annual growth,100
-OECD ,Avoided Peat Impacts,Baseline,AFOLU,Max annual growth,100
+ OECD ,Avoided Peat Impacts,Pathway,AFOLU,Max annual growth,100
+ OECD ,Avoided Peat Impacts,Baseline,AFOLU,Max annual growth,100
 RUS ,Avoided Peat Impacts,Pathway,AFOLU,Max annual growth,100
 RUS ,Avoided Peat Impacts,Baseline,AFOLU,Max annual growth,100
 SAFR ,Avoided Peat Impacts,Pathway,AFOLU,Max annual growth,100
@@ -1749,10 +1749,10 @@ NonOECD ,Biochar,Baseline,Industry,Max annual growth,100
 NonOECD ,Biochar,Pathway,Industry,Max annual growth,100
 NonOECD ,Biochar,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Biochar,Baseline,AFOLU,Max annual growth,100
-OECD ,Biochar,Baseline,Industry,Max annual growth,100
-OECD ,Biochar,Pathway,Industry,Max annual growth,100
-OECD ,Biochar,Pathway,AFOLU,Max annual growth,100
-OECD ,Biochar,Baseline,AFOLU,Max annual growth,100
+ OECD ,Biochar,Baseline,Industry,Max annual growth,100
+ OECD ,Biochar,Pathway,Industry,Max annual growth,100
+ OECD ,Biochar,Pathway,AFOLU,Max annual growth,100
+ OECD ,Biochar,Baseline,AFOLU,Max annual growth,100
 RUS ,Biochar,Baseline,,Max annual growth,100
 RUS ,Biochar,Pathway,,Max annual growth,100
 RUS ,Biochar,Pathway,AFOLU,Max annual growth,100
@@ -1775,10 +1775,10 @@ NonOECD ,Bioenergy,Pathway,Electricity,Max annual growth,100
 NonOECD ,Bioenergy,Baseline,Electricity,Max annual growth,100
 NonOECD ,Bioenergy,Pathway,Heat,Max annual growth,100
 NonOECD ,Bioenergy,Baseline,Heat,Max annual growth,100
-OECD ,Bioenergy,Pathway,Electricity,Max annual growth,100
-OECD ,Bioenergy,Baseline,Electricity,Max annual growth,100
-OECD ,Bioenergy,Pathway,Heat,Max annual growth,100
-OECD ,Bioenergy,Baseline,Heat,Max annual growth,100
+ OECD ,Bioenergy,Pathway,Electricity,Max annual growth,100
+ OECD ,Bioenergy,Baseline,Electricity,Max annual growth,100
+ OECD ,Bioenergy,Pathway,Heat,Max annual growth,100
+ OECD ,Bioenergy,Baseline,Heat,Max annual growth,100
 World ,Bioenergy,Baseline,Electricity,Max annual growth,100
 World ,Bioenergy,Pathway,Electricity,Max annual growth,100
 World ,Bioenergy,Baseline,Heat,Max annual growth,100
@@ -1800,8 +1800,8 @@ ME ,Biofuels,Baseline,,Max annual growth,100
 NAM ,Biofuels,Baseline,,Max annual growth,100
 NonOECD ,Biofuels,Baseline,Transport,Max annual growth,100
 NonOECD ,Biofuels,Pathway,Transport,Max annual growth,100
-OECD ,Biofuels,Baseline,Transport,Max annual growth,100
-OECD ,Biofuels,Pathway,Transport,Max annual growth,80
+ OECD ,Biofuels,Baseline,Transport,Max annual growth,100
+ OECD ,Biofuels,Pathway,Transport,Max annual growth,80
 RUS ,Biofuels,Baseline,,Max annual growth,100
 SAFR ,Biofuels,Baseline,,Max annual growth,100
 US ,Biofuels,Baseline,,Max annual growth,100
@@ -1839,8 +1839,8 @@ NAM ,Biomass and waste,Baseline,,Max annual growth,100
 NAM ,Biomass and waste,Pathway,,Max annual growth,100
 NonOECD ,Biomass and waste,Baseline,Electricity,Max annual growth,100
 NonOECD ,Biomass and waste,Pathway,Electricity,Max annual growth,100
-OECD ,Biomass and waste,Baseline,Electricity,Max annual growth,100
-OECD ,Biomass and waste,Pathway,Electricity,Max annual growth,100
+ OECD ,Biomass and waste,Baseline,Electricity,Max annual growth,100
+ OECD ,Biomass and waste,Pathway,Electricity,Max annual growth,100
 RUS ,Biomass and waste,Baseline,,Max annual growth,100
 RUS ,Biomass and waste,Pathway,,Max annual growth,100
 SAFR ,Biomass and waste,Baseline,,Max annual growth,100
@@ -1853,10 +1853,10 @@ NonOECD ,Coal,Baseline,Electricity,Max annual growth,100
 NonOECD ,Coal,Pathway,Electricity,Max annual growth,100
 NonOECD ,Coal,Baseline,Heat,Max annual growth,100
 NonOECD ,Coal,Pathway,Heat,Max annual growth,100
-OECD ,Coal,Baseline,Electricity,Max annual growth,100
-OECD ,Coal,Pathway,Electricity,Max annual growth,100
-OECD ,Coal,Baseline,Heat,Max annual growth,100
-OECD ,Coal,Pathway,Heat,Max annual growth,100
+ OECD ,Coal,Baseline,Electricity,Max annual growth,100
+ OECD ,Coal,Pathway,Electricity,Max annual growth,100
+ OECD ,Coal,Baseline,Heat,Max annual growth,100
+ OECD ,Coal,Pathway,Heat,Max annual growth,100
 World ,Coal,Baseline,Electricity,Max annual growth,100
 World ,Coal,Pathway,Electricity,Max annual growth,100
 World ,Coal,Baseline,Heat,Max annual growth,100
@@ -1893,8 +1893,8 @@ NAM ,Coastal Restoration,Pathway,AFOLU,Max annual growth,100
 NAM ,Coastal Restoration,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Coastal Restoration,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Coastal Restoration,Baseline,AFOLU,Max annual growth,100
-OECD ,Coastal Restoration,Pathway,AFOLU,Max annual growth,100
-OECD ,Coastal Restoration,Baseline,AFOLU,Max annual growth,100
+ OECD ,Coastal Restoration,Pathway,AFOLU,Max annual growth,100
+ OECD ,Coastal Restoration,Baseline,AFOLU,Max annual growth,100
 RUS ,Coastal Restoration,Pathway,AFOLU,Max annual growth,100
 RUS ,Coastal Restoration,Baseline,AFOLU,Max annual growth,100
 SAFR ,Coastal Restoration,Pathway,AFOLU,Max annual growth,100
@@ -1937,8 +1937,8 @@ NAM ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
 NAM ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
-OECD ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
-OECD ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
+ OECD ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
+ OECD ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 RUS ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
 RUS ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 SAFR ,Cropland Soil Health,Pathway,AFOLU,Max annual growth,100
@@ -1950,8 +1950,8 @@ World ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 World ,Cropland Soil Health,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Electricity,Baseline,Electricity,Max annual growth,100
 NonOECD ,Electricity,Pathway,Electricity,Max annual growth,100
-OECD ,Electricity,Baseline,Electricity,Max annual growth,100
-OECD ,Electricity,Pathway,Electricity,Max annual growth,100
+ OECD ,Electricity,Baseline,Electricity,Max annual growth,100
+ OECD ,Electricity,Pathway,Electricity,Max annual growth,100
 World ,Electricity,Baseline,Electricity,Max annual growth,100
 World ,Electricity,Pathway,Electricity,Max annual growth,100
 AdvancedECO ,Fossil fuels,Baseline,,Max annual growth,100
@@ -1988,10 +1988,10 @@ NonOECD ,Fossil fuels,Baseline,Transport,Max annual growth,100
 NonOECD ,Fossil fuels,Pathway,Transport,Max annual growth,100
 NonOECD ,Fossil fuels,Pathway,Electricity,Max annual growth,100
 NonOECD ,Fossil fuels,Baseline,Electricity,Max annual growth,100
-OECD ,Fossil fuels,Baseline,Transport,Max annual growth,100
-OECD ,Fossil fuels,Pathway,Transport,Max annual growth,100
-OECD ,Fossil fuels,Pathway,Electricity,Max annual growth,100
-OECD ,Fossil fuels,Baseline,Electricity,Max annual growth,100
+ OECD ,Fossil fuels,Baseline,Transport,Max annual growth,100
+ OECD ,Fossil fuels,Pathway,Transport,Max annual growth,100
+ OECD ,Fossil fuels,Pathway,Electricity,Max annual growth,100
+ OECD ,Fossil fuels,Baseline,Electricity,Max annual growth,100
 RUS ,Fossil fuels,Baseline,,Max annual growth,100
 RUS ,Fossil fuels,Pathway,,Max annual growth,100
 SAFR ,Fossil fuels,Baseline,,Max annual growth,100
@@ -2033,8 +2033,8 @@ NAM ,Generation,Baseline,,Max annual growth,100
 NAM ,Generation,Pathway,,Max annual growth,100
 NonOECD ,Generation,Baseline,Electricity,Max annual growth,100
 NonOECD ,Generation,Pathway,Electricity,Max annual growth,100
-OECD ,Generation,Baseline,Electricity,Max annual growth,100
-OECD ,Generation,Pathway,Electricity,Max annual growth,100
+ OECD ,Generation,Baseline,Electricity,Max annual growth,100
+ OECD ,Generation,Pathway,Electricity,Max annual growth,100
 RUS ,Generation,Baseline,,Max annual growth,100
 RUS ,Generation,Pathway,,Max annual growth,100
 SAFR ,Generation,Baseline,,Max annual growth,100
@@ -2077,10 +2077,10 @@ NonOECD ,Geothermal,Baseline,Electricity,Max annual growth,100
 NonOECD ,Geothermal,Pathway,Electricity,Max annual growth,100
 NonOECD ,Geothermal,Baseline,Heat,Max annual growth,100
 NonOECD ,Geothermal,Pathway,Heat,Max annual growth,100
-OECD ,Geothermal,Baseline,Electricity,Max annual growth,100
-OECD ,Geothermal,Pathway,Electricity,Max annual growth,100
-OECD ,Geothermal,Baseline,Heat,Max annual growth,100
-OECD ,Geothermal,Pathway,Heat,Max annual growth,100
+ OECD ,Geothermal,Baseline,Electricity,Max annual growth,100
+ OECD ,Geothermal,Pathway,Electricity,Max annual growth,100
+ OECD ,Geothermal,Baseline,Heat,Max annual growth,100
+ OECD ,Geothermal,Pathway,Heat,Max annual growth,100
 RUS ,Geothermal,Baseline,,Max annual growth,100
 RUS ,Geothermal,Pathway,,Max annual growth,100
 SAFR ,Geothermal,Baseline,,Max annual growth,100
@@ -2123,8 +2123,8 @@ NAM ,Hydroelectric pumped storage,Baseline,,Max annual growth,100
 NAM ,Hydroelectric pumped storage,Pathway,,Max annual growth,100
 NonOECD ,Hydroelectric pumped storage,Baseline,Electricity,Max annual growth,100
 NonOECD ,Hydroelectric pumped storage,Pathway,Electricity,Max annual growth,100
-OECD ,Hydroelectric pumped storage,Baseline,Electricity,Max annual growth,100
-OECD ,Hydroelectric pumped storage,Pathway,Electricity,Max annual growth,100
+ OECD ,Hydroelectric pumped storage,Baseline,Electricity,Max annual growth,100
+ OECD ,Hydroelectric pumped storage,Pathway,Electricity,Max annual growth,100
 RUS ,Hydroelectric pumped storage,Baseline,,Max annual growth,100
 RUS ,Hydroelectric pumped storage,Pathway,,Max annual growth,100
 SAFR ,Hydroelectric pumped storage,Baseline,,Max annual growth,100
@@ -2165,8 +2165,8 @@ NAM ,Hydroelectricity,Baseline,,Max annual growth,100
 NAM ,Hydroelectricity,Pathway,,Max annual growth,100
 NonOECD ,Hydroelectricity,Baseline,Electricity,Max annual growth,100
 NonOECD ,Hydroelectricity,Pathway,Electricity,Max annual growth,100
-OECD ,Hydroelectricity,Baseline,Electricity,Max annual growth,100
-OECD ,Hydroelectricity,Pathway,Electricity,Max annual growth,100
+ OECD ,Hydroelectricity,Baseline,Electricity,Max annual growth,100
+ OECD ,Hydroelectricity,Pathway,Electricity,Max annual growth,100
 RUS ,Hydroelectricity,Baseline,,Max annual growth,100
 RUS ,Hydroelectricity,Pathway,,Max annual growth,100
 SAFR ,Hydroelectricity,Baseline,,Max annual growth,100
@@ -2207,8 +2207,8 @@ NAM ,Improved Forest Mgmt,Pathway,AFOLU,Max annual growth,100
 NAM ,Improved Forest Mgmt,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Improved Forest Mgmt,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Improved Forest Mgmt,Baseline,AFOLU,Max annual growth,100
-OECD ,Improved Forest Mgmt,Pathway,AFOLU,Max annual growth,100
-OECD ,Improved Forest Mgmt,Baseline,AFOLU,Max annual growth,100
+ OECD ,Improved Forest Mgmt,Pathway,AFOLU,Max annual growth,100
+ OECD ,Improved Forest Mgmt,Baseline,AFOLU,Max annual growth,100
 RUS ,Improved Forest Mgmt,Pathway,AFOLU,Max annual growth,100
 RUS ,Improved Forest Mgmt,Baseline,AFOLU,Max annual growth,100
 SAFR ,Improved Forest Mgmt,Pathway,AFOLU,Max annual growth,100
@@ -2251,8 +2251,8 @@ NAM ,Improved Rice,Pathway,AFOLU,Max annual growth,100
 NAM ,Improved Rice,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Improved Rice,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Improved Rice,Baseline,AFOLU,Max annual growth,100
-OECD ,Improved Rice,Pathway,AFOLU,Max annual growth,100
-OECD ,Improved Rice,Baseline,AFOLU,Max annual growth,100
+ OECD ,Improved Rice,Pathway,AFOLU,Max annual growth,100
+ OECD ,Improved Rice,Baseline,AFOLU,Max annual growth,100
 RUS ,Improved Rice,Pathway,AFOLU,Max annual growth,100
 RUS ,Improved Rice,Baseline,AFOLU,Max annual growth,100
 SAFR ,Improved Rice,Pathway,AFOLU,Max annual growth,100
@@ -2295,8 +2295,8 @@ NAM ,Legumes,Pathway,AFOLU,Max annual growth,100
 NAM ,Legumes,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Legumes,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Legumes,Baseline,AFOLU,Max annual growth,100
-OECD ,Legumes,Pathway,AFOLU,Max annual growth,100
-OECD ,Legumes,Baseline,AFOLU,Max annual growth,100
+ OECD ,Legumes,Pathway,AFOLU,Max annual growth,100
+ OECD ,Legumes,Baseline,AFOLU,Max annual growth,100
 RUS ,Legumes,Pathway,AFOLU,Max annual growth,100
 RUS ,Legumes,Baseline,AFOLU,Max annual growth,100
 SAFR ,Legumes,Pathway,AFOLU,Max annual growth,100
@@ -2311,10 +2311,10 @@ NonOECD ,Natural gas,Baseline,Electricity,Max annual growth,100
 NonOECD ,Natural gas,Pathway,Electricity,Max annual growth,100
 NonOECD ,Natural gas,Baseline,Heat,Max annual growth,100
 NonOECD ,Natural gas,Pathway,Heat,Max annual growth,100
-OECD ,Natural gas,Baseline,Electricity,Max annual growth,100
-OECD ,Natural gas,Pathway,Electricity,Max annual growth,100
-OECD ,Natural gas,Baseline,Heat,Max annual growth,100
-OECD ,Natural gas,Pathway,Heat,Max annual growth,100
+ OECD ,Natural gas,Baseline,Electricity,Max annual growth,100
+ OECD ,Natural gas,Pathway,Electricity,Max annual growth,100
+ OECD ,Natural gas,Baseline,Heat,Max annual growth,100
+ OECD ,Natural gas,Pathway,Heat,Max annual growth,100
 World ,Natural gas,Baseline,Electricity,Max annual growth,100
 World ,Natural gas,Pathway,Electricity,Max annual growth,100
 World ,Natural gas,Baseline,Heat,Max annual growth,100
@@ -2351,8 +2351,8 @@ NAM ,Natural Regeneration,Pathway,AFOLU,Max annual growth,100
 NAM ,Natural Regeneration,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Natural Regeneration,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Natural Regeneration,Baseline,AFOLU,Max annual growth,100
-OECD ,Natural Regeneration,Pathway,AFOLU,Max annual growth,100
-OECD ,Natural Regeneration,Baseline,AFOLU,Max annual growth,100
+ OECD ,Natural Regeneration,Pathway,AFOLU,Max annual growth,100
+ OECD ,Natural Regeneration,Baseline,AFOLU,Max annual growth,100
 RUS ,Natural Regeneration,Pathway,AFOLU,Max annual growth,100
 RUS ,Natural Regeneration,Baseline,AFOLU,Max annual growth,100
 SAFR ,Natural Regeneration,Pathway,AFOLU,Max annual growth,100
@@ -2395,8 +2395,8 @@ NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,Max annual growth,100
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Max annual growth,100
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Max annual growth,100
-OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Max annual growth,100
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Max annual growth,100
+ OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Max annual growth,100
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,Max annual growth,100
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,Max annual growth,100
 SAFR ,Nitrogen Fertilizer Management,Pathway,AFOLU,Max annual growth,100
@@ -2441,10 +2441,10 @@ NonOECD ,Nuclear,Baseline,Electricity,Max annual growth,100
 NonOECD ,Nuclear,Pathway,Electricity,Max annual growth,100
 NonOECD ,Nuclear,Baseline,Heat,Max annual growth,100
 NonOECD ,Nuclear,Pathway,Heat,Max annual growth,100
-OECD ,Nuclear,Baseline,Electricity,Max annual growth,100
-OECD ,Nuclear,Pathway,Electricity,Max annual growth,100
-OECD ,Nuclear,Baseline,Heat,Max annual growth,100
-OECD ,Nuclear,Pathway,Heat,Max annual growth,100
+ OECD ,Nuclear,Baseline,Electricity,Max annual growth,100
+ OECD ,Nuclear,Pathway,Electricity,Max annual growth,100
+ OECD ,Nuclear,Baseline,Heat,Max annual growth,100
+ OECD ,Nuclear,Pathway,Heat,Max annual growth,100
 RUS ,Nuclear,Baseline,,Max annual growth,100
 RUS ,Nuclear,Pathway,,Max annual growth,100
 SAFR ,Nuclear,Baseline,,Max annual growth,100
@@ -2461,12 +2461,12 @@ NonOECD ,Oil,Baseline,Heat,Max annual growth,100
 NonOECD ,Oil,Pathway,Heat,Max annual growth,100
 NonOECD ,Oil,Baseline,Transport,Max annual growth,100
 NonOECD ,Oil,Pathway,Transport,Max annual growth,100
-OECD ,Oil,Baseline,Electricity,Max annual growth,100
-OECD ,Oil,Pathway,Electricity,Max annual growth,100
-OECD ,Oil,Baseline,Heat,Max annual growth,100
-OECD ,Oil,Pathway,Heat,Max annual growth,100
-OECD ,Oil,Baseline,Transport,Max annual growth,100
-OECD ,Oil,Pathway,Transport,Max annual growth,100
+ OECD ,Oil,Baseline,Electricity,Max annual growth,100
+ OECD ,Oil,Pathway,Electricity,Max annual growth,100
+ OECD ,Oil,Baseline,Heat,Max annual growth,100
+ OECD ,Oil,Pathway,Heat,Max annual growth,100
+ OECD ,Oil,Baseline,Transport,Max annual growth,100
+ OECD ,Oil,Pathway,Transport,Max annual growth,100
 World ,Oil,Baseline,Electricity,Max annual growth,100
 World ,Oil,Pathway,Electricity,Max annual growth,100
 World ,Oil,Baseline,Heat,Max annual growth,100
@@ -2505,8 +2505,8 @@ NAM ,Optimal Intensity,Pathway,AFOLU,Max annual growth,100
 NAM ,Optimal Intensity,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Optimal Intensity,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Optimal Intensity,Baseline,AFOLU,Max annual growth,100
-OECD ,Optimal Intensity,Pathway,AFOLU,Max annual growth,100
-OECD ,Optimal Intensity,Baseline,AFOLU,Max annual growth,100
+ OECD ,Optimal Intensity,Pathway,AFOLU,Max annual growth,100
+ OECD ,Optimal Intensity,Baseline,AFOLU,Max annual growth,100
 RUS ,Optimal Intensity,Pathway,AFOLU,Max annual growth,100
 RUS ,Optimal Intensity,Baseline,AFOLU,Max annual growth,100
 SAFR ,Optimal Intensity,Pathway,AFOLU,Max annual growth,100
@@ -2519,14 +2519,14 @@ World ,Optimal Intensity,Pathway,AFOLU,Max annual growth,100
 World ,Optimal Intensity,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Other fuels,Pathway,Transport,Max annual growth,100
 NonOECD ,Other fuels,Baseline,Transport,Max annual growth,100
-OECD ,Other fuels,Pathway,Transport,Max annual growth,100
-OECD ,Other fuels,Baseline,Transport,Max annual growth,100
+ OECD ,Other fuels,Pathway,Transport,Max annual growth,100
+ OECD ,Other fuels,Baseline,Transport,Max annual growth,100
 World ,Other fuels,Baseline,Transport,Max annual growth,100
 World ,Other fuels,Pathway,Transport,Max annual growth,100
 NonOECD ,Other sources,Pathway,Heat,Max annual growth,100
 NonOECD ,Other sources,Baseline,Heat,Max annual growth,100
-OECD ,Other sources,Pathway,Heat,Max annual growth,100
-OECD ,Other sources,Baseline,Heat,Max annual growth,100
+ OECD ,Other sources,Pathway,Heat,Max annual growth,100
+ OECD ,Other sources,Baseline,Heat,Max annual growth,100
 World ,Other sources,Pathway,Heat,Max annual growth,100
 World ,Other sources,Baseline,Heat,Max annual growth,100
 AdvancedECO ,Peat Restoration,Pathway,AFOLU,Max annual growth,100
@@ -2561,8 +2561,8 @@ NAM ,Peat Restoration,Pathway,AFOLU,Max annual growth,100
 NAM ,Peat Restoration,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Peat Restoration,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Peat Restoration,Baseline,AFOLU,Max annual growth,100
-OECD ,Peat Restoration,Pathway,AFOLU,Max annual growth,100
-OECD ,Peat Restoration,Baseline,AFOLU,Max annual growth,100
+ OECD ,Peat Restoration,Pathway,AFOLU,Max annual growth,100
+ OECD ,Peat Restoration,Baseline,AFOLU,Max annual growth,100
 RUS ,Peat Restoration,Pathway,AFOLU,Max annual growth,100
 RUS ,Peat Restoration,Baseline,AFOLU,Max annual growth,100
 SAFR ,Peat Restoration,Pathway,AFOLU,Max annual growth,100
@@ -2605,8 +2605,8 @@ NAM ,Silvopasture,Pathway,AFOLU,Max annual growth,100
 NAM ,Silvopasture,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Silvopasture,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Silvopasture,Baseline,AFOLU,Max annual growth,100
-OECD ,Silvopasture,Pathway,AFOLU,Max annual growth,100
-OECD ,Silvopasture,Baseline,AFOLU,Max annual growth,100
+ OECD ,Silvopasture,Pathway,AFOLU,Max annual growth,100
+ OECD ,Silvopasture,Baseline,AFOLU,Max annual growth,100
 RUS ,Silvopasture,Pathway,AFOLU,Max annual growth,100
 RUS ,Silvopasture,Baseline,AFOLU,Max annual growth,100
 SAFR ,Silvopasture,Pathway,AFOLU,Max annual growth,100
@@ -2648,8 +2648,8 @@ NAM ,Solar,Baseline,,Max annual growth,100
 NAM ,Solar,Pathway,,Max annual growth,100
 NonOECD ,Solar,Baseline,Electricity,Max annual growth,100
 NonOECD ,Solar,Pathway,Electricity,Max annual growth,100
-OECD ,Solar,Baseline,Electricity,Max annual growth,100
-OECD ,Solar,Pathway,Electricity,Max annual growth,100
+ OECD ,Solar,Baseline,Electricity,Max annual growth,100
+ OECD ,Solar,Pathway,Electricity,Max annual growth,100
 RUS ,Solar,Baseline,,Max annual growth,100
 RUS ,Solar,Pathway,,Max annual growth,100
 SAFR ,Solar,Baseline,,Max annual growth,100
@@ -2690,8 +2690,8 @@ NAM ,Solar thermal,Baseline,,Max annual growth,100
 NAM ,Solar thermal,Pathway,,Max annual growth,100
 NonOECD ,Solar thermal,Baseline,Heat,Max annual growth,100
 NonOECD ,Solar thermal,Pathway,Heat,Max annual growth,100
-OECD ,Solar thermal,Baseline,Heat,Max annual growth,100
-OECD ,Solar thermal,Pathway,Heat,Max annual growth,100
+ OECD ,Solar thermal,Baseline,Heat,Max annual growth,100
+ OECD ,Solar thermal,Pathway,Heat,Max annual growth,100
 RUS ,Solar thermal,Baseline,,Max annual growth,100
 RUS ,Solar thermal,Pathway,,Max annual growth,100
 SAFR ,Solar thermal,Baseline,,Max annual growth,100
@@ -2732,8 +2732,8 @@ NAM ,Tide and wave,Baseline,,Max annual growth,100
 NAM ,Tide and wave,Pathway,,Max annual growth,100
 NonOECD ,Tide and wave,Baseline,Electricity,Max annual growth,100
 NonOECD ,Tide and wave,Pathway,Electricity,Max annual growth,100
-OECD ,Tide and wave,Baseline,Electricity,Max annual growth,100
-OECD ,Tide and wave,Pathway,Electricity,Max annual growth,100
+ OECD ,Tide and wave,Baseline,Electricity,Max annual growth,100
+ OECD ,Tide and wave,Pathway,Electricity,Max annual growth,100
 RUS ,Tide and wave,Baseline,,Max annual growth,100
 RUS ,Tide and wave,Pathway,,Max annual growth,100
 SAFR ,Tide and wave,Baseline,,Max annual growth,100
@@ -2774,8 +2774,8 @@ NAM ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
 NAM ,Trees in Croplands,Baseline,AFOLU,Max annual growth,100
 NonOECD ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
 NonOECD ,Trees in Croplands,Baseline,AFOLU,Max annual growth,100
-OECD ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
-OECD ,Trees in Croplands,Baseline,AFOLU,Max annual growth,100
+ OECD ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
+ OECD ,Trees in Croplands,Baseline,AFOLU,Max annual growth,100
 RUS ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
 RUS ,Trees in Croplands,Baseline,AFOLU,Max annual growth,100
 SAFR ,Trees in Croplands,Pathway,AFOLU,Max annual growth,100
@@ -2789,10 +2789,10 @@ NonOECD ,Waste,Pathway,Electricity,Max annual growth,100
 NonOECD ,Waste,Baseline,Electricity,Max annual growth,100
 NonOECD ,Waste,Pathway,Heat,Max annual growth,100
 NonOECD ,Waste,Baseline,Heat,Max annual growth,100
-OECD ,Waste,Pathway,Electricity,Max annual growth,100
-OECD ,Waste,Baseline,Electricity,Max annual growth,100
-OECD ,Waste,Pathway,Heat,Max annual growth,100
-OECD ,Waste,Baseline,Heat,Max annual growth,100
+ OECD ,Waste,Pathway,Electricity,Max annual growth,100
+ OECD ,Waste,Baseline,Electricity,Max annual growth,100
+ OECD ,Waste,Pathway,Heat,Max annual growth,100
+ OECD ,Waste,Baseline,Heat,Max annual growth,100
 World ,Waste,Baseline,Electricity,Max annual growth,100
 World ,Waste,Pathway,Electricity,Max annual growth,100
 World ,Waste,Baseline,Heat,Max annual growth,100
@@ -2829,8 +2829,8 @@ NAM ,Wind,Baseline,,Max annual growth,100
 NAM ,Wind,Pathway,,Max annual growth,100
 NonOECD ,Wind,Baseline,Electricity,Max annual growth,100
 NonOECD ,Wind,Pathway,Electricity,Max annual growth,100
-OECD ,Wind,Baseline,Electricity,Max annual growth,100
-OECD ,Wind,Pathway,Electricity,Max annual growth,100
+ OECD ,Wind,Baseline,Electricity,Max annual growth,100
+ OECD ,Wind,Pathway,Electricity,Max annual growth,100
 RUS ,Wind,Baseline,,Max annual growth,100
 RUS ,Wind,Pathway,,Max annual growth,100
 SAFR ,Wind,Baseline,,Max annual growth,100
@@ -2871,8 +2871,8 @@ NAM ,Animal Mgmt,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Animal Mgmt,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Animal Mgmt,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Animal Mgmt,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Animal Mgmt,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Animal Mgmt,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -2913,8 +2913,8 @@ NAM ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
 NAM ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
 NonOECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
-OECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
+ OECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
 RUS ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
@@ -2955,8 +2955,8 @@ NAM ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.025
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.025
-OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.025
+ OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, max",0.0263
@@ -2997,8 +2997,8 @@ NAM ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
 NAM ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
-OECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
+ OECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
 RUS ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, max",0.0263
@@ -3071,10 +3071,10 @@ NonOECD ,Biochar,Pathway,Industry,"Parameter a, max",0.1
 NonOECD ,Biochar,Baseline,Industry,"Parameter a, max",5
 NonOECD ,Biochar,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Biochar,Pathway,Industry,"Parameter a, max",0.1
-OECD ,Biochar,Baseline,Industry,"Parameter a, max",5
-OECD ,Biochar,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Biochar,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Biochar,Pathway,Industry,"Parameter a, max",0.1
+ OECD ,Biochar,Baseline,Industry,"Parameter a, max",5
+ OECD ,Biochar,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Biochar,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Biochar,Pathway,,"Parameter a, max",5
 RUS ,Biochar,Baseline,,"Parameter a, max",5
 RUS ,Biochar,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -3095,18 +3095,18 @@ NonOECD ,Bioenergy,Pathway,Electricity,"Parameter a, max",-0.04
 NonOECD ,Bioenergy,Baseline,Electricity,"Parameter a, max",-0.04
 NonOECD ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.005
 NonOECD ,Bioenergy,Baseline,Heat,"Parameter a, max",100
-OECD ,Bioenergy,Pathway,Electricity,"Parameter a, max",-0.04
-OECD ,Bioenergy,Baseline,Electricity,"Parameter a, max",-0.04
-OECD ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.005
-OECD ,Bioenergy,Baseline,Heat,"Parameter a, max",100
+ OECD ,Bioenergy,Pathway,Electricity,"Parameter a, max",-0.04
+ OECD ,Bioenergy,Baseline,Electricity,"Parameter a, max",-0.04
+ OECD ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.005
+ OECD ,Bioenergy,Baseline,Heat,"Parameter a, max",100
 World ,Bioenergy,Baseline,Electricity,"Parameter a, max",-0.04
 World ,Bioenergy,Pathway,Electricity,"Parameter a, max",-0.04
 World ,Bioenergy,Baseline,Heat,"Parameter a, max",-0.04
 World ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.14
 NonOECD ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
 NonOECD ,Biofuels,Baseline,Transport,"Parameter a, max",5
-OECD ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-OECD ,Biofuels,Baseline,Transport,"Parameter a, max",5
+ OECD ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
+ OECD ,Biofuels,Baseline,Transport,"Parameter a, max",5
 World ,Biofuels,Baseline,Transport,"Parameter a, max",5
 World ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
 AdvancedECO ,Biomass and waste,Pathway,,"Parameter a, max",5
@@ -3141,8 +3141,8 @@ NAM ,Biomass and waste,Pathway,,"Parameter a, max",5
 NAM ,Biomass and waste,Baseline,,"Parameter a, max",5
 NonOECD ,Biomass and waste,Pathway,Electricity,"Parameter a, max",5
 NonOECD ,Biomass and waste,Baseline,Electricity,"Parameter a, max",100
-OECD ,Biomass and waste,Pathway,Electricity,"Parameter a, max",5
-OECD ,Biomass and waste,Baseline,Electricity,"Parameter a, max",5
+ OECD ,Biomass and waste,Pathway,Electricity,"Parameter a, max",5
+ OECD ,Biomass and waste,Baseline,Electricity,"Parameter a, max",5
 RUS ,Biomass and waste,Pathway,,"Parameter a, max",5
 RUS ,Biomass and waste,Baseline,,"Parameter a, max",5
 SAFR ,Biomass and waste,Pathway,,"Parameter a, max",5
@@ -3155,10 +3155,10 @@ NonOECD ,Coal,Baseline,Electricity,"Parameter a, max",100
 NonOECD ,Coal,Pathway,Electricity,"Parameter a, max",5
 NonOECD ,Coal,Baseline,Heat,"Parameter a, max",100
 NonOECD ,Coal,Pathway,Heat,"Parameter a, max",-0.07
-OECD ,Coal,Baseline,Electricity,"Parameter a, max",100
-OECD ,Coal,Pathway,Electricity,"Parameter a, max",5
-OECD ,Coal,Baseline,Heat,"Parameter a, max",100
-OECD ,Coal,Pathway,Heat,"Parameter a, max",-0.07
+ OECD ,Coal,Baseline,Electricity,"Parameter a, max",100
+ OECD ,Coal,Pathway,Electricity,"Parameter a, max",5
+ OECD ,Coal,Baseline,Heat,"Parameter a, max",100
+ OECD ,Coal,Pathway,Heat,"Parameter a, max",-0.07
 World ,Coal,Pathway,Electricity,"Parameter a, max",5
 World ,Coal,Baseline,Electricity,"Parameter a, max",100
 World ,Coal,Pathway,Heat,"Parameter a, max",-0.12
@@ -3195,8 +3195,8 @@ NAM ,Coastal Restoration,Pathway,AFOLU,"Parameter a, max",0.1157
 NAM ,Coastal Restoration,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Coastal Restoration,Pathway,AFOLU,"Parameter a, max",0.1157
 NonOECD ,Coastal Restoration,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Coastal Restoration,Pathway,AFOLU,"Parameter a, max",0.1157
-OECD ,Coastal Restoration,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Coastal Restoration,Pathway,AFOLU,"Parameter a, max",0.1157
+ OECD ,Coastal Restoration,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Coastal Restoration,Pathway,AFOLU,"Parameter a, max",0.1157
 RUS ,Coastal Restoration,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Coastal Restoration,Pathway,AFOLU,"Parameter a, max",0.1157
@@ -3237,8 +3237,8 @@ NAM ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -3249,8 +3249,8 @@ World ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, max",0.10618
 World ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Electricity,Baseline,Electricity,"Parameter a, max",5
 NonOECD ,Electricity,Pathway,Electricity,"Parameter a, max",5
-OECD ,Electricity,Baseline,Electricity,"Parameter a, max",5
-OECD ,Electricity,Pathway,Electricity,"Parameter a, max",5
+ OECD ,Electricity,Baseline,Electricity,"Parameter a, max",5
+ OECD ,Electricity,Pathway,Electricity,"Parameter a, max",5
 World ,Electricity,Pathway,Electricity,"Parameter a, max",5
 World ,Electricity,Baseline,Electricity,"Parameter a, max",5
 AdvancedECO ,Fossil fuels,Pathway,,"Parameter a, max",5
@@ -3287,10 +3287,10 @@ NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.11
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter a, max",100
-OECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
-OECD ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.11
-OECD ,Fossil fuels,Baseline,Electricity,"Parameter a, max",100
+ OECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
+ OECD ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
+ OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.11
+ OECD ,Fossil fuels,Baseline,Electricity,"Parameter a, max",100
 RUS ,Fossil fuels,Pathway,,"Parameter a, max",5
 RUS ,Fossil fuels,Baseline,,"Parameter a, max",5
 SAFR ,Fossil fuels,Pathway,,"Parameter a, max",5
@@ -3332,8 +3332,8 @@ NAM ,Generation,Pathway,,"Parameter a, max",0
 NAM ,Generation,Baseline,,"Parameter a, max",0
 NonOECD ,Generation,Pathway,Electricity,"Parameter a, max",0
 NonOECD ,Generation,Baseline,Electricity,"Parameter a, max",0
-OECD ,Generation,Pathway,Electricity,"Parameter a, max",0
-OECD ,Generation,Baseline,Electricity,"Parameter a, max",0
+ OECD ,Generation,Pathway,Electricity,"Parameter a, max",0
+ OECD ,Generation,Baseline,Electricity,"Parameter a, max",0
 RUS ,Generation,Pathway,,"Parameter a, max",0
 RUS ,Generation,Baseline,,"Parameter a, max",0
 SAFR ,Generation,Pathway,,"Parameter a, max",0
@@ -3376,10 +3376,10 @@ NonOECD ,Geothermal,Baseline,Electricity,"Parameter a, max",100
 NonOECD ,Geothermal,Pathway,Electricity,"Parameter a, max",0.1
 NonOECD ,Geothermal,Baseline,Heat,"Parameter a, max",100
 NonOECD ,Geothermal,Pathway,Heat,"Parameter a, max",0.01
-OECD ,Geothermal,Baseline,Electricity,"Parameter a, max",5
-OECD ,Geothermal,Pathway,Electricity,"Parameter a, max",0.1
-OECD ,Geothermal,Baseline,Heat,"Parameter a, max",100
-OECD ,Geothermal,Pathway,Heat,"Parameter a, max",0.01
+ OECD ,Geothermal,Baseline,Electricity,"Parameter a, max",5
+ OECD ,Geothermal,Pathway,Electricity,"Parameter a, max",0.1
+ OECD ,Geothermal,Baseline,Heat,"Parameter a, max",100
+ OECD ,Geothermal,Pathway,Heat,"Parameter a, max",0.01
 RUS ,Geothermal,Pathway,,"Parameter a, max",5
 RUS ,Geothermal,Baseline,,"Parameter a, max",5
 SAFR ,Geothermal,Pathway,,"Parameter a, max",5
@@ -3422,8 +3422,8 @@ NAM ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
 NAM ,Hydroelectric pumped storage,Baseline,,"Parameter a, max",5
 NonOECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter a, max",5
 NonOECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter a, max",5
-OECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter a, max",5
-OECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter a, max",5
+ OECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter a, max",5
+ OECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter a, max",5
 RUS ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
 RUS ,Hydroelectric pumped storage,Baseline,,"Parameter a, max",5
 SAFR ,Hydroelectric pumped storage,Pathway,,"Parameter a, max",5
@@ -3464,8 +3464,8 @@ NAM ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
 NAM ,Hydroelectricity,Baseline,,"Parameter a, max",-0.19
 NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, max",100
 NonOECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, max",100
-OECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, max",100
-OECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, max",100
+ OECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, max",100
+ OECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, max",100
 RUS ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
 RUS ,Hydroelectricity,Baseline,,"Parameter a, max",-0.19
 SAFR ,Hydroelectricity,Pathway,,"Parameter a, max",-0.19
@@ -3506,8 +3506,8 @@ NAM ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, max",0.11776
 NAM ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, max",0.11776
 NonOECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, max",0.11776
-OECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, max",0.11776
+ OECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, max",0.11776
 RUS ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, max",0.11776
@@ -3548,8 +3548,8 @@ NAM ,Improved Rice,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Improved Rice,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Improved Rice,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Improved Rice,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Improved Rice,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Improved Rice,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Improved Rice,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Improved Rice,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Improved Rice,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Improved Rice,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Improved Rice,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -3590,8 +3590,8 @@ NAM ,Legumes,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Legumes,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Legumes,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Legumes,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Legumes,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Legumes,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Legumes,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Legumes,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Legumes,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Legumes,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Legumes,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -3604,10 +3604,10 @@ NonOECD ,Natural gas,Baseline,Electricity,"Parameter a, max",100
 NonOECD ,Natural gas,Pathway,Electricity,"Parameter a, max",0
 NonOECD ,Natural gas,Baseline,Heat,"Parameter a, max",100
 NonOECD ,Natural gas,Pathway,Heat,"Parameter a, max",-0.07
-OECD ,Natural gas,Baseline,Electricity,"Parameter a, max",100
-OECD ,Natural gas,Pathway,Electricity,"Parameter a, max",0
-OECD ,Natural gas,Baseline,Heat,"Parameter a, max",100
-OECD ,Natural gas,Pathway,Heat,"Parameter a, max",-0.07
+ OECD ,Natural gas,Baseline,Electricity,"Parameter a, max",100
+ OECD ,Natural gas,Pathway,Electricity,"Parameter a, max",0
+ OECD ,Natural gas,Baseline,Heat,"Parameter a, max",100
+ OECD ,Natural gas,Pathway,Heat,"Parameter a, max",-0.07
 World ,Natural gas,Pathway,Electricity,"Parameter a, max",0
 World ,Natural gas,Baseline,Electricity,"Parameter a, max",100
 World ,Natural gas,Pathway,Heat,"Parameter a, max",-0.12
@@ -3644,8 +3644,8 @@ NAM ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.0598
 NAM ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.08
 NonOECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.08
-OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.08
+ OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.0598
 RUS ,Natural Regeneration,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Natural Regeneration,Pathway,AFOLU,"Parameter a, max",0.0598
@@ -3686,8 +3686,8 @@ NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -3726,14 +3726,14 @@ ME ,Nuclear,Pathway,,"Parameter a, max",-0.1
 ME ,Nuclear,Baseline,,"Parameter a, max",-0.1
 NAM ,Nuclear,Pathway,,"Parameter a, max",-0.1
 NAM ,Nuclear,Baseline,,"Parameter a, max",-0.1
-NonOECD ,Nuclear,Baseline,Electricity,"Parameter a, max",100
-NonOECD ,Nuclear,Pathway,Electricity,"Parameter a, max",100
+NonOECD ,Nuclear,Baseline,Electricity,"Parameter a, max",-100
+NonOECD ,Nuclear,Pathway,Electricity,"Parameter a, max",-100
 NonOECD ,Nuclear,Baseline,Heat,"Parameter a, max",100
 NonOECD ,Nuclear,Pathway,Heat,"Parameter a, max",-0.02
-OECD ,Nuclear,Baseline,Electricity,"Parameter a, max",100
-OECD ,Nuclear,Pathway,Electricity,"Parameter a, max",100
-OECD ,Nuclear,Baseline,Heat,"Parameter a, max",100
-OECD ,Nuclear,Pathway,Heat,"Parameter a, max",-0.02
+ OECD ,Nuclear,Baseline,Electricity,"Parameter a, max",-100
+ OECD ,Nuclear,Pathway,Electricity,"Parameter a, max",-100
+ OECD ,Nuclear,Baseline,Heat,"Parameter a, max",100
+ OECD ,Nuclear,Pathway,Heat,"Parameter a, max",-0.02
 RUS ,Nuclear,Pathway,,"Parameter a, max",-0.1
 RUS ,Nuclear,Baseline,,"Parameter a, max",-0.1
 SAFR ,Nuclear,Pathway,,"Parameter a, max",-0.1
@@ -3750,12 +3750,12 @@ NonOECD ,Oil,Baseline,Heat,"Parameter a, max",100
 NonOECD ,Oil,Pathway,Heat,"Parameter a, max",-0.07
 NonOECD ,Oil,Baseline,Transport,"Parameter a, max",100
 NonOECD ,Oil,Pathway,Transport,"Parameter a, max",-0.1074
-OECD ,Oil,Baseline,Electricity,"Parameter a, max",100
-OECD ,Oil,Pathway,Electricity,"Parameter a, max",-0.1074
-OECD ,Oil,Baseline,Heat,"Parameter a, max",100
-OECD ,Oil,Pathway,Heat,"Parameter a, max",-0.07
-OECD ,Oil,Baseline,Transport,"Parameter a, max",100
-OECD ,Oil,Pathway,Transport,"Parameter a, max",-0.05
+ OECD ,Oil,Baseline,Electricity,"Parameter a, max",100
+ OECD ,Oil,Pathway,Electricity,"Parameter a, max",-0.1074
+ OECD ,Oil,Baseline,Heat,"Parameter a, max",100
+ OECD ,Oil,Pathway,Heat,"Parameter a, max",-0.07
+ OECD ,Oil,Baseline,Transport,"Parameter a, max",100
+ OECD ,Oil,Pathway,Transport,"Parameter a, max",-0.05
 World ,Oil,Pathway,Electricity,"Parameter a, max",-0.1074
 World ,Oil,Baseline,Electricity,"Parameter a, max",100
 World ,Oil,Pathway,Heat,"Parameter a, max",-0.1074
@@ -3794,8 +3794,8 @@ NAM ,Optimal Intensity,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Optimal Intensity,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Optimal Intensity,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Optimal Intensity,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Optimal Intensity,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Optimal Intensity,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -3806,14 +3806,14 @@ World ,Optimal Intensity,Pathway,AFOLU,"Parameter a, max",0.10618
 World ,Optimal Intensity,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 NonOECD ,Other fuels,Baseline,Transport,"Parameter a, max",100
-OECD ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
-OECD ,Other fuels,Baseline,Transport,"Parameter a, max",100
+ OECD ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
+ OECD ,Other fuels,Baseline,Transport,"Parameter a, max",100
 World ,Other fuels,Pathway,Transport,"Parameter a, max",-0.1
 World ,Other fuels,Baseline,Transport,"Parameter a, max",100
 NonOECD ,Other sources,Pathway,Heat,"Parameter a, max",0
 NonOECD ,Other sources,Baseline,Heat,"Parameter a, max",100
-OECD ,Other sources,Pathway,Heat,"Parameter a, max",0
-OECD ,Other sources,Baseline,Heat,"Parameter a, max",100
+ OECD ,Other sources,Pathway,Heat,"Parameter a, max",0
+ OECD ,Other sources,Baseline,Heat,"Parameter a, max",100
 World ,Other sources,Pathway,Heat,"Parameter a, max",0
 World ,Other sources,Baseline,Heat,"Parameter a, max",5
 AdvancedECO ,Peat Restoration,Pathway,AFOLU,"Parameter a, max",0.11599
@@ -3848,8 +3848,8 @@ NAM ,Peat Restoration,Pathway,AFOLU,"Parameter a, max",0.11599
 NAM ,Peat Restoration,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Peat Restoration,Pathway,AFOLU,"Parameter a, max",0.11599
 NonOECD ,Peat Restoration,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Peat Restoration,Pathway,AFOLU,"Parameter a, max",0.11599
-OECD ,Peat Restoration,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Peat Restoration,Pathway,AFOLU,"Parameter a, max",0.11599
+ OECD ,Peat Restoration,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Peat Restoration,Pathway,AFOLU,"Parameter a, max",0.11599
 RUS ,Peat Restoration,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Peat Restoration,Pathway,AFOLU,"Parameter a, max",0.11599
@@ -3890,8 +3890,8 @@ NAM ,Silvopasture,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Silvopasture,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Silvopasture,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Silvopasture,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Silvopasture,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Silvopasture,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Silvopasture,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Silvopasture,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Silvopasture,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Silvopasture,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -3932,8 +3932,8 @@ NAM ,Solar,Pathway,,"Parameter a, max",5
 NAM ,Solar,Baseline,,"Parameter a, max",5
 NonOECD ,Solar,Pathway,Electricity,"Parameter a, max",5
 NonOECD ,Solar,Baseline,Electricity,"Parameter a, max",100
-OECD ,Solar,Pathway,Electricity,"Parameter a, max",5
-OECD ,Solar,Baseline,Electricity,"Parameter a, max",5
+ OECD ,Solar,Pathway,Electricity,"Parameter a, max",5
+ OECD ,Solar,Baseline,Electricity,"Parameter a, max",5
 RUS ,Solar,Pathway,,"Parameter a, max",5
 RUS ,Solar,Baseline,,"Parameter a, max",5
 SAFR ,Solar,Pathway,,"Parameter a, max",5
@@ -3974,8 +3974,8 @@ NAM ,Solar thermal,Pathway,,"Parameter a, max",5
 NAM ,Solar thermal,Baseline,,"Parameter a, max",5
 NonOECD ,Solar thermal,Baseline,Heat,"Parameter a, max",100
 NonOECD ,Solar thermal,Pathway,Heat,"Parameter a, max",0.3
-OECD ,Solar thermal,Baseline,Heat,"Parameter a, max",100
-OECD ,Solar thermal,Pathway,Heat,"Parameter a, max",0.3
+ OECD ,Solar thermal,Baseline,Heat,"Parameter a, max",100
+ OECD ,Solar thermal,Pathway,Heat,"Parameter a, max",0.3
 RUS ,Solar thermal,Pathway,,"Parameter a, max",5
 RUS ,Solar thermal,Baseline,,"Parameter a, max",5
 SAFR ,Solar thermal,Pathway,,"Parameter a, max",5
@@ -4016,8 +4016,8 @@ NAM ,Tide and wave,Pathway,,"Parameter a, max",5
 NAM ,Tide and wave,Baseline,,"Parameter a, max",5
 NonOECD ,Tide and wave,Pathway,Electricity,"Parameter a, max",5
 NonOECD ,Tide and wave,Baseline,Electricity,"Parameter a, max",100
-OECD ,Tide and wave,Pathway,Electricity,"Parameter a, max",5
-OECD ,Tide and wave,Baseline,Electricity,"Parameter a, max",5
+ OECD ,Tide and wave,Pathway,Electricity,"Parameter a, max",5
+ OECD ,Tide and wave,Baseline,Electricity,"Parameter a, max",5
 RUS ,Tide and wave,Pathway,,"Parameter a, max",5
 RUS ,Tide and wave,Baseline,,"Parameter a, max",5
 SAFR ,Tide and wave,Pathway,,"Parameter a, max",5
@@ -4058,8 +4058,8 @@ NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter a, max",0
 NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter a, max",0.10618
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter a, max",0
-OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter a, max",0.10618
-OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter a, max",0
+ OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter a, max",0
 SAFR ,Trees in Croplands,Pathway,AFOLU,"Parameter a, max",0.10618
@@ -4072,10 +4072,10 @@ NonOECD ,Waste,Pathway,Electricity,"Parameter a, max",0.05
 NonOECD ,Waste,Baseline,Electricity,"Parameter a, max",5
 NonOECD ,Waste,Pathway,Heat,"Parameter a, max",0.2
 NonOECD ,Waste,Baseline,Heat,"Parameter a, max",100
-OECD ,Waste,Pathway,Electricity,"Parameter a, max",0.05
-OECD ,Waste,Baseline,Electricity,"Parameter a, max",5
-OECD ,Waste,Pathway,Heat,"Parameter a, max",0.2
-OECD ,Waste,Baseline,Heat,"Parameter a, max",100
+ OECD ,Waste,Pathway,Electricity,"Parameter a, max",0.05
+ OECD ,Waste,Baseline,Electricity,"Parameter a, max",5
+ OECD ,Waste,Pathway,Heat,"Parameter a, max",0.2
+ OECD ,Waste,Baseline,Heat,"Parameter a, max",100
 World ,Waste,Pathway,Electricity,"Parameter a, max",0.05
 World ,Waste,Baseline,Electricity,"Parameter a, max",5
 World ,Waste,Pathway,Heat,"Parameter a, max",0
@@ -4112,8 +4112,8 @@ NAM ,Wind,Pathway,,"Parameter a, max",5
 NAM ,Wind,Baseline,,"Parameter a, max",5
 NonOECD ,Wind,Pathway,Electricity,"Parameter a, max",5
 NonOECD ,Wind,Baseline,Electricity,"Parameter a, max",100
-OECD ,Wind,Pathway,Electricity,"Parameter a, max",5
-OECD ,Wind,Baseline,Electricity,"Parameter a, max",100
+ OECD ,Wind,Pathway,Electricity,"Parameter a, max",5
+ OECD ,Wind,Baseline,Electricity,"Parameter a, max",100
 RUS ,Wind,Pathway,,"Parameter a, max",5
 RUS ,Wind,Baseline,,"Parameter a, max",5
 SAFR ,Wind,Pathway,,"Parameter a, max",5
@@ -4154,8 +4154,8 @@ NAM ,Animal Mgmt,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Animal Mgmt,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Animal Mgmt,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Animal Mgmt,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Animal Mgmt,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Animal Mgmt,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -4196,8 +4196,8 @@ NAM ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, min",0
 NAM ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, min",0
 NonOECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, min",0
-OECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, min",0
+ OECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, min",0
 RUS ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter a, min",0
@@ -4238,8 +4238,8 @@ NAM ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, min",0
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, min",0
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, min",0
-OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, min",0
+ OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, min",0
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter a, min",0
@@ -4280,8 +4280,8 @@ NAM ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, min",0
 NAM ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, min",0
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, min",0
-OECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, min",0
+ OECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, min",0
 RUS ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter a, min",0
@@ -4354,10 +4354,10 @@ NonOECD ,Biochar,Pathway,Industry,"Parameter a, min",0.1
 NonOECD ,Biochar,Baseline,Industry,"Parameter a, min",0
 NonOECD ,Biochar,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Biochar,Pathway,Industry,"Parameter a, min",0.1
-OECD ,Biochar,Baseline,Industry,"Parameter a, min",0
-OECD ,Biochar,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Biochar,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Biochar,Pathway,Industry,"Parameter a, min",0.1
+ OECD ,Biochar,Baseline,Industry,"Parameter a, min",0
+ OECD ,Biochar,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Biochar,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Biochar,Pathway,,"Parameter a, min",0
 RUS ,Biochar,Baseline,,"Parameter a, min",0
 RUS ,Biochar,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -4378,18 +4378,18 @@ NonOECD ,Bioenergy,Pathway,Electricity,"Parameter a, min",-0.04
 NonOECD ,Bioenergy,Baseline,Electricity,"Parameter a, min",-0.04
 NonOECD ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.005
 NonOECD ,Bioenergy,Baseline,Heat,"Parameter a, min",100
-OECD ,Bioenergy,Pathway,Electricity,"Parameter a, min",-0.04
-OECD ,Bioenergy,Baseline,Electricity,"Parameter a, min",-0.04
-OECD ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.005
-OECD ,Bioenergy,Baseline,Heat,"Parameter a, min",100
+ OECD ,Bioenergy,Pathway,Electricity,"Parameter a, min",-0.04
+ OECD ,Bioenergy,Baseline,Electricity,"Parameter a, min",-0.04
+ OECD ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.005
+ OECD ,Bioenergy,Baseline,Heat,"Parameter a, min",100
 World ,Bioenergy,Baseline,Electricity,"Parameter a, min",-0.04
 World ,Bioenergy,Pathway,Electricity,"Parameter a, min",-0.04
 World ,Bioenergy,Baseline,Heat,"Parameter a, min",-0.04
 World ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.14
 NonOECD ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
 NonOECD ,Biofuels,Baseline,Transport,"Parameter a, min",0
-OECD ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-OECD ,Biofuels,Baseline,Transport,"Parameter a, min",0
+ OECD ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
+ OECD ,Biofuels,Baseline,Transport,"Parameter a, min",0
 World ,Biofuels,Baseline,Transport,"Parameter a, min",0
 World ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
 AdvancedECO ,Biomass and waste,Pathway,,"Parameter a, min",0
@@ -4424,8 +4424,8 @@ NAM ,Biomass and waste,Pathway,,"Parameter a, min",0
 NAM ,Biomass and waste,Baseline,,"Parameter a, min",0
 NonOECD ,Biomass and waste,Pathway,Electricity,"Parameter a, min",0
 NonOECD ,Biomass and waste,Baseline,Electricity,"Parameter a, min",100
-OECD ,Biomass and waste,Pathway,Electricity,"Parameter a, min",0
-OECD ,Biomass and waste,Baseline,Electricity,"Parameter a, min",0
+ OECD ,Biomass and waste,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Biomass and waste,Baseline,Electricity,"Parameter a, min",0
 RUS ,Biomass and waste,Pathway,,"Parameter a, min",0
 RUS ,Biomass and waste,Baseline,,"Parameter a, min",0
 SAFR ,Biomass and waste,Pathway,,"Parameter a, min",0
@@ -4438,10 +4438,10 @@ NonOECD ,Coal,Baseline,Electricity,"Parameter a, min",100
 NonOECD ,Coal,Pathway,Electricity,"Parameter a, min",0
 NonOECD ,Coal,Baseline,Heat,"Parameter a, min",100
 NonOECD ,Coal,Pathway,Heat,"Parameter a, min",-0.07
-OECD ,Coal,Baseline,Electricity,"Parameter a, min",100
-OECD ,Coal,Pathway,Electricity,"Parameter a, min",0
-OECD ,Coal,Baseline,Heat,"Parameter a, min",100
-OECD ,Coal,Pathway,Heat,"Parameter a, min",-0.07
+ OECD ,Coal,Baseline,Electricity,"Parameter a, min",100
+ OECD ,Coal,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Coal,Baseline,Heat,"Parameter a, min",100
+ OECD ,Coal,Pathway,Heat,"Parameter a, min",-0.07
 World ,Coal,Pathway,Electricity,"Parameter a, min",0
 World ,Coal,Baseline,Electricity,"Parameter a, min",100
 World ,Coal,Pathway,Heat,"Parameter a, min",-0.3
@@ -4478,8 +4478,8 @@ NAM ,Coastal Restoration,Pathway,AFOLU,"Parameter a, min",0.1157
 NAM ,Coastal Restoration,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Coastal Restoration,Pathway,AFOLU,"Parameter a, min",0.1157
 NonOECD ,Coastal Restoration,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Coastal Restoration,Pathway,AFOLU,"Parameter a, min",0.1157
-OECD ,Coastal Restoration,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Coastal Restoration,Pathway,AFOLU,"Parameter a, min",0.1157
+ OECD ,Coastal Restoration,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Coastal Restoration,Pathway,AFOLU,"Parameter a, min",0.1157
 RUS ,Coastal Restoration,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Coastal Restoration,Pathway,AFOLU,"Parameter a, min",0.1157
@@ -4520,8 +4520,8 @@ NAM ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -4532,8 +4532,8 @@ World ,Cropland Soil Health,Pathway,AFOLU,"Parameter a, min",0.10618
 World ,Cropland Soil Health,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Electricity,Baseline,Electricity,"Parameter a, min",0
 NonOECD ,Electricity,Pathway,Electricity,"Parameter a, min",0
-OECD ,Electricity,Baseline,Electricity,"Parameter a, min",0
-OECD ,Electricity,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Electricity,Baseline,Electricity,"Parameter a, min",0
+ OECD ,Electricity,Pathway,Electricity,"Parameter a, min",0
 World ,Electricity,Pathway,Electricity,"Parameter a, min",0
 World ,Electricity,Baseline,Electricity,"Parameter a, min",0
 AdvancedECO ,Fossil fuels,Pathway,,"Parameter a, min",0
@@ -4570,10 +4570,10 @@ NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.3
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter a, min",100
-OECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
-OECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.4
-OECD ,Fossil fuels,Baseline,Electricity,"Parameter a, min",100
+ OECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
+ OECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
+ OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.4
+ OECD ,Fossil fuels,Baseline,Electricity,"Parameter a, min",100
 RUS ,Fossil fuels,Pathway,,"Parameter a, min",0
 RUS ,Fossil fuels,Baseline,,"Parameter a, min",0
 SAFR ,Fossil fuels,Pathway,,"Parameter a, min",0
@@ -4615,8 +4615,8 @@ NAM ,Generation,Pathway,,"Parameter a, min",0
 NAM ,Generation,Baseline,,"Parameter a, min",0
 NonOECD ,Generation,Pathway,Electricity,"Parameter a, min",0
 NonOECD ,Generation,Baseline,Electricity,"Parameter a, min",0
-OECD ,Generation,Pathway,Electricity,"Parameter a, min",0
-OECD ,Generation,Baseline,Electricity,"Parameter a, min",0
+ OECD ,Generation,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Generation,Baseline,Electricity,"Parameter a, min",0
 RUS ,Generation,Pathway,,"Parameter a, min",0
 RUS ,Generation,Baseline,,"Parameter a, min",0
 SAFR ,Generation,Pathway,,"Parameter a, min",0
@@ -4659,10 +4659,10 @@ NonOECD ,Geothermal,Baseline,Electricity,"Parameter a, min",100
 NonOECD ,Geothermal,Pathway,Electricity,"Parameter a, min",0
 NonOECD ,Geothermal,Baseline,Heat,"Parameter a, min",100
 NonOECD ,Geothermal,Pathway,Heat,"Parameter a, min",0.01
-OECD ,Geothermal,Baseline,Electricity,"Parameter a, min",0
-OECD ,Geothermal,Pathway,Electricity,"Parameter a, min",0
-OECD ,Geothermal,Baseline,Heat,"Parameter a, min",100
-OECD ,Geothermal,Pathway,Heat,"Parameter a, min",0.01
+ OECD ,Geothermal,Baseline,Electricity,"Parameter a, min",0
+ OECD ,Geothermal,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Geothermal,Baseline,Heat,"Parameter a, min",100
+ OECD ,Geothermal,Pathway,Heat,"Parameter a, min",0.01
 RUS ,Geothermal,Pathway,,"Parameter a, min",0
 RUS ,Geothermal,Baseline,,"Parameter a, min",0
 SAFR ,Geothermal,Pathway,,"Parameter a, min",0
@@ -4705,8 +4705,8 @@ NAM ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
 NAM ,Hydroelectric pumped storage,Baseline,,"Parameter a, min",0
 NonOECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter a, min",0
 NonOECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter a, min",0
-OECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter a, min",0
-OECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter a, min",0
+ OECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter a, min",0
 RUS ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
 RUS ,Hydroelectric pumped storage,Baseline,,"Parameter a, min",0
 SAFR ,Hydroelectric pumped storage,Pathway,,"Parameter a, min",0
@@ -4747,8 +4747,8 @@ NAM ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
 NAM ,Hydroelectricity,Baseline,,"Parameter a, min",-0.19
 NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, min",100
 NonOECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, min",100
-OECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, min",100
-OECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, min",100
+ OECD ,Hydroelectricity,Pathway,Electricity,"Parameter a, min",100
+ OECD ,Hydroelectricity,Baseline,Electricity,"Parameter a, min",100
 RUS ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
 RUS ,Hydroelectricity,Baseline,,"Parameter a, min",-0.19
 SAFR ,Hydroelectricity,Pathway,,"Parameter a, min",-0.19
@@ -4789,8 +4789,8 @@ NAM ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, min",0.11776
 NAM ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, min",0.11776
 NonOECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, min",0.11776
-OECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, min",0.11776
+ OECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, min",0.11776
 RUS ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter a, min",0.11776
@@ -4831,8 +4831,8 @@ NAM ,Improved Rice,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Improved Rice,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Improved Rice,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Improved Rice,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Improved Rice,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Improved Rice,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Improved Rice,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Improved Rice,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Improved Rice,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Improved Rice,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Improved Rice,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -4873,8 +4873,8 @@ NAM ,Legumes,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Legumes,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Legumes,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Legumes,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Legumes,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Legumes,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Legumes,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Legumes,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Legumes,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Legumes,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Legumes,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -4887,10 +4887,10 @@ NonOECD ,Natural gas,Baseline,Electricity,"Parameter a, min",100
 NonOECD ,Natural gas,Pathway,Electricity,"Parameter a, min",-1
 NonOECD ,Natural gas,Baseline,Heat,"Parameter a, min",100
 NonOECD ,Natural gas,Pathway,Heat,"Parameter a, min",-0.07
-OECD ,Natural gas,Baseline,Electricity,"Parameter a, min",100
-OECD ,Natural gas,Pathway,Electricity,"Parameter a, min",-1
-OECD ,Natural gas,Baseline,Heat,"Parameter a, min",100
-OECD ,Natural gas,Pathway,Heat,"Parameter a, min",-0.07
+ OECD ,Natural gas,Baseline,Electricity,"Parameter a, min",100
+ OECD ,Natural gas,Pathway,Electricity,"Parameter a, min",-1
+ OECD ,Natural gas,Baseline,Heat,"Parameter a, min",100
+ OECD ,Natural gas,Pathway,Heat,"Parameter a, min",-0.07
 World ,Natural gas,Pathway,Electricity,"Parameter a, min",-1
 World ,Natural gas,Baseline,Electricity,"Parameter a, min",100
 World ,Natural gas,Pathway,Heat,"Parameter a, min",-0.3
@@ -4927,8 +4927,8 @@ NAM ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.0598
 NAM ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.08
 NonOECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.08
-OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.08
+ OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.0598
 RUS ,Natural Regeneration,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Natural Regeneration,Pathway,AFOLU,"Parameter a, min",0.0598
@@ -4969,8 +4969,8 @@ NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -5009,14 +5009,14 @@ ME ,Nuclear,Pathway,,"Parameter a, min",-0.1
 ME ,Nuclear,Baseline,,"Parameter a, min",-0.1
 NAM ,Nuclear,Pathway,,"Parameter a, min",-0.1
 NAM ,Nuclear,Baseline,,"Parameter a, min",-0.1
-NonOECD ,Nuclear,Baseline,Electricity,"Parameter a, min",100
-NonOECD ,Nuclear,Pathway,Electricity,"Parameter a, min",100
+NonOECD ,Nuclear,Baseline,Electricity,"Parameter a, min",-100
+NonOECD ,Nuclear,Pathway,Electricity,"Parameter a, min",-100
 NonOECD ,Nuclear,Baseline,Heat,"Parameter a, min",100
 NonOECD ,Nuclear,Pathway,Heat,"Parameter a, min",-0.02
-OECD ,Nuclear,Baseline,Electricity,"Parameter a, min",100
-OECD ,Nuclear,Pathway,Electricity,"Parameter a, min",100
-OECD ,Nuclear,Baseline,Heat,"Parameter a, min",100
-OECD ,Nuclear,Pathway,Heat,"Parameter a, min",-0.02
+ OECD ,Nuclear,Baseline,Electricity,"Parameter a, min",-100
+ OECD ,Nuclear,Pathway,Electricity,"Parameter a, min",-100
+ OECD ,Nuclear,Baseline,Heat,"Parameter a, min",100
+ OECD ,Nuclear,Pathway,Heat,"Parameter a, min",-0.02
 RUS ,Nuclear,Pathway,,"Parameter a, min",-0.1
 RUS ,Nuclear,Baseline,,"Parameter a, min",-0.1
 SAFR ,Nuclear,Pathway,,"Parameter a, min",-0.1
@@ -5033,12 +5033,12 @@ NonOECD ,Oil,Baseline,Heat,"Parameter a, min",100
 NonOECD ,Oil,Pathway,Heat,"Parameter a, min",-0.07
 NonOECD ,Oil,Baseline,Transport,"Parameter a, min",100
 NonOECD ,Oil,Pathway,Transport,"Parameter a, min",-0.1074
-OECD ,Oil,Baseline,Electricity,"Parameter a, min",100
-OECD ,Oil,Pathway,Electricity,"Parameter a, min",-0.1074
-OECD ,Oil,Baseline,Heat,"Parameter a, min",100
-OECD ,Oil,Pathway,Heat,"Parameter a, min",-0.07
-OECD ,Oil,Baseline,Transport,"Parameter a, min",100
-OECD ,Oil,Pathway,Transport,"Parameter a, min",-0.05
+ OECD ,Oil,Baseline,Electricity,"Parameter a, min",100
+ OECD ,Oil,Pathway,Electricity,"Parameter a, min",-0.1074
+ OECD ,Oil,Baseline,Heat,"Parameter a, min",100
+ OECD ,Oil,Pathway,Heat,"Parameter a, min",-0.07
+ OECD ,Oil,Baseline,Transport,"Parameter a, min",100
+ OECD ,Oil,Pathway,Transport,"Parameter a, min",-0.05
 World ,Oil,Pathway,Electricity,"Parameter a, min",-0.1074
 World ,Oil,Baseline,Electricity,"Parameter a, min",100
 World ,Oil,Pathway,Heat,"Parameter a, min",-0.1074
@@ -5077,8 +5077,8 @@ NAM ,Optimal Intensity,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Optimal Intensity,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Optimal Intensity,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Optimal Intensity,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Optimal Intensity,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Optimal Intensity,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -5089,14 +5089,14 @@ World ,Optimal Intensity,Pathway,AFOLU,"Parameter a, min",0.10618
 World ,Optimal Intensity,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 NonOECD ,Other fuels,Baseline,Transport,"Parameter a, min",100
-OECD ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
-OECD ,Other fuels,Baseline,Transport,"Parameter a, min",100
+ OECD ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
+ OECD ,Other fuels,Baseline,Transport,"Parameter a, min",100
 World ,Other fuels,Pathway,Transport,"Parameter a, min",-0.1
 World ,Other fuels,Baseline,Transport,"Parameter a, min",100
 NonOECD ,Other sources,Pathway,Heat,"Parameter a, min",-0.5
 NonOECD ,Other sources,Baseline,Heat,"Parameter a, min",100
-OECD ,Other sources,Pathway,Heat,"Parameter a, min",-0.5
-OECD ,Other sources,Baseline,Heat,"Parameter a, min",100
+ OECD ,Other sources,Pathway,Heat,"Parameter a, min",-0.5
+ OECD ,Other sources,Baseline,Heat,"Parameter a, min",100
 World ,Other sources,Pathway,Heat,"Parameter a, min",-0.5
 World ,Other sources,Baseline,Heat,"Parameter a, min",0
 AdvancedECO ,Peat Restoration,Pathway,AFOLU,"Parameter a, min",0.11599
@@ -5131,8 +5131,8 @@ NAM ,Peat Restoration,Pathway,AFOLU,"Parameter a, min",0.11599
 NAM ,Peat Restoration,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Peat Restoration,Pathway,AFOLU,"Parameter a, min",0.11599
 NonOECD ,Peat Restoration,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Peat Restoration,Pathway,AFOLU,"Parameter a, min",0.11599
-OECD ,Peat Restoration,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Peat Restoration,Pathway,AFOLU,"Parameter a, min",0.11599
+ OECD ,Peat Restoration,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Peat Restoration,Pathway,AFOLU,"Parameter a, min",0.11599
 RUS ,Peat Restoration,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Peat Restoration,Pathway,AFOLU,"Parameter a, min",0.11599
@@ -5173,8 +5173,8 @@ NAM ,Silvopasture,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Silvopasture,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Silvopasture,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Silvopasture,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Silvopasture,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Silvopasture,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Silvopasture,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Silvopasture,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Silvopasture,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Silvopasture,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -5215,8 +5215,8 @@ NAM ,Solar,Pathway,,"Parameter a, min",0
 NAM ,Solar,Baseline,,"Parameter a, min",0
 NonOECD ,Solar,Pathway,Electricity,"Parameter a, min",0
 NonOECD ,Solar,Baseline,Electricity,"Parameter a, min",100
-OECD ,Solar,Pathway,Electricity,"Parameter a, min",0
-OECD ,Solar,Baseline,Electricity,"Parameter a, min",0
+ OECD ,Solar,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Solar,Baseline,Electricity,"Parameter a, min",0
 RUS ,Solar,Pathway,,"Parameter a, min",0
 RUS ,Solar,Baseline,,"Parameter a, min",0
 SAFR ,Solar,Pathway,,"Parameter a, min",0
@@ -5257,8 +5257,8 @@ NAM ,Solar thermal,Pathway,,"Parameter a, min",0
 NAM ,Solar thermal,Baseline,,"Parameter a, min",0
 NonOECD ,Solar thermal,Baseline,Heat,"Parameter a, min",100
 NonOECD ,Solar thermal,Pathway,Heat,"Parameter a, min",0.14
-OECD ,Solar thermal,Baseline,Heat,"Parameter a, min",100
-OECD ,Solar thermal,Pathway,Heat,"Parameter a, min",0.14
+ OECD ,Solar thermal,Baseline,Heat,"Parameter a, min",100
+ OECD ,Solar thermal,Pathway,Heat,"Parameter a, min",0.14
 RUS ,Solar thermal,Pathway,,"Parameter a, min",0
 RUS ,Solar thermal,Baseline,,"Parameter a, min",0
 SAFR ,Solar thermal,Pathway,,"Parameter a, min",0
@@ -5299,8 +5299,8 @@ NAM ,Tide and wave,Pathway,,"Parameter a, min",0
 NAM ,Tide and wave,Baseline,,"Parameter a, min",0
 NonOECD ,Tide and wave,Pathway,Electricity,"Parameter a, min",0
 NonOECD ,Tide and wave,Baseline,Electricity,"Parameter a, min",100
-OECD ,Tide and wave,Pathway,Electricity,"Parameter a, min",0
-OECD ,Tide and wave,Baseline,Electricity,"Parameter a, min",0
+ OECD ,Tide and wave,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Tide and wave,Baseline,Electricity,"Parameter a, min",0
 RUS ,Tide and wave,Pathway,,"Parameter a, min",0
 RUS ,Tide and wave,Baseline,,"Parameter a, min",0
 SAFR ,Tide and wave,Pathway,,"Parameter a, min",0
@@ -5341,8 +5341,8 @@ NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter a, min",0
 NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter a, min",0.10618
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter a, min",0
-OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter a, min",0.10618
-OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter a, min",0
+ OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter a, min",0
 SAFR ,Trees in Croplands,Pathway,AFOLU,"Parameter a, min",0.10618
@@ -5355,10 +5355,10 @@ NonOECD ,Waste,Pathway,Electricity,"Parameter a, min",0.05
 NonOECD ,Waste,Baseline,Electricity,"Parameter a, min",0
 NonOECD ,Waste,Pathway,Heat,"Parameter a, min",0.2
 NonOECD ,Waste,Baseline,Heat,"Parameter a, min",100
-OECD ,Waste,Pathway,Electricity,"Parameter a, min",0.05
-OECD ,Waste,Baseline,Electricity,"Parameter a, min",0
-OECD ,Waste,Pathway,Heat,"Parameter a, min",0.2
-OECD ,Waste,Baseline,Heat,"Parameter a, min",100
+ OECD ,Waste,Pathway,Electricity,"Parameter a, min",0.05
+ OECD ,Waste,Baseline,Electricity,"Parameter a, min",0
+ OECD ,Waste,Pathway,Heat,"Parameter a, min",0.2
+ OECD ,Waste,Baseline,Heat,"Parameter a, min",100
 World ,Waste,Pathway,Electricity,"Parameter a, min",0.05
 World ,Waste,Baseline,Electricity,"Parameter a, min",0
 World ,Waste,Pathway,Heat,"Parameter a, min",-1
@@ -5395,8 +5395,8 @@ NAM ,Wind,Pathway,,"Parameter a, min",0
 NAM ,Wind,Baseline,,"Parameter a, min",0
 NonOECD ,Wind,Pathway,Electricity,"Parameter a, min",0
 NonOECD ,Wind,Baseline,Electricity,"Parameter a, min",100
-OECD ,Wind,Pathway,Electricity,"Parameter a, min",0
-OECD ,Wind,Baseline,Electricity,"Parameter a, min",100
+ OECD ,Wind,Pathway,Electricity,"Parameter a, min",0
+ OECD ,Wind,Baseline,Electricity,"Parameter a, min",100
 RUS ,Wind,Pathway,,"Parameter a, min",0
 RUS ,Wind,Baseline,,"Parameter a, min",0
 SAFR ,Wind,Pathway,,"Parameter a, min",0
@@ -5437,8 +5437,8 @@ NAM ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
@@ -5479,8 +5479,8 @@ NAM ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, max",100
 NAM ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, max",100
 NonOECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, max",100
-OECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, max",100
+ OECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, max",100
 RUS ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, max",100
@@ -5521,8 +5521,8 @@ NAM ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
-OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
+ OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
@@ -5563,8 +5563,8 @@ NAM ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, max",100
 NAM ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, max",100
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, max",100
-OECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, max",100
+ OECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, max",100
 RUS ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, max",100
@@ -5637,10 +5637,10 @@ NonOECD ,Biochar,Pathway,Industry,"Parameter b, max",40
 NonOECD ,Biochar,Baseline,Industry,"Parameter b, max",100
 NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Biochar,Pathway,Industry,"Parameter b, max",40
-OECD ,Biochar,Baseline,Industry,"Parameter b, max",100
-OECD ,Biochar,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Biochar,Pathway,Industry,"Parameter b, max",40
+ OECD ,Biochar,Baseline,Industry,"Parameter b, max",100
+ OECD ,Biochar,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Biochar,Pathway,,"Parameter b, max",100
 RUS ,Biochar,Baseline,,"Parameter b, max",100
 RUS ,Biochar,Pathway,AFOLU,"Parameter b, max",60.52
@@ -5661,18 +5661,18 @@ NonOECD ,Bioenergy,Pathway,Electricity,"Parameter b, max",40
 NonOECD ,Bioenergy,Baseline,Electricity,"Parameter b, max",40
 NonOECD ,Bioenergy,Pathway,Heat,"Parameter b, max",37
 NonOECD ,Bioenergy,Baseline,Heat,"Parameter b, max",-100
-OECD ,Bioenergy,Pathway,Electricity,"Parameter b, max",40
-OECD ,Bioenergy,Baseline,Electricity,"Parameter b, max",40
-OECD ,Bioenergy,Pathway,Heat,"Parameter b, max",37
-OECD ,Bioenergy,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Bioenergy,Pathway,Electricity,"Parameter b, max",40
+ OECD ,Bioenergy,Baseline,Electricity,"Parameter b, max",40
+ OECD ,Bioenergy,Pathway,Heat,"Parameter b, max",37
+ OECD ,Bioenergy,Baseline,Heat,"Parameter b, max",-100
 World ,Bioenergy,Baseline,Electricity,"Parameter b, max",40
 World ,Bioenergy,Pathway,Electricity,"Parameter b, max",40
 World ,Bioenergy,Baseline,Heat,"Parameter b, max",40
 World ,Bioenergy,Pathway,Heat,"Parameter b, max",37
 NonOECD ,Biofuels,Pathway,Transport,"Parameter b, max",37
 NonOECD ,Biofuels,Baseline,Transport,"Parameter b, max",100
-OECD ,Biofuels,Pathway,Transport,"Parameter b, max",37
-OECD ,Biofuels,Baseline,Transport,"Parameter b, max",100
+ OECD ,Biofuels,Pathway,Transport,"Parameter b, max",37
+ OECD ,Biofuels,Baseline,Transport,"Parameter b, max",100
 World ,Biofuels,Baseline,Transport,"Parameter b, max",100
 World ,Biofuels,Pathway,Transport,"Parameter b, max",37
 AdvancedECO ,Biomass and waste,Pathway,,"Parameter b, max",100
@@ -5707,8 +5707,8 @@ NAM ,Biomass and waste,Pathway,,"Parameter b, max",100
 NAM ,Biomass and waste,Baseline,,"Parameter b, max",100
 NonOECD ,Biomass and waste,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Biomass and waste,Baseline,Electricity,"Parameter b, max",-100
-OECD ,Biomass and waste,Pathway,Electricity,"Parameter b, max",100
-OECD ,Biomass and waste,Baseline,Electricity,"Parameter b, max",-100
+ OECD ,Biomass and waste,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Biomass and waste,Baseline,Electricity,"Parameter b, max",-100
 RUS ,Biomass and waste,Pathway,,"Parameter b, max",100
 RUS ,Biomass and waste,Baseline,,"Parameter b, max",100
 SAFR ,Biomass and waste,Pathway,,"Parameter b, max",100
@@ -5721,10 +5721,10 @@ NonOECD ,Coal,Baseline,Electricity,"Parameter b, max",100
 NonOECD ,Coal,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Coal,Baseline,Heat,"Parameter b, max",-100
 NonOECD ,Coal,Pathway,Heat,"Parameter b, max",10
-OECD ,Coal,Baseline,Electricity,"Parameter b, max",100
-OECD ,Coal,Pathway,Electricity,"Parameter b, max",100
-OECD ,Coal,Baseline,Heat,"Parameter b, max",-100
-OECD ,Coal,Pathway,Heat,"Parameter b, max",10
+ OECD ,Coal,Baseline,Electricity,"Parameter b, max",100
+ OECD ,Coal,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Coal,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Coal,Pathway,Heat,"Parameter b, max",10
 World ,Coal,Pathway,Electricity,"Parameter b, max",100
 World ,Coal,Baseline,Electricity,"Parameter b, max",100
 World ,Coal,Pathway,Heat,"Parameter b, max",5
@@ -5761,8 +5761,8 @@ NAM ,Coastal Restoration,Pathway,AFOLU,"Parameter b, max",40.46
 NAM ,Coastal Restoration,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Coastal Restoration,Pathway,AFOLU,"Parameter b, max",40.46
 NonOECD ,Coastal Restoration,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Coastal Restoration,Pathway,AFOLU,"Parameter b, max",40.46
-OECD ,Coastal Restoration,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Coastal Restoration,Pathway,AFOLU,"Parameter b, max",40.46
+ OECD ,Coastal Restoration,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Coastal Restoration,Pathway,AFOLU,"Parameter b, max",40.46
 RUS ,Coastal Restoration,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Coastal Restoration,Pathway,AFOLU,"Parameter b, max",40.46
@@ -5803,8 +5803,8 @@ NAM ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
@@ -5815,8 +5815,8 @@ World ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
 World ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Electricity,Baseline,Electricity,"Parameter b, max",100
 NonOECD ,Electricity,Pathway,Electricity,"Parameter b, max",100
-OECD ,Electricity,Baseline,Electricity,"Parameter b, max",100
-OECD ,Electricity,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Electricity,Baseline,Electricity,"Parameter b, max",100
+ OECD ,Electricity,Pathway,Electricity,"Parameter b, max",100
 World ,Electricity,Pathway,Electricity,"Parameter b, max",100
 World ,Electricity,Baseline,Electricity,"Parameter b, max",100
 AdvancedECO ,Fossil fuels,Pathway,,"Parameter b, max",100
@@ -5853,10 +5853,10 @@ NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",25
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter b, max",-100
-OECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
-OECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",15
-OECD ,Fossil fuels,Baseline,Electricity,"Parameter b, max",-100
+ OECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
+ OECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
+ OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",15
+ OECD ,Fossil fuels,Baseline,Electricity,"Parameter b, max",-100
 RUS ,Fossil fuels,Pathway,,"Parameter b, max",100
 RUS ,Fossil fuels,Baseline,,"Parameter b, max",100
 SAFR ,Fossil fuels,Pathway,,"Parameter b, max",100
@@ -5898,8 +5898,8 @@ NAM ,Generation,Pathway,,"Parameter b, max",100
 NAM ,Generation,Baseline,,"Parameter b, max",100
 NonOECD ,Generation,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Generation,Baseline,Electricity,"Parameter b, max",100
-OECD ,Generation,Pathway,Electricity,"Parameter b, max",100
-OECD ,Generation,Baseline,Electricity,"Parameter b, max",100
+ OECD ,Generation,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Generation,Baseline,Electricity,"Parameter b, max",100
 RUS ,Generation,Pathway,,"Parameter b, max",100
 RUS ,Generation,Baseline,,"Parameter b, max",100
 SAFR ,Generation,Pathway,,"Parameter b, max",100
@@ -5942,10 +5942,10 @@ NonOECD ,Geothermal,Baseline,Electricity,"Parameter b, max",-100
 NonOECD ,Geothermal,Pathway,Electricity,"Parameter b, max",40
 NonOECD ,Geothermal,Baseline,Heat,"Parameter b, max",-100
 NonOECD ,Geothermal,Pathway,Heat,"Parameter b, max",15
-OECD ,Geothermal,Baseline,Electricity,"Parameter b, max",-100
-OECD ,Geothermal,Pathway,Electricity,"Parameter b, max",40
-OECD ,Geothermal,Baseline,Heat,"Parameter b, max",-100
-OECD ,Geothermal,Pathway,Heat,"Parameter b, max",15
+ OECD ,Geothermal,Baseline,Electricity,"Parameter b, max",-100
+ OECD ,Geothermal,Pathway,Electricity,"Parameter b, max",40
+ OECD ,Geothermal,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Geothermal,Pathway,Heat,"Parameter b, max",15
 RUS ,Geothermal,Pathway,,"Parameter b, max",100
 RUS ,Geothermal,Baseline,,"Parameter b, max",100
 SAFR ,Geothermal,Pathway,,"Parameter b, max",100
@@ -5988,8 +5988,8 @@ NAM ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
 NAM ,Hydroelectric pumped storage,Baseline,,"Parameter b, max",100
 NonOECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter b, max",100
-OECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter b, max",100
-OECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter b, max",100
+ OECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter b, max",100
 RUS ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
 RUS ,Hydroelectric pumped storage,Baseline,,"Parameter b, max",100
 SAFR ,Hydroelectric pumped storage,Pathway,,"Parameter b, max",100
@@ -6030,8 +6030,8 @@ NAM ,Hydroelectricity,Pathway,,"Parameter b, max",18
 NAM ,Hydroelectricity,Baseline,,"Parameter b, max",18
 NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, max",-100
-OECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, max",100
-OECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, max",-100
+ OECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, max",-100
 RUS ,Hydroelectricity,Pathway,,"Parameter b, max",18
 RUS ,Hydroelectricity,Baseline,,"Parameter b, max",18
 SAFR ,Hydroelectricity,Pathway,,"Parameter b, max",18
@@ -6072,8 +6072,8 @@ NAM ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, max",37.1
 NAM ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, max",37.1
 NonOECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, max",37.1
-OECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, max",37.1
+ OECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, max",37.1
 RUS ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, max",37.1
@@ -6114,8 +6114,8 @@ NAM ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Improved Rice,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Improved Rice,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Improved Rice,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Improved Rice,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Improved Rice,Pathway,AFOLU,"Parameter b, max",60.52
@@ -6156,8 +6156,8 @@ NAM ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Legumes,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Legumes,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Legumes,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Legumes,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
@@ -6170,10 +6170,10 @@ NonOECD ,Natural gas,Baseline,Electricity,"Parameter b, max",100
 NonOECD ,Natural gas,Pathway,Electricity,"Parameter b, max",50
 NonOECD ,Natural gas,Baseline,Heat,"Parameter b, max",-100
 NonOECD ,Natural gas,Pathway,Heat,"Parameter b, max",10
-OECD ,Natural gas,Baseline,Electricity,"Parameter b, max",100
-OECD ,Natural gas,Pathway,Electricity,"Parameter b, max",50
-OECD ,Natural gas,Baseline,Heat,"Parameter b, max",-100
-OECD ,Natural gas,Pathway,Heat,"Parameter b, max",10
+ OECD ,Natural gas,Baseline,Electricity,"Parameter b, max",100
+ OECD ,Natural gas,Pathway,Electricity,"Parameter b, max",50
+ OECD ,Natural gas,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Natural gas,Pathway,Heat,"Parameter b, max",10
 World ,Natural gas,Pathway,Electricity,"Parameter b, max",50
 World ,Natural gas,Baseline,Electricity,"Parameter b, max",100
 World ,Natural gas,Pathway,Heat,"Parameter b, max",5
@@ -6210,8 +6210,8 @@ NAM ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",34.75
 NAM ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",60
 NonOECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",60
-OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",60
+ OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",34.75
 RUS ,Natural Regeneration,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Natural Regeneration,Pathway,AFOLU,"Parameter b, max",34.75
@@ -6252,8 +6252,8 @@ NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
@@ -6292,14 +6292,14 @@ ME ,Nuclear,Pathway,,"Parameter b, max",43
 ME ,Nuclear,Baseline,,"Parameter b, max",43
 NAM ,Nuclear,Pathway,,"Parameter b, max",43
 NAM ,Nuclear,Baseline,,"Parameter b, max",43
-NonOECD ,Nuclear,Baseline,Electricity,"Parameter b, max",-100
+NonOECD ,Nuclear,Baseline,Electricity,"Parameter b, max",100
 NonOECD ,Nuclear,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Nuclear,Baseline,Heat,"Parameter b, max",-100
 NonOECD ,Nuclear,Pathway,Heat,"Parameter b, max",100
-OECD ,Nuclear,Baseline,Electricity,"Parameter b, max",-100
-OECD ,Nuclear,Pathway,Electricity,"Parameter b, max",100
-OECD ,Nuclear,Baseline,Heat,"Parameter b, max",-100
-OECD ,Nuclear,Pathway,Heat,"Parameter b, max",100
+ OECD ,Nuclear,Baseline,Electricity,"Parameter b, max",100
+ OECD ,Nuclear,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Nuclear,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Nuclear,Pathway,Heat,"Parameter b, max",100
 RUS ,Nuclear,Pathway,,"Parameter b, max",43
 RUS ,Nuclear,Baseline,,"Parameter b, max",43
 SAFR ,Nuclear,Pathway,,"Parameter b, max",43
@@ -6316,12 +6316,12 @@ NonOECD ,Oil,Baseline,Heat,"Parameter b, max",-100
 NonOECD ,Oil,Pathway,Heat,"Parameter b, max",20
 NonOECD ,Oil,Baseline,Transport,"Parameter b, max",-100
 NonOECD ,Oil,Pathway,Transport,"Parameter b, max",37
-OECD ,Oil,Baseline,Electricity,"Parameter b, max",100
-OECD ,Oil,Pathway,Electricity,"Parameter b, max",30
-OECD ,Oil,Baseline,Heat,"Parameter b, max",-100
-OECD ,Oil,Pathway,Heat,"Parameter b, max",20
-OECD ,Oil,Baseline,Transport,"Parameter b, max",-100
-OECD ,Oil,Pathway,Transport,"Parameter b, max",10
+ OECD ,Oil,Baseline,Electricity,"Parameter b, max",100
+ OECD ,Oil,Pathway,Electricity,"Parameter b, max",30
+ OECD ,Oil,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Oil,Pathway,Heat,"Parameter b, max",20
+ OECD ,Oil,Baseline,Transport,"Parameter b, max",-100
+ OECD ,Oil,Pathway,Transport,"Parameter b, max",10
 World ,Oil,Pathway,Electricity,"Parameter b, max",30
 World ,Oil,Baseline,Electricity,"Parameter b, max",100
 World ,Oil,Pathway,Heat,"Parameter b, max",20
@@ -6360,8 +6360,8 @@ NAM ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
@@ -6372,15 +6372,15 @@ World ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
 World ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Other fuels,Pathway,Transport,"Parameter b, max",10
 NonOECD ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-OECD ,Other fuels,Pathway,Transport,"Parameter b, max",10
-OECD ,Other fuels,Baseline,Transport,"Parameter b, max",-100
+ OECD ,Other fuels,Pathway,Transport,"Parameter b, max",10
+ OECD ,Other fuels,Baseline,Transport,"Parameter b, max",-100
 World ,Other fuels,Pathway,Transport,"Parameter b, max",37
 World ,Other fuels,Baseline,Transport,"Parameter b, max",-100
 World ,Other fuels,Baseline,Transport,"Parameter b, max",100
 NonOECD ,Other sources,Pathway,Heat,"Parameter b, max",50
 NonOECD ,Other sources,Baseline,Heat,"Parameter b, max",-100
-OECD ,Other sources,Pathway,Heat,"Parameter b, max",50
-OECD ,Other sources,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Other sources,Pathway,Heat,"Parameter b, max",50
+ OECD ,Other sources,Baseline,Heat,"Parameter b, max",-100
 World ,Other sources,Pathway,Heat,"Parameter b, max",50
 World ,Other sources,Baseline,Heat,"Parameter b, max",100
 AdvancedECO ,Peat Restoration,Pathway,AFOLU,"Parameter b, max",39.84
@@ -6415,8 +6415,8 @@ NAM ,Peat Restoration,Pathway,AFOLU,"Parameter b, max",39.84
 NAM ,Peat Restoration,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Peat Restoration,Pathway,AFOLU,"Parameter b, max",39.84
 NonOECD ,Peat Restoration,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Peat Restoration,Pathway,AFOLU,"Parameter b, max",39.84
-OECD ,Peat Restoration,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Peat Restoration,Pathway,AFOLU,"Parameter b, max",39.84
+ OECD ,Peat Restoration,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Peat Restoration,Pathway,AFOLU,"Parameter b, max",39.84
 RUS ,Peat Restoration,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Peat Restoration,Pathway,AFOLU,"Parameter b, max",39.84
@@ -6457,8 +6457,8 @@ NAM ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
@@ -6499,8 +6499,8 @@ NAM ,Solar,Pathway,,"Parameter b, max",100
 NAM ,Solar,Baseline,,"Parameter b, max",100
 NonOECD ,Solar,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Solar,Baseline,Electricity,"Parameter b, max",-100
-OECD ,Solar,Pathway,Electricity,"Parameter b, max",100
-OECD ,Solar,Baseline,Electricity,"Parameter b, max",-100
+ OECD ,Solar,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Solar,Baseline,Electricity,"Parameter b, max",-100
 RUS ,Solar,Pathway,,"Parameter b, max",100
 RUS ,Solar,Baseline,,"Parameter b, max",100
 SAFR ,Solar,Pathway,,"Parameter b, max",100
@@ -6541,8 +6541,8 @@ NAM ,Solar thermal,Pathway,,"Parameter b, max",100
 NAM ,Solar thermal,Baseline,,"Parameter b, max",100
 NonOECD ,Solar thermal,Baseline,Heat,"Parameter b, max",-100
 NonOECD ,Solar thermal,Pathway,Heat,"Parameter b, max",35
-OECD ,Solar thermal,Baseline,Heat,"Parameter b, max",-100
-OECD ,Solar thermal,Pathway,Heat,"Parameter b, max",30
+ OECD ,Solar thermal,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Solar thermal,Pathway,Heat,"Parameter b, max",30
 RUS ,Solar thermal,Pathway,,"Parameter b, max",100
 RUS ,Solar thermal,Baseline,,"Parameter b, max",100
 SAFR ,Solar thermal,Pathway,,"Parameter b, max",100
@@ -6583,8 +6583,8 @@ NAM ,Tide and wave,Pathway,,"Parameter b, max",100
 NAM ,Tide and wave,Baseline,,"Parameter b, max",100
 NonOECD ,Tide and wave,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Tide and wave,Baseline,Electricity,"Parameter b, max",-100
-OECD ,Tide and wave,Pathway,Electricity,"Parameter b, max",100
-OECD ,Tide and wave,Baseline,Electricity,"Parameter b, max",-100
+ OECD ,Tide and wave,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Tide and wave,Baseline,Electricity,"Parameter b, max",-100
 RUS ,Tide and wave,Pathway,,"Parameter b, max",100
 RUS ,Tide and wave,Baseline,,"Parameter b, max",100
 SAFR ,Tide and wave,Pathway,,"Parameter b, max",100
@@ -6625,8 +6625,8 @@ NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
-OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
-OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
+ OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 SAFR ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
@@ -6639,10 +6639,10 @@ NonOECD ,Waste,Pathway,Electricity,"Parameter b, max",40
 NonOECD ,Waste,Baseline,Electricity,"Parameter b, max",100
 NonOECD ,Waste,Pathway,Heat,"Parameter b, max",15
 NonOECD ,Waste,Baseline,Heat,"Parameter b, max",-100
-OECD ,Waste,Pathway,Electricity,"Parameter b, max",40
-OECD ,Waste,Baseline,Electricity,"Parameter b, max",100
-OECD ,Waste,Pathway,Heat,"Parameter b, max",15
-OECD ,Waste,Baseline,Heat,"Parameter b, max",-100
+ OECD ,Waste,Pathway,Electricity,"Parameter b, max",40
+ OECD ,Waste,Baseline,Electricity,"Parameter b, max",100
+ OECD ,Waste,Pathway,Heat,"Parameter b, max",15
+ OECD ,Waste,Baseline,Heat,"Parameter b, max",-100
 World ,Waste,Pathway,Electricity,"Parameter b, max",40
 World ,Waste,Baseline,Electricity,"Parameter b, max",100
 World ,Waste,Pathway,Heat,"Parameter b, max",100
@@ -6679,8 +6679,8 @@ NAM ,Wind,Pathway,,"Parameter b, max",100
 NAM ,Wind,Baseline,,"Parameter b, max",100
 NonOECD ,Wind,Pathway,Electricity,"Parameter b, max",100
 NonOECD ,Wind,Baseline,Electricity,"Parameter b, max",-100
-OECD ,Wind,Pathway,Electricity,"Parameter b, max",100
-OECD ,Wind,Baseline,Electricity,"Parameter b, max",-100
+ OECD ,Wind,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Wind,Baseline,Electricity,"Parameter b, max",-100
 RUS ,Wind,Pathway,,"Parameter b, max",100
 RUS ,Wind,Baseline,,"Parameter b, max",100
 SAFR ,Wind,Pathway,,"Parameter b, max",100
@@ -6721,8 +6721,8 @@ NAM ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
@@ -6763,8 +6763,8 @@ NAM ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, min",0
 NAM ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, min",0
 NonOECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, min",0
-OECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, min",0
+ OECD ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, min",0
 RUS ,Avoided Coastal Impacts,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Avoided Coastal Impacts,Pathway,AFOLU,"Parameter b, min",0
@@ -6805,8 +6805,8 @@ NAM ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
-OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
+ OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, min",0
@@ -6847,8 +6847,8 @@ NAM ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, min",0
 NAM ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, min",0
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, min",0
-OECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, min",0
+ OECD ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, min",0
 RUS ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, min",0
@@ -6921,10 +6921,10 @@ NonOECD ,Biochar,Pathway,Industry,"Parameter b, min",40
 NonOECD ,Biochar,Baseline,Industry,"Parameter b, min",0
 NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Biochar,Pathway,Industry,"Parameter b, min",40
-OECD ,Biochar,Baseline,Industry,"Parameter b, min",0
-OECD ,Biochar,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Biochar,Pathway,Industry,"Parameter b, min",40
+ OECD ,Biochar,Baseline,Industry,"Parameter b, min",0
+ OECD ,Biochar,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Biochar,Pathway,,"Parameter b, min",0
 RUS ,Biochar,Baseline,,"Parameter b, min",0
 RUS ,Biochar,Pathway,AFOLU,"Parameter b, min",60.52
@@ -6945,18 +6945,18 @@ NonOECD ,Bioenergy,Pathway,Electricity,"Parameter b, min",40
 NonOECD ,Bioenergy,Baseline,Electricity,"Parameter b, min",40
 NonOECD ,Bioenergy,Pathway,Heat,"Parameter b, min",37
 NonOECD ,Bioenergy,Baseline,Heat,"Parameter b, min",-100
-OECD ,Bioenergy,Pathway,Electricity,"Parameter b, min",40
-OECD ,Bioenergy,Baseline,Electricity,"Parameter b, min",40
-OECD ,Bioenergy,Pathway,Heat,"Parameter b, min",37
-OECD ,Bioenergy,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Bioenergy,Pathway,Electricity,"Parameter b, min",40
+ OECD ,Bioenergy,Baseline,Electricity,"Parameter b, min",40
+ OECD ,Bioenergy,Pathway,Heat,"Parameter b, min",37
+ OECD ,Bioenergy,Baseline,Heat,"Parameter b, min",-100
 World ,Bioenergy,Baseline,Electricity,"Parameter b, min",40
 World ,Bioenergy,Pathway,Electricity,"Parameter b, min",40
 World ,Bioenergy,Baseline,Heat,"Parameter b, min",40
 World ,Bioenergy,Pathway,Heat,"Parameter b, min",37
 NonOECD ,Biofuels,Pathway,Transport,"Parameter b, min",37
 NonOECD ,Biofuels,Baseline,Transport,"Parameter b, min",0
-OECD ,Biofuels,Pathway,Transport,"Parameter b, min",37
-OECD ,Biofuels,Baseline,Transport,"Parameter b, min",0
+ OECD ,Biofuels,Pathway,Transport,"Parameter b, min",37
+ OECD ,Biofuels,Baseline,Transport,"Parameter b, min",0
 World ,Biofuels,Baseline,Transport,"Parameter b, min",0
 World ,Biofuels,Pathway,Transport,"Parameter b, min",37
 AdvancedECO ,Biomass and waste,Pathway,,"Parameter b, min",0
@@ -6991,8 +6991,8 @@ NAM ,Biomass and waste,Pathway,,"Parameter b, min",0
 NAM ,Biomass and waste,Baseline,,"Parameter b, min",0
 NonOECD ,Biomass and waste,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Biomass and waste,Baseline,Electricity,"Parameter b, min",-100
-OECD ,Biomass and waste,Pathway,Electricity,"Parameter b, min",0
-OECD ,Biomass and waste,Baseline,Electricity,"Parameter b, min",-100
+ OECD ,Biomass and waste,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Biomass and waste,Baseline,Electricity,"Parameter b, min",-100
 RUS ,Biomass and waste,Pathway,,"Parameter b, min",0
 RUS ,Biomass and waste,Baseline,,"Parameter b, min",0
 SAFR ,Biomass and waste,Pathway,,"Parameter b, min",0
@@ -7005,10 +7005,10 @@ NonOECD ,Coal,Baseline,Electricity,"Parameter b, min",100
 NonOECD ,Coal,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Coal,Baseline,Heat,"Parameter b, min",-100
 NonOECD ,Coal,Pathway,Heat,"Parameter b, min",0
-OECD ,Coal,Baseline,Electricity,"Parameter b, min",100
-OECD ,Coal,Pathway,Electricity,"Parameter b, min",0
-OECD ,Coal,Baseline,Heat,"Parameter b, min",-100
-OECD ,Coal,Pathway,Heat,"Parameter b, min",0
+ OECD ,Coal,Baseline,Electricity,"Parameter b, min",100
+ OECD ,Coal,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Coal,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Coal,Pathway,Heat,"Parameter b, min",0
 World ,Coal,Pathway,Electricity,"Parameter b, min",0
 World ,Coal,Baseline,Electricity,"Parameter b, min",100
 World ,Coal,Pathway,Heat,"Parameter b, min",3
@@ -7045,8 +7045,8 @@ NAM ,Coastal Restoration,Pathway,AFOLU,"Parameter b, min",40.46
 NAM ,Coastal Restoration,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Coastal Restoration,Pathway,AFOLU,"Parameter b, min",40.46
 NonOECD ,Coastal Restoration,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Coastal Restoration,Pathway,AFOLU,"Parameter b, min",40.46
-OECD ,Coastal Restoration,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Coastal Restoration,Pathway,AFOLU,"Parameter b, min",40.46
+ OECD ,Coastal Restoration,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Coastal Restoration,Pathway,AFOLU,"Parameter b, min",40.46
 RUS ,Coastal Restoration,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Coastal Restoration,Pathway,AFOLU,"Parameter b, min",40.46
@@ -7087,8 +7087,8 @@ NAM ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
@@ -7099,8 +7099,8 @@ World ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
 World ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Electricity,Baseline,Electricity,"Parameter b, min",0
 NonOECD ,Electricity,Pathway,Electricity,"Parameter b, min",0
-OECD ,Electricity,Baseline,Electricity,"Parameter b, min",0
-OECD ,Electricity,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Electricity,Baseline,Electricity,"Parameter b, min",0
+ OECD ,Electricity,Pathway,Electricity,"Parameter b, min",0
 World ,Electricity,Pathway,Electricity,"Parameter b, min",0
 World ,Electricity,Baseline,Electricity,"Parameter b, min",0
 AdvancedECO ,Fossil fuels,Pathway,,"Parameter b, min",0
@@ -7137,10 +7137,10 @@ NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",20
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter b, min",-100
-OECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
-OECD ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",15
-OECD ,Fossil fuels,Baseline,Electricity,"Parameter b, min",-100
+ OECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
+ OECD ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
+ OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",15
+ OECD ,Fossil fuels,Baseline,Electricity,"Parameter b, min",-100
 RUS ,Fossil fuels,Pathway,,"Parameter b, min",0
 RUS ,Fossil fuels,Baseline,,"Parameter b, min",0
 SAFR ,Fossil fuels,Pathway,,"Parameter b, min",0
@@ -7182,8 +7182,8 @@ NAM ,Generation,Pathway,,"Parameter b, min",0
 NAM ,Generation,Baseline,,"Parameter b, min",0
 NonOECD ,Generation,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Generation,Baseline,Electricity,"Parameter b, min",0
-OECD ,Generation,Pathway,Electricity,"Parameter b, min",0
-OECD ,Generation,Baseline,Electricity,"Parameter b, min",0
+ OECD ,Generation,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Generation,Baseline,Electricity,"Parameter b, min",0
 RUS ,Generation,Pathway,,"Parameter b, min",0
 RUS ,Generation,Baseline,,"Parameter b, min",0
 SAFR ,Generation,Pathway,,"Parameter b, min",0
@@ -7226,10 +7226,10 @@ NonOECD ,Geothermal,Baseline,Electricity,"Parameter b, min",-100
 NonOECD ,Geothermal,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Geothermal,Baseline,Heat,"Parameter b, min",-100
 NonOECD ,Geothermal,Pathway,Heat,"Parameter b, min",0
-OECD ,Geothermal,Baseline,Electricity,"Parameter b, min",-100
-OECD ,Geothermal,Pathway,Electricity,"Parameter b, min",0
-OECD ,Geothermal,Baseline,Heat,"Parameter b, min",-100
-OECD ,Geothermal,Pathway,Heat,"Parameter b, min",0
+ OECD ,Geothermal,Baseline,Electricity,"Parameter b, min",-100
+ OECD ,Geothermal,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Geothermal,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Geothermal,Pathway,Heat,"Parameter b, min",0
 RUS ,Geothermal,Pathway,,"Parameter b, min",0
 RUS ,Geothermal,Baseline,,"Parameter b, min",0
 SAFR ,Geothermal,Pathway,,"Parameter b, min",0
@@ -7272,8 +7272,8 @@ NAM ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
 NAM ,Hydroelectric pumped storage,Baseline,,"Parameter b, min",0
 NonOECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter b, min",0
-OECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter b, min",0
-OECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter b, min",0
+ OECD ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Hydroelectric pumped storage,Baseline,Electricity,"Parameter b, min",0
 RUS ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
 RUS ,Hydroelectric pumped storage,Baseline,,"Parameter b, min",0
 SAFR ,Hydroelectric pumped storage,Pathway,,"Parameter b, min",0
@@ -7314,8 +7314,8 @@ NAM ,Hydroelectricity,Pathway,,"Parameter b, min",18
 NAM ,Hydroelectricity,Baseline,,"Parameter b, min",18
 NonOECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, min",-100
-OECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, min",0
-OECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, min",-100
+ OECD ,Hydroelectricity,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Hydroelectricity,Baseline,Electricity,"Parameter b, min",-100
 RUS ,Hydroelectricity,Pathway,,"Parameter b, min",18
 RUS ,Hydroelectricity,Baseline,,"Parameter b, min",18
 SAFR ,Hydroelectricity,Pathway,,"Parameter b, min",18
@@ -7356,8 +7356,8 @@ NAM ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, min",37.1
 NAM ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, min",37.1
 NonOECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, min",37.1
-OECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, min",37.1
+ OECD ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, min",37.1
 RUS ,Improved Forest Mgmt,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Improved Forest Mgmt,Pathway,AFOLU,"Parameter b, min",37.1
@@ -7398,8 +7398,8 @@ NAM ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Improved Rice,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Improved Rice,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Improved Rice,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Improved Rice,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Improved Rice,Pathway,AFOLU,"Parameter b, min",60.52
@@ -7440,8 +7440,8 @@ NAM ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Legumes,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Legumes,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Legumes,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Legumes,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
@@ -7454,10 +7454,10 @@ NonOECD ,Natural gas,Baseline,Electricity,"Parameter b, min",100
 NonOECD ,Natural gas,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Natural gas,Baseline,Heat,"Parameter b, min",-100
 NonOECD ,Natural gas,Pathway,Heat,"Parameter b, min",0
-OECD ,Natural gas,Baseline,Electricity,"Parameter b, min",100
-OECD ,Natural gas,Pathway,Electricity,"Parameter b, min",0
-OECD ,Natural gas,Baseline,Heat,"Parameter b, min",-100
-OECD ,Natural gas,Pathway,Heat,"Parameter b, min",0
+ OECD ,Natural gas,Baseline,Electricity,"Parameter b, min",100
+ OECD ,Natural gas,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Natural gas,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Natural gas,Pathway,Heat,"Parameter b, min",0
 World ,Natural gas,Pathway,Electricity,"Parameter b, min",0
 World ,Natural gas,Baseline,Electricity,"Parameter b, min",100
 World ,Natural gas,Pathway,Heat,"Parameter b, min",3
@@ -7494,8 +7494,8 @@ NAM ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",34.75
 NAM ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",60
 NonOECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",60
-OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",60
+ OECD ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",34.75
 RUS ,Natural Regeneration,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Natural Regeneration,Pathway,AFOLU,"Parameter b, min",34.75
@@ -7536,8 +7536,8 @@ NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
@@ -7576,14 +7576,14 @@ ME ,Nuclear,Pathway,,"Parameter b, min",43
 ME ,Nuclear,Baseline,,"Parameter b, min",43
 NAM ,Nuclear,Pathway,,"Parameter b, min",43
 NAM ,Nuclear,Baseline,,"Parameter b, min",43
-NonOECD ,Nuclear,Baseline,Electricity,"Parameter b, min",-100
-NonOECD ,Nuclear,Pathway,Electricity,"Parameter b, min",0
+NonOECD ,Nuclear,Baseline,Electricity,"Parameter b, min",100
+NonOECD ,Nuclear,Pathway,Electricity,"Parameter b, min",100
 NonOECD ,Nuclear,Baseline,Heat,"Parameter b, min",-100
 NonOECD ,Nuclear,Pathway,Heat,"Parameter b, min",0
-OECD ,Nuclear,Baseline,Electricity,"Parameter b, min",-100
-OECD ,Nuclear,Pathway,Electricity,"Parameter b, min",0
-OECD ,Nuclear,Baseline,Heat,"Parameter b, min",-100
-OECD ,Nuclear,Pathway,Heat,"Parameter b, min",0
+ OECD ,Nuclear,Baseline,Electricity,"Parameter b, min",100
+ OECD ,Nuclear,Pathway,Electricity,"Parameter b, min",100
+ OECD ,Nuclear,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Nuclear,Pathway,Heat,"Parameter b, min",0
 RUS ,Nuclear,Pathway,,"Parameter b, min",43
 RUS ,Nuclear,Baseline,,"Parameter b, min",43
 SAFR ,Nuclear,Pathway,,"Parameter b, min",43
@@ -7600,12 +7600,12 @@ NonOECD ,Oil,Baseline,Heat,"Parameter b, min",-100
 NonOECD ,Oil,Pathway,Heat,"Parameter b, min",10
 NonOECD ,Oil,Baseline,Transport,"Parameter b, min",-100
 NonOECD ,Oil,Pathway,Transport,"Parameter b, min",37
-OECD ,Oil,Baseline,Electricity,"Parameter b, min",100
-OECD ,Oil,Pathway,Electricity,"Parameter b, min",30
-OECD ,Oil,Baseline,Heat,"Parameter b, min",-100
-OECD ,Oil,Pathway,Heat,"Parameter b, min",10
-OECD ,Oil,Baseline,Transport,"Parameter b, min",-100
-OECD ,Oil,Pathway,Transport,"Parameter b, min",10
+ OECD ,Oil,Baseline,Electricity,"Parameter b, min",100
+ OECD ,Oil,Pathway,Electricity,"Parameter b, min",30
+ OECD ,Oil,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Oil,Pathway,Heat,"Parameter b, min",10
+ OECD ,Oil,Baseline,Transport,"Parameter b, min",-100
+ OECD ,Oil,Pathway,Transport,"Parameter b, min",10
 World ,Oil,Pathway,Electricity,"Parameter b, min",30
 World ,Oil,Baseline,Electricity,"Parameter b, min",100
 World ,Oil,Pathway,Heat,"Parameter b, min",10
@@ -7644,8 +7644,8 @@ NAM ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
@@ -7656,14 +7656,14 @@ World ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
 World ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Other fuels,Pathway,Transport,"Parameter b, min",10
 NonOECD ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-OECD ,Other fuels,Pathway,Transport,"Parameter b, min",10
-OECD ,Other fuels,Baseline,Transport,"Parameter b, min",-100
+ OECD ,Other fuels,Pathway,Transport,"Parameter b, min",10
+ OECD ,Other fuels,Baseline,Transport,"Parameter b, min",-100
 World ,Other fuels,Pathway,Transport,"Parameter b, min",37
 World ,Other fuels,Baseline,Transport,"Parameter b, min",-100
 NonOECD ,Other sources,Pathway,Heat,"Parameter b, min",0
 NonOECD ,Other sources,Baseline,Heat,"Parameter b, min",-100
-OECD ,Other sources,Pathway,Heat,"Parameter b, min",0
-OECD ,Other sources,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Other sources,Pathway,Heat,"Parameter b, min",0
+ OECD ,Other sources,Baseline,Heat,"Parameter b, min",-100
 World ,Other sources,Pathway,Heat,"Parameter b, min",0
 World ,Other sources,Baseline,Heat,"Parameter b, min",0
 AdvancedECO ,Peat Restoration,Pathway,AFOLU,"Parameter b, min",39.84
@@ -7698,8 +7698,8 @@ NAM ,Peat Restoration,Pathway,AFOLU,"Parameter b, min",39.84
 NAM ,Peat Restoration,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Peat Restoration,Pathway,AFOLU,"Parameter b, min",39.84
 NonOECD ,Peat Restoration,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Peat Restoration,Pathway,AFOLU,"Parameter b, min",39.84
-OECD ,Peat Restoration,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Peat Restoration,Pathway,AFOLU,"Parameter b, min",39.84
+ OECD ,Peat Restoration,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Peat Restoration,Pathway,AFOLU,"Parameter b, min",39.84
 RUS ,Peat Restoration,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Peat Restoration,Pathway,AFOLU,"Parameter b, min",39.84
@@ -7740,8 +7740,8 @@ NAM ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
@@ -7782,8 +7782,8 @@ NAM ,Solar,Pathway,,"Parameter b, min",0
 NAM ,Solar,Baseline,,"Parameter b, min",0
 NonOECD ,Solar,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Solar,Baseline,Electricity,"Parameter b, min",-100
-OECD ,Solar,Pathway,Electricity,"Parameter b, min",0
-OECD ,Solar,Baseline,Electricity,"Parameter b, min",-100
+ OECD ,Solar,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Solar,Baseline,Electricity,"Parameter b, min",-100
 RUS ,Solar,Pathway,,"Parameter b, min",0
 RUS ,Solar,Baseline,,"Parameter b, min",0
 SAFR ,Solar,Pathway,,"Parameter b, min",0
@@ -7824,8 +7824,8 @@ NAM ,Solar thermal,Pathway,,"Parameter b, min",0
 NAM ,Solar thermal,Baseline,,"Parameter b, min",0
 NonOECD ,Solar thermal,Baseline,Heat,"Parameter b, min",-100
 NonOECD ,Solar thermal,Pathway,Heat,"Parameter b, min",35
-OECD ,Solar thermal,Baseline,Heat,"Parameter b, min",-100
-OECD ,Solar thermal,Pathway,Heat,"Parameter b, min",30
+ OECD ,Solar thermal,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Solar thermal,Pathway,Heat,"Parameter b, min",30
 RUS ,Solar thermal,Pathway,,"Parameter b, min",0
 RUS ,Solar thermal,Baseline,,"Parameter b, min",0
 SAFR ,Solar thermal,Pathway,,"Parameter b, min",0
@@ -7866,8 +7866,8 @@ NAM ,Tide and wave,Pathway,,"Parameter b, min",0
 NAM ,Tide and wave,Baseline,,"Parameter b, min",0
 NonOECD ,Tide and wave,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Tide and wave,Baseline,Electricity,"Parameter b, min",-100
-OECD ,Tide and wave,Pathway,Electricity,"Parameter b, min",0
-OECD ,Tide and wave,Baseline,Electricity,"Parameter b, min",-100
+ OECD ,Tide and wave,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Tide and wave,Baseline,Electricity,"Parameter b, min",-100
 RUS ,Tide and wave,Pathway,,"Parameter b, min",0
 RUS ,Tide and wave,Baseline,,"Parameter b, min",0
 SAFR ,Tide and wave,Pathway,,"Parameter b, min",0
@@ -7908,8 +7908,8 @@ NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
-OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",50
-OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
+ OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 SAFR ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
@@ -7922,10 +7922,10 @@ NonOECD ,Waste,Pathway,Electricity,"Parameter b, min",40
 NonOECD ,Waste,Baseline,Electricity,"Parameter b, min",0
 NonOECD ,Waste,Pathway,Heat,"Parameter b, min",0
 NonOECD ,Waste,Baseline,Heat,"Parameter b, min",-100
-OECD ,Waste,Pathway,Electricity,"Parameter b, min",40
-OECD ,Waste,Baseline,Electricity,"Parameter b, min",0
-OECD ,Waste,Pathway,Heat,"Parameter b, min",0
-OECD ,Waste,Baseline,Heat,"Parameter b, min",-100
+ OECD ,Waste,Pathway,Electricity,"Parameter b, min",40
+ OECD ,Waste,Baseline,Electricity,"Parameter b, min",0
+ OECD ,Waste,Pathway,Heat,"Parameter b, min",0
+ OECD ,Waste,Baseline,Heat,"Parameter b, min",-100
 World ,Waste,Pathway,Electricity,"Parameter b, min",40
 World ,Waste,Baseline,Electricity,"Parameter b, min",0
 World ,Waste,Pathway,Heat,"Parameter b, min",0
@@ -7962,8 +7962,8 @@ NAM ,Wind,Pathway,,"Parameter b, min",0
 NAM ,Wind,Baseline,,"Parameter b, min",0
 NonOECD ,Wind,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Wind,Baseline,Electricity,"Parameter b, min",-100
-OECD ,Wind,Pathway,Electricity,"Parameter b, min",0
-OECD ,Wind,Baseline,Electricity,"Parameter b, min",-100
+ OECD ,Wind,Pathway,Electricity,"Parameter b, min",0
+ OECD ,Wind,Baseline,Electricity,"Parameter b, min",-100
 RUS ,Wind,Pathway,,"Parameter b, min",0
 RUS ,Wind,Baseline,,"Parameter b, min",0
 SAFR ,Wind,Pathway,,"Parameter b, min",0
@@ -7974,8 +7974,8 @@ World ,Wind,Pathway,Electricity,"Parameter b, min",0
 World ,Wind,Baseline,Electricity,"Parameter b, min",100
 World ,Animal Mgmt,Pathway,AFOLU,Saturation Point,100
 World ,Animal Mgmt,Baseline,AFOLU,Saturation Point,100
-OECD ,Animal Mgmt,Pathway,AFOLU,Saturation Point,100
-OECD ,Animal Mgmt,Baseline,AFOLU,Saturation Point,100
+ OECD ,Animal Mgmt,Pathway,AFOLU,Saturation Point,100
+ OECD ,Animal Mgmt,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Animal Mgmt,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Animal Mgmt,Baseline,AFOLU,Saturation Point,100
 AdvancedECO ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
@@ -8010,8 +8010,8 @@ NAM ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
 NAM ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,110
 NonOECD ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
 NonOECD ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,110
-OECD ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
-OECD ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,110
+ OECD ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
+ OECD ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,110
 RUS ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
 RUS ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,110
 SAFR ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
@@ -8056,8 +8056,8 @@ NAM ,Biochar,Baseline,Industry,Saturation Point,5
 NAM ,Biochar,Pathway,Industry,Saturation Point,23
 NonOECD ,Biochar,Baseline,Industry,Saturation Point,5
 NonOECD ,Biochar,Pathway,Industry,Saturation Point,100
-OECD ,Biochar,Baseline,Industry,Saturation Point,5
-OECD ,Biochar,Pathway,Industry,Saturation Point,100
+ OECD ,Biochar,Baseline,Industry,Saturation Point,5
+ OECD ,Biochar,Pathway,Industry,Saturation Point,100
 RUS ,Biochar,Baseline,Industry,Saturation Point,5
 RUS ,Biochar,Pathway,Industry,Saturation Point,23
 SAFR ,Biochar,Baseline,Industry,Saturation Point,5
@@ -8072,10 +8072,10 @@ NonOECD ,Bioenergy,Pathway,Electricity,Saturation Point,50
 NonOECD ,Bioenergy,Baseline,Electricity,Saturation Point,0
 NonOECD ,Bioenergy,Pathway,Heat,Saturation Point,35
 NonOECD ,Bioenergy,Baseline,Heat,Saturation Point,35
-OECD ,Bioenergy,Pathway,Electricity,Saturation Point,50
-OECD ,Bioenergy,Baseline,Electricity,Saturation Point,0
-OECD ,Bioenergy,Pathway,Heat,Saturation Point,35
-OECD ,Bioenergy,Baseline,Heat,Saturation Point,35
+ OECD ,Bioenergy,Pathway,Electricity,Saturation Point,50
+ OECD ,Bioenergy,Baseline,Electricity,Saturation Point,0
+ OECD ,Bioenergy,Pathway,Heat,Saturation Point,35
+ OECD ,Bioenergy,Baseline,Heat,Saturation Point,35
 World ,Bioenergy,Baseline,Electricity,Saturation Point,50
 World ,Bioenergy,Pathway,Electricity,Saturation Point,50
 World ,Bioenergy,Baseline,Heat,Saturation Point,50
@@ -8114,8 +8114,8 @@ NAM ,Biofuels,Baseline,,Saturation Point,10
 NAM ,Biofuels,Pathway,,Saturation Point,100
 NonOECD ,Biofuels,Baseline,Transport,Saturation Point,2.4
 NonOECD ,Biofuels,Pathway,Transport,Saturation Point,100
-OECD ,Biofuels,Baseline,Transport,Saturation Point,4.6
-OECD ,Biofuels,Pathway,Transport,Saturation Point,80
+ OECD ,Biofuels,Baseline,Transport,Saturation Point,4.6
+ OECD ,Biofuels,Pathway,Transport,Saturation Point,80
 RUS ,Biofuels,Baseline,,Saturation Point,10
 RUS ,Biofuels,Pathway,,Saturation Point,100
 SAFR ,Biofuels,Baseline,,Saturation Point,10
@@ -8156,8 +8156,8 @@ NAM ,Biomass and waste,Baseline,,Saturation Point,5
 NAM ,Biomass and waste,Pathway,,Saturation Point,5
 NonOECD ,Biomass and waste,Baseline,Electricity,Saturation Point,1.64
 NonOECD ,Biomass and waste,Pathway,Electricity,Saturation Point,5
-OECD ,Biomass and waste,Baseline,Electricity,Saturation Point,2.4
-OECD ,Biomass and waste,Pathway,Electricity,Saturation Point,5
+ OECD ,Biomass and waste,Baseline,Electricity,Saturation Point,2.4
+ OECD ,Biomass and waste,Pathway,Electricity,Saturation Point,5
 RUS ,Biomass and waste,Baseline,,Saturation Point,5
 RUS ,Biomass and waste,Pathway,,Saturation Point,5
 SAFR ,Biomass and waste,Baseline,,Saturation Point,5
@@ -8170,10 +8170,10 @@ NonOECD ,Coal,Baseline,Electricity,Saturation Point,0
 NonOECD ,Coal,Pathway,Electricity,Saturation Point,0
 NonOECD ,Coal,Baseline,Heat,Saturation Point,13.1
 NonOECD ,Coal,Pathway,Heat,Saturation Point,32
-OECD ,Coal,Baseline,Electricity,Saturation Point,0
-OECD ,Coal,Pathway,Electricity,Saturation Point,0
-OECD ,Coal,Baseline,Heat,Saturation Point,13.1
-OECD ,Coal,Pathway,Heat,Saturation Point,32
+ OECD ,Coal,Baseline,Electricity,Saturation Point,0
+ OECD ,Coal,Pathway,Electricity,Saturation Point,0
+ OECD ,Coal,Baseline,Heat,Saturation Point,13.1
+ OECD ,Coal,Pathway,Heat,Saturation Point,32
 World ,Coal,Baseline,Electricity,Saturation Point,100
 World ,Coal,Pathway,Electricity,Saturation Point,0
 World ,Coal,Baseline,Heat,Saturation Point,100
@@ -8184,8 +8184,8 @@ World ,Cropland Soil Health,Pathway,AFOLU,Saturation Point,100
 World ,Cropland Soil Health,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Electricity,Baseline,Electricity,Saturation Point,0
 NonOECD ,Electricity,Pathway,Electricity,Saturation Point,100
-OECD ,Electricity,Baseline,Electricity,Saturation Point,0
-OECD ,Electricity,Pathway,Electricity,Saturation Point,100
+ OECD ,Electricity,Baseline,Electricity,Saturation Point,0
+ OECD ,Electricity,Pathway,Electricity,Saturation Point,100
 World ,Electricity,Baseline,Electricity,Saturation Point,100
 World ,Electricity,Pathway,Electricity,Saturation Point,100
 AdvancedECO ,Fossil fuels,Baseline,,Saturation Point,100
@@ -8222,10 +8222,10 @@ NonOECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
 NonOECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
 NonOECD ,Fossil fuels,Pathway,Electricity,Saturation Point,71
 NonOECD ,Fossil fuels,Baseline,Electricity,Saturation Point,72
-OECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
-OECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
-OECD ,Fossil fuels,Pathway,Electricity,Saturation Point,65
-OECD ,Fossil fuels,Baseline,Electricity,Saturation Point,66
+ OECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
+ OECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
+ OECD ,Fossil fuels,Pathway,Electricity,Saturation Point,65
+ OECD ,Fossil fuels,Baseline,Electricity,Saturation Point,66
 RUS ,Fossil fuels,Baseline,,Saturation Point,100
 RUS ,Fossil fuels,Pathway,,Saturation Point,0
 SAFR ,Fossil fuels,Baseline,,Saturation Point,100
@@ -8267,8 +8267,8 @@ NAM ,Generation,Baseline,,Saturation Point,100
 NAM ,Generation,Pathway,,Saturation Point,100
 NonOECD ,Generation,Baseline,Electricity,Saturation Point,0
 NonOECD ,Generation,Pathway,Electricity,Saturation Point,100
-OECD ,Generation,Baseline,Electricity,Saturation Point,0
-OECD ,Generation,Pathway,Electricity,Saturation Point,100
+ OECD ,Generation,Baseline,Electricity,Saturation Point,0
+ OECD ,Generation,Pathway,Electricity,Saturation Point,100
 RUS ,Generation,Baseline,,Saturation Point,100
 RUS ,Generation,Pathway,,Saturation Point,100
 SAFR ,Generation,Baseline,,Saturation Point,100
@@ -8311,10 +8311,10 @@ NonOECD ,Geothermal,Baseline,Electricity,Saturation Point,0.31
 NonOECD ,Geothermal,Pathway,Electricity,Saturation Point,5
 NonOECD ,Geothermal,Baseline,Heat,Saturation Point,0.01
 NonOECD ,Geothermal,Pathway,Heat,Saturation Point,5
-OECD ,Geothermal,Baseline,Electricity,Saturation Point,0.4
-OECD ,Geothermal,Pathway,Electricity,Saturation Point,5
-OECD ,Geothermal,Baseline,Heat,Saturation Point,0.01
-OECD ,Geothermal,Pathway,Heat,Saturation Point,5
+ OECD ,Geothermal,Baseline,Electricity,Saturation Point,0.4
+ OECD ,Geothermal,Pathway,Electricity,Saturation Point,5
+ OECD ,Geothermal,Baseline,Heat,Saturation Point,0.01
+ OECD ,Geothermal,Pathway,Heat,Saturation Point,5
 Other ,Geothermal,Pathway,,Saturation Point,0
 RUS ,Geothermal,Baseline,,Saturation Point,5
 RUS ,Geothermal,Pathway,,Saturation Point,0
@@ -8358,8 +8358,8 @@ NAM ,Hydroelectric pumped storage,Baseline,,Saturation Point,5
 NAM ,Hydroelectric pumped storage,Pathway,,Saturation Point,15
 NonOECD ,Hydroelectric pumped storage,Baseline,Electricity,Saturation Point,0
 NonOECD ,Hydroelectric pumped storage,Pathway,Electricity,Saturation Point,15
-OECD ,Hydroelectric pumped storage,Baseline,Electricity,Saturation Point,5
-OECD ,Hydroelectric pumped storage,Pathway,Electricity,Saturation Point,15
+ OECD ,Hydroelectric pumped storage,Baseline,Electricity,Saturation Point,5
+ OECD ,Hydroelectric pumped storage,Pathway,Electricity,Saturation Point,15
 RUS ,Hydroelectric pumped storage,Baseline,,Saturation Point,5
 RUS ,Hydroelectric pumped storage,Pathway,,Saturation Point,15
 SAFR ,Hydroelectric pumped storage,Baseline,,Saturation Point,5
@@ -8400,8 +8400,8 @@ NAM ,Hydroelectricity,Baseline,,Saturation Point,5
 NAM ,Hydroelectricity,Pathway,,Saturation Point,15
 NonOECD ,Hydroelectricity,Baseline,Electricity,Saturation Point,19
 NonOECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,18.9
-OECD ,Hydroelectricity,Baseline,Electricity,Saturation Point,16.5
-OECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,16.5
+ OECD ,Hydroelectricity,Baseline,Electricity,Saturation Point,16.5
+ OECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,16.5
 Other ,Hydroelectricity,Pathway,,Saturation Point,0
 RUS ,Hydroelectricity,Baseline,,Saturation Point,5
 RUS ,Hydroelectricity,Pathway,,Saturation Point,9
@@ -8421,10 +8421,10 @@ NonOECD ,Natural gas,Baseline,Electricity,Saturation Point,0
 NonOECD ,Natural gas,Pathway,Electricity,Saturation Point,0
 NonOECD ,Natural gas,Baseline,Heat,Saturation Point,13.1
 NonOECD ,Natural gas,Pathway,Heat,Saturation Point,32
-OECD ,Natural gas,Baseline,Electricity,Saturation Point,0
-OECD ,Natural gas,Pathway,Electricity,Saturation Point,0
-OECD ,Natural gas,Baseline,Heat,Saturation Point,14.2
-OECD ,Natural gas,Pathway,Heat,Saturation Point,32
+ OECD ,Natural gas,Baseline,Electricity,Saturation Point,0
+ OECD ,Natural gas,Pathway,Electricity,Saturation Point,0
+ OECD ,Natural gas,Baseline,Heat,Saturation Point,14.2
+ OECD ,Natural gas,Pathway,Heat,Saturation Point,32
 World ,Natural gas,Baseline,Electricity,Saturation Point,100
 World ,Natural gas,Pathway,Electricity,Saturation Point,0
 World ,Natural gas,Baseline,Heat,Saturation Point,100
@@ -8463,14 +8463,14 @@ ME ,Nuclear,Baseline,,Saturation Point,20
 ME ,Nuclear,Pathway,,Saturation Point,10
 NAM ,Nuclear,Baseline,,Saturation Point,20
 NAM ,Nuclear,Pathway,,Saturation Point,10
-NonOECD ,Nuclear,Baseline,Electricity,Saturation Point,4.6
-NonOECD ,Nuclear,Pathway,Electricity,Saturation Point,4.6
+NonOECD ,Nuclear,Baseline,Electricity,Saturation Point,4.5931
+NonOECD ,Nuclear,Pathway,Electricity,Saturation Point,4.5931
 NonOECD ,Nuclear,Baseline,Heat,Saturation Point,0.06
 NonOECD ,Nuclear,Pathway,Heat,Saturation Point,0.1
-OECD ,Nuclear,Baseline,Electricity,Saturation Point,10.3
-OECD ,Nuclear,Pathway,Electricity,Saturation Point,10.2
-OECD ,Nuclear,Baseline,Heat,Saturation Point,0.06
-OECD ,Nuclear,Pathway,Heat,Saturation Point,0.1
+ OECD ,Nuclear,Baseline,Electricity,Saturation Point,17.6844
+ OECD ,Nuclear,Pathway,Electricity,Saturation Point,17.6844
+ OECD ,Nuclear,Baseline,Heat,Saturation Point,0.06
+ OECD ,Nuclear,Pathway,Heat,Saturation Point,0.1
 RUS ,Nuclear,Baseline,,Saturation Point,20
 RUS ,Nuclear,Pathway,,Saturation Point,10
 SAFR ,Nuclear,Baseline,,Saturation Point,20
@@ -8487,12 +8487,12 @@ NonOECD ,Oil,Baseline,Heat,Saturation Point,1.2
 NonOECD ,Oil,Pathway,Heat,Saturation Point,2.6
 NonOECD ,Oil,Baseline,Transport,Saturation Point,90.9
 NonOECD ,Oil,Pathway,Transport,Saturation Point,95.5
-OECD ,Oil,Baseline,Electricity,Saturation Point,0
-OECD ,Oil,Pathway,Electricity,Saturation Point,100
-OECD ,Oil,Baseline,Heat,Saturation Point,1.4
-OECD ,Oil,Pathway,Heat,Saturation Point,2.6
-OECD ,Oil,Baseline,Transport,Saturation Point,93.4
-OECD ,Oil,Pathway,Transport,Saturation Point,95
+ OECD ,Oil,Baseline,Electricity,Saturation Point,0
+ OECD ,Oil,Pathway,Electricity,Saturation Point,100
+ OECD ,Oil,Baseline,Heat,Saturation Point,1.4
+ OECD ,Oil,Pathway,Heat,Saturation Point,2.6
+ OECD ,Oil,Baseline,Transport,Saturation Point,93.4
+ OECD ,Oil,Pathway,Transport,Saturation Point,95
 World ,Oil,Baseline,Electricity,Saturation Point,100
 World ,Oil,Pathway,Electricity,Saturation Point,100
 World ,Oil,Baseline,Heat,Saturation Point,100
@@ -8503,14 +8503,14 @@ World ,Optimal Intensity,Pathway,AFOLU,Saturation Point,100
 World ,Optimal Intensity,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Other fuels,Pathway,Transport,Saturation Point,5
 NonOECD ,Other fuels,Baseline,Transport,Saturation Point,6.86
-OECD ,Other fuels,Pathway,Transport,Saturation Point,5
-OECD ,Other fuels,Baseline,Transport,Saturation Point,2.1
+ OECD ,Other fuels,Pathway,Transport,Saturation Point,5
+ OECD ,Other fuels,Baseline,Transport,Saturation Point,2.1
 World ,Other fuels,Pathway,Transport,Saturation Point,5
 World ,Other fuels,Baseline,Transport,Saturation Point,5
 NonOECD ,Other sources,Pathway,Heat,Saturation Point,2.1
 NonOECD ,Other sources,Baseline,Heat,Saturation Point,1
-OECD ,Other sources,Pathway,Heat,Saturation Point,2.1
-OECD ,Other sources,Baseline,Heat,Saturation Point,1.1
+ OECD ,Other sources,Pathway,Heat,Saturation Point,2.1
+ OECD ,Other sources,Baseline,Heat,Saturation Point,1.1
 World ,Other sources,Pathway,Heat,Saturation Point,2.1
 World ,Other sources,Baseline,Heat,Saturation Point,5
 World ,Peat Restoration,Pathway,AFOLU,Saturation Point,100
@@ -8549,8 +8549,8 @@ NAM ,Solar,Baseline,,Saturation Point,5
 NAM ,Solar,Pathway,,Saturation Point,37
 NonOECD ,Solar,Baseline,Electricity,Saturation Point,1.3
 NonOECD ,Solar,Pathway,Electricity,Saturation Point,35.9
-OECD ,Solar,Baseline,Electricity,Saturation Point,1.9
-OECD ,Solar,Pathway,Electricity,Saturation Point,35.9
+ OECD ,Solar,Baseline,Electricity,Saturation Point,1.9
+ OECD ,Solar,Pathway,Electricity,Saturation Point,35.9
 Other ,Solar,Pathway,,Saturation Point,56
 RUS ,Solar,Baseline,,Saturation Point,5
 RUS ,Solar,Pathway,,Saturation Point,37
@@ -8622,8 +8622,8 @@ NAM ,Solar thermal,Pathway,Industry,Saturation Point,38
 NAM ,Solar thermal,Pathway,Buildings,Saturation Point,100
 NonOECD ,Solar thermal,Baseline,Heat,Saturation Point,0
 NonOECD ,Solar thermal,Pathway,Heat,Saturation Point,40
-OECD ,Solar thermal,Baseline,Heat,Saturation Point,0
-OECD ,Solar thermal,Pathway,Heat,Saturation Point,100
+ OECD ,Solar thermal,Baseline,Heat,Saturation Point,0
+ OECD ,Solar thermal,Pathway,Heat,Saturation Point,100
 RUS ,Solar thermal,Baseline,Industry,Saturation Point,10
 RUS ,Solar thermal,Baseline,Buildings,Saturation Point,10
 RUS ,Solar thermal,Pathway,Industry,Saturation Point,38
@@ -8671,8 +8671,8 @@ NAM ,Tide and wave,Baseline,,Saturation Point,5
 NAM ,Tide and wave,Pathway,,Saturation Point,10
 NonOECD ,Tide and wave,Baseline,Electricity,Saturation Point,0.01
 NonOECD ,Tide and wave,Pathway,Electricity,Saturation Point,5
-OECD ,Tide and wave,Baseline,Electricity,Saturation Point,0.2
-OECD ,Tide and wave,Pathway,Electricity,Saturation Point,5
+ OECD ,Tide and wave,Baseline,Electricity,Saturation Point,0.2
+ OECD ,Tide and wave,Pathway,Electricity,Saturation Point,5
 RUS ,Tide and wave,Baseline,,Saturation Point,5
 RUS ,Tide and wave,Pathway,,Saturation Point,10
 SAFR ,Tide and wave,Baseline,,Saturation Point,5
@@ -8687,10 +8687,10 @@ NonOECD ,Waste,Pathway,Electricity,Saturation Point,23
 NonOECD ,Waste,Baseline,Electricity,Saturation Point,0
 NonOECD ,Waste,Pathway,Heat,Saturation Point,10
 NonOECD ,Waste,Baseline,Heat,Saturation Point,0.4
-OECD ,Waste,Pathway,Electricity,Saturation Point,23
-OECD ,Waste,Baseline,Electricity,Saturation Point,0
-OECD ,Waste,Pathway,Heat,Saturation Point,10
-OECD ,Waste,Baseline,Heat,Saturation Point,0.94
+ OECD ,Waste,Pathway,Electricity,Saturation Point,23
+ OECD ,Waste,Baseline,Electricity,Saturation Point,0
+ OECD ,Waste,Pathway,Heat,Saturation Point,10
+ OECD ,Waste,Baseline,Heat,Saturation Point,0.94
 World ,Waste,Pathway,Electricity,Saturation Point,23
 World ,Waste,Baseline,Electricity,Saturation Point,5
 World ,Waste,Pathway,Heat,Saturation Point,1.3
@@ -8727,8 +8727,8 @@ NAM ,Wind,Baseline,,Saturation Point,5
 NAM ,Wind,Pathway,,Saturation Point,46
 NonOECD ,Wind,Baseline,Electricity,Saturation Point,3.2
 NonOECD ,Wind,Pathway,Electricity,Saturation Point,38.5
-OECD ,Wind,Baseline,Electricity,Saturation Point,4.7
-OECD ,Wind,Pathway,Electricity,Saturation Point,38.5
+ OECD ,Wind,Baseline,Electricity,Saturation Point,4.7
+ OECD ,Wind,Pathway,Electricity,Saturation Point,38.5
 Other ,Wind,Pathway,,Saturation Point,44
 RUS ,Wind,Baseline,,Saturation Point,5
 RUS ,Wind,Pathway,,Saturation Point,53
@@ -8741,39 +8741,39 @@ World ,Wind,Pathway,Electricity,Saturation Point,38.5
 World ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 World ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 World ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
-OECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,200
-OECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
-OECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
-OECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,200
+ OECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
+ OECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
+ OECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,200
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
-OECD ,Coastal Restoration,Pathway,AFOLU,Saturation Point,100
-OECD ,Coastal Restoration,Baseline,AFOLU,Saturation Point,100
-OECD ,Cropland Soil Health,Pathway,AFOLU,Saturation Point,100
-OECD ,Cropland Soil Health,Baseline,AFOLU,Saturation Point,100
-OECD ,Improved Forest Mgmt,Pathway,AFOLU,Saturation Point,100
-OECD ,Improved Forest Mgmt,Baseline,AFOLU,Saturation Point,100
-OECD ,Improved Rice,Pathway,AFOLU,Saturation Point,100
-OECD ,Improved Rice,Baseline,AFOLU,Saturation Point,100
-OECD ,Legumes,Pathway,AFOLU,Saturation Point,100
-OECD ,Legumes,Baseline,AFOLU,Saturation Point,100
-OECD ,Natural Regeneration,Pathway,AFOLU,Saturation Point,90
-OECD ,Natural Regeneration,Baseline,AFOLU,Saturation Point,100
-OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,100
-OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Saturation Point,100
-OECD ,Optimal Intensity,Pathway,AFOLU,Saturation Point,100
-OECD ,Optimal Intensity,Baseline,AFOLU,Saturation Point,100
-OECD ,Peat Restoration,Pathway,AFOLU,Saturation Point,100
-OECD ,Peat Restoration,Baseline,AFOLU,Saturation Point,100
-OECD ,Silvopasture,Pathway,AFOLU,Saturation Point,100
-OECD ,Silvopasture,Baseline,AFOLU,Saturation Point,100
-OECD ,Trees in Croplands,Pathway,AFOLU,Saturation Point,100
-OECD ,Trees in Croplands,Baseline,AFOLU,Saturation Point,100
-OECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
-OECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
-OECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
+ OECD ,Coastal Restoration,Pathway,AFOLU,Saturation Point,100
+ OECD ,Coastal Restoration,Baseline,AFOLU,Saturation Point,100
+ OECD ,Cropland Soil Health,Pathway,AFOLU,Saturation Point,100
+ OECD ,Cropland Soil Health,Baseline,AFOLU,Saturation Point,100
+ OECD ,Improved Forest Mgmt,Pathway,AFOLU,Saturation Point,100
+ OECD ,Improved Forest Mgmt,Baseline,AFOLU,Saturation Point,100
+ OECD ,Improved Rice,Pathway,AFOLU,Saturation Point,100
+ OECD ,Improved Rice,Baseline,AFOLU,Saturation Point,100
+ OECD ,Legumes,Pathway,AFOLU,Saturation Point,100
+ OECD ,Legumes,Baseline,AFOLU,Saturation Point,100
+ OECD ,Natural Regeneration,Pathway,AFOLU,Saturation Point,90
+ OECD ,Natural Regeneration,Baseline,AFOLU,Saturation Point,100
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,100
+ OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Saturation Point,100
+ OECD ,Optimal Intensity,Pathway,AFOLU,Saturation Point,100
+ OECD ,Optimal Intensity,Baseline,AFOLU,Saturation Point,100
+ OECD ,Peat Restoration,Pathway,AFOLU,Saturation Point,100
+ OECD ,Peat Restoration,Baseline,AFOLU,Saturation Point,100
+ OECD ,Silvopasture,Pathway,AFOLU,Saturation Point,100
+ OECD ,Silvopasture,Baseline,AFOLU,Saturation Point,100
+ OECD ,Trees in Croplands,Pathway,AFOLU,Saturation Point,100
+ OECD ,Trees in Croplands,Baseline,AFOLU,Saturation Point,100
+ OECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
+ OECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
+ OECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Coastal Restoration,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Coastal Restoration,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Cropland Soil Health,Pathway,AFOLU,Saturation Point,100
@@ -8799,7 +8799,7 @@ NonOECD ,Trees in Croplands,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
-OECD ,Biochar,Pathway,AFOLU,Saturation Point,100
-OECD ,Biochar,Baseline,AFOLU,Saturation Point,100
+ OECD ,Biochar,Pathway,AFOLU,Saturation Point,100
+ OECD ,Biochar,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Biochar,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Biochar,Baseline,AFOLU,Saturation Point,100
