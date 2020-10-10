@@ -2870,11 +2870,11 @@ NAM ,Fossil fuels,Pathway,,"Parameter a, max",5
 NAM ,Fossil fuels,Baseline,,"Parameter a, max",5
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
-NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.11
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.01
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter a, max",100
 OECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 OECD ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",0
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.01
 OECD ,Fossil fuels,Baseline,Electricity,"Parameter a, max",100
 RUS ,Fossil fuels,Pathway,,"Parameter a, max",5
 RUS ,Fossil fuels,Baseline,,"Parameter a, max",5
@@ -2917,11 +2917,11 @@ NAM ,Fossil fuels,Pathway,,"Parameter a, min",0
 NAM ,Fossil fuels,Baseline,,"Parameter a, min",0
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
-NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.11
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-10
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter a, min",100
 OECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 OECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.11
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-10
 OECD ,Fossil fuels,Baseline,Electricity,"Parameter a, min",100
 RUS ,Fossil fuels,Pathway,,"Parameter a, min",0
 RUS ,Fossil fuels,Baseline,,"Parameter a, min",0
@@ -2964,11 +2964,11 @@ NAM ,Fossil fuels,Pathway,,"Parameter b, max",100
 NAM ,Fossil fuels,Baseline,,"Parameter b, max",100
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
-NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",20
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",50
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter b, max",-100
 OECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 OECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",15
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",50
 OECD ,Fossil fuels,Baseline,Electricity,"Parameter b, max",-100
 RUS ,Fossil fuels,Pathway,,"Parameter b, max",100
 RUS ,Fossil fuels,Baseline,,"Parameter b, max",100
@@ -3011,11 +3011,11 @@ NAM ,Fossil fuels,Pathway,,"Parameter b, min",0
 NAM ,Fossil fuels,Baseline,,"Parameter b, min",0
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
-NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",20
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",50
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter b, min",-100
 OECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
 OECD ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",15
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, min",50
 OECD ,Fossil fuels,Baseline,Electricity,"Parameter b, min",-100
 RUS ,Fossil fuels,Pathway,,"Parameter b, min",0
 RUS ,Fossil fuels,Baseline,,"Parameter b, min",0
@@ -3058,11 +3058,11 @@ NAM ,Fossil fuels,Baseline,,Saturation Point,100
 NAM ,Fossil fuels,Pathway,,Saturation Point,0
 NonOECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
 NonOECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
-NonOECD ,Fossil fuels,Pathway,Electricity,Saturation Point,71
+NonOECD ,Fossil fuels,Pathway,Electricity,Saturation Point,200
 NonOECD ,Fossil fuels,Baseline,Electricity,Saturation Point,70.5
 OECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
 OECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
-OECD ,Fossil fuels,Pathway,Electricity,Saturation Point,70
+OECD ,Fossil fuels,Pathway,Electricity,Saturation Point,200
 OECD ,Fossil fuels,Baseline,Electricity,Saturation Point,64.3
 RUS ,Fossil fuels,Baseline,,Saturation Point,100
 RUS ,Fossil fuels,Pathway,,Saturation Point,0

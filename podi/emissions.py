@@ -193,7 +193,7 @@ def emissions(
         em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
             ["Region", "Sector", "Metric"]
         )
-        em = (em.append(afolu_em).append(addtl_em)) * 0.84
+        em = (em * 1 / 0.88).append(afolu_em).append(addtl_em)
     else:
         em = (
             elec_em.loc[slice(None), slice(None), "Fossil fuels"]
