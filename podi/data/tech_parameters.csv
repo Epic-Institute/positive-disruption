@@ -56,10 +56,10 @@ ME ,Grid,Baseline,,Consumption:Generation,0.88
 ME ,Grid,Pathway,,Consumption:Generation,0.88
 NAM ,Grid,Baseline,,Consumption:Generation,0.88
 NAM ,Grid,Pathway,,Consumption:Generation,0.88
-NonOECD ,Grid,Baseline,Electricity,Consumption:Generation,0.88
-NonOECD ,Grid,Pathway,Electricity,Consumption:Generation,0.88
-OECD ,Grid,Baseline,Electricity,Consumption:Generation,0.88
-OECD ,Grid,Pathway,Electricity,Consumption:Generation,0.88
+NonOECD ,Grid,Baseline,Electricity,Consumption:Generation,1
+NonOECD ,Grid,Pathway,Electricity,Consumption:Generation,1
+OECD ,Grid,Baseline,Electricity,Consumption:Generation,1
+OECD ,Grid,Pathway,Electricity,Consumption:Generation,1
 RUS ,Grid,Baseline,,Consumption:Generation,0.88
 RUS ,Grid,Pathway,,Consumption:Generation,0.88
 SAFR ,Grid,Baseline,,Consumption:Generation,0.88
@@ -3289,7 +3289,7 @@ NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.11
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter a, max",100
 OECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 OECD ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",0
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.11
 OECD ,Fossil fuels,Baseline,Electricity,"Parameter a, max",100
 RUS ,Fossil fuels,Pathway,,"Parameter a, max",5
 RUS ,Fossil fuels,Baseline,,"Parameter a, max",5
@@ -4568,11 +4568,11 @@ NAM ,Fossil fuels,Pathway,,"Parameter a, min",0
 NAM ,Fossil fuels,Baseline,,"Parameter a, min",0
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
-NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.11
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.3
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter a, min",100
 OECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 OECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
-OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.11
+OECD ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.4
 OECD ,Fossil fuels,Baseline,Electricity,"Parameter a, min",100
 RUS ,Fossil fuels,Pathway,,"Parameter a, min",0
 RUS ,Fossil fuels,Baseline,,"Parameter a, min",0
@@ -5851,7 +5851,7 @@ NAM ,Fossil fuels,Pathway,,"Parameter b, max",100
 NAM ,Fossil fuels,Baseline,,"Parameter b, max",100
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
-NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",20
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",25
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter b, max",-100
 OECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 OECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
@@ -8221,11 +8221,11 @@ NAM ,Fossil fuels,Pathway,,Saturation Point,0
 NonOECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
 NonOECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
 NonOECD ,Fossil fuels,Pathway,Electricity,Saturation Point,71
-NonOECD ,Fossil fuels,Baseline,Electricity,Saturation Point,70.5
+NonOECD ,Fossil fuels,Baseline,Electricity,Saturation Point,72
 OECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
 OECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
-OECD ,Fossil fuels,Pathway,Electricity,Saturation Point,70
-OECD ,Fossil fuels,Baseline,Electricity,Saturation Point,64.3
+OECD ,Fossil fuels,Pathway,Electricity,Saturation Point,65
+OECD ,Fossil fuels,Baseline,Electricity,Saturation Point,66
 RUS ,Fossil fuels,Baseline,,Saturation Point,100
 RUS ,Fossil fuels,Pathway,,Saturation Point,0
 SAFR ,Fossil fuels,Baseline,,Saturation Point,100
