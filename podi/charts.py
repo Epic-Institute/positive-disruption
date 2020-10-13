@@ -747,6 +747,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.stackplot(fig.columns.astype(int), fig, labels=fig.index, colors=color2)
         plt.ylabel("TFC (TWh)")
         plt.xlim([2010, 2100])
+        plt.xticks(np.arange(2010, 2110, step=10))
         plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)

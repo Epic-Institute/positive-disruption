@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import curve_fit, differential_evolution
 from numpy import NaN
-from podi.energy_supply import data_end_year, hist_elec_consump, hist_per_elec_consump
 
 
 def func(x, a, b, c, d):
@@ -21,19 +20,30 @@ def adoption_curve(value, region, scenario, sector):
     )
 
     # for technologies defined to remain constant/decrease, set saturation point to value of historical adoption level
-    if value.name.isin(
-        [
-            "Nuclear",
-            "Geothermal",
-            "Hydroelectricity",
-            "Fossil fuels",
-            "Biomass and waste",
-            "Coal",
-            "Hydroelectric pumped storage",
-            "Natural gas",
-            "Oil",
-        ]
+    if (
+        np.any(
+            pd.Series(value.name).isin(
+                [
+                    "Nuclear",
+                    "Geothermal",
+                    "Hydroelectricity",
+                    "Fossil fuels",
+                    "Biomass and waste",
+                    "Coal",
+                    "Hydroelectric pumped storage",
+                    "Natural gas",
+                    "Oil",
+                ]
+            )
+        )
+        is True
     ):
+        from podi.energy_supply import (
+            hist_elec_consump,
+            hist_per_elec_consump,
+            data_end_year,
+        )
+
         parameters.loc[region, value.name, scenario, sector, "Saturation Point"].Value[
             0
         ] = hist_per_elec_consump(
@@ -193,7 +203,5 @@ def adoption_curve(value, region, scenario, sector):
 
     y_growth = np.array(y_growth)
     """
-
-    parameters = pd.to_csv("podi/data/tech_parameters.csv")
 
     return pd.DataFrame(data=y, index=years)

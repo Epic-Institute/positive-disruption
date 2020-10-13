@@ -1356,7 +1356,7 @@ NonOECD ,Solar thermal,Baseline,Heat,Floor,0
 NonOECD ,Solar thermal,Pathway,Heat,Floor,2
  OECD ,Solar thermal,Baseline,Heat,Floor,0
  OECD ,Solar thermal,Baseline,Heat,Floor,0
- OECD ,Solar thermal,Pathway,Heat,Floor,2
+ OECD ,Solar thermal,Pathway,Heat,Floor,0
 RUS ,Solar thermal,Pathway,Industry,Floor,0
 RUS ,Solar thermal,Pathway,Buildings,Floor,0
 RUS ,Solar thermal,Baseline,Industry,Floor,0
@@ -6540,7 +6540,7 @@ ME ,Solar thermal,Baseline,,"Parameter b, max",100
 NAM ,Solar thermal,Pathway,,"Parameter b, max",100
 NAM ,Solar thermal,Baseline,,"Parameter b, max",100
 NonOECD ,Solar thermal,Baseline,Heat,"Parameter b, max",-100
-NonOECD ,Solar thermal,Pathway,Heat,"Parameter b, max",35
+NonOECD ,Solar thermal,Pathway,Heat,"Parameter b, max",30
  OECD ,Solar thermal,Baseline,Heat,"Parameter b, max",-100
  OECD ,Solar thermal,Pathway,Heat,"Parameter b, max",30
 RUS ,Solar thermal,Pathway,,"Parameter b, max",100
@@ -6637,11 +6637,11 @@ World ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
 World ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Waste,Pathway,Electricity,"Parameter b, max",40
 NonOECD ,Waste,Baseline,Electricity,"Parameter b, max",100
-NonOECD ,Waste,Pathway,Heat,"Parameter b, max",15
+NonOECD ,Waste,Pathway,Heat,"Parameter b, max",30
 NonOECD ,Waste,Baseline,Heat,"Parameter b, max",-100
  OECD ,Waste,Pathway,Electricity,"Parameter b, max",40
  OECD ,Waste,Baseline,Electricity,"Parameter b, max",100
- OECD ,Waste,Pathway,Heat,"Parameter b, max",15
+ OECD ,Waste,Pathway,Heat,"Parameter b, max",30
  OECD ,Waste,Baseline,Heat,"Parameter b, max",-100
 World ,Waste,Pathway,Electricity,"Parameter b, max",40
 World ,Waste,Baseline,Electricity,"Parameter b, max",100
@@ -7823,7 +7823,7 @@ ME ,Solar thermal,Baseline,,"Parameter b, min",0
 NAM ,Solar thermal,Pathway,,"Parameter b, min",0
 NAM ,Solar thermal,Baseline,,"Parameter b, min",0
 NonOECD ,Solar thermal,Baseline,Heat,"Parameter b, min",-100
-NonOECD ,Solar thermal,Pathway,Heat,"Parameter b, min",35
+NonOECD ,Solar thermal,Pathway,Heat,"Parameter b, min",30
  OECD ,Solar thermal,Baseline,Heat,"Parameter b, min",-100
  OECD ,Solar thermal,Pathway,Heat,"Parameter b, min",30
 RUS ,Solar thermal,Pathway,,"Parameter b, min",0
@@ -8401,7 +8401,7 @@ NAM ,Hydroelectricity,Pathway,,Saturation Point,15
 NonOECD ,Hydroelectricity,Baseline,Electricity,Saturation Point,19
 NonOECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,18.9
  OECD ,Hydroelectricity,Baseline,Electricity,Saturation Point,16.5
- OECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,16.5
+ OECD ,Hydroelectricity,Pathway,Electricity,Saturation Point,13.24
 Other ,Hydroelectricity,Pathway,,Saturation Point,0
 RUS ,Hydroelectricity,Baseline,,Saturation Point,5
 RUS ,Hydroelectricity,Pathway,,Saturation Point,9
@@ -8621,7 +8621,7 @@ NAM ,Solar thermal,Baseline,Buildings,Saturation Point,10
 NAM ,Solar thermal,Pathway,Industry,Saturation Point,38
 NAM ,Solar thermal,Pathway,Buildings,Saturation Point,100
 NonOECD ,Solar thermal,Baseline,Heat,Saturation Point,0
-NonOECD ,Solar thermal,Pathway,Heat,Saturation Point,40
+NonOECD ,Solar thermal,Pathway,Heat,Saturation Point,70
  OECD ,Solar thermal,Baseline,Heat,Saturation Point,0
  OECD ,Solar thermal,Pathway,Heat,Saturation Point,100
 RUS ,Solar thermal,Baseline,Industry,Saturation Point,10
@@ -8685,11 +8685,11 @@ World ,Trees in Croplands,Pathway,AFOLU,Saturation Point,100
 World ,Trees in Croplands,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Waste,Pathway,Electricity,Saturation Point,23
 NonOECD ,Waste,Baseline,Electricity,Saturation Point,0
-NonOECD ,Waste,Pathway,Heat,Saturation Point,10
+NonOECD ,Waste,Pathway,Heat,Saturation Point,15
 NonOECD ,Waste,Baseline,Heat,Saturation Point,0.4
  OECD ,Waste,Pathway,Electricity,Saturation Point,23
  OECD ,Waste,Baseline,Electricity,Saturation Point,0
- OECD ,Waste,Pathway,Heat,Saturation Point,10
+ OECD ,Waste,Pathway,Heat,Saturation Point,15
  OECD ,Waste,Baseline,Heat,Saturation Point,0.94
 World ,Waste,Pathway,Electricity,Saturation Point,23
 World ,Waste,Baseline,Electricity,Saturation Point,5
