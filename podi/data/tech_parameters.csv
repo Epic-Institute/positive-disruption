@@ -3727,11 +3727,11 @@ ME ,Nuclear,Baseline,,"Parameter a, max",-0.1
 NAM ,Nuclear,Pathway,,"Parameter a, max",-0.1
 NAM ,Nuclear,Baseline,,"Parameter a, max",-0.1
 NonOECD ,Nuclear,Baseline,Electricity,"Parameter a, max",-100
-NonOECD ,Nuclear,Pathway,Electricity,"Parameter a, max",-100
+NonOECD ,Nuclear,Pathway,Electricity,"Parameter a, max",-0.02
 NonOECD ,Nuclear,Baseline,Heat,"Parameter a, max",100
 NonOECD ,Nuclear,Pathway,Heat,"Parameter a, max",-0.02
  OECD ,Nuclear,Baseline,Electricity,"Parameter a, max",-100
- OECD ,Nuclear,Pathway,Electricity,"Parameter a, max",-100
+ OECD ,Nuclear,Pathway,Electricity,"Parameter a, max",-0.02
  OECD ,Nuclear,Baseline,Heat,"Parameter a, max",100
  OECD ,Nuclear,Pathway,Heat,"Parameter a, max",-0.02
 RUS ,Nuclear,Pathway,,"Parameter a, max",-0.1
@@ -5010,11 +5010,11 @@ ME ,Nuclear,Baseline,,"Parameter a, min",-0.1
 NAM ,Nuclear,Pathway,,"Parameter a, min",-0.1
 NAM ,Nuclear,Baseline,,"Parameter a, min",-0.1
 NonOECD ,Nuclear,Baseline,Electricity,"Parameter a, min",-100
-NonOECD ,Nuclear,Pathway,Electricity,"Parameter a, min",-100
+NonOECD ,Nuclear,Pathway,Electricity,"Parameter a, min",-0.03
 NonOECD ,Nuclear,Baseline,Heat,"Parameter a, min",100
 NonOECD ,Nuclear,Pathway,Heat,"Parameter a, min",-0.02
  OECD ,Nuclear,Baseline,Electricity,"Parameter a, min",-100
- OECD ,Nuclear,Pathway,Electricity,"Parameter a, min",-100
+ OECD ,Nuclear,Pathway,Electricity,"Parameter a, min",-0.03
  OECD ,Nuclear,Baseline,Heat,"Parameter a, min",100
  OECD ,Nuclear,Pathway,Heat,"Parameter a, min",-0.02
 RUS ,Nuclear,Pathway,,"Parameter a, min",-0.1
@@ -5851,11 +5851,11 @@ NAM ,Fossil fuels,Pathway,,"Parameter b, max",100
 NAM ,Fossil fuels,Baseline,,"Parameter b, max",100
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
-NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",25
+NonOECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",35
 NonOECD ,Fossil fuels,Baseline,Electricity,"Parameter b, max",-100
  OECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
  OECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
- OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",15
+ OECD ,Fossil fuels,Pathway,Electricity,"Parameter b, max",25
  OECD ,Fossil fuels,Baseline,Electricity,"Parameter b, max",-100
 RUS ,Fossil fuels,Pathway,,"Parameter b, max",100
 RUS ,Fossil fuels,Baseline,,"Parameter b, max",100
@@ -6293,11 +6293,11 @@ ME ,Nuclear,Baseline,,"Parameter b, max",43
 NAM ,Nuclear,Pathway,,"Parameter b, max",43
 NAM ,Nuclear,Baseline,,"Parameter b, max",43
 NonOECD ,Nuclear,Baseline,Electricity,"Parameter b, max",100
-NonOECD ,Nuclear,Pathway,Electricity,"Parameter b, max",100
+NonOECD ,Nuclear,Pathway,Electricity,"Parameter b, max",60
 NonOECD ,Nuclear,Baseline,Heat,"Parameter b, max",-100
 NonOECD ,Nuclear,Pathway,Heat,"Parameter b, max",100
  OECD ,Nuclear,Baseline,Electricity,"Parameter b, max",100
- OECD ,Nuclear,Pathway,Electricity,"Parameter b, max",100
+ OECD ,Nuclear,Pathway,Electricity,"Parameter b, max",60
  OECD ,Nuclear,Baseline,Heat,"Parameter b, max",-100
  OECD ,Nuclear,Pathway,Heat,"Parameter b, max",100
 RUS ,Nuclear,Pathway,,"Parameter b, max",43
@@ -6637,7 +6637,7 @@ World ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
 World ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Waste,Pathway,Electricity,"Parameter b, max",40
 NonOECD ,Waste,Baseline,Electricity,"Parameter b, max",100
-NonOECD ,Waste,Pathway,Heat,"Parameter b, max",30
+NonOECD ,Waste,Pathway,Heat,"Parameter b, max",25
 NonOECD ,Waste,Baseline,Heat,"Parameter b, max",-100
  OECD ,Waste,Pathway,Electricity,"Parameter b, max",40
  OECD ,Waste,Baseline,Electricity,"Parameter b, max",100
@@ -7577,11 +7577,11 @@ ME ,Nuclear,Baseline,,"Parameter b, min",43
 NAM ,Nuclear,Pathway,,"Parameter b, min",43
 NAM ,Nuclear,Baseline,,"Parameter b, min",43
 NonOECD ,Nuclear,Baseline,Electricity,"Parameter b, min",100
-NonOECD ,Nuclear,Pathway,Electricity,"Parameter b, min",100
+NonOECD ,Nuclear,Pathway,Electricity,"Parameter b, min",0
 NonOECD ,Nuclear,Baseline,Heat,"Parameter b, min",-100
 NonOECD ,Nuclear,Pathway,Heat,"Parameter b, min",0
  OECD ,Nuclear,Baseline,Electricity,"Parameter b, min",100
- OECD ,Nuclear,Pathway,Electricity,"Parameter b, min",100
+ OECD ,Nuclear,Pathway,Electricity,"Parameter b, min",0
  OECD ,Nuclear,Baseline,Heat,"Parameter b, min",-100
  OECD ,Nuclear,Pathway,Heat,"Parameter b, min",0
 RUS ,Nuclear,Pathway,,"Parameter b, min",43
@@ -8464,11 +8464,11 @@ ME ,Nuclear,Pathway,,Saturation Point,10
 NAM ,Nuclear,Baseline,,Saturation Point,20
 NAM ,Nuclear,Pathway,,Saturation Point,10
 NonOECD ,Nuclear,Baseline,Electricity,Saturation Point,4.5931
-NonOECD ,Nuclear,Pathway,Electricity,Saturation Point,4.5931
+NonOECD ,Nuclear,Pathway,Electricity,Saturation Point,5
 NonOECD ,Nuclear,Baseline,Heat,Saturation Point,0.06
 NonOECD ,Nuclear,Pathway,Heat,Saturation Point,0.1
  OECD ,Nuclear,Baseline,Electricity,Saturation Point,17.6844
- OECD ,Nuclear,Pathway,Electricity,Saturation Point,17.6844
+ OECD ,Nuclear,Pathway,Electricity,Saturation Point,31
  OECD ,Nuclear,Baseline,Heat,Saturation Point,0.06
  OECD ,Nuclear,Pathway,Heat,Saturation Point,0.1
 RUS ,Nuclear,Baseline,,Saturation Point,20
@@ -8621,7 +8621,7 @@ NAM ,Solar thermal,Baseline,Buildings,Saturation Point,10
 NAM ,Solar thermal,Pathway,Industry,Saturation Point,38
 NAM ,Solar thermal,Pathway,Buildings,Saturation Point,100
 NonOECD ,Solar thermal,Baseline,Heat,Saturation Point,0
-NonOECD ,Solar thermal,Pathway,Heat,Saturation Point,70
+NonOECD ,Solar thermal,Pathway,Heat,Saturation Point,40
  OECD ,Solar thermal,Baseline,Heat,Saturation Point,0
  OECD ,Solar thermal,Pathway,Heat,Saturation Point,100
 RUS ,Solar thermal,Baseline,Industry,Saturation Point,10
