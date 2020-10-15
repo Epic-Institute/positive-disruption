@@ -5,12 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import PercentFormatter
-import matplotlib.animation as animation
-from IPython.display import HTML
 from podi.data.iea_weo_etl import iea_region_list
-import pyam
-from scipy.interpolate import interp1d, UnivariateSpline
-from matplotlib.animation import FuncAnimation
 from podi.energy_supply import (
     data_end_year,
     data_start_year,
@@ -264,7 +259,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
         plt.axhline(y=0, color=(0, 0, 0), linestyle=":")
         plt.ylabel("GtCO2e/yr")
-        plt.xlim([2020, 2100])
+        plt.xlim([2010, 2100])
         plt.grid(which="major", linestyle=":", axis="y")
         plt.legend(
             custom_legend,
@@ -286,7 +281,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             loc=2,
             borderaxespad=0.0,
         )
-        plt.xticks(np.arange(2020, 2110, 10))
+        plt.xticks(np.arange(2010, 2110, 10))
         plt.yticks(np.arange(-25, 95, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
 
@@ -623,13 +618,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         ("Electricity", "Nuclear"): ("Electricity", "Nuclear"),
         ("Electricity", "Solar"): ("Electricity", "Solar"),
         ("Electricity", "Wind"): ("Electricity", "Wind"),
-        ("Heat", "Fossil fuels"): ("Heat", "Fossil fuels"),
+        ("Heat", "Fossil fuels"): ("Heat", "Other Fossil fuels"),
         ("Heat", "Bioenergy"): ("Heat", "Bioenergy"),
-        ("Heat", "Coal"): ("Heat", "Fossil fuels"),
+        ("Heat", "Coal"): ("Heat", "Other Fossil fuels"),
         ("Heat", "Geothermal"): ("Heat", "Geothermal"),
-        ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
+        ("Heat", "Natural gas"): ("Heat", "Other Fossil fuels"),
         ("Heat", "Nuclear"): ("Heat", "Nuclear"),
-        ("Heat", "Oil"): ("Heat", "Fossil fuels"),
+        ("Heat", "Oil"): ("Heat", "Other Fossil fuels"),
         ("Heat", "Other sources"): ("Heat", "Fossil fuels"),
         ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),
         ("Heat", "Waste"): ("Heat", "Biochar"),
@@ -660,21 +655,23 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # region
 
     for i in range(0, 1):
-        elec_consump_i = (
+        elec_consump_baseline_i = (
             elec_consump_baseline.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
-        elec_consump_i = pd.concat(
-            [elec_consump_i], keys=["Electricity"], names=["Sector"]
+        elec_consump_baseline_i = pd.concat(
+            [elec_consump_baseline_i], keys=["Electricity"], names=["Sector"]
         )
-        heat_consump_i = (
+        heat_consump_baseline_i = (
             heat_consump_baseline.loc[[" OECD ", "NonOECD "], slice(None)]
             .groupby("Metric")
             .sum()
         )
-        heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
-        transport_consump_i = (
+        heat_consump_baseline_i = pd.concat(
+            [heat_consump_baseline_i], keys=["Heat"], names=["Sector"]
+        )
+        transport_consump_baseline_i = (
             transport_consump_baseline.loc[
                 [" OECD ", "NonOECD "],
                 slice(None),
@@ -682,13 +679,15 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             .groupby("Metric")
             .sum()
         )
-        transport_consump_i = pd.concat(
-            [transport_consump_i], keys=["Transport"], names=["Sector"]
+        transport_consump_baseline_i = pd.concat(
+            [transport_consump_baseline_i], keys=["Transport"], names=["Sector"]
         )
         fig = pd.DataFrame(
-            (elec_consump_i.append(heat_consump_i).append(transport_consump_i)).loc[
-                :, 2010:2100
-            ]
+            (
+                elec_consump_baseline_i.append(heat_consump_baseline_i).append(
+                    transport_consump_baseline_i
+                )
+            ).loc[:, 2010:2100]
         )
         fig = fig.groupby(group_keys).sum()
         fig = fig.reindex(tech_list)
@@ -746,7 +745,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.figure(i)
         plt.stackplot(fig.columns.astype(int), fig, labels=fig.index, colors=color2)
         plt.ylabel("TFC (TWh)")
-        plt.xlim([2010, 2100])
+        plt.xlim([2020, 2100])
         plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)

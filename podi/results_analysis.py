@@ -351,8 +351,7 @@ def results_analysis(
     # region
 
     ra_decarb = afolu_per_adoption.loc[
-        [" OECD ", "NonOECD "],
-        slice(None),
+        region,
         [
             "Biochar",
             "Cropland Soil Health",
@@ -364,7 +363,7 @@ def results_analysis(
             "Optimal Intensity",
             "Silvopasture",
         ],
-        slice(None),
+        :,
     ]
     ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
         index={0: "Regenerative Agriculture"}
@@ -378,8 +377,7 @@ def results_analysis(
     # region
 
     fw_decarb = afolu_per_adoption.loc[
-        [" OECD ", "NonOECD "],
-        slice(None),
+        region,
         [
             " Avoided Coastal Impacts ",
             " Avoided Forest Conversion ",
@@ -389,7 +387,7 @@ def results_analysis(
             " Peat Restoration ",
             " Natural Regeneration ",
         ],
-        slice(None),
+        :,
     ]
     fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
         index={0: "Forests & Wetlands"}

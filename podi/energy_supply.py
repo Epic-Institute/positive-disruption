@@ -51,6 +51,25 @@ def energy_supply(scenario, energy_demand):
         .values
     )
 
+    heat_gen_data.loc[slice(None), slice(None), "Other sources", scenario] = (
+        energy_demand.loc[
+            ["World ", " OECD ", "NonOECD "],
+            ["Industry", "Buildings"],
+            ["Coal", "Oil", "Natural gas"],
+            slice(None),
+        ]
+        .groupby("IEA Region")
+        .sum()
+        .loc[:, data_start_year:data_end_year]
+        .reindex(
+            index=heat_gen_data.loc[
+                slice(None), slice(None), "Other sources", scenario
+            ].index,
+            level=0,
+        )
+        .values
+    )
+
     transport_data = (
         energy_demand.loc[
             slice(None),
@@ -197,7 +216,17 @@ def energy_supply(scenario, energy_demand):
         return proj_consump
 
     # join timeseries of historical and projected electricity consumption met by a given technology
-    def consump(hist_elec_consump, proj_elec_consump):
+    def consump(region, hist_elec_consump, hist_per_elec_consump, proj_elec_consump):
+        hist_elec_consump = hist_per_elec_consump.apply(
+            lambda x: x
+            * (
+                energy_demand.loc[region, "TFC", "Electricity", scenario]
+                .loc[str(data_start_year) : str(data_end_year)]
+                .values.T
+            ),
+            axis=1,
+        )
+
         hist_elec_consump.drop(labels="Generation", inplace=True)
         return hist_elec_consump.join(proj_elec_consump)
 
@@ -209,7 +238,11 @@ def energy_supply(scenario, energy_demand):
     # combine above functions to get electricity consumption met by a given technology
     def consump_total(region, scenario):
         consump_total = consump(
+            region,
             hist_elec_consump(region, scenario),
+            hist_per_elec_consump(
+                region, scenario, hist_elec_consump(region, scenario)
+            ),
             proj_elec_consump(
                 region,
                 scenario,
@@ -254,7 +287,11 @@ def energy_supply(scenario, energy_demand):
         # percent_adoption.drop(labels="Generation", level=1, inplace=True)
 
         consump_cdr = consump(
+            region,
             hist_elec_consump(region, scenario) * 0,
+            hist_per_elec_consump(
+                region, scenario, hist_elec_consump(region, scenario)
+            ),
             proj_elec_consump(
                 region,
                 scenario,

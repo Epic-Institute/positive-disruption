@@ -202,6 +202,27 @@ def emissions(
             .append(addtl_em)
         )
     else:
+        em2 = (
+            pd.read_csv("podi/data/emissions_baseline.csv")
+            .set_index(["Region", "Sector", "Unit"])
+            .droplevel(["Unit"])
+            .loc[[" OECD ", "NonOECD "]]
+        )
+        em2.columns = em2.columns.astype(int)
+        em2 = pd.concat([em2], keys=["Emissions"], names=["Metric"]).reorder_levels(
+            ["Region", "Sector", "Metric"]
+        )
+        em2 = (
+            (em2.loc[slice(None), ["Electricity"], slice(None)] * 0.88)
+            .append(
+                em2.loc[
+                    slice(None), ["Industry", "Transport", "Buildings"], slice(None)
+                ]
+            )
+            .append(afolu_em)
+            .append(addtl_em)
+        )
+
         em = (
             elec_em.loc[slice(None), slice(None), "Fossil fuels"]
             .append(transport_em)
@@ -213,6 +234,7 @@ def emissions(
         em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
             ["Region", "Sector", "Metric"]
         )
+        em.loc[:, 2010:2020] = em2.loc[:, 2010:2020]
 
     # Add emissions targets
     em_targets = pd.read_csv(targets_em).set_index("Scenario")
