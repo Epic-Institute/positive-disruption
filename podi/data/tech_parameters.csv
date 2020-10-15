@@ -5038,7 +5038,7 @@ NonOECD ,Oil,Pathway,Transport,"Parameter a, min",-0.09
  OECD ,Oil,Baseline,Heat,"Parameter a, min",100
  OECD ,Oil,Pathway,Heat,"Parameter a, min",-0.07
  OECD ,Oil,Baseline,Transport,"Parameter a, min",100
- OECD ,Oil,Pathway,Transport,"Parameter a, min",-0.08
+ OECD ,Oil,Pathway,Transport,"Parameter a, min",-0.2
 World ,Oil,Pathway,Electricity,"Parameter a, min",-0.1074
 World ,Oil,Baseline,Electricity,"Parameter a, min",100
 World ,Oil,Pathway,Heat,"Parameter a, min",-0.1074
@@ -8071,11 +8071,11 @@ World ,Biochar,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Bioenergy,Pathway,Electricity,Saturation Point,50
 NonOECD ,Bioenergy,Baseline,Electricity,Saturation Point,0
 NonOECD ,Bioenergy,Pathway,Heat,Saturation Point,54.4
-NonOECD ,Bioenergy,Baseline,Heat,Saturation Point,35
+NonOECD ,Bioenergy,Baseline,Heat,Saturation Point,23.9
  OECD ,Bioenergy,Pathway,Electricity,Saturation Point,50
  OECD ,Bioenergy,Baseline,Electricity,Saturation Point,0
  OECD ,Bioenergy,Pathway,Heat,Saturation Point,12.88
- OECD ,Bioenergy,Baseline,Heat,Saturation Point,35
+ OECD ,Bioenergy,Baseline,Heat,Saturation Point,6.4
 World ,Bioenergy,Baseline,Electricity,Saturation Point,50
 World ,Bioenergy,Pathway,Electricity,Saturation Point,50
 World ,Bioenergy,Baseline,Heat,Saturation Point,50
@@ -8168,11 +8168,11 @@ World ,Biomass and waste,Baseline,Electricity,Saturation Point,5
 World ,Biomass and waste,Pathway,Electricity,Saturation Point,5
 NonOECD ,Coal,Baseline,Electricity,Saturation Point,0
 NonOECD ,Coal,Pathway,Electricity,Saturation Point,0
-NonOECD ,Coal,Baseline,Heat,Saturation Point,13.1
+NonOECD ,Coal,Baseline,Heat,Saturation Point,4.3
 NonOECD ,Coal,Pathway,Heat,Saturation Point,32
  OECD ,Coal,Baseline,Electricity,Saturation Point,0
  OECD ,Coal,Pathway,Electricity,Saturation Point,0
- OECD ,Coal,Baseline,Heat,Saturation Point,13.1
+ OECD ,Coal,Baseline,Heat,Saturation Point,1.5
  OECD ,Coal,Pathway,Heat,Saturation Point,32
 World ,Coal,Baseline,Electricity,Saturation Point,100
 World ,Coal,Pathway,Electricity,Saturation Point,0
@@ -8221,11 +8221,11 @@ NAM ,Fossil fuels,Pathway,,Saturation Point,0
 NonOECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
 NonOECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
 NonOECD ,Fossil fuels,Pathway,Electricity,Saturation Point,71
-NonOECD ,Fossil fuels,Baseline,Electricity,Saturation Point,72
+NonOECD ,Fossil fuels,Baseline,Electricity,Saturation Point,70.5
  OECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
  OECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
  OECD ,Fossil fuels,Pathway,Electricity,Saturation Point,65
- OECD ,Fossil fuels,Baseline,Electricity,Saturation Point,66
+ OECD ,Fossil fuels,Baseline,Electricity,Saturation Point,56
 RUS ,Fossil fuels,Baseline,,Saturation Point,100
 RUS ,Fossil fuels,Pathway,,Saturation Point,0
 SAFR ,Fossil fuels,Baseline,,Saturation Point,100
@@ -8419,11 +8419,11 @@ World ,Legumes,Pathway,AFOLU,Saturation Point,100
 World ,Legumes,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Natural gas,Baseline,Electricity,Saturation Point,0
 NonOECD ,Natural gas,Pathway,Electricity,Saturation Point,0
-NonOECD ,Natural gas,Baseline,Heat,Saturation Point,13.1
+NonOECD ,Natural gas,Baseline,Heat,Saturation Point,4.3
 NonOECD ,Natural gas,Pathway,Heat,Saturation Point,32
  OECD ,Natural gas,Baseline,Electricity,Saturation Point,0
  OECD ,Natural gas,Pathway,Electricity,Saturation Point,0
- OECD ,Natural gas,Baseline,Heat,Saturation Point,14.2
+ OECD ,Natural gas,Baseline,Heat,Saturation Point,2.6
  OECD ,Natural gas,Pathway,Heat,Saturation Point,32
 World ,Natural gas,Baseline,Electricity,Saturation Point,100
 World ,Natural gas,Pathway,Electricity,Saturation Point,0
@@ -8483,13 +8483,13 @@ World ,Nuclear,Baseline,Heat,Saturation Point,20
 World ,Nuclear,Pathway,Heat,Saturation Point,0.1
 NonOECD ,Oil,Baseline,Electricity,Saturation Point,0
 NonOECD ,Oil,Pathway,Electricity,Saturation Point,100
-NonOECD ,Oil,Baseline,Heat,Saturation Point,1.2
+NonOECD ,Oil,Baseline,Heat,Saturation Point,0.01
 NonOECD ,Oil,Pathway,Heat,Saturation Point,2.6
 NonOECD ,Oil,Baseline,Transport,Saturation Point,90.9
 NonOECD ,Oil,Pathway,Transport,Saturation Point,95
  OECD ,Oil,Baseline,Electricity,Saturation Point,0
  OECD ,Oil,Pathway,Electricity,Saturation Point,100
- OECD ,Oil,Baseline,Heat,Saturation Point,1.4
+ OECD ,Oil,Baseline,Heat,Saturation Point,0.01
  OECD ,Oil,Pathway,Heat,Saturation Point,2.6
  OECD ,Oil,Baseline,Transport,Saturation Point,93.4
  OECD ,Oil,Pathway,Transport,Saturation Point,95
@@ -8508,9 +8508,9 @@ NonOECD ,Other fuels,Baseline,Transport,Saturation Point,6.86
 World ,Other fuels,Pathway,Transport,Saturation Point,5
 World ,Other fuels,Baseline,Transport,Saturation Point,5
 NonOECD ,Other sources,Pathway,Heat,Saturation Point,81.5
-NonOECD ,Other sources,Baseline,Heat,Saturation Point,1
+NonOECD ,Other sources,Baseline,Heat,Saturation Point,66.9
  OECD ,Other sources,Pathway,Heat,Saturation Point,94.7
- OECD ,Other sources,Baseline,Heat,Saturation Point,1.1
+ OECD ,Other sources,Baseline,Heat,Saturation Point,88.4
 World ,Other sources,Pathway,Heat,Saturation Point,2.1
 World ,Other sources,Baseline,Heat,Saturation Point,5
 World ,Peat Restoration,Pathway,AFOLU,Saturation Point,100
@@ -8690,7 +8690,7 @@ NonOECD ,Waste,Baseline,Heat,Saturation Point,0.4
  OECD ,Waste,Pathway,Electricity,Saturation Point,23
  OECD ,Waste,Baseline,Electricity,Saturation Point,0
  OECD ,Waste,Pathway,Heat,Saturation Point,15
- OECD ,Waste,Baseline,Heat,Saturation Point,0.94
+ OECD ,Waste,Baseline,Heat,Saturation Point,0.4
 World ,Waste,Pathway,Electricity,Saturation Point,23
 World ,Waste,Baseline,Electricity,Saturation Point,5
 World ,Waste,Pathway,Heat,Saturation Point,1.3

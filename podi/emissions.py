@@ -114,7 +114,7 @@ def emissions(
         industry_consump
         * heat_per_adoption.loc[
             [" OECD ", "NonOECD "],
-            ["Coal", "Natural gas", "Oil", "Bioenergy", "Biochar"],
+            ["Coal", "Natural gas", "Oil", "Bioenergy", "Waste"],
             slice(None),
         ]
         .groupby("Region")
@@ -194,7 +194,7 @@ def emissions(
             ["Region", "Sector", "Metric"]
         )
         em = (
-            (em.loc[slice(None), ["Electricity"], slice(None)] * 0.88)
+            (em.loc[slice(None), ["Electricity"], slice(None)])
             .append(
                 em.loc[slice(None), ["Industry", "Transport", "Buildings"], slice(None)]
             )
@@ -202,6 +202,7 @@ def emissions(
             .append(addtl_em)
         )
     else:
+        """
         em2 = (
             pd.read_csv("podi/data/emissions_baseline.csv")
             .set_index(["Region", "Sector", "Unit"])
@@ -213,7 +214,7 @@ def emissions(
             ["Region", "Sector", "Metric"]
         )
         em2 = (
-            (em2.loc[slice(None), ["Electricity"], slice(None)] * 0.88)
+            (em2.loc[slice(None), ["Electricity"], slice(None)])
             .append(
                 em2.loc[
                     slice(None), ["Industry", "Transport", "Buildings"], slice(None)
@@ -222,7 +223,7 @@ def emissions(
             .append(afolu_em)
             .append(addtl_em)
         )
-
+        """
         em = (
             elec_em.loc[slice(None), slice(None), "Fossil fuels"]
             .append(transport_em)
@@ -234,8 +235,9 @@ def emissions(
         em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
             ["Region", "Sector", "Metric"]
         )
+        """
         em.loc[:, 2010:2020] = em2.loc[:, 2010:2020]
-
+        """
     # Add emissions targets
     em_targets = pd.read_csv(targets_em).set_index("Scenario")
     em_targets.columns = em_targets.columns.astype(int)

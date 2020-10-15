@@ -146,6 +146,7 @@ em_mitigated = (
     em_baseline.groupby(["Region", "Sector"]).sum().loc[[" OECD ", "NonOECD "]]
     - em_pathway.groupby(["Region", "Sector"]).sum().loc[[" OECD ", "NonOECD "]]
 )
+# em_mitigated.loc[:,:2020] = 0
 
 # endregion
 
