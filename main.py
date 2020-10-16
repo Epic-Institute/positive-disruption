@@ -106,6 +106,7 @@ afolu_em_baseline, afolu_per_adoption_baseline = afolu("Baseline")
 afolu_em_pathway, afolu_per_adoption_pathway = afolu("Pathway")
 
 afolu_em_mitigated = afolu_em_pathway
+afolu_em_mitigated = afolu_em_mitigated.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
 
 # endregion
 
@@ -146,7 +147,6 @@ em_mitigated = (
     em_baseline.groupby(["Region", "Sector"]).sum().loc[[" OECD ", "NonOECD "]]
     - em_pathway.groupby(["Region", "Sector"]).sum().loc[[" OECD ", "NonOECD "]]
 )
-# em_mitigated.loc[:,:2020] = 0
 
 # endregion
 

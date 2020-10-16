@@ -114,7 +114,7 @@ def emissions(
         industry_consump
         * heat_per_adoption.loc[
             [" OECD ", "NonOECD "],
-            ["Coal", "Natural gas", "Oil", "Bioenergy", "Waste"],
+            ["Coal", "Natural gas", "Oil"],
             slice(None),
         ]
         .groupby("Region")

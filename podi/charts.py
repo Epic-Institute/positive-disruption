@@ -134,46 +134,55 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    em_mit_electricity = em_mitigated.loc[slice(None), "Electricity", slice(None)].sum()
+    em_mit_electricity = (
+        em_mitigated.loc[slice(None), "Electricity", slice(None)].sum() * 0.95
+    )
 
-    # need to add in electricity to these?
     em_mit_transport = em_mitigated.loc[slice(None), "Transport", slice(None)].sum()
 
-    em_mit_buildings = em_mitigated.loc[slice(None), "Buildings", slice(None)].sum()
+    em_mit_buildings = (
+        em_mitigated.loc[slice(None), "Buildings", slice(None)].sum() * 0.7
+    )
 
-    em_mit_industry = em_mitigated.loc[slice(None), "Industry", slice(None)].sum()
+    em_mit_industry = em_mitigated.loc[slice(None), "Industry", slice(None)].sum() * 0.6
 
-    em_mit_ra = afolu_em_mitigated.loc[
-        slice(None),
-        [
-            "Biochar",
-            "Cropland Soil Health",
-            "Improved Rice",
-            "Nitrogen Fertilizer Management",
-            "Trees in Croplands",
-            "Animal Mgmt",
-            "Legumes",
-            "Optimal Intensity",
-            "Silvopasture",
-        ],
-        slice(None),
-        slice(None),
-    ].sum()
+    em_mit_ra = (
+        afolu_em_mitigated.loc[
+            slice(None),
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+            ],
+            slice(None),
+            slice(None),
+        ].sum()
+        * 0.95
+    )
 
-    em_mit_fw = afolu_em_mitigated.loc[
-        slice(None),
-        [
-            "Avoided Coastal Impacts",
-            "Avoided Forest Conversion",
-            "Avoided Peat Impacts",
-            "Coastal Restoration",
-            "Improved Forest Mgmt",
-            "Peat Restoration",
-            "Natural Regeneration",
-        ],
-        slice(None),
-        slice(None),
-    ].sum()
+    em_mit_fw = (
+        afolu_em_mitigated.loc[
+            slice(None),
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Peat Restoration",
+                "Natural Regeneration",
+            ],
+            slice(None),
+            slice(None),
+        ].sum()
+        * 0.9
+    )
 
     em_mit_othergas = em_mitigated.loc[slice(None), "Other gases", :].sum()
     """
@@ -211,8 +220,15 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             7: "CDR",
         }
     )
-
+    em_mit.loc[:, :2020] = 0
     spacer = em_targets_pathway.loc["Pathway PD20"]
+    em_targets_pathway.loc["Baseline PD20"] = em_mit.append(spacer).sum()
+    em_targets_pathway.loc["Baseline PD20"].loc[2021] = numpy.mean(
+        [
+            em_targets_pathway.loc["Baseline PD20"].loc[2020],
+            em_targets_pathway.loc["Baseline PD20"].loc[2022],
+        ]
+    )
 
     custom_legend = [
         Line2D([0], [0], color=color[8], linewidth=4),
@@ -259,7 +275,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
         plt.axhline(y=0, color=(0, 0, 0), linestyle=":")
         plt.ylabel("GtCO2e/yr")
-        plt.xlim([2010, 2100])
+        plt.xlim([2020, 2100])
         plt.grid(which="major", linestyle=":", axis="y")
         plt.legend(
             custom_legend,
@@ -281,7 +297,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             loc=2,
             borderaxespad=0.0,
         )
-        plt.xticks(np.arange(2010, 2110, 10))
+        plt.xticks(np.arange(2020, 2110, 10))
         plt.yticks(np.arange(-25, 95, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
 
