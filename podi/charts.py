@@ -138,7 +138,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         em_mitigated.loc[slice(None), "Electricity", slice(None)].sum() * 0.95
     )
 
-    em_mit_transport = em_mitigated.loc[slice(None), "Transport", slice(None)].sum()
+    em_mit_transport = (
+        em_mitigated.loc[slice(None), "Transport", slice(None)].sum() * 1.05
+    )
 
     em_mit_buildings = (
         em_mitigated.loc[slice(None), "Buildings", slice(None)].sum() * 0.7
@@ -181,7 +183,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             slice(None),
             slice(None),
         ].sum()
-        * 0.9
+        * 0.95
     )
 
     em_mit_othergas = em_mitigated.loc[slice(None), "Other gases", :].sum()
@@ -222,12 +224,17 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     )
     em_mit.loc[:, :2020] = 0
     spacer = em_targets_pathway.loc["Pathway PD20"]
+    """
     em_targets_pathway.loc["Baseline PD20"] = em_mit.append(spacer).sum()
     em_targets_pathway.loc["Baseline PD20"].loc[2021] = numpy.mean(
         [
             em_targets_pathway.loc["Baseline PD20"].loc[2020],
             em_targets_pathway.loc["Baseline PD20"].loc[2022],
         ]
+    )
+    """
+    em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
+        em_mit.drop(labels="Electricity").append(spacer).sum()
     )
 
     custom_legend = [
@@ -298,7 +305,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
         plt.xticks(np.arange(2020, 2110, 10))
-        plt.yticks(np.arange(-25, 95, 10))
+        plt.yticks(np.arange(-25, 105, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
 
     # endregion
