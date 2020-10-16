@@ -1406,6 +1406,120 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
+    color = (
+        (0.999, 0.999, 0.999),
+        (0.928, 0.828, 0.824),
+        (0.688, 0.472, 0.460),
+        (0.572, 0.792, 0.744),
+        (0.536, 0.576, 0.432),
+        (0.384, 0.460, 0.560),
+        (0.904, 0.620, 0.384),
+        (0.488, 0.672, 0.736),
+        (0.560, 0.516, 0.640),
+        (0.284, 0.700, 0.936),
+        (0.384, 0.664, 0.600),
+        (0.999, 0.976, 0.332),
+        (0.748, 0.232, 0.204),
+    )
+
+    # endregion
+
+    # region
+
+    em_mit = (
+        afolu_em_mitigated.loc[
+            slice(None),
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+            ],
+            slice(None),
+            slice(None),
+        ].sum()
+        * 0.95
+    )
+
+    em_mit.loc[:, :2020] = 0
+    spacer = ag_net_em
+    baseline = 
+
+
+    custom_legend = [
+        Line2D([0], [0], color=color[8], linewidth=4),
+        Line2D([0], [0], color=color[7], linewidth=4),
+        Line2D([0], [0], color=color[6], linewidth=4),
+        Line2D([0], [0], color=color[5], linewidth=4),
+        Line2D([0], [0], color=color[4], linewidth=4),
+        Line2D([0], [0], color=color[3], linewidth=4),
+        Line2D([0], [0], color=color[2], linewidth=4),
+        Line2D([0], [0], color=color[1], linewidth=4),
+        Line2D([0], [0], color=color[12], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
+    ]
+
+    for i in range(0, 1):
+        fig = ((em_mit.append(spacer)) / 1000).reindex(
+            [
+                spacer.name,
+                "CDR",
+                "CH4, N2O, F-gases",
+                "Agriculture",
+                "Forests & Wetlands",
+                "Industry",
+                "Buildings",
+                "Transport",
+                "Electricity",
+            ]
+        )
+        plt.figure(i)
+        plt.stackplot(
+            fig.T.index,
+            fig,
+            labels=fig.index,
+            colors=color,
+        )
+        plt.plot(fig.T.index, em_targets_pathway.T / 1000, LineStyle="--")
+        plt.legend(
+            loc=2,
+            fontsize="small",
+        )
+        plt.axhline(y=0, color=(0, 0, 0), linestyle=":")
+        plt.ylabel("GtCO2e/yr")
+        plt.xlim([2020, 2100])
+        plt.grid(which="major", linestyle=":", axis="y")
+        plt.legend(
+            custom_legend,
+            [
+                "Electricity",
+                "Transport",
+                "Buildings",
+                "Industry",
+                "Agriculture",
+                "Forests & Wetlands",
+                "CH4, N2O, F-gases",
+                "CDR",
+                "Baseline",
+                "Positive Disruption",
+                "SSP2-RCP1.9",
+                "SSP2-RCP2.6",
+            ],
+            bbox_to_anchor=(1.05, 1),
+            loc=2,
+            borderaxespad=0.0,
+        )
+        plt.xticks(np.arange(2020, 2110, 10))
+        plt.yticks(np.arange(-25, 105, 10))
+        plt.title("Emissions Mitigated, " + iea_region_list[i])
+
     # endregion
 
     ###############################################
@@ -1413,6 +1527,122 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     ###############################################
 
     # region
+
+    color = (
+        (0.999, 0.999, 0.999),
+        (0.928, 0.828, 0.824),
+        (0.688, 0.472, 0.460),
+        (0.572, 0.792, 0.744),
+        (0.536, 0.576, 0.432),
+        (0.384, 0.460, 0.560),
+        (0.904, 0.620, 0.384),
+        (0.488, 0.672, 0.736),
+        (0.560, 0.516, 0.640),
+        (0.284, 0.700, 0.936),
+        (0.384, 0.664, 0.600),
+        (0.999, 0.976, 0.332),
+        (0.748, 0.232, 0.204),
+    )
+
+    # endregion
+
+    # region
+
+    em_mit = (
+        afolu_em_mitigated.loc[
+            slice(None),
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+            ],
+            slice(None),
+            slice(None),
+        ].sum()
+        * 0.95
+    )
+
+    em_mit.loc[:, :2020] = 0
+    spacer = ag_net_em
+    baseline = 
+
+
+    custom_legend = [
+        Line2D([0], [0], color=color[8], linewidth=4),
+        Line2D([0], [0], color=color[7], linewidth=4),
+        Line2D([0], [0], color=color[6], linewidth=4),
+        Line2D([0], [0], color=color[5], linewidth=4),
+        Line2D([0], [0], color=color[4], linewidth=4),
+        Line2D([0], [0], color=color[3], linewidth=4),
+        Line2D([0], [0], color=color[2], linewidth=4),
+        Line2D([0], [0], color=color[1], linewidth=4),
+        Line2D([0], [0], color=color[12], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
+    ]
+
+    # endregion
+
+    for i in range(0, 1):
+        fig = ((em_mit.append(spacer)) / 1000).reindex(
+            [
+                spacer.name,
+                "CDR",
+                "CH4, N2O, F-gases",
+                "Agriculture",
+                "Forests & Wetlands",
+                "Industry",
+                "Buildings",
+                "Transport",
+                "Electricity",
+            ]
+        )
+        plt.figure(i)
+        plt.stackplot(
+            fig.T.index,
+            fig,
+            labels=fig.index,
+            colors=color,
+        )
+        plt.plot(fig.T.index, em_targets_pathway.T / 1000, LineStyle="--")
+        plt.legend(
+            loc=2,
+            fontsize="small",
+        )
+        plt.axhline(y=0, color=(0, 0, 0), linestyle=":")
+        plt.ylabel("GtCO2e/yr")
+        plt.xlim([2020, 2100])
+        plt.grid(which="major", linestyle=":", axis="y")
+        plt.legend(
+            custom_legend,
+            [
+                "Electricity",
+                "Transport",
+                "Buildings",
+                "Industry",
+                "Agriculture",
+                "Forests & Wetlands",
+                "CH4, N2O, F-gases",
+                "CDR",
+                "Baseline",
+                "Positive Disruption",
+                "SSP2-RCP1.9",
+                "SSP2-RCP2.6",
+            ],
+            bbox_to_anchor=(1.05, 1),
+            loc=2,
+            borderaxespad=0.0,
+        )
+        plt.xticks(np.arange(2020, 2110, 10))
+        plt.yticks(np.arange(-25, 105, 10))
+        plt.title("Emissions Mitigated, " + iea_region_list[i])
 
     # Stacked plot
 
