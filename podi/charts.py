@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
+# region
+
 import matplotlib.pyplot as plt
 import numpy as np
-# region
 import pandas as pd
 from matplotlib.lines import Line2D
 from matplotlib.ticker import PercentFormatter
 from scipy.interpolate import interp1d
-
 import pymagicc
 from podi.data.iea_weo_etl import iea_region_list
 from podi.energy_supply import (
@@ -1292,7 +1292,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.804, 0.852, 0.704),
         (0.736, 0.708, 0.796),
         (0.712, 0.168, 0.136),
-        (0.384, 0.664, 0.600)
+        (0.384, 0.664, 0.600),
     )
 
     # endregion
@@ -1321,8 +1321,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     em_mit.loc[:, :2020] = 0
     spacer = ag_net_em
-    baseline = 
-
+    baseline = ag_net_em
 
     custom_legend = [
         Line2D([0], [0], color=color[8], linewidth=4),
@@ -1408,11 +1407,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.804, 0.868, 0.956),
         (0.152, 0.152, 0.152),
         (0.780, 0.756, 0.620),
-        (0.776, 0.504, 0.280)
-        (0.320, 0.560, 0.640),
-        (0.404, 0.332, 0.520)
-        (0.676, 0.144, 0.112),
-        (0.384, 0.664, 0.600)
+        (0.776, 0.504, 0.280)(0.320, 0.560, 0.640),
+        (0.404, 0.332, 0.520)(0.676, 0.144, 0.112),
+        (0.384, 0.664, 0.600),
     )
 
     # endregion
@@ -1441,8 +1438,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     em_mit.loc[:, :2020] = 0
     spacer = ag_net_em
-    baseline = 
-
+    baseline = ag_net_em
 
     custom_legend = [
         Line2D([0], [0], color=color[8], linewidth=4),
@@ -1526,14 +1522,10 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.804, 0.868, 0.956),
         (0.152, 0.152, 0.152),
         (0.780, 0.756, 0.620),
-        (0.776, 0.504, 0.280)
-        (0.320, 0.560, 0.640),
-        (0.404, 0.332, 0.520)
-        (0.356, 0.356, 0.356),
-        (0.584, 0.804, 0.756)
-        (0.656, 0.708, 0.500)
-        (0.704, 0.168, 0.120),
-        (0.384, 0.664, 0.600)
+        (0.776, 0.504, 0.280)(0.320, 0.560, 0.640),
+        (0.404, 0.332, 0.520)(0.356, 0.356, 0.356),
+        (0.584, 0.804, 0.756)(0.656, 0.708, 0.500)(0.704, 0.168, 0.120),
+        (0.384, 0.664, 0.600),
     )
 
     # endregion
@@ -1562,8 +1554,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     em_mit.loc[:, :2020] = 0
     spacer = ag_net_em
-    baseline = 
-
+    baseline = ag_net_em
 
     custom_legend = [
         Line2D([0], [0], color=color[8], linewidth=4),
