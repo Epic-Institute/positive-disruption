@@ -2,7 +2,7 @@
 
 # region
 
-from podi.socioeconomic import socioeconomic
+from podi.socioeconomics import socioeconomics
 from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply
 from podi.afolu import afolu
@@ -28,8 +28,8 @@ pd.set_option("mode.use_inf_as_na", True)
 
 # region
 
-socioeconomic_baseline = socioeconomic("Baseline", "podi/data/socioeconomic.csv")
-socioeconomic_pathway = socioeconomic("Pathway", "podi/data/socioeconomic.csv")
+pop_baseline, gdp_baseline = socioeconomics("Baseline", "podi/data/socioeconomic.csv")
+pop_pathway, gdp_pathway = socioeconomics("Pathway", "podi/data/socioeconomic.csv")
 
 # endregion
 

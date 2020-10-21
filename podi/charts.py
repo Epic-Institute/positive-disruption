@@ -227,15 +227,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     )
     em_mit.loc[:, :2020] = 0
     spacer = em_targets_pathway.loc["Pathway PD20"]
-    """
-    em_targets_pathway.loc["Baseline PD20"] = em_mit.append(spacer).sum()
-    em_targets_pathway.loc["Baseline PD20"].loc[2021] = numpy.mean(
-        [
-            em_targets_pathway.loc["Baseline PD20"].loc[2020],
-            em_targets_pathway.loc["Baseline PD20"].loc[2022],
-        ]
-    )
-    """
     em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
         em_mit.drop(labels="Electricity").append(spacer).sum()
     )
@@ -299,7 +290,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                 "CH4, N2O, F-gases",
                 "CDR",
                 "Baseline",
-                "Positive Disruption",
+                "DAU",
                 "SSP2-RCP1.9",
                 "SSP2-RCP2.6",
             ],
@@ -621,6 +612,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
+    # region
+
     tech_list = [
         ("Electricity", "Solar"),
         ("Electricity", "Wind"),
@@ -778,9 +771,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
+    # endregion
+
     ##############################################
     # FIG. 25 : ELECTRICITY GENERATION BY SOURCE #
     ##############################################
+
+    # region
 
     # region
 
@@ -1285,6 +1282,10 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # region
 
     color = (
+        (0.999, 0.999, 0.999),
+        (0.584, 0.804, 0.756),
+        (0.584, 0.804, 0.756),
+        (0.584, 0.804, 0.756),
         (0.584, 0.804, 0.756),
         (0.356, 0.356, 0.356),
         (0.720, 0.348, 0.324),
@@ -1300,58 +1301,79 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # region
 
     em_mit = (
-        afolu_em_mitigated.loc[
-            slice(None),
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Animal Mgmt",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-            ],
-            slice(None),
-            slice(None),
-        ].sum()
-        * 0.95
-    )
+        (
+            afolu_em_mitigated.loc[
+                slice(None),
+                [
+                    "Animal Mgmt",
+                    "Legumes",
+                    "Optimal Intensity",
+                    "Silvopasture",
+                    "Biochar",
+                    "Cropland Soil Health",
+                    "Trees in Croplands",
+                    "Nitrogen Fertilizer Management",
+                    "Improved Rice",
+                ],
+                slice(None),
+                slice(None),
+            ]
+            * 0.95
+        )
+        .droplevel(["Metric", "Unit"])
+        .groupby("Sector")
+        .sum()
+    ).loc[:, data_start_year:]
+    em_mit.columns = em_mit.columns.astype(int)
 
     em_mit.loc[:, :2020] = 0
-    spacer = ag_net_em
-    baseline = ag_net_em
+
+    em_targets_pathway = (
+        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+        .set_index(["Region", "Sector", "Unit"])
+        .loc[
+            slice(None),
+            ["Agriculture Net Emissions", "Agriculture Baseline Emissions"],
+            slice(None),
+        ]
+        .droplevel("Unit")
+    ).loc[:, str(data_start_year) :]
+
+    em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
+
+    spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
 
     custom_legend = [
-        Line2D([0], [0], color=color[8], linewidth=4),
-        Line2D([0], [0], color=color[7], linewidth=4),
-        Line2D([0], [0], color=color[6], linewidth=4),
-        Line2D([0], [0], color=color[5], linewidth=4),
-        Line2D([0], [0], color=color[4], linewidth=4),
-        Line2D([0], [0], color=color[3], linewidth=4),
-        Line2D([0], [0], color=color[2], linewidth=4),
         Line2D([0], [0], color=color[1], linewidth=4),
-        Line2D([0], [0], color=color[12], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[2], linewidth=4),
+        Line2D([0], [0], color=color[3], linewidth=4),
+        Line2D([0], [0], color=color[4], linewidth=4),
+        Line2D([0], [0], color=color[5], linewidth=4),
+        Line2D([0], [0], color=color[6], linewidth=4),
+        Line2D([0], [0], color=color[7], linewidth=4),
+        Line2D([0], [0], color=color[8], linewidth=4),
+        Line2D([0], [0], color=color[9], linewidth=4),
         Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
         Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
     ]
 
     # endregion
 
     for i in range(0, 1):
-        fig = ((em_mit.append(spacer)) / 1000).reindex(
+        fig = (
+            (em_mit.append(spacer.drop(index="Agriculture Baseline Emissions"))) / 1000
+        ).reindex(
             [
-                spacer.name,
-                "CDR",
-                "CH4, N2O, F-gases",
-                "Agriculture",
-                "Forests & Wetlands",
-                "Industry",
-                "Buildings",
-                "Transport",
-                "Electricity",
+                spacer.index[1],
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Biochar",
+                "Cropland Soil Health",
+                "Trees in Croplands",
+                "Nitrogen Fertilizer Management",
+                "Improved Rice",
             ]
         )
         plt.figure(i)
@@ -1373,26 +1395,28 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(
             custom_legend,
             [
-                "Electricity",
-                "Transport",
-                "Buildings",
-                "Industry",
-                "Agriculture",
-                "Forests & Wetlands",
-                "CH4, N2O, F-gases",
-                "CDR",
-                "Baseline",
-                "Positive Disruption",
-                "SSP2-RCP1.9",
-                "SSP2-RCP2.6",
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Biochar",
+                "Cropland Soil Health",
+                "Trees in Croplands",
+                "Nitrogen Fertilizer Management",
+                "Improved Rice",
+                "Agriculture Baseline Emissions",
+                "Agriculture Net Emissions",
             ],
             bbox_to_anchor=(1.05, 1),
             loc=2,
             borderaxespad=0.0,
         )
         plt.xticks(np.arange(2020, 2110, 10))
-        plt.yticks(np.arange(-25, 105, 10))
-        plt.title("Emissions Mitigated, " + iea_region_list[i])
+        plt.yticks(np.arange(-3, 8, 1))
+        plt.title(
+            "Regenerative Agriculture Subvector Mitigation Wedges, "
+            + iea_region_list[i]
+        )
 
     # endregion
 
@@ -1402,13 +1426,18 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
+    # region
+
     color = (
+        (0.999, 0.999, 0.999),
         (0.156, 0.472, 0.744),
         (0.804, 0.868, 0.956),
         (0.152, 0.152, 0.152),
         (0.780, 0.756, 0.620),
-        (0.776, 0.504, 0.280)(0.320, 0.560, 0.640),
-        (0.404, 0.332, 0.520)(0.676, 0.144, 0.112),
+        (0.776, 0.504, 0.280),
+        (0.320, 0.560, 0.640),
+        (0.404, 0.332, 0.520),
+        (0.676, 0.144, 0.112),
         (0.384, 0.664, 0.600),
     )
 
@@ -1417,56 +1446,77 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # region
 
     em_mit = (
-        afolu_em_mitigated.loc[
-            slice(None),
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Animal Mgmt",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-            ],
-            slice(None),
-            slice(None),
-        ].sum()
-        * 0.95
-    )
+        (
+            afolu_em_mitigated.loc[
+                slice(None),
+                [
+                    "Coastal Restoration",
+                    "Avoided Coastal Impacts",
+                    "Peat Restoration",
+                    "Avoided Peat Impacts",
+                    "Improved Forest Mgmt",
+                    "Natural Regeneration",
+                    "Avoided Forest Conversion",
+                ],
+                slice(None),
+                slice(None),
+            ]
+            * 0.95
+        )
+        .droplevel(["Metric", "Unit"])
+        .groupby("Sector")
+        .sum()
+    ).loc[:, data_start_year:]
+    em_mit.columns = em_mit.columns.astype(int)
 
     em_mit.loc[:, :2020] = 0
-    spacer = ag_net_em
-    baseline = ag_net_em
+
+    em_targets_pathway = (
+        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+        .set_index(["Region", "Sector", "Unit"])
+        .loc[
+            slice(None),
+            [
+                "Forests & Wetlands Net Emissions",
+                "Forests & Wetlands Baseline Emissions",
+            ],
+            slice(None),
+        ]
+        .droplevel("Unit")
+    ).loc[:, str(data_start_year) :]
+
+    em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
+
+    spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
 
     custom_legend = [
-        Line2D([0], [0], color=color[8], linewidth=4),
-        Line2D([0], [0], color=color[7], linewidth=4),
-        Line2D([0], [0], color=color[6], linewidth=4),
-        Line2D([0], [0], color=color[5], linewidth=4),
-        Line2D([0], [0], color=color[4], linewidth=4),
-        Line2D([0], [0], color=color[3], linewidth=4),
-        Line2D([0], [0], color=color[2], linewidth=4),
         Line2D([0], [0], color=color[1], linewidth=4),
-        Line2D([0], [0], color=color[12], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[2], linewidth=4),
+        Line2D([0], [0], color=color[3], linewidth=4),
+        Line2D([0], [0], color=color[4], linewidth=4),
+        Line2D([0], [0], color=color[5], linewidth=4),
+        Line2D([0], [0], color=color[6], linewidth=4),
+        Line2D([0], [0], color=color[7], linewidth=4),
+        Line2D([0], [0], color=color[8], linewidth=4, linestyle="--"),
         Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
     ]
 
+    # endregion
+
     for i in range(0, 1):
-        fig = ((em_mit.append(spacer)) / 1000).reindex(
+        fig = (
+            (em_mit.append(spacer.drop(index="Forests & Wetlands Baseline Emissions")))
+            / 1000
+        ).reindex(
             [
-                spacer.name,
-                "CDR",
-                "CH4, N2O, F-gases",
-                "Agriculture",
-                "Forests & Wetlands",
-                "Industry",
-                "Buildings",
-                "Transport",
-                "Electricity",
+                spacer.index[1],
+                "Coastal Restoration",
+                "Avoided Coastal Impacts",
+                "Peat Restoration",
+                "Avoided Peat Impacts",
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Avoided Forest Conversion",
             ]
         )
         plt.figure(i)
@@ -1488,26 +1538,25 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(
             custom_legend,
             [
-                "Electricity",
-                "Transport",
-                "Buildings",
-                "Industry",
-                "Agriculture",
-                "Forests & Wetlands",
-                "CH4, N2O, F-gases",
-                "CDR",
-                "Baseline",
-                "Positive Disruption",
-                "SSP2-RCP1.9",
-                "SSP2-RCP2.6",
+                "Coastal Restoration",
+                "Avoided Coastal Impacts",
+                "Peat Restoration",
+                "Avoided Peat Impacts",
+                "Forest Management",
+                "Reforestation",
+                "Avoided Forest Conversion",
+                "Forests & Wetlands Baseline Emissions",
+                "Forests & Wetlands Net Emissions",
             ],
             bbox_to_anchor=(1.05, 1),
             loc=2,
             borderaxespad=0.0,
         )
         plt.xticks(np.arange(2020, 2110, 10))
-        plt.yticks(np.arange(-25, 105, 10))
-        plt.title("Emissions Mitigated, " + iea_region_list[i])
+        plt.yticks(np.arange(-15, 5, 2))
+        plt.title(
+            "Forests & Wetlands Subvector Mitigation Wedges, " + iea_region_list[i]
+        )
 
     # endregion
 
@@ -1517,14 +1566,21 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
+    # region
+
     color = (
+        (0.999, 0.999, 0.999),
         (0.156, 0.472, 0.744),
         (0.804, 0.868, 0.956),
         (0.152, 0.152, 0.152),
         (0.780, 0.756, 0.620),
-        (0.776, 0.504, 0.280)(0.320, 0.560, 0.640),
-        (0.404, 0.332, 0.520)(0.356, 0.356, 0.356),
-        (0.584, 0.804, 0.756)(0.656, 0.708, 0.500)(0.704, 0.168, 0.120),
+        (0.776, 0.504, 0.280),
+        (0.320, 0.560, 0.640),
+        (0.404, 0.332, 0.520),
+        (0.356, 0.356, 0.356),
+        (0.584, 0.804, 0.756),
+        (0.656, 0.708, 0.500),
+        (0.704, 0.168, 0.120),
         (0.384, 0.664, 0.600),
     )
 
@@ -1533,58 +1589,94 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # region
 
     em_mit = (
-        afolu_em_mitigated.loc[
-            slice(None),
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Animal Mgmt",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-            ],
-            slice(None),
-            slice(None),
-        ].sum()
-        * 0.95
-    )
+        (
+            afolu_em_mitigated.loc[
+                slice(None),
+                [
+                    "Coastal Restoration",
+                    "Avoided Coastal Impacts",
+                    "Peat Restoration",
+                    "Avoided Peat Impacts",
+                    "Improved Forest Mgmt",
+                    "Natural Regeneration",
+                    "Avoided Forest Conversion",
+                    "Animal Mgmt",
+                    "Legumes",
+                    "Optimal Intensity",
+                    "Silvopasture",
+                    "Biochar",
+                    "Cropland Soil Health",
+                    "Trees in Croplands",
+                    "Nitrogen Fertilizer Management",
+                    "Improved Rice",
+                ],
+                slice(None),
+                slice(None),
+            ]
+            * 0.95
+        )
+        .droplevel(["Metric", "Unit"])
+        .groupby("Sector")
+        .sum()
+    ).loc[:, data_start_year:]
+    em_mit.columns = em_mit.columns.astype(int)
 
     em_mit.loc[:, :2020] = 0
-    spacer = ag_net_em
-    baseline = ag_net_em
+
+    em_targets_pathway = (
+        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+        .set_index(["Region", "Sector", "Unit"])
+        .loc[
+            slice(None),
+            [
+                "AFOLU Net Emissions",
+                "AFOLU Baseline Emissions",
+            ],
+            slice(None),
+        ]
+        .droplevel("Unit")
+    ).loc[:, str(data_start_year) :]
+
+    em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
+
+    spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
 
     custom_legend = [
-        Line2D([0], [0], color=color[8], linewidth=4),
-        Line2D([0], [0], color=color[7], linewidth=4),
-        Line2D([0], [0], color=color[6], linewidth=4),
-        Line2D([0], [0], color=color[5], linewidth=4),
-        Line2D([0], [0], color=color[4], linewidth=4),
-        Line2D([0], [0], color=color[3], linewidth=4),
-        Line2D([0], [0], color=color[2], linewidth=4),
         Line2D([0], [0], color=color[1], linewidth=4),
-        Line2D([0], [0], color=color[12], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[2], linewidth=4),
+        Line2D([0], [0], color=color[3], linewidth=4),
+        Line2D([0], [0], color=color[4], linewidth=4),
+        Line2D([0], [0], color=color[5], linewidth=4),
+        Line2D([0], [0], color=color[6], linewidth=4),
+        Line2D([0], [0], color=color[7], linewidth=4),
+        Line2D([0], [0], color=color[8], linewidth=4, linestyle="--"),
         Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
     ]
 
     # endregion
 
     for i in range(0, 1):
-        fig = ((em_mit.append(spacer)) / 1000).reindex(
+        fig = (
+            (em_mit.append(spacer.drop(index="AFOLU Baseline Emissions"))) / 1000
+        ).reindex(
             [
-                spacer.name,
-                "CDR",
-                "CH4, N2O, F-gases",
-                "Agriculture",
-                "Forests & Wetlands",
-                "Industry",
-                "Buildings",
-                "Transport",
-                "Electricity",
+                spacer.index[1],
+                "Coastal Restoration",
+                "Avoided Coastal Impacts",
+                "Peat Restoration",
+                "Avoided Peat Impacts",
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Avoided Forest Conversion",
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Biochar",
+                "Cropland Soil Health",
+                "Trees in Croplands",
+                "Nitrogen Fertilizer Management",
+                "Improved Rice",
             ]
         )
         plt.figure(i)
@@ -1606,45 +1698,32 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(
             custom_legend,
             [
-                "Electricity",
-                "Transport",
-                "Buildings",
-                "Industry",
-                "Agriculture",
-                "Forests & Wetlands",
-                "CH4, N2O, F-gases",
-                "CDR",
-                "Baseline",
-                "Positive Disruption",
-                "SSP2-RCP1.9",
-                "SSP2-RCP2.6",
+                "Coastal Restoration",
+                "Avoided Coastal Impacts",
+                "Peat Restoration",
+                "Avoided Peat Impacts",
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Avoided Forest Conversion",
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Biochar",
+                "Cropland Soil Health",
+                "Trees in Croplands",
+                "Nitrogen Fertilizer Management",
+                "Improved Rice",
+                "AFOLU Baseline Emissions",
+                "AFOLU Net Emissions",
             ],
             bbox_to_anchor=(1.05, 1),
             loc=2,
             borderaxespad=0.0,
         )
         plt.xticks(np.arange(2020, 2110, 10))
-        plt.yticks(np.arange(-25, 105, 10))
-        plt.title("Emissions Mitigated, " + iea_region_list[i])
-
-    # Stacked plot
-
-    for i in range(0, len(iea_region_list)):
-        fig = afolu_em_mitigated.loc[
-            iea_region_list[i], slice(None), slice(None), slice(None)
-        ]
-        plt.figure(i)
-        plt.stackplot(fig.columns.astype(int).values, fig / 1e6, labels=this.values)
-        plt.ylabel("Gt CO2/yr")
-        plt.xlim([data_start_year, long_proj_end_year])
-        plt.title("AFOLU Emissions Mitigated, " + iea_region_list[i])
-        plt.legend(
-            this.values,
-            loc=2,
-            fontsize="small",
-            bbox_to_anchor=(1.05, 1),
-            borderaxespad=0.0,
-        )
+        plt.yticks(np.arange(-17, 10, 5))
+        plt.title("AFOLU Subvector Mitigation Wedges, " + iea_region_list[i])
 
     # endregion
 
