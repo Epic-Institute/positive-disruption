@@ -9,8 +9,6 @@ from numpy import NaN
 
 
 def func(x, a, b, c, d):
-    # return 1 / (1.0 + a * np.exp(-c * x)) ** (1 / b)
-    # return np.exp(a + b * x) / (1.0 + np.exp(a + b * x))
     return c / (1 + np.exp(-a * (x - b))) + d
 
 
