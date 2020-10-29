@@ -1325,8 +1325,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     ).loc[:, data_start_year:]
     em_mit.columns = em_mit.columns.astype(int)
 
-    em_mit.loc[:, :2020] = 0
-
     em_targets_pathway = (
         pd.read_csv("podi/data/emissions_baseline_afolu.csv")
         .set_index(["Region", "Sector", "Unit"])
@@ -1341,6 +1339,16 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
 
     spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
+
+    em_mit.loc["Improved Rice"] = em_targets_pathway.loc[
+        "World ", "Agriculture Baseline Emissions"
+    ].subtract(
+        em_mit.drop(labels="Improved Rice")
+        .append(spacer.drop(index="Agriculture Baseline Emissions"))
+        .sum()
+    )
+
+    em_mit.loc[:, :2020] = 0
 
     custom_legend = [
         Line2D([0], [0], color=color[1], linewidth=4),
@@ -1411,7 +1419,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             borderaxespad=0.0,
         )
         plt.xticks(np.arange(2020, 2110, 10))
-        plt.yticks(np.arange(-3, 8, 1))
+        plt.yticks(np.arange(-3, 9, 1))
         plt.title(
             "Regenerative Agriculture Subvector Mitigation Wedges, "
             + iea_region_list[i]

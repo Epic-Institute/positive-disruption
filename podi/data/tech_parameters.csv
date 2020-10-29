@@ -3684,9 +3684,9 @@ ME ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
 ME ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
 NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
-NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
+NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.1
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
- OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.1
  OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, max",0.10618
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, max",0
@@ -4967,9 +4967,9 @@ ME ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
 ME ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
 NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
-NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
+NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.1
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
- OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.1
  OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter a, min",0.10618
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter a, min",0
@@ -5635,11 +5635,11 @@ NAM ,Biochar,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Biochar,Pathway,Industry,"Parameter b, max",40
 NonOECD ,Biochar,Baseline,Industry,"Parameter b, max",100
-NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, max",70
+NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, max",80
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
  OECD ,Biochar,Pathway,Industry,"Parameter b, max",40
  OECD ,Biochar,Baseline,Industry,"Parameter b, max",100
- OECD ,Biochar,Pathway,AFOLU,"Parameter b, max",70
+ OECD ,Biochar,Pathway,AFOLU,"Parameter b, max",80
  OECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Biochar,Pathway,,"Parameter b, max",100
 RUS ,Biochar,Baseline,,"Parameter b, max",100
@@ -5801,7 +5801,7 @@ ME ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
+NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",35
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
  OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, max",50
  OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, max",100
@@ -6252,7 +6252,7 @@ NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",50
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
- OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",30
  OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, max",100
@@ -6625,7 +6625,7 @@ NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",36
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
- OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",36
+ OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",40
  OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
@@ -6919,11 +6919,11 @@ NAM ,Biochar,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Biochar,Pathway,Industry,"Parameter b, min",40
 NonOECD ,Biochar,Baseline,Industry,"Parameter b, min",0
-NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, min",70
+NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, min",80
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
  OECD ,Biochar,Pathway,Industry,"Parameter b, min",40
  OECD ,Biochar,Baseline,Industry,"Parameter b, min",0
- OECD ,Biochar,Pathway,AFOLU,"Parameter b, min",70
+ OECD ,Biochar,Pathway,AFOLU,"Parameter b, min",80
  OECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Biochar,Pathway,,"Parameter b, min",0
 RUS ,Biochar,Baseline,,"Parameter b, min",0
@@ -7085,7 +7085,7 @@ ME ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
+NonOECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",35
 NonOECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
  OECD ,Cropland Soil Health,Pathway,AFOLU,"Parameter b, min",50
  OECD ,Cropland Soil Health,Baseline,AFOLU,"Parameter b, min",0
@@ -7536,7 +7536,7 @@ NAM ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",50
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
- OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",30
  OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Nitrogen Fertilizer Management,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Nitrogen Fertilizer Management,Baseline,AFOLU,"Parameter b, min",0
@@ -7908,7 +7908,7 @@ NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",36
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
- OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",36
+ OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",40
  OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
@@ -8761,7 +8761,7 @@ NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
  OECD ,Legumes,Baseline,AFOLU,Saturation Point,100
  OECD ,Natural Regeneration,Pathway,AFOLU,Saturation Point,90
  OECD ,Natural Regeneration,Baseline,AFOLU,Saturation Point,100
- OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,100
+ OECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,125
  OECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Saturation Point,100
  OECD ,Optimal Intensity,Pathway,AFOLU,Saturation Point,100
  OECD ,Optimal Intensity,Baseline,AFOLU,Saturation Point,100
@@ -8769,7 +8769,7 @@ NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
  OECD ,Peat Restoration,Baseline,AFOLU,Saturation Point,100
  OECD ,Silvopasture,Pathway,AFOLU,Saturation Point,100
  OECD ,Silvopasture,Baseline,AFOLU,Saturation Point,100
- OECD ,Trees in Croplands,Pathway,AFOLU,Saturation Point,100
+ OECD ,Trees in Croplands,Pathway,AFOLU,Saturation Point,110
  OECD ,Trees in Croplands,Baseline,AFOLU,Saturation Point,100
  OECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
  OECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
@@ -8786,7 +8786,7 @@ NonOECD ,Legumes,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Legumes,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Natural Regeneration,Pathway,AFOLU,Saturation Point,90
 NonOECD ,Natural Regeneration,Baseline,AFOLU,Saturation Point,100
-NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,100
+NonOECD ,Nitrogen Fertilizer Management,Pathway,AFOLU,Saturation Point,125
 NonOECD ,Nitrogen Fertilizer Management,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Optimal Intensity,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Optimal Intensity,Baseline,AFOLU,Saturation Point,100
@@ -8794,12 +8794,12 @@ NonOECD ,Peat Restoration,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Peat Restoration,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Silvopasture,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Silvopasture,Baseline,AFOLU,Saturation Point,100
-NonOECD ,Trees in Croplands,Pathway,AFOLU,Saturation Point,100
+NonOECD ,Trees in Croplands,Pathway,AFOLU,Saturation Point,110
 NonOECD ,Trees in Croplands,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
- OECD ,Biochar,Pathway,AFOLU,Saturation Point,100
+ OECD ,Biochar,Pathway,AFOLU,Saturation Point,110
  OECD ,Biochar,Baseline,AFOLU,Saturation Point,100
-NonOECD ,Biochar,Pathway,AFOLU,Saturation Point,100
+NonOECD ,Biochar,Pathway,AFOLU,Saturation Point,110
 NonOECD ,Biochar,Baseline,AFOLU,Saturation Point,100
