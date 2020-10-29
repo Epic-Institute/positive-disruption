@@ -1318,7 +1318,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                 slice(None),
                 slice(None),
             ]
-            * 0.95
         )
         .droplevel(["Metric", "Unit"])
         .groupby("Sector")

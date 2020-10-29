@@ -25,6 +25,7 @@ plotly = "==4.8.1"
 black = "*"
 ipykernel = "*"
 pyam-iamc = "*"
+ffmpeg = "*"
 
 [requires]
 python_version = "3.8"

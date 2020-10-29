@@ -5435,9 +5435,9 @@ ME ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",50
+NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",40
 NonOECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
- OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",40
  OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Animal Mgmt,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Animal Mgmt,Baseline,AFOLU,"Parameter b, max",100
@@ -5635,11 +5635,11 @@ NAM ,Biochar,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 NonOECD ,Biochar,Pathway,Industry,"Parameter b, max",40
 NonOECD ,Biochar,Baseline,Industry,"Parameter b, max",100
-NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, max",50
+NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, max",70
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
  OECD ,Biochar,Pathway,Industry,"Parameter b, max",40
  OECD ,Biochar,Baseline,Industry,"Parameter b, max",100
- OECD ,Biochar,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Biochar,Pathway,AFOLU,"Parameter b, max",70
  OECD ,Biochar,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Biochar,Pathway,,"Parameter b, max",100
 RUS ,Biochar,Baseline,,"Parameter b, max",100
@@ -6154,9 +6154,9 @@ ME ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Legumes,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, max",50
+NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, max",44
 NonOECD ,Legumes,Baseline,AFOLU,"Parameter b, max",100
- OECD ,Legumes,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Legumes,Pathway,AFOLU,"Parameter b, max",44
  OECD ,Legumes,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Legumes,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Legumes,Baseline,AFOLU,"Parameter b, max",100
@@ -6358,9 +6358,9 @@ ME ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
+NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",44
 NonOECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
- OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",44
  OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Optimal Intensity,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Optimal Intensity,Baseline,AFOLU,"Parameter b, max",100
@@ -6455,9 +6455,9 @@ ME ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",50
+NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",35
 NonOECD ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
- OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, max",35
  OECD ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Silvopasture,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Silvopasture,Baseline,AFOLU,"Parameter b, max",100
@@ -6623,9 +6623,9 @@ ME ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 ME ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
+NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",36
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
- OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",50
+ OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",36
  OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter b, max",60.52
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter b, max",100
@@ -6719,9 +6719,9 @@ ME ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",50
+NonOECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",40
 NonOECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
- OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",40
  OECD ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Animal Mgmt,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Animal Mgmt,Baseline,AFOLU,"Parameter b, min",0
@@ -6919,11 +6919,11 @@ NAM ,Biochar,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 NonOECD ,Biochar,Pathway,Industry,"Parameter b, min",40
 NonOECD ,Biochar,Baseline,Industry,"Parameter b, min",0
-NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, min",50
+NonOECD ,Biochar,Pathway,AFOLU,"Parameter b, min",70
 NonOECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
  OECD ,Biochar,Pathway,Industry,"Parameter b, min",40
  OECD ,Biochar,Baseline,Industry,"Parameter b, min",0
- OECD ,Biochar,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Biochar,Pathway,AFOLU,"Parameter b, min",70
  OECD ,Biochar,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Biochar,Pathway,,"Parameter b, min",0
 RUS ,Biochar,Baseline,,"Parameter b, min",0
@@ -7438,9 +7438,9 @@ ME ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Legumes,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, min",50
+NonOECD ,Legumes,Pathway,AFOLU,"Parameter b, min",44
 NonOECD ,Legumes,Baseline,AFOLU,"Parameter b, min",0
- OECD ,Legumes,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Legumes,Pathway,AFOLU,"Parameter b, min",44
  OECD ,Legumes,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Legumes,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Legumes,Baseline,AFOLU,"Parameter b, min",0
@@ -7642,9 +7642,9 @@ ME ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
+NonOECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",44
 NonOECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
- OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",44
  OECD ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Optimal Intensity,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Optimal Intensity,Baseline,AFOLU,"Parameter b, min",0
@@ -7738,9 +7738,9 @@ ME ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",50
+NonOECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",35
 NonOECD ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
- OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Silvopasture,Pathway,AFOLU,"Parameter b, min",35
  OECD ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Silvopasture,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Silvopasture,Baseline,AFOLU,"Parameter b, min",0
@@ -7906,9 +7906,9 @@ ME ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 ME ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 NAM ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 NAM ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
-NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",50
+NonOECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",36
 NonOECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
- OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",50
+ OECD ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",36
  OECD ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
 RUS ,Trees in Croplands,Pathway,AFOLU,"Parameter b, min",60.52
 RUS ,Trees in Croplands,Baseline,AFOLU,"Parameter b, min",0
