@@ -314,7 +314,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     for name, scen in scenarios.items():
         results = pymagicc.run(scen)
-        results_df = pd.DataFrame(results, index="time")
+        results_df = results.df
+        results_df.set_index("time", inplace=True)
 
         global_temp_time_rows = (results_df.variable == "Surface Temperature") & (
             results_df.region == "World"
@@ -330,7 +331,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     plt.title("Global Mean Temperature Projection")
     plt.ylabel("°C over pre-industrial (1850-1900 mean)")
     plt.legend(loc="best")
-    plt.show()
 
     # endregion
 
@@ -340,7 +340,11 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    # https://github.com/openscm/pymagicc
+    plt.legend()
+    plt.title("Greenhouse Gas Atmospheric Concentration Projection")
+    plt.ylabel("ppm CO2e")
+    plt.legend(loc="best")
+    plt.show()
 
     # endregion
 
@@ -350,7 +354,11 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    # https://github.com/openscm/pymagicc
+    plt.legend()
+    plt.title("CO2 Atmospheric Concentration Projection")
+    plt.ylabel("ppm CO2")
+    plt.legend(loc="best")
+    plt.show()
 
     # endregion
 
