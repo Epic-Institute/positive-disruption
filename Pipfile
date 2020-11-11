@@ -26,6 +26,8 @@ black = "*"
 ipykernel = "*"
 pyam-iamc = "*"
 ffmpeg = "*"
+diagrams = "*"
+graphviz = "*"
 
 [requires]
 python_version = "3.8"
