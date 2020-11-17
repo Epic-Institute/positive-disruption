@@ -27,10 +27,10 @@ ncs_types.py - implements behavior of specific NCS CDR strategies (concrete subc
 
 from queue import PriorityQueue, Empty
 
-import cdr.cdr_abstract_types as abstract_types
-import cdr.cdr_util as util
-import cdr.ecr_types as ecr
-import cdr.ncs_types as ncs
+import podi.cdr.cdr_abstract_types as abstract_types
+import podi.cdr.cdr_util as util
+import podi.cdr.ecr_types as ecr
+import podi.cdr.ncs_types as ncs
 
 __author__ = "Zach Birnholz"
 __version__ = "08.14.20"

@@ -14,8 +14,8 @@ to be put under consideration when developing the cost-optimal CDR mix.
 __author__ = "Zach Birnholz"
 __version__ = "08.20.20"
 
-from cdr.cdr_abstract_types import CDRStrategy, NCS
-import cdr.cdr_util as util
+from podi.cdr.cdr_abstract_types import CDRStrategy, NCS
+import podi.cdr.cdr_util as util
 
 ###################################################################
 # THIS FILE IS FOR SPECIFIC NCS (natural) STRATEGIES.             #

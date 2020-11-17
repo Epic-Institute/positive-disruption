@@ -18,8 +18,8 @@ import math
 
 from scipy import integrate
 
-from cdr.cdr_abstract_types import CDRStrategy, ECR
-import cdr.cdr_util as util
+from podi.cdr.cdr_abstract_types import CDRStrategy, ECR
+import podi.cdr.cdr_util as util
 
 ###################################################################
 # THIS FILE IS FOR SPECIFIC ECR (engineered) STRATEGIES.          #
@@ -118,11 +118,11 @@ import cdr.cdr_util as util
 
 
 class Deficit(ECR):
-    """ Catch-all CDR "strategy" used in ACCEPT_DEFICIT mode, which fills
+    """Catch-all CDR "strategy" used in ACCEPT_DEFICIT mode, which fills
     any deficits in the CDR budget that cannot be met with existing CDR
     strategies. Indicates a need for more CDR in the years when it is
     used. Allows the model to run to completion without crashing when
-    not enough CDR is available. """
+    not enough CDR is available."""
 
     default_lifetime = 1  # "deployed" on a yearly basis
 
@@ -144,11 +144,13 @@ class Deficit(ECR):
 
 
 class LTSSDAC(ECR):
-    """ Low-temperature Solid Sorbent Direct Air Capture
-        (Climeworks and Global Thermostat approach) """
+    """Low-temperature Solid Sorbent Direct Air Capture
+    (Climeworks and Global Thermostat approach)"""
 
     default_lifetime = 20
-    cumul_deployment = active_deployment = util.LTSSDAC_FIRST_DEPLOYMENT  # assumed starting in 2025
+    cumul_deployment = (
+        active_deployment
+    ) = util.LTSSDAC_FIRST_DEPLOYMENT  # assumed starting in 2025
 
     @classmethod
     def adopt_limits(cls) -> float:
@@ -208,11 +210,13 @@ class LTSSDAC(ECR):
 
 
 class HTLSDAC(ECR):
-    """ High-temperature Liquid Solvent Direct Air Capture
-            (Carbon Engineering approach) """
+    """High-temperature Liquid Solvent Direct Air Capture
+    (Carbon Engineering approach)"""
 
     default_lifetime = 25
-    cumul_deployment = active_deployment = util.HTLSDAC_FIRST_DEPLOYMENT  # assumed starting in 2025
+    cumul_deployment = (
+        active_deployment
+    ) = util.HTLSDAC_FIRST_DEPLOYMENT  # assumed starting in 2025
 
     @classmethod
     def adopt_limits(cls) -> float:
@@ -298,7 +302,7 @@ class ExSituEW(ECR):
     def marginal_levelized_cost(self) -> float:
         """Returns $/tCO2 for this project.
         It is 'marginal' in the sense that this project was
-        on the margin of EW at the time of its deployment. """
+        on the margin of EW at the time of its deployment."""
 
         tCO2 = (
             self.capacity * 1000000
@@ -317,7 +321,7 @@ class ExSituEW(ECR):
 
     @util.cacheit
     def marginal_energy_use(self) -> tuple:
-        """ Returns (electricity, heat, transport, non-transport fuel) energy in kWh/tCO2.
+        """Returns (electricity, heat, transport, non-transport fuel) energy in kWh/tCO2.
         It is 'marginal' in the sense that this project was on the margin of EW
         at the time of its deployment."""
         elec = (
@@ -378,7 +382,7 @@ class ExSituEW(ECR):
         (1) m_rock = (A_warm + A_temp) * M
         (2) R_CO2 = (0.95 * A_warm + 0.35 * A_temp) * M * P * d(x)
         (3) A_warm / A_temp = util.A_WARM / util.A_TEMP
-            (i.e. rock is applied to land regions proportionally to their availability) """
+            (i.e. rock is applied to land regions proportionally to their availability)"""
         num = tCO2 * (1 + util.A_WARM / util.A_TEMP)
         denom = (
             util.CO2_PER_ROCK
@@ -433,8 +437,8 @@ class ExSituEW(ECR):
 
 
 class GeologicStorage(ECR):
-    """ Traditional geologic storage paired with an
-     engineered capture approach"""
+    """Traditional geologic storage paired with an
+    engineered capture approach"""
 
     default_lifetime = float("inf")  # lifetime depends on paired project from __init__
 
@@ -492,7 +496,7 @@ class GeologicStorage(ECR):
         pipeline_elec = 837900 * transport_scale_factor
         pipeline_transport = (
             494940 * util.TRANSPORT_KWH_PER_TKM / self.lifetime * transport_scale_factor
-        ) # 1.5 * 2.26 * 10^5 (sh ton-mile) = 494940 tonne*km
+        )  # 1.5 * 2.26 * 10^5 (sh ton-mile) = 494940 tonne*km
         pipeline_fuel = (
             5343.16 * util.KWH_PER_GJ / self.lifetime * transport_scale_factor
         )

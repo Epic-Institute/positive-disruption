@@ -19,7 +19,7 @@ import inspect
 import math
 import numpy as np
 
-import cdr.cdr_util as util
+import podi.cdr.cdr_util as util
 
 
 class CDRStrategy(ABC):
@@ -68,8 +68,8 @@ class CDRStrategy(ABC):
         self.age = 0
 
     def __init_subclass__(cls, **kwargs):
-        """ Allow each CDR strategy to track its own deployment
-            and adoption limits at the class level """
+        """Allow each CDR strategy to track its own deployment
+        and adoption limits at the class level"""
         super().__init_subclass__(**kwargs)
         if not inspect.isabstract(cls):
             # each concrete class gets its own deployment counter
@@ -100,13 +100,13 @@ class CDRStrategy(ABC):
         self.age += 1
 
     def should_be_retired(self) -> bool:
-        """ Must call advance_age before this check to avoid being off by one
-        (as self.age starts at 0). """
+        """Must call advance_age before this check to avoid being off by one
+        (as self.age starts at 0)."""
         return self.age >= self.lifetime
 
     def retire(self):
-        """ This method can be called any time (regardless of return value of
-        should_be_retired), in case projects need to be retired early. """
+        """This method can be called any time (regardless of return value of
+        should_be_retired), in case projects need to be retired early."""
         self.__class__.active_deployment -= self.capacity
 
     @abstractmethod
@@ -119,12 +119,12 @@ class CDRStrategy(ABC):
     def adopt_limits(cls) -> float:
         """Computes annual adoption/deployment limit (MtCO2 capacity/yr)
         based on current cumulative deployment of this technology using
-        cls.cumul_deployment (MtCO2/yr) and/or CDRStrategy.curr_year """
+        cls.cumul_deployment (MtCO2/yr) and/or CDRStrategy.curr_year"""
         return NotImplemented
 
     @abstractmethod
     def curr_year_cost(self) -> float:
-        """ Returns the raw $/tCO2 (in 2020$) cost of the project in the year given
+        """Returns the raw $/tCO2 (in 2020$) cost of the project in the year given
         by self.age. This is not adjusted for the impacts of incidental emissions
         or CDR credits and, in addition to being based on the project’s current age,
         is likely based on the project’s capacity (self.capacity) and its original
@@ -132,18 +132,18 @@ class CDRStrategy(ABC):
         cumulative deployment (MtCO2/yr) at the time of this project’s creation.
         In theory, levelizing each of the yearly costs from this function over the
         lifetime of the project should yield the same result as the
-        marginal_levelized_cost function. """
+        marginal_levelized_cost function."""
         return NotImplemented
 
     @abstractmethod
     def marginal_levelized_cost(self) -> float:
-        """ Returns the single "sticker price" $/tCO2 (in 2020$) of the project, used for
+        """Returns the single "sticker price" $/tCO2 (in 2020$) of the project, used for
         comparison with other CDR projects. This is not adjusted for the impacts of
         incidental emissions or CDR credits and is based on the project’s capacity
         (self.capacity) and its original deployment level (self.deployment_level),
         which represents the technology’s cumulative deployment (MtCO2/yr) at the
         time of this project’s creation. It is 'marginal' in the sense that this
-        project was the marginal project at the time of its deployment. """
+        project was the marginal project at the time of its deployment."""
         return NotImplemented
 
     @abstractmethod
@@ -180,8 +180,8 @@ class CDRStrategy(ABC):
 
     @util.once_per_year
     def get_adjusted_curr_year_cost(self):
-        """ Returns cost of this project, adjusted for incidental emissions
-        so as to only count CDR on a net CO2 basis """
+        """Returns cost of this project, adjusted for incidental emissions
+        so as to only count CDR on a net CO2 basis"""
         return self.curr_year_cost() / self.get_eff_factor()
 
     @util.once_per_year
@@ -205,8 +205,8 @@ class NCS(CDRStrategy):
         return False
 
     def __init_subclass__(cls, **kwargs):
-        """ Allow each NCS strategy to track its own additional
-            characteristics at the class level, if desired in the future """
+        """Allow each NCS strategy to track its own additional
+        characteristics at the class level, if desired in the future"""
         super().__init_subclass__(**kwargs)
         # initialize any NCS-specific class variables here
 
@@ -224,15 +224,15 @@ class ECR(CDRStrategy):
         return True
 
     def __init_subclass__(cls, **kwargs):
-        """ Allow each ECR strategy to track its own additional
-            characteristics at the class level, if desired in the future """
+        """Allow each ECR strategy to track its own additional
+        characteristics at the class level, if desired in the future"""
         super().__init_subclass__(**kwargs)
         # initialize any ECR-specific class variables here
 
     @util.once_per_year
     def incidental_emissions(self) -> float:
-        """ Default behavior is simply multiplying the energy use in each sector
-         by its respective emissions rate and summing across sectors. """
+        """Default behavior is simply multiplying the energy use in each sector
+        by its respective emissions rate and summing across sectors."""
         energy_basis = self.marginal_energy_use()
         yr = CDRStrategy.curr_year - CDRStrategy.start_year
         return float(np.dot(energy_basis, CDRStrategy.DEFAULT_EM_BASIS[yr]))
