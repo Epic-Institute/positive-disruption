@@ -10,12 +10,12 @@ from podi.results_analysis import results_analysis
 import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
-from cdr.cdr_util import cdr_needed_def
+from podi.cdr.cdr_util import cdr_needed_def
 from podi.charts import charts
 from podi.data.iea_weo_etl import iea_region_list
 from podi.adoption_curve import adoption_curve
 from podi.emissions import emissions
-from cdr.cdr_main import cdr_mix
+from podi.cdr.cdr_main import cdr_mix
 from podi.climate import climate
 
 pd.set_option("mode.use_inf_as_na", True)
