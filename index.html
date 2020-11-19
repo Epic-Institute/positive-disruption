@@ -25,7 +25,13 @@
   </head>
   <body>
 
-    <img src= podi/data/figs width="400"  />
+      $dirname = "podi/data/figs/";
+        $images = glob($dirname."*.png");
+
+       foreach($images as $image) {
+        echo '<img src="'.$image.'" /><br />';
+        }
+      
     <p>
     </p>
   </body>
