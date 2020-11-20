@@ -8,7 +8,8 @@ import pandas as pd
 from matplotlib.lines import Line2D
 from matplotlib.ticker import PercentFormatter
 from scipy.interpolate import interp1d
-import pymagicc
+import pyhector
+from pyhector import rcp26, rcp45, rcp60, rcp85
 from podi.data.iea_weo_etl import iea_region_list
 from podi.energy_supply import (
     data_end_year,
@@ -17,7 +18,8 @@ from podi.energy_supply import (
     long_proj_start_year,
 )
 from pymagicc import scenarios
-
+from pandas_datapackage_reader import read_datapackage
+from shortcountrynames import to_name
 
 # endregion
 
@@ -305,60 +307,118 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # endregion
 
     ###############################################################
-    # FIG. 5 : PROJECTED AVERAGE GLOBAL TEMPERATURE INCREASE ABOVE PRE-INDUSTRIAL #
+    # FIG. 5a : PROJECTED AVERAGE GLOBAL TEMPERATURE INCREASE ABOVE PRE-INDUSTRIAL #
     ###############################################################
 
     # region
-    # https://github.com/openclimatedata/pyhector/blob/master/pyhector/emissions/RCP26_emissions.csv
-    # https://github.com/openscm/pymagicc
+    # from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
-    for name, scen in scenarios.items():
-        results = pymagicc.run(scen)
-        results_df = results.df
-        results_df.set_index("time", inplace=True)
+    rcps = [rcp26, rcp45, rcp60, rcp85]
 
-        global_temp_time_rows = (results_df.variable == "Surface Temperature") & (
-            results_df.region == "World"
-        )
+    SURFACE_TEMP = "temperature.Tgav"
 
-        temp = (
-            results_df.value[global_temp_time_rows].loc[1850:]
-            - results_df.value[global_temp_time_rows].loc[1850:1900].mean()
-        )
-        temp.plot(label=name)
-
-    plt.legend()
-    plt.title("Global Mean Temperature Projection")
-    plt.ylabel("°C over pre-industrial (1850-1900 mean)")
+    for rcp in rcps:
+        output = pyhector.run(rcp, {"core": {"endDate": 2100}})
+        temp = output[SURFACE_TEMP]
+        temp = temp.loc[1850:] - temp.loc[1850:1900].mean()
+        temp.plot(label=rcp.name.split("_")[0])
+    plt.title("Global mean temperature")
+    plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
     plt.legend(loc="best")
+
+    low = pyhector.run(rcp26, {"temperature": {"S": 1.5}})
+    default = pyhector.run(rcp26, {"temperature": {"S": 3}})
+    high = pyhector.run(rcp26, {"temperature": {"S": 4.5}})
+
+    plt.figure()
+    sel = slice(1850, 2100)
+    plt.fill_between(
+        low[SURFACE_TEMP].loc[sel].index,
+        low[SURFACE_TEMP].loc[sel],
+        high[SURFACE_TEMP].loc[sel],
+        color="lightgray",
+    )
+    default[SURFACE_TEMP].loc[sel].plot()
+    plt.title("DAU with equilibrium climate sensitivity set to 1.5, 3, and 4.5")
+    plt.ylabel("Deg. C")
 
     # endregion
 
-    ################################################################
-    # FIG. 6 : PROJECTED GREENHOUSE GAS ATMOSPHERIC CONCENTRATION #
-    ################################################################
+    #########################################
+    # FIG. 5b : PROJECTED RADIATIVE FORCING #
+    #########################################
 
     # region
+    # from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
-    plt.legend()
-    plt.title("Greenhouse Gas Atmospheric Concentration Projection")
-    plt.ylabel("ppm CO2e")
-    plt.legend(loc="best")
-    plt.show()
+    FORCING = "forcing.Ftot"
+
+    results = pyhector.run(rcp26)
+
+    results[FORCING].loc[1850:2100].plot()
+    plt.title("DAU: " + pyhector.output[FORCING]["description"])
+    plt.ylabel(pyhector.output[FORCING]["unit"])
 
     # endregion
+
+    #####################################
+    # FIG. 6a : PROJECTED CO2 EMISSIONS #
+    #####################################
+
+    # region
+    # from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb
+
+    df = read_datapackage("https://github.com/openclimatedata/edgar-co2-emissions")
+    df = (
+        df.reset_index()
+        .drop("Name", axis=1)
+        .set_index(["Code", "Sector", "Year"])
+        .sort_index()
+    )
+
+    for code in ["WORLD", "USA", "CHN", "EU28"]:
+        grouped = (
+            df.loc[code].reset_index().set_index("Year").groupby("Sector")["Emissions"]
+        )
+
+        fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(12, 4), sharey=True)
+        try:
+            name = to_name(code)
+        except KeyError:
+            name = code
+        fig.suptitle(name)
+        sectors = [
+            "Power Industry",
+            "Transport",
+            "Buildings",
+            "Other industrial combustion",
+            "Non-combustion",
+        ]
+        for (key, ax) in zip(sectors, axes):
+            ax.set_title(key, fontsize=10)
+            grouped.get_group(key).plot(ax=ax, legend=False)
+            ax.set_ylabel(unit)
+
+    # endregion
+
+    ################################################
+    # FIG. 6b : PROJECTED CO2 EMISSIONS #
+    ################################################
 
     #####################################################
     # FIG. 7 : PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
     #####################################################
 
     # region
+    # from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
-    plt.legend()
-    plt.title("CO2 Atmospheric Concentration Projection")
-    plt.ylabel("ppm CO2")
-    plt.legend(loc="best")
-    plt.show()
+    CONCENTRATION_CO2 = "simpleNbox.Ca"
+
+    results = pyhector.run(rcp26)
+
+    results[CONCENTRATION_CO2].loc[1850:2100].plot()
+    plt.title("RCP2.6: " + pyhector.output[CONCENTRATION_CO2]["description"])
+    plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
 
     # endregion
 
