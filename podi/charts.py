@@ -311,7 +311,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     ###############################################################
 
     # region
-    # from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+    # From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
     rcps = [rcp26, rcp45, rcp60, rcp85]
 
@@ -321,26 +321,33 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         output = pyhector.run(rcp, {"core": {"endDate": 2100}})
         temp = output[SURFACE_TEMP]
         temp = temp.loc[1850:] - temp.loc[1850:1900].mean()
-        temp.plot(label=rcp.name.split("_")[0])
-    plt.title("Global mean temperature")
+        hist = temp.loc[1850:2016]
+        temp.loc[1900:2100].plot(label=rcp.name.split("_")[0], linestyle="--")
+    hist.loc[1900:2100].plot(label="historical", color="black")
+    plt.legend(("DAU", "RCP4.5", "RCP6", "Baseline", "Historical"), loc="best")
+    plt.title("Global Mean Temperature")
     plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
-    plt.legend(loc="best")
+
+    # Climate sensitivity analysis
 
     low = pyhector.run(rcp26, {"temperature": {"S": 1.5}})
     default = pyhector.run(rcp26, {"temperature": {"S": 3}})
     high = pyhector.run(rcp26, {"temperature": {"S": 4.5}})
 
     plt.figure()
-    sel = slice(1850, 2100)
+    sel = slice(1900, 2100)
     plt.fill_between(
         low[SURFACE_TEMP].loc[sel].index,
         low[SURFACE_TEMP].loc[sel],
         high[SURFACE_TEMP].loc[sel],
         color="lightgray",
     )
-    default[SURFACE_TEMP].loc[sel].plot()
+    default[SURFACE_TEMP].loc[sel].plot(linestyle="--")
+    hist = default[SURFACE_TEMP].loc[1900:2016]
+    hist.plot(label="historical", color="black")
     plt.title("DAU with equilibrium climate sensitivity set to 1.5, 3, and 4.5")
     plt.ylabel("Deg. C")
+    plt.legend(("DAU", 'Historical', 'Sensitivity Range'), loc="upper left")
 
     # endregion
 
@@ -355,20 +362,24 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     results = pyhector.run(rcp26)
 
-    results[FORCING].loc[1850:2100].plot()
+    results[FORCING].loc[1900:2100].plot(linestyle='--')
+    hist = default[FORCING].loc[1900:2016]
+    hist.plot(label="historical", color="black")
     plt.title("DAU: " + pyhector.output[FORCING]["description"])
     plt.ylabel(pyhector.output[FORCING]["unit"])
+    plt.legend(("DAU", 'Historical'), loc="upper left")
 
     # endregion
 
-    #####################################
-    # FIG. 6a : PROJECTED CO2 EMISSIONS #
-    #####################################
+    ################################################
+    # FIG. 6a : PROJECTED CO2 EMISSIONS BY COUNTRY #
+    ################################################
 
     # region
     # from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb
 
     df = read_datapackage("https://github.com/openclimatedata/edgar-co2-emissions")
+    unit = "kt"
     df = (
         df.reset_index()
         .drop("Name", axis=1)
@@ -376,12 +387,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         .sort_index()
     )
 
-    for code in ["WORLD", "USA", "CHN", "EU28"]:
+    for code in ["USA", "CHN"]:
         grouped = (
             df.loc[code].reset_index().set_index("Year").groupby("Sector")["Emissions"]
         )
 
-        fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(12, 4), sharey=True)
+        fig, axes = plt.subplots(nrows=1, ncols=4, figsize=(12, 4), sharey=True)
         try:
             name = to_name(code)
         except KeyError:
@@ -392,7 +403,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             "Transport",
             "Buildings",
             "Other industrial combustion",
-            "Non-combustion",
         ]
         for (key, ax) in zip(sectors, axes):
             ax.set_title(key, fontsize=10)
@@ -401,9 +411,18 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ################################################
-    # FIG. 6b : PROJECTED CO2 EMISSIONS #
-    ################################################
+    #####################################
+    # FIG. 6b : PROJECTED GHG EMISSIONS #
+    #####################################
+
+    # region
+
+    emissions = ["ffi_emissions", "luc_emissions", "CH4_emissions", "N2O_emissions"]
+    rcp26[emissions].loc[1900:2100].plot(subplots=True, '--')
+    rcp26[emissions].loc[1900:2016].plot(subplots=True, '--', color='black')
+    plt.suptitle("DAU Net Emissions")
+
+    # endregion
 
     #####################################################
     # FIG. 7 : PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
@@ -416,9 +435,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     results = pyhector.run(rcp26)
 
-    results[CONCENTRATION_CO2].loc[1850:2100].plot()
-    plt.title("RCP2.6: " + pyhector.output[CONCENTRATION_CO2]["description"])
+    results[CONCENTRATION_CO2].loc[1900:2100].plot(linestyle='--')
+    hist = default[CONCENTRATION_CO2].loc[1900:2016]
+    hist.plot(label="historical", color="black")
+    plt.title("DAU: " + pyhector.output[CONCENTRATION_CO2]["description"])
     plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
+    plt.legend(("DAU", 'Historical'), loc="upper left")
 
     # endregion
 
