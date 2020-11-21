@@ -18,8 +18,6 @@ That's it.
 Usage
 =====
 
-TODO: There's not really any user-facing way to run anything yet.
-
 1. Run ``pipenv shell``.
 2. While in the virtual environment you can run scripts.
 
@@ -30,9 +28,6 @@ Developing
 2. Run ``pipenv shell`` to get into the virtual environment.
 
 Make sure to run tests and linters before committing: ``make all``
-
-TODO: Run linters automatically.
-
 
 Primer
 ==========
@@ -175,3 +170,52 @@ The following files, located in `podi/data <https://github.com/Epic-Institute/po
   - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with data on energy demand, energy efficiency, solar thermal, heat pump, and biofuels.
 
 
+Project Organization
+------------
+
+    ├── LICENSE
+    ├── Makefile           <- Makefile with commands like `make data` or `make train`
+    ├── README.md          <- The top-level README for developers using this project.
+    ├── data
+    │   ├── external       <- Data from third party sources.
+    │   ├── interim        <- Intermediate data that has been transformed.
+    │   ├── processed      <- The final, canonical data sets for modeling.
+    │   └── raw            <- The original, immutable data dump.
+    │
+    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    │
+    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    │
+    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
+    │                         the creator's initials, and a short `-` delimited description, e.g.
+    │                         `1.0-jqp-initial-data-exploration`.
+    │
+    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    │
+    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    │   └── figures        <- Generated graphics and figures to be used in reporting
+    │
+    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+    │                         generated with `pip freeze > requirements.txt`
+    │
+    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── src                <- Source code for use in this project.
+       ├── __init__.py    <- Makes src a Python module
+       │
+       ├── data           <- Scripts to download or generate data
+       │   └── make_dataset.py
+       │
+       ├── features       <- Scripts to turn raw data into features for modeling
+       │   └── build_features.py
+       │
+       ├── models         <- Scripts to train models and then use trained models to make
+       │   │                 predictions
+       │   ├── predict_model.py
+       │   └── train_model.py
+       │
+       └── visualization  <- Scripts to create exploratory and results oriented visualizations
+          └── visualize.py
+    
+--------
+
+<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
