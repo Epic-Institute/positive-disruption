@@ -26,9 +26,9 @@ from shortcountrynames import to_name
 
 def charts(energy_demand_baseline, energy_demand_pathway):
 
-    #########################################################
-    # FIG. 3 : PROJECTED MARKET DIFFUSION CURVES FOR THE V7 #
-    #########################################################
+    #####################################
+    # PROJECTED MARKET DIFFUSION CURVES #
+    #####################################
 
     # region
     xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 19)
@@ -111,9 +111,17 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ####################################
-    # FIG. 4 : MITIGATION WEDGES CURVE #
-    ####################################
+    ##############################
+    # SUBVECTOR DIFFUSION CURVES #
+    ##############################
+
+    # region
+    # show how subvector diffusion curves build up to vector diffusion
+    # endregion
+
+    ###########################
+    # MITIGATION WEDGES CURVE #
+    ###########################
 
     # region
 
@@ -306,14 +314,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ###############################################################
-    # FIG. 5a : PROJECTED AVERAGE GLOBAL TEMPERATURE INCREASE ABOVE PRE-INDUSTRIAL #
-    ###############################################################
+    ######################################################################
+    # PROJECTED AVERAGE GLOBAL TEMPERATURE INCREASE ABOVE PRE-INDUSTRIAL #
+    ######################################################################
 
     # region
     # From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
-    rcps = [rcp26, rcp45, rcp60, rcp85]
+    rcps = [rcp19, rcp26, rcp45, rcp60, rcp85]
 
     SURFACE_TEMP = "temperature.Tgav"
 
@@ -324,7 +332,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         hist = temp.loc[1850:2016]
         temp.loc[1900:2100].plot(label=rcp.name.split("_")[0], linestyle="--")
     hist.loc[1900:2100].plot(label="historical", color="black")
-    plt.legend(("DAU", "RCP4.5", "RCP6", "Baseline", "Historical"), loc="best")
+    plt.legend(("DAU", "RCP2.6" "RCP4.5", "RCP6", "Baseline", "Historical"), loc="best")
     plt.title("Global Mean Temperature")
     plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
 
@@ -347,13 +355,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     hist.plot(label="historical", color="black")
     plt.title("DAU with equilibrium climate sensitivity set to 1.5, 3, and 4.5")
     plt.ylabel("Deg. C")
-    plt.legend(("DAU", 'Historical', 'Sensitivity Range'), loc="upper left")
+    plt.legend(("DAU", "Historical", "Sensitivity Range"), loc="upper left")
 
     # endregion
 
-    #########################################
-    # FIG. 5b : PROJECTED RADIATIVE FORCING #
-    #########################################
+    ###############################
+    # PROJECTED RADIATIVE FORCING #
+    ###############################
 
     # region
     # from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
@@ -362,18 +370,18 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     results = pyhector.run(rcp26)
 
-    results[FORCING].loc[1900:2100].plot(linestyle='--')
+    results[FORCING].loc[1900:2100].plot(linestyle="--")
     hist = default[FORCING].loc[1900:2016]
     hist.plot(label="historical", color="black")
     plt.title("DAU: " + pyhector.output[FORCING]["description"])
     plt.ylabel(pyhector.output[FORCING]["unit"])
-    plt.legend(("DAU", 'Historical'), loc="upper left")
+    plt.legend(("DAU", "Historical"), loc="upper left")
 
     # endregion
 
-    ################################################
-    # FIG. 6a : PROJECTED CO2 EMISSIONS BY COUNTRY #
-    ################################################
+    ######################################
+    # PROJECTED CO2 EMISSIONS BY COUNTRY #
+    ######################################
 
     # region
     # from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb
@@ -411,22 +419,22 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    #####################################
-    # FIG. 6b : PROJECTED GHG EMISSIONS #
-    #####################################
+    ###########################
+    # PROJECTED GHG EMISSIONS #
+    ###########################
 
     # region
 
     emissions = ["ffi_emissions", "luc_emissions", "CH4_emissions", "N2O_emissions"]
-    rcp26[emissions].loc[1900:2100].plot(subplots=True, '--')
-    rcp26[emissions].loc[1900:2016].plot(subplots=True, '--', color='black')
+    rcp26[emissions].loc[1900:2100].plot(subplots=True)
+    rcp26[emissions].loc[1900:2016].plot(subplots=True, color="black")
     plt.suptitle("DAU Net Emissions")
 
     # endregion
 
-    #####################################################
-    # FIG. 7 : PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
-    #####################################################
+    ###########################################
+    # PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
+    ###########################################
 
     # region
     # from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
@@ -435,12 +443,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     results = pyhector.run(rcp26)
 
-    results[CONCENTRATION_CO2].loc[1900:2100].plot(linestyle='--')
+    results[CONCENTRATION_CO2].loc[1900:2100].plot(linestyle="--")
     hist = default[CONCENTRATION_CO2].loc[1900:2016]
     hist.plot(label="historical", color="black")
     plt.title("DAU: " + pyhector.output[CONCENTRATION_CO2]["description"])
     plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
-    plt.legend(("DAU", 'Historical'), loc="upper left")
+    plt.legend(("DAU", "Historical"), loc="upper left")
 
     # endregion
 
@@ -688,12 +696,21 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ##########################################
-    # FIG. 21 : ENERGY INTENSITY PROJECTIONS #
-    ##########################################
+    ################################
+    # ENERGY INTENSITY PROJECTIONS #
+    ################################
 
     # region
+    # https://github.com/iiasa/ipcc_sr15_scenario_analysis/blob/master/further_analysis/iamc15_energy_intensity.ipynb
 
+    # endregion
+
+    ###############################
+    # ECONOMIC GROWTH PROJECTIONS #
+    ###############################
+
+    # region
+    # https://github.com/iiasa/ipcc_sr15_scenario_analysis/blob/master/further_analysis/iamc15_gdp_per_capita.ipynb
     # endregion
 
     ###############################################
