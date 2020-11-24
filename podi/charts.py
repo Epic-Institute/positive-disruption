@@ -9,7 +9,7 @@ from matplotlib.lines import Line2D
 from matplotlib.ticker import PercentFormatter
 from scipy.interpolate import interp1d
 import pyhector
-from pyhector import rcp26, rcp45, rcp60, rcp85
+from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.data.iea_weo_etl import iea_region_list
 from podi.energy_supply import (
     data_end_year,
