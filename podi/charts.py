@@ -314,9 +314,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ######################################################################
-    # PROJECTED AVERAGE GLOBAL TEMPERATURE INCREASE ABOVE PRE-INDUSTRIAL #
-    ######################################################################
+    ######################
+    # TEMPERATURE CHANGE #
+    ######################
 
     # region
     # From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
