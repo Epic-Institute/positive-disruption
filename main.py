@@ -10,7 +10,13 @@ from podi.results_analysis import results_analysis
 import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
-from podi.cdr.cdr_util import cdr_needed_def
+from podi.cdr.cdr_util import (
+    cdr_needed_def,
+    grid_em_def,
+    heat_em_def,
+    transport_em_def,
+    fuel_em_def,
+)
 from podi.charts import charts
 from podi.data.iea_weo_etl import iea_region_list
 from podi.adoption_curve import adoption_curve
@@ -176,30 +182,41 @@ em_mitigated = (
 
 # region
 """
-cdr_baseline, cdr_cost_baseline, cdr_energy_baseline = cdr_mix(
-    em_baseline,
-    ef_baseline.loc["Grid"],
-    ef_baseline.loc["Heat"],
-    ef_baseline.loc["Transport"],
-    em_baseline.loc["Fuels"],
-)
+cdr_needed = (
+    abs(
+        em_targets_pathway.loc["Baseline PD20", 2010:]
+        - em_targets_pathway.loc["Pathway PD20", 2010:]
+    )    - em_targets_pathway.loc["Baseline PD20", 2010:] - em_pathway.loc[[' OECD ', 'NonOECD ']].sum())
+"""
+
+cdr_needed = cdr_needed_def[0:81]
+grid_em = grid_em_def
+heat_em = heat_em_def
+transport_em = transport_em_def
+fuel_em = fuel_em_def
 
 cdr_pathway, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
-    em_pathway.loc["Grid"],
-    ef_pathway.loc["Heat"],
-    ef_pathway.loc["Transport"],
-    em_pathway.loc["Fuels"],
+    cdr_needed, grid_em, heat_em, transport_em, fuel_em, 2020, 2100
 )
+
+cdr_pathway = (
+    pd.DataFrame(cdr_pathway, index=em_mitigated.columns[10:])
+    .T.fillna(0)
+    .iloc[[True, False, True, True], :]
+)
+
 
 # check if energy oversupply is at least energy demand needed for CDR
 
-if consump_cdr_baseline > cdr_energy_baseline:
-    print(
-        "Electricity oversupply does not meet CDR energy demand for Baseline Scenario"
+if (
+    sum(
+        elec_consump_cdr_pathway,
+        heat_consump_cdr_pathway,
     )
-if consump_cdr_pathway > cdr_energy_pathway:
+    > cdr_energy_pathway
+):
     print("Electricity oversupply does not meet CDR energy demand for Pathway Scenario")
-"""
+
 # endregion
 
 ###########

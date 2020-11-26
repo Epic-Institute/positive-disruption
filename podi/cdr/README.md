@@ -8,6 +8,8 @@ The following files play the following roles:
 4. **ecr_types.py:** implements behavior of specific ECR CDR strategies.
 5. **ncs_types.py:** implements behavior of specific NCS CDR strategies.
 
+<br/><br/>
+
 # Module inputs and outputs
 
 Inputs | Outputs
@@ -15,6 +17,8 @@ Inputs | Outputs
 Annual MtCO2 CDR requirements | Cost-optimal mix of CDR capacity in each year, by CDR technology (MtCO2/yr)
 Start year and end year | Total cost in each year (MM$), adjusted for CDR credits
 Emissions intensity of: **1)** Grid electricity (tCO2/TWh), **2)** Heat production (tCO2/MWh), **3)** Transportation (tCO2/t*km), **4)** Liquid fuels (tCO2/MWh) | Annual energy use (TWh), separated into: **1)** Grid electricity, **2)** Heat use, **3)** Transportation, **4)** Liquid fuels
+
+<br/><br/>
 
 # Optimization Process
 
@@ -136,6 +140,6 @@ The optimization takes place in `cdr_main.py` and relies on the CDR strategy fra
 
 Additionally, here are a couple areas with known potential for improvement:
 
-1. This optimization problem is NP-hard, so any exact solution would take impractically long to compute. Therefore, the results of this module are approximate, under the simplifying assumptions outlined above. The nature of the current greedy algorithm (always deploying the cheapest available technology) may also cause it to miss truly optimal solutions within an individual year. For example, if DAC gets cheaper with each MtCO2 deployment, then deploying 100% DAC in a year may be the cost-optimal strategy, even if DAC was not originally the cheapest technology in that year.
+1. The nature of the current greedy algorithm (always deploying the cheapest available technology) may cause it to miss truly optimal solutions within an individual year. For example, if DAC gets cheaper with each MtCO2 deployment, then deploying 100% DAC in a year may be the cost-optimal strategy, even if DAC was not originally the cheapest technology in that year.
 
 2. The optimization model currently runs in about 30 seconds for the full 2020-2100 range when dealing with LTSS-DAC, HTLS-DAC, ExSituEW, and GeologicStorage. At the moment, the cost and energy calculation step in `_add_next_year` (not the technology selection step) take up the most processing time. Future improvements to efficiency should look here first.

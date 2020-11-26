@@ -72,9 +72,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     axis_label = [
         "% TFC met by renewables",
-        "Buildings electricity demand as % \of Buildings TFC",
-        "Transport electricity demand as % \of Transport TFC",
-        "Industry electricity demand as % \of Industry TFC",
+        "% Transport TFC met by electricity & biofuels",
+        "% Buildings TFC met by electricity & renewable heat",
+        "% Industry TFC met by electricity & renewable heat",
         "MHa",
         "MHa",
         "GtCO2 removed",
@@ -97,8 +97,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                 color=(0, 0, 0),
             )
             ax.set_ylabel("% Adoption")
-            # secax = ax.secondary_yaxis("right")
-            # secax.set_ylabel(axis_label[j])
+            secax = ax.secondary_yaxis("right")
+            secax.set_ylabel(axis_label[j])
             plt.xlim([adoption_curves.columns.min(), adoption_curves.columns.max()])
             plt.ylim(0, 105)
             plt.grid(which="major", linestyle=":", axis="y")
@@ -200,13 +200,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     )
 
     em_mit_othergas = em_mitigated.loc[slice(None), "Other gases", :].sum()
-    """
-    em_mit_cdr = (
-        pd.Series(pd.read_csv(cdr_emissions).loc[data_start_year, long_proj_end_year])
-        .groupby("Metric")
-        .sum()
-    )
-    """
 
     em_mit_cdr = pd.Series(
         cdr_needed_def, index=np.arange(data_start_year, long_proj_end_year + 1)
@@ -252,8 +245,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         Line2D([0], [0], color=color[1], linewidth=4),
         Line2D([0], [0], color=color[12], linewidth=4, linestyle="--"),
         Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
         Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
+        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
     ]
 
     # endregion
@@ -1865,6 +1858,44 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     ########################################
 
     # region
+
+    color = (
+        (0.804, 0.868, 0.956),
+        (0.404, 0.332, 0.520),
+        (0.156, 0.472, 0.744),
+    )
+
+    custom_legend = [
+        Line2D([0], [0], color=color[0], linewidth=4),
+        Line2D([0], [0], color=color[1], linewidth=4),
+        Line2D([0], [0], color=color[2], linewidth=4),
+    ]
+
+    for i in range(0, 1):
+        fig = cdr_pathway / 1000
+        plt.figure(i)
+        plt.stackplot(
+            fig.T.index,
+            fig,
+            labels=fig.index,
+            colors=color,
+        )
+        plt.ylabel("GtCO2e/yr")
+        plt.xlim([2020, 2100])
+        plt.legend(
+            custom_legend,
+            [
+                "ExSitu Enhanced Weathering",
+                "Low-Temp Solid Sorbent DAC",
+                "High-temp Liquid Sorbent DAC",
+            ],
+            bbox_to_anchor=(1.05, 1),
+            fontsize="small",
+            loc=2,
+            borderaxespad=0.0,
+        )
+        plt.xticks(np.arange(2020, 2110, 10))
+        plt.title("CO2 Removed via CDR, " + iea_region_list[i])
 
     # endregion
 

@@ -68,10 +68,10 @@ STORAGE_PAIRINGS = {
 
 def cdr_mix(
     cdr_reqs: list = util.cdr_needed_def,
-    grid_em: list = util.GRID_EM_DEF,
-    heat_em: list = util.HEAT_EM_DEF,
-    transport_em: list = util.TRANSPORT_EM_DEF,
-    fuel_em: list = util.FUEL_EM_DEF,
+    grid_em: list = util.grid_em_def,
+    heat_em: list = util.heat_em_def,
+    transport_em: list = util.transport_em_def,
+    fuel_em: list = util.fuel_em_def,
     start: int = util.START_YEAR,
     end: int = util.END_YEAR,
 ) -> tuple:

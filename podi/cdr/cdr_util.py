@@ -143,7 +143,7 @@ cdr_needed_def = [
 """
 Default MtCO2/TWh emissions of grid electricity, from Epic PD21 model.
 """
-GRID_EM_DEF = [
+grid_em_def = [
     0.357,
     0.354,
     0.352,
@@ -239,7 +239,7 @@ Used here in tCO2/t*km (using 1/(1000 * 1.46) conversion factor).
 # from https://www.eia.gov/outlooks/aeo/data/browser/#/?id=51-IEO2019
 TRUCKING_RAT, SHIPPING_RAT, RAIL_RAT = 30.7, 10.5, 2.4
 
-TRANSPORT_EM_DEF = [
+transport_em_def = [
     np.average([0.202, 0.059, 0.023], weights=[TRUCKING_RAT, SHIPPING_RAT, RAIL_RAT])
     / (1000 * 1.46)
     * (END_YEAR - t)
@@ -259,7 +259,7 @@ from https://www.epa.gov/sites/production/files/2018-03/documents/emission-facto
 where it is given as 66.33 kgCO2/mmBTU of heat & steam.
 Used here in tCO2/MWh (using 1/(1000*0.2931) conversion factor).
 """
-HEAT_EM_DEF = [
+heat_em_def = [
     0.226305 * (END_YEAR - t) / (END_YEAR - START_YEAR)
     for t in range(START_YEAR, END_YEAR + 1)
 ]
@@ -269,7 +269,7 @@ Default tCO2/MWh for liquid fuels (assumed to be simply diesel), assumed to decl
 using 10.21 kgCO2/gal from https://www.epa.gov/sites/production/files/2018-03/documents/emission-factors_mar_2018_0.pdf
 and 117,100 Btu/gal (net) for biodiesel from https://tedb.ornl.gov/wp-content/uploads/2020/02/TEDB_Ed_38.pdf#page=391
 """
-FUEL_EM_DEF = [
+fuel_em_def = [
     0.2975 * (END_YEAR - t) / (END_YEAR - START_YEAR)
     for t in range(START_YEAR, END_YEAR + 1)
 ]

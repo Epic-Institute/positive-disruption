@@ -1,36 +1,35 @@
-###################
-Positive Disruption
-###################
+# Positive Disruption Model
 
-Prerequisites
-=============
+
+## Prerequisites
+
 
 1. `Python 3.8 <http://www.python.org/>`_
 2. `pipenv <https://pipenv.pypa.io/>`_
 
-Installation
-============
+## Installation
+
 
 1. Run ``pipenv install``.
 
 That's it.
 
-Usage
-=====
+## Usage
+
 
 1. Run ``pipenv shell``.
 2. While in the virtual environment you can run scripts.
 
-Developing
-==========
+## Developing
 
 1. Run ``pipenv install --dev``.
 2. Run ``pipenv shell`` to get into the virtual environment.
 
 Make sure to run tests and linters before committing: ``make all``
 
-Primer
-==========
+<br/><br/>
+
+# Primer
 
 The model has 7 components:
 
@@ -48,42 +47,45 @@ These components are run sequentially through main.py, and are meant to compare 
 
 
 1. socioeconomic
-==========
+
 - Population
 - GDP
 
 
-
 2. energy_demand
-==========
+
 - Takes historical energy demand, projected energy demand, and applies reductions based on measures such as energy efficiency, shift of heat demand to electricity via heat pumps, transport efficiency, shift from fuels to electricity via electric vehicles, solar thermal energy, and biofuels.
 
 3. energy_supply
-==========
+
 - Takes energy demand estimates, and estimates the technology mix of energy supply. Historical adoption rates and estimated saturation points are used to fit a logistics curve to future adoption.
 
 
 4. afolu
-==========
+
 - 
 
 
 5. emissions
-==========
+
 - Takes energy supply technology mix and emissions factors to estimate energy emissions. These are added to afolu emissions and additional emissions sources from non-energy processes to arrive at a total emission estimate.
 
 
 6. results_analysis
-==========
+
 - 
 
 
 7. charts
-==========
+
 - Produces charts of results
 
-Input Files
-=============
+
+<br/><br/>
+
+
+# Input Files
+
 
 The following files, located in `podi/data <https://github.com/Epic-Institute/positive-disruption/tree/master/podi/data/>`_, serve as inputs to the model scripts.
 
@@ -170,8 +172,7 @@ The following files, located in `podi/data <https://github.com/Epic-Institute/po
   - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with data on energy demand, energy efficiency, solar thermal, heat pump, and biofuels.
 
 
-Project Organization
-------------
+# Project Organization
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
@@ -214,8 +215,5 @@ Project Organization
        │   └── train_model.py
        │
        └── visualization  <- Scripts to create exploratory and results oriented visualizations
-          └── visualize.py
-    
---------
-
+          └── visualize.py   
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. </small></p>

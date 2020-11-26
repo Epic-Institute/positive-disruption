@@ -66,8 +66,8 @@ def results_analysis(
     energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
     transport_decarb = (
-        pd.DataFrame(transport_consump_pathway.loc[region, "Biofuels"])
-        .T.droplevel(level=0)
+        pd.DataFrame(transport_consump_pathway.loc[region, "Biofuels", :])
+        .droplevel(level=0)
         .append(energy_demand_pathway.loc[region, "Transport", "Electricity"])
         .sum()
         .div(
