@@ -189,18 +189,18 @@ cdr_needed = (
     )    - em_targets_pathway.loc["Baseline PD20", 2010:] - em_pathway.loc[[' OECD ', 'NonOECD ']].sum())
 """
 
-cdr_needed = cdr_needed_def[0:81]
+cdr_needed = cdr_needed_def
 grid_em = grid_em_def
 heat_em = heat_em_def
 transport_em = transport_em_def
 fuel_em = fuel_em_def
 
 cdr_pathway, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
-    cdr_needed, grid_em, heat_em, transport_em, fuel_em, 2020, 2100
+    cdr_needed, grid_em, heat_em, transport_em, fuel_em, 2010, 2100
 )
 
 cdr_pathway = (
-    pd.DataFrame(cdr_pathway, index=em_mitigated.columns[10:])
+    pd.DataFrame(cdr_pathway, index=em_mitigated.columns)
     .T.fillna(0)
     .iloc[[True, False, True, True], :]
 )
@@ -249,7 +249,7 @@ for i in range(17, 19):
         heat_consump_pathway,
         transport_consump_pathway,
         afolu_per_adoption_pathway,
-        cdr_needed_def,
+        cdr_pathway,
     )
 
 # endregion

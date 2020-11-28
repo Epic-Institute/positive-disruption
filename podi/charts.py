@@ -109,6 +109,33 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                 + iea_region_list[i]
             )
 
+            # Absolute values
+
+            """
+            t = adoption_curves.columns
+            data1 = adoption_curves.loc['Grid']
+            data2 = ren
+
+            fig, ax1 = plt.subplots()
+
+            color = 'tab:red'    
+            ax1.set_ylabel('% Adoption', color=color )
+            ax1.plot(t, data1, color=color)
+            ax1.tick_params(axis='y', labelcolor=color)
+            plt.grid(which="major", linestyle=":", axis="y")
+
+            ax2 = ax1.twinx()
+            color='tab:blue'
+            ax2.set_ylabel('TFC (TWh)',color=color)
+            ax2.plot(t, data2,color=color)
+            ax2.tick_params(axis='y', labelcolor=color)
+
+            plt.xlim([2010, 2100])
+            
+            fig.tight_layout()
+            plt.show()
+            """
+
     # endregion
 
     ##############################
@@ -202,7 +229,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     em_mit_othergas = em_mitigated.loc[slice(None), "Other gases", :].sum()
 
     em_mit_cdr = pd.Series(
-        cdr_needed_def, index=np.arange(data_start_year, long_proj_end_year + 1)
+        cdr_pathway, index=np.arange(data_start_year, long_proj_end_year + 1)
     )
 
     em_mit = pd.DataFrame(
@@ -449,17 +476,17 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ##################################################
-    # FIG. 16 : ACTUAL VS. PROJECTED ADOPTION CURVES #
-    ##################################################
+    ########################################
+    # ACTUAL VS. PROJECTED ADOPTION CURVES #
+    ########################################
 
     # region
 
     # endregion
 
-    #################################################
-    # FIG. 19 : ENERGY DEMAND BY SECTOR AND END-USE #
-    #################################################
+    #######################################
+    # ENERGY DEMAND BY SECTOR AND END-USE #
+    #######################################
 
     # region
 
@@ -685,9 +712,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    #############################################
-    # FIG. 20 : ENERGY DEMAND MITIGATION WEDGES #
-    #############################################
+    ###################################
+    # ENERGY DEMAND MITIGATION WEDGES #
+    ###################################
 
     # region
 
@@ -710,9 +737,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # https://github.com/iiasa/ipcc_sr15_scenario_analysis/blob/master/further_analysis/iamc15_gdp_per_capita.ipynb
     # endregion
 
-    ###############################################
-    # FIG. 24 : ENERGY SUPPLY BY SOURCE & END-USE #
-    ###############################################
+    #####################################
+    # ENERGY SUPPLY BY SOURCE & END-USE #
+    #####################################
 
     # region
 
@@ -877,9 +904,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ##############################################
-    # FIG. 25 : ELECTRICITY GENERATION BY SOURCE #
-    ##############################################
+    ####################################
+    # ELECTRICITY GENERATION BY SOURCE #
+    ####################################
 
     # region
 
@@ -985,9 +1012,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ################################################
-    # FIG. 26 : ELECTRICITY DEMAND BY SECTOR (TWH) #
-    ################################################
+    ######################################
+    # ELECTRICITY DEMAND BY SECTOR (TWH) #
+    ######################################
 
     # region
 
@@ -1033,9 +1060,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    #####################################
-    # FIG. 27 : BUILDINGS ENERGY SUPPLY #
-    #####################################
+    ###########################
+    # BUILDINGS ENERGY SUPPLY #
+    ###########################
 
     # region
 
@@ -1115,9 +1142,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ###############################################
-    # FIG. 28 : INDUSTRY ENERGY DEMAND BY END-USE #
-    ###############################################
+    #####################################
+    # INDUSTRY ENERGY DEMAND BY END-USE #
+    #####################################
 
     # region
 
@@ -1200,9 +1227,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ##################################
-    # FIG. 29 : INDUSTRY HEAT SUPPLY #
-    ##################################
+    ########################
+    # INDUSTRY HEAT SUPPLY #
+    ########################
 
     # region
 
@@ -1295,9 +1322,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ##########################################
-    # FIG. 30 : TRANSPORTATION ENERGY DEMAND #
-    ##########################################
+    ################################
+    # TRANSPORTATION ENERGY DEMAND #
+    ################################
 
     # region
 
@@ -1361,25 +1388,25 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    #########################################
-    # FIG. 31 : ELECTRIFICATION OF VEHICLES #
-    #########################################
+    ###############################
+    # ELECTRIFICATION OF VEHICLES #
+    ###############################
 
     # region
 
     # endregion
 
     ##############################################################
-    # FIG. 32 : TRANSPORTATION ENERGY DEMAND REDUCTION FROM DESIGN IMPROVEMENTS #
+    # TRANSPORTATION ENERGY DEMAND REDUCTION FROM DESIGN IMPROVEMENTS #
     ##############################################################
 
     # region
 
     # endregion
 
-    ##################################################################
-    # FIG. 33 : REGENERATIVE AGRICULTURE SUBVECTOR MITIGATION WEDGES #
-    ##################################################################
+    ########################################################
+    # REGENERATIVE AGRICULTURE SUBVECTOR MITIGATION WEDGES #
+    ########################################################
 
     # region
 
@@ -1531,9 +1558,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ############################################################
-    # FIG. 34 : FORESTS & WETLANDS SUBVECTOR MITIGATION WEDGES #
-    ############################################################
+    ##################################################
+    # FORESTS & WETLANDS SUBVECTOR MITIGATION WEDGES #
+    ##################################################
 
     # region
 
@@ -1671,9 +1698,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ###############################################
-    # FIG. 35 : AFOLU SUBVECTOR MITIGATION WEDGES #
-    ###############################################
+    #####################################
+    # AFOLU SUBVECTOR MITIGATION WEDGES #
+    #####################################
 
     # region
 
@@ -1853,9 +1880,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ########################################
-    # FIG. 40 : ANNUAL CO2 REMOVED VIA CDR #
-    ########################################
+    ##############################
+    # ANNUAL CO2 REMOVED VIA CDR #
+    ##############################
 
     # region
 

@@ -2,6 +2,7 @@
 
 import pandas as pd
 from podi.energy_supply import data_start_year, long_proj_end_year
+from podi.adoption_curve import adoption_curve
 
 
 def results_analysis(
@@ -12,7 +13,7 @@ def results_analysis(
     heat_consump_pathway,
     transport_consump_pathway,
     afolu_per_adoption,
-    cdr_needed_def,
+    cdr_pathway,
 ):
 
     ###################
@@ -402,9 +403,17 @@ def results_analysis(
     # region
 
     cdr_decarb = pd.DataFrame(
-        pd.DataFrame(cdr_needed_def) / pd.DataFrame(cdr_needed_def).max()
+        pd.DataFrame(cdr_pathway).sum() / pd.DataFrame(cdr_pathway).sum().max()
     ).T
-    cdr_decarb.columns = grid_decarb.columns
+    cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
+        cdr_decarb.idxmax(1).values[0]
+    ]
+    cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
+    cdr_decarb = pd.Series(
+        cdr_decarb.values[0], index=cdr_decarb.columns, name="Carbon Dioxide Removal"
+    )
+
+    cdr_decarb = adoption_curve(cdr_decarb, "World ", "Pathway", "All").T
     cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
 
     # endregion

@@ -21,7 +21,7 @@ ACCEPT_DEFICIT = True
 # Global constants #
 ####################
 
-START_YEAR = 2020
+START_YEAR = 2010
 END_YEAR = 2100
 
 PROJECT_SIZE = 1  # MtCO2/yr
@@ -47,16 +47,16 @@ FUEL_COST = 0.179  # $/kWh for fuel
 Default MtCO2/yr of CDR needed, from Epic PD21 model.
 """
 cdr_needed_def = [
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
-    50,
+    348,
+    348,
+    348,
+    348,
+    348,
+    348,
+    348,
+    348,
+    348,
+    348,
     348,
     386,
     428,
@@ -144,6 +144,16 @@ cdr_needed_def = [
 Default MtCO2/TWh emissions of grid electricity, from Epic PD21 model.
 """
 grid_em_def = [
+    0.357,
+    0.357,
+    0.357,
+    0.357,
+    0.357,
+    0.357,
+    0.357,
+    0.357,
+    0.357,
+    0.357,
     0.357,
     0.354,
     0.352,

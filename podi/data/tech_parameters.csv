@@ -8803,3 +8803,10 @@ NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
  OECD ,Biochar,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Biochar,Pathway,AFOLU,Saturation Point,110
 NonOECD ,Biochar,Baseline,AFOLU,Saturation Point,100
+World ,Carbon Dioxide Removal,Pathway,All,Saturation Point,100
+World ,Carbon Dioxide Removal,Pathway,All,"Parameter a, min",0
+World ,Carbon Dioxide Removal,Pathway,All,"Parameter a, max",0.5
+World ,Carbon Dioxide Removal,Pathway,All,"Parameter b, min",0
+World ,Carbon Dioxide Removal,Pathway,All,"Parameter b, max",100
+World ,Carbon Dioxide Removal,Pathway,All,Floor,0
+World ,Carbon Dioxide Removal,Pathway,All,Max annual growth,100
