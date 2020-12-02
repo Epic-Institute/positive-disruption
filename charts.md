@@ -2,24 +2,24 @@
 
 ## World
 
-![](./podi/data/figs/3a.png)
+![](./podi/data/figs/scurves-World .png)
 
 <br/><br/>
 
 ## USA
 
-(/podi/data/figs/3a.png)
+![](./podi/data/figs/scurves-World .png)
 
 <br/><br/>
 
 ## China
 
-(/podi/data/figs/3a.png)
+![](./podi/data/figs/scurves-World .png)
 
 <br/><br/>
 
 ## India
 
-(/podi/data/figs/3a.png)
+![](./podi/data/figs/scurves-World .png)
 
 <br/><br/>
