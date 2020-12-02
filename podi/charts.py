@@ -404,10 +404,10 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     plt.ylabel("Deg. C")
     plt.legend(("DAU", "Historical", "Sensitivity Range"), loc="upper left")
     plt.savefig(
-    fname="podi/data/figs/sensitivity",
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
+        fname="podi/data/figs/sensitivity",
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
     )
 
     # endregion
@@ -430,10 +430,10 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     plt.ylabel(pyhector.output[FORCING]["unit"])
     plt.legend(("DAU", "Historical"), loc="upper left")
     plt.savefig(
-    fname="podi/data/figs/forcing",
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
+        fname="podi/data/figs/forcing",
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
     )
 
     # endregion
@@ -476,10 +476,10 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             grouped.get_group(key).plot(ax=ax, legend=False)
             ax.set_ylabel(unit)
         plt.savefig(
-        fname="podi/data/figs/emissions-" + code,
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
+            fname="podi/data/figs/emissions-" + code,
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
         )
 
     # endregion
@@ -518,6 +518,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     plt.title("DAU: " + pyhector.output[CONCENTRATION_CO2]["description"])
     plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
     plt.legend(("DAU", "Historical"), loc="upper left")
+    plt.savefig(
+        fname="podi/data/figs/co2conc",
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
+    )
 
     # endregion
 
@@ -644,6 +650,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_baseline.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/energydemand_baseline-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
 
     # Pathway (Sum OECD/NonOECD)
 
@@ -754,6 +766,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/energydemand_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
 
     # endregion
 

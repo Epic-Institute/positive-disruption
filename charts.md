@@ -24,14 +24,17 @@
 ![](./podi/data/figs/temperature)
 ![](./podi/data/figs/sensitivity)
 ![](./podi/data/figs/forcing)
+![](./podi/data/figs/co2conc)
 
+<br/><br/>
+
+![](./podi/data/figs/emissions-USA)<br/><br/>
+![](./podi/data/figs/emissions-CHN)<br/><br/>
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-USA)
-![](./podi/data/figs/emissions-CHN)
-
-<br/><br/>
+![](./podi/data/figs/energydemand_baseline-World )
+![](./podi/data/figs/energydemand_pathway-World )
 
 ## USA
 
