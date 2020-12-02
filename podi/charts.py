@@ -244,7 +244,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     em_mit_othergas = em_mitigated.loc[slice(None), "Other gases", :].sum()
 
     em_mit_cdr = pd.Series(
-        cdr_pathway, index=np.arange(data_start_year, long_proj_end_year + 1)
+        cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
     )
 
     em_mit = pd.DataFrame(
@@ -346,6 +346,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.xticks(np.arange(2020, 2110, 10))
         plt.yticks(np.arange(-25, 105, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/mitigationwedges-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
 
     # endregion
 
@@ -370,6 +376,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     plt.legend(("DAU", "Baseline", "Historical"), loc="best")
     plt.title("Global Mean Temperature")
     plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
+    plt.savefig(
+        fname="podi/data/figs/temperature",
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
+    )
 
     # Climate sensitivity analysis
 
@@ -391,6 +403,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     plt.title("DAU with equilibrium climate sensitivity set to 1.5, 3, and 4.5")
     plt.ylabel("Deg. C")
     plt.legend(("DAU", "Historical", "Sensitivity Range"), loc="upper left")
+    plt.savefig(
+    fname="podi/data/figs/sensitivity",
+    format="png",
+    bbox_inches="tight",
+    pad_inches=0.1,
+    )
 
     # endregion
 
@@ -411,6 +429,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     plt.title("DAU: " + pyhector.output[FORCING]["description"])
     plt.ylabel(pyhector.output[FORCING]["unit"])
     plt.legend(("DAU", "Historical"), loc="upper left")
+    plt.savefig(
+    fname="podi/data/figs/forcing",
+    format="png",
+    bbox_inches="tight",
+    pad_inches=0.1,
+    )
 
     # endregion
 
@@ -451,6 +475,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             ax.set_title(key, fontsize=10)
             grouped.get_group(key).plot(ax=ax, legend=False)
             ax.set_ylabel(unit)
+        plt.savefig(
+        fname="podi/data/figs/emissions-" + code,
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
+        )
 
     # endregion
 

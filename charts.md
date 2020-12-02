@@ -14,6 +14,22 @@
 ![](./podi/data/figs/scurves_ind-Forests & Wetlands-World )
 ![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-World )
 
+<br/><br/>
+
+![](./podi/data/figs/mitigationwedges-World )
+
+
+<br/><br/>
+
+![](./podi/data/figs/temperature)
+![](./podi/data/figs/sensitivity)
+![](./podi/data/figs/forcing)
+
+
+<br/><br/>
+
+![](./podi/data/figs/emissions-USA)
+![](./podi/data/figs/emissions-CHN)
 
 <br/><br/>
 
