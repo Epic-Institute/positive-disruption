@@ -216,4 +216,4 @@ The following files, located in `podi/data <https://github.com/Epic-Institute/po
        │
        └── visualization  <- Scripts to create exploratory and results oriented visualizations
           └── visualize.py   
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. </small></p>
+<p></p>
