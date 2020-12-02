@@ -67,9 +67,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             loc=2,
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
-            borderaxespad=0.0,
+            # borderaxespad=0.0,
         )
-        plt.savefig(fname="podi/data/figs/scurves-" + iea_region_list[i], format="png")
+        plt.savefig(
+            fname="podi/data/figs/scurves-" + iea_region_list[i],
+            format="svg",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
 
     axis_label = [
         "% TFC met by renewables",
