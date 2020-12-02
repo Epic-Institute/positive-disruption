@@ -1,5 +1,4 @@
-# Positive Disruption Model
-
+# Model Overview
 
 The model has 7 components:
 
@@ -18,37 +17,35 @@ These components are run sequentially through main.py, and are meant to compare 
 
 1. socioeconomic
 
-- Population
-- GDP
+  Estimates population and GDP
 
 
 2. energy_demand
 
-- Takes historical energy demand, projected energy demand, and applies reductions based on measures such as energy efficiency, shift of heat demand to electricity via heat pumps, transport efficiency, shift from fuels to electricity via electric vehicles, solar thermal energy, and biofuels.
+  Takes historical energy demand, projected energy demand, and applies reductions based on measures such as energy efficiency, shift of heat demand to electricity via heat pumps, transport efficiency, shift from fuels to electricity via electric vehicles, solar thermal energy, and biofuels.
 
 3. energy_supply
 
-- Takes energy demand estimates, and estimates the technology mix of energy supply. Historical adoption rates and estimated saturation points are used to fit a logistics curve to future adoption.
+  Takes energy demand estimates, and estimates the technology mix of energy supply. Historical adoption rates and estimated saturation points are used to fit a logistics curve to future adoption.
 
 
 4. afolu
 
-- 
+
 
 
 5. emissions
 
-- Takes energy supply technology mix and emissions factors to estimate energy emissions. These are added to afolu emissions and additional emissions sources from non-energy processes to arrive at a total emission estimate.
+  Takes energy supply technology mix and emissions factors to estimate energy emissions. These are added to afolu emissions and additional emissions sources from non-energy processes to arrive at a total emission estimate.
 
 
 6. results_analysis
 
-- 
 
 
 7. charts
 
-- Produces charts of results
+  Produces charts of results
 
 
 <br/><br/>

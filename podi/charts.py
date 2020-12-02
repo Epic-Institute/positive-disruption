@@ -65,7 +65,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(
             adoption_curves.index,
             loc=2,
-            fontsize="large",
+            fontsize="small",
             bbox_to_anchor=(1.05, 1),
             # borderaxespad=0.0,
         )
