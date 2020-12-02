@@ -3,6 +3,9 @@
 ## World
 
 ![](./podi/data/figs/scurves-World )
+
+<br/><br/>
+
 ![](./podi/data/figs/scurves_ind-Grid-World )
 ![](./podi/data/figs/scurves_ind-Transport-World )
 ![](./podi/data/figs/scurves_ind-Buildings-World )
