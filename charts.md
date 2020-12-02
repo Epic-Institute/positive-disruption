@@ -2,7 +2,7 @@
 
 ## World
 
-![](./podi/data/figs/scurves-World .png)
+![](./podi/data/figs/scurves-World)
 
 <br/><br/>
 
