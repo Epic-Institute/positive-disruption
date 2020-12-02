@@ -65,13 +65,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(
             adoption_curves.index,
             loc=2,
-            fontsize="small",
+            fontsize="large",
             bbox_to_anchor=(1.05, 1),
             # borderaxespad=0.0,
         )
         plt.savefig(
             fname="podi/data/figs/scurves-" + iea_region_list[i],
-            format="jpg",
+            format="png",
             bbox_inches="tight",
             pad_inches=0.1,
         )
