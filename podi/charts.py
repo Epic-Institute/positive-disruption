@@ -71,7 +71,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
         plt.savefig(
             fname="podi/data/figs/scurves-" + iea_region_list[i],
-            format="svg",
+            format="jpg",
             bbox_inches="tight",
             pad_inches=0.1,
         )
