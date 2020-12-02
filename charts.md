@@ -18,7 +18,6 @@
 
 ![](./podi/data/figs/mitigationwedges-World )
 
-
 <br/><br/>
 
 ![](./podi/data/figs/temperature)
