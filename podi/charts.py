@@ -114,6 +114,15 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                 + ", "
                 + iea_region_list[i]
             )
+            plt.savefig(
+                fname="podi/data/figs/scurves_ind-"
+                + adoption_curves.index[j]
+                + "-"
+                + iea_region_list[i],
+                format="png",
+                bbox_inches="tight",
+                pad_inches=0.1,
+            )
 
             # Absolute values
 
