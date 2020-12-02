@@ -2,7 +2,7 @@
 
 ## World
 
-(/podi/data/figs/3a.png)
+!(./podi/data/figs/3a.png)
 
 <br/><br/>
 
