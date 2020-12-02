@@ -493,10 +493,16 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
 
     for emissions in emissions:
-        plt.plot(rcp19[emissions].loc[1900:2100])
+        fig = plt.plot(rcp19[emissions].loc[1900:2100])
         plt.plot(rcp19[emissions].loc[1900:2016], color="black")
         plt.ylabel("GtC")
         plt.title("DAU Net Emissions, " + emissions)
+        plt.savefig(
+            fname="podi/data/figs/emissions-" + emissions,
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
         plt.show()
 
     # endregion
