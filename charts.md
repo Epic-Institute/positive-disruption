@@ -8,18 +8,18 @@
 
 ## USA
 
-![](./podi/data/figs/scurves-World .png)
+![](./podi/data/figs/scurves-World )
 
 <br/><br/>
 
 ## China
 
-![](./podi/data/figs/scurves-World .png)
+![](./podi/data/figs/scurves-World )
 
 <br/><br/>
 
 ## India
 
-![](./podi/data/figs/scurves-World .png)
+![](./podi/data/figs/scurves-World )
 
 <br/><br/>
