@@ -31,6 +31,10 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     #####################################
 
     # region
+
+    # COMBINED SCURVE CHART
+
+    # region
     xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 19)
 
     color = pd.DataFrame(
@@ -75,6 +79,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_inches="tight",
             pad_inches=0.1,
         )
+        plt.clf()
+
+    # endregion
+
+    # INDIVIDUAL SCURVE CHART
+
+    # region
 
     axis_label = [
         "% TFC met by renewables",
@@ -153,19 +164,21 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
+    # endregion
+
     ##############################
     # SUBVECTOR DIFFUSION CURVES #
     ##############################
 
     # region
+
     # show how subvector diffusion curves build up to vector diffusion
+
     # endregion
 
     ###########################
     # MITIGATION WEDGES CURVE #
     ###########################
-
-    # region
 
     # region
 
@@ -184,10 +197,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.999, 0.976, 0.332),
         (0.748, 0.232, 0.204),
     )
-
-    # endregion
-
-    # region
 
     em_mit_electricity = (
         em_mitigated.loc[slice(None), "Electricity", slice(None)].sum() * 0.95
@@ -291,8 +300,6 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
     ]
 
-    # endregion
-
     for i in range(0, 1):
         fig = ((em_mit.append(spacer)) / 1000).reindex(
             [
@@ -362,6 +369,10 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # region
     # From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
+    # TEMPERATURE
+
+    # region
+
     rcps = [rcp19, rcp85]
 
     SURFACE_TEMP = "temperature.Tgav"
@@ -383,7 +394,11 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         pad_inches=0.1,
     )
 
-    # Climate sensitivity analysis
+    # endregion
+
+    # CLIMATE SENSITIVITY
+
+    # region
 
     low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
     default = pyhector.run(rcp19, {"temperature": {"S": 3}})
@@ -409,6 +424,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         bbox_inches="tight",
         pad_inches=0.1,
     )
+    plt.clf()
+    # endregion
 
     # endregion
 
@@ -481,7 +498,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_inches="tight",
             pad_inches=0.1,
         )
-
+    plt.clf()
     # endregion
 
     ###########################
@@ -504,6 +521,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             pad_inches=0.1,
         )
         plt.show()
+    plt.clf()
 
     # endregion
 
@@ -530,6 +548,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         bbox_inches="tight",
         pad_inches=0.1,
     )
+    plt.show()
+    plt.clf()
 
     # endregion
 
@@ -662,6 +682,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_inches="tight",
             pad_inches=0.1,
         )
+        plt.show()
+        plt.clf()
 
     # Pathway (Sum OECD/NonOECD)
 
@@ -778,6 +800,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_inches="tight",
             pad_inches=0.1,
         )
+        plt.show()
+        plt.clf()
 
     # endregion
 
@@ -869,7 +893,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    # Baseline
+    # BASELINE
 
     # region
 
@@ -917,10 +941,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+        plt.show()
+        plt.clf()
 
     # endregion
 
-    # Pathway
+    # PATHWAY
 
     # region
 
@@ -968,6 +994,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+        plt.savefig(
+            fname="podi/data/figs/energysupply_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
 
@@ -1003,7 +1037,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    # Stacked Area (TWh)
+    # STACKED AREA PLOT
 
     # region
 
@@ -1024,10 +1058,17 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.title("Electricity Generation by Source, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-
+        plt.savefig(
+            fname="podi/data/figs/electricity_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
     # endregion
 
-    # Line plot (%)
+    # LINE PLOT
 
     # region
 
@@ -1050,10 +1091,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_to_anchor=(1.05, 1),
             borderaxespad=0.0,
         )
+        plt.show()
+        plt.clf()
 
     # endregion
 
-    # Stacked 100% plot
+    # STACKED 100% PLOT
 
     # region
 
@@ -1076,6 +1119,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_to_anchor=(1.05, 1),
             borderaxespad=0.0,
         )
+        plt.show()
+        plt.clf()
 
     # endregion
 
@@ -1126,6 +1171,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Electricity Demand by Sector, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/elecbysector_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
 
@@ -1208,7 +1261,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Buildings Energy Supply, " + iea_region_list[i])
-
+        plt.savefig(
+            fname="podi/data/figs/buildings_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
     # endregion
 
     #####################################
@@ -1293,13 +1353,21 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Industry Energy Demand by End-Use, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/industry_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
 
     ########################
     # INDUSTRY HEAT SUPPLY #
     ########################
-
+    """
     # region
 
     # Heat generation by source
@@ -1329,10 +1397,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         energy_demand_pathway_i = energy_demand_pathway.loc[
             [" OECD ", "NonOECD "], slice(None), slice(None), "Pathway"
         ]
-
         fig = (
             energy_demand_pathway_i.loc[
-                ([" OECD ", "NonOECD "], "Industry", "Electricity", slice(None)), :
+                (slice(None), "Industry", "Electricity", slice(None)), :
             ]
             .groupby(["Sector"])
             .sum()
@@ -1344,12 +1411,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             .append(
                 pd.DataFrame(
                     energy_demand_pathway_i.loc[
-                        [" OECD ", "NonOECD "], "Industry", slice(None)
+                        slice(None), "Industry", slice(None), slice(None)
                     ]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
-                        ["Fossil fuels", "Bioenergy", "Solar thermal", "Waste"],
+                        ['Coal', 'Natural gas', 'Oil', "Bioenergy", "Heat", "Other renewables"],
                         :,
                     ]
                     .sum()
@@ -1388,9 +1455,17 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Industry Energy Demand by End-Use, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/industryheat_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
-
+    """
     ################################
     # TRANSPORTATION ENERGY DEMAND #
     ################################
@@ -1454,6 +1529,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, 2110, 10))
         plt.title("Transportation Energy Supply, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/transport_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
 
@@ -1465,9 +1548,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # endregion
 
-    ##############################################################
+    ###################################################################
     # TRANSPORTATION ENERGY DEMAND REDUCTION FROM DESIGN IMPROVEMENTS #
-    ##############################################################
+    ###################################################################
 
     # region
 
@@ -1624,6 +1707,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             "Regenerative Agriculture Subvector Mitigation Wedges, "
             + iea_region_list[i]
         )
+        plt.savefig(
+            fname="podi/data/figs/ra_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
 
@@ -1764,6 +1855,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.title(
             "Forests & Wetlands Subvector Mitigation Wedges, " + iea_region_list[i]
         )
+        plt.savefig(
+            fname="podi/data/figs/fw_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
 
@@ -1946,6 +2045,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.xticks(np.arange(2020, 2110, 10))
         plt.yticks(np.arange(-17, 10, 5))
         plt.title("AFOLU Subvector Mitigation Wedges, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/afolu_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
 
@@ -1992,6 +2099,14 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         )
         plt.xticks(np.arange(2020, 2110, 10))
         plt.title("CO2 Removed via CDR, " + iea_region_list[i])
+        plt.savefig(
+            fname="podi/data/figs/cdr_pathway-" + iea_region_list[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        plt.clf()
 
     # endregion
 

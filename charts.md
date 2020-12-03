@@ -2,6 +2,8 @@
 
 ## World
 
+### Adoption Curves
+
 ![](./podi/data/figs/scurves-World )
 
 <br/><br/>
@@ -16,6 +18,8 @@
 
 <br/><br/>
 
+### Emissions
+
 ![](./podi/data/figs/mitigationwedges-World )
 
 <br/><br/>
@@ -27,28 +31,52 @@
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-USA)<br/><br/>
-![](./podi/data/figs/emissions-CHN)<br/><br/>
+![](./podi/data/figs/emissions-ffi_emissions)<br/><br/>
+![](./podi/data/figs/emissions-CH4_emissions)<br/><br/>
+![](./podi/data/figs/emissions-N2O_emissions)<br/><br/>
 
 <br/><br/>
 
-![](./podi/data/figs/energydemand_baseline-World )
-![](./podi/data/figs/energydemand_pathway-World )
+### Energy Supply & Demand
 
-## USA
-
-![](./podi/data/figs/scurves-World )
-
-<br/><br/>
-
-## China
-
-![](./podi/data/figs/scurves-World )
+![](./podi/data/figs/energydemand_pathway-World )<br/><br/>
+![](./podi/data/figs/energysupply_pathway-World )<br/><br/>
+![](./podi/data/figs/electricity_pathway-World )<br/><br/>
+![](./podi/data/figs/elecbysector_pathway-World )<br/><br/>
+![](./podi/data/figs/buildings_pathway-World )<br/><br/>
+![](./podi/data/figs/industry_pathway-World )<br/><br/>
+![](./podi/data/figs/transport_pathway-World )<br/><br/>
 
 <br/><br/>
 
-## India
+### Natural Climate Solutions
 
-![](./podi/data/figs/scurves-World )
+![](./podi/data/figs/ra_pathway-World )<br/><br/>
+![](./podi/data/figs/fw_pathway-World )<br/><br/>
+![](./podi/data/figs/afolu_pathway-World )<br/><br/>
 
 <br/><br/>
+
+### Carbon Dioxide Removal
+
+![](./podi/data/figs/cdr_pathway-World )<br/><br/>
+
+<br/><br/>
+
+***
+
+## <NEXT REGION>
+
+
+
+<br/><br/>
+
+***
+
+## <NEXT REGION>
+
+
+
+<br/><br/>
+
+***
