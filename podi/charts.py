@@ -395,6 +395,8 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         bbox_inches="tight",
         pad_inches=0.1,
     )
+    plt.show()
+    plt.clf()
 
     # endregion
 
@@ -426,7 +428,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         bbox_inches="tight",
         pad_inches=0.1,
     )
+    plt.show()
     plt.clf()
+
     # endregion
 
     # endregion
