@@ -1153,7 +1153,7 @@
 ![](./podi/data/figs/energysupply_pathway-MEA-M )<br/><br/>
 ![](./podi/data/figs/electricity_pathway-MEA-M )<br/><br/>
 ![](./podi/data/figs/elecbysector_pathway-MEA-M )<br/><br/>
-![](./podi/data/figs/buildings_pathway-MEA-M)<br/><br/>
+![](./podi/data/figs/buildings_pathway-MEA-M )<br/><br/>
 ![](./podi/data/figs/industry_pathway-MEA-M )<br/><br/>
 ![](./podi/data/figs/transport_pathway-MEA-M )<br/><br/>
 
