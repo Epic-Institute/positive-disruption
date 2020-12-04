@@ -35,30 +35,28 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # COMBINED SCURVE CHART
 
     # region
-    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 19)
+    xnew = np.linspace(adoption_curves.columns.min(), adoption_curves.columns.max(), 30)
 
-    color = pd.DataFrame(
-        {
-            "Grid": [(0.120, 0.107, 0.155)],
-            "Transport": [(0.93, 0.129, 0.180)],
-            "Buildings": [(0.225, 0.156, 0.98)],
-            "Industry": [(0.44, 0.74, 0.114)],
-            "Regenerative Agriculture": [(0.130, 0.143, 0.81)],
-            "Forests & Wetlands": [(0.138, 0.188, 0.175)],
-            "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
-        }
-    ).T
+    color = {
+        "Grid": [(0.120, 0.107, 0.155)],
+        "Transport": [(0.93, 0.129, 0.180)],
+        "Buildings": [(0.225, 0.156, 0.98)],
+        "Industry": [(0.44, 0.74, 0.114)],
+        "Regenerative Agriculture": [(0.130, 0.143, 0.81)],
+        "Forests & Wetlands": [(0.138, 0.188, 0.175)],
+        "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
+    }
 
-    for i in range(0, 1):
+    for i in range(17, 19):
         fig = adoption_curves.apply(
             lambda x: interp1d(adoption_curves.columns.values, x, kind="cubic"), axis=1
         )
-        plt.figure(i)
+        plt.figure(i, figsize=(9, 5))
         fig.apply(lambda x: plt.plot(xnew, x(xnew) * 100, linestyle="--"))
         fig.apply(
             lambda x: plt.plot(
-                xnew[0 : (data_end_year - data_start_year) + 1],
-                x(xnew)[0 : (data_end_year - data_start_year) + 1] * 100,
+                xnew[0:4],
+                x(xnew)[0:4] * 100,
                 linestyle="-",
                 color=(0, 0, 0),
             )
@@ -79,6 +77,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             bbox_inches="tight",
             pad_inches=0.1,
         )
+        plt.show()
         plt.clf()
 
     # endregion

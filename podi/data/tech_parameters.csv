@@ -5519,9 +5519,9 @@ ME ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 ME ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 NAM ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 NAM ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
-NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
+NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
- OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
  OECD ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 RUS ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 RUS ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
@@ -5529,7 +5529,7 @@ SAFR ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 SAFR ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 US ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 US ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
-World ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",0
+World ,Avoided Forest Conversion,Pathway,AFOLU,"Parameter b, max",100
 World ,Avoided Forest Conversion,Baseline,AFOLU,"Parameter b, max",100
 AdvancedECO ,Avoided Peat Impacts,Pathway,AFOLU,"Parameter b, max",100
 AdvancedECO ,Avoided Peat Impacts,Baseline,AFOLU,"Parameter b, max",100
@@ -8019,7 +8019,7 @@ SAFR ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,110
 US ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
 US ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,110
 World ,Avoided Coastal Impacts,Pathway,AFOLU,Saturation Point,110
-World ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,110
+World ,Avoided Coastal Impacts,Baseline,AFOLU,Saturation Point,100
 World ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,100
 World ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 World ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
@@ -8741,11 +8741,11 @@ World ,Wind,Pathway,Electricity,Saturation Point,38.5
 World ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 World ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 World ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
- OECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,200
+ OECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,100
  OECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
  OECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
  OECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
-NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,200
+NonOECD ,Avoided Forest Conversion,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Avoided Forest Conversion,Baseline,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Pathway,AFOLU,Saturation Point,100
 NonOECD ,Avoided Peat Impacts,Baseline,AFOLU,Saturation Point,100
@@ -8810,3 +8810,290 @@ World ,Carbon Dioxide Removal,Pathway,All,"Parameter b, min",0
 World ,Carbon Dioxide Removal,Pathway,All,"Parameter b, max",100
 World ,Carbon Dioxide Removal,Pathway,All,Floor,0
 World ,Carbon Dioxide Removal,Pathway,All,Max annual growth,100
+World ,Grid,Pathway,All,Saturation Point,100
+World ,Grid,Pathway,All,"Parameter a, min",0
+World ,Grid,Pathway,All,"Parameter a, max",0.5
+World ,Grid,Pathway,All,"Parameter b, min",0
+World ,Grid,Pathway,All,"Parameter b, max",100
+World ,Grid,Pathway,All,Floor,0
+World ,Grid,Pathway,All,Max annual growth,100
+World ,Transport,Pathway,All,Saturation Point,100
+World ,Transport,Pathway,All,"Parameter a, min",0
+World ,Transport,Pathway,All,"Parameter a, max",0.5
+World ,Transport,Pathway,All,"Parameter b, min",0
+World ,Transport,Pathway,All,"Parameter b, max",100
+World ,Transport,Pathway,All,Floor,0
+World ,Transport,Pathway,All,Max annual growth,100
+World ,Buildings,Pathway,All,Saturation Point,100
+World ,Buildings,Pathway,All,"Parameter a, min",0
+World ,Buildings,Pathway,All,"Parameter a, max",0.5
+World ,Buildings,Pathway,All,"Parameter b, min",0
+World ,Buildings,Pathway,All,"Parameter b, max",100
+World ,Buildings,Pathway,All,Floor,0
+World ,Buildings,Pathway,All,Max annual growth,100
+World ,Industry,Pathway,All,Saturation Point,100
+World ,Industry,Pathway,All,"Parameter a, min",0
+World ,Industry,Pathway,All,"Parameter a, max",0.5
+World ,Industry,Pathway,All,"Parameter b, min",0
+World ,Industry,Pathway,All,"Parameter b, max",100
+World ,Industry,Pathway,All,Floor,0
+World ,Industry,Pathway,All,Max annual growth,100
+World ,Regenerative Agriculture,Pathway,All,Saturation Point,100
+World ,Regenerative Agriculture,Pathway,All,"Parameter a, min",0
+World ,Regenerative Agriculture,Pathway,All,"Parameter a, max",0.5
+World ,Regenerative Agriculture,Pathway,All,"Parameter b, min",0
+World ,Regenerative Agriculture,Pathway,All,"Parameter b, max",100
+World ,Regenerative Agriculture,Pathway,All,Floor,0
+World ,Regenerative Agriculture,Pathway,All,Max annual growth,100
+World ,Forests & Wetlands,Pathway,All,Saturation Point,100
+World ,Forests & Wetlands,Pathway,All,"Parameter a, min",0
+World ,Forests & Wetlands,Pathway,All,"Parameter a, max",0.5
+World ,Forests & Wetlands,Pathway,All,"Parameter b, min",0
+World ,Forests & Wetlands,Pathway,All,"Parameter b, max",100
+World ,Forests & Wetlands,Pathway,All,Floor,0
+World ,Forests & Wetlands,Pathway,All,Max annual growth,100
+ OECD ,Carbon Dioxide Removal,Pathway,All,Saturation Point,100
+ OECD ,Carbon Dioxide Removal,Pathway,All,"Parameter a, min",0
+ OECD ,Carbon Dioxide Removal,Pathway,All,"Parameter a, max",0.5
+ OECD ,Carbon Dioxide Removal,Pathway,All,"Parameter b, min",0
+ OECD ,Carbon Dioxide Removal,Pathway,All,"Parameter b, max",100
+ OECD ,Carbon Dioxide Removal,Pathway,All,Floor,0
+ OECD ,Carbon Dioxide Removal,Pathway,All,Max annual growth,100
+ OECD ,Grid,Pathway,All,Saturation Point,100
+ OECD ,Grid,Pathway,All,"Parameter a, min",0
+ OECD ,Grid,Pathway,All,"Parameter a, max",0.5
+ OECD ,Grid,Pathway,All,"Parameter b, min",0
+ OECD ,Grid,Pathway,All,"Parameter b, max",100
+ OECD ,Grid,Pathway,All,Floor,0
+ OECD ,Grid,Pathway,All,Max annual growth,100
+ OECD ,Transport,Pathway,All,Saturation Point,100
+ OECD ,Transport,Pathway,All,"Parameter a, min",0
+ OECD ,Transport,Pathway,All,"Parameter a, max",0.5
+ OECD ,Transport,Pathway,All,"Parameter b, min",0
+ OECD ,Transport,Pathway,All,"Parameter b, max",100
+ OECD ,Transport,Pathway,All,Floor,0
+ OECD ,Transport,Pathway,All,Max annual growth,100
+ OECD ,Buildings,Pathway,All,Saturation Point,100
+ OECD ,Buildings,Pathway,All,"Parameter a, min",0
+ OECD ,Buildings,Pathway,All,"Parameter a, max",0.5
+ OECD ,Buildings,Pathway,All,"Parameter b, min",0
+ OECD ,Buildings,Pathway,All,"Parameter b, max",100
+ OECD ,Buildings,Pathway,All,Floor,0
+ OECD ,Buildings,Pathway,All,Max annual growth,100
+ OECD ,Industry,Pathway,All,Saturation Point,100
+ OECD ,Industry,Pathway,All,"Parameter a, min",0
+ OECD ,Industry,Pathway,All,"Parameter a, max",0.5
+ OECD ,Industry,Pathway,All,"Parameter b, min",0
+ OECD ,Industry,Pathway,All,"Parameter b, max",100
+ OECD ,Industry,Pathway,All,Floor,0
+ OECD ,Industry,Pathway,All,Max annual growth,100
+ OECD ,Regenerative Agriculture,Pathway,All,Saturation Point,100
+ OECD ,Regenerative Agriculture,Pathway,All,"Parameter a, min",0
+ OECD ,Regenerative Agriculture,Pathway,All,"Parameter a, max",0.5
+ OECD ,Regenerative Agriculture,Pathway,All,"Parameter b, min",0
+ OECD ,Regenerative Agriculture,Pathway,All,"Parameter b, max",100
+ OECD ,Regenerative Agriculture,Pathway,All,Floor,0
+ OECD ,Regenerative Agriculture,Pathway,All,Max annual growth,100
+ OECD ,Forests & Wetlands,Pathway,All,Saturation Point,100
+ OECD ,Forests & Wetlands,Pathway,All,"Parameter a, min",0
+ OECD ,Forests & Wetlands,Pathway,All,"Parameter a, max",0.5
+ OECD ,Forests & Wetlands,Pathway,All,"Parameter b, min",0
+ OECD ,Forests & Wetlands,Pathway,All,"Parameter b, max",100
+ OECD ,Forests & Wetlands,Pathway,All,Floor,0
+ OECD ,Forests & Wetlands,Pathway,All,Max annual growth,100
+NonOECD ,Carbon Dioxide Removal,Pathway,All,Saturation Point,100
+NonOECD ,Carbon Dioxide Removal,Pathway,All,"Parameter a, min",0
+NonOECD ,Carbon Dioxide Removal,Pathway,All,"Parameter a, max",0.5
+NonOECD ,Carbon Dioxide Removal,Pathway,All,"Parameter b, min",0
+NonOECD ,Carbon Dioxide Removal,Pathway,All,"Parameter b, max",100
+NonOECD ,Carbon Dioxide Removal,Pathway,All,Floor,0
+NonOECD ,Carbon Dioxide Removal,Pathway,All,Max annual growth,100
+NonOECD ,Grid,Pathway,All,Saturation Point,100
+NonOECD ,Grid,Pathway,All,"Parameter a, min",0
+NonOECD ,Grid,Pathway,All,"Parameter a, max",0.5
+NonOECD ,Grid,Pathway,All,"Parameter b, min",0
+NonOECD ,Grid,Pathway,All,"Parameter b, max",100
+NonOECD ,Grid,Pathway,All,Floor,0
+NonOECD ,Grid,Pathway,All,Max annual growth,100
+NonOECD ,Transport,Pathway,All,Saturation Point,100
+NonOECD ,Transport,Pathway,All,"Parameter a, min",0
+NonOECD ,Transport,Pathway,All,"Parameter a, max",0.5
+NonOECD ,Transport,Pathway,All,"Parameter b, min",0
+NonOECD ,Transport,Pathway,All,"Parameter b, max",100
+NonOECD ,Transport,Pathway,All,Floor,0
+NonOECD ,Transport,Pathway,All,Max annual growth,100
+NonOECD ,Buildings,Pathway,All,Saturation Point,100
+NonOECD ,Buildings,Pathway,All,"Parameter a, min",0
+NonOECD ,Buildings,Pathway,All,"Parameter a, max",0.5
+NonOECD ,Buildings,Pathway,All,"Parameter b, min",0
+NonOECD ,Buildings,Pathway,All,"Parameter b, max",100
+NonOECD ,Buildings,Pathway,All,Floor,0
+NonOECD ,Buildings,Pathway,All,Max annual growth,100
+NonOECD ,Industry,Pathway,All,Saturation Point,100
+NonOECD ,Industry,Pathway,All,"Parameter a, min",0
+NonOECD ,Industry,Pathway,All,"Parameter a, max",0.5
+NonOECD ,Industry,Pathway,All,"Parameter b, min",0
+NonOECD ,Industry,Pathway,All,"Parameter b, max",100
+NonOECD ,Industry,Pathway,All,Floor,0
+NonOECD ,Industry,Pathway,All,Max annual growth,100
+NonOECD ,Regenerative Agriculture,Pathway,All,Saturation Point,100
+NonOECD ,Regenerative Agriculture,Pathway,All,"Parameter a, min",0
+NonOECD ,Regenerative Agriculture,Pathway,All,"Parameter a, max",0.5
+NonOECD ,Regenerative Agriculture,Pathway,All,"Parameter b, min",0
+NonOECD ,Regenerative Agriculture,Pathway,All,"Parameter b, max",100
+NonOECD ,Regenerative Agriculture,Pathway,All,Floor,0
+NonOECD ,Regenerative Agriculture,Pathway,All,Max annual growth,100
+NonOECD ,Forests & Wetlands,Pathway,All,Saturation Point,100
+NonOECD ,Forests & Wetlands,Pathway,All,"Parameter a, min",0
+NonOECD ,Forests & Wetlands,Pathway,All,"Parameter a, max",0.5
+NonOECD ,Forests & Wetlands,Pathway,All,"Parameter b, min",0
+NonOECD ,Forests & Wetlands,Pathway,All,"Parameter b, max",100
+NonOECD ,Forests & Wetlands,Pathway,All,Floor,0
+NonOECD ,Forests & Wetlands,Pathway,All,Max annual growth,100
+World ,Carbon Dioxide Removal,Baseline,All,Saturation Point,100
+World ,Carbon Dioxide Removal,Baseline,All,"Parameter a, min",0
+World ,Carbon Dioxide Removal,Baseline,All,"Parameter a, max",0.5
+World ,Carbon Dioxide Removal,Baseline,All,"Parameter b, min",0
+World ,Carbon Dioxide Removal,Baseline,All,"Parameter b, max",100
+World ,Carbon Dioxide Removal,Baseline,All,Floor,0
+World ,Carbon Dioxide Removal,Baseline,All,Max annual growth,100
+World ,Grid,Baseline,All,Saturation Point,100
+World ,Grid,Baseline,All,"Parameter a, min",0
+World ,Grid,Baseline,All,"Parameter a, max",0.5
+World ,Grid,Baseline,All,"Parameter b, min",0
+World ,Grid,Baseline,All,"Parameter b, max",100
+World ,Grid,Baseline,All,Floor,0
+World ,Grid,Baseline,All,Max annual growth,100
+World ,Transport,Baseline,All,Saturation Point,100
+World ,Transport,Baseline,All,"Parameter a, min",0
+World ,Transport,Baseline,All,"Parameter a, max",0.5
+World ,Transport,Baseline,All,"Parameter b, min",0
+World ,Transport,Baseline,All,"Parameter b, max",100
+World ,Transport,Baseline,All,Floor,0
+World ,Transport,Baseline,All,Max annual growth,100
+World ,Buildings,Baseline,All,Saturation Point,100
+World ,Buildings,Baseline,All,"Parameter a, min",0
+World ,Buildings,Baseline,All,"Parameter a, max",0.5
+World ,Buildings,Baseline,All,"Parameter b, min",0
+World ,Buildings,Baseline,All,"Parameter b, max",100
+World ,Buildings,Baseline,All,Floor,0
+World ,Buildings,Baseline,All,Max annual growth,100
+World ,Industry,Baseline,All,Saturation Point,100
+World ,Industry,Baseline,All,"Parameter a, min",0
+World ,Industry,Baseline,All,"Parameter a, max",0.5
+World ,Industry,Baseline,All,"Parameter b, min",0
+World ,Industry,Baseline,All,"Parameter b, max",100
+World ,Industry,Baseline,All,Floor,0
+World ,Industry,Baseline,All,Max annual growth,100
+World ,Regenerative Agriculture,Baseline,All,Saturation Point,100
+World ,Regenerative Agriculture,Baseline,All,"Parameter a, min",0
+World ,Regenerative Agriculture,Baseline,All,"Parameter a, max",0.5
+World ,Regenerative Agriculture,Baseline,All,"Parameter b, min",0
+World ,Regenerative Agriculture,Baseline,All,"Parameter b, max",100
+World ,Regenerative Agriculture,Baseline,All,Floor,0
+World ,Regenerative Agriculture,Baseline,All,Max annual growth,100
+World ,Forests & Wetlands,Baseline,All,Saturation Point,100
+World ,Forests & Wetlands,Baseline,All,"Parameter a, min",0
+World ,Forests & Wetlands,Baseline,All,"Parameter a, max",0.5
+World ,Forests & Wetlands,Baseline,All,"Parameter b, min",0
+World ,Forests & Wetlands,Baseline,All,"Parameter b, max",100
+World ,Forests & Wetlands,Baseline,All,Floor,0
+World ,Forests & Wetlands,Baseline,All,Max annual growth,100
+ OECD ,Carbon Dioxide Removal,Baseline,All,Saturation Point,100
+ OECD ,Carbon Dioxide Removal,Baseline,All,"Parameter a, min",0
+ OECD ,Carbon Dioxide Removal,Baseline,All,"Parameter a, max",0.5
+ OECD ,Carbon Dioxide Removal,Baseline,All,"Parameter b, min",0
+ OECD ,Carbon Dioxide Removal,Baseline,All,"Parameter b, max",100
+ OECD ,Carbon Dioxide Removal,Baseline,All,Floor,0
+ OECD ,Carbon Dioxide Removal,Baseline,All,Max annual growth,100
+ OECD ,Grid,Baseline,All,Saturation Point,100
+ OECD ,Grid,Baseline,All,"Parameter a, min",0
+ OECD ,Grid,Baseline,All,"Parameter a, max",0.5
+ OECD ,Grid,Baseline,All,"Parameter b, min",0
+ OECD ,Grid,Baseline,All,"Parameter b, max",100
+ OECD ,Grid,Baseline,All,Floor,0
+ OECD ,Grid,Baseline,All,Max annual growth,100
+ OECD ,Transport,Baseline,All,Saturation Point,100
+ OECD ,Transport,Baseline,All,"Parameter a, min",0
+ OECD ,Transport,Baseline,All,"Parameter a, max",0.5
+ OECD ,Transport,Baseline,All,"Parameter b, min",0
+ OECD ,Transport,Baseline,All,"Parameter b, max",100
+ OECD ,Transport,Baseline,All,Floor,0
+ OECD ,Transport,Baseline,All,Max annual growth,100
+ OECD ,Buildings,Baseline,All,Saturation Point,100
+ OECD ,Buildings,Baseline,All,"Parameter a, min",0
+ OECD ,Buildings,Baseline,All,"Parameter a, max",0.5
+ OECD ,Buildings,Baseline,All,"Parameter b, min",0
+ OECD ,Buildings,Baseline,All,"Parameter b, max",100
+ OECD ,Buildings,Baseline,All,Floor,0
+ OECD ,Buildings,Baseline,All,Max annual growth,100
+ OECD ,Industry,Baseline,All,Saturation Point,100
+ OECD ,Industry,Baseline,All,"Parameter a, min",0
+ OECD ,Industry,Baseline,All,"Parameter a, max",0.5
+ OECD ,Industry,Baseline,All,"Parameter b, min",0
+ OECD ,Industry,Baseline,All,"Parameter b, max",100
+ OECD ,Industry,Baseline,All,Floor,0
+ OECD ,Industry,Baseline,All,Max annual growth,100
+ OECD ,Regenerative Agriculture,Baseline,All,Saturation Point,100
+ OECD ,Regenerative Agriculture,Baseline,All,"Parameter a, min",0
+ OECD ,Regenerative Agriculture,Baseline,All,"Parameter a, max",0.5
+ OECD ,Regenerative Agriculture,Baseline,All,"Parameter b, min",0
+ OECD ,Regenerative Agriculture,Baseline,All,"Parameter b, max",100
+ OECD ,Regenerative Agriculture,Baseline,All,Floor,0
+ OECD ,Regenerative Agriculture,Baseline,All,Max annual growth,100
+ OECD ,Forests & Wetlands,Baseline,All,Saturation Point,100
+ OECD ,Forests & Wetlands,Baseline,All,"Parameter a, min",0
+ OECD ,Forests & Wetlands,Baseline,All,"Parameter a, max",0.5
+ OECD ,Forests & Wetlands,Baseline,All,"Parameter b, min",0
+ OECD ,Forests & Wetlands,Baseline,All,"Parameter b, max",100
+ OECD ,Forests & Wetlands,Baseline,All,Floor,0
+ OECD ,Forests & Wetlands,Baseline,All,Max annual growth,100
+NonOECD ,Carbon Dioxide Removal,Baseline,All,Saturation Point,100
+NonOECD ,Carbon Dioxide Removal,Baseline,All,"Parameter a, min",0
+NonOECD ,Carbon Dioxide Removal,Baseline,All,"Parameter a, max",0.5
+NonOECD ,Carbon Dioxide Removal,Baseline,All,"Parameter b, min",0
+NonOECD ,Carbon Dioxide Removal,Baseline,All,"Parameter b, max",100
+NonOECD ,Carbon Dioxide Removal,Baseline,All,Floor,0
+NonOECD ,Carbon Dioxide Removal,Baseline,All,Max annual growth,100
+NonOECD ,Grid,Baseline,All,Saturation Point,100
+NonOECD ,Grid,Baseline,All,"Parameter a, min",0
+NonOECD ,Grid,Baseline,All,"Parameter a, max",0.5
+NonOECD ,Grid,Baseline,All,"Parameter b, min",0
+NonOECD ,Grid,Baseline,All,"Parameter b, max",100
+NonOECD ,Grid,Baseline,All,Floor,0
+NonOECD ,Grid,Baseline,All,Max annual growth,100
+NonOECD ,Transport,Baseline,All,Saturation Point,100
+NonOECD ,Transport,Baseline,All,"Parameter a, min",0
+NonOECD ,Transport,Baseline,All,"Parameter a, max",0.5
+NonOECD ,Transport,Baseline,All,"Parameter b, min",0
+NonOECD ,Transport,Baseline,All,"Parameter b, max",100
+NonOECD ,Transport,Baseline,All,Floor,0
+NonOECD ,Transport,Baseline,All,Max annual growth,100
+NonOECD ,Buildings,Baseline,All,Saturation Point,100
+NonOECD ,Buildings,Baseline,All,"Parameter a, min",0
+NonOECD ,Buildings,Baseline,All,"Parameter a, max",0.5
+NonOECD ,Buildings,Baseline,All,"Parameter b, min",0
+NonOECD ,Buildings,Baseline,All,"Parameter b, max",100
+NonOECD ,Buildings,Baseline,All,Floor,0
+NonOECD ,Buildings,Baseline,All,Max annual growth,100
+NonOECD ,Industry,Baseline,All,Saturation Point,100
+NonOECD ,Industry,Baseline,All,"Parameter a, min",0
+NonOECD ,Industry,Baseline,All,"Parameter a, max",0.5
+NonOECD ,Industry,Baseline,All,"Parameter b, min",0
+NonOECD ,Industry,Baseline,All,"Parameter b, max",100
+NonOECD ,Industry,Baseline,All,Floor,0
+NonOECD ,Industry,Baseline,All,Max annual growth,100
+NonOECD ,Regenerative Agriculture,Baseline,All,Saturation Point,100
+NonOECD ,Regenerative Agriculture,Baseline,All,"Parameter a, min",0
+NonOECD ,Regenerative Agriculture,Baseline,All,"Parameter a, max",0.5
+NonOECD ,Regenerative Agriculture,Baseline,All,"Parameter b, min",0
+NonOECD ,Regenerative Agriculture,Baseline,All,"Parameter b, max",100
+NonOECD ,Regenerative Agriculture,Baseline,All,Floor,0
+NonOECD ,Regenerative Agriculture,Baseline,All,Max annual growth,100
+NonOECD ,Forests & Wetlands,Baseline,All,Saturation Point,100
+NonOECD ,Forests & Wetlands,Baseline,All,"Parameter a, min",0
+NonOECD ,Forests & Wetlands,Baseline,All,"Parameter a, max",0.5
+NonOECD ,Forests & Wetlands,Baseline,All,"Parameter b, min",0
+NonOECD ,Forests & Wetlands,Baseline,All,"Parameter b, max",100
+NonOECD ,Forests & Wetlands,Baseline,All,Floor,0
+NonOECD ,Forests & Wetlands,Baseline,All,Max annual growth,100

@@ -3,10 +3,12 @@
 import pandas as pd
 from podi.energy_supply import data_start_year, long_proj_end_year
 from podi.adoption_curve import adoption_curve
+from podi.energy_supply import near_proj_start_year
 
 
 def results_analysis(
     region,
+    scenario,
     energy_demand_baseline,
     energy_demand_pathway,
     elec_consump_pathway,
@@ -380,13 +382,13 @@ def results_analysis(
     fw_decarb = afolu_per_adoption.loc[
         region,
         [
-            " Avoided Coastal Impacts ",
-            " Avoided Forest Conversion ",
-            " Avoided Peat Impacts ",
-            " Coastal Restoration ",
-            " Improved Forest Mgmt ",
-            " Peat Restoration ",
-            " Natural Regeneration ",
+            "Avoided Coastal Impacts",
+            "Avoided Forest Conversion",
+            "Avoided Peat Impacts",
+            "Coastal Restoration",
+            "Improved Forest Mgmt",
+            "Peat Restoration",
+            "Natural Regeneration",
         ],
         :,
     ]
@@ -438,5 +440,20 @@ def results_analysis(
     )
 
     # endregion
+
+    """
+
+    adoption_curves = adoption_curves.apply(
+        adoption_curve, axis=1, args=["World ", scenario], sector="All"
+    )
+
+    perc = []
+    for i in range(0, len(adoption_curves.index)):
+        perc = pd.DataFrame(perc).append(adoption_curves[adoption_curves.index[i]][0].T)
+
+    adoption_curves = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(
+        adoption_curves.index
+    )
+    """
 
     return adoption_curves

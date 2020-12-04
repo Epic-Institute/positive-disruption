@@ -244,6 +244,7 @@ conc_pathway, temp_pathway, sea_lvl_pathway = climate(
 for i in range(17, 19):
     adoption_curves = results_analysis(
         iea_region_list[i],
+        "Pathway",
         energy_demand_baseline,
         energy_demand_pathway,
         elec_consump_pathway,
