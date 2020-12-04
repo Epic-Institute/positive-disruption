@@ -455,5 +455,9 @@ def results_analysis(
         adoption_curves.index
     )
     """
+    adoption_curves["Region"] = region
+    adoption_curves.index.set_names("Sector", inplace=True)
+    adoption_curves.reset_index(inplace=True)
+    adoption_curves.set_index(["Region", "Sector"], inplace=True)
 
     return adoption_curves

@@ -241,17 +241,21 @@ conc_pathway, temp_pathway, sea_lvl_pathway = climate(
 
 # region
 
+adoption_curves = []
+
 for i in range(17, 19):
-    adoption_curves = results_analysis(
-        iea_region_list[i],
-        "Pathway",
-        energy_demand_baseline,
-        energy_demand_pathway,
-        elec_consump_pathway,
-        heat_consump_pathway,
-        transport_consump_pathway,
-        afolu_per_adoption_pathway,
-        cdr_pathway,
+    adoption_curves = pd.DataFrame(adoption_curves).append(
+        results_analysis(
+            iea_region_list[i],
+            "Pathway",
+            energy_demand_baseline,
+            energy_demand_pathway,
+            elec_consump_pathway,
+            heat_consump_pathway,
+            transport_consump_pathway,
+            afolu_per_adoption_pathway,
+            cdr_pathway,
+        )
     )
 
 # endregion
