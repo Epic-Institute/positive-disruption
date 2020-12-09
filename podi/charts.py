@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
-from matplotlib.ticker import PercentFormatter
 from scipy.interpolate import interp1d
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
@@ -17,7 +16,6 @@ from podi.energy_supply import (
     long_proj_end_year,
     long_proj_start_year,
 )
-from pymagicc import scenarios
 from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
 
@@ -144,28 +142,56 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             # Absolute values
 
             """
+            iea_region_list = [' OECD ' , 'NonOECD ']
+
             t = adoption_curves2.columns
             data1 = adoption_curves2.loc['Grid']
-            data2 = ren
+            data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
 
-            fig, ax1 = plt.subplots()
+            fig, ax1 = plt.subplots(figsize=(9, 5))
 
             color = 'tab:red'    
             ax1.set_ylabel('% Adoption', color=color )
-            ax1.plot(t, data1, color=color)
+            ax1.plot(t, data1, color=color, linestyle = '--')
             ax1.tick_params(axis='y', labelcolor=color)
             plt.grid(which="major", linestyle=":", axis="y")
-
             ax2 = ax1.twinx()
             color='tab:blue'
             ax2.set_ylabel('TFC (TWh)',color=color)
-            ax2.plot(t, data2,color=color)
+            ax2.plot(t, data2,color=color, linestyle = '--')
             ax2.tick_params(axis='y', labelcolor=color)
-
+            ax1.plot(
+                t[0 : (data_end_year - data_start_year) + 2],
+                data1[0 : (data_end_year - data_start_year) + 2],
+                linestyle="-",
+                color=(0, 0, 0),
+            )
+            ax2.plot(
+                t[0 : (data_end_year - data_start_year) + 2],
+                data2[0 : (data_end_year - data_start_year) + 2],
+                linestyle="-",
+                color=(0, 0, 0),
+            )
             plt.xlim([2010, 2100])
-            
+            plt.suptitle(
+                "Total PD Adoption, "
+                + 'Grid Decarb'
+                + ", "
+                + 'World '
+            )
+            plt.title('% Adoption Projected - Red dashed line \n % Adoption Actual - Red Solid Line \n Cumulative Capacity Projected - Blue Dashed Line \n Cumulative Capacity Actual - Blue Solid Line \n (Mismatch between red and blue lines is due to growing electrical demand)', fontsize = 10)
+            plt.savefig(
+                fname="podi/data/figs/scurves2_ind-"
+                + adoption_curves2.index[j]
+                + "-"
+                + 'World ',
+                format="png",
+                bbox_inches="tight",
+                pad_inches=0.1,
+            )
             fig.tight_layout()
             plt.show()
+            
             """
 
     # endregion
