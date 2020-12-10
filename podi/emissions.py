@@ -69,7 +69,7 @@ def emissions(
 
     # region
     buildings_consump = (
-        energy_demand.loc[[" OECD ", "NonOECD "], "Buildings", slice(None)]
+        energy_demand.loc[slice(None), "Buildings", slice(None)]
         .groupby("IEA Region")
         .sum()
     )
@@ -78,7 +78,7 @@ def emissions(
     buildings_consump = (
         buildings_consump
         * heat_per_adoption.loc[
-            [" OECD ", "NonOECD "], ["Coal", "Natural gas", "Oil"], slice(None)
+            slice(None), ["Coal", "Natural gas", "Oil"], slice(None)
         ]
         .groupby("Region")
         .sum()
@@ -104,7 +104,7 @@ def emissions(
 
     # region
     industry_consump = (
-        energy_demand.loc[[" OECD ", "NonOECD "], "Industry", slice(None)]
+        energy_demand.loc[slice(None), "Industry", slice(None)]
         .groupby("IEA Region")
         .sum()
     )
@@ -113,7 +113,7 @@ def emissions(
     industry_consump = (
         industry_consump
         * heat_per_adoption.loc[
-            [" OECD ", "NonOECD "],
+            slice(None),
             ["Coal", "Natural gas", "Oil"],
             slice(None),
         ]
@@ -187,7 +187,6 @@ def emissions(
             pd.read_csv("podi/data/emissions_baseline.csv")
             .set_index(["Region", "Sector", "Unit"])
             .droplevel(["Unit"])
-            .loc[[" OECD ", "NonOECD "]]
         )
         em.columns = em.columns.astype(int)
         em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
@@ -207,7 +206,6 @@ def emissions(
             pd.read_csv("podi/data/emissions_baseline.csv")
             .set_index(["Region", "Sector", "Unit"])
             .droplevel(["Unit"])
-            .loc[[" OECD ", "NonOECD "]]
         )
         em2.columns = em2.columns.astype(int)
         em2 = pd.concat([em2], keys=["Emissions"], names=["Metric"]).reorder_levels(

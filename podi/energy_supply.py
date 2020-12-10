@@ -44,16 +44,14 @@ def energy_supply(scenario, energy_demand):
     heat_gen_data.columns = heat_gen_data.columns.astype(int)
 
     heat_gen_data.loc[slice(None), slice(None), "Bioenergy", scenario] = (
-        energy_demand.loc[
-            ["World ", " OECD ", "NonOECD "], "Buildings", "Bioenergy", slice(None)
-        ]
+        energy_demand.loc[slice(None), "Buildings", "Bioenergy", slice(None)]
         .loc[:, data_start_year:data_end_year]
         .values
     )
 
     heat_gen_data.loc[slice(None), slice(None), "Other sources", scenario] = (
         energy_demand.loc[
-            ["World ", " OECD ", "NonOECD "],
+            slice(None),
             ["Industry", "Buildings"],
             ["Coal", "Oil", "Natural gas"],
             slice(None),
