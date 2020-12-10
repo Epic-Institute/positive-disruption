@@ -49,7 +49,9 @@ def energy_supply(scenario, energy_demand):
         .values
     )
 
-    heat_gen_data.loc[slice(None), slice(None), "Other sources", scenario] = (
+    heat_gen_data.loc[
+        slice(None), slice(None), "Other sources", scenario, slice(None)
+    ] = (
         energy_demand.loc[
             slice(None),
             ["Industry", "Buildings"],
@@ -695,7 +697,7 @@ def energy_supply(scenario, energy_demand):
     transport_per_adoption = []
     transport_consump_cdr = []
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         elec_consump = pd.DataFrame(elec_consump).append(
             consump_total(iea_region_list[i], scenario)[0]
         )

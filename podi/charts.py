@@ -43,7 +43,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
     }
 
-    for i in range(0,len(iea_region_list)):
+    for i in range(0, len(iea_region_list)):
         adoption_curves2 = adoption_curves.loc[iea_region_list[i]]
         xnew = np.linspace(
             adoption_curves2.columns.min(), adoption_curves2.columns.max(), 30
@@ -664,7 +664,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Baseline
 
-    for i in [17, 18]:
+    for i in range(0,len(iea_region_list)):
         energy_demand_i = energy_demand_baseline.loc[
             iea_region_list[i], slice(None), slice(None), "Baseline"
         ]
@@ -774,7 +774,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Pathway (Sum OECD/NonOECD)
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         energy_demand_i = energy_demand_pathway.loc[
             iea_region_list[i], slice(None), slice(None), "Pathway"
         ]
@@ -976,7 +976,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    for i in [17, 18]:
+    for i in range(0, len(iea_region_list)):
         elec_consump_baseline_i = (
             elec_consump_baseline.loc[iea_region_list[i], slice(None)]
             .groupby("Metric")
@@ -1029,7 +1029,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    for i in [17, 18]:
+    for i in range(0, len(iea_region_list)):
         elec_consump_pathway_i = (
             elec_consump_pathway.loc[iea_region_list[i], slice(None)]
             .groupby("Metric")
@@ -1120,7 +1120,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = (
             elec_consump_pathway.loc[iea_region_list[i], slice(None)]
             .groupby("Metric")
@@ -1150,7 +1150,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = (
             elec_per_adoption_pathway.loc[iea_region_list[i], slice(None)]
             .groupby("Metric")
@@ -1178,7 +1178,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = (
             elec_per_adoption_pathway.loc[iea_region_list[i], slice(None)]
             .groupby("Metric")
@@ -1214,7 +1214,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Pathway
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         energy_demand_pathway_i = energy_demand_pathway.loc[
             iea_region_list[i], slice(None), slice(None), "Pathway"
         ]
@@ -1287,7 +1287,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Pathway
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = energy_demand_pathway.loc[
             iea_region_list[i], "Buildings", ["Electricity", "Heat"], "Pathway"
         ]
@@ -1348,7 +1348,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Pathway
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = energy_demand_pathway.loc[
             iea_region_list[i], "Industry", ["Electricity", "Heat"], "Pathway"
         ]
@@ -1407,7 +1407,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Pathway
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = energy_demand_pathway.loc[
             iea_region_list[i], 'Industry', ['Coal', 'Natural gas', 'Oil', "Bioenergy", "Other renewables"], "Pathway"]
         plt.figure(i)
@@ -1443,7 +1443,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     color = ((0.220, 0.500, 0.136), (0.356, 0.356, 0.356), (0.380, 0.572, 0.828))
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = energy_demand_pathway.loc[
             iea_region_list[i],
             "Transport",
@@ -1587,7 +1587,7 @@ color = (
 
     # endregion
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = (
             (em_mit.append(spacer.drop(index="Agriculture Baseline Emissions"))) / 1000
         ).reindex(
@@ -1743,7 +1743,7 @@ color = (
 
     # endregion
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = (
             (em_mit.append(spacer.drop(index="Forests & Wetlands Baseline Emissions")))
             / 1000
@@ -1921,7 +1921,7 @@ color = (
 
     # endregion
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = (
             (em_mit.append(spacer.drop(index="AFOLU Baseline Emissions"))) / 1000
         ).reindex(
@@ -2019,7 +2019,7 @@ color = (
         Line2D([0], [0], color=color[2], linewidth=4),
     ]
 
-    for i in range(17, 19):
+    for i in range(0, len(iea_region_list)):
         fig = cdr_pathway / 1000
         plt.figure(i)
         plt.stackplot(
