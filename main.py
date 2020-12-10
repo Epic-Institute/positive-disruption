@@ -187,7 +187,7 @@ cdr_needed = (
     abs(
         em_targets_pathway.loc["Baseline PD20", 2010:]
         - em_targets_pathway.loc["Pathway PD20", 2010:]
-    )    - em_targets_pathway.loc["Baseline PD20", 2010:] - em_pathway.loc[[' OECD ', 'NonOECD ']].sum())
+    )    - em_targets_pathway.loc["Baseline PD20", 2010:] - em_pathway.sum())
 """
 
 cdr_needed = cdr_needed_def

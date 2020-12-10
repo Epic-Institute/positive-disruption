@@ -43,7 +43,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
     }
 
-    for i in range(17, 19):
+    for i in range(0,len(iea_region_list)):
         adoption_curves2 = adoption_curves.loc[iea_region_list[i]]
         xnew = np.linspace(
             adoption_curves2.columns.min(), adoption_curves2.columns.max(), 30
@@ -101,7 +101,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         adoption_curves2.columns.min(), adoption_curves2.columns.max(), 91
     )
 
-    for i in range(17, 19):
+    for i in range(0,len(iea_region_list)):
         for j in range(0, len(adoption_curves2.index)):
             fig = interp1d(
                 adoption_curves2.columns.to_list(),
@@ -142,15 +142,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             # Absolute values
 
             """
-            iea_region_list = [' OECD ' , 'NonOECD ']
-
             t = adoption_curves2.columns
             data1 = adoption_curves2.loc['Grid']
             data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
 
             fig, ax1 = plt.subplots(figsize=(9, 5))
 
-            color = 'tab:red'    
+            color = (0.560, 0.792, 0.740)    
             ax1.set_ylabel('% Adoption', color=color )
             ax1.plot(t, data1, color=color, linestyle = '--')
             ax1.tick_params(axis='y', labelcolor=color)
@@ -177,19 +175,19 @@ def charts(energy_demand_baseline, energy_demand_pathway):
                 "Total PD Adoption, "
                 + 'Grid Decarb'
                 + ", "
-                + 'World '
+                + iea_region_list[i]
             )
-            plt.title('% Adoption Projected - Red dashed line \n % Adoption Actual - Red Solid Line \n Cumulative Capacity Projected - Blue Dashed Line \n Cumulative Capacity Actual - Blue Solid Line \n (Mismatch between red and blue lines is due to growing electrical demand)', fontsize = 10)
+            plt.title('% Adoption Projected - Teal Dashed Line \n Cumulative Capacity Projected - Blue Dashed Line \n (Mismatch between lines is due to growing electrical demand)', fontsize = 9)
+            fig.tight_layout()
             plt.savefig(
                 fname="podi/data/figs/scurves2_ind-"
                 + adoption_curves2.index[j]
                 + "-"
-                + 'World ',
+                + iea_region_list[i],
                 format="png",
                 bbox_inches="tight",
                 pad_inches=0.1,
             )
-            fig.tight_layout()
             plt.show()
             
             """
@@ -326,10 +324,18 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         Line2D([0], [0], color=color[3], linewidth=4),
         Line2D([0], [0], color=color[2], linewidth=4),
         Line2D([0], [0], color=color[1], linewidth=4),
-        Line2D([0], [0], color=color[12], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
+        Line2D(
+            [0], [0], color=color[12], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[10], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[9], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[11], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)
+        ),
     ]
 
     for i in range(0, 1):
@@ -480,7 +486,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     results[FORCING].loc[1900:2100].plot(linestyle="--")
     hist = default[FORCING].loc[1900:2016]
-    hist.plot(label="historical", color="black")
+    hist.plot(label="historical", color="black", figsize=(10, 5))
     plt.title("DAU: " + pyhector.output[FORCING]["description"])
     plt.ylabel(pyhector.output[FORCING]["unit"])
     plt.legend(("DAU", "Historical"), loc="upper left")
@@ -545,21 +551,72 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
+    # ABSOLUTE
 
-    for emissions in emissions:
-        fig = plt.plot(rcp19[emissions].loc[1900:2100])
-        plt.plot(rcp19[emissions].loc[1900:2016], color="black")
-        plt.ylabel("GtC")
-        plt.title("DAU Net Emissions, " + emissions)
+    emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
+    names = ['CO2', 'CH4', 'N2O']
+    units = ['Gt C', 'Mt CH4', 'Mt N2O']
+    mult = [1, 1, 0.001]
+    i = 0
+
+    for emission in emissions:
+        fig = plt.plot(rcp19[emission].loc[2000:2100]*mult[i], linestyle="--", color=(0.560, 0.792, 0.740))
+        plt.plot(rcp19[emission].loc[2000:2016]*mult[i], color="black")
+        plt.ylabel(units[i])
+        plt.title("DAU Net Emissions, " + names[i])
         plt.savefig(
-            fname="podi/data/figs/emissions-" + emissions,
+            fname="podi/data/figs/emissions-" + names[i],
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
         )
         plt.show()
+        i=i+1
     plt.clf()
+
+    # IN CO2e UNITS
+
+    emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
+    names = ['CO2', 'CH4', 'N2O']
+    units = ['GtCO2e', 'GtCO2e', 'GtCO2e']
+    mult = [3.67, 1e-3, 1e-3]
+    gwp = [1, 28, 265]
+    i = 0
+
+    for emission in emissions:
+        fig = plt.plot(rcp19[emission].loc[2000:2100] * mult[i] * gwp[i], linestyle="--", color=(0.560, 0.792, 0.740))
+        plt.plot(rcp19[emission].loc[2000:2016] * mult[i] * gwp[i], color="black")
+        plt.ylabel(units[i])
+        plt.title("DAU Net Emissions, " + names[i])
+        plt.savefig(
+            fname="podi/data/figs/emissions-" + names[i],
+            format="png",
+            bbox_inches="tight",
+            pad_inches=0.1,
+        )
+        plt.show()
+        i=i+1
+    plt.clf()
+
+    # Combined GHG
+
+    mult = [3.67, 1e-3, 1e-3]
+    gwp = [1, 28, 265]
+    i = 0
+
+    fig = plt.plot(rcp19.loc[2000:2100] * mult[i] * gwp[i], linestyle="--", color=(0.560, 0.792, 0.740))
+    plt.plot(rcp19.loc[2000:2016] * mult[i] * gwp[i], color="black")
+    plt.ylabel('GtCO2e')
+    plt.title("DAU Net Emissions, " + names[i])
+    plt.savefig(
+        fname="podi/data/figs/emissions-" + names[i],
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
+    )
+    plt.show()
+    i=i+1
+    plt.clf()    
 
     # endregion
 
@@ -576,7 +633,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     results[CONCENTRATION_CO2].loc[1900:2100].plot(linestyle="--")
     hist = default[CONCENTRATION_CO2].loc[1900:2016]
-    hist.plot(label="historical", color="black")
+    hist.plot(label="historical", color="black", figsize=(10, 5))
     plt.title("DAU: " + pyhector.output[CONCENTRATION_CO2]["description"])
     plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
     plt.legend(("DAU", "Historical"), loc="upper left")
@@ -1093,9 +1150,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    for i in range(0, 1):
+    for i in range(17, 19):
         fig = (
-            elec_per_adoption_pathway.loc[[" OECD ", "NonOECD "], slice(None)]
+            elec_per_adoption_pathway.loc[iea_region_list[i], slice(None)]
             .groupby("Metric")
             .sum()
         )
@@ -1121,9 +1178,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    for i in range(0, 1):
+    for i in range(17, 19):
         fig = (
-            elec_per_adoption_pathway.loc[[" OECD ", "NonOECD "], slice(None)]
+            elec_per_adoption_pathway.loc[iea_region_list[i], slice(None)]
             .groupby("Metric")
             .sum()
         )
@@ -1441,12 +1498,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-    color = (
+color = (
         (0.999, 0.999, 0.999),
         (0.584, 0.804, 0.756),
-        (0.584, 0.804, 0.756),
-        (0.584, 0.804, 0.756),
-        (0.584, 0.804, 0.756),
+        (0.526, 0.724, 0.680),
+        (0.473, 0.651, 0.612),
+        (0.426, 0.586, 0.551),
         (0.356, 0.356, 0.356),
         (0.720, 0.348, 0.324),
         (0.840, 0.688, 0.680),
@@ -1520,8 +1577,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         Line2D([0], [0], color=color[7], linewidth=4),
         Line2D([0], [0], color=color[8], linewidth=4),
         Line2D([0], [0], color=color[9], linewidth=4),
-        Line2D([0], [0], color=color[10], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[11], linewidth=4, linestyle="--"),
+        Line2D(
+            [0], [0], color=color[10], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[11], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)
+        ),
     ]
 
     # endregion
@@ -1672,8 +1733,12 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         Line2D([0], [0], color=color[5], linewidth=4),
         Line2D([0], [0], color=color[6], linewidth=4),
         Line2D([0], [0], color=color[7], linewidth=4),
-        Line2D([0], [0], color=color[8], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[9], linewidth=4, linestyle="--"),
+        Line2D(
+            [0], [0], color=color[8], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[9], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)
+        ),
     ]
 
     # endregion
@@ -1761,9 +1826,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         (0.404, 0.332, 0.520),
         (0.356, 0.356, 0.356),
         (0.584, 0.804, 0.756),
-        (0.584, 0.804, 0.756),
-        (0.584, 0.804, 0.756),
-        (0.584, 0.804, 0.756),
+        (0.526, 0.724, 0.680),
+        (0.473, 0.651, 0.612),
+        (0.426, 0.586, 0.551),
         (0.720, 0.348, 0.324),
         (0.840, 0.688, 0.680),
         (0.804, 0.852, 0.704),
@@ -1846,13 +1911,17 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         Line2D([0], [0], color=color[14], linewidth=4),
         Line2D([0], [0], color=color[15], linewidth=4),
         Line2D([0], [0], color=color[16], linewidth=4),
-        Line2D([0], [0], color=color[17], linewidth=4, linestyle="--"),
-        Line2D([0], [0], color=color[18], linewidth=4, linestyle="--"),
+        Line2D(
+            [0], [0], color=color[17], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[18], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)
+        ),
     ]
 
     # endregion
 
-    for i in range(0, 1):
+    for i in range(17, 19):
         fig = (
             (em_mit.append(spacer.drop(index="AFOLU Baseline Emissions"))) / 1000
         ).reindex(
