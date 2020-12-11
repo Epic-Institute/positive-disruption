@@ -21,8 +21,11 @@ from podi.data.iea_weo_etl import iea_region_list
 from podi.emissions import emissions
 from podi.cdr.cdr_main import cdr_mix
 from podi.climate import climate
+import time
+from datetime import timedelta
 
 pd.set_option("mode.use_inf_as_na", True)
+start_time = time.monotonic()
 
 # endregion
 
@@ -168,8 +171,8 @@ em_pathway2.to_csv(
 """
 
 em_mitigated = (
-    em_baseline.groupby(["Region", "Sector"]).sum().loc[[" OECD ", "NonOECD "]]
-    - em_pathway.groupby(["Region", "Sector"]).sum().loc[[" OECD ", "NonOECD "]]
+    em_baseline.groupby(["Region", "Sector"]).sum()
+    - em_pathway.groupby(["Region", "Sector"]).sum()
 )
 
 # endregion
@@ -256,3 +259,6 @@ for i in range(0, len(iea_region_list)):
     )
 
 # endregion
+
+end_time = time.monotonic()
+print(/n "Time: " + timedelta(seconds=end_time - start_time))

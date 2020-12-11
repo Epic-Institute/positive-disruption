@@ -101,7 +101,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         adoption_curves2.columns.min(), adoption_curves2.columns.max(), 91
     )
 
-    for i in range(0,len(iea_region_list)):
+    for i in range(0, len(iea_region_list)):
         for j in range(0, len(adoption_curves2.index)):
             fig = interp1d(
                 adoption_curves2.columns.to_list(),
@@ -229,22 +229,18 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     )
 
     em_mit_electricity = (
-        em_mitigated.loc[slice(None), "Electricity", slice(None)].sum() * 0.95
+        em_mitigated.loc["World ", "Electricity", slice(None)].sum() * 0.95
     )
 
-    em_mit_transport = (
-        em_mitigated.loc[slice(None), "Transport", slice(None)].sum() * 1.05
-    )
+    em_mit_transport = em_mitigated.loc["World ", "Transport", slice(None)].sum() * 1.05
 
-    em_mit_buildings = (
-        em_mitigated.loc[slice(None), "Buildings", slice(None)].sum() * 0.7
-    )
+    em_mit_buildings = em_mitigated.loc["World ", "Buildings", slice(None)].sum() * 0.7
 
-    em_mit_industry = em_mitigated.loc[slice(None), "Industry", slice(None)].sum() * 0.6
+    em_mit_industry = em_mitigated.loc["World ", "Industry", slice(None)].sum() * 0.6
 
     em_mit_ra = (
         afolu_em_mitigated.loc[
-            slice(None),
+            "World ",
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -264,7 +260,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     em_mit_fw = (
         afolu_em_mitigated.loc[
-            slice(None),
+            "World ",
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -280,7 +276,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         * 0.95
     )
 
-    em_mit_othergas = em_mitigated.loc[slice(None), "Other gases", :].sum()
+    em_mit_othergas = em_mitigated.loc["World ", "Other gases", :].sum()
 
     em_mit_cdr = pd.Series(
         cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
@@ -554,14 +550,18 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     # ABSOLUTE
 
     emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
-    names = ['CO2', 'CH4', 'N2O']
-    units = ['Gt C', 'Mt CH4', 'Mt N2O']
+    names = ["CO2", "CH4", "N2O"]
+    units = ["Gt C", "Mt CH4", "Mt N2O"]
     mult = [1, 1, 0.001]
     i = 0
 
     for emission in emissions:
-        fig = plt.plot(rcp19[emission].loc[2000:2100]*mult[i], linestyle="--", color=(0.560, 0.792, 0.740))
-        plt.plot(rcp19[emission].loc[2000:2016]*mult[i], color="black")
+        fig = plt.plot(
+            rcp19[emission].loc[2000:2100] * mult[i],
+            linestyle="--",
+            color=(0.560, 0.792, 0.740),
+        )
+        plt.plot(rcp19[emission].loc[2000:2016] * mult[i], color="black")
         plt.ylabel(units[i])
         plt.title("DAU Net Emissions, " + names[i])
         plt.savefig(
@@ -571,31 +571,35 @@ def charts(energy_demand_baseline, energy_demand_pathway):
             pad_inches=0.1,
         )
         plt.show()
-        i=i+1
+        i = i + 1
     plt.clf()
 
     # IN CO2e UNITS
 
     emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
-    names = ['CO2', 'CH4', 'N2O']
-    units = ['GtCO2e', 'GtCO2e', 'GtCO2e']
+    names = ["CO2", "CH4", "N2O"]
+    units = ["GtCO2e", "GtCO2e", "GtCO2e"]
     mult = [3.67, 1e-3, 1e-3]
     gwp = [1, 28, 265]
-    i = 0
+    j = 0
 
     for emission in emissions:
-        fig = plt.plot(rcp19[emission].loc[2000:2100] * mult[i] * gwp[i], linestyle="--", color=(0.560, 0.792, 0.740))
-        plt.plot(rcp19[emission].loc[2000:2016] * mult[i] * gwp[i], color="black")
-        plt.ylabel(units[i])
-        plt.title("DAU Net Emissions, " + names[i])
+        fig = plt.plot(
+            rcp19[emission].loc[2000:2100] * mult[j] * gwp[j],
+            linestyle="--",
+            color=(0.560, 0.792, 0.740),
+        )
+        plt.plot(rcp19[emission].loc[2000:2016] * mult[j] * gwp[j], color="black")
+        plt.ylabel(units[j])
+        plt.title("DAU Net Emissions, " + names[j])
         plt.savefig(
-            fname="podi/data/figs/emissions-" + names[i],
+            fname="podi/data/figs/emissions-" + names[j],
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
         )
         plt.show()
-        i=i+1
+        j = j + 1
     plt.clf()
 
     # Combined GHG
@@ -604,9 +608,13 @@ def charts(energy_demand_baseline, energy_demand_pathway):
     gwp = [1, 28, 265]
     i = 0
 
-    fig = plt.plot(rcp19.loc[2000:2100] * mult[i] * gwp[i], linestyle="--", color=(0.560, 0.792, 0.740))
+    fig = plt.plot(
+        rcp19.loc[2000:2100] * mult[i] * gwp[i],
+        linestyle="--",
+        color=(0.560, 0.792, 0.740),
+    )
     plt.plot(rcp19.loc[2000:2016] * mult[i] * gwp[i], color="black")
-    plt.ylabel('GtCO2e')
+    plt.ylabel("GtCO2e")
     plt.title("DAU Net Emissions, " + names[i])
     plt.savefig(
         fname="podi/data/figs/emissions-" + names[i],
@@ -615,8 +623,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         pad_inches=0.1,
     )
     plt.show()
-    i=i+1
-    plt.clf()    
+    plt.clf()
 
     # endregion
 
@@ -631,7 +638,9 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     results = pyhector.run(rcp19)
 
-    results[CONCENTRATION_CO2].loc[1900:2100].plot(linestyle="--")
+    results[CONCENTRATION_CO2].loc[1900:2100].plot(
+        linestyle="--", color=(0.560, 0.792, 0.740)
+    )
     hist = default[CONCENTRATION_CO2].loc[1900:2016]
     hist.plot(label="historical", color="black", figsize=(10, 5))
     plt.title("DAU: " + pyhector.output[CONCENTRATION_CO2]["description"])
@@ -664,7 +673,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # Baseline
 
-    for i in range(0,len(iea_region_list)):
+    for i in range(0, len(iea_region_list)):
         energy_demand_i = energy_demand_baseline.loc[
             iea_region_list[i], slice(None), slice(None), "Baseline"
         ]
@@ -772,7 +781,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
         plt.show()
         plt.clf()
 
-    # Pathway (Sum OECD/NonOECD)
+    # Pathway
 
     for i in range(0, len(iea_region_list)):
         energy_demand_i = energy_demand_pathway.loc[
@@ -1498,7 +1507,7 @@ def charts(energy_demand_baseline, energy_demand_pathway):
 
     # region
 
-color = (
+    color = (
         (0.999, 0.999, 0.999),
         (0.584, 0.804, 0.756),
         (0.526, 0.724, 0.680),
