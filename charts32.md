@@ -75,6 +75,8 @@
 
 ## ANUZ
 
+Australia, New Zealand
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-ANUZ )
@@ -131,7 +133,7 @@
 
 ***
 
-## BRA
+## Brazil
 
 ### Adoption Curves
 
@@ -189,7 +191,7 @@
 
 ***
 
-## CAN
+## Canada
 
 ### Adoption Curves
 
@@ -249,6 +251,8 @@
 
 ## CAS
 
+Armenia, Azerbaijan, Georgia, Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-CAS )
@@ -306,6 +310,8 @@
 ***
 
 ## CHN
+
+China, Hong Kong SAR, Macao SAR
 
 ### Adoption Curves
 
@@ -365,6 +371,8 @@
 
 ## EEU
 
+Albania, Bosnia and Herzegovina, Croatia, Montenegro, Serbia, The Former Yugoslav Republic of Macedonia
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-EEU )
@@ -422,6 +430,8 @@
 ***
 
 ## EEU-FSU
+
+Belarus, Republic of Moldova, Ukraine
 
 ### Adoption Curves
 
@@ -481,6 +491,8 @@
 
 ## EFTA
 
+Iceland, Norway, Switzerland
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-EFTA )
@@ -538,6 +550,8 @@
 ***
 
 ## EU12-H
+
+Cyprus, Czech Republic, Estonia, Hungary, Malta, Poland, Slovakia, Slovenia
 
 ### Adoption Curves
 
@@ -597,6 +611,8 @@
 
 ## EU12-M
 
+Bulgaria, Latvia, Lithuania, Romania
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-EU12-M )
@@ -655,6 +671,8 @@
 
 ## EU15
 
+Austria, Belgium, Denmark, Finland, France, Germany, Greece, Ireland, Italy, Luxembourg, Netherlands, Portugal, Spain, Sweden, United Kingdom
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-EU15 )
@@ -711,7 +729,7 @@
 
 ***
 
-## IDN
+## Indonesia
 
 ### Adoption Curves
 
@@ -769,7 +787,7 @@
 
 ***
 
-## IND
+## India
 
 ### Adoption Curves
 
@@ -827,7 +845,7 @@
 
 ***
 
-## JPN
+## Japan
 
 ### Adoption Curves
 
@@ -885,7 +903,7 @@
 
 ***
 
-## KOR
+## Republic of Korea
 
 ### Adoption Curves
 
@@ -945,6 +963,8 @@
 
 ## LAM-L
 
+Belize, Guatemala, Haiti, Honduras, Nicaragua
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-LAM-L )
@@ -1002,6 +1022,8 @@
 ***
 
 ## LAM-M
+
+Antigua and Barbuda, Argentina, Bahamas, Barbados, Bermuda, Bolivia (Plurinational State of), Chile, Colombia, Costa Rica, Cuba, Dominica, Dominican Republic, Ecuador, El Salvador, French Guiana, Grenada, Guadeloupe, Guyana, Jamaica, Martinique, Netherlands Antilles, Panama, Paraguay, Peru, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Suriname, Trinidad and Tobago, Uruguay, Venezuela (Bolivarian Republic of)
 
 ### Adoption Curves
 
@@ -1061,6 +1083,8 @@
 
 ## MEA-H
 
+Bahrain, Israel, Kuwait, Oman, Qatar, Saudi Arabia, United Arab Emirates
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-MEA-H )
@@ -1119,6 +1143,8 @@
 
 ## MEA-M
 
+Iran (Islamic Republic of), Iraq, Jordan, Lebanon, Occupied Palestinian Territory, Syrian Arab Republic, Yemen
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-MEA-M )
@@ -1175,7 +1201,7 @@
 
 ***
 
-## MEX
+## Mexico
 
 ### Adoption Curves
 
@@ -1235,6 +1261,8 @@
 
 ## NAF
 
+Algeria, Egypt, Libyan Arab Jamahiriya, Morocco, Tunisia, Western Sahara
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-NAF )
@@ -1292,6 +1320,8 @@
 ***
 
 ## OAS-CPA
+
+Cambodia, Lao People's Democratic Republic, Mongolia, Viet Nam
 
 ### Adoption Curves
 
@@ -1351,6 +1381,8 @@
 
 ## OAS-L
 
+Bangladesh, Democratic People's Republic of Korea, Fiji, Micronesia (Fed. States of), Myanmar, Nepal, Papua New Guinea, Philippines, Samoa, Solomon Islands, Timor-Leste, Tonga, Vanuatu
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-OAS-L )
@@ -1408,6 +1440,8 @@
 ***
 
 ## OAS-M
+
+Bhutan, Brunei Darussalam, French Polynesia, Guam, Malaysia, Maldives, New Caledonia, Singapore, Sri Lanka, Thailand
 
 ### Adoption Curves
 
@@ -1467,6 +1501,8 @@
 
 ## PAK
 
+Pakistan, Afghanistan
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-PAK )
@@ -1523,7 +1559,7 @@
 
 ***
 
-## RUS
+## Russian Federation
 
 ### Adoption Curves
 
@@ -1581,7 +1617,7 @@
 
 ***
 
-## SAF
+## South Africa
 
 ### Adoption Curves
 
@@ -1641,6 +1677,8 @@
 
 ## SSA-L
 
+Benin, Burkina Faso, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Comoros, Congo, Côte d\'Ivoire, Democratic Republic of the Congo, Djibouti, Eritrea, Ethiopia, Gambia, Ghana, Guinea, Guinea-Bissau, Kenya, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Mozambique, Niger, Nigeria, Rwanda, Sao Tome and Principe, Senegal, Sierra Leone, Somalia, South Sudan, Sudan, Swaziland, Togo, Uganda, United Republic of Tanzania, Zambia, Zimbabwe
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-SSA-L )
@@ -1699,6 +1737,8 @@
 
 ## SSA-M
 
+Angola, Botswana, Equatorial Guinea, Gabon, Mauritius, Mayotte, Namibia, Réunion, Seychelles
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-SSA-M )
@@ -1755,7 +1795,7 @@
 
 ***
 
-## TUR
+## Turkey
 
 ### Adoption Curves
 
@@ -1813,7 +1853,7 @@
 
 ***
 
-## TWN
+## Taiwan
 
 ### Adoption Curves
 
@@ -1872,6 +1912,8 @@
 ***
 
 ## USA
+
+Puerto Rico, United States Virgin Islands, United States of America
 
 ### Adoption Curves
 
