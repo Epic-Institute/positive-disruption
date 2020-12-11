@@ -22,7 +22,7 @@ from shortcountrynames import to_name
 # endregion
 
 
-def charts(energy_demand_baseline, energy_demand_pathway):
+def charts(energy_demand_baseline, energy_demand_pathway, adoption_curves, em_targets_pathway):
 
     #####################################
     # PROJECTED MARKET DIFFUSION CURVES #

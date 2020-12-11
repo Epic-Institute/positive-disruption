@@ -7,6 +7,7 @@ from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply
 from podi.afolu import afolu
 from podi.results_analysis import results_analysis
+from podi.charts import charts
 import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
@@ -260,5 +261,16 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
+##########
+# CHARTS #
+##########
+
+# region
+
+charts(energy_demand_baseline, energy_demand_pathway, adoption_curves, em_targets_pathway)
+
+# endregion
+
+
 end_time = time.monotonic()
-print(/n "Time: " + timedelta(seconds=end_time - start_time))
+print(timedelta(seconds=end_time - start_time))
