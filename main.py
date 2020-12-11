@@ -267,7 +267,13 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-charts(energy_demand_baseline, energy_demand_pathway, adoption_curves, em_targets_pathway)
+charts(
+    energy_demand_baseline,
+    energy_demand_pathway,
+    adoption_curves,
+    em_targets_pathway,
+    em_mitigated,
+)
 
 # endregion
 
