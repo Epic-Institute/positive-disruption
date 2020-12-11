@@ -65,65 +65,9 @@
 
 ***
 
-## Developing Economies
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-DevelopingECO )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-DevelopingECO )
-![](./podi/data/figs/scurves_ind-Transport-DevelopingECO )
-![](./podi/data/figs/scurves_ind-Buildings-DevelopingECO )
-![](./podi/data/figs/scurves_ind-Industry-DevelopingECO )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-DevelopingECO )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-DevelopingECO )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-DevelopingECO )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-DevelopingECO )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-DevelopingECO )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-DevelopingECO )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-DevelopingECO )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-DevelopingECO )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-DevelopingECO )<br/><br/>
-![](./podi/data/figs/electricity_pathway-DevelopingECO )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-DevelopingECO )<br/><br/>
-![](./podi/data/figs/buildings_pathway-DevelopingECO )<br/><br/>
-![](./podi/data/figs/industry_pathway-DevelopingECO )<br/><br/>
-![](./podi/data/figs/transport_pathway-DevelopingECO )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-DevelopingECO )<br/><br/>
-![](./podi/data/figs/fw_pathway-DevelopingECO )<br/><br/>
-![](./podi/data/figs/afolu_pathway-DevelopingECO )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-DevelopingECO )<br/><br/>
-
-<br/><br/>
-
-***
-
 ## Advanced Economies
+
+Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Israel, Italy, Japan, Korea, Luxembourg, Mexico, Netherlands, New Zealand, Norway, Poland, Portugal, Slovak Republic, Slovenia, Spain, Sweden, Switzerland, Turkey, United Kingdom, United States, Bulgaria, Croatia, Cyprus, Latvia, Lithuania, Malta, Romania 
 
 ### Adoption Curves
 
@@ -181,7 +125,69 @@
 
 ***
 
+## Developing Economies
+
+All countries not included in the Advanced Economies regional grouping
+
+### Adoption Curves
+
+![](./podi/data/figs/scurves-DevelopingECO )
+
+<br/><br/>
+
+![](./podi/data/figs/scurves_ind-Grid-DevelopingECO )
+![](./podi/data/figs/scurves_ind-Transport-DevelopingECO )
+![](./podi/data/figs/scurves_ind-Buildings-DevelopingECO )
+![](./podi/data/figs/scurves_ind-Industry-DevelopingECO )
+![](./podi/data/figs/scurves_ind-Regenerative Agriculture-DevelopingECO )
+![](./podi/data/figs/scurves_ind-Forests & Wetlands-DevelopingECO )
+![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-DevelopingECO )
+
+<br/><br/>
+
+### Emissions
+
+![](./podi/data/figs/mitigationwedges-DevelopingECO )
+
+<br/><br/>
+
+![](./podi/data/figs/emissions-ffi_emissions-DevelopingECO )<br/><br/>
+![](./podi/data/figs/emissions-CH4_emissions-DevelopingECO )<br/><br/>
+![](./podi/data/figs/emissions-N2O_emissions-DevelopingECO )<br/><br/>
+
+<br/><br/>
+
+### Energy Supply & Demand
+
+![](./podi/data/figs/energydemand_pathway-DevelopingECO )<br/><br/>
+![](./podi/data/figs/energysupply_pathway-DevelopingECO )<br/><br/>
+![](./podi/data/figs/electricity_pathway-DevelopingECO )<br/><br/>
+![](./podi/data/figs/elecbysector_pathway-DevelopingECO )<br/><br/>
+![](./podi/data/figs/buildings_pathway-DevelopingECO )<br/><br/>
+![](./podi/data/figs/industry_pathway-DevelopingECO )<br/><br/>
+![](./podi/data/figs/transport_pathway-DevelopingECO )<br/><br/>
+
+<br/><br/>
+
+### Natural Climate Solutions
+
+![](./podi/data/figs/ra_pathway-DevelopingECO )<br/><br/>
+![](./podi/data/figs/fw_pathway-DevelopingECO )<br/><br/>
+![](./podi/data/figs/afolu_pathway-DevelopingECO )<br/><br/>
+
+<br/><br/>
+
+### Carbon Dioxide Removal
+
+![](./podi/data/figs/cdr_pathway-DevelopingECO )<br/><br/>
+
+<br/><br/>
+
+***
+
 ## OECD Nations
+
+Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Israel, Italy, Japan, Korea, Luxembourg, Mexico, Netherlands, New Zealand, Norway, Poland, Portugal, Slovak Republic, Slovenia, Spain, Sweden, Switzerland, Turkey, United Kingdom, United States
 
 ### Adoption Curves
 
@@ -241,6 +247,8 @@
 
 ## Non-OECD Nations
 
+All countries not included in OECD regional grouping
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-NonOECD )
@@ -297,65 +305,9 @@
 
 ***
 
-## Asia Pacific
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-ASIAPAC )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-ASIAPAC )
-![](./podi/data/figs/scurves_ind-Transport-ASIAPAC )
-![](./podi/data/figs/scurves_ind-Buildings-ASIAPAC )
-![](./podi/data/figs/scurves_ind-Industry-ASIAPAC )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-ASIAPAC )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-ASIAPAC )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-ASIAPAC )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-ASIAPAC )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-ASIAPAC )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-ASIAPAC )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-ASIAPAC )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-ASIAPAC )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-ASIAPAC )<br/><br/>
-![](./podi/data/figs/electricity_pathway-ASIAPAC )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-ASIAPAC )<br/><br/>
-![](./podi/data/figs/buildings_pathway-ASIAPAC )<br/><br/>
-![](./podi/data/figs/industry_pathway-ASIAPAC )<br/><br/>
-![](./podi/data/figs/transport_pathway-ASIAPAC )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-ASIAPAC )<br/><br/>
-![](./podi/data/figs/fw_pathway-ASIAPAC )<br/><br/>
-![](./podi/data/figs/afolu_pathway-ASIAPAC )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-ASIAPAC )<br/><br/>
-
-<br/><br/>
-
-***
-
 ## Southeast Asia
+
+Brunei Darussalam, Cambodia, Indonesia, Lao People’s Democratic Republic, Malaysia, Myanmar, Philippines, Singapore, Thailand, Viet Nam
 
 ### Adoption Curves
 
@@ -413,65 +365,69 @@
 
 ***
 
-## Europe
+## Asia Pacific
+
+Southeast Asia regional grouping, Australia, Bangladesh, China, Chinese Taipei, India, Japan, Korea, Democratic People’s Republic of Korea, Mongolia, Nepal, New Zealand, Pakistan, Sri Lanka, Afghanistan, Bhutan, Cook Islands, Fiji, French Polynesia, Kiribati, the Lao People’s Democratic Republic, Macau (China), Maldives, New Caledonia, Palau, Papua New Guinea, Samoa, Solomon Islands, Timor-Leste and Tonga, Vanuatu
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-EUR )
+![](./podi/data/figs/scurves-ASIAPAC )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-EUR )
-![](./podi/data/figs/scurves_ind-Transport-EUR )
-![](./podi/data/figs/scurves_ind-Buildings-EUR )
-![](./podi/data/figs/scurves_ind-Industry-EUR )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-EUR )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-EUR )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-EUR )
+![](./podi/data/figs/scurves_ind-Grid-ASIAPAC )
+![](./podi/data/figs/scurves_ind-Transport-ASIAPAC )
+![](./podi/data/figs/scurves_ind-Buildings-ASIAPAC )
+![](./podi/data/figs/scurves_ind-Industry-ASIAPAC )
+![](./podi/data/figs/scurves_ind-Regenerative Agriculture-ASIAPAC )
+![](./podi/data/figs/scurves_ind-Forests & Wetlands-ASIAPAC )
+![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-ASIAPAC )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-EUR )
+![](./podi/data/figs/mitigationwedges-ASIAPAC )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-EUR )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-EUR )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-EUR )<br/><br/>
+![](./podi/data/figs/emissions-ffi_emissions-ASIAPAC )<br/><br/>
+![](./podi/data/figs/emissions-CH4_emissions-ASIAPAC )<br/><br/>
+![](./podi/data/figs/emissions-N2O_emissions-ASIAPAC )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-EUR )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-EUR )<br/><br/>
-![](./podi/data/figs/electricity_pathway-EUR )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-EUR )<br/><br/>
-![](./podi/data/figs/buildings_pathway-EUR )<br/><br/>
-![](./podi/data/figs/industry_pathway-EUR )<br/><br/>
-![](./podi/data/figs/transport_pathway-EUR )<br/><br/>
+![](./podi/data/figs/energydemand_pathway-ASIAPAC )<br/><br/>
+![](./podi/data/figs/energysupply_pathway-ASIAPAC )<br/><br/>
+![](./podi/data/figs/electricity_pathway-ASIAPAC )<br/><br/>
+![](./podi/data/figs/elecbysector_pathway-ASIAPAC )<br/><br/>
+![](./podi/data/figs/buildings_pathway-ASIAPAC )<br/><br/>
+![](./podi/data/figs/industry_pathway-ASIAPAC )<br/><br/>
+![](./podi/data/figs/transport_pathway-ASIAPAC )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-EUR )<br/><br/>
-![](./podi/data/figs/fw_pathway-EUR )<br/><br/>
-![](./podi/data/figs/afolu_pathway-EUR )<br/><br/>
+![](./podi/data/figs/ra_pathway-ASIAPAC )<br/><br/>
+![](./podi/data/figs/fw_pathway-ASIAPAC )<br/><br/>
+![](./podi/data/figs/afolu_pathway-ASIAPAC )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-EUR )<br/><br/>
+![](./podi/data/figs/cdr_pathway-ASIAPAC )<br/><br/>
 
 <br/><br/>
 
 ***
 
 ## European Union
+
+Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal, Romania, Slovak Republic, Slovenia, Spain, Sweden, United Kingdom
 
 ### Adoption Curves
 
@@ -529,7 +485,69 @@
 
 ***
 
+## Europe
+
+European Union regional grouping, Albania, Belarus, Bosnia and Herzegovina, Gibraltar, Iceland, Israel5, Kosovo, Montenegro, Norway, Serbia, Switzerland, the Former Yugoslav Republic of Macedonia, Republic of Moldova, Turkey, Ukraine
+
+### Adoption Curves
+
+![](./podi/data/figs/scurves-EUR )
+
+<br/><br/>
+
+![](./podi/data/figs/scurves_ind-Grid-EUR )
+![](./podi/data/figs/scurves_ind-Transport-EUR )
+![](./podi/data/figs/scurves_ind-Buildings-EUR )
+![](./podi/data/figs/scurves_ind-Industry-EUR )
+![](./podi/data/figs/scurves_ind-Regenerative Agriculture-EUR )
+![](./podi/data/figs/scurves_ind-Forests & Wetlands-EUR )
+![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-EUR )
+
+<br/><br/>
+
+### Emissions
+
+![](./podi/data/figs/mitigationwedges-EUR )
+
+<br/><br/>
+
+![](./podi/data/figs/emissions-ffi_emissions-EUR )<br/><br/>
+![](./podi/data/figs/emissions-CH4_emissions-EUR )<br/><br/>
+![](./podi/data/figs/emissions-N2O_emissions-EUR )<br/><br/>
+
+<br/><br/>
+
+### Energy Supply & Demand
+
+![](./podi/data/figs/energydemand_pathway-EUR )<br/><br/>
+![](./podi/data/figs/energysupply_pathway-EUR )<br/><br/>
+![](./podi/data/figs/electricity_pathway-EUR )<br/><br/>
+![](./podi/data/figs/elecbysector_pathway-EUR )<br/><br/>
+![](./podi/data/figs/buildings_pathway-EUR )<br/><br/>
+![](./podi/data/figs/industry_pathway-EUR )<br/><br/>
+![](./podi/data/figs/transport_pathway-EUR )<br/><br/>
+
+<br/><br/>
+
+### Natural Climate Solutions
+
+![](./podi/data/figs/ra_pathway-EUR )<br/><br/>
+![](./podi/data/figs/fw_pathway-EUR )<br/><br/>
+![](./podi/data/figs/afolu_pathway-EUR )<br/><br/>
+
+<br/><br/>
+
+### Carbon Dioxide Removal
+
+![](./podi/data/figs/cdr_pathway-EUR )<br/><br/>
+
+<br/><br/>
+
+***
+
 ## Africa
+
+Algeria, Egypt, Libya, Morocco, Tunisia, Angola, Benin, Botswana, Cameroon, Republic of the Congo, Côte d\’Ivoire, Democratic Republic of the Congo, Eritrea, Ethiopia, Gabon, Ghana, Kenya, Mauritius, Mozambique, Namibia, Niger, Nigeria, Senegal, South Africa, South Sudan, Sudan, United Republic of Tanzania, Togo, Zambia, Zimbabwe, Burkina Faso, Burundi, Cabo Verde, Central African Republic, Chad, Comoros, Djibouti, Equatorial Guinea, Gambia, Guinea, Guinea-Bissau, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Réunion, Rwanda, Sao Tome and Principe, Seychelles, Sierra Leone, Somalia, Swaziland, Uganda, Western Sahara
 
 ### Adoption Curves
 
@@ -589,6 +607,8 @@
 
 ## Central and South America
 
+Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, Costa Rica, Cuba, Curaçao, Dominican Republic, Ecuador, El Salvador, Guatemala, Haiti, Honduras, Jamaica, Nicaragua, Panama, Paraguay, Peru, Suriname, Trinidad and Tobago, Uruguay, Antigua and Barbuda, Aruba, Bahamas, Barbados, Belize, Bermuda, Bonaire, British Virgin Islands, Cayman Islands, Dominica, Falkland Islands (Malvinas), French Guiana, Grenada, Guadeloupe, Guyana, Martinique, Montserrat, Saba, Saint Eustatius, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Saint Maarten, Turks and Caicos Islands
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-CSAM )
@@ -646,6 +666,8 @@
 ***
 
 ## Eurasia
+
+Armenia, Azerbaijan, Georgia, Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan and Uzbekistan, Russian Federation
 
 ### Adoption Curves
 
@@ -705,6 +727,8 @@
 
 ## Middle East
 
+Bahrain, Islamic Republic of Iran, Iraq, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, Syrian Arab Republic, United Arab Emirates and Yemen
+
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-ME )
@@ -762,6 +786,8 @@
 ***
 
 ## North America
+
+Canada, Mexico, United States
 
 ### Adoption Curves
 
@@ -1109,7 +1135,7 @@
 
 ***
 
-## Russia
+## Russian Federation
 
 ### Adoption Curves
 
@@ -1226,6 +1252,9 @@
 ***
 
 ## Other
+
+Andorra, Anguilla, Netherlands Antilles, Liechtenstein, Marshall Islands, Micronesia, Monaco, Nauru, Niue, Northern Mariana Islands, Pitcairn, Puerto Rico, Saint Helena, Tokelau, Tuvalu, U.S. Virgin Islands, Vatican, Wallis and Futuna Island, Antarctica, Bermuda, Burma, Faroe 
+Islands, Saint Pierre and Miquelon, U.S. Pacific Islands, U.S. Territories, Wake Island
 
 ### Adoption Curves
 
