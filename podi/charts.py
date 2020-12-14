@@ -80,7 +80,7 @@ def charts(
         )
         plt.savefig(
             fname="podi/data/figs/scurves-" + iea_region_list[i],
-            format="png",
+            format="pdf",
             bbox_inches="tight",
             pad_inches=0.1,
         )
