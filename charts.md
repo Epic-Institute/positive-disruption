@@ -11,7 +11,7 @@
 <br/><br/>
 
 <p align="center">
-  <img src="./podi/data/figs/scurves_ind-Grid-World" width=9 height=5>
+  <img src="./podi/data/figs/scurves_ind-Grid-World" width="9" height="5">
   <img src="./podi/data/figs/scurves_ind-Transport-World" width="350"/>
   <img src="./podi/data/figs/scurves_ind-Buildings-World" width="350"/>
   <img src="./podi/data/figs/scurves_ind-Industry-World" width="350"/>
