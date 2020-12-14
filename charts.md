@@ -5,13 +5,13 @@
 ### Adoption Curves
 
 <p align="center">
-  <img src="./podi/data/figs/scurves-World" />
+  <img src="./podi/data/figs/scurves-World">
 </p>
 
 <br/><br/>
 
 <p align="center">
-  <img src="./podi/data/figs/scurves_ind-Grid-World" width="350"/>
+  <img src="./podi/data/figs/scurves_ind-Grid-World" width="350">
   <img src="./podi/data/figs/scurves_ind-Transport-World" width="350"/>
   <img src="./podi/data/figs/scurves_ind-Buildings-World" width="350"/>
   <img src="./podi/data/figs/scurves_ind-Industry-World" width="350"/>
