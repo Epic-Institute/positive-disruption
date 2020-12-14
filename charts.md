@@ -5,7 +5,7 @@
 ### Adoption Curves
 
 <p align="center">
-  ![](./podi/data/figs/scurves-World)
+  <img src="./podi/data/figs/scurves-World" />
 </p>
 
 <br/><br/>
@@ -25,7 +25,7 @@
 ### Emissions
 
 <p align="center"> 
-  ![](./podi/data/figs/mitigationwedges-World)
+  <img src="./podi/data/figs/mitigationwedges-World" />
 </p> 
 
 <br/><br/>
@@ -47,13 +47,13 @@
 ### Energy Supply & Demand
 
 <p align="center">
-  ![](./podi/data/figs/energydemand_pathway-World )<br/><br/>
-  ![](./podi/data/figs/energysupply_pathway-World )<br/><br/>
-  ![](./podi/data/figs/electricity_pathway-World )<br/><br/>
-  ![](./podi/data/figs/elecbysector_pathway-World )<br/><br/>
-  ![](./podi/data/figs/buildings_pathway-World )<br/><br/>
-  ![](./podi/data/figs/industry_pathway-World )<br/><br/>
-  ![](./podi/data/figs/transport_pathway-World )<br/><br/>
+  <img src="./podi/data/figs/energydemand_pathway-World" width="400"/>
+  <img src="./podi/data/figs/energysupply_pathway-World" width="400"/>
+  <img src="./podi/data/figs/electricity_pathway-World" width="400"/>
+  <img src="./podi/data/figs/elecbysector_pathway-World" width="400"/>
+  <img src="./podi/data/figs/buildings_pathway-World" width="400"/>
+  <img src="./podi/data/figs/industry_pathway-World" width="400"/>
+  <img src="./podi/data/figs/transport_pathway-World" width="400"/>
 </p>
 
 <br/><br/>
@@ -61,9 +61,9 @@
 ### Natural Climate Solutions
 
 <p align="center">
-  ![](./podi/data/figs/ra_pathway-World )<br/><br/>
-  ![](./podi/data/figs/fw_pathway-World )<br/><br/>
-  ![](./podi/data/figs/afolu_pathway-World )<br/><br/>
+  <img src="./podi/data/figs/ra_pathway-World" width="400"/>
+  <img src="./podi/data/figs/fw_pathway-World" width="400"/>
+  <img src="./podi/data/figs/afolu_pathway-World" width="400"/>
 </p>
 
 <br/><br/>
@@ -71,7 +71,7 @@
 ### Carbon Dioxide Removal
 
 <p align="center">
-  ![](./podi/data/figs/cdr_pathway-World )<br/><br/>
+  <img src="./podi/data/figs/cdr_pathway-World" width="400"/>
 </p>
 
 <br/><br/>
