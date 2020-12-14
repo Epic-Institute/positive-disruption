@@ -4,7 +4,7 @@
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-World )
+![](./podi/data/figs/scurves-World)
 
 <br/><br/>
 
