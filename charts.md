@@ -12,12 +12,12 @@
 
 <p align="center">
   <img src="./podi/data/figs/scurves_ind-Grid-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-Transport-World" width="350"/>
-  <img src="./podi/data/figs/scurves_ind-Buildings-World" width="350"/>
-  <img src="./podi/data/figs/scurves_ind-Industry-World" width="350"/>
-  <img src="./podi/data/figs/scurves_ind-Regenerative Agriculture-World" width="350"/>
-  <img src="./podi/data/figs/scurves_ind-Forests & Wetlands-World" width="350"/>
-  <img src="./podi/data/figs/scurves_ind-Carbon Dioxide Removal-World" width="350"/>
+  <img src="./podi/data/figs/scurves_ind-Transport-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-Buildings-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-Industry-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-Regenerative Agriculture-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-Forests & Wetlands-World" width="350"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-Carbon Dioxide Removal-World"><br/><br/>
 </p>
 
 <br/><br/>
