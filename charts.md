@@ -47,7 +47,7 @@
 ### Energy Supply & Demand
 
 <p align="center">
-  <img src="./podi/data/figs/energydemand_pathway-World" width="400"/>
+  <img src="./podi/data/figs/energydemand_pathway-World"/>
   <img src="./podi/data/figs/energysupply_pathway-World" width="400"/>
   <img src="./podi/data/figs/electricity_pathway-World" width="400"/>
   <img src="./podi/data/figs/elecbysector_pathway-World" width="400"/>
