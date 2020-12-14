@@ -340,7 +340,7 @@ def charts(
         ),
     ]
 
-    for i in range(0, 1):
+    for i in range(0, len(iea_region_list)):
         fig = ((em_mit.append(spacer)) / 1000).reindex(
             [
                 spacer.name,
