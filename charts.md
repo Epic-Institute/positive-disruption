@@ -15,9 +15,9 @@
   <img src="./podi/data/figs/scurves_ind-Transport-World"><br/><br/>
   <img src="./podi/data/figs/scurves_ind-Buildings-World"><br/><br/>
   <img src="./podi/data/figs/scurves_ind-Industry-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-Regenerative Agriculture-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-Forests & Wetlands-World" width="350"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-Carbon Dioxide Removal-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-RegenerativeAgriculture-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-Forests&Wetlands-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World"><br/><br/>
 </p>
 
 <br/><br/>
