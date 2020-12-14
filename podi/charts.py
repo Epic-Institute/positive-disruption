@@ -114,7 +114,7 @@ def charts(
                 adoption_curves2.iloc[j],
                 kind="cubic",
             )
-            fig2, ax = plt.subplots()
+            fig2, ax = plt.subplots(figsize=(9, 5))
             y = fig(xnew) * 100
             ax.plot(xnew, y, linestyle="--", color=(0.560, 0.792, 0.740))
             ax.plot(
@@ -136,10 +136,12 @@ def charts(
                 + iea_region_list[i]
             )
             plt.savefig(
-                fname="podi/data/figs/scurves_ind-"
-                + adoption_curves2.index[j]
-                + "-"
-                + iea_region_list[i],
+                fname=(
+                    "podi/data/figs/scurves_ind-"
+                    + adoption_curves2.index[j]
+                    + "-"
+                    + iea_region_list[i]
+                ).replace(" ", ""),
                 format="png",
                 bbox_inches="tight",
                 pad_inches=0.1,
