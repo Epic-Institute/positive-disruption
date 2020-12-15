@@ -114,7 +114,7 @@ def charts(
                 adoption_curves2.iloc[j],
                 kind="cubic",
             )
-            fig2, ax = plt.subplots(figsize=(9, 5))
+            fig2, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 6))
             y = fig(xnew) * 100
             ax.plot(xnew, y, linestyle="--", color=(0.560, 0.792, 0.740))
             ax.plot(
