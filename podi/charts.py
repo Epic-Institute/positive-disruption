@@ -147,6 +147,7 @@ def charts(
                 bbox_inches="tight",
                 pad_inches=0.1,
                 dpi=199,
+                figsize=(9, 5),
             )
 
             # Absolute values
