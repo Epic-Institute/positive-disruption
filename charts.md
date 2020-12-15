@@ -4,7 +4,7 @@
 
 ### Adoption Curves
 
-<p align="center">
+<p>
   <img src="./podi/data/figs/scurves-World "><br/>
 </p>
 
