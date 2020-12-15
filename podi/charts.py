@@ -137,6 +137,7 @@ def charts(
                 + ", "
                 + iea_region_list[i]
             )
+            plt.figure(j, figsize=(9, 5), dpi=199)
             plt.savefig(
                 fname=(
                     "podi/data/figs/scurves_ind-"
