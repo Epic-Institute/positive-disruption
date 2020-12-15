@@ -4,10 +4,7 @@
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-World)
-
-<br/><br/>
-
+![](./podi/data/figs/scurves-World)<br/><br/>
 ![](./podi/data/figs/scurves_ind-Grid-World)<br/><br/>
 ![](./podi/data/figs/scurves_ind-Transport-World)<br/><br/>
 ![](./podi/data/figs/scurves_ind-Buildings-World)<br/><br/>
