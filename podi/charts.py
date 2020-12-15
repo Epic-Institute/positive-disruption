@@ -83,6 +83,7 @@ def charts(
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
+            dpi=199,
         )
         plt.show()
         plt.clf()
@@ -114,7 +115,7 @@ def charts(
                 adoption_curves2.iloc[j],
                 kind="cubic",
             )
-            fig2, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 6))
+            fig2, ax = plt.subplots()
             y = fig(xnew) * 100
             ax.plot(xnew, y, linestyle="--", color=(0.560, 0.792, 0.740))
             ax.plot(
