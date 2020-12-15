@@ -58,7 +58,7 @@ def charts(
             lambda x: interp1d(adoption_curves2.columns.to_list(), x, kind="cubic"),
             axis=1,
         )
-        plt.figure(i, figsize=(9, 5))
+        plt.figure(i)
         fig.apply(lambda x: plt.plot(xnew, x(xnew) * 100, linestyle="--"))
         fig.apply(
             lambda x: plt.plot(
@@ -84,6 +84,7 @@ def charts(
             bbox_inches="tight",
             pad_inches=0.1,
             dpi=199,
+            figsize=(9, 5),
         )
         plt.show()
         plt.clf()
