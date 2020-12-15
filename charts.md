@@ -5,10 +5,8 @@
 ### Adoption Curves
 
 <p align="center">
-  <img src="./podi/data/figs/scurves-World">
+  <img src="./podi/data/figs/scurves-World "><br/>
 </p>
-
-<br/>
 
 <p align="center">
   <img src="./podi/data/figs/scurves_ind-Grid-World"><br/>
