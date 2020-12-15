@@ -8,16 +8,16 @@
   <img src="./podi/data/figs/scurves-World">
 </p>
 
-<br/><br/>
+<br/>
 
 <p align="center">
-  <img src="./podi/data/figs/scurves_ind-Grid-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-Transport-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-Buildings-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-Industry-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-RegenerativeAgriculture-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-Forests&Wetlands-World"><br/><br/>
-  <img src="./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-Grid-World"><br/>
+  <img src="./podi/data/figs/scurves_ind-Transport-World"><br/>
+  <img src="./podi/data/figs/scurves_ind-Buildings-World"><br/>
+  <img src="./podi/data/figs/scurves_ind-Industry-World"><br/>
+  <img src="./podi/data/figs/scurves_ind-RegenerativeAgriculture-World"><br/>
+  <img src="./podi/data/figs/scurves_ind-Forests&Wetlands-World"><br/>
+  <img src="./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World"><br/>
 </p>
 
 <br/><br/>
