@@ -12,9 +12,9 @@
 ![](./podi/data/figs/scurves_ind-Transport-World )
 ![](./podi/data/figs/scurves_ind-Buildings-World )
 ![](./podi/data/figs/scurves_ind-Industry-World )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-World )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-World )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-World )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-World )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-World )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World )
 
 <br/><br/>
 
@@ -60,14 +60,6 @@
 ### Carbon Dioxide Removal
 
 ![](./podi/data/figs/cdr_pathway-World )<br/><br/>
-
-<br/><br/>
-
-***
-
-## <NEXT REGION>
-
-
 
 <br/><br/>
 

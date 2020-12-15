@@ -6,69 +6,60 @@
 
 ![](./podi/data/figs/scurves-World)
 
-<p align="center">
-  <img src="./podi/data/figs/scurves_ind-Grid-World"><br/>
-  <img src="./podi/data/figs/scurves_ind-Transport-World"><br/>
-  <img src="./podi/data/figs/scurves_ind-Buildings-World"><br/>
-  <img src="./podi/data/figs/scurves_ind-Industry-World"><br/>
-  <img src="./podi/data/figs/scurves_ind-RegenerativeAgriculture-World"><br/>
-  <img src="./podi/data/figs/scurves_ind-Forests&Wetlands-World"><br/>
-  <img src="./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World"><br/>
-</p>
+<br/><br/>
+
+![](./podi/data/figs/scurves_ind-Grid-World)<br/><br/>
+![](./podi/data/figs/scurves_ind-Transport-World)<br/><br/>
+![](./podi/data/figs/scurves_ind-Buildings-World)
+![](./podi/data/figs/scurves_ind-Industry-World)<br/><br/>
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-World)<br/><br/>
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-World)<br/><br/>
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
 
 <br/><br/>
 
 ### Emissions
 
-<p align="center"> 
-  <img src="./podi/data/figs/mitigationwedges-World" />
-</p> 
+![](./podi/data/figs/mitigationwedges-World )
 
 <br/><br/>
 
-<p align="center"> 
-  <img src="./podi/data/figs/temperature" width="350"/> <img src="./podi/data/figs/sensitivity" width="375"/>
-  <img src="./podi/data/figs/forcing" width="500"/> <img src="./podi/data/figs/co2conc" width="500"/>
-</p> 
+![](./podi/data/figs/temperature)
+![](./podi/data/figs/sensitivity)
+![](./podi/data/figs/forcing)
+![](./podi/data/figs/co2conc)
 
 <br/><br/>
 
-<p align="center"> 
-  <img src="./podi/data/figs/emissions-ffi_emissions" width="350"/> <img src="./podi/data/figs/emissions-CH4_emissions" width="350"/>
-  <img src="./podi/data/figs/emissions-N2O_emissions" width="350"/>
-</p>
+![](./podi/data/figs/emissions-ffi_emissions)<br/><br/>
+![](./podi/data/figs/emissions-CH4_emissions)<br/><br/>
+![](./podi/data/figs/emissions-N2O_emissions)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-<p align="center">
-  <img src="./podi/data/figs/energydemand_pathway-World">
-  <img src="./podi/data/figs/energysupply_pathway-World" width="400"/>
-  <img src="./podi/data/figs/electricity_pathway-World" width="400"/>
-  <img src="./podi/data/figs/elecbysector_pathway-World" width="400"/>
-  <img src="./podi/data/figs/buildings_pathway-World" width="400"/>
-  <img src="./podi/data/figs/industry_pathway-World" width="400"/>
-  <img src="./podi/data/figs/transport_pathway-World" width="400"/>
-</p>
+![](./podi/data/figs/energydemand_pathway-World )<br/><br/>
+![](./podi/data/figs/energysupply_pathway-World )<br/><br/>
+![](./podi/data/figs/electricity_pathway-World )<br/><br/>
+![](./podi/data/figs/elecbysector_pathway-World )<br/><br/>
+![](./podi/data/figs/buildings_pathway-World )<br/><br/>
+![](./podi/data/figs/industry_pathway-World )<br/><br/>
+![](./podi/data/figs/transport_pathway-World )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-<p align="center">
-  <img src="./podi/data/figs/ra_pathway-World" width="400"/>
-  <img src="./podi/data/figs/fw_pathway-World" width="400"/>
-  <img src="./podi/data/figs/afolu_pathway-World" width="400"/>
-</p>
+![](./podi/data/figs/ra_pathway-World )<br/><br/>
+![](./podi/data/figs/fw_pathway-World )<br/><br/>
+![](./podi/data/figs/afolu_pathway-World )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-<p align="center">
-  <img src="./podi/data/figs/cdr_pathway-World" width="400"/>
-</p>
+![](./podi/data/figs/cdr_pathway-World )<br/><br/>
 
 <br/><br/>
 
