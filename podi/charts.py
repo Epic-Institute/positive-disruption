@@ -135,6 +135,7 @@ def charts(
                 + ", "
                 + iea_region_list[i]
             )
+            plt.figure(j, figsize=(9, 5))
             plt.savefig(
                 fname=(
                     "podi/data/figs/scurves_ind-"
@@ -146,6 +147,8 @@ def charts(
                 bbox_inches="tight",
                 pad_inches=0.1,
             )
+            plt.show()
+            plt.clf()
 
             # Absolute values
 

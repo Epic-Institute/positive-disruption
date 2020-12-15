@@ -11,8 +11,8 @@
 <br/><br/>
 
 <p align="center">
-  <img src="./podi/data/figs/scurves_ind-Grid-World">
-  <img src="./podi/data/figs/scurves_ind-Transport-World">
+  <img src="./podi/data/figs/scurves_ind-Grid-World"><br/><br/>
+  <img src="./podi/data/figs/scurves_ind-Transport-World"><br/><br/>
   <img src="./podi/data/figs/scurves_ind-Buildings-World"><br/><br/>
   <img src="./podi/data/figs/scurves_ind-Industry-World"><br/><br/>
   <img src="./podi/data/figs/scurves_ind-RegenerativeAgriculture-World"><br/><br/>
