@@ -79,7 +79,7 @@ def charts(
             # borderaxespad=0.0,
         )
         plt.savefig(
-            fname="podi/data/figs/scurves-" + iea_region_list[i],
+            fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
