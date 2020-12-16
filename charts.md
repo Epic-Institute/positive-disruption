@@ -4,7 +4,7 @@
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-World )
+![](./podi/data/figs/scurves-World)
 
 <br/><br/>
 
@@ -26,7 +26,7 @@
 
 ![](./podi/data/figs/temperature)
 ![](./podi/data/figs/sensitivity)
-![](./podi/data/figs/forcing)<br/><br/>
+![](./podi/data/figs/forcing)
 ![](./podi/data/figs/co2conc)
 
 <br/><br/>
