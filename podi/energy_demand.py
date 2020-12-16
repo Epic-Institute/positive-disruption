@@ -253,12 +253,7 @@ def energy_demand(
         .sum()
         .values
     )
-    """
-    energy_demand.loc[slice(None), 'TFC', 'Nonelec Transport'] = (
-        energy_demand.loc[
-            slice(None), ["Transport"], ["Oil", "Biofuels", "Other fuels"]        ]        .groupby("IEA Region")        ).sum()
-        .values
-    """
+
     energy_demand.loc[slice(None), "TFC", "Total final consumption"] = (
         (
             energy_demand.loc[

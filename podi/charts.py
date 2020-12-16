@@ -716,13 +716,6 @@ def charts(
                         :,
                     ]
                     .sum()
-                    .add(
-                        pd.DataFrame(
-                            energy_demand_baseline.loc[
-                                "World ", "Transport", "International bunkers"
-                            ]
-                        ).sum()
-                    )
                 ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
             )
             .append(
@@ -826,13 +819,6 @@ def charts(
                         :,
                     ]
                     .sum()
-                    .add(
-                        pd.DataFrame(
-                            energy_demand_pathway.loc[
-                                "World ", "Transport", "International bunkers"
-                            ]
-                        ).sum()
-                    )
                 ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
             )
             .append(
@@ -891,9 +877,9 @@ def charts(
         )
         plt.legend(loc=2, fontsize="small")
         plt.ylabel("TFC (TWh)")
-        plt.xlim([2020, energy_demand_pathway.columns.max()])
+        plt.xlim([2010, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-        plt.xticks(np.arange(2020, energy_demand_pathway.columns.max() + 1, 10))
+        plt.xticks(np.arange(2010, energy_demand_pathway.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
         plt.savefig(
             fname="podi/data/figs/energydemand_pathway-" + iea_region_list[i],
