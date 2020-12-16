@@ -193,10 +193,10 @@ def charts(
             plt.title('% Adoption Projected - Teal Dashed Line \n Cumulative Capacity Projected - Blue Dashed Line \n (Mismatch between lines is due to growing electrical demand)', fontsize = 9)
             fig.tight_layout()
             plt.savefig(
-                fname="podi/data/figs/scurves2_ind-"
+                (fname="podi/data/figs/scurves2_ind-"
                 + adoption_curves2.index[j]
                 + "-"
-                + iea_region_list[i],
+                + iea_region_list[i]).replace(" ", ""),
                 format="png",
                 bbox_inches="tight",
                 pad_inches=0.1,
@@ -401,7 +401,9 @@ def charts(
         plt.yticks(np.arange(-25, 105, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/mitigationwedges-" + iea_region_list[i],
+            fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -437,7 +439,7 @@ def charts(
     plt.title("Global Mean Temperature")
     plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
     plt.savefig(
-        fname="podi/data/figs/temperature",
+        fname=("podi/data/figs/temperature").replace(" ", ""),
         format="png",
         bbox_inches="tight",
         pad_inches=0.1,
@@ -546,7 +548,7 @@ def charts(
             grouped.get_group(key).plot(ax=ax, legend=False)
             ax.set_ylabel(unit)
         plt.savefig(
-            fname="podi/data/figs/emissions-" + code,
+            fname=("podi/data/figs/emissions-" + code).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -578,7 +580,7 @@ def charts(
         plt.ylabel(units[i])
         plt.title("DAU Net Emissions, " + names[i])
         plt.savefig(
-            fname="podi/data/figs/emissions-" + names[i],
+            fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -606,7 +608,7 @@ def charts(
         plt.ylabel(units[j])
         plt.title("DAU Net Emissions, " + names[j])
         plt.savefig(
-            fname="podi/data/figs/emissions-" + names[j],
+            fname=("podi/data/figs/emissions-" + names[j]).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -630,7 +632,7 @@ def charts(
     plt.ylabel("GtCO2e")
     plt.title("DAU Net Emissions, " + names[i])
     plt.savefig(
-        fname="podi/data/figs/emissions-" + names[i],
+        fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
         format="png",
         bbox_inches="tight",
         pad_inches=0.1,
@@ -660,7 +662,7 @@ def charts(
     plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
     plt.legend(("DAU", "Historical"), loc="upper left")
     plt.savefig(
-        fname="podi/data/figs/co2conc",
+        fname=("podi/data/figs/co2conc").replace(" ", ""),
         format="png",
         bbox_inches="tight",
         pad_inches=0.1,
@@ -779,7 +781,9 @@ def charts(
         plt.xticks(np.arange(2020, energy_demand_baseline.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/energydemand_baseline-" + iea_region_list[i],
+            fname=(
+                "podi/data/figs/energydemand_baseline-" + iea_region_list[i]
+            ).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -882,7 +886,9 @@ def charts(
         plt.xticks(np.arange(2010, energy_demand_pathway.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/energydemand_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/energydemand_pathway-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1082,7 +1088,9 @@ def charts(
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.savefig(
-            fname="podi/data/figs/energysupply_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/energysupply_pathway-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1144,7 +1152,9 @@ def charts(
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.savefig(
-            fname="podi/data/figs/electricity_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/electricity_pathway-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1254,7 +1264,9 @@ def charts(
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Electricity Demand by Sector, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/elecbysector_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/elecbysector_pathway-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1317,7 +1329,9 @@ def charts(
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Buildings Energy Supply, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/buildings_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/buildings_pathway-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1375,7 +1389,9 @@ def charts(
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Industry Energy Demand by End-Use, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/industry_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/industry_pathway-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1432,7 +1448,7 @@ def charts(
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
         plt.title("Industry Energy Demand by End-Use, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/industryheat_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/industryheat_pathway-" + iea_region_list[i]).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1472,7 +1488,9 @@ def charts(
         plt.xticks(np.arange(2020, 2110, 10))
         plt.title("Transportation Energy Supply, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/transport_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/transport_pathway-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1654,7 +1672,7 @@ def charts(
             + iea_region_list[i]
         )
         plt.savefig(
-            fname="podi/data/figs/ra_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/ra_pathway-" + iea_region_list[i]).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1805,7 +1823,7 @@ def charts(
             "Forests & Wetlands Subvector Mitigation Wedges, " + iea_region_list[i]
         )
         plt.savefig(
-            fname="podi/data/figs/fw_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/fw_pathway-" + iea_region_list[i]).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -1999,7 +2017,9 @@ def charts(
         plt.yticks(np.arange(-17, 10, 5))
         plt.title("AFOLU Subvector Mitigation Wedges, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/afolu_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/afolu_pathway-" + iea_region_list[i]).replace(
+                " ", ""
+            ),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
@@ -2053,7 +2073,7 @@ def charts(
         plt.xticks(np.arange(2020, 2110, 10))
         plt.title("CO2 Removed via CDR, " + iea_region_list[i])
         plt.savefig(
-            fname="podi/data/figs/cdr_pathway-" + iea_region_list[i],
+            fname=("podi/data/figs/cdr_pathway-" + iea_region_list[i]).replace(" ", ""),
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
