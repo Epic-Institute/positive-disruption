@@ -4,20 +4,23 @@
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-World)<br/><br/>
-![](./podi/data/figs/scurves_ind-Grid-World)<br/><br/>
-![](./podi/data/figs/scurves_ind-Transport-World)<br/><br/>
-![](./podi/data/figs/scurves_ind-Buildings-World)<br/><br/>
-![](./podi/data/figs/scurves_ind-Industry-World)<br/><br/>
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-World)<br/><br/>
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-World)<br/><br/>
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
+![](./podi/data/figs/scurves-World )
+
+<br/><br/>
+
+![](./podi/data/figs/scurves_ind-Grid-World )
+![](./podi/data/figs/scurves_ind-Transport-World )
+![](./podi/data/figs/scurves_ind-Buildings-World )
+![](./podi/data/figs/scurves_ind-Industry-World )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-World )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-World )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-World)
+![](./podi/data/figs/mitigationwedges-World )
 
 <br/><br/>
 
