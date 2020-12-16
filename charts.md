@@ -20,13 +20,13 @@
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-World )
+![](./podi/data/figs/mitigationwedges-World)
 
 <br/><br/>
 
 ![](./podi/data/figs/temperature)
 ![](./podi/data/figs/sensitivity)
-![](./podi/data/figs/forcing)
+![](./podi/data/figs/forcing | width=200)
 ![](./podi/data/figs/co2conc)
 
 <br/><br/>
