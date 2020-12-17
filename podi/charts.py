@@ -18,6 +18,7 @@ from podi.energy_supply import (
 )
 from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
+from scipy.signal import savgol_filter
 
 # endregion
 
@@ -686,6 +687,8 @@ def charts(
 
     # region
 
+    start_yr = 2010
+
     # Baseline
 
     for i in range(0, len(iea_region_list)):
@@ -776,9 +779,9 @@ def charts(
         )
         plt.legend(loc=2, fontsize="small")
         plt.ylabel("TFC (TWh)")
-        plt.xlim([2020, energy_demand_baseline.columns.max()])
+        plt.xlim([start_yr, energy_demand_baseline.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-        plt.xticks(np.arange(2020, energy_demand_baseline.columns.max() + 1, 10))
+        plt.xticks(np.arange(start_yr, energy_demand_baseline.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
         plt.savefig(
             fname=(
@@ -797,6 +800,7 @@ def charts(
         energy_demand_i = energy_demand_pathway.loc[
             iea_region_list[i], slice(None), slice(None), "Pathway"
         ]
+
         fig = (
             energy_demand_i.loc[(slice(None), "Electricity"), :]
             .groupby(["Sector"])
@@ -881,9 +885,9 @@ def charts(
         )
         plt.legend(loc=2, fontsize="small")
         plt.ylabel("TFC (TWh)")
-        plt.xlim([2010, energy_demand_pathway.columns.max()])
+        plt.xlim([start_yr, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-        plt.xticks(np.arange(2010, energy_demand_pathway.columns.max() + 1, 10))
+        plt.xticks(np.arange(start_yr, energy_demand_pathway.columns.max() + 1, 10))
         plt.title("Energy Demand, " + iea_region_list[i])
         plt.savefig(
             fname=("podi/data/figs/energydemand_pathway-" + iea_region_list[i]).replace(
