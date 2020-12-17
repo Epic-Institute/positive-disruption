@@ -107,7 +107,7 @@ def energy_demand(
 
     # Reallocate international bunkers from Transport - Oil
     energy_demand.loc["World ", "Transport", "Oil"] = (
-        energy_demand.loc["World ", "Transport", "Oil"] * 0.84
+        energy_demand.loc["World ", "Transport", "Oil"] * 0.9
     ).values
 
     bunkers = pd.concat(
@@ -154,7 +154,7 @@ def energy_demand(
     energy_demand_post_heat_pumps = energy_demand - (energy_demand * heat_pumps.values)
 
     # Apply percentage reduction attributed to solar thermal
-    """
+
     solar_thermal = (
         pd.read_csv(solar_thermal)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -165,7 +165,6 @@ def energy_demand(
     energy_demand_post_solarthermal = energy_demand - (
         energy_demand * solar_thermal.values
     )
-    """
 
     # endregion
 
@@ -186,9 +185,12 @@ def energy_demand(
     cdr_energy.reset_index(inplace=True)
     cdr_energy.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
     energy_demand = energy_demand.append(cdr_energy)
+
+    """
     energy_demand.loc[" OECD ", "Industry", "Electricity"] = (
         energy_demand.loc[" OECD ", "Industry", "Electricity"].add(cdr_energy).values
     )
+    """
 
     # endregion
 
@@ -199,7 +201,10 @@ def energy_demand(
     # region
 
     energy_demand = (
-        energy_demand - energy_demand_post_efficiency - energy_demand_post_heat_pumps
+        energy_demand
+        - energy_demand_post_efficiency
+        - energy_demand_post_heat_pumps
+        - energy_demand_post_solarthermal
     )
 
     energy_demand.loc[slice(None), "Industry", "Industry"] = (
