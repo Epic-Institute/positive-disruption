@@ -19,6 +19,7 @@ from podi.energy_supply import (
 from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
 from scipy.signal import savgol_filter
+import plotly.express as px
 
 # endregion
 
@@ -408,6 +409,166 @@ def charts(
         )
         plt.show()
         plt.clf()
+
+    # endregion
+
+    #################################
+    # Emissions Mitigation Barchart #
+    #################################
+
+    # region
+
+    color = (
+        (0.999, 0.999, 0.999),
+        (0.928, 0.828, 0.824),
+        (0.688, 0.472, 0.460),
+        (0.572, 0.792, 0.744),
+        (0.536, 0.576, 0.432),
+        (0.384, 0.460, 0.560),
+        (0.904, 0.620, 0.384),
+        (0.488, 0.672, 0.736),
+        (0.560, 0.516, 0.640),
+        (0.284, 0.700, 0.936),
+        (0.384, 0.664, 0.600),
+        (0.999, 0.976, 0.332),
+        (0.748, 0.232, 0.204),
+    )
+
+    em_mit_electricity = (
+        em_mitigated.loc["World ", "Electricity", slice(None)].sum() * 0.5
+    )
+
+    em_mit_transport = em_mitigated.loc["World ", "Transport", slice(None)].sum() * 1.05
+
+    em_mit_buildings = em_mitigated.loc["World ", "Buildings", slice(None)].sum() * 0.7
+
+    em_mit_industry = em_mitigated.loc["World ", "Industry", slice(None)].sum() * 0.6
+
+    em_mit_ra = (
+        afolu_em_mitigated.loc[
+            "World ",
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+            ],
+            slice(None),
+            slice(None),
+        ].sum()
+        * 0.95
+    )
+
+    em_mit_fw = (
+        afolu_em_mitigated.loc[
+            "World ",
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Peat Restoration",
+                "Natural Regeneration",
+            ],
+            slice(None),
+            slice(None),
+        ].sum()
+        * 0.95
+    )
+
+    em_mit_othergas = em_mitigated.loc["World ", "Other gases", :].sum()
+
+    em_mit_cdr = pd.Series(
+        cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
+    )
+
+    em_mit = pd.DataFrame(
+        [
+            em_mit_electricity,
+            em_mit_transport,
+            em_mit_buildings,
+            em_mit_industry,
+            em_mit_ra,
+            em_mit_fw,
+            em_mit_othergas,
+            em_mit_cdr,
+        ]
+    ).rename(
+        index={
+            0: "Electricity",
+            1: "Transport",
+            2: "Buildings",
+            3: "Industry",
+            4: "Forests & Wetlands",
+            5: "Agriculture",
+            6: "CH4, N2O, F-gases",
+            7: "CDR",
+        }
+    )
+    em_mit.loc[:, :2020] = 0
+    em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
+        em_mit.drop(labels="Electricity").sum()
+    )
+
+    custom_legend = [
+        Line2D([0], [0], color=color[8], linewidth=4),
+        Line2D([0], [0], color=color[7], linewidth=4),
+        Line2D([0], [0], color=color[6], linewidth=4),
+        Line2D([0], [0], color=color[5], linewidth=4),
+        Line2D([0], [0], color=color[4], linewidth=4),
+        Line2D([0], [0], color=color[3], linewidth=4),
+        Line2D([0], [0], color=color[2], linewidth=4),
+        Line2D([0], [0], color=color[1], linewidth=4),
+        Line2D(
+            [0], [0], color=color[12], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[10], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[9], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)
+        ),
+        Line2D(
+            [0], [0], color=color[11], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)
+        ),
+    ]
+
+    for i in range(0, len(iea_region_list)):
+        fig = ((em_mit) / 1000).reindex(
+            [
+                "CDR",
+                "CH4, N2O, F-gases",
+                "Agriculture",
+                "Forests & Wetlands",
+                "Industry",
+                "Buildings",
+                "Transport",
+                "Electricity",
+            ]
+        )
+        figure = px.bar(
+            fig,
+            x=fig.index,
+            y=2030,
+            labels={"index": "Vector", "2060": "GtCO2e Mitigated in 2060"},
+            title="V7 Opportunities, World",
+        )
+        figure.show()
+
+        figure = px.bar(
+            fig,
+            x=2030,
+            y=fig.index,
+            labels={"index": "Vector", "2060": "GtCO2e Mitigated in 2060"},
+            title="V7 Opportunities, World",
+        )
+        figure.show()
 
     # endregion
 
