@@ -451,9 +451,9 @@ Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, F
 ![](./podi/data/figs/scurves_ind-Transport-EU )
 ![](./podi/data/figs/scurves_ind-Buildings-EU )
 ![](./podi/data/figs/scurves_ind-Industry-EU )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-EU )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-EU )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-EU )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EU )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-EU )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EU )
 
 <br/><br/>
 
@@ -513,9 +513,9 @@ European Union regional grouping, Albania, Belarus, Bosnia and Herzegovina, Gibr
 ![](./podi/data/figs/scurves_ind-Transport-EUR )
 ![](./podi/data/figs/scurves_ind-Buildings-EUR )
 ![](./podi/data/figs/scurves_ind-Industry-EUR )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-EUR )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-EUR )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-EUR )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EUR )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-EUR )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EUR )
 
 <br/><br/>
 
@@ -575,9 +575,9 @@ Algeria, Egypt, Libya, Morocco, Tunisia, Angola, Benin, Botswana, Cameroon, Repu
 ![](./podi/data/figs/scurves_ind-Transport-Africa )
 ![](./podi/data/figs/scurves_ind-Buildings-Africa )
 ![](./podi/data/figs/scurves_ind-Industry-Africa )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-Africa )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-Africa )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-Africa )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-Africa )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-Africa )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-Africa )
 
 <br/><br/>
 
@@ -637,9 +637,9 @@ Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, C
 ![](./podi/data/figs/scurves_ind-Transport-CSAM )
 ![](./podi/data/figs/scurves_ind-Buildings-CSAM )
 ![](./podi/data/figs/scurves_ind-Industry-CSAM )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-CSAM )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-CSAM )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-CSAM )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-CSAM )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-CSAM )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-CSAM )
 
 <br/><br/>
 
@@ -699,9 +699,9 @@ Armenia, Azerbaijan, Georgia, Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, 
 ![](./podi/data/figs/scurves_ind-Transport-EURASIA )
 ![](./podi/data/figs/scurves_ind-Buildings-EURASIA )
 ![](./podi/data/figs/scurves_ind-Industry-EURASIA )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-EURASIA )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-EURASIA )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-EURASIA )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EURASIA )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-EURASIA )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EURASIA )
 
 <br/><br/>
 
@@ -761,9 +761,9 @@ Bahrain, Islamic Republic of Iran, Iraq, Jordan, Kuwait, Lebanon, Oman, Qatar, S
 ![](./podi/data/figs/scurves_ind-Transport-ME )
 ![](./podi/data/figs/scurves_ind-Buildings-ME )
 ![](./podi/data/figs/scurves_ind-Industry-ME )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-ME )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-ME )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-ME )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-ME )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-ME )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-ME )
 
 <br/><br/>
 
@@ -823,9 +823,9 @@ Canada, Mexico, United States
 ![](./podi/data/figs/scurves_ind-Transport-NAM )
 ![](./podi/data/figs/scurves_ind-Buildings-NAM )
 ![](./podi/data/figs/scurves_ind-Industry-NAM )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-NAM )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-NAM )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-NAM )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-NAM )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-NAM )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-NAM )
 
 <br/><br/>
 
@@ -883,9 +883,9 @@ Canada, Mexico, United States
 ![](./podi/data/figs/scurves_ind-Transport-BRAZIL )
 ![](./podi/data/figs/scurves_ind-Buildings-BRAZIL )
 ![](./podi/data/figs/scurves_ind-Industry-BRAZIL )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-BRAZIL )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-BRAZIL )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-BRAZIL )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-BRAZIL )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-BRAZIL )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-BRAZIL )
 
 <br/><br/>
 
@@ -943,9 +943,9 @@ Canada, Mexico, United States
 ![](./podi/data/figs/scurves_ind-Transport-US )
 ![](./podi/data/figs/scurves_ind-Buildings-US )
 ![](./podi/data/figs/scurves_ind-Industry-US )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-US )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-US )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-US )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-US )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-US )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-US )
 
 <br/><br/>
 
@@ -1003,9 +1003,9 @@ Canada, Mexico, United States
 ![](./podi/data/figs/scurves_ind-Transport-CHINA )
 ![](./podi/data/figs/scurves_ind-Buildings-CHINA )
 ![](./podi/data/figs/scurves_ind-Industry-CHINA )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-CHINA )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-CHINA )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-CHINA )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-CHINA )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-CHINA )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-CHINA )
 
 <br/><br/>
 
@@ -1063,9 +1063,9 @@ Canada, Mexico, United States
 ![](./podi/data/figs/scurves_ind-Transport-INDIA )
 ![](./podi/data/figs/scurves_ind-Buildings-INDIA )
 ![](./podi/data/figs/scurves_ind-Industry-INDIA )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-INDIA )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-INDIA )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-INDIA)
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-INDIA )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-INDIA )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-INDIA)
 
 <br/><br/>
 
@@ -1123,9 +1123,9 @@ Canada, Mexico, United States
 ![](./podi/data/figs/scurves_ind-Transport-JPN )
 ![](./podi/data/figs/scurves_ind-Buildings-JPN )
 ![](./podi/data/figs/scurves_ind-Industry-JPN )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-JPN )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-JPN )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-JPN )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-JPN )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-JPN )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-JPN )
 
 <br/><br/>
 
@@ -1183,9 +1183,9 @@ Canada, Mexico, United States
 ![](./podi/data/figs/scurves_ind-Transport-RUS )
 ![](./podi/data/figs/scurves_ind-Buildings-RUS )
 ![](./podi/data/figs/scurves_ind-Industry-RUS)
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-RUS )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-RUS )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-RUS )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-RUS )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-RUS )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-RUS )
 
 <br/><br/>
 
@@ -1243,9 +1243,9 @@ Canada, Mexico, United States
 ![](./podi/data/figs/scurves_ind-Transport-SAFR )
 ![](./podi/data/figs/scurves_ind-Buildings-SAFR )
 ![](./podi/data/figs/scurves_ind-Industry-SAFR )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-SAFR )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-SAFR )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-SAFR )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-SAFR )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-SAFR )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-SAFR )
 
 <br/><br/>
 
@@ -1304,9 +1304,9 @@ Islands, Saint Pierre and Miquelon, U.S. Pacific Islands, U.S. Territories, Wake
 ![](./podi/data/figs/scurves_ind-Transport-Other )
 ![](./podi/data/figs/scurves_ind-Buildings-Other )
 ![](./podi/data/figs/scurves_ind-Industry-Other )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-Other )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-Other )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-Other )
+![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-Other )
+![](./podi/data/figs/scurves_ind-Forests&Wetlands-Other )
+![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-Other )
 
 <br/><br/>
 
