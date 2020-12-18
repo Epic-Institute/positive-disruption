@@ -22,9 +22,9 @@
 
 ![](../podi/data/figs/mitigationwedges-World)
 
-<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em1-world.html" height="525" width="100%"></iframe>
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em1-World.html" height="525" width="100%"></iframe>
 
-<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em2-world.html" height="525" width="100%"></iframe>
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em2-World.html" height="525" width="100%"></iframe>
 
 <br/><br/>
 

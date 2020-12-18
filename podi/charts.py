@@ -20,6 +20,7 @@ from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
 from scipy.signal import savgol_filter
 import plotly.express as px
+import plotly.io as pio
 
 # endregion
 
@@ -555,20 +556,32 @@ def charts(
         figure = px.bar(
             fig,
             x=fig.index,
-            y=2030,
+            y=2060,
             labels={"index": "Vector", "2060": "GtCO2e Mitigated in 2060"},
             title="V7 Opportunities, World",
         )
         figure.show()
 
+        pio.write_html(
+            figure,
+            file=("./charts/em1-" + iea_region_list[i] + ".html").replace(" ", ""),
+            auto_open=False,
+        )
+
         figure = px.bar(
             fig,
-            x=2030,
+            x=2060,
             y=fig.index,
             labels={"index": "Vector", "2060": "GtCO2e Mitigated in 2060"},
             title="V7 Opportunities, World",
         )
         figure.show()
+
+        pio.write_html(
+            figure,
+            file=("./charts/em2-" + iea_region_list[i] + ".html").replace(" ", ""),
+            auto_open=False,
+        )
 
     # endregion
 
