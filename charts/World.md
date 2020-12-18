@@ -4,6 +4,9 @@
 
 ![](../podi/data/figs/scurves-World)
 
+% Adoption is uniquely defined for each vector, and represents the decarbonization of that vector over time.
+
+
 <br/>
 
 ![](../podi/data/figs/scurves_ind-Grid-World)
