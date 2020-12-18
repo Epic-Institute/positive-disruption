@@ -6,10 +6,6 @@
 
 % Adoption is uniquely defined for each vector, and represents the decarbonization of that vector over time.
 
-
-<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "fig1.html" height="525" width="100%"></iframe>
-
-
 <br/>
 
 ![](../podi/data/figs/scurves_ind-Grid-World)
@@ -25,6 +21,10 @@
 ### Emissions
 
 ![](../podi/data/figs/mitigationwedges-World)
+
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em1-world.html" height="525" width="100%"></iframe>
+
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em2-world.html" height="525" width="100%"></iframe>
 
 <br/><br/>
 
