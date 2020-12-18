@@ -1,1351 +1,186 @@
-# Charts
+# Model Overview
 
-## World
+The model has 7 components:
 
-### Adoption Curves
+1. socioeconomic
+2. energy_demand
+3. energy_supply
+4. afolu
+5. emissions
+6. results_analysis
+7. charts
 
-![](./podi/data/figs/scurves-World)
+These components are run sequentially through main.py, and are meant to compare two scenarios (a 'baseline' and a 'pathway'). The characteristics of baseline and pathway scenarios are determined by their input .csv/.xlsx data files, and can be changed to explore different scenarios. 
 
-<br/>
+'etl' scripts in the data folder are used to format input datafiles from the format in which they are recieved into a format that can be interpreted by the model.
 
-![](./podi/data/figs/scurves_ind-Grid-World)
-![](./podi/data/figs/scurves_ind-Transport-World)
-![](./podi/data/figs/scurves_ind-Buildings-World)
-![](./podi/data/figs/scurves_ind-Industry-World)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-World)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-World)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
 
-<br/>
+1. socioeconomic
 
-### Emissions
+  Estimates population and GDP
 
-![](./podi/data/figs/mitigationwedges-World)
 
-<br/><br/>
-
-![](./podi/data/figs/temperature)
-![](./podi/data/figs/sensitivity)
-![](./podi/data/figs/forcing)
-![](./podi/data/figs/co2conc)
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-World)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-World)<br/><br/>
-![](./podi/data/figs/electricity_pathway-World)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-World)<br/><br/>
-![](./podi/data/figs/buildings_pathway-World)<br/><br/>
-![](./podi/data/figs/industry_pathway-World)<br/><br/>
-![](./podi/data/figs/transport_pathway-World)<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-World)<br/><br/>
-![](./podi/data/figs/fw_pathway-World)<br/><br/>
-![](./podi/data/figs/afolu_pathway-World)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-World )<br/><br/>
-
-<br/><br/>
-
-***
-
-## Advanced Economies
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/AdvancedECO.png)
-
-Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Israel, Italy, Japan, Korea, Luxembourg, Mexico, Netherlands, New Zealand, Norway, Poland, Portugal, Slovak Republic, Slovenia, Spain, Sweden, Switzerland, Turkey, United Kingdom, United States, Bulgaria, Croatia, Cyprus, Latvia, Lithuania, Malta, Romania 
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-AdvancedECO )
-
-<br/>
-
-![](./podi/data/figs/scurves_ind-Grid-AdvancedECO)
-![](./podi/data/figs/scurves_ind-Transport-AdvancedECO)
-![](./podi/data/figs/scurves_ind-Buildings-AdvancedECO)
-![](./podi/data/figs/scurves_ind-Industry-AdvancedECO)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-AdvancedECO)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-AdvancedECO)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-AdvancedECO)
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-AdvancedECO)
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-AdvancedECO)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-AdvancedECO)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-AdvancedECO)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/electricity_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/buildings_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/industry_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/transport_pathway-AdvancedECO)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/fw_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/afolu_pathway-AdvancedECO)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-AdvancedECO)<br/><br/>
-
-<br/><br/>
-
-***
-
-## Developing Economies
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/DevelopingECO.png)
-
-All countries not included in the Advanced Economies regional grouping.
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-DevelopingECO)
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-DevelopingECO)
-![](./podi/data/figs/scurves_ind-Transport-DevelopingECO)
-![](./podi/data/figs/scurves_ind-Buildings-DevelopingECO)
-![](./podi/data/figs/scurves_ind-Industry-DevelopingECO)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-DevelopingECO)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-DevelopingECO)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-DevelopingECO)
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-DevelopingECO)
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-DevelopingECO)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-DevelopingECO)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-DevelopingECO)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/electricity_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/buildings_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/industry_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/transport_pathway-DevelopingECO)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/fw_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/afolu_pathway-DevelopingECO)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-DevelopingECO)<br/><br/>
-
-<br/><br/>
-
-***
-
-## OECD Nations
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/OECD.png)
-
-Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Israel, Italy, Japan, Korea, Luxembourg, Mexico, Netherlands, New Zealand, Norway, Poland, Portugal, Slovak Republic, Slovenia, Spain, Sweden, Switzerland, Turkey, United Kingdom, United States
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-OECD)
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-OECD)
-![](./podi/data/figs/scurves_ind-Transport-OECD)
-![](./podi/data/figs/scurves_ind-Buildings-OECD)
-![](./podi/data/figs/scurves_ind-Industry-OECD)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-OECD)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-OECD)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-OECD)
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-OECD)
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-OECD)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-OECD)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-OECD)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-OECD)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-OECD)<br/><br/>
-![](./podi/data/figs/electricity_pathway-OECD)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-OECD)<br/><br/>
-![](./podi/data/figs/buildings_pathway-OECD)<br/><br/>
-![](./podi/data/figs/industry_pathway-OECD)<br/><br/>
-![](./podi/data/figs/transport_pathway-OECD)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-OECD)<br/><br/>
-![](./podi/data/figs/fw_pathway-OECD)<br/><br/>
-![](./podi/data/figs/afolu_pathway-OECD)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-OECD)<br/><br/>
-
-<br/><br/>
-
-***
-
-## Non-OECD Nations
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/NonOECD.png)
-
-All countries not included in OECD regional grouping
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-NonOECD)
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-NonOECD)
-![](./podi/data/figs/scurves_ind-Transport-NonOECD)
-![](./podi/data/figs/scurves_ind-Buildings-NonOECD)
-![](./podi/data/figs/scurves_ind-Industry-NonOECD)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-NonOECD)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-NonOECD)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-NonOECD)
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-NonOECD)
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-NonOECD)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-NonOECD)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-NonOECD)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/electricity_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/buildings_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/industry_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/transport_pathway-NonOECD)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/fw_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/afolu_pathway-NonOECD)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-NonOECD)<br/><br/>
-
-<br/><br/>
-
-***
-
-## Southeast Asia
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/ASEAN.png)
-
-Brunei Darussalam, Cambodia, Indonesia, Lao People’s Democratic Republic, Malaysia, Myanmar, Philippines, Singapore, Thailand, Viet Nam
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-ASEAN)
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-ASEAN)
-![](./podi/data/figs/scurves_ind-Transport-ASEAN)
-![](./podi/data/figs/scurves_ind-Buildings-ASEAN)
-![](./podi/data/figs/scurves_ind-Industry-ASEAN)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-ASEAN)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-ASEAN)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-ASEAN)
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-ASEAN)
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-ASEAN)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-ASEAN)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-ASEAN)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/electricity_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/buildings_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/industry_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/transport_pathway-ASEAN)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/fw_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/afolu_pathway-ASEAN)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-ASEAN)<br/><br/>
-
-<br/><br/>
-
-***
-
-## Asia Pacific
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/ASIAPAC.png)
-
-Southeast Asia regional grouping, Australia, Bangladesh, China, Chinese Taipei, India, Japan, Korea, Democratic People’s Republic of Korea, Mongolia, Nepal, New Zealand, Pakistan, Sri Lanka, Afghanistan, Bhutan, Cook Islands, Fiji, French Polynesia, Kiribati, the Lao People’s Democratic Republic, Macau (China), Maldives, New Caledonia, Palau, Papua New Guinea, Samoa, Solomon Islands, Timor-Leste, Tonga, Vanuatu
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-ASIAPAC)
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-ASIAPAC)
-![](./podi/data/figs/scurves_ind-Transport-ASIAPAC)
-![](./podi/data/figs/scurves_ind-Buildings-ASIAPAC)
-![](./podi/data/figs/scurves_ind-Industry-ASIAPAC)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-ASIAPAC)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-ASIAPAC)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-ASIAPAC)
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-ASIAPAC)
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-ASIAPAC)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-ASIAPAC)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-ASIAPAC)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/electricity_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/buildings_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/industry_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/transport_pathway-ASIAPAC)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/fw_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/afolu_pathway-ASIAPAC)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-ASIAPAC)<br/><br/>
-
-<br/><br/>
-
-***
-
-## European Union
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/EU.png)
-
-Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal, Romania, Slovak Republic, Slovenia, Spain, Sweden, United Kingdom
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-EU )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-EU )
-![](./podi/data/figs/scurves_ind-Transport-EU )
-![](./podi/data/figs/scurves_ind-Buildings-EU )
-![](./podi/data/figs/scurves_ind-Industry-EU )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EU )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-EU )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EU )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-EU )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-EU )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-EU )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-EU )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-EU )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-EU )<br/><br/>
-![](./podi/data/figs/electricity_pathway-EU )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-EU )<br/><br/>
-![](./podi/data/figs/buildings_pathway-EU )<br/><br/>
-![](./podi/data/figs/industry_pathway-EU )<br/><br/>
-![](./podi/data/figs/transport_pathway-EU )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-EU )<br/><br/>
-![](./podi/data/figs/fw_pathway-EU )<br/><br/>
-![](./podi/data/figs/afolu_pathway-EU )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-EU )<br/><br/>
-
-<br/><br/>
-
-***
-
-## Europe
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/EUR.png)
-
-European Union regional grouping, Albania, Belarus, Bosnia and Herzegovina, Gibraltar, Iceland, Israel5, Kosovo, Montenegro, Norway, Serbia, Switzerland, the Former Yugoslav Republic of Macedonia, Republic of Moldova, Turkey, Ukraine
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-EUR )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-EUR )
-![](./podi/data/figs/scurves_ind-Transport-EUR )
-![](./podi/data/figs/scurves_ind-Buildings-EUR )
-![](./podi/data/figs/scurves_ind-Industry-EUR )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EUR )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-EUR )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EUR )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-EUR )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-EUR )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-EUR )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-EUR )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-EUR )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-EUR )<br/><br/>
-![](./podi/data/figs/electricity_pathway-EUR )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-EUR )<br/><br/>
-![](./podi/data/figs/buildings_pathway-EUR )<br/><br/>
-![](./podi/data/figs/industry_pathway-EUR )<br/><br/>
-![](./podi/data/figs/transport_pathway-EUR )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-EUR )<br/><br/>
-![](./podi/data/figs/fw_pathway-EUR )<br/><br/>
-![](./podi/data/figs/afolu_pathway-EUR )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-EUR )<br/><br/>
-
-<br/><br/>
-
-***
-
-## Africa
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/Africa.png)
-
-Algeria, Egypt, Libya, Morocco, Tunisia, Angola, Benin, Botswana, Cameroon, Republic of the Congo, Côte d\’Ivoire, Democratic Republic of the Congo, Eritrea, Ethiopia, Gabon, Ghana, Kenya, Mauritius, Mozambique, Namibia, Niger, Nigeria, Senegal, South Africa, South Sudan, Sudan, United Republic of Tanzania, Togo, Zambia, Zimbabwe, Burkina Faso, Burundi, Cabo Verde, Central African Republic, Chad, Comoros, Djibouti, Equatorial Guinea, Gambia, Guinea, Guinea-Bissau, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Réunion, Rwanda, Sao Tome and Principe, Seychelles, Sierra Leone, Somalia, Swaziland, Uganda, Western Sahara
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-Africa )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-Africa )
-![](./podi/data/figs/scurves_ind-Transport-Africa )
-![](./podi/data/figs/scurves_ind-Buildings-Africa )
-![](./podi/data/figs/scurves_ind-Industry-Africa )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-Africa )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-Africa )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-Africa )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-Africa )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-Africa )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-Africa )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-Africa )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-Africa )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-Africa )<br/><br/>
-![](./podi/data/figs/electricity_pathway-Africa )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-Africa )<br/><br/>
-![](./podi/data/figs/buildings_pathway-Africa )<br/><br/>
-![](./podi/data/figs/industry_pathway-Africa )<br/><br/>
-![](./podi/data/figs/transport_pathway-Africa )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-Africa )<br/><br/>
-![](./podi/data/figs/fw_pathway-Africa )<br/><br/>
-![](./podi/data/figs/afolu_pathway-Africa )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-Africa )<br/><br/>
-
-<br/><br/>
-
-***
-
-## Central and South America
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/CSAM.png)
-
-Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, Costa Rica, Cuba, Curaçao, Dominican Republic, Ecuador, El Salvador, Guatemala, Haiti, Honduras, Jamaica, Nicaragua, Panama, Paraguay, Peru, Suriname, Trinidad and Tobago, Uruguay, Antigua and Barbuda, Aruba, Bahamas, Barbados, Belize, Bermuda, Bonaire, British Virgin Islands, Cayman Islands, Dominica, Falkland Islands (Malvinas), French Guiana, Grenada, Guadeloupe, Guyana, Martinique, Montserrat, Saba, Saint Eustatius, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Saint Maarten, Turks and Caicos Islands
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-CSAM )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-CSAM )
-![](./podi/data/figs/scurves_ind-Transport-CSAM )
-![](./podi/data/figs/scurves_ind-Buildings-CSAM )
-![](./podi/data/figs/scurves_ind-Industry-CSAM )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-CSAM )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-CSAM )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-CSAM )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-CSAM )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-CSAM )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-CSAM )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-CSAM )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/electricity_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/buildings_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/industry_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/transport_pathway-CSAM )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/fw_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/afolu_pathway-CSAM )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-CSAM )<br/><br/>
-
-<br/><br/>
-
-***
-
-## Eurasia
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/EURASIA.png)
-
-Armenia, Azerbaijan, Georgia, Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan, Russian Federation
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-EURASIA)
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-EURASIA )
-![](./podi/data/figs/scurves_ind-Transport-EURASIA )
-![](./podi/data/figs/scurves_ind-Buildings-EURASIA )
-![](./podi/data/figs/scurves_ind-Industry-EURASIA )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EURASIA )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-EURASIA )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EURASIA )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-EURASIA )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-EURASIA )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-EURASIA )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-EURASIA )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/electricity_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/buildings_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/industry_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/transport_pathway-EURASIA )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/fw_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/afolu_pathway-EURASIA )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-EURASIA )<br/><br/>
-
-<br/><br/>
-
-***
+2. energy_demand
 
-## Middle East
+  Takes historical energy demand, projected energy demand, and applies reductions based on measures such as energy efficiency, shift of heat demand to electricity via heat pumps, transport efficiency, shift from fuels to electricity via electric vehicles, solar thermal energy, and biofuels.
 
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/ME.png)
+3. energy_supply
 
-Bahrain, Islamic Republic of Iran, Iraq, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, Syrian Arab Republic, United Arab Emirates, Yemen
+  Takes energy demand estimates, and estimates the technology mix of energy supply. Historical adoption rates and estimated saturation points are used to fit a logistics curve to future adoption.
 
-### Adoption Curves
 
-![](./podi/data/figs/scurves-ME )
+4. afolu
 
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-ME )
-![](./podi/data/figs/scurves_ind-Transport-ME )
-![](./podi/data/figs/scurves_ind-Buildings-ME )
-![](./podi/data/figs/scurves_ind-Industry-ME )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-ME )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-ME )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-ME )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-ME )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-ME )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-ME )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-ME )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-ME )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-ME )<br/><br/>
-![](./podi/data/figs/electricity_pathway-ME )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-ME )<br/><br/>
-![](./podi/data/figs/buildings_pathway-ME )<br/><br/>
-![](./podi/data/figs/industry_pathway-ME )<br/><br/>
-![](./podi/data/figs/transport_pathway-ME )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-ME )<br/><br/>
-![](./podi/data/figs/fw_pathway-ME )<br/><br/>
-![](./podi/data/figs/afolu_pathway-ME )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-ME )<br/><br/>
-
-<br/><br/>
-
-***
-
-## North America
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/NAM.png)
-
-Canada, Mexico, United States
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-NAM )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-NAM )
-![](./podi/data/figs/scurves_ind-Transport-NAM )
-![](./podi/data/figs/scurves_ind-Buildings-NAM )
-![](./podi/data/figs/scurves_ind-Industry-NAM )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-NAM )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-NAM )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-NAM )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-NAM )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-NAM )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-NAM )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-NAM )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-NAM )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-NAM )<br/><br/>
-![](./podi/data/figs/electricity_pathway-NAM )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-NAM )<br/><br/>
-![](./podi/data/figs/buildings_pathway-NAM )<br/><br/>
-![](./podi/data/figs/industry_pathway-NAM )<br/><br/>
-![](./podi/data/figs/transport_pathway-NAM )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-NAM )<br/><br/>
-![](./podi/data/figs/fw_pathway-NAM )<br/><br/>
-![](./podi/data/figs/afolu_pathway-NAM )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-NAM )<br/><br/>
-
-<br/><br/>
-
-***
-
-## Brazil
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/BRA.png)
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-BRAZIL )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-BRAZIL )
-![](./podi/data/figs/scurves_ind-Transport-BRAZIL )
-![](./podi/data/figs/scurves_ind-Buildings-BRAZIL )
-![](./podi/data/figs/scurves_ind-Industry-BRAZIL )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-BRAZIL )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-BRAZIL )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-BRAZIL )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-BRAZIL )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-BRAZIL )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-BRAZIL )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-BRAZIL )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/electricity_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/buildings_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/industry_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/transport_pathway-BRAZIL )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/fw_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/afolu_pathway-BRAZIL )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-BRAZIL )<br/><br/>
-
-<br/><br/>
-
-***
-
-## United States
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/USA.png)
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-US )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-US )
-![](./podi/data/figs/scurves_ind-Transport-US )
-![](./podi/data/figs/scurves_ind-Buildings-US )
-![](./podi/data/figs/scurves_ind-Industry-US )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-US )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-US )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-US )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-US )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-US )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-US )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-US )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-US )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-US )<br/><br/>
-![](./podi/data/figs/electricity_pathway-US )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-US )<br/><br/>
-![](./podi/data/figs/buildings_pathway-US )<br/><br/>
-![](./podi/data/figs/industry_pathway-US )<br/><br/>
-![](./podi/data/figs/transport_pathway-US )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-US )<br/><br/>
-![](./podi/data/figs/fw_pathway-US )<br/><br/>
-![](./podi/data/figs/afolu_pathway-US )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-US )<br/><br/>
-
-<br/><br/>
-
-***
-
-## China
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/CHN.png)
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-CHINA )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-CHINA )
-![](./podi/data/figs/scurves_ind-Transport-CHINA )
-![](./podi/data/figs/scurves_ind-Buildings-CHINA )
-![](./podi/data/figs/scurves_ind-Industry-CHINA )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-CHINA )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-CHINA )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-CHINA )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-CHINA )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-CHINA )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-CHINA )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-CHINA )<br/><br/>
-
-<br/><br/>
 
-### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/electricity_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/buildings_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/industry_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/transport_pathway-CHINA )<br/><br/>
 
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/fw_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/afolu_pathway-CHINA )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-CHINA )<br/><br/>
-
-<br/><br/>
-
-***
-
-## India
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/IND.png)
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-INDIA )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-INDIA )
-![](./podi/data/figs/scurves_ind-Transport-INDIA )
-![](./podi/data/figs/scurves_ind-Buildings-INDIA )
-![](./podi/data/figs/scurves_ind-Industry-INDIA )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-INDIA )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-INDIA )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-INDIA)
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-INDIA )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-INDIA )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-INDIA )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-INDIA )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/electricity_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/buildings_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/industry_pathway-INDIA)<br/><br/>
-![](./podi/data/figs/transport_pathway-INDIA )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/fw_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/afolu_pathway-INDIA )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-INDIA )<br/><br/>
-
-<br/><br/>
-
-***
-
-## Japan
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/JPN.png)
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-JPN )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-JPN )
-![](./podi/data/figs/scurves_ind-Transport-JPN )
-![](./podi/data/figs/scurves_ind-Buildings-JPN )
-![](./podi/data/figs/scurves_ind-Industry-JPN )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-JPN )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-JPN )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-JPN )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-JPN )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-JPN )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-JPN )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-JPN )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-JPN )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-JPN )<br/><br/>
-![](./podi/data/figs/electricity_pathway-JPN )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-JPN )<br/><br/>
-![](./podi/data/figs/buildings_pathway-JPN )<br/><br/>
-![](./podi/data/figs/industry_pathway-JPN )<br/><br/>
-![](./podi/data/figs/transport_pathway-JPN )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-JPN )<br/><br/>
-![](./podi/data/figs/fw_pathway-JJPN )<br/><br/>
-![](./podi/data/figs/afolu_pathway-JPN )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
+5. emissions
 
-![](./podi/data/figs/cdr_pathway-JPN )<br/><br/>
+  Takes energy supply technology mix and emissions factors to estimate energy emissions. These are added to afolu emissions and additional emissions sources from non-energy processes to arrive at a total emission estimate.
 
-<br/><br/>
-
-***
-
-## Russian Federation
-
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/RUS.png)
-
-### Adoption Curves
-
-![](./podi/data/figs/scurves-RUS )
-
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-RUS )
-![](./podi/data/figs/scurves_ind-Transport-RUS )
-![](./podi/data/figs/scurves_ind-Buildings-RUS )
-![](./podi/data/figs/scurves_ind-Industry-RUS)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-RUS )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-RUS )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-RUS )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-RUS )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-RUS )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-RUS )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-RUS )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-RUS )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-RUS )<br/><br/>
-![](./podi/data/figs/electricity_pathway-RUS )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-RUS )<br/><br/>
-![](./podi/data/figs/buildings_pathway-RUS )<br/><br/>
-![](./podi/data/figs/industry_pathway-RUS )<br/><br/>
-![](./podi/data/figs/transport_pathway-RUS )<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](./podi/data/figs/ra_pathway-RUS )<br/><br/>
-![](./podi/data/figs/fw_pathway-RUS )<br/><br/>
-![](./podi/data/figs/afolu_pathway-RUS )<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-RUS )<br/><br/>
-
-<br/><br/>
-
-***
-
-## South Africa
 
-![](https://github.com/Epic-Institute/positive-disruption/blob/master/region%20maps/SAF.png)
+6. results_analysis
 
-### Adoption Curves
 
-![](./podi/data/figs/scurves-SAFR )
 
-<br/><br/>
-
-![](./podi/data/figs/scurves_ind-Grid-SAFR )
-![](./podi/data/figs/scurves_ind-Transport-SAFR )
-![](./podi/data/figs/scurves_ind-Buildings-SAFR )
-![](./podi/data/figs/scurves_ind-Industry-SAFR )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-SAFR )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-SAFR )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-SAFR )
-
-<br/><br/>
-
-### Emissions
-
-![](./podi/data/figs/mitigationwedges-SAFR )
-
-<br/><br/>
-
-![](./podi/data/figs/emissions-ffi_emissions-SAFR )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-SAFR )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-SAFR )<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](./podi/data/figs/energydemand_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/electricity_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/buildings_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/industry_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/transport_pathway-SAFR)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
+7. charts
 
-![](./podi/data/figs/ra_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/fw_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/afolu_pathway-SAFR )<br/><br/>
+  Produces charts of results
 
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](./podi/data/figs/cdr_pathway-SAFR )<br/><br/>
-
-<br/><br/>
-
-***
-
-## Other
-
-Andorra, Anguilla, Netherlands Antilles, Liechtenstein, Marshall Islands, Micronesia, Monaco, Nauru, Niue, Northern Mariana Islands, Pitcairn, Puerto Rico, Saint Helena, Tokelau, Tuvalu, U.S. Virgin Islands, Vatican, Wallis and Futuna Island, Antarctica, Bermuda, Burma, Faroe 
-Islands, Saint Pierre and Miquelon, U.S. Pacific Islands, U.S. Territories, Wake Island
 
-### Adoption Curves
-
-![](./podi/data/figs/scurves-Other )
-
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-Other )
-![](./podi/data/figs/scurves_ind-Transport-Other )
-![](./podi/data/figs/scurves_ind-Buildings-Other )
-![](./podi/data/figs/scurves_ind-Industry-Other )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-Other )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-Other )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-Other )
-
-<br/><br/>
 
-### Emissions
+# Input Files
 
-![](./podi/data/figs/mitigationwedges-Other )
 
-<br/><br/>
+The following files, located in `podi/data <https://github.com/Epic-Institute/positive-disruption/tree/master/podi/data/>`_, serve as inputs to the model scripts.
 
-![](./podi/data/figs/emissions-ffi_emissions-Other )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-Other )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-Other )<br/><br/>
 
-<br/><br/>
+1. afolu.csv
+  - Consists of time series of AFOLU data from 2005 to 2100 in 10 year increments.
+  - Used in `afolu.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/afolu.py>`_ to provide data for baseline and pathway projections of AFOLU vector.
 
-### Energy Supply & Demand
+2. biofuels.csv
+  - Consists of time series of energy consumption data by sector and energy type from 2010 to 2100.
+  - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where values are shifted and combined with data on energy efficiency, demand, heat pumps, transport efficiency, and solar thermal.
 
-![](./podi/data/figs/energydemand_pathway-Other )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-Other )<br/><br/>
-![](./podi/data/figs/electricity_pathway-Other )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-Other )<br/><br/>
-![](./podi/data/figs/buildings_pathway-Other )<br/><br/>
-![](./podi/data/figs/industry_pathway-Other )<br/><br/>
-![](./podi/data/figs/transport_pathway-Other )<br/><br/>
+3. bnef.csv
+  - Consists of BNEF data on energy demand and consumption for all countries in a time series from 2012 to 2100.
+  - Not currently used in any .py file.
 
-<br/><br/>
+4. cdr.csv
+  - Consists of CDR data for baseline and pathway scenarios in time series from 2020 to 2100.
+  - Not currently used in model .py files.
 
-### Natural Climate Solutions
+5. climate.csv
+  - Consists of climate data (CO2 emissions, atm concentration, temp change) in time series from 1900 to 2100.
+  - Not currently used in model .py files.
 
-![](./podi/data/figs/ra_pathway-Other )<br/><br/>
-![](./podi/data/figs/fw_pathway-Other )<br/><br/>
-![](./podi/data/figs/afolu_pathway-Other )<br/><br/>
+6. electricity.csv
+  - Consists of data on electricity generation in time series from 1980 to 2024.
+  - Used in `energy_supply.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_supply.py>`_ to generate the historical and projected percent of electricity consumption met by given technologies and then to generate projections for the total amount of electricity consumption met by each technology.
 
-<br/><br/>
+7. emissions.csv
+  - Consists of data on greenhouse gas emissions in time series from 2010 to 2090.
+  - Not currently used in model .py files.
 
-### Carbon Dioxide Removal
+8. emissions_factors.csv
+  - Consists of emissions factors for different regions and fuel types in time series from 2010 to 2100.
+  - Not currently used in .py files.
 
-![](./podi/data/figs/cdr_pathway-Other )<br/><br/>
+9. energy_demand_historical.csv
+  - Consists of data on energy demand for different regions and fuels in time series from 2010 to 2040.
+  - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with energy_demand_projection.csv and then combined with data on energy efficiency, heat pumps, transport efficiency, solar thermal, and biofuels.
 
-<br/><br/>
+10. energy_demand_projection.csv
+  - Consists of data on energy demand for different regions and fuels in time series from 2041 to 2100.
+  - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with energy_demand_historical.csv and then combined with data on energy efficiency, heat pumps, transport efficiency, solar thermal, and biofuels.
 
-***
+11. energy_efficiency.csv
+  - Consists of data on energy efficiency factors for different regions, sectors, and fuels in time series from 2010 to 2100 for baseline and pathway scenarios.
+  - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with data on energy demand, heat pumps, transport efficiency, solar thermal, and biofuels.
+
+12. iea_weo.xlsx
+  - Consists of data on energy demand for WEO regions.
+  - Used in `iea_weo_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/iea_weo_etl.py>`_ where it is transformed into energy_demand_historical.csv.
+
+13. gcam.csv
+  - Consists of data on emissions and energy consumption in time series from 2005 to 2100 in ten-year increments.
+  - Used in `gcam_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/gcam_etl.py>`_, which transforms gcam.csv into appropriate format for use in mode .py files and generates energy_demand_projection_baseline.csv.
+
+14. heat.csv
+  - Consists of data on heat generation for buildings and industry by different sources in time series from 2000 to 2015.
+  - Used in `energy_supply.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_supply.py>`_ to generate projections for heat generation by energy source and sector.
+
+15. heat_pump.csv
+  - Consists of data on heat pumps by energy source and sector in time series from 2010 to 2100  for baseline and pathway scenarios.
+  - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with data on energy demand, energy efficiency, transport efficiency, solar thermal, and biofuels.
+
+16. metric_categories.csv
+  - Consists of table showing relationship between WEO sectors, WEO metrics, and GCAM metrics.
+  - Used in `gcam_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/gcam_etl.py>`_ to index gcam_demand_projections.
+
+17. region_categories.csv
+  - Consists of table showing which countries are in which regions (IEA, BNEF, IIASA, R32, CAIT, GCAM).
+  - Used in `eia_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/eia_etl.py>`_ to set index for electricity_generation.
+  - Used in `iea_weo_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/iea_weo_etl.py>`_ to create iea_region_list and gcam_region_list used to transform iea_weo.xlsx into energy_demand_historical.csv.
+
+18. socioeconomic.csv
+  - Consists of data on GDP, population, and carbon price in time series from 2005 to 2100 in ten-year increments for baseline and pathway scenarios.
+  - Used in `socioeconomic.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/socioeconomic.py>`_ to create data frame socioeconomic.
+
+19. solar_thermal.csv
+  - Consists of data on energy generation by different sources and sectors in time series from 2010 to 2100.
+  - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with data on energy demand, energy efficiency, transport efficiency, heat pump, and biofuels.
+
+20. transport_efficiency.csv
+  - Consists of data on energy demand by different sources and sectors in time series from 2010 to 2100 for baseline and pathways scenarios.
+  - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with data on energy demand, energy efficiency, solar thermal, heat pump, and biofuels.
+
+
+# Project Organization
+
+    ├── LICENSE
+    ├── Makefile           <- Makefile with commands like `make data` or `make train`
+    ├── README.md          <- The top-level README for developers using this project.
+    ├── data
+    │   ├── external       <- Data from third party sources.
+    │   ├── interim        <- Intermediate data that has been transformed.
+    │   ├── processed      <- The final, canonical data sets for modeling.
+    │   └── raw            <- The original, immutable data dump.
+    │
+    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    │
+    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    │
+    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
+    │                         the creator's initials, and a short `-` delimited description, e.g.
+    │                         `1.0-jqp-initial-data-exploration`.
+    │
+    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    │
+    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    │   └── figures        <- Generated graphics and figures to be used in reporting
+    │
+    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+    │                         generated with `pip freeze > requirements.txt`
+    │
+    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── src                <- Source code for use in this project.
+       ├── __init__.py    <- Makes src a Python module
+       │
+       ├── data           <- Scripts to download or generate data
+       │   └── make_dataset.py
+       │
+       ├── features       <- Scripts to turn raw data into features for modeling
+       │   └── build_features.py
+       │
+       ├── models         <- Scripts to train models and then use trained models to make
+       │   │                 predictions
+       │   ├── predict_model.py
+       │   └── train_model.py
+       │
+       └── visualization  <- Scripts to create exploratory and results oriented visualizations
+          └── visualize.py   
+<p></p>
