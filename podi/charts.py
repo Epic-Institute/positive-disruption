@@ -102,7 +102,7 @@ def charts(
         "MHa",
         "MHa",
         "GtCO2 removed",
-    ] 
+    ]
 
     xnew = np.linspace(
         adoption_curves2.columns.min(), adoption_curves2.columns.max(), 91
@@ -136,7 +136,6 @@ def charts(
                 + ", "
                 + iea_region_list[i]
             )
-            plt.figure(j)
             plt.savefig(
                 fname=(
                     "podi/data/figs/scurves_ind-"
@@ -148,6 +147,8 @@ def charts(
                 bbox_inches="tight",
                 pad_inches=0.1,
             )
+            plt.show()
+            plt.clf()
 
             # Absolute values
 
