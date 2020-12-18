@@ -102,7 +102,7 @@ def charts(
         "MHa",
         "MHa",
         "GtCO2 removed",
-    ]
+    ] 
 
     xnew = np.linspace(
         adoption_curves2.columns.min(), adoption_curves2.columns.max(), 91
