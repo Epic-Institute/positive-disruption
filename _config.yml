@@ -1,5 +1,5 @@
 title: Positive Disruption 2021
-logo: /podi/data/figs/logo.png
+logo: /docs/logo.png
 description: Draft results for internal analysis
 plugins:
   - jekyll-relative-links
