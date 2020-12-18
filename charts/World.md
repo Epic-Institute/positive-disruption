@@ -1,6 +1,4 @@
-# Charts
-
-## World
+# World
 
 ### Adoption Curves
 

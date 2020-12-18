@@ -1,6 +1,4 @@
-# Charts
-
-## Advanced Economies
+# Advanced Economies
 
 ![](../region%20maps/AdvancedECO.png)
 
