@@ -9,5 +9,7 @@ relative_links:
 include:
   -README.md
   -charts.md
+  -/charts/World.md
+  -/charts/AdvancedECO.md
 
 theme: jekyll-theme-minimal
