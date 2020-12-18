@@ -84,8 +84,6 @@ def charts(
             format="png",
             bbox_inches="tight",
             pad_inches=0.1,
-            dpi=199,
-            figsize=(9, 5),
         )
         plt.show()
         plt.clf()
@@ -138,7 +136,7 @@ def charts(
                 + ", "
                 + iea_region_list[i]
             )
-            plt.figure(j, figsize=(9, 5), dpi=199)
+            plt.figure(j)
             plt.savefig(
                 fname=(
                     "podi/data/figs/scurves_ind-"
@@ -149,8 +147,6 @@ def charts(
                 format="png",
                 bbox_inches="tight",
                 pad_inches=0.1,
-                dpi=199,
-                figsize=(9, 5),
             )
 
             # Absolute values
@@ -786,7 +782,7 @@ def charts(
         plt.xlim([start_yr, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(start_yr, energy_demand_pathway.columns.max() + 1, 10))
-        #plt.yticks(np.arange(0, 120000, 20000))
+        # plt.yticks(np.arange(0, 120000, 20000))
         plt.title("Energy Demand, " + iea_region_list[i])
         plt.savefig(
             fname=("podi/data/figs/energydemand_pathway-" + iea_region_list[i]).replace(

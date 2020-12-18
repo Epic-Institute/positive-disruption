@@ -5,9 +5,6 @@
 ### Adoption Curves
 
 ![](./podi/data/figs/scurves-World)
-
-<br/><br/>
-
 ![](./podi/data/figs/scurves_ind-Grid-World)
 ![](./podi/data/figs/scurves_ind-Transport-World)
 ![](./podi/data/figs/scurves_ind-Buildings-World)
@@ -46,8 +43,6 @@
 ![](./podi/data/figs/buildings_pathway-World)<br/><br/>
 ![](./podi/data/figs/industry_pathway-World)<br/><br/>
 ![](./podi/data/figs/transport_pathway-World)<br/><br/>
-
-<br/><br/>
 
 ### Natural Climate Solutions
 

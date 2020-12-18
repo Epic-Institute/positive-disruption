@@ -84,17 +84,9 @@ def results_analysis(
                         "Biofuels",
                         "Other fuels",
                     ],
-                ]
-                .sum()
-                .add(
-                    energy_demand_pathway.loc[
-                        "World ", "Transport", ["International bunkers"]
-                    ]
-                )
-                .sum()
+                ].sum()
             )
         )
-        / 0.9
         + (
             (
                 energy_demand_baseline.loc[
@@ -106,14 +98,7 @@ def results_analysis(
                         "Biofuels",
                         "Other fuels",
                     ],
-                ]
-                .sum()
-                .add(
-                    energy_demand_pathway.loc[
-                        "World ", "Transport", ["International bunkers"]
-                    ]
-                )
-                .sum()
+                ].sum()
                 - energy_demand_pathway.loc[
                     region,
                     "Transport",
@@ -123,14 +108,7 @@ def results_analysis(
                         "Biofuels",
                         "Other fuels",
                     ],
-                ]
-                .sum()
-                .add(
-                    energy_demand_pathway.loc[
-                        "World ", "Transport", ["International bunkers"]
-                    ]
-                )
-                .sum()
+                ].sum()
             )
             / (
                 energy_demand_baseline.loc[
@@ -144,12 +122,6 @@ def results_analysis(
                     ],
                 ]
                 .sum()
-                .add(
-                    energy_demand_pathway.loc[
-                        "World ", "Transport", ["International bunkers"]
-                    ]
-                )
-                .sum()
                 .sum()
                 - energy_demand_pathway.loc[
                     region,
@@ -162,16 +134,9 @@ def results_analysis(
                     ],
                 ]
                 .sum()
-                .add(
-                    energy_demand_pathway.loc[
-                        "World ", "Transport", ["International bunkers"]
-                    ]
-                )
-                .sum()
                 .sum()
             )
         ).cumsum()
-        / 1.05
     ) / 2
 
     transport_decarb = pd.DataFrame(transport_decarb).T
