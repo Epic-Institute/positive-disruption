@@ -8,7 +8,7 @@ Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Fi
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-AdvancedECO )
+![](podi/data/figs/scurves-AdvancedECO)
 
 <br/>
 
