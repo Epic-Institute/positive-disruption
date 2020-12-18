@@ -8,13 +8,13 @@
 
 <br/>
 
-![](./podi/data/figs/scurves_ind-Grid-World)
-![](./podi/data/figs/scurves_ind-Transport-World)
-![](./podi/data/figs/scurves_ind-Buildings-World)
-![](./podi/data/figs/scurves_ind-Industry-World)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-World)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-World)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
+![](../podi/data/figs/scurves_ind-Grid-World)
+![](../podi/data/figs/scurves_ind-Transport-World)
+![](../podi/data/figs/scurves_ind-Buildings-World)
+![](../podi/data/figs/scurves_ind-Industry-World)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-World)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-World)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
 
 <br/>
 
