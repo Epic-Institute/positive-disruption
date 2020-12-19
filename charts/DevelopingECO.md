@@ -1,4 +1,4 @@
-# Advanced Economies
+# Developing Economies
 
 ![](../region%20maps/DevelopingECO.png)
 
