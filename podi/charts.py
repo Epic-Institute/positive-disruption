@@ -348,10 +348,13 @@ def charts(
         )
         em_mit.loc[:, :2020] = 0
         spacer = em_targets_pathway.loc["Pathway PD20"]
+        em_targets_pathway.loc["Baseline PD20"] = em_mit.append(spacer).sum()
+
+        """
         em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
             em_mit.drop(labels="Electricity").append(spacer).sum()
         )
-
+        """
         fig = ((em_mit.append(spacer)) / 1000).reindex(
             [
                 spacer.name,
@@ -402,7 +405,7 @@ def charts(
             borderaxespad=0.0,
         )
         plt.xticks(np.arange(2020, 2110, 10))
-        plt.yticks(np.arange(-25, 105, 10))
+        # plt.yticks(np.arange(-25, 105, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
         plt.savefig(
             fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
