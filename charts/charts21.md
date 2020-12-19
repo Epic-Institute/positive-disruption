@@ -871,7 +871,7 @@ Canada, Mexico, United States
 
 ## Brazil
 
-![](region%20maps/BRA.png)
+![](region%20maps/BRAZIL.png)
 
 ### Adoption Curves
 
@@ -991,7 +991,7 @@ Canada, Mexico, United States
 
 ## China
 
-![](region%20maps/CHN.png)
+![](region%20maps/CHINA.png)
 
 ### Adoption Curves
 
@@ -1051,7 +1051,7 @@ Canada, Mexico, United States
 
 ## India
 
-![](region%20maps/IND.png)
+![](region%20maps/INDIA.png)
 
 ### Adoption Curves
 

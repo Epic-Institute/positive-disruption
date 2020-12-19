@@ -301,61 +301,61 @@ Armenia, Azerbaijan, Georgia, Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, 
 
 ***
 
-## CHN
+## CHINA
 
 China, Hong Kong SAR, Macao SAR
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-CHN )
+![](./podi/data/figs/scurves-CHINA )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-CHN )
-![](./podi/data/figs/scurves_ind-Transport-CHN )
-![](./podi/data/figs/scurves_ind-Buildings-CHN )
-![](./podi/data/figs/scurves_ind-Industry-CHN )
-![](./podi/data/figs/scurves_ind-Regenerative Agriculture-CHN )
-![](./podi/data/figs/scurves_ind-Forests & Wetlands-CHN )
-![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-CHN )
+![](./podi/data/figs/scurves_ind-Grid-CHINA )
+![](./podi/data/figs/scurves_ind-Transport-CHINA )
+![](./podi/data/figs/scurves_ind-Buildings-CHINA )
+![](./podi/data/figs/scurves_ind-Industry-CHINA )
+![](./podi/data/figs/scurves_ind-Regenerative Agriculture-CHINA )
+![](./podi/data/figs/scurves_ind-Forests & Wetlands-CHINA )
+![](./podi/data/figs/scurves_ind-Carbon Dioxide Removal-CHINA )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-CHN )
+![](./podi/data/figs/mitigationwedges-CHINA )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-CHN )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-CHN )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-CHN )<br/><br/>
+![](./podi/data/figs/emissions-ffi_emissions-CHINA )<br/><br/>
+![](./podi/data/figs/emissions-CH4_emissions-CHINA )<br/><br/>
+![](./podi/data/figs/emissions-N2O_emissions-CHINA )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-CHN )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-CHN )<br/><br/>
-![](./podi/data/figs/electricity_pathway-CHN )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-CHN )<br/><br/>
-![](./podi/data/figs/buildings_pathway-CHN )<br/><br/>
-![](./podi/data/figs/industry_pathway-CHN )<br/><br/>
-![](./podi/data/figs/transport_pathway-CHN )<br/><br/>
+![](./podi/data/figs/energydemand_pathway-CHINA )<br/><br/>
+![](./podi/data/figs/energysupply_pathway-CHINA )<br/><br/>
+![](./podi/data/figs/electricity_pathway-CHINA )<br/><br/>
+![](./podi/data/figs/elecbysector_pathway-CHINA )<br/><br/>
+![](./podi/data/figs/buildings_pathway-CHINA )<br/><br/>
+![](./podi/data/figs/industry_pathway-CHINA )<br/><br/>
+![](./podi/data/figs/transport_pathway-CHINA )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-CHN )<br/><br/>
-![](./podi/data/figs/fw_pathway-CHN )<br/><br/>
-![](./podi/data/figs/afolu_pathway-CHN )<br/><br/>
+![](./podi/data/figs/ra_pathway-CHINA )<br/><br/>
+![](./podi/data/figs/fw_pathway-CHINA )<br/><br/>
+![](./podi/data/figs/afolu_pathway-CHINA )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-CHN )<br/><br/>
+![](./podi/data/figs/cdr_pathway-CHINA )<br/><br/>
 
 <br/><br/>
 
