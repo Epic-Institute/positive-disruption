@@ -1623,56 +1623,6 @@ def charts(
 
     # region
 
-    em_mit = (
-        (
-            afolu_em_mitigated.loc[
-                slice(None),
-                [
-                    "Animal Mgmt",
-                    "Legumes",
-                    "Optimal Intensity",
-                    "Silvopasture",
-                    "Biochar",
-                    "Cropland Soil Health",
-                    "Trees in Croplands",
-                    "Nitrogen Fertilizer Management",
-                    "Improved Rice",
-                ],
-                slice(None),
-                slice(None),
-            ]
-        )
-        .droplevel(["Metric", "Unit"])
-        .groupby("Sector")
-        .sum()
-    ).loc[:, data_start_year:]
-    em_mit.columns = em_mit.columns.astype(int)
-
-    em_targets_pathway = (
-        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
-        .set_index(["Region", "Sector", "Unit"])
-        .loc[
-            slice(None),
-            ["Agriculture Net Emissions", "Agriculture Baseline Emissions"],
-            slice(None),
-        ]
-        .droplevel("Unit")
-    ).loc[:, str(data_start_year) :]
-
-    em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
-
-    spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
-
-    em_mit.loc["Improved Rice"] = em_targets_pathway.loc[
-        "World ", "Agriculture Baseline Emissions"
-    ].subtract(
-        em_mit.drop(labels="Improved Rice")
-        .append(spacer.drop(index="Agriculture Baseline Emissions"))
-        .sum()
-    )
-
-    em_mit.loc[:, :2020] = 0
-
     custom_legend = [
         Line2D([0], [0], color=color[1], linewidth=4),
         Line2D([0], [0], color=color[2], linewidth=4),
@@ -1694,6 +1644,56 @@ def charts(
     # endregion
 
     for i in range(0, len(iea_region_list)):
+        em_mit = (
+            (
+                afolu_em_mitigated.loc[
+                    [" OECD ", "NonOECD "],
+                    [
+                        "Animal Mgmt",
+                        "Legumes",
+                        "Optimal Intensity",
+                        "Silvopasture",
+                        "Biochar",
+                        "Cropland Soil Health",
+                        "Trees in Croplands",
+                        "Nitrogen Fertilizer Management",
+                        "Improved Rice",
+                    ],
+                    slice(None),
+                    slice(None),
+                ]
+            )
+            .droplevel(["Metric", "Unit"])
+            .groupby("Sector")
+            .sum()
+        ).loc[:, data_start_year:]
+        em_mit.columns = em_mit.columns.astype(int)
+
+        em_targets_pathway = (
+            pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+            .set_index(["Region", "Sector", "Unit"])
+            .loc[
+                slice(None),
+                ["Agriculture Net Emissions", "Agriculture Baseline Emissions"],
+                slice(None),
+            ]
+            .droplevel("Unit")
+        ).loc[:, str(data_start_year) :]
+
+        em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
+
+        spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
+
+        em_mit.loc["Improved Rice"] = em_targets_pathway.loc[
+            "World ", "Agriculture Baseline Emissions"
+        ].subtract(
+            em_mit.drop(labels="Improved Rice")
+            .append(spacer.drop(index="Agriculture Baseline Emissions"))
+            .sum()
+        )
+
+        em_mit.loc[:, :2020] = 0
+
         fig = (
             (em_mit.append(spacer.drop(index="Agriculture Baseline Emissions"))) / 1000
         ).reindex(
@@ -1783,54 +1783,6 @@ def charts(
         (0.384, 0.664, 0.600),
     )
 
-    # endregion
-
-    # region
-
-    em_mit = (
-        (
-            afolu_em_mitigated.loc[
-                slice(None),
-                [
-                    "Coastal Restoration",
-                    "Avoided Coastal Impacts",
-                    "Peat Restoration",
-                    "Avoided Peat Impacts",
-                    "Improved Forest Mgmt",
-                    "Natural Regeneration",
-                    "Avoided Forest Conversion",
-                ],
-                slice(None),
-                slice(None),
-            ]
-            * 0.95
-        )
-        .droplevel(["Metric", "Unit"])
-        .groupby("Sector")
-        .sum()
-    ).loc[:, data_start_year:]
-    em_mit.columns = em_mit.columns.astype(int)
-
-    em_mit.loc[:, :2020] = 0
-
-    em_targets_pathway = (
-        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
-        .set_index(["Region", "Sector", "Unit"])
-        .loc[
-            slice(None),
-            [
-                "Forests & Wetlands Net Emissions",
-                "Forests & Wetlands Baseline Emissions",
-            ],
-            slice(None),
-        ]
-        .droplevel("Unit")
-    ).loc[:, str(data_start_year) :]
-
-    em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
-
-    spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
-
     custom_legend = [
         Line2D([0], [0], color=color[1], linewidth=4),
         Line2D([0], [0], color=color[2], linewidth=4),
@@ -1850,6 +1802,50 @@ def charts(
     # endregion
 
     for i in range(0, len(iea_region_list)):
+        em_mit = (
+            (
+                afolu_em_mitigated.loc[
+                    [" OECD ", "NonOECD "],
+                    [
+                        "Coastal Restoration",
+                        "Avoided Coastal Impacts",
+                        "Peat Restoration",
+                        "Avoided Peat Impacts",
+                        "Improved Forest Mgmt",
+                        "Natural Regeneration",
+                        "Avoided Forest Conversion",
+                    ],
+                    slice(None),
+                    slice(None),
+                ]
+                * 0.95
+            )
+            .droplevel(["Metric", "Unit"])
+            .groupby("Sector")
+            .sum()
+        ).loc[:, data_start_year:]
+        em_mit.columns = em_mit.columns.astype(int)
+
+        em_mit.loc[:, :2020] = 0
+
+        em_targets_pathway = (
+            pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+            .set_index(["Region", "Sector", "Unit"])
+            .loc[
+                slice(None),
+                [
+                    "Forests & Wetlands Net Emissions",
+                    "Forests & Wetlands Baseline Emissions",
+                ],
+                slice(None),
+            ]
+            .droplevel("Unit")
+        ).loc[:, str(data_start_year) :]
+
+        em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
+
+        spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
+
         fig = (
             (em_mit.append(spacer.drop(index="Forests & Wetlands Baseline Emissions")))
             / 1000
@@ -1943,63 +1939,6 @@ def charts(
         (0.384, 0.664, 0.600),
     )
 
-    # endregion
-
-    # region
-
-    em_mit = (
-        (
-            afolu_em_mitigated.loc[
-                slice(None),
-                [
-                    "Coastal Restoration",
-                    "Avoided Coastal Impacts",
-                    "Peat Restoration",
-                    "Avoided Peat Impacts",
-                    "Improved Forest Mgmt",
-                    "Natural Regeneration",
-                    "Avoided Forest Conversion",
-                    "Animal Mgmt",
-                    "Legumes",
-                    "Optimal Intensity",
-                    "Silvopasture",
-                    "Biochar",
-                    "Cropland Soil Health",
-                    "Trees in Croplands",
-                    "Nitrogen Fertilizer Management",
-                    "Improved Rice",
-                ],
-                slice(None),
-                slice(None),
-            ]
-            * 0.95
-        )
-        .droplevel(["Metric", "Unit"])
-        .groupby("Sector")
-        .sum()
-    ).loc[:, data_start_year:]
-    em_mit.columns = em_mit.columns.astype(int)
-
-    em_mit.loc[:, :2020] = 0
-
-    em_targets_pathway = (
-        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
-        .set_index(["Region", "Sector", "Unit"])
-        .loc[
-            slice(None),
-            [
-                "AFOLU Net Emissions",
-                "AFOLU Baseline Emissions",
-            ],
-            slice(None),
-        ]
-        .droplevel("Unit")
-    ).loc[:, str(data_start_year) :]
-
-    em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
-
-    spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
-
     custom_legend = [
         Line2D([0], [0], color=color[1], linewidth=4),
         Line2D([0], [0], color=color[2], linewidth=4),
@@ -2028,6 +1967,59 @@ def charts(
     # endregion
 
     for i in range(0, len(iea_region_list)):
+        em_mit = (
+            (
+                afolu_em_mitigated.loc[
+                    [" OECD ", "NonOECD "],
+                    [
+                        "Coastal Restoration",
+                        "Avoided Coastal Impacts",
+                        "Peat Restoration",
+                        "Avoided Peat Impacts",
+                        "Improved Forest Mgmt",
+                        "Natural Regeneration",
+                        "Avoided Forest Conversion",
+                        "Animal Mgmt",
+                        "Legumes",
+                        "Optimal Intensity",
+                        "Silvopasture",
+                        "Biochar",
+                        "Cropland Soil Health",
+                        "Trees in Croplands",
+                        "Nitrogen Fertilizer Management",
+                        "Improved Rice",
+                    ],
+                    slice(None),
+                    slice(None),
+                ]
+                * 0.95
+            )
+            .droplevel(["Metric", "Unit"])
+            .groupby("Sector")
+            .sum()
+        ).loc[:, data_start_year:]
+        em_mit.columns = em_mit.columns.astype(int)
+
+        em_mit.loc[:, :2020] = 0
+
+        em_targets_pathway = (
+            pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+            .set_index(["Region", "Sector", "Unit"])
+            .loc[
+                slice(None),
+                [
+                    "AFOLU Net Emissions",
+                    "AFOLU Baseline Emissions",
+                ],
+                slice(None),
+            ]
+            .droplevel("Unit")
+        ).loc[:, str(data_start_year) :]
+
+        em_targets_pathway.columns = em_targets_pathway.columns.astype(int)
+
+        spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
+
         fig = (
             (em_mit.append(spacer.drop(index="AFOLU Baseline Emissions"))) / 1000
         ).reindex(

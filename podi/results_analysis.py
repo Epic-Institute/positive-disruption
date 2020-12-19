@@ -41,24 +41,25 @@ def results_analysis(
     grid_decarb = (
         elec_consump_pathway.loc[region, decarb, :]
         .sum()
-        .div(elec_consump_pathway.loc[region, decarb, :].sum())
+        .div(elec_consump_pathway.loc[region, slice(None), :].sum())
     )
     grid_decarb = pd.DataFrame(grid_decarb).T
     grid_decarb.columns = grid_decarb.columns.astype(int)
     grid_decarb.rename(index={0: "Grid"}, inplace=True)
-    """
-    grid_decarb.loc[:, 2010:2018] = [
-        0.25,
-        0.258,
-        0.275,
-        0.289,
-        0.303,
-        0.325,
-        0.355,
-        0.373,
-        0.385,
-    ]
-    """
+
+    if region == "World ":
+        grid_decarb.loc[:, 2010:2018] = [
+            0.25,
+            0.258,
+            0.275,
+            0.289,
+            0.303,
+            0.325,
+            0.355,
+            0.373,
+            0.385,
+        ]
+
     # endregion
 
     # TRANSPORTATION DECARB
