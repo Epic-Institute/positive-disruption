@@ -152,7 +152,7 @@ def charts(
 
             # Absolute values
 
-            '''
+            """
             t = adoption_curves2.columns
             data1 = adoption_curves2.loc['Grid']
             data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
@@ -200,7 +200,7 @@ def charts(
                 pad_inches=0.1,
             )
             plt.show()
-            '''
+            """
 
     # endregion
 
@@ -238,89 +238,6 @@ def charts(
         (0.748, 0.232, 0.204),
     )
 
-    em_mit_electricity = (
-        em_mitigated.loc["World ", "Electricity", slice(None)].sum() * 0.95
-    )
-
-    em_mit_transport = em_mitigated.loc["World ", "Transport", slice(None)].sum() * 1.05
-
-    em_mit_buildings = em_mitigated.loc["World ", "Buildings", slice(None)].sum() * 0.7
-
-    em_mit_industry = em_mitigated.loc["World ", "Industry", slice(None)].sum() * 0.6
-
-    em_mit_ra = (
-        afolu_em_mitigated.loc[
-            "World ",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Animal Mgmt",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-            ],
-            slice(None),
-            slice(None),
-        ].sum()
-        * 0.95
-    )
-
-    em_mit_fw = (
-        afolu_em_mitigated.loc[
-            "World ",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-            ],
-            slice(None),
-            slice(None),
-        ].sum()
-        * 0.95
-    )
-
-    em_mit_othergas = em_mitigated.loc["World ", "Other gases", :].sum()
-
-    em_mit_cdr = pd.Series(
-        cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
-    )
-
-    em_mit = pd.DataFrame(
-        [
-            em_mit_electricity,
-            em_mit_transport,
-            em_mit_buildings,
-            em_mit_industry,
-            em_mit_ra,
-            em_mit_fw,
-            em_mit_othergas,
-            em_mit_cdr,
-        ]
-    ).rename(
-        index={
-            0: "Electricity",
-            1: "Transport",
-            2: "Buildings",
-            3: "Industry",
-            4: "Forests & Wetlands",
-            5: "Agriculture",
-            6: "CH4, N2O, F-gases",
-            7: "CDR",
-        }
-    )
-    em_mit.loc[:, :2020] = 0
-    spacer = em_targets_pathway.loc["Pathway PD20"]
-    em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
-        em_mit.drop(labels="Electricity").append(spacer).sum()
-    )
-
     custom_legend = [
         Line2D([0], [0], color=color[8], linewidth=4),
         Line2D([0], [0], color=color[7], linewidth=4),
@@ -345,6 +262,96 @@ def charts(
     ]
 
     for i in range(0, len(iea_region_list)):
+        em_mit_electricity = (
+            em_mitigated.loc[iea_region_list[i], "Electricity", slice(None)].sum()
+            * 0.95
+        )
+
+        em_mit_transport = (
+            em_mitigated.loc[iea_region_list[i], "Transport", slice(None)].sum() * 1.05
+        )
+
+        em_mit_buildings = (
+            em_mitigated.loc[iea_region_list[i], "Buildings", slice(None)].sum() * 0.7
+        )
+
+        em_mit_industry = (
+            em_mitigated.loc[iea_region_list[i], "Industry", slice(None)].sum() * 0.6
+        )
+
+        em_mit_ra = (
+            afolu_em_mitigated.loc[
+                iea_region_list[i],
+                [
+                    "Biochar",
+                    "Cropland Soil Health",
+                    "Improved Rice",
+                    "Nitrogen Fertilizer Management",
+                    "Trees in Croplands",
+                    "Animal Mgmt",
+                    "Legumes",
+                    "Optimal Intensity",
+                    "Silvopasture",
+                ],
+                slice(None),
+                slice(None),
+            ].sum()
+            * 0.95
+        )
+
+        em_mit_fw = (
+            afolu_em_mitigated.loc[
+                iea_region_list[i],
+                [
+                    "Avoided Coastal Impacts",
+                    "Avoided Forest Conversion",
+                    "Avoided Peat Impacts",
+                    "Coastal Restoration",
+                    "Improved Forest Mgmt",
+                    "Peat Restoration",
+                    "Natural Regeneration",
+                ],
+                slice(None),
+                slice(None),
+            ].sum()
+            * 0.95
+        )
+
+        em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other gases", :].sum()
+
+        em_mit_cdr = pd.Series(
+            cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
+        )
+
+        em_mit = pd.DataFrame(
+            [
+                em_mit_electricity,
+                em_mit_transport,
+                em_mit_buildings,
+                em_mit_industry,
+                em_mit_ra,
+                em_mit_fw,
+                em_mit_othergas,
+                em_mit_cdr,
+            ]
+        ).rename(
+            index={
+                0: "Electricity",
+                1: "Transport",
+                2: "Buildings",
+                3: "Industry",
+                4: "Forests & Wetlands",
+                5: "Agriculture",
+                6: "CH4, N2O, F-gases",
+                7: "CDR",
+            }
+        )
+        em_mit.loc[:, :2020] = 0
+        spacer = em_targets_pathway.loc["Pathway PD20"]
+        em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
+            em_mit.drop(labels="Electricity").append(spacer).sum()
+        )
+
         fig = ((em_mit.append(spacer)) / 1000).reindex(
             [
                 spacer.name,

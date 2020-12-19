@@ -20,33 +20,31 @@
 
 ![](../podi/data/figs/scurves_ind-Grid-World)
 
-% Adoption = (TWh Renewables) / (TWh Total)<br/>
+% Adoption = (TWh Renewables) / (TWh Total)<br/><br/>
 
 ![](../podi/data/figs/scurves_ind-Transport-World)
 
-% Adoption = (TWh Electricity + Biofuels) / (TWh Total)<br/>
+% Adoption = (TWh Electricity + Biofuels) / (TWh Total)<br/><br/>
 
 ![](../podi/data/figs/scurves_ind-Buildings-World)
 
-% Adoption = (TWh Electricity + Renewable Heat) / (TWh Total)<br/>
+% Adoption = (TWh Electricity + Renewable Heat) / (TWh Total)<br/><br/>
 
 ![](../podi/data/figs/scurves_ind-Industry-World)
 
-% Adoption = (TWh Electricity + Renewable Heat) / (TWh Total)<br/>
+% Adoption = (TWh Electricity + Renewable Heat) / (TWh Total)<br/><br/>
 
 ![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-World)
 
-% Adoption = (Mha Regenerative Agriculture) / (Mha Total Agriculture)<br/>
+% Adoption = (Mha Regenerative Agriculture) / (Mha Total Agriculture)<br/><br/>
 
 ![](../podi/data/figs/scurves_ind-Forests&Wetlands-World)
 
-% Adoption = (Mha Deforestation Avoided) / (Mha Total At-Risk Forests & Wetlands)<br/>
+% Adoption = (Mha Deforestation Avoided) / (Mha Total At-Risk Forests & Wetlands)<br/><br/>
 
 ![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
 
-% Adoption = (GtCO2 removed via CDR) / (Cumulative GtCO2 removed via CDR)<br/>
-
-<br/>
+% Adoption = (GtCO2 removed via CDR) / (Cumulative GtCO2 removed via CDR)<br/><br/>
 
 ### Emissions
 
