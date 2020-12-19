@@ -262,25 +262,28 @@ def charts(
 
     for i in range(0, len(iea_region_list)):
         em_mit_electricity = (
-            em_mitigated.loc[iea_region_list[i], "Electricity", slice(None)].sum()
+            em_mitigated.loc[[" OECD ", "NonOECD "], "Electricity", slice(None)].sum()
             * 0.95
         )
 
         em_mit_transport = (
-            em_mitigated.loc[iea_region_list[i], "Transport", slice(None)].sum() * 1.05
+            em_mitigated.loc[[" OECD ", "NonOECD "], "Transport", slice(None)].sum()
+            * 1.05
         )
 
         em_mit_buildings = (
-            em_mitigated.loc[iea_region_list[i], "Buildings", slice(None)].sum() * 0.7
+            em_mitigated.loc[[" OECD ", "NonOECD "], "Buildings", slice(None)].sum()
+            * 0.7
         )
 
         em_mit_industry = (
-            em_mitigated.loc[iea_region_list[i], "Industry", slice(None)].sum() * 0.6
+            em_mitigated.loc[[" OECD ", "NonOECD "], "Industry", slice(None)].sum()
+            * 0.6
         )
 
         em_mit_ra = (
             afolu_em_mitigated.loc[
-                iea_region_list[i],
+                [" OECD ", "NonOECD "],
                 [
                     "Biochar",
                     "Cropland Soil Health",
@@ -300,7 +303,7 @@ def charts(
 
         em_mit_fw = (
             afolu_em_mitigated.loc[
-                iea_region_list[i],
+                [" OECD ", "NonOECD "],
                 [
                     "Avoided Coastal Impacts",
                     "Avoided Forest Conversion",
@@ -316,7 +319,9 @@ def charts(
             * 0.95
         )
 
-        em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other gases", :].sum()
+        em_mit_othergas = em_mitigated.loc[
+            [" OECD ", "NonOECD "], "Other gases", :
+        ].sum()
 
         em_mit_cdr = pd.Series(
             cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
@@ -349,11 +354,10 @@ def charts(
         spacer = em_targets_pathway.loc["Pathway PD20"]
         em_targets_pathway.loc["Baseline PD20"] = em_mit.append(spacer).sum()
 
-        """
         em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
             em_mit.drop(labels="Electricity").append(spacer).sum()
         )
-        """
+
         fig = ((em_mit.append(spacer)) / 1000).reindex(
             [
                 spacer.name,
@@ -404,7 +408,7 @@ def charts(
             borderaxespad=0.0,
         )
         plt.xticks(np.arange(2020, 2110, 10))
-        # plt.yticks(np.arange(-25, 105, 10))
+        plt.yticks(np.arange(-25, 105, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
         plt.savefig(
             fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
