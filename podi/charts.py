@@ -127,8 +127,6 @@ def charts(
                 color=(0, 0, 0),
             )
             ax.set_ylabel("% Adoption")
-            secax = ax.secondary_yaxis("right")
-            secax.set_ylabel(axis_label[j])
             plt.xlim([adoption_curves2.columns.min(), adoption_curves2.columns.max()])
             plt.ylim(0, 105)
             plt.grid(which="major", linestyle=":", axis="y")
@@ -154,7 +152,7 @@ def charts(
 
             # Absolute values
 
-            """
+            
             t = adoption_curves2.columns
             data1 = adoption_curves2.loc['Grid']
             data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
@@ -168,7 +166,7 @@ def charts(
             plt.grid(which="major", linestyle=":", axis="y")
             ax2 = ax1.twinx()
             color='tab:blue'
-            ax2.set_ylabel('TFC (TWh)',color=color)
+            ax2.set_ylabel(axis_label[j],color=color)
             ax2.plot(t, data2,color=color, linestyle = '--')
             ax2.tick_params(axis='y', labelcolor=color)
             ax1.plot(
@@ -202,8 +200,6 @@ def charts(
                 pad_inches=0.1,
             )
             plt.show()
-            
-            """
 
     # endregion
 

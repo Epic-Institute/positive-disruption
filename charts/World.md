@@ -6,6 +6,15 @@
 
 % Adoption is uniquely-defined for each vector, and represents the decarbonization of that vector over time, relative to the maximum level of adoption estimated in the PD model.
 
+| Vector    | % Adoption Metric 
+|:--------- | :----------------
+| Grid      | % TFC met by renewables           
+| Transport | % Transport TFC met by electricity & biofuels
+| Buildings | % Buildings TFC met by electricity & renewable heat
+| Industry  | % Industry TFC met by electricity & renewable heat
+| Regenerative Ag | Mha under Regenerative Agriculture
+| Forests & Wetlands | Mha of at-risk Forests/Wetlands preserved
+
 <br/>
 
 ![](../podi/data/figs/scurves_ind-Grid-World)

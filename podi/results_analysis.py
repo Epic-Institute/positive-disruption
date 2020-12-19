@@ -41,7 +41,7 @@ def results_analysis(
     grid_decarb = (
         elec_consump_pathway.loc[region, decarb, :]
         .sum()
-        .div(elec_consump_pathway.sum())
+        .div(elec_consump_pathway.loc[region, decarb, :].sum())
     )
     grid_decarb = pd.DataFrame(grid_decarb).T
     grid_decarb.columns = grid_decarb.columns.astype(int)
