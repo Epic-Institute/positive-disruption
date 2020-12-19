@@ -10,49 +10,49 @@ Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, C
 
 <br/>
 
-![](./podi/data/figs/scurves_ind-Grid-CSAM)
-![](./podi/data/figs/scurves_ind-Transport-CSAM)
-![](./podi/data/figs/scurves_ind-Buildings-CSAM)
-![](./podi/data/figs/scurves_ind-Industry-CSAM)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-CSAM)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-CSAM)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-CSAM)
+![](../podi/data/figs/scurves_ind-Grid-CSAM)
+![](../podi/data/figs/scurves_ind-Transport-CSAM)
+![](../podi/data/figs/scurves_ind-Buildings-CSAM)
+![](../podi/data/figs/scurves_ind-Industry-CSAM)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-CSAM)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-CSAM)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-CSAM)
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-CSAM)
+![](../podi/data/figs/mitigationwedges-CSAM)
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-CSAM)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-CSAM)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-CSAM)<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-CSAM)<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-CSAM)<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-CSAM)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-CSAM)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-CSAM)<br/><br/>
-![](./podi/data/figs/electricity_pathway-CSAM)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-CSAM)<br/><br/>
-![](./podi/data/figs/buildings_pathway-CSAM)<br/><br/>
-![](./podi/data/figs/industry_pathway-CSAM)<br/><br/>
-![](./podi/data/figs/transport_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/energysupply_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/electricity_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/buildings_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/industry_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/transport_pathway-CSAM)<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-CSAM)<br/><br/>
-![](./podi/data/figs/fw_pathway-CSAM)<br/><br/>
-![](./podi/data/figs/afolu_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/ra_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/fw_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/afolu_pathway-CSAM)<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-CSAM)<br/><br/>
+![](../podi/data/figs/cdr_pathway-CSAM)<br/><br/>
 

@@ -4,60 +4,60 @@
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-World)
+![](../podi/data/figs/scurves-World)
 
 <br/>
 
-![](./podi/data/figs/scurves_ind-Grid-World)
-![](./podi/data/figs/scurves_ind-Transport-World)
-![](./podi/data/figs/scurves_ind-Buildings-World)
-![](./podi/data/figs/scurves_ind-Industry-World)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-World)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-World)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
+![](../podi/data/figs/scurves_ind-Grid-World)
+![](../podi/data/figs/scurves_ind-Transport-World)
+![](../podi/data/figs/scurves_ind-Buildings-World)
+![](../podi/data/figs/scurves_ind-Industry-World)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-World)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-World)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
 
 <br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-World)
+![](../podi/data/figs/mitigationwedges-World)
 
 <br/><br/>
 
-![](./podi/data/figs/temperature)
-![](./podi/data/figs/sensitivity)
-![](./podi/data/figs/forcing)
-![](./podi/data/figs/co2conc)
+![](../podi/data/figs/temperature)
+![](../podi/data/figs/sensitivity)
+![](../podi/data/figs/forcing)
+![](../podi/data/figs/co2conc)
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions)<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions)<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions)<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-World)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-World)<br/><br/>
-![](./podi/data/figs/electricity_pathway-World)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-World)<br/><br/>
-![](./podi/data/figs/buildings_pathway-World)<br/><br/>
-![](./podi/data/figs/industry_pathway-World)<br/><br/>
-![](./podi/data/figs/transport_pathway-World)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-World)<br/><br/>
+![](../podi/data/figs/energysupply_pathway-World)<br/><br/>
+![](../podi/data/figs/electricity_pathway-World)<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-World)<br/><br/>
+![](../podi/data/figs/buildings_pathway-World)<br/><br/>
+![](../podi/data/figs/industry_pathway-World)<br/><br/>
+![](../podi/data/figs/transport_pathway-World)<br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-World)<br/><br/>
-![](./podi/data/figs/fw_pathway-World)<br/><br/>
-![](./podi/data/figs/afolu_pathway-World)<br/><br/>
+![](../podi/data/figs/ra_pathway-World)<br/><br/>
+![](../podi/data/figs/fw_pathway-World)<br/><br/>
+![](../podi/data/figs/afolu_pathway-World)<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-World )<br/><br/>
+![](../podi/data/figs/cdr_pathway-World )<br/><br/>
 
 <br/><br/>
 
@@ -71,55 +71,55 @@ Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Fi
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-AdvancedECO )
+![](../podi/data/figs/scurves-AdvancedECO )
 
 <br/>
 
-![](./podi/data/figs/scurves_ind-Grid-AdvancedECO)
-![](./podi/data/figs/scurves_ind-Transport-AdvancedECO)
-![](./podi/data/figs/scurves_ind-Buildings-AdvancedECO)
-![](./podi/data/figs/scurves_ind-Industry-AdvancedECO)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-AdvancedECO)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-AdvancedECO)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-AdvancedECO)
+![](../podi/data/figs/scurves_ind-Grid-AdvancedECO)
+![](../podi/data/figs/scurves_ind-Transport-AdvancedECO)
+![](../podi/data/figs/scurves_ind-Buildings-AdvancedECO)
+![](../podi/data/figs/scurves_ind-Industry-AdvancedECO)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-AdvancedECO)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-AdvancedECO)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-AdvancedECO)
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-AdvancedECO)
+![](../podi/data/figs/mitigationwedges-AdvancedECO)
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-AdvancedECO)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-AdvancedECO)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-AdvancedECO)<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-AdvancedECO)<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-AdvancedECO)<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-AdvancedECO)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/electricity_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/buildings_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/industry_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/transport_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/energysupply_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/electricity_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/buildings_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/industry_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/transport_pathway-AdvancedECO)<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/fw_pathway-AdvancedECO)<br/><br/>
-![](./podi/data/figs/afolu_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/ra_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/fw_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/afolu_pathway-AdvancedECO)<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-AdvancedECO)<br/><br/>
+![](../podi/data/figs/cdr_pathway-AdvancedECO)<br/><br/>
 
 <br/><br/>
 
@@ -133,55 +133,55 @@ All countries not included in the Advanced Economies regional grouping.
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-DevelopingECO)
+![](../podi/data/figs/scurves-DevelopingECO)
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-DevelopingECO)
-![](./podi/data/figs/scurves_ind-Transport-DevelopingECO)
-![](./podi/data/figs/scurves_ind-Buildings-DevelopingECO)
-![](./podi/data/figs/scurves_ind-Industry-DevelopingECO)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-DevelopingECO)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-DevelopingECO)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-DevelopingECO)
+![](../podi/data/figs/scurves_ind-Grid-DevelopingECO)
+![](../podi/data/figs/scurves_ind-Transport-DevelopingECO)
+![](../podi/data/figs/scurves_ind-Buildings-DevelopingECO)
+![](../podi/data/figs/scurves_ind-Industry-DevelopingECO)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-DevelopingECO)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-DevelopingECO)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-DevelopingECO)
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-DevelopingECO)
+![](../podi/data/figs/mitigationwedges-DevelopingECO)
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-DevelopingECO)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-DevelopingECO)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-DevelopingECO)<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-DevelopingECO)<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-DevelopingECO)<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-DevelopingECO)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/electricity_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/buildings_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/industry_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/transport_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/energysupply_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/electricity_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/buildings_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/industry_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/transport_pathway-DevelopingECO)<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/fw_pathway-DevelopingECO)<br/><br/>
-![](./podi/data/figs/afolu_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/ra_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/fw_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/afolu_pathway-DevelopingECO)<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-DevelopingECO)<br/><br/>
+![](../podi/data/figs/cdr_pathway-DevelopingECO)<br/><br/>
 
 <br/><br/>
 
@@ -195,55 +195,55 @@ Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Fi
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-OECD)
+![](../podi/data/figs/scurves-OECD)
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-OECD)
-![](./podi/data/figs/scurves_ind-Transport-OECD)
-![](./podi/data/figs/scurves_ind-Buildings-OECD)
-![](./podi/data/figs/scurves_ind-Industry-OECD)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-OECD)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-OECD)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-OECD)
+![](../podi/data/figs/scurves_ind-Grid-OECD)
+![](../podi/data/figs/scurves_ind-Transport-OECD)
+![](../podi/data/figs/scurves_ind-Buildings-OECD)
+![](../podi/data/figs/scurves_ind-Industry-OECD)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-OECD)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-OECD)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-OECD)
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-OECD)
+![](../podi/data/figs/mitigationwedges-OECD)
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-OECD)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-OECD)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-OECD)<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-OECD)<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-OECD)<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-OECD)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-OECD)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-OECD)<br/><br/>
-![](./podi/data/figs/electricity_pathway-OECD)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-OECD)<br/><br/>
-![](./podi/data/figs/buildings_pathway-OECD)<br/><br/>
-![](./podi/data/figs/industry_pathway-OECD)<br/><br/>
-![](./podi/data/figs/transport_pathway-OECD)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-OECD)<br/><br/>
+![](../podi/data/figs/energysupply_pathway-OECD)<br/><br/>
+![](../podi/data/figs/electricity_pathway-OECD)<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-OECD)<br/><br/>
+![](../podi/data/figs/buildings_pathway-OECD)<br/><br/>
+![](../podi/data/figs/industry_pathway-OECD)<br/><br/>
+![](../podi/data/figs/transport_pathway-OECD)<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-OECD)<br/><br/>
-![](./podi/data/figs/fw_pathway-OECD)<br/><br/>
-![](./podi/data/figs/afolu_pathway-OECD)<br/><br/>
+![](../podi/data/figs/ra_pathway-OECD)<br/><br/>
+![](../podi/data/figs/fw_pathway-OECD)<br/><br/>
+![](../podi/data/figs/afolu_pathway-OECD)<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-OECD)<br/><br/>
+![](../podi/data/figs/cdr_pathway-OECD)<br/><br/>
 
 <br/><br/>
 
@@ -257,55 +257,55 @@ All countries not included in OECD regional grouping
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-NonOECD)
+![](../podi/data/figs/scurves-NonOECD)
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-NonOECD)
-![](./podi/data/figs/scurves_ind-Transport-NonOECD)
-![](./podi/data/figs/scurves_ind-Buildings-NonOECD)
-![](./podi/data/figs/scurves_ind-Industry-NonOECD)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-NonOECD)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-NonOECD)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-NonOECD)
+![](../podi/data/figs/scurves_ind-Grid-NonOECD)
+![](../podi/data/figs/scurves_ind-Transport-NonOECD)
+![](../podi/data/figs/scurves_ind-Buildings-NonOECD)
+![](../podi/data/figs/scurves_ind-Industry-NonOECD)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-NonOECD)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-NonOECD)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-NonOECD)
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-NonOECD)
+![](../podi/data/figs/mitigationwedges-NonOECD)
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-NonOECD)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-NonOECD)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-NonOECD)<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-NonOECD)<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-NonOECD)<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-NonOECD)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/electricity_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/buildings_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/industry_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/transport_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/energysupply_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/electricity_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/buildings_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/industry_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/transport_pathway-NonOECD)<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/fw_pathway-NonOECD)<br/><br/>
-![](./podi/data/figs/afolu_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/ra_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/fw_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/afolu_pathway-NonOECD)<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-NonOECD)<br/><br/>
+![](../podi/data/figs/cdr_pathway-NonOECD)<br/><br/>
 
 <br/><br/>
 
@@ -319,55 +319,55 @@ Brunei Darussalam, Cambodia, Indonesia, Lao People’s Democratic Republic, Mala
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-ASEAN)
+![](../podi/data/figs/scurves-ASEAN)
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-ASEAN)
-![](./podi/data/figs/scurves_ind-Transport-ASEAN)
-![](./podi/data/figs/scurves_ind-Buildings-ASEAN)
-![](./podi/data/figs/scurves_ind-Industry-ASEAN)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-ASEAN)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-ASEAN)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-ASEAN)
+![](../podi/data/figs/scurves_ind-Grid-ASEAN)
+![](../podi/data/figs/scurves_ind-Transport-ASEAN)
+![](../podi/data/figs/scurves_ind-Buildings-ASEAN)
+![](../podi/data/figs/scurves_ind-Industry-ASEAN)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-ASEAN)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-ASEAN)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-ASEAN)
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-ASEAN)
+![](../podi/data/figs/mitigationwedges-ASEAN)
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-ASEAN)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-ASEAN)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-ASEAN)<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-ASEAN)<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-ASEAN)<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-ASEAN)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/electricity_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/buildings_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/industry_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/transport_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/energysupply_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/electricity_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/buildings_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/industry_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/transport_pathway-ASEAN)<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/fw_pathway-ASEAN)<br/><br/>
-![](./podi/data/figs/afolu_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/ra_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/fw_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/afolu_pathway-ASEAN)<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-ASEAN)<br/><br/>
+![](../podi/data/figs/cdr_pathway-ASEAN)<br/><br/>
 
 <br/><br/>
 
@@ -381,55 +381,55 @@ Southeast Asia regional grouping, Australia, Bangladesh, China, Chinese Taipei, 
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-ASIAPAC)
+![](../podi/data/figs/scurves-ASIAPAC)
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-ASIAPAC)
-![](./podi/data/figs/scurves_ind-Transport-ASIAPAC)
-![](./podi/data/figs/scurves_ind-Buildings-ASIAPAC)
-![](./podi/data/figs/scurves_ind-Industry-ASIAPAC)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-ASIAPAC)
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-ASIAPAC)
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-ASIAPAC)
+![](../podi/data/figs/scurves_ind-Grid-ASIAPAC)
+![](../podi/data/figs/scurves_ind-Transport-ASIAPAC)
+![](../podi/data/figs/scurves_ind-Buildings-ASIAPAC)
+![](../podi/data/figs/scurves_ind-Industry-ASIAPAC)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-ASIAPAC)
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-ASIAPAC)
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-ASIAPAC)
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-ASIAPAC)
+![](../podi/data/figs/mitigationwedges-ASIAPAC)
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-ASIAPAC)<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-ASIAPAC)<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-ASIAPAC)<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-ASIAPAC)<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-ASIAPAC)<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-ASIAPAC)<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/energysupply_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/electricity_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/buildings_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/industry_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/transport_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/energysupply_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/electricity_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/buildings_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/industry_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/transport_pathway-ASIAPAC)<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/fw_pathway-ASIAPAC)<br/><br/>
-![](./podi/data/figs/afolu_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/ra_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/fw_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/afolu_pathway-ASIAPAC)<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-ASIAPAC)<br/><br/>
+![](../podi/data/figs/cdr_pathway-ASIAPAC)<br/><br/>
 
 <br/><br/>
 
@@ -443,55 +443,55 @@ Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, F
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-EU )
+![](../podi/data/figs/scurves-EU )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-EU )
-![](./podi/data/figs/scurves_ind-Transport-EU )
-![](./podi/data/figs/scurves_ind-Buildings-EU )
-![](./podi/data/figs/scurves_ind-Industry-EU )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EU )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-EU )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EU )
+![](../podi/data/figs/scurves_ind-Grid-EU )
+![](../podi/data/figs/scurves_ind-Transport-EU )
+![](../podi/data/figs/scurves_ind-Buildings-EU )
+![](../podi/data/figs/scurves_ind-Industry-EU )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-EU )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-EU )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-EU )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-EU )
+![](../podi/data/figs/mitigationwedges-EU )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-EU )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-EU )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-EU )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-EU )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-EU )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-EU )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-EU )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-EU )<br/><br/>
-![](./podi/data/figs/electricity_pathway-EU )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-EU )<br/><br/>
-![](./podi/data/figs/buildings_pathway-EU )<br/><br/>
-![](./podi/data/figs/industry_pathway-EU )<br/><br/>
-![](./podi/data/figs/transport_pathway-EU )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-EU )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-EU )<br/><br/>
+![](../podi/data/figs/electricity_pathway-EU )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-EU )<br/><br/>
+![](../podi/data/figs/buildings_pathway-EU )<br/><br/>
+![](../podi/data/figs/industry_pathway-EU )<br/><br/>
+![](../podi/data/figs/transport_pathway-EU )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-EU )<br/><br/>
-![](./podi/data/figs/fw_pathway-EU )<br/><br/>
-![](./podi/data/figs/afolu_pathway-EU )<br/><br/>
+![](../podi/data/figs/ra_pathway-EU )<br/><br/>
+![](../podi/data/figs/fw_pathway-EU )<br/><br/>
+![](../podi/data/figs/afolu_pathway-EU )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-EU )<br/><br/>
+![](../podi/data/figs/cdr_pathway-EU )<br/><br/>
 
 <br/><br/>
 
@@ -505,55 +505,55 @@ European Union regional grouping, Albania, Belarus, Bosnia and Herzegovina, Gibr
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-EUR )
+![](../podi/data/figs/scurves-EUR )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-EUR )
-![](./podi/data/figs/scurves_ind-Transport-EUR )
-![](./podi/data/figs/scurves_ind-Buildings-EUR )
-![](./podi/data/figs/scurves_ind-Industry-EUR )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EUR )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-EUR )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EUR )
+![](../podi/data/figs/scurves_ind-Grid-EUR )
+![](../podi/data/figs/scurves_ind-Transport-EUR )
+![](../podi/data/figs/scurves_ind-Buildings-EUR )
+![](../podi/data/figs/scurves_ind-Industry-EUR )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-EUR )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-EUR )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-EUR )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-EUR )
+![](../podi/data/figs/mitigationwedges-EUR )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-EUR )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-EUR )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-EUR )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-EUR )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-EUR )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-EUR )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-EUR )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-EUR )<br/><br/>
-![](./podi/data/figs/electricity_pathway-EUR )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-EUR )<br/><br/>
-![](./podi/data/figs/buildings_pathway-EUR )<br/><br/>
-![](./podi/data/figs/industry_pathway-EUR )<br/><br/>
-![](./podi/data/figs/transport_pathway-EUR )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-EUR )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-EUR )<br/><br/>
+![](../podi/data/figs/electricity_pathway-EUR )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-EUR )<br/><br/>
+![](../podi/data/figs/buildings_pathway-EUR )<br/><br/>
+![](../podi/data/figs/industry_pathway-EUR )<br/><br/>
+![](../podi/data/figs/transport_pathway-EUR )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-EUR )<br/><br/>
-![](./podi/data/figs/fw_pathway-EUR )<br/><br/>
-![](./podi/data/figs/afolu_pathway-EUR )<br/><br/>
+![](../podi/data/figs/ra_pathway-EUR )<br/><br/>
+![](../podi/data/figs/fw_pathway-EUR )<br/><br/>
+![](../podi/data/figs/afolu_pathway-EUR )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-EUR )<br/><br/>
+![](../podi/data/figs/cdr_pathway-EUR )<br/><br/>
 
 <br/><br/>
 
@@ -567,55 +567,55 @@ Algeria, Egypt, Libya, Morocco, Tunisia, Angola, Benin, Botswana, Cameroon, Repu
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-Africa )
+![](../podi/data/figs/scurves-Africa )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-Africa )
-![](./podi/data/figs/scurves_ind-Transport-Africa )
-![](./podi/data/figs/scurves_ind-Buildings-Africa )
-![](./podi/data/figs/scurves_ind-Industry-Africa )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-Africa )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-Africa )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-Africa )
+![](../podi/data/figs/scurves_ind-Grid-Africa )
+![](../podi/data/figs/scurves_ind-Transport-Africa )
+![](../podi/data/figs/scurves_ind-Buildings-Africa )
+![](../podi/data/figs/scurves_ind-Industry-Africa )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-Africa )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-Africa )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-Africa )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-Africa )
+![](../podi/data/figs/mitigationwedges-Africa )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-Africa )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-Africa )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-Africa )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-Africa )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-Africa )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-Africa )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-Africa )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-Africa )<br/><br/>
-![](./podi/data/figs/electricity_pathway-Africa )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-Africa )<br/><br/>
-![](./podi/data/figs/buildings_pathway-Africa )<br/><br/>
-![](./podi/data/figs/industry_pathway-Africa )<br/><br/>
-![](./podi/data/figs/transport_pathway-Africa )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-Africa )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-Africa )<br/><br/>
+![](../podi/data/figs/electricity_pathway-Africa )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-Africa )<br/><br/>
+![](../podi/data/figs/buildings_pathway-Africa )<br/><br/>
+![](../podi/data/figs/industry_pathway-Africa )<br/><br/>
+![](../podi/data/figs/transport_pathway-Africa )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-Africa )<br/><br/>
-![](./podi/data/figs/fw_pathway-Africa )<br/><br/>
-![](./podi/data/figs/afolu_pathway-Africa )<br/><br/>
+![](../podi/data/figs/ra_pathway-Africa )<br/><br/>
+![](../podi/data/figs/fw_pathway-Africa )<br/><br/>
+![](../podi/data/figs/afolu_pathway-Africa )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-Africa )<br/><br/>
+![](../podi/data/figs/cdr_pathway-Africa )<br/><br/>
 
 <br/><br/>
 
@@ -629,55 +629,55 @@ Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, C
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-CSAM )
+![](../podi/data/figs/scurves-CSAM )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-CSAM )
-![](./podi/data/figs/scurves_ind-Transport-CSAM )
-![](./podi/data/figs/scurves_ind-Buildings-CSAM )
-![](./podi/data/figs/scurves_ind-Industry-CSAM )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-CSAM )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-CSAM )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-CSAM )
+![](../podi/data/figs/scurves_ind-Grid-CSAM )
+![](../podi/data/figs/scurves_ind-Transport-CSAM )
+![](../podi/data/figs/scurves_ind-Buildings-CSAM )
+![](../podi/data/figs/scurves_ind-Industry-CSAM )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-CSAM )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-CSAM )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-CSAM )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-CSAM )
+![](../podi/data/figs/mitigationwedges-CSAM )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-CSAM )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-CSAM )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-CSAM )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-CSAM )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-CSAM )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-CSAM )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/electricity_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/buildings_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/industry_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/transport_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/electricity_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/buildings_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/industry_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/transport_pathway-CSAM )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/fw_pathway-CSAM )<br/><br/>
-![](./podi/data/figs/afolu_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/ra_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/fw_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/afolu_pathway-CSAM )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-CSAM )<br/><br/>
+![](../podi/data/figs/cdr_pathway-CSAM )<br/><br/>
 
 <br/><br/>
 
@@ -691,55 +691,55 @@ Armenia, Azerbaijan, Georgia, Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, 
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-EURASIA)
+![](../podi/data/figs/scurves-EURASIA)
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-EURASIA )
-![](./podi/data/figs/scurves_ind-Transport-EURASIA )
-![](./podi/data/figs/scurves_ind-Buildings-EURASIA )
-![](./podi/data/figs/scurves_ind-Industry-EURASIA )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-EURASIA )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-EURASIA )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-EURASIA )
+![](../podi/data/figs/scurves_ind-Grid-EURASIA )
+![](../podi/data/figs/scurves_ind-Transport-EURASIA )
+![](../podi/data/figs/scurves_ind-Buildings-EURASIA )
+![](../podi/data/figs/scurves_ind-Industry-EURASIA )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-EURASIA )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-EURASIA )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-EURASIA )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-EURASIA )
+![](../podi/data/figs/mitigationwedges-EURASIA )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-EURASIA )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-EURASIA )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-EURASIA )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-EURASIA )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-EURASIA )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-EURASIA )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/electricity_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/buildings_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/industry_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/transport_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/electricity_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/buildings_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/industry_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/transport_pathway-EURASIA )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/fw_pathway-EURASIA )<br/><br/>
-![](./podi/data/figs/afolu_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/ra_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/fw_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/afolu_pathway-EURASIA )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-EURASIA )<br/><br/>
+![](../podi/data/figs/cdr_pathway-EURASIA )<br/><br/>
 
 <br/><br/>
 
@@ -753,55 +753,55 @@ Bahrain, Islamic Republic of Iran, Iraq, Jordan, Kuwait, Lebanon, Oman, Qatar, S
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-ME )
+![](../podi/data/figs/scurves-ME )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-ME )
-![](./podi/data/figs/scurves_ind-Transport-ME )
-![](./podi/data/figs/scurves_ind-Buildings-ME )
-![](./podi/data/figs/scurves_ind-Industry-ME )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-ME )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-ME )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-ME )
+![](../podi/data/figs/scurves_ind-Grid-ME )
+![](../podi/data/figs/scurves_ind-Transport-ME )
+![](../podi/data/figs/scurves_ind-Buildings-ME )
+![](../podi/data/figs/scurves_ind-Industry-ME )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-ME )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-ME )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-ME )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-ME )
+![](../podi/data/figs/mitigationwedges-ME )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-ME )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-ME )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-ME )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-ME )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-ME )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-ME )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-ME )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-ME )<br/><br/>
-![](./podi/data/figs/electricity_pathway-ME )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-ME )<br/><br/>
-![](./podi/data/figs/buildings_pathway-ME )<br/><br/>
-![](./podi/data/figs/industry_pathway-ME )<br/><br/>
-![](./podi/data/figs/transport_pathway-ME )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-ME )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-ME )<br/><br/>
+![](../podi/data/figs/electricity_pathway-ME )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-ME )<br/><br/>
+![](../podi/data/figs/buildings_pathway-ME )<br/><br/>
+![](../podi/data/figs/industry_pathway-ME )<br/><br/>
+![](../podi/data/figs/transport_pathway-ME )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-ME )<br/><br/>
-![](./podi/data/figs/fw_pathway-ME )<br/><br/>
-![](./podi/data/figs/afolu_pathway-ME )<br/><br/>
+![](../podi/data/figs/ra_pathway-ME )<br/><br/>
+![](../podi/data/figs/fw_pathway-ME )<br/><br/>
+![](../podi/data/figs/afolu_pathway-ME )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-ME )<br/><br/>
+![](../podi/data/figs/cdr_pathway-ME )<br/><br/>
 
 <br/><br/>
 
@@ -815,55 +815,55 @@ Canada, Mexico, United States
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-NAM )
+![](../podi/data/figs/scurves-NAM )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-NAM )
-![](./podi/data/figs/scurves_ind-Transport-NAM )
-![](./podi/data/figs/scurves_ind-Buildings-NAM )
-![](./podi/data/figs/scurves_ind-Industry-NAM )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-NAM )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-NAM )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-NAM )
+![](../podi/data/figs/scurves_ind-Grid-NAM )
+![](../podi/data/figs/scurves_ind-Transport-NAM )
+![](../podi/data/figs/scurves_ind-Buildings-NAM )
+![](../podi/data/figs/scurves_ind-Industry-NAM )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-NAM )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-NAM )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-NAM )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-NAM )
+![](../podi/data/figs/mitigationwedges-NAM )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-NAM )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-NAM )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-NAM )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-NAM )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-NAM )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-NAM )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-NAM )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-NAM )<br/><br/>
-![](./podi/data/figs/electricity_pathway-NAM )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-NAM )<br/><br/>
-![](./podi/data/figs/buildings_pathway-NAM )<br/><br/>
-![](./podi/data/figs/industry_pathway-NAM )<br/><br/>
-![](./podi/data/figs/transport_pathway-NAM )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-NAM )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-NAM )<br/><br/>
+![](../podi/data/figs/electricity_pathway-NAM )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-NAM )<br/><br/>
+![](../podi/data/figs/buildings_pathway-NAM )<br/><br/>
+![](../podi/data/figs/industry_pathway-NAM )<br/><br/>
+![](../podi/data/figs/transport_pathway-NAM )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-NAM )<br/><br/>
-![](./podi/data/figs/fw_pathway-NAM )<br/><br/>
-![](./podi/data/figs/afolu_pathway-NAM )<br/><br/>
+![](../podi/data/figs/ra_pathway-NAM )<br/><br/>
+![](../podi/data/figs/fw_pathway-NAM )<br/><br/>
+![](../podi/data/figs/afolu_pathway-NAM )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-NAM )<br/><br/>
+![](../podi/data/figs/cdr_pathway-NAM )<br/><br/>
 
 <br/><br/>
 
@@ -875,55 +875,55 @@ Canada, Mexico, United States
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-BRAZIL )
+![](../podi/data/figs/scurves-BRAZIL )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-BRAZIL )
-![](./podi/data/figs/scurves_ind-Transport-BRAZIL )
-![](./podi/data/figs/scurves_ind-Buildings-BRAZIL )
-![](./podi/data/figs/scurves_ind-Industry-BRAZIL )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-BRAZIL )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-BRAZIL )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-BRAZIL )
+![](../podi/data/figs/scurves_ind-Grid-BRAZIL )
+![](../podi/data/figs/scurves_ind-Transport-BRAZIL )
+![](../podi/data/figs/scurves_ind-Buildings-BRAZIL )
+![](../podi/data/figs/scurves_ind-Industry-BRAZIL )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-BRAZIL )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-BRAZIL )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-BRAZIL )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-BRAZIL )
+![](../podi/data/figs/mitigationwedges-BRAZIL )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-BRAZIL )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-BRAZIL )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-BRAZIL )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-BRAZIL )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-BRAZIL )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-BRAZIL )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/electricity_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/buildings_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/industry_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/transport_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/electricity_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/buildings_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/industry_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/transport_pathway-BRAZIL )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/fw_pathway-BRAZIL )<br/><br/>
-![](./podi/data/figs/afolu_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/ra_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/fw_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/afolu_pathway-BRAZIL )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-BRAZIL )<br/><br/>
+![](../podi/data/figs/cdr_pathway-BRAZIL )<br/><br/>
 
 <br/><br/>
 
@@ -935,55 +935,55 @@ Canada, Mexico, United States
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-US )
+![](../podi/data/figs/scurves-US )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-US )
-![](./podi/data/figs/scurves_ind-Transport-US )
-![](./podi/data/figs/scurves_ind-Buildings-US )
-![](./podi/data/figs/scurves_ind-Industry-US )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-US )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-US )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-US )
+![](../podi/data/figs/scurves_ind-Grid-US )
+![](../podi/data/figs/scurves_ind-Transport-US )
+![](../podi/data/figs/scurves_ind-Buildings-US )
+![](../podi/data/figs/scurves_ind-Industry-US )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-US )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-US )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-US )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-US )
+![](../podi/data/figs/mitigationwedges-US )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-US )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-US )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-US )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-US )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-US )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-US )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-US )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-US )<br/><br/>
-![](./podi/data/figs/electricity_pathway-US )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-US )<br/><br/>
-![](./podi/data/figs/buildings_pathway-US )<br/><br/>
-![](./podi/data/figs/industry_pathway-US )<br/><br/>
-![](./podi/data/figs/transport_pathway-US )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-US )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-US )<br/><br/>
+![](../podi/data/figs/electricity_pathway-US )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-US )<br/><br/>
+![](../podi/data/figs/buildings_pathway-US )<br/><br/>
+![](../podi/data/figs/industry_pathway-US )<br/><br/>
+![](../podi/data/figs/transport_pathway-US )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-US )<br/><br/>
-![](./podi/data/figs/fw_pathway-US )<br/><br/>
-![](./podi/data/figs/afolu_pathway-US )<br/><br/>
+![](../podi/data/figs/ra_pathway-US )<br/><br/>
+![](../podi/data/figs/fw_pathway-US )<br/><br/>
+![](../podi/data/figs/afolu_pathway-US )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-US )<br/><br/>
+![](../podi/data/figs/cdr_pathway-US )<br/><br/>
 
 <br/><br/>
 
@@ -995,55 +995,55 @@ Canada, Mexico, United States
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-CHINA )
+![](../podi/data/figs/scurves-CHINA )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-CHINA )
-![](./podi/data/figs/scurves_ind-Transport-CHINA )
-![](./podi/data/figs/scurves_ind-Buildings-CHINA )
-![](./podi/data/figs/scurves_ind-Industry-CHINA )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-CHINA )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-CHINA )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-CHINA )
+![](../podi/data/figs/scurves_ind-Grid-CHINA )
+![](../podi/data/figs/scurves_ind-Transport-CHINA )
+![](../podi/data/figs/scurves_ind-Buildings-CHINA )
+![](../podi/data/figs/scurves_ind-Industry-CHINA )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-CHINA )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-CHINA )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-CHINA )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-CHINA )
+![](../podi/data/figs/mitigationwedges-CHINA )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-CHINA )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-CHINA )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-CHINA )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-CHINA )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-CHINA )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-CHINA )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/electricity_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/buildings_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/industry_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/transport_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/electricity_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/buildings_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/industry_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/transport_pathway-CHINA )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/fw_pathway-CHINA )<br/><br/>
-![](./podi/data/figs/afolu_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/ra_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/fw_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/afolu_pathway-CHINA )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-CHINA )<br/><br/>
+![](../podi/data/figs/cdr_pathway-CHINA )<br/><br/>
 
 <br/><br/>
 
@@ -1055,55 +1055,55 @@ Canada, Mexico, United States
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-INDIA )
+![](../podi/data/figs/scurves-INDIA )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-INDIA )
-![](./podi/data/figs/scurves_ind-Transport-INDIA )
-![](./podi/data/figs/scurves_ind-Buildings-INDIA )
-![](./podi/data/figs/scurves_ind-Industry-INDIA )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-INDIA )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-INDIA )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-INDIA)
+![](../podi/data/figs/scurves_ind-Grid-INDIA )
+![](../podi/data/figs/scurves_ind-Transport-INDIA )
+![](../podi/data/figs/scurves_ind-Buildings-INDIA )
+![](../podi/data/figs/scurves_ind-Industry-INDIA )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-INDIA )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-INDIA )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-INDIA)
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-INDIA )
+![](../podi/data/figs/mitigationwedges-INDIA )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-INDIA )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-INDIA )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-INDIA )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-INDIA )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-INDIA )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-INDIA )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/electricity_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/buildings_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/industry_pathway-INDIA)<br/><br/>
-![](./podi/data/figs/transport_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/electricity_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/buildings_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/industry_pathway-INDIA)<br/><br/>
+![](../podi/data/figs/transport_pathway-INDIA )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/fw_pathway-INDIA )<br/><br/>
-![](./podi/data/figs/afolu_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/ra_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/fw_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/afolu_pathway-INDIA )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-INDIA )<br/><br/>
+![](../podi/data/figs/cdr_pathway-INDIA )<br/><br/>
 
 <br/><br/>
 
@@ -1115,55 +1115,55 @@ Canada, Mexico, United States
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-JPN )
+![](../podi/data/figs/scurves-JPN )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-JPN )
-![](./podi/data/figs/scurves_ind-Transport-JPN )
-![](./podi/data/figs/scurves_ind-Buildings-JPN )
-![](./podi/data/figs/scurves_ind-Industry-JPN )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-JPN )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-JPN )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-JPN )
+![](../podi/data/figs/scurves_ind-Grid-JPN )
+![](../podi/data/figs/scurves_ind-Transport-JPN )
+![](../podi/data/figs/scurves_ind-Buildings-JPN )
+![](../podi/data/figs/scurves_ind-Industry-JPN )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-JPN )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-JPN )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-JPN )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-JPN )
+![](../podi/data/figs/mitigationwedges-JPN )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-JPN )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-JPN )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-JPN )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-JPN )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-JPN )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-JPN )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-JPN )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-JPN )<br/><br/>
-![](./podi/data/figs/electricity_pathway-JPN )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-JPN )<br/><br/>
-![](./podi/data/figs/buildings_pathway-JPN )<br/><br/>
-![](./podi/data/figs/industry_pathway-JPN )<br/><br/>
-![](./podi/data/figs/transport_pathway-JPN )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-JPN )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-JPN )<br/><br/>
+![](../podi/data/figs/electricity_pathway-JPN )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-JPN )<br/><br/>
+![](../podi/data/figs/buildings_pathway-JPN )<br/><br/>
+![](../podi/data/figs/industry_pathway-JPN )<br/><br/>
+![](../podi/data/figs/transport_pathway-JPN )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-JPN )<br/><br/>
-![](./podi/data/figs/fw_pathway-JJPN )<br/><br/>
-![](./podi/data/figs/afolu_pathway-JPN )<br/><br/>
+![](../podi/data/figs/ra_pathway-JPN )<br/><br/>
+![](../podi/data/figs/fw_pathway-JJPN )<br/><br/>
+![](../podi/data/figs/afolu_pathway-JPN )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-JPN )<br/><br/>
+![](../podi/data/figs/cdr_pathway-JPN )<br/><br/>
 
 <br/><br/>
 
@@ -1175,55 +1175,55 @@ Canada, Mexico, United States
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-RUS )
+![](../podi/data/figs/scurves-RUS )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-RUS )
-![](./podi/data/figs/scurves_ind-Transport-RUS )
-![](./podi/data/figs/scurves_ind-Buildings-RUS )
-![](./podi/data/figs/scurves_ind-Industry-RUS)
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-RUS )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-RUS )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-RUS )
+![](../podi/data/figs/scurves_ind-Grid-RUS )
+![](../podi/data/figs/scurves_ind-Transport-RUS )
+![](../podi/data/figs/scurves_ind-Buildings-RUS )
+![](../podi/data/figs/scurves_ind-Industry-RUS)
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-RUS )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-RUS )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-RUS )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-RUS )
+![](../podi/data/figs/mitigationwedges-RUS )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-RUS )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-RUS )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-RUS )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-RUS )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-RUS )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-RUS )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-RUS )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-RUS )<br/><br/>
-![](./podi/data/figs/electricity_pathway-RUS )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-RUS )<br/><br/>
-![](./podi/data/figs/buildings_pathway-RUS )<br/><br/>
-![](./podi/data/figs/industry_pathway-RUS )<br/><br/>
-![](./podi/data/figs/transport_pathway-RUS )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-RUS )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-RUS )<br/><br/>
+![](../podi/data/figs/electricity_pathway-RUS )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-RUS )<br/><br/>
+![](../podi/data/figs/buildings_pathway-RUS )<br/><br/>
+![](../podi/data/figs/industry_pathway-RUS )<br/><br/>
+![](../podi/data/figs/transport_pathway-RUS )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-RUS )<br/><br/>
-![](./podi/data/figs/fw_pathway-RUS )<br/><br/>
-![](./podi/data/figs/afolu_pathway-RUS )<br/><br/>
+![](../podi/data/figs/ra_pathway-RUS )<br/><br/>
+![](../podi/data/figs/fw_pathway-RUS )<br/><br/>
+![](../podi/data/figs/afolu_pathway-RUS )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-RUS )<br/><br/>
+![](../podi/data/figs/cdr_pathway-RUS )<br/><br/>
 
 <br/><br/>
 
@@ -1235,55 +1235,55 @@ Canada, Mexico, United States
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-SAFR )
+![](../podi/data/figs/scurves-SAFR )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-SAFR )
-![](./podi/data/figs/scurves_ind-Transport-SAFR )
-![](./podi/data/figs/scurves_ind-Buildings-SAFR )
-![](./podi/data/figs/scurves_ind-Industry-SAFR )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-SAFR )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-SAFR )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-SAFR )
+![](../podi/data/figs/scurves_ind-Grid-SAFR )
+![](../podi/data/figs/scurves_ind-Transport-SAFR )
+![](../podi/data/figs/scurves_ind-Buildings-SAFR )
+![](../podi/data/figs/scurves_ind-Industry-SAFR )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-SAFR )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-SAFR )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-SAFR )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-SAFR )
+![](../podi/data/figs/mitigationwedges-SAFR )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-SAFR )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-SAFR )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-SAFR )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-SAFR )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-SAFR )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-SAFR )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/electricity_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/buildings_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/industry_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/transport_pathway-SAFR)<br/><br/>
+![](../podi/data/figs/energydemand_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/electricity_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/buildings_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/industry_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/transport_pathway-SAFR)<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/fw_pathway-SAFR )<br/><br/>
-![](./podi/data/figs/afolu_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/ra_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/fw_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/afolu_pathway-SAFR )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-SAFR )<br/><br/>
+![](../podi/data/figs/cdr_pathway-SAFR )<br/><br/>
 
 <br/><br/>
 
@@ -1296,55 +1296,55 @@ Islands, Saint Pierre and Miquelon, U.S. Pacific Islands, U.S. Territories, Wake
 
 ### Adoption Curves
 
-![](./podi/data/figs/scurves-Other )
+![](../podi/data/figs/scurves-Other )
 
 <br/><br/>
 
-![](./podi/data/figs/scurves_ind-Grid-Other )
-![](./podi/data/figs/scurves_ind-Transport-Other )
-![](./podi/data/figs/scurves_ind-Buildings-Other )
-![](./podi/data/figs/scurves_ind-Industry-Other )
-![](./podi/data/figs/scurves_ind-RegenerativeAgriculture-Other )
-![](./podi/data/figs/scurves_ind-Forests&Wetlands-Other )
-![](./podi/data/figs/scurves_ind-CarbonDioxideRemoval-Other )
+![](../podi/data/figs/scurves_ind-Grid-Other )
+![](../podi/data/figs/scurves_ind-Transport-Other )
+![](../podi/data/figs/scurves_ind-Buildings-Other )
+![](../podi/data/figs/scurves_ind-Industry-Other )
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-Other )
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-Other )
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-Other )
 
 <br/><br/>
 
 ### Emissions
 
-![](./podi/data/figs/mitigationwedges-Other )
+![](../podi/data/figs/mitigationwedges-Other )
 
 <br/><br/>
 
-![](./podi/data/figs/emissions-ffi_emissions-Other )<br/><br/>
-![](./podi/data/figs/emissions-CH4_emissions-Other )<br/><br/>
-![](./podi/data/figs/emissions-N2O_emissions-Other )<br/><br/>
+![](../podi/data/figs/emissions-ffi_emissions-Other )<br/><br/>
+![](../podi/data/figs/emissions-CH4_emissions-Other )<br/><br/>
+![](../podi/data/figs/emissions-N2O_emissions-Other )<br/><br/>
 
 <br/><br/>
 
 ### Energy Supply & Demand
 
-![](./podi/data/figs/energydemand_pathway-Other )<br/><br/>
-![](./podi/data/figs/energysupply_pathway-Other )<br/><br/>
-![](./podi/data/figs/electricity_pathway-Other )<br/><br/>
-![](./podi/data/figs/elecbysector_pathway-Other )<br/><br/>
-![](./podi/data/figs/buildings_pathway-Other )<br/><br/>
-![](./podi/data/figs/industry_pathway-Other )<br/><br/>
-![](./podi/data/figs/transport_pathway-Other )<br/><br/>
+![](../podi/data/figs/energydemand_pathway-Other )<br/><br/>
+![](../podi/data/figs/energysupply_pathway-Other )<br/><br/>
+![](../podi/data/figs/electricity_pathway-Other )<br/><br/>
+![](../podi/data/figs/elecbysector_pathway-Other )<br/><br/>
+![](../podi/data/figs/buildings_pathway-Other )<br/><br/>
+![](../podi/data/figs/industry_pathway-Other )<br/><br/>
+![](../podi/data/figs/transport_pathway-Other )<br/><br/>
 
 <br/><br/>
 
 ### Natural Climate Solutions
 
-![](./podi/data/figs/ra_pathway-Other )<br/><br/>
-![](./podi/data/figs/fw_pathway-Other )<br/><br/>
-![](./podi/data/figs/afolu_pathway-Other )<br/><br/>
+![](../podi/data/figs/ra_pathway-Other )<br/><br/>
+![](../podi/data/figs/fw_pathway-Other )<br/><br/>
+![](../podi/data/figs/afolu_pathway-Other )<br/><br/>
 
 <br/><br/>
 
 ### Carbon Dioxide Removal
 
-![](./podi/data/figs/cdr_pathway-Other )<br/><br/>
+![](../podi/data/figs/cdr_pathway-Other )<br/><br/>
 
 <br/><br/>
 
