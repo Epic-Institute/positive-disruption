@@ -14,6 +14,7 @@
 | Industry  | % Industry TFC met by electricity & renewable heat
 | Regenerative Ag | Mha under Regenerative Agriculture
 | Forests & Wetlands | Mha of at-risk Forests/Wetlands preserved
+| CDR | GtCO2 removed via CDR
 
 <br/>
 
