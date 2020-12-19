@@ -4,17 +4,37 @@
 
 ![](../podi/data/figs/scurves-World)
 
-% Adoption is uniquely defined for each vector, and represents the decarbonization of that vector over time.
+% Adoption is uniquely-defined for each vector, and represents the decarbonization of that vector over time, relative to the maximum level of adoption estimated in the PD model.
 
 <br/>
 
 ![](../podi/data/figs/scurves_ind-Grid-World)
+
+% Adoption = (TWh Renewables) / (TWh Total)
+
 ![](../podi/data/figs/scurves_ind-Transport-World)
+
+% Adoption = (TWh Electricity + Biofuels) / (TWh Total)
+
 ![](../podi/data/figs/scurves_ind-Buildings-World)
+
+% Adoption = (TWh Electricity + Renewable Heat) / (TWh Total)
+
 ![](../podi/data/figs/scurves_ind-Industry-World)
+
+% Adoption = (TWh Electricity + Renewable Heat) / (TWh Total)
+
 ![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-World)
+
+% Adoption = (Mha Regenerative Agriculture) / (Mha Total Agriculture)
+
 ![](../podi/data/figs/scurves_ind-Forests&Wetlands-World)
+
+% Adoption = (Mha Deforestation Avoided) / (Mha Total At-Risk Forests & Wetlands)
+
 ![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
+
+% Adoption = (GtCO2 removed via CDR) / (Cumulative GtCO2 removed via CDR)
 
 <br/>
 

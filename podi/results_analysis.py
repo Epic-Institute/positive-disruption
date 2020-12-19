@@ -39,13 +39,14 @@ def results_analysis(
     ]
 
     grid_decarb = (
-        elec_consump_pathway.loc[elec_consump_pathway.index.isin(decarb, level=1)]
+        elec_consump_pathway.loc[region, decarb, :]
         .sum()
         .div(elec_consump_pathway.sum())
     )
     grid_decarb = pd.DataFrame(grid_decarb).T
     grid_decarb.columns = grid_decarb.columns.astype(int)
     grid_decarb.rename(index={0: "Grid"}, inplace=True)
+    """
     grid_decarb.loc[:, 2010:2018] = [
         0.25,
         0.258,
@@ -57,7 +58,7 @@ def results_analysis(
         0.373,
         0.385,
     ]
-
+    """
     # endregion
 
     # TRANSPORTATION DECARB
