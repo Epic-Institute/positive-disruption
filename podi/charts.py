@@ -152,7 +152,7 @@ def charts(
 
             # Absolute values
 
-            
+            '''
             t = adoption_curves2.columns
             data1 = adoption_curves2.loc['Grid']
             data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
@@ -200,6 +200,7 @@ def charts(
                 pad_inches=0.1,
             )
             plt.show()
+            '''
 
     # endregion
 
