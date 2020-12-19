@@ -53,327 +53,327 @@ NonOECD ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5
 NonOECD ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
 NonOECD ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
 NonOECD ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
-AdvancedECO ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AdvancedECO ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-AFRICA ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASEAN ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ASIAPAC ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-BRAZIL ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CHINA ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSAM ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-DevelopingECO ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EU ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EUR ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-EURASIA ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-INDIA ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-JPN ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ME ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-NAM ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-RUS ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SAFR ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Coal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Oil,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Natural gas,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Bioenergy,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Waste,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Nuclear,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Geothermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Solar thermal,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Other sources,Baseline,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Coal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Oil,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Natural gas,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Bioenergy,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Waste,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Nuclear,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Geothermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Solar thermal,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-US ,,Other sources,Pathway,TWh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+AdvancedECO ,,Coal,Baseline,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+AdvancedECO ,,Oil,Baseline,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+AdvancedECO ,,Natural gas,Baseline,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+AdvancedECO ,,Bioenergy,Baseline,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+AdvancedECO ,,Waste,Baseline,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+AdvancedECO ,,Nuclear,Baseline,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+AdvancedECO ,,Geothermal,Baseline,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+AdvancedECO ,,Solar thermal,Baseline,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+AdvancedECO ,,Other sources,Baseline,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+AdvancedECO ,,Coal,Pathway,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+AdvancedECO ,,Oil,Pathway,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+AdvancedECO ,,Natural gas,Pathway,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+AdvancedECO ,,Bioenergy,Pathway,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+AdvancedECO ,,Waste,Pathway,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+AdvancedECO ,,Nuclear,Pathway,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+AdvancedECO ,,Geothermal,Pathway,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+AdvancedECO ,,Solar thermal,Pathway,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+AdvancedECO ,,Other sources,Pathway,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+AFRICA ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+AFRICA ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+AFRICA ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+AFRICA ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+AFRICA ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+AFRICA ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+AFRICA ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+AFRICA ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+AFRICA ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+AFRICA ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+AFRICA ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+AFRICA ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+AFRICA ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+AFRICA ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+AFRICA ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+AFRICA ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+AFRICA ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+AFRICA ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+ASEAN ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+ASEAN ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+ASEAN ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+ASEAN ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+ASEAN ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+ASEAN ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+ASEAN ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+ASEAN ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+ASEAN ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+ASEAN ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+ASEAN ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+ASEAN ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+ASEAN ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+ASEAN ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+ASEAN ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+ASEAN ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+ASEAN ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+ASEAN ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+ASIAPAC ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+ASIAPAC ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+ASIAPAC ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+ASIAPAC ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+ASIAPAC ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+ASIAPAC ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+ASIAPAC ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+ASIAPAC ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+ASIAPAC ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+ASIAPAC ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+ASIAPAC ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+ASIAPAC ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+ASIAPAC ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+ASIAPAC ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+ASIAPAC ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+ASIAPAC ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+ASIAPAC ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+ASIAPAC ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+BRAZIL ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+BRAZIL ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+BRAZIL ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+BRAZIL ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+BRAZIL ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+BRAZIL ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+BRAZIL ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+BRAZIL ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+BRAZIL ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+BRAZIL ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+BRAZIL ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+BRAZIL ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+BRAZIL ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+BRAZIL ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+BRAZIL ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+BRAZIL ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+BRAZIL ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+BRAZIL ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+CHINA ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+CHINA ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+CHINA ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+CHINA ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+CHINA ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+CHINA ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+CHINA ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+CHINA ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+CHINA ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+CHINA ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+CHINA ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+CHINA ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+CHINA ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+CHINA ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+CHINA ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+CHINA ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+CHINA ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+CHINA ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+CSAM ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+CSAM ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+CSAM ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+CSAM ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+CSAM ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+CSAM ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+CSAM ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+CSAM ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+CSAM ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+CSAM ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+CSAM ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+CSAM ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+CSAM ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+CSAM ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+CSAM ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+CSAM ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+CSAM ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+CSAM ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+DevelopingECO ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+DevelopingECO ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+DevelopingECO ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+DevelopingECO ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+DevelopingECO ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+DevelopingECO ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+DevelopingECO ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+DevelopingECO ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+DevelopingECO ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+DevelopingECO ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+DevelopingECO ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+DevelopingECO ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+DevelopingECO ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+DevelopingECO ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+DevelopingECO ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+DevelopingECO ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+DevelopingECO ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+DevelopingECO ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+EU ,,Coal,Baseline,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+EU ,,Oil,Baseline,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+EU ,,Natural gas,Baseline,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+EU ,,Bioenergy,Baseline,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+EU ,,Waste,Baseline,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+EU ,,Nuclear,Baseline,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+EU ,,Geothermal,Baseline,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+EU ,,Solar thermal,Baseline,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+EU ,,Other sources,Baseline,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+EU ,,Coal,Pathway,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+EU ,,Oil,Pathway,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+EU ,,Natural gas,Pathway,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+EU ,,Bioenergy,Pathway,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+EU ,,Waste,Pathway,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+EU ,,Nuclear,Pathway,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+EU ,,Geothermal,Pathway,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+EU ,,Solar thermal,Pathway,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+EU ,,Other sources,Pathway,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+EUR ,,Coal,Baseline,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+EUR ,,Oil,Baseline,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+EUR ,,Natural gas,Baseline,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+EUR ,,Bioenergy,Baseline,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+EUR ,,Waste,Baseline,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+EUR ,,Nuclear,Baseline,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+EUR ,,Geothermal,Baseline,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+EUR ,,Solar thermal,Baseline,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+EUR ,,Other sources,Baseline,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+EUR ,,Coal,Pathway,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+EUR ,,Oil,Pathway,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+EUR ,,Natural gas,Pathway,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+EUR ,,Bioenergy,Pathway,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+EUR ,,Waste,Pathway,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+EUR ,,Nuclear,Pathway,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+EUR ,,Geothermal,Pathway,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+EUR ,,Solar thermal,Pathway,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+EUR ,,Other sources,Pathway,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+EURASIA ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+EURASIA ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+EURASIA ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+EURASIA ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+EURASIA ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+EURASIA ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+EURASIA ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+EURASIA ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+EURASIA ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+EURASIA ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+EURASIA ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+EURASIA ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+EURASIA ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+EURASIA ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+EURASIA ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+EURASIA ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+EURASIA ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+EURASIA ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+INDIA ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+INDIA ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+INDIA ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+INDIA ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+INDIA ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+INDIA ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+INDIA ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+INDIA ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+INDIA ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+INDIA ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+INDIA ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+INDIA ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+INDIA ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+INDIA ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+INDIA ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+INDIA ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+INDIA ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+INDIA ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+JPN ,,Coal,Baseline,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+JPN ,,Oil,Baseline,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+JPN ,,Natural gas,Baseline,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+JPN ,,Bioenergy,Baseline,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+JPN ,,Waste,Baseline,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+JPN ,,Nuclear,Baseline,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+JPN ,,Geothermal,Baseline,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+JPN ,,Solar thermal,Baseline,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+JPN ,,Other sources,Baseline,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+JPN ,,Coal,Pathway,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+JPN ,,Oil,Pathway,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+JPN ,,Natural gas,Pathway,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+JPN ,,Bioenergy,Pathway,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+JPN ,,Waste,Pathway,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+JPN ,,Nuclear,Pathway,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+JPN ,,Geothermal,Pathway,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+JPN ,,Solar thermal,Pathway,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+JPN ,,Other sources,Pathway,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+ME ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+ME ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+ME ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+ME ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+ME ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+ME ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+ME ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+ME ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+ME ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+ME ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+ME ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+ME ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+ME ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+ME ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+ME ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+ME ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+ME ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+ME ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+NAM ,,Coal,Baseline,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+NAM ,,Oil,Baseline,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+NAM ,,Natural gas,Baseline,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+NAM ,,Bioenergy,Baseline,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+NAM ,,Waste,Baseline,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+NAM ,,Nuclear,Baseline,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+NAM ,,Geothermal,Baseline,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+NAM ,,Solar thermal,Baseline,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+NAM ,,Other sources,Baseline,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+NAM ,,Coal,Pathway,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+NAM ,,Oil,Pathway,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+NAM ,,Natural gas,Pathway,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+NAM ,,Bioenergy,Pathway,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+NAM ,,Waste,Pathway,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+NAM ,,Nuclear,Pathway,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+NAM ,,Geothermal,Pathway,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+NAM ,,Solar thermal,Pathway,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+NAM ,,Other sources,Pathway,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+RUS ,,Coal,Baseline,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+RUS ,,Oil,Baseline,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+RUS ,,Natural gas,Baseline,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+RUS ,,Bioenergy,Baseline,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+RUS ,,Waste,Baseline,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+RUS ,,Nuclear,Baseline,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+RUS ,,Geothermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+RUS ,,Solar thermal,Baseline,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+RUS ,,Other sources,Baseline,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+RUS ,,Coal,Pathway,TWh,966,,,,,924,,,,,952,,,,,1091,,,,,1230.4937094,,,,,1397.9934972,1397.9934972,1397.9934972
+RUS ,,Oil,Pathway,TWh,632,,,,,453,,,,,247,,,,,177,,,,,160.9714878,,,,,122.693148,122.693148,122.693148
+RUS ,,Natural gas,Pathway,TWh,2135,,,,,1779,,,,,1461,,,,,1473,,,,,1452.371736,,,,,1397.9934972,1397.9934972,1397.9934972
+RUS ,,Bioenergy,Pathway,TWh,38,,,,,23,,,,,17,,,,,19,,,,,20.8327776,,,,,21.0052914,21.0052914,21.0052914
+RUS ,,Waste,Pathway,TWh,6,,,,,12,,,,,18,,,,,22,,,,,31.7861538,,,,,34.0424454,34.0424454,34.0424454
+RUS ,,Nuclear,Pathway,TWh,5,,,,,4,,,,,4,,,,,4,,,,,6.1085442,,,,,5.8474122,5.8474122,5.8474122
+RUS ,,Geothermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0.0030558,,,,,0.1316772,0.1316772,0.1316772
+RUS ,,Solar thermal,Pathway,TWh,0,,,,,0,,,,,0,,,,,0,,,,,0,,,,,0,0,0
+RUS ,,Other sources,Pathway,TWh,0,,,,,0,,,,,1,,,,,105,,,,,94.5281172,,,,,103.3466004,103.3466004,103.3466004
+SAFR ,,Coal,Baseline,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+SAFR ,,Oil,Baseline,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+SAFR ,,Natural gas,Baseline,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+SAFR ,,Bioenergy,Baseline,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+SAFR ,,Waste,Baseline,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+SAFR ,,Nuclear,Baseline,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+SAFR ,,Geothermal,Baseline,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+SAFR ,,Solar thermal,Baseline,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+SAFR ,,Other sources,Baseline,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+SAFR ,,Coal,Pathway,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+SAFR ,,Oil,Pathway,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+SAFR ,,Natural gas,Pathway,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+SAFR ,,Bioenergy,Pathway,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+SAFR ,,Waste,Pathway,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+SAFR ,,Nuclear,Pathway,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+SAFR ,,Geothermal,Pathway,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+SAFR ,,Solar thermal,Pathway,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+SAFR ,,Other sources,Pathway,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+US ,,Coal,Baseline,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+US ,,Oil,Baseline,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+US ,,Natural gas,Baseline,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+US ,,Bioenergy,Baseline,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+US ,,Waste,Baseline,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+US ,,Nuclear,Baseline,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+US ,,Geothermal,Baseline,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+US ,,Solar thermal,Baseline,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+US ,,Other sources,Baseline,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27
+US ,,Coal,Pathway,TWh,377,,,,,288,,,,,251,,,,,239,,,,,258,,,,,203,203,203
+US ,,Oil,Pathway,TWh,77,,,,,85,,,,,75,,,,,93,,,,,74,,,,,43,43,43
+US ,,Natural gas,Pathway,TWh,116,,,,,210,,,,,272,,,,,362,,,,,414,,,,,345,345,345
+US ,,Bioenergy,Pathway,TWh,11,,,,,29,,,,,42,,,,,63,,,,,103,,,,,131,131,131
+US ,,Waste,Pathway,TWh,24,,,,,30,,,,,37,,,,,44,,,,,63,,,,,81,81,81
+US ,,Nuclear,Pathway,TWh,7,,,,,2,,,,,1,,,,,2,,,,,1,,,,,1,1,1
+US ,,Geothermal,Pathway,TWh,4,,,,,5,,,,,5,,,,,7,,,,,7,,,,,9,9,9
+US ,,Solar thermal,Pathway,TWh,0.00085,,,,,0.00085,,,,,0.00335,,,,,0.0075,,,,,0.0285,,,,,0.1475,0.1475,0.1475
+US ,,Other sources,Pathway,TWh,26,,,,,15,,,,,17,,,,,18,,,,,20,,,,,27,27,27

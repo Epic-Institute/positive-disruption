@@ -79,7 +79,6 @@ def charts(
             loc=2,
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
-            # borderaxespad=0.0,
         )
         plt.savefig(
             fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(" ", ""),
