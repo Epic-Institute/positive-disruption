@@ -931,7 +931,7 @@ Canada, Mexico, United States
 
 ## United States
 
-![](region%20maps/USA.png)
+![](region%20maps/US.png)
 
 ### Adoption Curves
 
