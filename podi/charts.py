@@ -21,6 +21,7 @@ from shortcountrynames import to_name
 from scipy.signal import savgol_filter
 import plotly.express as px
 import plotly.io as pio
+save_figs = False
 
 # endregion
 
@@ -80,12 +81,13 @@ def charts(
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
         )
-        plt.savefig(
-            fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(" ", ""),
-            format="png",
-            bbox_inches="tight",
-            pad_inches=0.1,
-        )
+        if save_figs is True:
+            plt.savefig(
+                fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(" ", ""),
+                format="png",
+                bbox_inches="tight",
+                pad_inches=0.1,
+            )
         plt.show()
         plt.clf()
 

@@ -3,6 +3,8 @@
 # region
 
 import pandas as pd
+from scipy.interpolate import interp1d
+import numpy as np
 
 # endregion
 
@@ -166,6 +168,36 @@ def energy_demand(
         energy_demand * solar_thermal.values
     )
 
+    # Apply adoption_curves to energy demand
+
+    """
+    def proj_demand(region, hist_demand):
+        foo = hist_demand.loc[region,slice(None),slice(None),slice(None)].droplevel(['Scenario']).apply(
+            adoption_curve,
+            axis=1,
+            args=(
+                [
+                    region,
+                    'Electricity',
+                    scenario,
+                ]
+            ),
+        )
+
+        perc = []
+        for i in range(0, len(foo.index)):
+            perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
+
+        perc = pd.DataFrame(perc).set_index(foo.index)
+        return perc
+
+    en_demand = []
+
+    for i in range(0, len(iea_region_list)):
+        en_demand = pd.DataFrame(en_demand).append(
+            proj_demand(iea_region_list[i], energy_demand)
+        )
+    """
     # endregion
 
     #########
@@ -185,12 +217,6 @@ def energy_demand(
     cdr_energy.reset_index(inplace=True)
     cdr_energy.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
     energy_demand = energy_demand.append(cdr_energy)
-
-    """
-    energy_demand.loc[" OECD ", "Industry", "Electricity"] = (
-        energy_demand.loc[" OECD ", "Industry", "Electricity"].add(cdr_energy).values
-    )
-    """
 
     # endregion
 
@@ -282,51 +308,54 @@ def energy_demand(
 
     # region
 
-    """
-    # Smooth energy demand curves
-
     xnew = np.linspace(
         energy_demand.columns.values.astype(int).min(),
         energy_demand.columns.values.astype(int).max(),
         11,
     )
-    energy_demand = energy_demand.apply(
+    energy_demand2 = energy_demand.apply(
         lambda x: interp1d(energy_demand.columns.values.astype(int), x, kind="cubic"),
         axis=1,
     )
-    energy_demand = energy_demand.apply(lambda x: x(xnew))
-    energy_demand = pd.DataFrame(energy_demand)
+    energy_demand2 = energy_demand2.apply(lambda x: x(xnew))
 
-    # Apply adoption_curves to energy demand
-    """
-    """
-    def proj_demand(region, hist_demand):
-        foo = hist_demand.loc[region,slice(None),slice(None),slice(None)].droplevel(['Scenario']).apply(
-            adoption_curve,
-            axis=1,
-            args=(
-                [
-                    region,
-                    'Electricity',
-                    scenario,
-                ]
-            ),
+    energy_demand3 = []
+
+    for i in range(0, len(energy_demand2.index)):
+        energy_demand3 = pd.DataFrame(energy_demand3).append(
+            (pd.DataFrame(energy_demand2[energy_demand2.index[i]]).T)
         )
 
-        perc = []
-        for i in range(0, len(foo.index)):
-            perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
+    energy_demand3 = pd.DataFrame(energy_demand3.set_index(energy_demand2.index))
 
-        perc = pd.DataFrame(perc).set_index(foo.index)
-        return perc
+    energy_demand3.columns = pd.date_range(
+        start="2010-01-01", end="2101-01-01", freq="Y"
+    ).year
 
-    en_demand = []
+    xnew = np.linspace(
+        energy_demand.columns.values.astype(int).min(),
+        energy_demand.columns.values.astype(int).max(),
+        energy_demand.columns.values.astype(int).max()
+        - energy_demand.columns.values.astype(int).min()
+        + 1,
+    ).astype(int)
+    energy_demand4 = energy_demand3.apply(
+        lambda x: interp1d(energy_demand.columns.values.astype(int), x, kind="cubic"),
+        axis=1,
+    )
+    energy_demand4 = energy_demand4.apply(lambda x: x(xnew))
 
-    for i in range(0, len(iea_region_list)):
-        en_demand = pd.DataFrame(en_demand).append(
-            proj_demand(iea_region_list[i], energy_demand)
+    energy_demand5 = []
+
+    for i in range(0, len(energy_demand2.index)):
+        energy_demand5 = pd.DataFrame(energy_demand5).append(
+            (pd.DataFrame(energy_demand4[energy_demand4.index[i]]).T)
         )
-    """
+
+    energy_demand5 = pd.DataFrame(energy_demand5.set_index(energy_demand.index))
+
+    energy_demand4.columns = energy_demand.columns
+
     # endregion
 
     return energy_demand
