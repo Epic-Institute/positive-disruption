@@ -21,7 +21,8 @@ from shortcountrynames import to_name
 from scipy.signal import savgol_filter
 import plotly.express as px
 import plotly.io as pio
-save_figs = False
+
+save_figs = True
 
 # endregion
 
@@ -878,12 +879,14 @@ def charts(
         ]
 
         if iea_region_list[i] == "World ":
-            energy_demand_i.loc["Transport", "Other fuels"] = energy_demand_i.loc[
-                "Transport", ["International bunkers", "Other fuels"], :
+            energy_demand_i.loc[
+                "World ", "Transport", "Other fuels"
+            ] = energy_demand_i.loc[
+                "World ", "Transport", ["International bunkers", "Other fuels"], :
             ].sum()
 
         fig = (
-            energy_demand_i.loc[(slice(None), "Electricity"), :]
+            energy_demand_i.loc[(iea_region_list[i], slice(None), "Electricity"), :]
             .groupby(["Sector"])
             .sum()
             .drop("TFC")
@@ -896,7 +899,7 @@ def charts(
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_i.loc["Transport", slice(None)]
+                    energy_demand_i.loc[iea_region_list[i],"Transport", slice(None)]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
@@ -912,7 +915,7 @@ def charts(
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_i.loc["Buildings", slice(None)]
+                    energy_demand_i.loc[iea_region_list[i], "Buildings", slice(None)]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
@@ -926,7 +929,7 @@ def charts(
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_i.loc["Industry", slice(None)]
+                    energy_demand_i.loc[iea_region_list[i], "Industry", slice(None)]
                     .groupby(["Metric"])
                     .sum()
                     .loc[

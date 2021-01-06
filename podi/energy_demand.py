@@ -307,11 +307,12 @@ def energy_demand(
     ###################
 
     # region
+    sr = 11
 
     xnew = np.linspace(
         energy_demand.columns.values.astype(int).min(),
         energy_demand.columns.values.astype(int).max(),
-        11,
+        sr,
     )
     energy_demand2 = energy_demand.apply(
         lambda x: interp1d(energy_demand.columns.values.astype(int), x, kind="cubic"),
@@ -328,9 +329,11 @@ def energy_demand(
 
     energy_demand3 = pd.DataFrame(energy_demand3.set_index(energy_demand2.index))
 
-    energy_demand3.columns = pd.date_range(
-        start="2010-01-01", end="2101-01-01", freq="Y"
-    ).year
+    energy_demand3.columns = np.linspace(
+        energy_demand.columns.values.astype(int).min(),
+        energy_demand.columns.values.astype(int).max(),
+        sr,
+    ).astype(int)
 
     xnew = np.linspace(
         energy_demand.columns.values.astype(int).min(),
@@ -339,23 +342,14 @@ def energy_demand(
         - energy_demand.columns.values.astype(int).min()
         + 1,
     ).astype(int)
-    energy_demand4 = energy_demand3.apply(
-        lambda x: interp1d(energy_demand.columns.values.astype(int), x, kind="cubic"),
-        axis=1,
+
+    energy_demand3 = (
+        pd.DataFrame(columns=xnew, index=energy_demand3.index)
+        .combine_first(energy_demand3)
+        .astype(float)
+        .interpolate(method="quadratic", axis=1)
     )
-    energy_demand4 = energy_demand4.apply(lambda x: x(xnew))
-
-    energy_demand5 = []
-
-    for i in range(0, len(energy_demand2.index)):
-        energy_demand5 = pd.DataFrame(energy_demand5).append(
-            (pd.DataFrame(energy_demand4[energy_demand4.index[i]]).T)
-        )
-
-    energy_demand5 = pd.DataFrame(energy_demand5.set_index(energy_demand.index))
-
-    energy_demand4.columns = energy_demand.columns
 
     # endregion
 
-    return energy_demand
+    return energy_demand3
