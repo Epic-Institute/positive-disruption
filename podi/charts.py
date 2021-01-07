@@ -74,7 +74,6 @@ def charts(
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
         )
-        plt.show()
 
         if save_figs is True:
             plt.savefig(
@@ -83,6 +82,7 @@ def charts(
                 bbox_inches="tight",
                 pad_inches=0.1,
             )
+        plt.show()
         plt.clf()
 
     # endregion
@@ -119,7 +119,6 @@ def charts(
                 + ", "
                 + iea_region_list[i]
             )
-            plt.show()
 
             if save_figs is True:
                 plt.savefig(
@@ -133,6 +132,7 @@ def charts(
                     bbox_inches="tight",
                     pad_inches=0.1,
                 )
+            plt.show()
             plt.clf()
 
             # Absolute values
@@ -396,14 +396,15 @@ def charts(
         plt.xticks(np.arange(2020, 2110, 10))
         plt.yticks(np.arange(-25, 105, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
-        plt.savefig(
-            fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
-                " ", ""
-            ),
-            format="png",
-            bbox_inches="tight",
-            pad_inches=0.1,
-        )
+        if save_figs is True:
+            plt.savefig(
+                fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
+                    " ", ""
+                ),
+                format="png",
+                bbox_inches="tight",
+                pad_inches=0.1,
+            )
         plt.show()
         plt.clf()
 
