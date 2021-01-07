@@ -15,6 +15,7 @@ def energy_demand(
     energy_efficiency,
     heat_pumps,
     solar_thermal,
+    trans_grid,
     cdr_demand,
 ):
 
@@ -167,6 +168,17 @@ def energy_demand(
         energy_demand * solar_thermal.values
     )
 
+    # Apply percentage reduction attributed to transactive grids
+
+    trans_grid = (
+        pd.read_csv(trans_grid)
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+        .fillna(0)
+    )
+    trans_grid = trans_grid.apply(lambda x: x + 1, axis=1)
+    trans_grid = trans_grid.reindex(energy_demand.index)
+    energy_demand_post_trans_grid = energy_demand - (energy_demand * trans_grid.values)
+
     # Apply adoption_curves to energy demand
 
     """
@@ -230,6 +242,7 @@ def energy_demand(
         - energy_demand_post_efficiency
         - energy_demand_post_heat_pumps
         - energy_demand_post_solarthermal
+        - energy_demand_post_trans_grid
     )
 
     energy_demand.loc[slice(None), "Industry", "Industry"] = (

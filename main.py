@@ -58,6 +58,7 @@ energy_demand_baseline = energy_demand(
     "podi/data/energy_efficiency.csv",
     "podi/data/heat_pumps.csv",
     "podi/data/solar_thermal.csv",
+    "podi/data/trans_grid.csv",
     "podi/data/cdr_energy.csv",
 )
 
@@ -68,6 +69,7 @@ energy_demand_pathway = energy_demand(
     "podi/data/energy_efficiency.csv",
     "podi/data/heat_pumps.csv",
     "podi/data/solar_thermal.csv",
+    "podi/data/trans_grid.csv",
     "podi/data/cdr_energy.csv",
 )
 
@@ -260,7 +262,7 @@ for i in range(0, len(iea_region_list)):
                 cdr_pathway,
             )
         ),
-        10,
+        19,
     )
 
 # endregion

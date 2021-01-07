@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
+# region
+
 import pandas as pd
 from podi.energy_supply import data_start_year, long_proj_end_year
 from podi.adoption_curve import adoption_curve
-from podi.energy_supply import near_proj_start_year
+
+# endregion
 
 
 def results_analysis(
@@ -47,6 +50,7 @@ def results_analysis(
     grid_decarb.columns = grid_decarb.columns.astype(int)
     grid_decarb.rename(index={0: "Grid"}, inplace=True)
 
+    """
     if region == "World ":
         grid_decarb.loc[:, 2010:2018] = [
             0.25,
@@ -59,6 +63,7 @@ def results_analysis(
             0.373,
             0.385,
         ]
+    """
 
     # endregion
 
@@ -171,7 +176,13 @@ def results_analysis(
     renewable_heat = (
         heat_consump_pathway.loc[
             region,
-            ["Bioenergy" "Geothermal", "Nuclear", "Solar thermal", "Waste"],
+            [
+                "Bioenergy" "Geothermal",
+                "Nuclear",
+                "Solar thermal",
+                "Waste",
+                "Other Sources",
+            ],
             :,
         ]
         .sum()
@@ -408,20 +419,6 @@ def results_analysis(
 
     # endregion
 
-    """
-
-    adoption_curves = adoption_curves.apply(
-        adoption_curve, axis=1, args=["World ", scenario], sector="All"
-    )
-
-    perc = []
-    for i in range(0, len(adoption_curves.index)):
-        perc = pd.DataFrame(perc).append(adoption_curves[adoption_curves.index[i]][0].T)
-
-    adoption_curves = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(
-        adoption_curves.index
-    )
-    """
     adoption_curves["Region"] = region
     adoption_curves.index.set_names("Sector", inplace=True)
     adoption_curves.reset_index(inplace=True)

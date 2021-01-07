@@ -958,7 +958,6 @@ def charts(
         plt.xticks(np.arange(start_yr, energy_demand_pathway.columns.max() + 1, 10))
         # plt.yticks(np.arange(0, 120000, 20000))
         plt.title("Energy Demand, " + iea_region_list[i])
-        plt.show()
 
         if save_figs is True:
             plt.savefig(
@@ -969,6 +968,7 @@ def charts(
                 bbox_inches="tight",
                 pad_inches=0.1,
             )
+        plt.show()
         plt.clf()
 
     # endregion

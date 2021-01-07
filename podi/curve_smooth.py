@@ -19,7 +19,7 @@ def curve_smooth(data, sr):
     )
 
     curve = data.apply(
-        lambda x: interp1d(data.columns.values.astype(int), x, kind="cubic"),
+        lambda x: interp1d(data.columns.values.astype(int), x, kind="quadratic"),
         axis=1,
     )
     curve = curve.apply(lambda x: x(xnew))
