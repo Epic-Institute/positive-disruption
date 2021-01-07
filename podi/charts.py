@@ -24,6 +24,10 @@ import plotly.io as pio
 
 save_figs = True
 
+unit_name = ["TWh", "EJ", "Mtoe"]
+unit_val = [1, 0.00359, 0.086]
+unit = [unit_name[1], unit_val[1]]
+
 # endregion
 
 
@@ -899,7 +903,7 @@ def charts(
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_i.loc[iea_region_list[i],"Transport", slice(None)]
+                    energy_demand_i.loc[iea_region_list[i], "Transport", slice(None)]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
@@ -956,7 +960,7 @@ def charts(
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
-            fig,
+            fig * unit[1],
             labels=fig.index,
             colors=(
                 "darkgreen",
@@ -968,7 +972,7 @@ def charts(
             ),
         )
         plt.legend(loc=2, fontsize="small")
-        plt.ylabel("TFC (TWh)")
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([start_yr, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(start_yr, energy_demand_pathway.columns.max() + 1, 10))
@@ -1117,8 +1121,10 @@ def charts(
         fig = fig.groupby(group_keys).sum()
         fig = fig.reindex(tech_list)
         plt.figure(i)
-        plt.stackplot(fig.columns.astype(int), fig, labels=fig.index, colors=color2)
-        plt.ylabel("TFC (TWh)")
+        plt.stackplot(
+            fig.columns.astype(int), fig * unit[1], labels=fig.index, colors=color2
+        )
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([2020, 2100])
         plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
@@ -1170,8 +1176,10 @@ def charts(
         fig = fig.groupby(group_keys).sum()
         fig = fig.reindex(tech_list)
         plt.figure(i)
-        plt.stackplot(fig.columns.astype(int), fig, labels=fig.index, colors=color2)
-        plt.ylabel("TFC (TWh)")
+        plt.stackplot(
+            fig.columns.astype(int), fig * unit[1], labels=fig.index, colors=color2
+        )
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([2020, 2100])
         plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
@@ -1234,8 +1242,10 @@ def charts(
         fig = fig.groupby(group_keys).sum()
         fig = fig.reindex(tech_list)
         plt.figure(i)
-        plt.stackplot(fig.columns.astype(int), fig, labels=fig.index, colors=color)
-        plt.ylabel("TFC (TWh)")
+        plt.stackplot(
+            fig.columns.astype(int), fig * unit[1], labels=fig.index, colors=color
+        )
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([2020, long_proj_end_year])
         plt.title("Electricity Generation by Source, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
@@ -1326,7 +1336,9 @@ def charts(
             iea_region_list[i], slice(None), slice(None), "Pathway"
         ]
         fig = (
-            energy_demand_pathway_i.loc[(slice(None), "Electricity"), :]
+            energy_demand_pathway_i.loc[
+                (iea_region_list[i], slice(None), "Electricity"), :
+            ]
             .groupby(["Sector"])
             .sum()
             .drop("TFC")
@@ -1345,9 +1357,9 @@ def charts(
             fig.loc[[("Transport", "Electricity")]] * 1.2
         )
         plt.figure(i)
-        plt.stackplot(fig.T.index, fig, labels=fig.index, colors=color)
+        plt.stackplot(fig.T.index, fig * unit[1], labels=fig.index, colors=color)
         plt.legend(loc=2, fontsize="small")
-        plt.ylabel("TFC (TWh)")
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([2020, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
@@ -1404,7 +1416,7 @@ def charts(
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
-            fig,
+            fig * unit[1],
             labels=fig.index.get_level_values(2),
             colors=(
                 "cornflowerblue",
@@ -1412,7 +1424,7 @@ def charts(
             ),
         )
         plt.legend(loc=2, fontsize="small")
-        plt.ylabel("TFC (TWh)")
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([2020, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
@@ -1467,12 +1479,12 @@ def charts(
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
-            fig,
+            fig * unit[1],
             labels=fig.index.get_level_values(2),
             colors=(color),
         )
         plt.legend(loc=2, fontsize="small")
-        plt.ylabel("TFC (TWh)")
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([2020, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
@@ -1526,12 +1538,12 @@ def charts(
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
-            fig,
+            fig * unit[1],
             labels=fig.index.get_level_values(2),
             colors=(color),
         )
         plt.legend(loc=2, fontsize="small")
-        plt.ylabel("TFC (TWh)")
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([2020, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
@@ -1566,12 +1578,12 @@ def charts(
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
-            fig,
+            fig * unit[1],
             labels=fig.index.get_level_values(2),
             colors=(color),
         )
         plt.legend(loc=2, fontsize="small")
-        plt.ylabel("TFC (TWh)")
+        plt.ylabel("TFC, " + unit[0])
         plt.xlim([2020, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(2020, 2110, 10))
