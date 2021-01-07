@@ -10,6 +10,7 @@ from scipy.interpolate import interp1d
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.data.iea_weo_etl import iea_region_list
+from podi.curve_smooth import curve_smooth
 from podi.energy_supply import (
     data_end_year,
     data_start_year,
@@ -59,33 +60,24 @@ def charts(
     }
 
     for i in range(0, len(iea_region_list)):
-        adoption_curves2 = adoption_curves.loc[iea_region_list[i]]
-        xnew = np.linspace(
-            adoption_curves2.columns.min(), adoption_curves2.columns.max(), 30
-        )
-        fig = adoption_curves2.apply(
-            lambda x: interp1d(adoption_curves2.columns.to_list(), x, kind="cubic"),
-            axis=1,
-        )
+        fig = adoption_curves.loc[iea_region_list[i]]
         plt.figure(i)
-        fig.apply(lambda x: plt.plot(xnew, x(xnew) * 100, linestyle="--"))
-        fig.apply(
-            lambda x: plt.plot(
-                xnew[0:4],
-                x(xnew)[0:4] * 100,
-                linestyle="-",
-                color=(0, 0, 0),
-            )
+        plt.plot(fig.T * 100, linestyle="--")
+        plt.plot(
+            fig.loc[:, data_start_year:data_end_year].T * 100,
+            linestyle="-",
+            color=(0, 0, 0),
         )
         plt.ylabel("% Adoption")
-        plt.xlim([adoption_curves2.columns.min(), adoption_curves2.columns.max()])
+        plt.xlim([fig.columns.min(), fig.columns.max()])
         plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
         plt.legend(
-            adoption_curves2.index,
+            fig.index,
             loc=2,
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
         )
+
         if save_figs is True:
             plt.savefig(
                 fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(" ", ""),
@@ -112,47 +104,37 @@ def charts(
         "GtCO2 removed",
     ]
 
-    xnew = np.linspace(
-        adoption_curves2.columns.min(), adoption_curves2.columns.max(), 91
-    )
-
     for i in range(0, len(iea_region_list)):
-        for j in range(0, len(adoption_curves2.index)):
-            fig = interp1d(
-                adoption_curves2.columns.to_list(),
-                adoption_curves2.iloc[j],
-                kind="cubic",
-            )
-            fig2, ax = plt.subplots()
-            y = fig(xnew) * 100
-            ax.plot(xnew, y, linestyle="--", color=(0.560, 0.792, 0.740))
-            ax.plot(
-                xnew[0 : (data_end_year - data_start_year) + 1],
-                y[0 : (data_end_year - data_start_year) + 1],
+        for j in range(0, len(adoption_curves.loc[iea_region_list[i]].index)):
+            fig = adoption_curves.iloc[j]
+            plt.figure(j)
+            plt.plot(fig * 100, linestyle="--", color=(0.560, 0.792, 0.740))
+            plt.plot(
+                fig.loc[data_start_year:data_end_year] * 100,
                 linestyle="-",
                 color=(0, 0, 0),
             )
-            ax.set_ylabel("% Adoption")
-            plt.xlim([adoption_curves2.columns.min(), adoption_curves2.columns.max()])
-            plt.ylim(0, 105)
-            plt.grid(which="major", linestyle=":", axis="y")
+            plt.ylabel("% Adoption")
+            plt.xlim([fig.index.min(), fig.index.max()])
             plt.title(
                 "Percent of Total PD Adoption, "
-                + adoption_curves2.index[j]
+                + fig.name[1]
                 + ", "
                 + iea_region_list[i]
             )
-            plt.savefig(
-                fname=(
-                    "podi/data/figs/scurves_ind-"
-                    + adoption_curves2.index[j]
-                    + "-"
-                    + iea_region_list[i]
-                ).replace(" ", ""),
-                format="png",
-                bbox_inches="tight",
-                pad_inches=0.1,
-            )
+
+            if save_figs is True:
+                plt.savefig(
+                    fname=(
+                        "podi/data/figs/scurves_ind-"
+                        + fig.name[1]
+                        + "-"
+                        + iea_region_list[i]
+                    ).replace(" ", ""),
+                    format="png",
+                    bbox_inches="tight",
+                    pad_inches=0.1,
+                )
             plt.show()
             plt.clf()
 
@@ -978,15 +960,17 @@ def charts(
         plt.xticks(np.arange(start_yr, energy_demand_pathway.columns.max() + 1, 10))
         # plt.yticks(np.arange(0, 120000, 20000))
         plt.title("Energy Demand, " + iea_region_list[i])
-        plt.savefig(
-            fname=("podi/data/figs/energydemand_pathway-" + iea_region_list[i]).replace(
-                " ", ""
-            ),
-            format="png",
-            bbox_inches="tight",
-            pad_inches=0.1,
-        )
         plt.show()
+
+        if save_figs is True:
+            plt.savefig(
+                fname=(
+                    "podi/data/figs/energydemand_pathway-" + iea_region_list[i]
+                ).replace(" ", ""),
+                format="png",
+                bbox_inches="tight",
+                pad_inches=0.1,
+            )
         plt.clf()
 
     # endregion

@@ -5,6 +5,7 @@
 import pandas as pd
 from scipy.interpolate import interp1d
 import numpy as np
+from podi.curve_smooth import curve_smooth
 
 # endregion
 
@@ -300,56 +301,8 @@ def energy_demand(
     energy_demand.columns = energy_demand.columns.astype(int)
     energy_demand.clip(lower=0, inplace=True)
 
-    # endregion
-
-    ###################
-    #  SMOOTH CURVES  #
-    ###################
-
-    # region
-    sr = 11
-
-    xnew = np.linspace(
-        energy_demand.columns.values.astype(int).min(),
-        energy_demand.columns.values.astype(int).max(),
-        sr,
-    )
-    energy_demand2 = energy_demand.apply(
-        lambda x: interp1d(energy_demand.columns.values.astype(int), x, kind="cubic"),
-        axis=1,
-    )
-    energy_demand2 = energy_demand2.apply(lambda x: x(xnew))
-
-    energy_demand3 = []
-
-    for i in range(0, len(energy_demand2.index)):
-        energy_demand3 = pd.DataFrame(energy_demand3).append(
-            (pd.DataFrame(energy_demand2[energy_demand2.index[i]]).T)
-        )
-
-    energy_demand3 = pd.DataFrame(energy_demand3.set_index(energy_demand2.index))
-
-    energy_demand3.columns = np.linspace(
-        energy_demand.columns.values.astype(int).min(),
-        energy_demand.columns.values.astype(int).max(),
-        sr,
-    ).astype(int)
-
-    xnew = np.linspace(
-        energy_demand.columns.values.astype(int).min(),
-        energy_demand.columns.values.astype(int).max(),
-        energy_demand.columns.values.astype(int).max()
-        - energy_demand.columns.values.astype(int).min()
-        + 1,
-    ).astype(int)
-
-    energy_demand3 = (
-        pd.DataFrame(columns=xnew, index=energy_demand3.index)
-        .combine_first(energy_demand3)
-        .astype(float)
-        .interpolate(method="quadratic", axis=1)
-    )
+    energy_demand = curve_smooth(energy_demand)
 
     # endregion
 
-    return energy_demand3
+    return energy_demand
