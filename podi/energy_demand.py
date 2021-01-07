@@ -3,8 +3,6 @@
 # region
 
 import pandas as pd
-from scipy.interpolate import interp1d
-import numpy as np
 from podi.curve_smooth import curve_smooth
 
 # endregion
