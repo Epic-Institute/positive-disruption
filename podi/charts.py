@@ -6,11 +6,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
-from scipy.interpolate import interp1d
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.data.iea_weo_etl import iea_region_list
-from podi.curve_smooth import curve_smooth
 from podi.energy_supply import (
     data_end_year,
     data_start_year,
@@ -19,7 +17,6 @@ from podi.energy_supply import (
 )
 from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
-from scipy.signal import savgol_filter
 import plotly.express as px
 import plotly.io as pio
 

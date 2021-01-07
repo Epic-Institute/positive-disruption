@@ -8,6 +8,7 @@ from podi.energy_supply import energy_supply
 from podi.afolu import afolu
 from podi.results_analysis import results_analysis
 from podi.charts import charts
+from podi.curve_smooth import curve_smooth
 import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
@@ -258,7 +259,8 @@ for i in range(0, len(iea_region_list)):
                 afolu_per_adoption_pathway,
                 cdr_pathway,
             )
-        )
+        ),
+        10,
     )
 
 # endregion

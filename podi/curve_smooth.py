@@ -10,9 +10,7 @@ import numpy as np
 # endregion
 
 
-def curve_smooth(data):
-
-    sr = 11
+def curve_smooth(data, sr):
 
     xnew = np.linspace(
         data.columns.values.astype(int).min(),

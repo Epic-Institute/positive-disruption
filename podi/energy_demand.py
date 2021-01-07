@@ -299,7 +299,7 @@ def energy_demand(
     energy_demand.columns = energy_demand.columns.astype(int)
     energy_demand.clip(lower=0, inplace=True)
 
-    energy_demand = curve_smooth(energy_demand)
+    energy_demand = curve_smooth(energy_demand, 11)
 
     # endregion
 
