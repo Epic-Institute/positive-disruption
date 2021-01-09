@@ -143,7 +143,9 @@ def results_analysis(
                 .sum()
                 .sum()
             )
-        ).cumsum()
+        )
+        .cumsum()
+        .clip(lower=0)
     ) / 2
 
     transport_decarb = pd.DataFrame(transport_decarb).T
