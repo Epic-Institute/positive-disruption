@@ -74,6 +74,7 @@ def charts(
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
         )
+        plt.show()
 
         if save_figs is True:
             plt.savefig(
@@ -82,7 +83,6 @@ def charts(
                 bbox_inches="tight",
                 pad_inches=0.1,
             )
-        plt.show()
         plt.clf()
 
     # endregion
@@ -119,6 +119,7 @@ def charts(
                 + ", "
                 + iea_region_list[i]
             )
+            plt.show()
 
             if save_figs is True:
                 plt.savefig(
@@ -132,7 +133,6 @@ def charts(
                     bbox_inches="tight",
                     pad_inches=0.1,
                 )
-            plt.show()
             plt.clf()
 
             # Absolute values
