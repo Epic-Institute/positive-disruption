@@ -316,4 +316,4 @@ def energy_demand(
 
     # endregion
 
-    return energy_demand
+    return energy_demand.clip(lower=0)

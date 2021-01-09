@@ -58,6 +58,7 @@ def charts(
 
     for i in range(0, len(iea_region_list)):
         fig = adoption_curves.loc[iea_region_list[i]]
+        plt.show()
         plt.figure(i)
         plt.plot(fig.T * 100, linestyle="--")
         plt.plot(
@@ -74,7 +75,6 @@ def charts(
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
         )
-        plt.show()
 
         if save_figs is True:
             plt.savefig(
@@ -104,6 +104,7 @@ def charts(
     for i in range(0, len(iea_region_list)):
         for j in range(0, len(adoption_curves.loc[iea_region_list[i]].index)):
             fig = adoption_curves.iloc[j]
+            plt.show()
             plt.figure(j)
             plt.plot(fig * 100, linestyle="--", color=(0.560, 0.792, 0.740))
             plt.plot(
@@ -119,7 +120,6 @@ def charts(
                 + ", "
                 + iea_region_list[i]
             )
-            plt.show()
 
             if save_figs is True:
                 plt.savefig(
@@ -247,10 +247,9 @@ def charts(
     ]
 
     for i in range(0, len(iea_region_list)):
-        em_mit_electricity = (
-            em_mitigated.loc[[" OECD ", "NonOECD "], "Electricity", slice(None)].sum()
-            * 0.95
-        )
+        em_mit_electricity = em_mitigated.loc[
+            [iea_region_list[i]], "Electricity", slice(None)
+        ].sum()
 
         em_mit_transport = (
             em_mitigated.loc[[" OECD ", "NonOECD "], "Transport", slice(None)].sum()
@@ -396,6 +395,8 @@ def charts(
         plt.xticks(np.arange(2020, 2110, 10))
         plt.yticks(np.arange(-25, 105, 10))
         plt.title("Emissions Mitigated, " + iea_region_list[i])
+        plt.show()
+
         if save_figs is True:
             plt.savefig(
                 fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
@@ -405,7 +406,6 @@ def charts(
                 bbox_inches="tight",
                 pad_inches=0.1,
             )
-        plt.show()
         plt.clf()
 
     # endregion
@@ -937,6 +937,7 @@ def charts(
             )
         )
 
+        plt.show()
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
@@ -968,7 +969,7 @@ def charts(
                 bbox_inches="tight",
                 pad_inches=0.1,
             )
-        plt.show()
+
         plt.clf()
 
     # endregion
