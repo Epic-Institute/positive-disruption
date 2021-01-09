@@ -25,6 +25,7 @@ from podi.cdr.cdr_main import cdr_mix
 from podi.climate import climate
 import time
 from datetime import timedelta
+import numpy as np
 
 pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()
@@ -260,10 +261,10 @@ for i in range(0, len(iea_region_list)):
                 transport_consump_pathway,
                 afolu_per_adoption_pathway,
                 cdr_pathway,
-            )
+            ).replace(np.nan, 1)
         ),
-        19,
-    )
+        11,
+    ).clip(upper=1)
 
 # endregion
 

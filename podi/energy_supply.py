@@ -428,6 +428,11 @@ def energy_supply(scenario, energy_demand):
         hist_heat_consump.loc["Fossil fuels"] = hist_heat_consump.loc[
             ["Coal", "Oil", "Natural gas"]
         ].sum()
+
+        proj_heat_consump.loc["Fossil fuels"] = proj_heat_consump.loc[
+            ["Coal", "Oil", "Natural gas"]
+        ].sum()
+
         return hist_heat_consump.join(proj_heat_consump)
 
     # join timeseries of historical and projected percent total heat consumption met by a given technology
@@ -435,6 +440,11 @@ def energy_supply(scenario, energy_demand):
         hist_per_heat_consump.loc["Fossil fuels"] = hist_per_heat_consump.loc[
             ["Coal", "Oil", "Natural gas"]
         ].sum()
+
+        proj_per_heat_consump.loc["Fossil fuels"] = proj_per_heat_consump.loc[
+            ["Coal", "Oil", "Natural gas"]
+        ].sum()
+
         return hist_per_heat_consump.join(proj_per_heat_consump)
 
     # combine above functions to get heat consumption met by a given technology

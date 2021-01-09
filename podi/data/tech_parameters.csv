@@ -1737,7 +1737,6 @@ World ,Wind,Pathway,Electricity,Saturation Point,38.5
  OECD ,Other sources,Pathway,Heat,Floor,0
  OECD ,Other sources,Baseline,Heat,Floor,0
  OECD ,Solar thermal,Baseline,Heat,Floor,0
- OECD ,Solar thermal,Baseline,Heat,Floor,0
  OECD ,Solar thermal,Pathway,Heat,Floor,0
  OECD ,Waste,Pathway,Heat,Floor,0
  OECD ,Waste,Baseline,Heat,Floor,0
@@ -1876,7 +1875,7 @@ NonOECD ,Oil,Pathway,Heat,Floor,0
 NonOECD ,Other sources,Pathway,Heat,Floor,0
 NonOECD ,Other sources,Baseline,Heat,Floor,0
 NonOECD ,Solar thermal,Baseline,Heat,Floor,0
-NonOECD ,Solar thermal,Pathway,Heat,Floor,2
+NonOECD ,Solar thermal,Pathway,Heat,Floor,0
 NonOECD ,Waste,Pathway,Heat,Floor,0
 NonOECD ,Waste,Baseline,Heat,Floor,0
 NonOECD ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -2014,8 +2013,7 @@ World ,Oil,Pathway,Heat,Floor,0
 World ,Oil,Baseline,Heat,Floor,0
 World ,Other sources,Pathway,Heat,Floor,0
 World ,Other sources,Baseline,Heat,Floor,0
-World ,Solar thermal,Pathway,Heat,Floor,2
-World ,Solar thermal,Baseline,Heat,Floor,0
+World ,Solar thermal,Pathway,Heat,Floor,0
 World ,Solar thermal,Baseline,Heat,Floor,0
 World ,Waste,Pathway,Heat,Floor,0
 World ,Waste,Baseline,Heat,Floor,0
@@ -2929,7 +2927,6 @@ NAM ,Oil,Pathway,Heat,Floor,0
 NAM ,Other sources,Pathway,Heat,Floor,0
 NAM ,Other sources,Baseline,Heat,Floor,0
 NAM ,Solar thermal,Baseline,Heat,Floor,0
-NAM ,Solar thermal,Baseline,Heat,Floor,0
 NAM ,Solar thermal,Pathway,Heat,Floor,0
 NAM ,Waste,Pathway,Heat,Floor,0
 NAM ,Waste,Baseline,Heat,Floor,0
@@ -3701,7 +3698,6 @@ US ,Oil,Baseline,Heat,Floor,0
 US ,Oil,Pathway,Heat,Floor,0
 US ,Other sources,Pathway,Heat,Floor,0
 US ,Other sources,Baseline,Heat,Floor,0
-US ,Solar thermal,Baseline,Heat,Floor,0
 US ,Solar thermal,Baseline,Heat,Floor,0
 US ,Solar thermal,Pathway,Heat,Floor,0
 US ,Waste,Pathway,Heat,Floor,0
@@ -4475,7 +4471,6 @@ EUR ,Oil,Pathway,Heat,Floor,0
 EUR ,Other sources,Pathway,Heat,Floor,0
 EUR ,Other sources,Baseline,Heat,Floor,0
 EUR ,Solar thermal,Baseline,Heat,Floor,0
-EUR ,Solar thermal,Baseline,Heat,Floor,0
 EUR ,Solar thermal,Pathway,Heat,Floor,0
 EUR ,Waste,Pathway,Heat,Floor,0
 EUR ,Waste,Baseline,Heat,Floor,0
@@ -5247,7 +5242,6 @@ EU ,Oil,Baseline,Heat,Floor,0
 EU ,Oil,Pathway,Heat,Floor,0
 EU ,Other sources,Pathway,Heat,Floor,0
 EU ,Other sources,Baseline,Heat,Floor,0
-EU ,Solar thermal,Baseline,Heat,Floor,0
 EU ,Solar thermal,Baseline,Heat,Floor,0
 EU ,Solar thermal,Pathway,Heat,Floor,0
 EU ,Waste,Pathway,Heat,Floor,0
@@ -6021,7 +6015,6 @@ JPN ,Oil,Pathway,Heat,Floor,0
 JPN ,Other sources,Pathway,Heat,Floor,0
 JPN ,Other sources,Baseline,Heat,Floor,0
 JPN ,Solar thermal,Baseline,Heat,Floor,0
-JPN ,Solar thermal,Baseline,Heat,Floor,0
 JPN ,Solar thermal,Pathway,Heat,Floor,0
 JPN ,Waste,Pathway,Heat,Floor,0
 JPN ,Waste,Baseline,Heat,Floor,0
@@ -6793,7 +6786,6 @@ SAFR ,Oil,Baseline,Heat,Floor,0
 SAFR ,Oil,Pathway,Heat,Floor,0
 SAFR ,Other sources,Pathway,Heat,Floor,0
 SAFR ,Other sources,Baseline,Heat,Floor,0
-SAFR ,Solar thermal,Baseline,Heat,Floor,0
 SAFR ,Solar thermal,Baseline,Heat,Floor,0
 SAFR ,Solar thermal,Pathway,Heat,Floor,0
 SAFR ,Waste,Pathway,Heat,Floor,0
@@ -7567,7 +7559,6 @@ AdvancedECO ,Oil,Pathway,Heat,Floor,0
 AdvancedECO ,Other sources,Pathway,Heat,Floor,0
 AdvancedECO ,Other sources,Baseline,Heat,Floor,0
 AdvancedECO ,Solar thermal,Baseline,Heat,Floor,0
-AdvancedECO ,Solar thermal,Baseline,Heat,Floor,0
 AdvancedECO ,Solar thermal,Pathway,Heat,Floor,0
 AdvancedECO ,Waste,Pathway,Heat,Floor,0
 AdvancedECO ,Waste,Baseline,Heat,Floor,0
@@ -8340,7 +8331,7 @@ CSAM ,Oil,Pathway,Heat,Floor,0
 CSAM ,Other sources,Pathway,Heat,Floor,0
 CSAM ,Other sources,Baseline,Heat,Floor,0
 CSAM ,Solar thermal,Baseline,Heat,Floor,0
-CSAM ,Solar thermal,Pathway,Heat,Floor,2
+CSAM ,Solar thermal,Pathway,Heat,Floor,0
 CSAM ,Waste,Pathway,Heat,Floor,0
 CSAM ,Waste,Baseline,Heat,Floor,0
 CSAM ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -9112,7 +9103,7 @@ BRAZIL ,Oil,Pathway,Heat,Floor,0
 BRAZIL ,Other sources,Pathway,Heat,Floor,0
 BRAZIL ,Other sources,Baseline,Heat,Floor,0
 BRAZIL ,Solar thermal,Baseline,Heat,Floor,0
-BRAZIL ,Solar thermal,Pathway,Heat,Floor,2
+BRAZIL ,Solar thermal,Pathway,Heat,Floor,0
 BRAZIL ,Waste,Pathway,Heat,Floor,0
 BRAZIL ,Waste,Baseline,Heat,Floor,0
 BRAZIL ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -9884,7 +9875,7 @@ AFRICA ,Oil,Pathway,Heat,Floor,0
 AFRICA ,Other sources,Pathway,Heat,Floor,0
 AFRICA ,Other sources,Baseline,Heat,Floor,0
 AFRICA ,Solar thermal,Baseline,Heat,Floor,0
-AFRICA ,Solar thermal,Pathway,Heat,Floor,2
+AFRICA ,Solar thermal,Pathway,Heat,Floor,0
 AFRICA ,Waste,Pathway,Heat,Floor,0
 AFRICA ,Waste,Baseline,Heat,Floor,0
 AFRICA ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -10656,7 +10647,7 @@ ME ,Oil,Pathway,Heat,Floor,0
 ME ,Other sources,Pathway,Heat,Floor,0
 ME ,Other sources,Baseline,Heat,Floor,0
 ME ,Solar thermal,Baseline,Heat,Floor,0
-ME ,Solar thermal,Pathway,Heat,Floor,2
+ME ,Solar thermal,Pathway,Heat,Floor,0
 ME ,Waste,Pathway,Heat,Floor,0
 ME ,Waste,Baseline,Heat,Floor,0
 ME ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -11428,7 +11419,7 @@ EURASIA ,Oil,Pathway,Heat,Floor,0
 EURASIA ,Other sources,Pathway,Heat,Floor,0
 EURASIA ,Other sources,Baseline,Heat,Floor,0
 EURASIA ,Solar thermal,Baseline,Heat,Floor,0
-EURASIA ,Solar thermal,Pathway,Heat,Floor,2
+EURASIA ,Solar thermal,Pathway,Heat,Floor,0
 EURASIA ,Waste,Pathway,Heat,Floor,0
 EURASIA ,Waste,Baseline,Heat,Floor,0
 EURASIA ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -12200,7 +12191,7 @@ RUS ,Oil,Pathway,Heat,Floor,0
 RUS ,Other sources,Pathway,Heat,Floor,0
 RUS ,Other sources,Baseline,Heat,Floor,0
 RUS ,Solar thermal,Baseline,Heat,Floor,0
-RUS ,Solar thermal,Pathway,Heat,Floor,2
+RUS ,Solar thermal,Pathway,Heat,Floor,0
 RUS ,Waste,Pathway,Heat,Floor,0
 RUS ,Waste,Baseline,Heat,Floor,0
 RUS ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -12972,7 +12963,7 @@ ASIAPAC ,Oil,Pathway,Heat,Floor,0
 ASIAPAC ,Other sources,Pathway,Heat,Floor,0
 ASIAPAC ,Other sources,Baseline,Heat,Floor,0
 ASIAPAC ,Solar thermal,Baseline,Heat,Floor,0
-ASIAPAC ,Solar thermal,Pathway,Heat,Floor,2
+ASIAPAC ,Solar thermal,Pathway,Heat,Floor,0
 ASIAPAC ,Waste,Pathway,Heat,Floor,0
 ASIAPAC ,Waste,Baseline,Heat,Floor,0
 ASIAPAC ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -13744,7 +13735,7 @@ CHINA ,Oil,Pathway,Heat,Floor,0
 CHINA ,Other sources,Pathway,Heat,Floor,0
 CHINA ,Other sources,Baseline,Heat,Floor,0
 CHINA ,Solar thermal,Baseline,Heat,Floor,0
-CHINA ,Solar thermal,Pathway,Heat,Floor,2
+CHINA ,Solar thermal,Pathway,Heat,Floor,0
 CHINA ,Waste,Pathway,Heat,Floor,0
 CHINA ,Waste,Baseline,Heat,Floor,0
 CHINA ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -14516,7 +14507,7 @@ INDIA ,Oil,Pathway,Heat,Floor,0
 INDIA ,Other sources,Pathway,Heat,Floor,0
 INDIA ,Other sources,Baseline,Heat,Floor,0
 INDIA ,Solar thermal,Baseline,Heat,Floor,0
-INDIA ,Solar thermal,Pathway,Heat,Floor,2
+INDIA ,Solar thermal,Pathway,Heat,Floor,0
 INDIA ,Waste,Pathway,Heat,Floor,0
 INDIA ,Waste,Baseline,Heat,Floor,0
 INDIA ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -15288,7 +15279,7 @@ ASEAN ,Oil,Pathway,Heat,Floor,0
 ASEAN ,Other sources,Pathway,Heat,Floor,0
 ASEAN ,Other sources,Baseline,Heat,Floor,0
 ASEAN ,Solar thermal,Baseline,Heat,Floor,0
-ASEAN ,Solar thermal,Pathway,Heat,Floor,2
+ASEAN ,Solar thermal,Pathway,Heat,Floor,0
 ASEAN ,Waste,Pathway,Heat,Floor,0
 ASEAN ,Waste,Baseline,Heat,Floor,0
 ASEAN ,Bioenergy,Pathway,Heat,Max annual growth,100
@@ -16060,7 +16051,7 @@ DevelopingECO ,Oil,Pathway,Heat,Floor,0
 DevelopingECO ,Other sources,Pathway,Heat,Floor,0
 DevelopingECO ,Other sources,Baseline,Heat,Floor,0
 DevelopingECO ,Solar thermal,Baseline,Heat,Floor,0
-DevelopingECO ,Solar thermal,Pathway,Heat,Floor,2
+DevelopingECO ,Solar thermal,Pathway,Heat,Floor,0
 DevelopingECO ,Waste,Pathway,Heat,Floor,0
 DevelopingECO ,Waste,Baseline,Heat,Floor,0
 DevelopingECO ,Bioenergy,Pathway,Heat,Max annual growth,100
