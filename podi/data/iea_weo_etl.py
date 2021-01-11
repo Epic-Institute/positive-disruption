@@ -2,6 +2,7 @@
 
 import pandas as pd
 from numpy import NaN
+from podi.curve_smooth import curve_smooth
 
 iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
 
@@ -228,5 +229,7 @@ energy_demand_historical = pd.concat(
         energy_demand_historical[20],
     ]
 )
+
+# energy_demand_historical = curve_smooth(energy_demand_historical, 20)
 
 energy_demand_historical.to_csv("podi/data/energy_demand_historical.csv", index=False)
