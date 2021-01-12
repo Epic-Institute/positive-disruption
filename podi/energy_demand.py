@@ -61,8 +61,18 @@ def energy_demand(
 
     # Reallocate 'Other' energy demand from ag/non-energy use to industry
 
-    energy_demand.loc[slice(None), "Other", slice(None), slice(None)].rename(
-        index={"Other": "Industry"}, level=0
+    energy_demand = energy_demand.append(
+        pd.concat(
+            [energy_demand.loc[slice(None), "Other", slice(None), slice(None)]],
+            keys=["Industry"],
+            names=["Sector"],
+        ).reorder_levels(["IEA Region", "Sector", "Metric", "Scenario"])
+    )
+
+    energy_demand.drop(
+        labels="Other",
+        level=1,
+        inplace=True,
     )
 
     """
@@ -90,7 +100,7 @@ def energy_demand(
             energy_demand.loc[
                 slice(None),
                 "Industry",
-                ["Coal", "Oil", "Natural gas", "Bioenergy", "Other renewables"],
+                ["Coal", "Oil", "Natural gas", "Bioenergy", "Other renewables", 'Other'],
                 scenario,
             ].groupby("IEA Region")
         )
@@ -114,6 +124,7 @@ def energy_demand(
         .values
     )
 
+    """
     # Reallocate international bunkers from Transport - Oil
     energy_demand.loc["World ", "Transport", "Oil"] = (
         energy_demand.loc["World ", "Transport", "Oil"] * 0.9
@@ -129,6 +140,7 @@ def energy_demand(
     bunkers.reset_index(inplace=True)
     bunkers.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
     energy_demand = energy_demand.append(bunkers)
+    """
 
     # endregion
 

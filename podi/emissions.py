@@ -146,7 +146,7 @@ def emissions(
     transport_em = (
         transport_consump
         * em_factors[em_factors.index.isin(transport_consump.index.values)]
-    ).drop(index=["Biofuels", "Oil", "Other fuels"], level=2)
+    ).drop(index=["Bioenergy", "Oil", "Other fuels"], level=2)
 
     # endregion
 

@@ -2168,172 +2168,172 @@ World ,Biochar,Pathway,Industry,"Parameter b, min",40
 World ,Biochar,Baseline,Industry,"Parameter b, min",0
 World ,Biochar,Baseline,Industry,Saturation Point,5
 World ,Biochar,Pathway,Industry,Saturation Point,100
- OECD ,Biofuels,Pathway,Transport,Consumption:Generation,1
+ OECD ,Bioenergy,Pathway,Transport,Consumption:Generation,1
  OECD ,Oil,Pathway,Transport,Consumption:Generation,1
  OECD ,Other fuels,Pathway,Transport,Consumption:Generation,1
- OECD ,Biofuels,Baseline,Transport,Floor,0
- OECD ,Biofuels,Pathway,Transport,Floor,0
+ OECD ,Bioenergy,Baseline,Transport,Floor,0
+ OECD ,Bioenergy,Pathway,Transport,Floor,0
  OECD ,Fossil fuels,Pathway,Transport,Floor,0
  OECD ,Fossil fuels,Baseline,Transport,Floor,0
  OECD ,Oil,Baseline,Transport,Floor,0
  OECD ,Oil,Pathway,Transport,Floor,0
  OECD ,Other fuels,Pathway,Transport,Floor,0
  OECD ,Other fuels,Baseline,Transport,Floor,0
- OECD ,Biofuels,Baseline,Transport,Max annual growth,100
- OECD ,Biofuels,Pathway,Transport,Max annual growth,80
+ OECD ,Bioenergy,Baseline,Transport,Max annual growth,100
+ OECD ,Bioenergy,Pathway,Transport,Max annual growth,80
  OECD ,Fossil fuels,Baseline,Transport,Max annual growth,100
  OECD ,Fossil fuels,Pathway,Transport,Max annual growth,100
  OECD ,Oil,Baseline,Transport,Max annual growth,100
  OECD ,Oil,Pathway,Transport,Max annual growth,100
  OECD ,Other fuels,Pathway,Transport,Max annual growth,100
  OECD ,Other fuels,Baseline,Transport,Max annual growth,100
- OECD ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
- OECD ,Biofuels,Baseline,Transport,"Parameter a, max",5
+ OECD ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+ OECD ,Bioenergy,Baseline,Transport,"Parameter a, max",5
  OECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
  OECD ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
  OECD ,Oil,Baseline,Transport,"Parameter a, max",100
  OECD ,Oil,Pathway,Transport,"Parameter a, max",-0.08
  OECD ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
  OECD ,Other fuels,Baseline,Transport,"Parameter a, max",100
- OECD ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
- OECD ,Biofuels,Baseline,Transport,"Parameter a, min",0
+ OECD ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+ OECD ,Bioenergy,Baseline,Transport,"Parameter a, min",0
  OECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
  OECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
  OECD ,Oil,Baseline,Transport,"Parameter a, min",100
  OECD ,Oil,Pathway,Transport,"Parameter a, min",-0.2
  OECD ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
  OECD ,Other fuels,Baseline,Transport,"Parameter a, min",100
- OECD ,Biofuels,Pathway,Transport,"Parameter b, max",37
- OECD ,Biofuels,Baseline,Transport,"Parameter b, max",100
+ OECD ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+ OECD ,Bioenergy,Baseline,Transport,"Parameter b, max",100
  OECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
  OECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
  OECD ,Oil,Baseline,Transport,"Parameter b, max",-100
  OECD ,Oil,Pathway,Transport,"Parameter b, max",23
  OECD ,Other fuels,Pathway,Transport,"Parameter b, max",10
  OECD ,Other fuels,Baseline,Transport,"Parameter b, max",-100
- OECD ,Biofuels,Pathway,Transport,"Parameter b, min",37
- OECD ,Biofuels,Baseline,Transport,"Parameter b, min",0
+ OECD ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+ OECD ,Bioenergy,Baseline,Transport,"Parameter b, min",0
  OECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
  OECD ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
  OECD ,Oil,Baseline,Transport,"Parameter b, min",-100
  OECD ,Oil,Pathway,Transport,"Parameter b, min",23
  OECD ,Other fuels,Pathway,Transport,"Parameter b, min",10
  OECD ,Other fuels,Baseline,Transport,"Parameter b, min",-100
- OECD ,Biofuels,Baseline,Transport,Saturation Point,4.6
- OECD ,Biofuels,Pathway,Transport,Saturation Point,100
+ OECD ,Bioenergy,Baseline,Transport,Saturation Point,4.6
+ OECD ,Bioenergy,Pathway,Transport,Saturation Point,100
  OECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
  OECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
  OECD ,Oil,Baseline,Transport,Saturation Point,93.4
  OECD ,Oil,Pathway,Transport,Saturation Point,95
  OECD ,Other fuels,Pathway,Transport,Saturation Point,5
  OECD ,Other fuels,Baseline,Transport,Saturation Point,2.1
-NonOECD ,Biofuels,Pathway,Transport,Consumption:Generation,1
+NonOECD ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 NonOECD ,Oil,Pathway,Transport,Consumption:Generation,1
 NonOECD ,Other fuels,Pathway,Transport,Consumption:Generation,1
-NonOECD ,Biofuels,Baseline,Transport,Floor,0
-NonOECD ,Biofuels,Pathway,Transport,Floor,0
+NonOECD ,Bioenergy,Baseline,Transport,Floor,0
+NonOECD ,Bioenergy,Pathway,Transport,Floor,0
 NonOECD ,Fossil fuels,Pathway,Transport,Floor,0
 NonOECD ,Fossil fuels,Baseline,Transport,Floor,0
 NonOECD ,Oil,Baseline,Transport,Floor,0
 NonOECD ,Oil,Pathway,Transport,Floor,0
 NonOECD ,Other fuels,Pathway,Transport,Floor,0
 NonOECD ,Other fuels,Baseline,Transport,Floor,0
-NonOECD ,Biofuels,Baseline,Transport,Max annual growth,100
-NonOECD ,Biofuels,Pathway,Transport,Max annual growth,100
+NonOECD ,Bioenergy,Baseline,Transport,Max annual growth,100
+NonOECD ,Bioenergy,Pathway,Transport,Max annual growth,100
 NonOECD ,Fossil fuels,Baseline,Transport,Max annual growth,100
 NonOECD ,Fossil fuels,Pathway,Transport,Max annual growth,100
 NonOECD ,Oil,Baseline,Transport,Max annual growth,100
 NonOECD ,Oil,Pathway,Transport,Max annual growth,100
 NonOECD ,Other fuels,Pathway,Transport,Max annual growth,100
 NonOECD ,Other fuels,Baseline,Transport,Max annual growth,100
-NonOECD ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-NonOECD ,Biofuels,Baseline,Transport,"Parameter a, max",5
+NonOECD ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+NonOECD ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 NonOECD ,Oil,Baseline,Transport,"Parameter a, max",100
 NonOECD ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 NonOECD ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 NonOECD ,Other fuels,Baseline,Transport,"Parameter a, max",100
-NonOECD ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-NonOECD ,Biofuels,Baseline,Transport,"Parameter a, min",0
+NonOECD ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+NonOECD ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 NonOECD ,Oil,Baseline,Transport,"Parameter a, min",100
 NonOECD ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 NonOECD ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 NonOECD ,Other fuels,Baseline,Transport,"Parameter a, min",100
-NonOECD ,Biofuels,Pathway,Transport,"Parameter b, max",37
-NonOECD ,Biofuels,Baseline,Transport,"Parameter b, max",100
+NonOECD ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+NonOECD ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 NonOECD ,Oil,Baseline,Transport,"Parameter b, max",-100
 NonOECD ,Oil,Pathway,Transport,"Parameter b, max",37
 NonOECD ,Other fuels,Pathway,Transport,"Parameter b, max",10
 NonOECD ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-NonOECD ,Biofuels,Pathway,Transport,"Parameter b, min",37
-NonOECD ,Biofuels,Baseline,Transport,"Parameter b, min",0
+NonOECD ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+NonOECD ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 NonOECD ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 NonOECD ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 NonOECD ,Oil,Baseline,Transport,"Parameter b, min",-100
 NonOECD ,Oil,Pathway,Transport,"Parameter b, min",37
 NonOECD ,Other fuels,Pathway,Transport,"Parameter b, min",10
 NonOECD ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-NonOECD ,Biofuels,Baseline,Transport,Saturation Point,2.4
-NonOECD ,Biofuels,Pathway,Transport,Saturation Point,100
+NonOECD ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+NonOECD ,Bioenergy,Pathway,Transport,Saturation Point,100
 NonOECD ,Fossil fuels,Baseline,Transport,Saturation Point,0
 NonOECD ,Fossil fuels,Pathway,Transport,Saturation Point,80
 NonOECD ,Oil,Baseline,Transport,Saturation Point,90.9
 NonOECD ,Oil,Pathway,Transport,Saturation Point,95
 NonOECD ,Other fuels,Pathway,Transport,Saturation Point,5
 NonOECD ,Other fuels,Baseline,Transport,Saturation Point,6.86
-World ,Biofuels,Pathway,Transport,Consumption:Generation,1
+World ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 World ,Oil,Pathway,Transport,Consumption:Generation,1
 World ,Other fuels,Pathway,Transport,Consumption:Generation,1
-World ,Biofuels,Baseline,Transport,Floor,0
-World ,Biofuels,Pathway,Transport,Floor,0
+World ,Bioenergy,Baseline,Transport,Floor,0
+World ,Bioenergy,Pathway,Transport,Floor,0
 World ,Fossil fuels,Pathway,Transport,Floor,0
 World ,Oil,Pathway,Transport,Floor,0
 World ,Oil,Baseline,Transport,Floor,0
 World ,Other fuels,Pathway,Transport,Floor,0
 World ,Other fuels,Baseline,Transport,Floor,0
-World ,Biofuels,Baseline,Transport,Max annual growth,100
-World ,Biofuels,Pathway,Transport,Max annual growth,100
+World ,Bioenergy,Baseline,Transport,Max annual growth,100
+World ,Bioenergy,Pathway,Transport,Max annual growth,100
 World ,Fossil fuels,Pathway,Transport,Max annual growth,100
 World ,Oil,Baseline,Transport,Max annual growth,100
 World ,Oil,Pathway,Transport,Max annual growth,100
 World ,Other fuels,Baseline,Transport,Max annual growth,100
 World ,Other fuels,Pathway,Transport,Max annual growth,100
-World ,Biofuels,Baseline,Transport,"Parameter a, max",5
-World ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
+World ,Bioenergy,Baseline,Transport,"Parameter a, max",5
+World ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
 World ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 World ,Oil,Pathway,Transport,"Parameter a, max",-0.1074
 World ,Oil,Baseline,Transport,"Parameter a, max",100
 World ,Other fuels,Pathway,Transport,"Parameter a, max",-0.1
 World ,Other fuels,Baseline,Transport,"Parameter a, max",100
-World ,Biofuels,Baseline,Transport,"Parameter a, min",0
-World ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
+World ,Bioenergy,Baseline,Transport,"Parameter a, min",0
+World ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
 World ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 World ,Oil,Pathway,Transport,"Parameter a, min",-0.1074
 World ,Oil,Baseline,Transport,"Parameter a, min",100
 World ,Other fuels,Pathway,Transport,"Parameter a, min",-0.1
 World ,Other fuels,Baseline,Transport,"Parameter a, min",100
-World ,Biofuels,Baseline,Transport,"Parameter b, max",100
-World ,Biofuels,Pathway,Transport,"Parameter b, max",37
+World ,Bioenergy,Baseline,Transport,"Parameter b, max",100
+World ,Bioenergy,Pathway,Transport,"Parameter b, max",37
 World ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 World ,Oil,Pathway,Transport,"Parameter b, max",37
 World ,Oil,Baseline,Transport,"Parameter b, max",-100
 World ,Other fuels,Pathway,Transport,"Parameter b, max",37
 World ,Other fuels,Baseline,Transport,"Parameter b, max",-100
 World ,Other fuels,Baseline,Transport,"Parameter b, max",100
-World ,Biofuels,Baseline,Transport,"Parameter b, min",0
-World ,Biofuels,Pathway,Transport,"Parameter b, min",37
+World ,Bioenergy,Baseline,Transport,"Parameter b, min",0
+World ,Bioenergy,Pathway,Transport,"Parameter b, min",37
 World ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 World ,Oil,Pathway,Transport,"Parameter b, min",37
 World ,Oil,Baseline,Transport,"Parameter b, min",-100
 World ,Other fuels,Pathway,Transport,"Parameter b, min",37
 World ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-World ,Biofuels,Baseline,Transport,Saturation Point,5
-World ,Biofuels,Pathway,Transport,Saturation Point,100
+World ,Bioenergy,Baseline,Transport,Saturation Point,5
+World ,Bioenergy,Pathway,Transport,Saturation Point,100
 World ,Fossil fuels,Pathway,Transport,Saturation Point,91
 World ,Oil,Baseline,Transport,Saturation Point,100
 World ,Oil,Pathway,Transport,Saturation Point,100
@@ -3052,59 +3052,59 @@ NAM ,Biochar,Pathway,Industry,"Parameter b, min",40
 NAM ,Biochar,Baseline,Industry,"Parameter b, min",0
 NAM ,Biochar,Baseline,Industry,Saturation Point,5
 NAM ,Biochar,Pathway,Industry,Saturation Point,100
-NAM ,Biofuels,Pathway,Transport,Consumption:Generation,1
+NAM ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 NAM ,Oil,Pathway,Transport,Consumption:Generation,1
 NAM ,Other fuels,Pathway,Transport,Consumption:Generation,1
-NAM ,Biofuels,Baseline,Transport,Floor,0
-NAM ,Biofuels,Pathway,Transport,Floor,0
+NAM ,Bioenergy,Baseline,Transport,Floor,0
+NAM ,Bioenergy,Pathway,Transport,Floor,0
 NAM ,Fossil fuels,Pathway,Transport,Floor,0
 NAM ,Fossil fuels,Baseline,Transport,Floor,0
 NAM ,Oil,Baseline,Transport,Floor,0
 NAM ,Oil,Pathway,Transport,Floor,0
 NAM ,Other fuels,Pathway,Transport,Floor,0
 NAM ,Other fuels,Baseline,Transport,Floor,0
-NAM ,Biofuels,Baseline,Transport,Max annual growth,100
-NAM ,Biofuels,Pathway,Transport,Max annual growth,80
+NAM ,Bioenergy,Baseline,Transport,Max annual growth,100
+NAM ,Bioenergy,Pathway,Transport,Max annual growth,80
 NAM ,Fossil fuels,Baseline,Transport,Max annual growth,100
 NAM ,Fossil fuels,Pathway,Transport,Max annual growth,100
 NAM ,Oil,Baseline,Transport,Max annual growth,100
 NAM ,Oil,Pathway,Transport,Max annual growth,100
 NAM ,Other fuels,Pathway,Transport,Max annual growth,100
 NAM ,Other fuels,Baseline,Transport,Max annual growth,100
-NAM ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-NAM ,Biofuels,Baseline,Transport,"Parameter a, max",5
+NAM ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+NAM ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 NAM ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 NAM ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 NAM ,Oil,Baseline,Transport,"Parameter a, max",100
 NAM ,Oil,Pathway,Transport,"Parameter a, max",-0.08
 NAM ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 NAM ,Other fuels,Baseline,Transport,"Parameter a, max",100
-NAM ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-NAM ,Biofuels,Baseline,Transport,"Parameter a, min",0
+NAM ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+NAM ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 NAM ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 NAM ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 NAM ,Oil,Baseline,Transport,"Parameter a, min",100
 NAM ,Oil,Pathway,Transport,"Parameter a, min",-0.2
 NAM ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 NAM ,Other fuels,Baseline,Transport,"Parameter a, min",100
-NAM ,Biofuels,Pathway,Transport,"Parameter b, max",37
-NAM ,Biofuels,Baseline,Transport,"Parameter b, max",100
+NAM ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+NAM ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 NAM ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 NAM ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 NAM ,Oil,Baseline,Transport,"Parameter b, max",-100
 NAM ,Oil,Pathway,Transport,"Parameter b, max",23
 NAM ,Other fuels,Pathway,Transport,"Parameter b, max",10
 NAM ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-NAM ,Biofuels,Pathway,Transport,"Parameter b, min",37
-NAM ,Biofuels,Baseline,Transport,"Parameter b, min",0
+NAM ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+NAM ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 NAM ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
 NAM ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 NAM ,Oil,Baseline,Transport,"Parameter b, min",-100
 NAM ,Oil,Pathway,Transport,"Parameter b, min",23
 NAM ,Other fuels,Pathway,Transport,"Parameter b, min",10
 NAM ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-NAM ,Biofuels,Baseline,Transport,Saturation Point,4.6
-NAM ,Biofuels,Pathway,Transport,Saturation Point,100
+NAM ,Bioenergy,Baseline,Transport,Saturation Point,4.6
+NAM ,Bioenergy,Pathway,Transport,Saturation Point,100
 NAM ,Fossil fuels,Baseline,Transport,Saturation Point,0
 NAM ,Fossil fuels,Pathway,Transport,Saturation Point,80
 NAM ,Oil,Baseline,Transport,Saturation Point,93.4
@@ -3824,59 +3824,59 @@ US ,Biochar,Pathway,Industry,"Parameter b, min",40
 US ,Biochar,Baseline,Industry,"Parameter b, min",0
 US ,Biochar,Baseline,Industry,Saturation Point,5
 US ,Biochar,Pathway,Industry,Saturation Point,100
-US ,Biofuels,Pathway,Transport,Consumption:Generation,1
+US ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 US ,Oil,Pathway,Transport,Consumption:Generation,1
 US ,Other fuels,Pathway,Transport,Consumption:Generation,1
-US ,Biofuels,Baseline,Transport,Floor,0
-US ,Biofuels,Pathway,Transport,Floor,0
+US ,Bioenergy,Baseline,Transport,Floor,0
+US ,Bioenergy,Pathway,Transport,Floor,0
 US ,Fossil fuels,Pathway,Transport,Floor,0
 US ,Fossil fuels,Baseline,Transport,Floor,0
 US ,Oil,Baseline,Transport,Floor,0
 US ,Oil,Pathway,Transport,Floor,0
 US ,Other fuels,Pathway,Transport,Floor,0
 US ,Other fuels,Baseline,Transport,Floor,0
-US ,Biofuels,Baseline,Transport,Max annual growth,100
-US ,Biofuels,Pathway,Transport,Max annual growth,80
+US ,Bioenergy,Baseline,Transport,Max annual growth,100
+US ,Bioenergy,Pathway,Transport,Max annual growth,80
 US ,Fossil fuels,Baseline,Transport,Max annual growth,100
 US ,Fossil fuels,Pathway,Transport,Max annual growth,100
 US ,Oil,Baseline,Transport,Max annual growth,100
 US ,Oil,Pathway,Transport,Max annual growth,100
 US ,Other fuels,Pathway,Transport,Max annual growth,100
 US ,Other fuels,Baseline,Transport,Max annual growth,100
-US ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-US ,Biofuels,Baseline,Transport,"Parameter a, max",5
+US ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+US ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 US ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 US ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 US ,Oil,Baseline,Transport,"Parameter a, max",100
 US ,Oil,Pathway,Transport,"Parameter a, max",-0.08
 US ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 US ,Other fuels,Baseline,Transport,"Parameter a, max",100
-US ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-US ,Biofuels,Baseline,Transport,"Parameter a, min",0
+US ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+US ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 US ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 US ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 US ,Oil,Baseline,Transport,"Parameter a, min",100
 US ,Oil,Pathway,Transport,"Parameter a, min",-0.2
 US ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 US ,Other fuels,Baseline,Transport,"Parameter a, min",100
-US ,Biofuels,Pathway,Transport,"Parameter b, max",37
-US ,Biofuels,Baseline,Transport,"Parameter b, max",100
+US ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+US ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 US ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 US ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 US ,Oil,Baseline,Transport,"Parameter b, max",-100
 US ,Oil,Pathway,Transport,"Parameter b, max",23
 US ,Other fuels,Pathway,Transport,"Parameter b, max",10
 US ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-US ,Biofuels,Pathway,Transport,"Parameter b, min",37
-US ,Biofuels,Baseline,Transport,"Parameter b, min",0
+US ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+US ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 US ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
 US ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 US ,Oil,Baseline,Transport,"Parameter b, min",-100
 US ,Oil,Pathway,Transport,"Parameter b, min",23
 US ,Other fuels,Pathway,Transport,"Parameter b, min",10
 US ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-US ,Biofuels,Baseline,Transport,Saturation Point,4.6
-US ,Biofuels,Pathway,Transport,Saturation Point,100
+US ,Bioenergy,Baseline,Transport,Saturation Point,4.6
+US ,Bioenergy,Pathway,Transport,Saturation Point,100
 US ,Fossil fuels,Baseline,Transport,Saturation Point,0
 US ,Fossil fuels,Pathway,Transport,Saturation Point,80
 US ,Oil,Baseline,Transport,Saturation Point,93.4
@@ -4596,59 +4596,59 @@ EUR ,Biochar,Pathway,Industry,"Parameter b, min",40
 EUR ,Biochar,Baseline,Industry,"Parameter b, min",0
 EUR ,Biochar,Baseline,Industry,Saturation Point,5
 EUR ,Biochar,Pathway,Industry,Saturation Point,100
-EUR ,Biofuels,Pathway,Transport,Consumption:Generation,1
+EUR ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 EUR ,Oil,Pathway,Transport,Consumption:Generation,1
 EUR ,Other fuels,Pathway,Transport,Consumption:Generation,1
-EUR ,Biofuels,Baseline,Transport,Floor,0
-EUR ,Biofuels,Pathway,Transport,Floor,0
+EUR ,Bioenergy,Baseline,Transport,Floor,0
+EUR ,Bioenergy,Pathway,Transport,Floor,0
 EUR ,Fossil fuels,Pathway,Transport,Floor,0
 EUR ,Fossil fuels,Baseline,Transport,Floor,0
 EUR ,Oil,Baseline,Transport,Floor,0
 EUR ,Oil,Pathway,Transport,Floor,0
 EUR ,Other fuels,Pathway,Transport,Floor,0
 EUR ,Other fuels,Baseline,Transport,Floor,0
-EUR ,Biofuels,Baseline,Transport,Max annual growth,100
-EUR ,Biofuels,Pathway,Transport,Max annual growth,80
+EUR ,Bioenergy,Baseline,Transport,Max annual growth,100
+EUR ,Bioenergy,Pathway,Transport,Max annual growth,80
 EUR ,Fossil fuels,Baseline,Transport,Max annual growth,100
 EUR ,Fossil fuels,Pathway,Transport,Max annual growth,100
 EUR ,Oil,Baseline,Transport,Max annual growth,100
 EUR ,Oil,Pathway,Transport,Max annual growth,100
 EUR ,Other fuels,Pathway,Transport,Max annual growth,100
 EUR ,Other fuels,Baseline,Transport,Max annual growth,100
-EUR ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-EUR ,Biofuels,Baseline,Transport,"Parameter a, max",5
+EUR ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+EUR ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 EUR ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 EUR ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 EUR ,Oil,Baseline,Transport,"Parameter a, max",100
 EUR ,Oil,Pathway,Transport,"Parameter a, max",-0.08
 EUR ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 EUR ,Other fuels,Baseline,Transport,"Parameter a, max",100
-EUR ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-EUR ,Biofuels,Baseline,Transport,"Parameter a, min",0
+EUR ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+EUR ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 EUR ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 EUR ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 EUR ,Oil,Baseline,Transport,"Parameter a, min",100
 EUR ,Oil,Pathway,Transport,"Parameter a, min",-0.2
 EUR ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 EUR ,Other fuels,Baseline,Transport,"Parameter a, min",100
-EUR ,Biofuels,Pathway,Transport,"Parameter b, max",37
-EUR ,Biofuels,Baseline,Transport,"Parameter b, max",100
+EUR ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+EUR ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 EUR ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 EUR ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 EUR ,Oil,Baseline,Transport,"Parameter b, max",-100
 EUR ,Oil,Pathway,Transport,"Parameter b, max",23
 EUR ,Other fuels,Pathway,Transport,"Parameter b, max",10
 EUR ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-EUR ,Biofuels,Pathway,Transport,"Parameter b, min",37
-EUR ,Biofuels,Baseline,Transport,"Parameter b, min",0
+EUR ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+EUR ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 EUR ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
 EUR ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 EUR ,Oil,Baseline,Transport,"Parameter b, min",-100
 EUR ,Oil,Pathway,Transport,"Parameter b, min",23
 EUR ,Other fuels,Pathway,Transport,"Parameter b, min",10
 EUR ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-EUR ,Biofuels,Baseline,Transport,Saturation Point,4.6
-EUR ,Biofuels,Pathway,Transport,Saturation Point,100
+EUR ,Bioenergy,Baseline,Transport,Saturation Point,4.6
+EUR ,Bioenergy,Pathway,Transport,Saturation Point,100
 EUR ,Fossil fuels,Baseline,Transport,Saturation Point,0
 EUR ,Fossil fuels,Pathway,Transport,Saturation Point,80
 EUR ,Oil,Baseline,Transport,Saturation Point,93.4
@@ -5368,59 +5368,59 @@ EU ,Biochar,Pathway,Industry,"Parameter b, min",40
 EU ,Biochar,Baseline,Industry,"Parameter b, min",0
 EU ,Biochar,Baseline,Industry,Saturation Point,5
 EU ,Biochar,Pathway,Industry,Saturation Point,100
-EU ,Biofuels,Pathway,Transport,Consumption:Generation,1
+EU ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 EU ,Oil,Pathway,Transport,Consumption:Generation,1
 EU ,Other fuels,Pathway,Transport,Consumption:Generation,1
-EU ,Biofuels,Baseline,Transport,Floor,0
-EU ,Biofuels,Pathway,Transport,Floor,0
+EU ,Bioenergy,Baseline,Transport,Floor,0
+EU ,Bioenergy,Pathway,Transport,Floor,0
 EU ,Fossil fuels,Pathway,Transport,Floor,0
 EU ,Fossil fuels,Baseline,Transport,Floor,0
 EU ,Oil,Baseline,Transport,Floor,0
 EU ,Oil,Pathway,Transport,Floor,0
 EU ,Other fuels,Pathway,Transport,Floor,0
 EU ,Other fuels,Baseline,Transport,Floor,0
-EU ,Biofuels,Baseline,Transport,Max annual growth,100
-EU ,Biofuels,Pathway,Transport,Max annual growth,80
+EU ,Bioenergy,Baseline,Transport,Max annual growth,100
+EU ,Bioenergy,Pathway,Transport,Max annual growth,80
 EU ,Fossil fuels,Baseline,Transport,Max annual growth,100
 EU ,Fossil fuels,Pathway,Transport,Max annual growth,100
 EU ,Oil,Baseline,Transport,Max annual growth,100
 EU ,Oil,Pathway,Transport,Max annual growth,100
 EU ,Other fuels,Pathway,Transport,Max annual growth,100
 EU ,Other fuels,Baseline,Transport,Max annual growth,100
-EU ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-EU ,Biofuels,Baseline,Transport,"Parameter a, max",5
+EU ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+EU ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 EU ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 EU ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 EU ,Oil,Baseline,Transport,"Parameter a, max",100
 EU ,Oil,Pathway,Transport,"Parameter a, max",-0.08
 EU ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 EU ,Other fuels,Baseline,Transport,"Parameter a, max",100
-EU ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-EU ,Biofuels,Baseline,Transport,"Parameter a, min",0
+EU ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+EU ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 EU ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 EU ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 EU ,Oil,Baseline,Transport,"Parameter a, min",100
 EU ,Oil,Pathway,Transport,"Parameter a, min",-0.2
 EU ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 EU ,Other fuels,Baseline,Transport,"Parameter a, min",100
-EU ,Biofuels,Pathway,Transport,"Parameter b, max",37
-EU ,Biofuels,Baseline,Transport,"Parameter b, max",100
+EU ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+EU ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 EU ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 EU ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 EU ,Oil,Baseline,Transport,"Parameter b, max",-100
 EU ,Oil,Pathway,Transport,"Parameter b, max",23
 EU ,Other fuels,Pathway,Transport,"Parameter b, max",10
 EU ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-EU ,Biofuels,Pathway,Transport,"Parameter b, min",37
-EU ,Biofuels,Baseline,Transport,"Parameter b, min",0
+EU ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+EU ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 EU ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
 EU ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 EU ,Oil,Baseline,Transport,"Parameter b, min",-100
 EU ,Oil,Pathway,Transport,"Parameter b, min",23
 EU ,Other fuels,Pathway,Transport,"Parameter b, min",10
 EU ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-EU ,Biofuels,Baseline,Transport,Saturation Point,4.6
-EU ,Biofuels,Pathway,Transport,Saturation Point,100
+EU ,Bioenergy,Baseline,Transport,Saturation Point,4.6
+EU ,Bioenergy,Pathway,Transport,Saturation Point,100
 EU ,Fossil fuels,Baseline,Transport,Saturation Point,0
 EU ,Fossil fuels,Pathway,Transport,Saturation Point,80
 EU ,Oil,Baseline,Transport,Saturation Point,93.4
@@ -6140,59 +6140,59 @@ JPN ,Biochar,Pathway,Industry,"Parameter b, min",40
 JPN ,Biochar,Baseline,Industry,"Parameter b, min",0
 JPN ,Biochar,Baseline,Industry,Saturation Point,5
 JPN ,Biochar,Pathway,Industry,Saturation Point,100
-JPN ,Biofuels,Pathway,Transport,Consumption:Generation,1
+JPN ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 JPN ,Oil,Pathway,Transport,Consumption:Generation,1
 JPN ,Other fuels,Pathway,Transport,Consumption:Generation,1
-JPN ,Biofuels,Baseline,Transport,Floor,0
-JPN ,Biofuels,Pathway,Transport,Floor,0
+JPN ,Bioenergy,Baseline,Transport,Floor,0
+JPN ,Bioenergy,Pathway,Transport,Floor,0
 JPN ,Fossil fuels,Pathway,Transport,Floor,0
 JPN ,Fossil fuels,Baseline,Transport,Floor,0
 JPN ,Oil,Baseline,Transport,Floor,0
 JPN ,Oil,Pathway,Transport,Floor,0
 JPN ,Other fuels,Pathway,Transport,Floor,0
 JPN ,Other fuels,Baseline,Transport,Floor,0
-JPN ,Biofuels,Baseline,Transport,Max annual growth,100
-JPN ,Biofuels,Pathway,Transport,Max annual growth,80
+JPN ,Bioenergy,Baseline,Transport,Max annual growth,100
+JPN ,Bioenergy,Pathway,Transport,Max annual growth,80
 JPN ,Fossil fuels,Baseline,Transport,Max annual growth,100
 JPN ,Fossil fuels,Pathway,Transport,Max annual growth,100
 JPN ,Oil,Baseline,Transport,Max annual growth,100
 JPN ,Oil,Pathway,Transport,Max annual growth,100
 JPN ,Other fuels,Pathway,Transport,Max annual growth,100
 JPN ,Other fuels,Baseline,Transport,Max annual growth,100
-JPN ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-JPN ,Biofuels,Baseline,Transport,"Parameter a, max",5
+JPN ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+JPN ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 JPN ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 JPN ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 JPN ,Oil,Baseline,Transport,"Parameter a, max",100
 JPN ,Oil,Pathway,Transport,"Parameter a, max",-0.08
 JPN ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 JPN ,Other fuels,Baseline,Transport,"Parameter a, max",100
-JPN ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-JPN ,Biofuels,Baseline,Transport,"Parameter a, min",0
+JPN ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+JPN ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 JPN ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 JPN ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 JPN ,Oil,Baseline,Transport,"Parameter a, min",100
 JPN ,Oil,Pathway,Transport,"Parameter a, min",-0.2
 JPN ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 JPN ,Other fuels,Baseline,Transport,"Parameter a, min",100
-JPN ,Biofuels,Pathway,Transport,"Parameter b, max",37
-JPN ,Biofuels,Baseline,Transport,"Parameter b, max",100
+JPN ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+JPN ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 JPN ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 JPN ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 JPN ,Oil,Baseline,Transport,"Parameter b, max",-100
 JPN ,Oil,Pathway,Transport,"Parameter b, max",23
 JPN ,Other fuels,Pathway,Transport,"Parameter b, max",10
 JPN ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-JPN ,Biofuels,Pathway,Transport,"Parameter b, min",37
-JPN ,Biofuels,Baseline,Transport,"Parameter b, min",0
+JPN ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+JPN ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 JPN ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
 JPN ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 JPN ,Oil,Baseline,Transport,"Parameter b, min",-100
 JPN ,Oil,Pathway,Transport,"Parameter b, min",23
 JPN ,Other fuels,Pathway,Transport,"Parameter b, min",10
 JPN ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-JPN ,Biofuels,Baseline,Transport,Saturation Point,4.6
-JPN ,Biofuels,Pathway,Transport,Saturation Point,100
+JPN ,Bioenergy,Baseline,Transport,Saturation Point,4.6
+JPN ,Bioenergy,Pathway,Transport,Saturation Point,100
 JPN ,Fossil fuels,Baseline,Transport,Saturation Point,0
 JPN ,Fossil fuels,Pathway,Transport,Saturation Point,80
 JPN ,Oil,Baseline,Transport,Saturation Point,93.4
@@ -6912,59 +6912,59 @@ SAFR ,Biochar,Pathway,Industry,"Parameter b, min",40
 SAFR ,Biochar,Baseline,Industry,"Parameter b, min",0
 SAFR ,Biochar,Baseline,Industry,Saturation Point,5
 SAFR ,Biochar,Pathway,Industry,Saturation Point,100
-SAFR ,Biofuels,Pathway,Transport,Consumption:Generation,1
+SAFR ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 SAFR ,Oil,Pathway,Transport,Consumption:Generation,1
 SAFR ,Other fuels,Pathway,Transport,Consumption:Generation,1
-SAFR ,Biofuels,Baseline,Transport,Floor,0
-SAFR ,Biofuels,Pathway,Transport,Floor,0
+SAFR ,Bioenergy,Baseline,Transport,Floor,0
+SAFR ,Bioenergy,Pathway,Transport,Floor,0
 SAFR ,Fossil fuels,Pathway,Transport,Floor,0
 SAFR ,Fossil fuels,Baseline,Transport,Floor,0
 SAFR ,Oil,Baseline,Transport,Floor,0
 SAFR ,Oil,Pathway,Transport,Floor,0
 SAFR ,Other fuels,Pathway,Transport,Floor,0
 SAFR ,Other fuels,Baseline,Transport,Floor,0
-SAFR ,Biofuels,Baseline,Transport,Max annual growth,100
-SAFR ,Biofuels,Pathway,Transport,Max annual growth,80
+SAFR ,Bioenergy,Baseline,Transport,Max annual growth,100
+SAFR ,Bioenergy,Pathway,Transport,Max annual growth,80
 SAFR ,Fossil fuels,Baseline,Transport,Max annual growth,100
 SAFR ,Fossil fuels,Pathway,Transport,Max annual growth,100
 SAFR ,Oil,Baseline,Transport,Max annual growth,100
 SAFR ,Oil,Pathway,Transport,Max annual growth,100
 SAFR ,Other fuels,Pathway,Transport,Max annual growth,100
 SAFR ,Other fuels,Baseline,Transport,Max annual growth,100
-SAFR ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-SAFR ,Biofuels,Baseline,Transport,"Parameter a, max",5
+SAFR ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+SAFR ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 SAFR ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 SAFR ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 SAFR ,Oil,Baseline,Transport,"Parameter a, max",100
 SAFR ,Oil,Pathway,Transport,"Parameter a, max",-0.08
 SAFR ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 SAFR ,Other fuels,Baseline,Transport,"Parameter a, max",100
-SAFR ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-SAFR ,Biofuels,Baseline,Transport,"Parameter a, min",0
+SAFR ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+SAFR ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 SAFR ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 SAFR ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 SAFR ,Oil,Baseline,Transport,"Parameter a, min",100
 SAFR ,Oil,Pathway,Transport,"Parameter a, min",-0.2
 SAFR ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 SAFR ,Other fuels,Baseline,Transport,"Parameter a, min",100
-SAFR ,Biofuels,Pathway,Transport,"Parameter b, max",37
-SAFR ,Biofuels,Baseline,Transport,"Parameter b, max",100
+SAFR ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+SAFR ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 SAFR ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 SAFR ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 SAFR ,Oil,Baseline,Transport,"Parameter b, max",-100
 SAFR ,Oil,Pathway,Transport,"Parameter b, max",23
 SAFR ,Other fuels,Pathway,Transport,"Parameter b, max",10
 SAFR ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-SAFR ,Biofuels,Pathway,Transport,"Parameter b, min",37
-SAFR ,Biofuels,Baseline,Transport,"Parameter b, min",0
+SAFR ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+SAFR ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 SAFR ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
 SAFR ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 SAFR ,Oil,Baseline,Transport,"Parameter b, min",-100
 SAFR ,Oil,Pathway,Transport,"Parameter b, min",23
 SAFR ,Other fuels,Pathway,Transport,"Parameter b, min",10
 SAFR ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-SAFR ,Biofuels,Baseline,Transport,Saturation Point,4.6
-SAFR ,Biofuels,Pathway,Transport,Saturation Point,100
+SAFR ,Bioenergy,Baseline,Transport,Saturation Point,4.6
+SAFR ,Bioenergy,Pathway,Transport,Saturation Point,100
 SAFR ,Fossil fuels,Baseline,Transport,Saturation Point,0
 SAFR ,Fossil fuels,Pathway,Transport,Saturation Point,80
 SAFR ,Oil,Baseline,Transport,Saturation Point,93.4
@@ -7684,59 +7684,59 @@ AdvancedECO ,Biochar,Pathway,Industry,"Parameter b, min",40
 AdvancedECO ,Biochar,Baseline,Industry,"Parameter b, min",0
 AdvancedECO ,Biochar,Baseline,Industry,Saturation Point,5
 AdvancedECO ,Biochar,Pathway,Industry,Saturation Point,100
-AdvancedECO ,Biofuels,Pathway,Transport,Consumption:Generation,1
+AdvancedECO ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 AdvancedECO ,Oil,Pathway,Transport,Consumption:Generation,1
 AdvancedECO ,Other fuels,Pathway,Transport,Consumption:Generation,1
-AdvancedECO ,Biofuels,Baseline,Transport,Floor,0
-AdvancedECO ,Biofuels,Pathway,Transport,Floor,0
+AdvancedECO ,Bioenergy,Baseline,Transport,Floor,0
+AdvancedECO ,Bioenergy,Pathway,Transport,Floor,0
 AdvancedECO ,Fossil fuels,Pathway,Transport,Floor,0
 AdvancedECO ,Fossil fuels,Baseline,Transport,Floor,0
 AdvancedECO ,Oil,Baseline,Transport,Floor,0
 AdvancedECO ,Oil,Pathway,Transport,Floor,0
 AdvancedECO ,Other fuels,Pathway,Transport,Floor,0
 AdvancedECO ,Other fuels,Baseline,Transport,Floor,0
-AdvancedECO ,Biofuels,Baseline,Transport,Max annual growth,100
-AdvancedECO ,Biofuels,Pathway,Transport,Max annual growth,80
+AdvancedECO ,Bioenergy,Baseline,Transport,Max annual growth,100
+AdvancedECO ,Bioenergy,Pathway,Transport,Max annual growth,80
 AdvancedECO ,Fossil fuels,Baseline,Transport,Max annual growth,100
 AdvancedECO ,Fossil fuels,Pathway,Transport,Max annual growth,100
 AdvancedECO ,Oil,Baseline,Transport,Max annual growth,100
 AdvancedECO ,Oil,Pathway,Transport,Max annual growth,100
 AdvancedECO ,Other fuels,Pathway,Transport,Max annual growth,100
 AdvancedECO ,Other fuels,Baseline,Transport,Max annual growth,100
-AdvancedECO ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-AdvancedECO ,Biofuels,Baseline,Transport,"Parameter a, max",5
+AdvancedECO ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+AdvancedECO ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 AdvancedECO ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 AdvancedECO ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 AdvancedECO ,Oil,Baseline,Transport,"Parameter a, max",100
 AdvancedECO ,Oil,Pathway,Transport,"Parameter a, max",-0.08
 AdvancedECO ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 AdvancedECO ,Other fuels,Baseline,Transport,"Parameter a, max",100
-AdvancedECO ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-AdvancedECO ,Biofuels,Baseline,Transport,"Parameter a, min",0
+AdvancedECO ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+AdvancedECO ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 AdvancedECO ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 AdvancedECO ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 AdvancedECO ,Oil,Baseline,Transport,"Parameter a, min",100
 AdvancedECO ,Oil,Pathway,Transport,"Parameter a, min",-0.2
 AdvancedECO ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 AdvancedECO ,Other fuels,Baseline,Transport,"Parameter a, min",100
-AdvancedECO ,Biofuels,Pathway,Transport,"Parameter b, max",37
-AdvancedECO ,Biofuels,Baseline,Transport,"Parameter b, max",100
+AdvancedECO ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+AdvancedECO ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 AdvancedECO ,Fossil fuels,Pathway,Transport,"Parameter b, max",15
 AdvancedECO ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 AdvancedECO ,Oil,Baseline,Transport,"Parameter b, max",-100
 AdvancedECO ,Oil,Pathway,Transport,"Parameter b, max",23
 AdvancedECO ,Other fuels,Pathway,Transport,"Parameter b, max",10
 AdvancedECO ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-AdvancedECO ,Biofuels,Pathway,Transport,"Parameter b, min",37
-AdvancedECO ,Biofuels,Baseline,Transport,"Parameter b, min",0
+AdvancedECO ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+AdvancedECO ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 AdvancedECO ,Fossil fuels,Pathway,Transport,"Parameter b, min",15
 AdvancedECO ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 AdvancedECO ,Oil,Baseline,Transport,"Parameter b, min",-100
 AdvancedECO ,Oil,Pathway,Transport,"Parameter b, min",23
 AdvancedECO ,Other fuels,Pathway,Transport,"Parameter b, min",10
 AdvancedECO ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-AdvancedECO ,Biofuels,Baseline,Transport,Saturation Point,4.6
-AdvancedECO ,Biofuels,Pathway,Transport,Saturation Point,100
+AdvancedECO ,Bioenergy,Baseline,Transport,Saturation Point,4.6
+AdvancedECO ,Bioenergy,Pathway,Transport,Saturation Point,100
 AdvancedECO ,Fossil fuels,Baseline,Transport,Saturation Point,0
 AdvancedECO ,Fossil fuels,Pathway,Transport,Saturation Point,80
 AdvancedECO ,Oil,Baseline,Transport,Saturation Point,93.4
@@ -8456,59 +8456,59 @@ CSAM ,Biochar,Pathway,Industry,"Parameter b, min",40
 CSAM ,Biochar,Baseline,Industry,"Parameter b, min",0
 CSAM ,Biochar,Baseline,Industry,Saturation Point,5
 CSAM ,Biochar,Pathway,Industry,Saturation Point,100
-CSAM ,Biofuels,Pathway,Transport,Consumption:Generation,1
+CSAM ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 CSAM ,Oil,Pathway,Transport,Consumption:Generation,1
 CSAM ,Other fuels,Pathway,Transport,Consumption:Generation,1
-CSAM ,Biofuels,Baseline,Transport,Floor,0
-CSAM ,Biofuels,Pathway,Transport,Floor,0
+CSAM ,Bioenergy,Baseline,Transport,Floor,0
+CSAM ,Bioenergy,Pathway,Transport,Floor,0
 CSAM ,Fossil fuels,Pathway,Transport,Floor,0
 CSAM ,Fossil fuels,Baseline,Transport,Floor,0
 CSAM ,Oil,Baseline,Transport,Floor,0
 CSAM ,Oil,Pathway,Transport,Floor,0
 CSAM ,Other fuels,Pathway,Transport,Floor,0
 CSAM ,Other fuels,Baseline,Transport,Floor,0
-CSAM ,Biofuels,Baseline,Transport,Max annual growth,100
-CSAM ,Biofuels,Pathway,Transport,Max annual growth,100
+CSAM ,Bioenergy,Baseline,Transport,Max annual growth,100
+CSAM ,Bioenergy,Pathway,Transport,Max annual growth,100
 CSAM ,Fossil fuels,Baseline,Transport,Max annual growth,100
 CSAM ,Fossil fuels,Pathway,Transport,Max annual growth,100
 CSAM ,Oil,Baseline,Transport,Max annual growth,100
 CSAM ,Oil,Pathway,Transport,Max annual growth,100
 CSAM ,Other fuels,Pathway,Transport,Max annual growth,100
 CSAM ,Other fuels,Baseline,Transport,Max annual growth,100
-CSAM ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-CSAM ,Biofuels,Baseline,Transport,"Parameter a, max",5
+CSAM ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+CSAM ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 CSAM ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 CSAM ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 CSAM ,Oil,Baseline,Transport,"Parameter a, max",100
 CSAM ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 CSAM ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 CSAM ,Other fuels,Baseline,Transport,"Parameter a, max",100
-CSAM ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-CSAM ,Biofuels,Baseline,Transport,"Parameter a, min",0
+CSAM ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+CSAM ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 CSAM ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 CSAM ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 CSAM ,Oil,Baseline,Transport,"Parameter a, min",100
 CSAM ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 CSAM ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 CSAM ,Other fuels,Baseline,Transport,"Parameter a, min",100
-CSAM ,Biofuels,Pathway,Transport,"Parameter b, max",37
-CSAM ,Biofuels,Baseline,Transport,"Parameter b, max",100
+CSAM ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+CSAM ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 CSAM ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 CSAM ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 CSAM ,Oil,Baseline,Transport,"Parameter b, max",-100
 CSAM ,Oil,Pathway,Transport,"Parameter b, max",37
 CSAM ,Other fuels,Pathway,Transport,"Parameter b, max",10
 CSAM ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-CSAM ,Biofuels,Pathway,Transport,"Parameter b, min",37
-CSAM ,Biofuels,Baseline,Transport,"Parameter b, min",0
+CSAM ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+CSAM ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 CSAM ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 CSAM ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 CSAM ,Oil,Baseline,Transport,"Parameter b, min",-100
 CSAM ,Oil,Pathway,Transport,"Parameter b, min",37
 CSAM ,Other fuels,Pathway,Transport,"Parameter b, min",10
 CSAM ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-CSAM ,Biofuels,Baseline,Transport,Saturation Point,2.4
-CSAM ,Biofuels,Pathway,Transport,Saturation Point,100
+CSAM ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+CSAM ,Bioenergy,Pathway,Transport,Saturation Point,100
 CSAM ,Fossil fuels,Baseline,Transport,Saturation Point,0
 CSAM ,Fossil fuels,Pathway,Transport,Saturation Point,80
 CSAM ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -9228,59 +9228,59 @@ BRAZIL ,Biochar,Pathway,Industry,"Parameter b, min",40
 BRAZIL ,Biochar,Baseline,Industry,"Parameter b, min",0
 BRAZIL ,Biochar,Baseline,Industry,Saturation Point,5
 BRAZIL ,Biochar,Pathway,Industry,Saturation Point,100
-BRAZIL ,Biofuels,Pathway,Transport,Consumption:Generation,1
+BRAZIL ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 BRAZIL ,Oil,Pathway,Transport,Consumption:Generation,1
 BRAZIL ,Other fuels,Pathway,Transport,Consumption:Generation,1
-BRAZIL ,Biofuels,Baseline,Transport,Floor,0
-BRAZIL ,Biofuels,Pathway,Transport,Floor,0
+BRAZIL ,Bioenergy,Baseline,Transport,Floor,0
+BRAZIL ,Bioenergy,Pathway,Transport,Floor,0
 BRAZIL ,Fossil fuels,Pathway,Transport,Floor,0
 BRAZIL ,Fossil fuels,Baseline,Transport,Floor,0
 BRAZIL ,Oil,Baseline,Transport,Floor,0
 BRAZIL ,Oil,Pathway,Transport,Floor,0
 BRAZIL ,Other fuels,Pathway,Transport,Floor,0
 BRAZIL ,Other fuels,Baseline,Transport,Floor,0
-BRAZIL ,Biofuels,Baseline,Transport,Max annual growth,100
-BRAZIL ,Biofuels,Pathway,Transport,Max annual growth,100
+BRAZIL ,Bioenergy,Baseline,Transport,Max annual growth,100
+BRAZIL ,Bioenergy,Pathway,Transport,Max annual growth,100
 BRAZIL ,Fossil fuels,Baseline,Transport,Max annual growth,100
 BRAZIL ,Fossil fuels,Pathway,Transport,Max annual growth,100
 BRAZIL ,Oil,Baseline,Transport,Max annual growth,100
 BRAZIL ,Oil,Pathway,Transport,Max annual growth,100
 BRAZIL ,Other fuels,Pathway,Transport,Max annual growth,100
 BRAZIL ,Other fuels,Baseline,Transport,Max annual growth,100
-BRAZIL ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-BRAZIL ,Biofuels,Baseline,Transport,"Parameter a, max",5
+BRAZIL ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+BRAZIL ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 BRAZIL ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 BRAZIL ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 BRAZIL ,Oil,Baseline,Transport,"Parameter a, max",100
 BRAZIL ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 BRAZIL ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 BRAZIL ,Other fuels,Baseline,Transport,"Parameter a, max",100
-BRAZIL ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-BRAZIL ,Biofuels,Baseline,Transport,"Parameter a, min",0
+BRAZIL ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+BRAZIL ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 BRAZIL ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 BRAZIL ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 BRAZIL ,Oil,Baseline,Transport,"Parameter a, min",100
 BRAZIL ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 BRAZIL ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 BRAZIL ,Other fuels,Baseline,Transport,"Parameter a, min",100
-BRAZIL ,Biofuels,Pathway,Transport,"Parameter b, max",37
-BRAZIL ,Biofuels,Baseline,Transport,"Parameter b, max",100
+BRAZIL ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+BRAZIL ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 BRAZIL ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 BRAZIL ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 BRAZIL ,Oil,Baseline,Transport,"Parameter b, max",-100
 BRAZIL ,Oil,Pathway,Transport,"Parameter b, max",37
 BRAZIL ,Other fuels,Pathway,Transport,"Parameter b, max",10
 BRAZIL ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-BRAZIL ,Biofuels,Pathway,Transport,"Parameter b, min",37
-BRAZIL ,Biofuels,Baseline,Transport,"Parameter b, min",0
+BRAZIL ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+BRAZIL ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 BRAZIL ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 BRAZIL ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 BRAZIL ,Oil,Baseline,Transport,"Parameter b, min",-100
 BRAZIL ,Oil,Pathway,Transport,"Parameter b, min",37
 BRAZIL ,Other fuels,Pathway,Transport,"Parameter b, min",10
 BRAZIL ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-BRAZIL ,Biofuels,Baseline,Transport,Saturation Point,2.4
-BRAZIL ,Biofuels,Pathway,Transport,Saturation Point,100
+BRAZIL ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+BRAZIL ,Bioenergy,Pathway,Transport,Saturation Point,100
 BRAZIL ,Fossil fuels,Baseline,Transport,Saturation Point,0
 BRAZIL ,Fossil fuels,Pathway,Transport,Saturation Point,80
 BRAZIL ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -10000,59 +10000,59 @@ AFRICA ,Biochar,Pathway,Industry,"Parameter b, min",40
 AFRICA ,Biochar,Baseline,Industry,"Parameter b, min",0
 AFRICA ,Biochar,Baseline,Industry,Saturation Point,5
 AFRICA ,Biochar,Pathway,Industry,Saturation Point,100
-AFRICA ,Biofuels,Pathway,Transport,Consumption:Generation,1
+AFRICA ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 AFRICA ,Oil,Pathway,Transport,Consumption:Generation,1
 AFRICA ,Other fuels,Pathway,Transport,Consumption:Generation,1
-AFRICA ,Biofuels,Baseline,Transport,Floor,0
-AFRICA ,Biofuels,Pathway,Transport,Floor,0
+AFRICA ,Bioenergy,Baseline,Transport,Floor,0
+AFRICA ,Bioenergy,Pathway,Transport,Floor,0
 AFRICA ,Fossil fuels,Pathway,Transport,Floor,0
 AFRICA ,Fossil fuels,Baseline,Transport,Floor,0
 AFRICA ,Oil,Baseline,Transport,Floor,0
 AFRICA ,Oil,Pathway,Transport,Floor,0
 AFRICA ,Other fuels,Pathway,Transport,Floor,0
 AFRICA ,Other fuels,Baseline,Transport,Floor,0
-AFRICA ,Biofuels,Baseline,Transport,Max annual growth,100
-AFRICA ,Biofuels,Pathway,Transport,Max annual growth,100
+AFRICA ,Bioenergy,Baseline,Transport,Max annual growth,100
+AFRICA ,Bioenergy,Pathway,Transport,Max annual growth,100
 AFRICA ,Fossil fuels,Baseline,Transport,Max annual growth,100
 AFRICA ,Fossil fuels,Pathway,Transport,Max annual growth,100
 AFRICA ,Oil,Baseline,Transport,Max annual growth,100
 AFRICA ,Oil,Pathway,Transport,Max annual growth,100
 AFRICA ,Other fuels,Pathway,Transport,Max annual growth,100
 AFRICA ,Other fuels,Baseline,Transport,Max annual growth,100
-AFRICA ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-AFRICA ,Biofuels,Baseline,Transport,"Parameter a, max",5
+AFRICA ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+AFRICA ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 AFRICA ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 AFRICA ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 AFRICA ,Oil,Baseline,Transport,"Parameter a, max",100
 AFRICA ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 AFRICA ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 AFRICA ,Other fuels,Baseline,Transport,"Parameter a, max",100
-AFRICA ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-AFRICA ,Biofuels,Baseline,Transport,"Parameter a, min",0
+AFRICA ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+AFRICA ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 AFRICA ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 AFRICA ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 AFRICA ,Oil,Baseline,Transport,"Parameter a, min",100
 AFRICA ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 AFRICA ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 AFRICA ,Other fuels,Baseline,Transport,"Parameter a, min",100
-AFRICA ,Biofuels,Pathway,Transport,"Parameter b, max",37
-AFRICA ,Biofuels,Baseline,Transport,"Parameter b, max",100
+AFRICA ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+AFRICA ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 AFRICA ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 AFRICA ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 AFRICA ,Oil,Baseline,Transport,"Parameter b, max",-100
 AFRICA ,Oil,Pathway,Transport,"Parameter b, max",37
 AFRICA ,Other fuels,Pathway,Transport,"Parameter b, max",10
 AFRICA ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-AFRICA ,Biofuels,Pathway,Transport,"Parameter b, min",37
-AFRICA ,Biofuels,Baseline,Transport,"Parameter b, min",0
+AFRICA ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+AFRICA ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 AFRICA ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 AFRICA ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 AFRICA ,Oil,Baseline,Transport,"Parameter b, min",-100
 AFRICA ,Oil,Pathway,Transport,"Parameter b, min",37
 AFRICA ,Other fuels,Pathway,Transport,"Parameter b, min",10
 AFRICA ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-AFRICA ,Biofuels,Baseline,Transport,Saturation Point,2.4
-AFRICA ,Biofuels,Pathway,Transport,Saturation Point,100
+AFRICA ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+AFRICA ,Bioenergy,Pathway,Transport,Saturation Point,100
 AFRICA ,Fossil fuels,Baseline,Transport,Saturation Point,0
 AFRICA ,Fossil fuels,Pathway,Transport,Saturation Point,80
 AFRICA ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -10772,59 +10772,59 @@ ME ,Biochar,Pathway,Industry,"Parameter b, min",40
 ME ,Biochar,Baseline,Industry,"Parameter b, min",0
 ME ,Biochar,Baseline,Industry,Saturation Point,5
 ME ,Biochar,Pathway,Industry,Saturation Point,100
-ME ,Biofuels,Pathway,Transport,Consumption:Generation,1
+ME ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 ME ,Oil,Pathway,Transport,Consumption:Generation,1
 ME ,Other fuels,Pathway,Transport,Consumption:Generation,1
-ME ,Biofuels,Baseline,Transport,Floor,0
-ME ,Biofuels,Pathway,Transport,Floor,0
+ME ,Bioenergy,Baseline,Transport,Floor,0
+ME ,Bioenergy,Pathway,Transport,Floor,0
 ME ,Fossil fuels,Pathway,Transport,Floor,0
 ME ,Fossil fuels,Baseline,Transport,Floor,0
 ME ,Oil,Baseline,Transport,Floor,0
 ME ,Oil,Pathway,Transport,Floor,0
 ME ,Other fuels,Pathway,Transport,Floor,0
 ME ,Other fuels,Baseline,Transport,Floor,0
-ME ,Biofuels,Baseline,Transport,Max annual growth,100
-ME ,Biofuels,Pathway,Transport,Max annual growth,100
+ME ,Bioenergy,Baseline,Transport,Max annual growth,100
+ME ,Bioenergy,Pathway,Transport,Max annual growth,100
 ME ,Fossil fuels,Baseline,Transport,Max annual growth,100
 ME ,Fossil fuels,Pathway,Transport,Max annual growth,100
 ME ,Oil,Baseline,Transport,Max annual growth,100
 ME ,Oil,Pathway,Transport,Max annual growth,100
 ME ,Other fuels,Pathway,Transport,Max annual growth,100
 ME ,Other fuels,Baseline,Transport,Max annual growth,100
-ME ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-ME ,Biofuels,Baseline,Transport,"Parameter a, max",5
+ME ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+ME ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 ME ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 ME ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 ME ,Oil,Baseline,Transport,"Parameter a, max",100
 ME ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 ME ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 ME ,Other fuels,Baseline,Transport,"Parameter a, max",100
-ME ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-ME ,Biofuels,Baseline,Transport,"Parameter a, min",0
+ME ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+ME ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 ME ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 ME ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 ME ,Oil,Baseline,Transport,"Parameter a, min",100
 ME ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 ME ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 ME ,Other fuels,Baseline,Transport,"Parameter a, min",100
-ME ,Biofuels,Pathway,Transport,"Parameter b, max",37
-ME ,Biofuels,Baseline,Transport,"Parameter b, max",100
+ME ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+ME ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 ME ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 ME ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 ME ,Oil,Baseline,Transport,"Parameter b, max",-100
 ME ,Oil,Pathway,Transport,"Parameter b, max",37
 ME ,Other fuels,Pathway,Transport,"Parameter b, max",10
 ME ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-ME ,Biofuels,Pathway,Transport,"Parameter b, min",37
-ME ,Biofuels,Baseline,Transport,"Parameter b, min",0
+ME ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+ME ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 ME ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 ME ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 ME ,Oil,Baseline,Transport,"Parameter b, min",-100
 ME ,Oil,Pathway,Transport,"Parameter b, min",37
 ME ,Other fuels,Pathway,Transport,"Parameter b, min",10
 ME ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-ME ,Biofuels,Baseline,Transport,Saturation Point,2.4
-ME ,Biofuels,Pathway,Transport,Saturation Point,100
+ME ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+ME ,Bioenergy,Pathway,Transport,Saturation Point,100
 ME ,Fossil fuels,Baseline,Transport,Saturation Point,0
 ME ,Fossil fuels,Pathway,Transport,Saturation Point,80
 ME ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -11544,59 +11544,59 @@ EURASIA ,Biochar,Pathway,Industry,"Parameter b, min",40
 EURASIA ,Biochar,Baseline,Industry,"Parameter b, min",0
 EURASIA ,Biochar,Baseline,Industry,Saturation Point,5
 EURASIA ,Biochar,Pathway,Industry,Saturation Point,100
-EURASIA ,Biofuels,Pathway,Transport,Consumption:Generation,1
+EURASIA ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 EURASIA ,Oil,Pathway,Transport,Consumption:Generation,1
 EURASIA ,Other fuels,Pathway,Transport,Consumption:Generation,1
-EURASIA ,Biofuels,Baseline,Transport,Floor,0
-EURASIA ,Biofuels,Pathway,Transport,Floor,0
+EURASIA ,Bioenergy,Baseline,Transport,Floor,0
+EURASIA ,Bioenergy,Pathway,Transport,Floor,0
 EURASIA ,Fossil fuels,Pathway,Transport,Floor,0
 EURASIA ,Fossil fuels,Baseline,Transport,Floor,0
 EURASIA ,Oil,Baseline,Transport,Floor,0
 EURASIA ,Oil,Pathway,Transport,Floor,0
 EURASIA ,Other fuels,Pathway,Transport,Floor,0
 EURASIA ,Other fuels,Baseline,Transport,Floor,0
-EURASIA ,Biofuels,Baseline,Transport,Max annual growth,100
-EURASIA ,Biofuels,Pathway,Transport,Max annual growth,100
+EURASIA ,Bioenergy,Baseline,Transport,Max annual growth,100
+EURASIA ,Bioenergy,Pathway,Transport,Max annual growth,100
 EURASIA ,Fossil fuels,Baseline,Transport,Max annual growth,100
 EURASIA ,Fossil fuels,Pathway,Transport,Max annual growth,100
 EURASIA ,Oil,Baseline,Transport,Max annual growth,100
 EURASIA ,Oil,Pathway,Transport,Max annual growth,100
 EURASIA ,Other fuels,Pathway,Transport,Max annual growth,100
 EURASIA ,Other fuels,Baseline,Transport,Max annual growth,100
-EURASIA ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-EURASIA ,Biofuels,Baseline,Transport,"Parameter a, max",5
+EURASIA ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+EURASIA ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 EURASIA ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 EURASIA ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 EURASIA ,Oil,Baseline,Transport,"Parameter a, max",100
 EURASIA ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 EURASIA ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 EURASIA ,Other fuels,Baseline,Transport,"Parameter a, max",100
-EURASIA ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-EURASIA ,Biofuels,Baseline,Transport,"Parameter a, min",0
+EURASIA ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+EURASIA ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 EURASIA ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 EURASIA ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 EURASIA ,Oil,Baseline,Transport,"Parameter a, min",100
 EURASIA ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 EURASIA ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 EURASIA ,Other fuels,Baseline,Transport,"Parameter a, min",100
-EURASIA ,Biofuels,Pathway,Transport,"Parameter b, max",37
-EURASIA ,Biofuels,Baseline,Transport,"Parameter b, max",100
+EURASIA ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+EURASIA ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 EURASIA ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 EURASIA ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 EURASIA ,Oil,Baseline,Transport,"Parameter b, max",-100
 EURASIA ,Oil,Pathway,Transport,"Parameter b, max",37
 EURASIA ,Other fuels,Pathway,Transport,"Parameter b, max",10
 EURASIA ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-EURASIA ,Biofuels,Pathway,Transport,"Parameter b, min",37
-EURASIA ,Biofuels,Baseline,Transport,"Parameter b, min",0
+EURASIA ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+EURASIA ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 EURASIA ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 EURASIA ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 EURASIA ,Oil,Baseline,Transport,"Parameter b, min",-100
 EURASIA ,Oil,Pathway,Transport,"Parameter b, min",37
 EURASIA ,Other fuels,Pathway,Transport,"Parameter b, min",10
 EURASIA ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-EURASIA ,Biofuels,Baseline,Transport,Saturation Point,2.4
-EURASIA ,Biofuels,Pathway,Transport,Saturation Point,100
+EURASIA ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+EURASIA ,Bioenergy,Pathway,Transport,Saturation Point,100
 EURASIA ,Fossil fuels,Baseline,Transport,Saturation Point,0
 EURASIA ,Fossil fuels,Pathway,Transport,Saturation Point,80
 EURASIA ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -12316,59 +12316,59 @@ RUS ,Biochar,Pathway,Industry,"Parameter b, min",40
 RUS ,Biochar,Baseline,Industry,"Parameter b, min",0
 RUS ,Biochar,Baseline,Industry,Saturation Point,5
 RUS ,Biochar,Pathway,Industry,Saturation Point,100
-RUS ,Biofuels,Pathway,Transport,Consumption:Generation,1
+RUS ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 RUS ,Oil,Pathway,Transport,Consumption:Generation,1
 RUS ,Other fuels,Pathway,Transport,Consumption:Generation,1
-RUS ,Biofuels,Baseline,Transport,Floor,0
-RUS ,Biofuels,Pathway,Transport,Floor,0
+RUS ,Bioenergy,Baseline,Transport,Floor,0
+RUS ,Bioenergy,Pathway,Transport,Floor,0
 RUS ,Fossil fuels,Pathway,Transport,Floor,0
 RUS ,Fossil fuels,Baseline,Transport,Floor,0
 RUS ,Oil,Baseline,Transport,Floor,0
 RUS ,Oil,Pathway,Transport,Floor,0
 RUS ,Other fuels,Pathway,Transport,Floor,0
 RUS ,Other fuels,Baseline,Transport,Floor,0
-RUS ,Biofuels,Baseline,Transport,Max annual growth,100
-RUS ,Biofuels,Pathway,Transport,Max annual growth,100
+RUS ,Bioenergy,Baseline,Transport,Max annual growth,100
+RUS ,Bioenergy,Pathway,Transport,Max annual growth,100
 RUS ,Fossil fuels,Baseline,Transport,Max annual growth,100
 RUS ,Fossil fuels,Pathway,Transport,Max annual growth,100
 RUS ,Oil,Baseline,Transport,Max annual growth,100
 RUS ,Oil,Pathway,Transport,Max annual growth,100
 RUS ,Other fuels,Pathway,Transport,Max annual growth,100
 RUS ,Other fuels,Baseline,Transport,Max annual growth,100
-RUS ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-RUS ,Biofuels,Baseline,Transport,"Parameter a, max",5
+RUS ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+RUS ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 RUS ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 RUS ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 RUS ,Oil,Baseline,Transport,"Parameter a, max",100
 RUS ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 RUS ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 RUS ,Other fuels,Baseline,Transport,"Parameter a, max",100
-RUS ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-RUS ,Biofuels,Baseline,Transport,"Parameter a, min",0
+RUS ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+RUS ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 RUS ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 RUS ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 RUS ,Oil,Baseline,Transport,"Parameter a, min",100
 RUS ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 RUS ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 RUS ,Other fuels,Baseline,Transport,"Parameter a, min",100
-RUS ,Biofuels,Pathway,Transport,"Parameter b, max",37
-RUS ,Biofuels,Baseline,Transport,"Parameter b, max",100
+RUS ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+RUS ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 RUS ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 RUS ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 RUS ,Oil,Baseline,Transport,"Parameter b, max",-100
 RUS ,Oil,Pathway,Transport,"Parameter b, max",37
 RUS ,Other fuels,Pathway,Transport,"Parameter b, max",10
 RUS ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-RUS ,Biofuels,Pathway,Transport,"Parameter b, min",37
-RUS ,Biofuels,Baseline,Transport,"Parameter b, min",0
+RUS ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+RUS ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 RUS ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 RUS ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 RUS ,Oil,Baseline,Transport,"Parameter b, min",-100
 RUS ,Oil,Pathway,Transport,"Parameter b, min",37
 RUS ,Other fuels,Pathway,Transport,"Parameter b, min",10
 RUS ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-RUS ,Biofuels,Baseline,Transport,Saturation Point,2.4
-RUS ,Biofuels,Pathway,Transport,Saturation Point,100
+RUS ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+RUS ,Bioenergy,Pathway,Transport,Saturation Point,100
 RUS ,Fossil fuels,Baseline,Transport,Saturation Point,0
 RUS ,Fossil fuels,Pathway,Transport,Saturation Point,80
 RUS ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -13088,59 +13088,59 @@ ASIAPAC ,Biochar,Pathway,Industry,"Parameter b, min",40
 ASIAPAC ,Biochar,Baseline,Industry,"Parameter b, min",0
 ASIAPAC ,Biochar,Baseline,Industry,Saturation Point,5
 ASIAPAC ,Biochar,Pathway,Industry,Saturation Point,100
-ASIAPAC ,Biofuels,Pathway,Transport,Consumption:Generation,1
+ASIAPAC ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 ASIAPAC ,Oil,Pathway,Transport,Consumption:Generation,1
 ASIAPAC ,Other fuels,Pathway,Transport,Consumption:Generation,1
-ASIAPAC ,Biofuels,Baseline,Transport,Floor,0
-ASIAPAC ,Biofuels,Pathway,Transport,Floor,0
+ASIAPAC ,Bioenergy,Baseline,Transport,Floor,0
+ASIAPAC ,Bioenergy,Pathway,Transport,Floor,0
 ASIAPAC ,Fossil fuels,Pathway,Transport,Floor,0
 ASIAPAC ,Fossil fuels,Baseline,Transport,Floor,0
 ASIAPAC ,Oil,Baseline,Transport,Floor,0
 ASIAPAC ,Oil,Pathway,Transport,Floor,0
 ASIAPAC ,Other fuels,Pathway,Transport,Floor,0
 ASIAPAC ,Other fuels,Baseline,Transport,Floor,0
-ASIAPAC ,Biofuels,Baseline,Transport,Max annual growth,100
-ASIAPAC ,Biofuels,Pathway,Transport,Max annual growth,100
+ASIAPAC ,Bioenergy,Baseline,Transport,Max annual growth,100
+ASIAPAC ,Bioenergy,Pathway,Transport,Max annual growth,100
 ASIAPAC ,Fossil fuels,Baseline,Transport,Max annual growth,100
 ASIAPAC ,Fossil fuels,Pathway,Transport,Max annual growth,100
 ASIAPAC ,Oil,Baseline,Transport,Max annual growth,100
 ASIAPAC ,Oil,Pathway,Transport,Max annual growth,100
 ASIAPAC ,Other fuels,Pathway,Transport,Max annual growth,100
 ASIAPAC ,Other fuels,Baseline,Transport,Max annual growth,100
-ASIAPAC ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-ASIAPAC ,Biofuels,Baseline,Transport,"Parameter a, max",5
+ASIAPAC ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+ASIAPAC ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 ASIAPAC ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 ASIAPAC ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 ASIAPAC ,Oil,Baseline,Transport,"Parameter a, max",100
 ASIAPAC ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 ASIAPAC ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 ASIAPAC ,Other fuels,Baseline,Transport,"Parameter a, max",100
-ASIAPAC ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-ASIAPAC ,Biofuels,Baseline,Transport,"Parameter a, min",0
+ASIAPAC ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+ASIAPAC ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 ASIAPAC ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 ASIAPAC ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 ASIAPAC ,Oil,Baseline,Transport,"Parameter a, min",100
 ASIAPAC ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 ASIAPAC ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 ASIAPAC ,Other fuels,Baseline,Transport,"Parameter a, min",100
-ASIAPAC ,Biofuels,Pathway,Transport,"Parameter b, max",37
-ASIAPAC ,Biofuels,Baseline,Transport,"Parameter b, max",100
+ASIAPAC ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+ASIAPAC ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 ASIAPAC ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 ASIAPAC ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 ASIAPAC ,Oil,Baseline,Transport,"Parameter b, max",-100
 ASIAPAC ,Oil,Pathway,Transport,"Parameter b, max",37
 ASIAPAC ,Other fuels,Pathway,Transport,"Parameter b, max",10
 ASIAPAC ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-ASIAPAC ,Biofuels,Pathway,Transport,"Parameter b, min",37
-ASIAPAC ,Biofuels,Baseline,Transport,"Parameter b, min",0
+ASIAPAC ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+ASIAPAC ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 ASIAPAC ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 ASIAPAC ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 ASIAPAC ,Oil,Baseline,Transport,"Parameter b, min",-100
 ASIAPAC ,Oil,Pathway,Transport,"Parameter b, min",37
 ASIAPAC ,Other fuels,Pathway,Transport,"Parameter b, min",10
 ASIAPAC ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-ASIAPAC ,Biofuels,Baseline,Transport,Saturation Point,2.4
-ASIAPAC ,Biofuels,Pathway,Transport,Saturation Point,100
+ASIAPAC ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+ASIAPAC ,Bioenergy,Pathway,Transport,Saturation Point,100
 ASIAPAC ,Fossil fuels,Baseline,Transport,Saturation Point,0
 ASIAPAC ,Fossil fuels,Pathway,Transport,Saturation Point,80
 ASIAPAC ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -13860,59 +13860,59 @@ CHINA ,Biochar,Pathway,Industry,"Parameter b, min",40
 CHINA ,Biochar,Baseline,Industry,"Parameter b, min",0
 CHINA ,Biochar,Baseline,Industry,Saturation Point,5
 CHINA ,Biochar,Pathway,Industry,Saturation Point,100
-CHINA ,Biofuels,Pathway,Transport,Consumption:Generation,1
+CHINA ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 CHINA ,Oil,Pathway,Transport,Consumption:Generation,1
 CHINA ,Other fuels,Pathway,Transport,Consumption:Generation,1
-CHINA ,Biofuels,Baseline,Transport,Floor,0
-CHINA ,Biofuels,Pathway,Transport,Floor,0
+CHINA ,Bioenergy,Baseline,Transport,Floor,0
+CHINA ,Bioenergy,Pathway,Transport,Floor,0
 CHINA ,Fossil fuels,Pathway,Transport,Floor,0
 CHINA ,Fossil fuels,Baseline,Transport,Floor,0
 CHINA ,Oil,Baseline,Transport,Floor,0
 CHINA ,Oil,Pathway,Transport,Floor,0
 CHINA ,Other fuels,Pathway,Transport,Floor,0
 CHINA ,Other fuels,Baseline,Transport,Floor,0
-CHINA ,Biofuels,Baseline,Transport,Max annual growth,100
-CHINA ,Biofuels,Pathway,Transport,Max annual growth,100
+CHINA ,Bioenergy,Baseline,Transport,Max annual growth,100
+CHINA ,Bioenergy,Pathway,Transport,Max annual growth,100
 CHINA ,Fossil fuels,Baseline,Transport,Max annual growth,100
 CHINA ,Fossil fuels,Pathway,Transport,Max annual growth,100
 CHINA ,Oil,Baseline,Transport,Max annual growth,100
 CHINA ,Oil,Pathway,Transport,Max annual growth,100
 CHINA ,Other fuels,Pathway,Transport,Max annual growth,100
 CHINA ,Other fuels,Baseline,Transport,Max annual growth,100
-CHINA ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-CHINA ,Biofuels,Baseline,Transport,"Parameter a, max",5
+CHINA ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+CHINA ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 CHINA ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 CHINA ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 CHINA ,Oil,Baseline,Transport,"Parameter a, max",100
 CHINA ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 CHINA ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 CHINA ,Other fuels,Baseline,Transport,"Parameter a, max",100
-CHINA ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-CHINA ,Biofuels,Baseline,Transport,"Parameter a, min",0
+CHINA ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+CHINA ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 CHINA ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 CHINA ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 CHINA ,Oil,Baseline,Transport,"Parameter a, min",100
 CHINA ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 CHINA ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 CHINA ,Other fuels,Baseline,Transport,"Parameter a, min",100
-CHINA ,Biofuels,Pathway,Transport,"Parameter b, max",37
-CHINA ,Biofuels,Baseline,Transport,"Parameter b, max",100
+CHINA ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+CHINA ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 CHINA ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 CHINA ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 CHINA ,Oil,Baseline,Transport,"Parameter b, max",-100
 CHINA ,Oil,Pathway,Transport,"Parameter b, max",37
 CHINA ,Other fuels,Pathway,Transport,"Parameter b, max",10
 CHINA ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-CHINA ,Biofuels,Pathway,Transport,"Parameter b, min",37
-CHINA ,Biofuels,Baseline,Transport,"Parameter b, min",0
+CHINA ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+CHINA ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 CHINA ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 CHINA ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 CHINA ,Oil,Baseline,Transport,"Parameter b, min",-100
 CHINA ,Oil,Pathway,Transport,"Parameter b, min",37
 CHINA ,Other fuels,Pathway,Transport,"Parameter b, min",10
 CHINA ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-CHINA ,Biofuels,Baseline,Transport,Saturation Point,2.4
-CHINA ,Biofuels,Pathway,Transport,Saturation Point,100
+CHINA ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+CHINA ,Bioenergy,Pathway,Transport,Saturation Point,100
 CHINA ,Fossil fuels,Baseline,Transport,Saturation Point,0
 CHINA ,Fossil fuels,Pathway,Transport,Saturation Point,80
 CHINA ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -14632,59 +14632,59 @@ INDIA ,Biochar,Pathway,Industry,"Parameter b, min",40
 INDIA ,Biochar,Baseline,Industry,"Parameter b, min",0
 INDIA ,Biochar,Baseline,Industry,Saturation Point,5
 INDIA ,Biochar,Pathway,Industry,Saturation Point,100
-INDIA ,Biofuels,Pathway,Transport,Consumption:Generation,1
+INDIA ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 INDIA ,Oil,Pathway,Transport,Consumption:Generation,1
 INDIA ,Other fuels,Pathway,Transport,Consumption:Generation,1
-INDIA ,Biofuels,Baseline,Transport,Floor,0
-INDIA ,Biofuels,Pathway,Transport,Floor,0
+INDIA ,Bioenergy,Baseline,Transport,Floor,0
+INDIA ,Bioenergy,Pathway,Transport,Floor,0
 INDIA ,Fossil fuels,Pathway,Transport,Floor,0
 INDIA ,Fossil fuels,Baseline,Transport,Floor,0
 INDIA ,Oil,Baseline,Transport,Floor,0
 INDIA ,Oil,Pathway,Transport,Floor,0
 INDIA ,Other fuels,Pathway,Transport,Floor,0
 INDIA ,Other fuels,Baseline,Transport,Floor,0
-INDIA ,Biofuels,Baseline,Transport,Max annual growth,100
-INDIA ,Biofuels,Pathway,Transport,Max annual growth,100
+INDIA ,Bioenergy,Baseline,Transport,Max annual growth,100
+INDIA ,Bioenergy,Pathway,Transport,Max annual growth,100
 INDIA ,Fossil fuels,Baseline,Transport,Max annual growth,100
 INDIA ,Fossil fuels,Pathway,Transport,Max annual growth,100
 INDIA ,Oil,Baseline,Transport,Max annual growth,100
 INDIA ,Oil,Pathway,Transport,Max annual growth,100
 INDIA ,Other fuels,Pathway,Transport,Max annual growth,100
 INDIA ,Other fuels,Baseline,Transport,Max annual growth,100
-INDIA ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-INDIA ,Biofuels,Baseline,Transport,"Parameter a, max",5
+INDIA ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+INDIA ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 INDIA ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 INDIA ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 INDIA ,Oil,Baseline,Transport,"Parameter a, max",100
 INDIA ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 INDIA ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 INDIA ,Other fuels,Baseline,Transport,"Parameter a, max",100
-INDIA ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-INDIA ,Biofuels,Baseline,Transport,"Parameter a, min",0
+INDIA ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+INDIA ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 INDIA ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 INDIA ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 INDIA ,Oil,Baseline,Transport,"Parameter a, min",100
 INDIA ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 INDIA ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 INDIA ,Other fuels,Baseline,Transport,"Parameter a, min",100
-INDIA ,Biofuels,Pathway,Transport,"Parameter b, max",37
-INDIA ,Biofuels,Baseline,Transport,"Parameter b, max",100
+INDIA ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+INDIA ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 INDIA ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 INDIA ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 INDIA ,Oil,Baseline,Transport,"Parameter b, max",-100
 INDIA ,Oil,Pathway,Transport,"Parameter b, max",37
 INDIA ,Other fuels,Pathway,Transport,"Parameter b, max",10
 INDIA ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-INDIA ,Biofuels,Pathway,Transport,"Parameter b, min",37
-INDIA ,Biofuels,Baseline,Transport,"Parameter b, min",0
+INDIA ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+INDIA ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 INDIA ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 INDIA ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 INDIA ,Oil,Baseline,Transport,"Parameter b, min",-100
 INDIA ,Oil,Pathway,Transport,"Parameter b, min",37
 INDIA ,Other fuels,Pathway,Transport,"Parameter b, min",10
 INDIA ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-INDIA ,Biofuels,Baseline,Transport,Saturation Point,2.4
-INDIA ,Biofuels,Pathway,Transport,Saturation Point,100
+INDIA ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+INDIA ,Bioenergy,Pathway,Transport,Saturation Point,100
 INDIA ,Fossil fuels,Baseline,Transport,Saturation Point,0
 INDIA ,Fossil fuels,Pathway,Transport,Saturation Point,80
 INDIA ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -15404,59 +15404,59 @@ ASEAN ,Biochar,Pathway,Industry,"Parameter b, min",40
 ASEAN ,Biochar,Baseline,Industry,"Parameter b, min",0
 ASEAN ,Biochar,Baseline,Industry,Saturation Point,5
 ASEAN ,Biochar,Pathway,Industry,Saturation Point,100
-ASEAN ,Biofuels,Pathway,Transport,Consumption:Generation,1
+ASEAN ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 ASEAN ,Oil,Pathway,Transport,Consumption:Generation,1
 ASEAN ,Other fuels,Pathway,Transport,Consumption:Generation,1
-ASEAN ,Biofuels,Baseline,Transport,Floor,0
-ASEAN ,Biofuels,Pathway,Transport,Floor,0
+ASEAN ,Bioenergy,Baseline,Transport,Floor,0
+ASEAN ,Bioenergy,Pathway,Transport,Floor,0
 ASEAN ,Fossil fuels,Pathway,Transport,Floor,0
 ASEAN ,Fossil fuels,Baseline,Transport,Floor,0
 ASEAN ,Oil,Baseline,Transport,Floor,0
 ASEAN ,Oil,Pathway,Transport,Floor,0
 ASEAN ,Other fuels,Pathway,Transport,Floor,0
 ASEAN ,Other fuels,Baseline,Transport,Floor,0
-ASEAN ,Biofuels,Baseline,Transport,Max annual growth,100
-ASEAN ,Biofuels,Pathway,Transport,Max annual growth,100
+ASEAN ,Bioenergy,Baseline,Transport,Max annual growth,100
+ASEAN ,Bioenergy,Pathway,Transport,Max annual growth,100
 ASEAN ,Fossil fuels,Baseline,Transport,Max annual growth,100
 ASEAN ,Fossil fuels,Pathway,Transport,Max annual growth,100
 ASEAN ,Oil,Baseline,Transport,Max annual growth,100
 ASEAN ,Oil,Pathway,Transport,Max annual growth,100
 ASEAN ,Other fuels,Pathway,Transport,Max annual growth,100
 ASEAN ,Other fuels,Baseline,Transport,Max annual growth,100
-ASEAN ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-ASEAN ,Biofuels,Baseline,Transport,"Parameter a, max",5
+ASEAN ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+ASEAN ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 ASEAN ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 ASEAN ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 ASEAN ,Oil,Baseline,Transport,"Parameter a, max",100
 ASEAN ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 ASEAN ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 ASEAN ,Other fuels,Baseline,Transport,"Parameter a, max",100
-ASEAN ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-ASEAN ,Biofuels,Baseline,Transport,"Parameter a, min",0
+ASEAN ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+ASEAN ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 ASEAN ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 ASEAN ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 ASEAN ,Oil,Baseline,Transport,"Parameter a, min",100
 ASEAN ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 ASEAN ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 ASEAN ,Other fuels,Baseline,Transport,"Parameter a, min",100
-ASEAN ,Biofuels,Pathway,Transport,"Parameter b, max",37
-ASEAN ,Biofuels,Baseline,Transport,"Parameter b, max",100
+ASEAN ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+ASEAN ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 ASEAN ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 ASEAN ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 ASEAN ,Oil,Baseline,Transport,"Parameter b, max",-100
 ASEAN ,Oil,Pathway,Transport,"Parameter b, max",37
 ASEAN ,Other fuels,Pathway,Transport,"Parameter b, max",10
 ASEAN ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-ASEAN ,Biofuels,Pathway,Transport,"Parameter b, min",37
-ASEAN ,Biofuels,Baseline,Transport,"Parameter b, min",0
+ASEAN ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+ASEAN ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 ASEAN ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 ASEAN ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 ASEAN ,Oil,Baseline,Transport,"Parameter b, min",-100
 ASEAN ,Oil,Pathway,Transport,"Parameter b, min",37
 ASEAN ,Other fuels,Pathway,Transport,"Parameter b, min",10
 ASEAN ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-ASEAN ,Biofuels,Baseline,Transport,Saturation Point,2.4
-ASEAN ,Biofuels,Pathway,Transport,Saturation Point,100
+ASEAN ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+ASEAN ,Bioenergy,Pathway,Transport,Saturation Point,100
 ASEAN ,Fossil fuels,Baseline,Transport,Saturation Point,0
 ASEAN ,Fossil fuels,Pathway,Transport,Saturation Point,80
 ASEAN ,Oil,Baseline,Transport,Saturation Point,90.9
@@ -16176,59 +16176,59 @@ DevelopingECO ,Biochar,Pathway,Industry,"Parameter b, min",40
 DevelopingECO ,Biochar,Baseline,Industry,"Parameter b, min",0
 DevelopingECO ,Biochar,Baseline,Industry,Saturation Point,5
 DevelopingECO ,Biochar,Pathway,Industry,Saturation Point,100
-DevelopingECO ,Biofuels,Pathway,Transport,Consumption:Generation,1
+DevelopingECO ,Bioenergy,Pathway,Transport,Consumption:Generation,1
 DevelopingECO ,Oil,Pathway,Transport,Consumption:Generation,1
 DevelopingECO ,Other fuels,Pathway,Transport,Consumption:Generation,1
-DevelopingECO ,Biofuels,Baseline,Transport,Floor,0
-DevelopingECO ,Biofuels,Pathway,Transport,Floor,0
+DevelopingECO ,Bioenergy,Baseline,Transport,Floor,0
+DevelopingECO ,Bioenergy,Pathway,Transport,Floor,0
 DevelopingECO ,Fossil fuels,Pathway,Transport,Floor,0
 DevelopingECO ,Fossil fuels,Baseline,Transport,Floor,0
 DevelopingECO ,Oil,Baseline,Transport,Floor,0
 DevelopingECO ,Oil,Pathway,Transport,Floor,0
 DevelopingECO ,Other fuels,Pathway,Transport,Floor,0
 DevelopingECO ,Other fuels,Baseline,Transport,Floor,0
-DevelopingECO ,Biofuels,Baseline,Transport,Max annual growth,100
-DevelopingECO ,Biofuels,Pathway,Transport,Max annual growth,100
+DevelopingECO ,Bioenergy,Baseline,Transport,Max annual growth,100
+DevelopingECO ,Bioenergy,Pathway,Transport,Max annual growth,100
 DevelopingECO ,Fossil fuels,Baseline,Transport,Max annual growth,100
 DevelopingECO ,Fossil fuels,Pathway,Transport,Max annual growth,100
 DevelopingECO ,Oil,Baseline,Transport,Max annual growth,100
 DevelopingECO ,Oil,Pathway,Transport,Max annual growth,100
 DevelopingECO ,Other fuels,Pathway,Transport,Max annual growth,100
 DevelopingECO ,Other fuels,Baseline,Transport,Max annual growth,100
-DevelopingECO ,Biofuels,Pathway,Transport,"Parameter a, max",0.1074
-DevelopingECO ,Biofuels,Baseline,Transport,"Parameter a, max",5
+DevelopingECO ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+DevelopingECO ,Bioenergy,Baseline,Transport,"Parameter a, max",5
 DevelopingECO ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
 DevelopingECO ,Fossil fuels,Baseline,Transport,"Parameter a, max",100
 DevelopingECO ,Oil,Baseline,Transport,"Parameter a, max",100
 DevelopingECO ,Oil,Pathway,Transport,"Parameter a, max",-0.09
 DevelopingECO ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
 DevelopingECO ,Other fuels,Baseline,Transport,"Parameter a, max",100
-DevelopingECO ,Biofuels,Pathway,Transport,"Parameter a, min",0.1074
-DevelopingECO ,Biofuels,Baseline,Transport,"Parameter a, min",0
+DevelopingECO ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+DevelopingECO ,Bioenergy,Baseline,Transport,"Parameter a, min",0
 DevelopingECO ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
 DevelopingECO ,Fossil fuels,Baseline,Transport,"Parameter a, min",100
 DevelopingECO ,Oil,Baseline,Transport,"Parameter a, min",100
 DevelopingECO ,Oil,Pathway,Transport,"Parameter a, min",-0.09
 DevelopingECO ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
 DevelopingECO ,Other fuels,Baseline,Transport,"Parameter a, min",100
-DevelopingECO ,Biofuels,Pathway,Transport,"Parameter b, max",37
-DevelopingECO ,Biofuels,Baseline,Transport,"Parameter b, max",100
+DevelopingECO ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+DevelopingECO ,Bioenergy,Baseline,Transport,"Parameter b, max",100
 DevelopingECO ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
 DevelopingECO ,Fossil fuels,Baseline,Transport,"Parameter b, max",-100
 DevelopingECO ,Oil,Baseline,Transport,"Parameter b, max",-100
 DevelopingECO ,Oil,Pathway,Transport,"Parameter b, max",37
 DevelopingECO ,Other fuels,Pathway,Transport,"Parameter b, max",10
 DevelopingECO ,Other fuels,Baseline,Transport,"Parameter b, max",-100
-DevelopingECO ,Biofuels,Pathway,Transport,"Parameter b, min",37
-DevelopingECO ,Biofuels,Baseline,Transport,"Parameter b, min",0
+DevelopingECO ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+DevelopingECO ,Bioenergy,Baseline,Transport,"Parameter b, min",0
 DevelopingECO ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
 DevelopingECO ,Fossil fuels,Baseline,Transport,"Parameter b, min",-100
 DevelopingECO ,Oil,Baseline,Transport,"Parameter b, min",-100
 DevelopingECO ,Oil,Pathway,Transport,"Parameter b, min",37
 DevelopingECO ,Other fuels,Pathway,Transport,"Parameter b, min",10
 DevelopingECO ,Other fuels,Baseline,Transport,"Parameter b, min",-100
-DevelopingECO ,Biofuels,Baseline,Transport,Saturation Point,2.4
-DevelopingECO ,Biofuels,Pathway,Transport,Saturation Point,100
+DevelopingECO ,Bioenergy,Baseline,Transport,Saturation Point,2.4
+DevelopingECO ,Bioenergy,Pathway,Transport,Saturation Point,100
 DevelopingECO ,Fossil fuels,Baseline,Transport,Saturation Point,0
 DevelopingECO ,Fossil fuels,Pathway,Transport,Saturation Point,80
 DevelopingECO ,Oil,Baseline,Transport,Saturation Point,90.9

@@ -74,7 +74,7 @@ def energy_supply(scenario, energy_demand):
         energy_demand.loc[
             slice(None),
             "Transport",
-            ["Oil", "Biofuels", "Other fuels", "International bunkers"],
+            ["Oil", "Bioenergy", "Other fuels", "International bunkers"],
             scenario,
         ]
         .loc[:, str(data_start_year) : str(data_end_year)]
@@ -534,7 +534,7 @@ def energy_supply(scenario, energy_demand):
     def hist_transport_consump(region, scenario):
         return transport_data.iloc[
             transport_data.index.get_level_values(0).str.contains(region, na=False)
-        ].loc[region, ["Oil", "Biofuels", "Other fuels"], :]
+        ].loc[region, ["Oil", "Bioenergy", "Other fuels"], :]
 
     # historical percent of total transport consumption met by a given technology (propotion)
     def hist_per_transport_consump(region, scenario, hist_transport_consump):
@@ -589,7 +589,7 @@ def energy_supply(scenario, energy_demand):
             lambda x: x
             * (
                 energy_demand.loc[
-                    region, "Transport", ["Oil", "Biofuels", "Other fuels"], scenario
+                    region, "Transport", ["Oil", "Bioenergy", "Other fuels"], scenario
                 ]
                 .sum()
                 .loc[str(near_proj_start_year) :]
