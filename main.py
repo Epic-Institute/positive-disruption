@@ -9,7 +9,7 @@ from podi.afolu import afolu
 from podi.results_analysis import results_analysis
 from podi.charts import charts
 from podi.curve_smooth import curve_smooth
-import podi.data.iea_weo_etl
+import podi.data.iea_weo2020_etl
 import podi.data.gcam_etl
 import pandas as pd
 from podi.cdr.cdr_util import (
@@ -50,7 +50,7 @@ pop_pathway, gdp_pathway = socioeconomics("Pathway", "podi/data/socioeconomic.cs
 # region
 
 podi.data.gcam_etl
-podi.data.iea_weo_etl
+podi.data.iea_weo2020_etl
 
 energy_demand_baseline = energy_demand(
     "Baseline",

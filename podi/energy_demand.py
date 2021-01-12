@@ -3,7 +3,7 @@
 # region
 
 import pandas as pd
-
+from podi.energy_supply import data_end_year
 from podi.curve_smooth import curve_smooth
 
 # endregion
@@ -60,6 +60,12 @@ def energy_demand(
     )
 
     # Reallocate 'Other' energy demand from ag/non-energy use to industry
+
+    energy_demand.loc[slice(None), "Other", slice(None), slice(None)].rename(
+        index={"Other": "Industry"}, level=0
+    )
+
+    """
     energy_demand.loc[slice(None), "Industry", "Other renewables", scenario] = (
         (
             (
@@ -70,13 +76,13 @@ def energy_demand(
                     scenario,
                 ].groupby("IEA Region")
             ).sum()
-            * 0.29
         )
         .reindex_like(
             energy_demand.loc[slice(None), "Industry", "Other renewables", scenario]
         )
         .values
     )
+    """
 
     # Reallocate heat demand within industry
     energy_demand.loc[slice(None), "Industry", "Heat", scenario] = (
@@ -271,7 +277,7 @@ def energy_demand(
             energy_demand.loc[
                 slice(None),
                 "Transport",
-                ["Electricity", "Oil", "Biofuels", "Other fuels"],
+                ["Electricity", "Oil", "Bioenergy", "Other fuels"],
             ].groupby("IEA Region")
         )
         .sum()
@@ -313,8 +319,11 @@ def energy_demand(
     energy_demand.columns = energy_demand.columns.astype(int)
     energy_demand.clip(lower=0, inplace=True)
 
-    energy_demand = curve_smooth(energy_demand, 5)
+    energy_demand_hist = energy_demand.loc[:, :data_end_year]
+    energy_demand_proj = curve_smooth(energy_demand.loc[:, (data_end_year + 1) :], 5)
+
+    energy_demand = energy_demand_hist.join(energy_demand_proj).clip(lower=0)
 
     # endregion
 
-    return energy_demand.clip(lower=0)
+    return energy_demand

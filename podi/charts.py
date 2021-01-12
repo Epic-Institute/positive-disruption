@@ -22,9 +22,9 @@ import plotly.io as pio
 
 save_figs = True
 
-unit_name = ["TWh", "EJ", "Mtoe"]
-unit_val = [1, 0.00359, 0.086]
-unit = [unit_name[1], unit_val[1]]
+unit_name = ["TWh", "EJ", "Mtoe", "Ktoe"]
+unit_val = [1, 0.00359, 0.086, 86]
+unit = [unit_name[3], unit_val[3]]
 
 # endregion
 
@@ -855,7 +855,7 @@ def charts(
 
     # region
 
-    start_yr = 2020
+    start_yr = data_start_year
 
     for i in range(0, len(iea_region_list)):
         energy_demand_i = energy_demand_pathway.loc[
@@ -863,14 +863,12 @@ def charts(
         ]
 
         if iea_region_list[i] == "World ":
-            energy_demand_i.loc[
-                "World ", "Transport", "Other fuels"
-            ] = energy_demand_i.loc[
-                "World ", "Transport", ["International bunkers", "Other fuels"], :
+            energy_demand_i.loc["Transport", "Other fuels"] = energy_demand_i.loc[
+                "Transport", ["International bunkers", "Other fuels"], :
             ].sum()
 
         fig = (
-            energy_demand_i.loc[(iea_region_list[i], slice(None), "Electricity"), :]
+            energy_demand_i.loc[(slice(None), "Electricity"), :]
             .groupby(["Sector"])
             .sum()
             .drop("TFC")
@@ -883,13 +881,13 @@ def charts(
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_i.loc[iea_region_list[i], "Transport", slice(None)]
+                    energy_demand_i.loc["Transport", slice(None)]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
                         [
                             "Oil",
-                            "Biofuels",
+                            "Bioenergy",
                             "Other fuels",
                         ],
                         :,
@@ -899,7 +897,7 @@ def charts(
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_i.loc[iea_region_list[i], "Buildings", slice(None)]
+                    energy_demand_i.loc["Buildings", slice(None)]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
@@ -913,7 +911,7 @@ def charts(
             )
             .append(
                 pd.DataFrame(
-                    energy_demand_i.loc[iea_region_list[i], "Industry", slice(None)]
+                    energy_demand_i.loc["Industry", slice(None)]
                     .groupby(["Metric"])
                     .sum()
                     .loc[
@@ -937,7 +935,6 @@ def charts(
             )
         )
 
-        plt.show()
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
@@ -957,8 +954,8 @@ def charts(
         plt.xlim([start_yr, energy_demand_pathway.columns.max()])
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
         plt.xticks(np.arange(start_yr, energy_demand_pathway.columns.max() + 1, 10))
-        # plt.yticks(np.arange(0, 120000, 20000))
         plt.title("Energy Demand, " + iea_region_list[i])
+        plt.show()
 
         if save_figs is True:
             plt.savefig(

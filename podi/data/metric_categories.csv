@@ -16,7 +16,7 @@ Power sector,Hydro,Fossil fuels,Oil,Secondary Energy | Electricity | Hydro,
 Power sector,Bioenergy,Fossil fuels,Gas,Secondary Energy | Electricity | Biomass,
 Power sector,Other renewables,Fossil fuels,Peaker gas,Secondary Energy | Electricity | Non-Biomass Renewables,
 Other energy sector,Other energy sector,Wind,Offshore wind,Secondary Energy | Liquids | Fossil,Offshore wind
-Other energy sector,Electricity,Solar,Small-scale PV,Secondary Energy | Electricity,Res. roof PV system
+Other energy sector,  Electricity,Solar,Small-scale PV,Secondary Energy | Electricity,Res. roof PV system
 TFC,Total final consumption,Solar,Small-scale PV,Final Energy,Com/gov/Indus roof PV system
 TFC,Coal,Solar,Utility-scale PV,Final Energy | Coal,CSP plant
 TFC,Oil,Tide and wave,Hydro,Final Energy | Oil,Wave device
@@ -35,9 +35,9 @@ Industry,Bioenergy,,,Final Energy | Industry,
 Industry,Other renewables,,,Final Energy | Industry | Electricity,
 Transport,Transport,,,Final Energy | Transportation,
 Transport,Oil,,,Final Energy | Transportation,
-Transport,International bunkers,,,Final Energy | Transportation,
+Transport,  International bunkers,,,Final Energy | Transportation,
 Transport,Electricity,,,Final Energy | Transportation | Electricity,
-Transport,Biofuels,,,Final Energy | Transportation,
+Transport,Bioenergy,,,Final Energy | Transportation,
 Transport,Other fuels,,,Final Energy | Transportation,
 Buildings,Buildings,,,Final Energy | Residential and Commercial,
 Buildings,Coal,,,Final Energy | Residential and Commercial,
@@ -46,7 +46,7 @@ Buildings,Natural gas,,,Final Energy | Residential and Commercial,
 Buildings,Electricity,,,Final Energy | Residential and Commercial | Electricity,
 Buildings,Heat,,,Final Energy | Residential and Commercial,
 Buildings,Bioenergy,,,Final Energy | Residential and Commercial,
-Buildings,Traditional biomass,,,Final Energy | Residential and Commercial,
+Buildings,   Traditional biomass,,,Final Energy | Residential and Commercial,
 Buildings,Other renewables,,,Final Energy | Residential and Commercial | Electricity,
 Other,Other,,,Final Energy,
-Other,Petrochem. feedstock,,,Secondary Energy | Liquids | Fossil,
+Other,   Petrochem. feedstock,,,Secondary Energy | Liquids | Fossil,

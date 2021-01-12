@@ -13,7 +13,7 @@ from numpy import NaN
 # endregion
 
 data_start_year = 2010
-data_end_year = 2017
+data_end_year = 2019
 near_proj_start_year = data_end_year + 1
 near_proj_end_year = 2025
 long_proj_start_year = near_proj_end_year + 1
