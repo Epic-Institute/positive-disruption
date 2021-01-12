@@ -4,7 +4,7 @@
 
 import pandas as pd
 
-# from podi.curve_smooth import curve_smooth
+from podi.curve_smooth import curve_smooth
 
 # endregion
 
@@ -312,6 +312,8 @@ def energy_demand(
 
     energy_demand.columns = energy_demand.columns.astype(int)
     energy_demand.clip(lower=0, inplace=True)
+
+    energy_demand = curve_smooth(energy_demand, 5)
 
     # endregion
 
