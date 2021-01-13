@@ -95,29 +95,50 @@ def iea_weo_em_etl(iea_region_list_i):
             ]
         ).T.set_index(1)
 
-        df["Sector"] = sector
-        df = pd.DataFrame(df.reset_index().set_index(["Sector", "Metric"]))
-
-        df = pd.concat(
-            [df],
-            keys=[
-                iea_region_list_i,
-            ],
-            names=["IEA Region"],
-        ).reorder_levels(["IEA Region", "Sector", "Metric"])
-
     else:
         df = pd.DataFrame(
             pd.read_excel(
                 input_data, (iea_region_list_i + "_El_CO2_Ind").replace(" ", "")
-            ).iloc[37:52, 0:7]
-        )
+            ).iloc[37:51, 0:7]
+        ).fillna(0)
+        df.set_index(df.iloc[:, 0].values, inplace=True)
+        df.columns = df.iloc[0].values
+        df.drop(columns=0, inplace=True)
+        df.drop(index=0, inplace=True)
+        df.columns = df.columns.astype(int)
+        df.index.name = "Metric"
 
-    df.rename(
-        index={42: "Electricity", 51: "Industry", 52: "Transport", 53: "Buildings"},
-        inplace=True,
-    )
-    df.index.name = "Sector"
+        sector = pd.DataFrame(
+            [
+                [
+                    "Total",
+                    "Total",
+                    "Total",
+                    "Total",
+                    "Power",
+                    "Power",
+                    "Power",
+                    "Power",
+                    "TFC",
+                    "TFC",
+                    "TFC",
+                    "TFC",
+                    "TFC",
+                ],
+                df.index.values,
+            ]
+        ).T.set_index(1)
+
+    df["Sector"] = sector
+    df = pd.DataFrame(df.reset_index().set_index(["Sector", "Metric"]))
+
+    df = pd.concat(
+        [df],
+        keys=[
+            iea_region_list_i,
+        ],
+        names=["IEA Region"],
+    ).reorder_levels(["IEA Region", "Sector", "Metric"])
 
     xnew = np.linspace(
         df.columns.values.astype(int).min(),
