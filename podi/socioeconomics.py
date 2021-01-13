@@ -3,7 +3,7 @@
 import pandas as pd
 import numpy as np
 from podi.curve_smooth import curve_smooth
-from podi.data.iea_weo_etl import data_end_year
+from podi.energy_demand import data_end_year
 
 iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
 

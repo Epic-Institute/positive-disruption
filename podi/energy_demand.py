@@ -4,7 +4,60 @@
 
 import pandas as pd
 from podi.curve_smooth import curve_smooth
-from podi.data.iea_weo_etl import data_end_year
+
+data_start_year = 2010
+data_end_year = 2019
+
+iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
+
+iea_region_list = (
+    "World ",
+    "NAM ",
+    "US ",
+    "CSAM ",
+    "BRAZIL ",
+    "EUR ",
+    "EU ",
+    "AFRICA ",
+    "SAFR ",
+    "ME ",
+    "EURASIA ",
+    "RUS ",
+    "ASIAPAC ",
+    "CHINA ",
+    "INDIA ",
+    "JPN ",
+    "ASEAN ",
+    " OECD ",
+    "NonOECD ",
+    "DevelopingECO ",
+    "AdvancedECO ",
+)
+
+gcam_region_list = (
+    "World ",
+    "OECD90 ",
+    "OECD90 ",
+    "LAM ",
+    "LAM ",
+    "OECD90 ",
+    "OECD90 ",
+    "MAF ",
+    "MAF ",
+    "MAF ",
+    "ASIA ",
+    "ASIA ",
+    "ASIA ",
+    "ASIA ",
+    "ASIA ",
+    "ASIA ",
+    "ASIA ",
+    "OECD90 ",
+    "World ",
+    "World ",
+    "World ",
+)
+
 
 # endregion
 

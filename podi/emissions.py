@@ -3,7 +3,7 @@
 # region
 
 import pandas as pd
-from podi.data.iea_weo_etl import data_start_year
+from podi.energy_demand import data_start_year
 from podi.energy_supply import long_proj_end_year
 from podi.data import iea_weo_em_etl
 

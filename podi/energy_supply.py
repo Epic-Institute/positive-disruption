@@ -7,9 +7,9 @@ from podi.adoption_curve import adoption_curve
 from podi.data.eia_etl import eia_etl
 from podi.data.bnef_etl import bnef_etl
 from podi.data.heat_etl import heat_etl
-from podi.data.iea_weo_etl import iea_region_list
+from podi.energy_demand import iea_region_list
 from numpy import NaN
-from podi.data.iea_weo_etl import (
+from podi.energy_demand import (
     data_start_year,
     data_end_year,
 )

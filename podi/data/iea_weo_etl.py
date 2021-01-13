@@ -3,59 +3,7 @@
 import pandas as pd
 import numpy as np
 from podi.curve_smooth import curve_smooth
-
-data_start_year = 2010
-data_end_year = 2019
-
-iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
-
-iea_region_list = (
-    "World ",
-    "NAM ",
-    "US ",
-    "CSAM ",
-    "BRAZIL ",
-    "EUR ",
-    "EU ",
-    "AFRICA ",
-    "SAFR ",
-    "ME ",
-    "EURASIA ",
-    "RUS ",
-    "ASIAPAC ",
-    "CHINA ",
-    "INDIA ",
-    "JPN ",
-    "ASEAN ",
-    " OECD ",
-    "NonOECD ",
-    "DevelopingECO ",
-    "AdvancedECO ",
-)
-
-gcam_region_list = (
-    "World ",
-    "OECD90 ",
-    "OECD90 ",
-    "LAM ",
-    "LAM ",
-    "OECD90 ",
-    "OECD90 ",
-    "MAF ",
-    "MAF ",
-    "MAF ",
-    "ASIA ",
-    "ASIA ",
-    "ASIA ",
-    "ASIA ",
-    "ASIA ",
-    "ASIA ",
-    "ASIA ",
-    "OECD90 ",
-    "World ",
-    "World ",
-    "World ",
-)
+from podi.energy_demand import data_end_year, iea_region_list, gcam_region_list
 
 input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
 

@@ -8,11 +8,7 @@ import pandas as pd
 from matplotlib.lines import Line2D
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
-from podi.data.iea_weo_etl import iea_region_list
-from podi.data.iea_weo_etl import (
-    data_end_year,
-    data_start_year,
-)
+from podi.energy_demand import iea_region_list, data_end_year, data_start_year
 from podi.energy_supply import near_proj_end_year
 from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name

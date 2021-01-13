@@ -9,7 +9,8 @@ from podi.afolu import afolu
 from podi.results_analysis import results_analysis
 from podi.charts import charts
 from podi.curve_smooth import curve_smooth
-import podi.data.iea_weo_etl
+
+# import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
 from podi.cdr.cdr_util import (
@@ -19,7 +20,7 @@ from podi.cdr.cdr_util import (
     transport_em_def,
     fuel_em_def,
 )
-from podi.data.iea_weo_etl import iea_region_list
+from podi.energy_demand import iea_region_list
 from podi.emissions import emissions
 from podi.cdr.cdr_main import cdr_mix
 from podi.climate import climate
@@ -49,7 +50,7 @@ start_time = time.monotonic()
 # region
 
 podi.data.gcam_etl
-podi.data.iea_weo_etl
+# podi.data.iea_weo_etl
 
 energy_demand_baseline = energy_demand(
     "Baseline",
