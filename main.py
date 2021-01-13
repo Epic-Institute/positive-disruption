@@ -38,8 +38,7 @@ start_time = time.monotonic()
 
 # region
 
-socio_baseline = socioeconomics("Baseline", "podi/data/socioeconomic.csv")
-socio_pathway = socioeconomics("Pathway", "podi/data/socioeconomic.csv")
+# podi.socioeconomics
 
 # endregion
 
@@ -50,7 +49,7 @@ socio_pathway = socioeconomics("Pathway", "podi/data/socioeconomic.csv")
 # region
 
 podi.data.gcam_etl
-podi.data.iea_weo2020_etl
+podi.data.iea_weo_etl
 
 energy_demand_baseline = energy_demand(
     "Baseline",

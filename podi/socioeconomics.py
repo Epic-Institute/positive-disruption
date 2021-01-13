@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import pandas as pd
-from numpy import NaN
 import numpy as np
 from podi.curve_smooth import curve_smooth
 from podi.data.iea_weo_etl import data_end_year
@@ -134,18 +133,10 @@ def socioeconomics(iea_region_list_i):
     df["Sector"] = sector
     df = pd.DataFrame(df.reset_index().set_index(["Sector", "Metric"]))
 
-    df = pd.concat(
-        [df],
-        keys=[
-            iea_region_list_i,
-        ],
-        names=["IEA Region"],
-    ).reorder_levels(["IEA Region", "Sector", "Metric"])
-
     xnew = np.linspace(
         df.columns.values.astype(int).min(),
         df.columns.values.astype(int).max(),
-        df.columns.values.astype(int).max() - df.columns.values.astype(int).min(),
+        df.columns.values.astype(int).max() - df.columns.values.astype(int).min() + 1,
     ).astype(int)
 
     df = (
@@ -155,15 +146,94 @@ def socioeconomics(iea_region_list_i):
         .interpolate(method="quadratic", axis=1)
     )
 
-    df2 = []
+    df.rename(
+        index={
+            "Total CO2": "Total primary demand",
+            "Final consumption": "Total final consumption",
+            "Process emissions": "Other",
+            "  Transport": "Transport",
+        },
+        inplace=True,
+    )
 
-    for i in range(0, len(iea_region_list)):
-        df2 = pd.DataFrame(df2).append(socioeconomics(iea_region_list[i]))
+    # GCAM for 2040-2100
 
-    socio_hist = df2.loc[:, :data_end_year]
+    gcam_demand_projection = (
+        pd.read_csv("podi/data/gcam.csv")
+        .replace(" -   ", 0)
+        .set_index(["Region", "Variable", "Unit"])
+        .astype(float)
+    )
+    gcam_demand_projection.index.rename(["Region", "Sector", "Unit"], inplace=True)
+    gcam_demand_projection.columns = gcam_demand_projection.columns.astype(int)
 
-    socio_proj = curve_smooth(df2.loc[:, (data_end_year + 1) :], 3)
+    xnew = np.linspace(
+        gcam_demand_projection.columns.values.astype(int).min(),
+        gcam_demand_projection.columns.values.astype(int).max(),
+        gcam_demand_projection.columns.values.astype(int).max()
+        - gcam_demand_projection.columns.values.astype(int).min(),
+    ).astype(int)
 
-    df2 = socio_hist.join(socio_proj)
+    gcam_demand_projection = (
+        pd.DataFrame(columns=xnew, index=gcam_demand_projection.index)
+        .combine_first(gcam_demand_projection)
+        .astype(float)
+        .interpolate(method="quadratic", axis=1)
+    )
 
-    return df2
+    metrics = pd.read_csv("podi/data/metric_categories_em.csv")
+
+    gcam_demand_projection = gcam_demand_projection.loc[
+        (slice(None), metrics.loc[:, "GCAM Metric"].dropna(axis=0), slice(None)),
+        :,
+    ]
+
+    gcam_pct_change = (
+        gcam_demand_projection.pct_change(axis="columns")
+        .loc[:, df.columns.values.max() :]
+        .fillna(0)
+        .apply(lambda x: x + 1, axis=1)
+    )
+
+    gcam_pct_change = gcam_pct_change.droplevel(["Region", "Unit"])
+    gcam_pct_change = (
+        gcam_pct_change.reset_index()
+        .merge(
+            pd.DataFrame(
+                metrics.loc[:, ["IEA Sector", "IEA Metric", "GCAM Metric"]].dropna()
+            ).set_index("GCAM Metric"),
+            right_on="GCAM Metric",
+            left_on="Sector",
+        )
+        .set_index(["IEA Sector", "IEA Metric"])
+        .drop(columns="Sector")
+    )
+    gcam_pct_change.columns = gcam_pct_change.columns.astype(int)
+
+    df = df.join(gcam_pct_change.loc[:, 2041:], on=["Sector", "Metric"]).dropna()
+
+    df = pd.concat(
+        [df],
+        keys=[
+            iea_region_list_i,
+        ],
+        names=["IEA Region"],
+    ).reorder_levels(["IEA Region", "Sector", "Metric"])
+
+    df = df.loc[:, :2039].join(df.loc[:, 2040:].cumprod(axis=1).fillna(0).astype(int))
+
+    return df
+
+
+df2 = []
+
+for i in range(0, len(iea_region_list)):
+    df2 = pd.DataFrame(df2).append(socioeconomics(iea_region_list[i]))
+
+socio_hist = df2.loc[:, :data_end_year]
+
+socio_proj = curve_smooth(df2.loc[:, (data_end_year + 1) :], 3)
+
+df2 = socio_hist.join(socio_proj)
+
+df2.to_csv("podi/data/socio.csv")

@@ -4,6 +4,7 @@
 
 import pandas as pd
 from podi.curve_smooth import curve_smooth
+from podi.data.iea_weo_etl import data_end_year
 
 # endregion
 
