@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import pandas as pd
-from podi.energy_supply import data_start_year
+from podi.data.iea_weo_etl import data_start_year
 
 
 def etl(data):

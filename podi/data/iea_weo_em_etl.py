@@ -2,6 +2,7 @@
 
 import pandas as pd
 from numpy import NaN
+import numpy as np
 
 iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
 
@@ -57,38 +58,79 @@ input_data = pd.ExcelFile("podi/data/iea_weo.xlsx")
 
 
 def iea_weo_em_etl(iea_region_list_i):
-    df = pd.read_excel(input_data, (iea_region_list_i + "_El_CO2_Ind").replace(" ", ""))
-    df.columns = df.loc[37, :]
+    if iea_region_list_i == "World ":
+        df = pd.DataFrame(
+            pd.read_excel(
+                input_data, (iea_region_list_i + "_El_CO2_Ind").replace(" ", "")
+            ).iloc[37:53, 0:7]
+        ).fillna(0)
+        df.set_index(df.iloc[:, 0].values, inplace=True)
+        df.columns = df.iloc[0].values
+        df.drop(columns=0, inplace=True)
+        df.drop(index=0, inplace=True)
+        df.columns = df.columns.astype(int)
+        df.rename(index={"  Of which: bunkers": "International bunkers"}, inplace=True)
+        df.index.name = "Metric"
 
-    df = (
-        pd.DataFrame(df.loc[42, :].iloc[1:4]).append(
-            pd.DataFrame(df.loc[42, :].iloc[13:17])
+        sector = pd.DataFrame(
+            [
+                [
+                    "Total",
+                    "Total",
+                    "Total",
+                    "Total",
+                    "Power",
+                    "Power",
+                    "Power",
+                    "Power",
+                    "TFC",
+                    "TFC",
+                    "TFC",
+                    "TFC",
+                    "TFC",
+                    "TFC",
+                    "Other",
+                ],
+                df.index.values,
+            ]
+        ).T.set_index(1)
+
+        df["Sector"] = sector
+        df = pd.DataFrame(df.reset_index().set_index(["Sector", "Metric"]))
+
+        df = pd.concat(
+            [df],
+            keys=[
+                iea_region_list_i,
+            ],
+            names=["IEA Region"],
+        ).reorder_levels(["IEA Region", "Sector", "Metric"])
+
+    else:
+        df = pd.DataFrame(
+            pd.read_excel(
+                input_data, (iea_region_list_i + "_El_CO2_Ind").replace(" ", "")
+            ).iloc[37:52, 0:7]
         )
-    ).T.append((df.loc[51:53, :].iloc[:, 1:4]).join(df.loc[51:53, :].iloc[:, 13:17]))
-    df = df.astype(float)
-    df.columns = df.columns.astype(int)
+
     df.rename(
         index={42: "Electricity", 51: "Industry", 52: "Transport", 53: "Buildings"},
         inplace=True,
     )
     df.index.name = "Sector"
 
-    for i in range(3, 9):
-        df.insert(i - 2, 2008 + i, NaN)
-    for i in range(10, 16):
-        df.insert(i - 1, i + 2009, NaN)
-    for i in range(17, 21):
-        df.insert(i - 1, i + 2009, NaN)
-    for i in range(22, 26):
-        df.insert(i - 1, i + 2009, NaN)
-    for i in range(27, 31):
-        df.insert(i - 1, i + 2009, NaN)
+    xnew = np.linspace(
+        df.columns.values.astype(int).min(),
+        df.columns.values.astype(int).max(),
+        df.columns.values.astype(int).max() - df.columns.values.astype(int).min(),
+    ).astype(int)
 
-    df.iloc[:, 0:8] = df.iloc[:, 0:8].interpolate(axis=1).astype(int)
-    df.iloc[:, 8:16] = df.iloc[:, 8:16].interpolate(axis=1).astype(int)
-    df.iloc[:, 15:21] = df.iloc[:, 15:21].interpolate(axis=1).astype(int)
-    df.iloc[:, 20:26] = df.iloc[:, 20:26].interpolate(axis=1).astype(int)
-    df.iloc[:, 25:31] = df.iloc[:, 25:31].interpolate(axis=1).astype(int)
+    df = (
+        pd.DataFrame(columns=xnew, index=df.index)
+        .combine_first(df)
+        .astype(float)
+        .interpolate(method="quadratic", axis=1)
+    )
 
     # GCAM for 2040-2100
 

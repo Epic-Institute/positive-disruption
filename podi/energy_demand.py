@@ -3,7 +3,6 @@
 # region
 
 import pandas as pd
-from podi.energy_supply import data_end_year
 from podi.curve_smooth import curve_smooth
 
 # endregion
@@ -100,7 +99,14 @@ def energy_demand(
             energy_demand.loc[
                 slice(None),
                 "Industry",
-                ["Coal", "Oil", "Natural gas", "Bioenergy", "Other renewables", 'Other'],
+                [
+                    "Coal",
+                    "Oil",
+                    "Natural gas",
+                    "Bioenergy",
+                    "Other renewables",
+                    "Other",
+                ],
                 scenario,
             ].groupby("IEA Region")
         )

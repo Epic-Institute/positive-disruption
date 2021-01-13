@@ -9,12 +9,11 @@ from matplotlib.lines import Line2D
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.data.iea_weo_etl import iea_region_list
-from podi.energy_supply import (
+from podi.data.iea_weo_etl import (
     data_end_year,
     data_start_year,
-    long_proj_end_year,
-    long_proj_start_year,
 )
+from podi.energy_supply import near_proj_end_year
 from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
 import plotly.express as px
@@ -22,9 +21,11 @@ import plotly.io as pio
 
 save_figs = True
 
+long_proj_start_year = near_proj_end_year + 1
 unit_name = ["TWh", "EJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00359, 0.086, 86]
 unit = [unit_name[3], unit_val[3]]
+
 
 # endregion
 

@@ -3,7 +3,8 @@
 # region
 
 import pandas as pd
-from podi.energy_supply import data_start_year, long_proj_end_year
+from podi.data.iea_weo_etl import data_start_year
+from podi.energy_supply import long_proj_end_year
 from podi.adoption_curve import adoption_curve
 
 # endregion

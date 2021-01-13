@@ -3,7 +3,9 @@
 import pandas as pd
 import numpy as np
 from podi.curve_smooth import curve_smooth
-from podi.energy_supply import data_end_year
+
+data_start_year = 2010
+data_end_year = 2019
 
 iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
 
@@ -55,7 +57,7 @@ gcam_region_list = (
     "World ",
 )
 
-input_data = pd.ExcelFile("podi/data/iea_weo_2020.xlsx")
+input_data = pd.ExcelFile("podi/data/iea_weo.xlsx")
 
 
 def iea_weo_etl(iea_region_list_i, gcam_region_list_i):

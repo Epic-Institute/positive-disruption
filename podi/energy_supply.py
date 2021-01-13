@@ -9,15 +9,17 @@ from podi.data.bnef_etl import bnef_etl
 from podi.data.heat_etl import heat_etl
 from podi.data.iea_weo_etl import iea_region_list
 from numpy import NaN
+from podi.data.iea_weo_etl import (
+    data_start_year,
+    data_end_year,
+)
 
 # endregion
 
-data_start_year = 2010
-data_end_year = 2019
-near_proj_start_year = data_end_year + 1
 near_proj_end_year = 2025
-long_proj_start_year = near_proj_end_year + 1
 long_proj_end_year = 2100
+near_proj_start_year = data_end_year + 1
+long_proj_start_year = near_proj_end_year + 1
 energy_oversupply_prop = 0.0
 
 

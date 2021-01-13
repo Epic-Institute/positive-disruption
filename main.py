@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # region
-# test
+
 from podi.socioeconomics import socioeconomics
 from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply
@@ -9,7 +9,7 @@ from podi.afolu import afolu
 from podi.results_analysis import results_analysis
 from podi.charts import charts
 from podi.curve_smooth import curve_smooth
-import podi.data.iea_weo2020_etl
+import podi.data.iea_weo_etl
 import podi.data.gcam_etl
 import pandas as pd
 from podi.cdr.cdr_util import (
