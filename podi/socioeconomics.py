@@ -55,7 +55,7 @@ gcam_region_list = (
     "World ",
 )
 
-input_data = pd.ExcelFile("podi/data/iea_weo.xlsx")
+input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
 
 
 def socioeconomics(iea_region_list_i):

@@ -55,7 +55,7 @@ gcam_region_list = (
     "World ",
 )
 
-input_data = pd.ExcelFile("podi/data/iea_weo.xlsx")
+input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
 
 
 def iea_weo_em_etl(iea_region_list_i, gcam_region_list_i):

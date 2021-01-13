@@ -856,6 +856,8 @@ def charts(
 
     # region
 
+    # region
+
     colors = (
         (0.0, 0.392, 0.0),
         (0.4, 0.2, 0.6),

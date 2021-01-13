@@ -248,7 +248,9 @@ conc_pathway, temp_pathway, sea_lvl_pathway = climate(
 adoption_curves = []
 
 for i in range(0, len(iea_region_list)):
-    adoption_curves = curve_smooth(
+    adoption_curves_hist = pd.DataFrame(adoption_curves.loc[:, :data_end_year])
+
+    adoption_curves_proj = curve_smooth(
         pd.DataFrame(adoption_curves).append(
             results_analysis(
                 iea_region_list[i],

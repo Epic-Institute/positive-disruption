@@ -101,7 +101,7 @@ The following files, located in `podi/data <https://github.com/Epic-Institute/po
   - Consists of data on energy efficiency factors for different regions, sectors, and fuels in time series from 2010 to 2100 for baseline and pathway scenarios.
   - Used in `energy_demand.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/energy_demand.py>`_ where it’s combined with data on energy demand, heat pumps, transport efficiency, solar thermal, and biofuels.
 
-12. iea_weo.xlsx
+12. iea_weo2020.xlsx
   - Consists of data on energy demand for WEO regions.
   - Used in `iea_weo_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/iea_weo_etl.py>`_ where it is transformed into energy_demand_historical.csv.
 
@@ -124,7 +124,7 @@ The following files, located in `podi/data <https://github.com/Epic-Institute/po
 17. region_categories.csv
   - Consists of table showing which countries are in which regions (IEA, BNEF, IIASA, R32, CAIT, GCAM).
   - Used in `eia_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/eia_etl.py>`_ to set index for electricity_generation.
-  - Used in `iea_weo_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/iea_weo_etl.py>`_ to create iea_region_list and gcam_region_list used to transform iea_weo.xlsx into energy_demand_historical.csv.
+  - Used in `iea_weo_etl.py <https://github.com/Epic-Institute/positive-disruption/blob/master/podi/data/iea_weo_etl.py>`_ to create iea_region_list and gcam_region_list used to transform iea_weo2020.xlsx into energy_demand_historical.csv.
 
 18. socioeconomic.csv
   - Consists of data on GDP, population, and carbon price in time series from 2005 to 2100 in ten-year increments for baseline and pathway scenarios.
