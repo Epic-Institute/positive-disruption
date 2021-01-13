@@ -75,14 +75,14 @@ def iea_weo_em_etl(iea_region_list_i):
         sector = pd.DataFrame(
             [
                 [
-                    "Total",
-                    "Total",
-                    "Total",
-                    "Total",
-                    "Power",
-                    "Power",
-                    "Power",
-                    "Power",
+                    "TPED",
+                    "TPED",
+                    "TPED",
+                    "TPED",
+                    "Power sector",
+                    "Power sector",
+                    "Power sector",
+                    "Power sector",
                     "TFC",
                     "TFC",
                     "TFC",
@@ -111,14 +111,14 @@ def iea_weo_em_etl(iea_region_list_i):
         sector = pd.DataFrame(
             [
                 [
-                    "Total",
-                    "Total",
-                    "Total",
-                    "Total",
-                    "Power",
-                    "Power",
-                    "Power",
-                    "Power",
+                    "TPED",
+                    "TPED",
+                    "TPED",
+                    "TPED",
+                    "Power sector",
+                    "Power sector",
+                    "Power sector",
+                    "Power sector",
                     "TFC",
                     "TFC",
                     "TFC",
@@ -131,14 +131,6 @@ def iea_weo_em_etl(iea_region_list_i):
 
     df["Sector"] = sector
     df = pd.DataFrame(df.reset_index().set_index(["Sector", "Metric"]))
-
-    df = pd.concat(
-        [df],
-        keys=[
-            iea_region_list_i,
-        ],
-        names=["IEA Region"],
-    ).reorder_levels(["IEA Region", "Sector", "Metric"])
 
     xnew = np.linspace(
         df.columns.values.astype(int).min(),
@@ -162,85 +154,75 @@ def iea_weo_em_etl(iea_region_list_i):
         .astype(float)
     )
     gcam_demand_projection.index.rename(["Region", "Sector", "Unit"], inplace=True)
+    gcam_demand_projection.columns = gcam_demand_projection.columns.astype(int)
 
-    for i in range(1, 5):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(6, 15):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(16, 25):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(26, 35):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(36, 45):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(46, 55):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(56, 65):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(66, 75):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(76, 85):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
-    for i in range(86, 95):
-        gcam_demand_projection.insert(i, i + 2005, NaN)
+    xnew = np.linspace(
+        gcam_demand_projection.columns.values.astype(int).min(),
+        gcam_demand_projection.columns.values.astype(int).max(),
+        gcam_demand_projection.columns.values.astype(int).max()
+        - gcam_demand_projection.columns.values.astype(int).min(),
+    ).astype(int)
 
-    gcam_demand_projection.columns = gcam_demand_projection.columns.astype(str)
-
-    gcam_demand_projection.iloc[:, 0:6] = gcam_demand_projection.iloc[
-        :, 0:6
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 5:16] = gcam_demand_projection.iloc[
-        :, 5:16
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 15:26] = gcam_demand_projection.iloc[
-        :, 15:26
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 25:36] = gcam_demand_projection.iloc[
-        :, 25:36
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 35:46] = gcam_demand_projection.iloc[
-        :, 35:46
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 45:56] = gcam_demand_projection.iloc[
-        :, 45:56
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 55:66] = gcam_demand_projection.iloc[
-        :, 55:66
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 65:76] = gcam_demand_projection.iloc[
-        :, 65:76
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 75:86] = gcam_demand_projection.iloc[
-        :, 75:86
-    ].interpolate(axis=1)
-    gcam_demand_projection.iloc[:, 85:96] = gcam_demand_projection.iloc[
-        :, 85:96
-    ].interpolate(axis=1)
+    gcam_demand_projection = (
+        pd.DataFrame(columns=xnew, index=gcam_demand_projection.index)
+        .combine_first(gcam_demand_projection)
+        .astype(float)
+        .interpolate(method="quadratic", axis=1)
+    )
 
     metrics = pd.read_csv("podi/data/metric_categories_em.csv")
 
     gcam_demand_projection = gcam_demand_projection.loc[
-        (slice(None), metrics.loc[:, "GCAM Metric"].dropna(axis=0), slice(None)), :
+        (iea_region_list_i, metrics.loc[:, "GCAM Metric"].dropna(axis=0), slice(None)),
+        :,
     ]
 
     gcam_pct_change = (
         gcam_demand_projection.pct_change(axis="columns")
-        .loc[:, "2041":]
+        .loc[:, df.columns.values.max() :]
         .fillna(0)
         .apply(lambda x: x + 1, axis=1)
     )
+
+    """
     gcam_pct_change.rename(
         index={
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Industry": "Electricity",
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Residential and Commercial": "Industry",
+            "Emissions | CO2 | Fossil Fuels and Industry": "TPED",
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Supply": "Power sector",
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand": "TFC",
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Industry": "Industry",
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Residential and Commercial": "Buildings",
             "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Transportation": "Transport",
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Supply | Electricity": "Buildings",
+            "Emissions | CO2 | Fossil Fuels and Industry | Energy Supply | Electricity": "Electricity",
         },
         inplace=True,
     )
-    gcam_pct_change.droplevel(["Region", "Unit"])
+    """
 
-    df = df.join(gcam_pct_change)
+    gcam_pct_change = gcam_pct_change.droplevel(["Region", "Unit"])
+    gcam_pct_change = (
+        gcam_pct_change.reset_index()
+        .merge(
+            pd.DataFrame(
+                metrics.loc[:, ["IEA Sector", "IEA Metric", "GCAM Metric"]].dropna()
+            ).set_index("GCAM Metric"),
+            right_on="GCAM Metric",
+            left_on="Sector",
+        )
+        .set_index(["IEA Sector", "IEA Metric"])
+        .drop(columns="Sector")
+    )
+
+    df = df.join(gcam_pct_change, on=["Sector", "Metric"])
+
+    df = pd.concat(
+        [df],
+        keys=[
+            iea_region_list_i,
+        ],
+        names=["IEA Region"],
+    ).reorder_levels(["IEA Region", "Sector", "Metric"])
+
     df.columns = df.columns.astype(int)
     df = df.loc[:, :2039].join(df.loc[:, 2040:].cumprod(axis=1).fillna(0).astype(int))
 

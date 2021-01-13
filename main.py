@@ -38,8 +38,8 @@ start_time = time.monotonic()
 
 # region
 
-pop_baseline, gdp_baseline = socioeconomics("Baseline", "podi/data/socioeconomic.csv")
-pop_pathway, gdp_pathway = socioeconomics("Pathway", "podi/data/socioeconomic.csv")
+socio_baseline = socioeconomics("Baseline", "podi/data/socioeconomic.csv")
+socio_pathway = socioeconomics("Pathway", "podi/data/socioeconomic.csv")
 
 # endregion
 
