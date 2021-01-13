@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 import pandas as pd
-from numpy import NaN
 import numpy as np
+from podi.curve_smooth import curve_smooth
+from podi.data.iea_weo_etl import data_end_year
 
 iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
 
@@ -57,7 +58,7 @@ gcam_region_list = (
 input_data = pd.ExcelFile("podi/data/iea_weo.xlsx")
 
 
-def iea_weo_em_etl(iea_region_list_i):
+def iea_weo_em_etl(iea_region_list_i, gcam_region_list_i):
     if iea_region_list_i == "World ":
         df = pd.DataFrame(
             pd.read_excel(
@@ -86,8 +87,8 @@ def iea_weo_em_etl(iea_region_list_i):
                     "TFC",
                     "TFC",
                     "TFC",
-                    "TFC",
-                    "TFC",
+                    "Transport",
+                    "Transport",
                     "TFC",
                     "Other",
                 ],
@@ -121,7 +122,7 @@ def iea_weo_em_etl(iea_region_list_i):
                     "Power sector",
                     "TFC",
                     "TFC",
-                    "TFC",
+                    "Transport",
                     "TFC",
                     "TFC",
                 ],
@@ -135,7 +136,7 @@ def iea_weo_em_etl(iea_region_list_i):
     xnew = np.linspace(
         df.columns.values.astype(int).min(),
         df.columns.values.astype(int).max(),
-        df.columns.values.astype(int).max() - df.columns.values.astype(int).min(),
+        df.columns.values.astype(int).max() - df.columns.values.astype(int).min() + 1,
     ).astype(int)
 
     df = (
@@ -143,6 +144,16 @@ def iea_weo_em_etl(iea_region_list_i):
         .combine_first(df)
         .astype(float)
         .interpolate(method="quadratic", axis=1)
+    )
+
+    df.rename(
+        index={
+            "Total CO2": "Total primary demand",
+            "Final consumption": "Total final consumption",
+            "Process emissions": "Other",
+            "  Transport": "Transport",
+        },
+        inplace=True,
     )
 
     # GCAM for 2040-2100
@@ -173,7 +184,7 @@ def iea_weo_em_etl(iea_region_list_i):
     metrics = pd.read_csv("podi/data/metric_categories_em.csv")
 
     gcam_demand_projection = gcam_demand_projection.loc[
-        (iea_region_list_i, metrics.loc[:, "GCAM Metric"].dropna(axis=0), slice(None)),
+        (gcam_region_list_i, metrics.loc[:, "GCAM Metric"].dropna(axis=0), slice(None)),
         :,
     ]
 
@@ -183,21 +194,6 @@ def iea_weo_em_etl(iea_region_list_i):
         .fillna(0)
         .apply(lambda x: x + 1, axis=1)
     )
-
-    """
-    gcam_pct_change.rename(
-        index={
-            "Emissions | CO2 | Fossil Fuels and Industry": "TPED",
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Supply": "Power sector",
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand": "TFC",
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Industry": "Industry",
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Residential and Commercial": "Buildings",
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Demand | Transportation": "Transport",
-            "Emissions | CO2 | Fossil Fuels and Industry | Energy Supply | Electricity": "Electricity",
-        },
-        inplace=True,
-    )
-    """
 
     gcam_pct_change = gcam_pct_change.droplevel(["Region", "Unit"])
     gcam_pct_change = (
@@ -212,8 +208,9 @@ def iea_weo_em_etl(iea_region_list_i):
         .set_index(["IEA Sector", "IEA Metric"])
         .drop(columns="Sector")
     )
+    gcam_pct_change.columns = gcam_pct_change.columns.astype(int)
 
-    df = df.join(gcam_pct_change, on=["Sector", "Metric"])
+    df = df.join(gcam_pct_change.loc[:, 2041:], on=["Sector", "Metric"]).dropna()
 
     df = pd.concat(
         [df],
@@ -223,44 +220,22 @@ def iea_weo_em_etl(iea_region_list_i):
         names=["IEA Region"],
     ).reorder_levels(["IEA Region", "Sector", "Metric"])
 
-    df.columns = df.columns.astype(int)
     df = df.loc[:, :2039].join(df.loc[:, 2040:].cumprod(axis=1).fillna(0).astype(int))
 
     return df
 
 
-em_baseline = dict()
+em = []
 
 for i in range(0, len(iea_region_list)):
-    em_baseline[i] = iea_weo_em_etl(iea_region_list[i]).droplevel("Region")
-    em_baseline[i].insert(0, "Region", iea_region_list[i])
-    # em_baseline[i].insert(0, "GCAM Region", gcam_region_list[i])
+    em = pd.DataFrame(em).append(
+        iea_weo_em_etl(iea_region_list[i], gcam_region_list[i])
+    )
 
+em_hist = em.loc[:, :data_end_year]
 
-em_baseline = pd.concat(
-    [
-        em_baseline[0],
-        em_baseline[1],
-        em_baseline[2],
-        em_baseline[3],
-        em_baseline[4],
-        em_baseline[5],
-        em_baseline[6],
-        em_baseline[7],
-        em_baseline[8],
-        em_baseline[9],
-        em_baseline[10],
-        em_baseline[11],
-        em_baseline[12],
-        em_baseline[13],
-        em_baseline[14],
-        em_baseline[15],
-        em_baseline[16],
-        em_baseline[17],
-        em_baseline[18],
-        em_baseline[19],
-        em_baseline[20],
-    ]
-)
+em_proj = curve_smooth(em.loc[:, (data_end_year + 1) :], 3)
 
-em_baseline.to_csv("podi/data/emissions_baseline.csv")
+em = em_hist.join(em_proj)
+
+em.to_csv("podi/data/emissions_baseline.csv")
