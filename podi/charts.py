@@ -65,20 +65,14 @@ def charts(
                 fig, id_vars="Year", var_name="Sector", value_name="% Adoption"
             )
             fig = px.line(
-                fig2['Year'=(:data_end_year)],
+                fig2,
                 x="Year",
                 y="% Adoption",
                 line_group="Sector",
                 color="Sector",
                 color_discrete_sequence=px.colors.qualitative.T10,
                 title="Percent of Total PD Adoption, " + iea_region_list[i],
-            ).line(fig2['Year'=(data_end_year:)],
-                x="Year",
-                y="% Adoption"
-                line_group="Sector",
-                color="Sector",
-                color_discrete_sequence=px.colors.qualitative.T10,line = dict(dash='dash'))
-
+            )
             fig.update_layout(title_x=0.5)
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
             fig.show()
@@ -90,7 +84,6 @@ def charts(
                     ),
                     auto_open=False,
                 )
-
         else:
             plt.figure(i)
             plt.plot(fig.T, linestyle="--")

@@ -2,7 +2,7 @@
 
 ### Adoption Curves
 
-![](../podi/data/figs/scurves-World)
+[//]: # ![](../podi/data/figs/scurves-World)
 
 <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "scurves-World.html" height="500" width="150%"></iframe>
 
