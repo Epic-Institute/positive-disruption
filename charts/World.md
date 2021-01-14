@@ -4,6 +4,8 @@
 
 ![](../podi/data/figs/scurves-World)
 
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "scurves-World.html" height="500" width="150%"></iframe>
+
 % Adoption is uniquely-defined for each vector, and represents the decarbonization of that vector over time, relative to the maximum level of adoption estimated in the PD model.
 
 | Vector    | % Adoption Metric 

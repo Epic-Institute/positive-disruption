@@ -52,32 +52,72 @@ def charts(
         "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
     }
 
+    fig_type = "plotly"
+
     for i in range(0, len(iea_region_list)):
-        fig = adoption_curves.loc[iea_region_list[i]]
-        plt.figure(i)
-        plt.plot(fig.T * 100, linestyle="--")
-        plt.plot(
-            fig.loc[:, data_start_year:data_end_year].T * 100,
-            linestyle="-",
-            color=(0, 0, 0),
-        )
-        plt.ylabel("% Adoption")
-        plt.xlim([fig.columns.min(), fig.columns.max()])
-        plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
-        plt.legend(
-            fig.index,
-            loc=2,
-            fontsize="small",
-            bbox_to_anchor=(1.05, 1),
-        )
-        plt.show()
-        if save_figs is True:
-            plt.savefig(
-                fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(" ", ""),
-                format="png",
-                bbox_inches="tight",
-                pad_inches=0.1,
+        fig = adoption_curves.loc[iea_region_list[i]] * 100
+
+        if fig_type == "plotly":
+            fig = fig.T
+            fig.index.name = "Year"
+            fig.reset_index(inplace=True)
+            fig2 = pd.melt(
+                fig, id_vars="Year", var_name="Sector", value_name="% Adoption"
             )
+            fig = px.line(
+                fig2['Year'=(:data_end_year)],
+                x="Year",
+                y="% Adoption",
+                line_group="Sector",
+                color="Sector",
+                color_discrete_sequence=px.colors.qualitative.T10,
+                title="Percent of Total PD Adoption, " + iea_region_list[i],
+            ).line(fig2['Year'=(data_end_year:)],
+                x="Year",
+                y="% Adoption"
+                line_group="Sector",
+                color="Sector",
+                color_discrete_sequence=px.colors.qualitative.T10,line = dict(dash='dash'))
+
+            fig.update_layout(title_x=0.5)
+            fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+            fig.show()
+            if save_figs is True:
+                pio.write_html(
+                    fig,
+                    file=("./charts/scurves-" + iea_region_list[i] + ".html").replace(
+                        " ", ""
+                    ),
+                    auto_open=False,
+                )
+
+        else:
+            plt.figure(i)
+            plt.plot(fig.T, linestyle="--")
+            plt.plot(
+                fig.loc[:, data_start_year:data_end_year].T * 100,
+                linestyle="-",
+                color=(0, 0, 0),
+            )
+            plt.ylabel("% Adoption")
+            plt.xlim([fig.columns.min(), fig.columns.max()])
+            plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
+            plt.legend(
+                fig.index,
+                loc=2,
+                fontsize="small",
+                bbox_to_anchor=(1.05, 1),
+            )
+            plt.show()
+            if save_figs is True:
+                plt.savefig(
+                    fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(
+                        " ", ""
+                    ),
+                    format="png",
+                    bbox_inches="tight",
+                    pad_inches=0.1,
+                )
         plt.clf()
 
     # endregion
@@ -969,18 +1009,18 @@ def charts(
                     x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0
                 )
                 fig.show()
-            if save_figs is True:
-                pio.write_html(
-                    fig,
-                    file=(
-                        "./charts/demand-"
-                        + scenario
-                        + "-"
-                        + iea_region_list[i]
-                        + ".html"
-                    ).replace(" ", ""),
-                    auto_open=False,
-                )
+                if save_figs is True:
+                    pio.write_html(
+                        fig,
+                        file=(
+                            "./charts/demand-"
+                            + scenario
+                            + "-"
+                            + iea_region_list[i]
+                            + ".html"
+                        ).replace(" ", ""),
+                        auto_open=False,
+                    )
             else:
                 plt.figure(i)
                 plt.stackplot(
