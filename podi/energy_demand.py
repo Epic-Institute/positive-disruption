@@ -184,24 +184,6 @@ def energy_demand(
         .values
     )
 
-    """
-    # Reallocate international bunkers from Transport - Oil
-    energy_demand.loc["World ", "Transport", "Oil"] = (
-        energy_demand.loc["World ", "Transport", "Oil"] * 0.9
-    ).values
-
-    bunkers = pd.concat(
-        [energy_demand.loc["World ", "Transport", "Oil"] * 0.16],
-        keys=["International bunkers"],
-        names=["Metric"],
-    )
-    bunkers["IEA Region"] = "World "
-    bunkers["Sector"] = "Transport"
-    bunkers.reset_index(inplace=True)
-    bunkers.set_index(["IEA Region", "Sector", "Metric", "Scenario"], inplace=True)
-    energy_demand = energy_demand.append(bunkers)
-    """
-
     # endregion
 
     #######################################
@@ -398,4 +380,4 @@ def energy_demand(
 
     # endregion
 
-    return energy_demand
+    return energy_demand.round(decimals=0)

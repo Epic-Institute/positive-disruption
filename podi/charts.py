@@ -16,7 +16,6 @@ import plotly.express as px
 import plotly.io as pio
 
 save_figs = True
-
 long_proj_start_year = near_proj_end_year + 1
 unit_name = ["TWh", "EJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00359, 0.086, 86]
@@ -408,7 +407,7 @@ def charts(
     # endregion
 
     #################################
-    # Emissions Mitigation Barchart #
+    # EMISSIONS MITIGATION BARCHART #
     #################################
 
     # region
@@ -866,17 +865,16 @@ def charts(
     colors2 = (pd.DataFrame(colors) * 0.75).values.tolist()
 
     start_yr = data_start_year
-    chart_type = "stackplot"
+    scenario = "Pathway"
+    chart_type = "stack"
+    fig_type = "plotly"
 
     # endregion
 
-    if chart_type == "stackplot":
-
-        # Baseline
-
+    if chart_type == "stack":
         for i in range(0, len(iea_region_list)):
-            energy_demand_i = energy_demand_baseline.loc[
-                iea_region_list[i], slice(None), slice(None), "Baseline"
+            energy_demand_i = energy_demand.loc[
+                iea_region_list[i], slice(None), slice(None), scenario
             ]
 
             if iea_region_list[i] == "World ":
@@ -951,164 +949,74 @@ def charts(
                     ]
                 )
             )
-
-            plt.figure(i)
-            plt.stackplot(
-                fig.loc[:, :data_end_year].T.index,
-                fig.loc[:, :data_end_year] * unit[1],
-                labels=fig.index,
-                colors=colors2,
-            )
-            plt.stackplot(
-                fig.loc[:, data_end_year:].T.index,
-                fig.loc[:, data_end_year:] * unit[1],
-                labels=fig.index,
-                colors=colors,
-                linestyle="--",
-            )
-            plt.legend(loc=2, fontsize="small")
-            plt.ylabel("TFC, " + unit[0])
-            plt.xlim([start_yr, energy_demand_baseline.columns.max()])
-            plt.legend(
-                labels=fig.index, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0
-            )
-            plt.xticks(
-                np.arange(start_yr, energy_demand_baseline.columns.max() + 1, 10)
-            )
-            plt.title("Energy Demand, " + iea_region_list[i])
-            plt.show()
-
+            if fig_type == "plotly":
+                fig = fig.T
+                fig.index.name = "Year"
+                fig.reset_index(inplace=True)
+                fig2 = pd.melt(
+                    fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0]
+                )
+                fig = px.area(
+                    fig2,
+                    x="Year",
+                    y="TFC, " + unit[0],
+                    line_group="Sector",
+                    color="Sector",
+                    title="Energy Demand, " + iea_region_list[i],
+                )
+                fig.show()
             if save_figs is True:
-                plt.savefig(
-                    fname=(
-                        "podi/data/figs/energydemand_baseline-" + iea_region_list[i]
+                pio.write_html(
+                    fig,
+                    file=(
+                        "./charts/demand-"
+                        + scenario
+                        + "-"
+                        + iea_region_list[i]
+                        + ".html"
                     ).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
+                    auto_open=False,
                 )
-
-            plt.clf()
-
-        # Pathway
-
-        for i in range(0, len(iea_region_list)):
-            energy_demand_i = energy_demand_pathway.loc[
-                iea_region_list[i], slice(None), slice(None), "Pathway"
-            ]
-
-            if iea_region_list[i] == "World ":
-                energy_demand_i.loc["Transport", "Other fuels"] = energy_demand_i.loc[
-                    "Transport", ["International bunkers", "Other fuels"], :
-                ].sum()
-
-            fig = (
-                energy_demand_i.loc[(slice(None), "Electricity"), :]
-                .groupby(["Sector"])
-                .sum()
-                .drop("TFC")
-                .rename(
-                    index={
-                        "Buildings": ("Buildings", "Electricity"),
-                        "Industry": ("Industry", "Electricity"),
-                        "Transport": ("Transport", "Electricity"),
-                    }
+            else:
+                plt.figure(i)
+                plt.stackplot(
+                    fig.loc[:, :data_end_year].T.index,
+                    fig.loc[:, :data_end_year] * unit[1],
+                    labels=fig.index,
+                    colors=colors2,
                 )
-                .append(
-                    pd.DataFrame(
-                        energy_demand_i.loc["Transport", slice(None)]
-                        .groupby(["Metric"])
-                        .sum()
-                        .loc[
-                            [
-                                "Oil",
-                                "Bioenergy",
-                                "Other fuels",
-                            ],
-                            :,
-                        ]
-                        .sum()
-                    ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
+                plt.stackplot(
+                    fig.loc[:, data_end_year:].T.index,
+                    fig.loc[:, data_end_year:] * unit[1],
+                    labels=fig.index,
+                    colors=colors,
+                    linestyle="--",
                 )
-                .append(
-                    pd.DataFrame(
-                        energy_demand_i.loc["Buildings", slice(None)]
-                        .groupby(["Metric"])
-                        .sum()
-                        .loc[
-                            [
-                                "Heat",
-                            ],
-                            :,
-                        ]
-                        .sum()
-                    ).T.rename(index={0: ("Buildings", "Heat")})
+                plt.legend(loc=2, fontsize="small")
+                plt.ylabel("TFC, " + unit[0])
+                plt.xlim([start_yr, energy_demand.columns.max()])
+                plt.legend(
+                    labels=fig.index, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0
                 )
-                .append(
-                    pd.DataFrame(
-                        energy_demand_i.loc["Industry", slice(None)]
-                        .groupby(["Metric"])
-                        .sum()
-                        .loc[
-                            [
-                                "Heat",
-                            ],
-                            :,
-                        ]
-                        .sum()
-                    ).T.rename(index={0: ("Industry", "Heat")})
-                )
-                .reindex(
-                    [
-                        ("Transport", "Nonelectric Transport"),
-                        ("Transport", "Electricity"),
-                        ("Buildings", "Heat"),
-                        ("Buildings", "Electricity"),
-                        ("Industry", "Heat"),
-                        ("Industry", "Electricity"),
-                    ]
-                )
-            )
-
-            plt.figure(i)
-            plt.stackplot(
-                fig.loc[:, :data_end_year].T.index,
-                fig.loc[:, :data_end_year] * unit[1],
-                labels=fig.index,
-                colors=colors2,
-            )
-            plt.stackplot(
-                fig.loc[:, data_end_year:].T.index,
-                fig.loc[:, data_end_year:] * unit[1],
-                labels=fig.index,
-                colors=colors,
-                linestyle="--",
-            )
-            plt.legend(loc=2, fontsize="small")
-            plt.ylabel("TFC, " + unit[0])
-            plt.xlim([start_yr, energy_demand_pathway.columns.max()])
-            plt.legend(
-                labels=fig.index, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0
-            )
-            plt.xticks(np.arange(start_yr, energy_demand_pathway.columns.max() + 1, 10))
-            plt.title("Energy Demand, " + iea_region_list[i])
-            plt.show()
-
-            if save_figs is True:
-                plt.savefig(
-                    fname=(
-                        "podi/data/figs/energydemand_pathway-" + iea_region_list[i]
-                    ).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
+                plt.xticks(np.arange(start_yr, energy_demand.columns.max() + 1, 10))
+                plt.title("Energy Demand, " + iea_region_list[i])
+                plt.show()
+                if save_figs is True:
+                    plt.savefig(
+                        fname=(
+                            "podi/data/figs/demand-"
+                            + scenario
+                            + "-"
+                            + iea_region_list[i]
+                        ).replace(" ", ""),
+                        format="png",
+                        bbox_inches="tight",
+                        pad_inches=0.1,
+                    )
 
             plt.clf()
 
     if chart_type == "line":
-        # Baseline
-
         for i in range(0, len(iea_region_list)):
             energy_demand_i = energy_demand_baseline.loc[
                 iea_region_list[i], slice(None), slice(None), "Baseline"
@@ -1213,122 +1121,6 @@ def charts(
                 plt.savefig(
                     fname=(
                         "podi/data/figs/energydemand_baseline-" + iea_region_list[i]
-                    ).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
-
-            plt.clf()
-
-        # Pathway
-
-        for i in range(0, len(iea_region_list)):
-            energy_demand_i = energy_demand_pathway.loc[
-                iea_region_list[i], slice(None), slice(None), "Pathway"
-            ]
-
-            if iea_region_list[i] == "World ":
-                energy_demand_i.loc["Transport", "Other fuels"] = energy_demand_i.loc[
-                    "Transport", ["International bunkers", "Other fuels"], :
-                ].sum()
-
-            fig = (
-                energy_demand_i.loc[(slice(None), "Electricity"), :]
-                .groupby(["Sector"])
-                .sum()
-                .drop("TFC")
-                .rename(
-                    index={
-                        "Buildings": ("Buildings", "Electricity"),
-                        "Industry": ("Industry", "Electricity"),
-                        "Transport": ("Transport", "Electricity"),
-                    }
-                )
-                .append(
-                    pd.DataFrame(
-                        energy_demand_i.loc["Transport", slice(None)]
-                        .groupby(["Metric"])
-                        .sum()
-                        .loc[
-                            [
-                                "Oil",
-                                "Bioenergy",
-                                "Other fuels",
-                            ],
-                            :,
-                        ]
-                        .sum()
-                    ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
-                )
-                .append(
-                    pd.DataFrame(
-                        energy_demand_i.loc["Buildings", slice(None)]
-                        .groupby(["Metric"])
-                        .sum()
-                        .loc[
-                            [
-                                "Heat",
-                            ],
-                            :,
-                        ]
-                        .sum()
-                    ).T.rename(index={0: ("Buildings", "Heat")})
-                )
-                .append(
-                    pd.DataFrame(
-                        energy_demand_i.loc["Industry", slice(None)]
-                        .groupby(["Metric"])
-                        .sum()
-                        .loc[
-                            [
-                                "Heat",
-                            ],
-                            :,
-                        ]
-                        .sum()
-                    ).T.rename(index={0: ("Industry", "Heat")})
-                )
-                .reindex(
-                    [
-                        ("Transport", "Nonelectric Transport"),
-                        ("Transport", "Electricity"),
-                        ("Buildings", "Heat"),
-                        ("Buildings", "Electricity"),
-                        ("Industry", "Heat"),
-                        ("Industry", "Electricity"),
-                    ]
-                )
-            )
-
-            plt.figure(i)
-            plt.plot(
-                fig.loc[:, :data_end_year].T.index,
-                fig.loc[:, :data_end_year] * unit[1],
-                labels=fig.index,
-                colors=colors2,
-            )
-            plt.plot(
-                fig.loc[:, data_end_year:].T.index,
-                fig.loc[:, data_end_year:] * unit[1],
-                labels=fig.index,
-                colors=colors,
-                linestyle="--",
-            )
-            plt.legend(loc=2, fontsize="small")
-            plt.ylabel("TFC, " + unit[0])
-            plt.xlim([start_yr, energy_demand_pathway.columns.max()])
-            plt.legend(
-                labels=fig.index, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0
-            )
-            plt.xticks(np.arange(start_yr, energy_demand_pathway.columns.max() + 1, 10))
-            plt.title("Energy Demand, " + iea_region_list[i])
-            plt.show()
-
-            if save_figs is True:
-                plt.savefig(
-                    fname=(
-                        "podi/data/figs/energydemand_pathway-" + iea_region_list[i]
                     ).replace(" ", ""),
                     format="png",
                     bbox_inches="tight",

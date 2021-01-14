@@ -419,7 +419,6 @@ def energy_supply(scenario, energy_demand):
                 ]
                 .loc[:, str(near_proj_start_year) :]
                 .sum()
-                * 0.2
             )
         ).values
 

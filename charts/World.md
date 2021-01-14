@@ -72,6 +72,9 @@
 ### Energy Supply & Demand
 
 ![](../podi/data/figs/energydemand_pathway-World)<br/><br/>
+
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "demand-Pathway-World.html" height="525" width="100%"></iframe>
+
 ![](../podi/data/figs/energysupply_pathway-World)<br/><br/>
 ![](../podi/data/figs/electricity_pathway-World)<br/><br/>
 ![](../podi/data/figs/elecbysector_pathway-World)<br/><br/>

@@ -76,6 +76,8 @@ energy_demand_pathway = energy_demand(
     "podi/data/cdr_energy.csv",
 )
 
+energy_demand = energy_demand_baseline.append(energy_demand_pathway)
+
 # endregion
 
 #################
