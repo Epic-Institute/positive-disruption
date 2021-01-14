@@ -183,13 +183,14 @@ def emissions(
     # endregion
 
     if scenario == "Baseline":
+
         em = pd.read_csv("podi/data/emissions_baseline.csv").set_index(
             ["IEA Region", "Sector", "Metric"]
         )
         em.columns = em.columns.astype(int)
-        em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
-            ["IEA Region", "Sector", "Metric"]
-        )
+
+        em.rename(index={"Power sector": "Electricity"})
+
         em = (
             (em.loc[slice(None), ["Electricity"], slice(None)])
             .append(

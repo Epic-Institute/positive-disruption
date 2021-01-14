@@ -11,6 +11,7 @@ from podi.charts import charts
 from podi.curve_smooth import curve_smooth
 
 # import podi.data.iea_weo_etl
+import podi.data.iea_weo_em_etl
 import podi.data.gcam_etl
 import pandas as pd
 from podi.cdr.cdr_util import (
