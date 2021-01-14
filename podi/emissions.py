@@ -5,7 +5,6 @@
 import pandas as pd
 from podi.energy_demand import data_start_year
 from podi.energy_supply import long_proj_end_year
-from podi.data import iea_weo_em_etl
 
 # endregion
 
@@ -184,14 +183,12 @@ def emissions(
     # endregion
 
     if scenario == "Baseline":
-        em = (
-            pd.read_csv("podi/data/emissions_baseline.csv")
-            .set_index(["Region", "Sector", "Unit"])
-            .droplevel(["Unit"])
+        em = pd.read_csv("podi/data/emissions_baseline.csv").set_index(
+            ["IEA Region", "Sector", "Metric"]
         )
         em.columns = em.columns.astype(int)
         em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
-            ["Region", "Sector", "Metric"]
+            ["IEA Region", "Sector", "Metric"]
         )
         em = (
             (em.loc[slice(None), ["Electricity"], slice(None)])
@@ -210,7 +207,7 @@ def emissions(
         )
         em2.columns = em2.columns.astype(int)
         em2 = pd.concat([em2], keys=["Emissions"], names=["Metric"]).reorder_levels(
-            ["Region", "Sector", "Metric"]
+            ["IEA Region", "Sector", "Metric"]
         )
         em2 = (
             (em2.loc[slice(None), ["Electricity"], slice(None)])
@@ -232,11 +229,12 @@ def emissions(
             .append(addtl_em)
         )
         em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
-            ["Region", "Sector", "Metric"]
+            ["IEA Region", "Sector", "Metric"]
         )
         """
         em.loc[:, 2010:2020] = em2.loc[:, 2010:2020]
         """
+
     # Add emissions targets
     em_targets = pd.read_csv(targets_em).set_index("Scenario")
     em_targets.columns = em_targets.columns.astype(int)

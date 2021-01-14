@@ -14,13 +14,13 @@ from podi.energy_demand import (
     data_end_year,
 )
 
-# endregion
-
 near_proj_end_year = 2025
 long_proj_end_year = 2100
 near_proj_start_year = data_end_year + 1
 long_proj_start_year = near_proj_end_year + 1
 energy_oversupply_prop = 0.0
+
+# endregion
 
 
 def energy_supply(scenario, energy_demand):
@@ -45,7 +45,7 @@ def energy_supply(scenario, energy_demand):
     ]
     heat_gen_data.columns = heat_gen_data.columns.astype(int)
 
-    heat_gen_data.loc[slice(None), slice(None), "Bioenergy", scenario] = (
+    heat_gen_data.loc[slice(None), slice(None), "Bioenergy", scenario, slice(None)] = (
         energy_demand.loc[slice(None), "Buildings", "Bioenergy", slice(None)]
         .loc[:, data_start_year:data_end_year]
         .values
@@ -105,9 +105,9 @@ def energy_supply(scenario, energy_demand):
                 elec_gen_data.index.get_level_values(1).str.contains(region, na=False)
             ]
             .loc[(slice(None), slice(None), slice(None), scenario, slice(None)), :]
-            .mul(consump_gen_ratio)
             .groupby(["Metric"])
             .sum()
+            .mul(consump_gen_ratio)
         )
 
     # historical percent of total electricity consumption met by a given technology (propotion)

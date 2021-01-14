@@ -27,6 +27,7 @@ from podi.climate import climate
 import time
 from datetime import timedelta
 import numpy as np
+from podi.energy_demand import data_end_year
 
 pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()
@@ -249,10 +250,9 @@ conc_pathway, temp_pathway, sea_lvl_pathway = climate(
 adoption_curves = []
 
 for i in range(0, len(iea_region_list)):
-    adoption_curves_hist = pd.DataFrame(adoption_curves.loc[:, :data_end_year])
-
-    adoption_curves_proj = curve_smooth(
-        pd.DataFrame(adoption_curves).append(
+    adoption_curves = (
+        pd.DataFrame(adoption_curves)
+        .append(
             results_analysis(
                 iea_region_list[i],
                 "Pathway",
@@ -264,9 +264,17 @@ for i in range(0, len(iea_region_list)):
                 afolu_per_adoption_pathway,
                 cdr_pathway,
             ).replace(np.nan, 1)
-        ),
-        11,
-    ).clip(upper=1)
+        )
+        .clip(upper=1)
+    )
+
+adoption_curves_hist = pd.DataFrame(adoption_curves.loc[:, :data_end_year])
+
+adoption_curves_proj = curve_smooth(
+    pd.DataFrame(adoption_curves.loc[:, data_end_year:]), 11
+)
+
+adoption_curves = adoption_curves_hist.join(adoption_curves_proj)
 
 # endregion
 

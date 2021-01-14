@@ -3,6 +3,7 @@
 import pandas as pd
 from numpy import NaN
 from podi.curve_smooth import curve_smooth
+from podi.data.energy_demand import data_end_year
 
 iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
 
@@ -230,13 +231,22 @@ energy_demand_historical = pd.concat(
     ]
 )
 
-energy_demand_historical = curve_smooth(
+energy_demand_historical = pd.DataFrame(
+    energy_demand_historical.loc[:, :data_end_year].set_index(
+        ["GCAM Region", "IEA Region", "Sector", "Metric"]
+    )
+)
+
+energy_demand_proj = curve_smooth(
     pd.DataFrame(
-        energy_demand_historical.set_index(
+        energy_demand_historical.loc[:, data_end_year:].set_index(
             ["GCAM Region", "IEA Region", "Sector", "Metric"]
         )
     ),
     5,
 )
+
+energy_demand_historical = energy_demand_historical.join(energy_demand_proj)
+
 
 energy_demand_historical.to_csv("podi/data/energy_demand_historical.csv", index=True)
