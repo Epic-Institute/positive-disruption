@@ -54,7 +54,6 @@ def charts(
 
     for i in range(0, len(iea_region_list)):
         fig = adoption_curves.loc[iea_region_list[i]]
-        plt.show()
         plt.figure(i)
         plt.plot(fig.T * 100, linestyle="--")
         plt.plot(
@@ -71,7 +70,7 @@ def charts(
             fontsize="small",
             bbox_to_anchor=(1.05, 1),
         )
-
+        plt.show()
         if save_figs is True:
             plt.savefig(
                 fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(" ", ""),

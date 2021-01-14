@@ -77,7 +77,7 @@ def results_analysis(
     energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
     transport_decarb = (
-        pd.DataFrame(transport_consump_pathway.loc[region, "bioenergy", :])
+        pd.DataFrame(transport_consump_pathway.loc[region, "Bioenergy", :])
         .droplevel(level=0)
         .append(energy_demand_pathway.loc[region, "Transport", "Electricity"])
         .sum()
@@ -89,7 +89,7 @@ def results_analysis(
                     [
                         "Oil",
                         "Electricity",
-                        "bioenergy",
+                        "Bioenergy",
                         "Other fuels",
                     ],
                 ].sum()
@@ -103,7 +103,7 @@ def results_analysis(
                     [
                         "Oil",
                         "Electricity",
-                        "bioenergy",
+                        "Bioenergy",
                         "Other fuels",
                     ],
                 ].sum()
@@ -113,7 +113,7 @@ def results_analysis(
                     [
                         "Oil",
                         "Electricity",
-                        "bioenergy",
+                        "Bioenergy",
                         "Other fuels",
                     ],
                 ].sum()
@@ -125,7 +125,7 @@ def results_analysis(
                     [
                         "Oil",
                         "Electricity",
-                        "bioenergy",
+                        "Bioenergy",
                         "Other fuels",
                     ],
                 ]
@@ -137,7 +137,7 @@ def results_analysis(
                     [
                         "Oil",
                         "Electricity",
-                        "bioenergy",
+                        "Bioenergy",
                         "Other fuels",
                     ],
                 ]
@@ -427,4 +427,4 @@ def results_analysis(
     adoption_curves.reset_index(inplace=True)
     adoption_curves.set_index(["Region", "Sector"], inplace=True)
 
-    return adoption_curves
+    return adoption_curves.clip(upper=1)

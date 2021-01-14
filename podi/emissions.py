@@ -230,7 +230,7 @@ def emissions(
             .append(addtl_em)
         )
         em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
-            ["IEA Region", "Sector", "Metric"]
+            ["Region", "Sector", "Metric"]
         )
         """
         em.loc[:, 2010:2020] = em2.loc[:, 2010:2020]

@@ -180,7 +180,7 @@ em_pathway2.to_csv(
 """
 
 em_mitigated = (
-    em_baseline.groupby(["Region", "Sector"]).sum()
+    em_baseline.groupby(["IEA Region", "Sector"]).sum()
     - em_pathway.groupby(["Region", "Sector"]).sum()
 )
 
@@ -274,10 +274,10 @@ for i in range(0, len(iea_region_list)):
 adoption_curves_hist = pd.DataFrame(adoption_curves.loc[:, :data_end_year])
 
 adoption_curves_proj = curve_smooth(
-    pd.DataFrame(adoption_curves.loc[:, data_end_year:]), 11
+    pd.DataFrame(adoption_curves.loc[:, data_end_year + 1 :]), 11
 )
 
-adoption_curves = adoption_curves_hist.join(adoption_curves_proj)
+adoption_curves = (adoption_curves_hist.join(adoption_curves_proj)).clip(upper=1)
 
 # endregion
 
