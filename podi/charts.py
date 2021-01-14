@@ -962,7 +962,11 @@ def charts(
                     y="TFC, " + unit[0],
                     line_group="Sector",
                     color="Sector",
+                    color_discrete_sequence=px.colors.qualitative.T10,
                     title="Energy Demand, " + iea_region_list[i],
+                )
+                fig.add_vrect(
+                    x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0
                 )
                 fig.show()
             if save_figs is True:
