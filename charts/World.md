@@ -73,7 +73,7 @@
 
 ![](../podi/data/figs/energydemand_pathway-World)<br/><br/>
 
-<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "demand-Pathway-World.html" height="100%" width="100%"></iframe>
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "demand-Pathway-World.html" height="288" width="432"></iframe>
 
 ![](../podi/data/figs/energysupply_pathway-World)<br/><br/>
 ![](../podi/data/figs/electricity_pathway-World)<br/><br/>
