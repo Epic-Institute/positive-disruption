@@ -2,6 +2,8 @@
 
 ### Adoption Curves
 
+[//]: # ![](../podi/data/figs/scurves-World)
+
 <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "scurves-World.html" height="500" width="150%"></iframe>
 
 % Adoption is uniquely-defined for each vector, and represents the decarbonization of that vector over time, relative to the maximum level of adoption estimated in the PD model.
@@ -17,6 +19,34 @@
 | CDR | GtCO2 removed via CDR
 
 <br/>
+
+![](../podi/data/figs/scurves_ind-Grid-World)
+
+% Adoption = (TWh Renewables) / (TWh Total)<br/><br/>
+
+![](../podi/data/figs/scurves_ind-Transport-World)
+
+% Adoption = (TWh Electricity + Biofuels) / (TWh Total)<br/><br/>
+
+![](../podi/data/figs/scurves_ind-Buildings-World)
+
+% Adoption = (TWh Electricity + Renewable Heat) / (TWh Total)<br/><br/>
+
+![](../podi/data/figs/scurves_ind-Industry-World)
+
+% Adoption = (TWh Electricity + Renewable Heat) / (TWh Total)<br/><br/>
+
+![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-World)
+
+% Adoption = (Mha Regenerative Agriculture) / (Mha Total Agriculture)<br/><br/>
+
+![](../podi/data/figs/scurves_ind-Forests&Wetlands-World)
+
+% Adoption = (Mha Deforestation Avoided) / (Mha Total At-Risk Forests & Wetlands)<br/><br/>
+
+![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-World)
+
+% Adoption = (GtCO2 removed via CDR) / (Cumulative GtCO2 removed via CDR)<br/><br/>
 
 ### Emissions
 
@@ -42,6 +72,8 @@
 <br/><br/>
 
 ### Energy Supply & Demand
+
+![](../podi/data/figs/demand_pathway-World)<br/><br/>
 
 <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "demand-Pathway-World.html" height="500" width="150%"></iframe>
 

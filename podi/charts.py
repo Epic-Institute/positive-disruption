@@ -39,19 +39,6 @@ def charts(
 
     # region
 
-    # COMBINED SCURVE CHART
-
-    # region
-    color = {
-        "Grid": [(0.120, 0.107, 0.155)],
-        "Transport": [(0.93, 0.129, 0.180)],
-        "Buildings": [(0.225, 0.156, 0.98)],
-        "Industry": [(0.44, 0.74, 0.114)],
-        "Regenerative Agriculture": [(0.130, 0.143, 0.81)],
-        "Forests & Wetlands": [(0.138, 0.188, 0.175)],
-        "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
-    }
-
     fig_type = "plotly"
 
     for i in range(0, len(iea_region_list)):
@@ -112,111 +99,111 @@ def charts(
                     bbox_inches="tight",
                     pad_inches=0.1,
                 )
-        plt.clf()
-
-    # endregion
-
-    # INDIVIDUAL SCURVE CHART
-
-    # region
-
-    axis_label = [
-        "% TFC met by renewables",
-        "% Transport TFC met by electricity & bioenergy",
-        "% Buildings TFC met by electricity & renewable heat",
-        "% Industry TFC met by electricity & renewable heat",
-        "MHa",
-        "MHa",
-        "GtCO2 removed",
-    ]
-
-    for i in range(0, len(iea_region_list)):
-        for j in range(0, len(adoption_curves.loc[iea_region_list[i]].index)):
-            fig = adoption_curves.iloc[j]
-            plt.show()
-            plt.figure(j)
-            plt.plot(fig * 100, linestyle="--", color=(0.560, 0.792, 0.740))
-            plt.plot(
-                fig.loc[data_start_year:data_end_year] * 100,
-                linestyle="-",
-                color=(0, 0, 0),
-            )
-            plt.ylabel("% Adoption")
-            plt.xlim([fig.index.min(), fig.index.max()])
-            plt.title(
-                "Percent of Total PD Adoption, "
-                + fig.name[1]
-                + ", "
-                + iea_region_list[i]
-            )
-
-            if save_figs is True:
-                plt.savefig(
-                    fname=(
-                        "podi/data/figs/scurves_ind-"
-                        + fig.name[1]
-                        + "-"
-                        + iea_region_list[i]
-                    ).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
             plt.clf()
+            color = {
+                "Grid": [(0.120, 0.107, 0.155)],
+                "Transport": [(0.93, 0.129, 0.180)],
+                "Buildings": [(0.225, 0.156, 0.98)],
+                "Industry": [(0.44, 0.74, 0.114)],
+                "Regenerative Agriculture": [(0.130, 0.143, 0.81)],
+                "Forests & Wetlands": [(0.138, 0.188, 0.175)],
+                "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
+            }
+            axis_label = [
+                "% TFC met by renewables",
+                "% Transport TFC met by electricity & bioenergy",
+                "% Buildings TFC met by electricity & renewable heat",
+                "% Industry TFC met by electricity & renewable heat",
+                "MHa",
+                "MHa",
+                "GtCO2 removed",
+            ]
 
-            # Absolute values
+            for i in range(0, len(iea_region_list)):
+                for j in range(0, len(adoption_curves.loc[iea_region_list[i]].index)):
+                    fig = adoption_curves.iloc[j]
+                    plt.show()
+                    plt.figure(j)
+                    plt.plot(fig * 100, linestyle="--", color=(0.560, 0.792, 0.740))
+                    plt.plot(
+                        fig.loc[data_start_year:data_end_year] * 100,
+                        linestyle="-",
+                        color=(0, 0, 0),
+                    )
+                    plt.ylabel("% Adoption")
+                    plt.xlim([fig.index.min(), fig.index.max()])
+                    plt.title(
+                        "Percent of Total PD Adoption, "
+                        + fig.name[1]
+                        + ", "
+                        + iea_region_list[i]
+                    )
 
-            """
-            t = adoption_curves2.columns
-            data1 = adoption_curves2.loc['Grid']
-            data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
+                    if save_figs is True:
+                        plt.savefig(
+                            fname=(
+                                "podi/data/figs/scurves_ind-"
+                                + fig.name[1]
+                                + "-"
+                                + iea_region_list[i]
+                            ).replace(" ", ""),
+                            format="png",
+                            bbox_inches="tight",
+                            pad_inches=0.1,
+                        )
+                    plt.clf()
 
-            fig, ax1 = plt.subplots(figsize=(9, 5))
+                    # Absolute values
 
-            color = (0.560, 0.792, 0.740)    
-            ax1.set_ylabel('% Adoption', color=color )
-            ax1.plot(t, data1, color=color, linestyle = '--')
-            ax1.tick_params(axis='y', labelcolor=color)
-            plt.grid(which="major", linestyle=":", axis="y")
-            ax2 = ax1.twinx()
-            color='tab:blue'
-            ax2.set_ylabel(axis_label[j],color=color)
-            ax2.plot(t, data2,color=color, linestyle = '--')
-            ax2.tick_params(axis='y', labelcolor=color)
-            ax1.plot(
-                t[0 : (data_end_year - data_start_year) + 2],
-                data1[0 : (data_end_year - data_start_year) + 2],
-                linestyle="-",
-                color=(0, 0, 0),
-            )
-            ax2.plot(
-                t[0 : (data_end_year - data_start_year) + 2],
-                data2[0 : (data_end_year - data_start_year) + 2],
-                linestyle="-",
-                color=(0, 0, 0),
-            )
-            plt.xlim([2010, 2100])
-            plt.suptitle(
-                "Total PD Adoption, "
-                + 'Grid Decarb'
-                + ", "
-                + iea_region_list[i]
-            )
-            plt.title('% Adoption Projected - Teal Dashed Line \n Cumulative Capacity Projected - Blue Dashed Line \n (Mismatch between lines is due to growing electrical demand)', fontsize = 9)
-            fig.tight_layout()
-            plt.savefig(
-                (fname="podi/data/figs/scurves2_ind-"
-                + adoption_curves2.index[j]
-                + "-"
-                + iea_region_list[i]).replace(" ", ""),
-                format="png",
-                bbox_inches="tight",
-                pad_inches=0.1,
-            )
-            plt.show()
-            """
+                    """
+                    t = adoption_curves2.columns
+                    data1 = adoption_curves2.loc['Grid']
+                    data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
 
-    # endregion
+                    fig, ax1 = plt.subplots(figsize=(9, 5))
+
+                    color = (0.560, 0.792, 0.740)    
+                    ax1.set_ylabel('% Adoption', color=color )
+                    ax1.plot(t, data1, color=color, linestyle = '--')
+                    ax1.tick_params(axis='y', labelcolor=color)
+                    plt.grid(which="major", linestyle=":", axis="y")
+                    ax2 = ax1.twinx()
+                    color='tab:blue'
+                    ax2.set_ylabel(axis_label[j],color=color)
+                    ax2.plot(t, data2,color=color, linestyle = '--')
+                    ax2.tick_params(axis='y', labelcolor=color)
+                    ax1.plot(
+                        t[0 : (data_end_year - data_start_year) + 2],
+                        data1[0 : (data_end_year - data_start_year) + 2],
+                        linestyle="-",
+                        color=(0, 0, 0),
+                    )
+                    ax2.plot(
+                        t[0 : (data_end_year - data_start_year) + 2],
+                        data2[0 : (data_end_year - data_start_year) + 2],
+                        linestyle="-",
+                        color=(0, 0, 0),
+                    )
+                    plt.xlim([2010, 2100])
+                    plt.suptitle(
+                        "Total PD Adoption, "
+                        + 'Grid Decarb'
+                        + ", "
+                        + iea_region_list[i]
+                    )
+                    plt.title('% Adoption Projected - Teal Dashed Line \n Cumulative Capacity Projected - Blue Dashed Line \n (Mismatch between lines is due to growing electrical demand)', fontsize = 9)
+                    fig.tight_layout()
+                    plt.savefig(
+                        (fname="podi/data/figs/scurves2_ind-"
+                        + adoption_curves2.index[j]
+                        + "-"
+                        + iea_region_list[i]).replace(" ", ""),
+                        format="png",
+                        bbox_inches="tight",
+                        pad_inches=0.1,
+                    )
+                    plt.show()
+                    """
 
     # endregion
 
