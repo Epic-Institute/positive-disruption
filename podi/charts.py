@@ -889,9 +889,9 @@ def charts(
                 .drop("TFC")
                 .rename(
                     index={
-                        "Buildings": ("Buildings", "Electricity"),
-                        "Industry": ("Industry", "Electricity"),
-                        "Transport": ("Transport", "Electricity"),
+                        "Buildings": "Buildings-Electricity",
+                        "Industry": "Industry-Electricity",
+                        "Transport": "Transport-Electricity",
                     }
                 )
                 .append(
@@ -908,7 +908,7 @@ def charts(
                             :,
                         ]
                         .sum()
-                    ).T.rename(index={0: ("Transport", "Nonelectric Transport")})
+                    ).T.rename(index={0: "Transport-Nonelectric"})
                 )
                 .append(
                     pd.DataFrame(
@@ -922,7 +922,7 @@ def charts(
                             :,
                         ]
                         .sum()
-                    ).T.rename(index={0: ("Buildings", "Heat")})
+                    ).T.rename(index={0: "Buildings-Heat"})
                 )
                 .append(
                     pd.DataFrame(
@@ -936,16 +936,16 @@ def charts(
                             :,
                         ]
                         .sum()
-                    ).T.rename(index={0: ("Industry", "Heat")})
+                    ).T.rename(index={0: "Industry-Heat"})
                 )
                 .reindex(
                     [
-                        ("Transport", "Nonelectric Transport"),
-                        ("Transport", "Electricity"),
-                        ("Buildings", "Heat"),
-                        ("Buildings", "Electricity"),
-                        ("Industry", "Heat"),
-                        ("Industry", "Electricity"),
+                        "Transport-Nonelectric",
+                        "Transport-Electricity",
+                        "Buildings-Heat",
+                        "Buildings-Electricity",
+                        "Industry-Heat",
+                        "Industry-Electricity",
                     ]
                 )
             )
@@ -965,6 +965,7 @@ def charts(
                     color_discrete_sequence=px.colors.qualitative.T10,
                     title="Energy Demand, " + iea_region_list[i],
                 )
+                fig.update_layout(title_x=0.5)
                 fig.add_vrect(
                     x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0
                 )
