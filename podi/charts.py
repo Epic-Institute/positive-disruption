@@ -72,6 +72,7 @@ def charts(
                 color="Sector",
                 color_discrete_sequence=px.colors.qualitative.T10,
                 title="Percent of Total PD Adoption, " + iea_region_list[i],
+                hover_data={"% Adoption": ":.0f"},
             )
             fig.update_layout(title_x=0.5)
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
@@ -996,6 +997,7 @@ def charts(
                     color="Sector",
                     color_discrete_sequence=px.colors.qualitative.T10,
                     title="Energy Demand, " + iea_region_list[i],
+                    hover_data={"sqrt": ":.0f"},
                 )
                 fig.update_layout(title_x=0.5)
                 fig.add_vrect(
