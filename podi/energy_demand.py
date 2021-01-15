@@ -128,25 +128,6 @@ def energy_demand(
         inplace=True,
     )
 
-    """
-    energy_demand.loc[slice(None), "Industry", "Other renewables", scenario] = (
-        (
-            (
-                energy_demand.loc[
-                    slice(None),
-                    ["Industry", "Other"],
-                    ["Other renewables", "Other"],
-                    scenario,
-                ].groupby("IEA Region")
-            ).sum()
-        )
-        .reindex_like(
-            energy_demand.loc[slice(None), "Industry", "Other renewables", scenario]
-        )
-        .values
-    )
-    """
-
     # Reallocate heat demand within industry
     energy_demand.loc[slice(None), "Industry", "Heat", scenario] = (
         (

@@ -26,7 +26,7 @@ def emissions(
     em_factors = (
         pd.read_csv("podi/data/emissions_factors.csv")
         .drop(columns=["Unit"])
-        .set_index(["Region", "Sector", "Metric"])
+        .set_index(["Region", "Sector", "Metric", "Scenario"])
     )
 
     em_factors.columns = em_factors.columns.astype(int)
@@ -78,7 +78,7 @@ def emissions(
     buildings_consump = (
         buildings_consump
         * heat_per_adoption.loc[
-            slice(None), ["Coal", "Natural gas", "Oil"], slice(None)
+            slice(None), ["Coal", "Natural gas", "Oil"], scneario, slice(None)
         ]
         .groupby("Region")
         .sum()
@@ -115,6 +115,7 @@ def emissions(
         * heat_per_adoption.loc[
             slice(None),
             ["Coal", "Natural gas", "Oil"],
+            scenario,
             slice(None),
         ]
         .groupby("Region")

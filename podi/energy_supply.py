@@ -264,7 +264,6 @@ def energy_supply(scenario, energy_demand):
             * (1 + energy_oversupply_prop),
         )
         consump_total = pd.concat([consump_total], keys=[region], names=["Region"])
-        # consump_total.drop(labels="Generation", level=1, inplace=True)
 
         percent_adoption = per_consump(
             hist_per_elec_consump(
@@ -286,7 +285,6 @@ def energy_supply(scenario, energy_demand):
         percent_adoption = pd.concat(
             [percent_adoption], keys=[region], names=["Region"]
         )
-        # percent_adoption.drop(labels="Generation", level=1, inplace=True)
 
         consump_cdr = consump(
             region,
@@ -313,7 +311,6 @@ def energy_supply(scenario, energy_demand):
             * (energy_oversupply_prop),
         )
         consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
-        # consump_cdr.drop(labels="Generation", level=1, inplace=True)
 
         consump_total.columns = consump_total.columns.astype(int)
         percent_adoption.columns = percent_adoption.columns.astype(int)
@@ -727,6 +724,28 @@ def energy_supply(scenario, energy_demand):
         transport_per_adoption = pd.DataFrame(transport_per_adoption).append(
             transport_consump_total(iea_region_list[i], scenario)[1]
         )
+
+    elec_consump = pd.concat(
+        [elec_consump], keys=[scenario], names=["Scenario"]
+    ).reorder_levels(["Region", "Metric", "Scenario"])
+    elec_per_adoption = pd.concat(
+        [elec_per_adoption], keys=[scenario], names=["Scenario"]
+    ).reorder_levels(["Region", "Metric", "Scenario"])
+    # elec_consump_cdr = pd.concat([elec_consump_cdr], keys=[scenario], names=["Scenario"]).reorder_levels(["Region", "Metric", "Scenario"])
+    heat_consump2 = pd.concat(
+        [heat_consump2], keys=[scenario], names=["Scenario"]
+    ).reorder_levels(["Region", "Metric", "Scenario"])
+    heat_per_adoption = pd.concat(
+        [heat_per_adoption], keys=[scenario], names=["Scenario"]
+    ).reorder_levels(["Region", "Metric", "Scenario"])
+    # heat_consump_cdr = pd.concat([heat_consump_cdr], keys=[scenario], names=["Scenario"]).reorder_levels(["Region", "Metric", "Scenario"])
+    transport_consump2 = pd.concat(
+        [transport_consump2], keys=[scenario], names=["Scenario"]
+    ).reorder_levels(["Region", "Metric", "Scenario"])
+    transport_per_adoption = pd.concat(
+        [transport_per_adoption], keys=[scenario], names=["Scenario"]
+    ).reorder_levels(["Region", "Metric", "Scenario"])
+    # transport_consump_cdr = pd.concat([transport_consump_cdr], keys=[scenario], names=["Scenario"]).reorder_levels(["Region", "Metric", "Scenario"])
 
     # endregion
 
