@@ -122,7 +122,7 @@ def energy_supply(scenario, energy_demand):
             ]["Value"].iat[0]
         )
 
-        if scenario == "Baseline":
+        if scenario == "baseline":
             near_proj_start_year = data_end_year
             long_proj_start_year = data_end_year + 1
             near_proj_end_year = data_end_year
@@ -154,7 +154,7 @@ def energy_supply(scenario, energy_demand):
             ]["Value"].iat[0]
         )
 
-        if scenario == "Baseline":
+        if scenario == "baseline":
             foo = hist_per_elec_consump
             return foo
         else:
@@ -604,7 +604,7 @@ def energy_supply(scenario, energy_demand):
         hist_transport_consump = hist_transport_consump.droplevel(["IEA Region"])
         hist_transport_consump.loc["Fossil fuels"] = hist_transport_consump.loc["Oil"]
 
-        if scenario == "Pathway":
+        if scenario == "pathway":
             transport_consump = hist_transport_consump.join(proj_transport_consump)
         else:
             transport_consump = hist_transport_consump.join(proj_transport_consump)

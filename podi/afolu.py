@@ -72,7 +72,7 @@ def afolu(scenario):
     afolu_adoption = proj_adoption
     afolu_per_adoption = per
 
-    if scenario == "Baseline":
+    if scenario == "baseline":
         afolu_adoption = afolu = pd.read_csv(
             "podi/data/afolu_input_baseline.csv"
         ).set_index(["Region", "Sector", "Metric", "Unit"])

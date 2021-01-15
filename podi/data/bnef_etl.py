@@ -62,7 +62,7 @@ def bnef_etl(data_source, metric):
         # create 'World' region
         elec_gen_world = elec_gen.groupby(by=["Metric"]).sum()
         elec_gen_world = elec_gen_world.assign(
-            Region="World ", IEA_Region="World ", Scenario="Pathway", Unit="TWh"
+            Region="World ", IEA_Region="World ", Scenario="pathway", Unit="TWh"
         ).set_index(["Region", "IEA_Region", "Scenario", "Unit"], append=True)
         elec_gen_world.index = elec_gen_world.index.rename(
             ["Metric", "Region", "IEA Region", "Scenario", "Unit"]
@@ -130,7 +130,7 @@ def bnef_etl(data_source, metric):
         # create 'World' region
         heat_gen_world = heat_gen.groupby(by=["Metric"]).sum()
         heat_gen_world = heat_gen_world.assign(
-            Region="World ", IEA_Region="World ", Scenario="Pathway", Unit="TWh"
+            Region="World ", IEA_Region="World ", Scenario="pathway", Unit="TWh"
         ).set_index(["Region", "IEA_Region", "Scenario", "Unit"], append=True)
         heat_gen_world.index = heat_gen_world.index.rename(
             ["Metric", "Region", "IEA Region", "Scenario", "Unit"]

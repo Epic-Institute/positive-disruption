@@ -61,7 +61,7 @@ def wws_etl(data_source):
     )
     elec_gen["Metric"] = "Saturation Point"
     elec_gen["Sector"] = NaN
-    elec_gen["Scenario"] = "Pathway"
+    elec_gen["Scenario"] = "pathway"
     elec_gen.reset_index(inplace=True)
 
     elec_gen = elec_gen[

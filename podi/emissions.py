@@ -189,7 +189,7 @@ def emissions(
 
     # endregion
 
-    if scenario == "Baseline":
+    if scenario == "baseline":
 
         em = pd.read_csv("podi/data/emissions_baseline.csv").set_index(
             ["IEA Region", "Sector", "Metric"]

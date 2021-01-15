@@ -55,7 +55,7 @@ podi.data.gcam_etl
 # podi.data.iea_weo_etl
 
 energy_demand_baseline = energy_demand(
-    "Baseline",
+    "baseline",
     "podi/data/energy_demand_historical.csv",
     "podi/data/energy_demand_projection.csv",
     "podi/data/energy_efficiency.csv",
@@ -66,7 +66,7 @@ energy_demand_baseline = energy_demand(
 )
 
 energy_demand_pathway = energy_demand(
-    "Pathway",
+    "pathway",
     "podi/data/energy_demand_historical.csv",
     "podi/data/energy_demand_projection.csv",
     "podi/data/energy_efficiency.csv",
@@ -96,7 +96,7 @@ energy_demand = energy_demand_baseline.append(energy_demand_pathway)
     transport_consump_baseline,
     transport_per_adoption_baseline,
     transport_consump_cdr_baseline,
-) = energy_supply("Baseline", energy_demand_baseline)
+) = energy_supply("baseline", energy_demand_baseline)
 
 (
     elec_consump_pathway,
@@ -108,7 +108,7 @@ energy_demand = energy_demand_baseline.append(energy_demand_pathway)
     transport_consump_pathway,
     transport_per_adoption_pathway,
     transport_consump_cdr_pathway,
-) = energy_supply("Pathway", energy_demand_pathway)
+) = energy_supply("pathway", energy_demand_pathway)
 
 
 elec_consump = elec_consump_baseline.append(elec_consump_pathway)
@@ -131,8 +131,8 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 
 # region
 
-afolu_em_baseline, afolu_per_adoption_baseline = afolu("Baseline")
-afolu_em_pathway, afolu_per_adoption_pathway = afolu("Pathway")
+afolu_em_baseline, afolu_per_adoption_baseline = afolu("baseline")
+afolu_em_pathway, afolu_per_adoption_pathway = afolu("pathway")
 
 afolu_em_mitigated = afolu_em_pathway
 afolu_em_mitigated = afolu_em_mitigated.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
@@ -148,7 +148,7 @@ afolu_em_mitigated = afolu_em_mitigated.apply(lambda x: x.subtract(x.loc[2020]),
 podi.data.iea_weo_em_etl
 
 em_baseline, em_targets_baseline = emissions(
-    "Baseline",
+    "baseline",
     energy_demand_baseline,
     elec_consump_baseline,
     heat_consump_baseline,
@@ -160,7 +160,7 @@ em_baseline, em_targets_baseline = emissions(
 )
 
 em_pathway, em_targets_pathway = emissions(
-    "Pathway",
+    "pathway",
     energy_demand_pathway,
     elec_consump_pathway,
     heat_consump_pathway,
@@ -207,9 +207,9 @@ em_mitigated = (
 """
 cdr_needed = (
     abs(
-        em_targets_pathway.loc["Baseline PD20", 2010:]
-        - em_targets_pathway.loc["Pathway PD20", 2010:]
-    )    - em_targets_pathway.loc["Baseline PD20", 2010:] - em_pathway.sum())
+        em_targets_pathway.loc["baseline PD20", 2010:]
+        - em_targets_pathway.loc["pathway PD20", 2010:]
+    )    - em_targets_pathway.loc["baseline PD20", 2010:] - em_pathway.sum())
 """
 
 cdr_needed = cdr_needed_def
@@ -238,7 +238,7 @@ if (
     )
     > cdr_energy_pathway
 ):
-    print("Electricity oversupply does not meet CDR energy demand for Pathway Scenario")
+    print("Electricity oversupply does not meet CDR energy demand for pathway Scenario")
 
 # endregion
 
@@ -249,10 +249,10 @@ if (
 # region
 
 conc_baseline, temp_baseline, sea_lvl_baseline = climate(
-    "Baseline", "podi/data/climate.csv"
+    "baseline", "podi/data/climate.csv"
 )
 conc_pathway, temp_pathway, sea_lvl_pathway = climate(
-    "Pathway", "podi/data/climate.csv"
+    "pathway", "podi/data/climate.csv"
 )
 
 # endregion
@@ -271,7 +271,7 @@ for i in range(0, len(iea_region_list)):
         .append(
             results_analysis(
                 iea_region_list[i],
-                "Pathway",
+                "pathway",
                 energy_demand_baseline,
                 energy_demand_pathway,
                 elec_consump_pathway,

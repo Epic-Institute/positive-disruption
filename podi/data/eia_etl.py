@@ -20,7 +20,7 @@ def eia_etl(data_source):
         pd.read_csv(data_source).fillna(method="ffill", axis=1).drop(columns=["Sector"])
     )
     elec_gen.loc[:, "1980":] = elec_gen.loc[:, "1980":].replace(
-        {"Baseline": 0.00001, "Pathway": 0.00001}
+        {"baseline": 0.00001, "pathway": 0.00001}
     )
     region_categories = pd.read_csv(
         "podi/data/region_categories.csv", usecols=["Region", "IEA Region"]

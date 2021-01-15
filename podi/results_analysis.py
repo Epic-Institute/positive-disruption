@@ -395,7 +395,7 @@ def results_analysis(
         cdr_decarb.values[0], index=cdr_decarb.columns, name="Carbon Dioxide Removal"
     )
 
-    cdr_decarb = adoption_curve(cdr_decarb, "World ", "Pathway", "All").T
+    cdr_decarb = adoption_curve(cdr_decarb, "World ", "pathway", "All").T
     cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
 
     # endregion

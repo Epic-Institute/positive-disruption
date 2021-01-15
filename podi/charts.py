@@ -14,6 +14,7 @@ from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
 import plotly.express as px
 import plotly.io as pio
+import plotly.graph_objects as go
 
 save_figs = True
 long_proj_start_year = near_proj_end_year + 1
@@ -352,10 +353,10 @@ def charts(
             }
         )
         em_mit.loc[:, :2020] = 0
-        spacer = em_targets_pathway.loc["Pathway PD20"]
-        em_targets_pathway.loc["Baseline PD20"] = em_mit.append(spacer).sum()
+        spacer = em_targets_pathway.loc["pathway PD20"]
+        em_targets_pathway.loc["baseline PD20"] = em_mit.append(spacer).sum()
 
-        em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
+        em_mit.loc["Electricity"] = em_targets_pathway.loc["baseline PD20"].subtract(
             em_mit.drop(labels="Electricity").append(spacer).sum()
         )
 
@@ -399,7 +400,7 @@ def charts(
                 "Forests & Wetlands",
                 "CH4, N2O, F-gases",
                 "CDR",
-                "Baseline",
+                "baseline",
                 "DAU",
                 "SSP2-RCP1.9",
                 "SSP2-RCP2.6",
@@ -526,7 +527,7 @@ def charts(
         }
     )
     em_mit.loc[:, :2020] = 0
-    em_mit.loc["Electricity"] = em_targets_pathway.loc["Baseline PD20"].subtract(
+    em_mit.loc["Electricity"] = em_targets_pathway.loc["baseline PD20"].subtract(
         em_mit.drop(labels="Electricity").sum()
     )
 
@@ -620,7 +621,7 @@ def charts(
         hist = temp.loc[1850:2016]
         temp.loc[2016:2100].plot(label=rcp.name.split("_")[0], linestyle="--")
     hist.loc[1900:2100].plot(label="historical", color="black")
-    plt.legend(("DAU", "Baseline", "Historical"), loc="best")
+    plt.legend(("DAU", "baseline", "Historical"), loc="best")
     plt.title("Global Mean Temperature")
     plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
     plt.savefig(
@@ -871,7 +872,7 @@ def charts(
 
     # region
 
-    scenario = "Pathway"
+    scenario = "baseline"
     chart_type = "stack"
     fig_type = "plotly"
 
@@ -970,7 +971,10 @@ def charts(
                     line_group="Sector",
                     color="Sector",
                     color_discrete_sequence=px.colors.qualitative.T10,
-                    title="Energy Demand, " + iea_region_list[i],
+                    title="Energy Demand, "
+                    + iea_region_list[i]
+                    + ", "
+                    + scenario.title(),
                     hover_data={"TFC, " + unit[0]: ":.0f"},
                 )
                 fig.update_layout(title_x=0.5)
@@ -1046,7 +1050,7 @@ def charts(
     if chart_type == "line":
         for i in range(0, len(iea_region_list)):
             energy_demand_i = energy_demand_baseline.loc[
-                iea_region_list[i], slice(None), slice(None), "Baseline"
+                iea_region_list[i], slice(None), slice(None), "baseline"
             ]
 
             if iea_region_list[i] == "World ":
@@ -1267,7 +1271,7 @@ def charts(
         ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
     }
 
-    scenario = "Pathway"
+    scenario = "pathway"
     chart_type = "stack"
     fig_type = "plotly"
 
@@ -1519,11 +1523,11 @@ def charts(
 
     color = ((0.116, 0.220, 0.364), (0.380, 0.572, 0.828), (0.368, 0.304, 0.48))
 
-    # Pathway
+    # pathway
 
     for i in range(0, len(iea_region_list)):
         energy_demand_pathway_i = energy_demand_pathway.loc[
-            iea_region_list[i], slice(None), slice(None), "Pathway"
+            iea_region_list[i], slice(None), slice(None), "pathway"
         ]
         fig = (
             energy_demand_pathway_i.loc[
@@ -1596,11 +1600,11 @@ def charts(
         (0.296, 0.276, 0.180),
     )
 
-    # Pathway
+    # pathway
 
     for i in range(0, len(iea_region_list)):
         fig = energy_demand_pathway.loc[
-            iea_region_list[i], "Buildings", ["Electricity", "Heat"], "Pathway"
+            iea_region_list[i], "Buildings", ["Electricity", "Heat"], "pathway"
         ]
 
         plt.figure(i)
@@ -1659,11 +1663,11 @@ def charts(
         (0.380, 0.572, 0.828),
     )
 
-    # Pathway
+    # pathway
 
     for i in range(0, len(iea_region_list)):
         fig = energy_demand_pathway.loc[
-            iea_region_list[i], "Industry", ["Electricity", "Heat"], "Pathway"
+            iea_region_list[i], "Industry", ["Electricity", "Heat"], "pathway"
         ]
 
         plt.figure(i)
@@ -1720,11 +1724,11 @@ def charts(
         (0.996, 0.096, 0.320),
     )
 
-    # Pathway
+    # pathway
 
     for i in range(0, len(iea_region_list)):
         fig = energy_demand_pathway.loc[
-            iea_region_list[i], 'Industry', ['Coal', 'Natural gas', 'Oil', "Bioenergy", "Other renewables"], "Pathway"]
+            iea_region_list[i], 'Industry', ['Coal', 'Natural gas', 'Oil', "Bioenergy", "Other renewables"], "pathway"]
         plt.figure(i)
         plt.stackplot(
             fig.T.index,
@@ -1763,7 +1767,7 @@ def charts(
             iea_region_list[i],
             "Transport",
             ["Electricity", "Oil", "Bioenergy"],
-            "Pathway",
+            "pathway",
         ]
         plt.figure(i)
         plt.stackplot(
@@ -1885,7 +1889,7 @@ def charts(
             .set_index(["Region", "Sector", "Unit"])
             .loc[
                 slice(None),
-                ["Agriculture Net Emissions", "Agriculture Baseline Emissions"],
+                ["Agriculture Net Emissions", "Agriculture baseline Emissions"],
                 slice(None),
             ]
             .droplevel("Unit")
@@ -1896,17 +1900,17 @@ def charts(
         spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
 
         em_mit.loc["Improved Rice"] = em_targets_pathway.loc[
-            "World ", "Agriculture Baseline Emissions"
+            "World ", "Agriculture baseline Emissions"
         ].subtract(
             em_mit.drop(labels="Improved Rice")
-            .append(spacer.drop(index="Agriculture Baseline Emissions"))
+            .append(spacer.drop(index="Agriculture baseline Emissions"))
             .sum()
         )
 
         em_mit.loc[:, :2020] = 0
 
         fig = (
-            (em_mit.append(spacer.drop(index="Agriculture Baseline Emissions"))) / 1000
+            (em_mit.append(spacer.drop(index="Agriculture baseline Emissions"))) / 1000
         ).reindex(
             [
                 spacer.index[1],
@@ -1949,7 +1953,7 @@ def charts(
                 "Trees in Croplands",
                 "Nitrogen Fertilizer Management",
                 "Improved Rice",
-                "Agriculture Baseline Emissions",
+                "Agriculture baseline Emissions",
                 "Agriculture Net Emissions",
             ],
             bbox_to_anchor=(1.05, 1),
@@ -2046,7 +2050,7 @@ def charts(
                 slice(None),
                 [
                     "Forests & Wetlands Net Emissions",
-                    "Forests & Wetlands Baseline Emissions",
+                    "Forests & Wetlands baseline Emissions",
                 ],
                 slice(None),
             ]
@@ -2058,7 +2062,7 @@ def charts(
         spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
 
         fig = (
-            (em_mit.append(spacer.drop(index="Forests & Wetlands Baseline Emissions")))
+            (em_mit.append(spacer.drop(index="Forests & Wetlands baseline Emissions")))
             / 1000
         ).reindex(
             [
@@ -2098,7 +2102,7 @@ def charts(
                 "Forest Management",
                 "Reforestation",
                 "Avoided Forest Conversion",
-                "Forests & Wetlands Baseline Emissions",
+                "Forests & Wetlands baseline Emissions",
                 "Forests & Wetlands Net Emissions",
             ],
             bbox_to_anchor=(1.05, 1),
@@ -2220,7 +2224,7 @@ def charts(
                 slice(None),
                 [
                     "AFOLU Net Emissions",
-                    "AFOLU Baseline Emissions",
+                    "AFOLU baseline Emissions",
                 ],
                 slice(None),
             ]
@@ -2232,7 +2236,7 @@ def charts(
         spacer = em_targets_pathway.droplevel("Region").loc[:, data_start_year:]
 
         fig = (
-            (em_mit.append(spacer.drop(index="AFOLU Baseline Emissions"))) / 1000
+            (em_mit.append(spacer.drop(index="AFOLU baseline Emissions"))) / 1000
         ).reindex(
             [
                 spacer.index[1],
@@ -2289,7 +2293,7 @@ def charts(
                 "Trees in Croplands",
                 "Nitrogen Fertilizer Management",
                 "Improved Rice",
-                "AFOLU Baseline Emissions",
+                "AFOLU baseline Emissions",
                 "AFOLU Net Emissions",
             ],
             bbox_to_anchor=(1.05, 1),
