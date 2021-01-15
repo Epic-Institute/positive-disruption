@@ -78,7 +78,6 @@ def results_analysis(
 
     transport_decarb = (
         pd.DataFrame(transport_consump_pathway.loc[region, "Bioenergy", :])
-        .droplevel(level=0)
         .append(energy_demand_pathway.loc[region, "Transport", "Electricity"])
         .sum()
         .div(

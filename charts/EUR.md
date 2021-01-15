@@ -1,4 +1,4 @@
-# Advanced Economies
+# Europe
 
 ![](../region%20maps/EUR.png)
 

@@ -27,7 +27,7 @@ def emissions(
         pd.read_csv("podi/data/emissions_factors.csv")
         .drop(columns=["Unit"])
         .set_index(["Region", "Sector", "Metric", "Scenario"])
-    )
+    ).loc[slice(None), slice(None), slice(None), scenario]
 
     em_factors.columns = em_factors.columns.astype(int)
     em_factors = em_factors.loc[:, data_start_year:long_proj_end_year]
@@ -39,9 +39,11 @@ def emissions(
     #################
 
     # region
-    elec_consump = pd.concat(
-        [elec_consump], keys=["Electricity"], names=["Sector"]
-    ).reorder_levels(["Region", "Sector", "Metric"])
+    elec_consump = (
+        pd.concat(
+            [elec_consump], keys=["Electricity"], names=["Sector"]
+        ).reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+    ).loc[slice(None), slice(None), slice(None), scenario]
     elec_em = (
         elec_consump * em_factors[em_factors.index.isin(elec_consump.index.values)]
     )
@@ -53,9 +55,11 @@ def emissions(
     ##########
 
     # region
-    heat_consump = pd.concat(
-        [heat_consump], keys=["Heat"], names=["Sector"]
-    ).reorder_levels(["Region", "Sector", "Metric"])
+    heat_consump = (
+        pd.concat([heat_consump], keys=["Heat"], names=["Sector"])
+        .reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+        .loc[slice(None), slice(None), slice(None), scenario]
+    )
 
     heat_em = (
         heat_consump * em_factors[em_factors.index.isin(heat_consump.index.values)]
@@ -69,7 +73,7 @@ def emissions(
 
     # region
     buildings_consump = (
-        energy_demand.loc[slice(None), "Buildings", slice(None)]
+        energy_demand.loc[slice(None), "Buildings", slice(None), slice(None)]
         .groupby("IEA Region")
         .sum()
     )
@@ -78,7 +82,7 @@ def emissions(
     buildings_consump = (
         buildings_consump
         * heat_per_adoption.loc[
-            slice(None), ["Coal", "Natural gas", "Oil"], scneario, slice(None)
+            slice(None), ["Coal", "Natural gas", "Oil"], slice(None)
         ]
         .groupby("Region")
         .sum()
@@ -140,9 +144,11 @@ def emissions(
     ###########################
 
     # region
-    transport_consump = pd.concat(
-        [transport_consump], keys=["Transport"], names=["Sector"]
-    ).reorder_levels(["Region", "Sector", "Metric"])
+    transport_consump = (
+        pd.concat([transport_consump], keys=["Transport"], names=["Sector"])
+        .reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+        .loc[slice(None), slice(None), slice(None), scenario]
+    )
 
     transport_em = (
         transport_consump

@@ -536,14 +536,16 @@ def energy_supply(scenario, energy_demand):
 
     # historical percent of total transport consumption met by a given technology (propotion)
     def hist_per_transport_consump(region, scenario, hist_transport_consump):
-        return hist_transport_consump.div(hist_transport_consump.sum())
+        return hist_transport_consump.div(hist_transport_consump.sum()).droplevel(
+            ["IEA Region"]
+        )
 
     # nearterm projected transport consumption
     def near_proj_transport_consump(region, scenario):
         near_proj_start_year = data_end_year
         long_proj_start_year = data_end_year + 1
         near_proj_end_year = data_end_year
-        return hist_transport_consump(region, scenario)
+        return hist_transport_consump(region, scenario).droplevel(["IEA Region"])
 
     # nearterm projected percent of total transport consumption met by a given technology (proportion)
     def near_proj_per_transport_consump(
@@ -553,7 +555,7 @@ def energy_supply(scenario, energy_demand):
         hist_per_transport_consump,
         near_proj_transport_consump,
     ):
-        foo = hist_per_transport_consump.droplevel(["IEA Region"])
+        foo = hist_per_transport_consump
         return foo
 
     # longterm projected percent of total transport consumption met by a given technology (proportion)
@@ -603,9 +605,7 @@ def energy_supply(scenario, energy_demand):
         hist_transport_consump.loc["Fossil fuels"] = hist_transport_consump.loc["Oil"]
 
         if scenario == "Pathway":
-            transport_consump = (
-                hist_transport_consump.join(proj_transport_consump) * 1.7
-            )
+            transport_consump = hist_transport_consump.join(proj_transport_consump)
         else:
             transport_consump = hist_transport_consump.join(proj_transport_consump)
 
@@ -690,7 +690,11 @@ def energy_supply(scenario, energy_demand):
         percent_adoption.columns = percent_adoption.columns.astype(int)
         consump_cdr.columns = consump_cdr.columns.astype(int)
 
-        return (transport_consump_total, percent_adoption, consump_cdr)
+        return (
+            transport_consump_total,
+            percent_adoption,
+            consump_cdr,
+        )
 
     # endregion
 
@@ -731,21 +735,18 @@ def energy_supply(scenario, energy_demand):
     elec_per_adoption = pd.concat(
         [elec_per_adoption], keys=[scenario], names=["Scenario"]
     ).reorder_levels(["Region", "Metric", "Scenario"])
-    # elec_consump_cdr = pd.concat([elec_consump_cdr], keys=[scenario], names=["Scenario"]).reorder_levels(["Region", "Metric", "Scenario"])
     heat_consump2 = pd.concat(
         [heat_consump2], keys=[scenario], names=["Scenario"]
     ).reorder_levels(["Region", "Metric", "Scenario"])
     heat_per_adoption = pd.concat(
         [heat_per_adoption], keys=[scenario], names=["Scenario"]
     ).reorder_levels(["Region", "Metric", "Scenario"])
-    # heat_consump_cdr = pd.concat([heat_consump_cdr], keys=[scenario], names=["Scenario"]).reorder_levels(["Region", "Metric", "Scenario"])
     transport_consump2 = pd.concat(
         [transport_consump2], keys=[scenario], names=["Scenario"]
     ).reorder_levels(["Region", "Metric", "Scenario"])
     transport_per_adoption = pd.concat(
         [transport_per_adoption], keys=[scenario], names=["Scenario"]
     ).reorder_levels(["Region", "Metric", "Scenario"])
-    # transport_consump_cdr = pd.concat([transport_consump_cdr], keys=[scenario], names=["Scenario"]).reorder_levels(["Region", "Metric", "Scenario"])
 
     # endregion
 
