@@ -33,7 +33,7 @@
 
 ### Emissions
 
-![](../podi/data/figs/mitigationwedges-World)
+![](../podi/data/figs/mitigationwedges-SAFR)
 
 <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em1-SAFR.html" height="500" width="150%"></iframe>
 

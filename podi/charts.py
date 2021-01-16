@@ -872,7 +872,8 @@ def charts(
 
     # region
 
-    scenario = "baseline"
+    show_fig = True
+    scenario = "pathway"
     chart_type = "stack"
     fig_type = "plotly"
 
@@ -981,7 +982,8 @@ def charts(
                 fig.add_vrect(
                     x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0
                 )
-                fig.show()
+                if show_fig is True:
+                    fig.show()
                 if save_figs is True:
                     pio.write_html(
                         fig,
@@ -1271,6 +1273,7 @@ def charts(
         ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
     }
 
+    show_fig = False
     scenario = "pathway"
     chart_type = "stack"
     fig_type = "plotly"
@@ -1333,7 +1336,8 @@ def charts(
                 fig.add_vrect(
                     x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0
                 )
-                fig.show()
+                if show_fig is True:
+                    fig.show()
                 if save_figs is True:
                     pio.write_html(
                         fig,
