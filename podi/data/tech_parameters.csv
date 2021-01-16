@@ -15828,410 +15828,410 @@ DevelopingECO ,Solar,pathway,Electricity,Floor,0
 DevelopingECO ,Solar,baseline,Electricity,Floor,0
 DevelopingECO ,Tide and wave,pathway,Electricity,Floor,0
 DevelopingECO ,Tide and wave,baseline,Electricity,Floor,0
-DevelopingECO ,Waste,Pathway,Electricity,Floor,0
+DevelopingECO ,Waste,pathway,Electricity,Floor,0
 DevelopingECO ,Waste,baseline,Electricity,Floor,0
-DevelopingECO ,Wind,Pathway,Electricity,Floor,0
+DevelopingECO ,Wind,pathway,Electricity,Floor,0
 DevelopingECO ,Wind,baseline,Electricity,Floor,0
-DevelopingECO ,Bioenergy,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Bioenergy,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Bioenergy,baseline,Electricity,Max annual growth,100
 DevelopingECO ,Biomass and waste,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Biomass and waste,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Biomass and waste,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Coal,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Coal,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Coal,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Electricity,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Electricity,Pathway,Electricity,Max annual growth,100
-DevelopingECO ,Fossil fuels,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Electricity,pathway,Electricity,Max annual growth,100
+DevelopingECO ,Fossil fuels,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Fossil fuels,baseline,Electricity,Max annual growth,100
 DevelopingECO ,Generation,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Generation,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Generation,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Geothermal,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Geothermal,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Geothermal,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Hydroelectric pumped storage,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Hydroelectric pumped storage,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Hydroelectric pumped storage,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Hydroelectricity,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Hydroelectricity,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Natural gas,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Natural gas,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Natural gas,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Nuclear,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Nuclear,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Nuclear,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Oil,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Oil,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Oil,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Solar,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Solar,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Solar,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Tide and wave,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Tide and wave,Pathway,Electricity,Max annual growth,100
-DevelopingECO ,Waste,Pathway,Electricity,Max annual growth,100
+DevelopingECO ,Tide and wave,pathway,Electricity,Max annual growth,100
+DevelopingECO ,Waste,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Waste,baseline,Electricity,Max annual growth,100
 DevelopingECO ,Wind,baseline,Electricity,Max annual growth,100
-DevelopingECO ,Wind,Pathway,Electricity,Max annual growth,100
-DevelopingECO ,Bioenergy,Pathway,Electricity,"Parameter a, max",-0.04
+DevelopingECO ,Wind,pathway,Electricity,Max annual growth,100
+DevelopingECO ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 DevelopingECO ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
-DevelopingECO ,Biomass and waste,Pathway,Electricity,"Parameter a, max",5
+DevelopingECO ,Biomass and waste,pathway,Electricity,"Parameter a, max",5
 DevelopingECO ,Biomass and waste,baseline,Electricity,"Parameter a, max",100
 DevelopingECO ,Coal,baseline,Electricity,"Parameter a, max",100
-DevelopingECO ,Coal,Pathway,Electricity,"Parameter a, max",5
+DevelopingECO ,Coal,pathway,Electricity,"Parameter a, max",5
 DevelopingECO ,Electricity,baseline,Electricity,"Parameter a, max",5
-DevelopingECO ,Electricity,Pathway,Electricity,"Parameter a, max",5
-DevelopingECO ,Fossil fuels,Pathway,Electricity,"Parameter a, max",-0.2
+DevelopingECO ,Electricity,pathway,Electricity,"Parameter a, max",5
+DevelopingECO ,Fossil fuels,pathway,Electricity,"Parameter a, max",-0.2
 DevelopingECO ,Fossil fuels,baseline,Electricity,"Parameter a, max",100
-DevelopingECO ,Generation,Pathway,Electricity,"Parameter a, max",0
+DevelopingECO ,Generation,pathway,Electricity,"Parameter a, max",0
 DevelopingECO ,Generation,baseline,Electricity,"Parameter a, max",0
 DevelopingECO ,Geothermal,baseline,Electricity,"Parameter a, max",100
-DevelopingECO ,Geothermal,Pathway,Electricity,"Parameter a, max",0.2
-DevelopingECO ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter a, max",5
+DevelopingECO ,Geothermal,pathway,Electricity,"Parameter a, max",0.2
+DevelopingECO ,Hydroelectric pumped storage,pathway,Electricity,"Parameter a, max",5
 DevelopingECO ,Hydroelectric pumped storage,baseline,Electricity,"Parameter a, max",5
-DevelopingECO ,Hydroelectricity,Pathway,Electricity,"Parameter a, max",100
+DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 DevelopingECO ,Natural gas,baseline,Electricity,"Parameter a, max",100
-DevelopingECO ,Natural gas,Pathway,Electricity,"Parameter a, max",0
+DevelopingECO ,Natural gas,pathway,Electricity,"Parameter a, max",0
 DevelopingECO ,Nuclear,baseline,Electricity,"Parameter a, max",-100
-DevelopingECO ,Nuclear,Pathway,Electricity,"Parameter a, max",-0.02
+DevelopingECO ,Nuclear,pathway,Electricity,"Parameter a, max",-0.02
 DevelopingECO ,Oil,baseline,Electricity,"Parameter a, max",100
-DevelopingECO ,Oil,Pathway,Electricity,"Parameter a, max",-0.1074
-DevelopingECO ,Solar,Pathway,Electricity,"Parameter a, max",5
+DevelopingECO ,Oil,pathway,Electricity,"Parameter a, max",-0.1074
+DevelopingECO ,Solar,pathway,Electricity,"Parameter a, max",5
 DevelopingECO ,Solar,baseline,Electricity,"Parameter a, max",100
-DevelopingECO ,Tide and wave,Pathway,Electricity,"Parameter a, max",5
+DevelopingECO ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 DevelopingECO ,Tide and wave,baseline,Electricity,"Parameter a, max",100
-DevelopingECO ,Waste,Pathway,Electricity,"Parameter a, max",0.05
+DevelopingECO ,Waste,pathway,Electricity,"Parameter a, max",0.05
 DevelopingECO ,Waste,baseline,Electricity,"Parameter a, max",5
-DevelopingECO ,Wind,Pathway,Electricity,"Parameter a, max",5
+DevelopingECO ,Wind,pathway,Electricity,"Parameter a, max",5
 DevelopingECO ,Wind,baseline,Electricity,"Parameter a, max",100
-DevelopingECO ,Bioenergy,Pathway,Electricity,"Parameter a, min",-0.04
+DevelopingECO ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 DevelopingECO ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
-DevelopingECO ,Biomass and waste,Pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Biomass and waste,pathway,Electricity,"Parameter a, min",0
 DevelopingECO ,Biomass and waste,baseline,Electricity,"Parameter a, min",100
 DevelopingECO ,Coal,baseline,Electricity,"Parameter a, min",100
-DevelopingECO ,Coal,Pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Coal,pathway,Electricity,"Parameter a, min",0
 DevelopingECO ,Electricity,baseline,Electricity,"Parameter a, min",0
-DevelopingECO ,Electricity,Pathway,Electricity,"Parameter a, min",0
-DevelopingECO ,Fossil fuels,Pathway,Electricity,"Parameter a, min",-0.4
+DevelopingECO ,Electricity,pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Fossil fuels,pathway,Electricity,"Parameter a, min",-0.4
 DevelopingECO ,Fossil fuels,baseline,Electricity,"Parameter a, min",100
-DevelopingECO ,Generation,Pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Generation,pathway,Electricity,"Parameter a, min",0
 DevelopingECO ,Generation,baseline,Electricity,"Parameter a, min",0
 DevelopingECO ,Geothermal,baseline,Electricity,"Parameter a, min",100
-DevelopingECO ,Geothermal,Pathway,Electricity,"Parameter a, min",0
-DevelopingECO ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Geothermal,pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Hydroelectric pumped storage,pathway,Electricity,"Parameter a, min",0
 DevelopingECO ,Hydroelectric pumped storage,baseline,Electricity,"Parameter a, min",0
-DevelopingECO ,Hydroelectricity,Pathway,Electricity,"Parameter a, min",100
+DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 DevelopingECO ,Natural gas,baseline,Electricity,"Parameter a, min",100
-DevelopingECO ,Natural gas,Pathway,Electricity,"Parameter a, min",-1
+DevelopingECO ,Natural gas,pathway,Electricity,"Parameter a, min",-1
 DevelopingECO ,Nuclear,baseline,Electricity,"Parameter a, min",-100
-DevelopingECO ,Nuclear,Pathway,Electricity,"Parameter a, min",-0.03
+DevelopingECO ,Nuclear,pathway,Electricity,"Parameter a, min",-0.03
 DevelopingECO ,Oil,baseline,Electricity,"Parameter a, min",100
-DevelopingECO ,Oil,Pathway,Electricity,"Parameter a, min",-0.1074
-DevelopingECO ,Solar,Pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Oil,pathway,Electricity,"Parameter a, min",-0.1074
+DevelopingECO ,Solar,pathway,Electricity,"Parameter a, min",0
 DevelopingECO ,Solar,baseline,Electricity,"Parameter a, min",100
-DevelopingECO ,Tide and wave,Pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Tide and wave,pathway,Electricity,"Parameter a, min",0
 DevelopingECO ,Tide and wave,baseline,Electricity,"Parameter a, min",100
-DevelopingECO ,Waste,Pathway,Electricity,"Parameter a, min",0.05
+DevelopingECO ,Waste,pathway,Electricity,"Parameter a, min",0.05
 DevelopingECO ,Waste,baseline,Electricity,"Parameter a, min",0
-DevelopingECO ,Wind,Pathway,Electricity,"Parameter a, min",0
+DevelopingECO ,Wind,pathway,Electricity,"Parameter a, min",0
 DevelopingECO ,Wind,baseline,Electricity,"Parameter a, min",100
-DevelopingECO ,Bioenergy,Pathway,Electricity,"Parameter b, max",40
+DevelopingECO ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 DevelopingECO ,Bioenergy,baseline,Electricity,"Parameter b, max",40
-DevelopingECO ,Biomass and waste,Pathway,Electricity,"Parameter b, max",80
+DevelopingECO ,Biomass and waste,pathway,Electricity,"Parameter b, max",80
 DevelopingECO ,Biomass and waste,baseline,Electricity,"Parameter b, max",-100
 DevelopingECO ,Coal,baseline,Electricity,"Parameter b, max",100
-DevelopingECO ,Coal,Pathway,Electricity,"Parameter b, max",100
+DevelopingECO ,Coal,pathway,Electricity,"Parameter b, max",100
 DevelopingECO ,Electricity,baseline,Electricity,"Parameter b, max",100
-DevelopingECO ,Electricity,Pathway,Electricity,"Parameter b, max",100
-DevelopingECO ,Fossil fuels,Pathway,Electricity,"Parameter b, max",15
+DevelopingECO ,Electricity,pathway,Electricity,"Parameter b, max",100
+DevelopingECO ,Fossil fuels,pathway,Electricity,"Parameter b, max",15
 DevelopingECO ,Fossil fuels,baseline,Electricity,"Parameter b, max",-100
-DevelopingECO ,Generation,Pathway,Electricity,"Parameter b, max",100
+DevelopingECO ,Generation,pathway,Electricity,"Parameter b, max",100
 DevelopingECO ,Generation,baseline,Electricity,"Parameter b, max",100
 DevelopingECO ,Geothermal,baseline,Electricity,"Parameter b, max",-100
-DevelopingECO ,Geothermal,Pathway,Electricity,"Parameter b, max",20
-DevelopingECO ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter b, max",100
+DevelopingECO ,Geothermal,pathway,Electricity,"Parameter b, max",20
+DevelopingECO ,Hydroelectric pumped storage,pathway,Electricity,"Parameter b, max",100
 DevelopingECO ,Hydroelectric pumped storage,baseline,Electricity,"Parameter b, max",100
-DevelopingECO ,Hydroelectricity,Pathway,Electricity,"Parameter b, max",100
+DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 DevelopingECO ,Natural gas,baseline,Electricity,"Parameter b, max",100
-DevelopingECO ,Natural gas,Pathway,Electricity,"Parameter b, max",50
+DevelopingECO ,Natural gas,pathway,Electricity,"Parameter b, max",50
 DevelopingECO ,Nuclear,baseline,Electricity,"Parameter b, max",100
-DevelopingECO ,Nuclear,Pathway,Electricity,"Parameter b, max",60
+DevelopingECO ,Nuclear,pathway,Electricity,"Parameter b, max",60
 DevelopingECO ,Oil,baseline,Electricity,"Parameter b, max",100
-DevelopingECO ,Oil,Pathway,Electricity,"Parameter b, max",30
-DevelopingECO ,Solar,Pathway,Electricity,"Parameter b, max",100
+DevelopingECO ,Oil,pathway,Electricity,"Parameter b, max",30
+DevelopingECO ,Solar,pathway,Electricity,"Parameter b, max",100
 DevelopingECO ,Solar,baseline,Electricity,"Parameter b, max",-100
-DevelopingECO ,Tide and wave,Pathway,Electricity,"Parameter b, max",100
+DevelopingECO ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 DevelopingECO ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
-DevelopingECO ,Waste,Pathway,Electricity,"Parameter b, max",40
+DevelopingECO ,Waste,pathway,Electricity,"Parameter b, max",40
 DevelopingECO ,Waste,baseline,Electricity,"Parameter b, max",100
-DevelopingECO ,Wind,Pathway,Electricity,"Parameter b, max",100
+DevelopingECO ,Wind,pathway,Electricity,"Parameter b, max",100
 DevelopingECO ,Wind,baseline,Electricity,"Parameter b, max",-100
-DevelopingECO ,Bioenergy,Pathway,Electricity,"Parameter b, min",40
+DevelopingECO ,Bioenergy,pathway,Electricity,"Parameter b, min",40
 DevelopingECO ,Bioenergy,baseline,Electricity,"Parameter b, min",40
-DevelopingECO ,Biomass and waste,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Biomass and waste,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Biomass and waste,baseline,Electricity,"Parameter b, min",-100
 DevelopingECO ,Coal,baseline,Electricity,"Parameter b, min",100
-DevelopingECO ,Coal,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Coal,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Electricity,baseline,Electricity,"Parameter b, min",0
-DevelopingECO ,Electricity,Pathway,Electricity,"Parameter b, min",0
-DevelopingECO ,Fossil fuels,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Electricity,pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Fossil fuels,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Fossil fuels,baseline,Electricity,"Parameter b, min",-100
-DevelopingECO ,Generation,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Generation,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Generation,baseline,Electricity,"Parameter b, min",0
 DevelopingECO ,Geothermal,baseline,Electricity,"Parameter b, min",-100
-DevelopingECO ,Geothermal,Pathway,Electricity,"Parameter b, min",0
-DevelopingECO ,Hydroelectric pumped storage,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Geothermal,pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Hydroelectric pumped storage,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Hydroelectric pumped storage,baseline,Electricity,"Parameter b, min",0
-DevelopingECO ,Hydroelectricity,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter b, min",-100
 DevelopingECO ,Natural gas,baseline,Electricity,"Parameter b, min",100
-DevelopingECO ,Natural gas,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Natural gas,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Nuclear,baseline,Electricity,"Parameter b, min",100
-DevelopingECO ,Nuclear,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Nuclear,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Oil,baseline,Electricity,"Parameter b, min",100
-DevelopingECO ,Oil,Pathway,Electricity,"Parameter b, min",30
-DevelopingECO ,Solar,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Oil,pathway,Electricity,"Parameter b, min",30
+DevelopingECO ,Solar,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Solar,baseline,Electricity,"Parameter b, min",-100
-DevelopingECO ,Tide and wave,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Tide and wave,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Tide and wave,baseline,Electricity,"Parameter b, min",-100
-DevelopingECO ,Waste,Pathway,Electricity,"Parameter b, min",40
+DevelopingECO ,Waste,pathway,Electricity,"Parameter b, min",40
 DevelopingECO ,Waste,baseline,Electricity,"Parameter b, min",0
-DevelopingECO ,Wind,Pathway,Electricity,"Parameter b, min",0
+DevelopingECO ,Wind,pathway,Electricity,"Parameter b, min",0
 DevelopingECO ,Wind,baseline,Electricity,"Parameter b, min",-100
-DevelopingECO ,Bioenergy,Pathway,Electricity,Saturation Point,50
+DevelopingECO ,Bioenergy,pathway,Electricity,Saturation Point,50
 DevelopingECO ,Bioenergy,baseline,Electricity,Saturation Point,0
 DevelopingECO ,Biomass and waste,baseline,Electricity,Saturation Point,1.64
-DevelopingECO ,Biomass and waste,Pathway,Electricity,Saturation Point,5
+DevelopingECO ,Biomass and waste,pathway,Electricity,Saturation Point,5
 DevelopingECO ,Coal,baseline,Electricity,Saturation Point,0
-DevelopingECO ,Coal,Pathway,Electricity,Saturation Point,0
+DevelopingECO ,Coal,pathway,Electricity,Saturation Point,0
 DevelopingECO ,Electricity,baseline,Electricity,Saturation Point,0
-DevelopingECO ,Electricity,Pathway,Electricity,Saturation Point,100
-DevelopingECO ,Fossil fuels,Pathway,Electricity,Saturation Point,71
+DevelopingECO ,Electricity,pathway,Electricity,Saturation Point,100
+DevelopingECO ,Fossil fuels,pathway,Electricity,Saturation Point,71
 DevelopingECO ,Fossil fuels,baseline,Electricity,Saturation Point,70.5
 DevelopingECO ,Generation,baseline,Electricity,Saturation Point,0
-DevelopingECO ,Generation,Pathway,Electricity,Saturation Point,100
+DevelopingECO ,Generation,pathway,Electricity,Saturation Point,100
 DevelopingECO ,Geothermal,baseline,Electricity,Saturation Point,0.31
-DevelopingECO ,Geothermal,Pathway,Electricity,Saturation Point,5
+DevelopingECO ,Geothermal,pathway,Electricity,Saturation Point,5
 DevelopingECO ,Hydroelectric pumped storage,baseline,Electricity,Saturation Point,0
-DevelopingECO ,Hydroelectric pumped storage,Pathway,Electricity,Saturation Point,15
+DevelopingECO ,Hydroelectric pumped storage,pathway,Electricity,Saturation Point,15
 DevelopingECO ,Hydroelectricity,baseline,Electricity,Saturation Point,19
-DevelopingECO ,Hydroelectricity,Pathway,Electricity,Saturation Point,18.9
+DevelopingECO ,Hydroelectricity,pathway,Electricity,Saturation Point,18.9
 DevelopingECO ,Natural gas,baseline,Electricity,Saturation Point,0
-DevelopingECO ,Natural gas,Pathway,Electricity,Saturation Point,0
+DevelopingECO ,Natural gas,pathway,Electricity,Saturation Point,0
 DevelopingECO ,Nuclear,baseline,Electricity,Saturation Point,4.5931
-DevelopingECO ,Nuclear,Pathway,Electricity,Saturation Point,5
+DevelopingECO ,Nuclear,pathway,Electricity,Saturation Point,5
 DevelopingECO ,Oil,baseline,Electricity,Saturation Point,0
-DevelopingECO ,Oil,Pathway,Electricity,Saturation Point,100
+DevelopingECO ,Oil,pathway,Electricity,Saturation Point,100
 DevelopingECO ,Solar,baseline,Electricity,Saturation Point,1.3
-DevelopingECO ,Solar,Pathway,Electricity,Saturation Point,35.9
+DevelopingECO ,Solar,pathway,Electricity,Saturation Point,35.9
 DevelopingECO ,Tide and wave,baseline,Electricity,Saturation Point,0.01
-DevelopingECO ,Tide and wave,Pathway,Electricity,Saturation Point,5
-DevelopingECO ,Waste,Pathway,Electricity,Saturation Point,23
+DevelopingECO ,Tide and wave,pathway,Electricity,Saturation Point,5
+DevelopingECO ,Waste,pathway,Electricity,Saturation Point,23
 DevelopingECO ,Waste,baseline,Electricity,Saturation Point,0
 DevelopingECO ,Wind,baseline,Electricity,Saturation Point,3.2
-DevelopingECO ,Wind,Pathway,Electricity,Saturation Point,38.5
-DevelopingECO ,Bioenergy,Pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Wind,pathway,Electricity,Saturation Point,38.5
+DevelopingECO ,Bioenergy,pathway,Heat,Consumption:Generation,1
 DevelopingECO ,Bioenergy,baseline,Heat,Consumption:Generation,1
-DevelopingECO ,Coal,Pathway,Heat,Consumption:Generation,1
-DevelopingECO ,Geothermal,Pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Coal,pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Geothermal,pathway,Heat,Consumption:Generation,1
 DevelopingECO ,Heat,baseline,Heat,Consumption:Generation,1
-DevelopingECO ,Heat,Pathway,Heat,Consumption:Generation,1
-DevelopingECO ,Natural gas,Pathway,Heat,Consumption:Generation,1
-DevelopingECO ,Nuclear,Pathway,Heat,Consumption:Generation,1
-DevelopingECO ,Oil,Pathway,Heat,Consumption:Generation,1
-DevelopingECO ,Other sources,Pathway,Heat,Consumption:Generation,1
-DevelopingECO ,Solar thermal,Pathway,Heat,Consumption:Generation,1
-DevelopingECO ,Waste,Pathway,Heat,Consumption:Generation,1
-DevelopingECO ,Bioenergy,Pathway,Heat,Floor,0
+DevelopingECO ,Heat,pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Natural gas,pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Nuclear,pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Oil,pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Other sources,pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Solar thermal,pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Waste,pathway,Heat,Consumption:Generation,1
+DevelopingECO ,Bioenergy,pathway,Heat,Floor,0
 DevelopingECO ,Bioenergy,baseline,Heat,Floor,0
 DevelopingECO ,Coal,baseline,Heat,Floor,0
-DevelopingECO ,Coal,Pathway,Heat,Floor,0
+DevelopingECO ,Coal,pathway,Heat,Floor,0
 DevelopingECO ,Geothermal,baseline,Heat,Floor,0
-DevelopingECO ,Geothermal,Pathway,Heat,Floor,0
+DevelopingECO ,Geothermal,pathway,Heat,Floor,0
 DevelopingECO ,Natural gas,baseline,Heat,Floor,0
-DevelopingECO ,Natural gas,Pathway,Heat,Floor,0
+DevelopingECO ,Natural gas,pathway,Heat,Floor,0
 DevelopingECO ,Nuclear,baseline,Heat,Floor,0
-DevelopingECO ,Nuclear,Pathway,Heat,Floor,0
+DevelopingECO ,Nuclear,pathway,Heat,Floor,0
 DevelopingECO ,Oil,baseline,Heat,Floor,0
-DevelopingECO ,Oil,Pathway,Heat,Floor,0
-DevelopingECO ,Other sources,Pathway,Heat,Floor,0
+DevelopingECO ,Oil,pathway,Heat,Floor,0
+DevelopingECO ,Other sources,pathway,Heat,Floor,0
 DevelopingECO ,Other sources,baseline,Heat,Floor,0
 DevelopingECO ,Solar thermal,baseline,Heat,Floor,0
-DevelopingECO ,Solar thermal,Pathway,Heat,Floor,0
-DevelopingECO ,Waste,Pathway,Heat,Floor,0
+DevelopingECO ,Solar thermal,pathway,Heat,Floor,0
+DevelopingECO ,Waste,pathway,Heat,Floor,0
 DevelopingECO ,Waste,baseline,Heat,Floor,0
-DevelopingECO ,Bioenergy,Pathway,Heat,Max annual growth,100
+DevelopingECO ,Bioenergy,pathway,Heat,Max annual growth,100
 DevelopingECO ,Bioenergy,baseline,Heat,Max annual growth,100
 DevelopingECO ,Coal,baseline,Heat,Max annual growth,100
-DevelopingECO ,Coal,Pathway,Heat,Max annual growth,100
+DevelopingECO ,Coal,pathway,Heat,Max annual growth,100
 DevelopingECO ,Geothermal,baseline,Heat,Max annual growth,100
-DevelopingECO ,Geothermal,Pathway,Heat,Max annual growth,100
+DevelopingECO ,Geothermal,pathway,Heat,Max annual growth,100
 DevelopingECO ,Natural gas,baseline,Heat,Max annual growth,100
-DevelopingECO ,Natural gas,Pathway,Heat,Max annual growth,100
+DevelopingECO ,Natural gas,pathway,Heat,Max annual growth,100
 DevelopingECO ,Nuclear,baseline,Heat,Max annual growth,100
-DevelopingECO ,Nuclear,Pathway,Heat,Max annual growth,100
+DevelopingECO ,Nuclear,pathway,Heat,Max annual growth,100
 DevelopingECO ,Oil,baseline,Heat,Max annual growth,100
-DevelopingECO ,Oil,Pathway,Heat,Max annual growth,100
-DevelopingECO ,Other sources,Pathway,Heat,Max annual growth,100
+DevelopingECO ,Oil,pathway,Heat,Max annual growth,100
+DevelopingECO ,Other sources,pathway,Heat,Max annual growth,100
 DevelopingECO ,Other sources,baseline,Heat,Max annual growth,100
 DevelopingECO ,Solar thermal,baseline,Heat,Max annual growth,100
-DevelopingECO ,Solar thermal,Pathway,Heat,Max annual growth,100
-DevelopingECO ,Waste,Pathway,Heat,Max annual growth,100
+DevelopingECO ,Solar thermal,pathway,Heat,Max annual growth,100
+DevelopingECO ,Waste,pathway,Heat,Max annual growth,100
 DevelopingECO ,Waste,baseline,Heat,Max annual growth,100
-DevelopingECO ,Bioenergy,Pathway,Heat,"Parameter a, max",-0.001
+DevelopingECO ,Bioenergy,pathway,Heat,"Parameter a, max",-0.001
 DevelopingECO ,Bioenergy,baseline,Heat,"Parameter a, max",100
 DevelopingECO ,Coal,baseline,Heat,"Parameter a, max",100
-DevelopingECO ,Coal,Pathway,Heat,"Parameter a, max",-0.1
+DevelopingECO ,Coal,pathway,Heat,"Parameter a, max",-0.1
 DevelopingECO ,Geothermal,baseline,Heat,"Parameter a, max",100
-DevelopingECO ,Geothermal,Pathway,Heat,"Parameter a, max",0.1
+DevelopingECO ,Geothermal,pathway,Heat,"Parameter a, max",0.1
 DevelopingECO ,Natural gas,baseline,Heat,"Parameter a, max",100
-DevelopingECO ,Natural gas,Pathway,Heat,"Parameter a, max",-0.1
+DevelopingECO ,Natural gas,pathway,Heat,"Parameter a, max",-0.1
 DevelopingECO ,Nuclear,baseline,Heat,"Parameter a, max",100
-DevelopingECO ,Nuclear,Pathway,Heat,"Parameter a, max",-0.02
+DevelopingECO ,Nuclear,pathway,Heat,"Parameter a, max",-0.02
 DevelopingECO ,Oil,baseline,Heat,"Parameter a, max",100
-DevelopingECO ,Oil,Pathway,Heat,"Parameter a, max",-0.01
-DevelopingECO ,Other sources,Pathway,Heat,"Parameter a, max",-0.1
+DevelopingECO ,Oil,pathway,Heat,"Parameter a, max",-0.01
+DevelopingECO ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 DevelopingECO ,Other sources,baseline,Heat,"Parameter a, max",100
 DevelopingECO ,Solar thermal,baseline,Heat,"Parameter a, max",100
-DevelopingECO ,Solar thermal,Pathway,Heat,"Parameter a, max",0.3
-DevelopingECO ,Waste,Pathway,Heat,"Parameter a, max",0.2
+DevelopingECO ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
+DevelopingECO ,Waste,pathway,Heat,"Parameter a, max",0.2
 DevelopingECO ,Waste,baseline,Heat,"Parameter a, max",100
-DevelopingECO ,Bioenergy,Pathway,Heat,"Parameter a, min",-0.001
+DevelopingECO ,Bioenergy,pathway,Heat,"Parameter a, min",-0.001
 DevelopingECO ,Bioenergy,baseline,Heat,"Parameter a, min",100
 DevelopingECO ,Coal,baseline,Heat,"Parameter a, min",100
-DevelopingECO ,Coal,Pathway,Heat,"Parameter a, min",-0.2
+DevelopingECO ,Coal,pathway,Heat,"Parameter a, min",-0.2
 DevelopingECO ,Geothermal,baseline,Heat,"Parameter a, min",100
-DevelopingECO ,Geothermal,Pathway,Heat,"Parameter a, min",0.01
+DevelopingECO ,Geothermal,pathway,Heat,"Parameter a, min",0.01
 DevelopingECO ,Natural gas,baseline,Heat,"Parameter a, min",100
-DevelopingECO ,Natural gas,Pathway,Heat,"Parameter a, min",-0.2
+DevelopingECO ,Natural gas,pathway,Heat,"Parameter a, min",-0.2
 DevelopingECO ,Nuclear,baseline,Heat,"Parameter a, min",100
-DevelopingECO ,Nuclear,Pathway,Heat,"Parameter a, min",-0.02
+DevelopingECO ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 DevelopingECO ,Oil,baseline,Heat,"Parameter a, min",100
-DevelopingECO ,Oil,Pathway,Heat,"Parameter a, min",-0.2
-DevelopingECO ,Other sources,Pathway,Heat,"Parameter a, min",-0.5
+DevelopingECO ,Oil,pathway,Heat,"Parameter a, min",-0.2
+DevelopingECO ,Other sources,pathway,Heat,"Parameter a, min",-0.5
 DevelopingECO ,Other sources,baseline,Heat,"Parameter a, min",100
 DevelopingECO ,Solar thermal,baseline,Heat,"Parameter a, min",100
-DevelopingECO ,Solar thermal,Pathway,Heat,"Parameter a, min",0.14
-DevelopingECO ,Waste,Pathway,Heat,"Parameter a, min",0.2
+DevelopingECO ,Solar thermal,pathway,Heat,"Parameter a, min",0.14
+DevelopingECO ,Waste,pathway,Heat,"Parameter a, min",0.2
 DevelopingECO ,Waste,baseline,Heat,"Parameter a, min",100
-DevelopingECO ,Bioenergy,Pathway,Heat,"Parameter b, max",37
+DevelopingECO ,Bioenergy,pathway,Heat,"Parameter b, max",37
 DevelopingECO ,Bioenergy,baseline,Heat,"Parameter b, max",-100
 DevelopingECO ,Coal,baseline,Heat,"Parameter b, max",-100
-DevelopingECO ,Coal,Pathway,Heat,"Parameter b, max",20
+DevelopingECO ,Coal,pathway,Heat,"Parameter b, max",20
 DevelopingECO ,Geothermal,baseline,Heat,"Parameter b, max",-100
-DevelopingECO ,Geothermal,Pathway,Heat,"Parameter b, max",15
+DevelopingECO ,Geothermal,pathway,Heat,"Parameter b, max",15
 DevelopingECO ,Natural gas,baseline,Heat,"Parameter b, max",-100
-DevelopingECO ,Natural gas,Pathway,Heat,"Parameter b, max",20
+DevelopingECO ,Natural gas,pathway,Heat,"Parameter b, max",20
 DevelopingECO ,Nuclear,baseline,Heat,"Parameter b, max",-100
-DevelopingECO ,Nuclear,Pathway,Heat,"Parameter b, max",100
+DevelopingECO ,Nuclear,pathway,Heat,"Parameter b, max",100
 DevelopingECO ,Oil,baseline,Heat,"Parameter b, max",-100
-DevelopingECO ,Oil,Pathway,Heat,"Parameter b, max",50
-DevelopingECO ,Other sources,Pathway,Heat,"Parameter b, max",40
+DevelopingECO ,Oil,pathway,Heat,"Parameter b, max",50
+DevelopingECO ,Other sources,pathway,Heat,"Parameter b, max",40
 DevelopingECO ,Other sources,baseline,Heat,"Parameter b, max",-100
 DevelopingECO ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-DevelopingECO ,Solar thermal,Pathway,Heat,"Parameter b, max",30
-DevelopingECO ,Waste,Pathway,Heat,"Parameter b, max",25
+DevelopingECO ,Solar thermal,pathway,Heat,"Parameter b, max",30
+DevelopingECO ,Waste,pathway,Heat,"Parameter b, max",25
 DevelopingECO ,Waste,baseline,Heat,"Parameter b, max",-100
-DevelopingECO ,Bioenergy,Pathway,Heat,"Parameter b, min",37
+DevelopingECO ,Bioenergy,pathway,Heat,"Parameter b, min",37
 DevelopingECO ,Bioenergy,baseline,Heat,"Parameter b, min",-100
 DevelopingECO ,Coal,baseline,Heat,"Parameter b, min",-100
-DevelopingECO ,Coal,Pathway,Heat,"Parameter b, min",0
+DevelopingECO ,Coal,pathway,Heat,"Parameter b, min",0
 DevelopingECO ,Geothermal,baseline,Heat,"Parameter b, min",-100
-DevelopingECO ,Geothermal,Pathway,Heat,"Parameter b, min",0
+DevelopingECO ,Geothermal,pathway,Heat,"Parameter b, min",0
 DevelopingECO ,Natural gas,baseline,Heat,"Parameter b, min",-100
-DevelopingECO ,Natural gas,Pathway,Heat,"Parameter b, min",0
+DevelopingECO ,Natural gas,pathway,Heat,"Parameter b, min",0
 DevelopingECO ,Nuclear,baseline,Heat,"Parameter b, min",-100
-DevelopingECO ,Nuclear,Pathway,Heat,"Parameter b, min",0
+DevelopingECO ,Nuclear,pathway,Heat,"Parameter b, min",0
 DevelopingECO ,Oil,baseline,Heat,"Parameter b, min",-100
-DevelopingECO ,Oil,Pathway,Heat,"Parameter b, min",10
-DevelopingECO ,Other sources,Pathway,Heat,"Parameter b, min",0
+DevelopingECO ,Oil,pathway,Heat,"Parameter b, min",10
+DevelopingECO ,Other sources,pathway,Heat,"Parameter b, min",0
 DevelopingECO ,Other sources,baseline,Heat,"Parameter b, min",-100
 DevelopingECO ,Solar thermal,baseline,Heat,"Parameter b, min",-100
-DevelopingECO ,Solar thermal,Pathway,Heat,"Parameter b, min",30
-DevelopingECO ,Waste,Pathway,Heat,"Parameter b, min",0
+DevelopingECO ,Solar thermal,pathway,Heat,"Parameter b, min",30
+DevelopingECO ,Waste,pathway,Heat,"Parameter b, min",0
 DevelopingECO ,Waste,baseline,Heat,"Parameter b, min",-100
-DevelopingECO ,Bioenergy,Pathway,Heat,Saturation Point,48
+DevelopingECO ,Bioenergy,pathway,Heat,Saturation Point,48
 DevelopingECO ,Bioenergy,baseline,Heat,Saturation Point,23.9
 DevelopingECO ,Coal,baseline,Heat,Saturation Point,4.3
-DevelopingECO ,Coal,Pathway,Heat,Saturation Point,4.7
+DevelopingECO ,Coal,pathway,Heat,Saturation Point,4.7
 DevelopingECO ,Geothermal,baseline,Heat,Saturation Point,0.01
-DevelopingECO ,Geothermal,Pathway,Heat,Saturation Point,5
+DevelopingECO ,Geothermal,pathway,Heat,Saturation Point,5
 DevelopingECO ,Natural gas,baseline,Heat,Saturation Point,4.3
-DevelopingECO ,Natural gas,Pathway,Heat,Saturation Point,4.7
+DevelopingECO ,Natural gas,pathway,Heat,Saturation Point,4.7
 DevelopingECO ,Nuclear,baseline,Heat,Saturation Point,0.06
-DevelopingECO ,Nuclear,Pathway,Heat,Saturation Point,0.1
+DevelopingECO ,Nuclear,pathway,Heat,Saturation Point,0.1
 DevelopingECO ,Oil,baseline,Heat,Saturation Point,0.01
-DevelopingECO ,Oil,Pathway,Heat,Saturation Point,0.4
-DevelopingECO ,Other sources,Pathway,Heat,Saturation Point,65.5
+DevelopingECO ,Oil,pathway,Heat,Saturation Point,0.4
+DevelopingECO ,Other sources,pathway,Heat,Saturation Point,65.5
 DevelopingECO ,Other sources,baseline,Heat,Saturation Point,66.9
 DevelopingECO ,Solar thermal,baseline,Heat,Saturation Point,0
-DevelopingECO ,Solar thermal,Pathway,Heat,Saturation Point,40
-DevelopingECO ,Waste,Pathway,Heat,Saturation Point,15
+DevelopingECO ,Solar thermal,pathway,Heat,Saturation Point,40
+DevelopingECO ,Waste,pathway,Heat,Saturation Point,15
 DevelopingECO ,Waste,baseline,Heat,Saturation Point,0.4
-DevelopingECO ,Biochar,Pathway,Industry,Floor,0
+DevelopingECO ,Biochar,pathway,Industry,Floor,0
 DevelopingECO ,Biochar,baseline,Industry,Floor,0
 DevelopingECO ,Biochar,baseline,Industry,Max annual growth,100
-DevelopingECO ,Biochar,Pathway,Industry,Max annual growth,100
-DevelopingECO ,Biochar,Pathway,Industry,"Parameter a, max",0.1
+DevelopingECO ,Biochar,pathway,Industry,Max annual growth,100
+DevelopingECO ,Biochar,pathway,Industry,"Parameter a, max",0.1
 DevelopingECO ,Biochar,baseline,Industry,"Parameter a, max",5
-DevelopingECO ,Biochar,Pathway,Industry,"Parameter a, min",0.1
+DevelopingECO ,Biochar,pathway,Industry,"Parameter a, min",0.1
 DevelopingECO ,Biochar,baseline,Industry,"Parameter a, min",0
-DevelopingECO ,Biochar,Pathway,Industry,"Parameter b, max",40
+DevelopingECO ,Biochar,pathway,Industry,"Parameter b, max",40
 DevelopingECO ,Biochar,baseline,Industry,"Parameter b, max",100
-DevelopingECO ,Biochar,Pathway,Industry,"Parameter b, min",40
+DevelopingECO ,Biochar,pathway,Industry,"Parameter b, min",40
 DevelopingECO ,Biochar,baseline,Industry,"Parameter b, min",0
 DevelopingECO ,Biochar,baseline,Industry,Saturation Point,5
-DevelopingECO ,Biochar,Pathway,Industry,Saturation Point,100
-DevelopingECO ,Bioenergy,Pathway,Transport,Consumption:Generation,1
-DevelopingECO ,Oil,Pathway,Transport,Consumption:Generation,1
-DevelopingECO ,Other fuels,Pathway,Transport,Consumption:Generation,1
+DevelopingECO ,Biochar,pathway,Industry,Saturation Point,100
+DevelopingECO ,Bioenergy,pathway,Transport,Consumption:Generation,1
+DevelopingECO ,Oil,pathway,Transport,Consumption:Generation,1
+DevelopingECO ,Other fuels,pathway,Transport,Consumption:Generation,1
 DevelopingECO ,Bioenergy,baseline,Transport,Floor,0
-DevelopingECO ,Bioenergy,Pathway,Transport,Floor,0
-DevelopingECO ,Fossil fuels,Pathway,Transport,Floor,0
+DevelopingECO ,Bioenergy,pathway,Transport,Floor,0
+DevelopingECO ,Fossil fuels,pathway,Transport,Floor,0
 DevelopingECO ,Fossil fuels,baseline,Transport,Floor,0
 DevelopingECO ,Oil,baseline,Transport,Floor,0
-DevelopingECO ,Oil,Pathway,Transport,Floor,0
-DevelopingECO ,Other fuels,Pathway,Transport,Floor,0
+DevelopingECO ,Oil,pathway,Transport,Floor,0
+DevelopingECO ,Other fuels,pathway,Transport,Floor,0
 DevelopingECO ,Other fuels,baseline,Transport,Floor,0
 DevelopingECO ,Bioenergy,baseline,Transport,Max annual growth,100
-DevelopingECO ,Bioenergy,Pathway,Transport,Max annual growth,100
+DevelopingECO ,Bioenergy,pathway,Transport,Max annual growth,100
 DevelopingECO ,Fossil fuels,baseline,Transport,Max annual growth,100
-DevelopingECO ,Fossil fuels,Pathway,Transport,Max annual growth,100
+DevelopingECO ,Fossil fuels,pathway,Transport,Max annual growth,100
 DevelopingECO ,Oil,baseline,Transport,Max annual growth,100
-DevelopingECO ,Oil,Pathway,Transport,Max annual growth,100
-DevelopingECO ,Other fuels,Pathway,Transport,Max annual growth,100
+DevelopingECO ,Oil,pathway,Transport,Max annual growth,100
+DevelopingECO ,Other fuels,pathway,Transport,Max annual growth,100
 DevelopingECO ,Other fuels,baseline,Transport,Max annual growth,100
-DevelopingECO ,Bioenergy,Pathway,Transport,"Parameter a, max",0.1074
+DevelopingECO ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
 DevelopingECO ,Bioenergy,baseline,Transport,"Parameter a, max",5
-DevelopingECO ,Fossil fuels,Pathway,Transport,"Parameter a, max",-0.1074
+DevelopingECO ,Fossil fuels,pathway,Transport,"Parameter a, max",-0.1074
 DevelopingECO ,Fossil fuels,baseline,Transport,"Parameter a, max",100
 DevelopingECO ,Oil,baseline,Transport,"Parameter a, max",100
-DevelopingECO ,Oil,Pathway,Transport,"Parameter a, max",-0.09
-DevelopingECO ,Other fuels,Pathway,Transport,"Parameter a, max",-0.05
+DevelopingECO ,Oil,pathway,Transport,"Parameter a, max",-0.09
+DevelopingECO ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 DevelopingECO ,Other fuels,baseline,Transport,"Parameter a, max",100
-DevelopingECO ,Bioenergy,Pathway,Transport,"Parameter a, min",0.1074
+DevelopingECO ,Bioenergy,pathway,Transport,"Parameter a, min",0.1074
 DevelopingECO ,Bioenergy,baseline,Transport,"Parameter a, min",0
-DevelopingECO ,Fossil fuels,Pathway,Transport,"Parameter a, min",-0.1074
+DevelopingECO ,Fossil fuels,pathway,Transport,"Parameter a, min",-0.1074
 DevelopingECO ,Fossil fuels,baseline,Transport,"Parameter a, min",100
 DevelopingECO ,Oil,baseline,Transport,"Parameter a, min",100
-DevelopingECO ,Oil,Pathway,Transport,"Parameter a, min",-0.09
-DevelopingECO ,Other fuels,Pathway,Transport,"Parameter a, min",-0.05
+DevelopingECO ,Oil,pathway,Transport,"Parameter a, min",-0.09
+DevelopingECO ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 DevelopingECO ,Other fuels,baseline,Transport,"Parameter a, min",100
-DevelopingECO ,Bioenergy,Pathway,Transport,"Parameter b, max",37
+DevelopingECO ,Bioenergy,pathway,Transport,"Parameter b, max",37
 DevelopingECO ,Bioenergy,baseline,Transport,"Parameter b, max",100
-DevelopingECO ,Fossil fuels,Pathway,Transport,"Parameter b, max",37
+DevelopingECO ,Fossil fuels,pathway,Transport,"Parameter b, max",37
 DevelopingECO ,Fossil fuels,baseline,Transport,"Parameter b, max",-100
 DevelopingECO ,Oil,baseline,Transport,"Parameter b, max",-100
-DevelopingECO ,Oil,Pathway,Transport,"Parameter b, max",37
-DevelopingECO ,Other fuels,Pathway,Transport,"Parameter b, max",10
+DevelopingECO ,Oil,pathway,Transport,"Parameter b, max",37
+DevelopingECO ,Other fuels,pathway,Transport,"Parameter b, max",10
 DevelopingECO ,Other fuels,baseline,Transport,"Parameter b, max",-100
-DevelopingECO ,Bioenergy,Pathway,Transport,"Parameter b, min",37
+DevelopingECO ,Bioenergy,pathway,Transport,"Parameter b, min",37
 DevelopingECO ,Bioenergy,baseline,Transport,"Parameter b, min",0
-DevelopingECO ,Fossil fuels,Pathway,Transport,"Parameter b, min",37
+DevelopingECO ,Fossil fuels,pathway,Transport,"Parameter b, min",37
 DevelopingECO ,Fossil fuels,baseline,Transport,"Parameter b, min",-100
 DevelopingECO ,Oil,baseline,Transport,"Parameter b, min",-100
-DevelopingECO ,Oil,Pathway,Transport,"Parameter b, min",37
-DevelopingECO ,Other fuels,Pathway,Transport,"Parameter b, min",10
+DevelopingECO ,Oil,pathway,Transport,"Parameter b, min",37
+DevelopingECO ,Other fuels,pathway,Transport,"Parameter b, min",10
 DevelopingECO ,Other fuels,baseline,Transport,"Parameter b, min",-100
 DevelopingECO ,Bioenergy,baseline,Transport,Saturation Point,2.4
-DevelopingECO ,Bioenergy,Pathway,Transport,Saturation Point,100
+DevelopingECO ,Bioenergy,pathway,Transport,Saturation Point,100
 DevelopingECO ,Fossil fuels,baseline,Transport,Saturation Point,0
-DevelopingECO ,Fossil fuels,Pathway,Transport,Saturation Point,80
+DevelopingECO ,Fossil fuels,pathway,Transport,Saturation Point,80
 DevelopingECO ,Oil,baseline,Transport,Saturation Point,90.9
-DevelopingECO ,Oil,Pathway,Transport,Saturation Point,95
-DevelopingECO ,Other fuels,Pathway,Transport,Saturation Point,5
+DevelopingECO ,Oil,pathway,Transport,Saturation Point,95
+DevelopingECO ,Other fuels,pathway,Transport,Saturation Point,5
 DevelopingECO ,Other fuels,baseline,Transport,Saturation Point,6.86

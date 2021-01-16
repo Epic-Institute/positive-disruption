@@ -1273,7 +1273,7 @@ def charts(
         ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
     }
 
-    show_fig = False
+    show_fig = True
     scenario = "pathway"
     chart_type = "stack"
     fig_type = "plotly"

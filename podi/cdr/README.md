@@ -25,7 +25,7 @@ Emissions intensity of: **1)** Grid electricity (tCO2/TWh), **2)** Heat producti
 Here is the basic logic and the underlying set of assumptions for the current process to determine an approximately cost-optimal mix of CDR technologies in each year.
 
 ## The Process
-* For each year from the start (2020) to the end (2100):
+* For each year:
     * Handle project retirements
         * Retire old plants that have reached the end of their lifetimes
         * Remove capacity for de-adopting technologies (e.g. natural carbon sinks that are saturating or other technologies with negative growth curves)
@@ -142,4 +142,4 @@ Additionally, here are a couple areas with known potential for improvement:
 
 1. The nature of the current greedy algorithm (always deploying the cheapest available technology) may cause it to miss truly optimal solutions within an individual year. For example, if DAC gets cheaper with each MtCO2 deployment, then deploying 100% DAC in a year may be the cost-optimal strategy, even if DAC was not originally the cheapest technology in that year.
 
-2. The optimization model currently runs in about 30 seconds for the full 2020-2100 range when dealing with LTSS-DAC, HTLS-DAC, ExSituEW, and GeologicStorage. At the moment, the cost and energy calculation step in `_add_next_year` (not the technology selection step) take up the most processing time. Future improvements to efficiency should look here first.
+2. The optimization model currently runs in about 30 seconds for the full time range when dealing with LTSS-DAC, HTLS-DAC, ExSituEW, and GeologicStorage. At the moment, the cost and energy calculation step in `_add_next_year` (not the technology selection step) take up the most processing time. Future improvements to efficiency should look here first.
