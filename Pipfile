@@ -29,6 +29,8 @@ ffmpeg = "*"
 diagrams = "*"
 graphviz = "*"
 pyhector = "*"
+pandas-profiling = "*"
+streamlit = "*"
 
 [requires]
 python_version = "3.8"

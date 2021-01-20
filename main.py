@@ -29,6 +29,8 @@ import time
 from datetime import timedelta
 import numpy as np
 from podi.energy_demand import data_end_year
+from pandas_profiling import ProfileReport
+import streamlit as st
 
 pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()

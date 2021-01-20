@@ -9,18 +9,20 @@ from matplotlib.lines import Line2D
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.energy_demand import iea_region_list, data_end_year, data_start_year
-from podi.energy_supply import near_proj_end_year
+from podi.energy_supply import near_proj_end_year, long_proj_end_year
 from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
 import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
+from itertools import chain, zip_longest
+from math import ceil, pi
 
 save_figs = True
 long_proj_start_year = near_proj_end_year + 1
 unit_name = ["TWh", "EJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00359, 0.086, 86]
-unit = [unit_name[0], unit_val[0]]
+unit = [unit_name[3], unit_val[3]]
 
 
 # endregion
@@ -205,6 +207,225 @@ def charts(
                     )
                     plt.show()
                     """
+
+    # endregion
+
+    ##############################
+    # ADOPTION CURVES STAR CHART #
+    ##############################
+
+    # region
+
+    # code adapted from Joao Palmeiro, matplotblog
+
+    fig_type == ""
+
+    for i in range(0, len(iea_region_list)):
+        fig = adoption_curves.loc[iea_region_list[i]] * 100
+
+        data = [
+            ("Grid", fig.loc["Grid", data_end_year]),
+            ("Industry", fig.loc["Industry", data_end_year]),
+            ("Buildings", fig.loc["Buildings", data_end_year]),
+            ("Transport", fig.loc["Transport", data_end_year]),
+            (
+                "Regenerative Agriculture",
+                fig.loc["Regenerative Agriculture", data_end_year],
+            ),
+            ("Forests & Wetlands", fig.loc["Forests & Wetlands", data_end_year]),
+            (
+                "Carbon Dioxide Removal",
+                fig.loc["Carbon Dioxide Removal", data_end_year],
+            ),
+        ]
+
+        def round_up(value):
+            """
+
+            >>> round_up(25)
+
+            30
+
+            """
+            return int(ceil(value / 10.0)) * 10
+
+        def even_odd_merge(even, odd, filter_none=True):
+            """
+            >>> list(even_odd_merge([1,3], [2,4]))
+            [1, 2, 3, 4]
+            """
+            if filter_none:
+                return filter(None.__ne__, chain.from_iterable(zip_longest(even, odd)))
+
+            return chain.from_iterable(zip_longest(even, odd))
+
+        def prepare_angles(N):
+            angles = [n / N * 2 * pi for n in range(N)]
+
+            # Repeat the first angle to close the circle
+
+            angles += angles[:1]
+
+            return angles
+
+        def prepare_data(data):
+            labels = [d[0] for d in data]  # Variable names
+
+            values = [d[1] for d in data]
+
+            # Repeat the first value to close the circle
+
+            values += values[:1]
+
+            N = len(labels)
+            angles = prepare_angles(N)
+
+            return labels, values, angles, N
+
+        def prepare_stellar_aux_data(angles, ymax, N):
+            angle_midpoint = pi / N
+
+            stellar_angles = [angle + angle_midpoint for angle in angles[:-1]]
+            stellar_values = [0.05 * ymax] * N
+
+            return stellar_angles, stellar_values
+
+        def draw_peripherals(ax, labels, angles, ymax, outer_color, inner_color):
+            # X-axis
+
+            ax.set_xticks(angles[:-1])
+            ax.set_xticklabels(labels, color=outer_color, size=8)
+
+            # Y-axis
+
+            ax.set_yticks(range(10, ymax, 10))
+            ax.set_yticklabels(range(10, ymax, 10), color=inner_color, size=7)
+            ax.set_ylim(0, ymax)
+            ax.set_rlabel_position(0)
+
+            # Both axes
+
+            ax.set_axisbelow(True)
+
+            # Boundary line
+
+            ax.spines["polar"].set_color(outer_color)
+
+            # Grid lines
+
+            ax.xaxis.grid(True, color=inner_color, linestyle="-")
+            ax.yaxis.grid(True, color=inner_color, linestyle="-")
+
+        def draw_stellar(
+            ax,
+            labels,
+            values,
+            angles,
+            N,
+            shape_color="tab:blue",
+            outer_color="slategrey",
+            inner_color="lightgrey",
+        ):
+            # Limit the Y-axis according to the data to be plotted
+
+            ymax = round_up(max(values))
+
+            # Get the lists of angles and variable values
+
+            # with the necessary auxiliary values injected
+
+            stellar_angles, stellar_values = prepare_stellar_aux_data(angles, ymax, N)
+            all_angles = list(even_odd_merge(angles, stellar_angles))
+            all_values = list(even_odd_merge(values, stellar_values))
+
+            # Apply the desired style to the figure elements
+
+            draw_peripherals(ax, labels, angles, ymax, outer_color, inner_color)
+
+            # Draw (and fill) the star-shaped outer line/area
+
+            ax.plot(
+                all_angles,
+                all_values,
+                linewidth=1,
+                linestyle="solid",
+                solid_joinstyle="round",
+                color=shape_color,
+            )
+
+            ax.fill(all_angles, all_values, shape_color)
+
+            # Add a small hole in the center of the chart
+
+            ax.plot(0, 0, marker="o", color="white", markersize=3)
+
+        fig = plt.figure(dpi=100)
+        ax = fig.add_subplot(111, polar=True)
+        draw_stellar(ax, *prepare_data(data))
+        plt.title(
+            "V7 Adoption, "
+            + iea_region_list[i].replace(" ", "")
+            + ", "
+            + str(data_end_year)
+        )
+        plt.show()
+
+        # Plotly version
+        if fig_type == "plotly":
+            categories = [
+                "Grid",
+                "Transport",
+                "Buildings",
+                "Industry",
+                "Regenerative Agriculture",
+                "Forests & Wetlands",
+                "Carbon Dioxide Removal",
+            ]
+
+            fig = go.Figure()
+
+            fig.add_trace(
+                go.Scatterpolar(
+                    r=[0, 0, 0, 0, 0, 0, 50], theta=categories, fill="toself", name="A"
+                )
+            )
+            fig.add_trace(
+                go.Scatterpolar(
+                    r=[0, 0, 0, 0, 0, 30, 0], theta=categories, fill="toself", name="B"
+                )
+            )
+            fig.add_trace(
+                go.Scatterpolar(
+                    r=[0, 0, 0, 0, 0, 30, 0], theta=categories, fill="toself", name="C"
+                )
+            )
+            fig.add_trace(
+                go.Scatterpolar(
+                    r=[0, 0, 0, 0, 0, 30, 0], theta=categories, fill="toself", name="D"
+                )
+            )
+            fig.add_trace(
+                go.Scatterpolar(
+                    r=[0, 0, 0, 0, 0, 30, 0], theta=categories, fill="toself", name="E"
+                )
+            )
+            fig.add_trace(
+                go.Scatterpolar(
+                    r=[0, 0, 0, 0, 0, 30, 0], theta=categories, fill="toself", name="F"
+                )
+            )
+            fig.add_trace(
+                go.Scatterpolar(
+                    r=[0, 0, 0, 0, 0, 30, 0], theta=categories, fill="toself", name="G"
+                )
+            )
+
+            fig.update_layout(
+                polar=dict(radialaxis=dict(visible=True, range=[0, 100])),
+                showlegend=False,
+            )
+
+            fig.show()
 
     # endregion
 
@@ -1444,7 +1665,7 @@ def charts(
             fig.columns.astype(int), fig * unit[1], labels=fig.index, colors=color
         )
         plt.ylabel("TFC, " + unit[0])
-        plt.xlim([2020, long_proj_end_year])
+        plt.xlim([data_start_year, long_proj_end_year])
         plt.title("Electricity Generation by Source, " + iea_region_list[i])
         plt.legend(loc=2, fontsize="small")
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)

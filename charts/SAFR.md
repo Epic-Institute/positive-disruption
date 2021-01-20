@@ -16,6 +16,10 @@
 
 <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "demand-pathway-SAFR.html" height="500" width="150%"></iframe>
 
+
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "supply-baseline-SAFR.html" height="500" width="150%"></iframe>
+
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "supply-pathway-SAFR.html" height="500" width="150%"></iframe>
 <br/>
 
 ### Emissions

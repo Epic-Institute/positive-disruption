@@ -14,7 +14,7 @@ from podi.energy_demand import (
     data_end_year,
 )
 
-near_proj_end_year = 2025
+near_proj_end_year = 2019
 long_proj_end_year = 2100
 near_proj_start_year = data_end_year + 1
 long_proj_start_year = near_proj_end_year + 1
@@ -35,14 +35,17 @@ def energy_supply(scenario, energy_demand):
             :, str(data_start_year) : str(data_end_year)
         ]
     )
+
     near_elec_proj_data = pd.DataFrame(
         bnef_etl("podi/data/bnef.csv", "elec").loc[
             :, str(near_proj_start_year - 1) : str(near_proj_end_year)
         ]
     )
+
     heat_gen_data = heat_etl("podi/data/heat.csv", scenario).loc[
         :, str(data_start_year) : str(data_end_year)
     ]
+
     heat_gen_data.columns = heat_gen_data.columns.astype(int)
 
     heat_gen_data.loc[slice(None), slice(None), "Bioenergy", scenario, slice(None)] = (
