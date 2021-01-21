@@ -1362,7 +1362,10 @@ def charts(
                     line_group="Sector",
                     color="Sector",
                     color_discrete_sequence=px.colors.qualitative.T10,
-                    title="Energy Demand, " + iea_region_list[i],
+                    title="Energy Demand, "
+                    + iea_region_list[i].replace(" ", "")
+                    + ", "
+                    + scenario,
                     hover_data={"TFC, " + unit[0]: ":.0f"},
                 )
                 fig.update_layout(title_x=0.5)
@@ -1495,7 +1498,7 @@ def charts(
     }
 
     show_fig = True
-    scenario = "pathway"
+    scenario = "baseline"
     chart_type = "stack"
     fig_type = "plotly"
 
@@ -1550,7 +1553,10 @@ def charts(
                     line_group="Sector",
                     color="Sector",
                     color_discrete_sequence=px.colors.qualitative.T10,
-                    title="Energy Supply, " + iea_region_list[i],
+                    title="Energy Supply, "
+                    + scenario.replace(" ", "")
+                    + ", "
+                    + iea_region_list[i],
                     hover_data={"TFC, " + unit[0]: ":.0f"},
                 )
                 fig.update_layout(title_x=0.5)
@@ -1858,9 +1864,9 @@ def charts(
 
     # endregion
 
-    ###################
-    # HEAT PER ADOPTION
-    ###################
+    #######################
+    # HEAT PERCENT ADOPTION
+    #######################
 
     # region
     scenario = "pathway"

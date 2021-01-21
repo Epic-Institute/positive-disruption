@@ -30,8 +30,6 @@ iea_region_list = (
     "ASEAN ",
     " OECD ",
     "NonOECD ",
-    "DevelopingECO ",
-    "AdvancedECO ",
 )
 
 gcam_region_list = (

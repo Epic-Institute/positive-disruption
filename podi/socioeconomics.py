@@ -3,33 +3,9 @@
 import pandas as pd
 import numpy as np
 from podi.curve_smooth import curve_smooth
-from podi.energy_demand import data_end_year
+from podi.energy_demand import data_end_year, iea_region_list
 
 iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
-
-iea_region_list = (
-    "World ",
-    "NAM ",
-    "US ",
-    "CSAM ",
-    "BRAZIL ",
-    "EUR ",
-    "EU ",
-    "AFRICA ",
-    "SAFR ",
-    "ME ",
-    "EURASIA ",
-    "RUS ",
-    "ASIAPAC ",
-    "CHINA ",
-    "INDIA ",
-    "JPN ",
-    "ASEAN ",
-    " OECD ",
-    "NonOECD ",
-    "DevelopingECO ",
-    "AdvancedECO ",
-)
 
 gcam_region_list = (
     "World ",

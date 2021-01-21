@@ -52,6 +52,8 @@ def energy_supply(scenario, energy_demand):
         energy_demand.loc[
             slice(None), ["Buildings", "Industry"], "Bioenergy", slice(None)
         ]
+        .groupby(["IEA Region", "Metric"])
+        .sum()
         .loc[:, data_start_year:data_end_year]
         .values
     )
