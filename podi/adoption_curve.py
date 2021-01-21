@@ -27,6 +27,7 @@ def adoption_curve(value, region, scenario, sector):
                     "Hydroelectricity",
                     "Fossil fuels",
                     "Biomass and waste",
+                    "Bioenergy",
                     "Coal",
                     "Hydroelectric pumped storage",
                     "Natural gas",
@@ -39,16 +40,27 @@ def adoption_curve(value, region, scenario, sector):
         from podi.energy_supply import (
             hist_elec_consump,
             hist_per_elec_consump,
+            hist_heat_consump,
+            hist_per_heat_consump,
             data_end_year,
         )
 
-        parameters.loc[region, value.name, scenario, sector, "Saturation Point"].Value[
-            0
-        ] = hist_per_elec_consump(
-            region, scenario, hist_elec_consump(region, scenario)
-        ).loc[
-            value.name, str(data_end_year)
-        ]
+        if sector == "Electricity":
+            parameters.loc[
+                region, value.name, scenario, sector, "Saturation Point"
+            ].Value[0] = hist_per_elec_consump(
+                region, scenario, hist_elec_consump(region, scenario)
+            ).loc[
+                value.name, str(data_end_year)
+            ]
+        else:
+            parameters.loc[
+                region, value.name, scenario, sector, "Saturation Point"
+            ].Value[0] = hist_per_heat_consump(
+                region, scenario, hist_heat_consump(region, scenario)
+            ).loc[
+                value.name, str(data_end_year)
+            ]
 
     x_data = np.arange(len(value.T))
     y_data = value.to_numpy()[~np.isnan(value)]
