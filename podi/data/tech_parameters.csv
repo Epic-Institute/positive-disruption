@@ -2566,8 +2566,8 @@ US ,Bioenergy,pathway,Transport,"Parameter b, max",37
 US ,Bioenergy,baseline,Transport,"Parameter b, max",100
 World ,Bioenergy,baseline,Electricity,"Parameter b, max",40
 World ,Bioenergy,pathway,Electricity,"Parameter b, max",40
-World ,Bioenergy,baseline,Heat,"Parameter b, max",40
-World ,Bioenergy,pathway,Heat,"Parameter b, max",37
+World ,Bioenergy,baseline,Heat,"Parameter b, max",100
+World ,Bioenergy,pathway,Heat,"Parameter b, max",100
 World ,Bioenergy,baseline,Transport,"Parameter b, max",100
 World ,Bioenergy,pathway,Transport,"Parameter b, max",37
  OECD ,Bioenergy,pathway,Electricity,"Parameter b, min",40
@@ -2692,7 +2692,7 @@ US ,Bioenergy,pathway,Transport,"Parameter b, min",37
 US ,Bioenergy,baseline,Transport,"Parameter b, min",0
 World ,Bioenergy,baseline,Electricity,"Parameter b, min",40
 World ,Bioenergy,pathway,Electricity,"Parameter b, min",40
-World ,Bioenergy,baseline,Heat,"Parameter b, min",40
+World ,Bioenergy,baseline,Heat,"Parameter b, min",37
 World ,Bioenergy,pathway,Heat,"Parameter b, min",37
 World ,Bioenergy,baseline,Transport,"Parameter b, min",0
 World ,Bioenergy,pathway,Transport,"Parameter b, min",37
@@ -2818,8 +2818,8 @@ US ,Bioenergy,baseline,Transport,Saturation Point,4.6
 US ,Bioenergy,pathway,Transport,Saturation Point,100
 World ,Bioenergy,baseline,Electricity,Saturation Point,50
 World ,Bioenergy,pathway,Electricity,Saturation Point,50
-World ,Bioenergy,baseline,Heat,Saturation Point,50
-World ,Bioenergy,pathway,Heat,Saturation Point,0.25
+World ,Bioenergy,baseline,Heat,Saturation Point,6
+World ,Bioenergy,pathway,Heat,Saturation Point,6
 World ,Bioenergy,baseline,Transport,Saturation Point,5
 World ,Bioenergy,pathway,Transport,Saturation Point,100
  OECD ,Biomass and waste,pathway,Electricity,Floor,0

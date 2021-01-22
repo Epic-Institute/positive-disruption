@@ -20,9 +20,9 @@ from math import ceil, pi
 
 save_figs = True
 long_proj_start_year = near_proj_end_year + 1
-unit_name = ["TWh", "EJ", "Mtoe", "Ktoe"]
-unit_val = [1, 0.00359, 0.086, 86]
-unit = [unit_name[3], unit_val[3]]
+unit_name = ["TWh", "EJ", "TJ", "Mtoe", "Ktoe"]
+unit_val = [1, 0.00360, 3600, 0.086, 86]
+unit = [unit_name[4], unit_val[4]]
 
 
 # endregion
@@ -1498,7 +1498,7 @@ def charts(
     }
 
     show_fig = True
-    scenario = "baseline"
+    scenario = "pathway"
     chart_type = "stack"
     fig_type = "plotly"
 
@@ -1513,7 +1513,7 @@ def charts(
                 [elec_consump_i], keys=["Electricity"], names=["Sector"]
             )
             heat_consump_i = (
-                heat_consump.loc[iea_region_list[i], slice(None)]
+                heat_consump.loc[iea_region_list[i], slice(None), scenario]
                 .groupby("Metric")
                 .sum()
             )
@@ -1521,20 +1521,22 @@ def charts(
                 [heat_consump_i], keys=["Heat"], names=["Sector"]
             )
             transport_consump_i = (
-                transport_consump.loc[
-                    iea_region_list[i],
-                    slice(None),
-                ]
+                transport_consump.loc[iea_region_list[i], slice(None), scenario]
                 .groupby("Metric")
                 .sum()
             )
             transport_consump_i = pd.concat(
                 [transport_consump_i], keys=["Transport"], names=["Sector"]
             )
-            fig = pd.DataFrame(
-                (elec_consump_i.append(heat_consump_i).append(transport_consump_i)).loc[
-                    :, 2010:2100
-                ]
+            fig = (
+                pd.DataFrame(
+                    (
+                        elec_consump_i.append(heat_consump_i).append(
+                            transport_consump_i
+                        )
+                    ).loc[:, 2010:2100]
+                )
+                * unit[1]
             )
             fig = fig.groupby(group_keys).sum()
             fig = fig.reindex(tech_list)
@@ -1552,7 +1554,7 @@ def charts(
                     y="TFC, " + unit[0],
                     line_group="Sector",
                     color="Sector",
-                    color_discrete_sequence=px.colors.qualitative.T10,
+                    color_discrete_sequence=px.colors.qualitative.Safe,
                     title="Energy Supply, "
                     + scenario.replace(" ", "")
                     + ", "
