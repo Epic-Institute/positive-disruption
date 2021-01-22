@@ -16,11 +16,11 @@
 
 * [North America](https://epic-institute.github.io/positive-disruption/charts/NAM.html)
 
-* [ASIAPAC](https://epic-institute.github.io/positive-disruption/charts/ASIAPAC.html)
+* [Asia Pacific](https://epic-institute.github.io/positive-disruption/charts/ASIAPAC.html)
 
-* [CSAM](https://epic-institute.github.io/positive-disruption/charts/CSAM.html)
+* [Central and South America](https://epic-institute.github.io/positive-disruption/charts/CSAM.html)
 
-* [EUR](https://epic-institute.github.io/positive-disruption/charts/EUR.html)
+* [Europe](https://epic-institute.github.io/positive-disruption/charts/EUR.html)
 
 * [Africa](https://epic-institute.github.io/positive-disruption/charts/AFRICA.html)
 
