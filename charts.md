@@ -4,7 +4,7 @@
 
 ***
 
-## Economic Groups
+## Economic Regions
 
 * [OECD](https://epic-institute.github.io/positive-disruption/charts/OECD.html)
 
@@ -12,7 +12,7 @@
 
 ***
 
-## Regional Groups
+## Geographic Regions
 
 * [North America](https://epic-institute.github.io/positive-disruption/charts/NAM.html)
 
