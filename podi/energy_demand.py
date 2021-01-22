@@ -8,8 +8,6 @@ from podi.curve_smooth import curve_smooth
 data_start_year = 2010
 data_end_year = 2019
 
-iea_regions = pd.read_csv("podi/data/region_categories.csv")["IEA Region"]
-
 iea_region_list = (
     "World ",
     "NAM ",
@@ -52,10 +50,7 @@ gcam_region_list = (
     "ASIA ",
     "OECD90 ",
     "World ",
-    "World ",
-    "World ",
 )
-
 
 # endregion
 
@@ -110,7 +105,7 @@ def energy_demand(
         energy_demand.loc[:, "2040":].cumprod(axis=1).fillna(0).astype(int)
     )
 
-    # Reallocate 'Other' energy demand from ag/non-energy use to industry
+    # Reallocate 'Other' energy demand from ag/non-energy use to industry heat
 
     energy_demand = energy_demand.append(
         pd.concat(
@@ -136,6 +131,7 @@ def energy_demand(
                     "Coal",
                     "Oil",
                     "Natural gas",
+                    "Heat",
                     "Bioenergy",
                     "Other renewables",
                     "Other",
@@ -154,7 +150,15 @@ def energy_demand(
             energy_demand.loc[
                 slice(None),
                 "Buildings",
-                ["Coal", "Oil", "Natural gas", "Bioenergy", "Other renewables"],
+                [
+                    "Coal",
+                    "Oil",
+                    "Natural gas",
+                    "Heat",
+                    "Bioenergy",
+                    "Traditional biomass",
+                    "Other renewables",
+                ],
                 scenario,
             ].groupby("IEA Region")
         )
@@ -196,12 +200,12 @@ def energy_demand(
     energy_demand_post_heat_pumps = energy_demand - (energy_demand * heat_pumps.values)
 
     # Apply percentage reduction attributed to solar thermal
-
     solar_thermal = (
         pd.read_csv(solar_thermal)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
         .fillna(0)
     )
+
     solar_thermal = solar_thermal.apply(lambda x: x + 1, axis=1)
     solar_thermal = solar_thermal.reindex(energy_demand.index)
     energy_demand_post_solarthermal = energy_demand - (
@@ -209,7 +213,6 @@ def energy_demand(
     )
 
     # Apply percentage reduction attributed to transactive grids
-
     trans_grid = (
         pd.read_csv(trans_grid)
         .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
@@ -219,36 +222,30 @@ def energy_demand(
     trans_grid = trans_grid.reindex(energy_demand.index)
     energy_demand_post_trans_grid = energy_demand - (energy_demand * trans_grid.values)
 
-    # Apply adoption_curves to energy demand
+    # Apply transport mode design improvements
 
+    # LDV (including two/three-wheelers)
     """
-    def proj_demand(region, hist_demand):
-        foo = hist_demand.loc[region,slice(None),slice(None),slice(None)].droplevel(['Scenario']).apply(
-            adoption_curve,
-            axis=1,
-            args=(
-                [
-                    region,
-                    'Electricity',
-                    scenario,
-                ]
-            ),
-        )
+    ldv = (
+        pd.read_csv(ldv)
+        .set_index(["IEA Region", "Sector", "Metric", "Scenario"])
+        .fillna(0)
+    )
 
-        perc = []
-        for i in range(0, len(foo.index)):
-            perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
-
-        perc = pd.DataFrame(perc).set_index(foo.index)
-        return perc
-
-    en_demand = []
-
-    for i in range(0, len(iea_region_list)):
-        en_demand = pd.DataFrame(en_demand).append(
-            proj_demand(iea_region_list[i], energy_demand)
-        )
+    ldv = ldv.apply(lambda x: x + 1, axis=1)
+    ldv = ldv.reindex(energy_demand.index)
+    energy_demand_post_ldv = energy_demand - (
+        energy_demand * ldv.values
+    )
     """
+    # Trucking
+
+    # Aviation (World Aviation Bunker, Domestic Aviation)
+
+    # Remaining (Rail, Pipeline Transport, World Marine Bunker, Domestic Navigation, Non-specified Transport)
+
+    # Apply adoption_curves to energy demand reductions/shifts
+
     # endregion
 
     #########
@@ -317,6 +314,25 @@ def energy_demand(
         .values
     )
 
+    # Add international bunker for World region
+    energy_demand.loc["World ", "Transport", "Transport"] = (
+        (
+            energy_demand.loc[
+                "World ",
+                "Transport",
+                [
+                    "Electricity",
+                    "Oil",
+                    "Bioenergy",
+                    "International bunkers",
+                    "Other fuels",
+                ],
+            ].groupby("IEA Region")
+        )
+        .sum()
+        .values
+    )
+
     energy_demand.loc[slice(None), "TFC", "Electricity"] = (
         (
             energy_demand.loc[
@@ -353,7 +369,7 @@ def energy_demand(
     energy_demand.clip(lower=0, inplace=True)
 
     energy_demand_hist = energy_demand.loc[:, :data_end_year]
-    energy_demand_proj = curve_smooth(energy_demand.loc[:, (data_end_year + 1) :], 5)
+    energy_demand_proj = curve_smooth(energy_demand.loc[:, (data_end_year + 1) :], 3)
 
     energy_demand = energy_demand_hist.join(energy_demand_proj).clip(lower=0)
 

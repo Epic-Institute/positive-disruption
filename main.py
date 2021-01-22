@@ -10,7 +10,7 @@ from podi.results_analysis import results_analysis
 from podi.charts import charts
 from podi.curve_smooth import curve_smooth
 
-# import podi.data.iea_weo_etl
+import podi.data.iea_weo_etl
 import podi.data.iea_weo_em_etl
 import podi.data.gcam_etl
 import pandas as pd
@@ -54,7 +54,7 @@ start_time = time.monotonic()
 # region
 
 podi.data.gcam_etl
-# podi.data.iea_weo_etl
+podi.data.iea_weo_etl
 
 energy_demand_baseline = energy_demand(
     "baseline",

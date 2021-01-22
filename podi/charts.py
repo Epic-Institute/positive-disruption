@@ -1095,7 +1095,7 @@ def charts(
 
     show_fig = True
     scenario = "pathway"
-    chart_type = "line"
+    chart_type = "stack"
     fig_type = "plotly"
 
     if chart_type == "stack":
@@ -1201,7 +1201,7 @@ def charts(
                 )
                 fig.update_layout(title_x=0.5)
                 fig.add_vrect(
-                    x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0
+                    x0=2010, x1=2020, fillcolor="grey", opacity=0.6, line_width=0
                 )
                 if show_fig is True:
                     fig.show()
@@ -1481,13 +1481,13 @@ def charts(
         ("Electricity", "Nuclear"): ("Electricity", "Nuclear"),
         ("Electricity", "Solar"): ("Electricity", "Solar"),
         ("Electricity", "Wind"): ("Electricity", "Wind"),
-        ("Heat", "Fossil fuels"): ("Heat", "Other Fossil fuels"),
+        ("Heat", "Fossil fuels"): ("Heat", "Fossil fuels"),
         ("Heat", "Bioenergy"): ("Heat", "Bioenergy"),
-        ("Heat", "Coal"): ("Heat", "Other Fossil fuels"),
+        ("Heat", "Coal"): ("Heat", "Fossil fuels"),
         ("Heat", "Geothermal"): ("Heat", "Geothermal"),
-        ("Heat", "Natural gas"): ("Heat", "Other Fossil fuels"),
+        ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
         ("Heat", "Nuclear"): ("Heat", "Nuclear"),
-        ("Heat", "Oil"): ("Heat", "Other Fossil fuels"),
+        ("Heat", "Oil"): ("Heat", "Fossil fuels"),
         ("Heat", "Other sources"): ("Heat", "Other sources"),
         ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),
         ("Heat", "Waste"): ("Heat", "Biochar"),
@@ -1563,7 +1563,7 @@ def charts(
                 )
                 fig.update_layout(title_x=0.5)
                 fig.add_vrect(
-                    x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0
+                    x0=2010, x1=2020, fillcolor="grey", opacity=0.6, line_width=0
                 )
                 if show_fig is True:
                     fig.show()
