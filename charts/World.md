@@ -20,22 +20,13 @@
 
 ### Energy Supply & Demand
 
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "demand-baseline-World.html" height="500" width="150%"></iframe>
+
 <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "demand-pathway-World.html" height="500" width="150%"></iframe>
 
-![](../podi/data/figs/energysupply_pathway-World)<br/><br/>
-![](../podi/data/figs/electricity_pathway-World)<br/><br/>
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "supply-baseline-World.html" height="500" width="150%"></iframe>
 
-### Natural Climate Solutions
-
-![](../podi/data/figs/ra_pathway-World)<br/><br/>
-![](../podi/data/figs/fw_pathway-World)<br/><br/>
-![](../podi/data/figs/afolu_pathway-World)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](../podi/data/figs/cdr_pathway-World )<br/><br/>
+<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "supply-pathway-World.html" height="500" width="150%"></iframe>
 
 ### Emissions
 
@@ -44,18 +35,3 @@
 <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em1-World.html" height="525" width="100%"></iframe>
 
 <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src= "em2-World.html" height="525" width="100%"></iframe>
-
-<br/><br/>
-
-![](../podi/data/figs/temperature)
-![](../podi/data/figs/sensitivity)
-![](../podi/data/figs/forcing)
-![](../podi/data/figs/co2conc)
-
-<br/><br/>
-
-![](../podi/data/figs/emissions-ffi_emissions)<br/><br/>
-![](../podi/data/figs/emissions-CH4_emissions)<br/><br/>
-![](../podi/data/figs/emissions-N2O_emissions)<br/><br/>
-
-<br/><br/>

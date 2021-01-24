@@ -215,6 +215,11 @@ def energy_supply(scenario, energy_demand):
 
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
+        """
+        # set fossil fuel generation to fill balance
+        perc.loc["Fossil fuels"] = perc.loc[['Coal', "Oil", 'Natural gas']].sum()
+        """
+
         return perc
 
     # project electricity consumption met by a given technology
@@ -400,6 +405,10 @@ def energy_supply(scenario, energy_demand):
 
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
+        """
+        # set fossil fuel generation to fill balance
+        perc.loc["Fossil fuels"] = perc.loc[['Coal', "Oil", 'Natural gas']].sum()
+        """
         return perc
 
     # project heat consumption met by a given technology

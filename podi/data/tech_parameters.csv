@@ -2416,7 +2416,7 @@ NAM ,Bioenergy,pathway,Transport,"Parameter a, min",0.1074
 NAM ,Bioenergy,baseline,Transport,"Parameter a, min",0
 NonOECD ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 NonOECD ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
-NonOECD ,Bioenergy,pathway,Heat,"Parameter a, min",-0.001
+NonOECD ,Bioenergy,pathway,Heat,"Parameter a, min",-1
 NonOECD ,Bioenergy,baseline,Heat,"Parameter a, min",100
 NonOECD ,Bioenergy,pathway,Transport,"Parameter a, min",0.1074
 NonOECD ,Bioenergy,baseline,Transport,"Parameter a, min",0
@@ -2542,7 +2542,7 @@ NAM ,Bioenergy,pathway,Transport,"Parameter b, max",37
 NAM ,Bioenergy,baseline,Transport,"Parameter b, max",100
 NonOECD ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 NonOECD ,Bioenergy,baseline,Electricity,"Parameter b, max",40
-NonOECD ,Bioenergy,pathway,Heat,"Parameter b, max",37
+NonOECD ,Bioenergy,pathway,Heat,"Parameter b, max",100
 NonOECD ,Bioenergy,baseline,Heat,"Parameter b, max",-100
 NonOECD ,Bioenergy,pathway,Transport,"Parameter b, max",37
 NonOECD ,Bioenergy,baseline,Transport,"Parameter b, max",100
@@ -2668,7 +2668,7 @@ NAM ,Bioenergy,pathway,Transport,"Parameter b, min",37
 NAM ,Bioenergy,baseline,Transport,"Parameter b, min",0
 NonOECD ,Bioenergy,pathway,Electricity,"Parameter b, min",40
 NonOECD ,Bioenergy,baseline,Electricity,"Parameter b, min",40
-NonOECD ,Bioenergy,pathway,Heat,"Parameter b, min",37
+NonOECD ,Bioenergy,pathway,Heat,"Parameter b, min",0
 NonOECD ,Bioenergy,baseline,Heat,"Parameter b, min",-100
 NonOECD ,Bioenergy,pathway,Transport,"Parameter b, min",37
 NonOECD ,Bioenergy,baseline,Transport,"Parameter b, min",0
@@ -2699,8 +2699,8 @@ World ,Bioenergy,pathway,Transport,"Parameter b, min",37
  OECD ,Bioenergy,pathway,Electricity,Saturation Point,50
  OECD ,Bioenergy,baseline,Electricity,Saturation Point,0
  OECD ,Bioenergy,pathway,Heat,Saturation Point,24
- OECD ,Bioenergy,baseline,Heat,Saturation Point,6.4
- OECD ,Bioenergy,baseline,Transport,Saturation Point,4.6
+ OECD ,Bioenergy,baseline,Heat,Saturation Point,13.2
+ OECD ,Bioenergy,baseline,Transport,Saturation Point,4.93
  OECD ,Bioenergy,pathway,Transport,Saturation Point,100
 AdvancedECO ,Bioenergy,pathway,Electricity,Saturation Point,50
 AdvancedECO ,Bioenergy,baseline,Electricity,Saturation Point,0
@@ -2795,8 +2795,8 @@ NAM ,Bioenergy,pathway,Transport,Saturation Point,100
 NonOECD ,Bioenergy,pathway,Electricity,Saturation Point,50
 NonOECD ,Bioenergy,baseline,Electricity,Saturation Point,0
 NonOECD ,Bioenergy,pathway,Heat,Saturation Point,2
-NonOECD ,Bioenergy,baseline,Heat,Saturation Point,23.9
-NonOECD ,Bioenergy,baseline,Transport,Saturation Point,2.4
+NonOECD ,Bioenergy,baseline,Heat,Saturation Point,26
+NonOECD ,Bioenergy,baseline,Transport,Saturation Point,2.97
 NonOECD ,Bioenergy,pathway,Transport,Saturation Point,100
 RUS ,Bioenergy,pathway,Electricity,Saturation Point,50
 RUS ,Bioenergy,baseline,Electricity,Saturation Point,0
@@ -3074,7 +3074,7 @@ US ,Biomass and waste,pathway,Electricity,"Parameter b, min",0
 US ,Biomass and waste,baseline,Electricity,"Parameter b, min",-100
 World ,Biomass and waste,pathway,Electricity,"Parameter b, min",0
 World ,Biomass and waste,baseline,Electricity,"Parameter b, min",0
- OECD ,Biomass and waste,baseline,Electricity,Saturation Point,2.4
+ OECD ,Biomass and waste,baseline,Electricity,Saturation Point,3.14
  OECD ,Biomass and waste,pathway,Electricity,Saturation Point,5
 AdvancedECO ,Biomass and waste,baseline,Electricity,Saturation Point,2.4
 AdvancedECO ,Biomass and waste,pathway,Electricity,Saturation Point,5
@@ -3106,7 +3106,7 @@ ME ,Biomass and waste,baseline,Electricity,Saturation Point,1.64
 ME ,Biomass and waste,pathway,Electricity,Saturation Point,5
 NAM ,Biomass and waste,baseline,Electricity,Saturation Point,2.4
 NAM ,Biomass and waste,pathway,Electricity,Saturation Point,5
-NonOECD ,Biomass and waste,baseline,Electricity,Saturation Point,1.64
+NonOECD ,Biomass and waste,baseline,Electricity,Saturation Point,1.52
 NonOECD ,Biomass and waste,pathway,Electricity,Saturation Point,5
 RUS ,Biomass and waste,baseline,Electricity,Saturation Point,1.64
 RUS ,Biomass and waste,pathway,Electricity,Saturation Point,5
@@ -4252,7 +4252,7 @@ World ,Coal,pathway,Heat,"Parameter b, min",3
 World ,Coal,baseline,Heat,"Parameter b, min",0
  OECD ,Coal,baseline,Electricity,Saturation Point,0
  OECD ,Coal,pathway,Electricity,Saturation Point,0
- OECD ,Coal,baseline,Heat,Saturation Point,1.5
+ OECD ,Coal,baseline,Heat,Saturation Point,1.2
  OECD ,Coal,pathway,Heat,Saturation Point,2
 AdvancedECO ,Coal,baseline,Electricity,Saturation Point,0
 AdvancedECO ,Coal,pathway,Electricity,Saturation Point,0
@@ -4316,7 +4316,7 @@ NAM ,Coal,baseline,Heat,Saturation Point,1.5
 NAM ,Coal,pathway,Heat,Saturation Point,3.6
 NonOECD ,Coal,baseline,Electricity,Saturation Point,0
 NonOECD ,Coal,pathway,Electricity,Saturation Point,0
-NonOECD ,Coal,baseline,Heat,Saturation Point,4.3
+NonOECD ,Coal,baseline,Heat,Saturation Point,4.8
 NonOECD ,Coal,pathway,Heat,Saturation Point,6
 RUS ,Coal,baseline,Electricity,Saturation Point,0
 RUS ,Coal,pathway,Electricity,Saturation Point,0
@@ -6076,7 +6076,7 @@ NAM ,Fossil fuels,baseline,Electricity,Saturation Point,56
 NAM ,Fossil fuels,baseline,Transport,Saturation Point,0
 NAM ,Fossil fuels,pathway,Transport,Saturation Point,80
 NonOECD ,Fossil fuels,pathway,Electricity,Saturation Point,71
-NonOECD ,Fossil fuels,baseline,Electricity,Saturation Point,70.5
+NonOECD ,Fossil fuels,baseline,Electricity,Saturation Point,74.6
 NonOECD ,Fossil fuels,baseline,Transport,Saturation Point,0
 NonOECD ,Fossil fuels,pathway,Transport,Saturation Point,80
 RUS ,Fossil fuels,pathway,Electricity,Saturation Point,71
@@ -6936,7 +6936,7 @@ World ,Geothermal,pathway,Heat,"Parameter b, min",0
 World ,Geothermal,baseline,Heat,"Parameter b, min",0
  OECD ,Geothermal,baseline,Electricity,Saturation Point,0.4
  OECD ,Geothermal,pathway,Electricity,Saturation Point,5
- OECD ,Geothermal,baseline,Heat,Saturation Point,0.01
+ OECD ,Geothermal,baseline,Heat,Saturation Point,0.09
  OECD ,Geothermal,pathway,Heat,Saturation Point,5
 AdvancedECO ,Geothermal,baseline,Electricity,Saturation Point,0.4
 AdvancedECO ,Geothermal,pathway,Electricity,Saturation Point,5
@@ -6998,7 +6998,7 @@ NAM ,Geothermal,baseline,Electricity,Saturation Point,0.4
 NAM ,Geothermal,pathway,Electricity,Saturation Point,5
 NAM ,Geothermal,baseline,Heat,Saturation Point,0.01
 NAM ,Geothermal,pathway,Heat,Saturation Point,5
-NonOECD ,Geothermal,baseline,Electricity,Saturation Point,0.31
+NonOECD ,Geothermal,baseline,Electricity,Saturation Point,0.21
 NonOECD ,Geothermal,pathway,Electricity,Saturation Point,5
 NonOECD ,Geothermal,baseline,Heat,Saturation Point,0.01
 NonOECD ,Geothermal,pathway,Heat,Saturation Point,5
@@ -7942,7 +7942,7 @@ US ,Hydroelectricity,pathway,Electricity,"Parameter b, min",0
 US ,Hydroelectricity,baseline,Electricity,"Parameter b, min",-100
 World ,Hydroelectricity,pathway,Electricity,"Parameter b, min",0
 World ,Hydroelectricity,baseline,Electricity,"Parameter b, min",100
- OECD ,Hydroelectricity,baseline,Electricity,Saturation Point,16.5
+ OECD ,Hydroelectricity,baseline,Electricity,Saturation Point,12.86
  OECD ,Hydroelectricity,pathway,Electricity,Saturation Point,13.24
 AdvancedECO ,Hydroelectricity,baseline,Electricity,Saturation Point,16.5
 AdvancedECO ,Hydroelectricity,pathway,Electricity,Saturation Point,13.24
@@ -7974,7 +7974,7 @@ ME ,Hydroelectricity,baseline,Electricity,Saturation Point,19
 ME ,Hydroelectricity,pathway,Electricity,Saturation Point,0.5
 NAM ,Hydroelectricity,baseline,Electricity,Saturation Point,16.5
 NAM ,Hydroelectricity,pathway,Electricity,Saturation Point,13.24
-NonOECD ,Hydroelectricity,baseline,Electricity,Saturation Point,19
+NonOECD ,Hydroelectricity,baseline,Electricity,Saturation Point,20.1
 NonOECD ,Hydroelectricity,pathway,Electricity,Saturation Point,18.9
 RUS ,Hydroelectricity,baseline,Electricity,Saturation Point,19
 RUS ,Hydroelectricity,pathway,Electricity,Saturation Point,18.9
@@ -9714,7 +9714,7 @@ World ,Natural gas,pathway,Heat,"Parameter b, min",3
 World ,Natural gas,baseline,Heat,"Parameter b, min",0
  OECD ,Natural gas,baseline,Electricity,Saturation Point,0
  OECD ,Natural gas,pathway,Electricity,Saturation Point,0
- OECD ,Natural gas,baseline,Heat,Saturation Point,2.6
+ OECD ,Natural gas,baseline,Heat,Saturation Point,2.54
  OECD ,Natural gas,pathway,Heat,Saturation Point,3
 AdvancedECO ,Natural gas,baseline,Electricity,Saturation Point,0
 AdvancedECO ,Natural gas,pathway,Electricity,Saturation Point,0
@@ -9778,7 +9778,7 @@ NAM ,Natural gas,baseline,Heat,Saturation Point,2.6
 NAM ,Natural gas,pathway,Heat,Saturation Point,6
 NonOECD ,Natural gas,baseline,Electricity,Saturation Point,0
 NonOECD ,Natural gas,pathway,Electricity,Saturation Point,0
-NonOECD ,Natural gas,baseline,Heat,Saturation Point,4.3
+NonOECD ,Natural gas,baseline,Heat,Saturation Point,4.1
 NonOECD ,Natural gas,pathway,Heat,Saturation Point,6
 RUS ,Natural gas,baseline,Electricity,Saturation Point,0
 RUS ,Natural gas,pathway,Electricity,Saturation Point,0
@@ -10747,7 +10747,7 @@ NAM ,Nuclear,pathway,Electricity,"Parameter a, min",-0.03
 NAM ,Nuclear,baseline,Heat,"Parameter a, min",100
 NAM ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 NonOECD ,Nuclear,baseline,Electricity,"Parameter a, min",-100
-NonOECD ,Nuclear,pathway,Electricity,"Parameter a, min",-0.03
+NonOECD ,Nuclear,pathway,Electricity,"Parameter a, min",-0.3
 NonOECD ,Nuclear,baseline,Heat,"Parameter a, min",100
 NonOECD ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 RUS ,Nuclear,baseline,Electricity,"Parameter a, min",-100
@@ -10831,7 +10831,7 @@ NAM ,Nuclear,pathway,Electricity,"Parameter b, max",60
 NAM ,Nuclear,baseline,Heat,"Parameter b, max",-100
 NAM ,Nuclear,pathway,Heat,"Parameter b, max",100
 NonOECD ,Nuclear,baseline,Electricity,"Parameter b, max",100
-NonOECD ,Nuclear,pathway,Electricity,"Parameter b, max",60
+NonOECD ,Nuclear,pathway,Electricity,"Parameter b, max",100
 NonOECD ,Nuclear,baseline,Heat,"Parameter b, max",-100
 NonOECD ,Nuclear,pathway,Heat,"Parameter b, max",100
 RUS ,Nuclear,baseline,Electricity,"Parameter b, max",100
@@ -10934,9 +10934,9 @@ World ,Nuclear,pathway,Electricity,"Parameter b, min",0
 World ,Nuclear,baseline,Electricity,"Parameter b, min",100
 World ,Nuclear,pathway,Heat,"Parameter b, min",0
 World ,Nuclear,baseline,Heat,"Parameter b, min",43
- OECD ,Nuclear,baseline,Electricity,Saturation Point,17.6844
+ OECD ,Nuclear,baseline,Electricity,Saturation Point,19.1
  OECD ,Nuclear,pathway,Electricity,Saturation Point,31
- OECD ,Nuclear,baseline,Heat,Saturation Point,0.06
+ OECD ,Nuclear,baseline,Heat,Saturation Point,0.013
  OECD ,Nuclear,pathway,Heat,Saturation Point,0.1
 AdvancedECO ,Nuclear,baseline,Electricity,Saturation Point,17.6844
 AdvancedECO ,Nuclear,pathway,Electricity,Saturation Point,31
@@ -10998,9 +10998,9 @@ NAM ,Nuclear,baseline,Electricity,Saturation Point,17.6844
 NAM ,Nuclear,pathway,Electricity,Saturation Point,31
 NAM ,Nuclear,baseline,Heat,Saturation Point,0.06
 NAM ,Nuclear,pathway,Heat,Saturation Point,0.1
-NonOECD ,Nuclear,baseline,Electricity,Saturation Point,4.5931
-NonOECD ,Nuclear,pathway,Electricity,Saturation Point,5
-NonOECD ,Nuclear,baseline,Heat,Saturation Point,0.06
+NonOECD ,Nuclear,baseline,Electricity,Saturation Point,6.3
+NonOECD ,Nuclear,pathway,Electricity,Saturation Point,6.26
+NonOECD ,Nuclear,baseline,Heat,Saturation Point,0.018
 NonOECD ,Nuclear,pathway,Heat,Saturation Point,0.1
 RUS ,Nuclear,baseline,Electricity,Saturation Point,4.5931
 RUS ,Nuclear,pathway,Electricity,Saturation Point,5
@@ -11839,9 +11839,9 @@ World ,Oil,pathway,Transport,"Parameter b, min",37
 World ,Oil,baseline,Transport,"Parameter b, min",-100
  OECD ,Oil,baseline,Electricity,Saturation Point,0
  OECD ,Oil,pathway,Electricity,Saturation Point,100
- OECD ,Oil,baseline,Heat,Saturation Point,0.01
+ OECD ,Oil,baseline,Heat,Saturation Point,0.3
  OECD ,Oil,pathway,Heat,Saturation Point,1
- OECD ,Oil,baseline,Transport,Saturation Point,93.4
+ OECD ,Oil,baseline,Transport,Saturation Point,92.6
  OECD ,Oil,pathway,Transport,Saturation Point,95
 AdvancedECO ,Oil,baseline,Electricity,Saturation Point,0
 AdvancedECO ,Oil,pathway,Electricity,Saturation Point,100
@@ -11935,9 +11935,9 @@ NAM ,Oil,baseline,Transport,Saturation Point,93.4
 NAM ,Oil,pathway,Transport,Saturation Point,95
 NonOECD ,Oil,baseline,Electricity,Saturation Point,0
 NonOECD ,Oil,pathway,Electricity,Saturation Point,100
-NonOECD ,Oil,baseline,Heat,Saturation Point,0.01
+NonOECD ,Oil,baseline,Heat,Saturation Point,0.33
 NonOECD ,Oil,pathway,Heat,Saturation Point,1
-NonOECD ,Oil,baseline,Transport,Saturation Point,90.9
+NonOECD ,Oil,baseline,Transport,Saturation Point,89.7
 NonOECD ,Oil,pathway,Transport,Saturation Point,95
 RUS ,Oil,baseline,Electricity,Saturation Point,0
 RUS ,Oil,pathway,Electricity,Saturation Point,100
@@ -12534,7 +12534,7 @@ US ,Other fuels,baseline,Transport,"Parameter b, min",-100
 World ,Other fuels,pathway,Transport,"Parameter b, min",37
 World ,Other fuels,baseline,Transport,"Parameter b, min",-100
  OECD ,Other fuels,pathway,Transport,Saturation Point,5
- OECD ,Other fuels,baseline,Transport,Saturation Point,2.1
+ OECD ,Other fuels,baseline,Transport,Saturation Point,2.5
 AdvancedECO ,Other fuels,pathway,Transport,Saturation Point,5
 AdvancedECO ,Other fuels,baseline,Transport,Saturation Point,2.1
 AFRICA ,Other fuels,pathway,Transport,Saturation Point,5
@@ -12566,7 +12566,7 @@ ME ,Other fuels,baseline,Transport,Saturation Point,6.86
 NAM ,Other fuels,pathway,Transport,Saturation Point,5
 NAM ,Other fuels,baseline,Transport,Saturation Point,2.1
 NonOECD ,Other fuels,pathway,Transport,Saturation Point,5
-NonOECD ,Other fuels,baseline,Transport,Saturation Point,6.86
+NonOECD ,Other fuels,baseline,Transport,Saturation Point,7.41
 RUS ,Other fuels,pathway,Transport,Saturation Point,5
 RUS ,Other fuels,baseline,Transport,Saturation Point,6.86
 SAFR ,Other fuels,pathway,Transport,Saturation Point,5
@@ -12849,7 +12849,7 @@ US ,Other sources,baseline,Heat,"Parameter b, min",-100
 World ,Other sources,pathway,Heat,"Parameter b, min",0
 World ,Other sources,baseline,Heat,"Parameter b, min",0
  OECD ,Other sources,pathway,Heat,Saturation Point,88
- OECD ,Other sources,baseline,Heat,Saturation Point,88.4
+ OECD ,Other sources,baseline,Heat,Saturation Point,82.1
 AdvancedECO ,Other sources,pathway,Heat,Saturation Point,88
 AdvancedECO ,Other sources,baseline,Heat,Saturation Point,88.4
 AFRICA ,Other sources,pathway,Heat,Saturation Point,25
@@ -12881,7 +12881,7 @@ ME ,Other sources,baseline,Heat,Saturation Point,66.9
 NAM ,Other sources,pathway,Heat,Saturation Point,88
 NAM ,Other sources,baseline,Heat,Saturation Point,88.4
 NonOECD ,Other sources,pathway,Heat,Saturation Point,90
-NonOECD ,Other sources,baseline,Heat,Saturation Point,66.9
+NonOECD ,Other sources,baseline,Heat,Saturation Point,64.9
 RUS ,Other sources,pathway,Heat,Saturation Point,65.5
 RUS ,Other sources,baseline,Heat,Saturation Point,66.9
 SAFR ,Other sources,pathway,Heat,Saturation Point,22
@@ -13881,7 +13881,7 @@ US ,Solar,pathway,Electricity,Max annual growth,100
 World ,Solar,baseline,Electricity,Max annual growth,100
 World ,Solar,pathway,Electricity,Max annual growth,100
  OECD ,Solar,pathway,Electricity,"Parameter a, max",5
- OECD ,Solar,baseline,Electricity,"Parameter a, max",5
+ OECD ,Solar,baseline,Electricity,"Parameter a, max",100
 AdvancedECO ,Solar,pathway,Electricity,"Parameter a, max",5
 AdvancedECO ,Solar,baseline,Electricity,"Parameter a, max",5
 AFRICA ,Solar,pathway,Electricity,"Parameter a, max",5
@@ -13923,7 +13923,7 @@ US ,Solar,baseline,Electricity,"Parameter a, max",5
 World ,Solar,pathway,Electricity,"Parameter a, max",5
 World ,Solar,baseline,Electricity,"Parameter a, max",5
  OECD ,Solar,pathway,Electricity,"Parameter a, min",0
- OECD ,Solar,baseline,Electricity,"Parameter a, min",0
+ OECD ,Solar,baseline,Electricity,"Parameter a, min",100
 AdvancedECO ,Solar,pathway,Electricity,"Parameter a, min",0
 AdvancedECO ,Solar,baseline,Electricity,"Parameter a, min",0
 AFRICA ,Solar,pathway,Electricity,"Parameter a, min",0
@@ -14048,7 +14048,7 @@ US ,Solar,pathway,Electricity,"Parameter b, min",0
 US ,Solar,baseline,Electricity,"Parameter b, min",-100
 World ,Solar,pathway,Electricity,"Parameter b, min",0
 World ,Solar,baseline,Electricity,"Parameter b, min",0
- OECD ,Solar,baseline,Electricity,Saturation Point,1.9
+ OECD ,Solar,baseline,Electricity,Saturation Point,3.4
  OECD ,Solar,pathway,Electricity,Saturation Point,35.9
 AdvancedECO ,Solar,baseline,Electricity,Saturation Point,1.9
 AdvancedECO ,Solar,pathway,Electricity,Saturation Point,35.9
@@ -14080,7 +14080,7 @@ ME ,Solar,baseline,Electricity,Saturation Point,1.3
 ME ,Solar,pathway,Electricity,Saturation Point,35.9
 NAM ,Solar,baseline,Electricity,Saturation Point,1.9
 NAM ,Solar,pathway,Electricity,Saturation Point,35.9
-NonOECD ,Solar,baseline,Electricity,Saturation Point,1.3
+NonOECD ,Solar,baseline,Electricity,Saturation Point,2.1
 NonOECD ,Solar,pathway,Electricity,Saturation Point,35.9
 RUS ,Solar,baseline,Electricity,Saturation Point,1.3
 RUS ,Solar,pathway,Electricity,Saturation Point,35.9
@@ -14364,7 +14364,7 @@ US ,Solar thermal,baseline,Heat,"Parameter b, min",-100
 US ,Solar thermal,pathway,Heat,"Parameter b, min",30
 World ,Solar thermal,pathway,Heat,"Parameter b, min",37
 World ,Solar thermal,baseline,Heat,"Parameter b, min",0
- OECD ,Solar thermal,baseline,Heat,Saturation Point,0
+ OECD ,Solar thermal,baseline,Heat,Saturation Point,0.005
  OECD ,Solar thermal,pathway,Heat,Saturation Point,100
 AdvancedECO ,Solar thermal,baseline,Heat,Saturation Point,0
 AdvancedECO ,Solar thermal,pathway,Heat,Saturation Point,100
@@ -14396,7 +14396,7 @@ ME ,Solar thermal,baseline,Heat,Saturation Point,0
 ME ,Solar thermal,pathway,Heat,Saturation Point,40
 NAM ,Solar thermal,baseline,Heat,Saturation Point,0
 NAM ,Solar thermal,pathway,Heat,Saturation Point,100
-NonOECD ,Solar thermal,baseline,Heat,Saturation Point,0
+NonOECD ,Solar thermal,baseline,Heat,Saturation Point,0.0005
 NonOECD ,Solar thermal,pathway,Heat,Saturation Point,40
 RUS ,Solar thermal,baseline,Heat,Saturation Point,0
 RUS ,Solar thermal,pathway,Heat,Saturation Point,40
@@ -15839,7 +15839,7 @@ World ,Waste,baseline,Heat,"Parameter b, min",0
  OECD ,Waste,pathway,Electricity,Saturation Point,23
  OECD ,Waste,baseline,Electricity,Saturation Point,0
  OECD ,Waste,pathway,Heat,Saturation Point,15
- OECD ,Waste,baseline,Heat,Saturation Point,0.4
+ OECD ,Waste,baseline,Heat,Saturation Point,0.7
 AdvancedECO ,Waste,pathway,Electricity,Saturation Point,23
 AdvancedECO ,Waste,baseline,Electricity,Saturation Point,0
 AdvancedECO ,Waste,pathway,Heat,Saturation Point,15
@@ -15903,7 +15903,7 @@ NAM ,Waste,baseline,Heat,Saturation Point,0.4
 NonOECD ,Waste,pathway,Electricity,Saturation Point,23
 NonOECD ,Waste,baseline,Electricity,Saturation Point,0
 NonOECD ,Waste,pathway,Heat,Saturation Point,15
-NonOECD ,Waste,baseline,Heat,Saturation Point,0.4
+NonOECD ,Waste,baseline,Heat,Saturation Point,0.13
 RUS ,Waste,pathway,Electricity,Saturation Point,23
 RUS ,Waste,baseline,Electricity,Saturation Point,0
 RUS ,Waste,pathway,Heat,Saturation Point,15
@@ -16193,7 +16193,7 @@ US ,Wind,pathway,Electricity,"Parameter b, min",0
 US ,Wind,baseline,Electricity,"Parameter b, min",-100
 World ,Wind,pathway,Electricity,"Parameter b, min",0
 World ,Wind,baseline,Electricity,"Parameter b, min",100
- OECD ,Wind,baseline,Electricity,Saturation Point,4.7
+ OECD ,Wind,baseline,Electricity,Saturation Point,7.51
  OECD ,Wind,pathway,Electricity,Saturation Point,38.5
 AdvancedECO ,Wind,baseline,Electricity,Saturation Point,4.7
 AdvancedECO ,Wind,pathway,Electricity,Saturation Point,38.5
@@ -16225,7 +16225,7 @@ ME ,Wind,baseline,Electricity,Saturation Point,3.2
 ME ,Wind,pathway,Electricity,Saturation Point,38.5
 NAM ,Wind,baseline,Electricity,Saturation Point,4.7
 NAM ,Wind,pathway,Electricity,Saturation Point,38.5
-NonOECD ,Wind,baseline,Electricity,Saturation Point,3.2
+NonOECD ,Wind,baseline,Electricity,Saturation Point,3.8
 NonOECD ,Wind,pathway,Electricity,Saturation Point,38.5
 RUS ,Wind,baseline,Electricity,Saturation Point,3.2
 RUS ,Wind,pathway,Electricity,Saturation Point,38.5
