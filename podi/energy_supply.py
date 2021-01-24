@@ -50,11 +50,17 @@ def energy_supply(scenario, energy_demand):
 
     heat_gen_data.loc[slice(None), slice(None), "Bioenergy", scenario, slice(None)] = (
         energy_demand.loc[
-            slice(None), ["Buildings", "Industry"], "Bioenergy", slice(None)
+            slice(None), ["Buildings", "Industry"], ["Bioenergy"], slice(None)
         ]
-        .groupby(["IEA Region", "Metric"])
+        .groupby("IEA Region")
         .sum()
         .loc[:, data_start_year:data_end_year]
+        .reindex(
+            index=heat_gen_data.loc[
+                slice(None), slice(None), "Bioenergy", scenario
+            ].index,
+            level=0,
+        )
         .values
     )
 

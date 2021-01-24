@@ -10,7 +10,7 @@ import numpy as np
 # endregion
 
 
-def curve_smooth(data, sr):
+def curve_smooth(data, method, sr):
 
     xnew = np.linspace(
         data.columns.values.astype(int).min(),
@@ -19,7 +19,7 @@ def curve_smooth(data, sr):
     )
 
     curve = data.apply(
-        lambda x: interp1d(data.columns.values.astype(int), x, kind="quadratic"),
+        lambda x: interp1d(data.columns.values.astype(int), x, kind=str(method)),
         axis=1,
     )
     curve = curve.apply(lambda x: x(xnew))
@@ -49,7 +49,7 @@ def curve_smooth(data, sr):
         pd.DataFrame(columns=xnew, index=curve2.index)
         .combine_first(curve2)
         .astype(float)
-        .interpolate(method="quadratic", axis=1)
+        .interpolate(method=str(method), axis=1)
     )
 
     return curve2

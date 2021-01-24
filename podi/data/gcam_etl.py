@@ -2,6 +2,7 @@
 
 import pandas as pd
 from numpy import NaN
+from podi.curve_smooth import curve_smooth
 
 gcam_demand_projection = (
     pd.read_csv("podi/data/gcam.csv")
@@ -82,4 +83,8 @@ gcam_pct_change = (
     )
 )
 
-gcam_pct_change.to_csv("podi/data/energy_demand_projection.csv", index=True)
+gcam_pct_change2 = curve_smooth(
+    gcam_pct_change.loc[:, "2041":"2100"], "quadratic", 4
+).join(gcam_pct_change.loc[:, "EIA Metric":])
+
+gcam_pct_change2.to_csv("podi/data/energy_demand_projection.csv", index=True)

@@ -183,7 +183,7 @@ for i in range(0, len(iea_region_list)):
 
 em_hist = em.loc[:, :data_end_year]
 
-em_proj = curve_smooth(em.loc[:, (data_end_year + 1) :], 3)
+em_proj = curve_smooth(em.loc[:, (data_end_year + 1) :], "quadratic", 3)
 
 em = em_hist.join(em_proj)
 

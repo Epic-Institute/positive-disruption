@@ -182,7 +182,7 @@ for i in range(0, len(iea_region_list)):
 
 socio_hist = df2.loc[:, :data_end_year]
 
-socio_proj = curve_smooth(df2.loc[:, (data_end_year + 1) :], 3)
+socio_proj = curve_smooth(df2.loc[:, (data_end_year + 1) :], "quadratic", 3)
 
 df2 = socio_hist.join(socio_proj)
 
