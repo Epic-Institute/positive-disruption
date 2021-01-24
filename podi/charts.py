@@ -48,7 +48,7 @@ def charts(
     fig_type = "plotly"
 
     if chart_type == "stacked":
-        for i in [17, 18]:
+        for i in range(0, len(iea_region_list)):
             energy_demand_i = (
                 energy_demand.loc[
                     iea_region_list[i], slice(None), slice(None), scenario
