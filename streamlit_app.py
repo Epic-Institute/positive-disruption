@@ -7,12 +7,27 @@ st.title("Positive Disruption")
 
 energy_demand = pd.read_csv("energy_demand_out.csv")
 
+energy_demand = pd.DataFrame(energy_demand).set_index(
+    ["IEA Region", "Sector", "Metric", "Scenario"]
+)
+
+energy_demand.unstack(level=-3)
+
 st.subheader("Energy Demand")
 st.area_chart(energy_demand)
 
-c = alt.Chart(energy_demand).mark_area().encode(x="", y="gen", color="Sector")
+fig = energy_demand
+
+c = (
+    alt.Chart(
+        fig[
+            (fig["IEA Region"] == "World ")
+            & (fig["Sector"] == "Buildings")
+            & (fig["Scenario"] == "pathway")
+        ]
+    )
+    .mark_area()
+    .encode(x="Year", y="gen", color="Metric")
+)
 
 st.altair_chart(c)
-
-st.subheader("Energy Demand")
-st.line_chart(energy_demand)

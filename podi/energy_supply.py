@@ -14,10 +14,9 @@ from podi.energy_demand import (
     data_end_year,
 )
 
-near_proj_end_year = 2019
-long_proj_end_year = 2100
 near_proj_start_year = data_end_year + 1
-long_proj_start_year = near_proj_end_year + 1
+near_proj_end_year = data_end_year + 1
+long_proj_end_year = 2100
 energy_oversupply_prop = 0.0
 
 # endregion
@@ -137,7 +136,6 @@ def energy_supply(scenario, energy_demand):
 
         if scenario == "baseline":
             near_proj_start_year = data_end_year
-            long_proj_start_year = data_end_year + 1
             near_proj_end_year = data_end_year
             return hist_elec_consump(region, scenario)
         else:
@@ -368,9 +366,8 @@ def energy_supply(scenario, energy_demand):
 
     # nearterm projected heat consumption
     def near_proj_heat_consump(region, scenario):
-        near_proj_start_year = data_end_year
-        long_proj_start_year = data_end_year + 1
-        near_proj_end_year = data_end_year
+        near_proj_start_year = data_end_year + 1
+        near_proj_end_year = data_end_year + 1
 
         return hist_heat_consump(region, scenario)
 
@@ -565,7 +562,6 @@ def energy_supply(scenario, energy_demand):
     # nearterm projected transport consumption
     def near_proj_transport_consump(region, scenario):
         near_proj_start_year = data_end_year
-        long_proj_start_year = data_end_year + 1
         near_proj_end_year = data_end_year
         return hist_transport_consump(region, scenario).droplevel(["IEA Region"])
 

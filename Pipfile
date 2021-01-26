@@ -31,6 +31,7 @@ graphviz = "*"
 pyhector = "*"
 pandas-profiling = "*"
 streamlit = "*"
+scikit-learn = "*"
 
 [requires]
 python_version = "3.8"

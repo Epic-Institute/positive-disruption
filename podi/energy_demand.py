@@ -4,6 +4,7 @@
 
 import pandas as pd
 from podi.curve_smooth import curve_smooth
+from numpy import NaN
 
 data_start_year = 2010
 data_end_year = 2019
@@ -188,6 +189,7 @@ def energy_demand(
 
     energy_efficiency = energy_efficiency.apply(lambda x: x + 1, axis=1)
     energy_efficiency = energy_efficiency.reindex(energy_demand.index)
+
     energy_demand_post_efficiency = energy_demand - (
         energy_demand * energy_efficiency.values
     )
@@ -264,13 +266,7 @@ def energy_demand(
 
     # Remaining (Rail, Pipeline Transport, World Marine Bunker, Domestic Navigation, Non-specified Transport)
 
-    # Apply adoption_curves to energy demand reductions/shifts
-
     # endregion
-
-    #################
-    # GCAM/IEA SMOOTH
-    #################
 
     #########
     #  CDR  #
@@ -394,7 +390,7 @@ def energy_demand(
 
     energy_demand_hist = energy_demand.loc[:, :data_end_year]
     energy_demand_proj = curve_smooth(
-        energy_demand.loc[:, (data_end_year + 1) :], "quadratic", 6
+        energy_demand.loc[:, (data_end_year + 1) :], "quadratic", 4
     )
 
     energy_demand_proj.loc[

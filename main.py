@@ -7,7 +7,8 @@ from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply
 from podi.afolu import afolu
 from podi.results_analysis import results_analysis
-from podi.charts import charts
+
+# from podi.charts import charts
 from podi.curve_smooth import curve_smooth
 
 import podi.data.iea_weo_etl
@@ -34,16 +35,6 @@ import streamlit as st
 
 pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()
-
-# endregion
-
-##################
-# SOCIOECONOMICS #
-##################
-
-# region
-
-# podi.socioeconomics
 
 # endregion
 
@@ -289,7 +280,7 @@ for i in range(0, len(iea_region_list)):
 adoption_curves_hist = pd.DataFrame(adoption_curves.loc[:, :data_end_year])
 
 adoption_curves_proj = curve_smooth(
-    pd.DataFrame(adoption_curves.loc[:, data_end_year + 1 :]), "quadratic", 11
+    pd.DataFrame(adoption_curves.loc[:, data_end_year + 1 :]), "quadratic", 4
 )
 
 adoption_curves = (adoption_curves_hist.join(adoption_curves_proj)).clip(upper=1)
@@ -299,7 +290,7 @@ adoption_curves = (adoption_curves_hist.join(adoption_curves_proj)).clip(upper=1
 ##########
 # CHARTS #
 ##########
-
+"""
 # region
 
 charts(
@@ -311,7 +302,16 @@ charts(
 )
 
 # endregion
+"""
+##################
+# SOCIOECONOMICS #
+##################
 
+# region
+
+# podi.socioeconomics
+
+# endregion
 
 end_time = time.monotonic()
 print(timedelta(seconds=end_time - start_time))
