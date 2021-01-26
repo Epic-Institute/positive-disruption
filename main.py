@@ -164,27 +164,6 @@ em_pathway, em_targets_pathway = emissions(
     "podi/data/emissions_targets.csv",
 )
 
-"""
-em_pathway2 = pd.read_csv(
-    "/home/n/.local/share/virtualenvs/positive-disruption-XAvGHklr/lib/python3.8/site-packages/pyhector/emissions/RCP19_emissions.csv"
-)
-
-em_pathway2.iloc[248:339, 1] = (
-    (
-        em_pathway.loc[
-            slice(None), ["Electricity", "Transport", "Buildings", "Industry"], :
-        ].sum()
-        / 3670
-    )
-    .values.round(4)
-)
-
-em_pathway2.to_csv(
-    "/home/n/.local/share/virtualenvs/positive-disruption-XAvGHklr/lib/python3.8/site-packages/pyhector/emissions/RCP19_emissions.csv",
-    index=False,
-)
-"""
-
 em_mitigated = (
     em_baseline.groupby(["Region", "Sector"]).sum()
     - em_pathway.groupby(["Region", "Sector"]).sum()

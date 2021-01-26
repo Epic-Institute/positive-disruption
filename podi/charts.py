@@ -992,6 +992,7 @@ for i in range(0, len(iea_region_list)):
 
 fig_type = 'plotly'
 save_figs = True
+show_fig = True
 
 
 for i in range(0, len(iea_region_list)):
@@ -1072,8 +1073,15 @@ for i in range(0, len(iea_region_list)):
             7: "CDR",
         }
     )
-    em_mit.loc[:, :2020] = 0
-    spacer = em_targets_pathway.loc["pathway PD20"]
+
+    spacer = pd.DataFrame(em_baseline.groupby('Region').sum().loc[region]).T
+    '''
+    if iea_region_list[i] == 'World ':
+        spacer = em_targets_pathway.loc["pathway PD20"]
+    else:
+        spacer = pd.DataFrame([])
+        spacer.name = ''
+    '''
     em_targets_pathway.loc["baseline PD20"] = em_mit.append(spacer).sum()
 
     em_mit.loc["Electricity"] = em_targets_pathway.loc["baseline PD20"].subtract(
@@ -1083,16 +1091,15 @@ for i in range(0, len(iea_region_list)):
     fig = ((em_mit.append(spacer)) / 1000).reindex(
         [
             spacer.name,
-            "CDR",
-            "CH4, N2O, F-gases",
-            "Agriculture",
-            "Forests & Wetlands",
-            "Industry",
-            "Buildings",
-            "Transport",
-            "Electricity",
-        ]
-    )
+            'Electricity',
+            'Transport',
+            'Buildings',
+            'Industry',
+            'Forests & Wetlands',
+            'Agriculture',
+            'CH4, N2O, F-gases',
+            'CDR',
+        ]).loc[:, 2020:]
 
     if fig_type == 'plotly':
         fig = fig.T
@@ -1112,7 +1119,6 @@ for i in range(0, len(iea_region_list)):
             hover_data={"Emissions, GtCO2e" : ":.0f"},
         )
         fig.update_layout(title_x=0.5)
-        fig.add_vrect(x0=1995, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
 
         if show_fig is True:
             fig.show()
