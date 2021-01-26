@@ -392,7 +392,7 @@ group_keys = {
 }
 
 show_fig = True
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stack"
 fig_type = "plotly"
 
@@ -450,7 +450,7 @@ if chart_type == "stack":
                 color="Sector",
                 color_discrete_sequence=px.colors.qualitative.Safe,
                 title="Energy Supply, "
-                + scenario.replace(" ", "")
+                + scenario.replace(" ", "").title()
                 + ", "
                 + iea_region_list[i],
                 hover_data={"TFC, " + unit[0]: ":.0f"},
@@ -624,15 +624,16 @@ else:
 
 # endregion
 
-#####################################
-# PROJECTED MARKET DIFFUSION CURVES #
-#####################################
+###################
+# ADOPTION CURVES #
+###################
 
 # region
 
 fig_type = "plotly"
+save_figs = False
 
-for i in [17, 18]:
+for i in range(0,len(iea_region_list)):
     fig = adoption_curves.loc[iea_region_list[i]] * 100
 
     if fig_type == "plotly":
@@ -989,56 +990,29 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-color = (
-    (0.999, 0.999, 0.999),
-    (0.928, 0.828, 0.824),
-    (0.688, 0.472, 0.460),
-    (0.572, 0.792, 0.744),
-    (0.536, 0.576, 0.432),
-    (0.384, 0.460, 0.560),
-    (0.904, 0.620, 0.384),
-    (0.488, 0.672, 0.736),
-    (0.560, 0.516, 0.640),
-    (0.284, 0.700, 0.936),
-    (0.384, 0.664, 0.600),
-    (0.999, 0.976, 0.332),
-    (0.748, 0.232, 0.204),
-)
+fig_type = 'plotly'
+save_figs = True
 
-custom_legend = [
-    Line2D([0], [0], color=color[8], linewidth=4),
-    Line2D([0], [0], color=color[7], linewidth=4),
-    Line2D([0], [0], color=color[6], linewidth=4),
-    Line2D([0], [0], color=color[5], linewidth=4),
-    Line2D([0], [0], color=color[4], linewidth=4),
-    Line2D([0], [0], color=color[3], linewidth=4),
-    Line2D([0], [0], color=color[2], linewidth=4),
-    Line2D([0], [0], color=color[1], linewidth=4),
-    Line2D([0], [0], color=color[12], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)),
-    Line2D([0], [0], color=color[10], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
-    Line2D([0], [0], color=color[9], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
-    Line2D([0], [0], color=color[11], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
-]
 
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[
-        [iea_region_list[i]], "Electricity", slice(None)
+        iea_region_list[i], "Electricity", slice(None)
     ].sum()
 
     em_mit_transport = em_mitigated.loc[
-        [" OECD ", "NonOECD "], "Transport", slice(None)
+        iea_region_list[i], "Transport", slice(None)
     ].sum()
 
     em_mit_buildings = em_mitigated.loc[
-        [" OECD ", "NonOECD "], "Buildings", slice(None)
+        iea_region_list[i], "Buildings", slice(None)
     ].sum()
 
     em_mit_industry = em_mitigated.loc[
-        [" OECD ", "NonOECD "], "Industry", slice(None)
+        iea_region_list[i], "Industry", slice(None)
     ].sum()
 
     em_mit_ra = afolu_em_mitigated.loc[
-        [" OECD ", "NonOECD "],
+        iea_region_list[i],
         [
             "Biochar",
             "Cropland Soil Health",
@@ -1055,7 +1029,7 @@ for i in range(0, len(iea_region_list)):
     ].sum()
 
     em_mit_fw = afolu_em_mitigated.loc[
-        [" OECD ", "NonOECD "],
+        iea_region_list[i],
         [
             "Avoided Coastal Impacts",
             "Avoided Forest Conversion",
@@ -1069,7 +1043,7 @@ for i in range(0, len(iea_region_list)):
         slice(None),
     ].sum()
 
-    em_mit_othergas = em_mitigated.loc[[" OECD ", "NonOECD "], "Other gases", :].sum()
+    em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other gases", :].sum()
 
     em_mit_cdr = pd.Series(
         cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
@@ -1119,56 +1093,123 @@ for i in range(0, len(iea_region_list)):
             "Electricity",
         ]
     )
-    plt.figure(i)
-    plt.stackplot(
-        fig.T.index,
-        fig,
-        labels=fig.index,
-        colors=color,
-    )
-    plt.plot(fig.T.index, em_targets_pathway.T / 1000, LineStyle="--")
-    plt.legend(
-        loc=2,
-        fontsize="small",
-    )
-    plt.axhline(y=0, color=(0, 0, 0), linestyle=":")
-    plt.ylabel("GtCO2e/yr")
-    plt.xlim([2020, 2100])
-    plt.grid(which="major", linestyle=":", axis="y")
-    plt.legend(
-        custom_legend,
-        [
-            "Electricity",
-            "Transport",
-            "Buildings",
-            "Industry",
-            "Agriculture",
-            "Forests & Wetlands",
-            "CH4, N2O, F-gases",
-            "CDR",
-            "baseline",
-            "DAU",
-            "SSP2-RCP1.9",
-            "SSP2-RCP2.6",
-        ],
-        bbox_to_anchor=(1.05, 1),
-        loc=2,
-        borderaxespad=0.0,
-    )
-    plt.xticks(np.arange(2020, 2110, 10))
-    plt.yticks(np.arange(-25, 105, 10))
-    plt.title("Emissions Mitigated, " + iea_region_list[i])
-    plt.show()
 
-    if save_figs is True:
-        plt.savefig(
-            fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
-                " ", ""
-            ),
-            format="png",
-            bbox_inches="tight",
-            pad_inches=0.1,
+    if fig_type == 'plotly':
+        fig = fig.T
+        fig.index.name = "Year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
         )
+        fig = px.area(
+            fig2,
+            x="Year",
+            y="Emissions, GtCO2e",
+            line_group="Sector",
+            color="Sector",
+            color_discrete_sequence=px.colors.qualitative.T10,
+            title="Emissions Mitigated, " + iea_region_list[i],
+            hover_data={"Emissions, GtCO2e" : ":.0f"},
+        )
+        fig.update_layout(title_x=0.5)
+        fig.add_vrect(x0=1995, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+
+        if show_fig is True:
+            fig.show()
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/mwedges-"
+                    + iea_region_list[i]
+                    + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
+
+    else:
+        color = (
+            (0.999, 0.999, 0.999),
+            (0.928, 0.828, 0.824),
+            (0.688, 0.472, 0.460),
+            (0.572, 0.792, 0.744),
+            (0.536, 0.576, 0.432),
+            (0.384, 0.460, 0.560),
+            (0.904, 0.620, 0.384),
+            (0.488, 0.672, 0.736),
+            (0.560, 0.516, 0.640),
+            (0.284, 0.700, 0.936),
+            (0.384, 0.664, 0.600),
+            (0.999, 0.976, 0.332),
+            (0.748, 0.232, 0.204),
+        )
+
+        custom_legend = [
+            Line2D([0], [0], color=color[8], linewidth=4),
+            Line2D([0], [0], color=color[7], linewidth=4),
+            Line2D([0], [0], color=color[6], linewidth=4),
+            Line2D([0], [0], color=color[5], linewidth=4),
+            Line2D([0], [0], color=color[4], linewidth=4),
+            Line2D([0], [0], color=color[3], linewidth=4),
+            Line2D([0], [0], color=color[2], linewidth=4),
+            Line2D([0], [0], color=color[1], linewidth=4),
+            Line2D([0], [0], color=color[12], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)),
+            Line2D([0], [0], color=color[10], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
+            Line2D([0], [0], color=color[9], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
+            Line2D([0], [0], color=color[11], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
+        ]
+
+        plt.figure(i)
+        plt.stackplot(
+            fig.T.index,
+            fig,
+            labels=fig.index,
+            colors=color,
+        )
+        plt.plot(fig.T.index, em_targets_pathway.T / 1000, LineStyle="--")
+        plt.legend(
+            loc=2,
+            fontsize="small",
+        )
+        plt.axhline(y=0, color=(0, 0, 0), linestyle=":")
+        plt.ylabel("GtCO2e/yr")
+        plt.xlim([2020, 2100])
+        plt.grid(which="major", linestyle=":", axis="y")
+        plt.legend(
+            custom_legend,
+            [
+                "Electricity",
+                "Transport",
+                "Buildings",
+                "Industry",
+                "Agriculture",
+                "Forests & Wetlands",
+                "CH4, N2O, F-gases",
+                "CDR",
+                "Baseline",
+                "DAU",
+                "SSP2-RCP1.9",
+                "SSP2-RCP2.6",
+            ],
+            bbox_to_anchor=(1.05, 1),
+            loc=2,
+            borderaxespad=0.0,
+        )
+        plt.xticks(np.arange(2020, 2110, 10))
+        plt.yticks(np.arange(-25, 105, 10))
+        plt.title("Emissions Mitigated, " + iea_region_list[i])
+        plt.show()
+
+        if save_figs is True:
+            plt.savefig(
+                fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
+                    " ", ""
+                ),
+                format="png",
+                bbox_inches="tight",
+                pad_inches=0.1,
+            )
+
     plt.clf()
 
 # endregion
@@ -1421,9 +1462,9 @@ plt.savefig(
 
 # endregion
 
-######################################
-# PROJECTED CO2 EMISSIONS BY COUNTRY #
-######################################
+#####################################
+# PROJECTED CO2 EMISSIONS BY REGION #
+#####################################
 
 # region
 # from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb

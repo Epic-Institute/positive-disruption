@@ -7,6 +7,8 @@ from podi.energy_demand import data_end_year, iea_region_list, gcam_region_list
 
 input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
 
+# use pandas-datareader for current data
+
 
 def socioeconomics(iea_region_list_i):
     if iea_region_list_i == "World ":

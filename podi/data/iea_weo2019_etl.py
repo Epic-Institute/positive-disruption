@@ -192,8 +192,9 @@ energy_demand_proj = curve_smooth(
         energy_demand_historical.loc[:, data_end_year:].set_index(
             ["GCAM Region", "IEA Region", "Sector", "Metric"]
         )
-    ),"quadratic"
-    5,
+    ),
+    "quadratic",
+    4,
 )
 
 energy_demand_historical = energy_demand_historical.join(energy_demand_proj)

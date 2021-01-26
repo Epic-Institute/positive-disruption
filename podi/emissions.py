@@ -192,7 +192,7 @@ def emissions(
     if scenario == "baseline":
 
         em = pd.read_csv("podi/data/emissions_baseline.csv").set_index(
-            ["IEA Region", "Sector", "Metric"]
+            ["Region", "Sector", "Metric"]
         )
         em.columns = em.columns.astype(int)
 
@@ -230,6 +230,7 @@ def emissions(
         """
         em = (
             elec_em.loc[slice(None), slice(None), "Fossil fuels"]
+            .append(heat_em)
             .append(transport_em)
             .append(buildings_em)
             .append(industry_em)

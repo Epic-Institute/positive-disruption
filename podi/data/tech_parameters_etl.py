@@ -2,75 +2,49 @@
 
 import pandas as pd
 
+tech_parameters = pd.read_csv("podi/data/tech_parameters (copy).csv").dropna()
 
-def tech_parameters_etl(data_source):
-    tech_parameters = pd.read_csv("podi/data/tech_parameters.csv").dropna()
-    region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=["IEA Region"]
+oecd_group = (
+    "NAM ",
+    "US ",
+    "EUR ",
+    "EU ",
+    "SAFR ",
+    "JPN ",
+    "AdvancedECO ",
+)
+non_group = (
+    "World ",
+    "CSAM ",
+    "BRAZIL ",
+    "AFRICA ",
+    "ME ",
+    "EURASIA ",
+    "RUS ",
+    "ASIAPAC ",
+    "CHINA ",
+    "INDIA ",
+    "ASEAN ",
+    "DevelopingECO ",
+)
+
+oecd_params = tech_parameters[tech_parameters["IEA Region"] == " OECD "]
+non_params = tech_parameters[tech_parameters["IEA Region"] == "NonOECD "]
+
+for i in range(0, len(oecd_group)):
+    oecd_params = oecd_params.append(
+        oecd_params[oecd_params["IEA Region"] == " OECD "].replace(
+            " OECD ", oecd_group[i]
+        )
     )
 
-    elec_gen = elec_gen.merge(
-        region_categories, right_on=["WWS Region"], left_on=["Region"]
+for i in range(0, len(non_group)):
+    non_params = non_params.append(
+        non_params[non_params["IEA Region"] == "NonOECD "].replace(
+            "NonOECD ", non_group[i]
+        )
     )
 
-    # collect rows into IEA regions
-    elec_gen = elec_gen.groupby("IEA Region").mean() * 100
+params = oecd_params.append(non_params)
 
-    # split into various levels of IEA regional grouping
-    elec_gen["IEA Region 1"] = elec_gen.apply(lambda x: x.name.split()[0] + " ", axis=1)
-    elec_gen["IEA Region 2"] = elec_gen.apply(lambda x: x.name.split()[2] + " ", axis=1)
-    elec_gen["IEA Region 3"] = elec_gen.apply(
-        lambda x: x.name.split()[-1] + " ", axis=1
-    )
-    elec_gen.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
-
-    # make new row for world level data
-    elec_gen_world = pd.DataFrame(elec_gen.mean()).T.rename(index={0: "World "})
-
-    # make new rows for advanced/developing economies
-    elec_gen_eco = pd.DataFrame(elec_gen.groupby("IEA Region 1").mean())
-
-    # make new rows for OECD/NonOECD regions
-    elec_gen_oecd = pd.DataFrame(elec_gen.groupby("IEA Region 2").mean())
-
-    # make new rows for IEA regions
-    elec_gen_regions = pd.DataFrame(elec_gen.groupby("IEA Region 3").mean())
-
-    # combine all
-    elec_gen = elec_gen_world.append([elec_gen_eco, elec_gen_oecd, elec_gen_regions])
-    elec_gen.index.name = "IEA Region"
-
-    # combine columns to match tech_list
-    mapping = {
-        "Onshore wind": "Wind",
-        "Offshore wind": "Wind",
-        "Wave device": "Hydroelectricity",
-        "Geothermal electric plant": "Geothermal",
-        "Hydroelectric plant": "Hydroelectricity",
-        "Tidal turbine": "Hydroelectricity",
-        "Res. roof PV system": "Solar",
-        "Com/gov/Indus roof PV system": "Solar",
-        "Solar PV plant": "Solar",
-        "CSP plant": "Solar",
-    }
-    elec_gen = elec_gen.groupby(mapping, axis=1).sum().round()
-
-    # melt
-    elec_gen = pd.melt(
-        elec_gen, var_name="Technology", value_name="Value", ignore_index=False
-    )
-    elec_gen["Metric"] = "Saturation Point"
-    elec_gen["Sector"] = NaN
-    elec_gen["Scenario"] = "pathway"
-    elec_gen.reset_index(inplace=True)
-
-    elec_gen = elec_gen[
-        ["IEA Region", "Technology", "Scenario", "Sector", "Metric", "Value"]
-    ]
-
-    # add to tech_parameters
-    tech_parameters = pd.read_csv("podi/data/tech_parameters.csv")
-    tech_parameters = tech_parameters.append(elec_gen)
-    tech_parameters.to_csv("podi/data/tech_parameters.csv", index=False)
-
-    return tech_parameters
+params.to_csv("podi/data/tech_parameters.csv", index=False)

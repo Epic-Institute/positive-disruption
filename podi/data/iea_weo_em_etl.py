@@ -166,8 +166,8 @@ def iea_weo_em_etl(iea_region_list_i, gcam_region_list_i):
         keys=[
             iea_region_list_i,
         ],
-        names=["IEA Region"],
-    ).reorder_levels(["IEA Region", "Sector", "Metric"])
+        names=["Region"],
+    ).reorder_levels(["Region", "Sector", "Metric"])
 
     df = df.loc[:, :2039].join(df.loc[:, 2040:].cumprod(axis=1).fillna(0).astype(int))
 
