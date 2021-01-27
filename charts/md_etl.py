@@ -90,25 +90,16 @@ for i in range(0, len(iea_region_list)):
 
     # region
 
-    for j in ["baseline", "pathway"]:
-        for k in ["mwedges", "em1"]:
-            path = (
-                '"'
-                + k
-                + "-"
-                + j
-                + "-"
-                + (iea_region_list[i]).replace(" ", "")
-                + '.html"'
-            )
+    for k in ["mwedges", "em1"]:
+        path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
 
-            mdFile.write(
-                "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
-            )
-            mdFile.write(path)
-            mdFile.write(" height='500' width='150%'></iframe>")
+        mdFile.write(
+            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+        )
+        mdFile.write(path)
+        mdFile.write(" height='500' width='150%'></iframe>")
 
-            mdFile.new_line()
+        mdFile.new_line()
 
     # endregion
 
