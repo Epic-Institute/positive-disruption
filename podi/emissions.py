@@ -5,6 +5,7 @@
 import pandas as pd
 from podi.energy_demand import data_start_year
 from podi.energy_supply import long_proj_end_year
+from podi.energy_demand import iea_region_list
 
 # endregion
 
@@ -186,6 +187,17 @@ def emissions(
     )
     addtl_em.columns = addtl_em.columns.astype(int)
     addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year]
+
+    for i in range(0, len(iea_region_list)):
+        addtl_em.loc[iea_region_list[i], slice(None), slice(None)] = (
+            addtl_em.loc["World ", slice(None), slice(None)].apply(
+                lambda x: x
+                * energy_demand.loc[
+                    iea_region_list[i], "Industry", "Industry", scenario
+                ].div(energy_demand.loc["World ", "Industry", "Industry", scenario]),
+                axis=1,
+            )
+        ).values
 
     # endregion
 

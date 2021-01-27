@@ -16,7 +16,7 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 from itertools import chain, zip_longest
-from math import ceil, pi
+from math import ceil, pi, nan
 
 save_figs = True
 long_proj_start_year = near_proj_end_year + 1
@@ -1074,19 +1074,21 @@ for i in range(0, len(iea_region_list)):
         }
     )
 
-    spacer = pd.DataFrame(em_baseline.groupby('Region').sum().loc[region]).T
+    spacer = pd.Series(em_baseline.groupby('Region').sum().loc[region] - em_mit.sum()).replace(nan,0).rename('').T
+
     '''
     if iea_region_list[i] == 'World ':
         spacer = em_targets_pathway.loc["pathway PD20"]
     else:
         spacer = pd.DataFrame([])
         spacer.name = ''
-    '''
-    em_targets_pathway.loc["baseline PD20"] = em_mit.append(spacer).sum()
 
     em_mit.loc["Electricity"] = em_targets_pathway.loc["baseline PD20"].subtract(
         em_mit.drop(labels="Electricity").append(spacer).sum()
     )
+
+    '''
+    em_targets_pathway.loc["baseline PD20"] = em_mit.append(spacer).sum()
 
     fig = ((em_mit.append(spacer)) / 1000).reindex(
         [

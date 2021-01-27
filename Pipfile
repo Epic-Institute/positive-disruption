@@ -32,6 +32,7 @@ pyhector = "*"
 pandas-profiling = "*"
 streamlit = "*"
 scikit-learn = "*"
+mdutils = "*"
 
 [requires]
 python_version = "3.8"
