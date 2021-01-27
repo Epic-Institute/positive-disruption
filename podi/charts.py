@@ -1046,9 +1046,7 @@ for i in range(0, len(iea_region_list)):
 
     em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other gases", :].sum()
 
-    em_mit_cdr = pd.Series(
-        cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
-    )
+    em_mit_cdr = cdr_pathway.loc[iea_region_list[i]].sum()
 
     em_mit = pd.DataFrame(
         [
@@ -1074,7 +1072,7 @@ for i in range(0, len(iea_region_list)):
         }
     )
 
-    spacer = pd.Series(em_baseline.groupby('Region').sum().loc[region] - em_mit.sum()).replace(nan,0).rename('').T
+    spacer = pd.Series(em_baseline.groupby('Region').sum().loc[region] - em_mit.sum()).replace(nan, 0).rename('').T
 
     '''
     if iea_region_list[i] == 'World ':

@@ -4,7 +4,7 @@
 
 from podi.socioeconomics import socioeconomics
 from podi.energy_demand import energy_demand
-from podi.energy_supply import energy_supply
+from podi.energy_supply import energy_supply, long_proj_end_year
 from podi.afolu import afolu
 from podi.results_analysis import results_analysis
 
@@ -29,7 +29,7 @@ from podi.climate import climate
 import time
 from datetime import timedelta
 import numpy as np
-from podi.energy_demand import data_end_year
+from podi.energy_demand import data_start_year, data_end_year
 from pandas_profiling import ProfileReport
 import streamlit as st
 
@@ -176,30 +176,27 @@ em_mitigated = (
 #######
 
 # region
-"""
-cdr_needed = (
-    abs(
-        em_targets_pathway.loc["baseline PD20", 2010:]
-        - em_targets_pathway.loc["pathway PD20", 2010:]
-    )    - em_targets_pathway.loc["baseline PD20", 2010:] - em_pathway.sum())
-"""
 
-cdr_needed = cdr_needed_def
-grid_em = grid_em_def
-heat_em = heat_em_def
-transport_em = transport_em_def
-fuel_em = fuel_em_def
+cdr_needed = em_pathway.groupby("Region").sum()
 
-cdr_pathway, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
-    cdr_needed, grid_em, heat_em, transport_em, fuel_em, 2010, 2100
-)
+cdr_pathway = []
 
-cdr_pathway = (
-    pd.DataFrame(cdr_pathway, index=em_mitigated.columns)
-    .T.fillna(0)
-    .iloc[[True, False, True, True], :]
-)
+for i in range(0, len(iea_region_list)):
+    cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
+        cdr_needed.loc[iea_region_list[i]].to_list(),
+        grid_em_def,
+        heat_em_def,
+        transport_em_def,
+        fuel_em_def,
+        data_start_year,
+        long_proj_end_year,
+    )
 
+    cdr_pathway2 = pd.DataFrame(cdr_pathway2, index=em_mitigated.columns).T.fillna(0)
+
+    cdr_pathway = pd.DataFrame(cdr_pathway).append(
+        pd.concat([cdr_pathway2], keys=[iea_region_list[i]], names=["Region"])
+    )
 
 # check if energy oversupply is at least energy demand needed for CDR
 
