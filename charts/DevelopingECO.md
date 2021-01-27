@@ -1,58 +1,23 @@
-# Developing Economies
 
-![](../region%20maps/DevelopingECO.png)
 
-All countries not included in the Advanced Economies regional grouping.
 
-### Adoption Curves
 
-![](../podi/data/figs/scurves-DevelopingECO)
+# DevelopingECO 
+  
+![](../region%20maps/DevelopingECO.png)  
+  
+  
 
-<br/>
+## Adoption Curves
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-DevelopingECO.html" height='500' width='150%'></iframe>  
 
-![](../podi/data/figs/scurves_ind-Grid-DevelopingECO)
-![](../podi/data/figs/scurves_ind-Transport-DevelopingECO)
-![](../podi/data/figs/scurves_ind-Buildings-DevelopingECO)
-![](../podi/data/figs/scurves_ind-Industry-DevelopingECO)
-![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-DevelopingECO)
-![](../podi/data/figs/scurves_ind-Forests&Wetlands-DevelopingECO)
-![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-DevelopingECO)
+## Energy Supply and Demand
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-DevelopingECO.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-baseline-DevelopingECO.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-DevelopingECO.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-DevelopingECO.html" height='500' width='150%'></iframe>  
+  
 
-<br/><br/>
-
-### Emissions
-
-![](../podi/data/figs/mitigationwedges-DevelopingECO)
-
-<br/><br/>
-
-![](../podi/data/figs/emissions-ffi_emissions-DevelopingECO)<br/><br/>
-![](../podi/data/figs/emissions-CH4_emissions-DevelopingECO)<br/><br/>
-![](../podi/data/figs/emissions-N2O_emissions-DevelopingECO)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](../podi/data/figs/energydemand_pathway-DevelopingECO)<br/><br/>
-![](../podi/data/figs/energysupply_pathway-DevelopingECO)<br/><br/>
-![](../podi/data/figs/electricity_pathway-DevelopingECO)<br/><br/>
-![](../podi/data/figs/elecbysector_pathway-DevelopingECO)<br/><br/>
-![](../podi/data/figs/buildings_pathway-DevelopingECO)<br/><br/>
-![](../podi/data/figs/industry_pathway-DevelopingECO)<br/><br/>
-![](../podi/data/figs/transport_pathway-DevelopingECO)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](../podi/data/figs/ra_pathway-DevelopingECO)<br/><br/>
-![](../podi/data/figs/fw_pathway-DevelopingECO)<br/><br/>
-![](../podi/data/figs/afolu_pathway-DevelopingECO)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](../podi/data/figs/cdr_pathway-DevelopingECO)<br/><br/>
-
+## Emissions
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-DevelopingECO.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-DevelopingECO.html" height='500' width='150%'></iframe>  

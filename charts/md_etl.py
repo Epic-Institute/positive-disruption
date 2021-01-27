@@ -8,7 +8,7 @@ from podi.energy_demand import iea_region_list
 region_dict = {
     "World ": "",
     "US ": "",
-    "Brazil ": "",
+    "BRAZIL ": "",
     "EU ": "",
     "SAFR ": "",
     "EURASIA ": "",

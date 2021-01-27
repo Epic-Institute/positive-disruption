@@ -1,56 +1,23 @@
-# India
 
-![](../region%20maps/INDIA.png)
 
-### Adoption Curves
 
-![](../podi/data/figs/scurves-INDIA)
 
-<br/>
+# INDIA 
+  
+![](../region%20maps/INDIA.png)  
+  
+  
 
-![](../podi/data/figs/scurves_ind-Grid-INDIA)
-![](../podi/data/figs/scurves_ind-Transport-INDIA)
-![](../podi/data/figs/scurves_ind-Buildings-INDIA)
-![](../podi/data/figs/scurves_ind-Industry-INDIA)
-![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-INDIA)
-![](../podi/data/figs/scurves_ind-Forests&Wetlands-INDIA)
-![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-INDIA)
+## Adoption Curves
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-INDIA.html" height='500' width='150%'></iframe>  
 
-<br/><br/>
+## Energy Supply and Demand
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-INDIA.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-baseline-INDIA.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-INDIA.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-INDIA.html" height='500' width='150%'></iframe>  
+  
 
-### Emissions
-
-![](../podi/data/figs/mitigationwedges-INDIA)
-
-<br/><br/>
-
-![](../podi/data/figs/emissions-ffi_emissions-INDIA)<br/><br/>
-![](../podi/data/figs/emissions-CH4_emissions-INDIA)<br/><br/>
-![](../podi/data/figs/emissions-N2O_emissions-INDIA)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](../podi/data/figs/energydemand_pathway-INDIA)<br/><br/>
-![](../podi/data/figs/energysupply_pathway-INDIA)<br/><br/>
-![](../podi/data/figs/electricity_pathway-INDIA)<br/><br/>
-![](../podi/data/figs/elecbysector_pathway-INDIA)<br/><br/>
-![](../podi/data/figs/buildings_pathway-INDIA)<br/><br/>
-![](../podi/data/figs/industry_pathway-INDIA)<br/><br/>
-![](../podi/data/figs/transport_pathway-INDIA)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](../podi/data/figs/ra_pathway-INDIA)<br/><br/>
-![](../podi/data/figs/fw_pathway-INDIA)<br/><br/>
-![](../podi/data/figs/afolu_pathway-INDIA)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](../podi/data/figs/cdr_pathway-INDIA)<br/><br/>
-
+## Emissions
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-INDIA.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-INDIA.html" height='500' width='150%'></iframe>  

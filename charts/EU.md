@@ -1,58 +1,23 @@
-# European Union
 
-![](../region%20maps/EU.png)
 
-Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal, Romania, Slovak Republic, Slovenia, Spain, Sweden, United Kingdom
 
-### Adoption Curves
 
-![](../podi/data/figs/scurves-EU)
+# EU 
+  
+![](../region%20maps/EU.png)  
+  
+  
 
-<br/>
+## Adoption Curves
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-EU.html" height='500' width='150%'></iframe>  
 
-![](../podi/data/figs/scurves_ind-Grid-EU)
-![](../podi/data/figs/scurves_ind-Transport-EU)
-![](../podi/data/figs/scurves_ind-Buildings-EU)
-![](../podi/data/figs/scurves_ind-Industry-EU)
-![](../podi/data/figs/scurves_ind-RegenerativeAgriculture-EU)
-![](../podi/data/figs/scurves_ind-Forests&Wetlands-EU)
-![](../podi/data/figs/scurves_ind-CarbonDioxideRemoval-EU)
+## Energy Supply and Demand
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-EU.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-baseline-EU.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-EU.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-EU.html" height='500' width='150%'></iframe>  
+  
 
-<br/><br/>
-
-### Emissions
-
-![](../podi/data/figs/mitigationwedges-EU)
-
-<br/><br/>
-
-![](../podi/data/figs/emissions-ffi_emissions-EU)<br/><br/>
-![](../podi/data/figs/emissions-CH4_emissions-EU)<br/><br/>
-![](../podi/data/figs/emissions-N2O_emissions-EU)<br/><br/>
-
-<br/><br/>
-
-### Energy Supply & Demand
-
-![](../podi/data/figs/energydemand_pathway-EU)<br/><br/>
-![](../podi/data/figs/energysupply_pathway-EU)<br/><br/>
-![](../podi/data/figs/electricity_pathway-EU)<br/><br/>
-![](../podi/data/figs/elecbysector_pathway-EU)<br/><br/>
-![](../podi/data/figs/buildings_pathway-EU)<br/><br/>
-![](../podi/data/figs/industry_pathway-EU)<br/><br/>
-![](../podi/data/figs/transport_pathway-EU)<br/><br/>
-
-<br/><br/>
-
-### Natural Climate Solutions
-
-![](../podi/data/figs/ra_pathway-EU)<br/><br/>
-![](../podi/data/figs/fw_pathway-EU)<br/><br/>
-![](../podi/data/figs/afolu_pathway-EU)<br/><br/>
-
-<br/><br/>
-
-### Carbon Dioxide Removal
-
-![](../podi/data/figs/cdr_pathway-EU)<br/><br/>
-
+## Emissions
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-EU.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-EU.html" height='500' width='150%'></iframe>  
