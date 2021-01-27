@@ -177,7 +177,11 @@ em_mitigated = (
 
 # region
 
-cdr_needed = em_pathway.groupby("Region").sum()
+cdr_needed = em_pathway.groupby("Region").sum() - em_targets_pathway.loc[
+    "pathway PD20"
+] * em_pathway.groupby("Region").sum().apply(
+    lambda x: x.div(em_pathway.groupby("Region").sum().sum()), axis=1
+)
 
 cdr_pathway = []
 
