@@ -17,9 +17,9 @@ region_dict = {
 }
 
 for i in range(0, len(iea_region_list)):
-    mdFile = MdUtils(file_name=iea_region_list[i] + ".md")
+    mdFile = MdUtils(file_name=iea_region_list[i].replace(" ", "") + ".md")
 
-    mdFile.new_header(level=1, title=iea_region_list[i])
+    mdFile.new_header(level=1, title=iea_region_list[i]).replace(" ", "")
     mdFile.new_line()
 
     mdFile.write("![](../region%20maps/")
