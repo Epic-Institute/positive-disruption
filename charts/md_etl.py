@@ -14,18 +14,13 @@ for i in range(0, len(iea_region_list)):
 
     mdFile.new_header(level=2, title="Adoption Curves")
 
-    mdFile.insert_code(
-        '<iframe id="igraph" scrolling="no" style="border:none" seamless="seamless" src= "demand-baseline-" + iea_region_list[i].replace(" ","") + ".html" height="500" width="150%"></iframe>',
-        language="python",
-    )
+    path = '"demand-pathway-' + (iea_region_list[i]).replace(" ", "") + '.html"'
 
-    path = ("demand-pathway-" + (iea_region_list[i]).replace(" ", "") + ".html",)
-
-    mdFile.new_paragraph(
-        Html.image(
-            path=path,
-        )
+    mdFile.write(
+        "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
     )
+    mdFile.write(path)
+    mdFile.write(" height='500' width='150%'></iframe>")
 
     mdFile.new_line()
     mdFile.new_header(level=2, title="Energy Supply and Demand")
