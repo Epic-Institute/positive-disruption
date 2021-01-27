@@ -8,7 +8,9 @@
 ## Adoption Curves
 
 
-<img src= "demand-pathway-World.html" height="200" width="50%"/>  
+```python
+<iframe id="igraph" scrolling="no" style="border:none" seamless="seamless" src= "demand-baseline-" + iea_region_list[i].replace(" ","") + ".html" height="500" width="150%"></iframe>
+``` 
 
 ## Energy Supply and Demand
   
