@@ -34,7 +34,7 @@ unit = [unit_name[0], unit_val[0]]
 # region
 
 show_fig = True
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -631,9 +631,9 @@ else:
 # region
 
 fig_type = "plotly"
-save_figs = False
+save_figs = True
 
-for i in range(0,len(iea_region_list)):
+for i in range(0, len(iea_region_list)):
     fig = adoption_curves.loc[iea_region_list[i]] * 100
 
     if fig_type == "plotly":
