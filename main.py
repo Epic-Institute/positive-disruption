@@ -192,10 +192,26 @@ for i in range(0, len(iea_region_list)):
         long_proj_end_year,
     )
 
-    cdr_pathway2 = pd.DataFrame(cdr_pathway2, index=em_mitigated.columns).T.fillna(0)
+    cdr_pathway2 = (
+        pd.DataFrame(cdr_pathway2, index=em_mitigated.columns)
+        .T.fillna(0)
+        .drop(
+            index=pd.DataFrame(cdr_pathway2, index=em_mitigated.columns)
+            .T.fillna(0)
+            .iloc[
+                pd.DataFrame(cdr_pathway2, index=em_mitigated.columns)
+                .T.fillna(0)
+                .index.str.contains("Deficit", na=False)
+            ]
+            .index
+        )
+    )
 
-    cdr_pathway = pd.DataFrame(cdr_pathway).append(
-        pd.concat([cdr_pathway2], keys=[iea_region_list[i]], names=["Region"])
+    cdr_pathway = (
+        pd.DataFrame(cdr_pathway).append(
+            pd.concat([cdr_pathway2], keys=[iea_region_list[i]], names=["Region"])
+        )
+        * 0.001
     )
 
 # check if energy oversupply is at least energy demand needed for CDR

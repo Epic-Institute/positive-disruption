@@ -1072,7 +1072,7 @@ for i in range(0, len(iea_region_list)):
         }
     )
 
-    spacer = pd.Series(em_baseline.groupby('Region').sum().loc[region] - em_mit.sum()).replace(nan, 0).rename('').T
+    spacer = pd.Series(em_baseline.groupby('Region').sum().loc[iea_region_list[i]] - em_mit.sum()).replace(nan, 0).rename('Spacer').T
 
     '''
     if iea_region_list[i] == 'World ':
@@ -1090,16 +1090,15 @@ for i in range(0, len(iea_region_list)):
 
     fig = ((em_mit.append(spacer)) / 1000).reindex(
         [
-            spacer.name,
-            'Electricity',
-            'Transport',
-            'Buildings',
-            'Industry',
-            'Forests & Wetlands',
-            'Agriculture',
-            'CH4, N2O, F-gases',
             'CDR',
-        ]).loc[:, 2020:]
+            'CH4, N2O, F-gases',
+            'Agriculture',
+            'Forests & Wetlands',
+            'Industry',
+            'Buildings',
+            'Transport',
+            'Electricity',
+            spacer.name]).loc[:, 2020:]
 
     if fig_type == 'plotly':
         fig = fig.T
@@ -1116,7 +1115,7 @@ for i in range(0, len(iea_region_list)):
             color="Sector",
             color_discrete_sequence=px.colors.qualitative.T10,
             title="Emissions Mitigated, " + iea_region_list[i],
-            hover_data={"Emissions, GtCO2e" : ":.0f"},
+            hover_data={"Emissions, GtCO2e" : ":.0f"}, category_orders={'Sector': [spacer.name, 'Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR']}
         )
         fig.update_layout(title_x=0.5)
 
