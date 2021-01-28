@@ -1115,7 +1115,7 @@ for i in range(0, len(iea_region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/em-"
+                "./charts/em2-"
                 + iea_region_list[i]
                 + ".html"
             ).replace(" ", ""),
@@ -1547,6 +1547,7 @@ plt.clf()
 
 # endregion
 
+'''
 # CLIMATE SENSITIVITY
 
 # region
@@ -1579,7 +1580,7 @@ plt.show()
 plt.clf()
 
 # endregion
-
+'''
 # endregion
 
 ###############################

@@ -127,9 +127,14 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 afolu_em_baseline, afolu_per_adoption_baseline = afolu("baseline")
 afolu_em_mitigated, afolu_per_adoption_pathway = afolu("pathway")
 
-afolu_em_pathway = afolu_em_baseline.droplevel(
-    ["Metric", "Unit"]
-) - afolu_em_mitigated.droplevel(["Metric", "Unit"])
+afolu_em_pathway = pd.concat(
+    [
+        afolu_em_baseline.droplevel(["Metric", "Unit"])
+        - afolu_em_mitigated.droplevel(["Metric", "Unit"])
+    ],
+    keys=["Emissions"],
+    names=["Metric"],
+).reorder_levels(["Region", "Sector", "Metric"])
 afolu_em_pathway = afolu_em_pathway.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
 
 
@@ -180,11 +185,13 @@ em_mitigated = (
 
 # region
 
-cdr_needed = em_pathway.groupby("Region").sum() - em_targets_pathway.loc[
-    "pathway PD20", data_start_year:long_proj_end_year
-] * em_pathway.groupby("Region").sum().apply(
-    lambda x: x.div(em_pathway.groupby("Region").sum().sum()), axis=1
-)
+cdr_needed = (
+    em_pathway.groupby("Region").sum()
+    - em_targets_pathway.loc["pathway PD20", data_start_year:long_proj_end_year]
+    * em_pathway.groupby("Region")
+    .sum()
+    .apply(lambda x: x.div(em_pathway.groupby("Region").sum().sum()), axis=1)
+).clip(lower=1)
 
 cdr_pathway = []
 
@@ -279,7 +286,7 @@ for i in range(0, len(iea_region_list)):
 adoption_curves_hist = pd.DataFrame(adoption_curves.loc[:, :data_end_year])
 
 adoption_curves_proj = curve_smooth(
-    pd.DataFrame(adoption_curves.loc[:, data_end_year + 1 :]), "quadratic", 4
+    pd.DataFrame(adoption_curves.loc[:, data_end_year + 1 :]), "quadratic", 5
 )
 
 adoption_curves = (adoption_curves_hist.join(adoption_curves_proj)).clip(

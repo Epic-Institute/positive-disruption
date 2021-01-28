@@ -44,7 +44,7 @@ for i in range(0, len(iea_region_list)):
     mdFile.write(region_dict[iea_region_list[i]])
     mdFile.new_line()
 
-    mdFile.new_header(level=2, title="Vector Adoption Curves")
+    mdFile.new_header(level=2, title="Adoption Curves")
 
     # region
 
@@ -55,24 +55,6 @@ for i in range(0, len(iea_region_list)):
     )
     mdFile.write(path)
     mdFile.write(" height='500' width='150%'></iframe>")
-
-    # endregion
-
-    mdFile.new_line()
-    mdFile.new_header(level=2, title="Emissions")
-
-    # region
-
-    for k in ["mwedges", "em1", "em2"]:
-        path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
-
-        mdFile.write(
-            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
-        )
-        mdFile.write(path)
-        mdFile.write(" height='500' width='150%'></iframe>")
-
-        mdFile.new_line()
 
     # endregion
 
@@ -100,6 +82,24 @@ for i in range(0, len(iea_region_list)):
             mdFile.write(" height='500' width='150%'></iframe>")
 
             mdFile.new_line()
+
+    # endregion
+
+    mdFile.new_line()
+    mdFile.new_header(level=2, title="Emissions")
+
+    # region
+
+    for k in ["mwedges", "em1"]:
+        path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
+
+        mdFile.write(
+            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+        )
+        mdFile.write(path)
+        mdFile.write(" height='500' width='150%'></iframe>")
+
+        mdFile.new_line()
 
     # endregion
 
