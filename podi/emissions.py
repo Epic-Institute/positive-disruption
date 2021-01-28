@@ -51,23 +51,6 @@ def emissions(
 
     # endregion
 
-    ##########
-    #  HEAT  #
-    ##########
-
-    # region
-    heat_consump = (
-        pd.concat([heat_consump], keys=["Heat"], names=["Sector"])
-        .reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-        .loc[slice(None), slice(None), slice(None), scenario]
-    )
-
-    heat_em = (
-        heat_consump * em_factors[em_factors.index.isin(heat_consump.index.values)]
-    ).drop(index=["Fossil fuels"], level=2)
-
-    # endregion
-
     ###############
     #  BUILDINGS  #
     ###############
@@ -164,8 +147,8 @@ def emissions(
 
     # region
 
-    afolu_em = afolu_em.droplevel(["Unit"])
-    afolu_em.columns = afolu_em.columns.astype(int)
+    # afolu_em = afolu_em.droplevel(["Unit"])
+    # afolu_em.columns = afolu_em.columns.astype(int)
     afolu_em = afolu_em.loc[:, data_start_year:long_proj_end_year]
 
     # endregion
@@ -200,7 +183,7 @@ def emissions(
         ).values
 
     # endregion
-
+    """
     if scenario == "baseline":
 
         em = pd.read_csv("podi/data/emissions_baseline.csv").set_index(
@@ -219,18 +202,20 @@ def emissions(
             .append(addtl_em)
         )
     else:
-        em = (
-            elec_em.loc[slice(None), slice(None), "Fossil fuels"]
-            .append(heat_em)
-            .append(transport_em)
-            .append(buildings_em)
-            .append(industry_em)
-            .append(afolu_em)
-            .append(addtl_em)
-        )
-        em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
-            ["Region", "Sector", "Metric"]
-        )
+    """
+    em = (
+        elec_em.append(transport_em)
+        .append(buildings_em)
+        .append(industry_em)
+        .append(afolu_em)
+        .append(addtl_em)
+    )
+
+    """
+    em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
+        ["Region", "Sector", "Metric"]
+    )
+    """
 
     # Add emissions targets
     em_targets = pd.read_csv(targets_em).set_index("Scenario")

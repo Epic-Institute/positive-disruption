@@ -72,9 +72,18 @@ def afolu(scenario):
     afolu_adoption = proj_adoption
     afolu_per_adoption = per
 
+    afolu_adoption = pd.concat(
+        [afolu_adoption.droplevel(level=2)],
+        keys=["Emissions"],
+        names=["Metric"],
+    ).reorder_levels(["Region", "Sector", "Metric", "Unit"])
+
     if scenario == "baseline":
         afolu_adoption = afolu = pd.read_csv(
             "podi/data/afolu_input_baseline.csv"
         ).set_index(["Region", "Sector", "Metric", "Unit"])
+
+    afolu_adoption.columns = afolu_adoption.columns.astype(int)
+    afolu_per_adoption.columns = afolu_per_adoption.columns.astype(int)
 
     return afolu_adoption, afolu_per_adoption

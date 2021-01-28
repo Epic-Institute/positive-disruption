@@ -984,6 +984,147 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
+#############
+# EMISSIONS #
+#############
+
+# region
+
+save_figs = True
+show_fig = True
+scenario = 'baseline'
+
+for i in range(0, len(iea_region_list)):
+    if scenario == 'baseline':
+        em = em_baseline
+        afolu_em = afolu_em_baseline
+        cdr_em = cdr_pathway
+    else:
+        em = em_pathway
+        afolu_em = afolu_em_pathway
+        cdr_em = cdr_pathway
+
+    em_electricity = em.loc[
+        iea_region_list[i], "Electricity", slice(None)
+    ].sum().loc[data_start_year:long_proj_end_year]
+
+    em_transport = em.loc[
+        iea_region_list[i], "Transport", slice(None)
+    ].sum().loc[data_start_year:long_proj_end_year]
+
+    em_buildings = em.loc[
+        iea_region_list[i], "Buildings", slice(None)
+    ].sum().loc[data_start_year:long_proj_end_year]
+
+    em_industry = em.loc[
+        iea_region_list[i], "Industry", slice(None)
+    ].sum().loc[data_start_year:long_proj_end_year]
+
+    em_ra = afolu_em.loc[
+        iea_region_list[i],
+        [
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Trees in Croplands",
+            "Animal Mgmt",
+            "Legumes",
+            "Optimal Intensity",
+            "Silvopasture",
+        ],
+        slice(None),
+        slice(None),
+    ].sum().loc[data_start_year:long_proj_end_year]
+
+    em_fw = afolu_em.loc[
+        iea_region_list[i],
+        [
+            "Avoided Coastal Impacts",
+            "Avoided Forest Conversion",
+            "Avoided Peat Impacts",
+            "Coastal Restoration",
+            "Improved Forest Mgmt",
+            "Peat Restoration",
+            "Natural Regeneration",
+        ],
+        slice(None),
+        slice(None),
+    ].sum().loc[data_start_year:long_proj_end_year]
+
+    em_othergas = em.loc[iea_region_list[i], "Other gases", slice(None)].sum()
+
+    em_cdr = -cdr_em.loc[iea_region_list[i]].sum()
+
+    em = pd.DataFrame(
+        [
+            em_electricity,
+            em_transport,
+            em_buildings,
+            em_industry,
+            em_ra,
+            em_fw,
+            em_othergas,
+            em_cdr,
+        ]
+    ).rename(
+        index={
+            0: "Electricity",
+            1: "Transport",
+            2: "Buildings",
+            3: "Industry",
+            4: "Forests & Wetlands",
+            5: "Agriculture",
+            6: "CH4, N2O, F-gases",
+            7: "CDR",
+        }
+    )
+
+    fig = ((em) / 1000).reindex(
+        [
+            'CDR',
+            'CH4, N2O, F-gases',
+            'Agriculture',
+            'Forests & Wetlands',
+            'Industry',
+            'Buildings',
+            'Transport',
+            'Electricity']).loc[:, 2020:]
+
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+    )
+    fig = px.area(
+        fig2,
+        x="Year",
+        y="Emissions, GtCO2e",
+        line_group="Sector",
+        color="Sector",
+        color_discrete_sequence=px.colors.qualitative.T10,
+        title="Emissions, " + iea_region_list[i],
+        hover_data={"Emissions, GtCO2e" : ":.0f"}, category_orders={'Sector': [spacer.name, 'Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR']}
+    )
+    fig.update_layout(title_x=0.5)
+
+    if show_fig is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/em-"
+                + iea_region_list[i]
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
+    plt.clf()
+
+# endregion
+
 ###########################
 # MITIGATION WEDGES CURVE #
 ###########################
@@ -2085,9 +2226,9 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
-###################################################################
-# TRANSPORTATION ENERGY DEMAND REDUCTION FROM DESIGN IMPROVEMENTS #
-###################################################################
+################################################
+# TRANSPORT REDUCTION FROM DESIGN IMPROVEMENTS #
+################################################
 
 # region
 
@@ -2140,7 +2281,7 @@ for i in range(0, len(iea_region_list)):
     em_mit = (
         (
             afolu_em_mitigated.loc[
-                [" OECD ", "NonOECD "],
+                iea_region_list[i],
                 [
                     "Animal Mgmt",
                     "Legumes",

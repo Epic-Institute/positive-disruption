@@ -125,10 +125,13 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 # region
 
 afolu_em_baseline, afolu_per_adoption_baseline = afolu("baseline")
-afolu_em_pathway, afolu_per_adoption_pathway = afolu("pathway")
+afolu_em_mitigated, afolu_per_adoption_pathway = afolu("pathway")
 
-afolu_em_mitigated = afolu_em_pathway
-afolu_em_mitigated = afolu_em_mitigated.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
+afolu_em_pathway = afolu_em_baseline.droplevel(
+    ["Metric", "Unit"]
+) - afolu_em_mitigated.droplevel(["Metric", "Unit"])
+afolu_em_pathway = afolu_em_pathway.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
+
 
 # endregion
 
@@ -165,8 +168,8 @@ em_pathway, em_targets_pathway = emissions(
 )
 
 em_mitigated = (
-    em_baseline.groupby(["Region", "Sector"]).sum()
-    - em_pathway.groupby(["Region", "Sector"]).sum()
+    em_baseline.groupby(["Region", "Sector", "Metric"]).sum()
+    - em_pathway.groupby(["Region", "Sector", "Metric"]).sum()
 )
 
 # endregion
