@@ -3,15 +3,15 @@
 import pandas as pd
 
 metric_list = [
-    "Biomass and waste",
-    "Fossil fuels",
     "Generation",
-    "Geothermal",
-    "Hydroelectricity",
     "Nuclear",
+    "Fossil fuels",
+    "Hydroelectricity",
+    "Geothermal",
+    "Tide and wave",
     "Solar",
     "Wind",
-    "Tide and wave",
+    "Biomass and waste",
 ]
 
 
@@ -19,9 +19,11 @@ def eia_etl(data_source):
     elec_gen = (
         pd.read_csv(data_source).fillna(method="ffill", axis=1).drop(columns=["Sector"])
     )
+    """
     elec_gen.loc[:, "1980":] = elec_gen.loc[:, "1980":].replace(
         {"baseline": 0.00001, "pathway": 0.00001}
     )
+    """
     region_categories = pd.read_csv(
         "podi/data/region_categories.csv", usecols=["Region", "IEA Region"]
     ).set_index("Region")

@@ -9,7 +9,7 @@ from matplotlib.lines import Line2D
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.energy_demand import iea_region_list, data_end_year, data_start_year
-from podi.energy_supply import near_proj_end_year, long_proj_end_year
+from podi.energy_supply import near_proj_end_year, long_proj_start_year, long_proj_end_year
 from pandas_datapackage_reader import read_datapackage
 from shortcountrynames import to_name
 import plotly.express as px
@@ -18,12 +18,12 @@ import plotly.graph_objects as go
 from itertools import chain, zip_longest
 from math import ceil, pi, nan
 
-save_figs = True
-long_proj_start_year = near_proj_end_year + 1
 unit_name = ["TWh", "EJ", "TJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00360, 3600, 0.086, 86]
 unit = [unit_name[0], unit_val[0]]
 
+save_figs = False
+show_figs = True
 
 # endregion
 
@@ -33,7 +33,6 @@ unit = [unit_name[0], unit_val[0]]
 
 # region
 
-show_fig = True
 scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
@@ -136,7 +135,7 @@ if chart_type == "stacked":
             )
             fig.update_layout(title_x=0.5)
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-            if show_fig is True:
+            if show_figs is True:
                 fig.show()
             if save_figs is True:
                 pio.write_html(
@@ -377,24 +376,23 @@ group_keys = {
     ("Electricity", "Wind"): ("Electricity", "Wind"),
     ("Heat", "Fossil fuels"): ("Heat", "Fossil fuels"),
     ("Heat", "Bioenergy"): ("Heat", "Bioenergy"),
-    ("Heat", "Coal"): ("Heat", "Coal"),
+    ("Heat", "Coal"): ("Heat", "Fossil fuels"),
     ("Heat", "Geothermal"): ("Heat", "Geothermal"),
-    ("Heat", "Natural gas"): ("Heat", "Natural gas"),
+    ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
     ("Heat", "Nuclear"): ("Heat", "Nuclear"),
-    ("Heat", "Oil"): ("Heat", "Oil"),
-    ("Heat", "Other sources"): ("Heat", "Fossil fuels"),
+    ("Heat", "Oil"): ("Heat", "Fossil fuels"),
+    ("Heat", "Other sources"): ("Heat", "Other sources"),
     ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),
     ("Heat", "Waste"): ("Heat", "Biochar"),
-    ("Transport", "Oil"): ("Transport", "Oil"),
+    ("Transport", "Oil"): ("Transport", "Fossil fuels"),
     ("Transport", "Bioenergy"): ("Transport", "Bioenergy"),
-    ("Transport", "Other fuels"): ("Transport", "Other fuels"),
+    ("Transport", "Other fuels"): ("Transport", "Bioenergy"),
     ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
 }
 
-show_fig = True
 scenario = "pathway"
 chart_type = "stack"
-fig_type = "plotly"
+fig_type = ""
 
 if chart_type == "stack":
     for i in range(0, len(iea_region_list)):
@@ -457,7 +455,7 @@ if chart_type == "stack":
             )
             fig.update_layout(title_x=0.5)
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-            if show_fig is True:
+            if show_figs is True:
                 fig.show()
             if save_figs is True:
                 pio.write_html(
@@ -496,7 +494,7 @@ if chart_type == "stack":
                 colors=color2,
             )
             plt.ylabel("TFC, " + unit[0])
-            plt.xlim([2020, 2100])
+            plt.xlim([2010, 2100])
             plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
             plt.legend(loc=2, fontsize="small")
             plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
@@ -566,7 +564,7 @@ else:
             )
             fig.update_layout(title_x=0.5)
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-            if show_fig is True:
+            if show_figs is True:
                 fig.show()
             if save_figs is True:
                 pio.write_html(
@@ -631,7 +629,6 @@ else:
 # region
 
 fig_type = "plotly"
-save_figs = True
 
 for i in range(0, len(iea_region_list)):
     fig = adoption_curves.loc[iea_region_list[i]] * 100
@@ -688,6 +685,7 @@ for i in range(0, len(iea_region_list)):
                 pad_inches=0.1,
             )
         plt.clf()
+        
         color = {
             "Grid": [(0.120, 0.107, 0.155)],
             "Transport": [(0.93, 0.129, 0.180)],
@@ -990,8 +988,6 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-save_figs = True
-show_fig = True
 scenario = 'baseline'
 
 for i in range(0, len(iea_region_list)):
@@ -1109,7 +1105,7 @@ for i in range(0, len(iea_region_list)):
     )
     fig.update_layout(title_x=0.5)
 
-    if show_fig is True:
+    if show_figs is True:
         fig.show()
     if save_figs is True:
         pio.write_html(
@@ -1132,9 +1128,6 @@ for i in range(0, len(iea_region_list)):
 # region
 
 fig_type = 'plotly'
-save_figs = True
-show_fig = True
-
 
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[
@@ -1260,7 +1253,7 @@ for i in range(0, len(iea_region_list)):
         )
         fig.update_layout(title_x=0.5)
 
-        if show_fig is True:
+        if show_figs is True:
             fig.show()
         if save_figs is True:
             pio.write_html(

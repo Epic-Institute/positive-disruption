@@ -161,7 +161,6 @@ def energy_demand(
                     "Natural gas",
                     "Heat",
                     "Bioenergy",
-                    "Traditional biomass",
                     "Other renewables",
                 ],
                 scenario,
@@ -393,32 +392,8 @@ def energy_demand(
         energy_demand.loc[:, (data_end_year + 1) :], "quadratic", 4
     )
 
-    energy_demand_proj.loc[
-        " OECD ", "Transport", "Electricity", scenario, :
-    ] = curve_smooth(
-        energy_demand_proj.loc[" OECD ", "Transport", "Electricity", scenario, :],
-        "quadratic",
-        3,
-    )
-
-    energy_demand_proj.loc[
-        " OECD ", "Buildings", "Electricity", scenario, :
-    ] = curve_smooth(
-        energy_demand_proj.loc[" OECD ", "Buildings", "Electricity", scenario, :],
-        "quadratic",
-        3,
-    )
-
-    energy_demand_proj.loc[
-        " OECD ", "Industry", slice(None), scenario, :
-    ] = curve_smooth(
-        energy_demand_proj.loc[" OECD ", "Industry", slice(None), scenario, :],
-        "quadratic",
-        4,
-    )
-
     energy_demand = energy_demand_hist.join(energy_demand_proj).clip(lower=0)
 
     # endregion
 
-    return energy_demand.round(decimals=0)
+    return energy_demand.round(decimals=0).replace(NaN, 0)

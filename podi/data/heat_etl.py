@@ -20,16 +20,16 @@ def heat_etl(data_source, scenario):
         ["Region", "Sector", "Metric", "Scenario", "Unit"]
     )
     heat_gen = pd.DataFrame(heat_gen).interpolate(method="linear", axis=1)
+
+    """
     region_categories = pd.read_csv(
         "podi/data/region_categories.csv", usecols=["Region", "IEA Region"]
     ).set_index("Region")
 
-    # heat_gen = heat_gen.merge(
-    #    region_categories, on='Region'
-    # )
-
-    # heat_gen.reset_index(inplace=True)
-    # heat_gen.set_index(["Region", "IEA Region", "Metric", "Scenario", "Unit"], #inplace=True)
+    heat_gen = heat_gen.merge(region_categories, on='Region')
+    heat_gen.reset_index(inplace=True)
+    heat_gen.set_index(["Region", "IEA Region", "Metric", "Scenario","Unit"], #inplace=True)
+    """
 
     heat_gen = heat_gen[heat_gen.index.isin(metric_list, level=2)]
 
