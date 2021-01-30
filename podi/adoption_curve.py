@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import curve_fit, differential_evolution
 from numpy import NaN
+from podi.curve_smooth import curve_smooth
 
 
 def func(x, a, b, c, d):
@@ -32,6 +33,7 @@ def adoption_curve(value, region, scenario, sector):
                     "Hydroelectric pumped storage",
                     "Natural gas",
                     "Oil",
+                    "Other sources",
                 ]
             )
         )
@@ -71,7 +73,7 @@ def adoption_curve(value, region, scenario, sector):
         return np.sum((y_data - val) ** 2.0)
 
     search_bounds = [
-        [
+        (
             pd.to_numeric(
                 parameters.loc[
                     region, value.name, scenario, sector, "Parameter a, min"
@@ -82,8 +84,8 @@ def adoption_curve(value, region, scenario, sector):
                     region, value.name, scenario, sector, "Parameter a, max"
                 ].Value[0]
             ),
-        ],
-        [
+        ),
+        (
             pd.to_numeric(
                 parameters.loc[
                     region, value.name, scenario, sector, "Parameter b, min"
@@ -94,8 +96,8 @@ def adoption_curve(value, region, scenario, sector):
                     region, value.name, scenario, sector, "Parameter b, max"
                 ].Value[0]
             ),
-        ],
-        [
+        ),
+        (
             pd.to_numeric(
                 parameters.loc[
                     region,
@@ -116,8 +118,8 @@ def adoption_curve(value, region, scenario, sector):
                 ].Value[0]
             )
             / 100,
-        ],
-        [
+        ),
+        (
             pd.to_numeric(
                 parameters.loc[
                     region,
@@ -138,43 +140,53 @@ def adoption_curve(value, region, scenario, sector):
                 ].Value[0]
             )
             / 100,
-        ],
+        ),
     ]  # a  # b  # c
-    # "seed" the numpy random number generator for repeatable results.
-    genetic_parameters = differential_evolution(
-        sum_of_squared_error, search_bounds, seed=3
-    ).x
+
+    if scenario == "baseline":
+        x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
+        y = np.full((len(x), 1), y_data[-1])
+    else:
+        # "seed" the numpy random number generator for repeatable results.
+        genetic_parameters = differential_evolution(
+            sum_of_squared_error,
+            search_bounds,
+            seed=3,
+            polish=False,
+            updating="immediate",
+            mutation=(0, 1),
+        ).x
+        x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
+        y = np.array(func(x, *genetic_parameters))
 
     """
-    # Now call curve_fit without passing bounds from the genetic algorithm,
-    # just in case the best fit parameters are outside those bounds
-    # fitted_parameters, _ = curve_fit(
-    #    func, x_data, y_data, genetic_parameters, maxfev=100000
-    # )
-
-    # print("genetic_parameters = ", genetic_parameters)
-
-    # model_predictions = func(x_data, *fitted_parameters)
-    # print('model_predictions = ', model_predictions)
-
-    # abs_error = model_predictions - y_data
-    # print('abs_error = ', abs_error)
-
-    # squared_errors = np.square(abs_error)
-    # print('squared_errors = ', squared_errors)
-
-    # mean_squared_errors = np.mean(squared_errors)
-    # print('mean_squared_errors = ', mean_squared_errors)
-
-    # root_mean_squared_error = np.sqrt(mean_squared_errors)
-    # print("root_mean_squared_error = ", root_mean_squared_error)
-
-    # r_squared = 1.0 - (np.var(abs_error) / np.var(y_data))
-    # print("r_squared = ", r_squared)
-    """
-
+    # Now call curve_fit without passing bounds from the genetic algorithm, just in case the best fit parameters are outside those bounds
+    fitted_parameters, _ = curve_fit(func, x_data, y_data, maxfev=10000)
     x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
     y = np.array(func(x, *genetic_parameters))
+    """
+
+    """
+    print("genetic_parameters = ", genetic_parameters)
+
+    model_predictions = func(x_data, *fitted_parameters)
+    print('model_predictions = ', model_predictions)
+    abs_error = model_predictions - y_data
+    print('abs_error = ', abs_error)
+
+    squared_errors = np.square(abs_error)
+    print('squared_errors = ', squared_errors)
+
+    mean_squared_errors = np.mean(squared_errors)
+    print('mean_squared_errors = ', mean_squared_errors)
+
+    root_mean_squared_error = np.sqrt(mean_squared_errors)
+    print("root_mean_squared_error = ", root_mean_squared_error)
+
+    r_squared = 1.0 - (np.var(abs_error) / np.var(y_data))
+    print("r_squared = ", r_squared)
+    """
+
     years = np.linspace(
         pd.to_numeric(value.index[0]),
         2100,

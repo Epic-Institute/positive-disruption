@@ -16,8 +16,10 @@ metric_list = [
 
 
 def heat_etl(data_source, scenario):
-    heat_gen = pd.read_csv(data_source).set_index(
-        ["Region", "Sector", "Metric", "Scenario", "Unit"]
+    heat_gen = (
+        pd.read_csv(data_source)
+        .set_index(["Region", "Sector", "Metric", "Scenario", "Unit"])
+        .loc[slice(None), slice(None), slice(None), scenario, slice(None), :]
     )
     heat_gen = pd.DataFrame(heat_gen).interpolate(method="linear", axis=1)
 

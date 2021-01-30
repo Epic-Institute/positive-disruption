@@ -34,8 +34,8 @@ show_figs = True
 # region
 
 scenario = "pathway"
-chart_type = "stacked"
-fig_type = "plotly"
+chart_type = "line"
+fig_type = ""
 
 if chart_type == "stacked":
     for i in range(0, len(iea_region_list)):
@@ -381,7 +381,7 @@ group_keys = {
     ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
     ("Heat", "Nuclear"): ("Heat", "Nuclear"),
     ("Heat", "Oil"): ("Heat", "Fossil fuels"),
-    ("Heat", "Other sources"): ("Heat", "Other sources"),
+    ("Heat", "Other sources"): ("Heat", "Fossil fuels"),
     ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),
     ("Heat", "Waste"): ("Heat", "Biochar"),
     ("Transport", "Oil"): ("Transport", "Fossil fuels"),
@@ -390,7 +390,7 @@ group_keys = {
     ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
 }
 
-scenario = "pathway"
+scenario = "baseline"
 chart_type = "stack"
 fig_type = ""
 
@@ -428,10 +428,6 @@ if chart_type == "stack":
         )
         fig = fig.groupby(group_keys).sum()
         fig = fig.reindex(tech_list)
-
-        fig.loc[[("Heat", "Biochar"), ("Heat", "Bioenergy")], :] = curve_smooth(
-            fig.loc[[("Heat", "Biochar"), ("Heat", "Bioenergy")], :], "quadratic", 4
-        )
 
         if fig_type == "plotly":
             fig = fig.T
@@ -598,15 +594,13 @@ else:
             plt.figure(i)
             plt.plot(
                 fig.columns.astype(int),
-                fig * unit[1],
-                labels=fig.index,
-                colors=color2,
+                fig.T * unit[1],
             )
             plt.ylabel("TFC, " + unit[0])
-            plt.xlim([2020, 2100])
+            plt.xlim([2010, 2100])
             plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
             plt.legend(loc=2, fontsize="small")
-            plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+            plt.legend(labels=fig.index, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
             plt.show()
             if save_figs is True:
                 plt.savefig(
@@ -1504,266 +1498,6 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
-######################
-# TEMPERATURE CHANGE #
-######################
-
-# region
-# From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-# TEMPERATURE
-
-# region
-
-rcps = [rcp19, rcp85]
-
-SURFACE_TEMP = "temperature.Tgav"
-
-for rcp in rcps:
-    output = pyhector.run(rcp, {"core": {"endDate": 2100}})
-    temp = output[SURFACE_TEMP]
-    temp = temp.loc[1850:] - temp.loc[1850:1900].mean()
-    hist = temp.loc[1850:2016]
-    temp.loc[2016:2100].plot(label=rcp.name.split("_")[0], linestyle="--")
-hist.loc[1900:2100].plot(label="historical", color="black")
-plt.legend(("DAU", "baseline", "Historical"), loc="best")
-plt.title("Global Mean Temperature")
-plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
-plt.savefig(
-    fname=("podi/data/figs/temperature").replace(" ", ""),
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
-plt.show()
-plt.clf()
-
-# endregion
-
-'''
-# CLIMATE SENSITIVITY
-
-# region
-
-low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
-default = pyhector.run(rcp19, {"temperature": {"S": 3}})
-high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
-
-plt.figure()
-sel = slice(1900, 2100)
-plt.fill_between(
-    low[SURFACE_TEMP].loc[sel].index,
-    low[SURFACE_TEMP].loc[sel],
-    high[SURFACE_TEMP].loc[sel],
-    color="lightgray",
-)
-default[SURFACE_TEMP].loc[sel].plot(linestyle="--")
-hist = default[SURFACE_TEMP].loc[1900:2016]
-hist.plot(label="historical", color="black")
-plt.title("DAU with equilibrium climate sensitivity set to 1.5, 3, and 4.5")
-plt.ylabel("Deg. C")
-plt.legend(("DAU", "Historical", "Sensitivity Range"), loc="upper left")
-plt.savefig(
-    fname="podi/data/figs/sensitivity",
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
-plt.show()
-plt.clf()
-
-# endregion
-'''
-# endregion
-
-###############################
-# PROJECTED RADIATIVE FORCING #
-###############################
-
-# region
-# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-FORCING = "forcing.Ftot"
-
-results = pyhector.run(rcp19)
-
-results[FORCING].loc[1900:2100].plot(linestyle="--")
-hist = default[FORCING].loc[1900:2016]
-hist.plot(label="historical", color="black", figsize=(10, 5))
-plt.title("DAU: " + pyhector.output[FORCING]["description"])
-plt.ylabel(pyhector.output[FORCING]["unit"])
-plt.legend(("DAU", "Historical"), loc="upper left")
-plt.savefig(
-    fname="podi/data/figs/forcing",
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
-
-# endregion
-
-#####################################
-# PROJECTED CO2 EMISSIONS BY REGION #
-#####################################
-
-# region
-# from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb
-
-df = read_datapackage("https://github.com/openclimatedata/edgar-co2-emissions")
-unit = "kt"
-df = (
-    df.reset_index()
-    .drop("Name", axis=1)
-    .set_index(["Code", "Sector", "Year"])
-    .sort_index()
-)
-
-for code in ["USA", "CHN"]:
-    grouped = (
-        df.loc[code].reset_index().set_index("Year").groupby("Sector")["Emissions"]
-    )
-
-    fig, axes = plt.subplots(nrows=1, ncols=4, figsize=(12, 4), sharey=True)
-    try:
-        name = to_name(code)
-    except KeyError:
-        name = code
-    fig.suptitle(name)
-    sectors = [
-        "Power Industry",
-        "Transport",
-        "Buildings",
-        "Other industrial combustion",
-    ]
-    for (key, ax) in zip(sectors, axes):
-        ax.set_title(key, fontsize=10)
-        grouped.get_group(key).plot(ax=ax, legend=False)
-        ax.set_ylabel(unit)
-    plt.savefig(
-        fname=("podi/data/figs/emissions-" + code).replace(" ", ""),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-plt.clf()
-# endregion
-
-###########################
-# PROJECTED GHG EMISSIONS #
-###########################
-
-# region
-
-# ABSOLUTE
-
-emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
-names = ["CO2", "CH4", "N2O"]
-units = ["Gt C", "Mt CH4", "Mt N2O"]
-mult = [1, 1, 0.001]
-i = 0
-
-for emission in emissions:
-    fig = plt.plot(
-        rcp19[emission].loc[2000:2100] * mult[i],
-        linestyle="--",
-        color=(0.560, 0.792, 0.740),
-    )
-    plt.plot(rcp19[emission].loc[2000:2016] * mult[i], color="black")
-    plt.ylabel(units[i])
-    plt.title("DAU Net Emissions, " + names[i])
-    plt.savefig(
-        fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    i = i + 1
-plt.clf()
-
-# IN CO2e UNITS
-
-emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
-names = ["CO2", "CH4", "N2O"]
-units = ["GtCO2e", "GtCO2e", "GtCO2e"]
-mult = [3.67, 1e-3, 1e-3]
-gwp = [1, 28, 265]
-j = 0
-
-for emission in emissions:
-    fig = plt.plot(
-        rcp19[emission].loc[2000:2100] * mult[j] * gwp[j],
-        linestyle="--",
-        color=(0.560, 0.792, 0.740),
-    )
-    plt.plot(rcp19[emission].loc[2000:2016] * mult[j] * gwp[j], color="black")
-    plt.ylabel(units[j])
-    plt.title("DAU Net Emissions, " + names[j])
-    plt.savefig(
-        fname=("podi/data/figs/emissions-" + names[j]).replace(" ", ""),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    j = j + 1
-plt.clf()
-
-# Combined GHG
-
-mult = [3.67, 1e-3, 1e-3]
-gwp = [1, 28, 265]
-i = 0
-
-fig = plt.plot(
-    rcp19.loc[2000:2100] * mult[i] * gwp[i],
-    linestyle="--",
-    color=(0.560, 0.792, 0.740),
-)
-plt.plot(rcp19.loc[2000:2016] * mult[i] * gwp[i], color="black")
-plt.ylabel("GtCO2e")
-plt.title("DAU Net Emissions, " + names[i])
-plt.savefig(
-    fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
-plt.show()
-plt.clf()
-
-# endregion
-
-###########################################
-# PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
-###########################################
-
-# region
-# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-CONCENTRATION_CO2 = "simpleNbox.Ca"
-
-results = pyhector.run(rcp19)
-
-results[CONCENTRATION_CO2].loc[1900:2100].plot(
-    linestyle="--", color=(0.560, 0.792, 0.740)
-)
-hist = default[CONCENTRATION_CO2].loc[1900:2016]
-hist.plot(label="historical", color="black", figsize=(10, 5))
-plt.title("DAU: " + pyhector.output[CONCENTRATION_CO2]["description"])
-plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
-plt.legend(("DAU", "Historical"), loc="upper left")
-plt.savefig(
-    fname=("podi/data/figs/co2conc").replace(" ", ""),
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
-plt.show()
-plt.clf()
-
-# endregion
-
 ########################################
 # ACTUAL VS. PROJECTED ADOPTION CURVES #
 ########################################
@@ -1778,23 +1512,6 @@ plt.clf()
 
 # region
 
-# endregion
-
-################################
-# ENERGY INTENSITY PROJECTIONS #
-################################
-
-# region
-# https://github.com/iiasa/ipcc_sr15_scenario_analysis/blob/master/further_analysis/iamc15_energy_intensity.ipynb
-
-# endregion
-
-###############################
-# ECONOMIC GROWTH PROJECTIONS #
-###############################
-
-# region
-# https://github.com/iiasa/ipcc_sr15_scenario_analysis/blob/master/further_analysis/iamc15_gdp_per_capita.ipynb
 # endregion
 
 ####################################
@@ -1924,7 +1641,7 @@ for i in range(0, len(iea_region_list)):
 #######################
 
 # region
-scenario = "pathway"
+scenario = "baseline"
 
 for i in range(0, len(iea_region_list)):
     plt.figure(i)
@@ -2116,7 +1833,7 @@ for i in range(0, len(iea_region_list)):
 ########################
 # INDUSTRY HEAT SUPPLY #
 ########################
-"""
+
 # region
 
 # Heat generation by source
@@ -2170,7 +1887,7 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
-"""
+
 ################################
 # TRANSPORTATION ENERGY DEMAND #
 ################################
@@ -2769,3 +2486,281 @@ for i in range(0, len(iea_region_list)):
     plt.clf()
 
 # endregion
+
+######################
+# TEMPERATURE CHANGE #
+######################
+
+# region
+# From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+# TEMPERATURE
+
+# region
+
+rcps = [rcp19, rcp85]
+
+SURFACE_TEMP = "temperature.Tgav"
+
+for rcp in rcps:
+    output = pyhector.run(rcp, {"core": {"endDate": 2100}})
+    temp = output[SURFACE_TEMP]
+    temp = temp.loc[1850:] - temp.loc[1850:1900].mean()
+    hist = temp.loc[1850:2016]
+    temp.loc[2016:2100].plot(label=rcp.name.split("_")[0], linestyle="--")
+hist.loc[1900:2100].plot(label="historical", color="black")
+plt.legend(("DAU", "baseline", "Historical"), loc="best")
+plt.title("Global Mean Temperature")
+plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
+plt.savefig(
+    fname=("podi/data/figs/temperature").replace(" ", ""),
+    format="png",
+    bbox_inches="tight",
+    pad_inches=0.1,
+)
+plt.show()
+plt.clf()
+
+# endregion
+
+'''
+# CLIMATE SENSITIVITY
+
+# region
+
+low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
+default = pyhector.run(rcp19, {"temperature": {"S": 3}})
+high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
+
+plt.figure()
+sel = slice(1900, 2100)
+plt.fill_between(
+    low[SURFACE_TEMP].loc[sel].index,
+    low[SURFACE_TEMP].loc[sel],
+    high[SURFACE_TEMP].loc[sel],
+    color="lightgray",
+)
+default[SURFACE_TEMP].loc[sel].plot(linestyle="--")
+hist = default[SURFACE_TEMP].loc[1900:2016]
+hist.plot(label="historical", color="black")
+plt.title("DAU with equilibrium climate sensitivity set to 1.5, 3, and 4.5")
+plt.ylabel("Deg. C")
+plt.legend(("DAU", "Historical", "Sensitivity Range"), loc="upper left")
+plt.savefig(
+    fname="podi/data/figs/sensitivity",
+    format="png",
+    bbox_inches="tight",
+    pad_inches=0.1,
+)
+plt.show()
+plt.clf()
+
+# endregion
+'''
+# endregion
+
+###############################
+# PROJECTED RADIATIVE FORCING #
+###############################
+
+# region
+# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+FORCING = "forcing.Ftot"
+
+results = pyhector.run(rcp19)
+
+results[FORCING].loc[1900:2100].plot(linestyle="--")
+hist = default[FORCING].loc[1900:2016]
+hist.plot(label="historical", color="black", figsize=(10, 5))
+plt.title("DAU: " + pyhector.output[FORCING]["description"])
+plt.ylabel(pyhector.output[FORCING]["unit"])
+plt.legend(("DAU", "Historical"), loc="upper left")
+plt.savefig(
+    fname="podi/data/figs/forcing",
+    format="png",
+    bbox_inches="tight",
+    pad_inches=0.1,
+)
+
+# endregion
+
+#####################################
+# PROJECTED CO2 EMISSIONS BY REGION #
+#####################################
+
+# region
+# from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb
+
+df = read_datapackage("https://github.com/openclimatedata/edgar-co2-emissions")
+unit = "kt"
+df = (
+    df.reset_index()
+    .drop("Name", axis=1)
+    .set_index(["Code", "Sector", "Year"])
+    .sort_index()
+)
+
+for code in ["USA", "CHN"]:
+    grouped = (
+        df.loc[code].reset_index().set_index("Year").groupby("Sector")["Emissions"]
+    )
+
+    fig, axes = plt.subplots(nrows=1, ncols=4, figsize=(12, 4), sharey=True)
+    try:
+        name = to_name(code)
+    except KeyError:
+        name = code
+    fig.suptitle(name)
+    sectors = [
+        "Power Industry",
+        "Transport",
+        "Buildings",
+        "Other industrial combustion",
+    ]
+    for (key, ax) in zip(sectors, axes):
+        ax.set_title(key, fontsize=10)
+        grouped.get_group(key).plot(ax=ax, legend=False)
+        ax.set_ylabel(unit)
+    plt.savefig(
+        fname=("podi/data/figs/emissions-" + code).replace(" ", ""),
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
+    )
+plt.clf()
+# endregion
+
+###########################
+# PROJECTED GHG EMISSIONS #
+###########################
+
+# region
+
+# ABSOLUTE
+
+emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
+names = ["CO2", "CH4", "N2O"]
+units = ["Gt C", "Mt CH4", "Mt N2O"]
+mult = [1, 1, 0.001]
+i = 0
+
+for emission in emissions:
+    fig = plt.plot(
+        rcp19[emission].loc[2000:2100] * mult[i],
+        linestyle="--",
+        color=(0.560, 0.792, 0.740),
+    )
+    plt.plot(rcp19[emission].loc[2000:2016] * mult[i], color="black")
+    plt.ylabel(units[i])
+    plt.title("DAU Net Emissions, " + names[i])
+    plt.savefig(
+        fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
+    )
+    plt.show()
+    i = i + 1
+plt.clf()
+
+# IN CO2e UNITS
+
+emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
+names = ["CO2", "CH4", "N2O"]
+units = ["GtCO2e", "GtCO2e", "GtCO2e"]
+mult = [3.67, 1e-3, 1e-3]
+gwp = [1, 28, 265]
+j = 0
+
+for emission in emissions:
+    fig = plt.plot(
+        rcp19[emission].loc[2000:2100] * mult[j] * gwp[j],
+        linestyle="--",
+        color=(0.560, 0.792, 0.740),
+    )
+    plt.plot(rcp19[emission].loc[2000:2016] * mult[j] * gwp[j], color="black")
+    plt.ylabel(units[j])
+    plt.title("DAU Net Emissions, " + names[j])
+    plt.savefig(
+        fname=("podi/data/figs/emissions-" + names[j]).replace(" ", ""),
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
+    )
+    plt.show()
+    j = j + 1
+plt.clf()
+
+# Combined GHG
+
+mult = [3.67, 1e-3, 1e-3]
+gwp = [1, 28, 265]
+i = 0
+
+fig = plt.plot(
+    rcp19.loc[2000:2100] * mult[i] * gwp[i],
+    linestyle="--",
+    color=(0.560, 0.792, 0.740),
+)
+plt.plot(rcp19.loc[2000:2016] * mult[i] * gwp[i], color="black")
+plt.ylabel("GtCO2e")
+plt.title("DAU Net Emissions, " + names[i])
+plt.savefig(
+    fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
+    format="png",
+    bbox_inches="tight",
+    pad_inches=0.1,
+)
+plt.show()
+plt.clf()
+
+# endregion
+
+###########################################
+# PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
+###########################################
+
+# region
+# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+CONCENTRATION_CO2 = "simpleNbox.Ca"
+
+results = pyhector.run(rcp19)
+
+results[CONCENTRATION_CO2].loc[1900:2100].plot(
+    linestyle="--", color=(0.560, 0.792, 0.740)
+)
+hist = default[CONCENTRATION_CO2].loc[1900:2016]
+hist.plot(label="historical", color="black", figsize=(10, 5))
+plt.title("DAU: " + pyhector.output[CONCENTRATION_CO2]["description"])
+plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
+plt.legend(("DAU", "Historical"), loc="upper left")
+plt.savefig(
+    fname=("podi/data/figs/co2conc").replace(" ", ""),
+    format="png",
+    bbox_inches="tight",
+    pad_inches=0.1,
+)
+plt.show()
+plt.clf()
+
+# endregion
+
+################################
+# ENERGY INTENSITY PROJECTIONS #
+################################
+
+# region
+# https://github.com/iiasa/ipcc_sr15_scenario_analysis/blob/master/further_analysis/iamc15_energy_intensity.ipynb
+
+# endregion
+
+###############################
+# ECONOMIC GROWTH PROJECTIONS #
+###############################
+
+# region
+# https://github.com/iiasa/ipcc_sr15_scenario_analysis/blob/master/further_analysis/iamc15_gdp_per_capita.ipynb
+# endregion
+
