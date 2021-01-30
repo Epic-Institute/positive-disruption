@@ -391,7 +391,7 @@ group_keys = {
 }
 
 scenario = "baseline"
-chart_type = "stack"
+chart_type = ""
 fig_type = ""
 
 if chart_type == "stack":

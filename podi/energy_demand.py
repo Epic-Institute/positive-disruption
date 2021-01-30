@@ -4,7 +4,11 @@
 
 import pandas as pd
 from podi.curve_smooth import curve_smooth
+import numpy as np
+from podi.curve_smooth import curve_smooth
 from numpy import NaN
+import podi.data.gcam_etl
+import podi.data.iea_weo_etl
 
 data_start_year = 2010
 data_end_year = 2019
@@ -71,15 +75,23 @@ def energy_demand(
     cdr_demand,
 ):
 
-    ##################################
-    #  DEFINE AND REALLOCATE DEMAND  #
-    ##################################
+    ############################
+    #  LOAD DEMAND INPUT DATA  #
+    ############################
 
     # region
 
     # Load energy demand historical data (TWh) and projections (% change)
     energy_demand_historical = pd.read_csv(demand_historical)
     energy_demand_projection = pd.read_csv(demand_projection)
+
+    # endregion
+
+    ##################################
+    #  DEFINE AND REALLOCATE DEMAND  #
+    ##################################
+
+    # region
 
     # Define energy demand as timeseries consisting of historical data (TWh) and projections (% change)
     energy_demand = energy_demand_historical.merge(
