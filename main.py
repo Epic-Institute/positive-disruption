@@ -3,7 +3,7 @@
 # region
 
 from podi.socioeconomics import socioeconomics
-from podi.energy_demand import energy_demand
+from podi.energy_demand import energy_demand, data_start_year, data_end_year
 from podi.energy_supply import energy_supply, long_proj_end_year
 from podi.afolu import afolu
 from podi.results_analysis import results_analysis
@@ -29,7 +29,6 @@ from podi.climate import climate
 import time
 from datetime import timedelta
 import numpy as np
-from podi.energy_demand import data_start_year, data_end_year
 from pandas_profiling import ProfileReport
 import streamlit as st
 

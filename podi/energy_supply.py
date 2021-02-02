@@ -14,8 +14,8 @@ from podi.energy_demand import (
     data_end_year,
 )
 
-near_proj_start_year = 2020
-near_proj_end_year = 2021
+near_proj_start_year = data_end_year + 1
+near_proj_end_year = near_proj_start_year + 1
 long_proj_start_year = near_proj_end_year + 1
 long_proj_end_year = 2100
 energy_oversupply_prop = 0.0
@@ -70,8 +70,7 @@ def energy_supply(scenario, energy_demand):
         )
         .values
     )
-    """
-    """
+
     heat_gen_data.loc[
         slice(None), slice(None), "Other sources", scenario, slice(None)
     ] = (
@@ -93,7 +92,6 @@ def energy_supply(scenario, energy_demand):
         .values
     )
     """
-
     transport_data = (
         energy_demand.loc[
             slice(None),
@@ -222,12 +220,32 @@ def energy_supply(scenario, energy_demand):
 
         perc = perc.apply(lambda x: x.div(perc.sum()), axis=1)
 
+        # harmonizing historical to projection
+        def harmonize(perc, near_proj_per_elec_consump):
+            if (
+                abs(
+                    near_proj_per_elec_consump.loc[perc.name, data_end_year]
+                    - perc.loc[data_end_year + 1]
+                )
+                > 0.03
+            ):
+                perc.loc[data_end_year + 1 :] = perc.loc[data_end_year + 1 :].subtract(
+                    (
+                        perc.loc[data_end_year + 1]
+                        - near_proj_per_elec_consump.loc[perc.name, data_end_year]
+                    )
+                )
+                return perc
+            else:
+                return perc
+
+        perc = perc.apply(
+            harmonize, near_proj_per_elec_consump=near_proj_per_elec_consump, axis=1
+        )
+
         # set fossil fuel generation to fill balance
 
         if scenario == "pathway":
-            """
-            perc.loc["Fossil fuels"] = perc.loc[['Fossil fuels, "Coal", "Oil", "Natural gas"]].sum()
-            """
             perc.loc["Fossil fuels"] = (
                 1
                 - perc.loc[
@@ -241,7 +259,7 @@ def energy_supply(scenario, energy_demand):
                         "Geothermal",
                     ]
                 ].sum()
-            )
+            ).clip(upper=1, lower=0)
 
         return perc
 
@@ -385,13 +403,13 @@ def energy_supply(scenario, energy_demand):
 
     # historical percent of total heat consumption met by a given technology (propotion)
     def hist_per_heat_consump(region, scenario, hist_heat_consump):
-
         return hist_heat_consump.div(hist_heat_consump.sum())
 
     # nearterm projected heat consumption
     def near_proj_heat_consump(region, scenario):
-        near_proj_start_year = data_end_year + 1
-        near_proj_end_year = data_end_year + 1
+        # near_proj_start_year = data_end_year
+        # near_proj_end_year = data_end_year
+        # long_proj_start_year = near_proj_end_year + 1
         return hist_heat_consump(region, scenario)
 
     # nearterm projected percent of total heat consumption met by a given technology (proportion)
@@ -402,29 +420,8 @@ def energy_supply(scenario, energy_demand):
         hist_per_heat_consump,
         near_proj_heat_consump,
     ):
-        if scenario == "baseline":
-            foo = hist_per_heat_consump
-            return foo
-        else:
-            foo = near_proj_heat_consump.div(near_proj_heat_consump.sum())
 
-            # normalize to historical data
-            foo = (
-                foo.pct_change(axis=1)
-                .replace(NaN, 0)
-                .loc[:, str(near_proj_start_year) :]
-                .apply(lambda x: x + 1, axis=1)
-            )
-
-            foo = hist_per_heat_consump.loc[:, : str(data_end_year - 1)].join(
-                (
-                    (
-                        hist_per_heat_consump.loc[:, str(data_end_year) :].join(foo)
-                    ).cumprod(axis=1)
-                )
-            )
-
-        return foo
+        return near_proj_heat_consump.div(near_proj_heat_consump.sum())
 
     # longterm projected percent of total heat consumption met by a given technology (proportion)
     def proj_per_heat_consump(region, near_proj_per_heat_consump):
@@ -444,24 +441,42 @@ def energy_supply(scenario, energy_demand):
         for i in range(0, len(foo.index)):
             perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
 
-        perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
+        perc = pd.DataFrame(perc).set_index(foo.index)
 
-        perc = perc.apply(lambda x: x.div(perc.sum()), axis=1)
+        # harmonizing historical to projection
+        def harmonize(perc, near_proj_per_heat_consump):
+            if (
+                abs(
+                    near_proj_per_heat_consump.loc[perc.name, data_end_year]
+                    - perc.loc[data_end_year + 1]
+                )
+                > 0.03
+            ):
+                perc.loc[data_end_year + 1 :] = perc.loc[data_end_year + 1 :].subtract(
+                    (
+                        perc.loc[data_end_year + 1]
+                        - near_proj_per_heat_consump.loc[perc.name, data_end_year]
+                    )
+                )
+                return perc
+            else:
+                return perc
+
+        perc = perc.apply(
+            harmonize, near_proj_per_heat_consump=near_proj_per_heat_consump, axis=1
+        )
 
         # set fossil fuel generation to fill balance
 
         if scenario == "pathway":
-            """
-            perc.loc["Fossil fuels"] = perc.loc[["Coal", "Oil", "Natural gas"]].sum()
-            """
             perc.loc["Fossil fuels"] = (
                 1
                 - perc.loc[
                     ["Bioenergy", "Waste", "Nuclear", "Geothermal", "Solar thermal"]
                 ].sum()
-            )
+            ).clip(upper=1, lower=0)
 
-        return perc
+        return perc.loc[:, data_end_year + 1 :]
 
     # project heat consumption met by a given technology
     def proj_heat_consump(region, scenario, proj_per_heat_consump):
@@ -667,12 +682,36 @@ def energy_supply(scenario, energy_demand):
 
         perc = perc.apply(lambda x: x.div(perc.sum()), axis=1)
 
+        # harmonizing historical to projection
+        def harmonize(perc, near_proj_per_transport_consump):
+            if (
+                abs(
+                    near_proj_per_transport_consump.loc[perc.name, data_end_year]
+                    - perc.loc[data_end_year + 1]
+                )
+                > 0.03
+            ):
+                perc.loc[data_end_year + 1 :] = perc.loc[data_end_year + 1 :].subtract(
+                    (
+                        perc.loc[data_end_year + 1]
+                        - near_proj_per_transport_consump.loc[perc.name, data_end_year]
+                    )
+                )
+                return perc
+            else:
+                return perc
+
+        perc = perc.apply(
+            harmonize,
+            near_proj_per_transport_consump=near_proj_per_transport_consump,
+            axis=1,
+        )
+
         # set fossil fuel generation to fill balance
         if scenario == "pathway":
-            """
-            perc.loc["Fossil fuels"] = perc.loc[["Oil", "Other fuels"]].sum()
-            """
-            perc.loc["Fossil fuels"] = 1 - perc.loc[["Bioenergy", "Other fuels"]].sum()
+            perc.loc["Fossil fuels"] = 1 - perc.loc[
+                ["Bioenergy", "Other fuels"]
+            ].sum().clip(upper=1, lower=0)
         return perc
 
     # project transport consumption met by a given technology

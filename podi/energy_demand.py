@@ -5,10 +5,7 @@
 import pandas as pd
 from podi.curve_smooth import curve_smooth
 import numpy as np
-from podi.curve_smooth import curve_smooth
 from numpy import NaN
-import podi.data.gcam_etl
-import podi.data.iea_weo_etl
 
 data_start_year = 2010
 data_end_year = 2019
