@@ -282,6 +282,7 @@ for i in range(0, len(iea_region_list)):
         .clip(upper=1)
     )
 
+"""
 adoption_curves_hist = pd.DataFrame(adoption_curves.loc[:, :data_end_year])
 
 adoption_curves_proj = curve_smooth(
@@ -291,33 +292,7 @@ adoption_curves_proj = curve_smooth(
 adoption_curves = (adoption_curves_hist.join(adoption_curves_proj)).clip(
     upper=1, lower=0
 )
-
-# endregion
-
-##########
-# CHARTS #
-##########
 """
-# region
-
-charts(
-    energy_demand_baseline,
-    energy_demand_pathway,
-    adoption_curves,
-    em_targets_pathway,
-    em_mitigated,
-)
-
-# endregion
-"""
-##################
-# SOCIOECONOMICS #
-##################
-
-# region
-
-# podi.socioeconomics
-
 # endregion
 
 end_time = time.monotonic()
