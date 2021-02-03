@@ -355,7 +355,7 @@ scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
-tech_list = ['Electricity-Solar', 'Electricity-Wind', 'Electricity-Nuclear', 'Electricity-Other ren', 'Heat-Solar thermal', 'Heat-Biochar', 'Heat-Bioenergy', 'Heat-Fossil fuels', 'Transport-Fossil fuels', 'Electricity-Fossil fuels', 'Transport-Bioenergy']
+tech_list = ['Electricity-Solar', 'Electricity-Wind', 'Electricity-Nuclear', 'Electricity-Other ren', 'Heat-Solar thermal', 'Heat-Biochar', 'Heat-Bioenergy', 'Heat-Fossil fuels', 'Transport-Fossil fuels', 'Electricity-Fossil fuels', 'Transport-Bioenergy & H2']
 
 group_keys = {
     ("Electricity", "Biomass and waste"): 'Electricity-Other ren',
@@ -377,8 +377,8 @@ group_keys = {
     ("Heat", "Solar thermal"): 'Heat-Solar thermal',
     ("Heat", "Waste"): 'Heat-Biochar',
     ("Transport", "Oil"): 'Transport-Fossil fuels',
-    ("Transport", "Bioenergy"): 'Transport-Bioenergy',
-    ("Transport", "Other fuels"): 'Transport-Fossil fuels',
+    ("Transport", "Bioenergy"): 'Transport-Bioenergy & H2',
+    ("Transport", "Other fuels"): 'Transport-Bioenergy & H2',
     ("Transport", "Fossil fuels"): 'Transport-Fossil fuels',
 }
 
