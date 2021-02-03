@@ -351,318 +351,36 @@ if chart_type == "line":
 
 # region
 
-tech_list = [
-    ("Electricity", "Solar"),
-    ("Electricity", "Wind"),
-    ("Electricity", "Nuclear"),
-    ("Electricity", "Other renewables"),
-    ("Heat", "Solar thermal"),
-    ("Heat", "Biochar"),
-    ("Heat", "Bioenergy"),
-    ("Transport", "Bioenergy"),
-    ("Electricity", "Fossil fuels"),
-    ("Heat", "Fossil fuels"),
-    ("Transport", "Fossil fuels"),
-]
-
-group_keys = {
-    ("Electricity", "Biomass and waste"): ("Electricity", "Other renewables"),
-    ("Electricity", "Fossil fuels"): ("Electricity", "Fossil fuels"),
-    ("Electricity", "Geothermal"): ("Electricity", "Other renewables"),
-    ("Electricity", "Hydroelectricity"): ("Electricity", "Other renewables"),
-    ("Electricity", "Tide and wave"): ("Electricity", "Other renewables"),
-    ("Electricity", "Nuclear"): ("Electricity", "Nuclear"),
-    ("Electricity", "Solar"): ("Electricity", "Solar"),
-    ("Electricity", "Wind"): ("Electricity", "Wind"),
-    ("Heat", "Fossil fuels"): ("Heat", "Fossil fuels"),
-    ("Heat", "Bioenergy"): ("Heat", "Bioenergy"),
-    ("Heat", "Coal"): ("Heat", "Fossil fuels"),
-    ("Heat", "Geothermal"): ("Heat", "Geothermal"),
-    ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
-    ("Heat", "Nuclear"): ("Heat", "Nuclear"),
-    ("Heat", "Oil"): ("Heat", "Fossil fuels"),
-    ("Heat", "Other sources"): ("Heat", "Fossil fuels"),
-    ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),
-    ("Heat", "Waste"): ("Heat", "Biochar"),
-    ("Transport", "Oil"): ("Transport", "Fossil fuels"),
-    ("Transport", "Bioenergy"): ("Transport", "Bioenergy"),
-    ("Transport", "Other fuels"): ("Transport", "Bioenergy"),
-    ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
-}
-
 scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
-if chart_type == "stacked":
-    for i in range(0, len(iea_region_list)):
-        elec_consump_i = (
-            elec_consump.loc[iea_region_list[i], slice(None), scenario]
-            .groupby("Metric")
-            .sum()
-        )
-        elec_consump_i = pd.concat(
-            [elec_consump_i], keys=["Electricity"], names=["Sector"]
-        )
-        heat_consump_i = (
-            heat_consump.loc[iea_region_list[i], slice(None), scenario]
-            .groupby("Metric")
-            .sum()
-        )
-        heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
-        transport_consump_i = (
-            transport_consump.loc[iea_region_list[i], slice(None), scenario]
-            .groupby("Metric")
-            .sum()
-        )
-        transport_consump_i = pd.concat(
-            [transport_consump_i], keys=["Transport"], names=["Sector"]
-        )
-        fig = (
-            pd.DataFrame(
-                (elec_consump_i.append(heat_consump_i).append(transport_consump_i)).loc[
-                    :, 2010:2100
-                ]
-            )
-            * unit[1]
-        )
-        fig = fig.groupby(group_keys).sum()
-        fig = fig.reindex(tech_list)
-
-        if fig_type == "plotly":
-            fig = fig.T
-            fig.index.name = "Year"
-            fig.reset_index(inplace=True)
-            fig2 = pd.melt(
-                fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0]
-            )
-            fig = px.area(
-                fig2,
-                x="Year",
-                y="TFC, " + unit[0],
-                line_group="Sector",
-                color="Sector",
-                color_discrete_sequence=px.colors.qualitative.Safe,
-                title="Energy Supply, "
-                + scenario.replace(" ", "").title()
-                + ", "
-                + iea_region_list[i],
-                hover_data={"TFC, " + unit[0]: ":.0f"},
-            )
-            fig.update_layout(title_x=0.5)
-            fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-            if show_figs is True:
-                fig.show()
-            if save_figs is True:
-                pio.write_html(
-                    fig,
-                    file=(
-                        "./charts/supply-"
-                        + scenario
-                        + "-"
-                        + iea_region_list[i]
-                        + ".html"
-                    ).replace(" ", ""),
-                    auto_open=False,
-                )
-
-        else:
-
-            color2 = (
-                (0.645, 0.342, 0.138),
-                (0.285, 0.429, 0.621),
-                (0.564, 0.114, 0.078),
-                (0.603, 0.651, 0.717),
-                (0.747, 0.720, 0.240),
-                (0.624, 0.459, 0.450),
-                (0.594, 0.462, 0.153),
-                (0.165, 0.375, 0.102),
-                (0.000, 0.000, 0.000),
-                (0.267, 0.267, 0.267),
-                (0.651, 0.651, 0.651),
-            )
-
-            plt.figure(i)
-            plt.stackplot(
-                fig.columns.astype(int),
-                fig * unit[1],
-                labels=fig.index,
-                colors=color2,
-            )
-            plt.ylabel("TFC, " + unit[0])
-            plt.xlim([2010, 2100])
-            plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
-            plt.legend(loc=2, fontsize="small")
-            plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-            plt.show()
-            if save_figs is True:
-                plt.savefig(
-                    fname=(
-                        "podi/data/figs/supply-" + scenario + "-" + iea_region_list[i]
-                    ).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
-
-else:
-    for i in range(0, len(iea_region_list)):
-        elec_consump_i = (
-            elec_consump.loc[iea_region_list[i], slice(None), scenario]
-            .groupby("Metric")
-            .sum()
-        )
-        elec_consump_i = pd.concat(
-            [elec_consump_i], keys=["Electricity"], names=["Sector"]
-        )
-        heat_consump_i = (
-            heat_consump.loc[iea_region_list[i], slice(None)].groupby("Metric").sum()
-        )
-        heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
-        transport_consump_i = (
-            transport_consump.loc[
-                iea_region_list[i],
-                slice(None),
-            ]
-            .groupby("Metric")
-            .sum()
-        )
-        transport_consump_i = pd.concat(
-            [transport_consump_i], keys=["Transport"], names=["Sector"]
-        )
-        fig = pd.DataFrame(
-            (elec_consump_i.append(heat_consump_i).append(transport_consump_i)).loc[
-                :, 2010:2100
-            ]
-        )
-        fig = fig.groupby(group_keys).sum()
-        fig = fig.reindex(tech_list)
-
-        if fig_type == "plotly":
-            fig = fig.T
-            fig.index.name = "Year"
-            fig.reset_index(inplace=True)
-            fig2 = pd.melt(
-                fig,
-                id_vars="Year",
-                var_name="Sector",
-                value_name="TFC, " + unit[0],
-            )
-            fig = px.line(
-                fig2,
-                x="Year",
-                y="TFC, " + unit[0],
-                line_group="Sector",
-                color="Sector",
-                color_discrete_sequence=px.colors.qualitative.T10,
-                title="Energy Supply, " + iea_region_list[i],
-                hover_data={"TFC, " + unit[0]: ":.0f"},
-            )
-            fig.update_layout(title_x=0.5)
-            fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-            if show_figs is True:
-                fig.show()
-            if save_figs is True:
-                pio.write_html(
-                    fig,
-                    file=(
-                        "./charts/supply-"
-                        + scenario
-                        + "-"
-                        + iea_region_list[i]
-                        + ".html"
-                    ).replace(" ", ""),
-                    auto_open=False,
-                )
-
-        else:
-
-            color2 = (
-                (0.645, 0.342, 0.138),
-                (0.285, 0.429, 0.621),
-                (0.564, 0.114, 0.078),
-                (0.603, 0.651, 0.717),
-                (0.747, 0.720, 0.240),
-                (0.624, 0.459, 0.450),
-                (0.594, 0.462, 0.153),
-                (0.165, 0.375, 0.102),
-                (0.000, 0.000, 0.000),
-                (0.267, 0.267, 0.267),
-                (0.651, 0.651, 0.651),
-            )
-
-            plt.figure(i)
-            plt.plot(
-                fig.columns.astype(int),
-                fig.T * unit[1],
-            )
-            plt.ylabel("TFC, " + unit[0])
-            plt.xlim([2010, 2100])
-            plt.title("Energy Supply by Source & End-use, " + iea_region_list[i])
-            plt.legend(loc=2, fontsize="small")
-            plt.legend(labels=fig.index, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-            plt.show()
-            if save_figs is True:
-                plt.savefig(
-                    fname=(
-                        "podi/data/figs/supply-" + scenario + "-" + iea_region_list[i]
-                    ).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
-
-        plt.clf()
-
-# endregion
-
-################################################
-# ENERGY SUPPLY BY SOURCE & END-USE (ALT CATS) #
-################################################
-
-# region
-
-tech_list = [
-    ("Electricity", "Solar"),
-    ("Electricity", "Wind"),
-    ("Electricity", "Nuclear"),
-    ("Electricity", "Other renewables"),
-    ("Heat", "Solar thermal"),
-    ("Heat", "Bioenergy"),
-    ("Transport", "Bioenergy"),
-    ("Electricity", "Fossil fuels"),
-    ("Heat", "Fossil fuels"),
-    ("Transport", "Fossil fuels"),
-]
+tech_list = ['Electricity-Solar', 'Electricity-Wind', 'Electricity-Nuclear', 'Electricity-Other ren', 'Heat-Solar thermal', 'Heat-Biochar', 'Heat-Bioenergy', 'Heat-Fossil fuels', 'Transport-Fossil fuels', 'Electricity-Fossil fuels', 'Transport-Bioenergy']
 
 group_keys = {
-    ("Electricity", "Biomass and waste"): ("Electricity", "Other renewables"),
-    ("Electricity", "Fossil fuels"): ("Electricity", "Fossil fuels"),
-    ("Electricity", "Geothermal"): ("Electricity", "Other renewables"),
-    ("Electricity", "Hydroelectricity"): ("Electricity", "Other renewables"),
-    ("Electricity", "Tide and wave"): ("Electricity", "Other renewables"),
-    ("Electricity", "Nuclear"): ("Electricity", "Nuclear"),
-    ("Electricity", "Solar"): ("Electricity", "Solar"),
-    ("Electricity", "Wind"): ("Electricity", "Wind"),
-    ("Heat", "Fossil fuels"): ("Heat", "Fossil fuels"),
-    ("Heat", "Bioenergy"): ("Heat", "Bioenergy"),
-    ("Heat", "Coal"): ("Heat", "Fossil fuels"),
-    ("Heat", "Geothermal"): ("Heat", "Bioenergy"),
-    ("Heat", "Natural gas"): ("Heat", "Fossil fuels"),
-    ("Heat", "Nuclear"): ("Heat", "Nuclear"),
-    ("Heat", "Oil"): ("Heat", "Fossil fuels"),
-    ("Heat", "Other sources"): ("Heat", "Fossil fuels"),
-    ("Heat", "Solar thermal"): ("Heat", "Solar thermal"),
-    ("Heat", "Waste"): ("Heat", "Fossil fuels"),
-    ("Transport", "Oil"): ("Transport", "Fossil fuels"),
-    ("Transport", "Bioenergy"): ("Transport", "Bioenergy"),
-    ("Transport", "Other fuels"): ("Transport", "Bioenergy"),
-    ("Transport", "Fossil fuels"): ("Transport", "Fossil fuels"),
+    ("Electricity", "Biomass and waste"): 'Electricity-Other ren',
+    ("Electricity", "Fossil fuels"): 'Electricity-Fossil fuels',
+    ("Electricity", "Geothermal"): 'Electricity-Other ren',
+    ("Electricity", "Hydroelectricity"): 'Electricity-Other ren',
+    ("Electricity", "Tide and wave"): 'Electricity-Other ren',
+    ("Electricity", "Nuclear"): 'Electricity-Nuclear',
+    ("Electricity", "Solar"): 'Electricity-Solar',
+    ("Electricity", "Wind"): 'Electricity-Wind',
+    ("Heat", "Fossil fuels"): 'Heat-Fossil fuels',
+    ("Heat", "Bioenergy"): 'Heat-Bioenergy',
+    ("Heat", "Coal"): 'Heat-Fossil fuels',
+    ("Heat", "Geothermal"): 'Heat-Bioenergy',
+    ("Heat", "Natural gas"): 'Heat-Fossil fuels',
+    ("Heat", "Nuclear"): 'Heat-Bioenergy',
+    ("Heat", "Oil"): 'Heat-Fossil fuels',
+    ("Heat", "Other sources"): 'Heat-Fossil fuels',
+    ("Heat", "Solar thermal"): 'Heat-Solar thermal',
+    ("Heat", "Waste"): 'Heat-Biochar',
+    ("Transport", "Oil"): 'Transport-Fossil fuels',
+    ("Transport", "Bioenergy"): 'Transport-Bioenergy',
+    ("Transport", "Other fuels"): 'Transport-Fossil fuels',
+    ("Transport", "Fossil fuels"): 'Transport-Fossil fuels',
 }
-
-scenario = "pathway"
-chart_type = "stacked"
-fig_type = "plotly"
 
 if chart_type == "stacked":
     for i in range(0, len(iea_region_list)):
@@ -1625,37 +1343,6 @@ for i in range(0, len(iea_region_list)):
 
 year = 2030
 
-color = (
-    (0.999, 0.999, 0.999),
-    (0.928, 0.828, 0.824),
-    (0.688, 0.472, 0.460),
-    (0.572, 0.792, 0.744),
-    (0.536, 0.576, 0.432),
-    (0.384, 0.460, 0.560),
-    (0.904, 0.620, 0.384),
-    (0.488, 0.672, 0.736),
-    (0.560, 0.516, 0.640),
-    (0.284, 0.700, 0.936),
-    (0.384, 0.664, 0.600),
-    (0.999, 0.976, 0.332),
-    (0.748, 0.232, 0.204),
-)
-
-custom_legend = [
-    Line2D([0], [0], color=color[8], linewidth=4),
-    Line2D([0], [0], color=color[7], linewidth=4),
-    Line2D([0], [0], color=color[6], linewidth=4),
-    Line2D([0], [0], color=color[5], linewidth=4),
-    Line2D([0], [0], color=color[4], linewidth=4),
-    Line2D([0], [0], color=color[3], linewidth=4),
-    Line2D([0], [0], color=color[2], linewidth=4),
-    Line2D([0], [0], color=color[1], linewidth=4),
-    Line2D([0], [0], color=color[12], linewidth=2, linestyle="--", dashes=(2, 1, 0, 0)),
-    Line2D([0], [0], color=color[10], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
-    Line2D([0], [0], color=color[9], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
-    Line2D([0], [0], color=color[11], linewidth=2, linestyle=":", dashes=(2, 1, 0, 0)),
-]
-
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[
         iea_region_list[i], "Electricity", slice(None)
@@ -1734,7 +1421,9 @@ for i in range(0, len(iea_region_list)):
             7: "CDR",
         }
     )
+
     em_mit.loc[:, :2020] = 0
+
     em_mit.loc["Electricity"] = em_targets_pathway.loc["baseline PD20"].subtract(
         em_mit.drop(labels="Electricity").sum()
     )
@@ -1751,12 +1440,15 @@ for i in range(0, len(iea_region_list)):
             "Electricity",
         ]
     )
+
     figure = px.bar(
         fig,
         x=fig.index,
         y=year,
+        orientation='h',
         labels={"index": "Vector", str(year): "GtCO2e Mitigated in " + year},
-        title="V7 Opportunities, " + iea_region_list[i],
+        title="Climate Mitigation Potential in " + year + ', '+ iea_region_list[i] + '(GtCO2e/yr)',
+        width=0.8
     )
     figure.show()
 

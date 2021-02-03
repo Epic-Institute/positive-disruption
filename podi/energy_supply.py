@@ -9,6 +9,7 @@ from podi.data.bnef_etl import bnef_etl
 from podi.data.heat_etl import heat_etl
 from podi.energy_demand import iea_region_list
 from numpy import NaN
+from podi.curve_smooth import curve_smooth
 from podi.energy_demand import (
     data_start_year,
     data_end_year,
@@ -227,7 +228,7 @@ def energy_supply(scenario, energy_demand):
                     near_proj_per_elec_consump.loc[perc.name, data_end_year]
                     - perc.loc[data_end_year + 1]
                 )
-                > 0.03
+                > 0.003
             ):
                 perc.loc[data_end_year + 1 :] = perc.loc[data_end_year + 1 :].subtract(
                     (
@@ -274,7 +275,13 @@ def energy_supply(scenario, energy_demand):
             ),
             axis=1,
         )
-        return proj_consump
+        """
+        if scenario == "baseline":
+            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
+        else:
+            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
+        """
+        return proj_consump.clip(lower=0)
 
     # join timeseries of historical and projected electricity consumption met by a given technology
     def consump(region, hist_elec_consump, hist_per_elec_consump, proj_elec_consump):
@@ -450,7 +457,7 @@ def energy_supply(scenario, energy_demand):
                     near_proj_per_heat_consump.loc[perc.name, data_end_year]
                     - perc.loc[data_end_year + 1]
                 )
-                > 0.03
+                > 0.003
             ):
                 perc.loc[data_end_year + 1 :] = perc.loc[data_end_year + 1 :].subtract(
                     (
@@ -489,15 +496,13 @@ def energy_supply(scenario, energy_demand):
             ),
             axis=1,
         )
-
+        """
         proj_consump.loc["Solar thermal"] = (
             proj_per_heat_consump.loc["Solar thermal"].values
             * energy_demand.loc[region, "Buildings", "Heat"].loc[
                 :, str(near_proj_start_year) :
             ]
         ).values
-
-        """
             .add(
                 proj_per_heat_consump.loc["Solar thermal"].values
                 * energy_demand.loc[
@@ -510,7 +515,13 @@ def energy_supply(scenario, energy_demand):
             )
             ).values
         """
-        return proj_consump
+
+        if scenario == "baseline":
+            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
+        else:
+            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
+
+        return proj_consump.clip(lower=0)
 
     # join timeseries of historical and projected heat consumption met by a given technology
     def heat_consump(
@@ -535,10 +546,11 @@ def energy_supply(scenario, energy_demand):
             ["Coal", "Oil", "Natural gas", "Other sources"]
         ].sum()
 
+        """
         proj_per_heat_consump.loc["Fossil fuels"] = proj_per_heat_consump.loc[
             ["Coal", "Oil", "Natural gas", "Other sources"]
         ].sum()
-
+        """
         return hist_per_heat_consump.join(proj_per_heat_consump)
 
     # combine above functions to get heat consumption met by a given technology
@@ -689,7 +701,7 @@ def energy_supply(scenario, energy_demand):
                     near_proj_per_transport_consump.loc[perc.name, data_end_year]
                     - perc.loc[data_end_year + 1]
                 )
-                > 0.03
+                > 0.003
             ):
                 perc.loc[data_end_year + 1 :] = perc.loc[data_end_year + 1 :].subtract(
                     (
@@ -728,7 +740,13 @@ def energy_supply(scenario, energy_demand):
             ),
             axis=1,
         )
-        return proj_consump
+        """
+        if scenario == "baseline":
+            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
+        else:
+            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
+        """
+        return proj_consump.clip(lower=0)
 
     # join timeseries of historical and projected transport consumption met by a given technology
     def transport_consump(
