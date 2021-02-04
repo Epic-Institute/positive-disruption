@@ -471,7 +471,7 @@ def energy_supply(scenario, energy_demand):
 
         perc = perc.apply(
             harmonize, near_proj_per_heat_consump=near_proj_per_heat_consump, axis=1
-        )
+        ).clip(upper=1, lower=0)
 
         # set fossil fuel generation to fill balance
 
@@ -479,7 +479,13 @@ def energy_supply(scenario, energy_demand):
             perc.loc["Fossil fuels"] = (
                 1
                 - perc.loc[
-                    ["Bioenergy", "Waste", "Nuclear", "Geothermal", "Solar thermal"]
+                    [
+                        "Bioenergy",
+                        "Waste",
+                        "Geothermal",
+                        "Solar thermal",
+                        "Other sources",
+                    ]
                 ].sum()
             ).clip(upper=1, lower=0)
 
@@ -517,9 +523,9 @@ def energy_supply(scenario, energy_demand):
         """
 
         if scenario == "baseline":
-            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
+            proj_consump = curve_smooth(proj_consump, "quadratic", 6)
         else:
-            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
+            proj_consump = curve_smooth(proj_consump, "quadratic", 6)
 
         return proj_consump.clip(lower=0)
 
@@ -527,6 +533,10 @@ def energy_supply(scenario, energy_demand):
     def heat_consump(
         region, hist_heat_consump, hist_per_heat_consump, proj_heat_consump
     ):
+        hist_per_heat_consump.loc["Fossil fuels"] = hist_per_heat_consump.loc[
+            ["Coal", "Oil", "Natural gas", "Nuclear"]
+        ].sum()
+
         hist_heat_consump = hist_per_heat_consump.apply(
             lambda x: x
             * (

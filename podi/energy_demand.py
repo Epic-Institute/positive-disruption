@@ -405,7 +405,7 @@ def energy_demand(
 
     energy_demand_hist = energy_demand.loc[:, :data_end_year]
     energy_demand_proj = curve_smooth(
-        energy_demand.loc[:, (data_end_year + 1) :], "quadratic", 4
+        energy_demand.loc[:, (data_end_year + 1) :], "quadratic", 3
     )
 
     energy_demand = energy_demand_hist.join(energy_demand_proj).clip(lower=0)

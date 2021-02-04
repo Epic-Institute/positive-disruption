@@ -2785,7 +2785,7 @@ RUS ,Bioenergy,baseline,Transport,Saturation Point,2.97
 RUS ,Bioenergy,pathway,Transport,Saturation Point,100
 ASIAPAC ,Bioenergy,pathway,Electricity,Saturation Point,50
 ASIAPAC ,Bioenergy,baseline,Electricity,Saturation Point,0
-ASIAPAC ,Bioenergy,pathway,Heat,Saturation Point,0.32
+ASIAPAC ,Bioenergy,pathway,Heat,Saturation Point,28.5
 ASIAPAC ,Bioenergy,baseline,Heat,Saturation Point,4.3
 ASIAPAC ,Bioenergy,baseline,Transport,Saturation Point,2.97
 ASIAPAC ,Bioenergy,pathway,Transport,Saturation Point,100
@@ -4012,7 +4012,7 @@ EU ,Coal,pathway,Heat,"Parameter a, min",-0.2
 SAFR ,Coal,baseline,Electricity,"Parameter a, min",100
 SAFR ,Coal,pathway,Electricity,"Parameter a, min",0
 SAFR ,Coal,baseline,Heat,"Parameter a, min",100
-SAFR ,Coal,pathway,Heat,"Parameter a, min",-0.2
+SAFR ,Coal,pathway,Heat,"Parameter a, min",-0.3
 JPN ,Coal,baseline,Electricity,"Parameter a, min",100
 JPN ,Coal,pathway,Electricity,"Parameter a, min",0
 JPN ,Coal,baseline,Heat,"Parameter a, min",100
@@ -4032,15 +4032,15 @@ World ,Coal,pathway,Heat,"Parameter a, min",-0.2
 CSAM ,Coal,baseline,Electricity,"Parameter a, min",100
 CSAM ,Coal,pathway,Electricity,"Parameter a, min",0
 CSAM ,Coal,baseline,Heat,"Parameter a, min",100
-CSAM ,Coal,pathway,Heat,"Parameter a, min",-0.2
+CSAM ,Coal,pathway,Heat,"Parameter a, min",-0.3
 BRAZIL ,Coal,baseline,Electricity,"Parameter a, min",100
 BRAZIL ,Coal,pathway,Electricity,"Parameter a, min",0
 BRAZIL ,Coal,baseline,Heat,"Parameter a, min",100
-BRAZIL ,Coal,pathway,Heat,"Parameter a, min",-0.2
+BRAZIL ,Coal,pathway,Heat,"Parameter a, min",-0.3
 AFRICA ,Coal,baseline,Electricity,"Parameter a, min",100
 AFRICA ,Coal,pathway,Electricity,"Parameter a, min",0
 AFRICA ,Coal,baseline,Heat,"Parameter a, min",100
-AFRICA ,Coal,pathway,Heat,"Parameter a, min",-0.2
+AFRICA ,Coal,pathway,Heat,"Parameter a, min",-0.3
 ME ,Coal,baseline,Electricity,"Parameter a, min",100
 ME ,Coal,pathway,Electricity,"Parameter a, min",0
 ME ,Coal,baseline,Heat,"Parameter a, min",100
@@ -4264,7 +4264,7 @@ EU ,Coal,pathway,Heat,Saturation Point,22.8
 SAFR ,Coal,baseline,Electricity,Saturation Point,0
 SAFR ,Coal,pathway,Electricity,Saturation Point,0
 SAFR ,Coal,baseline,Heat,Saturation Point,42.9
-SAFR ,Coal,pathway,Heat,Saturation Point,2
+SAFR ,Coal,pathway,Heat,Saturation Point,51
 JPN ,Coal,baseline,Electricity,Saturation Point,0
 JPN ,Coal,pathway,Electricity,Saturation Point,0
 JPN ,Coal,baseline,Heat,Saturation Point,42.9
@@ -4284,15 +4284,15 @@ World ,Coal,pathway,Heat,Saturation Point,42.9
 CSAM ,Coal,baseline,Electricity,Saturation Point,0
 CSAM ,Coal,pathway,Electricity,Saturation Point,0
 CSAM ,Coal,baseline,Heat,Saturation Point,42.9
-CSAM ,Coal,pathway,Heat,Saturation Point,6
+CSAM ,Coal,pathway,Heat,Saturation Point,51
 BRAZIL ,Coal,baseline,Electricity,Saturation Point,0
 BRAZIL ,Coal,pathway,Electricity,Saturation Point,0
 BRAZIL ,Coal,baseline,Heat,Saturation Point,42.9
-BRAZIL ,Coal,pathway,Heat,Saturation Point,6
+BRAZIL ,Coal,pathway,Heat,Saturation Point,51
 AFRICA ,Coal,baseline,Electricity,Saturation Point,0
 AFRICA ,Coal,pathway,Electricity,Saturation Point,0
 AFRICA ,Coal,baseline,Heat,Saturation Point,42.9
-AFRICA ,Coal,pathway,Heat,Saturation Point,6
+AFRICA ,Coal,pathway,Heat,Saturation Point,51
 ME ,Coal,baseline,Electricity,Saturation Point,0
 ME ,Coal,pathway,Electricity,Saturation Point,0
 ME ,Coal,baseline,Heat,Saturation Point,42.9
@@ -12672,7 +12672,7 @@ EUR ,Other sources,pathway,Heat,"Parameter a, max",0
 EUR ,Other sources,baseline,Heat,"Parameter a, max",100
 EU ,Other sources,pathway,Heat,"Parameter a, max",0
 EU ,Other sources,baseline,Heat,"Parameter a, max",100
-SAFR ,Other sources,pathway,Heat,"Parameter a, max",0
+SAFR ,Other sources,pathway,Heat,"Parameter a, max",-0.14
 SAFR ,Other sources,baseline,Heat,"Parameter a, max",100
 JPN ,Other sources,pathway,Heat,"Parameter a, max",0
 JPN ,Other sources,baseline,Heat,"Parameter a, max",100
@@ -12682,11 +12682,11 @@ NonOECD ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 NonOECD ,Other sources,baseline,Heat,"Parameter a, max",100
 World ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 World ,Other sources,baseline,Heat,"Parameter a, max",100
-CSAM ,Other sources,pathway,Heat,"Parameter a, max",-0.1
+CSAM ,Other sources,pathway,Heat,"Parameter a, max",-0.14
 CSAM ,Other sources,baseline,Heat,"Parameter a, max",100
-BRAZIL ,Other sources,pathway,Heat,"Parameter a, max",-0.1
+BRAZIL ,Other sources,pathway,Heat,"Parameter a, max",-0.14
 BRAZIL ,Other sources,baseline,Heat,"Parameter a, max",100
-AFRICA ,Other sources,pathway,Heat,"Parameter a, max",-0.1
+AFRICA ,Other sources,pathway,Heat,"Parameter a, max",-0.14
 AFRICA ,Other sources,baseline,Heat,"Parameter a, max",100
 ME ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 ME ,Other sources,baseline,Heat,"Parameter a, max",100
@@ -12714,7 +12714,7 @@ EUR ,Other sources,pathway,Heat,"Parameter a, min",-0.5
 EUR ,Other sources,baseline,Heat,"Parameter a, min",100
 EU ,Other sources,pathway,Heat,"Parameter a, min",-0.5
 EU ,Other sources,baseline,Heat,"Parameter a, min",100
-SAFR ,Other sources,pathway,Heat,"Parameter a, min",-0.5
+SAFR ,Other sources,pathway,Heat,"Parameter a, min",-0.3
 SAFR ,Other sources,baseline,Heat,"Parameter a, min",100
 JPN ,Other sources,pathway,Heat,"Parameter a, min",-0.5
 JPN ,Other sources,baseline,Heat,"Parameter a, min",100
@@ -12724,11 +12724,11 @@ NonOECD ,Other sources,pathway,Heat,"Parameter a, min",-0.5
 NonOECD ,Other sources,baseline,Heat,"Parameter a, min",100
 World ,Other sources,pathway,Heat,"Parameter a, min",-0.5
 World ,Other sources,baseline,Heat,"Parameter a, min",100
-CSAM ,Other sources,pathway,Heat,"Parameter a, min",-0.5
+CSAM ,Other sources,pathway,Heat,"Parameter a, min",-0.3
 CSAM ,Other sources,baseline,Heat,"Parameter a, min",100
-BRAZIL ,Other sources,pathway,Heat,"Parameter a, min",-0.5
+BRAZIL ,Other sources,pathway,Heat,"Parameter a, min",-0.3
 BRAZIL ,Other sources,baseline,Heat,"Parameter a, min",100
-AFRICA ,Other sources,pathway,Heat,"Parameter a, min",-0.5
+AFRICA ,Other sources,pathway,Heat,"Parameter a, min",-0.3
 AFRICA ,Other sources,baseline,Heat,"Parameter a, min",100
 ME ,Other sources,pathway,Heat,"Parameter a, min",-0.5
 ME ,Other sources,baseline,Heat,"Parameter a, min",100
@@ -12756,7 +12756,7 @@ EUR ,Other sources,pathway,Heat,"Parameter b, max",40
 EUR ,Other sources,baseline,Heat,"Parameter b, max",-100
 EU ,Other sources,pathway,Heat,"Parameter b, max",40
 EU ,Other sources,baseline,Heat,"Parameter b, max",-100
-SAFR ,Other sources,pathway,Heat,"Parameter b, max",40
+SAFR ,Other sources,pathway,Heat,"Parameter b, max",35
 SAFR ,Other sources,baseline,Heat,"Parameter b, max",-100
 JPN ,Other sources,pathway,Heat,"Parameter b, max",40
 JPN ,Other sources,baseline,Heat,"Parameter b, max",-100
@@ -12766,11 +12766,11 @@ NonOECD ,Other sources,pathway,Heat,"Parameter b, max",40
 NonOECD ,Other sources,baseline,Heat,"Parameter b, max",-100
 World ,Other sources,pathway,Heat,"Parameter b, max",40
 World ,Other sources,baseline,Heat,"Parameter b, max",-100
-CSAM ,Other sources,pathway,Heat,"Parameter b, max",40
+CSAM ,Other sources,pathway,Heat,"Parameter b, max",35
 CSAM ,Other sources,baseline,Heat,"Parameter b, max",-100
-BRAZIL ,Other sources,pathway,Heat,"Parameter b, max",40
+BRAZIL ,Other sources,pathway,Heat,"Parameter b, max",35
 BRAZIL ,Other sources,baseline,Heat,"Parameter b, max",-100
-AFRICA ,Other sources,pathway,Heat,"Parameter b, max",40
+AFRICA ,Other sources,pathway,Heat,"Parameter b, max",35
 AFRICA ,Other sources,baseline,Heat,"Parameter b, max",-100
 ME ,Other sources,pathway,Heat,"Parameter b, max",40
 ME ,Other sources,baseline,Heat,"Parameter b, max",-100
@@ -12798,7 +12798,7 @@ EUR ,Other sources,pathway,Heat,"Parameter b, min",0
 EUR ,Other sources,baseline,Heat,"Parameter b, min",-100
 EU ,Other sources,pathway,Heat,"Parameter b, min",0
 EU ,Other sources,baseline,Heat,"Parameter b, min",-100
-SAFR ,Other sources,pathway,Heat,"Parameter b, min",0
+SAFR ,Other sources,pathway,Heat,"Parameter b, min",35
 SAFR ,Other sources,baseline,Heat,"Parameter b, min",-100
 JPN ,Other sources,pathway,Heat,"Parameter b, min",0
 JPN ,Other sources,baseline,Heat,"Parameter b, min",-100
@@ -12808,11 +12808,11 @@ NonOECD ,Other sources,pathway,Heat,"Parameter b, min",0
 NonOECD ,Other sources,baseline,Heat,"Parameter b, min",-100
 World ,Other sources,pathway,Heat,"Parameter b, min",0
 World ,Other sources,baseline,Heat,"Parameter b, min",-100
-CSAM ,Other sources,pathway,Heat,"Parameter b, min",0
+CSAM ,Other sources,pathway,Heat,"Parameter b, min",35
 CSAM ,Other sources,baseline,Heat,"Parameter b, min",-100
-BRAZIL ,Other sources,pathway,Heat,"Parameter b, min",0
+BRAZIL ,Other sources,pathway,Heat,"Parameter b, min",35
 BRAZIL ,Other sources,baseline,Heat,"Parameter b, min",-100
-AFRICA ,Other sources,pathway,Heat,"Parameter b, min",0
+AFRICA ,Other sources,pathway,Heat,"Parameter b, min",35
 AFRICA ,Other sources,baseline,Heat,"Parameter b, min",-100
 ME ,Other sources,pathway,Heat,"Parameter b, min",0
 ME ,Other sources,baseline,Heat,"Parameter b, min",-100
@@ -12840,7 +12840,7 @@ EUR ,Other sources,pathway,Heat,Saturation Point,4.2
 EUR ,Other sources,baseline,Heat,Saturation Point,3.8
 EU ,Other sources,pathway,Heat,Saturation Point,3.7
 EU ,Other sources,baseline,Heat,Saturation Point,3.8
-SAFR ,Other sources,pathway,Heat,Saturation Point,88
+SAFR ,Other sources,pathway,Heat,Saturation Point,90
 SAFR ,Other sources,baseline,Heat,Saturation Point,3.8
 JPN ,Other sources,pathway,Heat,Saturation Point,88
 JPN ,Other sources,baseline,Heat,Saturation Point,3.8
@@ -14343,47 +14343,47 @@ ASEAN ,Solar thermal,pathway,Heat,"Parameter b, min",30
 DevelopingECO ,Solar thermal,baseline,Heat,"Parameter b, min",-100
 DevelopingECO ,Solar thermal,pathway,Heat,"Parameter b, min",30
  OECD ,Solar thermal,baseline,Heat,Saturation Point,0.016
- OECD ,Solar thermal,pathway,Heat,Saturation Point,100
+ OECD ,Solar thermal,pathway,Heat,Saturation Point,80
 NAM ,Solar thermal,baseline,Heat,Saturation Point,0.016
-NAM ,Solar thermal,pathway,Heat,Saturation Point,100
+NAM ,Solar thermal,pathway,Heat,Saturation Point,80
 US ,Solar thermal,baseline,Heat,Saturation Point,0.016
-US ,Solar thermal,pathway,Heat,Saturation Point,100
+US ,Solar thermal,pathway,Heat,Saturation Point,80
 EUR ,Solar thermal,baseline,Heat,Saturation Point,0.016
-EUR ,Solar thermal,pathway,Heat,Saturation Point,100
+EUR ,Solar thermal,pathway,Heat,Saturation Point,80
 EU ,Solar thermal,baseline,Heat,Saturation Point,0.016
-EU ,Solar thermal,pathway,Heat,Saturation Point,100
+EU ,Solar thermal,pathway,Heat,Saturation Point,80
 SAFR ,Solar thermal,baseline,Heat,Saturation Point,0.016
-SAFR ,Solar thermal,pathway,Heat,Saturation Point,100
+SAFR ,Solar thermal,pathway,Heat,Saturation Point,90
 JPN ,Solar thermal,baseline,Heat,Saturation Point,0.016
-JPN ,Solar thermal,pathway,Heat,Saturation Point,100
+JPN ,Solar thermal,pathway,Heat,Saturation Point,80
 AdvancedECO ,Solar thermal,baseline,Heat,Saturation Point,0.016
-AdvancedECO ,Solar thermal,pathway,Heat,Saturation Point,100
+AdvancedECO ,Solar thermal,pathway,Heat,Saturation Point,80
 NonOECD ,Solar thermal,baseline,Heat,Saturation Point,0.016
-NonOECD ,Solar thermal,pathway,Heat,Saturation Point,100
+NonOECD ,Solar thermal,pathway,Heat,Saturation Point,80
 World ,Solar thermal,baseline,Heat,Saturation Point,0.016
-World ,Solar thermal,pathway,Heat,Saturation Point,100
+World ,Solar thermal,pathway,Heat,Saturation Point,80
 CSAM ,Solar thermal,baseline,Heat,Saturation Point,0.016
-CSAM ,Solar thermal,pathway,Heat,Saturation Point,100
+CSAM ,Solar thermal,pathway,Heat,Saturation Point,90
 BRAZIL ,Solar thermal,baseline,Heat,Saturation Point,0.016
-BRAZIL ,Solar thermal,pathway,Heat,Saturation Point,100
+BRAZIL ,Solar thermal,pathway,Heat,Saturation Point,90
 AFRICA ,Solar thermal,baseline,Heat,Saturation Point,0.016
-AFRICA ,Solar thermal,pathway,Heat,Saturation Point,100
+AFRICA ,Solar thermal,pathway,Heat,Saturation Point,90
 ME ,Solar thermal,baseline,Heat,Saturation Point,0.016
-ME ,Solar thermal,pathway,Heat,Saturation Point,100
+ME ,Solar thermal,pathway,Heat,Saturation Point,80
 EURASIA ,Solar thermal,baseline,Heat,Saturation Point,0.016
-EURASIA ,Solar thermal,pathway,Heat,Saturation Point,100
+EURASIA ,Solar thermal,pathway,Heat,Saturation Point,80
 RUS ,Solar thermal,baseline,Heat,Saturation Point,0.016
-RUS ,Solar thermal,pathway,Heat,Saturation Point,100
+RUS ,Solar thermal,pathway,Heat,Saturation Point,80
 ASIAPAC ,Solar thermal,baseline,Heat,Saturation Point,0.016
-ASIAPAC ,Solar thermal,pathway,Heat,Saturation Point,100
+ASIAPAC ,Solar thermal,pathway,Heat,Saturation Point,80
 CHINA ,Solar thermal,baseline,Heat,Saturation Point,0.016
-CHINA ,Solar thermal,pathway,Heat,Saturation Point,100
+CHINA ,Solar thermal,pathway,Heat,Saturation Point,80
 INDIA ,Solar thermal,baseline,Heat,Saturation Point,0.016
-INDIA ,Solar thermal,pathway,Heat,Saturation Point,100
+INDIA ,Solar thermal,pathway,Heat,Saturation Point,80
 ASEAN ,Solar thermal,baseline,Heat,Saturation Point,0.016
-ASEAN ,Solar thermal,pathway,Heat,Saturation Point,100
+ASEAN ,Solar thermal,pathway,Heat,Saturation Point,80
 DevelopingECO ,Solar thermal,baseline,Heat,Saturation Point,0.016
-DevelopingECO ,Solar thermal,pathway,Heat,Saturation Point,100
+DevelopingECO ,Solar thermal,pathway,Heat,Saturation Point,80
  OECD ,Tide and wave,pathway,Electricity,Floor,0
  OECD ,Tide and wave,baseline,Electricity,Floor,0
 NAM ,Tide and wave,pathway,Electricity,Floor,0
@@ -15874,7 +15874,7 @@ EURASIA ,Waste,pathway,Heat,Saturation Point,15
 EURASIA ,Waste,baseline,Heat,Saturation Point,3.2
 RUS ,Waste,pathway,Electricity,Saturation Point,23
 RUS ,Waste,baseline,Electricity,Saturation Point,0
-RUS ,Waste,pathway,Heat,Saturation Point,2.1
+RUS ,Waste,pathway,Heat,Saturation Point,15
 RUS ,Waste,baseline,Heat,Saturation Point,3.2
 ASIAPAC ,Waste,pathway,Electricity,Saturation Point,23
 ASIAPAC ,Waste,baseline,Electricity,Saturation Point,0

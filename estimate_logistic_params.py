@@ -2,7 +2,7 @@
 
 """
 Fits the a and b parameters of a saturation-scaled logistic function to the time series of adoption data saved in the input CSV file. Can be called as: `python ./estimate_logistic_params.py <CSVFILEPATH>`
-Note that the CSV file should contain two columns,one called 't' that contains the time-step dataand one called 'Nt' that contains the adoption values at those time steps.To run the test on a simulated dataset, change the variable 'test' near the top of this file from False to True, then call as: `python ./estimate_logistic_params.py`
+Note that the CSV file should contain two columns,one called 't' that contains the time-step data and one called 'Nt' that contains the adoption values at those time steps.To run the test on a simulated dataset, change the variable 'test' near the top of this file from False to True, then call as: `python ./estimate_logistic_params.py`
 """
 
 from scipy.optimize import Bounds, differential_evolution
@@ -13,13 +13,9 @@ import sys
 
 ######
 # TODO
-# 1. decide if/how best to rescale the time data (perhaps by centering, since
-# currently centered on zero)
+# 1. decide if/how best to rescale the time data (perhaps by centering, since currently centered on zero)
 
-# 2. decide if/how best to transform the adoption data (since for now I have
-# assumed it is expressed as instantaneous levels of total adoption,
-# whereas the methodology slides mention that it should be expressed as percent
-# change
+# 2. decide if/how best to transform the adoption data (since for now I have assumed it is expressed as instantaneous levels of total adoption, whereas the methodology slides mention that it should be expressed as percent change
 
 
 ############
