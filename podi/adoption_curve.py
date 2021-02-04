@@ -4,8 +4,7 @@
 import warnings
 import pandas as pd
 import numpy as np
-from scipy.optimize import curve_fit, differential_evolution
-from numpy import NaN
+from scipy.optimize import differential_evolution
 
 
 def func(x, a, b, c, d):
@@ -140,7 +139,7 @@ def adoption_curve(value, region, scenario, sector):
             )
             / 100,
         ),
-    ]  # a  # b  # c
+    ]
 
     if scenario == "baseline":
         x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
@@ -168,7 +167,7 @@ def adoption_curve(value, region, scenario, sector):
     """
     print("genetic_parameters = ", genetic_parameters)
 
-    model_predictions = func(x_data, *fitted_parameters)
+    model_predictions = func(x_data, *genetic_parameters)
     print('model_predictions = ', model_predictions)
     abs_error = model_predictions - y_data
     print('abs_error = ', abs_error)
@@ -192,6 +191,7 @@ def adoption_curve(value, region, scenario, sector):
         2100 - pd.to_numeric(value.index[0]) + 1,
     ).astype(int)
 
+    """
     # set maximum annual growth rate
     max_growth = (
         pd.to_numeric(
@@ -202,8 +202,6 @@ def adoption_curve(value, region, scenario, sector):
         / 100
     )
 
-    """
-    # might need axis=1 in pct_change?
     y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
     for i in range(1, len(y_data)):
         y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
