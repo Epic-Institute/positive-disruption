@@ -475,19 +475,18 @@ def energy_supply(scenario, energy_demand):
 
         # set fossil fuel generation to fill balance
 
-        if scenario == "pathway":
-            perc.loc["Fossil fuels"] = (
-                1
-                - perc.loc[
-                    [
-                        "Bioenergy",
-                        "Waste",
-                        "Geothermal",
-                        "Solar thermal",
-                        "Other sources",
-                    ]
-                ].sum()
-            ).clip(upper=1, lower=0)
+        perc.loc["Fossil fuels"] = (
+            1
+            - perc.loc[
+                [
+                    "Bioenergy",
+                    "Waste",
+                    "Geothermal",
+                    "Solar thermal",
+                    "Other sources",
+                ]
+            ].sum()
+        ).clip(upper=1, lower=0)
 
         return perc.loc[:, data_end_year + 1 :]
 

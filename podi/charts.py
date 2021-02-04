@@ -351,7 +351,7 @@ if chart_type == "line":
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
 chart_type = "stacked"
 fig_type = "plotly"
 
