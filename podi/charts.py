@@ -351,7 +351,7 @@ if chart_type == "line":
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -1229,7 +1229,8 @@ for i in range(0, len(iea_region_list)):
             y="Emissions, GtCO2e",
             line_group="Sector",
             color="Sector",
-            color_discrete_sequence=px.colors.qualitative.T10,
+            # color_discrete_sequence=px.colors.qualitative.T10,
+            color_discrete_sequence=["#EDEDED", "#F58518", "#E45756", "#72B7B2", "#54A24B", "#EECA3B", "#B279A2", "#FF9DA6", "#9D755D", "#BAB0AC"],
             title="Emissions Mitigated, " + iea_region_list[i],
             hover_data={"Emissions, GtCO2e" : ":.0f"}, category_orders={'Sector': [spacer.name, 'Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR']}
         )

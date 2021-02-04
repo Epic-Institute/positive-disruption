@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import curve_fit, differential_evolution
 from numpy import NaN
-from podi.curve_smooth import curve_smooth
 
 
 def func(x, a, b, c, d):

@@ -76,28 +76,18 @@ def results_analysis(
     energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
     energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
-    transport_decarb = (
-        pd.DataFrame(transport_consump_pathway.loc[region, "Bioenergy", :])
-        .append(energy_demand_pathway.loc[region, "Transport", "Electricity"])
-        .sum()
-        .div(
+    transport_decarb = 1 - (
+        pd.DataFrame(transport_consump_pathway.loc[region, ["Fossil fuels"], :]).div(
             (
-                energy_demand_pathway.loc[
-                    region,
-                    "Transport",
-                    [
-                        "Oil",
-                        "Electricity",
-                        "Bioenergy",
-                        "Other fuels",
-                    ],
-                ].sum()
-            )
+                transport_consump_pathway.loc[
+                    region, ["Bioenergy", "Fossil fuels", "Other fuels"], :
+                ]
+            ).sum()
         )
-    )
+    ).droplevel(["Region", "Metric"])
 
-    transport_decarb = pd.DataFrame(transport_decarb).T
-    transport_decarb.rename(index={0: "Transport"}, inplace=True)
+    transport_decarb.index.name = ""
+    transport_decarb.rename(index={"pathway": "Transport"}, inplace=True)
 
     # endregion
 
@@ -137,7 +127,21 @@ def results_analysis(
             :,
         ]
         .sum()
-        .div(heat_consump_pathway.loc[region, slice(None), :].sum())
+        .div(
+            heat_consump_pathway.loc[
+                region,
+                [
+                    "Bioenergy",
+                    "Geothermal",
+                    "Nuclear",
+                    "Solar thermal",
+                    "Waste",
+                    "Other Sources",
+                    "Fossil fuels",
+                ],
+                :,
+            ].sum()
+        )
     )
 
     building_decarb = (

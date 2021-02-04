@@ -286,14 +286,13 @@ for i in range(0, len(iea_region_list)):
 adoption_curves_hist = pd.DataFrame(adoption_curves.loc[:, :data_end_year])
 
 adoption_curves_proj = curve_smooth(
-    pd.DataFrame(adoption_curves.loc[:, data_end_year + 1 :]), "quadratic", 100
+    pd.DataFrame(adoption_curves.loc[:, data_end_year + 1 :]), "quadratic", 6
 )
 
-adoption_curves = (adoption_curves_hist.join(adoption_curves_proj)).clip(
-    upper=1, lower=0
-)
+adoption_curves = (adoption_curves_hist.join(adoption_curves_proj)).clip(upper=1, lower=0)
 """
 # endregion
+
 
 end_time = time.monotonic()
 print(timedelta(seconds=end_time - start_time))
