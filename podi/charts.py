@@ -1283,7 +1283,7 @@ for i in range(0, len(iea_region_list)):
         }
     )
 
-    spacer = pd.Series(em_baseline.groupby('Region').sum().loc[iea_region_list[i]] - em_mit.sum()).replace(nan, 0).rename('Spacer').T
+    spacer = pd.Series(em_baseline.groupby('Region').sum().loc[iea_region_list[i]] - em_mit.sum()).replace(nan, 0).rename('').T
 
     '''
     if iea_region_list[i] == 'World ':
@@ -1300,16 +1300,7 @@ for i in range(0, len(iea_region_list)):
     em_targets_pathway.loc["baseline PD20"] = em_mit.append(spacer).sum()
 
     fig = ((em_mit.append(spacer)) / 1000).reindex(
-        [
-            'CDR',
-            'CH4, N2O, F-gases',
-            'Agriculture',
-            'Forests & Wetlands',
-            'Industry',
-            'Buildings',
-            'Transport',
-            'Electricity',
-            spacer.name]).loc[:, 2020:]
+        ['Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR', spacer.name]).loc[:, 2020:]
 
     if fig_type == 'plotly':
         fig = fig.T
@@ -1324,12 +1315,12 @@ for i in range(0, len(iea_region_list)):
             y="Emissions, GtCO2e",
             line_group="Sector",
             color="Sector",
-            # color_discrete_sequence=px.colors.qualitative.T10,
-            color_discrete_sequence=["#EDEDED", "#F58518", "#E45756", "#72B7B2", "#54A24B", "#EECA3B", "#B279A2", "#FF9DA6", "#9D755D", "#BAB0AC"],
+            color_discrete_sequence=["#EDEDED","#FF9DA6","#E45756", "#72B7B2","#54A24B", "#9D755D", "#F58518", "#EECA3B", "#B279A2"],
             title="Emissions Mitigated, " + iea_region_list[i],
-            hover_data={"Emissions, GtCO2e" : ":.0f"}, category_orders={'Sector': [spacer.name, 'Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR']}
+            hover_data={"Emissions, GtCO2e": ":.0f"}, category_orders={'Sector': [spacer.name, 'CDR','CH4, N2O, F-gases',  'Forests & Wetlands', 'Agriculture', 'Industry', 'Buildings','Transport', 'Electricity']}
         )
         fig.update_layout(title_x=0.5)
+
 
         if show_figs is True:
             fig.show()
@@ -1520,10 +1511,6 @@ for i in range(0, len(iea_region_list)):
 
     em_mit.loc[:, :2020] = 0
 
-    em_mit.loc["Electricity"] = em_targets_pathway.loc["baseline PD20"].subtract(
-        em_mit.drop(labels="Electricity").sum()
-    )
-
     fig = ((em_mit) / 1000).reindex(
         [
             "CDR",
@@ -1548,7 +1535,7 @@ for i in range(0, len(iea_region_list)):
     '''
     figure = go.Figure(go.Bar(x=fig.loc[:, 2030].values, y=fig.index, width=[0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8], orientation='h'))
 
-    figure.update_layout(title="Climate Mitigation Potential in 2030, " + iea_region_list[i] + '(GtCO2e/yr)') 
+    figure.update_layout(title="Climate Mitigation Potential in 2030, " + iea_region_list[i] + '(GtCO2e/yr)', title_x=0.5) 
 
     figure.show()
 
