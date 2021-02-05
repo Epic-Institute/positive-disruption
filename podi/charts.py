@@ -1315,12 +1315,11 @@ for i in range(0, len(iea_region_list)):
             y="Emissions, GtCO2e",
             line_group="Sector",
             color="Sector",
-            color_discrete_sequence=["#EDEDED","#FF9DA6","#E45756", "#72B7B2","#54A24B", "#9D755D", "#F58518", "#EECA3B", "#B279A2"],
+            color_discrete_sequence=["#EDEDED", "#FF9DA6", "#E45756", "#72B7B2", "#54A24B", "#9D755D", "#F58518", "#EECA3B", "#B279A2"],
             title="Emissions Mitigated, " + iea_region_list[i],
             hover_data={"Emissions, GtCO2e": ":.0f"}, category_orders={'Sector': [spacer.name, 'CDR','CH4, N2O, F-gases',  'Forests & Wetlands', 'Agriculture', 'Industry', 'Buildings','Transport', 'Electricity']}
         )
         fig.update_layout(title_x=0.5)
-
 
         if show_figs is True:
             fig.show()
@@ -1535,7 +1534,7 @@ for i in range(0, len(iea_region_list)):
     '''
     figure = go.Figure(go.Bar(x=fig.loc[:, 2030].values, y=fig.index, width=[0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8], orientation='h'))
 
-    figure.update_layout(title="Climate Mitigation Potential in 2030, " + iea_region_list[i] + '(GtCO2e/yr)', title_x=0.5) 
+    figure.update_layout(title="Climate Mitigation Potential in 2030, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated in 2030'})
 
     figure.show()
 
