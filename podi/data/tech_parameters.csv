@@ -2509,7 +2509,7 @@ BRAZIL ,Bioenergy,pathway,Transport,"Parameter b, max",37
 BRAZIL ,Bioenergy,baseline,Transport,"Parameter b, max",100
 AFRICA ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 AFRICA ,Bioenergy,baseline,Electricity,"Parameter b, max",40
-AFRICA ,Bioenergy,pathway,Heat,"Parameter b, max",100
+AFRICA ,Bioenergy,pathway,Heat,"Parameter b, max",200
 AFRICA ,Bioenergy,baseline,Heat,"Parameter b, max",-100
 AFRICA ,Bioenergy,pathway,Transport,"Parameter b, max",37
 AFRICA ,Bioenergy,baseline,Transport,"Parameter b, max",100
@@ -2761,7 +2761,7 @@ BRAZIL ,Bioenergy,baseline,Transport,Saturation Point,2.97
 BRAZIL ,Bioenergy,pathway,Transport,Saturation Point,100
 AFRICA ,Bioenergy,pathway,Electricity,Saturation Point,50
 AFRICA ,Bioenergy,baseline,Electricity,Saturation Point,0
-AFRICA ,Bioenergy,pathway,Heat,Saturation Point,28.5
+AFRICA ,Bioenergy,pathway,Heat,Saturation Point,13.5
 AFRICA ,Bioenergy,baseline,Heat,Saturation Point,4.3
 AFRICA ,Bioenergy,baseline,Transport,Saturation Point,2.97
 AFRICA ,Bioenergy,pathway,Transport,Saturation Point,100
@@ -7748,129 +7748,129 @@ ASEAN ,Hydroelectricity,baseline,Electricity,Max annual growth,100
 ASEAN ,Hydroelectricity,pathway,Electricity,Max annual growth,100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,Max annual growth,100
 DevelopingECO ,Hydroelectricity,pathway,Electricity,Max annual growth,100
- OECD ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+ OECD ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.01
  OECD ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 NAM ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 NAM ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-US ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+US ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 US ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-EUR ,Hydroelectricity,pathway,Electricity,"Parameter a, max",5
+EUR ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 EUR ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-EU ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+EU ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 EU ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 SAFR ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 SAFR ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-JPN ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+JPN ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.1
 JPN ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 AdvancedECO ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 AdvancedECO ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 NonOECD ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-World ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+World ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.1
 World ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 CSAM ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 CSAM ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 BRAZIL ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 BRAZIL ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-AFRICA ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+AFRICA ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.1
 AFRICA ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-ME ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+ME ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 ME ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 EURASIA ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-RUS ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+RUS ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.1
 RUS ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 ASIAPAC ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 ASIAPAC ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 CHINA ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.1
 CHINA ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-INDIA ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+INDIA ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.1
 INDIA ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-ASEAN ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+ASEAN ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.1
 ASEAN ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
- OECD ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+ OECD ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
  OECD ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 NAM ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 NAM ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-US ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+US ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 US ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-EUR ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0
+EUR ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 EUR ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-EU ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+EU ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 EU ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 SAFR ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 SAFR ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-JPN ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+JPN ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
 JPN ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 AdvancedECO ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 AdvancedECO ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 NonOECD ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-World ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+World ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
 World ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 CSAM ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 CSAM ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 BRAZIL ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 BRAZIL ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-AFRICA ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+AFRICA ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
 AFRICA ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-ME ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+ME ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 ME ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 EURASIA ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-RUS ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+RUS ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
 RUS ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 ASIAPAC ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 ASIAPAC ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 CHINA ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
 CHINA ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-INDIA ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+INDIA ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
 INDIA ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-ASEAN ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+ASEAN ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
 ASEAN ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
- OECD ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+ OECD ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
  OECD ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 NAM ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 NAM ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-US ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+US ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 US ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-EUR ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+EUR ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 EUR ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-EU ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+EU ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 EU ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 SAFR ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 SAFR ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-JPN ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+JPN ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 JPN ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 AdvancedECO ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 AdvancedECO ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 NonOECD ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-World ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+World ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 World ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 CSAM ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 CSAM ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 BRAZIL ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 BRAZIL ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-AFRICA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+AFRICA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 AFRICA ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-ME ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+ME ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 ME ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 EURASIA ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-RUS ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+RUS ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 RUS ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 ASIAPAC ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 ASIAPAC ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-CHINA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",50
+CHINA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 CHINA ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-INDIA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+INDIA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 INDIA ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-ASEAN ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+ASEAN ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 ASEAN ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
@@ -9414,19 +9414,19 @@ DevelopingECO ,Natural gas,pathway,Heat,"Parameter a, max",-0.1
 NAM ,Natural gas,baseline,Electricity,"Parameter a, min",100
 NAM ,Natural gas,pathway,Electricity,"Parameter a, min",-1
 NAM ,Natural gas,baseline,Heat,"Parameter a, min",100
-NAM ,Natural gas,pathway,Heat,"Parameter a, min",-1
+NAM ,Natural gas,pathway,Heat,"Parameter a, min",-0.2
 US ,Natural gas,baseline,Electricity,"Parameter a, min",100
 US ,Natural gas,pathway,Electricity,"Parameter a, min",-1
 US ,Natural gas,baseline,Heat,"Parameter a, min",100
-US ,Natural gas,pathway,Heat,"Parameter a, min",-1
+US ,Natural gas,pathway,Heat,"Parameter a, min",-0.2
 EUR ,Natural gas,baseline,Electricity,"Parameter a, min",100
 EUR ,Natural gas,pathway,Electricity,"Parameter a, min",-1
 EUR ,Natural gas,baseline,Heat,"Parameter a, min",100
-EUR ,Natural gas,pathway,Heat,"Parameter a, min",-1
+EUR ,Natural gas,pathway,Heat,"Parameter a, min",-0.2
 EU ,Natural gas,baseline,Electricity,"Parameter a, min",100
 EU ,Natural gas,pathway,Electricity,"Parameter a, min",-1
 EU ,Natural gas,baseline,Heat,"Parameter a, min",100
-EU ,Natural gas,pathway,Heat,"Parameter a, min",-1
+EU ,Natural gas,pathway,Heat,"Parameter a, min",-0.2
 SAFR ,Natural gas,baseline,Electricity,"Parameter a, min",100
 SAFR ,Natural gas,pathway,Electricity,"Parameter a, min",-1
 SAFR ,Natural gas,baseline,Heat,"Parameter a, min",100
@@ -9506,11 +9506,11 @@ US ,Natural gas,pathway,Heat,"Parameter b, max",30
 EUR ,Natural gas,baseline,Electricity,"Parameter b, max",100
 EUR ,Natural gas,pathway,Electricity,"Parameter b, max",50
 EUR ,Natural gas,baseline,Heat,"Parameter b, max",-100
-EUR ,Natural gas,pathway,Heat,"Parameter b, max",30
+EUR ,Natural gas,pathway,Heat,"Parameter b, max",20
 EU ,Natural gas,baseline,Electricity,"Parameter b, max",100
 EU ,Natural gas,pathway,Electricity,"Parameter b, max",50
 EU ,Natural gas,baseline,Heat,"Parameter b, max",-100
-EU ,Natural gas,pathway,Heat,"Parameter b, max",30
+EU ,Natural gas,pathway,Heat,"Parameter b, max",20
 SAFR ,Natural gas,baseline,Electricity,"Parameter b, max",100
 SAFR ,Natural gas,pathway,Electricity,"Parameter b, max",50
 SAFR ,Natural gas,baseline,Heat,"Parameter b, max",-100
@@ -12630,7 +12630,7 @@ EUR ,Other sources,pathway,Heat,"Parameter a, max",0
 EUR ,Other sources,baseline,Heat,"Parameter a, max",100
 EU ,Other sources,pathway,Heat,"Parameter a, max",0
 EU ,Other sources,baseline,Heat,"Parameter a, max",100
-SAFR ,Other sources,pathway,Heat,"Parameter a, max",-0.14
+SAFR ,Other sources,pathway,Heat,"Parameter a, max",0
 SAFR ,Other sources,baseline,Heat,"Parameter a, max",100
 JPN ,Other sources,pathway,Heat,"Parameter a, max",0
 JPN ,Other sources,baseline,Heat,"Parameter a, max",100
@@ -12640,11 +12640,11 @@ NonOECD ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 NonOECD ,Other sources,baseline,Heat,"Parameter a, max",100
 World ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 World ,Other sources,baseline,Heat,"Parameter a, max",100
-CSAM ,Other sources,pathway,Heat,"Parameter a, max",-0.14
+CSAM ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 CSAM ,Other sources,baseline,Heat,"Parameter a, max",100
-BRAZIL ,Other sources,pathway,Heat,"Parameter a, max",-0.14
+BRAZIL ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 BRAZIL ,Other sources,baseline,Heat,"Parameter a, max",100
-AFRICA ,Other sources,pathway,Heat,"Parameter a, max",-0.14
+AFRICA ,Other sources,pathway,Heat,"Parameter a, max",0
 AFRICA ,Other sources,baseline,Heat,"Parameter a, max",100
 ME ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 ME ,Other sources,baseline,Heat,"Parameter a, max",100
@@ -12714,7 +12714,7 @@ EUR ,Other sources,pathway,Heat,"Parameter b, max",40
 EUR ,Other sources,baseline,Heat,"Parameter b, max",-100
 EU ,Other sources,pathway,Heat,"Parameter b, max",40
 EU ,Other sources,baseline,Heat,"Parameter b, max",-100
-SAFR ,Other sources,pathway,Heat,"Parameter b, max",35
+SAFR ,Other sources,pathway,Heat,"Parameter b, max",40
 SAFR ,Other sources,baseline,Heat,"Parameter b, max",-100
 JPN ,Other sources,pathway,Heat,"Parameter b, max",40
 JPN ,Other sources,baseline,Heat,"Parameter b, max",-100
@@ -12724,11 +12724,11 @@ NonOECD ,Other sources,pathway,Heat,"Parameter b, max",40
 NonOECD ,Other sources,baseline,Heat,"Parameter b, max",-100
 World ,Other sources,pathway,Heat,"Parameter b, max",40
 World ,Other sources,baseline,Heat,"Parameter b, max",-100
-CSAM ,Other sources,pathway,Heat,"Parameter b, max",35
+CSAM ,Other sources,pathway,Heat,"Parameter b, max",20
 CSAM ,Other sources,baseline,Heat,"Parameter b, max",-100
-BRAZIL ,Other sources,pathway,Heat,"Parameter b, max",35
+BRAZIL ,Other sources,pathway,Heat,"Parameter b, max",20
 BRAZIL ,Other sources,baseline,Heat,"Parameter b, max",-100
-AFRICA ,Other sources,pathway,Heat,"Parameter b, max",35
+AFRICA ,Other sources,pathway,Heat,"Parameter b, max",40
 AFRICA ,Other sources,baseline,Heat,"Parameter b, max",-100
 ME ,Other sources,pathway,Heat,"Parameter b, max",40
 ME ,Other sources,baseline,Heat,"Parameter b, max",-100
@@ -12766,9 +12766,9 @@ NonOECD ,Other sources,pathway,Heat,"Parameter b, min",0
 NonOECD ,Other sources,baseline,Heat,"Parameter b, min",-100
 World ,Other sources,pathway,Heat,"Parameter b, min",0
 World ,Other sources,baseline,Heat,"Parameter b, min",-100
-CSAM ,Other sources,pathway,Heat,"Parameter b, min",35
+CSAM ,Other sources,pathway,Heat,"Parameter b, min",0
 CSAM ,Other sources,baseline,Heat,"Parameter b, min",-100
-BRAZIL ,Other sources,pathway,Heat,"Parameter b, min",35
+BRAZIL ,Other sources,pathway,Heat,"Parameter b, min",0
 BRAZIL ,Other sources,baseline,Heat,"Parameter b, min",-100
 AFRICA ,Other sources,pathway,Heat,"Parameter b, min",35
 AFRICA ,Other sources,baseline,Heat,"Parameter b, min",-100
@@ -13827,7 +13827,7 @@ EUR ,Solar,pathway,Electricity,"Parameter a, max",5
 EUR ,Solar,baseline,Electricity,"Parameter a, max",100
 EU ,Solar,pathway,Electricity,"Parameter a, max",5
 EU ,Solar,baseline,Electricity,"Parameter a, max",100
-SAFR ,Solar,pathway,Electricity,"Parameter a, max",0.5
+SAFR ,Solar,pathway,Electricity,"Parameter a, max",0.3
 SAFR ,Solar,baseline,Electricity,"Parameter a, max",100
 JPN ,Solar,pathway,Electricity,"Parameter a, max",5
 JPN ,Solar,baseline,Electricity,"Parameter a, max",100
@@ -13855,7 +13855,7 @@ CHINA ,Solar,pathway,Electricity,"Parameter a, max",5
 CHINA ,Solar,baseline,Electricity,"Parameter a, max",100
 INDIA ,Solar,pathway,Electricity,"Parameter a, max",5
 INDIA ,Solar,baseline,Electricity,"Parameter a, max",100
-ASEAN ,Solar,pathway,Electricity,"Parameter a, max",5
+ASEAN ,Solar,pathway,Electricity,"Parameter a, max",0.5
 ASEAN ,Solar,baseline,Electricity,"Parameter a, max",100
 DevelopingECO ,Solar,pathway,Electricity,"Parameter a, max",5
 DevelopingECO ,Solar,baseline,Electricity,"Parameter a, max",100
@@ -14114,15 +14114,15 @@ DevelopingECO ,Solar thermal,pathway,Heat,Max annual growth,100
  OECD ,Solar thermal,baseline,Heat,"Parameter a, max",100
  OECD ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
 NAM ,Solar thermal,baseline,Heat,"Parameter a, max",100
-NAM ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
+NAM ,Solar thermal,pathway,Heat,"Parameter a, max",0.25
 US ,Solar thermal,baseline,Heat,"Parameter a, max",100
 US ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
 EUR ,Solar thermal,baseline,Heat,"Parameter a, max",100
-EUR ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
+EUR ,Solar thermal,pathway,Heat,"Parameter a, max",0.25
 EU ,Solar thermal,baseline,Heat,"Parameter a, max",100
-EU ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
+EU ,Solar thermal,pathway,Heat,"Parameter a, max",0.25
 SAFR ,Solar thermal,baseline,Heat,"Parameter a, max",100
-SAFR ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
+SAFR ,Solar thermal,pathway,Heat,"Parameter a, max",0.25
 JPN ,Solar thermal,baseline,Heat,"Parameter a, max",100
 JPN ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
 AdvancedECO ,Solar thermal,baseline,Heat,"Parameter a, max",100
@@ -14132,11 +14132,11 @@ NonOECD ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
 World ,Solar thermal,baseline,Heat,"Parameter a, max",100
 World ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
 CSAM ,Solar thermal,baseline,Heat,"Parameter a, max",100
-CSAM ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
+CSAM ,Solar thermal,pathway,Heat,"Parameter a, max",0.25
 BRAZIL ,Solar thermal,baseline,Heat,"Parameter a, max",100
-BRAZIL ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
+BRAZIL ,Solar thermal,pathway,Heat,"Parameter a, max",0.25
 AFRICA ,Solar thermal,baseline,Heat,"Parameter a, max",100
-AFRICA ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
+AFRICA ,Solar thermal,pathway,Heat,"Parameter a, max",0.25
 ME ,Solar thermal,baseline,Heat,"Parameter a, max",100
 ME ,Solar thermal,pathway,Heat,"Parameter a, max",0.3
 EURASIA ,Solar thermal,baseline,Heat,"Parameter a, max",100
@@ -14198,15 +14198,15 @@ DevelopingECO ,Solar thermal,pathway,Heat,"Parameter a, min",0.14
  OECD ,Solar thermal,baseline,Heat,"Parameter b, max",-100
  OECD ,Solar thermal,pathway,Heat,"Parameter b, max",30
 NAM ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-NAM ,Solar thermal,pathway,Heat,"Parameter b, max",30
+NAM ,Solar thermal,pathway,Heat,"Parameter b, max",40
 US ,Solar thermal,baseline,Heat,"Parameter b, max",-100
 US ,Solar thermal,pathway,Heat,"Parameter b, max",30
 EUR ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-EUR ,Solar thermal,pathway,Heat,"Parameter b, max",30
+EUR ,Solar thermal,pathway,Heat,"Parameter b, max",50
 EU ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-EU ,Solar thermal,pathway,Heat,"Parameter b, max",30
+EU ,Solar thermal,pathway,Heat,"Parameter b, max",50
 SAFR ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-SAFR ,Solar thermal,pathway,Heat,"Parameter b, max",30
+SAFR ,Solar thermal,pathway,Heat,"Parameter b, max",50
 JPN ,Solar thermal,baseline,Heat,"Parameter b, max",-100
 JPN ,Solar thermal,pathway,Heat,"Parameter b, max",30
 AdvancedECO ,Solar thermal,baseline,Heat,"Parameter b, max",-100
@@ -14216,11 +14216,11 @@ NonOECD ,Solar thermal,pathway,Heat,"Parameter b, max",30
 World ,Solar thermal,baseline,Heat,"Parameter b, max",-100
 World ,Solar thermal,pathway,Heat,"Parameter b, max",30
 CSAM ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-CSAM ,Solar thermal,pathway,Heat,"Parameter b, max",30
+CSAM ,Solar thermal,pathway,Heat,"Parameter b, max",50
 BRAZIL ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-BRAZIL ,Solar thermal,pathway,Heat,"Parameter b, max",30
+BRAZIL ,Solar thermal,pathway,Heat,"Parameter b, max",50
 AFRICA ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-AFRICA ,Solar thermal,pathway,Heat,"Parameter b, max",30
+AFRICA ,Solar thermal,pathway,Heat,"Parameter b, max",50
 ME ,Solar thermal,baseline,Heat,"Parameter b, max",-100
 ME ,Solar thermal,pathway,Heat,"Parameter b, max",30
 EURASIA ,Solar thermal,baseline,Heat,"Parameter b, max",-100
@@ -14240,7 +14240,7 @@ DevelopingECO ,Solar thermal,pathway,Heat,"Parameter b, max",30
  OECD ,Solar thermal,baseline,Heat,"Parameter b, min",-100
  OECD ,Solar thermal,pathway,Heat,"Parameter b, min",30
 NAM ,Solar thermal,baseline,Heat,"Parameter b, min",-100
-NAM ,Solar thermal,pathway,Heat,"Parameter b, min",30
+NAM ,Solar thermal,pathway,Heat,"Parameter b, min",20
 US ,Solar thermal,baseline,Heat,"Parameter b, min",-100
 US ,Solar thermal,pathway,Heat,"Parameter b, min",30
 EUR ,Solar thermal,baseline,Heat,"Parameter b, min",-100
@@ -14280,33 +14280,33 @@ ASEAN ,Solar thermal,pathway,Heat,"Parameter b, min",30
 DevelopingECO ,Solar thermal,baseline,Heat,"Parameter b, min",-100
 DevelopingECO ,Solar thermal,pathway,Heat,"Parameter b, min",30
  OECD ,Solar thermal,baseline,Heat,Saturation Point,0.016
- OECD ,Solar thermal,pathway,Heat,Saturation Point,80
+ OECD ,Solar thermal,pathway,Heat,Saturation Point,60
 NAM ,Solar thermal,baseline,Heat,Saturation Point,0.016
-NAM ,Solar thermal,pathway,Heat,Saturation Point,80
+NAM ,Solar thermal,pathway,Heat,Saturation Point,75
 US ,Solar thermal,baseline,Heat,Saturation Point,0.016
-US ,Solar thermal,pathway,Heat,Saturation Point,80
+US ,Solar thermal,pathway,Heat,Saturation Point,75
 EUR ,Solar thermal,baseline,Heat,Saturation Point,0.016
 EUR ,Solar thermal,pathway,Heat,Saturation Point,80
 EU ,Solar thermal,baseline,Heat,Saturation Point,0.016
 EU ,Solar thermal,pathway,Heat,Saturation Point,80
 SAFR ,Solar thermal,baseline,Heat,Saturation Point,0.016
-SAFR ,Solar thermal,pathway,Heat,Saturation Point,90
+SAFR ,Solar thermal,pathway,Heat,Saturation Point,80
 JPN ,Solar thermal,baseline,Heat,Saturation Point,0.016
-JPN ,Solar thermal,pathway,Heat,Saturation Point,80
+JPN ,Solar thermal,pathway,Heat,Saturation Point,72
 AdvancedECO ,Solar thermal,baseline,Heat,Saturation Point,0.016
-AdvancedECO ,Solar thermal,pathway,Heat,Saturation Point,80
+AdvancedECO ,Solar thermal,pathway,Heat,Saturation Point,65
 NonOECD ,Solar thermal,baseline,Heat,Saturation Point,0.016
 NonOECD ,Solar thermal,pathway,Heat,Saturation Point,80
 World ,Solar thermal,baseline,Heat,Saturation Point,0.016
 World ,Solar thermal,pathway,Heat,Saturation Point,80
 CSAM ,Solar thermal,baseline,Heat,Saturation Point,0.016
-CSAM ,Solar thermal,pathway,Heat,Saturation Point,90
+CSAM ,Solar thermal,pathway,Heat,Saturation Point,80
 BRAZIL ,Solar thermal,baseline,Heat,Saturation Point,0.016
-BRAZIL ,Solar thermal,pathway,Heat,Saturation Point,90
+BRAZIL ,Solar thermal,pathway,Heat,Saturation Point,80
 AFRICA ,Solar thermal,baseline,Heat,Saturation Point,0.016
-AFRICA ,Solar thermal,pathway,Heat,Saturation Point,90
+AFRICA ,Solar thermal,pathway,Heat,Saturation Point,80
 ME ,Solar thermal,baseline,Heat,Saturation Point,0.016
-ME ,Solar thermal,pathway,Heat,Saturation Point,80
+ME ,Solar thermal,pathway,Heat,Saturation Point,72
 EURASIA ,Solar thermal,baseline,Heat,Saturation Point,0.016
 EURASIA ,Solar thermal,pathway,Heat,Saturation Point,80
 RUS ,Solar thermal,baseline,Heat,Saturation Point,0.016
@@ -15923,7 +15923,7 @@ NAM ,Wind,pathway,Electricity,"Parameter a, max",5
 NAM ,Wind,baseline,Electricity,"Parameter a, max",100
 US ,Wind,pathway,Electricity,"Parameter a, max",5
 US ,Wind,baseline,Electricity,"Parameter a, max",100
-EUR ,Wind,pathway,Electricity,"Parameter a, max",5
+EUR ,Wind,pathway,Electricity,"Parameter a, max",0.6
 EUR ,Wind,baseline,Electricity,"Parameter a, max",100
 EU ,Wind,pathway,Electricity,"Parameter a, max",5
 EU ,Wind,baseline,Electricity,"Parameter a, max",100
@@ -16007,7 +16007,7 @@ NAM ,Wind,pathway,Electricity,"Parameter b, max",100
 NAM ,Wind,baseline,Electricity,"Parameter b, max",-100
 US ,Wind,pathway,Electricity,"Parameter b, max",100
 US ,Wind,baseline,Electricity,"Parameter b, max",-100
-EUR ,Wind,pathway,Electricity,"Parameter b, max",100
+EUR ,Wind,pathway,Electricity,"Parameter b, max",50
 EUR ,Wind,baseline,Electricity,"Parameter b, max",-100
 EU ,Wind,pathway,Electricity,"Parameter b, max",100
 EU ,Wind,baseline,Electricity,"Parameter b, max",-100
@@ -16123,14 +16123,14 @@ US ,Tide and wave,pathway,Electricity,Saturation Point,1
 US ,Wind,pathway,Electricity,Saturation Point,50
 CSAM ,Geothermal,pathway,Electricity,Saturation Point,6.2
 CSAM ,Hydroelectricity,pathway,Electricity,Saturation Point,56.8
-CSAM ,Solar,pathway,Electricity,Saturation Point,16
+CSAM ,Solar,pathway,Electricity,Saturation Point,18
 CSAM ,Tide and wave,pathway,Electricity,Saturation Point,1
-CSAM ,Wind,pathway,Electricity,Saturation Point,16
+CSAM ,Wind,pathway,Electricity,Saturation Point,18
 BRAZIL ,Geothermal,pathway,Electricity,Saturation Point,0
 BRAZIL ,Hydroelectricity,pathway,Electricity,Saturation Point,63.8
-BRAZIL ,Solar,pathway,Electricity,Saturation Point,11
+BRAZIL ,Solar,pathway,Electricity,Saturation Point,17
 BRAZIL ,Tide and wave,pathway,Electricity,Saturation Point,1
-BRAZIL ,Wind,pathway,Electricity,Saturation Point,13
+BRAZIL ,Wind,pathway,Electricity,Saturation Point,18
 EUR ,Geothermal,pathway,Electricity,Saturation Point,5.1
 EUR ,Hydroelectricity,pathway,Electricity,Saturation Point,23.2
 EUR ,Solar,pathway,Electricity,Saturation Point,37.4

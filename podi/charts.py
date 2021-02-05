@@ -351,7 +351,7 @@ if chart_type == "line":
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -604,13 +604,59 @@ else:
 
 # endregion
 
+##############################
+# ELECTRICITY PERCENT ADOPTION
+##############################
+
+# region
+scenario = "pathway"
+chart_type = ''
+
+if chart_type == 'stack':
+    for i in range(0, len(iea_region_list)):
+        fig = elec_per_adoption.loc[iea_region_list[i], slice(None), scenario]
+        plt.figure(i)
+        plt.stackplot(fig.T.index, fig, labels=fig.index)
+        plt.legend(fig.T)
+        plt.title(iea_region_list[i])
+        
+        fig.loc[:,2020]
+else:
+    for i in range(0, len(iea_region_list)):
+        fig = elec_per_adoption.loc[iea_region_list[i], slice(None), scenario]
+        plt.figure(i)
+        plt.plot(fig.T)
+        plt.legend(fig.T)
+        plt.title(iea_region_list[i])
+        
+        fig.loc[:,2020]
+
+# endregion
+
+#######################
+# HEAT PERCENT ADOPTION
+#######################
+
+# region
+scenario = "pathway"
+
+for i in range(0, len(iea_region_list)):
+    plt.figure(i)
+    plt.plot(heat_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
+    plt.legend(heat_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
+    plt.title(iea_region_list[i])
+
+    elec_per_adoption.loc[iea_region_list[i], slice(None), scenario].loc[:,2020]
+
+# endregion
+
 ###################
 # ADOPTION CURVES #
 ###################
 
 # region
 
-fig_type = ""
+fig_type = "plotly"
 
 for i in range(0, len(iea_region_list)):
     fig = adoption_curves.loc[iea_region_list[i]] * 100
@@ -1652,21 +1698,6 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
-#######################
-# HEAT PERCENT ADOPTION
-#######################
-
-# region
-scenario = "pathway"
-
-for i in range(0, len(iea_region_list)):
-    plt.figure(i)
-    plt.plot(heat_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
-    plt.legend(heat_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
-    plt.title(iea_region_list[i])
-
-# endregion
-
 ######################################
 # ELECTRICITY DEMAND BY SECTOR (TWH) #
 ######################################
@@ -1902,7 +1933,6 @@ for i in range(0, len(iea_region_list)):
     plt.clf()
 
 # endregion
-
 
 ################################
 # TRANSPORTATION ENERGY DEMAND #
