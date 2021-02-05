@@ -1317,7 +1317,7 @@ for i in range(0, len(iea_region_list)):
             color="Sector",
             color_discrete_sequence=["#EDEDED", "#FF9DA6", "#E45756", "#72B7B2", "#54A24B", "#9D755D", "#F58518", "#EECA3B", "#B279A2"],
             title="Emissions Mitigated, " + iea_region_list[i],
-            hover_data={"Emissions, GtCO2e": ":.0f"}, category_orders={'Sector': [spacer.name, 'CDR','CH4, N2O, F-gases',  'Forests & Wetlands', 'Agriculture', 'Industry', 'Buildings','Transport', 'Electricity']}
+            hover_data={"Emissions, GtCO2e": ":.0f"}, category_orders={'Sector': [spacer.name, 'CDR', 'CH4, N2O, F-gases', 'Forests & Wetlands', 'Agriculture', 'Industry', 'Buildings', 'Transport', 'Electricity']}
         )
         fig.update_layout(title_x=0.5)
 
