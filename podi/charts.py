@@ -1309,17 +1309,17 @@ for i in range(0, len(iea_region_list)):
         fig2 = pd.melt(
             fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
         )
-        fig = px.area(
-            fig2,
-            x="Year",
-            y="Emissions, GtCO2e",
-            line_group="Sector",
-            color="Sector",
-            color_discrete_sequence=["#EDEDED", "#FF9DA6", "#E45756", "#72B7B2", "#54A24B", "#60738C", "#F58518", "#7AA8B8", "#B279A2"],
-            title="Emissions Mitigated, " + iea_region_list[i],
-            hover_data={"Emissions, GtCO2e": ":.0f"}, category_orders={'Sector': [spacer.name, 'CDR', 'CH4, N2O, F-gases', 'Forests & Wetlands', 'Agriculture', 'Industry', 'Buildings', 'Transport', 'Electricity']}
-        )
-        fig.update_layout(title_x=0.5)
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(name='', line=dict(width=0.5, color="#EDEDED"), x=fig2["Year"], y=fig2[fig2['Sector'] == '']['Emissions, GtCO2e'], fill='tozeroy', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='CDR', line=dict(width=0.5, color="#FF9DA6"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'CDR']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='CH4, N2O, F-gases', line=dict(width=0.5, color="#E45756"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'CH4, N2O, F-gases']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='Agriculture', line=dict(width=0.5, color="#72B7B2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Agriculture']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='Forests & Wetlands', line=dict(width=0.5, color="#54A24B"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Forests & Wetlands']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='Industry', line=dict(width=0.5, color="#60738C"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Industry']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='Buildings', line=dict(width=0.5, color="#F58518"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Buildings']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='Transport', line=dict(width=0.5, color="#7AA8B8"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Transport']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='Electricity', line=dict(width=0.5, color="#B279A2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Electricity']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+        fig.update_layout(title={'text': 'Emissions Mitigated, ' + iea_region_list[i], 'xanchor': 'center', 'x': 0.5})
 
         if show_figs is True:
             fig.show()
