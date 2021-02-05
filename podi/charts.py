@@ -1310,7 +1310,7 @@ for i in range(0, len(iea_region_list)):
             fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
         )
         fig = go.Figure()
-        fig.add_trace(go.Scatter(name='', line=dict(width=0.5, color="#EDEDED"), x=fig2["Year"], y=fig2[fig2['Sector'] == '']['Emissions, GtCO2e'], fill='tozeroy', stackgroup='one'))
+        fig.add_trace(go.Scatter(name='', line=dict(width=0.5, color="rgba(255, 255, 255, 0)"), x=fig2["Year"], y=fig2[fig2['Sector'] == '']['Emissions, GtCO2e'], fill='tozeroy', stackgroup='one'))
         fig.add_trace(go.Scatter(name='CDR', line=dict(width=0.5, color="#FF9DA6"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'CDR']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
         fig.add_trace(go.Scatter(name='CH4, N2O, F-gases', line=dict(width=0.5, color="#E45756"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'CH4, N2O, F-gases']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
         fig.add_trace(go.Scatter(name='Agriculture', line=dict(width=0.5, color="#72B7B2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Agriculture']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
@@ -1532,10 +1532,9 @@ for i in range(0, len(iea_region_list)):
         title="Climate Mitigation Potential in 2030, " + iea_region_list[i] + '(GtCO2e/yr)' 
     )
     '''
-    figure = go.Figure(go.Bar(x=fig.loc[:, 2030].values, y=fig.index, width=[0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8], orientation='h'))
+    figure = go.Figure(data=[go.Bar(x=fig.loc[:, 2050].values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050'), go.Bar(x=fig.loc[:, 2030].values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030')])
 
-    figure.update_layout(title="Climate Mitigation Potential in 2030, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated in 2030'})
-
+    figure.update_layout(title="Climate Mitigation Potential, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated'}, barmode='group', legend=dict(x=0.7,y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'))
     figure.show()
 
     pio.write_html(
