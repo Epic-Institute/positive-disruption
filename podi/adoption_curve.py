@@ -22,8 +22,6 @@ def adoption_curve(value, region, scenario, sector):
             pd.Series(value.name).isin(
                 [
                     "Nuclear",
-                    "Geothermal",
-                    "Hydroelectricity",
                     "Fossil fuels",
                     "Biomass and waste",
                     "Bioenergy",

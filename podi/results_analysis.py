@@ -285,4 +285,4 @@ def results_analysis(
     adoption_curves.reset_index(inplace=True)
     adoption_curves.set_index(["Region", "Sector"], inplace=True)
 
-    return adoption_curves.clip(upper=1)
+    return adoption_curves

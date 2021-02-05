@@ -351,7 +351,7 @@ if chart_type == "line":
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -376,7 +376,7 @@ group_keys = {
     ("Heat", "Other sources"): 'Heat-Bioenergy',
     ("Heat", "Solar thermal"): 'Heat-Solar thermal',
     ("Heat", "Waste"): 'Heat-Biochar',
-    ("Transport", "Oil"): 'Transport-Fossil fuels',
+    ("Transport", "Oil"): 'Transport-Fossil fuels2',
     ("Transport", "Bioenergy"): 'Transport-Bioenergy & H2',
     ("Transport", "Other fuels"): 'Transport-Bioenergy & H2',
     ("Transport", "Fossil fuels"): 'Transport-Fossil fuels',
@@ -610,7 +610,7 @@ else:
 
 # region
 
-fig_type = "plotly"
+fig_type = ""
 
 for i in range(0, len(iea_region_list)):
     fig = adoption_curves.loc[iea_region_list[i]] * 100
@@ -645,7 +645,7 @@ for i in range(0, len(iea_region_list)):
         plt.figure(i)
         plt.plot(fig.T, linestyle="--")
         plt.plot(
-            fig.loc[:, data_start_year:data_end_year].T * 100,
+            fig.loc[:, data_start_year:data_end_year].T,
             linestyle="-",
             color=(0, 0, 0),
         )
@@ -659,15 +659,8 @@ for i in range(0, len(iea_region_list)):
             bbox_to_anchor=(1.05, 1),
         )
         plt.show()
-        if save_figs is True:
-            plt.savefig(
-                fname=("podi/data/figs/scurves-" + iea_region_list[i]).replace(" ", ""),
-                format="png",
-                bbox_inches="tight",
-                pad_inches=0.1,
-            )
-        plt.clf()
-        
+
+        '''
         color = {
             "Grid": [(0.120, 0.107, 0.155)],
             "Transport": [(0.93, 0.129, 0.180)],
@@ -772,6 +765,7 @@ for i in range(0, len(iea_region_list)):
                 )
                 plt.show()
                 """
+        '''
 
 # endregion
 
@@ -960,7 +954,62 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-# show how subvector diffusion curves build up to vector diffusion
+
+# region
+
+subvectors = {'Electricity': ['Solar', 'Wind', 'Other ren'], 'Transport': ['LDV', 'Freight', 'Aviation'], 'Buildings': ['Heat Pumps', 'Efficiency'], 'Industry': ['Electrification', 'Efficiency'], 'Regenerative Agriculture': ["Animal Mgmt", "Legumes", "Optimal Intensity", "Silvopasture", "Biochar", "Cropland Soil Health", "Trees in Croplands", "Nitrogen Fertilizer Management", "Improved Rice"], 'Forests & Wetlands': ["Coastal Restoration", "Avoided Coastal Impacts", "Peat Restoration", "Avoided Peat Impacts", "Improved Forest Mgmt", "Natural Regeneration", "Avoided Forest Conversion"], 'CDR': ['Addtl NCS', 'ECR']}
+
+fig_type = ""
+
+for i in range(0, len(iea_region_list)):
+    fig = adoption_curves.loc[iea_region_list[i]] * 100
+
+    if fig_type == "plotly":
+        fig = fig.T
+        fig.index.name = "Year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
+        fig = px.line(
+            fig2,
+            x="Year",
+            y="% Adoption",
+            line_group="Sector",
+            color="Sector",
+            color_discrete_sequence=px.colors.qualitative.T10,
+            title="Percent of Total PD Adoption, " + iea_region_list[i],
+            hover_data={"% Adoption": ":.0f"},
+        )
+        fig.update_layout(title_x=0.5)
+        fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+        fig.show()
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=("./charts/scurves-" + iea_region_list[i] + ".html").replace(
+                    " ", ""
+                ),
+                auto_open=False,
+            )
+    else:
+        plt.figure(i)
+        plt.plot(fig.T, linestyle="--")
+        plt.plot(
+            fig.loc[:, data_start_year:data_end_year].T,
+            linestyle="-",
+            color=(0, 0, 0),
+        )
+        plt.ylabel("% Adoption")
+        plt.xlim([fig.columns.min(), fig.columns.max()])
+        plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
+        plt.legend(
+            fig.index,
+            loc=2,
+            fontsize="small",
+            bbox_to_anchor=(1.05, 1),
+        )
+        plt.show()
+
+# endregion
 
 # endregion
 
@@ -1441,16 +1490,20 @@ for i in range(0, len(iea_region_list)):
             "Electricity",
         ]
     )
-
+    '''
     figure = px.bar(
         fig,
+        y=fig.loc[:,2030],
         x=fig.index,
-        y=year,
         orientation='h',
-        labels={"index": "Vector", str(year): "GtCO2e Mitigated in " + year},
-        title="Climate Mitigation Potential in " + year + ', '+ iea_region_list[i] + '(GtCO2e/yr)',
-        width=0.8
+        labels={"index": "Vector", year: "GtCO2e Mitigated in 2030"},
+        title="Climate Mitigation Potential in 2030, " + iea_region_list[i] + '(GtCO2e/yr)' 
     )
+    '''
+    figure = go.Figure(go.Bar(x=fig.loc[:, 2030].values, y=fig.index, width=[0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8], orientation='h'))
+
+    figure.update_layout(title="Climate Mitigation Potential in 2030, " + iea_region_list[i] + '(GtCO2e/yr)') 
+
     figure.show()
 
     pio.write_html(
