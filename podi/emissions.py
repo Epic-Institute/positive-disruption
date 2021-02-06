@@ -221,4 +221,6 @@ def emissions(
     em_targets = pd.read_csv(targets_em).set_index("Scenario")
     em_targets.columns = em_targets.columns.astype(int)
 
-    return em, em_targets
+    return em.round(decimals=0).replace(NaN, 0), em_targets.round(decimals=0).replace(
+        NaN, 0
+    )

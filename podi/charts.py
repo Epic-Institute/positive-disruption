@@ -1300,7 +1300,7 @@ for i in range(0, len(iea_region_list)):
     em_targets_pathway.loc["baseline PD20"] = em_mit.append(spacer).sum()
 
     fig = ((em_mit.append(spacer)) / 1000).reindex(
-        ['Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR', spacer.name]).loc[:, 2020:]
+        ['Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR', spacer.name]).loc[:, 2020:].round(decimals=0)
 
     if fig_type == 'plotly':
         fig = fig.T
@@ -1521,7 +1521,7 @@ for i in range(0, len(iea_region_list)):
             "Transport",
             "Electricity",
         ]
-    )
+    ).round(decimals=2)
     '''
     figure = px.bar(
         fig,
