@@ -142,6 +142,7 @@ def adoption_curve(value, region, scenario, sector):
     if scenario == "baseline":
         x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
         y = np.full((len(x), 1), y_data[-1])
+        genetic_parameters = [0, 0, 0, 0]
     else:
         # "seed" the numpy random number generator for repeatable results.
         genetic_parameters = differential_evolution(
@@ -220,5 +221,23 @@ def adoption_curve(value, region, scenario, sector):
 
     y_growth = np.array(y_growth)
     """
+
+    genetic_parameters = pd.DataFrame(genetic_parameters, ["a", "b", "c", "d"]).T.round(
+        decimals=3
+    )
+
+    # genetic_parameters.rename(index={0: "Value"}, inplace=True)
+
+    genetic_parameters["Region"] = region
+    genetic_parameters["Sector"] = sector
+    genetic_parameters["Technology"] = value.name
+    genetic_parameters = genetic_parameters.reindex(
+        columns=["Region", "Sector", "Technology", "a", "b", "c", "d"]
+    )
+
+    if scenario == "pathway":
+        params = pd.read_csv("podi/data/params.csv")
+        params = params.append(genetic_parameters)
+        params.to_csv("podi/data/params.csv", index=False)
 
     return pd.DataFrame(data=y, index=years)

@@ -942,4 +942,4 @@ def energy_supply(scenario, energy_demand):
         transport_consump2,
         transport_per_adoption,
         transport_consump_cdr,
-    ).round(decimals=0).replace(NaN, 0)
+    )

@@ -7766,7 +7766,7 @@ AdvancedECO ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 AdvancedECO ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 NonOECD ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-World ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.1
+World ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.05
 World ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 CSAM ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 CSAM ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
