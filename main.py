@@ -77,6 +77,9 @@ energy_demand = energy_demand_baseline.append(energy_demand_pathway)
 #################
 
 # region
+params = pd.read_csv("podi/data/params.csv")
+params.drop(params.index, inplace=True)
+params.to_csv("podi/data/params.csv", index=False)
 
 (
     elec_consump_baseline,
@@ -101,7 +104,6 @@ energy_demand = energy_demand_baseline.append(energy_demand_pathway)
     transport_per_adoption_pathway,
     transport_consump_cdr_pathway,
 ) = energy_supply("pathway", energy_demand_pathway)
-
 
 elec_consump = elec_consump_baseline.append(elec_consump_pathway)
 elec_per_adoption = elec_per_adoption_baseline.append(elec_per_adoption_pathway)

@@ -226,8 +226,6 @@ def adoption_curve(value, region, scenario, sector):
         decimals=3
     )
 
-    # genetic_parameters.rename(index={0: "Value"}, inplace=True)
-
     genetic_parameters["Region"] = region
     genetic_parameters["Sector"] = sector
     genetic_parameters["Technology"] = value.name
@@ -238,6 +236,7 @@ def adoption_curve(value, region, scenario, sector):
     if scenario == "pathway":
         params = pd.read_csv("podi/data/params.csv")
         params = params.append(genetic_parameters)
+        params.drop_duplicates(inplace=True)
         params.to_csv("podi/data/params.csv", index=False)
 
     return pd.DataFrame(data=y, index=years)

@@ -33,6 +33,7 @@ pandas-profiling = "*"
 streamlit = "*"
 scikit-learn = "*"
 mdutils = "*"
+kneed = "*"
 
 [requires]
 python_version = "3.8"

@@ -17,6 +17,7 @@ import plotly.io as pio
 import plotly.graph_objects as go
 from itertools import chain, zip_longest
 from math import ceil, pi, nan
+from kneed import DataGenerator, KneeLocator
 
 unit_name = ["TWh", "EJ", "TJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00360, 3600, 0.086, 86]
@@ -619,8 +620,6 @@ if chart_type == 'stack':
         plt.stackplot(fig.T.index, fig, labels=fig.index)
         plt.legend(fig.T)
         plt.title(iea_region_list[i])
-        
-        fig.loc[:,2020]
 else:
     for i in range(0, len(iea_region_list)):
         fig = elec_per_adoption.loc[iea_region_list[i], slice(None), scenario]
@@ -628,8 +627,6 @@ else:
         plt.plot(fig.T)
         plt.legend(fig.T)
         plt.title(iea_region_list[i])
-        
-        fig.loc[:,2020]
 
 # endregion
 
@@ -991,6 +988,18 @@ for i in range(0, len(iea_region_list)):
                 ),
                 auto_open=False,
             )
+
+# endregion
+
+##############################
+# ADOPTION CURVES KNEE/ELBOW #
+##############################
+
+# region
+
+for i in range(0, len(iea_region_list)):
+    fig = adoption_curves.loc[iea_region_list[i]] * 100
+    kneedle = KneeLocator(fig.columns, fig.loc['Grid'].values, S=1.0, curve="concave", direction="increasing")
 
 # endregion
 
@@ -1534,7 +1543,9 @@ for i in range(0, len(iea_region_list)):
     '''
     figure = go.Figure(data=[go.Bar(x=fig.loc[:, 2050].values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050'), go.Bar(x=fig.loc[:, 2030].values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030')])
 
-    figure.update_layout(title="Climate Mitigation Potential, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated'}, barmode='group', legend=dict(x=0.7,y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'))
+    figure.update_layout(title="Climate Mitigation Potential, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated'}, barmode='group', legend=dict(x=0.7, y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'))
+    figure.add_shape(type="line", x0=20, y0=-1, x1=20, y1=10, line=dict(color="LightSeaGreen", width=4, dash="dashdot"))
+    figure.add_shape(type="line", x0=50, y0=-1, x1=50, y1=10, line=dict(color="LightSeaGreen", width=4, dash="dashdot"))
     figure.show()
 
     pio.write_html(
