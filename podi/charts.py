@@ -647,6 +647,21 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
+####################################
+# NONELEC TRANSPORT PERCENT ADOPTION
+####################################
+
+# region
+scenario = "pathway"
+
+for i in range(0, len(iea_region_list)):
+    plt.figure(i)
+    plt.plot(transport_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
+    plt.legend(transport_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
+    plt.title(iea_region_list[i])
+
+# endregion
+
 ###################
 # ADOPTION CURVES #
 ###################

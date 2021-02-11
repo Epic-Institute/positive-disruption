@@ -2217,13 +2217,13 @@ SAFR ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 SAFR ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 SAFR ,Bioenergy,pathway,Heat,"Parameter a, max",-0.4
 SAFR ,Bioenergy,baseline,Heat,"Parameter a, max",100
-SAFR ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
+SAFR ,Bioenergy,pathway,Transport,"Parameter a, max",0.15
 SAFR ,Bioenergy,baseline,Transport,"Parameter a, max",5
 JPN ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 JPN ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 JPN ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 JPN ,Bioenergy,baseline,Heat,"Parameter a, max",100
-JPN ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
+JPN ,Bioenergy,pathway,Transport,"Parameter a, max",0.15
 JPN ,Bioenergy,baseline,Transport,"Parameter a, max",5
 AdvancedECO ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 AdvancedECO ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -2259,13 +2259,13 @@ AFRICA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 AFRICA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 AFRICA ,Bioenergy,pathway,Heat,"Parameter a, max",-0.4
 AFRICA ,Bioenergy,baseline,Heat,"Parameter a, max",100
-AFRICA ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
+AFRICA ,Bioenergy,pathway,Transport,"Parameter a, max",0.15
 AFRICA ,Bioenergy,baseline,Transport,"Parameter a, max",5
 ME ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 ME ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 ME ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 ME ,Bioenergy,baseline,Heat,"Parameter a, max",100
-ME ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
+ME ,Bioenergy,pathway,Transport,"Parameter a, max",0.15
 ME ,Bioenergy,baseline,Transport,"Parameter a, max",5
 EURASIA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 EURASIA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -2277,25 +2277,25 @@ RUS ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 RUS ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 RUS ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 RUS ,Bioenergy,baseline,Heat,"Parameter a, max",100
-RUS ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
+RUS ,Bioenergy,pathway,Transport,"Parameter a, max",0.12
 RUS ,Bioenergy,baseline,Transport,"Parameter a, max",5
 ASIAPAC ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 ASIAPAC ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 ASIAPAC ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 ASIAPAC ,Bioenergy,baseline,Heat,"Parameter a, max",100
-ASIAPAC ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
+ASIAPAC ,Bioenergy,pathway,Transport,"Parameter a, max",0.15
 ASIAPAC ,Bioenergy,baseline,Transport,"Parameter a, max",5
 CHINA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 CHINA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 CHINA ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 CHINA ,Bioenergy,baseline,Heat,"Parameter a, max",100
-CHINA ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
+CHINA ,Bioenergy,pathway,Transport,"Parameter a, max",0.15
 CHINA ,Bioenergy,baseline,Transport,"Parameter a, max",5
 INDIA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 INDIA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 INDIA ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 INDIA ,Bioenergy,baseline,Heat,"Parameter a, max",100
-INDIA ,Bioenergy,pathway,Transport,"Parameter a, max",0.1074
+INDIA ,Bioenergy,pathway,Transport,"Parameter a, max",0.15
 INDIA ,Bioenergy,baseline,Transport,"Parameter a, max",5
 ASEAN ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 ASEAN ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -2373,13 +2373,13 @@ CSAM ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 CSAM ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
 CSAM ,Bioenergy,pathway,Heat,"Parameter a, min",-0.2
 CSAM ,Bioenergy,baseline,Heat,"Parameter a, min",100
-CSAM ,Bioenergy,pathway,Transport,"Parameter a, min",0.1074
+CSAM ,Bioenergy,pathway,Transport,"Parameter a, min",0.08
 CSAM ,Bioenergy,baseline,Transport,"Parameter a, min",0
 BRAZIL ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 BRAZIL ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
 BRAZIL ,Bioenergy,pathway,Heat,"Parameter a, min",-0.2
 BRAZIL ,Bioenergy,baseline,Heat,"Parameter a, min",100
-BRAZIL ,Bioenergy,pathway,Transport,"Parameter a, min",0.1074
+BRAZIL ,Bioenergy,pathway,Transport,"Parameter a, min",0.07
 BRAZIL ,Bioenergy,baseline,Transport,"Parameter a, min",0
 AFRICA ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 AFRICA ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
@@ -2541,7 +2541,7 @@ CHINA ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 CHINA ,Bioenergy,baseline,Electricity,"Parameter b, max",40
 CHINA ,Bioenergy,pathway,Heat,"Parameter b, max",100
 CHINA ,Bioenergy,baseline,Heat,"Parameter b, max",-100
-CHINA ,Bioenergy,pathway,Transport,"Parameter b, max",37
+CHINA ,Bioenergy,pathway,Transport,"Parameter b, max",30
 CHINA ,Bioenergy,baseline,Transport,"Parameter b, max",100
 INDIA ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 INDIA ,Bioenergy,baseline,Electricity,"Parameter b, max",40
@@ -2667,7 +2667,7 @@ CHINA ,Bioenergy,pathway,Electricity,"Parameter b, min",40
 CHINA ,Bioenergy,baseline,Electricity,"Parameter b, min",40
 CHINA ,Bioenergy,pathway,Heat,"Parameter b, min",0
 CHINA ,Bioenergy,baseline,Heat,"Parameter b, min",-100
-CHINA ,Bioenergy,pathway,Transport,"Parameter b, min",37
+CHINA ,Bioenergy,pathway,Transport,"Parameter b, min",25
 CHINA ,Bioenergy,baseline,Transport,"Parameter b, min",0
 INDIA ,Bioenergy,pathway,Electricity,"Parameter b, min",40
 INDIA ,Bioenergy,baseline,Electricity,"Parameter b, min",40
@@ -2752,13 +2752,13 @@ CSAM ,Bioenergy,baseline,Electricity,Saturation Point,0
 CSAM ,Bioenergy,pathway,Heat,Saturation Point,28.5
 CSAM ,Bioenergy,baseline,Heat,Saturation Point,4.3
 CSAM ,Bioenergy,baseline,Transport,Saturation Point,2.97
-CSAM ,Bioenergy,pathway,Transport,Saturation Point,100
+CSAM ,Bioenergy,pathway,Transport,Saturation Point,95
 BRAZIL ,Bioenergy,pathway,Electricity,Saturation Point,50
 BRAZIL ,Bioenergy,baseline,Electricity,Saturation Point,0
 BRAZIL ,Bioenergy,pathway,Heat,Saturation Point,28.5
 BRAZIL ,Bioenergy,baseline,Heat,Saturation Point,4.3
 BRAZIL ,Bioenergy,baseline,Transport,Saturation Point,2.97
-BRAZIL ,Bioenergy,pathway,Transport,Saturation Point,100
+BRAZIL ,Bioenergy,pathway,Transport,Saturation Point,90
 AFRICA ,Bioenergy,pathway,Electricity,Saturation Point,50
 AFRICA ,Bioenergy,baseline,Electricity,Saturation Point,0
 AFRICA ,Bioenergy,pathway,Heat,Saturation Point,13.5
@@ -12357,7 +12357,7 @@ EUR ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 EUR ,Other fuels,baseline,Transport,"Parameter a, max",100
 EU ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 EU ,Other fuels,baseline,Transport,"Parameter a, max",100
-SAFR ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
+SAFR ,Other fuels,pathway,Transport,"Parameter a, max",0
 SAFR ,Other fuels,baseline,Transport,"Parameter a, max",100
 JPN ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 JPN ,Other fuels,baseline,Transport,"Parameter a, max",100
@@ -12371,13 +12371,13 @@ CSAM ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 CSAM ,Other fuels,baseline,Transport,"Parameter a, max",100
 BRAZIL ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 BRAZIL ,Other fuels,baseline,Transport,"Parameter a, max",100
-AFRICA ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
+AFRICA ,Other fuels,pathway,Transport,"Parameter a, max",0
 AFRICA ,Other fuels,baseline,Transport,"Parameter a, max",100
-ME ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
+ME ,Other fuels,pathway,Transport,"Parameter a, max",0
 ME ,Other fuels,baseline,Transport,"Parameter a, max",100
 EURASIA ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 EURASIA ,Other fuels,baseline,Transport,"Parameter a, max",100
-RUS ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
+RUS ,Other fuels,pathway,Transport,"Parameter a, max",-0.1
 RUS ,Other fuels,baseline,Transport,"Parameter a, max",100
 ASIAPAC ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter a, max",100
@@ -12401,7 +12401,7 @@ EU ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 EU ,Other fuels,baseline,Transport,"Parameter a, min",100
 SAFR ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 SAFR ,Other fuels,baseline,Transport,"Parameter a, min",100
-JPN ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
+JPN ,Other fuels,pathway,Transport,"Parameter a, min",-0.2
 JPN ,Other fuels,baseline,Transport,"Parameter a, min",100
 AdvancedECO ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 AdvancedECO ,Other fuels,baseline,Transport,"Parameter a, min",100
@@ -12415,17 +12415,17 @@ BRAZIL ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 BRAZIL ,Other fuels,baseline,Transport,"Parameter a, min",100
 AFRICA ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 AFRICA ,Other fuels,baseline,Transport,"Parameter a, min",100
-ME ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
+ME ,Other fuels,pathway,Transport,"Parameter a, min",-0.1
 ME ,Other fuels,baseline,Transport,"Parameter a, min",100
 EURASIA ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 EURASIA ,Other fuels,baseline,Transport,"Parameter a, min",100
-RUS ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
+RUS ,Other fuels,pathway,Transport,"Parameter a, min",-0.2
 RUS ,Other fuels,baseline,Transport,"Parameter a, min",100
 ASIAPAC ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter a, min",100
-CHINA ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
+CHINA ,Other fuels,pathway,Transport,"Parameter a, min",-0.2
 CHINA ,Other fuels,baseline,Transport,"Parameter a, min",100
-INDIA ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
+INDIA ,Other fuels,pathway,Transport,"Parameter a, min",-0.2
 INDIA ,Other fuels,baseline,Transport,"Parameter a, min",100
 ASEAN ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 ASEAN ,Other fuels,baseline,Transport,"Parameter a, min",100
@@ -12461,7 +12461,7 @@ ME ,Other fuels,pathway,Transport,"Parameter b, max",10
 ME ,Other fuels,baseline,Transport,"Parameter b, max",-100
 EURASIA ,Other fuels,pathway,Transport,"Parameter b, max",10
 EURASIA ,Other fuels,baseline,Transport,"Parameter b, max",-100
-RUS ,Other fuels,pathway,Transport,"Parameter b, max",10
+RUS ,Other fuels,pathway,Transport,"Parameter b, max",30
 RUS ,Other fuels,baseline,Transport,"Parameter b, max",-100
 ASIAPAC ,Other fuels,pathway,Transport,"Parameter b, max",10
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter b, max",-100
@@ -12503,13 +12503,13 @@ ME ,Other fuels,pathway,Transport,"Parameter b, min",10
 ME ,Other fuels,baseline,Transport,"Parameter b, min",-100
 EURASIA ,Other fuels,pathway,Transport,"Parameter b, min",10
 EURASIA ,Other fuels,baseline,Transport,"Parameter b, min",-100
-RUS ,Other fuels,pathway,Transport,"Parameter b, min",10
+RUS ,Other fuels,pathway,Transport,"Parameter b, min",0
 RUS ,Other fuels,baseline,Transport,"Parameter b, min",-100
 ASIAPAC ,Other fuels,pathway,Transport,"Parameter b, min",10
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter b, min",-100
-CHINA ,Other fuels,pathway,Transport,"Parameter b, min",10
+CHINA ,Other fuels,pathway,Transport,"Parameter b, min",0
 CHINA ,Other fuels,baseline,Transport,"Parameter b, min",-100
-INDIA ,Other fuels,pathway,Transport,"Parameter b, min",10
+INDIA ,Other fuels,pathway,Transport,"Parameter b, min",0
 INDIA ,Other fuels,baseline,Transport,"Parameter b, min",-100
 ASEAN ,Other fuels,pathway,Transport,"Parameter b, min",10
 ASEAN ,Other fuels,baseline,Transport,"Parameter b, min",-100
@@ -12545,7 +12545,7 @@ ME ,Other fuels,pathway,Transport,Saturation Point,5
 ME ,Other fuels,baseline,Transport,Saturation Point,7.41
 EURASIA ,Other fuels,pathway,Transport,Saturation Point,5
 EURASIA ,Other fuels,baseline,Transport,Saturation Point,7.41
-RUS ,Other fuels,pathway,Transport,Saturation Point,5
+RUS ,Other fuels,pathway,Transport,Saturation Point,40
 RUS ,Other fuels,baseline,Transport,Saturation Point,7.41
 ASIAPAC ,Other fuels,pathway,Transport,Saturation Point,5
 ASIAPAC ,Other fuels,baseline,Transport,Saturation Point,7.41
@@ -16031,7 +16031,7 @@ ME ,Wind,pathway,Electricity,"Parameter a, max",5
 ME ,Wind,baseline,Electricity,"Parameter a, max",100
 EURASIA ,Wind,pathway,Electricity,"Parameter a, max",5
 EURASIA ,Wind,baseline,Electricity,"Parameter a, max",100
-RUS ,Wind,pathway,Electricity,"Parameter a, max",0.14
+RUS ,Wind,pathway,Electricity,"Parameter a, max",0.1
 RUS ,Wind,baseline,Electricity,"Parameter a, max",100
 ASIAPAC ,Wind,pathway,Electricity,"Parameter a, max",5
 ASIAPAC ,Wind,baseline,Electricity,"Parameter a, max",100

@@ -695,8 +695,6 @@ def energy_supply(scenario, energy_demand):
 
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
-        perc = perc.apply(lambda x: x.div(perc.sum()), axis=1)
-
         # harmonizing historical to projection
         def harmonize(perc, near_proj_per_transport_consump):
             if (
@@ -724,9 +722,9 @@ def energy_supply(scenario, energy_demand):
 
         # set fossil fuel generation to fill balance
 
-        perc.loc["Fossil fuels"] = 1 - perc.loc[
-            ["Bioenergy", "Other fuels"]
-        ].sum().clip(upper=1, lower=0)
+        perc.loc["Fossil fuels"] = (
+            1 - perc.loc[["Bioenergy", "Other fuels"]].sum()
+        ).clip(lower=0)
 
         return perc.loc[:, data_end_year + 1 :]
 

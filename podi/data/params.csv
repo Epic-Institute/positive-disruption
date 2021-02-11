@@ -77,7 +77,7 @@ CSAM ,Heat,Other sources,-0.1,6.699,0.9,0.0
 CSAM ,Heat,Solar thermal,0.2,30.0,0.75,0.0
 CSAM ,Heat,Waste,0.09,38.957,0.15,0.0
 CSAM ,Transport,Oil,-0.09,37.0,0.95,0.0
-CSAM ,Transport,Bioenergy,0.107,37.0,1.0,0.0
+CSAM ,Transport,Bioenergy,0.08,37.0,0.95,0.0
 CSAM ,Transport,Other fuels,-0.05,10.0,0.05,0.0
 BRAZIL ,Electricity,Biomass and waste,-0.3,30.0,0.05,0.0
 BRAZIL ,Electricity,Fossil fuels,-0.2,0.0,0.746,0.0
@@ -97,7 +97,7 @@ BRAZIL ,Heat,Other sources,-0.1,6.699,0.9,0.0
 BRAZIL ,Heat,Solar thermal,0.17,30.0,0.75,0.0
 BRAZIL ,Heat,Waste,0.09,38.957,0.15,0.0
 BRAZIL ,Transport,Oil,-0.09,37.0,0.95,0.0
-BRAZIL ,Transport,Bioenergy,0.107,37.0,1.0,0.0
+BRAZIL ,Transport,Bioenergy,0.07,37.0,0.9,0.0
 BRAZIL ,Transport,Other fuels,-0.05,10.0,0.05,0.0
 EUR ,Electricity,Biomass and waste,-0.2,22.747,0.05,0.0
 EUR ,Electricity,Fossil fuels,-0.11,16.154,0.65,0.0
@@ -134,11 +134,11 @@ AFRICA ,Heat,Natural gas,-0.2,0.0,0.06,0.0
 AFRICA ,Heat,Nuclear,-0.02,0.0,0.001,0.0
 AFRICA ,Heat,Oil,-0.01,10.002,0.01,0.0
 AFRICA ,Heat,Other sources,-0.1,6.759,0.9,0.0
-AFRICA ,Heat,Solar thermal,0.15,30.0,0.79,0.0
+AFRICA ,Heat,Solar thermal,0.14,30.0,0.78,0.0
 AFRICA ,Heat,Waste,0.09,43.086,0.15,0.0
 AFRICA ,Transport,Oil,-0.09,37.0,0.95,0.0
-AFRICA ,Transport,Bioenergy,0.107,37.0,1.0,0.0
-AFRICA ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+AFRICA ,Transport,Bioenergy,0.15,37.0,1.0,0.0
+AFRICA ,Transport,Other fuels,-0.0,10.0,0.05,0.0
 SAFR ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
 SAFR ,Electricity,Fossil fuels,-0.399,24.978,0.65,0.0
 SAFR ,Electricity,Geothermal,0.094,13.623,0.0,0.0
@@ -157,8 +157,8 @@ SAFR ,Heat,Other sources,-0.1,6.759,0.9,0.0
 SAFR ,Heat,Solar thermal,0.15,30.0,0.84,0.0
 SAFR ,Heat,Waste,0.09,43.086,0.15,0.0
 SAFR ,Transport,Oil,-0.2,23.0,0.95,0.0
-SAFR ,Transport,Bioenergy,0.107,37.0,1.0,0.0
-SAFR ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+SAFR ,Transport,Bioenergy,0.15,37.0,1.0,0.0
+SAFR ,Transport,Other fuels,-0.0,10.0,0.05,0.0
 ME ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
 ME ,Electricity,Fossil fuels,-0.393,29.85,0.746,0.0
 ME ,Electricity,Geothermal,0.094,13.623,0.0,0.0
@@ -177,8 +177,8 @@ ME ,Heat,Other sources,-0.5,0.0,0.9,0.0
 ME ,Heat,Solar thermal,0.15,35.0,0.8,0.0
 ME ,Heat,Waste,0.09,16.956,0.15,0.0
 ME ,Transport,Oil,-0.09,37.0,0.95,0.0
-ME ,Transport,Bioenergy,0.107,37.0,1.0,0.0
-ME ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+ME ,Transport,Bioenergy,0.15,37.0,1.0,0.0
+ME ,Transport,Other fuels,-0.1,10.0,0.05,0.0
 RUS ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
 RUS ,Electricity,Fossil fuels,-0.2,23.093,0.746,0.0
 RUS ,Electricity,Geothermal,0.094,13.623,0.0,0.0
@@ -186,7 +186,7 @@ RUS ,Electricity,Hydroelectricity,-0.04,44.999,0.09,0.0
 RUS ,Electricity,Nuclear,-0.09,49.999,0.145,0.0
 RUS ,Electricity,Solar,0.18,40.0,0.373,0.0
 RUS ,Electricity,Tide and wave,4.693,97.162,0.01,0.0
-RUS ,Electricity,Wind,0.14,35.0,0.533,0.0
+RUS ,Electricity,Wind,0.1,35.0,0.533,0.0
 RUS ,Heat,Bioenergy,-0.2,0.0,0.285,0.0
 RUS ,Heat,Coal,-0.2,20.0,0.208,0.0
 RUS ,Heat,Geothermal,0.1,15.0,0.05,0.0
@@ -197,8 +197,8 @@ RUS ,Heat,Other sources,-0.1,21.856,0.078,0.0
 RUS ,Heat,Solar thermal,0.25,30.0,0.8,0.0
 RUS ,Heat,Waste,0.09,28.367,0.15,0.0
 RUS ,Transport,Oil,-0.09,37.0,0.95,0.0
-RUS ,Transport,Bioenergy,0.107,37.0,1.0,0.0
-RUS ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+RUS ,Transport,Bioenergy,0.12,37.0,1.0,0.0
+RUS ,Transport,Other fuels,-0.177,18.407,0.4,0.0
 ASIAPAC ,Electricity,Biomass and waste,-0.2,0.0,0.05,0.0
 ASIAPAC ,Electricity,Fossil fuels,-0.31,22.548,0.746,0.0
 ASIAPAC ,Electricity,Geothermal,0.034,20.0,0.041,0.0
@@ -217,7 +217,7 @@ ASIAPAC ,Heat,Other sources,-0.492,39.91,0.002,0.0
 ASIAPAC ,Heat,Solar thermal,0.2,35.0,0.8,0.0
 ASIAPAC ,Heat,Waste,0.09,31.068,0.15,0.0
 ASIAPAC ,Transport,Oil,-0.09,37.0,0.95,0.0
-ASIAPAC ,Transport,Bioenergy,0.107,37.0,1.0,0.0
+ASIAPAC ,Transport,Bioenergy,0.145,37.0,1.0,0.0
 ASIAPAC ,Transport,Other fuels,-0.05,10.0,0.05,0.0
 CHINA ,Electricity,Biomass and waste,-0.5,0.898,0.03,0.0
 CHINA ,Electricity,Fossil fuels,-0.237,20.509,0.746,0.0
@@ -237,8 +237,8 @@ CHINA ,Heat,Other sources,-0.5,0.0,0.9,0.0
 CHINA ,Heat,Solar thermal,0.25,30.0,0.8,0.0
 CHINA ,Heat,Waste,0.09,39.596,0.15,0.0
 CHINA ,Transport,Oil,-0.09,37.0,0.95,0.0
-CHINA ,Transport,Bioenergy,0.107,37.0,1.0,0.0
-CHINA ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+CHINA ,Transport,Bioenergy,0.15,30.0,1.0,0.0
+CHINA ,Transport,Other fuels,-0.2,10.0,0.05,0.0
 INDIA ,Electricity,Biomass and waste,-0.2,3.075,0.05,0.0
 INDIA ,Electricity,Fossil fuels,-0.4,19.115,0.746,0.0
 INDIA ,Electricity,Geothermal,0.094,13.623,0.0,0.0
@@ -257,8 +257,8 @@ INDIA ,Heat,Other sources,-0.5,0.0,0.9,0.0
 INDIA ,Heat,Solar thermal,0.2,30.0,0.8,0.0
 INDIA ,Heat,Waste,0.09,39.596,0.15,0.0
 INDIA ,Transport,Oil,-0.09,37.0,0.95,0.0
-INDIA ,Transport,Bioenergy,0.107,37.0,1.0,0.0
-INDIA ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+INDIA ,Transport,Bioenergy,0.15,37.0,1.0,0.0
+INDIA ,Transport,Other fuels,-0.05,9.008,0.05,0.0
 JPN ,Electricity,Biomass and waste,-0.299,29.904,0.05,0.0
 JPN ,Electricity,Fossil fuels,-0.4,20.011,0.65,0.0
 JPN ,Electricity,Geothermal,0.093,20.0,0.01,0.0
@@ -277,7 +277,7 @@ JPN ,Heat,Other sources,-0.041,0.0,0.88,0.0
 JPN ,Heat,Solar thermal,0.25,30.0,0.75,0.0
 JPN ,Heat,Waste,0.112,50.0,0.15,0.0
 JPN ,Transport,Oil,-0.2,23.0,0.95,0.0
-JPN ,Transport,Bioenergy,0.107,37.0,1.0,0.0
+JPN ,Transport,Bioenergy,0.15,37.0,1.0,0.0
 JPN ,Transport,Other fuels,-0.05,10.0,0.05,0.0
  OECD ,Electricity,Biomass and waste,-0.2,11.278,0.05,0.0
  OECD ,Electricity,Fossil fuels,-0.11,24.288,0.65,0.0
