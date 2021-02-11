@@ -1189,7 +1189,7 @@ for i in range(0, len(iea_region_list)):
     fig.add_trace(go.Scatter(name='Buildings', line=dict(width=0.5, color="#F58518"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Buildings']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
     fig.add_trace(go.Scatter(name='Transport', line=dict(width=0.5, color="#7AA8B8"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Transport']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
     fig.add_trace(go.Scatter(name='Electricity', line=dict(width=0.5, color="#B279A2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Electricity']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-    fig.update_layout(title={'text': 'Emissions Mitigated, ' + iea_region_list[i], 'xanchor': 'center', 'x': 0.5})
+    fig.update_layout(title={'text': 'Emissions, ' + scenario + ', ' + iea_region_list[i] , 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e mitigated'}, hover_data=":.0f")
 
     if show_figs is True:
         fig.show()
@@ -1328,7 +1328,7 @@ for i in range(0, len(iea_region_list)):
         fig.add_trace(go.Scatter(name='Buildings', line=dict(width=0.5, color="#F58518"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Buildings']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
         fig.add_trace(go.Scatter(name='Transport', line=dict(width=0.5, color="#7AA8B8"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Transport']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
         fig.add_trace(go.Scatter(name='Electricity', line=dict(width=0.5, color="#B279A2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Electricity']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-        fig.update_layout(title={'text': 'Emissions Mitigated, ' + iea_region_list[i], 'xanchor': 'center', 'x': 0.5})
+        fig.update_layout(title={'text': 'Emissions Mitigated, ' + iea_region_list[i], 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e mitigated'}, hovertemplate=":.0f")
 
         if show_figs is True:
             fig.show()
@@ -1436,7 +1436,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-year = 2030
+ndcs = [(24.8, 58.7), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50)]
 
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[
@@ -1531,21 +1531,12 @@ for i in range(0, len(iea_region_list)):
             "Electricity",
         ]
     ).round(decimals=2)
-    '''
-    figure = px.bar(
-        fig,
-        y=fig.loc[:,2030],
-        x=fig.index,
-        orientation='h',
-        labels={"index": "Vector", year: "GtCO2e Mitigated in 2030"},
-        title="Climate Mitigation Potential in 2030, " + iea_region_list[i] + '(GtCO2e/yr)' 
-    )
-    '''
+
     figure = go.Figure(data=[go.Bar(x=fig.loc[:, 2050].values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050'), go.Bar(x=fig.loc[:, 2030].values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030')])
 
     figure.update_layout(title="Climate Mitigation Potential, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated'}, barmode='group', legend=dict(x=0.7, y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'))
-    figure.add_shape(type="line", x0=20, y0=-1, x1=20, y1=10, line=dict(color="LightSeaGreen", width=4, dash="dashdot"))
-    figure.add_shape(type="line", x0=50, y0=-1, x1=50, y1=10, line=dict(color="LightSeaGreen", width=4, dash="dashdot"))
+    figure.add_shape(type="line", x0=ndcs[i][0], y0=-1, x1=ndcs[i][0], y1=10, line=dict(color="LightSeaGreen", width=4, dash="dash"))
+    figure.add_shape(type="line", x0=ndcs[i][1], y0=-1, x1=ndcs[i][1], y1=10, line=dict(color="LightSeaGreen", width=4, dash="dash"))
     figure.show()
 
     pio.write_html(
