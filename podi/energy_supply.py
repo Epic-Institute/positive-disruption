@@ -219,8 +219,6 @@ def energy_supply(scenario, energy_demand):
 
         perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
-        # perc = perc.apply(lambda x: x.div(perc.sum()), axis=1)
-
         # harmonizing historical to projection
         def harmonize(perc, near_proj_per_elec_consump):
             if (
@@ -449,7 +447,7 @@ def energy_supply(scenario, energy_demand):
         for i in range(0, len(foo.index)):
             perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
 
-        perc = pd.DataFrame(perc).set_index(foo.index)
+        perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
 
         # harmonizing historical to projection
         def harmonize(perc, near_proj_per_heat_consump):
@@ -487,7 +485,7 @@ def energy_supply(scenario, energy_demand):
                     "Other sources",
                 ]
             ].sum()
-        ).clip(upper=1, lower=0)
+        ).clip(lower=0)
 
         return perc.loc[:, data_end_year + 1 :]
 
@@ -521,12 +519,12 @@ def energy_supply(scenario, energy_demand):
             )
             ).values
         """
-
+        """
         if scenario == "baseline":
             proj_consump = curve_smooth(proj_consump, "quadratic", 6)
         else:
             proj_consump = curve_smooth(proj_consump, "quadratic", 6)
-
+        """
         return proj_consump.clip(lower=0)
 
     # join timeseries of historical and projected heat consumption met by a given technology
@@ -556,11 +554,6 @@ def energy_supply(scenario, energy_demand):
             ["Coal", "Oil", "Natural gas", "Nuclear"]
         ].sum()
 
-        """
-        proj_per_heat_consump.loc["Fossil fuels"] = proj_per_heat_consump.loc[
-            ["Coal", "Oil", "Natural gas", "Other sources"]
-        ].sum()
-        """
         return hist_per_heat_consump.join(proj_per_heat_consump)
 
     # combine above functions to get heat consumption met by a given technology

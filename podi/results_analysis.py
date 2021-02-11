@@ -119,7 +119,6 @@ def results_analysis(
             [
                 "Bioenergy",
                 "Geothermal",
-                "Nuclear",
                 "Solar thermal",
                 "Waste",
                 "Other Sources",
@@ -176,10 +175,8 @@ def results_analysis(
             * renewable_heat
         )
     ).div(
-        (
-            (energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()).add(
-                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
-            )
+        (energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()).add(
+            energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
         )
     )
 
