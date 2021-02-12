@@ -91,7 +91,15 @@ for i in range(0, len(iea_region_list)):
     # region
 
     for k in ["em2", "mwedges", "em1"]:
-        path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
+        path = (
+            '"'
+            + k
+            + "-"
+            + "pathway"
+            + "-"
+            + (iea_region_list[i]).replace(" ", "")
+            + '.html"'
+        )
 
         mdFile.write(
             "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "

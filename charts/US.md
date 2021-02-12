@@ -19,6 +19,6 @@
   
 
 ## Emissions
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-US.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-US.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-US.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-US.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-US.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-US.html" height='500' width='150%'></iframe>  

@@ -19,6 +19,6 @@ European Union regional grouping, Albania, Belarus, Bosnia and Herzegovina, Gibr
   
 
 ## Emissions
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-EUR.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-EUR.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-EUR.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-EUR.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-EUR.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-EUR.html" height='500' width='150%'></iframe>  

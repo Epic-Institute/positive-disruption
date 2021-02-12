@@ -19,6 +19,6 @@
   
 
 ## Emissions
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-SAFR.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-SAFR.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-SAFR.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-SAFR.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-SAFR.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-SAFR.html" height='500' width='150%'></iframe>  
