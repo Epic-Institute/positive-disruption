@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 from mdutils.mdutils import MdUtils
-from mdutils.tools.Table import Table
-from mdutils import Html
 from podi.energy_demand import iea_region_list
 
 region_dict = {
@@ -90,7 +88,26 @@ for i in range(0, len(iea_region_list)):
 
     # region
 
-    for k in ["em2", "mwedges", "em1"]:
+    for k in ["em2"]:
+        path = (
+            '"'
+            + k
+            + "-"
+            + "baseline"
+            + "-"
+            + (iea_region_list[i]).replace(" ", "")
+            + '.html"'
+        )
+
+        mdFile.write(
+            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+        )
+        mdFile.write(path)
+        mdFile.write(" height='500' width='150%'></iframe>")
+
+        mdFile.new_line()
+
+    for k in ["mwedges", "em1"]:
         path = (
             '"'
             + k

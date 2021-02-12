@@ -1679,7 +1679,7 @@ for i in range(0, len(iea_region_list)):
     figure.update_layout(title="Climate Mitigation Potential, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated'}, barmode='group', legend=dict(x=0.7, y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'))
     figure.add_shape(type="line", x0=ndcs[i][0], y0=-0.5, x1=ndcs[i][0], y1=7.5, line=dict(color="LightSeaGreen", width=3, dash="dot"))
     figure.add_shape(type="line", x0=ndcs[i][1], y0=-0.5, x1=ndcs[i][1], y1=7.5, line=dict(color="LightSeaGreen", width=3, dash="dot"))
-    fig.add_trace(go.Scatter(x=[ndcs[i][0], ndcs[i][1]], y=[1, 1], text=["2030 NDC (placeholder data)", "2050 NDC (placeholder data)"], mode="text"))
+    figure.add_trace(go.Scatter(x=[ndcs[i][0] + 4, ndcs[i][1] - 4], y=['Electricity', 'Electricity'], text=["2030 NDC", "2050 NDC"], mode="text"))
     figure.show()
 
     pio.write_html(
