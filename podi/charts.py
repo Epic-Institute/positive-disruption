@@ -1216,7 +1216,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = 'pathway'
+scenario = 'baseline'
 
 for i in range(0, len(iea_region_list)):
     if scenario == 'baseline':
@@ -1331,7 +1331,7 @@ for i in range(0, len(iea_region_list)):
     fig.add_trace(go.Scatter(name='Buildings', line=dict(width=0.5, color="#F58518"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Buildings']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
     fig.add_trace(go.Scatter(name='Transport', line=dict(width=0.5, color="#7AA8B8"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Transport']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
     fig.add_trace(go.Scatter(name='Electricity', line=dict(width=0.5, color="#B279A2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Electricity']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-    fig.update_layout(title={'text': 'Emissions, ' + scenario.title() + ', ' + iea_region_list[i] , 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e'})
+    fig.update_layout(title={'text': 'Emissions, ' + scenario.title() + ', ' + iea_region_list[i], 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e'})
 
     if show_figs is True:
         fig.show()
