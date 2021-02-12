@@ -19,5 +19,6 @@ Southeast Asia regional grouping, Australia, Bangladesh, China, Chinese Taipei, 
   
 
 ## Emissions
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-ASIAPAC.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-ASIAPAC.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-ASIAPAC.html" height='500' width='150%'></iframe>  

@@ -19,5 +19,6 @@ All countries not included in OECD regional grouping.
   
 
 ## Emissions
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-NonOECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-NonOECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-NonOECD.html" height='500' width='150%'></iframe>  

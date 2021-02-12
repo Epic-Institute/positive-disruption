@@ -827,6 +827,133 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
+########################################
+# ACTUAL VS. PROJECTED ADOPTION CURVES #
+########################################
+
+# region
+
+for i in range(0, len(iea_region_list)):
+    fig = adoption_curves.loc[iea_region_list[i]] * 100
+
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
+    fig = px.line(
+        fig2,
+        x="Year",
+        y="% Adoption",
+        line_group="Sector",
+        color="Sector",
+        color_discrete_sequence=px.colors.qualitative.T10,
+        title="Percent of Total PD Adoption, " + iea_region_list[i],
+        hover_data={"% Adoption": ":.0f"},
+    )
+    fig.update_layout(title_x=0.5)
+    fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+    fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/scurves-" + iea_region_list[i] + ".html").replace(
+                " ", ""
+            ),
+            auto_open=False,
+        )
+
+    plt.show()
+
+    '''
+    for i in range(0, len(iea_region_list)):
+        for j in range(0, len(adoption_curves.loc[iea_region_list[i]].index)):
+            fig = adoption_curves.iloc[j]
+            plt.show()
+            plt.figure(j)
+            plt.plot(fig * 100, linestyle="--", color=(0.560, 0.792, 0.740))
+            plt.plot(
+                fig.loc[data_start_year:data_end_year] * 100,
+                linestyle="-",
+                color=(0, 0, 0),
+            )
+            plt.ylabel("% Adoption")
+            plt.xlim([fig.index.min(), fig.index.max()])
+            plt.title(
+                "Percent of Total PD Adoption, "
+                + fig.name[1]
+                + ", "
+                + iea_region_list[i]
+            )
+
+            if save_figs is True:
+                plt.savefig(
+                    fname=(
+                        "podi/data/figs/scurves_ind-"
+                        + fig.name[1]
+                        + "-"
+                        + iea_region_list[i]
+                    ).replace(" ", ""),
+                    format="png",
+                    bbox_inches="tight",
+                    pad_inches=0.1,
+                )
+            plt.clf()
+
+                # Absolute values
+
+                """
+                t = adoption_curves2.columns
+                data1 = adoption_curves2.loc['Grid']
+                data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
+
+                fig, ax1 = plt.subplots(figsize=(9, 5))
+
+                color = (0.560, 0.792, 0.740)    
+                ax1.set_ylabel('% Adoption', color=color )
+                ax1.plot(t, data1, color=color, linestyle = '--')
+                ax1.tick_params(axis='y', labelcolor=color)
+                plt.grid(which="major", linestyle=":", axis="y")
+                ax2 = ax1.twinx()
+                color='tab:blue'
+                ax2.set_ylabel(axis_label[j],color=color)
+                ax2.plot(t, data2,color=color, linestyle = '--')
+                ax2.tick_params(axis='y', labelcolor=color)
+                ax1.plot(
+                    t[0 : (data_end_year - data_start_year) + 2],
+                    data1[0 : (data_end_year - data_start_year) + 2],
+                    linestyle="-",
+                    color=(0, 0, 0),
+                )
+                ax2.plot(
+                    t[0 : (data_end_year - data_start_year) + 2],
+                    data2[0 : (data_end_year - data_start_year) + 2],
+                    linestyle="-",
+                    color=(0, 0, 0),
+                )
+                plt.xlim([2010, 2100])
+                plt.suptitle(
+                    "Total PD Adoption, "
+                    + 'Grid Decarb'
+                    + ", "
+                    + iea_region_list[i]
+                )
+                plt.title('% Adoption Projected - Teal Dashed Line \n Cumulative Capacity Projected - Blue Dashed Line \n (Mismatch between lines is due to growing electrical demand)', fontsize = 9)
+                fig.tight_layout()
+                plt.savefig(
+                    (fname="podi/data/figs/scurves2_ind-"
+                    + adoption_curves2.index[j]
+                    + "-"
+                    + iea_region_list[i]).replace(" ", ""),
+                    format="png",
+                    bbox_inches="tight",
+                    pad_inches=0.1,
+                )
+                plt.show()
+                """
+        '''
+
+# endregion
+
 ##############################
 # ADOPTION CURVES STAR CHART #
 ##############################
@@ -1089,7 +1216,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = 'baseline'
+scenario = 'pathway'
 
 for i in range(0, len(iea_region_list)):
     if scenario == 'baseline':
@@ -1204,7 +1331,7 @@ for i in range(0, len(iea_region_list)):
     fig.add_trace(go.Scatter(name='Buildings', line=dict(width=0.5, color="#F58518"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Buildings']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
     fig.add_trace(go.Scatter(name='Transport', line=dict(width=0.5, color="#7AA8B8"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Transport']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
     fig.add_trace(go.Scatter(name='Electricity', line=dict(width=0.5, color="#B279A2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Electricity']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-    fig.update_layout(title={'text': 'Emissions, ' + scenario + ', ' + iea_region_list[i] , 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e mitigated'}, hover_data=":.0f")
+    fig.update_layout(title={'text': 'Emissions, ' + scenario.title() + ', ' + iea_region_list[i] , 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e'})
 
     if show_figs is True:
         fig.show()
@@ -1324,7 +1451,7 @@ for i in range(0, len(iea_region_list)):
     em_targets_pathway.loc["baseline PD20"] = em_mit.append(spacer).sum()
 
     fig = ((em_mit.append(spacer)) / 1000).reindex(
-        ['Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR', spacer.name]).loc[:, 2020:].round(decimals=0)
+        ['Electricity', 'Transport', 'Buildings', 'Industry', 'Forests & Wetlands', 'Agriculture', 'CH4, N2O, F-gases', 'CDR', spacer.name]).loc[:, 2020:]
 
     if fig_type == 'plotly':
         fig = fig.T
@@ -1343,7 +1470,7 @@ for i in range(0, len(iea_region_list)):
         fig.add_trace(go.Scatter(name='Buildings', line=dict(width=0.5, color="#F58518"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Buildings']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
         fig.add_trace(go.Scatter(name='Transport', line=dict(width=0.5, color="#7AA8B8"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Transport']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
         fig.add_trace(go.Scatter(name='Electricity', line=dict(width=0.5, color="#B279A2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Electricity']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-        fig.update_layout(title={'text': 'Emissions Mitigated, ' + iea_region_list[i], 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e mitigated'}, hovertemplate=":.0f")
+        fig.update_layout(title={'text': 'Emissions Mitigated, ' + iea_region_list[i], 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e'})
 
         if show_figs is True:
             fig.show()
@@ -1451,7 +1578,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-ndcs = [(24.8, 58.7), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50), (20, 50)]
+ndcs = [(24.8, 58.7), (5, 10), (5, 10), (3, 5), (3, 5), (5, 10), (3, 5), (1, 3), (1, 3), (1, 5), (10, 30), (5, 10), (5, 10), (3, 5), (5, 7), (10, 30)]
 
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[
@@ -1545,13 +1672,13 @@ for i in range(0, len(iea_region_list)):
             "Transport",
             "Electricity",
         ]
-    ).round(decimals=2)
+    ).round(decimals=2).clip(lower=0)
 
     figure = go.Figure(data=[go.Bar(x=fig.loc[:, 2050].values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050'), go.Bar(x=fig.loc[:, 2030].values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030')])
 
     figure.update_layout(title="Climate Mitigation Potential, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated'}, barmode='group', legend=dict(x=0.7, y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'))
-    figure.add_shape(type="line", x0=ndcs[i][0], y0=-1, x1=ndcs[i][0], y1=10, line=dict(color="LightSeaGreen", width=4, dash="dash"))
-    figure.add_shape(type="line", x0=ndcs[i][1], y0=-1, x1=ndcs[i][1], y1=10, line=dict(color="LightSeaGreen", width=4, dash="dash"))
+    figure.add_shape(type="line", x0=ndcs[i][0], y0=-0.5, x1=ndcs[i][0], y1=7.5, line=dict(color="LightSeaGreen", width=3, dash="dot"))
+    figure.add_shape(type="line", x0=ndcs[i][1], y0=-0.5, x1=ndcs[i][1], y1=7.5, line=dict(color="LightSeaGreen", width=3, dash="dot"))
     figure.show()
 
     pio.write_html(
@@ -1559,14 +1686,6 @@ for i in range(0, len(iea_region_list)):
         file=("./charts/em1-" + iea_region_list[i] + ".html").replace(" ", ""),
         auto_open=False,
     )
-
-# endregion
-
-########################################
-# ACTUAL VS. PROJECTED ADOPTION CURVES #
-########################################
-
-# region
 
 # endregion
 
@@ -1974,22 +2093,6 @@ for i in range(0, len(iea_region_list)):
     )
     plt.show()
     plt.clf()
-
-# endregion
-
-###############################
-# ELECTRIFICATION OF VEHICLES #
-###############################
-
-# region
-
-# endregion
-
-################################################
-# TRANSPORT REDUCTION FROM DESIGN IMPROVEMENTS #
-################################################
-
-# region
 
 # endregion
 

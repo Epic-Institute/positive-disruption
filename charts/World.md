@@ -19,6 +19,6 @@
   
 
 ## Emissions
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-World.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-World.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-World.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-World.html" height='500' width='150%'></iframe>  

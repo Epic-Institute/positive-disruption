@@ -178,7 +178,7 @@ ME ,Heat,Solar thermal,0.15,35.0,0.8,0.0
 ME ,Heat,Waste,0.09,16.956,0.15,0.0
 ME ,Transport,Oil,-0.09,37.0,0.95,0.0
 ME ,Transport,Bioenergy,0.15,37.0,1.0,0.0
-ME ,Transport,Other fuels,-0.1,10.0,0.05,0.0
+ME ,Transport,Other fuels,-0.07,25.0,0.15,0.0
 RUS ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
 RUS ,Electricity,Fossil fuels,-0.2,23.093,0.746,0.0
 RUS ,Electricity,Geothermal,0.094,13.623,0.0,0.0
@@ -197,8 +197,8 @@ RUS ,Heat,Other sources,-0.1,21.856,0.078,0.0
 RUS ,Heat,Solar thermal,0.25,30.0,0.8,0.0
 RUS ,Heat,Waste,0.09,28.367,0.15,0.0
 RUS ,Transport,Oil,-0.09,37.0,0.95,0.0
-RUS ,Transport,Bioenergy,0.12,37.0,1.0,0.0
-RUS ,Transport,Other fuels,-0.177,18.407,0.4,0.0
+RUS ,Transport,Bioenergy,0.14,37.0,1.0,0.0
+RUS ,Transport,Other fuels,-0.07,30.0,0.4,0.0
 ASIAPAC ,Electricity,Biomass and waste,-0.2,0.0,0.05,0.0
 ASIAPAC ,Electricity,Fossil fuels,-0.31,22.548,0.746,0.0
 ASIAPAC ,Electricity,Geothermal,0.034,20.0,0.041,0.0
@@ -237,8 +237,8 @@ CHINA ,Heat,Other sources,-0.5,0.0,0.9,0.0
 CHINA ,Heat,Solar thermal,0.25,30.0,0.8,0.0
 CHINA ,Heat,Waste,0.09,39.596,0.15,0.0
 CHINA ,Transport,Oil,-0.09,37.0,0.95,0.0
-CHINA ,Transport,Bioenergy,0.15,30.0,1.0,0.0
-CHINA ,Transport,Other fuels,-0.2,10.0,0.05,0.0
+CHINA ,Transport,Bioenergy,0.18,30.0,1.0,0.0
+CHINA ,Transport,Other fuels,-0.07,25.0,0.1,0.0
 INDIA ,Electricity,Biomass and waste,-0.2,3.075,0.05,0.0
 INDIA ,Electricity,Fossil fuels,-0.4,19.115,0.746,0.0
 INDIA ,Electricity,Geothermal,0.094,13.623,0.0,0.0
@@ -317,8 +317,8 @@ NonOECD ,Heat,Other sources,-0.5,0.0,0.9,0.0
 NonOECD ,Heat,Solar thermal,0.2,30.0,0.8,0.0
 NonOECD ,Heat,Waste,0.09,32.727,0.15,0.0
 NonOECD ,Transport,Oil,-0.09,37.0,0.95,0.0
-NonOECD ,Transport,Bioenergy,0.107,37.0,1.0,0.0
-NonOECD ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+NonOECD ,Transport,Bioenergy,0.118,37.0,1.0,0.0
+NonOECD ,Transport,Other fuels,-0.07,25.0,0.15,0.0
 NAM ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
 NAM ,AFOLU,Avoided Coastal Impacts,0.026,99.999,1.1,0.0
 NAM ,AFOLU,Avoided Forest Conversion,0.025,99.999,1.0,0.0
