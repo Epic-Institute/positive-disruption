@@ -1478,7 +1478,7 @@ for i in range(0, len(iea_region_list)):
             pio.write_html(
                 fig,
                 file=(
-                    "./charts/mwedges-" + scenario + "-"
+                    "./charts/mwedges-" + 'pathway' + "-"
                     + iea_region_list[i]
                     + ".html"
                 ).replace(" ", ""),
@@ -1684,7 +1684,7 @@ for i in range(0, len(iea_region_list)):
 
     pio.write_html(
         figure,
-        file=("./charts/em1-" + scenario + "-" + iea_region_list[i] + ".html").replace(" ", ""),
+        file=("./charts/em1-" + 'pathway' + "-" + iea_region_list[i] + ".html").replace(" ", ""),
         auto_open=False,
     )
 
