@@ -57,7 +57,7 @@ def emissions(
 
     # region
     buildings_consump = (
-        energy_demand.loc[slice(None), "Buildings", slice(None), slice(None)]
+        energy_demand.loc[slice(None), "Buildings", slice(None), scenario]
         .groupby("IEA Region")
         .sum()
     )
@@ -92,7 +92,7 @@ def emissions(
 
     # region
     industry_consump = (
-        energy_demand.loc[slice(None), "Industry", slice(None)]
+        energy_demand.loc[slice(None), "Industry", slice(None), scenario]
         .groupby("IEA Region")
         .sum()
     )
