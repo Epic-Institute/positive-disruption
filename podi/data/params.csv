@@ -656,3 +656,148 @@ DevelopingECO ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 DevelopingECO ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 DevelopingECO ,AFOLU,Trees in Croplands,0.106,36.0,1.1,0.0
 World ,All,Carbon Dioxide Removal,0.1,40.0,1.0,0.0
+NAM ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+NAM ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+NAM ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+NAM ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+NAM ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+NAM ,AFOLU,Nitrogen Fertilizer Management,0.1,30.0,1.0,0.0
+NAM ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
+ OECD ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+ OECD ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+ OECD ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+ OECD ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+ OECD ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+ OECD ,AFOLU,Nitrogen Fertilizer Management,0.1,30.0,1.0,0.0
+ OECD ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
+NonOECD ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+NonOECD ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+NonOECD ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+NonOECD ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+NonOECD ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+NonOECD ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+NonOECD ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+World ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+World ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+World ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+World ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+World ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+US ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+US ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+US ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+US ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+US ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+US ,AFOLU,Nitrogen Fertilizer Management,0.1,30.0,1.0,0.0
+US ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
+EUR ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+EUR ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+EUR ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+EUR ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+EUR ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+EUR ,AFOLU,Nitrogen Fertilizer Management,0.1,30.0,1.0,0.0
+EUR ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
+EU ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+EU ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+EU ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+EU ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+EU ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+EU ,AFOLU,Nitrogen Fertilizer Management,0.1,30.0,1.0,0.0
+EU ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
+SAFR ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+SAFR ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+SAFR ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+SAFR ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+SAFR ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+SAFR ,AFOLU,Nitrogen Fertilizer Management,0.1,30.0,1.0,0.0
+SAFR ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
+JPN ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+JPN ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+JPN ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+JPN ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+JPN ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+JPN ,AFOLU,Nitrogen Fertilizer Management,0.1,30.0,1.0,0.0
+JPN ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
+AdvancedECO ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+AdvancedECO ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+AdvancedECO ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+AdvancedECO ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+AdvancedECO ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+AdvancedECO ,AFOLU,Nitrogen Fertilizer Management,0.1,30.0,1.0,0.0
+AdvancedECO ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
+CSAM ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+CSAM ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+CSAM ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+CSAM ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+CSAM ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+CSAM ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+CSAM ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+BRAZIL ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+BRAZIL ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+BRAZIL ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+BRAZIL ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+BRAZIL ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+BRAZIL ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+BRAZIL ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+AFRICA ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+AFRICA ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+AFRICA ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+AFRICA ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+AFRICA ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+AFRICA ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+AFRICA ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+ME ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+ME ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+ME ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+ME ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+ME ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+ME ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+ME ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+EURASIA ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+EURASIA ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+EURASIA ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+EURASIA ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+EURASIA ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+EURASIA ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+EURASIA ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+RUS ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+RUS ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+RUS ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+RUS ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+RUS ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+RUS ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+RUS ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+ASIAPAC ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+ASIAPAC ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+ASIAPAC ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+ASIAPAC ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+ASIAPAC ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+ASIAPAC ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+ASIAPAC ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+CHINA ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+CHINA ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+CHINA ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+CHINA ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+CHINA ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+CHINA ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+CHINA ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+INDIA ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+INDIA ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+INDIA ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+INDIA ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+INDIA ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+INDIA ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+INDIA ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+ASEAN ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+ASEAN ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+ASEAN ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+ASEAN ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+ASEAN ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+ASEAN ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+ASEAN ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
+DevelopingECO ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
+DevelopingECO ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
+DevelopingECO ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+DevelopingECO ,AFOLU,Biochar,0.106,80.0,1.0,0.0
+DevelopingECO ,AFOLU,Natural Regeneration,0.08,60.0,1.0,0.0
+DevelopingECO ,AFOLU,Nitrogen Fertilizer Management,0.1,50.0,1.0,0.0
+DevelopingECO ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0

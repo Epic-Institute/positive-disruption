@@ -78,11 +78,12 @@ def afolu(scenario):
         names=["Metric"],
     ).reorder_levels(["Region", "Sector", "Metric", "Unit"])
 
+    """
     if scenario == "baseline":
         afolu_adoption = afolu = pd.read_csv(
             "podi/data/afolu_input_baseline.csv"
         ).set_index(["Region", "Sector", "Metric", "Unit"])
-
+    """
     afolu_adoption.columns = afolu_adoption.columns.astype(int)
     afolu_per_adoption.columns = afolu_per_adoption.columns.astype(int)
 
