@@ -197,7 +197,7 @@ def emissions(
             .append(addtl_em)
         )
     else:
-    """
+        """
     em = (
         elec_em.append(transport_em)
         .append(buildings_em)
@@ -205,7 +205,6 @@ def emissions(
         .append(afolu_em)
         .append(addtl_em)
     )
-
     """
     em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
         ["Region", "Sector", "Metric"]

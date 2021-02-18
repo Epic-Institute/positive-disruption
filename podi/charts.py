@@ -1276,7 +1276,7 @@ for i in range(0, len(iea_region_list)):
         slice(None),
     ].sum().loc[data_start_year:long_proj_end_year]
 
-    em_othergas = em.loc[iea_region_list[i], "Other gases", ['CH4','N2O','F-Gases']].sum()
+    em_othergas = em.loc[iea_region_list[i], "Other gases", ['CH4', 'N2O', 'F-Gases']].sum()
 
     em_ch4 = em.loc[iea_region_list[i], "Other gases", ['CH4']].sum()
 
@@ -1622,7 +1622,8 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-ndcs = [(24.8, 58.7), (5, 10), (5, 10), (3, 5), (3, 5), (5, 10), (3, 5), (1, 3), (1, 3), (1, 5), (10, 30), (5, 10), (5, 10), (3, 5), (5, 7), (10, 30)]
+year = 2030
+ndcs = [(24.8, 58.7), (5, 7), (4.38, 6.07), (2, 3), (1.34, 1.9), (2, 3), (2, 3), (1.37, 1.37), (2, 3), (2.94, 4.58), (10, 15), (11.85, 21.51), (0.06, 0), (1.76, 2.7), (2, 3), (5, 10)]
 
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[
@@ -1718,20 +1719,30 @@ for i in range(0, len(iea_region_list)):
         ]
     ).round(decimals=4).clip(lower=0)
 
-    figure = go.Figure(data=[go.Bar(x=fig.loc[:, 2030].sum().values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030', marker_color='#B279A2'), go.Bar(x=fig.loc[:, 2050].sum().values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050', marker_color='#7AA8B8')])
+    data = {'Electricity': [0, 0, 0, 0, 0, 0, 0, fig.loc['Electricity', year], fig.loc['Electricity', year]], 'Transport': [0, 0, 0, 0, 0, 0, fig.loc['Transport', year], 0, fig.loc['Transport', year]], 'Buildings': [0, 0, 0, 0, 0, fig.loc['Buildings', year], 0, 0, fig.loc['Buildings', year]], 'Industry': [0, 0, 0, 0, fig.loc['Industry', year], 0, 0, 0, fig.loc['Industry', year]], 'Forests & Wetlands': [0, 0, 0, fig.loc['Forests & Wetlands', year], 0, 0, 0, 0, fig.loc['Forests & Wetlands', year]], 'Agriculture': [0, 0, fig.loc['Agriculture', year], 0, 0, 0, 0, 0, fig.loc['Agriculture', year]], "CH4, N2O, F-gases": [0, fig.loc['CH4, N2O, F-gases', year], 0, 0, 0, 0, 0, 0, fig.loc['CH4, N2O, F-gases', year]], 'CDR': [fig.loc['CDR', year], 0, 0, 0, 0, 0, 0, 0, fig.loc['CDR', year]], 'Total': [0, fig.loc['Electricity', year], fig.loc['Transport', year], fig.loc['Buildings', year], fig.loc['Industry', year], fig.loc['Forests & Wetlands', year], fig.loc['Agriculture', year], fig.loc['CH4, N2O, F-gases', year], fig.loc['CDR', year]], 'labels': ["CDR", "CH4, N2O, F-gases", "Agriculture", "Forests & Wetlands", "Industry", "Buildings", "Transport", "Electricity", 'Total']}
 
-    figure.add_shape(type="line", x0=ndcs[i][0], y0=-0.5, x1=ndcs[i][0], y1=7.5, line=dict(color="LightSeaGreen", width=3, dash="dot"), name='2030 NDC')
-    figure.add_shape(type="line", x0=ndcs[i][1], y0=-0.5, x1=ndcs[i][1], y1=7.5, line=dict(color="olive", width=3, dash="dot"), name='2050 NDC')
+    figure = go.Figure(data=[go.Bar(y=data['labels'], x=data['CDR'], offsetgroup=0, orientation='h'), go.Bar(y=data['labels'], x=data['CH4, N2O, F-gases'], offsetgroup=0, orientation='h'), go.Bar(y=data['labels'], x=data['Agriculture'], offsetgroup=0, orientation='h'), go.Bar(y=data['labels'], x=data['Forests & Wetlands'], offsetgroup=0, orientation='h'), go.Bar(y=data['labels'], x=data['Industry'], offsetgroup=0, orientation='h'), go.Bar(y=data['labels'], x=data['Buildings'], offsetgroup=0, orientation='h'), go.Bar(y=data['labels'], x=data['Transport'], offsetgroup=0, orientation='h'), go.Bar(y=data['labels'], x=data['Electricity'], offsetgroup=0, orientation='h')])
 
-    figure.add_trace(go.Scatter(x=[ndcs[i][0] + 4, ndcs[i][1] - 4], y=['Electricity', 'Electricity'], text=["2030 NDC", "2050 NDC"], mode="text", showlegend=False))
+    '''
+    figure = go.Figure(data=[go.Bar(x=fig.loc[:, 2030], y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030', marker_color='#B279A2'), go.Bar(x=fig.loc[:, 2050], y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050', marker_color='#7AA8B8'))
+    '''
 
-    figure.update_layout(title="Climate Mitigation Potential, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated'}, barmode='group', legend=dict(x=0.7, y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'))
+    if year == 2030:
+        j = 0
+    else:
+        j = 1
+
+    figure.add_shape(type="line", x0=ndcs[i][j], y0=-0.5, x1=ndcs[i][j], y1=8.5, line=dict(color="LightSeaGreen", width=3, dash="dot"), name= 'NDC')
+
+    figure.add_trace(go.Scatter(x=[ndcs[i][j]], y=['CDR'], text=["NDC  Target"], mode="text", showlegend=False))
+
+    figure.update_layout(title="Climate Mitigation Potential, " + str(year) + ", " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated in ' + str(year)}, barmode='stack', legend=dict(x=0.7, y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'), showlegend=False)
 
     figure.show()
 
     pio.write_html(
         figure,
-        file=("./charts/em1-" + 'pathway' + "-" + iea_region_list[i] + ".html").replace(" ", ""),
+        file=("./charts/em1-" + 'pathway' + "-" + str(year) + "-" + iea_region_list[i] + ".html").replace(" ", ""),
         auto_open=False,
     )
 

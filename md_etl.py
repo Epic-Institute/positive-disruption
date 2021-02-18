@@ -28,7 +28,7 @@ region_dict = {
 }
 
 for i in range(0, len(iea_region_list)):
-    mdFile = MdUtils(file_name=iea_region_list[i].replace(" ", "") + ".md")
+    mdFile = MdUtils(file_name="md-" + iea_region_list[i].replace(" ", "") + ".md")
 
     mdFile.new_header(level=1, title=iea_region_list[i]).replace(" ", "")
     mdFile.new_line()
@@ -107,7 +107,7 @@ for i in range(0, len(iea_region_list)):
 
             mdFile.new_line()
 
-    for k in ["mwedges", "em1"]:
+    for k in ["mwedges"]:
         path = (
             '"'
             + k
@@ -125,6 +125,28 @@ for i in range(0, len(iea_region_list)):
         mdFile.write(" height='500' width='150%'></iframe>")
 
         mdFile.new_line()
+
+    for j in ["em1"]:
+        for k in ["2030", "2050"]:
+            path = (
+                '"'
+                + j
+                + "-"
+                + "pathway"
+                + "-"
+                + k
+                + "-"
+                + (iea_region_list[i]).replace(" ", "")
+                + '.html"'
+            )
+
+            mdFile.write(
+                "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+            )
+            mdFile.write(path)
+            mdFile.write(" height='500' width='150%'></iframe>")
+
+            mdFile.new_line()
 
     # endregion
 
