@@ -20,5 +20,6 @@ Bahrain, Islamic Republic of Iran, Iraq, Jordan, Kuwait, Lebanon, Oman, Qatar, S
 
 ## Emissions
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-baseline-ME.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-ME.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-ME.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-ME.html" height='500' width='150%'></iframe>  

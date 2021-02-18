@@ -20,5 +20,6 @@
 
 ## Emissions
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-baseline-RUS.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-RUS.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-RUS.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-RUS.html" height='500' width='150%'></iframe>  

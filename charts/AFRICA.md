@@ -20,5 +20,6 @@ Algeria, Egypt, Libya, Morocco, Tunisia, Angola, Benin, Botswana, Cameroon, Repu
 
 ## Emissions
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-baseline-AFRICA.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-AFRICA.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-AFRICA.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-AFRICA.html" height='500' width='150%'></iframe>  

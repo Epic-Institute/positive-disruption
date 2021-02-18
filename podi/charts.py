@@ -34,7 +34,7 @@ show_figs = True
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -1216,7 +1216,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = 'pathway'
+scenario = 'baseline'
 
 for i in range(0, len(iea_region_list)):
     if scenario == 'baseline':
@@ -1241,7 +1241,7 @@ for i in range(0, len(iea_region_list)):
     ].sum().loc[data_start_year:long_proj_end_year]
 
     em_industry = em.loc[
-        iea_region_list[i], "Industry", slice(None)
+        iea_region_list[i], ["Industry", 'Other gases'], ['Fossil fuels', 'Cement']
     ].sum().loc[data_start_year:long_proj_end_year]
 
     em_ra = afolu_em.loc[
@@ -1276,7 +1276,13 @@ for i in range(0, len(iea_region_list)):
         slice(None),
     ].sum().loc[data_start_year:long_proj_end_year]
 
-    em_othergas = em.loc[iea_region_list[i], "Other gases", slice(None)].sum()
+    em_othergas = em.loc[iea_region_list[i], "Other gases", ['CH4','N2O','F-Gases']].sum()
+
+    em_ch4 = em.loc[iea_region_list[i], "Other gases", ['CH4']].sum()
+
+    em_n2o = em.loc[iea_region_list[i], "Other gases", ['N2O']].sum()
+
+    em_fgas = em.loc[iea_region_list[i], "Other gases", ['F-Gases']].sum()
 
     em_cdr = -cdr_em.loc[iea_region_list[i]].sum()
 
@@ -1286,9 +1292,11 @@ for i in range(0, len(iea_region_list)):
             em_transport,
             em_buildings,
             em_industry,
+            em_ch4,
+            em_n2o,
+            em_fgas,
             em_ra,
             em_fw,
-            em_othergas,
             em_cdr,
         ]
     ).rename(
@@ -1297,23 +1305,42 @@ for i in range(0, len(iea_region_list)):
             1: "Transport",
             2: "Buildings",
             3: "Industry",
-            4: "Forests & Wetlands",
-            5: "Agriculture",
-            6: "CH4, N2O, F-gases",
-            7: "CDR",
+            4: "CH4",
+            5: "N2O",
+            6: "F-gases",
+            7: "Agriculture",
+            8: "Forests & Wetlands",
+            9: "CDR"
         }
     )
 
-    fig = ((em) / 1000).reindex(
+    '''
+
+    em = pd.DataFrame(
         [
-            'CDR',
-            'CH4, N2O, F-gases',
-            'Agriculture',
-            'Forests & Wetlands',
-            'Industry',
-            'Buildings',
-            'Transport',
-            'Electricity']).loc[:, 2020:]
+            em_cdr,
+            em_othergas,
+            em_fw,
+            em_ra,
+            em_industry,
+            em_buildings,
+            em_transport,
+            em_electricity
+        ]
+    ).rename(
+        index={
+            0: 'CDR',
+            1: "CH4, N2O, F-gases",
+            2: 'Forests & Wetlands',
+            3: 'Agriculture',
+            4: 'Industry',
+            5: 'Buildings',
+            6: 'Transport',
+            7: 'Electricity'
+        }
+    )
+    '''
+    fig = ((em) / 1000).loc[:, 2020:]
 
     fig = fig.T
     fig.index.name = "Year"
@@ -1323,14 +1350,31 @@ for i in range(0, len(iea_region_list)):
     )
 
     fig = go.Figure()
+    
     fig.add_trace(go.Scatter(name='CDR', line=dict(width=0.5, color="#FF9DA6"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'CDR']['Emissions, GtCO2e'], fill='tozeroy', stackgroup='one'))
+
+    '''    
     fig.add_trace(go.Scatter(name='CH4, N2O, F-gases', line=dict(width=0.5, color="#E45756"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'CH4, N2O, F-gases']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+    '''
+    
     fig.add_trace(go.Scatter(name='Agriculture', line=dict(width=0.5, color="#72B7B2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Agriculture']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+    
     fig.add_trace(go.Scatter(name='Forests & Wetlands', line=dict(width=0.5, color="#54A24B"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Forests & Wetlands']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-    fig.add_trace(go.Scatter(name='Industry', line=dict(width=0.5, color="#60738C"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Industry']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-    fig.add_trace(go.Scatter(name='Buildings', line=dict(width=0.5, color="#F58518"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Buildings']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-    fig.add_trace(go.Scatter(name='Transport', line=dict(width=0.5, color="#7AA8B8"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Transport']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
-    fig.add_trace(go.Scatter(name='Electricity', line=dict(width=0.5, color="#B279A2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Electricity']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
+
+    fig.add_trace(go.Scatter(name='CH4', line=dict(width=0.5, color="#E45756"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'CH4']['Emissions, GtCO2e'], fill='tonexty', stackgroup='two'))
+    
+    fig.add_trace(go.Scatter(name='N2O', line=dict(width=0.5, color="#77453b"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'N2O']['Emissions, GtCO2e'], fill='tonexty', stackgroup='two'))
+    
+    fig.add_trace(go.Scatter(name='F-gases', line=dict(width=0.5, color="#bbe272"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'F-gases']['Emissions, GtCO2e'], fill='tonexty', stackgroup='two'))
+
+    fig.add_trace(go.Scatter(name='Industry', line=dict(width=0.5, color="#60738C"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Industry']['Emissions, GtCO2e'], fill='tonexty', stackgroup='two'))
+    
+    fig.add_trace(go.Scatter(name='Buildings', line=dict(width=0.5, color="#F58518"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Buildings']['Emissions, GtCO2e'], fill='tonexty', stackgroup='two'))
+    
+    fig.add_trace(go.Scatter(name='Transport', line=dict(width=0.5, color="#7AA8B8"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Transport']['Emissions, GtCO2e'], fill='tonexty', stackgroup='two'))
+    
+    fig.add_trace(go.Scatter(name='Electricity', line=dict(width=0.5, color="#B279A2"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'Electricity']['Emissions, GtCO2e'], fill='tonexty', stackgroup='two'))
+    
     fig.update_layout(title={'text': 'Emissions, ' + scenario.title() + ', ' + iea_region_list[i], 'xanchor': 'center', 'x': 0.5}, xaxis={'title': 'Year'}, yaxis={'title': 'GtCO2e'})
 
     if show_figs is True:
@@ -1674,12 +1718,15 @@ for i in range(0, len(iea_region_list)):
         ]
     ).round(decimals=4).clip(lower=0)
 
-    figure = go.Figure(data=[go.Bar(x=fig.loc[:, :2050].sum(axis=1).values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050'), go.Bar(x=fig.loc[:, :2030].sum(axis=1).values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030')])
+    figure = go.Figure(data=[go.Bar(x=fig.loc[:, 2030].sum().values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030', marker_color='#B279A2'), go.Bar(x=fig.loc[:, 2050].sum().values, y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050', marker_color='#7AA8B8')])
+
+    figure.add_shape(type="line", x0=ndcs[i][0], y0=-0.5, x1=ndcs[i][0], y1=7.5, line=dict(color="LightSeaGreen", width=3, dash="dot"), name='2030 NDC')
+    figure.add_shape(type="line", x0=ndcs[i][1], y0=-0.5, x1=ndcs[i][1], y1=7.5, line=dict(color="olive", width=3, dash="dot"), name='2050 NDC')
+
+    figure.add_trace(go.Scatter(x=[ndcs[i][0] + 4, ndcs[i][1] - 4], y=['Electricity', 'Electricity'], text=["2030 NDC", "2050 NDC"], mode="text", showlegend=False))
 
     figure.update_layout(title="Climate Mitigation Potential, " + iea_region_list[i], title_x=0.5, xaxis={'title': 'GtCO2e mitigated'}, barmode='group', legend=dict(x=0.7, y=0, bgcolor='rgba(255, 255, 255, 0)', bordercolor='rgba(255, 255, 255, 0)'))
-    figure.add_shape(type="line", x0=ndcs[i][0], y0=-0.5, x1=ndcs[i][0], y1=7.5, line=dict(color="LightSeaGreen", width=3, dash="dot"))
-    figure.add_shape(type="line", x0=ndcs[i][1], y0=-0.5, x1=ndcs[i][1], y1=7.5, line=dict(color="LightSeaGreen", width=3, dash="dot"))
-    figure.add_trace(go.Scatter(x=[ndcs[i][0] + 4, ndcs[i][1] - 4], y=['Electricity', 'Electricity'], text=["2030 NDC", "2050 NDC"], mode="text"))
+
     figure.show()
 
     pio.write_html(

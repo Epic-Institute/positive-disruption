@@ -40,6 +40,7 @@ def emissions(
     #################
 
     # region
+
     elec_consump = (
         pd.concat(
             [elec_consump], keys=["Electricity"], names=["Sector"]
@@ -56,6 +57,7 @@ def emissions(
     ###############
 
     # region
+
     buildings_consump = (
         energy_demand.loc[slice(None), "Buildings", slice(None), scenario]
         .groupby("IEA Region")
@@ -65,9 +67,7 @@ def emissions(
 
     buildings_consump = (
         buildings_consump
-        * heat_per_adoption.loc[
-            slice(None), ["Coal", "Natural gas", "Oil"], slice(None)
-        ]
+        * heat_per_adoption.loc[slice(None), ["Fossil fuels"], scenario]
         .groupby("Region")
         .sum()
     )
@@ -100,12 +100,7 @@ def emissions(
 
     industry_consump = (
         industry_consump
-        * heat_per_adoption.loc[
-            slice(None),
-            ["Coal", "Natural gas", "Oil"],
-            scenario,
-            slice(None),
-        ]
+        * heat_per_adoption.loc[slice(None), ["Coal", "Natural gas", "Oil"], scenario]
         .groupby("Region")
         .sum()
     )
