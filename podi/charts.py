@@ -1927,7 +1927,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-year = 2050
+year = 2030
 ndcs = [
     (24.8, 58.7),
     (5, 7),
@@ -2056,6 +2056,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Electricity", year],
+            0,
             fig.loc["Electricity", year],
         ],
         "Transport": [
@@ -2066,6 +2067,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Transport", year],
+            0,
             0,
             fig.loc["Transport", year],
         ],
@@ -2078,6 +2080,7 @@ for i in range(0, len(iea_region_list)):
             fig.loc["Buildings", year],
             0,
             0,
+            0,
             fig.loc["Buildings", year],
         ],
         "Industry": [
@@ -2086,6 +2089,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Industry", year],
+            0,
             0,
             0,
             0,
@@ -2101,6 +2105,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Forests & Wetlands", year],
+            0,
         ],
         "Agriculture": [
             0,
@@ -2112,6 +2117,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Agriculture", year],
+            0,
         ],
         "CH4, N2O, F-gases": [
             0,
@@ -2122,19 +2128,33 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
+            0,
             fig.loc["CH4, N2O, F-gases", year],
         ],
-        "CDR": [fig.loc["CDR", year], 0, 0, 0, 0, 0, 0, 0, fig.loc["CDR", year]],
-        "Total": [
+        "CDR": [fig.loc["CDR", year], 0, 0, 0, 0, 0, 0, 0, 0, fig.loc["CDR", year]],
+        "NCS": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            fig.loc["Forests & Wetlands", year],
+            fig.loc["Agriculture", year],
+            0,
+            0,
+        ],
+        "Energy": [
             0,
             fig.loc["Electricity", year],
             fig.loc["Transport", year],
             fig.loc["Buildings", year],
             fig.loc["Industry", year],
-            fig.loc["Forests & Wetlands", year],
-            fig.loc["Agriculture", year],
-            fig.loc["CH4, N2O, F-gases", year],
-            fig.loc["CDR", year],
+            0,
+            0,
+            0,
+            0,
+            0,
         ],
         "labels": [
             "CDR",
@@ -2145,7 +2165,8 @@ for i in range(0, len(iea_region_list)):
             "Buildings",
             "Transport",
             "Electricity",
-            "Total",
+            "NCS",
+            "Energy",
         ],
     }
 
