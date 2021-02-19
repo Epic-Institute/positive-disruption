@@ -1927,7 +1927,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-year = 2030
+year = 2050
 ndcs = [
     (24, 45),
     (5, 7),
@@ -2170,6 +2170,8 @@ for i in range(0, len(iea_region_list)):
         ],
     }
 
+    opacity = 0.65
+
     figure = go.Figure(
         data=[
             go.Bar(
@@ -2178,6 +2180,7 @@ for i in range(0, len(iea_region_list)):
                 offsetgroup=0,
                 orientation="h",
                 marker_color="#FF9DA6",
+                opacity=opacity,
             ),
             go.Bar(
                 y=data["labels"],
@@ -2185,6 +2188,7 @@ for i in range(0, len(iea_region_list)):
                 offsetgroup=0,
                 orientation="h",
                 marker_color="#E45756",
+                opacity=opacity,
             ),
             go.Bar(
                 y=data["labels"],
@@ -2192,6 +2196,7 @@ for i in range(0, len(iea_region_list)):
                 offsetgroup=0,
                 orientation="h",
                 marker_color="#72B7B2",
+                opacity=opacity,
             ),
             go.Bar(
                 y=data["labels"],
@@ -2199,6 +2204,7 @@ for i in range(0, len(iea_region_list)):
                 offsetgroup=0,
                 orientation="h",
                 marker_color="#54A24B",
+                opacity=opacity,
             ),
             go.Bar(
                 y=data["labels"],
@@ -2206,6 +2212,7 @@ for i in range(0, len(iea_region_list)):
                 offsetgroup=0,
                 orientation="h",
                 marker_color="#60738C",
+                opacity=opacity,
             ),
             go.Bar(
                 y=data["labels"],
@@ -2213,6 +2220,7 @@ for i in range(0, len(iea_region_list)):
                 offsetgroup=0,
                 orientation="h",
                 marker_color="#F58518",
+                opacity=opacity,
             ),
             go.Bar(
                 y=data["labels"],
@@ -2220,6 +2228,7 @@ for i in range(0, len(iea_region_list)):
                 offsetgroup=0,
                 orientation="h",
                 marker_color="#7AA8B8",
+                opacity=opacity,
             ),
             go.Bar(
                 y=data["labels"],
@@ -2227,6 +2236,7 @@ for i in range(0, len(iea_region_list)):
                 offsetgroup=0,
                 orientation="h",
                 marker_color="#B279A2",
+                opacity=opacity,
             ),
         ]
     )
