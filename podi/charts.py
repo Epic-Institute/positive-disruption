@@ -1927,7 +1927,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-year = 2030
+year = 2050
 ndcs = [
     (24.8, 58.7),
     (5, 7),
