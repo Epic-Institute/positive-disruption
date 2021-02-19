@@ -27,8 +27,8 @@ def emissions(
     em_factors = (
         pd.read_csv("podi/data/emissions_factors.csv")
         .drop(columns=["Unit"])
-        .set_index(["Region", "Sector", "Metric", "Scenario"])
-    ).loc[slice(None), slice(None), slice(None), scenario]
+        .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])
+    ).loc[slice(None), slice(None), slice(None), slice(None), scenario]
 
     em_factors.columns = em_factors.columns.astype(int)
     em_factors = em_factors.loc[:, data_start_year:long_proj_end_year]
@@ -46,8 +46,18 @@ def emissions(
             [elec_consump], keys=["Electricity"], names=["Sector"]
         ).reorder_levels(["Region", "Sector", "Metric", "Scenario"])
     ).loc[slice(None), slice(None), slice(None), scenario]
+
+    elec_consump2 = []
+
+    for i in ["CO2", "CH4", "N2O"]:
+        elec_consump2 = pd.DataFrame(elec_consump2).append(
+            pd.concat([elec_consump], keys=[i], names=["Gas"]).reorder_levels(
+                ["Region", "Sector", "Metric", "Gas"]
+            )
+        )
+
     elec_em = (
-        elec_consump * em_factors[em_factors.index.isin(elec_consump.index.values)]
+        elec_consump2 * em_factors[em_factors.index.isin(elec_consump2.index.values)]
     )
 
     # endregion
@@ -58,8 +68,9 @@ def emissions(
 
     # region
 
+    # add 'Electricity' to energy_demand here to toggle emissions from Electricity to Buildings
     buildings_consump = (
-        energy_demand.loc[slice(None), "Buildings", slice(None), scenario]
+        energy_demand.loc[slice(None), "Buildings", ["Heat"], scenario]
         .groupby("IEA Region")
         .sum()
     )
@@ -79,9 +90,18 @@ def emissions(
         [buildings_consump], keys=["Fossil fuels"], names=["Metric"]
     ).reorder_levels(["Region", "Sector", "Metric"])
 
+    buildings_consump2 = []
+
+    for i in ["CO2", "CH4", "N2O"]:
+        buildings_consump2 = pd.DataFrame(buildings_consump2).append(
+            pd.concat([buildings_consump], keys=[i], names=["Gas"]).reorder_levels(
+                ["Region", "Sector", "Metric", "Gas"]
+            )
+        )
+
     buildings_em = (
-        buildings_consump
-        * em_factors[em_factors.index.isin(buildings_consump.index.values)]
+        buildings_consump2
+        * em_factors[em_factors.index.isin(buildings_consump2.index.values)]
     )
 
     # endregion
@@ -91,8 +111,10 @@ def emissions(
     ###############
 
     # region
+
+    # add 'Electricity' to energy_demand here to toggle emissions from Electricity to Buildings
     industry_consump = (
-        energy_demand.loc[slice(None), "Industry", slice(None), scenario]
+        energy_demand.loc[slice(None), "Industry", ["Heat"], scenario]
         .groupby("IEA Region")
         .sum()
     )
@@ -112,9 +134,18 @@ def emissions(
         [industry_consump], keys=["Fossil fuels"], names=["Metric"]
     ).reorder_levels(["Region", "Sector", "Metric"])
 
+    industry_consump2 = []
+
+    for i in ["CO2", "CH4", "N2O"]:
+        industry_consump2 = pd.DataFrame(industry_consump2).append(
+            pd.concat([industry_consump], keys=[i], names=["Gas"]).reorder_levels(
+                ["Region", "Sector", "Metric", "Gas"]
+            )
+        )
+
     industry_em = (
-        industry_consump
-        * em_factors[em_factors.index.isin(industry_consump.index.values)]
+        industry_consump2
+        * em_factors[em_factors.index.isin(industry_consump2.index.values)]
     )
     # endregion
 
@@ -123,15 +154,25 @@ def emissions(
     ###########################
 
     # region
+
     transport_consump = (
         pd.concat([transport_consump], keys=["Transport"], names=["Sector"])
         .reorder_levels(["Region", "Sector", "Metric", "Scenario"])
         .loc[slice(None), slice(None), slice(None), scenario]
     )
 
+    transport_consump2 = []
+
+    for i in ["CO2", "CH4", "N2O"]:
+        transport_consump2 = pd.DataFrame(transport_consump2).append(
+            pd.concat([transport_consump], keys=[i], names=["Gas"]).reorder_levels(
+                ["Region", "Sector", "Metric", "Gas"]
+            )
+        )
+
     transport_em = (
-        transport_consump
-        * em_factors[em_factors.index.isin(transport_consump.index.values)]
+        transport_consump2
+        * em_factors[em_factors.index.isin(transport_consump2.index.values)]
     ).drop(index=["Bioenergy", "Oil", "Other fuels"], level=2)
 
     # endregion
@@ -145,6 +186,10 @@ def emissions(
     # afolu_em = afolu_em.droplevel(["Unit"])
     # afolu_em.columns = afolu_em.columns.astype(int)
     afolu_em = afolu_em.loc[:, data_start_year:long_proj_end_year]
+
+    afolu_em = pd.concat([afolu_em], keys=["CO2"], names=["Gas"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas"]
+    )
 
     # endregion
 
@@ -176,6 +221,10 @@ def emissions(
                 axis=1,
             )
         ).values
+
+    addtl_em = pd.concat([addtl_em], keys=["CO2"], names=["Gas"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas"]
+    )
 
     # endregion
     """
@@ -215,4 +264,4 @@ def emissions(
     em_targets = pd.read_csv(targets_em).set_index("Scenario")
     em_targets.columns = em_targets.columns.astype(int)
 
-    return em.round(decimals=0), em_targets.round(decimals=0)
+    return em.round(decimals=3), em_targets.round(decimals=3)

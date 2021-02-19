@@ -138,6 +138,7 @@ afolu_em_pathway = pd.concat(
 ).reorder_levels(["Region", "Sector", "Metric"])
 afolu_em_pathway = afolu_em_pathway.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
 
+afolu_em_baseline = afolu_em_baseline.droplevel(["Unit"])
 
 # endregion
 
