@@ -2170,7 +2170,7 @@ for i in range(0, len(iea_region_list)):
         ],
     }
 
-    opacity = 0.65
+    opacity = 0.5
 
     figure = go.Figure(
         data=[
