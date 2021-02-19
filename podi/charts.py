@@ -38,7 +38,7 @@ show_figs = True
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -138,7 +138,7 @@ if chart_type == "stacked":
                 title="Energy Demand, " + iea_region_list[i] + ", " + scenario.title(),
                 hover_data={"TFC, " + unit[0]: ":.0f"},
             )
-            fig.update_layout(title_x=0.5)
+            fig.update_layout(title_x=0.5, legend_traceorder="reversed")
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
             if show_figs is True:
                 fig.show()
@@ -356,7 +356,7 @@ if chart_type == "line":
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -454,7 +454,7 @@ if chart_type == "stacked":
                 + iea_region_list[i],
                 hover_data={"TFC, " + unit[0]: ":.0f"},
             )
-            fig.update_layout(title_x=0.5)
+            fig.update_layout(title_x=0.5, legend_traceorder="reversed")
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
             if show_figs is True:
                 fig.show()
