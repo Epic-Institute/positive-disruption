@@ -1268,7 +1268,8 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
+start_year = 2010
 
 for i in range(0, len(iea_region_list)):
     if scenario == "baseline":
@@ -1412,7 +1413,7 @@ for i in range(0, len(iea_region_list)):
         }
     )
     """
-    fig = ((em) / 1000).loc[:, 2020:]
+    fig = ((em) / 1000).loc[:, start_year:]
 
     fig = fig.T
     fig.index.name = "Year"
