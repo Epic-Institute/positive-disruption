@@ -49,7 +49,7 @@ def results_analysis(
     )
     grid_decarb = pd.DataFrame(grid_decarb).T
     grid_decarb.columns = grid_decarb.columns.astype(int)
-    grid_decarb.rename(index={0: "Grid"}, inplace=True)
+    grid_decarb.rename(index={0: "Electricity"}, inplace=True)
 
     # endregion
 

@@ -140,6 +140,10 @@ afolu_em_pathway = afolu_em_pathway.apply(lambda x: x.subtract(x.loc[2020]), axi
 
 afolu_em_baseline = afolu_em_baseline.droplevel(["Unit"])
 
+afolu_em_mitigated = afolu_em_mitigated.apply(
+    lambda x: x.subtract(afolu_em_mitigated.loc[:, 2020].values), axis=0
+)
+
 # endregion
 
 #############
