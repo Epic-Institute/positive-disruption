@@ -1929,7 +1929,7 @@ for i in range(0, len(iea_region_list)):
 
 year = 2030
 ndcs = [
-    (24.8, 58.7),
+    (24, 45),
     (5, 7),
     (4.38, 6.07),
     (2, 3),
@@ -2240,25 +2240,35 @@ for i in range(0, len(iea_region_list)):
     else:
         j = 1
 
-    figure.add_shape(
-        type="line",
-        x0=ndcs[i][j],
-        y0=-0.5,
-        x1=ndcs[i][j],
-        y1=8.5,
-        line=dict(color="LightSeaGreen", width=3, dash="dot"),
-        name="NDC",
-    )
-
-    figure.add_trace(
-        go.Scatter(
-            x=[ndcs[i][j]],
-            y=["CDR"],
-            text=["NDC  Target"],
-            mode="text",
-            showlegend=False,
+    if iea_region_list[i] in [
+        "World ",
+        "US ",
+        "SAFR ",
+        "RUS ",
+        "JPN ",
+        "CHINA ",
+        "BRAZIL ",
+        "INDIA ",
+    ]:
+        figure.add_shape(
+            type="line",
+            x0=ndcs[i][j],
+            y0=-0.5,
+            x1=ndcs[i][j],
+            y1=9.5,
+            line=dict(color="LightSeaGreen", width=3, dash="dot"),
+            name="NDC",
         )
-    )
+
+        figure.add_trace(
+            go.Scatter(
+                x=[ndcs[i][j]],
+                y=["CDR"],
+                text=["Target"],
+                mode="text",
+                showlegend=False,
+            )
+        )
 
     figure.update_layout(
         title="Climate Mitigation Potential, " + str(year) + ", " + iea_region_list[i],
