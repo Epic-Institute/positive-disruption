@@ -215,6 +215,7 @@ if chart_type == "stacked":
                 xaxis={"title": "Year"},
                 yaxis={"title": "TFC, " + unit[0]},
             )
+            fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
 
             """
             fig = px.area(
@@ -449,7 +450,7 @@ if chart_type == "line":
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -678,6 +679,8 @@ if chart_type == "stacked":
                 xaxis={"title": "Year"},
                 yaxis={"title": "TFC, " + unit[0]},
             )
+
+            fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
 
             """
             fig = px.area(
@@ -1509,7 +1512,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 start_year = 2010
 
 for i in range(0, len(iea_region_list)):
@@ -1789,6 +1792,8 @@ for i in range(0, len(iea_region_list)):
         yaxis={"title": "GtCO2e"},
     )
 
+    fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -1926,7 +1931,7 @@ for i in range(0, len(iea_region_list)):
                 spacer.name,
             ]
         )
-        .loc[:, 2020:]
+        .loc[:, proj_start_year:]
     )
 
     if fig_type == "plotly":
@@ -2036,6 +2041,8 @@ for i in range(0, len(iea_region_list)):
             xaxis={"title": "Year"},
             yaxis={"title": "GtCO2e"},
         )
+
+        fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
 
         if show_figs is True:
             fig.show()
