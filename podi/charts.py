@@ -38,7 +38,7 @@ show_figs = True
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -128,6 +128,95 @@ if chart_type == "stacked":
             fig2 = pd.melt(
                 fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0]
             )
+
+            fig = go.Figure()
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Transport-Nonelectric",
+                    line=dict(width=0.5, color="#7AA8B8"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Transport-Nonelectric"][
+                        "TFC, " + unit[0]
+                    ],
+                    fill="tozeroy",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Transport-Electricity",
+                    line=dict(width=0.5, color="#bbe272"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Transport-Electricity"][
+                        "TFC, " + unit[0]
+                    ],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Buildings-Heat",
+                    line=dict(width=0.5, color="#F58518"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Buildings-Heat"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Buildings-Electricity",
+                    line=dict(width=0.5, color="#54A24B"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Buildings-Electricity"][
+                        "TFC, " + unit[0]
+                    ],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Industry-Heat",
+                    line=dict(width=0.5, color="#60738C"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Industry-Heat"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Industry-Electricity",
+                    line=dict(width=0.5, color="#B279A2"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Industry-Electricity"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.update_layout(
+                title={
+                    "text": "Energy Demand, "
+                    + iea_region_list[i]
+                    + ", "
+                    + scenario.title(),
+                    "xanchor": "center",
+                    "x": 0.5,
+                },
+                xaxis={"title": "Year"},
+                yaxis={"title": "TFC, " + unit[0]},
+            )
+
+            """
             fig = px.area(
                 fig2,
                 x="Year",
@@ -136,10 +225,14 @@ if chart_type == "stacked":
                 color="Sector",
                 color_discrete_sequence=px.colors.qualitative.T10,
                 title="Energy Demand, " + iea_region_list[i] + ", " + scenario.title(),
-                hover_data={"TFC, " + unit[0]: ":.0f"},
+                hover_data={"TFC, " + unit[0]: ": ,.0f"},
+                
             )
+
             fig.update_layout(title_x=0.5, legend_traceorder="reversed")
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+            """
+
             if show_figs is True:
                 fig.show()
             if save_figs is True:
@@ -356,7 +449,7 @@ if chart_type == "line":
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -441,6 +534,152 @@ if chart_type == "stacked":
             fig2 = pd.melt(
                 fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0]
             )
+
+            fig = go.Figure()
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Electricity-Solar",
+                    line=dict(width=0.5, color="rgb(136,204,238)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Electricity-Solar"]["TFC, " + unit[0]],
+                    fill="tozeroy",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Electricity-Wind",
+                    line=dict(width=0.5, color="rgb(204,102,119)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Electricity-Wind"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Electricity-Nuclear",
+                    line=dict(width=0.5, color="rgb(221,204,119)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Electricity-Nuclear"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Electricity-Other ren",
+                    line=dict(width=0.5, color="rgb(17,119,51)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Electricity-Other ren"][
+                        "TFC, " + unit[0]
+                    ],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Electricity-Fossil fuels",
+                    line=dict(width=0.5, color="rgb(51,34,136)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Electricity-Fossil fuels"][
+                        "TFC, " + unit[0]
+                    ],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Heat-Solar thermal",
+                    line=dict(width=0.5, color="rgb(170,168,153)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Heat-Solar thermal"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Heat-Biochar",
+                    line=dict(width=0.5, color="rgb(136,204,238)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Heat-Biochar"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Heat-Bioenergy",
+                    line=dict(width=0.5, color="rgb(68,170,153)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Heat-Bioenergy"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Heat-Fossil fuels",
+                    line=dict(width=0.5, color="rgb(153,153,51)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Heat-Fossil fuels"]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Transport-Fossil fuels",
+                    line=dict(width=0.5, color="rgb(136,34,85)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Transport-Fossil fuels"][
+                        "TFC, " + unit[0]
+                    ],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Transport-Bioenergy & H2",
+                    line=dict(width=0.5, color="rgb(102,17,0)"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "Transport-Bioenergy & H2"][
+                        "TFC, " + unit[0]
+                    ],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+            fig.update_layout(
+                title={
+                    "text": "Energy Supply, "
+                    + iea_region_list[i]
+                    + ", "
+                    + scenario.title(),
+                    "xanchor": "center",
+                    "x": 0.5,
+                },
+                xaxis={"title": "Year"},
+                yaxis={"title": "TFC, " + unit[0]},
+            )
+
+            """
             fig = px.area(
                 fig2,
                 x="Year",
@@ -452,10 +691,12 @@ if chart_type == "stacked":
                 + scenario.replace(" ", "").title()
                 + ", "
                 + iea_region_list[i],
-                hover_data={"TFC, " + unit[0]: ":.0f"},
+                hover_data={"TFC, " + unit[0]: " :,.0f"},
             )
             fig.update_layout(title_x=0.5, legend_traceorder="reversed")
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+            """
+
             if show_figs is True:
                 fig.show()
             if save_figs is True:
@@ -704,7 +945,7 @@ for i in range(0, len(iea_region_list)):
             color="Sector",
             color_discrete_sequence=px.colors.qualitative.T10,
             title="Percent of Total PD Adoption, " + iea_region_list[i],
-            hover_data={"% Adoption": ":.0f"},
+            hover_data={"% Adoption": ": .0f"},
         )
         fig.update_layout(title_x=0.5)
         fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
