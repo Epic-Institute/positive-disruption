@@ -1917,7 +1917,7 @@ for i in range(0, len(iea_region_list)):
 
     em_targets = (
         em_targets_pathway.loc[
-            "World", ["SSP1-19", "SSP1-Baseline"], "Emissions|Kyoto Gases"
+            "World ", ["SSP2-19", "SSP1-Baseline"], "Emissions|Kyoto Gases"
         ].loc[:, data_start_year:]
         / 1000
     )
@@ -2054,8 +2054,12 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 name="RCP1.9",
                 line=dict(width=2, color="green", dash="dot"),
-                x=pd.Series(em_targets.loc[:,near_proj_start_year:].columns.values),
-                y=pd.Series(em_targets.loc["World", "SSP1-19",slice(None)].loc[:,near_proj_start_year:].values[0]),
+                x=pd.Series(em_targets.loc[:, near_proj_start_year:].columns.values),
+                y=pd.Series(
+                    em_targets.loc["World ", "SSP1-19", slice(None)]
+                    .loc[:, near_proj_start_year:]
+                    .values[0]
+                ),
                 fill="none",
                 stackgroup="three",
             )
@@ -2065,8 +2069,12 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 name="RCP2.6",
                 line=dict(width=2, color="green", dash="dot"),
-                x=pd.Series(em_targets.loc[:,near_proj_start_year:].columns.values),
-                y=pd.Series(em_targets.loc["World", "SSP1-19",slice(None)].loc[:,near_proj_start_year:].values[0]),
+                x=pd.Series(em_targets.loc[:, near_proj_start_year:].columns.values),
+                y=pd.Series(
+                    em_targets.loc["World ", "SSP1-19", slice(None)]
+                    .loc[:, near_proj_start_year:]
+                    .values[0]
+                ),
                 fill="none",
                 stackgroup="four",
             )
@@ -2076,9 +2084,14 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 name="Baseline",
                 line=dict(width=2, color="red", dash="dot"),
-                x=pd.Series(em_targets.loc[:,near_proj_start_year:].columns.values),
+                x=pd.Series(em_targets.loc[:, near_proj_start_year:].columns.values),
                 y=pd.Series(
-            em_baseline.loc[:,near_proj_start_year:].groupby("Region").sum().loc[iea_region_list[i]]/1000),
+                    em_baseline.loc[:, near_proj_start_year:]
+                    .groupby("Region")
+                    .sum()
+                    .loc[iea_region_list[i]]
+                    / 1000
+                ),
                 fill="none",
                 stackgroup="five",
             )
@@ -2091,11 +2104,11 @@ for i in range(0, len(iea_region_list)):
                 "x": 0.5,
             },
             xaxis={"title": "Year"},
-            yaxis={"title": "GtCO2e"}
+            yaxis={"title": "GtCO2e"},
         )
-        '''
+        """
         fig.add_vrect(x0=1990, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-        '''
+        """
         if show_figs is True:
             fig.show()
         if save_figs is True:

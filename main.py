@@ -192,16 +192,20 @@ em_mitigated = (
 # region
 
 cdr_needed = (
-    em_pathway.groupby("Region").sum()
-    - em_targets_pathway.loc["pathway PD20", data_start_year:long_proj_end_year]
-    * em_pathway.groupby("Region")
-    .sum()
-    .apply(lambda x: x.div(em_pathway.groupby("Region").sum().sum()), axis=1)
-).clip(lower=1)
+    pd.DataFrame(
+        em_pathway.groupby("Region").sum().loc["World "]
+        - em_targets_pathway.loc["World ", "SSP2-19", "Emissions|Kyoto Gases"].loc[
+            data_start_year:long_proj_end_year
+        ]
+    )
+    .clip(lower=1)
+    .T
+)
+cdr_needed.rename(index={0: "World "}, inplace=True)
 
 cdr_pathway = []
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, 1):
     cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
         cdr_needed.loc[iea_region_list[i]].to_list(),
         grid_em_def,

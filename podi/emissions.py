@@ -295,8 +295,38 @@ def emissions(
         .droplevel("Unit")
     )
 
-    em_hist = em_hist.append(pd.DataFrame(em_hist.sum()).T.rename(index={0: "World "}))
+    region_categories = pd.read_csv(
+        "podi/data/region_categories.csv", usecols=["IAM Region", "IEA Region"]
+    )
 
+    em_hist = em_hist.merge(
+        region_categories, right_on=["IAM Region"], left_on=["Region"]
+    )
+
+    em_hist = em_hist.groupby("IEA Region").sum()
+
+    # split into various levels of IEA regional grouping
+    em_hist["IEA Region 1"] = em_hist.apply(lambda x: x.name.split()[0] + " ", axis=1)
+    em_hist["IEA Region 2"] = em_hist.apply(lambda x: x.name.split()[2] + " ", axis=1)
+    em_hist["IEA Region 3"] = em_hist.apply(lambda x: x.name.split()[-1] + " ", axis=1)
+    em_hist.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
+
+    # make new row for world level data
+    em_hist_world = pd.DataFrame(em_hist.sum()).T.rename(index={0: "World "})
+
+    # make new rows for OECD/NonOECD regions
+    em_hist_oecd = pd.DataFrame(em_hist.groupby("IEA Region 2").sum()).rename(
+        index={"OECD ": " OECD "}
+    )
+
+    # make new rows for IEA regions
+    em_hist_regions = pd.DataFrame(em_hist.groupby("IEA Region 3").sum())
+
+    # combine all
+    em_hist = em_hist_world.append([em_hist_oecd, em_hist_regions])
+    em_hist.index.name = "IEA Region"
+
+    # estimate time between data and projections
     em_hist["2018"] = em_hist["2017"] * (
         1 + (em_hist["2017"] - em_hist["2016"]) / em_hist["2016"]
     )
@@ -321,6 +351,6 @@ def emissions(
         ["Model", "Region", "Scenario", "Variable", "Unit"]
     )
     em_targets.columns = em_targets.columns.astype(int)
-    em_targets = em_targets.loc["GCAM 4.2"].droplevel("Unit")
+    em_targets = em_targets.loc["GCAM 4.2",'World'].droplevel("Unit")
 
     return em.round(decimals=3), em_targets.round(decimals=3), em_hist
