@@ -3,8 +3,8 @@
 # region
 
 import pandas as pd
-from podi.energy_demand import data_start_year
-from podi.energy_supply import long_proj_end_year
+from podi.energy_demand import data_start_year, data_end_year
+from podi.energy_supply import near_proj_start_year, long_proj_end_year
 from podi.energy_demand import iea_region_list
 
 # endregion
@@ -260,8 +260,67 @@ def emissions(
     )
     """
 
-    # Add emissions targets
-    em_targets = pd.read_csv(targets_em).set_index("Scenario")
-    em_targets.columns = em_targets.columns.astype(int)
+    ##########################
+    #  HISTORICAL EMISSIONS  #
+    ##########################
 
-    return em.round(decimals=3), em_targets.round(decimals=3)
+    # pyhector data
+    """
+    em_hist = (
+        pd.read_csv(
+            "podi/pyhector/pyhector/emissions/RCP19_emissions.csv",
+            header=3,
+            usecols=[
+                "Date",
+                "ffi_emissions",
+                "luc_emissions",
+                "CH4_emissions",
+                "N2O_emissions",
+            ],
+        )
+        .dropna(axis=1)
+        .multiply([1, 3.67, 3.67, 0.025, 0.298])
+        .set_index("Date")
+    )
+
+    em_hist.index = em_hist.index.astype(int)
+    em_hist = em_hist[(em_hist.index >= 1900) & (em_hist.index <= data_start_year)]
+    em_hist["total_emissions"] = em_hist.sum(axis=1)
+    """
+
+    # CAIT data
+    em_hist = (
+        pd.read_csv("podi/data/emissions_historical.csv")
+        .set_index(["Region", "Unit"])
+        .droplevel("Unit")
+    )
+
+    em_hist = em_hist.append(pd.DataFrame(em_hist.sum()).T.rename(index={0: "World "}))
+
+    em_hist["2018"] = em_hist["2017"] * (
+        1 + (em_hist["2017"] - em_hist["2016"]) / em_hist["2016"]
+    )
+    em_hist["2019"] = em_hist["2018"] * (
+        1 + (em_hist["2018"] - em_hist["2017"]) / em_hist["2017"]
+    )
+
+    em_hist.columns = em_hist.columns.astype(int)
+
+    # harmonize with historical emissions
+    hf = (
+        em_hist.loc["World "].loc[data_end_year]
+        / em.loc["World "].loc[:, data_end_year].sum()
+    )
+
+    em = em * hf
+
+    #######################
+    #  EMISSIONS TARGETS  #
+    #######################
+    em_targets = pd.read_csv(targets_em).set_index(
+        ["Model", "Region", "Scenario", "Variable", "Unit"]
+    )
+    em_targets.columns = em_targets.columns.astype(int)
+    em_targets = em_targets.loc["GCAM 4.2"].droplevel("Unit")
+
+    return em.round(decimals=3), em_targets.round(decimals=3), em_hist

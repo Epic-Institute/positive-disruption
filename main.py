@@ -154,7 +154,7 @@ afolu_em_mitigated = afolu_em_mitigated.apply(
 
 podi.data.iea_weo_em_etl
 
-em_baseline, em_targets_baseline = emissions(
+em_baseline, em_targets_baseline, em_hist = emissions(
     "baseline",
     energy_demand_baseline,
     elec_consump_baseline,
@@ -163,10 +163,10 @@ em_baseline, em_targets_baseline = emissions(
     transport_consump_baseline,
     afolu_em_baseline,
     "podi/data/emissions_additional.csv",
-    "podi/data/emissions_targets.csv",
+    "podi/data/iamc_data.csv",
 )
 
-em_pathway, em_targets_pathway = emissions(
+em_pathway, em_targets_pathway, em_hist = emissions(
     "pathway",
     energy_demand_pathway,
     elec_consump_pathway,
@@ -175,7 +175,7 @@ em_pathway, em_targets_pathway = emissions(
     transport_consump_pathway,
     afolu_em_pathway,
     "podi/data/emissions_additional.csv",
-    "podi/data/emissions_targets.csv",
+    "podi/data/iamc_data.csv",
 )
 
 em_mitigated = (

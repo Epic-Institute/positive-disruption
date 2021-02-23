@@ -1914,7 +1914,13 @@ for i in range(0, len(iea_region_list)):
     )
 
     """
-    em_targets_pathway.loc["baseline PD20"] = em_mit.append(spacer).sum()
+
+    em_targets = (
+        em_targets_pathway.loc[
+            "World", ["SSP1-19", "SSP1-Baseline"], "Emissions|Kyoto Gases"
+        ].loc[:, data_start_year:]
+        / 1000
+    )
 
     fig = (
         ((em_mit.append(spacer)) / 1000)
@@ -1931,7 +1937,7 @@ for i in range(0, len(iea_region_list)):
                 spacer.name,
             ]
         )
-        .loc[:, proj_start_year:]
+        .loc[:, data_end_year:]
     )
 
     if fig_type == "plotly":
@@ -2032,6 +2038,52 @@ for i in range(0, len(iea_region_list)):
                 stackgroup="one",
             )
         )
+
+        fig.add_trace(
+            go.Scatter(
+                name="Historical",
+                line=dict(width=2, color="black"),
+                x=pd.Series(em_hist.columns.values),
+                y=pd.Series(em_hist.loc["World "].values / 1000),
+                fill="none",
+                stackgroup="two",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                name="RCP1.9",
+                line=dict(width=2, color="green", dash="dot"),
+                x=pd.Series(em_targets.loc[:,near_proj_start_year:].columns.values),
+                y=pd.Series(em_targets.loc["World", "SSP1-19",slice(None)].loc[:,near_proj_start_year:].values[0]),
+                fill="none",
+                stackgroup="three",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                name="RCP2.6",
+                line=dict(width=2, color="green", dash="dot"),
+                x=pd.Series(em_targets.loc[:,near_proj_start_year:].columns.values),
+                y=pd.Series(em_targets.loc["World", "SSP1-19",slice(None)].loc[:,near_proj_start_year:].values[0]),
+                fill="none",
+                stackgroup="four",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                name="Baseline",
+                line=dict(width=2, color="red", dash="dot"),
+                x=pd.Series(em_targets.loc[:,near_proj_start_year:].columns.values),
+                y=pd.Series(
+            em_baseline.loc[:,near_proj_start_year:].groupby("Region").sum().loc[iea_region_list[i]]/1000),
+                fill="none",
+                stackgroup="five",
+            )
+        )
+
         fig.update_layout(
             title={
                 "text": "Emissions Mitigated, " + iea_region_list[i],
@@ -2039,11 +2091,11 @@ for i in range(0, len(iea_region_list)):
                 "x": 0.5,
             },
             xaxis={"title": "Year"},
-            yaxis={"title": "GtCO2e"},
+            yaxis={"title": "GtCO2e"}
         )
-
-        fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-
+        '''
+        fig.add_vrect(x0=1990, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+        '''
         if show_figs is True:
             fig.show()
         if save_figs is True:
