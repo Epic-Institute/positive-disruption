@@ -237,11 +237,11 @@ for i in range(0, 1):
 
     cdr_pathway = (
         cdr_pathway.droplevel(1)
-        .assign(Technology=["Enhanced Weathering", "LTSSDAC", "HTLSDAC"])
+        .assign(Technology=["Enhanced Weathering", "LTSSDAC", "HTLSDAC", "Other"])
         .set_index("Technology", append=True)
     )
 
-    cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 4)
+    # cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 4)
 
 
 # check if energy oversupply is at least energy demand needed for CDR
