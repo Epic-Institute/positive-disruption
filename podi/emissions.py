@@ -6,6 +6,7 @@ import pandas as pd
 from podi.energy_demand import data_start_year, data_end_year
 from podi.energy_supply import near_proj_start_year, long_proj_end_year
 from podi.energy_demand import iea_region_list
+from numpy import NaN
 
 # endregion
 
@@ -306,24 +307,28 @@ def emissions(
     em_hist = em_hist.groupby("IEA Region").sum()
 
     # split into various levels of IEA regional grouping
-    em_hist["IEA Region 1"] = em_hist.apply(lambda x: x.name.split()[0] + " ", axis=1)
-    em_hist["IEA Region 2"] = em_hist.apply(lambda x: x.name.split()[2] + " ", axis=1)
+    em_hist["IEA Region 1"] = em_hist.apply(lambda x: x.name.split()[2] + " ", axis=1)
+    em_hist["IEA Region 2"] = em_hist.apply(lambda x: x.name.split()[4] + " ", axis=1)
     em_hist["IEA Region 3"] = em_hist.apply(lambda x: x.name.split()[-1] + " ", axis=1)
+
     em_hist.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
 
     # make new row for world level data
     em_hist_world = pd.DataFrame(em_hist.sum()).T.rename(index={0: "World "})
 
     # make new rows for OECD/NonOECD regions
-    em_hist_oecd = pd.DataFrame(em_hist.groupby("IEA Region 2").sum()).rename(
+    em_hist_oecd = pd.DataFrame(em_hist.groupby("IEA Region 1").sum()).rename(
         index={"OECD ": " OECD "}
     )
 
     # make new rows for IEA regions
-    em_hist_regions = pd.DataFrame(em_hist.groupby("IEA Region 3").sum())
+    em_hist_regions = pd.DataFrame(em_hist.groupby("IEA Region 2").sum())
+    em_hist_regions2 = pd.DataFrame(em_hist.groupby("IEA Region 3").sum())
 
     # combine all
-    em_hist = em_hist_world.append([em_hist_oecd, em_hist_regions])
+    em_hist = em_hist_world.append(
+        [em_hist_oecd, em_hist_regions.combine_first(em_hist_regions2)]
+    )
     em_hist.index.name = "IEA Region"
 
     # estimate time between data and projections
@@ -338,11 +343,12 @@ def emissions(
 
     # harmonize with historical emissions
     hf = (
-        em_hist.loc["World "].loc[data_end_year]
-        / em.loc["World "].loc[:, data_end_year].sum()
+        em_hist.loc[:, data_end_year]
+        .divide(em.loc[:, data_end_year].groupby("Region").sum())
+        .replace(NaN, 0)
     )
 
-    em = em * hf
+    em = em.apply(lambda x: x.multiply(hf[x.name[0]]), axis=1)
 
     #######################
     #  EMISSIONS TARGETS  #
@@ -351,6 +357,6 @@ def emissions(
         ["Model", "Region", "Scenario", "Variable", "Unit"]
     )
     em_targets.columns = em_targets.columns.astype(int)
-    em_targets = em_targets.loc["GCAM 4.2",'World'].droplevel("Unit")
+    em_targets = em_targets.loc["GCAM 4.2", "World "].droplevel("Unit")
 
     return em.round(decimals=3), em_targets.round(decimals=3), em_hist

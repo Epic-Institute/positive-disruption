@@ -1867,31 +1867,53 @@ for i in range(0, len(iea_region_list)):
 
     em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other gases", :].sum()
 
-    em_mit_cdr = cdr_pathway.loc[iea_region_list[i]].sum()
-
-    em_mit = pd.DataFrame(
-        [
-            em_mit_electricity,
-            em_mit_transport,
-            em_mit_buildings,
-            em_mit_industry,
-            em_mit_ra,
-            em_mit_fw,
-            em_mit_othergas,
-            em_mit_cdr,
-        ]
-    ).rename(
-        index={
-            0: "Electricity",
-            1: "Transport",
-            2: "Buildings",
-            3: "Industry",
-            4: "Forests & Wetlands",
-            5: "Agriculture",
-            6: "CH4, N2O, F-gases",
-            7: "CDR",
-        }
-    )
+    if iea_region_list[i] == "World ":
+        em_mit_cdr = cdr_pathway.loc[iea_region_list[i]].sum()
+        em_mit = pd.DataFrame(
+            [
+                em_mit_electricity,
+                em_mit_transport,
+                em_mit_buildings,
+                em_mit_industry,
+                em_mit_ra,
+                em_mit_fw,
+                em_mit_othergas,
+                em_mit_cdr,
+            ]
+        ).rename(
+            index={
+                0: "Electricity",
+                1: "Transport",
+                2: "Buildings",
+                3: "Industry",
+                4: "Forests & Wetlands",
+                5: "Agriculture",
+                6: "CH4, N2O, F-gases",
+                7: "CDR",
+            }
+        )
+    else:
+        em_mit = pd.DataFrame(
+            [
+                em_mit_electricity,
+                em_mit_transport,
+                em_mit_buildings,
+                em_mit_industry,
+                em_mit_ra,
+                em_mit_fw,
+                em_mit_othergas,
+            ]
+        ).rename(
+            index={
+                0: "Electricity",
+                1: "Transport",
+                2: "Buildings",
+                3: "Industry",
+                4: "Forests & Wetlands",
+                5: "Agriculture",
+                6: "CH4, N2O, F-gases",
+            }
+        )
 
     spacer = (
         pd.Series(
@@ -1902,24 +1924,16 @@ for i in range(0, len(iea_region_list)):
         .T
     )
 
-    """
-    if iea_region_list[i] == 'World ':
-        spacer = em_targets_pathway.loc["pathway PD20"]
-    else:
-        spacer = pd.DataFrame([])
-        spacer.name = ''
-
-    em_mit.loc["Electricity"] = em_targets_pathway.loc["baseline PD20"].subtract(
-        em_mit.drop(labels="Electricity").append(spacer).sum()
+    em_targets = (
+        (em_targets_pathway.loc["SSP1-19", "Emissions|Kyoto Gases"])
+        .loc[data_start_year:]
+        .div(1000)
     )
 
-    """
-
-    em_targets = (
-        em_targets_pathway.loc[
-            "World ", ["SSP2-19", "SSP1-Baseline"], "Emissions|Kyoto Gases"
-        ].loc[:, data_start_year:]
-        / 1000
+    em_targets2 = (
+        (em_targets_pathway.loc["SSP1-26", "Emissions|Kyoto Gases"])
+        .loc[data_start_year:]
+        .div(1000)
     )
 
     fig = (
@@ -1951,23 +1965,25 @@ for i in range(0, len(iea_region_list)):
         fig.add_trace(
             go.Scatter(
                 name="",
-                line=dict(width=0.5, color="rgba(255, 255, 255, 0)"),
+                line=dict(width=0.5, color="rgba(230, 236, 245, 0)"),
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == ""]["Emissions, GtCO2e"],
                 fill="tozeroy",
                 stackgroup="one",
             )
         )
-        fig.add_trace(
-            go.Scatter(
-                name="CDR",
-                line=dict(width=0.5, color="#FF9DA6"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup="one",
+
+        if iea_region_list[i] == "World ":
+            fig.add_trace(
+                go.Scatter(
+                    name="CDR",
+                    line=dict(width=0.5, color="#FF9DA6"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
             )
-        )
         fig.add_trace(
             go.Scatter(
                 name="CH4, N2O, F-gases",
@@ -2044,39 +2060,42 @@ for i in range(0, len(iea_region_list)):
                 name="Historical",
                 line=dict(width=2, color="black"),
                 x=pd.Series(em_hist.columns.values),
-                y=pd.Series(em_hist.loc["World "].values / 1000),
+                y=pd.Series(em_hist.loc[iea_region_list[i]].values / 1000),
                 fill="none",
                 stackgroup="two",
             )
         )
-
-        fig.add_trace(
-            go.Scatter(
-                name="RCP1.9",
-                line=dict(width=2, color="green", dash="dot"),
-                x=pd.Series(em_targets.loc[:, near_proj_start_year:].columns.values),
-                y=pd.Series(
-                    em_targets.loc["World ", "SSP1-19", slice(None)]
-                    .loc[:, near_proj_start_year:]
-                    .values[0]
-                ),
-                fill="none",
-                stackgroup="three",
+        if iea_region_list[i] == "World ":
+            fig.add_trace(
+                go.Scatter(
+                    name="SSP2-1.9",
+                    line=dict(width=2, color="light blue", dash="dot"),
+                    x=pd.Series(em_targets.loc[near_proj_start_year:].index.values),
+                    y=pd.Series(em_targets.loc[near_proj_start_year:].values),
+                    fill="none",
+                    stackgroup="three",
+                )
             )
-        )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="SSP2-2.6",
+                    line=dict(width=2, color="yellow", dash="dot"),
+                    x=pd.Series(em_targets.loc[near_proj_start_year:].index.values),
+                    y=pd.Series(em_targets2.loc[near_proj_start_year:].values),
+                    fill="none",
+                    stackgroup="four",
+                )
+            )
 
         fig.add_trace(
             go.Scatter(
-                name="RCP2.6",
+                name="PD21",
                 line=dict(width=2, color="green", dash="dot"),
-                x=pd.Series(em_targets.loc[:, near_proj_start_year:].columns.values),
-                y=pd.Series(
-                    em_targets.loc["World ", "SSP1-19", slice(None)]
-                    .loc[:, near_proj_start_year:]
-                    .values[0]
-                ),
+                x=pd.Series(em_targets.loc[near_proj_start_year:].index.values),
+                y=pd.Series(spacer.loc[near_proj_start_year:].values / 1000),
                 fill="none",
-                stackgroup="four",
+                stackgroup="five",
             )
         )
 
@@ -2084,7 +2103,7 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 name="Baseline",
                 line=dict(width=2, color="red", dash="dot"),
-                x=pd.Series(em_targets.loc[:, near_proj_start_year:].columns.values),
+                x=pd.Series(em_targets.loc[near_proj_start_year:].index.values),
                 y=pd.Series(
                     em_baseline.loc[:, near_proj_start_year:]
                     .groupby("Region")
@@ -2093,7 +2112,7 @@ for i in range(0, len(iea_region_list)):
                     / 1000
                 ),
                 fill="none",
-                stackgroup="five",
+                stackgroup="six",
             )
         )
 
