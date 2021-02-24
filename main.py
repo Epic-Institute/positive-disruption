@@ -194,7 +194,7 @@ em_mitigated = (
 cdr_needed = (
     pd.DataFrame(
         em_pathway.groupby("Region").sum().loc["World "]
-        - em_targets_pathway.loc["World ", "SSP2-19", "Emissions|Kyoto Gases"].loc[
+        - em_targets_pathway.loc["SSP1-19", "Emissions|Kyoto Gases"].loc[
             data_start_year:long_proj_end_year
         ]
     )
@@ -231,12 +231,18 @@ for i in range(0, 1):
         )
     )
 
-    cdr_pathway = (
-        pd.DataFrame(cdr_pathway).append(
-            pd.concat([cdr_pathway2], keys=[iea_region_list[i]], names=["Region"])
-        )
-        * 0.001
+    cdr_pathway = pd.DataFrame(cdr_pathway).append(
+        pd.concat([cdr_pathway2], keys=[iea_region_list[i]], names=["Region"])
     )
+
+    cdr_pathway = (
+        cdr_pathway.droplevel(1)
+        .assign(Technology=["Enhanced Weathering", "LTSSDAC", "HTLSDAC"])
+        .set_index("Technology", append=True)
+    )
+
+    cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 4)
+
 
 # check if energy oversupply is at least energy demand needed for CDR
 
