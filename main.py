@@ -194,9 +194,9 @@ em_mitigated = (
 cdr_needed = (
     pd.DataFrame(
         em_pathway.groupby("Region").sum().loc["World "]
-        - em_targets_pathway.loc["SSP1-19", "Emissions|Kyoto Gases"].loc[
-            data_start_year:long_proj_end_year
-        ]
+        - em_targets_pathway.loc[
+            "MESSAGE-GLOBIOM 1.0", "World ", "SSP2-19", "Emissions|Kyoto Gases"
+        ].loc[data_start_year:long_proj_end_year]
     )
     .clip(lower=1)
     .T

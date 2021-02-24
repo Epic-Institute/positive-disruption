@@ -1926,14 +1926,10 @@ for i in range(0, len(iea_region_list)):
     )
 
     em_targets = (
-        (em_targets_pathway.loc["SSP1-19", "Emissions|Kyoto Gases"])
-        .loc[data_start_year:]
-        .div(1000)
-    )
-
-    em_targets2 = (
-        (em_targets_pathway.loc["SSP1-26", "Emissions|Kyoto Gases"])
-        .loc[data_start_year:]
+        em_targets_pathway.loc[
+            "MESSAGE-GLOBIOM 1.0", "World ", slice(None), "Emissions|Kyoto Gases"
+        ]
+        .loc[:, data_start_year:]
         .div(1000)
     )
 
@@ -1971,6 +1967,7 @@ for i in range(0, len(iea_region_list)):
                 y=fig2[fig2["Sector"] == ""]["Emissions, GtCO2e"],
                 fill="tozeroy",
                 stackgroup="one",
+                showlegend=False,
             )
         )
 
@@ -2071,8 +2068,12 @@ for i in range(0, len(iea_region_list)):
                 go.Scatter(
                     name="SSP2-1.9",
                     line=dict(width=2, color="light blue", dash="dot"),
-                    x=pd.Series(em_targets.loc[near_proj_start_year:].index.values),
-                    y=pd.Series(em_targets.loc[near_proj_start_year:].values),
+                    x=pd.Series(
+                        em_targets.loc["SSP2-19", near_proj_start_year:].index.values
+                    ),
+                    y=pd.Series(
+                        em_targets.loc["SSP2-19", near_proj_start_year:].values
+                    ),
                     fill="none",
                     stackgroup="three",
                 )
@@ -2082,8 +2083,12 @@ for i in range(0, len(iea_region_list)):
                 go.Scatter(
                     name="SSP2-2.6",
                     line=dict(width=2, color="yellow", dash="dot"),
-                    x=pd.Series(em_targets.loc[near_proj_start_year:].index.values),
-                    y=pd.Series(em_targets2.loc[near_proj_start_year:].values),
+                    x=pd.Series(
+                        em_targets.loc["SSP2-26", near_proj_start_year:].index.values
+                    ),
+                    y=pd.Series(
+                        em_targets.loc["SSP2-26", near_proj_start_year:].values
+                    ),
                     fill="none",
                     stackgroup="four",
                 )
@@ -2093,7 +2098,9 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 name="PD21",
                 line=dict(width=2, color="green", dash="dot"),
-                x=pd.Series(em_targets.loc[near_proj_start_year:].index.values),
+                x=pd.Series(
+                    em_targets.loc["SSP2-26", near_proj_start_year:].index.values
+                ),
                 y=pd.Series(spacer.loc[near_proj_start_year:].values / 1000),
                 fill="none",
                 stackgroup="five",
@@ -2104,7 +2111,9 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 name="Baseline",
                 line=dict(width=2, color="red", dash="dot"),
-                x=pd.Series(em_targets.loc[near_proj_start_year:].index.values),
+                x=pd.Series(
+                    em_targets.loc["SSP2-26", near_proj_start_year:].index.values
+                ),
                 y=pd.Series(
                     em_baseline.loc[:, near_proj_start_year:]
                     .groupby("Region")

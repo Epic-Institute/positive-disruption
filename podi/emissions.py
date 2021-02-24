@@ -265,6 +265,8 @@ def emissions(
     #  HISTORICAL EMISSIONS  #
     ##########################
 
+    # region
+
     # pyhector data
     """
     em_hist = (
@@ -357,6 +359,21 @@ def emissions(
         ["Model", "Region", "Scenario", "Variable", "Unit"]
     )
     em_targets.columns = em_targets.columns.astype(int)
-    em_targets = em_targets.loc["GCAM 4.2", "World "].droplevel("Unit")
+    em_targets = em_targets.loc[
+        "MESSAGE-GLOBIOM 1.0",
+        "World ",
+        ["SSP2-Baseline", "SSP2-19", "SSP2-26"],
+        "Emissions|Kyoto Gases",
+    ].droplevel("Unit")
+
+    # harmonize targets with historical emissions
+    hf = pd.DataFrame(
+        em_hist.loc["World ", data_end_year]
+        / (em_targets.loc[:, data_end_year]).replace(NaN, 0)
+    )
+
+    em_targets = em_targets * (hf.values)
+
+    # endregion
 
     return em.round(decimals=3), em_targets.round(decimals=3), em_hist
