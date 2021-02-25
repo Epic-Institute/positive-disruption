@@ -1602,9 +1602,38 @@ for i in range(0, len(iea_region_list)):
 
     em_fgas = em.loc[iea_region_list[i], "Other gases", ["F-Gases"]].sum()
 
-    em_cdr = -cdr_em.loc[iea_region_list[i]].sum()
+    if iea_region_list[i] == 'World ':
+        em_cdr = -cdr_em.loc[iea_region_list[i]].sum()
 
-    em = pd.DataFrame(
+        em = pd.DataFrame(
+            [
+                em_electricity,
+                em_transport,
+                em_buildings,
+                em_industry,
+                em_ch4,
+                em_n2o,
+                em_fgas,
+                em_ra,
+                em_fw,
+                em_cdr,
+            ]
+        ).rename(
+            index={
+                0: "Electricity",
+                1: "Transport",
+                2: "Buildings",
+                3: "Industry",
+                4: "CH4",
+                5: "N2O",
+                6: "F-gases",
+                7: "Agriculture",
+                8: "Forests & Wetlands",
+                9: "CDR",
+            }
+        )
+    else:
+            em = pd.DataFrame(
         [
             em_electricity,
             em_transport,
@@ -1615,7 +1644,6 @@ for i in range(0, len(iea_region_list)):
             em_fgas,
             em_ra,
             em_fw,
-            em_cdr,
         ]
     ).rename(
         index={
@@ -1628,36 +1656,9 @@ for i in range(0, len(iea_region_list)):
             6: "F-gases",
             7: "Agriculture",
             8: "Forests & Wetlands",
-            9: "CDR",
         }
     )
 
-    """
-
-    em = pd.DataFrame(
-        [
-            em_cdr,
-            em_othergas,
-            em_fw,
-            em_ra,
-            em_industry,
-            em_buildings,
-            em_transport,
-            em_electricity
-        ]
-    ).rename(
-        index={
-            0: 'CDR',
-            1: "CH4, N2O, F-gases",
-            2: 'Forests & Wetlands',
-            3: 'Agriculture',
-            4: 'Industry',
-            5: 'Buildings',
-            6: 'Transport',
-            7: 'Electricity'
-        }
-    )
-    """
     fig = ((em) / 1000).loc[:, start_year:]
 
     fig = fig.T
@@ -1668,17 +1669,17 @@ for i in range(0, len(iea_region_list)):
     )
 
     fig = go.Figure()
-
-    fig.add_trace(
-        go.Scatter(
-            name="CDR",
-            line=dict(width=0.5, color="#FF9DA6"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
-            fill="tozeroy",
-            stackgroup="one",
+    if iea_region_list[i] == 'World ':
+        fig.add_trace(
+            go.Scatter(
+                name="CDR",
+                line=dict(width=0.5, color="#FF9DA6"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
+                fill="tozeroy",
+                stackgroup="one",
+            )
         )
-    )
 
     """    
     fig.add_trace(go.Scatter(name='CH4, N2O, F-gases', line=dict(width=0.5, color="#E45756"), x=fig2["Year"], y=fig2[fig2['Sector'] == 'CH4, N2O, F-gases']['Emissions, GtCO2e'], fill='tonexty', stackgroup='one'))
@@ -1808,6 +1809,7 @@ for i in range(0, len(iea_region_list)):
     '''
     fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
     '''
+
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -1998,7 +2000,7 @@ for i in range(0, len(iea_region_list)):
         fig.add_trace(
             go.Scatter(
                 name="CH4, N2O, F-gases",
-                line=dict(width=0.5, color="#E45756"),
+                line=dict(width=0.5, color="#B82E2E"),
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "CH4, N2O, F-gases"]["Emissions, GtCO2e"],
                 fill="tonexty",
