@@ -960,7 +960,7 @@ for i in range(0, len(iea_region_list)):
         fig.add_trace(
             go.Scatter(
                 name="Historical",
-                line=dict(width=2, color="black"),
+                line=dict(width=3, color="black"),
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -969,13 +969,15 @@ for i in range(0, len(iea_region_list)):
                 ],
                 fill="none",
                 stackgroup="one",
+                legendgroup="Electricity", showlegend=False
+
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Transport",
-                line=dict(width=2, color="black"),
+                line=dict(width=3, color="black"),
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -984,14 +986,14 @@ for i in range(0, len(iea_region_list)):
                 ],
                 fill="none",
                 stackgroup="two",
-                showlegend=False,
+                legendgroup="Transport", showlegend=False
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Buildings",
-                line=dict(width=2, color="black"),
+                line=dict(width=3, color="black"),
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1000,14 +1002,14 @@ for i in range(0, len(iea_region_list)):
                 ],
                 fill="none",
                 stackgroup="three",
-                showlegend=False,
+                legendgroup="Buildings", showlegend=False
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Industry",
-                line=dict(width=2, color="black"),
+                line=dict(width=3, color="black"),
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1016,14 +1018,14 @@ for i in range(0, len(iea_region_list)):
                 ],
                 fill="none",
                 stackgroup="four",
-                showlegend=False,
+                legendgroup="Industry", showlegend=False
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Regenerative Agriculture",
-                line=dict(width=2, color="black"),
+                line=dict(width=3, color="black"),
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1033,14 +1035,14 @@ for i in range(0, len(iea_region_list)):
                 ]["% Adoption"],
                 fill="none",
                 stackgroup="five",
-                showlegend=False,
+                legendgroup="Regenerative Agriculture", showlegend=False
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Forests & Wetlands",
-                line=dict(width=2, color="black"),
+                line=dict(width=3, color="black"),
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1049,14 +1051,14 @@ for i in range(0, len(iea_region_list)):
                 ]["% Adoption"],
                 fill="none",
                 stackgroup="six",
-                showlegend=False,
+                legendgroup="Forests & Wetlands", showlegend=False
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Carbon Dioxide Removal",
-                line=dict(width=2, color="black"),
+                line=dict(width=3, color="black"),
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1066,14 +1068,14 @@ for i in range(0, len(iea_region_list)):
                 ]["% Adoption"],
                 fill="none",
                 stackgroup="seven",
-                showlegend=False,
+                legendgroup="Carbon Dioxide Removal", showlegend=False
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Electricity",
-                line=dict(width=2, color="#B279A2", dash="dot"),
+                line=dict(width=3, color="#B279A2", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1081,14 +1083,14 @@ for i in range(0, len(iea_region_list)):
                     "% Adoption"
                 ],
                 fill="none",
-                stackgroup="eight",
+                stackgroup="eight", legendgroup="Electricity"
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Transport",
-                line=dict(width=2, color="#7AA8B8", dash="dot"),
+                line=dict(width=3, color="#7AA8B8", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1096,14 +1098,14 @@ for i in range(0, len(iea_region_list)):
                     "% Adoption"
                 ],
                 fill="none",
-                stackgroup="nine",
+                stackgroup="nine", legendgroup="Transport"
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Buildings",
-                line=dict(width=2, color="#F58518", dash="dot"),
+                line=dict(width=3, color="#F58518", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1111,14 +1113,14 @@ for i in range(0, len(iea_region_list)):
                     "% Adoption"
                 ],
                 fill="none",
-                stackgroup="ten",
+                stackgroup="ten", legendgroup="Buildings"
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Industry",
-                line=dict(width=2, color="#60738C", dash="dot"),
+                line=dict(width=3, color="#60738C", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1126,14 +1128,14 @@ for i in range(0, len(iea_region_list)):
                     "% Adoption"
                 ],
                 fill="none",
-                stackgroup="eleven",
+                stackgroup="eleven", legendgroup="Industry"
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Regenerative Agriculture",
-                line=dict(width=2, color="#72B7B2", dash="dot"),
+                line=dict(width=3, color="#72B7B2", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1142,14 +1144,14 @@ for i in range(0, len(iea_region_list)):
                     & (fig2["Sector"] == "Regenerative Agriculture")
                 ]["% Adoption"],
                 fill="none",
-                stackgroup="twelve",
+                stackgroup="twelve", legendgroup="Regenerative Agriculture"
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Forests & Wetlands",
-                line=dict(width=2, color="#54A24B", dash="dot"),
+                line=dict(width=3, color="#54A24B", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1157,14 +1159,14 @@ for i in range(0, len(iea_region_list)):
                     (fig2["Year"] >= 2020) & (fig2["Sector"] == "Forests & Wetlands")
                 ]["% Adoption"],
                 fill="none",
-                stackgroup="thirteen",
+                stackgroup="thirteen", legendgroup="Forests & Wetlands"
             )
         )
 
         fig.add_trace(
             go.Scatter(
                 name="Carbon Dioxide Removal",
-                line=dict(width=2, color="#FF9DA6", dash="dot"),
+                line=dict(width=3, color="#FF9DA6", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -1173,9 +1175,10 @@ for i in range(0, len(iea_region_list)):
                     & (fig2["Sector"] == "Carbon Dioxide Removal")
                 ]["% Adoption"],
                 fill="none",
-                stackgroup="fourteen",
+                stackgroup="fourteen", legendgroup="Carbon Dioxide Removal"
             )
         )
+
 
         """
         px.line(
@@ -2537,9 +2540,9 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-year = 2050
+year = 2030
 ndcs = [
-    (24, 45),
+    (23, 49),
     (5, 7),
     (4.38, 6.07),
     (2, 3),
@@ -2667,7 +2670,7 @@ for i in range(0, len(iea_region_list)):
             0,
             fig.loc["Electricity", year],
             0,
-            fig.loc["Electricity", year],
+            fig.loc["Electricity", year], fig.loc["Electricity", year],
         ],
         "Transport": [
             0,
@@ -2679,7 +2682,7 @@ for i in range(0, len(iea_region_list)):
             fig.loc["Transport", year],
             0,
             0,
-            fig.loc["Transport", year],
+            fig.loc["Transport", year], fig.loc["Transport", year],
         ],
         "Buildings": [
             0,
@@ -2691,7 +2694,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
-            fig.loc["Buildings", year],
+            fig.loc["Buildings", year], fig.loc["Buildings", year],
         ],
         "Industry": [
             0,
@@ -2703,7 +2706,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
-            fig.loc["Industry", year],
+            fig.loc["Industry", year], fig.loc["Industry", year],
         ],
         "Forests & Wetlands": [
             0,
@@ -2715,7 +2718,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Forests & Wetlands", year],
-            0,
+            0, fig.loc["Forests & Wetlands", year],
         ],
         "Agriculture": [
             0,
@@ -2727,7 +2730,7 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Agriculture", year],
-            0,
+            0, fig.loc["Agriculture", year],
         ],
         "CH4, N2O, F-gases": [
             0,
@@ -2739,9 +2742,9 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
-            fig.loc["CH4, N2O, F-gases", year],
+            fig.loc["CH4, N2O, F-gases", year], fig.loc["CH4, N2O, F-gases", year],
         ],
-        "CDR": [fig.loc["CDR", year], 0, 0, 0, 0, 0, 0, 0, 0, fig.loc["CDR", year]],
+        "CDR": [fig.loc["CDR", year], 0, 0, 0, 0, 0, 0, 0, 0, fig.loc["CDR", year], fig.loc["CDR", year]],
         "NCS": [
             0,
             0,
@@ -2765,6 +2768,17 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
+        ], "Total": [
+            0,
+            fig.loc["Electricity", year],
+            fig.loc["Transport", year],
+            fig.loc["Buildings", year],
+            fig.loc["Industry", year],
+            fig.loc["Forests & Wetlands", year],
+            fig.loc["Agriculture", year],
+            0,
+            0,
+            0,
         ],
         "labels": [
             "CDR",
@@ -2776,7 +2790,7 @@ for i in range(0, len(iea_region_list)):
             "Transport",
             "Electricity",
             "NCS",
-            "Energy",
+            "Energy", "Total"
         ],
     }
 
@@ -2875,7 +2889,7 @@ for i in range(0, len(iea_region_list)):
             x0=ndcs[i][j],
             y0=-0.5,
             x1=ndcs[i][j],
-            y1=9.5,
+            y1=10.5,
             line=dict(color="LightSeaGreen", width=3, dash="dot"),
             name="NDC",
         )
