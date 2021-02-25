@@ -150,4 +150,20 @@ for i in range(0, len(iea_region_list)):
 
     # endregion
 
+    # region
+
+    if iea_region_list[i] == "World ":
+        for k in ["conc", "forcing"]:
+            path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
+
+        mdFile.write(
+            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+        )
+        mdFile.write(path)
+        mdFile.write(" height='500' width='150%'></iframe>")
+
+        mdFile.new_line()
+
+    # endregion
+
     mdFile.create_md_file()

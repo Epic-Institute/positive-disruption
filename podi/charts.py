@@ -39,7 +39,7 @@ show_figs = True
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -969,8 +969,8 @@ for i in range(0, len(iea_region_list)):
                 ],
                 fill="none",
                 stackgroup="one",
-                legendgroup="Electricity", showlegend=False
-
+                legendgroup="Electricity",
+                showlegend=False,
             )
         )
 
@@ -986,7 +986,8 @@ for i in range(0, len(iea_region_list)):
                 ],
                 fill="none",
                 stackgroup="two",
-                legendgroup="Transport", showlegend=False
+                legendgroup="Transport",
+                showlegend=False,
             )
         )
 
@@ -1002,7 +1003,8 @@ for i in range(0, len(iea_region_list)):
                 ],
                 fill="none",
                 stackgroup="three",
-                legendgroup="Buildings", showlegend=False
+                legendgroup="Buildings",
+                showlegend=False,
             )
         )
 
@@ -1018,7 +1020,8 @@ for i in range(0, len(iea_region_list)):
                 ],
                 fill="none",
                 stackgroup="four",
-                legendgroup="Industry", showlegend=False
+                legendgroup="Industry",
+                showlegend=False,
             )
         )
 
@@ -1035,7 +1038,8 @@ for i in range(0, len(iea_region_list)):
                 ]["% Adoption"],
                 fill="none",
                 stackgroup="five",
-                legendgroup="Regenerative Agriculture", showlegend=False
+                legendgroup="Regenerative Agriculture",
+                showlegend=False,
             )
         )
 
@@ -1051,7 +1055,8 @@ for i in range(0, len(iea_region_list)):
                 ]["% Adoption"],
                 fill="none",
                 stackgroup="six",
-                legendgroup="Forests & Wetlands", showlegend=False
+                legendgroup="Forests & Wetlands",
+                showlegend=False,
             )
         )
 
@@ -1068,7 +1073,8 @@ for i in range(0, len(iea_region_list)):
                 ]["% Adoption"],
                 fill="none",
                 stackgroup="seven",
-                legendgroup="Carbon Dioxide Removal", showlegend=False
+                legendgroup="Carbon Dioxide Removal",
+                showlegend=False,
             )
         )
 
@@ -1083,7 +1089,8 @@ for i in range(0, len(iea_region_list)):
                     "% Adoption"
                 ],
                 fill="none",
-                stackgroup="eight", legendgroup="Electricity"
+                stackgroup="eight",
+                legendgroup="Electricity",
             )
         )
 
@@ -1098,7 +1105,8 @@ for i in range(0, len(iea_region_list)):
                     "% Adoption"
                 ],
                 fill="none",
-                stackgroup="nine", legendgroup="Transport"
+                stackgroup="nine",
+                legendgroup="Transport",
             )
         )
 
@@ -1113,7 +1121,8 @@ for i in range(0, len(iea_region_list)):
                     "% Adoption"
                 ],
                 fill="none",
-                stackgroup="ten", legendgroup="Buildings"
+                stackgroup="ten",
+                legendgroup="Buildings",
             )
         )
 
@@ -1128,7 +1137,8 @@ for i in range(0, len(iea_region_list)):
                     "% Adoption"
                 ],
                 fill="none",
-                stackgroup="eleven", legendgroup="Industry"
+                stackgroup="eleven",
+                legendgroup="Industry",
             )
         )
 
@@ -1144,7 +1154,8 @@ for i in range(0, len(iea_region_list)):
                     & (fig2["Sector"] == "Regenerative Agriculture")
                 ]["% Adoption"],
                 fill="none",
-                stackgroup="twelve", legendgroup="Regenerative Agriculture"
+                stackgroup="twelve",
+                legendgroup="Regenerative Agriculture",
             )
         )
 
@@ -1159,7 +1170,8 @@ for i in range(0, len(iea_region_list)):
                     (fig2["Year"] >= 2020) & (fig2["Sector"] == "Forests & Wetlands")
                 ]["% Adoption"],
                 fill="none",
-                stackgroup="thirteen", legendgroup="Forests & Wetlands"
+                stackgroup="thirteen",
+                legendgroup="Forests & Wetlands",
             )
         )
 
@@ -1175,10 +1187,10 @@ for i in range(0, len(iea_region_list)):
                     & (fig2["Sector"] == "Carbon Dioxide Removal")
                 ]["% Adoption"],
                 fill="none",
-                stackgroup="fourteen", legendgroup="Carbon Dioxide Removal"
+                stackgroup="fourteen",
+                legendgroup="Carbon Dioxide Removal",
             )
         )
-
 
         """
         px.line(
@@ -1776,7 +1788,7 @@ for i in range(0, len(iea_region_list)):
     if scenario == "baseline":
         em = em_baseline
         afolu_em = afolu_em_baseline
-        cdr_em = cdr_pathway
+        cdr_em = cdr_pathway * 0
     else:
         em = em_pathway
         afolu_em = afolu_em_pathway
@@ -2540,7 +2552,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-year = 2030
+year = 2050
 ndcs = [
     (23, 49),
     (5, 7),
@@ -2554,7 +2566,7 @@ ndcs = [
     (2.94, 4.58),
     (10, 15),
     (11.85, 21.51),
-    (0.06, 0),
+    (0.06, 5),
     (1.76, 2.7),
     (2, 3),
     (5, 10),
@@ -2670,7 +2682,8 @@ for i in range(0, len(iea_region_list)):
             0,
             fig.loc["Electricity", year],
             0,
-            fig.loc["Electricity", year], fig.loc["Electricity", year],
+            fig.loc["Electricity", year],
+            fig.loc["Electricity", year],
         ],
         "Transport": [
             0,
@@ -2682,7 +2695,8 @@ for i in range(0, len(iea_region_list)):
             fig.loc["Transport", year],
             0,
             0,
-            fig.loc["Transport", year], fig.loc["Transport", year],
+            fig.loc["Transport", year],
+            fig.loc["Transport", year],
         ],
         "Buildings": [
             0,
@@ -2694,7 +2708,8 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
-            fig.loc["Buildings", year], fig.loc["Buildings", year],
+            fig.loc["Buildings", year],
+            fig.loc["Buildings", year],
         ],
         "Industry": [
             0,
@@ -2706,7 +2721,8 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
-            fig.loc["Industry", year], fig.loc["Industry", year],
+            fig.loc["Industry", year],
+            fig.loc["Industry", year],
         ],
         "Forests & Wetlands": [
             0,
@@ -2718,7 +2734,8 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Forests & Wetlands", year],
-            0, fig.loc["Forests & Wetlands", year],
+            0,
+            fig.loc["Forests & Wetlands", year],
         ],
         "Agriculture": [
             0,
@@ -2730,7 +2747,8 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             fig.loc["Agriculture", year],
-            0, fig.loc["Agriculture", year],
+            0,
+            fig.loc["Agriculture", year],
         ],
         "CH4, N2O, F-gases": [
             0,
@@ -2742,9 +2760,22 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
-            fig.loc["CH4, N2O, F-gases", year], fig.loc["CH4, N2O, F-gases", year],
+            fig.loc["CH4, N2O, F-gases", year],
+            fig.loc["CH4, N2O, F-gases", year],
         ],
-        "CDR": [fig.loc["CDR", year], 0, 0, 0, 0, 0, 0, 0, 0, fig.loc["CDR", year], fig.loc["CDR", year]],
+        "CDR": [
+            fig.loc["CDR", year],
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            fig.loc["CDR", year],
+            fig.loc["CDR", year],
+        ],
         "NCS": [
             0,
             0,
@@ -2768,7 +2799,8 @@ for i in range(0, len(iea_region_list)):
             0,
             0,
             0,
-        ], "Total": [
+        ],
+        "Total": [
             0,
             fig.loc["Electricity", year],
             fig.loc["Transport", year],
@@ -2790,7 +2822,8 @@ for i in range(0, len(iea_region_list)):
             "Transport",
             "Electricity",
             "NCS",
-            "Energy", "Total"
+            "Energy",
+            "Total",
         ],
     }
 
@@ -3891,6 +3924,206 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
+###########################################
+# PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
+###########################################
+
+# region
+# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+CONCENTRATION_CO2 = "simpleNbox.Ca"
+
+low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
+default = pyhector.run(rcp19, {"temperature": {"S": 3}})
+high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
+
+results19 = pyhector.run(rcp19)
+results26 = pyhector.run(rcp26)
+results60 = pyhector.run(rcp60)
+
+hist = default[CONCENTRATION_CO2].loc[1950:]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
+        y=results26[results26.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="three",
+        legendgroup="SSP2-2.6",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="four",
+        legendgroup="SSP2-1.9",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
+        y=results60[results60.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="five",
+        legendgroup="Baseline",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Atmospheric CO2 Concentration",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "ppmv CO2"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/co2conc-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+
+###############################
+# PROJECTED RADIATIVE FORCING #
+###############################
+
+# region
+# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+FORCING = "forcing.Ftot"
+
+results19 = pyhector.run(rcp19)
+results26 = pyhector.run(rcp26)
+results60 = pyhector.run(rcp60)
+
+hist = default[FORCING].loc[1950:]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][FORCING],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
+        y=results26[results26.index >= 2020][FORCING],
+        fill="none",
+        stackgroup="three",
+        legendgroup="SSP2-2.6",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][FORCING],
+        fill="none",
+        stackgroup="four",
+        legendgroup="SSP2-1.9",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
+        y=results60[results60.index >= 2020][FORCING],
+        fill="none",
+        stackgroup="five",
+        legendgroup="Baseline",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Radiative Forcing",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "W/m2"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/forcing-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+
 ######################
 # TEMPERATURE CHANGE #
 ######################
@@ -3927,7 +4160,6 @@ plt.clf()
 
 # endregion
 
-"""
 # CLIMATE SENSITIVITY
 
 # region
@@ -3960,34 +4192,9 @@ plt.show()
 plt.clf()
 
 # endregion
-"""
-# endregion
-
-###############################
-# PROJECTED RADIATIVE FORCING #
-###############################
-
-# region
-# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-FORCING = "forcing.Ftot"
-
-results = pyhector.run(rcp19)
-
-results[FORCING].loc[1900:2100].plot(linestyle="--")
-hist = default[FORCING].loc[1900:2016]
-hist.plot(label="historical", color="black", figsize=(10, 5))
-plt.title("DAU: " + pyhector.output[FORCING]["description"])
-plt.ylabel(pyhector.output[FORCING]["unit"])
-plt.legend(("DAU", "Historical"), loc="upper left")
-plt.savefig(
-    fname="podi/data/figs/forcing",
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
 
 # endregion
+
 
 #####################################
 # PROJECTED CO2 EMISSIONS BY REGION #
@@ -4112,36 +4319,6 @@ plt.ylabel("GtCO2e")
 plt.title("DAU Net Emissions, " + names[i])
 plt.savefig(
     fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
-plt.show()
-plt.clf()
-
-# endregion
-
-###########################################
-# PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
-###########################################
-
-# region
-# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-CONCENTRATION_CO2 = "simpleNbox.Ca"
-
-results = pyhector.run(rcp19)
-
-results[CONCENTRATION_CO2].loc[1900:2100].plot(
-    linestyle="--", color=(0.560, 0.792, 0.740)
-)
-hist = default[CONCENTRATION_CO2].loc[1900:2016]
-hist.plot(label="historical", color="black", figsize=(10, 5))
-plt.title("DAU: " + pyhector.output[CONCENTRATION_CO2]["description"])
-plt.ylabel(pyhector.output[CONCENTRATION_CO2]["unit"])
-plt.legend(("DAU", "Historical"), loc="upper left")
-plt.savefig(
-    fname=("podi/data/figs/co2conc").replace(" ", ""),
     format="png",
     bbox_inches="tight",
     pad_inches=0.1,
