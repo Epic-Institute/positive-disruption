@@ -228,26 +228,7 @@ def emissions(
     )
 
     # endregion
-    """
-    if scenario == "baseline":
 
-        em = pd.read_csv("podi/data/emissions_baseline.csv").set_index(
-            ["Region", "Sector", "Metric"]
-        )
-        em.columns = em.columns.astype(int)
-
-        em.rename(index={"Power sector": "Electricity"})
-
-        em = (
-            (em.loc[slice(None), ["Electricity"], slice(None)])
-            .append(
-                em.loc[slice(None), ["Industry", "Transport", "Buildings"], slice(None)]
-            )
-            .append(afolu_em)
-            .append(addtl_em)
-        )
-    else:
-        """
     em = (
         elec_em.append(transport_em)
         .append(buildings_em)
@@ -255,11 +236,6 @@ def emissions(
         .append(afolu_em)
         .append(addtl_em)
     )
-    """
-    em = pd.concat([em], keys=["Emissions"], names=["Metric"]).reorder_levels(
-        ["Region", "Sector", "Metric"]
-    )
-    """
 
     ##########################
     #  HISTORICAL EMISSIONS  #

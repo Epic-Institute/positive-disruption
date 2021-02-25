@@ -4135,33 +4135,100 @@ if save_figs is True:
 
 # region
 
-rcps = [rcp19, rcp85]
 
-SURFACE_TEMP = "temperature.Tgav"
+TEMP = "temperature.Tgav"
 
-for rcp in rcps:
-    output = pyhector.run(rcp, {"core": {"endDate": 2100}})
-    temp = output[SURFACE_TEMP]
-    temp = temp.loc[1850:] - temp.loc[1850:1900].mean()
-    hist = temp.loc[1850:2016]
-    temp.loc[2016:2100].plot(label=rcp.name.split("_")[0], linestyle="--")
-hist.loc[1900:2100].plot(label="historical", color="black")
-plt.legend(("DAU", "baseline", "Historical"), loc="best")
-plt.title("Global Mean Temperature")
-plt.ylabel("Deg. C over pre-industrial (1850-1900 mean)")
-plt.savefig(
-    fname=("podi/data/figs/temperature").replace(" ", ""),
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
+results19 = pyhector.run(rcp19)
+results26 = pyhector.run(rcp26)
+results60 = pyhector.run(rcp60)
+
+hist = default[TEMP].loc[1950:]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
 )
-plt.show()
-plt.clf()
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
+        y=results26[results26.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="three",
+        legendgroup="SSP2-2.6",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="four",
+        legendgroup="SSP2-1.9",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
+        y=results60[results60.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="five",
+        legendgroup="Baseline",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Global Mean Temperature",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/temp-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
 
 # endregion
 
 # CLIMATE SENSITIVITY
-
+'''
 # region
 
 low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
@@ -4171,30 +4238,64 @@ high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
 plt.figure()
 sel = slice(1900, 2100)
 plt.fill_between(
-    low[SURFACE_TEMP].loc[sel].index,
-    low[SURFACE_TEMP].loc[sel],
-    high[SURFACE_TEMP].loc[sel],
+    low[TEMP].loc[sel].index,
+    low[TEMP].loc[sel],
+    high[TEMP].loc[sel],
     color="lightgray",
 )
-default[SURFACE_TEMP].loc[sel].plot(linestyle="--")
-hist = default[SURFACE_TEMP].loc[1900:2016]
-hist.plot(label="historical", color="black")
-plt.title("DAU with equilibrium climate sensitivity set to 1.5, 3, and 4.5")
-plt.ylabel("Deg. C")
-plt.legend(("DAU", "Historical", "Sensitivity Range"), loc="upper left")
-plt.savefig(
-    fname="podi/data/figs/sensitivity",
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
+
+default[TEMP].loc[sel]
+
+hist = default[TEMP].loc[1900:2016]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
 )
-plt.show()
-plt.clf()
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "PD21 Temperature with equilibrium climate sensitivity set to 1.5, 3, and 4.5",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/forcing2-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
 
 # endregion
-
+'''
 # endregion
-
 
 #####################################
 # PROJECTED CO2 EMISSIONS BY REGION #
