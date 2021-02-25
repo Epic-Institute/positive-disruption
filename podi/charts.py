@@ -1514,7 +1514,7 @@ for i in range(0, len(iea_region_list)):
 # region
 
 scenario = "pathway"
-start_year = 2010
+start_year = 2019
 
 for i in range(0, len(iea_region_list)):
     if scenario == "baseline":
@@ -1783,6 +1783,18 @@ for i in range(0, len(iea_region_list)):
         )
     )
 
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=2, color="black"),
+            x=pd.Series(em_hist.columns.values),
+            y=pd.Series(em_hist.loc[iea_region_list[i]].values / 1000),
+            fill="tozeroy",
+            stackgroup="three",
+        )
+    )
+
+
     fig.update_layout(
         title={
             "text": "Emissions, " + scenario.title() + ", " + iea_region_list[i],
@@ -1793,8 +1805,9 @@ for i in range(0, len(iea_region_list)):
         yaxis={"title": "GtCO2e"},
     )
 
+    '''
     fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-
+    '''
     if show_figs is True:
         fig.show()
     if save_figs is True:
