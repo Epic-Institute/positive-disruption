@@ -1780,7 +1780,18 @@ for i in range(0, len(iea_region_list)):
 #############
 
 # region
+"""
+# from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb
 
+df = read_datapackage("https://github.com/openclimatedata/edgar-co2-emissions")
+unit = "kt"
+df = (
+    df.reset_index()
+    .drop("Name", axis=1)
+    .set_index(["Code", "Sector", "Year"])
+    .sort_index()
+)
+"""
 scenario = "pathway"
 start_year = 2019
 
@@ -2088,6 +2099,86 @@ for i in range(0, len(iea_region_list)):
             auto_open=False,
         )
     plt.clf()
+
+# endregion
+
+########################
+# GHG EMISSIONS BY GAS #
+########################
+
+# region
+
+# ABSOLUTE
+
+emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
+names = ["CO2", "CH4", "N2O"]
+units = ["Gt C", "Mt CH4", "Mt N2O"]
+mult = [1, 1, 0.001]
+i = 0
+
+for emission in emissions:
+    fig = plt.plot(
+        rcp19[emission].loc[1950:2100] * mult[i],
+        linestyle="--",
+        color=(0.560, 0.792, 0.740),
+    )
+    plt.plot(rcp19[emission].loc[1950:2016] * mult[i], color="black")
+    plt.ylabel(units[i])
+    plt.title("DAU Net Emissions, " + names[i])
+    plt.show()
+    i = i + 1
+plt.clf()
+
+# IN CO2e UNITS
+
+emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
+names = ["CO2", "CH4", "N2O"]
+units = ["GtCO2e", "GtCO2e", "GtCO2e"]
+mult = [3.67, 1e-3, 1e-3]
+gwp = [1, 28, 265]
+j = 0
+
+for emission in emissions:
+    fig = plt.plot(
+        rcp19[emission].loc[2000:2100] * mult[j] * gwp[j],
+        linestyle="--",
+        color=(0.560, 0.792, 0.740),
+    )
+    plt.plot(rcp19[emission].loc[2000:2016] * mult[j] * gwp[j], color="black")
+    plt.ylabel(units[j])
+    plt.title("DAU Net Emissions, " + names[j])
+    plt.savefig(
+        fname=("podi/data/figs/emissions-" + names[j]).replace(" ", ""),
+        format="png",
+        bbox_inches="tight",
+        pad_inches=0.1,
+    )
+    plt.show()
+    j = j + 1
+plt.clf()
+
+# Combined GHG
+
+mult = [3.67, 1e-3, 1e-3]
+gwp = [1, 28, 265]
+i = 0
+
+fig = plt.plot(
+    rcp19.loc[2000:2100] * mult[i] * gwp[i],
+    linestyle="--",
+    color=(0.560, 0.792, 0.740),
+)
+plt.plot(rcp19.loc[2000:2016] * mult[i] * gwp[i], color="black")
+plt.ylabel("GtCO2e")
+plt.title("DAU Net Emissions, " + names[i])
+plt.savefig(
+    fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
+    format="png",
+    bbox_inches="tight",
+    pad_inches=0.1,
+)
+plt.show()
+plt.clf()
 
 # endregion
 
@@ -2967,6 +3058,484 @@ for i in range(0, len(iea_region_list)):
         auto_open=False,
     )
 
+# endregion
+
+#################################
+# CO2 ATMOSPHERIC CONCENTRATION #
+#################################
+
+# region
+# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+CONCENTRATION_CO2 = "simpleNbox.Ca"
+
+low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
+default = pyhector.run(rcp19, {"temperature": {"S": 3}})
+high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
+
+results19 = pyhector.run(rcp19)
+results26 = pyhector.run(rcp26)
+results60 = pyhector.run(rcp60)
+
+hist = default[CONCENTRATION_CO2].loc[1950:]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
+        y=results26[results26.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="three",
+        legendgroup="SSP2-2.6",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="four",
+        legendgroup="SSP2-1.9",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
+        y=results60[results60.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="five",
+        legendgroup="Baseline",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Atmospheric CO2 Concentration",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "ppmv CO2"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/co2conc-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+
+#################################
+# GHG ATMOSPHERIC CONCENTRATION #
+#################################
+
+# region
+# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+CONCENTRATION_CO2 = "simpleNbox.Ca"
+CONCENTRATION_CH4 = "CH4.CH4"
+CONCENTRATION_N2O = "N2O.N2O"
+CONCENTRATION_F = "SF6_halocarbon.hc_concentration"
+
+low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
+default = pyhector.run(rcp19, {"temperature": {"S": 3}})
+high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
+
+results19 = pyhector.run(rcp19)
+results26 = pyhector.run(rcp26)
+results60 = pyhector.run(rcp60)
+
+hist = default[CONCENTRATION_CO2].loc[1950:]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
+        y=results26[results26.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="three",
+        legendgroup="SSP2-2.6",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="four",
+        legendgroup="SSP2-1.9",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
+        y=results60[results60.index >= 2020][CONCENTRATION_CO2],
+        fill="none",
+        stackgroup="five",
+        legendgroup="Baseline",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Atmospheric CO2 Concentration",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "ppmv CO2"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/co2conc-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+
+#####################
+# RADIATIVE FORCING #
+#####################
+
+# region
+# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+FORCING = "forcing.Ftot"
+
+results19 = pyhector.run(rcp19)
+results26 = pyhector.run(rcp26)
+results60 = pyhector.run(rcp60)
+
+hist = default[FORCING].loc[1950:]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][FORCING],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
+        y=results26[results26.index >= 2020][FORCING],
+        fill="none",
+        stackgroup="three",
+        legendgroup="SSP2-2.6",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][FORCING],
+        fill="none",
+        stackgroup="four",
+        legendgroup="SSP2-1.9",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
+        y=results60[results60.index >= 2020][FORCING],
+        fill="none",
+        stackgroup="five",
+        legendgroup="Baseline",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Radiative Forcing",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "W/m2"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/forcing-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+
+######################
+# TEMPERATURE CHANGE #
+######################
+
+# region
+# From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+# TEMPERATURE
+
+# region
+
+
+TEMP = "temperature.Tgav"
+
+results19 = pyhector.run(rcp19)
+results26 = pyhector.run(rcp26)
+results60 = pyhector.run(rcp60)
+
+hist = default[TEMP].loc[1950:]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
+        y=results26[results26.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="three",
+        legendgroup="SSP2-2.6",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="four",
+        legendgroup="SSP2-1.9",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
+        y=results60[results60.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="five",
+        legendgroup="Baseline",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Global Mean Temperature",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/temp-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+
+# CLIMATE SENSITIVITY
+"""
+# region
+
+low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
+default = pyhector.run(rcp19, {"temperature": {"S": 3}})
+high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
+
+plt.figure()
+sel = slice(1900, 2100)
+plt.fill_between(
+    low[TEMP].loc[sel].index,
+    low[TEMP].loc[sel],
+    high[TEMP].loc[sel],
+    color="lightgray",
+)
+
+default[TEMP].loc[sel]
+
+hist = default[TEMP].loc[1900:2016]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[hist.index <= 2020].index,
+        y=hist[hist.index <= 2020],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
+        y=results19[results19.index >= 2020][TEMP],
+        fill="none",
+        stackgroup="two",
+        legendgroup="PD21",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "PD21 Temperature with equilibrium climate sensitivity set to 1.5, 3, and 4.5",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
+)
+
+fig.show()
+
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/forcing2-" + iea_region_list[i] + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+"""
 # endregion
 
 ###################################
@@ -3921,511 +4490,6 @@ for i in range(0, len(iea_region_list)):
     )
     plt.show()
     plt.clf()
-
-# endregion
-
-###########################################
-# PROJECTED CO2 ATMOSPHERIC CONCENTRATION #
-###########################################
-
-# region
-# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-CONCENTRATION_CO2 = "simpleNbox.Ca"
-
-low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
-default = pyhector.run(rcp19, {"temperature": {"S": 3}})
-high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
-
-results19 = pyhector.run(rcp19)
-results26 = pyhector.run(rcp26)
-results60 = pyhector.run(rcp60)
-
-hist = default[CONCENTRATION_CO2].loc[1950:]
-
-fig = go.Figure()
-
-fig.add_trace(
-    go.Scatter(
-        name="Historical",
-        line=dict(width=3, color="black"),
-        x=hist[hist.index <= 2020].index,
-        y=hist[hist.index <= 2020],
-        fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="PD21",
-        line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
-        fill="none",
-        stackgroup="two",
-        legendgroup="PD21",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-2.6",
-        line=dict(width=3, color="yellow", dash="dot"),
-        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
-        y=results26[results26.index >= 2020][CONCENTRATION_CO2],
-        fill="none",
-        stackgroup="three",
-        legendgroup="SSP2-2.6",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
-        fill="none",
-        stackgroup="four",
-        legendgroup="SSP2-1.9",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
-        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
-        y=results60[results60.index >= 2020][CONCENTRATION_CO2],
-        fill="none",
-        stackgroup="five",
-        legendgroup="Baseline",
-    )
-)
-
-fig.update_layout(
-    title={
-        "text": "Atmospheric CO2 Concentration",
-        "xanchor": "center",
-        "x": 0.5,
-    },
-    xaxis={"title": "Year"},
-    yaxis={"title": "ppmv CO2"},
-)
-
-fig.show()
-
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/co2conc-" + iea_region_list[i] + ".html").replace(" ", ""),
-        auto_open=False,
-    )
-
-# endregion
-
-###############################
-# PROJECTED RADIATIVE FORCING #
-###############################
-
-# region
-# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-FORCING = "forcing.Ftot"
-
-results19 = pyhector.run(rcp19)
-results26 = pyhector.run(rcp26)
-results60 = pyhector.run(rcp60)
-
-hist = default[FORCING].loc[1950:]
-
-fig = go.Figure()
-
-fig.add_trace(
-    go.Scatter(
-        name="Historical",
-        line=dict(width=3, color="black"),
-        x=hist[hist.index <= 2020].index,
-        y=hist[hist.index <= 2020],
-        fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="PD21",
-        line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][FORCING],
-        fill="none",
-        stackgroup="two",
-        legendgroup="PD21",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-2.6",
-        line=dict(width=3, color="yellow", dash="dot"),
-        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
-        y=results26[results26.index >= 2020][FORCING],
-        fill="none",
-        stackgroup="three",
-        legendgroup="SSP2-2.6",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][FORCING],
-        fill="none",
-        stackgroup="four",
-        legendgroup="SSP2-1.9",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
-        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
-        y=results60[results60.index >= 2020][FORCING],
-        fill="none",
-        stackgroup="five",
-        legendgroup="Baseline",
-    )
-)
-
-fig.update_layout(
-    title={
-        "text": "Radiative Forcing",
-        "xanchor": "center",
-        "x": 0.5,
-    },
-    xaxis={"title": "Year"},
-    yaxis={"title": "W/m2"},
-)
-
-fig.show()
-
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/forcing-" + iea_region_list[i] + ".html").replace(" ", ""),
-        auto_open=False,
-    )
-
-# endregion
-
-######################
-# TEMPERATURE CHANGE #
-######################
-
-# region
-# From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-# TEMPERATURE
-
-# region
-
-
-TEMP = "temperature.Tgav"
-
-results19 = pyhector.run(rcp19)
-results26 = pyhector.run(rcp26)
-results60 = pyhector.run(rcp60)
-
-hist = default[TEMP].loc[1950:]
-
-fig = go.Figure()
-
-fig.add_trace(
-    go.Scatter(
-        name="Historical",
-        line=dict(width=3, color="black"),
-        x=hist[hist.index <= 2020].index,
-        y=hist[hist.index <= 2020],
-        fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="PD21",
-        line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][TEMP],
-        fill="none",
-        stackgroup="two",
-        legendgroup="PD21",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-2.6",
-        line=dict(width=3, color="yellow", dash="dot"),
-        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
-        y=results26[results26.index >= 2020][TEMP],
-        fill="none",
-        stackgroup="three",
-        legendgroup="SSP2-2.6",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][TEMP],
-        fill="none",
-        stackgroup="four",
-        legendgroup="SSP2-1.9",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
-        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
-        y=results60[results60.index >= 2020][TEMP],
-        fill="none",
-        stackgroup="five",
-        legendgroup="Baseline",
-    )
-)
-
-fig.update_layout(
-    title={
-        "text": "Global Mean Temperature",
-        "xanchor": "center",
-        "x": 0.5,
-    },
-    xaxis={"title": "Year"},
-    yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
-)
-
-fig.show()
-
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/temp-" + iea_region_list[i] + ".html").replace(" ", ""),
-        auto_open=False,
-    )
-
-# endregion
-
-# CLIMATE SENSITIVITY
-'''
-# region
-
-low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
-default = pyhector.run(rcp19, {"temperature": {"S": 3}})
-high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
-
-plt.figure()
-sel = slice(1900, 2100)
-plt.fill_between(
-    low[TEMP].loc[sel].index,
-    low[TEMP].loc[sel],
-    high[TEMP].loc[sel],
-    color="lightgray",
-)
-
-default[TEMP].loc[sel]
-
-hist = default[TEMP].loc[1900:2016]
-
-fig = go.Figure()
-
-fig.add_trace(
-    go.Scatter(
-        name="Historical",
-        line=dict(width=3, color="black"),
-        x=hist[hist.index <= 2020].index,
-        y=hist[hist.index <= 2020],
-        fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="PD21",
-        line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][TEMP],
-        fill="none",
-        stackgroup="two",
-        legendgroup="PD21",
-    )
-)
-
-fig.update_layout(
-    title={
-        "text": "PD21 Temperature with equilibrium climate sensitivity set to 1.5, 3, and 4.5",
-        "xanchor": "center",
-        "x": 0.5,
-    },
-    xaxis={"title": "Year"},
-    yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
-)
-
-fig.show()
-
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/forcing2-" + iea_region_list[i] + ".html").replace(" ", ""),
-        auto_open=False,
-    )
-
-# endregion
-'''
-# endregion
-
-#####################################
-# PROJECTED CO2 EMISSIONS BY REGION #
-#####################################
-
-# region
-# from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb
-
-df = read_datapackage("https://github.com/openclimatedata/edgar-co2-emissions")
-unit = "kt"
-df = (
-    df.reset_index()
-    .drop("Name", axis=1)
-    .set_index(["Code", "Sector", "Year"])
-    .sort_index()
-)
-
-for code in ["USA", "CHN"]:
-    grouped = (
-        df.loc[code].reset_index().set_index("Year").groupby("Sector")["Emissions"]
-    )
-
-    fig, axes = plt.subplots(nrows=1, ncols=4, figsize=(12, 4), sharey=True)
-    try:
-        name = to_name(code)
-    except KeyError:
-        name = code
-    fig.suptitle(name)
-    sectors = [
-        "Power Industry",
-        "Transport",
-        "Buildings",
-        "Other industrial combustion",
-    ]
-    for (key, ax) in zip(sectors, axes):
-        ax.set_title(key, fontsize=10)
-        grouped.get_group(key).plot(ax=ax, legend=False)
-        ax.set_ylabel(unit)
-    plt.savefig(
-        fname=("podi/data/figs/emissions-" + code).replace(" ", ""),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-plt.clf()
-# endregion
-
-###########################
-# PROJECTED GHG EMISSIONS #
-###########################
-
-# region
-
-# ABSOLUTE
-
-emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
-names = ["CO2", "CH4", "N2O"]
-units = ["Gt C", "Mt CH4", "Mt N2O"]
-mult = [1, 1, 0.001]
-i = 0
-
-for emission in emissions:
-    fig = plt.plot(
-        rcp19[emission].loc[2000:2100] * mult[i],
-        linestyle="--",
-        color=(0.560, 0.792, 0.740),
-    )
-    plt.plot(rcp19[emission].loc[2000:2016] * mult[i], color="black")
-    plt.ylabel(units[i])
-    plt.title("DAU Net Emissions, " + names[i])
-    plt.savefig(
-        fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    i = i + 1
-plt.clf()
-
-# IN CO2e UNITS
-
-emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
-names = ["CO2", "CH4", "N2O"]
-units = ["GtCO2e", "GtCO2e", "GtCO2e"]
-mult = [3.67, 1e-3, 1e-3]
-gwp = [1, 28, 265]
-j = 0
-
-for emission in emissions:
-    fig = plt.plot(
-        rcp19[emission].loc[2000:2100] * mult[j] * gwp[j],
-        linestyle="--",
-        color=(0.560, 0.792, 0.740),
-    )
-    plt.plot(rcp19[emission].loc[2000:2016] * mult[j] * gwp[j], color="black")
-    plt.ylabel(units[j])
-    plt.title("DAU Net Emissions, " + names[j])
-    plt.savefig(
-        fname=("podi/data/figs/emissions-" + names[j]).replace(" ", ""),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    j = j + 1
-plt.clf()
-
-# Combined GHG
-
-mult = [3.67, 1e-3, 1e-3]
-gwp = [1, 28, 265]
-i = 0
-
-fig = plt.plot(
-    rcp19.loc[2000:2100] * mult[i] * gwp[i],
-    linestyle="--",
-    color=(0.560, 0.792, 0.740),
-)
-plt.plot(rcp19.loc[2000:2016] * mult[i] * gwp[i], color="black")
-plt.ylabel("GtCO2e")
-plt.title("DAU Net Emissions, " + names[i])
-plt.savefig(
-    fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
-plt.show()
-plt.clf()
 
 # endregion
 

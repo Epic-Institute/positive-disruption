@@ -1,245 +1,245 @@
-Region,IEA Region,BNEF Region,BNEF2 Region,IIASA Region,R32 Region,CAIT Region,GCAM Region,WWS Region,NCS Region,IAM Region
-Afghanistan,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | PAK ,PAK,,ASIA ,Afghanistan,AFG,Afghanistan
-Albania,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,Albania,ALB,Albania
-Algeria,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA ,META | MENA ,MAF | NAF ,NAF,,MAF ,Algeria,DZA,Algeria
-Andorra,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,Andorra
-Angola,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Angola,AGO,Angola
-Anguilla,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,LAM ,OTH,none,World ,,,
-Antigua and Barbuda,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Antigua and Barbuda,,Antigua and Barbuda
-Netherlands Antilles,AdvancedECO | OECD | Other ,Rest of the world,Rest of world,LAM | LAM -M ,LAM-M,none,World ,Netherlands Antilles,,
-Argentina,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Argentina,ARG,Argentina
-Armenia,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Armenia,ARM,Armenia
-Aruba,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,,LAM ,,,
-Australia,AdvancedECO | OECD | ASIAPAC ,South Korea,Asia Pacific , OECD | ANUZ ,ANUZ,,ASIA ,Australia,AUS,Australia
-Austria,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD90 ,Austria,AUT,Austria
-Azerbaijan,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Azerbaijan,AZE,Azerbaijan
-Bahamas,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Bahamas,BHS,Bahamas
-Bahrain,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Bahrain,,Bahrain
-Bangladesh,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Bangladesh,BGD,Bangladesh
-Barbados,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM -M,,LAM ,Barbados,,Barbados
-Belarus,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU-FSU ,EEU-FSU,,World ,Belarus,BLR,Belarus
-Belgium,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU16 ,EU15,,OECD90 ,Belgium,BEL,Belgium
-Belize,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America ,LAM | LAM -L ,LAM-L,,LAM ,Belize,BLZ,Belize
-Benin,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Benin,BEN,Benin
-Bhutan,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Bhutan,BTN,Bhutan
-Bolivia,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Bolivia,BOL,Bolivia
-Bosnia and Herzegovina,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,Bosnia and Herzegovina,BIH,Bosnia and Herzegovina
-Botswana,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Botswana,BWA,Botswana
-Brazil,DevelopingECO | NonOECD | CSAM | BRAZIL ,Brazil,Latin America ,LAM | BRA ,BRA,,LAM ,Brazil,BRA,Brazil
-British Virgin Islands,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,,LAM ,,,
-Brunei,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Brunei,BRN,Brunei
-Bulgaria,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-M ,EU12-M,,OECD90 ,Bulgaria,BGR,Bulgaria
-Burkina Faso,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Burkina Faso,BFA,Burkina Faso
-Burundi,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Burundi,BDI,Burundi
-Cote d'Ivoire,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Cote d'Ivoire,CIV,Côte d'Ivoire
-Cabo Verde,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Cape Verde,CPV,Cape Verde
-Cambodia,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-CPA ,OAS-CPA,,ASIA ,Cambodia,KHM,Cambodia
-Cameroon,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Cameroon,CMR,Cameroon
-Canada,AdvancedECO | OECD | NAM ,Canada,North America , OECD | CAN ,CAN,,OECD90 ,Canada,CAN,Canada
-Cayman Islands,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,,LAM ,,,
-Central African Republic,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,none,MAF ,Central African Republic,CAF,Central African Republic
-Chad,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Chad,TCD,Chad
-Chile,AdvancedECO | OECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Chile,CHL,Chile
-China,DevelopingECO | NonOECD | CHINA ,China,Asia Pacific ,ASIA | CHN ,CHN,,ASIA ,China,CHN,China
-Chinese Taipei,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,,OTH,none,ASIA ,Taiwan,,
-Colombia,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Colombia,COL,Colombia
-Comoros,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Comoros,COM,Comoros
-Cook Islands,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD ,OTH,none,ASIA ,,,Cook Islands
-Costa Rica,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Costa Rica,CRI,Costa Rica
-Croatia,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EEU ,EEU,,OECD90 ,Croatia,HRV,Croatia
-Cuba,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Cuba,CUB,Cuba
-Curacao,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,,OTH,,LAM ,,,
-Cyprus,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OeCD90 ,Cyprus,CYP,Cyprus
-Czech Republic,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Czech Republic,CZE,Czech Republic
-Democratic People's Republic of Korea,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,"Korea, Democratic People's Republic of",PRK,South Korea
-Congo-Kinshasa,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Congo,,Democratic Republic of the Congo
-Congo-Brazzaville,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,"Congo, Democratic Republic of",COD,
-Denmark,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU15 ,EU15,,OECD90 ,Denmark,DNK,Denmark
-Djibouti,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Djibouti,DJI,Djibouti
-Dominica,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,,,Dominica
-Dominican Republic,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Dominican Republic,DOM,Dominican Republic
-Ecuador,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Ecuador,ECU,Ecuador
-Egypt,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | MENA ,MAF | NAF ,NAF,,MAF ,Egypt,EGY,Egypt
-El Salvador,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,El Salvador,SLV,El Salvador
-Equatorial Guinea,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Equatorial Guinea,GNQ,Equatorial Guinea
-Eritrea,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Eritrea,ERI,Eritrea
-Estonia,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU12-H ,EU12-H,,OECD90 ,Estonia,EST,Estonia
-Ethiopia,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Ethiopia,ETH,Ethiopia
-Falkland Islands,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,none,LAM ,,FLK,
-Fiji,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Fiji,FJI,Fiji
-Finland,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU15 ,EU15,,OECD90 ,Finland,FIN,Finland
-France,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU16 ,EU15,,OECD90 ,France,FRA,France
-French Guiana,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,none,LAM ,French Guiana,GUF,
-French Polynesia,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,,PYF,
-Gabon,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Gabon,GAB,Gabon
-Gambia,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Gambia,GMB,Gambia
-Georgia,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Georgia,GEO,Georgia
-Germany,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD90 ,Germany,DEU,Germany
-Ghana,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Ghana,GHA,Ghana
-Gibraltar,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD ,OTH,,World ,Gibraltar,,
-Greece,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD90 ,Greece,GRC,Greece
-Grenada,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Grenada,,Grenada
-Guadeloupe,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,none,LAM ,,GLP,
-Guatemala,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -L ,LAM-L,,LAM ,Guatemala,GTM,Guatemala
-Guinea,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Guinea,GIN,Guinea
-Guinea-Bissau,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Guinea-Bissau,GNB,Guinea-Bissau
-Guyana,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Guyana,GUY,Guyana
-Haiti,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -L ,LAM-L,,LAM ,Haiti,HTI,Haiti
-Honduras,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-L,,LAM ,Honduras,HND,Honduras
-Hungary,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Hungary,HUN,Hungary
-Iceland,AdvancedECO | OECD | EUR ,Other Europe,Europe | Other , OECD | EFTA ,EFTA,,OECD90 ,Iceland,ISL,Iceland
-India,DevelopingECO | NonOECD | INDIA ,India,Asia Pacific ,ASIA | IND ,IND,,ASIA ,India,IND,India
-Indonesia,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Asia Pacific | Southeast Asia ,ASIA | IDN ,IDN,,ASIA ,Indonesia,IDN,Indonesia
-Iraq,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Iraq,IRQ,Iraq
-Ireland,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD90 ,Ireland,IRL,Ireland
-Iran,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,"Iran, Islamic Republic of",IRN,Iran
-Israel,AdvancedECO | OECD | EUR ,Other Europe,META | MENA ,MAF | MEA-H ,MEA-H,,OECD90 ,Israel,ISR,Israel
-Italy,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD90 ,Italy,ITA,Italy
-Jamaica,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Jamaica,JAM,Jamaica
-Japan,AdvancedECO | OECD | JPN ,Japan,Asia Pacific , OECD | JPN ,JPN ,,ASIA ,Japan,JPN,Japan
-Jordan,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Jordan,JOR,Jordan
-Kazakhstan,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Kazakhstan,KAZ,Kazakhstan
-Kenya,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Kenya,KEN,Kenya
-Kiribati,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD ,OTH,,ASIA ,Kiribati,,Kiribati
-South Korea,AdvancedECO | OECD | ASIAPAC ,South Korea,Asia Pacific ,ASIA | KOR ,KOR,,ASIA ,"Korea, Republic of",KOR,
-Kosovo,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world,,OTH,,World ,Kosovo,,
-Kuwait,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Kuwait,KWT,Kuwait
-Kyrgyzstan,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Kyrgyzstan,KGZ,Kyrgyzstan
-Laos,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-CPA ,OAS-CPA,,ASIA ,Laos,LAO,Laos
-Latvia,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | North , OECD | EU12-M ,EU12-M,,OECD90 ,Latvia,LVA,Latvia
-Lebanon,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Lebanon,LBN,Lebanon
-Lesotho,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Lesotho,LSO,Lesotho
-Liberia,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Liberia,LBR,Liberia
-Libya,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | MENA ,MAF | NAF ,NAF,,MAF ,Libya,LBY,Libya
-Liectenstein,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,OECD90 ,,,Liechtenstein
-Lithuania,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | North , OECD | EU12-M ,EU12-M,,OECD91,Lithuania,LTU,Lithuania
-Luxembourg,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD92,Luxembourg,LUX,Luxembourg
-Macau,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | CHN ,CHN,none,ASIA ,,,
-Madagascar,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Madagascar,MDG,Madagascar
-Malawi,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Malawi,MWI,Malawi
-Malaysia,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Asia Pacific | Southeast Asia ,ASIA | OAS-M ,OAS-M,,ASIA ,Malaysia,MYS,Malaysia
-Maldives,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Maldives,,Maldives
-Mali,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Mali,MLI,Mali
-Malta,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Malta,,Malta
-Marshall Islands,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,Marshall Islands
-Martinique,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,none,LAM ,,MTQ,
-Mauritania,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Mauritania,MRT,Mauritania
-Mauritius,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Mauritius,MUS,Mauritius
-Mexico,AdvancedECO | OECD | NAM ,Canada,Latin America ,LAM | MEX ,MEX,,OECD90 ,Mexico,MEX,Mexico
-Micronesia,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Micronesia,,Micronesia
-Monaco,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,
-Mongolia,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-CPA ,OAS-CPA,,ASIA ,Mongolia,MNG,Mongolia
-Montenegro,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,Montenegro,MNE,Montenegro
-Montserrat,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,none,LAM ,,,
-Morocco,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | MENA ,MAF | NAF ,NAF,,MAF ,Morocco,MAR,Morocco
-Mozambique,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Mozambique,MOZ,Mozambique
-Myanmar,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Myanmar,MMR,Myanmar
-Namibia,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Namibia,NAM,Namibia
-Nauru,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,Nauru
-Nepal,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Nepal,NPL,Nepal
-Netherlands,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD90 ,Netherlands,NLD,Netherlands
-New Caledonia,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,,NCL,
-New Zealand,AdvancedECO | OECD | ASIAPAC ,South Korea,Rest of world, OECD | ANUZ ,ANUZ,,ASIA ,New Zealand,NZL,New Zealand
-Nicaragua,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -L ,LAM-L,,LAM ,Nicaragua,NIC,Nicaragua
-Niger,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Niger,NER,Niger
-Nigeria,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Nigeria,NGA,Nigeria
-Niue,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,Niue
-Northern Mariana Islands,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,
-Norway,AdvancedECO | OECD | EUR ,Other Europe,Europe | North , OECD | EFTA ,EFTA,,OECD90 ,Norway,NOR,Norway
-Oman,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Oman,OMN,Oman
-Pakistan,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | PAK ,PAK,,ASIA ,Pakistan,PAK,Pakistan
-Palau,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD ,OTH,,ASIA ,,,Palau
-Panama,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM -M,,LAM ,Panama,PAN,Panama
-Papua New Guinea,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Papua New Guinea,PNG,Papua New Guinea
-Paraguay,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Paraguay,PRY,Paraguay
-Peru,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Peru,PER,Peru
-Philippines,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Asia Pacific | Southeast Asia ,ASIA | OAS-L ,OAS-L,,ASIA ,Philippines,PHL,Philippines
-Pitcarin,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,
-Poland,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Poland,POL,Poland
-Portugal,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Iberia , OECD | EU15 ,EU15,,OECD90 ,Portugal,PRT,Portugal
-Puerto Rico,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,LAM | USA ,USA,,World ,,PRI,
-Qatar,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Qatar,QAT,Qatar
-Moldova,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world,REF | EEU-RSA ,EEU-FSA,,World ,"Moldova, Republic of",MDA,Moldova
-Congo,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Congo,COG,Republic of Congo
-Reunion,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-M ,SSA-M,none,MAF ,,REU,
-Romania,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-M ,EU12-M,,OECD90 ,Romania,ROU,Romania
-Russia,DevelopingECO | NonOECD | RUS ,Rest of the world,Rest of world,REF | RUS ,RUS ,,ASIA ,Russian Federation,RUS,Russia
-Rwanda,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Rwanda,RWA,Rwanda
-American Samoa,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Samoa,WSM,Samoa
-Sao Tome and Principe,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Sao Tome and Principe,STP,Sao Tome and Principe
-Saudi Arabia,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Saudi Arabia,SAU,Saudi Arabia
-Senegal,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Senegal,SEN,Senegal
-Serbia,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,Serbia,SRB,Serbia
-Seychelles,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Seychelles,,Seychelles
-Sierra Leone,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Sierra Leone,SLE,Sierra Leone
-Singapore,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Singapore,,Singapore
-Slovakia,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Slovak Republic,SVK,Slovakia
-Slovenia,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Slovenia,SVN,Slovenia
-Solomon Islands,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Solomon Islands,SLB,Solomon Islands
-Somalia,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Somalia,SOM,Somalia
-South Africa,DevelopingECO | NonOECD | AFRICA | SAFR ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SAF ,SAF,,MAF ,South Africa,ZAF,South Africa
-South Sudan,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,South Sudan,SSD,South Sudan
-Spain,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Iberia , OECD | EU15 ,EU15,,OECD90 ,Spain,ESP,Spain
-Sri Lanka,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Sri Lanka,LKA,Sri Lanka
-Saint Lucia,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Saint Lucia,,Saint Lucia
-Saint Vincent and Grenadines,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Saint Vincent and the Grenadines,,Saint Vincent and the Grenadines
-Saint Helena,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,MAF ,OTH,none,World ,,,
-Saint Kitts and Nevis,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM -M,,LAM ,,,Saint Kitts and Nevis
-Sudan,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Sudan,SDN,Sudan
-Suriname,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Suriname,SUR,Suriname
-Swaziland,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,none,MAF ,Swaziland,SWZ,
-Sweden,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU15 ,EU15,,OECD90 ,Sweden,SWE,Sweden
-Switzerland,AdvancedECO | OECD | EUR ,Other Europe,Europe | Other , OECD | EFTA ,EFTA,,OECD90 ,Switzerland,CHE,Switzerland
-Syria,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Syrian Arab Republic,SYR,Syria
-Tajikistan,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Tajikistan,TJK,Tajikistan
-Thailand,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Asia Pacific | Southeast Asia ,ASIA | OAS-M ,OAS-M,,ASIA ,Thailand,THA,Thailand
-North Macedonia,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,"Macedonia, Former Yugoslav Republic of",MKD,
-Timor-Leste,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Timor-Leste (East Timor),TLS,Timor-Leste
-Togo,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Togo,TGO,Togo
-Tokelau,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,
-Tonga,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Tonga,,Tonga
-Trinidad and Tobago,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Trinidad and Tobago,TTO,Trinidad and Tobago
-Tunisia,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | MENA ,MAF | NAF ,NAF,,MAF ,Tunisia,TUN,Tunisia
-Turkey,AdvancedECO | OECD | EUR ,Other Europe,META , OECD | TUR ,TUR,,OECD90 ,Turkey,TUR,Turkey
-Turkmenistan,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Turkmenistan,TKM,Turkmenistan
-Turks and Caicos,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,,LAM ,,,
-Tuvalu,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,Tuvalu
-U.S. Virgin Islands,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,LAM | USA ,USA,,World ,,,
-Uganda,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Uganda,UGA,Uganda
-Ukraine,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world,REF | EEU-FSU ,EEU-FSU,,World ,Ukraine,UKR,Ukraine
-United Arab Emirates,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,United Arab Emirates,ARE,United Arab Emirates
-United Kingdom,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD90 ,United Kingdom,GBR,United Kingdom
-Tanzania,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,"Tanzania, United Republic of",TZA,Tanzania
-United States,AdvancedECO | OECD | NAM | US ,U.S.,North America , OECD | USA ,USA,,OECD90 ,United States of America,USA,United States
-Uruguay,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Uruguay,URY,Uruguay
-Uzbekistan,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Uzbekistan,UZB,Uzbekistan
-Vanuatu,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Vanuatu,VUT,Vanuatu
-Vatican,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,
-Venezuela,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Venezuela,VEN,Venezuela
-Viet Nam,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-CPA ,OAS-CPA,,ASIA ,Vietnam,VNM,Vietnam
-Wallis and Futuna Island,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,
-Western Sahara,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | NAF ,NAF,none,MAF ,,ESH,
-World ,World | World | World,World,World ,World ,World ,World ,World ,,,World 
-Yemen,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Yemen,YEM,Yemen
-Zambia,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Zambia,ZMB,Zambia
-Zimbabwe,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,, ,Zimbabwe,ZWE,Zimbabwe
-Antarctica,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
-Bermuda,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
-Burma,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
-Faroe Islands,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,FRO,
-Former Czechoslovakia,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,,,
-Former Serbia and Montenegro,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,,,
-Former U.S.S.R.,DevelopingECO | NonOECD | RUS ,Rest of the world,Rest of world,REF | RUS ,RUS ,,ASIA ,,,
-Former Yugoslavia,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EEU ,EEU,,OECD90 ,,,
-"Germany, East",AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD91,,,
-"Germany, West",AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD92,,,
-Greenland,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU15 ,EU15,,OECD93,,GRL,
-Guam,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,,,
-Hong Kong,DevelopingECO | NonOECD | CHINA ,China,Asia Pacific ,ASIA | CHN ,CHN,,ASIA ,"Hong Kong, China",,
-Palestinian Territories,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,,,
-Saint Pierre and Miquelon,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
-Samoa,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Samoa,,
-Taiwan,DevelopingECO | NonOECD | CHINA ,China,Asia Pacific ,ASIA | CHN ,CHN,,ASIA ,Taiwan,,
-U.S Pacific Islands,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
-U.S Territories,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
-Wake Island,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
+Region,ISO,IEA Region,BNEF Region,BNEF2 Region,IIASA Region,R32 Region,CAIT Region,GCAM Region,WWS Region,NCS Region,IAM Region
+Afghanistan,afg,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | PAK ,PAK,,ASIA ,Afghanistan,AFG,Afghanistan
+Albania,alb,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,Albania,ALB,Albania
+Algeria,dza,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA ,META | MENA ,MAF | NAF ,NAF,,MAF ,Algeria,DZA,Algeria
+Andorra,oth,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,Andorra
+Angola,ago,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Angola,AGO,Angola
+Anguilla,oth,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,LAM ,OTH,none,World ,,,
+Antigua and Barbuda,atg,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Antigua and Barbuda,,Antigua and Barbuda
+Netherlands Antilles,ant,AdvancedECO | OECD | Other ,Rest of the world,Rest of world,LAM | LAM -M ,LAM-M,none,World ,Netherlands Antilles,,
+Argentina,arg,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Argentina,ARG,Argentina
+Armenia,arm,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Armenia,ARM,Armenia
+Aruba,abw,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,,LAM ,,,
+Australia,aus,AdvancedECO | OECD | ASIAPAC ,South Korea,Asia Pacific , OECD | ANUZ ,ANUZ,,ASIA ,Australia,AUS,Australia
+Austria,aut,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD90 ,Austria,AUT,Austria
+Azerbaijan,aze,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Azerbaijan,AZE,Azerbaijan
+Bahamas,bhs,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Bahamas,BHS,Bahamas
+Bahrain,bhr,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Bahrain,,Bahrain
+Bangladesh,bgd,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Bangladesh,BGD,Bangladesh
+Barbados,brb,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM -M,,LAM ,Barbados,,Barbados
+Belarus,blr,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU-FSU ,EEU-FSU,,World ,Belarus,BLR,Belarus
+Belgium,bel,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU16 ,EU15,,OECD90 ,Belgium,BEL,Belgium
+Belize,blz,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America ,LAM | LAM -L ,LAM-L,,LAM ,Belize,BLZ,Belize
+Benin,ben,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Benin,BEN,Benin
+Bhutan,btn,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Bhutan,BTN,Bhutan
+Bolivia,bol,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Bolivia,BOL,Bolivia
+Bosnia and Herzegovina,bih,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,Bosnia and Herzegovina,BIH,Bosnia and Herzegovina
+Botswana,bwa,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Botswana,BWA,Botswana
+Brazil,bra,DevelopingECO | NonOECD | CSAM | BRAZIL ,Brazil,Latin America ,LAM | BRA ,BRA,,LAM ,Brazil,BRA,Brazil
+British Virgin Islands,vgb,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,,LAM ,,,
+Brunei,brn,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Brunei,BRN,Brunei
+Bulgaria,bgr,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-M ,EU12-M,,OECD90 ,Bulgaria,BGR,Bulgaria
+Burkina Faso,bfa,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Burkina Faso,BFA,Burkina Faso
+Burundi,bdi,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Burundi,BDI,Burundi
+Cote d'Ivoire,civ,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Cote d'Ivoire,CIV,Côte d'Ivoire
+Cabo Verde,cpv,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Cape Verde,CPV,Cape Verde
+Cambodia,khm,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-CPA ,OAS-CPA,,ASIA ,Cambodia,KHM,Cambodia
+Cameroon,cmr,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Cameroon,CMR,Cameroon
+Canada,can,AdvancedECO | OECD | NAM ,Canada,North America , OECD | CAN ,CAN,,OECD90 ,Canada,CAN,Canada
+Cayman Islands,cym,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,,LAM ,,,
+Central African Republic,caf,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,none,MAF ,Central African Republic,CAF,Central African Republic
+Chad,tcd,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Chad,TCD,Chad
+Chile,chl,AdvancedECO | OECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Chile,CHL,Chile
+China,chn,DevelopingECO | NonOECD | CHINA ,China,Asia Pacific ,ASIA | CHN ,CHN,,ASIA ,China,CHN,China
+Chinese Taipei,twn,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,,OTH,none,ASIA ,Taiwan,,
+Colombia,col,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Colombia,COL,Colombia
+Comoros,com,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Comoros,COM,Comoros
+Cook Islands,cok,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD ,OTH,none,ASIA ,,,Cook Islands
+Costa Rica,cri,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Costa Rica,CRI,Costa Rica
+Croatia,hrv,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EEU ,EEU,,OECD90 ,Croatia,HRV,Croatia
+Cuba,cub,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Cuba,CUB,Cuba
+Curacao,cuw,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,,OTH,,LAM ,,,
+Cyprus,cyp,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OeCD90 ,Cyprus,CYP,Cyprus
+Czech Republic,cze,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Czech Republic,CZE,Czech Republic
+Democratic People's Republic of Korea,prk,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,"Korea, Democratic People's Republic of",PRK,South Korea
+Congo-Kinshasa,cod,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Congo,,Democratic Republic of the Congo
+Congo-Brazzaville,cod,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,"Congo, Democratic Republic of",COD,
+Denmark,dnk,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU15 ,EU15,,OECD90 ,Denmark,DNK,Denmark
+Djibouti,dji,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Djibouti,DJI,Djibouti
+Dominica,dma,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,,,Dominica
+Dominican Republic,dom,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Dominican Republic,DOM,Dominican Republic
+Ecuador,ecu,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Ecuador,ECU,Ecuador
+Egypt,egy,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | MENA ,MAF | NAF ,NAF,,MAF ,Egypt,EGY,Egypt
+El Salvador,slv,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,El Salvador,SLV,El Salvador
+Equatorial Guinea,gnq,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Equatorial Guinea,GNQ,Equatorial Guinea
+Eritrea,eri,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Eritrea,ERI,Eritrea
+Estonia,est,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU12-H ,EU12-H,,OECD90 ,Estonia,EST,Estonia
+Ethiopia,eth,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Ethiopia,ETH,Ethiopia
+Falkland Islands,flk,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,none,LAM ,,FLK,
+Fiji,fji,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Fiji,FJI,Fiji
+Finland,fin,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU15 ,EU15,,OECD90 ,Finland,FIN,Finland
+France,fra,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU16 ,EU15,,OECD90 ,France,FRA,France
+French Guiana,guf,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,none,LAM ,French Guiana,GUF,
+French Polynesia,pyf,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,,PYF,
+Gabon,gab,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Gabon,GAB,Gabon
+Gambia,gmb,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Gambia,GMB,Gambia
+Georgia,geo,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Georgia,GEO,Georgia
+Germany,deu,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD90 ,Germany,DEU,Germany
+Ghana,gha,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Ghana,GHA,Ghana
+Gibraltar,gib,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD ,OTH,,World ,Gibraltar,,
+Greece,grc,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD90 ,Greece,GRC,Greece
+Grenada,grd,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Grenada,,Grenada
+Guadeloupe,glp,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,none,LAM ,,GLP,
+Guatemala,gtm,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -L ,LAM-L,,LAM ,Guatemala,GTM,Guatemala
+Guinea,gin,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Guinea,GIN,Guinea
+Guinea-Bissau,gnb,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Guinea-Bissau,GNB,Guinea-Bissau
+Guyana,guy,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Guyana,GUY,Guyana
+Haiti,hti,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -L ,LAM-L,,LAM ,Haiti,HTI,Haiti
+Honduras,hnd,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-L,,LAM ,Honduras,HND,Honduras
+Hungary,hun,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Hungary,HUN,Hungary
+Iceland,isl,AdvancedECO | OECD | EUR ,Other Europe,Europe | Other , OECD | EFTA ,EFTA,,OECD90 ,Iceland,ISL,Iceland
+India,ind,DevelopingECO | NonOECD | INDIA ,India,Asia Pacific ,ASIA | IND ,IND,,ASIA ,India,IND,India
+Indonesia,idn,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Asia Pacific | Southeast Asia ,ASIA | IDN ,IDN,,ASIA ,Indonesia,IDN,Indonesia
+Iraq,irq,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Iraq,IRQ,Iraq
+Ireland,irl,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD90 ,Ireland,IRL,Ireland
+Iran,irn,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,"Iran, Islamic Republic of",IRN,Iran
+Israel,isr,AdvancedECO | OECD | EUR ,Other Europe,META | MENA ,MAF | MEA-H ,MEA-H,,OECD90 ,Israel,ISR,Israel
+Italy,ita,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD90 ,Italy,ITA,Italy
+Jamaica,jam,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Jamaica,JAM,Jamaica
+Japan,jpn,AdvancedECO | OECD | JPN ,Japan,Asia Pacific , OECD | JPN ,JPN ,,ASIA ,Japan,JPN,Japan
+Jordan,jor,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Jordan,JOR,Jordan
+Kazakhstan,kaz,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Kazakhstan,KAZ,Kazakhstan
+Kenya,ken,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Kenya,KEN,Kenya
+Kiribati,kir,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD ,OTH,,ASIA ,Kiribati,,Kiribati
+South Korea,kor,AdvancedECO | OECD | ASIAPAC ,South Korea,Asia Pacific ,ASIA | KOR ,KOR,,ASIA ,"Korea, Republic of",KOR,
+Kosovo,srb (kosovo),DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world,,OTH,,World ,Kosovo,,
+Kuwait,kwt,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Kuwait,KWT,Kuwait
+Kyrgyzstan,kgz,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Kyrgyzstan,KGZ,Kyrgyzstan
+Laos,lao,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-CPA ,OAS-CPA,,ASIA ,Laos,LAO,Laos
+Latvia,lva,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | North , OECD | EU12-M ,EU12-M,,OECD90 ,Latvia,LVA,Latvia
+Lebanon,lbn,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Lebanon,LBN,Lebanon
+Lesotho,lso,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Lesotho,LSO,Lesotho
+Liberia,lbr,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Liberia,LBR,Liberia
+Libya,lby,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | MENA ,MAF | NAF ,NAF,,MAF ,Libya,LBY,Libya
+Liectenstein,lie,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,OECD90 ,,,Liechtenstein
+Lithuania,ltu,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | North , OECD | EU12-M ,EU12-M,,OECD91,Lithuania,LTU,Lithuania
+Luxembourg,lux,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD92,Luxembourg,LUX,Luxembourg
+Macau,mac,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | CHN ,CHN,none,ASIA ,,,
+Madagascar,mdg,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Madagascar,MDG,Madagascar
+Malawi,mwi,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Malawi,MWI,Malawi
+Malaysia,mys,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Asia Pacific | Southeast Asia ,ASIA | OAS-M ,OAS-M,,ASIA ,Malaysia,MYS,Malaysia
+Maldives,mdv,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Maldives,,Maldives
+Mali,mli,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Mali,MLI,Mali
+Malta,mlt,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Malta,,Malta
+Marshall Islands,mhl,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,Marshall Islands
+Martinique,mtq,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,none,LAM ,,MTQ,
+Mauritania,mrt,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Mauritania,MRT,Mauritania
+Mauritius,mus,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Mauritius,MUS,Mauritius
+Mexico,mex,AdvancedECO | OECD | NAM ,Canada,Latin America ,LAM | MEX ,MEX,,OECD90 ,Mexico,MEX,Mexico
+Micronesia,fsm,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Micronesia,,Micronesia
+Monaco,oth,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,
+Mongolia,mng,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-CPA ,OAS-CPA,,ASIA ,Mongolia,MNG,Mongolia
+Montenegro,mne,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,Montenegro,MNE,Montenegro
+Montserrat,msr,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,none,LAM ,,,
+Morocco,mar,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | MENA ,MAF | NAF ,NAF,,MAF ,Morocco,MAR,Morocco
+Mozambique,moz,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Mozambique,MOZ,Mozambique
+Myanmar,mmr,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Myanmar,MMR,Myanmar
+Namibia,nam,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Namibia,NAM,Namibia
+Nauru,oth,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,Nauru
+Nepal,npl,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Nepal,NPL,Nepal
+Netherlands,nld,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU15 ,EU15,,OECD90 ,Netherlands,NLD,Netherlands
+New Caledonia,ncl,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,,NCL,
+New Zealand,nzl,AdvancedECO | OECD | ASIAPAC ,South Korea,Rest of world, OECD | ANUZ ,ANUZ,,ASIA ,New Zealand,NZL,New Zealand
+Nicaragua,nic,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -L ,LAM-L,,LAM ,Nicaragua,NIC,Nicaragua
+Niger,ner,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Niger,NER,Niger
+Nigeria,nga,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Nigeria,NGA,Nigeria
+Niue,niu,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,Niue
+Northern Mariana Islands,oth,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,
+Norway,nor,AdvancedECO | OECD | EUR ,Other Europe,Europe | North , OECD | EFTA ,EFTA,,OECD90 ,Norway,NOR,Norway
+Oman,omn,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Oman,OMN,Oman
+Pakistan,pak,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | PAK ,PAK,,ASIA ,Pakistan,PAK,Pakistan
+Palau,plw,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD ,OTH,,ASIA ,,,Palau
+Panama,pan,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM -M,,LAM ,Panama,PAN,Panama
+Papua New Guinea,png,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Papua New Guinea,PNG,Papua New Guinea
+Paraguay,pry,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Paraguay,PRY,Paraguay
+Peru,per,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Peru,PER,Peru
+Philippines,phl,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Asia Pacific | Southeast Asia ,ASIA | OAS-L ,OAS-L,,ASIA ,Philippines,PHL,Philippines
+Pitcarin,oth,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,
+Poland,pol,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Poland,POL,Poland
+Portugal,prt,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Iberia , OECD | EU15 ,EU15,,OECD90 ,Portugal,PRT,Portugal
+Puerto Rico,pri,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,LAM | USA ,USA,,World ,,PRI,
+Qatar,qat,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Qatar,QAT,Qatar
+Moldova,mda,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world,REF | EEU-RSA ,EEU-FSA,,World ,"Moldova, Republic of",MDA,Moldova
+Congo,cog,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Congo,COG,Republic of Congo
+Reunion,reu,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-M ,SSA-M,none,MAF ,,REU,
+Romania,rou,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-M ,EU12-M,,OECD90 ,Romania,ROU,Romania
+Russia,rus,DevelopingECO | NonOECD | RUS ,Rest of the world,Rest of world,REF | RUS ,RUS ,,ASIA ,Russian Federation,RUS,Russia
+Rwanda,rwa,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Rwanda,RWA,Rwanda
+American Samoa,wsm,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Samoa,WSM,Samoa
+Sao Tome and Principe,stp,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Sao Tome and Principe,STP,Sao Tome and Principe
+Saudi Arabia,sau,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,Saudi Arabia,SAU,Saudi Arabia
+Senegal,sen,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Senegal,SEN,Senegal
+Serbia,srb,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,Serbia,SRB,Serbia
+Seychelles,syc,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-M ,SSA-M,,MAF ,Seychelles,,Seychelles
+Sierra Leone,sle,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Sierra Leone,SLE,Sierra Leone
+Singapore,sgp,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Singapore,,Singapore
+Slovakia,svk,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Slovak Republic,SVK,Slovakia
+Slovenia,svn,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,Slovenia,SVN,Slovenia
+Solomon Islands,slb,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Solomon Islands,SLB,Solomon Islands
+Somalia,som,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Somalia,SOM,Somalia
+South Africa,zaf,DevelopingECO | NonOECD | AFRICA | SAFR ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SAF ,SAF,,MAF ,South Africa,ZAF,South Africa
+South Sudan,ssd,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,South Sudan,SSD,South Sudan
+Spain,esp,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Iberia , OECD | EU15 ,EU15,,OECD90 ,Spain,ESP,Spain
+Sri Lanka,lka,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-M ,OAS-M,,ASIA ,Sri Lanka,LKA,Sri Lanka
+Saint Lucia,lca,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Saint Lucia,,Saint Lucia
+Saint Vincent and Grenadines,vct,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Saint Vincent and the Grenadines,,Saint Vincent and the Grenadines
+Saint Helena,oth,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,MAF ,OTH,none,World ,,,
+Saint Kitts and Nevis,kna,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM -M,,LAM ,,,Saint Kitts and Nevis
+Sudan,sdn,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,,MAF ,Sudan,SDN,Sudan
+Suriname,sur,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,,LAM ,Suriname,SUR,Suriname
+Swaziland,swz,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,none,MAF ,Swaziland,SWZ,
+Sweden,swe,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU15 ,EU15,,OECD90 ,Sweden,SWE,Sweden
+Switzerland,che,AdvancedECO | OECD | EUR ,Other Europe,Europe | Other , OECD | EFTA ,EFTA,,OECD90 ,Switzerland,CHE,Switzerland
+Syria,syr,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Syrian Arab Republic,SYR,Syria
+Tajikistan,tjk,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Tajikistan,TJK,Tajikistan
+Thailand,tha,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Asia Pacific | Southeast Asia ,ASIA | OAS-M ,OAS-M,,ASIA ,Thailand,THA,Thailand
+North Macedonia,mkd,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,"Macedonia, Former Yugoslav Republic of",MKD,
+Timor-Leste,tls,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world,ASIA | OAS-L ,OAS-L,,ASIA ,Timor-Leste (East Timor),TLS,Timor-Leste
+Togo,tgo,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Togo,TGO,Togo
+Tokelau,tkl,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,
+Tonga,ton,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Tonga,,Tonga
+Trinidad and Tobago,tto,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Trinidad and Tobago,TTO,Trinidad and Tobago
+Tunisia,tun,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | MENA ,MAF | NAF ,NAF,,MAF ,Tunisia,TUN,Tunisia
+Turkey,tur,AdvancedECO | OECD | EUR ,Other Europe,META , OECD | TUR ,TUR,,OECD90 ,Turkey,TUR,Turkey
+Turkmenistan,tkm,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Turkmenistan,TKM,Turkmenistan
+Turks and Caicos,tca,DevelopingECO | NonOECD | CSAM ,Other Latin America,Rest of world,LAM ,OTH,,LAM ,,,
+Tuvalu,oth,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,,World ,,,Tuvalu
+U.S. Virgin Islands,vir,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,LAM | USA ,USA,,World ,,,
+Uganda,uga,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Uganda,UGA,Uganda
+Ukraine,ukr,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world,REF | EEU-FSU ,EEU-FSU,,World ,Ukraine,UKR,Ukraine
+United Arab Emirates,are,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-H ,MEA-H,,MAF ,United Arab Emirates,ARE,United Arab Emirates
+United Kingdom,gbr,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD90 ,United Kingdom,GBR,United Kingdom
+Tanzania,tza,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,"Tanzania, United Republic of",TZA,Tanzania
+United States,usa,AdvancedECO | OECD | NAM | US ,U.S.,North America , OECD | USA ,USA,,OECD90 ,United States of America,USA,United States
+Uruguay,ury,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Uruguay,URY,Uruguay
+Uzbekistan,uzb,DevelopingECO | NonOECD | EURASIA ,Rest of the world,Rest of world,REF | CAS ,CAS,,ASIA ,Uzbekistan,UZB,Uzbekistan
+Vanuatu,vut,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Vanuatu,VUT,Vanuatu
+Vatican,oth,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,
+Venezuela,ven,DevelopingECO | NonOECD | CSAM ,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,,LAM ,Venezuela,VEN,Venezuela
+Viet Nam,vnm,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,Indonesia,Rest of world,ASIA | OAS-CPA ,OAS-CPA,,ASIA ,Vietnam,VNM,Vietnam
+Wallis and Futuna Island,wlf,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world, OECD ,OTH,none,World ,,,
+Western Sahara,esh,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,Rest of world,MAF | NAF ,NAF,none,MAF ,,ESH,
+World ,oth,World | World | World,World,World ,World ,World ,World ,World ,,,World 
+Yemen,yem,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,Yemen,YEM,Yemen
+Zambia,zmb,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,,MAF ,Zambia,ZMB,Zambia
+Zimbabwe,zwe,DevelopingECO | NonOECD | AFRICA ,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,, ,Zimbabwe,ZWE,Zimbabwe
+Antarctica,oth,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
+Bermuda,bmu,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
+Burma,mmr,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
+Faroe Islands,oth,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,FRO,
+Former CzechoslovakiaCzechoslovakia,csk,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,,OECD90 ,,,
+Former Serbia and Montenegro,scg,DevelopingECO | NonOECD | EUR ,Rest of the world,Rest of world, OECD | EEU ,EEU,,World ,,,
+Former U.S.S.R.,ussr,DevelopingECO | NonOECD | RUS ,Rest of the world,Rest of world,REF | RUS ,RUS ,,ASIA ,,,
+Former Yugoslavia,svn,AdvancedECO | NonOECD | EUR | EU ,Other Europe,Europe | Other , OECD | EEU ,EEU,,OECD90 ,,,
+"Germany, East",oth,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD91,,,
+"Germany, West",oth,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe , OECD | EU15 ,EU15,,OECD92,,,
+Greenland,grl,AdvancedECO | OECD | EUR | EU ,Other Europe,Europe | North , OECD | EU15 ,EU15,,OECD93,,GRL,
+Guam,gum,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,,,
+Hong Kong,hkg,DevelopingECO | NonOECD | CHINA ,China,Asia Pacific ,ASIA | CHN ,CHN,,ASIA ,"Hong Kong, China",,
+Palestinian Territories,pse,DevelopingECO | NonOECD | ME ,MENA,META | MENA ,MAF | MEA-M ,MEA-M,,MAF ,,,
+Saint Pierre and Miquelon,spm,DevelopingECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
+Samoa,wsm,DevelopingECO | NonOECD | ASIAPAC ,Rest of the world,Rest of world, OECD | OAS-L ,OAS-L,,ASIA ,Samoa,,
+Taiwan,twn,DevelopingECO | NonOECD | CHINA ,China,Asia Pacific ,ASIA | CHN ,CHN,,ASIA ,Taiwan,,
+U.S Pacific Islands,oth,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
+U.S Territories,oth,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
+Wake Island,oth,AdvancedECO | NonOECD | Other ,Rest of the world,Rest of world,,OTH,,,,,
