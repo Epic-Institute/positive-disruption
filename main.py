@@ -234,12 +234,17 @@ for i in range(0, 1):
     cdr_pathway = pd.DataFrame(cdr_pathway).append(
         pd.concat([cdr_pathway2], keys=[iea_region_list[i]], names=["Region"])
     )
-
+    """
     cdr_pathway = (
         cdr_pathway.droplevel(1)
         .assign(Technology=["Enhanced Weathering", "LTSSDAC", "HTLSDAC", "Other"])
         .set_index("Technology", append=True)
     )
+    """
+    cdr_pathway = cdr_pathway.droplevel(1).groupby("Region").sum()
+    cdr_pathway = (
+        em_pathway.groupby("Region").sum().divide(em_pathway.loc["World "].sum())
+    ).apply(lambda x: x.multiply(cdr_pathway.values[0]), axis=1)
 
     # cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 4)
 

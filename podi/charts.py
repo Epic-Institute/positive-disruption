@@ -23,6 +23,7 @@ import plotly.graph_objects as go
 from itertools import chain, zip_longest
 from math import ceil, pi, nan
 from kneed import DataGenerator, KneeLocator
+from podi.curve_smooth import curve_smooth
 
 unit_name = ["TWh", "EJ", "TJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00360, 3600, 0.086, 86]
@@ -1792,7 +1793,7 @@ df = (
     .sort_index()
 )
 """
-scenario = "pathway"
+scenario = "baseline"
 start_year = 2019
 
 for i in range(0, len(iea_region_list)):
@@ -1871,18 +1872,16 @@ for i in range(0, len(iea_region_list)):
         .loc[data_start_year:long_proj_end_year]
     )
 
-    em_othergas = em.loc[
-        iea_region_list[i], "Other gases", ["CH4", "N2O", "F-Gases"]
-    ].sum()
+    em_othergas = em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-Gases"]].sum()
 
-    em_ch4 = em.loc[iea_region_list[i], "Other gases", ["CH4"]].sum()
+    em_ch4 = em.loc[iea_region_list[i], "Other", ["CH4"]].sum()
 
-    em_n2o = em.loc[iea_region_list[i], "Other gases", ["N2O"]].sum()
+    em_n2o = em.loc[iea_region_list[i], "Other", ["N2O"]].sum()
 
-    em_fgas = em.loc[iea_region_list[i], "Other gases", ["F-Gases"]].sum()
+    em_fgas = em.loc[iea_region_list[i], "Other", ["F-Gases"]].sum()
 
     if iea_region_list[i] == "World ":
-        em_cdr = -cdr_em.loc[iea_region_list[i]].sum()
+        em_cdr = -cdr_em.loc[iea_region_list[i]]
 
         em = pd.DataFrame(
             [
@@ -3073,11 +3072,63 @@ low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
 default = pyhector.run(rcp19, {"temperature": {"S": 3}})
 high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
 
-results19 = pyhector.run(rcp19)
-results26 = pyhector.run(rcp26)
-results60 = pyhector.run(rcp60)
+hist = pd.DataFrame(pd.read_csv("podi/data/CO2_conc.csv")).set_index(
+    ["Region", "Model", "Metric", "Scenario"]
+)
+hist.columns = hist.columns.astype(int)
+hist = hist.loc["World ", "NOAA", "PPM CO2", "pathway"].T.dropna()
 
-hist = default[CONCENTRATION_CO2].loc[1950:]
+results = (
+    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
+    .droplevel(["UNIT"])
+)
+results.columns = results.columns.astype(int)
+
+results19 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ].loc[2010:]
+    ).T,
+    "quadratic",
+    4,
+).T
+
+results26 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4", "SSP2-26", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ].loc[2010:]
+    ).T,
+    "quadratic",
+    4,
+).T
+
+results60 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4", "SSP2-Baseline", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ].loc[2010:]
+    ).T,
+    "quadratic",
+    4,
+).T
+
+pd20 = (
+    pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv"))
+    .set_index(["Region", "Metric", "Units", "Scenario"])
+    .droplevel(["Units", "Scenario"])
+)
+pd20.columns = pd20.columns.astype(int)
+
+
+pd20.loc["World ", "Atm conc CO2"] = pd20.loc["World ", "Atm conc CO2"] * (
+    hist[2019] / pd20.loc["World ", "Atm conc CO2"].loc[2019]
+)
+results19 = results19 * (hist[2021] / results19[results19.index == 2021].values[0][0])
+results26 = results26 * (hist[2021] / results26[results26.index == 2021].values[0][0])
+results60 = results60 * (hist[2021] / results60[results60.index == 2021].values[0][0])
 
 fig = go.Figure()
 
@@ -3085,8 +3136,8 @@ fig.add_trace(
     go.Scatter(
         name="Historical",
         line=dict(width=3, color="black"),
-        x=hist[hist.index <= 2020].index,
-        y=hist[hist.index <= 2020],
+        x=hist[(hist.index >= 1950) & (hist.index <= 2021)].index,
+        y=hist[(hist.index >= 1950) & (hist.index <= 2021)],
         fill="none",
         stackgroup="one",
         legendgroup="Historical",
@@ -3095,12 +3146,26 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
+        name="PD20",
+        line=dict(width=3, color="blue", dash="dot"),
+        x=pd20.loc["World ", "Atm conc CO2"].loc[2019:].index,
+        y=pd20.loc["World ", "Atm conc CO2"].loc[2019:],
+        fill="none",
+        stackgroup="three",
+        legendgroup="PD20",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
         name="PD21",
         line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
+        x=results19[(results19.index >= 2021) & (results19.index <= 2100)].index,
+        y=results19[(results19.index >= 2021) & (results19.index <= 2100)][
+            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ],
         fill="none",
-        stackgroup="two",
+        stackgroup="four",
         legendgroup="PD21",
     )
 )
@@ -3109,10 +3174,12 @@ fig.add_trace(
     go.Scatter(
         name="SSP2-2.6",
         line=dict(width=3, color="yellow", dash="dot"),
-        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
-        y=results26[results26.index >= 2020][CONCENTRATION_CO2],
+        x=results26[(results19.index >= 2021) & (results26.index <= 2100)].index,
+        y=results26[(results26.index >= 2021) & (results26.index <= 2100)][
+            "GCAM4", "SSP2-26", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ],
         fill="none",
-        stackgroup="three",
+        stackgroup="five",
         legendgroup="SSP2-2.6",
     )
 )
@@ -3120,11 +3187,13 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][CONCENTRATION_CO2],
+        line=dict(width=3, color="orange", dash="dot"),
+        x=results19[(results19.index >= 2021) & (results19.index <= 2100)].index,
+        y=results19[(results19.index >= 2021) & (results19.index <= 2100)][
+            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ],
         fill="none",
-        stackgroup="four",
+        stackgroup="six",
         legendgroup="SSP2-1.9",
     )
 )
@@ -3133,10 +3202,12 @@ fig.add_trace(
     go.Scatter(
         name="Baseline",
         line=dict(width=3, color="red", dash="dot"),
-        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
-        y=results60[results60.index >= 2020][CONCENTRATION_CO2],
+        x=results60[(results60.index >= 2021) & (results60.index <= 2100)].index,
+        y=results60[(results60.index >= 2021) & (results60.index <= 2100)][
+            "GCAM4", "SSP2-Baseline", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ],
         fill="none",
-        stackgroup="five",
+        stackgroup="seven",
         legendgroup="Baseline",
     )
 )
@@ -3156,7 +3227,7 @@ fig.show()
 if save_figs is True:
     pio.write_html(
         fig,
-        file=("./charts/co2conc-" + iea_region_list[i] + ".html").replace(" ", ""),
+        file=("./charts/co2conc-" + "World " + ".html").replace(" ", ""),
         auto_open=False,
     )
 

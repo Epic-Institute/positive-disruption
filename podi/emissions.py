@@ -202,16 +202,24 @@ def emissions(
 
     addtl_em = (
         (
-            pd.read_csv(addtl_em)
-            .set_index(["Region", "Sector", "Metric", "Scenario"])
-            .drop(columns=["Unit"])
+            pd.read_csv(addtl_em).set_index(
+                ["Region", "Sector", "Metric", "Gas", "Scenario"]
+            )
         )
-        .loc[slice(None), slice(None), slice(None), scenario]
-        .reorder_levels(["Region", "Sector", "Metric"])
+        .loc[slice(None), slice(None), slice(None), slice(None), scenario]
+        .reorder_levels(
+            [
+                "Region",
+                "Sector",
+                "Metric",
+                "Gas",
+            ]
+        )
     )
     addtl_em.columns = addtl_em.columns.astype(int)
     addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year]
 
+    """
     for i in range(0, len(iea_region_list)):
         addtl_em.loc[iea_region_list[i], slice(None), slice(None)] = (
             addtl_em.loc["World ", slice(None), slice(None)].apply(
@@ -222,10 +230,7 @@ def emissions(
                 axis=1,
             )
         ).values
-
-    addtl_em = pd.concat([addtl_em], keys=["CO2"], names=["Gas"]).reorder_levels(
-        ["Region", "Sector", "Metric", "Gas"]
-    )
+    """
 
     # endregion
 
