@@ -943,19 +943,6 @@ for i in range(0, len(iea_region_list)):
         fig.reset_index(inplace=True)
         fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
 
-        """
-        fig = px.line(
-            fig2,
-            x="Year",
-            y="% Adoption",
-            line_group="Sector",
-            color="Sector",
-            color_discrete_sequence=px.colors.qualitative.T10,
-            title="Percent of Total PD Adoption, " + iea_region_list[i],
-            hover_data={"% Adoption": ": .0f"},
-        )
-        """
-
         fig = go.Figure()
 
         fig.add_trace(
@@ -1063,24 +1050,6 @@ for i in range(0, len(iea_region_list)):
 
         fig.add_trace(
             go.Scatter(
-                name="Carbon Dioxide Removal",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[
-                    (fig2["Year"] <= 2020)
-                    & (fig2["Sector"] == "Carbon Dioxide Removal")
-                ]["% Adoption"],
-                fill="none",
-                stackgroup="seven",
-                legendgroup="Carbon Dioxide Removal",
-                showlegend=False,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
                 name="Electricity",
                 line=dict(width=3, color="#B279A2", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
@@ -1176,36 +1145,41 @@ for i in range(0, len(iea_region_list)):
             )
         )
 
-        fig.add_trace(
-            go.Scatter(
-                name="Carbon Dioxide Removal",
-                line=dict(width=3, color="#FF9DA6", dash="dot"),
-                x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[
-                    (fig2["Year"] >= 2020)
-                    & (fig2["Sector"] == "Carbon Dioxide Removal")
-                ]["% Adoption"],
-                fill="none",
-                stackgroup="fourteen",
-                legendgroup="Carbon Dioxide Removal",
+        if iea_region_list[i] == "World ":
+            fig.add_trace(
+                go.Scatter(
+                    name="Carbon Dioxide Removal",
+                    line=dict(width=3, color="black"),
+                    x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
+                        "Year"
+                    ],
+                    y=fig2[
+                        (fig2["Year"] <= 2020)
+                        & (fig2["Sector"] == "Carbon Dioxide Removal")
+                    ]["% Adoption"],
+                    fill="none",
+                    stackgroup="seven",
+                    legendgroup="Carbon Dioxide Removal",
+                    showlegend=False,
+                )
             )
-        )
 
-        """
-        px.line(
-            fig2[fig2["Year"] < 2019],
-            x="Year",
-            y="% Adoption",
-            line_group="Sector",
-            color="Sector",
-            color_discrete_sequence=px.colors.qualitative.T10,
-            opacity=1,
-            title="Percent of Total PD Adoption, " + iea_region_list[i],
-            hover_data={"% Adoption": ": .0f"},
-        )
-        """
+            fig.add_trace(
+                go.Scatter(
+                    name="Carbon Dioxide Removal",
+                    line=dict(width=3, color="#FF9DA6", dash="dot"),
+                    x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
+                        "Year"
+                    ],
+                    y=fig2[
+                        (fig2["Year"] >= 2020)
+                        & (fig2["Sector"] == "Carbon Dioxide Removal")
+                    ]["% Adoption"],
+                    fill="none",
+                    stackgroup="fourteen",
+                    legendgroup="Carbon Dioxide Removal",
+                )
+            )
 
         fig.update_layout(
             title={
@@ -2213,6 +2187,25 @@ plt.clf()
 
 fig_type = "plotly"
 
+ndcs = [
+    (3, 3),
+    (3, 3),
+    (2025, 4.86),
+    (3, 3),
+    (2030, 1.2),
+    (3, 3),
+    (3, 3),
+    (2030, 0.13),
+    (3, 3),
+    (2030, 2.67),
+    (3, 3),
+    (2030, 12.96),
+    (2030, 9.14),
+    (2030, 1),
+    (3, 3),
+    (3, 3),
+]
+
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[
         iea_region_list[i], "Electricity", slice(None)
@@ -2262,10 +2255,10 @@ for i in range(0, len(iea_region_list)):
         slice(None),
     ].sum()
 
-    em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other gases", :].sum()
+    em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other", :].sum()
 
     if iea_region_list[i] == "World ":
-        em_mit_cdr = cdr_pathway.loc[iea_region_list[i]].sum()
+        em_mit_cdr = cdr_pathway.loc[iea_region_list[i]]
         em_mit = pd.DataFrame(
             [
                 em_mit_electricity,
@@ -2279,14 +2272,14 @@ for i in range(0, len(iea_region_list)):
             ]
         ).rename(
             index={
-                0: "Electricity",
-                1: "Transport",
-                2: "Buildings",
-                3: "Industry",
-                4: "Forests & Wetlands",
-                5: "Agriculture",
-                6: "CH4, N2O, F-gases",
-                7: "CDR",
+                "Unnamed 0": "Electricity",
+                "Unnamed 1": "Transport",
+                "Unnamed 2": "Buildings",
+                "Unnamed 3": "Industry",
+                "Unnamed 4": "Forests & Wetlands",
+                "Unnamed 5": "Agriculture",
+                "Unnamed 6": "CH4, N2O, F-gases",
+                "Unnamed 7": "CDR",
             }
         )
     else:
@@ -2522,6 +2515,24 @@ for i in range(0, len(iea_region_list)):
             )
         )
 
+        if iea_region_list[i] in [
+            "US ",
+            "SAFR ",
+            "RUS ",
+            "JPN ",
+            "CHINA ",
+            "BRAZIL ",
+            "INDIA ",
+        ]:
+            fig.add_trace(
+                go.Scatter(
+                    x=[ndcs[i][0]],
+                    y=[ndcs[i][1]],
+                    marker_color="#00FE35",
+                    name="NDC " + str(ndcs[i][0]),
+                )
+            )
+
         fig.update_layout(
             title={
                 "text": "Emissions Mitigated, " + iea_region_list[i],
@@ -2735,7 +2746,7 @@ for i in range(0, len(iea_region_list)):
         slice(None),
     ].sum()
 
-    em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other gases", :].sum()
+    em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other", :].sum()
 
     em_mit_cdr = pd.Series(
         cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
@@ -2767,10 +2778,126 @@ for i in range(0, len(iea_region_list)):
 
     em_mit.loc[:, :2020] = 0
 
-    fig = (
-        ((em_mit) / 1000)
-        .reindex(
-            [
+    if iea_region_list[i] == "World ":
+        fig = (
+            ((em_mit) / 1000)
+            .reindex(
+                [
+                    "CDR",
+                    "CH4, N2O, F-gases",
+                    "Agriculture",
+                    "Forests & Wetlands",
+                    "Industry",
+                    "Buildings",
+                    "Transport",
+                    "Electricity",
+                ]
+            )
+            .round(decimals=4)
+            .clip(lower=0)
+        )
+
+        data = {
+            "Electricity": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Electricity", year],
+                fig.loc["Electricity", year],
+            ],
+            "Transport": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Transport", year],
+                0,
+                fig.loc["Transport", year],
+            ],
+            "Buildings": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Buildings", year],
+                0,
+                0,
+                fig.loc["Buildings", year],
+            ],
+            "Industry": [
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Industry", year],
+                0,
+                0,
+                0,
+                fig.loc["Industry", year],
+            ],
+            "Forests & Wetlands": [
+                0,
+                0,
+                0,
+                fig.loc["Forests & Wetlands", year],
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Forests & Wetlands", year],
+            ],
+            "Agriculture": [
+                0,
+                0,
+                fig.loc["Agriculture", year],
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Agriculture", year],
+            ],
+            "CH4, N2O, F-gases": [
+                0,
+                fig.loc["CH4, N2O, F-gases", year],
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["CH4, N2O, F-gases", year],
+            ],
+            "CDR": [
+                fig.loc["CDR", year],
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["CDR", year],
+            ],
+            "Total": [
+                0,
+                fig.loc["Electricity", year],
+                fig.loc["Transport", year],
+                fig.loc["Buildings", year],
+                fig.loc["Industry", year],
+                fig.loc["Forests & Wetlands", year],
+                fig.loc["Agriculture", year],
+                0,
+                0,
+            ],
+            "labels": [
                 "CDR",
                 "CH4, N2O, F-gases",
                 "Agriculture",
@@ -2779,238 +2906,252 @@ for i in range(0, len(iea_region_list)):
                 "Buildings",
                 "Transport",
                 "Electricity",
-            ]
+                "Total",
+            ],
+        }
+    else:
+        fig = (
+            ((em_mit) / 1000)
+            .reindex(
+                [
+                    "CH4, N2O, F-gases",
+                    "Agriculture",
+                    "Forests & Wetlands",
+                    "Industry",
+                    "Buildings",
+                    "Transport",
+                    "Electricity",
+                ]
+            )
+            .round(decimals=4)
+            .clip(lower=0)
         )
-        .round(decimals=4)
-        .clip(lower=0)
-    )
 
-    data = {
-        "Electricity": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            fig.loc["Electricity", year],
-            0,
-            fig.loc["Electricity", year],
-            fig.loc["Electricity", year],
-        ],
-        "Transport": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            fig.loc["Transport", year],
-            0,
-            0,
-            fig.loc["Transport", year],
-            fig.loc["Transport", year],
-        ],
-        "Buildings": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            fig.loc["Buildings", year],
-            0,
-            0,
-            0,
-            fig.loc["Buildings", year],
-            fig.loc["Buildings", year],
-        ],
-        "Industry": [
-            0,
-            0,
-            0,
-            0,
-            fig.loc["Industry", year],
-            0,
-            0,
-            0,
-            0,
-            fig.loc["Industry", year],
-            fig.loc["Industry", year],
-        ],
-        "Forests & Wetlands": [
-            0,
-            0,
-            0,
-            fig.loc["Forests & Wetlands", year],
-            0,
-            0,
-            0,
-            0,
-            fig.loc["Forests & Wetlands", year],
-            0,
-            fig.loc["Forests & Wetlands", year],
-        ],
-        "Agriculture": [
-            0,
-            0,
-            fig.loc["Agriculture", year],
-            0,
-            0,
-            0,
-            0,
-            0,
-            fig.loc["Agriculture", year],
-            0,
-            fig.loc["Agriculture", year],
-        ],
-        "CH4, N2O, F-gases": [
-            0,
-            fig.loc["CH4, N2O, F-gases", year],
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            fig.loc["CH4, N2O, F-gases", year],
-            fig.loc["CH4, N2O, F-gases", year],
-        ],
-        "CDR": [
-            fig.loc["CDR", year],
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            fig.loc["CDR", year],
-            fig.loc["CDR", year],
-        ],
-        "NCS": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            fig.loc["Forests & Wetlands", year],
-            fig.loc["Agriculture", year],
-            0,
-            0,
-        ],
-        "Energy": [
-            0,
-            fig.loc["Electricity", year],
-            fig.loc["Transport", year],
-            fig.loc["Buildings", year],
-            fig.loc["Industry", year],
-            0,
-            0,
-            0,
-            0,
-            0,
-        ],
-        "Total": [
-            0,
-            fig.loc["Electricity", year],
-            fig.loc["Transport", year],
-            fig.loc["Buildings", year],
-            fig.loc["Industry", year],
-            fig.loc["Forests & Wetlands", year],
-            fig.loc["Agriculture", year],
-            0,
-            0,
-            0,
-        ],
-        "labels": [
-            "CDR",
-            "CH4, N2O, F-gases",
-            "Agriculture",
-            "Forests & Wetlands",
-            "Industry",
-            "Buildings",
-            "Transport",
-            "Electricity",
-            "NCS",
-            "Energy",
-            "Total",
-        ],
-    }
+        data = {
+            "Electricity": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Electricity", year],
+                fig.loc["Electricity", year],
+            ],
+            "Transport": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Transport", year],
+                0,
+                fig.loc["Transport", year],
+            ],
+            "Buildings": [
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Buildings", year],
+                0,
+                0,
+                fig.loc["Buildings", year],
+            ],
+            "Industry": [
+                0,
+                0,
+                0,
+                fig.loc["Industry", year],
+                0,
+                0,
+                0,
+                fig.loc["Industry", year],
+            ],
+            "Forests & Wetlands": [
+                0,
+                0,
+                fig.loc["Forests & Wetlands", year],
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Forests & Wetlands", year],
+            ],
+            "Agriculture": [
+                0,
+                fig.loc["Agriculture", year],
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["Agriculture", year],
+            ],
+            "CH4, N2O, F-gases": [
+                fig.loc["CH4, N2O, F-gases", year],
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["CH4, N2O, F-gases", year],
+            ],
+            "Total": [
+                0,
+                fig.loc["Electricity", year],
+                fig.loc["Transport", year],
+                fig.loc["Buildings", year],
+                fig.loc["Industry", year],
+                fig.loc["Forests & Wetlands", year],
+                fig.loc["Agriculture", year],
+                0,
+            ],
+            "labels": [
+                "CH4, N2O, F-gases",
+                "Agriculture",
+                "Forests & Wetlands",
+                "Industry",
+                "Buildings",
+                "Transport",
+                "Electricity",
+                "Total",
+            ],
+        }
 
     opacity = 0.5
 
-    figure = go.Figure(
-        data=[
-            go.Bar(
-                y=data["labels"],
-                x=data["CDR"],
-                offsetgroup=0,
-                orientation="h",
-                marker_color="#B82E2E",
-                opacity=opacity,
-            ),
-            go.Bar(
-                y=data["labels"],
-                x=data["CH4, N2O, F-gases"],
-                offsetgroup=0,
-                orientation="h",
-                marker_color="#E45756",
-                opacity=opacity,
-            ),
-            go.Bar(
-                y=data["labels"],
-                x=data["Agriculture"],
-                offsetgroup=0,
-                orientation="h",
-                marker_color="#72B7B2",
-                opacity=opacity,
-            ),
-            go.Bar(
-                y=data["labels"],
-                x=data["Forests & Wetlands"],
-                offsetgroup=0,
-                orientation="h",
-                marker_color="#54A24B",
-                opacity=opacity,
-            ),
-            go.Bar(
-                y=data["labels"],
-                x=data["Industry"],
-                offsetgroup=0,
-                orientation="h",
-                marker_color="#60738C",
-                opacity=opacity,
-            ),
-            go.Bar(
-                y=data["labels"],
-                x=data["Buildings"],
-                offsetgroup=0,
-                orientation="h",
-                marker_color="#F58518",
-                opacity=opacity,
-            ),
-            go.Bar(
-                y=data["labels"],
-                x=data["Transport"],
-                offsetgroup=0,
-                orientation="h",
-                marker_color="#7AA8B8",
-                opacity=opacity,
-            ),
-            go.Bar(
-                y=data["labels"],
-                x=data["Electricity"],
-                offsetgroup=0,
-                orientation="h",
-                marker_color="#B279A2",
-                opacity=opacity,
-            ),
-        ]
-    )
+    if iea_region_list[i] == "World ":
+        figure = go.Figure(
+            data=[
+                go.Bar(
+                    y=data["labels"],
+                    x=data["CDR"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#B82E2E",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["CH4, N2O, F-gases"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#E45756",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Agriculture"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#72B7B2",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Forests & Wetlands"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#54A24B",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Industry"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#60738C",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Buildings"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#F58518",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Transport"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#7AA8B8",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Electricity"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#B279A2",
+                    opacity=opacity,
+                ),
+            ]
+        )
+    else:
+        figure = go.Figure(
+            data=[
+                go.Bar(
+                    y=data["labels"],
+                    x=data["CH4, N2O, F-gases"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#E45756",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Agriculture"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#72B7B2",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Forests & Wetlands"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#54A24B",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Industry"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#60738C",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Buildings"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#F58518",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Transport"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#7AA8B8",
+                    opacity=opacity,
+                ),
+                go.Bar(
+                    y=data["labels"],
+                    x=data["Electricity"],
+                    offsetgroup=0,
+                    orientation="h",
+                    marker_color="#B279A2",
+                    opacity=opacity,
+                ),
+            ]
+        )
 
     """
     figure = go.Figure(data=[go.Bar(x=fig.loc[:, 2030], y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2030', marker_color='#B279A2'), go.Bar(x=fig.loc[:, 2050], y=fig.index, width=[0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], orientation='h', name='Mitigation in 2050', marker_color='#7AA8B8'))
@@ -3022,7 +3163,6 @@ for i in range(0, len(iea_region_list)):
         j = 1
 
     if iea_region_list[i] in [
-        "World ",
         "US ",
         "SAFR ",
         "RUS ",
@@ -3036,16 +3176,26 @@ for i in range(0, len(iea_region_list)):
             x0=ndcs[i][j],
             y0=-0.5,
             x1=ndcs[i][j],
-            y1=10.5,
+            y1=7.5,
+            line=dict(color="LightSeaGreen", width=3, dash="dot"),
+            name="NDC",
+        )
+    if iea_region_list[i] == "World ":
+        figure.add_shape(
+            type="line",
+            x0=ndcs[i][j],
+            y0=-0.5,
+            x1=ndcs[i][j],
+            y1=8.5,
             line=dict(color="LightSeaGreen", width=3, dash="dot"),
             name="NDC",
         )
 
         figure.add_trace(
             go.Scatter(
-                x=[ndcs[i][j]],
+                x=[ndcs[i][j] - 1],
                 y=["CDR"],
-                text=["Target"],
+                text=["NDC " + str(year)],
                 mode="text",
                 showlegend=False,
             )
