@@ -1091,21 +1091,4 @@ def results_analysis(
 
         # endregion
 
-    ########
-    # NDCS #
-    ########
-
-    if region in [
-        "US ",
-        "SAFR ",
-        "RUS ",
-        "JPN ",
-        "CHINA ",
-        "BRAZIL ",
-        "INDIA ",
-    ]:
-       em_ndc = pd.read_csv('podi/data/emissions_ndcs.csv').set_index(['Region']).drop('2025', axis=1)
-       em_mit_ndc =  
-
-
     return adoption_curves

@@ -62,7 +62,7 @@ for i in range(0, len(iea_region_list)):
     # region
 
     for j in ["baseline", "pathway"]:
-        for k in ["demand", "supply"]:
+        for k in ["demand", "supply", "supply2"]:
             path = (
                 '"'
                 + k

@@ -303,5 +303,45 @@ for i in range(0, len(iea_region_list)):
 # endregion
 
 
+########
+# NDCS #
+########
+
+# region
+
+em_mit_ndc = []
+
+for i in range(0, len(iea_region_list)):
+    if iea_region_list[i] in [
+        "World ",
+        "US ",
+        "SAFR ",
+        "RUS ",
+        "JPN ",
+        "CHINA ",
+        "BRAZIL ",
+        "INDIA ",
+    ]:
+        em_ndc = (
+            pd.read_csv("podi/data/emissions_ndcs.csv")
+            .set_index(["Region"])
+            .loc[iea_region_list[i]]
+        )
+
+        em_ndc = pd.DataFrame(
+            (
+                em_baseline.loc[iea_region_list[i]].sum().loc[[2025, 2030, 2050]] / 1000
+            ).values
+            - (em_ndc).values
+        ).rename(index={0: 2025, 1: 2030, 2: 2050}, columns={0: "em_mit"})
+
+        em_ndc["Region"] = iea_region_list[i]
+    else:
+        em_ndc = []
+
+    em_mit_ndc = pd.DataFrame(em_mit_ndc).append(em_ndc)
+
+# endregion
+
 end_time = time.monotonic()
 print(timedelta(seconds=end_time - start_time))
