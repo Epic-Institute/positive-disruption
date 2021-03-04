@@ -113,7 +113,7 @@ gas4 = []
 for gas2 in ["CH4"]:
     gas = pd.read_csv(data[gas2]).drop(columns=["Em", "Units"])
 
-    gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000 * 28
+    gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000 * 25
 
     gas.columns = gas.columns.astype(int)
 
@@ -248,7 +248,7 @@ gas5 = []
 for gas2 in ["N2O"]:
     gas = pd.read_csv(data[gas2]).drop(columns=["Em", "Units"])
 
-    gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000 * 265
+    gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000 * 298
     gas.columns = gas.columns.astype(int)
 
     region_categories = pd.read_csv(

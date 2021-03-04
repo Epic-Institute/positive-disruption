@@ -123,168 +123,128 @@ if chart_type == "stacked":
                 ]
             )
         )
-        if fig_type == "plotly":
-            fig = fig.T
-            fig.index.name = "Year"
-            fig.reset_index(inplace=True)
-            fig2 = pd.melt(
-                fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0]
+        fig = fig.T
+        fig.index.name = "Year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        fig.add_trace(
+            go.Scatter(
+                name="Transport-Nonelectric",
+                line=dict(width=0.5, color="#7AA8B8"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "Transport-Nonelectric"]["TFC, " + unit[0]],
+                fill="tozeroy",
+                stackgroup="one",
             )
+        )
 
-            fig = go.Figure()
-
-            fig.add_trace(
-                go.Scatter(
-                    name="Transport-Nonelectric",
-                    line=dict(width=0.5, color="#7AA8B8"),
-                    x=fig2["Year"],
-                    y=fig2[fig2["Sector"] == "Transport-Nonelectric"][
-                        "TFC, " + unit[0]
-                    ],
-                    fill="tozeroy",
-                    stackgroup="one",
-                )
+        fig.add_trace(
+            go.Scatter(
+                name="Transport-Electricity",
+                line=dict(width=0.5, color="#bbe272"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "Transport-Electricity"]["TFC, " + unit[0]],
+                fill="tonexty",
+                stackgroup="one",
             )
+        )
 
-            fig.add_trace(
-                go.Scatter(
-                    name="Transport-Electricity",
-                    line=dict(width=0.5, color="#bbe272"),
-                    x=fig2["Year"],
-                    y=fig2[fig2["Sector"] == "Transport-Electricity"][
-                        "TFC, " + unit[0]
-                    ],
-                    fill="tonexty",
-                    stackgroup="one",
-                )
+        fig.add_trace(
+            go.Scatter(
+                name="Buildings-Heat",
+                line=dict(width=0.5, color="#F58518"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "Buildings-Heat"]["TFC, " + unit[0]],
+                fill="tonexty",
+                stackgroup="one",
             )
+        )
 
-            fig.add_trace(
-                go.Scatter(
-                    name="Buildings-Heat",
-                    line=dict(width=0.5, color="#F58518"),
-                    x=fig2["Year"],
-                    y=fig2[fig2["Sector"] == "Buildings-Heat"]["TFC, " + unit[0]],
-                    fill="tonexty",
-                    stackgroup="one",
-                )
+        fig.add_trace(
+            go.Scatter(
+                name="Buildings-Electricity",
+                line=dict(width=0.5, color="#54A24B"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "Buildings-Electricity"]["TFC, " + unit[0]],
+                fill="tonexty",
+                stackgroup="one",
             )
+        )
 
-            fig.add_trace(
-                go.Scatter(
-                    name="Buildings-Electricity",
-                    line=dict(width=0.5, color="#54A24B"),
-                    x=fig2["Year"],
-                    y=fig2[fig2["Sector"] == "Buildings-Electricity"][
-                        "TFC, " + unit[0]
-                    ],
-                    fill="tonexty",
-                    stackgroup="one",
-                )
+        fig.add_trace(
+            go.Scatter(
+                name="Industry-Heat",
+                line=dict(width=0.5, color="#60738C"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "Industry-Heat"]["TFC, " + unit[0]],
+                fill="tonexty",
+                stackgroup="one",
             )
+        )
 
-            fig.add_trace(
-                go.Scatter(
-                    name="Industry-Heat",
-                    line=dict(width=0.5, color="#60738C"),
-                    x=fig2["Year"],
-                    y=fig2[fig2["Sector"] == "Industry-Heat"]["TFC, " + unit[0]],
-                    fill="tonexty",
-                    stackgroup="one",
-                )
+        fig.add_trace(
+            go.Scatter(
+                name="Industry-Electricity",
+                line=dict(width=0.5, color="#B279A2"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "Industry-Electricity"]["TFC, " + unit[0]],
+                fill="tonexty",
+                stackgroup="one",
             )
+        )
 
-            fig.add_trace(
-                go.Scatter(
-                    name="Industry-Electricity",
-                    line=dict(width=0.5, color="#B279A2"),
-                    x=fig2["Year"],
-                    y=fig2[fig2["Sector"] == "Industry-Electricity"]["TFC, " + unit[0]],
-                    fill="tonexty",
-                    stackgroup="one",
-                )
+        fig.update_layout(
+            title={
+                "text": "Energy Demand, "
+                + iea_region_list[i]
+                + ", "
+                + scenario.title(),
+                "xanchor": "center",
+                "x": 0.5,
+            },
+            xaxis={"title": "Year"},
+            yaxis={"title": "TFC, " + unit[0]},
+        )
+
+        fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+
+        """
+        fig.update_layout(title_x=0.5, legend_traceorder="reversed")
+        fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+        """
+
+        fig.add_annotation(
+            text="Source",
+            xref="paper",
+            yref="paper",
+            x=1.1,
+            y=-0.1,
+            showarrow=False,
+            font=dict(size=16, color="#ffffff"),
+            align="center",
+            bordercolor="#c7c7c7",
+            borderwidth=2,
+            borderpad=4,
+            bgcolor="#ff7f0e",
+            opacity=0.8,
+        )
+
+        if show_figs is True:
+            fig.show()
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/demand-" + scenario + "-" + iea_region_list[i] + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
             )
-
-            fig.update_layout(
-                title={
-                    "text": "Energy Demand, "
-                    + iea_region_list[i]
-                    + ", "
-                    + scenario.title(),
-                    "xanchor": "center",
-                    "x": 0.5,
-                },
-                xaxis={"title": "Year"},
-                yaxis={"title": "TFC, " + unit[0]},
-            )
-            fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-
-            """
-            fig.update_layout(title_x=0.5, legend_traceorder="reversed")
-            fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-            """
-
-            if show_figs is True:
-                fig.show()
-            if save_figs is True:
-                pio.write_html(
-                    fig,
-                    file=(
-                        "./charts/demand-"
-                        + scenario
-                        + "-"
-                        + iea_region_list[i]
-                        + ".html"
-                    ).replace(" ", ""),
-                    auto_open=False,
-                )
-        else:
-
-            colors = (
-                (0.0, 0.392, 0.0),
-                (0.4, 0.2, 0.6),
-                (0.941, 0.501, 0.501),
-                (0.098, 0.098, 0.439),
-                (0.545, 0.0, 0.0),
-                (0.392, 0.584, 0.929),
-            )
-
-            colors2 = (pd.DataFrame(colors) * 0.75).values.tolist()
-
-            plt.figure(i)
-            plt.stackplot(
-                fig.loc[:, :data_end_year].T.index,
-                fig.loc[:, :data_end_year],
-                labels=fig.index,
-                colors=colors2,
-            )
-            plt.stackplot(
-                fig.loc[:, data_end_year:].T.index,
-                fig.loc[:, data_end_year:],
-                labels=fig.index,
-                colors=colors,
-                linestyle="--",
-            )
-            plt.legend(loc=2, fontsize="small")
-            plt.ylabel("TFC, " + unit[0])
-            plt.xlim([data_start_year, energy_demand.columns.max()])
-            plt.legend(
-                labels=fig.index, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0
-            )
-            plt.xticks(np.arange(data_start_year, energy_demand.columns.max() + 1, 10))
-            plt.title("Energy Demand, " + iea_region_list[i])
-            plt.show()
-            if save_figs is True:
-                plt.savefig(
-                    fname=(
-                        "podi/data/figs/demand-" + scenario + "-" + iea_region_list[i]
-                    ).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
-
-        plt.clf()
+    plt.clf()
 
 if chart_type == "line":
     for i in range(0, len(iea_region_list)):
@@ -450,7 +410,6 @@ tech_list = [
     "Electricity-Nuclear",
     "Electricity-Other ren",
     "Heat-Solar thermal",
-    "Heat-Biochar",
     "Heat-Bioenergy",
     "Heat-Fossil fuels",
     "Transport-Fossil fuels",
@@ -476,7 +435,7 @@ group_keys = {
     ("Heat", "Oil"): "Heat-Fossil fuels2",
     ("Heat", "Other sources"): "Heat-Bioenergy",
     ("Heat", "Solar thermal"): "Heat-Solar thermal",
-    ("Heat", "Waste"): "Heat-Biochar",
+    ("Heat", "Waste"): "Heat-Bioenergy",
     ("Transport", "Oil"): "Transport-Fossil fuels2",
     ("Transport", "Bioenergy"): "Transport-Bioenergy & H2",
     ("Transport", "Other fuels"): "Transport-Bioenergy & H2",
@@ -2303,86 +2262,6 @@ for i in range(0, len(iea_region_list)):
             auto_open=False,
         )
     plt.clf()
-
-# endregion
-
-########################
-# GHG EMISSIONS BY GAS #
-########################
-
-# region
-
-# ABSOLUTE
-
-emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
-names = ["CO2", "CH4", "N2O"]
-units = ["Gt C", "Mt CH4", "Mt N2O"]
-mult = [1, 1, 0.001]
-i = 0
-
-for emission in emissions:
-    fig = plt.plot(
-        rcp19[emission].loc[1950:2100] * mult[i],
-        linestyle="--",
-        color=(0.560, 0.792, 0.740),
-    )
-    plt.plot(rcp19[emission].loc[1950:2016] * mult[i], color="black")
-    plt.ylabel(units[i])
-    plt.title("DAU Net Emissions, " + names[i])
-    plt.show()
-    i = i + 1
-plt.clf()
-
-# IN CO2e UNITS
-
-emissions = ["ffi_emissions", "CH4_emissions", "N2O_emissions"]
-names = ["CO2", "CH4", "N2O"]
-units = ["GtCO2e", "GtCO2e", "GtCO2e"]
-mult = [3.67, 1e-3, 1e-3]
-gwp = [1, 28, 265]
-j = 0
-
-for emission in emissions:
-    fig = plt.plot(
-        rcp19[emission].loc[2000:2100] * mult[j] * gwp[j],
-        linestyle="--",
-        color=(0.560, 0.792, 0.740),
-    )
-    plt.plot(rcp19[emission].loc[2000:2016] * mult[j] * gwp[j], color="black")
-    plt.ylabel(units[j])
-    plt.title("DAU Net Emissions, " + names[j])
-    plt.savefig(
-        fname=("podi/data/figs/emissions-" + names[j]).replace(" ", ""),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    j = j + 1
-plt.clf()
-
-# Combined GHG
-
-mult = [3.67, 1e-3, 1e-3]
-gwp = [1, 28, 265]
-i = 0
-
-fig = plt.plot(
-    rcp19.loc[2000:2100] * mult[i] * gwp[i],
-    linestyle="--",
-    color=(0.560, 0.792, 0.740),
-)
-plt.plot(rcp19.loc[2000:2016] * mult[i] * gwp[i], color="black")
-plt.ylabel("GtCO2e")
-plt.title("DAU Net Emissions, " + names[i])
-plt.savefig(
-    fname=("podi/data/figs/emissions-" + names[i]).replace(" ", ""),
-    format="png",
-    bbox_inches="tight",
-    pad_inches=0.1,
-)
-plt.show()
-plt.clf()
 
 # endregion
 

@@ -217,7 +217,35 @@ def emissions(
         )
     )
     addtl_em.columns = addtl_em.columns.astype(int)
-    addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year] / 1e9
+    addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year]
+
+    per_change = (
+        elec_em.loc[slice(None), "Electricity", "Fossil fuels", "CO2"]
+        .loc[:, 2019:]
+        .pct_change(axis=1)
+        .replace(NaN, 0)
+        .dropna(axis=1)
+        .apply(lambda x: x + 1, axis=1)
+        .combine_first(addtl_em)
+        .reindex(sorted(elec_em.columns), axis=1)
+    )
+
+    addtl_em = addtl_em.loc[:, :2019].merge(
+        pd.DataFrame(addtl_em.loc[:, 2019])
+        .merge(
+            per_change.loc[:, 2020:],
+            right_on=["Region", "Metric", "Gas"],
+            left_on=["Region", "Metric", "Gas"],
+        )
+        .cumprod(axis=1)
+        .loc[:, 2020:],
+        right_on=["Region", "Metric", "Gas"],
+        left_on=["Region", "Metric", "Gas"],
+    )
+
+    addtl_em = pd.concat([addtl_em], keys=["Other"], names=["Sector"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas"]
+    )
 
     """
     for i in range(0, len(iea_region_list)):
