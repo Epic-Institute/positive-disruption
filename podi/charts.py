@@ -220,18 +220,6 @@ if chart_type == "stacked":
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
 
             """
-            fig = px.area(
-                fig2,
-                x="Year",
-                y="TFC, " + unit[0],
-                line_group="Sector",
-                color="Sector",
-                color_discrete_sequence=px.colors.qualitative.T10,
-                title="Energy Demand, " + iea_region_list[i] + ", " + scenario.title(),
-                hover_data={"TFC, " + unit[0]: ": ,.0f"},
-                
-            )
-
             fig.update_layout(title_x=0.5, legend_traceorder="reversed")
             fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
             """
@@ -1986,18 +1974,6 @@ for i in range(0, len(iea_region_list)):
 #############
 
 # region
-"""
-# from openclimatedata/https://github.com/openclimatedata/notebooks/blob/master/EDGAR%20CO2%20Emissions.ipynb
-
-df = read_datapackage("https://github.com/openclimatedata/edgar-co2-emissions")
-unit = "kt"
-df = (
-    df.reset_index()
-    .drop("Name", axis=1)
-    .set_index(["Code", "Sector", "Year"])
-    .sort_index()
-)
-"""
 pd20 = (
     pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv"))
     .set_index(["Region", "Metric", "Units", "Scenario"])
@@ -2042,9 +2018,7 @@ for i in range(0, len(iea_region_list)):
     )
 
     em_industry = (
-        em.loc[
-            iea_region_list[i], ["Industry", "Other gases"], ["Fossil fuels", "Cement"]
-        ]
+        em.loc[iea_region_list[i], ["Industry", "Other"], ["Fossil fuels", "cement"]]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
@@ -2089,13 +2063,13 @@ for i in range(0, len(iea_region_list)):
         .loc[data_start_year:long_proj_end_year]
     )
 
-    em_othergas = em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-Gases"]].sum()
+    em_othergas = em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-gases"]].sum()
 
     em_ch4 = em.loc[iea_region_list[i], "Other", ["CH4"]].sum()
 
     em_n2o = em.loc[iea_region_list[i], "Other", ["N2O"]].sum()
 
-    em_fgas = em.loc[iea_region_list[i], "Other", ["F-Gases"]].sum()
+    em_fgas = em.loc[iea_region_list[i], "Other", ["F-gases"]].sum()
 
     if iea_region_list[i] == "World ":
         em_cdr = -cdr_em.loc[iea_region_list[i]]
@@ -2115,16 +2089,16 @@ for i in range(0, len(iea_region_list)):
             ]
         ).rename(
             index={
-                0: "Electricity",
-                1: "Transport",
-                2: "Buildings",
-                3: "Industry",
-                4: "CH4",
-                5: "N2O",
-                6: "F-gases",
-                7: "Agriculture",
-                8: "Forests & Wetlands",
-                9: "CDR",
+                "Unnamed 0": "Electricity",
+                "Unnamed 1": "Transport",
+                "Unnamed 2": "Buildings",
+                "Unnamed 3": "Industry",
+                "Unnamed 4": "CH4",
+                "Unnamed 5": "N2O",
+                "Unnamed 6": "F-gases",
+                "Unnamed 7": "Agriculture",
+                "Unnamed 8": "Forests & Wetlands",
+                "World ": "CDR",
             }
         )
     else:
@@ -2290,6 +2264,8 @@ for i in range(0, len(iea_region_list)):
         )
     )
 
+    """
+    # PD20 Check
     if iea_region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
@@ -2301,7 +2277,7 @@ for i in range(0, len(iea_region_list)):
                 stackgroup="PD20",
             )
         )
-
+    """
     fig.update_layout(
         title={
             "text": "Emissions, " + scenario.title() + ", " + iea_region_list[i],

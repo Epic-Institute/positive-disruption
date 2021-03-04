@@ -99,14 +99,14 @@ BRAZIL ,Heat,Waste,0.09,38.957,0.15,0.0
 BRAZIL ,Transport,Oil,-0.09,37.0,0.95,0.0
 BRAZIL ,Transport,Bioenergy,0.07,37.0,0.9,0.0
 BRAZIL ,Transport,Other fuels,-0.05,10.0,0.05,0.0
-EUR ,Electricity,Biomass and waste,-0.2,23.726,0.05,0.0
-EUR ,Electricity,Fossil fuels,-0.11,15.937,0.65,0.0
+EUR ,Electricity,Biomass and waste,-0.2,22.747,0.05,0.0
+EUR ,Electricity,Fossil fuels,-0.11,16.154,0.65,0.0
 EUR ,Electricity,Geothermal,0.2,20.0,0.051,0.0
-EUR ,Electricity,Hydroelectricity,0.11,0.719,0.225,0.0
-EUR ,Electricity,Nuclear,-0.1,19.903,0.31,0.0
-EUR ,Electricity,Solar,0.146,24.664,0.388,0.0
+EUR ,Electricity,Hydroelectricity,0.11,1.107,0.225,0.0
+EUR ,Electricity,Nuclear,-0.1,20.12,0.31,0.0
+EUR ,Electricity,Solar,0.146,24.816,0.388,0.0
 EUR ,Electricity,Tide and wave,2.351,68.113,0.0,0.0
-EUR ,Electricity,Wind,0.247,12.459,0.39,0.0
+EUR ,Electricity,Wind,0.245,12.593,0.39,0.0
 EUR ,Heat,Bioenergy,-0.1,21.507,0.174,0.0
 EUR ,Heat,Coal,-0.2,19.999,0.21,0.0
 EUR ,Heat,Geothermal,0.1,15.0,0.05,0.0
@@ -279,14 +279,14 @@ JPN ,Heat,Waste,0.112,50.0,0.15,0.0
 JPN ,Transport,Oil,-0.2,23.0,0.95,0.0
 JPN ,Transport,Bioenergy,0.15,37.0,1.0,0.0
 JPN ,Transport,Other fuels,-0.05,10.0,0.05,0.0
- OECD ,Electricity,Biomass and waste,-0.2,11.467,0.05,0.0
- OECD ,Electricity,Fossil fuels,-0.11,24.221,0.65,0.0
- OECD ,Electricity,Geothermal,0.117,20.0,0.021,0.0
- OECD ,Electricity,Hydroelectricity,-0.002,47.246,0.103,0.0
- OECD ,Electricity,Nuclear,-0.15,11.524,0.31,0.0
- OECD ,Electricity,Solar,0.146,26.372,0.423,0.0
+ OECD ,Electricity,Biomass and waste,-0.2,11.278,0.05,0.0
+ OECD ,Electricity,Fossil fuels,-0.11,24.288,0.65,0.0
+ OECD ,Electricity,Geothermal,0.118,20.0,0.021,0.0
+ OECD ,Electricity,Hydroelectricity,-0.002,49.05,0.103,0.0
+ OECD ,Electricity,Nuclear,-0.15,11.611,0.31,0.0
+ OECD ,Electricity,Solar,0.146,26.436,0.423,0.0
  OECD ,Electricity,Tide and wave,0.012,100.0,0.01,0.0
- OECD ,Electricity,Wind,0.14,19.822,0.43,0.0
+ OECD ,Electricity,Wind,0.14,19.903,0.43,0.0
  OECD ,Heat,Bioenergy,-1.636,136.226,0.135,0.0
  OECD ,Heat,Coal,-0.2,19.582,0.02,0.0
  OECD ,Heat,Geothermal,0.1,15.0,0.05,0.0

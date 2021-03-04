@@ -217,7 +217,7 @@ def emissions(
         )
     )
     addtl_em.columns = addtl_em.columns.astype(int)
-    addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year]
+    addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year] / 1e9
 
     """
     for i in range(0, len(iea_region_list)):

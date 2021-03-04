@@ -113,7 +113,8 @@ gas4 = []
 for gas2 in ["CH4"]:
     gas = pd.read_csv(data[gas2]).drop(columns=["Em", "Units"])
 
-    gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000
+    gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000 * 28
+
     gas.columns = gas.columns.astype(int)
 
     region_categories = pd.read_csv(
@@ -160,6 +161,7 @@ for gas2 in ["CH4"]:
     )
 
     # project gas emissions using percent change in industry energy demand
+
     gas_per_change = (
         energy_demand.loc[slice(None), "Industry", "Industry", slice(None)]
         .loc[:, 2019:]
@@ -174,6 +176,51 @@ for gas2 in ["CH4"]:
         .reindex(sorted(energy_demand.columns), axis=1)
     )
 
+    """
+    gas_per_change = (
+        (
+            pd.concat(
+                [
+                    em_baseline.loc[slice(None), slice(None), slice(None), "CO2"]
+                    .groupby("Region")
+                    .sum()
+                    .loc[:, 2019:]
+                    .pct_change(axis=1)
+                    .loc[:, 2020:]
+                    .dropna(axis=0)
+                    .apply(lambda x: x + 1, axis=1)
+                ],
+                keys=["baseline"],
+                names=["Scenario"],
+            ).append(
+                pd.concat(
+                    [
+                        em_pathway.loc[slice(None), slice(None), slice(None), "CO2"]
+                        .groupby("Region")
+                        .sum()
+                        .loc[:, 2019:]
+                        .pct_change(axis=1)
+                        .loc[:, 2020:]
+                        .dropna(axis=0)
+                        .apply(lambda x: x + 1, axis=1)
+                    ],
+                    keys=["pathway"],
+                    names=["Scenario"],
+                )
+            )
+        )
+        .reset_index()
+        .merge(
+            gas.droplevel("Gas"),
+            right_on=["IEA Region", "Scenario"],
+            left_on=["Region", "Scenario"],
+        )
+        .set_index(["Region", "Scenario"])
+        .reindex(sorted(em_baseline.columns), axis=1)
+    )
+
+    gas_per_change.index.set_names(["IEA Region", "Scenario"], inplace=True)
+    """
     gas = gas_per_change.loc[:, :2019].merge(
         gas_per_change.loc[:, 2019:].cumprod(axis=1).loc[:, 2020:],
         right_on=["IEA Region", "Scenario"],
@@ -201,7 +248,7 @@ gas5 = []
 for gas2 in ["N2O"]:
     gas = pd.read_csv(data[gas2]).drop(columns=["Em", "Units"])
 
-    gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000
+    gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000 * 265
     gas.columns = gas.columns.astype(int)
 
     region_categories = pd.read_csv(
@@ -247,7 +294,8 @@ for gas2 in ["N2O"]:
         )
     )
 
-    # project gas emissions using percent change in industry energy demand
+    # project gas emissions using percent change in industry CO2 emissions
+
     gas_per_change = (
         energy_demand.loc[slice(None), "Industry", "Industry", slice(None)]
         .loc[:, 2019:]
@@ -262,6 +310,52 @@ for gas2 in ["N2O"]:
         .reindex(sorted(energy_demand.columns), axis=1)
     )
 
+    """
+    gas_per_change = (
+        (
+            pd.concat(
+                [
+                    em_baseline.loc[slice(None), slice(None), slice(None), "CO2"]
+                    .groupby("Region")
+                    .sum()
+                    .loc[:, 2019:]
+                    .pct_change(axis=1)
+                    .loc[:, 2020:]
+                    .dropna(axis=0)
+                    .apply(lambda x: x + 1, axis=1)
+                ],
+                keys=["baseline"],
+                names=["Scenario"],
+            )
+            .append(
+                pd.concat(
+                    [
+                        em_pathway.loc[slice(None), slice(None), slice(None), "CO2"]
+                        .groupby("Region")
+                        .sum()
+                        .loc[:, 2019:]
+                        .pct_change(axis=1)
+                        .loc[:, 2020:]
+                        .dropna(axis=0)
+                        .apply(lambda x: x + 1, axis=1)
+                    ],
+                    keys=["pathway"],
+                    names=["Scenario"],
+                )
+            )
+            .reset_index()
+        )
+        .merge(
+            gas.droplevel("Gas"),
+            right_on=["IEA Region", "Scenario"],
+            left_on=["Region", "Scenario"],
+        )
+        .set_index(["Region", "Scenario"])
+        .reindex(sorted(em_baseline.columns), axis=1)
+    )
+
+    gas_per_change.index.set_names(["IEA Region", "Scenario"], inplace=True)
+    """
     gas = gas_per_change.loc[:, :2019].merge(
         gas_per_change.loc[:, 2019:].cumprod(axis=1).loc[:, 2020:],
         right_on=["IEA Region", "Scenario"],
@@ -287,7 +381,151 @@ for gas2 in ["N2O"]:
 
 # endregion
 
+###########
+# F-gases #
+###########
+
+# region
+
+gas = (
+    pd.read_csv("podi/data/emissions_historical_fgas.csv")
+    .drop(columns=["Gas", "Unit"])
+    .set_index("Region")
+)
+
+gas = gas[gas.columns[::-1]]
+
+gas.columns = gas.columns.astype(int)
+
+region_categories = pd.read_csv(
+    "podi/data/region_categories.csv", usecols=["CAIT Region", "IEA Region"]
+)
+
+gas = gas.merge(region_categories, right_on=["CAIT Region"], left_on=["Region"])
+
+gas = gas.groupby("IEA Region").sum()
+
+# split into various levels of IEA regional grouping
+gas["IEA Region 1"] = gas.apply(lambda x: x.name.split()[2] + " ", axis=1)
+gas["IEA Region 2"] = gas.apply(lambda x: x.name.split()[4] + " ", axis=1)
+gas["IEA Region 3"] = gas.apply(lambda x: x.name.split()[-1] + " ", axis=1)
+
+gas.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
+
+# make new row for world level data
+gas_world = pd.DataFrame(gas.sum()).T.rename(index={0: "World "})
+
+# make new rows for OECD/NonOECD regions
+gas_oecd = pd.DataFrame(gas.groupby("IEA Region 1").sum()).rename(
+    index={"OECD ": " OECD "}
+)
+
+# make new rows for IEA regions
+gas_regions = pd.DataFrame(gas.groupby("IEA Region 2").sum())
+gas_regions2 = pd.DataFrame(gas.groupby("IEA Region 3").sum())
+
+# combine all
+gas = gas_world.append([gas_oecd, gas_regions.combine_first(gas_regions2)])
+gas.index.name = "IEA Region"
+
+gas = pd.concat([gas], keys=["F-gases"], names=["Gas"]).reorder_levels(
+    ["IEA Region", "Gas"]
+)
+gas3 = pd.concat([gas], keys=["baseline"], names=["Scenario"]).reorder_levels(
+    ["IEA Region", "Gas", "Scenario"]
+)
+gas7 = gas3.append(
+    pd.concat([gas], keys=["pathway"], names=["Scenario"]).reorder_levels(
+        ["IEA Region", "Gas", "Scenario"]
+    )
+)
+
+# project gas emissions using percent change in industry energy demand
+
+gas_per_change = (
+    energy_demand.loc[slice(None), "Industry", "Industry", slice(None)]
+    .loc[:, 2017:]
+    .pct_change(axis=1)
+    .dropna(axis=1)
+    .apply(lambda x: x + 1, axis=1)
+    .merge(
+        gas7,
+        right_on=["IEA Region", "Scenario"],
+        left_on=["IEA Region", "Scenario"],
+    )
+    .reindex(sorted(energy_demand.columns), axis=1)
+)
+
+"""
+gas_per_change = (
+    (
+        pd.concat(
+            [
+                em_baseline.loc[slice(None), slice(None), slice(None), "CO2"]
+                .groupby("Region")
+                .sum()
+                .loc[:, 2017:]
+                .pct_change(axis=1)
+                .loc[:, 2018:]
+                .dropna(axis=0)
+                .apply(lambda x: x + 1, axis=1)
+            ],
+            keys=["baseline"],
+            names=["Scenario"],
+        ).append(
+            pd.concat(
+                [
+                    em_pathway.loc[slice(None), slice(None), slice(None), "CO2"]
+                    .groupby("Region")
+                    .sum()
+                    .loc[:, 2017:]
+                    .pct_change(axis=1)
+                    .loc[:, 2018:]
+                    .dropna(axis=0)
+                    .apply(lambda x: x + 1, axis=1)
+                ],
+                keys=["pathway"],
+                names=["Scenario"],
+            )
+        )
+    )
+    .reset_index()
+    .merge(
+        gas7.droplevel("Gas"),
+        right_on=["IEA Region", "Scenario"],
+        left_on=["Region", "Scenario"],
+    )
+    .set_index(["Region", "Scenario"])
+    .reindex(sorted(em_baseline.columns), axis=1)
+)
+
+gas_per_change.index.set_names(["IEA Region", "Scenario"], inplace=True)
+"""
+gas = gas_per_change.loc[:, :2017].merge(
+    gas_per_change.loc[:, 2017:].cumprod(axis=1).loc[:, 2018:],
+    right_on=["IEA Region", "Scenario"],
+    left_on=["IEA Region", "Scenario"],
+)
+
+gas8 = []
+
+gas8 = pd.DataFrame(gas8).append(pd.concat([gas], keys=["F-gases"], names=["Metric"]))
+
+gas8 = pd.concat([gas8], keys=["F-gases"], names=["Gas"]).reorder_levels(
+    ["IEA Region", "Metric", "Gas", "Scenario"]
+)
+
+gas8 = pd.concat([gas8], keys=["Other"], names=["Sector"]).reorder_levels(
+    ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
+)
+
+gas8.index.set_names(
+    ["IEA Region", "Sector", "Metric", "Gas", "Scenario"], inplace=True
+)
+
+# endregion
+
 # combine
-addtl_em = cement.append(gas4).append(gas5)
+addtl_em = cement.append(gas4).append(gas5).append(gas8)
 
 addtl_em.to_csv("podi/data/emissions_additional.csv", index=True)

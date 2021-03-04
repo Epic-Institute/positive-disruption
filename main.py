@@ -139,11 +139,11 @@ afolu_em_pathway = pd.concat(
 afolu_em_pathway = afolu_em_pathway.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
 
 afolu_em_baseline = afolu_em_baseline.droplevel(["Unit"])
-
+"""
 afolu_em_mitigated = afolu_em_mitigated.apply(
     lambda x: x.subtract(afolu_em_mitigated.loc[:, 2020].values), axis=0
 )
-
+"""
 # endregion
 
 #############
@@ -301,7 +301,6 @@ for i in range(0, len(iea_region_list)):
     )
 
 # endregion
-
 
 ########
 # NDCS #
