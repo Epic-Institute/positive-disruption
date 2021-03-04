@@ -3597,6 +3597,8 @@ for i in range(0, len(iea_region_list)):
                 0,
                 0,
                 0,
+                0,
+                0,
                 fig.loc["CDR", year],
             ],
             "Total": [
@@ -3787,7 +3789,7 @@ for i in range(0, len(iea_region_list)):
                     x=data["CDR"],
                     offsetgroup=0,
                     orientation="h",
-                    marker_color="#B82E2E",
+                    marker_color="#FF9DA6",
                     opacity=opacity,
                 ),
                 go.Bar(
