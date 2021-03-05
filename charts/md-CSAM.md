@@ -14,8 +14,10 @@ Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, C
 ## Energy Supply and Demand
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-CSAM.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-baseline-CSAM.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-baseline-CSAM.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-CSAM.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-CSAM.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-pathway-CSAM.html" height='500' width='150%'></iframe>  
   
 
 ## Emissions

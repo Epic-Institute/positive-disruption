@@ -14,8 +14,10 @@
 ## Energy Supply and Demand
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-US.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-baseline-US.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-baseline-US.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-US.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-US.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-pathway-US.html" height='500' width='150%'></iframe>  
   
 
 ## Emissions

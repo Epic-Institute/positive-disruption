@@ -31,6 +31,7 @@ from datetime import timedelta
 import numpy as np
 from pandas_profiling import ProfileReport
 import streamlit as st
+from podi.adoption_curve import adoption_curve
 
 pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()

@@ -14,8 +14,10 @@ Southeast Asia regional grouping, Australia, Bangladesh, China, Chinese Taipei, 
 ## Energy Supply and Demand
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-ASIAPAC.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-baseline-ASIAPAC.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-baseline-ASIAPAC.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-ASIAPAC.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-ASIAPAC.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-pathway-ASIAPAC.html" height='500' width='150%'></iframe>  
   
 
 ## Emissions

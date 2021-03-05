@@ -7,6 +7,7 @@ from podi.energy_demand import data_start_year, data_end_year
 from podi.energy_supply import near_proj_start_year, long_proj_end_year
 from podi.energy_demand import iea_region_list
 from numpy import NaN
+from podi.adoption_curve import adoption_curve
 
 # endregion
 
@@ -231,42 +232,41 @@ def emissions(
         .reindex(sorted(elec_em.columns), axis=1)
     )
 
-    per = []
-    for i in range(0, len(per_change.index)):
-        per = pd.DataFrame(per).append(proj_per_adoption[proj_per_adoption.index[i]].T)
-
-    per.set_index(proj_per_adoption.index, inplace=True)
-
-    addtl_em = (
-        addtl_em.loc[:, :2019]        .merge(
-            pd.DataFrame(addtl_em.loc[:, 2019])            .merge(
-                per_change.loc[:, 2020:],
-                right_on=["Region", "Metric", "Gas"],
-                left_on=["Region", "Metric", "Gas"],
-            )            .cumprod(axis=1)
-            .loc[:, 2020:],
+    addtl_em = addtl_em.loc[:, :2019].merge(
+        pd.DataFrame(addtl_em.loc[:, 2019])
+        .merge(
+            per_change.loc[:, 2020:],
             right_on=["Region", "Metric", "Gas"],
             left_on=["Region", "Metric", "Gas"],
-        ).droplevel('Gas').apply(lambda x: adoption_curve(x.rename(x.name[1]), x.name[0], scenario,'Other'), axis=1)
+        )
+        .cumprod(axis=1)
+        .loc[:, 2020:],
+        right_on=["Region", "Metric", "Gas"],
+        left_on=["Region", "Metric", "Gas"],
+    )
 
+    """
+    addtl_em = addtl_em.droplevel("Gas").apply(lambda x: adoption_curve(x.rename(x.name[1]), x.name[0], scenario, "Other"), axis=1))
 
+    addtl_em2 = []
+
+    for i in range(0, len(addtl_em.index)):
+        addtl_em2 = (
+            pd.DataFrame(addtl_em2)
+            .append(addtl_em[addtl_em.index[i]].T)
+            .rename(index={0: addtl_em.index[i]})
+        )
+
+    addtl_em2 = addtl_em2.reindex(addtl_em.index)
+    
+    addtl_em = pd.concat([addtl_em], keys=["Other"], names=["Gas"]).reorder_levels(
+    ["Region", "Sector", "Gas"])
+
+    """
 
     addtl_em = pd.concat([addtl_em], keys=["Other"], names=["Sector"]).reorder_levels(
         ["Region", "Sector", "Metric", "Gas"]
     )
-
-    """
-    for i in range(0, len(iea_region_list)):
-        addtl_em.loc[iea_region_list[i], slice(None), slice(None)] = (
-            addtl_em.loc["World ", slice(None), slice(None)].apply(
-                lambda x: x
-                * energy_demand.loc[
-                    iea_region_list[i], "Industry", "Industry", scenario
-                ].div(energy_demand.loc["World ", "Industry", "Industry", scenario]),
-                axis=1,
-            )
-        ).values
-    """
 
     # endregion
 

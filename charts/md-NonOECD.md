@@ -14,8 +14,10 @@ All countries not included in OECD regional grouping.
 ## Energy Supply and Demand
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-NonOECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-baseline-NonOECD.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-baseline-NonOECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-NonOECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-NonOECD.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-pathway-NonOECD.html" height='500' width='150%'></iframe>  
   
 
 ## Emissions

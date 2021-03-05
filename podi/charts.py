@@ -32,7 +32,9 @@ unit = [unit_name[0], unit_val[0]]
 save_figs = True
 show_figs = True
 
-annotation_source = ["Historical data is from IEA WEO 2020, projections are based on PD21 growth rate assumptions applied to IEA WEO projections for 2020-2040 and GCAM scenario x for 2040-2100"]
+annotation_source = [
+    "Historical data is from IEA WEO 2020, projections are based on PD21 growth rate assumptions applied to IEA WEO projections for 2020-2040 and GCAM scenario x for 2040-2100"
+]
 
 # endregion
 
@@ -42,7 +44,7 @@ annotation_source = ["Historical data is from IEA WEO 2020, projections are base
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -219,15 +221,15 @@ if chart_type == "stacked":
         fig.update_layout(title_x=0.5, legend_traceorder="reversed")
         fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
         """
-
+        """
         fig.add_annotation(
             text=annotation_source[0],
             xref="paper",
             yref="paper",
             x=1.1,
-            y=-0.1,
+            y=-0.2,
             showarrow=False,
-            font=dict(size=16, color="#ffffff"),
+            font=dict(size=11, color="#ffffff"),
             align="center",
             bordercolor="#c7c7c7",
             borderwidth=2,
@@ -235,7 +237,7 @@ if chart_type == "stacked":
             bgcolor="#ff7f0e",
             opacity=0.8,
         )
-
+        """
         if show_figs is True:
             fig.show()
         if save_figs is True:
@@ -402,7 +404,7 @@ if chart_type == "line":
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -806,7 +808,7 @@ else:
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 chart_type = "stacked"
 fig_type = "plotly"
 
@@ -2033,7 +2035,7 @@ for i in range(0, len(iea_region_list)):
     em_fgas = em.loc[iea_region_list[i], "Other", ["F-gases"]].sum()
 
     if iea_region_list[i] == "World ":
-        em_cdr = -cdr_em.loc[iea_region_list[i]]
+        em_cdr = -cdr_em[0]
 
         em = pd.DataFrame(
             [
@@ -2059,7 +2061,7 @@ for i in range(0, len(iea_region_list)):
                 "Unnamed 6": "F-gases",
                 "Unnamed 7": "Agriculture",
                 "Unnamed 8": "Forests & Wetlands",
-                "World ": "CDR",
+                "0": "CDR",
             }
         )
     else:
@@ -2875,30 +2877,34 @@ for i in range(0, len(iea_region_list)):
             }
         )
     else:
-        em_mit = pd.DataFrame(
-            [
-                em_mit_electricity,
-                em_mit_transport,
-                em_mit_buildings,
-                em_mit_industry,
-                em_mit_ra,
-                em_mit_fw,
-                em_mit_ch4,
-                em_mit_n2o,
-                em_mit_fgas,
-            ]
-        ).clip(lower=0).rename(
-            index={
-                "Unnamed 0": "Electricity",
-                 "Unnamed 1": "Transport",
-                "Unnamed 2": "Buildings",
-                "Unnamed 3": "Industry",
-                "Unnamed 4": "Forests & Wetlands",
-                "Unnamed 5": "Agriculture",
-                "CH4": "CH4",
-                "N2O": "N2O",
-                "F-gases": "F-gases",
-            }
+        em_mit = (
+            pd.DataFrame(
+                [
+                    em_mit_electricity,
+                    em_mit_transport,
+                    em_mit_buildings,
+                    em_mit_industry,
+                    em_mit_ra,
+                    em_mit_fw,
+                    em_mit_ch4,
+                    em_mit_n2o,
+                    em_mit_fgas,
+                ]
+            )
+            .clip(lower=0)
+            .rename(
+                index={
+                    "Unnamed 0": "Electricity",
+                    "Unnamed 1": "Transport",
+                    "Unnamed 2": "Buildings",
+                    "Unnamed 3": "Industry",
+                    "Unnamed 4": "Forests & Wetlands",
+                    "Unnamed 5": "Agriculture",
+                    "CH4": "CH4",
+                    "N2O": "N2O",
+                    "F-gases": "F-gases",
+                }
+            )
         )
 
     spacer = (
@@ -3768,7 +3774,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-year = 2030
+year = 2050
 
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[

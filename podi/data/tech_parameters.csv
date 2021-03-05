@@ -5146,7 +5146,7 @@ World ,Electricity,pathway,Electricity,"Parameter b, min",0
 CSAM ,Electricity,baseline,Electricity,"Parameter b, min",0
 CSAM ,Electricity,pathway,Electricity,"Parameter b, min",0
 BRAZIL ,Electricity,baseline,Electricity,"Parameter b, min",0
-BRAZIL ,Electricity,pathway,Electricity,"Parameter b, min",0
+BRAZIL ,Electricity,pathway,Electricity,"Parameter b, min",10
 AFRICA ,Electricity,baseline,Electricity,"Parameter b, min",0
 AFRICA ,Electricity,pathway,Electricity,"Parameter b, min",0
 ME ,Electricity,baseline,Electricity,"Parameter b, min",0
@@ -13881,7 +13881,7 @@ World ,Solar,pathway,Electricity,"Parameter a, max",5
 World ,Solar,baseline,Electricity,"Parameter a, max",100
 CSAM ,Solar,pathway,Electricity,"Parameter a, max",5
 CSAM ,Solar,baseline,Electricity,"Parameter a, max",100
-BRAZIL ,Solar,pathway,Electricity,"Parameter a, max",0.14
+BRAZIL ,Solar,pathway,Electricity,"Parameter a, max",0.1
 BRAZIL ,Solar,baseline,Electricity,"Parameter a, max",100
 AFRICA ,Solar,pathway,Electricity,"Parameter a, max",0.3
 AFRICA ,Solar,baseline,Electricity,"Parameter a, max",100
@@ -13925,7 +13925,7 @@ CSAM ,Solar,pathway,Electricity,"Parameter a, min",0
 CSAM ,Solar,baseline,Electricity,"Parameter a, min",100
 BRAZIL ,Solar,pathway,Electricity,"Parameter a, min",0
 BRAZIL ,Solar,baseline,Electricity,"Parameter a, min",100
-AFRICA ,Solar,pathway,Electricity,"Parameter a, min",0
+AFRICA ,Solar,pathway,Electricity,"Parameter a, min",0.1
 AFRICA ,Solar,baseline,Electricity,"Parameter a, min",100
 ME ,Solar,pathway,Electricity,"Parameter a, min",0
 ME ,Solar,baseline,Electricity,"Parameter a, min",100
@@ -14009,7 +14009,7 @@ CSAM ,Solar,pathway,Electricity,"Parameter b, min",0
 CSAM ,Solar,baseline,Electricity,"Parameter b, min",-100
 BRAZIL ,Solar,pathway,Electricity,"Parameter b, min",0
 BRAZIL ,Solar,baseline,Electricity,"Parameter b, min",-100
-AFRICA ,Solar,pathway,Electricity,"Parameter b, min",20
+AFRICA ,Solar,pathway,Electricity,"Parameter b, min",30
 AFRICA ,Solar,baseline,Electricity,"Parameter b, min",-100
 ME ,Solar,pathway,Electricity,"Parameter b, min",0
 ME ,Solar,baseline,Electricity,"Parameter b, min",-100
@@ -14283,7 +14283,7 @@ CSAM ,Solar thermal,pathway,Heat,"Parameter b, max",30
 BRAZIL ,Solar thermal,baseline,Heat,"Parameter b, max",-100
 BRAZIL ,Solar thermal,pathway,Heat,"Parameter b, max",30
 AFRICA ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-AFRICA ,Solar thermal,pathway,Heat,"Parameter b, max",30
+AFRICA ,Solar thermal,pathway,Heat,"Parameter b, max",40
 ME ,Solar thermal,baseline,Heat,"Parameter b, max",-100
 ME ,Solar thermal,pathway,Heat,"Parameter b, max",35
 EURASIA ,Solar thermal,baseline,Heat,"Parameter b, max",-100
@@ -14325,7 +14325,7 @@ CSAM ,Solar thermal,pathway,Heat,"Parameter b, min",30
 BRAZIL ,Solar thermal,baseline,Heat,"Parameter b, min",-100
 BRAZIL ,Solar thermal,pathway,Heat,"Parameter b, min",30
 AFRICA ,Solar thermal,baseline,Heat,"Parameter b, min",-100
-AFRICA ,Solar thermal,pathway,Heat,"Parameter b, min",30
+AFRICA ,Solar thermal,pathway,Heat,"Parameter b, min",40
 ME ,Solar thermal,baseline,Heat,"Parameter b, min",-100
 ME ,Solar thermal,pathway,Heat,"Parameter b, min",30
 EURASIA ,Solar thermal,baseline,Heat,"Parameter b, min",-100
@@ -16067,7 +16067,7 @@ CSAM ,Wind,pathway,Electricity,"Parameter a, min",0
 CSAM ,Wind,baseline,Electricity,"Parameter a, min",100
 BRAZIL ,Wind,pathway,Electricity,"Parameter a, min",0
 BRAZIL ,Wind,baseline,Electricity,"Parameter a, min",100
-AFRICA ,Wind,pathway,Electricity,"Parameter a, min",0
+AFRICA ,Wind,pathway,Electricity,"Parameter a, min",0.1
 AFRICA ,Wind,baseline,Electricity,"Parameter a, min",100
 ME ,Wind,pathway,Electricity,"Parameter a, min",0
 ME ,Wind,baseline,Electricity,"Parameter a, min",100
@@ -16151,7 +16151,7 @@ CSAM ,Wind,pathway,Electricity,"Parameter b, min",0
 CSAM ,Wind,baseline,Electricity,"Parameter b, min",-100
 BRAZIL ,Wind,pathway,Electricity,"Parameter b, min",0
 BRAZIL ,Wind,baseline,Electricity,"Parameter b, min",-100
-AFRICA ,Wind,pathway,Electricity,"Parameter b, min",25
+AFRICA ,Wind,pathway,Electricity,"Parameter b, min",35
 AFRICA ,Wind,baseline,Electricity,"Parameter b, min",-100
 ME ,Wind,pathway,Electricity,"Parameter b, min",0
 ME ,Wind,baseline,Electricity,"Parameter b, min",-100
@@ -16946,3 +16946,591 @@ CHINA ,F-gases,pathway,Other,Saturation Point,100
 INDIA ,F-gases,pathway,Other,Saturation Point,100
 ASEAN ,F-gases,pathway,Other,Saturation Point,100
 DevelopingECO ,F-gases,pathway,Other,Saturation Point,100
+ OECD ,cement,baseline,Other,Floor,0
+NAM ,cement,baseline,Other,Floor,0
+US ,cement,baseline,Other,Floor,0
+EUR ,cement,baseline,Other,Floor,0
+EU ,cement,baseline,Other,Floor,0
+SAFR ,cement,baseline,Other,Floor,0
+JPN ,cement,baseline,Other,Floor,0
+AdvancedECO ,cement,baseline,Other,Floor,0
+NonOECD ,cement,baseline,Other,Floor,0
+World ,cement,baseline,Other,Floor,0
+CSAM ,cement,baseline,Other,Floor,0
+BRAZIL ,cement,baseline,Other,Floor,0
+AFRICA ,cement,baseline,Other,Floor,0
+ME ,cement,baseline,Other,Floor,0
+EURASIA ,cement,baseline,Other,Floor,0
+RUS ,cement,baseline,Other,Floor,0
+ASIAPAC ,cement,baseline,Other,Floor,0
+CHINA ,cement,baseline,Other,Floor,0
+INDIA ,cement,baseline,Other,Floor,0
+ASEAN ,cement,baseline,Other,Floor,0
+DevelopingECO ,cement,baseline,Other,Floor,0
+ OECD ,cement,baseline,Other,Max annual growth,100
+NAM ,cement,baseline,Other,Max annual growth,100
+US ,cement,baseline,Other,Max annual growth,100
+EUR ,cement,baseline,Other,Max annual growth,100
+EU ,cement,baseline,Other,Max annual growth,100
+SAFR ,cement,baseline,Other,Max annual growth,100
+JPN ,cement,baseline,Other,Max annual growth,100
+AdvancedECO ,cement,baseline,Other,Max annual growth,100
+NonOECD ,cement,baseline,Other,Max annual growth,100
+World ,cement,baseline,Other,Max annual growth,100
+CSAM ,cement,baseline,Other,Max annual growth,100
+BRAZIL ,cement,baseline,Other,Max annual growth,100
+AFRICA ,cement,baseline,Other,Max annual growth,100
+ME ,cement,baseline,Other,Max annual growth,100
+EURASIA ,cement,baseline,Other,Max annual growth,100
+RUS ,cement,baseline,Other,Max annual growth,100
+ASIAPAC ,cement,baseline,Other,Max annual growth,100
+CHINA ,cement,baseline,Other,Max annual growth,100
+INDIA ,cement,baseline,Other,Max annual growth,100
+ASEAN ,cement,baseline,Other,Max annual growth,100
+DevelopingECO ,cement,baseline,Other,Max annual growth,100
+ OECD ,cement,baseline,Other,"Parameter a, max",0.1
+NAM ,cement,baseline,Other,"Parameter a, max",0.1
+US ,cement,baseline,Other,"Parameter a, max",0.1
+EUR ,cement,baseline,Other,"Parameter a, max",0.1
+EU ,cement,baseline,Other,"Parameter a, max",0.1
+SAFR ,cement,baseline,Other,"Parameter a, max",0.1
+JPN ,cement,baseline,Other,"Parameter a, max",0.1
+AdvancedECO ,cement,baseline,Other,"Parameter a, max",0.1
+NonOECD ,cement,baseline,Other,"Parameter a, max",0.1
+World ,cement,baseline,Other,"Parameter a, max",0.1
+CSAM ,cement,baseline,Other,"Parameter a, max",0.1
+BRAZIL ,cement,baseline,Other,"Parameter a, max",0.1
+AFRICA ,cement,baseline,Other,"Parameter a, max",0.1
+ME ,cement,baseline,Other,"Parameter a, max",0.1
+EURASIA ,cement,baseline,Other,"Parameter a, max",0.1
+RUS ,cement,baseline,Other,"Parameter a, max",0.1
+ASIAPAC ,cement,baseline,Other,"Parameter a, max",0.1
+CHINA ,cement,baseline,Other,"Parameter a, max",0.1
+INDIA ,cement,baseline,Other,"Parameter a, max",0.1
+ASEAN ,cement,baseline,Other,"Parameter a, max",0.1
+DevelopingECO ,cement,baseline,Other,"Parameter a, max",0.1
+ OECD ,cement,baseline,Other,"Parameter a, min",-0.1
+NAM ,cement,baseline,Other,"Parameter a, min",-0.1
+US ,cement,baseline,Other,"Parameter a, min",-0.1
+EUR ,cement,baseline,Other,"Parameter a, min",-0.1
+EU ,cement,baseline,Other,"Parameter a, min",-0.1
+SAFR ,cement,baseline,Other,"Parameter a, min",-0.1
+JPN ,cement,baseline,Other,"Parameter a, min",-0.1
+AdvancedECO ,cement,baseline,Other,"Parameter a, min",-0.1
+NonOECD ,cement,baseline,Other,"Parameter a, min",-0.1
+World ,cement,baseline,Other,"Parameter a, min",-0.1
+CSAM ,cement,baseline,Other,"Parameter a, min",-0.1
+BRAZIL ,cement,baseline,Other,"Parameter a, min",-0.1
+AFRICA ,cement,baseline,Other,"Parameter a, min",-0.1
+ME ,cement,baseline,Other,"Parameter a, min",-0.1
+EURASIA ,cement,baseline,Other,"Parameter a, min",-0.1
+RUS ,cement,baseline,Other,"Parameter a, min",-0.1
+ASIAPAC ,cement,baseline,Other,"Parameter a, min",-0.1
+CHINA ,cement,baseline,Other,"Parameter a, min",-0.1
+INDIA ,cement,baseline,Other,"Parameter a, min",-0.1
+ASEAN ,cement,baseline,Other,"Parameter a, min",-0.1
+DevelopingECO ,cement,baseline,Other,"Parameter a, min",-0.1
+ OECD ,cement,baseline,Other,"Parameter b, max",50
+NAM ,cement,baseline,Other,"Parameter b, max",50
+US ,cement,baseline,Other,"Parameter b, max",50
+EUR ,cement,baseline,Other,"Parameter b, max",50
+EU ,cement,baseline,Other,"Parameter b, max",50
+SAFR ,cement,baseline,Other,"Parameter b, max",50
+JPN ,cement,baseline,Other,"Parameter b, max",50
+AdvancedECO ,cement,baseline,Other,"Parameter b, max",50
+NonOECD ,cement,baseline,Other,"Parameter b, max",50
+World ,cement,baseline,Other,"Parameter b, max",50
+CSAM ,cement,baseline,Other,"Parameter b, max",50
+BRAZIL ,cement,baseline,Other,"Parameter b, max",50
+AFRICA ,cement,baseline,Other,"Parameter b, max",50
+ME ,cement,baseline,Other,"Parameter b, max",50
+EURASIA ,cement,baseline,Other,"Parameter b, max",50
+RUS ,cement,baseline,Other,"Parameter b, max",50
+ASIAPAC ,cement,baseline,Other,"Parameter b, max",50
+CHINA ,cement,baseline,Other,"Parameter b, max",50
+INDIA ,cement,baseline,Other,"Parameter b, max",50
+ASEAN ,cement,baseline,Other,"Parameter b, max",50
+DevelopingECO ,cement,baseline,Other,"Parameter b, max",50
+ OECD ,cement,baseline,Other,"Parameter b, min",50
+NAM ,cement,baseline,Other,"Parameter b, min",50
+US ,cement,baseline,Other,"Parameter b, min",50
+EUR ,cement,baseline,Other,"Parameter b, min",50
+EU ,cement,baseline,Other,"Parameter b, min",50
+SAFR ,cement,baseline,Other,"Parameter b, min",50
+JPN ,cement,baseline,Other,"Parameter b, min",50
+AdvancedECO ,cement,baseline,Other,"Parameter b, min",50
+NonOECD ,cement,baseline,Other,"Parameter b, min",50
+World ,cement,baseline,Other,"Parameter b, min",50
+CSAM ,cement,baseline,Other,"Parameter b, min",50
+BRAZIL ,cement,baseline,Other,"Parameter b, min",50
+AFRICA ,cement,baseline,Other,"Parameter b, min",50
+ME ,cement,baseline,Other,"Parameter b, min",50
+EURASIA ,cement,baseline,Other,"Parameter b, min",50
+RUS ,cement,baseline,Other,"Parameter b, min",50
+ASIAPAC ,cement,baseline,Other,"Parameter b, min",50
+CHINA ,cement,baseline,Other,"Parameter b, min",50
+INDIA ,cement,baseline,Other,"Parameter b, min",50
+ASEAN ,cement,baseline,Other,"Parameter b, min",50
+DevelopingECO ,cement,baseline,Other,"Parameter b, min",50
+ OECD ,cement,baseline,Other,Saturation Point,100
+NAM ,cement,baseline,Other,Saturation Point,100
+US ,cement,baseline,Other,Saturation Point,100
+EUR ,cement,baseline,Other,Saturation Point,100
+EU ,cement,baseline,Other,Saturation Point,100
+SAFR ,cement,baseline,Other,Saturation Point,100
+JPN ,cement,baseline,Other,Saturation Point,100
+AdvancedECO ,cement,baseline,Other,Saturation Point,100
+NonOECD ,cement,baseline,Other,Saturation Point,100
+World ,cement,baseline,Other,Saturation Point,100
+CSAM ,cement,baseline,Other,Saturation Point,100
+BRAZIL ,cement,baseline,Other,Saturation Point,100
+AFRICA ,cement,baseline,Other,Saturation Point,100
+ME ,cement,baseline,Other,Saturation Point,100
+EURASIA ,cement,baseline,Other,Saturation Point,100
+RUS ,cement,baseline,Other,Saturation Point,100
+ASIAPAC ,cement,baseline,Other,Saturation Point,100
+CHINA ,cement,baseline,Other,Saturation Point,100
+INDIA ,cement,baseline,Other,Saturation Point,100
+ASEAN ,cement,baseline,Other,Saturation Point,100
+DevelopingECO ,cement,baseline,Other,Saturation Point,100
+ OECD ,CH4,baseline,Other,Floor,0
+NAM ,CH4,baseline,Other,Floor,0
+US ,CH4,baseline,Other,Floor,0
+EUR ,CH4,baseline,Other,Floor,0
+EU ,CH4,baseline,Other,Floor,0
+SAFR ,CH4,baseline,Other,Floor,0
+JPN ,CH4,baseline,Other,Floor,0
+AdvancedECO ,CH4,baseline,Other,Floor,0
+NonOECD ,CH4,baseline,Other,Floor,0
+World ,CH4,baseline,Other,Floor,0
+CSAM ,CH4,baseline,Other,Floor,0
+BRAZIL ,CH4,baseline,Other,Floor,0
+AFRICA ,CH4,baseline,Other,Floor,0
+ME ,CH4,baseline,Other,Floor,0
+EURASIA ,CH4,baseline,Other,Floor,0
+RUS ,CH4,baseline,Other,Floor,0
+ASIAPAC ,CH4,baseline,Other,Floor,0
+CHINA ,CH4,baseline,Other,Floor,0
+INDIA ,CH4,baseline,Other,Floor,0
+ASEAN ,CH4,baseline,Other,Floor,0
+DevelopingECO ,CH4,baseline,Other,Floor,0
+ OECD ,CH4,baseline,Other,Max annual growth,100
+NAM ,CH4,baseline,Other,Max annual growth,100
+US ,CH4,baseline,Other,Max annual growth,100
+EUR ,CH4,baseline,Other,Max annual growth,100
+EU ,CH4,baseline,Other,Max annual growth,100
+SAFR ,CH4,baseline,Other,Max annual growth,100
+JPN ,CH4,baseline,Other,Max annual growth,100
+AdvancedECO ,CH4,baseline,Other,Max annual growth,100
+NonOECD ,CH4,baseline,Other,Max annual growth,100
+World ,CH4,baseline,Other,Max annual growth,100
+CSAM ,CH4,baseline,Other,Max annual growth,100
+BRAZIL ,CH4,baseline,Other,Max annual growth,100
+AFRICA ,CH4,baseline,Other,Max annual growth,100
+ME ,CH4,baseline,Other,Max annual growth,100
+EURASIA ,CH4,baseline,Other,Max annual growth,100
+RUS ,CH4,baseline,Other,Max annual growth,100
+ASIAPAC ,CH4,baseline,Other,Max annual growth,100
+CHINA ,CH4,baseline,Other,Max annual growth,100
+INDIA ,CH4,baseline,Other,Max annual growth,100
+ASEAN ,CH4,baseline,Other,Max annual growth,100
+DevelopingECO ,CH4,baseline,Other,Max annual growth,100
+ OECD ,CH4,baseline,Other,"Parameter a, max",0.1
+NAM ,CH4,baseline,Other,"Parameter a, max",0.1
+US ,CH4,baseline,Other,"Parameter a, max",0.1
+EUR ,CH4,baseline,Other,"Parameter a, max",0.1
+EU ,CH4,baseline,Other,"Parameter a, max",0.1
+SAFR ,CH4,baseline,Other,"Parameter a, max",0.1
+JPN ,CH4,baseline,Other,"Parameter a, max",0.1
+AdvancedECO ,CH4,baseline,Other,"Parameter a, max",0.1
+NonOECD ,CH4,baseline,Other,"Parameter a, max",0.1
+World ,CH4,baseline,Other,"Parameter a, max",0.1
+CSAM ,CH4,baseline,Other,"Parameter a, max",0.1
+BRAZIL ,CH4,baseline,Other,"Parameter a, max",0.1
+AFRICA ,CH4,baseline,Other,"Parameter a, max",0.1
+ME ,CH4,baseline,Other,"Parameter a, max",0.1
+EURASIA ,CH4,baseline,Other,"Parameter a, max",0.1
+RUS ,CH4,baseline,Other,"Parameter a, max",0.1
+ASIAPAC ,CH4,baseline,Other,"Parameter a, max",0.1
+CHINA ,CH4,baseline,Other,"Parameter a, max",0.1
+INDIA ,CH4,baseline,Other,"Parameter a, max",0.1
+ASEAN ,CH4,baseline,Other,"Parameter a, max",0.1
+DevelopingECO ,CH4,baseline,Other,"Parameter a, max",0.1
+ OECD ,CH4,baseline,Other,"Parameter a, min",-0.1
+NAM ,CH4,baseline,Other,"Parameter a, min",-0.1
+US ,CH4,baseline,Other,"Parameter a, min",-0.1
+EUR ,CH4,baseline,Other,"Parameter a, min",-0.1
+EU ,CH4,baseline,Other,"Parameter a, min",-0.1
+SAFR ,CH4,baseline,Other,"Parameter a, min",-0.1
+JPN ,CH4,baseline,Other,"Parameter a, min",-0.1
+AdvancedECO ,CH4,baseline,Other,"Parameter a, min",-0.1
+NonOECD ,CH4,baseline,Other,"Parameter a, min",-0.1
+World ,CH4,baseline,Other,"Parameter a, min",-0.1
+CSAM ,CH4,baseline,Other,"Parameter a, min",-0.1
+BRAZIL ,CH4,baseline,Other,"Parameter a, min",-0.1
+AFRICA ,CH4,baseline,Other,"Parameter a, min",-0.1
+ME ,CH4,baseline,Other,"Parameter a, min",-0.1
+EURASIA ,CH4,baseline,Other,"Parameter a, min",-0.1
+RUS ,CH4,baseline,Other,"Parameter a, min",-0.1
+ASIAPAC ,CH4,baseline,Other,"Parameter a, min",-0.1
+CHINA ,CH4,baseline,Other,"Parameter a, min",-0.1
+INDIA ,CH4,baseline,Other,"Parameter a, min",-0.1
+ASEAN ,CH4,baseline,Other,"Parameter a, min",-0.1
+DevelopingECO ,CH4,baseline,Other,"Parameter a, min",-0.1
+ OECD ,CH4,baseline,Other,"Parameter b, max",50
+NAM ,CH4,baseline,Other,"Parameter b, max",50
+US ,CH4,baseline,Other,"Parameter b, max",50
+EUR ,CH4,baseline,Other,"Parameter b, max",50
+EU ,CH4,baseline,Other,"Parameter b, max",50
+SAFR ,CH4,baseline,Other,"Parameter b, max",50
+JPN ,CH4,baseline,Other,"Parameter b, max",50
+AdvancedECO ,CH4,baseline,Other,"Parameter b, max",50
+NonOECD ,CH4,baseline,Other,"Parameter b, max",50
+World ,CH4,baseline,Other,"Parameter b, max",50
+CSAM ,CH4,baseline,Other,"Parameter b, max",50
+BRAZIL ,CH4,baseline,Other,"Parameter b, max",50
+AFRICA ,CH4,baseline,Other,"Parameter b, max",50
+ME ,CH4,baseline,Other,"Parameter b, max",50
+EURASIA ,CH4,baseline,Other,"Parameter b, max",50
+RUS ,CH4,baseline,Other,"Parameter b, max",50
+ASIAPAC ,CH4,baseline,Other,"Parameter b, max",50
+CHINA ,CH4,baseline,Other,"Parameter b, max",50
+INDIA ,CH4,baseline,Other,"Parameter b, max",50
+ASEAN ,CH4,baseline,Other,"Parameter b, max",50
+DevelopingECO ,CH4,baseline,Other,"Parameter b, max",50
+ OECD ,CH4,baseline,Other,"Parameter b, min",50
+NAM ,CH4,baseline,Other,"Parameter b, min",50
+US ,CH4,baseline,Other,"Parameter b, min",50
+EUR ,CH4,baseline,Other,"Parameter b, min",50
+EU ,CH4,baseline,Other,"Parameter b, min",50
+SAFR ,CH4,baseline,Other,"Parameter b, min",50
+JPN ,CH4,baseline,Other,"Parameter b, min",50
+AdvancedECO ,CH4,baseline,Other,"Parameter b, min",50
+NonOECD ,CH4,baseline,Other,"Parameter b, min",50
+World ,CH4,baseline,Other,"Parameter b, min",50
+CSAM ,CH4,baseline,Other,"Parameter b, min",50
+BRAZIL ,CH4,baseline,Other,"Parameter b, min",50
+AFRICA ,CH4,baseline,Other,"Parameter b, min",50
+ME ,CH4,baseline,Other,"Parameter b, min",50
+EURASIA ,CH4,baseline,Other,"Parameter b, min",50
+RUS ,CH4,baseline,Other,"Parameter b, min",50
+ASIAPAC ,CH4,baseline,Other,"Parameter b, min",50
+CHINA ,CH4,baseline,Other,"Parameter b, min",50
+INDIA ,CH4,baseline,Other,"Parameter b, min",50
+ASEAN ,CH4,baseline,Other,"Parameter b, min",50
+DevelopingECO ,CH4,baseline,Other,"Parameter b, min",50
+ OECD ,CH4,baseline,Other,Saturation Point,100
+NAM ,CH4,baseline,Other,Saturation Point,100
+US ,CH4,baseline,Other,Saturation Point,100
+EUR ,CH4,baseline,Other,Saturation Point,100
+EU ,CH4,baseline,Other,Saturation Point,100
+SAFR ,CH4,baseline,Other,Saturation Point,100
+JPN ,CH4,baseline,Other,Saturation Point,100
+AdvancedECO ,CH4,baseline,Other,Saturation Point,100
+NonOECD ,CH4,baseline,Other,Saturation Point,100
+World ,CH4,baseline,Other,Saturation Point,100
+CSAM ,CH4,baseline,Other,Saturation Point,100
+BRAZIL ,CH4,baseline,Other,Saturation Point,100
+AFRICA ,CH4,baseline,Other,Saturation Point,100
+ME ,CH4,baseline,Other,Saturation Point,100
+EURASIA ,CH4,baseline,Other,Saturation Point,100
+RUS ,CH4,baseline,Other,Saturation Point,100
+ASIAPAC ,CH4,baseline,Other,Saturation Point,100
+CHINA ,CH4,baseline,Other,Saturation Point,100
+INDIA ,CH4,baseline,Other,Saturation Point,100
+ASEAN ,CH4,baseline,Other,Saturation Point,100
+DevelopingECO ,CH4,baseline,Other,Saturation Point,100
+ OECD ,N2O,baseline,Other,Floor,0
+NAM ,N2O,baseline,Other,Floor,0
+US ,N2O,baseline,Other,Floor,0
+EUR ,N2O,baseline,Other,Floor,0
+EU ,N2O,baseline,Other,Floor,0
+SAFR ,N2O,baseline,Other,Floor,0
+JPN ,N2O,baseline,Other,Floor,0
+AdvancedECO ,N2O,baseline,Other,Floor,0
+NonOECD ,N2O,baseline,Other,Floor,0
+World ,N2O,baseline,Other,Floor,0
+CSAM ,N2O,baseline,Other,Floor,0
+BRAZIL ,N2O,baseline,Other,Floor,0
+AFRICA ,N2O,baseline,Other,Floor,0
+ME ,N2O,baseline,Other,Floor,0
+EURASIA ,N2O,baseline,Other,Floor,0
+RUS ,N2O,baseline,Other,Floor,0
+ASIAPAC ,N2O,baseline,Other,Floor,0
+CHINA ,N2O,baseline,Other,Floor,0
+INDIA ,N2O,baseline,Other,Floor,0
+ASEAN ,N2O,baseline,Other,Floor,0
+DevelopingECO ,N2O,baseline,Other,Floor,0
+ OECD ,N2O,baseline,Other,Max annual growth,100
+NAM ,N2O,baseline,Other,Max annual growth,100
+US ,N2O,baseline,Other,Max annual growth,100
+EUR ,N2O,baseline,Other,Max annual growth,100
+EU ,N2O,baseline,Other,Max annual growth,100
+SAFR ,N2O,baseline,Other,Max annual growth,100
+JPN ,N2O,baseline,Other,Max annual growth,100
+AdvancedECO ,N2O,baseline,Other,Max annual growth,100
+NonOECD ,N2O,baseline,Other,Max annual growth,100
+World ,N2O,baseline,Other,Max annual growth,100
+CSAM ,N2O,baseline,Other,Max annual growth,100
+BRAZIL ,N2O,baseline,Other,Max annual growth,100
+AFRICA ,N2O,baseline,Other,Max annual growth,100
+ME ,N2O,baseline,Other,Max annual growth,100
+EURASIA ,N2O,baseline,Other,Max annual growth,100
+RUS ,N2O,baseline,Other,Max annual growth,100
+ASIAPAC ,N2O,baseline,Other,Max annual growth,100
+CHINA ,N2O,baseline,Other,Max annual growth,100
+INDIA ,N2O,baseline,Other,Max annual growth,100
+ASEAN ,N2O,baseline,Other,Max annual growth,100
+DevelopingECO ,N2O,baseline,Other,Max annual growth,100
+ OECD ,N2O,baseline,Other,"Parameter a, max",0.1
+NAM ,N2O,baseline,Other,"Parameter a, max",0.1
+US ,N2O,baseline,Other,"Parameter a, max",0.1
+EUR ,N2O,baseline,Other,"Parameter a, max",0.1
+EU ,N2O,baseline,Other,"Parameter a, max",0.1
+SAFR ,N2O,baseline,Other,"Parameter a, max",0.1
+JPN ,N2O,baseline,Other,"Parameter a, max",0.1
+AdvancedECO ,N2O,baseline,Other,"Parameter a, max",0.1
+NonOECD ,N2O,baseline,Other,"Parameter a, max",0.1
+World ,N2O,baseline,Other,"Parameter a, max",0.1
+CSAM ,N2O,baseline,Other,"Parameter a, max",0.1
+BRAZIL ,N2O,baseline,Other,"Parameter a, max",0.1
+AFRICA ,N2O,baseline,Other,"Parameter a, max",0.1
+ME ,N2O,baseline,Other,"Parameter a, max",0.1
+EURASIA ,N2O,baseline,Other,"Parameter a, max",0.1
+RUS ,N2O,baseline,Other,"Parameter a, max",0.1
+ASIAPAC ,N2O,baseline,Other,"Parameter a, max",0.1
+CHINA ,N2O,baseline,Other,"Parameter a, max",0.1
+INDIA ,N2O,baseline,Other,"Parameter a, max",0.1
+ASEAN ,N2O,baseline,Other,"Parameter a, max",0.1
+DevelopingECO ,N2O,baseline,Other,"Parameter a, max",0.1
+ OECD ,N2O,baseline,Other,"Parameter a, min",-0.1
+NAM ,N2O,baseline,Other,"Parameter a, min",-0.1
+US ,N2O,baseline,Other,"Parameter a, min",-0.1
+EUR ,N2O,baseline,Other,"Parameter a, min",-0.1
+EU ,N2O,baseline,Other,"Parameter a, min",-0.1
+SAFR ,N2O,baseline,Other,"Parameter a, min",-0.1
+JPN ,N2O,baseline,Other,"Parameter a, min",-0.1
+AdvancedECO ,N2O,baseline,Other,"Parameter a, min",-0.1
+NonOECD ,N2O,baseline,Other,"Parameter a, min",-0.1
+World ,N2O,baseline,Other,"Parameter a, min",-0.1
+CSAM ,N2O,baseline,Other,"Parameter a, min",-0.1
+BRAZIL ,N2O,baseline,Other,"Parameter a, min",-0.1
+AFRICA ,N2O,baseline,Other,"Parameter a, min",-0.1
+ME ,N2O,baseline,Other,"Parameter a, min",-0.1
+EURASIA ,N2O,baseline,Other,"Parameter a, min",-0.1
+RUS ,N2O,baseline,Other,"Parameter a, min",-0.1
+ASIAPAC ,N2O,baseline,Other,"Parameter a, min",-0.1
+CHINA ,N2O,baseline,Other,"Parameter a, min",-0.1
+INDIA ,N2O,baseline,Other,"Parameter a, min",-0.1
+ASEAN ,N2O,baseline,Other,"Parameter a, min",-0.1
+DevelopingECO ,N2O,baseline,Other,"Parameter a, min",-0.1
+ OECD ,N2O,baseline,Other,"Parameter b, max",50
+NAM ,N2O,baseline,Other,"Parameter b, max",50
+US ,N2O,baseline,Other,"Parameter b, max",50
+EUR ,N2O,baseline,Other,"Parameter b, max",50
+EU ,N2O,baseline,Other,"Parameter b, max",50
+SAFR ,N2O,baseline,Other,"Parameter b, max",50
+JPN ,N2O,baseline,Other,"Parameter b, max",50
+AdvancedECO ,N2O,baseline,Other,"Parameter b, max",50
+NonOECD ,N2O,baseline,Other,"Parameter b, max",50
+World ,N2O,baseline,Other,"Parameter b, max",50
+CSAM ,N2O,baseline,Other,"Parameter b, max",50
+BRAZIL ,N2O,baseline,Other,"Parameter b, max",50
+AFRICA ,N2O,baseline,Other,"Parameter b, max",50
+ME ,N2O,baseline,Other,"Parameter b, max",50
+EURASIA ,N2O,baseline,Other,"Parameter b, max",50
+RUS ,N2O,baseline,Other,"Parameter b, max",50
+ASIAPAC ,N2O,baseline,Other,"Parameter b, max",50
+CHINA ,N2O,baseline,Other,"Parameter b, max",50
+INDIA ,N2O,baseline,Other,"Parameter b, max",50
+ASEAN ,N2O,baseline,Other,"Parameter b, max",50
+DevelopingECO ,N2O,baseline,Other,"Parameter b, max",50
+ OECD ,N2O,baseline,Other,"Parameter b, min",50
+NAM ,N2O,baseline,Other,"Parameter b, min",50
+US ,N2O,baseline,Other,"Parameter b, min",50
+EUR ,N2O,baseline,Other,"Parameter b, min",50
+EU ,N2O,baseline,Other,"Parameter b, min",50
+SAFR ,N2O,baseline,Other,"Parameter b, min",50
+JPN ,N2O,baseline,Other,"Parameter b, min",50
+AdvancedECO ,N2O,baseline,Other,"Parameter b, min",50
+NonOECD ,N2O,baseline,Other,"Parameter b, min",50
+World ,N2O,baseline,Other,"Parameter b, min",50
+CSAM ,N2O,baseline,Other,"Parameter b, min",50
+BRAZIL ,N2O,baseline,Other,"Parameter b, min",50
+AFRICA ,N2O,baseline,Other,"Parameter b, min",50
+ME ,N2O,baseline,Other,"Parameter b, min",50
+EURASIA ,N2O,baseline,Other,"Parameter b, min",50
+RUS ,N2O,baseline,Other,"Parameter b, min",50
+ASIAPAC ,N2O,baseline,Other,"Parameter b, min",50
+CHINA ,N2O,baseline,Other,"Parameter b, min",50
+INDIA ,N2O,baseline,Other,"Parameter b, min",50
+ASEAN ,N2O,baseline,Other,"Parameter b, min",50
+DevelopingECO ,N2O,baseline,Other,"Parameter b, min",50
+ OECD ,N2O,baseline,Other,Saturation Point,100
+NAM ,N2O,baseline,Other,Saturation Point,100
+US ,N2O,baseline,Other,Saturation Point,100
+EUR ,N2O,baseline,Other,Saturation Point,100
+EU ,N2O,baseline,Other,Saturation Point,100
+SAFR ,N2O,baseline,Other,Saturation Point,100
+JPN ,N2O,baseline,Other,Saturation Point,100
+AdvancedECO ,N2O,baseline,Other,Saturation Point,100
+NonOECD ,N2O,baseline,Other,Saturation Point,100
+World ,N2O,baseline,Other,Saturation Point,100
+CSAM ,N2O,baseline,Other,Saturation Point,100
+BRAZIL ,N2O,baseline,Other,Saturation Point,100
+AFRICA ,N2O,baseline,Other,Saturation Point,100
+ME ,N2O,baseline,Other,Saturation Point,100
+EURASIA ,N2O,baseline,Other,Saturation Point,100
+RUS ,N2O,baseline,Other,Saturation Point,100
+ASIAPAC ,N2O,baseline,Other,Saturation Point,100
+CHINA ,N2O,baseline,Other,Saturation Point,100
+INDIA ,N2O,baseline,Other,Saturation Point,100
+ASEAN ,N2O,baseline,Other,Saturation Point,100
+DevelopingECO ,N2O,baseline,Other,Saturation Point,100
+ OECD ,F-gases,baseline,Other,Floor,0
+NAM ,F-gases,baseline,Other,Floor,0
+US ,F-gases,baseline,Other,Floor,0
+EUR ,F-gases,baseline,Other,Floor,0
+EU ,F-gases,baseline,Other,Floor,0
+SAFR ,F-gases,baseline,Other,Floor,0
+JPN ,F-gases,baseline,Other,Floor,0
+AdvancedECO ,F-gases,baseline,Other,Floor,0
+NonOECD ,F-gases,baseline,Other,Floor,0
+World ,F-gases,baseline,Other,Floor,0
+CSAM ,F-gases,baseline,Other,Floor,0
+BRAZIL ,F-gases,baseline,Other,Floor,0
+AFRICA ,F-gases,baseline,Other,Floor,0
+ME ,F-gases,baseline,Other,Floor,0
+EURASIA ,F-gases,baseline,Other,Floor,0
+RUS ,F-gases,baseline,Other,Floor,0
+ASIAPAC ,F-gases,baseline,Other,Floor,0
+CHINA ,F-gases,baseline,Other,Floor,0
+INDIA ,F-gases,baseline,Other,Floor,0
+ASEAN ,F-gases,baseline,Other,Floor,0
+DevelopingECO ,F-gases,baseline,Other,Floor,0
+ OECD ,F-gases,baseline,Other,Max annual growth,100
+NAM ,F-gases,baseline,Other,Max annual growth,100
+US ,F-gases,baseline,Other,Max annual growth,100
+EUR ,F-gases,baseline,Other,Max annual growth,100
+EU ,F-gases,baseline,Other,Max annual growth,100
+SAFR ,F-gases,baseline,Other,Max annual growth,100
+JPN ,F-gases,baseline,Other,Max annual growth,100
+AdvancedECO ,F-gases,baseline,Other,Max annual growth,100
+NonOECD ,F-gases,baseline,Other,Max annual growth,100
+World ,F-gases,baseline,Other,Max annual growth,100
+CSAM ,F-gases,baseline,Other,Max annual growth,100
+BRAZIL ,F-gases,baseline,Other,Max annual growth,100
+AFRICA ,F-gases,baseline,Other,Max annual growth,100
+ME ,F-gases,baseline,Other,Max annual growth,100
+EURASIA ,F-gases,baseline,Other,Max annual growth,100
+RUS ,F-gases,baseline,Other,Max annual growth,100
+ASIAPAC ,F-gases,baseline,Other,Max annual growth,100
+CHINA ,F-gases,baseline,Other,Max annual growth,100
+INDIA ,F-gases,baseline,Other,Max annual growth,100
+ASEAN ,F-gases,baseline,Other,Max annual growth,100
+DevelopingECO ,F-gases,baseline,Other,Max annual growth,100
+ OECD ,F-gases,baseline,Other,"Parameter a, max",0.1
+NAM ,F-gases,baseline,Other,"Parameter a, max",0.1
+US ,F-gases,baseline,Other,"Parameter a, max",0.1
+EUR ,F-gases,baseline,Other,"Parameter a, max",0.1
+EU ,F-gases,baseline,Other,"Parameter a, max",0.1
+SAFR ,F-gases,baseline,Other,"Parameter a, max",0.1
+JPN ,F-gases,baseline,Other,"Parameter a, max",0.1
+AdvancedECO ,F-gases,baseline,Other,"Parameter a, max",0.1
+NonOECD ,F-gases,baseline,Other,"Parameter a, max",0.1
+World ,F-gases,baseline,Other,"Parameter a, max",0.1
+CSAM ,F-gases,baseline,Other,"Parameter a, max",0.1
+BRAZIL ,F-gases,baseline,Other,"Parameter a, max",0.1
+AFRICA ,F-gases,baseline,Other,"Parameter a, max",0.1
+ME ,F-gases,baseline,Other,"Parameter a, max",0.1
+EURASIA ,F-gases,baseline,Other,"Parameter a, max",0.1
+RUS ,F-gases,baseline,Other,"Parameter a, max",0.1
+ASIAPAC ,F-gases,baseline,Other,"Parameter a, max",0.1
+CHINA ,F-gases,baseline,Other,"Parameter a, max",0.1
+INDIA ,F-gases,baseline,Other,"Parameter a, max",0.1
+ASEAN ,F-gases,baseline,Other,"Parameter a, max",0.1
+DevelopingECO ,F-gases,baseline,Other,"Parameter a, max",0.1
+ OECD ,F-gases,baseline,Other,"Parameter a, min",-0.1
+NAM ,F-gases,baseline,Other,"Parameter a, min",-0.1
+US ,F-gases,baseline,Other,"Parameter a, min",-0.1
+EUR ,F-gases,baseline,Other,"Parameter a, min",-0.1
+EU ,F-gases,baseline,Other,"Parameter a, min",-0.1
+SAFR ,F-gases,baseline,Other,"Parameter a, min",-0.1
+JPN ,F-gases,baseline,Other,"Parameter a, min",-0.1
+AdvancedECO ,F-gases,baseline,Other,"Parameter a, min",-0.1
+NonOECD ,F-gases,baseline,Other,"Parameter a, min",-0.1
+World ,F-gases,baseline,Other,"Parameter a, min",-0.1
+CSAM ,F-gases,baseline,Other,"Parameter a, min",-0.1
+BRAZIL ,F-gases,baseline,Other,"Parameter a, min",-0.1
+AFRICA ,F-gases,baseline,Other,"Parameter a, min",-0.1
+ME ,F-gases,baseline,Other,"Parameter a, min",-0.1
+EURASIA ,F-gases,baseline,Other,"Parameter a, min",-0.1
+RUS ,F-gases,baseline,Other,"Parameter a, min",-0.1
+ASIAPAC ,F-gases,baseline,Other,"Parameter a, min",-0.1
+CHINA ,F-gases,baseline,Other,"Parameter a, min",-0.1
+INDIA ,F-gases,baseline,Other,"Parameter a, min",-0.1
+ASEAN ,F-gases,baseline,Other,"Parameter a, min",-0.1
+DevelopingECO ,F-gases,baseline,Other,"Parameter a, min",-0.1
+ OECD ,F-gases,baseline,Other,"Parameter b, max",50
+NAM ,F-gases,baseline,Other,"Parameter b, max",50
+US ,F-gases,baseline,Other,"Parameter b, max",50
+EUR ,F-gases,baseline,Other,"Parameter b, max",50
+EU ,F-gases,baseline,Other,"Parameter b, max",50
+SAFR ,F-gases,baseline,Other,"Parameter b, max",50
+JPN ,F-gases,baseline,Other,"Parameter b, max",50
+AdvancedECO ,F-gases,baseline,Other,"Parameter b, max",50
+NonOECD ,F-gases,baseline,Other,"Parameter b, max",50
+World ,F-gases,baseline,Other,"Parameter b, max",50
+CSAM ,F-gases,baseline,Other,"Parameter b, max",50
+BRAZIL ,F-gases,baseline,Other,"Parameter b, max",50
+AFRICA ,F-gases,baseline,Other,"Parameter b, max",50
+ME ,F-gases,baseline,Other,"Parameter b, max",50
+EURASIA ,F-gases,baseline,Other,"Parameter b, max",50
+RUS ,F-gases,baseline,Other,"Parameter b, max",50
+ASIAPAC ,F-gases,baseline,Other,"Parameter b, max",50
+CHINA ,F-gases,baseline,Other,"Parameter b, max",50
+INDIA ,F-gases,baseline,Other,"Parameter b, max",50
+ASEAN ,F-gases,baseline,Other,"Parameter b, max",50
+DevelopingECO ,F-gases,baseline,Other,"Parameter b, max",50
+ OECD ,F-gases,baseline,Other,"Parameter b, min",50
+NAM ,F-gases,baseline,Other,"Parameter b, min",50
+US ,F-gases,baseline,Other,"Parameter b, min",50
+EUR ,F-gases,baseline,Other,"Parameter b, min",50
+EU ,F-gases,baseline,Other,"Parameter b, min",50
+SAFR ,F-gases,baseline,Other,"Parameter b, min",50
+JPN ,F-gases,baseline,Other,"Parameter b, min",50
+AdvancedECO ,F-gases,baseline,Other,"Parameter b, min",50
+NonOECD ,F-gases,baseline,Other,"Parameter b, min",50
+World ,F-gases,baseline,Other,"Parameter b, min",50
+CSAM ,F-gases,baseline,Other,"Parameter b, min",50
+BRAZIL ,F-gases,baseline,Other,"Parameter b, min",50
+AFRICA ,F-gases,baseline,Other,"Parameter b, min",50
+ME ,F-gases,baseline,Other,"Parameter b, min",50
+EURASIA ,F-gases,baseline,Other,"Parameter b, min",50
+RUS ,F-gases,baseline,Other,"Parameter b, min",50
+ASIAPAC ,F-gases,baseline,Other,"Parameter b, min",50
+CHINA ,F-gases,baseline,Other,"Parameter b, min",50
+INDIA ,F-gases,baseline,Other,"Parameter b, min",50
+ASEAN ,F-gases,baseline,Other,"Parameter b, min",50
+DevelopingECO ,F-gases,baseline,Other,"Parameter b, min",50
+ OECD ,F-gases,baseline,Other,Saturation Point,100
+NAM ,F-gases,baseline,Other,Saturation Point,100
+US ,F-gases,baseline,Other,Saturation Point,100
+EUR ,F-gases,baseline,Other,Saturation Point,100
+EU ,F-gases,baseline,Other,Saturation Point,100
+SAFR ,F-gases,baseline,Other,Saturation Point,100
+JPN ,F-gases,baseline,Other,Saturation Point,100
+AdvancedECO ,F-gases,baseline,Other,Saturation Point,100
+NonOECD ,F-gases,baseline,Other,Saturation Point,100
+World ,F-gases,baseline,Other,Saturation Point,100
+CSAM ,F-gases,baseline,Other,Saturation Point,100
+BRAZIL ,F-gases,baseline,Other,Saturation Point,100
+AFRICA ,F-gases,baseline,Other,Saturation Point,100
+ME ,F-gases,baseline,Other,Saturation Point,100
+EURASIA ,F-gases,baseline,Other,Saturation Point,100
+RUS ,F-gases,baseline,Other,Saturation Point,100
+ASIAPAC ,F-gases,baseline,Other,Saturation Point,100
+CHINA ,F-gases,baseline,Other,Saturation Point,100
+INDIA ,F-gases,baseline,Other,Saturation Point,100
+ASEAN ,F-gases,baseline,Other,Saturation Point,100
+DevelopingECO ,F-gases,baseline,Other,Saturation Point,100

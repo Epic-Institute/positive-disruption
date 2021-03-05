@@ -84,7 +84,7 @@ BRAZIL ,Electricity,Fossil fuels,-0.2,0.0,0.746,0.0
 BRAZIL ,Electricity,Geothermal,0.094,13.623,0.0,0.0
 BRAZIL ,Electricity,Hydroelectricity,100.0,0.0,0.638,0.0
 BRAZIL ,Electricity,Nuclear,-0.1,3.64,0.063,0.0
-BRAZIL ,Electricity,Solar,0.14,24.787,0.17,0.0
+BRAZIL ,Electricity,Solar,0.1,30.989,0.17,0.0
 BRAZIL ,Electricity,Tide and wave,4.693,97.162,0.01,0.0
 BRAZIL ,Electricity,Wind,0.366,8.542,0.168,0.0
 BRAZIL ,Heat,Bioenergy,-0.2,0.0,0.285,0.0
@@ -124,9 +124,9 @@ AFRICA ,Electricity,Fossil fuels,-0.3,18.848,0.746,0.0
 AFRICA ,Electricity,Geothermal,0.114,7.643,0.01,0.0
 AFRICA ,Electricity,Hydroelectricity,-0.396,29.43,0.041,0.0
 AFRICA ,Electricity,Nuclear,-0.1,0.0,0.063,0.0
-AFRICA ,Electricity,Solar,0.174,20.0,0.474,0.0
+AFRICA ,Electricity,Solar,0.1,30.0,0.474,0.0
 AFRICA ,Electricity,Tide and wave,0.335,65.477,0.01,0.0
-AFRICA ,Electricity,Wind,0.142,25.0,0.464,0.0
+AFRICA ,Electricity,Wind,0.1,35.0,0.464,0.0
 AFRICA ,Heat,Bioenergy,-0.4,0.0,0.135,0.0
 AFRICA ,Heat,Coal,-0.279,20.0,0.51,0.0
 AFRICA ,Heat,Geothermal,0.1,15.0,0.05,0.0
@@ -134,7 +134,7 @@ AFRICA ,Heat,Natural gas,-0.2,0.0,0.06,0.0
 AFRICA ,Heat,Nuclear,-0.02,0.0,0.001,0.0
 AFRICA ,Heat,Oil,-0.01,10.002,0.01,0.0
 AFRICA ,Heat,Other sources,-0.1,6.759,0.9,0.0
-AFRICA ,Heat,Solar thermal,0.14,30.0,0.78,0.0
+AFRICA ,Heat,Solar thermal,0.14,40.0,0.78,0.0
 AFRICA ,Heat,Waste,0.09,43.086,0.15,0.0
 AFRICA ,Transport,Oil,-0.09,37.0,0.95,0.0
 AFRICA ,Transport,Bioenergy,0.15,37.0,1.0,0.0
@@ -655,8 +655,6 @@ DevelopingECO ,AFOLU,Optimal Intensity,0.106,44.0,1.0,0.0
 DevelopingECO ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 DevelopingECO ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 DevelopingECO ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
-World ,All,Carbon Dioxide Removal,0.1,40.0,1.0,0.0
-World ,All,Carbon Dioxide Removal,0.1,50.0,1.0,0.0
  OECD ,Other,cement,-0.1,50.0,1.0,0.0
 AFRICA ,Other,cement,-0.1,50.0,1.0,0.0
 ASIAPAC ,Other,cement,-0.1,50.0,1.0,0.0
@@ -720,3 +718,4 @@ RUS ,Other,F-gases,-0.1,50.0,1.0,0.0
 SAFR ,Other,F-gases,-0.1,50.0,1.0,0.0
 US ,Other,F-gases,-0.1,50.0,1.0,0.0
 World ,Other,F-gases,-0.1,50.0,1.0,0.0
+World ,All,Carbon Dioxide Removal,0.1,50.0,1.0,0.0
