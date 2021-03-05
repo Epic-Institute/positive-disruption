@@ -219,6 +219,7 @@ def emissions(
     addtl_em.columns = addtl_em.columns.astype(int)
     addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year]
 
+    # Set emissions change to follow elec ff emissions
     per_change = (
         elec_em.loc[slice(None), "Electricity", "Fossil fuels", "CO2"]
         .loc[:, 2019:]
@@ -230,18 +231,25 @@ def emissions(
         .reindex(sorted(elec_em.columns), axis=1)
     )
 
-    addtl_em = addtl_em.loc[:, :2019].merge(
-        pd.DataFrame(addtl_em.loc[:, 2019])
-        .merge(
-            per_change.loc[:, 2020:],
+    per = []
+    for i in range(0, len(per_change.index)):
+        per = pd.DataFrame(per).append(proj_per_adoption[proj_per_adoption.index[i]].T)
+
+    per.set_index(proj_per_adoption.index, inplace=True)
+
+    addtl_em = (
+        addtl_em.loc[:, :2019]        .merge(
+            pd.DataFrame(addtl_em.loc[:, 2019])            .merge(
+                per_change.loc[:, 2020:],
+                right_on=["Region", "Metric", "Gas"],
+                left_on=["Region", "Metric", "Gas"],
+            )            .cumprod(axis=1)
+            .loc[:, 2020:],
             right_on=["Region", "Metric", "Gas"],
             left_on=["Region", "Metric", "Gas"],
-        )
-        .cumprod(axis=1)
-        .loc[:, 2020:],
-        right_on=["Region", "Metric", "Gas"],
-        left_on=["Region", "Metric", "Gas"],
-    )
+        ).droplevel('Gas').apply(lambda x: adoption_curve(x.rename(x.name[1]), x.name[0], scenario,'Other'), axis=1)
+
+
 
     addtl_em = pd.concat([addtl_em], keys=["Other"], names=["Sector"]).reorder_levels(
         ["Region", "Sector", "Metric", "Gas"]

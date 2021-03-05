@@ -139,11 +139,11 @@ afolu_em_pathway = pd.concat(
 afolu_em_pathway = afolu_em_pathway.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
 
 afolu_em_baseline = afolu_em_baseline.droplevel(["Unit"])
-"""
+
 afolu_em_mitigated = afolu_em_mitigated.apply(
     lambda x: x.subtract(afolu_em_mitigated.loc[:, 2020].values), axis=0
 )
-"""
+
 # endregion
 
 #############
@@ -246,8 +246,17 @@ for i in range(0, 1):
         em_pathway.groupby("Region").sum().divide(em_pathway.loc["World "].sum())
     ).apply(lambda x: x.multiply(cdr_pathway.values[0]), axis=1)
 
-    # cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 4)
+    # cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 3)
 
+    cdr_pathway = (
+        1 - transport_per_adoption_pathway.loc["World ", "Fossil fuels"]
+    ).rename(index={"pathway": "Carbon Dioxide Removal"}).apply(
+        adoption_curve, axis=1, args=(["World ", "pathway"]), sector="All"
+    )[
+        0
+    ] * cdr_pathway.loc[
+        "World "
+    ].max()
 
 # check if energy oversupply is at least energy demand needed for CDR
 

@@ -248,17 +248,16 @@ def results_analysis(
 
         # region
 
-        cdr_decarb = pd.DataFrame(
-            pd.DataFrame(cdr_pathway).sum().cumsum()
-            / pd.DataFrame(cdr_pathway).sum().sum()
-        ).T
+        cdr_decarb = pd.DataFrame(cdr_pathway / cdr_pathway.max()).T.rename(
+            index={0: "Carbon Dioxide Removal"}
+        )
         """
         cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
             cdr_decarb.idxmax(1).values[0]
         ]
-        """
+    
         cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
+
         cdr_decarb = pd.Series(
             cdr_decarb.values[0],
             index=cdr_decarb.columns,

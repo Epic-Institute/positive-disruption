@@ -3587,7 +3587,7 @@ AdvancedECO ,Carbon Dioxide Removal,pathway,All,"Parameter b, max",100
 AdvancedECO ,Carbon Dioxide Removal,baseline,All,"Parameter b, max",100
 NonOECD ,Carbon Dioxide Removal,pathway,All,"Parameter b, max",100
 NonOECD ,Carbon Dioxide Removal,baseline,All,"Parameter b, max",100
-World ,Carbon Dioxide Removal,pathway,All,"Parameter b, max",40
+World ,Carbon Dioxide Removal,pathway,All,"Parameter b, max",50
 World ,Carbon Dioxide Removal,baseline,All,"Parameter b, max",100
 CSAM ,Carbon Dioxide Removal,pathway,All,"Parameter b, max",100
 CSAM ,Carbon Dioxide Removal,baseline,All,"Parameter b, max",100
@@ -3629,7 +3629,7 @@ AdvancedECO ,Carbon Dioxide Removal,pathway,All,"Parameter b, min",0
 AdvancedECO ,Carbon Dioxide Removal,baseline,All,"Parameter b, min",0
 NonOECD ,Carbon Dioxide Removal,pathway,All,"Parameter b, min",0
 NonOECD ,Carbon Dioxide Removal,baseline,All,"Parameter b, min",0
-World ,Carbon Dioxide Removal,pathway,All,"Parameter b, min",40
+World ,Carbon Dioxide Removal,pathway,All,"Parameter b, min",50
 World ,Carbon Dioxide Removal,baseline,All,"Parameter b, min",0
 CSAM ,Carbon Dioxide Removal,pathway,All,"Parameter b, min",0
 CSAM ,Carbon Dioxide Removal,baseline,All,"Parameter b, min",0
@@ -16211,3 +16211,738 @@ ASEAN ,Wind,pathway,Electricity,Saturation Point,40.2
 NonOECD ,Wind,pathway,Electricity,Saturation Point,38.6
 AdvancedECO ,Wind,pathway,Electricity,Saturation Point,43.9
 DevelopingECO ,Wind,pathway,Electricity,Saturation Point,39
+ OECD ,cement,pathway,Other,Floor,0
+ OECD ,Additional Emissions,baseline,All,Floor,0
+NAM ,cement,pathway,Other,Floor,0
+NAM ,Additional Emissions,baseline,All,Floor,0
+US ,cement,pathway,Other,Floor,0
+US ,Additional Emissions,baseline,All,Floor,0
+EUR ,cement,pathway,Other,Floor,0
+EUR ,Additional Emissions,baseline,All,Floor,0
+EU ,cement,pathway,Other,Floor,0
+EU ,Additional Emissions,baseline,All,Floor,0
+SAFR ,cement,pathway,Other,Floor,0
+SAFR ,Additional Emissions,baseline,All,Floor,0
+JPN ,cement,pathway,Other,Floor,0
+JPN ,Additional Emissions,baseline,All,Floor,0
+AdvancedECO ,cement,pathway,Other,Floor,0
+AdvancedECO ,Additional Emissions,baseline,All,Floor,0
+NonOECD ,cement,pathway,Other,Floor,0
+NonOECD ,Additional Emissions,baseline,All,Floor,0
+World ,cement,pathway,Other,Floor,0
+World ,Additional Emissions,baseline,All,Floor,0
+CSAM ,cement,pathway,Other,Floor,0
+CSAM ,Additional Emissions,baseline,All,Floor,0
+BRAZIL ,cement,pathway,Other,Floor,0
+BRAZIL ,Additional Emissions,baseline,All,Floor,0
+AFRICA ,cement,pathway,Other,Floor,0
+AFRICA ,Additional Emissions,baseline,All,Floor,0
+ME ,cement,pathway,Other,Floor,0
+ME ,Additional Emissions,baseline,All,Floor,0
+EURASIA ,cement,pathway,Other,Floor,0
+EURASIA ,Additional Emissions,baseline,All,Floor,0
+RUS ,cement,pathway,Other,Floor,0
+RUS ,Additional Emissions,baseline,All,Floor,0
+ASIAPAC ,cement,pathway,Other,Floor,0
+ASIAPAC ,Additional Emissions,baseline,All,Floor,0
+CHINA ,cement,pathway,Other,Floor,0
+CHINA ,Additional Emissions,baseline,All,Floor,0
+INDIA ,cement,pathway,Other,Floor,0
+INDIA ,Additional Emissions,baseline,All,Floor,0
+ASEAN ,cement,pathway,Other,Floor,0
+ASEAN ,Additional Emissions,baseline,All,Floor,0
+DevelopingECO ,cement,pathway,Other,Floor,0
+DevelopingECO ,Additional Emissions,baseline,All,Floor,0
+ OECD ,cement,pathway,Other,Max annual growth,100
+ OECD ,Additional Emissions,baseline,All,Max annual growth,100
+NAM ,cement,pathway,Other,Max annual growth,100
+NAM ,Additional Emissions,baseline,All,Max annual growth,100
+US ,cement,pathway,Other,Max annual growth,100
+US ,Additional Emissions,baseline,All,Max annual growth,100
+EUR ,cement,pathway,Other,Max annual growth,100
+EUR ,Additional Emissions,baseline,All,Max annual growth,100
+EU ,cement,pathway,Other,Max annual growth,100
+EU ,Additional Emissions,baseline,All,Max annual growth,100
+SAFR ,cement,pathway,Other,Max annual growth,100
+SAFR ,Additional Emissions,baseline,All,Max annual growth,100
+JPN ,cement,pathway,Other,Max annual growth,100
+JPN ,Additional Emissions,baseline,All,Max annual growth,100
+AdvancedECO ,cement,pathway,Other,Max annual growth,100
+AdvancedECO ,Additional Emissions,baseline,All,Max annual growth,100
+NonOECD ,cement,pathway,Other,Max annual growth,100
+NonOECD ,Additional Emissions,baseline,All,Max annual growth,100
+World ,cement,pathway,Other,Max annual growth,100
+World ,Additional Emissions,baseline,All,Max annual growth,100
+CSAM ,cement,pathway,Other,Max annual growth,100
+CSAM ,Additional Emissions,baseline,All,Max annual growth,100
+BRAZIL ,cement,pathway,Other,Max annual growth,100
+BRAZIL ,Additional Emissions,baseline,All,Max annual growth,100
+AFRICA ,cement,pathway,Other,Max annual growth,100
+AFRICA ,Additional Emissions,baseline,All,Max annual growth,100
+ME ,cement,pathway,Other,Max annual growth,100
+ME ,Additional Emissions,baseline,All,Max annual growth,100
+EURASIA ,cement,pathway,Other,Max annual growth,100
+EURASIA ,Additional Emissions,baseline,All,Max annual growth,100
+RUS ,cement,pathway,Other,Max annual growth,100
+RUS ,Additional Emissions,baseline,All,Max annual growth,100
+ASIAPAC ,cement,pathway,Other,Max annual growth,100
+ASIAPAC ,Additional Emissions,baseline,All,Max annual growth,100
+CHINA ,cement,pathway,Other,Max annual growth,100
+CHINA ,Additional Emissions,baseline,All,Max annual growth,100
+INDIA ,cement,pathway,Other,Max annual growth,100
+INDIA ,Additional Emissions,baseline,All,Max annual growth,100
+ASEAN ,cement,pathway,Other,Max annual growth,100
+ASEAN ,Additional Emissions,baseline,All,Max annual growth,100
+DevelopingECO ,cement,pathway,Other,Max annual growth,100
+DevelopingECO ,Additional Emissions,baseline,All,Max annual growth,100
+ OECD ,cement,pathway,Other,"Parameter a, max",0.1
+ OECD ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+NAM ,cement,pathway,Other,"Parameter a, max",0.1
+NAM ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+US ,cement,pathway,Other,"Parameter a, max",0.1
+US ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+EUR ,cement,pathway,Other,"Parameter a, max",0.1
+EUR ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+EU ,cement,pathway,Other,"Parameter a, max",0.1
+EU ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+SAFR ,cement,pathway,Other,"Parameter a, max",0.1
+SAFR ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+JPN ,cement,pathway,Other,"Parameter a, max",0.1
+JPN ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+AdvancedECO ,cement,pathway,Other,"Parameter a, max",0.1
+AdvancedECO ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+NonOECD ,cement,pathway,Other,"Parameter a, max",0.1
+NonOECD ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+World ,cement,pathway,Other,"Parameter a, max",0.1
+World ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+CSAM ,cement,pathway,Other,"Parameter a, max",0.1
+CSAM ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+BRAZIL ,cement,pathway,Other,"Parameter a, max",0.1
+BRAZIL ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+AFRICA ,cement,pathway,Other,"Parameter a, max",0.1
+AFRICA ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+ME ,cement,pathway,Other,"Parameter a, max",0.1
+ME ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+EURASIA ,cement,pathway,Other,"Parameter a, max",0.1
+EURASIA ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+RUS ,cement,pathway,Other,"Parameter a, max",0.1
+RUS ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+ASIAPAC ,cement,pathway,Other,"Parameter a, max",0.1
+ASIAPAC ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+CHINA ,cement,pathway,Other,"Parameter a, max",0.1
+CHINA ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+INDIA ,cement,pathway,Other,"Parameter a, max",0.1
+INDIA ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+ASEAN ,cement,pathway,Other,"Parameter a, max",0.1
+ASEAN ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+DevelopingECO ,cement,pathway,Other,"Parameter a, max",0.1
+DevelopingECO ,Additional Emissions,baseline,All,"Parameter a, max",0.5
+ OECD ,cement,pathway,Other,"Parameter a, min",-0.1
+ OECD ,Additional Emissions,baseline,All,"Parameter a, min",0
+NAM ,cement,pathway,Other,"Parameter a, min",-0.1
+NAM ,Additional Emissions,baseline,All,"Parameter a, min",0
+US ,cement,pathway,Other,"Parameter a, min",-0.1
+US ,Additional Emissions,baseline,All,"Parameter a, min",0
+EUR ,cement,pathway,Other,"Parameter a, min",-0.1
+EUR ,Additional Emissions,baseline,All,"Parameter a, min",0
+EU ,cement,pathway,Other,"Parameter a, min",-0.1
+EU ,Additional Emissions,baseline,All,"Parameter a, min",0
+SAFR ,cement,pathway,Other,"Parameter a, min",-0.1
+SAFR ,Additional Emissions,baseline,All,"Parameter a, min",0
+JPN ,cement,pathway,Other,"Parameter a, min",-0.1
+JPN ,Additional Emissions,baseline,All,"Parameter a, min",0
+AdvancedECO ,cement,pathway,Other,"Parameter a, min",-0.1
+AdvancedECO ,Additional Emissions,baseline,All,"Parameter a, min",0
+NonOECD ,cement,pathway,Other,"Parameter a, min",-0.1
+NonOECD ,Additional Emissions,baseline,All,"Parameter a, min",0
+World ,cement,pathway,Other,"Parameter a, min",-0.1
+World ,Additional Emissions,baseline,All,"Parameter a, min",0
+CSAM ,cement,pathway,Other,"Parameter a, min",-0.1
+CSAM ,Additional Emissions,baseline,All,"Parameter a, min",0
+BRAZIL ,cement,pathway,Other,"Parameter a, min",-0.1
+BRAZIL ,Additional Emissions,baseline,All,"Parameter a, min",0
+AFRICA ,cement,pathway,Other,"Parameter a, min",-0.1
+AFRICA ,Additional Emissions,baseline,All,"Parameter a, min",0
+ME ,cement,pathway,Other,"Parameter a, min",-0.1
+ME ,Additional Emissions,baseline,All,"Parameter a, min",0
+EURASIA ,cement,pathway,Other,"Parameter a, min",-0.1
+EURASIA ,Additional Emissions,baseline,All,"Parameter a, min",0
+RUS ,cement,pathway,Other,"Parameter a, min",-0.1
+RUS ,Additional Emissions,baseline,All,"Parameter a, min",0
+ASIAPAC ,cement,pathway,Other,"Parameter a, min",-0.1
+ASIAPAC ,Additional Emissions,baseline,All,"Parameter a, min",0
+CHINA ,cement,pathway,Other,"Parameter a, min",-0.1
+CHINA ,Additional Emissions,baseline,All,"Parameter a, min",0
+INDIA ,cement,pathway,Other,"Parameter a, min",-0.1
+INDIA ,Additional Emissions,baseline,All,"Parameter a, min",0
+ASEAN ,cement,pathway,Other,"Parameter a, min",-0.1
+ASEAN ,Additional Emissions,baseline,All,"Parameter a, min",0
+DevelopingECO ,cement,pathway,Other,"Parameter a, min",-0.1
+DevelopingECO ,Additional Emissions,baseline,All,"Parameter a, min",0
+ OECD ,cement,pathway,Other,"Parameter b, max",50
+ OECD ,Additional Emissions,baseline,All,"Parameter b, max",100
+NAM ,cement,pathway,Other,"Parameter b, max",50
+NAM ,Additional Emissions,baseline,All,"Parameter b, max",100
+US ,cement,pathway,Other,"Parameter b, max",50
+US ,Additional Emissions,baseline,All,"Parameter b, max",100
+EUR ,cement,pathway,Other,"Parameter b, max",50
+EUR ,Additional Emissions,baseline,All,"Parameter b, max",100
+EU ,cement,pathway,Other,"Parameter b, max",50
+EU ,Additional Emissions,baseline,All,"Parameter b, max",100
+SAFR ,cement,pathway,Other,"Parameter b, max",50
+SAFR ,Additional Emissions,baseline,All,"Parameter b, max",100
+JPN ,cement,pathway,Other,"Parameter b, max",50
+JPN ,Additional Emissions,baseline,All,"Parameter b, max",100
+AdvancedECO ,cement,pathway,Other,"Parameter b, max",50
+AdvancedECO ,Additional Emissions,baseline,All,"Parameter b, max",100
+NonOECD ,cement,pathway,Other,"Parameter b, max",50
+NonOECD ,Additional Emissions,baseline,All,"Parameter b, max",100
+World ,cement,pathway,Other,"Parameter b, max",50
+World ,Additional Emissions,baseline,All,"Parameter b, max",100
+CSAM ,cement,pathway,Other,"Parameter b, max",50
+CSAM ,Additional Emissions,baseline,All,"Parameter b, max",100
+BRAZIL ,cement,pathway,Other,"Parameter b, max",50
+BRAZIL ,Additional Emissions,baseline,All,"Parameter b, max",100
+AFRICA ,cement,pathway,Other,"Parameter b, max",50
+AFRICA ,Additional Emissions,baseline,All,"Parameter b, max",100
+ME ,cement,pathway,Other,"Parameter b, max",50
+ME ,Additional Emissions,baseline,All,"Parameter b, max",100
+EURASIA ,cement,pathway,Other,"Parameter b, max",50
+EURASIA ,Additional Emissions,baseline,All,"Parameter b, max",100
+RUS ,cement,pathway,Other,"Parameter b, max",50
+RUS ,Additional Emissions,baseline,All,"Parameter b, max",100
+ASIAPAC ,cement,pathway,Other,"Parameter b, max",50
+ASIAPAC ,Additional Emissions,baseline,All,"Parameter b, max",100
+CHINA ,cement,pathway,Other,"Parameter b, max",50
+CHINA ,Additional Emissions,baseline,All,"Parameter b, max",100
+INDIA ,cement,pathway,Other,"Parameter b, max",50
+INDIA ,Additional Emissions,baseline,All,"Parameter b, max",100
+ASEAN ,cement,pathway,Other,"Parameter b, max",50
+ASEAN ,Additional Emissions,baseline,All,"Parameter b, max",100
+DevelopingECO ,cement,pathway,Other,"Parameter b, max",50
+DevelopingECO ,Additional Emissions,baseline,All,"Parameter b, max",100
+ OECD ,cement,pathway,Other,"Parameter b, min",50
+ OECD ,Additional Emissions,baseline,All,"Parameter b, min",0
+NAM ,cement,pathway,Other,"Parameter b, min",50
+NAM ,Additional Emissions,baseline,All,"Parameter b, min",0
+US ,cement,pathway,Other,"Parameter b, min",50
+US ,Additional Emissions,baseline,All,"Parameter b, min",0
+EUR ,cement,pathway,Other,"Parameter b, min",50
+EUR ,Additional Emissions,baseline,All,"Parameter b, min",0
+EU ,cement,pathway,Other,"Parameter b, min",50
+EU ,Additional Emissions,baseline,All,"Parameter b, min",0
+SAFR ,cement,pathway,Other,"Parameter b, min",50
+SAFR ,Additional Emissions,baseline,All,"Parameter b, min",0
+JPN ,cement,pathway,Other,"Parameter b, min",50
+JPN ,Additional Emissions,baseline,All,"Parameter b, min",0
+AdvancedECO ,cement,pathway,Other,"Parameter b, min",50
+AdvancedECO ,Additional Emissions,baseline,All,"Parameter b, min",0
+NonOECD ,cement,pathway,Other,"Parameter b, min",50
+NonOECD ,Additional Emissions,baseline,All,"Parameter b, min",0
+World ,cement,pathway,Other,"Parameter b, min",50
+World ,Additional Emissions,baseline,All,"Parameter b, min",0
+CSAM ,cement,pathway,Other,"Parameter b, min",50
+CSAM ,Additional Emissions,baseline,All,"Parameter b, min",0
+BRAZIL ,cement,pathway,Other,"Parameter b, min",50
+BRAZIL ,Additional Emissions,baseline,All,"Parameter b, min",0
+AFRICA ,cement,pathway,Other,"Parameter b, min",50
+AFRICA ,Additional Emissions,baseline,All,"Parameter b, min",0
+ME ,cement,pathway,Other,"Parameter b, min",50
+ME ,Additional Emissions,baseline,All,"Parameter b, min",0
+EURASIA ,cement,pathway,Other,"Parameter b, min",50
+EURASIA ,Additional Emissions,baseline,All,"Parameter b, min",0
+RUS ,cement,pathway,Other,"Parameter b, min",50
+RUS ,Additional Emissions,baseline,All,"Parameter b, min",0
+ASIAPAC ,cement,pathway,Other,"Parameter b, min",50
+ASIAPAC ,Additional Emissions,baseline,All,"Parameter b, min",0
+CHINA ,cement,pathway,Other,"Parameter b, min",50
+CHINA ,Additional Emissions,baseline,All,"Parameter b, min",0
+INDIA ,cement,pathway,Other,"Parameter b, min",50
+INDIA ,Additional Emissions,baseline,All,"Parameter b, min",0
+ASEAN ,cement,pathway,Other,"Parameter b, min",50
+ASEAN ,Additional Emissions,baseline,All,"Parameter b, min",0
+DevelopingECO ,cement,pathway,Other,"Parameter b, min",50
+DevelopingECO ,Additional Emissions,baseline,All,"Parameter b, min",0
+ OECD ,cement,pathway,Other,Saturation Point,100
+ OECD ,Additional Emissions,baseline,All,Saturation Point,100
+NAM ,cement,pathway,Other,Saturation Point,100
+NAM ,Additional Emissions,baseline,All,Saturation Point,100
+US ,cement,pathway,Other,Saturation Point,100
+US ,Additional Emissions,baseline,All,Saturation Point,100
+EUR ,cement,pathway,Other,Saturation Point,100
+EUR ,Additional Emissions,baseline,All,Saturation Point,100
+EU ,cement,pathway,Other,Saturation Point,100
+EU ,Additional Emissions,baseline,All,Saturation Point,100
+SAFR ,cement,pathway,Other,Saturation Point,100
+SAFR ,Additional Emissions,baseline,All,Saturation Point,100
+JPN ,cement,pathway,Other,Saturation Point,100
+JPN ,Additional Emissions,baseline,All,Saturation Point,100
+AdvancedECO ,cement,pathway,Other,Saturation Point,100
+AdvancedECO ,Additional Emissions,baseline,All,Saturation Point,100
+NonOECD ,cement,pathway,Other,Saturation Point,100
+NonOECD ,Additional Emissions,baseline,All,Saturation Point,100
+World ,cement,pathway,Other,Saturation Point,100
+World ,Additional Emissions,baseline,All,Saturation Point,100
+CSAM ,cement,pathway,Other,Saturation Point,100
+CSAM ,Additional Emissions,baseline,All,Saturation Point,100
+BRAZIL ,cement,pathway,Other,Saturation Point,100
+BRAZIL ,Additional Emissions,baseline,All,Saturation Point,100
+AFRICA ,cement,pathway,Other,Saturation Point,100
+AFRICA ,Additional Emissions,baseline,All,Saturation Point,100
+ME ,cement,pathway,Other,Saturation Point,100
+ME ,Additional Emissions,baseline,All,Saturation Point,100
+EURASIA ,cement,pathway,Other,Saturation Point,100
+EURASIA ,Additional Emissions,baseline,All,Saturation Point,100
+RUS ,cement,pathway,Other,Saturation Point,100
+RUS ,Additional Emissions,baseline,All,Saturation Point,100
+ASIAPAC ,cement,pathway,Other,Saturation Point,100
+ASIAPAC ,Additional Emissions,baseline,All,Saturation Point,100
+CHINA ,cement,pathway,Other,Saturation Point,100
+CHINA ,Additional Emissions,baseline,All,Saturation Point,100
+INDIA ,cement,pathway,Other,Saturation Point,100
+INDIA ,Additional Emissions,baseline,All,Saturation Point,100
+ASEAN ,cement,pathway,Other,Saturation Point,100
+ASEAN ,Additional Emissions,baseline,All,Saturation Point,100
+DevelopingECO ,cement,pathway,Other,Saturation Point,100
+DevelopingECO ,Additional Emissions,baseline,All,Saturation Point,100
+ OECD ,CH4,pathway,Other,Floor,0
+NAM ,CH4,pathway,Other,Floor,0
+US ,CH4,pathway,Other,Floor,0
+EUR ,CH4,pathway,Other,Floor,0
+EU ,CH4,pathway,Other,Floor,0
+SAFR ,CH4,pathway,Other,Floor,0
+JPN ,CH4,pathway,Other,Floor,0
+AdvancedECO ,CH4,pathway,Other,Floor,0
+NonOECD ,CH4,pathway,Other,Floor,0
+World ,CH4,pathway,Other,Floor,0
+CSAM ,CH4,pathway,Other,Floor,0
+BRAZIL ,CH4,pathway,Other,Floor,0
+AFRICA ,CH4,pathway,Other,Floor,0
+ME ,CH4,pathway,Other,Floor,0
+EURASIA ,CH4,pathway,Other,Floor,0
+RUS ,CH4,pathway,Other,Floor,0
+ASIAPAC ,CH4,pathway,Other,Floor,0
+CHINA ,CH4,pathway,Other,Floor,0
+INDIA ,CH4,pathway,Other,Floor,0
+ASEAN ,CH4,pathway,Other,Floor,0
+DevelopingECO ,CH4,pathway,Other,Floor,0
+ OECD ,CH4,pathway,Other,Max annual growth,100
+NAM ,CH4,pathway,Other,Max annual growth,100
+US ,CH4,pathway,Other,Max annual growth,100
+EUR ,CH4,pathway,Other,Max annual growth,100
+EU ,CH4,pathway,Other,Max annual growth,100
+SAFR ,CH4,pathway,Other,Max annual growth,100
+JPN ,CH4,pathway,Other,Max annual growth,100
+AdvancedECO ,CH4,pathway,Other,Max annual growth,100
+NonOECD ,CH4,pathway,Other,Max annual growth,100
+World ,CH4,pathway,Other,Max annual growth,100
+CSAM ,CH4,pathway,Other,Max annual growth,100
+BRAZIL ,CH4,pathway,Other,Max annual growth,100
+AFRICA ,CH4,pathway,Other,Max annual growth,100
+ME ,CH4,pathway,Other,Max annual growth,100
+EURASIA ,CH4,pathway,Other,Max annual growth,100
+RUS ,CH4,pathway,Other,Max annual growth,100
+ASIAPAC ,CH4,pathway,Other,Max annual growth,100
+CHINA ,CH4,pathway,Other,Max annual growth,100
+INDIA ,CH4,pathway,Other,Max annual growth,100
+ASEAN ,CH4,pathway,Other,Max annual growth,100
+DevelopingECO ,CH4,pathway,Other,Max annual growth,100
+ OECD ,CH4,pathway,Other,"Parameter a, max",0.1
+NAM ,CH4,pathway,Other,"Parameter a, max",0.1
+US ,CH4,pathway,Other,"Parameter a, max",0.1
+EUR ,CH4,pathway,Other,"Parameter a, max",0.1
+EU ,CH4,pathway,Other,"Parameter a, max",0.1
+SAFR ,CH4,pathway,Other,"Parameter a, max",0.1
+JPN ,CH4,pathway,Other,"Parameter a, max",0.1
+AdvancedECO ,CH4,pathway,Other,"Parameter a, max",0.1
+NonOECD ,CH4,pathway,Other,"Parameter a, max",0.1
+World ,CH4,pathway,Other,"Parameter a, max",0.1
+CSAM ,CH4,pathway,Other,"Parameter a, max",0.1
+BRAZIL ,CH4,pathway,Other,"Parameter a, max",0.1
+AFRICA ,CH4,pathway,Other,"Parameter a, max",0.1
+ME ,CH4,pathway,Other,"Parameter a, max",0.1
+EURASIA ,CH4,pathway,Other,"Parameter a, max",0.1
+RUS ,CH4,pathway,Other,"Parameter a, max",0.1
+ASIAPAC ,CH4,pathway,Other,"Parameter a, max",0.1
+CHINA ,CH4,pathway,Other,"Parameter a, max",0.1
+INDIA ,CH4,pathway,Other,"Parameter a, max",0.1
+ASEAN ,CH4,pathway,Other,"Parameter a, max",0.1
+DevelopingECO ,CH4,pathway,Other,"Parameter a, max",0.1
+ OECD ,CH4,pathway,Other,"Parameter a, min",-0.1
+NAM ,CH4,pathway,Other,"Parameter a, min",-0.1
+US ,CH4,pathway,Other,"Parameter a, min",-0.1
+EUR ,CH4,pathway,Other,"Parameter a, min",-0.1
+EU ,CH4,pathway,Other,"Parameter a, min",-0.1
+SAFR ,CH4,pathway,Other,"Parameter a, min",-0.1
+JPN ,CH4,pathway,Other,"Parameter a, min",-0.1
+AdvancedECO ,CH4,pathway,Other,"Parameter a, min",-0.1
+NonOECD ,CH4,pathway,Other,"Parameter a, min",-0.1
+World ,CH4,pathway,Other,"Parameter a, min",-0.1
+CSAM ,CH4,pathway,Other,"Parameter a, min",-0.1
+BRAZIL ,CH4,pathway,Other,"Parameter a, min",-0.1
+AFRICA ,CH4,pathway,Other,"Parameter a, min",-0.1
+ME ,CH4,pathway,Other,"Parameter a, min",-0.1
+EURASIA ,CH4,pathway,Other,"Parameter a, min",-0.1
+RUS ,CH4,pathway,Other,"Parameter a, min",-0.1
+ASIAPAC ,CH4,pathway,Other,"Parameter a, min",-0.1
+CHINA ,CH4,pathway,Other,"Parameter a, min",-0.1
+INDIA ,CH4,pathway,Other,"Parameter a, min",-0.1
+ASEAN ,CH4,pathway,Other,"Parameter a, min",-0.1
+DevelopingECO ,CH4,pathway,Other,"Parameter a, min",-0.1
+ OECD ,CH4,pathway,Other,"Parameter b, max",50
+NAM ,CH4,pathway,Other,"Parameter b, max",50
+US ,CH4,pathway,Other,"Parameter b, max",50
+EUR ,CH4,pathway,Other,"Parameter b, max",50
+EU ,CH4,pathway,Other,"Parameter b, max",50
+SAFR ,CH4,pathway,Other,"Parameter b, max",50
+JPN ,CH4,pathway,Other,"Parameter b, max",50
+AdvancedECO ,CH4,pathway,Other,"Parameter b, max",50
+NonOECD ,CH4,pathway,Other,"Parameter b, max",50
+World ,CH4,pathway,Other,"Parameter b, max",50
+CSAM ,CH4,pathway,Other,"Parameter b, max",50
+BRAZIL ,CH4,pathway,Other,"Parameter b, max",50
+AFRICA ,CH4,pathway,Other,"Parameter b, max",50
+ME ,CH4,pathway,Other,"Parameter b, max",50
+EURASIA ,CH4,pathway,Other,"Parameter b, max",50
+RUS ,CH4,pathway,Other,"Parameter b, max",50
+ASIAPAC ,CH4,pathway,Other,"Parameter b, max",50
+CHINA ,CH4,pathway,Other,"Parameter b, max",50
+INDIA ,CH4,pathway,Other,"Parameter b, max",50
+ASEAN ,CH4,pathway,Other,"Parameter b, max",50
+DevelopingECO ,CH4,pathway,Other,"Parameter b, max",50
+ OECD ,CH4,pathway,Other,"Parameter b, min",50
+NAM ,CH4,pathway,Other,"Parameter b, min",50
+US ,CH4,pathway,Other,"Parameter b, min",50
+EUR ,CH4,pathway,Other,"Parameter b, min",50
+EU ,CH4,pathway,Other,"Parameter b, min",50
+SAFR ,CH4,pathway,Other,"Parameter b, min",50
+JPN ,CH4,pathway,Other,"Parameter b, min",50
+AdvancedECO ,CH4,pathway,Other,"Parameter b, min",50
+NonOECD ,CH4,pathway,Other,"Parameter b, min",50
+World ,CH4,pathway,Other,"Parameter b, min",50
+CSAM ,CH4,pathway,Other,"Parameter b, min",50
+BRAZIL ,CH4,pathway,Other,"Parameter b, min",50
+AFRICA ,CH4,pathway,Other,"Parameter b, min",50
+ME ,CH4,pathway,Other,"Parameter b, min",50
+EURASIA ,CH4,pathway,Other,"Parameter b, min",50
+RUS ,CH4,pathway,Other,"Parameter b, min",50
+ASIAPAC ,CH4,pathway,Other,"Parameter b, min",50
+CHINA ,CH4,pathway,Other,"Parameter b, min",50
+INDIA ,CH4,pathway,Other,"Parameter b, min",50
+ASEAN ,CH4,pathway,Other,"Parameter b, min",50
+DevelopingECO ,CH4,pathway,Other,"Parameter b, min",50
+ OECD ,CH4,pathway,Other,Saturation Point,100
+NAM ,CH4,pathway,Other,Saturation Point,100
+US ,CH4,pathway,Other,Saturation Point,100
+EUR ,CH4,pathway,Other,Saturation Point,100
+EU ,CH4,pathway,Other,Saturation Point,100
+SAFR ,CH4,pathway,Other,Saturation Point,100
+JPN ,CH4,pathway,Other,Saturation Point,100
+AdvancedECO ,CH4,pathway,Other,Saturation Point,100
+NonOECD ,CH4,pathway,Other,Saturation Point,100
+World ,CH4,pathway,Other,Saturation Point,100
+CSAM ,CH4,pathway,Other,Saturation Point,100
+BRAZIL ,CH4,pathway,Other,Saturation Point,100
+AFRICA ,CH4,pathway,Other,Saturation Point,100
+ME ,CH4,pathway,Other,Saturation Point,100
+EURASIA ,CH4,pathway,Other,Saturation Point,100
+RUS ,CH4,pathway,Other,Saturation Point,100
+ASIAPAC ,CH4,pathway,Other,Saturation Point,100
+CHINA ,CH4,pathway,Other,Saturation Point,100
+INDIA ,CH4,pathway,Other,Saturation Point,100
+ASEAN ,CH4,pathway,Other,Saturation Point,100
+DevelopingECO ,CH4,pathway,Other,Saturation Point,100
+ OECD ,N2O,pathway,Other,Floor,0
+NAM ,N2O,pathway,Other,Floor,0
+US ,N2O,pathway,Other,Floor,0
+EUR ,N2O,pathway,Other,Floor,0
+EU ,N2O,pathway,Other,Floor,0
+SAFR ,N2O,pathway,Other,Floor,0
+JPN ,N2O,pathway,Other,Floor,0
+AdvancedECO ,N2O,pathway,Other,Floor,0
+NonOECD ,N2O,pathway,Other,Floor,0
+World ,N2O,pathway,Other,Floor,0
+CSAM ,N2O,pathway,Other,Floor,0
+BRAZIL ,N2O,pathway,Other,Floor,0
+AFRICA ,N2O,pathway,Other,Floor,0
+ME ,N2O,pathway,Other,Floor,0
+EURASIA ,N2O,pathway,Other,Floor,0
+RUS ,N2O,pathway,Other,Floor,0
+ASIAPAC ,N2O,pathway,Other,Floor,0
+CHINA ,N2O,pathway,Other,Floor,0
+INDIA ,N2O,pathway,Other,Floor,0
+ASEAN ,N2O,pathway,Other,Floor,0
+DevelopingECO ,N2O,pathway,Other,Floor,0
+ OECD ,N2O,pathway,Other,Max annual growth,100
+NAM ,N2O,pathway,Other,Max annual growth,100
+US ,N2O,pathway,Other,Max annual growth,100
+EUR ,N2O,pathway,Other,Max annual growth,100
+EU ,N2O,pathway,Other,Max annual growth,100
+SAFR ,N2O,pathway,Other,Max annual growth,100
+JPN ,N2O,pathway,Other,Max annual growth,100
+AdvancedECO ,N2O,pathway,Other,Max annual growth,100
+NonOECD ,N2O,pathway,Other,Max annual growth,100
+World ,N2O,pathway,Other,Max annual growth,100
+CSAM ,N2O,pathway,Other,Max annual growth,100
+BRAZIL ,N2O,pathway,Other,Max annual growth,100
+AFRICA ,N2O,pathway,Other,Max annual growth,100
+ME ,N2O,pathway,Other,Max annual growth,100
+EURASIA ,N2O,pathway,Other,Max annual growth,100
+RUS ,N2O,pathway,Other,Max annual growth,100
+ASIAPAC ,N2O,pathway,Other,Max annual growth,100
+CHINA ,N2O,pathway,Other,Max annual growth,100
+INDIA ,N2O,pathway,Other,Max annual growth,100
+ASEAN ,N2O,pathway,Other,Max annual growth,100
+DevelopingECO ,N2O,pathway,Other,Max annual growth,100
+ OECD ,N2O,pathway,Other,"Parameter a, max",0.1
+NAM ,N2O,pathway,Other,"Parameter a, max",0.1
+US ,N2O,pathway,Other,"Parameter a, max",0.1
+EUR ,N2O,pathway,Other,"Parameter a, max",0.1
+EU ,N2O,pathway,Other,"Parameter a, max",0.1
+SAFR ,N2O,pathway,Other,"Parameter a, max",0.1
+JPN ,N2O,pathway,Other,"Parameter a, max",0.1
+AdvancedECO ,N2O,pathway,Other,"Parameter a, max",0.1
+NonOECD ,N2O,pathway,Other,"Parameter a, max",0.1
+World ,N2O,pathway,Other,"Parameter a, max",0.1
+CSAM ,N2O,pathway,Other,"Parameter a, max",0.1
+BRAZIL ,N2O,pathway,Other,"Parameter a, max",0.1
+AFRICA ,N2O,pathway,Other,"Parameter a, max",0.1
+ME ,N2O,pathway,Other,"Parameter a, max",0.1
+EURASIA ,N2O,pathway,Other,"Parameter a, max",0.1
+RUS ,N2O,pathway,Other,"Parameter a, max",0.1
+ASIAPAC ,N2O,pathway,Other,"Parameter a, max",0.1
+CHINA ,N2O,pathway,Other,"Parameter a, max",0.1
+INDIA ,N2O,pathway,Other,"Parameter a, max",0.1
+ASEAN ,N2O,pathway,Other,"Parameter a, max",0.1
+DevelopingECO ,N2O,pathway,Other,"Parameter a, max",0.1
+ OECD ,N2O,pathway,Other,"Parameter a, min",-0.1
+NAM ,N2O,pathway,Other,"Parameter a, min",-0.1
+US ,N2O,pathway,Other,"Parameter a, min",-0.1
+EUR ,N2O,pathway,Other,"Parameter a, min",-0.1
+EU ,N2O,pathway,Other,"Parameter a, min",-0.1
+SAFR ,N2O,pathway,Other,"Parameter a, min",-0.1
+JPN ,N2O,pathway,Other,"Parameter a, min",-0.1
+AdvancedECO ,N2O,pathway,Other,"Parameter a, min",-0.1
+NonOECD ,N2O,pathway,Other,"Parameter a, min",-0.1
+World ,N2O,pathway,Other,"Parameter a, min",-0.1
+CSAM ,N2O,pathway,Other,"Parameter a, min",-0.1
+BRAZIL ,N2O,pathway,Other,"Parameter a, min",-0.1
+AFRICA ,N2O,pathway,Other,"Parameter a, min",-0.1
+ME ,N2O,pathway,Other,"Parameter a, min",-0.1
+EURASIA ,N2O,pathway,Other,"Parameter a, min",-0.1
+RUS ,N2O,pathway,Other,"Parameter a, min",-0.1
+ASIAPAC ,N2O,pathway,Other,"Parameter a, min",-0.1
+CHINA ,N2O,pathway,Other,"Parameter a, min",-0.1
+INDIA ,N2O,pathway,Other,"Parameter a, min",-0.1
+ASEAN ,N2O,pathway,Other,"Parameter a, min",-0.1
+DevelopingECO ,N2O,pathway,Other,"Parameter a, min",-0.1
+ OECD ,N2O,pathway,Other,"Parameter b, max",50
+NAM ,N2O,pathway,Other,"Parameter b, max",50
+US ,N2O,pathway,Other,"Parameter b, max",50
+EUR ,N2O,pathway,Other,"Parameter b, max",50
+EU ,N2O,pathway,Other,"Parameter b, max",50
+SAFR ,N2O,pathway,Other,"Parameter b, max",50
+JPN ,N2O,pathway,Other,"Parameter b, max",50
+AdvancedECO ,N2O,pathway,Other,"Parameter b, max",50
+NonOECD ,N2O,pathway,Other,"Parameter b, max",50
+World ,N2O,pathway,Other,"Parameter b, max",50
+CSAM ,N2O,pathway,Other,"Parameter b, max",50
+BRAZIL ,N2O,pathway,Other,"Parameter b, max",50
+AFRICA ,N2O,pathway,Other,"Parameter b, max",50
+ME ,N2O,pathway,Other,"Parameter b, max",50
+EURASIA ,N2O,pathway,Other,"Parameter b, max",50
+RUS ,N2O,pathway,Other,"Parameter b, max",50
+ASIAPAC ,N2O,pathway,Other,"Parameter b, max",50
+CHINA ,N2O,pathway,Other,"Parameter b, max",50
+INDIA ,N2O,pathway,Other,"Parameter b, max",50
+ASEAN ,N2O,pathway,Other,"Parameter b, max",50
+DevelopingECO ,N2O,pathway,Other,"Parameter b, max",50
+ OECD ,N2O,pathway,Other,"Parameter b, min",50
+NAM ,N2O,pathway,Other,"Parameter b, min",50
+US ,N2O,pathway,Other,"Parameter b, min",50
+EUR ,N2O,pathway,Other,"Parameter b, min",50
+EU ,N2O,pathway,Other,"Parameter b, min",50
+SAFR ,N2O,pathway,Other,"Parameter b, min",50
+JPN ,N2O,pathway,Other,"Parameter b, min",50
+AdvancedECO ,N2O,pathway,Other,"Parameter b, min",50
+NonOECD ,N2O,pathway,Other,"Parameter b, min",50
+World ,N2O,pathway,Other,"Parameter b, min",50
+CSAM ,N2O,pathway,Other,"Parameter b, min",50
+BRAZIL ,N2O,pathway,Other,"Parameter b, min",50
+AFRICA ,N2O,pathway,Other,"Parameter b, min",50
+ME ,N2O,pathway,Other,"Parameter b, min",50
+EURASIA ,N2O,pathway,Other,"Parameter b, min",50
+RUS ,N2O,pathway,Other,"Parameter b, min",50
+ASIAPAC ,N2O,pathway,Other,"Parameter b, min",50
+CHINA ,N2O,pathway,Other,"Parameter b, min",50
+INDIA ,N2O,pathway,Other,"Parameter b, min",50
+ASEAN ,N2O,pathway,Other,"Parameter b, min",50
+DevelopingECO ,N2O,pathway,Other,"Parameter b, min",50
+ OECD ,N2O,pathway,Other,Saturation Point,100
+NAM ,N2O,pathway,Other,Saturation Point,100
+US ,N2O,pathway,Other,Saturation Point,100
+EUR ,N2O,pathway,Other,Saturation Point,100
+EU ,N2O,pathway,Other,Saturation Point,100
+SAFR ,N2O,pathway,Other,Saturation Point,100
+JPN ,N2O,pathway,Other,Saturation Point,100
+AdvancedECO ,N2O,pathway,Other,Saturation Point,100
+NonOECD ,N2O,pathway,Other,Saturation Point,100
+World ,N2O,pathway,Other,Saturation Point,100
+CSAM ,N2O,pathway,Other,Saturation Point,100
+BRAZIL ,N2O,pathway,Other,Saturation Point,100
+AFRICA ,N2O,pathway,Other,Saturation Point,100
+ME ,N2O,pathway,Other,Saturation Point,100
+EURASIA ,N2O,pathway,Other,Saturation Point,100
+RUS ,N2O,pathway,Other,Saturation Point,100
+ASIAPAC ,N2O,pathway,Other,Saturation Point,100
+CHINA ,N2O,pathway,Other,Saturation Point,100
+INDIA ,N2O,pathway,Other,Saturation Point,100
+ASEAN ,N2O,pathway,Other,Saturation Point,100
+DevelopingECO ,N2O,pathway,Other,Saturation Point,100
+ OECD ,F-gases,pathway,Other,Floor,0
+NAM ,F-gases,pathway,Other,Floor,0
+US ,F-gases,pathway,Other,Floor,0
+EUR ,F-gases,pathway,Other,Floor,0
+EU ,F-gases,pathway,Other,Floor,0
+SAFR ,F-gases,pathway,Other,Floor,0
+JPN ,F-gases,pathway,Other,Floor,0
+AdvancedECO ,F-gases,pathway,Other,Floor,0
+NonOECD ,F-gases,pathway,Other,Floor,0
+World ,F-gases,pathway,Other,Floor,0
+CSAM ,F-gases,pathway,Other,Floor,0
+BRAZIL ,F-gases,pathway,Other,Floor,0
+AFRICA ,F-gases,pathway,Other,Floor,0
+ME ,F-gases,pathway,Other,Floor,0
+EURASIA ,F-gases,pathway,Other,Floor,0
+RUS ,F-gases,pathway,Other,Floor,0
+ASIAPAC ,F-gases,pathway,Other,Floor,0
+CHINA ,F-gases,pathway,Other,Floor,0
+INDIA ,F-gases,pathway,Other,Floor,0
+ASEAN ,F-gases,pathway,Other,Floor,0
+DevelopingECO ,F-gases,pathway,Other,Floor,0
+ OECD ,F-gases,pathway,Other,Max annual growth,100
+NAM ,F-gases,pathway,Other,Max annual growth,100
+US ,F-gases,pathway,Other,Max annual growth,100
+EUR ,F-gases,pathway,Other,Max annual growth,100
+EU ,F-gases,pathway,Other,Max annual growth,100
+SAFR ,F-gases,pathway,Other,Max annual growth,100
+JPN ,F-gases,pathway,Other,Max annual growth,100
+AdvancedECO ,F-gases,pathway,Other,Max annual growth,100
+NonOECD ,F-gases,pathway,Other,Max annual growth,100
+World ,F-gases,pathway,Other,Max annual growth,100
+CSAM ,F-gases,pathway,Other,Max annual growth,100
+BRAZIL ,F-gases,pathway,Other,Max annual growth,100
+AFRICA ,F-gases,pathway,Other,Max annual growth,100
+ME ,F-gases,pathway,Other,Max annual growth,100
+EURASIA ,F-gases,pathway,Other,Max annual growth,100
+RUS ,F-gases,pathway,Other,Max annual growth,100
+ASIAPAC ,F-gases,pathway,Other,Max annual growth,100
+CHINA ,F-gases,pathway,Other,Max annual growth,100
+INDIA ,F-gases,pathway,Other,Max annual growth,100
+ASEAN ,F-gases,pathway,Other,Max annual growth,100
+DevelopingECO ,F-gases,pathway,Other,Max annual growth,100
+ OECD ,F-gases,pathway,Other,"Parameter a, max",0.1
+NAM ,F-gases,pathway,Other,"Parameter a, max",0.1
+US ,F-gases,pathway,Other,"Parameter a, max",0.1
+EUR ,F-gases,pathway,Other,"Parameter a, max",0.1
+EU ,F-gases,pathway,Other,"Parameter a, max",0.1
+SAFR ,F-gases,pathway,Other,"Parameter a, max",0.1
+JPN ,F-gases,pathway,Other,"Parameter a, max",0.1
+AdvancedECO ,F-gases,pathway,Other,"Parameter a, max",0.1
+NonOECD ,F-gases,pathway,Other,"Parameter a, max",0.1
+World ,F-gases,pathway,Other,"Parameter a, max",0.1
+CSAM ,F-gases,pathway,Other,"Parameter a, max",0.1
+BRAZIL ,F-gases,pathway,Other,"Parameter a, max",0.1
+AFRICA ,F-gases,pathway,Other,"Parameter a, max",0.1
+ME ,F-gases,pathway,Other,"Parameter a, max",0.1
+EURASIA ,F-gases,pathway,Other,"Parameter a, max",0.1
+RUS ,F-gases,pathway,Other,"Parameter a, max",0.1
+ASIAPAC ,F-gases,pathway,Other,"Parameter a, max",0.1
+CHINA ,F-gases,pathway,Other,"Parameter a, max",0.1
+INDIA ,F-gases,pathway,Other,"Parameter a, max",0.1
+ASEAN ,F-gases,pathway,Other,"Parameter a, max",0.1
+DevelopingECO ,F-gases,pathway,Other,"Parameter a, max",0.1
+ OECD ,F-gases,pathway,Other,"Parameter a, min",-0.1
+NAM ,F-gases,pathway,Other,"Parameter a, min",-0.1
+US ,F-gases,pathway,Other,"Parameter a, min",-0.1
+EUR ,F-gases,pathway,Other,"Parameter a, min",-0.1
+EU ,F-gases,pathway,Other,"Parameter a, min",-0.1
+SAFR ,F-gases,pathway,Other,"Parameter a, min",-0.1
+JPN ,F-gases,pathway,Other,"Parameter a, min",-0.1
+AdvancedECO ,F-gases,pathway,Other,"Parameter a, min",-0.1
+NonOECD ,F-gases,pathway,Other,"Parameter a, min",-0.1
+World ,F-gases,pathway,Other,"Parameter a, min",-0.1
+CSAM ,F-gases,pathway,Other,"Parameter a, min",-0.1
+BRAZIL ,F-gases,pathway,Other,"Parameter a, min",-0.1
+AFRICA ,F-gases,pathway,Other,"Parameter a, min",-0.1
+ME ,F-gases,pathway,Other,"Parameter a, min",-0.1
+EURASIA ,F-gases,pathway,Other,"Parameter a, min",-0.1
+RUS ,F-gases,pathway,Other,"Parameter a, min",-0.1
+ASIAPAC ,F-gases,pathway,Other,"Parameter a, min",-0.1
+CHINA ,F-gases,pathway,Other,"Parameter a, min",-0.1
+INDIA ,F-gases,pathway,Other,"Parameter a, min",-0.1
+ASEAN ,F-gases,pathway,Other,"Parameter a, min",-0.1
+DevelopingECO ,F-gases,pathway,Other,"Parameter a, min",-0.1
+ OECD ,F-gases,pathway,Other,"Parameter b, max",50
+NAM ,F-gases,pathway,Other,"Parameter b, max",50
+US ,F-gases,pathway,Other,"Parameter b, max",50
+EUR ,F-gases,pathway,Other,"Parameter b, max",50
+EU ,F-gases,pathway,Other,"Parameter b, max",50
+SAFR ,F-gases,pathway,Other,"Parameter b, max",50
+JPN ,F-gases,pathway,Other,"Parameter b, max",50
+AdvancedECO ,F-gases,pathway,Other,"Parameter b, max",50
+NonOECD ,F-gases,pathway,Other,"Parameter b, max",50
+World ,F-gases,pathway,Other,"Parameter b, max",50
+CSAM ,F-gases,pathway,Other,"Parameter b, max",50
+BRAZIL ,F-gases,pathway,Other,"Parameter b, max",50
+AFRICA ,F-gases,pathway,Other,"Parameter b, max",50
+ME ,F-gases,pathway,Other,"Parameter b, max",50
+EURASIA ,F-gases,pathway,Other,"Parameter b, max",50
+RUS ,F-gases,pathway,Other,"Parameter b, max",50
+ASIAPAC ,F-gases,pathway,Other,"Parameter b, max",50
+CHINA ,F-gases,pathway,Other,"Parameter b, max",50
+INDIA ,F-gases,pathway,Other,"Parameter b, max",50
+ASEAN ,F-gases,pathway,Other,"Parameter b, max",50
+DevelopingECO ,F-gases,pathway,Other,"Parameter b, max",50
+ OECD ,F-gases,pathway,Other,"Parameter b, min",50
+NAM ,F-gases,pathway,Other,"Parameter b, min",50
+US ,F-gases,pathway,Other,"Parameter b, min",50
+EUR ,F-gases,pathway,Other,"Parameter b, min",50
+EU ,F-gases,pathway,Other,"Parameter b, min",50
+SAFR ,F-gases,pathway,Other,"Parameter b, min",50
+JPN ,F-gases,pathway,Other,"Parameter b, min",50
+AdvancedECO ,F-gases,pathway,Other,"Parameter b, min",50
+NonOECD ,F-gases,pathway,Other,"Parameter b, min",50
+World ,F-gases,pathway,Other,"Parameter b, min",50
+CSAM ,F-gases,pathway,Other,"Parameter b, min",50
+BRAZIL ,F-gases,pathway,Other,"Parameter b, min",50
+AFRICA ,F-gases,pathway,Other,"Parameter b, min",50
+ME ,F-gases,pathway,Other,"Parameter b, min",50
+EURASIA ,F-gases,pathway,Other,"Parameter b, min",50
+RUS ,F-gases,pathway,Other,"Parameter b, min",50
+ASIAPAC ,F-gases,pathway,Other,"Parameter b, min",50
+CHINA ,F-gases,pathway,Other,"Parameter b, min",50
+INDIA ,F-gases,pathway,Other,"Parameter b, min",50
+ASEAN ,F-gases,pathway,Other,"Parameter b, min",50
+DevelopingECO ,F-gases,pathway,Other,"Parameter b, min",50
+ OECD ,F-gases,pathway,Other,Saturation Point,100
+NAM ,F-gases,pathway,Other,Saturation Point,100
+US ,F-gases,pathway,Other,Saturation Point,100
+EUR ,F-gases,pathway,Other,Saturation Point,100
+EU ,F-gases,pathway,Other,Saturation Point,100
+SAFR ,F-gases,pathway,Other,Saturation Point,100
+JPN ,F-gases,pathway,Other,Saturation Point,100
+AdvancedECO ,F-gases,pathway,Other,Saturation Point,100
+NonOECD ,F-gases,pathway,Other,Saturation Point,100
+World ,F-gases,pathway,Other,Saturation Point,100
+CSAM ,F-gases,pathway,Other,Saturation Point,100
+BRAZIL ,F-gases,pathway,Other,Saturation Point,100
+AFRICA ,F-gases,pathway,Other,Saturation Point,100
+ME ,F-gases,pathway,Other,Saturation Point,100
+EURASIA ,F-gases,pathway,Other,Saturation Point,100
+RUS ,F-gases,pathway,Other,Saturation Point,100
+ASIAPAC ,F-gases,pathway,Other,Saturation Point,100
+CHINA ,F-gases,pathway,Other,Saturation Point,100
+INDIA ,F-gases,pathway,Other,Saturation Point,100
+ASEAN ,F-gases,pathway,Other,Saturation Point,100
+DevelopingECO ,F-gases,pathway,Other,Saturation Point,100
