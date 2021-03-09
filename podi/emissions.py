@@ -220,9 +220,14 @@ def emissions(
     addtl_em.columns = addtl_em.columns.astype(int)
     addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year]
 
+    # remove steel to avoid double counting
+    addtl_em = addtl_em.loc[
+        slice(None), slice(None), ["cement", "CH4", "N2O", "F-gases"], slice(None)
+    ]
+
     # Set emissions change to follow elec ff emissions
     per_change = (
-        elec_em.loc[slice(None), "Electricity", "Fossil fuels", "CO2"]
+        industry_em.loc[slice(None), "Industry", "Fossil fuels", "CO2"]
         .loc[:, 2019:]
         .pct_change(axis=1)
         .replace(NaN, 0)
@@ -308,6 +313,92 @@ def emissions(
     em_hist["total_emissions"] = em_hist.sum(axis=1)
     """
 
+    # IEA data by sector
+    em_hist2 = (
+        pd.read_csv("podi/data/energy_demand_historical_IEA.csv")
+        .set_index(["IEA Region", "Product", "Flow"])
+        .replace("..", 0)
+        .replace(NaN, 0)
+    )
+
+    em_hist2 = em_hist2.loc[
+        slice(None),
+        slice(None),
+        [
+            "Total final consumption (ktoe)",
+            "Industry (ktoe)",
+            "Transport (ktoe)",
+            "Residential (ktoe)",
+            "Commercial and public services (ktoe)",
+            "Other final consumption (ktoe)",
+        ],
+        :,
+    ]
+
+    # combine residential and commercial
+
+    # combine industry and other
+
+    #
+
+    region_categories = pd.read_csv(
+        "podi/data/region_categories.csv", usecols=["WEB Region", "IEA Region"]
+    )
+
+    em_hist2 = em_hist2.merge(
+        region_categories, right_on=["WEB Region"], left_on=["IEA Region"]
+    )
+
+    em_hist2 = em_hist2.drop(columns=["WEB Region"])
+
+    em_hist2 = em_hist2.groupby("IEA Region").sum()
+
+    # split into various levels of IEA regional grouping
+    em_hist2["IEA Region 1"] = em_hist2.apply(lambda x: x.name.split()[2] + " ", axis=1)
+    em_hist2["IEA Region 2"] = em_hist2.apply(lambda x: x.name.split()[4] + " ", axis=1)
+    em_hist2["IEA Region 3"] = em_hist2.apply(
+        lambda x: x.name.split()[-1] + " ", axis=1
+    )
+
+    em_hist2.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
+
+    # make new row for world level data
+    em_hist2_world = pd.DataFrame(em_hist2.sum()).T.rename(index={0: "World "})
+
+    # make new rows for OECD/NonOECD regions
+    em_hist2_oecd = pd.DataFrame(em_hist2.groupby("IEA Region 1").sum()).rename(
+        index={"OECD ": " OECD "}
+    )
+
+    # make new rows for IEA regions
+    em_hist2_regions = pd.DataFrame(em_hist2.groupby("IEA Region 2").sum())
+    em_hist2_regions2 = pd.DataFrame(em_hist2.groupby("IEA Region 3").sum())
+
+    # combine all
+    em_hist2 = em_hist2_world.append(
+        [em_hist2_oecd, em_hist2_regions.combine_first(em_hist2_regions2)]
+    )
+    em_hist2.index.name = "IEA Region"
+
+    # estimate time between data and projections
+    em_hist2["2018"] = em_hist2["2017"] * (
+        1 + (em_hist2["2017"] - em_hist2["2016"]) / em_hist2["2016"]
+    )
+    em_hist2["2019"] = em_hist2["2018"] * (
+        1 + (em_hist2["2018"] - em_hist2["2017"]) / em_hist2["2017"]
+    )
+
+    em_hist2.columns = em_hist2.columns.astype(int)
+
+    # harmonize with historical emissions
+    hf = (
+        em_hist2.loc[:, data_end_year]
+        .divide(em.loc[:, data_end_year].groupby("Region").sum())
+        .replace(NaN, 0)
+    )
+
+    em = em.apply(lambda x: x.multiply(hf[x.name[0]]), axis=1)
+
     # CAIT data
     em_hist = (
         pd.read_csv("podi/data/emissions_historical.csv")
@@ -372,6 +463,7 @@ def emissions(
     #######################
     #  EMISSIONS TARGETS  #
     #######################
+
     em_targets = pd.read_csv(targets_em).set_index(
         ["Model", "Region", "Scenario", "Variable", "Unit"]
     )

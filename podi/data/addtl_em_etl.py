@@ -97,6 +97,149 @@ cement.index.set_names(["Region", "Sector", "Metric", "Gas", "Scenario"], inplac
 
 # endregion
 
+
+#########
+# STEEL #
+#########
+
+# region
+
+gas = pd.read_csv("podi/data/CO2_CEDS_emissions_by_sector_country_2021_02_05.csv").drop(
+    columns=["Em", "Units"]
+)
+
+gas = pd.DataFrame(gas).set_index(["Country", "Sector"]) / 1000
+
+gas.columns = gas.columns.astype(int)
+
+gas = gas.loc[slice(None), "1A2a_Ind-Comb-Iron-steel", :]
+
+region_categories = pd.read_csv(
+    "podi/data/region_categories.csv", usecols=["ISO", "IEA Region"]
+)
+
+gas = gas.merge(region_categories, right_on=["ISO"], left_on=["Country"])
+
+gas = gas.groupby("IEA Region").sum()
+
+# split into various levels of IEA regional grouping
+gas["IEA Region 1"] = gas.apply(lambda x: x.name.split()[2] + " ", axis=1)
+gas["IEA Region 2"] = gas.apply(lambda x: x.name.split()[4] + " ", axis=1)
+gas["IEA Region 3"] = gas.apply(lambda x: x.name.split()[-1] + " ", axis=1)
+
+gas.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
+
+# make new row for world level data
+gas_world = pd.DataFrame(gas.sum()).T.rename(index={0: "World "})
+
+# make new rows for OECD/NonOECD regions
+gas_oecd = pd.DataFrame(gas.groupby("IEA Region 1").sum()).rename(
+    index={"OECD ": " OECD "}
+)
+
+# make new rows for IEA regions
+gas_regions = pd.DataFrame(gas.groupby("IEA Region 2").sum())
+gas_regions2 = pd.DataFrame(gas.groupby("IEA Region 3").sum())
+
+# combine all
+gas = gas_world.append([gas_oecd, gas_regions.combine_first(gas_regions2)])
+gas.index.name = "IEA Region"
+
+gas = pd.concat([gas], keys=["CO2"], names=["Gas"]).reorder_levels(
+    ["IEA Region", "Gas"]
+)
+gas3 = pd.concat([gas], keys=["baseline"], names=["Scenario"]).reorder_levels(
+    ["IEA Region", "Gas", "Scenario"]
+)
+gas = gas3.append(
+    pd.concat([gas], keys=["pathway"], names=["Scenario"]).reorder_levels(
+        ["IEA Region", "Gas", "Scenario"]
+    )
+)
+
+# project gas emissions using percent change in industry energy demand
+
+gas_per_change = (
+    energy_demand.loc[slice(None), "Industry", "Industry", slice(None)]
+    .loc[:, 2019:]
+    .pct_change(axis=1)
+    .dropna(axis=1)
+    .apply(lambda x: x + 1, axis=1)
+    .merge(
+        gas,
+        right_on=["IEA Region", "Scenario"],
+        left_on=["IEA Region", "Scenario"],
+    )
+    .reindex(sorted(energy_demand.columns), axis=1)
+)
+
+"""
+gas_per_change = (
+    (
+        pd.concat(
+            [
+                em_baseline.loc[slice(None), slice(None), slice(None), "CO2"]
+                .groupby("Region")
+                .sum()
+                .loc[:, 2019:]
+                .pct_change(axis=1)
+                .loc[:, 2020:]
+                .dropna(axis=0)
+                .apply(lambda x: x + 1, axis=1)
+            ],
+            keys=["baseline"],
+            names=["Scenario"],
+        ).append(
+            pd.concat(
+                [
+                    em_pathway.loc[slice(None), slice(None), slice(None), "CO2"]
+                    .groupby("Region")
+                    .sum()
+                    .loc[:, 2019:]
+                    .pct_change(axis=1)
+                    .loc[:, 2020:]
+                    .dropna(axis=0)
+                    .apply(lambda x: x + 1, axis=1)
+                ],
+                keys=["pathway"],
+                names=["Scenario"],
+            )
+        )
+    )
+    .reset_index()
+    .merge(
+        gas.droplevel("Gas"),
+        right_on=["IEA Region", "Scenario"],
+        left_on=["Region", "Scenario"],
+    )
+    .set_index(["Region", "Scenario"])
+    .reindex(sorted(em_baseline.columns), axis=1)
+)
+
+gas_per_change.index.set_names(["IEA Region", "Scenario"], inplace=True)
+"""
+gas = gas_per_change.loc[:, :2019].merge(
+    gas_per_change.loc[:, 2019:].cumprod(axis=1).loc[:, 2020:],
+    right_on=["IEA Region", "Scenario"],
+    left_on=["IEA Region", "Scenario"],
+)
+
+steel = []
+
+steel = pd.DataFrame(steel).append(pd.concat([gas], keys=["steel"], names=["Metric"]))
+
+steel = pd.concat([steel], keys=["CO2"], names=["Gas"]).reorder_levels(
+    ["IEA Region", "Metric", "Gas", "Scenario"]
+)
+
+steel = pd.concat([steel], keys=["Other"], names=["Sector"]).reorder_levels(
+    ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
+)
+
+steel.index.set_names(["Region", "Sector", "Metric", "Gas", "Scenario"], inplace=True)
+
+# endregion
+
 ############
 # CH4, N2O #
 ############
@@ -526,6 +669,6 @@ gas8.index.set_names(
 # endregion
 
 # combine
-addtl_em = cement.append(gas4).append(gas5).append(gas8)
+addtl_em = cement.append(gas4).append(gas5).append(gas8).append(steel)
 
 addtl_em.to_csv("podi/data/emissions_additional.csv", index=True)

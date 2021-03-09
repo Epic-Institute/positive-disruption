@@ -24,6 +24,7 @@ from itertools import chain, zip_longest
 from math import ceil, pi, nan
 from kneed import DataGenerator, KneeLocator
 from podi.curve_smooth import curve_smooth
+from numpy import NaN
 
 unit_name = ["TWh", "EJ", "TJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00360, 3600, 0.086, 86]
@@ -221,23 +222,22 @@ if chart_type == "stacked":
         fig.update_layout(title_x=0.5, legend_traceorder="reversed")
         fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
         """
-        """
         fig.add_annotation(
-            text=annotation_source[0],
+            text="Historical data is from IEA WEO 2020, projections are based on PD21 growth rate assumptions applied to IEA WEO projections"
+            + "<br>"
+            + "for 2020-2040 and GCAM scenario x for 2040-2100",
             xref="paper",
             yref="paper",
-            x=1.1,
-            y=-0.2,
+            x=0,
+            y=-0.3,
             showarrow=False,
-            font=dict(size=11, color="#ffffff"),
-            align="center",
-            bordercolor="#c7c7c7",
-            borderwidth=2,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
             borderpad=4,
-            bgcolor="#ff7f0e",
-            opacity=0.8,
+            bgcolor="#ffffff",
+            opacity=1,
         )
-        """
+
         if show_figs is True:
             fig.show()
         if save_figs is True:
@@ -1114,404 +1114,248 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-fig_type = "plotly"
-
 for i in range(0, len(iea_region_list)):
     fig = adoption_curves.loc[iea_region_list[i]] * 100
 
-    if fig_type == "plotly":
-        fig = fig.T
-        fig.index.name = "Year"
-        fig.reset_index(inplace=True)
-        fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
 
-        fig = go.Figure()
+    fig = go.Figure()
 
-        fig.add_trace(
-            go.Scatter(
-                name="Historical",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="one",
-                legendgroup="Electricity",
-                showlegend=False,
-            )
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="one",
+            legendgroup="Electricity",
+            showlegend=False,
         )
+    )
 
-        fig.add_trace(
-            go.Scatter(
-                name="Transport",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Transport")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="two",
-                legendgroup="Transport",
-                showlegend=False,
-            )
+    fig.add_trace(
+        go.Scatter(
+            name="Transport",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Transport")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="two",
+            legendgroup="Transport",
+            showlegend=False,
         )
+    )
 
-        fig.add_trace(
-            go.Scatter(
-                name="Buildings",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Buildings")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="three",
-                legendgroup="Buildings",
-                showlegend=False,
-            )
+    fig.add_trace(
+        go.Scatter(
+            name="Buildings",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Buildings")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="three",
+            legendgroup="Buildings",
+            showlegend=False,
         )
+    )
 
-        fig.add_trace(
-            go.Scatter(
-                name="Industry",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Industry")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="four",
-                legendgroup="Industry",
-                showlegend=False,
-            )
+    fig.add_trace(
+        go.Scatter(
+            name="Industry",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Industry")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="four",
+            legendgroup="Industry",
+            showlegend=False,
         )
+    )
 
+    fig.add_trace(
+        go.Scatter(
+            name="Regenerative Agriculture",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] <= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="five",
+            legendgroup="Regenerative Agriculture",
+            showlegend=False,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Forests & Wetlands",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="six",
+            legendgroup="Forests & Wetlands",
+            showlegend=False,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Electricity",
+            line=dict(width=3, color="#B279A2", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="eight",
+            legendgroup="Electricity",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Transport",
+            line=dict(width=3, color="#7AA8B8", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Transport")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="nine",
+            legendgroup="Transport",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Buildings",
+            line=dict(width=3, color="#F58518", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Buildings")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="ten",
+            legendgroup="Buildings",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Industry",
+            line=dict(width=3, color="#60738C", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Industry")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="eleven",
+            legendgroup="Industry",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Regenerative Agriculture",
+            line=dict(width=3, color="#72B7B2", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="twelve",
+            legendgroup="Regenerative Agriculture",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Forests & Wetlands",
+            line=dict(width=3, color="#54A24B", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="thirteen",
+            legendgroup="Forests & Wetlands",
+        )
+    )
+
+    if iea_region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="Regenerative Agriculture",
+                name="Carbon Dioxide Removal",
                 line=dict(width=3, color="black"),
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
                 y=fig2[
                     (fig2["Year"] <= 2020)
-                    & (fig2["Sector"] == "Regenerative Agriculture")
+                    & (fig2["Sector"] == "Carbon Dioxide Removal")
                 ]["% Adoption"],
                 fill="none",
-                stackgroup="five",
-                legendgroup="Regenerative Agriculture",
+                stackgroup="seven",
+                legendgroup="Carbon Dioxide Removal",
                 showlegend=False,
             )
         )
 
         fig.add_trace(
             go.Scatter(
-                name="Forests & Wetlands",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[
-                    (fig2["Year"] <= 2020) & (fig2["Sector"] == "Forests & Wetlands")
-                ]["% Adoption"],
-                fill="none",
-                stackgroup="six",
-                legendgroup="Forests & Wetlands",
-                showlegend=False,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Electricity",
-                line=dict(width=3, color="#B279A2", dash="dot"),
-                x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="eight",
-                legendgroup="Electricity",
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Transport",
-                line=dict(width=3, color="#7AA8B8", dash="dot"),
-                x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Transport")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="nine",
-                legendgroup="Transport",
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Buildings",
-                line=dict(width=3, color="#F58518", dash="dot"),
-                x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Buildings")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="ten",
-                legendgroup="Buildings",
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Industry",
-                line=dict(width=3, color="#60738C", dash="dot"),
-                x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Industry")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="eleven",
-                legendgroup="Industry",
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Regenerative Agriculture",
-                line=dict(width=3, color="#72B7B2", dash="dot"),
+                name="Carbon Dioxide Removal",
+                line=dict(width=3, color="#FF9DA6", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
                 y=fig2[
                     (fig2["Year"] >= 2020)
-                    & (fig2["Sector"] == "Regenerative Agriculture")
+                    & (fig2["Sector"] == "Carbon Dioxide Removal")
                 ]["% Adoption"],
                 fill="none",
-                stackgroup="twelve",
-                legendgroup="Regenerative Agriculture",
+                stackgroup="fourteen",
+                legendgroup="Carbon Dioxide Removal",
             )
         )
 
-        fig.add_trace(
-            go.Scatter(
-                name="Forests & Wetlands",
-                line=dict(width=3, color="#54A24B", dash="dot"),
-                x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-                    "Year"
-                ],
-                y=fig2[
-                    (fig2["Year"] >= 2020) & (fig2["Sector"] == "Forests & Wetlands")
-                ]["% Adoption"],
-                fill="none",
-                stackgroup="thirteen",
-                legendgroup="Forests & Wetlands",
-            )
+    fig.update_layout(
+        title={
+            "text": "Percent of Total PD Adoption, " + iea_region_list[i],
+            "xanchor": "center",
+            "x": 0.5,
+        },
+        xaxis={"title": "Year"},
+        yaxis={"title": "% Adoption"},
+    )
+
+    """
+    fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+    """
+
+    fig.show()
+
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/scurves-" + iea_region_list[i] + ".html").replace(" ", ""),
+            auto_open=False,
         )
-
-        if iea_region_list[i] == "World ":
-            fig.add_trace(
-                go.Scatter(
-                    name="Carbon Dioxide Removal",
-                    line=dict(width=3, color="black"),
-                    x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
-                        "Year"
-                    ],
-                    y=fig2[
-                        (fig2["Year"] <= 2020)
-                        & (fig2["Sector"] == "Carbon Dioxide Removal")
-                    ]["% Adoption"],
-                    fill="none",
-                    stackgroup="seven",
-                    legendgroup="Carbon Dioxide Removal",
-                    showlegend=False,
-                )
-            )
-
-            fig.add_trace(
-                go.Scatter(
-                    name="Carbon Dioxide Removal",
-                    line=dict(width=3, color="#FF9DA6", dash="dot"),
-                    x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-                        "Year"
-                    ],
-                    y=fig2[
-                        (fig2["Year"] >= 2020)
-                        & (fig2["Sector"] == "Carbon Dioxide Removal")
-                    ]["% Adoption"],
-                    fill="none",
-                    stackgroup="fourteen",
-                    legendgroup="Carbon Dioxide Removal",
-                )
-            )
-
-        fig.update_layout(
-            title={
-                "text": "Percent of Total PD Adoption, " + iea_region_list[i],
-                "xanchor": "center",
-                "x": 0.5,
-            },
-            xaxis={"title": "Year"},
-            yaxis={"title": "% Adoption"},
-        )
-
-        """
-        fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-        """
-
-        fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=("./charts/scurves-" + iea_region_list[i] + ".html").replace(
-                    " ", ""
-                ),
-                auto_open=False,
-            )
-    else:
-        plt.figure(i)
-        plt.plot(fig.T, linestyle="--")
-        plt.plot(
-            fig.loc[:, data_start_year:data_end_year].T,
-            linestyle="-",
-            color=(0, 0, 0),
-        )
-        plt.ylabel("% Adoption")
-        plt.xlim([fig.columns.min(), fig.columns.max()])
-        plt.title("Percent of Total PD Adoption, " + iea_region_list[i])
-        plt.legend(
-            fig.index,
-            loc=2,
-            fontsize="small",
-            bbox_to_anchor=(1.05, 1),
-        )
-        plt.show()
-
-        '''
-        color = {
-            "Grid": [(0.120, 0.107, 0.155)],
-            "Transport": [(0.93, 0.129, 0.180)],
-            "Buildings": [(0.225, 0.156, 0.98)],
-            "Industry": [(0.44, 0.74, 0.114)],
-            "Regenerative Agriculture": [(0.130, 0.143, 0.81)],
-            "Forests & Wetlands": [(0.138, 0.188, 0.175)],
-            "Carbon Dioxide Removal": [(0.200, 0.156, 0.152)],
-        }
-        axis_label = [
-            "% TFC met by renewables",
-            "% Transport TFC met by electricity & bioenergy",
-            "% Buildings TFC met by electricity & renewable heat",
-            "% Industry TFC met by electricity & renewable heat",
-            "MHa",
-            "MHa",
-            "GtCO2 removed",
-        ]
-
-        for i in range(0, len(iea_region_list)):
-            for j in range(0, len(adoption_curves.loc[iea_region_list[i]].index)):
-                fig = adoption_curves.iloc[j]
-                plt.show()
-                plt.figure(j)
-                plt.plot(fig * 100, linestyle="--", color=(0.560, 0.792, 0.740))
-                plt.plot(
-                    fig.loc[data_start_year:data_end_year] * 100,
-                    linestyle="-",
-                    color=(0, 0, 0),
-                )
-                plt.ylabel("% Adoption")
-                plt.xlim([fig.index.min(), fig.index.max()])
-                plt.title(
-                    "Percent of Total PD Adoption, "
-                    + fig.name[1]
-                    + ", "
-                    + iea_region_list[i]
-                )
-
-                if save_figs is True:
-                    plt.savefig(
-                        fname=(
-                            "podi/data/figs/scurves_ind-"
-                            + fig.name[1]
-                            + "-"
-                            + iea_region_list[i]
-                        ).replace(" ", ""),
-                        format="png",
-                        bbox_inches="tight",
-                        pad_inches=0.1,
-                    )
-                plt.clf()
-
-                # Absolute values
-
-                """
-                t = adoption_curves2.columns
-                data1 = adoption_curves2.loc['Grid']
-                data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
-
-                fig, ax1 = plt.subplots(figsize=(9, 5))
-
-                color = (0.560, 0.792, 0.740)    
-                ax1.set_ylabel('% Adoption', color=color )
-                ax1.plot(t, data1, color=color, linestyle = '--')
-                ax1.tick_params(axis='y', labelcolor=color)
-                plt.grid(which="major", linestyle=":", axis="y")
-                ax2 = ax1.twinx()
-                color='tab:blue'
-                ax2.set_ylabel(axis_label[j],color=color)
-                ax2.plot(t, data2,color=color, linestyle = '--')
-                ax2.tick_params(axis='y', labelcolor=color)
-                ax1.plot(
-                    t[0 : (data_end_year - data_start_year) + 2],
-                    data1[0 : (data_end_year - data_start_year) + 2],
-                    linestyle="-",
-                    color=(0, 0, 0),
-                )
-                ax2.plot(
-                    t[0 : (data_end_year - data_start_year) + 2],
-                    data2[0 : (data_end_year - data_start_year) + 2],
-                    linestyle="-",
-                    color=(0, 0, 0),
-                )
-                plt.xlim([2010, 2100])
-                plt.suptitle(
-                    "Total PD Adoption, "
-                    + 'Grid Decarb'
-                    + ", "
-                    + iea_region_list[i]
-                )
-                plt.title('% Adoption Projected - Teal Dashed Line \n Cumulative Capacity Projected - Blue Dashed Line \n (Mismatch between lines is due to growing electrical demand)', fontsize = 9)
-                fig.tight_layout()
-                plt.savefig(
-                    (fname="podi/data/figs/scurves2_ind-"
-                    + adoption_curves2.index[j]
-                    + "-"
-                    + iea_region_list[i]).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
-                plt.show()
-                """
-        '''
 
 # endregion
 
@@ -1521,122 +1365,487 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-for i in range(0, len(iea_region_list)):
-    fig = adoption_curves.loc[iea_region_list[i]] * 100
+actual = (
+    pd.read_csv("podi/data/adoption_curves_PD20.csv")
+    .set_index(["Region", "Sector", "Units", "Scenario"])
+    .droplevel(["Region", "Units"])
+)
+actual.columns = actual.columns.astype(int)
+actual = actual.loc[:, 2015:2025] * 100
+actual.columns.name = "Year"
+
+for i in range(0, 1):
+    fig = adoption_curves.loc[iea_region_list[i]].loc[:, 2015:2025] * 100
+    fig = pd.concat([fig], keys=["PD21"], names=["Scenario"]).reorder_levels(
+        ["Sector", "Scenario"]
+    )
+
+    hf = 1 / (
+        actual.loc[:, 2018].values / (fig.loc[:, 2018].append(fig.loc[:, 2018]).values)
+    )
+
+    actual = actual.multiply(hf, axis=0)
+
+    fig = fig.append(actual)
 
     fig = fig.T
     fig.index.name = "Year"
     fig.reset_index(inplace=True)
-    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
-    fig = px.line(
-        fig2,
-        x="Year",
-        y="% Adoption",
-        line_group="Sector",
-        color="Sector",
-        color_discrete_sequence=px.colors.qualitative.T10,
-        title="Percent of Total PD Adoption, " + iea_region_list[i],
-        hover_data={"% Adoption": ":.0f"},
+    fig2 = pd.melt(
+        fig, id_vars="Year", var_name=["Sector", "Scenario"], value_name="% Adoption"
     )
-    fig.update_layout(title_x=0.5)
-    fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-    fig.show()
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=("./charts/scurves-" + iea_region_list[i] + ".html").replace(" ", ""),
-            auto_open=False,
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] <= 2020)
+                & (fig2["Sector"] == "Electricity")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="one",
+            legendgroup="Electricity",
+            showlegend=False,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Transport",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] <= 2020)
+                & (fig2["Sector"] == "Transport")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="two",
+            legendgroup="Transport",
+            showlegend=False,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Buildings",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] <= 2020)
+                & (fig2["Sector"] == "Buildings")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="three",
+            legendgroup="Buildings",
+            showlegend=False,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Industry",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] <= 2020)
+                & (fig2["Sector"] == "Industry")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="four",
+            legendgroup="Industry",
+            showlegend=False,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Regenerative Agriculture",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] <= 2020)
+                & (fig2["Sector"] == "Regenerative Agriculture")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="five",
+            legendgroup="Regenerative Agriculture",
+            showlegend=False,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Forests & Wetlands",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] <= 2020)
+                & (fig2["Sector"] == "Forests & Wetlands")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="six",
+            legendgroup="Forests & Wetlands",
+            showlegend=False,
+        )
+    )
+
+    # PD21
+
+    # region
+
+    fig.add_trace(
+        go.Scatter(
+            name="Electricity PD21",
+            line=dict(width=3, color="#B279A2", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2020)
+                & (fig2["Sector"] == "Electricity")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="eight",
+            legendgroup="Electricity",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Transport PD21",
+            line=dict(width=3, color="#7AA8B8", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2020)
+                & (fig2["Sector"] == "Transport")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="nine",
+            legendgroup="Transport",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Buildings PD21",
+            line=dict(width=3, color="#F58518", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2020)
+                & (fig2["Sector"] == "Buildings")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="ten",
+            legendgroup="Buildings",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Industry PD21",
+            line=dict(width=3, color="#60738C", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2020)
+                & (fig2["Sector"] == "Industry")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="eleven",
+            legendgroup="Industry",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Regenerative Agriculture PD21",
+            line=dict(width=3, color="#72B7B2", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2020)
+                & (fig2["Sector"] == "Regenerative Agriculture")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="twelve",
+            legendgroup="Regenerative Agriculture",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Forests & Wetlands PD21",
+            line=dict(width=3, color="#54A24B", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2020)
+                & (fig2["Sector"] == "Forests & Wetlands")
+                & (fig2["Scenario"] == "PD21")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="thirteen",
+            legendgroup="Forests & Wetlands",
+        )
+    )
+
+    # endregion
+
+    # PD20
+
+    # region
+
+    fig.add_trace(
+        go.Scatter(
+            name="Electricity PD20",
+            line=dict(width=3, color="#B279A2", dash="dashdot"),
+            x=fig2[(fig2["Year"] >= 2018) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2018)
+                & (fig2["Sector"] == "Electricity")
+                & (fig2["Scenario"] == "PD20")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="14",
+            legendgroup="Electricity",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Transport PD20",
+            line=dict(width=3, color="#7AA8B8", dash="dashdot"),
+            x=fig2[(fig2["Year"] >= 2018) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2018)
+                & (fig2["Sector"] == "Transport")
+                & (fig2["Scenario"] == "PD20")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="15",
+            legendgroup="Transport",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Buildings PD20",
+            line=dict(width=3, color="#F58518", dash="dashdot"),
+            x=fig2[(fig2["Year"] >= 2018) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2018)
+                & (fig2["Sector"] == "Buildings")
+                & (fig2["Scenario"] == "PD20")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="16",
+            legendgroup="Buildings",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Industry PD20",
+            line=dict(width=3, color="#60738C", dash="dashdot"),
+            x=fig2[(fig2["Year"] >= 2018) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2018)
+                & (fig2["Sector"] == "Industry")
+                & (fig2["Scenario"] == "PD20")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="17",
+            legendgroup="Industry",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Regenerative Agriculture PD20",
+            line=dict(width=3, color="#72B7B2", dash="dashdot"),
+            x=fig2[(fig2["Year"] >= 2018) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2018)
+                & (fig2["Sector"] == "Regenerative Agriculture")
+                & (fig2["Scenario"] == "PD20")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="18",
+            legendgroup="Regenerative Agriculture",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Forests & Wetlands PD20",
+            line=dict(width=3, color="#54A24B", dash="dashdot"),
+            x=fig2[(fig2["Year"] >= 2018) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2018)
+                & (fig2["Sector"] == "Forests & Wetlands")
+                & (fig2["Scenario"] == "PD20")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="19",
+            legendgroup="Forests & Wetlands",
+        )
+    )
+
+    # endregion
+
+    # PD17
+    """
+    # region
+
+    fig.add_trace(
+        go.Scatter(
+            name="Electricity PD17",
+            line=dict(width=3, color="#B279A2", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Electricity") & (fig2["Scenario"] == "PD17")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="20",
+            legendgroup="Electricity",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Transport PD17",
+            line=dict(width=3, color="#7AA8B8", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Transport") & (fig2["Scenario"] == "PD17")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="21",
+            legendgroup="Transport",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Buildings PD17",
+            line=dict(width=3, color="#F58518", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Buildings") & (fig2["Scenario"] == "PD17")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="22",
+            legendgroup="Buildings",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Industry PD17",
+            line=dict(width=3, color="#60738C", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Industry") & (fig2["Scenario"] == "PD17")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="23",
+            legendgroup="Industry",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Regenerative Agriculture PD17",
+            line=dict(width=3, color="#72B7B2", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2016) & (fig2["Sector"] == "Regenerative Agriculture") & (fig2["Scenario"] == "PD17")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="24",
+            legendgroup="Regenerative Agriculture",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Forests & Wetlands PD17",
+            line=dict(width=3, color="#54A24B", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Forests & Wetlands") & (fig2["Scenario"] == "PD17")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="25",
+            legendgroup="Forests & Wetlands",
+        )
+    )
+
+    # endregion
+    """
+    """
+    if iea_region_list[i] == "World ":
+        fig.add_trace(
+            go.Scatter(
+                name="Carbon Dioxide Removal",
+                line=dict(width=3, color="black"),
+                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
+                    "Year"
+                ],
+                y=fig2[
+                    (fig2["Year"] <= 2020)
+                    & (fig2["Sector"] == "Carbon Dioxide Removal")
+                ]["% Adoption"],
+                fill="none",
+                stackgroup="seven",
+                legendgroup="Carbon Dioxide Removal",
+                showlegend=False,
+            )
         )
 
-    plt.show()
-
-    '''
-    for i in range(0, len(iea_region_list)):
-        for j in range(0, len(adoption_curves.loc[iea_region_list[i]].index)):
-            fig = adoption_curves.iloc[j]
-            plt.show()
-            plt.figure(j)
-            plt.plot(fig * 100, linestyle="--", color=(0.560, 0.792, 0.740))
-            plt.plot(
-                fig.loc[data_start_year:data_end_year] * 100,
-                linestyle="-",
-                color=(0, 0, 0),
+        fig.add_trace(
+            go.Scatter(
+                name="Carbon Dioxide Removal",
+                line=dict(width=3, color="#FF9DA6", dash="dot"),
+                x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
+                    "Year"
+                ],
+                y=fig2[
+                    (fig2["Year"] >= 2020)
+                    & (fig2["Sector"] == "Carbon Dioxide Removal")
+                ]["% Adoption"],
+                fill="none",
+                stackgroup="fourteen",
+                legendgroup="Carbon Dioxide Removal",
             )
-            plt.ylabel("% Adoption")
-            plt.xlim([fig.index.min(), fig.index.max()])
-            plt.title(
-                "Percent of Total PD Adoption, "
-                + fig.name[1]
-                + ", "
-                + iea_region_list[i]
-            )
+        )
+    """
 
-            if save_figs is True:
-                plt.savefig(
-                    fname=(
-                        "podi/data/figs/scurves_ind-"
-                        + fig.name[1]
-                        + "-"
-                        + iea_region_list[i]
-                    ).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
-            plt.clf()
+    fig.update_layout(
+        title={
+            "text": "Percent of Total PD Adoption, " + iea_region_list[i],
+            "xanchor": "center",
+            "x": 0.5,
+        },
+        xaxis={"title": "Year"},
+        yaxis={"title": "% Adoption"},
+    )
 
-                # Absolute values
+    """
+    fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+    """
 
-                """
-                t = adoption_curves2.columns
-                data1 = adoption_curves2.loc['Grid']
-                data2 = elec_consump_pathway.loc[iea_region_list, ['Biomass and Waste', 'Geothermal','Hydroelectricity','Nuclear','Solar','Tide and Wave','Wind'],:].sum()
-
-                fig, ax1 = plt.subplots(figsize=(9, 5))
-
-                color = (0.560, 0.792, 0.740)    
-                ax1.set_ylabel('% Adoption', color=color )
-                ax1.plot(t, data1, color=color, linestyle = '--')
-                ax1.tick_params(axis='y', labelcolor=color)
-                plt.grid(which="major", linestyle=":", axis="y")
-                ax2 = ax1.twinx()
-                color='tab:blue'
-                ax2.set_ylabel(axis_label[j],color=color)
-                ax2.plot(t, data2,color=color, linestyle = '--')
-                ax2.tick_params(axis='y', labelcolor=color)
-                ax1.plot(
-                    t[0 : (data_end_year - data_start_year) + 2],
-                    data1[0 : (data_end_year - data_start_year) + 2],
-                    linestyle="-",
-                    color=(0, 0, 0),
-                )
-                ax2.plot(
-                    t[0 : (data_end_year - data_start_year) + 2],
-                    data2[0 : (data_end_year - data_start_year) + 2],
-                    linestyle="-",
-                    color=(0, 0, 0),
-                )
-                plt.xlim([2010, 2100])
-                plt.suptitle(
-                    "Total PD Adoption, "
-                    + 'Grid Decarb'
-                    + ", "
-                    + iea_region_list[i]
-                )
-                plt.title('% Adoption Projected - Teal Dashed Line \n Cumulative Capacity Projected - Blue Dashed Line \n (Mismatch between lines is due to growing electrical demand)', fontsize = 9)
-                fig.tight_layout()
-                plt.savefig(
-                    (fname="podi/data/figs/scurves2_ind-"
-                    + adoption_curves2.index[j]
-                    + "-"
-                    + iea_region_list[i]).replace(" ", ""),
-                    format="png",
-                    bbox_inches="tight",
-                    pad_inches=0.1,
-                )
-                plt.show()
-                """
-        '''
+    fig.show()
 
 # endregion
 
@@ -2770,7 +2979,7 @@ for i in range(0, len(iea_region_list)):
 fig_type = "plotly"
 
 ndcs = [
-    (3, 3),
+    [(2030, 2050), (25, 0)],
     (3, 3),
     (2025, 4.86),
     (3, 3),
@@ -3104,7 +3313,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="PD21",
+            name="PD21-DAU",
             line=dict(width=2, color="green", dash="dot"),
             x=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].index.values),
             y=pd.Series(spacer.loc[near_proj_start_year:].values / 1000),
@@ -3129,6 +3338,25 @@ for i in range(0, len(iea_region_list)):
             stackgroup="six",
         )
     )
+
+    if iea_region_list[i] in ["World "]:
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][0]],
+                y=[ndcs[i][1][0]],
+                marker_color="#FF7F0E",
+                name="50% reduction by 2030",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][1]],
+                y=[ndcs[i][1][1]],
+                marker_color="#FC0080",
+                name="Net-zero by 2050",
+            )
+        )
 
     if iea_region_list[i] in [
         "US ",
