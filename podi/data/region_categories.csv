@@ -239,7 +239,7 @@ Viet Nam,,DevelopingECO | NonOECD | ASIAPAC | ASEAN ,vnm,Indonesia,Rest of world
 Wake Island,,AdvancedECO | NonOECD | Other ,,Rest of the world,Rest of world,,OTH,Other,,,,
 Wallis and Futuna Island,,DevelopingECO | NonOECD | Other ,,Rest of the world,Rest of world, OECD ,OTH,Other,World ,,,
 Western Sahara,,DevelopingECO | NonOECD | AFRICA ,esh,Sub-Saharan AFRICA,Rest of world,MAF | NAF ,NAF,Other,MAF ,,ESH,
-World ,World ,World | World | World,,World,World ,World ,World ,World,World ,,,World 
+World ,World,World | World | World,,World,World ,World ,World ,World,World ,,,World 
 Yemen,,DevelopingECO | NonOECD | ME ,yem,MENA,META | MENA ,MAF | MEA-M ,MEA-M,Yemen,MAF ,Yemen,YEM,Yemen
 Zambia,,DevelopingECO | NonOECD | AFRICA ,zmb,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,Zambia,MAF ,Zambia,ZMB,Zambia
 Zimbabwe,,DevelopingECO | NonOECD | AFRICA ,zwe,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,Zimbabwe, ,Zimbabwe,ZWE,Zimbabwe
@@ -249,4 +249,4 @@ Zimbabwe,,DevelopingECO | NonOECD | AFRICA ,zwe,Sub-Saharan AFRICA,META | Sub-Sa
 ,Non-OECD Asia (including China),DevelopingECO | NonOECD | ASIAPAC ,,,,,,,,,,
 ,Non-OECD Europe and Eurasia,DevelopingECO | NonOECD | EURASIA ,,,,,,,,,,
 ,Middle East,DevelopingECO | NonOECD | ME ,,,,,,,,,,
-,OECD,AdvancedECO | OECD  ,,,,,,,,,,
+,OECD Total,AdvancedECO | OECD  ,,,,,,,,,,

@@ -32,6 +32,7 @@ import numpy as np
 from pandas_profiling import ProfileReport
 import streamlit as st
 from podi.adoption_curve import adoption_curve
+from podi.energy_demand_hist import energy_demand_hist
 
 pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()
@@ -70,6 +71,8 @@ energy_demand_pathway = energy_demand(
 )
 
 energy_demand = energy_demand_baseline.append(energy_demand_pathway)
+
+energy_demand_hist = energy_demand_hist(energy_demand_baseline)
 
 # endregion
 
@@ -117,6 +120,19 @@ transport_per_adoption = transport_per_adoption_baseline.append(
     transport_per_adoption_pathway
 )
 # transport_consump_cdr = transport_consump_cdr_baseline.append(transport_consump_cdr_pathway)
+
+
+(
+    elec_consump_hist,
+    elec_per_adoption_hist,
+    elec_consump_cdr_hist,
+    heat_consump_hist,
+    heat_per_adoption_hist,
+    heat_consump_cdr_hist,
+    transport_consump_hist,
+    transport_per_adoption_hist,
+    transport_consump_cdr_hist,
+) = energy_supply("baseline", energy_demand_hist)
 
 # endregion
 
