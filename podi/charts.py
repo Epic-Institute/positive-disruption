@@ -127,7 +127,7 @@ if chart_type == "stacked":
                     "Industry-Electricity",
                 ]
             )
-        )
+        ).loc[:, data_start_year:long_proj_end_year]
         fig = fig.T
         fig.index.name = "Year"
         fig.reset_index(inplace=True)
@@ -216,7 +216,7 @@ if chart_type == "stacked":
             yaxis={"title": "TFC, " + unit[0]},
         )
 
-        fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+        fig.add_vrect(x0=1995, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
 
         """
         fig.update_layout(title_x=0.5, legend_traceorder="reversed")
@@ -473,7 +473,7 @@ if chart_type == "stacked":
         fig = (
             pd.DataFrame(
                 (elec_consump_i.append(heat_consump_i).append(transport_consump_i)).loc[
-                    :, 2010:2100
+                    :, data_start_year:2100
                 ]
             )
             * unit[1]
@@ -633,7 +633,9 @@ if chart_type == "stacked":
                 yaxis={"title": "TFC, " + unit[0]},
             )
 
-            fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
+            fig.add_vrect(
+                x0=data_start_year, x1=2019, fillcolor="grey", opacity=0.6, line_width=0
+            )
 
             if show_figs is True:
                 fig.show()
@@ -2159,7 +2161,7 @@ pd20 = pd20.loc["World ", "Global CO2 Equivalent Emissions", slice(None)].apply(
 )
 
 scenario = "baseline"
-start_year = 2019
+start_year = 1990
 
 for i in range(0, len(iea_region_list)):
     if scenario == "baseline":
@@ -2981,7 +2983,7 @@ fig_type = "plotly"
 ndcs = [
     [(2030, 2050), (25, 0)],
     (3, 3),
-    (2025, 4.86),
+    [(2025, 2050), (4.86, 2.84)],
     (3, 3),
     (2030, 1.2),
     (3, 3),
@@ -3339,13 +3341,13 @@ for i in range(0, len(iea_region_list)):
         )
     )
 
-    if iea_region_list[i] in ["World "]:
+    if iea_region_list[i] in ["World ", 'US ']:
         fig.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][0]],
                 y=[ndcs[i][1][0]],
                 marker_color="#FF7F0E",
-                name="50% reduction by 2030",
+                name="2030 Target",
             )
         )
 
@@ -3354,12 +3356,11 @@ for i in range(0, len(iea_region_list)):
                 x=[ndcs[i][0][1]],
                 y=[ndcs[i][1][1]],
                 marker_color="#FC0080",
-                name="Net-zero by 2050",
+                name="2050 Target",
             )
         )
 
     if iea_region_list[i] in [
-        "US ",
         "SAFR ",
         "RUS ",
         "JPN ",

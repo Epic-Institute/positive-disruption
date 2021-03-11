@@ -33,6 +33,7 @@ from pandas_profiling import ProfileReport
 import streamlit as st
 from podi.adoption_curve import adoption_curve
 from podi.energy_demand_hist import energy_demand_hist
+from numpy import NaN
 
 pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()
@@ -72,7 +73,9 @@ energy_demand_pathway = energy_demand(
 
 energy_demand = energy_demand_baseline.append(energy_demand_pathway)
 
+# Toggle for energy hist data further than 2010
 energy_demand_hist = energy_demand_hist(energy_demand_baseline)
+energy_demand = energy_demand_hist.join(energy_demand.loc[:, 2019:]).replace(NaN, 0)
 
 # endregion
 
@@ -95,7 +98,9 @@ params.to_csv("podi/data/params.csv", index=False)
     transport_consump_baseline,
     transport_per_adoption_baseline,
     transport_consump_cdr_baseline,
-) = energy_supply("baseline", energy_demand_baseline)
+) = energy_supply(
+    "baseline", energy_demand.loc[slice(None), slice(None), slice(None), ["baseline"]]
+)
 
 (
     elec_consump_pathway,
@@ -107,7 +112,9 @@ params.to_csv("podi/data/params.csv", index=False)
     transport_consump_pathway,
     transport_per_adoption_pathway,
     transport_consump_cdr_pathway,
-) = energy_supply("pathway", energy_demand_pathway)
+) = energy_supply(
+    "pathway", energy_demand.loc[slice(None), slice(None), slice(None), ["pathway"]]
+)
 
 elec_consump = elec_consump_baseline.append(elec_consump_pathway)
 elec_per_adoption = elec_per_adoption_baseline.append(elec_per_adoption_pathway)
@@ -121,7 +128,7 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 )
 # transport_consump_cdr = transport_consump_cdr_baseline.append(transport_consump_cdr_pathway)
 
-
+"""
 (
     elec_consump_hist,
     elec_per_adoption_hist,
@@ -133,7 +140,7 @@ transport_per_adoption = transport_per_adoption_baseline.append(
     transport_per_adoption_hist,
     transport_consump_cdr_hist,
 ) = energy_supply("baseline", energy_demand_hist)
-
+"""
 # endregion
 
 #########
@@ -173,7 +180,7 @@ podi.data.iea_weo_em_etl
 
 em_baseline, em_targets_baseline, em_hist = emissions(
     "baseline",
-    energy_demand_baseline,
+    energy_demand.loc[slice(None), slice(None), slice(None), ["baseline"]],
     elec_consump_baseline,
     heat_consump_baseline,
     heat_per_adoption_baseline,
@@ -185,7 +192,7 @@ em_baseline, em_targets_baseline, em_hist = emissions(
 
 em_pathway, em_targets_pathway, em_hist = emissions(
     "pathway",
-    energy_demand_pathway,
+    energy_demand.loc[slice(None), slice(None), slice(None), ["pathway"]],
     elec_consump_pathway,
     heat_consump_pathway,
     heat_per_adoption_pathway,
@@ -217,12 +224,13 @@ cdr_needed = (
     )
     .clip(lower=1)
     .T
-)
+).loc[:, 2010:]
 cdr_needed.rename(index={0: "World "}, inplace=True)
 
 cdr_pathway = []
 
 for i in range(0, 1):
+    '''
     cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
         cdr_needed.loc[iea_region_list[i]].to_list(),
         grid_em_def,
@@ -264,19 +272,19 @@ for i in range(0, 1):
     ).apply(lambda x: x.multiply(cdr_pathway.values[0]), axis=1)
 
     # cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 3)
-
+    '''
     cdr_pathway = (
         1 - transport_per_adoption_pathway.loc["World ", "Fossil fuels"]
     ).rename(index={"pathway": "Carbon Dioxide Removal"}).apply(
         adoption_curve, axis=1, args=(["World ", "pathway"]), sector="All"
     )[
         0
-    ] * cdr_pathway.loc[
+    ] * cdr_needed.loc[
         "World "
     ].max()
 
 # check if energy oversupply is at least energy demand needed for CDR
-
+"""
 if (
     sum(
         elec_consump_cdr_pathway,
@@ -285,7 +293,7 @@ if (
     > cdr_energy_pathway
 ):
     print("Electricity oversupply does not meet CDR energy demand for pathway Scenario")
-
+"""
 # endregion
 
 ###########

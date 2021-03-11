@@ -25,6 +25,7 @@ energy_oversupply_prop = 0.0
 
 
 def energy_supply(scenario, energy_demand):
+
     # region
 
     parameters = pd.read_csv("podi/data/tech_parameters.csv").set_index(

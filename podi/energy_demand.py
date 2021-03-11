@@ -7,7 +7,7 @@ from podi.curve_smooth import curve_smooth
 import numpy as np
 from numpy import NaN
 
-data_start_year = 2010
+data_start_year = 1990
 data_end_year = 2019
 
 iea_region_list = (

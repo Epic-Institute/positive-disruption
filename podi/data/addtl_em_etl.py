@@ -97,7 +97,6 @@ cement.index.set_names(["Region", "Sector", "Metric", "Gas", "Scenario"], inplac
 
 # endregion
 
-
 #########
 # STEEL #
 #########
@@ -248,7 +247,7 @@ steel.index.set_names(["Region", "Sector", "Metric", "Gas", "Scenario"], inplace
 
 data = {
     "CH4": "podi/data/CH4_CEDS_emissions_by_sector_country_2021_02_05.csv",
-    "N2O": "podi/data/N2O_CEDS_emissions_by_sector_country_2021_02_05.csv",
+    "N2O": "podi/data/N2O_CEDS_emissions_by_sector_country_2021_02_05.
 }
 
 gas4 = []
@@ -260,6 +259,20 @@ for gas2 in ["CH4"]:
 
     gas.columns = gas.columns.astype(int)
 
+    gas_elec = gas.loc[slice(None), '1A1a_Electricity-autoproducer', '1A1a_Electricity-public', '1A1a_Heat-production', '1A1bc_Other-transformation', '1B1_Fugitive-solid-fuels', '1B2_Fugitive-petr', '1B2b_Fugitive-NG-distr', '1B2b_Fugitive-NG-prod', '1B2d_Fugitive-other-energy'], :]
+
+    gas_ind = gas.loc[slice(None), ['1A2a_Ind-Comb-Iron-steel', '1A2b_Ind-Comb-Non-ferrous-metals', '1A2c_Ind-Comb-Chemicals', '1A2d_Ind-Comb-Pulp-paper', '1A2e_Ind-Comb-Food-tobacco', '1A2f_Ind-Comb-Non-metalic-minerals', '1A2g_Ind-Comb-Construction', '1A2g_Ind-Comb-machinery', '1A2g_Ind-Comb-mining-quarying', '1A2g_Ind-Comb-other', '1A2g_Ind-Comb-textile-leather', '1A2g_Ind-Comb-transpequip', '1A2g_Ind-Comb-wood-products', '1A5_Other-unspecified', '2A1_Cement-production', '2A2_Lime-production', '2Ax_Other-minerals', '2B_Chemical-industry', '2B2_Chemicals-Nitric-acid', '2B3_Chemicals-Adipic-acid', '2C_Metal-production', '2D_Chemical-products-manufacture-processing', '2D_Degreasing-Cleaning', '2D_Other-product-use', '2D_Paint-application', '2H_Pulp-and-paper-food-beverage-wood', '2L_Other-process-emissions', '5A_Solid-waste-disposal', '5C_Waste-combustion', '5D_Wastewater-handling', '5E_Other-waste-handling', '6A_Other-in-total', '6B_Other-not-in-total', '7A_Fossil-fuel-fires', '7BC_Indirect-N2O-non-agricultural-N', :]
+
+    gas_trans = gas.loc[slice(None), ['1A3b_Road', '1A3c_Rail', '1A3di_Oil_Tanker_Loading', '1A3dii_Domestic-navigation', '1A3eii_Other-transp'], :]
+
+    gas_b = gas.loc[slice(None), ['1A4a_Commercial-institutional','1A4b_Residential'], :]
+
+    gas_ag = gas.loc[slice(None),['3B_Manure-management', '3D_Rice-Cultivation', '3D_Soil-emissions', '3E_Enteric-fermentation', '3I_Agriculture-other'], :]
+
+    gas_fw = pd.read_csv('podi/data/emissions_fw_historical.csv').set_index(['Region', 'Sector', 'Gas', 'Unit']).droplevel('Unit').groupby(['Region','Sector']).sum()
+
+    gas_en = gas_elec.append(gas_ind).append(gas_trans).append(gas_b)
+
     region_categories = pd.read_csv(
         "podi/data/region_categories.csv", usecols=["ISO", "IEA Region"]
     )
@@ -268,40 +281,44 @@ for gas2 in ["CH4"]:
 
     gas = gas.groupby("IEA Region").sum()
 
-    # split into various levels of IEA regional grouping
-    gas["IEA Region 1"] = gas.apply(lambda x: x.name.split()[2] + " ", axis=1)
-    gas["IEA Region 2"] = gas.apply(lambda x: x.name.split()[4] + " ", axis=1)
-    gas["IEA Region 3"] = gas.apply(lambda x: x.name.split()[-1] + " ", axis=1)
+    def ieagroup(gas):
 
-    gas.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
+        # split into various levels of IEA regional grouping
+        gas["IEA Region 1"] = gas.apply(lambda x: x.name.split()[2] + " ", axis=1)
+        gas["IEA Region 2"] = gas.apply(lambda x: x.name.split()[4] + " ", axis=1)
+        gas["IEA Region 3"] = gas.apply(lambda x: x.name.split()[-1] + " ", axis=1)
 
-    # make new row for world level data
-    gas_world = pd.DataFrame(gas.sum()).T.rename(index={0: "World "})
+        gas.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
 
-    # make new rows for OECD/NonOECD regions
-    gas_oecd = pd.DataFrame(gas.groupby("IEA Region 1").sum()).rename(
-        index={"OECD ": " OECD "}
-    )
+        # make new row for world level data
+        gas_world = pd.DataFrame(gas.sum()).T.rename(index={0: "World "})
 
-    # make new rows for IEA regions
-    gas_regions = pd.DataFrame(gas.groupby("IEA Region 2").sum())
-    gas_regions2 = pd.DataFrame(gas.groupby("IEA Region 3").sum())
+        # make new rows for OECD/NonOECD regions
+        gas_oecd = pd.DataFrame(gas.groupby("IEA Region 1").sum()).rename(
+            index={"OECD ": " OECD "}
+        )
 
-    # combine all
-    gas = gas_world.append([gas_oecd, gas_regions.combine_first(gas_regions2)])
-    gas.index.name = "IEA Region"
+        # make new rows for IEA regions
+        gas_regions = pd.DataFrame(gas.groupby("IEA Region 2").sum())
+        gas_regions2 = pd.DataFrame(gas.groupby("IEA Region 3").sum())
 
-    gas = pd.concat([gas], keys=[str(gas2)], names=["Gas"]).reorder_levels(
-        ["IEA Region", "Gas"]
-    )
-    gas3 = pd.concat([gas], keys=["baseline"], names=["Scenario"]).reorder_levels(
-        ["IEA Region", "Gas", "Scenario"]
-    )
-    gas = gas3.append(
-        pd.concat([gas], keys=["pathway"], names=["Scenario"]).reorder_levels(
+        # combine all
+        gas = gas_world.append([gas_oecd, gas_regions.combine_first(gas_regions2)])
+        gas.index.name = "IEA Region"
+
+        gas = pd.concat([gas], keys=[str(gas2)], names=["Gas"]).reorder_levels(
+            ["IEA Region", "Gas"]
+        )
+        gas3 = pd.concat([gas], keys=["baseline"], names=["Scenario"]).reorder_levels(
             ["IEA Region", "Gas", "Scenario"]
         )
-    )
+        gas = gas3.append(
+            pd.concat([gas], keys=["pathway"], names=["Scenario"]).reorder_levels(
+                ["IEA Region", "Gas", "Scenario"]
+            )
+        )
+        
+        return gas
 
     # project gas emissions using percent change in industry energy demand
 

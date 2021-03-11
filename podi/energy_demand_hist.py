@@ -42,29 +42,28 @@ def energy_demand_hist(energy_demand_baseline):
 
     # Load energy demand historical data (ktoe)
     demand = (
-        pd.read_csv("podi/data/energy_demand_historical_IEA.csv")
+        pd.read_csv("podi/data/energy_demand_historical_IEA (copy).csv")
         .set_index(["WEB Region", "Sector", "Metric"])
         .replace("..", 0)
     )
 
     demand = demand.loc[
         slice(None),
+        ["Industry", "Transport", "Buildings", "Other", "TFC"],
         [
-            "Industry (ktoe)",
-            "Transport (ktoe)",
-            "Commercial and public services (ktoe)",
-            "Residential (ktoe)",
-            "Other final consumption (ktoe)",
-        ],
-        [
-            "Coal, peat, and oil shale",
-            "Crude, NGL and feedstocks",
-            "Oil products",
+            "Coal",
+            "Oil",
             "Natural gas",
             "Nuclear",
-            "Renewables and waste",
+            "Other renewables",
             "Electricity",
             "Heat",
+            "Total final consumption",
+            "Industry",
+            "Transport",
+            "Buildings",
+            "Other fuels",
+            "Bioenergy",
         ],
         :,
     ]
@@ -81,6 +80,7 @@ def energy_demand_hist(energy_demand_baseline):
 
     demand = demand.astype(float) * 1 / 0.086
 
+    """
     # combine residential and commercial
 
     demand_b = (
@@ -101,23 +101,23 @@ def energy_demand_hist(energy_demand_baseline):
         slice(None),
         :,
     ].append(demand_b.reorder_levels(["WEB Region", "Sector", "Metric"]))
-
+    """
     # Reallocate 'Other' energy demand from ag/non-energy use to industry heat
 
     demand_i = (
         demand.loc[
             slice(None),
-            ["Other final consumption (ktoe)", "Industry (ktoe)"],
+            ["Other", "Industry"],
             slice(None),
         ]
         .groupby(["WEB Region", "Metric"])
         .sum()
     )
 
-    demand_i = pd.concat([demand_i], keys=["Industry (ktoe)"], names=["Sector"])
+    demand_i = pd.concat([demand_i], keys=["Industry"], names=["Sector"])
 
     demand = demand.loc[
-        slice(None), ["Transport (ktoe)", "Buildings"], slice(None), :
+        slice(None), ["Transport", "Buildings", "TFC"], slice(None), :
     ].append(demand_i.reorder_levels(["WEB Region", "Sector", "Metric"]))
 
     # Reallocate heat demand within industry
@@ -125,25 +125,25 @@ def energy_demand_hist(energy_demand_baseline):
     demand_h = (
         demand.loc[
             slice(None),
-            "Industry (ktoe)",
+            "Industry",
             [
-                "Coal, peat and oil shale",
-                "Oil products",
+                "Coal",
+                "Oil",
                 "Natural gas",
                 "Heat",
-                "Renewables and waste",
+                "Other renewables",
             ],
         ]
         .groupby(["WEB Region", "Metric"])
         .sum()
     )
 
-    demand_h = pd.concat([demand_h], keys=["Industry (ktoe)"], names=["Sector"])
+    demand_h = pd.concat([demand_h], keys=["Industry"], names=["Sector"])
 
     demand = (
-        demand.loc[slice(None), ["Transport (ktoe)", "Buildings"], slice(None), :]
+        demand.loc[slice(None), ["Transport", "Buildings", "TFC"], slice(None), :]
         .append(demand_h.reorder_levels(["WEB Region", "Sector", "Metric"]))
-        .append(demand.loc[slice(None), ["Industry (ktoe)"], ["Electricity"], :])
+        .append(demand.loc[slice(None), ["Industry"], ["Electricity"], :])
     )
 
     # Reallocate heat demand within buildings
@@ -153,11 +153,11 @@ def energy_demand_hist(energy_demand_baseline):
             slice(None),
             "Buildings",
             [
-                "Coal, peat and oil shale",
-                "Oil products",
+                "Coal",
+                "Oil",
                 "Natural gas",
                 "Heat",
-                "Renewables and waste",
+                "Other renewables",
             ],
         ]
         .groupby(["WEB Region", "Metric"])
@@ -167,7 +167,7 @@ def energy_demand_hist(energy_demand_baseline):
     demand_b = pd.concat([demand_b], keys=["Buildings"], names=["Sector"])
 
     demand = (
-        demand.loc[slice(None), ["Transport (ktoe)", "Industry (ktoe)"], slice(None), :]
+        demand.loc[slice(None), ["Transport", "Industry", "TFC"], slice(None), :]
         .append(demand_b.reorder_levels(["WEB Region", "Sector", "Metric"]))
         .append(demand.loc[slice(None), ["Buildings"], ["Electricity"], :])
     )
@@ -177,9 +177,9 @@ def energy_demand_hist(energy_demand_baseline):
     #################################################
     #  COMBINE, RECALCULATE SECTOR & END-USE DEMAND #
     #################################################
-    """
-    # region
 
+    # region
+    """
     demand.loc[slice(None), "Industry", "Industry"] = (
         (
             demand.loc[slice(None), "Industry", ["Electricity", "Heat"]].groupby(
@@ -211,10 +211,10 @@ def energy_demand_hist(energy_demand_baseline):
         .sum()
         .values
     )
-
-    energy_demand.loc[slice(None), "TFC", "Electricity"] = (
+    """
+    demand.loc[slice(None), "TFC", "Electricity"] = (
         (
-            energy_demand.loc[
+            demand.loc[
                 slice(None), ["Industry", "Buildings", "Transport"], ["Electricity"]
             ].groupby("WEB Region")
         )
@@ -222,9 +222,9 @@ def energy_demand_hist(energy_demand_baseline):
         .values
     )
 
-    energy_demand.loc[slice(None), "TFC", "Heat"] = (
+    demand.loc[slice(None), "TFC", "Heat"] = (
         (
-            energy_demand.loc[
+            demand.loc[
                 slice(None), ["Industry", "Buildings", "Transport"], ["Heat"]
             ].groupby("WEB Region")
         )
@@ -232,9 +232,9 @@ def energy_demand_hist(energy_demand_baseline):
         .values
     )
 
-    energy_demand.loc[slice(None), "TFC", "Total final consumption"] = (
+    demand.loc[slice(None), "TFC", "Total final consumption"] = (
         (
-            energy_demand.loc[
+            demand.loc[
                 slice(None),
                 ["Industry", "Buildings", "Transport"],
                 ["Industry", "Buildings", "Transport"],
@@ -245,19 +245,23 @@ def energy_demand_hist(energy_demand_baseline):
     )
 
     # endregion
-    """
+
     #############################
     #  REGROUP INTO IEA REGIONS #
     #############################
 
     # region
-    """
-    region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=["WEB Region", "IEA Region"]
-    ).dropna().set_index('WEB Region')
+
+    region_categories = (
+        pd.read_csv(
+            "podi/data/region_categories.csv", usecols=["WEB Region", "IEA Region"]
+        )
+        .dropna()
+        .set_index("WEB Region")
+    )
 
     demand = demand.combine_first(region_categories)
-
+    """
     demand = demand.droplevel('WEB Region').reset_index().set_index(['IEA Region'])
 
     demand.index = demand.index.astype(str)
@@ -407,8 +411,10 @@ def energy_demand_hist(energy_demand_baseline):
 
     # endregion
 
-    # update Sector and Metric naming
+    # region
 
+    # update Sector and Metric naming
+    """
     demand = demand.rename(
         index={
             "Transport (ktoe)": "Transport",
@@ -419,6 +425,9 @@ def energy_demand_hist(energy_demand_baseline):
             "Renewables and waste": "Other renewables",
         }
     )
+    """
+
+    demand.drop(columns="IEA Region", inplace=True)
 
     demand = demand.groupby(["IEA Region", "Sector", "Metric"]).sum()
 
@@ -457,7 +466,7 @@ def energy_demand_hist(energy_demand_baseline):
                     " OECD ",
                     "NonOECD ",
                 ],
-                ["Buildings", "Industry", "Transport"],
+                ["Buildings", "Industry", "Transport", "TFC"],
                 [
                     "Coal",
                     "Electricity",
@@ -465,6 +474,11 @@ def energy_demand_hist(energy_demand_baseline):
                     "Natural gas",
                     "Oil",
                     "Other renewables",
+                    "Industry",
+                    "Transport",
+                    "Buildings",
+                    "Bioenergy",
+                    "Other fuels",
                 ],
                 "baseline",
             ]
@@ -474,25 +488,93 @@ def energy_demand_hist(energy_demand_baseline):
         .replace(NaN, 0)
     )
 
-    demand = demand.apply(lambda x: x.multiply(hf[x.name]), axis=1)
+    demand = demand.apply(lambda x: x.divide(hf[x.name]), axis=1).replace(NaN, 0)
+
+    # back-extrapolate hist data where not available
+
+    def zero(data):
+        if data[1971] < 0.00001:
+            data = data.replace(0, NaN)
+            data[1971] = 0
+            data[2010] = 0
+        return data
+
+    demand = demand.apply(lambda x: zero(x), axis=1)
+
+    demand_proj = (
+        energy_demand_baseline.loc[
+            [
+                "World ",
+                "NAM ",
+                "US ",
+                "CSAM ",
+                "BRAZIL ",
+                "EUR ",
+                "AFRICA ",
+                "SAFR ",
+                "ME ",
+                "RUS ",
+                "ASIAPAC ",
+                "CHINA ",
+                "INDIA ",
+                "JPN ",
+                " OECD ",
+                "NonOECD ",
+            ],
+            ["Buildings", "Industry", "Transport", "TFC"],
+            [
+                "Coal",
+                "Electricity",
+                "Heat",
+                "Natural gas",
+                "Oil",
+                "Other renewables",
+                "Industry",
+                "Transport",
+                "Buildings",
+                "Bioenergy",
+                "Other fuels",
+            ],
+            "baseline",
+        ]
+    ).loc[:, 2010:]
+
+    demand = demand.loc[:, :2009].combine_first(demand_proj)
+
+    demand = demand.apply(lambda x: x.interpolate(limit_area="inside"), axis=1)
+
+    demand.loc["RUS ", "Industry", "Heat", "baseline"].loc[:2009] = NaN
+    demand.loc["RUS ", "Industry", "Heat", "baseline"].loc[1971] = 0
+    demand.loc["RUS ", "Industry", "Heat", "baseline"] = demand.loc[
+        "RUS ", "Industry", "Heat", "baseline"
+    ].interpolate(limit_area="inside")
+
+    demand.loc["US ", "Industry", "Heat", "baseline"].loc[1999:2006] = NaN
+    demand.loc["US ", "Industry", "Heat", "baseline"] = demand.loc[
+        "US ", "Industry", "Heat", "baseline"
+    ].interpolate(limit_area="inside")
+
+    demand.loc["US ", "Buildings", "Heat", "baseline"].loc[1999:2006] = NaN
+    demand.loc["US ", "Buildings", "Heat", "baseline"] = demand.loc[
+        "US ", "Buildings", "Heat", "baseline"
+    ].interpolate(limit_area="inside")
+
+    demand.loc["NAM ", "Industry", "Heat", "baseline"].loc[1999:2006] = NaN
+    demand.loc["NAM ", "Industry", "Heat", "baseline"] = demand.loc[
+        "NAM ", "Industry", "Heat", "baseline"
+    ].interpolate(limit_area="inside")
+
+    demand.loc["NAM ", "Buildings", "Heat", "baseline"].loc[1999:2006] = NaN
+    demand.loc["NAM ", "Buildings", "Heat", "baseline"] = demand.loc[
+        "NAM ", "Buildings", "Heat", "baseline"
+    ].interpolate(limit_area="inside")
 
     # endregion
 
-    """
-    energy_demand = demand
-    elec_consump = pd.concat([demand.loc[slice(None),slice(None),'Electricity']], keys=['Fossil fuels'], names=['Metric']).reorder_levels(['IEA Region','Sector','Metric','Scenario']).groupby(['IEA Region', 'Metric', 'Scenario']).sum()
-    heat_consump = pd.concat([demand.loc[slice(None),slice(None),'Heat']], keys=['Fossil fuels'], names=['Metric']).reorder_levels(['IEA Region','Sector','Metric','Scenario']).groupby(['IEA Region', 'Metric', 'Scenario']).sum()
-    transport_consump = pd.concat([demand.loc[slice(None),slice(None),'Heat']], keys=['Fossil fuels'], names=['Metric']).reorder_levels(['IEA Region','Sector','Metric','Scenario']).groupby(['IEA Region', 'Metric', 'Scenario']).sum()
-    heat_per_adoption = demand.loc[slice(None),'Buildings',slice(None)].divide(demand.loc[slice(None),'Buildings',slice(None)])
-    """
+    demand2 = pd.concat(
+        [demand.droplevel("Scenario")], keys=["pathway"], names=["Scenario"]
+    ).reorder_levels(["IEA Region", "Sector", "Metric", "Scenario"])
 
-    """
-    per_change = (
-        demand.pct_change(-1, axis=1)
-        .replace(NaN, 0)
-        .dropna(axis=1)
-        .apply(lambda x: x + 1, axis=1)
-    )
-    """
+    demand = demand.append(demand2).loc[:, :2018]
 
-    return demand
+    return demand.replace(NaN, 0)
