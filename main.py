@@ -166,7 +166,7 @@ afolu_em_baseline = afolu_em_baseline.droplevel(["Unit"])
 
 afolu_em_mitigated = afolu_em_mitigated.apply(
     lambda x: x.subtract(afolu_em_mitigated.loc[:, 2020].values), axis=0
-)
+).clip(lower=0)
 
 # endregion
 
@@ -202,10 +202,13 @@ em_pathway, em_targets_pathway, em_hist = emissions(
     "podi/data/iamc_data.csv",
 )
 
+em_pathway = em_pathway.append(-afolu_em_mitigated.loc[:, 2020:])
+
 em_mitigated = (
     em_baseline.groupby(["Region", "Sector", "Metric"]).sum()
     - em_pathway.groupby(["Region", "Sector", "Metric"]).sum()
 )
+
 
 # endregion
 

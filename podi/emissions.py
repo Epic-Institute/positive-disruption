@@ -51,7 +51,7 @@ def emissions(
 
     elec_consump2 = []
 
-    for i in ["CO2", "CH4", "N2O"]:
+    for i in ["CO2"]:
         elec_consump2 = pd.DataFrame(elec_consump2).append(
             pd.concat([elec_consump], keys=[i], names=["Gas"]).reorder_levels(
                 ["Region", "Sector", "Metric", "Gas"]
@@ -94,7 +94,7 @@ def emissions(
 
     buildings_consump2 = []
 
-    for i in ["CO2", "CH4", "N2O"]:
+    for i in ["CO2"]:
         buildings_consump2 = pd.DataFrame(buildings_consump2).append(
             pd.concat([buildings_consump], keys=[i], names=["Gas"]).reorder_levels(
                 ["Region", "Sector", "Metric", "Gas"]
@@ -138,7 +138,7 @@ def emissions(
 
     industry_consump2 = []
 
-    for i in ["CO2", "CH4", "N2O"]:
+    for i in ["CO2"]:
         industry_consump2 = pd.DataFrame(industry_consump2).append(
             pd.concat([industry_consump], keys=[i], names=["Gas"]).reorder_levels(
                 ["Region", "Sector", "Metric", "Gas"]
@@ -165,7 +165,7 @@ def emissions(
 
     transport_consump2 = []
 
-    for i in ["CO2", "CH4", "N2O"]:
+    for i in ["CO2"]:
         transport_consump2 = pd.DataFrame(transport_consump2).append(
             pd.concat([transport_consump], keys=[i], names=["Gas"]).reorder_levels(
                 ["Region", "Sector", "Metric", "Gas"]
@@ -185,13 +185,21 @@ def emissions(
 
     # region
 
-    # afolu_em = afolu_em.droplevel(["Unit"])
-    # afolu_em.columns = afolu_em.columns.astype(int)
-    afolu_em = afolu_em.loc[:, data_start_year:long_proj_end_year]
+    afolu_em = (
+        pd.read_csv("podi/data/emissions_additional.csv")
+        .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        .loc[
+            slice(None),
+            ["Regenerative Agriculture", "Forests & Wetlands"],
+            slice(None),
+            slice(None),
+            "pathway",
+        ]
+    ).droplevel("Scenario")
 
-    afolu_em = pd.concat([afolu_em], keys=["CO2"], names=["Gas"]).reorder_levels(
-        ["Region", "Sector", "Metric", "Gas"]
-    )
+    afolu_em.columns = afolu_em.columns.astype(int)
+
+    afolu_em = afolu_em.loc[:, data_start_year:long_proj_end_year]
 
     # endregion
 
@@ -222,7 +230,10 @@ def emissions(
 
     # remove steel to avoid double counting
     addtl_em = addtl_em.loc[
-        slice(None), slice(None), ["cement", "CH4", "N2O", "F-gases"], slice(None)
+        slice(None),
+        slice(None),
+        ["cement", "CO2", "CH4", "N2O", "F-gases"],
+        slice(None),
     ]
 
     # Set emissions change to follow elec ff emissions
@@ -233,55 +244,22 @@ def emissions(
         .replace(NaN, 0)
         .dropna(axis=1)
         .apply(lambda x: x + 1, axis=1)
-        .combine_first(addtl_em)
-        .reindex(sorted(elec_em.columns), axis=1)
     )
 
     addtl_em = addtl_em.loc[:, :2019].merge(
-        pd.DataFrame(addtl_em.loc[:, 2019])
-        .merge(
-            per_change.loc[:, 2020:],
-            right_on=["Region", "Metric", "Gas"],
-            left_on=["Region", "Metric", "Gas"],
-        )
-        .cumprod(axis=1)
-        .loc[:, 2020:],
-        right_on=["Region", "Metric", "Gas"],
-        left_on=["Region", "Metric", "Gas"],
-    )
-
-    """
-    addtl_em = addtl_em.droplevel("Gas").apply(lambda x: adoption_curve(x.rename(x.name[1]), x.name[0], scenario, "Other"), axis=1))
-
-    addtl_em2 = []
-
-    for i in range(0, len(addtl_em.index)):
-        addtl_em2 = (
-            pd.DataFrame(addtl_em2)
-            .append(addtl_em[addtl_em.index[i]].T)
-            .rename(index={0: addtl_em.index[i]})
-        )
-
-    addtl_em2 = addtl_em2.reindex(addtl_em.index)
-    
-    addtl_em = pd.concat([addtl_em], keys=["Other"], names=["Gas"]).reorder_levels(
-    ["Region", "Sector", "Gas"])
-
-    """
-
-    addtl_em = pd.concat([addtl_em], keys=["Other"], names=["Sector"]).reorder_levels(
-        ["Region", "Sector", "Metric", "Gas"]
+        (
+            pd.DataFrame(addtl_em.loc[:, 2019])
+            .combine_first(per_change.loc[:, 2020:])
+            .cumprod(axis=1)
+            .loc[:, 2020:]
+        ),
+        right_on=["Region", "Sector", "Metric", "Gas"],
+        left_on=["Region", "Sector", "Metric", "Gas"],
     )
 
     # endregion
 
-    em = (
-        elec_em.append(transport_em)
-        .append(buildings_em)
-        .append(industry_em)
-        .append(afolu_em)
-        .append(addtl_em)
-    )
+    em = pd.concat([elec_em, transport_em, buildings_em, industry_em, addtl_em])
 
     ##########################
     #  HISTORICAL EMISSIONS  #
@@ -373,6 +351,24 @@ def emissions(
     )
 
     em = em.apply(lambda x: x.multiply(hf[x.name[0]]), axis=1)
+
+    em2 = []
+
+    for i in range(0, len(iea_region_list)):
+        em_per = (
+            pd.DataFrame(
+                em.loc[iea_region_list[i]].apply(
+                    lambda x: x.divide(em.loc[iea_region_list[i]].sum()), axis=1
+                )
+            )
+        ).loc[:, 1990:data_end_year]
+        em_per = pd.concat([em_per], keys=[iea_region_list[i]], names=["Region"])
+        em_per = em_per.apply(
+            lambda x: x.multiply(em_hist.loc[iea_region_list[i]][x.name]), axis=0
+        )
+        em2 = pd.DataFrame(em2).append(em_per)
+
+    em = em2.join(em.loc[:, 2020:])
 
     #######################
     #  EMISSIONS TARGETS  #

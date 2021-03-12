@@ -265,7 +265,9 @@ def energy_demand(
         energy_demand * ldv.values
     )
     """
-    # Trucking
+    # Shortrange Trucking
+
+    # Longrange Trucking
 
     # Aviation (World Aviation Bunker, Domestic Aviation)
 

@@ -320,9 +320,9 @@ NonOECD ,Transport,Oil,-0.09,37.0,0.95,0.0
 NonOECD ,Transport,Bioenergy,0.13,37.0,1.0,0.0
 NonOECD ,Transport,Other fuels,-0.07,29.992,0.15,0.0
 NAM ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-NAM ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-NAM ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-NAM ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+NAM ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+NAM ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+NAM ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 NAM ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 NAM ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 NAM ,AFOLU,Cropland Soil Health,0.106,50.0,1.0,0.0
@@ -336,9 +336,9 @@ NAM ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 NAM ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 NAM ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
  OECD ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
- OECD ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
- OECD ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
- OECD ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+ OECD ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+ OECD ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+ OECD ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
  OECD ,AFOLU,Biochar,0.106,80.0,1.0,0.0
  OECD ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
  OECD ,AFOLU,Cropland Soil Health,0.106,50.0,1.0,0.0
@@ -352,9 +352,9 @@ NAM ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
  OECD ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
  OECD ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
 NonOECD ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-NonOECD ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-NonOECD ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-NonOECD ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+NonOECD ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+NonOECD ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+NonOECD ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 NonOECD ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 NonOECD ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 NonOECD ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -368,9 +368,9 @@ NonOECD ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 NonOECD ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 NonOECD ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 World ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-World ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-World ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-World ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+World ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+World ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+World ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 World ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 World ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 World ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -384,9 +384,9 @@ World ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 World ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 World ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 US ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-US ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-US ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-US ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+US ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+US ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+US ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 US ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 US ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 US ,AFOLU,Cropland Soil Health,0.106,50.0,1.0,0.0
@@ -400,9 +400,9 @@ US ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 US ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 US ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
 EUR ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-EUR ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-EUR ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-EUR ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+EUR ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+EUR ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+EUR ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 EUR ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 EUR ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 EUR ,AFOLU,Cropland Soil Health,0.106,50.0,1.0,0.0
@@ -416,9 +416,9 @@ EUR ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 EUR ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 EUR ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
 EU ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-EU ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-EU ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-EU ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+EU ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+EU ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+EU ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 EU ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 EU ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 EU ,AFOLU,Cropland Soil Health,0.106,50.0,1.0,0.0
@@ -432,9 +432,9 @@ EU ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 EU ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 EU ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
 SAFR ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-SAFR ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-SAFR ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-SAFR ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+SAFR ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+SAFR ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+SAFR ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 SAFR ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 SAFR ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 SAFR ,AFOLU,Cropland Soil Health,0.106,50.0,1.0,0.0
@@ -448,9 +448,9 @@ SAFR ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 SAFR ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 SAFR ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
 JPN ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-JPN ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-JPN ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-JPN ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+JPN ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+JPN ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+JPN ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 JPN ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 JPN ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 JPN ,AFOLU,Cropland Soil Health,0.106,50.0,1.0,0.0
@@ -464,9 +464,9 @@ JPN ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 JPN ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 JPN ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
 AdvancedECO ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-AdvancedECO ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-AdvancedECO ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-AdvancedECO ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+AdvancedECO ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+AdvancedECO ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+AdvancedECO ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 AdvancedECO ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 AdvancedECO ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 AdvancedECO ,AFOLU,Cropland Soil Health,0.106,50.0,1.0,0.0
@@ -480,9 +480,9 @@ AdvancedECO ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 AdvancedECO ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 AdvancedECO ,AFOLU,Trees in Croplands,0.106,40.0,1.0,0.0
 CSAM ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-CSAM ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-CSAM ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-CSAM ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+CSAM ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+CSAM ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+CSAM ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 CSAM ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 CSAM ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 CSAM ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -496,9 +496,9 @@ CSAM ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 CSAM ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 CSAM ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 BRAZIL ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-BRAZIL ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-BRAZIL ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-BRAZIL ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+BRAZIL ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+BRAZIL ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+BRAZIL ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 BRAZIL ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 BRAZIL ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 BRAZIL ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -512,9 +512,9 @@ BRAZIL ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 BRAZIL ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 BRAZIL ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 AFRICA ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-AFRICA ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-AFRICA ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-AFRICA ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+AFRICA ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+AFRICA ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+AFRICA ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 AFRICA ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 AFRICA ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 AFRICA ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -528,9 +528,9 @@ AFRICA ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 AFRICA ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 AFRICA ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 ME ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-ME ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-ME ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-ME ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+ME ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+ME ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+ME ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 ME ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 ME ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 ME ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -544,9 +544,9 @@ ME ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 ME ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 ME ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 EURASIA ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-EURASIA ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-EURASIA ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-EURASIA ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+EURASIA ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+EURASIA ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+EURASIA ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 EURASIA ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 EURASIA ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 EURASIA ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -560,9 +560,9 @@ EURASIA ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 EURASIA ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 EURASIA ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 RUS ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-RUS ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-RUS ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-RUS ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+RUS ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+RUS ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+RUS ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 RUS ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 RUS ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 RUS ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -576,9 +576,9 @@ RUS ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 RUS ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 RUS ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 ASIAPAC ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-ASIAPAC ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-ASIAPAC ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-ASIAPAC ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+ASIAPAC ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+ASIAPAC ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+ASIAPAC ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 ASIAPAC ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 ASIAPAC ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 ASIAPAC ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -592,9 +592,9 @@ ASIAPAC ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 ASIAPAC ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 ASIAPAC ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 CHINA ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-CHINA ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-CHINA ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-CHINA ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+CHINA ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+CHINA ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+CHINA ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 CHINA ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 CHINA ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 CHINA ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -608,9 +608,9 @@ CHINA ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 CHINA ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 CHINA ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 INDIA ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-INDIA ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-INDIA ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-INDIA ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+INDIA ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+INDIA ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+INDIA ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 INDIA ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 INDIA ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 INDIA ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -624,9 +624,9 @@ INDIA ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 INDIA ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 INDIA ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 ASEAN ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-ASEAN ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-ASEAN ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-ASEAN ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+ASEAN ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+ASEAN ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+ASEAN ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 ASEAN ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 ASEAN ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 ASEAN ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
@@ -640,9 +640,9 @@ ASEAN ,AFOLU,Peat Restoration,0.116,39.84,1.0,0.0
 ASEAN ,AFOLU,Silvopasture,0.106,35.0,1.0,0.0
 ASEAN ,AFOLU,Trees in Croplands,0.106,39.993,1.0,0.0
 DevelopingECO ,AFOLU,Animal Mgmt,0.106,40.0,1.0,0.0
-DevelopingECO ,AFOLU,Avoided Coastal Impacts,0.026,99.997,1.0,0.0
-DevelopingECO ,AFOLU,Avoided Forest Conversion,0.025,99.994,1.0,0.0
-DevelopingECO ,AFOLU,Avoided Peat Impacts,0.026,99.997,1.0,0.0
+DevelopingECO ,AFOLU,Avoided Coastal Impacts,0.026,99.995,1.0,0.0
+DevelopingECO ,AFOLU,Avoided Forest Conversion,0.025,99.995,1.0,0.0
+DevelopingECO ,AFOLU,Avoided Peat Impacts,0.026,99.995,1.0,0.0
 DevelopingECO ,AFOLU,Biochar,0.106,80.0,1.0,0.0
 DevelopingECO ,AFOLU,Coastal Restoration,0.116,40.46,1.0,0.0
 DevelopingECO ,AFOLU,Cropland Soil Health,0.106,35.0,1.0,0.0
