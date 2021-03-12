@@ -2517,7 +2517,7 @@ pd20 = pd20.loc["World ", "Global CO2 Equivalent Emissions", slice(None)].apply(
 )
 
 scenario = "baseline"
-start_year = 1990
+start_year = 1980
 
 for i in range(0, len(iea_region_list)):
     if scenario == "baseline":
@@ -2573,7 +2573,7 @@ for i in range(0, len(iea_region_list)):
                 "Regenerative Agriculture",
             ],
             slice(None),
-            ["CO2", "CH4", "N2O", "F-gases"],
+            slice(None),
         ]
         .sum()
         .loc[data_start_year:long_proj_end_year]
@@ -2682,7 +2682,7 @@ for i in range(0, len(iea_region_list)):
     )
 
     fig = go.Figure()
-
+    """
     if iea_region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
@@ -2694,7 +2694,7 @@ for i in range(0, len(iea_region_list)):
                 stackgroup="one",
             )
         )
-
+    """
     fig.add_trace(
         go.Scatter(
             name="Forests & Wetlands",
@@ -2702,18 +2702,24 @@ for i in range(0, len(iea_region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tozeroy",
-            stackgroup="two",
+            stackgroup="fw",
         )
     )
 
     if (
         fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
-    ).any() is True:
-        fill = "tozeroy"
-        stackgroup = "ag"
+    ).any() == True:
+        if (
+            fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+        ).all() == True:
+            fill = "tozeroy"
+            stackgroup = "two"
+        else:
+            fill = "tonexty"
+            stackgroup = "fw"
     else:
         fill = "tonexty"
-        stackgroup = "two"
+        stackgroup = "fw"
 
     fig.add_trace(
         go.Scatter(
@@ -2726,14 +2732,31 @@ for i in range(0, len(iea_region_list)):
         )
     )
 
+    if (
+        fig2[fig2["Sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"] < 0
+    ).any() == True:
+        if (
+            fig2[fig2["Sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"] < 0
+        ).all() == True:
+            fill = "tozeroy"
+            stackgroup = "three"
+            stackgroup2 = "three"
+        else:
+            fill = "tonexty"
+            stackgroup = "fw"
+    else:
+        fill = "tonexty"
+        stackgroup = "fw"
+        stackgroup2 = "three"
+
     fig.add_trace(
         go.Scatter(
-            name="Other",
+            name="Other Gases",
             line=dict(width=0.5, color="#E45756"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Other"]["Emissions, GtCO2e"],
-            fill="tonexty",
-            stackgroup="two",
+            fill=fill,
+            stackgroup=stackgroup2,
         )
     )
 
@@ -2778,7 +2801,7 @@ for i in range(0, len(iea_region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="two",
+            stackgroup=stackgroup2,
         )
     )
 
@@ -2789,7 +2812,7 @@ for i in range(0, len(iea_region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="two",
+            stackgroup=stackgroup2,
         )
     )
 
@@ -2800,7 +2823,7 @@ for i in range(0, len(iea_region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="two",
+            stackgroup=stackgroup2,
         )
     )
 
@@ -2811,7 +2834,7 @@ for i in range(0, len(iea_region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="two",
+            stackgroup=stackgroup2,
         )
     )
 
@@ -2822,7 +2845,7 @@ for i in range(0, len(iea_region_list)):
             x=pd.Series(em_hist.columns.values),
             y=pd.Series(em_hist.loc[iea_region_list[i]].values / 1000),
             fill="tozeroy",
-            stackgroup="three",
+            stackgroup="hist",
         )
     )
 
