@@ -2516,7 +2516,7 @@ pd20 = pd20.loc["World ", "Global CO2 Equivalent Emissions", slice(None)].apply(
     axis=1,
 )
 
-scenario = "pathway"
+scenario = "baseline"
 start_year = 1990
 
 for i in range(0, len(iea_region_list)):
