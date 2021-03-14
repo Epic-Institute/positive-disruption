@@ -84,7 +84,7 @@ gcam_pct_change = (
 )
 
 gcam_pct_change2 = curve_smooth(
-    gcam_pct_change.loc[:, "2041":"2100"], "quadratic", 4
+    gcam_pct_change.loc[:, "2041":"2100"], "quadratic", 3
 ).join(gcam_pct_change.loc[:, "EIA Metric":])
 
 gcam_pct_change2.to_csv("podi/data/energy_demand_projection.csv", index=True)

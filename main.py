@@ -53,10 +53,10 @@ energy_demand_baseline = energy_demand(
     "baseline",
     "podi/data/energy_demand_historical.csv",
     "podi/data/energy_demand_projection.csv",
-    "podi/data/energy_efficiency.csv",
-    "podi/data/heat_pumps.csv",
-    "podi/data/solar_thermal.csv",
-    "podi/data/trans_grid.csv",
+    "podi/data/rs_energy_efficiency.csv",
+    "podi/data/rs_heat_pumps.csv",
+    "podi/data/rs_solar_thermal.csv",
+    "podi/data/rs_trans_grid.csv",
     "podi/data/cdr_energy.csv",
 )
 
@@ -64,18 +64,18 @@ energy_demand_pathway = energy_demand(
     "pathway",
     "podi/data/energy_demand_historical.csv",
     "podi/data/energy_demand_projection.csv",
-    "podi/data/energy_efficiency.csv",
-    "podi/data/heat_pumps.csv",
-    "podi/data/solar_thermal.csv",
-    "podi/data/trans_grid.csv",
+    "podi/data/rs_energy_efficiency.csv",
+    "podi/data/rs_heat_pumps.csv",
+    "podi/data/rs_solar_thermal.csv",
+    "podi/data/rs_trans_grid.csv",
     "podi/data/cdr_energy.csv",
 )
 
 energy_demand = energy_demand_baseline.append(energy_demand_pathway)
 
 # Toggle for energy hist data further than 2010
-energy_demand_hist = energy_demand_hist(energy_demand_baseline)
-energy_demand = energy_demand_hist.join(energy_demand.loc[:, 2019:]).replace(NaN, 0)
+energy_demand_hist2 = energy_demand_hist(energy_demand_baseline)
+energy_demand = energy_demand_hist2.join(energy_demand.loc[:, 2019:]).replace(NaN, 0)
 
 # endregion
 

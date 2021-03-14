@@ -6,9 +6,7 @@ import pandas as pd
 from podi.curve_smooth import curve_smooth
 import numpy as np
 from numpy import NaN
-
-data_start_year = 1971
-data_end_year = 2019
+from podi.energy_demand import data_start_year, data_end_year
 
 iea_region_list = (
     "World ",
@@ -42,7 +40,7 @@ def energy_demand_hist(energy_demand_baseline):
 
     # Load energy demand historical data (ktoe)
     demand = (
-        pd.read_csv("podi/data/energy_demand_historical_IEA (copy).csv")
+        pd.read_csv("podi/data/energy_demand_historical_IEA.csv")
         .set_index(["WEB Region", "Sector", "Metric"])
         .replace("..", 0)
     )
@@ -77,7 +75,6 @@ def energy_demand_hist(energy_demand_baseline):
     # region
 
     # convert from ktoe to TWh
-
     demand = demand.astype(float) * 1 / 0.086
 
     """
@@ -426,14 +423,58 @@ def energy_demand_hist(energy_demand_baseline):
         }
     )
     """
-
     demand.drop(columns="IEA Region", inplace=True)
+    demand.columns = demand.columns.astype(int)
+
+    demand.loc["World ", "Buildings", "Heat"].loc[:, :1997] = NaN
+    demand.loc["World ", "Buildings", "Heat"].loc[:, 1971] = demand.loc[
+        "World ", "Buildings", "Heat"
+    ].loc[:, 1998]
+    demand.loc["World ", "Buildings", "Heat"] = demand.loc[
+        "World ",
+        "Buildings",
+        "Heat",
+    ].interpolate(limit_area="inside")
+
+    demand.loc["RUS ", "Industry", "Heat"].loc[:, :2012] = NaN
+    demand.loc["RUS ", "Industry", "Heat"].loc[:, 1971] = 0
+    demand.loc["RUS ", "Industry", "Heat"] = demand.loc[
+        "RUS ",
+        "Industry",
+        "Heat",
+    ].interpolate(limit_area="inside")
+
+    demand.loc["US ", "Industry", "Heat"].loc[:, 1999:2006] = NaN
+    demand.loc["US ", "Industry", "Heat"] = demand.loc[
+        "US ", "Industry", "Heat"
+    ].interpolate(limit_area="inside")
+
+    demand.loc["US ", "Buildings", "Heat"].loc[:, 1999:2006] = NaN
+    demand.loc["US ", "Buildings", "Heat"] = demand.loc[
+        "US ", "Buildings", "Heat"
+    ].interpolate(limit_area="inside")
+
+    demand.loc["NAM ", "Industry", "Heat"].loc[:, 1999:2006] = NaN
+    demand.loc["NAM ", "Industry", "Heat"] = demand.loc[
+        "NAM ", "Industry", "Heat"
+    ].interpolate(limit_area="inside")
+
+    demand.loc["NAM ", "Buildings", "Heat"].loc[:, 1999:2006] = NaN
+    demand.loc["NAM ", "Buildings", "Heat"] = demand.loc[
+        "NAM ", "Buildings", "Heat"
+    ].interpolate(limit_area="inside")
+
+    demand.loc["NonOECD ", "Buildings", "Heat"].loc[:, :1992] = NaN
+    demand.loc["NonOECD ", "Buildings", "Heat"].loc[:, 1971] = demand.loc[
+        "NonOECD ", "Buildings", "Heat"
+    ].loc[:, :1993]
+    demand.loc["NonOECD ", "Buildings", "Heat"] = demand.loc[
+        "NAM ", "Buildings", "Heat"
+    ].interpolate(limit_area="inside")
 
     demand = demand.groupby(["IEA Region", "Sector", "Metric"]).sum()
 
     # estimate time between data and projections
-
-    demand.columns = demand.columns.astype(int)
 
     demand.loc[:, 2019] = demand.loc[:, 2018] * (
         1 + (demand.loc[:, 2018] - demand.loc[:, 2017]) / demand.loc[:, 2017]
@@ -443,9 +484,11 @@ def energy_demand_hist(energy_demand_baseline):
         ["IEA Region", "Sector", "Metric", "Scenario"]
     )
 
-    # harmonize with 2010 demand
+    # harmonize with current demand
+    hf_year = 2018
+
     hf = (
-        demand.loc[:, 2010]
+        demand.loc[:, hf_year]
         .divide(
             energy_demand_baseline.loc[
                 [
@@ -483,7 +526,7 @@ def energy_demand_hist(energy_demand_baseline):
                 "baseline",
             ]
             .reindex_like(demand)
-            .loc[:, 2010]
+            .loc[:, hf_year]
         )
         .replace(NaN, 0)
     )
@@ -496,7 +539,7 @@ def energy_demand_hist(energy_demand_baseline):
         if data[1971] < 0.00001:
             data = data.replace(0, NaN)
             data[1971] = 0
-            data[2010] = 0
+            # data[2010] = 0
         return data
 
     demand = demand.apply(lambda x: zero(x), axis=1)
@@ -537,37 +580,11 @@ def energy_demand_hist(energy_demand_baseline):
             ],
             "baseline",
         ]
-    ).loc[:, 2010:]
+    ).loc[:, 2018:]
 
-    demand = demand.loc[:, :2009].combine_first(demand_proj)
+    demand = demand.loc[:, :2017].combine_first(demand_proj)
 
     demand = demand.apply(lambda x: x.interpolate(limit_area="inside"), axis=1)
-
-    demand.loc["RUS ", "Industry", "Heat", "baseline"].loc[:2009] = NaN
-    demand.loc["RUS ", "Industry", "Heat", "baseline"].loc[1971] = 0
-    demand.loc["RUS ", "Industry", "Heat", "baseline"] = demand.loc[
-        "RUS ", "Industry", "Heat", "baseline"
-    ].interpolate(limit_area="inside")
-
-    demand.loc["US ", "Industry", "Heat", "baseline"].loc[1999:2006] = NaN
-    demand.loc["US ", "Industry", "Heat", "baseline"] = demand.loc[
-        "US ", "Industry", "Heat", "baseline"
-    ].interpolate(limit_area="inside")
-
-    demand.loc["US ", "Buildings", "Heat", "baseline"].loc[1999:2006] = NaN
-    demand.loc["US ", "Buildings", "Heat", "baseline"] = demand.loc[
-        "US ", "Buildings", "Heat", "baseline"
-    ].interpolate(limit_area="inside")
-
-    demand.loc["NAM ", "Industry", "Heat", "baseline"].loc[1999:2006] = NaN
-    demand.loc["NAM ", "Industry", "Heat", "baseline"] = demand.loc[
-        "NAM ", "Industry", "Heat", "baseline"
-    ].interpolate(limit_area="inside")
-
-    demand.loc["NAM ", "Buildings", "Heat", "baseline"].loc[1999:2006] = NaN
-    demand.loc["NAM ", "Buildings", "Heat", "baseline"] = demand.loc[
-        "NAM ", "Buildings", "Heat", "baseline"
-    ].interpolate(limit_area="inside")
 
     # endregion
 

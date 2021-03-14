@@ -222,6 +222,7 @@ def energy_supply(scenario, energy_demand):
 
         # harmonizing historical to projection
         def harmonize(perc, near_proj_per_elec_consump):
+            """
             if (
                 abs(
                     near_proj_per_elec_consump.loc[perc.name, data_end_year]
@@ -238,6 +239,18 @@ def energy_supply(scenario, energy_demand):
                 return perc
             else:
                 return perc
+            """
+            hf = (
+                near_proj_per_elec_consump.loc[perc.name, data_end_year]
+                + (
+                    near_proj_per_elec_consump.loc[perc.name, data_end_year]
+                    - near_proj_per_elec_consump.loc[perc.name, data_end_year - 2]
+                ) / 2
+                - perc.loc[data_end_year + 1]
+            )
+
+            perc = perc + (hf)
+            return perc
 
         perc = perc.apply(
             harmonize, near_proj_per_elec_consump=near_proj_per_elec_consump, axis=1
@@ -452,6 +465,7 @@ def energy_supply(scenario, energy_demand):
 
         # harmonizing historical to projection
         def harmonize(perc, near_proj_per_heat_consump):
+            """
             if (
                 abs(
                     near_proj_per_heat_consump.loc[perc.name, data_end_year]
@@ -468,6 +482,19 @@ def energy_supply(scenario, energy_demand):
                 return perc
             else:
                 return perc
+            """
+
+            hf = (
+                near_proj_per_heat_consump.loc[perc.name, data_end_year]
+                + (
+                    near_proj_per_heat_consump.loc[perc.name, data_end_year]
+                    - near_proj_per_heat_consump.loc[perc.name, data_end_year - 2]
+                ) / 2
+                - perc.loc[data_end_year + 1]
+            )
+
+            perc = perc + (hf)
+            return perc
 
         perc = perc.apply(
             harmonize, near_proj_per_heat_consump=near_proj_per_heat_consump, axis=1
@@ -698,6 +725,18 @@ def energy_supply(scenario, energy_demand):
 
         # harmonizing historical to projection
         def harmonize(perc, near_proj_per_transport_consump):
+            hf = (
+                near_proj_per_transport_consump.loc[perc.name, data_end_year]
+                + (
+                    near_proj_per_transport_consump.loc[perc.name, data_end_year]
+                    - near_proj_per_transport_consump.loc[perc.name, data_end_year - 2]
+                ) / 2
+                - perc.loc[data_end_year + 1]
+            )
+
+            perc = perc + (hf)
+
+            """
             if (
                 abs(
                     near_proj_per_transport_consump.loc[perc.name, data_end_year]
@@ -714,6 +753,8 @@ def energy_supply(scenario, energy_demand):
                 return perc
             else:
                 return perc
+            """
+            return perc
 
         perc = perc.apply(
             harmonize,
