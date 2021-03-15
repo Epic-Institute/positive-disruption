@@ -6,6 +6,7 @@ import pandas as pd
 from podi.curve_smooth import curve_smooth
 import numpy as np
 from numpy import NaN
+from podi.adoption_curve import adoption_curve
 
 data_start_year = 1990
 data_end_year = 2019
@@ -405,6 +406,27 @@ def energy_demand(
 
     energy_demand = energy_demand_hist.join(energy_demand_proj).clip(lower=0)
 
+    energy_demand = energy_demand.dropna(axis=0)
+    """
+    # Adoption curves
+    energy_demand = energy_demand.apply(
+        lambda x: adoption_curve(
+            x.rename(x.name[2]),
+            x.name[0],
+            scenario,
+            x.name[1],
+        ),
+        axis=1,
+    )
+
+    per = []
+    for i in range(0, len(energy_demand.index)):
+        per = pd.DataFrame(per).append(energy_demand[energy_demand.index[i]].T)
+
+    per.set_index(energy_demand.index, inplace=True)
+
+    energy_demand = per
+    """
     # endregion
 
     return energy_demand.round(decimals=0).replace(NaN, 0)

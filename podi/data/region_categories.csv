@@ -110,7 +110,7 @@ Ireland,Ireland,AdvancedECO | OECD | EUR | EU ,irl,Other Europe,Europe | Other ,
 Israel,Israel,AdvancedECO | OECD | EUR ,isr,Other Europe,META | MENA ,MAF | MEA-H ,MEA-H,Israel,OECD90 ,Israel,ISR,Israel
 Italy,Italy,AdvancedECO | OECD | EUR | EU ,ita,Other Europe,Europe , OECD | EU15 ,EU15,Italy,OECD90 ,Italy,ITA,Italy
 Jamaica,,DevelopingECO | NonOECD | CSAM ,jam,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,Jamaica,LAM ,Jamaica,JAM,Jamaica
-Japan,Japan,AdvancedECO | OECD | JPN ,jpn,Japan,Asia Pacific , OECD | JPN ,JPN ,Japan,ASIA ,Japan,JPN,Japan
+Japan,Japan,AdvancedECO | OECD | JPN ,jpn,Japan,Asia Pacific , OECD | JPN ,JPN ,Japan,OECD90 ,Japan,JPN,Japan
 Jordan,,DevelopingECO | NonOECD | ME ,jor,MENA,META | MENA ,MAF | MEA-M ,MEA-M,Jordan,MAF ,Jordan,JOR,Jordan
 Kazakhstan,,DevelopingECO | NonOECD | EURASIA ,kaz,Rest of the world,Rest of world,REF | CAS ,CAS,Kazakhstan,ASIA ,Kazakhstan,KAZ,Kazakhstan
 Kenya,,DevelopingECO | NonOECD | AFRICA ,ken,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,Kenya,MAF ,Kenya,KEN,Kenya

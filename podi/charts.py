@@ -47,7 +47,7 @@ annotation_source = [
 # region
 
 scenario = "pathway"
-start_year = 1970
+start_year = 2000
 
 for i in range(0, len(iea_region_list)):
     energy_demand_i = (
@@ -251,7 +251,7 @@ for i in range(0, len(iea_region_list)):
 # region
 
 scenario = "pathway"
-start_year = 1971
+start_year = 2000
 
 tech_list = [
     "Electricity-Solar",
@@ -1815,9 +1815,9 @@ for i in range(0, len(iea_region_list)):
 
 # endregion
 
-#############
-# EMISSIONS #
-#############
+###################
+# EMISSIONS (OLD) #
+###################
 
 # region
 pd20 = (
@@ -1833,7 +1833,7 @@ pd20 = pd20.loc["World ", "Global CO2 Equivalent Emissions", slice(None)].apply(
 )
 
 scenario = "baseline"
-start_year = 1990
+start_year = 2000
 
 for i in range(0, len(iea_region_list)):
     if scenario == "baseline":
@@ -2122,8 +2122,8 @@ for i in range(0, len(iea_region_list)):
         go.Scatter(
             name="Historical",
             line=dict(width=2, color="black"),
-            x=pd.Series(em_hist.columns.values),
-            y=pd.Series(em_hist.loc[iea_region_list[i]].values / 1000),
+            x=pd.Series(em_hist.loc[:,start_year:].columns.values),
+            y=pd.Series(em_hist.loc[:,start_year:].loc[iea_region_list[i]].values / 1000),
             fill="tozeroy",
             stackgroup="three",
         )
@@ -2189,7 +2189,7 @@ pd20 = pd20.loc["World ", "Global CO2 Equivalent Emissions", slice(None)].apply(
 )
 
 scenario = "baseline"
-start_year = 1980
+start_year = 2000
 
 for i in range(0, len(iea_region_list)):
     if scenario == "baseline":
@@ -2204,95 +2204,79 @@ for i in range(0, len(iea_region_list)):
     em_electricity = (
         em.loc[iea_region_list[i], "Electricity", slice(None)]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_transport = (
         em.loc[iea_region_list[i], "Transport", slice(None)]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_buildings = (
         em.loc[iea_region_list[i], "Buildings", slice(None)]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_industry = (
         em.loc[
             iea_region_list[i],
             ["Industry"],
-            ["Fossil fuels", "cement", "CH4", "N2O"],
+            ["Fossil fuels", "cement"],
         ]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_ra = (
         afolu_em.loc[
             iea_region_list[i],
             [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Animal Mgmt",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
                 "Regenerative Agriculture",
             ],
             slice(None),
             slice(None),
         ]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_fw = (
         afolu_em.loc[
             iea_region_list[i],
             [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
                 "Forests & Wetlands",
             ],
-            slice(None),
+            ['CO2'],
             slice(None),
         ]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_othergas = (
         em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_ch4 = (
         em.loc[iea_region_list[i], slice(None), ["CH4"]]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_n2o = (
         em.loc[iea_region_list[i], slice(None), ["N2O"]]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_fgas = (
         em.loc[iea_region_list[i], slice(None), ["F-gases"]]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     if iea_region_list[i] == "World ":
@@ -2500,8 +2484,8 @@ for i in range(0, len(iea_region_list)):
         go.Scatter(
             name="Historical",
             line=dict(width=2, color="black"),
-            x=pd.Series(em_hist.columns.values),
-            y=pd.Series(em_hist.loc[iea_region_list[i]].values / 1000),
+            x=pd.Series(em_hist.loc[:,start_year:].columns.values),
+            y=pd.Series(em_hist.loc[:,start_year:].loc[iea_region_list[i]].values / 1000),
             fill="tozeroy",
             stackgroup="hist",
         )

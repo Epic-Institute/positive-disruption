@@ -211,7 +211,7 @@ def emissions(
 
     addtl_em = (
         (
-            pd.read_csv(addtl_em).set_index(
+            pd.read_csv("podi/data/emissions_additional.csv").set_index(
                 ["Region", "Sector", "Metric", "Gas", "Scenario"]
             )
         )
@@ -299,11 +299,11 @@ def emissions(
     )
 
     region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=["IAM Region", "IEA Region"]
+        "podi/data/region_categories.csv", usecols=["CAIT Region", "IEA Region"]
     )
 
     em_hist = em_hist.merge(
-        region_categories, right_on=["IAM Region"], left_on=["Region"]
+        region_categories, right_on=["CAIT Region"], left_on=["Region"]
     )
 
     em_hist = em_hist.groupby("IEA Region").sum()
@@ -346,7 +346,7 @@ def emissions(
     # harmonize with historical emissions
     hf = (
         em_hist.loc[:, data_end_year]
-        .divide(em.loc[:, data_end_year].groupby("Region").sum())
+        .divide(em.loc[:, data_end_year].clip(lower=0).groupby("Region").sum())
         .replace(NaN, 0)
     )
 
