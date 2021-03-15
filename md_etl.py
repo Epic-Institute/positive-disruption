@@ -148,12 +148,31 @@ for i in range(0, len(iea_region_list)):
 
             mdFile.new_line()
 
+    for j in ["pathway"]:
+        for k in ["ei"]:
+            path = (
+                '"'
+                + k
+                + "-"
+                + j
+                + "-"
+                + (iea_region_list[i]).replace(" ", "")
+                + '.html"'
+            )
+            mdFile.write(
+                "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+            )
+            mdFile.write(path)
+            mdFile.write(" height='500' width='150%'></iframe>")
+
+            mdFile.new_line()
+
     # endregion
 
     # region
 
     if iea_region_list[i] == "World ":
-        for k in ["ei", "co2conc", "ghgconc", "forcing", "temp"]:
+        for k in ["co2conc", "ghgconc", "forcing", "temp"]:
             path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
 
         mdFile.write(

@@ -26,3 +26,4 @@ Southeast Asia regional grouping, Australia, Bangladesh, China, Chinese Taipei, 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-ASIAPAC.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2030-ASIAPAC.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-ASIAPAC.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "ei-pathway-ASIAPAC.html" height='500' width='150%'></iframe>  

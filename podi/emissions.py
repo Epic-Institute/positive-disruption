@@ -347,7 +347,7 @@ def emissions(
 
     hf = (
         em_hist.loc[:, data_end_year]
-        .divide(em.loc[:, data_end_year].groupby("Region").sum())
+        .divide(em.loc[:, data_end_year].clip(lower=0).groupby("Region").sum())
         .replace(NaN, 0)
     )
 
