@@ -37379,3 +37379,297 @@ ASEAN ,Transport,baseline,Transport,Saturation Point,0
 ASEAN ,Transport,pathway,Transport,Saturation Point,100
 DevelopingECO ,Transport,baseline,Transport,Saturation Point,0
 DevelopingECO ,Transport,pathway,Transport,Saturation Point,100
+ OECD ,Electricity,baseline,Other energy sector,Floor,0
+ OECD ,Electricity,pathway,Other energy sector,Floor,0
+NAM ,Electricity,baseline,Other energy sector,Floor,0
+NAM ,Electricity,pathway,Other energy sector,Floor,0
+US ,Electricity,baseline,Other energy sector,Floor,0
+US ,Electricity,pathway,Other energy sector,Floor,0
+EUR ,Electricity,baseline,Other energy sector,Floor,0
+EUR ,Electricity,pathway,Other energy sector,Floor,0
+EU ,Electricity,baseline,Other energy sector,Floor,0
+EU ,Electricity,pathway,Other energy sector,Floor,0
+SAFR ,Electricity,baseline,Other energy sector,Floor,0
+SAFR ,Electricity,pathway,Other energy sector,Floor,0
+JPN ,Electricity,baseline,Other energy sector,Floor,0
+JPN ,Electricity,pathway,Other energy sector,Floor,0
+AdvancedECO ,Electricity,baseline,Other energy sector,Floor,0
+AdvancedECO ,Electricity,pathway,Other energy sector,Floor,0
+NonOECD ,Electricity,baseline,Other energy sector,Floor,0
+NonOECD ,Electricity,pathway,Other energy sector,Floor,0
+World ,Electricity,baseline,Other energy sector,Floor,0
+World ,Electricity,pathway,Other energy sector,Floor,0
+CSAM ,Electricity,baseline,Other energy sector,Floor,0
+CSAM ,Electricity,pathway,Other energy sector,Floor,0
+BRAZIL ,Electricity,baseline,Other energy sector,Floor,0
+BRAZIL ,Electricity,pathway,Other energy sector,Floor,0
+AFRICA ,Electricity,baseline,Other energy sector,Floor,0
+AFRICA ,Electricity,pathway,Other energy sector,Floor,0
+ME ,Electricity,baseline,Other energy sector,Floor,0
+ME ,Electricity,pathway,Other energy sector,Floor,0
+EURASIA ,Electricity,baseline,Other energy sector,Floor,0
+EURASIA ,Electricity,pathway,Other energy sector,Floor,0
+RUS ,Electricity,baseline,Other energy sector,Floor,0
+RUS ,Electricity,pathway,Other energy sector,Floor,0
+ASIAPAC ,Electricity,baseline,Other energy sector,Floor,0
+ASIAPAC ,Electricity,pathway,Other energy sector,Floor,0
+CHINA ,Electricity,baseline,Other energy sector,Floor,0
+CHINA ,Electricity,pathway,Other energy sector,Floor,0
+INDIA ,Electricity,baseline,Other energy sector,Floor,0
+INDIA ,Electricity,pathway,Other energy sector,Floor,0
+ASEAN ,Electricity,baseline,Other energy sector,Floor,0
+ASEAN ,Electricity,pathway,Other energy sector,Floor,0
+DevelopingECO ,Electricity,baseline,Other energy sector,Floor,0
+DevelopingECO ,Electricity,pathway,Other energy sector,Floor,0
+ OECD ,Electricity,baseline,Other energy sector,Max annual growth,100
+ OECD ,Electricity,pathway,Other energy sector,Max annual growth,100
+NAM ,Electricity,baseline,Other energy sector,Max annual growth,100
+NAM ,Electricity,pathway,Other energy sector,Max annual growth,100
+US ,Electricity,baseline,Other energy sector,Max annual growth,100
+US ,Electricity,pathway,Other energy sector,Max annual growth,100
+EUR ,Electricity,baseline,Other energy sector,Max annual growth,100
+EUR ,Electricity,pathway,Other energy sector,Max annual growth,100
+EU ,Electricity,baseline,Other energy sector,Max annual growth,100
+EU ,Electricity,pathway,Other energy sector,Max annual growth,100
+SAFR ,Electricity,baseline,Other energy sector,Max annual growth,100
+SAFR ,Electricity,pathway,Other energy sector,Max annual growth,100
+JPN ,Electricity,baseline,Other energy sector,Max annual growth,100
+JPN ,Electricity,pathway,Other energy sector,Max annual growth,100
+AdvancedECO ,Electricity,baseline,Other energy sector,Max annual growth,100
+AdvancedECO ,Electricity,pathway,Other energy sector,Max annual growth,100
+NonOECD ,Electricity,baseline,Other energy sector,Max annual growth,100
+NonOECD ,Electricity,pathway,Other energy sector,Max annual growth,100
+World ,Electricity,baseline,Other energy sector,Max annual growth,100
+World ,Electricity,pathway,Other energy sector,Max annual growth,100
+CSAM ,Electricity,baseline,Other energy sector,Max annual growth,100
+CSAM ,Electricity,pathway,Other energy sector,Max annual growth,100
+BRAZIL ,Electricity,baseline,Other energy sector,Max annual growth,100
+BRAZIL ,Electricity,pathway,Other energy sector,Max annual growth,100
+AFRICA ,Electricity,baseline,Other energy sector,Max annual growth,100
+AFRICA ,Electricity,pathway,Other energy sector,Max annual growth,100
+ME ,Electricity,baseline,Other energy sector,Max annual growth,100
+ME ,Electricity,pathway,Other energy sector,Max annual growth,100
+EURASIA ,Electricity,baseline,Other energy sector,Max annual growth,100
+EURASIA ,Electricity,pathway,Other energy sector,Max annual growth,100
+RUS ,Electricity,baseline,Other energy sector,Max annual growth,100
+RUS ,Electricity,pathway,Other energy sector,Max annual growth,100
+ASIAPAC ,Electricity,baseline,Other energy sector,Max annual growth,100
+ASIAPAC ,Electricity,pathway,Other energy sector,Max annual growth,100
+CHINA ,Electricity,baseline,Other energy sector,Max annual growth,100
+CHINA ,Electricity,pathway,Other energy sector,Max annual growth,100
+INDIA ,Electricity,baseline,Other energy sector,Max annual growth,100
+INDIA ,Electricity,pathway,Other energy sector,Max annual growth,100
+ASEAN ,Electricity,baseline,Other energy sector,Max annual growth,100
+ASEAN ,Electricity,pathway,Other energy sector,Max annual growth,100
+DevelopingECO ,Electricity,baseline,Other energy sector,Max annual growth,100
+DevelopingECO ,Electricity,pathway,Other energy sector,Max annual growth,100
+ OECD ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+ OECD ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+NAM ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+NAM ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+US ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+US ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+EUR ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+EUR ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+EU ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+EU ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+SAFR ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+SAFR ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+JPN ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+JPN ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+AdvancedECO ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+AdvancedECO ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+NonOECD ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+NonOECD ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+World ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+World ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+CSAM ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+CSAM ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+BRAZIL ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+BRAZIL ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+AFRICA ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+AFRICA ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+ME ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+ME ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+EURASIA ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+EURASIA ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+RUS ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+RUS ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+ASIAPAC ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+ASIAPAC ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+CHINA ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+CHINA ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+INDIA ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+INDIA ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+ASEAN ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+ASEAN ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+DevelopingECO ,Electricity,baseline,Other energy sector,"Parameter a, max",5
+DevelopingECO ,Electricity,pathway,Other energy sector,"Parameter a, max",5
+ OECD ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+ OECD ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+NAM ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+NAM ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+US ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+US ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+EUR ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+EUR ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+EU ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+EU ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+SAFR ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+SAFR ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+JPN ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+JPN ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+AdvancedECO ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+AdvancedECO ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+NonOECD ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+NonOECD ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+World ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+World ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+CSAM ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+CSAM ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+BRAZIL ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+BRAZIL ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+AFRICA ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+AFRICA ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+ME ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+ME ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+EURASIA ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+EURASIA ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+RUS ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+RUS ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+ASIAPAC ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+ASIAPAC ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+CHINA ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+CHINA ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+INDIA ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+INDIA ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+ASEAN ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+ASEAN ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+DevelopingECO ,Electricity,baseline,Other energy sector,"Parameter a, min",0
+DevelopingECO ,Electricity,pathway,Other energy sector,"Parameter a, min",0
+ OECD ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+ OECD ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+NAM ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+NAM ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+US ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+US ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+EUR ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+EUR ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+EU ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+EU ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+SAFR ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+SAFR ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+JPN ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+JPN ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+AdvancedECO ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+AdvancedECO ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+NonOECD ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+NonOECD ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+World ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+World ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+CSAM ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+CSAM ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+BRAZIL ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+BRAZIL ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+AFRICA ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+AFRICA ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+ME ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+ME ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+EURASIA ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+EURASIA ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+RUS ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+RUS ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+ASIAPAC ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+ASIAPAC ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+CHINA ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+CHINA ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+INDIA ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+INDIA ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+ASEAN ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+ASEAN ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+DevelopingECO ,Electricity,baseline,Other energy sector,"Parameter b, max",100
+DevelopingECO ,Electricity,pathway,Other energy sector,"Parameter b, max",100
+ OECD ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+ OECD ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+NAM ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+NAM ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+US ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+US ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+EUR ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+EUR ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+EU ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+EU ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+SAFR ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+SAFR ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+JPN ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+JPN ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+AdvancedECO ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+AdvancedECO ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+NonOECD ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+NonOECD ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+World ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+World ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+CSAM ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+CSAM ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+BRAZIL ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+BRAZIL ,Electricity,pathway,Other energy sector,"Parameter b, min",10
+AFRICA ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+AFRICA ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+ME ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+ME ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+EURASIA ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+EURASIA ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+RUS ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+RUS ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+ASIAPAC ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+ASIAPAC ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+CHINA ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+CHINA ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+INDIA ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+INDIA ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+ASEAN ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+ASEAN ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+DevelopingECO ,Electricity,baseline,Other energy sector,"Parameter b, min",0
+DevelopingECO ,Electricity,pathway,Other energy sector,"Parameter b, min",0
+ OECD ,Electricity,baseline,Other energy sector,Saturation Point,0
+ OECD ,Electricity,pathway,Other energy sector,Saturation Point,100
+NAM ,Electricity,baseline,Other energy sector,Saturation Point,0
+NAM ,Electricity,pathway,Other energy sector,Saturation Point,100
+US ,Electricity,baseline,Other energy sector,Saturation Point,0
+US ,Electricity,pathway,Other energy sector,Saturation Point,100
+EUR ,Electricity,baseline,Other energy sector,Saturation Point,0
+EUR ,Electricity,pathway,Other energy sector,Saturation Point,100
+EU ,Electricity,baseline,Other energy sector,Saturation Point,0
+EU ,Electricity,pathway,Other energy sector,Saturation Point,100
+SAFR ,Electricity,baseline,Other energy sector,Saturation Point,0
+SAFR ,Electricity,pathway,Other energy sector,Saturation Point,100
+JPN ,Electricity,baseline,Other energy sector,Saturation Point,0
+JPN ,Electricity,pathway,Other energy sector,Saturation Point,100
+AdvancedECO ,Electricity,baseline,Other energy sector,Saturation Point,0
+AdvancedECO ,Electricity,pathway,Other energy sector,Saturation Point,100
+NonOECD ,Electricity,baseline,Other energy sector,Saturation Point,0
+NonOECD ,Electricity,pathway,Other energy sector,Saturation Point,100
+World ,Electricity,baseline,Other energy sector,Saturation Point,0
+World ,Electricity,pathway,Other energy sector,Saturation Point,100
+CSAM ,Electricity,baseline,Other energy sector,Saturation Point,0
+CSAM ,Electricity,pathway,Other energy sector,Saturation Point,100
+BRAZIL ,Electricity,baseline,Other energy sector,Saturation Point,0
+BRAZIL ,Electricity,pathway,Other energy sector,Saturation Point,100
+AFRICA ,Electricity,baseline,Other energy sector,Saturation Point,0
+AFRICA ,Electricity,pathway,Other energy sector,Saturation Point,100
+ME ,Electricity,baseline,Other energy sector,Saturation Point,0
+ME ,Electricity,pathway,Other energy sector,Saturation Point,100
+EURASIA ,Electricity,baseline,Other energy sector,Saturation Point,0
+EURASIA ,Electricity,pathway,Other energy sector,Saturation Point,100
+RUS ,Electricity,baseline,Other energy sector,Saturation Point,0
+RUS ,Electricity,pathway,Other energy sector,Saturation Point,100
+ASIAPAC ,Electricity,baseline,Other energy sector,Saturation Point,0
+ASIAPAC ,Electricity,pathway,Other energy sector,Saturation Point,100
+CHINA ,Electricity,baseline,Other energy sector,Saturation Point,0
+CHINA ,Electricity,pathway,Other energy sector,Saturation Point,100
+INDIA ,Electricity,baseline,Other energy sector,Saturation Point,0
+INDIA ,Electricity,pathway,Other energy sector,Saturation Point,100
+ASEAN ,Electricity,baseline,Other energy sector,Saturation Point,0
+ASEAN ,Electricity,pathway,Other energy sector,Saturation Point,100
+DevelopingECO ,Electricity,baseline,Other energy sector,Saturation Point,0
+DevelopingECO ,Electricity,pathway,Other energy sector,Saturation Point,100

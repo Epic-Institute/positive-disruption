@@ -153,7 +153,7 @@ for i in range(0, len(iea_region_list)):
     # region
 
     if iea_region_list[i] == "World ":
-        for k in ["co2conc", "ghgconc", "forcing", "temp"]:
+        for k in ["ei", "co2conc", "ghgconc", "forcing", "temp"]:
             path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
 
         mdFile.write(

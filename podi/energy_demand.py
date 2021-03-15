@@ -62,6 +62,23 @@ def energy_demand(
     trans_grid,
     cdr_demand,
 ):
+    def acurve(data):
+        data = data.apply(
+            lambda x: adoption_curve(
+                x.rename(x.name[2].replace("  ", "")),
+                x.name[0],
+                scenario,
+                x.name[1],
+            ),
+            axis=1,
+        )
+
+        per = []
+        for i in range(0, len(data.index)):
+            per = pd.DataFrame(per).append(data[data.index[i]].T)
+
+        per.set_index(data.index, inplace=True)
+        return per
 
     ############################
     #  LOAD DEMAND INPUT DATA  #
@@ -196,6 +213,8 @@ def energy_demand(
 
     energy_efficiency = energy_efficiency.apply(lambda x: x + 1, axis=1)
     energy_efficiency = energy_efficiency.reindex(energy_demand.index)
+
+    # energy_efficiency = acurve(energy_efficiency.loc[:,:str(2030)])
 
     energy_demand_post_efficiency = energy_demand - (
         energy_demand * energy_efficiency.values

@@ -2188,7 +2188,7 @@ pd20 = pd20.loc["World ", "Global CO2 Equivalent Emissions", slice(None)].apply(
     axis=1,
 )
 
-scenario = "baseline"
+scenario = "pathway"
 start_year = 2000
 
 for i in range(0, len(iea_region_list)):
@@ -2223,7 +2223,7 @@ for i in range(0, len(iea_region_list)):
         em.loc[
             iea_region_list[i],
             ["Industry"],
-            ["Fossil fuels", "cement"],
+            slice(None),
         ]
         .sum()
         .loc[start_year:long_proj_end_year]
@@ -2248,7 +2248,7 @@ for i in range(0, len(iea_region_list)):
             [
                 "Forests & Wetlands",
             ],
-            ['CO2'],
+            slice(None),
             slice(None),
         ]
         .sum()
@@ -2539,71 +2539,69 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-# calculate
-
-# region
-
-em_total = pd.read_csv(
-    "podi/data/CO2_CEDS_emissions_by_sector_country_2021_02_05.csv"
-).drop(columns=["Em", "Units"])
-
-em_total = pd.DataFrame(em_total).set_index(["Country", "Sector"]) / 1000
-
-em_total.columns = em_total.columns.astype(int)
-
-em_total = em_total.groupby('Country').sum()
-
-region_categories = pd.read_csv(
-    "podi/data/region_categories.csv", usecols=["ISO", "IEA Region"]
-)
-
-em_total = em_total.merge(region_categories, right_on=["ISO"], left_on=["Country"])
-
-em_total = em_total.groupby("IEA Region").sum()
-
-# split into various levels of IEA regional grouping
-em_total["IEA Region 1"] = em_total.apply(lambda x: x.name.split()[2] + " ", axis=1)
-em_total["IEA Region 2"] = em_total.apply(lambda x: x.name.split()[4] + " ", axis=1)
-em_total["IEA Region 3"] = em_total.apply(lambda x: x.name.split()[-1] + " ", axis=1)
-
-em_total.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
-
-# make new row for world level data
-em_total_world = pd.DataFrame(em_total.sum()).T.rename(index={0: "World "})
-
-# make new rows for OECD/NonOECD regions
-em_total_oecd = pd.DataFrame(em_total.groupby("IEA Region 1").sum()).rename(
-    index={"OECD ": " OECD "}
-)
-
-# make new rows for IEA regions
-em_total_regions = pd.DataFrame(em_total.groupby("IEA Region 2").sum())
-em_total_regions2 = pd.DataFrame(em_total.groupby("IEA Region 3").sum())
-
-# combine all
-em_total = em_total_world.append([em_total_oecd, em_total_regions.combine_first(em_total_regions2)])
-em_total.index.name = "IEA Region"
-
-em_total = pd.concat([em_total], keys=["CO2"], names=["Gas"]).reorder_levels(
-    ["IEA Region", "Gas"]
-)
-em_total3 = pd.concat([em_total], keys=["baseline"], names=["Scenario"]).reorder_levels(
-    ["IEA Region", "Gas", "Scenario"]
-)
-em_total = em_total3.append(
-    pd.concat([em_total], keys=["pathway"], names=["Scenario"]).reorder_levels(
-        ["IEA Region", "Gas", "Scenario"]
-    )
-)
-
-# endregion
-
-# chart
-
-scenario = "baseline"
-start_year = start_year
+scenario = "pathway"
+start_year = 1990
 
 for i in range(0, len(iea_region_list)):
+    # calculate
+
+    # region
+
+    em_total = pd.read_csv(
+        "podi/data/CO2_CEDS_emissions_by_sector_country_2021_02_05.csv"
+    ).drop(columns=["Em", "Units"])
+
+    em_total = pd.DataFrame(em_total).set_index(["Country", "Sector"]) / 1000
+
+    em_total.columns = em_total.columns.astype(int)
+
+    em_total = em_total.groupby('Country').sum()
+
+    region_categories = pd.read_csv(
+        "podi/data/region_categories.csv", usecols=["ISO", "IEA Region"]
+    )
+
+    em_total = em_total.merge(region_categories, right_on=["ISO"], left_on=["Country"])
+
+    em_total = em_total.groupby("IEA Region").sum()
+
+    # split into various levels of IEA regional grouping
+    em_total["IEA Region 1"] = em_total.apply(lambda x: x.name.split()[2] + " ", axis=1)
+    em_total["IEA Region 2"] = em_total.apply(lambda x: x.name.split()[4] + " ", axis=1)
+    em_total["IEA Region 3"] = em_total.apply(lambda x: x.name.split()[-1] + " ", axis=1)
+
+    em_total.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
+
+    # make new row for world level data
+    em_total_world = pd.DataFrame(em_total.sum()).T.rename(index={0: "World "})
+
+    # make new rows for OECD/NonOECD regions
+    em_total_oecd = pd.DataFrame(em_total.groupby("IEA Region 1").sum()).rename(
+        index={"OECD ": " OECD "}
+    )
+
+    # make new rows for IEA regions
+    em_total_regions = pd.DataFrame(em_total.groupby("IEA Region 2").sum())
+    em_total_regions2 = pd.DataFrame(em_total.groupby("IEA Region 3").sum())
+
+    # combine all
+    em_total = em_total_world.append([em_total_oecd, em_total_regions.combine_first(em_total_regions2)])
+    em_total.index.name = "IEA Region"
+
+    em_total = pd.concat([em_total], keys=["CO2"], names=["Gas"]).reorder_levels(
+        ["IEA Region", "Gas"]
+    )
+    em_total3 = pd.concat([em_total], keys=["baseline"], names=["Scenario"]).reorder_levels(
+        ["IEA Region", "Gas", "Scenario"]
+    )
+    em_total = em_total3.append(
+        pd.concat([em_total], keys=["pathway"], names=["Scenario"]).reorder_levels(
+            ["IEA Region", "Gas", "Scenario"]
+        )
+    )
+
+    # endregion
+
     if scenario == "baseline":
         em = em_baseline
         afolu_em = afolu_em_baseline
@@ -2616,69 +2614,81 @@ for i in range(0, len(iea_region_list)):
     em_electricity = (
         em.loc[iea_region_list[i], "Electricity", slice(None)]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_transport = (
         em.loc[iea_region_list[i], "Transport", slice(None)]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_buildings = (
         em.loc[iea_region_list[i], "Buildings", slice(None)]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_industry = (
-        em.loc[iea_region_list[i], ["Industry", "Other"], ["Fossil fuels", "cement"]]
+        em.loc[
+            iea_region_list[i],
+            ["Industry"],
+            slice(None),
+        ]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_ra = (
         afolu_em.loc[
             iea_region_list[i],
             [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Animal Mgmt",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
+                "Regenerative Agriculture",
             ],
             slice(None),
             slice(None),
         ]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
     em_fw = (
         afolu_em.loc[
             iea_region_list[i],
             [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
+                "Forests & Wetlands",
             ],
             slice(None),
             slice(None),
         ]
         .sum()
-        .loc[data_start_year:long_proj_end_year]
+        .loc[start_year:long_proj_end_year]
     )
 
-    em_othergas = em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-gases"]].sum()
+    em_othergas = (
+        em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
+        .sum()
+        .loc[start_year:long_proj_end_year]
+    )
 
+    em_ch4 = (
+        em.loc[iea_region_list[i], slice(None), ["CH4"]]
+        .sum()
+        .loc[start_year:long_proj_end_year]
+    )
+
+    em_n2o = (
+        em.loc[iea_region_list[i], slice(None), ["N2O"]]
+        .sum()
+        .loc[start_year:long_proj_end_year]
+    )
+
+    em_fgas = (
+        em.loc[iea_region_list[i], slice(None), ["F-gases"]]
+        .sum()
+        .loc[start_year:long_proj_end_year]
+    )
+    
     em_total = em_total.loc[iea_region_list[i], 'CO2', scenario]
 
     if iea_region_list[i] == "World ":
@@ -2690,9 +2700,7 @@ for i in range(0, len(iea_region_list)):
                 em_transport,
                 em_buildings,
                 em_industry,
-                em_ch4,
-                em_n2o,
-                em_fgas,
+                em_othergas,
                 em_ra,
                 em_fw,
                 em_cdr,
@@ -2703,12 +2711,10 @@ for i in range(0, len(iea_region_list)):
                 "Unnamed 1": "Transport",
                 "Unnamed 2": "Buildings",
                 "Unnamed 3": "Industry",
-                "Unnamed 4": "CH4",
-                "Unnamed 5": "N2O",
-                "Unnamed 6": "F-gases",
-                "Unnamed 7": "Agriculture",
-                "Unnamed 8": "Forests & Wetlands",
-                "0": "CDR",
+                "Unnamed 4": "Other",
+                "Unnamed 5": "Agriculture",
+                "Unnamed 6": "Forests & Wetlands",
+                0: "CDR",
             }
         )
     else:
@@ -2718,9 +2724,7 @@ for i in range(0, len(iea_region_list)):
                 em_transport,
                 em_buildings,
                 em_industry,
-                em_ch4,
-                em_n2o,
-                em_fgas,
+                em_othergas,
                 em_ra,
                 em_fw,
             ]
@@ -2730,43 +2734,37 @@ for i in range(0, len(iea_region_list)):
                 1: "Transport",
                 2: "Buildings",
                 3: "Industry",
-                4: "CH4",
-                5: "N2O",
-                6: "F-gases",
-                7: "Agriculture",
-                8: "Forests & Wetlands",
+                4: "Other",
+                5: "Agriculture",
+                6: "Forests & Wetlands",
             }
         )
 
-    ei = em.sum().divide(em_total)
+    ei = em.sum().loc[start_year:data_end_year].divide(em_total.loc[start_year:]).replace(NaN,0)
 
-    fig = (ei / 1000).loc[:, start_year:]
+    fig2 = (ei)
 
-    fig = fig.T
-    fig.index.name = "Year"
-    fig.reset_index(inplace=True)
+    fig2.index.name = "Year"
 
     fig = go.Figure()
 
     fig.add_trace(
         go.Scatter(
             name="EI",
-            line=dict(width=0.5, color="#72B7B2"),
-            x=fig["Year"],
-            y=fig,
-            fill="tozeroy",
-            stackgroup="one",
+            line=dict(width=3, color="#72B7B2"),
+            x=fig2.index.values,
+            y=fig2.values,
         )
     )
 
     fig.update_layout(
         title={
-            "text": "Emissions, " + scenario.title() + ", " + iea_region_list[i],
+            "text": "Epic Index, " + scenario.title() + ", " + iea_region_list[i],
             "xanchor": "center",
             "x": 0.5,
         },
         xaxis={"title": "Year"},
-        yaxis={"title": "GtCO2e"},
+        yaxis={"title": "Index"},
     )
 
     """
@@ -3471,9 +3469,9 @@ for i in range(0, len(iea_region_list)):
     fig2 = pd.melt(
         fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
     )
-    
+
     fig = go.Figure()
-    
+  
     fig.add_trace(
         go.Scatter(
             name="",

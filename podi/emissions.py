@@ -299,11 +299,11 @@ def emissions(
     )
 
     region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=["CAIT Region", "IEA Region"]
+        "podi/data/region_categories.csv", usecols=["IAM Region", "IEA Region"]
     )
 
     em_hist = em_hist.merge(
-        region_categories, right_on=["CAIT Region"], left_on=["Region"]
+        region_categories, right_on=["IAM Region"], left_on=["Region"]
     )
 
     em_hist = em_hist.groupby("IEA Region").sum()
@@ -344,21 +344,30 @@ def emissions(
     em_hist.columns = em_hist.columns.astype(int)
 
     # harmonize with historical emissions
+
     hf = (
         em_hist.loc[:, data_end_year]
-        .divide(em.loc[:, data_end_year].clip(lower=0).groupby("Region").sum())
+        .divide(em.loc[:, data_end_year].groupby("Region").sum())
         .replace(NaN, 0)
     )
 
     em = em.apply(lambda x: x.multiply(hf[x.name[0]]), axis=1)
 
+    """
+    hf = em_hist.loc[:, data_end_year] - (
+        em.loc[:, data_end_year].groupby("Region").sum()
+    ).replace(NaN, 0)
+
+    em = em.apply(lambda x: x + (hf[x.name[0]]), axis=1)
+    """
     em2 = []
 
     for i in range(0, len(iea_region_list)):
         em_per = (
             pd.DataFrame(
                 em.loc[iea_region_list[i]].apply(
-                    lambda x: x.divide(em.loc[iea_region_list[i]].sum()), axis=1
+                    lambda x: x.divide(x.clip(lower=0).sum()),
+                    axis=0,
                 )
             )
         ).loc[:, 1990:data_end_year]

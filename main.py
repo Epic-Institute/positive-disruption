@@ -209,7 +209,6 @@ em_mitigated = (
     - em_pathway.groupby(["Region", "Sector", "Metric"]).sum()
 )
 
-
 # endregion
 
 #######
