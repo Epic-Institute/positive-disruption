@@ -13973,7 +13973,7 @@ ME ,Solar,pathway,Electricity,"Parameter b, max",100
 ME ,Solar,baseline,Electricity,"Parameter b, max",-100
 EURASIA ,Solar,pathway,Electricity,"Parameter b, max",100
 EURASIA ,Solar,baseline,Electricity,"Parameter b, max",-100
-RUS ,Solar,pathway,Electricity,"Parameter b, max",40
+RUS ,Solar,pathway,Electricity,"Parameter b, max",60
 RUS ,Solar,baseline,Electricity,"Parameter b, max",-100
 ASIAPAC ,Solar,pathway,Electricity,"Parameter b, max",100
 ASIAPAC ,Solar,baseline,Electricity,"Parameter b, max",-100
@@ -14015,7 +14015,7 @@ ME ,Solar,pathway,Electricity,"Parameter b, min",0
 ME ,Solar,baseline,Electricity,"Parameter b, min",-100
 EURASIA ,Solar,pathway,Electricity,"Parameter b, min",0
 EURASIA ,Solar,baseline,Electricity,"Parameter b, min",-100
-RUS ,Solar,pathway,Electricity,"Parameter b, min",15
+RUS ,Solar,pathway,Electricity,"Parameter b, min",35
 RUS ,Solar,baseline,Electricity,"Parameter b, min",-100
 ASIAPAC ,Solar,pathway,Electricity,"Parameter b, min",0
 ASIAPAC ,Solar,baseline,Electricity,"Parameter b, min",-100
@@ -16115,7 +16115,7 @@ ME ,Wind,pathway,Electricity,"Parameter b, max",100
 ME ,Wind,baseline,Electricity,"Parameter b, max",-100
 EURASIA ,Wind,pathway,Electricity,"Parameter b, max",100
 EURASIA ,Wind,baseline,Electricity,"Parameter b, max",-100
-RUS ,Wind,pathway,Electricity,"Parameter b, max",35
+RUS ,Wind,pathway,Electricity,"Parameter b, max",60
 RUS ,Wind,baseline,Electricity,"Parameter b, max",-100
 ASIAPAC ,Wind,pathway,Electricity,"Parameter b, max",100
 ASIAPAC ,Wind,baseline,Electricity,"Parameter b, max",-100
@@ -16157,7 +16157,7 @@ ME ,Wind,pathway,Electricity,"Parameter b, min",0
 ME ,Wind,baseline,Electricity,"Parameter b, min",-100
 EURASIA ,Wind,pathway,Electricity,"Parameter b, min",0
 EURASIA ,Wind,baseline,Electricity,"Parameter b, min",-100
-RUS ,Wind,pathway,Electricity,"Parameter b, min",20
+RUS ,Wind,pathway,Electricity,"Parameter b, min",40
 RUS ,Wind,baseline,Electricity,"Parameter b, min",-100
 ASIAPAC ,Wind,pathway,Electricity,"Parameter b, min",0
 ASIAPAC ,Wind,baseline,Electricity,"Parameter b, min",-100
@@ -16201,7 +16201,7 @@ AFRICA ,Wind,pathway,Electricity,Saturation Point,46.4
 SAFR ,Wind,pathway,Electricity,Saturation Point,59
 ME ,Wind,pathway,Electricity,Saturation Point,33.7
 EURASIA ,Wind,pathway,Electricity,Saturation Point,30.9
-RUS ,Wind,pathway,Electricity,Saturation Point,53.3
+RUS ,Wind,pathway,Electricity,Saturation Point,63.3
 ASIAPAC ,Wind,pathway,Electricity,Saturation Point,37.2
 CHINA ,Wind,pathway,Electricity,Saturation Point,49.7
 INDIA ,Wind,pathway,Electricity,Saturation Point,44.2
@@ -37673,3 +37673,87 @@ ASEAN ,Electricity,baseline,Other energy sector,Saturation Point,0
 ASEAN ,Electricity,pathway,Other energy sector,Saturation Point,100
 DevelopingECO ,Electricity,baseline,Other energy sector,Saturation Point,0
 DevelopingECO ,Electricity,pathway,Other energy sector,Saturation Point,100
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,Floor,0
+Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,Floor,0
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,Max annual growth,100
+Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,Max annual growth,100
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,"Parameter a, max",0.1
+Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,"Parameter a, max",0
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,"Parameter a, min",0
+Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,"Parameter a, min",0
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,"Parameter b, max",100
+Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,"Parameter b, max",100
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,"Parameter b, min",0
+Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,"Parameter b, min",0
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,Saturation Point,100
+Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,Saturation Point,100
+FAO CA,FAO CA,pathway,AFOLU,Floor,0
+FAO CA,FAO CA,baseline,AFOLU,Floor,0
+FAO CA,FAO CA,pathway,AFOLU,Max annual growth,100
+FAO CA,FAO CA,baseline,AFOLU,Max annual growth,100
+FAO CA,FAO CA,pathway,AFOLU,"Parameter a, max",0.10618
+FAO CA,FAO CA,baseline,AFOLU,"Parameter a, max",0
+FAO CA,FAO CA,pathway,AFOLU,"Parameter a, min",0
+FAO CA,FAO CA,baseline,AFOLU,"Parameter a, min",0
+FAO CA,FAO CA,pathway,AFOLU,"Parameter b, max",100
+FAO CA,FAO CA,baseline,AFOLU,"Parameter b, max",100
+FAO CA,FAO CA,pathway,AFOLU,"Parameter b, min",0
+FAO CA,FAO CA,baseline,AFOLU,"Parameter b, min",0
+FAO CA,FAO CA,pathway,AFOLU,Saturation Point,100
+FAO CA,FAO CA,baseline,AFOLU,Saturation Point,100
+Brazil No Till,Brazil No Till,pathway,AFOLU,Floor,0
+Brazil No Till,Brazil No Till,baseline,AFOLU,Floor,0
+Brazil No Till,Brazil No Till,pathway,AFOLU,Max annual growth,100
+Brazil No Till,Brazil No Till,baseline,AFOLU,Max annual growth,100
+Brazil No Till,Brazil No Till,pathway,AFOLU,"Parameter a, max",0.10618
+Brazil No Till,Brazil No Till,baseline,AFOLU,"Parameter a, max",0
+Brazil No Till,Brazil No Till,pathway,AFOLU,"Parameter a, min",0
+Brazil No Till,Brazil No Till,baseline,AFOLU,"Parameter a, min",0
+Brazil No Till,Brazil No Till,pathway,AFOLU,"Parameter b, max",100
+Brazil No Till,Brazil No Till,baseline,AFOLU,"Parameter b, max",100
+Brazil No Till,Brazil No Till,pathway,AFOLU,"Parameter b, min",0
+Brazil No Till,Brazil No Till,baseline,AFOLU,"Parameter b, min",0
+Brazil No Till,Brazil No Till,pathway,AFOLU,Saturation Point,100
+Brazil No Till,Brazil No Till,baseline,AFOLU,Saturation Point,100
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Floor,0
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,Floor,0
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Max annual growth,100
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,Max annual growth,100
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,"Parameter a, max",0.1
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,"Parameter a, max",0
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,"Parameter a, min",0
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,"Parameter a, min",0
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,"Parameter b, max",70
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,"Parameter b, max",100
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,"Parameter b, min",0
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,"Parameter b, min",0
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Saturation Point,100
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,Saturation Point,100
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Floor,0
+US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,Floor,0
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Max annual growth,100
+US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,Max annual growth,100
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,"Parameter a, max",1
+US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,"Parameter a, max",0
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,"Parameter a, min",0
+US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,"Parameter a, min",0
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,"Parameter b, max",100
+US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,"Parameter b, max",100
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,"Parameter b, min",0
+US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,"Parameter b, min",0
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Saturation Point,100
+US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,Saturation Point,100
+FSC global adoption,FSC global adoption,pathway,AFOLU,Floor,0
+FSC global adoption,FSC global adoption,baseline,AFOLU,Floor,0
+FSC global adoption,FSC global adoption,pathway,AFOLU,Max annual growth,100
+FSC global adoption,FSC global adoption,baseline,AFOLU,Max annual growth,100
+FSC global adoption,FSC global adoption,pathway,AFOLU,"Parameter a, max",0.1
+FSC global adoption,FSC global adoption,baseline,AFOLU,"Parameter a, max",0
+FSC global adoption,FSC global adoption,pathway,AFOLU,"Parameter a, min",0
+FSC global adoption,FSC global adoption,baseline,AFOLU,"Parameter a, min",0
+FSC global adoption,FSC global adoption,pathway,AFOLU,"Parameter b, max",100
+FSC global adoption,FSC global adoption,baseline,AFOLU,"Parameter b, max",100
+FSC global adoption,FSC global adoption,pathway,AFOLU,"Parameter b, min",0
+FSC global adoption,FSC global adoption,baseline,AFOLU,"Parameter b, min",0
+FSC global adoption,FSC global adoption,pathway,AFOLU,Saturation Point,100
+FSC global adoption,FSC global adoption,baseline,AFOLU,Saturation Point,100

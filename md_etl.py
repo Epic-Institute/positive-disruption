@@ -172,16 +172,16 @@ for i in range(0, len(iea_region_list)):
     # region
 
     if iea_region_list[i] == "World ":
-        for k in ["co2conc", "ghgconc", "forcing", "temp"]:
+        for k in ["co2conc", "forcing", "temp"]:
             path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
 
-        mdFile.write(
-            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
-        )
-        mdFile.write(path)
-        mdFile.write(" height='500' width='150%'></iframe>")
+            mdFile.write(
+                "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+            )
+            mdFile.write(path)
+            mdFile.write(" height='500' width='150%'></iframe>")
 
-        mdFile.new_line()
+            mdFile.new_line()
 
     # endregion
 

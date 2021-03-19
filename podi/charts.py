@@ -3770,24 +3770,6 @@ for i in range(0, len(iea_region_list)):
 # region
 
 year = 2050
-ndcs = [
-    (23, 49),
-    (5, 7),
-    (4.36, 5.96),
-    (2, 3),
-    (1.38, 2.09),
-    (2, 3),
-    (2, 3),
-    (1.64, 1.73),
-    (2, 3),
-    (2.87, 5.17),
-    (10, 15),
-    (11.85, 21.51),
-    (0.06, 5),
-    (1.76, 2.7),
-    (2, 3),
-    (5, 10),
-]
 
 for i in range(0, len(iea_region_list)):
     em_mit_electricity = em_mitigated.loc[
@@ -5241,7 +5223,6 @@ if save_figs is True:
 
 # region
 
-
 CONCENTRATION_CO2 = "simpleNbox.Ca"
 
 low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
@@ -5261,6 +5242,23 @@ results = (
 )
 results.columns = results.columns.astype(int)
 
+results19 = (
+    results.loc[
+        "GCAM4",
+        "SSP2-19",
+        "World",
+        [
+            "Diagnostics|MAGICC6|Concentration|CO2",
+            "Diagnostics|MAGICC6|Concentration|CH4",
+            "Diagnostics|MAGICC6|Concentration|N2O",
+        ],
+    ]
+    .loc[:, 2010:]
+    .multiply([1, 25e-3, 298e-3], axis=0)
+    .sum()
+)
+
+"""
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -5272,12 +5270,12 @@ results19 = curve_smooth(
                 "Diagnostics|MAGICC6|Concentration|CH4",
                 "Diagnostics|MAGICC6|Concentration|N2O",
             ],
-        ].loc[2010:]
+        ].loc[:,2010:]
     ).T,
     "quadratic",
     4,
 ).T
-
+"""
 results26 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -6768,6 +6766,61 @@ for i in range(0, len(iea_region_list)):
     plt.clf()
 
     # endregion
+
+##############################
+# AFOLU ADOPTION CURVE CHECK #
+##############################
+
+# region
+
+for i in range(0, len(acurves)):
+    fig1 = acurves.iloc[i].dropna() * 100
+    fig2 = per.iloc[i] * 100
+
+    fig1.index.name = "Year"
+    fig2.index.name = "Year"
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            name=fig1.name[0],
+            line=dict(width=3, color="black"),
+            x=fig1.index.values,
+            y=fig1.values,
+            fill="none",
+            stackgroup="one",
+            legendgroup="one",
+            showlegend=True,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="PD Projection",
+            line=dict(width=2, color="red", dash="dot"),
+            x=fig2.index.values,
+            y=fig2.values,
+            fill="none",
+            stackgroup="two",
+            legendgroup="two",
+            showlegend=True,
+        )
+    )
+
+    fig.update_layout(
+        title={
+            "text": "Logistic Curve Fit, " + fig1.name[0],
+            "xanchor": "center",
+            "x": 0.5,
+        },
+        xaxis={"title": "Year"},
+        yaxis={"title": "% Adoption"},
+    )
+
+    fig.show()
+
+# endregion
 
 ##############################
 # ANNUAL CO2 REMOVED VIA CDR #

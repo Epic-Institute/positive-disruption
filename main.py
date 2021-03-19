@@ -128,19 +128,6 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 )
 # transport_consump_cdr = transport_consump_cdr_baseline.append(transport_consump_cdr_pathway)
 
-"""
-(
-    elec_consump_hist,
-    elec_per_adoption_hist,
-    elec_consump_cdr_hist,
-    heat_consump_hist,
-    heat_per_adoption_hist,
-    heat_consump_cdr_hist,
-    transport_consump_hist,
-    transport_per_adoption_hist,
-    transport_consump_cdr_hist,
-) = energy_supply("baseline", energy_demand_hist)
-"""
 # endregion
 
 #########
