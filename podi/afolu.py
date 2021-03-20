@@ -3,6 +3,7 @@
 import pandas as pd
 from podi.adoption_curve import adoption_curve
 from numpy import NaN
+import numpy as np
 
 
 def afolu(scenario):
@@ -16,6 +17,10 @@ def afolu(scenario):
             "Analogs",
         ],
     )
+
+    # max extent
+
+    # region
 
     max_extent = afolu["Input data 3"][
         afolu["Input data 3"]["Metric"] == "Max extent"
@@ -54,19 +59,113 @@ def afolu(scenario):
         index=[
             max_extent["iso"],
             max_extent["Subvector"],
-            max_extent["Duration 1 (Years)"],max_extent["Value 2"], max_extent["Duration 2 (Years)"]],
+            max_extent["Duration 1 (Years)"],
+            max_extent["Value 2"],
+            max_extent["Duration 2 (Years)"],
+        ],
         columns=np.arange(data_end_year, long_proj_end_year + 1, 1),
-    dtype=float)
+        dtype=float,
+    )
     max_extent2.loc[:, 2019] = max_extent["Value 1"].values
     max_extent2.loc[:, 2100] = max_extent["Value 1"].values
-    max_extent2.interpolate(axis=1, limit_area ='inside', inplace=True)
-    
-        '''
+    max_extent2.interpolate(axis=1, limit_area="inside", inplace=True)
+
+    """
     max_extent2 = max_extent2.apply(
         lambda x: x[int(data_end_year + x.name[2])] = (max_extent["Value 2"]), axis=1)
-    '''
-    
-    afolu["Avoided pathways input"]
+    """
+    # endregion
+
+    # avg mitigation potential flux
+
+    # region
+
+    flux = afolu["Input data 3"][
+        afolu["Input data 3"]["Metric"] == "Avg mitigation potential flux"
+    ].drop(columns=["Metric", "Model", "Scenario", "Region", "Country", "Unit"])
+
+    flux["Duration 1 (Years)"] = np.where(
+        (
+            (flux["Duration 1 (Years)"].isna())
+            | (flux["Duration 1 (Years)"] > 2100 - 2019)
+        ),
+        2100 - 2019,
+        flux["Duration 1 (Years)"],
+    )
+
+    flux["Value 2"] = np.where(flux["Value 2"].isna(), flux["Value 1"], flux["Value 2"])
+
+    flux["Duration 2 (Years)"] = np.where(
+        (flux["Duration 2 (Years)"].isna()),
+        flux["Duration 1 (Years)"],
+        flux["Duration 2 (Years)"],
+    )
+
+    flux["Value 3"] = np.where(flux["Value 3"].isna(), flux["Value 2"], flux["Value 3"])
+
+    flux["Duration 3 (Years)"] = np.where(
+        flux["Duration 3 (Years)"].isna(),
+        flux["Duration 2 (Years)"],
+        flux["Duration 3 (Years)"],
+    )
+
+    flux2 = pd.DataFrame(
+        index=[
+            flux["iso"],
+            flux["Subvector"],
+            flux["Duration 1 (Years)"],
+            flux["Value 2"],
+            flux["Duration 2 (Years)"],
+        ],
+        columns=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        dtype=float,
+    )
+    flux2.loc[:, 2019] = flux["Value 1"].values
+    flux2.loc[:, 2100] = flux["Value 1"].values
+    flux2.interpolate(axis=1, limit_area="inside", inplace=True)
+
+    """
+    flux2 = flux2.apply(
+        lambda x: x[int(data_end_year + x.name[2])] = (flux["Value 2"]), axis=1)
+    """
+    # endregion
+
+    # avoided pathways
+
+    # region
+
+    avoid = afolu["Avoided pathways input"].drop(
+        columns=["Model", "Scenario", "Region"]
+    )
+
+    avoid["Mitigation (CO2)"] = (
+        avoid["Initial Extent (Mha)"].values
+        * avoid["Rate of Improvement"].values
+        * avoid["Mitigation (Mg CO2/ha)"].values
+    )
+
+    avoid2 = pd.DataFrame(
+        index=[
+            avoid["Country"],
+            avoid["Subvector"],
+            avoid["Initial Extent (Mha)"],
+            avoid["Initial Loss Rate (%)"],
+            avoid["Rate of Improvement"],
+            avoid["Mitigation (Mg CO2/ha)"],
+        ],
+        columns=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        dtype=float,
+    ).fillna(0)
+
+    avoid2 = avoid2.apply(
+        lambda x: x
+        + x.name[5]
+        * x.name[2]
+        * (1 + min((x.name[3] + x.name[4] * (x.index - 2018)), 0)),
+        axis=1,
+    )
+
+    # endregion
 
     afolu["Historical Observations"]
 

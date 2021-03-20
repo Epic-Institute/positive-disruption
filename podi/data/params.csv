@@ -184,9 +184,9 @@ RUS ,Electricity,Fossil fuels,-0.2,30.0,0.746,0.0
 RUS ,Electricity,Geothermal,0.094,13.623,0.0,0.0
 RUS ,Electricity,Hydroelectricity,-0.04,45.0,0.09,0.0
 RUS ,Electricity,Nuclear,-0.09,50.0,0.145,0.0
-RUS ,Electricity,Solar,0.18,50.0,0.373,0.0
+RUS ,Electricity,Solar,0.18,60.0,0.373,0.0
 RUS ,Electricity,Tide and wave,0.389,98.795,0.01,0.0
-RUS ,Electricity,Wind,0.1,50.0,0.533,0.0
+RUS ,Electricity,Wind,0.1,60.0,0.633,0.0
 RUS ,Heat,Bioenergy,-0.2,0.0,0.285,0.0
 RUS ,Heat,Coal,-0.181,20.0,0.208,0.0
 RUS ,Heat,Geothermal,0.014,14.994,0.05,0.0
@@ -319,10 +319,3 @@ NonOECD ,Heat,Waste,0.092,50.0,0.15,0.0
 NonOECD ,Transport,Oil,-0.09,37.0,0.95,0.0
 NonOECD ,Transport,Bioenergy,0.13,37.0,1.0,0.0
 NonOECD ,Transport,Other fuels,-0.07,25.0,0.15,0.0
-NAM ,Transport,Oil,-0.2,23.0,0.95,0.0
-US ,Transport,Oil,-0.192,23.0,0.95,0.0
-US ,Transport,Bioenergy,0.049,63.727,1.0,0.0
-CSAM ,Transport,Bioenergy,0.08,37.0,0.95,0.0
-BRAZIL ,Transport,Bioenergy,0.07,37.0,0.9,0.0
-EUR ,Transport,Oil,-0.2,23.0,0.95,0.0
-AFRICA ,Transport,Other fuels,-0.0,10.0,0.05,0.0

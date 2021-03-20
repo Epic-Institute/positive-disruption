@@ -2152,7 +2152,7 @@ for i in range(0, len(iea_region_list)):
             "x": 0.5,
         },
         xaxis={"title": "Year"},
-        yaxis={"title": "GtCO2e"},
+        yaxis={"title": "GtCO2e/yr"},
     )
 
     """
@@ -2517,7 +2517,7 @@ for i in range(0, len(iea_region_list)):
             "x": 0.5,
         },
         xaxis={"title": "Year"},
-        yaxis={"title": "GtCO2e"},
+        yaxis={"title": "GtCO2e/yr"},
     )
 
     if show_figs is True:
@@ -3166,7 +3166,7 @@ for i in range(0, len(iea_region_list)):
                 "x": 0.5,
             },
             xaxis={"title": "Year"},
-            yaxis={"title": "GtCO2e"},
+            yaxis={"title": "GtCO2e/yr"},
         )
         """
         fig.add_vrect(x0=1990, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
@@ -3741,7 +3741,7 @@ for i in range(0, len(iea_region_list)):
             "x": 0.5,
         },
         xaxis={"title": "Year"},
-        yaxis={"title": "GtCO2e"},
+        yaxis={"title": "GtCO2e/yr"},
     )
 
     """
