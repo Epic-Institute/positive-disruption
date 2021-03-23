@@ -137,23 +137,9 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 # region
 
 afolu_em_baseline, afolu_per_adoption_baseline = afolu("baseline")
-afolu_em_mitigated, afolu_per_adoption_pathway = afolu("pathway")
+afolu_em_pathway, afolu_per_adoption_pathway = afolu("pathway")
 
-afolu_em_pathway = pd.concat(
-    [
-        afolu_em_baseline.droplevel(["Metric", "Unit"])
-        - afolu_em_mitigated.droplevel(["Metric", "Unit"])
-    ],
-    keys=["Emissions"],
-    names=["Metric"],
-).reorder_levels(["Region", "Sector", "Metric"])
-afolu_em_pathway = afolu_em_pathway.apply(lambda x: x.subtract(x.loc[2020]), axis=1)
-
-afolu_em_baseline = afolu_em_baseline.droplevel(["Unit"])
-
-afolu_em_mitigated = afolu_em_mitigated.apply(
-    lambda x: x.subtract(afolu_em_mitigated.loc[:, 2020].values), axis=0
-).clip(lower=0)
+afolu_em_mitigated = afolu_em_pathway - afolu_em_baseline
 
 # endregion
 
@@ -188,8 +174,6 @@ em_pathway, em_targets_pathway, em_hist = emissions(
     "podi/data/emissions_additional.csv",
     "podi/data/iamc_data.csv",
 )
-
-em_pathway = em_pathway.append(-afolu_em_mitigated.loc[:, 2020:])
 
 em_mitigated = (
     em_baseline.groupby(["Region", "Sector", "Metric"]).sum()

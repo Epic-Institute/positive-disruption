@@ -2179,7 +2179,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 start_year = 2000
 
 for i in range(0, len(iea_region_list)):
