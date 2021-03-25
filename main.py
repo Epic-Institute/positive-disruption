@@ -137,9 +137,8 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 # region
 
 afolu_em_baseline, afolu_per_adoption_baseline = afolu("baseline")
-afolu_em_pathway, afolu_per_adoption_pathway = afolu("pathway")
 
-afolu_em_mitigated = afolu_em_pathway - afolu_em_baseline
+afolu_em_pathway, afolu_per_adoption_pathway = afolu("pathway")
 
 # endregion
 
@@ -348,6 +347,3 @@ for i in range(0, len(iea_region_list)):
     em_mit_ndc = pd.DataFrame(em_mit_ndc).append(em_ndc)
 
 # endregion
-
-end_time = time.monotonic()
-print(timedelta(seconds=end_time - start_time))

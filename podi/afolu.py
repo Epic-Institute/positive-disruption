@@ -35,8 +35,22 @@ def rgroup(data, gas, sector, rgroup, scenario):
     data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
     data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
 
+    # remove countries from higher level regions
+    data_oecd.loc[" OECD "] = (
+        data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
+    )
+    data_oecd.loc["NonOECD "] = data_oecd.loc["NonOECD "] - data_regions2.loc["BRAZIL "]
+
+    data_regions.loc["CSAM "] = data_regions.loc["CSAM "] - data_regions2.loc["BRAZIL "]
+    data_regions.loc["NAM "] = data_regions.loc["NAM "] - data_regions2.loc["US "]
+    data_regions.loc["AFRICA "] = (
+        data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
+    )
+
     # combine all
-    data = data_world.append([data_oecd, data_regions.combine_first(data_regions2)])
+    data = data_world.append(
+        [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
+    )
     data.index.name = "Region"
 
     data = pd.concat([data], names=["Sector"], keys=[sector])
@@ -61,7 +75,7 @@ def afolu(scenario):
         ],
     )
 
-    # max extent
+    # create max extent df
 
     # region
 
@@ -117,12 +131,15 @@ def afolu(scenario):
     )
 
     """
-    max_extent2 = max_extent2.apply(
-        lambda x: x[int(data_end_year + x.name[2])] = (max_extent["Value 2"]), axis=1)
+    # update Improved Forest Mgmt max extent units for consistency
+    max_extent2.loc[slice(None), "Improved Forest Mgmt", :] = (
+        max_extent2.loc[slice(None), "Improved Forest Mgmt", :] / 1e6
+    )
     """
+
     # endregion
 
-    # avg mitigation potential flux
+    # create avg mitigation potential flux df
 
     # region
 
@@ -169,11 +186,18 @@ def afolu(scenario):
     flux2.loc[:, 2019] = flux["Value 1"].values
     flux2.loc[:, 2100] = flux["Value 1"].values
     flux2.interpolate(axis=1, limit_area="inside", inplace=True)
-    flux2 = flux2.droplevel(["Duration 1 (Years)", "Value 2", "Duration 2 (Years)"])
+    flux2 = flux2.droplevel(
+        ["Duration 1 (Years)", "Value 2", "Duration 2 (Years)"]
+    ).fillna(0)
+
+    """
+    # update units to MtCO2e
+    flux2 = flux2 / 1e6
+    """
 
     # endregion
 
-    # historical observations
+    # create historical observations df (as % of max extent)
 
     # region
 
@@ -187,14 +211,13 @@ def afolu(scenario):
         hist.loc[
             slice(None),
             [
-                "Animal Mgmt",
                 "Biochar",
                 "Coastal Restoration",
                 "Cropland Soil Health",
                 "Improved Forest Mgmt",
                 "Improved Rice",
                 "Natural Regeneration",
-                "Nitrogen Fertilizer Management",
+                # "Nitrogen Fertilizer Management",
                 "Optimal Intensity",
                 "Peat Restoration",
                 "Silvopasture",
@@ -207,6 +230,28 @@ def afolu(scenario):
             lambda x: x.divide(max_extent2.loc[x.name[0], x.name[1]].loc[:2020]), axis=1
         )
     )
+
+    # correct units
+    hist1.loc[
+        slice(None),
+        ["Improved Rice", "Trees in Croplands", "Peat Restoration", "Silvopasture"],
+        :,
+    ] = (
+        hist1.loc[
+            slice(None),
+            ["Improved Rice", "Trees in Croplands", "Peat Restoration", "Silvopasture"],
+            :,
+        ]
+        / 1e3
+    )
+
+    """
+    # update Improved Forest Mgmt units for consistency
+    hist.loc[slice(None), "Improved Forest Mgmt", :] = (
+        hist.loc[slice(None), "Improved Forest Mgmt", :] / 1e6
+    )
+    """
+
     hist1 = hist1.replace(0, NaN)
 
     # endregion
@@ -245,7 +290,7 @@ def afolu(scenario):
     per.set_index(proj_per_adoption.index, inplace=True)
 
     per = per.apply(lambda x: x - x[2021], axis=1)
-    per = per.apply(lambda x: x / x[2100], axis=1)
+    # per = per.apply(lambda x: x / x[2100], axis=1)
 
     per = per.droplevel("Max (Mha)")
 
@@ -257,21 +302,132 @@ def afolu(scenario):
 
     cw = afolu["Pathway - analog crosswalk"][["Sub-vector", "Analog Name"]]
 
+    hist1.loc[:, 1990] = 0
+    hist0 = hist1[hist1.loc[:, :2020].sum(axis=1) <= 0.0]
+    hist1 = hist1[hist1.loc[:, :2020].sum(axis=1) > 0.0]
+    hist0.loc[:, 2020] = 0.0
+    hist1 = hist1.append(hist0)
+    hist1.interpolate(axis=1, limit_area="inside", inplace=True)
+
+    hist3 = []
+
+    for i in range(0, len(hist1)):
+        print(i)
+        hist3 = pd.DataFrame(hist3).append(
+            pd.concat(
+                [
+                    hist1.iloc[i].dropna(),
+                    pd.DataFrame(
+                        [
+                            per.loc[
+                                cw[cw["Sub-vector"] == hist1.iloc[i].name[1]][
+                                    "Analog Name"
+                                ],
+                                :,
+                            ]
+                            .where(
+                                per.loc[
+                                    cw[cw["Sub-vector"] == hist1.iloc[i].name[1]][
+                                        "Analog Name"
+                                    ]
+                                ].values
+                                >= hist1.iloc[i].max()
+                            )
+                            .dropna(axis=1)
+                            .squeeze()
+                            .values
+                        ]
+                    )
+                    .T.set_index(
+                        np.arange(
+                            hist1.iloc[i].dropna().index[-1],
+                            hist1.iloc[i].dropna().index[-1]
+                            + len(
+                                pd.DataFrame(
+                                    [
+                                        per.loc[
+                                            cw[
+                                                cw["Sub-vector"]
+                                                == hist1.iloc[i].name[1]
+                                            ]["Analog Name"],
+                                            :,
+                                        ]
+                                        .where(
+                                            per.loc[
+                                                cw[
+                                                    cw["Sub-vector"]
+                                                    == hist1.iloc[i].name[1]
+                                                ]["Analog Name"]
+                                            ].values
+                                            >= hist1.iloc[i].max()
+                                        )
+                                        .dropna(axis=1)
+                                        .squeeze()
+                                        .values
+                                    ]
+                                ).columns
+                            ),
+                            1,
+                        ).squeeze()
+                    )
+                    .squeeze(),
+                ]
+            )
+        )
+
     hist1 = hist1.apply(
         lambda x: pd.concat(
             [
-                x,
-                per.loc[cw[cw["Sub-vector"] == x.name[1]]["Analog Name"], :]
-                .where(
-                    per.loc[cw[cw["Sub-vector"] == x.name[1]]["Analog Name"]].values
-                    >= x.max()
+                x.dropna(),
+                pd.DataFrame(
+                    [
+                        per.loc[cw[cw["Sub-vector"] == x.name[1]]["Analog Name"], :]
+                        .where(
+                            per.loc[
+                                cw[cw["Sub-vector"] == x.name[1]]["Analog Name"]
+                            ].values
+                            >= x.max()
+                        )
+                        .dropna(axis=1)
+                        .squeeze()
+                        .values
+                    ]
+                )
+                .T.set_index(
+                    np.arange(
+                        x.dropna().index[-1],
+                        x.dropna().index[-1]
+                        + len(
+                            pd.DataFrame(
+                                [
+                                    per.loc[
+                                        cw[cw["Sub-vector"] == x.name[1]][
+                                            "Analog Name"
+                                        ],
+                                        :,
+                                    ]
+                                    .where(
+                                        per.loc[
+                                            cw[cw["Sub-vector"] == x.name[1]][
+                                                "Analog Name"
+                                            ]
+                                        ].values
+                                        >= x.max()
+                                    )
+                                    .dropna(axis=1)
+                                    .squeeze()
+                                    .values
+                                ]
+                            ).columns
+                        ),
+                        1,
+                    ).squeeze()
                 )
                 .squeeze(),
             ]
         ),
         axis=1,
     )
-    hist1.interpolate(axis=1, limit_area="inside", inplace=True)
 
     # for region/subvector with no historical data, start adoption curve at current year
     hist2 = (
@@ -320,6 +476,8 @@ def afolu(scenario):
         )
     ).set_index(["Country", "Subvector"])
 
+    avoid = avoid / 1e6
+
     avoid_per = avoid.apply(lambda x: ((x[1990] - x) / x[1990]).fillna(0), axis=1)
 
     # endregion
@@ -355,7 +513,6 @@ def afolu(scenario):
         adoption.loc[
             slice(None),
             [
-                "Animal Mgmt",
                 "Biochar",
                 "Cropland Soil Health",
                 "Improved Rice",
@@ -396,7 +553,6 @@ def afolu(scenario):
         per_adoption.loc[
             slice(None),
             [
-                "Animal Mgmt",
                 "Biochar",
                 "Cropland Soil Health",
                 "Improved Rice",
@@ -413,7 +569,12 @@ def afolu(scenario):
         scenario,
     )
 
+    # endregion
+
     # subtract from current year emissions to get emissions
+
+    # region
+
     afolu_em_hist = (
         pd.read_csv("podi/data/emissions_additional.csv")
         .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])

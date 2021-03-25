@@ -85,6 +85,9 @@ def rgroup(data, gas, sector, rgroup):
         "podi/data/region_categories.csv", usecols=[rgroup, "IEA Region"]
     )
 
+    # make new row for world level data
+    data_world = pd.DataFrame(data.sum()).T.rename(index={0: "World "})
+
     data = data.merge(region_categories, right_on=[rgroup], left_on=["Country"])
 
     data = data.groupby("IEA Region").sum()
@@ -96,9 +99,6 @@ def rgroup(data, gas, sector, rgroup):
 
     data.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
 
-    # make new row for world level data
-    data_world = pd.DataFrame(data.sum()).T.rename(index={0: "World "})
-
     # make new rows for OECD/NonOECD regions
     data_oecd = pd.DataFrame(data.groupby("IEA Region 1").sum()).rename(
         index={"OECD ": " OECD "}
@@ -108,8 +108,22 @@ def rgroup(data, gas, sector, rgroup):
     data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
     data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
 
+    # remove countries from higher level regions
+    data_oecd.loc[" OECD "] = (
+        data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
+    )
+    data_oecd.loc["NonOECD "] = data_oecd.loc["NonOECD "] - data_regions2.loc["BRAZIL "]
+
+    data_regions.loc["CSAM "] = data_regions.loc["CSAM "] - data_regions2.loc["BRAZIL "]
+    data_regions.loc["NAM "] = data_regions.loc["NAM "] - data_regions2.loc["US "]
+    data_regions.loc["AFRICA "] = (
+        data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
+    )
+
     # combine all
-    data = data_world.append([data_oecd, data_regions.combine_first(data_regions2)])
+    data = data_world.append(
+        [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
+    )
     data.index.name = "IEA Region"
 
     data = pd.concat([data], names=["Sector"], keys=[sector])
