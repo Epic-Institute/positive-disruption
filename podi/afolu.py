@@ -35,6 +35,7 @@ def rgroup(data, gas, sector, rgroup, scenario):
     data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
     data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
 
+    """
     # remove countries from higher level regions
     data_oecd.loc[" OECD "] = (
         data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
@@ -46,7 +47,64 @@ def rgroup(data, gas, sector, rgroup, scenario):
     data_regions.loc["AFRICA "] = (
         data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
     )
+    """
+    # combine all
+    data = data_world.append(
+        [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
+    )
+    data.index.name = "Region"
 
+    data = pd.concat([data], names=["Sector"], keys=[sector])
+    data = pd.concat([data], names=["Metric"], keys=[sector])
+    data = pd.concat([data], names=["Scenario"], keys=[scenario]).reorder_levels(
+        ["Region", "Sector", "Metric", "Scenario"]
+    )
+    data = data.loc[np.array(iea_region_list), slice(None), slice(None), slice(None)]
+
+    return data
+
+
+def rgroup2(data, gas, sector, rgroup, scenario):
+    region_categories = pd.read_csv(
+        "podi/data/region_categories.csv", usecols=[rgroup, "IEA Region"]
+    )
+
+    # make new row for world level data
+    data_world = pd.DataFrame(data.mean()).T.rename(index={0: "World "})
+
+    data = data.merge(region_categories, right_on=[rgroup], left_on=["Country"])
+
+    data = data.groupby("IEA Region").mean()
+
+    # split into various levels of IEA regional grouping
+    data["IEA Region 1"] = data.apply(lambda x: x.name.split()[2] + " ", axis=1)
+    data["IEA Region 2"] = data.apply(lambda x: x.name.split()[4] + " ", axis=1)
+    data["IEA Region 3"] = data.apply(lambda x: x.name.split()[-1] + " ", axis=1)
+
+    data.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
+
+    # make new rows for OECD/NonOECD regions
+    data_oecd = pd.DataFrame(data.groupby("IEA Region 1").mean()).rename(
+        index={"OECD ": " OECD "}
+    )
+
+    # make new rows for IEA regions
+    data_regions = pd.DataFrame(data.groupby("IEA Region 2").mean())
+    data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").mean())
+
+    """
+    # remove countries from higher level regions
+    data_oecd.loc[" OECD "] = (
+        data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
+    )
+    data_oecd.loc["NonOECD "] = data_oecd.loc["NonOECD "] - data_regions2.loc["BRAZIL "]
+
+    data_regions.loc["CSAM "] = data_regions.loc["CSAM "] - data_regions2.loc["BRAZIL "]
+    data_regions.loc["NAM "] = data_regions.loc["NAM "] - data_regions2.loc["US "]
+    data_regions.loc["AFRICA "] = (
+        data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
+    )
+    """
     # combine all
     data = data_world.append(
         [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
@@ -130,12 +188,10 @@ def afolu(scenario):
         ["Duration 1 (Years)", "Value 2", "Duration 2 (Years)"]
     )
 
-    """
     # update Improved Forest Mgmt max extent units for consistency
     max_extent2.loc[slice(None), "Improved Forest Mgmt", :] = (
         max_extent2.loc[slice(None), "Improved Forest Mgmt", :] / 1e6
     )
-    """
 
     # endregion
 
@@ -183,17 +239,12 @@ def afolu(scenario):
         columns=np.arange(1990, long_proj_end_year + 1, 1),
         dtype=float,
     )
-    flux2.loc[:, 2019] = flux["Value 1"].values
+    flux2.loc[:, 1990] = flux["Value 1"].values
     flux2.loc[:, 2100] = flux["Value 1"].values
     flux2.interpolate(axis=1, limit_area="inside", inplace=True)
     flux2 = flux2.droplevel(
         ["Duration 1 (Years)", "Value 2", "Duration 2 (Years)"]
     ).fillna(0)
-
-    """
-    # update units to MtCO2e
-    flux2 = flux2 / 1e6
-    """
 
     # endregion
 
@@ -244,13 +295,6 @@ def afolu(scenario):
         ]
         / 1e3
     )
-
-    """
-    # update Improved Forest Mgmt units for consistency
-    hist.loc[slice(None), "Improved Forest Mgmt", :] = (
-        hist.loc[slice(None), "Improved Forest Mgmt", :] / 1e6
-    )
-    """
 
     hist1 = hist1.replace(0, NaN)
 
@@ -309,72 +353,6 @@ def afolu(scenario):
     hist1 = hist1.append(hist0)
     hist1.interpolate(axis=1, limit_area="inside", inplace=True)
 
-    hist3 = []
-
-    for i in range(0, len(hist1)):
-        print(i)
-        hist3 = pd.DataFrame(hist3).append(
-            pd.concat(
-                [
-                    hist1.iloc[i].dropna(),
-                    pd.DataFrame(
-                        [
-                            per.loc[
-                                cw[cw["Sub-vector"] == hist1.iloc[i].name[1]][
-                                    "Analog Name"
-                                ],
-                                :,
-                            ]
-                            .where(
-                                per.loc[
-                                    cw[cw["Sub-vector"] == hist1.iloc[i].name[1]][
-                                        "Analog Name"
-                                    ]
-                                ].values
-                                >= hist1.iloc[i].max()
-                            )
-                            .dropna(axis=1)
-                            .squeeze()
-                            .values
-                        ]
-                    )
-                    .T.set_index(
-                        np.arange(
-                            hist1.iloc[i].dropna().index[-1],
-                            hist1.iloc[i].dropna().index[-1]
-                            + len(
-                                pd.DataFrame(
-                                    [
-                                        per.loc[
-                                            cw[
-                                                cw["Sub-vector"]
-                                                == hist1.iloc[i].name[1]
-                                            ]["Analog Name"],
-                                            :,
-                                        ]
-                                        .where(
-                                            per.loc[
-                                                cw[
-                                                    cw["Sub-vector"]
-                                                    == hist1.iloc[i].name[1]
-                                                ]["Analog Name"]
-                                            ].values
-                                            >= hist1.iloc[i].max()
-                                        )
-                                        .dropna(axis=1)
-                                        .squeeze()
-                                        .values
-                                    ]
-                                ).columns
-                            ),
-                            1,
-                        ).squeeze()
-                    )
-                    .squeeze(),
-                ]
-            )
-        )
-
     hist1 = hist1.apply(
         lambda x: pd.concat(
             [
@@ -386,7 +364,7 @@ def afolu(scenario):
                             per.loc[
                                 cw[cw["Sub-vector"] == x.name[1]]["Analog Name"]
                             ].values
-                            >= x.max()
+                            >= x.dropna().iloc[-1]
                         )
                         .dropna(axis=1)
                         .squeeze()
@@ -395,8 +373,9 @@ def afolu(scenario):
                 )
                 .T.set_index(
                     np.arange(
-                        x.dropna().index[-1],
+                        x.dropna().index[-1] + 1,
                         x.dropna().index[-1]
+                        + 1
                         + len(
                             pd.DataFrame(
                                 [
@@ -412,7 +391,7 @@ def afolu(scenario):
                                                 "Analog Name"
                                             ]
                                         ].values
-                                        >= x.max()
+                                        >= x.dropna().iloc[-1]
                                     )
                                     .dropna(axis=1)
                                     .squeeze()
@@ -429,24 +408,7 @@ def afolu(scenario):
         axis=1,
     )
 
-    # for region/subvector with no historical data, start adoption curve at current year
-    hist2 = (
-        hist1.loc[:, 2020:]
-        .where(hist1.loc[:, 2020] == 0)
-        .apply(
-            lambda x: pd.concat(
-                [
-                    x[x.index < 2021],
-                    per.loc[
-                        cw[cw["Sub-vector"] == x.name[1]]["Analog Name"], :
-                    ].squeeze(),
-                ]
-            ),
-            axis=1,
-        )
-    )
-
-    hist1 = hist1.combine_first(hist2)
+    hist1 = hist1.fillna(method="ffill", axis=1)
 
     # endregion
 
@@ -487,7 +449,8 @@ def afolu(scenario):
     # region
 
     adoption = adoption.append(avoid)
-    per_adoption = hist1.append(avoid_per).fillna(0)
+    hist1.loc[:, 2100] = hist1.loc[:, 2099]
+    per_adoption = pd.concat([hist1, avoid_per], axis=0).fillna(0)
 
     co2_fw = rgroup(
         adoption.loc[
@@ -529,7 +492,7 @@ def afolu(scenario):
         scenario,
     )
 
-    per_fw = rgroup(
+    per_fw = rgroup2(
         per_adoption.loc[
             slice(None),
             [
@@ -549,7 +512,7 @@ def afolu(scenario):
         scenario,
     )
 
-    per_ag = rgroup(
+    per_ag = rgroup2(
         per_adoption.loc[
             slice(None),
             [

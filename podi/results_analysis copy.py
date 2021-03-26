@@ -13,12 +13,13 @@ from podi.adoption_curve import adoption_curve
 def results_analysis(
     region,
     scenario,
-    energy_demand,
-    elec_consump,
-    heat_consump,
-    transport_consump,
+    energy_demand_baseline,
+    energy_demand_pathway,
+    elec_consump_pathway,
+    heat_consump_pathway,
+    transport_consump_pathway,
     afolu_per_adoption,
-    cdr,
+    cdr_pathway,
 ):
 
     ###################
@@ -49,9 +50,9 @@ def results_analysis(
         ]
 
         grid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
+            elec_consump_pathway.loc[region, decarb, :]
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .div(elec_consump_pathway.loc[region, slice(None), :].sum())
         )
         grid_decarb = pd.DataFrame(grid_decarb).T
         grid_decarb.columns = grid_decarb.columns.astype(int)
@@ -63,25 +64,25 @@ def results_analysis(
 
         # region
 
-        transport_consump.columns = transport_consump.columns.astype(int)
-        energy_demand.columns = energy_demand.columns.astype(int)
+        transport_consump_pathway.columns = transport_consump_pathway.columns.astype(
+            int
+        )
+        energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
+        energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
         transport_decarb = 1 - (
             (
                 pd.DataFrame(
-                    transport_consump.loc[
-                        region, ["Fossil fuels", "Other fuels"], scenario, :
+                    transport_consump_pathway.loc[
+                        region, ["Fossil fuels", "Other fuels"], :
                     ]
                 )
                 .groupby("Region")
                 .sum()
             ).div(
                 (
-                    transport_consump.loc[
-                        region,
-                        ["Bioenergy", "Fossil fuels", "Other fuels"],
-                        scenario,
-                        :,
+                    transport_consump_pathway.loc[
+                        region, ["Bioenergy", "Fossil fuels", "Other fuels"], :
                     ]
                 ).sum()
             )
@@ -99,7 +100,7 @@ def results_analysis(
         # region
 
         renewable_elec = (
-            elec_consump.loc[
+            elec_consump_pathway.loc[
                 region,
                 [
                     "Biomass and waste",
@@ -110,15 +111,14 @@ def results_analysis(
                     "Tide and wave",
                     "Wind",
                 ],
-                scenario,
                 :,
             ]
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .div(elec_consump_pathway.loc[region, slice(None), :].sum())
         )
 
         renewable_heat = (
-            heat_consump.loc[
+            heat_consump_pathway.loc[
                 region,
                 [
                     "Bioenergy",
@@ -127,12 +127,11 @@ def results_analysis(
                     "Waste",
                     "Other Sources",
                 ],
-                scenario,
                 :,
             ]
             .sum()
             .div(
-                heat_consump.loc[
+                heat_consump_pathway.loc[
                     region,
                     [
                         "Bioenergy",
@@ -143,7 +142,6 @@ def results_analysis(
                         "Other Sources",
                         "Fossil fuels",
                     ],
-                    scenario,
                     :,
                 ].sum()
             )
@@ -151,16 +149,16 @@ def results_analysis(
 
         building_decarb = (
             (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
+                energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()
                 * renewable_elec
             ).add(
-                energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum()
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
                 * renewable_heat
             )
         ).div(
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum())
+            (energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()).add(
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
+            )
         )
 
         building_decarb = pd.DataFrame(building_decarb).T
@@ -176,16 +174,16 @@ def results_analysis(
 
         industry_decarb = (
             (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
+                energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()
                 * renewable_elec
             ).add(
-                energy_demand.loc[region, "Industry", ["Heat"], scenario].sum()
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
                 * renewable_heat
             )
         ).div(
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Industry", ["Heat"], scenario].sum())
+            (energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()).add(
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
+            )
         )
 
         industry_decarb = pd.DataFrame(industry_decarb)
@@ -201,7 +199,6 @@ def results_analysis(
 
         ra_decarb = afolu_per_adoption.loc[
             region,
-            "Regenerative Agriculture",
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -211,9 +208,7 @@ def results_analysis(
                 "Legumes",
                 "Optimal Intensity",
                 "Silvopasture",
-                "Regenerative Agriculture",
             ],
-            scenario,
             :,
         ]
         ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
@@ -229,7 +224,6 @@ def results_analysis(
 
         fw_decarb = afolu_per_adoption.loc[
             region,
-            "Forests & Wetlands",
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -238,9 +232,7 @@ def results_analysis(
                 "Improved Forest Mgmt",
                 "Peat Restoration",
                 "Natural Regeneration",
-                "Forests & Wetlands",
             ],
-            scenario,
             :,
         ]
         fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
@@ -255,13 +247,9 @@ def results_analysis(
 
         # region
 
-        cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
-                axis=1,
-            )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-
+        cdr_decarb = pd.DataFrame(cdr_pathway / cdr_pathway.max()).T.rename(
+            index={0: "Carbon Dioxide Removal"}
+        )
         """
         cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
             cdr_decarb.idxmax(1).values[0]
@@ -277,7 +265,7 @@ def results_analysis(
         """
 
         """
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
+        cdr_decarb = adoption_curve(cdr_decarb, "World ", "pathway", "All").T
         cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
         """
 
@@ -302,12 +290,10 @@ def results_analysis(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
         )
 
-        adoption_curves.index.name = "Sector"
-        region = "World "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
+        adoption_curves["Region"] = "World "
+        adoption_curves.index.set_names("Sector", inplace=True)
         adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
+        adoption_curves.set_index(["Region", "Sector"], inplace=True)
 
         # endregion
 
@@ -336,9 +322,9 @@ def results_analysis(
         ]
 
         grid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
+            elec_consump_pathway.loc[region, decarb, :]
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .div(elec_consump_pathway.loc[region, slice(None), :].sum())
         )
         grid_decarb = pd.DataFrame(grid_decarb).T
         grid_decarb.columns = grid_decarb.columns.astype(int)
@@ -350,25 +336,25 @@ def results_analysis(
 
         # region
 
-        transport_consump.columns = transport_consump.columns.astype(int)
-        energy_demand.columns = energy_demand.columns.astype(int)
+        transport_consump_pathway.columns = transport_consump_pathway.columns.astype(
+            int
+        )
+        energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
+        energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
         transport_decarb = 1 - (
             (
                 pd.DataFrame(
-                    transport_consump.loc[
-                        region, ["Fossil fuels", "Other fuels"], scenario, :
+                    transport_consump_pathway.loc[
+                        region, ["Fossil fuels", "Other fuels"], :
                     ]
                 )
                 .groupby("Region")
                 .sum()
             ).div(
                 (
-                    transport_consump.loc[
-                        region,
-                        ["Bioenergy", "Fossil fuels", "Other fuels"],
-                        scenario,
-                        :,
+                    transport_consump_pathway.loc[
+                        region, ["Bioenergy", "Fossil fuels", "Other fuels"], :
                     ]
                 ).sum()
             )
@@ -386,7 +372,7 @@ def results_analysis(
         # region
 
         renewable_elec = (
-            elec_consump.loc[
+            elec_consump_pathway.loc[
                 region,
                 [
                     "Biomass and waste",
@@ -397,15 +383,14 @@ def results_analysis(
                     "Tide and wave",
                     "Wind",
                 ],
-                scenario,
                 :,
             ]
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .div(elec_consump_pathway.loc[region, slice(None), :].sum())
         )
 
         renewable_heat = (
-            heat_consump.loc[
+            heat_consump_pathway.loc[
                 region,
                 [
                     "Bioenergy",
@@ -414,12 +399,11 @@ def results_analysis(
                     "Waste",
                     "Other Sources",
                 ],
-                scenario,
                 :,
             ]
             .sum()
             .div(
-                heat_consump.loc[
+                heat_consump_pathway.loc[
                     region,
                     [
                         "Bioenergy",
@@ -430,7 +414,6 @@ def results_analysis(
                         "Other Sources",
                         "Fossil fuels",
                     ],
-                    scenario,
                     :,
                 ].sum()
             )
@@ -438,16 +421,16 @@ def results_analysis(
 
         building_decarb = (
             (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
+                energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()
                 * renewable_elec
             ).add(
-                energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum()
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
                 * renewable_heat
             )
         ).div(
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum())
+            (energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()).add(
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
+            )
         )
 
         building_decarb = pd.DataFrame(building_decarb).T
@@ -463,16 +446,16 @@ def results_analysis(
 
         industry_decarb = (
             (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
+                energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()
                 * renewable_elec
             ).add(
-                energy_demand.loc[region, "Industry", ["Heat"], scenario].sum()
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
                 * renewable_heat
             )
         ).div(
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Industry", ["Heat"], scenario].sum())
+            (energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()).add(
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
+            )
         )
 
         industry_decarb = pd.DataFrame(industry_decarb)
@@ -498,7 +481,6 @@ def results_analysis(
                 "Optimal Intensity",
                 "Silvopasture",
             ],
-            scenario,
             :,
         ]
         ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
@@ -523,7 +505,6 @@ def results_analysis(
                 "Peat Restoration",
                 "Natural Regeneration",
             ],
-            scenario,
             :,
         ]
         fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
@@ -539,12 +520,8 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
-                axis=1,
-            )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-        """
+            pd.DataFrame(cdr_pathway).sum() / pd.DataFrame(cdr_pathway).sum().max()
+        ).T
         cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
             cdr_decarb.idxmax(1).values[0]
         ]
@@ -555,9 +532,9 @@ def results_analysis(
             name="Carbon Dioxide Removal",
         )
 
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
+        cdr_decarb = adoption_curve(cdr_decarb, "World ", "pathway", "All").T
         cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
+
         # endregion
 
         adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
@@ -579,12 +556,10 @@ def results_analysis(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
         )
 
-        adoption_curves.index.name = "Sector"
-        region = " OECD "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
+        adoption_curves["Region"] = " OECD "
+        adoption_curves.index.set_names("Sector", inplace=True)
         adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
+        adoption_curves.set_index(["Region", "Sector"], inplace=True)
 
         # endregion
 
@@ -613,9 +588,9 @@ def results_analysis(
         ]
 
         grid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
+            elec_consump_pathway.loc[region, decarb, :]
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .div(elec_consump_pathway.loc[region, slice(None), :].sum())
         )
         grid_decarb = pd.DataFrame(grid_decarb).T
         grid_decarb.columns = grid_decarb.columns.astype(int)
@@ -627,25 +602,25 @@ def results_analysis(
 
         # region
 
-        transport_consump.columns = transport_consump.columns.astype(int)
-        energy_demand.columns = energy_demand.columns.astype(int)
+        transport_consump_pathway.columns = transport_consump_pathway.columns.astype(
+            int
+        )
+        energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
+        energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
         transport_decarb = 1 - (
             (
                 pd.DataFrame(
-                    transport_consump.loc[
-                        region, ["Fossil fuels", "Other fuels"], scenario, :
+                    transport_consump_pathway.loc[
+                        region, ["Fossil fuels", "Other fuels"], :
                     ]
                 )
                 .groupby("Region")
                 .sum()
             ).div(
                 (
-                    transport_consump.loc[
-                        region,
-                        ["Bioenergy", "Fossil fuels", "Other fuels"],
-                        scenario,
-                        :,
+                    transport_consump_pathway.loc[
+                        region, ["Bioenergy", "Fossil fuels", "Other fuels"], :
                     ]
                 ).sum()
             )
@@ -663,7 +638,7 @@ def results_analysis(
         # region
 
         renewable_elec = (
-            elec_consump.loc[
+            elec_consump_pathway.loc[
                 region,
                 [
                     "Biomass and waste",
@@ -674,15 +649,14 @@ def results_analysis(
                     "Tide and wave",
                     "Wind",
                 ],
-                scenario,
                 :,
             ]
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .div(elec_consump_pathway.loc[region, slice(None), :].sum())
         )
 
         renewable_heat = (
-            heat_consump.loc[
+            heat_consump_pathway.loc[
                 region,
                 [
                     "Bioenergy",
@@ -691,12 +665,11 @@ def results_analysis(
                     "Waste",
                     "Other Sources",
                 ],
-                scenario,
                 :,
             ]
             .sum()
             .div(
-                heat_consump.loc[
+                heat_consump_pathway.loc[
                     region,
                     [
                         "Bioenergy",
@@ -707,7 +680,6 @@ def results_analysis(
                         "Other Sources",
                         "Fossil fuels",
                     ],
-                    scenario,
                     :,
                 ].sum()
             )
@@ -715,16 +687,16 @@ def results_analysis(
 
         building_decarb = (
             (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
+                energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()
                 * renewable_elec
             ).add(
-                energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum()
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
                 * renewable_heat
             )
         ).div(
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum())
+            (energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()).add(
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
+            )
         )
 
         building_decarb = pd.DataFrame(building_decarb).T
@@ -740,16 +712,16 @@ def results_analysis(
 
         industry_decarb = (
             (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
+                energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()
                 * renewable_elec
             ).add(
-                energy_demand.loc[region, "Industry", ["Heat"], scenario].sum()
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
                 * renewable_heat
             )
         ).div(
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Industry", ["Heat"], scenario].sum())
+            (energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()).add(
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
+            )
         )
 
         industry_decarb = pd.DataFrame(industry_decarb)
@@ -775,7 +747,6 @@ def results_analysis(
                 "Optimal Intensity",
                 "Silvopasture",
             ],
-            scenario,
             :,
         ]
         ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
@@ -800,7 +771,6 @@ def results_analysis(
                 "Peat Restoration",
                 "Natural Regeneration",
             ],
-            scenario,
             :,
         ]
         fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
@@ -816,12 +786,8 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
-                axis=1,
-            )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-        """
+            pd.DataFrame(cdr_pathway).sum() / pd.DataFrame(cdr_pathway).sum().max()
+        ).T
         cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
             cdr_decarb.idxmax(1).values[0]
         ]
@@ -832,9 +798,8 @@ def results_analysis(
             name="Carbon Dioxide Removal",
         )
 
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
+        cdr_decarb = adoption_curve(cdr_decarb, "World ", "pathway", "All").T
         cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
 
         # endregion
 
@@ -857,12 +822,10 @@ def results_analysis(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
         )
 
-        adoption_curves.index.name = "Sector"
-        region = "NonOECD "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
+        adoption_curves["Region"] = "NonOECD "
+        adoption_curves.index.set_names("Sector", inplace=True)
         adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
+        adoption_curves.set_index(["Region", "Sector"], inplace=True)
 
         # endregion
     else:
@@ -888,9 +851,9 @@ def results_analysis(
         ]
 
         grid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
+            elec_consump_pathway.loc[region, decarb, :]
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .div(elec_consump_pathway.loc[region, slice(None), :].sum())
         )
         grid_decarb = pd.DataFrame(grid_decarb).T
         grid_decarb.columns = grid_decarb.columns.astype(int)
@@ -902,25 +865,25 @@ def results_analysis(
 
         # region
 
-        transport_consump.columns = transport_consump.columns.astype(int)
-        energy_demand.columns = energy_demand.columns.astype(int)
+        transport_consump_pathway.columns = transport_consump_pathway.columns.astype(
+            int
+        )
+        energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
+        energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
 
         transport_decarb = 1 - (
             (
                 pd.DataFrame(
-                    transport_consump.loc[
-                        region, ["Fossil fuels", "Other fuels"], scenario, :
+                    transport_consump_pathway.loc[
+                        region, ["Fossil fuels", "Other fuels"], :
                     ]
                 )
                 .groupby("Region")
                 .sum()
             ).div(
                 (
-                    transport_consump.loc[
-                        region,
-                        ["Bioenergy", "Fossil fuels", "Other fuels"],
-                        scenario,
-                        :,
+                    transport_consump_pathway.loc[
+                        region, ["Bioenergy", "Fossil fuels", "Other fuels"], :
                     ]
                 ).sum()
             )
@@ -936,7 +899,7 @@ def results_analysis(
         # region
 
         renewable_elec = (
-            elec_consump.loc[
+            elec_consump_pathway.loc[
                 region,
                 [
                     "Biomass and waste",
@@ -947,15 +910,14 @@ def results_analysis(
                     "Tide and wave",
                     "Wind",
                 ],
-                scenario,
                 :,
             ]
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .div(elec_consump_pathway.loc[region, slice(None), :].sum())
         )
 
         renewable_heat = (
-            heat_consump.loc[
+            heat_consump_pathway.loc[
                 region,
                 [
                     "Bioenergy",
@@ -964,12 +926,11 @@ def results_analysis(
                     "Waste",
                     "Other Sources",
                 ],
-                scenario,
                 :,
             ]
             .sum()
             .div(
-                heat_consump.loc[
+                heat_consump_pathway.loc[
                     region,
                     [
                         "Bioenergy",
@@ -980,7 +941,6 @@ def results_analysis(
                         "Other Sources",
                         "Fossil fuels",
                     ],
-                    scenario,
                     :,
                 ].sum()
             )
@@ -988,16 +948,16 @@ def results_analysis(
 
         building_decarb = (
             (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
+                energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()
                 * renewable_elec
             ).add(
-                energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum()
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
                 * renewable_heat
             )
         ).div(
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum())
+            (energy_demand_pathway.loc[region, "Buildings", ["Electricity"]].sum()).add(
+                energy_demand_pathway.loc[region, "Buildings", ["Heat"]].sum()
+            )
         )
 
         building_decarb = pd.DataFrame(building_decarb).T
@@ -1011,16 +971,16 @@ def results_analysis(
 
         industry_decarb = (
             (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
+                energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()
                 * renewable_elec
             ).add(
-                energy_demand.loc[region, "Industry", ["Heat"], scenario].sum()
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
                 * renewable_heat
             )
         ).div(
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Industry", ["Heat"], scenario].sum())
+            (energy_demand_pathway.loc[region, "Industry", ["Electricity"]].sum()).add(
+                energy_demand_pathway.loc[region, "Industry", ["Heat"]].sum()
+            )
         )
 
         industry_decarb = pd.DataFrame(industry_decarb).T
@@ -1044,7 +1004,6 @@ def results_analysis(
                 "Optimal Intensity",
                 "Silvopasture",
             ],
-            scenario,
             :,
         ]
         ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
@@ -1069,7 +1028,6 @@ def results_analysis(
                 "Peat Restoration",
                 "Natural Regeneration",
             ],
-            scenario,
             :,
         ]
         fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
@@ -1085,12 +1043,8 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
-                axis=1,
-            )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-        """
+            pd.DataFrame(cdr_pathway).sum() / pd.DataFrame(cdr_pathway).sum().max()
+        ).T
         cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
             cdr_decarb.idxmax(1).values[0]
         ]
@@ -1101,9 +1055,8 @@ def results_analysis(
             name="Carbon Dioxide Removal",
         )
 
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
+        cdr_decarb = adoption_curve(cdr_decarb, "World ", "pathway", "All").T
         cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
 
         # endregion
 
@@ -1126,11 +1079,10 @@ def results_analysis(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
         )
 
-        adoption_curves.index.name = "Sector"
         adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
+        adoption_curves.index.set_names("Sector", inplace=True)
         adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
+        adoption_curves.set_index(["Region", "Sector"], inplace=True)
 
         # endregion
 

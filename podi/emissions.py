@@ -41,6 +41,7 @@ def rgroup(data, gas, sector, rgroup, scenario):
     data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
     data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
 
+    """
     # remove countries from higher level regions
     data_oecd.loc[" OECD "] = (
         data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
@@ -52,6 +53,7 @@ def rgroup(data, gas, sector, rgroup, scenario):
     data_regions.loc["AFRICA "] = (
         data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
     )
+    """
 
     # combine all
     data = data_world.append(
@@ -345,9 +347,10 @@ def emissions(
 
     # harmonize with historical emissions
 
+    # add clip(lower=0) before .groupby to have em_hist not account for net negative F&W emissions
     hf = (
         em_hist.loc[:, data_end_year]
-        .divide(em.loc[:, data_end_year].clip(lower=0).groupby("Region").sum())
+        .divide(em.loc[:, data_end_year].groupby("Region").sum())
         .replace(NaN, 0)
     )
 
@@ -355,11 +358,12 @@ def emissions(
 
     em2 = []
 
+    # add clip(lower=0) before .sum() to have em_hist not account for net negative F&W emissions
     for i in range(0, len(iea_region_list)):
         em_per = (
             pd.DataFrame(
                 em.loc[iea_region_list[i]].apply(
-                    lambda x: x.divide(x.clip(lower=0).sum()),
+                    lambda x: x.divide(x.sum()),
                     axis=0,
                 )
             )
@@ -373,12 +377,11 @@ def emissions(
         )
         em2 = pd.DataFrame(em2).append(em_per)
 
-    em = (
-        em2.join(em.loc[:, 2020:])
-        .droplevel("Gas")
-    )
+    em = em2.join(em.loc[:, 2020:]).droplevel("Gas")
 
-    em = pd.concat([em], keys=[scenario], names=['Scenario']).reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+    em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Scenario"]
+    )
 
     #######################
     #  EMISSIONS TARGETS  #

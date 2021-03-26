@@ -108,6 +108,7 @@ def rgroup(data, gas, sector, rgroup):
     data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
     data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
 
+    """
     # remove countries from higher level regions
     data_oecd.loc[" OECD "] = (
         data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
@@ -119,7 +120,7 @@ def rgroup(data, gas, sector, rgroup):
     data_regions.loc["AFRICA "] = (
         data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
     )
-
+    """
     # combine all
     data = data_world.append(
         [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
