@@ -53,6 +53,7 @@ for i in range(0, len(iea_region_list)):
         )
         mdFile.write(path)
         mdFile.write(" height='500' width='150%'></iframe>")
+        mdFile.new_line()
 
     # endregion
 
@@ -78,7 +79,6 @@ for i in range(0, len(iea_region_list)):
             )
             mdFile.write(path)
             mdFile.write(" height='500' width='150%'></iframe>")
-
             mdFile.new_line()
 
     # endregion
