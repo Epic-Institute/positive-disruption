@@ -2,7 +2,6 @@
 
 # region
 
-from podi.socioeconomics import socioeconomics
 from podi.energy_demand import energy_demand, data_start_year, data_end_year
 from podi.energy_supply import energy_supply, long_proj_end_year
 from podi.afolu import afolu

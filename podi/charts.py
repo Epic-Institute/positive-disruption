@@ -5406,7 +5406,7 @@ for i in range(0, len(iea_region_list)):
     em_mit.columns = em_mit.columns.astype(int)
 
     em_targets_pathway = (
-        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+        pd.read_csv()
         .set_index(["Region", "Sector", "Unit"])
         .loc[
             slice(None),
@@ -5554,7 +5554,7 @@ for i in range(0, len(iea_region_list)):
     em_mit.loc[:, :2020] = 0
 
     em_targets_pathway = (
-        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+        pd.read_csv()
         .set_index(["Region", "Sector", "Unit"])
         .loc[
             slice(None),
@@ -5722,7 +5722,7 @@ for i in range(0, len(iea_region_list)):
     em_mit.loc[:, :2020] = 0
 
     em_targets_pathway = (
-        pd.read_csv("podi/data/emissions_baseline_afolu.csv")
+        pd.read_csv()
         .set_index(["Region", "Sector", "Unit"])
         .loc[
             slice(None),
