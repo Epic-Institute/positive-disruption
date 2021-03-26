@@ -223,7 +223,7 @@ for i in range(0, len(iea_region_list)):
         + " IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
-        x=[-0.1, 0.1],
+        x=(-0.1, 0.1),
         y=-0.3,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
@@ -1798,7 +1798,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 start_year = 2000
 
 for i in range(0, len(iea_region_list)):
@@ -2142,6 +2142,25 @@ for i in range(0, len(iea_region_list)):
         yaxis={"title": "GtCO2e/yr"},
     )
 
+    fig.update_layout(margin=dict())
+    fig.add_annotation(
+        text="Historical data (shaded gray) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to"
+        + "<br>"
+        + " IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100;"
+        + "<br>"
+        + " emissions factors are from IEA Emissions Factors 2020.",
+        xref="paper",
+        yref="paper",
+        x=(-0.1, 0.1),
+        y=-0.35,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="left",
+        borderpad=6,
+        bgcolor="#ffffff",
+        opacity=1,
+    )
+
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -2162,7 +2181,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 start_year = 2000
 
 for i in range(0, len(iea_region_list)):
@@ -2476,7 +2495,26 @@ for i in range(0, len(iea_region_list)):
             "x": 0.5,
         },
         xaxis={"title": "Year"},
-        yaxis={"title": "GtCO2e/yr"},
+        yaxis={"title": "% of Total Emissions"},
+    )
+
+    fig.update_layout(margin=dict())
+    fig.add_annotation(
+        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to"
+        + "<br>"
+        + " IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100;"
+        + "<br>"
+        + " emissions factors are from IEA Emissions Factors 2020.",
+        xref="paper",
+        yref="paper",
+        x=-0.1,
+        y=-0.3,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="left",
+        borderpad=4,
+        bgcolor="#ffffff",
+        opacity=1,
     )
 
     if show_figs is True:
@@ -2506,7 +2544,9 @@ for i in range(0, len(iea_region_list)):
     # calculate
 
     # region
+    em_total = em_hist
 
+    """
     em_total = pd.read_csv(
         "podi/data/CO2_CEDS_emissions_by_sector_country_2021_02_05.csv"
     ).drop(columns=["Em", "Units"])
@@ -2563,7 +2603,7 @@ for i in range(0, len(iea_region_list)):
             ["IEA Region", "Gas", "Scenario"]
         )
     )
-
+    """
     # endregion
 
     if scenario == "baseline":
@@ -2650,8 +2690,11 @@ for i in range(0, len(iea_region_list)):
         .sum()
         .loc[start_year:long_proj_end_year]
     )
-
+    """
     em_total = em_total.loc[iea_region_list[i], "CO2", scenario]
+    """
+
+    em_total = em_total.loc[iea_region_list[i], slice(None), slice(None), scenario]
 
     if iea_region_list[i] == "World ":
         em_cdr = -cdr.loc[slice(None), scenario, :].squeeze()
@@ -2702,15 +2745,11 @@ for i in range(0, len(iea_region_list)):
             }
         )
 
-    ei = (
-        em_total.loc[start_year:]
-        .divide(em.sum().loc[start_year:data_end_year])
-        .replace(NaN, 0)
-    )
+    ei = em_total.loc[:, data_end_year].values / (em.sum().loc[data_end_year])
 
     fig2 = ei
 
-    fig2.index.name = "Year"
+    # fig2.index.name = "Year"
 
     fig = go.Figure()
 
@@ -2719,7 +2758,7 @@ for i in range(0, len(iea_region_list)):
             name="EI",
             line=dict(width=4, color="#72B7B2"),
             x=pd.Series(data_end_year),
-            y=pd.Series(fig2[data_end_year]),
+            y=pd.Series(fig2),
         )
     )
 
@@ -2748,10 +2787,10 @@ for i in range(0, len(iea_region_list)):
         text="Epic Index = Measured Emissions  /  PD Projected Emissions"
         + "<br>"
         + "EI = "
-        + str((em_total.loc[data_end_year] / 1000).round(decimals=2))
+        + str((em_total.loc[:, data_end_year].values[0] / 1000).round(decimals=3))
         + " GtCO2e"
         + "  /  "
-        + str((em.sum().loc[data_end_year] / 1000).round(decimals=2))
+        + str((em.sum().loc[data_end_year] / 1000).round(decimals=3))
         + " GtCO2e",
         xref="paper",
         yref="paper",
@@ -3311,6 +3350,25 @@ for i in range(0, len(iea_region_list)):
     fig.add_vrect(x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0)
     """
 
+    fig.update_layout(margin=dict())
+    fig.add_annotation(
+        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to"
+        + "<br>"
+        + " IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100;"
+        + "<br>"
+        + " emissions factors are from IEA Emissions Factors 2020.",
+        xref="paper",
+        yref="paper",
+        x=-0.1,
+        y=-0.3,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="left",
+        borderpad=4,
+        bgcolor="#ffffff",
+        opacity=1,
+    )
+
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -3851,7 +3909,7 @@ for year in [2030, 2050]:
                 ]["em_mit"].values[0],
                 y1=8.5,
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
-                name="NDC",
+                name="Target",
             )
 
             figure.add_trace(
@@ -3868,6 +3926,21 @@ for year in [2030, 2050]:
                     mode="text",
                     showlegend=False,
                 )
+            )
+
+            figure.update_layout(margin=dict())
+            figure.add_annotation(
+                text="Emissions mitigation target values represent a 50% reduction in the year 2030, and net-zero emissions in the year 2050.",
+                xref="paper",
+                yref="paper",
+                x=-0.1,
+                y=-0.3,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
             )
 
         figure.update_layout(
