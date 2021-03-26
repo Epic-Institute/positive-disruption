@@ -2800,9 +2800,12 @@ for i in range(0, len(iea_region_list)):
         font=dict(size=10, color="#2E3F5C"),
         align="left",
         borderpad=4,
+        borderwidth=2,
         bgcolor="#ffffff",
         opacity=1,
     )
+
+    fig.update_shapes(dict(xref="x", yref="y"))
 
     """
     fig.add_vrect(x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0)
