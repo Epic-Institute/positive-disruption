@@ -45,14 +45,14 @@ for i in range(0, len(iea_region_list)):
     mdFile.new_header(level=2, title="Adoption Curves")
 
     # region
+    for j in ["baseline", "pathway"]:
+        path = '"scurves-' + (iea_region_list[i]).replace(" ", "") + "-" + j + '.html"'
 
-    path = '"scurves-' + (iea_region_list[i]).replace(" ", "") + '.html"'
-
-    mdFile.write(
-        "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
-    )
-    mdFile.write(path)
-    mdFile.write(" height='500' width='150%'></iframe>")
+        mdFile.write(
+            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+        )
+        mdFile.write(path)
+        mdFile.write(" height='500' width='150%'></iframe>")
 
     # endregion
 
@@ -89,7 +89,7 @@ for i in range(0, len(iea_region_list)):
     # region
 
     for j in ["baseline", "pathway"]:
-        for k in ["em2"]:
+        for k in ["em2", "em3"]:
             path = (
                 '"'
                 + k

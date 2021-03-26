@@ -140,6 +140,8 @@ afolu_em_baseline, afolu_per_adoption_baseline = afolu("baseline")
 
 afolu_em_pathway, afolu_per_adoption_pathway = afolu("pathway")
 
+afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
+
 # endregion
 
 #############
@@ -246,14 +248,22 @@ for i in range(0, 1):
     # cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 3)
     '''
     cdr_pathway = (
-        1 - transport_per_adoption_pathway.loc["World ", "Fossil fuels"]
-    ).rename(index={"pathway": "Carbon Dioxide Removal"}).apply(
-        adoption_curve, axis=1, args=(["World ", "pathway"]), sector="All"
-    )[
-        0
-    ] * cdr_needed.loc[
-        "World "
-    ].max()
+        (1 - transport_per_adoption_pathway.loc["World ", "Fossil fuels"])
+        .rename(index={"pathway": "Carbon Dioxide Removal"})
+        .apply(adoption_curve, axis=1, args=(["World ", "pathway"]), sector="All")[0]
+        * cdr_needed.loc["World "].max()
+    ).T.rename(index={0: "Carbon Dioxide Removal"})
+
+cdr_pathway.index.name = "Sector"
+cdr_pathway = pd.concat(
+    [cdr_pathway], keys=["pathway"], names=["Scenario"]
+).reorder_levels(["Sector", "Scenario"])
+
+cdr_baseline = cdr_pathway.droplevel("Scenario") * 0
+cdr_baseline = pd.concat(
+    [cdr_baseline], keys=["baseline"], names=["Scenario"]
+).reorder_levels(["Sector", "Scenario"])
+cdr = cdr_baseline.append(cdr_pathway)
 
 # check if energy oversupply is at least energy demand needed for CDR
 """
@@ -290,21 +300,20 @@ conc_pathway, temp_pathway, sea_lvl_pathway = climate(
 # region
 
 adoption_curves = []
-
-for i in range(0, len(iea_region_list)):
-    adoption_curves = pd.DataFrame(adoption_curves).append(
-        results_analysis(
-            iea_region_list[i],
-            "pathway",
-            energy_demand_baseline,
-            energy_demand_pathway,
-            elec_consump_pathway,
-            heat_consump_pathway,
-            transport_consump_pathway,
-            afolu_per_adoption_pathway,
-            cdr_pathway,
-        ).replace(np.nan, 1)
-    )
+for j in ["baseline", "pathway"]:
+    for i in range(0, len(iea_region_list)):
+        adoption_curves = pd.DataFrame(adoption_curves).append(
+            results_analysis(
+                iea_region_list[i],
+                j,
+                energy_demand,
+                elec_consump,
+                heat_consump,
+                transport_consump,
+                afolu_per_adoption,
+                cdr,
+            ).replace(np.nan, 1)
+        )
 
 # endregion
 
