@@ -9,7 +9,7 @@
   
 
 ## Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-US.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-US-baseline.html" height='500' width='150%'></iframe><iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-US-pathway.html" height='500' width='150%'></iframe>  
 
 ## Energy Supply and Demand
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-US.html" height='500' width='150%'></iframe>  
@@ -22,7 +22,9 @@
 
 ## Emissions
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-baseline-US.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em3-baseline-US.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-US.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em3-pathway-US.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-US.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2030-US.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-US.html" height='500' width='150%'></iframe>  
