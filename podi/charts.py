@@ -216,7 +216,6 @@ for i in range(0, len(iea_region_list)):
         x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0
     )
 
-    fig.update_layout(margin=dict())
     fig.add_annotation(
         text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to"
         + "<br>"
@@ -232,6 +231,8 @@ for i in range(0, len(iea_region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
+
+    fig.update_shapes(dict(xref="x", yref="y"))
 
     if show_figs is True:
         fig.show()
@@ -771,7 +772,7 @@ for i in range(0, len(iea_region_list)):
 ##############################
 
 # region
-scenario = "baseline"
+scenario = "pathway"
 
 for i in range(0, len(iea_region_list)):
     fig = elec_per_adoption.loc[iea_region_list[i], slice(None), scenario]
@@ -1063,9 +1064,9 @@ for i in range(0, len(iea_region_list)):
         + "<br>"
         + "<b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources"
         + "<br>"
-        + "Regenerative Agriculture and Forests & Wetlands: percent of maximum estimated extent of mitigation available"
+        + "<b>Regenerative Agriculture and Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available"
         + "<br>"
-        + "CDR: percent of maximum CDR estimated to meet emissions targets",
+        + "<b>CDR</b>: percent of maximum CDR estimated to meet emissions targets",
         xref="paper",
         yref="paper",
         x=0,
