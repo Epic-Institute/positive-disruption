@@ -122,6 +122,7 @@ def rgroup2(data, gas, sector, rgroup, scenario):
 
 
 def afolu(scenario):
+    """
     afolu = pd.read_excel(
         "podi/data/Positive Disruption NCS Vectors.xlsx",
         sheet_name=[
@@ -132,14 +133,26 @@ def afolu(scenario):
             "Analogs",
         ],
     )
+    """
+
+    input_data_3 = pd.read_csv("podi/data/tnc_input_data_3.csv")
+    avoided_pathways_input = pd.read_csv("podi/data/tnc_avoided_pathways_input.csv")
+    hist_obs = pd.read_csv("podi/data/tnc_hist_obs.csv")
+    crosswalk = pd.read_csv("podi/data/tnc_crosswalk.csv")
+    analogs = pd.read_csv("podi/data/tnc_analogs.csv")
 
     # create max extent df
 
     # region
+    max_extent = input_data_3[input_data_3["Metric"] == "Max extent"].drop(
+        columns=["Metric", "Model", "Scenario", "Region", "iso", "Unit"]
+    )
 
+    """
     max_extent = afolu["Input data 3"][
         afolu["Input data 3"]["Metric"] == "Max extent"
     ].drop(columns=["Metric", "Model", "Scenario", "Region", "iso", "Unit"])
+    """
 
     max_extent["Duration 1 (Years)"] = np.where(
         (
@@ -199,9 +212,9 @@ def afolu(scenario):
 
     # region
 
-    flux = afolu["Input data 3"][
-        afolu["Input data 3"]["Metric"] == "Avg mitigation potential flux"
-    ].drop(columns=["Metric", "Model", "Scenario", "Region", "iso", "Unit"])
+    flux = input_data_3[input_data_3["Metric"] == "Avg mitigation potential flux"].drop(
+        columns=["Metric", "Model", "Scenario", "Region", "iso", "Unit"]
+    )
 
     flux["Duration 1 (Years)"] = np.where(
         (
@@ -252,11 +265,13 @@ def afolu(scenario):
 
     # region
 
-    hist = afolu["Historical Observations"].drop(
+    hist = hist_obs.drop(
         columns=["iso", "Model", "Scenario", "Region", "Metric", "Unit"]
     )
 
-    hist = pd.DataFrame(hist).set_index(["Country", "Subvector"]).loc[:, 1990:]
+    hist = pd.DataFrame(hist).set_index(["Country", "Subvector"])
+    hist.columns = hist.columns.astype(int)
+    hist = hist.loc[:, 1990:]
     hist.interpolate(axis=1, limit_area="inside", inplace=True)
     hist1 = (
         hist.loc[
@@ -305,7 +320,7 @@ def afolu(scenario):
     # region
 
     acurves = (
-        pd.DataFrame(afolu["Analogs"])
+        pd.DataFrame(analogs)
         .drop(columns=["Note", "Units", "Actual start year"])
         .set_index(["Analog name", "Max (Mha)"])
     )
@@ -344,7 +359,7 @@ def afolu(scenario):
 
     # region
 
-    cw = afolu["Pathway - analog crosswalk"][["Sub-vector", "Analog Name"]]
+    cw = crosswalk[["Sub-vector", "Analog Name"]]
 
     hist1.loc[:, 1990] = 0
     hist0 = hist1[hist1.loc[:, :2020].sum(axis=1) <= 0.0]
@@ -425,7 +440,7 @@ def afolu(scenario):
     # region
 
     avoid = pd.DataFrame(
-        afolu["Avoided pathways input"].drop(
+        avoided_pathways_input.drop(
             columns=[
                 "Model",
                 "Scenario",
@@ -439,6 +454,7 @@ def afolu(scenario):
     ).set_index(["Country", "Subvector"])
 
     avoid = avoid / 1e6
+    avoid.columns = avoid.columns.astype(int)
 
     avoid_per = avoid.apply(lambda x: ((x[1990] - x) / x[1990]).fillna(0), axis=1)
 
