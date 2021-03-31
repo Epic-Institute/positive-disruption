@@ -820,7 +820,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = "pathway"
+scenario = "baseline"
 start_year = start_year
 
 for i in range(0, len(iea_region_list)):
@@ -930,6 +930,21 @@ for i in range(0, len(iea_region_list)):
 
     fig.add_trace(
         go.Scatter(
+            name="Other Gases",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Other Gases")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="othergases",
+            legendgroup="Other Gases",
+            showlegend=False,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
             name="Electricity",
             line=dict(width=3, color="#B279A2", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
@@ -1012,6 +1027,20 @@ for i in range(0, len(iea_region_list)):
         )
     )
 
+    fig.add_trace(
+        go.Scatter(
+            name="Other Gases",
+            line=dict(width=3, color="#E45756", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Other Gases")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="othergases2",
+            legendgroup="Other Gases",
+        )
+    )
+
     if iea_region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
@@ -1050,7 +1079,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(
         title={
-            "text": "Percent of Total PD Adoption, " + iea_region_list[i],
+            "text": "Percent of Total PD Adoption, " + scenario + ', ' + iea_region_list[i],
             "xanchor": "center",
             "x": 0.5,
         },
@@ -2743,7 +2772,7 @@ for i in range(0, len(iea_region_list)):
             }
         )
 
-    ei = em_total.loc[:, data_end_year].values / (em.sum().loc[data_end_year])
+    ei = em_total.loc[:, data_end_year:2020].values / (em.sum().loc[data_end_year:2020])
 
     fig2 = ei
 

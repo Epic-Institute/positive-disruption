@@ -308,7 +308,7 @@ def afolu(scenario):
             ["Improved Rice", "Trees in Croplands", "Peat Restoration", "Silvopasture"],
             :,
         ]
-        / 1e3
+        / 1e2
     )
 
     hist1 = hist1.replace(0, NaN)
@@ -439,19 +439,22 @@ def afolu(scenario):
 
     # region
 
-    avoid = pd.DataFrame(
-        avoided_pathways_input.drop(
-            columns=[
-                "Model",
-                "Scenario",
-                "Region",
-                "Initial Extent (Mha)",
-                "Initial Loss Rate (%)",
-                "Rate of Improvement",
-                "Mitigation (Mg CO2/ha)",
-            ]
+    avoid = (
+        pd.DataFrame(
+            avoided_pathways_input.drop(
+                columns=[
+                    "Model",
+                    "Region",
+                    "Initial Extent (Mha)",
+                    "Initial Loss Rate (%)",
+                    "Rate of Improvement",
+                    "Mitigation (Mg CO2/ha)",
+                ]
+            )
         )
-    ).set_index(["Country", "Subvector"])
+        .set_index(["Scenario", "Country", "Subvector"])
+        .loc[scenario, slice(None), slice(None), :]
+    )
 
     avoid = avoid / 1e6
     avoid.columns = avoid.columns.astype(int)

@@ -175,6 +175,8 @@ em_pathway, em_targets_pathway, em_hist = emissions(
     "podi/data/iamc_data.csv",
 )
 
+em = em_baseline.append(em_pathway)
+
 em_mitigated = (
     em_baseline.groupby(["Region", "Sector", "Metric"]).sum()
     - em_pathway.groupby(["Region", "Sector", "Metric"]).sum()
@@ -311,6 +313,8 @@ for j in ["baseline", "pathway"]:
                 transport_consump,
                 afolu_per_adoption,
                 cdr,
+                em,
+                em_mitigated,
             ).replace(np.nan, 1)
         )
 

@@ -19,6 +19,8 @@ def results_analysis(
     transport_consump,
     afolu_per_adoption,
     cdr,
+    em,
+    em_mitigated,
 ):
 
     ###################
@@ -32,11 +34,11 @@ def results_analysis(
 
         # region
 
+        region = ["NAM ", "ASIAPAC ", "CSAM ", "EUR ", "AFRICA ", "ME "]
+
         # GRID DECARB
 
         # region
-
-        region = ["NAM ", "ASIAPAC ", "CSAM ", "EUR ", "AFRICA ", "ME "]
 
         decarb = [
             "Biomass and waste",
@@ -195,9 +197,38 @@ def results_analysis(
 
         # endregion
 
+        # OTHER GASES DECARB
+
+        # region
+
+        other_decarb = (
+            industry_decarb.append(building_decarb).append(grid_decarb)
+        ).mean()
+
+        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
+
+        # endregion
+
         # REGENERATIVE AGRICULTURE DECARB
 
         # region
+        ra_decarb_max = afolu_per_adoption.loc[
+            region,
+            "Regenerative Agriculture",
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Regenerative Agriculture",
+            ],
+            "pathway",
+            :,
+        ]
 
         ra_decarb = afolu_per_adoption.loc[
             region,
@@ -216,7 +247,7 @@ def results_analysis(
             scenario,
             :,
         ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
+        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
             index={0: "Regenerative Agriculture"}
         )
         ra_decarb.columns = ra_decarb.columns.astype(int)
@@ -226,6 +257,22 @@ def results_analysis(
         # FORESTS & WETLANDS DECARB
 
         # region
+        fw_decarb_max = afolu_per_adoption.loc[
+            region,
+            "Forests & Wetlands",
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Peat Restoration",
+                "Natural Regeneration",
+                "Forests & Wetlands",
+            ],
+            "pathway",
+            :,
+        ]
 
         fw_decarb = afolu_per_adoption.loc[
             region,
@@ -243,7 +290,8 @@ def results_analysis(
             scenario,
             :,
         ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
+
+        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
             index={0: "Forests & Wetlands"}
         )
         fw_decarb.columns = fw_decarb.columns.astype(int)
@@ -257,7 +305,7 @@ def results_analysis(
 
         cdr_decarb = pd.DataFrame(
             cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
+                lambda x: x / (cdr.loc[slice(None), "pathway", :].max(axis=1).values),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
@@ -301,6 +349,9 @@ def results_analysis(
         adoption_curves = adoption_curves.append(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
         )
+        adoption_curves = adoption_curves.append(
+            other_decarb.loc[:, data_start_year:long_proj_end_year]
+        )
 
         adoption_curves.index.name = "Sector"
         region = "World "
@@ -312,18 +363,17 @@ def results_analysis(
         # endregion
 
     elif region == " OECD ":
-
         ##################################
         # ADOPTION CURVES SUM TO OECD #
         ##################################
 
         # region
 
+        region = ["NAM ", "EUR ", "JPN "]
+
         # GRID DECARB
 
         # region
-
-        region = ["NAM ", "EUR ", "JPN "]
 
         decarb = [
             "Biomass and waste",
@@ -482,12 +532,24 @@ def results_analysis(
 
         # endregion
 
-        # REGENERATIVE AGRICULTURE DECARB
+        # OTHER GASES DECARB
 
         # region
 
-        ra_decarb = afolu_per_adoption.loc[
+        other_decarb = (
+            industry_decarb.append(building_decarb).append(grid_decarb)
+        ).mean()
+
+        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
+
+        # endregion
+
+        # REGENERATIVE AGRICULTURE DECARB
+
+        # region
+        ra_decarb_max = afolu_per_adoption.loc[
             region,
+            "Regenerative Agriculture",
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -497,11 +559,30 @@ def results_analysis(
                 "Legumes",
                 "Optimal Intensity",
                 "Silvopasture",
+                "Regenerative Agriculture",
+            ],
+            "pathway",
+            :,
+        ]
+
+        ra_decarb = afolu_per_adoption.loc[
+            region,
+            "Regenerative Agriculture",
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Regenerative Agriculture",
             ],
             scenario,
             :,
         ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
+        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
             index={0: "Regenerative Agriculture"}
         )
         ra_decarb.columns = ra_decarb.columns.astype(int)
@@ -511,9 +592,9 @@ def results_analysis(
         # FORESTS & WETLANDS DECARB
 
         # region
-
-        fw_decarb = afolu_per_adoption.loc[
+        fw_decarb_max = afolu_per_adoption.loc[
             region,
+            "Forests & Wetlands",
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -522,11 +603,29 @@ def results_analysis(
                 "Improved Forest Mgmt",
                 "Peat Restoration",
                 "Natural Regeneration",
+                "Forests & Wetlands",
+            ],
+            "pathway",
+            :,
+        ]
+
+        fw_decarb = afolu_per_adoption.loc[
+            region,
+            "Forests & Wetlands",
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Peat Restoration",
+                "Natural Regeneration",
+                "Forests & Wetlands",
             ],
             scenario,
             :,
         ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
+        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
             index={0: "Forests & Wetlands"}
         )
         fw_decarb.columns = fw_decarb.columns.astype(int)
@@ -578,6 +677,9 @@ def results_analysis(
         adoption_curves = adoption_curves.append(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
         )
+        adoption_curves = adoption_curves.append(
+            other_decarb.loc[:, data_start_year:long_proj_end_year]
+        )
 
         adoption_curves.index.name = "Sector"
         region = " OECD "
@@ -589,18 +691,17 @@ def results_analysis(
         # endregion
 
     elif region == "NonOECD ":
-
         ##################################
         # ADOPTION CURVES SUM TO NonOECD #
         ##################################
 
         # region
 
+        region = ["CSAM ", "AFRICA ", "ME ", "RUS ", "INDIA "]
+
         # GRID DECARB
 
         # region
-
-        region = ["CSAM ", "AFRICA ", "ME ", "RUS ", "INDIA "]
 
         decarb = [
             "Biomass and waste",
@@ -759,12 +860,24 @@ def results_analysis(
 
         # endregion
 
-        # REGENERATIVE AGRICULTURE DECARB
+        # OTHER GASES DECARB
 
         # region
 
-        ra_decarb = afolu_per_adoption.loc[
+        other_decarb = (
+            industry_decarb.append(building_decarb).append(grid_decarb)
+        ).mean()
+
+        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
+
+        # endregion
+
+        # REGENERATIVE AGRICULTURE DECARB
+
+        # region
+        ra_decarb_max = afolu_per_adoption.loc[
             region,
+            "Regenerative Agriculture",
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -774,11 +887,30 @@ def results_analysis(
                 "Legumes",
                 "Optimal Intensity",
                 "Silvopasture",
+                "Regenerative Agriculture",
+            ],
+            "pathway",
+            :,
+        ]
+
+        ra_decarb = afolu_per_adoption.loc[
+            region,
+            "Regenerative Agriculture",
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Regenerative Agriculture",
             ],
             scenario,
             :,
         ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
+        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
             index={0: "Regenerative Agriculture"}
         )
         ra_decarb.columns = ra_decarb.columns.astype(int)
@@ -788,9 +920,9 @@ def results_analysis(
         # FORESTS & WETLANDS DECARB
 
         # region
-
-        fw_decarb = afolu_per_adoption.loc[
+        fw_decarb_max = afolu_per_adoption.loc[
             region,
+            "Forests & Wetlands",
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -799,11 +931,29 @@ def results_analysis(
                 "Improved Forest Mgmt",
                 "Peat Restoration",
                 "Natural Regeneration",
+                "Forests & Wetlands",
+            ],
+            "pathway",
+            :,
+        ]
+
+        fw_decarb = afolu_per_adoption.loc[
+            region,
+            "Forests & Wetlands",
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Peat Restoration",
+                "Natural Regeneration",
+                "Forests & Wetlands",
             ],
             scenario,
             :,
         ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
+        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
             index={0: "Forests & Wetlands"}
         )
         fw_decarb.columns = fw_decarb.columns.astype(int)
@@ -856,6 +1006,9 @@ def results_analysis(
         adoption_curves = adoption_curves.append(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
         )
+        adoption_curves = adoption_curves.append(
+            other_decarb.loc[:, data_start_year:long_proj_end_year]
+        )
 
         adoption_curves.index.name = "Sector"
         region = "NonOECD "
@@ -865,8 +1018,8 @@ def results_analysis(
         adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
 
         # endregion
-    else:
 
+    else:
         ###################
         # ADOPTION CURVES #
         ###################
@@ -1028,12 +1181,24 @@ def results_analysis(
 
         # endregion
 
-        # REGENERATIVE AGRICULTURE DECARB
+        # OTHER GASES DECARB
 
         # region
 
-        ra_decarb = afolu_per_adoption.loc[
+        other_decarb = (
+            industry_decarb.append(building_decarb).append(grid_decarb)
+        ).mean()
+
+        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
+
+        # endregion
+
+        # REGENERATIVE AGRICULTURE DECARB
+
+        # region
+        ra_decarb_max = afolu_per_adoption.loc[
             region,
+            "Regenerative Agriculture",
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -1043,11 +1208,30 @@ def results_analysis(
                 "Legumes",
                 "Optimal Intensity",
                 "Silvopasture",
+                "Regenerative Agriculture",
+            ],
+            "pathway",
+            :,
+        ]
+
+        ra_decarb = afolu_per_adoption.loc[
+            region,
+            "Regenerative Agriculture",
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Regenerative Agriculture",
             ],
             scenario,
             :,
         ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb.sum().max()).T.rename(
+        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
             index={0: "Regenerative Agriculture"}
         )
         ra_decarb.columns = ra_decarb.columns.astype(int)
@@ -1057,9 +1241,9 @@ def results_analysis(
         # FORESTS & WETLANDS DECARB
 
         # region
-
-        fw_decarb = afolu_per_adoption.loc[
+        fw_decarb_max = afolu_per_adoption.loc[
             region,
+            "Forests & Wetlands",
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -1068,11 +1252,29 @@ def results_analysis(
                 "Improved Forest Mgmt",
                 "Peat Restoration",
                 "Natural Regeneration",
+                "Forests & Wetlands",
+            ],
+            "pathway",
+            :,
+        ]
+
+        fw_decarb = afolu_per_adoption.loc[
+            region,
+            "Forests & Wetlands",
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Peat Restoration",
+                "Natural Regeneration",
+                "Forests & Wetlands",
             ],
             scenario,
             :,
         ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb.sum().max()).T.rename(
+        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
             index={0: "Forests & Wetlands"}
         )
         fw_decarb.columns = fw_decarb.columns.astype(int)
@@ -1124,6 +1326,9 @@ def results_analysis(
         )
         adoption_curves = adoption_curves.append(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
+        )
+        adoption_curves = adoption_curves.append(
+            other_decarb.loc[:, data_start_year:long_proj_end_year]
         )
 
         adoption_curves.index.name = "Sector"
