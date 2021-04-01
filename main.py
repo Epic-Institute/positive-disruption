@@ -2,18 +2,17 @@
 
 # region
 
-from podi.energy_demand import energy_demand, data_start_year, data_end_year
+from podi.energy_demand import energy_demand, data_start_year, iea_region_list
 from podi.energy_supply import energy_supply, long_proj_end_year
 from podi.afolu import afolu
+from podi.emissions import emissions
 from podi.results_analysis import results_analysis
-
-# from podi.charts import charts
-from podi.curve_smooth import curve_smooth
-
 import podi.data.iea_weo_etl
 import podi.data.iea_weo_em_etl
 import podi.data.gcam_etl
 import pandas as pd
+
+"""
 from podi.cdr.cdr_util import (
     cdr_needed_def,
     grid_em_def,
@@ -24,12 +23,10 @@ from podi.cdr.cdr_util import (
 from podi.energy_demand import iea_region_list
 from podi.emissions import emissions
 from podi.cdr.cdr_main import cdr_mix
+"""
 from podi.climate import climate
 import time
-from datetime import timedelta
 import numpy as np
-from pandas_profiling import ProfileReport
-import streamlit as st
 from podi.adoption_curve import adoption_curve
 from podi.energy_demand_hist import energy_demand_hist
 from numpy import NaN
