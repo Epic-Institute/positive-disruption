@@ -9,8 +9,8 @@
   
 
 ## Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-World-baseline.html" height='500' width='150%'></iframe><br/><br/>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-World-pathway.html" height='500' width='150%'></iframe><br/><br/>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-World-baseline.html" height='500' width='125%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-World-pathway.html" height='500' width='150%'></iframe>
 
 ## Energy Supply and Demand
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-World.html" height='500' width='150%'></iframe>  
