@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
-import pyhector
-from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
+#import pyhector
+#from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.energy_demand import iea_region_list, data_end_year, data_start_year
 from podi.energy_supply import (
     near_proj_start_year,
@@ -223,7 +223,7 @@ for i in range(0, len(iea_region_list)):
         xref="paper",
         yref="paper",
         x=(-0.1, 0.1),
-        y=-0.3,
+        y=1.15,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -477,7 +477,7 @@ for i in range(0, len(iea_region_list)):
         xref="paper",
         yref="paper",
         x=[-0.1, 0.1],
-        y=-0.3,
+        y=1.15,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -741,7 +741,7 @@ for i in range(0, len(iea_region_list)):
         xref="paper",
         yref="paper",
         x=[-0.1, 0.1],
-        y=-0.3,
+        y=1.15,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -2179,7 +2179,7 @@ for i in range(0, len(iea_region_list)):
         xref="paper",
         yref="paper",
         x=(-0.1, 0.1),
-        y=-0.35,
+        y=1.17,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -2535,7 +2535,7 @@ for i in range(0, len(iea_region_list)):
         xref="paper",
         yref="paper",
         x=-0.1,
-        y=-0.3,
+        y=1.17,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -2822,7 +2822,7 @@ for i in range(0, len(iea_region_list)):
         xref="paper",
         yref="paper",
         x=0.4,
-        y=-0.3,
+        y=1.15,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -3117,7 +3117,7 @@ start_year = 1990
         xref="paper",
         yref="paper",
         x=0.4,
-        y=-0.3,
+        y=1.15
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -3581,7 +3581,7 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 x=[ndcs[i][0][0]],
                 y=[ndcs[i][1][0]],
-                marker_color="#FF7F0E",
+                marker_color="#f71be9",
                 name=ndcs[i][2][0],
             )
         )
@@ -3590,7 +3590,7 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 x=[ndcs[i][0][1]],
                 y=[ndcs[i][1][1]],
-                marker_color="#FC0080",
+                marker_color="#9c0803",
                 name=ndcs[i][2][1],
             )
         )
@@ -3618,11 +3618,11 @@ for i in range(0, len(iea_region_list)):
             text="The NDC commitment is to " + ndc_commit[i][0],
             xref="paper",
             yref="paper",
-            x=0,
-            y=-0.3,
+            x=-0.1,
+            y=-0.25,
             showarrow=False,
             font=dict(size=10, color="#2E3F5C"),
-            align="center",
+            align="left",
             borderpad=4,
             bgcolor="#ffffff",
             opacity=1,
@@ -3649,8 +3649,8 @@ for i in range(0, len(iea_region_list)):
             text="The NDC commitment is to " + ndc_commit[i][0],
             xref="paper",
             yref="paper",
-            x=0,
-            y=-0.3,
+            x=-0.1,
+            y=-0.25,
             showarrow=False,
             font=dict(size=10, color="#2E3F5C"),
             align="center",
@@ -3685,7 +3685,7 @@ for i in range(0, len(iea_region_list)):
         xref="paper",
         yref="paper",
         x=-0.1,
-        y=-0.3,
+        y=1.17,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -4259,7 +4259,7 @@ for year in [2030, 2050]:
                 xref="paper",
                 yref="paper",
                 x=-0.1,
-                y=-0.3,
+                y=-0.25,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
                 align="left",
@@ -4283,6 +4283,21 @@ for year in [2030, 2050]:
                 bordercolor="rgba(255, 255, 255, 0)",
             ),
             showlegend=False,
+        )
+        
+        figure.update_layout(margin=dict())
+        figure.add_annotation(
+            text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
+            xref="paper",
+            yref="paper",
+            x=-0.1,
+            y=1.14,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
         )
 
         figure.show()
@@ -4881,7 +4896,7 @@ if save_figs is True:
     )
 
 # endregion
-
+"""
 # CLIMATE SENSITIVITY
 """
 # region
