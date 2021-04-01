@@ -9,7 +9,7 @@
   
 
 ## Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-World-baseline.html" height='400' width='125%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-World-baseline.html" height='450' width='125%'></iframe>
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-World-pathway.html" height='500' width='150%'></iframe>
 
 ## Energy Supply and Demand
