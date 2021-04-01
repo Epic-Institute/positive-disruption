@@ -1405,7 +1405,7 @@ def results_analysis(
         # region
 
         sbuildings_decarb = (
-            (buildings_decarb * 0.73)
+            (building_decarb * 0.73)
             .rename(index={"Buildings": "Fuel Switching"})
             .append(transport_decarb * 0.27)
             .rename(index={"Buildings": "Efficiency"})
@@ -1658,7 +1658,7 @@ def results_analysis(
         # region
 
         sbuildings_decarb = (
-            (buildings_decarb * 0.73)
+            (building_decarb * 0.73)
             .rename(index={"Buildings": "Fuel Switching"})
             .append(transport_decarb * 0.27)
             .rename(index={"Buildings": "Efficiency"})
@@ -1910,7 +1910,7 @@ def results_analysis(
         # region
 
         sbuildings_decarb = (
-            (buildings_decarb * 0.73)
+            (building_decarb * 0.73)
             .rename(index={"Buildings": "Fuel Switching"})
             .append(transport_decarb * 0.27)
             .rename(index={"Buildings": "Efficiency"})
@@ -2161,7 +2161,7 @@ def results_analysis(
         # region
 
         sbuildings_decarb = (
-            (buildings_decarb * 0.73)
+            (building_decarb * 0.73)
             .rename(index={"Buildings": "Fuel Switching"})
             .append(transport_decarb * 0.27)
             .rename(index={"Buildings": "Efficiency"})
@@ -2354,4 +2354,4 @@ def results_analysis(
 
         # endregion
 
-    return adoption_curves, subadoption_curves
+    return adoption_curves
