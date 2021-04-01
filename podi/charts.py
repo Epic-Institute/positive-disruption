@@ -820,7 +820,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = "baseline"
+scenario = "pathway"
 start_year = start_year
 
 for i in range(0, len(iea_region_list)):
@@ -1079,7 +1079,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(
         title={
-            "text": "Percent of Total PD Adoption, " + scenario + ', ' + iea_region_list[i],
+            "text": "Percent of Total PD Adoption, " + scenario.title() + ', ' + iea_region_list[i],
             "xanchor": "center",
             "x": 0.5,
         },

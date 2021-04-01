@@ -446,20 +446,44 @@ def afolu(scenario):
                     "Model",
                     "Region",
                     "Initial Extent (Mha)",
-                    "Initial Loss Rate (%)",
-                    "Rate of Improvement",
                     "Mitigation (Mg CO2/ha)",
                 ]
             )
         )
-        .set_index(["Scenario", "Country", "Subvector"])
-        .loc[scenario, slice(None), slice(None), :]
+        .set_index(
+            [
+                "Scenario",
+                "Country",
+                "Subvector",
+                "Initial Loss Rate (%)",
+                "Rate of Improvement",
+            ]
+        )
+        .loc[scenario, slice(None), slice(None), slice(None), :]
     )
 
     avoid = avoid / 1e6
     avoid.columns = avoid.columns.astype(int)
 
-    avoid_per = avoid.apply(lambda x: ((x[1990] - x) / x[1990]).fillna(0), axis=1)
+    """
+    avoid_per = avoid.apply(lambda x: ((x[2019] - x) / x[2019]).fillna(0), axis=1)
+    """
+
+    avoid_per = (
+        (
+            avoid.apply(lambda x: x * 0, axis=1)
+            .apply(lambda x: x + x.name[3], axis=1)
+            .cumsum(axis=1)
+            .apply(lambda x: -x - x.name[2], axis=1)
+        )
+        .clip(lower=0)
+        .apply(
+            lambda x: pd.Series(
+                np.where(x.name[3] > 0, (-x + 1), (x * 0)), index=x.index
+            ),
+            axis=1,
+        )
+    ).clip(lower=0)
 
     # endregion
 
