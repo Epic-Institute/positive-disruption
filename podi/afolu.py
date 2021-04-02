@@ -308,7 +308,7 @@ def afolu(scenario):
             ["Improved Rice", "Trees in Croplands", "Peat Restoration", "Silvopasture"],
             :,
         ]
-        / 1e2
+        / 1e3
     )
 
     hist1 = hist1.replace(0, NaN)

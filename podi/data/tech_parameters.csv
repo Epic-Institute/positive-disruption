@@ -37699,8 +37699,8 @@ FAO CA,FAO CA,pathway,AFOLU,"Parameter b, max",100
 FAO CA,FAO CA,baseline,AFOLU,"Parameter b, max",100
 FAO CA,FAO CA,pathway,AFOLU,"Parameter b, min",0
 FAO CA,FAO CA,baseline,AFOLU,"Parameter b, min",0
-FAO CA,FAO CA,pathway,AFOLU,Saturation Point,100
-FAO CA,FAO CA,baseline,AFOLU,Saturation Point,100
+FAO CA,FAO CA,pathway,AFOLU,Saturation Point,50
+FAO CA,FAO CA,baseline,AFOLU,Saturation Point,50
 Brazil No Till,Brazil No Till,pathway,AFOLU,Floor,0
 Brazil No Till,Brazil No Till,baseline,AFOLU,Floor,0
 Brazil No Till,Brazil No Till,pathway,AFOLU,Max annual growth,100

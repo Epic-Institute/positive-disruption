@@ -3433,7 +3433,7 @@ fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
     xref="paper",
     yref="paper",
-    x=-0.18,
+    x=0,
     y=1.15,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
@@ -3554,7 +3554,7 @@ fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
     xref="paper",
     yref="paper",
-    x=-0.18,
+    x=0,
     y=1.15,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
@@ -3668,8 +3668,24 @@ fig.update_layout(
     yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
 )
 
-fig.show()
+fig.update_layout(margin=dict())
+fig.add_annotation(
+    text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
+    xref="paper",
+    yref="paper",
+    x=0,
+    y=1.15,
+    showarrow=False,
+    font=dict(size=10, color="#2E3F5C"),
+    align="left",
+    borderpad=4,
+    borderwidth=2,
+    bgcolor="#ffffff",
+    opacity=1,
+)
 
+if show_figs is True:
+    fig.show()
 if save_figs is True:
     pio.write_html(
         fig,
@@ -3678,9 +3694,9 @@ if save_figs is True:
     )
 
 # endregion
+
 """
 # CLIMATE SENSITIVITY
-"""
 # region
 
 low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
@@ -3736,22 +3752,6 @@ fig.update_layout(
     yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
 )
 
-fig.update_layout(margin=dict())
-fig.add_annotation(
-    text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
-    xref="paper",
-    yref="paper",
-    x=-0.18,
-    y=1.15,
-    showarrow=False,
-    font=dict(size=10, color="#2E3F5C"),
-    align="left",
-    borderpad=4,
-    borderwidth=2,
-    bgcolor="#ffffff",
-    opacity=1,
-)
-
 if show_figs is True:
     fig.show()
 if save_figs is True:
@@ -3762,7 +3762,7 @@ if save_figs is True:
     )
 
 # endregion
-
+"""
 # endregion
 
 
