@@ -39,7 +39,7 @@ save_figs = True
 show_figs = True
 start_year = 2000
 iea_region_list = iea_region_list
-scenario = 'baseline'
+scenario = 'pathway'
 
 # endregion
 
@@ -318,17 +318,11 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Adoption rates are represented as:"
-        + "<br>"
-        + "<b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources"
-        + "<br>"
-        + "<b>Regenerative Agriculture and Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available"
-        + "<br>"
-        + "<b>CDR</b>: percent of maximum CDR estimated to meet emissions targets",
+        text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture and Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available; <br><b>CDR</b>: percent of maximum CDR estimated to meet emissions targets",
         xref="paper",
         yref="paper",
-        x=0,
-        y=-0.4,
+        x=-0.18,
+        y=1.15,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -340,9 +334,8 @@ for i in range(0, len(iea_region_list)):
     """
     fig.add_vrect(x0=2010, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
     """
-
-    fig.show()
-
+    if show_figs is True:
+        fig.show()
     if save_figs is True:
         pio.write_html(
             fig,
@@ -534,7 +527,7 @@ for i in range(0, len(iea_region_list)):
         + "IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
-        x=(-0.1, 0.1),
+        x=-0.18,
         y=1.15,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
@@ -786,7 +779,7 @@ for i in range(0, len(iea_region_list)):
         + "IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
-        x=[-0.1, 0.1],
+        x=-0.18,
         y=1.15,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
@@ -1047,10 +1040,10 @@ for i in range(0, len(iea_region_list)):
     fig.add_annotation(
         text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to"
         + "<br>"
-        + " IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100",
+        + "IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
-        x=[-0.1, 0.1],
+        x=-0.18,
         y=1.15,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
@@ -1429,14 +1422,10 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data (shaded gray) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to"
-        + "<br>"
-        + "IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100;"
-        + "<br>"
-        + "emissions factors are from IEA Emissions Factors 2020.",
+        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy Outlook <br>2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100; emissions factors are from <br>IEA Emissions Factors 2020",
         xref="paper",
         yref="paper",
-        x=(-0.1, 0.1),
+        x=-0.18,
         y=1.17,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
@@ -1785,14 +1774,10 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to"
-        + "<br>"
-        + " IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100;"
-        + "<br>"
-        + " emissions factors are from IEA Emissions Factors 2020.",
+        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy Outlook <br>2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100; emissions factors are from <br>IEA Emissions Factors 2020",
         xref="paper",
         yref="paper",
-        x=-0.1,
+        x=-0.18,
         y=1.17,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
@@ -2346,14 +2331,10 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to"
-        + "<br>"
-        + " IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100;"
-        + "<br>"
-        + " emissions factors are from IEA Emissions Factors 2020.",
+        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy<br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100; emissions<br>factors are from IEA Emissions Factors 2020",
         xref="paper",
         yref="paper",
-        x=-0.1,
+        x=-0.18,
         y=1.17,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
@@ -2995,7 +2976,7 @@ for year in [2030, 2050]:
 
 # region
 
-scenario = scenario
+scenario = 'pathway'
 start_year = 1990
 
 for i in range(0, len(iea_region_list)):
@@ -3203,7 +3184,7 @@ for i in range(0, len(iea_region_list)):
             }
         )
 
-    ei = em_total.loc[:, data_end_year:2020].values / (em.sum().loc[data_end_year:2020])
+    ei = em_total.loc[:, data_end_year].values / (em.sum().loc[data_end_year])
 
     fig2 = ei
 
@@ -3447,8 +3428,24 @@ fig.update_layout(
     yaxis={"title": "ppmv CO2"},
 )
 
-fig.show()
+fig.update_layout(margin=dict())
+fig.add_annotation(
+    text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
+    xref="paper",
+    yref="paper",
+    x=-0.18,
+    y=1.15,
+    showarrow=False,
+    font=dict(size=10, color="#2E3F5C"),
+    align="left",
+    borderpad=4,
+    borderwidth=2,
+    bgcolor="#ffffff",
+    opacity=1,
+)
 
+if show_figs is True:
+    fig.show()
 if save_figs is True:
     pio.write_html(
         fig,
@@ -3552,8 +3549,24 @@ fig.update_layout(
     yaxis={"title": "W/m2"},
 )
 
-fig.show()
+fig.update_layout(margin=dict())
+fig.add_annotation(
+    text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
+    xref="paper",
+    yref="paper",
+    x=-0.18,
+    y=1.15,
+    showarrow=False,
+    font=dict(size=10, color="#2E3F5C"),
+    align="left",
+    borderpad=4,
+    borderwidth=2,
+    bgcolor="#ffffff",
+    opacity=1,
+)
 
+if show_figs is True:
+    fig.show()
 if save_figs is True:
     pio.write_html(
         fig,
@@ -3723,8 +3736,24 @@ fig.update_layout(
     yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
 )
 
-fig.show()
+fig.update_layout(margin=dict())
+fig.add_annotation(
+    text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
+    xref="paper",
+    yref="paper",
+    x=-0.18,
+    y=1.15,
+    showarrow=False,
+    font=dict(size=10, color="#2E3F5C"),
+    align="left",
+    borderpad=4,
+    borderwidth=2,
+    bgcolor="#ffffff",
+    opacity=1,
+)
 
+if show_figs is True:
+    fig.show()
 if save_figs is True:
     pio.write_html(
         fig,

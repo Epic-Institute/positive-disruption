@@ -1345,7 +1345,7 @@ def results_analysis(
     ######################
     # SUBADOPTION CURVES #
     ######################
-
+    '''
     if region == "World ":
         #################################
         # ADOPTION CURVES SUM TO GLOBAL #
@@ -1449,6 +1449,8 @@ def results_analysis(
         # REGENERATIVE AGRICULTURE DECARB
 
         # region
+        sra_decarb = ra_decarb
+
         ra_decarb_max = afolu_per_adoption.loc[
             region,
             "Regenerative Agriculture",
@@ -1494,6 +1496,8 @@ def results_analysis(
         # FORESTS & WETLANDS DECARB
 
         # region
+        sfw_decarb = fw_decarb
+
         fw_decarb_max = afolu_per_adoption.loc[
             region,
             "Forests & Wetlands",
@@ -1547,30 +1551,22 @@ def results_analysis(
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
 
-        """
-        cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
-            cdr_decarb.idxmax(1).values[0]
-        ]
-    
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-
-        cdr_decarb = pd.Series(
-            cdr_decarb.values[0],
-            index=cdr_decarb.columns,
-            name="Carbon Dioxide Removal",
-        )
-        """
-
-        """
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
-
         # endregion
 
-        adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-            transport_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
+        sadoption_curves = pd.concat(
+            [
+                sgrid_decarb,
+                stransport_decarb,
+                sbuildings_decarb,
+                sindustry_decarb,
+                sra_decarb,
+                sfw_decarb,
+            ],
+        ).loc[:, data_start_year:long_proj_end_year]
+
+        sadoption_curves = sgrid_decarb.loc[
+            :, data_start_year:long_proj_end_year
+        ].append(stransport_decarb.loc[:, data_start_year:long_proj_end_year])
         adoption_curves = adoption_curves.append(
             building_decarb.loc[:, data_start_year:long_proj_end_year]
         )
@@ -2353,5 +2349,5 @@ def results_analysis(
         adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
 
         # endregion
-
+    '''
     return adoption_curves
