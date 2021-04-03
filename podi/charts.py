@@ -353,7 +353,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = scenario
+scenario = 'baseline'
 start_year = 2000
 
 for i in range(0, len(iea_region_list)):
@@ -4072,14 +4072,14 @@ plt.clf()
 
 # region
 
-scenario = "baseline"
+scenario = scenario
 start_year = start_year
 
 for i in range(0, len(iea_region_list)):
     for j in ['Electricity', 'Transport', 'Buildings', 'Industry', 'Regenerative Agriculture', 'Forests & Wetlands', 'Carbon Dioxide Removal', 'Other Gases']
 
         fig = (
-            adoption_curves.loc[iea_region_list[i], j, scenario].loc[
+            sadoption_curves.loc[iea_region_list[i], j, scenario].loc[
                 :, start_year:
             ]
             * 100

@@ -188,14 +188,14 @@ def energy_demand(
         .reindex_like(energy_demand.loc[slice(None), "Buildings", "Heat", scenario])
         .values
     )
-
+    """
     energy_demand_hist = energy_demand.loc[:, : str(data_end_year)]
     energy_demand_proj = curve_smooth(
         energy_demand.loc[:, (str(data_end_year + 1)) :], "quadratic", cs
     )
 
     energy_demand = energy_demand_hist.join(energy_demand_proj).clip(lower=0)
-
+    """
     # endregion
 
     #######################################
@@ -219,13 +219,13 @@ def energy_demand(
     energy_demand_post_efficiency = energy_demand - (
         energy_demand * energy_efficiency.values
     )
-
+    """
     energy_efficiency = energy_efficiency.loc[:, : str(data_end_year + 1)].join(
         curve_smooth(
             energy_efficiency.loc[:, str(data_end_year + 1) :], "quadratic", cs
         )
     )
-
+    """
     # Apply percentage reduction & shift to electrification attributed to heat pumps
     heat_pumps = (
         pd.read_csv(heat_pumps)
@@ -236,11 +236,11 @@ def energy_demand(
     heat_pumps = heat_pumps.apply(lambda x: x + 1, axis=1)
     heat_pumps = heat_pumps.reindex(energy_demand.index)
     energy_demand_post_heat_pumps = energy_demand - (energy_demand * heat_pumps.values)
-
+    """
     heat_pumps = heat_pumps.loc[:, : str(data_end_year + 1)].join(
         curve_smooth(heat_pumps.loc[:, str(data_end_year + 1) :], "quadratic", cs)
     )
-
+    """
     # Apply percentage reduction attributed to solar thermal
     solar_thermal = (
         pd.read_csv(solar_thermal)
@@ -253,11 +253,11 @@ def energy_demand(
     energy_demand_post_solarthermal = energy_demand - (
         energy_demand * solar_thermal.values
     )
-
+    """
     solar_thermal = solar_thermal.loc[:, : str(data_end_year + 1)].join(
         curve_smooth(solar_thermal.loc[:, str(data_end_year + 1) :], "quadratic", cs)
     )
-
+    """
     # Apply percentage reduction attributed to transactive grids
     trans_grid = (
         pd.read_csv(trans_grid)
@@ -267,11 +267,11 @@ def energy_demand(
     trans_grid = trans_grid.apply(lambda x: x + 1, axis=1)
     trans_grid = trans_grid.reindex(energy_demand.index)
     energy_demand_post_trans_grid = energy_demand - (energy_demand * trans_grid.values)
-
+    """
     trans_grid = trans_grid.loc[:, : str(data_end_year + 1)].join(
         curve_smooth(trans_grid.loc[:, str(data_end_year + 1) :], "quadratic", cs)
     )
-
+    """
     # Apply transport mode design improvements
 
     # LDV (including two/three-wheelers)
@@ -417,14 +417,14 @@ def energy_demand(
 
     energy_demand.columns = energy_demand.columns.astype(int)
     energy_demand.clip(lower=0, inplace=True)
-
+    """
     energy_demand_hist = energy_demand.loc[:, :data_end_year]
     energy_demand_proj = curve_smooth(
         energy_demand.loc[:, (data_end_year + 1) :], "quadratic", cs
     )
 
     energy_demand = energy_demand_hist.join(energy_demand_proj).clip(lower=0)
-
+    """
     energy_demand = energy_demand.dropna(axis=0)
     """
     # Adoption curves
