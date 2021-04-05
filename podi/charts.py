@@ -2923,7 +2923,22 @@ for year in [2030, 2050]:
                 xref="paper",
                 yref="paper",
                 x=-0.1,
-                y=-0.25,
+                y=1.14,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
+            )
+        else:
+            figure.update_layout(margin=dict())
+            figure.add_annotation(
+                text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
+                xref="paper",
+                yref="paper",
+                x=-0.1,
+                y=1.14,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
                 align="left",
@@ -2947,21 +2962,6 @@ for year in [2030, 2050]:
                 bordercolor="rgba(255, 255, 255, 0)",
             ),
             showlegend=False,
-        )
-        
-        figure.update_layout(margin=dict())
-        figure.add_annotation(
-            text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
-            xref="paper",
-            yref="paper",
-            x=-0.1,
-            y=1.14,
-            showarrow=False,
-            font=dict(size=10, color="#2E3F5C"),
-            align="left",
-            borderpad=4,
-            bgcolor="#ffffff",
-            opacity=1,
         )
 
         figure.show()
