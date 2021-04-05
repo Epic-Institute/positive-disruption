@@ -512,6 +512,7 @@ for i in range(0, len(iea_region_list)):
             "text": "Energy Demand, " + iea_region_list[i] + ", " + scenario.title(),
             "xanchor": "center",
             "x": 0.5,
+            'y':.93,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
@@ -522,13 +523,15 @@ for i in range(0, len(iea_region_list)):
     )
 
     fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to"
+        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate "
         + "<br>"
-        + "IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100",
+        + "assumptions applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline "
+        + "<br>"
+        + "Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
         x=-0.18,
-        y=1.15,
+        y=1.19,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -763,6 +766,7 @@ for i in range(0, len(iea_region_list)):
             "text": "Energy Supply, " + iea_region_list[i] + ", " + scenario.title(),
             "xanchor": "center",
             "x": 0.5,
+            "y": 0.93,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
@@ -774,13 +778,15 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to"
+        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate "
         + "<br>"
-        + "IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100",
+        + "assumptions applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline "
+        + "<br>"
+        + "Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
         x=-0.18,
-        y=1.15,
+        y=1.19,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -1029,6 +1035,7 @@ for i in range(0, len(iea_region_list)):
             + scenario.title(),
             "xanchor": "center",
             "x": 0.5,
+            "y": 0.93,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
@@ -1038,13 +1045,15 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to"
+        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate "
         + "<br>"
-        + "IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100",
+        + "assumptions applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline "
+        + "<br>"
+        + "Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
         x=-0.18,
-        y=1.15,
+        y=1.19,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -1415,6 +1424,7 @@ for i in range(0, len(iea_region_list)):
             "text": "Emissions, " + scenario.title() + ", " + iea_region_list[i],
             "xanchor": "center",
             "x": 0.5,
+            "y": 0.93
         },
         xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
@@ -1422,11 +1432,11 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy Outlook <br>2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100; emissions factors are from <br>IEA Emissions Factors 2020",
+        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA <br>World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissions factors are from IEA Emissions Factors 2020",
         xref="paper",
         yref="paper",
         x=-0.18,
-        y=1.17,
+        y=1.19,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -1767,6 +1777,7 @@ for i in range(0, len(iea_region_list)):
             "text": "Emissions as Relative %, " + scenario.title() + ", " + iea_region_list[i],
             "xanchor": "center",
             "x": 0.5,
+            "y": 0.93
         },
         xaxis={"title": "Year"},
         yaxis={"title": "% of Total Emissions"},
@@ -1774,7 +1785,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy Outlook <br>2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100; emissions factors are from <br>IEA Emissions Factors 2020",
+        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA <br>World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissions factors are from IEA Emissions Factors 2020",
         xref="paper",
         yref="paper",
         x=-0.18,
@@ -2244,7 +2255,7 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 x=[ndcs[i][0][1]],
                 y=[ndcs[i][1][1]],
-                marker_color="#9c0803",
+                marker_color="#211df2",
                 name=ndcs[i][2][1],
             )
         )
@@ -2254,7 +2265,7 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 x=[ndcs[i][0][2]],
                 y=[ndcs[i][1][2]],
-                marker_color="#750D86",
+                marker_color="#eb742f",
                 name=ndcs[i][2][2],
             )
         )
@@ -2263,7 +2274,7 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 x=[ndcs[i][0][3]],
                 y=[ndcs[i][1][3]],
-                marker_color="#16FF32",
+                marker_color="#05a118",
                 name=ndcs[i][2][3],
             )
         )
@@ -2320,6 +2331,7 @@ for i in range(0, len(iea_region_list)):
             "text": "Emissions Mitigated, " + iea_region_list[i],
             "xanchor": "center",
             "x": 0.5,
+            "y": 0.93
         },
         xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
@@ -2331,7 +2343,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy<br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100; emissions<br>factors are from IEA Emissions Factors 2020",
+        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissionsfactors are from IEA Emissions Factors 2020",
         xref="paper",
         yref="paper",
         x=-0.18,
