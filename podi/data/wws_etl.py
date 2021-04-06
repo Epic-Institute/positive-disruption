@@ -2,7 +2,6 @@
 
 import pandas as pd
 from numpy import NaN
-from energy_demand import iea_region_list
 
 
 def wws_etl(data_source):
@@ -73,16 +72,14 @@ def wws_etl(data_source):
     )
 
     params = []
-    for i in range(0, len(iea_region_list)):
+    for i in range(0, len(region_list)):
         params = pd.DataFrame(params).append(
             pd.concat(
                 [
-                    elec_gen.loc[iea_region_list[i]].div(
-                        elec_gen.loc[iea_region_list[i]].sum()
-                    )
+                    elec_gen.loc[region_list[i]].div(elec_gen.loc[region_list[i]].sum())
                     * 100
                 ],
-                keys=[iea_region_list[i]],
+                keys=[region_list[i]],
                 names=["IEA Region"],
             ).round(decimals=1)
         )

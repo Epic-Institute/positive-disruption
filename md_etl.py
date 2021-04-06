@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from mdutils.mdutils import MdUtils
-from podi.energy_demand import iea_region_list
+from main import region_list
 
 region_dict = {
     "World ": "",
@@ -27,26 +27,26 @@ region_dict = {
     "ME ": "Bahrain, Islamic Republic of Iran, Iraq, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, Syrian Arab Republic, United Arab Emirates, Yemen",
 }
 
-for i in range(0, len(iea_region_list)):
-    mdFile = MdUtils(file_name="md-" + iea_region_list[i].replace(" ", "") + ".md")
+for i in range(0, len(region_list)):
+    mdFile = MdUtils(file_name="md-" + region_list[i].replace(" ", "") + ".md")
 
-    mdFile.new_header(level=1, title=iea_region_list[i]).replace(" ", "")
+    mdFile.new_header(level=1, title=region_list[i]).replace(" ", "")
     mdFile.new_line()
 
     mdFile.write("![](../region%20maps/")
-    mdFile.write(iea_region_list[i].replace(" ", ""))
+    mdFile.write(region_list[i].replace(" ", ""))
     mdFile.write(".png)")
     mdFile.new_line()
     mdFile.new_line()
 
-    mdFile.write(region_dict[iea_region_list[i]])
+    mdFile.write(region_dict[region_list[i]])
     mdFile.new_line()
 
     mdFile.new_header(level=2, title="Adoption Curves")
 
     # region
     for j in ["baseline", "pathway"]:
-        path = '"scurves-' + (iea_region_list[i]).replace(" ", "") + "-" + j + '.html"'
+        path = '"scurves-' + (region_list[i]).replace(" ", "") + "-" + j + '.html"'
 
         mdFile.write(
             "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
@@ -65,13 +65,7 @@ for i in range(0, len(iea_region_list)):
     for j in ["baseline", "pathway"]:
         for k in ["demand", "supply", "supply2"]:
             path = (
-                '"'
-                + k
-                + "-"
-                + j
-                + "-"
-                + (iea_region_list[i]).replace(" ", "")
-                + '.html"'
+                '"' + k + "-" + j + "-" + (region_list[i]).replace(" ", "") + '.html"'
             )
 
             mdFile.write(
@@ -91,13 +85,7 @@ for i in range(0, len(iea_region_list)):
     for j in ["baseline", "pathway"]:
         for k in ["em2", "em3"]:
             path = (
-                '"'
-                + k
-                + "-"
-                + j
-                + "-"
-                + (iea_region_list[i]).replace(" ", "")
-                + '.html"'
+                '"' + k + "-" + j + "-" + (region_list[i]).replace(" ", "") + '.html"'
             )
             mdFile.write(
                 "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
@@ -114,7 +102,7 @@ for i in range(0, len(iea_region_list)):
             + "-"
             + "pathway"
             + "-"
-            + (iea_region_list[i]).replace(" ", "")
+            + (region_list[i]).replace(" ", "")
             + '.html"'
         )
 
@@ -136,7 +124,7 @@ for i in range(0, len(iea_region_list)):
                 + "-"
                 + k
                 + "-"
-                + (iea_region_list[i]).replace(" ", "")
+                + (region_list[i]).replace(" ", "")
                 + '.html"'
             )
 
@@ -151,13 +139,7 @@ for i in range(0, len(iea_region_list)):
     for j in ["pathway"]:
         for k in ["ei"]:
             path = (
-                '"'
-                + k
-                + "-"
-                + j
-                + "-"
-                + (iea_region_list[i]).replace(" ", "")
-                + '.html"'
+                '"' + k + "-" + j + "-" + (region_list[i]).replace(" ", "") + '.html"'
             )
             mdFile.write(
                 "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
@@ -171,9 +153,9 @@ for i in range(0, len(iea_region_list)):
 
     # region
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         for k in ["co2conc", "forcing", "temp"]:
-            path = '"' + k + "-" + (iea_region_list[i]).replace(" ", "") + '.html"'
+            path = '"' + k + "-" + (region_list[i]).replace(" ", "") + '.html"'
 
             mdFile.write(
                 "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "

@@ -3,19 +3,21 @@
 import pandas as pd
 import numpy as np
 from podi.curve_smooth import curve_smooth
-from podi.energy_demand import data_end_year, iea_region_list, gcam_region_list
+from podi.energy_demand import data_end_year, gcam_region_list
 
 input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
 
+region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
-def iea_weo_etl(iea_region_list_i, gcam_region_list_i):
-    df = pd.read_excel(input_data, (iea_region_list_i + "_Balance").replace(" ", ""))
+
+def iea_weo_etl(region_list_i, gcam_region_list_i):
+    df = pd.read_excel(input_data, (region_list_i + "_Balance").replace(" ", ""))
     df.columns = df.iloc[3]
     df = df.drop(df.index[0:4])
     df.drop(df.tail(1).index, inplace=True)
     df.rename(columns={df.columns[0]: "Metric"}, inplace=True)
 
-    if iea_region_list_i == "World ":
+    if region_list_i == "World ":
         df.insert(
             0,
             "Sector",
@@ -156,7 +158,7 @@ def iea_weo_etl(iea_region_list_i, gcam_region_list_i):
     energy_demand = pd.concat(
         [energy_demand],
         keys=[
-            iea_region_list_i,
+            region_list_i,
         ],
         names=["IEA Region"],
     ).reorder_levels(["IEA Region", "Sector", "Metric"])
@@ -174,9 +176,9 @@ def iea_weo_etl(iea_region_list_i, gcam_region_list_i):
 
 energy_demand2 = []
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     energy_demand2 = pd.DataFrame(energy_demand2).append(
-        iea_weo_etl(iea_region_list[i], gcam_region_list[i])
+        iea_weo_etl(region_list[i], gcam_region_list[i])
     )
 
 energy_demand_hist = energy_demand2.loc[:, :data_end_year]

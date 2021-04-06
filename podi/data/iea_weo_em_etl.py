@@ -3,16 +3,18 @@
 import pandas as pd
 import numpy as np
 from podi.curve_smooth import curve_smooth
-from podi.energy_demand import data_end_year, iea_region_list, gcam_region_list
+from podi.energy_demand import data_end_year, gcam_region_list
 
 input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
 
+region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
-def iea_weo_em_etl(iea_region_list_i, gcam_region_list_i):
-    if iea_region_list_i == "World ":
+
+def iea_weo_em_etl(region_list_i, gcam_region_list_i):
+    if region_list_i == "World ":
         df = pd.DataFrame(
             pd.read_excel(
-                input_data, (iea_region_list_i + "_El_CO2_Ind").replace(" ", "")
+                input_data, (region_list_i + "_El_CO2_Ind").replace(" ", "")
             ).iloc[37:53, 0:7]
         ).fillna(0)
         df.set_index(df.iloc[:, 0].values, inplace=True)
@@ -49,7 +51,7 @@ def iea_weo_em_etl(iea_region_list_i, gcam_region_list_i):
     else:
         df = pd.DataFrame(
             pd.read_excel(
-                input_data, (iea_region_list_i + "_El_CO2_Ind").replace(" ", "")
+                input_data, (region_list_i + "_El_CO2_Ind").replace(" ", "")
             ).iloc[37:51, 0:7]
         ).fillna(0)
         df.set_index(df.iloc[:, 0].values, inplace=True)
@@ -164,7 +166,7 @@ def iea_weo_em_etl(iea_region_list_i, gcam_region_list_i):
     df = pd.concat(
         [df],
         keys=[
-            iea_region_list_i,
+            region_list_i,
         ],
         names=["Region"],
     ).reorder_levels(["Region", "Sector", "Metric"])
@@ -176,10 +178,8 @@ def iea_weo_em_etl(iea_region_list_i, gcam_region_list_i):
 
 em = []
 
-for i in range(0, len(iea_region_list)):
-    em = pd.DataFrame(em).append(
-        iea_weo_em_etl(iea_region_list[i], gcam_region_list[i])
-    )
+for i in range(0, len(region_list)):
+    em = pd.DataFrame(em).append(iea_weo_em_etl(region_list[i], gcam_region_list[i]))
 
 em_hist = em.loc[:, :data_end_year]
 

@@ -8,15 +8,13 @@ import pandas as pd
 from matplotlib.lines import Line2D
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
-from podi.energy_demand import iea_region_list, data_end_year, data_start_year
+from podi.energy_demand import data_end_year, data_start_year
 from podi.energy_supply import (
     near_proj_start_year,
     near_proj_end_year,
     long_proj_start_year,
     long_proj_end_year,
 )
-from pandas_datapackage_reader import read_datapackage
-from shortcountrynames import to_name
 import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
@@ -34,11 +32,11 @@ unit_name = ["TWh", "EJ", "TJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00360, 3600, 0.086, 86]
 unit = [unit_name[0], unit_val[0]]
 
+region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
 save_figs = True
 show_figs = True
 start_year = 2000
-iea_region_list = iea_region_list
 scenario = 'pathway'
 
 # endregion
@@ -52,9 +50,9 @@ scenario = 'pathway'
 scenario = scenario
 start_year = start_year
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     fig = (
-        adoption_curves.loc[iea_region_list[i], slice(None), scenario].loc[
+        adoption_curves.loc[region_list[i], slice(None), scenario].loc[
             :, start_year:
         ]
         * 100
@@ -270,7 +268,7 @@ for i in range(0, len(iea_region_list)):
         )
     )
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
                 name="Carbon Dioxide Removal",
@@ -308,7 +306,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(
         title={
-            "text": "Percent of Total PD Adoption, " + scenario.title() + ', ' + iea_region_list[i],
+            "text": "Percent of Total PD Adoption, " + scenario.title() + ', ' + region_list[i],
             "xanchor": "center",
             "x": 0.5,
         },
@@ -340,7 +338,7 @@ for i in range(0, len(iea_region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/scurves-" + iea_region_list[i] + "-" + scenario + ".html"
+                "./charts/scurves-" + region_list[i] + "-" + scenario + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -353,16 +351,16 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = 'baseline'
+scenario = scenario
 start_year = 2000
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     energy_demand_i = (
-        energy_demand.loc[iea_region_list[i], slice(None), slice(None), scenario]
+        energy_demand.loc[region_list[i], slice(None), slice(None), scenario]
         * unit[1]
     ).loc[:, start_year:]
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         energy_demand_i.loc["Transport", "Other fuels"] = energy_demand_i.loc[
             "Transport", ["International bunkers", "Other fuels"], :
         ].sum()
@@ -509,7 +507,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(
         title={
-            "text": "Energy Demand, " + iea_region_list[i] + ", " + scenario.title(),
+            "text": "Energy Demand, " + region_list[i] + ", " + scenario.title(),
             "xanchor": "center",
             "x": 0.5,
             'y':.93,
@@ -546,7 +544,7 @@ for i in range(0, len(iea_region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/demand-" + scenario + "-" + iea_region_list[i] + ".html"
+                "./charts/demand-" + scenario + "-" + region_list[i] + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -601,21 +599,21 @@ group_keys = {
     ("Transport", "Fossil fuels"): "Transport-Fossil fuels",
 }
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     elec_consump_i = (
-        elec_consump.loc[iea_region_list[i], slice(None), scenario]
+        elec_consump.loc[region_list[i], slice(None), scenario]
         .groupby("Metric")
         .sum()
     )
     elec_consump_i = pd.concat([elec_consump_i], keys=["Electricity"], names=["Sector"])
     heat_consump_i = (
-        heat_consump.loc[iea_region_list[i], slice(None), scenario]
+        heat_consump.loc[region_list[i], slice(None), scenario]
         .groupby("Metric")
         .sum()
     )
     heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
     transport_consump_i = (
-        transport_consump.loc[iea_region_list[i], slice(None), scenario]
+        transport_consump.loc[region_list[i], slice(None), scenario]
         .groupby("Metric")
         .sum()
     )
@@ -763,7 +761,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(
         title={
-            "text": "Energy Supply, " + iea_region_list[i] + ", " + scenario.title(),
+            "text": "Energy Supply, " + region_list[i] + ", " + scenario.title(),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.93,
@@ -804,7 +802,7 @@ for i in range(0, len(iea_region_list)):
                 "./charts/supply-"
                 + scenario
                 + "-"
-                + iea_region_list[i].replace(" ", "")
+                + region_list[i].replace(" ", "")
                 + ".html"
             ).replace(" ", ""),
             auto_open=False,
@@ -856,9 +854,9 @@ group_keys = {
 }
 
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     elec_consump_i = (
-        elec_consump.loc[iea_region_list[i], slice(None), scenario]
+        elec_consump.loc[region_list[i], slice(None), scenario]
         .groupby("Metric")
         .sum()
     )
@@ -866,13 +864,13 @@ for i in range(0, len(iea_region_list)):
         [elec_consump_i], keys=["Electricity"], names=["Sector"]
     )
     heat_consump_i = (
-        heat_consump.loc[iea_region_list[i], slice(None), scenario]
+        heat_consump.loc[region_list[i], slice(None), scenario]
         .groupby("Metric")
         .sum()
     )
     heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
     transport_consump_i = (
-        transport_consump.loc[iea_region_list[i], slice(None), scenario]
+        transport_consump.loc[region_list[i], slice(None), scenario]
         .groupby("Metric")
         .sum()
     )
@@ -1030,7 +1028,7 @@ for i in range(0, len(iea_region_list)):
     fig.update_layout(
         title={
             "text": "Electricity Supply, "
-            + iea_region_list[i].replace(" ", "")
+            + region_list[i].replace(" ", "")
             + ", "
             + scenario.title(),
             "xanchor": "center",
@@ -1071,7 +1069,7 @@ for i in range(0, len(iea_region_list)):
                 "./charts/supply2-"
                 + scenario
                 + "-"
-                + iea_region_list[i]
+                + region_list[i]
                 + ".html"
             ).replace(" ", ""),
             auto_open=False,
@@ -1088,33 +1086,33 @@ for i in range(0, len(iea_region_list)):
 scenario = scenario
 start_year = 2000
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     if scenario == "baseline":
         em = em_baseline
     else:
         em = em_pathway
 
     em_electricity = (
-        em.loc[iea_region_list[i], "Electricity", slice(None)]
+        em.loc[region_list[i], "Electricity", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_transport = (
-        em.loc[iea_region_list[i], "Transport", slice(None)]
+        em.loc[region_list[i], "Transport", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_buildings = (
-        em.loc[iea_region_list[i], "Buildings", slice(None)]
+        em.loc[region_list[i], "Buildings", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_industry = (
         em.loc[
-            iea_region_list[i],
+            region_list[i],
             ["Industry"],
             slice(None),
         ]
@@ -1124,7 +1122,7 @@ for i in range(0, len(iea_region_list)):
 
     em_ra = (
         em.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -1146,7 +1144,7 @@ for i in range(0, len(iea_region_list)):
 
     em_fw = (
         em.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -1165,30 +1163,30 @@ for i in range(0, len(iea_region_list)):
     )
 
     em_othergas = (
-        em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
+        em.loc[region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_ch4 = (
-        em.loc[iea_region_list[i], slice(None), ["CH4"]]
+        em.loc[region_list[i], slice(None), ["CH4"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_n2o = (
-        em.loc[iea_region_list[i], slice(None), ["N2O"]]
+        em.loc[region_list[i], slice(None), ["N2O"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_fgas = (
-        em.loc[iea_region_list[i], slice(None), ["F-gases"]]
+        em.loc[region_list[i], slice(None), ["F-gases"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         em_cdr = -cdr.loc[slice(None), scenario, :].squeeze()
 
         em = pd.DataFrame(
@@ -1248,7 +1246,7 @@ for i in range(0, len(iea_region_list)):
 
     fig = go.Figure()
     """
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
                 name="CDR",
@@ -1402,7 +1400,7 @@ for i in range(0, len(iea_region_list)):
             line=dict(width=2, color="black"),
             x=pd.Series(em_hist.loc[:, start_year:].columns.values),
             y=pd.Series(
-                em_hist.loc[iea_region_list[i]].loc[:, start_year:].values[0] / 1000
+                em_hist.loc[region_list[i]].loc[:, start_year:].values[0] / 1000
             ),
             fill=histfill,
             stackgroup=stackgroup,
@@ -1421,7 +1419,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(
         title={
-            "text": "Emissions, " + scenario.title() + ", " + iea_region_list[i],
+            "text": "Emissions, " + scenario.title() + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.93
@@ -1451,7 +1449,7 @@ for i in range(0, len(iea_region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/em2-" + scenario + "-" + iea_region_list[i] + ".html"
+                "./charts/em2-" + scenario + "-" + region_list[i] + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -1468,33 +1466,33 @@ for i in range(0, len(iea_region_list)):
 scenario = scenario
 start_year = 2000
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     if scenario == "baseline":
-        em = em_baseline
+        em = em_baseline.clip(lower=0)
     else:
         em = em_pathway.clip(lower=0)
 
     em_electricity = (
-        em.loc[iea_region_list[i], "Electricity", slice(None)]
+        em.loc[region_list[i], "Electricity", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_transport = (
-        em.loc[iea_region_list[i], "Transport", slice(None)]
+        em.loc[region_list[i], "Transport", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_buildings = (
-        em.loc[iea_region_list[i], "Buildings", slice(None)]
+        em.loc[region_list[i], "Buildings", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_industry = (
         em.loc[
-            iea_region_list[i],
+            region_list[i],
             ["Industry"],
             slice(None),
         ]
@@ -1504,7 +1502,7 @@ for i in range(0, len(iea_region_list)):
 
     em_ra = (
         em.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -1526,7 +1524,7 @@ for i in range(0, len(iea_region_list)):
 
     em_fw = (
         em.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -1545,30 +1543,30 @@ for i in range(0, len(iea_region_list)):
     )
 
     em_othergas = (
-        em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
+        em.loc[region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_ch4 = (
-        em.loc[iea_region_list[i], slice(None), ["CH4"]]
+        em.loc[region_list[i], slice(None), ["CH4"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_n2o = (
-        em.loc[iea_region_list[i], slice(None), ["N2O"]]
+        em.loc[region_list[i], slice(None), ["N2O"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_fgas = (
-        em.loc[iea_region_list[i], slice(None), ["F-gases"]]
+        em.loc[region_list[i], slice(None), ["F-gases"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         em_cdr = -cdr.loc[slice(None), scenario, :].squeeze()
 
         em = pd.DataFrame(
@@ -1628,7 +1626,7 @@ for i in range(0, len(iea_region_list)):
 
     fig = go.Figure()
     """
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
                 name="CDR",
@@ -1774,7 +1772,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(
         title={
-            "text": "Emissions as Relative %, " + scenario.title() + ", " + iea_region_list[i],
+            "text": "Emissions as Relative %, " + scenario.title() + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.93
@@ -1804,7 +1802,7 @@ for i in range(0, len(iea_region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/em3-" + scenario + "-" + iea_region_list[i] + ".html"
+                "./charts/em3-" + scenario + "-" + region_list[i] + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -1865,25 +1863,25 @@ ndc_commit = [
     ("x",),
 ]
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     em_mit_electricity = em_mitigated.loc[
-        iea_region_list[i], "Electricity", slice(None)
+        region_list[i], "Electricity", slice(None)
     ].sum()
 
     em_mit_transport = em_mitigated.loc[
-        iea_region_list[i], "Transport", slice(None)
+        region_list[i], "Transport", slice(None)
     ].sum()
 
     em_mit_buildings = em_mitigated.loc[
-        iea_region_list[i], "Buildings", slice(None)
+        region_list[i], "Buildings", slice(None)
     ].sum()
 
     em_mit_industry = em_mitigated.loc[
-        iea_region_list[i], "Industry", slice(None)
+        region_list[i], "Industry", slice(None)
     ].sum()
 
     em_mit_ra = em_mitigated.loc[
-        iea_region_list[i],
+        region_list[i],
         [
             "Biochar",
             "Cropland Soil Health",
@@ -1901,7 +1899,7 @@ for i in range(0, len(iea_region_list)):
     ].sum()
 
     em_mit_fw = em_mitigated.loc[
-        iea_region_list[i],
+        region_list[i],
         [
             "Avoided Coastal Impacts",
             "Avoided Forest Conversion",
@@ -1916,17 +1914,17 @@ for i in range(0, len(iea_region_list)):
         slice(None),
     ].sum()
 
-    em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other", :].sum()
+    em_mit_othergas = em_mitigated.loc[region_list[i], "Other", :].sum()
 
-    em_mit_ch4 = em_mitigated.loc[iea_region_list[i], "Other", "CH4"].rename("CH4")
+    em_mit_ch4 = em_mitigated.loc[region_list[i], "Other", "CH4"].rename("CH4")
 
-    em_mit_n2o = em_mitigated.loc[iea_region_list[i], "Other", "N2O"].rename("N2O")
+    em_mit_n2o = em_mitigated.loc[region_list[i], "Other", "N2O"].rename("N2O")
 
-    em_mit_fgas = em_mitigated.loc[iea_region_list[i], "Other", "F-gases"].rename(
+    em_mit_fgas = em_mitigated.loc[region_list[i], "Other", "F-gases"].rename(
         "F-gases"
     )
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         em_mit_cdr = cdr.loc[slice(None), scenario, :].squeeze().rename("CDR")
         em_mit = pd.DataFrame(
             [
@@ -1981,7 +1979,7 @@ for i in range(0, len(iea_region_list)):
 
     spacer = (
         pd.Series(
-            em_baseline.groupby("Region").sum().loc[iea_region_list[i]] - em_mit.sum()
+            em_baseline.groupby("Region").sum().loc[region_list[i]] - em_mit.sum()
         )
         .replace(nan, 0)
         .rename("")
@@ -2035,7 +2033,7 @@ for i in range(0, len(iea_region_list)):
         )
     )
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
                 name="CDR",
@@ -2155,7 +2153,7 @@ for i in range(0, len(iea_region_list)):
             name="Historical",
             line=dict(width=2, color="black"),
             x=pd.Series(em_hist.columns.values),
-            y=pd.Series(em_hist.loc[iea_region_list[i], :].values[0] / 1000),
+            y=pd.Series(em_hist.loc[region_list[i], :].values[0] / 1000),
             fill="none",
             stackgroup="two",
         )
@@ -2164,7 +2162,7 @@ for i in range(0, len(iea_region_list)):
     # Targets/NDCS
 
     # region
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
                 name="SSP2-1.9",
@@ -2233,7 +2231,7 @@ for i in range(0, len(iea_region_list)):
                 em_baseline.loc[:, near_proj_start_year:]
                 .groupby("Region")
                 .sum()
-                .loc[iea_region_list[i]]
+                .loc[region_list[i]]
                 / 1000
             ),
             fill="none",
@@ -2241,7 +2239,7 @@ for i in range(0, len(iea_region_list)):
         )
     )
 
-    if iea_region_list[i] in ["World ", "US "]:
+    if region_list[i] in ["World ", "US "]:
         fig.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][0]],
@@ -2260,7 +2258,7 @@ for i in range(0, len(iea_region_list)):
             )
         )
 
-    if iea_region_list[i] in ["US "]:
+    if region_list[i] in ["US "]:
         fig.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][2]],
@@ -2293,7 +2291,7 @@ for i in range(0, len(iea_region_list)):
             opacity=1,
         )
 
-    if iea_region_list[i] in [
+    if region_list[i] in [
         "SAFR ",
         "RUS ",
         "JPN ",
@@ -2328,7 +2326,7 @@ for i in range(0, len(iea_region_list)):
 
     fig.update_layout(
         title={
-            "text": "Emissions Mitigated, " + iea_region_list[i],
+            "text": "Emissions Mitigated, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.93
@@ -2362,7 +2360,7 @@ for i in range(0, len(iea_region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/mwedges-" + "pathway" + "-" + iea_region_list[i] + ".html"
+                "./charts/mwedges-" + "pathway" + "-" + region_list[i] + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -2380,25 +2378,25 @@ for i in range(0, len(iea_region_list)):
 scenario = scenario
 
 for year in [2030, 2050]:
-    for i in range(0, len(iea_region_list)):
+    for i in range(0, len(region_list)):
         em_mit_electricity = em_mitigated.loc[
-            iea_region_list[i], "Electricity", slice(None)
+            region_list[i], "Electricity", slice(None)
         ].sum()
 
         em_mit_transport = em_mitigated.loc[
-            iea_region_list[i], "Transport", slice(None)
+            region_list[i], "Transport", slice(None)
         ].sum()
 
         em_mit_buildings = em_mitigated.loc[
-            iea_region_list[i], "Buildings", slice(None)
+            region_list[i], "Buildings", slice(None)
         ].sum()
 
         em_mit_industry = em_mitigated.loc[
-            iea_region_list[i], "Industry", slice(None)
+            region_list[i], "Industry", slice(None)
         ].sum()
 
         em_mit_ra = em_mitigated.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -2416,7 +2414,7 @@ for year in [2030, 2050]:
         ].sum()
 
         em_mit_fw = em_mitigated.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -2431,7 +2429,7 @@ for year in [2030, 2050]:
             slice(None),
         ].sum()
 
-        em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other", :].sum()
+        em_mit_othergas = em_mitigated.loc[region_list[i], "Other", :].sum()
 
         em_mit_cdr = pd.Series(
             cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
@@ -2463,7 +2461,7 @@ for year in [2030, 2050]:
 
         em_mit.loc[:, :2020] = 0
 
-        if iea_region_list[i] == "World ":
+        if region_list[i] == "World ":
             fig = (
                 ((em_mit) / 1000)
                 .reindex(
@@ -2707,7 +2705,7 @@ for year in [2030, 2050]:
 
         opacity = 0.5
 
-        if iea_region_list[i] == "World ":
+        if region_list[i] == "World ":
             figure = go.Figure(
                 data=[
                     go.Bar(
@@ -2843,7 +2841,7 @@ for year in [2030, 2050]:
         else:
             j = 1
 
-        if iea_region_list[i] in [
+        if region_list[i] in [
             "US ",
             "SAFR ",
             "RUS ",
@@ -2855,12 +2853,12 @@ for year in [2030, 2050]:
             figure.add_shape(
                 type="line",
                 x0=em_mit_ndc[
-                    (em_mit_ndc["Region"] == iea_region_list[i])
+                    (em_mit_ndc["Region"] == region_list[i])
                     & (em_mit_ndc.index == year)
                 ]["em_mit"].values[0],
                 y0=-0.5,
                 x1=em_mit_ndc[
-                    (em_mit_ndc["Region"] == iea_region_list[i])
+                    (em_mit_ndc["Region"] == region_list[i])
                     & (em_mit_ndc.index == year)
                 ]["em_mit"].values[0],
                 y1=7.5,
@@ -2872,7 +2870,7 @@ for year in [2030, 2050]:
                 go.Scatter(
                     x=[
                         em_mit_ndc[
-                            (em_mit_ndc["Region"] == iea_region_list[i])
+                            (em_mit_ndc["Region"] == region_list[i])
                             & (em_mit_ndc.index == year)
                         ]["em_mit"].values[0]
                         * 0.9
@@ -2884,16 +2882,16 @@ for year in [2030, 2050]:
                 )
             )
 
-        if iea_region_list[i] == "World ":
+        if region_list[i] == "World ":
             figure.add_shape(
                 type="line",
                 x0=em_mit_ndc[
-                    (em_mit_ndc["Region"] == iea_region_list[i])
+                    (em_mit_ndc["Region"] == region_list[i])
                     & (em_mit_ndc.index == year)
                 ]["em_mit"].values[0],
                 y0=-0.5,
                 x1=em_mit_ndc[
-                    (em_mit_ndc["Region"] == iea_region_list[i])
+                    (em_mit_ndc["Region"] == region_list[i])
                     & (em_mit_ndc.index == year)
                 ]["em_mit"].values[0],
                 y1=8.5,
@@ -2905,7 +2903,7 @@ for year in [2030, 2050]:
                 go.Scatter(
                     x=[
                         em_mit_ndc[
-                            (em_mit_ndc["Region"] == iea_region_list[i])
+                            (em_mit_ndc["Region"] == region_list[i])
                             & (em_mit_ndc.index == year)
                         ]["em_mit"].values[0]
                         * 0.9
@@ -2951,7 +2949,7 @@ for year in [2030, 2050]:
             title="Climate Mitigation Potential, "
             + str(year)
             + ", "
-            + iea_region_list[i],
+            + region_list[i],
             title_x=0.5,
             xaxis={"title": "GtCO2e mitigated in " + str(year)},
             barmode="stack",
@@ -2974,7 +2972,7 @@ for year in [2030, 2050]:
                 + "-"
                 + str(year)
                 + "-"
-                + iea_region_list[i]
+                + region_list[i]
                 + ".html"
             ).replace(" ", ""),
             auto_open=False,
@@ -2991,7 +2989,7 @@ for year in [2030, 2050]:
 scenario = 'pathway'
 start_year = 1990
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     # calculate
 
     # region
@@ -3065,26 +3063,26 @@ for i in range(0, len(iea_region_list)):
         afolu_em = afolu_em_pathway
 
     em_electricity = (
-        em.loc[iea_region_list[i], "Electricity", slice(None)]
+        em.loc[region_list[i], "Electricity", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_transport = (
-        em.loc[iea_region_list[i], "Transport", slice(None)]
+        em.loc[region_list[i], "Transport", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_buildings = (
-        em.loc[iea_region_list[i], "Buildings", slice(None)]
+        em.loc[region_list[i], "Buildings", slice(None)]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_industry = (
         em.loc[
-            iea_region_list[i],
+            region_list[i],
             ["Industry"],
             slice(None),
         ]
@@ -3094,7 +3092,7 @@ for i in range(0, len(iea_region_list)):
 
     em_ra = (
         afolu_em.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Regenerative Agriculture",
             ],
@@ -3107,7 +3105,7 @@ for i in range(0, len(iea_region_list)):
 
     em_fw = (
         afolu_em.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Forests & Wetlands",
             ],
@@ -3119,35 +3117,35 @@ for i in range(0, len(iea_region_list)):
     )
 
     em_othergas = (
-        em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
+        em.loc[region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_ch4 = (
-        em.loc[iea_region_list[i], slice(None), ["CH4"]]
+        em.loc[region_list[i], slice(None), ["CH4"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_n2o = (
-        em.loc[iea_region_list[i], slice(None), ["N2O"]]
+        em.loc[region_list[i], slice(None), ["N2O"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
 
     em_fgas = (
-        em.loc[iea_region_list[i], slice(None), ["F-gases"]]
+        em.loc[region_list[i], slice(None), ["F-gases"]]
         .sum()
         .loc[start_year:long_proj_end_year]
     )
     """
-    em_total = em_total.loc[iea_region_list[i], "CO2", scenario]
+    em_total = em_total.loc[region_list[i], "CO2", scenario]
     """
 
-    em_total = em_total.loc[iea_region_list[i], slice(None), slice(None), scenario]
+    em_total = em_total.loc[region_list[i], slice(None), slice(None), scenario]
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         em_cdr = -cdr.loc[slice(None), scenario, :].squeeze()
 
         em = pd.DataFrame(
@@ -3225,7 +3223,7 @@ for i in range(0, len(iea_region_list)):
     """
     fig.update_layout(
         title={
-            "text": "Epic Index, " + scenario.title() + ", " + iea_region_list[i],
+            "text": "Epic Index, " + scenario.title() + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
         },
@@ -3268,7 +3266,7 @@ for i in range(0, len(iea_region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/ei-" + scenario + "-" + iea_region_list[i] + ".html"
+                "./charts/ei-" + scenario + "-" + region_list[i] + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -3582,7 +3580,7 @@ if show_figs is True:
 if save_figs is True:
     pio.write_html(
         fig,
-        file=("./charts/forcing-" + iea_region_list[i] + ".html").replace(" ", ""),
+        file=("./charts/forcing-" + region_list[i] + ".html").replace(" ", ""),
         auto_open=False,
     )
 
@@ -3701,7 +3699,7 @@ if show_figs is True:
 if save_figs is True:
     pio.write_html(
         fig,
-        file=("./charts/temp-" + iea_region_list[i] + ".html").replace(" ", ""),
+        file=("./charts/temp-" + region_list[i] + ".html").replace(" ", ""),
         auto_open=False,
     )
 
@@ -3769,7 +3767,7 @@ if show_figs is True:
 if save_figs is True:
     pio.write_html(
         fig,
-        file=("./charts/forcing2-" + iea_region_list[i] + ".html").replace(" ", ""),
+        file=("./charts/forcing2-" + region_list[i] + ".html").replace(" ", ""),
         auto_open=False,
     )
 
@@ -3866,26 +3864,26 @@ else:
     afolu_em = afolu_em_pathway
 
 em_electricity = (
-    em.loc[iea_region_list[i], "Electricity", slice(None)]
+    em.loc[region_list[i], "Electricity", slice(None)]
     .sum()
     .loc[start_year:long_proj_end_year]
 )
 
 em_transport = (
-    em.loc[iea_region_list[i], "Transport", slice(None)]
+    em.loc[region_list[i], "Transport", slice(None)]
     .sum()
     .loc[start_year:long_proj_end_year]
 )
 
 em_buildings = (
-    em.loc[iea_region_list[i], "Buildings", slice(None)]
+    em.loc[region_list[i], "Buildings", slice(None)]
     .sum()
     .loc[start_year:long_proj_end_year]
 )
 
 em_industry = (
     em.loc[
-        iea_region_list[i],
+        region_list[i],
         ["Industry"],
         slice(None),
     ]
@@ -3895,7 +3893,7 @@ em_industry = (
 
 em_ra = (
     afolu_em.loc[
-        iea_region_list[i],
+        region_list[i],
         [
             "Regenerative Agriculture",
         ],
@@ -3908,7 +3906,7 @@ em_ra = (
 
 em_fw = (
     afolu_em.loc[
-        iea_region_list[i],
+        region_list[i],
         [
             "Forests & Wetlands",
         ],
@@ -3920,35 +3918,35 @@ em_fw = (
 )
 
 em_othergas = (
-    em.loc[iea_region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
+    em.loc[region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
     .sum()
     .loc[start_year:long_proj_end_year]
 )
 
 em_ch4 = (
-    em.loc[iea_region_list[i], slice(None), ["CH4"]]
+    em.loc[region_list[i], slice(None), ["CH4"]]
     .sum()
     .loc[start_year:long_proj_end_year]
 )
 
 em_n2o = (
-    em.loc[iea_region_list[i], slice(None), ["N2O"]]
+    em.loc[region_list[i], slice(None), ["N2O"]]
     .sum()
     .loc[start_year:long_proj_end_year]
 )
 
 em_fgas = (
-    em.loc[iea_region_list[i], slice(None), ["F-gases"]]
+    em.loc[region_list[i], slice(None), ["F-gases"]]
     .sum()
     .loc[start_year:long_proj_end_year]
 )
 """
-em_total = em_total.loc[iea_region_list[i], "CO2", scenario]
+em_total = em_total.loc[region_list[i], "CO2", scenario]
 """
 
-em_total = em_total.loc[iea_region_list[i], slice(None), slice(None), scenario]
+em_total = em_total.loc[region_list[i], slice(None), slice(None), scenario]
 
-if iea_region_list[i] == "World ":
+if region_list[i] == "World ":
     em_cdr = -cdr.loc[slice(None), scenario, :].squeeze()
 
     em = pd.DataFrame(
@@ -4026,7 +4024,7 @@ fig.add_trace(
 """
 fig.update_layout(
     title={
-        "text": "Epic Index, " + scenario.title() + ", " + iea_region_list[i],
+        "text": "Epic Index, " + scenario.title() + ", " + region_list[i],
         "xanchor": "center",
         "x": 0.5,
     },
@@ -4069,7 +4067,7 @@ if save_figs is True:
     pio.write_html(
         fig,
         file=(
-            "./charts/ei-" + scenario + "-" + iea_region_list[i] + ".html"
+            "./charts/ei-" + scenario + "-" + region_list[i] + ".html"
         ).replace(" ", ""),
         auto_open=False,
     )
@@ -4087,11 +4085,11 @@ plt.clf()
 scenario = scenario
 start_year = start_year
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     for j in ['Electricity', 'Transport', 'Buildings', 'Industry', 'Regenerative Agriculture', 'Forests & Wetlands', 'Carbon Dioxide Removal', 'Other Gases']
 
         fig = (
-            sadoption_curves.loc[iea_region_list[i], j, scenario].loc[
+            sadoption_curves.loc[region_list[i], j, scenario].loc[
                 :, start_year:
             ]
             * 100
@@ -4307,7 +4305,7 @@ for i in range(0, len(iea_region_list)):
             )
         )
 
-        if iea_region_list[i] == "World ":
+        if region_list[i] == "World ":
             fig.add_trace(
                 go.Scatter(
                     name="Carbon Dioxide Removal",
@@ -4345,7 +4343,7 @@ for i in range(0, len(iea_region_list)):
 
         fig.update_layout(
             title={
-                "text": "Percent of Total PD Adoption, " + scenario.title() + ', ' + iea_region_list[i],
+                "text": "Percent of Total PD Adoption, " + scenario.title() + ', ' + region_list[i],
                 "xanchor": "center",
                 "x": 0.5,
             },
@@ -4384,7 +4382,7 @@ for i in range(0, len(iea_region_list)):
             pio.write_html(
                 fig,
                 file=(
-                    "./charts/scurvessub-" + iea_region_list[i] + "-" + j + "-" scenario + ".html"
+                    "./charts/scurvessub-" + region_list[i] + "-" + j + "-" scenario + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
             )
@@ -4408,7 +4406,7 @@ actual.columns.name = "Year"
 
 for i in range(0, 1):
     fig = (
-        adoption_curves.loc[iea_region_list[i], slice(None), scenario].loc[:, 2015:2025]
+        adoption_curves.loc[region_list[i], slice(None), scenario].loc[:, 2015:2025]
         * 100
     )
     fig = pd.concat([fig], keys=["PD21"], names=["Scenario"]).reorder_levels(
@@ -4829,7 +4827,7 @@ for i in range(0, 1):
     # endregion
     """
     """
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
                 name="Carbon Dioxide Removal",
@@ -4868,7 +4866,7 @@ for i in range(0, 1):
 
     fig.update_layout(
         title={
-            "text": "Percent of Total PD Adoption, " + iea_region_list[i],
+            "text": "Percent of Total PD Adoption, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
         },
@@ -4972,8 +4970,8 @@ def draw_stellar(
     ax.plot(0, 0, marker="o", color="white", markersize=3)
 
 
-for i in range(0, len(iea_region_list)):
-    fig = adoption_curves.loc[iea_region_list[i], slice(None), scenario] * 100
+for i in range(0, len(region_list)):
+    fig = adoption_curves.loc[region_list[i], slice(None), scenario] * 100
 
     data = [
         ("Grid", fig.loc["Grid", year]),
@@ -4996,7 +4994,7 @@ for i in range(0, len(iea_region_list)):
     draw_stellar(ax, *prepare_data(data))
     plt.title(
         "V7 Adoption, "
-        + iea_region_list[i].replace(" ", "")
+        + region_list[i].replace(" ", "")
         + ", "
         + str(data_end_year)
     )
@@ -5061,7 +5059,7 @@ for i in range(0, len(iea_region_list)):
         if save_figs is True:
             pio.write_html(
                 fig,
-                file=("./charts/star-" + iea_region_list[i] + ".html").replace(" ", ""),
+                file=("./charts/star-" + region_list[i] + ".html").replace(" ", ""),
                 auto_open=False,
             )
 
@@ -5073,8 +5071,8 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-for i in range(0, len(iea_region_list)):
-    fig = adoption_curves.loc[iea_region_list[i], slice(None), scenario] * 100
+for i in range(0, len(region_list)):
+    fig = adoption_curves.loc[region_list[i], slice(None), scenario] * 100
     kneedle = KneeLocator(
         fig.columns,
         fig.loc["Grid"].values,
@@ -5290,411 +5288,6 @@ if save_figs is True:
 
 # endregion
 
-####################################
-# ELECTRICITY GENERATION BY SOURCE #
-####################################
-
-# region
-
-# region
-
-tech_list = ["Solar", "Wind", "Nuclear", "Other renewables", "Fossil fuels"]
-
-group_keys = {
-    "Biomass and waste": "Other renewables",
-    "Fossil fuels": "Fossil fuels",
-    "Geothermal": "Other renewables",
-    "Hydroelectricity": "Other renewables",
-    "Nuclear": "Nuclear",
-    "Solar": "Solar",
-    "Wind": "Wind",
-}
-
-color = (
-    (0.645, 0.342, 0.138),
-    (0.285, 0.429, 0.621),
-    (0.564, 0.114, 0.078),
-    (0.603, 0.651, 0.717),
-    (0.267, 0.267, 0.267),
-)
-
-# endregion
-
-# STACKED AREA PLOT
-
-# region
-
-for i in range(0, len(iea_region_list)):
-    fig = (
-        elec_consump_pathway.loc[iea_region_list[i], slice(None)]
-        .groupby("Metric")
-        .sum()
-    )
-    fig = fig.groupby(group_keys).sum()
-    fig = fig.reindex(tech_list)
-    plt.figure(i)
-    plt.stackplot(
-        fig.columns.astype(int), fig * unit[1], labels=fig.index, colors=color
-    )
-    plt.ylabel("TFC, " + unit[0])
-    plt.xlim([data_start_year, long_proj_end_year])
-    plt.title("Electricity Generation by Source, " + iea_region_list[i])
-    plt.legend(loc=2, fontsize="small")
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-    plt.savefig(
-        fname=("podi/data/figs/electricity_pathway-" + iea_region_list[i]).replace(
-            " ", ""
-        ),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    plt.clf()
-
-# endregion
-
-# LINE PLOT
-
-# region
-
-for i in range(0, len(iea_region_list)):
-    fig = (
-        elec_per_adoption_pathway.loc[iea_region_list[i], slice(None)]
-        .groupby("Metric")
-        .sum()
-    )
-    fig = fig[fig.index.isin(tech_list)]
-    plt.figure(i)
-    plt.plot(fig.columns.astype(int).values, fig.T * 100)
-    plt.ylabel("(%)")
-    plt.xlim([data_start_year, long_proj_end_year])
-    plt.title("Percent of Total Electricity Generation, " + iea_region_list[i])
-    plt.legend(
-        fig.index,
-        loc=2,
-        fontsize="small",
-        bbox_to_anchor=(1.05, 1),
-        borderaxespad=0.0,
-    )
-    plt.show()
-    plt.clf()
-
-# endregion
-
-# STACKED 100% PLOT
-
-# region
-
-for i in range(0, len(iea_region_list)):
-    fig = (
-        elec_per_adoption_pathway.loc[iea_region_list[i], slice(None)]
-        .groupby("Metric")
-        .sum()
-    )
-    fig = fig[fig.index.isin(tech_list)]
-    plt.figure(i)
-    plt.stackplot(fig.columns.astype(int).values, fig * 100, labels=fig.index)
-    plt.ylabel("(%)")
-    plt.xlim([data_start_year, long_proj_end_year])
-    plt.title("Percent of Total Electricity Generation, " + iea_region_list[i])
-    plt.legend(
-        fig.index,
-        loc=2,
-        fontsize="small",
-        bbox_to_anchor=(1.05, 1),
-        borderaxespad=0.0,
-    )
-    plt.show()
-    plt.clf()
-
-# endregion
-
-# endregion
-
-######################################
-# ELECTRICITY DEMAND BY SECTOR (TWH) #
-######################################
-
-# region
-
-color = ((0.116, 0.220, 0.364), (0.380, 0.572, 0.828), (0.368, 0.304, 0.48))
-
-# pathway
-
-for i in range(0, len(iea_region_list)):
-    energy_demand_pathway_i = energy_demand_pathway.loc[
-        iea_region_list[i], slice(None), slice(None), "pathway"
-    ]
-    fig = (
-        energy_demand_pathway_i.loc[(iea_region_list[i], slice(None), "Electricity"), :]
-        .groupby(["Sector"])
-        .sum()
-        .drop("TFC")
-        .rename(
-            index={
-                "Buildings": ("Buildings", "Electricity"),
-                "Industry": ("Industry", "Electricity"),
-                "Transport": ("Transport", "Electricity"),
-            }
-        )
-    )
-    fig.loc[[("Industry", "Electricity")]] = (
-        fig.loc[[("Industry", "Electricity")]] * 0.9
-    )
-    fig.loc[[("Transport", "Electricity")]] = (
-        fig.loc[[("Transport", "Electricity")]] * 1.2
-    )
-    plt.figure(i)
-    plt.stackplot(fig.T.index, fig * unit[1], labels=fig.index, colors=color)
-    plt.legend(loc=2, fontsize="small")
-    plt.ylabel("TFC, " + unit[0])
-    plt.xlim([2020, energy_demand_pathway.columns.max()])
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-    plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
-    plt.title("Electricity Demand by Sector, " + iea_region_list[i])
-    plt.savefig(
-        fname=("podi/data/figs/elecbysector_pathway-" + iea_region_list[i]).replace(
-            " ", ""
-        ),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    plt.clf()
-
-# endregion
-
-###########################
-# BUILDINGS ENERGY SUPPLY #
-###########################
-
-# region
-
-tech_list = ["Electricity", "Solar thermal", "Bioenergy", "Fossil fuels"]
-
-group_keys = {
-    "Bioenergy": "Bioenergy",
-    "Geothermal": "Electricity",
-    "Hydroelectricity": "Electricity",
-    "Nuclear": "Electricity",
-    "Solar": "Electricity",
-    "Wind": "Electricity",
-    "Coal": "Fossil fuels",
-    "Electricity": "Electricity",
-    "Natural gas": "Fossil fuels",
-    "Oil": "Fossil fuels",
-    "Other renewables": "Solar thermal",
-}
-
-color = (
-    (0.380, 0.572, 0.828),
-    (0.996, 0.096, 0.320),
-    (0.792, 0.616, 0.204),
-    (0.296, 0.276, 0.180),
-)
-
-# pathway
-
-for i in range(0, len(iea_region_list)):
-    fig = energy_demand_pathway.loc[
-        iea_region_list[i], "Buildings", ["Electricity", "Heat"], "pathway"
-    ]
-
-    plt.figure(i)
-    plt.stackplot(
-        fig.T.index,
-        fig * unit[1],
-        labels=fig.index.get_level_values(2),
-        colors=(
-            "cornflowerblue",
-            "lightcoral",
-        ),
-    )
-    plt.legend(loc=2, fontsize="small")
-    plt.ylabel("TFC, " + unit[0])
-    plt.xlim([2020, energy_demand_pathway.columns.max()])
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-    plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
-    plt.title("Buildings Energy Supply, " + iea_region_list[i])
-    plt.savefig(
-        fname=("podi/data/figs/buildings_pathway-" + iea_region_list[i]).replace(
-            " ", ""
-        ),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    plt.clf()
-
-# endregion
-
-#####################################
-# INDUSTRY ENERGY DEMAND BY END-USE #
-#####################################
-
-# region
-
-tech_list = ["Solar thermal", "Bioenergy", "Fossil fuels", "Electricity"]
-
-group_keys = {
-    "Bioenergy": "Bioenergy",
-    "Geothermal": "Electricity",
-    "Hydroelectricity": "Electricity",
-    "Nuclear": "Electricity",
-    "Solar": "Electricity",
-    "Wind": "Electricity",
-    "Coal": "Fossil fuels",
-    "Electricity": "Electricity",
-    "Natural gas": "Fossil fuels",
-    "Oil": "Fossil fuels",
-    "Other renewables": "Solar thermal",
-}
-
-color = (
-    (0.556, 0.244, 0.228),
-    (0.380, 0.572, 0.828),
-)
-
-# pathway
-
-for i in range(0, len(iea_region_list)):
-    fig = energy_demand_pathway.loc[
-        iea_region_list[i], "Industry", ["Electricity", "Heat"], "pathway"
-    ]
-
-    plt.figure(i)
-    plt.stackplot(
-        fig.T.index,
-        fig * unit[1],
-        labels=fig.index.get_level_values(2),
-        colors=(color),
-    )
-    plt.legend(loc=2, fontsize="small")
-    plt.ylabel("TFC, " + unit[0])
-    plt.xlim([2020, energy_demand_pathway.columns.max()])
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-    plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
-    plt.title("Industry Energy Demand by End-Use, " + iea_region_list[i])
-    plt.savefig(
-        fname=("podi/data/figs/industry_pathway-" + iea_region_list[i]).replace(
-            " ", ""
-        ),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    plt.clf()
-
-# endregion
-
-########################
-# INDUSTRY HEAT SUPPLY #
-########################
-
-# region
-
-# Heat generation by source
-
-heat_tech_list = [
-    "Bioenergy",
-    "Coal",
-    "Geothermal",
-    "Natural gas",
-    "Nuclear",
-    "Oil",
-    "Other sources",
-    "Solar thermal",
-    "Waste",
-]
-
-color = (
-    (0.296, 0.276, 0.180),
-    (0.860, 0.456, 0.184),
-    (0.792, 0.616, 0.204),
-    (0.832, 0.612, 0.060),
-    (0.996, 0.096, 0.320),
-)
-
-# pathway
-
-for i in range(0, len(iea_region_list)):
-    fig = energy_demand_pathway.loc[
-        iea_region_list[i],
-        "Industry",
-        ["Coal", "Natural gas", "Oil", "Bioenergy", "Other renewables"],
-        "pathway",
-    ]
-    plt.figure(i)
-    plt.stackplot(
-        fig.T.index,
-        fig * unit[1],
-        labels=fig.index.get_level_values(2),
-        colors=(color),
-    )
-    plt.legend(loc=2, fontsize="small")
-    plt.ylabel("TFC, " + unit[0])
-    plt.xlim([2020, energy_demand_pathway.columns.max()])
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-    plt.xticks(np.arange(2020, energy_demand_pathway.columns.max(), 10))
-    plt.title("Industry Energy Demand by End-Use, " + iea_region_list[i])
-    plt.savefig(
-        fname=("podi/data/figs/industryheat_pathway-" + iea_region_list[i]).replace(
-            " ", ""
-        ),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    plt.clf()
-
-# endregion
-
-################################
-# TRANSPORTATION ENERGY DEMAND #
-################################
-
-# region
-
-color = ((0.220, 0.500, 0.136), (0.356, 0.356, 0.356), (0.380, 0.572, 0.828))
-
-for i in range(0, len(iea_region_list)):
-    fig = energy_demand_pathway.loc[
-        iea_region_list[i],
-        "Transport",
-        ["Electricity", "Oil", "Bioenergy"],
-        "pathway",
-    ]
-    plt.figure(i)
-    plt.stackplot(
-        fig.T.index,
-        fig * unit[1],
-        labels=fig.index.get_level_values(2),
-        colors=(color),
-    )
-    plt.legend(loc=2, fontsize="small")
-    plt.ylabel("TFC, " + unit[0])
-    plt.xlim([2020, energy_demand_pathway.columns.max()])
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
-    plt.xticks(np.arange(2020, 2110, 10))
-    plt.title("Transportation Energy Supply, " + iea_region_list[i])
-    plt.savefig(
-        fname=("podi/data/figs/transport_pathway-" + iea_region_list[i]).replace(
-            " ", ""
-        ),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
-    plt.show()
-    plt.clf()
-
-# endregion
-
 ########################################################
 # REGENERATIVE AGRICULTURE SUBVECTOR MITIGATION WEDGES #
 ########################################################
@@ -5738,11 +5331,11 @@ custom_legend = [
 
 # endregion
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     em_mit = (
         (
             em_mitigated.loc[
-                iea_region_list[i],
+                region_list[i],
                 [
                     "Animal Mgmt",
                     "Legumes",
@@ -5843,7 +5436,7 @@ for i in range(0, len(iea_region_list)):
     plt.xticks(np.arange(2020, 2110, 10))
     plt.yticks(np.arange(-3, 9, 1))
     plt.title(
-        "Regenerative Agriculture Subvector Mitigation Wedges, " + iea_region_list[i]
+        "Regenerative Agriculture Subvector Mitigation Wedges, " + region_list[i]
     )
     plt.show()
     plt.clf()
@@ -5885,7 +5478,7 @@ custom_legend = [
 
 # endregion
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     em_mit = (
         (
             em_mitigated.loc[
@@ -5979,9 +5572,9 @@ for i in range(0, len(iea_region_list)):
         borderaxespad=0.0,
     )
     plt.xticks(np.arange(2020, 2110, 10))
-    plt.title("Forests & Wetlands Subvector Mitigation Wedges, " + iea_region_list[i])
+    plt.title("Forests & Wetlands Subvector Mitigation Wedges, " + region_list[i])
     plt.savefig(
-        fname=("podi/data/figs/fw_pathway-" + iea_region_list[i]).replace(" ", ""),
+        fname=("podi/data/figs/fw_pathway-" + region_list[i]).replace(" ", ""),
         format="png",
         bbox_inches="tight",
         pad_inches=0.1,
@@ -6044,7 +5637,7 @@ custom_legend = [
 
 # endregion
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     em_mit = (
         (
             em_mitigated.loc[
@@ -6165,9 +5758,9 @@ for i in range(0, len(iea_region_list)):
     )
     plt.xticks(np.arange(2020, 2110, 10))
     plt.yticks(np.arange(-17, 10, 5))
-    plt.title("AFOLU Subvector Mitigation Wedges, " + iea_region_list[i])
+    plt.title("AFOLU Subvector Mitigation Wedges, " + region_list[i])
     plt.savefig(
-        fname=("podi/data/figs/afolu_pathway-" + iea_region_list[i]).replace(" ", ""),
+        fname=("podi/data/figs/afolu_pathway-" + region_list[i]).replace(" ", ""),
         format="png",
         bbox_inches="tight",
         pad_inches=0.1,
@@ -6250,7 +5843,7 @@ custom_legend = [
     Line2D([0], [0], color=color[2], linewidth=4),
 ]
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     fig = cdr_pathway / 1000
     plt.figure(i)
     plt.stackplot(
@@ -6274,9 +5867,9 @@ for i in range(0, len(iea_region_list)):
         borderaxespad=0.0,
     )
     plt.xticks(np.arange(2020, 2110, 10))
-    plt.title("CO2 Removed via CDR, " + iea_region_list[i])
+    plt.title("CO2 Removed via CDR, " + region_list[i])
     plt.savefig(
-        fname=("podi/data/figs/cdr_pathway-" + iea_region_list[i]).replace(" ", ""),
+        fname=("podi/data/figs/cdr_pathway-" + region_list[i]).replace(" ", ""),
         format="png",
         bbox_inches="tight",
         pad_inches=0.1,
@@ -6323,7 +5916,7 @@ pd20 = pd20.loc["World ", "Global CO2 Equivalent Emissions", slice(None)].apply(
 scenario = "baseline"
 start_year = 2000
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     if scenario == "baseline":
         em = em_baseline
         afolu_em = em_baseline
@@ -6332,32 +5925,32 @@ for i in range(0, len(iea_region_list)):
         afolu_em = em_pathway
 
     em_electricity = (
-        em.loc[iea_region_list[i], "Electricity", slice(None)]
+        em.loc[region_list[i], "Electricity", slice(None)]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
 
     em_transport = (
-        em.loc[iea_region_list[i], "Transport", slice(None)]
+        em.loc[region_list[i], "Transport", slice(None)]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
 
     em_buildings = (
-        em.loc[iea_region_list[i], "Buildings", slice(None)]
+        em.loc[region_list[i], "Buildings", slice(None)]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
 
     em_industry = (
-        em.loc[iea_region_list[i], ["Industry", "Other"], ["Fossil fuels", "cement"]]
+        em.loc[region_list[i], ["Industry", "Other"], ["Fossil fuels", "cement"]]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
 
     em_ra = (
         afolu_em.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Biochar",
                 "Cropland Soil Health",
@@ -6379,7 +5972,7 @@ for i in range(0, len(iea_region_list)):
 
     em_fw = (
         afolu_em.loc[
-            iea_region_list[i],
+            region_list[i],
             [
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -6398,30 +5991,30 @@ for i in range(0, len(iea_region_list)):
     )
 
     em_othergas = (
-        em.loc[iea_region_list[i], slice(None), ["CH4", "N2O", "F-gases"]]
+        em.loc[region_list[i], slice(None), ["CH4", "N2O", "F-gases"]]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
 
     em_ch4 = (
-        em.loc[iea_region_list[i], slice(None), ["CH4"]]
+        em.loc[region_list[i], slice(None), ["CH4"]]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
 
     em_n2o = (
-        em.loc[iea_region_list[i], slice(None), ["N2O"]]
+        em.loc[region_list[i], slice(None), ["N2O"]]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
 
     em_fgas = (
-        em.loc[iea_region_list[i], slice(None), ["F-gases"]]
+        em.loc[region_list[i], slice(None), ["F-gases"]]
         .sum()
         .loc[data_start_year:long_proj_end_year]
     )
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         em_cdr = -cdr.loc[slice(None), scenario, :].squeeze()
 
         em = pd.DataFrame(
@@ -6489,7 +6082,7 @@ for i in range(0, len(iea_region_list)):
 
     fig = go.Figure()
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
                 name="CDR",
@@ -6610,7 +6203,7 @@ for i in range(0, len(iea_region_list)):
             line=dict(width=2, color="black"),
             x=pd.Series(em_hist.loc[:, start_year:].columns.values),
             y=pd.Series(
-                em_hist.loc[:, start_year:].loc[iea_region_list[i]].values / 1000
+                em_hist.loc[:, start_year:].loc[region_list[i]].values / 1000
             ),
             fill="tozeroy",
             stackgroup="three",
@@ -6619,7 +6212,7 @@ for i in range(0, len(iea_region_list)):
 
     """
     # PD20 Check
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
                 name="PD20",
@@ -6633,7 +6226,7 @@ for i in range(0, len(iea_region_list)):
     """
     fig.update_layout(
         title={
-            "text": "Emissions, " + scenario.title() + ", " + iea_region_list[i],
+            "text": "Emissions, " + scenario.title() + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
         },
@@ -6651,7 +6244,7 @@ for i in range(0, len(iea_region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/em2-" + scenario + "-" + iea_region_list[i] + ".html"
+                "./charts/em2-" + scenario + "-" + region_list[i] + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -6686,25 +6279,25 @@ ndcs = [
     (3, 3),
 ]
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     em_mit_electricity = em_mitigated.loc[
-        iea_region_list[i], "Electricity", slice(None)
+        region_list[i], "Electricity", slice(None)
     ].sum()
 
     em_mit_transport = em_mitigated.loc[
-        iea_region_list[i], "Transport", slice(None)
+        region_list[i], "Transport", slice(None)
     ].sum()
 
     em_mit_buildings = em_mitigated.loc[
-        iea_region_list[i], "Buildings", slice(None)
+        region_list[i], "Buildings", slice(None)
     ].sum()
 
     em_mit_industry = em_mitigated.loc[
-        iea_region_list[i], "Industry", slice(None)
+        region_list[i], "Industry", slice(None)
     ].sum()
 
     em_mit_ra = em_mitigated.loc[
-        iea_region_list[i],
+        region_list[i],
         [
             "Biochar",
             "Cropland Soil Health",
@@ -6721,7 +6314,7 @@ for i in range(0, len(iea_region_list)):
     ].sum()
 
     em_mit_fw = em_mitigated.loc[
-        iea_region_list[i],
+        region_list[i],
         [
             "Avoided Coastal Impacts",
             "Avoided Forest Conversion",
@@ -6735,9 +6328,9 @@ for i in range(0, len(iea_region_list)):
         slice(None),
     ].sum()
 
-    em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other", :].sum()
+    em_mit_othergas = em_mitigated.loc[region_list[i], "Other", :].sum()
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         em_mit_cdr = cdr_pathway[0].rename("CDR")
         em_mit = pd.DataFrame(
             [
@@ -6787,7 +6380,7 @@ for i in range(0, len(iea_region_list)):
 
     spacer = (
         pd.Series(
-            em_baseline.groupby("Region").sum().loc[iea_region_list[i]] - em_mit.sum()
+            em_baseline.groupby("Region").sum().loc[region_list[i]] - em_mit.sum()
         )
         .replace(nan, 0)
         .rename("")
@@ -6840,7 +6433,7 @@ for i in range(0, len(iea_region_list)):
             )
         )
 
-        if iea_region_list[i] == "World ":
+        if region_list[i] == "World ":
             fig.add_trace(
                 go.Scatter(
                     name="CDR",
@@ -6927,12 +6520,12 @@ for i in range(0, len(iea_region_list)):
                 name="Historical",
                 line=dict(width=2, color="black"),
                 x=pd.Series(em_hist.columns.values),
-                y=pd.Series(em_hist.loc[iea_region_list[i]].values / 1000),
+                y=pd.Series(em_hist.loc[region_list[i]].values / 1000),
                 fill="none",
                 stackgroup="two",
             )
         )
-        if iea_region_list[i] == "World ":
+        if region_list[i] == "World ":
             fig.add_trace(
                 go.Scatter(
                     name="SSP2-1.9",
@@ -6987,7 +6580,7 @@ for i in range(0, len(iea_region_list)):
                     em_baseline.loc[:, near_proj_start_year:]
                     .groupby("Region")
                     .sum()
-                    .loc[iea_region_list[i]]
+                    .loc[region_list[i]]
                     / 1000
                 ),
                 fill="none",
@@ -6995,7 +6588,7 @@ for i in range(0, len(iea_region_list)):
             )
         )
 
-        if iea_region_list[i] in [
+        if region_list[i] in [
             "US ",
             "SAFR ",
             "RUS ",
@@ -7015,7 +6608,7 @@ for i in range(0, len(iea_region_list)):
 
         fig.update_layout(
             title={
-                "text": "Emissions Mitigated, " + iea_region_list[i],
+                "text": "Emissions Mitigated, " + region_list[i],
                 "xanchor": "center",
                 "x": 0.5,
             },
@@ -7031,7 +6624,7 @@ for i in range(0, len(iea_region_list)):
             pio.write_html(
                 fig,
                 file=(
-                    "./charts/mwedges-" + "pathway" + "-" + iea_region_list[i] + ".html"
+                    "./charts/mwedges-" + "pathway" + "-" + region_list[i] + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
             )
@@ -7134,12 +6727,12 @@ for i in range(0, len(iea_region_list)):
         )
         plt.xticks(np.arange(2020, 2110, 10))
         plt.yticks(np.arange(-25, 105, 10))
-        plt.title("Emissions Mitigated, " + iea_region_list[i])
+        plt.title("Emissions Mitigated, " + region_list[i])
         plt.show()
 
         if save_figs is True:
             plt.savefig(
-                fname=("podi/data/figs/mitigationwedges-" + iea_region_list[i]).replace(
+                fname=("podi/data/figs/mitigationwedges-" + region_list[i]).replace(
                     " ", ""
                 ),
                 format="png",
@@ -7340,25 +6933,25 @@ if save_figs is True:
 
 year = 2030
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     em_mit_electricity = em_mitigated.loc[
-        iea_region_list[i], "Electricity", slice(None)
+        region_list[i], "Electricity", slice(None)
     ].sum()
 
     em_mit_transport = em_mitigated.loc[
-        iea_region_list[i], "Transport", slice(None)
+        region_list[i], "Transport", slice(None)
     ].sum()
 
     em_mit_buildings = em_mitigated.loc[
-        iea_region_list[i], "Buildings", slice(None)
+        region_list[i], "Buildings", slice(None)
     ].sum()
 
     em_mit_industry = em_mitigated.loc[
-        iea_region_list[i], "Industry", slice(None)
+        region_list[i], "Industry", slice(None)
     ].sum()
 
     em_mit_ra = em_mitigated.loc[
-        iea_region_list[i],
+        region_list[i],
         [
             "Biochar",
             "Cropland Soil Health",
@@ -7375,7 +6968,7 @@ for i in range(0, len(iea_region_list)):
     ].sum()
 
     em_mit_fw = em_mitigated.loc[
-        iea_region_list[i],
+        region_list[i],
         [
             "Avoided Coastal Impacts",
             "Avoided Forest Conversion",
@@ -7389,13 +6982,13 @@ for i in range(0, len(iea_region_list)):
         slice(None),
     ].sum()
 
-    em_mit_othergas = em_mitigated.loc[iea_region_list[i], "Other", :].sum()
+    em_mit_othergas = em_mitigated.loc[region_list[i], "Other", :].sum()
 
-    em_mit_ch4 = em_mitigated.loc[iea_region_list[i], "Other", ["CH4"]].sum()
+    em_mit_ch4 = em_mitigated.loc[region_list[i], "Other", ["CH4"]].sum()
 
-    em_mit_n2o = em_mitigated.loc[iea_region_list[i], "Other", ["N2O"]].sum()
+    em_mit_n2o = em_mitigated.loc[region_list[i], "Other", ["N2O"]].sum()
 
-    em_mit_fgas = em_mitigated.loc[iea_region_list[i], "Other", ["F-gases"]].sum()
+    em_mit_fgas = em_mitigated.loc[region_list[i], "Other", ["F-gases"]].sum()
 
     em_mit_cdr = pd.Series(
         cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
@@ -7431,7 +7024,7 @@ for i in range(0, len(iea_region_list)):
 
     em_mit.loc[:, :2020] = 0
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         fig = (
             ((em_mit) / 1000)
             .reindex(
@@ -7763,7 +7356,7 @@ for i in range(0, len(iea_region_list)):
 
     opacity = 0.5
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         figure = go.Figure(
             data=[
                 go.Bar(
@@ -7931,7 +7524,7 @@ for i in range(0, len(iea_region_list)):
     else:
         j = 1
 
-    if iea_region_list[i] in [
+    if region_list[i] in [
         "US ",
         "SAFR ",
         "RUS ",
@@ -7943,12 +7536,12 @@ for i in range(0, len(iea_region_list)):
         figure.add_shape(
             type="line",
             x0=em_mit_ndc[
-                (em_mit_ndc["Region"] == iea_region_list[i])
+                (em_mit_ndc["Region"] == region_list[i])
                 & (em_mit_ndc.index == year)
             ]["em_mit"].values[0],
             y0=-0.5,
             x1=em_mit_ndc[
-                (em_mit_ndc["Region"] == iea_region_list[i])
+                (em_mit_ndc["Region"] == region_list[i])
                 & (em_mit_ndc.index == year)
             ]["em_mit"].values[0],
             y1=9.5,
@@ -7960,7 +7553,7 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 x=[
                     em_mit_ndc[
-                        (em_mit_ndc["Region"] == iea_region_list[i])
+                        (em_mit_ndc["Region"] == region_list[i])
                         & (em_mit_ndc.index == year)
                     ]["em_mit"].values[0]
                     * 0.9
@@ -7972,16 +7565,16 @@ for i in range(0, len(iea_region_list)):
             )
         )
 
-    if iea_region_list[i] == "World ":
+    if region_list[i] == "World ":
         figure.add_shape(
             type="line",
             x0=em_mit_ndc[
-                (em_mit_ndc["Region"] == iea_region_list[i])
+                (em_mit_ndc["Region"] == region_list[i])
                 & (em_mit_ndc.index == year)
             ]["em_mit"].values[0],
             y0=-0.5,
             x1=em_mit_ndc[
-                (em_mit_ndc["Region"] == iea_region_list[i])
+                (em_mit_ndc["Region"] == region_list[i])
                 & (em_mit_ndc.index == year)
             ]["em_mit"].values[0],
             y1=10.5,
@@ -7993,7 +7586,7 @@ for i in range(0, len(iea_region_list)):
             go.Scatter(
                 x=[
                     em_mit_ndc[
-                        (em_mit_ndc["Region"] == iea_region_list[i])
+                        (em_mit_ndc["Region"] == region_list[i])
                         & (em_mit_ndc.index == year)
                     ]["em_mit"].values[0]
                     * 0.9
@@ -8006,7 +7599,7 @@ for i in range(0, len(iea_region_list)):
         )
 
     figure.update_layout(
-        title="Climate Mitigation Potential, " + str(year) + ", " + iea_region_list[i],
+        title="Climate Mitigation Potential, " + str(year) + ", " + region_list[i],
         title_x=0.5,
         xaxis={"title": "GtCO2e mitigated in " + str(year)},
         barmode="stack",
@@ -8029,7 +7622,7 @@ for i in range(0, len(iea_region_list)):
             + "-"
             + str(year)
             + "-"
-            + iea_region_list[i]
+            + region_list[i]
             + ".html"
         ).replace(" ", ""),
         auto_open=False,
@@ -8046,13 +7639,13 @@ for i in range(0, len(iea_region_list)):
 scenario = scenario
 start_year = start_year
 
-for i in range(0, len(iea_region_list)):
-    fig = elec_per_adoption.loc[iea_region_list[i], slice(None), scenario]
+for i in range(0, len(region_list)):
+    fig = elec_per_adoption.loc[region_list[i], slice(None), scenario]
     plt.figure(i)
     plt.plot(fig.T)
     plt.legend(fig.T)
-    plt.title(iea_region_list[i])
-    elec_per_adoption.loc[iea_region_list[i], slice(None), scenario].loc[:, 2019]
+    plt.title(region_list[i])
+    elec_per_adoption.loc[region_list[i], slice(None), scenario].loc[:, 2019]
 
 # endregion
 
@@ -8063,11 +7656,11 @@ for i in range(0, len(iea_region_list)):
 # region
 scenario = "pathway"
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     plt.figure(i)
-    plt.plot(heat_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
-    plt.legend(heat_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
-    plt.title(iea_region_list[i])
+    plt.plot(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.legend(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.title(region_list[i])
 
 # endregion
 
@@ -8078,10 +7671,10 @@ for i in range(0, len(iea_region_list)):
 # region
 scenario = "pathway"
 
-for i in range(0, len(iea_region_list)):
+for i in range(0, len(region_list)):
     plt.figure(i)
-    plt.plot(transport_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
-    plt.legend(transport_per_adoption.loc[iea_region_list[i], slice(None), scenario].T)
-    plt.title(iea_region_list[i])
+    plt.plot(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.legend(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.title(region_list[i])
 
 # endregion

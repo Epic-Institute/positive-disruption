@@ -4,7 +4,9 @@ import pandas as pd
 from podi.adoption_curve import adoption_curve
 from numpy import NaN
 import numpy as np
-from podi.energy_supply import iea_region_list, long_proj_end_year
+from podi.energy_supply import long_proj_end_year
+
+region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
 
 def rgroup(data, gas, sector, rgroup, scenario):
@@ -59,7 +61,7 @@ def rgroup(data, gas, sector, rgroup, scenario):
     data = pd.concat([data], names=["Scenario"], keys=[scenario]).reorder_levels(
         ["Region", "Sector", "Metric", "Scenario"]
     )
-    data = data.loc[np.array(iea_region_list), slice(None), slice(None), slice(None)]
+    data = data.loc[np.array(region_list), slice(None), slice(None), slice(None)]
 
     return data
 
@@ -116,7 +118,7 @@ def rgroup2(data, gas, sector, rgroup, scenario):
     data = pd.concat([data], names=["Scenario"], keys=[scenario]).reorder_levels(
         ["Region", "Sector", "Metric", "Scenario"]
     )
-    data = data.loc[np.array(iea_region_list), slice(None), slice(None), slice(None)]
+    data = data.loc[np.array(region_list), slice(None), slice(None), slice(None)]
 
     return data
 

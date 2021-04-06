@@ -2,7 +2,7 @@
 
 # region
 
-from podi.energy_demand import energy_demand, data_start_year, iea_region_list
+from podi.energy_demand import energy_demand, data_start_year
 from podi.energy_supply import energy_supply, long_proj_end_year
 from podi.afolu import afolu
 from podi.emissions import emissions
@@ -20,7 +20,6 @@ from podi.cdr.cdr_util import (
     transport_em_def,
     fuel_em_def,
 )
-from podi.energy_demand import iea_region_list
 from podi.emissions import emissions
 from podi.cdr.cdr_main import cdr_mix
 """
@@ -33,6 +32,8 @@ from numpy import NaN
 
 pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()
+
+region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
 # endregion
 
@@ -95,7 +96,9 @@ params.to_csv("podi/data/params.csv", index=False)
     transport_per_adoption_baseline,
     transport_consump_cdr_baseline,
 ) = energy_supply(
-    "baseline", energy_demand.loc[slice(None), slice(None), slice(None), ["baseline"]]
+    "baseline",
+    energy_demand.loc[slice(None), slice(None), slice(None), ["baseline"]],
+    region_list,
 )
 
 (
@@ -109,7 +112,9 @@ params.to_csv("podi/data/params.csv", index=False)
     transport_per_adoption_pathway,
     transport_consump_cdr_pathway,
 ) = energy_supply(
-    "pathway", energy_demand.loc[slice(None), slice(None), slice(None), ["pathway"]]
+    "pathway",
+    energy_demand.loc[slice(None), slice(None), slice(None), ["pathway"]],
+    region_list,
 )
 
 elec_consump = elec_consump_baseline.append(elec_consump_pathway)
@@ -204,7 +209,7 @@ cdr_pathway = []
 for i in range(0, 1):
     '''
     cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
-        cdr_needed.loc[iea_region_list[i]].to_list(),
+        cdr_needed.loc[region_list[i]].to_list(),
         grid_em_def,
         heat_em_def,
         transport_em_def,
@@ -229,7 +234,7 @@ for i in range(0, 1):
     )
 
     cdr_pathway = pd.DataFrame(cdr_pathway).append(
-        pd.concat([cdr_pathway2], keys=[iea_region_list[i]], names=["Region"])
+        pd.concat([cdr_pathway2], keys=[region_list[i]], names=["Region"])
     )
     """
     cdr_pathway = (
@@ -299,10 +304,10 @@ conc_pathway, temp_pathway, sea_lvl_pathway = climate(
 
 adoption_curves = []
 for j in ["baseline", "pathway"]:
-    for i in range(0, len(iea_region_list)):
+    for i in range(0, len(region_list)):
         adoption_curves = pd.DataFrame(adoption_curves).append(
             results_analysis(
-                iea_region_list[i],
+                region_list[i],
                 j,
                 energy_demand,
                 elec_consump,
@@ -328,8 +333,8 @@ for j in ["baseline", "pathway"]:
 
 em_mit_ndc = []
 
-for i in range(0, len(iea_region_list)):
-    if iea_region_list[i] in [
+for i in range(0, len(region_list)):
+    if region_list[i] in [
         "World ",
         "US ",
         "SAFR ",
@@ -342,17 +347,17 @@ for i in range(0, len(iea_region_list)):
         em_ndc = (
             pd.read_csv("podi/data/emissions_ndcs.csv")
             .set_index(["Region"])
-            .loc[iea_region_list[i]]
+            .loc[region_list[i]]
         )
 
         em_ndc = pd.DataFrame(
             (
-                em_baseline.loc[iea_region_list[i]].sum().loc[[2025, 2030, 2050]] / 1000
+                em_baseline.loc[region_list[i]].sum().loc[[2025, 2030, 2050]] / 1000
             ).values
             - (em_ndc).values
         ).rename(index={0: 2025, 1: 2030, 2: 2050}, columns={0: "em_mit"})
 
-        em_ndc["Region"] = iea_region_list[i]
+        em_ndc["Region"] = region_list[i]
     else:
         em_ndc = []
 

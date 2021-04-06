@@ -3,13 +3,14 @@
 import pandas as pd
 from numpy import NaN
 from podi.curve_smooth import curve_smooth
-from podi.data.energy_demand import data_end_year, iea_region_list, gcam_region_list
+from podi.data.energy_demand import data_end_year, gcam_region_list
+from main import region_list
 
 input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
 
 
-def iea_weo_etl(iea_region_list_i):
-    df = pd.read_excel(input_data, (iea_region_list_i + "_Balance").replace(" ", ""))
+def iea_weo_etl(region_list_i):
+    df = pd.read_excel(input_data, (region_list_i + "_Balance").replace(" ", ""))
     df = df.drop(df.index[0:3])
     df.columns = df.iloc[0]
     df = df.drop(df.index[0])
@@ -149,10 +150,10 @@ def iea_weo_etl(iea_region_list_i):
 
 energy_demand_historical = dict()
 
-for i in range(0, len(iea_region_list)):
-    energy_demand_historical[i] = iea_weo_etl(iea_region_list[i])
+for i in range(0, len(region_list)):
+    energy_demand_historical[i] = iea_weo_etl(region_list[i])
 
-    energy_demand_historical[i].insert(0, "IEA Region", iea_region_list[i])
+    energy_demand_historical[i].insert(0, "IEA Region", region_list[i])
     energy_demand_historical[i].insert(0, "GCAM Region", gcam_region_list[i])
 
 energy_demand_historical = pd.concat(

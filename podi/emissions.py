@@ -5,13 +5,13 @@
 import pandas as pd
 from podi.energy_demand import data_start_year, data_end_year
 from podi.energy_supply import near_proj_start_year, long_proj_end_year
-from podi.energy_demand import iea_region_list
 from numpy import NaN
 import numpy as np
 from podi.adoption_curve import adoption_curve
 
 # endregion
 
+region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
 def rgroup(data, gas, sector, rgroup, scenario):
     region_categories = pd.read_csv(
@@ -66,7 +66,7 @@ def rgroup(data, gas, sector, rgroup, scenario):
     data = pd.concat([data], names=["Scenario"], keys=[scenario]).reorder_levels(
         ["Region", "Sector", "Metric", "Scenario"]
     )
-    data = data.loc[np.array(iea_region_list), slice(None), slice(None), slice(None)]
+    data = data.loc[np.array(region_list), slice(None), slice(None), slice(None)]
 
     return data
 
@@ -359,20 +359,18 @@ def emissions(
     em2 = []
 
     # add clip(lower=0) before .sum() to have em_hist not account for net negative F&W emissions
-    for i in range(0, len(iea_region_list)):
+    for i in range(0, len(region_list)):
         em_per = (
             pd.DataFrame(
-                em.loc[iea_region_list[i]].apply(
+                em.loc[region_list[i]].apply(
                     lambda x: x.divide(x.sum()),
                     axis=0,
                 )
             )
         ).loc[:, 1990:data_end_year]
-        em_per = pd.concat([em_per], keys=[iea_region_list[i]], names=["Region"])
+        em_per = pd.concat([em_per], keys=[region_list[i]], names=["Region"])
         em_per = em_per.apply(
-            lambda x: x.multiply(
-                em_hist.loc[iea_region_list[i]].loc[:, x.name].values[0]
-            ),
+            lambda x: x.multiply(em_hist.loc[region_list[i]].loc[:, x.name].values[0]),
             axis=0,
         )
         em2 = pd.DataFrame(em2).append(em_per)

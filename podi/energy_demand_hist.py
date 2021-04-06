@@ -8,25 +8,6 @@ import numpy as np
 from numpy import NaN
 from podi.energy_demand import data_start_year, data_end_year
 
-iea_region_list = (
-    "World ",
-    "NAM ",
-    "US ",
-    "CSAM ",
-    "BRAZIL ",
-    "EUR ",
-    "AFRICA ",
-    "SAFR ",
-    "ME ",
-    "RUS ",
-    "ASIAPAC ",
-    "CHINA ",
-    "INDIA ",
-    "JPN ",
-    " OECD ",
-    "NonOECD ",
-)
-
 # endregion
 
 

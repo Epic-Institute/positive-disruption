@@ -7,7 +7,6 @@ from podi.adoption_curve import adoption_curve
 from podi.data.eia_etl import eia_etl
 from podi.data.bnef_etl import bnef_etl
 from podi.data.heat_etl import heat_etl
-from podi.energy_demand import iea_region_list
 from numpy import NaN
 from podi.curve_smooth import curve_smooth
 from podi.energy_demand import (
@@ -24,7 +23,7 @@ energy_oversupply_prop = 0.0
 # endregion
 
 
-def energy_supply(scenario, energy_demand):
+def energy_supply(scenario, energy_demand, region_list):
 
     # region
 
@@ -245,7 +244,8 @@ def energy_supply(scenario, energy_demand):
                 + (
                     near_proj_per_elec_consump.loc[perc.name, data_end_year]
                     - near_proj_per_elec_consump.loc[perc.name, data_end_year - 2]
-                ) / 2
+                )
+                / 2
                 - perc.loc[data_end_year + 1]
             )
 
@@ -489,7 +489,8 @@ def energy_supply(scenario, energy_demand):
                 + (
                     near_proj_per_heat_consump.loc[perc.name, data_end_year]
                     - near_proj_per_heat_consump.loc[perc.name, data_end_year - 2]
-                ) / 2
+                )
+                / 2
                 - perc.loc[data_end_year + 1]
             )
 
@@ -730,7 +731,8 @@ def energy_supply(scenario, energy_demand):
                 + (
                     near_proj_per_transport_consump.loc[perc.name, data_end_year]
                     - near_proj_per_transport_consump.loc[perc.name, data_end_year - 2]
-                ) / 2
+                )
+                / 2
                 - perc.loc[data_end_year + 1]
             )
 
@@ -924,24 +926,24 @@ def energy_supply(scenario, energy_demand):
     transport_per_adoption = []
     transport_consump_cdr = []
 
-    for i in range(0, len(iea_region_list)):
+    for i in range(0, len(region_list)):
         elec_consump = pd.DataFrame(elec_consump).append(
-            consump_total(iea_region_list[i], scenario)[0]
+            consump_total(region_list[i], scenario)[0]
         )
         heat_consump2 = pd.DataFrame(heat_consump2).append(
-            heat_consump_total(iea_region_list[i], scenario)[0]
+            heat_consump_total(region_list[i], scenario)[0]
         )
         transport_consump2 = pd.DataFrame(transport_consump2).append(
-            transport_consump_total(iea_region_list[i], scenario)[0]
+            transport_consump_total(region_list[i], scenario)[0]
         )
         elec_per_adoption = pd.DataFrame(elec_per_adoption).append(
-            consump_total(iea_region_list[i], scenario)[1]
+            consump_total(region_list[i], scenario)[1]
         )
         heat_per_adoption = pd.DataFrame(heat_per_adoption).append(
-            heat_consump_total(iea_region_list[i], scenario)[1]
+            heat_consump_total(region_list[i], scenario)[1]
         )
         transport_per_adoption = pd.DataFrame(transport_per_adoption).append(
-            transport_consump_total(iea_region_list[i], scenario)[1]
+            transport_consump_total(region_list[i], scenario)[1]
         )
 
     elec_consump = pd.concat(
