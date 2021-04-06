@@ -9,6 +9,7 @@ from matplotlib.lines import Line2D
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.energy_demand import data_end_year, data_start_year
+from podi.energy_demand import iea_region_list, data_end_year, data_start_year
 from podi.energy_supply import (
     near_proj_start_year,
     near_proj_end_year,
@@ -2375,6 +2376,32 @@ for i in range(0, len(region_list)):
 
 # region
 
+bar_emissions_goal = [
+    ("x",),
+    ("x",),
+    ("determined through linear extrapolation using the U.S’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2025.", 
+    "of net zero emissions, which was set in President Biden’s <br>climate plan."),
+    ("x",),
+    ("set in Brazil’s 2015 NDC.", 
+    "determined through linear extrapolation using Brazil’s 2025 and <br>2030 emissions goals set in their 2015 NDC."),
+    ("x",),
+    ("x",),
+    ("set in South Africa’s 2015 NDC.", 
+    "determined through linear extrapolation using South Africa’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030. South Africa submitted a Low Emission <br>Development Scenario in 2020, but the scenario does not specify a 2050 emissions goal."),
+    ("x",),
+    ("set in Russia’s 2015 NDC.",
+    "determined through linear extrapolation using Russia’s 1990 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030."),
+    ("x",),
+    ("determined by China’s 2020 NDC update to peak emissions before <br>2030.", 
+    "of net zero emissions, which was announced by President Xi Jinping in <br>September 2020."),
+    ("set in India’s 2015 NDC.", 
+    "determined through linear extrapolation using India’s 2017 emissions <br>and the NDC set in 2015, which set an emissions goal for 2030."),
+    ("set in Japan’s 2015 NDC.", 
+    "of net zero emissions, which was announced in Prime Minister Yoshihide <br>Suga's speech on October 26th, 2020."),
+    ("x",),
+    ("x",),
+]
+
 scenario = scenario
 
 for year in [2030, 2050]:
@@ -2865,7 +2892,7 @@ for year in [2030, 2050]:
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
                 name="NDC",
             )
-
+            """
             figure.add_trace(
                 go.Scatter(
                     x=[
@@ -2881,6 +2908,21 @@ for year in [2030, 2050]:
                     showlegend=False,
                 )
             )
+            """
+            figure.add_annotation(
+                text="The blue dotted line represents an emissions mitigation goal " + bar_emissions_goal[i][j],
+                xref="paper",
+                yref="paper",
+                x=-0.2,
+                y=1.14,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
+            )
+
 
         if region_list[i] == "World ":
             figure.add_shape(
@@ -2909,7 +2951,7 @@ for year in [2030, 2050]:
                         * 0.9
                     ],
                     y=["CDR"],
-                    text=["NDC " + str(year)],
+                    text=["Mitigation Target " + str(year)],
                     mode="text",
                     showlegend=False,
                 )
@@ -2920,7 +2962,7 @@ for year in [2030, 2050]:
                 text="Emissions mitigation target values represent a 50% reduction in the year 2030, and net-zero emissions in the year 2050.",
                 xref="paper",
                 yref="paper",
-                x=-0.1,
+                x=-0.2,
                 y=1.14,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
@@ -3230,6 +3272,8 @@ for i in range(0, len(region_list)):
         xaxis={"title": "Year"},
         yaxis={"title": "Index"},
     )
+
+    fig.update_xaxes(dtick=1)
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
