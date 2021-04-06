@@ -353,7 +353,7 @@ for i in range(0, len(iea_region_list)):
 
 # region
 
-scenario = scenario
+scenario = 'baseline'
 start_year = 2000
 
 for i in range(0, len(iea_region_list)):
@@ -2972,6 +2972,21 @@ for year in [2030, 2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
+        else:
+            figure.update_layout(margin=dict())
+            figure.add_annotation(
+                text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
+                xref="paper",
+                yref="paper",
+                x=-0.1,
+                y=1.14,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
+            )
 
         figure.update_layout(
             title="Climate Mitigation Potential, "
@@ -2988,21 +3003,6 @@ for year in [2030, 2050]:
                 bordercolor="rgba(255, 255, 255, 0)",
             ),
             showlegend=False,
-        )
-        
-        figure.update_layout(margin=dict())
-        figure.add_annotation(
-            text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
-            xref="paper",
-            yref="paper",
-            x=-0.2,
-            y=-0.25,
-            showarrow=False,
-            font=dict(size=10, color="#2E3F5C"),
-            align="left",
-            borderpad=4,
-            bgcolor="#ffffff",
-            opacity=1,
         )
 
         figure.show()
@@ -4127,14 +4127,14 @@ plt.clf()
 
 # region
 
-scenario = "baseline"
+scenario = scenario
 start_year = start_year
 
 for i in range(0, len(iea_region_list)):
     for j in ['Electricity', 'Transport', 'Buildings', 'Industry', 'Regenerative Agriculture', 'Forests & Wetlands', 'Carbon Dioxide Removal', 'Other Gases']
 
         fig = (
-            adoption_curves.loc[iea_region_list[i], j, scenario].loc[
+            sadoption_curves.loc[iea_region_list[i], j, scenario].loc[
                 :, start_year:
             ]
             * 100

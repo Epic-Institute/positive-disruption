@@ -1345,7 +1345,7 @@ def results_analysis(
     ######################
     # SUBADOPTION CURVES #
     ######################
-    '''
+
     if region == "World ":
         #################################
         # ADOPTION CURVES SUM TO GLOBAL #
@@ -1567,31 +1567,31 @@ def results_analysis(
         sadoption_curves = sgrid_decarb.loc[
             :, data_start_year:long_proj_end_year
         ].append(stransport_decarb.loc[:, data_start_year:long_proj_end_year])
-        adoption_curves = adoption_curves.append(
+        sadoption_curves = adoption_curves.append(
             building_decarb.loc[:, data_start_year:long_proj_end_year]
         )
-        adoption_curves = adoption_curves.append(
+        sadoption_curves = adoption_curves.append(
             industry_decarb.loc[:, data_start_year:long_proj_end_year]
         )
-        adoption_curves = adoption_curves.append(
+        sadoption_curves = adoption_curves.append(
             ra_decarb.loc[:, data_start_year:long_proj_end_year]
         )
-        adoption_curves = adoption_curves.append(
+        sadoption_curves = adoption_curves.append(
             fw_decarb.loc[:, data_start_year:long_proj_end_year]
         )
-        adoption_curves = adoption_curves.append(
+        sadoption_curves = adoption_curves.append(
             cdr_decarb.loc[:, data_start_year:long_proj_end_year]
         )
-        adoption_curves = adoption_curves.append(
+        sadoption_curves = adoption_curves.append(
             other_decarb.loc[:, data_start_year:long_proj_end_year]
         )
 
-        adoption_curves.index.name = "Sector"
+        sadoption_curves.index.name = "Sector"
         region = "World "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
-        adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
+        sadoption_curves["Region"] = region
+        sadoption_curves["Scenario"] = scenario
+        sadoption_curves.reset_index(inplace=True)
+        sadoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
 
         # endregion
 
@@ -2349,5 +2349,5 @@ def results_analysis(
         adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
 
         # endregion
-    '''
+
     return adoption_curves
