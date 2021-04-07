@@ -7,7 +7,7 @@ from podi.energy_supply import energy_supply, long_proj_end_year
 from podi.afolu import afolu
 from podi.emissions import emissions
 from podi.results_analysis import results_analysis
-import podi.data.iea_weo_etl
+#import podi.data.iea_weo_etl
 import podi.data.iea_weo_em_etl
 import podi.data.gcam_etl
 import pandas as pd
@@ -43,7 +43,7 @@ start_time = time.monotonic()
 # region
 
 podi.data.gcam_etl
-podi.data.iea_weo_etl
+#podi.data.iea_weo_etl
 
 energy_demand_baseline = energy_demand(
     "baseline",
