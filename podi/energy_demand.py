@@ -438,4 +438,4 @@ def energy_demand(
     """
     # endregion
 
-    return energy_demand.round(decimals=0).replace(NaN, 0)
+    return energy_demand.replace(NaN, 0)

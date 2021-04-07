@@ -9,7 +9,6 @@ from matplotlib.lines import Line2D
 import pyhector
 from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.energy_demand import data_end_year, data_start_year
-from podi.energy_demand import iea_region_list, data_end_year, data_start_year
 from podi.energy_supply import (
     near_proj_start_year,
     near_proj_end_year,

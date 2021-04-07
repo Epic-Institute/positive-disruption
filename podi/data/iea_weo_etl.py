@@ -142,8 +142,11 @@ def iea_weo_etl(region_list_i, gcam_region_list_i):
     xnew = np.linspace(
         energy_demand.columns.values.astype(int).min(),
         energy_demand.columns.values.astype(int).max(),
-        energy_demand.columns.values.astype(int).max()
-        - energy_demand.columns.values.astype(int).min(),
+        (
+            energy_demand.columns.values.astype(int).max()
+            - energy_demand.columns.values.astype(int).min()
+            + 1
+        ),
     ).astype(int)
 
     energy_demand = (
@@ -180,7 +183,7 @@ for i in range(0, len(region_list)):
     energy_demand2 = pd.DataFrame(energy_demand2).append(
         iea_weo_etl(region_list[i], gcam_region_list[i])
     )
-
+"""
 energy_demand_hist = energy_demand2.loc[:, :data_end_year]
 
 energy_demand_proj = curve_smooth(
@@ -188,7 +191,7 @@ energy_demand_proj = curve_smooth(
 )
 
 energy_demand2 = energy_demand_hist.join(energy_demand_proj)
-
+"""
 # unit conversion from Mtoe to TWh
 energy_demand2 = energy_demand2.mul(11.63)
 

@@ -181,7 +181,7 @@ energy_demand_historical = pd.concat(
         energy_demand_historical[20],
     ]
 )
-
+"""
 energy_demand_historical = pd.DataFrame(
     energy_demand_historical.loc[:, :data_end_year].set_index(
         ["GCAM Region", "IEA Region", "Sector", "Metric"]
@@ -197,7 +197,7 @@ energy_demand_proj = curve_smooth(
     "quadratic",
     4,
 )
-
+"""
 energy_demand_historical = energy_demand_historical.join(energy_demand_proj)
 
 

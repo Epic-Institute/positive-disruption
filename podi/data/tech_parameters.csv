@@ -10592,7 +10592,7 @@ NAM ,Nuclear,pathway,Electricity,"Parameter a, max",-0.15
 NAM ,Nuclear,baseline,Heat,"Parameter a, max",100
 NAM ,Nuclear,pathway,Heat,"Parameter a, max",-0.02
 US ,Nuclear,baseline,Electricity,"Parameter a, max",-100
-US ,Nuclear,pathway,Electricity,"Parameter a, max",-0.04
+US ,Nuclear,pathway,Electricity,"Parameter a, max",-0.03
 US ,Nuclear,baseline,Heat,"Parameter a, max",100
 US ,Nuclear,pathway,Heat,"Parameter a, max",-0.02
 EUR ,Nuclear,baseline,Electricity,"Parameter a, max",-100
@@ -10760,7 +10760,7 @@ NAM ,Nuclear,pathway,Electricity,"Parameter b, max",60
 NAM ,Nuclear,baseline,Heat,"Parameter b, max",-100
 NAM ,Nuclear,pathway,Heat,"Parameter b, max",100
 US ,Nuclear,baseline,Electricity,"Parameter b, max",100
-US ,Nuclear,pathway,Electricity,"Parameter b, max",50
+US ,Nuclear,pathway,Electricity,"Parameter b, max",30
 US ,Nuclear,baseline,Heat,"Parameter b, max",-100
 US ,Nuclear,pathway,Heat,"Parameter b, max",100
 EUR ,Nuclear,baseline,Electricity,"Parameter b, max",100

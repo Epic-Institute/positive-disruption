@@ -88,7 +88,7 @@ def iea_weo_em_etl(region_list_i, gcam_region_list_i):
     xnew = np.linspace(
         df.columns.values.astype(int).min(),
         df.columns.values.astype(int).max(),
-        df.columns.values.astype(int).max() - df.columns.values.astype(int).min() + 1,
+        (df.columns.values.astype(int).max() - df.columns.values.astype(int).min() + 1),
     ).astype(int)
 
     df = (

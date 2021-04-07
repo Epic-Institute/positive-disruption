@@ -13,6 +13,7 @@ from podi.adoption_curve import adoption_curve
 
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
+
 def rgroup(data, gas, sector, rgroup, scenario):
     region_categories = pd.read_csv(
         "podi/data/region_categories.csv", usecols=[rgroup, "IEA Region"]
@@ -406,4 +407,4 @@ def emissions(
 
     # endregion
 
-    return em.round(decimals=3), em_targets.round(decimals=3), em_hist
+    return em, em_targets, em_hist

@@ -71,7 +71,7 @@ gcam_demand_projection = gcam_demand_projection.loc[
     (slice(None), metrics.loc[:, "GCAM Metric"], slice(None)), :
 ]
 
-gcam_pct_change = (
+gcam_pct_change2 = (
     gcam_demand_projection.pct_change(axis="columns")
     .loc[:, "2041":]
     .fillna(0)
@@ -82,9 +82,9 @@ gcam_pct_change = (
         ["Region", "Variable", "Unit", "IEA Sector", "IEA Metric", "GCAM Metric"]
     )
 )
-
+"""
 gcam_pct_change2 = curve_smooth(
     gcam_pct_change.loc[:, "2041":"2100"], "quadratic", 3
 ).join(gcam_pct_change.loc[:, "EIA Metric":])
-
+"""
 gcam_pct_change2.to_csv("podi/data/energy_demand_projection.csv", index=True)
