@@ -1,21 +1,21 @@
 Region,Sector,Technology,a,b,c,d
-EUR ,Electricity,Biomass and waste,-0.201,40.438,0.05,0.0
-EUR ,Electricity,Fossil fuels,-0.11,25.0,0.65,0.0
-EUR ,Electricity,Geothermal,0.047,19.999,0.051,0.0
-EUR ,Electricity,Hydroelectricity,0.11,5.481,0.225,0.0
-EUR ,Electricity,Nuclear,-0.1,39.6,0.31,0.0
-EUR ,Electricity,Solar,0.157,44.087,0.388,0.0
-EUR ,Electricity,Tide and wave,2.351,68.113,0.0,0.0
-EUR ,Electricity,Wind,0.232,32.599,0.39,0.0
-EUR ,Heat,Bioenergy,-0.1,2.589,0.174,0.0
-EUR ,Heat,Coal,-0.192,20.0,0.21,0.0
-EUR ,Heat,Geothermal,0.036,14.998,0.05,0.0
-EUR ,Heat,Natural gas,-0.183,20.0,0.444,0.0
-EUR ,Heat,Nuclear,-0.02,45.16,0.004,0.0
-EUR ,Heat,Oil,-0.196,49.91,0.032,0.0
-EUR ,Heat,Other sources,-0.0,22.338,0.042,0.0
-EUR ,Heat,Solar thermal,0.2,60.0,0.75,0.0
-EUR ,Heat,Waste,0.09,25.222,0.15,0.0
-EUR ,Transport,Oil,-0.197,23.0,0.95,0.0
-EUR ,Transport,Bioenergy,0.1,57.05,1.0,0.0
-EUR ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+ME ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
+ME ,Electricity,Fossil fuels,-0.345,30.0,0.746,0.0
+ME ,Electricity,Geothermal,0.094,13.623,0.0,0.0
+ME ,Electricity,Hydroelectricity,0.2,0.0,0.017,0.0
+ME ,Electricity,Nuclear,-0.3,0.0,0.063,0.0
+ME ,Electricity,Solar,0.232,48.601,0.642,0.0
+ME ,Electricity,Tide and wave,2.351,68.113,0.0,0.0
+ME ,Electricity,Wind,0.179,59.627,0.337,0.0
+ME ,Heat,Bioenergy,-0.5,0.0,0.285,0.0
+ME ,Heat,Coal,-0.2,20.0,0.228,0.0
+ME ,Heat,Geothermal,0.1,0.0,0.05,0.0
+ME ,Heat,Natural gas,-0.197,19.993,0.06,0.0
+ME ,Heat,Nuclear,-0.02,98.793,0.001,0.0
+ME ,Heat,Oil,-0.2,49.861,0.035,0.0
+ME ,Heat,Other sources,-0.5,0.0,0.9,0.0
+ME ,Heat,Solar thermal,0.15,60.0,0.8,0.0
+ME ,Heat,Waste,0.09,32.826,0.15,0.0
+ME ,Transport,Oil,-0.09,37.0,0.95,0.0
+ME ,Transport,Bioenergy,0.13,64.999,1.0,0.0
+ME ,Transport,Other fuels,-0.07,25.0,0.15,0.0

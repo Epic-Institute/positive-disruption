@@ -2205,7 +2205,7 @@ EUR ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 EUR ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 EUR ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 EUR ,Bioenergy,baseline,Heat,"Parameter a, max",100
-EUR ,Bioenergy,pathway,Transport,"Parameter a, max",0.1
+EUR ,Bioenergy,pathway,Transport,"Parameter a, max",0.2
 EUR ,Bioenergy,baseline,Transport,"Parameter a, max",5
 EU ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 EU ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -2259,13 +2259,13 @@ AFRICA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 AFRICA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 AFRICA ,Bioenergy,pathway,Heat,"Parameter a, max",-0.4
 AFRICA ,Bioenergy,baseline,Heat,"Parameter a, max",100
-AFRICA ,Bioenergy,pathway,Transport,"Parameter a, max",0.1
+AFRICA ,Bioenergy,pathway,Transport,"Parameter a, max",0.13
 AFRICA ,Bioenergy,baseline,Transport,"Parameter a, max",5
 ME ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 ME ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 ME ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 ME ,Bioenergy,baseline,Heat,"Parameter a, max",100
-ME ,Bioenergy,pathway,Transport,"Parameter a, max",0.1
+ME ,Bioenergy,pathway,Transport,"Parameter a, max",0.13
 ME ,Bioenergy,baseline,Transport,"Parameter a, max",5
 EURASIA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 EURASIA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -2331,7 +2331,7 @@ EUR ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 EUR ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
 EUR ,Bioenergy,pathway,Heat,"Parameter a, min",-3
 EUR ,Bioenergy,baseline,Heat,"Parameter a, min",100
-EUR ,Bioenergy,pathway,Transport,"Parameter a, min",0
+EUR ,Bioenergy,pathway,Transport,"Parameter a, min",0.15
 EUR ,Bioenergy,baseline,Transport,"Parameter a, min",0
 EU ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 EU ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
@@ -10596,7 +10596,7 @@ US ,Nuclear,pathway,Electricity,"Parameter a, max",-0.03
 US ,Nuclear,baseline,Heat,"Parameter a, max",100
 US ,Nuclear,pathway,Heat,"Parameter a, max",-0.02
 EUR ,Nuclear,baseline,Electricity,"Parameter a, max",-100
-EUR ,Nuclear,pathway,Electricity,"Parameter a, max",-0.1
+EUR ,Nuclear,pathway,Electricity,"Parameter a, max",-0.08
 EUR ,Nuclear,baseline,Heat,"Parameter a, max",100
 EUR ,Nuclear,pathway,Heat,"Parameter a, max",-0.02
 EU ,Nuclear,baseline,Electricity,"Parameter a, max",-100
@@ -10680,7 +10680,7 @@ US ,Nuclear,pathway,Electricity,"Parameter a, min",-0.01
 US ,Nuclear,baseline,Heat,"Parameter a, min",100
 US ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 EUR ,Nuclear,baseline,Electricity,"Parameter a, min",-100
-EUR ,Nuclear,pathway,Electricity,"Parameter a, min",-0.1
+EUR ,Nuclear,pathway,Electricity,"Parameter a, min",-0.08
 EUR ,Nuclear,baseline,Heat,"Parameter a, min",100
 EUR ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 EU ,Nuclear,baseline,Electricity,"Parameter a, min",-100
@@ -10764,7 +10764,7 @@ US ,Nuclear,pathway,Electricity,"Parameter b, max",30
 US ,Nuclear,baseline,Heat,"Parameter b, max",-100
 US ,Nuclear,pathway,Heat,"Parameter b, max",100
 EUR ,Nuclear,baseline,Electricity,"Parameter b, max",100
-EUR ,Nuclear,pathway,Electricity,"Parameter b, max",70
+EUR ,Nuclear,pathway,Electricity,"Parameter b, max",30
 EUR ,Nuclear,baseline,Heat,"Parameter b, max",-100
 EUR ,Nuclear,pathway,Heat,"Parameter b, max",100
 EU ,Nuclear,baseline,Electricity,"Parameter b, max",100
@@ -12353,7 +12353,7 @@ NAM ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 NAM ,Other fuels,baseline,Transport,"Parameter a, max",100
 US ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 US ,Other fuels,baseline,Transport,"Parameter a, max",100
-EUR ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
+EUR ,Other fuels,pathway,Transport,"Parameter a, max",-0.1
 EUR ,Other fuels,baseline,Transport,"Parameter a, max",100
 EU ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 EU ,Other fuels,baseline,Transport,"Parameter a, max",100
@@ -12395,7 +12395,7 @@ NAM ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 NAM ,Other fuels,baseline,Transport,"Parameter a, min",100
 US ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 US ,Other fuels,baseline,Transport,"Parameter a, min",100
-EUR ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
+EUR ,Other fuels,pathway,Transport,"Parameter a, min",-0.1
 EUR ,Other fuels,baseline,Transport,"Parameter a, min",100
 EU ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 EU ,Other fuels,baseline,Transport,"Parameter a, min",100
@@ -12437,7 +12437,7 @@ NAM ,Other fuels,pathway,Transport,"Parameter b, max",10
 NAM ,Other fuels,baseline,Transport,"Parameter b, max",-100
 US ,Other fuels,pathway,Transport,"Parameter b, max",10
 US ,Other fuels,baseline,Transport,"Parameter b, max",-100
-EUR ,Other fuels,pathway,Transport,"Parameter b, max",10
+EUR ,Other fuels,pathway,Transport,"Parameter b, max",50
 EUR ,Other fuels,baseline,Transport,"Parameter b, max",-100
 EU ,Other fuels,pathway,Transport,"Parameter b, max",10
 EU ,Other fuels,baseline,Transport,"Parameter b, max",-100
@@ -12686,7 +12686,7 @@ CSAM ,Other sources,pathway,Heat,"Parameter a, max",-0.01
 CSAM ,Other sources,baseline,Heat,"Parameter a, max",100
 BRAZIL ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 BRAZIL ,Other sources,baseline,Heat,"Parameter a, max",100
-AFRICA ,Other sources,pathway,Heat,"Parameter a, max",-0.1
+AFRICA ,Other sources,pathway,Heat,"Parameter a, max",-0.15
 AFRICA ,Other sources,baseline,Heat,"Parameter a, max",100
 ME ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 ME ,Other sources,baseline,Heat,"Parameter a, max",100
@@ -12854,7 +12854,7 @@ CSAM ,Other sources,pathway,Heat,Saturation Point,90
 CSAM ,Other sources,baseline,Heat,Saturation Point,3.8
 BRAZIL ,Other sources,pathway,Heat,Saturation Point,90
 BRAZIL ,Other sources,baseline,Heat,Saturation Point,3.8
-AFRICA ,Other sources,pathway,Heat,Saturation Point,90
+AFRICA ,Other sources,pathway,Heat,Saturation Point,60
 AFRICA ,Other sources,baseline,Heat,Saturation Point,3.8
 ME ,Other sources,pathway,Heat,Saturation Point,90
 ME ,Other sources,baseline,Heat,Saturation Point,3.8
@@ -13883,7 +13883,7 @@ CSAM ,Solar,pathway,Electricity,"Parameter a, max",5
 CSAM ,Solar,baseline,Electricity,"Parameter a, max",100
 BRAZIL ,Solar,pathway,Electricity,"Parameter a, max",0.13
 BRAZIL ,Solar,baseline,Electricity,"Parameter a, max",100
-AFRICA ,Solar,pathway,Electricity,"Parameter a, max",0.3
+AFRICA ,Solar,pathway,Electricity,"Parameter a, max",0.16
 AFRICA ,Solar,baseline,Electricity,"Parameter a, max",100
 ME ,Solar,pathway,Electricity,"Parameter a, max",5
 ME ,Solar,baseline,Electricity,"Parameter a, max",100
@@ -14199,7 +14199,7 @@ CSAM ,Solar thermal,pathway,Heat,"Parameter a, max",0.08
 BRAZIL ,Solar thermal,baseline,Heat,"Parameter a, max",100
 BRAZIL ,Solar thermal,pathway,Heat,"Parameter a, max",0.15
 AFRICA ,Solar thermal,baseline,Heat,"Parameter a, max",100
-AFRICA ,Solar thermal,pathway,Heat,"Parameter a, max",0.14
+AFRICA ,Solar thermal,pathway,Heat,"Parameter a, max",0.2
 ME ,Solar thermal,baseline,Heat,"Parameter a, max",100
 ME ,Solar thermal,pathway,Heat,"Parameter a, max",0.15
 EURASIA ,Solar thermal,baseline,Heat,"Parameter a, max",100
@@ -14283,7 +14283,7 @@ CSAM ,Solar thermal,pathway,Heat,"Parameter b, max",60
 BRAZIL ,Solar thermal,baseline,Heat,"Parameter b, max",-100
 BRAZIL ,Solar thermal,pathway,Heat,"Parameter b, max",60
 AFRICA ,Solar thermal,baseline,Heat,"Parameter b, max",-100
-AFRICA ,Solar thermal,pathway,Heat,"Parameter b, max",60
+AFRICA ,Solar thermal,pathway,Heat,"Parameter b, max",67
 ME ,Solar thermal,baseline,Heat,"Parameter b, max",-100
 ME ,Solar thermal,pathway,Heat,"Parameter b, max",60
 EURASIA ,Solar thermal,baseline,Heat,"Parameter b, max",-100
@@ -14325,7 +14325,7 @@ CSAM ,Solar thermal,pathway,Heat,"Parameter b, min",30
 BRAZIL ,Solar thermal,baseline,Heat,"Parameter b, min",-100
 BRAZIL ,Solar thermal,pathway,Heat,"Parameter b, min",30
 AFRICA ,Solar thermal,baseline,Heat,"Parameter b, min",-100
-AFRICA ,Solar thermal,pathway,Heat,"Parameter b, min",40
+AFRICA ,Solar thermal,pathway,Heat,"Parameter b, min",67
 ME ,Solar thermal,baseline,Heat,"Parameter b, min",-100
 ME ,Solar thermal,pathway,Heat,"Parameter b, min",30
 EURASIA ,Solar thermal,baseline,Heat,"Parameter b, min",-100
@@ -14349,7 +14349,7 @@ NAM ,Solar thermal,pathway,Heat,Saturation Point,75
 US ,Solar thermal,baseline,Heat,Saturation Point,0.016
 US ,Solar thermal,pathway,Heat,Saturation Point,85
 EUR ,Solar thermal,baseline,Heat,Saturation Point,0.016
-EUR ,Solar thermal,pathway,Heat,Saturation Point,75
+EUR ,Solar thermal,pathway,Heat,Saturation Point,65
 EU ,Solar thermal,baseline,Heat,Saturation Point,0.016
 EU ,Solar thermal,pathway,Heat,Saturation Point,80
 SAFR ,Solar thermal,baseline,Heat,Saturation Point,0.016
@@ -14367,7 +14367,7 @@ CSAM ,Solar thermal,pathway,Heat,Saturation Point,65
 BRAZIL ,Solar thermal,baseline,Heat,Saturation Point,0.016
 BRAZIL ,Solar thermal,pathway,Heat,Saturation Point,57
 AFRICA ,Solar thermal,baseline,Heat,Saturation Point,0.016
-AFRICA ,Solar thermal,pathway,Heat,Saturation Point,78
+AFRICA ,Solar thermal,pathway,Heat,Saturation Point,60
 ME ,Solar thermal,baseline,Heat,Saturation Point,0.016
 ME ,Solar thermal,pathway,Heat,Saturation Point,80
 EURASIA ,Solar thermal,baseline,Heat,Saturation Point,0.016
@@ -15490,7 +15490,7 @@ US ,Waste,pathway,Heat,"Parameter a, max",5
 US ,Waste,baseline,Heat,"Parameter a, max",100
 EUR ,Waste,pathway,Electricity,"Parameter a, max",0.05
 EUR ,Waste,baseline,Electricity,"Parameter a, max",5
-EUR ,Waste,pathway,Heat,"Parameter a, max",5
+EUR ,Waste,pathway,Heat,"Parameter a, max",0.1
 EUR ,Waste,baseline,Heat,"Parameter a, max",100
 EU ,Waste,pathway,Electricity,"Parameter a, max",0.05
 EU ,Waste,baseline,Electricity,"Parameter a, max",5
@@ -15574,7 +15574,7 @@ US ,Waste,pathway,Heat,"Parameter a, min",0.09
 US ,Waste,baseline,Heat,"Parameter a, min",100
 EUR ,Waste,pathway,Electricity,"Parameter a, min",0.05
 EUR ,Waste,baseline,Electricity,"Parameter a, min",0
-EUR ,Waste,pathway,Heat,"Parameter a, min",0.09
+EUR ,Waste,pathway,Heat,"Parameter a, min",0.01
 EUR ,Waste,baseline,Heat,"Parameter a, min",100
 EU ,Waste,pathway,Electricity,"Parameter a, min",0.05
 EU ,Waste,baseline,Electricity,"Parameter a, min",0
@@ -16025,7 +16025,7 @@ CSAM ,Wind,pathway,Electricity,"Parameter a, max",5
 CSAM ,Wind,baseline,Electricity,"Parameter a, max",100
 BRAZIL ,Wind,pathway,Electricity,"Parameter a, max",0.16
 BRAZIL ,Wind,baseline,Electricity,"Parameter a, max",100
-AFRICA ,Wind,pathway,Electricity,"Parameter a, max",0.25
+AFRICA ,Wind,pathway,Electricity,"Parameter a, max",0.14
 AFRICA ,Wind,baseline,Electricity,"Parameter a, max",100
 ME ,Wind,pathway,Electricity,"Parameter a, max",5
 ME ,Wind,baseline,Electricity,"Parameter a, max",100
