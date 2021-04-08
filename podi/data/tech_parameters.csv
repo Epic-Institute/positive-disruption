@@ -2217,7 +2217,7 @@ SAFR ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 SAFR ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 SAFR ,Bioenergy,pathway,Heat,"Parameter a, max",-0.4
 SAFR ,Bioenergy,baseline,Heat,"Parameter a, max",100
-SAFR ,Bioenergy,pathway,Transport,"Parameter a, max",0.1
+SAFR ,Bioenergy,pathway,Transport,"Parameter a, max",0.13
 SAFR ,Bioenergy,baseline,Transport,"Parameter a, max",5
 JPN ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 JPN ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -2277,7 +2277,7 @@ RUS ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 RUS ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 RUS ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 RUS ,Bioenergy,baseline,Heat,"Parameter a, max",100
-RUS ,Bioenergy,pathway,Transport,"Parameter a, max",0.1
+RUS ,Bioenergy,pathway,Transport,"Parameter a, max",0.12
 RUS ,Bioenergy,baseline,Transport,"Parameter a, max",5
 ASIAPAC ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 ASIAPAC ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -2782,7 +2782,7 @@ RUS ,Bioenergy,baseline,Electricity,Saturation Point,0
 RUS ,Bioenergy,pathway,Heat,Saturation Point,28.5
 RUS ,Bioenergy,baseline,Heat,Saturation Point,4.3
 RUS ,Bioenergy,baseline,Transport,Saturation Point,2.97
-RUS ,Bioenergy,pathway,Transport,Saturation Point,100
+RUS ,Bioenergy,pathway,Transport,Saturation Point,104
 ASIAPAC ,Bioenergy,pathway,Electricity,Saturation Point,50
 ASIAPAC ,Bioenergy,baseline,Electricity,Saturation Point,0
 ASIAPAC ,Bioenergy,pathway,Heat,Saturation Point,28.5
@@ -7799,7 +7799,7 @@ ME ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 ME ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.2
 EURASIA ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-RUS ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.01
+RUS ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.07
 RUS ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 ASIAPAC ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 ASIAPAC ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
@@ -7841,7 +7841,7 @@ ME ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 ME ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 EURASIA ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-RUS ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.04
+RUS ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.09
 RUS ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 ASIAPAC ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 ASIAPAC ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
@@ -7883,7 +7883,7 @@ ME ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 ME ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 EURASIA ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 EURASIA ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-RUS ,Hydroelectricity,pathway,Electricity,"Parameter b, max",45
+RUS ,Hydroelectricity,pathway,Electricity,"Parameter b, max",50
 RUS ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 ASIAPAC ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 ASIAPAC ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
@@ -10604,7 +10604,7 @@ EU ,Nuclear,pathway,Electricity,"Parameter a, max",-0.1
 EU ,Nuclear,baseline,Heat,"Parameter a, max",100
 EU ,Nuclear,pathway,Heat,"Parameter a, max",-0.02
 SAFR ,Nuclear,baseline,Electricity,"Parameter a, max",-100
-SAFR ,Nuclear,pathway,Electricity,"Parameter a, max",-0.02
+SAFR ,Nuclear,pathway,Electricity,"Parameter a, max",-0.01
 SAFR ,Nuclear,baseline,Heat,"Parameter a, max",100
 SAFR ,Nuclear,pathway,Heat,"Parameter a, max",-0.02
 JPN ,Nuclear,baseline,Electricity,"Parameter a, max",-100
@@ -10688,7 +10688,7 @@ EU ,Nuclear,pathway,Electricity,"Parameter a, min",-0.4
 EU ,Nuclear,baseline,Heat,"Parameter a, min",100
 EU ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 SAFR ,Nuclear,baseline,Electricity,"Parameter a, min",-100
-SAFR ,Nuclear,pathway,Electricity,"Parameter a, min",-0.03
+SAFR ,Nuclear,pathway,Electricity,"Parameter a, min",-0.01
 SAFR ,Nuclear,baseline,Heat,"Parameter a, min",100
 SAFR ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 JPN ,Nuclear,baseline,Electricity,"Parameter a, min",-100
@@ -10772,7 +10772,7 @@ EU ,Nuclear,pathway,Electricity,"Parameter b, max",50
 EU ,Nuclear,baseline,Heat,"Parameter b, max",-100
 EU ,Nuclear,pathway,Heat,"Parameter b, max",100
 SAFR ,Nuclear,baseline,Electricity,"Parameter b, max",100
-SAFR ,Nuclear,pathway,Electricity,"Parameter b, max",60
+SAFR ,Nuclear,pathway,Electricity,"Parameter b, max",80
 SAFR ,Nuclear,baseline,Heat,"Parameter b, max",-100
 SAFR ,Nuclear,pathway,Heat,"Parameter b, max",100
 JPN ,Nuclear,baseline,Electricity,"Parameter b, max",100
@@ -12377,7 +12377,7 @@ ME ,Other fuels,pathway,Transport,"Parameter a, max",-0.07
 ME ,Other fuels,baseline,Transport,"Parameter a, max",100
 EURASIA ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 EURASIA ,Other fuels,baseline,Transport,"Parameter a, max",100
-RUS ,Other fuels,pathway,Transport,"Parameter a, max",-0.07
+RUS ,Other fuels,pathway,Transport,"Parameter a, max",-0.16
 RUS ,Other fuels,baseline,Transport,"Parameter a, max",100
 ASIAPAC ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter a, max",100
@@ -12419,7 +12419,7 @@ ME ,Other fuels,pathway,Transport,"Parameter a, min",-0.07
 ME ,Other fuels,baseline,Transport,"Parameter a, min",100
 EURASIA ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 EURASIA ,Other fuels,baseline,Transport,"Parameter a, min",100
-RUS ,Other fuels,pathway,Transport,"Parameter a, min",-0.07
+RUS ,Other fuels,pathway,Transport,"Parameter a, min",-0.16
 RUS ,Other fuels,baseline,Transport,"Parameter a, min",100
 ASIAPAC ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter a, min",100
@@ -12461,7 +12461,7 @@ ME ,Other fuels,pathway,Transport,"Parameter b, max",30
 ME ,Other fuels,baseline,Transport,"Parameter b, max",-100
 EURASIA ,Other fuels,pathway,Transport,"Parameter b, max",10
 EURASIA ,Other fuels,baseline,Transport,"Parameter b, max",-100
-RUS ,Other fuels,pathway,Transport,"Parameter b, max",30
+RUS ,Other fuels,pathway,Transport,"Parameter b, max",47
 RUS ,Other fuels,baseline,Transport,"Parameter b, max",-100
 ASIAPAC ,Other fuels,pathway,Transport,"Parameter b, max",10
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter b, max",-100
@@ -12503,7 +12503,7 @@ ME ,Other fuels,pathway,Transport,"Parameter b, min",25
 ME ,Other fuels,baseline,Transport,"Parameter b, min",-100
 EURASIA ,Other fuels,pathway,Transport,"Parameter b, min",10
 EURASIA ,Other fuels,baseline,Transport,"Parameter b, min",-100
-RUS ,Other fuels,pathway,Transport,"Parameter b, min",25
+RUS ,Other fuels,pathway,Transport,"Parameter b, min",37
 RUS ,Other fuels,baseline,Transport,"Parameter b, min",-100
 ASIAPAC ,Other fuels,pathway,Transport,"Parameter b, min",10
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter b, min",-100
@@ -13869,7 +13869,7 @@ EUR ,Solar,pathway,Electricity,"Parameter a, max",0.18
 EUR ,Solar,baseline,Electricity,"Parameter a, max",100
 EU ,Solar,pathway,Electricity,"Parameter a, max",5
 EU ,Solar,baseline,Electricity,"Parameter a, max",100
-SAFR ,Solar,pathway,Electricity,"Parameter a, max",0.3
+SAFR ,Solar,pathway,Electricity,"Parameter a, max",0.1
 SAFR ,Solar,baseline,Electricity,"Parameter a, max",100
 JPN ,Solar,pathway,Electricity,"Parameter a, max",5
 JPN ,Solar,baseline,Electricity,"Parameter a, max",100
@@ -13911,7 +13911,7 @@ EUR ,Solar,pathway,Electricity,"Parameter a, min",0
 EUR ,Solar,baseline,Electricity,"Parameter a, min",100
 EU ,Solar,pathway,Electricity,"Parameter a, min",0
 EU ,Solar,baseline,Electricity,"Parameter a, min",100
-SAFR ,Solar,pathway,Electricity,"Parameter a, min",0.18
+SAFR ,Solar,pathway,Electricity,"Parameter a, min",0
 SAFR ,Solar,baseline,Electricity,"Parameter a, min",100
 JPN ,Solar,pathway,Electricity,"Parameter a, min",0
 JPN ,Solar,baseline,Electricity,"Parameter a, min",100
@@ -13995,7 +13995,7 @@ EUR ,Solar,pathway,Electricity,"Parameter b, min",0
 EUR ,Solar,baseline,Electricity,"Parameter b, min",-100
 EU ,Solar,pathway,Electricity,"Parameter b, min",0
 EU ,Solar,baseline,Electricity,"Parameter b, min",-100
-SAFR ,Solar,pathway,Electricity,"Parameter b, min",25
+SAFR ,Solar,pathway,Electricity,"Parameter b, min",30
 SAFR ,Solar,baseline,Electricity,"Parameter b, min",-100
 JPN ,Solar,pathway,Electricity,"Parameter b, min",0
 JPN ,Solar,baseline,Electricity,"Parameter b, min",-100
@@ -14056,10 +14056,10 @@ BRAZIL ,Solar,pathway,Electricity,Saturation Point,17
 EUR ,Solar,pathway,Electricity,Saturation Point,38.8
 EU ,Solar,pathway,Electricity,Saturation Point,45.9
 AFRICA ,Solar,pathway,Electricity,Saturation Point,47.4
-SAFR ,Solar,pathway,Electricity,Saturation Point,47.5
+SAFR ,Solar,pathway,Electricity,Saturation Point,50
 ME ,Solar,pathway,Electricity,Saturation Point,64.2
 EURASIA ,Solar,pathway,Electricity,Saturation Point,42.3
-RUS ,Solar,pathway,Electricity,Saturation Point,37.3
+RUS ,Solar,pathway,Electricity,Saturation Point,29
 ASIAPAC ,Solar,pathway,Electricity,Saturation Point,45.5
 CHINA ,Solar,pathway,Electricity,Saturation Point,44.4
 INDIA ,Solar,pathway,Electricity,Saturation Point,55.2
@@ -14353,7 +14353,7 @@ EUR ,Solar thermal,pathway,Heat,Saturation Point,75
 EU ,Solar thermal,baseline,Heat,Saturation Point,0.016
 EU ,Solar thermal,pathway,Heat,Saturation Point,80
 SAFR ,Solar thermal,baseline,Heat,Saturation Point,0.016
-SAFR ,Solar thermal,pathway,Heat,Saturation Point,84
+SAFR ,Solar thermal,pathway,Heat,Saturation Point,54
 JPN ,Solar thermal,baseline,Heat,Saturation Point,0.016
 JPN ,Solar thermal,pathway,Heat,Saturation Point,75
 AdvancedECO ,Solar thermal,baseline,Heat,Saturation Point,0.016
@@ -14478,7 +14478,7 @@ EUR ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 EUR ,Tide and wave,baseline,Electricity,"Parameter a, max",5
 EU ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 EU ,Tide and wave,baseline,Electricity,"Parameter a, max",5
-SAFR ,Tide and wave,pathway,Electricity,"Parameter a, max",5
+SAFR ,Tide and wave,pathway,Electricity,"Parameter a, max",0.1
 SAFR ,Tide and wave,baseline,Electricity,"Parameter a, max",5
 JPN ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 JPN ,Tide and wave,baseline,Electricity,"Parameter a, max",5
@@ -14498,7 +14498,7 @@ ME ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 ME ,Tide and wave,baseline,Electricity,"Parameter a, max",100
 EURASIA ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 EURASIA ,Tide and wave,baseline,Electricity,"Parameter a, max",100
-RUS ,Tide and wave,pathway,Electricity,"Parameter a, max",5
+RUS ,Tide and wave,pathway,Electricity,"Parameter a, max",0.1
 RUS ,Tide and wave,baseline,Electricity,"Parameter a, max",100
 ASIAPAC ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 ASIAPAC ,Tide and wave,baseline,Electricity,"Parameter a, max",100
@@ -14562,7 +14562,7 @@ EUR ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 EUR ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
 EU ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 EU ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
-SAFR ,Tide and wave,pathway,Electricity,"Parameter b, max",100
+SAFR ,Tide and wave,pathway,Electricity,"Parameter b, max",50
 SAFR ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
 JPN ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 JPN ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
@@ -14582,7 +14582,7 @@ ME ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 ME ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
 EURASIA ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 EURASIA ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
-RUS ,Tide and wave,pathway,Electricity,"Parameter b, max",100
+RUS ,Tide and wave,pathway,Electricity,"Parameter b, max",50
 RUS ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
 ASIAPAC ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 ASIAPAC ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
@@ -16011,7 +16011,7 @@ EUR ,Wind,pathway,Electricity,"Parameter a, max",0.25
 EUR ,Wind,baseline,Electricity,"Parameter a, max",100
 EU ,Wind,pathway,Electricity,"Parameter a, max",5
 EU ,Wind,baseline,Electricity,"Parameter a, max",100
-SAFR ,Wind,pathway,Electricity,"Parameter a, max",0.25
+SAFR ,Wind,pathway,Electricity,"Parameter a, max",0.14
 SAFR ,Wind,baseline,Electricity,"Parameter a, max",100
 JPN ,Wind,pathway,Electricity,"Parameter a, max",5
 JPN ,Wind,baseline,Electricity,"Parameter a, max",100

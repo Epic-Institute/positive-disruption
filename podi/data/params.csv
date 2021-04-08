@@ -1,21 +1,21 @@
 Region,Sector,Technology,a,b,c,d
-SAFR ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
-SAFR ,Electricity,Fossil fuels,-0.226,25.0,0.65,0.0
-SAFR ,Electricity,Geothermal,0.094,13.623,0.0,0.0
-SAFR ,Electricity,Hydroelectricity,100.0,68.113,0.0,0.0
-SAFR ,Electricity,Nuclear,-0.03,0.001,0.31,0.0
-SAFR ,Electricity,Solar,0.3,35.18,0.475,0.0
-SAFR ,Electricity,Tide and wave,4.987,99.954,0.011,0.0
-SAFR ,Electricity,Wind,0.25,39.292,0.59,0.0
-SAFR ,Heat,Bioenergy,-0.4,0.0,0.135,0.0
-SAFR ,Heat,Coal,-0.1,19.996,0.51,0.0
-SAFR ,Heat,Geothermal,0.014,14.994,0.05,0.0
-SAFR ,Heat,Natural gas,-1.0,0.0,0.025,0.0
-SAFR ,Heat,Nuclear,-0.02,0.0,0.001,0.0
-SAFR ,Heat,Oil,-0.097,10.0,0.006,0.0
-SAFR ,Heat,Other sources,-0.1,0.005,0.9,0.0
-SAFR ,Heat,Solar thermal,0.15,60.0,0.84,0.0
-SAFR ,Heat,Waste,4.991,0.0,0.15,0.0
-SAFR ,Transport,Oil,-0.2,23.0,0.95,0.0
-SAFR ,Transport,Bioenergy,0.1,65.0,1.0,0.0
-SAFR ,Transport,Other fuels,-0.05,10.0,0.05,0.0
+RUS ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
+RUS ,Electricity,Fossil fuels,-0.2,30.0,0.746,0.0
+RUS ,Electricity,Geothermal,0.094,13.623,0.0,0.0
+RUS ,Electricity,Hydroelectricity,-0.09,50.0,0.09,0.0
+RUS ,Electricity,Nuclear,-0.09,50.0,0.145,0.0
+RUS ,Electricity,Solar,0.18,60.0,0.29,0.0
+RUS ,Electricity,Tide and wave,0.1,49.999,0.01,0.0
+RUS ,Electricity,Wind,0.1,60.0,0.633,0.0
+RUS ,Heat,Bioenergy,-0.2,0.0,0.285,0.0
+RUS ,Heat,Coal,-0.181,20.0,0.208,0.0
+RUS ,Heat,Geothermal,0.014,14.994,0.05,0.0
+RUS ,Heat,Natural gas,-0.1,20.0,0.655,0.0
+RUS ,Heat,Nuclear,-0.02,89.088,0.003,0.0
+RUS ,Heat,Oil,-0.196,49.91,0.037,0.0
+RUS ,Heat,Other sources,-0.1,1.002,0.078,0.0
+RUS ,Heat,Solar thermal,0.25,60.0,0.8,0.0
+RUS ,Heat,Waste,0.09,46.84,0.15,0.0
+RUS ,Transport,Oil,-0.09,37.0,0.95,0.0
+RUS ,Transport,Bioenergy,0.12,65.0,1.04,0.0
+RUS ,Transport,Other fuels,-0.16,37.0,0.4,0.0
