@@ -2295,7 +2295,7 @@ INDIA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 INDIA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 INDIA ,Bioenergy,pathway,Heat,"Parameter a, max",0.08
 INDIA ,Bioenergy,baseline,Heat,"Parameter a, max",100
-INDIA ,Bioenergy,pathway,Transport,"Parameter a, max",0.11
+INDIA ,Bioenergy,pathway,Transport,"Parameter a, max",0.13
 INDIA ,Bioenergy,baseline,Transport,"Parameter a, max",5
 ASEAN ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 ASEAN ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -12383,7 +12383,7 @@ ASIAPAC ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter a, max",100
 CHINA ,Other fuels,pathway,Transport,"Parameter a, max",-0.07
 CHINA ,Other fuels,baseline,Transport,"Parameter a, max",100
-INDIA ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
+INDIA ,Other fuels,pathway,Transport,"Parameter a, max",-0.1
 INDIA ,Other fuels,baseline,Transport,"Parameter a, max",100
 ASEAN ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 ASEAN ,Other fuels,baseline,Transport,"Parameter a, max",100
@@ -12467,7 +12467,7 @@ ASIAPAC ,Other fuels,pathway,Transport,"Parameter b, max",10
 ASIAPAC ,Other fuels,baseline,Transport,"Parameter b, max",-100
 CHINA ,Other fuels,pathway,Transport,"Parameter b, max",40
 CHINA ,Other fuels,baseline,Transport,"Parameter b, max",-100
-INDIA ,Other fuels,pathway,Transport,"Parameter b, max",10
+INDIA ,Other fuels,pathway,Transport,"Parameter b, max",50
 INDIA ,Other fuels,baseline,Transport,"Parameter b, max",-100
 ASEAN ,Other fuels,pathway,Transport,"Parameter b, max",10
 ASEAN ,Other fuels,baseline,Transport,"Parameter b, max",-100
@@ -14062,7 +14062,7 @@ EURASIA ,Solar,pathway,Electricity,Saturation Point,42.3
 RUS ,Solar,pathway,Electricity,Saturation Point,29
 ASIAPAC ,Solar,pathway,Electricity,Saturation Point,45.5
 CHINA ,Solar,pathway,Electricity,Saturation Point,44.4
-INDIA ,Solar,pathway,Electricity,Saturation Point,55.2
+INDIA ,Solar,pathway,Electricity,Saturation Point,52
 JPN ,Solar,pathway,Electricity,Saturation Point,45
 ASEAN ,Solar,pathway,Electricity,Saturation Point,51.5
  OECD ,Solar,pathway,Electricity,Saturation Point,42.3
