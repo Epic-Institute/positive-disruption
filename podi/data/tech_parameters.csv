@@ -7771,7 +7771,7 @@ DevelopingECO ,Hydroelectricity,baseline,Electricity,Max annual growth,100
 DevelopingECO ,Hydroelectricity,pathway,Electricity,Max annual growth,100
  OECD ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.001
  OECD ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-NAM ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+NAM ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.03
 NAM ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 US ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.03
 US ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
@@ -7813,7 +7813,7 @@ DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
  OECD ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.002
  OECD ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-NAM ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+NAM ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.03
 NAM ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 US ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.03
 US ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
@@ -7855,7 +7855,7 @@ DevelopingECO ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 DevelopingECO ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
  OECD ,Hydroelectricity,pathway,Electricity,"Parameter b, max",50
  OECD ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-NAM ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+NAM ,Hydroelectricity,pathway,Electricity,"Parameter b, max",50
 NAM ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 US ,Hydroelectricity,pathway,Electricity,"Parameter b, max",50
 US ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
@@ -10680,7 +10680,7 @@ US ,Nuclear,pathway,Electricity,"Parameter a, min",-0.01
 US ,Nuclear,baseline,Heat,"Parameter a, min",100
 US ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 EUR ,Nuclear,baseline,Electricity,"Parameter a, min",-100
-EUR ,Nuclear,pathway,Electricity,"Parameter a, min",-0.2
+EUR ,Nuclear,pathway,Electricity,"Parameter a, min",-0.1
 EUR ,Nuclear,baseline,Heat,"Parameter a, min",100
 EUR ,Nuclear,pathway,Heat,"Parameter a, min",-0.02
 EU ,Nuclear,baseline,Electricity,"Parameter a, min",-100
