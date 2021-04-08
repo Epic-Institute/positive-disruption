@@ -2373,7 +2373,7 @@ CSAM ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 CSAM ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
 CSAM ,Bioenergy,pathway,Heat,"Parameter a, min",-0.2
 CSAM ,Bioenergy,baseline,Heat,"Parameter a, min",100
-CSAM ,Bioenergy,pathway,Transport,"Parameter a, min",0
+CSAM ,Bioenergy,pathway,Transport,"Parameter a, min",0.09
 CSAM ,Bioenergy,baseline,Transport,"Parameter a, min",0
 BRAZIL ,Bioenergy,pathway,Electricity,"Parameter a, min",-0.04
 BRAZIL ,Bioenergy,baseline,Electricity,"Parameter a, min",-0.04
@@ -2499,7 +2499,7 @@ CSAM ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 CSAM ,Bioenergy,baseline,Electricity,"Parameter b, max",40
 CSAM ,Bioenergy,pathway,Heat,"Parameter b, max",100
 CSAM ,Bioenergy,baseline,Heat,"Parameter b, max",-100
-CSAM ,Bioenergy,pathway,Transport,"Parameter b, max",100
+CSAM ,Bioenergy,pathway,Transport,"Parameter b, max",60
 CSAM ,Bioenergy,baseline,Transport,"Parameter b, max",100
 BRAZIL ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 BRAZIL ,Bioenergy,baseline,Electricity,"Parameter b, max",40
@@ -2752,7 +2752,7 @@ CSAM ,Bioenergy,baseline,Electricity,Saturation Point,0
 CSAM ,Bioenergy,pathway,Heat,Saturation Point,28.5
 CSAM ,Bioenergy,baseline,Heat,Saturation Point,4.3
 CSAM ,Bioenergy,baseline,Transport,Saturation Point,2.97
-CSAM ,Bioenergy,pathway,Transport,Saturation Point,100
+CSAM ,Bioenergy,pathway,Transport,Saturation Point,105
 BRAZIL ,Bioenergy,pathway,Electricity,Saturation Point,50
 BRAZIL ,Bioenergy,baseline,Electricity,Saturation Point,0
 BRAZIL ,Bioenergy,pathway,Heat,Saturation Point,28.5
@@ -5711,7 +5711,7 @@ World ,Fossil fuels,pathway,Transport,"Parameter a, max",-0.1074
 World ,Fossil fuels,baseline,Transport,"Parameter a, max",100
 CSAM ,Fossil fuels,pathway,Electricity,"Parameter a, max",-0.2
 CSAM ,Fossil fuels,baseline,Electricity,"Parameter a, max",100
-CSAM ,Fossil fuels,pathway,Transport,"Parameter a, max",-0.1074
+CSAM ,Fossil fuels,pathway,Transport,"Parameter a, max",-0.11
 CSAM ,Fossil fuels,baseline,Transport,"Parameter a, max",100
 BRAZIL ,Fossil fuels,pathway,Electricity,"Parameter a, max",-0.2
 BRAZIL ,Fossil fuels,baseline,Electricity,"Parameter a, max",100
@@ -5795,7 +5795,7 @@ World ,Fossil fuels,pathway,Transport,"Parameter a, min",-0.1074
 World ,Fossil fuels,baseline,Transport,"Parameter a, min",100
 CSAM ,Fossil fuels,pathway,Electricity,"Parameter a, min",-0.4
 CSAM ,Fossil fuels,baseline,Electricity,"Parameter a, min",100
-CSAM ,Fossil fuels,pathway,Transport,"Parameter a, min",-0.1074
+CSAM ,Fossil fuels,pathway,Transport,"Parameter a, min",-0.11
 CSAM ,Fossil fuels,baseline,Transport,"Parameter a, min",100
 BRAZIL ,Fossil fuels,pathway,Electricity,"Parameter a, min",-0.4
 BRAZIL ,Fossil fuels,baseline,Electricity,"Parameter a, min",100
@@ -7789,7 +7789,7 @@ NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter a, max",0.15
 NonOECD ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 World ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.05
 World ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
-CSAM ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
+CSAM ,Hydroelectricity,pathway,Electricity,"Parameter a, max",-0.11
 CSAM ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
 BRAZIL ,Hydroelectricity,pathway,Electricity,"Parameter a, max",100
 BRAZIL ,Hydroelectricity,baseline,Electricity,"Parameter a, max",100
@@ -7831,7 +7831,7 @@ NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter a, min",0.1
 NonOECD ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 World ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.2
 World ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
-CSAM ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
+CSAM ,Hydroelectricity,pathway,Electricity,"Parameter a, min",-0.11
 CSAM ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
 BRAZIL ,Hydroelectricity,pathway,Electricity,"Parameter a, min",100
 BRAZIL ,Hydroelectricity,baseline,Electricity,"Parameter a, min",100
@@ -7873,7 +7873,7 @@ NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 NonOECD ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 World ,Hydroelectricity,pathway,Electricity,"Parameter b, max",30
 World ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
-CSAM ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
+CSAM ,Hydroelectricity,pathway,Electricity,"Parameter b, max",13
 CSAM ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
 BRAZIL ,Hydroelectricity,pathway,Electricity,"Parameter b, max",100
 BRAZIL ,Hydroelectricity,baseline,Electricity,"Parameter b, max",-100
@@ -7915,7 +7915,7 @@ NonOECD ,Hydroelectricity,pathway,Electricity,"Parameter b, min",0
 NonOECD ,Hydroelectricity,baseline,Electricity,"Parameter b, min",-100
 World ,Hydroelectricity,pathway,Electricity,"Parameter b, min",0
 World ,Hydroelectricity,baseline,Electricity,"Parameter b, min",-100
-CSAM ,Hydroelectricity,pathway,Electricity,"Parameter b, min",0
+CSAM ,Hydroelectricity,pathway,Electricity,"Parameter b, min",8
 CSAM ,Hydroelectricity,baseline,Electricity,"Parameter b, min",-100
 BRAZIL ,Hydroelectricity,pathway,Electricity,"Parameter b, min",0
 BRAZIL ,Hydroelectricity,baseline,Electricity,"Parameter b, min",-100
@@ -11383,7 +11383,7 @@ CSAM ,Oil,pathway,Electricity,"Parameter a, max",-0.1074
 CSAM ,Oil,baseline,Heat,"Parameter a, max",100
 CSAM ,Oil,pathway,Heat,"Parameter a, max",-0.01
 CSAM ,Oil,baseline,Transport,"Parameter a, max",100
-CSAM ,Oil,pathway,Transport,"Parameter a, max",-0.09
+CSAM ,Oil,pathway,Transport,"Parameter a, max",-0.11
 BRAZIL ,Oil,baseline,Electricity,"Parameter a, max",100
 BRAZIL ,Oil,pathway,Electricity,"Parameter a, max",-0.1074
 BRAZIL ,Oil,baseline,Heat,"Parameter a, max",100
@@ -11509,7 +11509,7 @@ CSAM ,Oil,pathway,Electricity,"Parameter a, min",-0.1074
 CSAM ,Oil,baseline,Heat,"Parameter a, min",100
 CSAM ,Oil,pathway,Heat,"Parameter a, min",-0.2
 CSAM ,Oil,baseline,Transport,"Parameter a, min",100
-CSAM ,Oil,pathway,Transport,"Parameter a, min",-0.09
+CSAM ,Oil,pathway,Transport,"Parameter a, min",-0.11
 BRAZIL ,Oil,baseline,Electricity,"Parameter a, min",100
 BRAZIL ,Oil,pathway,Electricity,"Parameter a, min",-0.1074
 BRAZIL ,Oil,baseline,Heat,"Parameter a, min",100
@@ -12367,7 +12367,7 @@ NonOECD ,Other fuels,pathway,Transport,"Parameter a, max",-0.07
 NonOECD ,Other fuels,baseline,Transport,"Parameter a, max",100
 World ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 World ,Other fuels,baseline,Transport,"Parameter a, max",100
-CSAM ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
+CSAM ,Other fuels,pathway,Transport,"Parameter a, max",-0.09
 CSAM ,Other fuels,baseline,Transport,"Parameter a, max",100
 BRAZIL ,Other fuels,pathway,Transport,"Parameter a, max",-0.05
 BRAZIL ,Other fuels,baseline,Transport,"Parameter a, max",100
@@ -12409,7 +12409,7 @@ NonOECD ,Other fuels,pathway,Transport,"Parameter a, min",-0.07
 NonOECD ,Other fuels,baseline,Transport,"Parameter a, min",100
 World ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 World ,Other fuels,baseline,Transport,"Parameter a, min",100
-CSAM ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
+CSAM ,Other fuels,pathway,Transport,"Parameter a, min",-0.09
 CSAM ,Other fuels,baseline,Transport,"Parameter a, min",100
 BRAZIL ,Other fuels,pathway,Transport,"Parameter a, min",-0.05
 BRAZIL ,Other fuels,baseline,Transport,"Parameter a, min",100
@@ -12451,7 +12451,7 @@ NonOECD ,Other fuels,pathway,Transport,"Parameter b, max",30
 NonOECD ,Other fuels,baseline,Transport,"Parameter b, max",-100
 World ,Other fuels,pathway,Transport,"Parameter b, max",10
 World ,Other fuels,baseline,Transport,"Parameter b, max",-100
-CSAM ,Other fuels,pathway,Transport,"Parameter b, max",10
+CSAM ,Other fuels,pathway,Transport,"Parameter b, max",60
 CSAM ,Other fuels,baseline,Transport,"Parameter b, max",-100
 BRAZIL ,Other fuels,pathway,Transport,"Parameter b, max",10
 BRAZIL ,Other fuels,baseline,Transport,"Parameter b, max",-100
@@ -12682,7 +12682,7 @@ NonOECD ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 NonOECD ,Other sources,baseline,Heat,"Parameter a, max",100
 World ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 World ,Other sources,baseline,Heat,"Parameter a, max",100
-CSAM ,Other sources,pathway,Heat,"Parameter a, max",-0.1
+CSAM ,Other sources,pathway,Heat,"Parameter a, max",-0.01
 CSAM ,Other sources,baseline,Heat,"Parameter a, max",100
 BRAZIL ,Other sources,pathway,Heat,"Parameter a, max",-0.1
 BRAZIL ,Other sources,baseline,Heat,"Parameter a, max",100
@@ -14050,7 +14050,7 @@ ASEAN ,Solar,baseline,Electricity,Saturation Point,2.1
 DevelopingECO ,Solar,baseline,Electricity,Saturation Point,2.1
 World ,Solar,pathway,Electricity,Saturation Point,43.3
 NAM ,Solar,pathway,Electricity,Saturation Point,35.4
-US ,Solar,pathway,Electricity,Saturation Point,43.8
+US ,Solar,pathway,Electricity,Saturation Point,42
 CSAM ,Solar,pathway,Electricity,Saturation Point,20.5
 BRAZIL ,Solar,pathway,Electricity,Saturation Point,17
 EUR ,Solar,pathway,Electricity,Saturation Point,38.8
@@ -14195,7 +14195,7 @@ NonOECD ,Solar thermal,pathway,Heat,"Parameter a, max",0.2
 World ,Solar thermal,baseline,Heat,"Parameter a, max",100
 World ,Solar thermal,pathway,Heat,"Parameter a, max",0.15
 CSAM ,Solar thermal,baseline,Heat,"Parameter a, max",100
-CSAM ,Solar thermal,pathway,Heat,"Parameter a, max",0.2
+CSAM ,Solar thermal,pathway,Heat,"Parameter a, max",0.08
 BRAZIL ,Solar thermal,baseline,Heat,"Parameter a, max",100
 BRAZIL ,Solar thermal,pathway,Heat,"Parameter a, max",0.17
 AFRICA ,Solar thermal,baseline,Heat,"Parameter a, max",100
@@ -14347,7 +14347,7 @@ DevelopingECO ,Solar thermal,pathway,Heat,"Parameter b, min",30
 NAM ,Solar thermal,baseline,Heat,Saturation Point,0.016
 NAM ,Solar thermal,pathway,Heat,Saturation Point,75
 US ,Solar thermal,baseline,Heat,Saturation Point,0.016
-US ,Solar thermal,pathway,Heat,Saturation Point,90
+US ,Solar thermal,pathway,Heat,Saturation Point,85
 EUR ,Solar thermal,baseline,Heat,Saturation Point,0.016
 EUR ,Solar thermal,pathway,Heat,Saturation Point,75
 EU ,Solar thermal,baseline,Heat,Saturation Point,0.016
@@ -14363,7 +14363,7 @@ NonOECD ,Solar thermal,pathway,Heat,Saturation Point,80
 World ,Solar thermal,baseline,Heat,Saturation Point,0.016
 World ,Solar thermal,pathway,Heat,Saturation Point,80
 CSAM ,Solar thermal,baseline,Heat,Saturation Point,0.016
-CSAM ,Solar thermal,pathway,Heat,Saturation Point,75
+CSAM ,Solar thermal,pathway,Heat,Saturation Point,65
 BRAZIL ,Solar thermal,baseline,Heat,Saturation Point,0.016
 BRAZIL ,Solar thermal,pathway,Heat,Saturation Point,75
 AFRICA ,Solar thermal,baseline,Heat,Saturation Point,0.016
@@ -14488,7 +14488,7 @@ NonOECD ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 NonOECD ,Tide and wave,baseline,Electricity,"Parameter a, max",100
 World ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 World ,Tide and wave,baseline,Electricity,"Parameter a, max",100
-CSAM ,Tide and wave,pathway,Electricity,"Parameter a, max",5
+CSAM ,Tide and wave,pathway,Electricity,"Parameter a, max",0.1
 CSAM ,Tide and wave,baseline,Electricity,"Parameter a, max",100
 BRAZIL ,Tide and wave,pathway,Electricity,"Parameter a, max",5
 BRAZIL ,Tide and wave,baseline,Electricity,"Parameter a, max",100
@@ -14572,7 +14572,7 @@ NonOECD ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 NonOECD ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
 World ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 World ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
-CSAM ,Tide and wave,pathway,Electricity,"Parameter b, max",100
+CSAM ,Tide and wave,pathway,Electricity,"Parameter b, max",50
 CSAM ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
 BRAZIL ,Tide and wave,pathway,Electricity,"Parameter b, max",100
 BRAZIL ,Tide and wave,baseline,Electricity,"Parameter b, max",-100
@@ -15854,7 +15854,7 @@ World ,Waste,pathway,Heat,Saturation Point,15
 World ,Waste,baseline,Heat,Saturation Point,3.2
 CSAM ,Waste,pathway,Electricity,Saturation Point,23
 CSAM ,Waste,baseline,Electricity,Saturation Point,0
-CSAM ,Waste,pathway,Heat,Saturation Point,15
+CSAM ,Waste,pathway,Heat,Saturation Point,10
 CSAM ,Waste,baseline,Heat,Saturation Point,3.2
 BRAZIL ,Waste,pathway,Electricity,Saturation Point,23
 BRAZIL ,Waste,baseline,Electricity,Saturation Point,0
@@ -16192,7 +16192,7 @@ ASEAN ,Wind,baseline,Electricity,Saturation Point,3.8
 DevelopingECO ,Wind,baseline,Electricity,Saturation Point,3.8
 World ,Wind,pathway,Electricity,Saturation Point,44.3
 NAM ,Wind,pathway,Electricity,Saturation Point,46.5
-US ,Wind,pathway,Electricity,Saturation Point,43
+US ,Wind,pathway,Electricity,Saturation Point,42
 CSAM ,Wind,pathway,Electricity,Saturation Point,18.5
 BRAZIL ,Wind,pathway,Electricity,Saturation Point,16.8
 EUR ,Wind,pathway,Electricity,Saturation Point,39

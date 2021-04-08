@@ -257,6 +257,10 @@ for i in range(0, 1):
         * cdr_needed.loc["World "].max()
     ).T.rename(index={0: "Carbon Dioxide Removal"})
 
+    cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").rename(
+        index={0: "Carbon Dioxide Removal"}
+    )
+
 cdr_pathway.index.name = "Sector"
 cdr_pathway = pd.concat(
     [cdr_pathway], keys=["pathway"], names=["Scenario"]
@@ -267,6 +271,8 @@ cdr_baseline = pd.concat(
     [cdr_baseline], keys=["baseline"], names=["Scenario"]
 ).reorder_levels(["Sector", "Scenario"])
 cdr = cdr_baseline.append(cdr_pathway)
+cdr.columns = cdr.columns.astype(int)
+
 
 # check if energy oversupply is at least energy demand needed for CDR
 """
