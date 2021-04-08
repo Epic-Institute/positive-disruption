@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
-import pyhector
-from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
+#import pyhector
+#from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.energy_demand import data_end_year, data_start_year
 from podi.energy_supply import (
     near_proj_start_year,
@@ -37,7 +37,7 @@ region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True
 save_figs = True
 show_figs = True
 start_year = 2000
-scenario = 'baseline'
+scenario = 'pathway'
 
 # endregion
 
@@ -1434,7 +1434,7 @@ for i in range(0, len(region_list)):
         xref="paper",
         yref="paper",
         x=-0.18,
-        y=1.19,
+        y=1.18,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -2978,8 +2978,8 @@ for year in [2030, 2050]:
                 text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
                 xref="paper",
                 yref="paper",
-                x=-0.1,
-                y=1.14,
+                x=-0.2,
+                y=-0.25,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
                 align="left",
