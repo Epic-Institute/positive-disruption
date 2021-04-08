@@ -37,7 +37,7 @@ region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True
 save_figs = True
 show_figs = True
 start_year = 2000
-scenario = 'pathway'
+scenario = 'baseline'
 
 # endregion
 
@@ -1795,6 +1795,8 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
+
+    fig.add_vrect(x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0)
 
     if show_figs is True:
         fig.show()

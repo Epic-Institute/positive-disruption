@@ -4,7 +4,6 @@
 
 import pandas as pd
 from numpy import NaN
-from podi.curve_smooth import curve_smooth
 
 elec = [
     "1A1a_Electricity-autoproducer",

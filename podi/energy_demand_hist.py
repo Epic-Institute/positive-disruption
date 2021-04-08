@@ -3,7 +3,6 @@
 # region
 
 import pandas as pd
-from podi.curve_smooth import curve_smooth
 import numpy as np
 from numpy import NaN
 from podi.energy_demand import data_start_year, data_end_year

@@ -7,9 +7,13 @@ from podi.curve_smooth import curve_smooth
 gcam_demand_projection = (
     pd.read_csv("podi/data/gcam.csv")
     .replace(" -   ", 0)
-    .set_index(["Region", "Variable", "Unit"])
+    .set_index(["Model", "Scenario", "Region", "Variable", "Unit"])
     .astype(float)
 )
+
+gcam_demand_projection = gcam_demand_projection.loc[
+    "GCAM 4.2", "SSP3-Baseline", :
+].droplevel(["Model", "Scenario"])
 
 for i in range(1, 5):
     gcam_demand_projection.insert(i, i + 2005, NaN)
@@ -71,7 +75,7 @@ gcam_demand_projection = gcam_demand_projection.loc[
     (slice(None), metrics.loc[:, "GCAM Metric"], slice(None)), :
 ]
 
-gcam_pct_change2 = (
+gcam_pct_change = (
     gcam_demand_projection.pct_change(axis="columns")
     .loc[:, "2041":]
     .fillna(0)
@@ -82,9 +86,9 @@ gcam_pct_change2 = (
         ["Region", "Variable", "Unit", "IEA Sector", "IEA Metric", "GCAM Metric"]
     )
 )
-"""
+
 gcam_pct_change2 = curve_smooth(
     gcam_pct_change.loc[:, "2041":"2100"], "quadratic", 3
 ).join(gcam_pct_change.loc[:, "EIA Metric":])
-"""
+
 gcam_pct_change2.to_csv("podi/data/energy_demand_projection.csv", index=True)

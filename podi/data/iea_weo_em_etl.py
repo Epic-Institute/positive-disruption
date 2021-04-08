@@ -113,9 +113,14 @@ def iea_weo_em_etl(region_list_i, gcam_region_list_i):
     gcam_demand_projection = (
         pd.read_csv("podi/data/gcam.csv")
         .replace(" -   ", 0)
-        .set_index(["Region", "Variable", "Unit"])
+        .set_index(["Model", "Scenario", "Region", "Variable", "Unit"])
         .astype(float)
     )
+
+    gcam_demand_projection = gcam_demand_projection.loc[
+        "GCAM 4.2", "SSP3-Baseline", :
+    ].droplevel(["Model", "Scenario"])
+
     gcam_demand_projection.index.rename(["Region", "Sector", "Unit"], inplace=True)
     gcam_demand_projection.columns = gcam_demand_projection.columns.astype(int)
 
@@ -136,7 +141,7 @@ def iea_weo_em_etl(region_list_i, gcam_region_list_i):
     metrics = pd.read_csv("podi/data/metric_categories_em.csv")
 
     gcam_demand_projection = gcam_demand_projection.loc[
-        "World ", metrics.loc[:, "GCAM Metric"].dropna(), slice(None)
+        "World ", metrics.loc[:, "GCAM Metric"], slice(None)
     ]
 
     gcam_pct_change = (
