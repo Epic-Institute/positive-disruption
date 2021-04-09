@@ -1187,7 +1187,7 @@ for i in range(0, len(region_list)):
     )
 
     if region_list[i] == "World ":
-        em_cdr = -cdr.loc[slice(None), scenario, :].squeeze()
+        em_cdr = -cdr.loc['World ','Carbon Dioxide Removal', scenario, :].squeeze()
 
         em = pd.DataFrame(
             [
