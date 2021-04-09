@@ -307,8 +307,13 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), "pathway", :].max(axis=1).values),
+            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+                lambda x: x
+                / (
+                    cdr.loc["World ", "Carbon Dioxide Removal", "pathway", :]
+                    .max(axis=1)
+                    .values
+                ),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
@@ -641,8 +646,13 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
+            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+                lambda x: x
+                / (
+                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
+                    .max(axis=1)
+                    .values
+                ),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
@@ -969,8 +979,13 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
+            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+                lambda x: x
+                / (
+                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
+                    .max(axis=1)
+                    .values
+                ),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
@@ -1290,8 +1305,13 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
+            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+                lambda x: x
+                / (
+                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
+                    .max(axis=1)
+                    .values
+                ),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
@@ -1545,8 +1565,13 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), "pathway", :].max(axis=1).values),
+            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+                lambda x: x
+                / (
+                    cdr.loc["World ", "Carbon Dioxide Removal", "pathway", :]
+                    .max(axis=1)
+                    .values
+                ),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
@@ -1795,8 +1820,13 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
+            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+                lambda x: x
+                / (
+                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
+                    .max(axis=1)
+                    .values
+                ),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
@@ -2047,8 +2077,13 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
+            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+                lambda x: x
+                / (
+                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
+                    .max(axis=1)
+                    .values
+                ),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})
@@ -2298,8 +2333,13 @@ def results_analysis(
         # region
 
         cdr_decarb = pd.DataFrame(
-            cdr.loc[slice(None), scenario, :].apply(
-                lambda x: x / (cdr.loc[slice(None), scenario, :].max(axis=1).values),
+            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+                lambda x: x
+                / (
+                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
+                    .max(axis=1)
+                    .values
+                ),
                 axis=1,
             )
         ).rename(index={0: "Carbon Dioxide Removal"})

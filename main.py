@@ -206,7 +206,7 @@ cdr_needed.rename(index={0: "World "}, inplace=True)
 
 cdr_pathway = []
 
-for i in range(0, 1):
+for i in range(0, 2):
     '''
     cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
         cdr_needed.loc[region_list[i]].to_list(),
@@ -258,18 +258,24 @@ for i in range(0, 1):
     ).T.rename(index={0: "Carbon Dioxide Removal"})
 
     cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").rename(
-        index={0: "Carbon Dioxide Removal"}
+        index={
+            0: "Carbon Dioxide Removal",
+            1: "Carbon Dioxide Removal",
+            2: "Carbon Dioxide Removal",
+            3: "Carbon Dioxide Removal",
+        }
     )
 
 cdr_pathway.index.name = "Sector"
 cdr_pathway = pd.concat(
     [cdr_pathway], keys=["pathway"], names=["Scenario"]
 ).reorder_levels(["Sector", "Scenario"])
+cdr_pathway = cdr_pathway.reset_index().set_index(["Region", "Sector", "Scenario"])
 
 cdr_baseline = cdr_pathway.droplevel("Scenario") * 0
 cdr_baseline = pd.concat(
     [cdr_baseline], keys=["baseline"], names=["Scenario"]
-).reorder_levels(["Sector", "Scenario"])
+).reorder_levels(["Region", "Sector", "Scenario"])
 cdr = cdr_baseline.append(cdr_pathway)
 cdr.columns = cdr.columns.astype(int)
 

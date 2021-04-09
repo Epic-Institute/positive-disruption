@@ -1880,13 +1880,13 @@ ndcs = [
     ],
     (3, 3),
     (2030, 1.2),
-    (3, 3),
+    [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
     (2030, 0.13),
     (3, 3),
     (2030, 2.67),
     (3, 3),
-    (2030, 12.96),
+    [(2030, 2030, 2050), (12.96, 6.15, 0), ('NDC', "50% reduction by 2030", "Net-zero by 2050")],
     (2030, 5.88),
     (2030, 1),
     (3, 3),
@@ -1975,8 +1975,8 @@ for i in range(0, len(region_list)):
         "F-gases"
     )
 
-    if region_list[i] == "World ":
-        em_mit_cdr = cdr.loc[slice(None), scenario, :].squeeze().rename("CDR")
+    if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
+        em_mit_cdr = cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario, :].squeeze().rename("CDR")
         em_mit = pd.DataFrame(
             [
                 em_mit_electricity,
@@ -1999,7 +1999,7 @@ for i in range(0, len(region_list)):
                 "Unnamed 6": "Other Gases",
                 "CDR": "CDR",
             }
-        )
+        ).clip(lower=0)
     else:
         em_mit = (
             pd.DataFrame(
@@ -2026,7 +2026,7 @@ for i in range(0, len(region_list)):
                     "Unnamed 6": "Other Gases",
                 }
             )
-        )
+        ).clip(lower=0)
 
     spacer = (
         pd.Series(
@@ -2084,7 +2084,7 @@ for i in range(0, len(region_list)):
         )
     )
 
-    if region_list[i] == "World ":
+    if region_list[i] in ["World ", 'US ', 'CHINA ', 'EUR ']:
         fig.add_trace(
             go.Scatter(
                 name="CDR",
@@ -2239,7 +2239,8 @@ for i in range(0, len(region_list)):
                 stackgroup="four",
             )
         )
-
+    
+    if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
         fig.add_trace(
             go.Scatter(
                 name="PD21-DAU",
@@ -2250,7 +2251,7 @@ for i in range(0, len(region_list)):
                 y=pd.Series(
                     (
                         spacer.loc[near_proj_start_year:].values
-                        + cdr.loc[slice(None), scenario, :]
+                        + cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario, :]
                         .loc[:, near_proj_start_year:]
                         .values[0]
                     )
@@ -2258,6 +2259,24 @@ for i in range(0, len(region_list)):
                 ),
                 fill="none",
                 stackgroup="five",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][0]],
+                y=[ndcs[i][1][0]],
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][1]],
+                y=[ndcs[i][1][1]],
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
             )
         )
     else:
@@ -2289,25 +2308,6 @@ for i in range(0, len(region_list)):
             stackgroup="six",
         )
     )
-
-    if region_list[i] in ["World ", "US "]:
-        fig.add_trace(
-            go.Scatter(
-                x=[ndcs[i][0][0]],
-                y=[ndcs[i][1][0]],
-                marker_color="#f71be9",
-                name=ndcs[i][2][0],
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                x=[ndcs[i][0][1]],
-                y=[ndcs[i][1][1]],
-                marker_color="#211df2",
-                name=ndcs[i][2][1],
-            )
-        )
 
     if region_list[i] in ["US "]:
         fig.add_trace(
@@ -2342,11 +2342,34 @@ for i in range(0, len(region_list)):
             opacity=1,
         )
 
+    if region_list[i] in ["CHINA "]:
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][2]],
+                y=[ndcs[i][1][2]],
+                marker_color="#eb742f",
+                name=ndcs[i][2][2],
+            )
+        )
+
+        fig.add_annotation(
+            text="The NDC commitment is to " + ndc_commit[i][0],
+            xref="paper",
+            yref="paper",
+            x=-0.1,
+            y=-0.25,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
     if region_list[i] in [
         "SAFR ",
         "RUS ",
         "JPN ",
-        "CHINA ",
         "BRAZIL ",
         "INDIA ",
     ]:
@@ -2509,7 +2532,7 @@ for year in [2030, 2050]:
         em_mit_othergas = em_mitigated.loc[region_list[i], "Other", :].sum()
 
         em_mit_cdr = pd.Series(
-            cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
+            cdr_pathway.loc[region_list[i]].sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
         )
 
         em_mit = pd.DataFrame(
@@ -7085,7 +7108,7 @@ for i in range(0, len(region_list)):
     em_mit_fgas = em_mitigated.loc[region_list[i], "Other", ["F-gases"]].sum()
 
     em_mit_cdr = pd.Series(
-        cdr_pathway.sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
+        cdr_pathway.loc[region_list[i]].sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
     )
 
     em_mit = pd.DataFrame(
