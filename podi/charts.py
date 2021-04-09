@@ -2426,9 +2426,9 @@ bar_emissions_goal = [
     ("x",),
 ]
 
-scenario = scenario
+scenario = 'pathway'
 
-for year in [2030, 2050]:
+for year in [2050]:
     for i in range(0, len(region_list)):
         em_mit_electricity = em_mitigated.loc[
             region_list[i], "Electricity", slice(None)
@@ -2482,37 +2482,60 @@ for year in [2030, 2050]:
 
         em_mit_othergas = em_mitigated.loc[region_list[i], "Other", :].sum()
 
-        em_mit_cdr = pd.Series(
-            cdr_pathway.loc[region_list[i]].sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
-        )
+        if region_list[i] in ['World ', 'US ', 'CHINA ', 'EUR ']:
+            em_mit_cdr = pd.Series(
+                cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario].sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
+            ) / 1000
 
-        em_mit = pd.DataFrame(
-            [
-                em_mit_electricity,
-                em_mit_transport,
-                em_mit_buildings,
-                em_mit_industry,
-                em_mit_ra,
-                em_mit_fw,
-                em_mit_othergas,
-                em_mit_cdr,
-            ]
-        ).rename(
-            index={
-                0: "Electricity",
-                1: "Transport",
-                2: "Buildings",
-                3: "Industry",
-                4: "Forests & Wetlands",
-                5: "Agriculture",
-                6: "CH4, N2O, F-gases",
-                7: "CDR",
-            }
-        )
+            em_mit = pd.DataFrame(
+                [
+                    em_mit_electricity,
+                    em_mit_transport,
+                    em_mit_buildings,
+                    em_mit_industry,
+                    em_mit_ra,
+                    em_mit_fw,
+                    em_mit_othergas,
+                    em_mit_cdr,
+                ]
+            ).rename(
+                index={
+                    0: "Electricity",
+                    1: "Transport",
+                    2: "Buildings",
+                    3: "Industry",
+                    4: "Forests & Wetlands",
+                    5: "Agriculture",
+                    6: "CH4, N2O, F-gases",
+                    7: "CDR",
+                }
+            )
+        else:
+            em_mit = pd.DataFrame(
+                [
+                    em_mit_electricity,
+                    em_mit_transport,
+                    em_mit_buildings,
+                    em_mit_industry,
+                    em_mit_ra,
+                    em_mit_fw,
+                    em_mit_othergas,
+                ]
+            ).rename(
+                index={
+                    0: "Electricity",
+                    1: "Transport",
+                    2: "Buildings",
+                    3: "Industry",
+                    4: "Forests & Wetlands",
+                    5: "Agriculture",
+                    6: "CH4, N2O, F-gases",
+                }
+            )
 
         em_mit.loc[:, :2020] = 0
 
-        if region_list[i] == "World ":
+        if region_list[i] in ["World ", 'US ', 'CHINA ', 'EUR ']:
             fig = (
                 ((em_mit) / 1000)
                 .reindex(
@@ -2756,7 +2779,7 @@ for year in [2030, 2050]:
 
         opacity = 0.5
 
-        if region_list[i] == "World ":
+        if region_list[i] in ["World ", 'US ', 'CHINA ', 'EUR ']:
             figure = go.Figure(
                 data=[
                     go.Bar(
@@ -2972,7 +2995,7 @@ for year in [2030, 2050]:
                             (em_mit_ndc["Region"] == region_list[i])
                             & (em_mit_ndc.index == year)
                         ]["em_mit"].values[0]
-                        * 0.9
+                        * 0.85
                     ],
                     y=["CDR"],
                     text=["Mitigation Target " + str(year)],
