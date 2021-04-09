@@ -345,55 +345,6 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-##############################
-# ELECTRICITY PERCENT ADOPTION
-##############################
-
-# region
-
-scenario = scenario
-start_year = start_year
-
-for i in range(0, len(region_list)):
-    fig = elec_per_adoption.loc[region_list[i], slice(None), scenario]
-    plt.figure(i)
-    plt.plot(fig.T)
-    plt.legend(fig.T)
-    plt.title(region_list[i])
-    elec_per_adoption.loc[region_list[i], slice(None), scenario].loc[:, 2019]
-
-# endregion
-
-#######################
-# HEAT PERCENT ADOPTION
-#######################
-
-# region
-scenario = "pathway"
-
-for i in range(0, len(region_list)):
-    plt.figure(i)
-    plt.plot(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.legend(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.title(region_list[i])
-
-# endregion
-
-####################################
-# NONELEC TRANSPORT PERCENT ADOPTION
-####################################
-
-# region
-scenario = "pathway"
-
-for i in range(0, len(region_list)):
-    plt.figure(i)
-    plt.plot(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.legend(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.title(region_list[i])
-
-# endregion
-
 #######################################
 # ENERGY DEMAND BY SECTOR AND END-USE #
 #######################################
@@ -5007,7 +4958,7 @@ for i in range(0, 1):
 
 # code adapted from Joao Palmeiro, matplotblog
 
-fig_type == ""
+fig_type = "plotly"
 year = 2020
 
 
@@ -5091,7 +5042,7 @@ for i in range(0, len(region_list)):
     fig = adoption_curves.loc[region_list[i], slice(None), scenario] * 100
 
     data = [
-        ("Grid", fig.loc["Grid", year]),
+        ("Electricity", fig.loc["Electricity", year]),
         ("Industry", fig.loc["Industry", year]),
         ("Buildings", fig.loc["Buildings", year]),
         ("Transport", fig.loc["Transport", year]),
@@ -5191,8 +5142,8 @@ for i in range(0, len(region_list)):
 for i in range(0, len(region_list)):
     fig = adoption_curves.loc[region_list[i], slice(None), scenario] * 100
     kneedle = KneeLocator(
-        fig.columns,
-        fig.loc["Grid"].values,
+        fig.columns.values,
+        fig.loc["Electricity"].values,
         S=1.0,
         curve="concave",
         direction="increasing",
@@ -5394,14 +5345,6 @@ if save_figs is True:
         file=("./charts/ghgconc-" + "World " + ".html").replace(" ", ""),
         auto_open=False,
     )
-
-# endregion
-
-###################################
-# ENERGY DEMAND MITIGATION WEDGES #
-###################################
-
-# region
 
 # endregion
 
@@ -5876,12 +5819,6 @@ for i in range(0, len(region_list)):
     plt.xticks(np.arange(2020, 2110, 10))
     plt.yticks(np.arange(-17, 10, 5))
     plt.title("AFOLU Subvector Mitigation Wedges, " + region_list[i])
-    plt.savefig(
-        fname=("podi/data/figs/afolu_pathway-" + region_list[i]).replace(" ", ""),
-        format="png",
-        bbox_inches="tight",
-        pad_inches=0.1,
-    )
     plt.show()
     plt.clf()
 
@@ -7744,6 +7681,55 @@ for i in range(0, len(region_list)):
         ).replace(" ", ""),
         auto_open=False,
     )
+
+# endregion
+
+##############################
+# ELECTRICITY PERCENT ADOPTION
+##############################
+
+# region
+
+scenario = scenario
+start_year = start_year
+
+for i in range(0, len(region_list)):
+    fig = elec_per_adoption.loc[region_list[i], slice(None), scenario]
+    plt.figure(i)
+    plt.plot(fig.T)
+    plt.legend(fig.T)
+    plt.title(region_list[i])
+    elec_per_adoption.loc[region_list[i], slice(None), scenario].loc[:, 2019]
+
+# endregion
+
+#######################
+# HEAT PERCENT ADOPTION
+#######################
+
+# region
+scenario = "pathway"
+
+for i in range(0, len(region_list)):
+    plt.figure(i)
+    plt.plot(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.legend(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.title(region_list[i])
+
+# endregion
+
+####################################
+# NONELEC TRANSPORT PERCENT ADOPTION
+####################################
+
+# region
+scenario = "pathway"
+
+for i in range(0, len(region_list)):
+    plt.figure(i)
+    plt.plot(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.legend(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.title(region_list[i])
 
 # endregion
 
