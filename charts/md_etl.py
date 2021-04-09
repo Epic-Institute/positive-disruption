@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from mdutils.mdutils import MdUtils
-from main import region_list
 
 region_dict = {
     "World ": "",
@@ -136,6 +135,7 @@ for i in range(0, len(region_list)):
 
             mdFile.new_line()
 
+    """
     for j in ["pathway"]:
         for k in ["ei"]:
             path = (
@@ -148,13 +148,13 @@ for i in range(0, len(region_list)):
             mdFile.write(" height='500' width='150%'></iframe>")
 
             mdFile.new_line()
-
+    """
     # endregion
 
     # region
 
     if region_list[i] == "World ":
-        for k in ["co2conc", "forcing", "temp"]:
+        for k in ["ghgconc", "forcing", "temp"]:
             path = '"' + k + "-" + (region_list[i]).replace(" ", "") + '.html"'
 
             mdFile.write(

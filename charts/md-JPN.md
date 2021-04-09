@@ -9,7 +9,9 @@
   
 
 ## Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-JPN-baseline.html" height='500' width='150%'></iframe><iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-JPN-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-JPN-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-JPN-pathway.html" height='500' width='150%'></iframe>  
+  
 
 ## Energy Supply and Demand
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-JPN.html" height='500' width='150%'></iframe>  
@@ -28,4 +30,3 @@
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-JPN.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2030-JPN.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-JPN.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "ei-pathway-JPN.html" height='500' width='150%'></iframe>  

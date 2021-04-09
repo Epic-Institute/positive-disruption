@@ -9,7 +9,9 @@
 All countries not included in OECD regional grouping.  
 
 ## Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-NonOECD-baseline.html" height='500' width='150%'></iframe><iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-NonOECD-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-NonOECD-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-NonOECD-pathway.html" height='500' width='150%'></iframe>  
+  
 
 ## Energy Supply and Demand
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-NonOECD.html" height='500' width='150%'></iframe>  
@@ -28,4 +30,3 @@ All countries not included in OECD regional grouping.
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-NonOECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2030-NonOECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-NonOECD.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "ei-pathway-NonOECD.html" height='500' width='150%'></iframe>  
