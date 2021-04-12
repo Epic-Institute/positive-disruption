@@ -319,10 +319,10 @@ NonOECD ,Heat,Waste,0.092,50.0,0.15,0.0
 NonOECD ,Transport,Oil,-0.09,37.0,0.95,0.0
 NonOECD ,Transport,Bioenergy,0.089,65.0,1.0,0.0
 NonOECD ,Transport,Other fuels,-0.07,25.0,0.15,0.0
-Spanish Reforestation,AFOLU,Spanish Reforestation,0.076,38.574,0.5,0.0
-FAO CA,AFOLU,FAO CA,0.106,49.049,0.5,0.0
-Brazil No Till,AFOLU,Brazil No Till,0.1,60.449,0.5,0.0
-Brazil Avoided Deforestation,AFOLU,Brazil Avoided Deforestation,0.1,70.0,0.5,0.0
-US Wetlands 2002-2014,AFOLU,US Wetlands 2002-2014,0.146,25.895,0.5,0.0
-FSC global adoption,AFOLU,FSC global adoption,0.1,39.078,0.5,0.0
+Spanish Reforestation,AFOLU,Spanish Reforestation,0.06,56.852,0.99,0.0
+FAO CA,AFOLU,FAO CA,0.099,58.154,0.99,0.0
+Brazil No Till,AFOLU,Brazil No Till,0.098,68.456,0.99,0.0
+Brazil Avoided Deforestation,AFOLU,Brazil Avoided Deforestation,0.1,70.0,0.99,0.0
+US Wetlands 2002-2014,AFOLU,US Wetlands 2002-2014,0.14,31.744,0.99,0.0
+FSC global adoption,AFOLU,FSC global adoption,0.098,47.376,0.99,0.0
 World ,All,Carbon Dioxide Removal,0.1,50.0,1.0,0.0

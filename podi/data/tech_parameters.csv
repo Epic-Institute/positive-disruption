@@ -37685,7 +37685,7 @@ Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,"Parameter b, max",100
 Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,"Parameter b, max",100
 Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,"Parameter b, min",0
 Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,"Parameter b, min",0
-Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,Saturation Point,50
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,Saturation Point,99
 Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,Saturation Point,50
 FAO CA,FAO CA,pathway,AFOLU,Floor,0
 FAO CA,FAO CA,baseline,AFOLU,Floor,0
@@ -37699,7 +37699,7 @@ FAO CA,FAO CA,pathway,AFOLU,"Parameter b, max",100
 FAO CA,FAO CA,baseline,AFOLU,"Parameter b, max",100
 FAO CA,FAO CA,pathway,AFOLU,"Parameter b, min",0
 FAO CA,FAO CA,baseline,AFOLU,"Parameter b, min",0
-FAO CA,FAO CA,pathway,AFOLU,Saturation Point,50
+FAO CA,FAO CA,pathway,AFOLU,Saturation Point,99
 FAO CA,FAO CA,baseline,AFOLU,Saturation Point,50
 Brazil No Till,Brazil No Till,pathway,AFOLU,Floor,0
 Brazil No Till,Brazil No Till,baseline,AFOLU,Floor,0
@@ -37713,7 +37713,7 @@ Brazil No Till,Brazil No Till,pathway,AFOLU,"Parameter b, max",100
 Brazil No Till,Brazil No Till,baseline,AFOLU,"Parameter b, max",100
 Brazil No Till,Brazil No Till,pathway,AFOLU,"Parameter b, min",0
 Brazil No Till,Brazil No Till,baseline,AFOLU,"Parameter b, min",0
-Brazil No Till,Brazil No Till,pathway,AFOLU,Saturation Point,50
+Brazil No Till,Brazil No Till,pathway,AFOLU,Saturation Point,99
 Brazil No Till,Brazil No Till,baseline,AFOLU,Saturation Point,50
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Floor,0
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,Floor,0
@@ -37727,7 +37727,7 @@ Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,"Paramet
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,"Parameter b, max",100
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,"Parameter b, min",0
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,"Parameter b, min",0
-Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Saturation Point,50
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Saturation Point,99
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,Saturation Point,50
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Floor,0
 US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,Floor,0
@@ -37741,7 +37741,7 @@ US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,"Parameter b, max",100
 US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,"Parameter b, max",100
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,"Parameter b, min",0
 US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,"Parameter b, min",0
-US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Saturation Point,50
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Saturation Point,99
 US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,Saturation Point,50
 FSC global adoption,FSC global adoption,pathway,AFOLU,Floor,0
 FSC global adoption,FSC global adoption,baseline,AFOLU,Floor,0
@@ -37755,5 +37755,5 @@ FSC global adoption,FSC global adoption,pathway,AFOLU,"Parameter b, max",100
 FSC global adoption,FSC global adoption,baseline,AFOLU,"Parameter b, max",100
 FSC global adoption,FSC global adoption,pathway,AFOLU,"Parameter b, min",0
 FSC global adoption,FSC global adoption,baseline,AFOLU,"Parameter b, min",0
-FSC global adoption,FSC global adoption,pathway,AFOLU,Saturation Point,50
+FSC global adoption,FSC global adoption,pathway,AFOLU,Saturation Point,99
 FSC global adoption,FSC global adoption,baseline,AFOLU,Saturation Point,50
