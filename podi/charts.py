@@ -229,7 +229,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Regenerative Agriculture",
-            line=dict(width=3, color="#72B7B2", dash="dot"),
+            line=dict(width=3, color="#EECA3B", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[
                 (fig2["Year"] >= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
@@ -346,9 +346,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#######################################
-# ADOPTION CURVES SUBVECTOR BREAKDOWN #
-#######################################
+#############################
+# SUBVECTOR ADOPTION CURVES #
+#############################
 
 # region
 
@@ -372,110 +372,22 @@ for i in range(0, len(region_list)):
 
         fig = go.Figure()
 
-        fig.add_trace(
-            go.Scatter(
-                name="Historical",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == j)]["Year"],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == j)][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="one",
-                legendgroup=j,
-                showlegend=False,
+        for x in metric.names:
+            fig.add_trace(
+                go.Scatter(
+                    name=x,
+                    line=dict(width=3, color="black"),
+                    x=fig2[(fig2["Year"] <= 2020)]["Year"],
+                    y=fig2[(fig2["Year"] <= 2020) & (fig2["Metric"] == x)]["% Adoption"],
+                    fill="none",
+                    stackgroup="one",
+                    legendgroup=j,
+                    showlegend=True,
+                )
             )
-        )
 
-        fig.add_trace(
-            go.Scatter(
-                name="Transport",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Transport")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="two",
-                legendgroup="Transport",
-                showlegend=False,
-            )
-        )
 
-        fig.add_trace(
-            go.Scatter(
-                name="Buildings",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Buildings")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="three",
-                legendgroup="Buildings",
-                showlegend=False,
-            )
-        )
 
-        fig.add_trace(
-            go.Scatter(
-                name="Industry",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Industry")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="four",
-                legendgroup="Industry",
-                showlegend=False,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Regenerative Agriculture",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-                y=fig2[
-                    (fig2["Year"] <= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
-                ]["% Adoption"],
-                fill="none",
-                stackgroup="five",
-                legendgroup="Regenerative Agriculture",
-                showlegend=False,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Forests & Wetlands",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="six",
-                legendgroup="Forests & Wetlands",
-                showlegend=False,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Other Gases",
-                line=dict(width=3, color="black"),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Other Gases")][
-                    "% Adoption"
-                ],
-                fill="none",
-                stackgroup="othergases",
-                legendgroup="Other Gases",
-                showlegend=False,
-            )
-        )
 
         fig.add_trace(
             go.Scatter(
@@ -536,7 +448,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="Regenerative Agriculture",
-                line=dict(width=3, color="#72B7B2", dash="dot"),
+                line=dict(width=3, color="#EECA3B", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
                 y=fig2[
                     (fig2["Year"] >= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
@@ -1601,7 +1513,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Agriculture",
-            line=dict(width=0.5, color="#72B7B2"),
+            line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
@@ -1982,7 +1894,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Agriculture",
-            line=dict(width=0.5, color="#72B7B2"),
+            line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
@@ -2407,7 +2319,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Agriculture",
-            line=dict(width=0.5, color="#72B7B2"),
+            line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
@@ -3117,7 +3029,7 @@ for year in [2050]:
                         x=data["Agriculture"],
                         offsetgroup=0,
                         orientation="h",
-                        marker_color="#72B7B2",
+                        marker_color="#EECA3B",
                         opacity=opacity,
                     ),
                     go.Bar(
@@ -3178,7 +3090,7 @@ for year in [2050]:
                         x=data["Agriculture"],
                         offsetgroup=0,
                         orientation="h",
-                        marker_color="#72B7B2",
+                        marker_color="#EECA3B",
                         opacity=opacity,
                     ),
                     go.Bar(
@@ -4341,7 +4253,7 @@ fig = go.Figure()
 fig.add_trace(
     go.bar(
         name="EI",
-        line=dict(width=4, color="#72B7B2"),
+        line=dict(width=4, color="#EECA3B"),
         x=pd.Series(data_end_year),
         y=pd.Series(fig2),
     )
@@ -4625,7 +4537,7 @@ for i in range(0, 1):
     fig.add_trace(
         go.Scatter(
             name="Regenerative Agriculture PD21",
-            line=dict(width=3, color="#72B7B2", dash="dot"),
+            line=dict(width=3, color="#EECA3B", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[
                 (fig2["Year"] >= 2020)
@@ -4727,7 +4639,7 @@ for i in range(0, 1):
     fig.add_trace(
         go.Scatter(
             name="Regenerative Agriculture PD20",
-            line=dict(width=3, color="#72B7B2", dash="dashdot"),
+            line=dict(width=3, color="#EECA3B", dash="dashdot"),
             x=fig2[(fig2["Year"] >= 2018) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[
                 (fig2["Year"] >= 2018)
@@ -4821,7 +4733,7 @@ for i in range(0, 1):
     fig.add_trace(
         go.Scatter(
             name="Regenerative Agriculture PD17",
-            line=dict(width=3, color="#72B7B2", dash="dot"),
+            line=dict(width=3, color="#EECA3B", dash="dot"),
             x=fig2[(fig2["Year"] >= 2016) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[
                 (fig2["Year"] >= 2016) & (fig2["Sector"] == "Regenerative Agriculture") & (fig2["Scenario"] == "PD17")
@@ -5912,7 +5824,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Agriculture",
-            line=dict(width=0.5, color="#72B7B2"),
+            line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
@@ -6268,7 +6180,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="Agriculture",
-                line=dict(width=0.5, color="#72B7B2"),
+                line=dict(width=0.5, color="#EECA3B"),
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
                 fill="tonexty",
@@ -7207,7 +7119,7 @@ for i in range(0, len(region_list)):
                     x=data["Agriculture"],
                     offsetgroup=0,
                     orientation="h",
-                    marker_color="#72B7B2",
+                    marker_color="#EECA3B",
                     opacity=opacity,
                 ),
                 go.Bar(
@@ -7284,7 +7196,7 @@ for i in range(0, len(region_list)):
                     x=data["Agriculture"],
                     offsetgroup=0,
                     orientation="h",
-                    marker_color="#72B7B2",
+                    marker_color="#EECA3B",
                     opacity=opacity,
                 ),
                 go.Bar(
@@ -7715,7 +7627,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="EI",
-            line=dict(width=4, color="#72B7B2"),
+            line=dict(width=4, color="#EECA3B"),
             x=pd.Series(data_end_year),
             y=pd.Series(fig2),
         )

@@ -245,10 +245,11 @@ def emissions(
 
     # region
 
-    afolu_em = afolu_em.loc[slice(None), slice(None), slice(None), scenario]
-    afolu_em = pd.concat([afolu_em], keys=["CO2"], names=["Gas"]).reorder_levels(
-        ["Region", "Sector", "Metric", "Gas"]
-    )
+    # afolu_em = afolu_em.loc[slice(None), slice(None), slice(None), scenario]
+    afolu_em["Metric"] = afolu_em.index.get_level_values("Sector")
+    afolu_em = pd.concat([afolu_em], keys=["CO2"], names=["Gas"])
+    afolu_em = afolu_em.reset_index()
+    afolu_em = afolu_em.set_index(["Region", "Sector", "Metric", "Gas"])
 
     # endregion
 
