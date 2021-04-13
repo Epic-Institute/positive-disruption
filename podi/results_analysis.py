@@ -422,7 +422,7 @@ def results_analysis(
 
     stransport_decarb = (
         (transport_decarb * 0.73)
-        .rename(index={"Transport": "Fuel Switching"})
+        .rename(index={"Transport": "Electrification"})
         .append(transport_decarb * 0.27)
         .rename(index={"Transport": "Efficiency"})
     )
@@ -440,9 +440,9 @@ def results_analysis(
     # region
 
     sbuilding_decarb = (
-        (building_decarb * 0.73)
-        .rename(index={"Buildings": "Fuel Switching"})
-        .append(transport_decarb * 0.27)
+        (building_decarb * 0.35)
+        .rename(index={"Buildings": "Electrification"})
+        .append(building_decarb * 0.65)
         .rename(index={"Buildings": "Efficiency"})
     )
     sbuilding_decarb.index.name = "Metric"
@@ -458,10 +458,10 @@ def results_analysis(
     # region
 
     sindustry_decarb = (
-        (industry_decarb * 0.73)
-        .rename(index={'"Industry"': "Fuel Switching"})
-        .append(transport_decarb * 0.27)
-        .rename(index={'"Industry"': "Efficiency"})
+        (industry_decarb * 0.60)
+        .rename(index={"Industry": "Electrification"})
+        .append(industry_decarb * 0.40)
+        .rename(index={"Industry": "Efficiency"})
     )
     sindustry_decarb.index.name = "Metric"
     sindustry_decarb = pd.concat(
@@ -476,10 +476,10 @@ def results_analysis(
     # region
 
     sother_decarb = (
-        (other_decarb * 0.73)
-        .rename(index={'"Other Gases"': "Fuel Switching"})
-        .append(other_decarb * 0.27)
-        .rename(index={'"Other Gases"': "Efficiency"})
+        (other_decarb * 0.60)
+        .rename(index={"Other Gases": "Electrification"})
+        .append(other_decarb * 0.40)
+        .rename(index={"Other Gases": "Efficiency"})
     )
     sother_decarb.index.name = "Metric"
     sother_decarb = pd.concat([sother_decarb], keys=["Other Gases"], names=["Sector"])
@@ -492,26 +492,49 @@ def results_analysis(
     # region
 
     sra_decarb = (
-        afolu_per_adoption.loc[
-            region2,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
+        (
+            afolu_per_adoption.loc[
+                region2,
                 "Regenerative Agriculture",
-            ],
-            scenario,
-            :,
-        ]
-        .groupby("Metric")
-        .mean()
-    )
+                [
+                    "Biochar",
+                    "Cropland Soil Health",
+                    "Improved Rice",
+                    "Nitrogen Fertilizer Management",
+                    "Trees in Croplands",
+                    "Legumes",
+                    "Optimal Intensity",
+                    "Silvopasture",
+                    "Regenerative Agriculture",
+                ],
+                scenario,
+                :,
+            ]
+            .groupby("Metric")
+            .mean()
+        )
+        / (
+            afolu_per_adoption.loc[
+                region2,
+                "Regenerative Agriculture",
+                [
+                    "Biochar",
+                    "Cropland Soil Health",
+                    "Improved Rice",
+                    "Nitrogen Fertilizer Management",
+                    "Trees in Croplands",
+                    "Legumes",
+                    "Optimal Intensity",
+                    "Silvopasture",
+                    "Regenerative Agriculture",
+                ],
+                scenario,
+                :,
+            ]
+            .groupby("Metric")
+            .mean()
+        ).sum()
+    ).apply(lambda x: x * ra_decarb.squeeze(), axis=1)
 
     """
     sra_decarb_max = sra_decarb.sum()
@@ -532,25 +555,48 @@ def results_analysis(
     # region
 
     sfw_decarb = (
-        afolu_per_adoption.loc[
-            region2,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
+        (
+            afolu_per_adoption.loc[
+                region2,
                 "Forests & Wetlands",
-            ],
-            scenario,
-            :,
-        ]
-        .groupby("Metric")
-        .mean()
-    )
+                [
+                    "Avoided Coastal Impacts",
+                    "Avoided Forest Conversion",
+                    "Avoided Peat Impacts",
+                    "Coastal Restoration",
+                    "Improved Forest Mgmt",
+                    "Peat Restoration",
+                    "Natural Regeneration",
+                    "Forests & Wetlands",
+                ],
+                scenario,
+                :,
+            ]
+            .groupby("Metric")
+            .mean()
+        )
+        / (
+            afolu_per_adoption.loc[
+                region2,
+                "Forests & Wetlands",
+                [
+                    "Avoided Coastal Impacts",
+                    "Avoided Forest Conversion",
+                    "Avoided Peat Impacts",
+                    "Coastal Restoration",
+                    "Improved Forest Mgmt",
+                    "Peat Restoration",
+                    "Natural Regeneration",
+                    "Forests & Wetlands",
+                ],
+                scenario,
+                :,
+            ]
+            .groupby("Metric")
+            .mean()
+            .sum()
+        )
+    ).apply(lambda x: x * fw_decarb.squeeze(), axis=1)
 
     """
     sfw_decarb_max = sfw_decarb.sum()
