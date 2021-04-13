@@ -124,19 +124,6 @@ def rgroup2(data, gas, sector, rgroup, scenario):
 
 
 def afolu(scenario):
-    """
-    afolu = pd.read_excel(
-        "podi/data/Positive Disruption NCS Vectors.xlsx",
-        sheet_name=[
-            "Input data 3",
-            "Avoided pathways input",
-            "Historical Observations",
-            "Pathway - analog crosswalk",
-            "Analogs",
-        ],
-    )
-    """
-
     input_data_3 = pd.read_csv("podi/data/tnc_input_data_3.csv")
     avoided_pathways_input = pd.read_csv("podi/data/tnc_avoided_pathways_input.csv")
     hist_obs = pd.read_csv("podi/data/tnc_hist_obs.csv")
@@ -285,7 +272,7 @@ def afolu(scenario):
                 "Improved Forest Mgmt",
                 "Improved Rice",
                 "Natural Regeneration",
-                # "Nitrogen Fertilizer Management",
+                #"Nitrogen Fertilizer Management",
                 "Optimal Intensity",
                 "Peat Restoration",
                 "Silvopasture",
@@ -497,6 +484,30 @@ def afolu(scenario):
     hist1.loc[:, 2100] = hist1.loc[:, 2099]
     per_adoption = pd.concat([hist1, avoid_per], axis=0).fillna(0)
 
+    co2_fw = []
+
+    for subv in [
+        "Avoided Coastal Impacts",
+        "Avoided Peat Impacts",
+        "Avoided Forest Conversion",
+        "Coastal Restoration",
+        "Improved Forest Mgmt",
+        "Natural Regeneration",
+        "Peat Restoration",
+    ]:
+        co2_fw = pd.DataFrame(co2_fw).append(
+            pd.DataFrame(
+                rgroup(
+                    adoption.loc[slice(None), subv, :], "CO2", subv, "Region", scenario
+                )
+            )
+        )
+
+    co2_fw.index = co2_fw.index.droplevel("Sector")
+    co2_fw = pd.concat([co2_fw], names=["Sector"], keys=["Forests & Wetlands"])
+    co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+
+    """
     co2_fw = rgroup(
         adoption.loc[
             slice(None),
@@ -516,7 +527,32 @@ def afolu(scenario):
         "Region",
         scenario,
     )
+    """
 
+    co2_ag = []
+
+    for subv in [
+        "Biochar",
+        "Cropland Soil Health",
+        "Improved Rice",
+        #"Nitrogen Fertilizer Management",
+        "Optimal Intensity",
+        "Silvopasture",
+        "Trees in Croplands",
+    ]:
+        co2_ag = pd.DataFrame(co2_ag).append(
+            pd.DataFrame(
+                rgroup(
+                    adoption.loc[slice(None), subv, :], "CO2", subv, "Region", scenario
+                )
+            )
+        )
+
+    co2_ag.index = co2_ag.index.droplevel("Sector")
+    co2_ag = pd.concat([co2_ag], names=["Sector"], keys=["Regenerative Agriculture"])
+    co2_ag = co2_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+
+    """
     co2_ag = rgroup(
         adoption.loc[
             slice(None),
@@ -536,7 +572,36 @@ def afolu(scenario):
         "Region",
         scenario,
     )
+    """
 
+    per_fw = []
+
+    for subv in [
+        "Avoided Coastal Impacts",
+        "Avoided Peat Impacts",
+        "Avoided Forest Conversion",
+        "Coastal Restoration",
+        "Improved Forest Mgmt",
+        "Natural Regeneration",
+        "Peat Restoration",
+    ]:
+        per_fw = pd.DataFrame(per_fw).append(
+            pd.DataFrame(
+                rgroup2(
+                    per_adoption.loc[slice(None), subv, :],
+                    "CO2",
+                    subv,
+                    "Region",
+                    scenario,
+                )
+            )
+        )
+
+    per_fw.index = per_fw.index.droplevel("Sector")
+    per_fw = pd.concat([per_fw], names=["Sector"], keys=["Forests & Wetlands"])
+    per_fw = per_fw.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+
+    """
     per_fw = rgroup2(
         per_adoption.loc[
             slice(None),
@@ -556,7 +621,36 @@ def afolu(scenario):
         "Region",
         scenario,
     )
+    """
 
+    per_ag = []
+
+    for subv in [
+        "Biochar",
+        "Cropland Soil Health",
+        "Improved Rice",
+        #"Nitrogen Fertilizer Management",
+        "Optimal Intensity",
+        "Silvopasture",
+        "Trees in Croplands",
+    ]:
+        per_ag = pd.DataFrame(per_ag).append(
+            pd.DataFrame(
+                rgroup2(
+                    per_adoption.loc[slice(None), subv, :],
+                    "CO2",
+                    subv,
+                    "Region",
+                    scenario,
+                )
+            )
+        )
+
+    per_ag.index = per_ag.index.droplevel("Sector")
+    per_ag = pd.concat([per_ag], names=["Sector"], keys=["Regenerative Agriculture"])
+    per_ag = per_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+
+    """
     per_ag = rgroup2(
         per_adoption.loc[
             slice(None),
@@ -576,6 +670,7 @@ def afolu(scenario):
         "Region",
         scenario,
     )
+    """
 
     # endregion
 
@@ -598,11 +693,16 @@ def afolu(scenario):
     )
     afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
 
-    afolu_em = -pd.concat([co2_fw, co2_ag]).apply(
-        lambda x: x.subtract(
-            afolu_em_hist.loc[x.name[0], x.name[1], :][2020].values[0]
-        ),
-        axis=1,
+    afolu_em = (
+        -pd.concat([co2_fw, co2_ag])
+        .groupby(["Region", "Sector"])
+        .sum()
+        .apply(
+            lambda x: x.subtract(
+                afolu_em_hist.loc[x.name[0], x.name[1], :][2020].values[0]
+            ),
+            axis=1,
+        )
     )
 
     per_adoption = pd.concat([per_fw, per_ag])

@@ -30,632 +30,304 @@ def results_analysis(
     # ADOPTION CURVES #
     ###################
 
-    if region == "World ":
-        #################################
-        # ADOPTION CURVES SUM TO GLOBAL #
-        #################################
+    rgroup = {
+        "World ": ["NAM ", "ASIAPAC ", "CSAM ", "EUR ", "AFRICA ", "ME "],
+        " OECD ": ["NAM ", "EUR ", "JPN "],
+        "NonOECD ": ["CSAM ", "AFRICA ", "ME ", "RUS ", "INDIA "],
+        "NAM ": "NAM ",
+        "US ": "US ",
+        "CSAM ": "CSAM ",
+        "BRAZIL ": "BRAZIL ",
+        "EUR ": "EUR ",
+        "AFRICA ": "AFRICA ",
+        "SAFR ": "SAFR ",
+        "ME ": "ME ",
+        "RUS ": "RUS ",
+        "ASIAPAC ": "ASIAPAC ",
+        "CHINA ": "CHINA ",
+        "INDIA ": "INDIA ",
+        "JPN ": "JPN ",
+    }
 
-        # region
+    region2 = rgroup[region]
 
-        region = ["NAM ", "ASIAPAC ", "CSAM ", "EUR ", "AFRICA ", "ME "]
+    # region
 
-        # GRID DECARB
+    # GRID DECARB
 
-        # region
+    # region
 
-        decarb = [
-            "Biomass and waste",
-            "Geothermal",
-            "Hydroelectricity",
-            "Nuclear",
-            "Solar",
-            "Wind",
-            "Tide and wave",
-        ]
+    decarb = [
+        "Biomass and waste",
+        "Geothermal",
+        "Hydroelectricity",
+        "Nuclear",
+        "Solar",
+        "Wind",
+        "Tide and wave",
+    ]
 
-        grid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
-            .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
-        )
-        grid_decarb = pd.DataFrame(grid_decarb).T
-        grid_decarb.columns = grid_decarb.columns.astype(int)
-        grid_decarb.rename(index={0: "Electricity"}, inplace=True)
+    grid_decarb = (
+        elec_consump.loc[region2, decarb, scenario, :]
+        .sum()
+        .div(elec_consump.loc[region2, slice(None), scenario, :].sum())
+    )
+    grid_decarb = pd.DataFrame(grid_decarb).T
+    grid_decarb.columns = grid_decarb.columns.astype(int)
+    grid_decarb.rename(index={0: "Electricity"}, inplace=True)
 
-        # endregion
+    # endregion
 
-        # TRANSPORTATION DECARB
+    # TRANSPORTATION DECARB
 
-        # region
+    # region
 
-        transport_consump.columns = transport_consump.columns.astype(int)
-        energy_demand.columns = energy_demand.columns.astype(int)
+    transport_consump.columns = transport_consump.columns.astype(int)
+    energy_demand.columns = energy_demand.columns.astype(int)
 
-        transport_decarb = 1 - (
-            (
-                pd.DataFrame(
-                    transport_consump.loc[
-                        region, ["Fossil fuels", "Other fuels"], scenario, :
-                    ]
-                )
-                .groupby("Region")
-                .sum()
-            ).div(
-                (
-                    transport_consump.loc[
-                        region,
-                        ["Bioenergy", "Fossil fuels", "Other fuels"],
-                        scenario,
-                        :,
-                    ]
-                ).sum()
+    transport_decarb = 1 - (
+        (
+            pd.DataFrame(
+                transport_consump.loc[
+                    region2, ["Fossil fuels", "Other fuels"], scenario, :
+                ]
             )
-        )
-
-        transport_decarb = pd.DataFrame(transport_decarb.sum()).T - 5
-
-        transport_decarb.index.name = ""
-        transport_decarb.rename(index={0: "Transport"}, inplace=True)
-
-        # endregion
-
-        # BUILDINGS DECARB
-
-        # region
-
-        renewable_elec = (
-            elec_consump.loc[
-                region,
-                [
-                    "Biomass and waste",
-                    "Geothermal",
-                    "Hydroelectricity",
-                    "Nuclear",
-                    "Solar",
-                    "Tide and wave",
-                    "Wind",
-                ],
-                scenario,
-                :,
-            ]
+            .groupby("Region")
             .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
+            .sum()
+        ).div(
+            (
+                transport_consump.loc[
+                    region2,
+                    ["Bioenergy", "Fossil fuels", "Other fuels"],
+                    scenario,
+                    :,
+                ]
+            ).sum()
         )
+    )
 
-        renewable_heat = (
+    # transport_decarb.index.name = ""
+    transport_decarb = pd.DataFrame(transport_decarb).T
+    transport_decarb.columns = transport_decarb.columns.astype(int)
+    transport_decarb.rename(index={0: "Transport"}, inplace=True)
+
+    # endregion
+
+    # BUILDINGS DECARB
+
+    # region
+
+    renewable_elec = (
+        elec_consump.loc[
+            region2,
+            [
+                "Biomass and waste",
+                "Geothermal",
+                "Hydroelectricity",
+                "Nuclear",
+                "Solar",
+                "Tide and wave",
+                "Wind",
+            ],
+            scenario,
+            :,
+        ]
+        .sum()
+        .div(elec_consump.loc[region2, slice(None), scenario, :].sum())
+    )
+
+    renewable_heat = (
+        heat_consump.loc[
+            region2,
+            [
+                "Bioenergy",
+                "Geothermal",
+                "Solar thermal",
+                "Waste",
+                "Other Sources",
+            ],
+            scenario,
+            :,
+        ]
+        .sum()
+        .div(
             heat_consump.loc[
-                region,
+                region2,
                 [
                     "Bioenergy",
                     "Geothermal",
+                    "Nuclear",
                     "Solar thermal",
                     "Waste",
                     "Other Sources",
+                    "Fossil fuels",
                 ],
                 scenario,
                 :,
-            ]
-            .sum()
-            .div(
-                heat_consump.loc[
-                    region,
-                    [
-                        "Bioenergy",
-                        "Geothermal",
-                        "Nuclear",
-                        "Solar thermal",
-                        "Waste",
-                        "Other Sources",
-                        "Fossil fuels",
-                    ],
-                    scenario,
-                    :,
-                ].sum()
-            )
+            ].sum()
         )
+    )
 
-        building_decarb = (
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-                * renewable_elec
-            ).add(
-                energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum()
-                * renewable_heat
-            )
-        ).div(
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum())
+    building_decarb = (
+        (
+            energy_demand.loc[region2, "Buildings", ["Electricity"], scenario].sum()
+            * renewable_elec
+        ).add(
+            energy_demand.loc[region2, "Buildings", ["Heat"], scenario].sum()
+            * renewable_heat
         )
-
-        building_decarb = pd.DataFrame(building_decarb).T
-
-        building_decarb = pd.DataFrame(building_decarb)
-        building_decarb.rename(index={0: "Buildings"}, inplace=True)
-
-        # endregion
-
-        # INDUSTRY DECARB
-
-        # region
-
-        industry_decarb = (
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-                * renewable_elec
-            ).add(
-                energy_demand.loc[region, "Industry", ["Heat"], scenario].sum()
-                * renewable_heat
-            )
-        ).div(
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Industry", ["Heat"], scenario].sum())
+    ).div(
+        (energy_demand.loc[region2, "Buildings", ["Electricity"], scenario].sum()).add(
+            energy_demand.loc[region2, "Buildings", ["Heat"], scenario].sum()
         )
+    )
 
-        industry_decarb = pd.DataFrame(industry_decarb)
+    building_decarb = pd.DataFrame(building_decarb).T
+    building_decarb.rename(index={0: "Buildings"}, inplace=True)
 
-        industry_decarb = pd.DataFrame(industry_decarb).T
-        industry_decarb.rename(index={0: "Industry"}, inplace=True)
+    # endregion
 
-        # endregion
+    # INDUSTRY DECARB
 
-        # OTHER GASES DECARB
+    # region
 
-        # region
+    industry_decarb = (
+        (
+            energy_demand.loc[region2, "Industry", ["Electricity"], scenario].sum()
+            * renewable_elec
+        ).add(
+            energy_demand.loc[region2, "Industry", ["Heat"], scenario].sum()
+            * renewable_heat
+        )
+    ).div(
+        (energy_demand.loc[region2, "Industry", ["Electricity"], scenario].sum()).add(
+            energy_demand.loc[region2, "Industry", ["Heat"], scenario].sum()
+        )
+    )
 
-        other_decarb = (
-            industry_decarb.append(building_decarb).append(grid_decarb)
-        ).mean()
+    industry_decarb = pd.DataFrame(industry_decarb).T
+    industry_decarb.rename(index={0: "Industry"}, inplace=True)
 
-        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
+    # endregion
 
-        # endregion
+    # OTHER GASES DECARB
 
-        # REGENERATIVE AGRICULTURE DECARB
+    # region
 
-        # region
-        ra_decarb_max = afolu_per_adoption.loc[
-            region,
+    other_decarb = (industry_decarb.append(building_decarb).append(grid_decarb)).mean()
+
+    other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
+
+    # endregion
+
+    # REGENERATIVE AGRICULTURE DECARB
+
+    # region
+    ra_decarb_max = afolu_per_adoption.loc[
+        region2,
+        "Regenerative Agriculture",
+        [
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Trees in Croplands",
+            "Legumes",
+            "Optimal Intensity",
+            "Silvopasture",
             "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            "pathway",
-            :,
-        ]
+        ],
+        "pathway",
+        :,
+    ]
 
-        ra_decarb = afolu_per_adoption.loc[
-            region,
+    ra_decarb = afolu_per_adoption.loc[
+        region2,
+        "Regenerative Agriculture",
+        [
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Trees in Croplands",
+            "Legumes",
+            "Optimal Intensity",
+            "Silvopasture",
             "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            scenario,
-            :,
-        ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
-            index={0: "Regenerative Agriculture"}
-        )
-        ra_decarb.columns = ra_decarb.columns.astype(int)
+        ],
+        scenario,
+        :,
+    ]
+    ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
+        index={0: "Regenerative Agriculture"}
+    )
+    ra_decarb.columns = ra_decarb.columns.astype(int)
 
-        # endregion
+    # endregion
 
-        # FORESTS & WETLANDS DECARB
+    # FORESTS & WETLANDS DECARB
 
-        # region
-        fw_decarb_max = afolu_per_adoption.loc[
-            region,
+    # region
+    fw_decarb_max = afolu_per_adoption.loc[
+        region2,
+        "Forests & Wetlands",
+        [
+            "Avoided Coastal Impacts",
+            "Avoided Forest Conversion",
+            "Avoided Peat Impacts",
+            "Coastal Restoration",
+            "Improved Forest Mgmt",
+            "Peat Restoration",
+            "Natural Regeneration",
             "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            "pathway",
-            :,
-        ]
+        ],
+        "pathway",
+        :,
+    ]
 
-        fw_decarb = afolu_per_adoption.loc[
-            region,
+    fw_decarb = afolu_per_adoption.loc[
+        region2,
+        "Forests & Wetlands",
+        [
+            "Avoided Coastal Impacts",
+            "Avoided Forest Conversion",
+            "Avoided Peat Impacts",
+            "Coastal Restoration",
+            "Improved Forest Mgmt",
+            "Peat Restoration",
+            "Natural Regeneration",
             "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            scenario,
-            :,
-        ]
+        ],
+        scenario,
+        :,
+    ]
+    fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
+        index={0: "Forests & Wetlands"}
+    )
+    fw_decarb.columns = fw_decarb.columns.astype(int)
+    fw_decarb.columns = ra_decarb.columns
 
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
-            index={0: "Forests & Wetlands"}
-        )
-        fw_decarb.columns = fw_decarb.columns.astype(int)
-        fw_decarb.columns = ra_decarb.columns
+    # endregion
 
-        # endregion
+    # CDR DECARB
 
-        # CDR DECARB
+    # region
 
-        # region
-
+    if region in ["World ", "US ", "CHINA ", "EUR "]:
         cdr_decarb = pd.DataFrame(
-            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+            cdr.loc[region, "Carbon Dioxide Removal", scenario, :].apply(
                 lambda x: x
                 / (
-                    cdr.loc["World ", "Carbon Dioxide Removal", "pathway", :]
+                    cdr.loc[region, "Carbon Dioxide Removal", scenario, :]
                     .max(axis=1)
                     .values
                 ),
                 axis=1,
             )
-        ).rename(index={0: "Carbon Dioxide Removal"})
+        ).droplevel(["Region", "Scenario"])
+        cdr_decarb.index.name = ""
 
-        """
-        cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
-            cdr_decarb.idxmax(1).values[0]
-        ]
-    
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-
-        cdr_decarb = pd.Series(
-            cdr_decarb.values[0],
-            index=cdr_decarb.columns,
-            name="Carbon Dioxide Removal",
-        )
-        """
-
-        """
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
-
-        # endregion
-
-        adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-            transport_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            building_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            industry_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            ra_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            fw_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            other_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-
-        adoption_curves.index.name = "Sector"
-        region = "World "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
-        adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
-
-        # endregion
-
-    elif region == " OECD ":
-        ##################################
-        # ADOPTION CURVES SUM TO OECD #
-        ##################################
-
-        # region
-
-        region = ["NAM ", "EUR ", "JPN "]
-
-        # GRID DECARB
-
-        # region
-
-        decarb = [
-            "Biomass and waste",
-            "Geothermal",
-            "Hydroelectricity",
-            "Nuclear",
-            "Solar",
-            "Wind",
-            "Tide and wave",
-        ]
-
-        grid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
-            .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
-        )
-        grid_decarb = pd.DataFrame(grid_decarb).T
-        grid_decarb.columns = grid_decarb.columns.astype(int)
-        grid_decarb.rename(index={0: "Electricity"}, inplace=True)
-
-        # endregion
-
-        # TRANSPORTATION DECARB
-
-        # region
-
-        transport_consump.columns = transport_consump.columns.astype(int)
-        energy_demand.columns = energy_demand.columns.astype(int)
-
-        transport_decarb = 1 - (
-            (
-                pd.DataFrame(
-                    transport_consump.loc[
-                        region, ["Fossil fuels", "Other fuels"], scenario, :
-                    ]
-                )
-                .groupby("Region")
-                .sum()
-            ).div(
-                (
-                    transport_consump.loc[
-                        region,
-                        ["Bioenergy", "Fossil fuels", "Other fuels"],
-                        scenario,
-                        :,
-                    ]
-                ).sum()
-            )
-        )
-
-        transport_decarb = pd.DataFrame(transport_decarb.sum()).T - 2
-
-        transport_decarb.index.name = ""
-        transport_decarb.rename(index={0: "Transport"}, inplace=True)
-
-        # endregion
-
-        # BUILDINGS DECARB
-
-        # region
-
-        renewable_elec = (
-            elec_consump.loc[
-                region,
-                [
-                    "Biomass and waste",
-                    "Geothermal",
-                    "Hydroelectricity",
-                    "Nuclear",
-                    "Solar",
-                    "Tide and wave",
-                    "Wind",
-                ],
-                scenario,
-                :,
-            ]
-            .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
-        )
-
-        renewable_heat = (
-            heat_consump.loc[
-                region,
-                [
-                    "Bioenergy",
-                    "Geothermal",
-                    "Solar thermal",
-                    "Waste",
-                    "Other Sources",
-                ],
-                scenario,
-                :,
-            ]
-            .sum()
-            .div(
-                heat_consump.loc[
-                    region,
-                    [
-                        "Bioenergy",
-                        "Geothermal",
-                        "Nuclear",
-                        "Solar thermal",
-                        "Waste",
-                        "Other Sources",
-                        "Fossil fuels",
-                    ],
-                    scenario,
-                    :,
-                ].sum()
-            )
-        )
-
-        building_decarb = (
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-                * renewable_elec
-            ).add(
-                energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum()
-                * renewable_heat
-            )
-        ).div(
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum())
-        )
-
-        building_decarb = pd.DataFrame(building_decarb).T
-
-        building_decarb = pd.DataFrame(building_decarb)
-        building_decarb.rename(index={0: "Buildings"}, inplace=True)
-
-        # endregion
-
-        # INDUSTRY DECARB
-
-        # region
-
-        industry_decarb = (
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-                * renewable_elec
-            ).add(
-                energy_demand.loc[region, "Industry", ["Heat"], scenario].sum()
-                * renewable_heat
-            )
-        ).div(
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Industry", ["Heat"], scenario].sum())
-        )
-
-        industry_decarb = pd.DataFrame(industry_decarb)
-
-        industry_decarb = pd.DataFrame(industry_decarb).T
-        industry_decarb.rename(index={0: "Industry"}, inplace=True)
-
-        # endregion
-
-        # OTHER GASES DECARB
-
-        # region
-
-        other_decarb = (
-            industry_decarb.append(building_decarb).append(grid_decarb)
-        ).mean()
-
-        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
-
-        # endregion
-
-        # REGENERATIVE AGRICULTURE DECARB
-
-        # region
-        ra_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            "pathway",
-            :,
-        ]
-
-        ra_decarb = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            scenario,
-            :,
-        ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
-            index={0: "Regenerative Agriculture"}
-        )
-        ra_decarb.columns = ra_decarb.columns.astype(int)
-
-        # endregion
-
-        # FORESTS & WETLANDS DECARB
-
-        # region
-        fw_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            "pathway",
-            :,
-        ]
-
-        fw_decarb = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            scenario,
-            :,
-        ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
-            index={0: "Forests & Wetlands"}
-        )
-        fw_decarb.columns = fw_decarb.columns.astype(int)
-        fw_decarb.columns = ra_decarb.columns
-
-        # endregion
-
-        # CDR DECARB
-
-        # region
-
-        cdr_decarb = pd.DataFrame(
-            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
-                lambda x: x
-                / (
-                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
-                    .max(axis=1)
-                    .values
-                ),
-                axis=1,
-            )
-        ).rename(index={0: "Carbon Dioxide Removal"})
         """
         cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
             cdr_decarb.idxmax(1).values[0]
@@ -670,640 +342,7 @@ def results_analysis(
         cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
         cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
         """
-        # endregion
-
-        adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-            transport_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            building_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            industry_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            ra_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            fw_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            other_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-
-        adoption_curves.index.name = "Sector"
-        region = " OECD "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
-        adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
-
-        # endregion
-
-    elif region == "NonOECD ":
-        ##################################
-        # ADOPTION CURVES SUM TO NonOECD #
-        ##################################
-
-        # region
-
-        region = ["CSAM ", "AFRICA ", "ME ", "RUS ", "INDIA "]
-
-        # GRID DECARB
-
-        # region
-
-        decarb = [
-            "Biomass and waste",
-            "Geothermal",
-            "Hydroelectricity",
-            "Nuclear",
-            "Solar",
-            "Wind",
-            "Tide and wave",
-        ]
-
-        grid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
-            .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
-        )
-        grid_decarb = pd.DataFrame(grid_decarb).T
-        grid_decarb.columns = grid_decarb.columns.astype(int)
-        grid_decarb.rename(index={0: "Electricity"}, inplace=True)
-
-        # endregion
-
-        # TRANSPORTATION DECARB
-
-        # region
-
-        transport_consump.columns = transport_consump.columns.astype(int)
-        energy_demand.columns = energy_demand.columns.astype(int)
-
-        transport_decarb = 1 - (
-            (
-                pd.DataFrame(
-                    transport_consump.loc[
-                        region, ["Fossil fuels", "Other fuels"], scenario, :
-                    ]
-                )
-                .groupby("Region")
-                .sum()
-            ).div(
-                (
-                    transport_consump.loc[
-                        region,
-                        ["Bioenergy", "Fossil fuels", "Other fuels"],
-                        scenario,
-                        :,
-                    ]
-                ).sum()
-            )
-        )
-
-        transport_decarb = pd.DataFrame(transport_decarb.sum()).T - 4
-
-        transport_decarb.index.name = ""
-        transport_decarb.rename(index={0: "Transport"}, inplace=True)
-
-        # endregion
-
-        # BUILDINGS DECARB
-
-        # region
-
-        renewable_elec = (
-            elec_consump.loc[
-                region,
-                [
-                    "Biomass and waste",
-                    "Geothermal",
-                    "Hydroelectricity",
-                    "Nuclear",
-                    "Solar",
-                    "Tide and wave",
-                    "Wind",
-                ],
-                scenario,
-                :,
-            ]
-            .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
-        )
-
-        renewable_heat = (
-            heat_consump.loc[
-                region,
-                [
-                    "Bioenergy",
-                    "Geothermal",
-                    "Solar thermal",
-                    "Waste",
-                    "Other Sources",
-                ],
-                scenario,
-                :,
-            ]
-            .sum()
-            .div(
-                heat_consump.loc[
-                    region,
-                    [
-                        "Bioenergy",
-                        "Geothermal",
-                        "Nuclear",
-                        "Solar thermal",
-                        "Waste",
-                        "Other Sources",
-                        "Fossil fuels",
-                    ],
-                    scenario,
-                    :,
-                ].sum()
-            )
-        )
-
-        building_decarb = (
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-                * renewable_elec
-            ).add(
-                energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum()
-                * renewable_heat
-            )
-        ).div(
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum())
-        )
-
-        building_decarb = pd.DataFrame(building_decarb).T
-
-        building_decarb = pd.DataFrame(building_decarb)
-        building_decarb.rename(index={0: "Buildings"}, inplace=True)
-
-        # endregion
-
-        # INDUSTRY DECARB
-
-        # region
-
-        industry_decarb = (
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-                * renewable_elec
-            ).add(
-                energy_demand.loc[region, "Industry", ["Heat"], scenario].sum()
-                * renewable_heat
-            )
-        ).div(
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Industry", ["Heat"], scenario].sum())
-        )
-
-        industry_decarb = pd.DataFrame(industry_decarb)
-
-        industry_decarb = pd.DataFrame(industry_decarb).T
-        industry_decarb.rename(index={0: "Industry"}, inplace=True)
-
-        # endregion
-
-        # OTHER GASES DECARB
-
-        # region
-
-        other_decarb = (
-            industry_decarb.append(building_decarb).append(grid_decarb)
-        ).mean()
-
-        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
-
-        # endregion
-
-        # REGENERATIVE AGRICULTURE DECARB
-
-        # region
-        ra_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            "pathway",
-            :,
-        ]
-
-        ra_decarb = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            scenario,
-            :,
-        ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
-            index={0: "Regenerative Agriculture"}
-        )
-        ra_decarb.columns = ra_decarb.columns.astype(int)
-
-        # endregion
-
-        # FORESTS & WETLANDS DECARB
-
-        # region
-        fw_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            "pathway",
-            :,
-        ]
-
-        fw_decarb = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            scenario,
-            :,
-        ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
-            index={0: "Forests & Wetlands"}
-        )
-        fw_decarb.columns = fw_decarb.columns.astype(int)
-        fw_decarb.columns = ra_decarb.columns
-
-        # endregion
-
-        # CDR DECARB
-
-        # region
-
-        cdr_decarb = pd.DataFrame(
-            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
-                lambda x: x
-                / (
-                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
-                    .max(axis=1)
-                    .values
-                ),
-                axis=1,
-            )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-        """
-        cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
-            cdr_decarb.idxmax(1).values[0]
-        ]
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        cdr_decarb = pd.Series(
-            cdr_decarb.values[0],
-            index=cdr_decarb.columns,
-            name="Carbon Dioxide Removal",
-        )
-
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
-
-        # endregion
-
-        adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-            transport_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            building_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            industry_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            ra_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            fw_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            other_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-
-        adoption_curves.index.name = "Sector"
-        region = "NonOECD "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
-        adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
-
-        # endregion
-
     else:
-        ###################
-        # ADOPTION CURVES #
-        ###################
-
-        # region
-
-        # GRID DECARB
-
-        # region
-
-        decarb = [
-            "Biomass and waste",
-            "Geothermal",
-            "Hydroelectricity",
-            "Nuclear",
-            "Solar",
-            "Wind",
-            "Tide and wave",
-        ]
-
-        grid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
-            .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
-        )
-        grid_decarb = pd.DataFrame(grid_decarb).T
-        grid_decarb.columns = grid_decarb.columns.astype(int)
-        grid_decarb.rename(index={0: "Electricity"}, inplace=True)
-
-        # endregion
-
-        # TRANSPORTATION DECARB
-
-        # region
-
-        transport_consump.columns = transport_consump.columns.astype(int)
-        energy_demand.columns = energy_demand.columns.astype(int)
-
-        transport_decarb = 1 - (
-            (
-                pd.DataFrame(
-                    transport_consump.loc[
-                        region, ["Fossil fuels", "Other fuels"], scenario, :
-                    ]
-                )
-                .groupby("Region")
-                .sum()
-            ).div(
-                (
-                    transport_consump.loc[
-                        region,
-                        ["Bioenergy", "Fossil fuels", "Other fuels"],
-                        scenario,
-                        :,
-                    ]
-                ).sum()
-            )
-        )
-
-        transport_decarb.index.name = ""
-        transport_decarb.rename(index={region: "Transport"}, inplace=True)
-
-        # endregion
-
-        # BUILDINGS DECARB
-
-        # region
-
-        renewable_elec = (
-            elec_consump.loc[
-                region,
-                [
-                    "Biomass and waste",
-                    "Geothermal",
-                    "Hydroelectricity",
-                    "Nuclear",
-                    "Solar",
-                    "Tide and wave",
-                    "Wind",
-                ],
-                scenario,
-                :,
-            ]
-            .sum()
-            .div(elec_consump.loc[region, slice(None), scenario, :].sum())
-        )
-
-        renewable_heat = (
-            heat_consump.loc[
-                region,
-                [
-                    "Bioenergy",
-                    "Geothermal",
-                    "Solar thermal",
-                    "Waste",
-                    "Other Sources",
-                ],
-                scenario,
-                :,
-            ]
-            .sum()
-            .div(
-                heat_consump.loc[
-                    region,
-                    [
-                        "Bioenergy",
-                        "Geothermal",
-                        "Nuclear",
-                        "Solar thermal",
-                        "Waste",
-                        "Other Sources",
-                        "Fossil fuels",
-                    ],
-                    scenario,
-                    :,
-                ].sum()
-            )
-        )
-
-        building_decarb = (
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-                * renewable_elec
-            ).add(
-                energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum()
-                * renewable_heat
-            )
-        ).div(
-            (
-                energy_demand.loc[region, "Buildings", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Buildings", ["Heat"], scenario].sum())
-        )
-
-        building_decarb = pd.DataFrame(building_decarb).T
-        building_decarb.rename(index={0: "Buildings"}, inplace=True)
-
-        # endregion
-
-        # INDUSTRY DECARB
-
-        # region
-
-        industry_decarb = (
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-                * renewable_elec
-            ).add(
-                energy_demand.loc[region, "Industry", ["Heat"], scenario].sum()
-                * renewable_heat
-            )
-        ).div(
-            (
-                energy_demand.loc[region, "Industry", ["Electricity"], scenario].sum()
-            ).add(energy_demand.loc[region, "Industry", ["Heat"], scenario].sum())
-        )
-
-        industry_decarb = pd.DataFrame(industry_decarb).T
-        industry_decarb.rename(index={0: "Industry"}, inplace=True)
-
-        # endregion
-
-        # OTHER GASES DECARB
-
-        # region
-
-        other_decarb = (
-            industry_decarb.append(building_decarb).append(grid_decarb)
-        ).mean()
-
-        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
-
-        # endregion
-
-        # REGENERATIVE AGRICULTURE DECARB
-
-        # region
-        ra_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            "pathway",
-            :,
-        ]
-
-        ra_decarb = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            scenario,
-            :,
-        ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
-            index={0: "Regenerative Agriculture"}
-        )
-        ra_decarb.columns = ra_decarb.columns.astype(int)
-
-        # endregion
-
-        # FORESTS & WETLANDS DECARB
-
-        # region
-        fw_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            "pathway",
-            :,
-        ]
-
-        fw_decarb = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            scenario,
-            :,
-        ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
-            index={0: "Forests & Wetlands"}
-        )
-        fw_decarb.columns = fw_decarb.columns.astype(int)
-        fw_decarb.columns = ra_decarb.columns
-
-        # endregion
-
-        # CDR DECARB
-
-        # region
-
         cdr_decarb = pd.DataFrame(
             cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
                 lambda x: x
@@ -1314,183 +353,147 @@ def results_analysis(
                 ),
                 axis=1,
             )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-        """
-        cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
-            cdr_decarb.idxmax(1).values[0]
-        ]
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        cdr_decarb = pd.Series(
-            cdr_decarb.values[0],
-            index=cdr_decarb.columns,
-            name="Carbon Dioxide Removal",
-        )
+        ).droplevel(["Region", "Scenario"])
+        cdr_decarb.index.name = ""
 
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
+    # endregion
 
-        # endregion
+    adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
+        transport_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        building_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        industry_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        ra_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        fw_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        cdr_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    adoption_curves = adoption_curves.append(
+        other_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
 
-        adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-            transport_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            building_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            industry_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            ra_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            fw_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            other_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
+    adoption_curves.index.name = "Sector"
+    adoption_curves["Region"] = region
+    adoption_curves["Scenario"] = scenario
+    adoption_curves.reset_index(inplace=True)
+    adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
 
-        adoption_curves.index.name = "Sector"
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
-        adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
-
-        # endregion
+    # endregion
 
     ######################
     # SUBADOPTION CURVES #
     ######################
 
-    if region == "World ":
-        #################################
-        # ADOPTION CURVES SUM TO GLOBAL #
-        #################################
+    # region
 
-        # region
+    # GRID DECARB
 
-        region = ["NAM ", "ASIAPAC ", "CSAM ", "EUR ", "AFRICA ", "ME "]
+    # region
 
-        # GRID DECARB
-
-        # region
-
-        sgrid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
-            .groupby("Metric")
-            .sum()
-            .divide(
-                elec_consump.loc[region, decarb, scenario, :]
-                .groupby("Metric")
-                .sum()
-                .sum()
-            )
-        ).multiply(grid_decarb.values)
-
-        """
-        sgrid_decarb = sgrid_decarb.append(pd.DataFrame(sgrid_decarb.loc[['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave']].sum()).T.rename(index={0:'Other ren'})).drop(index=['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave'])
-        """
-
-        sgrid_decarb = pd.concat([sgrid_decarb], keys=["Electricity"], names=["Sector"])
-        sgrid_decarb = pd.concat([sgrid_decarb], keys=["World "], names=["Region"])
-
-        # endregion
-
-        # TRANSPORTATION DECARB
-
-        # region
-
-        stransport_decarb = (
-            (transport_decarb * 0.73)
-            .rename(index={"Transport": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Transport": "Efficiency"})
+    sgrid_decarb = (
+        elec_consump.loc[region2, decarb, scenario, :]
+        .groupby("Metric")
+        .sum()
+        .divide(
+            elec_consump.loc[region2, decarb, scenario, :].groupby("Metric").sum().sum()
         )
+    ).multiply(grid_decarb.values)
 
-        stransport_decarb = pd.concat(
-            [stransport_decarb], keys=["Transport"], names=["Sector"]
-        )
-        stransport_decarb = pd.concat(
-            [stransport_decarb], keys=["World "], names=["Region"]
-        )
+    """
+    sgrid_decarb = sgrid_decarb.append(pd.DataFrame(sgrid_decarb.loc[['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave']].sum()).T.rename(index={0:'Other ren'})).drop(index=['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave'])
+    """
 
-        # endregion
+    sgrid_decarb = pd.concat([sgrid_decarb], keys=["Electricity"], names=["Sector"])
+    sgrid_decarb = pd.concat([sgrid_decarb], keys=[region], names=["Region"])
 
-        # BUILDINGS DECARB
+    # endregion
 
-        # region
+    # TRANSPORTATION DECARB
 
-        sbuildings_decarb = (
-            (building_decarb * 0.73)
-            .rename(index={"Buildings": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Buildings": "Efficiency"})
-        )
+    # region
 
-        sbuildings_decarb = pd.concat(
-            [sbuildings_decarb], keys=["Buildings"], names=["Sector"]
-        )
-        sbuildings_decarb = pd.concat(
-            [sbuildings_decarb], keys=["World "], names=["Region"]
-        )
+    stransport_decarb = (
+        (transport_decarb * 0.73)
+        .rename(index={"Transport": "Fuel Switching"})
+        .append(transport_decarb * 0.27)
+        .rename(index={"Transport": "Efficiency"})
+    )
+    stransport_decarb.index.name = "Metric"
 
-        # endregion
+    stransport_decarb = pd.concat(
+        [stransport_decarb], keys=["Transport"], names=["Sector"]
+    )
+    stransport_decarb = pd.concat([stransport_decarb], keys=[region], names=["Region"])
 
-        # INDUSTRY DECARB
+    # endregion
 
-        # region
+    # BUILDINGS DECARB
 
-        sindustry_decarb = (
-            (industry_decarb * 0.73)
-            .rename(index={'"Industry"': "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={'"Industry"': "Efficiency"})
-        )
+    # region
 
-        sindustry_decarb = pd.concat(
-            [sindustry_decarb], keys=["Industry"], names=["Sector"]
-        )
-        sbuildings_decarb = pd.concat(
-            [sindustry_decarb], keys=["World "], names=["Region"]
-        )
+    sbuilding_decarb = (
+        (building_decarb * 0.73)
+        .rename(index={"Buildings": "Fuel Switching"})
+        .append(transport_decarb * 0.27)
+        .rename(index={"Buildings": "Efficiency"})
+    )
+    sbuilding_decarb.index.name = "Metric"
+    sbuilding_decarb = pd.concat(
+        [sbuilding_decarb], keys=["Buildings"], names=["Sector"]
+    )
+    sbuilding_decarb = pd.concat([sbuilding_decarb], keys=[region], names=["Region"])
 
-        # endregion
+    # endregion
 
-        # OTHER GASES DECARB
+    # INDUSTRY DECARB
 
-        # region
+    # region
 
-        # endregion
+    sindustry_decarb = (
+        (industry_decarb * 0.73)
+        .rename(index={'"Industry"': "Fuel Switching"})
+        .append(transport_decarb * 0.27)
+        .rename(index={'"Industry"': "Efficiency"})
+    )
+    sindustry_decarb.index.name = "Metric"
+    sindustry_decarb = pd.concat(
+        [sindustry_decarb], keys=["Industry"], names=["Sector"]
+    )
+    sindustry_decarb = pd.concat([sindustry_decarb], keys=[region], names=["Region"])
 
-        # REGENERATIVE AGRICULTURE DECARB
+    # endregion
 
-        # region
-        sra_decarb = ra_decarb
+    # OTHER GASES DECARB
 
-        ra_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            "pathway",
-            :,
-        ]
+    # region
 
-        ra_decarb = afolu_per_adoption.loc[
-            region,
+    sother_decarb = (
+        (other_decarb * 0.73)
+        .rename(index={'"Other Gases"': "Fuel Switching"})
+        .append(other_decarb * 0.27)
+        .rename(index={'"Other Gases"': "Efficiency"})
+    )
+    sother_decarb.index.name = "Metric"
+    sother_decarb = pd.concat([sother_decarb], keys=["Other Gases"], names=["Sector"])
+    sother_decarb = pd.concat([sother_decarb], keys=[region], names=["Region"])
+
+    # endregion
+
+    # REGENERATIVE AGRICULTURE DECARB
+
+    # region
+
+    sra_decarb = (
+        afolu_per_adoption.loc[
+            region2,
             "Regenerative Agriculture",
             [
                 "Biochar",
@@ -1506,37 +509,31 @@ def results_analysis(
             scenario,
             :,
         ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
-            index={0: "Regenerative Agriculture"}
-        )
-        ra_decarb.columns = ra_decarb.columns.astype(int)
+        .groupby("Metric")
+        .mean()
+    )
 
-        # endregion
+    """
+    sra_decarb_max = sra_decarb.sum()
+    sra_decarb = sra_decarb.apply(lambda x: x.divide(sra_decarb_max), axis=1)
+    """
 
-        # FORESTS & WETLANDS DECARB
+    sra_decarb.columns = sra_decarb.columns.astype(int)
+    sra_decarb.index.name = "Metric"
+    sra_decarb = pd.concat(
+        [sra_decarb], keys=["Regenerative Agriculture"], names=["Sector"]
+    )
+    sra_decarb = pd.concat([sra_decarb], keys=[region], names=["Region"])
 
-        # region
-        sfw_decarb = fw_decarb
+    # endregion
 
-        fw_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            "pathway",
-            :,
-        ]
+    # FORESTS & WETLANDS DECARB
 
-        fw_decarb = afolu_per_adoption.loc[
-            region,
+    # region
+
+    sfw_decarb = (
+        afolu_per_adoption.loc[
+            region2,
             "Forests & Wetlands",
             [
                 "Avoided Coastal Impacts",
@@ -1551,788 +548,42 @@ def results_analysis(
             scenario,
             :,
         ]
+        .groupby("Metric")
+        .mean()
+    )
 
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
-            index={0: "Forests & Wetlands"}
-        )
-        fw_decarb.columns = fw_decarb.columns.astype(int)
-        fw_decarb.columns = ra_decarb.columns
+    """
+    sfw_decarb_max = sfw_decarb.sum()
+    sfw_decarb = sfw_decarb.apply(lambda x: x.divide(sfw_decarb_max), axis=1)
+    """
 
-        # endregion
+    sfw_decarb.columns = sfw_decarb.columns.astype(int)
+    sfw_decarb.index.name = "Metric"
+    sfw_decarb = pd.concat([sfw_decarb], keys=["Forests & Wetlands"], names=["Sector"])
+    sfw_decarb = pd.concat([sfw_decarb], keys=[region], names=["Region"])
 
-        # CDR DECARB
+    # endregion
 
-        # region
+    # CDR DECARB
 
-        cdr_decarb = pd.DataFrame(
-            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+    # region
+
+    if region in ["World ", "US ", "CHINA ", "EUR "]:
+        scdr_decarb = pd.DataFrame(
+            cdr.loc[region, "Carbon Dioxide Removal", scenario, :].apply(
                 lambda x: x
                 / (
-                    cdr.loc["World ", "Carbon Dioxide Removal", "pathway", :]
+                    cdr.loc[region, "Carbon Dioxide Removal", scenario, :]
                     .max(axis=1)
                     .values
                 ),
                 axis=1,
             )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-
-        # endregion
-
-        sadoption_curves = pd.concat(
-            [
-                sgrid_decarb,
-                stransport_decarb,
-                sbuildings_decarb,
-                sindustry_decarb,
-                sra_decarb,
-                sfw_decarb,
-            ],
-        ).loc[:, data_start_year:long_proj_end_year]
-
-        sadoption_curves = sgrid_decarb.loc[
-            :, data_start_year:long_proj_end_year
-        ].append(stransport_decarb.loc[:, data_start_year:long_proj_end_year])
-        sadoption_curves = adoption_curves.append(
-            building_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        sadoption_curves = adoption_curves.append(
-            industry_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        sadoption_curves = adoption_curves.append(
-            ra_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        sadoption_curves = adoption_curves.append(
-            fw_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        sadoption_curves = adoption_curves.append(
-            cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        sadoption_curves = adoption_curves.append(
-            other_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-
-        sadoption_curves.index.name = "Sector"
-        region = "World "
-        sadoption_curves["Region"] = region
-        sadoption_curves["Scenario"] = scenario
-        sadoption_curves.reset_index(inplace=True)
-        sadoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
-
-        # endregion
-
-    elif region == " OECD ":
-        ##################################
-        # ADOPTION CURVES SUM TO OECD #
-        ##################################
-
-        # region
-
-        region = ["NAM ", "EUR ", "JPN "]
-
-        # GRID DECARB
-
-        # region
-
-        sgrid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
-            .groupby("Metric")
-            .sum()
-            .divide(
-                elec_consump.loc[region, decarb, scenario, :]
-                .groupby("Metric")
-                .sum()
-                .sum()
-            )
-        ).multiply(grid_decarb.values)
-
-        """
-        sgrid_decarb = sgrid_decarb.append(pd.DataFrame(sgrid_decarb.loc[['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave']].sum()).T.rename(index={0:'Other ren'})).drop(index=['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave'])
-        """
-
-        sgrid_decarb = pd.concat([sgrid_decarb], keys=["Electricity"], names=["Sector"])
-        sgrid_decarb = pd.concat([sgrid_decarb], keys=[" OECD "], names=["Region"])
-
-        # endregion
-
-        # TRANSPORTATION DECARB
-
-        # region
-
-        stransport_decarb = (
-            (transport_decarb * 0.73)
-            .rename(index={"Transport": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Transport": "Efficiency"})
-        )
-
-        stransport_decarb = pd.concat(
-            [stransport_decarb], keys=["Transport"], names=["Sector"]
-        )
-        stransport_decarb = pd.concat(
-            [stransport_decarb], keys=[" OECD "], names=["Region"]
-        )
-
-        # endregion
-
-        # BUILDINGS DECARB
-
-        # region
-
-        sbuildings_decarb = (
-            (building_decarb * 0.73)
-            .rename(index={"Buildings": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Buildings": "Efficiency"})
-        )
-
-        sbuildings_decarb = pd.concat(
-            [sbuildings_decarb], keys=["Buildings"], names=["Sector"]
-        )
-        sbuildings_decarb = pd.concat(
-            [sbuildings_decarb], keys=[" OECD "], names=["Region"]
-        )
-
-        # endregion
-
-        # INDUSTRY DECARB
-
-        # region
-
-        sindustry_decarb = (
-            (industry_decarb * 0.73)
-            .rename(index={"Industry": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={'"Industry"': "Efficiency"})
-        )
-
-        sindustry_decarb = pd.concat(
-            [sindustry_decarb], keys=["Industry"], names=["Sector"]
-        )
-        sbuildings_decarb = pd.concat(
-            [sindustry_decarb], keys=[" OECD "], names=["Region"]
-        )
-
-        # endregion
-
-        # OTHER GASES DECARB
-
-        # region
-
-        other_decarb = (
-            industry_decarb.append(building_decarb).append(grid_decarb)
-        ).mean()
-
-        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
-
-        # endregion
-
-        # REGENERATIVE AGRICULTURE DECARB
-
-        # region
-        ra_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            "pathway",
-            :,
-        ]
-
-        ra_decarb = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            scenario,
-            :,
-        ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
-            index={0: "Regenerative Agriculture"}
-        )
-        ra_decarb.columns = ra_decarb.columns.astype(int)
-
-        # endregion
-
-        # FORESTS & WETLANDS DECARB
-
-        # region
-        fw_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            "pathway",
-            :,
-        ]
-
-        fw_decarb = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            scenario,
-            :,
-        ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
-            index={0: "Forests & Wetlands"}
-        )
-        fw_decarb.columns = fw_decarb.columns.astype(int)
-        fw_decarb.columns = ra_decarb.columns
-
-        # endregion
-
-        # CDR DECARB
-
-        # region
-
-        cdr_decarb = pd.DataFrame(
-            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
-                lambda x: x
-                / (
-                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
-                    .max(axis=1)
-                    .values
-                ),
-                axis=1,
-            )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-        """
-        cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
-            cdr_decarb.idxmax(1).values[0]
-        ]
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        cdr_decarb = pd.Series(
-            cdr_decarb.values[0],
-            index=cdr_decarb.columns,
-            name="Carbon Dioxide Removal",
-        )
-
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
-        # endregion
-
-        adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-            transport_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            building_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            industry_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            ra_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            fw_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            other_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-
-        adoption_curves.index.name = "Sector"
-        region = " OECD "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
-        adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
-
-        # endregion
-
-    elif region == "NonOECD ":
-        ##################################
-        # ADOPTION CURVES SUM TO NonOECD #
-        ##################################
-
-        # region
-
-        region = ["CSAM ", "AFRICA ", "ME ", "RUS ", "INDIA "]
-
-        # GRID DECARB
-
-        # region
-
-        sgrid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
-            .groupby("Metric")
-            .sum()
-            .divide(
-                elec_consump.loc[region, decarb, scenario, :]
-                .groupby("Metric")
-                .sum()
-                .sum()
-            )
-        ).multiply(grid_decarb.values)
-
-        """
-        sgrid_decarb = sgrid_decarb.append(pd.DataFrame(sgrid_decarb.loc[['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave']].sum()).T.rename(index={0:'Other ren'})).drop(index=['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave'])
-        """
-
-        sgrid_decarb = pd.concat([sgrid_decarb], keys=["Electricity"], names=["Sector"])
-        sgrid_decarb = pd.concat([sgrid_decarb], keys=["NonOECD "], names=["Region"])
-
-        # endregion
-
-        # TRANSPORTATION DECARB
-
-        # region
-
-        stransport_decarb = (
-            (transport_decarb * 0.73)
-            .rename(index={"Transport": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Transport": "Efficiency"})
-        )
-
-        stransport_decarb = pd.concat(
-            [stransport_decarb], keys=["Transport"], names=["Sector"]
-        )
-        stransport_decarb = pd.concat(
-            [stransport_decarb], keys=["NonOECD "], names=["Region"]
-        )
-
-        # endregion
-
-        # BUILDINGS DECARB
-
-        # region
-
-        sbuildings_decarb = (
-            (building_decarb * 0.73)
-            .rename(index={"Buildings": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Buildings": "Efficiency"})
-        )
-
-        sbuildings_decarb = pd.concat(
-            [sbuildings_decarb], keys=["Buildings"], names=["Sector"]
-        )
-        sbuildings_decarb = pd.concat(
-            [sbuildings_decarb], keys=["NonOECD "], names=["Region"]
-        )
-
-        # endregion
-
-        # INDUSTRY DECARB
-
-        # region
-
-        sindustry_decarb = (
-            (industry_decarb * 0.73)
-            .rename(index={"Industry": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Industry": "Efficiency"})
-        )
-
-        sindustry_decarb = pd.concat(
-            [sindustry_decarb], keys=["Industry"], names=["Sector"]
-        )
-        sbuildings_decarb = pd.concat(
-            [sindustry_decarb], keys=["NonOECD "], names=["Region"]
-        )
-
-        # endregion
-
-        # OTHER GASES DECARB
-
-        # region
-
-        other_decarb = (
-            industry_decarb.append(building_decarb).append(grid_decarb)
-        ).mean()
-
-        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
-
-        # endregion
-
-        # REGENERATIVE AGRICULTURE DECARB
-
-        # region
-        ra_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            "pathway",
-            :,
-        ]
-
-        ra_decarb = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            scenario,
-            :,
-        ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
-            index={0: "Regenerative Agriculture"}
-        )
-        ra_decarb.columns = ra_decarb.columns.astype(int)
-
-        # endregion
-
-        # FORESTS & WETLANDS DECARB
-
-        # region
-        fw_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            "pathway",
-            :,
-        ]
-
-        fw_decarb = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            scenario,
-            :,
-        ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
-            index={0: "Forests & Wetlands"}
-        )
-        fw_decarb.columns = fw_decarb.columns.astype(int)
-        fw_decarb.columns = ra_decarb.columns
-
-        # endregion
-
-        # CDR DECARB
-
-        # region
-
-        cdr_decarb = pd.DataFrame(
-            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
-                lambda x: x
-                / (
-                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
-                    .max(axis=1)
-                    .values
-                ),
-                axis=1,
-            )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-        """
-        cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
-            cdr_decarb.idxmax(1).values[0]
-        ]
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        cdr_decarb = pd.Series(
-            cdr_decarb.values[0],
-            index=cdr_decarb.columns,
-            name="Carbon Dioxide Removal",
-        )
-
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
-
-        # endregion
-
-        adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-            transport_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            building_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            industry_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            ra_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            fw_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            other_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-
-        adoption_curves.index.name = "Sector"
-        region = "NonOECD "
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
-        adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
-
-        # endregion
+        ).droplevel(["Region", "Scenario"])
+        scdr_decarb.index.name = ""
 
     else:
-        ######################
-        # SUBADOPTION CURVES #
-        ######################
-
-        # region
-
-        # GRID DECARB
-
-        # region
-
-        sgrid_decarb = (
-            elec_consump.loc[region, decarb, scenario, :]
-            .groupby("Metric")
-            .sum()
-            .divide(
-                elec_consump.loc[region, decarb, scenario, :]
-                .groupby("Metric")
-                .sum()
-                .sum()
-            )
-        ).multiply(grid_decarb.values)
-
-        """
-        sgrid_decarb = sgrid_decarb.append(pd.DataFrame(sgrid_decarb.loc[['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave']].sum()).T.rename(index={0:'Other ren'})).drop(index=['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave'])
-        """
-
-        sgrid_decarb = pd.concat([sgrid_decarb], keys=["Electricity"], names=["Sector"])
-        sgrid_decarb = pd.concat([sgrid_decarb], keys=[region], names=["Region"])
-
-        # endregion
-
-        # TRANSPORTATION DECARB
-
-        # region
-
-        stransport_decarb = (
-            (transport_decarb * 0.73)
-            .rename(index={"Transport": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Transport": "Efficiency"})
-        )
-
-        stransport_decarb = pd.concat(
-            [stransport_decarb], keys=["Transport"], names=["Sector"]
-        )
-        stransport_decarb = pd.concat(
-            [stransport_decarb], keys=[region], names=["Region"]
-        )
-
-        # endregion
-
-        # BUILDINGS DECARB
-
-        # region
-
-        sbuildings_decarb = (
-            (building_decarb * 0.73)
-            .rename(index={"Buildings": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Buildings": "Efficiency"})
-        )
-
-        sbuildings_decarb = pd.concat(
-            [sbuildings_decarb], keys=["Buildings"], names=["Sector"]
-        )
-        sbuildings_decarb = pd.concat(
-            [sbuildings_decarb], keys=[region], names=["Region"]
-        )
-
-        # endregion
-
-        # INDUSTRY DECARB
-
-        # region
-
-        sindustry_decarb = (
-            (industry_decarb * 0.73)
-            .rename(index={"Buildings": "Fuel Switching"})
-            .append(transport_decarb * 0.27)
-            .rename(index={"Buildings": "Efficiency"})
-        )
-
-        sindustry_decarb = pd.concat(
-            [sindustry_decarb], keys=["Buildings"], names=["Sector"]
-        )
-        sbuildings_decarb = pd.concat(
-            [sindustry_decarb], keys=[region], names=["Region"]
-        )
-
-        # endregion
-
-        # OTHER GASES DECARB
-
-        # region
-
-        other_decarb = (
-            industry_decarb.append(building_decarb).append(grid_decarb)
-        ).mean()
-
-        other_decarb = pd.DataFrame(other_decarb).T.rename(index={0: "Other Gases"})
-
-        # endregion
-
-        # REGENERATIVE AGRICULTURE DECARB
-
-        # region
-        ra_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            "pathway",
-            :,
-        ]
-
-        ra_decarb = afolu_per_adoption.loc[
-            region,
-            "Regenerative Agriculture",
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            scenario,
-            :,
-        ]
-        ra_decarb = pd.DataFrame(ra_decarb.sum() / ra_decarb_max.sum().max()).T.rename(
-            index={0: "Regenerative Agriculture"}
-        )
-        ra_decarb.columns = ra_decarb.columns.astype(int)
-
-        # endregion
-
-        # FORESTS & WETLANDS DECARB
-
-        # region
-        fw_decarb_max = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            "pathway",
-            :,
-        ]
-
-        fw_decarb = afolu_per_adoption.loc[
-            region,
-            "Forests & Wetlands",
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            scenario,
-            :,
-        ]
-        fw_decarb = pd.DataFrame(fw_decarb.sum() / fw_decarb_max.sum().max()).T.rename(
-            index={0: "Forests & Wetlands"}
-        )
-        fw_decarb.columns = fw_decarb.columns.astype(int)
-        fw_decarb.columns = ra_decarb.columns
-
-        # endregion
-
-        # CDR DECARB
-
-        # region
-
-        cdr_decarb = pd.DataFrame(
+        scdr_decarb = pd.DataFrame(
             cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
                 lambda x: x
                 / (
@@ -2342,52 +593,53 @@ def results_analysis(
                 ),
                 axis=1,
             )
-        ).rename(index={0: "Carbon Dioxide Removal"})
-        """
-        cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
-            cdr_decarb.idxmax(1).values[0]
-        ]
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        cdr_decarb = pd.Series(
-            cdr_decarb.values[0],
-            index=cdr_decarb.columns,
-            name="Carbon Dioxide Removal",
-        )
+        ).droplevel(["Region", "Scenario"])
+        scdr_decarb.index.name = ""
 
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
+    # endregion
 
-        # endregion
+    sadoption_curves = pd.concat(
+        [
+            sgrid_decarb,
+            stransport_decarb,
+            sbuilding_decarb,
+            sindustry_decarb,
+            sra_decarb,
+            sfw_decarb,
+            sother_decarb,
+        ],
+    ).loc[:, data_start_year:long_proj_end_year]
 
-        adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-            transport_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            building_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            industry_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            ra_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            fw_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
-        adoption_curves = adoption_curves.append(
-            other_decarb.loc[:, data_start_year:long_proj_end_year]
-        )
+    """
+    sadoption_curves = sgrid_decarb.loc[:, data_start_year:long_proj_end_year].append(
+        stransport_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    sadoption_curves = sadoption_curves.append(
+        sbuilding_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    sadoption_curves = sadoption_curves.append(
+        sindustry_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    sadoption_curves = sadoption_curves.append(
+        sra_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    sadoption_curves = sadoption_curves.append(
+        sfw_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    sadoption_curves = sadoption_curves.append(
+        scdr_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
+    sadoption_curves = sadoption_curves.append(
+        sother_decarb.loc[:, data_start_year:long_proj_end_year]
+    )
 
-        adoption_curves.index.name = "Sector"
-        adoption_curves["Region"] = region
-        adoption_curves["Scenario"] = scenario
-        adoption_curves.reset_index(inplace=True)
-        adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
+    sadoption_curves.index.name = "Sector"
+    sadoption_curves["Region"] = region
+    """
+    sadoption_curves["Scenario"] = scenario
+    sadoption_curves.reset_index(inplace=True)
+    sadoption_curves.set_index(["Region", "Sector", "Metric", "Scenario"], inplace=True)
 
-        # endregion
+    # endregion
 
-    return adoption_curves
+    return adoption_curves, sadoption_curves

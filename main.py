@@ -315,6 +315,7 @@ conc_pathway, temp_pathway, sea_lvl_pathway = climate(
 # region
 
 adoption_curves = []
+sadoption_curves = []
 for j in ["baseline", "pathway"]:
     for i in range(0, len(region_list)):
         adoption_curves = pd.DataFrame(adoption_curves).append(
@@ -332,7 +333,25 @@ for j in ["baseline", "pathway"]:
                 cdr,
                 em,
                 em_mitigated,
-            ).replace(np.nan, 1)
+            )[0].replace(np.nan, 1)
+        )
+
+        sadoption_curves = pd.DataFrame(sadoption_curves).append(
+            results_analysis(
+                region_list[i],
+                j,
+                energy_demand,
+                elec_consump,
+                elec_per_adoption,
+                heat_consump,
+                heat_per_adoption,
+                transport_consump,
+                transport_per_adoption,
+                afolu_per_adoption,
+                cdr,
+                em,
+                em_mitigated,
+            )[1].replace(np.nan, 1)
         )
 
 # endregion
