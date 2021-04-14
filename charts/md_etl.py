@@ -44,6 +44,7 @@ for i in range(0, len(region_list)):
     mdFile.new_header(level=2, title="Adoption Curves")
 
     # region
+
     for j in ["baseline", "pathway"]:
         path = '"scurves-' + (region_list[i]).replace(" ", "") + "-" + j + '.html"'
 
@@ -151,6 +152,9 @@ for i in range(0, len(region_list)):
     """
     # endregion
 
+    mdFile.new_line()
+    mdFile.new_header(level=2, title="Climate")
+
     # region
 
     if region_list[i] == "World ":
@@ -163,6 +167,34 @@ for i in range(0, len(region_list)):
             mdFile.write(path)
             mdFile.write(" height='500' width='150%'></iframe>")
 
+            mdFile.new_line()
+
+    # endregion
+
+    mdFile.new_line()
+    mdFile.new_header(level=2, title="Subvector Adoption Curves")
+
+    # region
+
+    for j in ["baseline", "pathway"]:
+        for k in [
+            "Electricity",
+            "Transport",
+            "Buildings",
+            "Industry",
+            "Regenerative Agriculture",
+            "Forests & Wetlands",
+            "Other Gases",
+        ]:
+            path = (
+                '"scurvesub-' + region_list[i] + "-" + k + "-" + j + '.html"'
+            ).replace(" ", "")
+
+            mdFile.write(
+                "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+            )
+            mdFile.write(path)
+            mdFile.write(" height='500' width='150%'></iframe>")
             mdFile.new_line()
 
     # endregion

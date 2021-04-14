@@ -368,6 +368,7 @@ for i in range(0, len(region_list)):
     if region_list[i] in [
         "World ",
         "US ",
+        "EUR ",
         "SAFR ",
         "RUS ",
         "JPN ",

@@ -2092,7 +2092,7 @@ SAFR ,Bioenergy,baseline,Electricity,Max annual growth,100
 SAFR ,Bioenergy,pathway,Heat,Max annual growth,100
 SAFR ,Bioenergy,baseline,Heat,Max annual growth,100
 SAFR ,Bioenergy,baseline,Transport,Max annual growth,100
-SAFR ,Bioenergy,pathway,Transport,Max annual growth,80
+SAFR ,Bioenergy,pathway,Transport,Max annual growth,100
 JPN ,Bioenergy,pathway,Electricity,Max annual growth,100
 JPN ,Bioenergy,baseline,Electricity,Max annual growth,100
 JPN ,Bioenergy,pathway,Heat,Max annual growth,100
@@ -2289,7 +2289,7 @@ CHINA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 CHINA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
 CHINA ,Bioenergy,pathway,Heat,"Parameter a, max",-0.1
 CHINA ,Bioenergy,baseline,Heat,"Parameter a, max",100
-CHINA ,Bioenergy,pathway,Transport,"Parameter a, max",0.14
+CHINA ,Bioenergy,pathway,Transport,"Parameter a, max",0.2
 CHINA ,Bioenergy,baseline,Transport,"Parameter a, max",5
 INDIA ,Bioenergy,pathway,Electricity,"Parameter a, max",-0.04
 INDIA ,Bioenergy,baseline,Electricity,"Parameter a, max",-0.04
@@ -2541,7 +2541,7 @@ CHINA ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 CHINA ,Bioenergy,baseline,Electricity,"Parameter b, max",40
 CHINA ,Bioenergy,pathway,Heat,"Parameter b, max",100
 CHINA ,Bioenergy,baseline,Heat,"Parameter b, max",-100
-CHINA ,Bioenergy,pathway,Transport,"Parameter b, max",65
+CHINA ,Bioenergy,pathway,Transport,"Parameter b, max",55
 CHINA ,Bioenergy,baseline,Transport,"Parameter b, max",100
 INDIA ,Bioenergy,pathway,Electricity,"Parameter b, max",40
 INDIA ,Bioenergy,baseline,Electricity,"Parameter b, max",40
@@ -5689,7 +5689,7 @@ EU ,Fossil fuels,pathway,Electricity,"Parameter a, max",-0.11
 EU ,Fossil fuels,baseline,Electricity,"Parameter a, max",100
 EU ,Fossil fuels,pathway,Transport,"Parameter a, max",-0.1074
 EU ,Fossil fuels,baseline,Transport,"Parameter a, max",100
-SAFR ,Fossil fuels,pathway,Electricity,"Parameter a, max",-0.11
+SAFR ,Fossil fuels,pathway,Electricity,"Parameter a, max",-0.2
 SAFR ,Fossil fuels,baseline,Electricity,"Parameter a, max",100
 SAFR ,Fossil fuels,pathway,Transport,"Parameter a, max",-0.1074
 SAFR ,Fossil fuels,baseline,Transport,"Parameter a, max",100
@@ -5773,7 +5773,7 @@ EU ,Fossil fuels,pathway,Electricity,"Parameter a, min",-0.4
 EU ,Fossil fuels,baseline,Electricity,"Parameter a, min",100
 EU ,Fossil fuels,pathway,Transport,"Parameter a, min",-0.1074
 EU ,Fossil fuels,baseline,Transport,"Parameter a, min",100
-SAFR ,Fossil fuels,pathway,Electricity,"Parameter a, min",-0.4
+SAFR ,Fossil fuels,pathway,Electricity,"Parameter a, min",-0.3
 SAFR ,Fossil fuels,baseline,Electricity,"Parameter a, min",100
 SAFR ,Fossil fuels,pathway,Transport,"Parameter a, min",-0.1074
 SAFR ,Fossil fuels,baseline,Transport,"Parameter a, min",100
@@ -5857,9 +5857,9 @@ EU ,Fossil fuels,pathway,Electricity,"Parameter b, max",25
 EU ,Fossil fuels,baseline,Electricity,"Parameter b, max",-100
 EU ,Fossil fuels,pathway,Transport,"Parameter b, max",15
 EU ,Fossil fuels,baseline,Transport,"Parameter b, max",-100
-SAFR ,Fossil fuels,pathway,Electricity,"Parameter b, max",25
+SAFR ,Fossil fuels,pathway,Electricity,"Parameter b, max",30
 SAFR ,Fossil fuels,baseline,Electricity,"Parameter b, max",-100
-SAFR ,Fossil fuels,pathway,Transport,"Parameter b, max",15
+SAFR ,Fossil fuels,pathway,Transport,"Parameter b, max",37
 SAFR ,Fossil fuels,baseline,Transport,"Parameter b, max",-100
 JPN ,Fossil fuels,pathway,Electricity,"Parameter b, max",25
 JPN ,Fossil fuels,baseline,Electricity,"Parameter b, max",-100
@@ -5941,9 +5941,9 @@ EU ,Fossil fuels,pathway,Electricity,"Parameter b, min",15
 EU ,Fossil fuels,baseline,Electricity,"Parameter b, min",-100
 EU ,Fossil fuels,pathway,Transport,"Parameter b, min",15
 EU ,Fossil fuels,baseline,Transport,"Parameter b, min",-100
-SAFR ,Fossil fuels,pathway,Electricity,"Parameter b, min",15
+SAFR ,Fossil fuels,pathway,Electricity,"Parameter b, min",0
 SAFR ,Fossil fuels,baseline,Electricity,"Parameter b, min",-100
-SAFR ,Fossil fuels,pathway,Transport,"Parameter b, min",15
+SAFR ,Fossil fuels,pathway,Transport,"Parameter b, min",37
 SAFR ,Fossil fuels,baseline,Transport,"Parameter b, min",-100
 JPN ,Fossil fuels,pathway,Electricity,"Parameter b, min",15
 JPN ,Fossil fuels,baseline,Electricity,"Parameter b, min",-100
@@ -11353,7 +11353,7 @@ SAFR ,Oil,pathway,Electricity,"Parameter a, max",-0.1074
 SAFR ,Oil,baseline,Heat,"Parameter a, max",100
 SAFR ,Oil,pathway,Heat,"Parameter a, max",-0.01
 SAFR ,Oil,baseline,Transport,"Parameter a, max",100
-SAFR ,Oil,pathway,Transport,"Parameter a, max",-0.08
+SAFR ,Oil,pathway,Transport,"Parameter a, max",-0.09
 JPN ,Oil,baseline,Electricity,"Parameter a, max",100
 JPN ,Oil,pathway,Electricity,"Parameter a, max",-0.1074
 JPN ,Oil,baseline,Heat,"Parameter a, max",100
@@ -11479,7 +11479,7 @@ SAFR ,Oil,pathway,Electricity,"Parameter a, min",-0.1074
 SAFR ,Oil,baseline,Heat,"Parameter a, min",100
 SAFR ,Oil,pathway,Heat,"Parameter a, min",-0.2
 SAFR ,Oil,baseline,Transport,"Parameter a, min",100
-SAFR ,Oil,pathway,Transport,"Parameter a, min",-0.2
+SAFR ,Oil,pathway,Transport,"Parameter a, min",-0.09
 JPN ,Oil,baseline,Electricity,"Parameter a, min",100
 JPN ,Oil,pathway,Electricity,"Parameter a, min",-0.1074
 JPN ,Oil,baseline,Heat,"Parameter a, min",100
@@ -11605,7 +11605,7 @@ SAFR ,Oil,pathway,Electricity,"Parameter b, max",30
 SAFR ,Oil,baseline,Heat,"Parameter b, max",-100
 SAFR ,Oil,pathway,Heat,"Parameter b, max",50
 SAFR ,Oil,baseline,Transport,"Parameter b, max",-100
-SAFR ,Oil,pathway,Transport,"Parameter b, max",23
+SAFR ,Oil,pathway,Transport,"Parameter b, max",37
 JPN ,Oil,baseline,Electricity,"Parameter b, max",100
 JPN ,Oil,pathway,Electricity,"Parameter b, max",30
 JPN ,Oil,baseline,Heat,"Parameter b, max",-100
@@ -11731,7 +11731,7 @@ SAFR ,Oil,pathway,Electricity,"Parameter b, min",30
 SAFR ,Oil,baseline,Heat,"Parameter b, min",-100
 SAFR ,Oil,pathway,Heat,"Parameter b, min",10
 SAFR ,Oil,baseline,Transport,"Parameter b, min",-100
-SAFR ,Oil,pathway,Transport,"Parameter b, min",23
+SAFR ,Oil,pathway,Transport,"Parameter b, min",37
 JPN ,Oil,baseline,Electricity,"Parameter b, min",100
 JPN ,Oil,pathway,Electricity,"Parameter b, min",30
 JPN ,Oil,baseline,Heat,"Parameter b, min",-100
@@ -13869,7 +13869,7 @@ EUR ,Solar,pathway,Electricity,"Parameter a, max",0.18
 EUR ,Solar,baseline,Electricity,"Parameter a, max",100
 EU ,Solar,pathway,Electricity,"Parameter a, max",5
 EU ,Solar,baseline,Electricity,"Parameter a, max",100
-SAFR ,Solar,pathway,Electricity,"Parameter a, max",0.1
+SAFR ,Solar,pathway,Electricity,"Parameter a, max",0.16
 SAFR ,Solar,baseline,Electricity,"Parameter a, max",100
 JPN ,Solar,pathway,Electricity,"Parameter a, max",5
 JPN ,Solar,baseline,Electricity,"Parameter a, max",100
@@ -13995,7 +13995,7 @@ EUR ,Solar,pathway,Electricity,"Parameter b, min",0
 EUR ,Solar,baseline,Electricity,"Parameter b, min",-100
 EU ,Solar,pathway,Electricity,"Parameter b, min",0
 EU ,Solar,baseline,Electricity,"Parameter b, min",-100
-SAFR ,Solar,pathway,Electricity,"Parameter b, min",30
+SAFR ,Solar,pathway,Electricity,"Parameter b, min",50
 SAFR ,Solar,baseline,Electricity,"Parameter b, min",-100
 JPN ,Solar,pathway,Electricity,"Parameter b, min",0
 JPN ,Solar,baseline,Electricity,"Parameter b, min",-100
@@ -16137,7 +16137,7 @@ EUR ,Wind,pathway,Electricity,"Parameter b, min",0
 EUR ,Wind,baseline,Electricity,"Parameter b, min",-100
 EU ,Wind,pathway,Electricity,"Parameter b, min",0
 EU ,Wind,baseline,Electricity,"Parameter b, min",-100
-SAFR ,Wind,pathway,Electricity,"Parameter b, min",30
+SAFR ,Wind,pathway,Electricity,"Parameter b, min",55
 SAFR ,Wind,baseline,Electricity,"Parameter b, min",-100
 JPN ,Wind,pathway,Electricity,"Parameter b, min",0
 JPN ,Wind,baseline,Electricity,"Parameter b, min",-100

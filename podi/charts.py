@@ -82,7 +82,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Transport",
+            name="V2: Transport",
             line=dict(width=3, color="black"),
             x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Transport")][
@@ -97,7 +97,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Buildings",
+            name="V3: Buildings",
             line=dict(width=3, color="black"),
             x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Buildings")][
@@ -112,7 +112,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Industry",
+            name="V4: Industry",
             line=dict(width=3, color="black"),
             x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Industry")][
@@ -127,7 +127,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Regenerative Agriculture",
+            name="V5: Regenerative Agriculture",
             line=dict(width=3, color="black"),
             x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[
@@ -142,7 +142,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Forests & Wetlands",
+            name="V6: Forests & Wetlands",
             line=dict(width=3, color="black"),
             x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
@@ -157,7 +157,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Other Gases",
+            name="V7: Other Gases",
             line=dict(width=3, color="black"),
             x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Other Gases")][
@@ -172,7 +172,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Electricity",
+            name="V1: Electricity",
             line=dict(width=3, color="#B279A2", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
@@ -186,7 +186,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Transport",
+            name="V2: Transport",
             line=dict(width=3, color="#7AA8B8", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Transport")][
@@ -200,7 +200,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Buildings",
+            name="V3: Buildings",
             line=dict(width=3, color="#F58518", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Buildings")][
@@ -214,7 +214,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Industry",
+            name="V4: Industry",
             line=dict(width=3, color="#60738C", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Industry")][
@@ -228,7 +228,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Regenerative Agriculture",
+            name="V5: Regenerative Agriculture",
             line=dict(width=3, color="#EECA3B", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[
@@ -242,7 +242,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Forests & Wetlands",
+            name="V6: Forests & Wetlands",
             line=dict(width=3, color="#54A24B", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
@@ -256,7 +256,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Other Gases",
+            name="V7: Other Gases",
             line=dict(width=3, color="#E45756", dash="dot"),
             x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
             y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Other Gases")][
@@ -476,13 +476,13 @@ for i in range(0, len(region_list)):
 
         fig.add_vrect(x0=start_year, x1=2020, fillcolor="grey", opacity=0.6, line_width=0)
     
-        fig.show()
+        #fig.show()
 
         if save_figs is True:
             pio.write_html(
                 fig,
                 file=(
-                    "./charts/scurvessub-" + region_list[i] + "-" + j + "-" scenario + ".html"
+                    "./charts/scurvessub-" + region_list[i] + "-" + j + "-" + scenario + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
             )
@@ -2545,23 +2545,17 @@ for i in range(0, len(region_list)):
 # region
 
 bar_emissions_goal = [
+    ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
     ("x",),
+    ("determined through linear extrapolation using the U.S’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2025.", "of net zero emissions, which was set in President Biden’s climate plan."),
     ("x",),
-    ("determined through linear extrapolation using the U.S’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2025.", 
-    "of net zero emissions, which was set in President Biden’s <br>climate plan."),
+    ("set in Brazil’s 2015 NDC.", "determined through linear extrapolation using Brazil’s 2025 and <br>2030 emissions goals set in their 2015 NDC."), ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
     ("x",),
-    ("set in Brazil’s 2015 NDC.", 
-    "determined through linear extrapolation using Brazil’s 2025 and <br>2030 emissions goals set in their 2015 NDC."),
+    ("set in South Africa’s 2015 NDC.", "determined through linear extrapolation using South Africa’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030. South Africa submitted a Low Emission <br>Development Scenario in 2020, but the scenario does not specify a 2050 emissions goal."),
     ("x",),
+    ("set in Russia’s 2015 NDC.", "determined through linear extrapolation using Russia’s 1990 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030."),
     ("x",),
-    ("set in South Africa’s 2015 NDC.", 
-    "determined through linear extrapolation using South Africa’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030. South Africa submitted a Low Emission <br>Development Scenario in 2020, but the scenario does not specify a 2050 emissions goal."),
-    ("x",),
-    ("set in Russia’s 2015 NDC.",
-    "determined through linear extrapolation using Russia’s 1990 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030."),
-    ("x",),
-    ("determined by China’s 2020 NDC update to peak emissions before <br>2030.", 
-    "of net zero emissions, which was announced by President Xi Jinping in <br>September 2020."),
+    ("determined by China’s 2020 NDC update to peak emissions before <br>2030.", "of net zero emissions, which was announced by President Xi Jinping in <br>September 2020."),
     ("set in India’s 2015 NDC.", 
     "determined through linear extrapolation using India’s 2017 emissions <br>and the NDC set in 2015, which set an emissions goal for 2030."),
     ("set in Japan’s 2015 NDC.", 
@@ -2572,7 +2566,7 @@ bar_emissions_goal = [
 
 scenario = 'pathway'
 
-for year in [2050]:
+for year in [2030]:
     for i in range(0, len(region_list)):
         em_mit_electricity = em_mitigated.loc[
             region_list[i], "Electricity", slice(None)
@@ -2654,32 +2648,6 @@ for year in [2050]:
                     7: "CDR",
                 }
             )
-        else:
-            em_mit = pd.DataFrame(
-                [
-                    em_mit_electricity,
-                    em_mit_transport,
-                    em_mit_buildings,
-                    em_mit_industry,
-                    em_mit_ra,
-                    em_mit_fw,
-                    em_mit_othergas,
-                ]
-            ).rename(
-                index={
-                    0: "Electricity",
-                    1: "Transport",
-                    2: "Buildings",
-                    3: "Industry",
-                    4: "Forests & Wetlands",
-                    5: "Agriculture",
-                    6: "CH4, N2O, F-gases",
-                }
-            )
-
-        em_mit.loc[:, :2020] = 0
-
-        if region_list[i] in ["World ", 'US ', 'CHINA ', 'EUR ']:
             fig = (
                 ((em_mit) / 1000)
                 .reindex(
@@ -2697,7 +2665,6 @@ for year in [2050]:
                 .round(decimals=4)
                 .clip(lower=0)
             )
-
             data = {
                 "Electricity": [
                     0,
@@ -2811,6 +2778,27 @@ for year in [2050]:
                 ],
             }
         else:
+            em_mit = pd.DataFrame(
+                [
+                    em_mit_electricity,
+                    em_mit_transport,
+                    em_mit_buildings,
+                    em_mit_industry,
+                    em_mit_ra,
+                    em_mit_fw,
+                    em_mit_othergas,
+                ]
+            ).rename(
+                index={
+                    0: "Electricity",
+                    1: "Transport",
+                    2: "Buildings",
+                    3: "Industry",
+                    4: "Forests & Wetlands",
+                    5: "Agriculture",
+                    6: "CH4, N2O, F-gases",
+                }
+            )
             fig = (
                 ((em_mit) / 1000)
                 .reindex(
@@ -2827,7 +2815,6 @@ for year in [2050]:
                 .round(decimals=4)
                 .clip(lower=0)
             )
-
             data = {
                 "Electricity": [
                     0,
@@ -2920,7 +2907,8 @@ for year in [2050]:
                     "Total",
                 ],
             }
-
+        
+        em_mit.loc[:, :2020] = 0
         opacity = 0.5
 
         if year == 2030:
@@ -2929,6 +2917,7 @@ for year in [2050]:
             j = 1
 
         if region_list[i] in ["World ", 'US ', 'CHINA ', 'EUR ']:
+            
             figure = go.Figure(
                 data=[
                     go.Bar(
@@ -2997,6 +2986,7 @@ for year in [2050]:
                     ),
                 ]
             )
+            
             figure.add_shape(
                 type="line",
                 x0=em_mit_ndc[
@@ -3012,23 +3002,7 @@ for year in [2050]:
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
                 name="NDC",
             )
-            """
-            figure.add_trace(
-                go.Scatter(
-                    x=[
-                        em_mit_ndc[
-                            (em_mit_ndc["Region"] == region_list[i])
-                            & (em_mit_ndc.index == year)
-                        ]["em_mit"].values[0]
-                        * 0.9
-                    ],
-                    y=["CH4, N2O, F-gases"],
-                    text=["NDC " + str(year)],
-                    mode="text",
-                    showlegend=False,
-                )
-            )
-            """
+
             figure.add_annotation(
                 text="The blue dotted line represents an emissions mitigation goal " + bar_emissions_goal[i][j],
                 xref="paper",
@@ -3042,6 +3016,7 @@ for year in [2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
+        
         else:
             figure = go.Figure(
                 data=[
@@ -3126,23 +3101,7 @@ for year in [2050]:
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
                 name="NDC",
             )
-            """
-            figure.add_trace(
-                go.Scatter(
-                    x=[
-                        em_mit_ndc[
-                            (em_mit_ndc["Region"] == region_list[i])
-                            & (em_mit_ndc.index == year)
-                        ]["em_mit"].values[0]
-                        * 0.9
-                    ],
-                    y=["CH4, N2O, F-gases"],
-                    text=["NDC " + str(year)],
-                    mode="text",
-                    showlegend=False,
-                )
-            )
-            """
+
             figure.add_annotation(
                 text="The blue dotted line represents an emissions mitigation goal " + bar_emissions_goal[i][j],
                 xref="paper",
@@ -3157,101 +3116,44 @@ for year in [2050]:
                 opacity=1,
             )
 
-        if region_list[i] == "World ":
-            figure.add_shape(
-                type="line",
-                x0=em_mit_ndc[
-                    (em_mit_ndc["Region"] == region_list[i])
-                    & (em_mit_ndc.index == year)
-                ]["em_mit"].values[0],
-                y0=-0.5,
-                x1=em_mit_ndc[
-                    (em_mit_ndc["Region"] == region_list[i])
-                    & (em_mit_ndc.index == year)
-                ]["em_mit"].values[0],
-                y1=8.5,
-                line=dict(color="LightSeaGreen", width=3, dash="dot"),
-                name="Target",
-            )
+        if region_list[i] in ['World ', 'US ', 'CHINA ', 'EUR ', "SAFR ", "RUS ", "JPN ", "BRAZIL ", "INDIA ", ]:
 
-            figure.add_trace(
-                go.Scatter(
-                    x=[
-                        em_mit_ndc[
-                            (em_mit_ndc["Region"] == region_list[i])
-                            & (em_mit_ndc.index == year)
-                        ]["em_mit"].values[0]
-                        * 0.85
-                    ],
-                    y=["CDR"],
-                    text=["Mitigation Target " + str(year)],
-                    mode="text",
-                    showlegend=False,
-                )
-            )
+            ei = em_mit.loc[:, year].values.sum()/1e3 / (em_mit_ndc[(em_mit_ndc["Region"] == region_list[i]) & (em_mit_ndc.index == year)]["em_mit"].values[0])
 
-            figure.update_layout(margin=dict())
             figure.add_annotation(
-                text="Emissions mitigation target values represent a 50% reduction in the year 2030, and net-zero emissions in the year 2050.",
+                text="Epic Index = PD Projected Mitigation Potential / Target Mitigation = "
+                + str((em_mit.loc[:, year].values.sum()/1e3).round(decimals=0))
+                + " GtCO2e"
+                + "  /  "
+                + str(((em_mit_ndc[(em_mit_ndc["Region"] == region_list[i]) & (em_mit_ndc.index == year)]["em_mit"].values[0])).round(decimals=0))
+                + " GtCO2e = " + str(ei.round(decimals=2)),
                 xref="paper",
                 yref="paper",
-                x=-0.2,
-                y=1.14,
-                showarrow=False,
-                font=dict(size=10, color="#2E3F5C"),
-                align="left",
-                borderpad=4,
-                bgcolor="#ffffff",
-                opacity=1,
-            )
-        else:
-            figure.update_layout(margin=dict())
-            figure.add_annotation(
-                text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
-                xref="paper",
-                yref="paper",
-                x=-0.2,
+                x=0,
                 y=-0.25,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
                 align="left",
                 borderpad=4,
+                borderwidth=2,
                 bgcolor="#ffffff",
                 opacity=1,
             )
-        
         '''
-        ei = em_mit.loc[:, year].values.sum() / (em_mit_ndc[
-                    (em_mit_ndc["Region"] == region_list[i])
-                    & (em_mit_ndc.index == year)
-                ]["em_mit"].values[0])
-
-        figure.add_shape(type='line', x0=ei, x1=ei, y0=-0.5,y1=8.5,
-                line=dict(color="LightSeaGreen", width=3, dash="dot"), name='EI'
-            )
-
         figure.add_annotation(
-            text="Epic Index = Measured Emissions  /  PD Projected Emissions"
-            + "<br>"
-            + "EI = "
-            + str((em_hist.loc[:, data_end_year].values[0] / 1000).round(decimals=3))
-            + " GtCO2e"
-            + "  /  "
-            + str((em.sum().loc[data_end_year] / 1000).round(decimals=3))
-            + " GtCO2e",
+            text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
             xref="paper",
             yref="paper",
-            x=0.4,
-            y=1.15,
+            x=-0.2,
+            y=-0.25,
             showarrow=False,
             font=dict(size=10, color="#2E3F5C"),
             align="left",
             borderpad=4,
-            borderwidth=2,
             bgcolor="#ffffff",
             opacity=1,
         )
-        '''
+        '''  
         figure.update_layout(
             title="Climate Mitigation Potential, "
             + str(year)
@@ -7315,55 +7217,6 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-##############################
-# ELECTRICITY PERCENT ADOPTION
-##############################
-
-# region
-
-scenario = scenario
-start_year = start_year
-
-for i in range(0, len(region_list)):
-    fig = elec_per_adoption.loc[region_list[i], slice(None), scenario]
-    plt.figure(i)
-    plt.plot(fig.T)
-    plt.legend(fig.T)
-    plt.title(region_list[i])
-    elec_per_adoption.loc[region_list[i], slice(None), scenario].loc[:, 2019]
-
-# endregion
-
-#######################
-# HEAT PERCENT ADOPTION
-#######################
-
-# region
-scenario = "pathway"
-
-for i in range(0, len(region_list)):
-    plt.figure(i)
-    plt.plot(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.legend(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.title(region_list[i])
-
-# endregion
-
-####################################
-# NONELEC TRANSPORT PERCENT ADOPTION
-####################################
-
-# region
-scenario = "pathway"
-
-for i in range(0, len(region_list)):
-    plt.figure(i)
-    plt.plot(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.legend(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.title(region_list[i])
-
-# endregion
-
 ####################
 # EPIC INDEX (OLD) #
 ####################
@@ -7658,6 +7511,55 @@ for i in range(0, len(region_list)):
         )
     plt.clf()
 
+
+# endregion
+
+##############################
+# ELECTRICITY PERCENT ADOPTION
+##############################
+
+# region
+
+scenario = scenario
+start_year = start_year
+
+for i in range(0, len(region_list)):
+    fig = elec_per_adoption.loc[region_list[i], slice(None), scenario]
+    plt.figure(i)
+    plt.plot(fig.T)
+    plt.legend(fig.T)
+    plt.title(region_list[i])
+    elec_per_adoption.loc[region_list[i], slice(None), scenario].loc[:, 2019]
+
+# endregion
+
+#######################
+# HEAT PERCENT ADOPTION
+#######################
+
+# region
+scenario = "pathway"
+
+for i in range(0, len(region_list)):
+    plt.figure(i)
+    plt.plot(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.legend(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.title(region_list[i])
+
+# endregion
+
+####################################
+# NONELEC TRANSPORT PERCENT ADOPTION
+####################################
+
+# region
+scenario = "pathway"
+
+for i in range(0, len(region_list)):
+    plt.figure(i)
+    plt.plot(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.legend(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
+    plt.title(region_list[i])
 
 # endregion
 

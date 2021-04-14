@@ -427,7 +427,16 @@ def results_analysis(
         .rename(index={"Transport": "Efficiency"})
     )
     stransport_decarb.index.name = "Metric"
-
+    """
+    stransport_decarb = (
+        transport_consump.loc[region2, decarb, scenario, :]
+        .groupby("Metric")
+        .sum()
+        .divide(
+            transport_consump.loc[region2, decarb, scenario, :].groupby("Metric").sum().sum()
+        )
+    ).multiply(grid_decarb.values)
+    """
     stransport_decarb = pd.concat(
         [stransport_decarb], keys=["Transport"], names=["Sector"]
     )

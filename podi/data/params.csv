@@ -140,13 +140,13 @@ AFRICA ,Transport,Oil,-0.09,37.0,0.95,0.0
 AFRICA ,Transport,Bioenergy,0.13,64.999,1.0,0.0
 AFRICA ,Transport,Other fuels,-0.05,10.0,0.05,0.0
 SAFR ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
-SAFR ,Electricity,Fossil fuels,-0.226,25.0,0.65,0.0
+SAFR ,Electricity,Fossil fuels,-0.3,30.0,0.65,0.0
 SAFR ,Electricity,Geothermal,0.094,13.623,0.0,0.0
 SAFR ,Electricity,Hydroelectricity,100.0,68.113,0.0,0.0
 SAFR ,Electricity,Nuclear,-0.01,0.0,0.31,0.0
-SAFR ,Electricity,Solar,0.1,45.736,0.5,0.0
+SAFR ,Electricity,Solar,0.091,50.0,0.5,0.0
 SAFR ,Electricity,Tide and wave,0.1,49.999,0.011,0.0
-SAFR ,Electricity,Wind,0.14,45.394,0.59,0.0
+SAFR ,Electricity,Wind,0.094,55.0,0.59,0.0
 SAFR ,Heat,Bioenergy,-0.4,0.0,0.135,0.0
 SAFR ,Heat,Coal,-0.1,19.996,0.51,0.0
 SAFR ,Heat,Geothermal,0.014,14.994,0.05,0.0
@@ -156,7 +156,7 @@ SAFR ,Heat,Oil,-0.097,10.0,0.006,0.0
 SAFR ,Heat,Other sources,-0.1,0.005,0.9,0.0
 SAFR ,Heat,Solar thermal,0.15,60.0,0.54,0.0
 SAFR ,Heat,Waste,4.991,0.0,0.15,0.0
-SAFR ,Transport,Oil,-0.2,23.0,0.95,0.0
+SAFR ,Transport,Oil,-0.09,37.0,0.95,0.0
 SAFR ,Transport,Bioenergy,0.13,64.999,1.0,0.0
 SAFR ,Transport,Other fuels,-0.05,10.0,0.05,0.0
 ME ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
@@ -237,7 +237,7 @@ CHINA ,Heat,Other sources,-0.5,0.0,0.9,0.0
 CHINA ,Heat,Solar thermal,0.25,60.0,0.8,0.0
 CHINA ,Heat,Waste,0.126,50.0,0.15,0.0
 CHINA ,Transport,Oil,-0.09,37.0,0.95,0.0
-CHINA ,Transport,Bioenergy,0.114,65.0,1.02,0.0
+CHINA ,Transport,Bioenergy,0.157,54.999,1.02,0.0
 CHINA ,Transport,Other fuels,-0.08,40.0,0.1,0.0
 INDIA ,Electricity,Biomass and waste,-0.3,0.0,0.05,0.0
 INDIA ,Electricity,Fossil fuels,-0.297,30.0,0.746,0.0
