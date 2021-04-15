@@ -11,6 +11,10 @@ def func(x, a, b, c, d):
     return c / (1 + np.exp(-a * (x - b))) + d
 
 
+def func2(x, a, b, c, d):
+    return a * x + b
+
+
 def adoption_curve(value, region, scenario, sector):
     parameters = pd.read_csv("podi/data/tech_parameters.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
@@ -141,7 +145,14 @@ def adoption_curve(value, region, scenario, sector):
 
     if scenario == "baseline":
         x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
-        y = np.full((len(x), 1), y_data[-1])
+        # y = np.full((len(x), 1), y_data[-1])
+        y = func2(
+            x,
+            min(0.001, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+            (y_data[-1]),
+            0,
+            0,
+        )
         genetic_parameters = [0, 0, 0, 0]
     else:
         # "seed" the numpy random number generator for repeatable results.

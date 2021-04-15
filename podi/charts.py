@@ -35,9 +35,9 @@ unit = [unit_name[0], unit_val[0]]
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
 save_figs = True
-show_figs = True
+show_figs = False
 start_year = 2000
-scenario = 'pathway'
+scenario = 'baseline'
 
 # endregion
 
@@ -475,9 +475,9 @@ for i in range(0, len(region_list)):
         )
 
         fig.add_vrect(x0=start_year, x1=2020, fillcolor="grey", opacity=0.6, line_width=0)
-    
-        #fig.show()
 
+        if show_figs is True:
+            fig.show()
         if save_figs is True:
             pio.write_html(
                 fig,
@@ -2191,6 +2191,20 @@ for i in range(0, len(region_list)):
             )
         )
 
+        fig.add_annotation(
+            text="Cumulative CDR in 2100: " + str(fig2[(fig2["Sector"] == "CDR") & (fig2['Year'] == 2100)]["Emissions, GtCO2e"].values[0].round(2)) + "GtCO2e",
+            xref="paper",
+            yref="paper",
+            x=0,
+            y=-0.1,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
     """
     fig.add_trace(
         go.Scatter(
@@ -2508,7 +2522,6 @@ for i in range(0, len(region_list)):
     fig.add_vrect(x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0)
     """
 
-    fig.update_layout(margin=dict())
     fig.add_annotation(
         text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissionsfactors are from IEA Emissions Factors 2020",
         xref="paper",
@@ -2566,7 +2579,7 @@ bar_emissions_goal = [
 
 scenario = 'pathway'
 
-for year in [2030]:
+for year in [2050]:
     for i in range(0, len(region_list)):
         em_mit_electricity = em_mitigated.loc[
             region_list[i], "Electricity", slice(None)
@@ -3171,21 +3184,22 @@ for year in [2030]:
             showlegend=False,
         )
 
-        figure.show()
-
-        pio.write_html(
-            figure,
-            file=(
-                "./charts/em1-"
-                + "pathway"
-                + "-"
-                + str(year)
-                + "-"
-                + region_list[i]
-                + ".html"
-            ).replace(" ", ""),
-            auto_open=False,
-        )
+        if show_figs is True:
+            figure.show()
+        if save_figs is True:
+            pio.write_html(
+                figure,
+                file=(
+                    "./charts/em1-"
+                    + "pathway"
+                    + "-"
+                    + str(year)
+                    + "-"
+                    + region_list[i]
+                    + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
 
 # endregion
 
@@ -3352,7 +3366,6 @@ fig.update_layout(
     yaxis={"title": "ppmv CO2"},
 )
 
-fig.update_layout(margin=dict())
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
     xref="paper",
@@ -7538,7 +7551,7 @@ for i in range(0, len(region_list)):
 #######################
 
 # region
-scenario = "pathway"
+scenario = scenario
 
 for i in range(0, len(region_list)):
     plt.figure(i)
@@ -7553,7 +7566,7 @@ for i in range(0, len(region_list)):
 ####################################
 
 # region
-scenario = "pathway"
+scenario = scenario
 
 for i in range(0, len(region_list)):
     plt.figure(i)

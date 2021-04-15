@@ -34,6 +34,7 @@ pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()
 
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
+# region_list = ["World "]
 
 # endregion
 

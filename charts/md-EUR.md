@@ -32,21 +32,18 @@ European Union regional grouping, Albania, Belarus, Bosnia and Herzegovina, Gibr
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-EUR.html" height='500' width='150%'></iframe>  
   
 
-## Climate
-  
-
 ## Subvector Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Electricity-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Transport-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Buildings-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Industry-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-RegenerativeAgriculture-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Forests&Wetlands-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-OtherGases-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Electricity-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Transport-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Buildings-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Industry-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-EUR-OtherGases-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Electricity-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Transport-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Buildings-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Industry-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-RegenerativeAgriculture-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Forests&Wetlands-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-OtherGases-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Electricity-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Transport-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Buildings-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Industry-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-OtherGases-pathway.html" height='500' width='150%'></iframe>  

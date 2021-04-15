@@ -32,21 +32,18 @@
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-JPN.html" height='500' width='150%'></iframe>  
   
 
-## Climate
-  
-
 ## Subvector Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Electricity-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Transport-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Buildings-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Industry-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-RegenerativeAgriculture-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Forests&Wetlands-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-OtherGases-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Electricity-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Transport-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Buildings-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Industry-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-JPN-OtherGases-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Electricity-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Transport-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Buildings-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Industry-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-RegenerativeAgriculture-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Forests&Wetlands-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-OtherGases-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Electricity-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Transport-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Buildings-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Industry-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-OtherGases-pathway.html" height='500' width='150%'></iframe>  

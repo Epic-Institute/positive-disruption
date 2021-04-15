@@ -40,7 +40,6 @@ for i in range(0, len(region_list)):
 
     mdFile.write(region_dict[region_list[i]])
     mdFile.new_line()
-
     mdFile.new_header(level=2, title="Adoption Curves")
 
     # region
@@ -152,24 +151,25 @@ for i in range(0, len(region_list)):
     """
     # endregion
 
-    mdFile.new_line()
-    mdFile.new_header(level=2, title="Climate")
-
-    # region
-
     if region_list[i] == "World ":
-        for k in ["ghgconc", "forcing", "temp"]:
-            path = '"' + k + "-" + (region_list[i]).replace(" ", "") + '.html"'
+        mdFile.new_line()
+        mdFile.new_header(level=2, title="Climate")
 
-            mdFile.write(
-                "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
-            )
-            mdFile.write(path)
-            mdFile.write(" height='500' width='150%'></iframe>")
+        # region
 
-            mdFile.new_line()
+        if region_list[i] == "World ":
+            for k in ["ghgconc", "forcing", "temp"]:
+                path = '"' + k + "-" + (region_list[i]).replace(" ", "") + '.html"'
 
-    # endregion
+                mdFile.write(
+                    "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+                )
+                mdFile.write(path)
+                mdFile.write(" height='500' width='150%'></iframe>")
+
+                mdFile.new_line()
+
+        # endregion
 
     mdFile.new_line()
     mdFile.new_header(level=2, title="Subvector Adoption Curves")
@@ -187,7 +187,7 @@ for i in range(0, len(region_list)):
             "Other Gases",
         ]:
             path = (
-                '"scurvesub-' + region_list[i] + "-" + k + "-" + j + '.html"'
+                '"scurvessub-' + region_list[i] + "-" + k + "-" + j + '.html"'
             ).replace(" ", "")
 
             mdFile.write(

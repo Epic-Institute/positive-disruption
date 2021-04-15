@@ -32,21 +32,18 @@ All countries not included in OECD regional grouping.
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-NonOECD.html" height='500' width='150%'></iframe>  
   
 
-## Climate
-  
-
 ## Subvector Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Electricity-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Transport-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Buildings-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Industry-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-RegenerativeAgriculture-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Forests&Wetlands-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-OtherGases-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Electricity-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Transport-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Buildings-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Industry-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvesub-NonOECD-OtherGases-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Electricity-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Transport-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Buildings-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Industry-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-RegenerativeAgriculture-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Forests&Wetlands-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-OtherGases-baseline.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Electricity-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Transport-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Buildings-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Industry-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-NonOECD-OtherGases-pathway.html" height='500' width='150%'></iframe>  
