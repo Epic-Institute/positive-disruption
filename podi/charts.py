@@ -2401,6 +2401,25 @@ for i in range(0, len(region_list)):
                 stackgroup="five",
             )
         )
+        fig.add_trace(
+            go.Scatter(
+                x=pd.Series(2030),
+                y=pd.Series(em_hist.loc[region_list[i], 2019].values[0] / 2000),
+                marker_color="#f71be9",
+                name='50% reduction by 2030',
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=pd.Series(2050),
+                y=pd.Series(0),
+                marker_color="#211df2",
+                name='Net-zero by 2050',
+            )
+        )
+
+
     fig.add_trace(
         go.Scatter(
             name="Baseline",
@@ -2417,7 +2436,6 @@ for i in range(0, len(region_list)):
             stackgroup="six",
         )
     )
-
 
     if region_list[i] in ["US "]:
         fig.add_trace(
@@ -2503,25 +2521,6 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
-    else:
-        fig.add_trace(
-            go.Scatter(
-                x=2030,
-                y=pd.Series(em_hist.loc[region_list[i], 2020].values[0] / 1000) * 0.5,
-                marker_color="#f71be9",
-                name=ndcs[i][2][0],
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                x=2050,
-                y=0,
-                marker_color="#211df2",
-                name=ndcs[i][2][1],
-            )
-        )
-
 
         '''
         fig.add_annotation(
