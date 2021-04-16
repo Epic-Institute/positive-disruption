@@ -2192,11 +2192,11 @@ for i in range(0, len(region_list)):
         )
 
         fig.add_annotation(
-            text="Cumulative CDR in 2100: " + str(fig2[(fig2["Sector"] == "CDR") & (fig2['Year'] == 2100)]["Emissions, GtCO2e"].values[0].round(2)) + "GtCO2e",
+            text="Cumulative CDR in 2100: " + str(fig2[(fig2["Sector"] == "CDR") & (fig2['Year'] == 2100)]["Emissions, GtCO2e"].values[0].round(1)) + " GtCO2e",
             xref="paper",
             yref="paper",
-            x=0,
-            y=-0.1,
+            x=0.05,
+            y=0.05,
             showarrow=False,
             font=dict(size=10, color="#2E3F5C"),
             align="left",
@@ -3204,195 +3204,6 @@ for year in [2050]:
 # endregion
 
 #################################
-# CO2 ATMOSPHERIC CONCENTRATION #
-#################################
-
-# region
-# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
-
-CONCENTRATION_CO2 = "simpleNbox.Ca"
-
-low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
-default = pyhector.run(rcp19, {"temperature": {"S": 3}})
-high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
-
-hist = pd.DataFrame(pd.read_csv("podi/data/CO2_conc.csv")).set_index(
-    ["Region", "Model", "Metric", "Scenario"]
-)
-hist.columns = hist.columns.astype(int)
-hist = hist.loc["World ", "NOAA", "PPM CO2", "pathway"].T.dropna()
-
-results = (
-    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
-    .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
-    .droplevel(["UNIT"])
-)
-results.columns = results.columns.astype(int)
-
-results19 = curve_smooth(
-    pd.DataFrame(
-        results.loc[
-            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ].loc[2010:]
-    ).T,
-    "quadratic",
-    4,
-).T
-
-results26 = curve_smooth(
-    pd.DataFrame(
-        results.loc[
-            "GCAM4", "SSP2-26", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ].loc[2010:]
-    ).T,
-    "quadratic",
-    4,
-).T
-
-results60 = curve_smooth(
-    pd.DataFrame(
-        results.loc[
-            "GCAM4", "SSP2-Baseline", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ].loc[2010:]
-    ).T,
-    "quadratic",
-    4,
-).T
-
-pd20 = (
-    pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv"))
-    .set_index(["Region", "Metric", "Units", "Scenario"])
-    .droplevel(["Units"])
-)
-pd20.columns = pd20.columns.astype(int)
-
-
-pd20.loc["World ", "Atm conc CO2", "pathway"] = pd20.loc[
-    "World ", "Atm conc CO2", "pathway"
-] * (hist[2019] / pd20.loc["World ", "Atm conc CO2", "pathway"].loc[2019])
-results19 = results19 * (hist[2021] / results19[results19.index == 2021].values[0][0])
-results26 = results26 * (hist[2021] / results26[results26.index == 2021].values[0][0])
-results60 = results60 * (hist[2021] / results60[results60.index == 2021].values[0][0])
-
-fig = go.Figure()
-
-fig.add_trace(
-    go.Scatter(
-        name="Historical",
-        line=dict(width=3, color="black"),
-        x=hist[(hist.index >= 1950) & (hist.index <= 2021)].index,
-        y=hist[(hist.index >= 1950) & (hist.index <= 2021)],
-        fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="PD20",
-        line=dict(width=3, color="blue", dash="dot"),
-        x=pd20.loc["World ", "Atm conc CO2", "pathway"].loc[2019:].index,
-        y=pd20.loc["World ", "Atm conc CO2", "pathway"].loc[2019:],
-        fill="none",
-        stackgroup="three",
-        legendgroup="PD20",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="PD21",
-        line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2021) & (results19.index <= 2100)].index,
-        y=results19[(results19.index >= 2021) & (results19.index <= 2100)][
-            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ],
-        fill="none",
-        stackgroup="four",
-        legendgroup="PD21",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-2.6",
-        line=dict(width=3, color="yellow", dash="dot"),
-        x=results26[(results19.index >= 2021) & (results26.index <= 2100)].index,
-        y=results26[(results26.index >= 2021) & (results26.index <= 2100)][
-            "GCAM4", "SSP2-26", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ],
-        fill="none",
-        stackgroup="five",
-        legendgroup="SSP2-2.6",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-1.9",
-        line=dict(width=3, color="orange", dash="dot"),
-        x=results19[(results19.index >= 2021) & (results19.index <= 2100)].index,
-        y=results19[(results19.index >= 2021) & (results19.index <= 2100)][
-            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ],
-        fill="none",
-        stackgroup="six",
-        legendgroup="SSP2-1.9",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
-        x=results60[(results60.index >= 2021) & (results60.index <= 2100)].index,
-        y=results60[(results60.index >= 2021) & (results60.index <= 2100)][
-            "GCAM4", "SSP2-Baseline", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ],
-        fill="none",
-        stackgroup="seven",
-        legendgroup="Baseline",
-    )
-)
-
-fig.update_layout(
-    title={
-        "text": "Atmospheric CO2 Concentration",
-        "xanchor": "center",
-        "x": 0.5,
-    },
-    xaxis={"title": "Year"},
-    yaxis={"title": "ppmv CO2"},
-)
-
-fig.add_annotation(
-    text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
-    xref="paper",
-    yref="paper",
-    x=0,
-    y=1.15,
-    showarrow=False,
-    font=dict(size=10, color="#2E3F5C"),
-    align="left",
-    borderpad=4,
-    borderwidth=2,
-    bgcolor="#ffffff",
-    opacity=1,
-)
-
-if show_figs is True:
-    fig.show()
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/co2conc-" + "World " + ".html").replace(" ", ""),
-        auto_open=False,
-    )
-
-# endregion
-
-#################################
 # GHG ATMOSPHERIC CONCENTRATION #
 #################################
 
@@ -3404,11 +3215,11 @@ low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
 default = pyhector.run(rcp19, {"temperature": {"S": 3}})
 high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
 
-hist = pd.DataFrame(pd.read_csv("podi/data/CO2_conc.csv")).set_index(
-    ["Region", "Model", "Metric", "Scenario"]
+hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
+    ["Region", "Metric", "Units", "Scenario"]
 )
 hist.columns = hist.columns.astype(int)
-hist = hist.loc["World ", "NOAA", "PPM CO2", "pathway"].T.dropna()
+hist = hist.loc["World ", "Equivalent CO2", "ppm", "pathway"].T.dropna()
 
 results = (
     pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
@@ -3417,23 +3228,8 @@ results = (
 )
 results.columns = results.columns.astype(int)
 
-results19 = (
-    results.loc[
-        "GCAM4",
-        "SSP2-19",
-        "World",
-        [
-            "Diagnostics|MAGICC6|Concentration|CO2",
-            "Diagnostics|MAGICC6|Concentration|CH4",
-            "Diagnostics|MAGICC6|Concentration|N2O",
-        ],
-    ]
-    .loc[:, 2010:]
-    .multiply([1, 25e-3, 298e-3], axis=0)
-    .sum()
-)
+resultspd = low['simpleNbox.Ca']
 
-"""
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -3445,46 +3241,79 @@ results19 = curve_smooth(
                 "Diagnostics|MAGICC6|Concentration|CH4",
                 "Diagnostics|MAGICC6|Concentration|N2O",
             ],
-        ].loc[:,2010:]
+        ].loc[:,2010:].multiply([1, 25e-3, 298e-3], axis=0).sum()
     ).T,
     "quadratic",
     4,
-).T
-"""
+)
+
 results26 = curve_smooth(
     pd.DataFrame(
         results.loc[
-            "GCAM4", "SSP2-26", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ].loc[2010:]
+            "GCAM4",
+            "SSP2-26",
+            "World",
+            [
+                "Diagnostics|MAGICC6|Concentration|CO2",
+                "Diagnostics|MAGICC6|Concentration|CH4",
+                "Diagnostics|MAGICC6|Concentration|N2O",
+            ],
+        ].loc[:,2010:].multiply([1, 25e-3, 298e-3], axis=0).sum()
     ).T,
     "quadratic",
     4,
-).T
+)
+
+results45 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-45",
+            "World",
+            [
+                "Diagnostics|MAGICC6|Concentration|CO2",
+                "Diagnostics|MAGICC6|Concentration|CH4",
+                "Diagnostics|MAGICC6|Concentration|N2O",
+            ],
+        ].loc[:,2010:].multiply([1, 25e-3, 298e-3], axis=0).sum()
+    ).T,
+    "quadratic",
+    4,
+)
 
 results60 = curve_smooth(
     pd.DataFrame(
         results.loc[
-            "GCAM4", "SSP2-Baseline", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ].loc[2010:]
+            "GCAM4",
+            "SSP2-60",
+            "World",
+            [
+                "Diagnostics|MAGICC6|Concentration|CO2",
+                "Diagnostics|MAGICC6|Concentration|CH4",
+                "Diagnostics|MAGICC6|Concentration|N2O",
+            ],
+        ].loc[:,2010:].multiply([1, 25e-3, 298e-3], axis=0).sum()
     ).T,
     "quadratic",
     4,
-).T
+)
 
 pd20 = (
     pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv"))
     .set_index(["Region", "Metric", "Units", "Scenario"])
-    .droplevel(["Units", "Scenario"])
+    .droplevel(["Units"])
 )
 pd20.columns = pd20.columns.astype(int)
 
 
-pd20.loc["World ", "Equivalent CO2"] = pd20.loc["World ", "Equivalent CO2"] * (
-    hist[2019] / pd20.loc["World ", "Equivalent CO2"].loc[2019]
+pd20.loc["World ", "Equivalent CO2", 'pathway'] = pd20.loc["World ", "Equivalent CO2", 'pathway'] * (
+    hist[2019] / pd20.loc["World ", "Equivalent CO2", 'pathway'].loc[2019]
 )
-results19 = results19 * (hist[2021] / results19[results19.index == 2021].values[0][0])
-results26 = results26 * (hist[2021] / results26[results26.index == 2021].values[0][0])
-results60 = results60 * (hist[2021] / results60[results60.index == 2021].values[0][0])
+resultspd = resultspd * (hist[2021] / resultspd[resultspd.index == 2021].values[0])
+results19 = results19 * (hist[2021] / results19.loc[:,2021].values[0])
+results26 = results26 * (hist[2021] / results26.loc[:,2021].values[0])
+results45 = results45 * (hist[2021] / results45.loc[:,2021].values[0])
+results60 = results60 * (hist[2021] / results60.loc[:,2021].values[0])
 
 fig = go.Figure()
 
@@ -3495,34 +3324,56 @@ fig.add_trace(
         x=hist[(hist.index >= 1950) & (hist.index <= 2021)].index,
         y=hist[(hist.index >= 1950) & (hist.index <= 2021)],
         fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
+        stackgroup="hist",
+        legendgroup="hist",
     )
 )
-
+'''
 fig.add_trace(
     go.Scatter(
         name="PD20",
         line=dict(width=3, color="blue", dash="dot"),
-        x=pd20.loc["World ", "Equivalent CO2"].loc[2019:].index,
-        y=pd20.loc["World ", "Equivalent CO2"].loc[2019:],
+        x=pd20.loc["World ", "Equivalent CO2", 'pathway'].loc[2020:].index,
+        y=pd20.loc["World ", "Equivalent CO2", 'pathway'].loc[2020:],
         fill="none",
         stackgroup="three",
         legendgroup="PD20",
     )
 )
+'''
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60.loc[:, 2020:2100].columns,
+        y=results60.loc[:, 2020:2100].squeeze(),
+        fill="none",
+        stackgroup="baseline",
+        legendgroup="baseline",
+    )
+)
 
 fig.add_trace(
     go.Scatter(
-        name="PD21",
+        name="PD21-DAU",
         line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2021) & (results19.index <= 2100)].index,
-        y=results19[(results19.index >= 2021) & (results19.index <= 2100)][
-            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ],
+        x=resultspd[(resultspd.index >= 2020) & (resultspd.index <= 2100)].index,
+        y=resultspd[(resultspd.index >= 2020) & (resultspd.index <= 2100)],
         fill="none",
-        stackgroup="four",
-        legendgroup="PD21",
+        stackgroup="pd21",
+        legendgroup="pd21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19.loc[:, 2020:2100].columns,
+        y=results19.loc[:, 2020:2100].squeeze(),
+        fill="none",
+        stackgroup="19",
+        legendgroup="19",
     )
 )
 
@@ -3530,44 +3381,26 @@ fig.add_trace(
     go.Scatter(
         name="SSP2-2.6",
         line=dict(width=3, color="yellow", dash="dot"),
-        x=results26[(results19.index >= 2021) & (results26.index <= 2100)].index,
-        y=results26[(results26.index >= 2021) & (results26.index <= 2100)][
-            "GCAM4", "SSP2-26", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ],
+        x=results26.loc[:, 2020:2100].columns,
+        y=results26.loc[:, 2020:2100].squeeze(),
         fill="none",
-        stackgroup="five",
-        legendgroup="SSP2-2.6",
+        stackgroup="26",
+        legendgroup="26",
     )
 )
-
+'''
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
-        line=dict(width=3, color="orange", dash="dot"),
-        x=results19[(results19.index >= 2021) & (results19.index <= 2100)].index,
-        y=results19[(results19.index >= 2021) & (results19.index <= 2100)][
-            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ],
+        name="SSP2-4.5",
+        line=dict(width=3, color="blue", dash="dot"),
+        x=results45.loc[:,2020:2100].columns,
+        y=results45.loc[:,2020:2100].squeeze(),
         fill="none",
-        stackgroup="six",
-        legendgroup="SSP2-1.9",
+        stackgroup="45",
+        legendgroup="45",
     )
 )
-
-fig.add_trace(
-    go.Scatter(
-        name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
-        x=results60[(results60.index >= 2021) & (results60.index <= 2100)].index,
-        y=results60[(results60.index >= 2021) & (results60.index <= 2100)][
-            "GCAM4", "SSP2-Baseline", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-        ],
-        fill="none",
-        stackgroup="seven",
-        legendgroup="Baseline",
-    )
-)
-
+'''
 fig.update_layout(
     title={
         "text": "Atmospheric GHG Concentration",
@@ -3578,8 +3411,8 @@ fig.update_layout(
     yaxis={"title": "ppmv CO2e"},
 )
 
-fig.show()
-
+if show_figs is True:
+    fig.show()
 if save_figs is True:
     pio.write_html(
         fig,
@@ -3602,12 +3435,76 @@ low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
 default = pyhector.run(rcp19, {"temperature": {"S": 3}})
 high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
 
+hist = default[FORCING].loc[1950:]
+
 results19 = pyhector.run(rcp19)
 results26 = pyhector.run(rcp26)
+results45 = pyhector.run(rcp45)
 results60 = pyhector.run(rcp60)
-results85 = pyhector.run(rcp85)
 
-hist = default[FORCING].loc[1950:]
+results = (
+    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
+    .droplevel(["UNIT"])
+)
+results.columns = results.columns.astype(int)
+
+results19 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-19",
+            "World",
+            ["Diagnostics|MAGICC6|Forcing"],
+        ].loc[:, 2010:]
+    ),
+    "quadratic",
+    4,
+)
+
+results26 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-26",
+            "World",
+            ["Diagnostics|MAGICC6|Forcing"],
+        ].loc[:,2010:]
+    ),
+    "quadratic",
+    4,
+)
+
+results45 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-45",
+            "World",
+            ["Diagnostics|MAGICC6|Forcing"],
+        ].loc[:,2010:]
+    ),
+    "quadratic",
+    4,
+)
+
+results60 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-60",
+            "World",
+            ["Diagnostics|MAGICC6|Forcing"],
+        ].loc[:,2010:]
+    ),
+    "quadratic",
+    4,
+)
+
+results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
+results26 = results26 * (hist[2021] / results26.loc[:, 2021].values[0])
+results45 = results45 * (hist[2021] / results45.loc[:, 2021].values[0])
+results60 = results60 * (hist[2021] / results60.loc[:, 2021].values[0])
 
 fig = go.Figure()
 
@@ -3615,47 +3512,11 @@ fig.add_trace(
     go.Scatter(
         name="Historical",
         line=dict(width=3, color="black"),
-        x=hist[hist.index <= 2020].index,
-        y=hist[hist.index <= 2020],
+        x=hist[(hist.index >= 1950) & (hist.index <= 2021)].index,
+        y=hist[(hist.index >= 1950) & (hist.index <= 2021)],
         fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="PD21",
-        line=dict(width=3, color="green", dash="dot"),
-        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
-        y=results26[results26.index >= 2020][FORCING],
-        fill="none",
-        stackgroup="two",
-        legendgroup="PD21",
-    )
-)
-"""
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-2.6",
-        line=dict(width=3, color="yellow", dash="dot"),
-        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
-        y=results26[results26.index >= 2020][FORCING],
-        fill="none",
-        stackgroup="three",
-        legendgroup="SSP2-2.6",
-    )
-)
-"""
-fig.add_trace(
-    go.Scatter(
-        name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][FORCING],
-        fill="none",
-        stackgroup="four",
-        legendgroup="SSP2-1.9",
+        stackgroup="hist",
+        legendgroup="hist",
     )
 )
 
@@ -3663,16 +3524,62 @@ fig.add_trace(
     go.Scatter(
         name="Baseline",
         line=dict(width=3, color="red", dash="dot"),
-        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
-        y=results60[results60.index >= 2020][FORCING]
-        - results60[results60.index >= 2020][FORCING][2020]
-        + hist[2020],
+        x=results60.loc[:, 2020:2100].columns,
+        y=results60.loc[:, 2020:2100].squeeze(),
         fill="none",
-        stackgroup="five",
-        legendgroup="Baseline",
+        stackgroup="baseline",
+        legendgroup="baseline",
     )
 )
 
+fig.add_trace(
+    go.Scatter(
+        name="PD21-DAU",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19.loc[:, 2020:2100].columns,
+        y=results19.loc[:, 2020:2100].squeeze(),
+        fill="none",
+        stackgroup="pd21",
+        legendgroup="pd21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19.loc[:, 2020:2100].columns,
+        y=results19.loc[:, 2020:2100].squeeze(),
+        fill="none",
+        stackgroup="19",
+        legendgroup="19",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26.loc[:, 2020:2100].columns,
+        y=results26.loc[:, 2020:2100].squeeze(),
+        fill="none",
+        stackgroup="26",
+        legendgroup="26",
+    )
+)
+'''
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-4.5",
+        line=dict(width=3, color="orange", dash="dot"),
+        x=results45.loc[:,2020:2100].columns,
+        y=results45.loc[:,2020:2100].squeeze(),
+        fill="none",
+        stackgroup="45",
+        legendgroup="45",
+    )
+)
+'''
 fig.update_layout(
     title={
         "text": "Radiative Forcing",
@@ -3683,7 +3590,6 @@ fig.update_layout(
     yaxis={"title": "W/m2"},
 )
 
-fig.update_layout(margin=dict())
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
     xref="paper",
@@ -6341,6 +6247,195 @@ for i in range(0, len(region_list)):
             )
 
     plt.clf()
+
+# endregion
+
+#################################
+# CO2 ATMOSPHERIC CONCENTRATION #
+#################################
+
+# region
+# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
+
+CONCENTRATION_CO2 = "simpleNbox.Ca"
+
+low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
+default = pyhector.run(rcp19, {"temperature": {"S": 3}})
+high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
+
+hist = pd.DataFrame(pd.read_csv("podi/data/CO2_conc.csv")).set_index(
+    ["Region", "Model", "Metric", "Scenario"]
+)
+hist.columns = hist.columns.astype(int)
+hist = hist.loc["World ", "NOAA", "PPM CO2", "pathway"].T.dropna()
+
+results = (
+    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
+    .droplevel(["UNIT"])
+)
+results.columns = results.columns.astype(int)
+
+results19 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ].loc[2010:]
+    ).T,
+    "quadratic",
+    4,
+).T
+
+results26 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4", "SSP2-26", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ].loc[2010:]
+    ).T,
+    "quadratic",
+    4,
+).T
+
+results60 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4", "SSP2-Baseline", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ].loc[2010:]
+    ).T,
+    "quadratic",
+    4,
+).T
+
+pd20 = (
+    pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv"))
+    .set_index(["Region", "Metric", "Units", "Scenario"])
+    .droplevel(["Units"])
+)
+pd20.columns = pd20.columns.astype(int)
+
+
+pd20.loc["World ", "Atm conc CO2", "pathway"] = pd20.loc[
+    "World ", "Atm conc CO2", "pathway"
+] * (hist[2019] / pd20.loc["World ", "Atm conc CO2", "pathway"].loc[2019])
+results19 = results19 * (hist[2021] / results19[results19.index == 2021].values[0][0])
+results26 = results26 * (hist[2021] / results26[results26.index == 2021].values[0][0])
+results60 = results60 * (hist[2021] / results60[results60.index == 2021].values[0][0])
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=hist[(hist.index >= 1950) & (hist.index <= 2021)].index,
+        y=hist[(hist.index >= 1950) & (hist.index <= 2021)],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Historical",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD20",
+        line=dict(width=3, color="blue", dash="dot"),
+        x=pd20.loc["World ", "Atm conc CO2", "pathway"].loc[2019:].index,
+        y=pd20.loc["World ", "Atm conc CO2", "pathway"].loc[2019:],
+        fill="none",
+        stackgroup="three",
+        legendgroup="PD20",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21",
+        line=dict(width=3, color="green", dash="dot"),
+        x=results19[(results19.index >= 2021) & (results19.index <= 2100)].index,
+        y=results19[(results19.index >= 2021) & (results19.index <= 2100)][
+            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ],
+        fill="none",
+        stackgroup="four",
+        legendgroup="PD21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26[(results19.index >= 2021) & (results26.index <= 2100)].index,
+        y=results26[(results26.index >= 2021) & (results26.index <= 2100)][
+            "GCAM4", "SSP2-26", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ],
+        fill="none",
+        stackgroup="five",
+        legendgroup="SSP2-2.6",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="orange", dash="dot"),
+        x=results19[(results19.index >= 2021) & (results19.index <= 2100)].index,
+        y=results19[(results19.index >= 2021) & (results19.index <= 2100)][
+            "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ],
+        fill="none",
+        stackgroup="six",
+        legendgroup="SSP2-1.9",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60[(results60.index >= 2021) & (results60.index <= 2100)].index,
+        y=results60[(results60.index >= 2021) & (results60.index <= 2100)][
+            "GCAM4", "SSP2-Baseline", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+        ],
+        fill="none",
+        stackgroup="seven",
+        legendgroup="Baseline",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Atmospheric CO2 Concentration",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "ppmv CO2"},
+)
+
+fig.add_annotation(
+    text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
+    xref="paper",
+    yref="paper",
+    x=0,
+    y=1.15,
+    showarrow=False,
+    font=dict(size=10, color="#2E3F5C"),
+    align="left",
+    borderpad=4,
+    borderwidth=2,
+    bgcolor="#ffffff",
+    opacity=1,
+)
+
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/co2conc-" + "World " + ".html").replace(" ", ""),
+        auto_open=False,
+    )
 
 # endregion
 
