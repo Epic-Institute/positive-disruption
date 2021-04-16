@@ -2192,7 +2192,7 @@ for i in range(0, len(region_list)):
         )
 
         fig.add_annotation(
-            text="Cumulative CDR in 2100: " + str(fig2[(fig2["Sector"] == "CDR") & (fig2['Year'] == 2100)]["Emissions, GtCO2e"].values[0].round(1)) + " GtCO2e",
+            text="Cumulative CDR in 2100: " + str(fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"].values.sum().round(1)) + " GtCO2e",
             xref="paper",
             yref="paper",
             x=0.05,
@@ -2577,6 +2577,25 @@ bar_emissions_goal = [
     ("x",),
 ]
 
+ndcs = [
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+]
+
 scenario = 'pathway'
 
 for year in [2050]:
@@ -2636,7 +2655,7 @@ for year in [2050]:
         if region_list[i] in ['World ', 'US ', 'CHINA ', 'EUR ']:
             em_mit_cdr = pd.Series(
                 cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario].sum(), index=np.arange(data_start_year, long_proj_end_year + 1)
-            ) / 1000
+            ) / 100
 
             em_mit = pd.DataFrame(
                 [
@@ -2775,8 +2794,8 @@ for year in [2050]:
                     fig.loc["Industry", year],
                     fig.loc["Forests & Wetlands", year],
                     fig.loc["Agriculture", year],
-                    0,
-                    0,
+                    fig.loc["CH4, N2O, F-gases", year],
+                    fig.loc["CDR", year],
                 ],
                 "labels": [
                     "CDR",
@@ -2907,7 +2926,7 @@ for year in [2050]:
                     fig.loc["Industry", year],
                     fig.loc["Forests & Wetlands", year],
                     fig.loc["Agriculture", year],
-                    0,
+                    fig.loc["CH4, N2O, F-gases", year],
                 ],
                 "labels": [
                     "CH4, N2O, F-gases",
@@ -2938,7 +2957,7 @@ for year in [2050]:
                         x=data["CDR"],
                         offsetgroup=0,
                         orientation="h",
-                        marker_color="#B82E2E",
+                        marker_color="#FF9DA6",
                         opacity=opacity,
                     ),
                     go.Bar(
@@ -3002,15 +3021,9 @@ for year in [2050]:
             
             figure.add_shape(
                 type="line",
-                x0=em_mit_ndc[
-                    (em_mit_ndc["Region"] == region_list[i])
-                    & (em_mit_ndc.index == year)
-                ]["em_mit"].values[0],
+                x0=pd.Series(data['Total']).sum(),
                 y0=-0.5,
-                x1=em_mit_ndc[
-                    (em_mit_ndc["Region"] == region_list[i])
-                    & (em_mit_ndc.index == year)
-                ]["em_mit"].values[0],
+                x1=pd.Series(data['Total']).sum(),
                 y1=8.5,
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
                 name="NDC",
@@ -3101,15 +3114,9 @@ for year in [2050]:
         ]:
             figure.add_shape(
                 type="line",
-                x0=em_mit_ndc[
-                    (em_mit_ndc["Region"] == region_list[i])
-                    & (em_mit_ndc.index == year)
-                ]["em_mit"].values[0],
+                x0=pd.Series(data['Total']).sum(),
                 y0=-0.5,
-                x1=em_mit_ndc[
-                    (em_mit_ndc["Region"] == region_list[i])
-                    & (em_mit_ndc.index == year)
-                ]["em_mit"].values[0],
+                x1=pd.Series(data['Total']).sum(),
                 y1=7.5,
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
                 name="NDC",
