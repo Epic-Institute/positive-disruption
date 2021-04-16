@@ -35,7 +35,7 @@ unit = [unit_name[0], unit_val[0]]
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
 save_figs = True
-show_figs = False
+show_figs = True
 start_year = 2000
 scenario = 'baseline'
 
@@ -3429,18 +3429,13 @@ if save_figs is True:
 # region
 # from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
-FORCING = "forcing.Ftot"
-
 low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
 default = pyhector.run(rcp19, {"temperature": {"S": 3}})
 high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
 
-hist = default[FORCING].loc[1950:]
+hist = default["forcing.Ftot"].loc[1950:]
 
-results19 = pyhector.run(rcp19)
-results26 = pyhector.run(rcp26)
-results45 = pyhector.run(rcp45)
-results60 = pyhector.run(rcp60)
+resultspd = low["forcing.Ftot"]
 
 results = (
     pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
@@ -3501,6 +3496,7 @@ results60 = curve_smooth(
     4,
 )
 
+resultspd = resultspd * (hist[2021] / resultspd[resultspd.index == 2021].values[0])
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 results26 = results26 * (hist[2021] / results26.loc[:, 2021].values[0])
 results45 = results45 * (hist[2021] / results45.loc[:, 2021].values[0])
@@ -3536,8 +3532,8 @@ fig.add_trace(
     go.Scatter(
         name="PD21-DAU",
         line=dict(width=3, color="green", dash="dot"),
-        x=results19.loc[:, 2020:2100].columns,
-        y=results19.loc[:, 2020:2100].squeeze(),
+        x=resultspd[(resultspd.index >= 2020) & (resultspd.index <= 2100)].index,
+        y=resultspd[(resultspd.index >= 2020) & (resultspd.index <= 2100)],
         fill="none",
         stackgroup="pd21",
         legendgroup="pd21",
@@ -3610,7 +3606,7 @@ if show_figs is True:
 if save_figs is True:
     pio.write_html(
         fig,
-        file=("./charts/forcing-" + region_list[i] + ".html").replace(" ", ""),
+        file=("./charts/forcing-" + 'World' + ".html").replace(" ", ""),
         auto_open=False,
     )
 
@@ -3627,14 +3623,78 @@ if save_figs is True:
 
 # region
 
+low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
+default = pyhector.run(rcp19, {"temperature": {"S": 3}})
+high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
 
-TEMP = "temperature.Tgav"
+hist = default["temperature.Tgav"].loc[1950:]
 
-results19 = pyhector.run(rcp19)
-results26 = pyhector.run(rcp26)
-results60 = pyhector.run(rcp60)
+resultspd = low['temperature.Tgav']
 
-hist = default[TEMP].loc[1950:]
+results = (
+    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
+    .droplevel(["UNIT"])
+)
+results.columns = results.columns.astype(int)
+
+results19 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-19",
+            "World",
+            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
+        ].loc[:, 2010:]
+    ),
+    "quadratic",
+    4,
+)
+
+results26 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-26",
+            "World",
+            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
+        ].loc[:,2010:]
+    ),
+    "quadratic",
+    4,
+)
+
+results45 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-45",
+            "World",
+            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
+        ].loc[:,2010:]
+    ),
+    "quadratic",
+    4,
+)
+
+results60 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-60",
+            "World",
+            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
+        ].loc[:,2010:]
+    ),
+    "quadratic",
+    4,
+)
+
+resultspd = resultspd * (hist[2021] / resultspd[resultspd.index == 2021].values[0])
+results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
+results26 = results26 * (hist[2021] / results26.loc[:, 2021].values[0])
+results45 = results45 * (hist[2021] / results45.loc[:, 2021].values[0])
+results60 = results60 * (hist[2021] / results60.loc[:, 2021].values[0])
 
 fig = go.Figure()
 
@@ -3652,10 +3712,22 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="PD21",
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=results60.loc[:, 2020:2100].columns,
+        y=results60.loc[:, 2020:2100].squeeze(),
+        fill="none",
+        stackgroup="five",
+        legendgroup="Baseline",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21-DAU",
         line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][TEMP],
+        x=resultspd[(resultspd.index >= 2020) & (resultspd.index <= 2100)].index,
+        y=resultspd[(resultspd.index >= 2020) & (resultspd.index <= 2100)],
         fill="none",
         stackgroup="two",
         legendgroup="PD21",
@@ -3664,22 +3736,10 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="SSP2-2.6",
-        line=dict(width=3, color="yellow", dash="dot"),
-        x=results26[(results26.index >= 2020) & (results26.index <= 2100)].index,
-        y=results26[results26.index >= 2020][TEMP],
-        fill="none",
-        stackgroup="three",
-        legendgroup="SSP2-2.6",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
         name="SSP2-1.9",
         line=dict(width=3, color="light blue", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][TEMP],
+        x=results19.loc[:, 2020:2100].columns,
+        y=results19.loc[:, 2020:2100].squeeze(),
         fill="none",
         stackgroup="four",
         legendgroup="SSP2-1.9",
@@ -3688,13 +3748,13 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
-        x=results60[(results60.index >= 2020) & (results60.index <= 2100)].index,
-        y=results60[results60.index >= 2020][TEMP],
+        name="SSP2-2.6",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=results26.loc[:, 2020:2100].columns,
+        y=results26.loc[:, 2020:2100].squeeze(),
         fill="none",
-        stackgroup="five",
-        legendgroup="Baseline",
+        stackgroup="three",
+        legendgroup="SSP2-2.6",
     )
 )
 
@@ -3708,7 +3768,6 @@ fig.update_layout(
     yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
 )
 
-fig.update_layout(margin=dict())
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
     xref="paper",
@@ -3729,7 +3788,7 @@ if show_figs is True:
 if save_figs is True:
     pio.write_html(
         fig,
-        file=("./charts/temp-" + region_list[i] + ".html").replace(" ", ""),
+        file=("./charts/temp-" + 'World' + ".html").replace(" ", ""),
         auto_open=False,
     )
 
