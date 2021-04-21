@@ -3253,9 +3253,9 @@ for year in [2050]:
 
 # endregion
 
-######################################
-# GHG ATMOSPHERIC CONCENTRATION FAIR #
-######################################
+########################################
+# GHG ATMOSPHERIC CONCENTRATION (FaIR) #
+########################################
 
 # region
 
@@ -3426,9 +3426,9 @@ if save_figs is True:
 
 # endregion
 
-##########################
-# RADIATIVE FORCING FAIR #
-##########################
+############################
+# RADIATIVE FORCING (FaIR) #
+############################
 
 # region
 
@@ -3610,9 +3610,9 @@ if save_figs is True:
 
 # endregion
 
-###########################
-# TEMPERATURE CHANGE FAIR #
-###########################
+#############################
+# TEMPERATURE CHANGE (FaIR) #
+#############################
 
 # region
 
