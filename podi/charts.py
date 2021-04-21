@@ -3253,9 +3253,9 @@ for year in [2050]:
 
 # endregion
 
-########################################
-# GHG ATMOSPHERIC CONCENTRATION (FaIR) #
-########################################
+#################################
+# GHG ATMOSPHERIC CONCENTRATION #
+#################################
 
 # region
 
@@ -3426,9 +3426,9 @@ if save_figs is True:
 
 # endregion
 
-############################
-# RADIATIVE FORCING (FaIR) #
-############################
+#####################
+# RADIATIVE FORCING #
+#####################
 
 # region
 
@@ -3610,9 +3610,9 @@ if save_figs is True:
 
 # endregion
 
-#############################
-# TEMPERATURE CHANGE (FaIR) #
-#############################
+######################
+# TEMPERATURE CHANGE #
+######################
 
 # region
 
@@ -3641,7 +3641,7 @@ T19 = curve_smooth(
         ].loc[:, 2010:]
     ),
     "quadratic",
-    9,
+    6,
 )
 
 #CO2
@@ -3686,9 +3686,9 @@ Tcdr = (pd.DataFrame(Tcdr).loc[225:335].set_index(np.arange(data_start_year, (lo
 
 # CO2e conversion
 
-Tb['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tb, axis=1)).T, 'quadratic', 9).T
-Tpd['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tpd, axis=1)).T, 'quadratic', 9).T
-Tcdr['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tcdr, axis=1)).T, 'quadratic', 9).T
+Tb['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tb, axis=1)).T, 'quadratic', 6).T
+Tpd['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tpd, axis=1)).T, 'quadratic', 6).T
+Tcdr['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tcdr, axis=1)).T, 'quadratic', 6).T
 
 T19 = T19 * (hist.loc[:,2020].values[0] / T19.loc[:,2020].values[0])
 Tb = Tb * (hist.loc[:, data_end_year].values[0] / Tb.loc[data_end_year,'CO2e'])
