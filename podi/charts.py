@@ -3433,7 +3433,7 @@ if save_figs is True:
 # region
 
 # Load RCP data, then swap in PD for main GHGs
-em_b = pd.DataFrame(rcp60.Emissions.emissions)
+em_b = pd.DataFrame(rcp85.Emissions.emissions)
 em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 
@@ -3444,31 +3444,16 @@ F = (
 )
 F.columns = F.columns.astype(int)
 
-hist = curve_smooth(
-    pd.DataFrame(
-        F.loc[
-            "GCAM4",
-            "SSP2-19",
-            "World",
-            ["Diagnostics|MAGICC6|Forcing"],
-        ].loc[:, 1980:]
-    ),
-    "quadratic",
-    4,
-)
+hist = pyhector.run(rcp19, {"temperature": {"S": 3}})['forcing.Ftot'].loc[1950:]
 
-F19 = curve_smooth(
-    pd.DataFrame(
+F19 = pd.DataFrame(
         F.loc[
             "GCAM4",
             "SSP2-19",
             "World",
             ["Diagnostics|MAGICC6|Forcing"],
         ].loc[:, 2010:]
-    ),
-    "quadratic",
-    4,
-)
+    )
 
 #CO2
 em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
@@ -3496,25 +3481,31 @@ em_pd = em_pd.values
 em_cdr = em_cdr.values
 
 other_rf = np.zeros(em_pd.shape[0])
-for x in range(0, em_pd.shape[0]):
-    other_rf[x] = 0.5 * np.sin(2 * np.pi * (x) / 14.0)
-
 
 # run the model
+Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b)
+Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd)
+Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr)
+'''
 Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b, other_rf=other_rf)
 Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd, other_rf=other_rf)
 Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
-
+'''
 Fb = (pd.DataFrame(Fb).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
 Fpd = (pd.DataFrame(Fpd).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
 Fcdr = (pd.DataFrame(Fcdr).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
 
 # CO2e conversion
+
+Fb['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fb, axis=1)).T, 'quadratic', 4).T
+Fpd['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fpd, axis=1)).T, 'quadratic', 4).T
+Fcdr['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fcdr, axis=1)).T, 'quadratic', 4).T
+'''
 Fb['CO2e'] = np.sum(Fb, axis=1)
 Fpd['CO2e'] = np.sum(Fpd, axis=1)
 Fcdr['CO2e'] = np.sum(Fcdr, axis=1)
-
-F19 = results19 * (hist[2021] / F19.loc[:,2021].values[0])
+'''
+#F19 = F19 * (hist[2021] / F19.loc[:,2021].values[0])
 Fb = Fb * (hist[2021] / Fb.loc[2021,'CO2e'])
 Fpd = Fpd * (hist[2021] / Fpd.loc[2021,'CO2e'])
 Fcdr = Fcdr * (hist[2021] / Fcdr.loc[2021,'CO2e'])
@@ -3561,8 +3552,8 @@ fig.add_trace(
     go.Scatter(
         name="SSP2-1.9",
         line=dict(width=3, color="light blue", dash="dot"),
-        x=results19.loc[:, 2020:2100].columns,
-        y=results19.loc[:, 2020:2100].squeeze(),
+        x=F19.loc[:, 2020:2100].columns,
+        y=F19.loc[:, 2020:2100].squeeze(),
         fill="none",
         stackgroup="19",
         legendgroup="19",
