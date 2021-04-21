@@ -3454,7 +3454,7 @@ F19 = curve_smooth(pd.DataFrame(
             "World",
             ["Diagnostics|MAGICC6|Forcing"],
         ].loc[:, 2010:]
-    ), 'quadratic', 4)
+    ), 'quadratic', 6)
 
 #CO2
 em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
@@ -3498,9 +3498,9 @@ Fcdr = (pd.DataFrame(Fcdr).loc[225:335].set_index(np.arange(data_start_year, (lo
 
 # CO2e conversion
 
-Fb['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fb, axis=1)).T, 'quadratic', 4).T
-Fpd['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fpd, axis=1)).T, 'quadratic', 4).T
-Fcdr['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fcdr, axis=1)).T, 'quadratic', 4).T
+Fb['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fb, axis=1)).T, 'quadratic', 6).T
+Fpd['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fpd, axis=1)).T, 'quadratic', 6).T
+Fcdr['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fcdr, axis=1)).T, 'quadratic', 6).T
 '''
 Fb['CO2e'] = np.sum(Fb, axis=1)
 Fpd['CO2e'] = np.sum(Fpd, axis=1)
@@ -3616,14 +3616,13 @@ if save_figs is True:
 
 # region
 
-# TEMPERATURE
-
-# region
+# Load RCP data, then swap in PD for main GHGs
+em_b = pd.DataFrame(rcp85.Emissions.emissions)
+em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
+em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 
 hist = (pd.read_csv('podi/data/temp.csv'))
 hist.columns = hist.columns.astype(int)
-
-resultspd = low['temperature.Tgav']
 
 T = (
     pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
@@ -3632,63 +3631,69 @@ T = (
 )
 T.columns = T.columns.astype(int)
 
-results19 = curve_smooth(
+T19 = curve_smooth(
     pd.DataFrame(
-        results.loc[
+        T.loc[
             "GCAM4",
-            "SSP2-19",
+            "SSP1-19",
             "World",
             ["Diagnostics|MAGICC6|Temperature|Global Mean"],
         ].loc[:, 2010:]
     ),
     "quadratic",
-    4,
+    9,
 )
 
-results26 = curve_smooth(
-    pd.DataFrame(
-        results.loc[
-            "GCAM4",
-            "SSP2-26",
-            "World",
-            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
-        ].loc[:,2010:]
-    ),
-    "quadratic",
-    4,
-)
+#CO2
+em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
 
-results45 = curve_smooth(
-    pd.DataFrame(
-        results.loc[
-            "GCAM4",
-            "SSP2-45",
-            "World",
-            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
-        ].loc[:,2010:]
-    ),
-    "quadratic",
-    4,
-)
 
-results60 = curve_smooth(
-    pd.DataFrame(
-        results.loc[
-            "GCAM4",
-            "SSP2-60",
-            "World",
-            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
-        ].loc[:,2010:]
-    ),
-    "quadratic",
-    4,
-)
+em_b.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
 
-resultspd = resultspd * (hist[2021] / resultspd[resultspd.index == 2021].values[0])
-results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
-results26 = results26 * (hist[2021] / results26.loc[:, 2021].values[0])
-results45 = results45 * (hist[2021] / results45.loc[:, 2021].values[0])
-results60 = results60 * (hist[2021] / results60.loc[:, 2021].values[0])
+
+#CH4
+em_b.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc[region, slice(None), slice(None), 'pathway'].sum() / (25)).values
+em_pd.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc[region, slice(None), slice(None), 'pathway'].sum() / (25)).values
+em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc[region, slice(None), slice(None), 'pathway'].sum() / (25)).values
+
+#N2O
+em_b.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc[region, slice(None), slice(None), 'pathway'].sum() / (298)).values
+em_pd.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc[region, slice(None), slice(None), 'pathway'].sum() / (298)).values
+em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc[region, slice(None), slice(None), 'pathway'].sum() / (298)).values
+
+em_b = em_b.values
+em_pd = em_pd.values
+em_cdr = em_cdr.values
+
+other_rf = np.zeros(em_pd.shape[0])
+
+# run the model
+Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b)
+Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd)
+Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr)
+'''
+Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b, other_rf=other_rf)
+Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd, other_rf=other_rf)
+Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
+'''
+Tb = (pd.DataFrame(Tb).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
+Tpd = (pd.DataFrame(Tpd).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
+Tcdr = (pd.DataFrame(Tcdr).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
+
+# CO2e conversion
+
+Tb['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tb, axis=1)).T, 'quadratic', 9).T
+Tpd['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tpd, axis=1)).T, 'quadratic', 9).T
+Tcdr['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Tcdr, axis=1)).T, 'quadratic', 9).T
+
+T19 = T19 * (hist.loc[:,2020].values[0] / T19.loc[:,2020].values[0])
+Tb = Tb * (hist.loc[:, data_end_year].values[0] / Tb.loc[data_end_year,'CO2e'])
+Tpd = Tpd * (hist.loc[:, data_end_year].values[0] / Tpd.loc[data_end_year,'CO2e'])
+Tcdr = Tcdr * (hist.loc[:, data_end_year].values[0] / Tcdr.loc[data_end_year,'CO2e'])
 
 fig = go.Figure()
 
@@ -3696,11 +3701,11 @@ fig.add_trace(
     go.Scatter(
         name="Historical",
         line=dict(width=3, color="black"),
-        x=hist[hist.index <= 2020].index,
-        y=hist[hist.index <= 2020],
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=hist.loc[:,data_start_year:long_proj_end_year].squeeze(),
         fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
+        stackgroup="hist",
+        legendgroup="hist",
     )
 )
 
@@ -3708,11 +3713,11 @@ fig.add_trace(
     go.Scatter(
         name="Baseline",
         line=dict(width=3, color="red", dash="dot"),
-        x=results60.loc[:, 2020:2100].columns,
-        y=results60.loc[:, 2020:2100].squeeze(),
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tb.loc[data_end_year:, 'CO2e'],
         fill="none",
-        stackgroup="five",
-        legendgroup="Baseline",
+        stackgroup="baseline",
+        legendgroup="baseline",
     )
 )
 
@@ -3720,11 +3725,11 @@ fig.add_trace(
     go.Scatter(
         name="PD21-DAU",
         line=dict(width=3, color="green", dash="dot"),
-        x=resultspd[(resultspd.index >= 2020) & (resultspd.index <= 2100)].index,
-        y=resultspd[(resultspd.index >= 2020) & (resultspd.index <= 2100)],
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tpd.loc[data_end_year:, 'CO2e'],
         fill="none",
-        stackgroup="two",
-        legendgroup="PD21",
+        stackgroup="pd21",
+        legendgroup="pd21",
     )
 )
 
@@ -3732,11 +3737,11 @@ fig.add_trace(
     go.Scatter(
         name="SSP2-1.9",
         line=dict(width=3, color="light blue", dash="dot"),
-        x=results19.loc[:, 2020:2100].columns,
-        y=results19.loc[:, 2020:2100].squeeze(),
+        x=T19.loc[:, 2020:2100].columns,
+        y=T19.loc[:, 2020:2100].squeeze(),
         fill="none",
-        stackgroup="four",
-        legendgroup="SSP2-1.9",
+        stackgroup="19",
+        legendgroup="19",
     )
 )
 
@@ -3744,11 +3749,11 @@ fig.add_trace(
     go.Scatter(
         name="PD21+CDR",
         line=dict(width=3, color="yellow", dash="dot"),
-        x=results26.loc[:, 2020:2100].columns,
-        y=results26.loc[:, 2020:2100].squeeze(),
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tcdr.loc[data_end_year:, 'CO2e'],
         fill="none",
-        stackgroup="three",
-        legendgroup="SSP2-2.6",
+        stackgroup="26",
+        legendgroup="26",
     )
 )
 
@@ -3786,76 +3791,6 @@ if save_figs is True:
         auto_open=False,
     )
 
-# endregion
-
-"""
-# CLIMATE SENSITIVITY
-# region
-
-low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
-default = pyhector.run(rcp19, {"temperature": {"S": 3}})
-high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
-
-plt.figure()
-sel = slice(1900, 2100)
-plt.fill_between(
-    low[TEMP].loc[sel].index,
-    low[TEMP].loc[sel],
-    high[TEMP].loc[sel],
-    color="lightgray",
-)
-
-default[TEMP].loc[sel]
-
-hist = default[TEMP].loc[1900:2016]
-
-fig = go.Figure()
-
-fig.add_trace(
-    go.Scatter(
-        name="Historical",
-        line=dict(width=3, color="black"),
-        x=hist[hist.index <= 2020].index,
-        y=hist[hist.index <= 2020],
-        fill="none",
-        stackgroup="one",
-        legendgroup="Historical",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="PD21",
-        line=dict(width=3, color="green", dash="dot"),
-        x=results19[(results19.index >= 2020) & (results19.index <= 2100)].index,
-        y=results19[results19.index >= 2020][TEMP],
-        fill="none",
-        stackgroup="two",
-        legendgroup="PD21",
-    )
-)
-
-fig.update_layout(
-    title={
-        "text": "PD21 Temperature with equilibrium climate sensitivity set to 1.5, 3, and 4.5",
-        "xanchor": "center",
-        "x": 0.5,
-    },
-    xaxis={"title": "Year"},
-    yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
-)
-
-if show_figs is True:
-    fig.show()
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/forcing2-" + region_list[i] + ".html").replace(" ", ""),
-        auto_open=False,
-    )
-
-# endregion
-"""
 # endregion
 
 
