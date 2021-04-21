@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
-import pyhector
-from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
+#import pyhector
+#from pyhector import rcp19, rcp26, rcp45, rcp60, rcp85
 from podi.energy_demand import data_end_year, data_start_year
 from podi.energy_supply import (
     near_proj_start_year,
@@ -3444,15 +3444,16 @@ F = (
 )
 F.columns = F.columns.astype(int)
 
-hist = pyhector.run(rcp19, {"temperature": {"S": 3}})['forcing.Ftot'].loc[1950:]
+hist = (pd.read_csv('podi/data/forcing.csv'))
+hist.columns = hist.columns.astype(int)
 
 F19 = pd.DataFrame(
         F.loc[
             "GCAM4",
-            "SSP2-19",
+            "SSP1-19",
             "World",
             ["Diagnostics|MAGICC6|Forcing"],
-        ].loc[:, 2010:]
+        ].loc[:, 2020:]
     )
 
 #CO2
@@ -3505,10 +3506,11 @@ Fb['CO2e'] = np.sum(Fb, axis=1)
 Fpd['CO2e'] = np.sum(Fpd, axis=1)
 Fcdr['CO2e'] = np.sum(Fcdr, axis=1)
 '''
-#F19 = F19 * (hist[2021] / F19.loc[:,2021].values[0])
-Fb = Fb * (hist[2021] / Fb.loc[2021,'CO2e'])
-Fpd = Fpd * (hist[2021] / Fpd.loc[2021,'CO2e'])
-Fcdr = Fcdr * (hist[2021] / Fcdr.loc[2021,'CO2e'])
+
+#F19 = F19 * (hist.loc[:,2021].values[0] / F19.loc[:,2021].values[0])
+Fb = Fb * (hist.loc[:,2021].values[0] / Fb.loc[2021,'CO2e'])
+Fpd = Fpd * (hist.loc[:,2021].values[0] / Fpd.loc[2021,'CO2e'])
+Fcdr = Fcdr * (hist.loc[:,2021].values[0] / Fcdr.loc[2021,'CO2e'])
 
 fig = go.Figure()
 
@@ -3517,7 +3519,7 @@ fig.add_trace(
         name="Historical",
         line=dict(width=3, color="black"),
         x=np.arange(data_start_year, data_end_year + 1, 1),
-        y=Fpd.loc[:, 'CO2e'],
+        y=hist.loc[:,data_start_year:long_proj_end_year].squeeze(),
         fill="none",
         stackgroup="hist",
         legendgroup="hist",
@@ -3613,15 +3615,10 @@ if save_figs is True:
 ###########################
 
 # region
-# From openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
 # TEMPERATURE
 
 # region
-
-low = pyhector.run(rcp19, {"temperature": {"S": 1.5}})
-default = pyhector.run(rcp19, {"temperature": {"S": 3}})
-high = pyhector.run(rcp19, {"temperature": {"S": 4.5}})
 
 hist = default["temperature.Tgav"].loc[1950:]
 
@@ -5450,12 +5447,11 @@ for i in range(0, len(region_list)):
 # https://github.com/iiasa/ipcc_sr15_scenario_analysis/blob/master/further_analysis/iamc15_gdp_per_capita.ipynb
 # endregion
 
-#################################
-# CO2 ATMOSPHERIC CONCENTRATION #
-#################################
-
+#######################################
+# CO2 ATMOSPHERIC CONCENTRATION (OLD) #
+#######################################
+'''
 # region
-# from openclimatedata/pyhector https://github.com/openclimatedata/pyhector
 
 CONCENTRATION_CO2 = "simpleNbox.Ca"
 
@@ -5638,7 +5634,7 @@ if save_figs is True:
     )
 
 # endregion
-
+'''
 ####################
 # EPIC INDEX (OLD) #
 ####################
