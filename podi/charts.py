@@ -3437,6 +3437,9 @@ em_b = pd.DataFrame(rcp85.Emissions.emissions)
 em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 
+hist = (pd.read_csv('podi/data/forcing.csv'))
+hist.columns = hist.columns.astype(int)
+
 F = (
     pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
     .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
@@ -3444,17 +3447,14 @@ F = (
 )
 F.columns = F.columns.astype(int)
 
-hist = (pd.read_csv('podi/data/forcing.csv'))
-hist.columns = hist.columns.astype(int)
-
-F19 = pd.DataFrame(
+F19 = curve_smooth(pd.DataFrame(
         F.loc[
             "GCAM4",
             "SSP1-19",
             "World",
             ["Diagnostics|MAGICC6|Forcing"],
-        ].loc[:, 2020:]
-    )
+        ].loc[:, 2010:]
+    ), 'quadratic', 4)
 
 #CO2
 em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc[region, ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
@@ -3507,10 +3507,10 @@ Fpd['CO2e'] = np.sum(Fpd, axis=1)
 Fcdr['CO2e'] = np.sum(Fcdr, axis=1)
 '''
 
-#F19 = F19 * (hist.loc[:,2021].values[0] / F19.loc[:,2021].values[0])
-Fb = Fb * (hist.loc[:,2021].values[0] / Fb.loc[2021,'CO2e'])
-Fpd = Fpd * (hist.loc[:,2021].values[0] / Fpd.loc[2021,'CO2e'])
-Fcdr = Fcdr * (hist.loc[:,2021].values[0] / Fcdr.loc[2021,'CO2e'])
+F19 = F19 * (hist.loc[:,2020].values[0] / F19.loc[:,2020].values[0])
+Fb = Fb * (hist.loc[:, data_end_year].values[0] / Fb.loc[data_end_year,'CO2e'])
+Fpd = Fpd * (hist.loc[:, data_end_year].values[0] / Fpd.loc[data_end_year,'CO2e'])
+Fcdr = Fcdr * (hist.loc[:, data_end_year].values[0] / Fcdr.loc[data_end_year,'CO2e'])
 
 fig = go.Figure()
 
@@ -3620,16 +3620,17 @@ if save_figs is True:
 
 # region
 
-hist = default["temperature.Tgav"].loc[1950:]
+hist = (pd.read_csv('podi/data/temp.csv'))
+hist.columns = hist.columns.astype(int)
 
 resultspd = low['temperature.Tgav']
 
-results = (
+T = (
     pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
     .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
     .droplevel(["UNIT"])
 )
-results.columns = results.columns.astype(int)
+T.columns = T.columns.astype(int)
 
 results19 = curve_smooth(
     pd.DataFrame(
