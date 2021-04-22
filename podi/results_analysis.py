@@ -419,24 +419,51 @@ def results_analysis(
     # TRANSPORTATION DECARB
 
     # region
-
+    """
     stransport_decarb = (
         (transport_decarb * 0.73)
         .rename(index={"Transport": "Electrification"})
         .append(transport_decarb * 0.27)
         .rename(index={"Transport": "Efficiency"})
     )
-    stransport_decarb.index.name = "Metric"
     """
+
     stransport_decarb = (
-        transport_consump.loc[region2, decarb, scenario, :]
-        .groupby("Metric")
-        .sum()
-        .divide(
-            transport_consump.loc[region2, decarb, scenario, :].groupby("Metric").sum().sum()
+        (
+            (transport_decarb * 0.365).rename(
+                index={"Transport": "Electrification (LDV)"}
+            )
         )
-    ).multiply(grid_decarb.values)
-    """
+        .append(
+            (transport_decarb * 0.064).rename(
+                index={"Transport": "Electrification (HDV)"}
+            )
+        )
+        .append(
+            (transport_decarb * 0.008).rename(
+                index={"Transport": "Electrification (Shipping)"}
+            )
+        )
+        .append(
+            (transport_decarb * 0.016).rename(
+                index={"Transport": "Electrification (Aviation)"}
+            )
+        )
+        .append(
+            (transport_decarb * 0.069).rename(
+                index={"Transport": "Electrification (Rail)"}
+            )
+        )
+        .append((transport_decarb * 0.02).rename(index={"Transport": "H2 (LDV)"}))
+        .append((transport_decarb * 0.016).rename(index={"Transport": "H2 (HDV)"}))
+        .append((transport_decarb * 0.064).rename(index={"Transport": "H2 (Shipping)"}))
+        .append((transport_decarb * 0.097).rename(index={"Transport": "H2 (Aviation)"}))
+        .append((transport_decarb * 0.008).rename(index={"Transport": "H2 (Rail)"}))
+        .append((transport_decarb * 0.27).rename(index={"Transport": "Efficiency"}))
+    )
+
+    stransport_decarb.index.name = "Metric"
+
     stransport_decarb = pd.concat(
         [stransport_decarb], keys=["Transport"], names=["Sector"]
     )
@@ -447,14 +474,17 @@ def results_analysis(
     # BUILDINGS DECARB
 
     # region
-
+    """
     sbuilding_decarb = (
         (building_decarb * 0.35)
         .rename(index={"Buildings": "Electrification"})
         .append(building_decarb * 0.65)
         .rename(index={"Buildings": "Efficiency"})
     )
+    """
+
     sbuilding_decarb.index.name = "Metric"
+
     sbuilding_decarb = pd.concat(
         [sbuilding_decarb], keys=["Buildings"], names=["Sector"]
     )
@@ -465,14 +495,19 @@ def results_analysis(
     # INDUSTRY DECARB
 
     # region
-
+    """
     sindustry_decarb = (
-        (industry_decarb * 0.60)
+        (industry_decarb * 0.34)
         .rename(index={"Industry": "Electrification"})
-        .append(industry_decarb * 0.40)
+        .append(industry_decarb * 0.31)
+        .rename(index={"Industry": "Hydrogen"})
+        .append(industry_decarb * 0.35)
         .rename(index={"Industry": "Efficiency"})
     )
+    """
+
     sindustry_decarb.index.name = "Metric"
+
     sindustry_decarb = pd.concat(
         [sindustry_decarb], keys=["Industry"], names=["Sector"]
     )

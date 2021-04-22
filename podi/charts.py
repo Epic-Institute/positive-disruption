@@ -358,7 +358,7 @@ for i in range(0, len(region_list)):
 scenario = scenario
 start_year = start_year
 
-colors = px.colors.qualitative.T10
+colors = px.colors.qualitative.Dark24
 
 for i in range(0, len(region_list)):
     fig = (
@@ -389,21 +389,6 @@ for i in range(0, len(region_list)):
 
         fig = go.Figure()
 
-        '''
-        for x in fig2['Metric'].unique():
-            fig.add_trace(
-                go.Scatter(
-                    name=x,
-                    line=dict(width=3, color="black"),
-                    x=fig2[(fig2["Year"] <= 2020)]["Year"],
-                    y=fig2[(fig2["Year"] <= 2020) & (fig2["Metric"] == x)]["% Adoption"],
-                    fill="tonexty",
-                    stackgroup="one",
-                    legendgroup=x,
-                    showlegend=False,
-                )
-            )
-        '''
         for x in fig2['Metric'].unique():
             fig.add_trace(
                 go.Scatter(
