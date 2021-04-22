@@ -483,6 +483,21 @@ def results_analysis(
     )
     """
 
+    sbuilding_decarb = (
+        (
+            (building_decarb * 0.277).rename(
+                index={"Buildings": "Electrification (Heating)"}
+            )
+        )
+        .append((building_decarb * 0.035).rename(index={"Buildings": "H2 (Heating)"}))
+        .append(
+            (building_decarb * 0.038).rename(
+                index={"Buildings": "Electrification (Other)"}
+            )
+        )
+        .append((building_decarb * 0.65).rename(index={"Buildings": "Efficiency"}))
+    )
+
     sbuilding_decarb.index.name = "Metric"
 
     sbuilding_decarb = pd.concat(
@@ -506,6 +521,34 @@ def results_analysis(
     )
     """
 
+    sindustry_decarb = (
+        (
+            (industry_decarb * 0.036).rename(
+                index={"Industry": "Electrification (Cement)"}
+            )
+        )
+        .append((industry_decarb * 0.053).rename(index={"Industry": "H2 (Cement)"}))
+        .append(
+            (industry_decarb * 0.157).rename(
+                index={"Industry": "Electrification (Steel)"}
+            )
+        )
+        .append((industry_decarb * 0.224).rename(index={"Industry": "H2 (Steel)"}))
+        .append(
+            (industry_decarb * 0.045).rename(
+                index={"Industry": "Electrification (Chemicals)"}
+            )
+        )
+        .append((industry_decarb * 0.045).rename(index={"Industry": "H2 (Chemicals)"}))
+        .append(
+            (industry_decarb * 0.085).rename(
+                index={"Industry": "Electrification (Other)"}
+            )
+        )
+        .append((industry_decarb * 0.0045).rename(index={"Industry": "H2 (Other)"}))
+        .append((industry_decarb * 0.35).rename(index={"Industry": "Efficiency"}))
+    )
+
     sindustry_decarb.index.name = "Metric"
 
     sindustry_decarb = pd.concat(
@@ -518,13 +561,36 @@ def results_analysis(
     # OTHER GASES DECARB
 
     # region
-
+    """
     sother_decarb = (
         (other_decarb * 0.60)
         .rename(index={"Other Gases": "Electrification"})
         .append(other_decarb * 0.40)
         .rename(index={"Other Gases": "Efficiency"})
     )
+    """
+
+    sother_decarb = (
+        ((other_decarb * 0.167).rename(index={"Other Gases": "Fugitive Solid Fuels"}))
+        .append(
+            (other_decarb * 0.167).rename(index={"Other Gases": "Fugitive Petroleum"})
+        )
+        .append(
+            (other_decarb * 0.167).rename(
+                index={"Other Gases": "Fugitive Other Energy"}
+            )
+        )
+        .append(
+            (other_decarb * 0.167).rename(index={"Other Gases": "Other Unspecified"})
+        )
+        .append(
+            (other_decarb * 0.167).rename(index={"Other Gases": "Fossil Fuel Fires"})
+        )
+        .append(
+            (other_decarb * 0.167).rename(index={"Other Gases": "Indirect Non-ag N20"})
+        )
+    )
+
     sother_decarb.index.name = "Metric"
     sother_decarb = pd.concat([sother_decarb], keys=["Other Gases"], names=["Sector"])
     sother_decarb = pd.concat([sother_decarb], keys=[region], names=["Region"])
