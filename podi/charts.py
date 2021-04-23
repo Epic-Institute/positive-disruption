@@ -18,6 +18,7 @@ from podi.energy_supply import (
 import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from itertools import chain, zip_longest
 from math import ceil, pi, nan
 from kneed import DataGenerator, KneeLocator
@@ -350,6 +351,292 @@ for i in range(0, len(region_list)):
 # endregion
 
 #############################
+# ADOPTION CURVES DASHBOARD #
+#############################
+
+# region
+
+scenario = scenario
+start_year = start_year
+
+for i in range(0, len(region_list)):
+    fig = (
+        adoption_curves.loc[region_list[i], slice(None), scenario].loc[
+            :, start_year:
+        ]
+        * 100
+    )
+
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
+
+    fig = make_subplots(rows=2, cols=4, start_cell='top-left', subplot_titles=('Electricity', 'Transport', 'Buildings', 'Industry', 'Regenerative Agriculture', 'Forests & Wetlands', 'Other Gases', 'CDR'))
+    fig.update_annotations(font_size=10)
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="one",
+            legendgroup="Electricity",
+            showlegend=False, 
+        ), row=1, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V2: Transport",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Transport")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="two",
+            legendgroup="Transport",
+            showlegend=False,
+        ), row=1, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V3: Buildings",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Buildings")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="three",
+            legendgroup="Buildings",
+            showlegend=False,
+        ), row=1, col=3
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V4: Industry",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Industry")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="four",
+            legendgroup="Industry",
+            showlegend=False,
+        ), row=1, col=4
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V5: Regenerative Agriculture",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] <= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="five",
+            legendgroup="Regenerative Agriculture",
+            showlegend=False,
+        ), row=2, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V6: Forests & Wetlands",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="six",
+            legendgroup="Forests & Wetlands",
+            showlegend=False,
+        ), row=2, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V7: Other Gases",
+            line=dict(width=3, color="black"),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Other Gases")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="othergases",
+            legendgroup="Other Gases",
+            showlegend=False,
+        ), row=2, col=3
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V1: Electricity",
+            line=dict(width=3, color="#B279A2", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="eight",
+            legendgroup="Electricity",
+        ), row=1, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V2: Transport",
+            line=dict(width=3, color="#7AA8B8", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Transport")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="nine",
+            legendgroup="Transport",
+        ), row=1, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V3: Buildings",
+            line=dict(width=3, color="#F58518", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Buildings")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="ten",
+            legendgroup="Buildings",
+        ), row=1, col=3
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V4: Industry",
+            line=dict(width=3, color="#60738C", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Industry")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="eleven",
+            legendgroup="Industry",
+        ), row=1, col=4
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V5: Regenerative Agriculture",
+            line=dict(width=3, color="#EECA3B", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[
+                (fig2["Year"] >= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
+            ]["% Adoption"],
+            fill="none",
+            stackgroup="twelve",
+            legendgroup="Regenerative Agriculture",
+        ), row=2, col=1
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V6: Forests & Wetlands",
+            line=dict(width=3, color="#54A24B", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="thirteen",
+            legendgroup="Forests & Wetlands",
+        ), row=2, col=2
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V7: Other Gases",
+            line=dict(width=3, color="#E45756", dash="dot"),
+            x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Other Gases")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="othergases2",
+            legendgroup="Other Gases",
+        ), row=2, col=3
+    )
+
+    
+    if region_list[i] == "World ":
+        fig.add_trace(
+            go.Scatter(
+                name="Carbon Dioxide Removal",
+                line=dict(width=3, color="black"),
+                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
+                    "Year"
+                ],
+                y=fig2[
+                    (fig2["Year"] <= 2020)
+                    & (fig2["Sector"] == "Carbon Dioxide Removal")
+                ]["% Adoption"],
+                fill="none",
+                stackgroup="seven",
+                legendgroup="Carbon Dioxide Removal",
+                showlegend=False,
+            ), row=2, col=4
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                name="Carbon Dioxide Removal",
+                line=dict(width=3, color="#FF9DA6", dash="dot"),
+                x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
+                    "Year"
+                ],
+                y=fig2[
+                    (fig2["Year"] >= 2020)
+                    & (fig2["Sector"] == "Carbon Dioxide Removal")
+                ]["% Adoption"],
+                fill="none",
+                stackgroup="fourteen",
+                legendgroup="Carbon Dioxide Removal",
+            ), row=2, col=4
+        )
+    
+    fig.update_layout(
+        title={
+            "text": "Percent of Total PD Adoption, " + scenario.title() + ', ' + region_list[i],
+            "xanchor": "center",
+            "x": 0.5,
+        }, showlegend=False
+    )
+
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/scurves2-" + region_list[i] + "-" + scenario + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
+
+# endregion
+
+#############################
 # SUBVECTOR ADOPTION CURVES #
 #############################
 
@@ -358,7 +645,7 @@ for i in range(0, len(region_list)):
 scenario = scenario
 start_year = start_year
 
-colors = px.colors.qualitative.Dark24
+colors = px.colors.qualitative.Vivid
 
 for i in range(0, len(region_list)):
     fig = (
@@ -446,7 +733,7 @@ for i in range(0, len(region_list)):
             text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture and Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available",
             xref="paper",
             yref="paper",
-            x=-0.18,
+            x=-0.17,
             y=1.15,
             showarrow=False,
             font=dict(size=10, color="#2E3F5C"),
@@ -3228,6 +3515,194 @@ for year in [2050]:
                 ).replace(" ", ""),
                 auto_open=False,
             )
+
+# endregion
+
+#################################
+# CO2 ATMOSPHERIC CONCENTRATION #
+#################################
+
+# region
+
+# Load RCP data, then swap in PD for main GHGs
+em_b = pd.DataFrame(rcp60.Emissions.emissions)
+em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
+em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
+
+hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
+    ["Region", "Metric", "Units", "Scenario"]
+)
+hist.columns = hist.columns.astype(int)
+hist = hist.loc["World ", "Equivalent CO2", "ppm", "pathway"].T.dropna()
+
+results = (
+    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
+    .droplevel(["UNIT"])
+)
+results.columns = results.columns.astype(int)
+results19 = curve_smooth(
+    pd.DataFrame(
+        results.loc[
+            "GCAM4",
+            "SSP2-19",
+            "World",
+            [
+                "Diagnostics|MAGICC6|Concentration|CO2",
+                "Diagnostics|MAGICC6|Concentration|CH4",
+                "Diagnostics|MAGICC6|Concentration|N2O",
+            ],
+        ].loc[:,2010:].multiply([1, 25e-3, 298e-3], axis=0).sum()
+    ).T,
+    "quadratic",
+    4,
+)
+results19 = results19 * (hist[2021] / results19.loc[:,2021].values[0])
+
+#CO2
+em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
+
+
+em_b.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
+
+
+#CH4
+em_b.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
+em_pd.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
+em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
+
+#N2O
+em_b.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
+em_pd.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
+em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
+
+em_b = em_b.values
+em_pd = em_pd.values
+em_cdr = em_cdr.values
+
+other_rf = np.zeros(em_pd.shape[0])
+for x in range(0, em_pd.shape[0]):
+    other_rf[x] = 0.5 * np.sin(2 * np.pi * (x) / 14.0)
+
+
+# run the model
+Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b, other_rf=other_rf)
+Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd, other_rf=other_rf)
+Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
+
+Cb = (pd.DataFrame(Cb).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
+Cpd = (pd.DataFrame(Cpd).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
+Ccdr = (pd.DataFrame(Ccdr).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
+
+# CO2e conversion
+Cb['CO2e'] = Cb.loc[:,0] + Cb.loc[:,1] * 25e-3 + Cb.loc[:,2] * 298e-3
+Cpd['CO2e'] = Cpd.loc[:,0] + Cpd.loc[:,1] * 25e-3 + Cpd.loc[:,2] * 298e-3
+Ccdr['CO2e'] = Ccdr.loc[:,0] + Ccdr.loc[:,1] * 25e-3 + Ccdr.loc[:,2] * 298e-3
+
+C19 = results19 * (hist[2021] / results19.loc[:,2021].values[0])
+Cb = Cb * (hist[2021] / Cb.loc[2021,'CO2e'])
+Cpd = Cpd * (hist[2021] / Cpd.loc[2021,'CO2e'])
+Ccdr = Ccdr * (hist[2021] / Ccdr.loc[2021,'CO2e'])
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=Cpd.loc[:, 'CO2e'],
+        fill="none",
+        stackgroup="hist",
+        legendgroup="hist",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Cb.loc[data_end_year:, 'CO2e'],
+        fill="none",
+        stackgroup="baseline",
+        legendgroup="baseline",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21-DAU",
+        line=dict(width=3, color="green", dash="dot"),
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Cpd.loc[data_end_year:, 'CO2e'],
+        fill="none",
+        stackgroup="pd21",
+        legendgroup="pd21",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="SSP2-1.9",
+        line=dict(width=3, color="light blue", dash="dot"),
+        x=results19.loc[:, 2020:2100].columns,
+        y=results19.loc[:, 2020:2100].squeeze(),
+        fill="none",
+        stackgroup="19",
+        legendgroup="19",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="PD21+CDR",
+        line=dict(width=3, color="yellow", dash="dot"),
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Ccdr.loc[data_end_year:, 'CO2e'],
+        fill="none",
+        stackgroup="26",
+        legendgroup="26",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Atmospheric CO2 Concentration",
+        "xanchor": "center",
+        "x": 0.5,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "ppmv CO2"},
+)
+
+fig.add_annotation(
+    text="Historical data is from NASA; projected data is from projected emissions input into the FaIR climate model.",
+    xref="paper",
+    yref="paper",
+    x=0,
+    y=1.15,
+    showarrow=False,
+    font=dict(size=10, color="#2E3F5C"),
+    align="left",
+    borderpad=4,
+    borderwidth=2,
+    bgcolor="#ffffff",
+    opacity=1,
+)
+
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/co2conc-" + "World " + ".html").replace(" ", ""),
+        auto_open=False,
+    )
 
 # endregion
 
