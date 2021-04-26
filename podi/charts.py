@@ -3533,7 +3533,7 @@ hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
     ["Region", "Metric", "Units", "Scenario"]
 )
 hist.columns = hist.columns.astype(int)
-hist = hist.loc["World ", "Equivalent CO2", "ppm", "pathway"].T.dropna()
+hist = hist.loc["World ", "Atm conc CO2", "ppm", "pathway"].T.dropna()
 
 results = (
     pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
@@ -3546,17 +3546,8 @@ results19 = curve_smooth(
         results.loc[
             "GCAM4",
             "SSP2-19",
-            "World",
-            [
-                "Diagnostics|MAGICC6|Concentration|CO2",
-                "Diagnostics|MAGICC6|Concentration|CH4",
-                "Diagnostics|MAGICC6|Concentration|N2O",
-            ],
-        ].loc[:,2010:].multiply([1, 25e-3, 298e-3], axis=0).sum()
-    ).T,
-    "quadratic",
-    4,
-)
+            "World", "Diagnostics|MAGICC6|Concentration|CO2"].loc[2010:]).T , "quadratic", 3)
+
 results19 = results19 * (hist[2021] / results19.loc[:,2021].values[0])
 
 #CO2
@@ -3598,15 +3589,15 @@ Cb = (pd.DataFrame(Cb).loc[225:335].set_index(np.arange(data_start_year, (long_p
 Cpd = (pd.DataFrame(Cpd).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
 Ccdr = (pd.DataFrame(Ccdr).loc[225:335].set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1)))
 
-# CO2e conversion
-Cb['CO2e'] = Cb.loc[:,0] + Cb.loc[:,1] * 25e-3 + Cb.loc[:,2] * 298e-3
-Cpd['CO2e'] = Cpd.loc[:,0] + Cpd.loc[:,1] * 25e-3 + Cpd.loc[:,2] * 298e-3
-Ccdr['CO2e'] = Ccdr.loc[:,0] + Ccdr.loc[:,1] * 25e-3 + Ccdr.loc[:,2] * 298e-3
+# CO2e conversion (not needed here for just CO2)
+Cb['CO2'] = Cb.loc[:,0]
+Cpd['CO2'] = Cpd.loc[:,0]
+Ccdr['CO2'] = Ccdr.loc[:,0]
 
 C19 = results19 * (hist[2021] / results19.loc[:,2021].values[0])
-Cb = Cb * (hist[2021] / Cb.loc[2021,'CO2e'])
-Cpd = Cpd * (hist[2021] / Cpd.loc[2021,'CO2e'])
-Ccdr = Ccdr * (hist[2021] / Ccdr.loc[2021,'CO2e'])
+Cb = Cb * (hist[2021] / Cb.loc[2021,'CO2'])
+Cpd = Cpd * (hist[2021] / Cpd.loc[2021,'CO2'])
+Ccdr = Ccdr * (hist[2021] / Ccdr.loc[2021,'CO2'])
 
 fig = go.Figure()
 
@@ -3615,7 +3606,7 @@ fig.add_trace(
         name="Historical",
         line=dict(width=3, color="black"),
         x=np.arange(data_start_year, data_end_year + 1, 1),
-        y=Cpd.loc[:, 'CO2e'],
+        y=Cpd.loc[:, 'CO2'],
         fill="none",
         stackgroup="hist",
         legendgroup="hist",
@@ -3627,7 +3618,7 @@ fig.add_trace(
         name="Baseline",
         line=dict(width=3, color="red", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-        y=Cb.loc[data_end_year:, 'CO2e'],
+        y=Cb.loc[data_end_year:, 'CO2'],
         fill="none",
         stackgroup="baseline",
         legendgroup="baseline",
@@ -3639,7 +3630,7 @@ fig.add_trace(
         name="PD21-DAU",
         line=dict(width=3, color="green", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-        y=Cpd.loc[data_end_year:, 'CO2e'],
+        y=Cpd.loc[data_end_year:, 'CO2'],
         fill="none",
         stackgroup="pd21",
         legendgroup="pd21",
@@ -3663,7 +3654,7 @@ fig.add_trace(
         name="PD21+CDR",
         line=dict(width=3, color="yellow", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-        y=Ccdr.loc[data_end_year:, 'CO2e'],
+        y=Ccdr.loc[data_end_year:, 'CO2'],
         fill="none",
         stackgroup="26",
         legendgroup="26",
@@ -3677,7 +3668,7 @@ fig.update_layout(
         "x": 0.5,
     },
     xaxis={"title": "Year"},
-    yaxis={"title": "ppmv CO2"},
+    yaxis={"title": "ppm CO2"},
 )
 
 fig.add_annotation(
@@ -3743,7 +3734,7 @@ results19 = curve_smooth(
         ].loc[:,2010:].multiply([1, 25e-3, 298e-3], axis=0).sum()
     ).T,
     "quadratic",
-    4,
+    6,
 )
 results19 = results19 * (hist[2021] / results19.loc[:,2021].values[0])
 
@@ -3865,7 +3856,7 @@ fig.update_layout(
         "x": 0.5,
     },
     xaxis={"title": "Year"},
-    yaxis={"title": "ppmv CO2e"},
+    yaxis={"title": "ppm CO2e"},
 )
 
 fig.add_annotation(
@@ -3922,7 +3913,7 @@ F19 = curve_smooth(pd.DataFrame(
             "World",
             ["Diagnostics|MAGICC6|Forcing"],
         ].loc[:, 2010:]
-    ), 'quadratic', 6)
+    ), 'quadratic', 3)
 
 #CO2
 em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
@@ -6010,7 +6001,7 @@ fig.update_layout(
         "x": 0.5,
     },
     xaxis={"title": "Year"},
-    yaxis={"title": "ppmv CO2"},
+    yaxis={"title": "ppm CO2"},
 )
 
 fig.add_annotation(
@@ -6590,7 +6581,7 @@ fig.update_layout(
         "x": 0.5,
     },
     xaxis={"title": "Year"},
-    yaxis={"title": "ppmv CO2e"},
+    yaxis={"title": "ppm CO2e"},
 )
 
 if show_figs is True:
