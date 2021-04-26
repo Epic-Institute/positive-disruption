@@ -3909,11 +3909,11 @@ F.columns = F.columns.astype(int)
 F19 = curve_smooth(pd.DataFrame(
         F.loc[
             "GCAM4",
-            "SSP1-19",
+            "SSP2-19",
             "World",
             ["Diagnostics|MAGICC6|Forcing"],
         ].loc[:, 2010:]
-    ), 'quadratic', 3)
+    ), 'quadratic', 6)
 
 #CO2
 em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values

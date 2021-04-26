@@ -456,8 +456,16 @@ def results_analysis(
         )
         .append((transport_decarb * 0.02).rename(index={"Transport": "H2 (LDV)"}))
         .append((transport_decarb * 0.016).rename(index={"Transport": "H2 (HDV)"}))
-        .append((transport_decarb * 0.064).rename(index={"Transport": "H2 (Shipping)"}))
-        .append((transport_decarb * 0.097).rename(index={"Transport": "H2 (Aviation)"}))
+        .append(
+            (transport_decarb * 0.064).rename(
+                index={"Transport": "H2/Ammonia (Shipping)"}
+            )
+        )
+        .append(
+            (transport_decarb * 0.097).rename(
+                index={"Transport": "H2/Synfuels (Aviation)"}
+            )
+        )
         .append((transport_decarb * 0.008).rename(index={"Transport": "H2 (Rail)"}))
         .append((transport_decarb * 0.27).rename(index={"Transport": "Efficiency"}))
     )
