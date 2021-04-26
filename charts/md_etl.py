@@ -158,7 +158,7 @@ for i in range(0, len(region_list)):
         # region
 
         if region_list[i] == "World ":
-            for k in ["ghgconc", "forcing", "temp"]:
+            for k in ["co2conc", "ghgconc", "forcing", "temp"]:
                 path = '"' + k + "-" + (region_list[i]).replace(" ", "") + '.html"'
 
                 mdFile.write(
