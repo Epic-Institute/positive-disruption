@@ -726,7 +726,7 @@ for i in range(0, len(region_list)):
                 "x": 0.5,
             },
             xaxis={"title": "Year"},
-            yaxis={"title": "% Adoption"},
+            yaxis={"title": "% Adoption"}, legend={'traceorder':'reversed'}
         )
 
         fig.add_annotation(
@@ -2246,7 +2246,7 @@ ndcs = [
     (2030, 1.2),
     [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
-    (2030, 0.13),
+    (2030, 0.614),
     (3, 3),
     (2030, 2.67),
     (3, 3),
@@ -2375,19 +2375,18 @@ for i in range(0, len(region_list)):
                     em_mit_ra,
                     em_mit_fw,
                     em_mit_othergas,
-                    em_mit_fgas,
                 ]
             )
             .clip(lower=0)
             .rename(
                 index={
-                    "Unnamed 0": "Electricity",
-                    "Unnamed 1": "Transport",
-                    "Unnamed 2": "Buildings",
-                    "Unnamed 3": "Industry",
-                    "Unnamed 4": "Forests & Wetlands",
-                    "Unnamed 5": "Agriculture",
-                    "Unnamed 6": "Other Gases",
+                    0: "Electricity",
+                    1: "Transport",
+                    2: "Buildings",
+                    3: "Industry",
+                    4: "Forests & Wetlands",
+                    5: "Agriculture",
+                    6: "Other Gases",
                 }
             )
         ).clip(lower=0)
