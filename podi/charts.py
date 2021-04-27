@@ -2246,9 +2246,9 @@ ndcs = [
     (2030, 1.2),
     [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
-    (2030, 0.614),
+    (2030, 0.398),
     (3, 3),
-    (2030, 2.67),
+    (2030, 2.49),
     (3, 3),
     [(2030, 2030, 2050), (12.96, 6.15, 0), ('NDC', "50% reduction by 2030", "Net-zero by 2050")],
     (2030, 5.88),
@@ -2886,26 +2886,26 @@ bar_emissions_goal = [
 
 ndcs = [
     [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    (3, 3),
+    [(2030, 2050), (2.84, 0), ("NDC", "Net-zero by 2050")],
+    (3, 3),
+    (2030, 1.2),
+    [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    (3, 3),
+    (2030, 0.398),
+    (3, 3),
+    (2030, 2.17),
+    (3, 3),
+    [(2030, 2050), (12.96, 0), ('NDC', "Net-zero by 2050")],
+    (2030, 9.14),
+    (2030, 1),
+    (3, 3),
+    (3, 3),
 ]
 
 scenario = 'pathway'
 
-for year in [2050]:
+for year in [2030]:
     for i in range(0, len(region_list)):
         em_mit_electricity = em_mitigated.loc[
             region_list[i], "Electricity", slice(None)
@@ -3412,18 +3412,18 @@ for year in [2050]:
                 ]
             )
 
-        if region_list[i] in [
+        if (region_list[i] in [
             "SAFR ",
             "RUS ",
             "JPN ",
             "BRAZIL ",
             "INDIA ",
-        ]:
+        ]) & (year==2030):
             figure.add_shape(
                 type="line",
-                x0=pd.Series(data['Total']).sum(),
+                x0=(pd.Series(em_baseline.groupby("Region").sum().loc[region_list[i]][year]/1e3 - ndcs[i][1]).values[0]).clip(min=0),
                 y0=-0.5,
-                x1=pd.Series(data['Total']).sum(),
+                x1=(pd.Series(em_baseline.groupby("Region").sum().loc[region_list[i]][year]/1e3 - ndcs[i][1]).values[0]).clip(min=0),
                 y1=7.5,
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
                 name="NDC",
@@ -3449,10 +3449,10 @@ for year in [2050]:
 
             figure.add_annotation(
                 text="Epic Index = PD Projected Mitigation Potential / Target Mitigation = "
-                + str((em_mit.loc[:, year].values.sum()/1e3).round(decimals=0))
+                + str((em_mit.loc[:, year].values.sum()/1e3).round(decimals=2))
                 + " GtCO2e"
                 + "  /  "
-                + str(((em_mit_ndc[(em_mit_ndc["Region"] == region_list[i]) & (em_mit_ndc.index == year)]["em_mit"].values[0])).round(decimals=0))
+                + str(((em_mit_ndc[(em_mit_ndc["Region"] == region_list[i]) & (em_mit_ndc.index == year)]["em_mit"].values[0])).round(decimals=2))
                 + " GtCO2e = " + str(ei.round(decimals=2)),
                 xref="paper",
                 yref="paper",
