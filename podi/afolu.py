@@ -272,7 +272,7 @@ def afolu(scenario):
                 "Improved Forest Mgmt",
                 "Improved Rice",
                 "Natural Regeneration",
-                #"Nitrogen Fertilizer Management",
+                # "Nitrogen Fertilizer Management",
                 "Optimal Intensity",
                 "Peat Restoration",
                 "Silvopasture",
@@ -535,7 +535,7 @@ def afolu(scenario):
         "Biochar",
         "Cropland Soil Health",
         "Improved Rice",
-        #"Nitrogen Fertilizer Management",
+        # "Nitrogen Fertilizer Management",
         "Optimal Intensity",
         "Silvopasture",
         "Trees in Croplands",
@@ -629,7 +629,7 @@ def afolu(scenario):
         "Biochar",
         "Cropland Soil Health",
         "Improved Rice",
-        #"Nitrogen Fertilizer Management",
+        # "Nitrogen Fertilizer Management",
         "Optimal Intensity",
         "Silvopasture",
         "Trees in Croplands",
@@ -706,6 +706,33 @@ def afolu(scenario):
     )
 
     per_adoption = pd.concat([per_fw, per_ag])
+
+    # endregion
+
+    # add in Mariculture estimate
+
+    # region
+
+    afolu_em = pd.concat(
+        [
+            afolu_em,
+            pd.DataFrame(afolu_em.loc["World ", "Forests & Wetlands"]).T.rename(
+                index={"Forests & Wetlands": "Mariculture"}
+            ),
+        ]
+    )
+
+    if scenario == "baseline":
+        afolu_em.loc["World ", "Mariculture"] = (
+            afolu_em.loc["World ", "Mariculture"] * 0
+        )
+    else:
+        afolu_em.loc["World ", "Mariculture"] = (
+            per_adoption.loc[
+                "World ", "Forests & Wetlands", "Coastal Restoration", "pathway"
+            ].values
+            * -290
+        )
 
     # endregion
 

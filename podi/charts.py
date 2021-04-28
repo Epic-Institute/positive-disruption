@@ -281,7 +281,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="V7: Mariculture",
-                line=dict(width=3, color="#2fddce", dash="dot"),
+                line=dict(width=3, color="#2FDDCE", dash="dot"),
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
@@ -2499,7 +2499,34 @@ for i in range(0, len(region_list)):
         "F-gases"
     )
 
-    if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
+    if region_list[i] in ["World "]:
+        em_mit_mar = em_mitigated.loc[region_list[i], "Mariculture"].squeeze()
+        
+        em_mit_cdr = cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario, :].squeeze().rename("CDR")
+        em_mit = pd.DataFrame(
+            [
+                em_mit_electricity,
+                em_mit_transport,
+                em_mit_buildings,
+                em_mit_industry,
+                em_mit_ra,
+                em_mit_fw,
+                em_mit_othergas,
+                em_mit_cdr, em_mit_mar
+            ]
+        ).rename(
+            index={
+                "Unnamed 0": "Electricity",
+                "Unnamed 1": "Transport",
+                "Unnamed 2": "Buildings",
+                "Unnamed 3": "Industry",
+                "Unnamed 4": "Forests & Wetlands",
+                "Unnamed 5": "Agriculture",
+                "Unnamed 6": "Other Gases",
+                "CDR": "CDR", "Unnamed 7": "Mariculture"
+            }
+        ).clip(lower=0)
+    elif region_list[i] in ["US ", "CHINA ", "EUR "]:
         em_mit_cdr = cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario, :].squeeze().rename("CDR")
         em_mit = pd.DataFrame(
             [
@@ -2579,7 +2606,7 @@ for i in range(0, len(region_list)):
                 "Forests & Wetlands",
                 "Agriculture",
                 "Other Gases",
-                "CDR",
+                "CDR", 'Mariculture',
                 spacer.name,
             ]
         )
@@ -2676,6 +2703,19 @@ for i in range(0, len(region_list)):
             stackgroup="one",
         )
     )
+
+    if region_list[i] in ["World "]:
+        fig.add_trace(
+            go.Scatter(
+                name="Mariculture",
+                line=dict(width=0.5, color="#2FDDCE"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "Mariculture"]["Emissions, GtCO2e"],
+                fill="tonexty",
+                stackgroup="one",
+            )
+        )
+
     fig.add_trace(
         go.Scatter(
             name="Agriculture",
@@ -2743,7 +2783,7 @@ for i in range(0, len(region_list)):
             x=pd.Series(em_hist.columns.values),
             y=pd.Series(em_hist.loc[region_list[i], :].values[0] / 1000),
             fill="none",
-            stackgroup="two",
+            stackgroup="two", showlegend=False
         )
     )
 
@@ -3000,7 +3040,7 @@ for i in range(0, len(region_list)):
             "y": 0.93
         },
         xaxis={"title": "Year"},
-        yaxis={"title": "GtCO2e/yr"},
+        yaxis={"title": "GtCO2e/yr"}, legend=dict(font=dict(size=11))
     )
 
     if show_figs is True:
