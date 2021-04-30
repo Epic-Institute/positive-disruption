@@ -10,8 +10,12 @@ elec = [
     "1A1a_Electricity-public",
     "1A1a_Heat-production",
     "1A1bc_Other-transformation",
+    "1B1_Fugitive-solid-fuels",
+    "1B2_Fugitive-petr",
     "1B2b_Fugitive-NG-distr",
     "1B2b_Fugitive-NG-prod",
+    "1B2d_Fugitive-other-energy",
+    "7A_Fossil-fuel-fires",
 ]
 
 ind = [
@@ -45,11 +49,17 @@ ind = [
     "5C_Waste-combustion",
     "5D_Wastewater-handling",
     "5E_Other-waste-handling",
+    "7BC_Indirect-N2O-non-agricultural-N",
+    "1A5_Other-unspecified",
+    "6A_Other-in-total",
 ]
 
 trans = [
+    "1A3ai_International-aviation",
+    "1A3aii_Domestic-aviation",
     "1A3b_Road",
     "1A3c_Rail",
+    "1A3di_International-shipping",
     "1A3di_Oil_Tanker_Loading",
     "1A3dii_Domestic-navigation",
     "1A3eii_Other-transp",
@@ -65,16 +75,7 @@ ag = [
     "3I_Agriculture-other",
 ]
 
-other = [
-    "1B1_Fugitive-solid-fuels",
-    "1B2_Fugitive-petr",
-    "1B2d_Fugitive-other-energy",
-    "1A5_Other-unspecified",
-    "6A_Other-in-total",
-    "6B_Other-not-in-total",
-    "7A_Fossil-fuel-fires",
-    "7BC_Indirect-N2O-non-agricultural-N",
-]
+other = ["other"]
 
 # endregion
 
@@ -141,7 +142,7 @@ def rgroup(data, gas, sector, rgroup):
 
 
 def proj(data, sector, metric, gas):
-    # project gas emissions using percent change in other sector
+    # project gas emissions using percent change in sector
 
     data_per_change = (
         energy_demand.loc[slice(None), "Industry", "Industry", slice(None)]
@@ -364,7 +365,7 @@ steel = pd.concat([steel], keys=["steel"], names=["Metric"]).reorder_levels(
 steel = pd.concat([steel], keys=["CO2"], names=["Gas"]).reorder_levels(
     ["IEA Region", "Metric", "Gas", "Scenario"]
 )
-steel = pd.concat([steel], keys=["Other"], names=["Sector"]).reorder_levels(
+steel = pd.concat([steel], keys=["Industry"], names=["Sector"]).reorder_levels(
     ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
 )
 
@@ -461,13 +462,13 @@ ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands", "CAIT Region")
 ch4_fw = proj(ch4_fw, "Forests & Wetlands", "CH4", "CH4")
 
 # Other
-
+"""
 ch4_o = ch4.loc[slice(None), other, :]
 
 ch4_o = rgroup(ch4_o, "CH4", "Other", "ISO")
 
 ch4_o = proj(ch4_o, "Other", "CH4", "CH4")
-
+"""
 # endregion
 
 #######
@@ -534,13 +535,13 @@ n2o_fw = rgroup(n2o_fw, "N2O", "Forests & Wetlands", "CAIT Region")
 n2o_fw = proj(n2o_fw, "Forests & Wetlands", "N2O", "N2O")
 
 # Other
-
+"""
 n2o_o = n2o.loc[slice(None), other, :]
 
 n2o_o = rgroup(n2o_o, "N2O", "Other", "ISO")
 
 n2o_o = proj(n2o_o, "Other", "N2O", "N2O")
-
+"""
 # endregion
 
 ###########
@@ -559,9 +560,13 @@ fgas = fgas[fgas.columns[::-1]]
 
 fgas.columns = fgas.columns.astype(int)
 
-fgas = rgroup(fgas, "F-gases", "Other", "CAIT Region")
+fgas_ind = rgroup(fgas * 0.5, "F-gases", "Industry", "CAIT Region")
 
-fgas = proj(fgas, "Other", "F-gases", "F-gases")
+fgas_ind = proj(fgas_ind, "Industry", "F-gases", "F-gases")
+
+fgas_build = rgroup(fgas * 0.5, "F-gases", "Buildings", "CAIT Region")
+
+fgas_build = proj(fgas_build, "Buildings", "F-gases", "F-gases")
 
 # endregion
 
@@ -578,15 +583,14 @@ addtl_em = pd.concat(
         ch4_b,
         ch4_ag,
         ch4_fw,
-        ch4_o,
         n2o_elec,
         n2o_ind,
         n2o_trans,
         n2o_b,
         n2o_ag,
         n2o_fw,
-        n2o_o,
-        fgas,
+        fgas_ind,
+        fgas_build,
     ]
 ).fillna(method="ffill", axis=1)
 

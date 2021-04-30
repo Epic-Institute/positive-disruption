@@ -174,7 +174,7 @@ def emissions(
 
     # region
 
-    # add 'Electricity' to energy_demand here to toggle emissions from Electricity to Buildings
+    # add 'Electricity' to energy_demand here to toggle emissions from Electricity to Industry
     industry_consump = (
         energy_demand.loc[slice(None), "Industry", ["Heat"], scenario]
         .groupby("IEA Region")
@@ -184,7 +184,7 @@ def emissions(
 
     industry_consump = (
         industry_consump
-        * heat_per_adoption.loc[slice(None), ["Coal", "Natural gas", "Oil"], scenario]
+        * heat_per_adoption.loc[slice(None), ["Fossil fuels"], scenario]
         .groupby("Region")
         .sum()
     )
@@ -294,6 +294,7 @@ def emissions(
         slice(None),
     ]
 
+    """
     # Set emissions change to follow elec ff emissions
     per_change = (
         industry_em.loc[slice(None), "Industry", "Fossil fuels", "CO2"]
@@ -303,22 +304,135 @@ def emissions(
         .dropna(axis=1)
         .apply(lambda x: x + 1, axis=1)
     )
+    """
 
-    addtl_em = addtl_em.loc[:, :2019].merge(
-        (
-            pd.DataFrame(addtl_em.loc[:, 2019])
-            .combine_first(per_change.loc[:, 2020:])
-            .cumprod(axis=1)
-            .loc[:, 2020:]
-        ),
-        right_on=["Region", "Sector", "Metric", "Gas"],
-        left_on=["Region", "Sector", "Metric", "Gas"],
+    # Set emissions change to follow sector emissions
+    per_change_elec = (
+        elec_em.loc[slice(None), "Electricity", "Fossil fuels", "CO2"]
+        .loc[:, 2019:]
+        .pct_change(axis=1)
+        .replace(NaN, 0)
+        .dropna(axis=1)
+        .apply(lambda x: x + 1, axis=1)
+    )
+
+    addtl_em_elec = (
+        addtl_em.loc[slice(None), ["Electricity"], slice(None), slice(None), :]
+        .loc[:, :2019]
+        .merge(
+            (
+                pd.DataFrame(
+                    addtl_em.loc[
+                        slice(None), ["Electricity"], slice(None), slice(None), :
+                    ].loc[:, 2019]
+                )
+                .combine_first(per_change_elec.loc[:, 2020:])
+                .cumprod(axis=1)
+                .loc[:, 2020:]
+            ),
+            right_on=["Region", "Sector", "Metric", "Gas"],
+            left_on=["Region", "Sector", "Metric", "Gas"],
+        )
+    )
+
+    per_change_ind = (
+        industry_em.loc[slice(None), "Industry", "Fossil fuels", "CO2"]
+        .loc[:, 2019:]
+        .pct_change(axis=1)
+        .replace(NaN, 0)
+        .dropna(axis=1)
+        .apply(lambda x: x + 1, axis=1)
+    )
+
+    addtl_em_ind = (
+        addtl_em.loc[slice(None), ["Industry"], slice(None), slice(None), :]
+        .loc[:, :2019]
+        .merge(
+            (
+                pd.DataFrame(
+                    addtl_em.loc[
+                        slice(None), ["Industry"], slice(None), slice(None), :
+                    ].loc[:, 2019]
+                )
+                .combine_first(per_change_ind.loc[:, 2020:])
+                .cumprod(axis=1)
+                .loc[:, 2020:]
+            ),
+            right_on=["Region", "Sector", "Metric", "Gas"],
+            left_on=["Region", "Sector", "Metric", "Gas"],
+        )
+    )
+
+    per_change_build = (
+        buildings_em.loc[slice(None), "Buildings", "Fossil fuels", "CO2"]
+        .loc[:, 2019:]
+        .pct_change(axis=1)
+        .replace(NaN, 0)
+        .dropna(axis=1)
+        .apply(lambda x: x + 1, axis=1)
+    )
+
+    addtl_em_build = (
+        addtl_em.loc[slice(None), ["Buildings"], slice(None), slice(None), :]
+        .loc[:, :2019]
+        .merge(
+            (
+                pd.DataFrame(
+                    addtl_em.loc[
+                        slice(None), ["Buildings"], slice(None), slice(None), :
+                    ].loc[:, 2019]
+                )
+                .combine_first(per_change_build.loc[:, 2020:])
+                .cumprod(axis=1)
+                .loc[:, 2020:]
+            ),
+            right_on=["Region", "Sector", "Metric", "Gas"],
+            left_on=["Region", "Sector", "Metric", "Gas"],
+        )
+    )
+
+    per_change_trans = (
+        transport_em.loc[slice(None), "Transport", "Fossil fuels", "CO2"]
+        .loc[:, 2019:]
+        .pct_change(axis=1)
+        .replace(NaN, 0)
+        .dropna(axis=1)
+        .apply(lambda x: x + 1, axis=1)
+    )
+
+    addtl_em_trans = (
+        addtl_em.loc[slice(None), ["Transport"], slice(None), slice(None), :]
+        .loc[:, :2019]
+        .merge(
+            (
+                pd.DataFrame(
+                    addtl_em.loc[
+                        slice(None), ["Transport"], slice(None), slice(None), :
+                    ].loc[:, 2019]
+                )
+                .combine_first(per_change_trans.loc[:, 2020:])
+                .cumprod(axis=1)
+                .loc[:, 2020:]
+            ),
+            right_on=["Region", "Sector", "Metric", "Gas"],
+            left_on=["Region", "Sector", "Metric", "Gas"],
+        )
     )
 
     # endregion
 
     em = pd.concat(
-        [elec_em, transport_em, buildings_em, industry_em, afolu_em, addtl_em]
+        [
+            elec_em,
+            transport_em,
+            buildings_em,
+            industry_em,
+            afolu_em,
+            addtl_em_elec,
+            addtl_em_ind,
+            addtl_em_build,
+            addtl_em_trans,
+        ]
     )
 
     ##########################

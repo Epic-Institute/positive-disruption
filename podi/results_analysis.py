@@ -603,35 +603,10 @@ def results_analysis(
     # OTHER GASES DECARB
 
     # region
-    """
-    sother_decarb = (
-        (other_decarb * 0.60)
-        .rename(index={"Other Gases": "Electrification"})
-        .append(other_decarb * 0.40)
-        .rename(index={"Other Gases": "Efficiency"})
-    )
-    """
 
     sother_decarb = (
-        ((other_decarb * 0.167).rename(index={"Other Gases": "Fugitive Solid Fuels"}))
-        .append(
-            (other_decarb * 0.167).rename(index={"Other Gases": "Fugitive Petroleum"})
-        )
-        .append(
-            (other_decarb * 0.167).rename(
-                index={"Other Gases": "Fugitive Other Energy"}
-            )
-        )
-        .append(
-            (other_decarb * 0.167).rename(index={"Other Gases": "Other Unspecified"})
-        )
-        .append(
-            (other_decarb * 0.167).rename(index={"Other Gases": "Fossil Fuel Fires"})
-        )
-        .append(
-            (other_decarb * 0.167).rename(index={"Other Gases": "Indirect Non-ag N20"})
-        )
-    )
+        (other_decarb * 0.7).rename(index={"Other Gases": "Other Unspecified"})
+    ).append((other_decarb * 0.3).rename(index={"Other Gases": "Indirect Non-ag N20"}))
 
     sother_decarb.index.name = "Metric"
     sother_decarb = pd.concat([sother_decarb], keys=["Other Gases"], names=["Sector"])
