@@ -3,7 +3,6 @@
 # region
 
 import pandas as pd
-from numpy import NaN
 
 elec = [
     "1A1a_Electricity-autoproducer",
@@ -232,7 +231,7 @@ cement = cement_world.append(
 )
 cement.index.name = "IEA Region"
 
-cement = pd.concat([cement], keys=["cement"], names=["Metric"]).reorder_levels(
+cement = pd.concat([cement], keys=["Cement"], names=["Metric"]).reorder_levels(
     ["IEA Region", "Metric"]
 )
 cement2 = pd.concat([cement], keys=["baseline"], names=["Scenario"]).reorder_levels(
@@ -264,7 +263,7 @@ cement = cement_per_change.loc[:, :2018].merge(
     right_on=["IEA Region", "Scenario"],
     left_on=["IEA Region", "Scenario"],
 )
-cement = pd.concat([cement], keys=["cement"], names=["Metric"]).reorder_levels(
+cement = pd.concat([cement], keys=["Cement"], names=["Metric"]).reorder_levels(
     ["IEA Region", "Metric", "Scenario"]
 )
 cement = pd.concat([cement], keys=["CO2"], names=["Gas"]).reorder_levels(
@@ -359,7 +358,7 @@ steel = steel_per_change.loc[:, :2019].merge(
     left_on=["IEA Region", "Scenario"],
 )
 
-steel = pd.concat([steel], keys=["steel"], names=["Metric"]).reorder_levels(
+steel = pd.concat([steel], keys=["Steel"], names=["Metric"]).reorder_levels(
     ["IEA Region", "Metric", "Scenario"]
 )
 steel = pd.concat([steel], keys=["CO2"], names=["Gas"]).reorder_levels(
@@ -416,50 +415,129 @@ ch4.columns = ch4.columns.astype(int)
 # Electricity
 
 ch4_elec = ch4.loc[slice(None), elec, :]
+ch4_elec2 = []
+ch4_elec3 = []
 
+for sub in elec:
+    ch4_elec2 = pd.DataFrame(ch4_elec2).append(rgroup(ch4_elec, "CH4", sub, "ISO"))
+for sub in elec:
+    ch4_elec3 = pd.DataFrame(ch4_elec3).append(
+        proj(ch4_elec2, "Electricity", sub, "CH4").drop_duplicates()
+    )
+
+ch4_elec = ch4_elec3
+
+"""
 ch4_elec = rgroup(ch4_elec, "CH4", "Electricity", "ISO")
 
 ch4_elec = proj(ch4_elec, "Electricity", "CH4", "CH4")
+"""
 
 # Industry
 
 ch4_ind = ch4.loc[slice(None), ind, :]
+ch4_ind2 = []
+ch4_ind3 = []
 
+for sub in ind:
+    ch4_ind2 = pd.DataFrame(ch4_ind2).append(rgroup(ch4_ind, "CH4", sub, "ISO"))
+for sub in ind:
+    ch4_ind3 = pd.DataFrame(ch4_ind3).append(
+        proj(ch4_ind2, "Industry", sub, "CH4").drop_duplicates()
+    )
+
+ch4_ind = ch4_ind3
+
+"""
 ch4_ind = rgroup(ch4_ind, "CH4", "Industry", "ISO")
 
 ch4_ind = proj(ch4_ind, "Industry", "CH4", "CH4")
+"""
 
 # Transport
 
 ch4_trans = ch4.loc[slice(None), trans, :]
+ch4_trans2 = []
+ch4_trans3 = []
 
+for sub in trans:
+    ch4_trans2 = pd.DataFrame(ch4_trans2).append(rgroup(ch4_trans, "CH4", sub, "ISO"))
+for sub in trans:
+    ch4_trans3 = pd.DataFrame(ch4_trans3).append(
+        proj(ch4_trans2, "Transport", sub, "CH4").drop_duplicates()
+    )
+
+ch4_trans = ch4_trans3
+
+"""
 ch4_trans = rgroup(ch4_trans, "CH4", "Transport", "ISO")
 
 ch4_trans = proj(ch4_trans, "Transport", "CH4", "CH4")
+"""
 
 # Buildings
 
-ch4_b = ch4.loc[slice(None), build, :]
+ch4_build = ch4.loc[slice(None), build, :]
+ch4_build2 = []
+ch4_build3 = []
 
+for sub in build:
+    ch4_build2 = pd.DataFrame(ch4_build2).append(rgroup(ch4_build, "CH4", sub, "ISO"))
+for sub in build:
+    ch4_build3 = pd.DataFrame(ch4_build3).append(
+        proj(ch4_build2, "Buildings", sub, "CH4").drop_duplicates()
+    )
+
+ch4_build = ch4_build3
+
+"""
 ch4_b = rgroup(ch4_b, "CH4", "Buildings", "ISO")
 
 ch4_b = proj(ch4_b, "Buildings", "CH4", "CH4")
+"""
 
 # Agriculture
 
 ch4_ag = ch4.loc[slice(None), ag, :]
+ch4_ag2 = []
+ch4_ag3 = []
 
+for sub in ag:
+    ch4_ag2 = pd.DataFrame(ch4_ag2).append(rgroup(ch4_ag, "CH4", sub, "ISO"))
+for sub in ag:
+    ch4_ag3 = pd.DataFrame(ch4_ag3).append(
+        proj(ch4_ag2, "Regenerative Agriculture", sub, "CH4").drop_duplicates()
+    )
+
+ch4_ag = ch4_ag3
+
+"""
 ch4_ag = rgroup(ch4_ag, "CH4", "Regenerative Agriculture", "ISO")
 
 ch4_ag = proj(ch4_ag, "Regenerative Agriculture", "CH4", "CH4")
+"""
 
 # Forests & Wetlands
 
 ch4_fw = gas_fw.loc[slice(None), slice(None), "CH4"]
+"""
+ch4_fw2 = []
+ch4_fw3 = []
+
+for sub in fw:
+    ch4_fw2 = pd.DataFrame(ch4_fw2).append(rgroup(ch4_fw, "CH4", sub, "ISO"))
+for sub in fw:
+    ch4_fw3 = pd.DataFrame(ch4_fw3).append(
+        proj(ch4_fw2, sub, "CH4", "CH4").drop_duplicates()
+    )
+
+ch4_fw = ch4_fw3
+"""
 
 ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands", "CAIT Region")
 
 ch4_fw = proj(ch4_fw, "Forests & Wetlands", "CH4", "CH4")
+
 
 # Other
 """
@@ -560,14 +638,14 @@ fgas = fgas[fgas.columns[::-1]]
 
 fgas.columns = fgas.columns.astype(int)
 
-fgas_ind = rgroup(fgas * 0.5, "F-gases", "Industry", "CAIT Region")
+fgas_ind = rgroup(fgas * 1, "F-gases", "Industry", "CAIT Region")
 
 fgas_ind = proj(fgas_ind, "Industry", "F-gases", "F-gases")
-
+"""
 fgas_build = rgroup(fgas * 0.5, "F-gases", "Buildings", "CAIT Region")
 
 fgas_build = proj(fgas_build, "Buildings", "F-gases", "F-gases")
-
+"""
 # endregion
 
 # combine
@@ -580,7 +658,7 @@ addtl_em = pd.concat(
         ch4_elec,
         ch4_ind,
         ch4_trans,
-        ch4_b,
+        ch4_build,
         ch4_ag,
         ch4_fw,
         n2o_elec,
@@ -590,7 +668,6 @@ addtl_em = pd.concat(
         n2o_ag,
         n2o_fw,
         fgas_ind,
-        fgas_build,
     ]
 ).fillna(method="ffill", axis=1)
 

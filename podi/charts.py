@@ -2048,9 +2048,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#############
-# EMISSIONS # vs (OLD), collapses 'other gases' into sectors
-#############
+################
+# EMISSIONS # V2 collapses 'other gases' into sectors
+################
 
 # region
 
@@ -2450,6 +2450,10 @@ for i in range(0, len(region_list)):
         ]
         .loc[:,start_year:long_proj_end_year]
     )
+    
+    em_industry.loc[region_list[i], 'Industry', 'Fossil fuels',scenario] = em_industry.loc[slice(None), slice(None), ['Fossil fuels', 'Cement'],:].sum()
+
+    em_industry = em_industry.loc[region_list[i], 'Industry', ['Fossil fuels', 'CH4', 'N2O', 'F-gases']]
 
     em_ra = (
         em.loc[
@@ -2570,6 +2574,7 @@ for i in range(0, len(region_list)):
         fig = fig.droplevel(['Region', 'Scenario']).T
         fig.index.name = "Year"
         fig.reset_index(inplace=True)
+        fig.rename(columns={'Fossil fuels':'CO2'}, inplace=True)
         fig2 = pd.melt(
             fig, id_vars="Year", var_name="Metric", value_name="Emissions, GtCO2e"
         )
@@ -2580,156 +2585,17 @@ for i in range(0, len(region_list)):
             fig.add_trace(
                 go.Scatter(
                     name=gas,
-                    line=dict(width=0.5, color="#54A24B"),
+                    line=dict(width=0.5, color=colors[pd.DataFrame(fig2['Metric'].unique()).set_index(0).index.get_loc(gas)]),
                     x=fig2["Year"],
-                    y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
-                    fill="tozeroy",
-                    stackgroup="fw",
+                    y=fig2[fig2["Metric"] == gas]["Emissions, GtCO2e"],
+                    fill="tonexty",
+                    stackgroup='1',
                 )
             )
 
-        if (
-            fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
-        ).any() == True:
-            if (
-                fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
-            ).all() == True:
-                fill = "tozeroy"
-                stackgroup = "two"
-            else:
-                fill = "tonexty"
-                stackgroup = "fw"
-        else:
-            fill = "tonexty"
-            stackgroup = "fw"
-
-        fig.add_trace(
-            go.Scatter(
-                name="Agriculture",
-                line=dict(width=0.5, color="#EECA3B"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
-                fill=fill,
-                stackgroup=stackgroup,
-            )
-        )
-
-        fill = "tonexty"
-        stackgroup2 = stackgroup
-
-        """
-        fig.add_trace(
-            go.Scatter(
-                name="Other Gases",
-                line=dict(width=0.5, color="#E45756"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "Other"]["Emissions, GtCO2e"],
-                fill=fill,
-                stackgroup=stackgroup2,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="CH4",
-                line=dict(width=0.5, color="#B82E2E"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "CH4"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup="two",
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="N2O",
-                line=dict(width=0.5, color="#77453b"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "N2O"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup="two",
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="F-gases",
-                line=dict(width=0.5, color="#bbe272"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "F-gases"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup="two",
-            )
-        )
-        """
-
-        fig.add_trace(
-            go.Scatter(
-                name="Industry",
-                line=dict(width=0.5, color="#60738C"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup=stackgroup2,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Buildings",
-                line=dict(width=0.5, color="#F58518"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup=stackgroup2,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Transport",
-                line=dict(width=0.5, color="#7AA8B8"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup=stackgroup2,
-            )
-        )
-
-        fig.add_trace(
-            go.Scatter(
-                name="Electricity",
-                line=dict(width=0.5, color="#B279A2"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup=stackgroup2,
-            )
-        )
-
-        if em_fw.loc[2000] < 0:
-            histfill = "tozeroy"
-            stackgroup = "hist"
-        else:
-            histfill = "tozeroy"
-            stackgroup = "hist"
-
-        fig.add_trace(
-            go.Scatter(
-                name="Historical Net Emissions",
-                line=dict(width=2, color="black"),
-                x=pd.Series(em_hist.loc[:, start_year:].columns.values),
-                y=pd.Series(
-                    em_hist.loc[region_list[i]].loc[:, start_year:].values[0] / 1000
-                ),
-                fill=histfill,
-                stackgroup=stackgroup,
-            )
-        )
-
         fig.update_layout(
             title={
-                "text": "Emissions, " + scenario.title() + ", " + region_list[i],
+                "text": "Emissions by Type in " + str(j) + ", " + scenario.title() + ", " + region_list[i],
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.93
@@ -2759,7 +2625,7 @@ for i in range(0, len(region_list)):
             pio.write_html(
                 fig,
                 file=(
-                    "./charts/em2-" + scenario + "-" + region_list[i] + ".html"
+                    "./charts/em3-" + scenario + "-" + region_list[i] + "-" + str(j) + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
             )
@@ -2770,6 +2636,8 @@ for i in range(0, len(region_list)):
 ################
 # EMISSIONS V4 # shows sector emissions by gas
 ################
+
+# region
 
 ###########################
 # EMISSIONS AS RELATIVE % #
@@ -3444,6 +3312,672 @@ for i in range(0, len(region_list)):
             stackgroup="one",
         )
     )
+
+    if region_list[i] in ["World "]:
+        fig.add_trace(
+            go.Scatter(
+                name="Mariculture",
+                line=dict(width=0.5, color="#2FDDCE"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "Mariculture"]["Emissions, GtCO2e"],
+                fill="tonexty",
+                stackgroup="one",
+            )
+        )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Agriculture",
+            line=dict(width=0.5, color="#EECA3B"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Forests & Wetlands",
+            line=dict(width=0.5, color="#54A24B"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Industry",
+            line=dict(width=0.5, color="#60738C"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Buildings",
+            line=dict(width=0.5, color="#F58518"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Transport",
+            line=dict(width=0.5, color="#7AA8B8"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Electricity",
+            line=dict(width=0.5, color="#B279A2"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=2, color="black"),
+            x=pd.Series(em_hist.columns.values),
+            y=pd.Series(em_hist.loc[region_list[i], :].values[0] / 1000),
+            fill="none",
+            stackgroup="two", showlegend=False
+        )
+    )
+
+    # Targets/NDCS
+
+    # region
+    if region_list[i] == "World ":
+        fig.add_trace(
+            go.Scatter(
+                name="SSP2-1.9",
+                line=dict(width=2, color="#17BECF", dash="dot"),
+                x=pd.Series(
+                    em_targets.loc["SSP2-19", near_proj_start_year:].index.values
+                ),
+                y=pd.Series(em_targets.loc["SSP2-19", near_proj_start_year:].values),
+                fill="none",
+                stackgroup="three",
+            )
+        )
+        '''
+        fig.add_trace(
+            go.Scatter(
+                name="SSP2-2.6",
+                line=dict(width=2, color="yellow", dash="dot"),
+                x=pd.Series(
+                    em_targets.loc["SSP2-26", near_proj_start_year:].index.values
+                ),
+                y=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].values),
+                fill="none",
+                stackgroup="four",
+            )
+        )
+        '''
+    if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
+        fig.add_trace(
+            go.Scatter(
+                name="PD21-DAU",
+                line=dict(width=2, color="green", dash="dot"),
+                x=pd.Series(
+                    em_targets.loc["SSP2-26", near_proj_start_year:].index.values
+                ),
+                y=pd.Series(
+                    (
+                        spacer.loc[near_proj_start_year:].values
+                        + cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario, :]
+                        .loc[:, near_proj_start_year:]
+                        .values[0]
+                    )
+                    / 1000
+                ),
+                fill="none",
+                stackgroup="five",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                name="PD21+CDR",
+                line=dict(width=2, color="yellow", dash="dot"),
+                x=pd.Series(
+                    em_targets.loc["SSP2-26", near_proj_start_year:].index.values
+                ),
+                y=pd.Series(spacer.loc[near_proj_start_year:].values) / 1000,
+                fill="none",
+                stackgroup="pd21+cdr",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][0]],
+                y=[ndcs[i][1][0]],
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][1]],
+                y=[ndcs[i][1][1]],
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+            )
+        )
+    else:
+        fig.add_trace(
+            go.Scatter(
+                name="PD21-DAU",
+                line=dict(width=2, color="green", dash="dot"),
+                x=pd.Series(
+                    em_targets.loc["SSP2-26", near_proj_start_year:].index.values
+                ),
+                y=pd.Series((spacer.loc[near_proj_start_year:].values) / 1000),
+                fill="none",
+                stackgroup="five",
+            )
+        )
+        fig.add_trace(
+            go.Scatter(
+                x=pd.Series(2030),
+                y=pd.Series(em_hist.loc[region_list[i], 2019].values[0] / 2000),
+                marker_color="#f71be9",
+                name='50% reduction by 2030',
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=pd.Series(2050),
+                y=pd.Series(0),
+                marker_color="#211df2",
+                name='Net-zero by 2050',
+            )
+        )
+
+        fig.add_annotation(
+            text="50% reduction and net-zero goals compare regional alignment with global-level IPCC recommendations.",
+            xref="paper",
+            yref="paper",
+            x=-0.17,
+            y=-0.27,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Baseline",
+            line=dict(width=2, color="red", dash="dot"),
+            x=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].index.values),
+            y=pd.Series(
+                em_baseline.loc[:, near_proj_start_year:]
+                .groupby("Region")
+                .sum()
+                .loc[region_list[i]]
+                / 1000
+            ),
+            fill="none",
+            stackgroup="six",
+        )
+    )
+
+    if region_list[i] in ["US "]:
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][2]],
+                y=[ndcs[i][1][2]],
+                marker_color="#eb742f",
+                name=ndcs[i][2][2],
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][3]],
+                y=[ndcs[i][1][3]],
+                marker_color="#05a118",
+                name=ndcs[i][2][3],
+            )
+        )
+
+        fig.add_annotation(
+            text="The NDC commitment is to " + ndc_commit[i][0] + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
+            xref="paper",
+            yref="paper",
+            x=-0.2,
+            y=-0.25,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+    elif region_list[i] in ["CHINA "]:
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][2]],
+                y=[ndcs[i][1][2]],
+                marker_color="#eb742f",
+                name=ndcs[i][2][2],
+            )
+        )
+
+        fig.add_annotation(
+            text="The NDC commitment is to " + ndc_commit[i][0] + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
+            xref="paper",
+            yref="paper",
+            x=-0.17,
+            y=-0.27,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+    elif region_list[i] in [
+        "SAFR ",
+        "RUS ",
+        "JPN ",
+        "BRAZIL ",
+        "INDIA ",
+    ]:
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0]],
+                y=[ndcs[i][1]],
+                marker_color="#FC0080",
+                name="NDC " + str(ndcs[i][0]),
+            )
+        )
+
+        fig.add_annotation(
+            text="The NDC commitment is to " + ndc_commit[i][0] + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
+            xref="paper",
+            yref="paper",
+            x=-0.17,
+            y=-0.27,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="center",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
+    # endregion
+
+    fig.add_annotation(
+        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissionsfactors are from IEA Emissions Factors 2020",
+        xref="paper",
+        yref="paper",
+        x=-0.18,
+        y=1.17,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="left",
+        borderpad=4,
+        bgcolor="#ffffff",
+        opacity=1,
+    )
+
+    fig.update_layout(
+        title={
+            "text": "Emissions Mitigated, " + region_list[i],
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.93
+        },
+        xaxis={"title": "Year"},
+        yaxis={"title": "GtCO2e/yr"}, legend=dict(font=dict(size=11))
+    )
+
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/mwedges-" + "pathway" + "-" + region_list[i] + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
+
+    plt.clf()
+
+# endregion
+
+##############################
+# MITIGATION WEDGES CURVE V2 # collapses 'other gases'
+##############################
+
+# region
+
+scenario = 'pathway'
+start_year = start_year
+
+ndcs = [
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    (3, 3),
+    [
+        (2025, 2050, 2030, 2050),
+        (4.86, 2.84, 2.84, 0),
+        ("NDC", "NDC 2050 est.", "50% reduction by 2030", "Net-zero by 2050"),
+    ],
+    (3, 3),
+    (2030, 1.2),
+    [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    (3, 3),
+    (2030, 0.398),
+    (3, 3),
+    (2030, 2.49),
+    (3, 3),
+    [(2030, 2030, 2050), (12.96, 6.15, 0), ('NDC', "50% reduction by 2030", "Net-zero by 2050")],
+    (2030, 5.88),
+    (2030, 1),
+    (3, 3),
+    (3, 3),
+]
+
+ndc_commit = [
+    ("x",),
+    ("x",),
+    ("reduce emissions to 25% below 2005 levels by 2025.",),
+    ("x",),
+    ("reduce emissions to 1.3 GtCO2e by 2025 and 1.2 by 2030.",),
+    ("x",),
+    ("x",),
+    ("reduce emissions to 398-614 MtCO2e over the period 2025-2030.",),
+    ("x",),
+    ("reduce emissions to 25-30% below 1990 by 2030",),
+    ("x",),
+    ("reach a GDP carbon intensity 60-65% below 2005 levels by 2030.",),
+    ("reach a GDP carbon intensity of 33-35% below 2005 by 2030.",),
+    (
+        "reduce emissions to 26% emissions below 2013 levels in 2030 and reach net 0 by 2050.",
+    ),
+    ("x",),
+    ("x",),
+]
+
+for i in range(0, len(region_list)):
+    em_mit_electricity = em_mitigated.loc[
+        region_list[i], "Electricity", slice(None)
+    ].sum()
+
+    em_mit_transport = em_mitigated.loc[
+        region_list[i], "Transport", slice(None)
+    ].sum()
+
+    em_mit_buildings = em_mitigated.loc[
+        region_list[i], "Buildings", slice(None)
+    ].sum()
+
+    em_mit_industry = em_mitigated.loc[
+        region_list[i], "Industry", slice(None)
+    ].sum()
+
+    em_mit_ra = em_mitigated.loc[
+        region_list[i],
+        [
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Trees in Croplands",
+            "Animal Mgmt",
+            "Legumes",
+            "Optimal Intensity",
+            "Silvopasture",
+            "Regenerative Agriculture",
+        ],
+        slice(None),
+        slice(None),
+    ].sum()
+
+    em_mit_fw = em_mitigated.loc[
+        region_list[i],
+        [
+            "Avoided Coastal Impacts",
+            "Avoided Forest Conversion",
+            "Avoided Peat Impacts",
+            "Coastal Restoration",
+            "Improved Forest Mgmt",
+            "Peat Restoration",
+            "Natural Regeneration",
+            "Forests & Wetlands",
+        ],
+        slice(None),
+        slice(None),
+    ].sum()
+
+    '''
+    em_mit_ch4 = em_mitigated.loc[region_list[i], "Other", "CH4"].rename("CH4")
+
+    em_mit_n2o = em_mitigated.loc[region_list[i], "Other", "N2O"].rename("N2O")
+
+    em_mit_fgas = em_mitigated.loc[region_list[i], "Other", "F-gases"].rename(
+        "F-gases"
+    )
+    '''
+
+    if region_list[i] in ["World "]:
+        em_mit_mar = em_mitigated.loc[region_list[i], "Mariculture"].squeeze()
+        
+        em_mit_cdr = cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario, :].squeeze().rename("CDR")
+        em_mit = pd.DataFrame(
+            [
+                em_mit_electricity,
+                em_mit_transport,
+                em_mit_buildings,
+                em_mit_industry,
+                em_mit_ra,
+                em_mit_fw,
+                em_mit_cdr, em_mit_mar
+            ]
+        ).rename(
+            index={
+                "Unnamed 0": "Electricity",
+                "Unnamed 1": "Transport",
+                "Unnamed 2": "Buildings",
+                "Unnamed 3": "Industry",
+                "Unnamed 4": "Forests & Wetlands",
+                "Unnamed 5": "Agriculture",
+                "CDR": "CDR", "Mariculture": "Mariculture"
+            }
+        ).clip(lower=0)
+    elif region_list[i] in ["US ", "CHINA ", "EUR "]:
+        em_mit_cdr = cdr.loc[region_list[i], 'Carbon Dioxide Removal', scenario, :].squeeze().rename("CDR")
+        em_mit = pd.DataFrame(
+            [
+                em_mit_electricity,
+                em_mit_transport,
+                em_mit_buildings,
+                em_mit_industry,
+                em_mit_ra,
+                em_mit_fw,
+                em_mit_cdr,
+            ]
+        ).rename(
+            index={
+                "Unnamed 0": "Electricity",
+                "Unnamed 1": "Transport",
+                "Unnamed 2": "Buildings",
+                "Unnamed 3": "Industry",
+                "Unnamed 4": "Forests & Wetlands",
+                "Unnamed 5": "Agriculture",
+                "CDR": "CDR",
+            }
+        ).clip(lower=0)
+    else:
+        em_mit = (
+            pd.DataFrame(
+                [
+                    em_mit_electricity,
+                    em_mit_transport,
+                    em_mit_buildings,
+                    em_mit_industry,
+                    em_mit_ra,
+                    em_mit_fw,
+                ]
+            )
+            .clip(lower=0)
+            .rename(
+                index={
+                    0: "Electricity",
+                    1: "Transport",
+                    2: "Buildings",
+                    3: "Industry",
+                    4: "Forests & Wetlands",
+                    5: "Agriculture",
+                }
+            )
+        ).clip(lower=0)
+
+    spacer = (
+        pd.Series(
+            em_baseline.groupby("Region").sum().loc[region_list[i]] - em_mit.sum()
+        )
+        .replace(nan, 0)
+        .rename("")
+        .T
+    )
+
+    em_targets = (
+        em_targets_pathway.loc[
+            "MESSAGE-GLOBIOM 1.0", "World ", slice(None), "Emissions|Kyoto Gases"
+        ]
+        .loc[:, data_start_year:]
+        .div(1000)
+    )
+
+    fig = (
+        ((em_mit.append(spacer)) / 1000)
+        .reindex(
+            [
+                "Electricity",
+                "Transport",
+                "Buildings",
+                "Industry",
+                "Forests & Wetlands",
+                "Agriculture",
+                "CDR", 'Mariculture',
+                spacer.name,
+            ]
+        )
+        .loc[:, data_end_year:]
+    )
+
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+    )
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            name="",
+            line=dict(width=0.5, color="rgba(230, 236, 245, 0)"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == ""]["Emissions, GtCO2e"],
+            fill="tozeroy",
+            stackgroup="one",
+            showlegend=False,
+        )
+    )
+
+    if region_list[i] in ["World ", 'US ', 'CHINA ', 'EUR ']:
+        fig.add_trace(
+            go.Scatter(
+                name="CDR",
+                line=dict(width=0.5, color="#FF9DA6"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
+                fill="tonexty",
+                stackgroup="one",
+            )
+        )
+
+        fig.add_annotation(
+            text="Cumulative CDR in 2100: " + str(fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"].values.sum().round(1)) + " GtCO2e",
+            xref="paper",
+            yref="paper",
+            x=0.05,
+            y=0.05,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
+    """
+    fig.add_trace(
+        go.Scatter(
+            name="CH4",
+            line=dict(width=0.5, color="#B82e2e"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "CH4"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="N2O",
+            line=dict(width=0.5, color="#77453b"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "N2O"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="F-gases",
+            line=dict(width=0.5, color="#bbe272"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "F-gases"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Other Gases",
+            line=dict(width=0.5, color="#E45756"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Other Gases"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    """
 
     if region_list[i] in ["World "]:
         fig.add_trace(
