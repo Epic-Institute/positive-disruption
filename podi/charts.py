@@ -377,7 +377,7 @@ for i in range(0, len(region_list)):
     )
 
     fig.add_annotation(
-        text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture and Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available",
+        text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture, Forests & Wetlands, Mariculture, Other Gases</b>: percent of maximum estimated extent of mitigation available; <br><b>CDR</b>: percent of total mitigation needed to meet net emissions targets.",
         xref="paper",
         yref="paper",
         x=-0.18,
@@ -786,7 +786,7 @@ for i in range(0, len(region_list)):
         )
 
         fig.add_annotation(
-            text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture and Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available",
+            text="",
             xref="paper",
             yref="paper",
             x=-0.17,
@@ -1112,11 +1112,7 @@ for i in range(0, len(region_list)):
     )
 
     fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate "
-        + "<br>"
-        + "assumptions applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline "
-        + "<br>"
-        + "Limited Technology Scenario for 2040-2100",
+        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
         x=-0.17,
@@ -1367,11 +1363,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate "
-        + "<br>"
-        + "assumptions applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline "
-        + "<br>"
-        + "Limited Technology Scenario for 2040-2100",
+        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
         x=-0.17,
@@ -1634,11 +1626,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(margin=dict())
     fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate "
-        + "<br>"
-        + "assumptions applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline "
-        + "<br>"
-        + "Limited Technology Scenario for 2040-2100",
+        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
         xref="paper",
         yref="paper",
         x=-0.17,
@@ -2226,7 +2214,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Forests & Wetlands",
+            name="V6: Forests & Wetlands",
             line=dict(width=0.5, color="#54A24B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
@@ -2252,7 +2240,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Agriculture",
+            name="V5: Agriculture",
             line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
@@ -2312,7 +2300,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Industry",
+            name="V4: Industry",
             line=dict(width=0.5, color="#60738C"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
@@ -2323,7 +2311,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Buildings",
+            name="V3: Buildings",
             line=dict(width=0.5, color="#F58518"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
@@ -2334,7 +2322,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Transport",
+            name="V2: Transport",
             line=dict(width=0.5, color="#7AA8B8"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
@@ -2345,7 +2333,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Electricity",
+            name="V1: Electricity",
             line=dict(width=0.5, color="#B279A2"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
@@ -2822,7 +2810,7 @@ for i in range(0, len(region_list)):
     """
     fig.add_trace(
         go.Scatter(
-            name="Forests & Wetlands",
+            name="V6: Forests & Wetlands",
             line=dict(width=0.5, color="#54A24B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
@@ -2849,7 +2837,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Agriculture",
+            name="V5: Agriculture",
             line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
@@ -2864,7 +2852,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Other Gases",
+            name="V8: Other Gases",
             line=dict(width=0.5, color="#E45756"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Other"]["Emissions, GtCO2e"],
@@ -2921,7 +2909,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Buildings",
+            name="V3: Buildings",
             line=dict(width=0.5, color="#F58518"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
@@ -2932,7 +2920,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Transport",
+            name="V2: Transport",
             line=dict(width=0.5, color="#7AA8B8"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
@@ -2943,7 +2931,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Electricity",
+            name="V1: Electricity",
             line=dict(width=0.5, color="#B279A2"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
@@ -3246,7 +3234,7 @@ for i in range(0, len(region_list)):
     if region_list[i] in ["World ", 'US ', 'CHINA ', 'EUR ']:
         fig.add_trace(
             go.Scatter(
-                name="CDR",
+                name="V9: CDR",
                 line=dict(width=0.5, color="#FF9DA6"),
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
@@ -3304,7 +3292,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Other Gases",
+            name="V8: Other Gases",
             line=dict(width=0.5, color="#E45756"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Other Gases"]["Emissions, GtCO2e"],
@@ -3316,7 +3304,7 @@ for i in range(0, len(region_list)):
     if region_list[i] in ["World "]:
         fig.add_trace(
             go.Scatter(
-                name="Mariculture",
+                name="V7: Mariculture",
                 line=dict(width=0.5, color="#2FDDCE"),
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "Mariculture"]["Emissions, GtCO2e"],
@@ -3327,7 +3315,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Agriculture",
+            name="V5: Agriculture",
             line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
@@ -3337,7 +3325,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Forests & Wetlands",
+            name="V6: Forests & Wetlands",
             line=dict(width=0.5, color="#54A24B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
@@ -3347,7 +3335,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Industry",
+            name="V4: Industry",
             line=dict(width=0.5, color="#60738C"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
@@ -3357,7 +3345,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Buildings",
+            name="V3: Buildings",
             line=dict(width=0.5, color="#F58518"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
@@ -3367,7 +3355,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Transport",
+            name="V2: Transport",
             line=dict(width=0.5, color="#7AA8B8"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
@@ -3377,7 +3365,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Electricity",
+            name="V1: Electricity",
             line=dict(width=0.5, color="#B279A2"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
@@ -3628,7 +3616,7 @@ for i in range(0, len(region_list)):
     # endregion
 
     fig.add_annotation(
-        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissionsfactors are from IEA Emissions Factors 2020",
+        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissions factors are from IEA Emissions Factors 2020",
         xref="paper",
         yref="paper",
         x=-0.18,
@@ -3912,7 +3900,7 @@ for i in range(0, len(region_list)):
     if region_list[i] in ["World ", 'US ', 'CHINA ', 'EUR ']:
         fig.add_trace(
             go.Scatter(
-                name="CDR",
+                name="V9: CDR",
                 line=dict(width=0.5, color="#FF9DA6"),
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
@@ -3982,7 +3970,7 @@ for i in range(0, len(region_list)):
     if region_list[i] in ["World "]:
         fig.add_trace(
             go.Scatter(
-                name="Mariculture",
+                name="V7: Mariculture",
                 line=dict(width=0.5, color="#2FDDCE"),
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "Mariculture"]["Emissions, GtCO2e"],
@@ -3993,7 +3981,7 @@ for i in range(0, len(region_list)):
 
     fig.add_trace(
         go.Scatter(
-            name="Agriculture",
+            name="V5: Agriculture",
             line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
@@ -4003,7 +3991,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Forests & Wetlands",
+            name="V6: Forests & Wetlands",
             line=dict(width=0.5, color="#54A24B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
@@ -4013,7 +4001,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Industry",
+            name="V4: Industry",
             line=dict(width=0.5, color="#60738C"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
@@ -4023,7 +4011,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Buildings",
+            name="V3: Buildings",
             line=dict(width=0.5, color="#F58518"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
@@ -4033,7 +4021,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Transport",
+            name="V2: Transport",
             line=dict(width=0.5, color="#7AA8B8"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
@@ -4043,7 +4031,7 @@ for i in range(0, len(region_list)):
     )
     fig.add_trace(
         go.Scatter(
-            name="Electricity",
+            name="V1: Electricity",
             line=dict(width=0.5, color="#B279A2"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
@@ -4294,7 +4282,7 @@ for i in range(0, len(region_list)):
     # endregion
 
     fig.add_annotation(
-        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissionsfactors are from IEA Emissions Factors 2020",
+        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissions factors are from IEA Emissions Factors 2020",
         xref="paper",
         yref="paper",
         x=-0.18,
@@ -4432,7 +4420,7 @@ for year in [2030]:
             slice(None),
         ].sum()
 
-        em_mit_othergas = em_mitigated.loc[region_list[i], "Other", :].sum()
+        em_mit_othergas = em_mitigated.loc[region_list[i], slice(None), ['CH4', 'N2O', 'F-gases'], :].sum()
 
         if region_list[i] in ['World ', 'US ', 'CHINA ', 'EUR ']:
             em_mit_cdr = pd.Series(
@@ -4452,35 +4440,36 @@ for year in [2030]:
                 ]
             ).rename(
                 index={
-                    0: "Electricity",
-                    1: "Transport",
-                    2: "Buildings",
-                    3: "Industry",
-                    4: "Forests & Wetlands",
-                    5: "Agriculture",
-                    6: "CH4, N2O, F-gases",
-                    7: "CDR",
+                    0: "V1: Electricity",
+                    1: "V2: Transport",
+                    2: "V3: Buildings",
+                    3: "V4: Industry",
+                    4: "V5: Forests & Wetlands",
+                    5: "V6: Agriculture",
+                    6: "V7: Mariculture",
+                    7: "V8: Other Gases",
+                    8: "V9: CDR"
                 }
             )
             fig = (
                 ((em_mit) / 1000)
                 .reindex(
                     [
-                        "CDR",
-                        "CH4, N2O, F-gases",
-                        "Agriculture",
-                        "Forests & Wetlands",
-                        "Industry",
-                        "Buildings",
-                        "Transport",
-                        "Electricity",
+                        "V9: CDR",
+                        "V8: Other Gases",
+                        "V6: Agriculture",
+                        "V5: Forests & Wetlands",
+                        "V4: Industry",
+                        "V3: Buildings",
+                        "V2: Transport",
+                        "V1: Electricity",
                     ]
                 )
                 .round(decimals=4)
                 .clip(lower=0)
             )
             data = {
-                "Electricity": [
+                "V1: Electricity": [
                     0,
                     0,
                     0,
@@ -4488,77 +4477,77 @@ for year in [2030]:
                     0,
                     0,
                     0,
-                    fig.loc["Electricity", year],
-                    fig.loc["Electricity", year],
+                    fig.loc["V1: Electricity", year],
+                    fig.loc["V1: Electricity", year],
                 ],
-                "Transport": [
+                "V2: Transport": [
                     0,
                     0,
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Transport", year],
+                    fig.loc["V2: Transport", year],
                     0,
-                    fig.loc["Transport", year],
+                    fig.loc["V2: Transport", year],
                 ],
-                "Buildings": [
+                "V3: Buildings": [
                     0,
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Buildings", year],
+                    fig.loc["V3: Buildings", year],
                     0,
                     0,
-                    fig.loc["Buildings", year],
+                    fig.loc["V3: Buildings", year],
                 ],
-                "Industry": [
+                "V4: Industry": [
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Industry", year],
+                    fig.loc["V4: Industry", year],
                     0,
                     0,
                     0,
-                    fig.loc["Industry", year],
+                    fig.loc["V4: Industry", year],
                 ],
-                "Forests & Wetlands": [
+                "V5: Forests & Wetlands": [
                     0,
                     0,
                     0,
-                    fig.loc["Forests & Wetlands", year],
+                    fig.loc["V5: Forests & Wetlands", year],
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Forests & Wetlands", year],
+                    fig.loc["V5: Forests & Wetlands", year],
                 ],
-                "Agriculture": [
+                "V6: Agriculture": [
                     0,
                     0,
-                    fig.loc["Agriculture", year],
+                    fig.loc["V6: Agriculture", year],
                     0,
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Agriculture", year],
+                    fig.loc["V6: Agriculture", year],
                 ],
-                "CH4, N2O, F-gases": [
+                "V8: Other Gases": [
                     0,
-                    fig.loc["CH4, N2O, F-gases", year],
-                    0,
-                    0,
+                    fig.loc["V8: Other Gases", year],
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["CH4, N2O, F-gases", year],
+                    0,
+                    0,
+                    fig.loc["V8: Other Gases", year],
                 ],
-                "CDR": [
-                    fig.loc["CDR", year],
+                "V9: CDR": [
+                    fig.loc["V9: CDR", year],
                     0,
                     0,
                     0,
@@ -4566,28 +4555,28 @@ for year in [2030]:
                     0,
                     0,
                     0,
-                    fig.loc["CDR", year],
+                    fig.loc["V9: CDR", year],
                 ],
                 "Total": [
                     0,
-                    fig.loc["Electricity", year],
-                    fig.loc["Transport", year],
-                    fig.loc["Buildings", year],
-                    fig.loc["Industry", year],
-                    fig.loc["Forests & Wetlands", year],
-                    fig.loc["Agriculture", year],
-                    fig.loc["CH4, N2O, F-gases", year],
-                    fig.loc["CDR", year],
+                    fig.loc["V1: Electricity", year],
+                    fig.loc["V2: Transport", year],
+                    fig.loc["V3: Buildings", year],
+                    fig.loc["V4: Industry", year],
+                    fig.loc["V5: Forests & Wetlands", year],
+                    fig.loc["V6: Agriculture", year],
+                    fig.loc["V8: Other Gases", year],
+                    fig.loc["V9: CDR", year],
                 ],
                 "labels": [
-                    "CDR",
-                    "CH4, N2O, F-gases",
-                    "Agriculture",
-                    "Forests & Wetlands",
-                    "Industry",
-                    "Buildings",
-                    "Transport",
-                    "Electricity",
+                    "V9: CDR",
+                    "V8: Other Gases",
+                    "V6: Agriculture",
+                    "V5: Forests & Wetlands",
+                    "V4: Industry",
+                    "V3: Buildings",
+                    "V2: Transport",
+                    "V1: Electricity",
                     "Total",
                 ],
             }
@@ -4604,120 +4593,121 @@ for year in [2030]:
                 ]
             ).rename(
                 index={
-                    0: "Electricity",
-                    1: "Transport",
-                    2: "Buildings",
-                    3: "Industry",
-                    4: "Forests & Wetlands",
-                    5: "Agriculture",
-                    6: "CH4, N2O, F-gases",
+                    0: "V1: Electricity",
+                    1: "V2: Transport",
+                    2: "V3: Buildings",
+                    3: "V4: Industry",
+                    4: "V5: Forests & Wetlands",
+                    5: "V6: Agriculture",
+                    6: "V7: Mariculture",
+                    7: "V8: Other Gases",
                 }
             )
             fig = (
                 ((em_mit) / 1000)
                 .reindex(
                     [
-                        "CH4, N2O, F-gases",
-                        "Agriculture",
-                        "Forests & Wetlands",
-                        "Industry",
-                        "Buildings",
-                        "Transport",
-                        "Electricity",
+                        "V8: Other Gases",
+                        "V6: Agriculture",
+                        "V5: Forests & Wetlands",
+                        "V4: Industry",
+                        "V3: Buildings",
+                        "V2: Transport",
+                        "V1: Electricity",
                     ]
                 )
                 .round(decimals=4)
                 .clip(lower=0)
             )
             data = {
-                "Electricity": [
+                "V1: Electricity": [
                     0,
                     0,
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Electricity", year],
-                    fig.loc["Electricity", year],
+                    fig.loc["V1: Electricity", year],
+                    fig.loc["V1: Electricity", year],
                 ],
-                "Transport": [
+                "V2: Transport": [
                     0,
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Transport", year],
+                    fig.loc["V2: Transport", year],
                     0,
-                    fig.loc["Transport", year],
+                    fig.loc["V2: Transport", year],
                 ],
-                "Buildings": [
+                "V3: Buildings": [
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Buildings", year],
+                    fig.loc["V3: Buildings", year],
                     0,
                     0,
-                    fig.loc["Buildings", year],
+                    fig.loc["V3: Buildings", year],
                 ],
-                "Industry": [
+                "V4: Industry": [
                     0,
                     0,
                     0,
-                    fig.loc["Industry", year],
+                    fig.loc["V4: Industry", year],
                     0,
                     0,
                     0,
-                    fig.loc["Industry", year],
+                    fig.loc["V4: Industry", year],
                 ],
-                "Forests & Wetlands": [
+                "V5: Forests & Wetlands": [
                     0,
                     0,
-                    fig.loc["Forests & Wetlands", year],
+                    fig.loc["V5: Forests & Wetlands", year],
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["Forests & Wetlands", year],
+                    fig.loc["V5: Forests & Wetlands", year],
                 ],
-                "Agriculture": [
+                "V6: Agriculture": [
                     0,
-                    fig.loc["Agriculture", year],
-                    0,
-                    0,
+                    fig.loc["V6: Agriculture", year],
                     0,
                     0,
                     0,
-                    fig.loc["Agriculture", year],
+                    0,
+                    0,
+                    fig.loc["V6: Agriculture", year],
                 ],
-                "CH4, N2O, F-gases": [
-                    fig.loc["CH4, N2O, F-gases", year],
+                "V8: Other Gases": [
+                    fig.loc["V8: Other Gases", year],
                     0,
                     0,
                     0,
                     0,
                     0,
                     0,
-                    fig.loc["CH4, N2O, F-gases", year],
+                    fig.loc["V8: Other Gases", year],
                 ],
                 "Total": [
                     0,
-                    fig.loc["Electricity", year],
-                    fig.loc["Transport", year],
-                    fig.loc["Buildings", year],
-                    fig.loc["Industry", year],
-                    fig.loc["Forests & Wetlands", year],
-                    fig.loc["Agriculture", year],
-                    fig.loc["CH4, N2O, F-gases", year],
+                    fig.loc["V1: Electricity", year],
+                    fig.loc["V2: Transport", year],
+                    fig.loc["V3: Buildings", year],
+                    fig.loc["V4: Industry", year],
+                    fig.loc["V5: Forests & Wetlands", year],
+                    fig.loc["V6: Agriculture", year],
+                    fig.loc["V8: Other Gases", year],
                 ],
                 "labels": [
-                    "CH4, N2O, F-gases",
-                    "Agriculture",
-                    "Forests & Wetlands",
-                    "Industry",
-                    "Buildings",
-                    "Transport",
-                    "Electricity",
+                    "V8: Other Gases",
+                    "V6: Agriculture",
+                    "V5: Forests & Wetlands",
+                    "V4: Industry",
+                    "V3: Buildings",
+                    "V2: Transport",
+                    "V1: Electricity",
                     "Total",
                 ],
             }
@@ -4736,7 +4726,7 @@ for year in [2030]:
                 data=[
                     go.Bar(
                         y=data["labels"],
-                        x=data["CDR"],
+                        x=data["V9: CDR"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#FF9DA6",
@@ -4744,7 +4734,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["CH4, N2O, F-gases"],
+                        x=data["V8: Other Gases"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#E45756",
@@ -4752,7 +4742,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Agriculture"],
+                        x=data["V6: Agriculture"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#EECA3B",
@@ -4760,7 +4750,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Forests & Wetlands"],
+                        x=data["V5: Forests & Wetlands"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#54A24B",
@@ -4768,7 +4758,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Industry"],
+                        x=data["V4: Industry"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#60738C",
@@ -4776,7 +4766,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Buildings"],
+                        x=data["V3: Buildings"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#F58518",
@@ -4784,7 +4774,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Transport"],
+                        x=data["V2: Transport"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#7AA8B8",
@@ -4792,7 +4782,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Electricity"],
+                        x=data["V1: Electricity"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#B279A2",
@@ -4830,7 +4820,7 @@ for year in [2030]:
                 data=[
                     go.Bar(
                         y=data["labels"],
-                        x=data["CH4, N2O, F-gases"],
+                        x=data["V8: Other Gases"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#E45756",
@@ -4838,7 +4828,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Agriculture"],
+                        x=data["V6: Agriculture"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#EECA3B",
@@ -4846,7 +4836,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Forests & Wetlands"],
+                        x=data["V5: Forests & Wetlands"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#54A24B",
@@ -4854,7 +4844,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Industry"],
+                        x=data["V4: Industry"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#60738C",
@@ -4862,7 +4852,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Buildings"],
+                        x=data["V3: Buildings"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#F58518",
@@ -4870,7 +4860,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Transport"],
+                        x=data["V2: Transport"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#7AA8B8",
@@ -4878,7 +4868,7 @@ for year in [2030]:
                     ),
                     go.Bar(
                         y=data["labels"],
-                        x=data["Electricity"],
+                        x=data["V1: Electricity"],
                         offsetgroup=0,
                         orientation="h",
                         marker_color="#B279A2",
@@ -4908,11 +4898,11 @@ for year in [2030]:
                 text="The blue dotted line represents an emissions mitigation goal " + bar_emissions_goal[i][j],
                 xref="paper",
                 yref="paper",
-                x=-0.2,
+                x=0,
                 y=1.14,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
-                align="left",
+                align="center",
                 borderpad=4,
                 bgcolor="#ffffff",
                 opacity=1,
@@ -5153,7 +5143,7 @@ fig.add_annotation(
     y=1.15,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
-    align="left",
+    align="center",
     borderpad=4,
     borderwidth=2,
     bgcolor="#ffffff",
@@ -5341,7 +5331,7 @@ fig.add_annotation(
     y=1.15,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
-    align="left",
+    align="center",
     borderpad=4,
     borderwidth=2,
     bgcolor="#ffffff",
@@ -5525,7 +5515,7 @@ fig.add_annotation(
     y=1.15,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
-    align="left",
+    align="center",
     borderpad=4,
     borderwidth=2,
     bgcolor="#ffffff",
@@ -5708,7 +5698,7 @@ fig.add_annotation(
     y=1.15,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
-    align="left",
+    align="center",
     borderpad=4,
     borderwidth=2,
     bgcolor="#ffffff",
