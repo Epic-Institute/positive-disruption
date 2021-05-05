@@ -2350,7 +2350,7 @@ for i in range(0, len(region_list)):
 scenario = scenario
 start_year = 2000
 
-colors = px.colors.qualitative.Alphabet
+colors = px.colors.qualitative.Safe
 
 for i in range(0, len(region_list)):
 
