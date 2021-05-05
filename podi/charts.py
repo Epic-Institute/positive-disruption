@@ -2439,9 +2439,9 @@ for i in range(0, len(region_list)):
     else:
         em2 = em_electricity.append(em_transport).append(em_buildings).append(em_industry).append(em_ra).append(em_fw)
 
-    for j in pd.Series(em2.index.get_level_values(1).unique()):
+    for sector in pd.Series(em2.index.get_level_values(1).unique()):
 
-        fig = ((em2.loc[slice(None), j,:].groupby('Gas').sum()) / 1000).loc[:, start_year:]
+        fig = ((em2.loc[slice(None), sector,:].groupby('Gas').sum()) / 1000).loc[:, start_year:]
         fig = fig.T
         fig.index.name = "Year"
         fig.reset_index(inplace=True)
@@ -2465,7 +2465,7 @@ for i in range(0, len(region_list)):
 
         fig.update_layout(
             title={
-                "text": "Emissions by Type in " + str(j) + ", " + scenario.title() + ", " + region_list[i],
+                "text": "Emissions by Type in " + str(sector) + ", " + scenario.title() + ", " + region_list[i],
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.93
@@ -2494,7 +2494,7 @@ for i in range(0, len(region_list)):
             pio.write_html(
                 fig,
                 file=(
-                    "./charts/em3-" + scenario + "-" + region_list[i] + "-" + str(j) + ".html"
+                    "./charts/em3-" + scenario + "-" + region_list[i] + "-" + str(sector) + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
             )
