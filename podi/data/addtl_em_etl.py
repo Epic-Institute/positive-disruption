@@ -277,7 +277,7 @@ cement.index.set_names(["Region", "Sector", "Metric", "Gas", "Scenario"], inplac
 #############
 # STEEL CO2 #
 #############
-
+"""
 # region
 
 steel = pd.read_csv(
@@ -361,14 +361,16 @@ steel = pd.concat([steel], keys=["Steel"], names=["Metric"]).reorder_levels(
 steel = pd.concat([steel], keys=["CO2"], names=["Gas"]).reorder_levels(
     ["IEA Region", "Metric", "Gas", "Scenario"]
 )
-steel = pd.concat([steel], keys=["Industry"], names=["Sector"]).reorder_levels(
-    ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
+steel = (
+    pd.concat([steel], keys=["Industry"], names=["Sector"])
+    .reorder_levels(["IEA Region", "Sector", "Metric", "Gas", "Scenario"])
+    .drop_duplicates()
 )
 
 steel.index.set_names(["Region", "Sector", "Metric", "Gas", "Scenario"], inplace=True)
 
 # endregion
-
+"""
 ##########################
 # FORESTS & WETLANDS CO2 #
 ##########################
@@ -756,11 +758,13 @@ fgas.columns = fgas.columns.astype(int)
 fgas_ind = rgroup(fgas * 1, "F-gases", "Industry", "CAIT Region")
 
 fgas_ind = proj(fgas_ind, "Industry", "F-gases", "F-gases")
+
 """
 fgas_build = rgroup(fgas * 0.5, "F-gases", "Buildings", "CAIT Region")
 
 fgas_build = proj(fgas_build, "Buildings", "F-gases", "F-gases")
 """
+
 # endregion
 
 # combine
@@ -768,7 +772,6 @@ fgas_build = proj(fgas_build, "Buildings", "F-gases", "F-gases")
 addtl_em = pd.concat(
     [
         cement,
-        steel,
         co2_fw,
         ch4_elec,
         ch4_ind,
@@ -787,4 +790,4 @@ addtl_em = pd.concat(
 )
 # .fillna(method="ffill", axis=1)
 
-addtl_em.to_csv("podi/data/emissions_additional.csv", index=True)
+addtl_em.drop_duplicates().to_csv("podi/data/emissions_additional.csv", index=True)

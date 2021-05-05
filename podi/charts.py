@@ -2621,7 +2621,7 @@ for i in range(0, len(region_list)):
 
         fig.update_layout(
             title={
-                "text": "Emissions by Sector in " + str(gas) + ", " + scenario.title() + ", " + region_list[i],
+                "text": str(gas) + " Emissions by Sector, " + scenario.title() + ", " + region_list[i],
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.93
@@ -3005,7 +3005,7 @@ for i in range(0, len(region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/em3-" + scenario + "-" + region_list[i] + ".html"
+                "./charts/emr-" + scenario + "-" + region_list[i] + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )

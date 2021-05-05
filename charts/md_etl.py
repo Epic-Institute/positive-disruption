@@ -82,7 +82,7 @@ for i in range(0, len(region_list)):
     # region
 
     for j in ["baseline", "pathway"]:
-        for k in ["em2", "em3"]:
+        for k in ["em2", "emr"]:
             path = (
                 '"' + k + "-" + j + "-" + (region_list[i]).replace(" ", "") + '.html"'
             )
@@ -93,6 +93,34 @@ for i in range(0, len(region_list)):
             mdFile.write(" height='500' width='150%'></iframe>")
 
             mdFile.new_line()
+
+        for m in ["em3", "em4"]:
+            for n in [
+                "Electricity",
+                "Transport",
+                "Buildings",
+                "Industry",
+                "Regenerative Agriculture",
+                "Forests & Wetlands",
+            ]:
+                path = (
+                    '"'
+                    + m
+                    + "-"
+                    + j
+                    + "-"
+                    + (region_list[i]).replace(" ", "")
+                    + "-"
+                    + n
+                    + '.html"'
+                )
+                mdFile.write(
+                    "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+                )
+                mdFile.write(path)
+                mdFile.write(" height='500' width='150%'></iframe>")
+
+                mdFile.new_line()
 
     for k in ["mwedges"]:
         path = (
