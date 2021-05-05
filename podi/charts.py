@@ -2650,7 +2650,7 @@ for i in range(0, len(region_list)):
             pio.write_html(
                 fig,
                 file=(
-                    "./charts/em4-" + scenario + "-" + region_list[i] + "-" + str(j) + ".html"
+                    "./charts/em4-" + scenario + "-" + region_list[i] + "-" + str(gas) + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
             )
