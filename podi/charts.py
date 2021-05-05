@@ -2048,32 +2048,32 @@ start_year = 2000
 for i in range(0, len(region_list)):
 
     em_electricity = (
-        em.loc[region_list[i], "Electricity", slice(None), scenario]
-        .sum()
-        .loc[start_year:long_proj_end_year]
+        em.loc[region_list[i], ["Electricity"], slice(None), slice(None), scenario]
+        .loc[:,start_year:long_proj_end_year]
     )
+    em_electricity = em_electricity.loc[~(em_electricity==0).all(axis=1)]
 
     em_transport = (
-        em.loc[region_list[i], "Transport", slice(None), scenario]
-        .sum()
-        .loc[start_year:long_proj_end_year]
+        em.loc[region_list[i], ["Transport"], slice(None), slice(None), scenario]
+        .loc[:,start_year:long_proj_end_year]
     )
+    em_transport = em_transport.loc[~(em_transport==0).all(axis=1)]
 
     em_buildings = (
-        em.loc[region_list[i], "Buildings", slice(None), scenario]
-        .sum()
-        .loc[start_year:long_proj_end_year]
+        em.loc[region_list[i], ["Buildings"], slice(None), slice(None), scenario]
+        .loc[:,start_year:long_proj_end_year]
     )
+    em_buildings = em_buildings.loc[~(em_buildings==0).all(axis=1)]
 
     em_industry = (
         em.loc[
             region_list[i],
-            "Industry",
-            slice(None), scenario
+            ["Industry"],
+            slice(None), slice(None), scenario
         ]
-        .sum()
-        .loc[start_year:long_proj_end_year]
+        .loc[:,start_year:long_proj_end_year]
     )
+    em_industry = em_industry.loc[~(em_industry==0).all(axis=1)]
 
     em_ra = (
         em.loc[
@@ -2090,12 +2090,12 @@ for i in range(0, len(region_list)):
                 "Silvopasture",
                 "Regenerative Agriculture",
             ],
-            slice(None),
+            slice(None), slice(None),
             scenario,
         ]
-        .sum()
-        .loc[start_year:long_proj_end_year]
+        .loc[:,start_year:long_proj_end_year]
     )
+    em_ra = em_ra.loc[~(em_ra==0).all(axis=1)]
 
     em_fw = (
         em.loc[
@@ -2110,84 +2110,23 @@ for i in range(0, len(region_list)):
                 "Natural Regeneration",
                 "Forests & Wetlands",
             ],
-            slice(None),
+            slice(None), slice(None),
             scenario,
         ]
-        .sum()
-        .loc[start_year:long_proj_end_year]
+        .loc[:,start_year:long_proj_end_year]
     )
-    '''
-    em_othergas = (
-        em.loc[region_list[i], "Other", ["CH4", "N2O", "F-gases"]]
-        .sum()
-        .loc[start_year:long_proj_end_year]
-    )
-
-    em_ch4 = (
-        em.loc[region_list[i], slice(None), ["CH4"], scenario]
-        .sum()
-        .loc[start_year:long_proj_end_year]
-    )
-
-    em_n2o = (
-        em.loc[region_list[i], slice(None), ["N2O"], scenario]
-        .sum()
-        .loc[start_year:long_proj_end_year]
-    )
-
-    em_fgas = (
-        em.loc[region_list[i], slice(None), ["F-gases"], scenario]
-        .sum()
-        .loc[start_year:long_proj_end_year]
-    )
-    '''
+    em_fw = em_fw.loc[~(em_fw==0).all(axis=1)]
 
     if region_list[i] == "World ":
-        em_cdr = -cdr.loc['World ', 'Carbon Dioxide Removal', scenario, :].squeeze()
+        em_cdr = -cdr.loc['World ', ['Carbon Dioxide Removal'], scenario, :]
+        em_cdr = pd.concat([pd.concat([em_cdr], names=['Gas'], keys=['CO2'])], names=['Metric'], keys=['Carbon Dioxide Removal']).reorder_levels(['Region', 'Sector', 'Metric', 'Gas', 'Scenario'])
 
-        em2 = pd.DataFrame(
-            [
-                em_electricity,
-                em_transport,
-                em_buildings,
-                em_industry,
-                em_ra,
-                em_fw,
-                em_cdr,
-            ]
-        ).rename(
-            index={
-                "Unnamed 0": "Electricity",
-                "Unnamed 1": "Transport",
-                "Unnamed 2": "Buildings",
-                "Unnamed 3": "Industry",
-                "Unnamed 4": "Agriculture",
-                "Unnamed 5": "Forests & Wetlands",
-                "0": "CDR",
-            }
-        )
+        em2 = em_electricity.append(em_transport).append(em_buildings).append(em_industry).append(em_ra).append(em_fw)
+
     else:
-        em2 = pd.DataFrame(
-            [
-                em_electricity,
-                em_transport,
-                em_buildings,
-                em_industry,
-                em_ra,
-                em_fw,
-            ]
-        ).rename(
-            index={
-                0: "Electricity",
-                1: "Transport",
-                2: "Buildings",
-                3: "Industry",
-                4: "Agriculture",
-                5: "Forests & Wetlands",
-            }
-        )
+        em2 = em_electricity.append(em_transport).append(em_buildings).append(em_industry).append(em_ra).append(em_fw)
 
-    fig = ((em2) / 1000).loc[:, start_year:]
+    fig = ((em2.groupby('Sector').sum()) / 1000).loc[:, start_year:]
 
     fig = fig.T
     fig.index.name = "Year"
@@ -2243,7 +2182,7 @@ for i in range(0, len(region_list)):
             name="V5: Agriculture",
             line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
+            y=fig2[fig2["Sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
             stackgroup=stackgroup,
         )
@@ -2342,7 +2281,7 @@ for i in range(0, len(region_list)):
         )
     )
 
-    if em_fw.loc[2000] < 0:
+    if em_fw.loc[:,2000].values[0] < 0:
         histfill = "tozeroy"
         stackgroup = "hist"
     else:
@@ -2403,7 +2342,7 @@ for i in range(0, len(region_list)):
 # endregion
 
 ################
-# EMISSIONS V3 # shows gas emissions by sector
+# EMISSIONS V3 # One chart per sector, gas breakdown
 ################
 
 # region
@@ -2411,37 +2350,43 @@ for i in range(0, len(region_list)):
 scenario = scenario
 start_year = 2000
 
-colors = px.colors.qualitative.Vivid
+colors = px.colors.qualitative.Alphabet
 
 for i in range(0, len(region_list)):
 
     em_electricity = (
-        em.loc[region_list[i], "Electricity", ['Fossil fuels', 'CH4', 'N2O'], scenario]
+        em.loc[region_list[i], ["Electricity"], slice(None), slice(None), scenario]
         .loc[:,start_year:long_proj_end_year]
     )
+    em_electricity = em_electricity.loc[~(em_electricity==0).all(axis=1)]
 
     em_transport = (
-        em.loc[region_list[i], ["Transport"], slice(None), scenario]
+        em.loc[region_list[i], ["Transport"], slice(None), slice(None), scenario]
         .loc[:,start_year:long_proj_end_year]
     )
+    em_transport = em_transport.loc[~(em_transport==0).all(axis=1)]
 
     em_buildings = (
-        em.loc[region_list[i], ["Buildings"], slice(None), scenario]
+        em.loc[region_list[i], ["Buildings"], slice(None), slice(None), scenario]
         .loc[:,start_year:long_proj_end_year]
     )
+    em_buildings = em_buildings.loc[~(em_buildings==0).all(axis=1)]
 
     em_industry = (
         em.loc[
             region_list[i],
             ["Industry"],
-            slice(None), scenario
+            slice(None), slice(None), scenario
         ]
         .loc[:,start_year:long_proj_end_year]
     )
-    
-    em_industry.loc[region_list[i], 'Industry', 'Fossil fuels',scenario] = em_industry.loc[slice(None), slice(None), ['Fossil fuels', 'Cement'],:].sum()
+    em_industry = em_industry.loc[~(em_industry==0).all(axis=1)]
+
+    '''
+    em_industry.loc[region_list[i], 'Industry', 'Fossil fuels', slice(None), scenario] = em_industry.loc[slice(None), slice(None), ['Fossil fuels', 'Cement'],:].sum()
 
     em_industry = em_industry.loc[region_list[i], 'Industry', ['Fossil fuels', 'CH4', 'N2O', 'F-gases']]
+    '''
 
     em_ra = (
         em.loc[
@@ -2458,11 +2403,12 @@ for i in range(0, len(region_list)):
                 "Silvopasture",
                 "Regenerative Agriculture",
             ],
-            slice(None),
+            slice(None), slice(None),
             scenario,
         ]
         .loc[:,start_year:long_proj_end_year]
     )
+    em_ra = em_ra.loc[~(em_ra==0).all(axis=1)]
 
     em_fw = (
         em.loc[
@@ -2477,92 +2423,28 @@ for i in range(0, len(region_list)):
                 "Natural Regeneration",
                 "Forests & Wetlands",
             ],
-            slice(None),
+            slice(None), slice(None),
             scenario,
         ]
         .loc[:,start_year:long_proj_end_year]
     )
-    '''
-    em_othergas = (
-        em.loc[region_list[i], slice(None), ["CH4", "N2O", "F-gases"]]
-        .loc[:,start_year:long_proj_end_year]
-    )
-
-    em_ch4 = (
-        em.loc[region_list[i], slice(None), ["CH4"], scenario]
-        .loc[:,start_year:long_proj_end_year]
-    )
-
-    em_n2o = (
-        em.loc[region_list[i], slice(None), ["N2O"], scenario]
-        .loc[:,start_year:long_proj_end_year]
-    )
-
-    em_fgas = (
-        em.loc[region_list[i], slice(None), ["F-gases"], scenario]
-
-        .loc[:,start_year:long_proj_end_year]
-    )
-    '''
+    em_fw = em_fw.loc[~(em_fw==0).all(axis=1)]
 
     if region_list[i] == "World ":
         em_cdr = -cdr.loc['World ', ['Carbon Dioxide Removal'], scenario, :]
+        em_cdr = pd.concat([pd.concat([em_cdr], names=['Gas'], keys=['CO2'])], names=['Metric'], keys=['Carbon Dioxide Removal']).reorder_levels(['Region', 'Sector', 'Metric', 'Gas', 'Scenario'])
 
         em2 = em_electricity.append(em_transport).append(em_buildings).append(em_industry).append(em_ra).append(em_fw)
 
-        '''
-        em2 = pd.DataFrame(
-            [
-                em_electricity,
-                em_transport,
-                em_buildings,
-                em_industry,
-                em_ra,
-                em_fw,
-            ]
-        ).rename(
-            index={
-                "Unnamed 0": "Electricity",
-                "Unnamed 1": "Transport",
-                "Unnamed 2": "Buildings",
-                "Unnamed 3": "Industry",
-                "Unnamed 4": "Agriculture",
-                "Unnamed 5": "Forests & Wetlands",
-            }
-        )
-        '''
     else:
         em2 = em_electricity.append(em_transport).append(em_buildings).append(em_industry).append(em_ra).append(em_fw)
-        
-        '''
-        em2 = pd.DataFrame(
-            [
-                em_electricity,
-                em_transport,
-                em_buildings,
-                em_industry,
-                em_ra,
-                em_fw,
-            ]
-        ).rename(
-            index={
-                0: "Electricity",
-                1: "Transport",
-                2: "Buildings",
-                3: "Industry",
-                4: "Agriculture",
-                5: "Forests & Wetlands",
-            }
-        )
-        '''
 
-    for j in ['Electricity', 'Transport', 'Buildings', 'Industry']:
+    for j in pd.Series(em2.index.get_level_values(1).unique()):
 
-        fig = ((em2.loc[slice(None), j,:]) / 1000).loc[:, start_year:]
-        fig = fig.droplevel(['Region', 'Scenario']).T
+        fig = ((em2.loc[slice(None), j,:].groupby('Gas').sum()) / 1000).loc[:, start_year:]
+        fig = fig.T
         fig.index.name = "Year"
         fig.reset_index(inplace=True)
-        fig.rename(columns={'Fossil fuels':'CO2'}, inplace=True)
         fig2 = pd.melt(
             fig, id_vars="Year", var_name="Metric", value_name="Emissions, GtCO2e"
         )
@@ -2589,18 +2471,17 @@ for i in range(0, len(region_list)):
                 "y": 0.93
             },
             xaxis={"title": "Year"},
-            yaxis={"title": "GtCO2e/yr"},
+            yaxis={"title": "GtCO2e/yr"}, showlegend=True
         )
 
-        fig.update_layout(margin=dict())
         fig.add_annotation(
-            text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA <br>World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissions factors are from IEA Emissions Factors 2020",
+            text="Historical data is from Global Carbon Project and Community Emissions Data System; projections are based on PD21 technology adoption rate assumptions<br>applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model for 2040-2100; emissions factors are from IEA<br>Emissions Factors 2020.",
             xref="paper",
             yref="paper",
-            x=-0.17,
+            x=-0.16,
             y=1.17,
             showarrow=False,
-            font=dict(size=10, color="#2E3F5C"),
+            font=dict(size=9, color="#2E3F5C"),
             align="left",
             borderpad=6,
             bgcolor="#ffffff",
@@ -2622,10 +2503,160 @@ for i in range(0, len(region_list)):
 # endregion
 
 ################
-# EMISSIONS V4 # shows sector emissions by gas
+# EMISSIONS V4 # One chart per gas, sector breakdown
 ################
 
 # region
+
+scenario = scenario
+start_year = 2000
+
+colors = px.colors.qualitative.Safe
+
+for i in range(0, len(region_list)):
+
+    em_electricity = (
+        em.loc[region_list[i], ["Electricity"], slice(None), slice(None), scenario]
+        .loc[:,start_year:long_proj_end_year]
+    )
+    em_electricity = em_electricity.loc[~(em_electricity==0).all(axis=1)]
+
+    em_transport = (
+        em.loc[region_list[i], ["Transport"], slice(None), slice(None), scenario]
+        .loc[:,start_year:long_proj_end_year]
+    )
+    em_transport = em_transport.loc[~(em_transport==0).all(axis=1)]
+
+    em_buildings = (
+        em.loc[region_list[i], ["Buildings"], slice(None), slice(None), scenario]
+        .loc[:,start_year:long_proj_end_year]
+    )
+    em_buildings = em_buildings.loc[~(em_buildings==0).all(axis=1)]
+
+    em_industry = (
+        em.loc[
+            region_list[i],
+            ["Industry"],
+            slice(None), slice(None), scenario
+        ]
+        .loc[:,start_year:long_proj_end_year]
+    )
+    em_industry = em_industry.loc[~(em_industry==0).all(axis=1)]
+
+    em_ra = (
+        em.loc[
+            region_list[i],
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Trees in Croplands",
+                "Animal Mgmt",
+                "Legumes",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Regenerative Agriculture",
+            ],
+            slice(None), slice(None),
+            scenario,
+        ]
+        .loc[:,start_year:long_proj_end_year]
+    )
+    em_ra = em_ra.loc[~(em_ra==0).all(axis=1)]
+
+    em_fw = (
+        em.loc[
+            region_list[i],
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Peat Restoration",
+                "Natural Regeneration",
+                "Forests & Wetlands",
+            ],
+            slice(None), slice(None),
+            scenario,
+        ]
+        .loc[:,start_year:long_proj_end_year]
+    )
+    em_fw = em_fw.loc[~(em_fw==0).all(axis=1)]
+
+    if region_list[i] == "World ":
+        em_cdr = -cdr.loc['World ', ['Carbon Dioxide Removal'], scenario, :]
+        em_cdr = pd.concat([pd.concat([em_cdr], names=['Gas'], keys=['CO2'])], names=['Metric'], keys=['Carbon Dioxide Removal']).reorder_levels(['Region', 'Sector', 'Metric', 'Gas', 'Scenario'])
+
+        em2 = em_electricity.append(em_transport).append(em_buildings).append(em_industry).append(em_ra).append(em_fw)
+
+    else:
+        em2 = em_electricity.append(em_transport).append(em_buildings).append(em_industry).append(em_ra).append(em_fw)
+  
+
+    for gas in em2.index.get_level_values(3).unique():
+
+        fig = ((em2.loc[region_list[i], slice(None), slice(None), gas, scenario, :].groupby('Sector').sum()) / 1000).loc[:, start_year:]
+        fig = fig.T
+        fig.index.name = "Year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="Year", var_name="Metric", value_name="Emissions, GtCO2e"
+        )
+
+        fig = go.Figure()
+
+        for j in pd.Series(em2.index.get_level_values(1).unique()).iloc[::-1]:
+            fig.add_trace(
+                go.Scatter(
+                    name=j,
+                    line=dict(width=0.5, color=colors[pd.DataFrame(em2.index.get_level_values(1).unique()).set_index('Sector').index.get_loc(j)]),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Metric"] == j]["Emissions, GtCO2e"],
+                    fill="tonexty",
+                    stackgroup='1',
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Emissions by Sector in " + str(gas) + ", " + scenario.title() + ", " + region_list[i],
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.93
+            },
+            xaxis={"title": "Year"},
+            yaxis={"title": "GtCO2e/yr"}, showlegend=True
+        )
+
+        fig.add_annotation(
+            text="Historical data is from Global Carbon Project and Community Emissions Data System; projections are based on PD21 technology adoption rate assumptions<br>applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model for 2040-2100; emissions factors are from IEA<br>Emissions Factors 2020.",
+            xref="paper",
+            yref="paper",
+            x=-0.16,
+            y=1.17,
+            showarrow=False,
+            font=dict(size=9, color="#2E3F5C"),
+            align="left",
+            borderpad=6,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
+        if show_figs is True:
+            fig.show()
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/em4-" + scenario + "-" + region_list[i] + "-" + str(j) + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
+        plt.clf()
+
+# endregion
 
 ###########################
 # EMISSIONS AS RELATIVE % #
@@ -4805,11 +4836,11 @@ for year in [2030]:
                 text="The blue dotted line represents an emissions mitigation goal " + bar_emissions_goal[i][j],
                 xref="paper",
                 yref="paper",
-                x=-0.2,
+                x=0,
                 y=1.14,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
-                align="left",
+                align="center",
                 borderpad=4,
                 bgcolor="#ffffff",
                 opacity=1,

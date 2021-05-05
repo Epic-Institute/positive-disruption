@@ -54,11 +54,8 @@ ind = [
 ]
 
 trans = [
-    "1A3ai_International-aviation",
-    "1A3aii_Domestic-aviation",
     "1A3b_Road",
     "1A3c_Rail",
-    "1A3di_International-shipping",
     "1A3di_Oil_Tanker_Loading",
     "1A3dii_Domestic-navigation",
     "1A3eii_Other-transp",
@@ -419,10 +416,14 @@ ch4_elec2 = []
 ch4_elec3 = []
 
 for sub in elec:
-    ch4_elec2 = pd.DataFrame(ch4_elec2).append(rgroup(ch4_elec, "CH4", sub, "ISO"))
+    ch4_elec2 = pd.DataFrame(ch4_elec2).append(
+        rgroup(ch4_elec.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+    )
 for sub in elec:
     ch4_elec3 = pd.DataFrame(ch4_elec3).append(
-        proj(ch4_elec2, "Electricity", sub, "CH4").drop_duplicates()
+        proj(
+            ch4_elec2.loc[slice(None), [sub], :], "Electricity", sub, "CH4"
+        ).drop_duplicates()
     )
 
 ch4_elec = ch4_elec3
@@ -440,10 +441,14 @@ ch4_ind2 = []
 ch4_ind3 = []
 
 for sub in ind:
-    ch4_ind2 = pd.DataFrame(ch4_ind2).append(rgroup(ch4_ind, "CH4", sub, "ISO"))
+    ch4_ind2 = pd.DataFrame(ch4_ind2).append(
+        rgroup(ch4_ind.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+    )
 for sub in ind:
     ch4_ind3 = pd.DataFrame(ch4_ind3).append(
-        proj(ch4_ind2, "Industry", sub, "CH4").drop_duplicates()
+        proj(
+            ch4_ind2.loc[slice(None), [sub], :], "Industry", sub, "CH4"
+        ).drop_duplicates()
     )
 
 ch4_ind = ch4_ind3
@@ -461,10 +466,14 @@ ch4_trans2 = []
 ch4_trans3 = []
 
 for sub in trans:
-    ch4_trans2 = pd.DataFrame(ch4_trans2).append(rgroup(ch4_trans, "CH4", sub, "ISO"))
+    ch4_trans2 = pd.DataFrame(ch4_trans2).append(
+        rgroup(ch4_trans.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+    )
 for sub in trans:
     ch4_trans3 = pd.DataFrame(ch4_trans3).append(
-        proj(ch4_trans2, "Transport", sub, "CH4").drop_duplicates()
+        proj(
+            ch4_trans2.loc[slice(None), [sub], :], "Transport", sub, "CH4"
+        ).drop_duplicates()
     )
 
 ch4_trans = ch4_trans3
@@ -482,10 +491,14 @@ ch4_build2 = []
 ch4_build3 = []
 
 for sub in build:
-    ch4_build2 = pd.DataFrame(ch4_build2).append(rgroup(ch4_build, "CH4", sub, "ISO"))
+    ch4_build2 = pd.DataFrame(ch4_build2).append(
+        rgroup(ch4_build.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+    )
 for sub in build:
     ch4_build3 = pd.DataFrame(ch4_build3).append(
-        proj(ch4_build2, "Buildings", sub, "CH4").drop_duplicates()
+        proj(
+            ch4_build2.loc[slice(None), [sub], :], "Buildings", sub, "CH4"
+        ).drop_duplicates()
     )
 
 ch4_build = ch4_build3
@@ -503,10 +516,14 @@ ch4_ag2 = []
 ch4_ag3 = []
 
 for sub in ag:
-    ch4_ag2 = pd.DataFrame(ch4_ag2).append(rgroup(ch4_ag, "CH4", sub, "ISO"))
+    ch4_ag2 = pd.DataFrame(ch4_ag2).append(
+        rgroup(ch4_ag.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+    )
 for sub in ag:
     ch4_ag3 = pd.DataFrame(ch4_ag3).append(
-        proj(ch4_ag2, "Regenerative Agriculture", sub, "CH4").drop_duplicates()
+        proj(
+            ch4_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CH4"
+        ).drop_duplicates()
     )
 
 ch4_ag = ch4_ag3
@@ -567,50 +584,148 @@ n2o.columns = n2o.columns.astype(int)
 # Electricity
 
 n2o_elec = n2o.loc[slice(None), elec, :]
+n2o_elec2 = []
+n2o_elec3 = []
 
+for sub in elec:
+    n2o_elec2 = pd.DataFrame(n2o_elec2).append(
+        rgroup(n2o_elec.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+    )
+for sub in elec:
+    n2o_elec3 = pd.DataFrame(n2o_elec3).append(
+        proj(
+            n2o_elec2.loc[slice(None), [sub], :], "Electricity", sub, "N2O"
+        ).drop_duplicates()
+    )
+
+n2o_elec = n2o_elec3
+
+"""
 n2o_elec = rgroup(n2o_elec, "N2O", "Electricity", "ISO")
 
 n2o_elec = proj(n2o_elec, "Electricity", "N2O", "N2O")
+"""
 
 # Industry
 
 n2o_ind = n2o.loc[slice(None), ind, :]
+n2o_ind2 = []
+n2o_ind3 = []
 
+for sub in ind:
+    n2o_ind2 = pd.DataFrame(n2o_ind2).append(
+        rgroup(n2o_ind.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+    )
+for sub in ind:
+    n2o_ind3 = pd.DataFrame(n2o_ind3).append(
+        proj(
+            n2o_ind2.loc[slice(None), [sub], :], "Industry", sub, "N2O"
+        ).drop_duplicates()
+    )
+
+n2o_ind = n2o_ind3
+
+"""
 n2o_ind = rgroup(n2o_ind, "N2O", "Industry", "ISO")
 
 n2o_ind = proj(n2o_ind, "Industry", "N2O", "N2O")
+"""
 
 # Transport
 
 n2o_trans = n2o.loc[slice(None), trans, :]
+n2o_trans2 = []
+n2o_trans3 = []
 
+for sub in trans:
+    n2o_trans2 = pd.DataFrame(n2o_trans2).append(
+        rgroup(n2o_trans.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+    )
+for sub in trans:
+    n2o_trans3 = pd.DataFrame(n2o_trans3).append(
+        proj(
+            n2o_trans2.loc[slice(None), [sub], :], "Transport", sub, "N2O"
+        ).drop_duplicates()
+    )
+
+n2o_trans = n2o_trans3
+
+"""
 n2o_trans = rgroup(n2o_trans, "N2O", "Transport", "ISO")
 
 n2o_trans = proj(n2o_trans, "Transport", "N2O", "N2O")
+"""
 
 # Buildings
 
-n2o_b = n2o.loc[slice(None), build, :]
+n2o_build = n2o.loc[slice(None), build, :]
+n2o_build2 = []
+n2o_build3 = []
 
+for sub in build:
+    n2o_build2 = pd.DataFrame(n2o_build2).append(
+        rgroup(n2o_build.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+    )
+for sub in build:
+    n2o_build3 = pd.DataFrame(n2o_build3).append(
+        proj(
+            n2o_build2.loc[slice(None), [sub], :], "Buildings", sub, "N2O"
+        ).drop_duplicates()
+    )
+
+n2o_build = n2o_build3
+
+"""
 n2o_b = rgroup(n2o_b, "N2O", "Buildings", "ISO")
 
 n2o_b = proj(n2o_b, "Buildings", "N2O", "N2O")
+"""
 
 # Agriculture
 
 n2o_ag = n2o.loc[slice(None), ag, :]
+n2o_ag2 = []
+n2o_ag3 = []
 
+for sub in ag:
+    n2o_ag2 = pd.DataFrame(n2o_ag2).append(
+        rgroup(n2o_ag.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+    )
+for sub in ag:
+    n2o_ag3 = pd.DataFrame(n2o_ag3).append(
+        proj(
+            n2o_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "N2O"
+        ).drop_duplicates()
+    )
+
+n2o_ag = n2o_ag3
+
+"""
 n2o_ag = rgroup(n2o_ag, "N2O", "Regenerative Agriculture", "ISO")
 
 n2o_ag = proj(n2o_ag, "Regenerative Agriculture", "N2O", "N2O")
-
+"""
 # Forests & Wetlands
 
 n2o_fw = gas_fw.loc[slice(None), slice(None), "N2O"]
+"""
+n2o_fw2 = []
+n2o_fw3 = []
+
+for sub in fw:
+    n2o_fw2 = pd.DataFrame(n2o_fw2).append(rgroup(n2o_fw, "N2O", sub, "ISO"))
+for sub in fw:
+    n2o_fw3 = pd.DataFrame(n2o_fw3).append(
+        proj(n2o_fw2, sub, "N2O", "N2O").drop_duplicates()
+    )
+
+n2o_fw = n2o_fw3
+"""
 
 n2o_fw = rgroup(n2o_fw, "N2O", "Forests & Wetlands", "CAIT Region")
 
 n2o_fw = proj(n2o_fw, "Forests & Wetlands", "N2O", "N2O")
+
 
 # Other
 """
@@ -664,11 +779,12 @@ addtl_em = pd.concat(
         n2o_elec,
         n2o_ind,
         n2o_trans,
-        n2o_b,
+        n2o_build,
         n2o_ag,
         n2o_fw,
         fgas_ind,
     ]
-).fillna(method="ffill", axis=1)
+)
+# .fillna(method="ffill", axis=1)
 
 addtl_em.to_csv("podi/data/emissions_additional.csv", index=True)

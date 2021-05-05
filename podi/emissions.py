@@ -282,7 +282,7 @@ def emissions(
     addtl_em = addtl_em.loc[
         slice(None),
         slice(None),
-        ["cement", "CO2", "CH4", "N2O", "F-gases"],
+        slice(None),
         slice(None),
     ]
 
@@ -491,10 +491,10 @@ def emissions(
         )
         em2 = pd.DataFrame(em2).append(em_per)
 
-    em = em2.join(em.loc[:, 2020:]).droplevel("Gas")
+    em = em2.join(em.loc[:, 2020:])
 
     em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
-        ["Region", "Sector", "Metric", "Scenario"]
+        ["Region", "Sector", "Metric", 'Gas', "Scenario"]
     )
 
     #######################
