@@ -2673,19 +2673,19 @@ for i in range(0, len(region_list)):
 
     em_electricity = (
         em.loc[region_list[i], ["Electricity"], slice(None), slice(None), scenario]
-        .loc[:,start_year:long_proj_end_year]
+        .loc[:, start_year:long_proj_end_year]
     )
     em_electricity = em_electricity.loc[~(em_electricity==0).all(axis=1)]
 
     em_transport = (
         em.loc[region_list[i], ["Transport"], slice(None), slice(None), scenario]
-        .loc[:,start_year:long_proj_end_year]
+        .loc[:, start_year:long_proj_end_year]
     )
     em_transport = em_transport.loc[~(em_transport==0).all(axis=1)]
 
     em_buildings = (
         em.loc[region_list[i], ["Buildings"], slice(None), slice(None), scenario]
-        .loc[:,start_year:long_proj_end_year]
+        .loc[:, start_year:long_proj_end_year]
     )
     em_buildings = em_buildings.loc[~(em_buildings==0).all(axis=1)]
 
@@ -2695,7 +2695,7 @@ for i in range(0, len(region_list)):
             ["Industry"],
             slice(None), slice(None), scenario
         ]
-        .loc[:,start_year:long_proj_end_year]
+        .loc[:, start_year:long_proj_end_year]
     )
     em_industry = em_industry.loc[~(em_industry==0).all(axis=1)]
 
@@ -2723,7 +2723,7 @@ for i in range(0, len(region_list)):
             slice(None), slice(None),
             scenario,
         ]
-        .loc[:,start_year:long_proj_end_year]
+        .loc[:, start_year:long_proj_end_year]
     )
     em_ra = em_ra.loc[~(em_ra==0).all(axis=1)]
 
@@ -2743,7 +2743,7 @@ for i in range(0, len(region_list)):
             slice(None), slice(None),
             scenario,
         ]
-        .loc[:,start_year:long_proj_end_year]
+        .loc[:, start_year:long_proj_end_year]
     )
     em_fw = em_fw.loc[~(em_fw==0).all(axis=1)]
 
