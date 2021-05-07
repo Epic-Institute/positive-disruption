@@ -37686,7 +37686,7 @@ Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,"Parameter b, max",10
 Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,"Parameter b, min",0
 Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,"Parameter b, min",0
 Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,Saturation Point,100
-Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,Saturation Point,50
+Spanish Reforestation,Spanish Reforestation,baseline,AFOLU,Saturation Point,100
 FAO CA,FAO CA,pathway,AFOLU,Floor,0
 FAO CA,FAO CA,baseline,AFOLU,Floor,0
 FAO CA,FAO CA,pathway,AFOLU,Max annual growth,100
@@ -37700,7 +37700,7 @@ FAO CA,FAO CA,baseline,AFOLU,"Parameter b, max",100
 FAO CA,FAO CA,pathway,AFOLU,"Parameter b, min",0
 FAO CA,FAO CA,baseline,AFOLU,"Parameter b, min",0
 FAO CA,FAO CA,pathway,AFOLU,Saturation Point,100
-FAO CA,FAO CA,baseline,AFOLU,Saturation Point,50
+FAO CA,FAO CA,baseline,AFOLU,Saturation Point,100
 Brazil No Till,Brazil No Till,pathway,AFOLU,Floor,0
 Brazil No Till,Brazil No Till,baseline,AFOLU,Floor,0
 Brazil No Till,Brazil No Till,pathway,AFOLU,Max annual growth,100
@@ -37714,7 +37714,7 @@ Brazil No Till,Brazil No Till,baseline,AFOLU,"Parameter b, max",100
 Brazil No Till,Brazil No Till,pathway,AFOLU,"Parameter b, min",0
 Brazil No Till,Brazil No Till,baseline,AFOLU,"Parameter b, min",0
 Brazil No Till,Brazil No Till,pathway,AFOLU,Saturation Point,100
-Brazil No Till,Brazil No Till,baseline,AFOLU,Saturation Point,50
+Brazil No Till,Brazil No Till,baseline,AFOLU,Saturation Point,100
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Floor,0
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,Floor,0
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Max annual growth,100
@@ -37728,7 +37728,7 @@ Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,"Parame
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,"Parameter b, min",0
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,"Parameter b, min",0
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Saturation Point,100
-Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,Saturation Point,50
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,baseline,AFOLU,Saturation Point,100
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Floor,0
 US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,Floor,0
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Max annual growth,100
@@ -37742,7 +37742,7 @@ US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,"Parameter b, max",10
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,"Parameter b, min",0
 US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,"Parameter b, min",0
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Saturation Point,100
-US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,Saturation Point,50
+US Wetlands 2002-2014,US Wetlands 2002-2014,baseline,AFOLU,Saturation Point,100
 FSC global adoption,FSC global adoption,pathway,AFOLU,Floor,0
 FSC global adoption,FSC global adoption,baseline,AFOLU,Floor,0
 FSC global adoption,FSC global adoption,pathway,AFOLU,Max annual growth,100
@@ -37756,4 +37756,18 @@ FSC global adoption,FSC global adoption,baseline,AFOLU,"Parameter b, max",100
 FSC global adoption,FSC global adoption,pathway,AFOLU,"Parameter b, min",0
 FSC global adoption,FSC global adoption,baseline,AFOLU,"Parameter b, min",0
 FSC global adoption,FSC global adoption,pathway,AFOLU,Saturation Point,100
-FSC global adoption,FSC global adoption,baseline,AFOLU,Saturation Point,50
+FSC global adoption,FSC global adoption,baseline,AFOLU,Saturation Point,100
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,Floor,0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,baseline,AFOLU,Floor,0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,Max annual growth,100
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,baseline,AFOLU,Max annual growth,100
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,"Parameter a, max",1
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,baseline,AFOLU,"Parameter a, max",0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,"Parameter a, min",0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,baseline,AFOLU,"Parameter a, min",0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,"Parameter b, max",100
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,baseline,AFOLU,"Parameter b, max",100
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,"Parameter b, min",0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,baseline,AFOLU,"Parameter b, min",0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,Saturation Point,100
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,baseline,AFOLU,Saturation Point,100

@@ -3309,8 +3309,8 @@ for i in range(0, len(region_list)):
                 "Unnamed 1": "Transport",
                 "Unnamed 2": "Buildings",
                 "Unnamed 3": "Industry",
-                "Unnamed 4": "Forests & Wetlands",
-                "Unnamed 5": "Agriculture",
+                "Unnamed 4": "Agriculture",
+                "Unnamed 5": "Forests & Wetlands",
                 "Unnamed 6": "Other Gases",
                 "CDR": "CDR", "Mariculture": "Mariculture"
             }
@@ -3334,8 +3334,8 @@ for i in range(0, len(region_list)):
                 "Unnamed 1": "Transport",
                 "Unnamed 2": "Buildings",
                 "Unnamed 3": "Industry",
-                "Unnamed 4": "Forests & Wetlands",
-                "Unnamed 5": "Agriculture",
+                "Unnamed 4": "Agriculture",
+                "Unnamed 5": "Forests & Wetlands",
                 "Unnamed 6": "Other Gases",
                 "CDR": "CDR",
             }
@@ -3360,8 +3360,8 @@ for i in range(0, len(region_list)):
                     1: "Transport",
                     2: "Buildings",
                     3: "Industry",
-                    4: "Forests & Wetlands",
-                    5: "Agriculture",
+                    4: "Agriculture",
+                    5: "Forests & Wetlands",
                     6: "Other Gases",
                 }
             )
@@ -3973,7 +3973,8 @@ for i in range(0, len(region_list)):
                 em_mit_industry,
                 em_mit_ra,
                 em_mit_fw,
-                em_mit_cdr, em_mit_mar
+                em_mit_cdr, 
+                em_mit_mar
             ]
         ).rename(
             index={
@@ -3981,9 +3982,10 @@ for i in range(0, len(region_list)):
                 "Unnamed 1": "Transport",
                 "Unnamed 2": "Buildings",
                 "Unnamed 3": "Industry",
-                "Unnamed 4": "Forests & Wetlands",
-                "Unnamed 5": "Agriculture",
-                "CDR": "CDR", "Mariculture": "Mariculture"
+                "Unnamed 4": "Agriculture",
+                "Unnamed 5": "Forests & Wetlands",
+                "CDR": "CDR", 
+                "Mariculture": "Mariculture"
             }
         ).clip(lower=0)
     elif region_list[i] in ["US ", "CHINA ", "EUR "]:
@@ -4004,8 +4006,8 @@ for i in range(0, len(region_list)):
                 "Unnamed 1": "Transport",
                 "Unnamed 2": "Buildings",
                 "Unnamed 3": "Industry",
-                "Unnamed 4": "Forests & Wetlands",
-                "Unnamed 5": "Agriculture",
+                "Unnamed 4": "Agriculture",
+                "Unnamed 5": "Forests & Wetlands",
                 "CDR": "CDR",
             }
         ).clip(lower=0)
@@ -4028,8 +4030,8 @@ for i in range(0, len(region_list)):
                     1: "Transport",
                     2: "Buildings",
                     3: "Industry",
-                    4: "Forests & Wetlands",
-                    5: "Agriculture",
+                    4: "Agriculture",
+                    5: "Forests & Wetlands",
                 }
             )
         ).clip(lower=0)
@@ -4059,8 +4061,8 @@ for i in range(0, len(region_list)):
                 "Transport",
                 "Buildings",
                 "Industry",
-                "Forests & Wetlands",
                 "Agriculture",
+                "Forests & Wetlands",
                 "CDR", 'Mariculture',
                 spacer.name,
             ]
@@ -4170,23 +4172,22 @@ for i in range(0, len(region_list)):
                 stackgroup="one",
             )
         )
-
-    fig.add_trace(
-        go.Scatter(
-            name="V5: Agriculture",
-            line=dict(width=0.5, color="#EECA3B"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
     fig.add_trace(
         go.Scatter(
             name="V6: Forests & Wetlands",
             line=dict(width=0.5, color="#54A24B"),
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="one",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="V5: Agriculture",
+            line=dict(width=0.5, color="#EECA3B"),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup="one",
         )
@@ -4636,8 +4637,8 @@ for year in [2030]:
                     1: "V2: Transport",
                     2: "V3: Buildings",
                     3: "V4: Industry",
-                    4: "V5: Forests & Wetlands",
-                    5: "V6: Agriculture",
+                    4: "V5: Agriculture",
+                    5: "V6: Forests & Wetlands",
                     6: "V7: Mariculture",
                     7: "V8: Other Gases",
                     8: "V9: CDR"
@@ -4789,8 +4790,8 @@ for year in [2030]:
                     1: "V2: Transport",
                     2: "V3: Buildings",
                     3: "V4: Industry",
-                    4: "V5: Forests & Wetlands",
-                    5: "V6: Agriculture",
+                    4: "V5: Agriculture",
+                    5: "V6: Forests & Wetlands",
                     6: "V7: Mariculture",
                     7: "V8: Other Gases",
                 }

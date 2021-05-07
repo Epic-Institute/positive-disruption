@@ -287,6 +287,7 @@ def afolu(scenario):
     )
 
     # correct units
+    """
     hist1.loc[
         slice(None),
         ["Improved Rice", "Trees in Croplands", "Peat Restoration", "Silvopasture"],
@@ -299,7 +300,7 @@ def afolu(scenario):
         ]
         / 1e3
     )
-
+    """
     hist1 = hist1.replace(0, NaN)
 
     # endregion
@@ -454,9 +455,7 @@ def afolu(scenario):
     avoid = avoid / 1e6
     avoid.columns = avoid.columns.astype(int)
 
-    """
     avoid_per = avoid.apply(lambda x: ((x[2019] - x) / x[2019]).fillna(0), axis=1)
-    """
 
     avoid_per = (
         (

@@ -1,3 +1,8 @@
+for i in range(0,len(hist1)):
+    per.loc[cw[cw["Sub-vector"] == hist1.iloc[i].name[1]]["Analog Name"], :].where(per.loc[cw[cw["Sub-vector"] == hist1.iloc[i].name[1]]["Analog Name"]].values>= hist1.iloc[i].dropna().iloc[-1]).dropna(axis=1).squeeze().values
+    print(i)
+
+
 #ENERGY DEMAND
 scenario = "baseline"
 demand_historical = "podi/data/energy_demand_historical.csv"

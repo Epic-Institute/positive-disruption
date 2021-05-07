@@ -148,12 +148,21 @@ def adoption_curve(value, region, scenario, sector):
         # y = np.full((len(x), 1), y_data[-1])
         y = func2(
             x,
-            min(0.001, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+            min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
             (y_data[-1]),
             0,
             0,
         )
         genetic_parameters = [0, 0, 0, 0]
+
+        if value.name == "Spanish Reforestation":
+            y = func2(
+                x,
+                min(0.002, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                (y_data[-1]),
+                0,
+                0,
+            )
     else:
         # "seed" the numpy random number generator for repeatable results.
         genetic_parameters = differential_evolution(
