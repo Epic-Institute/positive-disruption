@@ -93,7 +93,7 @@ for i in range(0, len(region_list)):
             mdFile.write(" height='500' width='150%'></iframe>")
 
             mdFile.new_line()
-
+        """
         for m in ["em3", "em4"]:
             for n in [
                 "Electricity",
@@ -152,7 +152,7 @@ for i in range(0, len(region_list)):
                     mdFile.write(" height='500' width='150%'></iframe>")
 
                     mdFile.new_line()
-
+        """
     for k in ["mwedges"]:
         path = (
             '"'

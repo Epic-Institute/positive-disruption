@@ -313,7 +313,7 @@ def results_analysis(
     # MARICULTURE DECARB
 
     # region
-
+    """
     mar_decarb_max = afolu_per_adoption.loc[
         region2,
         "Forests & Wetlands",
@@ -338,7 +338,7 @@ def results_analysis(
     )
     mar_decarb.columns = mar_decarb.columns.astype(int)
     mar_decarb.columns = ra_decarb.columns
-
+    """
     # endregion
 
     # CDR DECARB
@@ -409,9 +409,6 @@ def results_analysis(
     )
     adoption_curves = adoption_curves.append(
         other_decarb.loc[:, data_start_year:long_proj_end_year]
-    )
-    adoption_curves = adoption_curves.append(
-        mar_decarb.loc[:, data_start_year:long_proj_end_year]
     )
 
     adoption_curves.index.name = "Sector"

@@ -5,6 +5,7 @@ from podi.adoption_curve import adoption_curve
 from numpy import NaN
 import numpy as np
 from podi.energy_supply import long_proj_end_year
+from podi.curve_smooth import curve_smooth
 
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
@@ -37,19 +38,6 @@ def rgroup(data, gas, sector, rgroup, scenario):
     data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
     data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
 
-    """
-    # remove countries from higher level regions
-    data_oecd.loc[" OECD "] = (
-        data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
-    )
-    data_oecd.loc["NonOECD "] = data_oecd.loc["NonOECD "] - data_regions2.loc["BRAZIL "]
-
-    data_regions.loc["CSAM "] = data_regions.loc["CSAM "] - data_regions2.loc["BRAZIL "]
-    data_regions.loc["NAM "] = data_regions.loc["NAM "] - data_regions2.loc["US "]
-    data_regions.loc["AFRICA "] = (
-        data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
-    )
-    """
     # combine all
     data = data_world.append(
         [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
@@ -94,19 +82,6 @@ def rgroup2(data, gas, sector, rgroup, scenario):
     data_regions = pd.DataFrame(data.groupby("IEA Region 2").mean())
     data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").mean())
 
-    """
-    # remove countries from higher level regions
-    data_oecd.loc[" OECD "] = (
-        data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
-    )
-    data_oecd.loc["NonOECD "] = data_oecd.loc["NonOECD "] - data_regions2.loc["BRAZIL "]
-
-    data_regions.loc["CSAM "] = data_regions.loc["CSAM "] - data_regions2.loc["BRAZIL "]
-    data_regions.loc["NAM "] = data_regions.loc["NAM "] - data_regions2.loc["US "]
-    data_regions.loc["AFRICA "] = (
-        data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
-    )
-    """
     # combine all
     data = data_world.append(
         [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
@@ -136,12 +111,6 @@ def afolu(scenario):
     max_extent = input_data_3[input_data_3["Metric"] == "Max extent"].drop(
         columns=["Metric", "Model", "Scenario", "Region", "iso", "Unit"]
     )
-
-    """
-    max_extent = afolu["Input data 3"][
-        afolu["Input data 3"]["Metric"] == "Max extent"
-    ].drop(columns=["Metric", "Model", "Scenario", "Region", "iso", "Unit"])
-    """
 
     max_extent["Duration 1 (Years)"] = np.where(
         (
@@ -179,6 +148,8 @@ def afolu(scenario):
             max_extent["Duration 1 (Years)"],
             max_extent["Value 2"],
             max_extent["Duration 2 (Years)"],
+            max_extent["Value 3"],
+            max_extent["Duration 3 (Years)"],
         ],
         columns=np.arange(1990, long_proj_end_year + 1, 1),
         dtype=float,
@@ -187,14 +158,21 @@ def afolu(scenario):
     max_extent2.loc[:, 2100] = max_extent["Value 1"].values
     max_extent2.interpolate(axis=1, limit_area="inside", inplace=True)
     max_extent2 = max_extent2.droplevel(
-        ["Duration 1 (Years)", "Value 2", "Duration 2 (Years)"]
+        [
+            "Duration 1 (Years)",
+            "Value 2",
+            "Duration 2 (Years)",
+            "Value 3",
+            "Duration 3 (Years)",
+        ]
     )
 
-    # update Improved Forest Mgmt max extent units for consistency
+    """
+    # update Improved Forest Mgmt max extent units for consistency (m^3 to Mha)
     max_extent2.loc[slice(None), "Improved Forest Mgmt", :] = (
         max_extent2.loc[slice(None), "Improved Forest Mgmt", :] / 1e6
     )
-
+    """
     # endregion
 
     # create avg mitigation potential flux df
@@ -237,16 +215,43 @@ def afolu(scenario):
             flux["Duration 1 (Years)"],
             flux["Value 2"],
             flux["Duration 2 (Years)"],
+            flux["Value 3"],
+            flux["Duration 3 (Years)"],
         ],
         columns=np.arange(1990, long_proj_end_year + 1, 1),
         dtype=float,
     )
     flux2.loc[:, 1990] = flux["Value 1"].values
-    flux2.loc[:, 2100] = flux["Value 1"].values
+
     flux2.interpolate(axis=1, limit_area="inside", inplace=True)
+
+    flux2 = pd.read_csv("podi/data/tnc_flux.csv").set_index(
+        [
+            "Country",
+            "Subvector",
+            "Duration 1 (Years)",
+            "Value 2",
+            "Duration 2 (Years)",
+            "Value 3",
+            "Duration 3 (Years)",
+        ]
+    )
+
     flux2 = flux2.droplevel(
-        ["Duration 1 (Years)", "Value 2", "Duration 2 (Years)"]
+        [
+            "Duration 1 (Years)",
+            "Value 2",
+            "Duration 2 (Years)",
+            "Value 3",
+            "Duration 3 (Years)",
+        ]
     ).fillna(0)
+
+    # smooth avg mitigation flux
+
+    flux2 = flux2.apply(
+        lambda x: curve_smooth(pd.DataFrame(x).T, "quadratic", 4), axis=1
+    )
 
     # endregion
 
@@ -285,22 +290,6 @@ def afolu(scenario):
             lambda x: x.divide(max_extent2.loc[x.name[0], x.name[1]].loc[:2020]), axis=1
         )
     )
-
-    # correct units
-    """
-    hist1.loc[
-        slice(None),
-        ["Improved Rice", "Trees in Croplands", "Peat Restoration", "Silvopasture"],
-        :,
-    ] = (
-        hist1.loc[
-            slice(None),
-            ["Improved Rice", "Trees in Croplands", "Peat Restoration", "Silvopasture"],
-            :,
-        ]
-        / 1e3
-    )
-    """
     hist1 = hist1.replace(0, NaN)
 
     # endregion
@@ -339,7 +328,6 @@ def afolu(scenario):
     per.set_index(proj_per_adoption.index, inplace=True)
 
     per = per.apply(lambda x: x - x[2021], axis=1)
-    # per = per.apply(lambda x: x / x[2100], axis=1)
 
     per = per.droplevel("Max (Mha)")
 
@@ -419,11 +407,15 @@ def afolu(scenario):
 
     # project adoption by applying s-curve growth to max extent
 
-    adoption = hist1.multiply(max_extent2).fillna(0)
+    adoption = hist1.apply(
+        lambda x: x.multiply(max_extent2.loc[x.name[0], x.name[1]]), axis=1
+    ).fillna(0)
 
     # multiply by avg mitigation potential flux to get emissions mitigated
 
-    adoption = adoption.multiply(flux2).fillna(0)
+    adoption = adoption.apply(
+        lambda x: x.multiply(flux2.loc[x.name[0], x.name[1]].values), axis=1
+    )
 
     # estimate emissions mitigated by avoided pathways
 
@@ -506,28 +498,6 @@ def afolu(scenario):
     co2_fw = pd.concat([co2_fw], names=["Sector"], keys=["Forests & Wetlands"])
     co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
 
-    """
-    co2_fw = rgroup(
-        adoption.loc[
-            slice(None),
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Peat Impacts",
-                "Avoided Forest Conversion",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Natural Regeneration",
-                "Peat Restoration",
-            ],
-            :,
-        ],
-        "CO2",
-        "Forests & Wetlands",
-        "Region",
-        scenario,
-    )
-    """
-
     co2_ag = []
 
     for subv in [
@@ -550,28 +520,6 @@ def afolu(scenario):
     co2_ag.index = co2_ag.index.droplevel("Sector")
     co2_ag = pd.concat([co2_ag], names=["Sector"], keys=["Regenerative Agriculture"])
     co2_ag = co2_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-
-    """
-    co2_ag = rgroup(
-        adoption.loc[
-            slice(None),
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Trees in Croplands",
-            ],
-            :,
-        ],
-        "CO2",
-        "Regenerative Agriculture",
-        "Region",
-        scenario,
-    )
-    """
 
     per_fw = []
 
@@ -600,28 +548,6 @@ def afolu(scenario):
     per_fw = pd.concat([per_fw], names=["Sector"], keys=["Forests & Wetlands"])
     per_fw = per_fw.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
 
-    """
-    per_fw = rgroup2(
-        per_adoption.loc[
-            slice(None),
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Peat Impacts",
-                "Avoided Forest Conversion",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Natural Regeneration",
-                "Peat Restoration",
-            ],
-            :,
-        ],
-        "CO2",
-        "Forests & Wetlands",
-        "Region",
-        scenario,
-    )
-    """
-
     per_ag = []
 
     for subv in [
@@ -648,28 +574,6 @@ def afolu(scenario):
     per_ag.index = per_ag.index.droplevel("Sector")
     per_ag = pd.concat([per_ag], names=["Sector"], keys=["Regenerative Agriculture"])
     per_ag = per_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-
-    """
-    per_ag = rgroup2(
-        per_adoption.loc[
-            slice(None),
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Trees in Croplands",
-            ],
-            :,
-        ],
-        "CO2",
-        "Regenerative Agriculture",
-        "Region",
-        scenario,
-    )
-    """
 
     # endregion
 
@@ -708,10 +612,11 @@ def afolu(scenario):
 
     # endregion
 
+    """
     # add in Mariculture estimate
 
     # region
-
+   
     afolu_em = pd.concat(
         [
             afolu_em,
@@ -734,5 +639,5 @@ def afolu(scenario):
         )
 
     # endregion
-
+    """
     return afolu_em, per_adoption
