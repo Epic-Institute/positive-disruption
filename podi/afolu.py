@@ -167,12 +167,11 @@ def afolu(scenario):
         ]
     )
 
-    """
     # update Improved Forest Mgmt max extent units for consistency (m^3 to Mha)
     max_extent2.loc[slice(None), "Improved Forest Mgmt", :] = (
-        max_extent2.loc[slice(None), "Improved Forest Mgmt", :] / 1e6
+        max_extent2.loc[slice(None), "Improved Forest Mgmt", :] / 1e3
     )
-    """
+
     # endregion
 
     # create avg mitigation potential flux df
@@ -248,11 +247,11 @@ def afolu(scenario):
     ).fillna(0)
 
     # smooth avg mitigation flux
-
+    """
     flux2 = flux2.apply(
         lambda x: curve_smooth(pd.DataFrame(x).T, "quadratic", 4), axis=1
     )
-
+    """
     # endregion
 
     # create historical observations df (as % of max extent)
@@ -471,9 +470,24 @@ def afolu(scenario):
 
     # region
 
-    adoption = adoption.append(avoid)
+    # make placeholder for Animal Mgmt CH4, N Fertilizer Mgmt
+    adoption_am = pd.concat(
+        [adoption.loc[slice(None), "Cropland Soil Health", :] * 0],
+        keys=["Animal Mgmt"],
+        names=["Subvector"],
+    ).reorder_levels(["Country", "Subvector"])
+
+    adoption_n = pd.concat(
+        [adoption.loc[slice(None), "Cropland Soil Health", :] * 0],
+        keys=["N Fertilizer Mgmt"],
+        names=["Subvector"],
+    ).reorder_levels(["Country", "Subvector"])
+
+    adoption = adoption.append(adoption_am).append(adoption_n).append(avoid)
     hist1.loc[:, 2100] = hist1.loc[:, 2099]
     per_adoption = pd.concat([hist1, avoid_per], axis=0).fillna(0)
+
+    # CO2 F&W (F&W only has CO2 at this point)
 
     co2_fw = []
 
@@ -498,13 +512,16 @@ def afolu(scenario):
     co2_fw = pd.concat([co2_fw], names=["Sector"], keys=["Forests & Wetlands"])
     co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
 
+    co2_fw = pd.concat([co2_fw], names=["Gas"], keys=["CO2"])
+    co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+
+    # CO2 Agriculture
+
     co2_ag = []
 
     for subv in [
         "Biochar",
         "Cropland Soil Health",
-        "Improved Rice",
-        # "Nitrogen Fertilizer Management",
         "Optimal Intensity",
         "Silvopasture",
         "Trees in Croplands",
@@ -520,6 +537,62 @@ def afolu(scenario):
     co2_ag.index = co2_ag.index.droplevel("Sector")
     co2_ag = pd.concat([co2_ag], names=["Sector"], keys=["Regenerative Agriculture"])
     co2_ag = co2_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+
+    co2_ag = pd.concat([co2_ag], names=["Gas"], keys=["CO2"])
+    co2_ag = co2_ag.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+
+    # CH4 Agriculture
+
+    ch4_ag = []
+
+    for subv in ["Improved Rice", "Animal Mgmt"]:
+        ch4_ag = pd.DataFrame(ch4_ag).append(
+            pd.DataFrame(
+                rgroup(
+                    adoption.loc[slice(None), subv, :], "CH4", subv, "Region", scenario
+                )
+            )
+        )
+
+    # Improved rice is 58% CH4 and 42% N2O
+    ch4_ag.loc[slice(None), slice(None), "Improved Rice", scenario] = (
+        ch4_ag.loc[slice(None), slice(None), "Improved Rice", scenario] * 0.58
+    ).values
+
+    ch4_ag.index = ch4_ag.index.droplevel("Sector")
+    ch4_ag = pd.concat([ch4_ag], names=["Sector"], keys=["Regenerative Agriculture"])
+    ch4_ag = ch4_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+
+    ch4_ag = pd.concat([ch4_ag], names=["Gas"], keys=["CH4"])
+    ch4_ag = ch4_ag.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+
+    # N2O Agriculture
+
+    n2o_ag = []
+
+    for subv in [
+        "Improved Rice",
+        # "Nitrogen Fertilizer Management",
+    ]:
+        n2o_ag = pd.DataFrame(n2o_ag).append(
+            pd.DataFrame(
+                rgroup(
+                    adoption.loc[slice(None), subv, :], "N2O", subv, "Region", scenario
+                )
+            )
+        )
+
+    # Improved rice is 58% CH4 and 42% N2O
+    n2o_ag.loc[slice(None), slice(None), "Improved Rice", scenario] = (
+        n2o_ag.loc[slice(None), slice(None), "Improved Rice", scenario] * 0.42
+    ).values
+
+    n2o_ag.index = n2o_ag.index.droplevel("Sector")
+    n2o_ag = pd.concat([n2o_ag], names=["Sector"], keys=["Regenerative Agriculture"])
+    n2o_ag = n2o_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+
+    n2o_ag = pd.concat([n2o_ag], names=["Gas"], keys=["N2O"])
+    n2o_ag = n2o_ag.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
 
     per_fw = []
 
@@ -591,18 +664,18 @@ def afolu(scenario):
             slice(None),
             scenario,
         ]
-        .groupby(["Region", "Sector"])
+        .groupby(["Region", "Sector", "Gas"])
         .sum()
     )
     afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
 
     afolu_em = (
-        -pd.concat([co2_fw, co2_ag])
-        .groupby(["Region", "Sector"])
+        -pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag])
+        .groupby(["Region", "Sector", "Gas"])
         .sum()
         .apply(
             lambda x: x.subtract(
-                afolu_em_hist.loc[x.name[0], x.name[1], :][2020].values[0]
+                afolu_em_hist.loc[x.name[0], x.name[1], x.name[2], :][2020].values[0]
             ),
             axis=1,
         )

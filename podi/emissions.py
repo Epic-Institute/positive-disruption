@@ -64,8 +64,9 @@ def rgroup(data, gas, sector, rgroup, scenario):
 
     data = pd.concat([data], names=["Sector"], keys=[sector])
     data = pd.concat([data], names=["Metric"], keys=[sector])
+    data = pd.concat([data], names=["Gas"], keys=[gas])
     data = pd.concat([data], names=["Scenario"], keys=[scenario]).reorder_levels(
-        ["Region", "Sector", "Metric", "Scenario"]
+        ["Region", "Sector", "Metric", "Gas", "Scenario"]
     )
     data = data.loc[np.array(region_list), slice(None), slice(None), slice(None)]
 
@@ -247,7 +248,7 @@ def emissions(
 
     # afolu_em = afolu_em.loc[slice(None), slice(None), slice(None), scenario]
     afolu_em["Metric"] = afolu_em.index.get_level_values("Sector")
-    afolu_em = pd.concat([afolu_em], keys=["CO2"], names=["Gas"])
+    # afolu_em = pd.concat([afolu_em], keys=["CO2"], names=["Gas"])
     afolu_em = afolu_em.reset_index()
     afolu_em = afolu_em.set_index(["Region", "Sector", "Metric", "Gas"])
 
@@ -443,21 +444,55 @@ def emissions(
 
     em_hist = (
         pd.read_csv("podi/data/emissions_historical.csv")
-        .set_index(["Region", "Unit"])
+        .set_index(["Region", "Sector", "Gas", "Unit"])
         .droplevel("Unit")
     )
+    em_hist.columns = em_hist.columns[::-1].astype(int)
 
-    em_hist = rgroup(em_hist, "CO2", "Emissions", "IAM Region", scenario)
+    em_hist = (
+        em_hist.loc[
+            slice(None),
+            [
+                "Electricity",
+                "Transport",
+                "Buildings",
+                "Industry",
+                "Forests & Wetlands",
+                "Regenerative Agriculture",
+            ],
+            slice(None),
+            :,
+        ]
+        .groupby(["Region", "Sector", "Gas"])
+        .sum()
+    )
+
+    em_hist2 = []
+
+    for sector in em_hist.index.get_level_values(1).unique():
+        for gas in (
+            em_hist.loc[slice(None), sector, slice(None)]
+            .index.get_level_values(1)
+            .unique()
+        ):
+            em_hist2 = pd.DataFrame(em_hist2).append(
+                rgroup(
+                    em_hist.loc[slice(None), [sector], [gas], :],
+                    gas,
+                    sector,
+                    "IAM Region",
+                    scenario,
+                )
+            )
+
+    em_hist = em_hist2.droplevel("Metric")
 
     em_hist.index.name = "IEA Region"
 
     # estimate time between data and projections
-    em_hist["2018"] = em_hist["2017"] * (
-        1 + (em_hist["2017"] - em_hist["2016"]) / em_hist["2016"]
-    )
-    em_hist["2019"] = em_hist["2018"] * (
-        1 + (em_hist["2018"] - em_hist["2017"]) / em_hist["2017"]
-    )
+    em_hist["2019"] = em_hist[2018] * (
+        1 + (em_hist[2018] - em_hist[2017]) / em_hist[2017]
+    ).replace(NaN, 0)
 
     em_hist.columns = em_hist.columns.astype(int)
 
@@ -466,11 +501,11 @@ def emissions(
     # add clip(lower=0) before .groupby to have em_hist not account for net negative F&W emissions
     hf = (
         em_hist.loc[:, data_end_year]
-        .divide(em.loc[:, data_end_year].groupby("Region").sum())
+        .divide(em.loc[:, data_end_year].groupby(["Region", "Sector", "Gas"]).sum())
         .replace(NaN, 0)
     )
 
-    em = em.apply(lambda x: x.multiply(hf[x.name[0]][0]), axis=1)
+    em = em.apply(lambda x: x.multiply(hf[x.name[0], x.name[1], x.name[3]]), axis=1)
 
     em2 = []
 
@@ -493,10 +528,6 @@ def emissions(
 
     em = em2.join(em.loc[:, 2020:])
 
-    em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
-        ["Region", "Sector", "Metric", 'Gas', "Scenario"]
-    )
-
     #######################
     #  EMISSIONS TARGETS  #
     #######################
@@ -514,7 +545,7 @@ def emissions(
 
     # harmonize targets with historical emissions
     hf = pd.DataFrame(
-        em_hist.loc["World ", data_end_year].values
+        em_hist.loc["World ", data_end_year].sum()
         / (em_targets.loc[:, data_end_year]).replace(NaN, 0)
     )
 

@@ -374,6 +374,34 @@ cement.index.set_names(["Region", "Sector", "Metric", "Gas", "Scenario"], inplac
 
 # endregion
 
+# Agriculture
+
+co2 = (
+    pd.DataFrame(
+        pd.read_csv(
+            "podi/data/CO2_CEDS_emissions_by_sector_country_2021_02_05.csv"
+        ).drop(columns=["Em", "Units"])
+    ).set_index(["Country", "Sector"])
+    / 1000
+)
+co2.columns = co2.columns.astype(int)
+
+co2_ag = co2.loc[slice(None), ag, :]
+co2_ag2 = []
+co2_ag3 = []
+
+for sub in ag:
+    co2_ag2 = pd.DataFrame(co2_ag2).append(
+        rgroup(co2_ag.loc[slice(None), [sub], :], "CO2", sub, "ISO")
+    )
+for sub in ag:
+    co2_ag3 = pd.DataFrame(co2_ag3).append(
+        proj(co2_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CO2")
+    )
+
+co2_ag = co2_ag3
+
+
 # Forests & Wetlands
 
 gas_fw = (
@@ -772,6 +800,7 @@ fgas_build = proj(fgas_build, "Buildings", "F-gases", "F-gases")
 addtl_em = pd.concat(
     [
         cement,
+        co2_ag,
         co2_fw,
         ch4_elec,
         ch4_ind,
@@ -790,4 +819,4 @@ addtl_em = pd.concat(
 )
 # .fillna(method="ffill", axis=1)
 
-addtl_em.drop_duplicates().to_csv("podi/data/emissions_additional.csv", index=True)
+addtl_em.to_csv("podi/data/emissions_additional.csv", index=True)

@@ -1976,6 +1976,7 @@ for i in range(0, len(region_list)):
 
 scenario = scenario
 start_year = 2000
+i=0
 
 for i in range(0, len(region_list)):
 
@@ -4432,25 +4433,25 @@ results19 = curve_smooth(
 results19 = results19 * (hist[2021] / results19.loc[:,2021].values[0])
 
 #CO2
-em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
-em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values
-em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
+em_b.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
 
 
-em_b.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'baseline'].sum() / 3670).values
-em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
-em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
+em_b.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
 
 
 #CH4
-em_b.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
-em_pd.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
-em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
+em_b.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
+em_pd.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
+em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
 
 #N2O
-em_b.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
-em_pd.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
-em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
+em_b.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
+em_pd.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None),'N2O', 'pathway'].sum() / (298)).values
+em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None),'N2O', 'pathway'].sum() / (298)).values
 
 em_b = em_b.values
 em_pd = em_pd.values
@@ -4620,25 +4621,25 @@ results19 = curve_smooth(
 results19 = results19 * (hist[2021] / results19.loc[:,2021].values[0])
 
 #CO2
-em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
-em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values
-em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
+em_b.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
 
 
-em_b.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'baseline'].sum() / 3670).values
-em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
-em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
+em_b.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
 
 
 #CH4
-em_b.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
-em_pd.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
-em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
+em_b.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
+em_pd.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
+em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
 
 #N2O
-em_b.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
-em_pd.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
-em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
+em_b.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
+em_pd.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
+em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
 
 em_b = em_b.values
 em_pd = em_pd.values
@@ -4797,25 +4798,25 @@ F19 = curve_smooth(pd.DataFrame(
     ), 'quadratic', 6)
 
 #CO2
-em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
-em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values
-em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
+em_b.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
 
 
-em_b.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'baseline'].sum() / 3670).values
-em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
-em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
+em_b.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
 
 
 #CH4
-em_b.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
-em_pd.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
-em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
+em_b.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
+em_pd.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
+em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
 
 #N2O
-em_b.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
-em_pd.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
-em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
+em_b.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
+em_pd.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None),'N2O', 'pathway'].sum() / (298)).values
+em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
 
 em_b = em_b.values
 em_pd = em_pd.values
@@ -4838,9 +4839,9 @@ Fcdr = (pd.DataFrame(Fcdr).loc[225:335].set_index(np.arange(data_start_year, (lo
 
 # CO2e conversion
 
-Fb['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fb, axis=1)).T, 'quadratic', 6).T
-Fpd['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fpd, axis=1)).T, 'quadratic', 6).T
-Fcdr['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fcdr, axis=1)).T, 'quadratic', 6).T
+Fb['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fb, axis=1)).T, 'quadratic', 50).T
+Fpd['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fpd, axis=1)).T, 'quadratic', 50).T
+Fcdr['CO2e'] = curve_smooth(pd.DataFrame(np.sum(Fcdr, axis=1)).T, 'quadratic', 50).T
 '''
 Fb['CO2e'] = np.sum(Fb, axis=1)
 Fpd['CO2e'] = np.sum(Fpd, axis=1)
@@ -4985,25 +4986,25 @@ T19 = curve_smooth(
 )
 
 #CO2
-em_b.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'baseline'].sum() / 3670).values
-em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values
-em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
+em_b.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 1] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Electricity', 'Transport', 'Buildings', 'Industry'], slice(None), 'CO2', 'pathway'].sum() / 3670).values - (cdr.loc['World ', 'Carbon Dioxide Removal', 'pathway'] / 3670).values
 
 
-em_b.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'baseline'].sum() / 3670).values
-em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
-em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(2).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'pathway'].sum() / 3670).values
+em_b.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'baseline'].sum() / 3670).values
+em_pd.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
+em_cdr.loc[225:335, 2] = (em[~em.index.get_level_values(3).isin(['CH4', 'N2O', 'F-gases'])].loc['World ', ['Forests & Wetlands', 'Regenerative Agriculture'], slice(None), 'CO2', 'pathway'].sum() / 3670).values
 
 
 #CH4
-em_b.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
-em_pd.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
-em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(2).isin(['CH4'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (25)).values
+em_b.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
+em_pd.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
+em_cdr.loc[225:335, 3] = (em[em.index.get_level_values(3).isin(['CH4'])].loc['World ', slice(None), slice(None), 'CH4', 'pathway'].sum() / (25)).values
 
 #N2O
-em_b.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
-em_pd.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
-em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(2).isin(['N2O'])].loc['World ', slice(None), slice(None), 'pathway'].sum() / (298)).values
+em_b.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
+em_pd.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
+em_cdr.loc[225:335, 4] = (em[em.index.get_level_values(3).isin(['N2O'])].loc['World ', slice(None), slice(None), 'N2O', 'pathway'].sum() / (298)).values
 
 em_b = em_b.values
 em_pd = em_pd.values
