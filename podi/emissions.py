@@ -246,9 +246,8 @@ def emissions(
 
     # region
 
-    # afolu_em = afolu_em.loc[slice(None), slice(None), slice(None), scenario]
+    afolu_em = afolu_em.loc[slice(None), slice(None), slice(None), scenario]
     afolu_em["Metric"] = afolu_em.index.get_level_values("Sector")
-    # afolu_em = pd.concat([afolu_em], keys=["CO2"], names=["Gas"])
     afolu_em = afolu_em.reset_index()
     afolu_em = afolu_em.set_index(["Region", "Sector", "Metric", "Gas"])
 
@@ -279,14 +278,6 @@ def emissions(
     addtl_em.columns = addtl_em.columns.astype(int)
     addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year]
 
-    # remove steel to avoid double counting
-    addtl_em = addtl_em.loc[
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-    ]
-
     # remove AFOLU to avoid double counting
     addtl_em = addtl_em.loc[
         slice(None),
@@ -294,18 +285,6 @@ def emissions(
         slice(None),
         slice(None),
     ]
-
-    """
-    # Set emissions change to follow elec ff emissions
-    per_change = (
-        industry_em.loc[slice(None), "Industry", "Fossil fuels", "CO2"]
-        .loc[:, 2019:]
-        .pct_change(axis=1)
-        .replace(NaN, 0)
-        .dropna(axis=1)
-        .apply(lambda x: x + 1, axis=1)
-    )
-    """
 
     # Set emissions change to follow sector emissions
     per_change_elec = (
@@ -436,10 +415,52 @@ def emissions(
         ]
     )
 
+    em_hist_old = (
+        pd.read_csv("podi/data/emissions_historical_old.csv")
+        .set_index(["Region", "Unit"])
+        .droplevel("Unit")
+    )
+
+    em_hist_old = rgroup(em_hist_old, "CO2", "CO2", "CAIT Region", scenario)
+    em_hist_old.columns = em_hist_old.columns.astype(int)
+
+    # estimate time between data and projections
+    em_hist_old["2019"] = em_hist_old[2018] * (
+        1 + (em_hist_old[2018] - em_hist_old[2017]) / em_hist_old[2017]
+    )
+    em_hist_old.columns = em_hist_old.columns.astype(int)
+
+    per_em = em.loc[:, data_start_year:data_end_year].apply(
+        lambda x: x.divide(
+            em.loc[x.name[0]].loc[:, data_start_year:data_end_year].sum(axis=0)
+        ),
+        axis=1,
+    )
+
+    em2 = per_em.apply(
+        lambda x: x.multiply(em_hist_old.loc[x.name[0]].squeeze()), axis=1
+    )
+
+    em = pd.concat(
+        [
+            em2,
+            em.loc[:, data_end_year + 1 : long_proj_end_year].apply(
+                lambda x: x
+                + em2.loc[x.name[0], x.name[1], x.name[2], x.name[3]].loc[data_end_year]
+                - em.loc[x.name[0], x.name[1], x.name[2], x.name[3]].loc[data_end_year],
+                axis=1,
+            ),
+        ]
+    )
+
+    em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas", "Scenario"]
+    )
+
     ##########################
     #  HISTORICAL EMISSIONS  #
     ##########################
-
+    '''
     # region
 
     em_hist = (
@@ -485,7 +506,7 @@ def emissions(
                 )
             )
 
-    em_hist = em_hist2.droplevel("Metric")
+    em_hist = em_hist2.droplevel(["Metric", "Scenario"])
 
     em_hist.index.name = "IEA Region"
 
@@ -498,12 +519,27 @@ def emissions(
 
     # harmonize with historical emissions
 
-    # add clip(lower=0) before .groupby to have em_hist not account for net negative F&W emissions
+    hf = (
+        (
+            1
+            / em.drop_duplicates().apply(
+                lambda x: x.divide(
+                    em_hist.loc[x.name[0], x.name[1], x.name[3]].loc[data_end_year]
+                ),
+                axis=1,
+            )
+        )
+        .replace(nan, 0)
+        .loc[:, data_end_year]
+    )
+
+    """
     hf = (
         em_hist.loc[:, data_end_year]
         .divide(em.loc[:, data_end_year].groupby(["Region", "Sector", "Gas"]).sum())
         .replace(NaN, 0)
     )
+    """
 
     em = em.apply(lambda x: x.multiply(hf[x.name[0], x.name[1], x.name[3]]), axis=1)
 
@@ -528,9 +564,17 @@ def emissions(
 
     em = em2.join(em.loc[:, 2020:])
 
+    em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas", "Scenario"]
+    )
+
+    # endregion
+    '''
     #######################
     #  EMISSIONS TARGETS  #
     #######################
+
+    # region
 
     em_targets = pd.read_csv(targets_em).set_index(
         ["Model", "Region", "Scenario", "Variable", "Unit"]
@@ -544,13 +588,16 @@ def emissions(
     ].droplevel("Unit")
 
     # harmonize targets with historical emissions
+    """
     hf = pd.DataFrame(
         em_hist.loc["World ", data_end_year].sum()
         / (em_targets.loc[:, data_end_year]).replace(NaN, 0)
     )
 
     em_targets = em_targets * (hf.values)
-
+    """
     # endregion
 
-    return em, em_targets, em_hist
+    em_hist = 1
+
+    return em, em_targets, em_hist_old

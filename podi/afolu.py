@@ -681,6 +681,10 @@ def afolu(scenario):
         )
     )
 
+    afolu_em = pd.concat(
+        [afolu_em], names=["Scenario"], keys=[scenario]
+    ).reorder_levels(["Region", "Sector", "Gas", "Scenario"])
+
     per_adoption = pd.concat([per_fw, per_ag])
 
     # endregion

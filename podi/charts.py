@@ -2225,10 +2225,8 @@ for i in range(0, len(region_list)):
         go.Scatter(
             name="Historical Net Emissions",
             line=dict(width=2, color="black"),
-            x=pd.Series(em_hist.loc[:, start_year:].columns.values),
-            y=pd.Series(
-                em_hist.loc[region_list[i]].loc[:, start_year:].values[0] / 1000
-            ),
+            x=pd.Series(em.loc[region_list[i], slice(None), slice(None), slice(None), scenario].loc[:, start_year:data_end_year].columns.values),
+            y=pd.Series(em.loc[region_list[i], slice(None), slice(None), slice(None), scenario].loc[:, start_year:data_end_year].sum()) / 1000,
             fill=histfill,
             stackgroup=stackgroup,
         )
@@ -2245,7 +2243,6 @@ for i in range(0, len(region_list)):
         yaxis={"title": "GtCO2e/yr"},
     )
 
-    fig.update_layout(margin=dict())
     fig.add_annotation(
         text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA <br>World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissions factors are from IEA Emissions Factors 2020",
         xref="paper",

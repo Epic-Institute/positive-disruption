@@ -142,6 +142,8 @@ afolu_em_baseline, afolu_per_adoption_baseline = afolu("baseline")
 
 afolu_em_pathway, afolu_per_adoption_pathway = afolu("pathway")
 
+afolu_em = afolu_em_baseline.append(afolu_em_pathway)
+
 afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
 
 # endregion
@@ -161,7 +163,7 @@ em_baseline, em_targets_baseline, em_hist = emissions(
     heat_consump_baseline,
     heat_per_adoption_baseline,
     transport_consump_baseline,
-    afolu_em_baseline,
+    afolu_em,
     "podi/data/emissions_additional.csv",
     "podi/data/iamc_data.csv",
 )
@@ -173,7 +175,7 @@ em_pathway, em_targets_pathway, em_hist = emissions(
     heat_consump_pathway,
     heat_per_adoption_pathway,
     transport_consump_pathway,
-    afolu_em_pathway,
+    afolu_em,
     "podi/data/emissions_additional.csv",
     "podi/data/iamc_data.csv",
 )
