@@ -243,7 +243,6 @@ for i in range(0, len(region_list)):
             "Industry",
             "Regenerative Agriculture",
             "Forests & Wetlands",
-            "Other Gases",
         ]:
             path = (
                 '"scurvessub-' + region_list[i] + "-" + k + "-" + j + '.html"'

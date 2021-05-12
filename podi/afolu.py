@@ -246,12 +246,6 @@ def afolu(scenario):
         ]
     ).fillna(0)
 
-    # smooth avg mitigation flux
-    """
-    flux2 = flux2.apply(
-        lambda x: curve_smooth(pd.DataFrame(x).T, "quadratic", 4), axis=1
-    )
-    """
     # endregion
 
     # create historical observations df (as % of max extent)
@@ -689,6 +683,12 @@ def afolu(scenario):
 
     # endregion
 
+    # smooth from jumps in avg mitigation flux
+    """
+    if scenario == 'baseline':
+        afolu_em = curve_smooth(afolu_em, "quadratic", 3)
+        per_adoption = curve_smooth(per_adoption, "quadratic", 3)
+    """
     """
     # add in Mariculture estimate
 

@@ -1,0 +1,81 @@
+Region,Sector,Metric,Gas,Scenario,2040,2041
+World ,Regenerative Agriculture,Biochar,CO2,baseline,3.618973237464001,3.80944551312
+NAM ,Regenerative Agriculture,Biochar,CO2,baseline,0.7418347608960001,0.78087869568
+US ,Regenerative Agriculture,Biochar,CO2,baseline,0.6498392352660001,0.68404130028
+CSAM ,Regenerative Agriculture,Biochar,CO2,baseline,0.6535463641020002,0.6879435411600001
+BRAZIL ,Regenerative Agriculture,Biochar,CO2,baseline,0.4220328639240001,0.44424511992000004
+EUR ,Regenerative Agriculture,Biochar,CO2,baseline,0.31152912661800003,0.32792539644
+AFRICA ,Regenerative Agriculture,Biochar,CO2,baseline,0.20625315172200004,0.21710858076
+SAFR ,Regenerative Agriculture,Biochar,CO2,baseline,0.017452683738000005,0.01837124604
+ME ,Regenerative Agriculture,Biochar,CO2,baseline,0.031130280846000006,0.03276871668
+RUS ,Regenerative Agriculture,Biochar,CO2,baseline,0.09519016541400002,0.10020017412
+ASIAPAC ,Regenerative Agriculture,Biochar,CO2,baseline,0.4367996561340001,0.45978911172
+CHINA ,Regenerative Agriculture,Biochar,CO2,baseline,0.6113408332320002,0.6435166665600001
+INDIA ,Regenerative Agriculture,Biochar,CO2,baseline,0.35367916901400004,0.37229386212
+JPN ,Regenerative Agriculture,Biochar,CO2,baseline,0.012211205076,0.012853900080000001
+ OECD ,Regenerative Agriculture,Biochar,CO2,baseline,0.9697652019720001,1.02080547576
+NonOECD ,Regenerative Agriculture,Biochar,CO2,baseline,2.514034372032001,2.64635197056
+World ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+NAM ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+US ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+CSAM ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+BRAZIL ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+EUR ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+AFRICA ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+SAFR ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+ME ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+RUS ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+ASIAPAC ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+CHINA ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+INDIA ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+JPN ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+ OECD ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+NonOECD ,Regenerative Agriculture,Cropland Soil Health,CO2,baseline,0.0,0.0
+World ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+NAM ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+US ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+CSAM ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+BRAZIL ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+EUR ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+AFRICA ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+SAFR ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+ME ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+RUS ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+ASIAPAC ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+CHINA ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+INDIA ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+JPN ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+ OECD ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+NonOECD ,Regenerative Agriculture,Optimal Intensity,CO2,baseline,0.0,0.0
+World ,Regenerative Agriculture,Silvopasture,CO2,baseline,992.8203726715759,0.0
+NAM ,Regenerative Agriculture,Silvopasture,CO2,baseline,48.986033739426,0.0
+US ,Regenerative Agriculture,Silvopasture,CO2,baseline,34.686199774656,0.0
+CSAM ,Regenerative Agriculture,Silvopasture,CO2,baseline,84.407431566598,0.0
+BRAZIL ,Regenerative Agriculture,Silvopasture,CO2,baseline,32.966444,0.0
+EUR ,Regenerative Agriculture,Silvopasture,CO2,baseline,7.574946590473999,0.0
+AFRICA ,Regenerative Agriculture,Silvopasture,CO2,baseline,707.2987172782282,0.0
+SAFR ,Regenerative Agriculture,Silvopasture,CO2,baseline,37.64309349,0.0
+ME ,Regenerative Agriculture,Silvopasture,CO2,baseline,6.798680652312,0.0
+RUS ,Regenerative Agriculture,Silvopasture,CO2,baseline,8.49629537,0.0
+ASIAPAC ,Regenerative Agriculture,Silvopasture,CO2,baseline,56.577136737941984,0.0
+CHINA ,Regenerative Agriculture,Silvopasture,CO2,baseline,48.839497276176,0.0
+INDIA ,Regenerative Agriculture,Silvopasture,CO2,baseline,0.7430031679679999,0.0
+JPN ,Regenerative Agriculture,Silvopasture,CO2,baseline,0.340660608084,0.0
+ OECD ,Regenerative Agriculture,Silvopasture,CO2,baseline,100.573673647564,0.0
+NonOECD ,Regenerative Agriculture,Silvopasture,CO2,baseline,882.6878774413301,0.0
+World ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,754.5866784798479,0.0
+NAM ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,59.416339917708,0.0
+US ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,38.034930458952005,0.0
+CSAM ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,83.79836008674799,0.0
+BRAZIL ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,43.87125854348999,0.0
+EUR ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,89.96569049805001,0.0
+AFRICA ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,292.5575551003719,0.0
+SAFR ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,12.56442057,0.0
+ME ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,6.6126858549479985,0.0
+RUS ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,43.70601077595,0.0
+ASIAPAC ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,46.08625250214799,0.0
+CHINA ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,51.53629470857998,0.0
+INDIA ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,26.264505038472,0.0
+JPN ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,1.69955707,0.0
+ OECD ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,143.00273493721,0.0
+NonOECD ,Regenerative Agriculture,Trees in Croplands,CO2,baseline,573.7561246071759,0.0

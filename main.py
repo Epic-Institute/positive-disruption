@@ -158,11 +158,11 @@ podi.data.iea_weo_em_etl
 
 em_baseline, em_targets_baseline, em_hist = emissions(
     "baseline",
-    energy_demand.loc[slice(None), slice(None), slice(None), ["baseline"]],
-    elec_consump_baseline,
-    heat_consump_baseline,
-    heat_per_adoption_baseline,
-    transport_consump_baseline,
+    energy_demand,
+    elec_consump,
+    heat_consump,
+    heat_per_adoption,
+    transport_consump,
     afolu_em,
     "podi/data/emissions_additional.csv",
     "podi/data/iamc_data.csv",
@@ -170,11 +170,11 @@ em_baseline, em_targets_baseline, em_hist = emissions(
 
 em_pathway, em_targets_pathway, em_hist = emissions(
     "pathway",
-    energy_demand.loc[slice(None), slice(None), slice(None), ["pathway"]],
-    elec_consump_pathway,
-    heat_consump_pathway,
-    heat_per_adoption_pathway,
-    transport_consump_pathway,
+    energy_demand,
+    elec_consump,
+    heat_consump,
+    heat_per_adoption,
+    transport_consump,
     afolu_em,
     "podi/data/emissions_additional.csv",
     "podi/data/iamc_data.csv",
