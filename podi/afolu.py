@@ -246,6 +246,8 @@ def afolu(scenario):
         ]
     ).fillna(0)
 
+    flux2 = curve_smooth(flux2, "quadratic", 10)
+
     # endregion
 
     # create historical observations df (as % of max extent)
@@ -283,7 +285,7 @@ def afolu(scenario):
             lambda x: x.divide(max_extent2.loc[x.name[0], x.name[1]].loc[:2020]), axis=1
         )
     )
-    hist1 = hist1.replace(0, NaN)
+    hist1 = hist1.replace(0, NaN).clip(upper=0.99)
 
     # endregion
 
@@ -664,7 +666,7 @@ def afolu(scenario):
     afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
 
     afolu_em = (
-        -pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag])
+        -pd.concat([co2_fw, co2_ag, ch4_ag * 10, n2o_ag * 10])
         .groupby(["Region", "Sector", "Gas"])
         .sum()
         .apply(
