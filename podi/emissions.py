@@ -445,7 +445,7 @@ def emissions(
     em2 = per_em.apply(
         lambda x: x.multiply(em_hist_old.loc[x.name[0]].squeeze()), axis=1
     )
-
+    """
     em = (
         pd.concat(
             [
@@ -465,7 +465,7 @@ def emissions(
         .groupby(["Region", "Sector", "Metric", "Gas", "Scenario"])
         .sum()
     )
-
+    """
     ##########################
     #  HISTORICAL EMISSIONS  #
     ##########################

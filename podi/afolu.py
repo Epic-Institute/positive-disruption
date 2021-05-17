@@ -246,7 +246,7 @@ def afolu(scenario):
         ]
     ).fillna(0)
 
-    flux2 = curve_smooth(flux2, "quadratic", 10)
+    # flux2 = curve_smooth(flux2, "quadratic", 10)
 
     # endregion
 
@@ -402,15 +402,23 @@ def afolu(scenario):
 
     # project adoption by applying s-curve growth to max extent
 
+    # region
+
     adoption = hist1.apply(
         lambda x: x.multiply(max_extent2.loc[x.name[0], x.name[1]]), axis=1
     ).fillna(0)
 
+    # endregion
+
     # multiply by avg mitigation potential flux to get emissions mitigated
+
+    # region
 
     adoption = adoption.apply(
         lambda x: x.multiply(flux2.loc[x.name[0], x.name[1]].values), axis=1
     )
+
+    # endregion
 
     # estimate emissions mitigated by avoided pathways
 
@@ -441,6 +449,14 @@ def afolu(scenario):
 
     avoid = avoid / 1e6
     avoid.columns = avoid.columns.astype(int)
+
+    avoid.loc[:, :2019] = 0
+    avoid.loc[:, 2020:] = avoid.loc[:, 2020:].apply(
+        lambda x: x.subtract(
+            avoid.loc[x.name[0], x.name[1], x.name[2], :][2020].values[0]
+        ),
+        axis=1,
+    )
 
     avoid_per = avoid.apply(lambda x: ((x[2019] - x) / x[2019]).fillna(0), axis=1)
 
@@ -666,11 +682,11 @@ def afolu(scenario):
     afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
 
     afolu_em = (
-        -pd.concat([co2_fw, co2_ag, ch4_ag * 10, n2o_ag * 10])
+        -pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag])
         .groupby(["Region", "Sector", "Gas"])
         .sum()
         .apply(
-            lambda x: x.subtract(
+            lambda x: x.add(
                 afolu_em_hist.loc[x.name[0], x.name[1], x.name[2], :][2020].values[0]
             ),
             axis=1,
