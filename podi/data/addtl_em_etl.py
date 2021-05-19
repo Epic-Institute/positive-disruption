@@ -69,6 +69,7 @@ ag = [
     "3D_Soil-emissions",
     "3E_Enteric-fermentation",
     "3I_Agriculture-other",
+    # "1A4c_Agriculture-forestry-fishing",
 ]
 
 other = ["other"]
@@ -142,6 +143,50 @@ def proj(data, sector, metric, gas):
 
     data_per_change = (
         energy_demand.loc[slice(None), "Industry", "Industry", slice(None)]
+        .loc[:, 2019:]
+        .pct_change(axis=1)
+        .dropna(axis=1)
+        .apply(lambda x: x + 1, axis=1)
+        .merge(
+            data,
+            right_on=["IEA Region", "Scenario"],
+            left_on=["IEA Region", "Scenario"],
+        )
+        .reindex(sorted(energy_demand.columns), axis=1)
+    )
+
+    data = data_per_change.loc[:, :2019].merge(
+        data_per_change.loc[:, 2019:].cumprod(axis=1).loc[:, 2020:],
+        right_on=["IEA Region", "Scenario"],
+        left_on=["IEA Region", "Scenario"],
+    )
+
+    data4 = []
+
+    data4 = pd.DataFrame(data4).append(
+        pd.concat([data], keys=[metric], names=["Metric"])
+    )
+
+    data4 = pd.concat([data4], keys=[gas], names=["Gas"]).reorder_levels(
+        ["IEA Region", "Metric", "Gas", "Scenario"]
+    )
+
+    data4 = pd.concat([data4], keys=[sector], names=["Sector"]).reorder_levels(
+        ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
+    )
+
+    data4.index.set_names(
+        ["Region", "Sector", "Metric", "Gas", "Scenario"], inplace=True
+    )
+
+    return data4
+
+
+def proj2(data, sector, metric, gas):
+    # project gas emissions using percent change in sector
+
+    data_per_change = (
+        energy_demand.loc[slice(None), "Industry", "Heat", slice(None)]
         .loc[:, 2019:]
         .pct_change(axis=1)
         .dropna(axis=1)
@@ -376,6 +421,8 @@ cement.index.set_names(["Region", "Sector", "Metric", "Gas", "Scenario"], inplac
 
 # Agriculture
 
+# region
+
 co2 = (
     pd.DataFrame(
         pd.read_csv(
@@ -401,8 +448,11 @@ for sub in ag:
 
 co2_ag = co2_ag3
 
+# endregion
 
 # Forests & Wetlands
+
+# region
 
 gas_fw = (
     pd.read_csv("podi/data/emissions_fw_historical.csv")
@@ -417,7 +467,9 @@ co2_fw = gas_fw.loc[slice(None), slice(None), "CO2"]
 
 co2_fw = rgroup(co2_fw, "CO2", "Forests & Wetlands", "CAIT Region")
 
-co2_fw = proj(co2_fw, "Forests & Wetlands", "CO2", "CO2")
+co2_fw = proj2(co2_fw, "Forests & Wetlands", "CO2", "CO2")
+
+# endregion
 
 # endregion
 
@@ -439,6 +491,8 @@ ch4 = (
 ch4.columns = ch4.columns.astype(int)
 
 # Electricity
+
+# region
 
 ch4_elec = ch4.loc[slice(None), elec, :]
 ch4_elec2 = []
@@ -463,7 +517,11 @@ ch4_elec = rgroup(ch4_elec, "CH4", "Electricity", "ISO")
 ch4_elec = proj(ch4_elec, "Electricity", "CH4", "CH4")
 """
 
+# endregion
+
 # Industry
+
+# region
 
 ch4_ind = ch4.loc[slice(None), ind, :]
 ch4_ind2 = []
@@ -488,7 +546,11 @@ ch4_ind = rgroup(ch4_ind, "CH4", "Industry", "ISO")
 ch4_ind = proj(ch4_ind, "Industry", "CH4", "CH4")
 """
 
+# endregion
+
 # Transport
+
+# region
 
 ch4_trans = ch4.loc[slice(None), trans, :]
 ch4_trans2 = []
@@ -513,7 +575,11 @@ ch4_trans = rgroup(ch4_trans, "CH4", "Transport", "ISO")
 ch4_trans = proj(ch4_trans, "Transport", "CH4", "CH4")
 """
 
+# endregion
+
 # Buildings
+
+# region
 
 ch4_build = ch4.loc[slice(None), build, :]
 ch4_build2 = []
@@ -538,7 +604,11 @@ ch4_b = rgroup(ch4_b, "CH4", "Buildings", "ISO")
 ch4_b = proj(ch4_b, "Buildings", "CH4", "CH4")
 """
 
+# endregion
+
 # Agriculture
+
+# region
 
 ch4_ag = ch4.loc[slice(None), ag, :]
 ch4_ag2 = []
@@ -563,7 +633,11 @@ ch4_ag = rgroup(ch4_ag, "CH4", "Regenerative Agriculture", "ISO")
 ch4_ag = proj(ch4_ag, "Regenerative Agriculture", "CH4", "CH4")
 """
 
+# endregion
+
 # Forests & Wetlands
+
+# region
 
 ch4_fw = gas_fw.loc[slice(None), slice(None), "CH4"]
 """
@@ -584,8 +658,12 @@ ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands", "CAIT Region")
 
 ch4_fw = proj(ch4_fw, "Forests & Wetlands", "CH4", "CH4")
 
+# endregion
 
 # Other
+
+# region
+
 """
 ch4_o = ch4.loc[slice(None), other, :]
 
@@ -593,6 +671,9 @@ ch4_o = rgroup(ch4_o, "CH4", "Other", "ISO")
 
 ch4_o = proj(ch4_o, "Other", "CH4", "CH4")
 """
+
+# endregion
+
 # endregion
 
 #######

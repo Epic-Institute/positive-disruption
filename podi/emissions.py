@@ -402,6 +402,12 @@ def emissions(
 
     # endregion
 
+    #################
+    #  COMBINE ALL  #
+    #################
+
+    # region
+
     em = pd.concat(
         [
             elec_em,
@@ -420,6 +426,14 @@ def emissions(
         ["Region", "Sector", "Metric", "Gas", "Scenario"]
     )
 
+    # endregion
+
+    ###############################
+    #  HISTORICAL EMISSIONS (V3)  #
+    ###############################
+
+    # region
+
     em_hist_old = (
         pd.read_csv("podi/data/emissions_historical_old.csv")
         .set_index(["Region", "Unit"])
@@ -435,6 +449,7 @@ def emissions(
     )
     em_hist_old.columns = em_hist_old.columns.astype(int)
 
+    # find emissions percent breakdown of historical estimates
     per_em = em.loc[:, data_start_year:data_end_year].apply(
         lambda x: x.divide(
             em.loc[x.name[0]].loc[:, data_start_year:data_end_year].sum(axis=0)
@@ -445,7 +460,54 @@ def emissions(
     em2 = per_em.apply(
         lambda x: x.multiply(em_hist_old.loc[x.name[0]].squeeze()), axis=1
     )
+
+    # harmonize emissions projections with current year emissions
+
+    hf = em2.loc[:, data_end_year].divide(em.loc[:, data_end_year]).replace(NaN, 0)
+
+    em = em.apply(
+        lambda x: x.multiply(hf[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]),
+        axis=1,
+    )
+
+    em = em2.join(em.loc[:, 2020:])
+
+    # endregion
+
+    ###############################
+    #  HISTORICAL EMISSIONS (V2)  #
+    ###############################
     """
+    # region
+
+    em_hist_old = (
+        pd.read_csv("podi/data/emissions_historical_old.csv")
+        .set_index(["Region", "Unit"])
+        .droplevel("Unit")
+    )
+
+    em_hist_old = rgroup(em_hist_old, "CO2", "CO2", "CAIT Region", scenario)
+    em_hist_old.columns = em_hist_old.columns.astype(int)
+
+    # estimate time between data and projections
+    em_hist_old["2019"] = em_hist_old[2018] * (
+        1 + (em_hist_old[2018] - em_hist_old[2017]) / em_hist_old[2017]
+    )
+    em_hist_old.columns = em_hist_old.columns.astype(int)
+
+    #find emissions percent breakdown
+    per_em = em.loc[:, data_start_year:data_end_year].apply(
+        lambda x: x.divide(
+            em.loc[x.name[0]].loc[:, data_start_year:data_end_year].sum(axis=0)
+        ),
+        axis=1,
+    )
+
+    em2 = per_em.apply(
+        lambda x: x.multiply(em_hist_old.loc[x.name[0]].squeeze()), axis=1
+    )
+
+
     em = (
         pd.concat(
             [
@@ -465,6 +527,8 @@ def emissions(
         .groupby(["Region", "Sector", "Metric", "Gas", "Scenario"])
         .sum()
     )
+
+    # endregion
     """
     ##########################
     #  HISTORICAL EMISSIONS  #

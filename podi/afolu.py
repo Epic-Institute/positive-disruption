@@ -167,9 +167,9 @@ def afolu(scenario):
         ]
     )
 
-    # update Improved Forest Mgmt max extent units for consistency (m^3 to Mha)
+    # update Improved Forest Mgmt avg mitigation potential units for consistency (tCO2e/yr to MtCO2e/yr)
     max_extent2.loc[slice(None), "Improved Forest Mgmt", :] = (
-        max_extent2.loc[slice(None), "Improved Forest Mgmt", :] / 1e3
+        max_extent2.loc[slice(None), "Improved Forest Mgmt", :] / 1e6
     )
 
     # endregion
@@ -451,6 +451,7 @@ def afolu(scenario):
     avoid.columns = avoid.columns.astype(int)
 
     avoid.loc[:, :2019] = 0
+
     avoid.loc[:, 2020:] = avoid.loc[:, 2020:].apply(
         lambda x: x.subtract(
             avoid.loc[x.name[0], x.name[1], x.name[2], :][2020].values[0]
@@ -496,7 +497,6 @@ def afolu(scenario):
     ).reorder_levels(["Country", "Subvector"])
 
     adoption = adoption.append(adoption_am).append(adoption_n).append(avoid)
-    hist1.loc[:, 2100] = hist1.loc[:, 2099]
     per_adoption = pd.concat([hist1, avoid_per], axis=0).fillna(0)
 
     # CO2 F&W (F&W only has CO2 at this point)
@@ -526,6 +526,14 @@ def afolu(scenario):
 
     co2_fw = pd.concat([co2_fw], names=["Gas"], keys=["CO2"])
     co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+
+    co2_fw.loc[
+        slice(None), "Forests & Wetlands", "Natural Regeneration"
+    ] = curve_smooth(
+        co2_fw.loc[slice(None), "Forests & Wetlands", "Natural Regeneration"],
+        "quadratic",
+        3,
+    ).values
 
     # CO2 Agriculture
 
@@ -680,17 +688,17 @@ def afolu(scenario):
         .sum()
     )
     afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
+    afolu_em_hist = afolu_em_hist.loc[:, 1990:]
 
     afolu_em = (
-        -pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag])
+        -pd.concat([co2_fw, co2_ag, ch4_ag * 20, n2o_ag * 20])
         .groupby(["Region", "Sector", "Gas"])
         .sum()
-        .apply(
-            lambda x: x.add(
-                afolu_em_hist.loc[x.name[0], x.name[1], x.name[2], :][2020].values[0]
-            ),
-            axis=1,
-        )
+    ).apply(
+        lambda x: x.add(
+            afolu_em_hist.loc[x.name[0], x.name[1], x.name[2], :].values[0]
+        ),
+        axis=1,
     )
 
     afolu_em = pd.concat(
@@ -701,12 +709,6 @@ def afolu(scenario):
 
     # endregion
 
-    # smooth from jumps in avg mitigation flux
-    """
-    if scenario == 'baseline':
-        afolu_em = curve_smooth(afolu_em, "quadratic", 3)
-        per_adoption = curve_smooth(per_adoption, "quadratic", 3)
-    """
     """
     # add in Mariculture estimate
 
@@ -735,4 +737,8 @@ def afolu(scenario):
 
     # endregion
     """
+
+    if scenario == "baseline":
+        afolu_em = curve_smooth(afolu_em, "linear", 2)
+
     return afolu_em, per_adoption
