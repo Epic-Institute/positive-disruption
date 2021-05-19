@@ -739,6 +739,6 @@ def afolu(scenario):
     """
 
     if scenario == "baseline":
-        afolu_em = curve_smooth(afolu_em, "linear", 2)
+        afolu_em = curve_smooth(afolu_em, "linear", 1)
 
     return afolu_em, per_adoption
