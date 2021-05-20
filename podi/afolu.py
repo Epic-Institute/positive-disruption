@@ -682,7 +682,7 @@ def afolu(scenario):
             ["Forests & Wetlands", "Regenerative Agriculture"],
             slice(None),
             slice(None),
-            "baseline",
+            "pathway",
         ]
         .groupby(["Region", "Sector", "Gas"])
         .sum()
@@ -691,7 +691,7 @@ def afolu(scenario):
     afolu_em_hist = afolu_em_hist.loc[:, 1990:]
 
     afolu_em = (
-        -pd.concat([co2_fw, co2_ag, ch4_ag * 20, n2o_ag * 20])
+        -pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag])
         .groupby(["Region", "Sector", "Gas"])
         .sum()
     ).apply(

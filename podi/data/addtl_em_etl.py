@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 # region
 
 import pandas as pd
@@ -185,9 +186,15 @@ def proj(data, sector, metric, gas):
 def proj2(data, sector, metric, gas):
     # project gas emissions using percent change in sector
 
+    # MANUALLY EXTEND 2018 VALUES THROUGH 2100 FOR FW RA
+
     data_per_change = (
-        energy_demand.loc[slice(None), "Industry", "Heat", slice(None)]
-        .loc[:, 2019:]
+        (
+            energy_demand.loc[slice(None), "Industry", "Heat", slice(None)].loc[
+                :, 2019:
+            ]
+            * 0.001
+        )
         .pct_change(axis=1)
         .dropna(axis=1)
         .apply(lambda x: x + 1, axis=1)
@@ -443,7 +450,9 @@ for sub in ag:
     )
 for sub in ag:
     co2_ag3 = pd.DataFrame(co2_ag3).append(
-        proj(co2_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CO2")
+        proj2(
+            co2_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CO2"
+        )
     )
 
 co2_ag = co2_ag3
@@ -620,7 +629,7 @@ for sub in ag:
     )
 for sub in ag:
     ch4_ag3 = pd.DataFrame(ch4_ag3).append(
-        proj(
+        proj2(
             ch4_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CH4"
         ).drop_duplicates()
     )
@@ -656,7 +665,7 @@ ch4_fw = ch4_fw3
 
 ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands", "CAIT Region")
 
-ch4_fw = proj(ch4_fw, "Forests & Wetlands", "CH4", "CH4")
+ch4_fw = proj2(ch4_fw, "Forests & Wetlands", "CH4", "CH4")
 
 # endregion
 
@@ -803,7 +812,7 @@ for sub in ag:
     )
 for sub in ag:
     n2o_ag3 = pd.DataFrame(n2o_ag3).append(
-        proj(
+        proj2(
             n2o_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "N2O"
         ).drop_duplicates()
     )
@@ -834,7 +843,7 @@ n2o_fw = n2o_fw3
 
 n2o_fw = rgroup(n2o_fw, "N2O", "Forests & Wetlands", "CAIT Region")
 
-n2o_fw = proj(n2o_fw, "Forests & Wetlands", "N2O", "N2O")
+n2o_fw = proj2(n2o_fw, "Forests & Wetlands", "N2O", "N2O")
 
 
 # Other
