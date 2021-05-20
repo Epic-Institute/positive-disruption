@@ -682,7 +682,7 @@ def afolu(scenario):
             ["Forests & Wetlands", "Regenerative Agriculture"],
             slice(None),
             slice(None),
-            scenario,
+            "baseline",
         ]
         .groupby(["Region", "Sector", "Gas"])
         .sum()
@@ -739,6 +739,6 @@ def afolu(scenario):
     """
 
     if scenario == "baseline":
-        afolu_em = curve_smooth(afolu_em, "linear", 1)
+        afolu_em.loc[:, 2019:] = curve_smooth(afolu_em.loc[:, 2019:], "linear", 1)
 
     return afolu_em, per_adoption

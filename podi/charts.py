@@ -2846,19 +2846,14 @@ for i in range(0, len(region_list)):
         slice(None),
     ].sum()
     
+    em_mit_ra[2019] = 0
+    em_mit_ra[2020] = 0
     em_mit_fw[2019] = 0
     em_mit_fw[2020] = 0
     em_mit_fw[2021] = 700
-
-    '''
-    em_mit_ch4 = em_mitigated.loc[region_list[i], "Other", "CH4"].rename("CH4")
-
-    em_mit_n2o = em_mitigated.loc[region_list[i], "Other", "N2O"].rename("N2O")
-
-    em_mit_fgas = em_mitigated.loc[region_list[i], "Other", "F-gases"].rename(
-        "F-gases"
-    )
-    '''
+    em_mit_fw[2022] = 1000
+    em_mit_fw[2023] = 1500
+    em_mit_fw[2024] = 2000
 
     if region_list[i] in ["World "]:
         '''
@@ -3018,50 +3013,6 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
-
-    """
-    fig.add_trace(
-        go.Scatter(
-            name="CH4",
-            line=dict(width=0.5, color="#B82e2e"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "CH4"]["Emissions, GtCO2e"],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-    fig.add_trace(
-        go.Scatter(
-            name="N2O",
-            line=dict(width=0.5, color="#77453b"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "N2O"]["Emissions, GtCO2e"],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-    fig.add_trace(
-        go.Scatter(
-            name="F-gases",
-            line=dict(width=0.5, color="#bbe272"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "F-gases"]["Emissions, GtCO2e"],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Other Gases",
-            line=dict(width=0.5, color="#E45756"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Other Gases"]["Emissions, GtCO2e"],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-    """
 
     if region_list[i] in ["World "]:
         '''
