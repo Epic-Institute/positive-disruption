@@ -1,7 +1,3 @@
-"""
-#!/usr/bin/env python
-"""
-
 import pandas as pd
 from podi.adoption_curve import adoption_curve
 from numpy import NaN
@@ -176,6 +172,9 @@ def afolu(scenario):
     max_extent2.loc[slice(None), "Biochar", :] = (
         max_extent2.loc[slice(None), "Biochar", :] / 1e6
     )
+    max_extent2.loc[slice(None), "Nitrogen Fertilizer Management", :] = (
+        max_extent2.loc[slice(None), "Nitrogen Fertilizer Management", :] / 1e6
+    )
 
     # endregion
 
@@ -275,7 +274,7 @@ def afolu(scenario):
                 "Improved Forest Mgmt",
                 "Improved Rice",
                 "Natural Regeneration",
-                # "Nitrogen Fertilizer Management",
+                "Nitrogen Fertilizer Management",
                 "Optimal Intensity",
                 "Peat Restoration",
                 "Silvopasture",
@@ -595,7 +594,7 @@ def afolu(scenario):
 
     for subv in [
         "Improved Rice",
-        # "Nitrogen Fertilizer Management",
+        "Nitrogen Fertilizer Management",
     ]:
         n2o_ag = pd.DataFrame(n2o_ag).append(
             pd.DataFrame(
@@ -650,7 +649,7 @@ def afolu(scenario):
         "Biochar",
         "Cropland Soil Health",
         "Improved Rice",
-        # "Nitrogen Fertilizer Management",
+        "Nitrogen Fertilizer Management",
         "Optimal Intensity",
         "Silvopasture",
         "Trees in Croplands",

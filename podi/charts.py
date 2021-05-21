@@ -2983,16 +2983,6 @@ for i in range(0, len(region_list)):
         slice(None),
     ].sum()
 
-    em_mit_ra[2019] = 0
-    em_mit_ra[2020] = 0
-    em_mit_fw[2019] = 0
-    em_mit_fw[2020] = 0
-    if region_list[i] == "World ":
-        em_mit_fw[2021] = 700
-        em_mit_fw[2022] = 1000
-        em_mit_fw[2023] = 1500
-        em_mit_fw[2024] = 2000
-
     if region_list[i] in ["World "]:
         """
         em_mit_mar = em_mitigated.loc[region_list[i], "Mariculture"].squeeze()
