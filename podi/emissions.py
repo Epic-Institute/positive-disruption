@@ -1,4 +1,6 @@
+"""
 #!/usr/bin/env python
+"""
 
 # region
 
@@ -463,7 +465,12 @@ def emissions(
 
     # harmonize emissions projections with current year emissions
 
-    hf = em2.loc[:, data_end_year].divide(em.loc[:, data_end_year]).replace(NaN, 0)
+    hf = (
+        em2.loc[:, data_end_year]
+        .divide(em.loc[:, data_end_year])
+        .replace(NaN, 0)
+        .replace(0, 1)
+    )
 
     em = em.apply(
         lambda x: x.multiply(hf[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]),

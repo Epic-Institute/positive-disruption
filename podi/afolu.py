@@ -1,4 +1,6 @@
+"""
 #!/usr/bin/env python
+"""
 
 import pandas as pd
 from podi.adoption_curve import adoption_curve
@@ -167,9 +169,12 @@ def afolu(scenario):
         ]
     )
 
-    # update Improved Forest Mgmt avg mitigation potential units for consistency (tCO2e/yr to MtCO2e/yr)
+    # update Improved Forest Mgmt and Biochar units for consistency (10^6 less than flux)
     max_extent2.loc[slice(None), "Improved Forest Mgmt", :] = (
         max_extent2.loc[slice(None), "Improved Forest Mgmt", :] / 1e6
+    )
+    max_extent2.loc[slice(None), "Biochar", :] = (
+        max_extent2.loc[slice(None), "Biochar", :] / 1e6
     )
 
     # endregion
@@ -245,8 +250,6 @@ def afolu(scenario):
             "Duration 3 (Years)",
         ]
     ).fillna(0)
-
-    # flux2 = curve_smooth(flux2, "quadratic", 10)
 
     # endregion
 
@@ -670,10 +673,11 @@ def afolu(scenario):
 
     # endregion
 
-    # subtract from current year emissions to get emissions
+    # add mitigation to hist/projected emissions to get net emissions
 
     # region
 
+    # historical emissions
     afolu_em_hist = (
         pd.read_csv("podi/data/emissions_additional.csv")
         .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])
@@ -682,7 +686,7 @@ def afolu(scenario):
             ["Forests & Wetlands", "Regenerative Agriculture"],
             slice(None),
             slice(None),
-            "pathway",
+            scenario,
         ]
         .groupby(["Region", "Sector", "Gas"])
         .sum()
@@ -690,11 +694,26 @@ def afolu(scenario):
     afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
     afolu_em_hist = afolu_em_hist.loc[:, 1990:]
 
-    afolu_em = (
-        -pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag])
-        .groupby(["Region", "Sector", "Gas"])
-        .sum()
-    ).apply(
+    # estimated mitigation
+    afolu_em_mit = -(pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag]))
+    afolu_em_mit.loc[:, :2019] = 0
+
+    # shift mitigation values by 2020 value
+    afolu_em_mit = afolu_em_mit.apply(
+        lambda x: x.subtract(
+            (
+                afolu_em_mit.loc[
+                    x.name[0], x.name[1], x.name[2], x.name[3], x.name[4], :
+                ]
+                .loc[:, 2020]
+                .values[0]
+            )
+        ),
+        axis=1,
+    ).clip(upper=0)
+
+    # combine emissions and mitigation
+    afolu_em = (afolu_em_mit.groupby(["Region", "Sector", "Gas"]).sum()).apply(
         lambda x: x.add(
             afolu_em_hist.loc[x.name[0], x.name[1], x.name[2], :].values[0]
         ),
@@ -708,35 +727,6 @@ def afolu(scenario):
     per_adoption = pd.concat([per_fw, per_ag])
 
     # endregion
-
-    """
-    # add in Mariculture estimate
-
-    # region
-   
-    afolu_em = pd.concat(
-        [
-            afolu_em,
-            pd.DataFrame(afolu_em.loc["World ", "Forests & Wetlands"]).T.rename(
-                index={"Forests & Wetlands": "Mariculture"}
-            ),
-        ]
-    )
-
-    if scenario == "baseline":
-        afolu_em.loc["World ", "Mariculture"] = (
-            afolu_em.loc["World ", "Mariculture"] * 0
-        )
-    else:
-        afolu_em.loc["World ", "Mariculture"] = (
-            per_adoption.loc[
-                "World ", "Forests & Wetlands", "Coastal Restoration", "pathway"
-            ].values
-            * -290
-        )
-
-    # endregion
-    """
 
     if scenario == "baseline":
         afolu_em.loc[:, 2019:] = curve_smooth(afolu_em.loc[:, 2019:], "linear", 1)
