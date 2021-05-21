@@ -2062,18 +2062,22 @@ for i in range(0, len(region_list)):
             "text": "Emissions, " + scenario.title() + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
-            "y": 0.93,
+            "y": 0.99,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
     )
 
+    fig.update_layout(
+        legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10))
+    )
+
     fig.add_annotation(
-        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA <br>World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissions factors are from IEA Emissions Factors 2020",
+        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
         yref="paper",
-        x=-0.17,
-        y=1.17,
+        x=-0.15,
+        y=-0.31,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -3162,19 +3166,6 @@ for i in range(0, len(region_list)):
             opacity=1,
         )
 
-    if region_list[i] in ["World "]:
-        """
-        fig.add_trace(
-            go.Scatter(
-                name="V7: Mariculture",
-                line=dict(width=0.5, color="#2FDDCE"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "Mariculture"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup="one",
-            )
-        )
-        """
     fig.add_trace(
         go.Scatter(
             name="V6: Forests & Wetlands",
@@ -3485,15 +3476,15 @@ for i in range(0, len(region_list)):
     # endregion
 
     fig.add_annotation(
-        text="Historical data (black) is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario <br>for 2040-2100; emissions factors are from IEA Emissions Factors 2020",
+        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
         yref="paper",
-        x=-0.18,
-        y=1.17,
+        x=-0.15,
+        y=-0.31,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
-        borderpad=4,
+        borderpad=5,
         bgcolor="#ffffff",
         opacity=1,
     )
@@ -3503,11 +3494,15 @@ for i in range(0, len(region_list)):
             "text": "Emissions Mitigated, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
-            "y": 0.93,
+            "y": 0.99,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
         legend=dict(font=dict(size=11)),
+    )
+
+    fig.update_layout(
+        legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10))
     )
 
     if show_figs is True:
