@@ -3139,7 +3139,7 @@ for i in range(0, len(region_list)):
     if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
         fig.add_trace(
             go.Scatter(
-                name="V9: CDR",
+                name="V7: CDR",
                 line=dict(width=0.5, color="#FF9DA6"),
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
@@ -3480,7 +3480,7 @@ for i in range(0, len(region_list)):
         xref="paper",
         yref="paper",
         x=-0.15,
-        y=-0.31,
+        y=-0.3,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -3502,7 +3502,7 @@ for i in range(0, len(region_list)):
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10))
+        legend=dict(orientation="h", yanchor="bottom", y=0.98, x=0, font=dict(size=10))
     )
 
     if show_figs is True:
