@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from mdutils.mdutils import MdUtils
 
 region_dict = {
@@ -25,13 +27,6 @@ region_dict = {
 }
 
 for i in range(0, len(region_list)):
-
-    ###################
-    # MAP & COUNTRIES #
-    ###################
-
-    # region
-
     mdFile = MdUtils(file_name="md-" + region_list[i].replace(" ", "") + ".md")
 
     mdFile.new_header(level=1, title=region_list[i]).replace(" ", "")
@@ -43,8 +38,6 @@ for i in range(0, len(region_list)):
     mdFile.new_line()
     mdFile.new_line()
 
-    # endregion
-
     ###################
     # ADOPTION CURVES #
     ###################
@@ -55,7 +48,7 @@ for i in range(0, len(region_list)):
     mdFile.new_line()
     mdFile.new_header(level=2, title="Adoption Curves")
 
-    for j in ["pathway"]:
+    for j in ["baseline", "pathway"]:
         path = '"scurves-' + (region_list[i]).replace(" ", "") + "-" + j + '.html"'
 
         mdFile.write(
@@ -70,7 +63,7 @@ for i in range(0, len(region_list)):
     ########################
     # ENERGY SUPPLY/DEMAND #
     ########################
-    """
+
     # region
 
     mdFile.new_line()
@@ -90,18 +83,18 @@ for i in range(0, len(region_list)):
             mdFile.new_line()
 
     # endregion
-    """
-    #############
-    # EMISSIONS #
-    #############
+
+    ########################
+    # ENERGY SUPPLY/DEMAND #
+    ########################
 
     # region
 
     mdFile.new_line()
     mdFile.new_header(level=2, title="Emissions")
 
-    for j in ["pathway"]:
-        for k in ["em2"]:
+    for j in ["baseline", "pathway"]:
+        for k in ["em2", "emr"]:
             path = (
                 '"' + k + "-" + j + "-" + (region_list[i]).replace(" ", "") + '.html"'
             )
@@ -262,7 +255,7 @@ for i in range(0, len(region_list)):
     mdFile.new_line()
     mdFile.new_header(level=2, title="Subvector Adoption Curves")
 
-    for j in ["pathway"]:
+    for j in ["baseline", "pathway"]:
         for k in [
             "Electricity",
             "Transport",

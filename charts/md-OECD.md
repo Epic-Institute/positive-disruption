@@ -9,41 +9,20 @@
 Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Israel, Italy, Japan, Korea, Luxembourg, Mexico, Netherlands, New Zealand, Norway, Poland, Portugal, Slovak Republic, Slovenia, Spain, Sweden, Switzerland, Turkey, United Kingdom, United States  
 
 ## Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-OECD-baseline.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-OECD-pathway.html" height='500' width='150%'></iframe>  
   
 
-## Energy Supply and Demand
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-baseline-OECD.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-baseline-OECD.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-baseline-OECD.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-OECD.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-OECD.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-pathway-OECD.html" height='500' width='150%'></iframe>  
-  
-
 ## Emissions
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-baseline-OECD.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emr-baseline-OECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-OECD.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emr-pathway-OECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-OECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2030-OECD.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-OECD.html" height='500' width='150%'></iframe>  
   
 
 ## Subvector Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Electricity-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Transport-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Buildings-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Industry-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-RegenerativeAgriculture-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Forests&Wetlands-baseline.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-OtherGases-baseline.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Electricity-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Transport-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Buildings-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Industry-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-OtherGases-pathway.html" height='500' width='150%'></iframe>  

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # region
 
 import matplotlib.pyplot as plt
