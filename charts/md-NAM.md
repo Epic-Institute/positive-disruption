@@ -6,10 +6,6 @@
   
 ![](../region%20maps/NAM.png)  
   
-Canada, Mexico, United States  
-
-## Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-NAM-pathway.html" height='500' width='150%'></iframe>  
   
 
 ## Emissions
@@ -17,6 +13,10 @@ Canada, Mexico, United States
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-NAM.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2030-NAM.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em1-pathway-2050-NAM.html" height='500' width='150%'></iframe>  
+Canada, Mexico, United States  
+
+## Adoption Curves
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-NAM-pathway.html" height='500' width='150%'></iframe>  
   
 
 ## Subvector Adoption Curves

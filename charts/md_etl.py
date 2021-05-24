@@ -45,28 +45,6 @@ for i in range(0, len(region_list)):
 
     # endregion
 
-    ###################
-    # ADOPTION CURVES #
-    ###################
-
-    # region
-
-    mdFile.write(region_dict[region_list[i]])
-    mdFile.new_line()
-    mdFile.new_header(level=2, title="Adoption Curves")
-
-    for j in ["pathway"]:
-        path = '"scurves-' + (region_list[i]).replace(" ", "") + "-" + j + '.html"'
-
-        mdFile.write(
-            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
-        )
-        mdFile.write(path)
-        mdFile.write(" height='500' width='150%'></iframe>")
-        mdFile.new_line()
-
-    # endregion
-
     ########################
     # ENERGY SUPPLY/DEMAND #
     ########################
@@ -229,27 +207,25 @@ for i in range(0, len(region_list)):
     """
     # endregion
 
-    ###########
-    # CLIMATE #
-    ###########
+    ###################
+    # ADOPTION CURVES #
+    ###################
 
     # region
 
-    if region_list[i] == "World ":
+    mdFile.write(region_dict[region_list[i]])
+    mdFile.new_line()
+    mdFile.new_header(level=2, title="Adoption Curves")
+
+    for j in ["pathway"]:
+        path = '"scurves-' + (region_list[i]).replace(" ", "") + "-" + j + '.html"'
+
+        mdFile.write(
+            "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+        )
+        mdFile.write(path)
+        mdFile.write(" height='500' width='150%'></iframe>")
         mdFile.new_line()
-        mdFile.new_header(level=2, title="Climate")
-
-        if region_list[i] == "World ":
-            for k in ["co2conc", "ghgconc", "forcing", "temp"]:
-                path = '"' + k + "-" + (region_list[i]).replace(" ", "") + '.html"'
-
-                mdFile.write(
-                    "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
-                )
-                mdFile.write(path)
-                mdFile.write(" height='500' width='150%'></iframe>")
-
-                mdFile.new_line()
 
     # endregion
 
@@ -281,6 +257,30 @@ for i in range(0, len(region_list)):
             mdFile.write(path)
             mdFile.write(" height='500' width='150%'></iframe>")
             mdFile.new_line()
+
+    # endregion
+
+    ###########
+    # CLIMATE #
+    ###########
+
+    # region
+
+    if region_list[i] == "World ":
+        mdFile.new_line()
+        mdFile.new_header(level=2, title="Climate")
+
+        if region_list[i] == "World ":
+            for k in ["co2conc", "ghgconc", "forcing", "temp"]:
+                path = '"' + k + "-" + (region_list[i]).replace(" ", "") + '.html"'
+
+                mdFile.write(
+                    "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+                )
+                mdFile.write(path)
+                mdFile.write(" height='500' width='150%'></iframe>")
+
+                mdFile.new_line()
 
     # endregion
 
