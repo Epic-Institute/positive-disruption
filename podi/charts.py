@@ -2067,7 +2067,8 @@ for i in range(0, len(region_list)):
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10))
+        legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10)),
+        margin_b=90,
     )
 
     fig.add_annotation(
@@ -3142,7 +3143,7 @@ for i in range(0, len(region_list)):
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
                 fill="tonexty",
-                stackgroup="one",
+                stackgroup="one", legendgroup="one"
             )
         )
 
@@ -3171,7 +3172,7 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="one", legendgroup="one"
         )
     )
     fig.add_trace(
@@ -3181,7 +3182,7 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="one", legendgroup="one"
         )
     )
     fig.add_trace(
@@ -3191,7 +3192,7 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="one", legendgroup="one"
         )
     )
     fig.add_trace(
@@ -3201,7 +3202,7 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="one", legendgroup="one"
         )
     )
     fig.add_trace(
@@ -3211,7 +3212,7 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="one", legendgroup="one"
         )
     )
     fig.add_trace(
@@ -3221,7 +3222,7 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="one", legendgroup="one"
         )
     )
     fig.add_trace(
@@ -3249,23 +3250,10 @@ for i in range(0, len(region_list)):
                 ),
                 y=pd.Series(em_targets.loc["SSP2-19", near_proj_start_year:].values),
                 fill="none",
-                stackgroup="three",
+                stackgroup="three", legendgroup="two"
             )
         )
-        """
-        fig.add_trace(
-            go.Scatter(
-                name="SSP2-2.6",
-                line=dict(width=2, color="yellow", dash="dot"),
-                x=pd.Series(
-                    em_targets.loc["SSP2-26", near_proj_start_year:].index.values
-                ),
-                y=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].values),
-                fill="none",
-                stackgroup="four",
-            )
-        )
-        """
+
     if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
         fig.add_trace(
             go.Scatter(
@@ -3284,7 +3272,7 @@ for i in range(0, len(region_list)):
                     / 1000
                 ),
                 fill="none",
-                stackgroup="five",
+                stackgroup="five", legendgroup="two"
             )
         )
 
@@ -3297,7 +3285,7 @@ for i in range(0, len(region_list)):
                 ),
                 y=pd.Series(spacer.loc[near_proj_start_year:].values) / 1000,
                 fill="none",
-                stackgroup="DAU21+CDR",
+                stackgroup="DAU21+CDR", legendgroup="two"
             )
         )
 
@@ -3328,7 +3316,7 @@ for i in range(0, len(region_list)):
                 ),
                 y=pd.Series((spacer.loc[near_proj_start_year:].values) / 1000),
                 fill="none",
-                stackgroup="five",
+                stackgroup="five", legendgroup="two"
             )
         )
         fig.add_trace(
@@ -3348,7 +3336,7 @@ for i in range(0, len(region_list)):
                 name="Net-zero by 2050",
             )
         )
-
+        '''
         fig.add_annotation(
             text="50% reduction and net-zero goals compare regional alignment with global-level IPCC recommendations.",
             xref="paper",
@@ -3362,7 +3350,7 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
-
+        '''
     fig.add_trace(
         go.Scatter(
             name="Baseline",
@@ -3376,7 +3364,7 @@ for i in range(0, len(region_list)):
                 / 1000
             ),
             fill="none",
-            stackgroup="six",
+            stackgroup="six", legendgroup="two"
         )
     )
 
@@ -3398,7 +3386,7 @@ for i in range(0, len(region_list)):
                 name=ndcs[i][2][3],
             )
         )
-
+        '''
         fig.add_annotation(
             text="The NDC commitment is to "
             + ndc_commit[i][0]
@@ -3414,6 +3402,7 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
+        '''
     elif region_list[i] in ["CHINA "]:
         fig.add_trace(
             go.Scatter(
@@ -3423,7 +3412,7 @@ for i in range(0, len(region_list)):
                 name=ndcs[i][2][2],
             )
         )
-
+        '''
         fig.add_annotation(
             text="The NDC commitment is to "
             + ndc_commit[i][0]
@@ -3439,6 +3428,7 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
+        '''
     elif region_list[i] in [
         "SAFR ",
         "RUS ",
@@ -3454,7 +3444,7 @@ for i in range(0, len(region_list)):
                 name="NDC " + str(ndcs[i][0]),
             )
         )
-
+        '''
         fig.add_annotation(
             text="The NDC commitment is to "
             + ndc_commit[i][0]
@@ -3470,15 +3460,27 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
-
+        '''
     # endregion
+
+    fig.update_layout( margin_b=100, margin_t=125,
+        title={
+            "text": "Emissions Mitigated, " + region_list[i],
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        xaxis={"title": "Year"},
+        yaxis={"title": "GtCO2e/yr"},
+        legend={"traceorder": "reversed"}
+    )
 
     fig.add_annotation(
         text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
         yref="paper",
         x=-0.15,
-        y=-0.3,
+        y=-0.4,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -3488,19 +3490,7 @@ for i in range(0, len(region_list)):
     )
 
     fig.update_layout(
-        title={
-            "text": "Emissions Mitigated, " + region_list[i],
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        xaxis={"title": "Year"},
-        yaxis={"title": "GtCO2e/yr"},
-        legend=dict(font=dict(size=11)),
-    )
-
-    fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=0.98, x=0, font=dict(size=10))
+        legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10))
     )
 
     if show_figs is True:
