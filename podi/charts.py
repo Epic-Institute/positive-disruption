@@ -1968,11 +1968,7 @@ colors = [
     "#1C8356",
     "#16FF32",
     "#F7E1A0",
-    "#E2E2E2",
-    "#1CBE4F",
     "#C4451C",
-    "#DEA0FD",
-    "#FE00FA",
     "#325A9B",
     "#FEAF16",
     "#F8A19F",
@@ -3484,12 +3480,12 @@ for year in [2030]:
         ].sum()
 
         em_mit_ra = em_mitigated.loc[
-            region_list[i],
-            ["Regenerative Agriculture"], slice(None), slice(None)].sum()
+            region_list[i], ["Regenerative Agriculture"], slice(None), slice(None)
+        ].sum()
 
         em_mit_fw = em_mitigated.loc[
-            region_list[i],
-            ["Forests & Wetlands"], slice(None), slice(None)].sum()
+            region_list[i], ["Forests & Wetlands"], slice(None), slice(None)
+        ].sum()
 
         em_mit_othergas = em_mitigated.loc[
             region_list[i], slice(None), ["CH4", "N2O", "F-gases"], :
@@ -4126,12 +4122,12 @@ for year in [2050]:
         ].sum()
 
         em_mit_ra = em_mitigated.loc[
-            region_list[i],
-            ["Regenerative Agriculture"], slice(None), slice(None)].sum()
+            region_list[i], ["Regenerative Agriculture"], slice(None), slice(None)
+        ].sum()
 
         em_mit_fw = em_mitigated.loc[
-            region_list[i],
-            ["Forests & Wetlands"], slice(None), slice(None)].sum()
+            region_list[i], ["Forests & Wetlands"], slice(None), slice(None)
+        ].sum()
 
         em_mit = pd.DataFrame(
             [
@@ -4238,7 +4234,7 @@ for year in [2050]:
                 "V3: Buildings",
                 "V2: Transport",
                 "V1: Electricity",
-                region_list[i]
+                region_list[i],
             ],
         }
 
@@ -4259,7 +4255,7 @@ for year in [2050]:
                 orientation="v",
                 marker_color="#EECA3B",
                 opacity=0.5,
-            )
+            ),
         ]
     )
 
@@ -4291,7 +4287,7 @@ for year in [2050]:
                 + "-"
                 + str(year)
                 + "-"
-                + 'World'
+                + "World"
                 + ".html"
             ).replace(" ", ""),
             auto_open=False,
