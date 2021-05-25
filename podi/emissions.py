@@ -511,7 +511,7 @@ def emissions(
                 "1A2g_Ind-Comb-other": "Other Industrial",
                 "1A2g_Ind-Comb-textile-leather": "Textile, Leather Production",
                 "1A2g_Ind-Comb-transpequip": "Transportation Equipment Production",
-                "1A2g_Ind-Comb-wood-products": "Wood Production Production",
+                "1A2g_Ind-Comb-wood-products": "Wood Production",
                 "2A1_Cement-production": "Cement Production",
                 "2A2_Lime-production": "Lime Production",
                 "2Ax_Other-minerals": "Other Mineral Production",
