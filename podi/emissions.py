@@ -488,9 +488,9 @@ def emissions(
     em = (
         em.rename(
             index={
-                "Fossil fuels": "Fossil fuel Electricity",
-                "1A1a_Electricity-autoproducer": "Fossil fuel Electricity",
-                "1A1a_Electricity-public": "Fossil fuel Electricity",
+                "Fossil fuels": "Fossil fuels",
+                "1A1a_Electricity-autoproducer": "Fossil fuels",
+                "1A1a_Electricity-public": "Fossil fuels",
                 "1A1a_Heat-production": "Fossil fuel Heat",
                 "1A1bc_Other-transformation": "Other Fossil Transformation",
                 "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels",

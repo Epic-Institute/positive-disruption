@@ -1964,7 +1964,6 @@ colors = [
     "#AA0DFE",
     "#3283FE",
     "#85660D",
-    "#782AB6",
     "#565656",
     "#1C8356",
     "#16FF32",
@@ -2069,6 +2068,10 @@ for i in range(0, len(region_list)):
         fig2 = pd.melt(
             fig, id_vars="Year", var_name="Metric", value_name="Emissions, GtCO2e"
         )
+
+        if sector == "Industry":
+            fig3 = fig2[fig2["Metric"] == "Fossil fuels"]
+            fig2 = fig3.append(fig2[fig2["Metric"] != "Fossil fuels"])
 
         if sector == "Regenerative Agriculture":
             fig3 = fig2[fig2["Metric"] != "Cropland Soil Health"]
