@@ -10,9 +10,6 @@
 
 ## Emissions
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-CSAM.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-CSAM-Electricity.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-CSAM-Transport.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-CSAM-Buildings.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-CSAM-Industry.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-CSAM-RegenerativeAgriculture.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-CSAM-Forests&Wetlands.html" height='500' width='150%'></iframe>  
@@ -26,6 +23,9 @@ Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, C
   
 
 ## Subvector Adoption Curves
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CSAM-Electricity-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CSAM-Transport-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CSAM-Buildings-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CSAM-Industry-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CSAM-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CSAM-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  

@@ -120,15 +120,12 @@ params.to_csv("podi/data/params.csv", index=False)
 
 elec_consump = elec_consump_baseline.append(elec_consump_pathway)
 elec_per_adoption = elec_per_adoption_baseline.append(elec_per_adoption_pathway)
-# elec_consump_cdr = elec_consump_cdr_baseline.append(elec_consump_cdr_pathway)
 heat_consump = heat_consump_baseline.append(heat_consump_pathway)
 heat_per_adoption = heat_per_adoption_baseline.append(heat_per_adoption_pathway)
-# heat_consump_cdr = heat_consump_cdr_baseline.append(heat_consump_cdr_pathway)
 transport_consump = transport_consump_baseline.append(transport_consump_pathway)
 transport_per_adoption = transport_per_adoption_baseline.append(
     transport_per_adoption_pathway
 )
-# transport_consump_cdr = transport_consump_cdr_baseline.append(transport_consump_cdr_pathway)
 
 # endregion
 
