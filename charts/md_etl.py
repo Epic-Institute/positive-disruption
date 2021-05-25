@@ -147,6 +147,29 @@ for i in range(0, len(region_list)):
 
                 mdFile.new_line()
 
+    if region_list[i] == "World ":
+        for j in ["ncsbar"]:
+            for year in ["2050"]:
+                path = (
+                    '"'
+                    + j
+                    + "-"
+                    + "pathway"
+                    + "-"
+                    + year
+                    + "-"
+                    + (region_list[i]).replace(" ", "")
+                    + '.html"'
+                )
+
+                mdFile.write(
+                    "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+                )
+                mdFile.write(path)
+                mdFile.write(" height='500' width='150%'></iframe>")
+
+                mdFile.new_line()
+
     for k in ["mwedges"]:
         path = (
             '"'

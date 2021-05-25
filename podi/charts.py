@@ -3009,14 +3009,36 @@ for i in range(0, len(region_list)):
         )
 
         fig.add_annotation(
-            text="Cumulative CDR in 2100: "
+            text="Cumulative CDR 2020-2100: "
             + str(
                 fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"].values.sum().round(1)
             )
             + " GtCO2e",
             xref="paper",
             yref="paper",
-            x=0.05,
+            x=0.02,
+            y=0.15,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
+        fig.add_annotation(
+            text="Cumulative CDR 2050-2100: "
+            + str(
+                fig2[(fig2["Sector"] == "CDR") & (fig2["Year"] > 2049)][
+                    "Emissions, GtCO2e"
+                ]
+                .values.sum()
+                .round(1)
+            )
+            + " GtCO2e",
+            xref="paper",
+            yref="paper",
+            x=0.02,
             y=0.05,
             showarrow=False,
             font=dict(size=10, color="#2E3F5C"),
@@ -3463,37 +3485,11 @@ for year in [2030]:
 
         em_mit_ra = em_mitigated.loc[
             region_list[i],
-            [
-                "Biochar",
-                "Cropland Soil Health",
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-                "Trees in Croplands",
-                "Animal Mgmt",
-                "Legumes",
-                "Optimal Intensity",
-                "Silvopasture",
-                "Regenerative Agriculture",
-            ],
-            slice(None),
-            slice(None),
-        ].sum()
+            ["Regenerative Agriculture"], slice(None), slice(None)].sum()
 
         em_mit_fw = em_mitigated.loc[
             region_list[i],
-            [
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Improved Forest Mgmt",
-                "Peat Restoration",
-                "Natural Regeneration",
-                "Forests & Wetlands",
-            ],
-            slice(None),
-            slice(None),
-        ].sum()
+            ["Forests & Wetlands"], slice(None), slice(None)].sum()
 
         em_mit_othergas = em_mitigated.loc[
             region_list[i], slice(None), ["CH4", "N2O", "F-gases"], :
@@ -3661,9 +3657,8 @@ for year in [2030]:
                 ((em_mit) / 1000)
                 .reindex(
                     [
-                        "V8: Other Gases",
-                        "V6: Agriculture",
-                        "V5: Forests & Wetlands",
+                        "V6: Forests & Wetlands",
+                        "V5: Agriculture",
                         "V4: Industry",
                         "V3: Buildings",
                         "V2: Transport",
@@ -3673,98 +3668,80 @@ for year in [2030]:
                 .round(decimals=4)
                 .clip(lower=0)
             )
-            data = {
-                "V1: Electricity": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    fig.loc["V1: Electricity", year],
-                    fig.loc["V1: Electricity", year],
-                ],
-                "V2: Transport": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    fig.loc["V2: Transport", year],
-                    0,
-                    fig.loc["V2: Transport", year],
-                ],
-                "V3: Buildings": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    fig.loc["V3: Buildings", year],
-                    0,
-                    0,
-                    fig.loc["V3: Buildings", year],
-                ],
-                "V4: Industry": [
-                    0,
-                    0,
-                    0,
-                    fig.loc["V4: Industry", year],
-                    0,
-                    0,
-                    0,
-                    fig.loc["V4: Industry", year],
-                ],
-                "V5: Forests & Wetlands": [
-                    0,
-                    0,
-                    fig.loc["V5: Forests & Wetlands", year],
-                    0,
-                    0,
-                    0,
-                    0,
-                    fig.loc["V5: Forests & Wetlands", year],
-                ],
-                "V6: Agriculture": [
-                    0,
-                    fig.loc["V6: Agriculture", year],
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    fig.loc["V6: Agriculture", year],
-                ],
-                "V8: Other Gases": [
-                    fig.loc["V8: Other Gases", year],
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    fig.loc["V8: Other Gases", year],
-                ],
-                "Total": [
-                    0,
-                    fig.loc["V1: Electricity", year],
-                    fig.loc["V2: Transport", year],
-                    fig.loc["V3: Buildings", year],
-                    fig.loc["V4: Industry", year],
-                    fig.loc["V5: Forests & Wetlands", year],
-                    fig.loc["V6: Agriculture", year],
-                    fig.loc["V8: Other Gases", year],
-                ],
-                "labels": [
-                    "V8: Other Gases",
-                    "V6: Agriculture",
-                    "V5: Forests & Wetlands",
-                    "V4: Industry",
-                    "V3: Buildings",
-                    "V2: Transport",
-                    "V1: Electricity",
-                    "Total",
-                ],
-            }
+        data = {
+            "V1: Electricity": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["V1: Electricity", year],
+                fig.loc["V1: Electricity", year],
+            ],
+            "V2: Transport": [
+                0,
+                0,
+                0,
+                0,
+                fig.loc["V2: Transport", year],
+                0,
+                fig.loc["V2: Transport", year],
+            ],
+            "V3: Buildings": [
+                0,
+                0,
+                0,
+                fig.loc["V3: Buildings", year],
+                0,
+                0,
+                fig.loc["V3: Buildings", year],
+            ],
+            "V4: Industry": [
+                0,
+                0,
+                fig.loc["V4: Industry", year],
+                0,
+                0,
+                0,
+                fig.loc["V4: Industry", year],
+            ],
+            "V5: Agriculture": [
+                0,
+                fig.loc["V5: Agriculture", year],
+                0,
+                0,
+                0,
+                0,
+                fig.loc["V5: Agriculture", year],
+            ],
+            "V6: Forests & Wetlands": [
+                fig.loc["V6: Forests & Wetlands", year],
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["V6: Forests & Wetlands", year],
+            ],
+            "Total": [
+                0,
+                fig.loc["V1: Electricity", year],
+                fig.loc["V2: Transport", year],
+                fig.loc["V3: Buildings", year],
+                fig.loc["V4: Industry", year],
+                fig.loc["V5: Agriculture", year],
+                fig.loc["V6: Forests & Wetlands", year],
+            ],
+            "labels": [
+                "V6: Forests & Wetlands",
+                "V5: Agriculture",
+                "V4: Industry",
+                "V3: Buildings",
+                "V2: Transport",
+                "V1: Electricity",
+                "Total",
+            ],
+        }
 
         em_mit.loc[:, :2020] = 0
         opacity = 0.5
@@ -4060,6 +4037,265 @@ for year in [2030]:
                 ).replace(" ", ""),
                 auto_open=False,
             )
+
+# endregion
+
+############################
+# NCS OPPORTUNITY BARCHART #
+############################
+
+# region
+
+bar_emissions_goal = [
+    ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
+    ("x",),
+    (
+        "determined through linear extrapolation using the U.S’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2025.",
+        "of net zero emissions, which was set in President Biden’s climate plan.",
+    ),
+    ("x",),
+    (
+        "set in Brazil’s 2015 NDC.",
+        "determined through linear extrapolation using Brazil’s 2025 and <br>2030 emissions goals set in their 2015 NDC.",
+    ),
+    ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
+    ("x",),
+    (
+        "set in South Africa’s 2015 NDC.",
+        "determined through linear extrapolation using South Africa’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030. South Africa submitted a Low Emission <br>Development Scenario in 2020, but the scenario does not specify a 2050 emissions goal.",
+    ),
+    ("x",),
+    (
+        "set in Russia’s 2015 NDC.",
+        "determined through linear extrapolation using Russia’s 1990 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030.",
+    ),
+    ("x",),
+    (
+        "determined by China’s 2020 NDC update to peak emissions before <br>2030.",
+        "of net zero emissions, which was announced by President Xi Jinping in <br>September 2020.",
+    ),
+    (
+        "set in India’s 2015 NDC.",
+        "determined through linear extrapolation using India’s 2017 emissions <br>and the NDC set in 2015, which set an emissions goal for 2030.",
+    ),
+    (
+        "set in Japan’s 2015 NDC.",
+        "of net zero emissions, which was announced in Prime Minister Yoshihide <br>Suga's speech on October 26th, 2020.",
+    ),
+    ("x",),
+    ("x",),
+]
+
+ndcs = [
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    (3, 3),
+    [(2030, 2050), (2.84, 0), ("NDC", "Net-zero by 2050")],
+    (3, 3),
+    (2030, 1.2),
+    [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    (3, 3),
+    (2030, 0.398),
+    (3, 3),
+    (2030, 2.17),
+    (3, 3),
+    [(2030, 2050), (12.96, 0), ("NDC", "Net-zero by 2050")],
+    (2030, 9.14),
+    (2030, 1),
+    (3, 3),
+    (3, 3),
+]
+
+scenario = "pathway"
+
+for year in [2050]:
+    for i in range(0, len(region_list)):
+        em_mit_electricity = em_mitigated.loc[
+            region_list[i], "Electricity", slice(None)
+        ].sum()
+
+        em_mit_transport = em_mitigated.loc[
+            region_list[i], "Transport", slice(None)
+        ].sum()
+
+        em_mit_buildings = em_mitigated.loc[
+            region_list[i], "Buildings", slice(None)
+        ].sum()
+
+        em_mit_industry = em_mitigated.loc[
+            region_list[i], "Industry", slice(None)
+        ].sum()
+
+        em_mit_ra = em_mitigated.loc[
+            region_list[i],
+            ["Regenerative Agriculture"], slice(None), slice(None)].sum()
+
+        em_mit_fw = em_mitigated.loc[
+            region_list[i],
+            ["Forests & Wetlands"], slice(None), slice(None)].sum()
+
+        em_mit = pd.DataFrame(
+            [
+                em_mit_electricity,
+                em_mit_transport,
+                em_mit_buildings,
+                em_mit_industry,
+                em_mit_ra,
+                em_mit_fw,
+            ]
+        ).rename(
+            index={
+                0: "V1: Electricity",
+                1: "V2: Transport",
+                2: "V3: Buildings",
+                3: "V4: Industry",
+                4: "V5: Agriculture",
+                5: "V6: Forests & Wetlands",
+            }
+        )
+        fig = (
+            ((em_mit) / 1000)
+            .reindex(
+                [
+                    "V6: Forests & Wetlands",
+                    "V5: Agriculture",
+                    "V4: Industry",
+                    "V3: Buildings",
+                    "V2: Transport",
+                    "V1: Electricity",
+                ]
+            )
+            .round(decimals=4)
+            .clip(lower=0)
+        )
+        data = {
+            "V1: Electricity": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["V1: Electricity", year],
+                fig.loc["V1: Electricity", year],
+            ],
+            "V2: Transport": [
+                0,
+                0,
+                0,
+                0,
+                fig.loc["V2: Transport", year],
+                0,
+                fig.loc["V2: Transport", year],
+            ],
+            "V3: Buildings": [
+                0,
+                0,
+                0,
+                fig.loc["V3: Buildings", year],
+                0,
+                0,
+                fig.loc["V3: Buildings", year],
+            ],
+            "V4: Industry": [
+                0,
+                0,
+                fig.loc["V4: Industry", year],
+                0,
+                0,
+                0,
+                fig.loc["V4: Industry", year],
+            ],
+            "V5: Agriculture": [
+                0,
+                fig.loc["V5: Agriculture", year],
+                0,
+                0,
+                0,
+                0,
+                fig.loc["V5: Agriculture", year],
+            ],
+            "V6: Forests & Wetlands": [
+                fig.loc["V6: Forests & Wetlands", year],
+                0,
+                0,
+                0,
+                0,
+                0,
+                fig.loc["V6: Forests & Wetlands", year],
+            ],
+            region_list[i]: [
+                0,
+                fig.loc["V1: Electricity", year],
+                fig.loc["V2: Transport", year],
+                fig.loc["V3: Buildings", year],
+                fig.loc["V4: Industry", year],
+                fig.loc["V5: Agriculture", year],
+                fig.loc["V6: Forests & Wetlands", year],
+            ],
+            "labels": [
+                "V6: Forests & Wetlands",
+                "V5: Agriculture",
+                "V4: Industry",
+                "V3: Buildings",
+                "V2: Transport",
+                "V1: Electricity",
+                region_list[i]
+            ],
+        }
+
+    figure = go.Figure(
+        data=[
+            go.Bar(
+                x=data["labels"],
+                y=data["V6: Forests & Wetlands"],
+                offsetgroup=0,
+                orientation="v",
+                marker_color="#54A24B",
+                opacity=0.5,
+            ),
+            go.Bar(
+                x=data["labels"],
+                y=data["V5: Agriculture"],
+                offsetgroup=0,
+                orientation="v",
+                marker_color="#EECA3B",
+                opacity=0.5,
+            )
+        ]
+    )
+
+    figure.update_layout(
+        title="Opportunity for NCS Mitigation after Energy Markets, "
+        + str(year)
+        + ", "
+        + region_list[i],
+        title_x=0.5,
+        yaxis={"title": "GtCO2e mitigated in " + str(year)},
+        barmode="stack",
+        legend=dict(
+            x=0.7,
+            y=0,
+            bgcolor="rgba(255, 255, 255, 0)",
+            bordercolor="rgba(255, 255, 255, 0)",
+        ),
+        showlegend=True,
+    )
+
+    if show_figs is True:
+        figure.show()
+    if save_figs is True:
+        pio.write_html(
+            figure,
+            file=(
+                "./charts/ncsbar-"
+                + "pathway"
+                + "-"
+                + str(year)
+                + "-"
+                + 'World'
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
 
 # endregion
 

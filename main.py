@@ -192,6 +192,33 @@ em_mitigated = (
 
 # region
 
+ndcs = [
+    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    (3, 3),
+    [
+        (2025, 2050, 2030, 2050),
+        (4.86, 2.84, 2.84, 0),
+        ("NDC", "NDC 2050 est.", "50% reduction by 2030", "Net-zero by 2050"),
+    ],
+    (3, 3),
+    (2030, 1.2),
+    [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    (3, 3),
+    (2030, 0.398),
+    (3, 3),
+    (2030, 2.49),
+    (3, 3),
+    [
+        (2030, 2030, 2050),
+        (12.96, 6.15, 0),
+        ("NDC", "50% reduction by 2030", "Net-zero by 2050"),
+    ],
+    (2030, 5.88),
+    (2030, 1),
+    (3, 3),
+    (3, 3),
+]
+
 cdr_needed = (
     pd.DataFrame(
         em_pathway.groupby("Region").sum().loc["World "]
