@@ -43,3 +43,8 @@
 * [Brazil](https://epic-institute.github.io/positive-disruption/charts/md-BRAZIL.html)
 
 * [India](https://epic-institute.github.io/positive-disruption/charts/md-INDIA.html)
+
+
+## Other
+
+* [Accelerated Industry/RA Scenario for US](https://epic-institute.github.io/positive-disruption/charts/md-altscen1.html)

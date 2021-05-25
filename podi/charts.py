@@ -2070,8 +2070,15 @@ for i in range(0, len(region_list)):
             fig2 = fig3.append(fig2[fig2["Metric"] != "Fossil fuels"])
 
         if sector == "Regenerative Agriculture":
-            fig3 = fig2[fig2["Metric"] != "Cropland Soil Health"]
-            fig2 = fig3.append(fig2[fig2["Metric"] == "Cropland Soil Health"])
+            fig3 = fig2[
+                (fig2["Metric"] != "Cropland Soil Health")
+                & (fig2["Metric"] != "Soil Emissions")
+            ]
+            fig2 = (
+                (fig2[fig2["Metric"] == "Soil Emissions"])
+                .append(fig3)
+                .append(fig2[fig2["Metric"] == "Cropland Soil Health"])
+            )
 
         if sector == "Forests & Wetlands":
             fig3 = fig2[fig2["Metric"] == "Natural Regeneration"]
@@ -2798,6 +2805,8 @@ ndc_commit = [
     ("x",),
 ]
 
+altscen = str(1)
+
 for i in range(0, len(region_list)):
     em_mit_electricity = em_mitigated.loc[
         region_list[i], "Electricity", slice(None)
@@ -3385,7 +3394,12 @@ for i in range(0, len(region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/mwedges-" + "pathway" + "-" + region_list[i] + ".html"
+                "./charts/mwedges-"
+                + "pathway"
+                + "-"
+                + region_list[i]
+                + str(altscen)
+                + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
