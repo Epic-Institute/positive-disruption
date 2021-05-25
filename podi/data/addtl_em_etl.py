@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-
-
 # region
 
 import pandas as pd
@@ -476,7 +473,7 @@ co2_fw = gas_fw.loc[slice(None), slice(None), "CO2"]
 
 co2_fw = rgroup(co2_fw, "CO2", "Forests & Wetlands", "CAIT Region")
 
-co2_fw = proj2(co2_fw, "Forests & Wetlands", "CO2", "CO2")
+co2_fw = proj2(co2_fw, "Forests & Wetlands", "Natural Regeneration", "CO2")
 
 # endregion
 
@@ -665,7 +662,7 @@ ch4_fw = ch4_fw3
 
 ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands", "CAIT Region")
 
-ch4_fw = proj2(ch4_fw, "Forests & Wetlands", "CH4", "CH4")
+ch4_fw = proj2(ch4_fw, "Forests & Wetlands", "Natural Regeneration", "CH4")
 
 # endregion
 
@@ -843,7 +840,7 @@ n2o_fw = n2o_fw3
 
 n2o_fw = rgroup(n2o_fw, "N2O", "Forests & Wetlands", "CAIT Region")
 
-n2o_fw = proj2(n2o_fw, "Forests & Wetlands", "N2O", "N2O")
+n2o_fw = proj2(n2o_fw, "Forests & Wetlands", "Natural Regeneration", "N2O")
 
 
 # Other

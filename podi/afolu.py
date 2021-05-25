@@ -1,3 +1,5 @@
+# region
+
 import pandas as pd
 from podi.adoption_curve import adoption_curve
 from numpy import NaN
@@ -94,6 +96,9 @@ def rgroup2(data, gas, sector, rgroup, scenario):
     data = data.loc[np.array(region_list), slice(None), slice(None), slice(None)]
 
     return data
+
+
+# endregion
 
 
 def afolu(scenario):
@@ -449,12 +454,20 @@ def afolu(scenario):
         .loc[scenario, slice(None), slice(None), slice(None), :]
     )
 
-    avoid = avoid / 1e6
+    avoid.loc[:, "Avoided Peat Impacts", :] = (
+        avoid.loc[:, "Avoided Peat Impacts", :].values / 1e3
+    )
+    avoid.loc[:, "Avoided Forest Conversion", :] = (
+        avoid.loc[:, "Avoided Forest Conversion", :] / 1e4
+    ).values
+    avoid.loc[:, "Avoided Coastal Impacts", :] = (
+        avoid.loc[:, "Avoided Coastal Impacts", :]
+    ).values / 1e1
     avoid.columns = avoid.columns.astype(int)
 
     avoid.loc[:, :2019] = 0
 
-    avoid.loc[:, 2020:] = avoid.loc[:, 2020:].apply(
+    avoid.loc[:, 2020:] = -avoid.loc[:, 2020:].apply(
         lambda x: x.subtract(
             avoid.loc[x.name[0], x.name[1], x.name[2], :][2020].values[0]
         ),
@@ -687,9 +700,24 @@ def afolu(scenario):
             slice(None),
             scenario,
         ]
+        .groupby(["Region", "Sector", "Metric", "Gas"])
+        .sum()
+    )
+    """
+    afolu_em_hist = (
+        pd.read_csv("podi/data/emissions_additional.csv")
+        .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        .loc[
+            slice(None),
+            ["Forests & Wetlands", "Regenerative Agriculture"],
+            slice(None),
+            slice(None),
+            scenario,
+        ]
         .groupby(["Region", "Sector", "Gas"])
         .sum()
     )
+    """
     afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
     afolu_em_hist = afolu_em_hist.loc[:, 1990:]
 
@@ -712,6 +740,23 @@ def afolu(scenario):
     ).clip(upper=0)
 
     # combine emissions and mitigation
+
+    afolu_em = (
+        pd.concat(
+            [
+                afolu_em_mit.groupby(["Region", "Sector", "Metric", "Gas"]).sum(),
+                afolu_em_hist,
+            ]
+        )
+        .groupby(["Region", "Sector", "Metric", "Gas"])
+        .sum()
+    )
+
+    afolu_em = pd.concat(
+        [afolu_em], names=["Scenario"], keys=[scenario]
+    ).reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+
+    """
     afolu_em = (afolu_em_mit.groupby(["Region", "Sector", "Gas"]).sum()).apply(
         lambda x: x.add(
             afolu_em_hist.loc[x.name[0], x.name[1], x.name[2], :].values[0]
@@ -722,7 +767,7 @@ def afolu(scenario):
     afolu_em = pd.concat(
         [afolu_em], names=["Scenario"], keys=[scenario]
     ).reorder_levels(["Region", "Sector", "Gas", "Scenario"])
-
+    """
     per_adoption = pd.concat([per_fw, per_ag])
 
     # endregion

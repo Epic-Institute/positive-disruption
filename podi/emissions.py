@@ -1,15 +1,10 @@
-"""
-#!/usr/bin/env python
-"""
-
 # region
 
 import pandas as pd
 from podi.energy_demand import data_start_year, data_end_year
-from podi.energy_supply import near_proj_start_year, long_proj_end_year
+from podi.energy_supply import long_proj_end_year
 from numpy import NaN
 import numpy as np
-from podi.adoption_curve import adoption_curve
 
 # endregion
 
@@ -249,11 +244,14 @@ def emissions(
 
     # region
 
-    afolu_em = afolu_em.loc[slice(None), slice(None), slice(None), scenario]
+    afolu_em = afolu_em.loc[
+        slice(None), slice(None), slice(None), slice(None), scenario
+    ]
+    """
     afolu_em["Metric"] = afolu_em.index.get_level_values("Sector")
     afolu_em = afolu_em.reset_index()
     afolu_em = afolu_em.set_index(["Region", "Sector", "Metric", "Gas"])
-
+    """
     # endregion
 
     ##################################
@@ -478,6 +476,79 @@ def emissions(
     )
 
     em = em2.join(em.loc[:, 2020:])
+
+    # endregion
+
+    ########################
+    #  RELABEL SUBVECTORS  #
+    ########################
+
+    # region
+
+    em = (
+        em.rename(
+            index={
+                "Fossil fuels": "Fossil fuel Electricity",
+                "1A1a_Electricity-autoproducer": "Fossil fuel Electricity",
+                "1A1a_Electricity-public": "Fossil fuel Electricity",
+                "1A1a_Heat-production": "Fossil fuel Heat",
+                "1A1bc_Other-transformation": "Other Fossil Transformation",
+                "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels",
+                "1B2_Fugitive-petr": "Fugitive Petroleum",
+                "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution",
+                "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production",
+                "1B2d_Fugitive-other-energy": "Fugitive Fossil fuel, Other",
+                "7A_Fossil-fuel-fires": "Fossil fuel fires",
+                "1A2a_Ind-Comb-Iron-steel": "Steel Production",
+                "1A2b_Ind-Comb-Non-ferrous-metals": "Non-ferrous Metal Production",
+                "1A2c_Ind-Comb-Chemicals": "Chemical Production",
+                "1A2d_Ind-Comb-Pulp-paper": "Pulp-Paper Production",
+                "1A2e_Ind-Comb-Food-tobacco": "Food Production",
+                "1A2f_Ind-Comb-Non-metalic-minerals": "Non-metalic Mineral Production",
+                "1A2g_Ind-Comb-Construction": "Construction",
+                "1A2g_Ind-Comb-machinery": "Machinery",
+                "1A2g_Ind-Comb-mining-quarying": "Mining, Quarying",
+                "1A2g_Ind-Comb-other": "Other Industrial",
+                "1A2g_Ind-Comb-textile-leather": "Textile, Leather Production",
+                "1A2g_Ind-Comb-transpequip": "Transportation Equipment Production",
+                "1A2g_Ind-Comb-wood-products": "Wood Production Production",
+                "2A1_Cement-production": "Cement Production",
+                "2A2_Lime-production": "Lime Production",
+                "2Ax_Other-minerals": "Other Mineral Production",
+                "2B_Chemical-industry": "Chemical Production",
+                "2B2_Chemicals-Nitric-acid": "Nitric Acid Production",
+                "2B3_Chemicals-Adipic-acid": "Adipic Acid Production",
+                "2C_Metal-production": "Metal Production",
+                "2D_Chemical-products-manufacture-processing": "Chemical Production",
+                "2D_Degreasing-Cleaning": "Chemical Production",
+                "2D_Other-product-use": "Chemical Production",
+                "2D_Paint-application": "Chemical Production",
+                "2H_Pulp-and-paper-food-beverage-wood": "Food Production",
+                "2L_Other-process-emissions": "Other Industrial",
+                "5A_Solid-waste-disposal": "Solid Waste Disposal",
+                "5C_Waste-combustion": "Waste Combustion",
+                "5D_Wastewater-handling": "Wastewater Handling",
+                "5E_Other-waste-handling": "Waste Combustion",
+                "7BC_Indirect-N2O-non-agricultural-N": "Indirect N2O from Non-Ag N",
+                "1A5_Other-unspecified": "Other Industrial",
+                "6A_Other-in-total": "Other Industrial",
+                "1A3b_Road": "Road Transport",
+                "1A3c_Rail": "Rail Transport",
+                "1A3di_Oil_Tanker_Loading": "Maritime Transport",
+                "1A3dii_Domestic-navigation": "Maritime Transport",
+                "1A3eii_Other-transp": "Other Transport",
+                "1A4a_Commercial-institutional": "Commercial Buildings",
+                "1A4b_Residential": "Residential Buildings",
+                "3B_Manure-management": "Manure Management",
+                "3D_Rice-Cultivation": "Rice Cultivation",
+                "3D_Soil-emissions": "Soil Emissions",
+                "3E_Enteric-fermentation": "Enteric Fermentation",
+                "3I_Agriculture-other": "Other Agricultural",
+            }
+        )
+        .groupby(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        .sum()
+    )
 
     # endregion
 
