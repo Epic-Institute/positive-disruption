@@ -2134,8 +2134,6 @@ for i in range(0, len(region_list)):
                     + region_list[i]
                     + "-"
                     + str(sector)
-                    + "-"
-                    + str(gas)
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,

@@ -118,9 +118,9 @@ for i in range(0, len(region_list)):
                 mdFile.write(" height='500' width='150%'></iframe>")
 
                 mdFile.new_line()
-
-        for m in ["em5"]:
-            for n in [
+        """
+        for m in ["emsub"]:
+            for sector in [
                 "Electricity",
                 "Transport",
                 "Buildings",
@@ -128,28 +128,25 @@ for i in range(0, len(region_list)):
                 "Regenerative Agriculture",
                 "Forests & Wetlands",
             ]:
-                for p in ["CO2", "CH4", "N2O", "F-gas"]:
-                    path = (
-                        '"'
-                        + m
-                        + "-"
-                        + j
-                        + "-"
-                        + (region_list[i]).replace(" ", "")
-                        + "-"
-                        + n
-                        + "-"
-                        + p
-                        + '.html"'
-                    )
-                    mdFile.write(
-                        "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
-                    )
-                    mdFile.write(path)
-                    mdFile.write(" height='500' width='150%'></iframe>")
+                path = (
+                    '"'
+                    + m
+                    + "-"
+                    + scenario
+                    + "-"
+                    + (region_list[i]).replace(" ", "")
+                    + "-"
+                    + sector
+                    + '.html"'
+                ).replace(" ", "")
+                mdFile.write(
+                    "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+                )
+                mdFile.write(path)
+                mdFile.write(" height='500' width='150%'></iframe>")
 
-                    mdFile.new_line()
-        """
+                mdFile.new_line()
+
     for k in ["mwedges"]:
         path = (
             '"'
