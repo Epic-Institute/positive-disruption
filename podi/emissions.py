@@ -11,15 +11,15 @@ import numpy as np
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
 
-def rgroup(data, gas, sector, rgroup, scenario):
+def rgroup3(data, gas, sector, r, scenario):
     region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=[rgroup, "IEA Region"]
+        "podi/data/region_categories.csv", usecols=[r, "IEA Region"]
     )
 
     # make new row for world level data
     data_world = pd.DataFrame(data.sum()).T.rename(index={0: "World "})
 
-    data = data.merge(region_categories, right_on=[rgroup], left_on=["Region"])
+    data = data.merge(region_categories, right_on=[r], left_on=["Region"])
 
     data = data.groupby("IEA Region").sum()
 
@@ -440,7 +440,7 @@ def emissions(
         .droplevel("Unit")
     )
 
-    em_hist_old = rgroup(em_hist_old, "CO2", "CO2", "CAIT Region", scenario)
+    em_hist_old = rgroup3(em_hist_old, "CO2", "CO2", "CAIT Region", scenario)
     em_hist_old.columns = em_hist_old.columns.astype(int)
 
     # estimate time between data and projections
@@ -564,7 +564,7 @@ def emissions(
         .droplevel("Unit")
     )
 
-    em_hist_old = rgroup(em_hist_old, "CO2", "CO2", "CAIT Region", scenario)
+    em_hist_old = rgroup3(em_hist_old, "CO2", "CO2", "CAIT Region", scenario)
     em_hist_old.columns = em_hist_old.columns.astype(int)
 
     # estimate time between data and projections
@@ -648,7 +648,7 @@ def emissions(
             .unique()
         ):
             em_hist2 = pd.DataFrame(em_hist2).append(
-                rgroup(
+                rgroup3(
                     em_hist.loc[slice(None), [sector], [gas], :],
                     gas,
                     sector,

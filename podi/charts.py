@@ -2040,16 +2040,11 @@ for i in range(0, len(region_list)):
         region_list[i], ["Regenerative Agriculture"], slice(None), slice(None), scenario
     ].loc[:, start_year:long_proj_end_year]
     em_ra = em_ra.loc[~(em_ra == 0).all(axis=1)]
-    em_ra2 = em_ra.loc[slice(None), slice(None), ['Enteric Fermentation', 'Improved Rice', 'Improved Rice', 'Manure Management', 'Manure Management', 'Optimal Intensity', 'Rice Cultivation', 'Silvopasture', 'Soil Emissions', 'Trees in Croplands'], slice(None), slice(None)]
-    em_ra = em_ra2.append(em_ra.loc[slice(None), slice(None), ['Cropland Soil Health'], slice(None), slice(None)])
 
     em_fw = em.loc[
         region_list[i], ["Forests & Wetlands"], slice(None), slice(None), scenario
     ].loc[:, start_year:long_proj_end_year]
     em_fw = em_fw.loc[~(em_fw == 0).all(axis=1)]
-    em_fw2 = em_fw.loc[slice(None), slice(None), ['Avoided Coastal Impacts', 'Avoided Forest Conversion', 'Avoided Peat Impacts', 'Coastal Restoration', 'Natural Regeneration', 'Natural Regeneration', 'Natural Regeneration'], slice(None), slice(None)]
-    em_fw = em_fw2.append(em_fw.loc[slice(None), slice(None), ['Peat Restoration'], slice(None), slice(None)])
-
 
     em2 = (
         em_electricity.append(em_transport)
@@ -2074,6 +2069,14 @@ for i in range(0, len(region_list)):
         fig2 = pd.melt(
             fig, id_vars="Year", var_name="Metric", value_name="Emissions, GtCO2e"
         )
+
+        if sector == "Regenerative Agriculture":
+            fig3 = fig2[fig2["Metric"] != "Cropland Soil Health"]
+            fig2 = fig3.append(fig2[fig2["Metric"] == "Cropland Soil Health"])
+
+        if sector == "Forests & Wetlands":
+            fig3 = fig2[fig2["Metric"] == "Natural Regeneration"]
+            fig2 = fig3.append(fig2[fig2["Metric"] != "Natural Regeneration"])
 
         fig = go.Figure()
 
