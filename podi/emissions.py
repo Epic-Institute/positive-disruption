@@ -540,7 +540,7 @@ def emissions(
                 "1A4a_Commercial-institutional": "Commercial Buildings",
                 "1A4b_Residential": "Residential Buildings",
                 "3B_Manure-management": "Manure Management",
-                "3D_Rice-Cultivation": "Rice Cultivation",
+                "3D_Rice-Cultivation": "Improved Rice",
                 "3D_Soil-emissions": "Soil Emissions",
                 "3E_Enteric-fermentation": "Enteric Fermentation",
                 "3I_Agriculture-other": "Other Agricultural",
