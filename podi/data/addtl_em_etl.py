@@ -251,8 +251,24 @@ def proj(data, sector, metric, gas):
 def proj2(data, sector, metric, gas):
     # project gas emissions using percent change in sector
 
-    # MANUALLY EXTEND 2018 VALUES THROUGH 2100 FOR FW RA
+    # to create baseline FAO projections for RA/FW emissions
+    """
+    ra_em = pd.read_csv("podi/data/FOFA2050CountryData_Fertilizer-and-emissions.csv", usecols=['Indicator', 'CountryCode', 'Scenario', 'Year', 'Value']).set_index(['Indicator', 'CountryCode', 'Scenario', 'Year']).loc['GHG emissions in agriculture', slice(None), 'Business As Usual', slice(None)]
 
+    ra_em = ra_em.reset_index().pivot(index='Country', columns='Year', values='Value')
+
+    # manually add years to 2100, set 2100 value to 2050 value, change CountryCode to Country
+    """
+
+    ra_em = pd.read_csv("podi/data/ra_em.csv").set_index("Country")
+    ra_em.columns = ra_em.columns.astype(int)
+    ra_em = ra_em.interpolate(axis=1, method="quadratic")
+
+    ra_em = rgroup(ra_em, "CO2", "RA", "NCS Region")
+    ra_em = ra_em.droplevel(["Sector", "Metric", "Gas"])
+
+    # MANUALLY EXTEND 2018 VALUES THROUGH 2100 FOR FW RA
+    """
     data_per_change = (
         (
             energy_demand.loc[slice(None), "Industry", "Heat", slice(None)].loc[
@@ -260,6 +276,19 @@ def proj2(data, sector, metric, gas):
             ]
             * 0.001
         )
+        .pct_change(axis=1)
+        .dropna(axis=1)
+        .apply(lambda x: x + 1, axis=1)
+        .merge(
+            data,
+            right_on=["IEA Region", "Scenario"],
+            left_on=["IEA Region", "Scenario"],
+        )
+        .reindex(sorted(energy_demand.columns), axis=1)
+    )
+    """
+    data_per_change = (
+        ra_em.loc[:, 2019:]
         .pct_change(axis=1)
         .dropna(axis=1)
         .apply(lambda x: x + 1, axis=1)
