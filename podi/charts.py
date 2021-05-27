@@ -4509,6 +4509,7 @@ results = (
     .droplevel(["UNIT"])
 )
 results.columns = results.columns.astype(int)
+"""
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -4518,7 +4519,7 @@ results19 = curve_smooth(
     "quadratic",
     3,
 )
-
+"""
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -4719,7 +4720,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
+        line=dict(width=3, color="#17BECF", dash="dot"),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -4799,6 +4800,7 @@ results = (
     .droplevel(["UNIT"])
 )
 results.columns = results.columns.astype(int)
+"""
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -4818,6 +4820,7 @@ results19 = curve_smooth(
     "quadratic",
     6,
 )
+"""
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -5018,7 +5021,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
+        line=dict(width=3, color="#17BECF", dash="dot"),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -5108,6 +5111,16 @@ F19 = curve_smooth(
     "quadratic",
     6,
 )
+
+"""
+F19 = pd.DataFrame(
+        F.loc[
+            "GCAM4",
+            "SSP2-19",
+            "World",
+            ["Diagnostics|MAGICC6|Forcing"],
+        ].loc[:, 2010:])
+"""
 
 # CO2
 em_b.loc[225:335, 1] = (
@@ -5259,9 +5272,9 @@ Fcdr = (
 
 # CO2e conversion
 
-Fb["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fb, axis=1)).T, "quadratic", 50).T
-Fpd["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fpd, axis=1)).T, "quadratic", 50).T
-Fcdr["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fcdr, axis=1)).T, "quadratic", 50).T
+Fb["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fb, axis=1)).T, "quadratic", 6).T
+Fpd["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fpd, axis=1)).T, "quadratic", 6).T
+Fcdr["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fcdr, axis=1)).T, "quadratic", 6).T
 """
 Fb['CO2e'] = np.sum(Fb, axis=1)
 Fpd['CO2e'] = np.sum(Fpd, axis=1)
@@ -5314,7 +5327,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
+        line=dict(width=3, color="#17BECF", dash="dot"),
         x=F19.loc[:, 2020:2100].columns,
         y=F19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -5404,6 +5417,15 @@ T19 = curve_smooth(
     "quadratic",
     6,
 )
+
+"""
+T19 = T.loc[
+            "GCAM4",
+            "SSP1-19",
+            "World",
+            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
+        ].loc[:, 2010:]
+"""
 
 # CO2
 em_b.loc[225:335, 1] = (
@@ -5558,6 +5580,11 @@ Tcdr = (
 Tb["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tb, axis=1)).T, "quadratic", 6).T
 Tpd["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tpd, axis=1)).T, "quadratic", 6).T
 Tcdr["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tcdr, axis=1)).T, "quadratic", 6).T
+"""
+Tb['CO2e'] = np.sum(Tb, axis=1)
+Tpd['CO2e'] = np.sum(Tpd, axis=1)
+Tcdr['CO2e'] = np.sum(Tcdr, axis=1)
+"""
 
 T19 = T19 * (hist.loc[:, 2020].values[0] / T19.loc[:, 2020].values[0])
 Tb = Tb * (hist.loc[:, data_end_year].values[0] / Tb.loc[data_end_year, "CO2e"])
@@ -5605,7 +5632,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-1.9",
-        line=dict(width=3, color="light blue", dash="dot"),
+        line=dict(width=3, color="#17BECF", dash="dot"),
         x=T19.loc[:, 2020:2100].columns,
         y=T19.loc[:, 2020:2100].squeeze(),
         fill="none",
