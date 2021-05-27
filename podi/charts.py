@@ -4149,7 +4149,7 @@ for year in [2030, 2050]:
                 / 1e3
             ) / (
                 em_baseline.groupby("Region").sum().loc[region_list[i]][year] / 1e3
-                - ndcs[i][1][0]
+                - ndcs[i][1][j]
             )
 
             figure.add_annotation(
@@ -4176,7 +4176,7 @@ for year in [2030, 2050]:
                     (
                         em_baseline.groupby("Region").sum().loc[region_list[i]][year]
                         / 1e3
-                        - ndcs[i][1][0]
+                        - ndcs[i][1][j]
                     ).round(decimals=2)
                 )
                 + " GtCO2e = "
