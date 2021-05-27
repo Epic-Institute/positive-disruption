@@ -443,15 +443,10 @@ def afolu(scenario):
         .loc[scenario, slice(None), slice(None), slice(None), :]
     )
 
-    avoid.loc[:, "Avoided Peat Impacts", :] = (
-        avoid.loc[:, "Avoided Peat Impacts", :].values / 1e3
-    )
     avoid.loc[:, "Avoided Forest Conversion", :] = (
-        avoid.loc[:, "Avoided Forest Conversion", :] / 1e4
+        avoid.loc[:, "Avoided Forest Conversion", :] / 1e1
     ).values
-    avoid.loc[:, "Avoided Coastal Impacts", :] = (
-        avoid.loc[:, "Avoided Coastal Impacts", :]
-    ).values / 1e1
+
     avoid.columns = avoid.columns.astype(int)
 
     avoid.loc[:, :2019] = 0

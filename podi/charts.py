@@ -2179,6 +2179,7 @@ for i in range(0, len(region_list)):
 
 scenario = scenario
 start_year = 2000
+i = 0
 
 colors = px.colors.qualitative.Safe
 
@@ -2365,6 +2366,7 @@ for i in range(0, len(region_list)):
 
 scenario = scenario
 start_year = 2000
+i = 0
 
 colors = px.colors.qualitative.Safe
 
@@ -3634,16 +3636,16 @@ ndcs = [
     (3, 3),
     [(2030, 2050), (2.84, 0), ("NDC", "Net-zero by 2050")],
     (3, 3),
-    (2030, 1.2),
+    [(2030, 2050), (1.2, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
-    (2030, 0.398),
+    [(2030, 2050), (0.398, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
-    (2030, 2.17),
+    [(2030, 2050), (2.17, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
     [(2030, 2050), (12.96, 0), ("NDC", "Net-zero by 2050")],
-    (2030, 9.14),
-    (2030, 1),
+    [(2030, 2050), (9.14, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (1, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
     (3, 3),
 ]
@@ -3669,25 +3671,20 @@ for year in [2030]:
         ].sum()
 
         em_mit_ra = em_mitigated.loc[
-            region_list[i], ["Regenerative Agriculture"], slice(None), slice(None)
+            region_list[i], "Regenerative Agriculture", slice(None), slice(None)
         ].sum()
 
         em_mit_fw = em_mitigated.loc[
-            region_list[i], ["Forests & Wetlands"], slice(None), slice(None)
-        ].sum()
-
-        em_mit_othergas = em_mitigated.loc[
-            region_list[i], slice(None), ["CH4", "N2O", "F-gases"], :
+            region_list[i], "Forests & Wetlands", slice(None), slice(None)
         ].sum()
 
         if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
             em_mit_cdr = (
                 pd.Series(
-                    cdr.loc[region_list[i], "Carbon Dioxide Removal", scenario].sum(),
+                    cdr.loc[region_list[i], "Carbon Dioxide Removal", scenario],
                     index=np.arange(data_start_year, long_proj_end_year + 1),
                 )
-                / 100
-            )
+            ).rename(index="Unnamed 6")
 
             em_mit = pd.DataFrame(
                 [
@@ -3701,13 +3698,13 @@ for year in [2030]:
                 ]
             ).rename(
                 index={
-                    0: "V1: Electricity",
-                    1: "V2: Transport",
-                    2: "V3: Buildings",
-                    3: "V4: Industry",
-                    4: "V5: Agriculture",
-                    5: "V6: Forests & Wetlands",
-                    6: "V7: CDR",
+                    "Unnamed 0": "V1: Electricity",
+                    "Unnamed 1": "V2: Transport",
+                    "Unnamed 2": "V3: Buildings",
+                    "Unnamed 3": "V4: Industry",
+                    "Unnamed 4": "V5: Agriculture",
+                    "Unnamed 5": "V6: Forests & Wetlands",
+                    "Unnamed 6": "V7: CDR",
                 }
             )
             fig = (
@@ -3798,14 +3795,14 @@ for year in [2030]:
                     fig.loc["V7: CDR", year],
                 ],
                 "Total": [
-                    0,
-                    fig.loc["V1: Electricity", year],
-                    fig.loc["V2: Transport", year],
-                    fig.loc["V3: Buildings", year],
-                    fig.loc["V4: Industry", year],
-                    fig.loc["V5: Agriculture", year],
-                    fig.loc["V6: Forests & Wetlands", year],
                     fig.loc["V7: CDR", year],
+                    fig.loc["V6: Forests & Wetlands", year],
+                    fig.loc["V5: Agriculture", year],
+                    fig.loc["V4: Industry", year],
+                    fig.loc["V3: Buildings", year],
+                    fig.loc["V2: Transport", year],
+                    fig.loc["V1: Electricity", year],
+                    0,
                 ],
                 "labels": [
                     "V7: CDR",
@@ -3853,80 +3850,80 @@ for year in [2030]:
                 .round(decimals=4)
                 .clip(lower=0)
             )
-        data = {
-            "V1: Electricity": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                fig.loc["V1: Electricity", year],
-                fig.loc["V1: Electricity", year],
-            ],
-            "V2: Transport": [
-                0,
-                0,
-                0,
-                0,
-                fig.loc["V2: Transport", year],
-                0,
-                fig.loc["V2: Transport", year],
-            ],
-            "V3: Buildings": [
-                0,
-                0,
-                0,
-                fig.loc["V3: Buildings", year],
-                0,
-                0,
-                fig.loc["V3: Buildings", year],
-            ],
-            "V4: Industry": [
-                0,
-                0,
-                fig.loc["V4: Industry", year],
-                0,
-                0,
-                0,
-                fig.loc["V4: Industry", year],
-            ],
-            "V5: Agriculture": [
-                0,
-                fig.loc["V5: Agriculture", year],
-                0,
-                0,
-                0,
-                0,
-                fig.loc["V5: Agriculture", year],
-            ],
-            "V6: Forests & Wetlands": [
-                fig.loc["V6: Forests & Wetlands", year],
-                0,
-                0,
-                0,
-                0,
-                0,
-                fig.loc["V6: Forests & Wetlands", year],
-            ],
-            "Total": [
-                0,
-                fig.loc["V1: Electricity", year],
-                fig.loc["V2: Transport", year],
-                fig.loc["V3: Buildings", year],
-                fig.loc["V4: Industry", year],
-                fig.loc["V5: Agriculture", year],
-                fig.loc["V6: Forests & Wetlands", year],
-            ],
-            "labels": [
-                "V6: Forests & Wetlands",
-                "V5: Agriculture",
-                "V4: Industry",
-                "V3: Buildings",
-                "V2: Transport",
-                "V1: Electricity",
-                "Total",
-            ],
-        }
+            data = {
+                "V1: Electricity": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    fig.loc["V1: Electricity", year],
+                    fig.loc["V1: Electricity", year],
+                ],
+                "V2: Transport": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    fig.loc["V2: Transport", year],
+                    0,
+                    fig.loc["V2: Transport", year],
+                ],
+                "V3: Buildings": [
+                    0,
+                    0,
+                    0,
+                    fig.loc["V3: Buildings", year],
+                    0,
+                    0,
+                    fig.loc["V3: Buildings", year],
+                ],
+                "V4: Industry": [
+                    0,
+                    0,
+                    fig.loc["V4: Industry", year],
+                    0,
+                    0,
+                    0,
+                    fig.loc["V4: Industry", year],
+                ],
+                "V5: Agriculture": [
+                    0,
+                    fig.loc["V5: Agriculture", year],
+                    0,
+                    0,
+                    0,
+                    0,
+                    fig.loc["V5: Agriculture", year],
+                ],
+                "V6: Forests & Wetlands": [
+                    fig.loc["V6: Forests & Wetlands", year],
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    fig.loc["V6: Forests & Wetlands", year],
+                ],
+                "Total": [
+                    fig.loc["V6: Forests & Wetlands", year],
+                    fig.loc["V5: Agriculture", year],
+                    fig.loc["V4: Industry", year],
+                    fig.loc["V3: Buildings", year],
+                    fig.loc["V2: Transport", year],
+                    fig.loc["V1: Electricity", year],
+                    0,
+                ],
+                "labels": [
+                    "V6: Forests & Wetlands",
+                    "V5: Agriculture",
+                    "V4: Industry",
+                    "V3: Buildings",
+                    "V2: Transport",
+                    "V1: Electricity",
+                    "Total",
+                ],
+            }
 
         em_mit.loc[:, :2020] = 0
         opacity = 0.5
@@ -4018,7 +4015,7 @@ for year in [2030]:
                 y=1.14,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
-                align="center",
+                align="left",
                 borderpad=4,
                 bgcolor="#ffffff",
                 opacity=1,
@@ -4119,7 +4116,7 @@ for year in [2030]:
                 y=1.14,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
-                align="center",
+                align="left",
                 borderpad=4,
                 bgcolor="#ffffff",
                 opacity=1,
@@ -4138,29 +4135,48 @@ for year in [2030]:
         ]:
 
             ei = (
-                em_mit.loc[:, year].values.sum()
+                em_mit.loc[
+                    [
+                        "V6: Forests & Wetlands",
+                        "V5: Agriculture",
+                        "V4: Industry",
+                        "V3: Buildings",
+                        "V2: Transport",
+                        "V1: Electricity",
+                    ],
+                    year,
+                ].values.sum()
                 / 1e3
-                / (
-                    em_mit_ndc[
-                        (em_mit_ndc["Region"] == region_list[i])
-                        & (em_mit_ndc.index == year)
-                    ]["em_mit"].values[0]
-                )
+            ) / (
+                em_baseline.groupby("Region").sum().loc[region_list[i]][year] / 1e3
+                - ndcs[i][1][0]
             )
 
             figure.add_annotation(
                 text="Epic Index = PD Projected Mitigation Potential / Target Mitigation = "
-                + str((em_mit.loc[:, year].values.sum() / 1e3).round(decimals=2))
+                + str(
+                    (
+                        em_mit.loc[
+                            [
+                                "V6: Forests & Wetlands",
+                                "V5: Agriculture",
+                                "V4: Industry",
+                                "V3: Buildings",
+                                "V2: Transport",
+                                "V1: Electricity",
+                            ],
+                            year,
+                        ].values.sum()
+                        / 1e3
+                    ).round(decimals=2)
+                )
                 + " GtCO2e"
                 + "  /  "
                 + str(
                     (
-                        (
-                            em_mit_ndc[
-                                (em_mit_ndc["Region"] == region_list[i])
-                                & (em_mit_ndc.index == year)
-                            ]["em_mit"].values[0]
-                        )
+                        em_baseline.groupby("Region").sum().loc[region_list[i]][year]
+                        / 1e3
+                        - ndcs[i][1][0]
                     ).round(decimals=2)
                 )
                 + " GtCO2e = "
@@ -4177,21 +4193,7 @@ for year in [2030]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
-        """
-        figure.add_annotation(
-            text="Mitigation potential is defined as the difference between baseline emissions and pathway emissions in a given year.",
-            xref="paper",
-            yref="paper",
-            x=-0.2,
-            y=-0.25,
-            showarrow=False,
-            font=dict(size=10, color="#2E3F5C"),
-            align="left",
-            borderpad=4,
-            bgcolor="#ffffff",
-            opacity=1,
-        )
-        """
+
         figure.update_layout(
             title="Climate Mitigation Potential, " + str(year) + ", " + region_list[i],
             title_x=0.5,
@@ -5661,9 +5663,14 @@ if save_figs is True:
 # endregion
 
 
-########################################
+##############################################
+# //////////// AFOLU DIAGNOSTICS ////////////#
+##############################################
+
+
+#########################################
 # //////////// NOT YET USED ////////////#
-########################################
+#########################################
 
 
 ########################################
