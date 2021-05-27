@@ -3652,7 +3652,7 @@ ndcs = [
 
 scenario = "pathway"
 
-for year in [2030]:
+for year in [2030, 2050]:
     for i in range(0, len(region_list)):
         em_mit_electricity = em_mitigated.loc[
             region_list[i], "Electricity", slice(None)
