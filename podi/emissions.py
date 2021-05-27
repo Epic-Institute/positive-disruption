@@ -247,11 +247,7 @@ def emissions(
     afolu_em = afolu_em.loc[
         slice(None), slice(None), slice(None), slice(None), scenario
     ]
-    """
-    afolu_em["Metric"] = afolu_em.index.get_level_values("Sector")
-    afolu_em = afolu_em.reset_index()
-    afolu_em = afolu_em.set_index(["Region", "Sector", "Metric", "Gas"])
-    """
+
     # endregion
 
     ##################################
@@ -428,9 +424,9 @@ def emissions(
 
     # endregion
 
-    ###############################
-    #  HISTORICAL EMISSIONS (V3)  #
-    ###############################
+    ##########################
+    #  HISTORICAL EMISSIONS  #
+    ##########################
 
     # region
 
@@ -497,8 +493,8 @@ def emissions(
                 "1B2_Fugitive-petr": "Fugitive Petroleum",
                 "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution",
                 "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production",
-                "1B2d_Fugitive-other-energy": "Fugitive Fossil fuel, Other",
-                "7A_Fossil-fuel-fires": "Fossil fuel fires",
+                "1B2d_Fugitive-other-energy": "Fugitive Fossil Fuels, Other",
+                "7A_Fossil-fuel-fires": "Fossil fuel Fires",
                 "1A2a_Ind-Comb-Iron-steel": "Steel Production",
                 "1A2b_Ind-Comb-Non-ferrous-metals": "Non-ferrous Metal Production",
                 "1A2c_Ind-Comb-Chemicals": "Chemical Production",
@@ -540,8 +536,8 @@ def emissions(
                 "1A4a_Commercial-institutional": "Commercial Buildings",
                 "1A4b_Residential": "Residential Buildings",
                 "3B_Manure-management": "Manure Management",
-                "3D_Rice-Cultivation": "Improved Rice",
-                "3D_Soil-emissions": "Soil Emissions",
+                "3D_Rice-Cultivation": "Rice Cultivation",
+                "3D_Soil-emissions": "Fertilized Soils",
                 "3E_Enteric-fermentation": "Enteric Fermentation",
                 "3I_Agriculture-other": "Other Agricultural",
             }
@@ -552,175 +548,6 @@ def emissions(
 
     # endregion
 
-    ###############################
-    #  HISTORICAL EMISSIONS (V2)  #
-    ###############################
-    """
-    # region
-
-    em_hist_old = (
-        pd.read_csv("podi/data/emissions_historical_old.csv")
-        .set_index(["Region", "Unit"])
-        .droplevel("Unit")
-    )
-
-    em_hist_old = rgroup3(em_hist_old, "CO2", "CO2", "CAIT Region", scenario)
-    em_hist_old.columns = em_hist_old.columns.astype(int)
-
-    # estimate time between data and projections
-    em_hist_old["2019"] = em_hist_old[2018] * (
-        1 + (em_hist_old[2018] - em_hist_old[2017]) / em_hist_old[2017]
-    )
-    em_hist_old.columns = em_hist_old.columns.astype(int)
-
-    #find emissions percent breakdown
-    per_em = em.loc[:, data_start_year:data_end_year].apply(
-        lambda x: x.divide(
-            em.loc[x.name[0]].loc[:, data_start_year:data_end_year].sum(axis=0)
-        ),
-        axis=1,
-    )
-
-    em2 = per_em.apply(
-        lambda x: x.multiply(em_hist_old.loc[x.name[0]].squeeze()), axis=1
-    )
-
-
-    em = (
-        pd.concat(
-            [
-                em2,
-                em.loc[:, data_end_year + 1 : long_proj_end_year].apply(
-                    lambda x: x
-                    + em2.loc[
-                        x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]
-                    ].loc[data_end_year]
-                    - em.loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]].loc[
-                        data_end_year
-                    ],
-                    axis=1,
-                ),
-            ]
-        )
-        .groupby(["Region", "Sector", "Metric", "Gas", "Scenario"])
-        .sum()
-    )
-
-    # endregion
-    """
-    ##########################
-    #  HISTORICAL EMISSIONS  #
-    ##########################
-    '''
-    # region
-
-    em_hist = (
-        pd.read_csv("podi/data/emissions_historical.csv")
-        .set_index(["Region", "Sector", "Gas", "Unit"])
-        .droplevel("Unit")
-    )
-    em_hist.columns = em_hist.columns[::-1].astype(int)
-
-    em_hist = (
-        em_hist.loc[
-            slice(None),
-            [
-                "Electricity",
-                "Transport",
-                "Buildings",
-                "Industry",
-                "Forests & Wetlands",
-                "Regenerative Agriculture",
-            ],
-            slice(None),
-            :,
-        ]
-        .groupby(["Region", "Sector", "Gas"])
-        .sum()
-    )
-
-    em_hist2 = []
-
-    for sector in em_hist.index.get_level_values(1).unique():
-        for gas in (
-            em_hist.loc[slice(None), sector, slice(None)]
-            .index.get_level_values(1)
-            .unique()
-        ):
-            em_hist2 = pd.DataFrame(em_hist2).append(
-                rgroup3(
-                    em_hist.loc[slice(None), [sector], [gas], :],
-                    gas,
-                    sector,
-                    "IAM Region",
-                    scenario,
-                )
-            )
-
-    em_hist = em_hist2.droplevel(["Metric", "Scenario"])
-
-    em_hist.index.name = "IEA Region"
-
-    # estimate time between data and projections
-    em_hist["2019"] = em_hist[2018] * (
-        1 + (em_hist[2018] - em_hist[2017]) / em_hist[2017]
-    ).replace(NaN, 0)
-
-    em_hist.columns = em_hist.columns.astype(int)
-
-    # harmonize with historical emissions
-
-    hf = (
-        (
-            1
-            / em.drop_duplicates().apply(
-                lambda x: x.divide(
-                    em_hist.loc[x.name[0], x.name[1], x.name[3]].loc[data_end_year]
-                ),
-                axis=1,
-            )
-        )
-        .replace(nan, 0)
-        .loc[:, data_end_year]
-    )
-
-    """
-    hf = (
-        em_hist.loc[:, data_end_year]
-        .divide(em.loc[:, data_end_year].groupby(["Region", "Sector", "Gas"]).sum())
-        .replace(NaN, 0)
-    )
-    """
-
-    em = em.apply(lambda x: x.multiply(hf[x.name[0], x.name[1], x.name[3]]), axis=1)
-
-    em2 = []
-
-    # add clip(lower=0) before .sum() to have em_hist not account for net negative F&W emissions
-    for i in range(0, len(region_list)):
-        em_per = (
-            pd.DataFrame(
-                em.loc[region_list[i]].apply(
-                    lambda x: x.divide(x.sum()),
-                    axis=0,
-                )
-            )
-        ).loc[:, 1990:data_end_year]
-        em_per = pd.concat([em_per], keys=[region_list[i]], names=["Region"])
-        em_per = em_per.apply(
-            lambda x: x.multiply(em_hist.loc[region_list[i]].loc[:, x.name].values[0]),
-            axis=0,
-        )
-        em2 = pd.DataFrame(em2).append(em_per)
-
-    em = em2.join(em.loc[:, 2020:])
-
-    em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
-        ["Region", "Sector", "Metric", "Gas", "Scenario"]
-    )
-
-    # endregion
-    '''
     #######################
     #  EMISSIONS TARGETS  #
     #######################

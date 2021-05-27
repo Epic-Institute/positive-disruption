@@ -2173,7 +2173,7 @@ ZWE,Natural Regeneration,Avg mitigation potential flux,PD21,pathway,SSA-L,Zimbab
 ZWE,Natural Regeneration,Max extent,PD21,pathway,SSA-L,Zimbabwe,Mha,0,NA,NA,NA,NA,100
 AFG,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,PAK,Afghanistan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 AFG,Nitrogen Fertilizer Management,Max extent,PD21,pathway,PAK,Afghanistan,Mha,0,NA,NA,NA,NA,100
-ALB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Albania,tCO2e/ha/yr,0.3716,NA,NA,NA,NA,NA
+ALB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Albania,tCO2e/ha/yr,0.003716,NA,NA,NA,NA,NA
 ALB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU,Albania,Mha,0.33,NA,NA,NA,NA,100
 DZA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Algeria,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 DZA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,NAF,Algeria,Mha,0,NA,NA,NA,NA,100
@@ -2183,37 +2183,37 @@ ARG,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LA
 ARG,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Argentina,Mha,0,NA,NA,NA,NA,100
 ARM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAS,Armenia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 ARM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAS,Armenia,Mha,0,NA,NA,NA,NA,100
-AUS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,ANUZ,Australia,tCO2e/ha/yr,9.641,NA,NA,NA,NA,NA
+AUS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,ANUZ,Australia,tCO2e/ha/yr,0.09641,NA,NA,NA,NA,NA
 AUS,Nitrogen Fertilizer Management,Max extent,PD21,pathway,ANUZ,Australia,Mha,0.31,NA,NA,NA,NA,100
-AUT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Austria,tCO2e/ha/yr,1.3894,NA,NA,NA,NA,NA
+AUT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Austria,tCO2e/ha/yr,0.013894,NA,NA,NA,NA,NA
 AUT,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Austria,Mha,0.35,NA,NA,NA,NA,100
 AZE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAS,Azerbaijan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 AZE,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAS,Azerbaijan,Mha,0,NA,NA,NA,NA,100
-BHS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Bahamas,tCO2e/ha/yr,0.005,NA,NA,NA,NA,NA
+BHS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Bahamas,tCO2e/ha/yr,5E-05,NA,NA,NA,NA,NA
 BHS,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Bahamas,Mha,0,NA,NA,NA,NA,100
-BGD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Bangladesh,tCO2e/ha/yr,11.7251,NA,NA,NA,NA,NA
+BGD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Bangladesh,tCO2e/ha/yr,0.117251,NA,NA,NA,NA,NA
 BGD,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Bangladesh,Mha,5.63,NA,NA,NA,NA,100
 BLR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU-FSU,Belarus,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BLR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU-FSU,Belarus,Mha,0,NA,NA,NA,NA,100
-BEL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Belgium,tCO2e/ha/yr,2.0036,NA,NA,NA,NA,NA
+BEL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Belgium,tCO2e/ha/yr,0.020036,NA,NA,NA,NA,NA
 BEL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Belgium,Mha,0.84,NA,NA,NA,NA,100
-BLZ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Belize,tCO2e/ha/yr,0.0545,NA,NA,NA,NA,NA
+BLZ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Belize,tCO2e/ha/yr,0.000545,NA,NA,NA,NA,NA
 BLZ,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-L,Belize,Mha,0.03,NA,NA,NA,NA,100
 BEN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Benin,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BEN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Benin,Mha,0,NA,NA,NA,NA,100
-BTN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Bhutan,tCO2e/ha/yr,0.0099,NA,NA,NA,NA,NA
+BTN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Bhutan,tCO2e/ha/yr,9.9E-05,NA,NA,NA,NA,NA
 BTN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-M,Bhutan,Mha,0,NA,NA,NA,NA,100
-BOL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Bolivia,tCO2e/ha/yr,0.1416,NA,NA,NA,NA,NA
+BOL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Bolivia,tCO2e/ha/yr,0.001416,NA,NA,NA,NA,NA
 BOL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Bolivia,Mha,0.01,NA,NA,NA,NA,100
-BIH,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Bosnia and Herzegovina,tCO2e/ha/yr,0.2744,NA,NA,NA,NA,NA
+BIH,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Bosnia and Herzegovina,tCO2e/ha/yr,0.002744,NA,NA,NA,NA,NA
 BIH,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU,Bosnia and Herzegovina,Mha,0.11,NA,NA,NA,NA,100
-BWA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Botswana,tCO2e/ha/yr,0.3563,NA,NA,NA,NA,NA
+BWA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Botswana,tCO2e/ha/yr,0.003563,NA,NA,NA,NA,NA
 BWA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-M,Botswana,Mha,0.24,NA,NA,NA,NA,100
-BRA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,BRA,Brazil,tCO2e/ha/yr,34.9305,NA,NA,NA,NA,NA
+BRA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,BRA,Brazil,tCO2e/ha/yr,0.349305,NA,NA,NA,NA,NA
 BRA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,BRA,Brazil,Mha,10.93,NA,NA,NA,NA,100
 BRN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Brunei Darussalam,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BRN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-M,Brunei Darussalam,Mha,NA,NA,NA,NA,NA,100
-BGR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-M,Bulgaria,tCO2e/ha/yr,2.5674,NA,NA,NA,NA,NA
+BGR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-M,Bulgaria,tCO2e/ha/yr,0.025674,NA,NA,NA,NA,NA
 BGR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-M,Bulgaria,Mha,1.14,NA,NA,NA,NA,100
 BFA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Burkina Faso,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BFA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Burkina Faso,Mha,0,NA,NA,NA,NA,100
@@ -2223,53 +2223,53 @@ KHM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OA
 KHM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-CPA,Cambodia,Mha,0,NA,NA,NA,NA,100
 CMR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Cameroon,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 CMR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Cameroon,Mha,0,NA,NA,NA,NA,100
-CAN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAN,Canada,tCO2e/ha/yr,16.1589,NA,NA,NA,NA,NA
+CAN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAN,Canada,tCO2e/ha/yr,0.161589,NA,NA,NA,NA,NA
 CAN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAN,Canada,Mha,2.74,NA,NA,NA,NA,100
 CPV,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Cape Verde,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 CPV,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Cape Verde,Mha,NA,NA,NA,NA,NA,100
-CAF,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Central African Republic,tCO2e/ha/yr,0.0071,NA,NA,NA,NA,NA
+CAF,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Central African Republic,tCO2e/ha/yr,7.1E-05,NA,NA,NA,NA,NA
 CAF,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Central African Republic,Mha,0,NA,NA,NA,NA,100
 TCD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Chad,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TCD,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Chad,Mha,0,NA,NA,NA,NA,100
-CHL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Chile,tCO2e/ha/yr,2.4347,NA,NA,NA,NA,NA
+CHL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Chile,tCO2e/ha/yr,0.024347,NA,NA,NA,NA,NA
 CHL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Chile,Mha,1.85,NA,NA,NA,NA,100
-CHN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CHN,China,tCO2e/ha/yr,304.9122,NA,NA,NA,NA,NA
+CHN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CHN,China,tCO2e/ha/yr,3.049122,NA,NA,NA,NA,NA
 CHN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CHN,China,Mha,212.92,NA,NA,NA,NA,100
-COL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Colombia,tCO2e/ha/yr,3.8222,NA,NA,NA,NA,NA
+COL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Colombia,tCO2e/ha/yr,0.038222,NA,NA,NA,NA,NA
 COL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Colombia,Mha,3.56,NA,NA,NA,NA,100
 COM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Comoros,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 COM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Comoros,Mha,NA,NA,NA,NA,NA,100
-CRI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Costa Rica,tCO2e/ha/yr,0.5514,NA,NA,NA,NA,NA
+CRI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Costa Rica,tCO2e/ha/yr,0.005514,NA,NA,NA,NA,NA
 CRI,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Costa Rica,Mha,0.53,NA,NA,NA,NA,100
 CIV,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Cote d'Ivoire,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 CIV,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Cote d'Ivoire,Mha,0,NA,NA,NA,NA,100
-HRV,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Croatia,tCO2e/ha/yr,1.7641,NA,NA,NA,NA,NA
+HRV,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Croatia,tCO2e/ha/yr,0.017641,NA,NA,NA,NA,NA
 HRV,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU,Croatia,Mha,0.71,NA,NA,NA,NA,100
-CUB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Cuba,tCO2e/ha/yr,0.3624,NA,NA,NA,NA,NA
+CUB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Cuba,tCO2e/ha/yr,0.003624,NA,NA,NA,NA,NA
 CUB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Cuba,Mha,0.23,NA,NA,NA,NA,100
 CYP,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Cyprus,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 CYP,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-H,Cyprus,Mha,NA,NA,NA,NA,NA,100
-CZE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Czech Republic,tCO2e/ha/yr,2.3921,NA,NA,NA,NA,NA
+CZE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Czech Republic,tCO2e/ha/yr,0.023921,NA,NA,NA,NA,NA
 CZE,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-H,Czech Republic,Mha,0.59,NA,NA,NA,NA,100
 PRK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Democratic People's Republic of Korea (North Korea),tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PRK,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Democratic People's Republic of Korea (North Korea),Mha,NA,NA,NA,NA,NA,100
-COD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),tCO2e/ha/yr,0.0525,NA,NA,NA,NA,NA
+COD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),tCO2e/ha/yr,0.000525,NA,NA,NA,NA,NA
 COD,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),Mha,0,NA,NA,NA,NA,100
-DNK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Denmark (except Greenland),tCO2e/ha/yr,2.0968,NA,NA,NA,NA,NA
+DNK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Denmark (except Greenland),tCO2e/ha/yr,0.020968,NA,NA,NA,NA,NA
 DNK,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Denmark (except Greenland),Mha,0.41,NA,NA,NA,NA,100
 DJI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Djibouti,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 DJI,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Djibouti,Mha,NA,NA,NA,NA,NA,100
-DOM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Dominican Republic,tCO2e/ha/yr,0.3669,NA,NA,NA,NA,NA
+DOM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Dominican Republic,tCO2e/ha/yr,0.003669,NA,NA,NA,NA,NA
 DOM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Dominican Republic,Mha,0.32,NA,NA,NA,NA,100
-ECU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Ecuador,tCO2e/ha/yr,1.0964,NA,NA,NA,NA,NA
+ECU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Ecuador,tCO2e/ha/yr,0.010964,NA,NA,NA,NA,NA
 ECU,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Ecuador,Mha,0.83,NA,NA,NA,NA,100
-EGY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Egypt,tCO2e/ha/yr,7.4451,NA,NA,NA,NA,NA
+EGY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Egypt,tCO2e/ha/yr,0.074451,NA,NA,NA,NA,NA
 EGY,Nitrogen Fertilizer Management,Max extent,PD21,pathway,NAF,Egypt,Mha,4.52,NA,NA,NA,NA,100
-SLV,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,El Salvador,tCO2e/ha/yr,0.4599,NA,NA,NA,NA,NA
+SLV,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,El Salvador,tCO2e/ha/yr,0.004599,NA,NA,NA,NA,NA
 SLV,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,El Salvador,Mha,0.36,NA,NA,NA,NA,100
 GNQ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Equatorial Guinea,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GNQ,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-M,Equatorial Guinea,Mha,NA,NA,NA,NA,NA,100
-ERI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Eritrea,tCO2e/ha/yr,0.023,NA,NA,NA,NA,NA
+ERI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Eritrea,tCO2e/ha/yr,0.00023,NA,NA,NA,NA,NA
 ERI,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Eritrea,Mha,0,NA,NA,NA,NA,100
 EST,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Estonia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 EST,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-H,Estonia,Mha,0,NA,NA,NA,NA,100
@@ -2279,73 +2279,73 @@ FLK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NA
 FLK,Nitrogen Fertilizer Management,Max extent,PD21,pathway,NA,Falkland Islands,Mha,NA,NA,NA,NA,NA,100
 FRO,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NA,Faroe Islands,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 FRO,Nitrogen Fertilizer Management,Max extent,PD21,pathway,NA,Faroe Islands,Mha,NA,NA,NA,NA,NA,100
-FJI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Fiji,tCO2e/ha/yr,0.0565,NA,NA,NA,NA,NA
+FJI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Fiji,tCO2e/ha/yr,0.000565,NA,NA,NA,NA,NA
 FJI,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Fiji,Mha,0.05,NA,NA,NA,NA,100
-FIN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Finland,tCO2e/ha/yr,1.99,NA,NA,NA,NA,NA
+FIN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Finland,tCO2e/ha/yr,0.0199,NA,NA,NA,NA,NA
 FIN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Finland,Mha,0.79,NA,NA,NA,NA,100
-FRA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,France (except French Guiana),tCO2e/ha/yr,24.3376,NA,NA,NA,NA,NA
+FRA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,France (except French Guiana),tCO2e/ha/yr,0.243376,NA,NA,NA,NA,NA
 FRA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,France (except French Guiana),Mha,5.83,NA,NA,NA,NA,100
 GUF,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,French Guiana (France),tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GUF,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,French Guiana (France),Mha,NA,NA,NA,NA,NA,100
 PYF,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,French Polynesia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PYF,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-M,French Polynesia,Mha,NA,NA,NA,NA,NA,100
-GAB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Gabon,tCO2e/ha/yr,0.0176,NA,NA,NA,NA,NA
+GAB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Gabon,tCO2e/ha/yr,0.000176,NA,NA,NA,NA,NA
 GAB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-M,Gabon,Mha,0.01,NA,NA,NA,NA,100
 GMB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,"Gambia, The",tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GMB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,"Gambia, The",Mha,0,NA,NA,NA,NA,100
 GEO,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAS,Georgia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GEO,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAS,Georgia,Mha,0,NA,NA,NA,NA,100
-DEU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Germany,tCO2e/ha/yr,18.8304,NA,NA,NA,NA,NA
+DEU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Germany,tCO2e/ha/yr,0.188304,NA,NA,NA,NA,NA
 DEU,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Germany,Mha,6.52,NA,NA,NA,NA,100
 GHA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Ghana,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GHA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Ghana,Mha,0,NA,NA,NA,NA,100
-GRC,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Greece,tCO2e/ha/yr,2.1762,NA,NA,NA,NA,NA
+GRC,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Greece,tCO2e/ha/yr,0.021762,NA,NA,NA,NA,NA
 GRC,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Greece,Mha,0.62,NA,NA,NA,NA,100
 GRL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Greenland (Denmark),tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GRL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Greenland (Denmark),Mha,NA,NA,NA,NA,NA,100
 GLP,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Guadeloupe,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GLP,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Guadeloupe,Mha,NA,NA,NA,NA,NA,100
-GTM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Guatemala,tCO2e/ha/yr,0.9983,NA,NA,NA,NA,NA
+GTM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Guatemala,tCO2e/ha/yr,0.009983,NA,NA,NA,NA,NA
 GTM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-L,Guatemala,Mha,0.76,NA,NA,NA,NA,100
 GIN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Guinea,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GIN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Guinea,Mha,0,NA,NA,NA,NA,100
 GNB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Guinea-Bissau,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GNB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Guinea-Bissau,Mha,NA,NA,NA,NA,NA,100
-GUY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Guyana,tCO2e/ha/yr,0.0915,NA,NA,NA,NA,NA
+GUY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Guyana,tCO2e/ha/yr,0.000915,NA,NA,NA,NA,NA
 GUY,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Guyana,Mha,0.04,NA,NA,NA,NA,100
 HTI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Haiti,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 HTI,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-L,Haiti,Mha,NA,NA,NA,NA,NA,100
-HND,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Honduras,tCO2e/ha/yr,0.5177,NA,NA,NA,NA,NA
+HND,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Honduras,tCO2e/ha/yr,0.005177,NA,NA,NA,NA,NA
 HND,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-L,Honduras,Mha,0.4,NA,NA,NA,NA,100
-HUN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Hungary,tCO2e/ha/yr,3.219,NA,NA,NA,NA,NA
+HUN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Hungary,tCO2e/ha/yr,0.03219,NA,NA,NA,NA,NA
 HUN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-H,Hungary,Mha,0.31,NA,NA,NA,NA,100
-ISL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EFTA,Iceland,tCO2e/ha/yr,0.1238,NA,NA,NA,NA,NA
+ISL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EFTA,Iceland,tCO2e/ha/yr,0.001238,NA,NA,NA,NA,NA
 ISL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EFTA,Iceland,Mha,0.06,NA,NA,NA,NA,100
-IND,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,IND,India,tCO2e/ha/yr,143.1157,NA,NA,NA,NA,NA
+IND,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,IND,India,tCO2e/ha/yr,1.431157,NA,NA,NA,NA,NA
 IND,Nitrogen Fertilizer Management,Max extent,PD21,pathway,IND,India,Mha,89.51,NA,NA,NA,NA,100
-IDN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,IDN,Indonesia,tCO2e/ha/yr,15.9189,NA,NA,NA,NA,NA
+IDN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,IDN,Indonesia,tCO2e/ha/yr,0.159189,NA,NA,NA,NA,NA
 IDN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,IDN,Indonesia,Mha,4.93,NA,NA,NA,NA,100
-IRN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Iran,tCO2e/ha/yr,5.4852,NA,NA,NA,NA,NA
+IRN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Iran,tCO2e/ha/yr,0.054852,NA,NA,NA,NA,NA
 IRN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-M,Iran,Mha,2.57,NA,NA,NA,NA,100
-IRQ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Iraq,tCO2e/ha/yr,0.8434,NA,NA,NA,NA,NA
+IRQ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Iraq,tCO2e/ha/yr,0.008434,NA,NA,NA,NA,NA
 IRQ,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-M,Iraq,Mha,0.37,NA,NA,NA,NA,100
-IRL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Ireland,tCO2e/ha/yr,3.9247,NA,NA,NA,NA,NA
+IRL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Ireland,tCO2e/ha/yr,0.039247,NA,NA,NA,NA,NA
 IRL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Ireland,Mha,3.2,NA,NA,NA,NA,100
-ISR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Israel,tCO2e/ha/yr,0.2749,NA,NA,NA,NA,NA
+ISR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Israel,tCO2e/ha/yr,0.002749,NA,NA,NA,NA,NA
 ISR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-H,Israel,Mha,0.21,NA,NA,NA,NA,100
-ITA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Italy,tCO2e/ha/yr,8.4564,NA,NA,NA,NA,NA
+ITA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Italy,tCO2e/ha/yr,0.084564,NA,NA,NA,NA,NA
 ITA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Italy,Mha,3.98,NA,NA,NA,NA,100
-JAM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Jamaica,tCO2e/ha/yr,0.0544,NA,NA,NA,NA,NA
+JAM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Jamaica,tCO2e/ha/yr,0.000544,NA,NA,NA,NA,NA
 JAM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Jamaica,Mha,0.04,NA,NA,NA,NA,100
-JPN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,JPN,Japan,tCO2e/ha/yr,2.5145,NA,NA,NA,NA,NA
+JPN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,JPN,Japan,tCO2e/ha/yr,0.025145,NA,NA,NA,NA,NA
 JPN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,JPN,Japan,Mha,1.42,NA,NA,NA,NA,100
-JOR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Jordan,tCO2e/ha/yr,0.1888,NA,NA,NA,NA,NA
+JOR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Jordan,tCO2e/ha/yr,0.001888,NA,NA,NA,NA,NA
 JOR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-M,Jordan,Mha,0.16,NA,NA,NA,NA,100
 KAZ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAS,Kazakhstan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 KAZ,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAS,Kazakhstan,Mha,0,NA,NA,NA,NA,100
-KEN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Kenya,tCO2e/ha/yr,1.8482,NA,NA,NA,NA,NA
+KEN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Kenya,tCO2e/ha/yr,0.018482,NA,NA,NA,NA,NA
 KEN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Kenya,Mha,0.26,NA,NA,NA,NA,100
-KWT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Kuwait,tCO2e/ha/yr,0.0759,NA,NA,NA,NA,NA
+KWT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Kuwait,tCO2e/ha/yr,0.000759,NA,NA,NA,NA,NA
 KWT,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-H,Kuwait,Mha,0.03,NA,NA,NA,NA,100
 KGZ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAS,Kyrgyzstan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 KGZ,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAS,Kyrgyzstan,Mha,0,NA,NA,NA,NA,100
@@ -2353,25 +2353,25 @@ LAO,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OA
 LAO,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-CPA,Laos,Mha,0,NA,NA,NA,NA,100
 LVA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-M,Latvia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LVA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-M,Latvia,Mha,0,NA,NA,NA,NA,100
-LBN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Lebanon,tCO2e/ha/yr,0.0829,NA,NA,NA,NA,NA
+LBN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Lebanon,tCO2e/ha/yr,0.000829,NA,NA,NA,NA,NA
 LBN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-M,Lebanon,Mha,0.04,NA,NA,NA,NA,100
 LSO,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Lesotho,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LSO,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Lesotho,Mha,NA,NA,NA,NA,NA,100
 LBR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Liberia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LBR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Liberia,Mha,NA,NA,NA,NA,NA,100
-LBY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Libya,tCO2e/ha/yr,0.2971,NA,NA,NA,NA,NA
+LBY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Libya,tCO2e/ha/yr,0.002971,NA,NA,NA,NA,NA
 LBY,Nitrogen Fertilizer Management,Max extent,PD21,pathway,NAF,Libya,Mha,0.27,NA,NA,NA,NA,100
 LTU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-M,Lithuania,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LTU,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-M,Lithuania,Mha,0,NA,NA,NA,NA,100
 LUX,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Luxembourg,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LUX,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Luxembourg,Mha,NA,NA,NA,NA,NA,100
-MKD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Macedonia (The Former Yugoslav Republic of Macedonia),tCO2e/ha/yr,0.1692,NA,NA,NA,NA,NA
+MKD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Macedonia (The Former Yugoslav Republic of Macedonia),tCO2e/ha/yr,0.001692,NA,NA,NA,NA,NA
 MKD,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU,Macedonia (The Former Yugoslav Republic of Macedonia),Mha,0.07,NA,NA,NA,NA,100
 MDG,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Madagascar,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MDG,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Madagascar,Mha,0,NA,NA,NA,NA,100
-MWI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Malawi,tCO2e/ha/yr,1.9489,NA,NA,NA,NA,NA
+MWI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Malawi,tCO2e/ha/yr,0.019489,NA,NA,NA,NA,NA
 MWI,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Malawi,Mha,0.31,NA,NA,NA,NA,100
-MYS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Malaysia,tCO2e/ha/yr,4.2793,NA,NA,NA,NA,NA
+MYS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Malaysia,tCO2e/ha/yr,0.042793,NA,NA,NA,NA,NA
 MYS,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-M,Malaysia,Mha,2.03,NA,NA,NA,NA,100
 MLI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Mali,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MLI,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Mali,Mha,0,NA,NA,NA,NA,100
@@ -2381,67 +2381,67 @@ MRT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SS
 MRT,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Mauritania,Mha,NA,NA,NA,NA,NA,100
 MUS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Mauritius,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MUS,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-M,Mauritius,Mha,NA,NA,NA,NA,NA,100
-MEX,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEX,Mexico,tCO2e/ha/yr,8.4486,NA,NA,NA,NA,NA
+MEX,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEX,Mexico,tCO2e/ha/yr,0.084486,NA,NA,NA,NA,NA
 MEX,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEX,Mexico,Mha,3.95,NA,NA,NA,NA,100
 MDA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU-FSA,Moldova,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MDA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU-FSA,Moldova,Mha,0,NA,NA,NA,NA,100
-MNG,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Mongolia,tCO2e/ha/yr,0.0631,NA,NA,NA,NA,NA
+MNG,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Mongolia,tCO2e/ha/yr,0.000631,NA,NA,NA,NA,NA
 MNG,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-CPA,Mongolia,Mha,0.06,NA,NA,NA,NA,100
-MNE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Montenegro,tCO2e/ha/yr,0.0152,NA,NA,NA,NA,NA
+MNE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Montenegro,tCO2e/ha/yr,0.000152,NA,NA,NA,NA,NA
 MNE,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU,Montenegro,Mha,0.01,NA,NA,NA,NA,100
-MAR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Morocco,tCO2e/ha/yr,1.5148,NA,NA,NA,NA,NA
+MAR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Morocco,tCO2e/ha/yr,0.015148,NA,NA,NA,NA,NA
 MAR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,NAF,Morocco,Mha,0.28,NA,NA,NA,NA,100
 MOZ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Mozambique,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MOZ,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Mozambique,Mha,0,NA,NA,NA,NA,100
 MMR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Myanmar,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MMR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Myanmar,Mha,0,NA,NA,NA,NA,100
-NAM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Namibia,tCO2e/ha/yr,0.0373,NA,NA,NA,NA,NA
+NAM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Namibia,tCO2e/ha/yr,0.000373,NA,NA,NA,NA,NA
 NAM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-M,Namibia,Mha,0.02,NA,NA,NA,NA,100
 NPL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Nepal,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 NPL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Nepal,Mha,0,NA,NA,NA,NA,100
-NLD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Netherlands,tCO2e/ha/yr,2.9494,NA,NA,NA,NA,NA
+NLD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Netherlands,tCO2e/ha/yr,0.029494,NA,NA,NA,NA,NA
 NLD,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Netherlands,Mha,2.42,NA,NA,NA,NA,100
-NCL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,New Caledonia,tCO2e/ha/yr,0.0075,NA,NA,NA,NA,NA
+NCL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,New Caledonia,tCO2e/ha/yr,7.5E-05,NA,NA,NA,NA,NA
 NCL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-M,New Caledonia,Mha,0,NA,NA,NA,NA,100
-NZL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,ANUZ,New Zealand,tCO2e/ha/yr,3.0699,NA,NA,NA,NA,NA
+NZL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,ANUZ,New Zealand,tCO2e/ha/yr,0.030699,NA,NA,NA,NA,NA
 NZL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,ANUZ,New Zealand,Mha,3.01,NA,NA,NA,NA,100
-NIC,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Nicaragua,tCO2e/ha/yr,0.3185,NA,NA,NA,NA,NA
+NIC,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-L,Nicaragua,tCO2e/ha/yr,0.003185,NA,NA,NA,NA,NA
 NIC,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-L,Nicaragua,Mha,0.22,NA,NA,NA,NA,100
 NER,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Niger,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 NER,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Niger,Mha,0,NA,NA,NA,NA,100
 NGA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Nigeria,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 NGA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Nigeria,Mha,0,NA,NA,NA,NA,100
-NOR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EFTA,Norway,tCO2e/ha/yr,1.1273,NA,NA,NA,NA,NA
+NOR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EFTA,Norway,tCO2e/ha/yr,0.011273,NA,NA,NA,NA,NA
 NOR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EFTA,Norway,Mha,0.99,NA,NA,NA,NA,100
-OMN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Oman,tCO2e/ha/yr,0.0596,NA,NA,NA,NA,NA
+OMN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Oman,tCO2e/ha/yr,0.000596,NA,NA,NA,NA,NA
 OMN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-H,Oman,Mha,0.05,NA,NA,NA,NA,100
-PAK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,PAK,Pakistan,tCO2e/ha/yr,15.2363,NA,NA,NA,NA,NA
+PAK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,PAK,Pakistan,tCO2e/ha/yr,0.152363,NA,NA,NA,NA,NA
 PAK,Nitrogen Fertilizer Management,Max extent,PD21,pathway,PAK,Pakistan,Mha,11.64,NA,NA,NA,NA,100
-PAN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Panama,tCO2e/ha/yr,0.1335,NA,NA,NA,NA,NA
+PAN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Panama,tCO2e/ha/yr,0.001335,NA,NA,NA,NA,NA
 PAN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Panama,Mha,0.1,NA,NA,NA,NA,100
 PNG,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Papua New Guinea,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PNG,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Papua New Guinea,Mha,0,NA,NA,NA,NA,100
 PRY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Paraguay,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PRY,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Paraguay,Mha,0,NA,NA,NA,NA,100
-PER,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Peru,tCO2e/ha/yr,1.7859,NA,NA,NA,NA,NA
+PER,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Peru,tCO2e/ha/yr,0.017859,NA,NA,NA,NA,NA
 PER,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Peru,Mha,0.96,NA,NA,NA,NA,100
-PHL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Philippines,tCO2e/ha/yr,3.2966,NA,NA,NA,NA,NA
+PHL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Philippines,tCO2e/ha/yr,0.032966,NA,NA,NA,NA,NA
 PHL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Philippines,Mha,0.63,NA,NA,NA,NA,100
-POL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Poland,tCO2e/ha/yr,10.9089,NA,NA,NA,NA,NA
+POL,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Poland,tCO2e/ha/yr,0.109089,NA,NA,NA,NA,NA
 POL,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-H,Poland,Mha,4.91,NA,NA,NA,NA,100
-PRT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Portugal,tCO2e/ha/yr,1.2404,NA,NA,NA,NA,NA
+PRT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Portugal,tCO2e/ha/yr,0.012404,NA,NA,NA,NA,NA
 PRT,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Portugal,Mha,1.13,NA,NA,NA,NA,100
 PRI,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,USA,Puerto Rico,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PRI,Nitrogen Fertilizer Management,Max extent,PD21,pathway,USA,Puerto Rico,Mha,NA,NA,NA,NA,NA,100
-QAT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Qatar,tCO2e/ha/yr,0.118,NA,NA,NA,NA,NA
+QAT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Qatar,tCO2e/ha/yr,0.00118,NA,NA,NA,NA,NA
 QAT,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-H,Qatar,Mha,0.05,NA,NA,NA,NA,100
 COG,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Republic of Congo (ROC),tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 COG,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Republic of Congo (ROC),Mha,0,NA,NA,NA,NA,100
-KOR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,ANUZ,Republic of Korea (South Korea),tCO2e/ha/yr,1.6213,NA,NA,NA,NA,NA
+KOR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,ANUZ,Republic of Korea (South Korea),tCO2e/ha/yr,0.016213,NA,NA,NA,NA,NA
 KOR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,ANUZ,Republic of Korea (South Korea),Mha,0.88,NA,NA,NA,NA,100
 REU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-M,Reunion,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 REU,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-M,Reunion,Mha,NA,NA,NA,NA,NA,100
-ROU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-M,Romania,tCO2e/ha/yr,2.9596,NA,NA,NA,NA,NA
+ROU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-M,Romania,tCO2e/ha/yr,0.029596,NA,NA,NA,NA,NA
 ROU,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-M,Romania,Mha,0.38,NA,NA,NA,NA,100
 RUS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,RUS,Russia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 RUS,Nitrogen Fertilizer Management,Max extent,PD21,pathway,RUS,Russia,Mha,0,NA,NA,NA,NA,100
@@ -2451,47 +2451,47 @@ WSM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OA
 WSM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Samoa,Mha,NA,NA,NA,NA,NA,100
 STP,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Sao Tome and Principe,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 STP,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Sao Tome and Principe,Mha,NA,NA,NA,NA,NA,100
-SAU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Saudi Arabia,tCO2e/ha/yr,1.1111,NA,NA,NA,NA,NA
+SAU,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,Saudi Arabia,tCO2e/ha/yr,0.011111,NA,NA,NA,NA,NA
 SAU,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-H,Saudi Arabia,Mha,0.82,NA,NA,NA,NA,100
-SEN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Senegal,tCO2e/ha/yr,0.2866,NA,NA,NA,NA,NA
+SEN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Senegal,tCO2e/ha/yr,0.002866,NA,NA,NA,NA,NA
 SEN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Senegal,Mha,0.03,NA,NA,NA,NA,100
-SRB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Serbia,tCO2e/ha/yr,3.0364,NA,NA,NA,NA,NA
+SRB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU,Serbia,tCO2e/ha/yr,0.030364,NA,NA,NA,NA,NA
 SRB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU,Serbia,Mha,1.21,NA,NA,NA,NA,100
 SLE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Sierra Leone,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SLE,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Sierra Leone,Mha,NA,NA,NA,NA,NA,100
-SVK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Slovakia,tCO2e/ha/yr,0.9093,NA,NA,NA,NA,NA
+SVK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Slovakia,tCO2e/ha/yr,0.009093,NA,NA,NA,NA,NA
 SVK,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-H,Slovakia,Mha,0.22,NA,NA,NA,NA,100
-SVN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Slovenia,tCO2e/ha/yr,0.3256,NA,NA,NA,NA,NA
+SVN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU12-H,Slovenia,tCO2e/ha/yr,0.003256,NA,NA,NA,NA,NA
 SVN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU12-H,Slovenia,Mha,0.13,NA,NA,NA,NA,100
 SLB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Solomon Islands,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SLB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Solomon Islands,Mha,NA,NA,NA,NA,NA,100
 SOM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Somalia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SOM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Somalia,Mha,NA,NA,NA,NA,NA,100
-ZAF,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SAF,South Africa,tCO2e/ha/yr,11.1719,NA,NA,NA,NA,NA
+ZAF,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SAF,South Africa,tCO2e/ha/yr,0.111719,NA,NA,NA,NA,NA
 ZAF,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SAF,South Africa,Mha,3.11,NA,NA,NA,NA,100
 SSD,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,South Sudan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SSD,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,South Sudan,Mha,NA,NA,NA,NA,NA,100
-ESP,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Spain,tCO2e/ha/yr,10.5768,NA,NA,NA,NA,NA
+ESP,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Spain,tCO2e/ha/yr,0.105768,NA,NA,NA,NA,NA
 ESP,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU27,Spain,Mha,6.45,NA,NA,NA,NA,100
-LKA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Sri Lanka,tCO2e/ha/yr,1.9319,NA,NA,NA,NA,NA
+LKA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Sri Lanka,tCO2e/ha/yr,0.019319,NA,NA,NA,NA,NA
 LKA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-M,Sri Lanka,Mha,1.22,NA,NA,NA,NA,100
-SDN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Sudan,tCO2e/ha/yr,1.3099,NA,NA,NA,NA,NA
+SDN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Sudan,tCO2e/ha/yr,0.013099,NA,NA,NA,NA,NA
 SDN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Sudan,Mha,0.48,NA,NA,NA,NA,100
-SUR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Suriname,tCO2e/ha/yr,0.0568,NA,NA,NA,NA,NA
+SUR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Suriname,tCO2e/ha/yr,0.000568,NA,NA,NA,NA,NA
 SUR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Suriname,Mha,0.04,NA,NA,NA,NA,100
 SWZ,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Swaziland,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SWZ,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Swaziland,Mha,0,NA,NA,NA,NA,100
-SWE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Sweden,tCO2e/ha/yr,1.8678,NA,NA,NA,NA,NA
+SWE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,Sweden,tCO2e/ha/yr,0.018678,NA,NA,NA,NA,NA
 SWE,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,Sweden,Mha,0.81,NA,NA,NA,NA,100
-CHE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EFTA,Switzerland,tCO2e/ha/yr,0.5339,NA,NA,NA,NA,NA
+CHE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EFTA,Switzerland,tCO2e/ha/yr,0.005339,NA,NA,NA,NA,NA
 CHE,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EFTA,Switzerland,Mha,0.34,NA,NA,NA,NA,100
-SYR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Syria,tCO2e/ha/yr,1.41,NA,NA,NA,NA,NA
+SYR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Syria,tCO2e/ha/yr,0.0141,NA,NA,NA,NA,NA
 SYR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-M,Syria,Mha,0.35,NA,NA,NA,NA,100
 TJK,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAS,Tajikistan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TJK,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAS,Tajikistan,Mha,0,NA,NA,NA,NA,100
 TZA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Tanzania,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TZA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Tanzania,Mha,0,NA,NA,NA,NA,100
-THA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Thailand,tCO2e/ha/yr,7.7163,NA,NA,NA,NA,NA
+THA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-M,Thailand,tCO2e/ha/yr,0.077163,NA,NA,NA,NA,NA
 THA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-M,Thailand,Mha,3.63,NA,NA,NA,NA,100
 TLS,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Timor-Leste,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TLS,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Timor-Leste,Mha,NA,NA,NA,NA,NA,100
@@ -2499,9 +2499,9 @@ TGO,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SS
 TGO,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Togo,Mha,0,NA,NA,NA,NA,100
 TTO,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Trinidad and Tobago,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TTO,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Trinidad and Tobago,Mha,NA,NA,NA,NA,NA,100
-TUN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Tunisia,tCO2e/ha/yr,0.3136,NA,NA,NA,NA,NA
+TUN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Tunisia,tCO2e/ha/yr,0.003136,NA,NA,NA,NA,NA
 TUN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,TUR,Tunisia,Mha,0.09,NA,NA,NA,NA,100
-TUR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,TUR,Turkey,tCO2e/ha/yr,7.6418,NA,NA,NA,NA,NA
+TUR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,TUR,Turkey,tCO2e/ha/yr,0.076418,NA,NA,NA,NA,NA
 TUR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,TUR,Turkey,Mha,2.8,NA,NA,NA,NA,100
 TKM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAS,Turkmenistan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TKM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAS,Turkmenistan,Mha,0,NA,NA,NA,NA,100
@@ -2509,27 +2509,27 @@ UGA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SS
 UGA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Uganda,Mha,0,NA,NA,NA,NA,100
 UKR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EEU-FSU,Ukraine,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 UKR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EEU-FSU,Ukraine,Mha,0,NA,NA,NA,NA,100
-ARE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,United Arab Emirates,tCO2e/ha/yr,0.2047,NA,NA,NA,NA,NA
+ARE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-H,United Arab Emirates,tCO2e/ha/yr,0.002047,NA,NA,NA,NA,NA
 ARE,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-H,United Arab Emirates,Mha,0.2,NA,NA,NA,NA,100
-GBR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,United Kingdom,tCO2e/ha/yr,11.4236,NA,NA,NA,NA,NA
+GBR,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,EU15,United Kingdom,tCO2e/ha/yr,0.114236,NA,NA,NA,NA,NA
 GBR,Nitrogen Fertilizer Management,Max extent,PD21,pathway,EU15,United Kingdom,Mha,4.71,NA,NA,NA,NA,100
-USA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,USA,United States,tCO2e/ha/yr,104.614,NA,NA,NA,NA,NA
+USA,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,USA,United States,tCO2e/ha/yr,1.04614,NA,NA,NA,NA,NA
 USA,Nitrogen Fertilizer Management,Max extent,PD21,pathway,USA,United States,Mha,14.58,NA,NA,NA,NA,100
-URY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Uruguay,tCO2e/ha/yr,1.1482,NA,NA,NA,NA,NA
+URY,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Uruguay,tCO2e/ha/yr,0.011482,NA,NA,NA,NA,NA
 URY,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Uruguay,Mha,0.35,NA,NA,NA,NA,100
 UZB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,CAS,Uzbekistan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 UZB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,CAS,Uzbekistan,Mha,0,NA,NA,NA,NA,100
 VUT,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-L,Vanuatu,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 VUT,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-L,Vanuatu,Mha,NA,NA,NA,NA,NA,100
-VEN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Venezuela,tCO2e/ha/yr,2.1548,NA,NA,NA,NA,NA
+VEN,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,LAM-M,Venezuela,tCO2e/ha/yr,0.021548,NA,NA,NA,NA,NA
 VEN,Nitrogen Fertilizer Management,Max extent,PD21,pathway,LAM-M,Venezuela,Mha,1.86,NA,NA,NA,NA,100
-VNM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Vietnam,tCO2e/ha/yr,7.907,NA,NA,NA,NA,NA
+VNM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Vietnam,tCO2e/ha/yr,0.07907,NA,NA,NA,NA,NA
 VNM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,OAS-CPA,Vietnam,Mha,2.95,NA,NA,NA,NA,100
 ESH,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,NAF,Western Sahara,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 ESH,Nitrogen Fertilizer Management,Max extent,PD21,pathway,NAF,Western Sahara,Mha,NA,NA,NA,NA,NA,100
 YEM,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,MEA-M,Yemen,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 YEM,Nitrogen Fertilizer Management,Max extent,PD21,pathway,MEA-M,Yemen,Mha,0,NA,NA,NA,NA,100
-ZMB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Zambia,tCO2e/ha/yr,1.3636,NA,NA,NA,NA,NA
+ZMB,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Zambia,tCO2e/ha/yr,0.013636,NA,NA,NA,NA,NA
 ZMB,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Zambia,Mha,0.55,NA,NA,NA,NA,100
 ZWE,Nitrogen Fertilizer Management,Avg mitigation potential flux,PD21,pathway,SSA-L,Zimbabwe,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 ZWE,Nitrogen Fertilizer Management,Max extent,PD21,pathway,SSA-L,Zimbabwe,Mha,NA,NA,NA,NA,NA,100

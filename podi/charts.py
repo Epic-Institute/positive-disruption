@@ -2072,17 +2072,32 @@ for i in range(0, len(region_list)):
         if sector == "Regenerative Agriculture":
             fig3 = fig2[
                 (fig2["Metric"] != "Cropland Soil Health")
-                & (fig2["Metric"] != "Soil Emissions")
+                & (fig2["Metric"] != "Trees in Croplands")
+                & (fig2["Metric"] != "Silvopasture")
+                & (fig2["Metric"] != "Optimal Intensity")
+                & (fig2["Metric"] != "Improved Rice")
+                & (fig2["Metric"] != "Biochar")
+                & (fig2["Metric"] != "Nitrogen Fertilizer Management")
             ]
-            fig2 = (
-                (fig2[fig2["Metric"] == "Soil Emissions"])
-                .append(fig3)
-                .append(fig2[fig2["Metric"] == "Cropland Soil Health"])
-            )
+
+            fig4 = fig2[
+                (fig2["Metric"] == "Cropland Soil Health")
+                | (fig2["Metric"] == "Trees in Croplands")
+                | (fig2["Metric"] == "Silvopasture")
+                | (fig2["Metric"] == "Optimal Intensity")
+                | (fig2["Metric"] == "Improved Rice")
+                | (fig2["Metric"] == "Biochar")
+                | (fig2["Metric"] == "Nitrogen Fertilizer Management")
+            ]
+
+            fig2 = fig3.append(fig4)
 
         if sector == "Forests & Wetlands":
-            fig3 = fig2[fig2["Metric"] == "Natural Regeneration"]
-            fig2 = fig3.append(fig2[fig2["Metric"] != "Natural Regeneration"])
+            fig3 = fig2[fig2["Metric"] == "Deforestation"]
+
+            fig4 = fig2[fig2["Metric"] != "Deforestation"]
+
+            fig2 = fig3.append(fig4)
 
         fig = go.Figure()
 
@@ -2123,7 +2138,7 @@ for i in range(0, len(region_list)):
         )
 
         fig.add_annotation(
-            text="Historical data is from Global Carbon Project and Community Emissions Data System; projections are based on PD21 technology adoption rate assumptions<br>applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model for 2040-2100; emissions factors are from IEA<br>Emissions Factors 2020.",
+            text="Historical data is from Global Carbon Project and Community Emissions Data System; projections are based on PD21 technology adoption rate assumptions<br>applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model for 2040-2100.",
             xref="paper",
             yref="paper",
             x=-0.16,
@@ -2756,6 +2771,7 @@ for i in range(0, len(region_list)):
 
 scenario = "pathway"
 start_year = start_year
+altscen = str()
 
 ndcs = [
     [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
@@ -2805,9 +2821,9 @@ ndc_commit = [
     ("x",),
 ]
 
-altscen = str(1)
 
 for i in range(0, len(region_list)):
+
     em_mit_electricity = em_mitigated.loc[
         region_list[i], "Electricity", slice(None)
     ].sum()
@@ -2819,37 +2835,11 @@ for i in range(0, len(region_list)):
     em_mit_industry = em_mitigated.loc[region_list[i], "Industry", slice(None)].sum()
 
     em_mit_ra = em_mitigated.loc[
-        region_list[i],
-        [
-            "Biochar",
-            "Cropland Soil Health",
-            "Improved Rice",
-            "Nitrogen Fertilizer Management",
-            "Trees in Croplands",
-            "Animal Mgmt",
-            "Legumes",
-            "Optimal Intensity",
-            "Silvopasture",
-            "Regenerative Agriculture",
-        ],
-        slice(None),
-        slice(None),
+        region_list[i], ["Regenerative Agriculture"], slice(None), slice(None)
     ].sum()
 
     em_mit_fw = em_mitigated.loc[
-        region_list[i],
-        [
-            "Avoided Coastal Impacts",
-            "Avoided Forest Conversion",
-            "Avoided Peat Impacts",
-            "Coastal Restoration",
-            "Improved Forest Mgmt",
-            "Peat Restoration",
-            "Natural Regeneration",
-            "Forests & Wetlands",
-        ],
-        slice(None),
-        slice(None),
+        region_list[i], ["Forests & Wetlands"], slice(None), slice(None)
     ].sum()
 
     if region_list[i] in ["World "]:
@@ -3405,6 +3395,191 @@ for i in range(0, len(region_list)):
         )
 
     plt.clf()
+
+# endregion
+
+######################################
+# SUBVECTOR MITIGATION WEDGES CURVES #
+######################################
+
+# region
+
+scenario = "pathway"
+start_year = start_year
+altscen = str()
+i = 0
+
+for i in range(0, len(region_list)):
+    em_mit_electricity = em_mitigated.loc[region_list[i], "Electricity", slice(None)]
+
+    em_mit_transport = em_mitigated.loc[region_list[i], "Transport", slice(None)]
+
+    em_mit_buildings = em_mitigated.loc[region_list[i], "Buildings", slice(None)]
+
+    em_mit_industry = em_mitigated.loc[region_list[i], "Industry", slice(None)]
+
+    em_mit_ra = em_mitigated.loc[
+        region_list[i], "Regenerative Agriculture", slice(None), slice(None)
+    ]
+
+    em_mit_fw = em_mitigated.loc[
+        region_list[i], "Forests & Wetlands", slice(None), slice(None)
+    ]
+
+    em_mit = (
+        pd.DataFrame(
+            [
+                em_mit_electricity,
+                em_mit_transport,
+                em_mit_buildings,
+                em_mit_industry,
+                em_mit_ra,
+                em_mit_fw,
+            ]
+        )
+        .clip(lower=0)
+        .rename(
+            index={
+                0: "Electricity",
+                1: "Transport",
+                2: "Buildings",
+                3: "Industry",
+                4: "Agriculture",
+                5: "Forests & Wetlands",
+            }
+        )
+    ).clip(lower=0)
+
+    spacer = (
+        pd.Series(
+            em_baseline.groupby("Region").sum().loc[region_list[i]] - em_mit.sum()
+        )
+        .replace(nan, 0)
+        .rename("")
+        .T
+    )
+
+    for sector in pd.Series(em2.index.get_level_values(1).unique()):
+        fig = (
+            ((em_mit.append(spacer)) / 1000)
+            .reindex(
+                [
+                    "Electricity",
+                    "Transport",
+                    "Buildings",
+                    "Industry",
+                    "Agriculture",
+                    "Forests & Wetlands",
+                    "CDR",
+                    spacer.name,
+                ]
+            )
+            .loc[:, data_end_year:]
+        )
+
+        fig = fig.T
+        fig.index.name = "Year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+        )
+
+        fig = go.Figure()
+
+        fig.add_trace(
+            go.Scatter(
+                name="",
+                line=dict(width=0.5, color="rgba(230, 236, 245, 0)"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == ""]["Emissions, GtCO2e"],
+                fill="tozeroy",
+                stackgroup="one",
+                showlegend=False,
+            )
+        )
+
+        for sub in fig2["Metric"].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                        color=colors[
+                            pd.DataFrame(fig2["Metric"].unique())
+                            .set_index(0)
+                            .index.get_loc(sub)
+                        ],
+                    ),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Metric"] == sub]["Emissions, GtCO2e"],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.add_trace(
+            go.Scatter(
+                name="Historical",
+                line=dict(width=2, color="black"),
+                x=pd.Series(em_hist.columns.values),
+                y=pd.Series(em_hist.loc[region_list[i], :].values[0] / 1000),
+                fill="none",
+                stackgroup="two",
+                showlegend=False,
+            )
+        )
+
+        fig.update_layout(
+            margin_b=100,
+            margin_t=125,
+            title={
+                "text": "Emissions Mitigated, " + sector + ", " + region_list[i],
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            xaxis={"title": "Year"},
+            yaxis={"title": "GtCO2e/yr"},
+            legend={"traceorder": "reversed"},
+        )
+
+        fig.add_annotation(
+            text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
+            xref="paper",
+            yref="paper",
+            x=-0.15,
+            y=-0.4,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=5,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
+        fig.update_layout(
+            legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10))
+        )
+
+        if show_figs is True:
+            fig.show()
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/mwedgessub-"
+                    + "pathway"
+                    + "-"
+                    + sector
+                    + "-"
+                    + region_list[i]
+                    + str(altscen)
+                    + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
+
+        plt.clf()
 
 # endregion
 
@@ -6228,5 +6403,20 @@ for i in range(0, len(region_list)):
     plt.plot(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
     plt.legend(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
     plt.title(region_list[i])
+
+# endregion
+
+##########################
+# AFOLU PERCENT ADOPTION #
+##########################
+
+# region
+scenario = scenario
+
+for i in range(0, len(region_list)):
+    plt.figure(i)
+    plt.plot(
+        afolu_per_adoption.loc[region_list[i], slice(None), slice(None), scenario].T
+    )
 
 # endregion

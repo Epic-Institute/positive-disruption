@@ -142,6 +142,8 @@ ag_co2 = [
 
 # endregion
 
+# IF THIS IS RUN, MANUALLY DUPLICATE BASELINE RESTULTS TO CREATE PATHWAY RESULTS FOR RA
+
 
 def rgroup(data, gas, sector, rgroup):
     region_categories = pd.read_csv(
@@ -264,10 +266,9 @@ def proj2(data, sector, metric, gas):
     ra_em.columns = ra_em.columns.astype(int)
     ra_em = ra_em.interpolate(axis=1, method="quadratic")
 
-    ra_em = rgroup(ra_em, "CO2", "RA", "NCS Region")
+    ra_em = rgroup(ra_em, "CO2", "RA", "ISO")
     ra_em = ra_em.droplevel(["Sector", "Metric", "Gas"])
 
-    # MANUALLY EXTEND 2018 VALUES THROUGH 2100 FOR FW RA
     """
     data_per_change = (
         (
@@ -287,6 +288,7 @@ def proj2(data, sector, metric, gas):
         .reindex(sorted(energy_demand.columns), axis=1)
     )
     """
+
     data_per_change = (
         ra_em.loc[:, 2019:]
         .pct_change(axis=1)
@@ -439,15 +441,15 @@ co2_build = co2_build3
 
 # region
 
-co2_ag = co2.loc[slice(None), ag, :]
+co2_ag = co2.loc[slice(None), ag_co2, :]
 co2_ag2 = []
 co2_ag3 = []
 
-for sub in ag:
+for sub in ag_co2:
     co2_ag2 = pd.DataFrame(co2_ag2).append(
         rgroup(co2_ag.loc[slice(None), [sub], :], "CO2", sub, "ISO")
     )
-for sub in ag:
+for sub in ag_co2:
     co2_ag3 = pd.DataFrame(co2_ag3).append(
         proj2(
             co2_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CO2"
@@ -475,7 +477,7 @@ co2_fw = gas_fw.loc[slice(None), slice(None), "CO2"]
 
 co2_fw = rgroup(co2_fw, "CO2", "Forests & Wetlands", "CAIT Region")
 
-co2_fw = proj2(co2_fw, "Forests & Wetlands", "Natural Regeneration", "CO2")
+co2_fw = proj2(co2_fw, "Forests & Wetlands", "Deforestation", "CO2")
 
 # endregion
 
@@ -606,7 +608,7 @@ for sub in ag:
     ch4_ag3 = pd.DataFrame(ch4_ag3).append(
         proj2(
             ch4_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CH4"
-        ).drop_duplicates()
+        )
     )
 
 ch4_ag = ch4_ag3
@@ -634,7 +636,7 @@ ch4_fw = ch4_fw3
 
 ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands", "CAIT Region")
 
-ch4_fw = proj2(ch4_fw, "Forests & Wetlands", "Natural Regeneration", "CH4")
+ch4_fw = proj2(ch4_fw, "Forests & Wetlands", "Deforestation", "CH4")
 
 # endregion
 
@@ -745,7 +747,7 @@ for sub in ag:
     n2o_ag3 = pd.DataFrame(n2o_ag3).append(
         proj2(
             n2o_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "N2O"
-        ).drop_duplicates()
+        )
     )
 
 n2o_ag = n2o_ag3
@@ -769,7 +771,7 @@ n2o_fw = n2o_fw3
 
 n2o_fw = rgroup(n2o_fw, "N2O", "Forests & Wetlands", "CAIT Region")
 
-n2o_fw = proj2(n2o_fw, "Forests & Wetlands", "Natural Regeneration", "N2O")
+n2o_fw = proj2(n2o_fw, "Forests & Wetlands", "Deforestation", "N2O")
 
 # endregion
 
