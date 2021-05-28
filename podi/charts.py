@@ -50,6 +50,7 @@ scenario = "pathway"
 
 scenario = scenario
 start_year = start_year
+i = 0
 
 for i in range(0, len(region_list)):
 
@@ -332,7 +333,8 @@ for i in range(0, len(region_list)):
             + ", "
             + region_list[i],
             "xanchor": "center",
-            "x": 0.5, "y":0.99
+            "x": 0.5,
+            "y": 0.99,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "% Adoption"},
@@ -348,7 +350,7 @@ for i in range(0, len(region_list)):
         xref="paper",
         yref="paper",
         x=-0.12,
-        y=-0.38,
+        y=-0.36,
         showarrow=False,
         font=dict(size=10, color="#2E3F5C"),
         align="left",
@@ -675,10 +677,12 @@ for i in range(0, len(region_list)):
 
 scenario = scenario
 start_year = start_year
+i = 0
 
 colors = px.colors.qualitative.Vivid
 
 for i in range(0, len(region_list)):
+
     fig = (
         adoption_curves.loc[region_list[i], slice(None), scenario].loc[:, start_year:]
         * 100
@@ -772,10 +776,18 @@ for i in range(0, len(region_list)):
                 + region_list[i],
                 "xanchor": "center",
                 "x": 0.5,
+                "y": 0.99,
             },
             xaxis={"title": "Year"},
             yaxis={"title": "% Adoption"},
             legend={"traceorder": "reversed"},
+        )
+
+        fig.update_layout(
+            legend=dict(
+                orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)
+            ),
+            margin_t=120,
         )
 
         fig.add_annotation(
@@ -921,18 +933,26 @@ for i in range(0, len(region_list)):
                 + region_list[i],
                 "xanchor": "center",
                 "x": 0.5,
+                "y": 0.99,
             },
             xaxis={"title": "Year"},
             yaxis={"title": "% Adoption"},
             legend={"traceorder": "reversed"},
         )
 
+        fig.update_layout(
+            legend=dict(
+                orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)
+            ),
+            margin_b=100,
+        )
+
         fig.add_annotation(
             text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture and Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available",
             xref="paper",
             yref="paper",
-            x=-0.17,
-            y=1.15,
+            x=-0.12,
+            y=-0.38,
             showarrow=False,
             font=dict(size=10, color="#2E3F5C"),
             align="left",
@@ -4724,9 +4744,15 @@ fig.update_layout(
         "text": "Atmospheric CO2 Concentration",
         "xanchor": "center",
         "x": 0.5,
+        "y": 0.95,
     },
     xaxis={"title": "Year"},
     yaxis={"title": "ppm CO2"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
+    margin_b=80,
 )
 
 fig.add_annotation(
@@ -4734,7 +4760,7 @@ fig.add_annotation(
     xref="paper",
     yref="paper",
     x=0,
-    y=1.15,
+    y=-0.27,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
     align="center",
@@ -5025,9 +5051,15 @@ fig.update_layout(
         "text": "Atmospheric GHG Concentration",
         "xanchor": "center",
         "x": 0.5,
+        "y": 0.95,
     },
     xaxis={"title": "Year"},
     yaxis={"title": "ppm CO2e"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
+    margin_b=80,
 )
 
 fig.add_annotation(
@@ -5035,7 +5067,7 @@ fig.add_annotation(
     xref="paper",
     yref="paper",
     x=0,
-    y=1.15,
+    y=-0.27,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
     align="center",
@@ -5327,21 +5359,23 @@ fig.add_trace(
 )
 
 fig.update_layout(
-    title={
-        "text": "Radiative Forcing",
-        "xanchor": "center",
-        "x": 0.5,
-    },
+    title={"text": "Radiative Forcing", "xanchor": "center", "x": 0.5, "y": 0.95},
     xaxis={"title": "Year"},
     yaxis={"title": "W/m2"},
 )
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
+    margin_b=80,
+)
+
 
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
     xref="paper",
     yref="paper",
     x=0,
-    y=1.15,
+    y=-0.27,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
     align="center",
@@ -5632,13 +5666,14 @@ fig.add_trace(
 )
 
 fig.update_layout(
-    title={
-        "text": "Global Mean Temperature",
-        "xanchor": "center",
-        "x": 0.5,
-    },
+    title={"text": "Global Mean Temperature", "xanchor": "center", "x": 0.5, "y": 0.95},
     xaxis={"title": "Year"},
     yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
+    margin_b=80,
 )
 
 fig.add_annotation(
@@ -5646,7 +5681,7 @@ fig.add_annotation(
     xref="paper",
     yref="paper",
     x=0,
-    y=1.15,
+    y=-0.27,
     showarrow=False,
     font=dict(size=10, color="#2E3F5C"),
     align="center",

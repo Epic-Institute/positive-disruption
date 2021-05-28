@@ -44,7 +44,16 @@
 
 * [India](https://epic-institute.github.io/positive-disruption/charts/md-INDIA.html)
 
+***
 
-## Other
+## Exploratory Scenarios
 
-* [Accelerated Industry/RA Scenario for US](https://epic-institute.github.io/positive-disruption/charts/md-altscen1.html)
+* [Limited Policy (DAU-LP)](https://epic-institute.github.io/positive-disruption/charts/md-altscenlp.html)
+
+* [War Effort (DAU-WE)](https://epic-institute.github.io/positive-disruption/charts/md-altscenwe.html)
+
+* [Accelerated Regenerative Agriculture (2060-->2050)](https://epic-institute.github.io/positive-disruption/charts/md-altscenra1.html)
+
+* [Accelerated Forests & Wetlands (2060-->2040)](https://epic-institute.github.io/positive-disruption/charts/md-altscenfw1.html)
+
+* [Accelerated Industry & Regenerative Agriculture (2060-->2040)](https://epic-institute.github.io/positive-disruption/charts/md-altscenind1.html)
