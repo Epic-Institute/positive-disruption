@@ -852,6 +852,7 @@ for i in range(0, len(region_list)):
 
 scenario = scenario
 start_year = start_year
+i = 0
 
 colors = px.colors.qualitative.Vivid
 
@@ -4752,7 +4753,7 @@ fig.update_layout(
 )
 
 fig.add_annotation(
-    text="Historical data is from NASA; projected data is from projected emissions input into the FaIR climate model.",
+    text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
     xref="paper",
     yref="paper",
     x=0,
@@ -5053,7 +5054,7 @@ fig.update_layout(
 )
 
 fig.add_annotation(
-    text="Historical data is from NASA; projected data is from projected emissions input into the FaIR climate model.",
+    text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
     xref="paper",
     yref="paper",
     x=0,
@@ -5359,7 +5360,7 @@ fig.update_layout(
 )
 
 fig.add_annotation(
-    text="Historical data is from NASA; projected data is from projected emissions input into the FaIR climate model.",
+    text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
     xref="paper",
     yref="paper",
     x=0,
