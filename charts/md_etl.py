@@ -121,9 +121,6 @@ for i in range(0, len(region_list)):
         """
         for m in ["emsub"]:
             for sector in [
-                "Electricity",
-                "Transport",
-                "Buildings",
                 "Industry",
                 "Regenerative Agriculture",
                 "Forests & Wetlands",
