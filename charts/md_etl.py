@@ -257,7 +257,7 @@ for i in range(0, len(region_list)):
 
     mdFile.new_line()
     mdFile.new_header(level=2, title="Subvector Adoption Curves")
-
+    """
     for j in ["pathway"]:
         for k in [
             "Industry",
@@ -274,7 +274,7 @@ for i in range(0, len(region_list)):
             mdFile.write(path)
             mdFile.write(" height='500' width='150%'></iframe>")
             mdFile.new_line()
-
+    """
     for j in ["pathway"]:
         for k in [
             "Regenerative Agriculture",

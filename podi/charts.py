@@ -4668,7 +4668,7 @@ results = (
     .droplevel(["UNIT"])
 )
 results.columns = results.columns.astype(int)
-"""
+
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -4678,7 +4678,7 @@ results19 = curve_smooth(
     "quadratic",
     3,
 )
-"""
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
