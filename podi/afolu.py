@@ -410,10 +410,31 @@ def afolu(scenario):
 
     # region
 
+    adoption2 = []
+
+    for i in range(0, len(adoption)):
+        adopt_row = []
+        for j in range(0, len(adoption.iloc[i])):
+            foo = pd.DataFrame(
+                flux2.loc[adoption.index[i][0], adoption.index[i][1]]
+            ).T * (adoption.iloc[i, j] - adoption.iloc[i, max(0, j - 1)])
+            foo2 = foo.loc[:, : str(1990 + int(2100 - adoption.columns[j]))]
+            foo2.columns = foo.loc[:, str(adoption.columns[j]) :].columns
+
+            adopt_row = pd.DataFrame(adopt_row).append(foo2)
+
+        adopt_row.iloc[0] = adopt_row.sum().values
+        adoption2 = pd.DataFrame(adoption2).append(pd.DataFrame(adopt_row.iloc[0]).T)
+
+    adoption = adoption2
+    adoption.index.names = flux2.index.names
+    adoption.columns = adoption.columns.astype(int)
+
+    """
     adoption = adoption.apply(
         lambda x: x.multiply(flux2.loc[x.name[0], x.name[1]].values), axis=1
     )
-
+    """
     # endregion
 
     # estimate emissions mitigated by avoided pathways
