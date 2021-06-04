@@ -24,24 +24,13 @@
 
 ## Subvector Adoption Curves
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-Biochar.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-CoastalRestoration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-CroplandSoilHealth.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-ImprovedForestMgmt.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-ImprovedRice.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-NaturalRegeneration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-OptimalIntensity.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-PeatRestoration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-Silvopasture.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-RegenerativeAgriculture-pathway-TreesinCroplands.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-Biochar.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-CoastalRestoration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-CroplandSoilHealth.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-ImprovedForestMgmt.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-ImprovedRice.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-NaturalRegeneration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-OptimalIntensity.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-PeatRestoration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-Silvopasture.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CHINA-Forests&Wetlands-pathway-TreesinCroplands.html" height='500' width='150%'></iframe>  

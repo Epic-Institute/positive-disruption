@@ -24,24 +24,13 @@ Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, C
 
 ## Subvector Adoption Curves
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-Biochar.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-CoastalRestoration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-CroplandSoilHealth.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-ImprovedForestMgmt.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-ImprovedRice.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-NaturalRegeneration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-OptimalIntensity.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-PeatRestoration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-Silvopasture.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-RegenerativeAgriculture-pathway-TreesinCroplands.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-Biochar.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-CoastalRestoration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-CroplandSoilHealth.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-ImprovedForestMgmt.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-ImprovedRice.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-NaturalRegeneration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-OptimalIntensity.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-PeatRestoration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-Silvopasture.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-CSAM-Forests&Wetlands-pathway-TreesinCroplands.html" height='500' width='150%'></iframe>  

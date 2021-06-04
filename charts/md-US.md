@@ -24,24 +24,13 @@
 
 ## Subvector Adoption Curves
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-Biochar.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-CoastalRestoration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-CroplandSoilHealth.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-ImprovedForestMgmt.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-ImprovedRice.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-NaturalRegeneration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-OptimalIntensity.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-PeatRestoration.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-Silvopasture.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-RegenerativeAgriculture-pathway-TreesinCroplands.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-Biochar.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-CoastalRestoration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-CroplandSoilHealth.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-ImprovedForestMgmt.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-ImprovedRice.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-NaturalRegeneration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-OptimalIntensity.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-PeatRestoration.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-Silvopasture.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-US-Forests&Wetlands-pathway-TreesinCroplands.html" height='500' width='150%'></iframe>  

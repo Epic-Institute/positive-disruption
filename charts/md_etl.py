@@ -275,20 +275,43 @@ for i in range(0, len(region_list)):
     for j in ["pathway"]:
         for k in [
             "Regenerative Agriculture",
-            "Forests & Wetlands",
         ]:
             for subvector in [
                 "Biochar",
-                "Coastal Restoration",
                 "Cropland Soil Health",
-                "Improved Forest Mgmt",
                 "Improved Rice",
-                "Natural Regeneration",
                 "Nitrogen Fertilizer Management",
                 "Optimal Intensity",
-                "Peat Restoration",
                 "Silvopasture",
                 "Trees in Croplands",
+            ]:
+                path = (
+                    '"scurvessubafolu-'
+                    + region_list[i]
+                    + "-"
+                    + k
+                    + "-"
+                    + j
+                    + "-"
+                    + subvector
+                    + '.html"'
+                ).replace(" ", "")
+
+                mdFile.write(
+                    "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+                )
+                mdFile.write(path)
+                mdFile.write(" height='500' width='150%'></iframe>")
+                mdFile.new_line()
+
+        for k in [
+            "Forests & Wetlands",
+        ]:
+            for subvector in [
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Peat Restoration",
             ]:
                 path = (
                     '"scurvessubafolu-'
