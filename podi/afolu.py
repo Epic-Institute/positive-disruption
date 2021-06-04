@@ -749,4 +749,73 @@ def afolu(scenario):
     if scenario == "baseline":
         afolu_em.loc[:, 2019:] = curve_smooth(afolu_em.loc[:, 2019:], "linear", 1)
 
-    return afolu_em, per_adoption
+    # create 16 region df for max extent
+
+    max_extent3 = []
+
+    for subv in [
+        "Biochar",
+        "Coastal Restoration",
+        "Cropland Soil Health",
+        "Improved Forest Mgmt",
+        "Improved Rice",
+        "Natural Regeneration",
+        "Nitrogen Fertilizer Management",
+        "Optimal Intensity",
+        "Peat Restoration",
+        "Silvopasture",
+        "Trees in Croplands",
+    ]:
+        max_extent3 = pd.DataFrame(max_extent3).append(
+            pd.DataFrame(
+                rgroup(
+                    max_extent2.loc[slice(None), subv, :],
+                    "CO2",
+                    subv,
+                    "Region",
+                    scenario,
+                )
+            )
+        )
+
+    max_extent3.index = max_extent3.index.droplevel("Sector")
+    max_extent3 = pd.concat(
+        [max_extent3], names=["Sector"], keys=["Regenerative Agriculture"]
+    )
+    max_extent3 = max_extent3.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+
+    max_extent3 = pd.concat([max_extent3], names=["Gas"], keys=["CO2"])
+    max_extent3 = max_extent3.reorder_levels(
+        ["Region", "Sector", "Metric", "Gas", "Scenario"]
+    )
+
+    per_max = (
+        per_adoption.loc[
+            slice(None),
+            slice(None),
+            [
+                "Biochar",
+                "Coastal Restoration",
+                "Cropland Soil Health",
+                "Improved Forest Mgmt",
+                "Improved Rice",
+                "Natural Regeneration",
+                "Nitrogen Fertilizer Management",
+                "Optimal Intensity",
+                "Peat Restoration",
+                "Silvopasture",
+                "Trees in Croplands",
+            ],
+            scenario,
+            :,
+        ]
+        .apply(
+            lambda x: x.multiply(
+                max_extent3.loc[x.name[0], slice(None), x.name[2]].values[0]
+            ),
+            axis=1,
+        )
+        .fillna(0)
+    )
+
+    return afolu_em, per_adoption, per_max

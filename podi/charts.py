@@ -986,6 +986,165 @@ for i in range(0, len(region_list)):
 
 # endregion
 
+
+#################################################
+# AFOLU SUBVECTOR ADOPTION CURVES AS MAX EXTENT #
+#################################################
+
+# region
+
+scenario = scenario
+start_year = start_year
+i = 0
+
+colors = px.colors.qualitative.Vivid
+
+max_extent_units = {"Biochar":"Tgdm/yr", "Coastal Restoration":"Mha", "Cropland Soil Health":"Mha", "Improved Forest Mgmt":"m^3", "Improved Rice":"Mha", "Natural Regeneration":"Mha", "Nitrogen Fertilizer Management":"Mha", "Optimal Intensity":"Mha", "Peat Restoration":"Mha", "Silvopasture":"Mha", "Trees in Croplands":"Mha", "Avoided Forest Conversion":"Mha", "Avoided Coastal Impacts":"Mha", "Avoided Peat Impacts":"Mha"}
+
+for i in range(0, len(region_list)):
+
+    fig = (
+        afolu_per_max.loc[region_list[i], slice(None), slice(None), scenario].loc[:, start_year:]
+    )
+
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig3 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="Adoption")
+
+    for sector in [
+        "Regenerative Agriculture",
+        "Forests & Wetlands",
+    ]:
+
+        fig = (afolu_per_max.loc[region_list[i], sector, slice(None), scenario, :].loc[:, start_year:])
+
+        fig = fig.T
+        fig.index.name = "Year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(fig, id_vars="Year", var_name="Metric", value_name="Adoption")
+
+
+        for x in fig2["Metric"].unique():
+            fig = go.Figure()
+
+            fig.add_trace(
+                go.Scatter(
+                    name=x,
+                    line=dict(
+                        width=0,
+                        color=colors[
+                            pd.DataFrame(fig2["Metric"].unique())
+                            .set_index(0)
+                            .index.get_loc(x)
+                        ],
+                    ),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Metric"] == x]["Adoption"],
+                    fill="tonexty",
+                    stackgroup="two",
+                    legendgroup=x,
+                )
+            )
+
+            '''
+            fig.add_trace(
+                go.Scatter(
+                    name=sector,
+                    line=dict(width=3, color="black"),
+                    x=fig2[fig2["Year"] <= 2020]["Year"],
+                    y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == sector)][
+                        "Adoption"
+                    ],
+                    fill="none",
+                    stackgroup="three",
+                    legendgroup=sector,
+                    showlegend=False,
+                )
+            )
+
+
+            fig.add_trace(
+                go.Scatter(
+                    name=sector,
+                    line=dict(width=3, color="#7AA8B8", dash="dot"),
+                    x=fig2[fig2["Year"] >= 2020]["Year"],
+                    y=fig3[(fig3["Year"] >= 2020) & (fig3["Sector"] == sector)][
+                        "Adoption"
+                    ],
+                    fill="none",
+                    stackgroup="four",
+                    legendgroup=sector,
+                    showlegend=True,
+                )
+            )
+            '''
+
+            fig.update_layout(
+                title={
+                    "text": "Total PD Adoption, "
+                    + scenario.title()
+                    + ", "
+                    + sector
+                    + ", "
+                    + x
+                    + ", "
+                    + region_list[i],
+                    "xanchor": "center",
+                    "x": 0.5,
+                    "y": 0.99,
+                },
+                xaxis={"title": "Year"},
+                yaxis={"title": max_extent_units[x]},
+                legend={"traceorder": "reversed"},
+            )
+
+            fig.update_layout(
+                legend=dict(
+                    orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)
+                ),
+                margin_t=120,
+            )
+
+            fig.add_annotation(
+                text="",
+                xref="paper",
+                yref="paper",
+                x=-0.17,
+                y=1.15,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
+            )
+
+            fig.add_vrect(
+                x0=start_year, x1=2020, fillcolor="grey", opacity=0.6, line_width=0
+            )
+
+            if show_figs is True:
+                fig.show()
+            if save_figs is True:
+                pio.write_html(
+                    fig,
+                    file=(
+                        "./charts/scurvessubafolu-"
+                        + region_list[i]
+                        + "-"
+                        + sector
+                        + "-"
+                        + scenario
+                        + "-"
+                        + x
+                        + ".html"
+                    ).replace(" ", ""),
+                    auto_open=False,
+                )
+
+# endregion
+
 #######################################
 # ENERGY DEMAND BY SECTOR AND END-USE #
 #######################################

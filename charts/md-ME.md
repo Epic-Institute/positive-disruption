@@ -10,6 +10,9 @@
 
 ## Emissions
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-ME.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-ME-Electricity.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-ME-Transport.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-ME-Buildings.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-ME-Industry.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-ME-RegenerativeAgriculture.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-ME-Forests&Wetlands.html" height='500' width='150%'></iframe>  
@@ -23,9 +26,28 @@ Bahrain, Islamic Republic of Iran, Iraq, Jordan, Kuwait, Lebanon, Oman, Qatar, S
   
 
 ## Subvector Adoption Curves
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-ME-Electricity-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-ME-Transport-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-ME-Buildings-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-ME-Industry-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-ME-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-ME-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-Biochar.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-CoastalRestoration.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-CroplandSoilHealth.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-ImprovedForestMgmt.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-ImprovedRice.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-NaturalRegeneration.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-OptimalIntensity.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-PeatRestoration.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-Silvopasture.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-RegenerativeAgriculture-pathway-TreesinCroplands.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-Biochar.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-CoastalRestoration.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-CroplandSoilHealth.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-ImprovedForestMgmt.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-ImprovedRice.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-NaturalRegeneration.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-OptimalIntensity.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-PeatRestoration.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-Silvopasture.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessubafolu-ME-Forests&Wetlands-pathway-TreesinCroplands.html" height='500' width='150%'></iframe>  

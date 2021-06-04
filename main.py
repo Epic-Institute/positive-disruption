@@ -135,13 +135,17 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 
 # region
 
-afolu_em_baseline, afolu_per_adoption_baseline = afolu("baseline")
+afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu(
+    "baseline"
+)
 
-afolu_em_pathway, afolu_per_adoption_pathway = afolu("pathway")
+afolu_em_pathway, afolu_per_adoption_pathway, afolu_per_max_pathway = afolu("pathway")
 
 afolu_em = afolu_em_baseline.append(afolu_em_pathway)
 
 afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
+
+afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
 
 # endregion
 
