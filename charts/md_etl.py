@@ -144,6 +144,7 @@ for i in range(0, len(region_list)):
 
                 mdFile.new_line()
 
+    """
     if region_list[i] == "World ":
         for j in ["ncsbar"]:
             for year in ["2050"]:
@@ -166,7 +167,7 @@ for i in range(0, len(region_list)):
                 mdFile.write(" height='500' width='150%'></iframe>")
 
                 mdFile.new_line()
-
+    """
     for k in ["mwedges"]:
         path = (
             '"'
