@@ -999,13 +999,28 @@ i = 0
 
 colors = px.colors.qualitative.Vivid
 
-max_extent_units = {"Biochar":"Tgdm/yr", "Coastal Restoration":"Mha", "Cropland Soil Health":"Mha", "Improved Forest Mgmt":"m^3", "Improved Rice":"Mha", "Natural Regeneration":"Mha", "Nitrogen Fertilizer Management":"Mha", "Optimal Intensity":"Mha", "Peat Restoration":"Mha", "Silvopasture":"Mha", "Trees in Croplands":"Mha", "Avoided Forest Conversion":"Mha", "Avoided Coastal Impacts":"Mha", "Avoided Peat Impacts":"Mha"}
+max_extent_units = {
+    "Biochar": "Tgdm/yr",
+    "Coastal Restoration": "Mha",
+    "Cropland Soil Health": "Mha",
+    "Improved Forest Mgmt": "m^3",
+    "Improved Rice": "Mha",
+    "Natural Regeneration": "Mha",
+    "Nitrogen Fertilizer Management": "Mha",
+    "Optimal Intensity": "Mha",
+    "Peat Restoration": "Mha",
+    "Silvopasture": "Mha",
+    "Trees in Croplands": "Mha",
+    "Avoided Forest Conversion": "Mha",
+    "Avoided Coastal Impacts": "Mha",
+    "Avoided Peat Impacts": "Mha",
+}
 
 for i in range(0, len(region_list)):
 
-    fig = (
-        afolu_per_max.loc[region_list[i], slice(None), slice(None), scenario].loc[:, start_year:]
-    )
+    fig = afolu_per_max.loc[region_list[i], slice(None), slice(None), scenario].loc[
+        :, start_year:
+    ]
 
     fig = fig.T
     fig.index.name = "Year"
@@ -1017,13 +1032,14 @@ for i in range(0, len(region_list)):
         "Forests & Wetlands",
     ]:
 
-        fig = (afolu_per_max.loc[region_list[i], sector, slice(None), scenario, :].loc[:, start_year:])
+        fig = afolu_per_max.loc[region_list[i], sector, slice(None), scenario, :].loc[
+            :, start_year:
+        ]
 
         fig = fig.T
         fig.index.name = "Year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(fig, id_vars="Year", var_name="Metric", value_name="Adoption")
-
 
         for x in fig2["Metric"].unique():
             fig = go.Figure()
@@ -1047,7 +1063,7 @@ for i in range(0, len(region_list)):
                 )
             )
 
-            '''
+            """
             fig.add_trace(
                 go.Scatter(
                     name=sector,
@@ -1078,7 +1094,7 @@ for i in range(0, len(region_list)):
                     showlegend=True,
                 )
             )
-            '''
+            """
 
             fig.update_layout(
                 title={
@@ -2219,8 +2235,8 @@ for i in range(0, len(region_list)):
         )
 
         if sector == "Industry":
-            fig3 = fig2[fig2["Metric"] == "Fossil fuels"]
-            fig2 = fig3.append(fig2[fig2["Metric"] != "Fossil fuels"])
+            fig3 = fig2[fig2["Metric"] == "Fossil Fuel Heat"]
+            fig2 = fig3.append(fig2[fig2["Metric"] != "Fossil Fuel Heat"])
 
         if sector == "Regenerative Agriculture":
             fig3 = fig2[
@@ -2693,6 +2709,155 @@ for i in range(0, len(region_list)):
                 auto_open=False,
             )
         plt.clf()
+
+# endregion
+
+###########################################
+# EMISSIONS INDUSTRY FF HEAT REGION STACK #
+###########################################
+
+# region
+
+scenario = scenario
+start_year = 2000
+
+colors = [
+    "#AA0DFE",
+    "#3283FE",
+    "#85660D",
+    "#565656",
+    "#1C8356",
+    "#16FF32",
+    "#F7E1A0",
+    "#C4451C",
+    "#325A9B",
+    "#FEAF16",
+    "#F8A19F",
+    "#90AD1C",
+    "#F6222E",
+    "#1CFFCE",
+    "#2ED9FF",
+    "#B10DA1",
+    "#C075A6",
+    "#FC1CBF",
+    "#B00068",
+    "#FBE426",
+    "#FA0087",
+    "#FD3216",
+    "#00FE35",
+    "#6A76FC",
+    "#FED4C4",
+    "#FE00CE",
+    "#0DF9FF",
+    "#F6F926",
+    "#FF9616",
+    "#479B55",
+    "#EEA6FB",
+    "#DC587D",
+    "#D626FF",
+    "#6E899C",
+    "#00B5F7",
+    "#B68E00",
+    "#C9FBE5",
+    "#FF0092",
+    "#22FFA7",
+    "#E3EE9E",
+    "#86CE00",
+    "#BC7196",
+    "#7E7DCD",
+    "#FC6955",
+    "#E48F72",
+]
+
+em2 = em.loc[
+    [
+        "US ",
+        "SAFR ",
+        "RUS ",
+        "ME ",
+        "JPN ",
+        "INDIA ",
+        "EUR ",
+        "CSAM ",
+        "CHINA ",
+        "AFRICA ",
+    ],
+    ["Industry"],
+    slice(None),
+    slice(None),
+    scenario,
+].loc[:, start_year:long_proj_end_year]
+em2 = em2.loc[~(em2 == 0).all(axis=1)]
+
+fig = (
+    (
+        em2.loc[slice(None), slice(None), ["Fossil Fuel Heat"], slice(None), scenario]
+        .groupby(["Region", "Metric"])
+        .sum()
+    )
+    / 1000
+).loc[:, start_year:]
+fig = fig.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name="Metric", value_name="Emissions, GtCO2e")
+
+fig = go.Figure()
+
+for sub in fig2["Metric"].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(fig2["Metric"].unique())
+                    .set_index(0)
+                    .index.get_loc(sub)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2["Metric"] == sub]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup="1",
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": " Emissions in Industry Fossil Fuel Heat, " + scenario.title(),
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.93,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "GtCO2e/yr"},
+    showlegend=True,
+)
+
+fig.add_annotation(
+    text="Historical data is from Global Carbon Project and Community Emissions Data System; projections are based on PD21 technology adoption rate assumptions<br>applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model for 2040-2100.",
+    xref="paper",
+    yref="paper",
+    x=-0.16,
+    y=1.17,
+    showarrow=False,
+    font=dict(size=9, color="#2E3F5C"),
+    align="left",
+    borderpad=6,
+    bgcolor="#ffffff",
+    opacity=1,
+)
+
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/emsubind-" + scenario + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+plt.clf()
 
 # endregion
 

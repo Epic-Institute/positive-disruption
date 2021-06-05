@@ -209,6 +209,18 @@ for i in range(0, len(region_list)):
 
             mdFile.new_line()
 
+    if region_list[i] == "World ":
+        for sub in ["emsubind"]:
+            path = '"' + sub + "-" + "pathway" + '.html"'
+
+            mdFile.write(
+                "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
+            )
+            mdFile.write(path)
+            mdFile.write(" height='500' width='150%'></iframe>")
+
+            mdFile.new_line()
+
     """
     for j in ["pathway"]:
         for k in ["ei"]:
