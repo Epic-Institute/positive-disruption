@@ -21,7 +21,7 @@ from itertools import chain, zip_longest
 from math import ceil, pi, nan
 from kneed import DataGenerator, KneeLocator
 from podi.curve_smooth import curve_smooth
-from numpy import NaN
+from numpy import NaN, triu_indices_from
 import fair
 from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
@@ -6642,10 +6642,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(
         title={
-            "text": "Percent of Total PD Adoption, "
-            + "Limited Policy"
-            + ", "
-            + region_list[i],
+            "text": "Percent of Total PD Adoption, " + "DAU-LP" + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -8154,10 +8151,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(
         title={
-            "text": "Percent of Total PD Adoption, "
-            + "War Effort"
-            + ", "
-            + region_list[i],
+            "text": "Percent of Total PD Adoption, " + "DAU-WE" + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -9175,10 +9169,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(
         title={
-            "text": "Percent of Total PD Adoption, "
-            + "War Effort"
-            + ", "
-            + region_list[i],
+            "text": "Percent of Total PD Adoption, " + "DAU-RA" + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -12893,6 +12884,7 @@ if show_figs is True:
 
 # region
 
+altscen = "daurafw"
 show_ra = False
 show_fw = False
 show_rafw = True
@@ -13370,7 +13362,14 @@ fig.add_annotation(
 
 if show_figs is True:
     fig.show()
-
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/co2conc-" + "World " + "-" + str(altscen) + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
 
 # endregion
 
@@ -13847,7 +13846,14 @@ fig.add_annotation(
 
 if show_figs is True:
     fig.show()
-
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/ghgconc-" + "World " + "-" + str(altscen) + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
 
 # endregion
 
@@ -14319,7 +14325,14 @@ fig.add_annotation(
 
 if show_figs is True:
     fig.show()
-
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/forcing-" + "World" + "-" + str(altscen) + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
 
 # endregion
 
@@ -14788,6 +14801,14 @@ fig.add_annotation(
 
 if show_figs is True:
     fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/temp-" + "World" + "-" + str(altscen) + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
 
 # endregion
 
