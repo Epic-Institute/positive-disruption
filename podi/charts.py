@@ -3348,9 +3348,7 @@ for i in range(0, len(region_list)):
     ].sum()
 
     if region_list[i] in ["World "]:
-        """
-        em_mit_mar = em_mitigated.loc[region_list[i], "Mariculture"].squeeze()
-        """
+
         em_mit_cdr = (
             cdr.loc[region_list[i], "Carbon Dioxide Removal", scenario, :]
             .squeeze()
