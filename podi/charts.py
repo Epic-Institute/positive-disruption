@@ -4659,17 +4659,14 @@ for year in [2030, 2050]:
                 ]
             )
 
-        # IPCC & NDC target lines
-        if (
-            region_list[i]
-            in [
-                "SAFR ",
-                "RUS ",
-                "JPN ",
-                "BRAZIL ",
-                "INDIA ",
-            ]
-        ) & (year == 2030):
+        # IPCC & NDC target lines & (year == 2030)
+        if region_list[i] in [
+            "SAFR ",
+            "RUS ",
+            "JPN ",
+            "BRAZIL ",
+            "INDIA ",
+        ]:
             figure.add_shape(
                 type="line",
                 x0=(
@@ -4731,18 +4728,16 @@ for year in [2030, 2050]:
             "INDIA ",
         ]:
 
-            if (
-                region_list[i]
-                in [
-                    "US ",
-                    "CHINA ",
-                    "SAFR ",
-                    "RUS ",
-                    "JPN ",
-                    "BRAZIL ",
-                    "INDIA ",
-                ]
-            ) & (year == 2030):
+            #  & (year == 2030)
+            if region_list[i] in [
+                "US ",
+                "CHINA ",
+                "SAFR ",
+                "RUS ",
+                "JPN ",
+                "BRAZIL ",
+                "INDIA ",
+            ]:
                 ei = (
                     em_mit.loc[
                         [
@@ -4869,7 +4864,7 @@ for year in [2030, 2050]:
                 bordercolor="rgba(255, 255, 255, 0)",
             ),
             showlegend=False,
-            margin_b=100,
+            margin_b=120,
         )
 
         if show_figs is True:
