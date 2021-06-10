@@ -830,6 +830,191 @@ for i in range(0, len(region_list)):
 
 # endregion
 
+#############################
+# ADOPTION CURVES BY REGION #
+#############################
+
+# region
+
+scenario = scenario
+start_year = start_year
+i = 0
+
+data = []
+sector = "Regenerative Agriculture"
+
+for i in range(0, len(region_list)):
+
+    fig = (
+        adoption_curves.loc[region_list[i], sector, scenario].loc[:, start_year:] * 100
+    )
+
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
+
+    data = pd.DataFrame(data).append(fig2)
+
+fig2 = data
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == sector)]["Year"],
+        y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == sector)]["% Adoption"],
+        fill="none",
+        stackgroup="one",
+        legendgroup="Electricity",
+        showlegend=False,
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="V1: Electricity",
+        line=dict(width=3, color="#B279A2", dash="dot"),
+        x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == sector)]["Year"],
+        y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == sector)]["% Adoption"],
+        fill="none",
+        stackgroup="eight",
+        legendgroup="Electricity",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Percent of Total PD Adoption, " + scenario.title() + ", " + sector,
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "% Adoption"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
+    margin_b=100,
+)
+
+fig.add_annotation(
+    text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture, Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available; <br><b>CDR</b>: percent of total mitigation needed to meet net emissions targets.",
+    xref="paper",
+    yref="paper",
+    x=-0.12,
+    y=-0.36,
+    showarrow=False,
+    font=dict(size=10, color="#2E3F5C"),
+    align="left",
+    borderpad=4,
+    bgcolor="#ffffff",
+    opacity=1,
+)
+
+if show_figs is True:
+    fig.show()
+
+# endregion
+
+###############################################
+# ADOPTION CURVES BY REGION SNAPSHOT BARCHART #
+###############################################
+
+# region
+
+scenario = scenario
+start_year = start_year
+i = 0
+
+data = []
+sector = "Regenerative Agriculture"
+
+for i in range(0, len(region_list)):
+
+    fig = (
+        adoption_curves.loc[region_list[i], sector, scenario].loc[:, start_year:] * 100
+    )
+
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
+
+    data = pd.DataFrame(data).append(fig2)
+
+
+figure = go.Figure(
+    data=[
+        go.Bar(
+            name="V6: Forests & Wetlands",
+            x=data["labels"],
+            y=data["V6: Forests & Wetlands"],
+            offsetgroup=0,
+            orientation="v",
+            marker_color="#54A24B",
+            opacity=0.5,
+        ),
+        go.Bar(
+            name="V5: Agriculture",
+            x=data["labels"],
+            y=data["V5: Agriculture"],
+            offsetgroup=0,
+            orientation="v",
+            marker_color="#EECA3B",
+            opacity=0.5,
+        ),
+    ]
+)
+
+figure.add_trace(
+    go.Scatter(
+        mode="markers",
+        name="Emissions gap, after energy sector mitigation",
+        x=data["labels"],
+        y=data["spacer"],
+        fill="none",
+    )
+)
+
+figure.add_trace(
+    go.Scatter(
+        mode="markers",
+        opacity=0,
+        name="Emissions gap, after energy sector mitigation",
+        x=data["labels"],
+        y=-data["spacer"],
+        fill="none",
+        showlegend=False,
+    )
+)
+
+figure.update_layout(
+    title="Vector Adoption in " + str(year),
+    title_x=0.5,
+    title_y=0.99,
+    yaxis={"title": "GtCO2e"},
+    barmode="stack",
+    showlegend=True,
+    legend=dict(
+        orientation="h",
+        x=0.2,
+        y=1.25,
+        bgcolor="rgba(255, 255, 255, 0)",
+        bordercolor="rgba(255, 255, 255, 0)",
+    ),
+    xaxis={"categoryorder": "total descending"},
+)
+
+figure.update_yaxes(range=[0, 35])
+
+if show_figs is True:
+    figure.show()
+
+# endregion
+
 #######################################
 # SUBVECTOR ADOPTION CURVES UNSTACKED #
 #######################################
@@ -986,7 +1171,6 @@ for i in range(0, len(region_list)):
             )
 
 # endregion
-
 
 #################################################
 # AFOLU SUBVECTOR ADOPTION CURVES AS MAX EXTENT #
