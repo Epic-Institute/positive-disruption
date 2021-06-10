@@ -5131,7 +5131,7 @@ results = (
     .droplevel(["UNIT"])
 )
 results.columns = results.columns.astype(int)
-
+"""
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -5141,7 +5141,7 @@ results19 = curve_smooth(
     "quadratic",
     3,
 )
-
+"""
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -5732,7 +5732,7 @@ F = (
     .droplevel(["UNIT"])
 )
 F.columns = F.columns.astype(int)
-
+"""
 F19 = curve_smooth(
     pd.DataFrame(
         F.loc[
@@ -5748,13 +5748,14 @@ F19 = curve_smooth(
 
 """
 F19 = pd.DataFrame(
-        F.loc[
-            "GCAM4",
-            "SSP2-19",
-            "World",
-            ["Diagnostics|MAGICC6|Forcing"],
-        ].loc[:, 2010:])
-"""
+    F.loc[
+        "GCAM4",
+        "SSP2-19",
+        "World",
+        ["Diagnostics|MAGICC6|Forcing"],
+    ].loc[:, 2010:]
+)
+
 
 # CO2
 em_b.loc[225:335, 1] = (
@@ -6040,7 +6041,7 @@ T = (
     .droplevel(["UNIT"])
 )
 T.columns = T.columns.astype(int)
-
+"""
 T19 = curve_smooth(
     pd.DataFrame(
         T.loc[
@@ -6056,12 +6057,12 @@ T19 = curve_smooth(
 
 """
 T19 = T.loc[
-            "GCAM4",
-            "SSP1-19",
-            "World",
-            ["Diagnostics|MAGICC6|Temperature|Global Mean"],
-        ].loc[:, 2010:]
-"""
+    "GCAM4",
+    "SSP1-19",
+    "World",
+    ["Diagnostics|MAGICC6|Temperature|Global Mean"],
+].loc[:, 2010:]
+
 
 # CO2
 em_b.loc[225:335, 1] = (
@@ -10888,7 +10889,7 @@ for i in range(0, len(region_list)):
 # region
 
 ##########################
-# DAU-FW ADOPTION CURVES #
+# DAU-RAFW ADOPTION CURVES #
 ##########################
 
 # region
