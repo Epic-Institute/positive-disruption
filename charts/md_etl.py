@@ -761,7 +761,7 @@ for scen in ["daulp", "dauwe", "daura", "daufw", "daurafw"]:
                         + "-"
                         + (region_list[i]).replace(" ", "")
                         + "-"
-                        + "daualt"
+                        + scen
                         + '.html"'
                     )
 

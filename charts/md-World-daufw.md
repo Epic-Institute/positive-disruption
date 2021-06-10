@@ -17,7 +17,7 @@
   
 
 ## Climate
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "co2conc-World-daualt.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "ghgconc-World-daualt.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "forcing-World-daualt.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "temp-World-daualt.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "co2conc-World-daufw.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "ghgconc-World-daufw.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "forcing-World-daufw.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "temp-World-daufw.html" height='500' width='150%'></iframe>  
