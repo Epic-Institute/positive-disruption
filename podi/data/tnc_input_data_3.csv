@@ -368,27 +368,27 @@ ALB,Coastal Restoration,Max extent,PD21,pathway,EEU,Albania,Mha,0,NA,NA,NA,NA,10
 DZA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Algeria,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 DZA,Coastal Restoration,Max extent,PD21,pathway,NAF,Algeria,Mha,NA,NA,NA,NA,NA,NA
 AGO,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Angola,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-AGO,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Angola,Mha,0.0551,NA,NA,NA,NA,100
+AGO,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Angola,Mha,0.0382,NA,NA,NA,NA,100
 ARG,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Argentina,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 ARG,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Argentina,Mha,0,NA,NA,NA,NA,100
 ARM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Armenia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 ARM,Coastal Restoration,Max extent,PD21,pathway,CAS,Armenia,Mha,0,NA,NA,NA,NA,100
 AUS,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,ANUZ,Australia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-AUS,Coastal Restoration,Max extent,PD21,pathway,ANUZ,Australia,Mha,1.5269,NA,NA,NA,NA,100
+AUS,Coastal Restoration,Max extent,PD21,pathway,ANUZ,Australia,Mha,1.0528,NA,NA,NA,NA,100
 AUT,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Austria,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 AUT,Coastal Restoration,Max extent,PD21,pathway,EU15,Austria,Mha,0,NA,NA,NA,NA,100
 AZE,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Azerbaijan,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 AZE,Coastal Restoration,Max extent,PD21,pathway,CAS,Azerbaijan,Mha,0,NA,NA,NA,NA,100
 BHS,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Bahamas,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-BHS,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Bahamas,Mha,0.1515,NA,NA,NA,NA,100
+BHS,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Bahamas,Mha,0.1028,NA,NA,NA,NA,100
 BGD,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Bangladesh,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-BGD,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Bangladesh,Mha,0.6274,NA,NA,NA,NA,100
+BGD,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Bangladesh,Mha,0.4291,NA,NA,NA,NA,100
 BLR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EEU-FSU,Belarus,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 BLR,Coastal Restoration,Max extent,PD21,pathway,EEU-FSU,Belarus,Mha,0,NA,NA,NA,NA,100
 BEL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Belgium,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 BEL,Coastal Restoration,Max extent,PD21,pathway,EU15,Belgium,Mha,0,NA,NA,NA,NA,100
 BLZ,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Belize,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-BLZ,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Belize,Mha,0.0711,NA,NA,NA,NA,100
+BLZ,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Belize,Mha,0.0566,NA,NA,NA,NA,100
 BEN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Benin,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
 BEN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Benin,Mha,0.0002,NA,NA,NA,NA,100
 BTN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Bhutan,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -400,9 +400,9 @@ BIH,Coastal Restoration,Max extent,PD21,pathway,EEU,Bosnia and Herzegovina,Mha,0
 BWA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Botswana,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 BWA,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Botswana,Mha,0,NA,NA,NA,NA,100
 BRA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,BRA,Brazil,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-BRA,Coastal Restoration,Max extent,PD21,pathway,BRA,Brazil,Mha,1.6928,NA,NA,NA,NA,100
+BRA,Coastal Restoration,Max extent,PD21,pathway,BRA,Brazil,Mha,1.1747,NA,NA,NA,NA,100
 BRN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Brunei Darussalam,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-BRN,Coastal Restoration,Max extent,PD21,pathway,OAS-M,Brunei Darussalam,Mha,0.0166,NA,NA,NA,NA,100
+BRN,Coastal Restoration,Max extent,PD21,pathway,OAS-M,Brunei Darussalam,Mha,0.0143,NA,NA,NA,NA,100
 BGR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Bulgaria,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 BGR,Coastal Restoration,Max extent,PD21,pathway,EU12-M,Bulgaria,Mha,0,NA,NA,NA,NA,100
 BFA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Burkina Faso,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -410,9 +410,9 @@ BFA,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Burkina Faso,Mha,0,NA,NA,N
 BDI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Burundi,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 BDI,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Burundi,Mha,0,NA,NA,NA,NA,100
 KHM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Cambodia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-KHM,Coastal Restoration,Max extent,PD21,pathway,OAS-CPA,Cambodia,Mha,0.0915,NA,NA,NA,NA,100
+KHM,Coastal Restoration,Max extent,PD21,pathway,OAS-CPA,Cambodia,Mha,0.0644,NA,NA,NA,NA,100
 CMR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Cameroon,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-CMR,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Cameroon,Mha,0.2877,NA,NA,NA,NA,100
+CMR,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Cameroon,Mha,0.1931,NA,NA,NA,NA,100
 CAN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CAN,Canada,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 CAN,Coastal Restoration,Max extent,PD21,pathway,CAN,Canada,Mha,0,NA,NA,NA,NA,100
 CPV,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Cape Verde,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -424,19 +424,19 @@ TCD,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Chad,Mha,0,NA,NA,NA,NA,100
 CHL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Chile,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 CHL,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Chile,Mha,0,NA,NA,NA,NA,100
 CHN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CHN,China,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-CHN,Coastal Restoration,Max extent,PD21,pathway,CHN,China,Mha,0.0241,NA,NA,NA,NA,100
+CHN,Coastal Restoration,Max extent,PD21,pathway,CHN,China,Mha,0.0221,NA,NA,NA,NA,100
 COL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Colombia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-COL,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Colombia,Mha,0.3519,NA,NA,NA,NA,100
+COL,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Colombia,Mha,0.2369,NA,NA,NA,NA,100
 COM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Comoros,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-COM,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Comoros,Mha,0.0002,NA,NA,NA,NA,100
+COM,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Comoros,Mha,0.0006,NA,NA,NA,NA,100
 CRI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Costa Rica,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-CRI,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Costa Rica,Mha,0.056,NA,NA,NA,NA,100
+CRI,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Costa Rica,Mha,0.0383,NA,NA,NA,NA,100
 CIV,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Cote d'Ivoire,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-CIV,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Cote d'Ivoire,Mha,0.0095,NA,NA,NA,NA,100
+CIV,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Cote d'Ivoire,Mha,0.0066,NA,NA,NA,NA,100
 HRV,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EEU,Croatia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 HRV,Coastal Restoration,Max extent,PD21,pathway,EEU,Croatia,Mha,0,NA,NA,NA,NA,100
 CUB,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Cuba,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-CUB,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Cuba,Mha,0.5102,NA,NA,NA,NA,100
+CUB,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Cuba,Mha,0.3485,NA,NA,NA,NA,100
 CYP,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Cyprus,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 CYP,Coastal Restoration,Max extent,PD21,pathway,EU12-H,Cyprus,Mha,0,NA,NA,NA,NA,100
 CZE,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Czech Republic,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -444,23 +444,23 @@ CZE,Coastal Restoration,Max extent,PD21,pathway,EU12-H,Czech Republic,Mha,0,NA,N
 PRK,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Democratic People's Republic of Korea (North Korea),tCO2e/ha/yr,0,NA,NA,NA,NA,100
 PRK,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Democratic People's Republic of Korea (North Korea),Mha,0,NA,NA,NA,NA,100
 COD,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-COD,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),Mha,0.0404,NA,NA,NA,NA,100
+COD,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),Mha,0.2957,NA,NA,NA,NA,100
 DNK,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Denmark (except Greenland),tCO2e/ha/yr,0,NA,NA,NA,NA,100
 DNK,Coastal Restoration,Max extent,PD21,pathway,EU15,Denmark (except Greenland),Mha,0,NA,NA,NA,NA,100
 DJI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Djibouti,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-DJI,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Djibouti,Mha,0.0008,NA,NA,NA,NA,100
+DJI,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Djibouti,Mha,0.0005,NA,NA,NA,NA,100
 DOM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Dominican Republic,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-DOM,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Dominican Republic,Mha,0.0284,NA,NA,NA,NA,100
+DOM,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Dominican Republic,Mha,0.1928,NA,NA,NA,NA,100
 ECU,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Ecuador,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-ECU,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Ecuador,Mha,0.2118,NA,NA,NA,NA,100
+ECU,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Ecuador,Mha,0.1422,NA,NA,NA,NA,100
 EGY,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Egypt,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-EGY,Coastal Restoration,Max extent,PD21,pathway,NAF,Egypt,Mha,0.0003,NA,NA,NA,NA,100
+EGY,Coastal Restoration,Max extent,PD21,pathway,NAF,Egypt,Mha,0.0014,NA,NA,NA,NA,100
 SLV,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,El Salvador,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-SLV,Coastal Restoration,Max extent,PD21,pathway,LAM-M,El Salvador,Mha,0.0573,NA,NA,NA,NA,100
+SLV,Coastal Restoration,Max extent,PD21,pathway,LAM-M,El Salvador,Mha,0.0389,NA,NA,NA,NA,100
 GNQ,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Equatorial Guinea,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GNQ,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Equatorial Guinea,Mha,0.0379,NA,NA,NA,NA,100
+GNQ,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Equatorial Guinea,Mha,0.0257,NA,NA,NA,NA,100
 ERI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Eritrea,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-ERI,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Eritrea,Mha,0.0106,NA,NA,NA,NA,100
+ERI,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Eritrea,Mha,0.0072,NA,NA,NA,NA,100
 EST,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Estonia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 EST,Coastal Restoration,Max extent,PD21,pathway,EU12-H,Estonia,Mha,0,NA,NA,NA,NA,100
 ETH,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Ethiopia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -470,53 +470,53 @@ FLK,Coastal Restoration,Max extent,PD21,pathway,NA,Falkland Islands,Mha,0,NA,NA,
 FRO,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,NA,Faroe Islands,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 FRO,Coastal Restoration,Max extent,PD21,pathway,NA,Faroe Islands,Mha,0,NA,NA,NA,NA,100
 FJI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Fiji,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-FJI,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Fiji,Mha,0.0763,NA,NA,NA,NA,100
+FJI,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Fiji,Mha,0.0557,NA,NA,NA,NA,100
 FIN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Finland,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 FIN,Coastal Restoration,Max extent,PD21,pathway,EU15,Finland,Mha,0,NA,NA,NA,NA,100
 FRA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,France (except French Guiana),tCO2e/ha/yr,0,NA,NA,NA,NA,100
 FRA,Coastal Restoration,Max extent,PD21,pathway,EU15,France (except French Guiana),Mha,0,NA,NA,NA,NA,100
 GUF,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,French Guiana (France),tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GUF,Coastal Restoration,Max extent,PD21,pathway,LAM-M,French Guiana (France),Mha,0.0797,NA,NA,NA,NA,100
+GUF,Coastal Restoration,Max extent,PD21,pathway,LAM-M,French Guiana (France),Mha,0.0564,NA,NA,NA,NA,100
 PYF,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,French Polynesia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 PYF,Coastal Restoration,Max extent,PD21,pathway,OAS-M,French Polynesia,Mha,0,NA,NA,NA,NA,100
 GAB,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Gabon,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GAB,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Gabon,Mha,0.2675,NA,NA,NA,NA,100
+GAB,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Gabon,Mha,0.1796,NA,NA,NA,NA,100
 GMB,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,"Gambia, The",tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GMB,Coastal Restoration,Max extent,PD21,pathway,SSA-L,"Gambia, The",Mha,0.093,NA,NA,NA,NA,100
+GMB,Coastal Restoration,Max extent,PD21,pathway,SSA-L,"Gambia, The",Mha,0.0626,NA,NA,NA,NA,100
 GEO,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Georgia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 GEO,Coastal Restoration,Max extent,PD21,pathway,CAS,Georgia,Mha,0,NA,NA,NA,NA,100
 DEU,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Germany,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 DEU,Coastal Restoration,Max extent,PD21,pathway,EU15,Germany,Mha,0,NA,NA,NA,NA,100
 GHA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Ghana,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GHA,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Ghana,Mha,0.031,NA,NA,NA,NA,100
+GHA,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Ghana,Mha,0.0208,NA,NA,NA,NA,100
 GRC,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Greece,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 GRC,Coastal Restoration,Max extent,PD21,pathway,EU15,Greece,Mha,0,NA,NA,NA,NA,100
 GRL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Greenland (Denmark),tCO2e/ha/yr,0,NA,NA,NA,NA,100
 GRL,Coastal Restoration,Max extent,PD21,pathway,EU15,Greenland (Denmark),Mha,0,NA,NA,NA,NA,100
 GLP,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Guadeloupe,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GLP,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Guadeloupe,Mha,0.0056,NA,NA,NA,NA,100
+GLP,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Guadeloupe,Mha,0.0053,NA,NA,NA,NA,100
 GTM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Guatemala,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GTM,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Guatemala,Mha,0.0367,NA,NA,NA,NA,100
+GTM,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Guatemala,Mha,0.0277,NA,NA,NA,NA,100
 GIN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Guinea,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GIN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Guinea,Mha,0.3417,NA,NA,NA,NA,100
+GIN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Guinea,Mha,0.2313,NA,NA,NA,NA,100
 GNB,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Guinea-Bissau,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GNB,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Guinea-Bissau,Mha,0.3922,NA,NA,NA,NA,100
+GNB,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Guinea-Bissau,Mha,0.2645,NA,NA,NA,NA,100
 GUY,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Guyana,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-GUY,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Guyana,Mha,0.0454,NA,NA,NA,NA,100
+GUY,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Guyana,Mha,0.0313,NA,NA,NA,NA,100
 HTI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Haiti,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-HTI,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Haiti,Mha,0.0223,NA,NA,NA,NA,100
+HTI,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Haiti,Mha,0.0185,NA,NA,NA,NA,100
 HND,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Honduras,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-HND,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Honduras,Mha,0.0947,NA,NA,NA,NA,100
+HND,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Honduras,Mha,0.0776,NA,NA,NA,NA,100
 HUN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Hungary,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 HUN,Coastal Restoration,Max extent,PD21,pathway,EU12-H,Hungary,Mha,0,NA,NA,NA,NA,100
 ISL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EFTA,Iceland,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 ISL,Coastal Restoration,Max extent,PD21,pathway,EFTA,Iceland,Mha,0,NA,NA,NA,NA,100
 IND,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,IND,India,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-IND,Coastal Restoration,Max extent,PD21,pathway,IND,India,Mha,0.546,NA,NA,NA,NA,100
+IND,Coastal Restoration,Max extent,PD21,pathway,IND,India,Mha,0.4443,NA,NA,NA,NA,100
 IDN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,IDN,Indonesia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-IDN,Coastal Restoration,Max extent,PD21,pathway,IDN,Indonesia,Mha,4.1053,NA,NA,NA,NA,100
+IDN,Coastal Restoration,Max extent,PD21,pathway,IDN,Indonesia,Mha,2.7694,NA,NA,NA,NA,100
 IRN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Iran,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-IRN,Coastal Restoration,Max extent,PD21,pathway,MEA-M,Iran,Mha,0.0121,NA,NA,NA,NA,100
+IRN,Coastal Restoration,Max extent,PD21,pathway,MEA-M,Iran,Mha,0.0084,NA,NA,NA,NA,100
 IRQ,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Iraq,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 IRQ,Coastal Restoration,Max extent,PD21,pathway,MEA-M,Iraq,Mha,0,NA,NA,NA,NA,100
 IRL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Ireland,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -526,15 +526,15 @@ ISR,Coastal Restoration,Max extent,PD21,pathway,MEA-H,Israel,Mha,0,NA,NA,NA,NA,1
 ITA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Italy,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 ITA,Coastal Restoration,Max extent,PD21,pathway,EU15,Italy,Mha,0,NA,NA,NA,NA,100
 JAM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Jamaica,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-JAM,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Jamaica,Mha,0.0144,NA,NA,NA,NA,100
+JAM,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Jamaica,Mha,0.0097,NA,NA,NA,NA,100
 JPN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,JPN,Japan,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-JPN,Coastal Restoration,Max extent,PD21,pathway,JPN,Japan,Mha,0.0015,NA,NA,NA,NA,100
+JPN,Coastal Restoration,Max extent,PD21,pathway,JPN,Japan,Mha,0.0038,NA,NA,NA,NA,100
 JOR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Jordan,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 JOR,Coastal Restoration,Max extent,PD21,pathway,MEA-M,Jordan,Mha,0,NA,NA,NA,NA,100
 KAZ,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Kazakhstan,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 KAZ,Coastal Restoration,Max extent,PD21,pathway,CAS,Kazakhstan,Mha,0,NA,NA,NA,NA,100
 KEN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Kenya,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-KEN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Kenya,Mha,0.0835,NA,NA,NA,NA,100
+KEN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Kenya,Mha,0.0569,NA,NA,NA,NA,100
 KWT,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Kuwait,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 KWT,Coastal Restoration,Max extent,PD21,pathway,MEA-H,Kuwait,Mha,0,NA,NA,NA,NA,100
 KGZ,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Kyrgyzstan,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -548,7 +548,7 @@ LBN,Coastal Restoration,Max extent,PD21,pathway,MEA-M,Lebanon,Mha,0,NA,NA,NA,NA,
 LSO,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Lesotho,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 LSO,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Lesotho,Mha,0,NA,NA,NA,NA,100
 LBR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Liberia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-LBR,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Liberia,Mha,0.0289,NA,NA,NA,NA,100
+LBR,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Liberia,Mha,0.0273,NA,NA,NA,NA,100
 LBY,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Libya,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 LBY,Coastal Restoration,Max extent,PD21,pathway,NAF,Libya,Mha,0,NA,NA,NA,NA,100
 LTU,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Lithuania,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -558,21 +558,21 @@ LUX,Coastal Restoration,Max extent,PD21,pathway,EU15,Luxembourg,Mha,0,NA,NA,NA,N
 MKD,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EEU,Macedonia (The Former Yugoslav Republic of Macedonia),tCO2e/ha/yr,0,NA,NA,NA,NA,100
 MKD,Coastal Restoration,Max extent,PD21,pathway,EEU,Macedonia (The Former Yugoslav Republic of Macedonia),Mha,0,NA,NA,NA,NA,100
 MDG,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Madagascar,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-MDG,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Madagascar,Mha,0.3983,NA,NA,NA,NA,100
+MDG,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Madagascar,Mha,0.2803,NA,NA,NA,NA,100
 MWI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Malawi,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 MWI,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Malawi,Mha,0,NA,NA,NA,NA,100
 MYS,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Malaysia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-MYS,Coastal Restoration,Max extent,PD21,pathway,OAS-M,Malaysia,Mha,0.7939,NA,NA,NA,NA,100
+MYS,Coastal Restoration,Max extent,PD21,pathway,OAS-M,Malaysia,Mha,0.5356,NA,NA,NA,NA,100
 MLI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mali,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 MLI,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Mali,Mha,0,NA,NA,NA,NA,100
 MTQ,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Martinique,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-MTQ,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Martinique,Mha,0.0025,NA,NA,NA,NA,100
+MTQ,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Martinique,Mha,0.0017,NA,NA,NA,NA,100
 MRT,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mauritania,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 MRT,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Mauritania,Mha,0,NA,NA,NA,NA,100
 MUS,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Mauritius,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-MUS,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Mauritius,Mha,0.0011,NA,NA,NA,NA,100
+MUS,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Mauritius,Mha,0.0007,NA,NA,NA,NA,100
 MEX,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEX,Mexico,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-MEX,Coastal Restoration,Max extent,PD21,pathway,MEX,Mexico,Mha,1.4857,NA,NA,NA,NA,100
+MEX,Coastal Restoration,Max extent,PD21,pathway,MEX,Mexico,Mha,1.0112,NA,NA,NA,NA,100
 MDA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EEU-FSA,Moldova,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 MDA,Coastal Restoration,Max extent,PD21,pathway,EEU-FSA,Moldova,Mha,0,NA,NA,NA,NA,100
 MNG,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Mongolia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -582,9 +582,9 @@ MNE,Coastal Restoration,Max extent,PD21,pathway,EEU,Montenegro,Mha,0,NA,NA,NA,NA
 MAR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Morocco,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 MAR,Coastal Restoration,Max extent,PD21,pathway,NAF,Morocco,Mha,0,NA,NA,NA,NA,100
 MOZ,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mozambique,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-MOZ,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Mozambique,Mha,0.4692,NA,NA,NA,NA,100
+MOZ,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Mozambique,Mha,0.3475,NA,NA,NA,NA,100
 MMR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Myanmar,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-MMR,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Myanmar,Mha,0.7786,NA,NA,NA,NA,100
+MMR,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Myanmar,Mha,0.5294,NA,NA,NA,NA,100
 NAM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Namibia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 NAM,Coastal Restoration,Max extent,PD21,pathway,SSA-M,Namibia,Mha,0,NA,NA,NA,NA,100
 NPL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Nepal,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -592,39 +592,39 @@ NPL,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Nepal,Mha,0,NA,NA,NA,NA,10
 NLD,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Netherlands,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 NLD,Coastal Restoration,Max extent,PD21,pathway,EU15,Netherlands,Mha,0,NA,NA,NA,NA,100
 NCL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,New Caledonia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-NCL,Coastal Restoration,Max extent,PD21,pathway,OAS-M,New Caledonia,Mha,0.0442,NA,NA,NA,NA,100
+NCL,Coastal Restoration,Max extent,PD21,pathway,OAS-M,New Caledonia,Mha,0.0328,NA,NA,NA,NA,100
 NZL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,ANUZ,New Zealand,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 NZL,Coastal Restoration,Max extent,PD21,pathway,ANUZ,New Zealand,Mha,0,NA,NA,NA,NA,100
 NIC,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Nicaragua,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-NIC,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Nicaragua,Mha,0.1159,NA,NA,NA,NA,100
+NIC,Coastal Restoration,Max extent,PD21,pathway,LAM-L,Nicaragua,Mha,0.0828,NA,NA,NA,NA,100
 NER,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Niger,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 NER,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Niger,Mha,0,NA,NA,NA,NA,100
 NGA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Nigeria,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-NGA,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Nigeria,Mha,1.0459,NA,NA,NA,NA,100
+NGA,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Nigeria,Mha,0.6997,NA,NA,NA,NA,100
 NOR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EFTA,Norway,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 NOR,Coastal Restoration,Max extent,PD21,pathway,EFTA,Norway,Mha,0,NA,NA,NA,NA,100
 OMN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Oman,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-OMN,Coastal Restoration,Max extent,PD21,pathway,MEA-H,Oman,Mha,0.0002,NA,NA,NA,NA,100
+OMN,Coastal Restoration,Max extent,PD21,pathway,MEA-H,Oman,Mha,0.0021,NA,NA,NA,NA,100
 PAK,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,PAK,Pakistan,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-PAK,Coastal Restoration,Max extent,PD21,pathway,PAK,Pakistan,Mha,0.1003,NA,NA,NA,NA,100
+PAK,Coastal Restoration,Max extent,PD21,pathway,PAK,Pakistan,Mha,0.0678,NA,NA,NA,NA,100
 PAN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Panama,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-PAN,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Panama,Mha,0.2335,NA,NA,NA,NA,100
+PAN,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Panama,Mha,0.1636,NA,NA,NA,NA,100
 PNG,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Papua New Guinea,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-PNG,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Papua New Guinea,Mha,0.7199,NA,NA,NA,NA,100
+PNG,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Papua New Guinea,Mha,0.4839,NA,NA,NA,NA,100
 PRY,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Paraguay,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 PRY,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Paraguay,Mha,0,NA,NA,NA,NA,100
 PER,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Peru,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-PER,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Peru,Mha,0.005,NA,NA,NA,NA,100
+PER,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Peru,Mha,0.0108,NA,NA,NA,NA,100
 PHL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Philippines,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-PHL,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Philippines,Mha,0.3988,NA,NA,NA,NA,100
+PHL,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Philippines,Mha,0.2671,NA,NA,NA,NA,100
 POL,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Poland,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 POL,Coastal Restoration,Max extent,PD21,pathway,EU12-H,Poland,Mha,0,NA,NA,NA,NA,100
 PRT,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Portugal,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 PRT,Coastal Restoration,Max extent,PD21,pathway,EU15,Portugal,Mha,0,NA,NA,NA,NA,100
 PRI,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,USA,Puerto Rico,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-PRI,Coastal Restoration,Max extent,PD21,pathway,USA,Puerto Rico,Mha,0.0134,NA,NA,NA,NA,100
+PRI,Coastal Restoration,Max extent,PD21,pathway,USA,Puerto Rico,Mha,0.009,NA,NA,NA,NA,100
 QAT,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Qatar,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-QAT,Coastal Restoration,Max extent,PD21,pathway,MEA-H,Qatar,Mha,0.0007,NA,NA,NA,NA,100
+QAT,Coastal Restoration,Max extent,PD21,pathway,MEA-H,Qatar,Mha,0.0005,NA,NA,NA,NA,100
 COG,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Republic of Congo (ROC),tCO2e/ha/yr,0,NA,NA,NA,NA,100
 COG,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Republic of Congo (ROC),Mha,0,NA,NA,NA,NA,100
 KOR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,ANUZ,Republic of Korea (South Korea),tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -642,33 +642,33 @@ WSM,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Samoa,Mha,0.0005,NA,NA,NA,
 STP,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Sao Tome and Principe,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 STP,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Sao Tome and Principe,Mha,0,NA,NA,NA,NA,100
 SAU,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Saudi Arabia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-SAU,Coastal Restoration,Max extent,PD21,pathway,MEA-H,Saudi Arabia,Mha,0.0108,NA,NA,NA,NA,100
+SAU,Coastal Restoration,Max extent,PD21,pathway,MEA-H,Saudi Arabia,Mha,0.0089,NA,NA,NA,NA,100
 SEN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Senegal,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-SEN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Senegal,Mha,0.1977,NA,NA,NA,NA,100
+SEN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Senegal,Mha,0.1335,NA,NA,NA,NA,100
 SRB,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EEU,Serbia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 SRB,Coastal Restoration,Max extent,PD21,pathway,EEU,Serbia,Mha,0,NA,NA,NA,NA,100
 SLE,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Sierra Leone,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-SLE,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Sierra Leone,Mha,0.1914,NA,NA,NA,NA,100
+SLE,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Sierra Leone,Mha,0.1279,NA,NA,NA,NA,100
 SVK,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Slovakia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 SVK,Coastal Restoration,Max extent,PD21,pathway,EU12-H,Slovakia,Mha,0,NA,NA,NA,NA,100
 SVN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Slovenia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 SVN,Coastal Restoration,Max extent,PD21,pathway,EU12-H,Slovenia,Mha,0,NA,NA,NA,NA,100
 SLB,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Solomon Islands,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-SLB,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Solomon Islands,Mha,0.079,NA,NA,NA,NA,100
+SLB,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Solomon Islands,Mha,0.0529,NA,NA,NA,NA,100
 SOM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Somalia,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-SOM,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Somalia,Mha,0.0032,NA,NA,NA,NA,100
+SOM,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Somalia,Mha,0.0022,NA,NA,NA,NA,100
 ZAF,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SAF,South Africa,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-ZAF,Coastal Restoration,Max extent,PD21,pathway,SAF,South Africa,Mha,0.0041,NA,NA,NA,NA,100
+ZAF,Coastal Restoration,Max extent,PD21,pathway,SAF,South Africa,Mha,0.0039,NA,NA,NA,NA,100
 SSD,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,South Sudan,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 SSD,Coastal Restoration,Max extent,PD21,pathway,SSA-L,South Sudan,Mha,0,NA,NA,NA,NA,100
 ESP,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Spain,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 ESP,Coastal Restoration,Max extent,PD21,pathway,EU21,Spain,Mha,0,NA,NA,NA,NA,100
 LKA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Sri Lanka,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-LKA,Coastal Restoration,Max extent,PD21,pathway,OAS-M,Sri Lanka,Mha,0.0315,NA,NA,NA,NA,100
+LKA,Coastal Restoration,Max extent,PD21,pathway,OAS-M,Sri Lanka,Mha,0.0215,NA,NA,NA,NA,100
 SDN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Sudan,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-SDN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Sudan,Mha,0.0005,NA,NA,NA,NA,100
+SDN,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Sudan,Mha,0.005,NA,NA,NA,NA,100
 SUR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Suriname,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-SUR,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Suriname,Mha,0.1223,NA,NA,NA,NA,100
+SUR,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Suriname,Mha,0.0835,NA,NA,NA,NA,100
 SWZ,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Swaziland,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 SWZ,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Swaziland,Mha,0,NA,NA,NA,NA,100
 SWE,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Sweden,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -680,15 +680,15 @@ SYR,Coastal Restoration,Max extent,PD21,pathway,MEA-M,Syria,Mha,0,NA,NA,NA,NA,10
 TJK,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Tajikistan,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 TJK,Coastal Restoration,Max extent,PD21,pathway,CAS,Tajikistan,Mha,0,NA,NA,NA,NA,100
 TZA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Tanzania,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-TZA,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Tanzania,Mha,0.1728,NA,NA,NA,NA,100
+TZA,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Tanzania,Mha,0.1335,NA,NA,NA,NA,100
 THA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Thailand,tCO2e/ha/yr,0,NA,NA,NA,NA,100
-THA,Coastal Restoration,Max extent,PD21,pathway,OAS-M,Thailand,Mha,0.353,NA,NA,NA,NA,100
+THA,Coastal Restoration,Max extent,PD21,pathway,OAS-M,Thailand,Mha,0.242,NA,NA,NA,NA,100
 TLS,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Timor-Leste,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-TLS,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Timor-Leste,Mha,0.0014,NA,NA,NA,NA,100
+TLS,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Timor-Leste,Mha,0.0009,NA,NA,NA,NA,100
 TGO,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Togo,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 TGO,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Togo,Mha,0,NA,NA,NA,NA,100
 TTO,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Trinidad and Tobago,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-TTO,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Trinidad and Tobago,Mha,0.0086,NA,NA,NA,NA,100
+TTO,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Trinidad and Tobago,Mha,0.006,NA,NA,NA,NA,100
 TUN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Tunisia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 TUN,Coastal Restoration,Max extent,PD21,pathway,TUR,Tunisia,Mha,0,NA,NA,NA,NA,100
 TUR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,TUR,Turkey,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -700,25 +700,25 @@ UGA,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Uganda,Mha,0,NA,NA,NA,NA,1
 UKR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EEU-FSU,Ukraine,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 UKR,Coastal Restoration,Max extent,PD21,pathway,EEU-FSU,Ukraine,Mha,0,NA,NA,NA,NA,100
 ARE,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,United Arab Emirates,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-ARE,Coastal Restoration,Max extent,PD21,pathway,MEA-H,United Arab Emirates,Mha,0.0123,NA,NA,NA,NA,100
+ARE,Coastal Restoration,Max extent,PD21,pathway,MEA-H,United Arab Emirates,Mha,0.0156,NA,NA,NA,NA,100
 GBR,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,EU15,United Kingdom,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 GBR,Coastal Restoration,Max extent,PD21,pathway,EU15,United Kingdom,Mha,0,NA,NA,NA,NA,100
 USA,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,USA,United States,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-USA,Coastal Restoration,Max extent,PD21,pathway,USA,United States,Mha,0.3018,NA,NA,NA,NA,100
+USA,Coastal Restoration,Max extent,PD21,pathway,USA,United States,Mha,0.2052,NA,NA,NA,NA,100
 URY,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Uruguay,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 URY,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Uruguay,Mha,0,NA,NA,NA,NA,100
 UZB,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Uzbekistan,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 UZB,Coastal Restoration,Max extent,PD21,pathway,CAS,Uzbekistan,Mha,0,NA,NA,NA,NA,100
 VUT,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Vanuatu,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-VUT,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Vanuatu,Mha,0.0027,NA,NA,NA,NA,100
+VUT,Coastal Restoration,Max extent,PD21,pathway,OAS-L,Vanuatu,Mha,0.0084,NA,NA,NA,NA,100
 VEN,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Venezuela,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-VEN,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Venezuela,Mha,0.4365,NA,NA,NA,NA,100
+VEN,Coastal Restoration,Max extent,PD21,pathway,LAM-M,Venezuela,Mha,0.302,NA,NA,NA,NA,100
 VNM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Vietnam,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-VNM,Coastal Restoration,Max extent,PD21,pathway,OAS-CPA,Vietnam,Mha,0.2465,NA,NA,NA,NA,100
+VNM,Coastal Restoration,Max extent,PD21,pathway,OAS-CPA,Vietnam,Mha,0.1671,NA,NA,NA,NA,100
 ESH,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Western Sahara,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 ESH,Coastal Restoration,Max extent,PD21,pathway,NAF,Western Sahara,Mha,0,NA,NA,NA,NA,100
 YEM,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Yemen,tCO2e/ha/yr,14.6667,25.6667,25,0,60,15
-YEM,Coastal Restoration,Max extent,PD21,pathway,MEA-M,Yemen,Mha,0.0027,NA,NA,NA,NA,100
+YEM,Coastal Restoration,Max extent,PD21,pathway,MEA-M,Yemen,Mha,0.0018,NA,NA,NA,NA,100
 ZMB,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Zambia,tCO2e/ha/yr,0,NA,NA,NA,NA,100
 ZMB,Coastal Restoration,Max extent,PD21,pathway,SSA-L,Zambia,Mha,0,NA,NA,NA,NA,100
 ZWE,Coastal Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Zimbabwe,tCO2e/ha/yr,0,NA,NA,NA,NA,100
@@ -2903,124 +2903,124 @@ DZA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Algeria,tCO2
 DZA,Peat Restoration,Max extent,PD21,pathway,NAF,Algeria,Mha,NA,NA,NA,NA,NA,NA
 AGO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Angola,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 AGO,Peat Restoration,Max extent,PD21,pathway,SSA-M,Angola,Mha,NA,NA,NA,NA,NA,NA
-ARG,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Argentina,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-ARG,Peat Restoration,Max extent,PD21,pathway,LAM-M,Argentina,Mha,7.3419,NA,NA,NA,NA,100
-ARM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Armenia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-ARM,Peat Restoration,Max extent,PD21,pathway,CAS,Armenia,Mha,0.2351,NA,NA,NA,NA,100
-AUS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,ANUZ,Australia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-AUS,Peat Restoration,Max extent,PD21,pathway,ANUZ,Australia,Mha,5.5521,NA,NA,NA,NA,100
+ARG,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Argentina,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+ARG,Peat Restoration,Max extent,PD21,pathway,LAM-M,Argentina,Mha,0.076,NA,NA,NA,NA,100
+ARM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Armenia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+ARM,Peat Restoration,Max extent,PD21,pathway,CAS,Armenia,Mha,0.002,NA,NA,NA,NA,100
+AUS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,ANUZ,Australia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+AUS,Peat Restoration,Max extent,PD21,pathway,ANUZ,Australia,Mha,1.379,NA,NA,NA,NA,100
 AUT,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Austria,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 AUT,Peat Restoration,Max extent,PD21,pathway,EU15,Austria,Mha,NA,NA,NA,NA,NA,NA
-AZE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Azerbaijan,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-AZE,Peat Restoration,Max extent,PD21,pathway,CAS,Azerbaijan,Mha,0.2347,NA,NA,NA,NA,100
+AZE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Azerbaijan,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+AZE,Peat Restoration,Max extent,PD21,pathway,CAS,Azerbaijan,Mha,0.002,NA,NA,NA,NA,100
 BHS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Bahamas,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BHS,Peat Restoration,Max extent,PD21,pathway,LAM-M,Bahamas,Mha,NA,NA,NA,NA,NA,NA
 BGD,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Bangladesh,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BGD,Peat Restoration,Max extent,PD21,pathway,OAS-L,Bangladesh,Mha,NA,NA,NA,NA,NA,NA
-BLR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU-FSU,Belarus,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-BLR,Peat Restoration,Max extent,PD21,pathway,EEU-FSU,Belarus,Mha,2.1592,NA,NA,NA,NA,100
+BLR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU-FSU,Belarus,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+BLR,Peat Restoration,Max extent,PD21,pathway,EEU-FSU,Belarus,Mha,1.663,NA,NA,NA,NA,100
 BEL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Belgium,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BEL,Peat Restoration,Max extent,PD21,pathway,EU15,Belgium,Mha,NA,NA,NA,NA,NA,NA
 BLZ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Belize,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BLZ,Peat Restoration,Max extent,PD21,pathway,LAM-L,Belize,Mha,NA,NA,NA,NA,NA,NA
-BEN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Benin,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-BEN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Benin,Mha,0.6023,NA,NA,NA,NA,100
+BEN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Benin,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+BEN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Benin,Mha,0.012,NA,NA,NA,NA,100
 BTN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Bhutan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BTN,Peat Restoration,Max extent,PD21,pathway,OAS-M,Bhutan,Mha,NA,NA,NA,NA,NA,NA
-BOL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Bolivia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-BOL,Peat Restoration,Max extent,PD21,pathway,LAM-M,Bolivia,Mha,16.7129,NA,NA,NA,NA,100
+BOL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Bolivia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+BOL,Peat Restoration,Max extent,PD21,pathway,LAM-M,Bolivia,Mha,0.006,NA,NA,NA,NA,100
 BIH,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU,Bosnia and Herzegovina,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BIH,Peat Restoration,Max extent,PD21,pathway,EEU,Bosnia and Herzegovina,Mha,NA,NA,NA,NA,NA,NA
-BWA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Botswana,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-BWA,Peat Restoration,Max extent,PD21,pathway,SSA-M,Botswana,Mha,0.5828,NA,NA,NA,NA,100
-BRA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,BRA,Brazil,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-BRA,Peat Restoration,Max extent,PD21,pathway,BRA,Brazil,Mha,34.671,NA,NA,NA,NA,100
-BRN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Brunei Darussalam,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-BRN,Peat Restoration,Max extent,PD21,pathway,OAS-M,Brunei Darussalam,Mha,0.2216,NA,NA,NA,NA,100
+BWA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Botswana,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+BWA,Peat Restoration,Max extent,PD21,pathway,SSA-M,Botswana,Mha,0.16,NA,NA,NA,NA,100
+BRA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,BRA,Brazil,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+BRA,Peat Restoration,Max extent,PD21,pathway,BRA,Brazil,Mha,3.155,NA,NA,NA,NA,100
+BRN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Brunei Darussalam,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+BRN,Peat Restoration,Max extent,PD21,pathway,OAS-M,Brunei Darussalam,Mha,0.014,NA,NA,NA,NA,100
 BGR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Bulgaria,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BGR,Peat Restoration,Max extent,PD21,pathway,EU12-M,Bulgaria,Mha,NA,NA,NA,NA,NA,NA
-BFA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Burkina Faso,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-BFA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Burkina Faso,Mha,0.2918,NA,NA,NA,NA,100
+BFA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Burkina Faso,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+BFA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Burkina Faso,Mha,0.005,NA,NA,NA,NA,100
 BDI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Burundi,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 BDI,Peat Restoration,Max extent,PD21,pathway,SSA-L,Burundi,Mha,NA,NA,NA,NA,NA,NA
-KHM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Cambodia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-KHM,Peat Restoration,Max extent,PD21,pathway,OAS-CPA,Cambodia,Mha,3.3042,NA,NA,NA,NA,100
-CMR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Cameroon,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-CMR,Peat Restoration,Max extent,PD21,pathway,SSA-L,Cameroon,Mha,0.8226,NA,NA,NA,NA,100
-CAN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAN,Canada,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-CAN,Peat Restoration,Max extent,PD21,pathway,CAN,Canada,Mha,190.2057,NA,NA,NA,NA,100
+KHM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Cambodia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+KHM,Peat Restoration,Max extent,PD21,pathway,OAS-CPA,Cambodia,Mha,0,NA,NA,NA,NA,100
+CMR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Cameroon,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+CMR,Peat Restoration,Max extent,PD21,pathway,SSA-L,Cameroon,Mha,0.01,NA,NA,NA,NA,100
+CAN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAN,Canada,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+CAN,Peat Restoration,Max extent,PD21,pathway,CAN,Canada,Mha,34.67,NA,NA,NA,NA,100
 CPV,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Cape Verde,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 CPV,Peat Restoration,Max extent,PD21,pathway,SSA-L,Cape Verde,Mha,NA,NA,NA,NA,NA,NA
-CAF,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Central African Republic,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-CAF,Peat Restoration,Max extent,PD21,pathway,SSA-L,Central African Republic,Mha,0.9044,NA,NA,NA,NA,100
+CAF,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Central African Republic,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+CAF,Peat Restoration,Max extent,PD21,pathway,SSA-L,Central African Republic,Mha,0.006,NA,NA,NA,NA,100
 TCD,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Chad,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TCD,Peat Restoration,Max extent,PD21,pathway,SSA-L,Chad,Mha,NA,NA,NA,NA,NA,NA
-CHL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Chile,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-CHL,Peat Restoration,Max extent,PD21,pathway,LAM-M,Chile,Mha,5.9622,NA,NA,NA,NA,100
-CHN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CHN,China,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-CHN,Peat Restoration,Max extent,PD21,pathway,CHN,China,Mha,19.5868,NA,NA,NA,NA,100
-COL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Colombia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-COL,Peat Restoration,Max extent,PD21,pathway,LAM-M,Colombia,Mha,24.3812,NA,NA,NA,NA,100
+CHL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Chile,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+CHL,Peat Restoration,Max extent,PD21,pathway,LAM-M,Chile,Mha,0.007,NA,NA,NA,NA,100
+CHN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CHN,China,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+CHN,Peat Restoration,Max extent,PD21,pathway,CHN,China,Mha,3.163,NA,NA,NA,NA,100
+COL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Colombia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+COL,Peat Restoration,Max extent,PD21,pathway,LAM-M,Colombia,Mha,0.992,NA,NA,NA,NA,100
 COM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Comoros,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 COM,Peat Restoration,Max extent,PD21,pathway,SSA-L,Comoros,Mha,NA,NA,NA,NA,NA,NA
-CRI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Costa Rica,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-CRI,Peat Restoration,Max extent,PD21,pathway,LAM-M,Costa Rica,Mha,0.5718,NA,NA,NA,NA,100
+CRI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Costa Rica,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+CRI,Peat Restoration,Max extent,PD21,pathway,LAM-M,Costa Rica,Mha,0.036,NA,NA,NA,NA,100
 CIV,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Cote d'Ivoire,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 CIV,Peat Restoration,Max extent,PD21,pathway,SSA-L,Cote d'Ivoire,Mha,NA,NA,NA,NA,NA,NA
 HRV,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU,Croatia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 HRV,Peat Restoration,Max extent,PD21,pathway,EEU,Croatia,Mha,NA,NA,NA,NA,NA,NA
-CUB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Cuba,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-CUB,Peat Restoration,Max extent,PD21,pathway,LAM-M,Cuba,Mha,1.2431,NA,NA,NA,NA,100
+CUB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Cuba,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+CUB,Peat Restoration,Max extent,PD21,pathway,LAM-M,Cuba,Mha,0.064,NA,NA,NA,NA,100
 CYP,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Cyprus,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 CYP,Peat Restoration,Max extent,PD21,pathway,EU12-H,Cyprus,Mha,NA,NA,NA,NA,NA,NA
 CZE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Czech Republic,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 CZE,Peat Restoration,Max extent,PD21,pathway,EU12-H,Czech Republic,Mha,NA,NA,NA,NA,NA,NA
 PRK,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Democratic People's Republic of Korea (North Korea),tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PRK,Peat Restoration,Max extent,PD21,pathway,OAS-L,Democratic People's Republic of Korea (North Korea),Mha,NA,NA,NA,NA,NA,NA
-COD,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),tCO2e/ha/yr,17.56,0,80,NA,NA,20
-COD,Peat Restoration,Max extent,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),Mha,13.3164,NA,NA,NA,NA,100
-DNK,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Denmark (except Greenland),tCO2e/ha/yr,17.56,0,80,NA,NA,20
-DNK,Peat Restoration,Max extent,PD21,pathway,EU15,Denmark (except Greenland),Mha,0.1813,NA,NA,NA,NA,100
+COD,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+COD,Peat Restoration,Max extent,PD21,pathway,SSA-L,Democratic Republic of the Congo (DRC),Mha,0.569,NA,NA,NA,NA,100
+DNK,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Denmark (except Greenland),tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+DNK,Peat Restoration,Max extent,PD21,pathway,EU15,Denmark (except Greenland),Mha,0.078,NA,NA,NA,NA,100
 DJI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Djibouti,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 DJI,Peat Restoration,Max extent,PD21,pathway,SSA-L,Djibouti,Mha,NA,NA,NA,NA,NA,NA
 DOM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Dominican Republic,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 DOM,Peat Restoration,Max extent,PD21,pathway,LAM-M,Dominican Republic,Mha,NA,NA,NA,NA,NA,NA
-ECU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Ecuador,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-ECU,Peat Restoration,Max extent,PD21,pathway,LAM-M,Ecuador,Mha,1.6646,NA,NA,NA,NA,100
+ECU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Ecuador,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+ECU,Peat Restoration,Max extent,PD21,pathway,LAM-M,Ecuador,Mha,0.093,NA,NA,NA,NA,100
 EGY,Peat Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Egypt,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 EGY,Peat Restoration,Max extent,PD21,pathway,NAF,Egypt,Mha,NA,NA,NA,NA,NA,NA
 SLV,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,El Salvador,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SLV,Peat Restoration,Max extent,PD21,pathway,LAM-M,El Salvador,Mha,NA,NA,NA,NA,NA,NA
-GNQ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Equatorial Guinea,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-GNQ,Peat Restoration,Max extent,PD21,pathway,SSA-M,Equatorial Guinea,Mha,0.3071,NA,NA,NA,NA,100
+GNQ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Equatorial Guinea,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+GNQ,Peat Restoration,Max extent,PD21,pathway,SSA-M,Equatorial Guinea,Mha,0.002,NA,NA,NA,NA,100
 ERI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Eritrea,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 ERI,Peat Restoration,Max extent,PD21,pathway,SSA-L,Eritrea,Mha,NA,NA,NA,NA,NA,NA
-EST,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Estonia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-EST,Peat Restoration,Max extent,PD21,pathway,EU12-H,Estonia,Mha,0.1501,NA,NA,NA,NA,100
-ETH,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Ethiopia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-ETH,Peat Restoration,Max extent,PD21,pathway,SSA-L,Ethiopia,Mha,0.7058,NA,NA,NA,NA,100
+EST,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Estonia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+EST,Peat Restoration,Max extent,PD21,pathway,EU12-H,Estonia,Mha,0.236,NA,NA,NA,NA,100
+ETH,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Ethiopia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+ETH,Peat Restoration,Max extent,PD21,pathway,SSA-L,Ethiopia,Mha,0.504,NA,NA,NA,NA,100
 FLK,Peat Restoration,Avg mitigation potential flux,PD21,pathway,NA,Falkland Islands,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 FLK,Peat Restoration,Max extent,PD21,pathway,NA,Falkland Islands,Mha,NA,NA,NA,NA,NA,NA
 FRO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,NA,Faroe Islands,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 FRO,Peat Restoration,Max extent,PD21,pathway,NA,Faroe Islands,Mha,NA,NA,NA,NA,NA,NA
 FJI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Fiji,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 FJI,Peat Restoration,Max extent,PD21,pathway,OAS-L,Fiji,Mha,NA,NA,NA,NA,NA,NA
-FIN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Finland,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-FIN,Peat Restoration,Max extent,PD21,pathway,EU15,Finland,Mha,4.715,NA,NA,NA,NA,100
-FRA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,France (except French Guiana),tCO2e/ha/yr,17.56,0,80,NA,NA,20
-FRA,Peat Restoration,Max extent,PD21,pathway,EU15,France (except French Guiana),Mha,0.5775,NA,NA,NA,NA,100
-GUF,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,French Guiana (France),tCO2e/ha/yr,17.56,0,80,NA,NA,20
-GUF,Peat Restoration,Max extent,PD21,pathway,LAM-M,French Guiana (France),Mha,0.5181,NA,NA,NA,NA,100
+FIN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Finland,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+FIN,Peat Restoration,Max extent,PD21,pathway,EU15,Finland,Mha,3.744,NA,NA,NA,NA,100
+FRA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,France (except French Guiana),tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+FRA,Peat Restoration,Max extent,PD21,pathway,EU15,France (except French Guiana),Mha,0.398,NA,NA,NA,NA,100
+GUF,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,French Guiana (France),tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+GUF,Peat Restoration,Max extent,PD21,pathway,LAM-M,French Guiana (France),Mha,0.002,NA,NA,NA,NA,100
 PYF,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,French Polynesia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PYF,Peat Restoration,Max extent,PD21,pathway,OAS-M,French Polynesia,Mha,NA,NA,NA,NA,NA,NA
 GAB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Gabon,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GAB,Peat Restoration,Max extent,PD21,pathway,SSA-M,Gabon,Mha,NA,NA,NA,NA,NA,NA
-GMB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,"Gambia, The",tCO2e/ha/yr,17.56,0,80,NA,NA,20
-GMB,Peat Restoration,Max extent,PD21,pathway,SSA-L,"Gambia, The",Mha,0.5964,NA,NA,NA,NA,100
+GMB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,"Gambia, The",tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+GMB,Peat Restoration,Max extent,PD21,pathway,SSA-L,"Gambia, The",Mha,0.007,NA,NA,NA,NA,100
 GEO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Georgia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GEO,Peat Restoration,Max extent,PD21,pathway,CAS,Georgia,Mha,NA,NA,NA,NA,NA,NA
-DEU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Germany,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-DEU,Peat Restoration,Max extent,PD21,pathway,EU15,Germany,Mha,2.3539,NA,NA,NA,NA,100
+DEU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Germany,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+DEU,Peat Restoration,Max extent,PD21,pathway,EU15,Germany,Mha,1.416,NA,NA,NA,NA,100
 GHA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Ghana,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GHA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Ghana,Mha,NA,NA,NA,NA,NA,NA
 GRC,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Greece,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
@@ -3029,32 +3029,32 @@ GRL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Greenland (
 GRL,Peat Restoration,Max extent,PD21,pathway,EU15,Greenland (Denmark),Mha,NA,NA,NA,NA,NA,NA
 GLP,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Guadeloupe,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GLP,Peat Restoration,Max extent,PD21,pathway,LAM-M,Guadeloupe,Mha,NA,NA,NA,NA,NA,NA
-GTM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Guatemala,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-GTM,Peat Restoration,Max extent,PD21,pathway,LAM-L,Guatemala,Mha,0.5703,NA,NA,NA,NA,100
+GTM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Guatemala,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+GTM,Peat Restoration,Max extent,PD21,pathway,LAM-L,Guatemala,Mha,0.002,NA,NA,NA,NA,100
 GIN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Guinea,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 GIN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Guinea,Mha,NA,NA,NA,NA,NA,NA
-GNB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Guinea-Bissau,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-GNB,Peat Restoration,Max extent,PD21,pathway,SSA-L,Guinea-Bissau,Mha,1.1998,NA,NA,NA,NA,100
-GUY,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Guyana,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-GUY,Peat Restoration,Max extent,PD21,pathway,LAM-M,Guyana,Mha,1.7543,NA,NA,NA,NA,100
+GNB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Guinea-Bissau,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+GNB,Peat Restoration,Max extent,PD21,pathway,SSA-L,Guinea-Bissau,Mha,0.001,NA,NA,NA,NA,100
+GUY,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Guyana,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+GUY,Peat Restoration,Max extent,PD21,pathway,LAM-M,Guyana,Mha,0.574,NA,NA,NA,NA,100
 HTI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Haiti,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 HTI,Peat Restoration,Max extent,PD21,pathway,LAM-L,Haiti,Mha,NA,NA,NA,NA,NA,NA
-HND,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Honduras,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-HND,Peat Restoration,Max extent,PD21,pathway,LAM-L,Honduras,Mha,0.173,NA,NA,NA,NA,100
-HUN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Hungary,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-HUN,Peat Restoration,Max extent,PD21,pathway,EU12-H,Hungary,Mha,0.8439,NA,NA,NA,NA,100
+HND,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Honduras,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+HND,Peat Restoration,Max extent,PD21,pathway,LAM-L,Honduras,Mha,0.019,NA,NA,NA,NA,100
+HUN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Hungary,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+HUN,Peat Restoration,Max extent,PD21,pathway,EU12-H,Hungary,Mha,0.162,NA,NA,NA,NA,100
 ISL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EFTA,Iceland,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 ISL,Peat Restoration,Max extent,PD21,pathway,EFTA,Iceland,Mha,NA,NA,NA,NA,NA,NA
 IND,Peat Restoration,Avg mitigation potential flux,PD21,pathway,IND,India,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 IND,Peat Restoration,Max extent,PD21,pathway,IND,India,Mha,NA,NA,NA,NA,NA,NA
-IDN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,IDN,Indonesia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-IDN,Peat Restoration,Max extent,PD21,pathway,IDN,Indonesia,Mha,22.7865,NA,NA,NA,NA,100
+IDN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,IDN,Indonesia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+IDN,Peat Restoration,Max extent,PD21,pathway,IDN,Indonesia,Mha,21.56,NA,NA,NA,NA,100
 IRN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Iran,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 IRN,Peat Restoration,Max extent,PD21,pathway,MEA-M,Iran,Mha,NA,NA,NA,NA,NA,NA
 IRQ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Iraq,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 IRQ,Peat Restoration,Max extent,PD21,pathway,MEA-M,Iraq,Mha,NA,NA,NA,NA,NA,NA
-IRL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Ireland,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-IRL,Peat Restoration,Max extent,PD21,pathway,EU15,Ireland,Mha,2.0884,NA,NA,NA,NA,100
+IRL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Ireland,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+IRL,Peat Restoration,Max extent,PD21,pathway,EU15,Ireland,Mha,1.391,NA,NA,NA,NA,100
 ISR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Israel,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 ISR,Peat Restoration,Max extent,PD21,pathway,MEA-H,Israel,Mha,NA,NA,NA,NA,NA,NA
 ITA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Italy,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
@@ -3065,48 +3065,48 @@ JPN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,JPN,Japan,tCO2e/
 JPN,Peat Restoration,Max extent,PD21,pathway,JPN,Japan,Mha,NA,NA,NA,NA,NA,NA
 JOR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Jordan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 JOR,Peat Restoration,Max extent,PD21,pathway,MEA-M,Jordan,Mha,NA,NA,NA,NA,NA,NA
-KAZ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Kazakhstan,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-KAZ,Peat Restoration,Max extent,PD21,pathway,CAS,Kazakhstan,Mha,0.1891,NA,NA,NA,NA,100
-KEN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Kenya,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-KEN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Kenya,Mha,0.566,NA,NA,NA,NA,100
+KAZ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Kazakhstan,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+KAZ,Peat Restoration,Max extent,PD21,pathway,CAS,Kazakhstan,Mha,0.001,NA,NA,NA,NA,100
+KEN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Kenya,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+KEN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Kenya,Mha,0.042,NA,NA,NA,NA,100
 KWT,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Kuwait,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 KWT,Peat Restoration,Max extent,PD21,pathway,MEA-H,Kuwait,Mha,NA,NA,NA,NA,NA,NA
 KGZ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Kyrgyzstan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 KGZ,Peat Restoration,Max extent,PD21,pathway,CAS,Kyrgyzstan,Mha,NA,NA,NA,NA,NA,NA
-LAO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Laos,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-LAO,Peat Restoration,Max extent,PD21,pathway,OAS-CPA,Laos,Mha,0.8794,NA,NA,NA,NA,100
-LVA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Latvia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-LVA,Peat Restoration,Max extent,PD21,pathway,EU12-M,Latvia,Mha,0.8198,NA,NA,NA,NA,100
+LAO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Laos,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+LAO,Peat Restoration,Max extent,PD21,pathway,OAS-CPA,Laos,Mha,0.014,NA,NA,NA,NA,100
+LVA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Latvia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+LVA,Peat Restoration,Max extent,PD21,pathway,EU12-M,Latvia,Mha,0.834,NA,NA,NA,NA,100
 LBN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Lebanon,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LBN,Peat Restoration,Max extent,PD21,pathway,MEA-M,Lebanon,Mha,NA,NA,NA,NA,NA,NA
-LSO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Lesotho,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-LSO,Peat Restoration,Max extent,PD21,pathway,SSA-L,Lesotho,Mha,0.2671,NA,NA,NA,NA,100
+LSO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Lesotho,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+LSO,Peat Restoration,Max extent,PD21,pathway,SSA-L,Lesotho,Mha,0.015,NA,NA,NA,NA,100
 LBR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Liberia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LBR,Peat Restoration,Max extent,PD21,pathway,SSA-L,Liberia,Mha,NA,NA,NA,NA,NA,NA
 LBY,Peat Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Libya,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LBY,Peat Restoration,Max extent,PD21,pathway,NAF,Libya,Mha,NA,NA,NA,NA,NA,NA
-LTU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Lithuania,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-LTU,Peat Restoration,Max extent,PD21,pathway,EU12-M,Lithuania,Mha,0.1714,NA,NA,NA,NA,100
+LTU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Lithuania,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+LTU,Peat Restoration,Max extent,PD21,pathway,EU12-M,Lithuania,Mha,0.171,NA,NA,NA,NA,100
 LUX,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Luxembourg,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LUX,Peat Restoration,Max extent,PD21,pathway,EU15,Luxembourg,Mha,NA,NA,NA,NA,NA,NA
 MKD,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU,Macedonia (The Former Yugoslav Republic of Macedonia),tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MKD,Peat Restoration,Max extent,PD21,pathway,EEU,Macedonia (The Former Yugoslav Republic of Macedonia),Mha,NA,NA,NA,NA,NA,NA
-MDG,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Madagascar,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-MDG,Peat Restoration,Max extent,PD21,pathway,SSA-L,Madagascar,Mha,1.3447,NA,NA,NA,NA,100
+MDG,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Madagascar,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+MDG,Peat Restoration,Max extent,PD21,pathway,SSA-L,Madagascar,Mha,0.116,NA,NA,NA,NA,100
 MWI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Malawi,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MWI,Peat Restoration,Max extent,PD21,pathway,SSA-L,Malawi,Mha,NA,NA,NA,NA,NA,NA
-MYS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Malaysia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-MYS,Peat Restoration,Max extent,PD21,pathway,OAS-M,Malaysia,Mha,2.2206,NA,NA,NA,NA,100
-MLI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mali,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-MLI,Peat Restoration,Max extent,PD21,pathway,SSA-L,Mali,Mha,6.8017,NA,NA,NA,NA,100
+MYS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Malaysia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+MYS,Peat Restoration,Max extent,PD21,pathway,OAS-M,Malaysia,Mha,1.518,NA,NA,NA,NA,100
+MLI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mali,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+MLI,Peat Restoration,Max extent,PD21,pathway,SSA-L,Mali,Mha,0.026,NA,NA,NA,NA,100
 MTQ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Martinique,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MTQ,Peat Restoration,Max extent,PD21,pathway,LAM-M,Martinique,Mha,NA,NA,NA,NA,NA,NA
-MRT,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mauritania,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-MRT,Peat Restoration,Max extent,PD21,pathway,SSA-L,Mauritania,Mha,0.2936,NA,NA,NA,NA,100
+MRT,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mauritania,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+MRT,Peat Restoration,Max extent,PD21,pathway,SSA-L,Mauritania,Mha,0.003,NA,NA,NA,NA,100
 MUS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Mauritius,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MUS,Peat Restoration,Max extent,PD21,pathway,SSA-M,Mauritius,Mha,NA,NA,NA,NA,NA,NA
-MEX,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEX,Mexico,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-MEX,Peat Restoration,Max extent,PD21,pathway,MEX,Mexico,Mha,2.3255,NA,NA,NA,NA,100
+MEX,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEX,Mexico,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+MEX,Peat Restoration,Max extent,PD21,pathway,MEX,Mexico,Mha,0.321,NA,NA,NA,NA,100
 MDA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU-FSA,Moldova,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MDA,Peat Restoration,Max extent,PD21,pathway,EEU-FSA,Moldova,Mha,NA,NA,NA,NA,NA,NA
 MNG,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Mongolia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
@@ -3115,28 +3115,28 @@ MNE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU,Montenegro,t
 MNE,Peat Restoration,Max extent,PD21,pathway,EEU,Montenegro,Mha,NA,NA,NA,NA,NA,NA
 MAR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Morocco,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 MAR,Peat Restoration,Max extent,PD21,pathway,NAF,Morocco,Mha,NA,NA,NA,NA,NA,NA
-MOZ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mozambique,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-MOZ,Peat Restoration,Max extent,PD21,pathway,SSA-L,Mozambique,Mha,4.8544,NA,NA,NA,NA,100
-MMR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Myanmar,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-MMR,Peat Restoration,Max extent,PD21,pathway,OAS-L,Myanmar,Mha,2.0368,NA,NA,NA,NA,100
+MOZ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Mozambique,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+MOZ,Peat Restoration,Max extent,PD21,pathway,SSA-L,Mozambique,Mha,0.312,NA,NA,NA,NA,100
+MMR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Myanmar,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+MMR,Peat Restoration,Max extent,PD21,pathway,OAS-L,Myanmar,Mha,0.238,NA,NA,NA,NA,100
 NAM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Namibia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 NAM,Peat Restoration,Max extent,PD21,pathway,SSA-M,Namibia,Mha,NA,NA,NA,NA,NA,NA
 NPL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Nepal,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 NPL,Peat Restoration,Max extent,PD21,pathway,OAS-L,Nepal,Mha,NA,NA,NA,NA,NA,NA
-NLD,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Netherlands,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-NLD,Peat Restoration,Max extent,PD21,pathway,EU15,Netherlands,Mha,0.9134,NA,NA,NA,NA,100
+NLD,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Netherlands,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+NLD,Peat Restoration,Max extent,PD21,pathway,EU15,Netherlands,Mha,0.417,NA,NA,NA,NA,100
 NCL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,New Caledonia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 NCL,Peat Restoration,Max extent,PD21,pathway,OAS-M,New Caledonia,Mha,NA,NA,NA,NA,NA,NA
 NZL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,ANUZ,New Zealand,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 NZL,Peat Restoration,Max extent,PD21,pathway,ANUZ,New Zealand,Mha,NA,NA,NA,NA,NA,NA
 NIC,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-L,Nicaragua,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 NIC,Peat Restoration,Max extent,PD21,pathway,LAM-L,Nicaragua,Mha,NA,NA,NA,NA,NA,NA
-NER,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Niger,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-NER,Peat Restoration,Max extent,PD21,pathway,SSA-L,Niger,Mha,2.3772,NA,NA,NA,NA,100
-NGA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Nigeria,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-NGA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Nigeria,Mha,6.9091,NA,NA,NA,NA,100
-NOR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EFTA,Norway,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-NOR,Peat Restoration,Max extent,PD21,pathway,EFTA,Norway,Mha,0.2187,NA,NA,NA,NA,100
+NER,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Niger,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+NER,Peat Restoration,Max extent,PD21,pathway,SSA-L,Niger,Mha,0.009,NA,NA,NA,NA,100
+NGA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Nigeria,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+NGA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Nigeria,Mha,0.071,NA,NA,NA,NA,100
+NOR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EFTA,Norway,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+NOR,Peat Restoration,Max extent,PD21,pathway,EFTA,Norway,Mha,0.109,NA,NA,NA,NA,100
 OMN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Oman,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 OMN,Peat Restoration,Max extent,PD21,pathway,MEA-H,Oman,Mha,NA,NA,NA,NA,NA,NA
 PAK,Peat Restoration,Avg mitigation potential flux,PD21,pathway,PAK,Pakistan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
@@ -3145,40 +3145,40 @@ PAN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Panama,tCO
 PAN,Peat Restoration,Max extent,PD21,pathway,LAM-M,Panama,Mha,NA,NA,NA,NA,NA,NA
 PNG,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Papua New Guinea,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PNG,Peat Restoration,Max extent,PD21,pathway,OAS-L,Papua New Guinea,Mha,NA,NA,NA,NA,NA,NA
-PRY,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Paraguay,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-PRY,Peat Restoration,Max extent,PD21,pathway,LAM-M,Paraguay,Mha,4.4387,NA,NA,NA,NA,100
-PER,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Peru,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-PER,Peat Restoration,Max extent,PD21,pathway,LAM-M,Peru,Mha,25.3175,NA,NA,NA,NA,100
-PHL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Philippines,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-PHL,Peat Restoration,Max extent,PD21,pathway,OAS-L,Philippines,Mha,1.2174,NA,NA,NA,NA,100
-POL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Poland,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-POL,Peat Restoration,Max extent,PD21,pathway,EU12-H,Poland,Mha,2.0939,NA,NA,NA,NA,100
+PRY,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Paraguay,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+PRY,Peat Restoration,Max extent,PD21,pathway,LAM-M,Paraguay,Mha,0.007,NA,NA,NA,NA,100
+PER,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Peru,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+PER,Peat Restoration,Max extent,PD21,pathway,LAM-M,Peru,Mha,3.555,NA,NA,NA,NA,100
+PHL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Philippines,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+PHL,Peat Restoration,Max extent,PD21,pathway,OAS-L,Philippines,Mha,0.011,NA,NA,NA,NA,100
+POL,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Poland,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+POL,Peat Restoration,Max extent,PD21,pathway,EU12-H,Poland,Mha,1.053,NA,NA,NA,NA,100
 PRT,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Portugal,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PRT,Peat Restoration,Max extent,PD21,pathway,EU15,Portugal,Mha,NA,NA,NA,NA,NA,NA
 PRI,Peat Restoration,Avg mitigation potential flux,PD21,pathway,USA,Puerto Rico,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 PRI,Peat Restoration,Max extent,PD21,pathway,USA,Puerto Rico,Mha,NA,NA,NA,NA,NA,NA
 QAT,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Qatar,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 QAT,Peat Restoration,Max extent,PD21,pathway,MEA-H,Qatar,Mha,NA,NA,NA,NA,NA,NA
-COG,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Republic of Congo (ROC),tCO2e/ha/yr,17.56,0,80,NA,NA,20
-COG,Peat Restoration,Max extent,PD21,pathway,SSA-L,Republic of Congo (ROC),Mha,10.0918,NA,NA,NA,NA,100
+COG,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Republic of Congo (ROC),tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+COG,Peat Restoration,Max extent,PD21,pathway,SSA-L,Republic of Congo (ROC),Mha,2.887,NA,NA,NA,NA,100
 KOR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,ANUZ,Republic of Korea (South Korea),tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 KOR,Peat Restoration,Max extent,PD21,pathway,ANUZ,Republic of Korea (South Korea),Mha,NA,NA,NA,NA,NA,NA
 REU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-M,Reunion,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 REU,Peat Restoration,Max extent,PD21,pathway,SSA-M,Reunion,Mha,NA,NA,NA,NA,NA,NA
-ROU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Romania,tCO2e/ha/yr,17.56,0,80,NA,NA,20
+ROU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-M,Romania,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
 ROU,Peat Restoration,Max extent,PD21,pathway,EU12-M,Romania,Mha,0.217,NA,NA,NA,NA,100
-RUS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,RUS,Russia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-RUS,Peat Restoration,Max extent,PD21,pathway,RUS,Russia,Mha,149.4547,NA,NA,NA,NA,100
-RWA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Rwanda,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-RWA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Rwanda,Mha,0.249,NA,NA,NA,NA,100
+RUS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,RUS,Russia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+RUS,Peat Restoration,Max extent,PD21,pathway,RUS,Russia,Mha,6.453,NA,NA,NA,NA,100
+RWA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Rwanda,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+RWA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Rwanda,Mha,0.062,NA,NA,NA,NA,100
 WSM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Samoa,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 WSM,Peat Restoration,Max extent,PD21,pathway,OAS-L,Samoa,Mha,NA,NA,NA,NA,NA,NA
 STP,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Sao Tome and Principe,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 STP,Peat Restoration,Max extent,PD21,pathway,SSA-L,Sao Tome and Principe,Mha,NA,NA,NA,NA,NA,NA
 SAU,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,Saudi Arabia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SAU,Peat Restoration,Max extent,PD21,pathway,MEA-H,Saudi Arabia,Mha,NA,NA,NA,NA,NA,NA
-SEN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Senegal,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-SEN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Senegal,Mha,8.072,NA,NA,NA,NA,100
+SEN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Senegal,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+SEN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Senegal,Mha,0.006,NA,NA,NA,NA,100
 SRB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU,Serbia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SRB,Peat Restoration,Max extent,PD21,pathway,EEU,Serbia,Mha,NA,NA,NA,NA,NA,NA
 SLE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Sierra Leone,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
@@ -3189,74 +3189,74 @@ SVN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU12-H,Slovenia,
 SVN,Peat Restoration,Max extent,PD21,pathway,EU12-H,Slovenia,Mha,NA,NA,NA,NA,NA,NA
 SLB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Solomon Islands,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SLB,Peat Restoration,Max extent,PD21,pathway,OAS-L,Solomon Islands,Mha,NA,NA,NA,NA,NA,NA
-SOM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Somalia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-SOM,Peat Restoration,Max extent,PD21,pathway,SSA-L,Somalia,Mha,0.919,NA,NA,NA,NA,100
-ZAF,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SAF,South Africa,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-ZAF,Peat Restoration,Max extent,PD21,pathway,SAF,South Africa,Mha,0.511,NA,NA,NA,NA,100
+SOM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Somalia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+SOM,Peat Restoration,Max extent,PD21,pathway,SSA-L,Somalia,Mha,0.001,NA,NA,NA,NA,100
+ZAF,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SAF,South Africa,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+ZAF,Peat Restoration,Max extent,PD21,pathway,SAF,South Africa,Mha,0.007,NA,NA,NA,NA,100
 SSD,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,South Sudan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SSD,Peat Restoration,Max extent,PD21,pathway,SSA-L,South Sudan,Mha,NA,NA,NA,NA,NA,NA
-ESP,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Spain,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-ESP,Peat Restoration,Max extent,PD21,pathway,EU29,Spain,Mha,0.2261,NA,NA,NA,NA,100
+ESP,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Spain,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+ESP,Peat Restoration,Max extent,PD21,pathway,EU29,Spain,Mha,0.033,NA,NA,NA,NA,100
 LKA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Sri Lanka,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 LKA,Peat Restoration,Max extent,PD21,pathway,OAS-M,Sri Lanka,Mha,NA,NA,NA,NA,NA,NA
-SDN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Sudan,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-SDN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Sudan,Mha,5.5086,NA,NA,NA,NA,100
-SUR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Suriname,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-SUR,Peat Restoration,Max extent,PD21,pathway,LAM-M,Suriname,Mha,1.8604,NA,NA,NA,NA,100
+SDN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Sudan,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+SDN,Peat Restoration,Max extent,PD21,pathway,SSA-L,Sudan,Mha,0.022,NA,NA,NA,NA,100
+SUR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Suriname,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+SUR,Peat Restoration,Max extent,PD21,pathway,LAM-M,Suriname,Mha,0.268,NA,NA,NA,NA,100
 SWZ,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Swaziland,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SWZ,Peat Restoration,Max extent,PD21,pathway,SSA-L,Swaziland,Mha,NA,NA,NA,NA,NA,NA
-SWE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Sweden,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-SWE,Peat Restoration,Max extent,PD21,pathway,EU15,Sweden,Mha,0.7623,NA,NA,NA,NA,100
-CHE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EFTA,Switzerland,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-CHE,Peat Restoration,Max extent,PD21,pathway,EFTA,Switzerland,Mha,0.2025,NA,NA,NA,NA,100
+SWE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,Sweden,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+SWE,Peat Restoration,Max extent,PD21,pathway,EU15,Sweden,Mha,0.746,NA,NA,NA,NA,100
+CHE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EFTA,Switzerland,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+CHE,Peat Restoration,Max extent,PD21,pathway,EFTA,Switzerland,Mha,0.021,NA,NA,NA,NA,100
 SYR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Syria,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 SYR,Peat Restoration,Max extent,PD21,pathway,MEA-M,Syria,Mha,NA,NA,NA,NA,NA,NA
 TJK,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Tajikistan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TJK,Peat Restoration,Max extent,PD21,pathway,CAS,Tajikistan,Mha,NA,NA,NA,NA,NA,NA
-TZA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Tanzania,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-TZA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Tanzania,Mha,0.7884,NA,NA,NA,NA,100
-THA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Thailand,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-THA,Peat Restoration,Max extent,PD21,pathway,OAS-M,Thailand,Mha,6.2541,NA,NA,NA,NA,100
+TZA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Tanzania,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+TZA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Tanzania,Mha,0.392,NA,NA,NA,NA,100
+THA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-M,Thailand,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+THA,Peat Restoration,Max extent,PD21,pathway,OAS-M,Thailand,Mha,0.095,NA,NA,NA,NA,100
 TLS,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Timor-Leste,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TLS,Peat Restoration,Max extent,PD21,pathway,OAS-L,Timor-Leste,Mha,NA,NA,NA,NA,NA,NA
-TGO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Togo,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-TGO,Peat Restoration,Max extent,PD21,pathway,SSA-L,Togo,Mha,0.3047,NA,NA,NA,NA,100
-TTO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Trinidad and Tobago,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-TTO,Peat Restoration,Max extent,PD21,pathway,LAM-M,Trinidad and Tobago,Mha,0.6049,NA,NA,NA,NA,100
+TGO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Togo,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+TGO,Peat Restoration,Max extent,PD21,pathway,SSA-L,Togo,Mha,0.009,NA,NA,NA,NA,100
+TTO,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Trinidad and Tobago,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+TTO,Peat Restoration,Max extent,PD21,pathway,LAM-M,Trinidad and Tobago,Mha,0.001,NA,NA,NA,NA,100
 TUN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Tunisia,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TUN,Peat Restoration,Max extent,PD21,pathway,TUR,Tunisia,Mha,NA,NA,NA,NA,NA,NA
 TUR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,TUR,Turkey,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TUR,Peat Restoration,Max extent,PD21,pathway,TUR,Turkey,Mha,NA,NA,NA,NA,NA,NA
 TKM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Turkmenistan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 TKM,Peat Restoration,Max extent,PD21,pathway,CAS,Turkmenistan,Mha,NA,NA,NA,NA,NA,NA
-UGA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Uganda,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-UGA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Uganda,Mha,0.4488,NA,NA,NA,NA,100
-UKR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU-FSU,Ukraine,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-UKR,Peat Restoration,Max extent,PD21,pathway,EEU-FSU,Ukraine,Mha,0.6614,NA,NA,NA,NA,100
+UGA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Uganda,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+UGA,Peat Restoration,Max extent,PD21,pathway,SSA-L,Uganda,Mha,0.041,NA,NA,NA,NA,100
+UKR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EEU-FSU,Ukraine,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+UKR,Peat Restoration,Max extent,PD21,pathway,EEU-FSU,Ukraine,Mha,0.601,NA,NA,NA,NA,100
 ARE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-H,United Arab Emirates,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 ARE,Peat Restoration,Max extent,PD21,pathway,MEA-H,United Arab Emirates,Mha,NA,NA,NA,NA,NA,NA
-GBR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,United Kingdom,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-GBR,Peat Restoration,Max extent,PD21,pathway,EU15,United Kingdom,Mha,1.3847,NA,NA,NA,NA,100
-USA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,USA,United States,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-USA,Peat Restoration,Max extent,PD21,pathway,USA,United States,Mha,20.2937,NA,NA,NA,NA,100
+GBR,Peat Restoration,Avg mitigation potential flux,PD21,pathway,EU15,United Kingdom,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+GBR,Peat Restoration,Max extent,PD21,pathway,EU15,United Kingdom,Mha,1.385,NA,NA,NA,NA,100
+USA,Peat Restoration,Avg mitigation potential flux,PD21,pathway,USA,United States,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+USA,Peat Restoration,Max extent,PD21,pathway,USA,United States,Mha,9.852,NA,NA,NA,NA,100
 URY,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Uruguay,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 URY,Peat Restoration,Max extent,PD21,pathway,LAM-M,Uruguay,Mha,NA,NA,NA,NA,NA,NA
 UZB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,CAS,Uzbekistan,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 UZB,Peat Restoration,Max extent,PD21,pathway,CAS,Uzbekistan,Mha,NA,NA,NA,NA,NA,NA
 VUT,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-L,Vanuatu,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 VUT,Peat Restoration,Max extent,PD21,pathway,OAS-L,Vanuatu,Mha,NA,NA,NA,NA,NA,NA
-VEN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Venezuela,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-VEN,Peat Restoration,Max extent,PD21,pathway,LAM-M,Venezuela,Mha,12.3809,NA,NA,NA,NA,100
-VNM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Vietnam,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-VNM,Peat Restoration,Max extent,PD21,pathway,OAS-CPA,Vietnam,Mha,7.2649,NA,NA,NA,NA,100
+VEN,Peat Restoration,Avg mitigation potential flux,PD21,pathway,LAM-M,Venezuela,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+VEN,Peat Restoration,Max extent,PD21,pathway,LAM-M,Venezuela,Mha,0.508,NA,NA,NA,NA,100
+VNM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,OAS-CPA,Vietnam,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+VNM,Peat Restoration,Max extent,PD21,pathway,OAS-CPA,Vietnam,Mha,0.266,NA,NA,NA,NA,100
 ESH,Peat Restoration,Avg mitigation potential flux,PD21,pathway,NAF,Western Sahara,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 ESH,Peat Restoration,Max extent,PD21,pathway,NAF,Western Sahara,Mha,NA,NA,NA,NA,NA,NA
 YEM,Peat Restoration,Avg mitigation potential flux,PD21,pathway,MEA-M,Yemen,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA
 YEM,Peat Restoration,Max extent,PD21,pathway,MEA-M,Yemen,Mha,NA,NA,NA,NA,NA,NA
-ZMB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Zambia,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-ZMB,Peat Restoration,Max extent,PD21,pathway,SSA-L,Zambia,Mha,10.8138,NA,NA,NA,NA,100
-ZWE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Zimbabwe,tCO2e/ha/yr,17.56,0,80,NA,NA,20
-ZWE,Peat Restoration,Max extent,PD21,pathway,SSA-L,Zimbabwe,Mha,0.2856,NA,NA,NA,NA,100
+ZMB,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Zambia,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+ZMB,Peat Restoration,Max extent,PD21,pathway,SSA-L,Zambia,Mha,0.552,NA,NA,NA,NA,100
+ZWE,Peat Restoration,Avg mitigation potential flux,PD21,pathway,SSA-L,Zimbabwe,tCO2e/ha/yr,3.512,NA,NA,NA,NA,100
+ZWE,Peat Restoration,Max extent,PD21,pathway,SSA-L,Zimbabwe,Mha,0,NA,NA,NA,NA,100
 AFG,Silvopasture,Avg mitigation potential flux,PD21,pathway,PAK,Afghanistan,tCO2e/ha/yr,6.1967,0,50,NA,NA,50
 AFG,Silvopasture,Max extent,PD21,pathway,PAK,Afghanistan,Mha,0.7961,NA,NA,NA,NA,100
 ALB,Silvopasture,Avg mitigation potential flux,PD21,pathway,EEU,Albania,tCO2e/ha/yr,NA,NA,NA,NA,NA,NA

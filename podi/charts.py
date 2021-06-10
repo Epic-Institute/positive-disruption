@@ -3095,7 +3095,7 @@ start_year = start_year
 altscen = str()
 
 ndcs = [
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (24, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
     [
         (2025, 2050, 2030, 2050),
@@ -3104,18 +3104,18 @@ ndcs = [
     ],
     (3, 3),
     (2030, 1.2),
-    [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
+    [(2030, 2050), (2.4, 0), ("50% reduction by 2030", "Net-zero by 2050")],
     (3, 3),
     (2030, 0.398),
     (3, 3),
-    (2030, 2.49),
+    (2030, 2.17),
     (3, 3),
     [
         (2030, 2030, 2050),
         (12.96, 6.15, 0),
-        ("NDC", "50% reduction by 2030", "Net-zero by 2050"),
+        ("50% reduction by 2030", "NDC", "Net-zero by 2050"),
     ],
-    (2030, 5.88),
+    (2030, 9.14),
     (2030, 1),
     (3, 3),
     (3, 3),
@@ -3916,63 +3916,91 @@ for i in range(0, len(region_list)):
 
 # region
 
-bar_emissions_goal = [
-    ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
-    ("x",),
-    (
-        "determined through linear extrapolation using the U.S’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2025.",
-        "of net zero emissions, which was set in President Biden’s climate plan.",
-    ),
-    ("x",),
-    (
-        "set in Brazil’s 2015 NDC.",
-        "determined through linear extrapolation using Brazil’s 2025 and <br>2030 emissions goals set in their 2015 NDC.",
-    ),
-    ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
-    ("x",),
-    (
-        "set in South Africa’s 2015 NDC.",
-        "determined through linear extrapolation using South Africa’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030. South Africa submitted a Low Emission <br>Development Scenario in 2020, but the scenario does not specify a 2050 emissions goal.",
-    ),
-    ("x",),
-    (
-        "set in Russia’s 2015 NDC.",
-        "determined through linear extrapolation using Russia’s 1990 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030.",
-    ),
-    ("x",),
-    (
-        "determined by China’s 2020 NDC update to peak emissions before <br>2030.",
-        "of net zero emissions, which was announced by President Xi Jinping in <br>September 2020.",
-    ),
-    (
-        "set in India’s 2015 NDC.",
-        "determined through linear extrapolation using India’s 2017 emissions <br>and the NDC set in 2015, which set an emissions goal for 2030.",
-    ),
-    (
-        "set in Japan’s 2015 NDC.",
-        "of net zero emissions, which was announced in Prime Minister Yoshihide <br>Suga's speech on October 26th, 2020.",
-    ),
-    ("x",),
-    ("x",),
+ndcs = [
+    [(2030, 2050), (24, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    (0, 0),
+    [
+        (2030, 2050),
+        (3.32, 0),
+        (
+            "determined through linear extrapolation using the<br>U.S’s 2005 emissions and the NDC set in 2015, which set an emissions goal for 2025.",
+            "of net zero emissions, <br>which was set in President Biden’s climate plan.",
+        ),
+    ],
+    (0, 0),
+    [
+        (2030, 2050),
+        (0.94, 0),
+        (
+            "set in Brazil’s 2015 NDC.",
+            "determined through linear extrapolation using Brazil’s 2025 and <br>2030 emissions goals set in their 2015 NDC.",
+        ),
+    ],
+    [(2030, 2050), (2.4, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    (0, 0),
+    [
+        (2030, 2050),
+        (0.398, 0),
+        (
+            "set in South Africa’s 2015 NDC.",
+            "determined through linear extrapolation using South Africa’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030. South Africa submitted a Low Emission <br>Development Scenario in 2020, but the scenario does not specify a 2050 emissions goal.",
+        ),
+    ],
+    (0, 0),
+    [
+        (2030, 2050),
+        (2.17, 0),
+        (
+            "set in Russia’s 2015 NDC.",
+            "determined through linear extrapolation using Russia’s 1990 <br>emissions and the NDC set in 2015, which set an emissions goal for 2030.",
+        ),
+    ],
+    (0, 0),
+    [
+        (2030, 2050),
+        (12.96, 0),
+        (
+            "determined by China’s 2020<br>NDC update to peak emissions before 2030.",
+            "of net zero emissions, which<br>was announced by President Xi Jinping in September 2020.",
+        ),
+    ],
+    [
+        (2030, 2050),
+        (9.14, 0),
+        (
+            "set in India’s 2015 NDC.",
+            "determined through linear extrapolation using India’s 2017 emissions <br>and the NDC set in 2015, which set an emissions goal for 2030.",
+        ),
+    ],
+    [
+        (2030, 2050),
+        (1, 0),
+        (
+            "set in Japan’s 2015 NDC.",
+            "of net zero emissions, which was announced in Prime Minister Yoshihide <br>Suga's speech on October 26th, 2020.",
+        ),
+    ],
+    (0, 0),
+    (0, 0),
 ]
 
-ndcs = [
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    (3, 3),
-    [(2030, 2050), (2.84, 0), ("NDC", "Net-zero by 2050")],
-    (3, 3),
-    [(2030, 2050), (1.2, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    (3, 3),
-    [(2030, 2050), (0.398, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    (3, 3),
-    [(2030, 2050), (2.17, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    (3, 3),
-    [(2030, 2050), (12.96, 0), ("NDC", "Net-zero by 2050")],
-    [(2030, 2050), (9.14, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    [(2030, 2050), (1, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    (3, 3),
-    (3, 3),
+ipcc = [
+    [(2030, 2050), (24, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    (0, 0),
+    [(2030, 2050), (2.99, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    (0, 0),
+    [(2030, 2050), (0.69, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    [(2030, 2050), (2.39, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    (0, 0),
+    [(2030, 2050), (0.26, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    (0, 0),
+    [(2030, 2050), (1.02, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    (0, 0),
+    [(2030, 2050), (12, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    [(2030, 2050), (1.75, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    [(2030, 2050), (0.55, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
+    (0, 0),
+    (0, 0),
 ]
 
 scenario = "pathway"
@@ -4321,6 +4349,7 @@ for year in [2030, 2050]:
                 ]
             )
 
+            # IPCC target line
             figure.add_shape(
                 type="line",
                 x0=pd.Series(data["Total"]).sum(),
@@ -4333,11 +4362,11 @@ for year in [2030, 2050]:
 
             figure.add_annotation(
                 text="The blue dotted line represents an emissions mitigation goal "
-                + bar_emissions_goal[i][j],
+                + ipcc[i][2][j],
                 xref="paper",
                 yref="paper",
                 x=0,
-                y=1.14,
+                y=1.16,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
                 align="left",
@@ -4345,6 +4374,52 @@ for year in [2030, 2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
+
+            # NDC target line
+            if region_list[i] in ["US ", "CHINA "]:
+
+                figure.add_shape(
+                    type="line",
+                    x0=(
+                        pd.Series(
+                            em_baseline.groupby("Region")
+                            .sum()
+                            .loc[region_list[i]][year]
+                            / 1e3
+                            - ndcs[i][1][j]
+                        ).values[0]
+                    ).clip(min=0),
+                    y0=-0.5,
+                    x1=(
+                        pd.Series(
+                            em_baseline.groupby("Region")
+                            .sum()
+                            .loc[region_list[i]][year]
+                            / 1e3
+                            - ndcs[i][1][j]
+                        ).values[0]
+                    ).clip(min=0),
+                    y1=7.5,
+                    line=dict(color="green", width=3, dash="dot"),
+                    name="NDC",
+                )
+
+                figure.add_annotation(
+                    text="The blue dotted line represents an emissions mitigation goal "
+                    + ipcc[i][2][j]
+                    + "<br>The green dotted line represents an emissions mitigation goal "
+                    + ndcs[i][2][j],
+                    xref="paper",
+                    yref="paper",
+                    x=0,
+                    y=1.2,
+                    showarrow=False,
+                    font=dict(size=10, color="#2E3F5C"),
+                    align="left",
+                    borderpad=4,
+                    bgcolor="#ffffff",
+                    opacity=1,
+                )
 
         else:
             figure = go.Figure(
@@ -4400,6 +4475,7 @@ for year in [2030, 2050]:
                 ]
             )
 
+        # IPCC & NDC target lines
         if (
             region_list[i]
             in [
@@ -4416,7 +4492,7 @@ for year in [2030, 2050]:
                     pd.Series(
                         em_baseline.groupby("Region").sum().loc[region_list[i]][year]
                         / 1e3
-                        - ndcs[i][1]
+                        - ndcs[i][1][j]
                     ).values[0]
                 ).clip(min=0),
                 y0=-0.5,
@@ -4424,21 +4500,22 @@ for year in [2030, 2050]:
                     pd.Series(
                         em_baseline.groupby("Region").sum().loc[region_list[i]][year]
                         / 1e3
-                        - ndcs[i][1]
+                        - ndcs[i][1][j]
                     ).values[0]
                 ).clip(min=0),
                 y1=6.5,
-                line=dict(color="LightSeaGreen", width=3, dash="dot"),
+                line=dict(color="green", width=3, dash="dot"),
                 name="NDC",
             )
 
             figure.add_annotation(
-                text="The blue dotted line represents an emissions mitigation goal "
-                + bar_emissions_goal[i][j],
+                text="The green dotted line represents an emissions mitigation goal "
+                + ndcs[i][2][j]
+                + "<br>The blue dotted line represents an emissions mitigation goal of 50% emissions reduction by 2030",
                 xref="paper",
                 yref="paper",
                 x=0,
-                y=1.14,
+                y=1.16,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
                 align="left",
@@ -4447,6 +4524,17 @@ for year in [2030, 2050]:
                 opacity=1,
             )
 
+            figure.add_shape(
+                type="line",
+                x0=em_hist.loc[region_list[i], 2019].values[0] / 2000,
+                y0=-0.5,
+                x1=em_hist.loc[region_list[i], 2019].values[0] / 2000,
+                y1=6.5,
+                line=dict(color="LightSeaGreen", width=3, dash="dot"),
+                name="NDC",
+            )
+
+        # EI
         if region_list[i] in [
             "World ",
             "US ",
@@ -4458,6 +4546,70 @@ for year in [2030, 2050]:
             "BRAZIL ",
             "INDIA ",
         ]:
+
+            if (
+                region_list[i]
+                in [
+                    "US ",
+                    "CHINA ",
+                    "SAFR ",
+                    "RUS ",
+                    "JPN ",
+                    "BRAZIL ",
+                    "INDIA ",
+                ]
+            ) & (year == 2030):
+                ei = (
+                    em_mit.loc[
+                        [
+                            "V6: Forests & Wetlands",
+                            "V5: Agriculture",
+                            "V4: Industry",
+                            "V3: Buildings",
+                            "V2: Transport",
+                            "V1: Electricity",
+                        ],
+                        year,
+                    ].values.sum()
+                    / 1e3
+                ) / (
+                    em_baseline.groupby("Region").sum().loc[region_list[i]][year] / 1e3
+                    - ndcs[i][1][j]
+                )
+
+                ndcan = (
+                    "<br>EI (NDC Target) = "
+                    + str(
+                        (
+                            em_mit.loc[
+                                [
+                                    "V6: Forests & Wetlands",
+                                    "V5: Agriculture",
+                                    "V4: Industry",
+                                    "V3: Buildings",
+                                    "V2: Transport",
+                                    "V1: Electricity",
+                                ],
+                                year,
+                            ].values.sum()
+                            / 1e3
+                        ).round(decimals=2)
+                    )
+                    + " GtCO2e  /  "
+                    + str(
+                        (
+                            em_baseline.groupby("Region")
+                            .sum()
+                            .loc[region_list[i]][year]
+                            / 1e3
+                            - ndcs[i][1][j]
+                        ).round(decimals=2)
+                    )
+                    + " GtCO2e = "
+                    + str(ei.round(decimals=2))
+                )
+            else:
+                ndcan = str("")
 
             ei = (
                 em_mit.loc[
@@ -4474,11 +4626,11 @@ for year in [2030, 2050]:
                 / 1e3
             ) / (
                 em_baseline.groupby("Region").sum().loc[region_list[i]][year] / 1e3
-                - ndcs[i][1][j]
+                - ipcc[i][1][j]
             )
 
             figure.add_annotation(
-                text="Epic Index = PD Projected Mitigation Potential / Target Mitigation = "
+                text="Epic Index = PD Projected Mitigation Potential / Target Mitigation<br>EI (IPCC Target) = "
                 + str(
                     (
                         em_mit.loc[
@@ -4501,15 +4653,16 @@ for year in [2030, 2050]:
                     (
                         em_baseline.groupby("Region").sum().loc[region_list[i]][year]
                         / 1e3
-                        - ndcs[i][1][j]
+                        - ipcc[i][1][j]
                     ).round(decimals=2)
                 )
                 + " GtCO2e = "
-                + str(ei.round(decimals=2)),
+                + str(ei.round(decimals=2))
+                + str(ndcan),
                 xref="paper",
                 yref="paper",
                 x=0,
-                y=-0.25,
+                y=-0.4,
                 showarrow=False,
                 font=dict(size=10, color="#2E3F5C"),
                 align="left",
@@ -4522,6 +4675,7 @@ for year in [2030, 2050]:
         figure.update_layout(
             title="Climate Mitigation Potential, " + str(year) + ", " + region_list[i],
             title_x=0.5,
+            title_y=0.95,
             xaxis={"title": "GtCO2e mitigated in " + str(year)},
             barmode="stack",
             legend=dict(
@@ -4531,6 +4685,7 @@ for year in [2030, 2050]:
                 bordercolor="rgba(255, 255, 255, 0)",
             ),
             showlegend=False,
+            margin_b=100,
         )
 
         if show_figs is True:
