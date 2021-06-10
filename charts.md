@@ -48,12 +48,12 @@
 
 ## Exploratory Scenarios
 
-* [Limited Policy (DAU-LP)](https://epic-institute.github.io/positive-disruption/charts/md-dau-lp.html)
+* [Limited Policy (DAU-LP)](https://epic-institute.github.io/positive-disruption/charts/md-daulp.html)
 
-* [War Effort (DAU-WE)](https://epic-institute.github.io/positive-disruption/charts/md-dau-we.html)
+* [War Effort (DAU-WE)](https://epic-institute.github.io/positive-disruption/charts/md-dauwe.html)
 
-* [Accelerated Regenerative Agriculture (DAU-RA)](https://epic-institute.github.io/positive-disruption/charts/md-dau-ra.html)
+* [Accelerated Regenerative Agriculture (DAU-RA)](https://epic-institute.github.io/positive-disruption/charts/md-daura.html)
 
-* [Accelerated Forests & Wetlands (DAU-FW)](https://epic-institute.github.io/positive-disruption/charts/md-dau-fw.html)
+* [Accelerated Forests & Wetlands (DAU-FW)](https://epic-institute.github.io/positive-disruption/charts/md-daufw.html)
 
-* [Accelerated Industry & Regenerative Agriculture (DAU-RAFW)](https://epic-institute.github.io/positive-disruption/charts/md-dau-rafw.html)
+* [Accelerated Industry & Regenerative Agriculture (DAU-RAFW)](https://epic-institute.github.io/positive-disruption/charts/md-daurafw.html)
