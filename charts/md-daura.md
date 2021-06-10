@@ -43,5 +43,3 @@
 * [Brazil](https://epic-institute.github.io/positive-disruption/charts/md-BRAZIL-daura.html)
 
 * [India](https://epic-institute.github.io/positive-disruption/charts/md-INDIA-daura.html)
-
-***

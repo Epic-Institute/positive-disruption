@@ -14,6 +14,3 @@ Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Fi
 
 ## Adoption Curves
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-OECD-pathway-daura.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Industry-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-OECD-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  

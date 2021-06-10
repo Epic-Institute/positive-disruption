@@ -14,6 +14,3 @@ European Union regional grouping, Albania, Belarus, Bosnia and Herzegovina, Gibr
 
 ## Adoption Curves
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-EUR-pathway-daufw.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Industry-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-EUR-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  

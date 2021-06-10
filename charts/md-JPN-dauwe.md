@@ -14,6 +14,3 @@
 
 ## Adoption Curves
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-JPN-pathway-dauwe.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Industry-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-JPN-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  

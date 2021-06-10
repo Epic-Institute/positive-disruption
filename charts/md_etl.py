@@ -647,7 +647,7 @@ for scen in ["daulp", "dauwe", "daura", "daufw", "daurafw"]:
 
         mdFile.new_line()
         mdFile.new_header(level=2, title="Subvector Adoption Curves")
-        """
+
         for j in ["pathway"]:
             for k in [
                 "Industry",
@@ -672,7 +672,7 @@ for scen in ["daulp", "dauwe", "daura", "daufw", "daurafw"]:
                 mdFile.write(path)
                 mdFile.write(" height='500' width='150%'></iframe>")
                 mdFile.new_line()
-        """
+        
         for j in ["pathway"]:
             for k in [
                 "Regenerative Agriculture",
@@ -751,7 +751,15 @@ for scen in ["daulp", "dauwe", "daura", "daufw", "daurafw"]:
 
             if region_list[i] == "World ":
                 for k in ["co2conc", "ghgconc", "forcing", "temp"]:
-                    path = '"' + k + "-" + (region_list[i]).replace(" ", "") + '.html"'
+                    path = (
+                        '"'
+                        + k
+                        + "-"
+                        + (region_list[i]).replace(" ", "")
+                        + "-"
+                        + scen
+                        + '.html"'
+                    )
 
                     mdFile.write(
                         "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "

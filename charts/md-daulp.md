@@ -43,5 +43,3 @@
 * [Brazil](https://epic-institute.github.io/positive-disruption/charts/md-BRAZIL-daulp.html)
 
 * [India](https://epic-institute.github.io/positive-disruption/charts/md-INDIA-daulp.html)
-
-***

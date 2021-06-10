@@ -14,6 +14,3 @@
 
 ## Adoption Curves
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurves-CHINA-pathway-daurafw.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CHINA-Industry-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CHINA-RegenerativeAgriculture-pathway.html" height='500' width='150%'></iframe>  
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "scurvessub-CHINA-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>  

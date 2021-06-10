@@ -8187,6 +8187,19 @@ for i in range(0, len(region_list)):
 
     if show_figs is True:
         fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/scurves-"
+                + region_list[i]
+                + "-"
+                + scenario
+                + "-dauwe"
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
 
 # endregion
 
@@ -8830,6 +8843,19 @@ for i in range(0, len(region_list)):
 
     if show_figs is True:
         fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/mwedges-"
+                + "pathway"
+                + "-"
+                + region_list[i]
+                + "-dauwe"
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
 
 # endregion
 
@@ -9182,6 +9208,19 @@ for i in range(0, len(region_list)):
 
     if show_figs is True:
         fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/scurves-"
+                + region_list[i]
+                + "-"
+                + scenario
+                + "-daura"
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
 
 # endregion
 
@@ -9840,6 +9879,19 @@ for i in range(0, len(region_list)):
 
     if show_figs is True:
         fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/mwedges-"
+                + "pathway"
+                + "-"
+                + region_list[i]
+                + "-daura"
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
 
 # endregion
 
@@ -10504,6 +10556,19 @@ for i in range(0, len(region_list)):
 
     if show_figs is True:
         fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/mwedges-"
+                + "pathway"
+                + "-"
+                + region_list[i]
+                + "-daufw"
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
 
 # endregion
 
@@ -10515,9 +10580,9 @@ for i in range(0, len(region_list)):
 
 # region
 
-##################################
+####################################
 # DAU-RAFW MITIGATION WEDGES CURVE #
-##################################
+####################################
 
 # region
 
@@ -11170,6 +11235,19 @@ for i in range(0, len(region_list)):
 
     if show_figs is True:
         fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/mwedges-"
+                + "pathway"
+                + "-"
+                + region_list[i]
+                + "-daurafw"
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
 
 # endregion
 
