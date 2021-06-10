@@ -40,6 +40,9 @@ for i in range(0, len(region_list)):
     mdFile.write("![](../region%20maps/")
     mdFile.write(region_list[i].replace(" ", ""))
     mdFile.write(".png)")
+
+    # mdFile.write(region_dict[region_list[i]])
+
     mdFile.new_line()
     mdFile.new_line()
 
@@ -243,7 +246,6 @@ for i in range(0, len(region_list)):
 
     # region
 
-    mdFile.write(region_dict[region_list[i]])
     mdFile.new_line()
     mdFile.new_header(level=2, title="Adoption Curves")
 
@@ -393,6 +395,9 @@ for scen in ["daulp", "dauwe", "daura", "daufw", "daurafw"]:
         mdFile.write("![](../region%20maps/")
         mdFile.write(region_list[i].replace(" ", ""))
         mdFile.write(".png)")
+
+        # mdFile.write(region_dict[region_list[i]])
+
         mdFile.new_line()
         mdFile.new_line()
 
@@ -615,7 +620,6 @@ for scen in ["daulp", "dauwe", "daura", "daufw", "daurafw"]:
 
         # region
 
-        mdFile.write(region_dict[region_list[i]])
         mdFile.new_line()
         mdFile.new_header(level=2, title="Adoption Curves")
 
