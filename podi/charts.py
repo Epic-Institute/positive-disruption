@@ -11887,6 +11887,8 @@ for i in range(0, len(region_list)):
 
 # region
 
+altscen = "dauwe"
+
 #################################
 # CO2 ATMOSPHERIC CONCENTRATION #
 #################################
@@ -12291,7 +12293,14 @@ fig.add_annotation(
 
 if show_figs is True:
     fig.show()
-
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/co2conc-" + "World " + "-" + str(altscen) + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
 
 # endregion
 
@@ -12698,7 +12707,14 @@ fig.add_annotation(
 
 if show_figs is True:
     fig.show()
-
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/ghgconc-" + "World " + "-" + str(altscen) + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
 
 # endregion
 
@@ -13103,7 +13119,14 @@ fig.add_annotation(
 
 if show_figs is True:
     fig.show()
-
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/forcing-" + "World" + "-" + str(altscen) + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
 
 # endregion
 
@@ -13508,9 +13531,16 @@ fig.add_annotation(
 
 if show_figs is True:
     fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/temp-" + "World" + "-" + str(altscen) + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
 
 # endregion
-
 
 # endregion
 
