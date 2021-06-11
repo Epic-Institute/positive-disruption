@@ -5142,6 +5142,12 @@ results19 = curve_smooth(
     3,
 )
 """
+results19 = pd.DataFrame(
+    results.loc[
+        "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+    ].loc[2010:]
+).T
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -5449,6 +5455,12 @@ results19 = curve_smooth(
     6,
 )
 """
+results19 = pd.DataFrame(
+    results.loc[
+        "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+    ].loc[2010:]
+).T
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -7610,7 +7622,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU21-LP",
+                name="DAU-LP",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -8629,7 +8641,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU21-WE",
+                name="DAU-WE",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -9662,7 +9674,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU21-RA",
+                name="DAU-RA",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -10655,7 +10667,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU21-FW",
+                name="DAU-FW",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -11305,7 +11317,7 @@ em_pathway_alt2 = em_pathway.loc[
 em_pathway_alt = em_pathway_alt2
 
 # for use in climate charts
-em_alt_rafw = em_pathway_alt
+em_alt_ncs = em_pathway_alt
 
 em_mitigated_alt = (
     em_baseline_alt.groupby(["Region", "Sector", "Metric"]).sum()
@@ -11653,7 +11665,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU21-RA",
+                name="DAU-RA",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -12367,7 +12379,7 @@ em_pathway_alt2 = (
 em_pathway_alt = em_pathway_alt2
 
 # for use in climate charts
-em_alt_ra = em_pathway_alt
+em_alt_ffi = em_pathway_alt
 
 em_mitigated_alt = (
     em_baseline_alt.groupby(["Region", "Sector", "Metric"]).sum()
@@ -12714,7 +12726,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU21-RA",
+                name="DAU-RA",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -13395,7 +13407,7 @@ em_pathway_alt2 = (
 em_pathway_alt = em_pathway_alt2
 
 # for use in climate charts
-em_alt_ra = em_pathway_alt
+em_alt_ncsffi = em_pathway_alt
 
 em_mitigated_alt = (
     em_baseline_alt.groupby(["Region", "Sector", "Metric"]).sum()
@@ -13665,7 +13677,7 @@ for i in range(0, len(region_list)):
 
         fig.add_trace(
             go.Scatter(
-                name="DAU21-RA",
+                name="DAU-RA",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -13897,6 +13909,12 @@ results19 = curve_smooth(
     6,
 )
 """
+results19 = pd.DataFrame(
+    results.loc[
+        "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+    ].loc[2010:]
+).T
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -14200,7 +14218,7 @@ fig.add_trace(
 """
 fig.add_trace(
     go.Scatter(
-        name="DAU21-LP",
+        name="DAU-LP",
         line=dict(width=3, color="yellow", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Clp.loc[data_end_year:, "CO2"],
@@ -14211,7 +14229,7 @@ fig.add_trace(
 )
 fig.add_trace(
     go.Scatter(
-        name="DAU21-WE",
+        name="DAU-WE",
         line=dict(width=3, color="light blue", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cwe.loc[data_end_year:, "CO2"],
@@ -14312,6 +14330,12 @@ results19 = curve_smooth(
     6,
 )
 """
+results19 = pd.DataFrame(
+    results.loc[
+        "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+    ].loc[2010:]
+).T
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -14614,7 +14638,7 @@ fig.add_trace(
 """
 fig.add_trace(
     go.Scatter(
-        name="DAU21-LP",
+        name="DAU-LP",
         line=dict(width=3, color="yellow", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Clp.loc[data_end_year:, "CO2e"],
@@ -14625,7 +14649,7 @@ fig.add_trace(
 )
 fig.add_trace(
     go.Scatter(
-        name="DAU21-WE",
+        name="DAU-WE",
         line=dict(width=3, color="light blue", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cwe.loc[data_end_year:, "CO2e"],
@@ -15032,7 +15056,7 @@ fig.add_trace(
 """
 fig.add_trace(
     go.Scatter(
-        name="DAU21-LP",
+        name="DAU-LP",
         line=dict(width=3, color="yellow", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Flp.loc[data_end_year:, "CO2e"],
@@ -15043,7 +15067,7 @@ fig.add_trace(
 )
 fig.add_trace(
     go.Scatter(
-        name="DAU21-WE",
+        name="DAU-WE",
         line=dict(width=3, color="light blue", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Fwe.loc[data_end_year:, "CO2e"],
@@ -15443,7 +15467,7 @@ fig.add_trace(
 """
 fig.add_trace(
     go.Scatter(
-        name="DAU21-LP",
+        name="DAU-LP",
         line=dict(width=3, color="yellow", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Tlp.loc[data_end_year:, "CO2e"],
@@ -15455,7 +15479,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="DAU21-WE",
+        name="DAU-WE",
         line=dict(width=3, color="light blue", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Twe.loc[data_end_year:, "CO2e"],
@@ -15512,10 +15536,12 @@ if save_figs is True:
 
 # region
 
-altscen = "dauncs"
+altscen = "dauffi"
 show_ra = False
 show_fw = False
-show_rafw = True
+show_ncs = False
+show_ffi = True
+show_ncsffi = False
 
 #################################
 # CO2 ATMOSPHERIC CONCENTRATION #
@@ -15529,7 +15555,9 @@ em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 em_ra = pd.DataFrame(rcp3pd.Emissions.emissions * 1.002)
 em_fw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.998)
-em_rafw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
+em_ncs = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
+em_ffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9999)
+em_ncsffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
 
 hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
     ["Region", "Metric", "Units", "Scenario"]
@@ -15543,7 +15571,7 @@ results = (
     .droplevel(["UNIT"])
 )
 results.columns = results.columns.astype(int)
-"""
+
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -15563,7 +15591,7 @@ results19 = curve_smooth(
     "quadratic",
     6,
 )
-"""
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -15627,8 +15655,34 @@ em_fw.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_rafw.loc[225:335, 1] = (
-    em_alt_rafw[~em_alt_rafw.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+em_ncs.loc[225:335, 1] = (
+    em_alt_ncs[~em_alt_ncs.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Electricity", "Transport", "Buildings", "Industry"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values
+em_ffi.loc[225:335, 1] = (
+    em_alt_ffi[~em_alt_ffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Electricity", "Transport", "Buildings", "Industry"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values
+em_ncsffi.loc[225:335, 1] = (
+    em_alt_ncsffi[
+        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+    ]
     .loc[
         "World ",
         ["Electricity", "Transport", "Buildings", "Industry"],
@@ -15700,8 +15754,34 @@ em_fw.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_rafw.loc[225:335, 2] = (
-    em_alt_rafw[~em_alt_rafw.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+em_ncs.loc[225:335, 2] = (
+    em_alt_ncs[~em_alt_ncs.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Forests & Wetlands", "Regenerative Agriculture"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values
+em_ffi.loc[225:335, 2] = (
+    em_alt_ffi[~em_alt_ffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Forests & Wetlands", "Regenerative Agriculture"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values
+em_ncsffi.loc[225:335, 2] = (
+    em_alt_ncsffi[
+        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+    ]
     .loc[
         "World ",
         ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -15744,8 +15824,20 @@ em_fw.loc[225:335, 3] = (
     .sum()
     / (25)
 ).values
-em_rafw.loc[225:335, 3] = (
-    em_alt_rafw[em_alt_rafw.index.get_level_values(3).isin(["CH4"])]
+em_ncs.loc[225:335, 3] = (
+    em_alt_ncs[em_alt_ncs.index.get_level_values(3).isin(["CH4"])]
+    .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+    .sum()
+    / (25)
+).values
+em_ffi.loc[225:335, 3] = (
+    em_alt_ffi[em_alt_ffi.index.get_level_values(3).isin(["CH4"])]
+    .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+    .sum()
+    / (25)
+).values
+em_ncsffi.loc[225:335, 3] = (
+    em_alt_ncsffi[em_alt_ncsffi.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
     / (25)
@@ -15782,8 +15874,20 @@ em_fw.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
-em_rafw.loc[225:335, 4] = (
-    em_alt_rafw[em_alt_rafw.index.get_level_values(3).isin(["N2O"])]
+em_ncs.loc[225:335, 4] = (
+    em_alt_ncs[em_alt_ncs.index.get_level_values(3).isin(["N2O"])]
+    .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+    .sum()
+    / (298)
+).values
+em_ffi.loc[225:335, 4] = (
+    em_alt_ffi[em_alt_ffi.index.get_level_values(3).isin(["N2O"])]
+    .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+    .sum()
+    / (298)
+).values
+em_ncsffi.loc[225:335, 4] = (
+    em_alt_ncsffi[em_alt_ncsffi.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
@@ -15794,7 +15898,9 @@ em_pd = em_pd.values
 em_cdr = em_cdr.values
 em_ra = em_ra.values
 em_fw = em_fw.values
-em_rafw = em_rafw.values
+em_ncs = em_ncs.values
+em_ffi = em_ffi.values
+em_ncsffi = em_ncsffi.values
 
 other_rf = np.zeros(em_pd.shape[0])
 for x in range(0, em_pd.shape[0]):
@@ -15807,7 +15913,11 @@ Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd, other_rf=other_rf)
 Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
 Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra, other_rf=other_rf)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw, other_rf=other_rf)
-Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_rafw, other_rf=other_rf)
+Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs, other_rf=other_rf)
+Cffi, Fffi, Tffi = fair.forward.fair_scm(emissions=em_ffi, other_rf=other_rf)
+Cncsffi, Fncsffi, Tncsffi = fair.forward.fair_scm(
+    emissions=em_ncsffi, other_rf=other_rf
+)
 
 Cb = (
     pd.DataFrame(Cb)
@@ -15839,6 +15949,16 @@ Crafw = (
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
+Cffi = (
+    pd.DataFrame(Cffi)
+    .loc[225:335]
+    .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+)
+Cncsffi = (
+    pd.DataFrame(Cncsffi)
+    .loc[225:335]
+    .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+)
 
 # CO2e conversion (not needed here for just CO2)
 Cb["CO2"] = Cb.loc[:, 0]
@@ -15847,6 +15967,8 @@ Ccdr["CO2"] = Ccdr.loc[:, 0]
 Clp["CO2"] = Clp.loc[:, 0]
 Cwe["CO2"] = Cwe.loc[:, 0]
 Crafw["CO2"] = Crafw.loc[:, 0]
+Cffi["CO2"] = Cffi.loc[:, 0]
+Cncsffi["CO2"] = Cncsffi.loc[:, 0]
 
 C19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 Cb = Cb * (hist[2021] / Cb.loc[2021, "CO2"])
@@ -15855,6 +15977,8 @@ Ccdr = Ccdr * (hist[2021] / Ccdr.loc[2021, "CO2"])
 Clp = Clp * (hist[2021] / Clp.loc[2021, "CO2"])
 Cwe = Cwe * (hist[2021] / Cwe.loc[2021, "CO2"])
 Crafw = Crafw * (hist[2021] / Crafw.loc[2021, "CO2"])
+Cffi = Cffi * (hist[2021] / Cffi.loc[2021, "CO2"])
+Cncsffi = Cncsffi * (hist[2021] / Cncsffi.loc[2021, "CO2"])
 
 fig = go.Figure()
 
@@ -15920,7 +16044,7 @@ fig.add_trace(
 if show_ra == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-RA",
+            name="DAU-RA",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Clp.loc[data_end_year:, "CO2"],
@@ -15933,7 +16057,7 @@ if show_ra == True:
 if show_fw == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-FW",
+            name="DAU-FW",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cwe.loc[data_end_year:, "CO2"],
@@ -15943,16 +16067,42 @@ if show_fw == True:
         )
     )
 
-if show_rafw == True:
+if show_ncs == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-RAFW",
+            name="DAU-NCS",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Crafw.loc[data_end_year:, "CO2"],
             fill="none",
             stackgroup="rafw",
             legendgroup="rafw",
+        )
+    )
+
+if show_ffi == True:
+    fig.add_trace(
+        go.Scatter(
+            name="DAU-FFI",
+            line=dict(width=3, color="purple", dash="dot"),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Cffi.loc[data_end_year:, "CO2"],
+            fill="none",
+            stackgroup="ffi",
+            legendgroup="ffi",
+        )
+    )
+
+if show_ncsffi == True:
+    fig.add_trace(
+        go.Scatter(
+            name="DAU-NCS+FFI",
+            line=dict(width=3, color="purple", dash="dot"),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Cncsffi.loc[data_end_year:, "CO2"],
+            fill="none",
+            stackgroup="ncsffi",
+            legendgroup="ncsffi",
         )
     )
 
@@ -16013,7 +16163,9 @@ em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 em_ra = pd.DataFrame(rcp3pd.Emissions.emissions * 1.002)
 em_fw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.998)
-em_rafw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
+em_ncs = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
+em_ffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9999)
+em_ncsffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
 
 hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
     ["Region", "Metric", "Units", "Scenario"]
@@ -16027,7 +16179,7 @@ results = (
     .droplevel(["UNIT"])
 )
 results.columns = results.columns.astype(int)
-"""
+
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -16047,7 +16199,7 @@ results19 = curve_smooth(
     "quadratic",
     6,
 )
-"""
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -16111,8 +16263,8 @@ em_fw.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_rafw.loc[225:335, 1] = (
-    em_alt_rafw[~em_alt_rafw.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+em_ncs.loc[225:335, 1] = (
+    em_alt_ncs[~em_alt_ncs.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Electricity", "Transport", "Buildings", "Industry"],
@@ -16184,8 +16336,8 @@ em_fw.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_rafw.loc[225:335, 2] = (
-    em_alt_rafw[~em_alt_rafw.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+em_ncs.loc[225:335, 2] = (
+    em_alt_ncs[~em_alt_ncs.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -16228,7 +16380,7 @@ em_fw.loc[225:335, 3] = (
     .sum()
     / (25)
 ).values
-em_rafw.loc[225:335, 3] = (
+em_ncs.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
@@ -16266,8 +16418,8 @@ em_fw.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
-em_rafw.loc[225:335, 4] = (
-    em_alt_rafw[em_alt_rafw.index.get_level_values(3).isin(["N2O"])]
+em_ncs.loc[225:335, 4] = (
+    em_alt_ncs[em_alt_ncs.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
@@ -16278,7 +16430,7 @@ em_pd = em_pd.values
 em_cdr = em_cdr.values
 em_ra = em_ra.values
 em_fw = em_fw.values
-em_rafw = em_rafw.values
+em_ncs = em_ncs.values
 
 other_rf = np.zeros(em_pd.shape[0])
 for x in range(0, em_pd.shape[0]):
@@ -16291,7 +16443,7 @@ Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd, other_rf=other_rf)
 Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
 Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra, other_rf=other_rf)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw, other_rf=other_rf)
-Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_rafw, other_rf=other_rf)
+Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs, other_rf=other_rf)
 
 Cb = (
     pd.DataFrame(Cb)
@@ -16405,7 +16557,7 @@ fig.add_trace(
 if show_ra == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-RA",
+            name="DAU-RA",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Clp.loc[data_end_year:, "CO2e"],
@@ -16418,7 +16570,7 @@ if show_ra == True:
 if show_fw == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-FW",
+            name="DAU-FW",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cwe.loc[data_end_year:, "CO2e"],
@@ -16428,10 +16580,10 @@ if show_fw == True:
         )
     )
 
-if show_rafw == True:
+if show_ncs == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-RAFW",
+            name="DAU-NCS",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Crafw.loc[data_end_year:, "CO2e"],
@@ -16440,6 +16592,35 @@ if show_rafw == True:
             legendgroup="rafw",
         )
     )
+
+
+if show_ffi == True:
+    fig.add_trace(
+        go.Scatter(
+            name="DAU-FFI",
+            line=dict(width=3, color="purple", dash="dot"),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Cffi.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="ffi",
+            legendgroup="ffi",
+        )
+    )
+
+
+if show_ncsffi == True:
+    fig.add_trace(
+        go.Scatter(
+            name="DAU-NCS+FFI",
+            line=dict(width=3, color="purple", dash="dot"),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Cncsffi.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="ncsffi",
+            legendgroup="ncsffi",
+        )
+    )
+
 
 fig.update_layout(
     title={
@@ -16497,8 +16678,9 @@ em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 em_ra = pd.DataFrame(rcp3pd.Emissions.emissions * 1.002)
 em_fw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.998)
-em_rafw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
-
+em_ncs = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
+em_ffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9999)
+em_ncsffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
 
 hist = pd.read_csv("podi/data/forcing.csv")
 hist.columns = hist.columns.astype(int)
@@ -16594,8 +16776,8 @@ em_fw.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_rafw.loc[225:335, 1] = (
-    em_alt_rafw[~em_alt_rafw.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+em_ncs.loc[225:335, 1] = (
+    em_alt_ncs[~em_alt_ncs.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Electricity", "Transport", "Buildings", "Industry"],
@@ -16667,8 +16849,8 @@ em_fw.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_rafw.loc[225:335, 2] = (
-    em_alt_rafw[~em_alt_rafw.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+em_ncs.loc[225:335, 2] = (
+    em_alt_ncs[~em_alt_ncs.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -16711,7 +16893,7 @@ em_fw.loc[225:335, 3] = (
     .sum()
     / (25)
 ).values
-em_rafw.loc[225:335, 3] = (
+em_ncs.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
@@ -16749,8 +16931,8 @@ em_fw.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
-em_rafw.loc[225:335, 4] = (
-    em_alt_rafw[em_alt_rafw.index.get_level_values(3).isin(["N2O"])]
+em_ncs.loc[225:335, 4] = (
+    em_alt_ncs[em_alt_ncs.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
@@ -16761,7 +16943,7 @@ em_pd = em_pd.values
 em_cdr = em_cdr.values
 em_ra = em_ra.values
 em_fw = em_fw.values
-em_rafw = em_rafw.values
+em_ncs = em_ncs.values
 
 other_rf = np.zeros(em_pd.shape[0])
 
@@ -16771,7 +16953,7 @@ Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd)
 Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr)
 Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw)
-Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_rafw)
+Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs)
 
 Fb = (
     pd.DataFrame(Fb)
@@ -16889,7 +17071,7 @@ fig.add_trace(
 if show_ra == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-RA",
+            name="DAU-RA",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Flp.loc[data_end_year:, "CO2e"],
@@ -16902,7 +17084,7 @@ if show_ra == True:
 if show_fw == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-FW",
+            name="DAU-FW",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fwe.loc[data_end_year:, "CO2e"],
@@ -16912,16 +17094,42 @@ if show_fw == True:
         )
     )
 
-if show_rafw == True:
+if show_ncs == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-RAFW",
+            name="DAU-NCS",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Frafw.loc[data_end_year:, "CO2e"],
             fill="none",
             stackgroup="rafw",
             legendgroup="rafw",
+        )
+    )
+
+if show_ffi == True:
+    fig.add_trace(
+        go.Scatter(
+            name="DAU-FFI",
+            line=dict(width=3, color="purple", dash="dot"),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Fffi.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="ffi",
+            legendgroup="ffi",
+        )
+    )
+
+if show_ncsffi == True:
+    fig.add_trace(
+        go.Scatter(
+            name="DAU-NCS+FFI",
+            line=dict(width=3, color="purple", dash="dot"),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Fncsffi.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="ncsffi",
+            legendgroup="ncsffi",
         )
     )
 
@@ -16976,7 +17184,9 @@ em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 em_ra = pd.DataFrame(rcp3pd.Emissions.emissions * 0.995)
 em_fw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.998)
-em_rafw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
+em_ncs = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
+em_ffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9999)
+em_ncsffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
 
 hist = pd.read_csv("podi/data/temp.csv")
 hist.columns = hist.columns.astype(int)
@@ -17071,8 +17281,8 @@ em_fw.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_rafw.loc[225:335, 1] = (
-    em_alt_rafw[~em_alt_rafw.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+em_ncs.loc[225:335, 1] = (
+    em_alt_ncs[~em_alt_ncs.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Electricity", "Transport", "Buildings", "Industry"],
@@ -17144,8 +17354,8 @@ em_fw.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_rafw.loc[225:335, 2] = (
-    em_alt_rafw[~em_alt_rafw.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+em_ncs.loc[225:335, 2] = (
+    em_alt_ncs[~em_alt_ncs.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -17188,7 +17398,7 @@ em_fw.loc[225:335, 3] = (
     .sum()
     / (25)
 ).values
-em_rafw.loc[225:335, 3] = (
+em_ncs.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
@@ -17226,8 +17436,8 @@ em_fw.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
-em_rafw.loc[225:335, 4] = (
-    em_alt_rafw[em_alt_rafw.index.get_level_values(3).isin(["N2O"])]
+em_ncs.loc[225:335, 4] = (
+    em_alt_ncs[em_alt_ncs.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
@@ -17238,7 +17448,7 @@ em_pd = em_pd.values
 em_cdr = em_cdr.values
 em_ra = em_ra.values
 em_fw = em_fw.values
-em_rafw = em_rafw.values
+em_ncs = em_ncs.values
 
 other_rf = np.zeros(em_pd.shape[0])
 
@@ -17248,7 +17458,7 @@ Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd)
 Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr)
 Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw)
-Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_rafw)
+Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs)
 
 Tb = (
     pd.DataFrame(Tb)
@@ -17365,7 +17575,7 @@ fig.add_trace(
 if show_ra == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-RA",
+            name="DAU-RA",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tlp.loc[data_end_year:, "CO2e"],
@@ -17378,7 +17588,7 @@ if show_ra == True:
 if show_fw == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-FW",
+            name="DAU-FW",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Twe.loc[data_end_year:, "CO2e"],
@@ -17388,10 +17598,10 @@ if show_fw == True:
         )
     )
 
-if show_rafw == True:
+if show_ncs == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21-RAFW",
+            name="DAU-NCS",
             line=dict(width=3, color="purple", dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Trafw.loc[data_end_year:, "CO2e"],
@@ -17400,6 +17610,33 @@ if show_rafw == True:
             legendgroup="rafw",
         )
     )
+
+if show_ffi == True:
+    fig.add_trace(
+        go.Scatter(
+            name="DAU-FFI",
+            line=dict(width=3, color="purple", dash="dot"),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tffi.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="ffi",
+            legendgroup="ffi",
+        )
+    )
+
+if show_ncsffi == True:
+    fig.add_trace(
+        go.Scatter(
+            name="DAU-NCS+FFI",
+            line=dict(width=3, color="purple", dash="dot"),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tncsffi.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="ncsffi",
+            legendgroup="ncsffi",
+        )
+    )
+
 
 fig.update_layout(
     title={"text": "Global Mean Temperature", "xanchor": "center", "x": 0.5, "y": 0.95},
