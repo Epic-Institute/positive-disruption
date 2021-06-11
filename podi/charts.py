@@ -10883,13 +10883,13 @@ for i in range(0, len(region_list)):
 
 
 ###################################
-# //////////// DAU-RAFW ////////////# RA&FW 2x
+# //////////// DAU-NCS ////////////# RA&FW 2x
 ###################################
 
 # region
 
 ##########################
-# DAU-RAFW ADOPTION CURVES #
+# DAU-NCS ADOPTION CURVES #
 ##########################
 
 # region
@@ -11158,7 +11158,7 @@ for i in range(0, len(region_list)):
     fig.update_layout(
         title={
             "text": "Percent of Total PD Adoption, "
-            + "DAU-RAFW"
+            + "DAU-NCS"
             + ", "
             + region_list[i],
             "xanchor": "center",
@@ -11198,7 +11198,7 @@ for i in range(0, len(region_list)):
                 + region_list[i]
                 + "-"
                 + scenario
-                + "-daurafw"
+                + "-dauncs"
                 + ".html"
             ).replace(" ", ""),
             auto_open=False,
@@ -11207,7 +11207,7 @@ for i in range(0, len(region_list)):
 # endregion
 
 ####################################
-# DAU-RAFW MITIGATION WEDGES CURVE #
+# DAU-NCS MITIGATION WEDGES CURVE #
 ####################################
 
 # region
@@ -11831,7 +11831,7 @@ for i in range(0, len(region_list)):
         margin_b=100,
         margin_t=125,
         title={
-            "text": "Emissions Mitigated, DAU-RAFW, " + region_list[i],
+            "text": "Emissions Mitigated, DAU-NCS, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -11869,7 +11869,7 @@ for i in range(0, len(region_list)):
                 + "pathway"
                 + "-"
                 + region_list[i]
-                + "-daurafw"
+                + "-dauncs"
                 + ".html"
             ).replace(" ", ""),
             auto_open=False,
@@ -14609,7 +14609,7 @@ if save_figs is True:
 
 # region
 
-altscen = "daurafw"
+altscen = "dauncs"
 show_ra = False
 show_fw = False
 show_rafw = True

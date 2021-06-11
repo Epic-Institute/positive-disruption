@@ -375,7 +375,7 @@ for i in range(0, len(region_list)):
 
     mdFile.create_md_file()
 
-for scen in ["daulp", "dauwe", "daura", "daufw", "daurafw", "dauffi"]:
+for scen in ["daulp", "dauwe", "daura", "daufw", "dauncs", "dauffi", "dauncsffi"]:
 
     for i in range(0, len(region_list)):
 
