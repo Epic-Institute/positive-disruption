@@ -16275,6 +16275,32 @@ em_ncs.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
+em_ffi.loc[225:335, 1] = (
+    em_alt_ffi[~em_alt_ffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Electricity", "Transport", "Buildings", "Industry"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values
+em_ncsffi.loc[225:335, 1] = (
+    em_alt_ncsffi[
+        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+    ]
+    .loc[
+        "World ",
+        ["Electricity", "Transport", "Buildings", "Industry"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -16348,6 +16374,32 @@ em_ncs.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
+em_ffi.loc[225:335, 2] = (
+    em_alt_ffi[~em_alt_ffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Forests & Wetlands", "Regenerative Agriculture"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values
+em_ncsffi.loc[225:335, 2] = (
+    em_alt_ncsffi[
+        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+    ]
+    .loc[
+        "World ",
+        ["Forests & Wetlands", "Regenerative Agriculture"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values
 
 # CH4
 em_b.loc[225:335, 3] = (
@@ -16381,6 +16433,18 @@ em_fw.loc[225:335, 3] = (
     / (25)
 ).values
 em_ncs.loc[225:335, 3] = (
+    em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
+    .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+    .sum()
+    / (25)
+).values
+em_ffi.loc[225:335, 3] = (
+    em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
+    .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+    .sum()
+    / (25)
+).values
+em_ffi.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
@@ -16424,6 +16488,18 @@ em_ncs.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
+em_ffi.loc[225:335, 4] = (
+    em_alt_ffi[em_alt_ffi.index.get_level_values(3).isin(["N2O"])]
+    .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+    .sum()
+    / (298)
+).values
+em_ncsffi.loc[225:335, 4] = (
+    em_alt_ncsffi[em_alt_ncsffi.index.get_level_values(3).isin(["N2O"])]
+    .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+    .sum()
+    / (298)
+).values
 
 em_b = em_b.values
 em_pd = em_pd.values
@@ -16431,6 +16507,8 @@ em_cdr = em_cdr.values
 em_ra = em_ra.values
 em_fw = em_fw.values
 em_ncs = em_ncs.values
+em_ffi = em_ffi.values
+em_ncsffi = em_ncsffi.values
 
 other_rf = np.zeros(em_pd.shape[0])
 for x in range(0, em_pd.shape[0]):
@@ -16444,6 +16522,10 @@ Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
 Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra, other_rf=other_rf)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw, other_rf=other_rf)
 Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs, other_rf=other_rf)
+Cffi, Fffi, Tffi = fair.forward.fair_scm(emissions=em_ffi, other_rf=other_rf)
+Cncsffi, Fncsffi, Tncsffi = fair.forward.fair_scm(
+    emissions=em_ncsffi, other_rf=other_rf
+)
 
 Cb = (
     pd.DataFrame(Cb)
@@ -16475,6 +16557,16 @@ Crafw = (
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
+Cffi = (
+    pd.DataFrame(Cffi)
+    .loc[225:335]
+    .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+)
+Cncsffi = (
+    pd.DataFrame(Cncsffi)
+    .loc[225:335]
+    .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+)
 
 # CO2e conversion
 Cb["CO2e"] = Cb.loc[:, 0] + Cb.loc[:, 1] * 25e-3 + Cb.loc[:, 2] * 298e-3
@@ -16483,6 +16575,8 @@ Ccdr["CO2e"] = Ccdr.loc[:, 0] + Ccdr.loc[:, 1] * 25e-3 + Ccdr.loc[:, 2] * 298e-3
 Clp["CO2e"] = Clp.loc[:, 0] + Clp.loc[:, 1] * 25e-3 + Clp.loc[:, 2] * 298e-3
 Cwe["CO2e"] = Cwe.loc[:, 0] + Cwe.loc[:, 1] * 25e-3 + Cwe.loc[:, 2] * 298e-3
 Crafw["CO2e"] = Crafw.loc[:, 0] + Crafw.loc[:, 1] * 25e-3 + Crafw.loc[:, 2] * 298e-3
+Cffi["CO2e"] = Cffi.loc[:, 0] + Cffi.loc[:, 1] * 25e-3 + Cffi.loc[:, 2] * 298e-3
+Cncsffi["CO2e"] = Cncsffi.loc[:, 0] + Cncsffi.loc[:, 1] * 25e-3 + Cncsffi.loc[:, 2] * 298e-3
 
 C19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 Cb = Cb * (hist[2021] / Cb.loc[2021, "CO2e"])
@@ -16491,6 +16585,8 @@ Ccdr = Ccdr * (hist[2021] / Ccdr.loc[2021, "CO2e"])
 Clp = Clp * (hist[2021] / Clp.loc[2021, "CO2e"])
 Cwe = Cwe * (hist[2021] / Cwe.loc[2021, "CO2e"])
 Crafw = Crafw * (hist[2021] / Crafw.loc[2021, "CO2e"])
+Cffi = Cffi * (hist[2021] / Cffi.loc[2021, "CO2e"])
+Cncsffi = Cncsffi * (hist[2021] / Cncsffi.loc[2021, "CO2e"])
 
 fig = go.Figure()
 
@@ -16593,7 +16689,6 @@ if show_ncs == True:
         )
     )
 
-
 if show_ffi == True:
     fig.add_trace(
         go.Scatter(
@@ -16606,7 +16701,6 @@ if show_ffi == True:
             legendgroup="ffi",
         )
     )
-
 
 if show_ncsffi == True:
     fig.add_trace(
