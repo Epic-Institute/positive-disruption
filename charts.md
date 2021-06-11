@@ -56,4 +56,6 @@
 
 * [Accelerated Forests & Wetlands (DAU-FW)](https://epic-institute.github.io/positive-disruption/charts/md-daufw.html)
 
-* [Accelerated Industry & Regenerative Agriculture (DAU-RAFW)](https://epic-institute.github.io/positive-disruption/charts/md-daurafw.html)
+* [Accelerated Regenerative Agriculture & Forests & Wetlands (DAU-RAFW)](https://epic-institute.github.io/positive-disruption/charts/md-daurafw.html)
+
+* [Accelerated Industry Fossil Fuel Heat (DAU-FFI)](https://epic-institute.github.io/positive-disruption/charts/md-dauffi.html)
