@@ -48,7 +48,7 @@
 
 ## Exploratory Scenarios
 
-* [Limited Policy (DAU-LP)](https://epic-institute.github.io/positive-disruption/charts/md-daulp.html)
+* [Policy Led (DAU-PL)](https://epic-institute.github.io/positive-disruption/charts/md-daulp.html)
 
 * [War Effort (DAU-WE)](https://epic-institute.github.io/positive-disruption/charts/md-dauwe.html)
 
@@ -61,3 +61,5 @@
 * [Accelerated Industry Fossil Fuel Heat (DAU-FFI)](https://epic-institute.github.io/positive-disruption/charts/md-dauffi.html)
 
 * [Accelerated NCS and Industry Fossil Fuel Heat (DAU-NCS+FFI)](https://epic-institute.github.io/positive-disruption/charts/md-dauncsffi.html)
+
+* [Accelerated NCS, Industry Fossil Fuel Heat, Electricity, Transport (DAU-NCS+FFI+E+T)](https://epic-institute.github.io/positive-disruption/charts/md-dauncsffiet.html)

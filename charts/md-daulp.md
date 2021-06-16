@@ -1,4 +1,4 @@
-# Limited Policy Scenario (DAU-LP)
+# Policy Led Scenario (DAU-PL)
 
 * [World](https://epic-institute.github.io/positive-disruption/charts/md-World-daulp.html)
 
