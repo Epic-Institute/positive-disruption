@@ -17565,14 +17565,14 @@ show_we = False
 show_ra = False
 show_fw = False
 show_ncs = True
-show_ffi = True
+show_ffi = False
 show_ncsffi = True
 show_ncsffiet = True
 
 color_dict = {
     "Baseline": "red",
     "SSP2-1.9": "#19d3f3",
-    "DAU": "green",
+    "DAU21": "green",
     "DAU+CDR": "yellow",
     "DAU-PL": "orange",
     "DAU-WE": "#16ff32",
@@ -18102,8 +18102,8 @@ fig.add_trace(
 if show_dau == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU",
-            line=dict(width=3, color=color_dict["DAU"], dash="dot"),
+            name="DAU21",
+            line=dict(width=3, color=color_dict["DAU21"], dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cpd.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18809,8 +18809,8 @@ fig.add_trace(
 if show_dau == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU",
-            line=dict(width=3, color=color_dict["DAU"], dash="dot"),
+            name="DAU21",
+            line=dict(width=3, color=color_dict["DAU21"], dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cpd.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19515,8 +19515,8 @@ fig.add_trace(
 if show_dau == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU",
-            line=dict(width=3, color=color_dict["DAU"], dash="dot"),
+            name="DAU21",
+            line=dict(width=3, color=color_dict["DAU21"], dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fpd.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20214,8 +20214,8 @@ fig.add_trace(
 if show_dau == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU",
-            line=dict(width=3, color=color_dict["DAU"], dash="dot"),
+            name="DAU21",
+            line=dict(width=3, color=color_dict["DAU21"], dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tpd.loc[data_end_year:, "CO2e"],
             fill="none",

@@ -43,7 +43,7 @@ Central African Republic,,DevelopingECO | NonOECD | AFRICA ,caf,Sub-Saharan AFRI
 Chad,,DevelopingECO | NonOECD | AFRICA ,tcd,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,Chad,MAF ,Chad,TCD,Chad,DevelopingECO | NonOECD | AFRICA 
 Chile,Chile,AdvancedECO | OECD | CSAM ,chl,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,Chile,LAM ,Chile,CHL,Chile,AdvancedECO | OECD | CSAM 
 China,People's Republic of China,DevelopingECO | NonOECD | CHINA ,chn,China,Asia Pacific ,ASIA | CHN ,CHN,China,ASIA ,China,CHN,China,DevelopingECO | NonOECD | CHINA 
-Chinese Taipei,,DevelopingECO | NonOECD | ASIAPAC ,twn,Rest of the world,Rest of world,,OTH,China,ASIA ,Taiwan,,,DevelopingECO | NonOECD | ASIAPAC 
+Chinese Taipei,,DevelopingECO | NonOECD | ASIAPAC ,twn,Rest of the world,Rest of world,,OTH,,ASIA ,Taiwan,,,DevelopingECO | NonOECD | ASIAPAC 
 Colombia,,DevelopingECO | NonOECD | CSAM ,col,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-M,Colombia,LAM ,Colombia,COL,Colombia,DevelopingECO | NonOECD | CSAM 
 Comoros,,DevelopingECO | NonOECD | AFRICA ,com,Sub-Saharan AFRICA,Rest of world,MAF | SSA-L ,SSA-L,Comoros,MAF ,Comoros,COM,Comoros,DevelopingECO | NonOECD | AFRICA 
 Congo,,DevelopingECO | NonOECD | AFRICA ,cog,Sub-Saharan AFRICA,META | Sub-Saharan AFRICA ,MAF | SSA-L ,SSA-L,Republic of Congo,MAF ,Congo,COG,Republic of Congo,DevelopingECO | NonOECD | AFRICA 
@@ -99,7 +99,7 @@ Guinea-Bissau,,DevelopingECO | NonOECD | AFRICA ,gnb,Sub-Saharan AFRICA,Rest of 
 Guyana,,DevelopingECO | NonOECD | CSAM ,guy,Other Latin America,Rest of world,LAM | LAM -M ,LAM-M,Guyana,LAM ,Guyana,GUY,Guyana,DevelopingECO | NonOECD | CSAM 
 Haiti,,DevelopingECO | NonOECD | CSAM ,hti,Other Latin America,Latin America | Other ,LAM | LAM -L ,LAM-L,Haiti,LAM ,Haiti,HTI,Haiti,DevelopingECO | NonOECD | CSAM 
 Honduras,,DevelopingECO | NonOECD | CSAM ,hnd,Other Latin America,Latin America | Other ,LAM | LAM -M ,LAM-L,Honduras,LAM ,Honduras,HND,Honduras,DevelopingECO | NonOECD | CSAM 
-Hong Kong,,DevelopingECO | NonOECD | CHINA ,hkg,China,Asia Pacific ,ASIA | CHN ,CHN,China,ASIA ,"Hong Kong, China",,,DevelopingECO | NonOECD | CHINA 
+Hong Kong,,DevelopingECO | NonOECD | CHINA ,hkg,China,Asia Pacific ,ASIA | CHN ,CHN,,ASIA ,"Hong Kong, China",,,DevelopingECO | NonOECD | CHINA 
 Hungary,Hungary,AdvancedECO | OECD | EUR ,hun,Other Europe,Europe | Other , OECD | EU12-H ,EU12-H,Hungary,OECD90 ,Hungary,HUN,Hungary,AdvancedECO | OECD | EUR | EU 
 Iceland,Iceland,AdvancedECO | OECD | EUR ,isl,Other Europe,Europe | Other , OECD | EFTA ,EFTA,Iceland,OECD90 ,Iceland,ISL,Iceland,AdvancedECO | OECD | EUR 
 India,India,DevelopingECO | NonOECD | INDIA ,ind,India,Asia Pacific ,ASIA | IND ,IND,India,ASIA ,India,IND,India,DevelopingECO | NonOECD | INDIA 
