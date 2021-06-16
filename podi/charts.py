@@ -2957,7 +2957,6 @@ colors = [
 em2 = em.loc[
     [
         "US ",
-        "SAFR ",
         "RUS ",
         "ME ",
         "JPN ",
