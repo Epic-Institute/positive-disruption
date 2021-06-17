@@ -11980,10 +11980,7 @@ for year in [2050]:
                     cdr.loc[region_list[i], "Carbon Dioxide Removal", scenario],
                     index=np.arange(data_start_year, long_proj_end_year + 1),
                 )
-                * 0
             ).rename(index="Unnamed 6")
-
-            em_mit_cdr[2050] = 0.2345
 
             em_mit = pd.DataFrame(
                 [
@@ -17562,18 +17559,18 @@ if save_figs is True:
 
 # region
 
-altscen = "daulp"  # only used for saving image
+altscen = "test"  # only used for saving image
 show_dau = True
 show_daucdr = False
 show_rcp19 = False
 show_lp = True
 show_we = False
-show_ra = True
-show_fw = True
+show_ra = False
+show_fw = False
 show_ncs = True
 show_ffi = False
-show_ncsffi = False
-show_ncsffiet = False
+show_ncsffi = True
+show_ncsffiet = True
 
 color_dict = {
     "Baseline": "red",
