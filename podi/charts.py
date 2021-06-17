@@ -12660,7 +12660,7 @@ for year in [2050]:
 # region
 
 scenario = "pathway"
-year = 2030
+year = 2050
 i = 0
 accel = 2
 
@@ -12912,7 +12912,9 @@ figure.add_trace(
 )
 
 figure.update_layout(
-    title="Regional 2030 PDP Contribution Opportunity Compared with Global Targets Alignment & NDCs",
+    title="Regional "
+    + str(year)
+    + " PDP Contribution Opportunity Compared with Global Targets Alignment & NDCs",
     title_x=0.5,
     title_y=0.99,
     font=dict(size=11),
@@ -15881,7 +15883,12 @@ for i in range(0, len(region_list)):
 
 # region
 
-altscen = "dauwe"
+altscen = "dauncs"
+
+show_dau = True
+show_daucdr = True
+show_pl = True
+show_we = False
 
 #################################
 # CO2 ATMOSPHERIC CONCENTRATION #
@@ -17555,18 +17562,18 @@ if save_figs is True:
 
 # region
 
-altscen = "test1"  # only used for saving image
+altscen = "daulp"  # only used for saving image
 show_dau = True
 show_daucdr = False
 show_rcp19 = False
 show_lp = True
 show_we = False
-show_ra = False
-show_fw = False
+show_ra = True
+show_fw = True
 show_ncs = True
 show_ffi = False
-show_ncsffi = True
-show_ncsffiet = True
+show_ncsffi = False
+show_ncsffiet = False
 
 color_dict = {
     "Baseline": "red",
@@ -18180,7 +18187,7 @@ if show_fw == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FW",
-            line=dict(width=3, color=color_dict[name], dash="dot"),
+            line=dict(width=3, color=color_dict["DAU-FW"], dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cwe.loc[data_end_year:, "CO2"],
             fill="none",

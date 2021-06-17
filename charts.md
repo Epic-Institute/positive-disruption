@@ -4,8 +4,6 @@
 
 * [Policy Led (DAU-PL)](https://epic-institute.github.io/positive-disruption/charts/md-daulp.html)
 
-* [War Effort (DAU-WE)](https://epic-institute.github.io/positive-disruption/charts/md-dauwe.html)
-
 * [Accelerated Regenerative Agriculture (DAU-RA)](https://epic-institute.github.io/positive-disruption/charts/md-daura.html)
 
 * [Accelerated Forests & Wetlands (DAU-FW)](https://epic-institute.github.io/positive-disruption/charts/md-daufw.html)
