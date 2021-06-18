@@ -3623,8 +3623,8 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
-                line=dict(width=2, color="green", dash="dot"),
+                name="SSP2-RCP1.9",
+                line=dict(width=2, color="green", dash="dashdot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
                 ),
@@ -3678,6 +3678,7 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][0]],
                 marker_color="#f71be9",
                 name=ndcs[i][2][0],
+                showlegend=False,
             )
         )
 
@@ -3687,8 +3688,32 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][1]],
                 marker_color="#211df2",
                 name=ndcs[i][2][1],
+                showlegend=False,
             )
         )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+                showlegend=True,
+            )
+        )
+
     else:
         fig.add_trace(
             go.Scatter(
@@ -5130,7 +5155,7 @@ results = (
     .droplevel(["UNIT"])
 )
 results.columns = results.columns.astype(int)
-"""
+
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -5138,7 +5163,7 @@ results19 = curve_smooth(
         ].loc[2010:]
     ).T,
     "quadratic",
-    3,
+    50,
 )
 """
 results19 = pd.DataFrame(
@@ -5146,7 +5171,7 @@ results19 = pd.DataFrame(
         "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
     ].loc[2010:]
 ).T
-
+"""
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -5346,7 +5371,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
+        name="SSP2-RCP1.9",
         line=dict(width=3, color="#17BECF", dash="dot"),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
@@ -5433,7 +5458,7 @@ results = (
     .droplevel(["UNIT"])
 )
 results.columns = results.columns.astype(int)
-"""
+
 results19 = curve_smooth(
     pd.DataFrame(
         results.loc[
@@ -5451,7 +5476,7 @@ results19 = curve_smooth(
         .sum()
     ).T,
     "quadratic",
-    6,
+    19,
 )
 """
 results19 = pd.DataFrame(
@@ -5459,7 +5484,7 @@ results19 = pd.DataFrame(
         "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
     ].loc[2010:]
 ).T
-
+"""
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -5659,7 +5684,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
+        name="SSP2-RCP1.9",
         line=dict(width=3, color="#17BECF", dash="dot"),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
@@ -5972,7 +5997,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
+        name="SSP2-RCP1.9",
         line=dict(width=3, color="#17BECF", dash="dot"),
         x=F19.loc[:, 2020:2100].columns,
         y=F19.loc[:, 2020:2100].squeeze(),
@@ -6279,7 +6304,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
+        name="SSP2-RCP1.9",
         line=dict(width=3, color="#17BECF", dash="dot"),
         x=T19.loc[:, 2020:2100].columns,
         y=T19.loc[:, 2020:2100].squeeze(),
@@ -7505,7 +7530,7 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
+                name="SSP2-RCP1.9",
                 line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
@@ -7561,6 +7586,7 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][0]],
                 marker_color="#f71be9",
                 name=ndcs[i][2][0],
+                showlegend=False,
             )
         )
 
@@ -7570,8 +7596,32 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][1]],
                 marker_color="#211df2",
                 name=ndcs[i][2][1],
+                showlegend=False,
             )
         )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+                showlegend=True,
+            )
+        )
+
     else:
         fig.add_trace(
             go.Scatter(
@@ -8524,7 +8574,7 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
+                name="SSP2-RCP1.9",
                 line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
@@ -9554,7 +9604,7 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
+                name="SSP2-RCP1.9",
                 line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
@@ -10547,7 +10597,7 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
+                name="SSP2-RCP1.9",
                 line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
@@ -11545,7 +11595,7 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
+                name="SSP2-RCP1.9",
                 line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
@@ -11583,7 +11633,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU-RA",
+                name="DAU-NCS",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -11601,6 +11651,7 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][0]],
                 marker_color="#f71be9",
                 name=ndcs[i][2][0],
+                showlegend=False,
             )
         )
 
@@ -11610,12 +11661,36 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][1]],
                 marker_color="#211df2",
                 name=ndcs[i][2][1],
+                showlegend=False,
             )
         )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+                showlegend=True,
+            )
+        )
+
     else:
         fig.add_trace(
             go.Scatter(
-                name="DAU21",
+                name="DAU-NCS",
                 line=dict(width=2, color="green", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -11632,6 +11707,7 @@ for i in range(0, len(region_list)):
                 y=pd.Series(em_hist.loc[region_list[i], 2019].values[0] / 2000),
                 marker_color="#f71be9",
                 name="50% reduction by 2030",
+                showlegend=False,
             )
         )
 
@@ -11641,6 +11717,29 @@ for i in range(0, len(region_list)):
                 y=pd.Series(0),
                 marker_color="#211df2",
                 name="Net-zero by 2050",
+                showlegend=False,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name="50% reduction by 2030",
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name="Net-zero by 2050",
+                showlegend=True,
             )
         )
 
@@ -12657,7 +12756,7 @@ for year in [2050]:
 # region
 
 scenario = "pathway"
-year = 2050
+year = 2030
 i = 0
 accel = 2
 
@@ -12886,16 +12985,17 @@ figure = go.Figure(
     ]
 )
 
-figure.add_trace(
-    go.Scatter(
-        mode="markers",
-        name="2050 NZE Target",
-        x=data["labels"],
-        y=data["nze"],
-        fill="none",
-        marker_color="blue",
+if year == 2050:
+    figure.add_trace(
+        go.Scatter(
+            mode="markers",
+            name="2050 NZE Target",
+            x=data["labels"],
+            y=data["nze"],
+            fill="none",
+            marker_color="blue",
+        )
     )
-)
 
 figure.add_trace(
     go.Scatter(
@@ -12929,7 +13029,7 @@ figure.update_layout(
     xaxis={"categoryorder": "total descending"},
 )
 
-figure.update_yaxes(range=[0, 50])
+figure.update_yaxes(range=[0, 25])
 
 if show_figs is True:
     figure.show()
@@ -13750,7 +13850,7 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
+                name="SSP2-RCP1.9",
                 line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
@@ -13788,7 +13888,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU-RA",
+                name="DAU-FFI",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -13806,6 +13906,7 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][0]],
                 marker_color="#f71be9",
                 name=ndcs[i][2][0],
+                showlegend=False,
             )
         )
 
@@ -13815,12 +13916,36 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][1]],
                 marker_color="#211df2",
                 name=ndcs[i][2][1],
+                showlegend=False,
             )
         )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+                showlegend=True,
+            )
+        )
+
     else:
         fig.add_trace(
             go.Scatter(
-                name="DAU21",
+                name="DAU-FFI",
                 line=dict(width=2, color="green", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -14723,7 +14848,7 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
+                name="SSP2-RCP1.9",
                 line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
@@ -14739,7 +14864,7 @@ for i in range(0, len(region_list)):
 
         fig.add_trace(
             go.Scatter(
-                name="DAU-RA",
+                name="DAU-NCS+FFI",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -14757,6 +14882,7 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][0]],
                 marker_color="#f71be9",
                 name=ndcs[i][2][0],
+                showlegend=False,
             )
         )
 
@@ -14766,12 +14892,36 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][1]],
                 marker_color="#211df2",
                 name=ndcs[i][2][1],
+                showlegend=False,
             )
         )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+                showlegend=True,
+            )
+        )
+
     else:
         fig.add_trace(
             go.Scatter(
-                name="DAU21",
+                name="DAU-NCS+FFI",
                 line=dict(width=2, color="green", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -15680,7 +15830,7 @@ for i in range(0, len(region_list)):
     if region_list[i] == "World ":
         fig.add_trace(
             go.Scatter(
-                name="SSP2-1.9",
+                name="SSP2-RCP1.9",
                 line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
@@ -15696,7 +15846,7 @@ for i in range(0, len(region_list)):
 
         fig.add_trace(
             go.Scatter(
-                name="DAU-RA",
+                name="DAU-NCS+FFI+E+T",
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -15714,6 +15864,7 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][0]],
                 marker_color="#f71be9",
                 name=ndcs[i][2][0],
+                showlegend=False,
             )
         )
 
@@ -15723,12 +15874,36 @@ for i in range(0, len(region_list)):
                 y=[ndcs[i][1][1]],
                 marker_color="#211df2",
                 name=ndcs[i][2][1],
+                showlegend=False,
             )
         )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+                showlegend=True,
+            )
+        )
+
     else:
         fig.add_trace(
             go.Scatter(
-                name="DAU21",
+                name="DAU-NCS+FFI+E+T",
                 line=dict(width=2, color="green", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -15745,6 +15920,7 @@ for i in range(0, len(region_list)):
                 y=pd.Series(em_hist.loc[region_list[i], 2019].values[0] / 2000),
                 marker_color="#f71be9",
                 name="50% reduction by 2030",
+                showlegend=False,
             )
         )
 
@@ -15754,6 +15930,29 @@ for i in range(0, len(region_list)):
                 y=pd.Series(0),
                 marker_color="#211df2",
                 name="Net-zero by 2050",
+                showlegend=False,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name="50% reduction by 2030",
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name="Net-zero by 2050",
+                showlegend=True,
             )
         )
 
@@ -16224,7 +16423,7 @@ fig.add_trace(
 """
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
+        name="SSP2-RCP1.9",
         line=dict(width=3, color="#17BECF", dash="dot"),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
@@ -16644,7 +16843,7 @@ fig.add_trace(
 """
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
+        name="SSP2-RCP1.9",
         line=dict(width=3, color="#17BECF", dash="dot"),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
@@ -17063,7 +17262,7 @@ fig.add_trace(
 """
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
+        name="SSP2-RCP1.9",
         line=dict(width=3, color="#17BECF", dash="dot"),
         x=F19.loc[:, 2020:2100].columns,
         y=F19.loc[:, 2020:2100].squeeze(),
@@ -17477,7 +17676,7 @@ fig.add_trace(
 """
 fig.add_trace(
     go.Scatter(
-        name="SSP2-1.9",
+        name="SSP2-RCP1.9",
         line=dict(width=3, color="#17BECF", dash="dot"),
         x=T19.loc[:, 2020:2100].columns,
         y=T19.loc[:, 2020:2100].squeeze(),
@@ -18131,7 +18330,7 @@ if show_daucdr == True:
 if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
-            name="SSP2-1.9",
+            name="SSP2-RCP1.9",
             line=dict(width=3, color=color_dict["SSP2-1.9"], dash="dot"),
             x=results19.loc[:, 2020:2100].columns,
             y=results19.loc[:, 2020:2100].squeeze(),
@@ -18838,7 +19037,7 @@ if show_daucdr == True:
 if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
-            name="SSP2-1.9",
+            name="SSP2-RCP1.9",
             line=dict(width=3, color=color_dict["SSP2-1.9"], dash="dot"),
             x=results19.loc[:, 2020:2100].columns,
             y=results19.loc[:, 2020:2100].squeeze(),
@@ -19544,7 +19743,7 @@ if show_daucdr == True:
 if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
-            name="SSP2-1.9",
+            name="SSP2-RCP1.9",
             line=dict(width=3, color=color_dict["SSP2-1.9"], dash="dot"),
             x=F19.loc[:, 2020:2100].columns,
             y=F19.loc[:, 2020:2100].squeeze(),
@@ -20243,7 +20442,7 @@ if show_daucdr == True:
 if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
-            name="SSP2-1.9",
+            name="SSP2-RCP1.9",
             line=dict(width=3, color=color_dict["SSP2-1.9"], dash="dot"),
             x=T19.loc[:, 2020:2100].columns,
             y=T19.loc[:, 2020:2100].squeeze(),
