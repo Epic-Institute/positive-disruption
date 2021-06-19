@@ -42,6 +42,27 @@ show_figs = True
 start_year = 2000
 scenario = "pathway"
 
+
+#######################
+# COLORS & LINESTYLES #
+#######################
+
+cl = {
+    "Baseline": ["red", "dot"],
+    "DAU21": ["#990099", "dashdot"],
+    "DAU21+CDR": ["#3366CC", "dashdot"],
+    "SSP2-RCP1.9": ["green", "dash"],
+    "DAU-PL": ["orange", "dash"],
+    "DAU-WE": ["#16ff32", "dash"],
+    "DAU-RA": ["#eeca3b", "dot"],
+    "DAU-FW": ["#66aa00", "dot"],
+    "DAU-NCS": ["#eb663b", "dot"],
+    "DAU-FFI": ["purple", "dot"],
+    "DAU-NCS+FFI": ["#1cffce", "dot"],
+    "DAU-NCS+FFI+E+T": ["#ff97ff", "dot"],
+}
+
+
 # endregion
 
 ###################
@@ -3624,7 +3645,9 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="SSP2-RCP1.9",
-                line=dict(width=2, color="green", dash="dashdot"),
+                line=dict(
+                    width=2, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
                 ),
@@ -3639,7 +3662,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU21",
-                line=dict(width=2, color="purple", dash="dot"),
+                line=dict(width=2, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -3661,7 +3684,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU21+CDR",
-                line=dict(width=2, color="rgb(229,134,6)", dash="dot"),
+                line=dict(width=2, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -3763,7 +3786,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=2, color="red", dash="dot"),
+            line=dict(width=2, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
             x=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].index.values),
             y=pd.Series(
                 em_baseline.loc[:, near_proj_start_year:]
@@ -5348,7 +5371,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cb.loc[data_end_year:, "CO2"],
         fill="none",
@@ -5360,7 +5383,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21",
-        line=dict(width=3, color="green", dash="dot"),
+        line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cpd.loc[data_end_year:, "CO2"],
         fill="none",
@@ -5372,7 +5395,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-RCP1.9",
-        line=dict(width=3, color="#17BECF", dash="dot"),
+        line=dict(width=3, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -5384,7 +5407,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21+CDR",
-        line=dict(width=3, color="yellow", dash="dot"),
+        line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Ccdr.loc[data_end_year:, "CO2"],
         fill="none",
@@ -5661,7 +5684,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cb.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -5673,7 +5696,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21",
-        line=dict(width=3, color="green", dash="dot"),
+        line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cpd.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -5685,7 +5708,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-RCP1.9",
-        line=dict(width=3, color="#17BECF", dash="dot"),
+        line=dict(width=3, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -5697,7 +5720,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21+CDR",
-        line=dict(width=3, color="yellow", dash="dot"),
+        line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Ccdr.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -5974,7 +5997,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Fb.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -5986,7 +6009,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21",
-        line=dict(width=3, color="green", dash="dot"),
+        line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Fpd.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -5998,7 +6021,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-RCP1.9",
-        line=dict(width=3, color="#17BECF", dash="dot"),
+        line=dict(width=3, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]),
         x=F19.loc[:, 2020:2100].columns,
         y=F19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -6010,7 +6033,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21+CDR",
-        line=dict(width=3, color="yellow", dash="dot"),
+        line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Fcdr.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -6281,7 +6304,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Tb.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -6293,7 +6316,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21",
-        line=dict(width=3, color="green", dash="dot"),
+        line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Tpd.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -6305,7 +6328,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-RCP1.9",
-        line=dict(width=3, color="#17BECF", dash="dot"),
+        line=dict(width=3, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]),
         x=T19.loc[:, 2020:2100].columns,
         y=T19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -6317,7 +6340,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21+CDR",
-        line=dict(width=3, color="yellow", dash="dot"),
+        line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Tcdr.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -16400,7 +16423,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cb.loc[data_end_year:, "CO2"],
         fill="none",
@@ -16412,7 +16435,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21",
-        line=dict(width=3, color="green", dash="dot"),
+        line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cpd.loc[data_end_year:, "CO2"],
         fill="none",
@@ -16424,7 +16447,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-RCP1.9",
-        line=dict(width=3, color="#17BECF", dash="dot"),
+        line=dict(width=3, color=cl['SSP2-RCP1.9'][0], dash=cl['SSP2-RCP1.9'][1]),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -16436,7 +16459,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU-PL",
-        line=dict(width=3, color="yellow", dash="dot"),
+        line=dict(width=3, color=cl["DAU21-PL"][0], dash=cl["DAU21-PL"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Clp.loc[data_end_year:, "CO2"],
         fill="none",
@@ -16447,7 +16470,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU-WE",
-        line=dict(width=3, color="light blue", dash="dot"),
+        line=dict(width=3, color=cl["DAU21-WE"][0], dash=cl["DAU21-WE"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cwe.loc[data_end_year:, "CO2"],
         fill="none",
@@ -16820,7 +16843,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cb.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -16832,7 +16855,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21",
-        line=dict(width=3, color="green", dash="dot"),
+        line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cpd.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -16844,7 +16867,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-RCP1.9",
-        line=dict(width=3, color="#17BECF", dash="dot"),
+        line=dict(width=3, color=cl['SSP2-RCP1.9'][0], dash=cl['SSP2-RCP1.9'][1]),
         x=results19.loc[:, 2020:2100].columns,
         y=results19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -16856,7 +16879,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU-PL",
-        line=dict(width=3, color="yellow", dash="dot"),
+        line=dict(width=3, color=cl["DAU21-PL"][0], dash=cl["DAU21-PL"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Clp.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -16867,7 +16890,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU-WE",
-        line=dict(width=3, color="light blue", dash="dot"),
+        line=dict(width=3, color=cl["DAU21-WE"][0], dash=cl["DAU21-WE"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Cwe.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17238,7 +17261,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Fb.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17250,7 +17273,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21",
-        line=dict(width=3, color="green", dash="dot"),
+        line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Fpd.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17263,7 +17286,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-RCP1.9",
-        line=dict(width=3, color="#17BECF", dash="dot"),
+        line=dict(width=3, color=cl['SSP2-RCP1.9'][0], dash=cl['SSP2-RCP1.9'][1]),
         x=F19.loc[:, 2020:2100].columns,
         y=F19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -17276,7 +17299,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU-PL",
-        line=dict(width=3, color="yellow", dash="dot"),
+        line=dict(width=3, color=cl["DAU21-PL"][0], dash=cl["DAU21-PL"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Flp.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17288,7 +17311,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU-WE",
-        line=dict(width=3, color="light blue", dash="dot"),
+        line=dict(width=3, color=cl["DAU21-WE"][0], dash=cl["DAU21-WE"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Fwe.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17652,7 +17675,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="Baseline",
-        line=dict(width=3, color="red", dash="dot"),
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Tb.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17664,7 +17687,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU21",
-        line=dict(width=3, color="green", dash="dot"),
+        line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Tpd.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17677,7 +17700,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="SSP2-RCP1.9",
-        line=dict(width=3, color="#17BECF", dash="dot"),
+        line=dict(width=3, color=cl['SSP2-RCP1.9'][0], dash=cl['SSP2-RCP1.9'][1]),
         x=T19.loc[:, 2020:2100].columns,
         y=T19.loc[:, 2020:2100].squeeze(),
         fill="none",
@@ -17690,7 +17713,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU-PL",
-        line=dict(width=3, color="yellow", dash="dot"),
+        line=dict(width=3, color=cl["DAU21-PL"][0], dash=cl["DAU21-PL"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Tlp.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17702,7 +17725,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         name="DAU-WE",
-        line=dict(width=3, color="light blue", dash="dot"),
+        line=dict(width=3, color=cl["DAU21-WE"][0], dash=cl["DAU21-WE"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Twe.loc[data_end_year:, "CO2e"],
         fill="none",
@@ -17770,21 +17793,6 @@ show_ncs = True
 show_ffi = False
 show_ncsffi = True
 show_ncsffiet = True
-
-color_dict = {
-    "Baseline": "red",
-    "SSP2-1.9": "#19d3f3",
-    "DAU21": "green",
-    "DAU+CDR": "yellow",
-    "DAU-PL": "orange",
-    "DAU-WE": "#16ff32",
-    "DAU-RA": "#eeca3b",
-    "DAU-FW": "#66aa00",
-    "DAU-NCS": "#eb663b",
-    "DAU-FFI": "purple",
-    "DAU-NCS+FFI": "#1cffce",
-    "DAU-NCS+FFI+E+T": "#ff97ff",
-}
 
 #################################
 # CO2 ATMOSPHERIC CONCENTRATION #
@@ -18305,7 +18313,7 @@ if show_dau == True:
     fig.add_trace(
         go.Scatter(
             name="DAU21",
-            line=dict(width=3, color=color_dict["DAU21"], dash="dot"),
+            line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cpd.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18317,8 +18325,8 @@ if show_dau == True:
 if show_daucdr == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU+CDR",
-            line=dict(width=3, color=color_dict["DAU+CDR"], dash="dot"),
+            name="DAU21+CDR",
+            line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Ccdr.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18331,7 +18339,7 @@ if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
             name="SSP2-RCP1.9",
-            line=dict(width=3, color=color_dict["SSP2-1.9"], dash="dot"),
+            line=dict(width=3, color=cl["SSP2-1.9"][0], dash=cl["SSP2-1.9"][1]),
             x=results19.loc[:, 2020:2100].columns,
             y=results19.loc[:, 2020:2100].squeeze(),
             fill="none",
@@ -18344,7 +18352,7 @@ if show_lp == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-PL",
-            line=dict(width=3, color=color_dict["DAU-PL"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-PL"][0], dash=cl["DAU-PL"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Clp.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18357,7 +18365,7 @@ if show_we == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-WE",
-            line=dict(width=3, color=color_dict["DAU-WE"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-WE"][0], dash=cl["DAU-WE"][0]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cwe.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18370,7 +18378,7 @@ if show_ra == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-RA",
-            line=dict(width=3, color=color_dict["DAU-RA"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-RA"][0], dash=cl["DAU-RA"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Clp.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18383,7 +18391,7 @@ if show_fw == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FW",
-            line=dict(width=3, color=color_dict["DAU-FW"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-FW"][0], dash=cl["DAU-FW"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cwe.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18396,7 +18404,7 @@ if show_ncs == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS",
-            line=dict(width=3, color=color_dict["DAU-NCS"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS"][0], dash=cl["DAU-NCS"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Crafw.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18409,7 +18417,7 @@ if show_ffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FFI",
-            line=dict(width=3, color=color_dict["DAU-FFI"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-FFI"][0], dash=cl["DAU-FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cffi.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18422,7 +18430,7 @@ if show_ncsffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI",
-            line=dict(width=3, color=color_dict["DAU-NCS+FFI"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][0]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsffi.loc[data_end_year:, "CO2"],
             fill="none",
@@ -18435,7 +18443,9 @@ if show_ncsffiet == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI+E+T",
-            line=dict(width=3, color=color_dict["DAU-NCS+FFI+E+T"], dash="dot"),
+            line=dict(
+                width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
+            ),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsffiet.loc[data_end_year:, "CO2"],
             fill="none",
@@ -19012,7 +19022,7 @@ if show_dau == True:
     fig.add_trace(
         go.Scatter(
             name="DAU21",
-            line=dict(width=3, color=color_dict["DAU21"], dash="dot"),
+            line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cpd.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19024,8 +19034,8 @@ if show_dau == True:
 if show_daucdr == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU+CDR",
-            line=dict(width=3, color=color_dict["DAU+CDR"], dash="dot"),
+            name="DAU21+CDR",
+            line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Ccdr.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19038,7 +19048,7 @@ if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
             name="SSP2-RCP1.9",
-            line=dict(width=3, color=color_dict["SSP2-1.9"], dash="dot"),
+            line=dict(width=3, color=cl['SSP2-RCP1.9'][0], dash=cl['SSP2-RCP1.9'][1]),
             x=results19.loc[:, 2020:2100].columns,
             y=results19.loc[:, 2020:2100].squeeze(),
             fill="none",
@@ -19051,7 +19061,7 @@ if show_lp == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-PL",
-            line=dict(width=3, color=color_dict["DAU-PL"], dash="dot"),
+            line=dict(width=3, color=cl["DAU21-PL"][0], dash=cl["DAU21-PL"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Clp.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19064,7 +19074,7 @@ if show_we == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-WE",
-            line=dict(width=3, color=color_dict["DAU-WE"], dash="dot"),
+            line=dict(width=3, color=cl["DAU21-WE"][0], dash=cl["DAU21-WE"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cwe.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19077,7 +19087,7 @@ if show_ra == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-RA",
-            line=dict(width=3, color=color_dict["DAU-RA"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-RA"][0], dash=cl["DAU-RA"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Clp.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19090,7 +19100,7 @@ if show_fw == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FW",
-            line=dict(width=3, color=color_dict["DAU-FW"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-FW"][0], dash=cl["DAU-FW"][1]), dash="dot"),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cwe.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19103,7 +19113,7 @@ if show_ncs == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS",
-            line=dict(width=3, color=color_dict["DAU-NCS"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS"][0], dash=cl["DAU-NCS"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Crafw.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19116,7 +19126,7 @@ if show_ffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FFI",
-            line=dict(width=3, color=color_dict["DAU-FFI"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-FFI"][0], dash=cl["DAU-FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cffi.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19129,7 +19139,7 @@ if show_ncsffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI",
-            line=dict(width=3, color=color_dict["DAU-NCS+FFI"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsffi.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19142,7 +19152,7 @@ if show_ncsffiet == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI+E+T",
-            line=dict(width=3, color=color_dict["DAU-NCS+FFI+E+T"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsffiet.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19718,7 +19728,7 @@ if show_dau == True:
     fig.add_trace(
         go.Scatter(
             name="DAU21",
-            line=dict(width=3, color=color_dict["DAU21"], dash="dot"),
+            line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fpd.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19730,8 +19740,8 @@ if show_dau == True:
 if show_daucdr == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU+CDR",
-            line=dict(width=3, color=color_dict["DAU+CDR"], dash="dot"),
+            name="DAU21+CDR",
+            line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fcdr.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19744,7 +19754,7 @@ if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
             name="SSP2-RCP1.9",
-            line=dict(width=3, color=color_dict["SSP2-1.9"], dash="dot"),
+            line=dict(width=3, color=cl["SSP2-1.9"][0], dash=cl["SSP2-1.9"][1]),
             x=F19.loc[:, 2020:2100].columns,
             y=F19.loc[:, 2020:2100].squeeze(),
             fill="none",
@@ -19757,7 +19767,7 @@ if show_lp == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-PL",
-            line=dict(width=3, color=color_dict["DAU-PL"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-PL"][0], dash=cl["DAU-PL"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Flp.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19770,7 +19780,7 @@ if show_we == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-WE",
-            line=dict(width=3, color=color_dict["DAU-WE"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-WE"][0], dash=cl["DAU-WE"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fwe.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19783,7 +19793,7 @@ if show_ra == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-RA",
-            line=dict(width=3, color=color_dict["DAU-RA"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-RA"][0], dash=cl["DAU-RA"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Flp.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19796,7 +19806,7 @@ if show_fw == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FW",
-            line=dict(width=3, color=color_dict["DAU-FW"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-FW"][0], dash=cl["DAU-FW"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fwe.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19809,7 +19819,7 @@ if show_ncs == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS",
-            line=dict(width=3, color=color_dict["DAU-NCS"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS"][0], dash=cl["DAU-NCS"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Frafw.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19822,7 +19832,7 @@ if show_ffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FFI",
-            line=dict(width=3, color=color_dict["DAU-FFI"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-FFI"][0], dash=cl["DAU-FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fffi.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19835,7 +19845,7 @@ if show_ncsffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI",
-            line=dict(width=3, color=color_dict["DAU-NCS+FFI"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fncsffi.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19848,7 +19858,7 @@ if show_ncsffiet == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI+E+T",
-            line=dict(width=3, color=color_dict["DAU-NCS+FFI+E+T"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fncsffiet.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20417,7 +20427,7 @@ if show_dau == True:
     fig.add_trace(
         go.Scatter(
             name="DAU21",
-            line=dict(width=3, color=color_dict["DAU21"], dash="dot"),
+            line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tpd.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20429,8 +20439,8 @@ if show_dau == True:
 if show_daucdr == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU+CDR",
-            line=dict(width=3, color=color_dict["DAU+CDR"], dash="dot"),
+            name="DAU21+CDR",
+            line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tcdr.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20443,7 +20453,7 @@ if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
             name="SSP2-RCP1.9",
-            line=dict(width=3, color=color_dict["SSP2-1.9"], dash="dot"),
+            line=dict(width=3, color=cl["SSP2-1.9"][0], dash=cl["SSP2-1.9"][1]),
             x=T19.loc[:, 2020:2100].columns,
             y=T19.loc[:, 2020:2100].squeeze(),
             fill="none",
@@ -20456,7 +20466,7 @@ if show_lp == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-PL",
-            line=dict(width=3, color=color_dict["DAU-PL"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-PL"][0], dash=cl["DAU-PL"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tlp.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20469,7 +20479,7 @@ if show_we == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-WE",
-            line=dict(width=3, color=color_dict["DAU-WE"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-WE"][0], dash=cl["DAU-WE"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Twe.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20482,7 +20492,7 @@ if show_ra == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-RA",
-            line=dict(width=3, color=color_dict["DAU-RA"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-RA"][0], dash=cl["DAU-RA"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tlp.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20495,7 +20505,7 @@ if show_fw == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FW",
-            line=dict(width=3, color=color_dict["DAU-FW"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-FW"][0], dash=cl["DAU-FW"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Twe.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20508,7 +20518,7 @@ if show_ncs == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS",
-            line=dict(width=3, color=color_dict["DAU-NCS"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS"][0], dash=cl["DAU-NCS"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Trafw.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20521,7 +20531,7 @@ if show_ffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FFI",
-            line=dict(width=3, color=color_dict["DAU-FFI"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-FFI"][0], dash=cl["DAU-FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tffi.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20534,7 +20544,7 @@ if show_ncsffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI",
-            line=dict(width=3, color=color_dict["DAU-NCS+FFI"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tncsffi.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20547,7 +20557,7 @@ if show_ncsffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI+E+T",
-            line=dict(width=3, color=color_dict["DAU-NCS+FFI+E+T"], dash="dot"),
+            line=dict(width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tncsffiet.loc[data_end_year:, "CO2e"],
             fill="none",
