@@ -4,10 +4,6 @@
 
 * [Policy Led (DAU-PL)](https://epic-institute.github.io/positive-disruption/charts/md-daulp.html)
 
-* [Accelerated Regenerative Agriculture (DAU-RA)](https://epic-institute.github.io/positive-disruption/charts/md-daura.html)
-
-* [Accelerated Forests & Wetlands (DAU-FW)](https://epic-institute.github.io/positive-disruption/charts/md-daufw.html)
-
 * [Accelerated Natural Climate Solutions (DAU-NCS)](https://epic-institute.github.io/positive-disruption/charts/md-dauncs.html)
 
 * [Accelerated Industry Fossil Fuel Heat (DAU-FFI)](https://epic-institute.github.io/positive-disruption/charts/md-dauffi.html)
