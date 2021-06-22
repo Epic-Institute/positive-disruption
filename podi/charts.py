@@ -52,14 +52,14 @@ cl = {
     "DAU21": ["#990099", "dashdot"],
     "DAU21+CDR": ["#3366CC", "dashdot"],
     "SSP2-RCP1.9": ["green", "dash"],
-    "DAU-PL": ["orange", "dash"],
-    "DAU-WE": ["#16ff32", "dash"],
-    "DAU-RA": ["#eeca3b", "dot"],
-    "DAU-FW": ["#66aa00", "dot"],
-    "DAU-NCS": ["#eb663b", "dot"],
-    "DAU-FFI": ["purple", "dot"],
-    "DAU-NCS+FFI": ["#1cffce", "dot"],
-    "DAU-NCS+FFI+E+T": ["#ff97ff", "dot"],
+    "DAU-PL": ["orange", "dashdot"],
+    "DAU-WE": ["#16ff32", "dashdot"],
+    "DAU-RA": ["#eeca3b", "dashdot"],
+    "DAU-FW": ["#66aa00", "dashdot"],
+    "DAU-NCS": ["#eb663b", "dashdot"],
+    "DAU-FFI": ["#862a16", "dashdot"],
+    "DAU-NCS+FFI": ["#17becf", "dashdot"],
+    "DAU-NCS+FFI+E+T": ["rgb(0,134,149)", "dashdot"],
 }
 
 
@@ -3527,9 +3527,37 @@ for i in range(0, len(region_list)):
         )
 
         fig.add_annotation(
-            text="Cumulative CDR 2020-2100: "
+            text="Cumulative CDR 2020-2030: "
             + str(
-                fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"].values.sum().round(1)
+                fig2[(fig2["Sector"] == "CDR") & (fig2["Year"] < 2031)][
+                    "Emissions, GtCO2e"
+                ]
+                .values.sum()
+                .round(1)
+            )
+            + " GtCO2e",
+            xref="paper",
+            yref="paper",
+            x=0.02,
+            y=0.25,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+
+        fig.add_annotation(
+            text="Cumulative CDR 2030-2040: "
+            + str(
+                fig2[
+                    (fig2["Sector"] == "CDR")
+                    & (fig2["Year"] > 2030)
+                    & (fig2["Year"] < 2041)
+                ]["Emissions, GtCO2e"]
+                .values.sum()
+                .round(1)
             )
             + " GtCO2e",
             xref="paper",
@@ -3545,11 +3573,13 @@ for i in range(0, len(region_list)):
         )
 
         fig.add_annotation(
-            text="Cumulative CDR 2050-2100: "
+            text="Cumulative CDR 2040-2060: "
             + str(
-                fig2[(fig2["Sector"] == "CDR") & (fig2["Year"] > 2049)][
-                    "Emissions, GtCO2e"
-                ]
+                fig2[
+                    (fig2["Sector"] == "CDR")
+                    & (fig2["Year"] > 2040)
+                    & (fig2["Year"] < 2061)
+                ]["Emissions, GtCO2e"]
                 .values.sum()
                 .round(1)
             )
@@ -5186,7 +5216,7 @@ results19 = curve_smooth(
         ].loc[2010:]
     ).T,
     "quadratic",
-    50,
+    30,
 )
 """
 results19 = pd.DataFrame(
@@ -5430,6 +5460,7 @@ fig.update_layout(
 fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
+    yaxis=dict(tickmode="linear", tick0=325, dtick=25),
 )
 
 fig.add_annotation(
@@ -5743,6 +5774,7 @@ fig.update_layout(
 fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
+    yaxis=dict(tickmode="linear", tick0=350, dtick=25),
 )
 
 fig.add_annotation(
@@ -6051,6 +6083,7 @@ fig.update_layout(
 fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
+    yaxis=dict(tickmode="linear", tick0=0, dtick=0.5),
 )
 
 
@@ -6358,6 +6391,7 @@ fig.update_layout(
 fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
+    yaxis=dict(tickmode="linear", tick0=0.5, dtick=0.25),
 )
 
 fig.add_annotation(
@@ -7439,7 +7473,7 @@ for i in range(0, len(region_list)):
         .div(1000)
     )
 
-    fig = (
+    fig_pl = (
         ((em_mit.append(spacer)) / 1000)
         .reindex(
             [
@@ -7455,87 +7489,87 @@ for i in range(0, len(region_list)):
         .loc[:, data_end_year:]
     )
 
-    fig = fig.T
-    fig.index.name = "Year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+    fig_pl = fig_pl.T
+    fig_pl.index.name = "Year"
+    fig_pl.reset_index(inplace=True)
+    fig_pl2 = pd.melt(
+        fig_pl, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
     )
 
-    fig = go.Figure()
+    fig_pl = go.Figure()
 
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="",
             line=dict(width=0.5, color="rgba(230, 236, 245, 0)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == ""]["Emissions, GtCO2e"],
+            x=fig_pl2["Year"],
+            y=fig_pl2[fig_pl2["Sector"] == ""]["Emissions, GtCO2e"],
             fill="tozeroy",
-            stackgroup="one",
+            stackgroup="onepl",
             showlegend=False,
         )
     )
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="V6: Forests & Wetlands",
             line=dict(width=0.5, color="#54A24B"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
+            x=fig_pl2["Year"],
+            y=fig_pl2[fig_pl2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="onepl",
         )
     )
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="V5: Agriculture",
             line=dict(width=0.5, color="#EECA3B"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
+            x=fig_pl2["Year"],
+            y=fig_pl2[fig_pl2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="onepl",
         )
     )
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="V4: Industry",
             line=dict(width=0.5, color="#60738C"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
+            x=fig_pl2["Year"],
+            y=fig_pl2[fig_pl2["Sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="onepl",
         )
     )
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="V3: Buildings",
             line=dict(width=0.5, color="#F58518"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
+            x=fig_pl2["Year"],
+            y=fig_pl2[fig_pl2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="onepl",
         )
     )
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="V2: Transport",
             line=dict(width=0.5, color="#7AA8B8"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
+            x=fig_pl2["Year"],
+            y=fig_pl2[fig_pl2["Sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="onepl",
         )
     )
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="V1: Electricity",
             line=dict(width=0.5, color="#B279A2"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
+            x=fig_pl2["Year"],
+            y=fig_pl2[fig_pl2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one",
+            stackgroup="onepl",
         )
     )
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="Historical",
             line=dict(width=2, color="black"),
@@ -7551,10 +7585,12 @@ for i in range(0, len(region_list)):
 
     # region
     if region_list[i] == "World ":
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 name="SSP2-RCP1.9",
-                line=dict(width=2, color="#17BECF", dash="dot"),
+                line=dict(
+                    width=2, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
                 ),
@@ -7567,10 +7603,10 @@ for i in range(0, len(region_list)):
 
     if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
         """
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 name="DAU21",
-                line=dict(width=2, color="green", dash="dot"),
+                line=dict(width=2, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -7589,21 +7625,21 @@ for i in range(0, len(region_list)):
             )
         )
         """
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 name="DAU-PL",
-                line=dict(width=2, color="yellow", dash="dot"),
+                line=dict(width=2, color=cl["DAU-PL"][0], dash=cl["DAU-PL"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
                 y=pd.Series(spacer.loc[near_proj_start_year:].values) / 1000,
                 fill="none",
-                stackgroup="DAU21+CDR",
+                stackgroup="DAU-PL",
                 legendgroup="two",
             )
         )
 
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][0]],
                 y=[ndcs[i][1][0]],
@@ -7613,7 +7649,7 @@ for i in range(0, len(region_list)):
             )
         )
 
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][1]],
                 y=[ndcs[i][1][1]],
@@ -7623,7 +7659,7 @@ for i in range(0, len(region_list)):
             )
         )
 
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=[None],
                 y=[None],
@@ -7634,7 +7670,7 @@ for i in range(0, len(region_list)):
             )
         )
 
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=[None],
                 y=[None],
@@ -7646,10 +7682,10 @@ for i in range(0, len(region_list)):
         )
 
     else:
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 name="DAU21",
-                line=dict(width=2, color="green", dash="dot"),
+                line=dict(width=2, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -7659,7 +7695,7 @@ for i in range(0, len(region_list)):
                 legendgroup="two",
             )
         )
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=pd.Series(2030),
                 y=pd.Series(em_hist.loc[region_list[i], 2019].values[0] / 2000),
@@ -7668,7 +7704,7 @@ for i in range(0, len(region_list)):
             )
         )
 
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=pd.Series(2050),
                 y=pd.Series(0),
@@ -7677,10 +7713,10 @@ for i in range(0, len(region_list)):
             )
         )
 
-    fig.add_trace(
+    fig_pl.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=2, color="red", dash="dot"),
+            line=dict(width=2, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
             x=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].index.values),
             y=pd.Series(
                 em_baseline.loc[:, near_proj_start_year:]
@@ -7696,7 +7732,7 @@ for i in range(0, len(region_list)):
     )
 
     if region_list[i] in ["US "]:
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][2]],
                 y=[ndcs[i][1][2]],
@@ -7705,7 +7741,7 @@ for i in range(0, len(region_list)):
             )
         )
 
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][3]],
                 y=[ndcs[i][1][3]],
@@ -7714,7 +7750,7 @@ for i in range(0, len(region_list)):
             )
         )
         """
-        fig.add_annotation(
+        fig_pl.add_annotation(
             text="The NDC commitment is to "
             + ndc_commit[i][0]
             + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
@@ -7731,7 +7767,7 @@ for i in range(0, len(region_list)):
         )
         """
     elif region_list[i] in ["CHINA "]:
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][2]],
                 y=[ndcs[i][1][2]],
@@ -7740,7 +7776,7 @@ for i in range(0, len(region_list)):
             )
         )
         """
-        fig.add_annotation(
+        fig_pl.add_annotation(
             text="The NDC commitment is to "
             + ndc_commit[i][0]
             + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
@@ -7763,7 +7799,7 @@ for i in range(0, len(region_list)):
         "BRAZIL ",
         "INDIA ",
     ]:
-        fig.add_trace(
+        fig_pl.add_trace(
             go.Scatter(
                 x=[ndcs[i][0]],
                 y=[ndcs[i][1]],
@@ -7772,7 +7808,7 @@ for i in range(0, len(region_list)):
             )
         )
         """
-        fig.add_annotation(
+        fig_pl.add_annotation(
             text="The NDC commitment is to "
             + ndc_commit[i][0]
             + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
@@ -7790,7 +7826,7 @@ for i in range(0, len(region_list)):
         """
     # endregion
 
-    fig.update_layout(
+    fig_pl.update_layout(
         margin_b=100,
         margin_t=125,
         title={
@@ -7804,7 +7840,7 @@ for i in range(0, len(region_list)):
         legend={"traceorder": "reversed"},
     )
 
-    fig.add_annotation(
+    fig_pl.add_annotation(
         text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
         yref="paper",
@@ -7818,15 +7854,15 @@ for i in range(0, len(region_list)):
         opacity=1,
     )
 
-    fig.update_layout(
+    fig_pl.update_layout(
         legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10))
     )
 
     if show_figs is True:
-        fig.show()
+        fig_pl.show()
     if save_figs is True:
         pio.write_html(
-            fig,
+            fig_pl,
             file=(
                 "./charts/mwedges-"
                 + "pathway"
@@ -7841,7 +7877,6 @@ for i in range(0, len(region_list)):
 # endregion
 
 # endregion
-
 
 ###################################
 # //////////// DAU-WE ////////////# ALL 3X
@@ -8261,16 +8296,6 @@ ndc_commit = [
     ("x",),
     ("x",),
 ]
-
-"""
-em_baseline_alt = em_baseline.loc[:, data_end_year + 1 :].loc[:, ::accel]
-em_baseline_alt.columns = np.arange(2020, int(2020 + 80 / accel + 1), 1)
-
-em_baseline_end = em_baseline.loc[:, long_proj_end_year - int(80 / accel - 1) :] * 0
-em_baseline_end.loc[:, :] = em_baseline_alt.iloc[:, -1].values[:, None]
-
-em_baseline_alt = pd.DataFrame(em_baseline.loc[:,data_end_year]).join(em_baseline_alt).join(em_baseline_end)
-"""
 
 em_baseline_alt = em_baseline
 
@@ -8860,7 +8885,6 @@ for i in range(0, len(region_list)):
 # endregion
 
 # endregion
-
 
 ###################################
 # //////////// DAU-RA ////////////# RA 2x
@@ -9891,7 +9915,6 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-
 ###################################
 # //////////// DAU-FW ////////////# FW 2x
 ###################################
@@ -10884,7 +10907,6 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-
 ###################################
 # //////////// DAU-NCS ////////////# RA&FW 2x
 ###################################
@@ -11619,7 +11641,9 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="SSP2-RCP1.9",
-                line=dict(width=2, color="#17BECF", dash="dot"),
+                line=dict(
+                    width=2, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
                 ),
@@ -11657,13 +11681,13 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU-NCS",
-                line=dict(width=2, color="yellow", dash="dot"),
+                line=dict(width=2, color=cl["DAU-NCS"][0], dash=cl["DAU-NCS"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
                 y=pd.Series(spacer.loc[near_proj_start_year:].values) / 1000,
                 fill="none",
-                stackgroup="DAU21+CDR",
+                stackgroup="DAU-NCS",
                 legendgroup="two",
             )
         )
@@ -11714,7 +11738,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU-NCS",
-                line=dict(width=2, color="green", dash="dot"),
+                line=dict(width=2, color=cl["DAU-NCS"][0], dash=cl["DAU-NCS"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -11769,7 +11793,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=2, color="red", dash="dot"),
+            line=dict(width=2, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
             x=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].index.values),
             y=pd.Series(
                 em_baseline.loc[:, near_proj_start_year:]
@@ -13874,7 +13898,9 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="SSP2-RCP1.9",
-                line=dict(width=2, color="#17BECF", dash="dot"),
+                line=dict(
+                    width=2, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
                 ),
@@ -13890,7 +13916,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU21",
-                line=dict(width=2, color="green", dash="dot"),
+                line=dict(width=2, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -13912,7 +13938,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU-FFI",
-                line=dict(width=2, color="yellow", dash="dot"),
+                line=dict(width=2, color=cl["DAU-FFI"][0], dash=cl["DAU-FFI"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -13969,7 +13995,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU-FFI",
-                line=dict(width=2, color="green", dash="dot"),
+                line=dict(width=2, color=cl["DAU-FFI"][0], dash=cl["DAU-FFI"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -14161,7 +14187,6 @@ for i in range(0, len(region_list)):
 # endregion
 
 # endregion
-
 
 ####################################
 # //////////// DAU-NCS+FFI /////// # NCS & Industry FF Heat 2x
@@ -14872,7 +14897,9 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="SSP2-RCP1.9",
-                line=dict(width=2, color="#17BECF", dash="dot"),
+                line=dict(
+                    width=2, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
                 ),
@@ -14888,7 +14915,9 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU-NCS+FFI",
-                line=dict(width=2, color="yellow", dash="dot"),
+                line=dict(
+                    width=2, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -14976,7 +15005,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=2, color="red", dash="dot"),
+            line=dict(width=2, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
             x=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].index.values),
             y=pd.Series(
                 em_baseline.loc[:, near_proj_start_year:]
@@ -15089,7 +15118,6 @@ for i in range(0, len(region_list)):
 # endregion
 
 # endregion
-
 
 ########################################
 # //////////// DAU-NCS+FFI+E+T /////// # NCS & Industry FF Heat 2x
@@ -15854,7 +15882,9 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="SSP2-RCP1.9",
-                line=dict(width=2, color="#17BECF", dash="dot"),
+                line=dict(
+                    width=2, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
                 ),
@@ -15870,7 +15900,11 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU-NCS+FFI+E+T",
-                line=dict(width=2, color="yellow", dash="dot"),
+                line=dict(
+                    width=2,
+                    color=cl["DAU-NCS+FFI+E+T"][0],
+                    dash=cl["DAU-NCS+FFI+E+T"][1],
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -15927,7 +15961,11 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="DAU-NCS+FFI+E+T",
-                line=dict(width=2, color="green", dash="dot"),
+                line=dict(
+                    width=2,
+                    color=cl["DAU-NCS+FFI+E+T"][0],
+                    dash=cl["DAU-NCS+FFI+E+T"][1],
+                ),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -15982,7 +16020,7 @@ for i in range(0, len(region_list)):
     fig.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=2, color="red", dash="dot"),
+            line=dict(width=2, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
             x=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].index.values),
             y=pd.Series(
                 em_baseline.loc[:, near_proj_start_year:]
@@ -18430,7 +18468,7 @@ if show_ncsffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI",
-            line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][0]),
+            line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsffi.loc[data_end_year:, "CO2"],
             fill="none",
@@ -19048,7 +19086,7 @@ if show_rcp19 == True:
     fig.add_trace(
         go.Scatter(
             name="SSP2-RCP1.9",
-            line=dict(width=3, color=cl['SSP2-RCP1.9'][0], dash=cl['SSP2-RCP1.9'][1]),
+            line=dict(width=3, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]),
             x=results19.loc[:, 2020:2100].columns,
             y=results19.loc[:, 2020:2100].squeeze(),
             fill="none",
@@ -19061,7 +19099,7 @@ if show_lp == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-PL",
-            line=dict(width=3, color=cl["DAU21-PL"][0], dash=cl["DAU21-PL"][1]),
+            line=dict(width=3, color=cl["DAU-PL"][0], dash=cl["DAU-PL"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Clp.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19100,7 +19138,7 @@ if show_fw == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-FW",
-            line=dict(width=3, color=cl["DAU-FW"][0], dash=cl["DAU-FW"][1]), dash="dot"),
+            line=dict(width=3, color=cl["DAU-FW"][0], dash=cl["DAU-FW"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cwe.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19152,7 +19190,9 @@ if show_ncsffiet == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI+E+T",
-            line=dict(width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]),
+            line=dict(
+                width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
+            ),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsffiet.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -19858,7 +19898,9 @@ if show_ncsffiet == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI+E+T",
-            line=dict(width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]),
+            line=dict(
+                width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
+            ),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fncsffiet.loc[data_end_year:, "CO2e"],
             fill="none",
@@ -20557,7 +20599,9 @@ if show_ncsffi == True:
     fig.add_trace(
         go.Scatter(
             name="DAU-NCS+FFI+E+T",
-            line=dict(width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]),
+            line=dict(
+                width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
+            ),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tncsffiet.loc[data_end_year:, "CO2e"],
             fill="none",
