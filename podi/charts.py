@@ -11964,7 +11964,7 @@ for i in range(0, len(region_list)):
 scenario = "pathway"
 year = 2050
 i = 0
-accel = 2
+accel = 5
 
 ndcs = [
     [(2030, 2050), (24, 0), ("of 50% reduction by 2030.", "of Net-zero by 2050.")],
@@ -12056,16 +12056,22 @@ ipcc = [
 em_baseline_alt = em_baseline
 
 em_pathway_alt = (
+    em_pathway.loc[
+        slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :
+    ].loc[:, data_end_year + 1 :]
+).drop(
     em_pathway.loc[slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :]
     .loc[:, data_end_year + 1 :]
-    .loc[:, ::accel]
+    .columns[::accel],
+    1,
 )
-em_pathway_alt.columns = np.arange(2020, int(2020 + 80 / accel + 1), 1)
+
+em_pathway_alt.columns = np.arange(2020, 2020 + len(em_pathway_alt.columns), 1)
 
 em_pathway_end = (
     em_pathway.loc[
         slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :
-    ].loc[:, long_proj_end_year - int(80 / accel - 1) :]
+    ].loc[:, long_proj_end_year - int(80 / accel) :]
     * 0
 )
 
@@ -12805,9 +12811,9 @@ for year in [2050]:
 # region
 
 scenario = "pathway"
-year = 2030
+year = 2050
 i = 0
-accel = 2
+accel = 5
 
 bar_emissions_goal = [
     ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
@@ -12852,17 +12858,22 @@ bar_emissions_goal = [
 em_baseline_alt = em_baseline
 
 em_pathway_alt = (
+    em_pathway.loc[
+        slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :
+    ].loc[:, data_end_year + 1 :]
+).drop(
     em_pathway.loc[slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :]
     .loc[:, data_end_year + 1 :]
-    .loc[:, ::accel]
+    .columns[::accel],
+    1,
 )
 
-em_pathway_alt.columns = np.arange(2020, int(2020 + 80 / accel + 1), 1)
+em_pathway_alt.columns = np.arange(2020, 2020 + len(em_pathway_alt.columns), 1)
 
 em_pathway_end = (
     em_pathway.loc[
         slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :
-    ].loc[:, long_proj_end_year - int(80 / accel - 1) :]
+    ].loc[:, long_proj_end_year - int(80 / accel) :]
     * 0
 )
 
@@ -13078,7 +13089,7 @@ figure.update_layout(
     xaxis={"categoryorder": "total descending"},
 )
 
-figure.update_yaxes(range=[0, 25])
+figure.update_yaxes(range=[0, 50])
 
 if show_figs is True:
     figure.show()
