@@ -294,20 +294,32 @@ for i in range(0, 2):
             1: "Carbon Dioxide Removal",
             2: "Carbon Dioxide Removal",
             3: "Carbon Dioxide Removal",
+            4: "Carbon Dioxide Removal",
+            5: "Carbon Dioxide Removal",
+            6: "Carbon Dioxide Removal",
+            7: "Carbon Dioxide Removal",
+            8: "Carbon Dioxide Removal",
+            9: "Carbon Dioxide Removal",
+            10: "Carbon Dioxide Removal",
+            11: "Carbon Dioxide Removal",
         }
     )
 
 cdr_pathway.index.name = "Sector"
+
+"""
 cdr_pathway = pd.concat(
     [cdr_pathway], keys=["pathway"], names=["Scenario"]
 ).reorder_levels(["Sector", "Scenario"])
-cdr_pathway = cdr_pathway.reset_index().set_index(["Region", "Sector", "Scenario"])
-
+"""
+cdr = cdr_pathway.reset_index().set_index(["Region", "Sector", "Scenario"])
+"""
 cdr_baseline = cdr_pathway.droplevel("Scenario") * 0
 cdr_baseline = pd.concat(
     [cdr_baseline], keys=["baseline"], names=["Scenario"]
 ).reorder_levels(["Region", "Sector", "Scenario"])
 cdr = cdr_baseline.append(cdr_pathway)
+"""
 cdr.columns = cdr.columns.astype(int)
 
 
