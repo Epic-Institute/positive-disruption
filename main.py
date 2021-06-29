@@ -302,6 +302,9 @@ for i in range(0, 2):
             9: "Carbon Dioxide Removal",
             10: "Carbon Dioxide Removal",
             11: "Carbon Dioxide Removal",
+            12: "Carbon Dioxide Removal",
+            13: "Carbon Dioxide Removal",
+            14: "Carbon Dioxide Removal",
         }
     )
 
