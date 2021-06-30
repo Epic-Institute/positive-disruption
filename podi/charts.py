@@ -17046,7 +17046,7 @@ em_pathway_alt = em_pathway_alt_ra.append(em_pathway_alt_fw).append(
         ["Electricity", "Industry", "Transport", "Buildings"],
         slice(None),
         :,
-    ].loc[:, data_end_year:]
+    ]
 )
 
 # endregion
@@ -17054,7 +17054,7 @@ em_pathway_alt = em_pathway_alt_ra.append(em_pathway_alt_fw).append(
 # em_pathway_alt = curve_smooth(em_pathway_alt, "linear", 30)
 
 # for use in climate charts
-em_alt_mm = em_pathway_alt
+em_alt_ncsm = em_pathway_alt
 
 em_mitigated_alt = (
     em_baseline_alt.groupby(["Region", "Sector", "Metric"]).sum()
@@ -21332,9 +21332,11 @@ show_we = False
 show_ra = False
 show_fw = False
 show_ncs = True
+show_ncsm = True
+show_ncsmffi = True
 show_ffi = False
-show_ncsffi = True
-show_ncsffiet = True
+show_ncsffi = False
+show_ncsffiet = False
 
 #################################
 # CO2 ATMOSPHERIC CONCENTRATION #
@@ -21350,8 +21352,8 @@ em_ra = pd.DataFrame(rcp3pd.Emissions.emissions * 1.002)
 em_fw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.998)
 em_ncs = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
 em_ffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9999)
-em_ncsffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.98)
-em_ncsffiet = pd.DataFrame(rcp3pd.Emissions.emissions * 0.989)
+em_ncsm = pd.DataFrame(rcp3pd.Emissions.emissions * 0.98)
+em_ncsmffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.989)
 
 hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
     ["Region", "Metric", "Units", "Scenario"]
@@ -21473,10 +21475,8 @@ em_ffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_ncsffi.loc[225:335, 1] = (
-    em_alt_ncsffi[
-        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
-    ]
+em_ncsm.loc[225:335, 1] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Electricity", "Transport", "Buildings", "Industry"],
@@ -21487,9 +21487,9 @@ em_ncsffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_ncsffiet.loc[225:335, 1] = (
-    em_alt_ncsffiet[
-        ~em_alt_ncsffiet.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+em_ncsmffi.loc[225:335, 1] = (
+    em_alt_ncsmffi[
+        ~em_alt_ncsmffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
     ]
     .loc[
         "World ",
@@ -21586,10 +21586,8 @@ em_ffi.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_ncsffi.loc[225:335, 2] = (
-    em_alt_ncsffi[
-        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
-    ]
+em_ncsm.loc[225:335, 2] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -21600,9 +21598,9 @@ em_ncsffi.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_ncsffiet.loc[225:335, 2] = (
-    em_alt_ncsffiet[
-        ~em_alt_ncsffiet.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+em_ncsmffi.loc[225:335, 2] = (
+    em_alt_ncsmffi[
+        ~em_alt_ncsmffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
     ]
     .loc[
         "World ",
@@ -21658,14 +21656,14 @@ em_ffi.loc[225:335, 3] = (
     .sum()
     / (25)
 ).values
-em_ncsffi.loc[225:335, 3] = (
-    em_alt_ncsffi[em_alt_ncsffi.index.get_level_values(3).isin(["CH4"])]
+em_ncsm.loc[225:335, 3] = (
+    em_alt_ncsm[em_alt_ncsm.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
     / (25)
 ).values
-em_ncsffiet.loc[225:335, 3] = (
-    em_alt_ncsffiet[em_alt_ncsffiet.index.get_level_values(3).isin(["CH4"])]
+em_ncsmffi.loc[225:335, 3] = (
+    em_alt_ncsmffi[em_alt_ncsmffi.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
     / (25)
@@ -21714,14 +21712,14 @@ em_ffi.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
-em_ncsffi.loc[225:335, 4] = (
-    em_alt_ncsffi[em_alt_ncsffi.index.get_level_values(3).isin(["N2O"])]
+em_ncsm.loc[225:335, 4] = (
+    em_alt_ncsm[em_alt_ncsm.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
 ).values
-em_ncsffiet.loc[225:335, 4] = (
-    em_alt_ncsffiet[em_alt_ncsffiet.index.get_level_values(3).isin(["N2O"])]
+em_ncsmffi.loc[225:335, 4] = (
+    em_alt_ncsmffi[em_alt_ncsmffi.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
@@ -21734,8 +21732,8 @@ em_ra = em_ra.values
 em_fw = em_fw.values
 em_ncs = em_ncs.values
 em_ffi = em_ffi.values
-em_ncsffi = em_ncsffi.values
-em_ncsffiet = em_ncsffiet.values
+em_ncsm = em_ncsm.values
+em_ncsmffi = em_ncsmffi.values
 
 other_rf = np.zeros(em_pd.shape[0])
 for x in range(0, em_pd.shape[0]):
@@ -21750,11 +21748,9 @@ Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra, other_rf=other_rf)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw, other_rf=other_rf)
 Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs, other_rf=other_rf)
 Cffi, Fffi, Tffi = fair.forward.fair_scm(emissions=em_ffi, other_rf=other_rf)
-Cncsffi, Fncsffi, Tncsffi = fair.forward.fair_scm(
-    emissions=em_ncsffi, other_rf=other_rf
-)
-Cncsffiet, Fncsffiet, Tncsffiet = fair.forward.fair_scm(
-    emissions=em_ncsffiet, other_rf=other_rf
+Cncsm, Fncsm, Tncsm = fair.forward.fair_scm(emissions=em_ncsm, other_rf=other_rf)
+Cncsmffi, Fncsmffi, Tncsmffi = fair.forward.fair_scm(
+    emissions=em_ncsmffi, other_rf=other_rf
 )
 
 Cb = (
@@ -21792,13 +21788,13 @@ Cffi = (
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
-Cncsffi = (
-    pd.DataFrame(Cncsffi)
+Cncsm = (
+    pd.DataFrame(Cncsm)
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
-Cncsffiet = (
-    pd.DataFrame(Cncsffiet)
+Cncsmffi = (
+    pd.DataFrame(Cncsmffi)
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
@@ -21811,8 +21807,8 @@ Clp["CO2"] = Clp.loc[:, 0]
 Cwe["CO2"] = Cwe.loc[:, 0]
 Crafw["CO2"] = Crafw.loc[:, 0]
 Cffi["CO2"] = Cffi.loc[:, 0]
-Cncsffi["CO2"] = Cncsffi.loc[:, 0]
-Cncsffiet["CO2"] = Cncsffiet.loc[:, 0]
+Cncsm["CO2"] = Cncsm.loc[:, 0]
+Cncsmffi["CO2"] = Cncsmffi.loc[:, 0]
 
 C19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 Cb = Cb * (hist[2021] / Cb.loc[2021, "CO2"])
@@ -21822,8 +21818,8 @@ Clp = Clp * (hist[2021] / Clp.loc[2021, "CO2"])
 Cwe = Cwe * (hist[2021] / Cwe.loc[2021, "CO2"])
 Crafw = Crafw * (hist[2021] / Crafw.loc[2021, "CO2"])
 Cffi = Cffi * (hist[2021] / Cffi.loc[2021, "CO2"])
-Cncsffi = Cncsffi * (hist[2021] / Cncsffi.loc[2021, "CO2"])
-Cncsffiet = Cncsffiet * (hist[2021] / Cncsffiet.loc[2021, "CO2"])
+Cncsm = Cncsm * (hist[2021] / Cncsm.loc[2021, "CO2"])
+Cncsmffi = Cncsmffi * (hist[2021] / Cncsmffi.loc[2021, "CO2"])
 
 fig = go.Figure()
 
@@ -21968,28 +21964,28 @@ if show_ffi == True:
         )
     )
 
-if show_ncsffi == True:
+if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCS+FFI",
+            name="DAU-NCSM",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-            y=Cncsffi.loc[data_end_year:, "CO2"],
+            y=Cncsm.loc[data_end_year:, "CO2"],
             fill="none",
             stackgroup="ncsffi",
             legendgroup="ncsffi",
         )
     )
 
-if show_ncsffiet == True:
+if show_ncsmffi == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCS+FFI+E+T",
+            name="DAU-NCSM+FFI",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-            y=Cncsffiet.loc[data_end_year:, "CO2"],
+            y=Cncsmffi.loc[data_end_year:, "CO2"],
             fill="none",
             stackgroup="ncsffiet",
             legendgroup="ncsffiet",
@@ -22055,8 +22051,8 @@ em_ra = pd.DataFrame(rcp3pd.Emissions.emissions * 0.997)
 em_fw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.998)
 em_ncs = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
 em_ffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9999)
-em_ncsffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
-em_ncsffiet = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9998)
+em_ncsm = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
+em_ncsmffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9998)
 
 hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
     ["Region", "Metric", "Units", "Scenario"]
@@ -22178,10 +22174,8 @@ em_ffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_ncsffi.loc[225:335, 1] = (
-    em_alt_ncsffi[
-        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
-    ]
+em_ncsm.loc[225:335, 1] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Electricity", "Transport", "Buildings", "Industry"],
@@ -22192,9 +22186,9 @@ em_ncsffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_ncsffiet.loc[225:335, 1] = (
-    em_alt_ncsffiet[
-        ~em_alt_ncsffiet.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+em_ncsmffi.loc[225:335, 1] = (
+    em_alt_ncsmffi[
+        ~em_alt_ncsmffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
     ]
     .loc[
         "World ",
@@ -22291,10 +22285,8 @@ em_ffi.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_ncsffi.loc[225:335, 2] = (
-    em_alt_ncsffi[
-        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
-    ]
+em_ncsm.loc[225:335, 2] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -22305,9 +22297,9 @@ em_ncsffi.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_ncsffiet.loc[225:335, 2] = (
-    em_alt_ncsffiet[
-        ~em_alt_ncsffiet.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+em_ncsmffi.loc[225:335, 2] = (
+    em_alt_ncsmffi[
+        ~em_alt_ncsmffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
     ]
     .loc[
         "World ",
@@ -22363,13 +22355,13 @@ em_ffi.loc[225:335, 3] = (
     .sum()
     / (25)
 ).values
-em_ncsffi.loc[225:335, 3] = (
+em_ncsm.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
     / (25)
 ).values
-em_ncsffiet.loc[225:335, 3] = (
+em_ncsmffi.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
@@ -22419,14 +22411,14 @@ em_ffi.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
-em_ncsffi.loc[225:335, 4] = (
-    em_alt_ncsffi[em_alt_ncsffi.index.get_level_values(3).isin(["N2O"])]
+em_ncsm.loc[225:335, 4] = (
+    em_alt_ncsm[em_alt_ncsm.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
 ).values
-em_ncsffiet.loc[225:335, 4] = (
-    em_alt_ncsffiet[em_alt_ncsffiet.index.get_level_values(3).isin(["N2O"])]
+em_ncsmffi.loc[225:335, 4] = (
+    em_alt_ncsmffi[em_alt_ncsmffi.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
@@ -22439,8 +22431,8 @@ em_ra = em_ra.values
 em_fw = em_fw.values
 em_ncs = em_ncs.values
 em_ffi = em_ffi.values
-em_ncsffi = em_ncsffi.values
-em_ncsffiet = em_ncsffiet.values
+em_ncsm = em_ncsm.values
+em_ncsmffi = em_ncsmffi.values
 
 other_rf = np.zeros(em_pd.shape[0])
 for x in range(0, em_pd.shape[0]):
@@ -22455,11 +22447,9 @@ Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra, other_rf=other_rf)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw, other_rf=other_rf)
 Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs, other_rf=other_rf)
 Cffi, Fffi, Tffi = fair.forward.fair_scm(emissions=em_ffi, other_rf=other_rf)
-Cncsffi, Fncsffi, Tncsffi = fair.forward.fair_scm(
-    emissions=em_ncsffi, other_rf=other_rf
-)
-Cncsffiet, Fncsffiet, Tncsffiet = fair.forward.fair_scm(
-    emissions=em_ncsffiet, other_rf=other_rf
+Cncsm, Fncsm, Tncsm = fair.forward.fair_scm(emissions=em_ncsm, other_rf=other_rf)
+Cncsmffi, Fncsmffi, Tncsmffi = fair.forward.fair_scm(
+    emissions=em_ncsmffi, other_rf=other_rf
 )
 
 Cb = (
@@ -22497,13 +22487,13 @@ Cffi = (
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
-Cncsffi = (
-    pd.DataFrame(Cncsffi)
+Cncsm = (
+    pd.DataFrame(Cncsm)
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
-Cncsffiet = (
-    pd.DataFrame(Cncsffiet)
+Cncsmffi = (
+    pd.DataFrame(Cncsmffi)
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
@@ -22516,11 +22506,9 @@ Clp["CO2e"] = Clp.loc[:, 0] + Clp.loc[:, 1] * 25e-3 + Clp.loc[:, 2] * 298e-3
 Cwe["CO2e"] = Cwe.loc[:, 0] + Cwe.loc[:, 1] * 25e-3 + Cwe.loc[:, 2] * 298e-3
 Crafw["CO2e"] = Crafw.loc[:, 0] + Crafw.loc[:, 1] * 25e-3 + Crafw.loc[:, 2] * 298e-3
 Cffi["CO2e"] = Cffi.loc[:, 0] + Cffi.loc[:, 1] * 25e-3 + Cffi.loc[:, 2] * 298e-3
-Cncsffi["CO2e"] = (
-    Cncsffi.loc[:, 0] + Cncsffi.loc[:, 1] * 25e-3 + Cncsffi.loc[:, 2] * 298e-3
-)
-Cncsffiet["CO2e"] = (
-    Cncsffiet.loc[:, 0] + Cncsffiet.loc[:, 1] * 25e-3 + Cncsffiet.loc[:, 2] * 298e-3
+Cncsm["CO2e"] = Cncsm.loc[:, 0] + Cncsm.loc[:, 1] * 25e-3 + Cncsm.loc[:, 2] * 298e-3
+Cncsmffi["CO2e"] = (
+    Cncsmffi.loc[:, 0] + Cncsmffi.loc[:, 1] * 25e-3 + Cncsmffi.loc[:, 2] * 298e-3
 )
 
 C19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
@@ -22531,8 +22519,8 @@ Clp = Clp * (hist[2021] / Clp.loc[2021, "CO2e"])
 Cwe = Cwe * (hist[2021] / Cwe.loc[2021, "CO2e"])
 Crafw = Crafw * (hist[2021] / Crafw.loc[2021, "CO2e"])
 Cffi = Cffi * (hist[2021] / Cffi.loc[2021, "CO2e"])
-Cncsffi = Cncsffi * (hist[2021] / Cncsffi.loc[2021, "CO2e"])
-Cncsffiet = Cncsffiet * (hist[2021] / Cncsffiet.loc[2021, "CO2e"])
+Cncsm = Cncsm * (hist[2021] / Cncsm.loc[2021, "CO2e"])
+Cncsmffi = Cncsmffi * (hist[2021] / Cncsmffi.loc[2021, "CO2e"])
 
 fig = go.Figure()
 
@@ -22677,28 +22665,28 @@ if show_ffi == True:
         )
     )
 
-if show_ncsffi == True:
+if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCS+FFI",
+            name="DAU-NCSM",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-            y=Cncsffi.loc[data_end_year:, "CO2e"],
+            y=Cncsm.loc[data_end_year:, "CO2e"],
             fill="none",
             stackgroup="ncsffi",
             legendgroup="ncsffi",
         )
     )
 
-if show_ncsffiet == True:
+if show_ncsmffi == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCS+FFI+E+T",
+            name="DAU-NCSM+FFI",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-            y=Cncsffiet.loc[data_end_year:, "CO2e"],
+            y=Cncsmffi.loc[data_end_year:, "CO2e"],
             fill="none",
             stackgroup="ncsffiet",
             legendgroup="ncsffiet",
@@ -22764,8 +22752,8 @@ em_ra = pd.DataFrame(rcp3pd.Emissions.emissions * 0.997)
 em_fw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.998)
 em_ncs = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
 em_ffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9999)
-em_ncsffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
-em_ncsffiet = pd.DataFrame(rcp3pd.Emissions.emissions * 0.98)
+em_ncsm = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
+em_ncsmffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.98)
 
 hist = pd.read_csv("podi/data/forcing.csv")
 hist.columns = hist.columns.astype(int)
@@ -22885,10 +22873,8 @@ em_ffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_ncsffi.loc[225:335, 1] = (
-    em_alt_ncsffi[
-        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
-    ]
+em_ncsm.loc[225:335, 1] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Electricity", "Transport", "Buildings", "Industry"],
@@ -22899,9 +22885,9 @@ em_ncsffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_ncsffiet.loc[225:335, 1] = (
-    em_alt_ncsffiet[
-        ~em_alt_ncsffiet.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+em_ncsmffi.loc[225:335, 1] = (
+    em_alt_ncsmffi[
+        ~em_alt_ncsmffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
     ]
     .loc[
         "World ",
@@ -22998,10 +22984,8 @@ em_ffi.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_ncsffi.loc[225:335, 2] = (
-    em_alt_ncsffi[
-        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
-    ]
+em_ncsm.loc[225:335, 2] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -23012,9 +22996,9 @@ em_ncsffi.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_ncsffiet.loc[225:335, 2] = (
-    em_alt_ncsffiet[
-        ~em_alt_ncsffiet.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+em_ncsmffi.loc[225:335, 2] = (
+    em_alt_ncsmffi[
+        ~em_alt_ncsmffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
     ]
     .loc[
         "World ",
@@ -23070,13 +23054,13 @@ em_ffi.loc[225:335, 3] = (
     .sum()
     / (25)
 ).values
-em_ncsffi.loc[225:335, 3] = (
+em_ncsm.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
     / (25)
 ).values
-em_ncsffiet.loc[225:335, 3] = (
+em_ncsmffi.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
@@ -23126,14 +23110,14 @@ em_ffi.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
-em_ncsffi.loc[225:335, 4] = (
-    em_alt_ncsffi[em_alt_ncsffi.index.get_level_values(3).isin(["N2O"])]
+em_ncsm.loc[225:335, 4] = (
+    em_alt_ncsm[em_alt_ncsm.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
 ).values
-em_ncsffiet.loc[225:335, 4] = (
-    em_alt_ncsffiet[em_alt_ncsffiet.index.get_level_values(3).isin(["N2O"])]
+em_ncsmffi.loc[225:335, 4] = (
+    em_alt_ncsmffi[em_alt_ncsmffi.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
@@ -23146,8 +23130,8 @@ em_ra = em_ra.values
 em_fw = em_fw.values
 em_ncs = em_ncs.values
 em_ffi = em_ffi.values
-em_ncsffi = em_ncsffi.values
-em_ncsffiet = em_ncsffiet.values
+em_ncsm = em_ncsm.values
+em_ncsmffi = em_ncsmffi.values
 
 other_rf = np.zeros(em_pd.shape[0])
 
@@ -23159,8 +23143,8 @@ Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw)
 Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs)
 Cffi, Fffi, Tffi = fair.forward.fair_scm(emissions=em_ffi)
-Cncsffi, Fncsffi, Tncsffi = fair.forward.fair_scm(emissions=em_ncsffi)
-Cncsffiet, Fncsffiet, Tncsffiet = fair.forward.fair_scm(emissions=em_ncsffiet)
+Cncsm, Fncsm, Tncsm = fair.forward.fair_scm(emissions=em_ncsm)
+Cncsmffi, Fncsmffi, Tncsmffi = fair.forward.fair_scm(emissions=em_ncsmffi)
 
 Fb = (
     pd.DataFrame(Fb)
@@ -23197,13 +23181,13 @@ Fffi = (
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
-Fncsffi = (
-    pd.DataFrame(Fncsffi)
+Fncsm = (
+    pd.DataFrame(Fncsm)
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
-Fncsffiet = (
-    pd.DataFrame(Fncsffiet)
+Fncsmffi = (
+    pd.DataFrame(Fncsmffi)
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
@@ -23218,11 +23202,9 @@ Flp["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Flp, axis=1)).T, "quadratic", 6).
 Fwe["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fwe, axis=1)).T, "quadratic", 6).T
 Frafw["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Frafw, axis=1)).T, "quadratic", 6).T
 Fffi["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fffi, axis=1)).T, "quadratic", 6).T
-Fncsffi["CO2e"] = curve_smooth(
-    pd.DataFrame(np.sum(Fncsffi, axis=1)).T, "quadratic", 6
-).T
-Fncsffiet["CO2e"] = curve_smooth(
-    pd.DataFrame(np.sum(Fncsffiet, axis=1)).T, "quadratic", 6
+Fncsm["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fncsm, axis=1)).T, "quadratic", 6).T
+Fncsmffi["CO2e"] = curve_smooth(
+    pd.DataFrame(np.sum(Fncsmffi, axis=1)).T, "quadratic", 6
 ).T
 
 F19 = F19 * (hist.loc[:, 2020].values[0] / F19.loc[:, 2020].values[0])
@@ -23235,11 +23217,11 @@ Frafw = Frafw * (
     hist.loc[:, data_end_year].values[0] / Frafw.loc[data_end_year, "CO2e"]
 )
 Fffi = Fffi * (hist.loc[:, data_end_year].values[0] / Fffi.loc[data_end_year, "CO2e"])
-Fncsffi = Fncsffi * (
-    hist.loc[:, data_end_year].values[0] / Fncsffi.loc[data_end_year, "CO2e"]
+Fncsm = Fncsm * (
+    hist.loc[:, data_end_year].values[0] / Fncsm.loc[data_end_year, "CO2e"]
 )
-Fncsffiet = Fncsffiet * (
-    hist.loc[:, data_end_year].values[0] / Fncsffiet.loc[data_end_year, "CO2e"]
+Fncsmffi = Fncsmffi * (
+    hist.loc[:, data_end_year].values[0] / Fncsmffi.loc[data_end_year, "CO2e"]
 )
 
 
@@ -23386,28 +23368,28 @@ if show_ffi == True:
         )
     )
 
-if show_ncsffi == True:
+if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCS+FFI",
+            name="DAU-NCSM",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-            y=Fncsffi.loc[data_end_year:, "CO2e"],
+            y=Fncsm.loc[data_end_year:, "CO2e"],
             fill="none",
             stackgroup="ncsffi",
             legendgroup="ncsffi",
         )
     )
 
-if show_ncsffiet == True:
+if show_ncsmffi == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCS+FFI+E+T",
+            name="DAU-NCSM+FFI",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-            y=Fncsffiet.loc[data_end_year:, "CO2e"],
+            y=Fncsmffi.loc[data_end_year:, "CO2e"],
             fill="none",
             stackgroup="ncsffiet",
             legendgroup="ncsffiet",
@@ -23468,8 +23450,8 @@ em_ra = pd.DataFrame(rcp3pd.Emissions.emissions * 0.995)
 em_fw = pd.DataFrame(rcp3pd.Emissions.emissions * 0.998)
 em_ncs = pd.DataFrame(rcp3pd.Emissions.emissions * 0.999)
 em_ffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.9999)
-em_ncsffi = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
-em_ncsffiet = pd.DataFrame(rcp3pd.Emissions.emissions * 1.002)
+em_ncsm = pd.DataFrame(rcp3pd.Emissions.emissions * 0.99999)
+em_ncsmffi = pd.DataFrame(rcp3pd.Emissions.emissions * 1.002)
 
 hist = pd.read_csv("podi/data/temp.csv")
 hist.columns = hist.columns.astype(int)
@@ -23588,10 +23570,8 @@ em_ffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_ncsffi.loc[225:335, 1] = (
-    em_alt_ncsffi[
-        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
-    ]
+em_ncsm.loc[225:335, 1] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Electricity", "Transport", "Buildings", "Industry"],
@@ -23602,9 +23582,9 @@ em_ncsffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
-em_ncsffiet.loc[225:335, 1] = (
-    em_alt_ncsffiet[
-        ~em_alt_ncsffiet.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+em_ncsmffi.loc[225:335, 1] = (
+    em_alt_ncsmffi[
+        ~em_alt_ncsmffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
     ]
     .loc[
         "World ",
@@ -23701,10 +23681,8 @@ em_ffi.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_ncsffi.loc[225:335, 2] = (
-    em_alt_ncsffi[
-        ~em_alt_ncsffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
-    ]
+em_ncsm.loc[225:335, 2] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
         ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -23715,9 +23693,9 @@ em_ncsffi.loc[225:335, 2] = (
     .sum()
     / 3670
 ).values
-em_ncsffiet.loc[225:335, 2] = (
-    em_alt_ncsffiet[
-        ~em_alt_ncsffiet.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
+em_ncsmffi.loc[225:335, 2] = (
+    em_alt_ncsmffi[
+        ~em_alt_ncsmffi.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])
     ]
     .loc[
         "World ",
@@ -23773,13 +23751,13 @@ em_ffi.loc[225:335, 3] = (
     .sum()
     / (25)
 ).values
-em_ncsffi.loc[225:335, 3] = (
+em_ncsm.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
     / (25)
 ).values
-em_ncsffiet.loc[225:335, 3] = (
+em_ncsmffi.loc[225:335, 3] = (
     em_alt_fw[em_alt_fw.index.get_level_values(3).isin(["CH4"])]
     .loc["World ", slice(None), slice(None), "CH4", "pathway"]
     .sum()
@@ -23829,14 +23807,14 @@ em_ffi.loc[225:335, 4] = (
     .sum()
     / (298)
 ).values
-em_ncsffi.loc[225:335, 4] = (
-    em_alt_ncsffi[em_alt_ncsffi.index.get_level_values(3).isin(["N2O"])]
+em_ncsm.loc[225:335, 4] = (
+    em_alt_ncsm[em_alt_ncsm.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
 ).values
-em_ncsffiet.loc[225:335, 4] = (
-    em_alt_ncsffiet[em_alt_ncsffiet.index.get_level_values(3).isin(["N2O"])]
+em_ncsmffi.loc[225:335, 4] = (
+    em_alt_ncsmffi[em_alt_ncsmffi.index.get_level_values(3).isin(["N2O"])]
     .loc["World ", slice(None), slice(None), "N2O", "pathway"]
     .sum()
     / (298)
@@ -23849,8 +23827,8 @@ em_ra = em_ra.values
 em_fw = em_fw.values
 em_ncs = em_ncs.values
 em_ffi = em_ffi.values
-em_ncsffi = em_ncsffi.values
-em_ncsffiet = em_ncsffiet.values
+em_ncsm = em_ncsm.values
+em_ncsmffi = em_ncsmffi.values
 
 other_rf = np.zeros(em_pd.shape[0])
 
@@ -23862,8 +23840,8 @@ Clp, Flp, Tlp = fair.forward.fair_scm(emissions=em_ra)
 Cwe, Fwe, Twe = fair.forward.fair_scm(emissions=em_fw)
 Crafw, Frafw, Trafw = fair.forward.fair_scm(emissions=em_ncs)
 Cffi, Fffi, Tffi = fair.forward.fair_scm(emissions=em_ffi)
-Cncsffi, Fncsffi, Tncsffi = fair.forward.fair_scm(emissions=em_ncsffi)
-Cncsffiet, Fncsffiet, Tncsffiet = fair.forward.fair_scm(emissions=em_ncsffiet)
+Cncsm, Fncsm, Tncsm = fair.forward.fair_scm(emissions=em_ncsm)
+Cncsmffi, Fncsmffi, Tncsmffi = fair.forward.fair_scm(emissions=em_ncsmffi)
 
 Tb = (
     pd.DataFrame(Tb)
@@ -23900,13 +23878,13 @@ Tffi = (
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
-Tncsffi = (
-    pd.DataFrame(Tncsffi)
+Tncsm = (
+    pd.DataFrame(Tncsm)
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
-Tncsffiet = (
-    pd.DataFrame(Tncsffiet)
+Tncsmffi = (
+    pd.DataFrame(Tncsmffi)
     .loc[225:335]
     .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
 )
@@ -23920,11 +23898,9 @@ Tlp["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tlp, axis=1)).T, "quadratic", 6).
 Twe["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Twe, axis=1)).T, "quadratic", 6).T
 Trafw["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Trafw, axis=1)).T, "quadratic", 6).T
 Tffi["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tffi, axis=1)).T, "quadratic", 6).T
-Tncsffi["CO2e"] = curve_smooth(
-    pd.DataFrame(np.sum(Tncsffi, axis=1)).T, "quadratic", 6
-).T
-Tncsffiet["CO2e"] = curve_smooth(
-    pd.DataFrame(np.sum(Tncsffiet, axis=1)).T, "quadratic", 6
+Tncsm["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tncsm, axis=1)).T, "quadratic", 6).T
+Tncsmffi["CO2e"] = curve_smooth(
+    pd.DataFrame(np.sum(Tncsmffi, axis=1)).T, "quadratic", 6
 ).T
 
 T19 = T19 * (hist.loc[:, 2020].values[0] / T19.loc[:, 2020].values[0])
@@ -23937,11 +23913,11 @@ Trafw = Trafw * (
     hist.loc[:, data_end_year].values[0] / Trafw.loc[data_end_year, "CO2e"]
 )
 Tffi = Tffi * (hist.loc[:, data_end_year].values[0] / Tffi.loc[data_end_year, "CO2e"])
-Tncsffi = Tncsffi * (
-    hist.loc[:, data_end_year].values[0] / Tncsffi.loc[data_end_year, "CO2e"]
+Tncsm = Tncsm * (
+    hist.loc[:, data_end_year].values[0] / Tncsm.loc[data_end_year, "CO2e"]
 )
-Tncsffiet = Tncsffiet * (
-    hist.loc[:, data_end_year].values[0] / Tncsffiet.loc[data_end_year, "CO2e"]
+Tncsmffi = Tncsmffi * (
+    hist.loc[:, data_end_year].values[0] / Tncsmffi.loc[data_end_year, "CO2e"]
 )
 
 fig = go.Figure()
@@ -24087,28 +24063,28 @@ if show_ffi == True:
         )
     )
 
-if show_ncsffi == True:
+if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCS+FFI",
+            name="DAU-NCSM",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-            y=Tncsffi.loc[data_end_year:, "CO2e"],
+            y=Tncsm.loc[data_end_year:, "CO2e"],
             fill="none",
             stackgroup="ncsffi",
             legendgroup="ncsffi",
         )
     )
 
-if show_ncsffi == True:
+if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCS+FFI+E+T",
+            name="DAU-NCSM+FFI",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
-            y=Tncsffiet.loc[data_end_year:, "CO2e"],
+            y=Tncsmffi.loc[data_end_year:, "CO2e"],
             fill="none",
             stackgroup="ncsffiet",
             legendgroup="ncsffiet",
