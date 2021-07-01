@@ -5,7 +5,7 @@ from numpy import NaN
 from podi.curve_smooth import curve_smooth
 
 iamc_data = pd.read_excel(
-    "podi/data/iamc15_scenario_data_all_regions_r2.0.xlsx"
+    "podi/data/iamc15_scenario_data_all_regions_r2.0.xlsx", engine="openpyxl"
 ).set_index(["Model", "Region", "Scenario", "Variable", "Unit"])
 
 

@@ -6,7 +6,7 @@ from podi.curve_smooth import curve_smooth
 from podi.data.energy_demand import data_end_year, gcam_region_list
 from main import region_list
 
-input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
+input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx", engine="openpyxl")
 
 
 def iea_weo_etl(region_list_i):

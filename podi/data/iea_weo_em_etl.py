@@ -5,7 +5,7 @@ import numpy as np
 from podi.curve_smooth import curve_smooth
 from podi.energy_demand import data_end_year, gcam_region_list
 
-input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx")
+input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx", engine="openpyxl")
 
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
