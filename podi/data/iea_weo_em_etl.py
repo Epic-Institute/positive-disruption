@@ -141,7 +141,7 @@ def iea_weo_em_etl(region_list_i, gcam_region_list_i):
     metrics = pd.read_csv("podi/data/metric_categories_em.csv")
 
     gcam_demand_projection = gcam_demand_projection.loc[
-        "World ", metrics.loc[:, "GCAM Metric"], slice(None)
+        "World ", metrics.loc[:, "GCAM Metric"].dropna(), slice(None)
     ]
 
     gcam_pct_change = (

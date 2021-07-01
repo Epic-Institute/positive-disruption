@@ -709,6 +709,7 @@ def afolu(scenario):
 
     # estimated mitigation
     afolu_em_mit = -(pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag]))
+    afolu_em_mit.columns = afolu_em_mit.columns.astype(int)
     afolu_em_mit.loc[:, :2019] = 0
 
     # shift mitigation values by 2020 value
