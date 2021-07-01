@@ -446,6 +446,8 @@ def emissions(
     em_hist_old.columns = em_hist_old.columns.astype(int)
 
     # find emissions percent breakdown of historical estimates
+    em.columns = em.columns.astype(int)
+
     per_em = em.loc[:, data_start_year:data_end_year].apply(
         lambda x: x.divide(
             em.loc[x.name[0]].loc[:, data_start_year:data_end_year].sum(axis=0)

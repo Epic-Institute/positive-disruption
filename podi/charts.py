@@ -19,7 +19,6 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from itertools import chain, zip_longest
 from math import ceil, pi, nan
-from kneed import DataGenerator, KneeLocator
 from podi.curve_smooth import curve_smooth
 from numpy import NaN, triu_indices_from
 import fair
@@ -24816,7 +24815,7 @@ for i in range(0, len(region_list)):
 ##############################
 
 # region
-
+"""
 for i in range(0, len(region_list)):
     fig = adoption_curves.loc[region_list[i], slice(None), scenario] * 100
     kneedle = KneeLocator(
@@ -24826,7 +24825,7 @@ for i in range(0, len(region_list)):
         curve="concave",
         direction="increasing",
     )
-
+"""
 # endregion
 
 ##############################
