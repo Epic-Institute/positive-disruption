@@ -479,7 +479,7 @@ def afolu(scenario):
         axis=1,
     )
 
-    avoid_per = avoid.apply(lambda x: ((x[2019] - x) / x.max()).fillna(0), axis=1)
+    avoid_per = -avoid.apply(lambda x: ((x[2019] - x) / x.max()).fillna(0), axis=1)
 
     """
     avoid_per = avoid.apply(lambda x: ((x[2019] - x) / x[2019]).fillna(0), axis=1)
