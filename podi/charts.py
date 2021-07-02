@@ -64,6 +64,132 @@ cl = {
 
 # endregion
 
+###################################
+# HISTORICAL TECH ADOPTION CURVES #
+###################################
+
+# region
+
+data = pd.read_csv(
+    "podi/data/technology-adoption-by-households-in-the-united-states.csv"
+)
+
+colors = [
+    "#AA0DFE",
+    "#3283FE",
+    "#85660D",
+    "#565656",
+    "#1C8356",
+    "#16FF32",
+    "#F7E1A0",
+    "#C4451C",
+    "#325A9B",
+    "#FEAF16",
+    "#F8A19F",
+    "#90AD1C",
+    "#F6222E",
+    "#1CFFCE",
+    "#2ED9FF",
+    "#B10DA1",
+    "#C075A6",
+    "#FC1CBF",
+    "#B00068",
+    "#FBE426",
+    "#FA0087",
+    "#FD3216",
+    "#00FE35",
+    "#6A76FC",
+    "#FED4C4",
+    "#FE00CE",
+    "#0DF9FF",
+    "#F6F926",
+    "#FF9616",
+    "#479B55",
+    "#EEA6FB",
+    "#DC587D",
+    "#D626FF",
+    "#6E899C",
+    "#00B5F7",
+    "#B68E00",
+    "#C9FBE5",
+    "#FF0092",
+    "#22FFA7",
+    "#E3EE9E",
+    "#86CE00",
+    "#BC7196",
+    "#7E7DCD",
+    "#FC6955",
+    "#E48F72",
+]
+
+fig = go.Figure()
+
+for tech in [
+    "Power steering",
+    "Automatic transmission",
+    "Refrigerator",
+    "Electric power",
+    "Radio",
+    "Stove",
+    "Household refrigerator",
+    "Automobile",
+    "Home air conditioning",
+    "Internet",
+    "Washing machine",
+    "Microcomputer",
+    "Central heating",
+    "Dishwasher",
+    "Electric Range",
+]:
+    fig.add_trace(
+        go.Scatter(
+            name=tech,
+            line=dict(
+                width=2,
+                color=colors[
+                    pd.DataFrame(data["Entity"].unique())
+                    .set_index(0)
+                    .index.get_loc(tech)
+                ],
+            ),
+            x=data[data["Entity"] == tech]["Year"],
+            y=data[data["Entity"] == tech]["Adoption"],
+        )
+    )
+
+fig.update_traces(mode="lines")
+
+fig.update_layout(
+    title={
+        "text": "Technology Adoption in U.S. Households",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    xaxis={"title": "Year"},
+    yaxis={"title": "% Adoption"},
+    showlegend=True,
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.0, x=0.1, font=dict(size=10)),
+    margin_b=40,
+    margin_t=140,
+)
+
+
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/histscurves.html").replace(" ", ""),
+        auto_open=False,
+    )
+
+
+# endregion
+
 ###################
 # ADOPTION CURVES #
 ###################
@@ -2510,7 +2636,7 @@ for i in range(0, len(region_list)):
             yaxis={"title": "GtCO2e/yr"},
             showlegend=True,
         )
-
+        """
         fig.add_annotation(
             text="Historical data is from Global Carbon Project and Community Emissions Data System; projections are based on PD21 technology adoption rate assumptions<br>applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model for 2040-2100.",
             xref="paper",
@@ -2524,7 +2650,7 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
-
+        """
         if show_figs is True:
             fig.show()
         if save_figs is True:
@@ -3038,7 +3164,7 @@ fig.update_layout(
     yaxis={"title": "GtCO2e/yr"},
     showlegend=True,
 )
-
+"""
 fig.add_annotation(
     text="Historical data is from Global Carbon Project and Community Emissions Data System; projections are based on PD21 technology adoption rate assumptions<br>applied to IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model for 2040-2100.",
     xref="paper",
@@ -3052,7 +3178,7 @@ fig.add_annotation(
     bgcolor="#ffffff",
     opacity=1,
 )
-
+"""
 if show_figs is True:
     fig.show()
 if save_figs is True:
