@@ -6471,7 +6471,7 @@ Tb = Tb * (hist.loc[:, data_end_year].values[0] / Tb.loc[data_end_year, "CO2e"])
 Tpd = Tpd * (hist.loc[:, data_end_year].values[0] / Tpd.loc[data_end_year, "CO2e"])
 Tcdr = Tcdr * (hist.loc[:, data_end_year].values[0] / Tcdr.loc[data_end_year, "CO2e"])
 
-fig = go.Figure()
+fig = make_subplots(specs=[[{"secondary_y": True}]])
 
 fig.add_trace(
     go.Scatter(
@@ -6487,6 +6487,20 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=hist.loc[:, data_start_year:long_proj_end_year].squeeze(),
+        fill="none",
+        stackgroup="hist",
+        legendgroup="hist",
+        showlegend=False,
+    ),
+    secondary_y=True,
+)
+
+fig.add_trace(
+    go.Scatter(
         name="Baseline",
         line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
@@ -6495,6 +6509,20 @@ fig.add_trace(
         stackgroup="baseline",
         legendgroup="baseline",
     )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tb.loc[data_end_year:, "CO2e"],
+        fill="none",
+        stackgroup="baseline",
+        legendgroup="baseline",
+        showlegend=False,
+    ),
+    secondary_y=True,
 )
 
 fig.add_trace(
@@ -6543,7 +6571,9 @@ fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
     yaxis=dict(tickmode="linear", tick0=0.5, dtick=0.25),
+    yaxis2=dict(tickmode="linear", tick0=0.5, dtick=0.25),
 )
+
 """
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
@@ -13391,7 +13421,7 @@ figure.update_layout(
     title_x=0.5,
     title_y=0.99,
     font=dict(size=11),
-    yaxis={"title": "GtCO2e"},
+    yaxis={"title": "GtCO2e of mitigation"},
     barmode="stack",
     showlegend=True,
     legend=dict(
@@ -17563,7 +17593,7 @@ for i in range(0, len(region_list)):
 
         fig.add_trace(
             go.Scatter(
-                name="DAU-NCSM",
+                name="DAU-NCSmx",
                 line=dict(
                     width=2,
                     color=cl["DAU-NCS+FFI+E+T"][0],
@@ -17750,7 +17780,7 @@ for i in range(0, len(region_list)):
         margin_b=100,
         margin_t=125,
         title={
-            "text": "Emissions Mitigated, DAU-NCSM, " + region_list[i],
+            "text": "Emissions Mitigated, DAU-NCSmx, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -18636,7 +18666,7 @@ for year in [2050]:
             title="Climate Mitigation Potential, "
             + str(year)
             + ", "
-            + "DAU-NCSM, "
+            + "DAU-NCSmx, "
             + region_list[i],
             title_x=0.5,
             title_y=0.95,
@@ -19558,7 +19588,7 @@ for i in range(0, len(region_list)):
 
         fig.add_trace(
             go.Scatter(
-                name="DAU-NCSM+FFI",
+                name="DAU-NCSmx+FFI",
                 line=dict(
                     width=2, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]
                 ),
@@ -19715,7 +19745,7 @@ for i in range(0, len(region_list)):
         margin_b=100,
         margin_t=125,
         title={
-            "text": "Emissions Mitigated, DAU-NCSM+FFI, " + region_list[i],
+            "text": "Emissions Mitigated, DAU-NCSmx+FFI, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -19724,7 +19754,7 @@ for i in range(0, len(region_list)):
         yaxis={"title": "GtCO2e/yr"},
         legend={"traceorder": "reversed"},
     )
-
+    """
     fig.add_annotation(
         text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
@@ -19738,7 +19768,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-
+    """
     fig.update_layout(
         legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10))
     )
@@ -21456,7 +21486,7 @@ show_lp = True
 show_we = False
 show_ra = False
 show_fw = False
-show_ncs = True
+show_ncs = False
 show_ncsm = True
 show_ncsmffi = True
 show_ffi = False
@@ -22092,7 +22122,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSM",
+            name="DAU-NCSmx",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsm.loc[data_end_year:, "CO2"],
@@ -22105,7 +22135,7 @@ if show_ncsm == True:
 if show_ncsmffi == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSM+FFI",
+            name="DAU-NCSmx+FFI",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),
@@ -22793,7 +22823,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSM",
+            name="DAU-NCSmx",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsm.loc[data_end_year:, "CO2e"],
@@ -22806,7 +22836,7 @@ if show_ncsm == True:
 if show_ncsmffi == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSM+FFI",
+            name="DAU-NCSmx+FFI",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),
@@ -23496,7 +23526,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSM",
+            name="DAU-NCSmx",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fncsm.loc[data_end_year:, "CO2e"],
@@ -23509,7 +23539,7 @@ if show_ncsm == True:
 if show_ncsmffi == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSM+FFI",
+            name="DAU-NCSmx+FFI",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),
@@ -24191,7 +24221,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSM",
+            name="DAU-NCSmx",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tncsm.loc[data_end_year:, "CO2e"],
@@ -24204,7 +24234,7 @@ if show_ncsm == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSM+FFI",
+            name="DAU-NCSmx+FFI",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),
