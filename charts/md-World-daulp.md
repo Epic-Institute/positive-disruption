@@ -10,6 +10,7 @@
 
 ## Emissions
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "mwedges-pathway-World-daulp.html" height='500' width='150%'></iframe>  
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsubind-pathway-daulp.html" height='500' width='150%'></iframe>  
   
 
 ## Adoption Curves

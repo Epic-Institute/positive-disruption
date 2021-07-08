@@ -487,8 +487,8 @@ def emissions(
         em.rename(
             index={
                 "Fossil fuels": "Fossil Fuel Heat",
-                "1A1a_Electricity-autoproducer": "Fossil fuels",
-                "1A1a_Electricity-public": "Fossil fuels",
+                "1A1a_Electricity-autoproducer": "Fossil Fuels",
+                "1A1a_Electricity-public": "Fossil Fuels",
                 "1A1a_Heat-production": "Fossil Fuel Heat",
                 "1A1bc_Other-transformation": "Other Fossil Transformation",
                 "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels",
@@ -496,7 +496,7 @@ def emissions(
                 "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution",
                 "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production",
                 "1B2d_Fugitive-other-energy": "Fugitive Fossil Fuels, Other",
-                "7A_Fossil-fuel-fires": "Fossil fuel Fires",
+                "7A_Fossil-fuel-fires": "Fossil Fuel Fires",
                 "1A2a_Ind-Comb-Iron-steel": "Other Industrial",
                 "1A2b_Ind-Comb-Non-ferrous-metals": "Other Industrial",
                 "1A2c_Ind-Comb-Chemicals": "Chemical Production",
@@ -552,8 +552,8 @@ def emissions(
         em.rename(
             index={
                 "Fossil fuels": "Fossil fuel Heat",
-                "1A1a_Electricity-autoproducer": "Fossil fuels",
-                "1A1a_Electricity-public": "Fossil fuels",
+                "1A1a_Electricity-autoproducer": "Fossil Fuels",
+                "1A1a_Electricity-public": "Fossil Fuels",
                 "1A1a_Heat-production": "Fossil fuel Heat",
                 "1A1bc_Other-transformation": "Other Fossil Transformation",
                 "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels",
@@ -561,7 +561,7 @@ def emissions(
                 "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution",
                 "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production",
                 "1B2d_Fugitive-other-energy": "Fugitive Fossil Fuels, Other",
-                "7A_Fossil-fuel-fires": "Fossil fuel Fires",
+                "7A_Fossil-fuel-fires": "Fossil Fuel Fires",
                 "1A2a_Ind-Comb-Iron-steel": "Steel Production",
                 "1A2b_Ind-Comb-Non-ferrous-metals": "Non-ferrous Metal Production",
                 "1A2c_Ind-Comb-Chemicals": "Chemical Production",

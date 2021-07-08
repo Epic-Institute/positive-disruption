@@ -1659,16 +1659,19 @@ for i in range(0, len(region_list)):
             + scenario.title(),
             "xanchor": "center",
             "x": 0.5,
-            "y": 0.93,
+            "y": 0.99,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
+        legend=dict(orientation="h", yanchor="bottom", y=1.03, x=0, font=dict(size=10)),
+        margin_b=100,
+        margin_t=120,
     )
 
     fig.add_vrect(
         x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0
     )
-
+    """
     fig.add_annotation(
         text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
         xref="paper",
@@ -1682,7 +1685,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-
+    """
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -1905,17 +1908,19 @@ for i in range(0, len(region_list)):
             "text": "Energy Supply, " + region_list[i] + ", " + scenario.title(),
             "xanchor": "center",
             "x": 0.5,
-            "y": 0.93,
+            "y": 0.99,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
+        legend=dict(orientation="h", yanchor="bottom", y=1.03, x=0, font=dict(size=10)),
+        margin_b=100,
+        margin_t=120,
     )
 
     fig.add_vrect(
         x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0
     )
-
-    fig.update_layout(margin=dict())
+    """
     fig.add_annotation(
         text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
         xref="paper",
@@ -1929,7 +1934,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-
+    """
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -2154,15 +2159,17 @@ for i in range(0, len(region_list)):
             + scenario.title(),
             "xanchor": "center",
             "x": 0.5,
-            "y": 0.93,
+            "y": 0.99,
         },
         xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
+        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
+        margin_b=100,
     )
 
     fig.add_vrect(x0=start_year, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
 
-    fig.update_layout(margin=dict())
+    """
     fig.add_annotation(
         text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
         xref="paper",
@@ -2176,7 +2183,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-
+    """
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -2514,12 +2521,19 @@ for i in range(0, len(region_list)):
     em_electricity = em.loc[
         region_list[i], ["Electricity"], slice(None), slice(None), scenario
     ].loc[:, start_year:long_proj_end_year]
-    em_electricity = em_electricity.loc[~(em_electricity == 0).all(axis=1)]
+    em_electricity = (
+        em_electricity.loc[~(em_electricity == 0).all(axis=1)]
+        .rename(index={"Fossil Fuel Heat": "Fossil Fuels"})
+        .groupby(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        .sum()
+    )
 
     em_transport = em.loc[
         region_list[i], ["Transport"], slice(None), slice(None), scenario
     ].loc[:, start_year:long_proj_end_year]
-    em_transport = em_transport.loc[~(em_transport == 0).all(axis=1)]
+    em_transport = em_transport.loc[~(em_transport == 0).all(axis=1)].rename(
+        index={"Fossil Fuel Heat": "Fossil Fuels"}
+    )
 
     em_buildings = em.loc[
         region_list[i], ["Buildings"], slice(None), slice(None), scenario
@@ -2564,6 +2578,10 @@ for i in range(0, len(region_list)):
         fig2 = pd.melt(
             fig, id_vars="Year", var_name="Metric", value_name="Emissions, GtCO2e"
         )
+
+        if sector == "Electricity":
+            fig3 = fig2[fig2["Metric"] == "Fossil Fuels"]
+            fig2 = fig3.append(fig2[fig2["Metric"] != "Fossil Fuels"])
 
         if sector == "Industry":
             fig3 = fig2[fig2["Metric"] == "Fossil Fuel Heat"]
@@ -2630,11 +2648,15 @@ for i in range(0, len(region_list)):
                 + region_list[i],
                 "xanchor": "center",
                 "x": 0.5,
-                "y": 0.93,
+                "y": 0.99,
             },
             xaxis={"title": "Year"},
             yaxis={"title": "GtCO2e/yr"},
             showlegend=True,
+            legend=dict(
+                orientation="h", yanchor="bottom", y=1.03, x=0, font=dict(size=10)
+            ),
+            margin_t=120,
         )
         """
         fig.add_annotation(
@@ -3862,7 +3884,7 @@ for i in range(0, len(region_list)):
 
         fig.add_trace(
             go.Scatter(
-                name="GT",
+                name="IPCC",
                 line=dict(width=2, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -5585,7 +5607,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="GT",
+        name="IPCC",
         line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Ccdr.loc[data_end_year:, "CO2"],
@@ -5611,7 +5633,7 @@ fig.update_layout(
     margin_b=80,
     yaxis=dict(tickmode="linear", tick0=325, dtick=25),
 )
-""""""
+"""
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
     xref="paper",
@@ -5626,7 +5648,7 @@ fig.add_annotation(
     bgcolor="#ffffff",
     opacity=1,
 )
-""""""
+"""
 
 if show_figs is True:
     fig.show()
@@ -5900,7 +5922,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="GT",
+        name="IPCC",
         line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Ccdr.loc[data_end_year:, "CO2e"],
@@ -6214,7 +6236,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="GT",
+        name="IPCC",
         line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Fcdr.loc[data_end_year:, "CO2e"],
@@ -6551,7 +6573,7 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
-        name="GT",
+        name="IPCC",
         line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
         y=Tcdr.loc[data_end_year:, "CO2e"],
@@ -21478,9 +21500,9 @@ if save_figs is True:
 
 # region
 
-altscen = "dauncsffiet"  # only used for saving image
+altscen = "dauncsmx"  # only used for saving image
 show_dau = True
-show_daucdr = False
+show_daucdr = True
 show_rcp19 = False
 show_lp = True
 show_we = False
@@ -22018,7 +22040,7 @@ if show_dau == True:
 if show_daucdr == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21+CDR",
+            name="IPCC",
             line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Ccdr.loc[data_end_year:, "CO2"],
@@ -22162,8 +22184,9 @@ fig.update_layout(
 fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
+    yaxis=dict(tickmode="linear", tick0=325, dtick=25),
 )
-
+"""
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
     xref="paper",
@@ -22178,7 +22201,7 @@ fig.add_annotation(
     bgcolor="#ffffff",
     opacity=1,
 )
-
+"""
 if show_figs is True:
     fig.show()
 if save_figs is True:
@@ -22719,7 +22742,7 @@ if show_dau == True:
 if show_daucdr == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21+CDR",
+            name="IPCC",
             line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Ccdr.loc[data_end_year:, "CO2e"],
@@ -22863,8 +22886,9 @@ fig.update_layout(
 fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
+    yaxis=dict(tickmode="linear", tick0=350, dtick=25),
 )
-
+"""
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
     xref="paper",
@@ -22879,7 +22903,7 @@ fig.add_annotation(
     bgcolor="#ffffff",
     opacity=1,
 )
-
+"""
 if show_figs is True:
     fig.show()
 if save_figs is True:
@@ -23422,7 +23446,7 @@ if show_dau == True:
 if show_daucdr == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21+CDR",
+            name="IPCC",
             line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fcdr.loc[data_end_year:, "CO2e"],
@@ -23561,8 +23585,9 @@ fig.update_layout(
 fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
+    yaxis=dict(tickmode="linear", tick0=0, dtick=0.5),
 )
-
+"""
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
     xref="paper",
@@ -23577,7 +23602,7 @@ fig.add_annotation(
     bgcolor="#ffffff",
     opacity=1,
 )
-
+"""
 if show_figs is True:
     fig.show()
 if save_figs is True:
@@ -24075,7 +24100,7 @@ Tncsmffi = Tncsmffi * (
     hist.loc[:, data_end_year].values[0] / Tncsmffi.loc[data_end_year, "CO2e"]
 )
 
-fig = go.Figure()
+fig = make_subplots(specs=[[{"secondary_y": True}]])
 
 fig.add_trace(
     go.Scatter(
@@ -24091,6 +24116,20 @@ fig.add_trace(
 
 fig.add_trace(
     go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=hist.loc[:, data_start_year:long_proj_end_year].squeeze(),
+        fill="none",
+        stackgroup="hist",
+        legendgroup="hist",
+        showlegend=False,
+    ),
+    secondary_y=True,
+)
+
+fig.add_trace(
+    go.Scatter(
         name="Baseline",
         line=dict(width=3, color="red", dash="dot"),
         x=np.arange(data_end_year, long_proj_end_year + 1, 1),
@@ -24099,6 +24138,20 @@ fig.add_trace(
         stackgroup="baseline",
         legendgroup="baseline",
     )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Baseline",
+        line=dict(width=3, color="red", dash="dot"),
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tb.loc[data_end_year:, "CO2e"],
+        fill="none",
+        stackgroup="baseline",
+        legendgroup="baseline",
+        showlegend=False,
+    ),
+    secondary_y=True,
 )
 
 if show_dau == True:
@@ -24117,7 +24170,7 @@ if show_dau == True:
 if show_daucdr == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU21+CDR",
+            name="IPCC",
             line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tcdr.loc[data_end_year:, "CO2e"],
@@ -24256,8 +24309,10 @@ fig.update_layout(
 fig.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
     margin_b=80,
+    yaxis=dict(tickmode="linear", tick0=0.5, dtick=0.25),
+    yaxis2=dict(tickmode="linear", tick0=0.5, dtick=0.25),
 )
-
+"""
 fig.add_annotation(
     text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
     xref="paper",
@@ -24272,7 +24327,7 @@ fig.add_annotation(
     bgcolor="#ffffff",
     opacity=1,
 )
-
+"""
 if show_figs is True:
     fig.show()
 if save_figs is True:

@@ -52,8 +52,11 @@ ind = [
 ]
 
 trans = [
+    # "1A3ai_International-aviation",
+    "1A3aii_Domestic-aviation",
     "1A3b_Road",
     "1A3c_Rail",
+    # "1A3di_International-shipping",
     "1A3di_Oil_Tanker_Loading",
     "1A3dii_Domestic-navigation",
     "1A3eii_Other-transp",
@@ -121,12 +124,12 @@ ind_co2 = [
 ]
 
 trans_co2 = [
-    # "1A3b_Road",
-    # "1A3c_Rail",
-    # "1A3di_Oil_Tanker_Loading",
-    # "1A3dii_Domestic-navigation",
-    # "1A3eii_Other-transp",
-    # "1A3di_International-shipping"
+    "1A3b_Road",
+    "1A3c_Rail",
+    "1A3di_Oil_Tanker_Loading",
+    "1A3dii_Domestic-navigation",
+    "1A3eii_Other-transp",
+    # "1A3di_International-shipping",
 ]
 
 build_co2 = []  # "1A4a_Commercial-institutional", "1A4b_Residential"
@@ -142,7 +145,7 @@ ag_co2 = [
 
 # endregion
 
-# IF THIS IS RUN, MANUALLY DUPLICATE BASELINE RESTULTS TO CREATE PATHWAY RESULTS FOR RA
+# IF THIS IS RUN, MANUALLY DUPLICATE BASELINE RESULTS TO CREATE PATHWAY RESULTS FOR RA
 
 
 def rgroup(data, gas, sector, rgroup):
@@ -554,11 +557,23 @@ ch4_trans = ch4.loc[slice(None), trans, :]
 ch4_trans2 = []
 ch4_trans3 = []
 
-for sub in trans:
+for sub in [
+    "1A3b_Road",
+    "1A3c_Rail",
+    "1A3di_Oil_Tanker_Loading",
+    "1A3dii_Domestic-navigation",
+    "1A3eii_Other-transp",
+]:
     ch4_trans2 = pd.DataFrame(ch4_trans2).append(
         rgroup(ch4_trans.loc[slice(None), [sub], :], "CH4", sub, "ISO")
     )
-for sub in trans:
+for sub in [
+    "1A3b_Road",
+    "1A3c_Rail",
+    "1A3di_Oil_Tanker_Loading",
+    "1A3dii_Domestic-navigation",
+    "1A3eii_Other-transp",
+]:
     ch4_trans3 = pd.DataFrame(ch4_trans3).append(
         proj(
             ch4_trans2.loc[slice(None), [sub], :], "Transport", sub, "CH4"
@@ -701,11 +716,23 @@ n2o_trans = n2o.loc[slice(None), trans, :]
 n2o_trans2 = []
 n2o_trans3 = []
 
-for sub in trans:
+for sub in [
+    "1A3b_Road",
+    "1A3c_Rail",
+    "1A3di_Oil_Tanker_Loading",
+    "1A3dii_Domestic-navigation",
+    "1A3eii_Other-transp",
+]:
     n2o_trans2 = pd.DataFrame(n2o_trans2).append(
         rgroup(n2o_trans.loc[slice(None), [sub], :], "N2O", sub, "ISO")
     )
-for sub in trans:
+for sub in [
+    "1A3b_Road",
+    "1A3c_Rail",
+    "1A3di_Oil_Tanker_Loading",
+    "1A3dii_Domestic-navigation",
+    "1A3eii_Other-transp",
+]:
     n2o_trans3 = pd.DataFrame(n2o_trans3).append(
         proj(
             n2o_trans2.loc[slice(None), [sub], :], "Transport", sub, "N2O"
