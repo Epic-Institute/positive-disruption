@@ -738,12 +738,12 @@ def results_analysis(
 
     # region
 
-    if region in ["World ", "US ", "CHINA ", "EUR "]:
+    if region in ["World "]:
         scdr_decarb = pd.DataFrame(
-            cdr.loc[region, "Carbon Dioxide Removal", scenario, :].apply(
+            cdr.loc[region, "Carbon Dioxide Removal", slice(None), scenario, :].apply(
                 lambda x: x
                 / (
-                    cdr.loc[region, "Carbon Dioxide Removal", scenario, :]
+                    cdr.loc[region, "Carbon Dioxide Removal", slice(None), scenario, :]
                     .max(axis=1)
                     .values
                 ),
@@ -777,6 +777,7 @@ def results_analysis(
             sra_decarb,
             sfw_decarb,
             sother_decarb,
+            scdr_decarb,
         ],
     ).loc[:, data_start_year:long_proj_end_year]
 

@@ -12,7 +12,6 @@ import podi.data.iea_weo_em_etl
 import podi.data.gcam_etl
 import pandas as pd
 
-"""
 from podi.cdr.cdr_util import (
     cdr_needed_def,
     grid_em_def,
@@ -20,9 +19,8 @@ from podi.cdr.cdr_util import (
     transport_em_def,
     fuel_em_def,
 )
-from podi.emissions import emissions
 from podi.cdr.cdr_main import cdr_mix
-"""
+from podi.curve_smooth import curve_smooth
 from podi.climate import climate
 import time
 import numpy as np
@@ -196,67 +194,35 @@ em_mitigated = (
 
 # region
 
-ndcs = [
-    [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    (3, 3),
-    [
-        (2025, 2050, 2030, 2050),
-        (4.86, 2.84, 2.84, 0),
-        ("NDC", "NDC 2050 est.", "50% reduction by 2030", "Net-zero by 2050"),
-    ],
-    (3, 3),
-    (2030, 1.2),
-    [(2030, 2050), (2.3, 0), ("50% reduction by 2030", "Net-zero by 2050")],
-    (3, 3),
-    (2030, 0.398),
-    (3, 3),
-    (2030, 2.49),
-    (3, 3),
-    [
-        (2030, 2030, 2050),
-        (12.96, 6.15, 0),
-        ("NDC", "50% reduction by 2030", "Net-zero by 2050"),
-    ],
-    (2030, 5.88),
-    (2030, 1),
-    (3, 3),
-    (3, 3),
-]
+cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").set_index(
+    ["Region", "Sector", "Scenario"]
+)
+cdr_pathway.columns = cdr_pathway.columns.astype(int)
 
-cdr_needed = (
-    pd.DataFrame(
-        em_pathway.groupby("Region").sum().loc["World "]
-        - em_targets_pathway.loc[
-            "MESSAGE-GLOBIOM 1.0", "World ", "SSP2-19", "Emissions|Kyoto Gases"
-        ].loc[data_start_year:long_proj_end_year]
-    )
-    .clip(lower=1)
-    .T
-).loc[:, 2010:]
-cdr_needed.rename(index={0: "World "}, inplace=True)
+cdr_subvs = []
 
-cdr_pathway = []
+for scenario in ["pathway"]:
 
-for i in range(0, 2):
-    '''
     cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
-        cdr_needed.loc[region_list[i]].to_list(),
+        cdr_pathway.loc["World ", "Carbon Dioxide Removal", scenario]
+        .loc[2010:]
+        .to_list(),
         grid_em_def,
         heat_em_def,
         transport_em_def,
         fuel_em_def,
-        data_start_year,
+        2010,
         long_proj_end_year,
     )
 
     cdr_pathway2 = (
-        pd.DataFrame(cdr_pathway2, index=em_mitigated.columns)
+        pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
         .T.fillna(0)
         .drop(
-            index=pd.DataFrame(cdr_pathway2, index=em_mitigated.columns)
+            index=pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
             .T.fillna(0)
             .iloc[
-                pd.DataFrame(cdr_pathway2, index=em_mitigated.columns)
+                pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
                 .T.fillna(0)
                 .index.str.contains("Deficit", na=False)
             ]
@@ -264,67 +230,33 @@ for i in range(0, 2):
         )
     )
 
-    cdr_pathway = pd.DataFrame(cdr_pathway).append(
-        pd.concat([cdr_pathway2], keys=[region_list[i]], names=["Region"])
-    )
-    """
-    cdr_pathway = (
-        cdr_pathway.droplevel(1)
-        .assign(Technology=["Enhanced Weathering", "LTSSDAC", "HTLSDAC", "Other"])
-        .set_index("Technology", append=True)
-    )
-    """
-    cdr_pathway = cdr_pathway.droplevel(1).groupby("Region").sum()
-    cdr_pathway = (
-        em_pathway.groupby("Region").sum().divide(em_pathway.loc["World "].sum())
-    ).apply(lambda x: x.multiply(cdr_pathway.values[0]), axis=1)
-
-    # cdr_pathway = curve_smooth(cdr_pathway, "quadratic", 3)
-    '''
-    cdr_pathway = (
-        (1 - transport_per_adoption_pathway.loc["World ", "Fossil fuels"])
-        .rename(index={"pathway": "Carbon Dioxide Removal"})
-        .apply(adoption_curve, axis=1, args=(["World ", "pathway"]), sector="All")[0]
-        * cdr_needed.loc["World "].max()
-    ).T.rename(index={0: "Carbon Dioxide Removal"})
-
-    cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").rename(
-        index={
-            0: "Carbon Dioxide Removal",
-            1: "Carbon Dioxide Removal",
-            2: "Carbon Dioxide Removal",
-            3: "Carbon Dioxide Removal",
-            4: "Carbon Dioxide Removal",
-            5: "Carbon Dioxide Removal",
-            6: "Carbon Dioxide Removal",
-            7: "Carbon Dioxide Removal",
-            8: "Carbon Dioxide Removal",
-            9: "Carbon Dioxide Removal",
-            10: "Carbon Dioxide Removal",
-            11: "Carbon Dioxide Removal",
-            12: "Carbon Dioxide Removal",
-            13: "Carbon Dioxide Removal",
-            14: "Carbon Dioxide Removal",
-        }
+    cdr_subvs = pd.DataFrame(cdr_subvs).append(
+        pd.concat([cdr_pathway2], keys=["World "], names=["Region"])
     )
 
-cdr_pathway.index.name = "Sector"
+    cdr_subvs = (
+        cdr_subvs.droplevel(1)
+        .assign(Metric=["Enhanced Weathering", "Other", "LTSSDAC", "HTLSDAC"])
+        .set_index("Metric", append=True)
+    )
 
-"""
-cdr_pathway = pd.concat(
-    [cdr_pathway], keys=["pathway"], names=["Scenario"]
-).reorder_levels(["Sector", "Scenario"])
-"""
-cdr = cdr_pathway.reset_index().set_index(["Region", "Sector", "Scenario"])
-"""
-cdr_baseline = cdr_pathway.droplevel("Scenario") * 0
-cdr_baseline = pd.concat(
-    [cdr_baseline], keys=["baseline"], names=["Scenario"]
-).reorder_levels(["Region", "Sector", "Scenario"])
-cdr = cdr_baseline.append(cdr_pathway)
-"""
-cdr.columns = cdr.columns.astype(int)
+    cdr_subvs = curve_smooth(cdr_subvs, "quadratic", 9).clip(lower=0)
 
+    cdr_subvs = pd.concat(
+        [cdr_subvs], names=["Sector"], keys=["Carbon Dioxide Removal"]
+    )
+    cdr_subvs["Scenario"] = "pathway"
+    cdr_subvs = cdr_subvs.reset_index().set_index(
+        ["Region", "Sector", "Metric", "Scenario"]
+    )
+    cdr_subvs_baseline = (cdr_subvs * 0).droplevel("Scenario")
+    cdr_subvs_baseline["Scenario"] = "baseline"
+    cdr_subvs_baseline = cdr_subvs_baseline.reset_index().set_index(
+        ["Region", "Sector", "Metric", "Scenario"]
+    )
+    cdr_subvs = cdr_subvs.append(cdr_subvs_baseline)
+
+cdr = cdr_pathway
 
 # check if energy oversupply is at least energy demand needed for CDR
 """
@@ -394,7 +326,7 @@ for j in ["baseline", "pathway"]:
                 transport_consump,
                 transport_per_adoption,
                 afolu_per_adoption,
-                cdr,
+                cdr_subvs,
                 em,
                 em_mitigated,
             )[1].replace(np.nan, 1)

@@ -38,6 +38,7 @@ region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True
 
 save_figs = True
 show_figs = True
+show_annotations = True
 start_year = 2000
 scenario = "pathway"
 
@@ -6596,22 +6597,21 @@ fig.update_layout(
     yaxis2=dict(tickmode="linear", tick0=0.5, dtick=0.25),
 )
 
-"""
-fig.add_annotation(
-    text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
-    xref="paper",
-    yref="paper",
-    x=0,
-    y=-0.27,
-    showarrow=False,
-    font=dict(size=10, color="#2E3F5C"),
-    align="center",
-    borderpad=4,
-    borderwidth=2,
-    bgcolor="#ffffff",
-    opacity=1,
-)
-"""
+if show_annotations is True:
+    fig.add_annotation(
+        text="Historical data is from NASA; projected data is from projected emissions input into the Hector climate model.",
+        xref="paper",
+        yref="paper",
+        x=0,
+        y=-0.27,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="center",
+        borderpad=4,
+        borderwidth=2,
+        bgcolor="#ffffff",
+        opacity=1,
+    )
 if show_figs is True:
     fig.show()
 if save_figs is True:
