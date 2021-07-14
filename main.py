@@ -256,7 +256,10 @@ for scenario in ["pathway"]:
     )
     cdr_subvs = cdr_subvs.append(cdr_subvs_baseline)
 
-cdr = cdr_pathway
+
+cdr_fill = cdr_subvs.loc[:, 2011:2030] * 0
+cdr_fill.columns = np.arange(1990, 2010, 1)
+cdr = cdr_fill.join(cdr_subvs)
 
 # check if energy oversupply is at least energy demand needed for CDR
 """
@@ -311,7 +314,7 @@ for j in ["baseline", "pathway"]:
                 cdr,
                 em,
                 em_mitigated,
-            )[0].replace(np.nan, 1)
+            )[0].replace(np.nan, 0)
         )
 
         sadoption_curves = pd.DataFrame(sadoption_curves).append(
@@ -329,8 +332,9 @@ for j in ["baseline", "pathway"]:
                 cdr_subvs,
                 em,
                 em_mitigated,
-            )[1].replace(np.nan, 1)
+            )[1].replace(np.nan, 0)
         )
+
 
 # endregion
 

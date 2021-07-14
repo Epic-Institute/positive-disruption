@@ -347,45 +347,44 @@ def results_analysis(
 
     if region in ["World ", "US ", "CHINA ", "EUR "]:
         cdr_decarb = pd.DataFrame(
-            cdr.loc[region, "Carbon Dioxide Removal", scenario, :].apply(
+            pd.DataFrame(
+                cdr.loc[
+                    "World ", "Carbon Dioxide Removal", slice(None), scenario, :
+                ].sum()
+            ).T.apply(
                 lambda x: x
                 / (
-                    cdr.loc[region, "Carbon Dioxide Removal", scenario, :]
-                    .max(axis=1)
-                    .values
+                    cdr.loc[
+                        "World ", "Carbon Dioxide Removal", slice(None), scenario, :
+                    ]
+                    .sum()
+                    .max()
                 ),
                 axis=1,
             )
-        ).droplevel(["Region", "Scenario"])
+        ).rename(index={0: "Carbon Dioxide Removal"})
         cdr_decarb.index.name = ""
-
-        """
-        cdr_decarb.loc[:, cdr_decarb.idxmax(1).values[0] :] = cdr_decarb[
-            cdr_decarb.idxmax(1).values[0]
-        ]
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        cdr_decarb = pd.Series(
-            cdr_decarb.values[0],
-            index=cdr_decarb.columns,
-            name="Carbon Dioxide Removal",
-        )
-
-        cdr_decarb = adoption_curve(cdr_decarb, "World ", scenario, "All").T
-        cdr_decarb.rename(index={0: "Carbon Dioxide Removal"}, inplace=True)
-        """
+        cdr_decarb.columns = cdr_decarb.columns.astype(int)
     else:
         cdr_decarb = pd.DataFrame(
-            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
+            pd.DataFrame(
+                cdr.loc[
+                    "World ", "Carbon Dioxide Removal", slice(None), scenario, :
+                ].sum()
+            ).T.apply(
                 lambda x: x
                 / (
-                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
-                    .max(axis=1)
-                    .values
+                    cdr.loc[
+                        "World ", "Carbon Dioxide Removal", slice(None), scenario, :
+                    ]
+                    .sum()
+                    .max()
                 ),
                 axis=1,
             )
-        ).droplevel(["Region", "Scenario"])
+        ).rename(index={0: "Carbon Dioxide Removal"})
         cdr_decarb.index.name = ""
+        cdr_decarb.columns = cdr_decarb.columns.astype(int)
 
     # endregion
 
@@ -741,30 +740,28 @@ def results_analysis(
     if region in ["World "]:
         scdr_decarb = pd.DataFrame(
             cdr.loc[region, "Carbon Dioxide Removal", slice(None), scenario, :].apply(
-                lambda x: x
-                / (
-                    cdr.loc[region, "Carbon Dioxide Removal", slice(None), scenario, :]
-                    .max(axis=1)
-                    .values
-                ),
+                lambda x: x / (x.max()),
                 axis=1,
             )
-        ).droplevel(["Region", "Scenario"])
-        scdr_decarb.index.name = ""
+        )
+        scdr_decarb["Region"] = region
+        scdr_decarb["Sector"] = "Carbon Dioxide Removal"
+        scdr_decarb = scdr_decarb.reset_index().set_index(
+            ["Region", "Sector", "Metric"]
+        )
 
     else:
         scdr_decarb = pd.DataFrame(
-            cdr.loc["World ", "Carbon Dioxide Removal", scenario, :].apply(
-                lambda x: x
-                / (
-                    cdr.loc["World ", "Carbon Dioxide Removal", scenario, :]
-                    .max(axis=1)
-                    .values
-                ),
+            cdr.loc["World ", "Carbon Dioxide Removal", slice(None), scenario, :].apply(
+                lambda x: x / (x.max()),
                 axis=1,
             )
-        ).droplevel(["Region", "Scenario"])
-        scdr_decarb.index.name = ""
+        )
+        scdr_decarb["Region"] = region
+        scdr_decarb["Sector"] = "Carbon Dioxide Removal"
+        scdr_decarb = scdr_decarb.reset_index().set_index(
+            ["Region", "Sector", "Metric"]
+        )
 
     # endregion
 
