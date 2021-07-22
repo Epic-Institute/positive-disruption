@@ -1,10 +1,11 @@
 # region
 
+from podi.afolu import afolu
 import pandas as pd
 from podi.adoption_curve import adoption_curve
 from numpy import NaN
 import numpy as np
-from podi.energy_supply import long_proj_end_year
+from podi.energy_supply import long_proj_end_year, data_end_year
 from podi.curve_smooth import curve_smooth
 
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
@@ -101,7 +102,7 @@ def rgroup2(data, gas, sector, rgroup, scenario):
 # endregion
 
 
-def afolu(scenario):
+def afolu2030(scenario):
     input_data_3 = pd.read_csv("podi/data/tnc_input_data_3_2030.csv")
     avoided_pathways_input = pd.read_csv(
         "podi/data/tnc_avoided_pathways_input_2030.csv"
@@ -324,6 +325,14 @@ def afolu(scenario):
 
     per = per.droplevel("Max (Mha)")
 
+    per2 = pd.DataFrame(columns=np.arange(2101, 2301, 1), index=per.index)
+    per2.columns = per2.columns.astype(int)
+    per2 = per2.astype(float)
+    per2.loc[:, 2300] = per.loc[:, 2100]
+    per2.loc[:, 2101] = per.loc[:, 2100]
+    per2.interpolate(axis=1, limit_area="inside", inplace=True)
+    per = per.join(per2)
+
     # endregion
 
     # match historical analogs to each subvector
@@ -432,11 +441,6 @@ def afolu(scenario):
     adoption.index.names = flux2.index.names
     adoption.columns = adoption.columns.astype(int)
 
-    """
-    adoption = adoption.apply(
-        lambda x: x.multiply(flux2.loc[x.name[0], x.name[1]].values), axis=1
-    )
-    """
     # endregion
 
     # estimate emissions mitigated by avoided pathways
@@ -483,25 +487,7 @@ def afolu(scenario):
 
     avoid_per = -avoid.apply(lambda x: ((x[2019] - x) / x.max()).fillna(0), axis=1)
 
-    """
-    avoid_per = avoid.apply(lambda x: ((x[2019] - x) / x[2019]).fillna(0), axis=1)
-
-    avoid_per = (
-        (
-            avoid.apply(lambda x: x * 0, axis=1)
-            .apply(lambda x: x + x.name[3], axis=1)
-            .cumsum(axis=1)
-            .apply(lambda x: -x - x.name[2], axis=1)
-        )
-        .clip(lower=0)
-        .apply(
-            lambda x: pd.Series(
-                np.where(x.name[3] > 0, (-x + 1), (x * 0)), index=x.index
-            ),
-            axis=1,
-        )
-    ).clip(lower=0)
-    """
+    avoid.loc[:, 2077:] = avoid.loc[:, 2077].values[:, None]
 
     # endregion
 
@@ -697,7 +683,7 @@ def afolu(scenario):
 
     # historical emissions
     afolu_em_hist = (
-        pd.read_csv("podi/data/emissions_additional.csv")
+        pd.read_csv("podi/data/emissions_additional_2030.csv")
         .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])
         .loc[
             slice(None),
@@ -757,6 +743,8 @@ def afolu(scenario):
         afolu_em.loc[:, 2019:] = curve_smooth(afolu_em.loc[:, 2019:], "linear", 1)
 
     # create 16 region df for max extent
+
+    # region
 
     max_extent3 = []
 
@@ -825,4 +813,126 @@ def afolu(scenario):
         .fillna(0)
     )
 
-    return afolu_em, per_adoption, per_max
+    # endregion
+
+    # accelerate so 2030 is max
+
+    # region
+
+    accel = 5
+
+    afolu_em_alt = (
+        afolu_em.loc[
+            slice(None),
+            slice(None),
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Trees in Croplands",
+            ],
+            slice(None),
+        ]
+        .loc[:, data_end_year + 1 :]
+        .loc[:, ::accel]
+    )
+    afolu_em_alt.columns = np.arange(2020, 2077, 1)
+
+    afolu_em_alt2 = afolu_em_alt.apply(lambda x: x[x.index <= x.idxmin(axis=1)], axis=1)
+
+    afolu_em_alt3 = afolu_em.loc[
+        slice(None),
+        slice(None),
+        [
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Optimal Intensity",
+            "Silvopasture",
+            "Trees in Croplands",
+        ],
+        slice(None),
+    ].apply(lambda x: x[x.index > x.idxmin(axis=1)], axis=1)
+
+    afolu_em_alt4 = afolu_em_alt2.apply(
+        lambda x: np.concatenate(
+            [
+                x.values,
+                afolu_em_alt3.loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
+                .dropna()
+                .values,
+            ]
+        ),
+        axis=1,
+    )
+
+    afolu_em_alt5 = []
+
+    for i in range(0, len(afolu_em_alt4)):
+        this = pd.DataFrame(afolu_em_alt4[i]).T
+        afolu_em_alt5 = pd.DataFrame(afolu_em_alt5).append(this)
+
+    afolu_em_alt5 = afolu_em_alt5.loc[:, :80]
+    afolu_em_alt5.columns = np.arange(2020, 2101, 1)
+    afolu_em_alt5.interpolate(axis=1, inplace=True, limit_area="inside")
+
+    afolu_em_alt6 = afolu_em.loc[
+        slice(None),
+        slice(None),
+        [
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Optimal Intensity",
+            "Silvopasture",
+            "Trees in Croplands",
+        ],
+        slice(None),
+    ].loc[:, :2100]
+
+    afolu_em_alt6.loc[:, 2020:2100] = afolu_em_alt5.loc[:, 2020:2100].values
+
+    afolu_em2 = afolu_em_alt6.append(
+        afolu_em.loc[
+            slice(None),
+            slice(None),
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Deforestation",
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Peat Restoration",
+                "3B_Manure-management",
+                "3D_Rice-Cultivation",
+                "3D_Soil-emissions",
+                "3E_Enteric-fermentation",
+                "3I_Agriculture-other",
+                "Animal Mgmt",
+            ],
+            slice(None),
+        ].loc[:, :2100]
+    )
+
+    # old method, assume same saturation
+    """
+    afolu_em_end = afolu_em.loc[:, 2077:2100] * 0
+    afolu_em_end.loc[:, :] = afolu_em_alt.iloc[:, -1].values[:, None]
+    afolu_em_alt = (
+        pd.DataFrame(afolu_em.loc[:, :data_end_year])
+        .join(afolu_em_alt)
+        .join(afolu_em_end)
+    )
+    afolu_em2 = afolu_em_alt
+    """
+
+    # endregion
+
+    return afolu_em2, per_adoption, per_max

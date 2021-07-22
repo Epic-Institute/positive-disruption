@@ -5,6 +5,7 @@
 from podi.energy_demand import energy_demand, data_start_year
 from podi.energy_supply import energy_supply, long_proj_end_year
 from podi.afolu import afolu
+from podi.afolu2030 import afolu2030
 from podi.emissions import emissions
 from podi.results_analysis import results_analysis
 import podi.data.iea_weo_etl
@@ -132,18 +133,36 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 #########
 
 # region
+ncsmx2030 = True
 
-afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu(
-    "baseline"
-)
+if ncsmx2030 is True:
+    afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu2030(
+        "baseline"
+    )
 
-afolu_em_pathway, afolu_per_adoption_pathway, afolu_per_max_pathway = afolu("pathway")
+    afolu_em_pathway, afolu_per_adoption_pathway, afolu_per_max_pathway = afolu2030(
+        "pathway"
+    )
 
-afolu_em = afolu_em_baseline.append(afolu_em_pathway)
+    afolu_em = afolu_em_baseline.append(afolu_em_pathway)
 
-afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
+    afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
 
-afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
+    afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
+else:
+    afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu(
+        "baseline"
+    )
+
+    afolu_em_pathway, afolu_per_adoption_pathway, afolu_per_max_pathway = afolu(
+        "pathway"
+    )
+
+    afolu_em = afolu_em_baseline.append(afolu_em_pathway)
+
+    afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
+
+    afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
 
 # endregion
 
