@@ -918,7 +918,7 @@ for i in range(0, len(region_list)):
         fig.update_layout(
             title={
                 "text": "Percent of Total PD Adoption, "
-                + scenario.title()
+                + "DAU"
                 + ", "
                 + sector
                 + ", "
@@ -952,11 +952,11 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
-
+        """
         fig.add_vrect(
             x0=start_year, x1=2020, fillcolor="grey", opacity=0.6, line_width=0
         )
-
+        """
         if show_figs is True:
             fig.show()
         if save_figs is True:
@@ -1673,10 +1673,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(
         title={
-            "text": "Energy Demand, "
-            + region_list[i].replace(" ", "")
-            + ", "
-            + scenario.title(),
+            "text": "Energy Demand, " + "DAU ," + region_list[i].replace(" ", ""),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -1687,10 +1684,11 @@ for i in range(0, len(region_list)):
         margin_b=100,
         margin_t=120,
     )
-
+    """
     fig.add_vrect(
         x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0
     )
+    """
     """
     fig.add_annotation(
         text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
@@ -1925,7 +1923,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(
         title={
-            "text": "Energy Supply, " + region_list[i] + ", " + scenario.title(),
+            "text": "Energy Supply, " + "DAU" + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -1936,10 +1934,11 @@ for i in range(0, len(region_list)):
         margin_b=100,
         margin_t=120,
     )
-
+    """
     fig.add_vrect(
         x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0
     )
+    """
     """
     fig.add_annotation(
         text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
@@ -2104,7 +2103,7 @@ for i in range(0, len(region_list)):
             stackgroup="one",
         )
     )
-
+    """
     fig.add_trace(
         go.Scatter(
             name="Heat-Solar thermal",
@@ -2170,13 +2169,10 @@ for i in range(0, len(region_list)):
             stackgroup="one",
         )
     )
-
+    """
     fig.update_layout(
         title={
-            "text": "Electricity Supply, "
-            + region_list[i].replace(" ", "")
-            + ", "
-            + scenario.title(),
+            "text": "Electricity Supply, " + "DAU, " + region_list[i].replace(" ", ""),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -2186,9 +2182,9 @@ for i in range(0, len(region_list)):
         legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
         margin_b=100,
     )
-
+    """
     fig.add_vrect(x0=start_year, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-
+    """
     """
     fig.add_annotation(
         text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
@@ -4346,7 +4342,7 @@ for i in range(0, len(region_list)):
         margin_b=100,
         margin_t=125,
         title={
-            "text": "Emissions Mitigated, " + region_list[i],
+            "text": "Emissions Mitigated, DAU, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -7817,8 +7813,15 @@ for i in range(0, len(region_list)):
 
     if region_list[i] in ["World "]:
 
+        cdr2 = (
+            pd.read_csv("podi/data/cdr_curve.csv")
+            .set_index(["Region", "Sector", "Scenario"])
+            .fillna(0)
+        )
+        cdr2.columns = cdr2.columns.astype(int)
+
         em_mit_cdr = (
-            cdr.loc[region_list[i], "Carbon Dioxide Removal", "daupl", :]
+            cdr2.loc[region_list[i], "Carbon Dioxide Removal", "daupl", :]
             .squeeze()
             .rename("CDR")
         )
@@ -20007,12 +20010,11 @@ for i in range(0, len(region_list)):
 scenario = "pathway"
 start_year = start_year
 i = 0
+scen = "V5 + V6"
 
 em_baseline_alt = em_baseline
 em_pathway_alt = em_pathway
 
-# uncomment if not using afolu2030.py
-"""
 accel = 5
 
 ndcs = [
@@ -20063,6 +20065,8 @@ ndc_commit = [
     ("x",),
 ]
 
+# uncomment if not using afolu2030.py
+"""
 em_pathway_alt = (
     em_pathway.loc[slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :]
     .loc[:, data_end_year + 1 :]
@@ -20127,8 +20131,15 @@ for i in range(0, len(region_list)):
 
     if region_list[i] in ["World "]:
 
+        cdr2 = (
+            pd.read_csv("podi/data/cdr_curve.csv")
+            .set_index(["Region", "Sector", "Scenario"])
+            .fillna(0)
+        )
+        cdr2.columns = cdr2.columns.astype(int)
+
         em_mit_cdr = (
-            cdr.loc[region_list[i], "Carbon Dioxide Removal", slice(None), scenario, :]
+            cdr2.loc[region_list[i], "Carbon Dioxide Removal", scen, :]
             .sum()
             .rename("CDR")
         )
@@ -20142,20 +20153,25 @@ for i in range(0, len(region_list)):
                     em_mit_industry,
                     em_mit_ra,
                     em_mit_fw,
+                    em_mit_cdr,
                 ]
             )
             .rename(
                 index={
-                    0: "Electricity",
-                    1: "Transport",
-                    2: "Buildings",
-                    3: "Industry",
-                    4: "Agriculture",
-                    5: "Forests & Wetlands",
+                    "Unnamed 0": "Electricity",
+                    "Unnamed 1": "Transport",
+                    "Unnamed 2": "Buildings",
+                    "Unnamed 3": "Industry",
+                    "Unnamed 4": "Agriculture",
+                    "Unnamed 5": "Forests & Wetlands",
+                    "Unnamed 6": "CDR",
                 }
             )
             .clip(lower=0)
         )
+
+        if scen == "V5 + V6":
+            em_mit = em_mit.drop(index="CDR")
 
     elif region_list[i] in ["US ", "CHINA ", "EUR "]:
 
@@ -20241,6 +20257,7 @@ for i in range(0, len(region_list)):
                 "Industry",
                 "Agriculture",
                 "Forests & Wetlands",
+                "CDR",
                 spacer.name,
             ]
         )
@@ -20268,60 +20285,113 @@ for i in range(0, len(region_list)):
         )
     )
 
-    """
     if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
-        
-        fig.add_trace(
-            go.Scatter(
-                name="V7: CDR",
-                line=dict(width=0.5, color="#FF9DA6"),
-                x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
-                fill="tonexty",
-                stackgroup="one",
-            )
-        )
+        if scen != "V5 + V6":
 
-        fig.add_annotation(
-            text="Cumulative CDR 2020-2100: "
-            + str(
-                fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"].values.sum().round(1)
+            fig.add_trace(
+                go.Scatter(
+                    name="V7: CDR",
+                    line=dict(width=0.5, color="#FF9DA6"),
+                    x=fig2["Year"],
+                    y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
             )
-            + " GtCO2e",
-            xref="paper",
-            yref="paper",
-            x=0.02,
-            y=0.15,
-            showarrow=False,
-            font=dict(size=10, color="#2E3F5C"),
-            align="left",
-            borderpad=4,
-            bgcolor="#ffffff",
-            opacity=1,
-        )
 
-        fig.add_annotation(
-            text="Cumulative CDR 2050-2100: "
-            + str(
-                fig2[(fig2["Sector"] == "CDR") & (fig2["Year"] > 2049)][
-                    "Emissions, GtCO2e"
-                ]
-                .values.sum()
-                .round(1)
+            fig.add_annotation(
+                text="Cumulative CDR 2020-2030: "
+                + str(
+                    fig2[(fig2["Sector"] == "CDR") & (fig2["Year"] < 2031)][
+                        "Emissions, GtCO2e"
+                    ]
+                    .values.sum()
+                    .round(1)
+                )
+                + " GtCO2e",
+                xref="paper",
+                yref="paper",
+                x=0.01,
+                y=0.31,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
             )
-            + " GtCO2e",
-            xref="paper",
-            yref="paper",
-            x=0.02,
-            y=0.05,
-            showarrow=False,
-            font=dict(size=10, color="#2E3F5C"),
-            align="left",
-            borderpad=4,
-            bgcolor="#ffffff",
-            opacity=1,
-        )
-    """
+
+            fig.add_annotation(
+                text="Cumulative CDR 2030-2040: "
+                + str(
+                    fig2[
+                        (fig2["Sector"] == "CDR")
+                        & (fig2["Year"] > 2030)
+                        & (fig2["Year"] < 2041)
+                    ]["Emissions, GtCO2e"]
+                    .values.sum()
+                    .round(1)
+                )
+                + " GtCO2e",
+                xref="paper",
+                yref="paper",
+                x=0.01,
+                y=0.21,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
+            )
+
+            fig.add_annotation(
+                text="Cumulative CDR 2040-2050: "
+                + str(
+                    fig2[
+                        (fig2["Sector"] == "CDR")
+                        & (fig2["Year"] > 2040)
+                        & (fig2["Year"] < 2051)
+                    ]["Emissions, GtCO2e"]
+                    .values.sum()
+                    .round(1)
+                )
+                + " GtCO2e",
+                xref="paper",
+                yref="paper",
+                x=0.01,
+                y=0.11,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
+            )
+
+            fig.add_annotation(
+                text="Cumulative CDR 2050-2060: "
+                + str(
+                    fig2[
+                        (fig2["Sector"] == "CDR")
+                        & (fig2["Year"] > 2050)
+                        & (fig2["Year"] < 2061)
+                    ]["Emissions, GtCO2e"]
+                    .values.sum()
+                    .round(1)
+                )
+                + " GtCO2e",
+                xref="paper",
+                yref="paper",
+                x=0.01,
+                y=0.01,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
+            )
 
     fig.add_trace(
         go.Scatter(
@@ -20439,7 +20509,7 @@ for i in range(0, len(region_list)):
         """
         fig.add_trace(
             go.Scatter(
-                name="DAU-NCSmx2030",
+                name=scen,
                 line=dict(width=2, color="yellow", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -20617,7 +20687,7 @@ for i in range(0, len(region_list)):
         margin_b=100,
         margin_t=125,
         title={
-            "text": "Emissions Mitigated, DAU-NCSmx2030, " + region_list[i],
+            "text": "Emissions Mitigated, " + scen + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -20936,7 +21006,7 @@ for i in range(0, len(region_list)):
                 "text": " Emissions in "
                 + str(sector)
                 + ", "
-                + scenario.title()
+                + "FW-max2030"
                 + ", "
                 + region_list[i],
                 "xanchor": "center",

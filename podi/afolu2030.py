@@ -821,8 +821,38 @@ def afolu2030(scenario):
 
     accel = 5
 
-    afolu_em_alt = (
-        afolu_em.loc[
+    # RA-mx2030
+
+    # region
+
+    ra_mx2030 = True
+    if ra_mx2030 is True:
+        afolu_em_alt = (
+            afolu_em.loc[
+                slice(None),
+                slice(None),
+                [
+                    "Biochar",
+                    "Cropland Soil Health",
+                    "Improved Rice",
+                    "Nitrogen Fertilizer Management",
+                    "Optimal Intensity",
+                    "Silvopasture",
+                    "Trees in Croplands",
+                    "Animal Mgmt",
+                ],
+                slice(None),
+            ]
+            .loc[:, data_end_year + 1 :]
+            .loc[:, ::accel]
+        )
+        afolu_em_alt.columns = np.arange(2020, 2077, 1)
+
+        afolu_em_alt2 = afolu_em_alt.apply(
+            lambda x: x[x.index <= x.idxmin(axis=1)], axis=1
+        )
+
+        afolu_em_alt3 = afolu_em.loc[
             slice(None),
             slice(None),
             [
@@ -833,72 +863,102 @@ def afolu2030(scenario):
                 "Optimal Intensity",
                 "Silvopasture",
                 "Trees in Croplands",
+                "Animal Mgmt",
             ],
             slice(None),
-        ]
-        .loc[:, data_end_year + 1 :]
-        .loc[:, ::accel]
-    )
-    afolu_em_alt.columns = np.arange(2020, 2077, 1)
+        ].apply(lambda x: x[x.index > x.idxmin(axis=1)], axis=1)
 
-    afolu_em_alt2 = afolu_em_alt.apply(lambda x: x[x.index <= x.idxmin(axis=1)], axis=1)
+        afolu_em_alt4 = afolu_em_alt2.apply(
+            lambda x: np.concatenate(
+                [
+                    x.values,
+                    afolu_em_alt3.loc[
+                        x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]
+                    ]
+                    .dropna()
+                    .values,
+                ]
+            ),
+            axis=1,
+        )
 
-    afolu_em_alt3 = afolu_em.loc[
-        slice(None),
-        slice(None),
-        [
-            "Biochar",
-            "Cropland Soil Health",
-            "Improved Rice",
-            "Nitrogen Fertilizer Management",
-            "Optimal Intensity",
-            "Silvopasture",
-            "Trees in Croplands",
-        ],
-        slice(None),
-    ].apply(lambda x: x[x.index > x.idxmin(axis=1)], axis=1)
+        afolu_em_alt5 = []
 
-    afolu_em_alt4 = afolu_em_alt2.apply(
-        lambda x: np.concatenate(
+        for i in range(0, len(afolu_em_alt4)):
+            this = pd.DataFrame(afolu_em_alt4[i]).T
+            afolu_em_alt5 = pd.DataFrame(afolu_em_alt5).append(this)
+
+        afolu_em_alt5 = afolu_em_alt5.loc[:, :80]
+        afolu_em_alt5.columns = np.arange(2020, 2101, 1)
+        afolu_em_alt5.interpolate(axis=1, inplace=True, limit_area="inside")
+
+        afolu_em_alt6 = afolu_em.loc[
+            slice(None),
+            slice(None),
             [
-                x.values,
-                afolu_em_alt3.loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
-                .dropna()
-                .values,
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Trees in Croplands",
+                "Animal Mgmt",
+            ],
+            slice(None),
+        ].loc[:, :2100]
+
+        afolu_em_alt6.loc[:, 2020:2100] = afolu_em_alt5.loc[:, 2020:2100].values
+    else:
+        afolu_em_alt6 = afolu_em.loc[
+            slice(None),
+            slice(None),
+            [
+                "Biochar",
+                "Cropland Soil Health",
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+                "Optimal Intensity",
+                "Silvopasture",
+                "Trees in Croplands",
+                "Animal Mgmt",
+            ],
+            slice(None),
+        ].loc[:, :2100]
+
+    # endregion
+
+    # FW-mx2030
+
+    # region
+
+    fw_mx2030 = True
+    if fw_mx2030 is True:
+        afolu_em_alt = (
+            afolu_em.loc[
+                slice(None),
+                slice(None),
+                [
+                    "Avoided Coastal Impacts",
+                    "Avoided Forest Conversion",
+                    "Avoided Peat Impacts",
+                    "Coastal Restoration",
+                    "Improved Forest Mgmt",
+                    "Natural Regeneration",
+                    "Peat Restoration",
+                ],
+                slice(None),
             ]
-        ),
-        axis=1,
-    )
+            .loc[:, data_end_year + 1 :]
+            .loc[:, ::accel]
+        )
+        afolu_em_alt.columns = np.arange(2020, 2077, 1)
 
-    afolu_em_alt5 = []
+        afolu_em_alt2 = afolu_em_alt.apply(
+            lambda x: x[x.index <= x.idxmin(axis=1)], axis=1
+        )
 
-    for i in range(0, len(afolu_em_alt4)):
-        this = pd.DataFrame(afolu_em_alt4[i]).T
-        afolu_em_alt5 = pd.DataFrame(afolu_em_alt5).append(this)
-
-    afolu_em_alt5 = afolu_em_alt5.loc[:, :80]
-    afolu_em_alt5.columns = np.arange(2020, 2101, 1)
-    afolu_em_alt5.interpolate(axis=1, inplace=True, limit_area="inside")
-
-    afolu_em_alt6 = afolu_em.loc[
-        slice(None),
-        slice(None),
-        [
-            "Biochar",
-            "Cropland Soil Health",
-            "Improved Rice",
-            "Nitrogen Fertilizer Management",
-            "Optimal Intensity",
-            "Silvopasture",
-            "Trees in Croplands",
-        ],
-        slice(None),
-    ].loc[:, :2100]
-
-    afolu_em_alt6.loc[:, 2020:2100] = afolu_em_alt5.loc[:, 2020:2100].values
-
-    afolu_em2 = afolu_em_alt6.append(
-        afolu_em.loc[
+        afolu_em_alt3 = afolu_em.loc[
             slice(None),
             slice(None),
             [
@@ -906,19 +966,88 @@ def afolu2030(scenario):
                 "Avoided Forest Conversion",
                 "Avoided Peat Impacts",
                 "Coastal Restoration",
-                "Deforestation",
                 "Improved Forest Mgmt",
                 "Natural Regeneration",
                 "Peat Restoration",
+            ],
+            slice(None),
+        ].apply(lambda x: x[x.index > x.idxmin(axis=1)], axis=1)
+
+        afolu_em_alt4 = afolu_em_alt2.apply(
+            lambda x: np.concatenate(
+                [
+                    x.values,
+                    afolu_em_alt3.loc[
+                        x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]
+                    ]
+                    .dropna()
+                    .values,
+                ]
+            ),
+            axis=1,
+        )
+
+        afolu_em_alt5 = []
+
+        for i in range(0, len(afolu_em_alt4)):
+            this = pd.DataFrame(afolu_em_alt4[i]).T
+            afolu_em_alt5 = pd.DataFrame(afolu_em_alt5).append(this)
+
+        afolu_em_alt5 = afolu_em_alt5.loc[:, :80]
+        afolu_em_alt5.columns = np.arange(2020, 2101, 1)
+        afolu_em_alt5.interpolate(axis=1, inplace=True, limit_area="inside")
+
+        afolu_em_alt7 = afolu_em.loc[
+            slice(None),
+            slice(None),
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Peat Restoration",
+            ],
+            slice(None),
+        ].loc[:, :2100]
+
+        afolu_em_alt7.loc[:, 2020:2100] = afolu_em_alt5.loc[:, 2020:2100].values
+    else:
+        afolu_em_alt7 = afolu_em.loc[
+            slice(None),
+            slice(None),
+            [
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Peat Restoration",
+            ],
+            slice(None),
+        ].loc[:, :2100]
+
+    # endregion
+
+    afolu_em2 = (
+        afolu_em.loc[
+            slice(None),
+            slice(None),
+            [
+                "Deforestation",
                 "3B_Manure-management",
                 "3D_Rice-Cultivation",
                 "3D_Soil-emissions",
                 "3E_Enteric-fermentation",
                 "3I_Agriculture-other",
-                "Animal Mgmt",
             ],
             slice(None),
-        ].loc[:, :2100]
+        ]
+        .loc[:, :2100]
+        .append(afolu_em_alt6)
+        .append(afolu_em_alt7)
     )
 
     # old method, assume same saturation
@@ -932,6 +1061,9 @@ def afolu2030(scenario):
     )
     afolu_em2 = afolu_em_alt
     """
+
+    per_adoption = per_adoption.loc[:, :2100]
+    per_max = per_max.loc[:, 2100]
 
     # endregion
 
