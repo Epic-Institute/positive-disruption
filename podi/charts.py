@@ -479,7 +479,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(
         title={
-            "text": "Percent of Total PD Adoption, " + "DAU" + ", " + region_list[i],
+            "text": "Percent of Total PD Adoption, " + "DAU21" + ", " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -918,7 +918,7 @@ for i in range(0, len(region_list)):
         fig.update_layout(
             title={
                 "text": "Percent of Total PD Adoption, "
-                + "DAU"
+                + "DAU21"
                 + ", "
                 + sector
                 + ", "
@@ -1284,7 +1284,7 @@ for i in range(0, len(region_list)):
         fig.update_layout(
             title={
                 "text": "Percent of Total PD Adoption, "
-                + "DAU"
+                + "DAU21"
                 + ", "
                 + sector
                 + ", "
@@ -2865,7 +2865,7 @@ for i in range(0, len(region_list)):
                 "text": " Emissions in "
                 + str(sector)
                 + ", "
-                + "DAU"
+                + "DAU21"
                 + ", "
                 + region_list[i],
                 "xanchor": "center",
@@ -4342,7 +4342,7 @@ for i in range(0, len(region_list)):
         margin_b=100,
         margin_t=125,
         title={
-            "text": "Emissions Mitigated, DAU, " + region_list[i],
+            "text": "Emissions Mitigated, DAU21, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -6606,7 +6606,7 @@ em_cdr.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
 
 
 em_b.loc[225:335, 2] = (
@@ -18964,9 +18964,14 @@ for year in [2050]:
         ].sum()
 
         if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
+
+            cdr2 = pd.read_csv("podi/data/cdr_curve.csv").set_index(
+                ["Region", "Sector", "Scenario"]
+            )
+
             em_mit_cdr = (
                 pd.Series(
-                    cdr.loc[region_list[i], "Carbon Dioxide Removal", "daumm"],
+                    cdr2.loc[region_list[i], "Carbon Dioxide Removal", "NCSmax"],
                     index=np.arange(data_start_year, long_proj_end_year + 1),
                 )
             ).rename(index="Unnamed 6")
@@ -19603,7 +19608,7 @@ for year in [2050]:
             title="Climate Mitigation Potential, "
             + str(year)
             + ", "
-            + "DAU-NCSmx, "
+            + "NCSmax, "
             + region_list[i],
             title_x=0.5,
             title_y=0.95,
@@ -19642,14 +19647,14 @@ for year in [2050]:
 # endregion
 
 ###################################
-# //////////// DAU-NCSmx2030 /////# MAX NCS BY 2030
+# //////////// DAU-NCSmax /////# MAX NCS BY 2030
 ###################################
 
 # region
 
-#################################
-# DAU-NCSmx2030 ADOPTION CURVES #
-#################################
+###################
+# ADOPTION CURVES #
+###################
 
 # region
 
@@ -20001,16 +20006,16 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#########################################
-# DAU-NCSmx2030 MITIGATION WEDGES CURVE #
-#########################################
+###########################
+# MITIGATION WEDGES CURVE #
+###########################
 
 # region
 
 scenario = "pathway"
 start_year = start_year
 i = 0
-scen = "V5 + V6"
+scen = "NCSmax"
 
 em_baseline_alt = em_baseline
 em_pathway_alt = em_pathway
@@ -20139,7 +20144,7 @@ for i in range(0, len(region_list)):
         cdr2.columns = cdr2.columns.astype(int)
 
         em_mit_cdr = (
-            cdr2.loc[region_list[i], "Carbon Dioxide Removal", scen, :]
+            cdr2.loc[region_list[i], "Carbon Dioxide Removal", "NCSmax2", :]
             .sum()
             .rename("CDR")
         )
@@ -20286,19 +20291,19 @@ for i in range(0, len(region_list)):
     )
 
     if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
-        if scen != "V5 + V6":
 
-            fig.add_trace(
-                go.Scatter(
-                    name="V7: CDR",
-                    line=dict(width=0.5, color="#FF9DA6"),
-                    x=fig2["Year"],
-                    y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
-                    fill="tonexty",
-                    stackgroup="one",
-                )
+        fig.add_trace(
+            go.Scatter(
+                name="V7: CDR",
+                line=dict(width=0.5, color="#FF9DA6"),
+                x=fig2["Year"],
+                y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
+                fill="tonexty",
+                stackgroup="one",
             )
+        )
 
+        if scen != "NCSmax":
             fig.add_annotation(
                 text="Cumulative CDR 2020-2030: "
                 + str(
@@ -20392,7 +20397,27 @@ for i in range(0, len(region_list)):
                 bgcolor="#ffffff",
                 opacity=1,
             )
-
+            """
+            fig.add_annotation(
+                text="Cumulative CDR: "
+                + str(
+                    fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"]
+                    .values.sum()
+                    .round(1)
+                )
+                + " GtCO2e",
+                xref="paper",
+                yref="paper",
+                x=0.01,
+                y=0.01,
+                showarrow=False,
+                font=dict(size=10, color="#2E3F5C"),
+                align="left",
+                borderpad=4,
+                bgcolor="#ffffff",
+                opacity=1,
+            )
+            """
     fig.add_trace(
         go.Scatter(
             name="V6: Forests & Wetlands",
@@ -20472,7 +20497,7 @@ for i in range(0, len(region_list)):
         fig.add_trace(
             go.Scatter(
                 name="SSP2-RCP1.9",
-                line=dict(width=2, color="#17BECF", dash="dot"),
+                line=dict(width=2, color="green", dash="dash"),
                 x=pd.Series(
                     em_targets.loc["SSP2-19", near_proj_start_year:].index.values
                 ),
@@ -20507,10 +20532,25 @@ for i in range(0, len(region_list)):
             )
         )
         """
+
+        fig.add_trace(
+            go.Scatter(
+                name="SR1.5",
+                line=dict(width=2, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
+                x=pd.Series(
+                    em_targets.loc["SSP2-26", near_proj_start_year:2050].index.values
+                ),
+                y=dau21_sr15[dau21_sr15.index < 32],
+                fill="none",
+                stackgroup="DAU21+CDR2",
+                legendgroup="two",
+            )
+        )
+
         fig.add_trace(
             go.Scatter(
                 name=scen,
-                line=dict(width=2, color="yellow", dash="dot"),
+                line=dict(width=2, color="#17BECF", dash="dot"),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
                 ),
@@ -20733,9 +20773,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-######################################
-# DAU-NCSmx2030 EMISSIONS SUBVECTORS #
-######################################
+########################
+# EMISSIONS SUBVECTORS #
+########################
 
 # region
 
@@ -21006,7 +21046,7 @@ for i in range(0, len(region_list)):
                 "text": " Emissions in "
                 + str(sector)
                 + ", "
-                + "FW-max2030"
+                + "V6"
                 + ", "
                 + region_list[i],
                 "xanchor": "center",
@@ -21056,9 +21096,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-######################################
-# DAU-NCSmx2030 OPPORTUNITY BARCHART #
-######################################
+########################
+# OPPORTUNITY BARCHART #
+########################
 
 # region
 
@@ -21321,9 +21361,9 @@ if save_figs is True:
 
 # endregion
 
-#########################################
-# DAU-NCSmx2030 OPPORTUNITY BARCHART V2 #
-#########################################
+###########################
+# OPPORTUNITY BARCHART V2 #
+###########################
 
 # region
 
@@ -21373,7 +21413,9 @@ bar_emissions_goal = [
 ]
 
 em_baseline_alt = em_baseline
+em_pathway_alt = em_pathway
 
+"""
 em_pathway_alt = (
     em_pathway.loc[slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :]
     .loc[:, data_end_year + 1 :]
@@ -21406,6 +21448,7 @@ em_pathway_alt2 = em_pathway.loc[
     :,
 ].append(em_pathway_alt)
 em_pathway_alt = em_pathway_alt2
+"""
 
 em_mitigated_alt2030 = (
     em_baseline_alt.groupby(["Region", "Sector", "Metric"]).sum()
@@ -24623,7 +24666,7 @@ show_ra = False
 show_fw = False
 show_ncs = False
 show_ncsm = True
-show_ncsmffi = True
+show_ncsmffi = False
 show_ffi = False
 show_ncsffi = False
 show_ncsffiet = False
@@ -24716,7 +24759,7 @@ em_cdr.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
 em_ra.loc[225:335, 1] = (
     em_alt_lp[~em_alt_lp.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
@@ -24791,6 +24834,20 @@ em_ncsmffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
+
+# for NCSmax2
+em_ncsm.loc[225:335, 1] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Electricity", "Transport", "Buildings", "Industry"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -25257,7 +25314,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="DAU-NCSmx",
+            name="NCSmax",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsm.loc[data_end_year:, "CO2"],
@@ -25416,7 +25473,7 @@ em_cdr.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
 em_ra.loc[225:335, 1] = (
     em_alt_lp[~em_alt_lp.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
@@ -25491,6 +25548,20 @@ em_ncsmffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
+
+# for NCSmax2
+em_ncsm.loc[225:335, 1] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Electricity", "Transport", "Buildings", "Industry"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -26116,7 +26187,7 @@ em_cdr.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
 em_ra.loc[225:335, 1] = (
     em_alt_lp[~em_alt_lp.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
@@ -26191,6 +26262,20 @@ em_ncsmffi.loc[225:335, 1] = (
     .sum()
     / 3670
 ).values
+
+# for NCSmax2
+em_ncsm.loc[225:335, 1] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Electricity", "Transport", "Buildings", "Industry"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -26892,6 +26977,20 @@ em_ncsmffi.loc[225:335, 1] = (
     / 3670
 ).values
 
+# for NCSmax2
+em_ncsm.loc[225:335, 1] = (
+    em_alt_ncsm[~em_alt_ncsm.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+    .loc[
+        "World ",
+        ["Electricity", "Transport", "Buildings", "Industry"],
+        slice(None),
+        "CO2",
+        "pathway",
+    ]
+    .sum()
+    / 3670
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
+
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
@@ -27185,17 +27284,24 @@ Tncsmffi = (
 )
 
 # CO2e conversion
+curvenum = 6
 
-Tb["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tb, axis=1)).T, "quadratic", 6).T
-Tpd["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tpd, axis=1)).T, "quadratic", 6).T
-Tcdr["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tcdr, axis=1)).T, "quadratic", 6).T
-Tlp["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tlp, axis=1)).T, "quadratic", 6).T
-Twe["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Twe, axis=1)).T, "quadratic", 6).T
-Trafw["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Trafw, axis=1)).T, "quadratic", 6).T
-Tffi["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tffi, axis=1)).T, "quadratic", 6).T
-Tncsm["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tncsm, axis=1)).T, "quadratic", 6).T
+Tb["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tb, axis=1)).T, "quadratic", curvenum).T
+Tpd["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tpd, axis=1)).T, "quadratic", curvenum).T
+Tcdr["CO2e"] = curve_smooth(
+    pd.DataFrame(np.sum(Tcdr, axis=1)).T, "quadratic", curvenum
+).T
+Tlp["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tlp, axis=1)).T, "quadratic", curvenum).T
+Twe["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Twe, axis=1)).T, "quadratic", curvenum).T
+Trafw["CO2e"] = curve_smooth(
+    pd.DataFrame(np.sum(Trafw, axis=1)).T, "quadratic", curvenum
+).T
+Tffi["CO2e"] = curve_smooth(
+    pd.DataFrame(np.sum(Tffi, axis=1)).T, "quadratic", curvenum
+).T
+Tncsm["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tncsm, axis=1)).T, "quadratic", 7).T
 Tncsmffi["CO2e"] = curve_smooth(
-    pd.DataFrame(np.sum(Tncsmffi, axis=1)).T, "quadratic", 6
+    pd.DataFrame(np.sum(Tncsmffi, axis=1)).T, "quadratic", curvenum
 ).T
 
 T19 = T19 * (hist.loc[:, 2020].values[0] / T19.loc[:, 2020].values[0])
@@ -27389,7 +27495,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="NCS at max",
+            name="NCSmax",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tncsm.loc[data_end_year:, "CO2e"],
@@ -27399,10 +27505,10 @@ if show_ncsm == True:
         )
     )
 
-if show_ncsm == True:
+if show_ncsffi == True:
     fig.add_trace(
         go.Scatter(
-            name="NCS at max + FFI (FF heating/industry)",
+            name="NCSx + FFI (FF heating/industry)",
             line=dict(
                 width=3, color=cl["DAU-NCS+FFI+E+T"][0], dash=cl["DAU-NCS+FFI+E+T"][1]
             ),

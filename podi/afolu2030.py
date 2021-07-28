@@ -822,10 +822,10 @@ def afolu2030(scenario):
     accel = 5
 
     # RA-mx2030
+    ra_mx2030 = True
 
     # region
 
-    ra_mx2030 = True
     if ra_mx2030 is True:
         afolu_em_alt = (
             afolu_em.loc[
@@ -929,10 +929,10 @@ def afolu2030(scenario):
     # endregion
 
     # FW-mx2030
+    fw_mx2030 = True
 
     # region
 
-    fw_mx2030 = True
     if fw_mx2030 is True:
         afolu_em_alt = (
             afolu_em.loc[
