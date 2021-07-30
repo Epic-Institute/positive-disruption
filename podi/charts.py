@@ -528,6 +528,7 @@ for i in range(0, len(region_list)):
 
 scenario = scenario
 start_year = start_year
+i=0
 
 for i in range(0, len(region_list)):
     fig = (
@@ -18772,11 +18773,6 @@ for i in range(0, len(region_list)):
 scenario = "pathway"
 start_year = start_year
 i = 0
-accel_trans = 2
-accel_build = 5
-accel_ind = 4
-accel_ra = 2
-accel_fw = 2
 
 ndcs = [
     [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
@@ -20018,9 +20014,7 @@ i = 0
 scen = "NCSmax"
 
 em_baseline_alt = em_baseline
-em_pathway_alt = em_pathway
-
-accel = 5
+em_pathway_alt = em_pathway_v5v6
 
 ndcs = [
     [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
@@ -20070,41 +20064,6 @@ ndc_commit = [
     ("x",),
 ]
 
-# uncomment if not using afolu2030.py
-"""
-em_pathway_alt = (
-    em_pathway.loc[slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :]
-    .loc[:, data_end_year + 1 :]
-    .loc[:, ::accel]
-)
-em_pathway_alt.columns = np.arange(2020, int(2020 + 80 / accel + 1), 1)
-
-em_pathway_end = (
-    em_pathway.loc[
-        slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :
-    ].loc[:, 2037:]
-    * 0
-)
-
-em_pathway_end.loc[:, :] = em_pathway_alt.iloc[:, -1].values[:, None]
-
-em_pathway_alt = (
-    pd.DataFrame(
-        em_pathway.loc[
-            slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :
-        ].loc[:, data_end_year]
-    )
-    .join(em_pathway_alt)
-    .join(em_pathway_end)
-)
-
-em_pathway_alt2 = em_pathway.loc[
-    slice(None),
-    ["Buildings", "Electricity", "Industry", "Transport"],
-    :,
-].append(em_pathway_alt)
-em_pathway_alt = em_pathway_alt2
-"""
 
 # for use in climate charts
 em_alt_we = em_pathway_alt
@@ -20177,7 +20136,31 @@ for i in range(0, len(region_list)):
 
         if scen == "V5 + V6":
             em_mit = em_mit.drop(index="CDR")
-
+    else:
+        em_mit = (
+            pd.DataFrame(
+                [
+                    em_mit_electricity,
+                    em_mit_transport,
+                    em_mit_buildings,
+                    em_mit_industry,
+                    em_mit_ra,
+                    em_mit_fw,
+                ]
+            )
+            .clip(lower=0)
+            .rename(
+                index={
+                    0: "Electricity",
+                    1: "Transport",
+                    2: "Buildings",
+                    3: "Industry",
+                    4: "Agriculture",
+                    5: "Forests & Wetlands",
+                }
+            )
+        ).clip(lower=0)
+    '''
     elif region_list[i] in ["US ", "CHINA ", "EUR "]:
 
         em_mit_cdr = (
@@ -20209,31 +20192,7 @@ for i in range(0, len(region_list)):
             )
             .clip(lower=0)
         )
-
-    else:
-        em_mit = (
-            pd.DataFrame(
-                [
-                    em_mit_electricity,
-                    em_mit_transport,
-                    em_mit_buildings,
-                    em_mit_industry,
-                    em_mit_ra,
-                    em_mit_fw,
-                ]
-            )
-            .clip(lower=0)
-            .rename(
-                index={
-                    0: "Electricity",
-                    1: "Transport",
-                    2: "Buildings",
-                    3: "Industry",
-                    4: "Agriculture",
-                    5: "Forests & Wetlands",
-                }
-            )
-        ).clip(lower=0)
+    '''
 
     spacer = (
         pd.Series(
@@ -20290,6 +20249,7 @@ for i in range(0, len(region_list)):
         )
     )
 
+    '''
     if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
 
         fig.add_trace(
@@ -20418,6 +20378,8 @@ for i in range(0, len(region_list)):
                 opacity=1,
             )
             """
+    '''
+
     fig.add_trace(
         go.Scatter(
             name="V6: Forests & Wetlands",
@@ -20532,7 +20494,7 @@ for i in range(0, len(region_list)):
             )
         )
         """
-
+        '''
         fig.add_trace(
             go.Scatter(
                 name="SR1.5",
@@ -20546,7 +20508,7 @@ for i in range(0, len(region_list)):
                 legendgroup="two",
             )
         )
-
+        '''
         fig.add_trace(
             go.Scatter(
                 name=scen,
@@ -21370,7 +21332,6 @@ if save_figs is True:
 scenario = "pathway"
 year = 2050
 i = 0
-accel = 5
 
 bar_emissions_goal = [
     ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
@@ -21413,42 +21374,7 @@ bar_emissions_goal = [
 ]
 
 em_baseline_alt = em_baseline
-em_pathway_alt = em_pathway
-
-"""
-em_pathway_alt = (
-    em_pathway.loc[slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :]
-    .loc[:, data_end_year + 1 :]
-    .loc[:, ::accel]
-)
-em_pathway_alt.columns = np.arange(2020, int(2020 + 80 / accel + 1), 1)
-
-em_pathway_end = (
-    em_pathway.loc[
-        slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :
-    ].loc[:, 2037:]
-    * 0
-)
-
-em_pathway_end.loc[:, :] = em_pathway_alt.iloc[:, -1].values[:, None]
-
-em_pathway_alt = (
-    pd.DataFrame(
-        em_pathway.loc[
-            slice(None), ["Regenerative Agriculture", "Forests & Wetlands"], :
-        ].loc[:, data_end_year]
-    )
-    .join(em_pathway_alt)
-    .join(em_pathway_end)
-)
-
-em_pathway_alt2 = em_pathway.loc[
-    slice(None),
-    ["Buildings", "Electricity", "Industry", "Transport"],
-    :,
-].append(em_pathway_alt)
-em_pathway_alt = em_pathway_alt2
-"""
+em_pathway_alt = em_pathway_v5v6
 
 em_mitigated_alt2030 = (
     em_baseline_alt.groupby(["Region", "Sector", "Metric"]).sum()
@@ -21780,6 +21706,7 @@ figure.append_trace(
 )
 
 if year == 2050:
+
     if region_list[i] == "NonOECD ":
         data2["nze"][2] = data2["nze"][2] - 6
 
@@ -21809,7 +21736,7 @@ if year == 2050:
     )
 
 
-data2["fifty"][2] = data2["fifty"][2] - 3.5
+data2["fifty"][2] = data2["fifty"][2] - 2.5
 data2["fifty"][1] = data2["fifty"][1] - 2
 
 figure.add_trace(

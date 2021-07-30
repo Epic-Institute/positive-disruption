@@ -164,6 +164,34 @@ else:
 
     afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
 
+afolu_em.loc[
+    slice(None),
+    slice(None),
+    [
+        "Deforestation",
+        "3B_Manure-management",
+        "3D_Rice-Cultivation",
+        "3D_Soil-emissions",
+        "3E_Enteric-fermentation",
+        "3I_Agriculture-other",
+    ],
+    slice(None),
+    "baseline",
+] = afolu_em.loc[
+    slice(None),
+    slice(None),
+    [
+        "Deforestation",
+        "3B_Manure-management",
+        "3D_Rice-Cultivation",
+        "3D_Soil-emissions",
+        "3E_Enteric-fermentation",
+        "3I_Agriculture-other",
+    ],
+    slice(None),
+    "pathway",
+].values
+
 # endregion
 
 #############
