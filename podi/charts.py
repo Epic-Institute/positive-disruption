@@ -20186,7 +20186,7 @@ i = 0
 scen = "NCSmax"
 
 em_baseline_alt = em_baseline
-em_pathway_alt = em_pathway_v5v6
+em_pathway_alt = em_pathway
 
 ndcs = [
     [(2030, 2050), (25, 0), ("50% reduction by 2030", "Net-zero by 2050")],
@@ -24946,7 +24946,7 @@ em_ncsm.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax"] / 3670).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -25660,7 +25660,7 @@ em_ncsm.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax"] / 3670).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -26374,7 +26374,7 @@ em_ncsm.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax"] / 3670).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -26933,6 +26933,13 @@ em_ncsmffi = pd.DataFrame(rcp3pd.Emissions.emissions * 1.002)
 hist = pd.read_csv("podi/data/temp.csv")
 hist.columns = hist.columns.astype(int)
 
+cdr2 = (
+    pd.read_csv("podi/data/cdr_curve.csv")
+    .set_index(["Region", "Sector", "Scenario"])
+    .fillna(0)
+)
+cdr2.columns = cdr2.columns.astype(int)
+
 T = (
     pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
     .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
@@ -27088,7 +27095,7 @@ em_ncsm.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax"] / 3670).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -27398,7 +27405,9 @@ Trafw["CO2e"] = curve_smooth(
 Tffi["CO2e"] = curve_smooth(
     pd.DataFrame(np.sum(Tffi, axis=1)).T, "quadratic", curvenum
 ).T
-Tncsm["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tncsm, axis=1)).T, "quadratic", 7).T
+Tncsm["CO2e"] = curve_smooth(
+    pd.DataFrame(np.sum(Tncsm, axis=1)).T, "quadratic", curvenum
+).T
 Tncsmffi["CO2e"] = curve_smooth(
     pd.DataFrame(np.sum(Tncsmffi, axis=1)).T, "quadratic", curvenum
 ).T
@@ -27619,6 +27628,140 @@ if show_ncsffi == True:
         )
     )
 
+
+# temp range
+
+# region
+
+# Historical
+# region
+
+temp_range = pd.read_csv("podi/data/temp_range.csv").set_index("Range")
+temp_range.columns = temp_range.columns.astype(int)
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical_upper",
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=temp_range.loc["83p", data_start_year:data_end_year].squeeze(),
+        mode="lines",
+        marker=dict(color="#444"),
+        line=dict(width=0),
+        showlegend=False,
+    ),
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical_upper",
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=temp_range.loc["83p", data_start_year:data_end_year].squeeze(),
+        mode="lines",
+        marker=dict(color="#444"),
+        line=dict(width=0),
+        showlegend=False,
+    ),
+    secondary_y=True,
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Est. range",
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=temp_range.loc["17p", data_start_year:data_end_year].squeeze(),
+        marker=dict(color="#444"),
+        line=dict(width=0),
+        mode="lines",
+        fillcolor="rgba(255,155,5,0.15)",
+        fill="tonexty",
+        showlegend=False,
+    ),
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical_lower",
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=temp_range.loc["17p", data_start_year:data_end_year].squeeze(),
+        marker=dict(color="#444"),
+        line=dict(width=0),
+        mode="lines",
+        fillcolor="rgba(255,155,5,0.15)",
+        fill="tonexty",
+        showlegend=False,
+    ),
+    secondary_y=True,
+)
+# endregion
+
+# SR1.5
+# region
+
+fig.add_trace(
+    go.Scatter(
+        name="sr1.5_upper",
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tcdr.loc[data_end_year:, "CO2e"] * 1.2,
+        mode="lines",
+        marker=dict(color="#444"),
+        line=dict(width=0),
+        showlegend=False,
+    ),
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="sr1.5_lower",
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tcdr.loc[data_end_year:, "CO2e"] * 0.8,
+        marker=dict(color="#444"),
+        line=dict(width=0),
+        mode="lines",
+        fillcolor="rgba(51,102,204,0.15)",
+        fill="tonexty",
+        showlegend=False,
+    ),
+)
+
+# endregion
+
+# DAU21 expanding
+# region
+
+tproj_err = pd.read_csv("podi/data/temp_range.csv").set_index("Range")
+tproj_err.columns = temp_range.columns.astype(int)
+
+fig.add_trace(
+    go.Scatter(
+        name="dau21_upper",
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tpd.loc[data_end_year:, "CO2e"] * 1.2
+        + temp_range.loc["dau21_upper", data_end_year:long_proj_end_year].squeeze(),
+        mode="lines",
+        marker=dict(color="#444"),
+        line=dict(width=0),
+        showlegend=False,
+    ),
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="dau21_lower",
+        x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+        y=Tpd.loc[data_end_year:, "CO2e"] * 0.8
+        + temp_range.loc["dau21_lower", data_end_year:long_proj_end_year].squeeze(),
+        marker=dict(color="#444"),
+        line=dict(width=0),
+        mode="lines",
+        fillcolor="rgba(153,0,153,0.15)",
+        fill="tonexty",
+        showlegend=False,
+    ),
+)
+
+# endregion
+
+# endregion
 
 fig.update_layout(
     title={"text": "Global Mean Temperature", "xanchor": "center", "x": 0.5, "y": 0.99},
