@@ -133,7 +133,7 @@ transport_per_adoption = transport_per_adoption_baseline.append(
 #########
 
 # region
-ncsmx2030 = False
+ncsmx2030 = True
 
 if ncsmx2030 is True:
     afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu2030(

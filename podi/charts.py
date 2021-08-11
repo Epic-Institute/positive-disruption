@@ -784,7 +784,7 @@ for i in range(0, len(region_list)):
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Transport")][
+                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Carbon Dioxide Removal")][
                     "% Adoption"
                 ],
                 fill="none",
@@ -803,7 +803,7 @@ for i in range(0, len(region_list)):
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
-                y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Transport")][
+                y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Carbon Dioxide Removal")][
                     "% Adoption"
                 ],
                 fill="none",
@@ -11819,7 +11819,7 @@ for i in range(0, len(region_list)):
 # endregion
 
 #########################################
-# DAU-NCS EMISSIONS MITIGATION BARCHART #
+# DAU-NCS EMISSIONS MITIGATION BARCHART # FIG B1 , B2, B3
 #########################################
 
 # region
@@ -11994,10 +11994,12 @@ for year in [2050]:
         if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
             em_mit_cdr = (
                 pd.Series(
-                    cdr.loc[region_list[i], "Carbon Dioxide Removal", scenario],
+                    cdr2.loc[region_list[i], "Carbon Dioxide Removal", 'pathway'],
                     index=np.arange(data_start_year, long_proj_end_year + 1),
                 )
             ).rename(index="Unnamed 6")
+
+            em_mit_cdr = em_mit_cdr * 0
 
             em_mit = pd.DataFrame(
                 [
@@ -12319,7 +12321,7 @@ for year in [2050]:
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
                 name="NDC",
             )
-
+            '''
             figure.add_annotation(
                 text="The blue dotted line represents an emissions mitigation goal "
                 + ipcc[i][2][j],
@@ -12334,7 +12336,7 @@ for year in [2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
-
+            '''
             # NDC target line
             if region_list[i] in ["US ", "CHINA "]:
 
@@ -12464,7 +12466,7 @@ for year in [2050]:
                 line=dict(color="green", width=3, dash="dot"),
                 name="NDC",
             )
-
+            '''
             figure.add_annotation(
                 text="The green dotted line represents an emissions mitigation goal "
                 + ndcs[i][2][j]
@@ -12480,7 +12482,7 @@ for year in [2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
-
+            '''
             figure.add_shape(
                 type="line",
                 x0=em_hist.loc[region_list[i], 2019].values[0] / 2000,
@@ -12583,7 +12585,7 @@ for year in [2050]:
                 em_baseline.groupby("Region").sum().loc[region_list[i]][year] / 1e3
                 - ipcc[i][1][j]
             )
-
+            '''
             figure.add_annotation(
                 text="Epic Index = PD Projected Mitigation Potential / Target Mitigation<br>EI (IPCC Target) = "
                 + str(
@@ -12626,14 +12628,13 @@ for year in [2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
-
+            '''
         figure.update_layout(
             title="Climate Mitigation Potential, "
             + str(year)
-            + ", "
-            + "DAU-NCS, "
+            + ", " + "NCSmax, "
             + region_list[i],
-            title_x=0.5,
+            title_x=0.3,
             title_y=0.95,
             xaxis={"title": "GtCO2e mitigated in " + str(year)},
             barmode="stack",
@@ -12644,7 +12645,9 @@ for year in [2050]:
                 bordercolor="rgba(255, 255, 255, 0)",
             ),
             showlegend=False,
-            margin_b=120,
+            margin_b=0,
+            margin_t=50,
+            margin_r=15
         )
 
         if show_figs is True:
@@ -25064,7 +25067,7 @@ em_ncsm.loc[225:335, 1] = (
     ]
     .sum()
     / 3670
-).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax"] / 3670).values
+).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "NCSmax2"] / 3670).values
 
 em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
@@ -25531,7 +25534,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="NCSmax",
+            name="NCSmax+eCDR",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsm.loc[data_end_year:, "CO2"],
@@ -26250,7 +26253,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="NCSmax",
+            name="NCSmax+eCDR",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Cncsm.loc[data_end_year:, "CO2e"],
@@ -26971,7 +26974,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="NCSmax",
+            name="NCSmax+eCDR",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Fncsm.loc[data_end_year:, "CO2e"],
@@ -27730,7 +27733,7 @@ if show_ffi == True:
 if show_ncsm == True:
     fig.add_trace(
         go.Scatter(
-            name="NCSmax",
+            name="NCSmax+eCDR",
             line=dict(width=3, color=cl["DAU-NCS+FFI"][0], dash=cl["DAU-NCS+FFI"][1]),
             x=np.arange(data_end_year, long_proj_end_year + 1, 1),
             y=Tncsm.loc[data_end_year:, "CO2e"],
