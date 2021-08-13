@@ -28227,7 +28227,7 @@ afolu_costs.index.name = "Scenario"
 
 costs = cdr_costs.append(afolu_costs).groupby("Scenario").sum()
 
-# Plot NCS
+# Plot NCS annual
 
 # region
 
@@ -28290,7 +28290,7 @@ if show_figs is True:
 
 # endregion
 
-# Plot eCDR
+# Plot eCDR annual
 
 # region
 
@@ -28353,7 +28353,7 @@ if show_figs is True:
 
 # endregion
 
-# Plot Total
+# Plot Total annual
 
 # region
 
@@ -28401,6 +28401,197 @@ fig.update_layout(
     },
     # xaxis={"title": "Year"},
     yaxis={"title": "Cost [$T]"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+    margin_b=0,
+    margin_t=70,
+    margin_l=15,
+    margin_r=15,
+)
+
+if show_figs is True:
+    fig.show()
+
+# endregion
+
+# Plot NCS cumulative
+
+# region
+
+scenario = scenario
+start_year = 2020
+i = 0
+
+colors = px.colors.qualitative.Vivid
+
+fig = (afolu_costs.clip(lower=0)).cumsum(axis=1).loc[:, :2060]
+
+fig.loc["DAU21"] = fig.loc["DAU21"] + 0.06
+
+fig = fig.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+
+fig = go.Figure()
+
+for x in fig2["Scenario"].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=x,
+            line=dict(
+                width=3,
+                color=colors[
+                    pd.DataFrame(fig2["Scenario"].unique())
+                    .set_index(0)
+                    .index.get_loc(x)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2["Scenario"] == x]["Cost"],
+            fill="none",
+            stackgroup=x,
+            legendgroup=x,
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "NCS Cumulative Cost, World ",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    # xaxis={"title": "Year"},
+    yaxis={"title": "Cumulative Cost [$T]"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+    margin_b=0,
+    margin_t=70,
+    margin_l=15,
+    margin_r=15,
+)
+
+if show_figs is True:
+    fig.show()
+
+# endregion
+
+# Plot eCDR cumulative
+
+# region
+
+scenario = scenario
+start_year = 2020
+i = 0
+
+colors = px.colors.qualitative.Vivid
+
+fig = cdr_costs.clip(lower=0).cumsum(axis=1).loc[:, :2060]
+
+fig = fig.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+
+fig = go.Figure()
+
+for x in fig2["Scenario"].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=x,
+            line=dict(
+                width=3,
+                color=colors[
+                    pd.DataFrame(fig2["Scenario"].unique())
+                    .set_index(0)
+                    .index.get_loc(x)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2["Scenario"] == x]["Cost"],
+            fill="none",
+            stackgroup=x,
+            legendgroup=x,
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "eCDR Cumulative Cost, World ",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    # xaxis={"title": "Year"},
+    yaxis={"title": "Cumulative Cost [$T]"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+    margin_b=0,
+    margin_t=70,
+    margin_l=15,
+    margin_r=15,
+)
+
+if show_figs is True:
+    fig.show()
+
+# endregion
+
+# Plot Total cumulative
+
+# region
+
+scenario = scenario
+start_year = 2020
+i = 0
+
+colors = px.colors.qualitative.Vivid
+
+fig = costs.clip(lower=0).cumsum(axis=1).loc[:, :2060]
+
+fig = fig.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+
+fig = go.Figure()
+
+for x in fig2["Scenario"].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=x,
+            line=dict(
+                width=3,
+                color=colors[
+                    pd.DataFrame(fig2["Scenario"].unique())
+                    .set_index(0)
+                    .index.get_loc(x)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2["Scenario"] == x]["Cost"],
+            fill="none",
+            stackgroup=x,
+            legendgroup=x,
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "Total Cumulative Cost (NCS + eCDR), World ",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    # xaxis={"title": "Year"},
+    yaxis={"title": "Cumulative Cost [$T]"},
 )
 
 fig.update_layout(
