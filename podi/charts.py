@@ -1,5 +1,6 @@
 # region
 
+from os import confstr_names
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy.random import random_integers
@@ -184,7 +185,7 @@ fig.update_layout(
         "x": 0.5,
         "y": 0.99,
     },
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "% Adoption"},
     showlegend=True,
 )
@@ -231,7 +232,7 @@ for i in range(0, len(region_list)):
     fig.reset_index(inplace=True)
     fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
 
-"    fig = go.Figure()
+    fig = go.Figure()
 
     fig.add_trace(
         go.Scatter(
@@ -502,7 +503,7 @@ for i in range(0, len(region_list)):
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "% Adoption"},
     )
 
@@ -511,9 +512,9 @@ for i in range(0, len(region_list)):
         margin_b=0,
         margin_t=100,
         margin_l=15,
-        margin_r=15
+        margin_r=15,
     )
-    '''
+    """
     fig.add_annotation(
         text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture, Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available; <br><b>CDR</b>: percent of total mitigation needed to meet net emissions targets.",
         xref="paper",
@@ -527,9 +528,9 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-    '''
+    """
     if show_figs is True:
-        fig.show()"
+        fig.show()
     if save_figs is True:
         pio.write_html(
             fig,
@@ -784,9 +785,10 @@ for i in range(0, len(region_list)):
                 x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Carbon Dioxide Removal")][
-                    "% Adoption"
-                ],
+                y=fig2[
+                    (fig2["Year"] <= 2020)
+                    & (fig2["Sector"] == "Carbon Dioxide Removal")
+                ]["% Adoption"],
                 fill="none",
                 stackgroup="seven",
                 legendgroup="Carbon Dioxide Removal",
@@ -803,9 +805,10 @@ for i in range(0, len(region_list)):
                 x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
                     "Year"
                 ],
-                y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Carbon Dioxide Removal")][
-                    "% Adoption"
-                ],
+                y=fig2[
+                    (fig2["Year"] >= 2020)
+                    & (fig2["Sector"] == "Carbon Dioxide Removal")
+                ]["% Adoption"],
                 fill="none",
                 stackgroup="fourteen",
                 legendgroup="Carbon Dioxide Removal",
@@ -903,11 +906,12 @@ for i in range(0, len(region_list)):
                     y=fig2[fig2["Metric"] == x]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
-                    legendgroup=x, fillcolor= colors[
-                            pd.DataFrame(fig2["Metric"].unique())
-                            .set_index(0)
-                            .index.get_loc(x)
-                        ]
+                    legendgroup=x,
+                    fillcolor=colors[
+                        pd.DataFrame(fig2["Metric"].unique())
+                        .set_index(0)
+                        .index.get_loc(x)
+                    ],
                 )
             )
 
@@ -953,7 +957,7 @@ for i in range(0, len(region_list)):
                 "x": 0.5,
                 "y": 0.99,
             },
-            #xaxis={"title": "Year"},
+            # xaxis={"title": "Year"},
             yaxis={"title": "% Adoption"},
             legend={"traceorder": "reversed"},
         )
@@ -967,7 +971,7 @@ for i in range(0, len(region_list)):
             margin_l=15,
             margin_r=15,
         )
-        '''
+        """
         fig.add_annotation(
             text="",
             xref="paper",
@@ -981,7 +985,7 @@ for i in range(0, len(region_list)):
             bgcolor="#ffffff",
             opacity=1,
         )
-        '''
+        """
         """
         fig.add_vrect(
             x0=start_year, x1=2020, fillcolor="grey", opacity=0.6, line_width=0
@@ -1323,7 +1327,7 @@ for i in range(0, len(region_list)):
                 "x": 0.5,
                 "y": 0.99,
             },
-            #xaxis={"title": "Year"},
+            # xaxis={"title": "Year"},
             yaxis={"title": "% Adoption"},
             legend={"traceorder": "reversed"},
         )
@@ -1335,7 +1339,7 @@ for i in range(0, len(region_list)):
             margin_b=0,
             margin_t=100,
             margin_l=15,
-            margin_r=15
+            margin_r=15,
         )
         """
         fig.add_annotation(
@@ -1645,7 +1649,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport-Nonelectric"]["TFC, " + unit[0]],
             fill="tozeroy",
-            stackgroup="one", fillcolor="#7AA8B8"
+            stackgroup="one",
+            fillcolor="#7AA8B8",
         )
     )
 
@@ -1656,7 +1661,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport-Electricity"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="#bbe272"
+            stackgroup="one",
+            fillcolor="#bbe272",
         )
     )
 
@@ -1667,7 +1673,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings-Heat"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="#F58518"
+            stackgroup="one",
+            fillcolor="#F58518",
         )
     )
 
@@ -1678,7 +1685,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings-Electricity"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="#54A24B"
+            stackgroup="one",
+            fillcolor="#54A24B",
         )
     )
 
@@ -1689,7 +1697,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry-Heat"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="#60738C"
+            stackgroup="one",
+            fillcolor="#60738C",
         )
     )
 
@@ -1700,7 +1709,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry-Electricity"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="#B279A2"
+            stackgroup="one",
+            fillcolor="#B279A2",
         )
     )
 
@@ -1711,13 +1721,15 @@ for i in range(0, len(region_list)):
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
-        legend=dict(orientation="h", yanchor="bottom", y=1.03, x=0.25, font=dict(size=10)),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.03, x=0.25, font=dict(size=10)
+        ),
         margin_b=0,
         margin_t=70,
         margin_l=15,
-        margin_r=15
+        margin_r=15,
     )
     """
     fig.add_vrect(
@@ -2091,7 +2103,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity-Solar"]["TFC, " + unit[0]],
             fill="tozeroy",
-            stackgroup="one", fillcolor="rgb(136,204,238)"
+            stackgroup="one",
+            fillcolor="rgb(136,204,238)",
         )
     )
 
@@ -2102,7 +2115,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity-Wind"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="rgb(204,102,119)"
+            stackgroup="one",
+            fillcolor="rgb(204,102,119)",
         )
     )
 
@@ -2113,7 +2127,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity-Nuclear"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="rgb(221,204,119)"
+            stackgroup="one",
+            fillcolor="rgb(221,204,119)",
         )
     )
 
@@ -2124,7 +2139,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity-Other ren"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="rgb(17,119,51)"
+            stackgroup="one",
+            fillcolor="rgb(17,119,51)",
         )
     )
 
@@ -2135,7 +2151,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity-Fossil fuels"]["TFC, " + unit[0]],
             fill="tonexty",
-            stackgroup="one", fillcolor="rgb(51,34,136)"
+            stackgroup="one",
+            fillcolor="rgb(51,34,136)",
         )
     )
     """
@@ -2207,18 +2224,20 @@ for i in range(0, len(region_list)):
     """
     fig.update_layout(
         title={
-            "text": "Electricity Supply, " + "DAU21, " + region_list[i].replace(" ", ""),
+            "text": "Electricity Supply, "
+            + "DAU21, "
+            + region_list[i].replace(" ", ""),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
         legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
         margin_b=0,
         margin_t=80,
         margin_l=15,
-        margin_r=15
+        margin_r=15,
     )
     """
     fig.add_vrect(x0=start_year, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
@@ -2687,7 +2706,7 @@ for i in range(0, len(region_list)):
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
     )
 
@@ -2698,7 +2717,7 @@ for i in range(0, len(region_list)):
         margin_l=15,
         margin_r=15,
     )
-    '''
+    """
     fig.add_annotation(
         text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
@@ -2712,7 +2731,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-    '''
+    """
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -2903,11 +2922,12 @@ for i in range(0, len(region_list)):
                     x=fig2["Year"],
                     y=fig2[fig2["Metric"] == sub]["Emissions, GtCO2e"],
                     fill="tonexty",
-                    stackgroup="1", fillcolor=colors[
-                            pd.DataFrame(fig2["Metric"].unique())
-                            .set_index(0)
-                            .index.get_loc(sub)
-                        ]
+                    stackgroup="1",
+                    fillcolor=colors[
+                        pd.DataFrame(fig2["Metric"].unique())
+                        .set_index(0)
+                        .index.get_loc(sub)
+                    ],
                 )
             )
 
@@ -2923,7 +2943,7 @@ for i in range(0, len(region_list)):
                 "x": 0.5,
                 "y": 0.99,
             },
-            #xaxis={"title": "Year"},
+            # xaxis={"title": "Year"},
             yaxis={"title": "GtCO2e/yr"},
             showlegend=True,
             legend=dict(
@@ -3770,7 +3790,7 @@ ndc_commit = [
 ]
 i = 0
 
-em_hist[2020] = em_hist.loc[:,2019]
+em_hist[2020] = em_hist.loc[:, 2019]
 
 for i in range(0, len(region_list)):
 
@@ -3968,7 +3988,8 @@ for i in range(0, len(region_list)):
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
                 fill="tonexty",
-                stackgroup="one", fillcolor=cl["V7: CDR"][0]
+                stackgroup="one",
+                fillcolor=cl["V7: CDR"][0],
             )
         )
 
@@ -4073,7 +4094,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V6: Forests & Wetlands"][0]
+            stackgroup="one",
+            fillcolor=cl["V6: Forests & Wetlands"][0],
         )
     )
     fig.add_trace(
@@ -4083,7 +4105,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V5: Agriculture"][0]
+            stackgroup="one",
+            fillcolor=cl["V5: Agriculture"][0],
         )
     )
     fig.add_trace(
@@ -4093,7 +4116,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V4: Industry"][0]
+            stackgroup="one",
+            fillcolor=cl["V4: Industry"][0],
         )
     )
     fig.add_trace(
@@ -4103,7 +4127,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V3: Buildings"][0]
+            stackgroup="one",
+            fillcolor=cl["V3: Buildings"][0],
         )
     )
     fig.add_trace(
@@ -4113,7 +4138,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V2: Transport"][0]
+            stackgroup="one",
+            fillcolor=cl["V2: Transport"][0],
         )
     )
     fig.add_trace(
@@ -4123,7 +4149,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V1: Electricity"][0]
+            stackgroup="one",
+            fillcolor=cl["V1: Electricity"][0],
         )
     )
     fig.add_trace(
@@ -4394,8 +4421,7 @@ for i in range(0, len(region_list)):
         """
     # endregion
 
-
-    '''
+    """
     fig.add_annotation(
         text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
@@ -4409,7 +4435,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-    '''
+    """
     fig.update_layout(
         legend=dict(
             orientation="h",
@@ -4432,14 +4458,14 @@ for i in range(0, len(region_list)):
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
     )
 
     if show_figs is True:
         fig.show()
-        fig.write_image('podi/Figure A.svg')
-        fig.write_image('podi/Figure 4.svg')
+        fig.write_image("podi/Figure A.svg")
+        fig.write_image("podi/Figure 4.svg")
     if save_figs is True:
         pio.write_html(
             fig,
@@ -5934,7 +5960,7 @@ fig.update_layout(
         "x": 0.5,
         "y": 0.99,
     },
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "ppm CO2"},
 )
 
@@ -6252,7 +6278,7 @@ fig.update_layout(
         "x": 0.5,
         "y": 0.99,
     },
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "ppm CO2e"},
 )
 
@@ -6564,7 +6590,7 @@ fig.add_trace(
 
 fig.update_layout(
     title={"text": "Radiative Forcing", "xanchor": "center", "x": 0.5, "y": 0.99},
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "W/m2"},
 )
 
@@ -7076,7 +7102,7 @@ fig.add_trace(
 
 fig.update_layout(
     title={"text": "Global Mean Temperature", "xanchor": "center", "x": 0.5, "y": 0.99},
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
 )
 
@@ -7091,7 +7117,7 @@ fig.update_layout(
 )
 
 if show_annotations is True:
-    '''
+    """
     fig.add_annotation(
         text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
         xref="paper",
@@ -7106,7 +7132,7 @@ if show_annotations is True:
         bgcolor="#ffffff",
         opacity=1,
     )
-    '''
+    """
 if show_figs is True:
     fig.show()
 if save_figs is True:
@@ -7410,7 +7436,7 @@ for i in range(0, len(region_list)):
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "% Adoption"},
     )
 
@@ -7421,7 +7447,7 @@ for i in range(0, len(region_list)):
         margin_l=15,
         margin_r=15,
     )
-    '''
+    """
     fig.add_annotation(
         text="Adoption rates are represented as: <b>Electricity, Transport, Buildings, and Industry</b>: percent of energy demand from renewable resources; <br><b>Regenerative Agriculture, Forests & Wetlands</b>: percent of maximum estimated extent of mitigation available; <br><b>CDR</b>: percent of total mitigation needed to meet net emissions targets.",
         xref="paper",
@@ -7435,7 +7461,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-    '''
+    """
     if show_figs is True:
         fig.show()
     if save_figs is True:
@@ -8230,7 +8256,8 @@ for i in range(0, len(region_list)):
                 x=fig_pl2["Year"],
                 y=fig_pl2[fig_pl2["Sector"] == "CDR"]["Emissions, GtCO2e"],
                 fill="tonexty",
-                stackgroup="onepl", fillcolor= cl["V7: CDR"][0]
+                stackgroup="onepl",
+                fillcolor=cl["V7: CDR"][0],
             )
         )
 
@@ -8335,7 +8362,8 @@ for i in range(0, len(region_list)):
             x=fig_pl2["Year"],
             y=fig_pl2[fig_pl2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="onepl", fillcolor = cl["V6: Forests & Wetlands"][0]
+            stackgroup="onepl",
+            fillcolor=cl["V6: Forests & Wetlands"][0],
         )
     )
     fig_pl.add_trace(
@@ -8345,7 +8373,8 @@ for i in range(0, len(region_list)):
             x=fig_pl2["Year"],
             y=fig_pl2[fig_pl2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="onepl", fillcolor = cl["V5: Agriculture"][0]
+            stackgroup="onepl",
+            fillcolor=cl["V5: Agriculture"][0],
         )
     )
     fig_pl.add_trace(
@@ -8355,7 +8384,8 @@ for i in range(0, len(region_list)):
             x=fig_pl2["Year"],
             y=fig_pl2[fig_pl2["Sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="onepl", fillcolor = cl["V4: Industry"][0]
+            stackgroup="onepl",
+            fillcolor=cl["V4: Industry"][0],
         )
     )
     fig_pl.add_trace(
@@ -8365,7 +8395,8 @@ for i in range(0, len(region_list)):
             x=fig_pl2["Year"],
             y=fig_pl2[fig_pl2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="onepl", fillcolor = cl["V3: Buildings"][0]
+            stackgroup="onepl",
+            fillcolor=cl["V3: Buildings"][0],
         )
     )
     fig_pl.add_trace(
@@ -8375,7 +8406,8 @@ for i in range(0, len(region_list)):
             x=fig_pl2["Year"],
             y=fig_pl2[fig_pl2["Sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="onepl", fillcolor = cl["V2: Transport"][0]
+            stackgroup="onepl",
+            fillcolor=cl["V2: Transport"][0],
         )
     )
     fig_pl.add_trace(
@@ -8385,7 +8417,8 @@ for i in range(0, len(region_list)):
             x=fig_pl2["Year"],
             y=fig_pl2[fig_pl2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="onepl", fillcolor = cl["V1: Electricity"][0]
+            stackgroup="onepl",
+            fillcolor=cl["V1: Electricity"][0],
         )
     )
     fig_pl.add_trace(
@@ -8656,11 +8689,11 @@ for i in range(0, len(region_list)):
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
         legend={"traceorder": "reversed"},
     )
-    '''
+    """
     fig_pl.add_annotation(
         text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
@@ -8674,7 +8707,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-    '''
+    """
     fig_pl.update_layout(
         legend=dict(orientation="h", yanchor="bottom", y=1, x=0.05, font=dict(size=10))
     )
@@ -11994,7 +12027,7 @@ for year in [2050]:
         if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
             em_mit_cdr = (
                 pd.Series(
-                    cdr2.loc[region_list[i], "Carbon Dioxide Removal", 'pathway'],
+                    cdr2.loc[region_list[i], "Carbon Dioxide Removal", "pathway"],
                     index=np.arange(data_start_year, long_proj_end_year + 1),
                 )
             ).rename(index="Unnamed 6")
@@ -12321,7 +12354,7 @@ for year in [2050]:
                 line=dict(color="LightSeaGreen", width=3, dash="dot"),
                 name="NDC",
             )
-            '''
+            """
             figure.add_annotation(
                 text="The blue dotted line represents an emissions mitigation goal "
                 + ipcc[i][2][j],
@@ -12336,7 +12369,7 @@ for year in [2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
-            '''
+            """
             # NDC target line
             if region_list[i] in ["US ", "CHINA "]:
 
@@ -12466,7 +12499,7 @@ for year in [2050]:
                 line=dict(color="green", width=3, dash="dot"),
                 name="NDC",
             )
-            '''
+            """
             figure.add_annotation(
                 text="The green dotted line represents an emissions mitigation goal "
                 + ndcs[i][2][j]
@@ -12482,7 +12515,7 @@ for year in [2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
-            '''
+            """
             figure.add_shape(
                 type="line",
                 x0=em_hist.loc[region_list[i], 2019].values[0] / 2000,
@@ -12585,7 +12618,7 @@ for year in [2050]:
                 em_baseline.groupby("Region").sum().loc[region_list[i]][year] / 1e3
                 - ipcc[i][1][j]
             )
-            '''
+            """
             figure.add_annotation(
                 text="Epic Index = PD Projected Mitigation Potential / Target Mitigation<br>EI (IPCC Target) = "
                 + str(
@@ -12628,11 +12661,12 @@ for year in [2050]:
                 bgcolor="#ffffff",
                 opacity=1,
             )
-            '''
+            """
         figure.update_layout(
             title="Climate Mitigation Potential, "
             + str(year)
-            + ", " + "NCSmax, "
+            + ", "
+            + "NCSmax, "
             + region_list[i],
             title_x=0.3,
             title_y=0.95,
@@ -12647,7 +12681,7 @@ for year in [2050]:
             showlegend=False,
             margin_b=0,
             margin_t=50,
-            margin_r=15
+            margin_r=15,
         )
 
         if show_figs is True:
@@ -15312,7 +15346,8 @@ for i in range(0, len(region_list)):
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
                 fill="tonexty",
-                stackgroup="one", fillcolor= cl["V7: CDR"][0]
+                stackgroup="one",
+                fillcolor=cl["V7: CDR"][0],
             )
         )
 
@@ -15417,7 +15452,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V6: Forests & Wetlands"][0]
+            stackgroup="one",
+            fillcolor=cl["V6: Forests & Wetlands"][0],
         )
     )
     fig.add_trace(
@@ -15427,7 +15463,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V5: Agriculture"][0]
+            stackgroup="one",
+            fillcolor=cl["V5: Agriculture"][0],
         )
     )
     fig.add_trace(
@@ -15437,7 +15474,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor= cl["V4: Industry"][0]
+            stackgroup="one",
+            fillcolor=cl["V4: Industry"][0],
         )
     )
     fig.add_trace(
@@ -15447,7 +15485,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor= cl["V3: Buildings"][0]
+            stackgroup="one",
+            fillcolor=cl["V3: Buildings"][0],
         )
     )
     fig.add_trace(
@@ -15457,7 +15496,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor= cl["V2: Transport"][0]
+            stackgroup="one",
+            fillcolor=cl["V2: Transport"][0],
         )
     )
     fig.add_trace(
@@ -15467,7 +15507,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor= cl["V1: Electricity"][0]
+            stackgroup="one",
+            fillcolor=cl["V1: Electricity"][0],
         )
     )
     fig.add_trace(
@@ -15738,7 +15779,7 @@ for i in range(0, len(region_list)):
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
         legend={"traceorder": "reversed"},
     )
@@ -20513,7 +20554,6 @@ for i in range(0, len(region_list)):
         )
     )
 
-    
     if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
 
         fig.add_trace(
@@ -20523,7 +20563,8 @@ for i in range(0, len(region_list)):
                 x=fig2["Year"],
                 y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
                 fill="tonexty",
-                stackgroup="one", fillcolor= cl["V7: CDR"][0]
+                stackgroup="one",
+                fillcolor=cl["V7: CDR"][0],
             )
         )
 
@@ -20642,7 +20683,6 @@ for i in range(0, len(region_list)):
                 opacity=1,
             )
             """
-    
 
     fig.add_trace(
         go.Scatter(
@@ -20651,7 +20691,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V6: Forests & Wetlands"][0]
+            stackgroup="one",
+            fillcolor=cl["V6: Forests & Wetlands"][0],
         )
     )
     fig.add_trace(
@@ -20661,7 +20702,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V5: Agriculture"][0]
+            stackgroup="one",
+            fillcolor=cl["V5: Agriculture"][0],
         )
     )
     fig.add_trace(
@@ -20671,7 +20713,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V4: Industry"][0]
+            stackgroup="one",
+            fillcolor=cl["V4: Industry"][0],
         )
     )
     fig.add_trace(
@@ -20681,7 +20724,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V3: Buildings"][0]
+            stackgroup="one",
+            fillcolor=cl["V3: Buildings"][0],
         )
     )
     fig.add_trace(
@@ -20691,7 +20735,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V2: Transport"][0]
+            stackgroup="one",
+            fillcolor=cl["V2: Transport"][0],
         )
     )
     fig.add_trace(
@@ -20701,7 +20746,8 @@ for i in range(0, len(region_list)):
             x=fig2["Year"],
             y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
-            stackgroup="one", fillcolor=cl["V1: Electricity"][0]
+            stackgroup="one",
+            fillcolor=cl["V1: Electricity"][0],
         )
     )
     fig.add_trace(
@@ -20758,7 +20804,7 @@ for i in range(0, len(region_list)):
             )
         )
         """
-        '''
+        """
         fig.add_trace(
             go.Scatter(
                 name="SR1.5",
@@ -20772,7 +20818,7 @@ for i in range(0, len(region_list)):
                 legendgroup="two",
             )
         )
-        '''
+        """
         fig.add_trace(
             go.Scatter(
                 name=scen,
@@ -20985,11 +21031,11 @@ for i in range(0, len(region_list)):
             "x": 0.5,
             "y": 0.99,
         },
-        #xaxis={"title": "Year"},
+        # xaxis={"title": "Year"},
         yaxis={"title": "GtCO2e/yr"},
         legend={"traceorder": "reversed"},
     )
-    '''
+    """
     fig.add_annotation(
         text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
         xref="paper",
@@ -21003,7 +21049,7 @@ for i in range(0, len(region_list)):
         bgcolor="#ffffff",
         opacity=1,
     )
-    '''
+    """
     fig.update_layout(
         legend=dict(orientation="h", yanchor="bottom", y=1, x=0.05, font=dict(size=10))
     )
@@ -25567,7 +25613,7 @@ fig.update_layout(
         "x": 0.5,
         "y": 0.99,
     },
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "ppm CO2"},
 )
 
@@ -26286,7 +26332,7 @@ fig.update_layout(
         "x": 0.5,
         "y": 0.99,
     },
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "ppm CO2e"},
 )
 
@@ -27002,7 +27048,7 @@ if show_ncsmffi == True:
 
 fig.update_layout(
     title={"text": "Radiative Forcing", "xanchor": "center", "x": 0.5, "y": 0.99},
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "W/m2"},
 )
 
@@ -27535,9 +27581,7 @@ Trafw["CO2e"] = curve_smooth(
 Tffi["CO2e"] = curve_smooth(
     pd.DataFrame(np.sum(Tffi, axis=1)).T, "quadratic", curvenum
 ).T
-Tncsm["CO2e"] = curve_smooth(
-    pd.DataFrame(np.sum(Tncsm, axis=1)).T, "quadratic", 7
-).T
+Tncsm["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tncsm, axis=1)).T, "quadratic", 7).T
 Tncsmffi["CO2e"] = curve_smooth(
     pd.DataFrame(np.sum(Tncsmffi, axis=1)).T, "quadratic", curvenum
 ).T
@@ -27895,7 +27939,7 @@ fig.add_trace(
 
 fig.update_layout(
     title={"text": "Global Mean Temperature", "xanchor": "center", "x": 0.5, "y": 0.99},
-    #xaxis={"title": "Year"},
+    # xaxis={"title": "Year"},
     yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
 )
 
@@ -27934,6 +27978,441 @@ if save_figs is True:
         ),
         auto_open=False,
     )
+
+# endregion
+
+# endregion
+
+
+#############
+# CDR COSTS #
+#############
+
+# region
+
+# eCDR
+
+# region
+
+cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").set_index(
+    ["Region", "Sector", "Scenario"]
+)
+cdr_pathway.columns = cdr_pathway.columns.astype(int)
+
+costs = []
+
+for scen in ["pathway", "dauffi", "V5", "V6", "daupl", "NCSmax"]:
+    cdr_i, cdr_cost_i, cdr_energy_i = cdr_mix(
+        cdr_pathway.loc["World ", "Carbon Dioxide Removal", scen].loc[2020:].to_list(),
+        grid_em_def,
+        heat_em_def,
+        transport_em_def,
+        fuel_em_def,
+        2020,
+        long_proj_end_year,
+    )
+
+    costs = pd.DataFrame(costs).append(
+        pd.DataFrame(cdr_cost_i).T.rename(index={0: scen})
+    )
+
+costs.columns = np.arange(2020, 2101, 1)
+costs = (curve_smooth(-costs, "quadratic", 7)).clip(lower=0) / 1e6
+costs.rename(index={"pathway": "DAU21", "dauffi": "V4", "daupl": "PL"}, inplace=True)
+costs.index.name = "Scenario"
+
+cdr_costs = costs
+
+# endregion
+
+# NCS
+
+# region
+costs_ra = pd.Series([0, 0, 0, 0, 0, 55, 55, 22, 30, 5, 30, 55, 55])
+costs_fw = pd.Series([22, 24, 22, 55, 0, 30, 55, 36])
+costs_fwra = pd.Series(
+    [22, 24, 22, 55, 0, 30, 55, 36, 0, 0, 0, 0, 0, 55, 55, 22, 30, 5, 30, 55, 55]
+)
+costs_rafw = pd.Series(
+    [0, 0, 0, 0, 0, 55, 55, 22, 30, 5, 30, 55, 55, 22, 24, 22, 55, 0, 30, 55, 36]
+)
+
+
+afolu_em_mit_dau21 = (
+    (
+        (
+            afolu_em1.loc[
+                "World ",
+                ["Regenerative Agriculture", "Forests & Wetlands"],
+                slice(None),
+                slice(None),
+                "baseline",
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+            - afolu_em1.loc[
+                "World ",
+                ["Regenerative Agriculture", "Forests & Wetlands"],
+                slice(None),
+                slice(None),
+                "pathway",
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+        )
+        .groupby(["Region", "Sector", "Metric"])
+        .sum()
+    )
+    .multiply(costs_fwra.T.values, "index")
+    .sum()
+)
+
+afolu_em_mit_v4 = (
+    (
+        (
+            afolu_em1.loc[
+                "World ",
+                ["Regenerative Agriculture", "Forests & Wetlands"],
+                slice(None),
+                slice(None),
+                "baseline",
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+            - afolu_em1.loc[
+                "World ",
+                ["Regenerative Agriculture", "Forests & Wetlands"],
+                slice(None),
+                slice(None),
+                "pathway",
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+        )
+        * 0
+    )
+    .groupby(["Region", "Sector", "Metric"])
+    .sum()
+    .sum()
+)
+
+afolu_em_mit_v5 = (
+    (
+        (
+            afolu_em1.loc[
+                "World ", ["Forests & Wetlands"], slice(None), slice(None), "baseline"
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+            - afolu_em1.loc[
+                "World ", ["Forests & Wetlands"], slice(None), slice(None), "pathway"
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+        ).append(
+            afolu_em.loc[
+                "World ",
+                ["Regenerative Agriculture"],
+                slice(None),
+                slice(None),
+                "baseline",
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+            - afolu_em.loc[
+                "World ",
+                ["Regenerative Agriculture"],
+                slice(None),
+                slice(None),
+                "pathway",
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+        )
+    )
+    .groupby(["Region", "Sector", "Metric"])
+    .sum()
+).multiply(costs_fwra.T.values, "index").sum() - afolu_em_mit_dau21
+
+afolu_em_mit_v6 = (
+    (
+        (
+            afolu_em.loc[
+                "World ", ["Forests & Wetlands"], slice(None), slice(None), "baseline"
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+            - afolu_em.loc[
+                "World ", ["Forests & Wetlands"], slice(None), slice(None), "pathway"
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+        ).append(
+            afolu_em1.loc[
+                "World ",
+                ["Regenerative Agriculture"],
+                slice(None),
+                slice(None),
+                "baseline",
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+            - afolu_em1.loc[
+                "World ",
+                ["Regenerative Agriculture"],
+                slice(None),
+                slice(None),
+                "pathway",
+            ]
+            .loc[:, 2020:]
+            .droplevel("Scenario")
+        )
+    )
+    .groupby(["Region", "Sector", "Metric"])
+    .sum()
+).multiply(costs_fwra.T.values, "index").sum() - afolu_em_mit_dau21
+
+afolu_em_mit_v5v6 = (
+    (
+        afolu_em.loc[
+            "World ",
+            ["Forests & Wetlands", "Regenerative Agriculture"],
+            slice(None),
+            slice(None),
+            "baseline",
+        ]
+        .loc[:, 2020:]
+        .droplevel("Scenario")
+        - afolu_em.loc[
+            "World ",
+            ["Forests & Wetlands", "Regenerative Agriculture"],
+            slice(None),
+            slice(None),
+            "pathway",
+        ]
+        .loc[:, 2020:]
+        .droplevel("Scenario")
+    )
+    .groupby(["Region", "Sector", "Metric"])
+    .sum()
+).multiply(costs_fwra.T.values, "index").sum() - afolu_em_mit_dau21
+
+"""
+em_pathway = afolu_em1.loc[slice(None), slice(None),slice(None), slice(None),'pathway',:]
+em_baseline = afolu_em1.loc[slice(None), slice(None),slice(None), slice(None),'baseline',:]
+"""
+# run section to get em_mitigated_alt for PL
+
+afolu_em_mit_pl = (em_mitigated_alt.loc[["World "]].loc[:, 2020:]).multiply(
+    costs_fwra.T.values, "index"
+).sum() - afolu_em_mit_dau21
+
+afolu_costs = (
+    pd.DataFrame(
+        [
+            afolu_em_mit_dau21 * 0,
+            afolu_em_mit_v4 * 0,
+            afolu_em_mit_v5,
+            afolu_em_mit_v6,
+            afolu_em_mit_pl,
+            afolu_em_mit_v5v6,
+        ]
+    ).rename(index={0: "DAU21", 1: "V4", 2: "V5", 3: "V6", 4: "PL", 5: "NCSmax"})
+    / 1e6
+)
+
+afolu_costs.index.name = "Scenario"
+
+# endregion
+
+costs = cdr_costs.append(afolu_costs).groupby("Scenario").sum()
+
+# Plot NCS
+
+# region
+
+scenario = scenario
+start_year = 2020
+i = 0
+
+colors = px.colors.qualitative.Vivid
+
+fig = afolu_costs.clip(lower=0)
+
+fig = fig.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+
+fig = go.Figure()
+
+for x in fig2["Scenario"].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=x,
+            line=dict(
+                width=3,
+                color=colors[
+                    pd.DataFrame(fig2["Scenario"].unique())
+                    .set_index(0)
+                    .index.get_loc(x)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2["Scenario"] == x]["Cost"],
+            fill="none",
+            stackgroup=x,
+            legendgroup=x,
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "NCS Cost, World ",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    # xaxis={"title": "Year"},
+    yaxis={"title": "Cost [$T]"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+    margin_b=0,
+    margin_t=70,
+    margin_l=15,
+    margin_r=15,
+)
+
+if show_figs is True:
+    fig.show()
+
+# endregion
+
+# Plot eCDR
+
+# region
+
+scenario = scenario
+start_year = 2020
+i = 0
+
+colors = px.colors.qualitative.Vivid
+
+fig = cdr_costs.clip(lower=0)
+
+fig = fig.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+
+fig = go.Figure()
+
+for x in fig2["Scenario"].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=x,
+            line=dict(
+                width=3,
+                color=colors[
+                    pd.DataFrame(fig2["Scenario"].unique())
+                    .set_index(0)
+                    .index.get_loc(x)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2["Scenario"] == x]["Cost"],
+            fill="none",
+            stackgroup=x,
+            legendgroup=x,
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "eCDR Cost, World ",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    # xaxis={"title": "Year"},
+    yaxis={"title": "Cost [$T]"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+    margin_b=0,
+    margin_t=70,
+    margin_l=15,
+    margin_r=15,
+)
+
+if show_figs is True:
+    fig.show()
+
+# endregion
+
+# Plot Total
+
+# region
+
+scenario = scenario
+start_year = 2020
+i = 0
+
+colors = px.colors.qualitative.Vivid
+
+fig = costs.clip(lower=0)
+
+fig = fig.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+
+fig = go.Figure()
+
+for x in fig2["Scenario"].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=x,
+            line=dict(
+                width=3,
+                color=colors[
+                    pd.DataFrame(fig2["Scenario"].unique())
+                    .set_index(0)
+                    .index.get_loc(x)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2["Scenario"] == x]["Cost"],
+            fill="none",
+            stackgroup=x,
+            legendgroup=x,
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "Total Cost, World ",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    # xaxis={"title": "Year"},
+    yaxis={"title": "Cost [$T]"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+    margin_b=0,
+    margin_t=70,
+    margin_l=15,
+    margin_r=15,
+)
+
+if show_figs is True:
+    fig.show()
 
 # endregion
 
