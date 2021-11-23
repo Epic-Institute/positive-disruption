@@ -3745,9 +3745,9 @@ ndcs = [
     [(2030, 2050), (24, 0), ("50% by 2030", "Net-zero by 2050")],
     (3, 3),
     [
-        (2025, 2050, 2030, 2050),
-        (4.86, 2.84, 2.84, 0),
-        ("NDC", "NDC 2050 est.", "50% by 2030", "Net-zero by 2050"),
+        (2030, 2050),
+        (2.84, 0),
+        ("50% by 2030", "Net-zero by 2050"),
     ],
     (3, 3),
     (2030, 1.2),
@@ -3864,6 +3864,20 @@ for i in range(0, len(region_list)):
         )
 
     elif region_list[i] in ["US ", "CHINA ", "EUR "]:
+        cdr2 = (
+            pd.read_csv("podi/data/cdr_curve.csv")
+            .set_index(["Region", "Sector", "Scenario"])
+            .fillna(0)
+        )
+        cdr2.columns = cdr2.columns.astype(int)
+
+        em_mit_cdr = (
+            cdr2.loc[region_list[i], "Carbon Dioxide Removal", scenario, :]
+            .sum()
+            .rename("CDR")
+        )        
+        
+        '''
         em_mit_cdr = (
             cdr.loc[region_list[i], "Carbon Dioxide Removal", slice(None), scenario, :]
             .sum()
@@ -3873,7 +3887,7 @@ for i in range(0, len(region_list)):
 
         em_mit_cdr[2019] = 0
         em_mit_cdr[2020] = 0
-
+        '''
         em_mit = (
             pd.DataFrame(
                 [
@@ -4188,7 +4202,7 @@ for i in range(0, len(region_list)):
     if region_list[i] in ["World ", "US ", "CHINA ", "EUR "]:
         fig.add_trace(
             go.Scatter(
-                name="DAU21",
+                name="NCSmax",
                 line=dict(width=2, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
                 x=pd.Series(
                     em_targets.loc["SSP2-26", near_proj_start_year:].index.values
@@ -4325,8 +4339,9 @@ for i in range(0, len(region_list)):
             legendgroup="two",
         )
     )
-
+    
     if region_list[i] in ["US "]:
+        '''
         fig.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][2]],
@@ -4344,6 +4359,7 @@ for i in range(0, len(region_list)):
                 name=ndcs[i][2][3],
             )
         )
+        '''
         """
         fig.add_annotation(
             text="The NDC commitment is to "
@@ -4419,6 +4435,7 @@ for i in range(0, len(region_list)):
             opacity=1,
         )
         """
+    
     # endregion
 
     """
@@ -4453,7 +4470,7 @@ for i in range(0, len(region_list)):
         margin_l=15,
         margin_r=15,
         title={
-            "text": "Emissions Mitigated, DAU21, " + region_list[i],
+            "text": "Emissions Mitigated, NCSmax, " + region_list[i],
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -28227,6 +28244,17 @@ afolu_costs.index.name = "Scenario"
 
 costs = cdr_costs.append(afolu_costs).groupby("Scenario").sum()
 
+cdr_costs = pd.DataFrame(pd.read_csv("cdr costs line28228.csv")).set_index("Scenario")
+
+afolu_costs = pd.DataFrame(pd.read_csv("afolu costs line28228.csv")).set_index(
+    "Scenario"
+)
+
+costs = pd.DataFrame(pd.read_csv("costs line28228.csv")).set_index("Scenario")
+
+costs.columns = costs.columns.astype(int)
+show_figs = True
+
 # Plot NCS annual
 
 # region
@@ -28595,7 +28623,7 @@ fig.update_layout(
 )
 
 fig.update_layout(
-    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.3, font=dict(size=10)),
     margin_b=0,
     margin_t=70,
     margin_l=15,
