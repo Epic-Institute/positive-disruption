@@ -1,20 +1,24 @@
 #!/usr/bin/env python
 
 # region
+import numpy as np
+import pandas as pd
+import time
 
-from podi.energy_demand import energy_demand, data_start_year
+from numpy import NaN
+
+import podi.data.iea_weo_etl
+import podi.data.iea_weo_em_etl
+import podi.data.gcam_etl
+
+from podi.energy_demand_hist import energy_demand_hist
+from podi.energy_demand import energy_demand
 from podi.energy_supply import energy_supply, long_proj_end_year
 from podi.afolu import afolu
 from podi.afolu2030 import afolu2030
 from podi.emissions import emissions
 from podi.results_analysis import results_analysis
-import podi.data.iea_weo_etl
-import podi.data.iea_weo_em_etl
-import podi.data.gcam_etl
-import pandas as pd
-
 from podi.cdr.cdr_util import (
-    cdr_needed_def,
     grid_em_def,
     heat_em_def,
     transport_em_def,
@@ -23,17 +27,12 @@ from podi.cdr.cdr_util import (
 from podi.cdr.cdr_main import cdr_mix
 from podi.curve_smooth import curve_smooth
 from podi.climate import climate
-import time
-import numpy as np
-from podi.adoption_curve import adoption_curve
-from podi.energy_demand_hist import energy_demand_hist
-from numpy import NaN
 
-pd.set_option("mode.use_inf_as_na", True)
 start_time = time.monotonic()
 
+pd.set_option("mode.use_inf_as_na", True)
+
 region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
-region_list = ["World "]
 
 # endregion
 
