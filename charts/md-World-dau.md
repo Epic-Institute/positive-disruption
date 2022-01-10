@@ -8,6 +8,13 @@
   
   
 
+## Energy
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-World.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "demand-pathway-World.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply-pathway-World.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "supply2-pathway-World.html" height='500' width='150%'></iframe>
+
+
 ## Emissions
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "em2-pathway-World-dau.html" height='500' width='150%'></iframe>  
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emsub-pathway-World-Industry-dau.html" height='500' width='150%'></iframe>  
