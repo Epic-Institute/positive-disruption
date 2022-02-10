@@ -9,14 +9,13 @@ The Positive Disruption model has 6 main components:
 5. results_analysis
 6. charts
 
-These components are run sequentially through main.py, and are meant to compare two scenarios (a 'baseline' and a 'pathway'). The characteristics of baseline and pathway scenarios are determined by their input .csv/.xlsx data files, and can be changed to explore different scenarios. 
-
-'etl' scripts in the data folder are used to format input datafiles from the format in which they are recieved into a format that can be interpreted by the model.
+These components are run sequentially through main.py, and are meant to compare two scenarios (a 'baseline' and a 'pathway'). The characteristics of baseline and pathway scenarios are determined by their input .csv/.xlsx data files, and can be changed to explore different scenarios.
 
 
 1. energy_demand
 
   Takes historical energy demand, projected energy demand, and applies reductions based on measures such as energy efficiency, shift of heat demand to electricity via heat pumps, transport efficiency, shift from fuels to electricity via electric vehicles, solar thermal energy, and biofuels.
+
 
 2. energy_supply
 
@@ -35,7 +34,7 @@ These components are run sequentially through main.py, and are meant to compare 
 
 5. results_analysis
 
-  Estimates adoption rates for each vector and subvector.
+  Estimates adoption rates for each vertical and subvertical.
 
 
 7. charts
