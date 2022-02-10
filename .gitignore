@@ -138,5 +138,6 @@ dmypy.json
 # DS_STORE
 .DS_STORE
 
-# Large file
+# Large files
 iamc_data.csv
+IEA/
