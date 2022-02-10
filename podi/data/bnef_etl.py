@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import pandas as pd
-from podi.data.eia_etl import metric_list
+
+metric_list = []
 
 
 def bnef_etl(data_source, metric):

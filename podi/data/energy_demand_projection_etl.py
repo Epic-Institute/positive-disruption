@@ -3,14 +3,16 @@
 import pandas as pd
 import numpy as np
 from podi.curve_smooth import curve_smooth
-from podi.energy_demand import data_end_year, gcam_region_list
+from podi.energy_demand import data_end_year
 
-input_data = pd.ExcelFile("podi/data/iea_weo2020.xlsx", engine="openpyxl")
+input_data = pd.ExcelFile(
+    "podi/data/World Energy Balances Highlights 2021.xlsx", engine="openpyxl"
+)
 
 region_list = pd.read_csv("podi/data/region_categories.csv", header=None, squeeze=True)
 
 
-def iea_weo_etl(region_list_i, gcam_region_list_i):
+def energy_demand_historical_etl(region_list_i, gcam_region_list_i):
     df = pd.read_excel(input_data, (region_list_i + "_Balance").replace(" ", ""))
     df.columns = df.iloc[3]
     df = df.drop(df.index[0:4])
