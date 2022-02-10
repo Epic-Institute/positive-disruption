@@ -4,38 +4,30 @@
 
 import pandas as pd
 from podi.adoption_curve import adoption_curve
-from podi.data.eia_etl import eia_etl
 from podi.data.bnef_etl import bnef_etl
 from podi.data.heat_etl import heat_etl
 from numpy import NaN
 from podi.curve_smooth import curve_smooth
-from podi.energy_demand import (
-    data_start_year,
-    data_end_year,
-)
 
-near_proj_start_year = data_end_year + 1
-near_proj_end_year = near_proj_start_year + 5
-long_proj_start_year = near_proj_end_year + 1
-long_proj_end_year = 2100
-energy_oversupply_prop = 0.0
 
 # endregion
 
 
-def energy_supply(scenario, energy_demand, region_list):
+def energy_supply(scenario, energy_demand, region_list, data_start_year, data_end_year):
 
     # region
+
+    near_proj_start_year = data_end_year + 1
+    near_proj_end_year = near_proj_start_year + 5
+    long_proj_start_year = near_proj_end_year + 1
+    long_proj_end_year = 2100
+    energy_oversupply_prop = 0.0
 
     parameters = pd.read_csv("podi/data/tech_parameters.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
 
-    elec_gen_data = pd.DataFrame(
-        eia_etl("podi/data/electricity.csv").loc[
-            :, str(data_start_year) : str(data_end_year)
-        ]
-    ).replace(["pathway", "baseline"], 0.0001)
+    elec_gen_data = []  # need to get elec gen data
 
     elec_gen_data.columns = elec_gen_data.columns.astype(int)
 

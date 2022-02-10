@@ -1,14 +1,12 @@
 # region
 
 import pandas as pd
-from podi.energy_demand import data_start_year, data_end_year
-from podi.energy_supply import long_proj_end_year
 from numpy import NaN
 import numpy as np
 
 # endregion
 
-region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
+region_list = pd.read_csv("podi/data/region_categories.csv", header=None, squeeze=True)
 
 
 def rgroup3(data, gas, sector, r, scenario):
@@ -80,6 +78,8 @@ def emissions(
     afolu_em,
     addtl_em,
     targets_em,
+    data_start_year,
+    data_end_year,
 ):
 
     # region
@@ -91,7 +91,7 @@ def emissions(
     ).loc[slice(None), slice(None), slice(None), slice(None), scenario]
 
     em_factors.columns = em_factors.columns.astype(int)
-    em_factors = em_factors.loc[:, data_start_year:long_proj_end_year]
+    em_factors = em_factors.loc[:, data_start_year:2100]
 
     # endregion
 
@@ -162,7 +162,7 @@ def emissions(
     buildings_em = (
         buildings_consump2
         * em_factors[em_factors.index.isin(buildings_consump2.index.values)]
-    ).loc[:, data_start_year:long_proj_end_year]
+    ).loc[:, data_start_year:2100]
 
     # endregion
 
@@ -206,7 +206,7 @@ def emissions(
     industry_em = (
         industry_consump2
         * em_factors[em_factors.index.isin(industry_consump2.index.values)]
-    ).loc[:, data_start_year:long_proj_end_year]
+    ).loc[:, data_start_year:2100]
 
     # endregion
 
@@ -273,7 +273,7 @@ def emissions(
         )
     )
     addtl_em.columns = addtl_em.columns.astype(int)
-    addtl_em = addtl_em.loc[:, data_start_year:long_proj_end_year]
+    addtl_em = addtl_em.loc[:, data_start_year:2100]
 
     # remove AFOLU to avoid double counting
     addtl_em = addtl_em.loc[

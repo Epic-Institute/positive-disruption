@@ -3,8 +3,6 @@
 # region
 
 import pandas as pd
-from podi.energy_demand import data_start_year
-from podi.energy_supply import long_proj_end_year
 from podi.adoption_curve import adoption_curve
 
 # endregion
@@ -24,6 +22,8 @@ def results_analysis(
     cdr,
     em,
     em_mitigated,
+    data_start_year,
+    data_end_year,
 ):
 
     ###################
@@ -388,27 +388,19 @@ def results_analysis(
 
     # endregion
 
-    adoption_curves = grid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-        transport_decarb.loc[:, data_start_year:long_proj_end_year]
+    adoption_curves = grid_decarb.loc[:, data_start_year:2100].append(
+        transport_decarb.loc[:, data_start_year:2100]
     )
     adoption_curves = adoption_curves.append(
-        building_decarb.loc[:, data_start_year:long_proj_end_year]
+        building_decarb.loc[:, data_start_year:2100]
     )
     adoption_curves = adoption_curves.append(
-        industry_decarb.loc[:, data_start_year:long_proj_end_year]
+        industry_decarb.loc[:, data_start_year:2100]
     )
-    adoption_curves = adoption_curves.append(
-        ra_decarb.loc[:, data_start_year:long_proj_end_year]
-    )
-    adoption_curves = adoption_curves.append(
-        fw_decarb.loc[:, data_start_year:long_proj_end_year]
-    )
-    adoption_curves = adoption_curves.append(
-        cdr_decarb.loc[:, data_start_year:long_proj_end_year]
-    )
-    adoption_curves = adoption_curves.append(
-        other_decarb.loc[:, data_start_year:long_proj_end_year]
-    )
+    adoption_curves = adoption_curves.append(ra_decarb.loc[:, data_start_year:2100])
+    adoption_curves = adoption_curves.append(fw_decarb.loc[:, data_start_year:2100])
+    adoption_curves = adoption_curves.append(cdr_decarb.loc[:, data_start_year:2100])
+    adoption_curves = adoption_curves.append(other_decarb.loc[:, data_start_year:2100])
 
     adoption_curves.index.name = "Sector"
     adoption_curves["Region"] = region
@@ -776,29 +768,29 @@ def results_analysis(
             sother_decarb,
             scdr_decarb,
         ],
-    ).loc[:, data_start_year:long_proj_end_year]
+    ).loc[:, data_start_year:2100]
 
     """
-    sadoption_curves = sgrid_decarb.loc[:, data_start_year:long_proj_end_year].append(
-        stransport_decarb.loc[:, data_start_year:long_proj_end_year]
+    sadoption_curves = sgrid_decarb.loc[:, data_start_year:2100].append(
+        stransport_decarb.loc[:, data_start_year:2100]
     )
     sadoption_curves = sadoption_curves.append(
-        sbuilding_decarb.loc[:, data_start_year:long_proj_end_year]
+        sbuilding_decarb.loc[:, data_start_year:2100]
     )
     sadoption_curves = sadoption_curves.append(
-        sindustry_decarb.loc[:, data_start_year:long_proj_end_year]
+        sindustry_decarb.loc[:, data_start_year:2100]
     )
     sadoption_curves = sadoption_curves.append(
-        sra_decarb.loc[:, data_start_year:long_proj_end_year]
+        sra_decarb.loc[:, data_start_year:2100]
     )
     sadoption_curves = sadoption_curves.append(
-        sfw_decarb.loc[:, data_start_year:long_proj_end_year]
+        sfw_decarb.loc[:, data_start_year:2100]
     )
     sadoption_curves = sadoption_curves.append(
-        scdr_decarb.loc[:, data_start_year:long_proj_end_year]
+        scdr_decarb.loc[:, data_start_year:2100]
     )
     sadoption_curves = sadoption_curves.append(
-        sother_decarb.loc[:, data_start_year:long_proj_end_year]
+        sother_decarb.loc[:, data_start_year:2100]
     )
 
     sadoption_curves.index.name = "Sector"

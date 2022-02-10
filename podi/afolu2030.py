@@ -5,10 +5,9 @@ import pandas as pd
 from podi.adoption_curve import adoption_curve
 from numpy import NaN
 import numpy as np
-from podi.energy_supply import long_proj_end_year, data_end_year
 from podi.curve_smooth import curve_smooth
 
-region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
+region_list = pd.read_csv("podi/data/region_categories.csv", header=None, squeeze=True)
 
 
 def rgroup(data, gas, sector, rgroup, scenario):
@@ -843,7 +842,7 @@ def afolu2030(scenario):
                 ],
                 slice(None),
             ]
-            .loc[:, data_end_year + 1 :]
+            .loc[:, 2020 + 1 :]
             .loc[:, ::accel]
         )
         afolu_em_alt.columns = np.arange(2020, 2077, 1)
@@ -949,7 +948,7 @@ def afolu2030(scenario):
                 ],
                 slice(None),
             ]
-            .loc[:, data_end_year + 1 :]
+            .loc[:, 2020 + 1 :]
             .loc[:, ::accel]
         )
         afolu_em_alt.columns = np.arange(2020, 2077, 1)
@@ -1055,7 +1054,7 @@ def afolu2030(scenario):
     afolu_em_end = afolu_em.loc[:, 2077:2100] * 0
     afolu_em_end.loc[:, :] = afolu_em_alt.iloc[:, -1].values[:, None]
     afolu_em_alt = (
-        pd.DataFrame(afolu_em.loc[:, :data_end_year])
+        pd.DataFrame(afolu_em.loc[:, :2020])
         .join(afolu_em_alt)
         .join(afolu_em_end)
     )

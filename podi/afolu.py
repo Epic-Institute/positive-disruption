@@ -4,10 +4,9 @@ import pandas as pd
 from podi.adoption_curve import adoption_curve
 from numpy import NaN
 import numpy as np
-from podi.energy_supply import long_proj_end_year
 from podi.curve_smooth import curve_smooth
 
-region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
+region_list = pd.read_csv("podi/data/region_categories.csv", header=None, squeeze=True)
 
 
 def rgroup(data, gas, sector, rgroup, scenario):
@@ -154,7 +153,7 @@ def afolu(scenario):
             max_extent["Value 3"],
             max_extent["Duration 3 (Years)"],
         ],
-        columns=np.arange(1990, long_proj_end_year + 1, 1),
+        columns=np.arange(1990, 2100 + 1, 1),
         dtype=float,
     )
     max_extent2.loc[:, 1990] = max_extent["Value 1"].values
@@ -215,7 +214,7 @@ def afolu(scenario):
             flux["Value 3"],
             flux["Duration 3 (Years)"],
         ],
-        columns=np.arange(1990, long_proj_end_year + 1, 1),
+        columns=np.arange(1990, 2100 + 1, 1),
         dtype=float,
     )
     flux2.loc[:, 1990] = flux["Value 1"].values

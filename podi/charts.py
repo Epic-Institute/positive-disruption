@@ -7,13 +7,6 @@ from numpy.random import random_integers
 import pandas as pd
 from matplotlib.lines import Line2D
 from scipy import interpolate
-from podi.energy_demand import data_end_year, data_start_year
-from podi.energy_supply import (
-    near_proj_start_year,
-    near_proj_end_year,
-    long_proj_start_year,
-    long_proj_end_year,
-)
 import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
@@ -27,6 +20,8 @@ from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
 from fair.constants import radeff
 
+from podi.energy_demand import energy_demand
+
 annotation_source = [
     "Historical data is from IEA WEO 2020, projections are based on PD21 growth rate assumptions applied to IEA WEO projections for 2020-2040 and GCAM scenario x for 2040-2100"
 ]
@@ -34,8 +29,6 @@ annotation_source = [
 unit_name = ["TWh", "EJ", "TJ", "Mtoe", "Ktoe"]
 unit_val = [1, 0.00360, 3600, 0.086, 86]
 unit = [unit_name[0], unit_val[0]]
-
-region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
 
 save_figs = True
 show_figs = True
@@ -1556,17 +1549,12 @@ for i in range(0, len(region_list)):
 # region
 
 scenario = scenario
-start_year = 2000
+start_year = data_start_year
 
-for i in range(0, len(region_list)):
+for region in energy_demand_pathway.index.get_level_values(0).unique():
     energy_demand_i = (
-        energy_demand.loc[region_list[i], slice(None), slice(None), scenario] * unit[1]
+        energy_demand_pathway.loc[region, slice(None), slice(None), slice(None)]
     ).loc[:, start_year:]
-
-    if region_list[i] == "World ":
-        energy_demand_i.loc["Transport", "Other fuels"] = energy_demand_i.loc[
-            "Transport", ["International bunkers", "Other fuels"], :
-        ].sum()
 
     fig = (
         energy_demand_i.loc[(slice(None), "Electricity"), :]
@@ -1716,7 +1704,7 @@ for i in range(0, len(region_list)):
 
     fig.update_layout(
         title={
-            "text": "Energy Demand, " + "DAU21 ," + region_list[i].replace(" ", ""),
+            "text": "Energy Demand, " + "DAU ," + region_list[region].replace(" ", ""),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -1731,14 +1719,10 @@ for i in range(0, len(region_list)):
         margin_l=15,
         margin_r=15,
     )
-    """
-    fig.add_vrect(
-        x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0
-    )
-    """
+
     """
     fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
+        text="Historical data (shaded gray) is from IEA World Energy Balance; projections are based on PD technology adoption rate assumptions applied to <br>EIA International Energy Outlook projections",
         xref="paper",
         yref="paper",
         x=-0.17,
@@ -1757,7 +1741,7 @@ for i in range(0, len(region_list)):
         pio.write_html(
             fig,
             file=(
-                "./charts/demand-" + scenario + "-" + region_list[i] + ".html"
+                "./charts/demand-" + scenario + "-" + region_list[region] + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -3875,9 +3859,9 @@ for i in range(0, len(region_list)):
             cdr2.loc[region_list[i], "Carbon Dioxide Removal", scenario, :]
             .sum()
             .rename("CDR")
-        )        
-        
-        '''
+        )
+
+        """
         em_mit_cdr = (
             cdr.loc[region_list[i], "Carbon Dioxide Removal", slice(None), scenario, :]
             .sum()
@@ -3887,7 +3871,7 @@ for i in range(0, len(region_list)):
 
         em_mit_cdr[2019] = 0
         em_mit_cdr[2020] = 0
-        '''
+        """
         em_mit = (
             pd.DataFrame(
                 [
@@ -4339,9 +4323,9 @@ for i in range(0, len(region_list)):
             legendgroup="two",
         )
     )
-    
+
     if region_list[i] in ["US "]:
-        '''
+        """
         fig.add_trace(
             go.Scatter(
                 x=[ndcs[i][0][2]],
@@ -4359,7 +4343,7 @@ for i in range(0, len(region_list)):
                 name=ndcs[i][2][3],
             )
         )
-        '''
+        """
         """
         fig.add_annotation(
             text="The NDC commitment is to "
@@ -4435,7 +4419,7 @@ for i in range(0, len(region_list)):
             opacity=1,
         )
         """
-    
+
     # endregion
 
     """

@@ -18,19 +18,23 @@ def func2(x, a, b, c, d):
     return a * x + b
 
 
-def adoption_curve(value, region, scenario, sector):
+def adoption_curve_demand(
+    value, region, scenario, sector, data_start_year, data_end_year, proj_end_year
+):
 
     # Load tech parameters to get 2050 energy demand reduction values
     parameters = pd.read_csv(
         "podi/data/tech_parameters.csv",
-        usecols=["Region", "Technology", "Scenario", "Sector", "Metric", "Value"],
-    ).set_index(["Region", "Technology", "Scenario", "Sector", "Metric"])
+        usecols=["Region", "Product", "Scenario", "Sector", "Metric", "Value"],
+    ).set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
 
     # Create x array (year) and y array (linear scale from zero to saturation value)
-    x_data = np.arange(data_start_year, 2051, 1)
+    x_data = np.arange(data_end_year, 2051, 1)
     y_data = np.zeros((1, data_end_year - data_start_year + 1))
     y_data[:, :] = np.NaN
-    y_data[:, 0] = 0
+    y_data[:, 0] = parameters.loc[
+        region, value.name[1], scenario, sector, "saturation point"
+    ].Value
     y_data[:, -1] = parameters.loc[
         region, value.name[1], scenario, sector, "saturation point"
     ].Value
@@ -75,8 +79,7 @@ def adoption_curve(value, region, scenario, sector):
                     sector,
                     "saturation point",
                 ].Value
-            )
-            / 100,
+            ),
             pd.to_numeric(
                 parameters.loc[
                     region,
@@ -85,8 +88,7 @@ def adoption_curve(value, region, scenario, sector):
                     sector,
                     "saturation point",
                 ].Value
-            )
-            / 100,
+            ),
         ),
         (
             pd.to_numeric(
@@ -97,8 +99,7 @@ def adoption_curve(value, region, scenario, sector):
                     sector,
                     "floor",
                 ].Value
-            )
-            / 100,
+            ),
             pd.to_numeric(
                 parameters.loc[
                     region,
@@ -107,13 +108,12 @@ def adoption_curve(value, region, scenario, sector):
                     sector,
                     "floor",
                 ].Value
-            )
-            / 100,
+            ),
         ),
     ]
 
     if scenario == "baseline":
-        x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
+        x = np.arange(proj_end_year - pd.to_numeric(value.index[0]) + 1)
         # y = np.full((len(x), 1), y_data[-1])
         y = func2(
             x,
@@ -134,16 +134,14 @@ def adoption_curve(value, region, scenario, sector):
             mutation=(0, 1),
         ).x
 
-    x = np.arange(2100 - data_end_year + 1)
+    x = np.arange(proj_end_year - data_end_year + 1)
     y = np.array(func(x, *genetic_parameters))
 
     years = np.linspace(
-        pd.to_numeric(value.index[0]),
-        2100,
-        2100 - pd.to_numeric(value.index[0]) + 1,
+        pd.to_numeric(data_end_year),
+        proj_end_year,
+        proj_end_year - pd.to_numeric(data_end_year) + 1,
     ).astype(int)
-
-    y = np.zeros(data_end_year - data_start_year).join(y).join(np.full_like())
 
     """
     # set maximum annual growth rate
@@ -177,4 +175,10 @@ def adoption_curve(value, region, scenario, sector):
     y_growth = np.array(y_growth)
     """
 
-    return pd.DataFrame(data=y, index=years)
+    df = pd.DataFrame(data=y, index=years).T.reset_index().drop(columns="index")
+    df["Region"] = value.name[0]
+    df["Product"] = value.name[1]
+    df["Scenario"] = value.name[2]
+    df["Sector"] = value.name[3]
+
+    return df
