@@ -1,38 +1,12 @@
 from mdutils.mdutils import MdUtils
+import pandas as pd
 
-region_dict = {
-    "World ": "",
-    "US ": "",
-    "BRAZIL ": "",
-    "EU ": "",
-    "SAFR ": "",
-    "EURASIA ": "",
-    "RUS ": "",
-    "CHINA ": "",
-    "INDIA ": "",
-    "JPN ": "",
-    "ASEAN ": "",
-    "AdvancedECO ": "",
-    "DevelopingECO ": "",
-    " OECD ": "Australia, Austria, Belgium, Canada, Chile, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Israel, Italy, Japan, Korea, Luxembourg, Mexico, Netherlands, New Zealand, Norway, Poland, Portugal, Slovak Republic, Slovenia, Spain, Sweden, Switzerland, Turkey, United Kingdom, United States",
-    "NonOECD ": "All countries not included in OECD regional grouping.",
-    "NAM ": "Canada, Mexico, United States",
-    "ASIAPAC ": "Southeast Asia regional grouping, Australia, Bangladesh, China, Chinese Taipei, India, Japan, Korea, Democratic People’s Republic of Korea, Mongolia, Nepal, New Zealand, Pakistan, Sri Lanka, Afghanistan, Bhutan, Cook Islands, Fiji, French Polynesia, Kiribati, the Lao People’s Democratic Republic, Macau (China), Maldives, New Caledonia, Palau, Papua New Guinea, Samoa, Solomon Islands, Timor-Leste, Tonga, Vanuatu",
-    "CSAM ": "Argentina, Bolivia, Bolivarian Republic of Venezuela, Brazil, Chile, Colombia, Costa Rica, Cuba, Curaçao, Dominican Republic, Ecuador, El Salvador, Guatemala, Haiti, Honduras, Jamaica, Nicaragua, Panama, Paraguay, Peru, Suriname, Trinidad and Tobago, Uruguay, Antigua and Barbuda, Aruba, Bahamas, Barbados, Belize, Bermuda, Bonaire, British Virgin Islands, Cayman Islands, Dominica, Falkland Islands (Malvinas), French Guiana, Grenada, Guadeloupe, Guyana, Martinique, Montserrat, Saba, Saint Eustatius, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Saint Maarten, Turks and Caicos Islands",
-    "EUR ": "European Union regional grouping, Albania, Belarus, Bosnia and Herzegovina, Gibraltar, Iceland, Israel, Kosovo, Montenegro, Norway, Serbia, Switzerland, the Former Yugoslav Republic of Macedonia, Republic of Moldova, Turkey, Ukraine",
-    "AFRICA ": "Algeria, Egypt, Libya, Morocco, Tunisia, Angola, Benin, Botswana, Cameroon, Republic of the Congo, Côte d\’Ivoire, Democratic Republic of the Congo, Eritrea, Ethiopia, Gabon, Ghana, Kenya, Mauritius, Mozambique, Namibia, Niger, Nigeria, Senegal, South Africa, South Sudan, Sudan, United Republic of Tanzania, Togo, Zambia, Zimbabwe, Burkina Faso, Burundi, Cabo Verde, Central African Republic, Chad, Comoros, Djibouti, Equatorial Guinea, Gambia, Guinea, Guinea-Bissau, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Réunion, Rwanda, Sao Tome and Principe, Seychelles, Sierra Leone, Somalia, Swaziland, Uganda, Western Sahara",
-    "ME ": "Bahrain, Islamic Republic of Iran, Iraq, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, Syrian Arab Republic, United Arab Emirates, Yemen",
-}
+scenario = "pathway"
+regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "Region"})
 
-for scen in [
-    "dau",
-    "daulp",
-    "dauncsmx",
-    "dauffi",
-    "dauncsmxffi",
-]:
+for scen in ["dau"]:
 
-    for i in range(0, len(region_list)):
+    for region in regions:
 
         ###################
         # MAP & COUNTRIES #
@@ -41,17 +15,17 @@ for scen in [
         # region
 
         mdFile = MdUtils(
-            file_name="md-" + region_list[i].replace(" ", "") + "-" + scen + ".md"
+            file_name="md-" + regions[region].replace(" ", "") + "-" + scen + ".md"
         )
 
-        mdFile.new_header(level=1, title=region_list[i]).replace(" ", "")
+        mdFile.new_header(level=1, title=regions[region]).replace(" ", "")
         mdFile.new_line()
 
         mdFile.write("![](../region%20maps/")
-        mdFile.write(region_list[i].replace(" ", ""))
+        mdFile.write(regions[region].replace(" ", ""))
         mdFile.write(".png)")
 
-        # mdFile.write(region_dict[region_list[i]])
+        # mdFile.write(region_dict[regions[region]])
 
         mdFile.new_line()
         mdFile.new_line()
@@ -61,16 +35,16 @@ for scen in [
         ########################
         # ENERGY SUPPLY/DEMAND #
         ########################
-        """
-        # region
 
+        # region
+        """
         mdFile.new_line()
         mdFile.new_header(level=2, title="Energy Supply and Demand")
 
         for j in ["baseline", "pathway"]:
             for k in ["demand", "supply", "supply2"]:
                 path = (
-                    '"' + k + "-" + j + "-" + (region_list[i]).replace(" ", "") + '.html"'
+                    '"' + k + "-" + j + "-" + (regions[region]).replace(" ", "") + '.html"'
                 )
 
                 mdFile.write(
@@ -79,9 +53,9 @@ for scen in [
                 mdFile.write(path)
                 mdFile.write(" height='500' width='150%'></iframe>")
                 mdFile.new_line()
-
-        # endregion
         """
+        # endregion
+
         #############
         # EMISSIONS #
         #############
@@ -100,7 +74,7 @@ for scen in [
                         + "-"
                         + j
                         + "-"
-                        + (region_list[i]).replace(" ", "")
+                        + (regions[region]).replace(" ", "")
                         + "-"
                         + scen
                         + '.html"'
@@ -129,7 +103,7 @@ for scen in [
                         + "-"
                         + j
                         + "-"
-                        + (region_list[i]).replace(" ", "")
+                        + (regions[region]).replace(" ", "")
                         + "-"
                         + n
                         + '.html"'
@@ -155,7 +129,7 @@ for scen in [
                             + "-"
                             + scenario
                             + "-"
-                            + (region_list[i]).replace(" ", "")
+                            + (regions[region]).replace(" ", "")
                             + "-"
                             + sector
                             + "-"
@@ -170,7 +144,7 @@ for scen in [
 
                         mdFile.new_line()
         """
-        if region_list[i] == "World ":
+        if regions[region] == "World ":
             for j in ["ncsbar"]:
                 for year in ["2050"]:
                     path = (
@@ -181,7 +155,7 @@ for scen in [
                         + "-"
                         + year
                         + "-"
-                        + (region_list[i]).replace(" ", "")
+                        + (regions[region]).replace(" ", "")
                         + '.html"'
                     )
 
@@ -200,7 +174,7 @@ for scen in [
                 + "-"
                 + "pathway"
                 + "-"
-                + (region_list[i]).replace(" ", "")
+                + (regions[region]).replace(" ", "")
                 + "-"
                 + scen
                 + '.html"'
@@ -224,7 +198,7 @@ for scen in [
                         + "-"
                         + k
                         + "-"
-                        + (region_list[i]).replace(" ", "")
+                        + (regions[region]).replace(" ", "")
                         + "-"
                         + scen
                         + '.html"'
@@ -238,7 +212,7 @@ for scen in [
 
                     mdFile.new_line()
 
-        if region_list[i] == "World ":
+        if regions[region] == "World ":
             for sub in ["emsubind"]:
                 path = '"' + sub + "-" + "pathway" + "-" + scen + '.html"'
 
@@ -254,7 +228,7 @@ for scen in [
         for j in ["pathway"]:
             for k in ["ei"]:
                 path = (
-                    '"' + k + "-" + j + "-" + (region_list[i]).replace(" ", "") + '.html"'
+                    '"' + k + "-" + j + "-" + (regions[region]).replace(" ", "") + '.html"'
                 )
                 mdFile.write(
                     "<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "
@@ -278,7 +252,7 @@ for scen in [
         for j in ["pathway"]:
             path = (
                 '"scurves-'
-                + (region_list[i]).replace(" ", "")
+                + (regions[region]).replace(" ", "")
                 + "-"
                 + j
                 + "-"
@@ -298,9 +272,9 @@ for scen in [
         #############################
         # SUBVECTOR ADOPTION CURVES #
         #############################
-        """
-        # region
 
+        # region
+        """
         mdFile.new_line()
         mdFile.new_header(level=2, title="Subvector Adoption Curves")
 
@@ -312,7 +286,7 @@ for scen in [
             ]:
                 path = (
                     '"scurvessub-'
-                    + region_list[i]
+                    + regions[region]
                     + "-"
                     + k
                     + "-"
@@ -344,7 +318,7 @@ for scen in [
                 ]:
                     path = (
                         '"scurvessubafolu-'
-                        + region_list[i]
+                        + regions[region]
                         + "-"
                         + k
                         + "-"
@@ -374,7 +348,7 @@ for scen in [
                 ]:
                     path = (
                         '"scurvessubafolu-'
-                        + region_list[i]
+                        + regions[region]
                         + "-"
                         + k
                         + "-"
@@ -392,26 +366,26 @@ for scen in [
                     mdFile.write(path)
                     mdFile.write(" height='500' width='150%'></iframe>")
                     mdFile.new_line()
-
-        # endregion
         """
+        # endregion
+
         ###########
         # CLIMATE #
         ###########
 
         # region
 
-        if region_list[i] == "World ":
+        if regions[region] == "World ":
             mdFile.new_line()
             mdFile.new_header(level=2, title="Climate")
 
-            if region_list[i] == "World ":
+            if regions[region] == "World ":
                 for k in ["co2conc", "ghgconc", "forcing", "temp"]:
                     path = (
                         '"'
                         + k
                         + "-"
-                        + (region_list[i]).replace(" ", "")
+                        + (regions[region]).replace(" ", "")
                         + "-"
                         + scen
                         + '.html"'
