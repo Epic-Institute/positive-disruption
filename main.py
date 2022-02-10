@@ -3,36 +3,27 @@
 # region
 import numpy as np
 import pandas as pd
-import time
-
-from numpy import NaN
-
-import podi.data.iea_weo_etl
-import podi.data.iea_weo_em_etl
-import podi.data.gcam_etl
-
-from podi.energy_demand_hist import energy_demand_hist
 from podi.energy_demand import energy_demand
-from podi.energy_supply import energy_supply, long_proj_end_year
+from podi.energy_supply import energy_supply
 from podi.afolu import afolu
 from podi.afolu2030 import afolu2030
 from podi.emissions import emissions
 from podi.results_analysis import results_analysis
+from podi.cdr.cdr_main import cdr_mix
+from podi.curve_smooth import curve_smooth
+from podi.climate import climate
 from podi.cdr.cdr_util import (
     grid_em_def,
     heat_em_def,
     transport_em_def,
     fuel_em_def,
 )
-from podi.cdr.cdr_main import cdr_mix
-from podi.curve_smooth import curve_smooth
-from podi.climate import climate
 
-start_time = time.monotonic()
+regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "Region"})
 
-pd.set_option("mode.use_inf_as_na", True)
-
-region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True)
+data_start_year = 1990
+data_end_year = 2020
+proj_end_year = 2050
 
 # endregion
 
@@ -42,36 +33,13 @@ region_list = pd.read_csv("podi/data/region_list.csv", header=None, squeeze=True
 
 # region
 
-podi.data.gcam_etl
-podi.data.iea_weo_etl
-
-energy_demand_baseline = energy_demand(
-    "baseline",
-    "podi/data/energy_demand_historical.csv",
-    "podi/data/energy_demand_projection.csv",
-    "podi/data/rs_energy_efficiency.csv",
-    "podi/data/rs_heat_pumps.csv",
-    "podi/data/rs_solar_thermal.csv",
-    "podi/data/rs_trans_grid.csv",
-    "podi/data/cdr_energy.csv",
-)
-
-energy_demand_pathway = energy_demand(
-    "pathway",
-    "podi/data/energy_demand_historical.csv",
-    "podi/data/energy_demand_projection.csv",
-    "podi/data/rs_energy_efficiency.csv",
-    "podi/data/rs_heat_pumps.csv",
-    "podi/data/rs_solar_thermal.csv",
-    "podi/data/rs_trans_grid.csv",
-    "podi/data/cdr_energy.csv",
-)
-
-energy_demand = energy_demand_baseline.append(energy_demand_pathway)
-
-# Toggle for energy hist data further than 2010
-energy_demand_hist2 = energy_demand_hist(energy_demand_baseline)
-energy_demand = energy_demand_hist2.join(energy_demand.loc[:, 2019:]).replace(NaN, 0)
+(
+    energy_demand_baseline,
+    energy_demand_post_ef_upstream,
+    energy_demand_pathway,
+    ef_ratios,
+    addtl_eff,
+) = energy_demand("pathway", data_start_year, data_end_year, proj_end_year)
 
 # endregion
 
@@ -98,6 +66,8 @@ params.to_csv("podi/data/params.csv", index=False)
     "baseline",
     energy_demand.loc[slice(None), slice(None), slice(None), ["baseline"]],
     region_list,
+    data_start_year,
+    data_end_year,
 )
 
 (
@@ -114,6 +84,8 @@ params.to_csv("podi/data/params.csv", index=False)
     "pathway",
     energy_demand.loc[slice(None), slice(None), slice(None), ["pathway"]],
     region_list,
+    data_start_year,
+    data_end_year,
 )
 
 elec_consump = elec_consump_baseline.append(elec_consump_pathway)
@@ -211,6 +183,8 @@ em_baseline, em_targets_baseline, em_hist = emissions(
     afolu_em,
     "podi/data/emissions_additional.csv",
     "podi/data/iamc_data.csv",
+    data_start_year,
+    data_end_year,
 )
 
 em_pathway, em_targets_pathway, em_hist = emissions(
@@ -223,6 +197,8 @@ em_pathway, em_targets_pathway, em_hist = emissions(
     afolu_em,
     "podi/data/emissions_additional.csv",
     "podi/data/iamc_data.csv",
+    data_start_year,
+    data_end_year,
 )
 
 em = em_baseline.append(em_pathway)
@@ -258,7 +234,7 @@ for scenario in ["pathway"]:
         transport_em_def,
         fuel_em_def,
         2010,
-        long_proj_end_year,
+        2100,
     )
 
     cdr_pathway2 = (
@@ -360,6 +336,8 @@ for j in ["baseline", "pathway"]:
                 cdr,
                 em,
                 em_mitigated,
+                data_start_year,
+                data_end_year,
             )[0].replace(np.nan, 0)
         )
 
@@ -378,6 +356,8 @@ for j in ["baseline", "pathway"]:
                 cdr_subvs,
                 em,
                 em_mitigated,
+                data_start_year,
+                data_end_year,
             )[1].replace(np.nan, 0)
         )
 
