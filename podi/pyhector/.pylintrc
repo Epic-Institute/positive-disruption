@@ -1,9 +1,0 @@
-[MASTER]
-ignore=_version.py
-
-[MESSAGES CONTROL]
-disable=
-    invalid-name,
-    too-many-locals,
-    # handled by black
-    format
