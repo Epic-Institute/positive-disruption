@@ -140,4 +140,5 @@ dmypy.json
 
 # Large files
 iamc_data.csv
+output_energy_demand.csv
 IEA/
