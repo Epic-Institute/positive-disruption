@@ -168,9 +168,9 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    ##############################
-    # ADD LABELS & RECATEGORIZE  #
-    ##############################
+    ###############################
+    #  ADD LABELS & RECATEGORIZE  #
+    ###############################
 
     # region
 
@@ -178,18 +178,39 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     labels = pd.DataFrame(
         pd.read_csv(
             "podi/data/product_flow_labels.csv",
-            usecols=["Product", "Flow", "Sector", "Subsector", "EIA Product"],
+            usecols=[
+                "Product",
+                "Flow",
+                "Sector",
+                "Subsector",
+                "EIA Product",
+                "Hydrogen",
+                "Flexible",
+                "Non-Energy Use",
+            ],
         )
     ).set_index(["Product", "Flow"])
 
-    energy_demand_historical2 = (
+    energy_demand_historical = (
         (
             energy_demand_historical.reset_index()
             .set_index(["Product", "Flow"])
             .merge(labels, on=["Product", "Flow"])
         )
         .reset_index()
-        .set_index(["Region", "Sector", "Subsector", "Product", "Flow", "EIA Product"])
+        .set_index(
+            [
+                "Region",
+                "Sector",
+                "Subsector",
+                "Product",
+                "Flow",
+                "EIA Product",
+                "Hydrogen",
+                "Flexible",
+                "Non-Energy Use",
+            ]
+        )
     )
 
     # For Transportation sectors AVBUNK/DOMESAIR/DOMESNAV/MARBUNK/RAIL/ROAD/WORLDAV/WORLDMAR that were copied to make Light/Medium/Heavy Subsectors, scale their energy demand so the sum of Light/Medium/Heavy is equal to the original energy demand estimate
@@ -220,7 +241,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         ]
     )
 
-    energy_demand_historical2.loc[
+    energy_demand_historical.loc[
         slice(None),
         "Transportation",
         slice(None),
@@ -235,7 +256,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
             "WORLDAV",
             "WORLDMAR",
         ],
-    ] = energy_demand_historical2.loc[
+    ] = energy_demand_historical.loc[
         slice(None),
         ["Transportation"],
         slice(None),
@@ -290,9 +311,9 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         ]
     )
 
-    energy_demand_historical2.loc[
+    energy_demand_historical.loc[
         slice(None), slice(None), slice(None), ["HEAT", "HEATNS"]
-    ] = energy_demand_historical2.loc[
+    ] = energy_demand_historical.loc[
         slice(None),
         slice(None),
         slice(None),
@@ -309,19 +330,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # For TNONSPEC/REFINGAS that were copied to make HYDROGEN subsector, scale their energy demand so the sum of HYDROGEN/OTHER is equal to the original energy demand estimate
-
-    # region
-
-    # endregion
-
-    # Add label for flexible energy demand end-use
-
-    # region
-
-    # endregion
-
-    # Add EIA region labels to energy_demand_historical
+    # Add EIA region labels
     regions = (
         pd.DataFrame(
             pd.read_csv(
@@ -334,9 +343,9 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     )
     regions.index = regions.index.str.lower()
 
-    energy_demand_historical2 = (
+    energy_demand_historical = (
         (
-            energy_demand_historical2.reset_index()
+            energy_demand_historical.reset_index()
             .set_index(["Region"])
             .merge(regions, on=["Region"])
         )
@@ -353,17 +362,17 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         usecols=["Product Category", "Product", "Short name"],
     )
 
-    energy_demand_post_addtl_eff[
-        "Product_category"
-    ] = energy_demand_post_addtl_eff.apply(
-        lambda x: longnames[longnames["Short name"] == x.name[2]][
+    energy_demand_historical["Product_category"] = energy_demand_historical.apply(
+        lambda x: longnames[longnames["Short name"] == x["Product"]][
             "Product Category"
-        ].squeeze(),
+        ].squeeze("rows"),
         axis=1,
     )
 
-    energy_demand_post_addtl_eff["Product_long"] = energy_demand_post_addtl_eff.apply(
-        lambda x: longnames[longnames["Short name"] == x.name[2]]["Product"].squeeze(),
+    energy_demand_historical["Product_long"] = energy_demand_historical.apply(
+        lambda x: longnames[longnames["Short name"] == x["Product"]]["Product"].squeeze(
+            "rows"
+        ),
         axis=1,
     )
 
@@ -372,45 +381,50 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         usecols=["Flow Category", "Flow", "Short name"],
     )
 
-    energy_demand_post_addtl_eff["Flow_category"] = energy_demand_post_addtl_eff.apply(
-        lambda x: longnames[longnames["Short name"] == x.name[3]][
+    energy_demand_historical["Flow_category"] = energy_demand_historical.apply(
+        lambda x: longnames[longnames["Short name"] == x["Flow"]][
             "Flow Category"
-        ].squeeze(),
+        ].squeeze("rows"),
         axis=1,
     )
 
-    energy_demand_post_addtl_eff["Flow_long"] = energy_demand_post_addtl_eff.apply(
-        lambda x: longnames[longnames["Short name"] == x.name[3]]["Flow"].squeeze(),
+    energy_demand_historical["Flow_long"] = energy_demand_historical.apply(
+        lambda x: longnames[longnames["Short name"] == x["Flow"]]["Flow"].squeeze(
+            "rows"
+        ),
         axis=1,
     )
 
-    energy_demand_post_addtl_eff = energy_demand_post_addtl_eff.set_index(
-        ["Product_long", "Flow_long", "Product_category", "Flow_category", "Scenario"],
-        append=True,
-    ).reorder_levels(
+    # Add scenario
+    energy_demand_historical["Scenario"] = scenario
+
+    energy_demand_historical = energy_demand_historical.reset_index().set_index(
         [
             "Scenario",
             "Region",
             "Sector",
+            "Subsector",
             "Product_category",
             "Product_long",
             "Product",
             "Flow_category",
             "Flow_long",
             "Flow",
+            "Hydrogen",
+            "Flexible",
+            "Non-Energy Use",
+            "EIA Region",
+            "EIA Product",
         ]
     )
 
     # endregion
 
-    # Add scenario
-    energy_demand_post_addtl_eff["Scenario"] = scenario
-
     # endregion
 
-    ###################################
-    # PROJECT BASELINE ENERGY DEMAND  #
-    ###################################
+    ####################################
+    #  PROJECT BASELINE ENERGY DEMAND  #
+    ####################################
 
     # region
 
@@ -439,12 +453,30 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     # Merge historical and projected energy demand
     energy_demand = (
         (
-            energy_demand_historical2.reset_index()
+            energy_demand_historical.reset_index()
             .set_index(["EIA Region", "Sector", "EIA Product"])
             .merge(energy_demand_projection, on=["EIA Region", "Sector", "EIA Product"])
         )
         .reset_index()
-        .set_index(["Region", "Sector", "Product", "Flow", "EIA Region", "EIA Product"])
+        .set_index(
+            [
+                "Scenario",
+                "Region",
+                "Sector",
+                "Subsector",
+                "Product_category",
+                "Product_long",
+                "Product",
+                "Flow_category",
+                "Flow_long",
+                "Flow",
+                "Hydrogen",
+                "Flexible",
+                "Non-Energy Use",
+                "EIA Region",
+                "EIA Product",
+            ]
+        )
         .droplevel(["EIA Region", "EIA Product"])
     )
 
@@ -567,6 +599,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
                         "Product",
                         "Flow",
                         "Sector",
+                        "Subsector",
                         "WWS EF Product",
                         "WWS Upstream Product",
                         "WWS Addtl Efficiency",
@@ -587,6 +620,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
                 [
                     "Region",
                     "Scenario",
+                    "Subsector",
                     "IEA Product",
                     "Flow",
                     "WWS Upstream Product",
@@ -600,6 +634,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
             [
                 "Region",
                 "Sector",
+                "Subsector",
                 "IEA Product",
                 "Flow",
                 "WWS Upstream Product",
@@ -610,18 +645,36 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Filter energy_demand to match ef_ratios index
     energy_demand = energy_demand.loc[
+        slice(None),
         ef_ratios.index.get_level_values(0).unique().values,
         ef_ratios.index.get_level_values(1).unique().values,
         ef_ratios.index.get_level_values(2).unique().values,
+        slice(None),
+        slice(None),
         ef_ratios.index.get_level_values(3).unique().values,
+        slice(None),
+        slice(None),
+        ef_ratios.index.get_level_values(4).unique().values,
     ]
 
     # Apply percentage reduction attributed to eliminating energy used for fossil fuel/biofuel/bioenergy/uranium mining/transport/processing
     ef_ratios.loc[
-        slice(None), slice(None), slice(None), slice(None), "Y", slice(None)
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        "Y",
+        slice(None),
     ] = (
         ef_ratios.loc[
-            slice(None), slice(None), slice(None), slice(None), "Y", slice(None)
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            "Y",
+            slice(None),
         ]
         .apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1)
         .values
@@ -633,7 +686,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     energy_demand_post_ef_upstream = energy_demand.apply(
         lambda x: x.mul(
             ef_ratios.loc[
-                x.name[0], x.name[1], x.name[2], x.name[3], slice(None)
+                x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]
             ].squeeze()
         ),
         axis=1,
@@ -662,6 +715,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
                 [
                     "Region",
                     "Scenario",
+                    "Subsector",
                     "IEA Product",
                     "Flow",
                 ],
@@ -669,38 +723,18 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
             )
         )
         .droplevel(["Product", "Scenario"])
-        .reorder_levels(["Region", "Sector", "IEA Product", "Flow"])
+        .reorder_levels(["Region", "Sector", "Subsector", "IEA Product", "Flow"])
     )
 
     energy_demand_post_addtl_eff = energy_demand_post_ef_upstream.apply(
-        lambda x: x.mul(addtl_eff.loc[x.name[0], x.name[1], x.name[2], x.name[3]]),
+        lambda x: x.mul(
+            addtl_eff.loc[x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]]
+        ),
         axis=1,
     )
 
     energy_demand_post_addtl_eff = energy_demand_post_addtl_eff.replace(NaN, 0)
 
-    # endregion
-
-    ##########################################
-    #  FILTER AND GROUP FOR AGGREGATE STATS  #
-    ##########################################
-
-    # region
-    """
-    product = pd.read_csv(
-        "podi/data/IEA/Other/IEA_Product_Definitions.csv",
-        usecols=["Product Category", "Short name"],
-    )
-
-    # Final consumption group
-    final_consumption = product[Product["Product Category"] == "Final consumption"][
-        "Short name"
-    ]
-
-    energy_demand_finalconsumption = energy_demand_post_addtl_eff.loc[
-        slice(None), slice(None), slice(None), final_consumption
-    ]
-    """
     # endregion
 
     return (
