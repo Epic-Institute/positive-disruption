@@ -3,6 +3,7 @@
 # region
 
 from multiprocessing.sharedctypes import Value
+from re import sub
 from unicodedata import category
 import pandas as pd
 import numpy as np
@@ -159,9 +160,251 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         )
     ]
 
-    energy_demand_historical = energy_demand_historical.loc[
-        slice(None), products, flows
-    ].drop_duplicates()
+    energy_demand_historical = (
+        energy_demand_historical.loc[slice(None), products, flows]
+        .drop_duplicates()
+        .abs()
+    )
+
+    # endregion
+
+    ##############################
+    # ADD LABELS & RECATEGORIZE  #
+    ##############################
+
+    # region
+
+    # Add product and flow labels to energy_demand_historical
+    labels = pd.DataFrame(
+        pd.read_csv(
+            "podi/data/product_flow_labels.csv",
+            usecols=["Product", "Flow", "Sector", "Subsector", "EIA Product"],
+        )
+    ).set_index(["Product", "Flow"])
+
+    energy_demand_historical2 = (
+        (
+            energy_demand_historical.reset_index()
+            .set_index(["Product", "Flow"])
+            .merge(labels, on=["Product", "Flow"])
+        )
+        .reset_index()
+        .set_index(["Region", "Sector", "Subsector", "Product", "Flow", "EIA Product"])
+    )
+
+    # For Transportation sectors AVBUNK/DOMESAIR/DOMESNAV/MARBUNK/RAIL/ROAD/WORLDAV/WORLDMAR that were copied to make Light/Medium/Heavy Subsectors, scale their energy demand so the sum of Light/Medium/Heavy is equal to the original energy demand estimate
+
+    # region
+
+    subsector_props = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/tech_parameters.csv",
+                usecols=[
+                    "Region",
+                    "Product",
+                    "Scenario",
+                    "Sector",
+                    "Metric",
+                    "Value",
+                ],
+            ),
+        )
+        .set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
+        .loc[
+            slice(None),
+            slice(None),
+            scenario,
+            slice(None),
+            ["Light", "Medium", "Heavy"],
+        ]
+    )
+
+    energy_demand_historical2.loc[
+        slice(None),
+        "Transportation",
+        slice(None),
+        slice(None),
+        [
+            "AVBUNK",
+            "DOMESAIR",
+            "DOMESNAV",
+            "MARBUNK",
+            "RAIL",
+            "ROAD",
+            "WORLDAV",
+            "WORLDMAR",
+        ],
+    ] = energy_demand_historical2.loc[
+        slice(None),
+        ["Transportation"],
+        slice(None),
+        slice(None),
+        [
+            "AVBUNK",
+            "DOMESAIR",
+            "DOMESNAV",
+            "MARBUNK",
+            "RAIL",
+            "ROAD",
+            "WORLDAV",
+            "WORLDMAR",
+        ],
+    ].apply(
+        lambda x: x
+        * (
+            subsector_props.loc[
+                x.name[0], x.name[4], scenario, "Transportation", x.name[2]
+            ].values
+        ),
+        axis=1,
+    )
+
+    # endregion
+
+    # For HEAT/HEATNS that were copied to make Low Temperature/High Temperature Subsectors, scale their energy demand so the sum of Low Temperature/High Temperature is equal to the original energy demand estimate
+
+    # region
+
+    subsector_props = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/tech_parameters.csv",
+                usecols=[
+                    "Region",
+                    "Product",
+                    "Scenario",
+                    "Sector",
+                    "Metric",
+                    "Value",
+                ],
+            ),
+        )
+        .set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
+        .loc[
+            slice(None),
+            slice(None),
+            scenario,
+            slice(None),
+            ["Low Temperature", "High Temperature"],
+        ]
+    )
+
+    energy_demand_historical2.loc[
+        slice(None), slice(None), slice(None), ["HEAT", "HEATNS"]
+    ] = energy_demand_historical2.loc[
+        slice(None),
+        slice(None),
+        slice(None),
+        ["HEAT", "HEATNS"],
+    ].apply(
+        lambda x: x
+        * (
+            subsector_props.loc[
+                "world", x.name[3], scenario, x.name[4], x.name[2]
+            ].values
+        ),
+        axis=1,
+    )
+
+    # endregion
+
+    # For TNONSPEC/REFINGAS that were copied to make HYDROGEN subsector, scale their energy demand so the sum of HYDROGEN/OTHER is equal to the original energy demand estimate
+
+    # region
+
+    # endregion
+
+    # Add label for flexible energy demand end-use
+
+    # region
+
+    # endregion
+
+    # Add EIA region labels to energy_demand_historical
+    regions = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/region_categories.csv",
+                usecols=["WEB Region", "EIA Region"],
+            ).dropna(axis=0)
+        )
+        .set_index(["WEB Region"])
+        .rename_axis(index={"WEB Region": "Region"})
+    )
+    regions.index = regions.index.str.lower()
+
+    energy_demand_historical2 = (
+        (
+            energy_demand_historical2.reset_index()
+            .set_index(["Region"])
+            .merge(regions, on=["Region"])
+        )
+        .reset_index()
+        .set_index(["EIA Region"])
+    )
+
+    # Add category and long names for Products and Flows
+
+    # region
+
+    longnames = pd.read_csv(
+        "podi/data/IEA/Other/IEA_Product_Definitions.csv",
+        usecols=["Product Category", "Product", "Short name"],
+    )
+
+    energy_demand_post_addtl_eff[
+        "Product_category"
+    ] = energy_demand_post_addtl_eff.apply(
+        lambda x: longnames[longnames["Short name"] == x.name[2]][
+            "Product Category"
+        ].squeeze(),
+        axis=1,
+    )
+
+    energy_demand_post_addtl_eff["Product_long"] = energy_demand_post_addtl_eff.apply(
+        lambda x: longnames[longnames["Short name"] == x.name[2]]["Product"].squeeze(),
+        axis=1,
+    )
+
+    longnames = pd.read_csv(
+        "podi/data/IEA/Other/IEA_Flow_Definitions.csv",
+        usecols=["Flow Category", "Flow", "Short name"],
+    )
+
+    energy_demand_post_addtl_eff["Flow_category"] = energy_demand_post_addtl_eff.apply(
+        lambda x: longnames[longnames["Short name"] == x.name[3]][
+            "Flow Category"
+        ].squeeze(),
+        axis=1,
+    )
+
+    energy_demand_post_addtl_eff["Flow_long"] = energy_demand_post_addtl_eff.apply(
+        lambda x: longnames[longnames["Short name"] == x.name[3]]["Flow"].squeeze(),
+        axis=1,
+    )
+
+    energy_demand_post_addtl_eff = energy_demand_post_addtl_eff.set_index(
+        ["Product_long", "Flow_long", "Product_category", "Flow_category", "Scenario"],
+        append=True,
+    ).reorder_levels(
+        [
+            "Scenario",
+            "Region",
+            "Sector",
+            "Product_category",
+            "Product_long",
+            "Product",
+            "Flow_category",
+            "Flow_long",
+            "Flow",
+        ]
+    )
+
+    # endregion
+
+    # Add scenario
+    energy_demand_post_addtl_eff["Scenario"] = scenario
 
     # endregion
 
@@ -192,44 +435,6 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         )
     ).pct_change(axis=1).replace(NaN, 0) + 1
     energy_demand_projection.iloc[:, 0] = energy_demand_projection.iloc[:, 1]
-
-    # Add product and flow labels to energy_demand_historical
-    labels = pd.DataFrame(
-        pd.read_csv(
-            "podi/data/product_flow_labels.csv",
-            usecols=["Product", "Flow", "Sector", "EIA Product"],
-        )
-    ).set_index(["Product", "Flow"])
-
-    energy_demand_historical2 = (
-        energy_demand_historical.reset_index()
-        .set_index(["Product", "Flow"])
-        .merge(labels, on=["Product", "Flow"])
-        .set_index(["Region", "Sector", "EIA Product"], append=True)
-    )
-
-    # Add region labels to energy_demand_historical
-    regions = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/region_categories.csv",
-                usecols=["WEB Region", "EIA Region"],
-            ).dropna(axis=0)
-        )
-        .set_index(["WEB Region"])
-        .rename_axis(index={"WEB Region": "Region"})
-    )
-    regions.index = regions.index.str.lower()
-
-    energy_demand_historical2 = (
-        (
-            energy_demand_historical2.reset_index()
-            .set_index(["Region"])
-            .merge(regions, on=["Region"])
-        )
-        .reset_index()
-        .set_index(["EIA Region"])
-    )
 
     # Merge historical and projected energy demand
     energy_demand = (
@@ -476,131 +681,6 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    ##############################
-    # ADD LABELS & RECATEGORIZE  #
-    ##############################
-
-    # region
-
-    # Add scenario
-    energy_demand_post_addtl_eff["Scenario"] = scenario
-
-    # Make values that were negative (by convention in the Energy Balance) positive
-    energy_demand = energy_demand.abs()
-    energy_demand_post_ef_upstream = energy_demand_post_ef_upstream.abs()
-    energy_demand_post_addtl_eff = energy_demand_post_addtl_eff.abs()
-
-    # Add Buildings Sector and make Residential & Commercial Subsectors
-
-    # region
-
-    # endregion
-
-    # Split ROAD into ROADS, ROADM, ROADL to represent short/med/long-haul
-
-    # region
-
-    # add new items in product_flow_labels
-
-    # endregion
-
-    # Split DOMESNAV into DOMESNAVS, DOMESNAVM, DOMESNAVL to represent short/med/long-haul
-
-    # region
-
-    # endregion
-
-    # Split DOMESAV into DOMESAVS, DOMESAVM, DOMESAVL to represent short/med/long-haul
-
-    # region
-
-    # endregion
-
-    # Add HYDROGEN demand for Transportation & Industrial
-
-    # region
-
-    # endregion
-
-    # Relabel ONONSPEC Flow as MIL/OTHR to represent Military/Other
-
-    # region
-
-    # endregion
-
-    # Split heat demand into Low Temperature Heat and High Temperature Heat by applying percent breakdown from DeStercke.
-
-    # region
-
-    # endregion
-
-    # Add label for flexible energy demand end-use
-
-    # region
-
-    # endregion
-
-    # Add category and long names for Products and Flows
-
-    # region
-
-    longnames = pd.read_csv(
-        "podi/data/IEA/Other/IEA_Product_Definitions.csv",
-        usecols=["Product Category", "Product", "Short name"],
-    )
-
-    energy_demand_post_addtl_eff[
-        "Product_category"
-    ] = energy_demand_post_addtl_eff.apply(
-        lambda x: longnames[longnames["Short name"] == x.name[2]][
-            "Product Category"
-        ].squeeze(),
-        axis=1,
-    )
-
-    energy_demand_post_addtl_eff["Product_long"] = energy_demand_post_addtl_eff.apply(
-        lambda x: longnames[longnames["Short name"] == x.name[2]]["Product"].squeeze(),
-        axis=1,
-    )
-
-    longnames = pd.read_csv(
-        "podi/data/IEA/Other/IEA_Flow_Definitions.csv",
-        usecols=["Flow Category", "Flow", "Short name"],
-    )
-
-    energy_demand_post_addtl_eff["Flow_category"] = energy_demand_post_addtl_eff.apply(
-        lambda x: longnames[longnames["Short name"] == x.name[3]][
-            "Flow Category"
-        ].squeeze(),
-        axis=1,
-    )
-
-    energy_demand_post_addtl_eff["Flow_long"] = energy_demand_post_addtl_eff.apply(
-        lambda x: longnames[longnames["Short name"] == x.name[3]]["Flow"].squeeze(),
-        axis=1,
-    )
-
-    energy_demand_post_addtl_eff = energy_demand_post_addtl_eff.set_index(
-        ["Product_long", "Flow_long", "Product_category", "Flow_category", "Scenario"],
-        append=True,
-    ).reorder_levels(
-        [
-            "Scenario",
-            "Region",
-            "Sector",
-            "Product_category",
-            "Product_long",
-            "Product",
-            "Flow_category",
-            "Flow_long",
-            "Flow",
-        ]
-    )
-
-    # endregion
-
-    # endregion
-
     ##########################################
     #  FILTER AND GROUP FOR AGGREGATE STATS  #
     ##########################################
@@ -621,8 +701,6 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         slice(None), slice(None), slice(None), final_consumption
     ]
     """
-    #
-
     # endregion
 
     return (
