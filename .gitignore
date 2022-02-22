@@ -142,3 +142,8 @@ dmypy.json
 iamc_data.csv
 output_energy_demand.csv
 IEA/
+energy_demand_baseline.csv
+energy_demand_post_ef_upstream.csv
+energy_demand_pathway.csv
+ef_ratios.csv
+addtl_eff.csv

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # region
 
 from os import confstr_names
@@ -22,18 +24,14 @@ from fair.constants import radeff
 
 from podi.energy_demand import energy_demand
 
-annotation_source = [
-    "Historical data is from IEA WEO 2020, projections are based on PD21 growth rate assumptions applied to IEA WEO projections for 2020-2040 and GCAM scenario x for 2040-2100"
-]
-
-unit_name = ["TWh", "EJ", "TJ", "Mtoe", "Ktoe"]
-unit_val = [1, 0.00360, 3600, 0.086, 86]
+unit_name = ["TJ"]
+unit_val = [1]
 unit = [unit_name[0], unit_val[0]]
 
 save_figs = True
 show_figs = True
 show_annotations = True
-start_year = 2000
+start_year = 1990
 scenario = "pathway"
 
 
@@ -1551,78 +1549,64 @@ for i in range(0, len(region_list)):
 scenario = scenario
 start_year = data_start_year
 
-for region in energy_demand_pathway.index.get_level_values(0).unique():
+for region in energy_demand_pathway.index.get_level_values(1).unique():
     energy_demand_i = (
-        energy_demand_pathway.loc[region, slice(None), slice(None), slice(None)]
+        energy_demand_pathway.loc[scenario, region]
+        .groupby(["Sector", "Product_long", "Flow_long"])
+        .sum()
     ).loc[:, start_year:]
 
     fig = (
-        energy_demand_i.loc[(slice(None), "Electricity"), :]
-        .groupby(["Sector"])
+        energy_demand_i.loc[slice(None), "Electricity", slice(None)]
+        .groupby("Sector")
         .sum()
-        .drop("TFC")
         .rename(
             index={
-                "Buildings": "Buildings-Electricity",
-                "Industry": "Industry-Electricity",
-                "Transport": "Transport-Electricity",
+                "Commercial": "Buildings-Electricity",
+                "Industrial": "Industrial-Electricity",
+                "Residential": "Buildings-Electricity",
+                "Transportation": "Transportation-Electricity",
             }
         )
+        .groupby("Sector")
+        .sum()
         .append(
-            pd.DataFrame(
-                energy_demand_i.loc["Transport", slice(None)]
-                .groupby(["Metric"])
-                .sum()
-                .loc[
-                    [
-                        "Oil",
-                        "Bioenergy",
-                        "Other fuels",
-                    ],
-                    :,
-                ]
-                .sum()
-            ).T.rename(index={0: "Transport-Nonelectric"})
+            energy_demand_i.loc[["Transportation"]]
+            .drop("Electricity", level=1)
+            .groupby("Sector")
+            .sum()
+            .rename(index={"Transportation": "Transportation-Nonelectric"})
         )
         .append(
-            pd.DataFrame(
-                energy_demand_i.loc["Buildings", slice(None)]
-                .groupby(["Metric"])
-                .sum()
-                .loc[
-                    [
-                        "Heat",
-                    ],
-                    :,
-                ]
-                .sum()
-            ).T.rename(index={0: "Buildings-Heat"})
+            energy_demand_i.loc[["Residential", "Commercial"]]
+            .drop(["Electricity", "Heat"], level=1)
+            .groupby(["Sector"])
+            .sum()
+            .rename(
+                index={"Residential": "Buildings-Heat", "Commercial": "Buildings-Heat"}
+            )
+            .groupby("Sector")
+            .sum()
         )
         .append(
-            pd.DataFrame(
-                energy_demand_i.loc["Industry", slice(None)]
-                .groupby(["Metric"])
-                .sum()
-                .loc[
-                    [
-                        "Heat",
-                    ],
-                    :,
-                ]
-                .sum()
-            ).T.rename(index={0: "Industry-Heat"})
+            energy_demand_i.loc[["Industrial"]]
+            .drop(["Electricity", "Heat"], level=1)
+            .groupby(["Sector"])
+            .sum()
+            .rename(index={"Industrial": "Industrial-Heat"})
         )
         .reindex(
             [
-                "Transport-Nonelectric",
-                "Transport-Electricity",
+                "Transportation-Nonelectric",
+                "Transportation-Electricity",
                 "Buildings-Heat",
                 "Buildings-Electricity",
-                "Industry-Heat",
-                "Industry-Electricity",
+                "Industrial-Heat",
+                "Industrial-Electricity",
             ]
         )
-    ).loc[:, start_year:long_proj_end_year]
+    )
+
     fig = fig.T
     fig.index.name = "Year"
     fig.reset_index(inplace=True)
@@ -1632,10 +1616,10 @@ for region in energy_demand_pathway.index.get_level_values(0).unique():
 
     fig.add_trace(
         go.Scatter(
-            name="Transport-Nonelectric",
+            name="Transportation-Nonelectric",
             line=dict(width=0.5, color="#7AA8B8"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport-Nonelectric"]["TFC, " + unit[0]],
+            y=fig2[fig2["Sector"] == "Transportation-Nonelectric"]["TFC, " + unit[0]],
             fill="tozeroy",
             stackgroup="one",
             fillcolor="#7AA8B8",
@@ -1644,10 +1628,10 @@ for region in energy_demand_pathway.index.get_level_values(0).unique():
 
     fig.add_trace(
         go.Scatter(
-            name="Transport-Electricity",
+            name="Transportation-Electricity",
             line=dict(width=0.5, color="#bbe272"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport-Electricity"]["TFC, " + unit[0]],
+            y=fig2[fig2["Sector"] == "Transportation-Electricity"]["TFC, " + unit[0]],
             fill="tonexty",
             stackgroup="one",
             fillcolor="#bbe272",
@@ -1680,10 +1664,10 @@ for region in energy_demand_pathway.index.get_level_values(0).unique():
 
     fig.add_trace(
         go.Scatter(
-            name="Industry-Heat",
+            name="Industrial-Heat",
             line=dict(width=0.5, color="#60738C"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industry-Heat"]["TFC, " + unit[0]],
+            y=fig2[fig2["Sector"] == "Industrial-Heat"]["TFC, " + unit[0]],
             fill="tonexty",
             stackgroup="one",
             fillcolor="#60738C",
@@ -1692,10 +1676,10 @@ for region in energy_demand_pathway.index.get_level_values(0).unique():
 
     fig.add_trace(
         go.Scatter(
-            name="Industry-Electricity",
+            name="Industrial-Electricity",
             line=dict(width=0.5, color="#B279A2"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industry-Electricity"]["TFC, " + unit[0]],
+            y=fig2[fig2["Sector"] == "Industrial-Electricity"]["TFC, " + unit[0]],
             fill="tonexty",
             stackgroup="one",
             fillcolor="#B279A2",
@@ -1704,16 +1688,14 @@ for region in energy_demand_pathway.index.get_level_values(0).unique():
 
     fig.update_layout(
         title={
-            "text": "Energy Demand, " + "DAU ," + region_list[region].replace(" ", ""),
+            "text": "Energy Demand, " + "DAU, " + region.upper(),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
         },
         # xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
-        legend=dict(
-            orientation="h", yanchor="bottom", y=1.03, x=0.25, font=dict(size=10)
-        ),
+        legend=dict(orientation="h", yanchor="bottom", y=1.0, x=0, font=dict(size=10)),
         margin_b=0,
         margin_t=70,
         margin_l=15,
