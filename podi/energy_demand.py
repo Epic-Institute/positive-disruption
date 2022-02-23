@@ -724,8 +724,50 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
+    # Apply percentage reduction attributed to additional energy efficiency measures
+    addtl_eff = pd.DataFrame(pd.read_csv("podi/data/ef_ratios.csv")).set_index(
+        ["Scenario", "Region", "Sector", "Product"]
+    )
+    addtl_eff.columns = addtl_eff.columns.astype(int)
+
+    labels = (
+        labels.reset_index()
+        .drop(columns=["WWS Upstream Product", "Product", "Subsector"])
+        .set_index(["Sector", "WWS Addtl Efficiency"])
+        .rename_axis(index={"WWS Addtl Efficiency": "Product"})
+        .rename(columns={"Product": "IEA Product"})
+    )
+
+    addtl_eff = (
+        (
+            addtl_eff.reset_index()
+            .set_index(["Sector", "Product"])
+            .merge(labels, on=["Sector", "Product"])
+            .set_index(
+                [
+                    "Region",
+                    "Scenario",
+                    "IEA Product",
+                    "Flow",
+                ],
+                append=True,
+            )
+        )
+        .droplevel(["Product", "Scenario"])
+        .reorder_levels(["Region", "Sector", "IEA Product", "Flow"])
+    )
+
+    addtl_eff = addtl_eff.groupby(["Region", "Sector", "IEA Product", "Flow"]).mean()
+
+    energy_demand_post_addtl_eff = energy_demand_post_upstream.apply(
+        lambda x: x.mul(
+            addtl_eff.loc[x.name[1], x.name[2], x.name[6], x.name[9]].squeeze()
+        ),
+        axis=1,
+    )
+
     # Isolate energy demand that gets replaced with (a reduced amount of) energy from electricity. Each row of energy demand is multiplied by ((ef[0] - ef[i]) / (ef[0] - ef[-1]), which represents the percent of energy demand that undergoes electrification. This does not count preexisting electricity demand.
-    energy_demand_electrified = energy_demand_post_upstream.apply(
+    energy_demand_electrified = energy_demand_post_addtl_eff.apply(
         lambda x: x.mul(
             (
                 (
@@ -751,9 +793,9 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
-    # Subtract energy demand that gets electrified from baseline energy demand after removal of upstream fossil energy demand
-    energy_demand_subtract_electrified = energy_demand_post_upstream.subtract(
-        energy_demand_electrified, axis="index"
+    # Subtract energy demand that gets electrified from baseline energy demand after removal of upstream fossil energy demand and reduction attributed to additional energy efficiency measures
+    energy_demand_subtract_electrified = energy_demand_post_addtl_eff.subtract(
+        energy_demand_electrified
     )
 
     # Find the reduced amount of electrical energy that represents an equivalent amount of work to that of the energy demand that undergoes electrification
@@ -767,93 +809,66 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Relabel reduced amount of energy as ELECTR or HYDROGEN
-    energy_demand_reduced_electrified.loc[
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        ["ELECTR"],
-    ] = (
+    energy_demand_reduced_electrified2 = (
         energy_demand_reduced_electrified.groupby(
             [
                 "Scenario",
                 "Region",
                 "Sector",
                 "Subsector",
-                "Product_category",
-                "Product_long",
-                "Product",
                 "Flow_category",
+                "Flow_long",
+                "Flow",
+                "Hydrogen",
+                "Flexible",
+                "Non-Energy Use",
             ]
         )
         .sum()
-        .loc[
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            ["Final consumption"],
-        ]
+        .reset_index()
     )
 
-    energy_demand_reduced_electrified.loc[
-        "HYDROGEN"
-    ] = energy_demand_reduced_electrified.groupby().sum()
+    energy_demand_reduced_electrified_e = energy_demand_reduced_electrified2[
+        energy_demand_reduced_electrified2["Hydrogen"] == "n"
+    ]
+    energy_demand_reduced_electrified_e["Product_category"] = "Electricity and Heat"
+    energy_demand_reduced_electrified_e["Product_long"] = "Electricity"
+    energy_demand_reduced_electrified_e["Product"] = "ELECTR"
 
-    energy_demand_reduced_electrified.loc[~["ELECTR", "HYRDROGEN"]] = 0
+    energy_demand_reduced_electrified_h = energy_demand_reduced_electrified2[
+        energy_demand_reduced_electrified2["Hydrogen"] == "y"
+    ]
+    energy_demand_reduced_electrified_h["Product_category"] = "Hydrogen"
+    energy_demand_reduced_electrified_h["Product_long"] = "Hydrogen"
+    energy_demand_reduced_electrified_h["Product"] = "HYDROGEN"
+
+    energy_demand_reduced_electrified2 = pd.concat(
+        [energy_demand_reduced_electrified_e, energy_demand_reduced_electrified_h]
+    )
+
+    energy_demand_reduced_electrified2.set_index(
+        [
+            "Scenario",
+            "Region",
+            "Sector",
+            "Subsector",
+            "Product_category",
+            "Product_long",
+            "Product",
+            "Flow_category",
+            "Flow_long",
+            "Flow",
+            "Hydrogen",
+            "Flexible",
+            "Non-Energy Use",
+        ],
+        inplace=True,
+    )
 
     # Add this reduced level of electrical energy demand to ELECTR
-    energy_demand_post_electrification = (
-        energy_demand_subtract_electrified + energy_demand_reduced_electrified
-    )
-
-    # Apply percentage reduction attributed to additional energy efficiency measures
-    addtl_eff = pd.DataFrame(pd.read_csv("podi/data/ef_ratios.csv")).set_index(
-        ["Region", "Sector", "Product", "Scenario"]
-    )
-    addtl_eff.columns = addtl_eff.columns.astype(int)
-
-    labels = (
-        labels.reset_index()
-        .drop(columns=["WWS Upstream Product", "Product"])
-        .set_index(["Sector", "WWS Addtl Efficiency"])
-        .rename_axis(index={"WWS Addtl Efficiency": "Product"})
-        .rename(columns={"Product": "IEA Product"})
-    )
-
-    addtl_eff = (
-        (
-            addtl_eff.reset_index()
-            .set_index(["Sector", "Product"])
-            .merge(labels, on=["Sector", "Product"])
-            .set_index(
-                [
-                    "Region",
-                    "Scenario",
-                    "Subsector",
-                    "IEA Product",
-                    "Flow",
-                ],
-                append=True,
-            )
-        )
-        .droplevel(["Product", "Scenario"])
-        .reorder_levels(["Region", "Sector", "Subsector", "IEA Product", "Flow"])
-    )
-
-    energy_demand_post_addtl_eff = energy_demand_post_electrification.apply(
-        lambda x: x.mul(
-            addtl_eff.loc[x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]]
-        ),
-        axis=1,
-    )
-
-    energy_demand_post_addtl_eff = energy_demand_post_addtl_eff.replace(NaN, 0)
+    energy_demand_post_electrification = pd.concat(
+        [energy_demand_subtract_electrified, energy_demand_reduced_electrified2]
+    ).drop_duplicates()
 
     # endregion
 
@@ -865,6 +880,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     energy_demand_baseline.to_csv("podi/data/energy_demand_baseline.csv")
     energy_demand_post_upstream.to_csv("podi/data/energy_demand_post_upstream.csv")
+    energy_demand_post_addtl_eff.to_csv("podi/data/energy_demand_post_addtl_eff.csv")
     energy_demand_electrified.to_csv("podi/data/energy_demand_electrified.csv")
     energy_demand_subtract_electrified.to_csv(
         "podi/data/energy_demand_subtract_electrified.csv"
@@ -873,10 +889,8 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         "podi/data/energy_demand_reduced_electrified.csv"
     )
     energy_demand_post_electrification.to_csv(
-        "podi/data/energy_demand_post_electrification.csv"
+        "podi/data/energy_demand_" + scenario + ".csv"
     )
-    energy_demand_post_addtl_eff.to_csv("podi/data/energy_demand_pathway.csv")
-
     # endregion
 
-    return (energy_demand, energy_demand_post_addtl_eff)
+    return (energy_demand, energy_demand_post_electrification)

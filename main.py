@@ -66,7 +66,7 @@ else:
     ).set_index(index)
     energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
     energy_demand_pathway = pd.DataFrame(
-        pd.read_csv("podi/data/energy_demand_pathway.csv")
+        pd.read_csv("podi/data/energy_demand" + scenario + ".csv")
     ).set_index(index)
     energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
 

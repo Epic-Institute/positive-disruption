@@ -16,7 +16,7 @@ CRNGFEED,AGRICULT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,
 CRUDEOIL,AGRICULT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,AGRICULT,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,AGRICULT,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,AGRICULT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,AGRICULT,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,AGRICULT,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,AGRICULT,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,AGRICULT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -44,8 +44,8 @@ PEATPROD,AGRICULT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PETCOKE,AGRICULT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,AGRICULT,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 RESFUEL,AGRICULT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,AGRICULT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,AGRICULT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,AGRICULT,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,AGRICULT,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,AGRICULT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,AGRICULT,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,AGRICULT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -66,7 +66,7 @@ CRUDEOIL,AUTOCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,y,n,n
 ELECTR,AUTOCHP,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,y,y,y,n,n,n
 ETHANE,AUTOCHP,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,y,y,y,n,n,n
 GASWKSGS,AUTOCHP,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,y,n,n,n
-GEOTHERM,AUTOCHP,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,y,n,n,n
+GEOTHERM,AUTOCHP,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,y,n,n,n
 HEAT,AUTOCHP,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,y,n,n,n
 INDWASTE,AUTOCHP,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,y,n,n,n
 LIGNITE,AUTOCHP,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,y,n,n,n
@@ -82,7 +82,7 @@ NATGAS,AUTOCHP,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl 
 NGL,AUTOCHP,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,y,y,y,n,n,n
 NONBIODIES,AUTOCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,y,n,n,n
 NONBIOJETK,AUTOCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,y,n,n,n
-NUCLEAR,AUTOCHP,Industrial,,Nuclear,electricity ef ratio,N,electricity addtl eff,y,y,y,n,n,n
+NUCLEAR,AUTOCHP,Electric Power,,Nuclear,electricity ef ratio,N,electricity addtl eff,y,y,y,n,n,n
 OBIOLIQ,AUTOCHP,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,y,n,n,n
 OGASES,AUTOCHP,Industrial,,Coal,natural gas ef ratio,N,natural gas addtl eff,y,y,y,n,n,n
 OILSHALE,AUTOCHP,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,y,n,n,n
@@ -97,7 +97,7 @@ PETCOKE,AUTOCHP,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,y,n,n,n
 PRIMSBIO,AUTOCHP,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,y,n,n,n
 REFINGAS,AUTOCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,y,n,n,n
 RESFUEL,AUTOCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,y,n,n,n
-SOLWIND,AUTOCHP,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLWIND,AUTOCHP,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,AUTOCHP,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,y,n,n,n
 TOTAL,AUTOCHP,Industrial,,Total,na,N,na,y,y,y,n,n,n
 TOTPRODS,AUTOCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,y,n,n,n
@@ -119,8 +119,8 @@ CRNGFEED,AUTOELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,
 CRUDEOIL,AUTOELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 ELECTR,AUTOELEC,Electric Power,na,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,AUTOELEC,Electric Power,na,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
-GEOTHERM,AUTOELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-HYDRO,AUTOELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,AUTOELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+HYDRO,AUTOELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 INDWASTE,AUTOELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 LIGNITE,AUTOELEC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 LPG,AUTOELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
@@ -148,14 +148,14 @@ PETCOKE,AUTOELEC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n
 PRIMSBIO,AUTOELEC,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 REFINGAS,AUTOELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 RESFUEL,AUTOELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-SOLARPV,AUTOELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLARTH,AUTOELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLWIND,AUTOELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARPV,AUTOELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+SOLARTH,AUTOELEC,Electric Power,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
+SOLWIND,AUTOELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,AUTOELEC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
-TIDE,AUTOELEC,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+TIDE,AUTOELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 TOTAL,AUTOELEC,Electric Power,na,Total,na,N,na,n,n,y,n,n,n
 TOTPRODS,AUTOELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-WIND,AUTOELEC,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+WIND,AUTOELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 ANTCOAL,AUTOHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 BIOGASES,AUTOHEAT,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 BITCOAL,AUTOHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -196,8 +196,8 @@ PETCOKE,AUTOHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,AUTOHEAT,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,AUTOHEAT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,AUTOHEAT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,AUTOHEAT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,AUTOHEAT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,AUTOHEAT,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,AUTOHEAT,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,AUTOHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,AUTOHEAT,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,AUTOHEAT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -264,7 +264,7 @@ CRUDEOIL,CHEMICAL,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,
 ELECTR,CHEMICAL,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 ETHANE,CHEMICAL,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 GASWKSGS,CHEMICAL,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,CHEMICAL,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,CHEMICAL,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,y,y,n,n,n,n
 HEAT,CHEMICAL,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,CHEMICAL,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,CHEMICAL,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -295,8 +295,8 @@ PETCOKE,CHEMICAL,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,CHEMICAL,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,CHEMICAL,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,CHEMICAL,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,CHEMICAL,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,CHEMICAL,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,CHEMICAL,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,CHEMICAL,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,CHEMICAL,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,CHEMICAL,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,CHEMICAL,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -351,8 +351,8 @@ PETCOKE,COMMPUB,Commercial,,Coal,coal ef ratio,N,coal addtl eff,n,n,n,n,y,n
 PRIMSBIO,COMMPUB,Commercial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,n,n,y,n
 REFINGAS,COMMPUB,Commercial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,n,n,y,n
 RESFUEL,COMMPUB,Commercial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,n,n,y,n
-SOLARTH,COMMPUB,Commercial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,n,n,y,n
-SOLWIND,COMMPUB,Commercial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,COMMPUB,Commercial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,n,n,y,n
+SOLWIND,COMMPUB,Commercial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,COMMPUB,Commercial,,Coal,coal ef ratio,N,coal addtl eff,n,n,n,n,n,n
 TOTAL,COMMPUB,Commercial,,Total,na,N,na,n,n,n,n,n,n
 TOTPRODS,COMMPUB,Commercial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,n,n,n,n
@@ -403,8 +403,8 @@ PETCOKE,CONSTRUC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,CONSTRUC,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,CONSTRUC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,CONSTRUC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,CONSTRUC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,CONSTRUC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,CONSTRUC,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,CONSTRUC,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,CONSTRUC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,CONSTRUC,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,CONSTRUC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -460,8 +460,8 @@ PETCOKE,DISTLOSS,Industrial,na,Coal,coal ef ratio,Y,na,n,n,n,n,n,y
 PRIMSBIO,DISTLOSS,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,n,n,n,y
 REFINGAS,DISTLOSS,Industrial,na,Natural gas,natural gas ef ratio,Y,na,n,n,n,n,n,y
 RESFUEL,DISTLOSS,Industrial,na,Liquid fuels,oil ef ratio,Y,na,n,n,n,n,n,y
-SOLARTH,DISTLOSS,Industrial,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,n,n,n,y
-SOLWIND,DISTLOSS,Industrial,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,DISTLOSS,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,n,n,n,y
+SOLWIND,DISTLOSS,Industrial,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,DISTLOSS,Industrial,na,Coal,coal ef ratio,Y,na,n,n,n,n,n,y
 TOTAL,DISTLOSS,Industrial,na,Total,na,N,na,n,n,n,n,n,y
 TOTPRODS,DISTLOSS,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,n,n,n,y
@@ -653,7 +653,7 @@ HEAT,ECOKEOVS,Industrial,High Temperature,Natural gas,heat ef ratio,N,heat addtl
 COAL,EFFELE,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 COMRENEW,EFFELE,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 CRNGFEED,EFFELE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-GEOTHERM,EFFELE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,EFFELE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 MTOTOIL,EFFELE,Electric Power,na,Electricity,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 MTOTSOLID,EFFELE,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 NATGAS,EFFELE,Electric Power,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,n,n,y,n,n,n
@@ -664,11 +664,11 @@ TOTPRODS,EFFELE,Electric Power,na,Electricity,oil ef ratio,N,oil addtl eff,n,n,y
 COAL,EFFPROD,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 COMRENEW,EFFPROD,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 CRNGFEED,EFFPROD,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-GEOTHERM,EFFPROD,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,EFFPROD,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 MTOTOIL,EFFPROD,Industrial,,Electricity,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 MTOTSOLID,EFFPROD,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 NATGAS,EFFPROD,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,n,n,y,n,n,n
-NUCLEAR,EFFPROD,Industrial,,Nuclear,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+NUCLEAR,EFFPROD,Electric Power,,Nuclear,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 OILSHALE,EFFPROD,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 PEAT,EFFPROD,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 TOTPRODS,EFFPROD,Industrial,,Electricity,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
@@ -710,7 +710,7 @@ COMRENEW,ELAUTOC,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels
 CRNGFEED,ELAUTOC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 CRUDEOIL,ELAUTOC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 GASWKSGS,ELAUTOC,Electric Power,na,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
-GEOTHERM,ELAUTOC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,ELAUTOC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,ELAUTOC,Electric Power,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,y,n,n,n
 INDWASTE,ELAUTOC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 LIGNITE,ELAUTOC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
@@ -741,7 +741,7 @@ PETCOKE,ELAUTOC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,
 PRIMSBIO,ELAUTOC,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 REFINGAS,ELAUTOC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 RESFUEL,ELAUTOC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-SOLWIND,ELAUTOC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLWIND,ELAUTOC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,ELAUTOC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 TOTAL,ELAUTOC,Electric Power,na,Total,na,N,na,n,n,y,n,n,n
 TOTPRODS,ELAUTOC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
@@ -762,9 +762,9 @@ COMRENEW,ELAUTOE,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels
 CRNGFEED,ELAUTOE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 CRUDEOIL,ELAUTOE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 GASWKSGS,ELAUTOE,Electric Power,na,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
-GEOTHERM,ELAUTOE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,ELAUTOE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,ELAUTOE,Electric Power,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,y,n,n,n
-HYDRO,ELAUTOE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+HYDRO,ELAUTOE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 INDWASTE,ELAUTOE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 LIGNITE,ELAUTOE,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 LPG,ELAUTOE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
@@ -793,14 +793,14 @@ PETCOKE,ELAUTOE,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,
 PRIMSBIO,ELAUTOE,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 REFINGAS,ELAUTOE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 RESFUEL,ELAUTOE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-SOLARPV,ELAUTOE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLARTH,ELAUTOE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLWIND,ELAUTOE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARPV,ELAUTOE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+SOLARTH,ELAUTOE,Electric Power,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
+SOLWIND,ELAUTOE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,ELAUTOE,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
-TIDE,ELAUTOE,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+TIDE,ELAUTOE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 TOTAL,ELAUTOE,Electric Power,na,Total,na,N,na,n,n,y,n,n,n
 TOTPRODS,ELAUTOE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-WIND,ELAUTOE,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+WIND,ELAUTOE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,ELAUTOE,Electric Power,High Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,y,n,n,n
 ANTCOAL,ELMAINC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 BIODIESEL,ELMAINC,Electric Power,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
@@ -816,7 +816,7 @@ COMRENEW,ELMAINC,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels
 CRNGFEED,ELMAINC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 CRUDEOIL,ELMAINC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 GASWKSGS,ELMAINC,Electric Power,na,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
-GEOTHERM,ELMAINC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,ELMAINC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,ELMAINC,Electric Power,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,y,n,n,n
 INDWASTE,ELMAINC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 LIGNITE,ELMAINC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
@@ -848,7 +848,7 @@ PETCOKE,ELMAINC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,
 PRIMSBIO,ELMAINC,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 REFINGAS,ELMAINC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 RESFUEL,ELMAINC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-SOLWIND,ELMAINC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLWIND,ELMAINC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,ELMAINC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 TOTAL,ELMAINC,Electric Power,na,Total,na,N,na,n,n,y,n,n,n
 TOTPRODS,ELMAINC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
@@ -868,9 +868,9 @@ COMRENEW,ELMAINE,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels
 CRNGFEED,ELMAINE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 CRUDEOIL,ELMAINE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 GASWKSGS,ELMAINE,Electric Power,na,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
-GEOTHERM,ELMAINE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,ELMAINE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,ELMAINE,Electric Power,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,y,n,n,n
-HYDRO,ELMAINE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+HYDRO,ELMAINE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 INDWASTE,ELMAINE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 LIGNITE,ELMAINE,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 LPG,ELMAINE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
@@ -902,14 +902,14 @@ PETCOKE,ELMAINE,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,
 PRIMSBIO,ELMAINE,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 REFINGAS,ELMAINE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 RESFUEL,ELMAINE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-SOLARPV,ELMAINE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLARTH,ELMAINE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLWIND,ELMAINE,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARPV,ELMAINE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+SOLARTH,ELMAINE,Electric Power,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
+SOLWIND,ELMAINE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,ELMAINE,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
-TIDE,ELMAINE,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+TIDE,ELMAINE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 TOTAL,ELMAINE,Electric Power,na,Total,na,N,na,n,n,y,n,n,n
 TOTPRODS,ELMAINE,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-WIND,ELMAINE,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+WIND,ELMAINE,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,ELMAINE,Electric Power,High Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,y,n,n,n
 ELECTR,ELNG,Industrial,,Electricity,electricity ef ratio,Y,na,n,n,y,n,n,n
 HEAT,ELNG,Industrial,Low Temperature,Natural gas,heat ef ratio,Y,na,y,y,n,n,n,n
@@ -932,9 +932,9 @@ COMRENEW,ELOUTPUT,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuel
 CRNGFEED,ELOUTPUT,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 CRUDEOIL,ELOUTPUT,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 GASWKSGS,ELOUTPUT,Electric Power,na,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
-GEOTHERM,ELOUTPUT,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,ELOUTPUT,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,ELOUTPUT,Electric Power,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,y,n,n,n
-HYDRO,ELOUTPUT,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+HYDRO,ELOUTPUT,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 INDWASTE,ELOUTPUT,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 LIGNITE,ELOUTPUT,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 LPG,ELOUTPUT,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
@@ -967,14 +967,14 @@ PETCOKE,ELOUTPUT,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n
 PRIMSBIO,ELOUTPUT,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 REFINGAS,ELOUTPUT,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 RESFUEL,ELOUTPUT,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-SOLARPV,ELOUTPUT,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLARTH,ELOUTPUT,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLWIND,ELOUTPUT,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARPV,ELOUTPUT,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+SOLARTH,ELOUTPUT,Electric Power,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
+SOLWIND,ELOUTPUT,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,ELOUTPUT,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
-TIDE,ELOUTPUT,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+TIDE,ELOUTPUT,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 TOTAL,ELOUTPUT,Electric Power,na,Total,na,N,na,n,n,y,n,n,n
 TOTPRODS,ELOUTPUT,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-WIND,ELOUTPUT,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+WIND,ELOUTPUT,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,ELOUTPUT,Electric Power,High Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,y,n,n,n
 ANTCOAL,EMINES,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 BIODIESEL,EMINES,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
@@ -1047,7 +1047,7 @@ PETCOKE,ENONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,ENONSPEC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
 REFINGAS,ENONSPEC,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 RESFUEL,ENONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,ENONSPEC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+SOLARTH,ENONSPEC,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 SUBCOAL,ENONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,ENONSPEC,Industrial,,Total,na,N,na,y,y,n,n,n,n
 WHITESP,ENONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1099,7 +1099,7 @@ COKEOVGS,EPOWERPLT,Industrial,,Coal,natural gas ef ratio,N,natural gas addtl eff
 CRUDEOIL,EPOWERPLT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 ELECTR,EPOWERPLT,Electric Power,na,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,EPOWERPLT,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
-GEOTHERM,EPOWERPLT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,EPOWERPLT,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,EPOWERPLT,Industrial,Low Temperature,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 INDWASTE,EPOWERPLT,Industrial,,Total,biofuels_waste ef ratio,Y,na,n,n,y,n,n,n
 LIGNITE,EPOWERPLT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
@@ -1126,7 +1126,7 @@ PETCOKE,EPOWERPLT,Industrial,,Coal,coal ef ratio,Y,na,n,n,y,n,n,n
 PRIMSBIO,EPOWERPLT,Industrial,,Renewables,biofuels_waste ef ratio,Y,na,n,n,y,n,n,n
 REFINGAS,EPOWERPLT,Industrial,,Liquid fuels,oil ef ratio,Y,na,n,n,y,n,n,n
 RESFUEL,EPOWERPLT,Industrial,,Liquid fuels,oil ef ratio,Y,na,n,n,y,n,n,n
-SOLARTH,EPOWERPLT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,EPOWERPLT,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
 SUBCOAL,EPOWERPLT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 TOTAL,EPOWERPLT,Industrial,,Total,electricity ef ratio,Y,na,n,n,y,n,n,n
 HEAT,EPOWERPLT,Industrial,High Temperature,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
@@ -1167,7 +1167,7 @@ PETCOKE,EREFINER,Industrial,,Coal,coal ef ratio,Y,na,y,y,n,n,n,n
 PRIMSBIO,EREFINER,Industrial,,Liquid fuels,biofuels_waste ef ratio,Y,na,y,y,n,n,n,n
 REFINGAS,EREFINER,Industrial,,Liquid fuels,oil ef ratio,Y,na,y,y,n,n,n,n
 RESFUEL,EREFINER,Industrial,,Liquid fuels,oil ef ratio,Y,na,y,y,n,n,n,n
-SOLARTH,EREFINER,Industrial,,Liquid fuels,renewables ef ratio,Y,na,y,y,n,n,n,n
+SOLARTH,EREFINER,Industrial,,Renewables,wws heat ef ratio,Y,na,y,y,n,n,n,n
 TOTAL,EREFINER,Industrial,,Liquid fuels,oil ef ratio,Y,na,y,y,n,n,n,n
 WHITESP,EREFINER,Industrial,,Liquid fuels,oil ef ratio,Y,na,y,y,n,n,n,n
 HEAT,EREFINER,Industrial,High Temperature,Liquid fuels,heat ef ratio,Y,na,y,y,n,n,n,n
@@ -1237,7 +1237,7 @@ CHARCOAL,FISHING,Industrial,,Renewables,renewables ef ratio,N,renewables addtl e
 COAL,FISHING,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 COMRENEW,FISHING,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 ELECTR,FISHING,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
-GEOTHERM,FISHING,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,FISHING,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,FISHING,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 LIGNITE,FISHING,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 LPG,FISHING,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1253,8 +1253,8 @@ ONONSPEC,FISHING,Industrial,,Liquid fuels,na,N,na,y,y,n,n,n,n
 OTHKERO,FISHING,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 PRIMSBIO,FISHING,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 RESFUEL,FISHING,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,FISHING,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,FISHING,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,FISHING,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,FISHING,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 TOTAL,FISHING,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,FISHING,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 HEAT,FISHING,Industrial,High Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
@@ -1276,7 +1276,7 @@ CRNGFEED,FOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n
 CRUDEOIL,FOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,FOODPRO,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,FOODPRO,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,FOODPRO,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,FOODPRO,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,FOODPRO,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,FOODPRO,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,FOODPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -1306,8 +1306,8 @@ PETCOKE,FOODPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,FOODPRO,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,FOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,FOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,FOODPRO,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,FOODPRO,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,FOODPRO,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,FOODPRO,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,FOODPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,FOODPRO,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,FOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1347,7 +1347,7 @@ NATGAS,HEATOUT,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl 
 NONBIODIES,HEATOUT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 NONBIOJETK,HEATOUT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 NONCRUDE,HEATOUT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-NUCLEAR,HEATOUT,Industrial,,Nuclear,electricity ef ratio,N,electricity addtl eff,y,y,n,n,n,n
+NUCLEAR,HEATOUT,Industrial,,Nuclear,heat ef ratio,N,electricity addtl eff,y,y,n,n,n,n
 OBIOLIQ,HEATOUT,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 OGASES,HEATOUT,Industrial,,Coal,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 OILSHALE,HEATOUT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -1362,8 +1362,8 @@ PETCOKE,HEATOUT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,HEATOUT,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,HEATOUT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,HEATOUT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,HEATOUT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,HEATOUT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,HEATOUT,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,HEATOUT,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,HEATOUT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,HEATOUT,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,HEATOUT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1411,7 +1411,7 @@ PETCOKE,HEAUTOC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,HEAUTOC,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,HEAUTOC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,HEAUTOC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLWIND,HEAUTOC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLWIND,HEAUTOC,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,HEAUTOC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,HEAUTOC,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,HEAUTOC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1459,7 +1459,7 @@ PRIMSBIO,HEAUTOH,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste
 REFINGAS,HEAUTOH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,HEAUTOH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 SOLARTH,HEAUTOH,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-SOLWIND,HEAUTOH,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
+SOLWIND,HEAUTOH,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,HEAUTOH,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,HEAUTOH,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,HEAUTOH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1498,7 +1498,7 @@ NATGAS,HEMAINC,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl 
 NONBIODIES,HEMAINC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 NONBIOJETK,HEMAINC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 NONCRUDE,HEMAINC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-NUCLEAR,HEMAINC,Industrial,,Nuclear,electricity ef ratio,N,electricity addtl eff,y,y,n,n,n,n
+NUCLEAR,HEMAINC,Industrial,,Nuclear,heat ef ratio,N,electricity addtl eff,y,y,n,n,n,n
 OBIOLIQ,HEMAINC,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 OGASES,HEMAINC,Industrial,,Coal,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 OILSHALE,HEMAINC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -1513,7 +1513,7 @@ PETCOKE,HEMAINC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,HEMAINC,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,HEMAINC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,HEMAINC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLWIND,HEMAINC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLWIND,HEMAINC,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,HEMAINC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,HEMAINC,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,HEMAINC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1547,7 +1547,7 @@ NAPHTHA,HEMAINH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,
 NATGAS,HEMAINH,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 NONBIODIES,HEMAINH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 NONBIOJETK,HEMAINH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-NUCLEAR,HEMAINH,Industrial,,Nuclear,electricity ef ratio,N,electricity addtl eff,y,y,n,n,n,n
+NUCLEAR,HEMAINH,Industrial,,Nuclear,heat ef ratio,N,electricity addtl eff,y,y,n,n,n,n
 OBIOLIQ,HEMAINH,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 OGASES,HEMAINH,Industrial,,Coal,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 OILSHALE,HEMAINH,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -1562,8 +1562,8 @@ PETCOKE,HEMAINH,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,HEMAINH,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,HEMAINH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,HEMAINH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,HEMAINH,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,HEMAINH,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,HEMAINH,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,HEMAINH,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,HEMAINH,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,HEMAINH,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,HEMAINH,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1639,7 +1639,7 @@ CRNGFEED,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 CRUDEOIL,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 GEOTHERM,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 HEAT,INDPROD,Total energy consumption,Low Temperature,Total,na,N,na,n,n,n,n,n,n
-HYDRO,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
+HYDRO,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,y,n,n,n
 INDWASTE,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 LIGNITE,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 MRENEW,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
@@ -1657,13 +1657,13 @@ OILSHALE,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 OTHER,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 PEAT,INDPROD,Total energy consumption,na,Coal,na,N,na,n,n,n,n,n,n
 PRIMSBIO,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
-SOLARPV,INDPROD,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLARTH,INDPROD,Total energy consumption,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,n,n,n,n
-SOLWIND,INDPROD,Total energy consumption,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,n,n,n,n
+SOLARPV,INDPROD,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+SOLARTH,INDPROD,Total energy consumption,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,n,n,n,n
+SOLWIND,INDPROD,Total energy consumption,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,n,n,n,n
 SUBCOAL,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
-TIDE,INDPROD,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+TIDE,INDPROD,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 TOTAL,INDPROD,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
-WIND,INDPROD,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+WIND,INDPROD,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 HEAT,INDPROD,Total energy consumption,High Temperature,Total,na,N,na,n,n,n,n,n,n
 ANTCOAL,INONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 AVGAS,INONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1686,7 +1686,7 @@ ELECTR,INONSPEC,Industrial,,Electricity,electricity ef ratio,N,electricity addtl
 ETHANE,INONSPEC,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 GASCOKE,INONSPEC,Industrial,,Coal,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 GASWKSGS,INONSPEC,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,INONSPEC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,INONSPEC,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,INONSPEC,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,INONSPEC,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,INONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -1717,8 +1717,8 @@ PETCOKE,INONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,INONSPEC,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,INONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,INONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,INONSPEC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,INONSPEC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,INONSPEC,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,INONSPEC,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,INONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,INONSPEC,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,INONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1742,7 +1742,7 @@ CRUDEOIL,IRONSTL,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n
 ELECTR,IRONSTL,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASCOKE,IRONSTL,Industrial,,Coal,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 GASWKSGS,IRONSTL,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,IRONSTL,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,IRONSTL,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,IRONSTL,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,IRONSTL,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,IRONSTL,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -1771,8 +1771,8 @@ PETCOKE,IRONSTL,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,IRONSTL,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,IRONSTL,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,IRONSTL,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,IRONSTL,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,IRONSTL,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,IRONSTL,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,IRONSTL,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,IRONSTL,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,IRONSTL,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,IRONSTL,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1802,7 +1802,7 @@ CRNGFEED,MACHINE,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n
 CRUDEOIL,MACHINE,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,MACHINE,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,MACHINE,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,MACHINE,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,MACHINE,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,MACHINE,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,MACHINE,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,MACHINE,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -1830,8 +1830,8 @@ PETCOKE,MACHINE,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,MACHINE,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,MACHINE,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,MACHINE,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,MACHINE,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,MACHINE,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,MACHINE,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,MACHINE,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,MACHINE,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,MACHINE,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,MACHINE,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -1852,7 +1852,7 @@ CRNGFEED,MAINCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,y,n,n
 CRUDEOIL,MAINCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,y,n,n,n
 ELECTR,MAINCHP,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,y,y,n,n,n
 GASWKSGS,MAINCHP,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,y,y,n,n,n
-GEOTHERM,MAINCHP,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,y,y,n,n,n
+GEOTHERM,MAINCHP,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,y,y,n,n,n
 HEAT,MAINCHP,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,y,y,n,n,n
 INDWASTE,MAINCHP,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,y,y,n,n,n
 LIGNITE,MAINCHP,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,y,n,n,n
@@ -1869,7 +1869,7 @@ NATGAS,MAINCHP,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl 
 NONBIODIES,MAINCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,y,n,n,n
 NONBIOJETK,MAINCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,y,n,n,n
 NONCRUDE,MAINCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,y,n,n,n
-NUCLEAR,MAINCHP,Industrial,,Nuclear,electricity ef ratio,N,electricity addtl eff,y,y,y,n,n,n
+NUCLEAR,MAINCHP,Industrial,,Nuclear,heat ef ratio,N,electricity addtl eff,y,y,y,n,n,n
 OBIOLIQ,MAINCHP,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,y,y,n,n,n
 OGASES,MAINCHP,Industrial,,Coal,natural gas ef ratio,N,natural gas addtl eff,n,y,y,n,n,n
 OILSHALE,MAINCHP,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,y,n,n,n
@@ -1884,7 +1884,7 @@ PETCOKE,MAINCHP,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,y,n,n,n
 PRIMSBIO,MAINCHP,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,y,y,n,n,n
 REFINGAS,MAINCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,y,n,n,n
 RESFUEL,MAINCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,y,n,n,n
-SOLWIND,MAINCHP,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLWIND,MAINCHP,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,MAINCHP,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,y,n,n,n
 TOTAL,MAINCHP,Industrial,,Total,na,N,na,n,y,y,n,n,n
 TOTPRODS,MAINCHP,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,y,n,n,n
@@ -1906,8 +1906,8 @@ CRNGFEED,MAINELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,
 CRUDEOIL,MAINELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 ELECTR,MAINELEC,Electric Power,na,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,MAINELEC,Electric Power,na,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
-GEOTHERM,MAINELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-HYDRO,MAINELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+GEOTHERM,MAINELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+HYDRO,MAINELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 INDWASTE,MAINELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 LIGNITE,MAINELEC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
 LPG,MAINELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
@@ -1940,14 +1940,14 @@ PETCOKE,MAINELEC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n
 PRIMSBIO,MAINELEC,Electric Power,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,y,n,n,n
 REFINGAS,MAINELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
 RESFUEL,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-SOLARPV,MAINELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLARTH,MAINELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
-SOLWIND,MAINELEC,Electric Power,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARPV,MAINELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
+SOLARTH,MAINELEC,Electric Power,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,y,n,n,n
+SOLWIND,MAINELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,MAINELEC,Electric Power,na,Coal,coal ef ratio,N,coal addtl eff,n,n,y,n,n,n
-TIDE,MAINELEC,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+TIDE,MAINELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 TOTAL,MAINELEC,Electric Power,na,Total,na,N,na,n,n,y,n,n,n
 TOTPRODS,MAINELEC,Electric Power,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,y,n,n,n
-WIND,MAINELEC,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+WIND,MAINELEC,Electric Power,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 ANTCOAL,MAINHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,n,n,n,n
 BIOGASES,MAINHEAT,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,y,n,n,n,n
 BITCOAL,MAINHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,n,n,n,n
@@ -1959,7 +1959,7 @@ COKCOAL,MAINHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,n,n,n,n
 COKEOVGS,MAINHEAT,Industrial,,Coal,natural gas ef ratio,N,natural gas addtl eff,n,y,n,n,n,n
 COMRENEW,MAINHEAT,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,y,n,n,n,n
 GASWKSGS,MAINHEAT,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,y,n,n,n,n
-GEOTHERM,MAINHEAT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,y,n,n,n,n
+GEOTHERM,MAINHEAT,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,y,n,n,n,n
 HEAT,MAINHEAT,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,y,n,n,n,n
 INDWASTE,MAINHEAT,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,y,n,n,n,n
 LIGNITE,MAINHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,n,n,n,n
@@ -1974,7 +1974,7 @@ MUNWASTER,MAINHEAT,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_was
 NAPHTHA,MAINHEAT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,n,n,n,n
 NATGAS,MAINHEAT,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,n,y,n,n,n,n
 NONBIODIES,MAINHEAT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,n,n,n,n
-NUCLEAR,MAINHEAT,Industrial,,Nuclear,electricity ef ratio,N,electricity addtl eff,n,y,n,n,n,n
+NUCLEAR,MAINHEAT,Industrial,,Nuclear,heat ef ratio,N,electricity addtl eff,n,y,n,n,n,n
 OBIOLIQ,MAINHEAT,Industrial,,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,y,n,n,n,n
 OGASES,MAINHEAT,Industrial,,Coal,natural gas ef ratio,N,natural gas addtl eff,n,y,n,n,n,n
 OILSHALE,MAINHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,n,n,n,n
@@ -1989,8 +1989,8 @@ PETCOKE,MAINHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,n,n,n,n
 PRIMSBIO,MAINHEAT,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,y,n,n,n,n
 REFINGAS,MAINHEAT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,n,n,n,n
 RESFUEL,MAINHEAT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,n,n,n,n
-SOLARTH,MAINHEAT,Industrial,,Liquid fuels,wws heat ef ratio,N,wws heat addtl eff,n,y,n,n,n,n
-SOLWIND,MAINHEAT,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,MAINHEAT,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,y,n,n,n,n
+SOLWIND,MAINHEAT,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,MAINHEAT,Industrial,,Coal,coal ef ratio,N,coal addtl eff,n,y,n,n,n,n
 TOTAL,MAINHEAT,Industrial,,Total,na,N,na,n,y,n,n,n,n
 TOTPRODS,MAINHEAT,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,n,n,n,n
@@ -2098,8 +2098,8 @@ PETCOKE,MINING,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,MINING,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,MINING,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,MINING,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,MINING,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,MINING,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,MINING,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,MINING,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,MINING,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,MINING,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,MINING,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -2496,8 +2496,8 @@ PEATPROD,NONFERR,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PETCOKE,NONFERR,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,NONFERR,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 RESFUEL,NONFERR,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,NONFERR,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,NONFERR,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,NONFERR,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,NONFERR,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,NONFERR,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,NONFERR,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,NONFERR,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -2521,7 +2521,7 @@ CRNGFEED,NONMET,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,
 CRUDEOIL,NONMET,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,NONMET,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,y,y,n,n,n,n
 GASWKSGS,NONMET,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,NONMET,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,NONMET,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,NONMET,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,NONMET,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,NONMET,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -2551,8 +2551,8 @@ PETCOKE,NONMET,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,NONMET,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,NONMET,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,NONMET,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,NONMET,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,NONMET,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,NONMET,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,NONMET,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,NONMET,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,NONMET,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,NONMET,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -2574,7 +2574,7 @@ CRNGFEED,ONONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,
 CRUDEOIL,ONONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,ONONSPEC,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,ONONSPEC,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,ONONSPEC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,ONONSPEC,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,ONONSPEC,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,ONONSPEC,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,ONONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -2602,8 +2602,8 @@ PEATPROD,ONONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PETCOKE,ONONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,ONONSPEC,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 RESFUEL,ONONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,ONONSPEC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,ONONSPEC,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,ONONSPEC,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,ONONSPEC,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,ONONSPEC,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,ONONSPEC,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,ONONSPEC,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -2612,7 +2612,7 @@ COAL,OWNUSE,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 COMRENEW,OWNUSE,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 CRNGFEED,OWNUSE,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,OWNUSE,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
-GEOTHERM,OWNUSE,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,OWNUSE,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,OWNUSE,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 MRENEW,OWNUSE,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
 MTOTOIL,OWNUSE,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -2621,7 +2621,7 @@ MTOTSOLID,OWNUSE,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 NATGAS,OWNUSE,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 OILSHALE,OWNUSE,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PEAT,OWNUSE,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
-SOLWIND,OWNUSE,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLWIND,OWNUSE,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 TOTAL,OWNUSE,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,OWNUSE,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 HEAT,OWNUSE,Industrial,High Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
@@ -2667,8 +2667,8 @@ PETCOKE,PAPERPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,PAPERPRO,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,PAPERPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,PAPERPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,PAPERPRO,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,PAPERPRO,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,PAPERPRO,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,PAPERPRO,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,PAPERPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,PAPERPRO,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,PAPERPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -2800,7 +2800,7 @@ CRUDEOIL,RESIDENT,Residential,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,n,n,n
 ELECTR,RESIDENT,Residential,,Electricity,electricity ef ratio,N,electricity addtl eff,y,n,y,n,y,n
 GASCOKE,RESIDENT,Residential,,Coal,wws heat ef ratio,N,wws heat addtl eff,y,n,n,n,y,n
 GASWKSGS,RESIDENT,Residential,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,n,n,n,y,n
-GEOTHERM,RESIDENT,Residential,,Renewables,renewables ef ratio,N,renewables addtl eff,y,n,n,n,y,n
+GEOTHERM,RESIDENT,Residential,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,n,n,n,y,n
 HEAT,RESIDENT,Residential,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,n,n,n,y,n
 INDWASTE,RESIDENT,Residential,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,n,n,n,y,n
 LIGNITE,RESIDENT,Residential,,Coal,coal ef ratio,N,coal addtl eff,y,n,n,n,y,n
@@ -2830,8 +2830,8 @@ PETCOKE,RESIDENT,Residential,,Coal,coal ef ratio,N,coal addtl eff,y,n,n,n,y,n
 PRIMSBIO,RESIDENT,Residential,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,n,n,n,y,n
 REFINGAS,RESIDENT,Residential,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,n,n,n,y,n
 RESFUEL,RESIDENT,Residential,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,n,n,n,y,n
-SOLARTH,RESIDENT,Residential,,Renewables,renewables ef ratio,N,renewables addtl eff,y,n,n,n,y,n
-SOLWIND,RESIDENT,Residential,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,y,n
+SOLARTH,RESIDENT,Residential,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,n,n,n,y,n
+SOLWIND,RESIDENT,Residential,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,y,n
 SUBCOAL,RESIDENT,Residential,,Coal,coal ef ratio,N,coal addtl eff,y,n,n,n,y,n
 TOTAL,RESIDENT,Residential,,Total,na,N,na,y,n,n,n,y,n
 TOTPRODS,RESIDENT,Residential,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,n,n,n,y,n
@@ -3214,7 +3214,7 @@ CRNGFEED,TEXTILES,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,
 CRUDEOIL,TEXTILES,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,TEXTILES,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,TEXTILES,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,TEXTILES,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,TEXTILES,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,TEXTILES,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,TEXTILES,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,TEXTILES,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -3241,8 +3241,8 @@ PEATPROD,TEXTILES,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PETCOKE,TEXTILES,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,TEXTILES,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 RESFUEL,TEXTILES,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,TEXTILES,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,TEXTILES,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,TEXTILES,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,TEXTILES,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,TEXTILES,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,TEXTILES,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,TEXTILES,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -3270,7 +3270,7 @@ ELECTR,TFC,Total energy consumption,na,Electricity,electricity ef ratio,N,electr
 ETHANE,TFC,Total energy consumption,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,n,n,n,n,n,n
 GASCOKE,TFC,Total energy consumption,na,Coal,wws heat ef ratio,N,wws heat addtl eff,n,n,n,n,n,n
 GASWKSGS,TFC,Total energy consumption,na,Natural gas,wws heat ef ratio,N,wws heat addtl eff,n,n,n,n,n,n
-GEOTHERM,TFC,Total energy consumption,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,n,n,n,n
+GEOTHERM,TFC,Total energy consumption,na,Renewables,na,N,na,n,n,n,n,n,n
 HEAT,TFC,Total energy consumption,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,n,n,n,n,n,n
 INDWASTE,TFC,Total energy consumption,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,n,n,n,n
 JETGAS,TFC,Total energy consumption,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,n,n,n,n
@@ -3304,8 +3304,8 @@ PETCOKE,TFC,Total energy consumption,na,Coal,coal ef ratio,N,coal addtl eff,n,n,
 PRIMSBIO,TFC,Total energy consumption,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,n,n,n,n,n,n
 REFINGAS,TFC,Total energy consumption,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,n,n,n,n
 RESFUEL,TFC,Total energy consumption,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,n,n,n,n
-SOLARTH,TFC,Total energy consumption,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,n,n,n,n
-SOLWIND,TFC,Total energy consumption,na,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,n,n,n,n
+SOLARTH,TFC,Total energy consumption,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,n,n,n,n,n,n
+SOLWIND,TFC,Total energy consumption,na,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,n,n,n,n
 SUBCOAL,TFC,Total energy consumption,na,Coal,coal ef ratio,N,coal addtl eff,n,n,n,n,n,n
 TOTAL,TFC,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 TOTPRODS,TFC,Total energy consumption,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,n,n,n,n,n
@@ -3429,7 +3429,7 @@ PETCOKE,TOTENGY,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,TOTENGY,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
 REFINGAS,TOTENGY,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,TOTENGY,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,TOTENGY,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+SOLARTH,TOTENGY,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 SUBCOAL,TOTENGY,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,TOTENGY,Industrial,,Total,na,N,na,y,y,n,n,n,n
 WHITESP,TOTENGY,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -3455,7 +3455,7 @@ ELECTR,TOTIND,Industrial,,Electricity,electricity ef ratio,N,electricity addtl e
 ETHANE,TOTIND,Industrial,,Natural gas,natural gas ef ratio,N,natural gas addtl eff,y,y,n,n,n,n
 GASCOKE,TOTIND,Industrial,,Coal,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 GASWKSGS,TOTIND,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,TOTIND,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,TOTIND,Industrial,,Renewables,na,N,na,y,y,n,n,n,n
 HEAT,TOTIND,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,TOTIND,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,TOTIND,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -3487,8 +3487,8 @@ PETCOKE,TOTIND,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,TOTIND,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 REFINGAS,TOTIND,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 RESFUEL,TOTIND,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,TOTIND,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,TOTIND,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,TOTIND,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,TOTIND,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,TOTIND,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,TOTIND,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,TOTIND,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -3548,13 +3548,13 @@ PRIMSBIO,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 REFFEEDS,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 REFINGAS,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 RESFUEL,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
-SOLARPV,TOTTRANF,Total energy consumption,na,Total,renewables ef ratio,N,renewables addtl eff,n,n,n,n,n,n
-SOLARTH,TOTTRANF,Total energy consumption,na,Total,renewables ef ratio,N,renewables addtl eff,n,n,n,n,n,n
+SOLARPV,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
+SOLARTH,TOTTRANF,Total energy consumption,na,Total,wws heat ef ratio,N,wws heat addtl eff,n,n,n,n,n,n
 SUBCOAL,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
-TIDE,TOTTRANF,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+TIDE,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 TOTAL,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 WHITESP,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
-WIND,TOTTRANF,Electric Power,na,Electricity,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+WIND,TOTTRANF,Total energy consumption,na,Total,na,N,na,n,n,n,n,n,n
 HEAT,TOTTRANF,Total energy consumption,High Temperature,Total,na,N,na,n,n,n,n,n,n
 ANTCOAL,TOTTRANS,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,n,y,n,n,n,n
 AVGAS,TOTTRANS,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,n,y,n,n,n,n
@@ -3654,7 +3654,7 @@ CRNGFEED,TRANSEQ,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n
 CRUDEOIL,TRANSEQ,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,TRANSEQ,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,TRANSEQ,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,TRANSEQ,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,TRANSEQ,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,TRANSEQ,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,TRANSEQ,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,TRANSEQ,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -3680,8 +3680,8 @@ PEATPROD,TRANSEQ,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PETCOKE,TRANSEQ,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,TRANSEQ,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 RESFUEL,TRANSEQ,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,TRANSEQ,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,TRANSEQ,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,TRANSEQ,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,TRANSEQ,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,TRANSEQ,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,TRANSEQ,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,TRANSEQ,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
@@ -3794,7 +3794,7 @@ CRNGFEED,WOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n
 CRUDEOIL,WOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
 ELECTR,WOODPRO,Industrial,,Electricity,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 GASWKSGS,WOODPRO,Industrial,,Natural gas,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
-GEOTHERM,WOODPRO,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
+GEOTHERM,WOODPRO,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
 HEAT,WOODPRO,Industrial,Low Temperature,Natural gas,heat ef ratio,N,heat addtl eff,y,y,n,n,n,n
 INDWASTE,WOODPRO,Industrial,,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 LIGNITE,WOODPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
@@ -3819,8 +3819,8 @@ PEAT,WOODPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PEATPROD,WOODPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 PRIMSBIO,WOODPRO,Industrial,,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,y,y,n,n,n,n
 RESFUEL,WOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n
-SOLARTH,WOODPRO,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,y,y,n,n,n,n
-SOLWIND,WOODPRO,Industrial,,Renewables,renewables ef ratio,N,renewables addtl eff,n,n,y,n,n,n
+SOLARTH,WOODPRO,Industrial,,Renewables,wws heat ef ratio,N,wws heat addtl eff,y,y,n,n,n,n
+SOLWIND,WOODPRO,Industrial,,Renewables,electricity ef ratio,N,electricity addtl eff,n,n,y,n,n,n
 SUBCOAL,WOODPRO,Industrial,,Coal,coal ef ratio,N,coal addtl eff,y,y,n,n,n,n
 TOTAL,WOODPRO,Industrial,,Total,na,N,na,y,y,n,n,n,n
 TOTPRODS,WOODPRO,Industrial,,Liquid fuels,oil ef ratio,N,oil addtl eff,y,y,n,n,n,n

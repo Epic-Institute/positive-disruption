@@ -73,8 +73,90 @@ cl_old = {
 
 # endregion
 
+################################
+# RECREATE IEA ENERGY BALANCES #
+################################
+
+# region
+
+scenario = scenario
+start_year = data_start_year
+region = "usa"
+year = 2019
+
+# Filter for region and year
+energy_balance = (
+    energy_demand_pathway.loc[scenario, region]
+    .loc[:, [year]]
+    .groupby(
+        ["Sector", "Product_category", "Product_long", "Flow_category", "Flow_long"]
+    )
+    .sum()
+)
+
+# Create energy balance table structure
+energy_balance = (
+    energy_balance.groupby(
+        ["Product_category", "Product_long", "Flow_category", "Flow_long"]
+    )
+    .sum()
+    .reset_index()
+    .pivot(
+        index=["Flow_category", "Flow_long"],
+        columns=["Product_category", "Product_long"],
+        values=2019,
+    )
+    .fillna(0)
+    .reindex(
+        axis="index",
+        level=0,
+        labels=[
+            "Supply",
+            "Transformation processes",
+            "Energy industry own use and Losses",
+            "Final consumption",
+        ],
+    )
+    .reindex(
+        axis="columns",
+        level=0,
+        labels=[
+            "Coal",
+            "Crude, NGL, refinery feedstocks",
+            "Oil products",
+            "Natural gas",
+            "Biofuels and Waste",
+            "Electricity and Heat",
+        ],
+    )
+    .astype(int)
+)
+
+# Create Product categories (columns)
+energy_balance = pd.concat(
+    [
+        energy_balance.groupby("Product_category", axis="columns")
+        .sum()[
+            ["Coal", "Crude, NGL, refinery feedstocks", "Oil products", "Natural gas"]
+        ]
+        .rename(columns={"Crude, NGL, refinery feedstocks": "Crude oil"}),
+        energy_balance.loc[:, "Electricity and Heat"].loc[
+            :, ["Nuclear", "Hydro", "Electricity", "Heat"]
+        ],
+        pd.DataFrame(
+            energy_balance.loc[:, "Electricity and Heat"]
+            .loc[:, ["Solar photovoltaics", "Solar thermal"]]
+            .sum(axis=1)
+        ).rename(columns={0: "Wind, solar, etc."}),
+    ],
+    axis=1,  # "Tide", "Wind",  "Geothermal"]].sum()
+)
+
+
+# endregion
+
 ###################################
-# HISTORICAL TECH ADOPTION CURVES # FIG 1
+# HISTORICAL TECH ADOPTION CURVES #
 ###################################
 
 # region
