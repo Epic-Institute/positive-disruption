@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 # region
+from unicodedata import name
+import warnings
 import numpy as np
 import pandas as pd
 from podi.energy_demand import energy_demand
@@ -19,6 +21,7 @@ from podi.cdr.cdr_util import (
     fuel_em_def,
 )
 
+warnings.simplefilter(action="ignore", category=FutureWarning)
 regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "Region"})
 
 data_start_year = 1990
@@ -27,19 +30,45 @@ proj_end_year = 2050
 
 # endregion
 
+scenario = "pathway"
+
 #################
 # ENERGY DEMAND #
 #################
 
 # region
 
-(
-    energy_demand_baseline,
-    energy_demand_post_ef_upstream,
-    energy_demand_pathway,
-    ef_ratios,
-    addtl_eff,
-) = energy_demand("pathway", data_start_year, data_end_year, proj_end_year)
+recalc_energy_demand = False
+if recalc_energy_demand is True:
+    (
+        energy_demand_baseline,
+        energy_demand_pathway,
+    ) = energy_demand("pathway", data_start_year, data_end_year, proj_end_year)
+else:
+    index = [
+        "Scenario",
+        "Region",
+        "Sector",
+        "Subsector",
+        "Product_category",
+        "Product_long",
+        "Product",
+        "Flow_category",
+        "Flow_long",
+        "Flow",
+        "Hydrogen",
+        "Flexible",
+        "Non-Energy Use",
+    ]
+
+    energy_demand_baseline = pd.DataFrame(
+        pd.read_csv("podi/data/energy_demand_baseline.csv")
+    ).set_index(index)
+    energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
+    energy_demand_pathway = pd.DataFrame(
+        pd.read_csv("podi/data/energy_demand" + scenario + ".csv")
+    ).set_index(index)
+    energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
 
 # endregion
 
