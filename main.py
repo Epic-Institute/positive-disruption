@@ -66,7 +66,7 @@ else:
     ).set_index(index)
     energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
     energy_demand_pathway = pd.DataFrame(
-        pd.read_csv("podi/data/energy_demand" + scenario + ".csv")
+        pd.read_csv("podi/data/energy_demand_" + scenario + ".csv")
     ).set_index(index)
     energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
 
@@ -77,10 +77,6 @@ else:
 #################
 
 # region
-params = pd.read_csv("podi/data/params.csv")
-params.drop(params.index, inplace=True)
-params.to_csv("podi/data/params.csv", index=False)
-
 (
     elec_consump_baseline,
     elec_per_adoption_baseline,
@@ -92,11 +88,7 @@ params.to_csv("podi/data/params.csv", index=False)
     transport_per_adoption_baseline,
     transport_consump_cdr_baseline,
 ) = energy_supply(
-    "baseline",
-    energy_demand.loc[slice(None), slice(None), slice(None), ["baseline"]],
-    region_list,
-    data_start_year,
-    data_end_year,
+    "baseline", energy_demand_baseline, data_start_year, data_end_year, proj_end_year
 )
 
 (
@@ -110,11 +102,7 @@ params.to_csv("podi/data/params.csv", index=False)
     transport_per_adoption_pathway,
     transport_consump_cdr_pathway,
 ) = energy_supply(
-    "pathway",
-    energy_demand.loc[slice(None), slice(None), slice(None), ["pathway"]],
-    region_list,
-    data_start_year,
-    data_end_year,
+    "pathway", energy_demand_pathway, data_start_year, data_end_year, proj_end_year
 )
 
 elec_consump = elec_consump_baseline.append(elec_consump_pathway)
