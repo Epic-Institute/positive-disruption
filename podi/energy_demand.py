@@ -61,7 +61,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
                 "Region"
             ].str.lower()
 
-            # Format timeseries
+            # Format as a dataframe with timeseries as rows
             energy_demand_historical = pd.pivot_table(
                 energy_demand_historical,
                 values="Value",
@@ -69,10 +69,10 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
                 columns="Year",
             ).replace(NaN, 0)
 
-            # Remove duplicate regions created because of name overlap
+            # Remove duplicate regions created due to name overlaps
             energy_demand_historical = energy_demand_historical.loc[[region.lower()], :]
 
-            # Build df of all regions
+            # Build dataframe consisting of all regions
             energy_demand_historical2 = pd.concat(
                 [energy_demand_historical2, energy_demand_historical]
             )
@@ -86,7 +86,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     energy_demand_historical.columns = energy_demand_historical.columns.astype(int)
 
-    # Filter Product categories that are redundant or unused
+    # Filter product categories that are redundant or unused
     products = (
         pd.DataFrame(
             pd.read_csv(
@@ -109,7 +109,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         ]
     )["Short name"]
 
-    # Filter Products that are summations of other products
+    # Filter out products that are summations of other products
     products = products[
         ~products.isin(
             [
@@ -126,7 +126,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         )
     ]
 
-    # Filter Flow categories that are redundant or unused
+    # Filter out flow categories that are redundant or unused
     flows = (
         pd.DataFrame(
             pd.read_csv(
@@ -137,17 +137,15 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         .set_index("Flow Category")
         .loc[
             [
-                # "Electricity output",
                 "Energy industry own use and Losses",
                 "Final consumption",
-                # "Heat output",
                 "Supply",
                 "Transformation processes",
             ]
         ]
     )["Short name"]
 
-    # Filter Flows that are summations of other products or for energy balance purposes (exports, imports, statistical differences, stock changes, transfers)
+    # Filter out flows that are summations of other products or for energy balance purposes (exports, imports, statistical differences, stock changes, transfers)
     flows = flows[
         ~flows.isin(
             [
@@ -156,24 +154,6 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
                 "IMPORTS",
                 "INDPROD",
                 "LIQUEFAC",
-                # "NECHEM",
-                # "NECONSTRUC",
-                # "NEFOODPRO",
-                # "NEIND",
-                # "NEINONSPEC",
-                # "NEINTREN",
-                # "NEIRONSTL",
-                # "NEMACHINE",
-                # "NEMINING",
-                # "NENONFERR",
-                # "NENONMET",
-                # "NEOTHER",
-                # "NEPAPERPRO",
-                # "NETEXTILES",
-                # "NETRANS",
-                # "NETRANSEQ",
-                # "NEWOODPRO",
-                # "NONENUSE",
                 "STATDIFF",
                 "STOCKCHA",
                 "TES",
@@ -290,7 +270,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # For products HEAT/HEATNS/MANGAS that were duplicated to make Low Temperature/High Temperature products, scale their energy demand so the sum of the subproducts is equal to the original energy demand estimate
+    # For products HEAT/HEATNS that were duplicated to make Low Temperature/High Temperature products, scale their energy demand so the sum of the subproducts is equal to the original energy demand estimate
 
     # region
 
@@ -319,12 +299,12 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     energy_demand_historical.loc[
-        slice(None), slice(None), slice(None), ["HEAT", "HEATNS", "MANGAS"]
+        slice(None), slice(None), slice(None), ["HEAT", "HEATNS"]
     ] = energy_demand_historical.loc[
         slice(None),
         slice(None),
         slice(None),
-        ["HEAT", "HEATNS", "MANGAS"],
+        ["HEAT", "HEATNS"],
     ].apply(
         lambda x: x
         * (
@@ -367,10 +347,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     energy_demand_historical.loc[
         slice(None), slice(None), ["Hydrogen", "Non-Hydrogen"], ["NONCRUDE"]
     ] = energy_demand_historical.loc[
-        slice(None),
-        slice(None),
-        ["Hydrogen", "Non-Hydrogen"],
-        ["NONCRUDE"],
+        slice(None), slice(None), ["Hydrogen", "Non-Hydrogen"], ["NONCRUDE"]
     ].apply(
         lambda x: x
         * (
@@ -410,7 +387,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # Add EIA region labels
+    # Add EIA region labels to energy_demand_historical in order to match EIA regional projected growth of each product
     regions = (
         pd.DataFrame(
             pd.read_csv(
@@ -433,7 +410,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         .set_index(["EIA Region"])
     )
 
-    # Add category and long names for Products and Flows
+    # Add categories and long names for products and flows
 
     # region
 
@@ -508,7 +485,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # Load energy demand projections
+    # Load EIA energy demand projections
     energy_demand_projection = (
         pd.read_excel(
             pd.ExcelFile("podi/data/EIA/EIA_IEO.xlsx", engine="openpyxl"), header=0
@@ -522,7 +499,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         "EIA Product"
     ].str.strip()
 
-    # create df and convert to % change
+    # create dataframe of energy demand projections as annual % change
     energy_demand_projection = (
         pd.DataFrame(energy_demand_projection).set_index(
             ["EIA Region", "Sector", "EIA Product"]
@@ -564,9 +541,6 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     energy_demand_baseline = energy_demand_baseline.loc[:, : data_end_year - 2].join(
         energy_demand_baseline.loc[:, data_end_year - 1 :].cumprod(axis=1).fillna(0)
     )
-
-    # Remove duplicate indices
-    # energy_demand_baseline = energy_demand_baseline[~energy_demand_baseline.index.duplicated()]
 
     # Curve smooth projections
     energy_demand_baseline = energy_demand_baseline.loc[:, : data_end_year - 1].join(

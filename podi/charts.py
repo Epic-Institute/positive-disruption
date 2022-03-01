@@ -869,6 +869,7 @@ for region in regions.index.to_list():
 
 # endregion
 
+
 ###################
 # ADOPTION CURVES #
 ###################
@@ -1855,7 +1856,7 @@ if show_figs is True:
 # endregion
 
 #######################################
-# SUBVECTOR ADOPTION CURVES UNSTACKED # FIG 2
+# SUBVECTOR ADOPTION CURVES UNSTACKED #
 #######################################
 
 # region
@@ -3469,7 +3470,7 @@ for i in range(0, len(region_list)):
 # endregion
 
 #############
-# EMISSIONS # FIG 6
+# EMISSIONS #
 #############
 
 # region
@@ -3945,7 +3946,7 @@ for i in range(0, len(region_list)):
 # endregion
 
 ########################
-# EMISSIONS SUBVECTORS # FIG 7 , FIG 9 , FIG 11
+# EMISSIONS SUBVECTORS #
 ########################
 
 # region
@@ -4187,9 +4188,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-################
-# EMISSIONS V3 # One chart per sector, gas breakdown
-################
+#################################################
+# EMISSIONS ONE CHART PER SECTOR, GAS BREAKDOWN #
+#################################################
 
 # region
 
@@ -4374,9 +4375,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-################
-# EMISSIONS V4 # One chart per gas, sector breakdown
-################
+#################################################
+# EMISSIONS ONE CHART PER GAS, SECTOR BREAKDOWN #
+#################################################
 
 # region
 
@@ -6887,7 +6888,7 @@ if save_figs is True:
 # endregion
 
 #################################
-# CO2 ATMOSPHERIC CONCENTRATION # FIG 5
+# CO2 ATMOSPHERIC CONCENTRATION #
 #################################
 
 # region
@@ -7202,7 +7203,7 @@ if save_figs is True:
 # endregion
 
 #################################
-# GHG ATMOSPHERIC CONCENTRATION # FIG 5
+# GHG ATMOSPHERIC CONCENTRATION #
 #################################
 
 # region
@@ -7519,7 +7520,7 @@ if save_figs is True:
 # endregion
 
 #####################
-# RADIATIVE FORCING # FIG 5
+# RADIATIVE FORCING #
 #####################
 
 # region
@@ -7833,7 +7834,7 @@ if save_figs is True:
 # endregion
 
 ######################
-# TEMPERATURE CHANGE # FIG B , FIG 5
+# TEMPERATURE CHANGE #
 ######################
 
 # region

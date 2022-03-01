@@ -4,196 +4,46 @@
 
 import pandas as pd
 from podi.adoption_curve import adoption_curve
-from podi.data.bnef_etl import bnef_etl
-from podi.data.heat_etl import heat_etl
 from numpy import NaN
 from podi.curve_smooth import curve_smooth
-
 
 # endregion
 
 
-def energy_supply(scenario, energy_demand, region_list, data_start_year, data_end_year):
+def energy_supply(
+    scenario, energy_demand, data_start_year, data_end_year, proj_end_year
+):
+
+    ###################################
+    # ESTIMATE ELECTRIC ENERGY SUPPLY #
+    ###################################
 
     # region
 
-    near_proj_start_year = data_end_year + 1
-    near_proj_end_year = near_proj_start_year + 5
-    long_proj_start_year = near_proj_end_year + 1
-    long_proj_end_year = 2100
-    energy_oversupply_prop = 0.0
+    parameters = pd.read_csv(
+        "podi/data/tech_parameters.csv",
+        usecols=["Region", "Product", "Scenario", "Sector", "Metric", "Value"],
+    ).set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
 
-    parameters = pd.read_csv("podi/data/tech_parameters.csv").set_index(
-        ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
-    )
-
-    elec_gen_data = []  # need to get elec gen data
-
-    elec_gen_data.columns = elec_gen_data.columns.astype(int)
-
-    near_elec_proj_data = pd.DataFrame(
-        bnef_etl("podi/data/bnef.csv", "elec").loc[
-            :, str(near_proj_start_year - 1) : str(near_proj_end_year)
-        ]
-    )
-
-    near_elec_proj_data.columns = near_elec_proj_data.columns.astype(int)
-
-    heat_gen_data = (
-        heat_etl("podi/data/heat.csv", scenario)
-        .loc[:, str(data_start_year) : str(data_end_year)]
-        .replace(NaN, 0)
-    )
-
-    heat_gen_data.columns = heat_gen_data.columns.astype(int)
-
-    """
-    heat_gen_data.loc[slice(None), slice(None), "Bioenergy", scenario, slice(None)] = (
-        energy_demand.loc[
-            slice(None), ["Buildings", "Industry"], ["Bioenergy"], scenario
-        ]
-        .groupby("IEA Region")
-        .sum()
-        .loc[:, data_start_year:data_end_year]
-        .reindex(
-            index=heat_gen_data.loc[
-                slice(None), slice(None), "Bioenergy", scenario
-            ].index,
-            level=0,
-        )
-        .values
-    )
-
-    heat_gen_data.loc[
-        slice(None), slice(None), "Other sources", scenario, slice(None)
-    ] = (
-        energy_demand.loc[
-            slice(None),
-            ["Industry", "Buildings"],
-            ["Coal", "Oil", "Natural gas"],
-            slice(None),
-        ]
-        .groupby("IEA Region")
-        .sum()
-        .loc[:, data_start_year:data_end_year]
-        .reindex(
-            index=heat_gen_data.loc[
-                slice(None), slice(None), "Other sources", scenario
-            ].index,
-            level=0,
-        )
-        .values
-    )
-    """
-    transport_data = (
-        energy_demand.loc[
-            slice(None),
-            "Transport",
-            ["Oil", "Bioenergy", "Other fuels", "International bunkers"],
-            scenario,
-        ]
-        .loc[:, str(data_start_year) : str(data_end_year)]
-        .droplevel(["Sector", "Scenario"])
-    )
-    transport_data.columns = transport_data.columns.astype(int)
-
-    # endregion
-
-    ###############
-    # ELECTRICITY #
-    ###############
-
-    # region
-
-    # historical electricity consumption (TWh)
-    def hist_elec_consump(region, scenario):
-        consump_gen_ratio = pd.to_numeric(
-            parameters.loc[
-                region, "Grid", scenario, slice(None), "Consumption:Generation"
-            ]["Value"].iat[0]
-        )
-
-        return (
-            elec_gen_data.iloc[
-                elec_gen_data.index.get_level_values(1).str.contains(region, na=False)
-            ]
-            .loc[(slice(None), slice(None), slice(None), scenario, slice(None)), :]
-            .groupby(["Metric"])
-            .sum()
-            .mul(consump_gen_ratio)
-        )
-
-    # historical percent of total electricity consumption met by a given technology (propotion)
-    def hist_per_elec_consump(region, scenario, hist_elec_consump):
-        return hist_elec_consump.div(hist_elec_consump.drop(labels="Generation").sum())
-
-    # nearterm projected electricity consumption
-    def near_proj_elec_consump(region, scenario):
-        consump_gen_ratio = pd.to_numeric(
-            parameters.loc[
-                region, "Grid", scenario, slice(None), "Consumption:Generation"
-            ]["Value"].iat[0]
-        )
-
-        if scenario == "baseline":
-            near_proj_start_year = data_end_year + 1
-            near_proj_end_year = data_end_year + 1
-            return hist_elec_consump(region, scenario)
-        else:
-            return (
-                near_elec_proj_data.iloc[
-                    near_elec_proj_data.index.get_level_values(1).str.contains(
-                        region, na=False
-                    )
-                ]
-                .loc[(slice(None), slice(None), slice(None), scenario, slice(None)), :]
-                .mul(consump_gen_ratio)
-                .groupby(["Metric"])
-                .sum()
-            )
-
-    # nearterm projected percent of total electricity consumption met by a given technology (proportion)
-    def near_proj_per_elec_consump(
+    # For each region, find the historical percent of total electricity consumption met by each product (might need to get flow categories Electricity output (GWh) and Heat output)
+    energy_demand.loc[
+        slice(None),
         region,
-        scenario,
-        hist_elec_consump,
-        hist_per_elec_consump,
-        near_proj_elec_consump,
-    ):
-        consump_gen_ratio = pd.to_numeric(
-            parameters.loc[
-                region, "Grid", scenario, slice(None), "Consumption:Generation"
-            ]["Value"].iat[0]
-        )
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        [
+            "Autoproducer electricity plants",
+            "Main activity producer electricity plants",
+        ],
+    ]
 
-        if scenario == "baseline":
-            foo = hist_per_elec_consump.drop(labels="Generation")
-            return foo
-        else:
-            foo = near_proj_elec_consump.div(near_proj_elec_consump.loc["Generation"])
-
-            # normalize to historical data
-            foo = (
-                foo.pct_change(axis=1)
-                .replace(NaN, 0)
-                .loc[:, str(near_proj_start_year) :]
-                .apply(lambda x: x + 1, axis=1)
-            )
-
-            foo = hist_per_elec_consump.loc[:, : str(data_end_year - 1)].join(
-                (
-                    (
-                        hist_per_elec_consump.loc[:, str(data_end_year) :].join(foo)
-                    ).cumprod(axis=1)
-                )
-            )
-            foo = foo.drop(labels="Generation")
-            # hist_elec_consump.drop(labels="Generation", inplace=True)
-            return foo
-
-    # longterm projected percent of total electricity consumption met by a given technology (proportion)
-    def proj_per_elec_consump(region, near_proj_per_elec_consump):
-        foo = near_proj_per_elec_consump.apply(
+    # Use the historical percent of total electricity consumption met by each product to estimate projected percent of total electricity consumption each meets
+    def proj_per_elec_consump(region, hist_per_elec_consump):
+        foo = hist_per_elec_consump.apply(
             adoption_curve,
             axis=1,
             args=(
@@ -209,14 +59,14 @@ def energy_supply(scenario, energy_demand, region_list, data_start_year, data_en
         for i in range(0, len(foo.index)):
             perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
 
-        perc = pd.DataFrame(perc.loc[:, near_proj_start_year:]).set_index(foo.index)
+        perc = pd.DataFrame(perc.loc[:, data_end_year + 1 :]).set_index(foo.index)
 
         # harmonizing historical to projection
-        def harmonize(perc, near_proj_per_elec_consump):
+        def harmonize(perc, hist_per_elec_consump):
             """
             if (
                 abs(
-                    near_proj_per_elec_consump.loc[perc.name, data_end_year]
+                    hist_per_elec_consump.loc[perc.name, data_end_year]
                     - perc.loc[data_end_year + 1]
                 )
                 > 0.003
@@ -224,7 +74,7 @@ def energy_supply(scenario, energy_demand, region_list, data_start_year, data_en
                 perc.loc[data_end_year + 1 :] = perc.loc[data_end_year + 1 :].subtract(
                     (
                         perc.loc[data_end_year + 1]
-                        - near_proj_per_elec_consump.loc[perc.name, data_end_year]
+                        - hist_per_elec_consump.loc[perc.name, data_end_year]
                     )
                 )
                 return perc
@@ -232,10 +82,10 @@ def energy_supply(scenario, energy_demand, region_list, data_start_year, data_en
                 return perc
             """
             hf = (
-                near_proj_per_elec_consump.loc[perc.name, data_end_year]
+                hist_per_elec_consump.loc[perc.name, data_end_year]
                 + (
-                    near_proj_per_elec_consump.loc[perc.name, data_end_year]
-                    - near_proj_per_elec_consump.loc[perc.name, data_end_year - 2]
+                    hist_per_elec_consump.loc[perc.name, data_end_year]
+                    - hist_per_elec_consump.loc[perc.name, data_end_year - 2]
                 )
                 / 2
                 - perc.loc[data_end_year + 1]
@@ -245,7 +95,7 @@ def energy_supply(scenario, energy_demand, region_list, data_start_year, data_en
             return perc
 
         perc = perc.apply(
-            harmonize, near_proj_per_elec_consump=near_proj_per_elec_consump, axis=1
+            harmonize, hist_per_elec_consump=hist_per_elec_consump, axis=1
         ).clip(upper=1, lower=0)
 
         # set fossil fuel generation to fill balance
@@ -390,13 +240,13 @@ def energy_supply(scenario, energy_demand, region_list, data_start_year, data_en
 
     # endregion
 
-    ##########
-    #  HEAT  #
-    ##########
+    ################################
+    # ESTIMATE HEAT ENERGY SUPPLY #
+    ################################
 
     # region
 
-    # historical heat consumption (TWh)
+    # historical heat consumption
     def hist_heat_consump(region, scenario):
         consump_gen_ratio = pd.to_numeric(
             parameters.loc[
@@ -661,13 +511,13 @@ def energy_supply(scenario, energy_demand, region_list, data_start_year, data_en
 
     # endregion
 
-    ###########################
-    #  NONELECTRIC TRANSPORT  #
-    ###########################
+    ################################################
+    # ESTIMATE NONELECTRIC TRANSPORT ENERGY SUPPLY #
+    ################################################
 
     # region
 
-    # historical transport consumption (TWh)
+    # historical transport consumption
     def hist_transport_consump(region, scenario):
         return transport_data.iloc[
             transport_data.index.get_level_values(0).str.contains(region, na=False)
@@ -907,6 +757,10 @@ def energy_supply(scenario, energy_demand, region_list, data_start_year, data_en
 
     # endregion
 
+    #####################
+    # COMBINE ESTIMATES #
+    #####################
+
     # region
     elec_consump = []
     elec_per_adoption = []
@@ -918,24 +772,24 @@ def energy_supply(scenario, energy_demand, region_list, data_start_year, data_en
     transport_per_adoption = []
     transport_consump_cdr = []
 
-    for i in range(0, len(region_list)):
+    for region in energy_demand.index.get_level_values(0).unique():
         elec_consump = pd.DataFrame(elec_consump).append(
-            consump_total(region_list[i], scenario)[0]
+            consump_total(region, scenario)[0]
         )
         heat_consump2 = pd.DataFrame(heat_consump2).append(
-            heat_consump_total(region_list[i], scenario)[0]
+            heat_consump_total(region, scenario)[0]
         )
         transport_consump2 = pd.DataFrame(transport_consump2).append(
-            transport_consump_total(region_list[i], scenario)[0]
+            transport_consump_total(region, scenario)[0]
         )
         elec_per_adoption = pd.DataFrame(elec_per_adoption).append(
-            consump_total(region_list[i], scenario)[1]
+            consump_total(region, scenario)[1]
         )
         heat_per_adoption = pd.DataFrame(heat_per_adoption).append(
-            heat_consump_total(region_list[i], scenario)[1]
+            heat_consump_total(region, scenario)[1]
         )
         transport_per_adoption = pd.DataFrame(transport_per_adoption).append(
-            transport_consump_total(region_list[i], scenario)[1]
+            transport_consump_total(region, scenario)[1]
         )
 
     elec_consump = pd.concat(
