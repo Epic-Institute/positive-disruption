@@ -2,12 +2,14 @@
 # coding: utf-8
 
 from os import sched_get_priority_max
+from this import d
 import warnings
 import pandas as pd
 import numpy as np
 import scipy
 from scipy.optimize import differential_evolution
 from scipy.sparse import data
+from numpy import NaN
 
 
 def func(x, a, b, c, d):
@@ -18,23 +20,28 @@ def func2(x, a, b, c, d):
     return a * x + b
 
 
-def adoption_curve(value, region, scenario, sector):
+def adoption_curve(
+    value, region, scenario, sector, data_start_year, data_end_year, proj_end_year
+):
 
-    # Load tech parameters to get 2050 energy demand reduction values
+    # Load adoption curve parameters
     parameters = pd.read_csv(
         "podi/data/tech_parameters.csv",
-        usecols=["Region", "Technology", "Scenario", "Sector", "Metric", "Value"],
-    ).set_index(["Region", "Technology", "Scenario", "Sector", "Metric"])
+        usecols=["Region", "Product", "Scenario", "Sector", "Metric", "Value"],
+    ).set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
 
     # Create x array (year) and y array (linear scale from zero to saturation value)
-    x_data = np.arange(data_start_year, 2051, 1)
-    y_data = np.zeros((1, data_end_year - data_start_year + 1))
+    x_data = np.arange(data_start_year, proj_end_year + 1, 1)
+    y_data = np.zeros((1, proj_end_year - data_start_year + 1))
     y_data[:, :] = np.NaN
-    y_data[:, 0] = 0
-    y_data[:, -1] = parameters.loc[
-        region, value.name[1], scenario, sector, "saturation point"
-    ].Value
-    y_data = np.array((pd.DataFrame(y_data).interpolate(axis=1)).squeeze())
+    y_data = y_data.squeeze().astype(float)
+    y_data[: (data_end_year - data_start_year + 1)] = value.loc[:data_end_year]
+    y_data[-1] = (
+        parameters.loc[region, value.name[5], scenario, sector, "saturation point"]
+        .Value[0]
+        .astype(float)
+    )
+    y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
 
     def sum_of_squared_error(parameters):
         warnings.filterwarnings("ignore")
@@ -45,75 +52,71 @@ def adoption_curve(value, region, scenario, sector):
         (
             pd.to_numeric(
                 parameters.loc[
-                    region, value.name[1], scenario, sector, "parameter a min"
-                ].Value
+                    region, value.name[5], scenario, sector, "parameter a min"
+                ].Value[0]
             ),
             pd.to_numeric(
                 parameters.loc[
-                    region, value.name[1], scenario, sector, "parameter a max"
-                ].Value
+                    region, value.name[5], scenario, sector, "parameter a max"
+                ].Value[0]
             ),
         ),
         (
             pd.to_numeric(
                 parameters.loc[
-                    region, value.name[1], scenario, sector, "parameter b min"
-                ].Value
+                    region, value.name[5], scenario, sector, "parameter b min"
+                ].Value[0]
             ),
             pd.to_numeric(
                 parameters.loc[
-                    region, value.name[1], scenario, sector, "parameter b max"
-                ].Value
+                    region, value.name[5], scenario, sector, "parameter b max"
+                ].Value[0]
             ),
         ),
         (
             pd.to_numeric(
                 parameters.loc[
                     region,
-                    value.name[1],
+                    value.name[5],
                     scenario,
                     sector,
                     "saturation point",
-                ].Value
-            )
-            / 100,
+                ].Value[0]
+            ),
             pd.to_numeric(
                 parameters.loc[
                     region,
-                    value.name[1],
+                    value.name[5],
                     scenario,
                     sector,
                     "saturation point",
-                ].Value
-            )
-            / 100,
+                ].Value[0]
+            ),
         ),
         (
             pd.to_numeric(
                 parameters.loc[
                     region,
-                    value.name[1],
+                    value.name[5],
                     scenario,
                     sector,
                     "floor",
-                ].Value
-            )
-            / 100,
+                ].Value[0]
+            ),
             pd.to_numeric(
                 parameters.loc[
                     region,
-                    value.name[1],
+                    value.name[5],
                     scenario,
                     sector,
                     "floor",
-                ].Value
-            )
-            / 100,
+                ].Value[0]
+            ),
         ),
     ]
 
     if scenario == "baseline":
-        x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
+        x = np.arange(proj_end_year - pd.to_numeric(value.index[0]) + 1)
         # y = np.full((len(x), 1), y_data[-1])
         y = func2(
             x,
@@ -134,16 +137,14 @@ def adoption_curve(value, region, scenario, sector):
             mutation=(0, 1),
         ).x
 
-    x = np.arange(2100 - data_end_year + 1)
+    x = np.arange(proj_end_year - data_end_year + 1)
     y = np.array(func(x, *genetic_parameters))
 
     years = np.linspace(
-        pd.to_numeric(value.index[0]),
-        2100,
-        2100 - pd.to_numeric(value.index[0]) + 1,
+        pd.to_numeric(data_end_year),
+        proj_end_year,
+        proj_end_year - pd.to_numeric(data_end_year) + 1,
     ).astype(int)
-
-    y = np.zeros(data_end_year - data_start_year).join(y).join(np.full_like())
 
     """
     # set maximum annual growth rate
@@ -151,7 +152,7 @@ def adoption_curve(value, region, scenario, sector):
         pd.to_numeric(
             parameters.loc[
                 region, value.name, scenario, sector, "Max annual growth"
-            ].Value
+            ].Value[0]
         )
         / 100
     )
@@ -177,4 +178,4 @@ def adoption_curve(value, region, scenario, sector):
     y_growth = np.array(y_growth)
     """
 
-    return pd.DataFrame(data=y, index=years)
+    return pd.Series(data=y, index=years, name=value.name)

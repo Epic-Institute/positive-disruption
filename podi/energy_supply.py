@@ -2,6 +2,7 @@
 
 # region
 
+from operator import index
 import pandas as pd
 from podi.adoption_curve import adoption_curve
 from numpy import NaN
@@ -25,218 +26,172 @@ def energy_supply(
         usecols=["Region", "Product", "Scenario", "Sector", "Metric", "Value"],
     ).set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
 
-    # For each region, find the historical percent of total electricity consumption met by each product (might need to get flow categories Electricity output (GWh) and Heat output)
-    energy_demand.loc[
-        slice(None),
-        region,
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
+    # Add IRENA data for select electricity technologies
+
+    # region
+    irena = pd.read_csv(
+        "podi/data/IRENA/electricity_supply_historical.csv", index_col="Region"
+    )
+
+    regions = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/region_categories.csv",
+                usecols=["WEB Region", "IRENA Region"],
+            ).dropna(axis=0)
+        )
+        .set_index(["IRENA Region"])
+        .rename_axis(index={"IRENA Region": "Region"})
+    )
+
+    irena = (
+        irena.merge(regions, on=["Region"])
+        .reset_index()
+        .set_index(["WEB Region", "Region"])
+        .droplevel("Region")
+        .rename_axis(index={"WEB Region": "Region"})
+    )
+    irena.index = irena.index.str.lower()
+    irena["Scenario"] = scenario
+    irena = irena.reset_index().set_index(
         [
-            "Autoproducer electricity plants",
-            "Main activity producer electricity plants",
-        ],
-    ]
+            "Scenario",
+            "Region",
+            "Sector",
+            "Subsector",
+            "Product_category",
+            "Product_long",
+            "Product",
+            "Flow_category",
+            "Flow_long",
+            "Flow",
+            "Hydrogen",
+            "Flexible",
+            "Non-Energy Use",
+        ]
+    )
+
+    irena.columns = irena.columns.astype(int)
+    irena = irena.loc[:, data_start_year:data_end_year]
+
+    energy_demand = pd.concat(
+        [
+            energy_demand,
+            irena.loc[
+                slice(None),
+                slice(None),
+                slice(None),
+                slice(None),
+                slice(None),
+                slice(None),
+                ["ONSHORE", "OFFSHORE"],
+            ],
+        ]
+    )
+
+    # Drop IEA WIND to avoid duplication with ONSHORE/OFFSHORE
+    energy_demand.drop(labels="WIND", level=6, inplace=True)
+
+    # endregion
+
+    # For each region, find the historical percent of total electricity consumption met by each product
+    elec_supply_historical = (
+        energy_demand.loc[
+            scenario,
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            [
+                "Electricity output",
+            ],
+        ]
+        .groupby(
+            [
+                "Region",
+                "Sector",
+                "Subsector",
+                "Product_category",
+                "Product_long",
+                "Product",
+            ]
+        )
+        .sum()
+    )
+
+    per_elec_supply_historical = elec_supply_historical.apply(
+        lambda x: x.divide(
+            elec_supply_historical.groupby(["Region"]).sum(0).loc[x.name[0]]
+        ),
+        axis=1,
+    )
 
     # Use the historical percent of total electricity consumption met by each product to estimate projected percent of total electricity consumption each meets
-    def proj_per_elec_consump(region, hist_per_elec_consump):
-        foo = hist_per_elec_consump.apply(
-            adoption_curve,
-            axis=1,
-            args=(
-                [
-                    region,
-                    scenario,
-                ]
-            ),
-            sector="Electricity",
-        )
+    per_elec_supply_projected = per_elec_supply_historical.apply(
+        lambda x: adoption_curve(
+            x,
+            x.name[0],
+            scenario,
+            x.name[1],
+            data_start_year,
+            data_end_year,
+            proj_end_year,
+        ),
+        axis=1,
+    )
 
-        perc = []
-        for i in range(0, len(foo.index)):
-            perc = pd.DataFrame(perc).append(foo[foo.index[i]][0].T)
+    # Set fossil fuel generation to fill balance of renewables
+    per_elec_supply_projected.loc[
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        "FOSSIL",
+    ] = (
+        1
+        - per_elec_supply_projected.loc[
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            [
+                "BIODIESEL",
+                "BIOGASES",
+                "BIOGASOL",
+                "MUNWASTER",
+                "OBIOLIQ",
+                "PRIMSBIO",
+                "GEOTHERM",
+                "HYDRO",
+                "NUCLEAR",
+                "SOLARPV",
+                "SOLARTH",
+                "OFFSHORE",
+                "ONSHORE",
+                "TIDE",
+            ],
+        ].sum()
+    ).clip(
+        lower=0
+    )
 
-        perc = pd.DataFrame(perc.loc[:, data_end_year + 1 :]).set_index(foo.index)
+    # Combine historical and projected electricity supply
+    per_elec_supply = pd.concat(
+        [
+            per_elec_supply_historical.loc[:, : data_end_year - 1],
+            per_elec_supply_projected,
+        ],
+        axis=1,
+    )
 
-        # harmonizing historical to projection
-        def harmonize(perc, hist_per_elec_consump):
-            """
-            if (
-                abs(
-                    hist_per_elec_consump.loc[perc.name, data_end_year]
-                    - perc.loc[data_end_year + 1]
-                )
-                > 0.003
-            ):
-                perc.loc[data_end_year + 1 :] = perc.loc[data_end_year + 1 :].subtract(
-                    (
-                        perc.loc[data_end_year + 1]
-                        - hist_per_elec_consump.loc[perc.name, data_end_year]
-                    )
-                )
-                return perc
-            else:
-                return perc
-            """
-            hf = (
-                hist_per_elec_consump.loc[perc.name, data_end_year]
-                + (
-                    hist_per_elec_consump.loc[perc.name, data_end_year]
-                    - hist_per_elec_consump.loc[perc.name, data_end_year - 2]
-                )
-                / 2
-                - perc.loc[data_end_year + 1]
-            )
-
-            perc = perc + (hf)
-            return perc
-
-        perc = perc.apply(
-            harmonize, hist_per_elec_consump=hist_per_elec_consump, axis=1
-        ).clip(upper=1, lower=0)
-
-        # set fossil fuel generation to fill balance
-
-        perc.loc["Fossil fuels"] = (
-            1
-            - perc.loc[
-                [
-                    "Hydroelectricity",
-                    "Tide and wave",
-                    "Solar",
-                    "Wind",
-                    "Biomass and waste",
-                    "Nuclear",
-                    "Geothermal",
-                ]
-            ].sum()
-        ).clip(lower=0)
-
-        return perc.loc[:, data_end_year + 1 :]
-
-    # project electricity consumption met by a given technology
-    def proj_elec_consump(region, scenario, proj_per_elec_consump):
-        proj_consump = proj_per_elec_consump.apply(
-            lambda x: x
-            * (
-                energy_demand.loc[region, "TFC", "Electricity", scenario]
-                .loc[str(near_proj_start_year) :]
-                .values.T
-            ),
-            axis=1,
-        )
-        """
-        if scenario == "baseline":
-            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
-        else:
-            proj_consump = curve_smooth(proj_consump, "quadratic", 4)
-        """
-        return proj_consump.clip(lower=0)
-
-    # join timeseries of historical and projected electricity consumption met by a given technology
-    def consump(region, hist_elec_consump, hist_per_elec_consump, proj_elec_consump):
-
-        hist_elec_consump = hist_per_elec_consump.apply(
-            lambda x: x
-            * (
-                energy_demand.loc[region, "TFC", "Electricity", scenario].loc[
-                    str(data_start_year) : str(data_end_year)
-                ]
-            ),
-            axis=1,
-        )
-
-        hist_elec_consump.drop(labels="Generation", inplace=True)
-        return hist_elec_consump.join(proj_elec_consump)
-
-    # join timeseries of historical and projected percent total electricity consumption met by a given technology
-    def per_consump(hist_per_elec_consump, proj_per_elec_consump):
-
-        hist_per_elec_consump.drop(labels="Generation", inplace=True)
-        return hist_per_elec_consump.join(proj_per_elec_consump)
-
-    # combine above functions to get electricity consumption met by a given technology
-    def consump_total(region, scenario):
-        consump_total = consump(
-            region,
-            hist_elec_consump(region, scenario),
-            hist_per_elec_consump(
-                region, scenario, hist_elec_consump(region, scenario)
-            ),
-            proj_elec_consump(
-                region,
-                scenario,
-                proj_per_elec_consump(
-                    region,
-                    near_proj_per_elec_consump(
-                        region,
-                        scenario,
-                        hist_elec_consump(region, scenario),
-                        hist_per_elec_consump(
-                            region, scenario, hist_elec_consump(region, scenario)
-                        ),
-                        near_proj_elec_consump(region, scenario),
-                    ),
-                ),
-            )
-            * (1 + energy_oversupply_prop),
-        )
-        consump_total = pd.concat([consump_total], keys=[region], names=["Region"])
-
-        percent_adoption = per_consump(
-            hist_per_elec_consump(
-                region, scenario, hist_elec_consump(region, scenario)
-            ),
-            proj_per_elec_consump(
-                region,
-                near_proj_per_elec_consump(
-                    region,
-                    scenario,
-                    hist_elec_consump(region, scenario),
-                    hist_per_elec_consump(
-                        region, scenario, hist_elec_consump(region, scenario)
-                    ),
-                    near_proj_elec_consump(region, scenario),
-                ),
-            ),
-        )
-        percent_adoption = pd.concat(
-            [percent_adoption], keys=[region], names=["Region"]
-        )
-
-        consump_cdr = consump(
-            region,
-            hist_elec_consump(region, scenario) * 0,
-            hist_per_elec_consump(region, scenario, hist_elec_consump(region, scenario))
-            * 0,
-            proj_elec_consump(
-                region,
-                scenario,
-                proj_per_elec_consump(
-                    region,
-                    near_proj_per_elec_consump(
-                        region,
-                        scenario,
-                        hist_elec_consump(region, scenario),
-                        hist_per_elec_consump(
-                            region, scenario, hist_elec_consump(region, scenario)
-                        ),
-                        near_proj_elec_consump(region, scenario),
-                    ),
-                ),
-            )
-            * (energy_oversupply_prop),
-        )
-        consump_cdr = pd.concat([consump_cdr], keys=[region], names=["Region"])
-
-        consump_total.columns = consump_total.columns.astype(int)
-        percent_adoption.columns = percent_adoption.columns.astype(int)
-        consump_cdr.columns = consump_cdr.columns.astype(int)
-
-        return (consump_total, percent_adoption, consump_cdr)
+    # Multiply percent of total electricity consumption met by total electricity demand
+    elec_supply = per_elec_supply.apply(
+        lambda x: x.multiply(elec_supply_historical.sum(0)), axis=1
+    )
 
     # endregion
 
@@ -245,6 +200,8 @@ def energy_supply(
     ################################
 
     # region
+
+    # Add IRENA data for select heat technologies
 
     # historical heat consumption
     def hist_heat_consump(region, scenario):

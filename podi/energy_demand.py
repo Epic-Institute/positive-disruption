@@ -138,7 +138,9 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         .loc[
             [
                 "Energy industry own use and Losses",
+                "Electricity output",
                 "Final consumption",
+                "Heat output",
                 "Supply",
                 "Transformation processes",
             ]
@@ -476,6 +478,31 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # endregion
+
+    # Convert Electricity output flow category from GWh to TJ
+    energy_demand_historical.loc[
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        "Electricity output",
+    ] = (
+        energy_demand_historical.loc[
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            "Electricity output",
+        ]
+        .multiply(3.6)
+        .values
+    )
 
     # endregion
 

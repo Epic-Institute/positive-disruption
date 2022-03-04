@@ -1,252 +1,252 @@
-ISO,ISO Name,WWS Region,NCS Region,WEB Region,EIA Region,CTRACE Region
-abw,Aruba,,,,,ABW
-afg,Afghanistan,Afghanistan,AFG,,nonoecd_asia,AFG
-ago,Angola,Angola,AGO,ANGOLA,africa,AGO
-aia,Anguilla,,,,,AIA
-ala,Åland Islands,,,,,
-alb,Albania,Albania,ALB,ALBANIA,nonoecd_eurasia,ALB
-and,Andorra,,,,,AND
-are,United Arab Emirates (the),United Arab Emirates,ARE,UAE,me,ARE
-arg,Argentina,Argentina,ARG,ARGENTINA,nonoecd_am,ARG
-arm,Armenia,Armenia,ARM,ARMENIA,nonoecd_eurasia,ARM
-asm,American Samoa,Samoa,,,,ASM
-ata,Antarctica,,,,,
-atf,French Southern Territories (the),,,,,
-atg,Antigua and Barbuda,Antigua and Barbuda,,,,ATG
-aus,Australia,Australia,AUS,AUSTRALI,australia_nz,AUS
-aut,Austria,Austria,AUT,AUSTRIA,oecd_eur,AUT
-aze,Azerbaijan,Azerbaijan,AZE,AZERBAIJAN,nonoecd_eurasia,AZE
-bdi,Burundi,Burundi,BDI,,africa,BDI
-bel,Belgium,Belgium,BEL,BELGIUM,oecd_eur,BEL
-ben,Benin,Benin,BEN,BENIN,africa,BEN
-bes,"Bonaire, Sint Eustatius and Saba",,,,,BES
-bfa,Burkina Faso,Burkina Faso,BFA,MBURKINAFA,africa,BFA
-bgd,Bangladesh,Bangladesh,BGD,BANGLADESH,nonoecd_asia,BGD
-bgr,Bulgaria,Bulgaria,BGR,BULGARIA,nonoecd_eurasia,BGR
-bhr,Bahrain,Bahrain,,BAHRAIN,me,BHR
-bhs,Bahamas (the),Bahamas,BHS,,nonoecd_am,BHS
-bih,Bosnia and Herzegovina,Bosnia and Herzegovina,BIH,BOSNIAHERZ,nonoecd_eurasia,BIH
-blm,Saint Barthélemy,,,,,BLM
-blr,Belarus,Belarus,BLR,BELARUS,nonoecd_eurasia,BLR
-blz,Belize,Belize,BLZ,,nonoecd_am,BLZ
-bmu,Bermuda,,,,,BMU
-bol,Bolivia (Plurinational State of),Bolivia,BOL,BOLIVIA,nonoecd_am,BOL
-bra,Brazil,Brazil,BRA,BRAZIL,brazil,BRA
-brb,Barbados,Barbados,,,nonoecd_am,BRB
-brn,Brunei Darussalam,Brunei Darussalam,BRN,BRUNEI,nonoecd_asia,BRN
-btn,Bhutan,Bhutan,BTN,,nonoecd_asia,BTN
-bvt,Bouvet Island,,,,,
-bwa,Botswana,Botswana,BWA,BOTSWANA,africa,BWA
-caf,Central African Republic (the),Central African Republic,CAF,,africa,CAF
-can,Canada,Canada,CAN,CANADA,canada,CAN
-cck,Cocos (Keeling) Islands (the),,,,,CCK
-che,Switzerland,Switzerland,CHE,SWITLAND,oecd_eur,CHE
-chl,Chile,Chile,CHL,CHILE,mexico_oecd,CHL
-chn,China,China,CHN,CHINA,china,CHN
-civ,Côte d'Ivoire,Cote d'Ivoire,CIV,COTEIVOIRE,africa,CIV
-cmr,Cameroon,Cameroon,CMR,CAMEROON,africa,CMR
-cod,Congo (the Democratic Republic of the),"Congo, Democratic Republic of",COD,CONGOREP,africa,COD
-cog,Congo (the),Congo,COG,CONGO,africa,COG
-cok,Cook Islands (the),,,,,COK
-col,Colombia,Colombia,COL,COLOMBIA,mexico_oecd,COL
-com,Comoros (the),Comoros,COM,,africa,COM
-cpv,Cabo Verde,Cape Verde,CPV,,africa,CPV
-cri,Costa Rica,Costa Rica,CRI,COSTARICA,nonoecd_am,CRI
-cub,Cuba,Cuba,CUB,CUBA,nonoecd_am,CUB
-cuw,Curaçao,Curacao,,CURACAO,nonoecd_am,CUW
-cxr,Christmas Island,,,,,CXR
-cym,Cayman Islands (the),,,,,CYM
-cyp,Cyprus,Cyprus,CYP,CYPRUS,nonoecd_eurasia,CYP
-cze,Czechia,Czech Republic,CZE,CZECH,oecd_eur,CZE
-deu,Germany,Germany,DEU,GERMANY,oecd_eur,DEU
-dji,Djibouti,Djibouti,DJI,,africa,DJI
-dma,Dominica,,,,nonoecd_am,DMA
-dnk,Denmark,Denmark,DNK,DENMARK,oecd_eur,DNK
-dom,Dominican Republic (the),Dominican Republic,DOM,DOMINICANR,nonoecd_am,DOM
-dza,Algeria,Algeria,DZA,ALGERIA,africa,DZA
-ecu,Ecuador,Ecuador,ECU,ECUADOR,nonoecd_am,ECU
-egy,Egypt,Egypt,EGY,EGYPT,africa,EGY
-eri,Eritrea,Eritrea,ERI,ERITREA,africa,ERI
-esh,Western Sahara*,,ESH,,,ESH
-esp,Spain,Spain,ESP,SPAIN,oecd_eur,ESP
-est,Estonia,Estonia,EST,ESTONIA,oecd_eur,EST
-eth,Ethiopia,Ethiopia,ETH,ETHIOPIA,africa,ETH
-fin,Finland,Finland,FIN,FINLAND,oecd_eur,FIN
-fji,Fiji,Fiji,FJI,,nonoecd_asia,FJI
-flk,Falkland Islands (the) [Malvinas],,FLK,,nonoecd_am,FLK
-fra,France,France,FRA,FRANCE,oecd_eur,FRA
-fro,Faroe Islands (the),,FRO,,,FRO
-fsm,Micronesia (Federated States of),Micronesia,,,,FSM
-gab,Gabon,Gabon,GAB,GABON,africa,GAB
-gbr,United Kingdom of Great Britain and Northern Ireland (the),United Kingdom,GBR,UK,oecd_eur,GBR
-geo,Georgia,Georgia,GEO,GEORGIA,nonoecd_eurasia,GEO
-ggy,Guernsey,,,,,GGY
-gha,Ghana,Ghana,GHA,GHANA,africa,GHA
-gib,Gibraltar,Gibraltar,,GIBRALTAR,nonoecd_eurasia,GIB
-gin,Guinea,Guinea,GIN,,,GIN
-glp,Guadeloupe,,GLP,,nonoecd_am,GLP
-gmb,Gambia (the),Gambia,GMB,,africa,GMB
-gnb,Guinea-Bissau,Guinea-Bissau,GNB,,,GNB
-gnq,Equatorial Guinea,Equatorial Guinea,GNQ,EQGUINEA,africa,GNQ
-grc,Greece,Greece,GRC,GREECE,oecd_eur,GRC
-grd,Grenada,Grenada,,,nonoecd_am,GRD
-grl,Greenland,Greenland,GRL,MGREENLAND,nonoecd_am,GRL
-gtm,Guatemala,Guatemala,GTM,GUATEMALA,nonoecd_am,GTM
-guf,French Guiana,French Guiana,GUF,,nonoecd_am,GUF
-gum,Guam,,,,,GUM
-guy,Guyana,Guyana,GUY,GUYANA,nonoecd_am,GUY
-hkg,Hong Kong,"Hong Kong, China",,HONGKONG,nonoecd_asia,HKG
-hmd,Heard Island and McDonald Islands,,,,,
-hnd,Honduras,Honduras,HND,HONDURAS,nonoecd_am,HND
-hrv,Croatia,Croatia,HRV,CROATIA,nonoecd_eurasia,HRV
-hti,Haiti,Haiti,HTI,HAITI,nonoecd_am,HTI
-hun,Hungary,Hungary,HUN,HUNGARY,oecd_eur,HUN
-idn,Indonesia,Indonesia,IDN,INDONESIA,nonoecd_asia,IDN
-imn,Isle of Man,,,,,IMN
-ind,India,India,IND,INDIA,india,IND
-iot,British Indian Ocean Territory (the),,,,,
-irl,Ireland,Ireland,IRL,IRELAND,oecd_eur,IRL
-irn,Iran (Islamic Republic of),"Iran, Islamic Republic of",IRN,IRAN,me,IRN
-irq,Iraq,Iraq,IRQ,IRAQ,me,IRQ
-isl,Iceland,Iceland,ISL,ICELAND,oecd_eur,ISL
-isr,Israel,Israel,ISR,ISRAEL,oecd_eur,ISR
-ita,Italy,Italy,ITA,ITALY,oecd_eur,ITA
-jam,Jamaica,Jamaica,JAM,JAMAICA,nonoecd_am,JAM
-jey,Jersey,,,,,JEY
-jor,Jordan,Jordan,JOR,JORDAN,me,JOR
-jpn,Japan,Japan,JPN,JAPAN,oecd_eur,JPN
-kaz,Kazakhstan,Kazakhstan,KAZ,KAZAKHSTAN,nonoecd_eurasia,KAZ
-ken,Kenya,Kenya,KEN,KENYA,africa,KEN
-kgz,Kyrgyzstan,Kyrgyzstan,KGZ,KYRGYZSTAN,nonoecd_eurasia,KGZ
-khm,Cambodia,Cambodia,KHM,CAMBODIA,nonoecd_asia,KHM
-kir,Kiribati,Kiribati,,,nonoecd_asia,KIR
-kna,Saint Kitts and Nevis,,,,nonoecd_am,KNA
-kor,Korea (the Republic of),"Korea, Republic of",KOR,KOREA,south_korea,KOR
-kwt,Kuwait,Kuwait,KWT,KUWAIT,me,KWT
-lao,Lao People's Democratic Republic (the),Lao PDR,LAO,LAO,nonoecd_asia,LAO
-lbn,Lebanon,Lebanon,LBN,LEBANON,me,LBN
-lbr,Liberia,Liberia,LBR,,africa,LBR
-lby,Libya,Libya,LBY,LIBYA,africa,LBY
-lca,Saint Lucia,Saint Lucia,,,nonoecd_am,LCA
-lie,Liechtenstein,,,,,LIE
-lka,Sri Lanka,Sri Lanka,LKA,SRILANKA,nonoecd_asia,LKA
-lso,Lesotho,Lesotho,LSO,,africa,LSO
-ltu,Lithuania,Lithuania,LTU,LITHUANIA,oecd_eur,LTU
-lux,Luxembourg,Luxembourg,LUX,LUXEMBOU,oecd_eur,LUX
-lva,Latvia,Latvia,LVA,LATVIA,oecd_eur,LVA
-mac,Macao,,,,nonoecd_asia,MAC
-maf,Saint Martin (French part),,,,,MAF
-mar,Morocco,Morocco,MAR,MOROCCO,africa,MAR
-mco,Monaco,,,,,MCO
-mda,Moldova (the Republic of),"Moldova, Republic of",MDA,MOLDOVA,nonoecd_eurasia,MDA
-mdg,Madagascar,Madagascar,MDG,MMADAGASCA,africa,MDG
-mdv,Maldives,Maldives,,,nonoecd_asia,MDV
-mex,Mexico,Mexico,MEX,MEXICO,mexico_oecd,MEX
-mhl,Marshall Islands (the),,,,,MHL
-mkd,North Macedonia,"Macedonia, North",MKD,NORTHMACED,nonoecd_eurasia,MKD
-mli,Mali,Mali,MLI,MMALI,africa,MLI
-mlt,Malta,Malta,,MALTA,nonoecd_eurasia,MLT
-mmr,Myanmar,Myanmar,MMR,MYANMAR,nonoecd_asia,MMR
-mne,Montenegro,Montenegro,MNE,MONTENEGRO,nonoecd_eurasia,MNE
-mng,Mongolia,Mongolia,MNG,MONGOLIA,nonoecd_asia,MNG
-mnp,Northern Mariana Islands (the),,,,,MNP
-moz,Mozambique,Mozambique,MOZ,MOZAMBIQUE,africa,MOZ
-mrt,Mauritania,Mauritania,MRT,MMAURITANI,africa,MRT
-msr,Montserrat,,,,nonoecd_am,MSR
-mtq,Martinique,,MTQ,,nonoecd_am,MTQ
-mus,Mauritius,Mauritius,MUS,MAURITIUS,africa,MUS
-mwi,Malawi,Malawi,MWI,,africa,MWI
-mys,Malaysia,Malaysia,MYS,MALAYSIA,nonoecd_asia,MYS
-myt,Mayotte,,,,,MYT
-nam,Namibia,Namibia,NAM,NAMIBIA,africa,NAM
-ncl,New Caledonia,,NCL,,,NCL
-ner,Niger (the),Niger,NER,NIGER,africa,NER
-nfk,Norfolk Island,,,,,NFK
-nga,Nigeria,Nigeria,NGA,NIGERIA,africa,NGA
-nic,Nicaragua,Nicaragua,NIC,NICARAGUA,nonoecd_am,NIC
-niu,Niue,,,,nonoecd_asia,NIU
-nld,Netherlands (the),Netherlands,NLD,NETHLAND,oecd_eur,NLD
-nor,Norway,Norway,NOR,NORWAY,oecd_eur,NOR
-npl,Nepal,Nepal,NPL,NEPAL,nonoecd_asia,NPL
-nru,Nauru,,,,,NRU
-nzl,New Zealand,New Zealand,NZL,NZ,australia_nz,NZL
-omn,Oman,Oman,OMN,OMAN,me,OMN
-pak,Pakistan,Pakistan,PAK,PAKISTAN,nonoecd_asia,PAK
-pan,Panama,Panama,PAN,PANAMA,nonoecd_am,PAN
-pcn,Pitcairn,,,,,
-per,Peru,Peru,PER,PERU,nonoecd_am,PER
-phl,Philippines (the),Philippines,PHL,PHILIPPINE,nonoecd_asia,PHL
-plw,Palau,,,,,PLW
-png,Papua New Guinea,Papua New Guinea,PNG,,nonoecd_asia,PNG
-pol,Poland,Poland,POL,POLAND,oecd_eur,POL
-pri,Puerto Rico,,PRI,,,PRI
-prk,Korea (the Democratic People's Republic of),"Korea, Democratic People's Republic of",PRK,KOREADPR,nonoecd_asia,PRK
-prt,Portugal,Portugal,PRT,PORTUGAL,oecd_eur,PRT
-pry,Paraguay,Paraguay,PRY,PARAGUAY,nonoecd_am,PRY
-pse,"Palestine, State of",,,,me,PSE
-pyf,French Polynesia,,PYF,,,PYF
-qat,Qatar,Qatar,QAT,QATAR,me,QAT
-reu,Réunion,,REU,,,REU
-rou,Romania,Romania,ROU,ROMANIA,nonoecd_eurasia,ROU
-rus,Russian Federation (the),Russian Federation,RUS,RUSSIA,russia,RUS
-rwa,Rwanda,Rwanda,RWA,MRWANDA,africa,RWA
-sau,Saudi Arabia,Saudi Arabia,SAU,SAUDIARABI,me,SAU
-sdn,Sudan (the),Sudan,SDN,SUDAN,africa,SDN
-sen,Senegal,Senegal,SEN,SENEGAL,africa,SEN
-sgp,Singapore,Singapore,,SINGAPORE,nonoecd_asia,SGP
-sgs,South Georgia and the South Sandwich Islands,,,,,
-shn,"Saint Helena, Ascension and Tristan da Cunha",,,,,SHN
-sjm,Svalbard and Jan Mayen,,,,,
-slb,Solomon Islands,Solomon Islands,SLB,,nonoecd_asia,SLB
-sle,Sierra Leone,Sierra Leone,SLE,,africa,SLE
-slv,El Salvador,El Salvador,SLV,ELSALVADOR,nonoecd_am,SLV
-smr,San Marino,,,,,
-som,Somalia,Somalia,SOM,,africa,SOM
-spm,Saint Pierre and Miquelon,,,,nonoecd_am,SPM
-srb,Serbia,Serbia,SRB,SERBIA,nonoecd_eurasia,SRB
-ssd,South Sudan,South Sudan,SSD,SSUDAN,africa,SSD
-stp,Sao Tome and Principe,Sao Tome and Principe,STP,,africa,STP
-sur,Suriname,Suriname,SUR,SURINAME,nonoecd_am,SUR
-svk,Slovakia,Slovak Republic,SVK,SLOVAKIA,oecd_eur,SVK
-svn,Slovenia,Slovenia,SVN,SLOVENIA,oecd_eur,SVN
-swe,Sweden,Sweden,SWE,SWEDEN,oecd_eur,SWE
-swz,Eswatini,Swaziland,SWZ,,,SWZ
-sxm,Sint Maarten (Dutch part),,,,,SXM
-syc,Seychelles,Seychelles,,,africa,SYC
-syr,Syrian Arab Republic (the),Syrian Arab Republic,SYR,SYRIA,me,SYR
-tca,Turks and Caicos Islands (the),,,,nonoecd_am,TCA
-tcd,Chad,Chad,TCD,MCHAD,africa,TCD
-tgo,Togo,Togo,TGO,TOGO,africa,TGO
-tha,Thailand,Thailand,THA,THAILAND,nonoecd_asia,THA
-tjk,Tajikistan,Tajikistan,TJK,TAJIKISTAN,nonoecd_eurasia,TJK
-tkl,Tokelau,,,,,TKL
-tkm,Turkmenistan,Turkmenistan,TKM,TURKMENIST,nonoecd_eurasia,TKM
-tls,Timor-Leste,Timor-Leste (East Timor),TLS,,nonoecd_asia,TLS
-ton,Tonga,Tonga,,,nonoecd_asia,TON
-tto,Trinidad and Tobago,Trinidad and Tobago,TTO,TRINIDAD,nonoecd_am,TTO
-tun,Tunisia,Tunisia,TUN,TUNISIA,africa,TUN
-tur,Turkey,Turkey,TUR,TURKEY,oecd_eur,TUR
-tuv,Tuvalu,,,,,TUV
-twn,Taiwan (Province of China),Taiwan,,TAIPEI,nonoecd_asia,TWN
-tza,"Tanzania, the United Republic of","Tanzania, United Republic of",TZA,TANZANIA,africa,TZA
-uga,Uganda,Uganda,UGA,MUGANDA,africa,UGA
-ukr,Ukraine,Ukraine,UKR,UKRAINE,nonoecd_eurasia,UKR
-umi,United States Minor Outlying Islands (the),,,,,UMI
-ury,Uruguay,Uruguay,URY,URUGUAY,nonoecd_am,URY
-usa,United States of America (the),United States of America,USA,USA,usa,USA
-uzb,Uzbekistan,Uzbekistan,UZB,UZBEKISTAN,nonoecd_eurasia,UZB
-vat,Holy See (the),,,,,
-vct,Saint Vincent and the Grenadines,Saint Vincent and the Grenadines,,,nonoecd_am,VCT
-ven,Venezuela (Bolivarian Republic of),Venezuela,VEN,VENEZUELA,nonoecd_am,VEN
-vgb,Virgin Islands (British),,,,,VGB
-vir,Virgin Islands (U.S.),,,,,VIR
-vnm,Viet Nam,Vietnam,VNM,VIETNAM,nonoecd_asia,VNM
-vut,Vanuatu,Vanuatu,VUT,,nonoecd_asia,VUT
-wlf,Wallis and Futuna,,,,,WLF
-wsm,Samoa,Samoa,WSM,,nonoecd_asia,WSM
-xkx,Kosovo,Kosovo,,KOSOVO,nonoecd_eurasia,XKX
-yem,Yemen,Yemen,YEM,YEMEN,me,YEM
-zaf,South Africa,South Africa,ZAF,SOUTHAFRIC,africa,ZAF
-zmb,Zambia,Zambia,ZMB,ZAMBIA,africa,ZMB
-zwe,Zimbabwe,Zimbabwe,ZWE,ZIMBABWE,africa,ZWE
-wld,World,,,WORLD,africa,
+ISO,ISO Name,WWS Region,NCS Region,WEB Region,EIA Region,CTRACE Region,IRENA Region
+afg,Afghanistan,Afghanistan,AFG,,nonoecd_asia,AFG,Afghanistan
+ala,Åland Islands,,,,,,
+alb,Albania,Albania,ALB,ALBANIA,nonoecd_eurasia,ALB,Albania
+dza,Algeria,Algeria,DZA,ALGERIA,africa,DZA,Algeria
+asm,American Samoa,Samoa,,,,ASM,American Samoa
+and,Andorra,,,,,AND,Andorra
+ago,Angola,Angola,AGO,ANGOLA,africa,AGO,Angola
+aia,Anguilla,,,,,AIA,Anguilla
+ata,Antarctica,,,,,,
+atg,Antigua and Barbuda,Antigua and Barbuda,,,,ATG,Antigua and Barbuda
+arg,Argentina,Argentina,ARG,ARGENTINA,nonoecd_am,ARG,Argentina
+arm,Armenia,Armenia,ARM,ARMENIA,nonoecd_eurasia,ARM,Armenia
+abw,Aruba,,,,,ABW,Aruba
+aus,Australia,Australia,AUS,AUSTRALI,australia_nz,AUS,Australia
+aut,Austria,Austria,AUT,AUSTRIA,oecd_eur,AUT,Austria
+aze,Azerbaijan,Azerbaijan,AZE,AZERBAIJAN,nonoecd_eurasia,AZE,Azerbaijan
+bhs,Bahamas (the),Bahamas,BHS,,nonoecd_am,BHS,Bahamas
+bhr,Bahrain,Bahrain,,BAHRAIN,me,BHR,Bahrain
+bgd,Bangladesh,Bangladesh,BGD,BANGLADESH,nonoecd_asia,BGD,Bangladesh
+brb,Barbados,Barbados,,,nonoecd_am,BRB,Barbados
+blr,Belarus,Belarus,BLR,BELARUS,nonoecd_eurasia,BLR,Belarus
+bel,Belgium,Belgium,BEL,BELGIUM,oecd_eur,BEL,Belgium
+blz,Belize,Belize,BLZ,,nonoecd_am,BLZ,Belize
+ben,Benin,Benin,BEN,BENIN,africa,BEN,Benin
+bmu,Bermuda,,,,,BMU,
+btn,Bhutan,Bhutan,BTN,,nonoecd_asia,BTN,Bhutan
+bol,Bolivia (Plurinational State of),Bolivia,BOL,BOLIVIA,nonoecd_am,BOL,Bolivia (Plurinational State of)
+bes,"Bonaire, Sint Eustatius and Saba",,,,,BES,"Bonaire, Sint Eustatius and Saba"
+bih,Bosnia and Herzegovina,Bosnia and Herzegovina,BIH,BOSNIAHERZ,nonoecd_eurasia,BIH,Bosnia and Herzegovina
+bwa,Botswana,Botswana,BWA,BOTSWANA,africa,BWA,Botswana
+bvt,Bouvet Island,,,,,,
+bra,Brazil,Brazil,BRA,BRAZIL,brazil,BRA,Brazil
+iot,British Indian Ocean Territory (the),,,,,,
+brn,Brunei Darussalam,Brunei Darussalam,BRN,BRUNEI,nonoecd_asia,BRN,Brunei Darussalam
+bgr,Bulgaria,Bulgaria,BGR,BULGARIA,nonoecd_eurasia,BGR,Bulgaria
+bfa,Burkina Faso,Burkina Faso,BFA,MBURKINAFA,africa,BFA,Burkina Faso
+bdi,Burundi,Burundi,BDI,,africa,BDI,Burundi
+cpv,Cabo Verde,Cape Verde,CPV,,africa,CPV,Cabo Verde
+khm,Cambodia,Cambodia,KHM,CAMBODIA,nonoecd_asia,KHM,Cambodia
+cmr,Cameroon,Cameroon,CMR,CAMEROON,africa,CMR,Cameroon
+can,Canada,Canada,CAN,CANADA,canada,CAN,Canada
+cym,Cayman Islands (the),,,,,CYM,Cayman Islands
+caf,Central African Republic (the),Central African Republic,CAF,,africa,CAF,Central African Republic
+tcd,Chad,Chad,TCD,MCHAD,africa,TCD,Chad
+chl,Chile,Chile,CHL,CHILE,mexico_oecd,CHL,Chile
+chn,China,China,CHN,CHINA,china,CHN,China
+cxr,Christmas Island,,,,,CXR,
+cck,Cocos (Keeling) Islands (the),,,,,CCK,
+col,Colombia,Colombia,COL,COLOMBIA,mexico_oecd,COL,Colombia
+com,Comoros (the),Comoros,COM,,africa,COM,Comoros
+cod,Congo (the Democratic Republic of the),"Congo, Democratic Republic of",COD,CONGOREP,africa,COD,Democratic Republic of the Congo
+cog,Congo (the),Congo,COG,CONGO,africa,COG,Congo
+cok,Cook Islands (the),,,,,COK,Cook Islands
+cri,Costa Rica,Costa Rica,CRI,COSTARICA,nonoecd_am,CRI,Costa Rica
+civ,Côte d'Ivoire,Cote d'Ivoire,CIV,COTEIVOIRE,africa,CIV,Côte d'Ivoire
+hrv,Croatia,Croatia,HRV,CROATIA,nonoecd_eurasia,HRV,Croatia
+cub,Cuba,Cuba,CUB,CUBA,nonoecd_am,CUB,Cuba
+cuw,Curaçao,Curacao,,CURACAO,nonoecd_am,CUW,Curaçao
+cyp,Cyprus,Cyprus,CYP,CYPRUS,nonoecd_eurasia,CYP,Cyprus
+cze,Czechia,Czech Republic,CZE,CZECH,oecd_eur,CZE,Czechia
+dnk,Denmark,Denmark,DNK,DENMARK,oecd_eur,DNK,Denmark
+dji,Djibouti,Djibouti,DJI,,africa,DJI,Djibouti
+dma,Dominica,,,,nonoecd_am,DMA,Dominica
+dom,Dominican Republic (the),Dominican Republic,DOM,DOMINICANR,nonoecd_am,DOM,Dominican Republic
+ecu,Ecuador,Ecuador,ECU,ECUADOR,nonoecd_am,ECU,Ecuador
+egy,Egypt,Egypt,EGY,EGYPT,africa,EGY,Egypt
+slv,El Salvador,El Salvador,SLV,ELSALVADOR,nonoecd_am,SLV,El Salvador
+gnq,Equatorial Guinea,Equatorial Guinea,GNQ,EQGUINEA,africa,GNQ,Equatorial Guinea
+eri,Eritrea,Eritrea,ERI,ERITREA,africa,ERI,Eritrea
+est,Estonia,Estonia,EST,ESTONIA,oecd_eur,EST,Estonia
+swz,Eswatini,Swaziland,SWZ,,,SWZ,Eswatini
+eth,Ethiopia,Ethiopia,ETH,ETHIOPIA,africa,ETH,Ethiopia
+flk,Falkland Islands (the) [Malvinas],,FLK,,nonoecd_am,FLK,Falkland Islands (Malvinas)
+fro,Faroe Islands (the),,FRO,,,FRO,Faroe Islands
+fji,Fiji,Fiji,FJI,,nonoecd_asia,FJI,Fiji
+fin,Finland,Finland,FIN,FINLAND,oecd_eur,FIN,Finland
+fra,France,France,FRA,FRANCE,oecd_eur,FRA,France
+guf,French Guiana,French Guiana,GUF,,nonoecd_am,GUF,French Guiana
+pyf,French Polynesia,,PYF,,,PYF,French Polynesia
+atf,French Southern Territories (the),,,,,,
+gab,Gabon,Gabon,GAB,GABON,africa,GAB,Gabon
+gmb,Gambia (the),Gambia,GMB,,africa,GMB,Gambia
+geo,Georgia,Georgia,GEO,GEORGIA,nonoecd_eurasia,GEO,Georgia
+deu,Germany,Germany,DEU,GERMANY,oecd_eur,DEU,Germany
+gha,Ghana,Ghana,GHA,GHANA,africa,GHA,Ghana
+gib,Gibraltar,Gibraltar,,GIBRALTAR,nonoecd_eurasia,GIB,
+grc,Greece,Greece,GRC,GREECE,oecd_eur,GRC,Greece
+grl,Greenland,Greenland,GRL,MGREENLAND,nonoecd_am,GRL,Greenland
+grd,Grenada,Grenada,,,nonoecd_am,GRD,Grenada
+glp,Guadeloupe,,GLP,,nonoecd_am,GLP,Guadeloupe
+gum,Guam,,,,,GUM,Guam
+gtm,Guatemala,Guatemala,GTM,GUATEMALA,nonoecd_am,GTM,Guatemala
+ggy,Guernsey,,,,,GGY,
+gin,Guinea,Guinea,GIN,,,GIN,Guinea
+gnb,Guinea-Bissau,Guinea-Bissau,GNB,,,GNB,Guinea-Bissau
+guy,Guyana,Guyana,GUY,GUYANA,nonoecd_am,GUY,Guyana
+hti,Haiti,Haiti,HTI,HAITI,nonoecd_am,HTI,Haiti
+hmd,Heard Island and McDonald Islands,,,,,,
+vat,Holy See (the),,,,,,
+hnd,Honduras,Honduras,HND,HONDURAS,nonoecd_am,HND,Honduras
+hkg,Hong Kong,"Hong Kong, China",,HONGKONG,nonoecd_asia,HKG,
+hun,Hungary,Hungary,HUN,HUNGARY,oecd_eur,HUN,Hungary
+isl,Iceland,Iceland,ISL,ICELAND,oecd_eur,ISL,Iceland
+ind,India,India,IND,INDIA,india,IND,India
+idn,Indonesia,Indonesia,IDN,INDONESIA,nonoecd_asia,IDN,Indonesia
+irn,Iran (Islamic Republic of),"Iran, Islamic Republic of",IRN,IRAN,me,IRN,Iran (Islamic Republic of)
+irq,Iraq,Iraq,IRQ,IRAQ,me,IRQ,Iraq
+irl,Ireland,Ireland,IRL,IRELAND,oecd_eur,IRL,Ireland
+imn,Isle of Man,,,,,IMN,
+isr,Israel,Israel,ISR,ISRAEL,oecd_eur,ISR,Israel
+ita,Italy,Italy,ITA,ITALY,oecd_eur,ITA,Italy
+jam,Jamaica,Jamaica,JAM,JAMAICA,nonoecd_am,JAM,Jamaica
+jpn,Japan,Japan,JPN,JAPAN,oecd_eur,JPN,Japan
+jey,Jersey,,,,,JEY,
+jor,Jordan,Jordan,JOR,JORDAN,me,JOR,Jordan
+kaz,Kazakhstan,Kazakhstan,KAZ,KAZAKHSTAN,nonoecd_eurasia,KAZ,Kazakhstan
+ken,Kenya,Kenya,KEN,KENYA,africa,KEN,Kenya
+kir,Kiribati,Kiribati,,,nonoecd_asia,KIR,Kiribati
+prk,Korea (the Democratic People's Republic of),"Korea, Democratic People's Republic of",PRK,KOREADPR,nonoecd_asia,PRK,Democratic People's Republic of Korea
+kor,Korea (the Republic of),"Korea, Republic of",KOR,KOREA,south_korea,KOR,Republic of Korea
+xkx,Kosovo,Kosovo,,KOSOVO,nonoecd_eurasia,XKX,Kosovo*
+kwt,Kuwait,Kuwait,KWT,KUWAIT,me,KWT,Kuwait
+kgz,Kyrgyzstan,Kyrgyzstan,KGZ,KYRGYZSTAN,nonoecd_eurasia,KGZ,Kyrgyzstan
+lao,Lao People's Democratic Republic (the),Lao PDR,LAO,LAO,nonoecd_asia,LAO,Lao People's Democratic Republic
+lva,Latvia,Latvia,LVA,LATVIA,oecd_eur,LVA,Latvia
+lbn,Lebanon,Lebanon,LBN,LEBANON,me,LBN,Lebanon
+lso,Lesotho,Lesotho,LSO,,africa,LSO,Lesotho
+lbr,Liberia,Liberia,LBR,,africa,LBR,Liberia
+lby,Libya,Libya,LBY,LIBYA,africa,LBY,Libya
+lie,Liechtenstein,,,,,LIE,
+ltu,Lithuania,Lithuania,LTU,LITHUANIA,oecd_eur,LTU,Lithuania
+lux,Luxembourg,Luxembourg,LUX,LUXEMBOU,oecd_eur,LUX,Luxembourg
+mac,Macao,,,,nonoecd_asia,MAC,
+mdg,Madagascar,Madagascar,MDG,MMADAGASCA,africa,MDG,Madagascar
+mwi,Malawi,Malawi,MWI,,africa,MWI,Malawi
+mys,Malaysia,Malaysia,MYS,MALAYSIA,nonoecd_asia,MYS,Malaysia
+mdv,Maldives,Maldives,,,nonoecd_asia,MDV,Maldives
+mli,Mali,Mali,MLI,MMALI,africa,MLI,Mali
+mlt,Malta,Malta,,MALTA,nonoecd_eurasia,MLT,Malta
+mhl,Marshall Islands (the),,,,,MHL,Marshall Islands
+mtq,Martinique,,MTQ,,nonoecd_am,MTQ,Martinique
+mrt,Mauritania,Mauritania,MRT,MMAURITANI,africa,MRT,Mauritania
+mus,Mauritius,Mauritius,MUS,MAURITIUS,africa,MUS,Mauritius
+myt,Mayotte,,,,,MYT,Mayotte
+mex,Mexico,Mexico,MEX,MEXICO,mexico_oecd,MEX,Mexico
+fsm,Micronesia (Federated States of),Micronesia,,,,FSM,Micronesia (Federated States of)
+mda,Moldova (the Republic of),"Moldova, Republic of",MDA,MOLDOVA,nonoecd_eurasia,MDA,Republic of Moldova
+mco,Monaco,,,,,MCO,
+mng,Mongolia,Mongolia,MNG,MONGOLIA,nonoecd_asia,MNG,Mongolia
+mne,Montenegro,Montenegro,MNE,MONTENEGRO,nonoecd_eurasia,MNE,Montenegro
+msr,Montserrat,,,,nonoecd_am,MSR,Montserrat
+mar,Morocco,Morocco,MAR,MOROCCO,africa,MAR,Morocco
+moz,Mozambique,Mozambique,MOZ,MOZAMBIQUE,africa,MOZ,Mozambique
+mmr,Myanmar,Myanmar,MMR,MYANMAR,nonoecd_asia,MMR,Myanmar
+nam,Namibia,Namibia,NAM,NAMIBIA,africa,NAM,Namibia
+nru,Nauru,,,,,NRU,Nauru
+npl,Nepal,Nepal,NPL,NEPAL,nonoecd_asia,NPL,Nepal
+nld,Netherlands (the),Netherlands,NLD,NETHLAND,oecd_eur,NLD,Netherlands
+ncl,New Caledonia,,NCL,,,NCL,New Caledonia
+nzl,New Zealand,New Zealand,NZL,NZ,australia_nz,NZL,New Zealand
+nic,Nicaragua,Nicaragua,NIC,NICARAGUA,nonoecd_am,NIC,Nicaragua
+ner,Niger (the),Niger,NER,NIGER,africa,NER,Niger
+nga,Nigeria,Nigeria,NGA,NIGERIA,africa,NGA,Nigeria
+niu,Niue,,,,nonoecd_asia,NIU,Niue
+nfk,Norfolk Island,,,,,NFK,
+mkd,North Macedonia,"Macedonia, North",MKD,NORTHMACED,nonoecd_eurasia,MKD,Republic of North Macedonia
+mnp,Northern Mariana Islands (the),,,,,MNP,
+nor,Norway,Norway,NOR,NORWAY,oecd_eur,NOR,Norway
+omn,Oman,Oman,OMN,OMAN,me,OMN,Oman
+pak,Pakistan,Pakistan,PAK,PAKISTAN,nonoecd_asia,PAK,Pakistan
+plw,Palau,,,,,PLW,Palau
+pse,"Palestine, State of",,,,me,PSE,State of Palestine
+pan,Panama,Panama,PAN,PANAMA,nonoecd_am,PAN,Panama
+png,Papua New Guinea,Papua New Guinea,PNG,,nonoecd_asia,PNG,Papua New Guinea
+pry,Paraguay,Paraguay,PRY,PARAGUAY,nonoecd_am,PRY,Paraguay
+per,Peru,Peru,PER,PERU,nonoecd_am,PER,Peru
+phl,Philippines (the),Philippines,PHL,PHILIPPINE,nonoecd_asia,PHL,Philippines
+pcn,Pitcairn,,,,,,
+pol,Poland,Poland,POL,POLAND,oecd_eur,POL,Poland
+prt,Portugal,Portugal,PRT,PORTUGAL,oecd_eur,PRT,Portugal
+pri,Puerto Rico,,PRI,,,PRI,Puerto Rico
+qat,Qatar,Qatar,QAT,QATAR,me,QAT,Qatar
+reu,Réunion,,REU,,,REU,Réunion
+rou,Romania,Romania,ROU,ROMANIA,nonoecd_eurasia,ROU,Romania
+rus,Russian Federation (the),Russian Federation,RUS,RUSSIA,russia,RUS,Russian Federation
+rwa,Rwanda,Rwanda,RWA,MRWANDA,africa,RWA,Rwanda
+blm,Saint Barthélemy,,,,,BLM,Saint Barthélemy
+shn,"Saint Helena, Ascension and Tristan da Cunha",,,,,SHN,
+kna,Saint Kitts and Nevis,,,,nonoecd_am,KNA,Saint Kitts and Nevis
+lca,Saint Lucia,Saint Lucia,,,nonoecd_am,LCA,Saint Lucia
+maf,Saint Martin (French part),,,,,MAF,Saint Martin (French Part)
+spm,Saint Pierre and Miquelon,,,,nonoecd_am,SPM,Saint Pierre and Miquelon
+vct,Saint Vincent and the Grenadines,Saint Vincent and the Grenadines,,,nonoecd_am,VCT,Saint Vincent and the Grenadines
+wsm,Samoa,Samoa,WSM,,nonoecd_asia,WSM,Samoa
+smr,San Marino,,,,,,
+stp,Sao Tome and Principe,Sao Tome and Principe,STP,,africa,STP,Sao Tome and Principe
+sau,Saudi Arabia,Saudi Arabia,SAU,SAUDIARABI,me,SAU,Saudi Arabia
+sen,Senegal,Senegal,SEN,SENEGAL,africa,SEN,Senegal
+srb,Serbia,Serbia,SRB,SERBIA,nonoecd_eurasia,SRB,Serbia
+syc,Seychelles,Seychelles,,,africa,SYC,Seychelles
+sle,Sierra Leone,Sierra Leone,SLE,,africa,SLE,Sierra Leone
+sgp,Singapore,Singapore,,SINGAPORE,nonoecd_asia,SGP,Singapore
+sxm,Sint Maarten (Dutch part),,,,,SXM,
+svk,Slovakia,Slovak Republic,SVK,SLOVAKIA,oecd_eur,SVK,Slovakia
+svn,Slovenia,Slovenia,SVN,SLOVENIA,oecd_eur,SVN,Slovenia
+slb,Solomon Islands,Solomon Islands,SLB,,nonoecd_asia,SLB,Solomon Islands
+som,Somalia,Somalia,SOM,,africa,SOM,Somalia
+zaf,South Africa,South Africa,ZAF,SOUTHAFRIC,africa,ZAF,South Africa
+sgs,South Georgia and the South Sandwich Islands,,,,,,South Georgia and the South Sandwich Islands
+ssd,South Sudan,South Sudan,SSD,SSUDAN,africa,SSD,South Sudan
+esp,Spain,Spain,ESP,SPAIN,oecd_eur,ESP,Spain
+lka,Sri Lanka,Sri Lanka,LKA,SRILANKA,nonoecd_asia,LKA,Sri Lanka
+sdn,Sudan (the),Sudan,SDN,SUDAN,africa,SDN,Sudan
+sur,Suriname,Suriname,SUR,SURINAME,nonoecd_am,SUR,Suriname
+sjm,Svalbard and Jan Mayen,,,,,,
+swe,Sweden,Sweden,SWE,SWEDEN,oecd_eur,SWE,Sweden
+che,Switzerland,Switzerland,CHE,SWITLAND,oecd_eur,CHE,Switzerland
+syr,Syrian Arab Republic (the),Syrian Arab Republic,SYR,SYRIA,me,SYR,Syrian Arab Republic
+twn,Taiwan (Province of China),Taiwan,,TAIPEI,nonoecd_asia,TWN,Chinese Taipei
+tjk,Tajikistan,Tajikistan,TJK,TAJIKISTAN,nonoecd_eurasia,TJK,Tajikistan
+tza,"Tanzania, the United Republic of","Tanzania, United Republic of",TZA,TANZANIA,africa,TZA,United Republic of Tanzania
+tha,Thailand,Thailand,THA,THAILAND,nonoecd_asia,THA,Thailand
+tls,Timor-Leste,Timor-Leste (East Timor),TLS,,nonoecd_asia,TLS,Timor-Leste
+tgo,Togo,Togo,TGO,TOGO,africa,TGO,Togo
+tkl,Tokelau,,,,,TKL,Tokelau
+ton,Tonga,Tonga,,,nonoecd_asia,TON,Tonga
+tto,Trinidad and Tobago,Trinidad and Tobago,TTO,TRINIDAD,nonoecd_am,TTO,Trinidad and Tobago
+tun,Tunisia,Tunisia,TUN,TUNISIA,africa,TUN,Tunisia
+tur,Turkey,Turkey,TUR,TURKEY,oecd_eur,TUR,Turkey
+tkm,Turkmenistan,Turkmenistan,TKM,TURKMENIST,nonoecd_eurasia,TKM,Turkmenistan
+tca,Turks and Caicos Islands (the),,,,nonoecd_am,TCA,Turks and Caicos Islands
+tuv,Tuvalu,,,,,TUV,Tuvalu
+uga,Uganda,Uganda,UGA,MUGANDA,africa,UGA,Uganda
+ukr,Ukraine,Ukraine,UKR,UKRAINE,nonoecd_eurasia,UKR,Ukraine
+are,United Arab Emirates (the),United Arab Emirates,ARE,UAE,me,ARE,United Arab Emirates
+gbr,United Kingdom of Great Britain and Northern Ireland (the),United Kingdom,GBR,UK,oecd_eur,GBR,United Kingdom of Great Britain and Northern Ireland
+umi,United States Minor Outlying Islands (the),,,,,UMI,
+usa,United States of America (the),United States of America,USA,USA,usa,USA,United States of America
+ury,Uruguay,Uruguay,URY,URUGUAY,nonoecd_am,URY,Uruguay
+uzb,Uzbekistan,Uzbekistan,UZB,UZBEKISTAN,nonoecd_eurasia,UZB,Uzbekistan
+vut,Vanuatu,Vanuatu,VUT,,nonoecd_asia,VUT,Vanuatu
+ven,Venezuela (Bolivarian Republic of),Venezuela,VEN,VENEZUELA,nonoecd_am,VEN,Venezuela (Bolivarian Republic of)
+vnm,Viet Nam,Vietnam,VNM,VIETNAM,nonoecd_asia,VNM,Viet Nam
+vgb,Virgin Islands (British),,,,,VGB,British Virgin Islands
+vir,Virgin Islands (U.S.),,,,,VIR,United States Virgin Islands
+wlf,Wallis and Futuna,,,,,WLF,
+esh,Western Sahara*,,ESH,,,ESH,
+wld,World,,,WORLD,africa,,
+yem,Yemen,Yemen,YEM,YEMEN,me,YEM,Yemen
+zmb,Zambia,Zambia,ZMB,ZAMBIA,africa,ZMB,Zambia
+zwe,Zimbabwe,Zimbabwe,ZWE,ZIMBABWE,africa,ZWE,Zimbabwe
