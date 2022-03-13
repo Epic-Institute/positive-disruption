@@ -24,6 +24,7 @@ from podi.cdr.cdr_util import (
 warnings.simplefilter(action="ignore", category=FutureWarning)
 regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "Region"})
 
+
 data_start_year = 1990
 data_end_year = 2020
 proj_end_year = 2050
@@ -77,41 +78,12 @@ else:
 #################
 
 # region
-(
-    elec_consump_baseline,
-    elec_per_adoption_baseline,
-    elec_consump_cdr_baseline,
-    heat_consump_baseline,
-    heat_per_adoption_baseline,
-    heat_consump_cdr_baseline,
-    transport_consump_baseline,
-    transport_per_adoption_baseline,
-    transport_consump_cdr_baseline,
-) = energy_supply(
+(per_elec_supply_baseline, elec_supply_baseline) = energy_supply(
     "baseline", energy_demand_baseline, data_start_year, data_end_year, proj_end_year
 )
 
-(
-    elec_consump_pathway,
-    elec_per_adoption_pathway,
-    elec_consump_cdr_pathway,
-    heat_consump_pathway,
-    heat_per_adoption_pathway,
-    heat_consump_cdr_pathway,
-    transport_consump_pathway,
-    transport_per_adoption_pathway,
-    transport_consump_cdr_pathway,
-) = energy_supply(
+(per_elec_supply_pathway, elec_supply_pathway) = energy_supply(
     "pathway", energy_demand_pathway, data_start_year, data_end_year, proj_end_year
-)
-
-elec_consump = elec_consump_baseline.append(elec_consump_pathway)
-elec_per_adoption = elec_per_adoption_baseline.append(elec_per_adoption_pathway)
-heat_consump = heat_consump_baseline.append(heat_consump_pathway)
-heat_per_adoption = heat_per_adoption_baseline.append(heat_per_adoption_pathway)
-transport_consump = transport_consump_baseline.append(transport_consump_pathway)
-transport_per_adoption = transport_per_adoption_baseline.append(
-    transport_per_adoption_pathway
 )
 
 # endregion

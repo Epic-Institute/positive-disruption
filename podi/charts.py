@@ -16,7 +16,7 @@ from plotly.subplots import make_subplots
 from itertools import chain, zip_longest
 from math import ceil, pi, nan
 from podi.curve_smooth import curve_smooth
-from numpy import NaN, triu_indices_from
+from numpy import NaN, product, triu_indices_from
 import fair
 from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
@@ -737,15 +737,16 @@ for region in regions.index.to_list():
 
 # endregion
 
-##################################################################
-# ENERGY DEMAND BY SECTOR AND END-USE, DETAILED PRODUCT AND FLOW #
-##################################################################
+#################
+# ENERGY DEMAND #
+#################
 
 # region
 
 scenario = scenario
 start_year = data_start_year
-sector = "Industrial"
+sector = "Electric Power"
+groupby = "Product_long"
 
 colors = [
     "#AA0DFE",
@@ -799,10 +800,10 @@ colors = [
 for region in regions.index.to_list():
     energy_demand = (
         (
-            energy_demand_pathway.loc[scenario, region, sector,slice(None), slice(None), slice(None), slice(None), 'Final consumption',slice(None),slice(None),slice(None), slice(None), 'N', :]
+            energy_demand_pathway.loc[scenario, region, sector]
             .groupby(
                 [
-                    "Flow_long",
+                    groupby,
                 ]
             )
             .sum()
@@ -816,25 +817,25 @@ for region in regions.index.to_list():
     fig.index.name = "Year"
     fig.reset_index(inplace=True)
     fig2 = pd.melt(
-        fig, id_vars="Year", var_name=['Flow_long"], value_name="TFC, " + unit[0]
+        fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0]
     )
 
     fig = go.Figure()
 
-    for sub in fig2["Flow_long"].unique():
+    for sub in fig2[groupby].unique():
         fig.add_trace(
             go.Scatter(
                 name=sub,
                 line=dict(
                     width=0.5,
                     color=colors[
-                        pd.DataFrame(fig2["Flow_long"].unique())
+                        pd.DataFrame(fig2[groupby].unique())
                         .set_index(0)
                         .index.get_loc(sub)
                     ],
                 ),
                 x=fig2["Year"],
-                y=fig2[fig2["Flow_long"] == sub]["TFC, TJ"],
+                y=fig2[fig2[groupby] == sub]["TFC, TJ"],
                 fill="tonexty",
                 stackgroup="1",
             )
@@ -842,7 +843,7 @@ for region in regions.index.to_list():
 
     fig.update_layout(
         title={
-            "text": "Energy Demand, " + "DAU, " + region[0].upper(),
+            "text": "Energy Demand, " + "DAU, " + region,
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
@@ -850,7 +851,7 @@ for region in regions.index.to_list():
         # xaxis={"title": "Year"},
         yaxis={"title": "TFC, " + unit[0]},
         margin_b=0,
-        margin_t=100,
+        margin_t=0,
         margin_l=10,
         margin_r=10,
     )
@@ -869,6 +870,128 @@ for region in regions.index.to_list():
 
 # endregion
 
+###################################
+# ELECTRICITY SUPPLY (% of Total) #
+###################################
+
+# region
+
+scenario = scenario
+start_year = start_year
+
+for region in regions.index.to_list():
+    fig = per_elec_supply.loc[region, "Electric Power"].groupby("Product_long").sum()
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="Year", var_name="Product", value_name="TFC, " + unit[0]
+    )
+
+    fig = go.Figure()
+
+    for product in fig2["Product"].unique():
+        fig.add_trace(
+            go.Scatter(
+                name=product,
+                line=dict(width=0.5),
+                x=fig2["Year"],
+                y=fig2[fig2["Product"] == product]["TFC, TJ"],
+                fill="tonexty",
+                stackgroup="one",
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Percent Electricity Supply, "
+            + scenario
+            + ", "
+            + region.replace(" ", ""),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "TFC, % of Total"},
+        legend=dict(font=dict(size=8)),
+        margin_b=0,
+        margin_t=20,
+        margin_l=0,
+        margin_r=0,
+    )
+
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/elec_supply-" + scenario + "-" + region + ".html").replace(
+                " ", ""
+            ),
+            auto_open=False,
+        )
+
+# endregion
+
+###########################
+# ELECTRICITY SUPPLY (TJ) #
+###########################
+
+# region
+
+scenario = scenario
+start_year = start_year
+
+for region in regions:
+    fig = elec_supply.loc[region, "Electric Power"].groupby("Product_long").sum()
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="Year", var_name="Product", value_name="TFC, " + unit[0]
+    )
+
+    fig = go.Figure()
+
+    for product in fig2["Product"].unique():
+        fig.add_trace(
+            go.Scatter(
+                name=product,
+                line=dict(width=0.5),
+                x=fig2["Year"],
+                y=fig2[fig2["Product"] == product]["TFC, TJ"],
+                fill="tonexty",
+                stackgroup="one",
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Electricity Supply, " + scenario + ", " + region.replace(" ", ""),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "TFC, " + unit[0]},
+        legend=dict(font=dict(size=8)),
+        margin_b=0,
+        margin_t=20,
+        margin_l=0,
+        margin_r=0,
+    )
+
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/supply2-" + scenario + "-" + region_list[i] + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
+
+# endregion
 
 ###################
 # ADOPTION CURVES #
@@ -2209,25 +2332,6 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-##############################
-# ELECTRICITY PERCENT ADOPTION
-##############################
-
-# region
-
-scenario = scenario
-start_year = start_year
-
-for i in range(0, len(region_list)):
-    fig = elec_per_adoption.loc[region_list[i], slice(None), scenario]
-    plt.figure(i)
-    plt.plot(fig.T)
-    plt.legend(fig.T)
-    plt.title(region_list[i])
-    elec_per_adoption.loc[region_list[i], slice(None), scenario].loc[:, 2019]
-
-# endregion
-
 #######################
 # HEAT PERCENT ADOPTION
 #######################
@@ -2964,14 +3068,14 @@ for i in range(0, len(region_list)):
 """
 # endregion
 
-#####################################
-# ENERGY SUPPLY BY SOURCE & END-USE #
-#####################################
+##########################################
+# ENERGY SUPPLY BY SOURCE & END-USE PD21 #
+##########################################
 
 # region
 
 scenario = scenario
-start_year = 2000
+start_year = start_year
 
 tech_list = [
     "Electricity-Solar",
@@ -3218,9 +3322,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-##########################################
-# ELECTRICITY SUPPLY BY SOURCE & END-USE #
-##########################################
+###############################################
+# ELECTRICITY SUPPLY BY SOURCE & END-USE PD21 #
+###############################################
 
 # region
 
@@ -8343,8 +8447,6 @@ if save_figs is True:
         file=("./charts/temp-" + "World" + ".html").replace(" ", ""),
         auto_open=False,
     )
-
-# endregion
 
 # endregion
 

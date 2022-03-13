@@ -10,6 +10,9 @@ import numpy as np
 from numpy import NaN, product
 from podi.adoption_curve_demand import adoption_curve_demand
 from podi.curve_smooth import curve_smooth
+from pandarallel import pandarallel
+
+pandarallel.initialize(nb_workers=8)
 
 # endregion
 
@@ -220,6 +223,20 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         )
     )
 
+    # Drop Non-energy use flows
+    energy_demand_historical = energy_demand_historical.loc[
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        slice(None),
+        ["N"],
+        :,
+    ]
+
     # For Transportation flows ROAD/DOMESAIR/RAIL that were duplicated to make Two- and three-wheeled/Light-Duty/Medium-Duty/Heavy-Duty flows, scale their energy demand so the sum of subflows is equal to the original energy demand estimate
 
     # region
@@ -260,7 +277,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         slice(None),
         slice(None),
         ["ROAD", "DOMESAIR", "RAIL"],
-    ].apply(
+    ].parallel_apply(
         lambda x: x
         * (
             subsector_props.loc[
@@ -307,7 +324,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         slice(None),
         slice(None),
         ["HEAT", "HEATNS"],
-    ].apply(
+    ].parallel_apply(
         lambda x: x
         * (
             subsector_props.loc[
@@ -350,7 +367,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         slice(None), slice(None), ["Hydrogen", "Non-Hydrogen"], ["NONCRUDE"]
     ] = energy_demand_historical.loc[
         slice(None), slice(None), ["Hydrogen", "Non-Hydrogen"], ["NONCRUDE"]
-    ].apply(
+    ].parallel_apply(
         lambda x: x
         * (
             subsector_props.loc[
@@ -421,14 +438,16 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         usecols=["Product Category", "Product", "Short name"],
     )
 
-    energy_demand_historical["Product_category"] = energy_demand_historical.apply(
+    energy_demand_historical[
+        "Product_category"
+    ] = energy_demand_historical.parallel_apply(
         lambda x: longnames[longnames["Short name"] == x["Product"]][
             "Product Category"
         ].squeeze("rows"),
         axis=1,
     )
 
-    energy_demand_historical["Product_long"] = energy_demand_historical.apply(
+    energy_demand_historical["Product_long"] = energy_demand_historical.parallel_apply(
         lambda x: longnames[longnames["Short name"] == x["Product"]]["Product"].squeeze(
             "rows"
         ),
@@ -440,14 +459,14 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         usecols=["Flow Category", "Flow", "Short name"],
     )
 
-    energy_demand_historical["Flow_category"] = energy_demand_historical.apply(
+    energy_demand_historical["Flow_category"] = energy_demand_historical.parallel_apply(
         lambda x: longnames[longnames["Short name"] == x["Flow"]][
             "Flow Category"
         ].squeeze("rows"),
         axis=1,
     )
 
-    energy_demand_historical["Flow_long"] = energy_demand_historical.apply(
+    energy_demand_historical["Flow_long"] = energy_demand_historical.parallel_apply(
         lambda x: longnames[longnames["Short name"] == x["Flow"]]["Flow"].squeeze(
             "rows"
         ),
@@ -628,13 +647,18 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
 
+        parameters = pd.read_csv(
+            "podi/data/tech_parameters.csv",
+            usecols=["Region", "Product", "Scenario", "Sector", "Metric", "Value"],
+        ).set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
+        parameters = parameters.sort_index()
+
         # Run adoption_curve_demand.py to calculate logistics curves for energy demand reduction ratios
-        ef_ratio = ef_ratio.apply(
+        ef_ratio = ef_ratio.parallel_apply(
             lambda x: adoption_curve_demand(
+                parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
                 x,
-                x.name[0],
                 scenario,
-                x.name[3],
                 data_start_year,
                 data_end_year,
                 proj_end_year,
@@ -649,7 +673,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         ef_ratios.set_index(["Region", "Sector", "Product", "Scenario"], inplace=True)
 
         # Prepare df for multiplication with energy_demand
-        ef_ratios = ef_ratios.apply(
+        ef_ratios = ef_ratios.parallel_apply(
             lambda x: 1 - (1 - x.max()) * (x - x.min()) / x.max(), axis=1
         )
 
@@ -748,7 +772,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
                 slice(None),
                 "Y",
                 slice(None),
-            ].apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1)
+            ].parallel_apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1)
         )
         .fillna(0)
         .values
@@ -765,6 +789,8 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         slice(None),
     ] = 1
 
+    ef_ratios = ef_ratios.sort_index()
+
     upstream_ratios.loc[
         slice(None),
         slice(None),
@@ -775,8 +801,10 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         slice(None),
     ] = 1
 
+    upstream_ratios = upstream_ratios.sort_index()
+
     # Reduce energy demand by the upstream energy demand reductions from fossil fuel/biofuel/bioenergy/uranium mining/transport/processing
-    energy_demand_post_upstream = energy_demand_baseline.apply(
+    energy_demand_post_upstream = energy_demand_baseline.parallel_apply(
         lambda x: x.mul(
             upstream_ratios.loc[
                 x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]
@@ -822,8 +850,9 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Remove duplicate indices
     addtl_eff = addtl_eff[~addtl_eff.index.duplicated()]
+    addtl_eff = addtl_eff.sort_index()
 
-    energy_demand_post_addtl_eff = energy_demand_post_upstream.apply(
+    energy_demand_post_addtl_eff = energy_demand_post_upstream.parallel_apply(
         lambda x: x.mul(
             addtl_eff.loc[x.name[1], x.name[2], x.name[6], x.name[9]].squeeze()
         ),
@@ -831,7 +860,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Isolate energy demand that gets replaced with (a reduced amount of) energy from electricity. Each row of energy demand is multiplied by ((ef[0] - ef[i]) / (ef[0] - ef[-1]), which represents the percent of energy demand that undergoes electrification. This does not count preexisting electricity demand.
-    energy_demand_electrified = energy_demand_post_addtl_eff.apply(
+    energy_demand_electrified = energy_demand_post_addtl_eff.parallel_apply(
         lambda x: x.mul(
             (
                 (
@@ -863,7 +892,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Find the reduced amount of electrical energy that represents an equivalent amount of work to that of the energy demand that undergoes electrification
-    energy_demand_reduced_electrified = energy_demand_electrified.apply(
+    energy_demand_reduced_electrified = energy_demand_electrified.parallel_apply(
         lambda x: x.mul(
             ef_ratios.loc[x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]]
             .squeeze()

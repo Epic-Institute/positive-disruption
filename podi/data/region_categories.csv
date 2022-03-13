@@ -84,9 +84,9 @@ gmb,Gambia (the),Gambia,GMB,,africa,GMB,Gambia
 geo,Georgia,Georgia,GEO,GEORGIA,nonoecd_eurasia,GEO,Georgia
 deu,Germany,Germany,DEU,GERMANY,oecd_eur,DEU,Germany
 gha,Ghana,Ghana,GHA,GHANA,africa,GHA,Ghana
-gib,Gibraltar,Gibraltar,,GIBRALTAR,nonoecd_eurasia,GIB,
+gib,Gibraltar,Gibraltar,,GIBRALTAR,nonoecd_eurasia,GIB,Gibraltar
 grc,Greece,Greece,GRC,GREECE,oecd_eur,GRC,Greece
-grl,Greenland,Greenland,GRL,MGREENLAND,nonoecd_am,GRL,Greenland
+grl,Greenland,,GRL,MGREENLAND,nonoecd_am,GRL,Greenland
 grd,Grenada,Grenada,,,nonoecd_am,GRD,Grenada
 glp,Guadeloupe,,GLP,,nonoecd_am,GLP,Guadeloupe
 gum,Guam,,,,,GUM,Guam
@@ -99,7 +99,7 @@ hti,Haiti,Haiti,HTI,HAITI,nonoecd_am,HTI,Haiti
 hmd,Heard Island and McDonald Islands,,,,,,
 vat,Holy See (the),,,,,,
 hnd,Honduras,Honduras,HND,HONDURAS,nonoecd_am,HND,Honduras
-hkg,Hong Kong,"Hong Kong, China",,HONGKONG,nonoecd_asia,HKG,
+hkg,Hong Kong,"Hong Kong, China",,HONGKONG,nonoecd_asia,HKG,Hong Kong
 hun,Hungary,Hungary,HUN,HUNGARY,oecd_eur,HUN,Hungary
 isl,Iceland,Iceland,ISL,ICELAND,oecd_eur,ISL,Iceland
 ind,India,India,IND,INDIA,india,IND,India
@@ -246,7 +246,7 @@ vgb,Virgin Islands (British),,,,,VGB,British Virgin Islands
 vir,Virgin Islands (U.S.),,,,,VIR,United States Virgin Islands
 wlf,Wallis and Futuna,,,,,WLF,
 esh,Western Sahara*,,ESH,,,ESH,
-wld,World,,,WORLD,africa,,
+wld,World,,,WORLD,africa,,World
 yem,Yemen,Yemen,YEM,YEMEN,me,YEM,Yemen
 zmb,Zambia,Zambia,ZMB,ZAMBIA,africa,ZMB,Zambia
 zwe,Zimbabwe,Zimbabwe,ZWE,ZIMBABWE,africa,ZWE,Zimbabwe
