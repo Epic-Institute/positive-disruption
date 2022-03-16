@@ -73,6 +73,33 @@ else:
 #################
 
 # region
+recalc_energy_supply = False
+if recalc_energy_supply is True:
+    energy_demand_supply = energy_demand(
+        "pathway", data_start_year, data_end_year, proj_end_year
+    )
+else:
+    index = [
+        "Scenario",
+        "Region",
+        "Sector",
+        "Subsector",
+        "Product_category",
+        "Product_long",
+        "Product",
+        "Flow_category",
+        "Flow_long",
+        "Flow",
+        "Hydrogen",
+        "Flexible",
+        "Non-Energy Use",
+    ]
+
+    energy_supply_pathway = pd.DataFrame(
+        pd.read_csv("podi/data/energy_supply_" + scenario + ".csv")
+    ).set_index(index)
+    energy_supply_pathway.columns = energy_supply_pathway.columns.astype(int)
+
 (per_elec_supply_baseline, elec_supply_baseline) = energy_supply(
     "baseline", energy_demand_baseline, data_start_year, data_end_year, proj_end_year
 )
