@@ -41,10 +41,9 @@ scenario = "pathway"
 
 recalc_energy_demand = False
 if recalc_energy_demand is True:
-    (
-        energy_demand_baseline,
-        energy_demand_pathway,
-    ) = energy_demand("pathway", data_start_year, data_end_year, proj_end_year)
+    energy_demand_pathway = energy_demand(
+        "pathway", data_start_year, data_end_year, proj_end_year
+    )
 else:
     index = [
         "Scenario",
@@ -62,10 +61,6 @@ else:
         "Non-Energy Use",
     ]
 
-    energy_demand_baseline = pd.DataFrame(
-        pd.read_csv("podi/data/energy_demand_baseline.csv")
-    ).set_index(index)
-    energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
     energy_demand_pathway = pd.DataFrame(
         pd.read_csv("podi/data/energy_demand_" + scenario + ".csv")
     ).set_index(index)

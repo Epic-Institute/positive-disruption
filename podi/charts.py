@@ -21,14 +21,13 @@ import fair
 from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
 from fair.constants import radeff
-
 from podi.energy_demand import energy_demand
 
 pd.options.display.float_format = "{:,.0f}".format
 
-unit_name = ["TJ"]
-unit_val = [1]
-unit = [unit_name[0], unit_val[0]]
+unit_name = ["TJ", "TWh"]
+unit_val = [1, 0.0002777]
+unit = [unit_name[1], unit_val[1]]
 
 save_figs = True
 show_figs = True
@@ -72,6 +71,99 @@ cl_old = {
     "V6: Forests & Wetlands": "#54A24B",
     "V7: CDR": "#FF9DA6",
 }
+
+colors = [
+    "#AA0DFE",
+    "#3283FE",
+    "#85660D",
+    "#565656",
+    "#1C8356",
+    "#16FF32",
+    "#F7E1A0",
+    "#C4451C",
+    "#325A9B",
+    "#FEAF16",
+    "#F8A19F",
+    "#90AD1C",
+    "#F6222E",
+    "#1CFFCE",
+    "#2ED9FF",
+    "#B10DA1",
+    "#C075A6",
+    "#FC1CBF",
+    "#B00068",
+    "#FBE426",
+    "#FA0087",
+    "#FD3216",
+    "#00FE35",
+    "#6A76FC",
+    "#FED4C4",
+    "#FE00CE",
+    "#0DF9FF",
+    "#F6F926",
+    "#FF9616",
+    "#479B55",
+    "#EEA6FB",
+    "#DC587D",
+    "#D626FF",
+    "#6E899C",
+    "#00B5F7",
+    "#B68E00",
+    "#C9FBE5",
+    "#FF0092",
+    "#22FFA7",
+    "#E3EE9E",
+    "#86CE00",
+    "#BC7196",
+    "#7E7DCD",
+    "#FC6955",
+    "#E48F72",
+    "#AA0DFE",
+    "#3283FE",
+    "#85660D",
+    "#565656",
+    "#1C8356",
+    "#16FF32",
+    "#F7E1A0",
+    "#C4451C",
+    "#325A9B",
+    "#FEAF16",
+    "#F8A19F",
+    "#90AD1C",
+    "#F6222E",
+    "#1CFFCE",
+    "#2ED9FF",
+    "#B10DA1",
+    "#C075A6",
+    "#FC1CBF",
+    "#B00068",
+    "#FBE426",
+    "#FA0087",
+    "#FD3216",
+    "#00FE35",
+    "#6A76FC",
+    "#FED4C4",
+    "#FE00CE",
+    "#0DF9FF",
+    "#F6F926",
+    "#FF9616",
+    "#479B55",
+    "#EEA6FB",
+    "#DC587D",
+    "#D626FF",
+    "#6E899C",
+    "#00B5F7",
+    "#B68E00",
+    "#C9FBE5",
+    "#FF0092",
+    "#22FFA7",
+    "#E3EE9E",
+    "#86CE00",
+    "#BC7196",
+    "#7E7DCD",
+    "#FC6955",
+    "#E48F72",
+]
 
 # endregion
 
@@ -505,235 +597,192 @@ energy_balance = pd.concat(
 
 # endregion
 
-############################################################
-# ENERGY DEMAND BY SECTOR AND END-USE, FOR PD21 COMPARISON #
-############################################################
+#############################################################
+# ENERGY DEMAND BY SECTOR AND END-USE (FOR PD21 COMPARISON) #
+#############################################################
 
 # region
 
 scenario = scenario
-start_year = data_start_year
+start_year = 1990
+region = slice(None)
 
-for region in regions.index.to_list():
-    energy_demand = (
-        (
-            energy_demand_pathway.loc[scenario, region, :]
-            .groupby(
-                [
-                    "Sector",
-                    "Product_category",
-                    "Product_long",
-                    "Flow_category",
-                    "Flow_long",
-                    "Non-Energy Use",
-                ]
-            )
-            .sum()
-        )
-        .loc[:, start_year:]
-        .abs()
+energy_demand = (
+    energy_demand_pathway.loc[scenario, region, :]
+    .groupby(
+        ["Sector", "Product_category", "Product_long", "Flow_category", "Flow_long"]
     )
+    .sum()
+).loc[:, start_year:] * (unit[1])
 
-    fig = (
+fig = (
+    energy_demand.loc[
+        slice(None), slice(None), "Electricity", "Final consumption", slice(None)
+    ]
+    .groupby("Sector")
+    .sum()
+    .rename(
+        index={
+            "Commercial": "Buildings-Electricity",
+            "Industrial": "Industrial-Electricity",
+            "Residential": "Buildings-Electricity",
+            "Transportation": "Transportation-Electricity",
+        }
+    )
+    .groupby("Sector")
+    .sum()
+    .append(
         energy_demand.loc[
+            ["Transportation"],
             slice(None),
             slice(None),
-            "Electricity",
             "Final consumption",
             slice(None),
-            "N",
         ]
+        .drop("Electricity", level=2)
         .groupby("Sector")
         .sum()
-        .rename(
-            index={
-                "Commercial": "Buildings-Electricity",
-                "Industrial": "Industrial-Electricity",
-                "Residential": "Buildings-Electricity",
-                "Transportation": "Transportation-Electricity",
-            }
-        )
+        .rename(index={"Transportation": "Transportation-Nonelectric"})
+    )
+    .append(
+        energy_demand.loc[
+            ["Residential", "Commercial"],
+            slice(None),
+            slice(None),
+            "Final consumption",
+            slice(None),
+        ]
+        .drop(["Electricity"], level=2)
+        .groupby(["Sector"])
+        .sum()
+        .rename(index={"Residential": "Buildings-Heat", "Commercial": "Buildings-Heat"})
         .groupby("Sector")
         .sum()
-        .append(
-            energy_demand.loc[
-                ["Transportation"],
-                slice(None),
-                slice(None),
-                "Final consumption",
-                slice(None),
-                "N",
-            ]
-            .drop("Electricity", level=2)
-            .groupby("Sector")
-            .sum()
-            .rename(index={"Transportation": "Transportation-Nonelectric"})
-        )
-        .append(
-            energy_demand.loc[
-                ["Residential", "Commercial"],
-                slice(None),
-                slice(None),
-                "Final consumption",
-                slice(None),
-                "N",
-            ]
-            .drop(["Electricity"], level=2)
-            .groupby(["Sector"])
-            .sum()
-            .rename(
-                index={"Residential": "Buildings-Heat", "Commercial": "Buildings-Heat"}
-            )
-            .groupby("Sector")
-            .sum()
-        )
-        .append(
-            energy_demand.loc[
-                ["Industrial"],
-                slice(None),
-                slice(None),
-                "Final consumption",
-                slice(None),
-                "N",
-            ]
-            .drop(["Electricity"], level=2)
-            .groupby(["Sector"])
-            .sum()
-            .rename(index={"Industrial": "Industrial-Heat"})
-        )
-        .reindex(
-            [
-                "Transportation-Nonelectric",
-                "Transportation-Electricity",
-                "Buildings-Heat",
-                "Buildings-Electricity",
-                "Industrial-Heat",
-                "Industrial-Electricity",
-            ]
-        )
+    )
+    .append(
+        energy_demand.loc[
+            ["Industrial"], slice(None), slice(None), "Final consumption", slice(None)
+        ]
+        .drop(["Electricity"], level=2)
+        .groupby(["Sector"])
+        .sum()
+        .rename(index={"Industrial": "Industrial-Heat"})
+    )
+    .reindex(
+        [
+            "Transportation-Nonelectric",
+            "Transportation-Electricity",
+            "Buildings-Heat",
+            "Buildings-Electricity",
+            "Industrial-Heat",
+            "Industrial-Electricity",
+        ]
+    )
+)
+
+fig = fig.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0])
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Transportation-Nonelectric",
+        line=dict(width=0.5, color="#7AA8B8"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Transportation-Nonelectric"]["TFC, " + unit[0]],
+        fill="tozeroy",
+        stackgroup="one",
+        fillcolor="#7AA8B8",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Transportation-Electricity",
+        line=dict(width=0.5, color="#bbe272"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Transportation-Electricity"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+        fillcolor="#bbe272",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Buildings-Heat",
+        line=dict(width=0.5, color="#F58518"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Buildings-Heat"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+        fillcolor="#F58518",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Buildings-Electricity",
+        line=dict(width=0.5, color="#54A24B"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Buildings-Electricity"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+        fillcolor="#54A24B",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Industrial-Heat",
+        line=dict(width=0.5, color="#60738C"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Industrial-Heat"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+        fillcolor="#60738C",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Industrial-Electricity",
+        line=dict(width=0.5, color="#B279A2"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Industrial-Electricity"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+        fillcolor="#B279A2",
+    )
+)
+
+fig.update_layout(
+    title={
+        "text": "Energy Demand, " + "DAU, " + str(region),
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "TFC, " + unit[0]},
+    legend=dict(orientation="h", yanchor="bottom", y=1.0, x=0, font=dict(size=10)),
+    margin_b=0,
+    margin_t=70,
+    margin_l=15,
+    margin_r=15,
+)
+
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/demand-" + scenario + "-" + region + ".html").replace(" ", ""),
+        auto_open=False,
     )
 
-    fig = fig.T
-    fig.index.name = "Year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0])
-
-    fig = go.Figure()
-
-    fig.add_trace(
-        go.Scatter(
-            name="Transportation-Nonelectric",
-            line=dict(width=0.5, color="#7AA8B8"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transportation-Nonelectric"]["TFC, " + unit[0]],
-            fill="tozeroy",
-            stackgroup="one",
-            fillcolor="#7AA8B8",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Transportation-Electricity",
-            line=dict(width=0.5, color="#bbe272"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transportation-Electricity"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="#bbe272",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Buildings-Heat",
-            line=dict(width=0.5, color="#F58518"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Buildings-Heat"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="#F58518",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Buildings-Electricity",
-            line=dict(width=0.5, color="#54A24B"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Buildings-Electricity"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="#54A24B",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Industrial-Heat",
-            line=dict(width=0.5, color="#60738C"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industrial-Heat"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="#60738C",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Industrial-Electricity",
-            line=dict(width=0.5, color="#B279A2"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industrial-Electricity"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="#B279A2",
-        )
-    )
-
-    fig.update_layout(
-        title={
-            "text": "Energy Demand, " + "DAU, " + region[0].upper(),
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        # xaxis={"title": "Year"},
-        yaxis={"title": "TFC, " + unit[0]},
-        legend=dict(orientation="h", yanchor="bottom", y=1.0, x=0, font=dict(size=10)),
-        margin_b=0,
-        margin_t=70,
-        margin_l=15,
-        margin_r=15,
-    )
-
-    """
-    fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance; projections are based on PD technology adoption rate assumptions applied to <br>EIA International Energy Outlook projections",
-        xref="paper",
-        yref="paper",
-        x=-0.17,
-        y=1.17,
-        showarrow=False,
-        font=dict(size=10, color="#2E3F5C"),
-        align="left",
-        borderpad=4,
-        bgcolor="#ffffff",
-        opacity=1,
-    )
-    """
-    if show_figs is True:
-        fig.show()
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=(
-                "./charts/demand-" + scenario + "-" + region_list[region] + ".html"
-            ).replace(" ", ""),
-            auto_open=False,
-        )
-    plt.clf()
 
 # endregion
 
@@ -745,257 +794,243 @@ for region in regions.index.to_list():
 
 scenario = scenario
 start_year = data_start_year
-sector = "Electric Power"
-groupby = "Product_long"
+region = "usa"
+sector = slice(None)
+product_category = slice(None)
+product = slice(None)
+flow_category = slice(None)
+flow = slice(None)
+groupby = "Product"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
 
-colors = [
-    "#AA0DFE",
-    "#3283FE",
-    "#85660D",
-    "#565656",
-    "#1C8356",
-    "#16FF32",
-    "#F7E1A0",
-    "#C4451C",
-    "#325A9B",
-    "#FEAF16",
-    "#F8A19F",
-    "#90AD1C",
-    "#F6222E",
-    "#1CFFCE",
-    "#2ED9FF",
-    "#B10DA1",
-    "#C075A6",
-    "#FC1CBF",
-    "#B00068",
-    "#FBE426",
-    "#FA0087",
-    "#FD3216",
-    "#00FE35",
-    "#6A76FC",
-    "#FED4C4",
-    "#FE00CE",
-    "#0DF9FF",
-    "#F6F926",
-    "#FF9616",
-    "#479B55",
-    "#EEA6FB",
-    "#DC587D",
-    "#D626FF",
-    "#6E899C",
-    "#00B5F7",
-    "#B68E00",
-    "#C9FBE5",
-    "#FF0092",
-    "#22FFA7",
-    "#E3EE9E",
-    "#86CE00",
-    "#BC7196",
-    "#7E7DCD",
-    "#FC6955",
-    "#E48F72",
-]
-
-
-for region in regions.index.to_list():
-    energy_demand = (
-        (
-            energy_demand_pathway.loc[scenario, region, sector]
-            .groupby(
-                [
-                    groupby,
-                ]
-            )
-            .sum()
+fig = (
+    (
+        energy_demand_pathway.loc[
+            scenario,
+            region,
+            sector,
+            slice(None),
+            product_category,
+            slice(None),
+            product,
+            flow_category,
+            slice(None),
+            flow,
+        ]
+        .groupby(
+            [
+                groupby,
+            ]
         )
-        .loc[:, start_year:]
-        .abs()
+        .sum()
     )
+    .loc[:, start_year:]
+    .abs()
+).T
 
-    fig = energy_demand
-    fig = fig.T
-    fig.index.name = "Year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0]
-    )
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0])
 
-    fig = go.Figure()
+fig = go.Figure()
 
-    for sub in fig2[groupby].unique():
-        fig.add_trace(
-            go.Scatter(
-                name=sub,
-                line=dict(
-                    width=0.5,
-                    color=colors[
-                        pd.DataFrame(fig2[groupby].unique())
-                        .set_index(0)
-                        .index.get_loc(sub)
-                    ],
-                ),
-                x=fig2["Year"],
-                y=fig2[fig2[groupby] == sub]["TFC, TJ"],
-                fill="tonexty",
-                stackgroup="1",
-            )
-        )
-
-    fig.update_layout(
-        title={
-            "text": "Energy Demand, " + "DAU, " + region,
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        # xaxis={"title": "Year"},
-        yaxis={"title": "TFC, " + unit[0]},
-        margin_b=0,
-        margin_t=0,
-        margin_l=10,
-        margin_r=10,
-    )
-
-    if show_figs is True:
-        fig.show()
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=(
-                "./charts/demand-" + scenario + "-" + region_list[region] + ".html"
-            ).replace(" ", ""),
-            auto_open=False,
-        )
-    plt.clf()
-
-# endregion
-
-###################################
-# ELECTRICITY SUPPLY (% of Total) #
-###################################
-
-# region
-
-scenario = scenario
-start_year = start_year
-
-for region in regions.index.to_list():
-    fig = per_elec_supply.loc[region, "Electric Power"].groupby("Product_long").sum()
-    fig = fig.T
-    fig.index.name = "Year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig, id_vars="Year", var_name="Product", value_name="TFC, " + unit[0]
-    )
-
-    fig = go.Figure()
-
-    for product in fig2["Product"].unique():
-        fig.add_trace(
-            go.Scatter(
-                name=product,
-                line=dict(width=0.5),
-                x=fig2["Year"],
-                y=fig2[fig2["Product"] == product]["TFC, TJ"],
-                fill="tonexty",
-                stackgroup="one",
-            )
-        )
-
-    fig.update_layout(
-        title={
-            "text": "Percent Electricity Supply, "
-            + scenario
-            + ", "
-            + region.replace(" ", ""),
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        yaxis={"title": "TFC, % of Total"},
-        legend=dict(font=dict(size=8)),
-        margin_b=0,
-        margin_t=20,
-        margin_l=0,
-        margin_r=0,
-    )
-
-    if show_figs is True:
-        fig.show()
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=("./charts/elec_supply-" + scenario + "-" + region + ".html").replace(
-                " ", ""
+for sub in fig2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(fig2[groupby].unique()).set_index(0).index.get_loc(sub)
+                ],
             ),
-            auto_open=False,
+            x=fig2["Year"],
+            y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+            fill="tonexty",
+            stackgroup="1",
         )
+    )
+
+fig.update_layout(
+    title={
+        "text": "Energy Demand, " + "DAU, " + region,
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "TFC, " + unit[0]},
+    margin_b=0,
+    margin_t=20,
+    margin_l=10,
+    margin_r=10,
+)
+
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/demand-" + scenario + "-" + region + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
 
 # endregion
 
-###########################
-# ELECTRICITY SUPPLY (TJ) #
-###########################
+########################
+# ENERGY DEMAND WEDGES # <--
+########################
+
+# region
+
+scenario = scenario
+start_year = data_start_year
+region = "usa"
+sector = slice(None)
+product_category = slice(None)
+product = slice(None)
+flow_category = slice(None)
+flow = slice(None)
+groupby = "Product"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+
+fig = (
+    (
+        energy_demand_pathway.loc[
+            scenario,
+            region,
+            sector,
+            slice(None),
+            product_category,
+            slice(None),
+            product,
+            flow_category,
+            slice(None),
+            flow,
+        ]
+        .groupby(
+            [
+                groupby,
+            ]
+        )
+        .sum()
+    )
+    .loc[:, start_year:]
+    .abs()
+).T
+
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0])
+
+fig = go.Figure()
+
+for sub in fig2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(fig2[groupby].unique()).set_index(0).index.get_loc(sub)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2[groupby] == sub]["TFC, TJ"],
+            fill="tonexty",
+            stackgroup="1",
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "Energy Demand, " + "DAU, " + region,
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "TFC, " + unit[0]},
+    margin_b=0,
+    margin_t=20,
+    margin_l=10,
+    margin_r=10,
+)
+
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/demandwedges-" + scenario + "-" + region + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
+    )
+
+
+# endregion
+
+######################
+# ELECTRICITY SUPPLY #
+######################
 
 # region
 
 scenario = scenario
 start_year = start_year
+region = slice(None)
+groupby = "Product_long"  # 'Subsector', 'Product_category', 'Product_long', 'Product'
 
-for region in regions:
-    fig = elec_supply.loc[region, "Electric Power"].groupby("Product_long").sum()
-    fig = fig.T
-    fig.index.name = "Year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig, id_vars="Year", var_name="Product", value_name="TFC, " + unit[0]
+# fig = per_elec_supply.loc[region].groupby(groupby).mean().T
+fig = elec_supply.loc[region].groupby(groupby).sum().T * unit[1]
+
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=groupby, value_name="TFC, " + unit[0])
+
+fig = go.Figure()
+
+for sub in fig2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=sub,
+            line=dict(width=0.5),
+            x=fig2["Year"],
+            y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+            fill="tonexty",
+            stackgroup="1",
+        )
     )
 
-    fig = go.Figure()
+fig.update_layout(
+    title={
+        "text": "Electricity Supply, " + scenario + ", " + str(region),
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "TFC, " + unit[0]},
+    legend=dict(font=dict(size=8)),
+    margin_b=0,
+    margin_t=20,
+    margin_l=0,
+    margin_r=0,
+)
 
-    for product in fig2["Product"].unique():
-        fig.add_trace(
-            go.Scatter(
-                name=product,
-                line=dict(width=0.5),
-                x=fig2["Year"],
-                y=fig2[fig2["Product"] == product]["TFC, TJ"],
-                fill="tonexty",
-                stackgroup="one",
-            )
-        )
-
-    fig.update_layout(
-        title={
-            "text": "Electricity Supply, " + scenario + ", " + region.replace(" ", ""),
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        yaxis={"title": "TFC, " + unit[0]},
-        legend=dict(font=dict(size=8)),
-        margin_b=0,
-        margin_t=20,
-        margin_l=0,
-        margin_r=0,
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/elec_supply-" + scenario + "-" + region + ".html").replace(
+            " ", ""
+        ),
+        auto_open=False,
     )
-
-    if show_figs is True:
-        fig.show()
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=(
-                "./charts/supply2-" + scenario + "-" + region_list[i] + ".html"
-            ).replace(" ", ""),
-            auto_open=False,
-        )
 
 # endregion
 
-###################
-# ADOPTION CURVES #
-###################
+###########################
+# SOLUTION ADOPTION RATES #
+###########################
 
 # region
 
@@ -1325,9 +1360,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#############################
-# ADOPTION CURVES DASHBOARD #
-#############################
+#####################################
+# SOLUTION ADOPTION RATES DASHBOARD #
+#####################################
 
 # region
 
@@ -1625,9 +1660,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#############################
-# SUBVECTOR ADOPTION CURVES #
-#############################
+#####################################
+# SUBVECTOR SOLUTION ADOPTION RATES #
+#####################################
 
 # region
 
@@ -1793,9 +1828,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#############################
-# ADOPTION CURVES BY REGION #
-#############################
+#####################################
+# SOLUTION ADOPTION RATES BY REGION #
+#####################################
 
 # region
 
@@ -1882,9 +1917,9 @@ if show_figs is True:
 
 # endregion
 
-###############################################
-# ADOPTION CURVES BY REGION SNAPSHOT BARCHART #
-###############################################
+#######################################################
+# SOLUTION ADOPTION RATES BY REGION SNAPSHOT BARCHART #
+#######################################################
 
 # region
 
@@ -1978,9 +2013,9 @@ if show_figs is True:
 
 # endregion
 
-#######################################
-# SUBVECTOR ADOPTION CURVES UNSTACKED #
-#######################################
+###############################################
+# SUBVECTOR SOLUTION ADOPTION RATES UNSTACKED #
+###############################################
 
 # region
 
@@ -2158,9 +2193,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#################################################
-# AFOLU SUBVECTOR ADOPTION CURVES AS MAX EXTENT #
-#################################################
+#########################################################
+# AFOLU SUBVECTOR SOLUTION ADOPTION RATES AS MAX EXTENT #
+#########################################################
 
 # region
 
@@ -2377,9 +2412,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-########################################
-# ACTUAL VS. PROJECTED ADOPTION CURVES #
-########################################
+################################################
+# ACTUAL VS. PROJECTED SOLUTION ADOPTION RATES #
+################################################
 
 # region
 
@@ -2870,9 +2905,9 @@ for i in range(0, 1):
 
 # endregion
 
-##############################
-# ADOPTION CURVES STAR CHART #
-##############################
+######################################
+# SOLUTION ADOPTION RATES STAR CHART #
+######################################
 
 # region
 
@@ -3050,9 +3085,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-##############################
-# ADOPTION CURVES KNEE/ELBOW #
-##############################
+######################################
+# SOLUTION ADOPTION RATES KNEE/ELBOW #
+######################################
 
 # region
 """
@@ -3573,9 +3608,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#############
-# EMISSIONS #
-#############
+#################
+# GHG EMISSIONS #
+#################
 
 # region
 
@@ -4049,9 +4084,485 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-########################
-# EMISSIONS SUBVECTORS #
-########################
+######################################
+# GHG EMISSIONS MITIGATION POTENTIAL #
+######################################
+
+# region
+
+scenario = scenario
+start_year = 2000
+i = 0
+
+ndcs = [
+    [(2030, 2050), (24, 0), ("50% by 2030", "Net-zero by 2050")],
+    (3, 3),
+    [
+        (2025, 2050, 2030, 2050),
+        (4.86, 2.84, 2.84, 0),
+        ("NDC", "NDC 2050 est.", "50% by 2030", "Net-zero by 2050"),
+    ],
+    (3, 3),
+    (2030, 1.2),
+    [(2030, 2050), (2.4, 0), ("50% by 2030", "Net-zero by 2050")],
+    (3, 3),
+    (2030, 0.398),
+    (3, 3),
+    (2030, 2.17),
+    (3, 3),
+    [
+        (2030, 2030, 2050),
+        (12.96, 6.15, 0),
+        ("50% by 2030", "NDC", "Net-zero by 2050"),
+    ],
+    (2030, 9.14),
+    (2030, 1),
+    (3, 3),
+    (3, 3),
+]
+
+ndc_commit = [
+    ("x",),
+    ("x",),
+    ("reduce emissions to 25% below 2005 levels by 2025.",),
+    ("x",),
+    ("reduce emissions to 1.3 GtCO2e by 2025 and 1.2 by 2030.",),
+    ("x",),
+    ("x",),
+    ("reduce emissions to 398-614 MtCO2e over the period 2025-2030.",),
+    ("x",),
+    ("reduce emissions to 25-30% below 1990 by 2030",),
+    ("x",),
+    ("reach a GDP carbon intensity 60-65% below 2005 levels by 2030.",),
+    ("reach a GDP carbon intensity of 33-35% below 2005 by 2030.",),
+    (
+        "reduce emissions to 26% emissions below 2013 levels in 2030 and reach net 0 by 2050.",
+    ),
+    ("x",),
+    ("x",),
+]
+
+for i in range(0, len(region_list)):
+
+    em_electricity = em.loc[
+        region_list[i], ["Electricity"], slice(None), slice(None), scenario
+    ].loc[:, start_year:long_proj_end_year]
+    em_electricity = em_electricity.loc[~(em_electricity == 0).all(axis=1)]
+
+    em_transport = em.loc[
+        region_list[i], ["Transport"], slice(None), slice(None), scenario
+    ].loc[:, start_year:long_proj_end_year]
+    em_transport = em_transport.loc[~(em_transport == 0).all(axis=1)]
+
+    em_buildings = em.loc[
+        region_list[i], ["Buildings"], slice(None), slice(None), scenario
+    ].loc[:, start_year:long_proj_end_year]
+    em_buildings = em_buildings.loc[~(em_buildings == 0).all(axis=1)]
+
+    em_industry = em.loc[
+        region_list[i], ["Industry"], slice(None), slice(None), scenario
+    ].loc[:, start_year:long_proj_end_year]
+    em_industry = em_industry.loc[~(em_industry == 0).all(axis=1)]
+
+    em_ra = em.loc[
+        region_list[i],
+        [
+            "Biochar",
+            "Cropland Soil Health",
+            "Improved Rice",
+            "Nitrogen Fertilizer Management",
+            "Trees in Croplands",
+            "Animal Mgmt",
+            "Legumes",
+            "Optimal Intensity",
+            "Silvopasture",
+            "Regenerative Agriculture",
+        ],
+        slice(None),
+        slice(None),
+        scenario,
+    ].loc[:, start_year:long_proj_end_year]
+    em_ra = em_ra.loc[~(em_ra == 0).all(axis=1)]
+
+    em_fw = em.loc[
+        region_list[i],
+        [
+            "Avoided Coastal Impacts",
+            "Avoided Forest Conversion",
+            "Avoided Peat Impacts",
+            "Coastal Restoration",
+            "Improved Forest Mgmt",
+            "Peat Restoration",
+            "Natural Regeneration",
+            "Forests & Wetlands",
+        ],
+        slice(None),
+        slice(None),
+        scenario,
+    ].loc[:, start_year:long_proj_end_year]
+    em_fw = em_fw.loc[~(em_fw == 0).all(axis=1)]
+
+    em2 = (
+        em_electricity.append(em_transport)
+        .append(em_buildings)
+        .append(em_industry)
+        .append(em_ra)
+        .append(em_fw)
+    )
+
+    fig = ((em2.groupby("Sector").sum()) / 1000).loc[:, start_year:]
+
+    fig = fig.T
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+    )
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            name="V6: Forests & Wetlands",
+            line=dict(width=0.5, color=cl["V6: Forests & Wetlands"][0]),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
+            fill="tozeroy",
+            stackgroup="fw",
+            fillcolor=cl["V6: Forests & Wetlands"][0],
+        )
+    )
+
+    if (
+        fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+    ).any() == True:
+        if (
+            fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+        ).all() == True:
+            fill = "tozeroy"
+            stackgroup = "two"
+        else:
+            fill = "tonexty"
+            stackgroup = "fw"
+    else:
+        fill = "tonexty"
+        stackgroup = "fw"
+
+    fig.add_trace(
+        go.Scatter(
+            name="V5: Agriculture",
+            line=dict(width=0.5, color=cl["V5: Agriculture"][0]),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
+            fill=fill,
+            stackgroup=stackgroup,
+            fillcolor=cl["V5: Agriculture"][0],
+        )
+    )
+
+    fill = "tonexty"
+    stackgroup2 = stackgroup
+
+    fig.add_trace(
+        go.Scatter(
+            name="V4: Industry",
+            line=dict(width=0.5, color=cl["V4: Industry"][0]),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup=stackgroup2,
+            fillcolor=cl["V4: Industry"][0],
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V3: Buildings",
+            line=dict(width=0.5, color=cl["V3: Buildings"][0]),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup=stackgroup2,
+            fillcolor=cl["V3: Buildings"][0],
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V2: Transport",
+            line=dict(width=0.5, color=cl["V2: Transport"][0]),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup=stackgroup2,
+            fillcolor=cl["V2: Transport"][0],
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="V1: Electricity",
+            line=dict(width=0.5, color=cl["V1: Electricity"][0]),
+            x=fig2["Year"],
+            y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
+            fill="tonexty",
+            stackgroup=stackgroup2,
+            fillcolor=cl["V1: Electricity"][0],
+        )
+    )
+
+    if em_fw.loc[:, 2000].values[0] < 0:
+        histfill = "tozeroy"
+        stackgroup = "hist"
+    else:
+        histfill = "tozeroy"
+        stackgroup = "hist"
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical Net Emissions",
+            line=dict(width=2, color="black"),
+            x=pd.Series(
+                em.loc[region_list[i], slice(None), slice(None), slice(None), scenario]
+                .loc[:, start_year:data_end_year]
+                .columns.values
+            ),
+            y=pd.Series(
+                em.loc[region_list[i], slice(None), slice(None), slice(None), scenario]
+                .loc[:, start_year:data_end_year]
+                .sum()
+            )
+            / 1000,
+            fill=histfill,
+            stackgroup=stackgroup,
+        )
+    )
+
+    # Targets/NDCS
+
+    # region
+
+    if region_list[i] in ["World "]:
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][0]],
+                y=[21.65],
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+                showlegend=False,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][1]],
+                y=[ndcs[i][1][1]],
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+                showlegend=False,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#f71be9",
+                name=ndcs[i][2][0],
+                showlegend=True,
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[None],
+                y=[None],
+                mode="markers",
+                marker_color="#211df2",
+                name=ndcs[i][2][1],
+                showlegend=True,
+            )
+        )
+    else:
+        fig.add_trace(
+            go.Scatter(
+                x=pd.Series(2030),
+                y=pd.Series(em_hist.loc[region_list[i], 2019].values[0] / 2000),
+                marker_color="#f71be9",
+                name="50% by 2030",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=pd.Series(2050),
+                y=pd.Series(0),
+                marker_color="#211df2",
+                name="Net-zero by 2050",
+            )
+        )
+        """
+        fig.add_annotation(
+            text="50% reduction and net-zero goals compare regional alignment with global-level IPCC recommendations.",
+            xref="paper",
+            yref="paper",
+            x=-0.17,
+            y=-0.27,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+        """
+    if region_list[i] in ["US "]:
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][2]],
+                y=[ndcs[i][1][2]],
+                marker_color="#eb742f",
+                name=ndcs[i][2][2],
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][3]],
+                y=[ndcs[i][1][3]],
+                marker_color="#05a118",
+                name=ndcs[i][2][3],
+            )
+        )
+        """
+        fig.add_annotation(
+            text="The NDC commitment is to "
+            + ndc_commit[i][0]
+            + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
+            xref="paper",
+            yref="paper",
+            x=-0.2,
+            y=-0.25,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+        """
+    elif region_list[i] in ["CHINA "]:
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0][2]],
+                y=[ndcs[i][1][2]],
+                marker_color="#eb742f",
+                name=ndcs[i][2][2],
+            )
+        )
+        """
+        fig.add_annotation(
+            text="The NDC commitment is to "
+            + ndc_commit[i][0]
+            + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
+            xref="paper",
+            yref="paper",
+            x=-0.17,
+            y=-0.27,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="left",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+        """
+    elif region_list[i] in [
+        "SAFR ",
+        "RUS ",
+        "JPN ",
+        "BRAZIL ",
+        "INDIA ",
+    ]:
+        fig.add_trace(
+            go.Scatter(
+                x=[ndcs[i][0]],
+                y=[ndcs[i][1]],
+                marker_color="#FC0080",
+                name="NDC " + str(ndcs[i][0]),
+            )
+        )
+        """
+        fig.add_annotation(
+            text="The NDC commitment is to "
+            + ndc_commit[i][0]
+            + " 50% reduction and net-zero goals compare regional alignment <br>with global-level IPCC recommendations.",
+            xref="paper",
+            yref="paper",
+            x=-0.17,
+            y=-0.27,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="center",
+            borderpad=4,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+        """
+    # endregion
+
+    fig.update_layout(
+        title={
+            "text": "Emissions, " + "DAU21" + ", " + region_list[i],
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        # xaxis={"title": "Year"},
+        yaxis={"title": "GtCO2e/yr"},
+    )
+
+    fig.update_layout(
+        legend=dict(orientation="h", yanchor="bottom", y=1, x=0, font=dict(size=10)),
+        margin_b=0,
+        margin_t=90,
+        margin_l=15,
+        margin_r=15,
+    )
+    """
+    fig.add_annotation(
+        text="Historical data is from Global Carbon Project; projections are based on PD21 technology adoption rate assumptions applied to IEA World Energy <br>Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline Limited Technology Scenario for 2040-2100.",
+        xref="paper",
+        yref="paper",
+        x=-0.15,
+        y=-0.31,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="left",
+        borderpad=6,
+        bgcolor="#ffffff",
+        opacity=1,
+    )
+    """
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/em2-" + scenario + "-" + region_list[i] + ".html").replace(
+                " ", ""
+            ),
+            auto_open=False,
+        )
+    plt.clf()
+
+# endregion
+
+###############################
+# GHG EMISSIONS BY SUBVECTORS #
+###############################
 
 # region
 
@@ -4292,9 +4803,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#################################################
-# EMISSIONS ONE CHART PER SECTOR, GAS BREAKDOWN #
-#################################################
+#####################################################
+# GHG EMISSIONS ONE CHART PER SECTOR, GAS BREAKDOWN #
+#####################################################
 
 # region
 
@@ -4479,9 +4990,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#################################################
-# EMISSIONS ONE CHART PER GAS, SECTOR BREAKDOWN #
-#################################################
+#####################################################
+# GHG EMISSIONS ONE CHART PER GAS, SECTOR BREAKDOWN #
+#####################################################
 
 # region
 
@@ -4664,9 +5175,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-###########################################
-# EMISSIONS INDUSTRY FF HEAT REGION STACK #
-###########################################
+###############################################
+# GHG EMISSIONS INDUSTRY FF HEAT REGION STACK #
+###############################################
 
 # region
 
@@ -4798,9 +5309,9 @@ plt.clf()
 
 # endregion
 
-###########################
-# EMISSIONS AS RELATIVE % #
-###########################
+###############################
+# GHG EMISSIONS AS RELATIVE % #
+###############################
 
 # region
 
@@ -5020,9 +5531,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-###########################
-# MITIGATION WEDGES CURVE #
-###########################
+###################################
+# GHG EMISSIONS MITIGATION WEDGES #
+###################################
 
 # region
 
@@ -5790,9 +6301,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-######################################
-# SUBVECTOR MITIGATION WEDGES CURVES #
-######################################
+###############################################
+# GHG EMISSIONS MITIGATION WEDGES, SUBVECTORS #
+###############################################
 
 # region
 
@@ -5975,9 +6486,9 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#################################
-# EMISSIONS MITIGATION BARCHART #
-#################################
+#####################################
+# GHG EMISSIONS MITIGATION BARCHART #
+#####################################
 
 # region
 
@@ -6767,9 +7278,9 @@ for year in [2030, 2050]:
 
 # endregion
 
-############################
-# NCS OPPORTUNITY BARCHART #
-############################
+#################
+# NDC ESTIMATES #
+#################
 
 # region
 
@@ -7623,9 +8134,9 @@ if save_figs is True:
 
 # endregion
 
-#####################
-# RADIATIVE FORCING #
-#####################
+#########################
+# GHG RADIATIVE FORCING #
+#########################
 
 # region
 

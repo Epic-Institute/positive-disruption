@@ -96,17 +96,6 @@ def adoption_curve(
 
     y = np.array(func(x_data, *genetic_parameters))
 
-    """
-    y = (
-        pd.DataFrame(y)
-        .pct_change()
-        .multiply((y[-1]-value.loc[data_end_year-1])/(y[-1]-y[10]))
-        .add(1)
-        .fillna(y[10])
-        .cumprod()[: (proj_end_year - data_end_year + 1)]
-    )
-    """
-
     # Rejoin with historical data at point where projection curve results in smooth growth
     y = np.concatenate(
         [
@@ -119,11 +108,6 @@ def adoption_curve(
         data_start_year, proj_end_year, proj_end_year - data_start_year + 1
     ).astype(int)
 
-    # Flip sign on cases where current value was greater than saturation point value
-    """
-    if neg == True:
-        y[proj_end_year - data_end_year :] = -y[proj_end_year - data_end_year :]
-    """
     pd.DataFrame(y).T.to_csv(
         "podi/data/y_data2.csv",
         mode="a",

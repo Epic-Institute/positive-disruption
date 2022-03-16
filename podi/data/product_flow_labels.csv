@@ -1279,11 +1279,11 @@ NONCRUDE,TNONSPEC,Industrial,Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,
 NONCRUDE,TNONSPEC,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONCRUDE,TREFINER,Industrial,Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,TREFINER,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NUCLEAR,AUTOCHP,Industrial,na,Electricity,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
-NUCLEAR,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
-NUCLEAR,MAINCHP,Industrial,na,Electricity,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
-NUCLEAR,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
-NUCLEAR,MAINHEAT,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+NUCLEAR,AUTOCHP,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
+NUCLEAR,AUTOELEC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,MAINCHP,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
+NUCLEAR,MAINELEC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,MAINHEAT,Industrial,na,Total,nuclear ef ratio,N,heat addtl eff,N,Y,N,N,N
 OBIOLIQ,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OBIOLIQ,AUTOCHP,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 OBIOLIQ,AUTOELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -2108,7 +2108,7 @@ NONBIODIES,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,
 NONBIOGASO,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOJETK,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONCRUDE,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NUCLEAR,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,ELAUTOC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
 OBIOLIQ,ELAUTOC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 OGASES,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 OILSHALE,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -2156,7 +2156,7 @@ NONBIODIES,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,
 NONBIOGASO,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOJETK,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONCRUDE,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NUCLEAR,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,ELAUTOE,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
 OBIOLIQ,ELAUTOE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 OGASES,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 OILSHALE,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -2204,7 +2204,7 @@ NONBIODIES,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,
 NONBIOGASO,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOJETK,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONCRUDE,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NUCLEAR,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,ELMAINC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
 OBIOLIQ,ELMAINC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 OGASES,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 OILSHALE,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -2252,7 +2252,7 @@ NONBIODIES,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,
 NONBIOGASO,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOJETK,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONCRUDE,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NUCLEAR,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,ELMAINE,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
 OBIOLIQ,ELMAINE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 OGASES,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 OILSHALE,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -2297,7 +2297,7 @@ NATGAS,HEAUTOC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addt
 NGL,HEAUTOC,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NONBIODIES,HEAUTOC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIOJETK,HEAUTOC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NUCLEAR,HEAUTOC,Industrial,na,Electricity,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
+NUCLEAR,HEAUTOC,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 OBIOLIQ,HEAUTOC,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 OGASES,HEAUTOC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 OILSHALE,HEAUTOC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
@@ -2340,7 +2340,7 @@ NATGAS,HEAUTOH,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addt
 NGL,HEAUTOH,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NONBIODIES,HEAUTOH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIOJETK,HEAUTOH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NUCLEAR,HEAUTOH,Industrial,na,Electricity,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
+NUCLEAR,HEAUTOH,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 OBIOLIQ,HEAUTOH,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 OGASES,HEAUTOH,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 OILSHALE,HEAUTOH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
@@ -2383,7 +2383,7 @@ NATGAS,HEMAINC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addt
 NGL,HEMAINC,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NONBIODIES,HEMAINC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIOJETK,HEMAINC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NUCLEAR,HEMAINC,Industrial,na,Electricity,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
+NUCLEAR,HEMAINC,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 OBIOLIQ,HEMAINC,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 OGASES,HEMAINC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 OILSHALE,HEMAINC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
@@ -2426,7 +2426,7 @@ NATGAS,HEMAINH,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addt
 NGL,HEMAINH,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NONBIODIES,HEMAINH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIOJETK,HEMAINH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NUCLEAR,HEMAINH,Industrial,na,Electricity,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
+NUCLEAR,HEMAINH,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 OBIOLIQ,HEMAINH,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 OGASES,HEMAINH,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 OILSHALE,HEMAINH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N

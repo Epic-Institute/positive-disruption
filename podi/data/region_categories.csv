@@ -246,7 +246,8 @@ vgb,Virgin Islands (British),,,,,VGB,British Virgin Islands
 vir,Virgin Islands (U.S.),,,,,VIR,United States Virgin Islands
 wlf,Wallis and Futuna,,,,,WLF,
 esh,Western Sahara*,,ESH,,,ESH,
-wld,World,,,WORLD,africa,,World
+,World aviation bunkers,,,WORLDAV,world,,
+,World marine bunkers,,,WORLDMAR,world,,
 yem,Yemen,Yemen,YEM,YEMEN,me,YEM,Yemen
 zmb,Zambia,Zambia,ZMB,ZAMBIA,africa,ZMB,Zambia
 zwe,Zimbabwe,Zimbabwe,ZWE,ZIMBABWE,africa,ZWE,Zimbabwe
