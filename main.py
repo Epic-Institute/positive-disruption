@@ -75,7 +75,7 @@ else:
 # region
 recalc_energy_supply = False
 if recalc_energy_supply is True:
-    energy_demand_supply = energy_demand(
+    energy_supply = energy_supply(
         "pathway", data_start_year, data_end_year, proj_end_year
     )
 else:
@@ -99,14 +99,6 @@ else:
         pd.read_csv("podi/data/energy_supply_" + scenario + ".csv")
     ).set_index(index)
     energy_supply_pathway.columns = energy_supply_pathway.columns.astype(int)
-
-(per_elec_supply_baseline, elec_supply_baseline) = energy_supply(
-    "baseline", energy_demand_baseline, data_start_year, data_end_year, proj_end_year
-)
-
-(per_elec_supply_pathway, elec_supply_pathway) = energy_supply(
-    "pathway", energy_demand_pathway, data_start_year, data_end_year, proj_end_year
-)
 
 # endregion
 

@@ -22,12 +22,13 @@ from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
 from fair.constants import radeff
 from podi.energy_demand import energy_demand
+from podi.energy_supply import energy_supply
 
 pd.options.display.float_format = "{:,.0f}".format
 
 unit_name = ["TJ", "TWh"]
 unit_val = [1, 0.0002777]
-unit = [unit_name[1], unit_val[1]]
+unit = [unit_name[0], unit_val[0]]
 
 save_figs = True
 show_figs = True
@@ -597,9 +598,9 @@ energy_balance = pd.concat(
 
 # endregion
 
-#############################################################
-# ENERGY DEMAND BY SECTOR AND END-USE (FOR PD21 COMPARISON) #
-#############################################################
+#################################################################
+# ENERGY DEMAND BY SECTOR AND END-USE PRODUCT (PD21 COMPARISON) #
+#################################################################
 
 # region
 
@@ -777,81 +778,12 @@ fig.update_layout(
 
 if show_figs is True:
     fig.show()
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/demand-" + scenario + "-" + region + ".html").replace(" ", ""),
-        auto_open=False,
-    )
-
 
 # endregion
 
-#######################################
-# ENERGY DEMAND BY SECTOR AND END-USE #
-#######################################
-
-# region
-
-start_year = 1990
-end_year = 2050
-scenario = scenario
-region = slice(None)
-sector = "Electric Power"  # Choose 'Transportation', 'Industrial', 'Commercial', 'Residential', 'Electric Power'
-groupby = "Flow"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
-
-fig = (
-    (energy_demand_pathway.loc[scenario, region, sector].groupby([groupby]).sum())
-    .loc[:, start_year:end_year]
-    .abs()
-    * unit[1]
-).T
-
-fig.index.name = "Year"
-fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0])
-
-fig = go.Figure()
-
-for sub in fig2[groupby].unique():
-    fig.add_trace(
-        go.Scatter(
-            name=sub,
-            line=dict(
-                width=0.5,
-                color=colors[
-                    pd.DataFrame(fig2[groupby].unique()).set_index(0).index.get_loc(sub)
-                ],
-            ),
-            x=fig2["Year"],
-            y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="1",
-        )
-    )
-
-fig.update_layout(
-    title={
-        "text": "Energy Demand, " + "DAU, " + str(region),
-        "xanchor": "center",
-        "x": 0.5,
-        "y": 0.99,
-    },
-    yaxis={"title": "TFC, " + unit[0]},
-    margin_b=0,
-    margin_t=20,
-    margin_l=10,
-    margin_r=10,
-)
-
-if show_figs is True:
-    fig.show()
-
-# endregion
-
-#######################################
-# ENERGY DEMAND BY SECTOR AND END-USE #
-#######################################
+###############################################
+# ENERGY DEMAND BY SECTOR AND END-USE PRODUCT #
+###############################################
 
 # region
 
@@ -861,9 +793,9 @@ scenario = scenario
 region = slice(None)
 product_category = slice(None)
 product = slice(None)
-flow_category = slice(None)
+flow_category = "Final consumption"  # Choose 'Energy industry own use and Losses', 'Final consumption', 'Supply', 'Heat output', 'Transformation processes', 'Electricity output'
 flow = slice(None)
-groupby = "Flow"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+groupby = "Product_category"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
 
 for sector in energy_demand_pathway.index.get_level_values(2).unique():
     fig = (
@@ -880,11 +812,10 @@ for sector in energy_demand_pathway.index.get_level_values(2).unique():
                 slice(None),
                 flow,
             ]
+            .abs()
             .groupby([groupby])
             .sum()
-        )
-        .loc[:, start_year:end_year]
-        .abs()
+        ).loc[:, start_year:end_year]
         * unit[1]
     ).T
 
@@ -938,7 +869,7 @@ for sector in energy_demand_pathway.index.get_level_values(2).unique():
 # endregion
 
 ########################
-# ENERGY DEMAND WEDGES # <--
+# ENERGY DEMAND WEDGES # <--WWS chart
 ########################
 
 # region
@@ -951,7 +882,7 @@ product_category = slice(None)
 product = slice(None)
 flow_category = slice(None)
 flow = slice(None)
-groupby = "Product"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+groupby = "Product_long"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
 
 fig = (
     (
@@ -1029,63 +960,91 @@ if save_figs is True:
 
 # endregion
 
-######################
-# ELECTRICITY SUPPLY #
-######################
+###############################################
+# ENERGY SUPPLY BY SECTOR AND END-USE PRODUCT #
+###############################################
 
 # region
 
+start_year = 1990
+end_year = 2050
 scenario = scenario
-start_year = start_year
 region = slice(None)
-groupby = "Product_long"  # 'Subsector', 'Product_category', 'Product_long', 'Product'
+product_category = slice(None)
+product = slice(None)
+flow_category = slice(None)
+flow = slice(None)
+groupby = "Flow_long"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
 
-# fig = per_elec_supply.loc[region].groupby(groupby).mean().T
-fig = elec_supply.loc[region].groupby(groupby).sum().T * unit[1]
-
-fig.index.name = "Year"
-fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=groupby, value_name="TFC, " + unit[0])
-
-fig = go.Figure()
-
-for sub in fig2[groupby].unique():
-    fig.add_trace(
-        go.Scatter(
-            name=sub,
-            line=dict(width=0.5),
-            x=fig2["Year"],
-            y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="1",
+for sector in energy_supply_pathway.index.get_level_values(2).unique():
+    fig = (
+        (
+            energy_supply_pathway.loc[
+                scenario,
+                region,
+                sector,
+                slice(None),
+                product_category,
+                slice(None),
+                product,
+                flow_category,
+                slice(None),
+                flow,
+            ]
+            .groupby([groupby])
+            .sum()
         )
+        .loc[:, start_year:end_year]
+        .abs()
+        * unit[1]
+    ).T
+
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0]
     )
 
-fig.update_layout(
-    title={
-        "text": "Electricity Supply, " + scenario + ", " + str(region),
-        "xanchor": "center",
-        "x": 0.5,
-        "y": 0.99,
-    },
-    yaxis={"title": "TFC, " + unit[0]},
-    legend=dict(font=dict(size=8)),
-    margin_b=0,
-    margin_t=20,
-    margin_l=0,
-    margin_r=0,
-)
+    fig = go.Figure()
 
-if show_figs is True:
-    fig.show()
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/elec_supply-" + scenario + "-" + region + ".html").replace(
-            " ", ""
-        ),
-        auto_open=False,
+    for sub in fig2[groupby].unique():
+        fig.add_trace(
+            go.Scatter(
+                name=sub,
+                line=dict(
+                    width=0.5,
+                    color=colors[
+                        pd.DataFrame(fig2[groupby].unique())
+                        .set_index(0)
+                        .index.get_loc(sub)
+                    ],
+                ),
+                x=fig2["Year"],
+                y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                fill="tonexty",
+                stackgroup="1",
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Energy Supply, "
+            + str(sector)
+            + ", "
+            + str(region).replace("slice(None, None, None)", "World"),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "TFC, " + unit[0]},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
     )
+
+    if show_figs is True:
+        fig.show()
 
 # endregion
 
