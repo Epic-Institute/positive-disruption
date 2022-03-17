@@ -141,12 +141,9 @@ dmypy.json
 # Large files
 iamc_data.csv
 IEA/
-energy_demand_baseline.csv
-energy_demand_post_upstream.csv
-energy_demand_post_addtl_eff.csv
-energy_demand_electrified.csv
-energy_demand_subtract_electrified.csv
-energy_demand_reduced_electrified.csv
-energy_demand_post_electrification.csv
-energy_demand_*
-ef_ratios.csv
+podi/data/energy_demand_electrified.csv
+podi/data/energy_demand_pathway.csv
+podi/data/energy_demand_post_addtl_eff.csv
+podi/data/energy_demand_post_upstream.csv
+podi/data/energy_demand_reduced_electrified.csv
+podi/data/energy_demand_subtract_electrified.csv

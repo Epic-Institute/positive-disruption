@@ -763,7 +763,9 @@ fig.add_trace(
 
 fig.update_layout(
     title={
-        "text": "Energy Demand, " + "DAU, " + str(region),
+        "text": "Energy Demand, "
+        + "DAU, "
+        + str(region).replace("slice(None, None, None)", "World"),
         "xanchor": "center",
         "x": 0.5,
         "y": 0.99,
@@ -795,7 +797,7 @@ product_category = slice(None)
 product = slice(None)
 flow_category = "Final consumption"  # Choose 'Energy industry own use and Losses', 'Final consumption', 'Supply', 'Heat output', 'Transformation processes', 'Electricity output'
 flow = slice(None)
-groupby = "Product_category"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+groupby = "Product"  # Choose 'Subsector', 'Product_category', 'Product', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
 
 for sector in energy_demand_pathway.index.get_level_values(2).unique():
     fig = (

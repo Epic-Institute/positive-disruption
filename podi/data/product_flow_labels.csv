@@ -236,6 +236,7 @@ BITUMEN,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,
 BITUMEN,EPOWERPLT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BITUMEN,EREFINER,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 BITUMEN,FOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
+BITUMEN,HEMAINC,Industrial,Industrial,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 BITUMEN,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BITUMEN,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BITUMEN,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -670,6 +671,14 @@ HEAT,ECOKEOVS,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,
 HEAT,ECOKEOVS,Industrial,High Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
 HEAT,EGASWKS,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
 HEAT,EGASWKS,Industrial,High Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
+HEAT,ELAUTOC,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+HEAT,ELAUTOC,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+HEAT,ELAUTOE,Electric Power,Low Temperature,Total,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
+HEAT,ELAUTOE,Electric Power,High Temperature,Total,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
+HEAT,ELMAINC,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+HEAT,ELMAINC,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+HEAT,ELMAINE,Electric Power,Low Temperature,Total,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
+HEAT,ELMAINE,Electric Power,High Temperature,Total,electricity ef ratio,N,electricity addtl eff,N,Y,N,N,N
 HEAT,ELNG,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
 HEAT,ELNG,Industrial,High Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
 HEAT,EMINES,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,Y,Y,N,Y,N
@@ -2444,3 +2453,12 @@ RESFUEL,HEMAINH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,
 SUBCOAL,HEMAINH,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 HEATNS,HEMAINH,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 HEATNS,HEMAINH,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+MANGAS,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+MANGAS,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+MANGAS,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NONCRUDE,HEMAINC,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+MANGAS,HEAUTOC,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+MANGAS,HEAUTOH,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+MANGAS,HEMAINC,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+SOLARTH,HEAUTOH,Industrial,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
+SOLARTH,HEMAINH,Industrial,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N

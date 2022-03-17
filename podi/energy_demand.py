@@ -155,11 +155,13 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     flows = flows[
         ~flows.isin(
             [
+                "ELOUTPUT",
                 "EXPORTS",
                 "HEATOUT",
                 "IMPORTS",
                 "INDPROD",
                 "LIQUEFAC",
+                "NONENUSE",
                 "STATDIFF",
                 "STOCKCHA",
                 "TES",
@@ -206,7 +208,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         (
             energy_demand_historical.reset_index()
             .set_index(["Product", "Flow"])
-            .merge(labels, on=["Product", "Flow"])
+            .merge(labels, how="left", on=["Product", "Flow"])
         )
         .reset_index()
         .set_index(
@@ -223,6 +225,11 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
     )
+
+    # Drop rows with NaN index, representing the product/flow combination does not exist in historical data for any region
+    energy_demand_historical = energy_demand_historical[
+        ~energy_demand_historical.index.get_level_values(1).isna()
+    ]
 
     # Drop Non-energy use flows
     energy_demand_historical = energy_demand_historical[
@@ -991,7 +998,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         "podi/data/energy_demand_subtract_electrified.csv"
     )
     energy_demand_reduced_electrified.to_csv(
-        "podi/data/energy_demand_reduced_electrified.csv"
+        "podi/data//energy_demand_reduced_electrified.csv"
     )
     # endregion
 
