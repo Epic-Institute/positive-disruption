@@ -8,123 +8,83 @@ import numpy as np
 import scipy
 from scipy.optimize import differential_evolution
 from scipy.sparse import data
+from numpy import NaN
+import os
 
 
 def func(x, a, b, c, d):
     return c / (1 + np.exp(-a * (x - b))) + d
 
 
-def func2(x, a, b, c, d):
+def func2(x, a, b):
     return a * x + b
 
 
-def adoption_curve(value, region, scenario, sector):
+def adoption_curve(
+    parameters,
+    value,
+    scenario,
+    data_start_year,
+    data_end_year,
+    proj_end_year,
+):
 
-    # Load tech parameters to get 2050 energy demand reduction values
-    parameters = pd.read_csv(
-        "podi/data/tech_parameters.csv",
-        usecols=["Region", "Technology", "Scenario", "Sector", "Metric", "Value"],
-    ).set_index(["Region", "Technology", "Scenario", "Sector", "Metric"])
-
-    # Create x array (year) and y array (linear scale from zero to saturation value)
-    x_data = np.arange(data_start_year, 2051, 1)
-    y_data = np.zeros((1, data_end_year - data_start_year + 1))
+    # Take 10 years prior data to fit logistic function
+    x_data = np.arange(0, len(value[proj_end_year - data_end_year - 10 :]), 1)
+    y_data = np.zeros((1, len(x_data)))
     y_data[:, :] = np.NaN
-    y_data[:, 0] = 0
-    y_data[:, -1] = parameters.loc[
-        region, value.name[1], scenario, sector, "saturation point"
-    ].Value
-    y_data = np.array((pd.DataFrame(y_data).interpolate(axis=1)).squeeze())
+    y_data = y_data.squeeze().astype(float)
+    y_data[:10] = value.loc[data_end_year - 10 : data_end_year - 1]
+    y_data[-1] = parameters.loc["saturation point"].Value.astype(float)
 
-    def sum_of_squared_error(parameters):
-        warnings.filterwarnings("ignore")
-        val = func(x_data, *parameters)
-        return np.sum((y_data - val) ** 2.0)
+    # Handle cases where saturation point is below current value, by making saturation point equidistant from current value but in positive direction
+    if y_data[9] > y_data[-1]:
+        y_data[-1] = y_data[9] + abs(y_data[-1] - y_data[9])
+        neg = True
+    else:
+        neg = False
 
+    y_data = np.array((pd.DataFrame(y_data).interpolate(method="linear")).squeeze())
+
+    pd.DataFrame(y_data).T.to_csv(
+        "podi/data/y_data.csv",
+        mode="a",
+        header=not os.path.exists("podi/data/y_data.csv"),
+    )
+
+    # Load search bounds for logistic function parameters
     search_bounds = [
         (
-            pd.to_numeric(
-                parameters.loc[
-                    region, value.name[1], scenario, sector, "parameter a min"
-                ].Value
-            ),
-            pd.to_numeric(
-                parameters.loc[
-                    region, value.name[1], scenario, sector, "parameter a max"
-                ].Value
-            ),
+            pd.to_numeric(parameters.loc["parameter a min"].Value),
+            pd.to_numeric(parameters.loc["parameter a max"].Value),
         ),
         (
-            pd.to_numeric(
-                parameters.loc[
-                    region, value.name[1], scenario, sector, "parameter b min"
-                ].Value
-            ),
-            pd.to_numeric(
-                parameters.loc[
-                    region, value.name[1], scenario, sector, "parameter b max"
-                ].Value
-            ),
+            pd.to_numeric(parameters.loc["parameter b min"].Value),
+            pd.to_numeric(parameters.loc["parameter b max"].Value),
         ),
         (
-            pd.to_numeric(
-                parameters.loc[
-                    region,
-                    value.name[1],
-                    scenario,
-                    sector,
-                    "saturation point",
-                ].Value
-            )
-            / 100,
-            pd.to_numeric(
-                parameters.loc[
-                    region,
-                    value.name[1],
-                    scenario,
-                    sector,
-                    "saturation point",
-                ].Value
-            )
-            / 100,
+            pd.to_numeric(parameters.loc["saturation point"].Value),
+            pd.to_numeric(parameters.loc["saturation point"].Value),
         ),
         (
-            pd.to_numeric(
-                parameters.loc[
-                    region,
-                    value.name[1],
-                    scenario,
-                    sector,
-                    "floor",
-                ].Value
-            )
-            / 100,
-            pd.to_numeric(
-                parameters.loc[
-                    region,
-                    value.name[1],
-                    scenario,
-                    sector,
-                    "floor",
-                ].Value
-            )
-            / 100,
+            y_data[9],
+            y_data[9],
         ),
     ]
 
+    # Define sum of squared error function
+    def sum_of_squared_error(parameters):
+        return np.sum((y_data - func(x_data, *parameters)) ** 2.0)
+
+    # Generate genetic_parameters. For baseline scenarios, projections are linear
     if scenario == "baseline":
-        x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
-        # y = np.full((len(x), 1), y_data[-1])
         y = func2(
-            x,
+            x_data,
             min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
             (y_data[-1]),
-            0,
-            0,
         )
         genetic_parameters = [0, 0, 0, 0]
     else:
-        # "seed" the numpy random number generator for repeatable results.
         genetic_parameters = differential_evolution(
             sum_of_squared_error,
             search_bounds,
@@ -134,47 +94,41 @@ def adoption_curve(value, region, scenario, sector):
             mutation=(0, 1),
         ).x
 
-    x = np.arange(2100 - data_end_year + 1)
-    y = np.array(func(x, *genetic_parameters))
+    y = np.array(func(x_data, *genetic_parameters))
+
+    # Rejoin with historical data at point where projection curve results in smooth growth
+    y = np.concatenate(
+        [
+            value[: proj_end_year - data_end_year].values,
+            y[y >= value[data_end_year - 1]].squeeze(),
+        ]
+    )[: (proj_end_year - data_start_year + 1)]
 
     years = np.linspace(
-        pd.to_numeric(value.index[0]),
-        2100,
-        2100 - pd.to_numeric(value.index[0]) + 1,
+        data_start_year, proj_end_year, proj_end_year - data_start_year + 1
     ).astype(int)
 
-    y = np.zeros(data_end_year - data_start_year).join(y).join(np.full_like())
-
-    """
-    # set maximum annual growth rate
-    max_growth = (
-        pd.to_numeric(
-            parameters.loc[
-                region, value.name, scenario, sector, "Max annual growth"
-            ].Value
-        )
-        / 100
+    pd.DataFrame(y).T.to_csv(
+        "podi/data/y_data2.csv",
+        mode="a",
+        header=not os.path.exists("podi/data/y_data2.csv"),
     )
 
-    y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
-    for i in range(1, len(y_data)):
-        y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
-        if y_growth[0][i].astype(float) <= 0:
-            y_growth[0][i] = 0
-            y_data[i] = y_data[i - 1]
-            genetic_parameters = differential_evolution(
-                sum_of_squared_error, search_bounds, seed=3
-            ).x
-            y = np.array(func(x, *genetic_parameters))
-        elif y_growth[0][i].astype(float) > max_growth.astype(float):
-            y_growth[0][i] = max_growth
-            y_data[i] = y_data[i - 1] * (1 + max_growth)
-            genetic_parameters = differential_evolution(
-                sum_of_squared_error, search_bounds, seed=3
-            ).x
-            y = np.array(func(x, *genetic_parameters))
+    # Save logistic function parameters to output file for inspection
+    pd.DataFrame(
+        (
+            value.name[0],
+            value.name[5],
+            value.name[1],
+            genetic_parameters[0],
+            genetic_parameters[1],
+            genetic_parameters[2],
+            genetic_parameters[3],
+        )
+    ).T.to_csv(
+        "podi/data/adoption_curve_parameters.csv",
+        mode="a",
+        header=not os.path.exists("podi/data/adoption_curve_parameters.csv"),
+    )
 
-    y_growth = np.array(y_growth)
-    """
-
-    return pd.DataFrame(data=y, index=years)
+    return pd.Series(data=y, index=years, name=value.name)

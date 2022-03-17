@@ -24,6 +24,7 @@ from podi.cdr.cdr_util import (
 warnings.simplefilter(action="ignore", category=FutureWarning)
 regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "Region"})
 
+
 data_start_year = 1990
 data_end_year = 2020
 proj_end_year = 2050
@@ -40,10 +41,9 @@ scenario = "pathway"
 
 recalc_energy_demand = False
 if recalc_energy_demand is True:
-    (
-        energy_demand_baseline,
-        energy_demand_pathway,
-    ) = energy_demand("pathway", data_start_year, data_end_year, proj_end_year)
+    energy_demand_pathway = energy_demand(
+        "pathway", data_start_year, data_end_year, proj_end_year
+    )
 else:
     index = [
         "Scenario",
@@ -61,10 +61,6 @@ else:
         "Non-Energy Use",
     ]
 
-    energy_demand_baseline = pd.DataFrame(
-        pd.read_csv("podi/data/energy_demand_baseline.csv")
-    ).set_index(index)
-    energy_demand_baseline.columns = energy_demand_baseline.columns.astype(int)
     energy_demand_pathway = pd.DataFrame(
         pd.read_csv("podi/data/energy_demand_" + scenario + ".csv")
     ).set_index(index)
@@ -77,42 +73,32 @@ else:
 #################
 
 # region
-(
-    elec_consump_baseline,
-    elec_per_adoption_baseline,
-    elec_consump_cdr_baseline,
-    heat_consump_baseline,
-    heat_per_adoption_baseline,
-    heat_consump_cdr_baseline,
-    transport_consump_baseline,
-    transport_per_adoption_baseline,
-    transport_consump_cdr_baseline,
-) = energy_supply(
-    "baseline", energy_demand_baseline, data_start_year, data_end_year, proj_end_year
-)
+recalc_energy_supply = False
+if recalc_energy_supply is True:
+    energy_supply = energy_supply(
+        "pathway", data_start_year, data_end_year, proj_end_year
+    )
+else:
+    index = [
+        "Scenario",
+        "Region",
+        "Sector",
+        "Subsector",
+        "Product_category",
+        "Product_long",
+        "Product",
+        "Flow_category",
+        "Flow_long",
+        "Flow",
+        "Hydrogen",
+        "Flexible",
+        "Non-Energy Use",
+    ]
 
-(
-    elec_consump_pathway,
-    elec_per_adoption_pathway,
-    elec_consump_cdr_pathway,
-    heat_consump_pathway,
-    heat_per_adoption_pathway,
-    heat_consump_cdr_pathway,
-    transport_consump_pathway,
-    transport_per_adoption_pathway,
-    transport_consump_cdr_pathway,
-) = energy_supply(
-    "pathway", energy_demand_pathway, data_start_year, data_end_year, proj_end_year
-)
-
-elec_consump = elec_consump_baseline.append(elec_consump_pathway)
-elec_per_adoption = elec_per_adoption_baseline.append(elec_per_adoption_pathway)
-heat_consump = heat_consump_baseline.append(heat_consump_pathway)
-heat_per_adoption = heat_per_adoption_baseline.append(heat_per_adoption_pathway)
-transport_consump = transport_consump_baseline.append(transport_consump_pathway)
-transport_per_adoption = transport_per_adoption_baseline.append(
-    transport_per_adoption_pathway
-)
+    energy_supply_pathway = pd.DataFrame(
+        pd.read_csv("podi/data/energy_supply_" + scenario + ".csv")
+    ).set_index(index)
+    energy_supply_pathway.columns = energy_supply_pathway.columns.astype(int)
 
 # endregion
 
