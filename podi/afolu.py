@@ -304,9 +304,10 @@ def afolu(scenario):
     proj_per_adoption = acurves.apply(
         lambda x: adoption_curve(
             x.dropna().rename(x.name[0]),
-            x.name[0],
             scenario,
-            "AFOLU",
+            data_start_year,
+            data_end_year,
+            proj_end_year,
         ),
         axis=1,
     )
