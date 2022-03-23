@@ -28,7 +28,7 @@ pd.options.display.float_format = "{:,.0f}".format
 
 unit_name = ["TJ", "TWh"]
 unit_val = [1, 0.0002777]
-unit = [unit_name[0], unit_val[0]]
+unit = [unit_name[1], unit_val[1]]
 
 save_figs = True
 show_figs = True
@@ -595,6 +595,7 @@ energy_balance = pd.concat(
     ]
 )
 
+energy_balance
 
 # endregion
 
@@ -604,7 +605,7 @@ energy_balance = pd.concat(
 
 # region
 
-start_year = 1990
+start_year = 2020
 end_year = 2050
 scenario = scenario
 region = slice(None)
@@ -764,7 +765,6 @@ fig.add_trace(
 fig.update_layout(
     title={
         "text": "Energy Demand, "
-        + "DAU, "
         + str(region).replace("slice(None, None, None)", "World"),
         "xanchor": "center",
         "x": 0.5,
@@ -775,7 +775,7 @@ fig.update_layout(
     margin_b=0,
     margin_t=70,
     margin_l=15,
-    margin_r=15,
+    margin_r=25,
 )
 
 if show_figs is True:
@@ -790,14 +790,14 @@ if show_figs is True:
 # region
 
 start_year = 1990
-end_year = 2050
+end_year = proj_end_year
 scenario = scenario
 region = slice(None)
 product_category = slice(None)
 product = slice(None)
-flow_category = "Final consumption"  # Choose 'Energy industry own use and Losses', 'Final consumption', 'Supply', 'Heat output', 'Transformation processes', 'Electricity output'
+flow_category = "Final consumption"  # Choose 'Final consumption' (applicable to Industrial/Transportation/Commercial/Residential); 'Energy industry own use and Losses' (applicable to Electric Power/Industrial/Transportation); 'Supply'(applicable to Transportation); 'Transformation processes'(applicable to Electric Power/Industrial); 'Electricity output'(applicable to Electric Power/Industrial); 'Heat output'(applicable to Industrial)
 flow = slice(None)
-groupby = "Product"  # Choose 'Subsector', 'Product_category', 'Product', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+groupby = "Product_long"  # Choose 'Subsector', 'Product_category', 'Product', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
 
 for sector in energy_demand_pathway.index.get_level_values(2).unique():
     fig = (
@@ -870,25 +870,97 @@ for sector in energy_demand_pathway.index.get_level_values(2).unique():
 
 # endregion
 
-########################
-# ENERGY DEMAND WEDGES # <--WWS chart
-########################
+###############################################################
+# ENERGY SUPPLY BY SOURCE & END-USE PRODUCT (PD21 COMPARISON) #
+###############################################################
 
 # region
 
+start_year = 2020
+end_year = proj_end_year
 scenario = scenario
-start_year = data_start_year
-region = "usa"
+region = slice(None)
 sector = slice(None)
 product_category = slice(None)
 product = slice(None)
-flow_category = slice(None)
-flow = slice(None)
-groupby = "Product_long"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+groupby = slice(None)
+
+tech_list = [
+    "Electricity-Solar",
+    "Electricity-Wind",
+    "Electricity-Nuclear",
+    "Electricity-Other ren",
+    "Heat-Solar thermal",
+    "Heat-Bioenergy",
+    "Heat-Fossil fuels",
+    "Transport-Fossil fuels",
+    "Electricity-Fossil fuels",
+    "Transport-Bioenergy & H2",
+]
+
+groupby = {
+    "Hydro": "Electricity-Other ren",
+    "Offshore wind energy": "Electricity-Wind",
+    "Onshore wind energy": "Electricity-Wind",
+    "Rooftop solar photovoltaics": "Electricity-Solar",
+    "Utility solar photovoltaics": "Electricity-Solar",
+    "Fuel oil": "Transport-Fossil fuels",
+    "Natural gas": "Electricity-Fossil fuels",
+    "Gas/diesel oil excl. biofuels": "Transport-Fossil fuels",
+    "Other oil products": "Transport-Fossil fuels",
+    "Biodiesels": "Transport-Bioenergy & H2",
+    "Biogases": "Heat-Bioenergy",
+    "Primary solid biofuels": "Heat-Bioenergy",
+    "Blast furnace gas": "Heat-Fossil fuels",
+    "Coke oven gas": "Heat-Fossil fuels",
+    "Other bituminous coal": "Electricity-Fossil fuels",
+    "Nuclear": "Electricity-Nuclear",
+    "Petroleum coke": "Heat-Fossil fuels",
+    "Refinery gas": "Heat-Fossil fuels",
+    "BKB": "Heat-Fossil fuels",
+    "Lignite": "Heat-Fossil fuels",
+    "Sub-bituminous coal": "Electricity-Fossil fuels",
+    "Geothermal": "Electricity-Other ren",
+    "Solar thermal": "Heat-Solar thermal",
+    "Heat": "Heat-Solar thermal",
+    "Industrial waste": "Electricity-Fossil fuels",
+    "Municipal waste (non-renewable)": "Electricity-Fossil fuels",
+    "Municipal waste (renewable)": "Electricity-Other ren",
+    "Other liquid biofuels": "Transport-Bioenergy & H2",
+    "Anthracite": "Electricity-Fossil fuels",
+    "Other recovered gases": "Electricity-Fossil fuels",
+    "Liquified petroleum gases (LPG)": "Transport-Fossil fuels",
+    "Peat": "Electricity-Fossil fuels",
+    "Peat products": "Electricity-Fossil fuels",
+    "Other sources": "Heat-Fossil fuels",
+    "Other kerosene": "Transport-Fossil fuels",
+    "Kerosene type jet fuel excl. biofuels": "Transport-Fossil fuels",
+    "Coal tar": "Heat-Fossil fuels",
+    "Patent fuel": "Heat-Fossil fuels",
+    "Oil shale and oil sands": "Heat-Fossil fuels",
+    "Biogasoline": "Transport-Bioenergy & H2",
+    "Coke oven coke": "Heat-Fossil fuels",
+    "Coking coal": "Heat-Fossil fuels",
+    "Gas works gas": "Heat-Fossil fuels",
+    "Crude oil": "Transport-Fossil fuels",
+    "Natural gas liquids": "Heat-Fossil fuels",
+    "Other hydrocarbons": "Heat-Fossil fuels",
+    "Elec/heat output from non-specified manufactured gases": "Heat-Fossil fuels",
+    "Tide, wave and ocean": "Electricity-Other ren",
+    "Bitumen": "Heat-Fossil fuels",
+    "Motor gasoline excl. biofuels": "Transport-Fossil fuels",
+    "Electricity": "Electricity-Other ren",
+    "Heat output from non-specified combustible fuels": "Heat-Fossil fuels",
+    "Ethane": "Transport-Fossil fuels",
+    "Hydrogen": "Transport-Bioenergy & H2",
+    "Aviation gasoline": "Transport-Fossil fuels",
+    "Gasoline type jet fuel": "Transport-Fossil fuels",
+    "White spirit & industrial spirit (SBP)": "Transport-Fossil fuels",
+}
 
 fig = (
     (
-        energy_demand_pathway.loc[
+        energy_supply_pathway.loc[
             scenario,
             region,
             sector,
@@ -896,69 +968,160 @@ fig = (
             product_category,
             slice(None),
             product,
-            flow_category,
-            slice(None),
-            flow,
         ]
-        .groupby(
-            [
-                groupby,
-            ]
-        )
+        .abs()
+        .groupby([groupby], level=4)
         .sum()
-    )
-    .loc[:, start_year:]
-    .abs()
+    ).loc[:, start_year:end_year]
+    * unit[1]
 ).T
 
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0])
+fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0])
 
 fig = go.Figure()
 
-for sub in fig2[groupby].unique():
-    fig.add_trace(
-        go.Scatter(
-            name=sub,
-            line=dict(
-                width=0.5,
-                color=colors[
-                    pd.DataFrame(fig2[groupby].unique()).set_index(0).index.get_loc(sub)
-                ],
-            ),
-            x=fig2["Year"],
-            y=fig2[fig2[groupby] == sub]["TFC, TJ"],
-            fill="tonexty",
-            stackgroup="1",
-        )
+fig.add_trace(
+    go.Scatter(
+        name="Electricity-Solar",
+        line=dict(width=0.5, color="rgb(136,204,238)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Electricity-Solar"]["TFC, " + unit[0]],
+        fill="tozeroy",
+        stackgroup="one",
     )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Electricity-Wind",
+        line=dict(width=0.5, color="rgb(204,102,119)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Electricity-Wind"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Electricity-Nuclear",
+        line=dict(width=0.5, color="rgb(221,204,119)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Electricity-Nuclear"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Electricity-Other ren",
+        line=dict(width=0.5, color="rgb(17,119,51)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Electricity-Other ren"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Electricity-Fossil fuels",
+        line=dict(width=0.5, color="rgb(51,34,136)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Electricity-Fossil fuels"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Heat-Solar thermal",
+        line=dict(width=0.5, color="rgb(170,168,153)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Heat-Solar thermal"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Heat-Biochar",
+        line=dict(width=0.5, color="rgb(136,204,238)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Heat-Biochar"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Heat-Bioenergy",
+        line=dict(width=0.5, color="rgb(68,170,153)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Heat-Bioenergy"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Heat-Fossil fuels",
+        line=dict(width=0.5, color="rgb(153,153,51)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Heat-Fossil fuels"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Transport-Fossil fuels",
+        line=dict(width=0.5, color="rgb(136,34,85)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Transport-Fossil fuels"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        name="Transport-Bioenergy & H2",
+        line=dict(width=0.5, color="rgb(102,17,0)"),
+        x=fig2["Year"],
+        y=fig2[fig2["Sector"] == "Transport-Bioenergy & H2"]["TFC, " + unit[0]],
+        fill="tonexty",
+        stackgroup="one",
+    )
+)
 
 fig.update_layout(
     title={
-        "text": "Energy Demand, " + "DAU, " + region,
+        "text": "Energy Supply, "
+        + str(region).replace("slice(None, None, None)", "World"),
         "xanchor": "center",
         "x": 0.5,
         "y": 0.99,
     },
+    xaxis={"title": "Year"},
     yaxis={"title": "TFC, " + unit[0]},
+    legend=dict(orientation="h", yanchor="bottom", y=1.0, x=0, font=dict(size=10)),
     margin_b=0,
-    margin_t=20,
-    margin_l=10,
-    margin_r=10,
+    margin_t=100,
+    margin_l=15,
+    margin_r=25,
 )
 
 if show_figs is True:
     fig.show()
-if save_figs is True:
-    pio.write_html(
-        fig,
-        file=("./charts/demandwedges-" + scenario + "-" + region + ".html").replace(
-            " ", ""
-        ),
-        auto_open=False,
-    )
-
 
 # endregion
 
@@ -974,9 +1137,9 @@ scenario = scenario
 region = slice(None)
 product_category = slice(None)
 product = slice(None)
-flow_category = slice(None)
+flow_category = "Final consumption"  # Choose 'Final consumption' (applicable to Industrial/Transportation/Commercial/Residential); 'Energy industry own use and Losses' (applicable to Electric Power/Industrial/Transportation); 'Supply'(applicable to Transportation); 'Transformation processes'(applicable to Electric Power/Industrial); 'Electricity output'(applicable to Electric Power/Industrial); 'Heat output'(applicable to Industrial)
 flow = slice(None)
-groupby = "Flow_long"  # Choose 'Sector', 'Subsector', 'Product_category', 'Product', 'Flow_category', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+groupby = "Product_long"  # Choose 'Subsector', 'Product_category', 'Product'
 
 for sector in energy_supply_pathway.index.get_level_values(2).unique():
     fig = (
@@ -989,15 +1152,11 @@ for sector in energy_supply_pathway.index.get_level_values(2).unique():
                 product_category,
                 slice(None),
                 product,
-                flow_category,
-                slice(None),
-                flow,
             ]
+            .abs()
             .groupby([groupby])
             .sum()
-        )
-        .loc[:, start_year:end_year]
-        .abs()
+        ).loc[:, start_year:end_year]
         * unit[1]
     ).T
 
@@ -2389,51 +2548,6 @@ for i in range(0, len(region_list)):
 
 # endregion
 
-#######################
-# HEAT PERCENT ADOPTION
-#######################
-
-# region
-scenario = scenario
-
-for i in range(0, len(region_list)):
-    plt.figure(i)
-    plt.plot(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.legend(heat_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.title(region_list[i])
-
-# endregion
-
-####################################
-# NONELEC TRANSPORT PERCENT ADOPTION
-####################################
-
-# region
-scenario = scenario
-
-for i in range(0, len(region_list)):
-    plt.figure(i)
-    plt.plot(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.legend(transport_per_adoption.loc[region_list[i], slice(None), scenario].T)
-    plt.title(region_list[i])
-
-# endregion
-
-##########################
-# AFOLU PERCENT ADOPTION #
-##########################
-
-# region
-scenario = scenario
-
-for i in range(0, len(region_list)):
-    plt.figure(i)
-    plt.plot(
-        afolu_per_adoption.loc[region_list[i], slice(None), slice(None), scenario].T
-    )
-
-# endregion
-
 ################################################
 # ACTUAL VS. PROJECTED SOLUTION ADOPTION RATES #
 ################################################
@@ -3123,511 +3237,6 @@ for i in range(0, len(region_list)):
         direction="increasing",
     )
 """
-# endregion
-
-##########################################
-# ENERGY SUPPLY BY SOURCE & END-USE PD21 #
-##########################################
-
-# region
-
-scenario = scenario
-start_year = start_year
-
-tech_list = [
-    "Electricity-Solar",
-    "Electricity-Wind",
-    "Electricity-Nuclear",
-    "Electricity-Other ren",
-    "Heat-Solar thermal",
-    "Heat-Bioenergy",
-    "Heat-Fossil fuels",
-    "Transport-Fossil fuels",
-    "Electricity-Fossil fuels",
-    "Transport-Bioenergy & H2",
-]
-
-group_keys = {
-    ("Electricity", "Biomass and waste"): "Electricity-Other ren",
-    ("Electricity", "Fossil fuels"): "Electricity-Fossil fuels",
-    ("Electricity", "Geothermal"): "Electricity-Other ren",
-    ("Electricity", "Hydroelectricity"): "Electricity-Other ren",
-    ("Electricity", "Tide and wave"): "Electricity-Other ren",
-    ("Electricity", "Nuclear"): "Electricity-Nuclear",
-    ("Electricity", "Solar"): "Electricity-Solar",
-    ("Electricity", "Wind"): "Electricity-Wind",
-    ("Heat", "Fossil fuels"): "Heat-Fossil fuels",
-    ("Heat", "Bioenergy"): "Heat-Bioenergy",
-    ("Heat", "Coal"): "Heat-Fossil fuels2",
-    ("Heat", "Geothermal"): "Heat-Bioenergy",
-    ("Heat", "Natural gas"): "Heat-Fossil fuels2",
-    ("Heat", "Nuclear"): "Heat-Fossil fuels2",
-    ("Heat", "Oil"): "Heat-Fossil fuels2",
-    ("Heat", "Other sources"): "Heat-Bioenergy",
-    ("Heat", "Solar thermal"): "Heat-Solar thermal",
-    ("Heat", "Waste"): "Heat-Bioenergy",
-    ("Transport", "Oil"): "Transport-Fossil fuels2",
-    ("Transport", "Bioenergy"): "Transport-Bioenergy & H2",
-    ("Transport", "Other fuels"): "Transport-Bioenergy & H2",
-    ("Transport", "Fossil fuels"): "Transport-Fossil fuels",
-}
-
-for i in range(0, len(region_list)):
-    elec_consump_i = (
-        elec_consump.loc[region_list[i], slice(None), scenario].groupby("Metric").sum()
-    )
-    elec_consump_i = pd.concat([elec_consump_i], keys=["Electricity"], names=["Sector"])
-    heat_consump_i = (
-        heat_consump.loc[region_list[i], slice(None), scenario].groupby("Metric").sum()
-    )
-    heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
-    transport_consump_i = (
-        transport_consump.loc[region_list[i], slice(None), scenario]
-        .groupby("Metric")
-        .sum()
-    )
-    transport_consump_i = pd.concat(
-        [transport_consump_i], keys=["Transport"], names=["Sector"]
-    )
-    fig = (
-        pd.DataFrame(
-            (elec_consump_i.append(heat_consump_i).append(transport_consump_i)).loc[
-                :, start_year:long_proj_end_year
-            ]
-        )
-        * unit[1]
-    )
-    fig = fig.groupby(group_keys).sum()
-    fig = fig.reindex(tech_list)
-
-    fig = fig.T
-    fig.index.name = "Year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0])
-
-    fig = go.Figure()
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Solar",
-            line=dict(width=0.5, color="rgb(136,204,238)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Solar"]["TFC, " + unit[0]],
-            fill="tozeroy",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Wind",
-            line=dict(width=0.5, color="rgb(204,102,119)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Wind"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Nuclear",
-            line=dict(width=0.5, color="rgb(221,204,119)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Nuclear"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Other ren",
-            line=dict(width=0.5, color="rgb(17,119,51)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Other ren"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Fossil fuels",
-            line=dict(width=0.5, color="rgb(51,34,136)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Fossil fuels"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Heat-Solar thermal",
-            line=dict(width=0.5, color="rgb(170,168,153)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Heat-Solar thermal"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Heat-Biochar",
-            line=dict(width=0.5, color="rgb(136,204,238)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Heat-Biochar"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Heat-Bioenergy",
-            line=dict(width=0.5, color="rgb(68,170,153)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Heat-Bioenergy"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Heat-Fossil fuels",
-            line=dict(width=0.5, color="rgb(153,153,51)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Heat-Fossil fuels"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Transport-Fossil fuels",
-            line=dict(width=0.5, color="rgb(136,34,85)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport-Fossil fuels"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Transport-Bioenergy & H2",
-            line=dict(width=0.5, color="rgb(102,17,0)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport-Bioenergy & H2"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.update_layout(
-        title={
-            "text": "Energy Supply, " + "DAU" + ", " + region_list[i],
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        xaxis={"title": "Year"},
-        yaxis={"title": "TFC, " + unit[0]},
-        legend=dict(orientation="h", yanchor="bottom", y=1.03, x=0, font=dict(size=10)),
-        margin_b=100,
-        margin_t=120,
-    )
-    """
-    fig.add_vrect(
-        x0=start_year, x1=data_end_year, fillcolor="grey", opacity=0.6, line_width=0
-    )
-    """
-    """
-    fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
-        xref="paper",
-        yref="paper",
-        x=-0.17,
-        y=1.17,
-        showarrow=False,
-        font=dict(size=10, color="#2E3F5C"),
-        align="left",
-        borderpad=4,
-        bgcolor="#ffffff",
-        opacity=1,
-    )
-    """
-    if show_figs is True:
-        fig.show()
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=(
-                "./charts/supply-"
-                + scenario
-                + "-"
-                + region_list[i].replace(" ", "")
-                + ".html"
-            ).replace(" ", ""),
-            auto_open=False,
-        )
-    plt.clf()
-
-# endregion
-
-###############################################
-# ELECTRICITY SUPPLY BY SOURCE & END-USE PD21 #
-###############################################
-
-# region
-
-scenario = scenario
-start_year = start_year
-
-tech_list = [
-    "Electricity-Solar",
-    "Electricity-Wind",
-    "Electricity-Nuclear",
-    "Electricity-Other ren",
-    "Electricity-Fossil fuels",
-]
-
-group_keys = {
-    ("Electricity", "Biomass and waste"): "Electricity-Other ren",
-    ("Electricity", "Fossil fuels"): "Electricity-Fossil fuels",
-    ("Electricity", "Geothermal"): "Electricity-Other ren",
-    ("Electricity", "Hydroelectricity"): "Electricity-Other ren",
-    ("Electricity", "Tide and wave"): "Electricity-Other ren",
-    ("Electricity", "Nuclear"): "Electricity-Nuclear",
-    ("Electricity", "Solar"): "Electricity-Solar",
-    ("Electricity", "Wind"): "Electricity-Wind",
-    ("Heat", "Fossil fuels"): "Heat-Fossil fuels",
-    ("Heat", "Bioenergy"): "Heat-Bioenergy",
-    ("Heat", "Coal"): "Heat-Fossil fuels2",
-    ("Heat", "Geothermal"): "Heat-Bioenergy",
-    ("Heat", "Natural gas"): "Heat-Fossil fuels2",
-    ("Heat", "Nuclear"): "Heat-Fossil fuels2",
-    ("Heat", "Oil"): "Heat-Fossil fuels2",
-    ("Heat", "Other sources"): "Heat-Bioenergy",
-    ("Heat", "Solar thermal"): "Heat-Solar thermal",
-    ("Heat", "Waste"): "Heat-Biochar",
-    ("Transport", "Oil"): "Transport-Fossil fuels2",
-    ("Transport", "Bioenergy"): "Transport-Bioenergy & H2",
-    ("Transport", "Other fuels"): "Transport-Bioenergy & H2",
-    ("Transport", "Fossil fuels"): "Transport-Fossil fuels",
-}
-
-
-for i in range(0, len(region_list)):
-    elec_consump_i = (
-        elec_consump.loc[region_list[i], slice(None), scenario].groupby("Metric").sum()
-    )
-    elec_consump_i = pd.concat([elec_consump_i], keys=["Electricity"], names=["Sector"])
-    heat_consump_i = (
-        heat_consump.loc[region_list[i], slice(None), scenario].groupby("Metric").sum()
-    )
-    heat_consump_i = pd.concat([heat_consump_i], keys=["Heat"], names=["Sector"])
-    transport_consump_i = (
-        transport_consump.loc[region_list[i], slice(None), scenario]
-        .groupby("Metric")
-        .sum()
-    )
-    transport_consump_i = pd.concat(
-        [transport_consump_i], keys=["Transport"], names=["Sector"]
-    )
-    fig = (
-        pd.DataFrame(
-            (elec_consump_i.append(heat_consump_i).append(transport_consump_i)).loc[
-                :, start_year:long_proj_end_year
-            ]
-        )
-        * unit[1]
-    )
-    fig = fig.groupby(group_keys).sum()
-    fig = fig.reindex(tech_list)
-    fig = fig.T
-    fig.index.name = "Year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="TFC, " + unit[0])
-
-    fig = go.Figure()
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Solar",
-            line=dict(width=0.5, color="rgb(136,204,238)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Solar"]["TFC, " + unit[0]],
-            fill="tozeroy",
-            stackgroup="one",
-            fillcolor="rgb(136,204,238)",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Wind",
-            line=dict(width=0.5, color="rgb(204,102,119)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Wind"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="rgb(204,102,119)",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Nuclear",
-            line=dict(width=0.5, color="rgb(221,204,119)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Nuclear"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="rgb(221,204,119)",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Other ren",
-            line=dict(width=0.5, color="rgb(17,119,51)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Other ren"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="rgb(17,119,51)",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Electricity-Fossil fuels",
-            line=dict(width=0.5, color="rgb(51,34,136)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity-Fossil fuels"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-            fillcolor="rgb(51,34,136)",
-        )
-    )
-    """
-    fig.add_trace(
-        go.Scatter(
-            name="Heat-Solar thermal",
-            line=dict(width=0.5, color="rgb(170,168,153)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Heat-Solar thermal"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Heat-Biochar",
-            line=dict(width=0.5, color="rgb(136,204,238)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Heat-Biochar"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Heat-Bioenergy",
-            line=dict(width=0.5, color="rgb(68,170,153)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Heat-Bioenergy"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Heat-Fossil fuels",
-            line=dict(width=0.5, color="rgb(153,153,51)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Heat-Fossil fuels"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Transport-Fossil fuels",
-            line=dict(width=0.5, color="rgb(136,34,85)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport-Fossil fuels"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Transport-Bioenergy & H2",
-            line=dict(width=0.5, color="rgb(102,17,0)"),
-            x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport-Bioenergy & H2"]["TFC, " + unit[0]],
-            fill="tonexty",
-            stackgroup="one",
-        )
-    )
-    """
-    fig.update_layout(
-        title={
-            "text": "Electricity Supply, "
-            + "DAU21, "
-            + region_list[i].replace(" ", ""),
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        # xaxis={"title": "Year"},
-        yaxis={"title": "TFC, " + unit[0]},
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
-        margin_b=0,
-        margin_t=80,
-        margin_l=15,
-        margin_r=15,
-    )
-    """
-    fig.add_vrect(x0=start_year, x1=2019, fillcolor="grey", opacity=0.6, line_width=0)
-    """
-    """
-    fig.add_annotation(
-        text="Historical data (shaded gray) is from IEA World Energy Balance 2020; projections are based on PD21 technology adoption rate assumptions applied to <br>IEA World Energy Outlook 2020 projections for 2020-2040, and Global Change Assessment Model Baseline <br>Limited Technology Scenario for 2040-2100",
-        xref="paper",
-        yref="paper",
-        x=-0.17,
-        y=1.17,
-        showarrow=False,
-        font=dict(size=10, color="#2E3F5C"),
-        align="left",
-        borderpad=4,
-        bgcolor="#ffffff",
-        opacity=1,
-    )
-    """
-    if show_figs is True:
-        fig.show()
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=(
-                "./charts/supply2-" + scenario + "-" + region_list[i] + ".html"
-            ).replace(" ", ""),
-            auto_open=False,
-        )
-
 # endregion
 
 #################
@@ -7521,6 +7130,126 @@ if save_figs is True:
         ).replace(" ", ""),
         auto_open=False,
     )
+
+# endregion
+
+########################
+# ENERGY DEMAND WEDGES #
+########################
+
+# region
+
+start_year = 1990
+end_year = proj_end_year
+scenario = scenario
+region = slice(None)
+product_category = slice(None)
+product = slice(None)
+flow_category = "Final consumption"  # Choose 'Final consumption' (applicable to Industrial/Transportation/Commercial/Residential); 'Energy industry own use and Losses' (applicable to Electric Power/Industrial/Transportation); 'Supply'(applicable to Transportation); 'Transformation processes'(applicable to Electric Power/Industrial); 'Electricity output'(applicable to Electric Power/Industrial); 'Heat output'(applicable to Industrial)
+flow = slice(None)
+groupby = "Product_long"  # Choose 'Subsector', 'Product_category', 'Product', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+
+for sector in energy_demand_pathway.index.get_level_values(2).unique():
+    # Calculate wedge due to removal of upstream demand 
+        index = [
+        "Scenario",
+        "Region",
+        "Sector",
+        "Subsector",
+        "Product_category",
+        "Product_long",
+        "Product",
+        "Flow_category",
+        "Flow_long",
+        "Flow",
+        "Hydrogen",
+        "Flexible",
+        "Non-Energy Use",
+    ]
+
+    energy_demand_post_upstream = pd.DataFrame(
+        pd.read_csv("podi/data/energy_demand_post_upstream.csv")
+    ).set_index(index)
+    energy_demand_post_upstream.columns = energy_demand_post_upstream.columns.astype(int)
+    energy_demand_post_upstream.index.rename(level=6,'Reduced demand from fossil fuel industry upstream processes')
+
+    # Calculate wedge due to additional efficiency measures
+    energy_demand_post_addtl_eff = pd.DataFrame(
+        pd.read_csv("podi/data/energy_demand_post_addtl_eff.csv")
+    ).set_index(index)
+    energy_demand_post_addtl_eff.columns = energy_demand_post_addtl_eff.columns.astype(int)
+    energy_demand_post_addtl_eff.index.rename(level=6,'Reduced demand due to additional efficiency')
+
+    # Calculate wedge due to reduced demand due to electrification
+    energy_demand_electrified = pd.DataFrame(
+        pd.read_csv("podi/data/energy_demand_post_ef.csv")
+    ).set_index(index)
+    energy_demand_electrified.columns = energy_demand_electrified.columns.astype(int)
+    energy_demand_electrified.index.rename(level=6,'Reduced demand due to reduced work required for electricity vs combustion'))
+
+    fig = ((pd.concat([energy_demand_baseline - energy_demand_post_upstream, energy_demand_post_upstream - energy_demand_post_addtl_eff, energy_demand_electrified , energy_demand_pathway]).loc[
+                scenario,
+                region,
+                sector,
+                slice(None),
+                product_category,
+                slice(None),
+                product,
+                flow_category,
+                slice(None),
+                flow,
+            ]
+            .abs()
+            .groupby([groupby])
+            .sum()).loc[:, start_year:end_year] * unit[1]).T
+
+    fig.index.name = "Year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0]
+    )
+
+    fig = go.Figure()
+
+    for sub in fig2[groupby].unique():
+        fig.add_trace(
+            go.Scatter(
+                name=sub,
+                line=dict(
+                    width=0.5,
+                    color=colors[
+                        pd.DataFrame(fig2[groupby].unique())
+                        .set_index(0)
+                        .index.get_loc(sub)
+                    ],
+                ),
+                x=fig2["Year"],
+                y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                fill="tonexty",
+                stackgroup="1",
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Energy Demand, "
+            + str(sector)
+            + ", "
+            + str(region).replace("slice(None, None, None)", "World"),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "TFC, " + unit[0]},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+
+    if show_figs is True:
+        fig.show()
+
 
 # endregion
 

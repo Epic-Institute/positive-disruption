@@ -100,7 +100,7 @@ def energy_supply(
     # For each region, find the percent of total electricity consumption met by each product. For future years, the percentage for renewables will not yet be updated to reflect logistic-style growth that covers the electrified demand (ELECTR) estimated in energy_demand.py.
     elec_supply = (
         energy_demand.loc[
-            scenario,
+            [scenario],
             slice(None),
             slice(None),
             slice(None),
@@ -119,6 +119,7 @@ def energy_supply(
         ]
         .groupby(
             [
+                "Scenario",
                 "Region",
                 "Sector",
                 "Subsector",
@@ -131,7 +132,7 @@ def energy_supply(
     )
 
     per_elec_supply = elec_supply.parallel_apply(
-        lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[0]]),
+        lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[1]]),
         axis=1,
     ).fillna(0)
 
@@ -153,11 +154,15 @@ def energy_supply(
         "TIDE",
     ]
 
-    per_elec_supply[per_elec_supply.index.get_level_values(5).isin(renewables)] = (
-        per_elec_supply[per_elec_supply.index.get_level_values(5).isin(renewables)]
+    # Clear parameter output file before running adoption_curve()
+    file = open("podi/data/adoption_curve_parameters.csv", "w")
+    file.close()
+
+    per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)] = (
+        per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[0], x.name[5], scenario, x.name[1]],
+                parameters.loc[x.name[1], x.name[6], scenario, x.name[2]],
                 x,
                 scenario,
                 data_start_year,
@@ -171,13 +176,13 @@ def energy_supply(
 
     # Set renewables generation to meet ELECTR (which represents electrified demand that replaces fossil fuels, calculated in energy_demand.py)
     elec_supply[
-        elec_supply.index.get_level_values(5).isin(renewables)
+        elec_supply.index.get_level_values(6).isin(renewables)
     ] = per_elec_supply[
-        per_elec_supply.index.get_level_values(5).isin(renewables)
+        per_elec_supply.index.get_level_values(6).isin(renewables)
     ].parallel_apply(
         lambda x: x.multiply(
             elec_supply[
-                elec_supply.index.get_level_values(5).isin(
+                elec_supply.index.get_level_values(6).isin(
                     pd.concat([pd.DataFrame(renewables), pd.DataFrame(["ELECTR"])])
                     .squeeze()
                     .values
@@ -185,18 +190,18 @@ def energy_supply(
             ]
             .groupby("Region")
             .sum(0)
-            .loc[x.name[0]]
+            .loc[x.name[1]]
         ),
         axis=1,
     )
 
     # Drop ELECTR now that it has been reallocated to the specific set of renewables
-    per_elec_supply.drop(labels="ELECTR", level=5, inplace=True)
-    elec_supply.drop(labels="ELECTR", level=5, inplace=True)
+    per_elec_supply.drop(labels="ELECTR", level=6, inplace=True)
+    elec_supply.drop(labels="ELECTR", level=6, inplace=True)
 
     # Recalculate percent of total consumption each technology meets
     per_elec_supply = elec_supply.parallel_apply(
-        lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[0]]),
+        lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[1]]),
         axis=1,
     ).fillna(0)
 
@@ -208,84 +213,59 @@ def energy_supply(
 
     # region
 
-    # Add IRENA data for select heat technologies
-    """    
-    # region
-    irena = pd.read_csv(
-        "podi/data/IRENA/heat_supply_historical.csv", index_col="Region"
-    )
-
-    regions = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/region_categories.csv",
-                usecols=["WEB Region", "IRENA Region"],
-            ).dropna(axis=0)
-        )
-        .set_index(["IRENA Region"])
-        .rename_axis(index={"IRENA Region": "Region"})
-    )
-
-    irena = (
-        irena.merge(regions, on=["Region"])
-        .reset_index()
-        .set_index(["WEB Region", "Region"])
-        .droplevel("Region")
-        .rename_axis(index={"WEB Region": "Region"})
-    )
-    irena.index = irena.index.str.lower()
-    irena["Scenario"] = scenario
-    irena = irena.reset_index().set_index(
-        [
-            "Scenario",
-            "Region",
-            "Sector",
-            "Subsector",
-            "Product_category",
-            "Product_long",
-            "Product",
-            "Flow_category",
-            "Flow_long",
-            "Flow",
-            "Hydrogen",
-            "Flexible",
-            "Non-Energy Use",
-        ]
-    )
-
-    irena.columns = irena.columns.astype(int)
-    irena = irena.loc[:, data_start_year:data_end_year]
-
-    energy_demand = pd.concat(
-        [energy_demand, irena[irena.index.get_level_values(6).isin(["SOLARTH"])]]
-    )
-
-    # endregion
-    """
-
-    # For each region, find the percent of total heat consumption met by each product. For future years, the percentage for renewables will not yet be updated to reflect logistic-style growth that covers the electrified/renewables heat demand estimated in energy_demand.py.
+    # For each region, for each subsector ('Low Temperature', 'High Temperature'), find the percent of total heat consumption met by each product. heat_supply is 'Heat output' from the 'Electricity and Heat' product category, plus other products that are consumed within residential, commercial, and industrial sectors directly for heat.
 
     heat_supply = (
-        energy_demand.loc[
-            scenario,
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
+        pd.concat(
             [
-                "Heat output",
-            ],
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            "N",
-            :,
-        ]
+                energy_demand.loc[
+                    [scenario],
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    ["Electricity and Heat"],
+                    slice(None),
+                    slice(None),
+                    [
+                        "Heat output",
+                    ],
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    "N",
+                    :,
+                ],
+                energy_demand.loc[
+                    [scenario],
+                    slice(None),
+                    ["Residential", "Commercial", "Industrial"],
+                    slice(None),
+                    [
+                        "Biofuels and Waste",
+                        "Coal",
+                        "Natural gas",
+                        "Oil products",
+                        "Hydrogen",
+                        "Crude, NGL, refinery feedstocks",
+                        "Peat and peat products",
+                        "Oil shale",
+                    ],
+                    slice(None),
+                    slice(None),
+                    "Final consumption",
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    "N",
+                    :,
+                ],
+            ]
+        )
         .groupby(
             [
+                "Scenario",
                 "Region",
                 "Sector",
                 "Subsector",
@@ -297,8 +277,14 @@ def energy_supply(
         .sum()
     )
 
+    # Add in final consumption of
+
     per_heat_supply = heat_supply.parallel_apply(
-        lambda x: x.divide(heat_supply.groupby(["Region"]).sum(0).loc[x.name[0]]),
+        lambda x: x.divide(
+            heat_supply.groupby(["Region", "Subsector"])
+            .sum(0)
+            .loc[x.name[1], x.name[3]]
+        ),
         axis=1,
     ).fillna(0)
 
@@ -310,21 +296,15 @@ def energy_supply(
     parameters = parameters.sort_index()
 
     renewables = [
-        "ELECTR",
-        "HEAT",
-        "BIOGASES",
-        "MUNWASTER",
-        "OBIOLIQ",
-        "PRIMSBIO",
         "GEOTHERM",
-        "BIODIESEL",
+        "SOLARTH",
     ]
 
-    per_heat_supply[per_heat_supply.index.get_level_values(5).isin(renewables)] = (
-        per_heat_supply[per_heat_supply.index.get_level_values(5).isin(renewables)]
+    per_heat_supply[per_heat_supply.index.get_level_values(6).isin(renewables)] = (
+        per_heat_supply[per_heat_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[0], x.name[5], scenario, x.name[1]],
+                parameters.loc[x.name[1], x.name[6], scenario, x.name[2]],
                 x,
                 scenario,
                 data_start_year,
@@ -336,36 +316,20 @@ def energy_supply(
         .clip(upper=1)
     )
 
-    # Set renewables heat generation to meet RHEAT (which represents heat demand previously met by fossil fuel heat but replaced by renewables heat, calculated in energy_demand.py)
+    # Set renewables heat generation to meet the amount estimated in Jacobson et al. (2016) to provide storage services.
     heat_supply[
-        heat_supply.index.get_level_values(5).isin(renewables)
+        heat_supply.index.get_level_values(6).isin(renewables)
     ] = per_heat_supply[
-        per_heat_supply.index.get_level_values(5).isin(renewables)
+        per_heat_supply.index.get_level_values(6).isin(renewables)
     ].parallel_apply(
         lambda x: x.multiply(
-            heat_supply[
-                heat_supply.index.get_level_values(5).isin(
-                    pd.concat([pd.DataFrame(renewables), pd.DataFrame(["RHEAT"])])
-                    .squeeze()
-                    .values
-                )
-            ]
-            .groupby("Region")
+            heat_supply[heat_supply.index.get_level_values(6).isin(renewables)]
+            .groupby(["Region", "Subsector"])
             .sum(0)
-            .loc[x.name[0]]
+            .loc[x.name[1], x.name[3]]
         ),
         axis=1,
     )
-
-    # Drop RHEAT now that it has been reallocated to the specific set of renewables
-    per_heat_supply.drop(labels="RHEAT", level=5, inplace=True)
-    heat_supply.drop(labels="RHEAT", level=5, inplace=True)
-
-    # Recalculate percent of total consumption each technology meets
-    per_heat_supply = heat_supply.parallel_apply(
-        lambda x: x.divide(heat_supply.groupby(["Region"]).sum(0).loc[x.name[0]]),
-        axis=1,
-    ).fillna(0)
 
     # endregion
 
@@ -375,66 +339,11 @@ def energy_supply(
 
     # region
 
-    # Add IRENA data for select transport technologies
-    """    
-    # region
-    irena = pd.read_csv(
-        "podi/data/IRENA/transport_supply_historical.csv", index_col="Region"
-    )
-
-    regions = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/region_categories.csv",
-                usecols=["WEB Region", "IRENA Region"],
-            ).dropna(axis=0)
-        )
-        .set_index(["IRENA Region"])
-        .rename_axis(index={"IRENA Region": "Region"})
-    )
-
-    irena = (
-        irena.merge(regions, on=["Region"])
-        .reset_index()
-        .set_index(["WEB Region", "Region"])
-        .droplevel("Region")
-        .rename_axis(index={"WEB Region": "Region"})
-    )
-    irena.index = irena.index.str.lower()
-    irena["Scenario"] = scenario
-    irena = irena.reset_index().set_index(
-        [
-            "Scenario",
-            "Region",
-            "Sector",
-            "Subsector",
-            "Product_category",
-            "Product_long",
-            "Product",
-            "Flow_category",
-            "Flow_long",
-            "Flow",
-            "Hydrogen",
-            "Flexible",
-            "Non-Energy Use",
-        ]
-    )
-
-    irena.columns = irena.columns.astype(int)
-    irena = irena.loc[:, data_start_year:data_end_year]
-
-    energy_demand = pd.concat(
-        [energy_demand, irena[irena.index.get_level_values(6).isin(["EVS"])]]
-    )
-
-    # endregion
-    """
-
-    # For each region, find the percent of total transport consumption met by each product. For future years, the percentage for renewables will not yet be updated to reflect logistic-style growth that covers the electrified/renewables transport demand estimated in energy_demand.py.
+    # For each region, for each subsector ('Light', 'Medium', 'Heavy', 'Two- and three-wheeled'), find the percent of total nonelectric energy consumption met by each product.
 
     transport_supply = (
         energy_demand.loc[
-            scenario,
+            [scenario],
             slice(None),
             ["Transportation"],
             slice(None),
@@ -451,50 +360,45 @@ def energy_supply(
         ]
         .groupby(
             [
+                "Scenario",
                 "Region",
                 "Sector",
                 "Subsector",
                 "Product_category",
                 "Product_long",
                 "Product",
-                "Flow_category",
-                "Flow_long",
             ]
         )
         .sum()
     )
 
     per_transport_supply = transport_supply.parallel_apply(
-        lambda x: x.divide(transport_supply.groupby(["Region"]).sum(0).loc[x.name[0]]),
+        lambda x: x.divide(
+            transport_supply.groupby(["Region", "Subsector"])
+            .sum(0)
+            .loc[x.name[1], x.name[3]]
+        ),
         axis=1,
     ).fillna(0)
 
-    # Use the historical percent of total transport consumption met by each renewable product to estimate projected percent of total transport consumption each meets
+    # Use the historical percent of total nonelectric transport consumption met by each renewable product to estimate projected percent of total heat consumption each meets
     parameters = pd.read_csv(
         "podi/data/tech_parameters.csv",
         usecols=["Region", "Product", "Scenario", "Sector", "Metric", "Value"],
     ).set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
     parameters = parameters.sort_index()
 
-    renewables = [
-        "BIODIESEL",
-        "ELECTR",
-        "HYDROGEN",
-        "BIOGASOL",
-        "BIOGASES",
-        "PRIMSBIO",
-        "OBIOLIQ",
-    ]
+    renewables = ["BIODIESEL", "HYDROGEN", "BIOGASOL", "BIOGASES", "OBIOLIQ"]
 
     per_transport_supply[
-        per_transport_supply.index.get_level_values(5).isin(renewables)
+        per_transport_supply.index.get_level_values(6).isin(renewables)
     ] = (
         per_transport_supply[
-            per_transport_supply.index.get_level_values(5).isin(renewables)
+            per_transport_supply.index.get_level_values(6).isin(renewables)
         ]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[0], x.name[5], scenario, x.name[1]],
+                parameters.loc[x.name[1], x.name[6], scenario, x.name[2]],
                 x,
                 scenario,
                 data_start_year,
@@ -506,36 +410,22 @@ def energy_supply(
         .clip(upper=1)
     )
 
-    # Set renewables transport generation to meet RTRANS (which represents transport demand previously met by fossil fuel transport but replaces by renewables transport, calculated in energy_demand.py)
+    # Set renewables nonelectric transport generation to meet the amount estimated in energy_demand.py
     transport_supply[
-        transport_supply.index.get_level_values(5).isin(renewables)
-    ] = per_elec_supply[
-        per_elec_supply.index.get_level_values(5).isin(renewables)
+        transport_supply.index.get_level_values(6).isin(renewables)
+    ] = per_transport_supply[
+        per_transport_supply.index.get_level_values(6).isin(renewables)
     ].parallel_apply(
         lambda x: x.multiply(
             transport_supply[
-                transport_supply.index.get_level_values(5).isin(
-                    pd.concat([pd.DataFrame(renewables), pd.DataFrame(["RTRANS"])])
-                    .squeeze()
-                    .values
-                )
+                transport_supply.index.get_level_values(6).isin(renewables)
             ]
-            .groupby("Region")
+            .groupby(["Region", "Subsector"])
             .sum(0)
-            .loc[x.name[0]]
+            .loc[x.name[1], x.name[3]]
         ),
         axis=1,
     )
-
-    # Drop RTRANS now that it has been reallocated to the specific set of renewables
-    per_transport_supply.drop(labels="RTRANS", level=5, inplace=True)
-    transport_supply.drop(labels="RTRANS", level=5, inplace=True)
-
-    # Recalculate percent of total consumption each technology meets
-    per_transport_supply = transport_supply.parallel_apply(
-        lambda x: x.divide(transport_supply.groupby(["Region"]).sum(0).loc[x.name[0]]),
-        axis=1,
-    ).fillna(0)
 
     # endregion
 

@@ -73,10 +73,10 @@ else:
 #################
 
 # region
-recalc_energy_supply = False
+recalc_energy_supply = True
 if recalc_energy_supply is True:
-    energy_supply = energy_supply(
-        "pathway", data_start_year, data_end_year, proj_end_year
+    (per_energy_supply_pathway, energy_supply_pathway) = energy_supply(
+        "pathway", energy_demand_pathway, data_start_year, data_end_year, proj_end_year
     )
 else:
     index = [
@@ -87,12 +87,6 @@ else:
         "Product_category",
         "Product_long",
         "Product",
-        "Flow_category",
-        "Flow_long",
-        "Flow",
-        "Hydrogen",
-        "Flexible",
-        "Non-Energy Use",
     ]
 
     energy_supply_pathway = pd.DataFrame(

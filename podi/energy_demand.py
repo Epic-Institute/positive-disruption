@@ -381,11 +381,13 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     energy_demand_historical[
         (energy_demand_historical["Subsector"] == "Hydrogen")
         & (energy_demand_historical["Product"] == "NONCRUDE")
-    ] = energy_demand_historical[
-        (energy_demand_historical["Subsector"] == "Hydrogen")
-        & (energy_demand_historical["Product"] == "NONCRUDE")
-    ].replace(
-        {"NONCRUDE": "HYDROGEN"}
+    ] = (
+        energy_demand_historical[
+            (energy_demand_historical["Subsector"] == "Hydrogen")
+            & (energy_demand_historical["Product"] == "NONCRUDE")
+        ]
+        .replace({"Hydrogen": "na"})
+        .replace({"NONCRUDE": "HYDROGEN"})
     )
 
     energy_demand_historical.set_index(
@@ -523,7 +525,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         )
         .dropna(axis="index", how="all")
         .dropna(axis="columns", thresh=2)
-    )
+    ).loc[:, :proj_end_year]
 
     # Strip preceding space in EIA Sector values
     energy_demand_projection["EIA Product"] = energy_demand_projection[
@@ -587,7 +589,7 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     # Calculate 'electrification factors' that scale down energy demand over time due to the lower energy demand required to produce an equivalent amount of work via electricity
-    recalc_ef_ratios = False
+    recalc_ef_ratios = True
     if recalc_ef_ratios is True:
 
         # Load saturation points for energy demand reduction ratios
@@ -644,7 +646,11 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
 
         ef_ratio = ef_ratio[ef_ratio.index.get_level_values(4) == "floor"].sort_index()
 
-        # Run adoption_curve_demand.py to calculate logistics curves for energy demand reduction ratios
+        # Clear energy_demand_adoption_curves.py, which stores output from running the adoption_curve_demand() function
+        file = open("podi/data/energy_demand_adoption_curves.csv", "w")
+        file.close()
+
+        # Run adoption_curve_demand() to calculate logistics curves for energy demand reduction ratios
         ef_ratio.parallel_apply(
             lambda x: adoption_curve_demand(
                 parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
@@ -838,6 +844,10 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
+    # Estimate energy demand reduction and fuel shifts due to electrification
+
+    # region
+
     # Isolate the energy demand that gets replaced with (a reduced amount of) energy from electricity. Each row of energy demand is multiplied by ((ef[0] - ef[i]) / (ef[0] - ef[-1]), which represents the percent of energy demand that undergoes electrification. This does not count preexisting electricity demand, except for nuclear, which is estimated to shift to renewables, and is treated in subsequent steps.
     energy_demand_electrified = energy_demand_post_addtl_eff.parallel_apply(
         lambda x: x.mul(
@@ -922,7 +932,6 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
     energy_demand_reduced_electrified_h = energy_demand_reduced_electrified2[
         energy_demand_reduced_electrified2["Hydrogen"] == "Y"
     ]
-    energy_demand_reduced_electrified_h["Subsector"] = "Hydrogen"
     energy_demand_reduced_electrified_h["Product_category"] = "Hydrogen"
     energy_demand_reduced_electrified_h["Product_long"] = "Hydrogen"
     energy_demand_reduced_electrified_h["Product"] = "HYDROGEN"
@@ -950,8 +959,6 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         inplace=True,
     )
 
-    # Relabel
-
     # Add this reduced level of electrical energy demand to overall energy demand
     energy_demand_post_electrification = (
         pd.concat(
@@ -976,6 +983,8 @@ def energy_demand(scenario, data_start_year, data_end_year, proj_end_year):
         )
         .sum()
     )
+
+    # endregion
 
     # endregion
 

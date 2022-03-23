@@ -30,16 +30,16 @@ def adoption_curve(
 ):
 
     # Take 10 years prior data to fit logistic function
-    x_data = np.arange(0, len(value[proj_end_year - data_end_year - 10 :]), 1)
+    x_data = np.arange(0, len(value.loc[data_end_year - 10 : proj_end_year]), 1)
     y_data = np.zeros((1, len(x_data)))
     y_data[:, :] = np.NaN
     y_data = y_data.squeeze().astype(float)
-    y_data[:10] = value.loc[data_end_year - 10 : data_end_year - 1]
+    y_data[:11] = value.loc[data_end_year - 10 : data_end_year]
     y_data[-1] = parameters.loc["saturation point"].Value.astype(float)
 
     # Handle cases where saturation point is below current value, by making saturation point equidistant from current value but in positive direction
-    if y_data[9] > y_data[-1]:
-        y_data[-1] = y_data[9] + abs(y_data[-1] - y_data[9])
+    if y_data[10] > y_data[-1]:
+        y_data[-1] = y_data[10] + abs(y_data[-1] - y_data[10])
         neg = True
     else:
         neg = False
@@ -67,8 +67,8 @@ def adoption_curve(
             pd.to_numeric(parameters.loc["saturation point"].Value),
         ),
         (
-            y_data[9],
-            y_data[9],
+            y_data[10],
+            y_data[10],
         ),
     ]
 
@@ -99,8 +99,8 @@ def adoption_curve(
     # Rejoin with historical data at point where projection curve results in smooth growth
     y = np.concatenate(
         [
-            value[: proj_end_year - data_end_year].values,
-            y[y >= value[data_end_year - 1]].squeeze(),
+            value.loc[:data_end_year].values,
+            y[y >= value.loc[data_end_year]].squeeze(),
         ]
     )[: (proj_end_year - data_start_year + 1)]
 

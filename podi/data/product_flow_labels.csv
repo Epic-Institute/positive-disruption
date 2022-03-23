@@ -2001,10 +2001,10 @@ WHITESP,ROAD,Transportation,Medium,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N
 WHITESP,ROAD,Transportation,Heavy,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 WIND,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 WIND,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
-HYDROGEN,DISTLOSS,Industrial,Hydrogen,Liquid fuels,na,N,na,N,N,Y,Y,N
-HYDROGEN,TGTL,Industrial,Hydrogen,Liquid fuels,na,N,na,N,N,Y,Y,N
-HYDROGEN,TNONSPEC,Industrial,Hydrogen,Liquid fuels,na,N,na,N,N,Y,Y,N
-HYDROGEN,TREFINER,Industrial,Hydrogen,Liquid fuels,na,N,na,N,N,Y,Y,N
+HYDROGEN,DISTLOSS,Industrial,na,Liquid fuels,na,N,na,N,N,Y,Y,N
+HYDROGEN,TGTL,Industrial,na,Liquid fuels,na,N,na,N,N,Y,Y,N
+HYDROGEN,TNONSPEC,Industrial,na,Liquid fuels,na,N,na,N,N,Y,Y,N
+HYDROGEN,TREFINER,Industrial,na,Liquid fuels,na,N,na,N,N,Y,Y,N
 HEATNS,AGRICULT,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,Y,Y,N,Y,N
 HEATNS,AGRICULT,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,Y,Y,N,Y,N
 HEATNS,AUTOCHP,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
@@ -2462,3 +2462,7 @@ MANGAS,HEAUTOH,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 MANGAS,HEMAINC,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 SOLARTH,HEAUTOH,Industrial,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
 SOLARTH,HEMAINH,Industrial,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
+HYDROGEN,DOMESAIR,Transportation,Heavy,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,N,N,N
+,,,,,,,,,,,,
+HYDROGEN,WORLDAV,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+HYDROGEN,WORLDMAR,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
