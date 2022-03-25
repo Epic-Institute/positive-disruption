@@ -310,37 +310,6 @@ def results_analysis(
 
     # endregion
 
-    # MARICULTURE DECARB
-
-    # region
-    """
-    mar_decarb_max = afolu_per_adoption.loc[
-        region2,
-        "Forests & Wetlands",
-        [
-            "Coastal Restoration",
-        ],
-        "pathway",
-        :,
-    ]
-
-    mar_decarb = afolu_per_adoption.loc[
-        region2,
-        "Forests & Wetlands",
-        [
-            "Coastal Restoration",
-        ],
-        scenario,
-        :,
-    ]
-    mar_decarb = pd.DataFrame(mar_decarb.sum() / mar_decarb_max.sum().max()).T.rename(
-        index={0: "Mariculture"}
-    )
-    mar_decarb.columns = mar_decarb.columns.astype(int)
-    mar_decarb.columns = ra_decarb.columns
-    """
-    # endregion
-
     # CDR DECARB
 
     # region

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 # region
 
 from operator import index
@@ -32,71 +33,6 @@ def energy_supply(
 
     # region
 
-    # Add IRENA data for select electricity technologies
-
-    # region
-    irena = pd.read_csv(
-        "podi/data/IRENA/electricity_supply_historical.csv", index_col="Region"
-    )
-
-    regions = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/region_categories.csv",
-                usecols=["WEB Region", "IRENA Region"],
-            ).dropna(axis=0)
-        )
-        .set_index(["IRENA Region"])
-        .rename_axis(index={"IRENA Region": "Region"})
-    )
-
-    irena = (
-        irena.merge(regions, on=["Region"])
-        .reset_index()
-        .set_index(["WEB Region", "Region"])
-        .droplevel("Region")
-        .rename_axis(index={"WEB Region": "Region"})
-    )
-    irena.index = irena.index.str.lower()
-    irena["Scenario"] = scenario
-    irena = irena.reset_index().set_index(
-        [
-            "Scenario",
-            "Region",
-            "Sector",
-            "Subsector",
-            "Product_category",
-            "Product_long",
-            "Product",
-            "Flow_category",
-            "Flow_long",
-            "Flow",
-            "Hydrogen",
-            "Flexible",
-            "Non-Energy Use",
-        ]
-    )
-
-    irena.columns = irena.columns.astype(int)
-    irena = irena.loc[:, data_start_year:data_end_year]
-
-    # Drop IEA WIND and SOLARPV to avoid duplication with IRENA ONSHORE/OFFSHORE/ROOFTOP/SOLARPV
-    energy_demand.drop(labels="WIND", level=6, inplace=True)
-    energy_demand.drop(labels="SOLARPV", level=6, inplace=True)
-
-    energy_demand = pd.concat(
-        [
-            energy_demand,
-            irena[
-                irena.index.get_level_values(6).isin(
-                    ["ONSHORE", "OFFSHORE", "ROOFTOP", "SOLARPV"]
-                )
-            ],
-        ]
-    )
-
-    # endregion
-
     # For each region, find the percent of total electricity consumption met by each product. For future years, the percentage for renewables will not yet be updated to reflect logistic-style growth that covers the electrified demand (ELECTR) estimated in energy_demand.py.
     elec_supply = (
         energy_demand.loc[
@@ -126,6 +62,9 @@ def energy_supply(
                 "Product_category",
                 "Product_long",
                 "Product",
+                "Flow_category",
+                "Flow_long",
+                "Flow",
             ]
         )
         .sum()
@@ -272,6 +211,9 @@ def energy_supply(
                 "Product_category",
                 "Product_long",
                 "Product",
+                "Flow_category",
+                "Flow_long",
+                "Flow",
             ]
         )
         .sum()
@@ -367,6 +309,9 @@ def energy_supply(
                 "Product_category",
                 "Product_long",
                 "Product",
+                "Flow_category",
+                "Flow_long",
+                "Flow",
             ]
         )
         .sum()

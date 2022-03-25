@@ -98,7 +98,7 @@ def adoption_curve_demand(
         ],
         axis=1,
     ).to_csv(
-        "podi/data/energy_demand_adoption_curves.csv",
+        "podi/data/energy_adoption_curves.csv",
         mode="a",
         header=None,
         index=False,
