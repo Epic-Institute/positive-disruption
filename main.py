@@ -5,7 +5,7 @@ from unicodedata import name
 import warnings
 import numpy as np
 import pandas as pd
-from podi.energy_demand import energy_demand
+from podi.energy import energy
 from podi.energy_supply import energy_supply
 from podi.afolu import afolu
 from podi.afolu2030 import afolu2030
@@ -31,19 +31,39 @@ proj_end_year = 2050
 
 # endregion
 
+# Choose a scenario name, which will create output data sets with the scenario name appended, e.g. energy_pathway.csv
 scenario = "pathway"
 
-#################
-# ENERGY DEMAND #
-#################
+##########
+# ENERGY #
+##########
 
 # region
 
-recalc_energy_demand = False
-if recalc_energy_demand is True:
-    energy_demand_pathway = energy_demand(
-        "pathway", data_start_year, data_end_year, proj_end_year
-    )
+recalc_energy = False
+if recalc_energy is True:
+    energy("pathway", data_start_year, data_end_year, proj_end_year)
+    index = [
+        "Scenario",
+        "Region",
+        "Sector",
+        "Subsector",
+        "Product_category",
+        "Product_long",
+        "Product",
+        "Flow_category",
+        "Flow_long",
+        "Flow",
+        "Hydrogen",
+        "Flexible",
+        "Non-Energy Use",
+    ]
+
+    energy_pathway = pd.DataFrame(
+        pd.read_csv("podi/data/energy_" + scenario + ".csv")
+    ).set_index(index)
+    energy_pathway.columns = energy_pathway.columns.astype(int)
+
 else:
     index = [
         "Scenario",
@@ -61,38 +81,11 @@ else:
         "Non-Energy Use",
     ]
 
-    energy_demand_pathway = pd.DataFrame(
-        pd.read_csv("podi/data/energy_demand_" + scenario + ".csv")
+    energy_pathway = pd.DataFrame(
+        pd.read_csv("podi/data/energy_" + scenario + ".csv")
     ).set_index(index)
-    energy_demand_pathway.columns = energy_demand_pathway.columns.astype(int)
+    energy_pathway.columns = energy_pathway.columns.astype(int)
 
-# endregion
-
-#################
-# ENERGY SUPPLY #
-#################
-
-# region
-recalc_energy_supply = True
-if recalc_energy_supply is True:
-    (per_energy_supply_pathway, energy_supply_pathway) = energy_supply(
-        "pathway", energy_demand_pathway, data_start_year, data_end_year, proj_end_year
-    )
-else:
-    index = [
-        "Scenario",
-        "Region",
-        "Sector",
-        "Subsector",
-        "Product_category",
-        "Product_long",
-        "Product",
-    ]
-
-    energy_supply_pathway = pd.DataFrame(
-        pd.read_csv("podi/data/energy_supply_" + scenario + ".csv")
-    ).set_index(index)
-    energy_supply_pathway.columns = energy_supply_pathway.columns.astype(int)
 
 # endregion
 
