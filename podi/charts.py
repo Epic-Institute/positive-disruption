@@ -22,7 +22,6 @@ from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
 from fair.constants import radeff
 from podi.energy import energy
-from podi.energy_supply import energy_supply
 
 pd.options.display.float_format = "{:,.0f}".format
 
