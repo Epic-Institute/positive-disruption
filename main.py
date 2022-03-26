@@ -6,7 +6,6 @@ import warnings
 import numpy as np
 import pandas as pd
 from podi.energy import energy
-from podi.energy_supply import energy_supply
 from podi.afolu import afolu
 from podi.afolu2030 import afolu2030
 from podi.emissions import emissions
