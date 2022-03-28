@@ -792,31 +792,60 @@ region = slice(None)
 sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
-flow_category = ['Electricity output']
-groupby = "Product_long"
+flow_category = slice(None)
 nonenergyuse = ['N']
 
-adoption = pd.concat([per_elec_supply, per_heat_supply, per_transport_supply])
+# Percent of electric power that is renewables
+electricity = energy_percent.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "ROOFTOP", "SOLARPV", "SOLARTH", "OFFSHORE","ONSHORE", "TIDE"], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year]
 
+# Percent of transport energy that is electric or nonelectric renewables
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].parallel_apply(
+        lambda x: x.divide(
+            energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(["Region", "Subsector"])
+            .sum(0)
+            .loc[x.name[1], x.name[3]]
+        ),
+        axis=1,
+    ).fillna(0)
 
-fig = (
-    adoption_curves.loc[region, slice(None), scenario].loc[:, start_year:]
-    * 100
-)
+# Percent of buildings energy that is electric or nonelectric renewables
+buildings =  energy_pathway.loc[scenario, region, sector, subsector, product_category, slice(None), ['HEAT', 'RELECTR', 'CHARCOAL', 'ELECTR', 'SOLARTH', 'BIOGASES', 'BIODIESEL', 'OBIOLIQ', 'BIOGASOL', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].parallel_apply(
+        lambda x: x.divide(
+            energy_pathway.loc[scenario, region, sector, subsector, product_category, slice(None), slice(None), flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(["Region", "Subsector"])
+            .sum(0)
+            .loc[x.name[1], x.name[3]]
+        ),
+        axis=1,
+    ).fillna(0).replace({'Residential':'Buildings','Commercial':'Buildings'}).groupby(['Region', 'Sector', 'Subsector', 'Product_category', 'Product_long','Product','Flow_category','Flow_long','Flow','Hydrogen','Flexible','Non-Energy Use']).sum()
 
-fig = fig.T
+# Percent of industry energy that is electric or nonelectric renewables
+industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, product_category, slice(None), ['HEAT', 'RELECTR', 'CHARCOAL', 'PRIMSBIO','ELECTR', 'SOLARTH', 'HYDROGEN', 'BIOGASES','BIODIESEL', 'MUNWASTER', 'OBIOLIQ', 'GEOTHERM', 'NUCLEAR', 'BIOGASOL'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].parallel_apply(
+        lambda x: x.divide(
+            energy_pathway.loc[scenario, region, ['Industrial'], subsector, product_category, slice(None), slice(None), flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(["Region", "Subsector"])
+            .sum(0)
+            .loc[x.name[1], x.name[3]]
+        ),
+        axis=1,
+    ).fillna(0)
+
+verticals = pd.concat([electricity, transport, buildings, industry])
+
+fig = fig.T * 100
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
 fig2 = pd.melt(fig, id_vars="Year", var_name="Sector", value_name="% Adoption")
 
 fig = go.Figure()
 
-fig.add_trace(
+
+for vertical in verticals:
+    # Make historical trace
+    fig.add_trace(
     go.Scatter(
         name="Historical",
         line=dict(width=3, color="#B279A2"),
-        x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")][
+        x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == "Electricity")]["Year"],
+        y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == "Electricity")][
             "% Adoption"
         ],
         fill="none",
@@ -826,168 +855,24 @@ fig.add_trace(
     )
 )
 
-fig.add_trace(
-    go.Scatter(
-        name="V2: Transport",
-        line=dict(width=3, color=cl["V2: Transport"][0]),
-        x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Transport")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="two",
-        legendgroup="Transport",
-        showlegend=False,
+    # Make projected trace
+    fig.add_trace(
+        go.Scatter(
+            name="V2: Transport",
+            line=dict(width=3, color=cl["V2: Transport"][0]),
+            x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
+            y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Transport")][
+                "% Adoption"
+            ],
+            fill="none",
+            stackgroup="two",
+            legendgroup="Transport",
+            showlegend=False,
+        )
     )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V3: Buildings",
-        line=dict(width=3, color=cl["V3: Buildings"][0]),
-        x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Buildings")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="three",
-        legendgroup="Buildings",
-        showlegend=False,
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V4: Industry",
-        line=dict(width=3, color=cl["V4: Industry"][0]),
-        x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Industry")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="four",
-        legendgroup="Industry",
-        showlegend=False,
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V5: Regenerative Agriculture",
-        line=dict(width=3, color=cl["V5: Agriculture"][0]),
-        x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[
-            (fig2["Year"] <= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
-        ]["% Adoption"],
-        fill="none",
-        stackgroup="five",
-        legendgroup="Regenerative Agriculture",
-        showlegend=False,
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V6: Forests & Wetlands",
-        line=dict(width=3, color=cl["V6: Forests & Wetlands"][0]),
-        x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="six",
-        legendgroup="Forests & Wetlands",
-        showlegend=False,
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V1: Electricity",
-        line=dict(width=3, color=cl["V1: Electricity"][0], dash="dot"),
-        x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="eight",
-        legendgroup="Electricity",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V2: Transport",
-        line=dict(width=3, color=cl["V2: Transport"][0], dash="dot"),
-        x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Transport")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="nine",
-        legendgroup="Transport",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V3: Buildings",
-        line=dict(width=3, color=cl["V3: Buildings"][0], dash="dot"),
-        x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Buildings")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="ten",
-        legendgroup="Buildings",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V4: Industry",
-        line=dict(width=3, color=cl["V4: Industry"][0], dash="dot"),
-        x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Industry")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="eleven",
-        legendgroup="Industry",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V5: Regenerative Agriculture",
-        line=dict(width=3, color=cl["V5: Agriculture"][0], dash="dot"),
-        x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[
-            (fig2["Year"] >= 2020) & (fig2["Sector"] == "Regenerative Agriculture")
-        ]["% Adoption"],
-        fill="none",
-        stackgroup="twelve",
-        legendgroup="Regenerative Agriculture",
-    )
-)
-
-fig.add_trace(
-    go.Scatter(
-        name="V6: Forests & Wetlands",
-        line=dict(width=3, color=cl["V6: Forests & Wetlands"][0], dash="dot"),
-        x=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Electricity")]["Year"],
-        y=fig2[(fig2["Year"] >= 2020) & (fig2["Sector"] == "Forests & Wetlands")][
-            "% Adoption"
-        ],
-        fill="none",
-        stackgroup="thirteen",
-        legendgroup="Forests & Wetlands",
-    )
-)
-
 fig.update_layout(
     title={
-        "text": "Percent of Total PD Adoption, " + "DAU21" + ", " + region,
+        "text": "Percent of Total PD Adoption, " + region,
         "xanchor": "center",
         "x": 0.5,
         "y": 0.99,

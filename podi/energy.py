@@ -1353,10 +1353,15 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     energy_electrified.to_csv("podi/data/energy_electrified.csv")
 
     # The reduced amount of electrical energy that represents an equivalent amount of work to combustion based energy
-    energy_reduced_electrified.to_csv("podi/data//energy_reduced_electrified.csv")
+    energy_reduced_electrified.to_csv("podi/data/energy_reduced_electrified.csv")
 
     # Energy supply mix that meets energy_reduced_electrified
     energy_post_electrification.to_csv("podi/data/energy_" + scenario + ".csv")
+
+    # Energy percent of total by region, electricity/heat/nonelectric transport, and subsector
+    pd.concat([per_elec_supply, per_heat_supply, per_transport_supply]).to_csv(
+        "podi/data/energy_percent.csv"
+    )
 
     # endregion
 
