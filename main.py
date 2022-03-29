@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 # region
-from unicodedata import name
 import warnings
 import numpy as np
 import pandas as pd
@@ -37,7 +36,7 @@ scenario = "pathway"
 # ENERGY #
 ##########
 
-recalc_energy = True
+recalc_energy = False
 # region
 
 if recalc_energy is True:
