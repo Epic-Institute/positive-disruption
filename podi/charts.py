@@ -692,6 +692,176 @@ if show_figs is True:
 
 # endregion
 
+#####################################
+# TOTAL FINAL CONSUMPTION BY SECTOR #
+#####################################
+
+# region
+
+start_year = 1990
+end_year = 2020
+scenario = scenario
+region = slice(None)
+sector = slice(None)
+subsector = slice(None)
+product_category = slice(None)
+flow_category = ['Final consumption']
+groupby = "Sector"
+nonenergyuse = ['Y','N']
+
+fig = ((
+        energy_pathway.loc[
+            scenario,
+            region,
+            sector,
+            subsector,
+            product_category,
+            slice(None),
+            slice(None),
+            flow_category, 
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            nonenergyuse
+        ].groupby([groupby]).sum()
+    ).loc[:, start_year:end_year]
+    * unit[1]
+).T
+
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(
+    fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0])
+
+fig = go.Figure()
+
+for sub in fig2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(fig2[groupby].unique())
+                    .set_index(0)
+                    .index.get_loc(sub)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+            fill="tonexty",
+            stackgroup="1",
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "Total Final Consumption, "
+        + str(sector).replace("slice(None, None, None)", "All Sectors")
+        + ", "
+        + str(region).replace("slice(None, None, None)", "World"),
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "TFC, " + unit[0]},
+    margin_b=0,
+    margin_t=20,
+    margin_l=10,
+    margin_r=10,
+)
+
+if show_figs is True:
+    fig.show()
+
+# endregion
+
+#####################################
+# ELECTRICITY CONSUMPTION BY SECTOR #
+#####################################
+
+# region
+
+start_year = 1990
+end_year = 2020
+scenario = scenario
+region = slice(None)
+sector = slice(None)
+subsector = slice(None)
+product_category = slice(None)
+product = 'Electricity'
+flow_category = ['Final consumption']
+groupby = "Sector"
+nonenergyuse = ['N']
+
+fig = ((
+        energy_pathway.loc[
+            scenario,
+            region,
+            sector,
+            subsector,
+            product_category,
+            product,
+            slice(None),
+            flow_category, 
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            nonenergyuse
+        ].groupby([groupby]).sum()
+    ).loc[:, start_year:end_year]
+    * unit[1]
+).T
+
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(
+    fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0])
+
+fig = go.Figure()
+
+for sub in fig2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(fig2[groupby].unique())
+                    .set_index(0)
+                    .index.get_loc(sub)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+            fill="tonexty",
+            stackgroup="1",
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "Electricity Generation, "
+        + str(sector).replace("slice(None, None, None)", "All Sectors")
+        + ", "
+        + str(region).replace("slice(None, None, None)", "World"),
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "TFC, " + unit[0]},
+    margin_b=0,
+    margin_t=20,
+    margin_l=10,
+    margin_r=10,
+)
+
+if show_figs is True:
+    fig.show()
+# endregion
+
 ####################################
 # ELECTRICITY GENERATION BY SOURCE #
 ####################################
@@ -699,7 +869,7 @@ if show_figs is True:
 # region
 
 start_year = 1990
-end_year = 2020
+end_year = proj_end_year
 scenario = scenario
 region = slice(None)
 sector = slice(None)
@@ -727,8 +897,10 @@ fig = ((
         ].groupby([groupby]).sum()
     ).loc[:, start_year:end_year]
     * unit_val[1]
-).T
+)
 
+fig = fig[fig.sum(axis=1)!=0]
+fig = fig.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
 fig2 = pd.melt(
@@ -786,7 +958,7 @@ if show_figs is True:
 start_year = data_start_year
 end_year = proj_end_year
 scenario = scenario
-region = 'usa'
+region = 'canada'
 sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
@@ -832,61 +1004,58 @@ fig.index.name = "Year"
 fig.reset_index(inplace=True)
 fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long"], value_name="% Adoption")
 
-fig = go.Figure()
-
 for vertical in fig2['Sector'].unique():
-    for subvertical in fig2["Product_long"].unique(): 
-        # Make historical trace
-        fig.add_trace(
-        go.Scatter(
-            name="Historical",
-            line=dict(width=3, color="#B279A2"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == subvertical)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == subvertical)]["% Adoption"],
-            fill="none",
-            stackgroup="one",
-            legendgroup=subvertical,
-            showlegend=False,
-        )
-    )
 
+    fig = go.Figure()
+
+    for subvertical in fig2["Product_long"].unique(): 
         # Make projected trace
         fig.add_trace(
             go.Scatter(
                 name=subvertical,
-                line=dict(width=3, color=colors[
-                    pd.DataFrame(fig2['Sector'].unique())
-                    .set_index(0)
-                    .index.get_loc(subvertical)
+                line=dict(width=1, color=colors[
+                    pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(subvertical)
                 ]),
-                x=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == subvertical)]["Year"],
-                y=fig2[(fig2["Year"] <= 2020) & (fig2["Sector"] == subvertical)]["% Adoption"],
-                fill="none",
+                x=fig2[(fig2["Sector"] == vertical) & (fig2["Product_long"] == subvertical)]["Year"],
+                y=fig2[(fig2["Sector"] == vertical) & (fig2["Product_long"] == subvertical)]["% Adoption"],
+                fill="tonexty",
                 stackgroup="two",
                 legendgroup=subvertical,
-                showlegend=False,
+                showlegend=True,
             )
         )
-fig.update_layout(
-    title={
-        "text": "Percent of Total PD Adoption, " + region,
-        "xanchor": "center",
-        "x": 0.5,
-        "y": 0.99,
-    },
-    yaxis={"title": "% Adoption"},
-)
 
-fig.update_layout(
-    legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0, font=dict(size=10)),
-    margin_b=0,
-    margin_t=100,
-    margin_l=15,
-    margin_r=15,
-)
+        # Make historical trace
+        fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=1, color="#1c352d"),
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == vertical) & (fig2["Product_long"] == subvertical)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == vertical) & (fig2["Product_long"] == subvertical)]["% Adoption"],
+            stackgroup="one",
+            legendgroup=subvertical,
+            showlegend=False
+        )
+    )
 
-if show_figs is True:
-    fig.show()
+    fig.update_layout(
+        title={
+            "text": "Percent of Total Adoption, " + vertical + ", "
+            + str(region).replace("slice(None, None, None)", "World"),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "% Adoption"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+
+    if show_figs is True:
+        fig.show()
+    
 
 
 # endregion

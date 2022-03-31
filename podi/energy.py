@@ -2,26 +2,22 @@
 
 # region
 
-from multiprocessing.sharedctypes import Value
-from operator import index
-from re import sub
-from unicodedata import category
 import pandas as pd
 import numpy as np
-from numpy import NaN, float64, product
+from numpy import NaN
 from podi.adoption_curve_demand import adoption_curve_demand
 from podi.adoption_curve import adoption_curve
 from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
 import os
 
+pandarallel.initialize(nb_workers=8)
+
+# These are diagnostic files for adoption curve fitting and will be removed soon
 file = open("podi/data/y_data.csv", "w")
 file.close()
-
 file = open("podi/data/y_data2.csv", "w")
 file.close()
-
-pandarallel.initialize(nb_workers=8)
 
 # endregion
 
@@ -811,16 +807,10 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # Calculate 'upstream ratios' that scale down energy over time due to the lower energy required for fossil fuel/biofuel/bioenergy/uranium mining/transport/processing
     upstream_ratios = ef_ratios.copy()
 
-    # upstream_ratios.update(upstream_ratios[upstream_ratios.index.get_level_values(5) == "Y"].parallel_apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1).fillna(0))
-
-    upstream_ratios[upstream_ratios.index.get_level_values(5) == "Y"] = (
-        (
-            upstream_ratios[
-                upstream_ratios.index.get_level_values(5) == "Y"
-            ].parallel_apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1)
-        )
+    upstream_ratios.update(
+        upstream_ratios[upstream_ratios.index.get_level_values(5) == "Y"]
+        .parallel_apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1)
         .fillna(0)
-        .values
     )
 
     # Set upstream ratios in ef_ratios to 1 so upstream reduction is not double counted
@@ -890,7 +880,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # Isolate the energy that gets replaced with (a reduced amount of) energy from electricity. Each row of energy is multiplied by ((ef[0] - ef[i]) / (ef[0] - ef[-1]), which represents the percent of energy that undergoes electrification. This does not count preexisting electricity, except for nuclear, which is estimated to shift to renewables, and is treated in subsequent steps.
+    # Isolate the energy that gets replaced with (a reduced amount of) energy from electricity. Each row of energy is multiplied by ((ef[0] - ef[i]) / (ef[0] - ef[-1]), which represents the percent of energy that undergoes electrification in each year. This does not count preexisting electricity, except for nuclear, which is estimated to shift to renewables, and is treated in subsequent steps.
     energy_electrified = energy_post_addtl_eff.parallel_apply(
         lambda x: x.mul(
             (
@@ -1079,25 +1069,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     file = open("podi/data/adoption_curve_parameters.csv", "w")
     file.close()
 
-    """
     per_elec_supply.update(
-        per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
-        .parallel_apply(
-            lambda x: adoption_curve(
-                parameters.loc[x.name[1], x.name[6], scenario, x.name[2]],
-                x,
-                scenario,
-                data_start_year,
-                data_end_year,
-                proj_end_year,
-            ),
-            axis=1,
-        )
-        .clip(upper=1)
-    )
-    """
-
-    per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)] = (
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
@@ -1150,6 +1122,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Drop RELECTR now that it has been reallocated to the specific set of renewables
     elec_supply.drop(labels="RELECTR", level=6, inplace=True)
+    energy_post_electrification.drop(labels="RELECTR", level=6, inplace=True)
 
     # Recalculate percent of total consumption each technology meets
     per_elec_supply = elec_supply.parallel_apply(
