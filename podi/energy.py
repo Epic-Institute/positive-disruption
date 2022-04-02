@@ -796,8 +796,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # Calculate 'upstream ratios' that scale down energy over time due to the lower energy required for fossil fuel/biofuel/bioenergy/uranium mining/transport/processing. Note that not all upstream fossil energy is eliminiated, since some upstream energy is expected to remain to produce fossil fuel flows for non-energy use.
     upstream_ratios = ef_ratios.copy()
 
-    # For each fossil fuel product, find the proportion which goes towards non-energy use. This proportion of upstream energy is estimated to remain.
-
     upstream_ratios.update(
         upstream_ratios[upstream_ratios.index.get_level_values(5) == "Y"]
         .parallel_apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1)
