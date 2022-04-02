@@ -958,7 +958,7 @@ if show_figs is True:
 start_year = data_start_year
 end_year = proj_end_year
 scenario = scenario
-region = 'canada'
+region = 'usa'
 sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)

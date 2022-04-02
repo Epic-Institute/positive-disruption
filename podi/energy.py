@@ -539,11 +539,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Convert Electricity output flow category from GWh to TJ
-    # energy_historical.update(energy_historical[energy_historical.index.get_level_values(7) == "Electricity output"].multiply(3.6).values)
-
-    energy_historical[
-        energy_historical.index.get_level_values(7) == "Electricity output"
-    ] = (
+    energy_historical.update(
         energy_historical[
             energy_historical.index.get_level_values(7) == "Electricity output"
         ]
@@ -628,124 +624,117 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     # Calculate 'electrification factors' that scale down energy over time due to the lower energy required to produce an equivalent amount of work via electricity
-    recalc_ef_ratios = False
-    if recalc_ef_ratios is True:
 
-        # Load saturation points for energy reduction ratios
-        ef_ratio = (
-            pd.DataFrame(
-                pd.read_csv(
-                    "podi/data/tech_parameters.csv",
-                    usecols=[
-                        "Region",
-                        "Product",
-                        "Scenario",
-                        "Sector",
-                        "Metric",
-                        "Value",
-                    ],
-                ),
-            )
-            .set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
-            .loc[
-                energy_baseline.index.get_level_values(1).unique(),
-                [
-                    "biofuels_waste ef ratio",
-                    "biofuels_waste addtl eff",
-                    "coal ef ratio",
-                    "coal addtl eff",
-                    "electricity ef ratio",
-                    "electricity addtl eff",
-                    "heat ef ratio",
-                    "heat addtl eff",
-                    "hydrogen ef ratio",
-                    "na",
-                    "natural gas ef ratio",
-                    "natural gas addtl eff",
-                    "nuclear ef ratio",
-                    "oil ef ratio",
-                    "oil addtl eff",
-                    "wws heat ef ratio",
-                    "wws heat addtl eff",
+    # Load saturation points for energy reduction ratios
+    ef_ratio = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/tech_parameters.csv",
+                usecols=[
+                    "Region",
+                    "Product",
+                    "Scenario",
+                    "Sector",
+                    "Metric",
+                    "Value",
                 ],
-                scenario,
-                slice(None),
-                [
-                    "floor",
-                    "parameter a max",
-                    "parameter a min",
-                    "parameter b max",
-                    "parameter b min",
-                    "saturation point",
-                ],
-            ]
-        ).sort_index()
-
-        parameters = ef_ratio
-
-        ef_ratio = ef_ratio[ef_ratio.index.get_level_values(4) == "floor"].sort_index()
-
-        file.close()
-        # Run adoption_curve_demand() to calculate logistics curves for energy reduction ratios
-        ef_ratio.parallel_apply(
-            lambda x: adoption_curve_demand(
-                parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
-                x,
-                scenario,
-                data_start_year,
-                data_end_year,
-                proj_end_year,
             ),
+        )
+        .set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
+        .loc[
+            energy_baseline.index.get_level_values(1).unique(),
+            [
+                "biofuels_waste ef ratio",
+                "biofuels_waste addtl eff",
+                "coal ef ratio",
+                "coal addtl eff",
+                "electricity ef ratio",
+                "electricity addtl eff",
+                "heat ef ratio",
+                "heat addtl eff",
+                "hydrogen ef ratio",
+                "na",
+                "natural gas ef ratio",
+                "natural gas addtl eff",
+                "nuclear ef ratio",
+                "oil ef ratio",
+                "oil addtl eff",
+                "wws heat ef ratio",
+                "wws heat addtl eff",
+            ],
+            scenario,
+            slice(None),
+            [
+                "floor",
+                "parameter a max",
+                "parameter a min",
+                "parameter b max",
+                "parameter b min",
+                "saturation point",
+            ],
+        ]
+    ).sort_index()
+
+    parameters = ef_ratio
+
+    ef_ratio = ef_ratio[ef_ratio.index.get_level_values(4) == "floor"].sort_index()
+
+    # Clear adoption curve demand file before running adoption_curve_demand()
+    file = open("podi/data/energy_adoption_curves.csv", "w")
+    file.close()
+
+    # Run adoption_curve_demand() to calculate logistics curves for energy reduction ratios
+    ef_ratio.parallel_apply(
+        lambda x: adoption_curve_demand(
+            parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
+            x,
+            scenario,
+            data_start_year,
+            data_end_year,
+            proj_end_year,
+        ),
+        axis=1,
+    )
+
+    ef_ratios = (
+        pd.DataFrame(pd.read_csv("podi/data/energy_adoption_curves.csv", header=None))
+        .set_axis(
+            pd.concat(
+                [
+                    pd.DataFrame(
+                        np.array(["Region", "Product", "Scenario", "Sector"])
+                    ).T,
+                    pd.DataFrame(
+                        np.linspace(
+                            data_end_year,
+                            proj_end_year,
+                            proj_end_year - data_end_year + 1,
+                        ).astype(int)
+                    ).T,
+                ],
+                axis=1,
+            ).squeeze(),
             axis=1,
         )
+        .set_index(["Region", "Sector", "Product", "Scenario"])
+    )
 
-        ef_ratios = (
-            pd.DataFrame(
-                pd.read_csv("podi/data/energy_adoption_curves.csv", header=None)
-            )
-            .set_axis(
-                pd.concat(
-                    [
-                        pd.DataFrame(
-                            np.array(["Region", "Product", "Scenario", "Sector"])
-                        ).T,
-                        pd.DataFrame(
-                            np.linspace(
-                                data_end_year,
-                                proj_end_year,
-                                proj_end_year - data_end_year + 1,
-                            ).astype(int)
-                        ).T,
-                    ],
-                    axis=1,
-                ).squeeze(),
-                axis=1,
-            )
-            .set_index(["Region", "Sector", "Product", "Scenario"])
+    # Prepare df for multiplication with energy
+    ef_ratios = ef_ratios.parallel_apply(
+        lambda x: 1 - (1 - x.max()) * (x - x.min()) / x.max(), axis=1
+    )
+
+    ef_ratios = (
+        pd.DataFrame(
+            1,
+            index=ef_ratios.index,
+            columns=np.arange(data_start_year, data_end_year, 1),
         )
+    ).join(ef_ratios)
+    ef_ratios = ef_ratios.loc[:, : energy_baseline.columns[-1]]
+    ef_ratios = ef_ratios.sort_index()
 
-        # Prepare df for multiplication with energy
-        ef_ratios = ef_ratios.parallel_apply(
-            lambda x: 1 - (1 - x.max()) * (x - x.min()) / x.max(), axis=1
-        )
-
-        ef_ratios = (
-            pd.DataFrame(
-                1,
-                index=ef_ratios.index,
-                columns=np.arange(data_start_year, data_end_year, 1),
-            )
-        ).join(ef_ratios)
-        ef_ratios = ef_ratios.loc[:, : energy_baseline.columns[-1]]
-        ef_ratios = ef_ratios.sort_index()
-
-        ef_ratios.to_csv("podi/data/ef_ratios.csv")
-    else:
-        ef_ratios = pd.DataFrame(pd.read_csv("podi/data/ef_ratios.csv")).set_index(
-            ["Region", "Sector", "Product", "Scenario"]
-        )
-
-    ef_ratios.columns = ef_ratios.columns.astype(int)
+    ef_ratios.to_csv("podi/data/ef_ratios.csv")
 
     # Add labels to ef_ratios
     labels = (
@@ -804,8 +793,10 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # Remove duplicate indices
     ef_ratios = ef_ratios[~ef_ratios.index.duplicated()]
 
-    # Calculate 'upstream ratios' that scale down energy over time due to the lower energy required for fossil fuel/biofuel/bioenergy/uranium mining/transport/processing
+    # Calculate 'upstream ratios' that scale down energy over time due to the lower energy required for fossil fuel/biofuel/bioenergy/uranium mining/transport/processing. Note that not all upstream fossil energy is eliminiated, since some upstream energy is expected to remain to produce fossil fuel flows for non-energy use.
     upstream_ratios = ef_ratios.copy()
+
+    # For each fossil fuel product, find the proportion which goes towards non-energy use. This proportion of upstream energy is estimated to remain.
 
     upstream_ratios.update(
         upstream_ratios[upstream_ratios.index.get_level_values(5) == "Y"]
