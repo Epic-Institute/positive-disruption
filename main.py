@@ -57,15 +57,15 @@ if recalc_energy is True:
         "Non-Energy Use",
     ]
 
-    energy_pathway = pd.DataFrame(
-        pd.read_csv("podi/data/energy_" + scenario + ".csv")
-    ).set_index(index)
-    energy_pathway.columns = energy_pathway.columns.astype(int)
-
     energy_baseline = pd.DataFrame(
         pd.read_csv("podi/data/energy_baseline.csv")
     ).set_index(index)
     energy_baseline.columns = energy_baseline.columns.astype(int)
+
+    energy_pathway = pd.DataFrame(
+        pd.read_csv("podi/data/energy_" + scenario + ".csv")
+    ).set_index(index)
+    energy_pathway.columns = energy_pathway.columns.astype(int)
 
     energy_percent = pd.DataFrame(
         pd.read_csv("podi/data/energy_percent.csv")
@@ -94,6 +94,11 @@ else:
         "Non-Energy Use",
     ]
 
+    energy_baseline = pd.DataFrame(
+        pd.read_csv("podi/data/energy_baseline.csv")
+    ).set_index(index)
+    energy_baseline.columns = energy_baseline.columns.astype(int)
+
     energy_pathway = pd.DataFrame(
         pd.read_csv("podi/data/energy_" + scenario + ".csv")
     ).set_index(index)
@@ -103,6 +108,11 @@ else:
         pd.read_csv("podi/data/energy_percent.csv")
     ).set_index(index)
     energy_percent.columns = energy_percent.columns.astype(int)
+
+    energy_electrified = pd.DataFrame(
+        pd.read_csv("podi/data/energy_electrified.csv")
+    ).set_index(index)
+    energy_electrified.columns = energy_electrified.columns.astype(int)
 
 # endregion
 

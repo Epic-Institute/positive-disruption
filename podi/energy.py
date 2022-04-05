@@ -1109,26 +1109,18 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Update product 'Electricity', representing Electricity consumption, which increases by RELECTR
     energy_post_electrification[
-        (energy_post_electrification.index.get_level_values(7) == "Electricity")
+        (energy_post_electrification.index.get_level_values(5) == "Electricity")
         & (energy_post_electrification.index.get_level_values(7) == "Final consumption")
-    ].update(
+    ].update(pd.concat([
         energy_post_electrification[
-            (energy_post_electrification.index.get_level_values(7) == "Electricity")
-            & (
-                energy_post_electrification.index.get_level_values(7)
-                == "Final consumption"
-            )
+            energy_post_electrification.index.get_level_values(5) == "Electricity"
         ]
         + energy_post_electrification[
             (
-                energy_post_electrification.index.get_level_values(7)
+                energy_post_electrification.index.get_level_values(5)
                 == "Renewable Electricity"
             )
-            & (
-                energy_post_electrification.index.get_level_values(7)
-                == "Final consumption"
-            )
-        ]
+        ]].groupby([]).sum()
     )
 
     # Drop RELECTR now that it has been reallocated to the specific set of renewables

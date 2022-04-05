@@ -623,7 +623,7 @@ subsector = slice(None)
 product_category = slice(None)
 flow_category = ['Final consumption']
 groupby = "Product_category"
-nonenergyuse = ['N']
+nonenergyuse = ['Y','N']
 
 fig = ((
         df.loc[
@@ -920,7 +920,7 @@ if show_figs is True:
 start_year = 1990
 end_year = 2050
 df = pd.concat([energy_pathway, energy_baseline])
-scenario = 'pathway'
+scenario = 'baseline'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
