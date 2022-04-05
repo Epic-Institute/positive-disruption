@@ -23,8 +23,8 @@ from podi.energy import energy
 
 pd.options.display.float_format = "{:,.0f}".format
 
-unit_name = ["TJ", "TWh"]
-unit_val = [1, 0.0002777]
+unit_name = ["TJ", "TWh", "GW"]
+unit_val = [1, 0.0002777, 0.2777/8760]
 unit = [unit_name[0], unit_val[0]]
 
 save_figs = True
@@ -607,6 +607,136 @@ energy_balance
 
 # endregion
 
+#################################################
+# TOTAL FINAL CONSUMPTION BY SOURCE (GW) WEDGES #
+#################################################
+
+# region
+
+start_year = 1990
+end_year = 2050
+df = pd.concat([energy_pathway, energy_baseline])
+scenario = 'pathway'
+region = slice(None)
+sector = slice(None)
+subsector = slice(None)
+product_category = slice(None)
+flow_category = ['Final consumption']
+groupby = "Product_category"
+nonenergyuse = ['N']
+
+fig = ((
+        df.loc[
+            scenario,
+            region,
+            sector,
+            subsector,
+            product_category,
+            slice(None),
+            slice(None),
+            flow_category, 
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            nonenergyuse
+        ].groupby([groupby]).sum()
+    ).loc[:, start_year:end_year]
+    * unit_val[2]
+).T
+
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(
+    fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit_name[2])
+
+bwedges = ((
+        energy_electrified.loc[
+            scenario,
+            region,
+            sector,
+            subsector,
+            product_category,
+            slice(None),
+            slice(None),
+            flow_category, 
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            nonenergyuse
+        ].groupby([groupby]).sum()
+    ).loc[:, start_year:end_year]
+    * unit_val[2]
+).T
+
+bwedges.index.name = "Year"
+bwedges.reset_index(inplace=True)
+bwedges2 = pd.melt(
+    bwedges, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit_name[2])
+
+fig = go.Figure()
+
+for sub in fig2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name=sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(fig2[groupby].unique())
+                    .set_index(0)
+                    .index.get_loc(sub)
+                ],
+            ),
+            x=fig2["Year"],
+            y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[2]],
+            fill="tonexty",
+            stackgroup="1",
+        )
+    )
+
+for sub in bwedges2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name="Avoided use of " + sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(bwedges2[groupby].unique())
+                    .set_index(0)
+                    .index.get_loc(sub)+7],
+            ),
+            x=bwedges2["Year"],
+            y=bwedges2[bwedges2[groupby] == sub]["TFC, " + unit_name[2]],
+            fill="tonexty",
+            stackgroup="1",
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "Total Final Consumption, "
+        + str(sector).replace("slice(None, None, None)", "All Sectors")
+        + ", "
+        + str(region).replace("slice(None, None, None)", "World")+ ", "
+        + str(scenario).capitalize(),
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "TFC, " + unit_name[2]},
+    margin_b=0,
+    margin_t=20,
+    margin_l=10,
+    margin_r=10,
+)
+
+if show_figs is True:
+    fig.show()
+
+# endregion
+
 #####################################
 # TOTAL FINAL CONSUMPTION BY SOURCE #
 #####################################
@@ -614,8 +744,9 @@ energy_balance
 # region
 
 start_year = 1990
-end_year = 2020
-scenario = scenario
+end_year = 2050
+df = pd.concat([energy_pathway, energy_baseline])
+scenario = 'pathway'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
@@ -625,7 +756,7 @@ groupby = "Product_category"
 nonenergyuse = ['Y','N']
 
 fig = ((
-        energy_pathway.loc[
+        df.loc[
             scenario,
             region,
             sector,
@@ -675,7 +806,8 @@ fig.update_layout(
         "text": "Total Final Consumption, "
         + str(sector).replace("slice(None, None, None)", "All Sectors")
         + ", "
-        + str(region).replace("slice(None, None, None)", "World"),
+        + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+        + str(scenario).capitalize(),
         "xanchor": "center",
         "x": 0.5,
         "y": 0.99,
@@ -699,8 +831,9 @@ if show_figs is True:
 # region
 
 start_year = 1990
-end_year = 2020
-scenario = scenario
+end_year = 2050
+df = pd.concat([energy_pathway, energy_baseline])
+scenario = 'baseline'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
@@ -710,7 +843,7 @@ groupby = "Sector"
 nonenergyuse = ['Y','N']
 
 fig = ((
-        energy_pathway.loc[
+        df.loc[
             scenario,
             region,
             sector,
@@ -758,9 +891,10 @@ for sub in fig2[groupby].unique():
 fig.update_layout(
     title={
         "text": "Total Final Consumption, "
-        + str(sector).replace("slice(None, None, None)", "All Sectors")
+        + str(product_category).replace("slice(None, None, None)", "All Sources")
         + ", "
-        + str(region).replace("slice(None, None, None)", "World"),
+        + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+        + str(scenario).capitalize(),
         "xanchor": "center",
         "x": 0.5,
         "y": 0.99,
@@ -784,8 +918,9 @@ if show_figs is True:
 # region
 
 start_year = 1990
-end_year = 2020
-scenario = scenario
+end_year = 2050
+df = pd.concat([energy_pathway, energy_baseline])
+scenario = 'pathway'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
@@ -796,7 +931,7 @@ groupby = "Sector"
 nonenergyuse = ['N']
 
 fig = ((
-        energy_pathway.loc[
+        df.loc[
             scenario,
             region,
             sector,
@@ -812,13 +947,13 @@ fig = ((
             nonenergyuse
         ].groupby([groupby]).sum()
     ).loc[:, start_year:end_year]
-    * unit[1]
+    * unit_val[1]
 ).T
 
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
 fig2 = pd.melt(
-    fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit[0])
+    fig, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit_name[1])
 
 fig = go.Figure()
 
@@ -835,7 +970,7 @@ for sub in fig2[groupby].unique():
                 ],
             ),
             x=fig2["Year"],
-            y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+            y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
             fill="tonexty",
             stackgroup="1",
         )
@@ -843,15 +978,16 @@ for sub in fig2[groupby].unique():
 
 fig.update_layout(
     title={
-        "text": "Electricity Generation, "
+        "text": "Electricity Consumption, "
         + str(sector).replace("slice(None, None, None)", "All Sectors")
         + ", "
-        + str(region).replace("slice(None, None, None)", "World"),
+        + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+        + str(scenario).capitalize(),
         "xanchor": "center",
         "x": 0.5,
         "y": 0.99,
     },
-    yaxis={"title": "TFC, " + unit[0]},
+    yaxis={"title": "TFC, " + unit_name[1]},
     margin_b=0,
     margin_t=20,
     margin_l=10,
@@ -870,7 +1006,8 @@ if show_figs is True:
 
 start_year = 1990
 end_year = proj_end_year
-scenario = scenario
+df = pd.concat([energy_pathway, energy_baseline])
+scenario = 'pathway'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
@@ -880,7 +1017,7 @@ groupby = "Product_long"
 nonenergyuse = ['N']
 
 fig = ((
-        energy_pathway.loc[
+        df.loc[
             scenario,
             region,
             sector,
@@ -932,7 +1069,8 @@ fig.update_layout(
         "text": "Electricity Generation, "
         + str(sector).replace("slice(None, None, None)", "All Sectors")
         + ", "
-        + str(region).replace("slice(None, None, None)", "World"),
+        + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+        + str(scenario).capitalize(),
         "xanchor": "center",
         "x": 0.5,
         "y": 0.99,
@@ -1041,7 +1179,8 @@ for vertical in fig2['Sector'].unique():
     fig.update_layout(
         title={
             "text": "Percent of Total Adoption, " + vertical + ", "
-            + str(region).replace("slice(None, None, None)", "World"),
+            + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+        + str(scenario).capitalize(),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,

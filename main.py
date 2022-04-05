@@ -62,10 +62,20 @@ if recalc_energy is True:
     ).set_index(index)
     energy_pathway.columns = energy_pathway.columns.astype(int)
 
+    energy_baseline = pd.DataFrame(
+        pd.read_csv("podi/data/energy_baseline.csv")
+    ).set_index(index)
+    energy_baseline.columns = energy_baseline.columns.astype(int)
+
     energy_percent = pd.DataFrame(
         pd.read_csv("podi/data/energy_percent.csv")
     ).set_index(index)
     energy_percent.columns = energy_percent.columns.astype(int)
+
+    energy_electrified = pd.DataFrame(
+        pd.read_csv("podi/data/energy_electrified.csv")
+    ).set_index(index)
+    energy_electrified.columns = energy_electrified.columns.astype(int)
 
 else:
     index = [

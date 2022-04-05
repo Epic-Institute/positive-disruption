@@ -542,9 +542,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     energy_historical.update(
         energy_historical[
             energy_historical.index.get_level_values(7) == "Electricity output"
-        ]
-        .multiply(3.6)
-        .values
+        ].multiply(3.6)
     )
 
     # endregion
@@ -1107,6 +1105,30 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ),
             axis=1,
         )
+    )
+
+    # Update product 'Electricity', representing Electricity consumption, which increases by RELECTR
+    energy_post_electrification[
+        (energy_post_electrification.index.get_level_values(7) == "Electricity")
+        & (energy_post_electrification.index.get_level_values(7) == "Final consumption")
+    ].update(
+        energy_post_electrification[
+            (energy_post_electrification.index.get_level_values(7) == "Electricity")
+            & (
+                energy_post_electrification.index.get_level_values(7)
+                == "Final consumption"
+            )
+        ]
+        + energy_post_electrification[
+            (
+                energy_post_electrification.index.get_level_values(7)
+                == "Renewable Electricity"
+            )
+            & (
+                energy_post_electrification.index.get_level_values(7)
+                == "Final consumption"
+            )
+        ]
     )
 
     # Drop RELECTR now that it has been reallocated to the specific set of renewables

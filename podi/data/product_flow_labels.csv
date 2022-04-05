@@ -787,12 +787,12 @@ HEAT,ECOKEOVS,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,
 HEAT,ECOKEOVS,Industrial,High Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
 HEAT,EGASWKS,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
 HEAT,EGASWKS,Industrial,High Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
-HEAT,ELAUTOC,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
-HEAT,ELAUTOC,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
-HEAT,ELAUTOE,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
-HEAT,ELAUTOE,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
-HEAT,ELMAINC,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
-HEAT,ELMAINC,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
 HEAT,ELMAINE,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 HEAT,ELMAINE,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 HEAT,ELNG,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
