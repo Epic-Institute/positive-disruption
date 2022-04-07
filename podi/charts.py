@@ -621,7 +621,7 @@ region = slice(None)
 sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
-flow_category = ['Final consumption']
+flow_category = ['Final consumption', 'Supply']
 groupby = "Product_category"
 nonenergyuse = ['Y','N']
 
@@ -675,6 +675,57 @@ bwedges.reset_index(inplace=True)
 bwedges2 = pd.melt(
     bwedges, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit_name[2])
 
+addtleffwedges = ((
+        (energy_post_upstream - energy_post_addtl_eff).loc[
+            scenario,
+            region,
+            sector,
+            subsector,
+            product_category,
+            slice(None),
+            slice(None),
+            flow_category, 
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            nonenergyuse
+        ].groupby([groupby]).sum()
+    ).loc[:, start_year:end_year]
+    * unit_val[2]
+).T
+
+addtleffwedges.index.name = "Year"
+addtleffwedges.reset_index(inplace=True)
+addtleffwedges2 = pd.melt(
+    addtleffwedges, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit_name[2])
+
+upstreamwedges = ((
+        (energy_post_upstream - energy_baseline).loc[
+            scenario,
+            region,
+            sector,
+            subsector,
+            product_category,
+            slice(None),
+            slice(None),
+            flow_category, 
+            slice(None),
+            slice(None),
+            slice(None),
+            slice(None),
+            nonenergyuse
+        ].groupby([groupby]).sum()
+    ).loc[:, start_year:end_year]
+    * unit_val[2]
+).T
+
+upstreamwedges.index.name = "Year"
+upstreamwedges.reset_index(inplace=True)
+upstreamwedges2 = pd.melt(
+    upstreamwedges, id_vars="Year", var_name=[groupby], value_name="TFC, " + unit_name[2])
+
+
 fig = go.Figure()
 
 for sub in fig2[groupby].unique():
@@ -709,6 +760,42 @@ for sub in bwedges2[groupby].unique():
             ),
             x=bwedges2["Year"],
             y=bwedges2[bwedges2[groupby] == sub]["TFC, " + unit_name[2]],
+            fill="tonexty",
+            stackgroup="1",
+        )
+    )
+
+for sub in addtleffwedges2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name="Efficiency reduction of " + sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(addtleffwedges2[groupby].unique())
+                    .set_index(0)
+                    .index.get_loc(sub)+14],
+            ),
+            x=addtleffwedges2["Year"],
+            y=addtleffwedges2[addtleffwedges2[groupby] == sub]["TFC, " + unit_name[2]],
+            fill="tonexty",
+            stackgroup="1",
+        )
+    )
+
+for sub in upstreamwedges2[groupby].unique():
+    fig.add_trace(
+        go.Scatter(
+            name="Avoided use of upstream " + sub,
+            line=dict(
+                width=0.5,
+                color=colors[
+                    pd.DataFrame(upstreamwedges2[groupby].unique())
+                    .set_index(0)
+                    .index.get_loc(sub)+21],
+            ),
+            x=upstreamwedges2["Year"],
+            y=upstreamwedges2[upstreamwedges2[groupby] == sub]["TFC, " + unit_name[2]],
             fill="tonexty",
             stackgroup="1",
         )
@@ -751,9 +838,9 @@ region = slice(None)
 sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
-flow_category = ['Final consumption']
-groupby = "Product_category"
-nonenergyuse = ['Y','N']
+flow_category = ['Final consumption', 'Supply']
+groupby = "Product_long"
+nonenergyuse = ['Y', 'N']
 
 fig = ((
         df.loc[
@@ -833,12 +920,12 @@ if show_figs is True:
 start_year = 1990
 end_year = 2050
 df = pd.concat([energy_pathway, energy_baseline])
-scenario = 'baseline'
+scenario = 'pathway'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
-flow_category = ['Final consumption']
+flow_category = ['Final consumption', 'Supply']
 groupby = "Sector"
 nonenergyuse = ['Y','N']
 
@@ -920,14 +1007,14 @@ if show_figs is True:
 start_year = 1990
 end_year = 2050
 df = pd.concat([energy_pathway, energy_baseline])
-scenario = 'baseline'
+scenario = 'pathway'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
 product = 'Electricity'
-flow_category = ['Final consumption']
-groupby = "Sector"
+flow_category = ['Final consumption', 'Supply']
+groupby = "Flow_long" # 'Sector' for sectors, 'Flow_long' for subsectors
 nonenergyuse = ['N']
 
 fig = ((
@@ -1007,7 +1094,7 @@ if show_figs is True:
 start_year = 1990
 end_year = proj_end_year
 df = pd.concat([energy_pathway, energy_baseline])
-scenario = 'pathway'
+scenario = 'baseline'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
@@ -1096,7 +1183,7 @@ if show_figs is True:
 start_year = data_start_year
 end_year = proj_end_year
 scenario = scenario
-region = 'usa'
+region = slice(None)
 sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)

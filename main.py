@@ -77,6 +77,16 @@ if recalc_energy is True:
     ).set_index(index)
     energy_electrified.columns = energy_electrified.columns.astype(int)
 
+    energy_post_upstream = pd.DataFrame(
+        pd.read_csv("podi/data/energy_post_upstream.csv")
+    ).set_index(index)
+    energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
+
+    energy_post_addtl_eff = pd.DataFrame(
+        pd.read_csv("podi/data/energy_post_addtl_eff.csv")
+    ).set_index(index)
+    energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
+
 else:
     index = [
         "Scenario",
@@ -113,6 +123,16 @@ else:
         pd.read_csv("podi/data/energy_electrified.csv")
     ).set_index(index)
     energy_electrified.columns = energy_electrified.columns.astype(int)
+
+    energy_post_upstream = pd.DataFrame(
+        pd.read_csv("podi/data/energy_post_upstream.csv")
+    ).set_index(index)
+    energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
+
+    energy_post_addtl_eff = pd.DataFrame(
+        pd.read_csv("podi/data/energy_post_addtl_eff.csv")
+    ).set_index(index)
+    energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
 # endregion
 

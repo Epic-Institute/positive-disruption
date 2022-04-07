@@ -787,12 +787,6 @@ HEAT,ECOKEOVS,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,
 HEAT,ECOKEOVS,Industrial,High Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
 HEAT,EGASWKS,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
 HEAT,EGASWKS,Industrial,High Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
 HEAT,ELMAINE,Industrial,Low Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 HEAT,ELMAINE,Industrial,High Temperature,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 HEAT,ELNG,Industrial,Low Temperature,Total,heat ef ratio,Y,heat addtl eff,N,Y,N,N,N
@@ -1588,7 +1582,7 @@ NONBIOJETK,TREFINER,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,
 NONBIOJETK,TRNONSPE,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOJETK,WORLDAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIOJETK,WORLDMAR,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
-NONCRUDE,DISTLOSS,Industrial,Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,DISTLOSS,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,DISTLOSS,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONCRUDE,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -1600,11 +1594,11 @@ NONCRUDE,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONCRUDE,ONONSPEC,Industrial,na,Total,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONCRUDE,TCOALLIQ,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,N,N,N,N
 NONCRUDE,TCOKEOVS,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,N,N,N,N
-NONCRUDE,TGTL,Industrial,Hydrogen,Liquid fuels,natural gas ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,TGTL,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,TGTL,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,N,N,N,N
-NONCRUDE,TNONSPEC,Industrial,Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,TNONSPEC,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,TNONSPEC,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONCRUDE,TREFINER,Industrial,Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,TREFINER,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,TREFINER,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NUCLEAR,AUTOCHP,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 NUCLEAR,AUTOELEC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
@@ -2477,3 +2471,28 @@ WHITESP,TPETCHEM,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N
 WHITESP,TRANSEQ,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 WHITESP,TREFINER,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 WHITESP,WORLDMAR,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,NECHEM,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,EREFINER,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,IRONSTL,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,DOMESAIR,Transportation,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,DOMESNAV,Transportation,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,WORLDAV,Transportation,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,WORLDMAR,Transportation,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,AVBUNK,Transportation,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,MARBUNK,Transportation,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,NECHEM,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,EREFINER,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,IRONSTL,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,DOMESAIR,Transportation,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,DOMESNAV,Transportation,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,WORLDAV,Transportation,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,WORLDMAR,Transportation,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,AVBUNK,Transportation,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+NONCRUDE,MARBUNK,Transportation,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+HYDROGEN,DOMESAIR,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+HYDROGEN,DOMESNAV,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+HYDROGEN,NECHEM,Industrial,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+HYDROGEN,IRONSTL,Industrial,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+HYDROGEN,AVBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+HYDROGEN,MARBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
+HYDROGEN,EREFINER,Industrial,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N

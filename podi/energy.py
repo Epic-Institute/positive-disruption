@@ -305,7 +305,14 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             slice(None),
             scenario,
             slice(None),
-            ["Two- and three-wheeled", "Light", "Medium", "Heavy"],
+            [
+                "Two- and three-wheeled",
+                "Light",
+                "Medium",
+                "Heavy",
+                "Hydrogen",
+                "Non-Hydrogen",
+            ],
         ]
     )
 
@@ -544,6 +551,13 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             energy_historical.index.get_level_values(7) == "Electricity output"
         ].multiply(3.6)
     )
+
+    # Convert AVBUNK & AVMAR to be positive (they were negative by convention representing an 'export' to an international region WORLDAV and WORLDMAR)
+    energy_historical[
+        energy_historical.index.get_level_values(9).isin(["AVBUNK", "MARBUNK"])
+    ] = energy_historical[
+        energy_historical.index.get_level_values(9).isin(["AVBUNK", "MARBUNK"])
+    ].abs()
 
     # endregion
 
@@ -906,12 +920,33 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
-    # Find the electrical energy from Nuclear assumed to shift to renewables
+    # Find the electrical energy from fossil fuels assumed to shift to renewables
+    renewables = [
+        "GEOTHERM",
+        "HYDRO",
+        "ROOFTOP",
+        "SOLARPV",
+        "SOLARTH",
+        "OFFSHORE",
+        "ONSHORE",
+        "TIDE",
+    ]
+
     energy_reduced_electrified = pd.concat(
         [
             energy_reduced_electrified,
-            energy_electrified[
-                energy_electrified.index.get_level_values(5) == "Nuclear"
+            energy_baseline[
+                ~energy_baseline.index.get_level_values(6).isin(renewables)
+            ].loc[
+                slice(None),
+                slice(None),
+                slice(None),
+                slice(None),
+                slice(None),
+                slice(None),
+                slice(None),
+                ["Electricity output"],
+                :,
             ],
         ]
     )
@@ -1010,18 +1045,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     #####################################
 
     # region
-
-    renewables = [
-        "GEOTHERM",
-        "HYDRO",
-        "ROOFTOP",
-        "SOLARPV",
-        "SOLARTH",
-        "OFFSHORE",
-        "ONSHORE",
-        "TIDE",
-    ]
-
     # For each region, find the percent of total electricity consumption met by each renewable product.
     elec_supply = energy_post_electrification.loc[
         [scenario],
@@ -1057,8 +1080,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     file.close()
 
     per_elec_supply.update(
-        per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
-        .parallel_apply(
+        per_elec_supply[
+            per_elec_supply.index.get_level_values(6).isin(renewables)
+        ].parallel_apply(
             lambda x: adoption_curve(
                 parameters.loc[x.name[1], x.name[6], scenario, x.name[2]],
                 x,
@@ -1069,21 +1093,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ),
             axis=1,
         )
-        .clip(upper=1)
-    )
-
-    # Add RELECTR (which represents electrified energy that replaces fossil fuels) to elec_supply
-    elec_supply = pd.concat(
-        [
-            elec_supply,
-            energy_post_electrification[
-                (energy_post_electrification.index.get_level_values(6) == "RELECTR")
-                & (
-                    energy_post_electrification.index.get_level_values(7)
-                    == "Electricity output"
-                )
-            ],
-        ]
+        # .clip(upper=1)
     )
 
     # Set renewables generation to meet RELECTR in the proportion estimated by adoption_curve()
@@ -1105,22 +1115,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ),
             axis=1,
         )
-    )
-
-    # Update product 'Electricity', representing Electricity consumption, which increases by RELECTR
-    energy_post_electrification[
-        (energy_post_electrification.index.get_level_values(5) == "Electricity")
-        & (energy_post_electrification.index.get_level_values(7) == "Final consumption")
-    ].update(pd.concat([
-        energy_post_electrification[
-            energy_post_electrification.index.get_level_values(5) == "Electricity"
-        ]
-        + energy_post_electrification[
-            (
-                energy_post_electrification.index.get_level_values(5)
-                == "Renewable Electricity"
-            )
-        ]].groupby([]).sum()
     )
 
     # Drop RELECTR now that it has been reallocated to the specific set of renewables
