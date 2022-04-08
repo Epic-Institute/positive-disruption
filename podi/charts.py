@@ -1224,7 +1224,7 @@ industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, prod
     ).fillna(0).groupby(['Sector','Product_long']).sum()
 
 
-fig = pd.concat([electricity, transport, buildings, industry]).T * 100
+fig = pd.concat([electricity, transport, buildings, industry]).T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
 fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long"], value_name="% Adoption")
