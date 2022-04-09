@@ -4,17 +4,17 @@ ADDITIVE,NONENUSE,Industrial,na,Total,na,N,na,N,N,N,N,Y
 ADDITIVE,TREFINER,Industrial,na,Total,na,N,na,Y,Y,N,N,Y
 ANTCOAL,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 ANTCOAL,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-ANTCOAL,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+ANTCOAL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ANTCOAL,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 ANTCOAL,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 ANTCOAL,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
 ANTCOAL,CONSTRUC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 ANTCOAL,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 ANTCOAL,ECOKEOVS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
-ANTCOAL,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-ANTCOAL,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-ANTCOAL,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-ANTCOAL,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+ANTCOAL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+ANTCOAL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+ANTCOAL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+ANTCOAL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ANTCOAL,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 ANTCOAL,EPATFUEL,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
 ANTCOAL,EPOWERPLT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -27,7 +27,7 @@ ANTCOAL,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 ANTCOAL,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 ANTCOAL,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 ANTCOAL,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-ANTCOAL,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+ANTCOAL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ANTCOAL,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 ANTCOAL,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 ANTCOAL,NECHEM,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -74,7 +74,7 @@ AVGAS,TRNONSPE,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N
 AVGAS,WORLDAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 BIODIESEL,AGRICULT,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 BIODIESEL,AUTOCHP,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-BIODIESEL,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BIODIESEL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIODIESEL,AVBUNK,Transportation,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 BIODIESEL,CHEMICAL,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 BIODIESEL,COMMPUB,Commercial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,Y,N
@@ -82,10 +82,10 @@ BIODIESEL,CONSTRUC,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels
 BIODIESEL,DISTLOSS,Transportation,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,N,N
 BIODIESEL,DOMESNAV,Transportation,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,Y,Y,N
 BIODIESEL,EBLASTFUR,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,Y,Y,N
-BIODIESEL,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BIODIESEL,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BIODIESEL,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BIODIESEL,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BIODIESEL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIODIESEL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIODIESEL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIODIESEL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIODIESEL,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 BIODIESEL,ENONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BIODIESEL,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -100,7 +100,7 @@ BIODIESEL,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N
 BIODIESEL,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 BIODIESEL,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 BIODIESEL,MAINCHP,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-BIODIESEL,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BIODIESEL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIODIESEL,MARBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,biofuels_waste addtl eff,N,N,Y,Y,N
 BIODIESEL,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BIODIESEL,NONFERR,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -126,7 +126,7 @@ BIODIESEL,WORLDAV,Transportation,na,Liquid fuels,biofuels_waste ef ratio,N,biofu
 BIODIESEL,WORLDMAR,Transportation,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,Y,Y,N
 BIOGASES,AGRICULT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BIOGASES,AUTOCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-BIOGASES,AUTOELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+BIOGASES,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIOGASES,AUTOHEAT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 BIOGASES,CHEMICAL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BIOGASES,COMMPUB,Commercial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,Y,N
@@ -134,10 +134,10 @@ BIOGASES,CONSTRUC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas a
 BIOGASES,DISTLOSS,Transportation,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 BIOGASES,EBIOGAS,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
 BIOGASES,EGASWKS,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
-BIOGASES,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-BIOGASES,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-BIOGASES,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-BIOGASES,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+BIOGASES,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIOGASES,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIOGASES,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIOGASES,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIOGASES,ENONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BIOGASES,EPOWERPLT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 BIOGASES,EREFINER,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
@@ -150,7 +150,7 @@ BIOGASES,INONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas a
 BIOGASES,IRONSTL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 BIOGASES,MACHINE,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 BIOGASES,MAINCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-BIOGASES,MAINELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+BIOGASES,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIOGASES,MAINHEAT,Industrial,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 BIOGASES,MINING,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BIOGASES,NONFERR,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
@@ -171,22 +171,22 @@ BIOGASES,TRANSEQ,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas ad
 BIOGASES,TRNONSPE,Transportation,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 BIOGASES,WOODPRO,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 BIOGASOL,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
-BIOGASOL,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BIOGASOL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIOGASOL,CHEMICAL,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 BIOGASOL,COMMPUB,Commercial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,Y,N
 BIOGASOL,CONSTRUC,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 BIOGASOL,DISTLOSS,Transportation,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,N,N
 BIOGASOL,DOMESNAV,Transportation,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,Y,Y,N
-BIOGASOL,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BIOGASOL,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BIOGASOL,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BIOGASOL,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BIOGASOL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIOGASOL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIOGASOL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BIOGASOL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIOGASOL,FISHING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BIOGASOL,FOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
 BIOGASOL,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BIOGASOL,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 BIOGASOL,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-BIOGASOL,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BIOGASOL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIOGASOL,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BIOGASOL,NONFERR,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BIOGASOL,NONMET,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -203,7 +203,7 @@ BIOGASOL,TRNONSPE,Transportation,na,Liquid fuels,biofuels_waste ef ratio,N,biofu
 BIOGASOL,WOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
 BITCOAL,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BITCOAL,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-BITCOAL,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BITCOAL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BITCOAL,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 BITCOAL,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BITCOAL,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
@@ -214,10 +214,10 @@ BITCOAL,EBLASTFUR,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,Y,Y,N
 BITCOAL,ECOALLIQ,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
 BITCOAL,ECOKEOVS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
 BITCOAL,EGASWKS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
-BITCOAL,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-BITCOAL,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-BITCOAL,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-BITCOAL,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BITCOAL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BITCOAL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BITCOAL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BITCOAL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BITCOAL,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 BITCOAL,ENONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BITCOAL,EPATFUEL,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
@@ -233,7 +233,7 @@ BITCOAL,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BITCOAL,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 BITCOAL,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 BITCOAL,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-BITCOAL,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BITCOAL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BITCOAL,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 BITCOAL,MARBUNK,Transportation,na,Coal,hydrogen ef ratio,N,coal addtl eff,N,N,Y,Y,N
 BITCOAL,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
@@ -262,15 +262,15 @@ BITCOAL,TRNONSPE,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 BITCOAL,WOODPRO,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 BITCOAL,WORLDMAR,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,Y,Y,N
 BITUMEN,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
-BITUMEN,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BITUMEN,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BITUMEN,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BITUMEN,COMMPUB,Commercial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,Y,N
 BITUMEN,CONSTRUC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BITUMEN,DISTLOSS,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
-BITUMEN,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BITUMEN,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BITUMEN,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BITUMEN,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BITUMEN,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BITUMEN,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BITUMEN,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BITUMEN,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BITUMEN,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BITUMEN,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 BITUMEN,EPOWERPLT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -278,7 +278,7 @@ BITUMEN,EREFINER,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N
 BITUMEN,FOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
 BITUMEN,HEMAINC,Industrial,Industrial,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 BITUMEN,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
-BITUMEN,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BITUMEN,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BITUMEN,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 BITUMEN,NECHEM,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
 BITUMEN,NECONSTRUC,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
@@ -314,17 +314,17 @@ BITUMEN,TREFINER,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N
 BITUMEN,TRNONSPE,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BKB,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BKB,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-BKB,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BKB,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BKB,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 BKB,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BKB,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
 BKB,CONSTRUC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BKB,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 BKB,EBKB,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,Y,Y,N
-BKB,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-BKB,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-BKB,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-BKB,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BKB,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BKB,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BKB,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BKB,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BKB,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 BKB,ENONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BKB,EREFINER,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
@@ -337,7 +337,7 @@ BKB,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BKB,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 BKB,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 BKB,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-BKB,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BKB,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BKB,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 BKB,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BKB,NEINTREN,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -358,17 +358,17 @@ BKB,TOTENGY,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BKB,TRANSEQ,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 BKB,WOODPRO,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 BLFURGS,AUTOCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-BLFURGS,AUTOELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+BLFURGS,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BLFURGS,AUTOHEAT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 BLFURGS,CHEMICAL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BLFURGS,CONSTRUC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BLFURGS,DISTLOSS,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 BLFURGS,EBLASTFUR,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,Y,Y,N
 BLFURGS,ECOKEOVS,Industrial,na,Coal,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
-BLFURGS,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-BLFURGS,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-BLFURGS,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-BLFURGS,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+BLFURGS,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BLFURGS,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BLFURGS,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+BLFURGS,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BLFURGS,EMINES,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,Y,Y,N,N,N
 BLFURGS,ENONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BLFURGS,EPOWERPLT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -381,7 +381,7 @@ BLFURGS,INONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas ad
 BLFURGS,IRONSTL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 BLFURGS,MACHINE,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 BLFURGS,MAINCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-BLFURGS,MAINELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+BLFURGS,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BLFURGS,MAINHEAT,Industrial,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 BLFURGS,MINING,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 BLFURGS,NECHEM,Industrial,na,Natural gas,na,N,na,N,N,N,N,Y
@@ -418,17 +418,17 @@ CHARCOAL,TCHARCOAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 CHARCOAL,TEXTILES,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 CHARCOAL,TOTENGY,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 COALTAR,AUTOCHP,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-COALTAR,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COALTAR,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COALTAR,CHEMICAL,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 COALTAR,COMMPUB,Commercial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
 COALTAR,CONSTRUC,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 COALTAR,EBLASTFUR,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,N,Y,Y,Y,N
 COALTAR,ECOKEOVS,Industrial,na,Liquid fuels,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
 COALTAR,EGASWKS,Industrial,na,Liquid fuels,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
-COALTAR,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-COALTAR,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-COALTAR,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-COALTAR,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COALTAR,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COALTAR,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COALTAR,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COALTAR,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COALTAR,EMINES,Industrial,na,Liquid fuels,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 COALTAR,EPOWERPLT,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COALTAR,EREFINER,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
@@ -441,7 +441,7 @@ COALTAR,INONSPEC,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,Y,Y,N
 COALTAR,IRONSTL,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 COALTAR,MACHINE,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 COALTAR,MAINCHP,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-COALTAR,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COALTAR,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COALTAR,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 COALTAR,MINING,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 COALTAR,NECHEM,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
@@ -461,7 +461,7 @@ COALTAR,TRANSEQ,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,Y,Y,N,
 COALTAR,WOODPRO,Industrial,na,Liquid fuels,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 COKCOAL,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 COKCOAL,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-COKCOAL,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COKCOAL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COKCOAL,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 COKCOAL,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 COKCOAL,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
@@ -470,10 +470,10 @@ COKCOAL,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 COKCOAL,DOMESNAV,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,Y,Y,N
 COKCOAL,ECOKEOVS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
 COKCOAL,EGASWKS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
-COKCOAL,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-COKCOAL,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-COKCOAL,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-COKCOAL,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COKCOAL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COKCOAL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COKCOAL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COKCOAL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COKCOAL,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 COKCOAL,EPOWERPLT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COKCOAL,FOODPRO,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
@@ -485,7 +485,7 @@ COKCOAL,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 COKCOAL,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 COKCOAL,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 COKCOAL,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-COKCOAL,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COKCOAL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COKCOAL,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 COKCOAL,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 COKCOAL,NECHEM,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -511,7 +511,7 @@ COKCOAL,TRNONSPE,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COKCOAL,WOODPRO,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 COKEOVGS,AGRICULT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 COKEOVGS,AUTOCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-COKEOVGS,AUTOELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+COKEOVGS,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COKEOVGS,AUTOHEAT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 COKEOVGS,CHEMICAL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 COKEOVGS,COMMPUB,Commercial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,Y,N
@@ -521,10 +521,10 @@ COKEOVGS,EBLASTFUR,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,Y,Y,N
 COKEOVGS,ECOALLIQ,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
 COKEOVGS,ECOKEOVS,Industrial,na,Coal,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
 COKEOVGS,EGASWKS,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
-COKEOVGS,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-COKEOVGS,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-COKEOVGS,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-COKEOVGS,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+COKEOVGS,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COKEOVGS,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COKEOVGS,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+COKEOVGS,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COKEOVGS,EMINES,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,Y,Y,N,N,N
 COKEOVGS,ENONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 COKEOVGS,EPOWERPLT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -538,7 +538,7 @@ COKEOVGS,INONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas a
 COKEOVGS,IRONSTL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 COKEOVGS,MACHINE,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 COKEOVGS,MAINCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-COKEOVGS,MAINELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+COKEOVGS,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COKEOVGS,MAINHEAT,Industrial,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 COKEOVGS,MINING,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 COKEOVGS,NECHEM,Industrial,na,Natural gas,na,N,na,N,N,N,N,Y
@@ -559,17 +559,17 @@ COKEOVGS,TRANSEQ,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas ad
 COKEOVGS,WOODPRO,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 CRUDEOIL,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 CRUDEOIL,AUTOCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-CRUDEOIL,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+CRUDEOIL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 CRUDEOIL,AUTOHEAT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 CRUDEOIL,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 CRUDEOIL,COMMPUB,Commercial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,Y,N
 CRUDEOIL,CONSTRUC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 CRUDEOIL,DISTLOSS,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
 CRUDEOIL,EGASWKS,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
-CRUDEOIL,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-CRUDEOIL,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-CRUDEOIL,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-CRUDEOIL,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+CRUDEOIL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+CRUDEOIL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+CRUDEOIL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+CRUDEOIL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 CRUDEOIL,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 CRUDEOIL,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 CRUDEOIL,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -584,7 +584,7 @@ CRUDEOIL,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,
 CRUDEOIL,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 CRUDEOIL,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 CRUDEOIL,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-CRUDEOIL,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+CRUDEOIL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 CRUDEOIL,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 CRUDEOIL,NECHEM,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
 CRUDEOIL,NECONSTRUC,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
@@ -691,7 +691,7 @@ GASCOKE,TGASWKS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,N,N,N,N
 GASCOKE,TOTENGY,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 GASWKSGS,AGRICULT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 GASWKSGS,AUTOCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-GASWKSGS,AUTOELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+GASWKSGS,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 GASWKSGS,AUTOHEAT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 GASWKSGS,CHEMICAL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 GASWKSGS,COMMPUB,Commercial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,Y,N
@@ -699,10 +699,10 @@ GASWKSGS,CONSTRUC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas a
 GASWKSGS,DISTLOSS,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 GASWKSGS,ECOALLIQ,Industrial,na,Coal,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
 GASWKSGS,EGASWKS,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
-GASWKSGS,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-GASWKSGS,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-GASWKSGS,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-GASWKSGS,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+GASWKSGS,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+GASWKSGS,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+GASWKSGS,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+GASWKSGS,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 GASWKSGS,EMINES,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,Y,Y,N,N,N
 GASWKSGS,EPOWERPLT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 GASWKSGS,EREFINER,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
@@ -715,7 +715,7 @@ GASWKSGS,INONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas a
 GASWKSGS,IRONSTL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 GASWKSGS,MACHINE,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 GASWKSGS,MAINCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-GASWKSGS,MAINELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+GASWKSGS,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 GASWKSGS,MAINHEAT,Industrial,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 GASWKSGS,MINING,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 GASWKSGS,NONFERR,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
@@ -731,16 +731,16 @@ GASWKSGS,TRANSEQ,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas ad
 GASWKSGS,WOODPRO,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 GEOTHERM,AGRICULT,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 GEOTHERM,AUTOCHP,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
-GEOTHERM,AUTOELEC,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+GEOTHERM,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 GEOTHERM,AUTOHEAT,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
 GEOTHERM,CHEMICAL,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 GEOTHERM,COMMPUB,Commercial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,N,N,Y,N
 GEOTHERM,CONSTRUC,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 GEOTHERM,DISTLOSS,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,N,N,N,N
-GEOTHERM,ELAUTOC,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
-GEOTHERM,ELAUTOE,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
-GEOTHERM,ELMAINC,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
-GEOTHERM,ELMAINE,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+GEOTHERM,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+GEOTHERM,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+GEOTHERM,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+GEOTHERM,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 GEOTHERM,EPOWERPLT,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 GEOTHERM,FISHING,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 GEOTHERM,FOODPRO,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,N,N,N,N
@@ -752,7 +752,7 @@ GEOTHERM,INONSPEC,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl ef
 GEOTHERM,IRONSTL,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
 GEOTHERM,MACHINE,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
 GEOTHERM,MAINCHP,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
-GEOTHERM,MAINELEC,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+GEOTHERM,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 GEOTHERM,MAINHEAT,Industrial,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
 GEOTHERM,NONMET,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 GEOTHERM,ONONSPEC,Industrial,na,Total,wws heat ef ratio,N,wws heat addtl eff,Y,N,N,N,N
@@ -962,7 +962,7 @@ HYDROGEN,WORLDAV,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl ef
 HYDROGEN,WORLDMAR,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 INDWASTE,AGRICULT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 INDWASTE,AUTOCHP,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-INDWASTE,AUTOELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+INDWASTE,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 INDWASTE,AUTOHEAT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 INDWASTE,CHEMICAL,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 INDWASTE,COMMPUB,Commercial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,Y,N
@@ -971,10 +971,10 @@ INDWASTE,DISTLOSS,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste a
 INDWASTE,EBKB,Industrial,na,Total,biofuels_waste ef ratio,Y,biofuels_waste ef ratio,N,Y,Y,Y,N
 INDWASTE,EBLASTFUR,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste ef ratio,N,Y,Y,Y,N
 INDWASTE,ECOKEOVS,Industrial,na,Coal,biofuels_waste ef ratio,Y,biofuels_waste ef ratio,N,Y,N,N,N
-INDWASTE,ELAUTOC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-INDWASTE,ELAUTOE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-INDWASTE,ELMAINC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-INDWASTE,ELMAINE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+INDWASTE,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+INDWASTE,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+INDWASTE,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+INDWASTE,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 INDWASTE,EMINES,Industrial,na,Total,biofuels_waste ef ratio,Y,biofuels_waste ef ratio,Y,Y,N,N,N
 INDWASTE,ENONSPEC,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste ef ratio,Y,Y,N,N,N
 INDWASTE,EPOWERPLT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -988,7 +988,7 @@ INDWASTE,INONSPEC,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste a
 INDWASTE,IRONSTL,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 INDWASTE,MACHINE,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 INDWASTE,MAINCHP,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-INDWASTE,MAINELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+INDWASTE,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 INDWASTE,MAINHEAT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 INDWASTE,MINING,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 INDWASTE,NONFERR,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
@@ -1014,7 +1014,7 @@ JETGAS,WORLDAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y
 JETGAS,WORLDMAR,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 LIGNITE,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 LIGNITE,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-LIGNITE,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+LIGNITE,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 LIGNITE,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 LIGNITE,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 LIGNITE,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
@@ -1022,10 +1022,10 @@ LIGNITE,CONSTRUC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 LIGNITE,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 LIGNITE,DOMESNAV,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,Y,Y,N
 LIGNITE,EBKB,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,N,N,N,Y
-LIGNITE,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-LIGNITE,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-LIGNITE,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-LIGNITE,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+LIGNITE,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+LIGNITE,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+LIGNITE,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+LIGNITE,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 LIGNITE,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 LIGNITE,ENONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 LIGNITE,EPATFUEL,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
@@ -1041,7 +1041,7 @@ LIGNITE,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 LIGNITE,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 LIGNITE,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 LIGNITE,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-LIGNITE,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+LIGNITE,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 LIGNITE,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 LIGNITE,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 LIGNITE,NECHEM,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -1068,7 +1068,7 @@ LIGNITE,TRNONSPE,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 LIGNITE,WOODPRO,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 LPG,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 LPG,AUTOCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-LPG,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+LPG,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 LPG,AUTOHEAT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 LPG,AVBUNK,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 LPG,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -1081,10 +1081,10 @@ LPG,DOMESNAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y
 LPG,EBLASTFUR,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,Y,Y,N
 LPG,ECOKEOVS,Industrial,na,Coal,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
 LPG,EGASWKS,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
-LPG,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-LPG,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-LPG,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-LPG,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+LPG,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+LPG,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+LPG,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+LPG,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 LPG,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 LPG,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 LPG,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -1100,7 +1100,7 @@ LPG,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 LPG,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 LPG,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 LPG,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-LPG,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+LPG,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 LPG,MAINHEAT,Industrial,na,Total,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 LPG,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 LPG,NECHEM,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
@@ -1148,10 +1148,10 @@ LUBRIC,CONSTRUC,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,DISTLOSS,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,DOMESNAV,Transportation,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,ECOKEOVS,Industrial,na,Total,na,Y,na,N,N,N,N,Y
-LUBRIC,ELAUTOC,Electric Power,na,Total,na,N,na,N,N,N,N,Y
-LUBRIC,ELAUTOE,Electric Power,na,Total,na,N,na,N,N,N,N,Y
-LUBRIC,ELMAINC,Electric Power,na,Total,na,N,na,N,N,N,N,Y
-LUBRIC,ELMAINE,Electric Power,na,Total,na,N,na,N,N,N,N,Y
+LUBRIC,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,Y
+LUBRIC,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,Y
+LUBRIC,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,Y
+LUBRIC,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,Y
 LUBRIC,EMINES,Industrial,na,Total,na,Y,na,N,N,N,N,Y
 LUBRIC,ENONSPEC,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,EOILGASEX,Industrial,na,Total,na,Y,na,N,N,N,N,Y
@@ -1163,7 +1163,7 @@ LUBRIC,INONSPEC,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,IRONSTL,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,MACHINE,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,MAINCHP,Industrial,na,Total,na,N,na,N,N,N,N,Y
-LUBRIC,MAINELEC,Electric Power,na,Total,na,N,na,N,N,N,N,Y
+LUBRIC,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,Y
 LUBRIC,MAINHEAT,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,MARBUNK,Transportation,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,MINING,Industrial,na,Total,na,N,na,N,N,N,N,Y
@@ -1202,15 +1202,15 @@ LUBRIC,TPETCHEM,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,TREFINER,Industrial,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,TRNONSPE,Transportation,na,Total,na,N,na,N,N,N,N,Y
 LUBRIC,WORLDMAR,Transportation,na,Total,na,N,na,N,N,N,N,Y
-MANGAS,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-MANGAS,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-MANGAS,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+MANGAS,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+MANGAS,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+MANGAS,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MANGAS,HEAUTOC,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 MANGAS,HEAUTOH,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 MANGAS,HEMAINC,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 MUNWASTEN,AGRICULT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 MUNWASTEN,AUTOCHP,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-MUNWASTEN,AUTOELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTEN,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MUNWASTEN,AUTOHEAT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 MUNWASTEN,CHEMICAL,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 MUNWASTEN,COMMPUB,Commercial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,Y,N
@@ -1218,10 +1218,10 @@ MUNWASTEN,CONSTRUC,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste 
 MUNWASTEN,DISTLOSS,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,N,N
 MUNWASTEN,EBKB,Industrial,na,Total,heat ef ratio,Y,heat addtl eff,N,Y,Y,Y,N
 MUNWASTEN,ECOKEOVS,Industrial,na,Coal,biofuels_waste ef ratio,Y,biofuels_waste addtl eff,N,Y,N,N,N
-MUNWASTEN,ELAUTOC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-MUNWASTEN,ELAUTOE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-MUNWASTEN,ELMAINC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-MUNWASTEN,ELMAINE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTEN,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+MUNWASTEN,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+MUNWASTEN,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+MUNWASTEN,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MUNWASTEN,ENONSPEC,Industrial,na,Total,heat ef ratio,N,heat addtl eff,Y,Y,N,N,N
 MUNWASTEN,EPOWERPLT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTEN,EREFINER,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
@@ -1234,7 +1234,7 @@ MUNWASTEN,INONSPEC,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste 
 MUNWASTEN,IRONSTL,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 MUNWASTEN,MACHINE,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 MUNWASTEN,MAINCHP,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-MUNWASTEN,MAINELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTEN,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MUNWASTEN,MAINHEAT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 MUNWASTEN,MINING,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 MUNWASTEN,NONFERR,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
@@ -1248,7 +1248,7 @@ MUNWASTEN,TRANSEQ,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste a
 MUNWASTEN,WOODPRO,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,N,N
 MUNWASTER,AGRICULT,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 MUNWASTER,AUTOCHP,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-MUNWASTER,AUTOELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTER,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MUNWASTER,AUTOHEAT,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 MUNWASTER,CHEMICAL,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 MUNWASTER,COMMPUB,Commercial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,Y,N
@@ -1256,10 +1256,10 @@ MUNWASTER,CONSTRUC,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_w
 MUNWASTER,DISTLOSS,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,N,N
 MUNWASTER,EBKB,Industrial,na,Renewables,biofuels_waste ef ratio,Y,biofuels_waste addtl eff,N,Y,Y,Y,N
 MUNWASTER,ECOKEOVS,Industrial,na,Coal,biofuels_waste ef ratio,Y,biofuels_waste addtl eff,N,Y,N,N,N
-MUNWASTER,ELAUTOC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-MUNWASTER,ELAUTOE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-MUNWASTER,ELMAINC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-MUNWASTER,ELMAINE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTER,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+MUNWASTER,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+MUNWASTER,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+MUNWASTER,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MUNWASTER,ENONSPEC,Industrial,na,Renewables,heat ef ratio,N,heat addtl eff,Y,Y,N,N,N
 MUNWASTER,EPOWERPLT,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTER,EREFINER,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
@@ -1272,7 +1272,7 @@ MUNWASTER,INONSPEC,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_w
 MUNWASTER,IRONSTL,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 MUNWASTER,MACHINE,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 MUNWASTER,MAINCHP,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-MUNWASTER,MAINELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTER,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MUNWASTER,MAINHEAT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 MUNWASTER,MINING,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 MUNWASTER,NONFERR,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
@@ -1286,7 +1286,7 @@ MUNWASTER,TRANSEQ,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_wa
 MUNWASTER,WOODPRO,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,N,N
 NATGAS,AGRICULT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 NATGAS,AUTOCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-NATGAS,AUTOELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NATGAS,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NATGAS,AUTOHEAT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NATGAS,CHEMICAL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 NATGAS,COMMPUB,Commercial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,Y,N
@@ -1297,10 +1297,10 @@ NATGAS,EBLASTFUR,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas ad
 NATGAS,ECOKEOVS,Industrial,na,Coal,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
 NATGAS,EGASWKS,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
 NATGAS,EGTL,Industrial,na,Liquid fuels,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
-NATGAS,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-NATGAS,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-NATGAS,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-NATGAS,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NATGAS,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NATGAS,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NATGAS,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NATGAS,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NATGAS,ELNG,Industrial,na,Liquid fuels,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
 NATGAS,EMINES,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,Y,Y,N,N,N
 NATGAS,ENONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
@@ -1317,7 +1317,7 @@ NATGAS,INONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas add
 NATGAS,IRONSTL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NATGAS,MACHINE,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NATGAS,MAINCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-NATGAS,MAINELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NATGAS,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NATGAS,MAINHEAT,Industrial,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NATGAS,MARBUNK,Transportation,na,Natural gas,hydrogen ef ratio,N,natural gas addtl eff,N,N,Y,Y,N
 NATGAS,MINING,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
@@ -1357,14 +1357,14 @@ NATGAS,WOODPRO,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addt
 NATGAS,WORLDMAR,Transportation,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,Y,Y,N
 NGL,AGRICULT,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 NGL,AUTOCHP,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-NGL,AUTOELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NGL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NGL,CHEMICAL,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 NGL,COMMPUB,Commercial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,Y,N
 NGL,DISTLOSS,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
-NGL,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-NGL,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-NGL,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-NGL,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NGL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NGL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NGL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NGL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NGL,ENONSPEC,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 NGL,EOILGASEX,Industrial,na,Liquid fuels,natural gas ef ratio,Y,natural gas addtl eff,Y,Y,N,N,N
 NGL,EPOWERPLT,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -1376,7 +1376,7 @@ NGL,HEMAINH,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl 
 NGL,INONSPEC,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 NGL,IRONSTL,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 NGL,MACHINE,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-NGL,MAINELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NGL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NGL,MINING,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 NGL,NECHEM,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
 NGL,NEIND,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
@@ -1400,7 +1400,7 @@ NGL,TREFINER,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl
 NGL,WOODPRO,Industrial,na,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 NONBIODIES,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIODIES,AUTOCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NONBIODIES,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIODIES,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIODIES,AUTOHEAT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIODIES,AVBUNK,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIODIES,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -1413,10 +1413,10 @@ NONBIODIES,DOMESNAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,
 NONBIODIES,EBLASTFUR,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,Y,Y,N
 NONBIODIES,ECOKEOVS,Industrial,na,Coal,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
 NONBIODIES,EGASWKS,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
-NONBIODIES,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIODIES,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIODIES,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIODIES,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIODIES,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIODIES,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIODIES,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIODIES,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIODIES,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 NONBIODIES,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIODIES,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -1432,7 +1432,7 @@ NONBIODIES,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,
 NONBIODIES,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIODIES,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIODIES,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NONBIODIES,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIODIES,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIODIES,MAINHEAT,Industrial,na,Total,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIODIES,MARBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIODIES,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -1478,7 +1478,7 @@ NONBIODIES,WOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N
 NONBIODIES,WORLDAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIODIES,WORLDMAR,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIOGASO,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
-NONBIOGASO,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOGASO,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIOGASO,AVBUNK,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOGASO,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIOGASO,COMMPUB,Commercial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,Y,N
@@ -1488,10 +1488,10 @@ NONBIOGASO,DOMESAIR,Transportation,Light,Liquid fuels,oil ef ratio,N,oil addtl e
 NONBIOGASO,DOMESAIR,Transportation,Heavy,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIOGASO,DOMESNAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIOGASO,EGASWKS,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
-NONBIOGASO,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIOGASO,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIOGASO,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIOGASO,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOGASO,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIOGASO,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIOGASO,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIOGASO,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIOGASO,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 NONBIOGASO,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIOGASO,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -1502,7 +1502,7 @@ NONBIOGASO,FOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N
 NONBIOGASO,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIOGASO,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIOGASO,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NONBIOGASO,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOGASO,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIOGASO,MARBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIOGASO,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIOGASO,NECHEM,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
@@ -1545,10 +1545,10 @@ NONBIOJETK,CONSTRUC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,
 NONBIOJETK,DISTLOSS,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
 NONBIOJETK,DOMESAIR,Transportation,Light,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIOJETK,DOMESAIR,Transportation,Heavy,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
-NONBIOJETK,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIOJETK,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIOJETK,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONBIOJETK,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOJETK,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIOJETK,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIOJETK,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONBIOJETK,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIOJETK,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 NONBIOJETK,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIOJETK,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -1562,7 +1562,7 @@ NONBIOJETK,HEMAINH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N
 NONBIOJETK,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIOJETK,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 NONBIOJETK,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NONBIOJETK,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOJETK,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIOJETK,MARBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIOJETK,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONBIOJETK,NECHEM,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
@@ -1584,13 +1584,13 @@ NONBIOJETK,WORLDAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N
 NONBIOJETK,WORLDMAR,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,DISTLOSS,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,DISTLOSS,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
-NONCRUDE,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONCRUDE,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONCRUDE,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-NONCRUDE,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONCRUDE,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONCRUDE,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONCRUDE,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NONCRUDE,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONCRUDE,HEMAINC,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 NONCRUDE,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-NONCRUDE,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONCRUDE,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONCRUDE,ONONSPEC,Industrial,na,Total,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 NONCRUDE,TCOALLIQ,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,N,N,N,N
 NONCRUDE,TCOKEOVS,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,N,N,N,N
@@ -1601,30 +1601,30 @@ NONCRUDE,TNONSPEC,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl 
 NONCRUDE,TREFINER,Industrial,Hydrogen,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONCRUDE,TREFINER,Industrial,Non-Hydrogen,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NUCLEAR,AUTOCHP,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
-NUCLEAR,AUTOELEC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
-NUCLEAR,ELAUTOC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
-NUCLEAR,ELAUTOE,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
-NUCLEAR,ELMAINC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
-NUCLEAR,ELMAINE,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NUCLEAR,HEAUTOC,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 NUCLEAR,HEAUTOH,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 NUCLEAR,HEMAINC,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 NUCLEAR,HEMAINH,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
 NUCLEAR,MAINCHP,Industrial,na,Electricity,nuclear ef ratio,N,electricity addtl eff,N,Y,N,N,N
-NUCLEAR,MAINELEC,Electric Power,na,Total,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
+NUCLEAR,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NUCLEAR,MAINHEAT,Industrial,na,Total,nuclear ef ratio,N,heat addtl eff,N,Y,N,N,N
 OBIOLIQ,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OBIOLIQ,AUTOCHP,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-OBIOLIQ,AUTOELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+OBIOLIQ,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OBIOLIQ,AUTOHEAT,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 OBIOLIQ,CHEMICAL,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 OBIOLIQ,COMMPUB,Commercial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,Y,N
 OBIOLIQ,CONSTRUC,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 OBIOLIQ,EBKB,Industrial,na,Liquid fuels,biofuels_waste ef ratio,Y,biofuels_waste addtl eff,N,Y,Y,Y,N
-OBIOLIQ,ELAUTOC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-OBIOLIQ,ELAUTOE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-OBIOLIQ,ELMAINC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-OBIOLIQ,ELMAINE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+OBIOLIQ,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OBIOLIQ,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OBIOLIQ,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OBIOLIQ,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OBIOLIQ,EPOWERPLT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OBIOLIQ,EREFINER,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OBIOLIQ,FOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
@@ -1636,7 +1636,7 @@ OBIOLIQ,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N
 OBIOLIQ,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OBIOLIQ,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OBIOLIQ,MAINCHP,Industrial,na,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-OBIOLIQ,MAINELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+OBIOLIQ,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OBIOLIQ,MAINHEAT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 OBIOLIQ,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OBIOLIQ,NONFERR,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -1658,16 +1658,16 @@ OFFSHORE,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addt
 OFFSHORE,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OFFSHORE,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OGASES,AUTOCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-OGASES,AUTOELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+OGASES,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OGASES,AUTOHEAT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 OGASES,CHEMICAL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 OGASES,DISTLOSS,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 OGASES,EBLASTFUR,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,Y,Y,N
 OGASES,ECOKEOVS,Industrial,na,Coal,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
-OGASES,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-OGASES,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-OGASES,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-OGASES,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+OGASES,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OGASES,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OGASES,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OGASES,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OGASES,EMINES,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,Y,Y,N,N,N
 OGASES,ENONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 OGASES,EPOWERPLT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -1677,7 +1677,7 @@ OGASES,HEMAINC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addt
 OGASES,HEMAINH,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 OGASES,IRONSTL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 OGASES,MAINCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-OGASES,MAINELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+OGASES,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OGASES,MAINHEAT,Industrial,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 OGASES,NECHEM,Industrial,na,Natural gas,na,N,na,N,N,N,N,Y
 OGASES,NEINTREN,Industrial,na,Natural gas,na,N,na,N,N,N,N,Y
@@ -1689,15 +1689,15 @@ OGASES,TNONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas add
 OGASES,TOTENGY,Industrial,na,Natural gas,na,N,na,Y,Y,N,N,N
 OILSHALE,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OILSHALE,AUTOCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-OILSHALE,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OILSHALE,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OILSHALE,AUTOHEAT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OILSHALE,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OILSHALE,DISTLOSS,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
 OILSHALE,ECOALLIQ,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
-OILSHALE,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-OILSHALE,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-OILSHALE,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-OILSHALE,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OILSHALE,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OILSHALE,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OILSHALE,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OILSHALE,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OILSHALE,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 OILSHALE,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OILSHALE,FOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
@@ -1707,7 +1707,7 @@ OILSHALE,HEMAINC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N
 OILSHALE,HEMAINH,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OILSHALE,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OILSHALE,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-OILSHALE,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OILSHALE,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OILSHALE,MAINHEAT,Industrial,na,Total,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OILSHALE,NEINTREN,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
 OILSHALE,NONENUSE,Industrial,na,Liquid fuels,na,N,na,N,N,N,N,Y
@@ -1721,7 +1721,7 @@ OILSHALE,TOTENGY,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N
 OILSHALE,WOODPRO,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,N,N
 ONONSPEC,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 ONONSPEC,AUTOCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-ONONSPEC,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+ONONSPEC,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ONONSPEC,AUTOHEAT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 ONONSPEC,AVBUNK,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 ONONSPEC,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -1732,10 +1732,10 @@ ONONSPEC,DOMESAIR,Transportation,Light,Liquid fuels,oil ef ratio,N,oil addtl eff
 ONONSPEC,DOMESAIR,Transportation,Heavy,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 ONONSPEC,DOMESNAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 ONONSPEC,ECOKEOVS,Industrial,na,Coal,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
-ONONSPEC,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-ONONSPEC,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-ONONSPEC,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-ONONSPEC,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+ONONSPEC,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+ONONSPEC,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+ONONSPEC,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+ONONSPEC,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ONONSPEC,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 ONONSPEC,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 ONONSPEC,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -1751,7 +1751,7 @@ ONONSPEC,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,
 ONONSPEC,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 ONONSPEC,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 ONONSPEC,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-ONONSPEC,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+ONONSPEC,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ONONSPEC,MAINHEAT,Industrial,na,Total,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 ONONSPEC,MARBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 ONONSPEC,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -1803,7 +1803,7 @@ ONSHORE,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl
 ONSHORE,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ONSHORE,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OTHER,AUTOCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-OTHER,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OTHER,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OTHER,AUTOHEAT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OTHER,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OTHER,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
@@ -1818,7 +1818,7 @@ OTHER,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl 
 OTHER,MAINHEAT,Industrial,na,Total,heat ef ratio,N,heat addtl eff,N,Y,N,N,N
 OTHKERO,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OTHKERO,AUTOCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-OTHKERO,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OTHKERO,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OTHKERO,AUTOHEAT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OTHKERO,AVBUNK,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OTHKERO,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -1830,10 +1830,10 @@ OTHKERO,DOMESAIR,Transportation,Heavy,Liquid fuels,hydrogen ef ratio,N,oil addtl
 OTHKERO,DOMESNAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 OTHKERO,ECOKEOVS,Industrial,na,Coal,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
 OTHKERO,EGASWKS,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
-OTHKERO,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-OTHKERO,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-OTHKERO,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-OTHKERO,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OTHKERO,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OTHKERO,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OTHKERO,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OTHKERO,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OTHKERO,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 OTHKERO,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 OTHKERO,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -1849,7 +1849,7 @@ OTHKERO,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N
 OTHKERO,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OTHKERO,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OTHKERO,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-OTHKERO,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OTHKERO,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OTHKERO,MAINHEAT,Industrial,na,Total,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 OTHKERO,MARBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 OTHKERO,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -1892,7 +1892,7 @@ OTHKERO,WORLDAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,
 OTHKERO,WORLDMAR,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 OVENCOKE,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 OVENCOKE,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-OVENCOKE,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+OVENCOKE,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OVENCOKE,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 OVENCOKE,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 OVENCOKE,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
@@ -1902,10 +1902,10 @@ OVENCOKE,DOMESNAV,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,Y,Y,
 OVENCOKE,EBLASTFUR,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,Y,Y,N
 OVENCOKE,ECOKEOVS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
 OVENCOKE,EGASWKS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
-OVENCOKE,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-OVENCOKE,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-OVENCOKE,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-OVENCOKE,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+OVENCOKE,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OVENCOKE,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OVENCOKE,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+OVENCOKE,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OVENCOKE,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 OVENCOKE,ENONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 OVENCOKE,EPATFUEL,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
@@ -1920,7 +1920,7 @@ OVENCOKE,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 OVENCOKE,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 OVENCOKE,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 OVENCOKE,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-OVENCOKE,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+OVENCOKE,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OVENCOKE,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 OVENCOKE,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 OVENCOKE,NECHEM,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -1978,10 +1978,10 @@ PATFUEL,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
 PATFUEL,CONSTRUC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PATFUEL,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 PATFUEL,ECOKEOVS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
-PATFUEL,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PATFUEL,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PATFUEL,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PATFUEL,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PATFUEL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PATFUEL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PATFUEL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PATFUEL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PATFUEL,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 PATFUEL,EPATFUEL,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
 PATFUEL,EPOWERPLT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -1994,7 +1994,7 @@ PATFUEL,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PATFUEL,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PATFUEL,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PATFUEL,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-PATFUEL,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PATFUEL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PATFUEL,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PATFUEL,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PATFUEL,NEINTREN,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -2015,17 +2015,17 @@ PATFUEL,TRANSEQ,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PATFUEL,WOODPRO,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 PEAT,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEAT,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-PEAT,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEAT,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PEAT,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PEAT,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEAT,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
 PEAT,CONSTRUC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEAT,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 PEAT,EBKB,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,Y,Y,N
-PEAT,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PEAT,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PEAT,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PEAT,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEAT,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PEAT,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PEAT,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PEAT,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PEAT,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 PEAT,ENONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEAT,EPOWERPLT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2038,7 +2038,7 @@ PEAT,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEAT,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PEAT,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PEAT,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-PEAT,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEAT,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PEAT,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PEAT,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEAT,NEINTREN,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -2065,10 +2065,10 @@ PEATPROD,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
 PEATPROD,CONSTRUC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEATPROD,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 PEATPROD,EBKB,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,Y,Y,N
-PEATPROD,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PEATPROD,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PEATPROD,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PEATPROD,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEATPROD,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PEATPROD,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PEATPROD,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PEATPROD,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PEATPROD,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 PEATPROD,ENONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEATPROD,EPOWERPLT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2081,7 +2081,7 @@ PEATPROD,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEATPROD,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PEATPROD,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PEATPROD,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-PEATPROD,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEATPROD,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PEATPROD,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PEATPROD,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PEATPROD,NEINTREN,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -2102,7 +2102,7 @@ PEATPROD,TRNONSPE,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,
 PEATPROD,WOODPRO,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 PETCOKE,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PETCOKE,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-PETCOKE,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PETCOKE,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PETCOKE,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PETCOKE,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PETCOKE,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
@@ -2110,10 +2110,10 @@ PETCOKE,CONSTRUC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PETCOKE,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 PETCOKE,EBLASTFUR,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,Y,Y,N
 PETCOKE,ECOKEOVS,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
-PETCOKE,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PETCOKE,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PETCOKE,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PETCOKE,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PETCOKE,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PETCOKE,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PETCOKE,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PETCOKE,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PETCOKE,ENONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PETCOKE,EOILGASEX,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 PETCOKE,EPOWERPLT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2127,7 +2127,7 @@ PETCOKE,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PETCOKE,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PETCOKE,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PETCOKE,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-PETCOKE,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PETCOKE,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PETCOKE,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 PETCOKE,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PETCOKE,NECHEM,Industrial,na,Coal,na,N,na,N,N,N,N,Y
@@ -2162,7 +2162,7 @@ PETCOKE,TRANSEQ,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PETCOKE,TREFINER,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 PRIMSBIO,AGRICULT,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 PRIMSBIO,AUTOCHP,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-PRIMSBIO,AUTOELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+PRIMSBIO,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PRIMSBIO,AUTOHEAT,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 PRIMSBIO,CHEMICAL,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 PRIMSBIO,COMMPUB,Commercial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,N,N,Y,N
@@ -2172,10 +2172,10 @@ PRIMSBIO,DOMESNAV,Transportation,na,Renewables,biofuels_waste ef ratio,N,biofuel
 PRIMSBIO,EBKB,Industrial,na,Renewables,biofuels_waste ef ratio,Y,biofuels_waste addtl eff,N,Y,Y,Y,N
 PRIMSBIO,ECHARCOAL,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,Y,Y,N
 PRIMSBIO,ECOKEOVS,Industrial,na,Renewables,biofuels_waste ef ratio,Y,biofuels_waste addtl eff,N,Y,N,N,N
-PRIMSBIO,ELAUTOC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-PRIMSBIO,ELAUTOE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-PRIMSBIO,ELMAINC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-PRIMSBIO,ELMAINE,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+PRIMSBIO,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PRIMSBIO,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PRIMSBIO,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+PRIMSBIO,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PRIMSBIO,EMINES,Industrial,na,Renewables,biofuels_waste ef ratio,Y,biofuels_waste addtl eff,Y,Y,N,N,N
 PRIMSBIO,ENONSPEC,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 PRIMSBIO,EPOWERPLT,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -2190,7 +2190,7 @@ PRIMSBIO,INONSPEC,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_wa
 PRIMSBIO,IRONSTL,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 PRIMSBIO,MACHINE,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 PRIMSBIO,MAINCHP,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
-PRIMSBIO,MAINELEC,Electric Power,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+PRIMSBIO,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PRIMSBIO,MAINHEAT,Industrial,na,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,Y,N,N,N
 PRIMSBIO,MINING,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
 PRIMSBIO,NONFERR,Industrial,na,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,Y,Y,N,N,N
@@ -2212,17 +2212,17 @@ REFFEEDS,TNONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,
 REFFEEDS,TPETCHEM,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,Y
 REFFEEDS,TREFINER,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,Y
 REFINGAS,AUTOCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-REFINGAS,AUTOELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+REFINGAS,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 REFINGAS,AUTOHEAT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 REFINGAS,CHEMICAL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 REFINGAS,COMMPUB,Commercial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,Y,N
 REFINGAS,CONSTRUC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 REFINGAS,DISTLOSS,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,N,N,N,N
 REFINGAS,ECOKEOVS,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,N,Y,N,N,N
-REFINGAS,ELAUTOC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-REFINGAS,ELAUTOE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-REFINGAS,ELMAINC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-REFINGAS,ELMAINE,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+REFINGAS,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+REFINGAS,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+REFINGAS,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+REFINGAS,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 REFINGAS,ENONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 REFINGAS,EOILGASEX,Industrial,na,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,Y,Y,N,N,N
 REFINGAS,EPOWERPLT,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -2236,7 +2236,7 @@ REFINGAS,INONSPEC,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas a
 REFINGAS,IRONSTL,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 REFINGAS,MACHINE,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 REFINGAS,MAINCHP,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
-REFINGAS,MAINELEC,Electric Power,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+REFINGAS,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 REFINGAS,MAINHEAT,Industrial,na,Total,natural gas ef ratio,N,natural gas addtl eff,N,Y,N,N,N
 REFINGAS,MINING,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 REFINGAS,NECHEM,Industrial,na,Natural gas,na,N,na,N,N,N,N,Y
@@ -2257,7 +2257,7 @@ REFINGAS,TPETCHEM,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas a
 REFINGAS,TREFINER,Industrial,na,Natural gas,natural gas ef ratio,N,natural gas addtl eff,Y,Y,N,N,N
 RESFUEL,AGRICULT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 RESFUEL,AUTOCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-RESFUEL,AUTOELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+RESFUEL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 RESFUEL,AUTOHEAT,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 RESFUEL,CHEMICAL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 RESFUEL,COMMPUB,Commercial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,N,N,Y,N
@@ -2269,10 +2269,10 @@ RESFUEL,DOMESNAV,Transportation,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N
 RESFUEL,EBLASTFUR,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,Y,Y,N
 RESFUEL,ECOKEOVS,Industrial,na,Coal,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
 RESFUEL,EGASWKS,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,Y,N,N,N
-RESFUEL,ELAUTOC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-RESFUEL,ELAUTOE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-RESFUEL,ELMAINC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-RESFUEL,ELMAINE,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+RESFUEL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+RESFUEL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+RESFUEL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+RESFUEL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 RESFUEL,EMINES,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
 RESFUEL,ENONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
 RESFUEL,EOILGASEX,Industrial,na,Liquid fuels,oil ef ratio,Y,oil addtl eff,Y,Y,N,N,N
@@ -2288,7 +2288,7 @@ RESFUEL,INONSPEC,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N
 RESFUEL,IRONSTL,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 RESFUEL,MACHINE,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 RESFUEL,MAINCHP,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
-RESFUEL,MAINELEC,Electric Power,na,Total,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+RESFUEL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 RESFUEL,MAINHEAT,Industrial,na,Total,oil ef ratio,N,oil addtl eff,N,Y,N,N,N
 RESFUEL,MARBUNK,Transportation,na,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 RESFUEL,MINING,Industrial,na,Liquid fuels,oil ef ratio,N,oil addtl eff,Y,Y,N,N,N
@@ -2342,16 +2342,16 @@ SOLARPV,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl
 SOLARPV,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SOLARPV,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SOLARTH,AGRICULT,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
-SOLARTH,AUTOELEC,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+SOLARTH,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SOLARTH,AUTOHEAT,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
 SOLARTH,CHEMICAL,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 SOLARTH,COMMPUB,Commercial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,N,N,Y,N
 SOLARTH,CONSTRUC,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 SOLARTH,DISTLOSS,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,N,N,N,N
-SOLARTH,ELAUTOC,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
-SOLARTH,ELAUTOE,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
-SOLARTH,ELMAINC,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
-SOLARTH,ELMAINE,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+SOLARTH,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+SOLARTH,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+SOLARTH,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+SOLARTH,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SOLARTH,ENONSPEC,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 SOLARTH,EPOWERPLT,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 SOLARTH,EREFINER,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
@@ -2362,7 +2362,7 @@ SOLARTH,HEMAINH,Industrial,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,Y,N
 SOLARTH,INONSPEC,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 SOLARTH,IRONSTL,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
 SOLARTH,MACHINE,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
-SOLARTH,MAINELEC,Electric Power,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+SOLARTH,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SOLARTH,MAINHEAT,Industrial,na,Total,wws heat ef ratio,N,wws heat addtl eff,N,Y,N,N,N
 SOLARTH,MINING,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
 SOLARTH,NONFERR,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,Y,N,N,N
@@ -2376,17 +2376,17 @@ SOLARTH,TRANSEQ,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,
 SOLARTH,WOODPRO,Industrial,na,Renewables,wws heat ef ratio,N,wws heat addtl eff,Y,N,N,N,N
 SUBCOAL,AGRICULT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 SUBCOAL,AUTOCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-SUBCOAL,AUTOELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+SUBCOAL,AUTOELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SUBCOAL,AUTOHEAT,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 SUBCOAL,CHEMICAL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 SUBCOAL,COMMPUB,Commercial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,Y,N
 SUBCOAL,CONSTRUC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 SUBCOAL,DISTLOSS,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,N,N,N,N
 SUBCOAL,DOMESNAV,Transportation,na,Coal,coal ef ratio,N,coal addtl eff,N,N,Y,Y,N
-SUBCOAL,ELAUTOC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-SUBCOAL,ELAUTOE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-SUBCOAL,ELMAINC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-SUBCOAL,ELMAINE,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+SUBCOAL,ELAUTOC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+SUBCOAL,ELAUTOE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+SUBCOAL,ELMAINC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+SUBCOAL,ELMAINE,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SUBCOAL,EMINES,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,Y,Y,N,N,N
 SUBCOAL,ENONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 SUBCOAL,EPATFUEL,Industrial,na,Coal,coal ef ratio,Y,coal addtl eff,N,Y,N,N,N
@@ -2400,7 +2400,7 @@ SUBCOAL,INONSPEC,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 SUBCOAL,IRONSTL,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 SUBCOAL,MACHINE,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 SUBCOAL,MAINCHP,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
-SUBCOAL,MAINELEC,Electric Power,na,Total,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+SUBCOAL,MAINELEC,Electric Power,na,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SUBCOAL,MAINHEAT,Industrial,na,Total,coal ef ratio,N,coal addtl eff,N,Y,N,N,N
 SUBCOAL,MINING,Industrial,na,Coal,coal ef ratio,N,coal addtl eff,Y,Y,N,N,N
 SUBCOAL,NEINTREN,Industrial,na,Coal,na,N,na,N,N,N,N,Y

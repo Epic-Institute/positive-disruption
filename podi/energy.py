@@ -861,6 +861,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ),
             axis=1,
         )
+        energy_post_upstream.rename(index={"baseline": scenario}, inplace=True)
 
         # Apply percentage reduction attributed to additional energy efficiency measures
         addtl_eff = pd.DataFrame(pd.read_csv("podi/data/ef_ratios.csv")).set_index(
@@ -967,6 +968,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             "OFFSHORE",
             "ONSHORE",
             "TIDE",
+            "RELECTR",
         ]
 
         energy_reduced_electrified = pd.concat(
@@ -1022,11 +1024,11 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         energy_reduced_electrified_h["Product_long"] = "Hydrogen"
         energy_reduced_electrified_h["Product"] = "HYDROGEN"
 
-        energy_reduced_electrified2 = pd.concat(
+        energy_reduced_electrified3 = pd.concat(
             [energy_reduced_electrified_e, energy_reduced_electrified_h]
         )
 
-        energy_reduced_electrified2.set_index(
+        energy_reduced_electrified3.set_index(
             [
                 "Scenario",
                 "Region",
@@ -1050,7 +1052,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             pd.concat(
                 [
                     energy_post_addtl_eff.subtract(energy_electrified),
-                    energy_reduced_electrified2,
+                    energy_reduced_electrified3,
                 ]
             )
             .groupby(
@@ -1165,6 +1167,15 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         .clip(upper=1)
     )
 
+    # Estimate the rate of nonrenewable electricity generation being replaced by renewable electricity generation
+    renew = elec_supply[
+        ~elec_supply.index.get_level_values(6).isin(renewables)
+    ].parallel_apply(lambda x: x.multiply(), axis=1) 
+    
+    elec_supply[
+        ~elec_supply.index.get_level_values(6).isin(renewables)
+    ] 
+
     # Set renewables generation to meet RELECTR in the proportion estimated by adoption_curve()
     elec_supply.update(
         per_elec_supply[
@@ -1240,96 +1251,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     ).sum()
 
     energy_post_electrification.drop(labels="RELECTR", level=6, inplace=True)
-
-    # Recalculate nonrenewables decline rate, so total electricity demand is met. Nonrenewables electricity output is scaled by a factor (TFC - total generation) / (TFC - nonrenewable generation)
-    energy_post_electrification[
-        ~energy_post_electrification.index.get_level_values(6).isin(renewables)
-    ].loc[
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        ["Electricity output"],
-        :,
-    ] = (
-        energy_post_electrification[
-            ~energy_post_electrification.index.get_level_values(6).isin(renewables)
-        ]
-        .loc[
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            slice(None),
-            ["Electricity output"],
-            :,
-        ]
-        .parallel_apply(
-            lambda x: x.multiply(
-                1
-                + (
-                    energy_post_electrification.loc[
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        ["Electricity"],
-                        slice(None),
-                        ["Final consumption"],
-                        :,
-                    ].sum()
-                    - energy_post_electrification.loc[
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        ["Electricity output"],
-                        :,
-                    ].sum()
-                )
-                / (
-                    energy_post_electrification.loc[
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        ["Electricity"],
-                        slice(None),
-                        ["Final consumption"],
-                        :,
-                    ].sum()
-                    - energy_post_electrification[
-                        ~energy_post_electrification.index.get_level_values(6).isin(
-                            renewables
-                        )
-                    ]
-                    .loc[
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        slice(None),
-                        ["Electricity output"],
-                        :,
-                    ]
-                    .sum()
-                )
-            ),
-            axis=1,
-        )
-    )
 
     # Recalculate percent of total consumption each technology meets
     per_elec_supply = elec_supply.parallel_apply(

@@ -1007,7 +1007,7 @@ if show_figs is True:
 start_year = 1990
 end_year = 2050
 df = pd.concat([energy_pathway, energy_baseline])
-scenario = 'baseline'
+scenario = 'pathway'
 region = slice(None)
 sector = slice(None)
 subsector = slice(None)
