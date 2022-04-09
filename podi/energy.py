@@ -1168,13 +1168,86 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Estimate the rate of nonrenewable electricity generation being replaced by renewable electricity generation
-    renew = elec_supply[
-        ~elec_supply.index.get_level_values(6).isin(renewables)
-    ].parallel_apply(lambda x: x.multiply(), axis=1) 
-    
-    elec_supply[
-        ~elec_supply.index.get_level_values(6).isin(renewables)
-    ] 
+    renew = pd.concat(
+        [
+            elec_supply[~elec_supply.index.get_level_values(6).isin(renewables)]
+            .parallel_apply(
+                lambda x: x.multiply(
+                    per_elec_supply[
+                        per_elec_supply.index.get_level_values(6).isin(renewables)
+                    ]
+                    .groupby("Region")
+                    .sum()
+                    .loc[x.name[1]]
+                ),
+                axis=1,
+            )
+            .loc[:, :data_end_year]
+            * 0,
+            elec_supply[~elec_supply.index.get_level_values(6).isin(renewables)]
+            .parallel_apply(
+                lambda x: x.multiply(
+                    per_elec_supply[
+                        per_elec_supply.index.get_level_values(6).isin(renewables)
+                    ]
+                    .groupby("Region")
+                    .sum()
+                    .loc[x.name[1]]
+                ),
+                axis=1,
+            )
+            .loc[:, data_end_year + 1 :]
+            .diff(axis=1)
+            .fillna(0)
+            .cumsum(axis=1),
+        ]
+    )
+
+    nonrenew = pd.concat(
+        [
+            pd.DataFrame(
+                0,
+                index=elec_supply[
+                    ~elec_supply.index.get_level_values(6).isin(renewables)
+                ]
+                .parallel_apply(
+                    lambda x: x.multiply(
+                        1
+                        - per_elec_supply[
+                            per_elec_supply.index.get_level_values(6).isin(renewables)
+                        ]
+                        .groupby("Region")
+                        .sum()
+                        .loc[x.name[1]]
+                    ),
+                    axis=1,
+                )
+                .loc[:, data_end_year + 1 :]
+                .diff(axis=1)
+                .cumsum(axis=1)
+                .fillna(0)
+                .index,
+                columns=np.arange(data_start_year, data_end_year + 1),
+            ),
+            elec_supply[~elec_supply.index.get_level_values(6).isin(renewables)]
+            .parallel_apply(
+                lambda x: x.multiply(
+                    1
+                    - per_elec_supply[
+                        per_elec_supply.index.get_level_values(6).isin(renewables)
+                    ]
+                    .groupby("Region")
+                    .sum()
+                    .loc[x.name[1]]
+                ),
+                axis=1,
+            )
+            .loc[:, data_end_year + 1 :]
+            .diff(axis=1)
+            .cumsum(axis=1)
+            .fillna(0),
+        ]
+    )
 
     # Set renewables generation to meet RELECTR in the proportion estimated by adoption_curve()
     elec_supply.update(
@@ -1182,7 +1255,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             per_elec_supply.index.get_level_values(6).isin(renewables)
         ].parallel_apply(
             lambda x: x.multiply(
-                elec_supply[
+                renew.loc[x.name[1]]
+                + elec_supply[
                     elec_supply.index.get_level_values(6).isin(
                         pd.concat([pd.DataFrame(renewables), pd.DataFrame(["RELECTR"])])
                         .squeeze()
