@@ -958,25 +958,51 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         "OFFSHORE",
         "ONSHORE",
         "TIDE",
-        "RELECTR",
     ]
 
     energy_reduced_electrified = pd.concat(
         [
             energy_reduced_electrified,
-            energy_post_addtl_eff[
-                ~energy_post_addtl_eff.index.get_level_values(6).isin(renewables)
-            ].loc[
-                slice(None),
-                slice(None),
-                slice(None),
-                slice(None),
-                slice(None),
-                slice(None),
-                slice(None),
-                ["Electricity output"],
-                :,
-            ],
+            pd.concat(
+                [
+                    energy_post_addtl_eff[
+                        ~energy_post_addtl_eff.index.get_level_values(6).isin(
+                            renewables
+                        )
+                    ]
+                    .loc[
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        ["Electricity output"],
+                        :,
+                    ]
+                    .loc[:, :data_end_year]
+                    * 0,
+                    energy_post_addtl_eff[
+                        ~energy_post_addtl_eff.index.get_level_values(6).isin(
+                            renewables
+                        )
+                    ]
+                    .loc[
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        slice(None),
+                        ["Electricity output"],
+                        :,
+                    ]
+                    .loc[:, data_end_year + 1 :],
+                ],
+                axis=1,
+            ),
         ]
     )
 
@@ -1107,17 +1133,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     file = open("podi/data/adoption_curve_parameters.csv", "w")
     file.close()
 
-    renewables = [
-        "GEOTHERM",
-        "HYDRO",
-        "ROOFTOP",
-        "SOLARPV",
-        "SOLARTH",
-        "OFFSHORE",
-        "ONSHORE",
-        "TIDE",
-    ]
-
     per_elec_supply.update(
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
@@ -1134,16 +1149,20 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         .clip(upper=1)
     )
 
-    renewables.append("RELECTR")
-
     # Estimate the rate of nonrenewable electricity generation being replaced by renewable electricity generation
     nonrenewable_to_renewable = pd.concat(
         [
-            elec_supply[~elec_supply.index.get_level_values(6).isin(renewables)]
+            elec_supply[
+                ~elec_supply.index.get_level_values(6).isin(
+                    pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                )
+            ]
             .parallel_apply(
                 lambda x: x.multiply(
                     per_elec_supply[
-                        per_elec_supply.index.get_level_values(6).isin(renewables)
+                        per_elec_supply.index.get_level_values(6).isin(
+                            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                        )
                     ]
                     .groupby("Region")
                     .sum()
@@ -1153,11 +1172,17 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             )
             .loc[:, :data_end_year]
             * 0,
-            elec_supply[~elec_supply.index.get_level_values(6).isin(renewables)]
+            elec_supply[
+                ~elec_supply.index.get_level_values(6).isin(
+                    pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                )
+            ]
             .parallel_apply(
                 lambda x: x.multiply(
                     per_elec_supply[
-                        per_elec_supply.index.get_level_values(6).isin(renewables)
+                        per_elec_supply.index.get_level_values(6).isin(
+                            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                        )
                     ]
                     .groupby("Region")
                     .sum()
@@ -1176,12 +1201,18 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # Update nonrenewables electricity generation
     nonrenew = pd.concat(
         [
-            elec_supply[~elec_supply.index.get_level_values(6).isin(renewables)]
+            elec_supply[
+                ~elec_supply.index.get_level_values(6).isin(
+                    pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                )
+            ]
             .parallel_apply(
                 lambda x: x.multiply(
                     1
                     - per_elec_supply[
-                        per_elec_supply.index.get_level_values(6).isin(renewables)
+                        per_elec_supply.index.get_level_values(6).isin(
+                            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                        )
                     ]
                     .groupby("Region")
                     .sum()
@@ -1191,12 +1222,18 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             )
             .loc[:, :data_end_year]
             * 0,
-            elec_supply[~elec_supply.index.get_level_values(6).isin(renewables)]
+            elec_supply[
+                ~elec_supply.index.get_level_values(6).isin(
+                    pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                )
+            ]
             .parallel_apply(
                 lambda x: x.multiply(
                     1
                     - per_elec_supply[
-                        per_elec_supply.index.get_level_values(6).isin(renewables)
+                        per_elec_supply.index.get_level_values(6).isin(
+                            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                        )
                     ]
                     .groupby("Region")
                     .sum()
@@ -1212,22 +1249,46 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
-    elec_supply[~elec_supply.index.get_level_values(6).isin(renewables)] = elec_supply[
-        ~elec_supply.index.get_level_values(6).isin(renewables)
-    ].parallel_apply(lambda x: (x + nonrenew.loc[x.name]).clip(lower=0), axis=1)
+    elec_supply[
+        ~elec_supply.index.get_level_values(6).isin(
+            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+        )
+    ] = elec_supply[
+        ~elec_supply.index.get_level_values(6).isin(
+            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+        )
+    ].parallel_apply(
+        lambda x: (x + nonrenew.loc[x.name]).clip(lower=0), axis=1
+    )
 
     # Set renewables generation to meet RELECTR in the proportion estimated by adoption_curve(), and nonrenewable electricity generation that shifts to renewable generation
     elec_supply.update(
-        per_elec_supply[
-            per_elec_supply.index.get_level_values(6).isin(renewables)
-        ].parallel_apply(
-            lambda x: x.multiply(
-                nonrenewable_to_renewable.groupby("Region").sum(0).loc[x.name[1]]
-                + elec_supply[elec_supply.index.get_level_values(6).isin(renewables)]
-                .groupby("Region")
-                .sum(0)
-                .loc[x.name[1]]
-            ),
+        pd.concat(
+            [
+                per_elec_supply[
+                    per_elec_supply.index.get_level_values(6).isin(renewables)
+                ].loc[:, :data_end_year],
+                per_elec_supply[
+                    per_elec_supply.index.get_level_values(6).isin(renewables)
+                ]
+                .parallel_apply(
+                    lambda x: x.multiply(
+                        nonrenewable_to_renewable.groupby("Region")
+                        .sum(0)
+                        .loc[x.name[1]]
+                        + elec_supply[
+                            elec_supply.index.get_level_values(6).isin(
+                                pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                            )
+                        ]
+                        .groupby("Region")
+                        .sum(0)
+                        .loc[x.name[1]]
+                    ),
+                    axis=1,
+                )
+                .loc[:, data_end_year + 1 :],
+            ],
             axis=1,
         )
     )
