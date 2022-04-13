@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 # region
-from unicodedata import name
 import warnings
 import numpy as np
 import pandas as pd
@@ -37,9 +36,9 @@ scenario = "pathway"
 # ENERGY #
 ##########
 
+recalc_energy = False
 # region
 
-recalc_energy = False
 if recalc_energy is True:
     energy("pathway", data_start_year, data_end_year, proj_end_year)
     index = [
@@ -58,10 +57,35 @@ if recalc_energy is True:
         "Non-Energy Use",
     ]
 
+    energy_baseline = pd.DataFrame(
+        pd.read_csv("podi/data/energy_baseline.csv")
+    ).set_index(index)
+    energy_baseline.columns = energy_baseline.columns.astype(int)
+
     energy_pathway = pd.DataFrame(
         pd.read_csv("podi/data/energy_" + scenario + ".csv")
     ).set_index(index)
     energy_pathway.columns = energy_pathway.columns.astype(int)
+
+    energy_percent = pd.DataFrame(
+        pd.read_csv("podi/data/energy_percent.csv")
+    ).set_index(index)
+    energy_percent.columns = energy_percent.columns.astype(int)
+
+    energy_electrified = pd.DataFrame(
+        pd.read_csv("podi/data/energy_electrified.csv")
+    ).set_index(index)
+    energy_electrified.columns = energy_electrified.columns.astype(int)
+
+    energy_post_upstream = pd.DataFrame(
+        pd.read_csv("podi/data/energy_post_upstream.csv")
+    ).set_index(index)
+    energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
+
+    energy_post_addtl_eff = pd.DataFrame(
+        pd.read_csv("podi/data/energy_post_addtl_eff.csv")
+    ).set_index(index)
+    energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
 else:
     index = [
@@ -80,11 +104,35 @@ else:
         "Non-Energy Use",
     ]
 
+    energy_baseline = pd.DataFrame(
+        pd.read_csv("podi/data/energy_baseline.csv")
+    ).set_index(index)
+    energy_baseline.columns = energy_baseline.columns.astype(int)
+
     energy_pathway = pd.DataFrame(
         pd.read_csv("podi/data/energy_" + scenario + ".csv")
     ).set_index(index)
     energy_pathway.columns = energy_pathway.columns.astype(int)
 
+    energy_percent = pd.DataFrame(
+        pd.read_csv("podi/data/energy_percent.csv")
+    ).set_index(index)
+    energy_percent.columns = energy_percent.columns.astype(int)
+
+    energy_electrified = pd.DataFrame(
+        pd.read_csv("podi/data/energy_electrified.csv")
+    ).set_index(index)
+    energy_electrified.columns = energy_electrified.columns.astype(int)
+
+    energy_post_upstream = pd.DataFrame(
+        pd.read_csv("podi/data/energy_post_upstream.csv")
+    ).set_index(index)
+    energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
+
+    energy_post_addtl_eff = pd.DataFrame(
+        pd.read_csv("podi/data/energy_post_addtl_eff.csv")
+    ).set_index(index)
+    energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
 # endregion
 
@@ -93,36 +141,17 @@ else:
 #########
 
 # region
-ncsmx2030 = False
+afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu(
+    "baseline"
+)
 
-if ncsmx2030 is True:
-    afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu2030(
-        "baseline"
-    )
+afolu_em_pathway, afolu_per_adoption_pathway, afolu_per_max_pathway = afolu("pathway")
 
-    afolu_em_pathway, afolu_per_adoption_pathway, afolu_per_max_pathway = afolu2030(
-        "pathway"
-    )
+afolu_em = afolu_em_baseline.append(afolu_em_pathway)
 
-    afolu_em = afolu_em_baseline.append(afolu_em_pathway)
+afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
 
-    afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
-
-    afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
-else:
-    afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu(
-        "baseline"
-    )
-
-    afolu_em_pathway, afolu_per_adoption_pathway, afolu_per_max_pathway = afolu(
-        "pathway"
-    )
-
-    afolu_em = afolu_em_baseline.append(afolu_em_pathway)
-
-    afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
-
-    afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
+afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
 
 afolu_em.loc[
     slice(None),
