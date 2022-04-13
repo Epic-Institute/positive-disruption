@@ -936,9 +936,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
-    # Find the reduced amount of electrical energy that represents an equivalent amount of work to that of the energy that undergoes electrification. Nuclear is excluded because, while it is estimated to reduce via shift to renewables, the electrical energy to represent an equivalent amount of work is the same.
+    # Find the reduced amount of electrical energy that represents an equivalent amount of work to that of the energy that undergoes electrification.
     energy_reduced_electrified = energy_electrified[
-        energy_electrified.index.get_level_values(5) != "Nuclear"
+        energy_electrified.index.get_level_values(7) != "Electricity output"
     ].parallel_apply(
         lambda x: x.mul(
             ef_ratios.loc[x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]]
@@ -999,7 +999,10 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                         ["Electricity output"],
                         :,
                     ]
-                    .loc[:, data_end_year + 1 :],
+                    .loc[:, data_end_year + 1 :]
+                    .diff(axis=1)
+                    .fillna(0)
+                    .cumsum(axis=1),
                 ],
                 axis=1,
             ),
@@ -1265,10 +1268,13 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     elec_supply.update(
         pd.concat(
             [
-                per_elec_supply[
-                    per_elec_supply.index.get_level_values(6).isin(renewables)
-                ].loc[:, :data_end_year],
-                per_elec_supply[
+                elec_supply[elec_supply.index.get_level_values(6).isin(renewables)].loc[
+                    :, :data_end_year
+                ],
+                elec_supply[elec_supply.index.get_level_values(6).isin(renewables)].loc[
+                    :, data_end_year + 1 :
+                ]
+                + per_elec_supply[
                     per_elec_supply.index.get_level_values(6).isin(renewables)
                 ]
                 .parallel_apply(
@@ -1278,7 +1284,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                         .loc[x.name[1]]
                         + elec_supply[
                             elec_supply.index.get_level_values(6).isin(
-                                pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                                pd.Series("RELECTR")
                             )
                         ]
                         .groupby("Region")
