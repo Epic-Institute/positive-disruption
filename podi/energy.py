@@ -1271,9 +1271,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 elec_supply[elec_supply.index.get_level_values(6).isin(renewables)].loc[
                     :, :data_end_year
                 ],
-                elec_supply[elec_supply.index.get_level_values(6).isin(renewables)].loc[
-                    :, data_end_year + 1 :
-                ]
                 + per_elec_supply[
                     per_elec_supply.index.get_level_values(6).isin(renewables)
                 ]
@@ -1282,12 +1279,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                         nonrenewable_to_renewable.groupby("Region")
                         .sum(0)
                         .loc[x.name[1]]
-                        + elec_supply[
-                            elec_supply.index.get_level_values(6).isin(
-                                pd.Series("RELECTR")
-                            )
-                        ]
-                        .groupby("Region")
+                        + elec_supply.groupby("Region")
                         .sum(0)
                         .loc[x.name[1]]
                     ),
