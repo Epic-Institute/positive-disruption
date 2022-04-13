@@ -1271,7 +1271,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 elec_supply[elec_supply.index.get_level_values(6).isin(renewables)].loc[
                     :, :data_end_year
                 ],
-                + per_elec_supply[
+                +per_elec_supply[
                     per_elec_supply.index.get_level_values(6).isin(renewables)
                 ]
                 .parallel_apply(
@@ -1279,9 +1279,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                         nonrenewable_to_renewable.groupby("Region")
                         .sum(0)
                         .loc[x.name[1]]
-                        + elec_supply.groupby("Region")
-                        .sum(0)
-                        .loc[x.name[1]]
+                        + elec_supply.groupby("Region").sum(0).loc[x.name[1]]
                     ),
                     axis=1,
                 )
@@ -1290,9 +1288,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             axis=1,
         )
     )
-
-    # Drop RELECTR now that it has been reallocated to the specific set of renewables
-    elec_supply.drop(labels="RELECTR", level=6, inplace=True)
 
     # Recast RELECTR to ELECTR in Final consumption
     energy_post_electrification.reset_index(inplace=True)
@@ -1351,6 +1346,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[1]]),
         axis=1,
     ).fillna(0)
+
+    # Drop RELECTR now that it has been reallocated to the specific set of renewables
+    elec_supply.drop(labels="RELECTR", level=6, inplace=True)
 
     # Update energy_post electrification with new renewables technology mix values
     energy_post_electrification.update(elec_supply)
