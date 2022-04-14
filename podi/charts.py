@@ -1476,9 +1476,10 @@ for vertical in fig2['Sector'].unique():
         margin_l=10,
         margin_r=10,
     )
-
+    
     if show_figs is True:
         fig.show()
+    
     pio.write_html(
     fig,
     file=(
@@ -1487,12 +1488,10 @@ for vertical in fig2['Sector'].unique():
         + "-"
         + str(region).replace("slice(None, None, None)", "World")
         + "-"
-        + str(sector).replace("slice(None, None, None)", "All")
+        + str(vertical).replace("slice(None, None, None)", "All")
         + ".html"
-    ),
+    ).replace(" ",""),
     auto_open=False)
-    
-
 
 # endregion
 
