@@ -26,9 +26,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     max_extent["Duration 1 (Years)"] = np.where(
         (
             (max_extent["Duration 1 (Years)"].isna())
-            | (max_extent["Duration 1 (Years)"] > 2100 - 2019)
+            | (max_extent["Duration 1 (Years)"] > proj_end_year - data_end_year)
         ),
-        2100 - 2019,
+        proj_end_year - data_end_year,
         max_extent["Duration 1 (Years)"],
     )
 
@@ -62,11 +62,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             max_extent["Value 3"],
             max_extent["Duration 3 (Years)"],
         ],
-        columns=np.arange(1990, 2100 + 1, 1),
+        columns=np.arange(data_start_year, proj_end_year + 1, 1),
         dtype=float,
     )
-    max_extent2.loc[:, 1990] = max_extent["Value 1"].values
-    max_extent2.loc[:, 2100] = max_extent["Value 1"].values
+    max_extent2.loc[:, data_start_year] = max_extent["Value 1"].values
+    max_extent2.loc[:, proj_end_year] = max_extent["Value 1"].values
     max_extent2.interpolate(axis=1, limit_area="inside", inplace=True)
     max_extent2 = max_extent2.droplevel(
         [
@@ -91,9 +91,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     flux["Duration 1 (Years)"] = np.where(
         (
             (flux["Duration 1 (Years)"].isna())
-            | (flux["Duration 1 (Years)"] > 2100 - 2019)
+            | (flux["Duration 1 (Years)"] > proj_end_year - data_end_year)
         ),
-        2100 - 2019,
+        proj_end_year - data_end_year,
         flux["Duration 1 (Years)"],
     )
 
@@ -123,10 +123,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             flux["Value 3"],
             flux["Duration 3 (Years)"],
         ],
-        columns=np.arange(1990, 2100 + 1, 1),
+        columns=np.arange(data_start_year, proj_end_year + 1, 1),
         dtype=float,
     )
-    flux2.loc[:, 1990] = flux["Value 1"].values
+    flux2.loc[:, data_start_year] = flux["Value 1"].values
 
     flux2.interpolate(axis=1, limit_area="inside", inplace=True)
 
@@ -163,7 +163,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     hist = pd.DataFrame(hist).set_index(["Region", "Subvector"])
     hist.columns = hist.columns.astype(int)
-    hist = hist.loc[:, 1990:]
+    hist = hist.loc[:, data_start_year:]
     hist.interpolate(axis=1, limit_area="inside", inplace=True)
     hist1 = (
         hist.loc[
@@ -185,7 +185,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         ]
         .fillna(0)
         .parallel_apply(
-            lambda x: x.divide(max_extent2.loc[x.name[0], x.name[1]].loc[:2020]), axis=1
+            lambda x: x.divide(
+                max_extent2.loc[x.name[0], x.name[1]].loc[: data_end_year + 1]
+            ),
+            axis=1,
         )
     )
     hist1 = hist1.replace(0, NaN).clip(upper=0.99)
@@ -239,10 +242,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     cw = tnc_crosswalk[["Sub-vector", "Analog Name"]]
 
-    hist1.loc[:, 1990] = 0
-    hist0 = hist1[hist1.loc[:, :2020].sum(axis=1) <= 0.0]
-    hist1 = hist1[hist1.loc[:, :2020].sum(axis=1) > 0.0]
-    hist0.loc[:, 2020] = 0.0
+    hist1.loc[:, data_start_year] = 0
+    hist0 = hist1[hist1.loc[:, : data_end_year + 1].sum(axis=1) <= 0.0]
+    hist1 = hist1[hist1.loc[:, : data_end_year + 1].sum(axis=1) > 0.0]
+    hist0.loc[:, data_end_year + 1] = 0.0
     hist1 = hist1.append(hist0)
     hist1.interpolate(axis=1, limit_area="inside", inplace=True)
 
@@ -327,7 +330,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             foo = pd.DataFrame(
                 flux2.loc[adoption.index[i][0], adoption.index[i][1]]
             ).T * (adoption.iloc[i, j] - adoption.iloc[i, max(0, j - 1)])
-            foo2 = foo.loc[:, : str(1990 + int(2100 - adoption.columns[j]))]
+            foo2 = foo.loc[
+                :, : str(data_start_year + int(proj_end_year - adoption.columns[j]))
+            ]
             foo2.columns = foo.loc[:, str(adoption.columns[j]) :].columns
 
             adopt_row = pd.concat([pd.DataFrame(adopt_row), foo2])
@@ -344,7 +349,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             foo = pd.DataFrame(
                 flux2.loc[adoption.index[i][0], adoption.index[i][1]]
             ).T * (adoption.iloc[i, j] - adoption.iloc[i, max(0, j - 1)])
-            foo2 = foo.loc[:, : str(1990 + int(2100 - adoption.columns[j]))]
+            foo2 = foo.loc[:, : str(data_start_year + int(2100 - adoption.columns[j]))]
             foo2.columns = foo.loc[:, str(adoption.columns[j]) :].columns
 
             adopt_row = pd.DataFrame(adopt_row).append(foo2)
@@ -396,21 +401,23 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     avoid.columns = avoid.columns.astype(int)
 
-    avoid.loc[:, :2019] = 0
+    avoid.loc[:, :data_end_year] = 0
 
-    avoid.loc[:, 2020:] = -avoid.loc[:, 2020:].parallel_apply(
+    avoid.loc[:, data_end_year + 1 :] = -avoid.loc[
+        :, data_end_year + 1 :
+    ].parallel_apply(
         lambda x: x.subtract(
-            avoid.loc[x.name[0], x.name[1], x.name[2], :][2020].values[0]
+            avoid.loc[x.name[0], x.name[1], x.name[2], :][data_end_year + 1].values[0]
         ),
         axis=1,
     )
 
     avoid_per = -avoid.parallel_apply(
-        lambda x: ((x[2019] - x) / x.max()).fillna(0), axis=1
+        lambda x: ((x[data_end_year] - x) / x.max()).fillna(0), axis=1
     )
 
     """
-    avoid_per = avoid.parallel_apply(lambda x: ((x[2019] - x) / x[2019]).fillna(0), axis=1)
+    avoid_per = avoid.parallel_apply(lambda x: ((x[data_end_year] - x) / x[data_end_year]).fillna(0), axis=1)
 
     avoid_per = (
         (
@@ -588,19 +595,19 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
-    afolu_em_hist = afolu_em_hist.loc[:, 1990:]
+    afolu_em_hist = afolu_em_hist.loc[:, data_start_year:]
 
     # estimated mitigation
     afolu_em_mit = -(pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag]))
     afolu_em_mit.columns = afolu_em_mit.columns.astype(int)
-    afolu_em_mit.loc[:, :2019] = 0
+    afolu_em_mit.loc[:, :data_end_year] = 0
 
-    # shift mitigation values by 2020 value
+    # shift mitigation values by data_end_year+1 value
     afolu_em_mit = afolu_em_mit.parallel_apply(
         lambda x: x.subtract(
             (
                 afolu_em_mit.loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
-                .loc[:, 2020]
+                .loc[:, data_end_year + 1]
                 .values[0]
             )
         ),
@@ -629,7 +636,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     if scenario == "baseline":
-        afolu_em.loc[:, 2019:] = curve_smooth(afolu_em.loc[:, 2019:], "linear", 1)
+        afolu_em.loc[:, data_end_year:] = curve_smooth(
+            afolu_em.loc[:, data_end_year:], "linear", 1
+        )
 
     # create 16 region df for max extent
 

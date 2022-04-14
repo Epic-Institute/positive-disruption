@@ -1495,7 +1495,6 @@ for vertical in fig2['Sector'].unique():
 
 # endregion
 
-
 ##################################################
 # SOLUTION ADOPTION RATES SUBVERTICALS BY SOURCE #
 ##################################################
@@ -1513,7 +1512,7 @@ flow_category = slice(None)
 nonenergyuse = ['N']
 
 # Percent of electric power that is renewables
-electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "ROOFTOP", "SOLARPV", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
+electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
 
 # Percent of transport energy that is electric or nonelectric renewables
 transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long','Flow_long']).sum().sum(0)) * 100
@@ -1694,7 +1693,7 @@ flow_category = slice(None)
 nonenergyuse = ['N']
 
 # electric power that is renewables
-electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "ROOFTOP", "SOLARPV", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum()
+electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum()
 
 # transport energy that is electric or nonelectric renewables
 transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum()
@@ -1719,7 +1718,7 @@ improvedforestmgmt = []
 
 vertical_units = {'Electric Power':"TJ", 'Transportation':"TJ",'Buildings':"TJ",'Industrial':"TJ",'agriculture':"MHa",'biochar':"Tgdm",'forestswetlands':"MHa",'improvedforestmgmt':"m^3"}
 
-subvertical_units = {"GEOTHERM":"TJ", "HYDRO":"TJ", "ROOFTOP":"TJ", "SOLARPV":"TJ", "SOLARTH":"TJ", "OFFSHORE":"TJ", "ONSHORE":"TJ", "TIDE":"TJ", 'BIODIESEL':"TJ", 'BIOGASOL':"TJ",'BIOGASES':"TJ",'OBIOLIQ':"TJ", 'ELECTR':"TJ", 'RELECTR':"TJ", 'HYDROGEN':"TJ", 'MUNWASTER':"TJ", "Cropland Soil Health":"MHa", "Trees in Croplands":"MHa","Nitrogen Fertilizer Management":"MHa","Improved Rice":"MHa","Animal Management":"MHa","Silvopasture":"MHa","Legumes in Pastures":"MHa","Optimal Intensity":"MHa", 'Biochar':"Tgdm", "Avoided Forest Conversion":"MHa","Reforestation":"MHa","Improved Forest Management":"m^3","Avoided Peat Impacts":"MHa","Peat Restoration":"MHa","Avoided Coastal Impacts":"MHa","Coastal Restoration":"MHa"}
+subvertical_units = {"GEOTHERM":"TJ", "HYDRO":"TJ", "SOLARPV":"TJ", "SOLARTH":"TJ", "OFFSHORE":"TJ", "ONSHORE":"TJ", "TIDE":"TJ", 'BIODIESEL':"TJ", 'BIOGASOL':"TJ",'BIOGASES':"TJ",'OBIOLIQ':"TJ", 'ELECTR':"TJ", 'RELECTR':"TJ", 'HYDROGEN':"TJ", 'MUNWASTER':"TJ", "Cropland Soil Health":"MHa", "Trees in Croplands":"MHa","Nitrogen Fertilizer Management":"MHa","Improved Rice":"MHa","Animal Management":"MHa","Silvopasture":"MHa","Legumes in Pastures":"MHa","Optimal Intensity":"MHa", 'Biochar':"Tgdm", "Avoided Forest Conversion":"MHa","Reforestation":"MHa","Improved Forest Management":"m^3","Avoided Peat Impacts":"MHa","Peat Restoration":"MHa","Avoided Coastal Impacts":"MHa","Coastal Restoration":"MHa"}
 
 fig = pd.concat([electricity, transport, buildings, industry]).T
 fig.index.name = "Year"

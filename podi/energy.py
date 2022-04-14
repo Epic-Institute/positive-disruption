@@ -212,18 +212,13 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     irena.columns = irena.columns.astype(int)
     irena = irena.loc[:, data_start_year:data_end_year]
 
-    # Drop IEA WIND and SOLARPV to avoid duplication with IRENA ONSHORE/OFFSHORE/ROOFTOP/SOLARPV
+    # Drop IEA WIND and SOLARPV to avoid duplication with IRENA ONSHORE/OFFSHORE
     energy_historical.drop(labels="WIND", level=1, inplace=True)
-    energy_historical.drop(labels="SOLARPV", level=1, inplace=True)
 
     energy_historical = pd.concat(
         [
             energy_historical,
-            irena[
-                irena.index.get_level_values(1).isin(
-                    ["ONSHORE", "OFFSHORE", "ROOFTOP", "SOLARPV"]
-                )
-            ],
+            irena[irena.index.get_level_values(1).isin(["ONSHORE", "OFFSHORE"])],
         ]
     )
 
@@ -633,22 +628,22 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         energy_baseline.rename(index={scenario: "baseline"}).to_csv(
             "podi/data/energy_baseline.csv"
         )
-    else:
-        index = [
-            "Scenario",
-            "Region",
-            "Sector",
-            "Subsector",
-            "Product_category",
-            "Product_long",
-            "Product",
-            "Flow_category",
-            "Flow_long",
-            "Flow",
-            "Hydrogen",
-            "Flexible",
-            "Non-Energy Use",
-        ]
+
+    index = [
+        "Scenario",
+        "Region",
+        "Sector",
+        "Subsector",
+        "Product_category",
+        "Product_long",
+        "Product",
+        "Flow_category",
+        "Flow_long",
+        "Flow",
+        "Hydrogen",
+        "Flexible",
+        "Non-Energy Use",
+    ]
 
     energy_baseline = pd.DataFrame(
         pd.read_csv("podi/data/energy_baseline.csv")
@@ -952,7 +947,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     renewables = [
         "GEOTHERM",
         "HYDRO",
-        "ROOFTOP",
         "SOLARPV",
         "SOLARTH",
         "OFFSHORE",
