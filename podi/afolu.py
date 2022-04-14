@@ -1,117 +1,26 @@
 # region
 
 import pandas as pd
-from podi.adoption_curve import adoption_curve
+from podi.adoption_curve_afolu import adoption_curve_afolu
 from numpy import NaN
 import numpy as np
 from podi.curve_smooth import curve_smooth
+from pandarallel import pandarallel
 
-region_list = pd.read_csv("podi/data/region_categories.csv", header=None, squeeze=True)
-
-
-def rgroup(data, gas, sector, rgroup, scenario):
-    region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=[rgroup, "IEA Region"]
-    )
-
-    # make new row for world level data
-    data_world = pd.DataFrame(data.sum()).T.rename(index={0: "World "})
-
-    data = data.merge(region_categories, right_on=[rgroup], left_on=["Country"])
-
-    data = data.groupby("IEA Region").sum()
-
-    # split into various levels of IEA regional grouping
-    data["IEA Region 1"] = data.apply(lambda x: x.name.split()[2] + " ", axis=1)
-    data["IEA Region 2"] = data.apply(lambda x: x.name.split()[4] + " ", axis=1)
-    data["IEA Region 3"] = data.apply(lambda x: x.name.split()[-1] + " ", axis=1)
-
-    data.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
-
-    # make new rows for OECD/NonOECD regions
-    data_oecd = pd.DataFrame(data.groupby("IEA Region 1").sum()).rename(
-        index={"OECD ": " OECD "}
-    )
-
-    # make new rows for IEA regions
-    data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
-    data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
-
-    # combine all
-    data = data_world.append(
-        [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
-    )
-    data.index.name = "Region"
-
-    data = pd.concat([data], names=["Sector"], keys=[sector])
-    data = pd.concat([data], names=["Metric"], keys=[sector])
-    data = pd.concat([data], names=["Scenario"], keys=[scenario]).reorder_levels(
-        ["Region", "Sector", "Metric", "Scenario"]
-    )
-    data = data.loc[np.array(region_list), slice(None), slice(None), slice(None)]
-
-    return data
-
-
-def rgroup2(data, gas, sector, rgroup, scenario):
-    region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=[rgroup, "IEA Region"]
-    )
-
-    # make new row for world level data
-    data_world = pd.DataFrame(data.mean()).T.rename(index={0: "World "})
-
-    data = data.merge(region_categories, right_on=[rgroup], left_on=["Country"])
-
-    data = data.groupby("IEA Region").mean()
-
-    # split into various levels of IEA regional grouping
-    data["IEA Region 1"] = data.apply(lambda x: x.name.split()[2] + " ", axis=1)
-    data["IEA Region 2"] = data.apply(lambda x: x.name.split()[4] + " ", axis=1)
-    data["IEA Region 3"] = data.apply(lambda x: x.name.split()[-1] + " ", axis=1)
-
-    data.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
-
-    # make new rows for OECD/NonOECD regions
-    data_oecd = pd.DataFrame(data.groupby("IEA Region 1").mean()).rename(
-        index={"OECD ": " OECD "}
-    )
-
-    # make new rows for IEA regions
-    data_regions = pd.DataFrame(data.groupby("IEA Region 2").mean())
-    data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").mean())
-
-    # combine all
-    data = data_world.append(
-        [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
-    )
-    data.index.name = "Region"
-
-    data = pd.concat([data], names=["Sector"], keys=[sector])
-    data = pd.concat([data], names=["Metric"], keys=[sector])
-    data = pd.concat([data], names=["Scenario"], keys=[scenario]).reorder_levels(
-        ["Region", "Sector", "Metric", "Scenario"]
-    )
-    data = data.loc[np.array(region_list), slice(None), slice(None), slice(None)]
-
-    return data
-
+pandarallel.initialize(nb_workers=4)
 
 # endregion
 
 
-def afolu(scenario):
-    input_data_3 = pd.read_csv("podi/data/tnc_input_data_3.csv")
-    avoided_pathways_input = pd.read_csv("podi/data/tnc_avoided_pathways_input.csv")
-    hist_obs = pd.read_csv("podi/data/tnc_hist_obs.csv")
-    crosswalk = pd.read_csv("podi/data/tnc_crosswalk.csv")
-    analogs = pd.read_csv("podi/data/tnc_analogs.csv")
+def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # create max extent df
 
     # region
-    max_extent = input_data_3[input_data_3["Metric"] == "Max extent"].drop(
-        columns=["Metric", "Model", "Scenario", "Region", "iso", "Unit"]
+    tnc_input_data = pd.read_csv("podi/data/tnc_input_data.csv")
+
+    max_extent = tnc_input_data[tnc_input_data["Metric"] == "Max extent"].drop(
+        columns=["Metric", "Model", "Scenario", "iso", "Unit"]
     )
 
     max_extent["Duration 1 (Years)"] = np.where(
@@ -145,7 +54,7 @@ def afolu(scenario):
 
     max_extent2 = pd.DataFrame(
         index=[
-            max_extent["Country"],
+            max_extent["Region"],
             max_extent["Subvector"],
             max_extent["Duration 1 (Years)"],
             max_extent["Value 2"],
@@ -175,9 +84,9 @@ def afolu(scenario):
 
     # region
 
-    flux = input_data_3[input_data_3["Metric"] == "Avg mitigation potential flux"].drop(
-        columns=["Metric", "Model", "Scenario", "Region", "iso", "Unit"]
-    )
+    flux = tnc_input_data[
+        tnc_input_data["Metric"] == "Avg mitigation potential flux"
+    ].drop(columns=["Metric", "Model", "Scenario", "iso", "Unit"])
 
     flux["Duration 1 (Years)"] = np.where(
         (
@@ -206,7 +115,7 @@ def afolu(scenario):
 
     flux2 = pd.DataFrame(
         index=[
-            flux["Country"],
+            flux["Region"],
             flux["Subvector"],
             flux["Duration 1 (Years)"],
             flux["Value 2"],
@@ -223,7 +132,7 @@ def afolu(scenario):
 
     flux2 = pd.read_csv("podi/data/tnc_flux.csv").set_index(
         [
-            "Country",
+            "Region",
             "Subvector",
             "Duration 1 (Years)",
             "Value 2",
@@ -248,12 +157,11 @@ def afolu(scenario):
     # create historical observations df (as % of max extent)
 
     # region
+    tnc_hist_obs = pd.read_csv("podi/data/tnc_hist_obs.csv")
 
-    hist = hist_obs.drop(
-        columns=["iso", "Model", "Scenario", "Region", "Metric", "Unit"]
-    )
+    hist = tnc_hist_obs.drop(columns=["iso", "Model", "Scenario", "Metric", "Unit"])
 
-    hist = pd.DataFrame(hist).set_index(["Country", "Subvector"])
+    hist = pd.DataFrame(hist).set_index(["Region", "Subvector"])
     hist.columns = hist.columns.astype(int)
     hist = hist.loc[:, 1990:]
     hist.interpolate(axis=1, limit_area="inside", inplace=True)
@@ -276,7 +184,7 @@ def afolu(scenario):
             :,
         ]
         .fillna(0)
-        .apply(
+        .parallel_apply(
             lambda x: x.divide(max_extent2.loc[x.name[0], x.name[1]].loc[:2020]), axis=1
         )
     )
@@ -287,9 +195,10 @@ def afolu(scenario):
     # compute adoption curves of historical analogs
 
     # region
+    tnc_analogs = pd.read_csv("podi/data/tnc_analogs.csv")
 
     acurves = (
-        pd.DataFrame(analogs)
+        pd.DataFrame(tnc_analogs)
         .drop(columns=["Note", "Units", "Actual start year"])
         .set_index(["Analog name", "Max (Mha)"])
     )
@@ -297,17 +206,16 @@ def afolu(scenario):
     acurves.columns.rename("Year", inplace=True)
     acurves.drop(index=NaN, inplace=True)
     acurves.interpolate(axis=1, limit_area="inside", inplace=True)
-    acurves = acurves.apply(lambda x: x / x.name[1], axis=1)
-    acurves = acurves.apply(lambda x: x - x[1], axis=1)
+    acurves = acurves.parallel_apply(lambda x: x / x.name[1], axis=1)
+    acurves = acurves.parallel_apply(lambda x: x - x[1], axis=1)
     acurves.columns = np.arange(2021, 2065, 1)
 
-    proj_per_adoption = acurves.apply(
-        lambda x: adoption_curve(
+    proj_per_adoption = acurves.parallel_apply(
+        lambda x: adoption_curve_afolu(
             x.dropna().rename(x.name[0]),
+            x.name[0],
             scenario,
-            data_start_year,
-            data_end_year,
-            proj_end_year,
+            "AFOLU",
         ),
         axis=1,
     )
@@ -318,7 +226,7 @@ def afolu(scenario):
 
     per.set_index(proj_per_adoption.index, inplace=True)
 
-    per = per.apply(lambda x: x - x[2021], axis=1)
+    per = per.parallel_apply(lambda x: x - x[2021], axis=1)
 
     per = per.droplevel("Max (Mha)")
 
@@ -327,8 +235,9 @@ def afolu(scenario):
     # match historical analogs to each subvector
 
     # region
+    tnc_crosswalk = pd.read_csv("podi/data/tnc_crosswalk.csv")
 
-    cw = crosswalk[["Sub-vector", "Analog Name"]]
+    cw = tnc_crosswalk[["Sub-vector", "Analog Name"]]
 
     hist1.loc[:, 1990] = 0
     hist0 = hist1[hist1.loc[:, :2020].sum(axis=1) <= 0.0]
@@ -337,7 +246,7 @@ def afolu(scenario):
     hist1 = hist1.append(hist0)
     hist1.interpolate(axis=1, limit_area="inside", inplace=True)
 
-    hist1 = hist1.apply(
+    hist1 = hist1.parallel_apply(
         lambda x: pd.concat(
             [
                 x.dropna(),
@@ -400,7 +309,7 @@ def afolu(scenario):
 
     # region
 
-    adoption = hist1.apply(
+    adoption = hist1.parallel_apply(
         lambda x: x.multiply(max_extent2.loc[x.name[0], x.name[1]]), axis=1
     ).fillna(0)
 
@@ -421,6 +330,23 @@ def afolu(scenario):
             foo2 = foo.loc[:, : str(1990 + int(2100 - adoption.columns[j]))]
             foo2.columns = foo.loc[:, str(adoption.columns[j]) :].columns
 
+            adopt_row = pd.concat([pd.DataFrame(adopt_row), foo2])
+
+        adopt_row.iloc[0] = adopt_row.sum().values
+        adoption2 = pd.concat(
+            [pd.DataFrame(adoption2), pd.DataFrame(adopt_row.iloc[0]).T]
+        )
+
+    """
+    for i in range(0, len(adoption)):
+        adopt_row = []
+        for j in range(0, len(adoption.iloc[i])):
+            foo = pd.DataFrame(
+                flux2.loc[adoption.index[i][0], adoption.index[i][1]]
+            ).T * (adoption.iloc[i, j] - adoption.iloc[i, max(0, j - 1)])
+            foo2 = foo.loc[:, : str(1990 + int(2100 - adoption.columns[j]))]
+            foo2.columns = foo.loc[:, str(adoption.columns[j]) :].columns
+
             adopt_row = pd.DataFrame(adopt_row).append(foo2)
 
         adopt_row.iloc[0] = adopt_row.sum().values
@@ -429,9 +355,9 @@ def afolu(scenario):
     adoption = adoption2
     adoption.index.names = flux2.index.names
     adoption.columns = adoption.columns.astype(int)
-
     """
-    adoption = adoption.apply(
+    """
+    adoption = adoption.parallel_apply(
         lambda x: x.multiply(flux2.loc[x.name[0], x.name[1]].values), axis=1
     )
     """
@@ -440,13 +366,13 @@ def afolu(scenario):
     # estimate emissions mitigated by avoided pathways
 
     # region
+    tnc_avoided_pathways_input = pd.read_csv("podi/data/tnc_avoided_pathways_input.csv")
 
     avoid = (
         pd.DataFrame(
-            avoided_pathways_input.drop(
+            tnc_avoided_pathways_input.drop(
                 columns=[
                     "Model",
-                    "Region",
                     "Initial Extent (Mha)",
                     "Mitigation (Mg CO2/ha)",
                 ]
@@ -455,7 +381,7 @@ def afolu(scenario):
         .set_index(
             [
                 "Scenario",
-                "Country",
+                "Region",
                 "Subvector",
                 "Initial Loss Rate (%)",
                 "Rate of Improvement",
@@ -472,27 +398,29 @@ def afolu(scenario):
 
     avoid.loc[:, :2019] = 0
 
-    avoid.loc[:, 2020:] = -avoid.loc[:, 2020:].apply(
+    avoid.loc[:, 2020:] = -avoid.loc[:, 2020:].parallel_apply(
         lambda x: x.subtract(
             avoid.loc[x.name[0], x.name[1], x.name[2], :][2020].values[0]
         ),
         axis=1,
     )
 
-    avoid_per = -avoid.apply(lambda x: ((x[2019] - x) / x.max()).fillna(0), axis=1)
+    avoid_per = -avoid.parallel_apply(
+        lambda x: ((x[2019] - x) / x.max()).fillna(0), axis=1
+    )
 
     """
-    avoid_per = avoid.apply(lambda x: ((x[2019] - x) / x[2019]).fillna(0), axis=1)
+    avoid_per = avoid.parallel_apply(lambda x: ((x[2019] - x) / x[2019]).fillna(0), axis=1)
 
     avoid_per = (
         (
-            avoid.apply(lambda x: x * 0, axis=1)
-            .apply(lambda x: x + x.name[3], axis=1)
+            avoid.parallel_apply(lambda x: x * 0, axis=1)
+            .parallel_apply(lambda x: x + x.name[3], axis=1)
             .cumsum(axis=1)
-            .apply(lambda x: -x - x.name[2], axis=1)
+            .parallel_apply(lambda x: -x - x.name[2], axis=1)
         )
         .clip(lower=0)
-        .apply(
+        .parallel_apply(
             lambda x: pd.Series(
                 np.where(x.name[3] > 0, (-x + 1), (x * 0)), index=x.index
             ),
@@ -512,7 +440,7 @@ def afolu(scenario):
         [adoption.loc[slice(None), "Cropland Soil Health", :] * 0],
         keys=["Animal Mgmt"],
         names=["Subvector"],
-    ).reorder_levels(["Country", "Subvector"])
+    ).reorder_levels(["Region", "Subvector"])
 
     adoption = adoption.append(adoption_am).append(avoid)
     per_adoption = pd.concat([hist1, avoid_per], axis=0).fillna(0)
@@ -531,29 +459,14 @@ def afolu(scenario):
         "Peat Restoration",
     ]:
         co2_fw = pd.DataFrame(co2_fw).append(
-            pd.DataFrame(
-                rgroup(
-                    adoption.loc[slice(None), subv, :], "CO2", subv, "Region", scenario
-                )
-            )
+            pd.DataFrame(adoption.loc[slice(None), [subv], :])
         )
 
-    co2_fw.index = co2_fw.index.droplevel("Sector")
     co2_fw = pd.concat([co2_fw], names=["Sector"], keys=["Forests & Wetlands"])
-    co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-
+    co2_fw = pd.concat([co2_fw], names=["Scenario"], keys=[scenario])
     co2_fw = pd.concat([co2_fw], names=["Gas"], keys=["CO2"])
-    co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+    co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
 
-    """
-    co2_fw.loc[
-        slice(None), "Forests & Wetlands", "Natural Regeneration"
-    ] = curve_smooth(
-        co2_fw.loc[slice(None), "Forests & Wetlands", "Natural Regeneration"],
-        "quadratic",
-        3,
-    ).values
-    """
     # CO2 Agriculture
 
     co2_ag = []
@@ -566,19 +479,13 @@ def afolu(scenario):
         "Trees in Croplands",
     ]:
         co2_ag = pd.DataFrame(co2_ag).append(
-            pd.DataFrame(
-                rgroup(
-                    adoption.loc[slice(None), subv, :], "CO2", subv, "Region", scenario
-                )
-            )
+            pd.DataFrame(adoption.loc[slice(None), [subv], :])
         )
 
-    co2_ag.index = co2_ag.index.droplevel("Sector")
     co2_ag = pd.concat([co2_ag], names=["Sector"], keys=["Regenerative Agriculture"])
-    co2_ag = co2_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-
+    co2_ag = pd.concat([co2_ag], names=["Scenario"], keys=[scenario])
     co2_ag = pd.concat([co2_ag], names=["Gas"], keys=["CO2"])
-    co2_ag = co2_ag.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+    co2_ag = co2_ag.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
 
     # CH4 Agriculture
 
@@ -586,24 +493,18 @@ def afolu(scenario):
 
     for subv in ["Improved Rice", "Animal Mgmt"]:
         ch4_ag = pd.DataFrame(ch4_ag).append(
-            pd.DataFrame(
-                rgroup(
-                    adoption.loc[slice(None), subv, :], "CH4", subv, "Region", scenario
-                )
-            )
+            pd.DataFrame(adoption.loc[slice(None), [subv], :])
         )
 
     # Improved rice mitigation is 58% from CH4 and 42% from N2O (see NCS)
-    ch4_ag.loc[slice(None), slice(None), "Improved Rice", scenario] = (
-        ch4_ag.loc[slice(None), slice(None), "Improved Rice", scenario] * 0.58
-    ).values
+    ch4_ag.loc[slice(None), ["Improved Rice"], :].update(
+        ch4_ag.loc[slice(None), ["Improved Rice"], :] * 0.58
+    )
 
-    ch4_ag.index = ch4_ag.index.droplevel("Sector")
     ch4_ag = pd.concat([ch4_ag], names=["Sector"], keys=["Regenerative Agriculture"])
-    ch4_ag = ch4_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-
+    ch4_ag = pd.concat([ch4_ag], names=["Scenario"], keys=[scenario])
     ch4_ag = pd.concat([ch4_ag], names=["Gas"], keys=["CH4"])
-    ch4_ag = ch4_ag.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+    ch4_ag = ch4_ag.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
 
     # N2O Agriculture
 
@@ -614,24 +515,18 @@ def afolu(scenario):
         "Nitrogen Fertilizer Management",
     ]:
         n2o_ag = pd.DataFrame(n2o_ag).append(
-            pd.DataFrame(
-                rgroup(
-                    adoption.loc[slice(None), subv, :], "N2O", subv, "Region", scenario
-                )
-            )
+            pd.DataFrame(adoption.loc[slice(None), [subv], :])
         )
 
     # Improved rice mitigation is 58% from CH4 and 42% from N2O (see NCS)
-    n2o_ag.loc[slice(None), slice(None), "Improved Rice", scenario] = (
-        n2o_ag.loc[slice(None), slice(None), "Improved Rice", scenario] * 0.42
-    ).values
+    n2o_ag.loc[slice(None), ["Improved Rice"], :].update(
+        n2o_ag.loc[slice(None), ["Improved Rice"], :] * 0.42
+    )
 
-    n2o_ag.index = n2o_ag.index.droplevel("Sector")
     n2o_ag = pd.concat([n2o_ag], names=["Sector"], keys=["Regenerative Agriculture"])
-    n2o_ag = n2o_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-
+    n2o_ag = pd.concat([n2o_ag], names=["Scenario"], keys=[scenario])
     n2o_ag = pd.concat([n2o_ag], names=["Gas"], keys=["N2O"])
-    n2o_ag = n2o_ag.reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+    n2o_ag = n2o_ag.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
 
     per_fw = []
 
@@ -645,20 +540,12 @@ def afolu(scenario):
         "Peat Restoration",
     ]:
         per_fw = pd.DataFrame(per_fw).append(
-            pd.DataFrame(
-                rgroup2(
-                    per_adoption.loc[slice(None), subv, :],
-                    "CO2",
-                    subv,
-                    "Region",
-                    scenario,
-                )
-            )
+            pd.DataFrame(per_adoption.loc[slice(None), [subv], :])
         )
 
-    per_fw.index = per_fw.index.droplevel("Sector")
     per_fw = pd.concat([per_fw], names=["Sector"], keys=["Forests & Wetlands"])
-    per_fw = per_fw.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+    per_fw = pd.concat([per_fw], names=["Scenario"], keys=[scenario])
+    per_fw = per_fw.reorder_levels(["Region", "Sector", "Subvector", "Scenario"])
 
     per_ag = []
 
@@ -672,20 +559,12 @@ def afolu(scenario):
         "Trees in Croplands",
     ]:
         per_ag = pd.DataFrame(per_ag).append(
-            pd.DataFrame(
-                rgroup2(
-                    per_adoption.loc[slice(None), subv, :],
-                    "CO2",
-                    subv,
-                    "Region",
-                    scenario,
-                )
-            )
+            pd.DataFrame(per_adoption.loc[slice(None), [subv], :])
         )
 
-    per_ag.index = per_ag.index.droplevel("Sector")
     per_ag = pd.concat([per_ag], names=["Sector"], keys=["Regenerative Agriculture"])
-    per_ag = per_ag.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+    per_ag = pd.concat([per_ag], names=["Scenario"], keys=[scenario])
+    per_ag = per_ag.reorder_levels(["Region", "Sector", "Subvector", "Scenario"])
 
     # endregion
 
@@ -717,12 +596,10 @@ def afolu(scenario):
     afolu_em_mit.loc[:, :2019] = 0
 
     # shift mitigation values by 2020 value
-    afolu_em_mit = afolu_em_mit.apply(
+    afolu_em_mit = afolu_em_mit.parallel_apply(
         lambda x: x.subtract(
             (
-                afolu_em_mit.loc[
-                    x.name[0], x.name[1], x.name[2], x.name[3], x.name[4], :
-                ]
+                afolu_em_mit.loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
                 .loc[:, 2020]
                 .values[0]
             )
@@ -735,17 +612,17 @@ def afolu(scenario):
     afolu_em = (
         pd.concat(
             [
-                afolu_em_mit.groupby(["Region", "Sector", "Metric", "Gas"]).sum(),
+                afolu_em_mit.groupby(["Region", "Sector", "Subvector", "Gas"]).sum(),
                 afolu_em_hist,
             ]
         )
-        .groupby(["Region", "Sector", "Metric", "Gas"])
+        .groupby(["Region", "Sector", "Subvector", "Gas"])
         .sum()
     )
 
     afolu_em = pd.concat(
         [afolu_em], names=["Scenario"], keys=[scenario]
-    ).reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+    ).reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
 
     per_adoption = pd.concat([per_fw, per_ag])
 
@@ -772,26 +649,16 @@ def afolu(scenario):
         "Trees in Croplands",
     ]:
         max_extent3 = pd.DataFrame(max_extent3).append(
-            pd.DataFrame(
-                rgroup(
-                    max_extent2.loc[slice(None), subv, :],
-                    "CO2",
-                    subv,
-                    "Region",
-                    scenario,
-                )
-            )
+            pd.DataFrame(max_extent2.loc[slice(None), [subv], :])
         )
 
-    max_extent3.index = max_extent3.index.droplevel("Sector")
     max_extent3 = pd.concat(
         [max_extent3], names=["Sector"], keys=["Regenerative Agriculture"]
     )
-    max_extent3 = max_extent3.reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-
+    max_extent3 = pd.concat([max_extent3], names=["Scenario"], keys=[scenario])
     max_extent3 = pd.concat([max_extent3], names=["Gas"], keys=["CO2"])
     max_extent3 = max_extent3.reorder_levels(
-        ["Region", "Sector", "Metric", "Gas", "Scenario"]
+        ["Region", "Sector", "Subvector", "Gas", "Scenario"]
     )
 
     per_max = (
@@ -812,12 +679,9 @@ def afolu(scenario):
                 "Trees in Croplands",
             ],
             scenario,
-            :,
         ]
-        .apply(
-            lambda x: x.multiply(
-                max_extent3.loc[x.name[0], slice(None), x.name[2]].values[0]
-            ),
+        .parallel_apply(
+            lambda x: x.multiply(max_extent3.loc[x.name[0], x.name[1], x.name[2]]),
             axis=1,
         )
         .fillna(0)

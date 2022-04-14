@@ -6,67 +6,6 @@ import numpy as np
 
 # endregion
 
-region_list = pd.read_csv("podi/data/region_categories.csv", header=None, squeeze=True)
-
-
-def rgroup3(data, gas, sector, r, scenario):
-    region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=[r, "IEA Region"]
-    )
-
-    # make new row for world level data
-    data_world = pd.DataFrame(data.sum()).T.rename(index={0: "World "})
-
-    data = data.merge(region_categories, right_on=[r], left_on=["Region"])
-
-    data = data.groupby("IEA Region").sum()
-
-    # split into various levels of IEA regional grouping
-    data["IEA Region 1"] = data.apply(lambda x: x.name.split()[2] + " ", axis=1)
-    data["IEA Region 2"] = data.apply(lambda x: x.name.split()[4] + " ", axis=1)
-    data["IEA Region 3"] = data.apply(lambda x: x.name.split()[-1] + " ", axis=1)
-
-    data.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
-
-    # make new rows for OECD/NonOECD regions
-    data_oecd = pd.DataFrame(data.groupby("IEA Region 1").sum()).rename(
-        index={"OECD ": " OECD "}
-    )
-
-    # make new rows for IEA regions
-    data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
-    data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
-
-    """
-    # remove countries from higher level regions
-    data_oecd.loc[" OECD "] = (
-        data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
-    )
-    data_oecd.loc["NonOECD "] = data_oecd.loc["NonOECD "] - data_regions2.loc["BRAZIL "]
-
-    data_regions.loc["CSAM "] = data_regions.loc["CSAM "] - data_regions2.loc["BRAZIL "]
-    data_regions.loc["NAM "] = data_regions.loc["NAM "] - data_regions2.loc["US "]
-    data_regions.loc["AFRICA "] = (
-        data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
-    )
-    """
-
-    # combine all
-    data = data_world.append(
-        [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
-    )
-    data.index.name = "Region"
-
-    data = pd.concat([data], names=["Sector"], keys=[sector])
-    data = pd.concat([data], names=["Metric"], keys=[sector])
-    data = pd.concat([data], names=["Gas"], keys=[gas])
-    data = pd.concat([data], names=["Scenario"], keys=[scenario]).reorder_levels(
-        ["Region", "Sector", "Metric", "Gas", "Scenario"]
-    )
-    data = data.loc[np.array(region_list), slice(None), slice(None), slice(None)]
-
-    return data
-
 
 def emissions(
     scenario,
@@ -435,8 +374,6 @@ def emissions(
         .set_index(["Region", "Unit"])
         .droplevel("Unit")
     )
-
-    em_hist_old = rgroup3(em_hist_old, "CO2", "CO2", "CAIT Region", scenario)
     em_hist_old.columns = em_hist_old.columns.astype(int)
 
     # estimate time between data and projections
