@@ -11,10 +11,4 @@ relative_links:
   enabled: true
   collections: true
 
-include:
-  -charts.md
-
 theme: minima
-
-header_pages:
-  - charts.md
