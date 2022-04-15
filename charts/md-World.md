@@ -1,38 +1,31 @@
-
-
-
-
 # World 
 
-## Adoption Curves [% Adoption, Stacked Area Charts]
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Transportation.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Buildings.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Industrial.html" height='500' width='150%'></iframe>
 
-## Adoption Curves [% Adoption, Line Charts]
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Transportation.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Buildings.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Industrial.html" height='500' width='150%'></iframe>
+### Adoption Curves [% Adoption, Stacked Area Charts]
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-pathway-World-Transportation.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-pathway-World-Buildings.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-pathway-World-Industrial.html" height='500' width='150%'></iframe>
 
 
-## Adoption Curves, [TJ, Stacked Area Charts]
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-absolute-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-absolute-pathway-World-Transportation.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-absolute-pathway-World-Buildings.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-absolute-pathway-World-Industrial.html" height='500' width='150%'></iframe>
+### Adoption Curves [% Adoption, Line Charts]
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-unstacked-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-unstacked-pathway-World-Transportation.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-unstacked-pathway-World-Buildings.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-unstacked-pathway-World-Industrial.html" height='500' width='150%'></iframe>
 
 
-## Adoption Curves, [TJ, Line Charts]
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-absolute-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-absolute-pathway-World-Transportation.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-absolute-pathway-World-Buildings.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-absolute-pathway-World-Industrial.html" height='500' width='150%'></iframe>
+
+### Adoption Curves, [TJ, Stacked Area Charts]
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-absolute-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-absolute-pathway-World-Transportation.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-absolute-pathway-World-Buildings.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-absolute-pathway-World-Industrial.html" height='500' width='150%'></iframe>
 
 
-## Adoption Curves, By Subvertical
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-subverticals-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-subverticals-pathway-World-Transportation.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-subverticals-pathway-World-Buildings.html" height='500' width='150%'></iframe>
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-subverticals-pathway-World-Industrial.html" height='500' width='150%'></iframe>
+
+### Adoption Curves, [TJ, Line Charts]
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-unstacked-absolute-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-unstacked-absolute-pathway-World-Transportation.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-unstacked-absolute-pathway-World-Buildings.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-unstacked-absolute-pathway-World-Industrial.html" height='500' width='150%'></iframe>

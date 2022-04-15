@@ -450,6 +450,62 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
+    # Split Product SOLARPV to rooftop (ROOFTOP) and utility (SOLARPV)
+
+    # region
+    energy_historical.update(
+        energy_historical.loc[
+            slice(None), slice(None), slice(None), ["SOLARPV"]
+        ].parallel_apply(lambda x: x * 0.6, axis=1)
+    )
+
+    energy_historical = pd.concat(
+        [
+            energy_historical,
+            (
+                energy_historical.loc[
+                    slice(None), slice(None), slice(None), ["SOLARPV"]
+                ].parallel_apply(lambda x: x * 0.4, axis=1)
+            ).rename(
+                index={
+                    "SOLARPV": "ROOFTOP",
+                    "Solar photovoltaics": "Rooftop solar photovoltaics",
+                }
+            ),
+        ]
+    )
+
+    # Recast Product from NONCRUDE to HYDROGEN
+    energy_historical.reset_index(inplace=True)
+    energy_historical[
+        (energy_historical["Subsector"] == "Hydrogen")
+        & (energy_historical["Product"] == "NONCRUDE")
+    ] = (
+        energy_historical[
+            (energy_historical["Subsector"] == "Hydrogen")
+            & (energy_historical["Product"] == "NONCRUDE")
+        ]
+        .replace({"Hydrogen": "na"})
+        .replace({"NONCRUDE": "HYDROGEN"})
+    )
+
+    energy_historical.set_index(
+        [
+            "Region",
+            "Sector",
+            "Subsector",
+            "Product",
+            "Flow",
+            "EIA Product",
+            "Hydrogen",
+            "Flexible",
+            "Non-Energy Use",
+        ],
+        inplace=True,
+    )
+
+    # endregion
+
     # Add EIA region labels to energy_historical in order to match EIA regional projected growth of each product
     regions = (
         pd.DataFrame(
@@ -948,6 +1004,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         "GEOTHERM",
         "HYDRO",
         "SOLARPV",
+        "ROOFTOP",
         "SOLARTH",
         "OFFSHORE",
         "ONSHORE",
