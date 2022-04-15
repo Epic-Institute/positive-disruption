@@ -7,30 +7,6 @@ relative_links:
   enabled: true
   collections: true
 include:
-  -README.md
   -charts.md
-  -/charts/World.md
-  -/charts/AdvancedECO.md
-  -/charts/DevelopingECO.md
-  -/charts/OECD.md
-  -/charts/NonOECD.md
-  -/charts/ASEAN.md
-  -/charts/ASIAPAC.md
-  -/charts/EU.md
-  -/charts/EUR.md
-  -/charts/Africa.md
-  -/charts/CSAM.md
-  -/charts/EURASIA.md
-  -/charts/ME.md
-  -/charts/NAM.md
-  -/charts/BRAZIL.md
-  -/charts/US.md
-  -/charts/CHINA.md
-  -/charts/INDIA.md
-  -/charts/JPN.md
-  -/charts/RUS.md
-  -/charts/RUS.md
-  -/charts/SAFR.md
-  -/charts/Other.md
 
-theme: jekyll-theme-minimal
+theme: jekyll-theme-tactile
