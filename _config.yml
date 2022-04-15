@@ -9,4 +9,4 @@ relative_links:
 include:
   -charts.md
 
-theme: jekyll-theme-minima
+theme: minima
