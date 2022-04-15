@@ -1736,7 +1736,7 @@ file=(
     + "-"
     + str(region).replace("slice(None, None, None)", "World")
     + "-"
-    + str(sector).replace("slice(None, None, None)", "All")
+    + str('Buildings').replace("slice(None, None, None)", "All")
     + ".html"
 ).replace(" ",""),
 auto_open=False)
@@ -1813,8 +1813,6 @@ for sector in fig2['Sector'].unique():
         + ".html"
     ).replace(" ",""),
     auto_open=False)
-
-
 
 # endregion
 
@@ -2058,7 +2056,7 @@ file=(
     + "-"
     + str(region).replace("slice(None, None, None)", "World")
     + "-"
-    + str(sector).replace("slice(None, None, None)", "All")
+    + str("Buildings").replace("slice(None, None, None)", "All")
     + ".html"
 ).replace(" ",""),
 auto_open=False)
@@ -2135,8 +2133,6 @@ for sector in fig2['Sector'].unique():
         + ".html"
     ).replace(" ",""),
     auto_open=False)
-
-
 
 # endregion
 
@@ -2380,7 +2376,7 @@ file=(
     + "-"
     + str(region).replace("slice(None, None, None)", "World")
     + "-"
-    + str(sector).replace("slice(None, None, None)", "All")
+    + str('Buildings').replace("slice(None, None, None)", "All")
     + ".html"
 ).replace(" ",""),
 auto_open=False)
@@ -2457,8 +2453,6 @@ for sector in fig2['Sector'].unique():
         + ".html"
     ).replace(" ",""),
     auto_open=False)
-
-
 
 # endregion
 
@@ -2702,7 +2696,7 @@ file=(
     + "-"
     + str(region).replace("slice(None, None, None)", "World")
     + "-"
-    + str(sector).replace("slice(None, None, None)", "All")
+    + str('Buildings').replace("slice(None, None, None)", "All")
     + ".html"
 ).replace(" ",""),
 auto_open=False)
@@ -2779,8 +2773,6 @@ for sector in fig2['Sector'].unique():
         + ".html"
     ).replace(" ",""),
     auto_open=False)
-
-
 
 # endregion
 
