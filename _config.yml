@@ -6,11 +6,9 @@ description: Draft results for internal analysis
 
 plugins:
   - jekyll-relative-links
-  - jekyll-remote-theme
 
 relative_links:
   enabled: true
   collections: true
 
-remote_theme: pages-themes/tactile@v0.2.0
-
+theme: minima
