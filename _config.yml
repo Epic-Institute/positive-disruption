@@ -1,12 +1,20 @@
 title: Positive Disruption
+
 logo: /docs/logo.png
+
 description: Draft results for internal analysis
+
 plugins:
   - jekyll-relative-links
+
 relative_links:
   enabled: true
   collections: true
+
 include:
   -charts.md
 
 theme: minima
+
+header_pages:
+  - charts.md
