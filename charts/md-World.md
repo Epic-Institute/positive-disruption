@@ -1,5 +1,4 @@
-# World 
-
+<br/><br/>
 
 ### Adoption Curves [% Adoption, Stacked Area Charts]
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-custom-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
