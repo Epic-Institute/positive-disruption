@@ -15,7 +15,9 @@ def func2(x, a, b, c, d):
     return a * x + b
 
 
-def adoption_curve_afolu(value, region, scenario, sector):
+def adoption_curve_afolu(
+    value, region, scenario, sector, data_start_year, data_end_year, proj_end_year
+):
     parameters = pd.read_csv("podi/data/tech_parameters_afolu.csv").set_index(
         ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
     )
@@ -144,7 +146,7 @@ def adoption_curve_afolu(value, region, scenario, sector):
     ]
 
     if scenario == "baseline":
-        x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
+        x = np.arange(proj_end_year - pd.to_numeric(value.index[0]) + 1)
         # y = np.full((len(x), 1), y_data[-1])
         y = func2(
             x,
@@ -173,13 +175,13 @@ def adoption_curve_afolu(value, region, scenario, sector):
             updating="immediate",
             mutation=(0, 1),
         ).x
-        x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
+        x = np.arange(proj_end_year - pd.to_numeric(value.index[0]) + 1)
         y = np.array(func(x, *genetic_parameters))
 
     """
     # Now call curve_fit without passing bounds from the genetic algorithm, just in case the best fit parameters are outside those bounds
     fitted_parameters, _ = curve_fit(func, x_data, y_data, maxfev=10000)
-    x = np.arange(2100 - pd.to_numeric(value.index[0]) + 1)
+    x = np.arange(proj_end_year - pd.to_numeric(value.index[0]) + 1)
     y = np.array(func(x, *genetic_parameters))
     """
 
@@ -206,8 +208,8 @@ def adoption_curve_afolu(value, region, scenario, sector):
 
     years = np.linspace(
         pd.to_numeric(value.index[0]),
-        2100,
-        2100 - pd.to_numeric(value.index[0]) + 1,
+        proj_end_year,
+        proj_end_year - pd.to_numeric(value.index[0]) + 1,
     ).astype(int)
 
     """

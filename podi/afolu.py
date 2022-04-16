@@ -141,6 +141,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             "Duration 3 (Years)",
         ]
     )
+    flux2.columns = flux2.columns.astype(int)
+    flux2 = flux2.loc[:, :proj_end_year]
 
     flux2 = flux2.droplevel(
         [
@@ -157,9 +159,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # create historical observations df (as % of max extent)
 
     # region
-    tnc_hist_obs = pd.read_csv("podi/data/tnc_hist_obs.csv")
-
-    hist = tnc_hist_obs.drop(columns=["iso", "Model", "Scenario", "Metric", "Unit"])
+    hist = pd.read_csv("podi/data/tnc_hist_obs.csv").drop(
+        columns=["iso", "Model", "Scenario", "Metric", "Unit"]
+    )
 
     hist = pd.DataFrame(hist).set_index(["Region", "Subvector"])
     hist.columns = hist.columns.astype(int)
@@ -186,7 +188,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .fillna(0)
         .parallel_apply(
             lambda x: x.divide(
-                max_extent2.loc[x.name[0], x.name[1]].loc[: data_end_year + 1]
+                max_extent2.loc[x.name[0], x.name[1]].loc[:data_end_year]
             ),
             axis=1,
         )
@@ -211,7 +213,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     acurves.interpolate(axis=1, limit_area="inside", inplace=True)
     acurves = acurves.parallel_apply(lambda x: x / x.name[1], axis=1)
     acurves = acurves.parallel_apply(lambda x: x - x[1], axis=1)
-    acurves.columns = np.arange(2021, 2065, 1)
+    acurves.columns = np.arange(
+        data_end_year + 1, data_end_year + 1 + len(acurves.columns), 1
+    )
 
     proj_per_adoption = acurves.parallel_apply(
         lambda x: adoption_curve_afolu(
@@ -219,6 +223,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             x.name[0],
             scenario,
             "AFOLU",
+            data_start_year,
+            data_end_year,
+            2100,
         ),
         axis=1,
     )
@@ -228,9 +235,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         per = pd.DataFrame(per).append(proj_per_adoption[proj_per_adoption.index[i]].T)
 
     per.set_index(proj_per_adoption.index, inplace=True)
-
-    per = per.parallel_apply(lambda x: x - x[2021], axis=1)
-
+    per = per.parallel_apply(lambda x: x - x[data_end_year + 1], axis=1)
     per = per.droplevel("Max (Mha)")
 
     # endregion
@@ -238,17 +243,18 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # match historical analogs to each subvector
 
     # region
-    tnc_crosswalk = pd.read_csv("podi/data/tnc_crosswalk.csv")
-
-    cw = tnc_crosswalk[["Sub-vector", "Analog Name"]]
+    cw = pd.read_csv(
+        "podi/data/tnc_crosswalk.csv", usecols=["Sub-vector", "Analog Name"]
+    )
 
     hist1.loc[:, data_start_year] = 0
-    hist0 = hist1[hist1.loc[:, : data_end_year + 1].sum(axis=1) <= 0.0]
-    hist1 = hist1[hist1.loc[:, : data_end_year + 1].sum(axis=1) > 0.0]
-    hist0.loc[:, data_end_year + 1] = 0.0
-    hist1 = hist1.append(hist0)
+    hist0 = hist1[hist1.loc[:, :data_end_year].sum(axis=1) <= 0.0]
+    hist1 = hist1[hist1.loc[:, :data_end_year].sum(axis=1) > 0.0]
+    hist0.loc[:, data_end_year] = 0.0
+    hist1 = pd.concat([hist1, hist0])
     hist1.interpolate(axis=1, limit_area="inside", inplace=True)
 
+    # For each historical adoption row, concatenate the corresponding historical analog
     hist1 = hist1.parallel_apply(
         lambda x: pd.concat(
             [
@@ -299,7 +305,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     ).squeeze()
                 )
                 .squeeze(),
-            ]
+            ],
         ),
         axis=1,
     )
@@ -342,30 +348,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             [pd.DataFrame(adoption2), pd.DataFrame(adopt_row.iloc[0]).T]
         )
 
-    """
-    for i in range(0, len(adoption)):
-        adopt_row = []
-        for j in range(0, len(adoption.iloc[i])):
-            foo = pd.DataFrame(
-                flux2.loc[adoption.index[i][0], adoption.index[i][1]]
-            ).T * (adoption.iloc[i, j] - adoption.iloc[i, max(0, j - 1)])
-            foo2 = foo.loc[:, : str(data_start_year + int(2100 - adoption.columns[j]))]
-            foo2.columns = foo.loc[:, str(adoption.columns[j]) :].columns
-
-            adopt_row = pd.DataFrame(adopt_row).append(foo2)
-
-        adopt_row.iloc[0] = adopt_row.sum().values
-        adoption2 = pd.DataFrame(adoption2).append(pd.DataFrame(adopt_row.iloc[0]).T)
-
     adoption = adoption2
     adoption.index.names = flux2.index.names
     adoption.columns = adoption.columns.astype(int)
-    """
-    """
     adoption = adoption.parallel_apply(
         lambda x: x.multiply(flux2.loc[x.name[0], x.name[1]].values), axis=1
     )
-    """
+
     # endregion
 
     # estimate emissions mitigated by avoided pathways
@@ -646,14 +635,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     for subv in [
         "Biochar",
-        "Coastal Restoration",
         "Cropland Soil Health",
-        "Improved Forest Mgmt",
         "Improved Rice",
-        "Natural Regeneration",
         "Nitrogen Fertilizer Management",
         "Optimal Intensity",
-        "Peat Restoration",
         "Silvopasture",
         "Trees in Croplands",
     ]:
@@ -667,6 +652,27 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     max_extent3 = pd.concat([max_extent3], names=["Scenario"], keys=[scenario])
     max_extent3 = pd.concat([max_extent3], names=["Gas"], keys=["CO2"])
     max_extent3 = max_extent3.reorder_levels(
+        ["Region", "Sector", "Subvector", "Gas", "Scenario"]
+    )
+
+    max_extent4 = []
+
+    for subv in [
+        "Coastal Restoration",
+        "Improved Forest Mgmt",
+        "Natural Regeneration",
+        "Peat Restoration",
+    ]:
+        max_extent4 = pd.DataFrame(max_extent4).append(
+            pd.DataFrame(max_extent2.loc[slice(None), [subv], :])
+        )
+
+    max_extent4 = pd.concat(
+        [max_extent4], names=["Sector"], keys=["Forests & Wetlands"]
+    )
+    max_extent4 = pd.concat([max_extent4], names=["Scenario"], keys=[scenario])
+    max_extent4 = pd.concat([max_extent4], names=["Gas"], keys=["CO2"])
+    max_extent4 = max_extent4.reorder_levels(
         ["Region", "Sector", "Subvector", "Gas", "Scenario"]
     )
 
@@ -690,7 +696,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             scenario,
         ]
         .parallel_apply(
-            lambda x: x.multiply(max_extent3.loc[x.name[0], x.name[1], x.name[2]]),
+            lambda x: x.multiply(
+                pd.concat([max_extent3, max_extent4]).loc[
+                    x.name[0], x.name[1], x.name[2]
+                ]
+            ),
             axis=1,
         )
         .fillna(0)
