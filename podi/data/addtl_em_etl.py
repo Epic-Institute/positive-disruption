@@ -145,191 +145,107 @@ ag_co2 = [
 
 # endregion
 
-# IF THIS IS RUN, MANUALLY DUPLICATE BASELINE RESULTS TO CREATE PATHWAY RESULTS FOR RA
 
+def rgroup(data, gas, sector):
 
-def rgroup(data, gas, sector, rgroup):
-    region_categories = pd.read_csv(
-        "podi/data/region_categories.csv", usecols=[rgroup, "IEA Region"]
-    )
-
-    # make new row for world level data
-    data_world = pd.DataFrame(data.sum()).T.rename(index={0: "World "})
-
-    data = data.merge(region_categories, right_on=[rgroup], left_on=["Country"])
-
-    data = data.groupby("IEA Region").sum()
-
-    # split into various levels of IEA regional grouping
-    data["IEA Region 1"] = data.apply(lambda x: x.name.split()[2] + " ", axis=1)
-    data["IEA Region 2"] = data.apply(lambda x: x.name.split()[4] + " ", axis=1)
-    data["IEA Region 3"] = data.apply(lambda x: x.name.split()[-1] + " ", axis=1)
-
-    data.set_index(["IEA Region 1", "IEA Region 2", "IEA Region 3"], inplace=True)
-
-    # make new rows for OECD/NonOECD regions
-    data_oecd = pd.DataFrame(data.groupby("IEA Region 1").sum()).rename(
-        index={"OECD ": " OECD "}
-    )
-
-    # make new rows for IEA regions
-    data_regions = pd.DataFrame(data.groupby("IEA Region 2").sum())
-    data_regions2 = pd.DataFrame(data.groupby("IEA Region 3").sum())
-
-    """
-    # remove countries from higher level regions
-    data_oecd.loc[" OECD "] = (
-        data_oecd.loc[" OECD "] - data_regions2.loc["US "] - data_regions2.loc["SAFR "]
-    )
-    data_oecd.loc["NonOECD "] = data_oecd.loc["NonOECD "] - data_regions2.loc["BRAZIL "]
-
-    data_regions.loc["CSAM "] = data_regions.loc["CSAM "] - data_regions2.loc["BRAZIL "]
-    data_regions.loc["NAM "] = data_regions.loc["NAM "] - data_regions2.loc["US "]
-    data_regions.loc["AFRICA "] = (
-        data_regions.loc["AFRICA "] - data_regions2.loc["SAFR "]
-    )
-    """
-    # combine all
-    data = data_world.append(
-        [data_oecd, data_regions, data_regions2.loc[["BRAZIL ", "US ", "SAFR "], :]]
-    )
-    data.index.name = "IEA Region"
-
-    data = pd.concat([data], names=["Sector"], keys=[sector])
+    # Adds Sector, Metric, Gas, and Scenario labels to data, and duplicates data to allow for 'Baseline' and 'Pathway' scenarios to be made.
     data = pd.concat([data], names=["Metric"], keys=[gas])
     data = pd.concat([data], names=["Gas"], keys=[gas])
-    data2 = pd.concat([data], names=["Scenario"], keys=["baseline"]).reorder_levels(
-        ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
+    data = pd.concat([data], names=["Scenario"], keys=["baseline"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas", "Scenario"]
     )
-    data3 = pd.concat([data], names=["Scenario"], keys=["pathway"]).reorder_levels(
-        ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
+    data2 = data.droplevel("Scenario")
+    data2 = pd.concat([data2], names=["Scenario"], keys=["pathway"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas", "Scenario"]
     )
-    data = data2.append(data3)
+    data = pd.concat([data, data2])
 
     return data
 
 
 def proj(data, sector, metric, gas):
-    # project gas emissions using percent change in sector
+
+    # Makes projections for gas emissions using the percent change in sector
 
     data_per_change = (
-        energy_demand.loc[slice(None), "Industry", "Industry", slice(None)]
-        .loc[:, 2019:]
+        energy_pathway.loc[slice(None), slice(None), "Industrial"]
+        .groupby(["Scenario", "Region"])
+        .mean()
+        .loc[:, data_end_year - 1 :]
         .pct_change(axis=1)
         .dropna(axis=1)
         .apply(lambda x: x + 1, axis=1)
         .merge(
             data,
-            right_on=["IEA Region", "Scenario"],
-            left_on=["IEA Region", "Scenario"],
+            right_on=["Scenario", "Region"],
+            left_on=["Scenario", "Region"],
         )
-        .reindex(sorted(energy_demand.columns), axis=1)
+        .reindex(sorted(energy_pathway.columns), axis=1)
     )
 
-    data = data_per_change.loc[:, :2019].merge(
-        data_per_change.loc[:, 2019:].cumprod(axis=1).loc[:, 2020:],
-        right_on=["IEA Region", "Scenario"],
-        left_on=["IEA Region", "Scenario"],
+    data = data_per_change.loc[:, : data_end_year - 1].merge(
+        data_per_change.loc[:, data_end_year - 1 :]
+        .cumprod(axis=1)
+        .loc[:, data_end_year:],
+        right_on=["Region", "Scenario"],
+        left_on=["Region", "Scenario"],
     )
 
-    data4 = []
-
-    data4 = pd.DataFrame(data4).append(
-        pd.concat([data], keys=[metric], names=["Metric"])
+    data = pd.concat([data], keys=[metric], names=["Metric"])
+    data = pd.concat([data], keys=[gas], names=["Gas"])
+    data = pd.concat([data], keys=[sector], names=["Sector"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas", "Scenario"]
     )
 
-    data4 = pd.concat([data4], keys=[gas], names=["Gas"]).reorder_levels(
-        ["IEA Region", "Metric", "Gas", "Scenario"]
-    )
-
-    data4 = pd.concat([data4], keys=[sector], names=["Sector"]).reorder_levels(
-        ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
-    )
-
-    data4.index.set_names(
+    data.index.set_names(
         ["Region", "Sector", "Metric", "Gas", "Scenario"], inplace=True
     )
 
-    return data4
+    return data
 
 
-def proj2(data, sector, metric, gas):
-    # project gas emissions using percent change in sector
+def proj_afolu(data, sector, metric, gas):
 
-    # to create baseline FAO projections for RA/FW emissions
-    """
-    ra_em = pd.read_csv("podi/data/FOFA2050CountryData_Fertilizer-and-emissions.csv", usecols=['Indicator', 'CountryCode', 'Scenario', 'Year', 'Value']).set_index(['Indicator', 'CountryCode', 'Scenario', 'Year']).loc['GHG emissions in agriculture', slice(None), 'Business As Usual', slice(None)]
+    # Makes projections for gas emissions using the percent change in sector
 
-    ra_em = ra_em.reset_index().pivot(index='Country', columns='Year', values='Value')
-
-    # manually add years to 2100, set 2100 value to 2050 value, change CountryCode to Country
-    """
-
-    ra_em = pd.read_csv("podi/data/ra_em.csv").set_index("Country")
+    ra_em = pd.read_csv("podi/data/emissions_agriculture.csv").set_index("Region")
     ra_em.columns = ra_em.columns.astype(int)
     ra_em = ra_em.interpolate(axis=1, method="quadratic")
 
-    ra_em = rgroup(ra_em, "CO2", "RA", "ISO")
-    ra_em = ra_em.droplevel(["Sector", "Metric", "Gas"])
+    ra_em = rgroup(ra_em, "CO2")
+    ra_em = ra_em.droplevel(["Metric", "Gas"])
 
-    """
     data_per_change = (
-        (
-            energy_demand.loc[slice(None), "Industry", "Heat", slice(None)].loc[
-                :, 2019:
-            ]
-            * 0.001
-        )
+        ra_em.loc[:, data_end_year - 1 :]
         .pct_change(axis=1)
         .dropna(axis=1)
         .apply(lambda x: x + 1, axis=1)
         .merge(
             data,
-            right_on=["IEA Region", "Scenario"],
-            left_on=["IEA Region", "Scenario"],
+            right_on=["Region", "Scenario"],
+            left_on=["Region", "Scenario"],
         )
-        .reindex(sorted(energy_demand.columns), axis=1)
-    )
-    """
-
-    data_per_change = (
-        ra_em.loc[:, 2019:]
-        .pct_change(axis=1)
-        .dropna(axis=1)
-        .apply(lambda x: x + 1, axis=1)
-        .merge(
-            data,
-            right_on=["IEA Region", "Scenario"],
-            left_on=["IEA Region", "Scenario"],
-        )
-        .reindex(sorted(energy_demand.columns), axis=1)
+        .reindex(sorted(energy_pathway.columns), axis=1)
     )
 
-    data = data_per_change.loc[:, :2019].merge(
-        data_per_change.loc[:, 2019:].cumprod(axis=1).loc[:, 2020:],
-        right_on=["IEA Region", "Scenario"],
-        left_on=["IEA Region", "Scenario"],
+    data = data_per_change.loc[:, : data_end_year - 1].merge(
+        data_per_change.loc[:, data_end_year - 1 :]
+        .cumprod(axis=1)
+        .loc[:, data_end_year:],
+        right_on=["Region", "Scenario"],
+        left_on=["Region", "Scenario"],
     )
 
-    data4 = []
-
-    data4 = pd.DataFrame(data4).append(
-        pd.concat([data], keys=[metric], names=["Metric"])
+    data = pd.concat([data], keys=[metric], names=["Metric"])
+    data = pd.concat([data], keys=[gas], names=["Gas"])
+    data = pd.concat([data], keys=[sector], names=["Sector"]).reorder_levels(
+        ["Region", "Sector", "Metric", "Gas", "Scenario"]
     )
-
-    data4 = pd.concat([data4], keys=[gas], names=["Gas"]).reorder_levels(
-        ["IEA Region", "Metric", "Gas", "Scenario"]
-    )
-
-    data4 = pd.concat([data4], keys=[sector], names=["Sector"]).reorder_levels(
-        ["IEA Region", "Sector", "Metric", "Gas", "Scenario"]
-    )
-
-    data4.index.set_names(
+    data.index.set_names(
         ["Region", "Sector", "Metric", "Gas", "Scenario"], inplace=True
     )
 
-    return data4
+    return data
 
 
 #######
@@ -341,12 +257,30 @@ def proj2(data, sector, metric, gas):
 co2 = (
     pd.DataFrame(
         pd.read_csv(
-            "podi/data/CO2_CEDS_emissions_by_sector_country_2021_02_05.csv"
+            "podi/data/emissions_CEDS_CO2_by_sector_country_2021_02_05.csv"
         ).drop(columns=["Em", "Units"])
-    ).set_index(["Country", "Sector"])
+    ).set_index(["Region", "Sector"])
     / 1000
 )
 co2.columns = co2.columns.astype(int)
+
+# Replace ISO code with WEB region labels
+regions = pd.DataFrame(
+    pd.read_csv(
+        "podi/data/region_categories.csv",
+        usecols=["WEB Region", "ISO"],
+    )
+    .dropna(axis=0)
+    .rename(columns={"WEB Region": "Region"})
+).set_index(["ISO"])
+regions.index = regions.index.str.lower()
+regions["Region"] = regions["Region"].str.lower()
+
+co2 = (
+    co2.reset_index()
+    .set_index(["Region"])
+    .merge(regions, left_on=["Region"], right_on=["ISO"])
+).set_index(["Region", "Sector"])
 
 # Electricity
 
@@ -358,7 +292,7 @@ co2_elec3 = []
 
 for sub in elec_co2:
     co2_elec2 = pd.DataFrame(co2_elec2).append(
-        rgroup(co2_elec.loc[slice(None), [sub], :], "CO2", sub, "ISO")
+        rgroup(co2_elec.loc[slice(None), [sub], :], "CO2", sub)
     )
 for sub in elec_co2:
     co2_elec3 = pd.DataFrame(co2_elec3).append(
@@ -381,7 +315,7 @@ co2_ind3 = []
 
 for sub in ind_co2:
     co2_ind2 = pd.DataFrame(co2_ind2).append(
-        rgroup(co2_ind.loc[slice(None), [sub], :], "CO2", sub, "ISO")
+        rgroup(co2_ind.loc[slice(None), [sub], :], "CO2", sub)
     )
 for sub in ind_co2:
     co2_ind3 = pd.DataFrame(co2_ind3).append(
@@ -404,7 +338,7 @@ co2_trans3 = []
 
 for sub in trans_co2:
     co2_trans2 = pd.DataFrame(co2_trans2).append(
-        rgroup(co2_trans.loc[slice(None), [sub], :], "CO2", sub, "ISO")
+        rgroup(co2_trans.loc[slice(None), [sub], :], "CO2", sub)
     )
 for sub in trans_co2:
     co2_trans3 = pd.DataFrame(co2_trans3).append(
@@ -427,7 +361,7 @@ co2_build3 = []
 
 for sub in build_co2:
     co2_build2 = pd.DataFrame(co2_build2).append(
-        rgroup(co2_build.loc[slice(None), [sub], :], "CO2", sub, "ISO")
+        rgroup(co2_build.loc[slice(None), [sub], :], "CO2", sub)
     )
 for sub in build_co2:
     co2_build3 = pd.DataFrame(co2_build3).append(
@@ -450,11 +384,11 @@ co2_ag3 = []
 
 for sub in ag_co2:
     co2_ag2 = pd.DataFrame(co2_ag2).append(
-        rgroup(co2_ag.loc[slice(None), [sub], :], "CO2", sub, "ISO")
+        rgroup(co2_ag.loc[slice(None), [sub], :], "CO2", sub)
     )
 for sub in ag_co2:
     co2_ag3 = pd.DataFrame(co2_ag3).append(
-        proj2(
+        proj_afolu(
             co2_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CO2"
         )
     )
@@ -469,18 +403,18 @@ co2_ag = co2_ag3
 
 gas_fw = (
     pd.read_csv("podi/data/emissions_fw_historical.csv")
-    .set_index(["Country", "Sector", "Gas", "Unit"])
+    .set_index(["Region", "Sector", "Gas", "Unit"])
     .droplevel("Unit")
-    .groupby(["Country", "Sector", "Gas"])
+    .groupby(["Region", "Sector", "Gas"])
     .sum()
 )
 gas_fw.columns = gas_fw.columns[::-1].astype(int)
 
 co2_fw = gas_fw.loc[slice(None), slice(None), "CO2"]
 
-co2_fw = rgroup(co2_fw, "CO2", "Forests & Wetlands", "CAIT Region")
+co2_fw = rgroup(co2_fw, "CO2", "Forests & Wetlands")
 
-co2_fw = proj2(co2_fw, "Forests & Wetlands", "Deforestation", "CO2")
+co2_fw = proj_afolu(co2_fw, "Forests & Wetlands", "Deforestation", "CO2")
 
 # endregion
 
@@ -495,9 +429,9 @@ co2_fw = proj2(co2_fw, "Forests & Wetlands", "Deforestation", "CO2")
 ch4 = (
     pd.DataFrame(
         pd.read_csv(
-            "podi/data/CH4_CEDS_emissions_by_sector_country_2021_02_05.csv"
+            "podi/data/emissions_CEDS_CH4_by_sector_country_2021_02_05.csv"
         ).drop(columns=["Em", "Units"])
-    ).set_index(["Country", "Sector"])
+    ).set_index(["Region", "Sector"])
     / 1000
     * 25
 )
@@ -513,7 +447,7 @@ ch4_elec3 = []
 
 for sub in elec:
     ch4_elec2 = pd.DataFrame(ch4_elec2).append(
-        rgroup(ch4_elec.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+        rgroup(ch4_elec.loc[slice(None), [sub], :], "CH4", sub)
     )
 for sub in elec:
     ch4_elec3 = pd.DataFrame(ch4_elec3).append(
@@ -536,7 +470,7 @@ ch4_ind3 = []
 
 for sub in ind:
     ch4_ind2 = pd.DataFrame(ch4_ind2).append(
-        rgroup(ch4_ind.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+        rgroup(ch4_ind.loc[slice(None), [sub], :], "CH4", sub)
     )
 for sub in ind:
     ch4_ind3 = pd.DataFrame(ch4_ind3).append(
@@ -565,7 +499,7 @@ for sub in [
     "1A3eii_Other-transp",
 ]:
     ch4_trans2 = pd.DataFrame(ch4_trans2).append(
-        rgroup(ch4_trans.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+        rgroup(ch4_trans.loc[slice(None), [sub], :], "CH4", sub)
     )
 for sub in [
     "1A3b_Road",
@@ -594,7 +528,7 @@ ch4_build3 = []
 
 for sub in build:
     ch4_build2 = pd.DataFrame(ch4_build2).append(
-        rgroup(ch4_build.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+        rgroup(ch4_build.loc[slice(None), [sub], :], "CH4", sub)
     )
 for sub in build:
     ch4_build3 = pd.DataFrame(ch4_build3).append(
@@ -617,11 +551,11 @@ ch4_ag3 = []
 
 for sub in ag:
     ch4_ag2 = pd.DataFrame(ch4_ag2).append(
-        rgroup(ch4_ag.loc[slice(None), [sub], :], "CH4", sub, "ISO")
+        rgroup(ch4_ag.loc[slice(None), [sub], :], "CH4", sub)
     )
 for sub in ag:
     ch4_ag3 = pd.DataFrame(ch4_ag3).append(
-        proj2(
+        proj_afolu(
             ch4_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "CH4"
         )
     )
@@ -635,23 +569,10 @@ ch4_ag = ch4_ag3
 # region
 
 ch4_fw = gas_fw.loc[slice(None), slice(None), "CH4"]
-"""
-ch4_fw2 = []
-ch4_fw3 = []
 
-for sub in fw:
-    ch4_fw2 = pd.DataFrame(ch4_fw2).append(rgroup(ch4_fw, "CH4", sub, "ISO"))
-for sub in fw:
-    ch4_fw3 = pd.DataFrame(ch4_fw3).append(
-        proj(ch4_fw2, sub, "CH4", "CH4").drop_duplicates()
-    )
+ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands")
 
-ch4_fw = ch4_fw3
-"""
-
-ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands", "CAIT Region")
-
-ch4_fw = proj2(ch4_fw, "Forests & Wetlands", "Deforestation", "CH4")
+ch4_fw = proj_afolu(ch4_fw, "Forests & Wetlands", "Deforestation", "CH4")
 
 # endregion
 
@@ -664,9 +585,9 @@ ch4_fw = proj2(ch4_fw, "Forests & Wetlands", "Deforestation", "CH4")
 # region
 
 n2o = (
-    pd.read_csv("podi/data/N2O_CEDS_emissions_by_sector_country_2021_02_05.csv")
+    pd.read_csv("podi/data/emissions_CEDS_N2O_by_sector_country_2021_02_05.csv")
     .drop(columns=["Em", "Units"])
-    .set_index(["Country", "Sector"])
+    .set_index(["Region", "Sector"])
     / 1000
     * 298
 )
@@ -680,7 +601,7 @@ n2o_elec3 = []
 
 for sub in elec:
     n2o_elec2 = pd.DataFrame(n2o_elec2).append(
-        rgroup(n2o_elec.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+        rgroup(n2o_elec.loc[slice(None), [sub], :], "N2O", sub)
     )
 for sub in elec:
     n2o_elec3 = pd.DataFrame(n2o_elec3).append(
@@ -724,7 +645,7 @@ for sub in [
     "1A3eii_Other-transp",
 ]:
     n2o_trans2 = pd.DataFrame(n2o_trans2).append(
-        rgroup(n2o_trans.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+        rgroup(n2o_trans.loc[slice(None), [sub], :], "N2O", sub)
     )
 for sub in [
     "1A3b_Road",
@@ -749,7 +670,7 @@ n2o_build3 = []
 
 for sub in build:
     n2o_build2 = pd.DataFrame(n2o_build2).append(
-        rgroup(n2o_build.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+        rgroup(n2o_build.loc[slice(None), [sub], :], "N2O", sub)
     )
 for sub in build:
     n2o_build3 = pd.DataFrame(n2o_build3).append(
@@ -768,11 +689,11 @@ n2o_ag3 = []
 
 for sub in ag:
     n2o_ag2 = pd.DataFrame(n2o_ag2).append(
-        rgroup(n2o_ag.loc[slice(None), [sub], :], "N2O", sub, "ISO")
+        rgroup(n2o_ag.loc[slice(None), [sub], :], "N2O", sub)
     )
 for sub in ag:
     n2o_ag3 = pd.DataFrame(n2o_ag3).append(
-        proj2(
+        proj_afolu(
             n2o_ag2.loc[slice(None), [sub], :], "Regenerative Agriculture", sub, "N2O"
         )
     )
@@ -782,23 +703,10 @@ n2o_ag = n2o_ag3
 # Forests & Wetlands
 
 n2o_fw = gas_fw.loc[slice(None), slice(None), "N2O"]
-"""
-n2o_fw2 = []
-n2o_fw3 = []
 
-for sub in fw:
-    n2o_fw2 = pd.DataFrame(n2o_fw2).append(rgroup(n2o_fw, "N2O", sub, "ISO"))
-for sub in fw:
-    n2o_fw3 = pd.DataFrame(n2o_fw3).append(
-        proj(n2o_fw2, sub, "N2O", "N2O").drop_duplicates()
-    )
+n2o_fw = rgroup(n2o_fw, "N2O", "Forests & Wetlands")
 
-n2o_fw = n2o_fw3
-"""
-
-n2o_fw = rgroup(n2o_fw, "N2O", "Forests & Wetlands", "CAIT Region")
-
-n2o_fw = proj2(n2o_fw, "Forests & Wetlands", "Deforestation", "N2O")
+n2o_fw = proj_afolu(n2o_fw, "Forests & Wetlands", "Deforestation", "N2O")
 
 # endregion
 
@@ -811,14 +719,14 @@ n2o_fw = proj2(n2o_fw, "Forests & Wetlands", "Deforestation", "N2O")
 fgas = (
     pd.read_csv("podi/data/emissions_historical_fgas.csv")
     .drop(columns=["Gas", "Unit"])
-    .set_index("Country")
+    .set_index("Region")
 )
 
 fgas = fgas[fgas.columns[::-1]]
 
 fgas.columns = fgas.columns.astype(int)
 
-fgas_ind = rgroup(fgas * 1, "F-gases", "Industry", "CAIT Region")
+fgas_ind = rgroup(fgas * 1, "F-gases", "Industry")
 
 fgas_ind = proj(fgas_ind, "Industry", "F-gases", "F-gases")
 

@@ -141,19 +141,17 @@ else:
 #########
 
 # region
-afolu_em_baseline, afolu_per_adoption_baseline, afolu_per_max_baseline = afolu(
+afolu_em_baseline, afolu_per_adoption_baseline = afolu(
     "baseline", data_start_year, data_end_year, proj_end_year
 )
 
-afolu_em_pathway, afolu_per_adoption_pathway, afolu_per_max_pathway = afolu(
+afolu_em_pathway, afolu_per_adoption_pathway = afolu(
     scenario, data_start_year, data_end_year, proj_end_year
 )
 
 afolu_em = afolu_em_baseline.append(afolu_em_pathway)
 
 afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
-
-afolu_per_max = afolu_per_max_baseline.append(afolu_per_max_pathway)
 
 afolu_em.loc[
     slice(None),

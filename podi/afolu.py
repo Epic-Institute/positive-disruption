@@ -14,7 +14,7 @@ pandarallel.initialize(nb_workers=4)
 
 def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
-    # create max extent df
+    # For each region, for each subvertical, create a timeseries of maximum extent of each subvertical.
 
     # region
     tnc_input_data = pd.read_csv("podi/data/tnc_input_data.csv")
@@ -80,7 +80,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # create avg mitigation potential flux df
+    # For each region, for each subvertical, create a timeseries of average mitigation potential flux of each subvertical.
 
     # region
 
@@ -156,7 +156,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # create historical observations df (as % of max extent)
+    # Load historical data of subvertical adoption (as % of max extent)
 
     # region
     hist = pd.read_csv("podi/data/tnc_hist_obs.csv").drop(
@@ -197,7 +197,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # compute adoption curves of historical analogs
+    # Compute adoption curves of the set of historical analogs that have been supplied to estimate the potential future growth of subverticals
 
     # region
     tnc_analogs = pd.read_csv("podi/data/tnc_analogs.csv")
@@ -237,10 +237,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     per.set_index(proj_per_adoption.index, inplace=True)
     per = per.parallel_apply(lambda x: x - x[data_end_year + 1], axis=1)
     per = per.droplevel("Max (Mha)")
+    per = per.loc[:, :proj_end_year]
 
     # endregion
 
-    # match historical analogs to each subvector
+    # match historical analogs to each subvertical
 
     # region
     cw = pd.read_csv(
@@ -314,7 +315,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # project adoption by applying s-curve growth to max extent
+    # project future subvertical adoption by applying this growth to the estimated maximum extent for each subvertical
 
     # region
 
@@ -360,11 +361,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # estimate emissions mitigated by avoided pathways
 
     # region
-    tnc_avoided_pathways_input = pd.read_csv("podi/data/tnc_avoided_pathways_input.csv")
-
     avoid = (
         pd.DataFrame(
-            tnc_avoided_pathways_input.drop(
+            pd.read_csv("podi/data/tnc_avoided_pathways_input.csv").drop(
                 columns=[
                     "Model",
                     "Initial Extent (Mha)",
@@ -390,6 +389,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     avoid.columns = avoid.columns.astype(int)
 
+    avoid = avoid.loc[:, :proj_end_year]
+
     avoid.loc[:, :data_end_year] = 0
 
     avoid.loc[:, data_end_year + 1 :] = -avoid.loc[
@@ -405,29 +406,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         lambda x: ((x[data_end_year] - x) / x.max()).fillna(0), axis=1
     )
 
-    """
-    avoid_per = avoid.parallel_apply(lambda x: ((x[data_end_year] - x) / x[data_end_year]).fillna(0), axis=1)
-
-    avoid_per = (
-        (
-            avoid.parallel_apply(lambda x: x * 0, axis=1)
-            .parallel_apply(lambda x: x + x.name[3], axis=1)
-            .cumsum(axis=1)
-            .parallel_apply(lambda x: -x - x.name[2], axis=1)
-        )
-        .clip(lower=0)
-        .parallel_apply(
-            lambda x: pd.Series(
-                np.where(x.name[3] > 0, (-x + 1), (x * 0)), index=x.index
-            ),
-            axis=1,
-        )
-    ).clip(lower=0)
-    """
-
     # endregion
 
-    # combine dfs and reformat index to regions
+    # Combine emissions estimates for all subverticals and add labels for scenario, sector, and gas
 
     # region
 
@@ -438,8 +419,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         names=["Subvector"],
     ).reorder_levels(["Region", "Subvector"])
 
-    adoption = adoption.append(adoption_am).append(avoid)
-    per_adoption = pd.concat([hist1, avoid_per], axis=0).fillna(0)
+    adoption = pd.concat([adoption, adoption_am, avoid])
+    per_adoption = pd.concat([hist1, avoid_per]).fillna(0)
 
     # CO2 F&W (F&W only has CO2 at this point)
 
@@ -454,8 +435,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         "Natural Regeneration",
         "Peat Restoration",
     ]:
-        co2_fw = pd.DataFrame(co2_fw).append(
-            pd.DataFrame(adoption.loc[slice(None), [subv], :])
+        co2_fw = pd.concat(
+            [pd.DataFrame(co2_fw), pd.DataFrame(adoption.loc[slice(None), [subv], :])]
         )
 
     co2_fw = pd.concat([co2_fw], names=["Sector"], keys=["Forests & Wetlands"])
@@ -474,8 +455,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         "Silvopasture",
         "Trees in Croplands",
     ]:
-        co2_ag = pd.DataFrame(co2_ag).append(
-            pd.DataFrame(adoption.loc[slice(None), [subv], :])
+        co2_ag = pd.concat(
+            [pd.DataFrame(co2_ag), pd.DataFrame(adoption.loc[slice(None), [subv], :])]
         )
 
     co2_ag = pd.concat([co2_ag], names=["Sector"], keys=["Regenerative Agriculture"])
@@ -488,8 +469,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     ch4_ag = []
 
     for subv in ["Improved Rice", "Animal Mgmt"]:
-        ch4_ag = pd.DataFrame(ch4_ag).append(
-            pd.DataFrame(adoption.loc[slice(None), [subv], :])
+        ch4_ag = pd.concat(
+            [pd.DataFrame(ch4_ag), pd.DataFrame(adoption.loc[slice(None), [subv], :])]
         )
 
     # Improved rice mitigation is 58% from CH4 and 42% from N2O (see NCS)
@@ -510,8 +491,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         "Improved Rice",
         "Nitrogen Fertilizer Management",
     ]:
-        n2o_ag = pd.DataFrame(n2o_ag).append(
-            pd.DataFrame(adoption.loc[slice(None), [subv], :])
+        n2o_ag = pd.concat(
+            [pd.DataFrame(n2o_ag), pd.DataFrame(adoption.loc[slice(None), [subv], :])]
         )
 
     # Improved rice mitigation is 58% from CH4 and 42% from N2O (see NCS)
@@ -524,6 +505,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     n2o_ag = pd.concat([n2o_ag], names=["Gas"], keys=["N2O"])
     n2o_ag = n2o_ag.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
 
+    # Percent adoption Forests & Wetlands
     per_fw = []
 
     for subv in [
@@ -535,14 +517,18 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         "Natural Regeneration",
         "Peat Restoration",
     ]:
-        per_fw = pd.DataFrame(per_fw).append(
-            pd.DataFrame(per_adoption.loc[slice(None), [subv], :])
+        per_fw = pd.concat(
+            [
+                pd.DataFrame(per_fw),
+                pd.DataFrame(per_adoption.loc[slice(None), [subv], :]),
+            ]
         )
 
     per_fw = pd.concat([per_fw], names=["Sector"], keys=["Forests & Wetlands"])
     per_fw = pd.concat([per_fw], names=["Scenario"], keys=[scenario])
     per_fw = per_fw.reorder_levels(["Region", "Sector", "Subvector", "Scenario"])
 
+    # Percent adoption Agriculture
     per_ag = []
 
     for subv in [
@@ -554,8 +540,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         "Silvopasture",
         "Trees in Croplands",
     ]:
-        per_ag = pd.DataFrame(per_ag).append(
-            pd.DataFrame(per_adoption.loc[slice(None), [subv], :])
+        per_ag = pd.concat(
+            [
+                pd.DataFrame(per_ag),
+                pd.DataFrame(per_adoption.loc[slice(None), [subv], :]),
+            ]
         )
 
     per_ag = pd.concat([per_ag], names=["Sector"], keys=["Regenerative Agriculture"])
@@ -564,11 +553,12 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # add mitigation to hist/projected emissions to get net emissions
+    # Add mitigation estimates to historical and projected emissions to get net emissions
 
     # region
 
     # historical emissions
+
     afolu_em_hist = (
         pd.read_csv("podi/data/emissions_additional.csv")
         .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])
@@ -629,81 +619,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             afolu_em.loc[:, data_end_year:], "linear", 1
         )
 
-    # create 16 region df for max extent
+    # endregion
 
-    max_extent3 = []
-
-    for subv in [
-        "Biochar",
-        "Cropland Soil Health",
-        "Improved Rice",
-        "Nitrogen Fertilizer Management",
-        "Optimal Intensity",
-        "Silvopasture",
-        "Trees in Croplands",
-    ]:
-        max_extent3 = pd.DataFrame(max_extent3).append(
-            pd.DataFrame(max_extent2.loc[slice(None), [subv], :])
-        )
-
-    max_extent3 = pd.concat(
-        [max_extent3], names=["Sector"], keys=["Regenerative Agriculture"]
-    )
-    max_extent3 = pd.concat([max_extent3], names=["Scenario"], keys=[scenario])
-    max_extent3 = pd.concat([max_extent3], names=["Gas"], keys=["CO2"])
-    max_extent3 = max_extent3.reorder_levels(
-        ["Region", "Sector", "Subvector", "Gas", "Scenario"]
-    )
-
-    max_extent4 = []
-
-    for subv in [
-        "Coastal Restoration",
-        "Improved Forest Mgmt",
-        "Natural Regeneration",
-        "Peat Restoration",
-    ]:
-        max_extent4 = pd.DataFrame(max_extent4).append(
-            pd.DataFrame(max_extent2.loc[slice(None), [subv], :])
-        )
-
-    max_extent4 = pd.concat(
-        [max_extent4], names=["Sector"], keys=["Forests & Wetlands"]
-    )
-    max_extent4 = pd.concat([max_extent4], names=["Scenario"], keys=[scenario])
-    max_extent4 = pd.concat([max_extent4], names=["Gas"], keys=["CO2"])
-    max_extent4 = max_extent4.reorder_levels(
-        ["Region", "Sector", "Subvector", "Gas", "Scenario"]
-    )
-
-    per_max = (
-        per_adoption.loc[
-            slice(None),
-            slice(None),
-            [
-                "Biochar",
-                "Coastal Restoration",
-                "Cropland Soil Health",
-                "Improved Forest Mgmt",
-                "Improved Rice",
-                "Natural Regeneration",
-                "Nitrogen Fertilizer Management",
-                "Optimal Intensity",
-                "Peat Restoration",
-                "Silvopasture",
-                "Trees in Croplands",
-            ],
-            scenario,
-        ]
-        .parallel_apply(
-            lambda x: x.multiply(
-                pd.concat([max_extent3, max_extent4]).loc[
-                    x.name[0], x.name[1], x.name[2]
-                ]
-            ),
-            axis=1,
-        )
-        .fillna(0)
-    )
-
-    return afolu_em, per_adoption, per_max
+    return afolu_em, per_adoption
