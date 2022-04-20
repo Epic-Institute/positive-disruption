@@ -100,7 +100,11 @@ def adoption_curve(
     y = np.concatenate(
         [
             value.loc[:data_end_year].values,
-            y[y >= value.loc[data_end_year]].squeeze(),
+            y[y >= value.loc[data_end_year]].squeeze()
+            - (
+                y[y >= value.loc[data_end_year]].squeeze().min()
+                - value.loc[data_end_year + 1]
+            ),
         ]
     )[: (proj_end_year - data_start_year + 1)]
 
@@ -118,8 +122,6 @@ def adoption_curve(
     pd.DataFrame(
         (
             value.name[0],
-            value.name[5],
-            value.name[1],
             genetic_parameters[0],
             genetic_parameters[1],
             genetic_parameters[2],

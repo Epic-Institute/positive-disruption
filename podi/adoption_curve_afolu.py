@@ -11,63 +11,26 @@ def func(x, a, b, c, d):
     return c / (1 + np.exp(-a * (x - b))) + d
 
 
-def func2(x, a, b, c, d):
+def func2(x, a, b):
     return a * x + b
 
 
 def adoption_curve_afolu(
     value, region, scenario, sector, data_start_year, data_end_year, proj_end_year
 ):
+
+    # Load tech parameters
     parameters = pd.read_csv("podi/data/tech_parameters_afolu.csv").set_index(
-        ["IEA Region", "Technology", "Scenario", "Sector", "Metric"]
+        ["Region", "Technology", "Scenario", "Sector", "Metric"]
     )
 
-    # for technologies defined to remain constant/decrease, set saturation point to value of historical adoption level
-    if (
-        np.any(
-            pd.Series(value.name).isin(
-                [
-                    "Nuclear",
-                    "Fossil fuels",
-                    "Biomass and waste",
-                    "Bioenergy",
-                    "Coal",
-                    "Hydroelectric pumped storage",
-                    "Natural gas",
-                    "Oil",
-                    "Other sources",
-                ]
-            )
-        )
-        is True
-    ):
-        from podi.energy_supply import (
-            hist_elec_consump,
-            hist_per_elec_consump,
-            hist_heat_consump,
-            hist_per_heat_consump,
-            data_end_year,
-        )
-
-        if sector == "Electricity":
-            parameters.loc[
-                region, value.name, scenario, sector, "Saturation Point"
-            ].Value[0] = hist_per_elec_consump(
-                region, scenario, hist_elec_consump(region, scenario)
-            ).loc[
-                value.name, str(data_end_year)
-            ]
-        else:
-            parameters.loc[
-                region, value.name, scenario, sector, "Saturation Point"
-            ].Value[0] = hist_per_heat_consump(
-                region, scenario, hist_heat_consump(region, scenario)
-            ).loc[
-                value.name, str(data_end_year)
-            ]
-
-    x_data = np.arange(len(value.T))
-    y_data = value.to_numpy()[~np.isnan(value)]
+    # Take 10 years prior data to fit logistic function
+    x_data = np.arange(0, len(value.loc[data_end_year - 10 : proj_end_year]), 1)
+    y_data = np.zeros((1, len(x_data)))
+    y_data[:, :] = np.NaN
+    y_data = y_data.squeeze().astype(float)
+    y_data[:11] = value.loc[data_end_year - 10 : data_end_year]
+    y_data[-1] = parameters.loc["saturation point"].Value.astype(float)
 
     def sum_of_squared_error(parameters):
         warnings.filterwarnings("ignore")
@@ -152,8 +115,6 @@ def adoption_curve_afolu(
             x,
             min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
             (y_data[-1]),
-            0,
-            0,
         )
         genetic_parameters = [0, 0, 0, 0]
 
@@ -162,8 +123,6 @@ def adoption_curve_afolu(
                 x,
                 min(0.002, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
                 (y_data[-1]),
-                0,
-                0,
             )
     else:
         # "seed" the numpy random number generator for repeatable results.
@@ -178,71 +137,11 @@ def adoption_curve_afolu(
         x = np.arange(proj_end_year - pd.to_numeric(value.index[0]) + 1)
         y = np.array(func(x, *genetic_parameters))
 
-    """
-    # Now call curve_fit without passing bounds from the genetic algorithm, just in case the best fit parameters are outside those bounds
-    fitted_parameters, _ = curve_fit(func, x_data, y_data, maxfev=10000)
-    x = np.arange(proj_end_year - pd.to_numeric(value.index[0]) + 1)
-    y = np.array(func(x, *genetic_parameters))
-    """
-
-    """
-    print("genetic_parameters = ", genetic_parameters)
-
-    model_predictions = func(x_data, *genetic_parameters)
-    print('model_predictions = ', model_predictions)
-    abs_error = model_predictions - y_data
-    print('abs_error = ', abs_error)
-
-    squared_errors = np.square(abs_error)
-    print('squared_errors = ', squared_errors)
-
-    mean_squared_errors = np.mean(squared_errors)
-    print('mean_squared_errors = ', mean_squared_errors)
-
-    root_mean_squared_error = np.sqrt(mean_squared_errors)
-    print("root_mean_squared_error = ", root_mean_squared_error)
-
-    r_squared = 1.0 - (np.var(abs_error) / np.var(y_data))
-    print("r_squared = ", r_squared)
-    """
-
     years = np.linspace(
         pd.to_numeric(value.index[0]),
         proj_end_year,
         proj_end_year - pd.to_numeric(value.index[0]) + 1,
     ).astype(int)
-
-    """
-    # set maximum annual growth rate
-    max_growth = (
-        pd.to_numeric(
-            parameters.loc[
-                region, value.name, scenario, sector, "Max annual growth"
-            ].Value[0]
-        )
-        / 100
-    )
-
-    y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
-    for i in range(1, len(y_data)):
-        y_growth = pd.DataFrame(y).pct_change().replace(NaN, 0)
-        if y_growth[0][i].astype(float) <= 0:
-            y_growth[0][i] = 0
-            y_data[i] = y_data[i - 1]
-            genetic_parameters = differential_evolution(
-                sum_of_squared_error, search_bounds, seed=3
-            ).x
-            y = np.array(func(x, *genetic_parameters))
-        elif y_growth[0][i].astype(float) > max_growth.astype(float):
-            y_growth[0][i] = max_growth
-            y_data[i] = y_data[i - 1] * (1 + max_growth)
-            genetic_parameters = differential_evolution(
-                sum_of_squared_error, search_bounds, seed=3
-            ).x
-            y = np.array(func(x, *genetic_parameters))
-
-    y_growth = np.array(y_growth)
-    """
 
     genetic_parameters = pd.DataFrame(genetic_parameters, ["a", "b", "c", "d"]).T.round(
         decimals=3
