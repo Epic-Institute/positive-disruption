@@ -1576,9 +1576,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    ##############################
-    #  SAVE OUTPUT TO CSV FILES  #
-    ##############################
+    #################
+    #  SAVE OUTPUT  #
+    #################
 
     # region
 

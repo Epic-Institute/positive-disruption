@@ -141,45 +141,24 @@ else:
 #########
 
 # region
-afolu_em_baseline, afolu_per_adoption_baseline = afolu(
-    "baseline", data_start_year, data_end_year, proj_end_year
-)
 
-afolu_em_pathway, afolu_per_adoption_pathway = afolu(
-    scenario, data_start_year, data_end_year, proj_end_year
-)
+index = [
+    "Scenario",
+    "Region",
+    "Sector",
+    "Subsector",
+    "Product_category",
+    "Product_long",
+    "Product",
+    "Flow_category",
+    "Flow_long",
+    "Flow",
+]
 
-afolu_em = afolu_em_baseline.append(afolu_em_pathway)
+afolu(scenario, data_start_year, data_end_year, proj_end_year)
 
-afolu_per_adoption = afolu_per_adoption_baseline.append(afolu_per_adoption_pathway)
-
-afolu_em.loc[
-    slice(None),
-    slice(None),
-    [
-        "Deforestation",
-        "3B_Manure-management",
-        "3D_Rice-Cultivation",
-        "3D_Soil-emissions",
-        "3E_Enteric-fermentation",
-        "3I_Agriculture-other",
-    ],
-    slice(None),
-    "baseline",
-] = afolu_em.loc[
-    slice(None),
-    slice(None),
-    [
-        "Deforestation",
-        "3B_Manure-management",
-        "3D_Rice-Cultivation",
-        "3D_Soil-emissions",
-        "3E_Enteric-fermentation",
-        "3I_Agriculture-other",
-    ],
-    slice(None),
-    "pathway",
-].values
+afolu = pd.DataFrame(pd.read_csv("podi/data/afolu_adoption.csv")).set_index(index)
+afolu.columns = afolu.columns.astype(int)
 
 # endregion
 
