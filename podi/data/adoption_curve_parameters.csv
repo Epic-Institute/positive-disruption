@@ -1,420 +1,1816 @@
-
-0,baseline,LBN,Natural Regeneration,0,0,0,0
-0,baseline,AFG,Biochar,0,0,0,0
-0,baseline,RUS,Cropland Soil Health,0,0,0,0
-0,baseline,LSO,Natural Regeneration,0,0,0,0
-0,baseline,EGY,Peat Restoration,0,0,0,0
-0,baseline,ALB,Biochar,0,0,0,0
-0,baseline,RWA,Cropland Soil Health,0,0,0,0
-0,baseline,LBR,Natural Regeneration,0,0,0,0
-0,baseline,SLV,Peat Restoration,0,0,0,0
-0,baseline,WSM,Cropland Soil Health,0,0,0,0
-0,baseline,DZA,Biochar,0,0,0,0
-0,baseline,GNQ,Peat Restoration,0,0,0,0
-0,baseline,STP,Cropland Soil Health,0,0,0,0
-0,baseline,AGO,Biochar,0,0,0,0
-0,baseline,SAU,Cropland Soil Health,0,0,0,0
-0,baseline,ARG,Biochar,0,0,0,0
-0,baseline,SEN,Cropland Soil Health,0,0,0,0
-0,baseline,ARM,Biochar,0,0,0,0
-0,baseline,AUS,Biochar,0,0,0,0
-0,baseline,SRB,Cropland Soil Health,0,0,0,0
-0,baseline,SLE,Cropland Soil Health,0,0,0,0
-0,baseline,AUT,Biochar,0,0,0,0
-0,baseline,SVK,Cropland Soil Health,0,0,0,0
-0,baseline,AZE,Biochar,0,0,0,0
-0,baseline,SVN,Cropland Soil Health,0,0,0,0
-0,baseline,BHS,Biochar,0,0,0,0
-0,baseline,SLB,Cropland Soil Health,0,0,0,0
-0,baseline,BGD,Biochar,0,0,0,0
-0,baseline,SOM,Cropland Soil Health,0,0,0,0
-0,baseline,BLR,Biochar,0,0,0,0
-0,baseline,ZAF,Cropland Soil Health,0,0,0,0
-0,baseline,BEL,Biochar,0,0,0,0
-0,baseline,SSD,Cropland Soil Health,0,0,0,0
-0,baseline,BLZ,Biochar,0,0,0,0
-0,baseline,ESP,Cropland Soil Health,0,0,0,0
-0,baseline,BEN,Biochar,0,0,0,0
-0,baseline,LKA,Cropland Soil Health,0,0,0,0
-0,baseline,BTN,Biochar,0,0,0,0
-0,baseline,SDN,Cropland Soil Health,0,0,0,0
-0,baseline,BOL,Biochar,0,0,0,0
-0,baseline,SUR,Cropland Soil Health,0,0,0,0
-0,baseline,BIH,Biochar,0,0,0,0
-0,baseline,SWZ,Cropland Soil Health,0,0,0,0
-0,baseline,BWA,Biochar,0,0,0,0
-0,baseline,SWE,Cropland Soil Health,0,0,0,0
-0,baseline,BRA,Biochar,0,0,0,0
-0,baseline,CHE,Cropland Soil Health,0,0,0,0
-0,baseline,BRN,Biochar,0,0,0,0
-0,baseline,SYR,Cropland Soil Health,0,0,0,0
-0,baseline,BGR,Biochar,0,0,0,0
-0,baseline,BFA,Biochar,0,0,0,0
-0,baseline,TJK,Cropland Soil Health,0,0,0,0
-0,baseline,BDI,Biochar,0,0,0,0
-0,baseline,TZA,Cropland Soil Health,0,0,0,0
-0,baseline,KHM,Biochar,0,0,0,0
-0,baseline,THA,Cropland Soil Health,0,0,0,0
-0,baseline,CMR,Biochar,0,0,0,0
-0,baseline,TLS,Cropland Soil Health,0,0,0,0
-0,baseline,CAN,Biochar,0,0,0,0
-0,baseline,TGO,Cropland Soil Health,0,0,0,0
-0,baseline,CPV,Biochar,0,0,0,0
-0,baseline,TTO,Cropland Soil Health,0,0,0,0
-0,baseline,CAF,Biochar,0,0,0,0
-0,baseline,TUN,Cropland Soil Health,0,0,0,0
-0,baseline,TCD,Biochar,0,0,0,0
-0,baseline,TUR,Cropland Soil Health,0,0,0,0
-0,baseline,CHL,Biochar,0,0,0,0
-0,baseline,TKM,Cropland Soil Health,0,0,0,0
-0,baseline,CHN,Biochar,0,0,0,0
-0,baseline,UGA,Cropland Soil Health,0,0,0,0
-0,baseline,COL,Biochar,0,0,0,0
-0,baseline,UKR,Cropland Soil Health,0,0,0,0
-0,baseline,COM,Biochar,0,0,0,0
-0,baseline,CRI,Biochar,0,0,0,0
-0,baseline,ARE,Cropland Soil Health,0,0,0,0
-0,baseline,CIV,Biochar,0,0,0,0
-0,baseline,GBR,Cropland Soil Health,0,0,0,0
-0,baseline,HRV,Biochar,0,0,0,0
-0,baseline,USA,Cropland Soil Health,0,0,0,0
-0,baseline,CUB,Biochar,0,0,0,0
-0,baseline,CYP,Biochar,0,0,0,0
-0,baseline,CZE,Biochar,0,0,0,0
-0,baseline,PRK,Biochar,0,0,0,0
-0,baseline,COD,Biochar,0,0,0,0
-0,baseline,DNK,Biochar,0,0,0,0
-0,baseline,DJI,Biochar,0,0,0,0
-0,baseline,DOM,Biochar,0,0,0,0
-0,baseline,ECU,Biochar,0,0,0,0
-0,baseline,EGY,Biochar,0,0,0,0
-0,baseline,SLV,Biochar,0,0,0,0
-0,baseline,GNQ,Biochar,0,0,0,0
-0,baseline,ERI,Biochar,0,0,0,0
-0,baseline,EST,Biochar,0,0,0,0
-0,baseline,ETH,Biochar,0,0,0,0
-0,baseline,FLK,Biochar,0,0,0,0
-0,baseline,FRO,Biochar,0,0,0,0
-0,baseline,FJI,Biochar,0,0,0,0
-0,baseline,FIN,Biochar,0,0,0,0
-0,baseline,FRA,Biochar,0,0,0,0
-0,baseline,GUF,Biochar,0,0,0,0
-0,baseline,PYF,Biochar,0,0,0,0
-0,baseline,GAB,Biochar,0,0,0,0
-0,baseline,GMB,Biochar,0,0,0,0
-0,baseline,GEO,Biochar,0,0,0,0
-0,baseline,DEU,Biochar,0,0,0,0
-0,baseline,GHA,Biochar,0,0,0,0
-0,baseline,GRC,Biochar,0,0,0,0
-0,baseline,GRL,Biochar,0,0,0,0
-0,baseline,GLP,Biochar,0,0,0,0
-0,baseline,GTM,Biochar,0,0,0,0
-0,baseline,GIN,Biochar,0,0,0,0
-0,baseline,GNB,Biochar,0,0,0,0
-0,baseline,GUY,Biochar,0,0,0,0
-0,baseline,HTI,Biochar,0,0,0,0
-0,baseline,HND,Biochar,0,0,0,0
-0,baseline,HUN,Biochar,0,0,0,0
-0,baseline,ISL,Biochar,0,0,0,0
-0,baseline,IND,Biochar,0,0,0,0
-0,baseline,IDN,Biochar,0,0,0,0
-0,baseline,IRN,Biochar,0,0,0,0
-0,baseline,IRQ,Biochar,0,0,0,0
-0,baseline,IRL,Biochar,0,0,0,0
-0,baseline,ISR,Biochar,0,0,0,0
-0,baseline,ITA,Biochar,0,0,0,0
-0,baseline,JAM,Biochar,0,0,0,0
-0,baseline,JPN,Biochar,0,0,0,0
-0,baseline,JOR,Biochar,0,0,0,0
-0,baseline,KAZ,Biochar,0,0,0,0
-0,baseline,KEN,Biochar,0,0,0,0
-0,baseline,KWT,Biochar,0,0,0,0
-0,baseline,KGZ,Biochar,0,0,0,0
-0,baseline,LAO,Biochar,0,0,0,0
-0,baseline,LVA,Biochar,0,0,0,0
-0,baseline,LBN,Biochar,0,0,0,0
-0,baseline,LSO,Biochar,0,0,0,0
-0,baseline,LBR,Biochar,0,0,0,0
-0,baseline,LBY,Biochar,0,0,0,0
-0,baseline,LTU,Biochar,0,0,0,0
-0,baseline,LUX,Biochar,0,0,0,0
-0,baseline,MKD,Biochar,0,0,0,0
-0,baseline,MDG,Biochar,0,0,0,0
-0,baseline,MWI,Biochar,0,0,0,0
-0,baseline,MYS,Biochar,0,0,0,0
-0,baseline,MLI,Biochar,0,0,0,0
-0,baseline,MTQ,Biochar,0,0,0,0
-0,baseline,MRT,Biochar,0,0,0,0
-0,baseline,MUS,Biochar,0,0,0,0
-0,baseline,MEX,Biochar,0,0,0,0
-0,baseline,MDA,Biochar,0,0,0,0
-0,baseline,MNG,Biochar,0,0,0,0
-0,baseline,MNE,Biochar,0,0,0,0
-0,baseline,MAR,Biochar,0,0,0,0
-0,baseline,MOZ,Biochar,0,0,0,0
-0,baseline,MMR,Biochar,0,0,0,0
-0,baseline,NAM,Biochar,0,0,0,0
-0,baseline,NPL,Biochar,0,0,0,0
-0,baseline,NLD,Biochar,0,0,0,0
-0,baseline,NCL,Biochar,0,0,0,0
-0,baseline,NZL,Biochar,0,0,0,0
-0,baseline,NIC,Biochar,0,0,0,0
-0,baseline,NER,Biochar,0,0,0,0
-0,baseline,NGA,Biochar,0,0,0,0
-0,baseline,NOR,Biochar,0,0,0,0
-0,baseline,OMN,Biochar,0,0,0,0
-0,baseline,PAK,Biochar,0,0,0,0
-0,baseline,PAN,Biochar,0,0,0,0
-0,baseline,PNG,Biochar,0,0,0,0
-0,baseline,PRY,Biochar,0,0,0,0
-0,baseline,PER,Biochar,0,0,0,0
-0,baseline,PHL,Biochar,0,0,0,0
-0,baseline,POL,Biochar,0,0,0,0
-0,baseline,PRT,Biochar,0,0,0,0
-0,baseline,PRI,Biochar,0,0,0,0
-0,baseline,QAT,Biochar,0,0,0,0
-0,baseline,COG,Biochar,0,0,0,0
-0,baseline,KOR,Biochar,0,0,0,0
-0,baseline,REU,Biochar,0,0,0,0
-0,baseline,ROU,Biochar,0,0,0,0
-0,baseline,RUS,Biochar,0,0,0,0
-0,baseline,RWA,Biochar,0,0,0,0
-0,baseline,WSM,Biochar,0,0,0,0
-0,baseline,STP,Biochar,0,0,0,0
-0,baseline,SAU,Biochar,0,0,0,0
-0,baseline,SEN,Biochar,0,0,0,0
-0,baseline,SRB,Biochar,0,0,0,0
-0,baseline,SLE,Biochar,0,0,0,0
-0,baseline,SVK,Biochar,0,0,0,0
-0,baseline,SVN,Biochar,0,0,0,0
-0,baseline,SLB,Biochar,0,0,0,0
-0,baseline,SOM,Biochar,0,0,0,0
-0,baseline,ZAF,Biochar,0,0,0,0
-0,baseline,SSD,Biochar,0,0,0,0
-0,baseline,ESP,Biochar,0,0,0,0
-0,baseline,LKA,Biochar,0,0,0,0
-0,baseline,SDN,Biochar,0,0,0,0
-0,baseline,SUR,Biochar,0,0,0,0
-0,baseline,SWZ,Biochar,0,0,0,0
-0,baseline,SWE,Biochar,0,0,0,0
-0,baseline,CHE,Biochar,0,0,0,0
-0,baseline,SYR,Biochar,0,0,0,0
-0,baseline,TJK,Biochar,0,0,0,0
-0,baseline,TZA,Biochar,0,0,0,0
-0,baseline,THA,Biochar,0,0,0,0
-0,baseline,TLS,Biochar,0,0,0,0
-0,baseline,TGO,Biochar,0,0,0,0
-0,baseline,TTO,Biochar,0,0,0,0
-0,baseline,TUN,Biochar,0,0,0,0
-0,baseline,TUR,Biochar,0,0,0,0
-0,baseline,TKM,Biochar,0,0,0,0
-0,baseline,UGA,Biochar,0,0,0,0
-0,baseline,UKR,Biochar,0,0,0,0
-0,baseline,ARE,Biochar,0,0,0,0
-0,baseline,GBR,Biochar,0,0,0,0
-0,baseline,USA,Biochar,0,0,0,0
-0,baseline,URY,Biochar,0,0,0,0
-0,baseline,UZB,Biochar,0,0,0,0
-0,baseline,VUT,Biochar,0,0,0,0
-0,baseline,VEN,Biochar,0,0,0,0
-0,baseline,VNM,Biochar,0,0,0,0
-0,baseline,ESH,Biochar,0,0,0,0
-0,baseline,YEM,Biochar,0,0,0,0
-0,baseline,ZMB,Biochar,0,0,0,0
-0,baseline,ZWE,Biochar,0,0,0,0
-0,baseline,AFG,Coastal Restoration,0,0,0,0
-0,baseline,ALB,Coastal Restoration,0,0,0,0
-0,baseline,DZA,Coastal Restoration,0,0,0,0
-0,baseline,AGO,Coastal Restoration,0,0,0,0
-0,baseline,ARG,Coastal Restoration,0,0,0,0
-0,baseline,ARM,Coastal Restoration,0,0,0,0
-0,baseline,AUS,Coastal Restoration,0,0,0,0
-0,baseline,AUT,Coastal Restoration,0,0,0,0
-0,baseline,AZE,Coastal Restoration,0,0,0,0
-0,baseline,BHS,Coastal Restoration,0,0,0,0
-0,baseline,BGD,Coastal Restoration,0,0,0,0
-0,baseline,BLR,Coastal Restoration,0,0,0,0
-0,baseline,BEL,Coastal Restoration,0,0,0,0
-0,baseline,BLZ,Coastal Restoration,0,0,0,0
-0,baseline,BEN,Coastal Restoration,0,0,0,0
-0,baseline,BTN,Coastal Restoration,0,0,0,0
-0,baseline,BOL,Coastal Restoration,0,0,0,0
-0,baseline,BIH,Coastal Restoration,0,0,0,0
-0,baseline,BWA,Coastal Restoration,0,0,0,0
-0,baseline,BRA,Coastal Restoration,0,0,0,0
-0,baseline,BRN,Coastal Restoration,0,0,0,0
-0,baseline,BGR,Coastal Restoration,0,0,0,0
-0,baseline,BFA,Coastal Restoration,0,0,0,0
-0,baseline,BDI,Coastal Restoration,0,0,0,0
-0,baseline,KHM,Coastal Restoration,0,0,0,0
-0,baseline,CMR,Coastal Restoration,0,0,0,0
-0,baseline,CAN,Coastal Restoration,0,0,0,0
-0,baseline,CPV,Coastal Restoration,0,0,0,0
-0,baseline,CAF,Coastal Restoration,0,0,0,0
-0,baseline,TCD,Coastal Restoration,0,0,0,0
-0,baseline,CHL,Coastal Restoration,0,0,0,0
-0,baseline,CHN,Coastal Restoration,0,0,0,0
-0,baseline,COL,Coastal Restoration,0,0,0,0
-0,baseline,COM,Coastal Restoration,0,0,0,0
-0,baseline,CRI,Coastal Restoration,0,0,0,0
-0,baseline,CIV,Coastal Restoration,0,0,0,0
-0,baseline,HRV,Coastal Restoration,0,0,0,0
-0,baseline,CUB,Coastal Restoration,0,0,0,0
-0,baseline,CYP,Coastal Restoration,0,0,0,0
-0,baseline,CZE,Coastal Restoration,0,0,0,0
-0,baseline,PRK,Coastal Restoration,0,0,0,0
-0,baseline,COD,Coastal Restoration,0,0,0,0
-0,baseline,DNK,Coastal Restoration,0,0,0,0
-0,baseline,DJI,Coastal Restoration,0,0,0,0
-0,baseline,DOM,Coastal Restoration,0,0,0,0
-0,baseline,ECU,Coastal Restoration,0,0,0,0
-0,baseline,EGY,Coastal Restoration,0,0,0,0
-0,baseline,SLV,Coastal Restoration,0,0,0,0
-0,baseline,GNQ,Coastal Restoration,0,0,0,0
-0,baseline,ERI,Coastal Restoration,0,0,0,0
-0,baseline,EST,Coastal Restoration,0,0,0,0
-0,baseline,ETH,Coastal Restoration,0,0,0,0
-0,baseline,FLK,Coastal Restoration,0,0,0,0
-0,baseline,FRO,Coastal Restoration,0,0,0,0
-0,baseline,FJI,Coastal Restoration,0,0,0,0
-0,baseline,FIN,Coastal Restoration,0,0,0,0
-0,baseline,FRA,Coastal Restoration,0,0,0,0
-0,baseline,GUF,Coastal Restoration,0,0,0,0
-0,baseline,PYF,Coastal Restoration,0,0,0,0
-0,baseline,GAB,Coastal Restoration,0,0,0,0
-0,baseline,GMB,Coastal Restoration,0,0,0,0
-0,baseline,GEO,Coastal Restoration,0,0,0,0
-0,baseline,DEU,Coastal Restoration,0,0,0,0
-0,baseline,GHA,Coastal Restoration,0,0,0,0
-0,baseline,GRC,Coastal Restoration,0,0,0,0
-0,baseline,GRL,Coastal Restoration,0,0,0,0
-0,baseline,GLP,Coastal Restoration,0,0,0,0
-0,baseline,GTM,Coastal Restoration,0,0,0,0
-0,baseline,GIN,Coastal Restoration,0,0,0,0
-0,baseline,GNB,Coastal Restoration,0,0,0,0
-0,baseline,GUY,Coastal Restoration,0,0,0,0
-0,baseline,HTI,Coastal Restoration,0,0,0,0
-0,baseline,HND,Coastal Restoration,0,0,0,0
-0,baseline,HUN,Coastal Restoration,0,0,0,0
-0,baseline,ISL,Coastal Restoration,0,0,0,0
-0,baseline,IND,Coastal Restoration,0,0,0,0
-0,baseline,IDN,Coastal Restoration,0,0,0,0
-0,baseline,IRN,Coastal Restoration,0,0,0,0
-0,baseline,IRQ,Coastal Restoration,0,0,0,0
-0,baseline,IRL,Coastal Restoration,0,0,0,0
-0,baseline,ISR,Coastal Restoration,0,0,0,0
-0,baseline,ITA,Coastal Restoration,0,0,0,0
-0,baseline,JAM,Coastal Restoration,0,0,0,0
-0,baseline,JPN,Coastal Restoration,0,0,0,0
-0,baseline,JOR,Coastal Restoration,0,0,0,0
-0,baseline,KAZ,Coastal Restoration,0,0,0,0
-0,baseline,KEN,Coastal Restoration,0,0,0,0
-0,baseline,KWT,Coastal Restoration,0,0,0,0
-0,baseline,KGZ,Coastal Restoration,0,0,0,0
-0,baseline,LAO,Coastal Restoration,0,0,0,0
-0,baseline,LVA,Coastal Restoration,0,0,0,0
-0,baseline,LBN,Coastal Restoration,0,0,0,0
-0,baseline,LSO,Coastal Restoration,0,0,0,0
-0,baseline,LBR,Coastal Restoration,0,0,0,0
-0,baseline,LBY,Coastal Restoration,0,0,0,0
-0,baseline,LTU,Coastal Restoration,0,0,0,0
-0,baseline,LUX,Coastal Restoration,0,0,0,0
-0,baseline,MKD,Coastal Restoration,0,0,0,0
-0,baseline,MDG,Coastal Restoration,0,0,0,0
-0,baseline,MWI,Coastal Restoration,0,0,0,0
-0,baseline,MYS,Coastal Restoration,0,0,0,0
-0,baseline,MLI,Coastal Restoration,0,0,0,0
-0,baseline,MTQ,Coastal Restoration,0,0,0,0
-0,baseline,MRT,Coastal Restoration,0,0,0,0
-0,baseline,MUS,Coastal Restoration,0,0,0,0
-0,baseline,MEX,Coastal Restoration,0,0,0,0
-0,baseline,MDA,Coastal Restoration,0,0,0,0
-0,baseline,MNG,Coastal Restoration,0,0,0,0
-0,baseline,MNE,Coastal Restoration,0,0,0,0
-0,baseline,MAR,Coastal Restoration,0,0,0,0
-0,baseline,MOZ,Coastal Restoration,0,0,0,0
-0,baseline,MMR,Coastal Restoration,0,0,0,0
-0,baseline,NAM,Coastal Restoration,0,0,0,0
-0,baseline,NPL,Coastal Restoration,0,0,0,0
-0,baseline,NLD,Coastal Restoration,0,0,0,0
-0,baseline,NCL,Coastal Restoration,0,0,0,0
-0,baseline,NZL,Coastal Restoration,0,0,0,0
-0,baseline,NIC,Coastal Restoration,0,0,0,0
-0,baseline,NER,Coastal Restoration,0,0,0,0
-0,baseline,NGA,Coastal Restoration,0,0,0,0
-0,baseline,NOR,Coastal Restoration,0,0,0,0
-0,baseline,OMN,Coastal Restoration,0,0,0,0
-0,baseline,PAK,Coastal Restoration,0,0,0,0
-0,baseline,PAN,Coastal Restoration,0,0,0,0
-0,baseline,PNG,Coastal Restoration,0,0,0,0
-0,baseline,PRY,Coastal Restoration,0,0,0,0
-0,baseline,PER,Coastal Restoration,0,0,0,0
-0,baseline,PHL,Coastal Restoration,0,0,0,0
-0,baseline,POL,Coastal Restoration,0,0,0,0
-0,baseline,PRT,Coastal Restoration,0,0,0,0
-0,baseline,PRI,Coastal Restoration,0,0,0,0
-0,baseline,QAT,Coastal Restoration,0,0,0,0
-0,baseline,COG,Coastal Restoration,0,0,0,0
-0,baseline,KOR,Coastal Restoration,0,0,0,0
-0,baseline,REU,Coastal Restoration,0,0,0,0
-0,baseline,ROU,Coastal Restoration,0,0,0,0
-0,baseline,RUS,Coastal Restoration,0,0,0,0
-0,baseline,RWA,Coastal Restoration,0,0,0,0
-0,baseline,WSM,Coastal Restoration,0,0,0,0
-0,baseline,STP,Coastal Restoration,0,0,0,0
-0,baseline,SAU,Coastal Restoration,0,0,0,0
-0,baseline,SEN,Coastal Restoration,0,0,0,0
-0,baseline,SRB,Coastal Restoration,0,0,0,0
-0,baseline,SLE,Coastal Restoration,0,0,0,0
-0,baseline,SVK,Coastal Restoration,0,0,0,0
-0,baseline,SVN,Coastal Restoration,0,0,0,0
-0,baseline,SLB,Coastal Restoration,0,0,0,0
-0,baseline,SOM,Coastal Restoration,0,0,0,0
-0,baseline,ZAF,Coastal Restoration,0,0,0,0
-0,baseline,SSD,Coastal Restoration,0,0,0,0
-0,baseline,ESP,Coastal Restoration,0,0,0,0
-0,baseline,LKA,Coastal Restoration,0,0,0,0
-0,baseline,SDN,Coastal Restoration,0,0,0,0
-0,baseline,SUR,Coastal Restoration,0,0,0,0
-0,baseline,SWZ,Coastal Restoration,0,0,0,0
-0,baseline,SWE,Coastal Restoration,0,0,0,0
-0,baseline,CHE,Coastal Restoration,0,0,0,0
-0,baseline,SYR,Coastal Restoration,0,0,0,0
-0,baseline,TJK,Coastal Restoration,0,0,0,0
-0,baseline,TZA,Coastal Restoration,0,0,0,0
-0,baseline,THA,Coastal Restoration,0,0,0,0
-0,baseline,TLS,Coastal Restoration,0,0,0,0
-0,baseline,TGO,Coastal Restoration,0,0,0,0
-0,baseline,TTO,Coastal Restoration,0,0,0,0
-0,baseline,TUN,Coastal Restoration,0,0,0,0
-0,baseline,TUR,Coastal Restoration,0,0,0,0
-0,baseline,TKM,Coastal Restoration,0,0,0,0
-0,baseline,UGA,Coastal Restoration,0,0,0,0
-0,baseline,UKR,Coastal Restoration,0,0,0,0
-0,baseline,ARE,Coastal Restoration,0,0,0,0
-0,baseline,GBR,Coastal Restoration,0,0,0,0
-0,baseline,USA,Coastal Restoration,0,0,0,0
-0,baseline,URY,Coastal Restoration,0,0,0,0
-0,baseline,UZB,Coastal Restoration,0,0,0,0
-0,baseline,VUT,Coastal Restoration,0,0,0,0
-0,baseline,VEN,Coastal Restoration,0,0,0,0
-0,baseline,VNM,Coastal Restoration,0,0,0,0
-0,baseline,ESH,Coastal Restoration,0,0,0,0
-0,baseline,YEM,Coastal Restoration,0,0,0,0
-0,baseline,ZMB,Coastal Restoration,0,0,0,0
-0,baseline,ZWE,Coastal Restoration,0,0,0,0
-0,baseline,AFG,Cropland Soil Health,0,0,0,0
-0,Solomon Islands Mangrove Restoration,0.12079635083898427,53.21984515118115,1.0,0.871759
-0,US Wetlands 2002-2014,0.16412566830656994,25.864223694296832,1.0,0.04547264126984127
-0,Spanish Reforestation,0.09999999838189806,26.323560187729733,1.0,0.029058290120199073
-0,Brazil No Till,0.10617999932505348,25.595883615638282,1.0,0.0008187134502923977
-0,FSC global adoption,0.09999825768425802,26.10905586938087,1.0,0.018484569322892677
-0,Brazil Avoided Deforestation,0.09999976840263704,25.70920868912753,1.0,0.00019883040935672505
-0,FAO CA,0.10617999822029149,25.63900182443719,1.0,0.0032821432894052987
-0,Spanish Reforestation,0.09999999838189806,26.323560187729733,1.0,0.029058290120199073
-0,FAO CA,0.10617999822029149,25.63900182443719,1.0,0.0032821432894052987
-0,Brazil No Till,0.10617999932505348,25.595883615638282,1.0,0.0008187134502923977
-0,Brazil Avoided Deforestation,0.09999976840263704,25.70920868912753,1.0,0.00019883040935672505
-0,US Wetlands 2002-2014,0.16412566830656994,25.864223694296832,1.0,0.04547264126984127
-0,FSC global adoption,0.09999825768425802,26.10905586938087,1.0,0.018484569322892677
-0,Solomon Islands Mangrove Restoration,0.12079635083898427,53.21984515118115,1.0,0.871759
+,0,1,2,3
+0,baseline,0.001205150745597905,2.587082548188846e-08,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0007102272727266268,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04002831778907989,0.23944766125175931,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.019988936013277225,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0006184291898563288,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.005830508474574003,2.842170943040401e-14,1.0
+0,baseline,0.028822115033918294,0.48375971964644293,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004543972009720676,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008893280632406686,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0069112174375334234,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0008542175450045875,0.00017258784696849716,1.0
+0,baseline,0.023453873855096674,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007873360242179217,7.105427357601002e-15,1.0
+0,baseline,0.0012445240939840119,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.011560044893379029,0.0,1.0
+0,baseline,0.04964510686787804,0.1231940797729223,1.0
+0,baseline,0.014238227146812221,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0012045013621317935,0.0015771992748483399,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001522842706080496,0.0002683138700021459,1.0
+0,baseline,0.04435717695240271,0.08269954200794416,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001433897332951517,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0019930738088760336,7.105427357601002e-15,1.0
+0,baseline,1.3710872501349058e-05,2.4646418047780116e-05,1.0
+0,baseline,0.0011716109650734552,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0022836015658995734,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00021266507690143044,7.105427357601002e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024475524475491284,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0002118027057775862,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001272016042669577,1.310397124143492e-09,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00024231803405427854,4.823583358160022e-05,1.0
+0,baseline,0.0013502714321163012,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.025202175125485837,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,5.163925785467427e-05,1.0377027294339314e-05,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0010740248338834135,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.026008111223070784,0.5396931481903167,1.0
+0,baseline,0.000770221179934083,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001014546597694732,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,9.616034146375796e-05,0.00017274338994610616,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,5.702090181358699e-05,1.1450771438603624e-05,1.0
+0,baseline,0.015598227474150406,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0022284610153988638,0.0,1.0
+0,baseline,3.8277878253722974e-05,4.263256414560601e-14,1.0
+0,baseline,0.0003898255929186689,5.489270620273601e-07,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01105460368294331,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0007529472082055122,4.3527501247808686e-07,1.0
+0,baseline,0.0007204955288671044,0.0,1.0
+0,baseline,0.009326260822547283,8.075941835272715e-07,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01543614864393561,6.54841378633364e-06,1.0
+0,baseline,0.016152597402594893,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,4.674863259879203e-05,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0013631807550922304,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00012521913347995905,4.263256414560601e-14,1.0
+0,baseline,0.0012878945927141672,0.0023070724410558796,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0010056728667606762,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01780836715482792,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0004190722234014288,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0070377903549072585,4.263256414560601e-14,1.0
+0,baseline,0.0006734401408863278,2.972546297996814e-07,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00017729434389224252,1.5381782247914089e-07,1.0
+0,baseline,0.0018447088121007482,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01772129649159382,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.009413449474145352,2.1316282072803006e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0019999994484081185,6.394884621840902e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0008337171645749208,1.4210854715202004e-14,1.0
+0,baseline,0.002400000000001512,0.0,1.0
+0,baseline,0.002000000037526206,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001108691348242985,6.394884621840902e-14,1.0
+0,baseline,0.003744128212211706,1.4210854715202004e-14,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.009143499151385015,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024011304960112057,0.0,1.0
+0,baseline,0.002000000037440941,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,1.2488056668757963e-06,0.033494962782079085,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.003246753246749279,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0037182486630982226,3.552713678800501e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.02394786729857401,4.973799150320701e-14,1.0
+0,baseline,0.028319841663012824,0.4949841862000781,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0020000000049407163,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007489832159016885,2.842170943040401e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.014462809917354491,7.105427357601002e-15,1.0
+0,baseline,0.04857776103469291,0.012591958399539749,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04009969506159905,0.2371196548552632,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,4.3706293702427956e-05,4.263256414560601e-14,1.0
+0,baseline,0.0019999999921296308,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04544094423928868,0.23920402506695382,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0028939766286484314,4.973799150320701e-14,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006888633754300599,4.973799150320701e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.042567639716359906,0.16472928363152306,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.005034522439586908,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.047228880744320634,0.19490573798639588,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.010565045992116495,0.0,1.0
+0,baseline,0.029545454545456096,0.0,1.0
+0,baseline,0.0019999991454611177,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.000547233052877516,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0004887585532742378,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0040673024195143626,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.002027277275651329,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.019151295315175787,0.6676455019138245,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03906666666666325,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00047658763254787573,3.552713678800501e-14,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0007794991717773314,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0029904306220061017,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0009987855484752117,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002000000005182301,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0019999999892519327,6.394884621840902e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04173362893229182,0.1919018378756263,1.0
+0,baseline,0.008604449510166035,0.8535054375650688,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.016141194212735854,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0034999999999953957,5.684341886080802e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.005605181735589326,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0018057324840725641,4.973799150320701e-14,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.00431365248307003,4.973799150320701e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.019062506652716138,1.4210854715202004e-14,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008604449510166035,0.8535054375650688,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008741258741260083,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0005481168271828096,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0014485389474927501,3.552713678800501e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004491096597973865,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004565217391302667,2.1316282072803006e-14,1.0
+0,baseline,0.001999998641302625,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0019995713673353066,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0033525968733769673,2.842170943040401e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.019133095321372195,0.66696844071393,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.018596491228080936,0.0,1.0
+0,baseline,0.0019999968778492416,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0020000004633473623,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04181698993360072,0.4256648640816536,1.0
+0,baseline,0.0511020731585603,0.2674661199448707,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0439451279078682,0.03068856838762457,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004861176030658498,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.016709113786220087,0.7121451205803169,1.0
+0,baseline,0.03646616541353609,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.017818469329277775,0.767677772404376,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.014008323770269726,0.8159201805182761,1.0
+0,baseline,0.029583536721759174,0.6050357842632437,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.05831045551716585,0.0663101934618524,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0033090961621766724,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01145115151675924,0.8042033014254812,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02563711911357558,0.0,1.0
+0,baseline,0.01140740740740398,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.026611341261968846,0.5290406985419196,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01594890510948943,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0067200000000013915,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.006785206258889787,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.015998028908207118,0.7241231732306375,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,7.457705883950894e-05,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0010053222944961249,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0033366434955297564,1.4210854715202004e-14,1.0
+0,baseline,0.026124192699903404,0.5381823302410993,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01850381679388846,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0020000006343039445,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04449221645663215,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.05663503292303318,0.1411643469904007,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03673052979915781,0.319005700169086,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.05814940421452519,0.050584125106034605,1.0
+0,baseline,0.0020000000801658757,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0007432438090901883,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.05299581866906067,0.2294279722511945,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.005084119060825287,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0006490332045387959,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04609556630776268,0.08572958475272685,1.0
+0,baseline,0.022088815789473415,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0006873450540467729,7.105427357601002e-15,1.0
+0,baseline,0.015542168674699042,0.0,1.0
+0,baseline,0.0020000000075555135,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0012866399981277254,7.105427357601002e-15,1.0
+0,baseline,0.0019999993707955355,3.552713678800501e-14,1.0
+0,baseline,0.004569166278528769,0.0,1.0
+0,baseline,0.0010480935192305196,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03282163742689903,1.4210854715202004e-14,1.0
+0,baseline,0.002356604805790141,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0030398264025279786,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.004107039547648128,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0015206812652053259,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0019999999506410404,3.552713678800501e-14,1.0
+0,baseline,0.01012145748988047,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.004003843689943665,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01008064516128826,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04218018416338509,0.41875224527837673,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.026606425702809133,2.842170943040401e-14,1.0
+0,baseline,0.040039973351099434,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01659517973855884,3.552713678800501e-14,1.0
+0,baseline,0.006864674550868699,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.005202156477260189,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0019999995693780193,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.005058866813833163,7.105427357601002e-15,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.014008323770269726,0.8159201805182761,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008124224680841508,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006654610314022591,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0018853695324239084,5.684341886080802e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.013220150292234223,7.105427357601002e-15,1.0
+0,baseline,0.005279302550853515,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02781840855496398,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04591563961228928,0.036183467600089614,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0569596238427863,0.021541031971729296,1.0
+0,baseline,0.008505070330386388,3.552713678800501e-14,1.0
+0,baseline,0.0020000001074649276,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.02423011380925999,3.552713678800501e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0042680256736460365,9.237055564881302e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.016295013850417206,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.043720592621163235,0.006247402949405512,1.0
+0,baseline,0.0019999999913977717,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.010593720688575559,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01719265215399446,0.7753851138388868,1.0
+0,baseline,0.00414897158334071,3.552713678800501e-14,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.003478280625600405,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.028723684210525846,7.105427357601002e-15,1.0
+0,baseline,0.006911607580846635,0.0,1.0
+0,baseline,0.04347607891590144,0.39763486133175263,1.0
+0,baseline,0.020822010073814567,0.7238930489365387,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04085872576177252,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00022026354009341276,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.011353315168030065,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04310021351396642,0.20161206330854498,1.0
+0,baseline,0.0073673534749616465,3.552713678800501e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0036516283086882595,5.684341886080802e-14,1.0
+0,baseline,0.01088879787015884,2.842170943040401e-14,1.0
+0,baseline,0.057601957460917674,0.11553604780514348,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006879000448755335,4.263256414560601e-14,1.0
+0,baseline,0.003032894736840319,1.4210854715202004e-14,1.0
+0,baseline,0.05414598422463257,0.003396275548375627,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0052794022092257364,1.4210854715202004e-14,1.0
+0,baseline,0.0019999999590751827,3.552713678800501e-14,1.0
+0,baseline,0.012077294685987283,3.552713678800501e-14,1.0
+0,baseline,0.006992859032003196,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02533435454643751,0.6635346338259609,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.004558874609237762,2.1316282072803006e-14,1.0
+0,baseline,0.01618606375092213,4.263256414560601e-14,1.0
+0,baseline,0.044446428405898075,0.16043524041346302,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.04753289473683964,2.1316282072803006e-14,1.0
+0,baseline,0.006946311732541233,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04029405370292238,0.44767423450095833,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.014008323770269726,0.8159201805182761,1.0
+0,baseline,0.001999999999995339,5.684341886080802e-14,1.0
+0,baseline,0.011190307421699686,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0019999999987661,0.0,1.0
+0,baseline,0.011595208531147705,4.973799150320701e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.005320766190330062,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.014105542648522373,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.018401209287169706,0.7577756013568191,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.037162162162161394,7.105427357601002e-15,1.0
+0,baseline,6.99524342451241e-07,0.08003249759548936,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.4101758289086774e-05,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008200857935904082,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.019142300194928907,2.842170943040401e-14,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.006384717540093732,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.8003773050168093e-07,0.013591240501284574,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.000306804395542315,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.022301924496240133,0.7057208424105212,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04513340583354619,0.37201911113744757,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01365569095151642,0.0,1.0
+0,baseline,0.010490310767508504,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01042082624016416,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.043141329497700553,0.0034368212802604603,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04272041652422587,0.00227088814232701,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008079475264374025,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007095269820119654,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007907542579076221,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04459211121610451,0.15677309246044047,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.05426700699089082,0.20169477447768713,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0060906665365152435,0.0,1.0
+0,baseline,0.014008323770269726,0.8159201805182761,1.0
+0,baseline,0.04347607891590144,0.39763486133175263,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02758596736225627,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.014008323770269726,0.8159201805182761,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01143641354071434,0.0,1.0
+0,baseline,0.045351458479800044,0.12868790016860032,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.043114499320175526,0.20413845965101274,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.003899521531096184,4.263256414560601e-14,1.0
+0,baseline,0.0016666666666651508,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006154357950762801,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.020015316067947708,0.0,1.0
+0,baseline,0.0003409687008186779,2.842170943040401e-14,1.0
+0,baseline,0.05811845253471404,0.08590486535543107,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.013643996641476974,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0049027237354053455,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.005262502520068324,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006310473152574048,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03492513446013845,0.5277514768574818,1.0
+0,baseline,0.0062882973892683935,4.973799150320701e-14,1.0
+0,baseline,0.0006026584807514723,0.00021013486254162217,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00019861110391161674,4.263256414560601e-14,1.0
+0,baseline,0.0010684572255357239,2.1316282072803006e-14,1.0
+0,baseline,0.04994745446068549,0.2876545205231906,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0011894566561991837,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00021046156083315282,2.5063471298381046e-08,1.0
+0,baseline,0.005118369652187482,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0005935422602050267,4.973799150320701e-14,1.0
+0,baseline,0.025301535087720595,0.0,1.0
+0,baseline,0.05812020116647432,0.05244926736713751,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0053828912302975596,2.1316282072803006e-14,1.0
+0,baseline,0.005895594383105163,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007374631268433518,3.552713678800501e-14,1.0
+0,baseline,0.00031803085918369334,6.896618364748974e-05,1.0
+0,baseline,0.004526525439068507,5.684341886080802e-14,1.0
+0,baseline,0.0040288775034937885,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.019317538760454056,0.7486802859069854,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.003776947607967429,0.006256182171767932,1.0
+0,baseline,0.0009401686563563771,4.973799150320701e-14,1.0
+0,baseline,0.015872624086512133,0.03472781379196732,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002149989449385714,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.027290669856455452,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04926035237009785,0.29895591126701504,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002857441811485728,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006279153211337984,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.010425975573426172,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.027339934068692173,0.0,1.0
+0,baseline,0.0004351316265385208,2.0669688183261314e-11,1.0
+0,baseline,0.0003070493103507488,1.7270274454972423e-06,1.0
+0,baseline,0.002750275027501914,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01434715705564571,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04117398648648418,2.842170943040401e-14,1.0
+0,baseline,0.016726572528881434,1.4210854715202004e-14,1.0
+0,baseline,0.014008323770269726,0.8159201805182761,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0005872440877610074,1.4210854715202004e-14,1.0
+0,baseline,0.0008365873215652186,6.261456775291663e-08,1.0
+0,baseline,0.026107003044799626,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00019677836974096863,8.222728098417065e-08,1.0
+0,baseline,0.0043133195307092365,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.039336188370754144,0.4624038867321403,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0326785136149752,0.5605924708519865,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004420565832425893,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.015223078078356878,0.0,1.0
+0,baseline,0.04292180255589528,0.20889883862337655,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0027056277056232148,5.684341886080802e-14,1.0
+0,baseline,0.012206803181584291,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0034988917961626953,3.552713678800501e-14,1.0
+0,baseline,0.0018672314743710672,0.0010322141134864182,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00046900739266675373,3.144767478602262e-05,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0031831905344716915,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,6.1779518389926125e-06,4.973799150320701e-14,1.0
+0,baseline,0.00031083172805779213,2.084924636847063e-05,1.0
+0,baseline,0.016000862812767025,2.1316282072803006e-14,1.0
+0,baseline,0.05810334901307357,0.06117723386987706,1.0
+0,baseline,0.020664929380679098,0.7304996600782232,1.0
+0,baseline,0.03822391412880677,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006031370826278248,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03695256660168411,4.973799150320701e-14,1.0
+0,baseline,0.05454046296713244,0.004021489786154575,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00035526890638237774,0.00010014090453580593,1.0
+0,baseline,0.05094492712574805,0.26956467814405016,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0012782706375134012,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007681907571289059,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0005648814439638272,1.4210854715202004e-14,1.0
+0,baseline,0.045919810339107414,0.09905874910524659,1.0
+0,baseline,0.007677250978687766,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,4.829337812850554e-05,4.853503324397934e-05,1.0
+0,baseline,0.006818663277194048,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.003944062399476422,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0047106086461852215,4.263256414560601e-14,1.0
+0,baseline,3.703971733415301e-05,3.711753117130456e-05,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.023319381024641928,0.6920922228006745,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00027304564292762734,4.7017870485888125e-08,1.0
+0,baseline,0.006631996427913123,2.1316282072803006e-14,1.0
+0,baseline,0.011919172932330468,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.014680595659086748,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0006741878683911295,0.00036787696516427104,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006320815847004724,0.0,1.0
+0,baseline,0.00017226367013023491,4.778328417387456e-07,1.0
+0,baseline,0.0006109127744480247,1.5445991152773786e-08,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.013435776201731642,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,3.3236595285757176e-05,4.973799150320701e-14,1.0
+0,baseline,2.0548895918182097e-11,2.5551827320668963e-09,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02872231775481282,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006567214213880845,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.011905386040332644,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006158400115516827,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0001430860805839984,2.842170943040401e-14,1.0
+0,baseline,0.05272676418252331,0.2349683055722167,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00637104994903126,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.013971071663377188,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008686980837239844,0.0,1.0
+0,baseline,0.003822863610636773,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002198078234158629,0.002931310660194697,1.0
+0,baseline,0.015583433180843542,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01118822479928383,2.1316282072803006e-14,1.0
+0,baseline,0.004588445385095952,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00014460344940658842,1.7906613436480256e-07,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007714019511126935,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006630596223210716,2.1316282072803006e-14,1.0
+0,baseline,0.05534375275203729,0.008431489633167644,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.017308341776427483,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0022222222222225696,0.0,1.0
+0,baseline,0.002499984050118087,3.552713678800501e-14,1.0
+0,baseline,0.0003434139991327356,0.00034304061171752664,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.045448576621637926,0.12453049543904626,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0047002297890088585,3.552713678800501e-14,1.0
+0,baseline,0.0024999999999977263,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002499965220899014,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0013703335798211924,0.0018518060171146544,1.0
+0,baseline,0.0056631874045720565,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024999757895045605,0.0,1.0
+0,baseline,0.0002157679861198858,6.64205401790241e-08,1.0
+0,baseline,0.00010156869314670303,7.142039706309333e-07,1.0
+0,baseline,0.0010453522375684088,1.882379088158359e-06,1.0
+0,baseline,0.0024981264051930907,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007161969258952183,2.1316282072803006e-14,1.0
+0,baseline,0.04607790803952838,0.09145387607436817,1.0
+0,baseline,0.0005578401564108049,0.0007551748084608789,1.0
+0,baseline,0.0009512102441178172,0.0002280197889632518,1.0
+0,baseline,0.002500002825357228,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024999999999977263,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.040650406504063596,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002498388136686458,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0005333124452135962,3.0279087326334775e-07,1.0
+0,baseline,0.0004807224178975389,2.553882509914729e-07,1.0
+0,baseline,0.002487562189052994,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0005241462434000255,2.380606382246242e-06,1.0
+0,baseline,0.026121966210595815,2.1316282072803006e-14,1.0
+0,baseline,0.0024999999999977263,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02413793103448114,2.1316282072803006e-14,1.0
+0,baseline,0.007641754546838797,6.394884621840902e-14,1.0
+0,baseline,0.0459221432419028,0.03800778935115545,1.0
+0,baseline,0.0024941724941740517,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.019655162725719322,7.105427357601002e-15,1.0
+0,baseline,0.002502031169214547,7.105427357601002e-15,1.0
+0,baseline,0.007159221076747713,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002496433666188125,3.552713678800501e-14,1.0
+0,baseline,0.010210493245367047,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.010869565217390686,7.105427357601002e-15,1.0
+0,baseline,0.0024996181546868,2.1316282072803006e-14,1.0
+0,baseline,0.0007377853664891632,0.000721953396492836,1.0
+0,baseline,0.004887457501865811,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002497553942014008,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02096517021452371,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025000927443556975,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04135089810576886,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025006927126582923,5.684341886080802e-14,1.0
+0,baseline,0.004645146750675622,0.0,1.0
+0,baseline,0.000924748967065625,6.458382273422103e-08,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025000228585554396,2.842170943040401e-14,1.0
+0,baseline,0.004628201172472757,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02758620689655089,1.4210854715202004e-14,1.0
+0,baseline,0.002456905306409851,0.0,1.0
+0,baseline,0.002499990290829146,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.015683520599246492,5.684341886080802e-14,1.0
+0,baseline,0.04625784670324862,0.06861718651614979,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024995868451469505,2.842170943040401e-14,1.0
+0,baseline,0.009222712380363873,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0016913939481000284,2.842170943040401e-14,1.0
+0,baseline,0.002500089769831959,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00010381169763462594,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025027808676298946,7.105427357601002e-15,1.0
+0,baseline,0.0014996796139001844,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.044440416017522466,0.011405625424373511,1.0
+0,baseline,0.0024977463942263967,4.973799150320701e-14,1.0
+0,baseline,0.00014536369216955336,9.456450371203573e-06,1.0
+0,baseline,0.0053579380984132285,7.105427357601002e-14,1.0
+0,baseline,0.019652268787780258,0.0,1.0
+0,baseline,0.002499806644792102,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.003627920475985036,0.0,1.0
+0,baseline,0.002500004476843287,2.1316282072803006e-14,1.0
+0,baseline,0.04489895053698234,0.14623504659846986,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004000336870468857,5.684341886080802e-14,1.0
+0,baseline,0.0025105951722821374,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0009178340555990872,4.263256414560601e-14,1.0
+0,baseline,0.0024998823782453883,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0015618660322331834,5.684341886080802e-14,1.0
+0,baseline,0.00039852108841387235,1.5135825037759787e-08,1.0
+0,baseline,0.0025000323552646364,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002500109246632576,2.842170943040401e-14,1.0
+0,baseline,0.046235916276124556,0.06343944377633903,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0002983483435201606,3.470786964498984e-07,1.0
+0,baseline,0.0025000031384010413,0.0,1.0
+0,baseline,0.012470350216268855,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024999025853844614,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0030864197530817705,5.684341886080802e-14,1.0
+0,baseline,0.0033857248068898116,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002531152647975432,0.0,1.0
+0,baseline,0.0023420528021773634,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002499548817901598,1.4210854715202004e-14,1.0
+0,baseline,0.00171592966879075,0.0,1.0
+0,baseline,0.001995096855864631,0.002738033857923483,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024984725495329485,0.0,1.0
+0,baseline,0.0016888226193714218,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024977631971339065,3.552713678800501e-14,1.0
+0,baseline,0.024224806201551985,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002531152647975432,0.0,1.0
+0,baseline,0.007523400719605888,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024971107809150794,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024623158615924012,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0011100672264703348,0.00024545454082414153,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0009588440898369299,2.3770281387669456e-07,1.0
+0,baseline,0.002499837639931002,3.552713678800501e-14,1.0
+0,baseline,0.00019095427399662412,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.044438158107809045,0.1622718239637706,1.0
+0,baseline,0.04487562951144497,0.01572100233631346,1.0
+0,baseline,0.002496433666188125,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.001984126984126533,7.105427357601002e-15,1.0
+0,baseline,0.0025201612903202886,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006381752305664179,1.4210854715202004e-14,1.0
+0,baseline,0.002501786990706023,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0012079354251923746,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.017317024839108797,0.712381960073472,1.0
+0,baseline,0.002500112263682297,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.009884727464324783,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024982155603154865,0.0,1.0
+0,baseline,0.0008051274178768608,0.00013448357052681104,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.005915100904658743,4.263256414560601e-14,1.0
+0,baseline,0.00256975036710827,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,8.743853818060643e-05,1.34506237259302e-08,1.0
+0,baseline,0.0014168195644828074,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01965510764246403,6.394884621840902e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.020362186985529718,0.0,1.0
+0,baseline,0.0024998369165061263,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.013139276329084737,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024964080459781712,0.0,1.0
+0,baseline,0.00026597239138226314,1.7754142376702475e-05,1.0
+0,baseline,8.46214470442419e-05,3.047624375085434e-08,1.0
+0,baseline,0.027777777777778567,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0002026473244427507,1.1086181928021688e-07,1.0
+0,baseline,0.0024999860504806293,2.1316282072803006e-14,1.0
+0,baseline,0.012767565524868019,7.105427357601002e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024978853880313068,0.0,1.0
+0,baseline,0.007476599746311763,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002477973568282721,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01482904208194924,0.0,1.0
+0,baseline,0.0007010884703717579,0.0008975243413900102,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03684210526315468,3.552713678800501e-14,1.0
+0,baseline,0.013425168594686454,0.7797117279208479,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002506379876045628,2.842170943040401e-14,1.0
+0,baseline,0.019230769230766498,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002500160266684759,0.0,1.0
+0,baseline,0.008719315783629611,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002314814814816657,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02144453758032938,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01449592074592232,0.0,1.0
+0,baseline,0.0025012874273500074,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.012183547640972847,3.552713678800501e-14,1.0
+0,baseline,0.002508960573472052,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04012345679011986,4.263256414560601e-14,1.0
+0,baseline,0.002499315256095258,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00552580999450214,7.815970093361102e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002499948613596814,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.028488438644686198,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0178611121130956,0.7035450807210282,1.0
+0,baseline,0.002499471746794768,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.013435411416672594,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.023321410567113787,0.607750718964482,1.0
+0,baseline,0.0024995009315915695,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01013992329924207,2.1316282072803006e-14,1.0
+0,baseline,0.0025001220464773155,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0021929824561368605,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01234539777256316,0.7953402209318199,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02226814690912704,0.6259670837167306,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024970305582527885,2.842170943040401e-14,1.0
+0,baseline,9.515584588370984e-05,7.864082931519079e-07,1.0
+0,baseline,0.025436978832580337,5.684341886080802e-14,1.0
+0,baseline,0.0024999999999977263,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.011238049830069485,0.0,1.0
+0,baseline,0.002481588216454611,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03258284445853832,0.0,1.0
+0,baseline,0.0025018285790281425,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024986446031647347,0.0,1.0
+0,baseline,0.04348504915856921,0.19152285163637117,1.0
+0,baseline,0.015057671407497253,0.7496188048510035,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024987075650528823,0.0,1.0
+0,baseline,0.012604166666662309,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024972322866361196,0.0,1.0
+0,baseline,0.0032153441816262784,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024998874938120252,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0038461538461547207,0.0,1.0
+0,baseline,0.002499992895224068,7.105427357601002e-15,1.0
+0,baseline,0.011783756851016847,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025025025025016134,1.4210854715202004e-14,1.0
+0,baseline,0.009789576365662356,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024998997174918713,0.0,1.0
+0,baseline,0.012703100230389452,0.7910988725517925,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01436548419506778,1.4210854715202004e-14,1.0
+0,baseline,0.0025001838370428686,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002499838720083858,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024570024569996463,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03345070422535201,0.0,1.0
+0,baseline,0.04617996206741992,0.053888867043951905,1.0
+0,baseline,0.03194188065829451,0.4480050409926335,1.0
+0,baseline,0.002499701230924245,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03521227768215596,1.4210854715202004e-14,1.0
+0,baseline,0.0024772096710279357,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002470355731226448,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.000448028673829981,6.394884621840902e-14,1.0
+0,baseline,0.002485021786490904,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.009644864588651103,5.684341886080802e-14,1.0
+0,baseline,0.017765860247394016,0.7045769058234086,1.0
+0,baseline,0.002500017745006744,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00250001645830622,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0027777777777799884,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002499768633086319,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00250024186136244,2.842170943040401e-14,1.0
+0,baseline,0.0182421227197338,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002502761668047526,0.0,1.0
+0,baseline,0.014233392547751578,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002495107632093152,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002500356239536927,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025100401606437117,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.023074065455389814,0.611796317523897,1.0
+0,baseline,0.0025003472704483443,7.105427357601002e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.019650842793254242,4.263256414560601e-14,1.0
+0,baseline,0.002498388136686458,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01709428157159465,7.105427357601002e-15,1.0
+0,baseline,0.01881295787715942,0.6868004727983745,1.0
+0,baseline,0.002514953779225948,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.012418150194392297,1.4210854715202004e-14,1.0
+0,baseline,0.0024952471482890815,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024999328165122847,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.045699635488155366,0.02897643987746079,1.0
+0,baseline,0.0024963969528499774,2.1316282072803006e-14,1.0
+0,baseline,0.015682765401138,0.7413852048965808,1.0
+0,baseline,0.012123790233616205,0.8011687491638853,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04536594696193674,0.1280677573567388,1.0
+0,baseline,0.002444134078210425,2.1316282072803006e-14,1.0
+0,baseline,0.01950182913707721,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.044833286085534496,0.015425865608669653,1.0
+0,baseline,0.0025000873392926337,3.552713678800501e-14,1.0
+0,baseline,0.019655250498139765,4.263256414560601e-14,1.0
+0,baseline,0.0074406181436614816,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025001053197613032,2.1316282072803006e-14,1.0
+0,baseline,0.0029172923343523394,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.041212563105467837,4.263256414560601e-14,1.0
+0,baseline,0.00250000493935687,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002107936045099734,0.0,1.0
+0,baseline,0.0023521505376322693,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0004623339371931934,5.684341886080802e-14,1.0
+0,baseline,0.0025000581144425382,1.4210854715202004e-14,1.0
+0,baseline,0.04571275640598316,0.02961821828923661,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024924143909856866,0.0,1.0
+0,baseline,0.0036121286121257867,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025000101092160776,4.973799150320701e-14,1.0
+0,baseline,0.01388610487492059,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025001035921974335,4.263256414560601e-14,1.0
+0,baseline,0.03850574712643606,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002499818228088202,0.0,1.0
+0,baseline,0.027363789856480025,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002500038953549222,2.842170943040401e-14,1.0
+0,baseline,0.00019069412662275909,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025005103082236246,2.842170943040401e-14,1.0
+0,baseline,0.007825932739358166,4.973799150320701e-14,1.0
+0,baseline,0.019939051842662536,0.6664875045047509,1.0
+0,baseline,0.028554095603134044,5.684341886080802e-14,1.0
+0,baseline,0.002500348237916228,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0025025025025016134,1.4210854715202004e-14,1.0
+0,baseline,0.013857782754755021,4.973799150320701e-14,1.0
+0,baseline,0.0025000106723993554,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.016877454377450363,4.973799150320701e-14,1.0
+0,baseline,0.002496081237644887,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.010450196709584247,7.105427357601002e-15,1.0
+0,baseline,0.004807692307693401,0.0,1.0
+0,baseline,0.002500097636222165,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03233289220801794,0.4405521668544523,1.0
+0,baseline,0.018796039552661625,0.6883631673143498,1.0
+0,baseline,0.0024998731028844645,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,7.517666516321242e-05,0.0,1.0
+0,baseline,0.0025004492994824545,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004246655031991509,4.263256414560601e-14,1.0
+0,baseline,0.0025204788909860554,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.019472361809043548,2.1316282072803006e-14,1.0
+0,baseline,0.0024999467396540354,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004923056859674091,2.842170943040401e-14,1.0
+0,baseline,0.02497656557013528,0.5786214756590269,1.0
+0,baseline,0.0025175131348476043,4.263256414560601e-14,1.0
+0,baseline,0.013781838133482438,0.7747891272714966,1.0
+0,baseline,0.04428846397738084,0.009664632040646381,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.046155151157435625,0.045778773684290286,1.0
+0,baseline,0.0025091681142583866,6.394884621840902e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002500075798153034,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0009057971014456712,4.263256414560601e-14,1.0
+0,baseline,0.002500061666474096,7.105427357601002e-15,1.0
+0,baseline,0.0010436352353835332,0.0,1.0
+0,baseline,0.0034722222222214327,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0013138320235412948,2.842170943040401e-14,1.0
+0,baseline,0.0025003049152303447,3.552713678800501e-14,1.0
+0,baseline,0.02151364065967698,2.842170943040401e-14,1.0
+0,baseline,0.003553486092386038,4.973799150320701e-14,1.0
+0,baseline,0.007209711136447083,3.552713678800501e-14,1.0
+0,baseline,0.0025091575091593654,0.0,1.0
+0,baseline,0.004875437500380997,0.0,1.0
+0,baseline,0.002517361111110006,1.4210854715202004e-14,1.0
+0,baseline,0.0006554307116104496,0.0,1.0
+0,baseline,0.0007171226831417243,7.105427357601002e-15,1.0
+0,baseline,0.017622461170844872,4.263256414560601e-14,1.0
+0,baseline,0.0024509803921546336,2.842170943040401e-14,1.0
+0,baseline,0.003695589229849361,0.0,1.0
+0,baseline,0.05038856676462444,0.0710628837882723,1.0
+0,baseline,0.0020282151706467744,3.552713678800501e-14,1.0
+0,baseline,0.002500958956652255,3.552713678800501e-14,1.0
+0,baseline,0.014877876806465906,0.7542303879949017,1.0
+0,baseline,0.00012096123864324682,0.0,1.0
+0,baseline,0.0025087260034908354,0.0,1.0
+0,baseline,0.005975487024656445,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0024305555555557135,0.0,1.0
+0,baseline,0.011155606407321272,1.4210854715202004e-14,1.0
+0,baseline,0.013894402540685746,5.684341886080802e-14,1.0
+0,baseline,0.0024991669443537035,0.0,1.0
+0,baseline,0.011454940282298764,3.552713678800501e-14,1.0
+0,baseline,0.0035526885952563703,0.0,1.0
+0,baseline,0.0024999931446245682,0.0,1.0
+0,baseline,0.01544335235679739,0.0,1.0
+0,baseline,0.007930096096607997,0.0,1.0
+0,baseline,0.0025127015683636955,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0036025893611011384,2.1316282072803006e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04398433940708202,0.272405074553987,1.0
+0,baseline,0.012280400899356891,0.0,1.0
+0,baseline,0.045873277701616644,0.10364660755134736,1.0
+0,baseline,0.0007132667617639754,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,1.1218811700075548e-05,4.263256414560601e-14,1.0
+0,baseline,0.027958351063134046,0.5249444060561501,1.0
+0,baseline,0.0025159930781200046,7.105427357601002e-15,1.0
+0,baseline,0.0025007521058952875,1.4210854715202004e-14,1.0
+0,baseline,0.04519761263617994,0.01982720415593775,1.0
+0,baseline,0.0025644995838760565,0.0,1.0
+0,baseline,0.0024998281905013187,1.4210854715202004e-14,1.0
+0,baseline,0.004807692307693401,0.0,1.0
+0,baseline,0.0025010004001586594,1.4210854715202004e-14,1.0
+0,baseline,0.0026758409785898607,4.263256414560601e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04179316529576482,0.0002797851883897806,1.0
+0,baseline,0.002487562189052994,2.1316282072803006e-14,1.0
+0,baseline,0.007368807524791521,6.394884621840902e-14,1.0
+0,baseline,0.03772802653399765,0.0,1.0
+0,baseline,0.011976047904191489,0.0,1.0
+0,baseline,0.0025036638983877424,0.0,1.0
+0,baseline,0.018236173393120225,4.263256414560601e-14,1.0
+0,baseline,0.002538356133605646,7.105427357601002e-14,1.0
+0,baseline,0.0025201612903202886,2.842170943040401e-14,1.0
+0,baseline,0.02308698045692381,0.0,1.0
+0,baseline,0.003205128205124197,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0235164141414117,2.842170943040401e-14,1.0
+0,baseline,0.004688721021096853,2.842170943040401e-14,1.0
+0,baseline,0.0024999773757699018,7.105427357601002e-15,1.0
+0,baseline,0.006994715506010607,0.0,1.0
+0,baseline,0.002097077867411201,0.0,1.0
+0,baseline,0.0024999771850104935,7.105427357601002e-15,1.0
+0,baseline,0.014620288248337943,0.0,1.0
+0,baseline,0.0024999429422862818,7.105427357601002e-15,1.0
+0,baseline,0.0015422374050615417,0.0,1.0
+0,baseline,0.03863856589147474,0.0,1.0
+0,baseline,0.03809107780919874,2.842170943040401e-14,1.0
+0,baseline,0.0025003379828021366,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0005033725963912161,4.973799150320701e-14,1.0
+0,baseline,0.0025016451825194963,0.0,1.0
+0,baseline,0.011277347102527813,0.8146717654155964,1.0
+0,baseline,0.004053859890390754,1.4210854715202004e-14,1.0
+0,baseline,0.004587521940315753,7.815970093361102e-14,1.0
+0,baseline,0.0025000499102532103,0.0,1.0
+0,baseline,0.00020292207791783312,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002507919746570053,0.0,1.0
+0,baseline,0.043638633526271065,3.552713678800501e-14,1.0
+0,baseline,0.005865524197346872,2.842170943040401e-14,1.0
+0,baseline,0.0025046109993311916,0.0,1.0
+0,baseline,0.003923681405645141,2.842170943040401e-14,1.0
+0,baseline,0.011654741889053355,0.0,1.0
+0,baseline,0.0175254159757543,0.7095452616037079,1.0
+0,baseline,0.00249995888225385,1.4210854715202004e-14,1.0
+0,baseline,0.004888996036328308,4.263256414560601e-14,1.0
+0,baseline,0.002499434357147834,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.007272727272727764,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.002503659194204033,3.552713678800501e-14,1.0
+0,baseline,0.002725417730907509,4.263256414560601e-14,1.0
+0,baseline,0.002499717268271695,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.04531737527801738,0.1327443122161398,1.0
+0,baseline,0.0019859033699844986,2.1316282072803006e-14,1.0
+0,baseline,0.0024999863164367753,4.263256414560601e-14,1.0
+0,baseline,0.009795092665100924,0.0,1.0
+0,baseline,0.0015436953153198374,2.1316282072803006e-14,1.0
+0,baseline,0.01725869139266223,0.7130177987374609,1.0
+0,baseline,0.002499785885575534,2.1316282072803006e-14,1.0
+0,baseline,0.003430503231108162,0.0,1.0
+0,baseline,0.009699100650593095,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00018439977871764768,2.842170943040401e-14,1.0
+0,baseline,0.01670399402762257,0.0,1.0
+0,baseline,0.0024998711406638563,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.009615384615386802,0.0,1.0
+0,baseline,0.0026371308016877038,0.0,1.0
+0,baseline,0.019900025310043645,4.973799150320701e-14,1.0
+0,baseline,0.00043956184988047653,1.4210854715202004e-14,1.0
+0,baseline,0.02878476062630142,0.5078465418944091,1.0
+0,baseline,0.020633633091783565,0.6554054492418828,1.0
+0,baseline,0.002499548468662738,1.4210854715202004e-14,1.0
+0,baseline,0.005957030330975499,2.1316282072803006e-14,1.0
+0,baseline,0.009850501140121537,0.0,1.0
+0,baseline,0.0025001567189306684,2.1316282072803006e-14,1.0
+0,baseline,0.009610219065237402,4.973799150320701e-14,1.0
+0,baseline,0.012398131584177463,7.105427357601002e-15,1.0
+0,baseline,0.0024998180004018877,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0023940753747595522,7.105427357601002e-15,1.0
+0,baseline,0.002500689845476245,0.0,1.0
+0,baseline,0.03458456171468782,0.3953064999479139,1.0
+0,baseline,0.014447654767451468,0.7611059604297736,1.0
+0,baseline,0.001247286437902062,0.0,1.0
+0,baseline,0.0024992884588002084,2.1316282072803006e-14,1.0
+0,baseline,0.02303144490644371,1.4210854715202004e-14,1.0
+0,baseline,0.002204988814028752,7.105427357601002e-15,1.0
+0,baseline,0.0024509803921546336,2.842170943040401e-14,1.0
+0,baseline,0.037451447740110666,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0019517477586390442,0.0,1.0
+0,baseline,0.0025001102827673094,0.0,1.0
+0,baseline,0.0010388229893933953,7.105427357601002e-15,1.0
+0,baseline,0.0060955243820970395,7.105427357601002e-15,1.0
+0,baseline,0.0024999974698260985,0.0,1.0
+0,baseline,0.018711582571050656,0.688786097214404,1.0
+0,baseline,0.018855218855215128,4.263256414560601e-14,1.0
+0,baseline,0.006059466506215472,2.1316282072803006e-14,1.0
+0,baseline,0.0025000734343763042,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02021696252465688,0.0,1.0
+0,baseline,0.013425168594686454,0.7797117279208479,1.0
+0,baseline,0.002500279157381158,7.105427357601002e-15,1.0
+0,baseline,0.004477342842257315,4.263256414560601e-14,1.0
+0,baseline,0.0288461538461533,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00045606323298130746,3.552713678800501e-14,1.0
+0,baseline,0.0006335070952800947,0.0,1.0
+0,baseline,0.002499920275887746,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.003053317262263988,0.0,1.0
+0,baseline,0.002499941726298971,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.012236308273976704,0.7991524612029792,1.0
+0,baseline,0.0037563131313120834,1.4210854715202004e-14,1.0
+0,baseline,0.0024994774611570847,7.105427357601002e-15,1.0
+0,baseline,0.009859952324191568,4.973799150320701e-14,1.0
+0,baseline,0.007502738225625194,4.973799150320701e-14,1.0
+0,baseline,0.0025000438989266627,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006737260163120595,7.105427357601002e-15,1.0
+0,baseline,0.002499958368716193,4.263256414560601e-14,1.0
+0,baseline,0.030432288313271272,4.263256414560601e-14,1.0
+0,baseline,0.012812690665036541,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00882031362393576,3.552713678800501e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.004680222142603441,0.0,1.0
+0,baseline,0.0033357220857226366,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006501906318078454,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03286914772637317,0.40179538801355363,1.0
+0,baseline,0.0002859525795315676,0.0,1.0
+0,baseline,0.02400000000000091,0.0,1.0
+0,baseline,0.026906491818770917,2.1316282072803006e-14,1.0
+0,baseline,0.02006630340596871,0.6504579285042666,1.0
+0,baseline,0.01637630662020939,0.0,1.0
+0,baseline,0.01714495182236675,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0026850702110863267,6.394884621840902e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.00034316229841380164,2.842170943040401e-14,1.0
+0,baseline,0.002604166666664298,2.842170943040401e-14,1.0
+0,baseline,0.014363680978220827,0.7634120991709992,1.0
+0,baseline,0.02820250448281314,0.5188469372463729,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006493812610486316,3.552713678800501e-14,1.0
+0,baseline,0.0054995877822676675,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0047677340377560995,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03839999999999577,4.973799150320701e-14,1.0
+0,baseline,0.0023468379446640597,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.03496202003470472,0.35815144069589167,1.0
+0,baseline,0.0002884858101026566,1.4210854715202004e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.011842939634767902,0.7968669569387004,1.0
+0,baseline,0.0016458996736474774,7.105427357601002e-15,1.0
+0,baseline,0.01556912546607947,0.7316004872792945,1.0
+0,baseline,0.006583374784206342,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0004271643692916882,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.02462308149380732,4.973799150320701e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,4.887585532742378e-05,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008604449510166035,0.8535054375650688,1.0
+0,baseline,0.006266450698518611,3.552713678800501e-14,1.0
+0,baseline,0.0030303030303002743,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.024972026763286692,0.5583711633923656,1.0
+0,baseline,0.001235828569384978,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0010101010100953545,6.394884621840902e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0029347615078023637,2.842170943040401e-14,1.0
+0,baseline,0.01867132867132426,5.684341886080802e-14,1.0
+0,baseline,0.009793045643391451,0.8336877188102534,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.008604449510166035,0.8535054375650688,1.0
+0,baseline,0.0009983314272830057,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.013271882098145227,7.105427357601002e-15,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0003491132523407714,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.005569731255107513,2.842170943040401e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.006073033377155923,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01650920713806414,0.7154063528489871,1.0
+0,baseline,0.0022995461422041785,5.684341886080802e-14,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.0,0.0,1.0
+0,baseline,0.01657281580345682,0.7142714093292852,1.0

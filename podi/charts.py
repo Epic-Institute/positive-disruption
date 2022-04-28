@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # region
 
 import numpy as np
@@ -21,6 +19,8 @@ from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
 from fair.constants import radeff
 from podi.energy import energy
+import hvplot.pandas
+import pyam
 
 pd.options.display.float_format = "{:,.0f}".format
 
@@ -33,6 +33,7 @@ show_figs = True
 show_annotations = True
 start_year = 1990
 scenario = "pathway"
+
 
 
 #######################
@@ -1711,7 +1712,7 @@ for product in fig2["Product_long"].unique():
 
 fig.update_layout(
     title={
-        "text": "Percent of Total Adoption, " + sector + ", "
+        "text": "Percent of Total Adoption, Buildings, "
         + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
     + str(scenario).capitalize(),
         "xanchor": "center",
@@ -2031,7 +2032,7 @@ for product in fig2["Product_long"].unique():
 
 fig.update_layout(
     title={
-        "text": "Percent of Total Adoption, " + sector + ", "
+        "text": "Percent of Total Adoption, Buildings, "
         + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
     + str(scenario).capitalize(),
         "xanchor": "center",
@@ -2125,6 +2126,328 @@ for sector in fig2['Sector'].unique():
     fig,
     file=(
         "./charts/acurves-unstacked-"
+        + scenario
+        + "-"
+        + str(region).replace("slice(None, None, None)", "World")
+        + "-"
+        + str(sector).replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
+
+# endregion
+
+###################################################
+# SOLUTION ADOPTION RATES, UNSTACKED, SEMILOG [%] #
+###################################################
+
+# region
+
+start_year = data_start_year
+end_year = proj_end_year
+scenario = scenario
+region = slice(None)
+sector = slice(None)
+subsector = slice(None)
+product_category = slice(None)
+flow_category = slice(None)
+nonenergyuse = ['N']
+
+# Percent of electric power that is renewables
+electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
+
+# Percent of transport energy that is electric or nonelectric renewables
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long','Flow_long']).sum().sum(0)) * 100
+
+# Percent of buildings energy that is electric or nonelectric renewables
+buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().sum(0)) * 100
+
+# Percent of industry energy that is electric or nonelectric renewables
+industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'HYDROGEN', 'MUNWASTER', 'GEOTHERM'], 'Final consumption', slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Industrial'], subsector, product_category, slice(None), slice(None), 'Final consumption', slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().sum(0)) * 100
+
+# For Electricity
+fig = electricity.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long"], value_name="% Adoption")
+
+for sector in fig2['Sector'].unique():
+
+    fig = go.Figure()
+
+    for product in fig2["Product_long"].unique(): 
+        # Make projected trace
+        fig.add_trace(
+            go.Scatter(
+                name=product,
+                line=dict(width=2, color=colors[
+                    pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)
+                ]),
+                x=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["Year"],
+                y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                fill=None,
+                stackgroup=None,
+                legendgroup=product,
+                showlegend=True,
+            )
+        )
+
+        # Make historical trace
+        fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=2, color="#1c352d"),
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+            stackgroup=None,
+            legendgroup=product,
+            showlegend=False
+        )
+    )
+
+    fig.update_layout(
+        title={
+            "text": "Percent of Total Adoption, " + sector + ", "
+            + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+        + str(scenario).capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "% Adoption"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+
+    fig.update_yaxes(type="log")
+
+    if show_figs is True:
+        fig.show()
+    
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/acurves-unstacked-log-"
+        + scenario
+        + "-"
+        + str(region).replace("slice(None, None, None)", "World")
+        + "-"
+        + str(sector).replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
+
+# For Transport
+fig = transport.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', "Product_long", 'Flow_long'], value_name="% Adoption")
+
+for sector in fig2['Sector'].unique():
+
+    fig = go.Figure()
+
+    for subsector in fig2['Subsector'].unique():
+
+        for product in fig2["Product_long"].unique(): 
+        
+            for flow in fig2['Flow_long'].unique():
+
+                # Make projected trace
+                fig.add_trace(
+                    go.Scatter(
+                        name=str(product) + "-" + str(flow) + "-" + str(subsector).replace('na','All'),
+                        line=dict(width=2, color=colors[
+                            pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)]),
+                        x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
+                        y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                        fill=None,
+                        stackgroup=None,
+                        legendgroup=str(product) + "-" + str(flow) + "-" + str(subsector).replace('na','All'),
+                        showlegend=True,
+                    ))
+
+                # Make historical trace
+                fig.add_trace(
+                go.Scatter(
+                    name="Historical",
+                    line=dict(width=2, color="#1c352d"),
+                    x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    stackgroup=None,
+                    legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
+                    showlegend=False
+                )
+            )
+
+    fig.update_layout(
+        title={
+            "text": "Percent of Total Adoption, " + sector + ", "
+            + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+        + str(scenario).capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "% Adoption"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+    
+    if show_figs is True:
+        fig.show()
+    
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/acurves-unstacked-log-"
+        + scenario
+        + "-"
+        + str(region).replace("slice(None, None, None)", "World")
+        + "-"
+        + str(sector).replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
+
+# For Buildings
+fig = buildings.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long", "Flow_long"], value_name="% Adoption")
+
+fig = go.Figure()
+i=0
+for product in fig2["Product_long"].unique(): 
+
+    for flow in fig2['Flow_long'].unique():
+
+        # Make projected trace
+        fig.add_trace(
+            go.Scatter(
+                name=str(product) + "-" + str(flow),
+                line=dict(width=2, color=colors[i]),
+                x=fig2[(fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                fill=None,
+                stackgroup=None,
+                legendgroup=str(product) + "-" + str(flow),
+                showlegend=True,
+            ))
+        i = i +1
+        # Make historical trace
+        fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=2, color="#1c352d"),
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+            stackgroup=None,
+            legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
+            showlegend=False
+        )
+    )
+
+fig.update_layout(
+    title={
+        "text": "Percent of Total Adoption, Buildings, "
+        + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+    + str(scenario).capitalize(),
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "% Adoption"},
+    margin_b=0,
+    margin_t=20,
+    margin_l=10,
+    margin_r=10,
+)
+
+if show_figs is True:
+    fig.show()
+
+pio.write_html(
+fig,
+file=(
+    "./charts/acurves-unstacked-log-"
+    + scenario
+    + "-"
+    + str(region).replace("slice(None, None, None)", "World")
+    + "-"
+    + str("Buildings").replace("slice(None, None, None)", "All")
+    + ".html"
+).replace(" ",""),
+auto_open=False)
+
+# For Industry
+fig = industry.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long", "Flow_long"], value_name="% Adoption")
+i=0
+
+for sector in fig2['Sector'].unique():
+
+    fig = go.Figure()
+
+    for product in fig2["Product_long"].unique(): 
+
+        for flow in fig2['Flow_long'].unique():
+
+            # Make projected trace
+            fig.add_trace(
+                go.Scatter(
+                    name=str(product) + "-" + str(flow),
+                    line=dict(width=2, color=colors[i]),
+                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    fill=None,
+                    stackgroup=None,
+                    legendgroup=str(product) + "-" + str(flow),
+                    showlegend=True,
+                ))
+            i=i+1
+            # Make historical trace
+            fig.add_trace(
+            go.Scatter(
+                name="Historical",
+                line=dict(width=2, color="#1c352d"),
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                stackgroup=None,
+                legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
+                showlegend=False
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Percent of Total Adoption, " + sector + ", "
+            + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
+        + str(scenario).capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "% Adoption"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+    
+    if show_figs is True:
+        fig.show()
+    
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/acurves-unstacked-log-"
         + scenario
         + "-"
         + str(region).replace("slice(None, None, None)", "World")
@@ -2351,7 +2674,7 @@ for product in fig2["Product_long"].unique():
 
 fig.update_layout(
     title={
-        "text": "Percent of Total Adoption, " + sector + ", "
+        "text": "Percent of Total Adoption, Buildings, "
         + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
     + str(scenario).capitalize(),
         "xanchor": "center",
@@ -2671,7 +2994,7 @@ for product in fig2["Product_long"].unique():
 
 fig.update_layout(
     title={
-        "text": "Percent of Total Adoption, " + sector + ", "
+        "text": "Percent of Total Adoption, Buildings, "
         + str(region).replace("slice(None, None, None)", "World").capitalize() + ", "
     + str(scenario).capitalize(),
         "xanchor": "center",

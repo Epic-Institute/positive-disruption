@@ -13,12 +13,6 @@ import os
 
 pandarallel.initialize(nb_workers=4)
 
-# These are diagnostic files for adoption curve fitting and will be removed soon
-file = open("podi/data/y_data.csv", "w")
-file.close()
-file = open("podi/data/y_data2.csv", "w")
-file.close()
-
 # endregion
 
 

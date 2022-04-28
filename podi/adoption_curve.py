@@ -30,7 +30,7 @@ def adoption_curve(
 ):
 
     # Take 10 years prior data to fit logistic function
-    x_data = np.arange(0, len(value.loc[data_end_year - 10 : proj_end_year]), 1)
+    x_data = np.arange(0, proj_end_year - data_end_year + 11, 1)
     y_data = np.zeros((1, len(x_data)))
     y_data[:, :] = np.NaN
     y_data = y_data.squeeze().astype(float)
@@ -80,10 +80,11 @@ def adoption_curve(
     if scenario == "baseline":
         y = func2(
             x_data,
-            min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
-            (y_data[-1]),
+            min(0.04, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+            0,
         )
         genetic_parameters = [0, 0, 0, 0]
+
     else:
         genetic_parameters = differential_evolution(
             sum_of_squared_error,
@@ -94,17 +95,13 @@ def adoption_curve(
             mutation=(0, 1),
         ).x
 
-    y = np.array(func(x_data, *genetic_parameters))
+        y = np.array(func(x_data, *genetic_parameters))
 
     # Rejoin with historical data at point where projection curve results in smooth growth
     y = np.concatenate(
         [
             value.loc[:data_end_year].values,
-            y[y >= value.loc[data_end_year]].squeeze()
-            - (
-                y[y >= value.loc[data_end_year]].squeeze().min()
-                - value.loc[data_end_year + 1]
-            ),
+            y[y >= value.loc[data_end_year]].squeeze(),
         ]
     )[: (proj_end_year - data_start_year + 1)]
 

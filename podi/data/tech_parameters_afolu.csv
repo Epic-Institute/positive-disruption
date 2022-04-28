@@ -1,59 +1,59 @@
 Region,Product,Scenario,Sector,Metric,Value
 Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,Floor,0
 Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,Max annual growth,100
-Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,parameter a max,0.1
-Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,parameter a min,0
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,parameter a max,0.2
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,parameter a min,0.001
 Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,parameter b max,100
-Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,parameter b min,0
+Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,parameter b min,10
 Spanish Reforestation,Spanish Reforestation,pathway,AFOLU,saturation point,1
 FAO CA,FAO CA,pathway,AFOLU,Floor,0
 FAO CA,FAO CA,pathway,AFOLU,Max annual growth,100
-FAO CA,FAO CA,pathway,AFOLU,parameter a max,0.10618
-FAO CA,FAO CA,pathway,AFOLU,parameter a min,0
+FAO CA,FAO CA,pathway,AFOLU,parameter a max,0.2
+FAO CA,FAO CA,pathway,AFOLU,parameter a min,0.001
 FAO CA,FAO CA,pathway,AFOLU,parameter b max,100
-FAO CA,FAO CA,pathway,AFOLU,parameter b min,0
+FAO CA,FAO CA,pathway,AFOLU,parameter b min,10
 FAO CA,FAO CA,pathway,AFOLU,saturation point,1
 Brazil No Till,Brazil No Till,pathway,AFOLU,Floor,0
 Brazil No Till,Brazil No Till,pathway,AFOLU,Max annual growth,100
-Brazil No Till,Brazil No Till,pathway,AFOLU,parameter a max,0.10618
-Brazil No Till,Brazil No Till,pathway,AFOLU,parameter a min,0
+Brazil No Till,Brazil No Till,pathway,AFOLU,parameter a max,0.2
+Brazil No Till,Brazil No Till,pathway,AFOLU,parameter a min,0.001
 Brazil No Till,Brazil No Till,pathway,AFOLU,parameter b max,100
-Brazil No Till,Brazil No Till,pathway,AFOLU,parameter b min,0
+Brazil No Till,Brazil No Till,pathway,AFOLU,parameter b min,10
 Brazil No Till,Brazil No Till,pathway,AFOLU,saturation point,1
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Floor,0
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,Max annual growth,100
-Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,parameter a max,0.1
-Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,parameter a min,0
-Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,parameter b max,70
-Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,parameter b min,0
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,parameter a max,0.2
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,parameter a min,0.001
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,parameter b max,100
+Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,parameter b min,10
 Brazil Avoided Deforestation,Brazil Avoided Deforestation,pathway,AFOLU,saturation point,1
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Floor,0
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,Max annual growth,100
-US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,parameter a max,1
-US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,parameter a min,0
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,parameter a max,0.2
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,parameter a min,0.001
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,parameter b max,100
-US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,parameter b min,0
+US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,parameter b min,10
 US Wetlands 2002-2014,US Wetlands 2002-2014,pathway,AFOLU,saturation point,1
 FSC global adoption,FSC global adoption,pathway,AFOLU,Floor,0
 FSC global adoption,FSC global adoption,pathway,AFOLU,Max annual growth,100
-FSC global adoption,FSC global adoption,pathway,AFOLU,parameter a max,0.1
-FSC global adoption,FSC global adoption,pathway,AFOLU,parameter a min,0
+FSC global adoption,FSC global adoption,pathway,AFOLU,parameter a max,0.2
+FSC global adoption,FSC global adoption,pathway,AFOLU,parameter a min,0.001
 FSC global adoption,FSC global adoption,pathway,AFOLU,parameter b max,100
-FSC global adoption,FSC global adoption,pathway,AFOLU,parameter b min,0
+FSC global adoption,FSC global adoption,pathway,AFOLU,parameter b min,10
 FSC global adoption,FSC global adoption,pathway,AFOLU,saturation point,1
 Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,Floor,0
 Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,Max annual growth,100
-Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,parameter a max,1
-Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,parameter a min,0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,parameter a max,0.2
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,parameter a min,0.001
 Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,parameter b max,100
-Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,parameter b min,0
+Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,parameter b min,10
 Solomon Islands Mangrove Restoration,Solomon Islands Mangrove Restoration,pathway,AFOLU,saturation point,1
 World ,Animal Mgmt,pathway,AFOLU,Floor,0
 World ,Animal Mgmt,baseline,AFOLU,Floor,0
 World ,Animal Mgmt,pathway,AFOLU,Max annual growth,100
 World ,Animal Mgmt,baseline,AFOLU,Max annual growth,100
 World ,Animal Mgmt,pathway,AFOLU,parameter a max,0.10618
-World ,Animal Mgmt,baseline,AFOLU,parameter a max,0
+World ,Animal Mgmt,baseline,AFOLU,parameter a max,100
 World ,Animal Mgmt,pathway,AFOLU,parameter a min,0.10618
 World ,Animal Mgmt,baseline,AFOLU,parameter a min,0
 World ,Animal Mgmt,pathway,AFOLU,parameter b max,40
@@ -67,7 +67,7 @@ World ,Avoided Coastal Impacts,baseline,AFOLU,Floor,0
 World ,Avoided Coastal Impacts,pathway,AFOLU,Max annual growth,100
 World ,Avoided Coastal Impacts,baseline,AFOLU,Max annual growth,100
 World ,Avoided Coastal Impacts,pathway,AFOLU,parameter a max,0.0263
-World ,Avoided Coastal Impacts,baseline,AFOLU,parameter a max,0
+World ,Avoided Coastal Impacts,baseline,AFOLU,parameter a max,100
 World ,Avoided Coastal Impacts,pathway,AFOLU,parameter a min,0
 World ,Avoided Coastal Impacts,baseline,AFOLU,parameter a min,0
 World ,Avoided Coastal Impacts,pathway,AFOLU,parameter b max,100
@@ -81,7 +81,7 @@ World ,Avoided Forest Conversion,baseline,AFOLU,Floor,0
 World ,Avoided Forest Conversion,pathway,AFOLU,Max annual growth,100
 World ,Avoided Forest Conversion,baseline,AFOLU,Max annual growth,100
 World ,Avoided Forest Conversion,pathway,AFOLU,parameter a max,0.025
-World ,Avoided Forest Conversion,baseline,AFOLU,parameter a max,0
+World ,Avoided Forest Conversion,baseline,AFOLU,parameter a max,100
 World ,Avoided Forest Conversion,pathway,AFOLU,parameter a min,0
 World ,Avoided Forest Conversion,baseline,AFOLU,parameter a min,0
 World ,Avoided Forest Conversion,pathway,AFOLU,parameter b max,100
@@ -96,7 +96,7 @@ World ,Avoided Peat Impacts,baseline,AFOLU,Floor,0
 World ,Avoided Peat Impacts,pathway,AFOLU,Max annual growth,100
 World ,Avoided Peat Impacts,baseline,AFOLU,Max annual growth,100
 World ,Avoided Peat Impacts,pathway,AFOLU,parameter a max,0.0263
-World ,Avoided Peat Impacts,baseline,AFOLU,parameter a max,0
+World ,Avoided Peat Impacts,baseline,AFOLU,parameter a max,100
 World ,Avoided Peat Impacts,pathway,AFOLU,parameter a min,0
 World ,Avoided Peat Impacts,baseline,AFOLU,parameter a min,0
 World ,Avoided Peat Impacts,pathway,AFOLU,parameter b max,100
@@ -112,7 +112,7 @@ World ,Biochar,baseline,AFOLU,Floor,0
 World ,Biochar,pathway,AFOLU,Max annual growth,100
 World ,Biochar,baseline,AFOLU,Max annual growth,100
 World ,Biochar,pathway,AFOLU,parameter a max,0.10618
-World ,Biochar,baseline,AFOLU,parameter a max,0
+World ,Biochar,baseline,AFOLU,parameter a max,100
 World ,Biochar,pathway,AFOLU,parameter a min,0.10618
 World ,Biochar,baseline,AFOLU,parameter a min,0
 World ,Biochar,pathway,AFOLU,parameter b max,80
@@ -126,7 +126,7 @@ World ,Coastal Restoration,baseline,AFOLU,Floor,0
 World ,Coastal Restoration,pathway,AFOLU,Max annual growth,100
 World ,Coastal Restoration,baseline,AFOLU,Max annual growth,100
 World ,Coastal Restoration,pathway,AFOLU,parameter a max,0.1157
-World ,Coastal Restoration,baseline,AFOLU,parameter a max,0
+World ,Coastal Restoration,baseline,AFOLU,parameter a max,100
 World ,Coastal Restoration,pathway,AFOLU,parameter a min,0.1157
 World ,Coastal Restoration,baseline,AFOLU,parameter a min,0
 World ,Coastal Restoration,pathway,AFOLU,parameter b max,40.46
@@ -140,7 +140,7 @@ World ,Cropland Soil Health,baseline,AFOLU,Floor,0
 World ,Cropland Soil Health,pathway,AFOLU,Max annual growth,100
 World ,Cropland Soil Health,baseline,AFOLU,Max annual growth,100
 World ,Cropland Soil Health,pathway,AFOLU,parameter a max,0.10618
-World ,Cropland Soil Health,baseline,AFOLU,parameter a max,0
+World ,Cropland Soil Health,baseline,AFOLU,parameter a max,100
 World ,Cropland Soil Health,pathway,AFOLU,parameter a min,0.10618
 World ,Cropland Soil Health,baseline,AFOLU,parameter a min,0
 World ,Cropland Soil Health,pathway,AFOLU,parameter b max,35
@@ -154,7 +154,7 @@ World ,Forests & Wetlands,baseline,All,Floor,0
 World ,Forests & Wetlands,pathway,All,Max annual growth,100
 World ,Forests & Wetlands,baseline,All,Max annual growth,100
 World ,Forests & Wetlands,pathway,All,parameter a max,0.5
-World ,Forests & Wetlands,baseline,All,parameter a max,0.5
+World ,Forests & Wetlands,baseline,All,parameter a max,100
 World ,Forests & Wetlands,pathway,All,parameter a min,0
 World ,Forests & Wetlands,baseline,All,parameter a min,0
 World ,Forests & Wetlands,pathway,All,parameter b max,100
@@ -168,7 +168,7 @@ World ,Improved Forest Mgmt,baseline,AFOLU,Floor,0
 World ,Improved Forest Mgmt,pathway,AFOLU,Max annual growth,100
 World ,Improved Forest Mgmt,baseline,AFOLU,Max annual growth,100
 World ,Improved Forest Mgmt,pathway,AFOLU,parameter a max,0.11776
-World ,Improved Forest Mgmt,baseline,AFOLU,parameter a max,0
+World ,Improved Forest Mgmt,baseline,AFOLU,parameter a max,100
 World ,Improved Forest Mgmt,pathway,AFOLU,parameter a min,0.11776
 World ,Improved Forest Mgmt,baseline,AFOLU,parameter a min,0
 World ,Improved Forest Mgmt,pathway,AFOLU,parameter b max,37.1
@@ -182,7 +182,7 @@ World ,Improved Rice,baseline,AFOLU,Floor,0
 World ,Improved Rice,pathway,AFOLU,Max annual growth,100
 World ,Improved Rice,baseline,AFOLU,Max annual growth,100
 World ,Improved Rice,pathway,AFOLU,parameter a max,0.10618
-World ,Improved Rice,baseline,AFOLU,parameter a max,0
+World ,Improved Rice,baseline,AFOLU,parameter a max,100
 World ,Improved Rice,pathway,AFOLU,parameter a min,0.10618
 World ,Improved Rice,baseline,AFOLU,parameter a min,0
 World ,Improved Rice,pathway,AFOLU,parameter b max,50
@@ -196,7 +196,7 @@ World ,Legumes,baseline,AFOLU,Floor,0
 World ,Legumes,pathway,AFOLU,Max annual growth,100
 World ,Legumes,baseline,AFOLU,Max annual growth,100
 World ,Legumes,pathway,AFOLU,parameter a max,0.10618
-World ,Legumes,baseline,AFOLU,parameter a max,0
+World ,Legumes,baseline,AFOLU,parameter a max,100
 World ,Legumes,pathway,AFOLU,parameter a min,0.10618
 World ,Legumes,baseline,AFOLU,parameter a min,0
 World ,Legumes,pathway,AFOLU,parameter b max,44
@@ -210,7 +210,7 @@ World ,Natural Regeneration,baseline,AFOLU,Floor,0
 World ,Natural Regeneration,pathway,AFOLU,Max annual growth,100
 World ,Natural Regeneration,baseline,AFOLU,Max annual growth,100
 World ,Natural Regeneration,pathway,AFOLU,parameter a max,0.08
-World ,Natural Regeneration,baseline,AFOLU,parameter a max,0
+World ,Natural Regeneration,baseline,AFOLU,parameter a max,100
 World ,Natural Regeneration,pathway,AFOLU,parameter a min,0.08
 World ,Natural Regeneration,baseline,AFOLU,parameter a min,0
 World ,Natural Regeneration,pathway,AFOLU,parameter b max,60
@@ -224,7 +224,7 @@ World ,Nitrogen Fertilizer Management,baseline,AFOLU,Floor,0
 World ,Nitrogen Fertilizer Management,pathway,AFOLU,Max annual growth,100
 World ,Nitrogen Fertilizer Management,baseline,AFOLU,Max annual growth,100
 World ,Nitrogen Fertilizer Management,pathway,AFOLU,parameter a max,0.1
-World ,Nitrogen Fertilizer Management,baseline,AFOLU,parameter a max,0
+World ,Nitrogen Fertilizer Management,baseline,AFOLU,parameter a max,100
 World ,Nitrogen Fertilizer Management,pathway,AFOLU,parameter a min,0.1
 World ,Nitrogen Fertilizer Management,baseline,AFOLU,parameter a min,0
 World ,Nitrogen Fertilizer Management,pathway,AFOLU,parameter b max,50
@@ -238,7 +238,7 @@ World ,Optimal Intensity,baseline,AFOLU,Floor,0
 World ,Optimal Intensity,pathway,AFOLU,Max annual growth,100
 World ,Optimal Intensity,baseline,AFOLU,Max annual growth,100
 World ,Optimal Intensity,pathway,AFOLU,parameter a max,0.10618
-World ,Optimal Intensity,baseline,AFOLU,parameter a max,0
+World ,Optimal Intensity,baseline,AFOLU,parameter a max,100
 World ,Optimal Intensity,pathway,AFOLU,parameter a min,0.10618
 World ,Optimal Intensity,baseline,AFOLU,parameter a min,0
 World ,Optimal Intensity,pathway,AFOLU,parameter b max,44
@@ -252,7 +252,7 @@ World ,Peat Restoration,baseline,AFOLU,Floor,0
 World ,Peat Restoration,pathway,AFOLU,Max annual growth,100
 World ,Peat Restoration,baseline,AFOLU,Max annual growth,100
 World ,Peat Restoration,pathway,AFOLU,parameter a max,0.11599
-World ,Peat Restoration,baseline,AFOLU,parameter a max,0
+World ,Peat Restoration,baseline,AFOLU,parameter a max,100
 World ,Peat Restoration,pathway,AFOLU,parameter a min,0.11599
 World ,Peat Restoration,baseline,AFOLU,parameter a min,0
 World ,Peat Restoration,pathway,AFOLU,parameter b max,39.84
@@ -266,7 +266,7 @@ World ,Regenerative Agriculture,baseline,All,Floor,0
 World ,Regenerative Agriculture,pathway,All,Max annual growth,100
 World ,Regenerative Agriculture,baseline,All,Max annual growth,100
 World ,Regenerative Agriculture,pathway,All,parameter a max,0.5
-World ,Regenerative Agriculture,baseline,All,parameter a max,0.5
+World ,Regenerative Agriculture,baseline,All,parameter a max,100
 World ,Regenerative Agriculture,pathway,All,parameter a min,0
 World ,Regenerative Agriculture,baseline,All,parameter a min,0
 World ,Regenerative Agriculture,pathway,All,parameter b max,100
@@ -280,7 +280,7 @@ World ,Silvopasture,baseline,AFOLU,Floor,0
 World ,Silvopasture,pathway,AFOLU,Max annual growth,100
 World ,Silvopasture,baseline,AFOLU,Max annual growth,100
 World ,Silvopasture,pathway,AFOLU,parameter a max,0.10618
-World ,Silvopasture,baseline,AFOLU,parameter a max,0
+World ,Silvopasture,baseline,AFOLU,parameter a max,100
 World ,Silvopasture,pathway,AFOLU,parameter a min,0.10618
 World ,Silvopasture,baseline,AFOLU,parameter a min,0
 World ,Silvopasture,pathway,AFOLU,parameter b max,35
@@ -294,7 +294,7 @@ World ,Trees in Croplands,baseline,AFOLU,Floor,0
 World ,Trees in Croplands,pathway,AFOLU,Max annual growth,100
 World ,Trees in Croplands,baseline,AFOLU,Max annual growth,100
 World ,Trees in Croplands,pathway,AFOLU,parameter a max,0.10618
-World ,Trees in Croplands,baseline,AFOLU,parameter a max,0
+World ,Trees in Croplands,baseline,AFOLU,parameter a max,100
 World ,Trees in Croplands,pathway,AFOLU,parameter a min,0.10618
 World ,Trees in Croplands,baseline,AFOLU,parameter a min,0
 World ,Trees in Croplands,pathway,AFOLU,parameter b max,36
