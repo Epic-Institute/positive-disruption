@@ -13,12 +13,6 @@ import os
 
 pandarallel.initialize(nb_workers=4)
 
-# These are diagnostic files for adoption curve fitting and will be removed soon
-file = open("podi/data/y_data.csv", "w")
-file.close()
-file = open("podi/data/y_data2.csv", "w")
-file.close()
-
 # endregion
 
 
@@ -328,6 +322,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             axis=1,
         )
     )
+
+    # Update values for Sector = 'Transportation' , Product_long = 'Electricity' , Flow_long = 'Road' to reflect IEA EV dataset
 
     # endregion
 
@@ -1576,9 +1572,66 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    ##############################
-    #  SAVE OUTPUT TO CSV FILES  #
-    ##############################
+    ########################
+    #  ESTIMATE SHIPMENTS  #
+    ########################
+
+    # region
+
+    # Load shipment historical data
+    index = [
+        "Scenario",
+        "Region",
+        "Sector",
+        "Subsector",
+        "Product_category",
+        "Product_long",
+        "Product",
+        "Flow_category",
+        "Flow_long",
+        "Flow",
+        "Hydrogen",
+        "Flexible",
+        "Non-Energy Use",
+        "Source",
+    ]
+
+    shipments = (
+        pd.DataFrame(pd.read_csv("podi/data/shipments_historical.csv"))
+        .set_index(index)
+        .droplevel("Source")
+        .dropna(axis=0, how="all")
+    )
+    shipments.columns = shipments.columns.astype(int)
+
+    # Project future growth based on percentage growth of energy demand
+    shipments = (
+        pd.concat(
+            [
+                shipments.loc[:, data_start_year : data_end_year - 1],
+                pd.concat(
+                    [
+                        shipments.loc[:, data_end_year],
+                        energy_post_electrification.loc[:, data_end_year:]
+                        .pct_change(axis=1)
+                        .dropna(axis=1, how="all")
+                        .add(1)
+                        .clip(upper=2),
+                    ],
+                    axis=1,
+                ).cumprod(axis=1),
+            ],
+            axis=1,
+        )
+        .replace(np.inf, 0)
+        .replace(-np.inf, 0)
+    )
+
+    # endregion
+
+    #################
+    #  SAVE OUTPUT  #
+    #################
 
     # region
 
@@ -1601,6 +1654,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     pd.concat([per_elec_supply, per_heat_supply, per_transport_supply]).to_csv(
         "podi/data/energy_percent.csv"
     )
+
+    # Shipments
+    shipments.to_csv("podi/data/shipments_projected.csv")
 
     # endregion
 
