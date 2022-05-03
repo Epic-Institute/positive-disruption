@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 6. Forests & Wetlands
+title: V6: Forests & Wetlands
 ---
 
 ### Adoption Curves [% Adoption]

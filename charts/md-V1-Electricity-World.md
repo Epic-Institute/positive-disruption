@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 1. Electricity
+title: V1:Electricity
 ---
 
 ### Adoption Curves [% Adoption]
