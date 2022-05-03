@@ -21,7 +21,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #  LOAD HISTORICAL NCS ADOPTION  #
     ##################################
 
-    recalc_afolu_historical = False
+    recalc_afolu_historical = True
     # region
     if recalc_afolu_historical == True:
         afolu_historical = pd.DataFrame(
@@ -157,7 +157,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             )
         ]
 
-        # Divide historical adoption by max extent, where each year of additional adoption is tracked independent of other years to preserve the time-varying rate of the max extent available in that year
+        # Divide historical adoption by max extent, preserving adoption vintage to correctly account for time-varying max extent estmates
         sum = afolu_historical * 0
         for year in afolu_historical.loc[:, data_start_year + 1 :].columns:
             sum = pd.concat(

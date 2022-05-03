@@ -87,6 +87,11 @@ if recalc_energy is True:
     ).set_index(index)
     energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
+    shipments = pd.DataFrame(
+        pd.read_csv("podi/data/shipments_projected.csv")
+    ).set_index(index)
+    shipments.columns = shipments.columns.astype(int)
+
 else:
     index = [
         "Scenario",
@@ -133,6 +138,13 @@ else:
         pd.read_csv("podi/data/energy_post_addtl_eff.csv")
     ).set_index(index)
     energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
+
+    shipments = (
+        pd.DataFrame(pd.read_csv("podi/data/shipments_projected.csv"))
+        .set_index(index)
+        .drop(columns="Source")
+    )
+    shipments.columns = shipments.columns.astype(int)
 
 # endregion
 

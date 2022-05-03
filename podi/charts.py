@@ -28,7 +28,7 @@ unit_name = ["TJ", "TWh", "GW"]
 unit_val = [1, 0.0002777, 0.2777/8760]
 unit = [unit_name[0], unit_val[0]]
 
-save_figs = True
+save_figs = False
 show_figs = True
 show_annotations = True
 start_year = 1990
@@ -1415,7 +1415,7 @@ nonenergyuse = ['N']
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV", "ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
 
 # Percent of transport energy that is electric or nonelectric renewables
-transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
 
 # Percent of buildings energy that is electric or nonelectric renewables
 buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].rename(index={'Residential':'Buildings','Commercial':'Buildings'}).groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].rename(index={'Residential':'Buildings','Commercial':'Buildings'}).groupby(['Sector','Product_long']).sum().sum(0)) * 100
@@ -1517,7 +1517,7 @@ nonenergyuse = ['N']
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
 
 # Percent of transport energy that is electric or nonelectric renewables
-transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long','Flow_long']).sum().sum(0)) * 100
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR',  'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long','Flow_long']).sum().sum(0)) * 100
 
 # Percent of buildings energy that is electric or nonelectric renewables
 buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().sum(0)) * 100
@@ -1584,18 +1584,19 @@ for sector in fig2['Sector'].unique():
     if show_figs is True:
         fig.show()
     
-    pio.write_html(
-    fig,
-    file=(
-        "./charts/acurves-custom-"
-        + scenario
-        + "-"
-        + str(region).replace("slice(None, None, None)", "World")
-        + "-"
-        + str(sector).replace("slice(None, None, None)", "All")
-        + ".html"
-    ).replace(" ",""),
-    auto_open=False)
+    if save_figs is True:
+        pio.write_html(
+        fig,
+        file=(
+            "./charts/acurves-custom-"
+            + scenario
+            + "-"
+            + str(region).replace("slice(None, None, None)", "World")
+            + "-"
+            + str(sector).replace("slice(None, None, None)", "All")
+            + ".html"
+        ).replace(" ",""),
+        auto_open=False)
 
 # For Transport
 fig = transport.T
@@ -1659,18 +1660,19 @@ for sector in fig2['Sector'].unique():
     if show_figs is True:
         fig.show()
     
-    pio.write_html(
-    fig,
-    file=(
-        "./charts/acurves-custom-"
-        + scenario
-        + "-"
-        + str(region).replace("slice(None, None, None)", "World")
-        + "-"
-        + str(sector).replace("slice(None, None, None)", "All")
-        + ".html"
-    ).replace(" ",""),
-    auto_open=False)
+    if save_figs is True:
+        pio.write_html(
+        fig,
+        file=(
+            "./charts/acurves-custom-"
+            + scenario
+            + "-"
+            + str(region).replace("slice(None, None, None)", "World")
+            + "-"
+            + str(sector).replace("slice(None, None, None)", "All")
+            + ".html"
+        ).replace(" ",""),
+        auto_open=False)
 
 # For Buildings
 fig = buildings.T
@@ -1729,18 +1731,19 @@ fig.update_layout(
 if show_figs is True:
     fig.show()
 
-pio.write_html(
-fig,
-file=(
-    "./charts/acurves-custom-"
-    + scenario
-    + "-"
-    + str(region).replace("slice(None, None, None)", "World")
-    + "-"
-    + str('Buildings').replace("slice(None, None, None)", "All")
-    + ".html"
-).replace(" ",""),
-auto_open=False)
+if save_figs is True:
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/acurves-custom-"
+        + scenario
+        + "-"
+        + str(region).replace("slice(None, None, None)", "World")
+        + "-"
+        + str('Buildings').replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
 
 # For Industry
 fig = industry.T
@@ -1801,19 +1804,150 @@ for sector in fig2['Sector'].unique():
     
     if show_figs is True:
         fig.show()
+
+    if save_figs is True:    
+        pio.write_html(
+        fig,
+        file=(
+            "./charts/acurves-custom-"
+            + scenario
+            + "-"
+            + str(region).replace("slice(None, None, None)", "World")
+            + "-"
+            + str(sector).replace("slice(None, None, None)", "All")
+            + ".html"
+        ).replace(" ",""),
+        auto_open=False)
+
+# endregion
+
+########################################################
+# SOLUTION ADOPTION RATES, STACKED, W DATA OVERLAY [%] #
+########################################################
+
+# region
+
+start_year = 2010
+end_year = proj_end_year
+scenario = scenario
+region = slice(None)
+sector = slice(None)
+subsector = slice(None)
+product_category = slice(None)
+flow_category = slice(None)
+nonenergyuse = ['N']
+
+# Fix EV electricity percent
+energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1057).values
+
+energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.6388).values
+
+energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1278).values
+
+energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1277).values
+
+# Percent of transport energy that is electric or nonelectric renewables
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['ELECTR', 'HYDROGEN'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), ["ROAD"], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long']).sum().sum(0)) * 100
+
+# For Transport
+fig = transport.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', "Product_long"], value_name="% Adoption")
+
+for sector in fig2['Sector'].unique():
+
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    # Make Units Shipped line for Sector = 'Transportation' , Product_long = 'Electricity' , Flow_long = 'Road'
+    fig.add_trace(
+    go.Scatter(
+        name="EV Stock (RHS)",
+        line=dict(width=1, color="#1c352d"),
+        x=fig2["Year"].unique(),
+        y=shipments.loc[:,start_year:end_year].fillna(0).groupby(['Sector','Product_long', 'Flow_long']).sum().loc[sector, 'Electricity','Road'],
+        fill="none",
+        stackgroup="EV Stock",
+        legendgroup='EV Stock',
+        showlegend=True
+    ), secondary_y=True)
+
+    for subsector in ['Two- and three-wheeled', 'Light','Medium','Heavy']:
+
+        for product in fig2["Product_long"].unique(): 
+
+            # Make projected trace
+            fig.add_trace(
+                go.Scatter(
+                    name=str(subsector).replace('na','All').replace('Heavy','Trucks').replace('Medium','Buses').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
+                    line=dict(width=1),
+                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["Year"],
+                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["% Adoption"],
+                    fill="tonexty",
+                    stackgroup="two",
+                    legendgroup=str(subsector).replace('na','All'),
+                    showlegend=True,
+                ),secondary_y=False)
+
+            # Make historical trace
+            fig.add_trace(
+            go.Scatter(
+                name="Historical",
+                line=dict(width=1, color="#1c352d"),
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["% Adoption"],
+                stackgroup="one",
+                legendgroup=str(subsector).replace('na',''),
+                showlegend=False
+            ), secondary_y=False)
+            
+    fig.update_layout(
+        title={
+            "text": "Projected EV Adoption, " + str(region).replace("slice(None, None, None)", "World").capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        margin_b=100,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10, yaxis=dict(range=[0,110]), yaxis2=dict(range=[0,6.6e8], dtick=7.2e8/6), legend={"traceorder": "reversed"}
+    )
     
-    pio.write_html(
-    fig,
-    file=(
-        "./charts/acurves-custom-"
-        + scenario
-        + "-"
-        + str(region).replace("slice(None, None, None)", "World")
-        + "-"
-        + str(sector).replace("slice(None, None, None)", "All")
-        + ".html"
-    ).replace(" ",""),
-    auto_open=False)
+    fig.update_yaxes(title_text="% of Total Vehicle Energy Demand", secondary_y=False)
+    fig.update_yaxes(title_text="EV Stock", secondary_y=True)
+
+    fig.add_annotation(
+        text="<b>Historical EV stock data source:</b> IEA <br><b>Projected EV stock:</b> Positive Disruption model</br><b>Historical vehicle energy demand data source:</b> IEA <br><b>Projected vehicle energy demand:</b> Positive Disruption model",
+        xref="paper",
+        yref="paper",
+        x=0,
+        y=-0.27,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="left",
+        borderpad=0,
+        borderwidth=2,
+        bgcolor="#ffffff",
+        opacity=1,
+    )
+
+    if show_figs is True:
+        fig.show()
+    
+    if save_figs is True:
+        pio.write_html(
+        fig,
+        file=(
+            "./charts/acurves-custom-"
+            + scenario
+            + "-"
+            + str(region).replace("slice(None, None, None)", "World")
+            + "-"
+            + str(sector).replace("slice(None, None, None)", "All")
+            + ".html"
+        ).replace(" ",""),
+        auto_open=False)
 
 # endregion
 
@@ -1837,7 +1971,7 @@ nonenergyuse = ['N']
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
 
 # Percent of transport energy that is electric or nonelectric renewables
-transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long','Flow_long']).sum().sum(0)) * 100
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long','Flow_long']).sum().sum(0)) * 100
 
 # Percent of buildings energy that is electric or nonelectric renewables
 buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().sum(0)) * 100
@@ -2157,7 +2291,7 @@ nonenergyuse = ['N']
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum().sum(0)) * 100
 
 # Percent of transport energy that is electric or nonelectric renewables
-transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long','Flow_long']).sum().sum(0)) * 100
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long','Flow_long']).sum().sum(0)) * 100
 
 # Percent of buildings energy that is electric or nonelectric renewables
 buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum().sum(0)) * 100
@@ -2479,7 +2613,7 @@ nonenergyuse = ['N']
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum()
 
 # transport energy that is electric or nonelectric renewables
-transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum()
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum()
 
 # buildings energy that is electric or nonelectric renewables
 buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum()
@@ -2799,7 +2933,7 @@ nonenergyuse = ['N']
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long']).sum()
 
 # Percent of transport energy that is electric or nonelectric renewables
-transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'RELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum()
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['BIODIESEL', 'BIOGASOL','BIOGASES','OBIOLIQ', 'ELECTR', 'HYDROGEN'], flow_category, slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long', 'Flow_long']).sum()
 
 # Percent of buildings energy that is electric or nonelectric renewables
 buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Product_long','Flow_long']).sum()
