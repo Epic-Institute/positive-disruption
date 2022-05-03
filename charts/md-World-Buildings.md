@@ -1,6 +1,6 @@
 ---
 layout: default
-title: V1:/ Electricity
+title: V3: Buildings
 ---
 
 ## Adoption Curves [% Adoption]

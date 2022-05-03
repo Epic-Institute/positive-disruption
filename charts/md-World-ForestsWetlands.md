@@ -1,6 +1,6 @@
 ---
 layout: default
-title: V1:/ Electricity
+title: V6: Forests & Wetlands
 ---
 
 ## Adoption Curves [% Adoption]
