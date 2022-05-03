@@ -2354,7 +2354,7 @@ for sector in fig2['Sector'].unique():
         pio.write_html(
         fig,
         file=(
-            "./charts/acurves-custom-"
+            "./charts/acurves-marketdata-"
             + scenario
             + "-"
             + str(region).replace("slice(None, None, None)", "World")
