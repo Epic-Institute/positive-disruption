@@ -1,6 +1,6 @@
 ---
 layout: default
-title: V3 Buildings
+title: 3. Buildings
 ---
 
 ### Adoption Curves [% Adoption]

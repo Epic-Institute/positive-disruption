@@ -1,6 +1,6 @@
 ---
 layout: default
-title: V2 Transport
+title: 2. Transport
 ---
 
 ### Adoption Curves [% Adoption]

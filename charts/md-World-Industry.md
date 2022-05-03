@@ -1,6 +1,6 @@
 ---
 layout: default
-title: V4 Industry
+title: 4. Industry
 ---
 
 ### Adoption Curves [% Adoption]
