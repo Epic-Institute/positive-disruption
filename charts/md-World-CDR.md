@@ -1,6 +1,6 @@
 ---
 layout: default
-title: V7: CDR
+title: V7 CDR
 ---
 
 ### Adoption Curves [% Adoption]

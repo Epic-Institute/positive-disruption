@@ -1,6 +1,6 @@
 ---
 layout: default
-title: V5: Agriculture
+title: V5 Agriculture
 ---
 
 ### Adoption Curves [% Adoption]
