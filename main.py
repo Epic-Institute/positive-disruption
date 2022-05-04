@@ -1827,7 +1827,7 @@ product_category = slice(None)
 flow_category = slice(None)
 nonenergyuse = ['N']
 
-groupby = ['Product_long'] # 'Sector', 'Subsector', 'Product_category', 'Product_long', 'Flow_long'
+groupby = ['Sector', 'Subsector','Flow_long'] # 'Sector', 'Subsector', 'Product_category', 'Product_long', 'Flow_long'
 
 # Percent of electric power that is renewables
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().sum(0)) * 100
@@ -3639,6 +3639,110 @@ for sector in fig2['Sector'].unique():
         legendgroup='EV Stock',
         showlegend=True
     ))
+
+    if show_figs is True:
+        fig.show()
+    
+    if save_figs is True:
+        pio.write_html(
+        fig,
+        file=(
+            "./charts/acurves-marketdata-"
+            + scenario
+            + "-"
+            + str(region).replace("slice(None, None, None)", "World")
+            + "-"
+            + str(sector).replace("slice(None, None, None)", "All")
+            + ".html"
+        ).replace(" ",""),
+        auto_open=False)
+
+# endregion
+
+
+###########################################
+# ADOPTION RATES, STACKED, TRANSPORTATION #
+###########################################
+
+# region
+
+start_year = 2010
+end_year = proj_end_year
+scenario = scenario
+region = slice(None)
+sector = slice(None)
+subsector = slice(None)
+product_category = slice(None)
+flow_category = slice(None)
+nonenergyuse = ['N']
+
+# Fix EV electricity percent
+energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1057).values
+
+energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.6388).values
+
+energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1278).values
+
+energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1277).values
+
+
+# Percent of transport energy that is electric or nonelectric renewables
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['ELECTR', 'HYDROGEN'], flow_category, ['Domestic aviation', 'Rail', 'Road', 'Domestic navigation', 'Pipeline transport', 'Transport not elsewhere specified'], slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), ['Domestic aviation', 'Rail', 'Road', 'Domestic navigation', 'Pipeline transport', 'Transport not elsewhere specified'], slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Flow_long']).sum().sum(0)) * 100
+
+# For Transport
+fig = transport[transport.sum(axis=1)>0.05].T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
+
+for sector in fig2['Sector'].unique():
+
+    fig = go.Figure()
+
+    for subsector in fig2['Subsector'].unique():
+
+        for flow in fig2["Flow_long"].unique(): 
+
+            # Make projected trace
+            fig.add_trace(
+                go.Scatter(
+                    name=str(flow).replace('Domestic navigation','Shipping').replace('Domestic aviation','Aviation') + ", " + str(subsector).replace('na','All').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
+                    line=dict(width=1, color=colors[
+                        pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)+ randrange(20)]),
+                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    fill="tonexty",
+                    stackgroup="two",
+                    legendgroup=str(flow) + ", " + str(subsector).replace('na','All').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
+                    showlegend=True,
+                ))
+
+            # Make historical trace
+            fig.add_trace(
+            go.Scatter(
+                name="Historical",
+                line=dict(width=1, color="#1c352d"),
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                stackgroup="one",
+                legendgroup=str(subsector).replace('na',''),
+                showlegend=False
+            ))
+            
+    fig.update_layout(
+        title={
+            "text": "Projected Transport Adoption, " + str(region).replace("slice(None, None, None)", "World").capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        margin_b=100,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10, legend={"traceorder": "reversed"}
+    )
+    
+    fig.update_yaxes(title_text="% of Total Transport Energy Demand")
 
     if show_figs is True:
         fig.show()
