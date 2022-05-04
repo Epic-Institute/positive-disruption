@@ -1827,7 +1827,7 @@ product_category = slice(None)
 flow_category = slice(None)
 nonenergyuse = ['N']
 
-groupby = ['Sector', 'Subsector','Flow_long'] # 'Sector', 'Subsector', 'Product_category', 'Product_long', 'Flow_long'
+groupby = ['Sector', 'Product_long','Flow_long'] # 'Sector', 'Subsector', 'Product_category', 'Product_long', 'Flow_long'
 
 # Percent of electric power that is renewables
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().sum(0)) * 100
@@ -3752,6 +3752,101 @@ for sector in fig2['Sector'].unique():
         fig,
         file=(
             "./charts/acurves-marketdata-"
+            + scenario
+            + "-"
+            + str(region).replace("slice(None, None, None)", "World")
+            + "-"
+            + str(sector).replace("slice(None, None, None)", "All")
+            + ".html"
+        ).replace(" ",""),
+        auto_open=False)
+
+# endregion
+
+######################################
+# ADOPTION RATES, STACKED, BUILDINGS #
+######################################
+
+# region
+
+start_year = 2010
+end_year = proj_end_year
+scenario = scenario
+region = slice(None)
+sector = slice(None)
+subsector = slice(None)
+product_category = slice(None)
+flow_category = slice(None)
+nonenergyuse = ['N']
+
+groupby = ['Sector', 'Product_long','Flow_long'] # 'Sector', 'Subsector', 'Product_category', 'Product_long', 'Flow_long'
+
+# Percent of buildings energy that is electric or nonelectric renewables
+buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().divide(energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().sum(0)) * 100
+
+fig = buildings.T
+fig.index.name = "Year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="Year", var_name=groupby, value_name="% Adoption")
+fig2['Sector'] = 'Buildings'
+
+for sector in fig2['Sector'].unique():
+
+    fig = go.Figure()
+
+    for product in fig2['Product_long'].unique():
+
+        for flow in fig2["Flow_long"].unique(): 
+
+            # Make projected trace
+            fig.add_trace(
+                go.Scatter(
+                    name=str(flow).replace('Commercial and public services','Commercial') + ", " + str(product).replace('na','All'),
+                    line=dict(width=1, color=colors[
+                        pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)+ randrange(50)]),
+                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    fill="tonexty",
+                    stackgroup="two",
+                    legendgroup=str(flow).replace('Commercial and public services','Commercial') + ", " + str(product).replace('na','All'),
+                    showlegend=True,
+                ))
+
+            # Make historical trace
+            fig.add_trace(
+            go.Scatter(
+                name="Historical",
+                line=dict(width=1, color="#1c352d"),
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                stackgroup="one",
+                legendgroup=str(product).replace('na',''),
+                showlegend=False
+            ))
+            
+    fig.update_layout(
+        title={
+            "text": "Projected Building Adoption, " + str(region).replace("slice(None, None, None)", "World").capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        margin_b=100,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10, legend={"traceorder": "reversed"}
+    )
+    
+    fig.update_yaxes(title_text="% of Total Building Energy Demand")
+
+    if show_figs is True:
+        fig.show()
+    
+    if save_figs is True:
+        pio.write_html(
+        fig,
+        file=(
+            "./charts/acurves-"
             + scenario
             + "-"
             + str(region).replace("slice(None, None, None)", "World")
