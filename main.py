@@ -1827,7 +1827,7 @@ product_category = slice(None)
 flow_category = slice(None)
 nonenergyuse = ['N']
 
-groupby = ['Sector', 'Subsector', 'Product_category', 'Product_long'] # 'Sector', 'Subsector', 'Product_category', 'Product_long', 'Flow_long'
+groupby = ['Product_long'] # 'Sector', 'Subsector', 'Product_category', 'Product_long', 'Flow_long'
 
 # Percent of electric power that is renewables
 electricity = energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().divide(energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), slice(None), ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().sum(0)) * 100
@@ -1839,7 +1839,7 @@ transport = energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy', '
 buildings =  energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), ['ELECTR', 'SOLARTH', 'MUNWASTER','GEOTHERM'], flow_category, slice(None),['RESIDENT','COMMPUB'], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().divide(energy_pathway.loc[scenario, region, ['Commercial','Residential'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().sum(0)) * 100
 
 # Percent of industry energy that is electric or nonelectric renewables
-industry =  energy_pathway.loc[scenario, region, ['Industrial'], ['na','High Temperature', 'Low Temperature'], product_category, slice(None), ['ELECTR', 'SOLARTH', 'HYDROGEN', 'MUNWASTER', 'GEOTHERM'], 'Final consumption', slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().divide(energy_pathway.loc[scenario, region, ['Industrial'], subsector, product_category, slice(None), slice(None), 'Final consumption', slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().sum(0)) * 100
+industry =  energy_pathway.loc[scenario, region, ['Industrial'], ['na','High Temperature', 'Low Temperature'], product_category, slice(None), ['ELECTR', 'SOLARTH', 'HYDROGEN', 'MUNWASTER', 'GEOTHERM'], 'Final consumption', ['Agriculture/forestry', 'Chemical and petrochemical', 'Construction', 'Final consumption not elsewhere specified', 'Fishing', 'Food and tobacco', 'Industry not elsewhere specified', 'Iron and steel', 'Machinery', 'Mining and quarrying', 'Non-ferrous metals', 'Non-metallic minerals', 'Paper, pulp, and print', 'Textile and leather', 'Transport equipment', 'Wood and wood products'], slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().divide(energy_pathway.loc[scenario, region, ['Industrial'], subsector, product_category, slice(None), slice(None), 'Final consumption', slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum().sum(0)) * 100
 
 fig = pd.concat([electricity, transport, buildings, industry]).T
 fig.index.name = "Year"
