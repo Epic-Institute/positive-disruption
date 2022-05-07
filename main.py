@@ -184,18 +184,7 @@ else:
 
 # region
 
-index = [
-    "Scenario",
-    "Region",
-    "Sector",
-    "Subsector",
-    "Product_category",
-    "Product_long",
-    "Product",
-    "Flow_category",
-    "Flow_long",
-    "Flow",
-]
+index = pyam.IAMC_IDX
 
 afolu(scenario, data_start_year, data_end_year, proj_end_year)
 

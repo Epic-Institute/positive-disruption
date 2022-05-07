@@ -24,18 +24,6 @@ def adoption_projection(
 
     y = pd.DataFrame(input_data).T
 
-    # Handle cases where saturation point is below current value, by making saturation point equidistant from current value but in positive direction
-    if (
-        y.loc[:, input_data.last_valid_index()].values
-        > y.loc[:, output_end_date].values
-    ):
-        y.loc[:, output_end_date] = y.loc[:, input_data.last_valid_index()] + abs(
-            y.loc[:, output_end_date] - y.loc[:, input_data.last_valid_index()]
-        )
-        neg = True
-    else:
-        neg = False
-
     y = np.array(
         y.interpolate(method="linear", limit_area="inside", axis=1).dropna(axis=1)
     )
@@ -50,16 +38,28 @@ def adoption_projection(
     # Load search bounds function parameters
     search_bounds = [
         (
-            change_parameters.loc["parameter a min"].Value,
-            change_parameters.loc["parameter a max"].Value,
+            change_parameters[
+                change_parameters.variable.str.contains("parameter a min")
+            ]["Unnamed: 5"].values[0],
+            change_parameters[
+                change_parameters.variable.str.contains("parameter a max")
+            ]["Unnamed: 5"].values[0],
         ),
         (
-            change_parameters.loc["parameter b min"].Value,
-            change_parameters.loc["parameter b max"].Value,
+            change_parameters[
+                change_parameters.variable.str.contains("parameter b min")
+            ]["Unnamed: 5"].values[0],
+            change_parameters[
+                change_parameters.variable.str.contains("parameter b max")
+            ]["Unnamed: 5"].values[0],
         ),
         (
-            change_parameters.loc["saturation point"].Value,
-            change_parameters.loc["saturation point"].Value,
+            change_parameters[
+                change_parameters.variable.str.contains("saturation point")
+            ]["Unnamed: 5"].values[0],
+            change_parameters[
+                change_parameters.variable.str.contains("saturation point")
+            ]["Unnamed: 5"].values[0],
         ),
     ]
 
@@ -86,7 +86,7 @@ def adoption_projection(
             mutation=(0, 1.99),
         ).x
 
-        y = np.array(linear(np.arange(0, 200, 1), *genetic_parameters))
+        y = np.array(linear(np.arange(0, 300, 1), *genetic_parameters))
 
     else:
 
@@ -146,8 +146,10 @@ def adoption_projection(
 
     # Save model to output file
     pd.Series(
-        data=y[: len(input_data.index)],
-        index=input_data.index,
+        data=y[
+            : len(np.arange(input_data.first_valid_index(), output_end_date + 1, 1))
+        ],
+        index=np.arange(input_data.first_valid_index(), output_end_date + 1, 1),
         name=input_data.name,
     ).T.to_csv(
         "podi/data/adoption_curve_models.csv",
@@ -156,7 +158,9 @@ def adoption_projection(
     )
 
     return pd.Series(
-        data=y2[: len(input_data.index)],
-        index=input_data.index,
+        data=y2[
+            : len(np.arange(input_data.first_valid_index(), output_end_date + 1, 1))
+        ],
+        index=np.arange(input_data.first_valid_index(), output_end_date + 1, 1),
         name=input_data.name,
     )
