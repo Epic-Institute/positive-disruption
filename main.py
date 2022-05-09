@@ -2387,8 +2387,6 @@ for sector in fig2['Sector'].unique():
 
 # endregion
 
-
-
 ########################################
 # ADOPTION RATES, STACKED, ELECTRICITY [TJ] # (V1)
 ########################################
@@ -2969,7 +2967,6 @@ for sector in fig2['Sector'].unique():
         auto_open=False)
 
 # endregion
-
 
 ############################
 # ADOPTION RATES BY SECTOR #
