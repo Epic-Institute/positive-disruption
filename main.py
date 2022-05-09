@@ -36,6 +36,7 @@ from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
 from fair.constants import radeff
 import hvplot.pandas
 import pyam
+import random
 
 pd.options.display.float_format = "{:,.0f}".format
 
@@ -3675,7 +3676,7 @@ energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_cate
 
 
 # Percent of transport energy that is electric or nonelectric renewables
-transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['ELECTR', 'HYDROGEN'], flow_category, ['Domestic aviation', 'Rail', 'Road', 'Domestic navigation', 'Pipeline transport', 'Transport not elsewhere specified'], slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), ['Domestic aviation', 'Rail', 'Road', 'Domestic navigation', 'Pipeline transport', 'Transport not elsewhere specified'], slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Flow_long']).sum().sum(0)) * 100
+transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['ELECTR', 'HYDROGEN'], flow_category, ['Domestic aviation', 'Rail', 'Road', 'Domestic navigation', 'Pipeline transport', 'Transport not elsewhere specified'], slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Flow_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), ['Domestic aviation', 'Rail', 'Road', 'Domestic navigation', 'Pipeline transport', 'Transport not elsewhere specified'], slice(None), slice(None), slice(None), nonenergyuse].loc[:, end_year].groupby(['Sector','Subsector','Flow_long']).sum().sum(0)) * 100
 
 # For Transport
 fig = transport[transport.sum(axis=1)>0.05].T
@@ -3687,16 +3688,18 @@ for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for subsector in fig2['Subsector'].unique():
+    for flow in np.array(['Road', 'Domestic aviation', 'Rail', 'Domestic navigation',
+       'Transport not elsewhere specified'], dtype=object):
 
-        for flow in fig2["Flow_long"].unique(): 
+        for subsector in np.array(['Two- and three-wheeled', 'Light', 'Medium', 'Heavy', 'na'],
+      dtype=object): 
 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
-                    name=str(flow).replace('Domestic navigation','Shipping').replace('Domestic aviation','Aviation') + ", " + str(subsector).replace('na','All').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
+                    name=str(flow).replace('Domestic navigation','Shipping').replace('Domestic aviation','Aviation').replace('Transport not elsewhere specified','Other') + ", " + str(subsector).replace('na','All').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
                     line=dict(width=1, color=colors[
-                        pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)+ randrange(20)]),
+                        pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)+ random.randrange(20)]),
                     x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
                     y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
@@ -3727,10 +3730,10 @@ for sector in fig2['Sector'].unique():
         margin_b=100,
         margin_t=20,
         margin_l=10,
-        margin_r=10, legend={"traceorder": "reversed"}
+        margin_r=10,legend={"traceorder": "reversed"}
     )
     
-    fig.update_yaxes(title_text="% of Total Transport Energy Demand")
+    fig.update_yaxes(title_text="% of 2050 Total Transport Energy Demand")
 
     if show_figs is True:
         fig.show()
@@ -3791,7 +3794,7 @@ for sector in fig2['Sector'].unique():
                 go.Scatter(
                     name=str(flow).replace('Commercial and public services','Commercial') + ", " + str(product).replace('na','All'),
                     line=dict(width=1, color=colors[
-                        pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)+ randrange(50)]),
+                        pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)+ random.randrange(50)]),
                     x=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
                     y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
