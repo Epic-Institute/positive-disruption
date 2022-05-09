@@ -22,8 +22,98 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #  LOAD HISTORICAL NCS ADOPTION  #
     ##################################
 
-    recalc_afolu_historical = True
+    recalc_afolu_historical = False
     # region
+    def step2curve(name, variable):
+        name = pd.read_csv(
+            "podi/data/afolu_max_extent_and_flux.csv",
+            usecols=[
+                "model",
+                "scenario",
+                "region",
+                "variable",
+                "unit",
+                "Value 1",
+                "Value 2",
+                "Value 3",
+                "Duration 1 (Years)",
+                "Duration 2 (Years)",
+                "Duration 3 (Years)",
+            ],
+        )
+
+        name = name[name["variable"].str.contains(variable)]
+
+        name["Value 2"] = np.where(
+            name["Value 2"].isna(), name["Value 1"], name["Value 2"]
+        )
+
+        name["Value 3"] = np.where(
+            name["Value 3"].isna(), name["Value 2"], name["Value 3"]
+        )
+
+        name["Duration 1 (Years)"] = np.where(
+            (
+                (name["Duration 1 (Years)"].isna())
+                | (name["Duration 1 (Years)"] > proj_end_year - data_end_year)
+            ),
+            proj_end_year - data_end_year,
+            name["Duration 1 (Years)"],
+        )
+
+        name["Duration 2 (Years)"] = np.where(
+            (name["Duration 2 (Years)"].isna()),
+            name["Duration 1 (Years)"],
+            name["Duration 2 (Years)"],
+        )
+
+        name["Duration 3 (Years)"] = np.where(
+            name["Duration 3 (Years)"].isna(),
+            name["Duration 2 (Years)"],
+            name["Duration 3 (Years)"],
+        )
+
+        name = pd.DataFrame(
+            index=[
+                name["model"],
+                name["scenario"],
+                name["region"],
+                name["variable"],
+                name["unit"],
+                name["Value 1"],
+                name["Duration 1 (Years)"],
+                name["Value 2"],
+                name["Duration 2 (Years)"],
+                name["Value 3"],
+                name["Duration 3 (Years)"],
+            ],
+            columns=np.arange(data_start_year, proj_end_year + 1, 1),
+            dtype=float,
+        )
+
+        def rep(x):
+            x0 = x
+            x0.loc[data_start_year] = x.name[5]
+            x0.loc[data_start_year + x.name[6]] = x.name[7]
+            x0.loc[data_start_year + x.name[6] + x.name[8]] = x.name[9]
+            x0.interpolate(axis=0, limit_area="inside", inplace=True)
+            x.update(x0)
+            return x
+
+        name.update(name.apply(rep, axis=1))
+
+        name = name.droplevel(
+            [
+                "Value 1",
+                "Duration 1 (Years)",
+                "Value 2",
+                "Duration 2 (Years)",
+                "Value 3",
+                "Duration 3 (Years)",
+            ]
+        ).fillna(0)
+        return name
+
     if recalc_afolu_historical == True:
         afolu_historical = pd.DataFrame(
             pd.read_csv("podi/data/afolu_historical.csv")
@@ -58,96 +148,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         # Create a timeseries of maximum extent of each subvertical
         # region
-        def step2curve(name, variable):
-            name = pd.read_csv(
-                "podi/data/afolu_max_extent_and_flux.csv",
-                usecols=[
-                    "model",
-                    "scenario",
-                    "region",
-                    "variable",
-                    "unit",
-                    "Value 1",
-                    "Value 2",
-                    "Value 3",
-                    "Duration 1 (Years)",
-                    "Duration 2 (Years)",
-                    "Duration 3 (Years)",
-                ],
-            )
-
-            name = name[name["variable"].str.contains(variable)]
-
-            name["Value 2"] = np.where(
-                name["Value 2"].isna(), name["Value 1"], name["Value 2"]
-            )
-
-            name["Value 3"] = np.where(
-                name["Value 3"].isna(), name["Value 2"], name["Value 3"]
-            )
-
-            name["Duration 1 (Years)"] = np.where(
-                (
-                    (name["Duration 1 (Years)"].isna())
-                    | (name["Duration 1 (Years)"] > proj_end_year - data_end_year)
-                ),
-                proj_end_year - data_end_year,
-                name["Duration 1 (Years)"],
-            )
-
-            name["Duration 2 (Years)"] = np.where(
-                (name["Duration 2 (Years)"].isna()),
-                name["Duration 1 (Years)"],
-                name["Duration 2 (Years)"],
-            )
-
-            name["Duration 3 (Years)"] = np.where(
-                name["Duration 3 (Years)"].isna(),
-                name["Duration 2 (Years)"],
-                name["Duration 3 (Years)"],
-            )
-
-            name = pd.DataFrame(
-                index=[
-                    name["model"],
-                    name["scenario"],
-                    name["region"],
-                    name["variable"],
-                    name["unit"],
-                    name["Value 1"],
-                    name["Duration 1 (Years)"],
-                    name["Value 2"],
-                    name["Duration 2 (Years)"],
-                    name["Value 3"],
-                    name["Duration 3 (Years)"],
-                ],
-                columns=np.arange(data_start_year, proj_end_year + 1, 1),
-                dtype=float,
-            )
-
-            def rep(x):
-                x0 = x
-                x0.loc[data_start_year] = x.name[5]
-                x0.loc[data_start_year + x.name[6]] = x.name[7]
-                x0.loc[data_start_year + x.name[6] + x.name[8]] = x.name[9]
-                x0.interpolate(axis=0, limit_area="inside", inplace=True)
-                x.update(x0)
-                return x
-
-            name.update(name.apply(rep, axis=1))
-
-            name = name.droplevel(
-                [
-                    "Value 1",
-                    "Duration 1 (Years)",
-                    "Value 2",
-                    "Duration 2 (Years)",
-                    "Value 3",
-                    "Duration 3 (Years)",
-                ]
-            ).fillna(0)
-            return name
-
         max_extent = step2curve("max_extent", "Max extent")
 
         # Plot
@@ -184,6 +184,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         ).set_index(index)
         afolu_historical.columns = afolu_historical.columns.astype(int)
 
+        max_extent = step2curve("max_extent", "Max extent")
+
     # Plot
     afolu_historical.T.plot(legend=False, title="AFOLU Historical [MHa, Tgdm, m3]")
 
@@ -213,7 +215,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #  ESTIMATE BASELINE NCS ADOPTION  #
     ####################################
 
-    recalc_afolu_baseline = True
+    recalc_afolu_baseline = False
     # region
 
     if recalc_afolu_baseline == True:
@@ -498,7 +500,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     regions = pd.DataFrame(
         pd.read_csv(
             "podi/data/region_categories.csv",
-            usecols=["WEB Region", "ISO"],
+            usecols=["ISO", "WEB Region"],
         )
         .dropna(axis=0)
         .rename(columns={"WEB Region": "region"})
@@ -510,7 +512,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         afolu_adoption.reset_index()
         .set_index(["region"])
         .merge(regions, left_on=["region"], right_on=["ISO"])
-    ).set_index(["region", "Sector"])
+    ).set_index(pyam.IAM_IDX)
 
     # endregion
 
