@@ -2388,7 +2388,7 @@ for sector in fig2['Sector'].unique():
 # endregion
 
 ########################################
-# ADOPTION RATES, STACKED, ELECTRICITY [TJ] # (V1)
+# ADOPTION RATES, STACKED, ELECTRICITY [TWh] # (V1)
 ########################################
 
 # region
@@ -2405,8 +2405,8 @@ nonenergyuse = ['N']
 
 groupby = ['Sector', 'Subsector', 'Product_category','Product_long'] # 'Sector', 'Subsector', 'Product_category', 'Product_long', 'Flow_long'
 
-# Percent of electric power that is renewables
-electricity = (energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE","NUCLEAR"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum()).reindex(axis='index', level=3, labels=['Nuclear','Hydro','Onshore wind energy','Offshore wind energy','Utility solar photovoltaics','Rooftop solar photovoltaics','Solar thermal','Tide, wave and ocean','Geothermal'])
+# Electric power that is renewables
+electricity = (energy_pathway.loc[scenario, region, ['Electric Power'], subsector, product_category, slice(None), ["GEOTHERM", "HYDRO", "SOLARPV","ROOFTOP", "SOLARTH", "OFFSHORE", "ONSHORE", "TIDE","NUCLEAR"], ['Electricity output'], slice(None), slice(None), slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(groupby).sum()).reindex(axis='index', level=3, labels=['Nuclear','Hydro','Onshore wind energy','Offshore wind energy','Utility solar photovoltaics','Rooftop solar photovoltaics','Solar thermal','Tide, wave and ocean','Geothermal']) * 0.0002778
 
 fig = pd.concat([electricity]).T
 fig.index.name = "Year"
@@ -2546,7 +2546,7 @@ for sector in fig2['Sector'].unique():
             "x": 0.5,
             "y": 0.99,
         },
-        yaxis={"title": "TJ"},
+        yaxis={"title": "TWh"},
         margin_b=0,
         margin_t=20,
         margin_l=10,
