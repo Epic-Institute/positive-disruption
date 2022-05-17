@@ -118,6 +118,8 @@ if recalc_energy is True:
     ).set_index(index)
     energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
+    energy_adoption = pd.concat([energy_baseline, energy_pathway])
+
     shipments = pd.DataFrame(
         pd.read_csv("podi/data/shipments_projected.csv")
     ).set_index(index)
@@ -170,6 +172,8 @@ else:
     ).set_index(index)
     energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
+    energy_adoption = pd.concat([energy_baseline, energy_pathway])
+
     shipments = (
         pd.DataFrame(pd.read_csv("podi/data/shipments_projected.csv"))
         .set_index(index)
@@ -189,8 +193,8 @@ index = pyam.IAMC_IDX
 
 afolu(scenario, data_start_year, data_end_year, proj_end_year)
 
-afolu = pd.DataFrame(pd.read_csv("podi/data/afolu_adoption.csv")).set_index(index)
-afolu.columns = afolu.columns.astype(int)
+afolu_adoption = pd.DataFrame(pd.read_csv("podi/data/afolu_adoption.csv")).set_index(index)
+afolu_adoption.columns = afolu_adoption.columns.astype(int)
 
 # endregion
 
@@ -200,19 +204,10 @@ afolu.columns = afolu.columns.astype(int)
 
 # region
 
-em_baseline, em_targets_baseline, em_hist = emissions(
-    "baseline",
-    energy_demand,
-    elec_consump,
-    heat_consump,
-    heat_per_adoption,
-    transport_consump,
-    afolu_em,
-    "podi/data/emissions_additional.csv",
-    "podi/data/iamc_data.csv",
-    data_start_year,
-    data_end_year,
-)
+emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_end_year, proj_end_year)
+
+emissions = pd.DataFrame(pd.read_csv("podi/data/emissions.csv")).set_index(index)
+emissions.columns = emissions.columns.astype(int)
 
 em_pathway, em_targets_pathway, em_hist = emissions(
     "pathway",
@@ -228,12 +223,6 @@ em_pathway, em_targets_pathway, em_hist = emissions(
     data_end_year,
 )
 
-em = em_baseline.append(em_pathway)
-
-em_mitigated = (
-    em_baseline.groupby(["Region", "Sector", "Metric"]).sum()
-    - em_pathway.groupby(["Region", "Sector", "Metric"]).sum()
-)
 
 # endregion
 
@@ -6872,6 +6861,17 @@ for i in range(0, len(region_list)):
 scenario = "pathway"
 start_year = start_year
 altscen = str()
+
+em_targets = pd.read_csv("podi/data/iamc_data.csv").set_index(
+    ["Model", "Region", "Scenario", "Variable", "Unit"]
+)
+em_targets.columns = em_targets.columns.astype(int)
+em_targets = em_targets.loc[
+    "MESSAGE-GLOBIOM 1.0",
+    "World ",
+    ["SSP2-Baseline", "SSP2-19", "SSP2-26"],
+    "Emissions|Kyoto Gases",
+].droplevel("Unit")
 
 ndcs = [
     [(2030, 2050), (24, 0), ("50% by 2030", "Net-zero by 2050")],

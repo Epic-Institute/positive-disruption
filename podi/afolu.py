@@ -1,11 +1,9 @@
 # region
 
-from operator import index
-from matplotlib.pyplot import axis, title
+from matplotlib.pyplot import axis, title, xlabel
 import pandas as pd
-from validators import Max
 from podi.adoption_projection import adoption_projection
-from numpy import NaN, divide, empty_like
+from numpy import NaN, divide
 import numpy as np
 from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
@@ -25,22 +23,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     recalc_afolu_historical = False
     # region
     def step2curve(name, variable):
-        name = pd.read_csv(
-            "podi/data/afolu_max_extent_and_flux.csv",
-            usecols=[
-                "model",
-                "scenario",
-                "region",
-                "variable",
-                "unit",
-                "Value 1",
-                "Value 2",
-                "Value 3",
-                "Duration 1 (Years)",
-                "Duration 2 (Years)",
-                "Duration 3 (Years)",
-            ],
-        )
+        name = pd.read_csv("podi/data/afolu_max_extent_and_flux.csv")
 
         name = name[name["variable"].str.contains(variable)]
 
@@ -151,7 +134,47 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         max_extent = step2curve("max_extent", "Max extent")
 
         # Plot
-        max_extent.T.plot(legend=False, title="Maximum Extent [MHa, Tgdm, m3]")
+        max_extentplot = max_extent.copy()
+        max_extentplot.columns = max_extentplot.columns - data_start_year
+        max_extentplot[
+            max_extentplot.index.get_level_values(3).isin(
+                [
+                    "Coastal Restoration|Max extent",
+                    "Cropland Soil Health|Max extent",
+                    "Improved Rice|Max extent",
+                    "Natural Regeneration|Max extent",
+                    "Nitrogen Fertilizer Management|Max extent",
+                    "Optimal Intensity|Max extent",
+                    "Peat Restoration|Max extent",
+                    "Silvopasture|Max extent",
+                    "Trees in Croplands|Max extent",
+                    "Avoided Peat Impacts|Max extent",
+                    "Agroforestry|Max extent",
+                ]
+            )
+        ].T.plot(
+            legend=False,
+            title="Maximum Extent [MHa]",
+            xlabel="Years from implementation",
+        )
+
+        max_extentplot[
+            max_extentplot.index.get_level_values(3).isin(
+                ["Improved Forest Mgmt|Max extent"]
+            )
+        ].T.plot(
+            legend=False,
+            title="Maximum Extent [m3]",
+            xlabel="Years from implementation",
+        )
+
+        max_extentplot[
+            max_extentplot.index.get_level_values(3).isin(["Biochar|Max extent"])
+        ].T.plot(
+            legend=False,
+            title="Maximum Extent [Tgdm]",
+            xlabel="Years from implementation",
+        )
 
         # endregion
 
@@ -177,7 +200,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         # Save
         afolu_historical.to_csv("podi/data/afolu_historical_postprocess.csv")
     else:
-        index = ["model", "scenario", "region", "variable", "unit"]
+        index = pyam.IAMC_IDX
 
         afolu_historical = pd.DataFrame(
             pd.read_csv("podi/data/afolu_historical_postprocess.csv")
@@ -240,7 +263,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         afolu_baseline.to_csv("podi/data/afolu_baseline.csv")
     else:
-        index = ["scenario", "region", "Subvector"]
+        index = pyam.IAMC_IDX
 
         afolu_baseline = pd.DataFrame(
             pd.read_csv("podi/data/afolu_baseline.csv")
@@ -267,8 +290,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     flux.update(flux.divide(1e6))
 
     # Plot
-    flux[
-        flux.index.get_level_values(3).isin(
+    fluxplot = flux.copy()
+    fluxplot.columns = fluxplot.columns - data_start_year
+    fluxplot[
+        fluxplot.index.get_level_values(3).isin(
             [
                 "Coastal Restoration|Avg mitigation potential flux",
                 "Cropland Soil Health|Avg mitigation potential flux",
@@ -283,19 +308,30 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Agroforestry|Avg mitigation potential flux",
             ]
         )
-    ].T.plot(legend=False, title="Avg Mitigation Flux [tCO2e/ha/yr]")
+    ].T.plot(
+        legend=False,
+        title="Avg Mitigation Flux [tCO2e/ha/yr]",
+        xlabel="Years from implementation",
+    )
 
-    flux[
-        flux.index.get_level_values(3).isin(
+    fluxplot[
+        fluxplot.index.get_level_values(3).isin(
             ["Improved Forest Mgmt|Avg mitigation potential flux"]
         )
-    ].T.plot(legend=False, title="Avg Mitigation Flux [tCO2e/m3/yr]")
+    ].T.plot(
+        legend=False,
+        title="Avg Mitigation Flux [tCO2e/m3/yr]",
+        xlabel="Years from implementation",
+    )
 
-    flux[
-        flux.index.get_level_values(3).isin(["Biochar|Avg mitigation potential flux"])
+    fluxplot[
+        fluxplot.index.get_level_values(3).isin(
+            ["Biochar|Avg mitigation potential flux"]
+        )
     ].T.plot(
         legend=False,
         title="Avg Mitigation Flux [tCO2e/Tgdm/yr]",
+        xlabel="Years from implementation",
     )
 
     # endregion
@@ -342,6 +378,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     ).droplevel("Max (Mha)")
 
+    # Plot
     afolu_analogs.T.plot(title="Historical Analog Adoption [%]")
 
     # endregion
@@ -383,8 +420,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     afolu_adoption.update(afolu_adoption.apply(rep, result_type="broadcast", axis=1))
     afolu_adoption = afolu_adoption.droplevel("Analog Name")
 
+    # Plot
     afolu_adoption.T.plot(legend=False, title="AFOLU Adoption [%]")
-    afolu_adoption_per = afolu_adoption
+
     # endregion
 
     # Multiply this by the estimated maximum extent and average mitigation potential flux to get emissions mitigated
@@ -416,6 +454,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         ).fillna(0)
     )
 
+    # Plot
     afolu_adoption.T.plot(legend=False, title="AFOLU Adoption [tCO2e mitigated]")
 
     # Estimate emissions mitigated by avoided pathways
@@ -426,7 +465,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         pd.DataFrame(
             pd.read_csv("podi/data/afolu_avoided_pathways_input.csv").drop(
                 columns=[
-                    "model",
                     "Initial Extent (Mha)",
                     "Mitigation (Mg CO2/ha)",
                 ]
@@ -434,6 +472,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
         .set_index(
             [
+                "model",
                 "scenario",
                 "region",
                 "variable",
@@ -442,24 +481,20 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Rate of Improvement",
             ]
         )
-        .loc[scenario, slice(None), slice(None), slice(None), :]
+        .loc[slice(None), [scenario], slice(None), slice(None), slice(None), :]
     )
 
-    avoided.loc[:, "Avoided Forest Conversion|Observed adoption", :] = (
-        avoided.loc[:, "Avoided Forest Conversion|Observed adoption", :] / 1e1
-    ).values
-
     avoided.columns = avoided.columns.astype(int)
-
     avoided = avoided.loc[:, :proj_end_year]
-
     avoided.loc[:, :data_end_year] = 0
 
     avoided.loc[:, data_end_year + 1 :] = -avoided.loc[
         :, data_end_year + 1 :
     ].parallel_apply(
         lambda x: x.subtract(
-            avoided.loc[x.name[0], x.name[1], x.name[2], :][data_end_year + 1].values[0]
+            avoided.loc[x.name[0], x.name[1], x.name[2], x.name[3], :][
+                data_end_year + 1
+            ].values[0]
         ),
         axis=1,
     )
@@ -505,14 +540,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .dropna(axis=0)
         .rename(columns={"WEB Region": "region"})
     ).set_index(["ISO"])
-    regions.index = regions.index.str.lower()
     regions["region"] = regions["region"].str.lower()
 
     afolu_adoption = (
         afolu_adoption.reset_index()
         .set_index(["region"])
         .merge(regions, left_on=["region"], right_on=["ISO"])
-    ).set_index(pyam.IAM_IDX)
+    ).set_index(pyam.IAMC_IDX)
 
     # endregion
 

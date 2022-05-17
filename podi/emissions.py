@@ -3,42 +3,29 @@
 import pandas as pd
 from numpy import NaN
 import numpy as np
+import pyam
+import os.path
+import traceback
+import matplotlib.pyplot as plt
+import silicone.database_crunchers
+from silicone.utils import download_or_load_sr15
+import aneris
 
 # endregion
 
 
-def emissions(
-    scenario,
-    energy_demand,
-    elec_consump,
-    heat_consump,
-    heat_per_adoption,
-    transport_consump,
-    afolu_em,
-    addtl_em,
-    targets_em,
-    data_start_year,
-    data_end_year,
-):
+def emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_end_year, proj_end_year):
+
+    ##########################################
+    #  CALCULATE EMISSIONS FROM ELECTRICITY  #
+    ##########################################
 
     # region
 
-    em_factors = (
-        pd.read_csv("podi/data/emissions_factors.csv")
-        .drop(columns=["Unit"])
-        .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])
-    ).loc[slice(None), slice(None), slice(None), slice(None), scenario]
-
+    # Load emissions factors
+    em_factors = pd.read_csv("podi/data/emissions_factors.csv").set_index(pyam.IAMC_IDX)
     em_factors.columns = em_factors.columns.astype(int)
-    em_factors = em_factors.loc[:, data_start_year:2100]
-
-    # endregion
-
-    #################
-    #  ELECTRICITY  #
-    #################
-
-    # region
+    em_factors = em_factors.loc[:, data_start_year:proj_end_year]
 
     elec_consump = (
         pd.concat(
@@ -61,9 +48,37 @@ def emissions(
 
     # endregion
 
-    ###############
-    #  BUILDINGS  #
-    ###############
+    ########################################
+    #  CALCULATE EMISSIONS FROM TRANSPORT  #
+    ########################################
+
+    # region
+
+    transport_consump = (
+        pd.concat([transport_consump], keys=["Transport"], names=["Sector"])
+        .reorder_levels(["Region", "Sector", "Metric", "Scenario"])
+        .loc[slice(None), slice(None), slice(None), scenario]
+    )
+
+    transport_consump2 = []
+
+    for i in ["CO2"]:
+        transport_consump2 = pd.DataFrame(transport_consump2).append(
+            pd.concat([transport_consump], keys=[i], names=["Gas"]).reorder_levels(
+                ["Region", "Sector", "Metric", "Gas"]
+            )
+        )
+
+    transport_em = (
+        transport_consump2
+        * em_factors[em_factors.index.isin(transport_consump2.index.values)]
+    ).drop(index=["Bioenergy", "Oil", "Other fuels"], level=2)
+
+    # endregion
+
+    ########################################
+    #  CALCULATE EMISSIONS FROM BUILDINGS  #
+    ########################################
 
     # region
 
@@ -101,13 +116,13 @@ def emissions(
     buildings_em = (
         buildings_consump2
         * em_factors[em_factors.index.isin(buildings_consump2.index.values)]
-    ).loc[:, data_start_year:2100]
+    ).loc[:, data_start_year:proj_end_year]
 
     # endregion
 
-    ###############
-    #  INDUSTRY  #
-    ###############
+    ########################################
+    #  CALCULATE EMISSIONS FROM INDUSTRY  #
+    ########################################
 
     # region
 
@@ -145,41 +160,13 @@ def emissions(
     industry_em = (
         industry_consump2
         * em_factors[em_factors.index.isin(industry_consump2.index.values)]
-    ).loc[:, data_start_year:2100]
+    ).loc[:, data_start_year:proj_end_year]
 
     # endregion
 
-    ###########################
-    #  NONELECTRIC TRANSPORT  #
-    ###########################
-
-    # region
-
-    transport_consump = (
-        pd.concat([transport_consump], keys=["Transport"], names=["Sector"])
-        .reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-        .loc[slice(None), slice(None), slice(None), scenario]
-    )
-
-    transport_consump2 = []
-
-    for i in ["CO2"]:
-        transport_consump2 = pd.DataFrame(transport_consump2).append(
-            pd.concat([transport_consump], keys=[i], names=["Gas"]).reorder_levels(
-                ["Region", "Sector", "Metric", "Gas"]
-            )
-        )
-
-    transport_em = (
-        transport_consump2
-        * em_factors[em_factors.index.isin(transport_consump2.index.values)]
-    ).drop(index=["Bioenergy", "Oil", "Other fuels"], level=2)
-
-    # endregion
-
-    ###########
-    #  AFOLU  #
-    ###########
+    ####################################
+    #  CALCULATE EMISSIONS FROM AFOLU  #
+    ####################################
 
     # region
 
@@ -353,9 +340,11 @@ def emissions(
 
     # endregion
 
-    ##################################
-    #  ADDITIONAL EMISSIONS SOURCES  #
-    ##################################
+    # endregion
+
+    #########################################
+    #  ADD IN ADDITIONAL EMISSIONS SOURCES  #
+    #########################################
 
     # region
 
@@ -1189,7 +1178,7 @@ def emissions(
         )
     )
     addtl_em.columns = addtl_em.columns.astype(int)
-    addtl_em = addtl_em.loc[:, data_start_year:2100]
+    addtl_em = addtl_em.loc[:, data_start_year:proj_end_year]
 
     # remove AFOLU to avoid double counting
     addtl_em = addtl_em.loc[
@@ -1314,9 +1303,19 @@ def emissions(
 
     # endregion
 
-    #################
-    #  COMBINE ALL  #
-    #################
+    ############################################################
+    #  MODEL EMISSIONS OF OTHER GHGS FROM CO2/CH4/N2O RESULTS  #
+    ############################################################
+
+    # region
+
+    https://github.com/GranthamImperial/silicone/tree/master/notebooks
+
+    # endregion
+
+    ###########################
+    #  COMBINE ALL & RELABEL  #
+    ###########################
 
     # region
 
@@ -1337,65 +1336,6 @@ def emissions(
     em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
         ["Region", "Sector", "Metric", "Gas", "Scenario"]
     )
-
-    # endregion
-
-    ##########################
-    #  HISTORICAL EMISSIONS  #
-    ##########################
-
-    # region
-
-    em_hist_old = (
-        pd.read_csv("podi/data/emissions_historical_old.csv")
-        .set_index(["Region", "Unit"])
-        .droplevel("Unit")
-    )
-    em_hist_old.columns = em_hist_old.columns.astype(int)
-
-    # estimate time between data and projections
-    em_hist_old["2019"] = em_hist_old[2018] * (
-        1 + (em_hist_old[2018] - em_hist_old[2017]) / em_hist_old[2017]
-    )
-    em_hist_old.columns = em_hist_old.columns.astype(int)
-
-    # find emissions percent breakdown of historical estimates
-    em.columns = em.columns.astype(int)
-
-    per_em = em.loc[:, data_start_year:data_end_year].apply(
-        lambda x: x.divide(
-            em.loc[x.name[0]].loc[:, data_start_year:data_end_year].sum(axis=0)
-        ),
-        axis=1,
-    )
-
-    em2 = per_em.apply(
-        lambda x: x.multiply(em_hist_old.loc[x.name[0]].squeeze()), axis=1
-    )
-
-    # harmonize emissions projections with current year emissions
-
-    hf = (
-        em2.loc[:, data_end_year]
-        .divide(em.loc[:, data_end_year])
-        .replace(NaN, 0)
-        .replace(0, 1)
-    )
-
-    em = em.apply(
-        lambda x: x.multiply(hf[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]),
-        axis=1,
-    )
-
-    em = em2.join(em.loc[:, 2020:])
-
-    # endregion
-
-    ########################
-    #  RELABEL SUBVECTORS  #
-    ########################
-
-    # region
 
     em = (
         em.rename(
@@ -1527,34 +1467,34 @@ def emissions(
         .sum()
     )
     """
+
     # endregion
 
-    #######################
-    #  EMISSIONS TARGETS  #
-    #######################
+    ##############################################################
+    #  LOAD HISTORICAL EMISSIONS & COMPARE TO MODELED EMISSIONS  #
+    ##############################################################
 
     # region
 
-    em_targets = pd.read_csv(targets_em).set_index(
-        ["Model", "Region", "Scenario", "Variable", "Unit"]
+    # Load historical emissions data from external source
+    emissions_historical = pd.read_csv("podi/data/emissions_historical.csv").set_index(
+        pyam.IAMC_IDX
     )
-    em_targets.columns = em_targets.columns.astype(int)
-    em_targets = em_targets.loc[
-        "MESSAGE-GLOBIOM 1.0",
-        "World ",
-        ["SSP2-Baseline", "SSP2-19", "SSP2-26"],
-        "Emissions|Kyoto Gases",
-    ].droplevel("Unit")
+    emissions_historical.columns = emissions_historical.columns.astype(int)
 
-    # harmonize targets with historical emissions
+    # Harmonize modeled emissions projections with observed historical emissions
 
-    hf = pd.DataFrame(
-        em_hist_old.loc["World "].loc[:, data_end_year].sum()
-        / (em_targets.loc[:, data_end_year]).replace(NaN, 0)
-    )
-
-    em_targets = em_targets * (hf.values)
+    https://aneris.readthedocs.io/en/latest/index.html
 
     # endregion
 
-    return em, em_targets, em_hist_old
+    #################
+    #  SAVE OUTPUT  #
+    #################
+
+    # region
+    emissions.to_csv("podi/data/emissions.csv")
+
+    # endregion
+
+    return
