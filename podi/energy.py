@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # region
 
 import pandas as pd
@@ -10,6 +8,7 @@ from podi.adoption_curve import adoption_curve
 from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
 import os
+import pyam
 
 pandarallel.initialize(nb_workers=4)
 
@@ -24,63 +23,57 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    recalc_energy_historical = False
-    if recalc_energy_historical is True:
-        regions = pd.read_csv("podi/data/IEA/Regions.txt").squeeze("columns")
-        energy_historical2 = pd.DataFrame([])
-        for region in regions:
-            energy_historical = pd.DataFrame(
-                pd.read_fwf(
-                    str("podi/data/IEA/" + region + ".txt"),
-                    colspecs=[
-                        (0, 15),
-                        (16, 31),
-                        (32, 47),
-                        (48, 63),
-                        (64, 70),
-                        (71, -1),
-                    ],
-                    names=["Region", "Product", "Year", "Flow", "Unit", "Value"],
-                )
-            ).replace(["x", "c", ".."], 0)
-
-            # Filter for data start_year
-            energy_historical = energy_historical[
-                (energy_historical["Year"] >= data_start_year)
-                & (energy_historical["Year"] < data_end_year)
-            ]
-
-            # Change values to float
-            energy_historical["Value"] = energy_historical["Value"].astype(float)
-
-            # Drop unit column since all values are in TJ
-            energy_historical.drop("Unit", axis=1, inplace=True)
-
-            # Change from all caps to lowercase
-            energy_historical["Region"] = energy_historical["Region"].str.lower()
-
-            # Format as a dataframe with timeseries as rows
-            energy_historical = pd.pivot_table(
-                energy_historical,
-                values="Value",
-                index=["Region", "Product", "Flow"],
-                columns="Year",
-            ).replace(NaN, 0)
-
-            # Remove duplicate regions created due to name overlaps
-            energy_historical = energy_historical.loc[[region.lower()], :]
-
-            # Build dataframe consisting of all regions
-            energy_historical2 = pd.concat([energy_historical2, energy_historical])
-        energy_historical = energy_historical2
-
-        energy_historical.to_csv("podi/data/energy_historical.csv")
-    else:
+    regions = pd.read_csv("podi/data/IEA/Regions.txt").squeeze("columns")
+    energy_historical2 = pd.DataFrame([])
+    for region in regions:
         energy_historical = pd.DataFrame(
-            pd.read_csv("podi/data/energy_historical.csv")
-        ).set_index(["Region", "Product", "Flow"])
+            pd.read_fwf(
+                str("podi/data/IEA/" + region + ".txt"),
+                colspecs=[
+                    (0, 15),
+                    (16, 31),
+                    (32, 47),
+                    (48, 63),
+                    (64, 70),
+                    (71, -1),
+                ],
+                names=["Region", "Product", "Year", "Flow", "Unit", "Value"],
+            )
+        ).replace(["x", "c", ".."], 0)
 
-    energy_historical.columns = energy_historical.columns.astype(int)
+        # Filter for data start_year
+        energy_historical = energy_historical[
+            (energy_historical["Year"] >= data_start_year)
+            & (energy_historical["Year"] < data_end_year)
+        ]
+
+        # Change values to float
+        energy_historical["Value"] = energy_historical["Value"].astype(float)
+
+        # Change from all caps to lowercase
+        energy_historical["Region"] = energy_historical["Region"].str.lower()
+
+        # Format as a dataframe with timeseries as rows
+        energy_historical = pd.pivot_table(
+            energy_historical,
+            values="Value",
+            index=["Region", "Product", "Flow", "Unit"],
+            columns="Year",
+        ).replace(NaN, 0)
+
+        # Remove duplicate regions created due to name overlaps
+        energy_historical = energy_historical.loc[[region.lower()], :]
+
+        # Build dataframe consisting of all regions
+        energy_historical2 = pd.concat([energy_historical2, energy_historical])
+    energy_historical = energy_historical2
+
+    # Add model and scenario indices
+    energy_historical = pd.concat(
+        [pd.concat([energy_historical], keys=["baseline"], names=["Scenario"])],
+        keys=["PD22"],
+        names=["Model"],
+    )
 
     # Filter product categories that are redundant or unused
     products = (
@@ -167,7 +160,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         )
     ]
 
-    energy_historical = energy_historical.loc[slice(None), products, flows]
+    energy_historical = energy_historical.loc[
+        slice(None), slice(None), slice(None), products, flows
+    ]
 
     # Add IRENA data for select electricity technologies
 
@@ -196,37 +191,26 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     )
     irena.index = irena.index.str.lower()
     irena = irena.reset_index().set_index(
-        [
-            "Region",
-            "Product",
-            "Flow",
-        ]
+        ["Model", "Scenario", "Region", "Product", "Flow", "Unit"]
     )
 
     irena.columns = irena.columns.astype(int)
     irena = irena.loc[:, data_start_year:data_end_year]
 
     # Drop IEA WIND and SOLARPV to avoid duplication with IRENA ONSHORE/OFFSHORE
-    energy_historical.drop(labels="WIND", level=1, inplace=True)
+    energy_historical = energy_historical.drop(labels="WIND", level=3)
 
     energy_historical = pd.concat(
         [
             energy_historical,
-            irena[irena.index.get_level_values(1).isin(["ONSHORE", "OFFSHORE"])],
+            irena[irena.index.get_level_values(3).isin(["ONSHORE", "OFFSHORE"])],
         ]
     )
 
     # endregion
 
-    # endregion
-
-    ###############################
-    #  ADD LABELS & RECATEGORIZE  #
-    ###############################
-
-    # region
-
     # Add product and flow labels to energy_historical
+
     labels = pd.DataFrame(
         pd.read_csv(
             "podi/data/product_flow_labels.csv",
@@ -234,11 +218,10 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "Product",
                 "Flow",
                 "Sector",
-                "Subsector",
                 "EIA Product",
                 "Hydrogen",
                 "Flexible",
-                "Non-Energy Use",
+                "Nonenergy",
             ],
         )
     ).set_index(["Product", "Flow"])
@@ -252,206 +235,294 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         .reset_index()
         .set_index(
             [
+                "Model",
+                "Scenario",
                 "Region",
                 "Sector",
-                "Subsector",
                 "Product",
                 "Flow",
+                "Unit",
                 "EIA Product",
                 "Hydrogen",
                 "Flexible",
-                "Non-Energy Use",
+                "Nonenergy",
             ]
         )
     )
 
-    # Drop rows with NaN index, representing the product/flow combination does not exist in historical data for any region
-    energy_historical = energy_historical[
-        ~energy_historical.index.get_level_values(1).isna()
-    ]
-
-    # For Transportation flows ROAD/DOMESAIR/RAIL that were duplicated to make Two- and three-wheeled/Light-Duty/Medium-Duty/Heavy-Duty flows, scale their energy so the sum of subflows is equal to the original energy estimate
+    # Split ROAD Flow into Two- and three-wheeled, Light, Medium (Buses), Heavy (Trucks)
 
     # region
 
-    subsector_props = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/tech_parameters.csv",
-                usecols=[
-                    "Region",
-                    "Product",
-                    "Scenario",
-                    "Sector",
-                    "Metric",
-                    "Value",
-                ],
-            ),
-        )
-        .set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
-        .loc[
-            slice(None),
-            slice(None),
-            scenario,
-            slice(None),
-            [
-                "Two- and three-wheeled",
-                "Light",
-                "Medium",
-                "Heavy",
-                "Hydrogen",
-                "Non-Hydrogen",
+    subsector_props = pd.DataFrame(
+        pd.read_csv(
+            "podi/data/tech_parameters.csv",
+            usecols=[
+                "Region",
+                "Product",
+                "Scenario",
+                "Sector",
+                "Metric",
+                "Value",
             ],
-        ]
-    )
+        ),
+    ).set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
 
-    energy_historical.update(
-        energy_historical.loc[
-            slice(None),
-            ["Transportation"],
-            slice(None),
-            slice(None),
-            ["ROAD", "DOMESAIR", "RAIL"],
-        ].parallel_apply(
+    # Create Two- and three-wheeled Flow (TTROAD) using estimate of the fraction of ROAD that is Two- and three-wheeled
+    ttroad = (
+        energy_historical[(energy_historical.reset_index().Flow == "ROAD").values]
+        .parallel_apply(
             lambda x: x
             * (
                 subsector_props.loc[
-                    x.name[0], x.name[4], scenario, "Transportation", x.name[2]
+                    x.name[2], "ROAD", "baseline", x.name[3], "Two- and three-wheeled"
                 ].values
             ),
             axis=1,
         )
+        .rename(index={"ROAD": "TTROAD"})
     )
 
-    # Update values for Sector = 'Transportation' , Product_long = 'Electricity' , Flow_long = 'Road' to reflect IEA EV dataset
-
-    # endregion
-
-    # For products HEAT/HEATNS that were duplicated to make Low Temperature/High Temperature products, scale their energy so the sum of the subproducts is equal to the original energy estimate
-
-    # region
-
-    subsector_props = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/tech_parameters.csv",
-                usecols=[
-                    "Region",
-                    "Product",
-                    "Scenario",
-                    "Sector",
-                    "Metric",
-                    "Value",
-                ],
-            ),
-        )
-        .set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
-        .loc[
-            slice(None),
-            slice(None),
-            scenario,
-            slice(None),
-            ["Low Temperature", "High Temperature"],
-        ]
-    )
-
-    energy_historical.update(
-        energy_historical.loc[
-            slice(None),
-            slice(None),
-            slice(None),
-            ["HEAT", "HEATNS"],
-        ].parallel_apply(
+    # Create Light-duty Flow (LIGHTROAD) using estimate of the fraction of ROAD that is Light-duty vehicles
+    lightroad = (
+        energy_historical[(energy_historical.reset_index().Flow == "ROAD").values]
+        .parallel_apply(
             lambda x: x
             * (
                 subsector_props.loc[
-                    "world", x.name[3], scenario, x.name[4], x.name[2]
+                    x.name[2], "ROAD", "baseline", x.name[3], "Light"
                 ].values
             ),
             axis=1,
         )
+        .rename(index={"ROAD": "LIGHTROAD"})
     )
 
-    # endregion
-
-    # For Product NONCRUDE that was duplicated to make Hydrogen/Non-Hydrogen products and flows, scale their energy so the sum of the subflows is equal to the original energy estimate.
-
-    # region
-    subsector_props = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/tech_parameters.csv",
-                usecols=[
-                    "Region",
-                    "Product",
-                    "Scenario",
-                    "Sector",
-                    "Metric",
-                    "Value",
-                ],
-            ),
-        )
-        .set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
-        .loc[
-            slice(None),
-            slice(None),
-            scenario,
-            slice(None),
-            ["Hydrogen", "Non-Hydrogen"],
-        ]
-    )
-
-    energy_historical.update(
-        energy_historical.loc[
-            slice(None), slice(None), ["Hydrogen", "Non-Hydrogen"], ["NONCRUDE"]
-        ].parallel_apply(
+    # Create Medium-duty Flow (MEDIUMROAD) using estimate of the fraction of ROAD that is Medium-duty vehicles (Buses and Vans)
+    mediumroad = (
+        energy_historical[(energy_historical.reset_index().Flow == "ROAD").values]
+        .parallel_apply(
             lambda x: x
             * (
                 subsector_props.loc[
-                    "world", x.name[3], scenario, x.name[4], x.name[2]
+                    x.name[2], "ROAD", "baseline", x.name[3], "Medium"
                 ].values
             ),
             axis=1,
         )
+        .rename(index={"ROAD": "MEDIUMROAD"})
     )
 
-    # Recast Product from NONCRUDE to HYDROGEN
-    energy_historical.reset_index(inplace=True)
-    energy_historical[
-        (energy_historical["Subsector"] == "Hydrogen")
-        & (energy_historical["Product"] == "NONCRUDE")
-    ] = (
-        energy_historical[
-            (energy_historical["Subsector"] == "Hydrogen")
-            & (energy_historical["Product"] == "NONCRUDE")
-        ]
-        .replace({"Hydrogen": "na"})
-        .replace({"NONCRUDE": "HYDROGEN"})
+    # Create Heavy-duty Flow (HEAVYROAD) using estimate of the fraction of ROAD that is Heavy-duty vehicles (Trucks)
+    heavyroad = (
+        energy_historical[(energy_historical.reset_index().Flow == "ROAD").values]
+        .parallel_apply(
+            lambda x: x
+            * (
+                subsector_props.loc[
+                    x.name[2], "ROAD", "baseline", x.name[3], "Heavy"
+                ].values
+            ),
+            axis=1,
+        )
+        .rename(index={"ROAD": "HEAVYROAD"})
     )
 
-    energy_historical.set_index(
+    # Drop ROAD Flow and add TTROAD, LIGHTROAD, MEDIUMROAD, HEAVYROAD
+    energy_historical = pd.concat(
         [
-            "Region",
-            "Sector",
-            "Subsector",
-            "Product",
-            "Flow",
-            "EIA Product",
-            "Hydrogen",
-            "Flexible",
-            "Non-Energy Use",
-        ],
-        inplace=True,
+            energy_historical.drop(labels=["ROAD"], level=5),
+            ttroad,
+            lightroad,
+            mediumroad,
+            heavyroad,
+        ]
     )
 
     # endregion
 
-    # Split Product SOLARPV to rooftop (ROOFTOP) and utility (SOLARPV)
+    # Split DOMESAIR Flow into Short-range, Long-range
+
+    # region
+
+    # Create Short-range Flow (SDOMESAIR) using estimate of the fraction of DOMESAIR that is Short-range
+    sdomesair = (
+        energy_historical[(energy_historical.reset_index().Flow == "DOMESAIR").values]
+        .parallel_apply(
+            lambda x: x
+            * (
+                subsector_props.loc[
+                    x.name[2], "DOMESAIR", "baseline", x.name[3], "Light"
+                ].values
+            ),
+            axis=1,
+        )
+        .rename(index={"DOMESAIR": "SDOMESAIR"})
+    )
+
+    # Create Long-range Flow (LDOMESAIR) using estimate of the fraction of DOMESAIR that is Long-range
+    ldomesair = (
+        energy_historical[(energy_historical.reset_index().Flow == "DOMESAIR").values]
+        .parallel_apply(
+            lambda x: x
+            * (
+                subsector_props.loc[
+                    x.name[2], "DOMESAIR", "baseline", x.name[3], "Heavy"
+                ].values
+            ),
+            axis=1,
+        )
+        .rename(index={"DOMESAIR": "LDOMESAIR"})
+    )
+
+    # Drop DOMESAIR Flow and add SDOMESAIR and LDOMESAIR
+    energy_historical = pd.concat(
+        [energy_historical.drop(labels=["DOMESAIR"], level=5), sdomesair, ldomesair]
+    )
+
+    # endregion
+
+    # Split RAIL Flow into Light-duty, Heavy-duty
+
+    # region
+
+    # Create Light-duty Flow (LIGHTRAIL) using estimate of the fraction of RAIL that is Light-duty
+    lightrail = (
+        energy_historical[(energy_historical.reset_index().Flow == "RAIL").values]
+        .parallel_apply(
+            lambda x: x
+            * (
+                subsector_props.loc[
+                    x.name[2], "RAIL", "baseline", x.name[3], "Light"
+                ].values
+            ),
+            axis=1,
+        )
+        .rename(index={"RAIL": "LIGHTRAIL"})
+    )
+
+    # Create Heavy-duty Flow (HEAVYRAIL) using estimate of the fraction of RAIL that is Heavy-duty
+    heavyrail = (
+        energy_historical[(energy_historical.reset_index().Flow == "RAIL").values]
+        .parallel_apply(
+            lambda x: x
+            * (
+                subsector_props.loc[
+                    x.name[2], "RAIL", "baseline", x.name[3], "Heavy"
+                ].values
+            ),
+            axis=1,
+        )
+        .rename(index={"RAIL": "HEAVYRAIL"})
+    )
+
+    # Drop RAIL Flow and add LIGHTRAIL and HEAVYRAIL
+    energy_historical = pd.concat(
+        [energy_historical.drop(labels=["RAIL"], level=5), lightrail, heavyrail]
+    )
+
+    # endregion
+
+    # Split HEAT & HEATNS Products into LHEAT/LHEATNS (low temperature) and HHEAT/HHEATNS (high temperature) heat
+
+    # region
+
+    # Create Low Temperature Heat Product (LHEAT) using estimate of the fraction of HEAT that is low temperature
+    lheat = (
+        energy_historical[
+            (
+                (energy_historical.reset_index().Product == "HEAT")
+                | (energy_historical.reset_index().Product == "HEATNS")
+            ).values
+        ]
+        .parallel_apply(
+            lambda x: x
+            * (
+                subsector_props.loc[
+                    "world", x.name[4], "baseline", x.name[5], "Low Temperature"
+                ].values
+            ),
+            axis=1,
+        )
+        .rename(index={"HEAT": "LHEAT", "HEATNS": "LHEATNS"})
+    )
+
+    # Create High Temperature Heat Product (HHEAT) using estimate of the fraction of HEAT that is high temperature
+    hheat = (
+        energy_historical[
+            (
+                (energy_historical.reset_index().Product == "HEAT")
+                | (energy_historical.reset_index().Product == "HEATNS")
+            ).values
+        ]
+        .parallel_apply(
+            lambda x: x
+            * (
+                1
+                - subsector_props.loc[
+                    "world", x.name[4], "baseline", x.name[5], "Low Temperature"
+                ].values
+            ),
+            axis=1,
+        )
+        .rename(index={"HEAT": "HHEAT", "HEATNS": "HHEATNS"})
+    )
+
+    # Drop HEAT, HEATNS Products and add LHEAT, LHEATNS, HHEAT, HHEATNS
+    energy_historical = pd.concat(
+        [energy_historical.drop(labels=["HEAT", "HEATNS"], level=4), lheat, hheat]
+    )
+
+    # endregion
+
+    # Split NONCRUDE Product into HYDROGEN and NONCRUDE
+
+    # region
+
+    # Create HYDROGEN Product (HYDROGEN) using estimate of the fraction of NONCRUDE that is Hydrogen
+    hydrogen = (
+        energy_historical[
+            (energy_historical.reset_index().Product == "NONCRUDE").values
+        ]
+        .parallel_apply(
+            lambda x: x
+            * (
+                subsector_props.loc[
+                    "world", x.name[4], "baseline", x.name[5], "Hydrogen"
+                ].values
+            ),
+            axis=1,
+        )
+        .rename(index={"NONCRUDE": "HYDROGEN"})
+    )
+
+    # Update NONCRUDE Product to be reduced by the estimate of HYDROGEN
+    noncrude = energy_historical[
+        (energy_historical.reset_index().Product == "NONCRUDE").values
+    ].parallel_apply(
+        lambda x: x
+        * (
+            1
+            - subsector_props.loc[
+                "world", x.name[4], "baseline", x.name[5], "Hydrogen"
+            ].values
+        ),
+        axis=1,
+    )
+
+    # Drop old NONCRUDE Product and add HYDROGEN and new NONCRUDE
+    energy_historical = pd.concat(
+        [energy_historical.drop(labels=["NONCRUDE"], level=4), hydrogen, noncrude]
+    )
+
+    # endregion
+
+    # Split SOLARPV Product into ROOFTOP and SOLARPV (utility) scale solar pv
 
     # region
     energy_historical.update(
-        energy_historical.loc[
-            slice(None), slice(None), slice(None), ["SOLARPV"]
+        energy_historical[
+            (energy_historical.reset_index().Product == "SOLARPV").values
         ].parallel_apply(lambda x: x * 0.6, axis=1)
     )
 
@@ -459,8 +530,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         [
             energy_historical,
             (
-                energy_historical.loc[
-                    slice(None), slice(None), slice(None), ["SOLARPV"]
+                energy_historical[
+                    (energy_historical.reset_index().Product == "SOLARPV").values
                 ].parallel_apply(lambda x: x * 0.4, axis=1)
             ).rename(
                 index={
@@ -471,38 +542,12 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ]
     )
 
-    # Recast Product from NONCRUDE to HYDROGEN
-    energy_historical.reset_index(inplace=True)
-    energy_historical[
-        (energy_historical["Subsector"] == "Hydrogen")
-        & (energy_historical["Product"] == "NONCRUDE")
-    ] = (
-        energy_historical[
-            (energy_historical["Subsector"] == "Hydrogen")
-            & (energy_historical["Product"] == "NONCRUDE")
-        ]
-        .replace({"Hydrogen": "na"})
-        .replace({"NONCRUDE": "HYDROGEN"})
-    )
-
-    energy_historical.set_index(
-        [
-            "Region",
-            "Sector",
-            "Subsector",
-            "Product",
-            "Flow",
-            "EIA Product",
-            "Hydrogen",
-            "Flexible",
-            "Non-Energy Use",
-        ],
-        inplace=True,
-    )
-
     # endregion
 
     # Add EIA region labels to energy_historical in order to match EIA regional projected growth of each product
+
+    # region
+
     regions = (
         pd.DataFrame(
             pd.read_csv(
@@ -524,6 +569,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         .reset_index()
         .set_index(["EIA Region"])
     )
+
+    # endregion
 
     # Add categories and long names for products and flows
 
@@ -567,24 +614,22 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
-    # Add scenario
-    energy_historical["Scenario"] = scenario
-
     energy_historical = energy_historical.reset_index().set_index(
         [
+            "Model",
             "Scenario",
             "Region",
             "Sector",
-            "Subsector",
             "Product_category",
             "Product_long",
             "Product",
             "Flow_category",
             "Flow_long",
             "Flow",
+            "Unit",
             "Hydrogen",
             "Flexible",
-            "Non-Energy Use",
+            "Nonenergy",
             "EIA Region",
             "EIA Product",
         ]
@@ -593,6 +638,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Convert Electricity output flow category from GWh to TJ
+
     energy_historical.update(
         energy_historical[
             energy_historical.index.get_level_values(7) == "Electricity output"
@@ -600,11 +646,15 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Convert AVBUNK & AVMAR to be positive (they were negative by convention representing an 'export' to an international region WORLDAV and WORLDMAR)
+
     energy_historical[
         energy_historical.index.get_level_values(9).isin(["AVBUNK", "MARBUNK"])
     ] = energy_historical[
         energy_historical.index.get_level_values(9).isin(["AVBUNK", "MARBUNK"])
     ].abs()
+
+    # Save to CSV file
+    energy_historical.to_csv("podi/data/energy_historical.csv")
 
     # endregion
 
@@ -646,19 +696,20 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .reset_index()
             .set_index(
                 [
+                    "Model",
                     "Scenario",
                     "Region",
                     "Sector",
-                    "Subsector",
                     "Product_category",
                     "Product_long",
                     "Product",
                     "Flow_category",
                     "Flow_long",
                     "Flow",
+                    "Unit",
                     "Hydrogen",
                     "Flexible",
-                    "Non-Energy Use",
+                    "Nonenergy",
                     "EIA Region",
                     "EIA Product",
                 ]
@@ -676,25 +727,24 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             curve_smooth(energy_baseline.loc[:, data_end_year:], "linear", 2)
         )
 
-        # Save to csv file
-        energy_baseline.rename(index={scenario: "baseline"}).to_csv(
-            "podi/data/energy_baseline.csv"
-        )
+        # Save to CSV file
+        energy_baseline.to_csv("podi/data/energy_baseline.csv")
 
     index = [
+        "Model",
         "Scenario",
         "Region",
         "Sector",
-        "Subsector",
         "Product_category",
         "Product_long",
         "Product",
         "Flow_category",
         "Flow_long",
         "Flow",
+        "Unit",
         "Hydrogen",
         "Flexible",
-        "Non-Energy Use",
+        "Nonenergy",
     ]
 
     energy_baseline = pd.DataFrame(
@@ -729,7 +779,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         )
         .set_index(["Region", "Product", "Scenario", "Sector", "Metric"])
         .loc[
-            energy_baseline.index.get_level_values(1).unique(),
+            energy_baseline.index.get_level_values(2).unique(),
             [
                 "biofuels_waste ef ratio",
                 "biofuels_waste addtl eff",
@@ -833,7 +883,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                         "Product",
                         "Flow",
                         "Sector",
-                        "Subsector",
                         "WWS EF Product",
                         "WWS Upstream Product",
                         "WWS Addtl Efficiency",
@@ -854,7 +903,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 [
                     "Region",
                     "Scenario",
-                    "Subsector",
                     "IEA Product",
                     "Flow",
                     "WWS Upstream Product",
@@ -868,7 +916,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             [
                 "Region",
                 "Sector",
-                "Subsector",
                 "IEA Product",
                 "Flow",
                 "WWS Upstream Product",
@@ -884,24 +931,22 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     upstream_ratios = ef_ratios.copy()
 
     upstream_ratios.update(
-        upstream_ratios[upstream_ratios.index.get_level_values(5) == "Y"]
+        upstream_ratios[upstream_ratios.index.get_level_values(4) == "Y"]
         .parallel_apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1)
         .fillna(0)
     )
 
     # Set upstream ratios in ef_ratios to 1 so upstream reduction is not double counted
-    ef_ratios[ef_ratios.index.get_level_values(5) == "Y"] = 1
+    ef_ratios[ef_ratios.index.get_level_values(4) == "Y"] = 1
     ef_ratios = ef_ratios.sort_index()
 
-    upstream_ratios[upstream_ratios.index.get_level_values(5) == "N"] = 1
+    upstream_ratios[upstream_ratios.index.get_level_values(4) == "N"] = 1
     upstream_ratios = upstream_ratios.sort_index()
 
     # Reduce energy by the upstream energy reductions from fossil fuel/biofuel/bioenergy/uranium mining/transport/processing
     energy_post_upstream = energy_baseline.parallel_apply(
         lambda x: x.mul(
-            upstream_ratios.loc[
-                x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]
-            ].squeeze()
+            upstream_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze()
         ),
         axis=1,
     )
@@ -915,7 +960,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     labels = (
         labels.reset_index()
-        .drop(columns=["WWS Upstream Product", "Product", "Subsector"])
+        .drop(columns=["WWS Upstream Product", "Product"])
         .set_index(["Sector", "WWS Addtl Efficiency"])
         .rename_axis(index={"WWS Addtl Efficiency": "Product"})
         .rename(columns={"Product": "IEA Product"})
@@ -948,12 +993,13 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     energy_post_addtl_eff = energy_post_upstream.parallel_apply(
         lambda x: x.mul(
-            addtl_eff.loc[x.name[1], x.name[2], x.name[6], x.name[9]].squeeze()
+            addtl_eff.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze()
         ),
         axis=1,
     )
 
     # Estimate energy reduction and fuel shifts due to electrification
+
     # region
 
     # Isolate the energy that gets replaced with (a reduced amount of) energy from electricity. Each row of energy is multiplied by ((ef[0] - ef[i]) / (ef[0] - ef[-1]), which represents the percent of energy that undergoes electrification in each year. This does not count preexisting electricity, except for nuclear, which is estimated to shift to renewables, and is treated in subsequent steps.
@@ -961,20 +1007,18 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         lambda x: x.mul(
             (
                 (
-                    ef_ratios.loc[x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]]
+                    ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]]
                     .squeeze()
                     .iloc[0]
                     - ef_ratios.loc[
-                        x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]
+                        x.name[2], x.name[3], x.name[6], x.name[9]
                     ].squeeze()
                 )
                 / (
-                    ef_ratios.loc[x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]]
+                    ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]]
                     .squeeze()
                     .iloc[0]
-                    - ef_ratios.loc[
-                        x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]
-                    ]
+                    - ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]]
                     .squeeze()
                     .iloc[-1]
                 )
@@ -988,9 +1032,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         energy_electrified.index.get_level_values(7) != "Electricity output"
     ].parallel_apply(
         lambda x: x.mul(
-            ef_ratios.loc[x.name[1], x.name[2], x.name[3], x.name[6], x.name[9]]
-            .squeeze()
-            .iloc[-1]
+            ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze().iloc[-1]
         ),
         axis=1,
     )
@@ -1060,16 +1102,17 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     energy_reduced_electrified2 = (
         energy_reduced_electrified.groupby(
             [
+                "Model",
                 "Scenario",
                 "Region",
                 "Sector",
-                "Subsector",
                 "Flow_category",
                 "Flow_long",
                 "Flow",
+                "Unit",
                 "Hydrogen",
                 "Flexible",
-                "Non-Energy Use",
+                "Nonenergy",
             ]
         )
         .sum()
@@ -1096,19 +1139,20 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     energy_reduced_electrified3.set_index(
         [
+            "Model",
             "Scenario",
             "Region",
             "Sector",
-            "Subsector",
             "Product_category",
             "Product_long",
             "Product",
             "Flow_category",
             "Flow_long",
             "Flow",
+            "Unit",
             "Hydrogen",
             "Flexible",
-            "Non-Energy Use",
+            "Nonenergy",
         ],
         inplace=True,
     )
@@ -1123,19 +1167,20 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         )
         .groupby(
             [
+                "Model",
                 "Scenario",
                 "Region",
                 "Sector",
-                "Subsector",
                 "Product_category",
                 "Product_long",
                 "Product",
                 "Flow_category",
                 "Flow_long",
                 "Flow",
+                "Unit",
                 "Hydrogen",
                 "Flexible",
-                "Non-Energy Use",
+                "Nonenergy",
             ]
         )
         .sum()
@@ -1150,25 +1195,18 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
     # For each region, find the percent of total electricity consumption met by each renewable product.
-    elec_supply = energy_post_electrification.loc[
-        [scenario],
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        ["Electricity output"],
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        ["N"],
-        :,
+    elec_supply = energy_post_electrification[
+        (
+            (
+                energy_post_electrification.reset_index().Flow_category
+                == "Electricity output"
+            ).values
+        )
+        & ((energy_post_electrification.reset_index().Nonenergy == "N").values)
     ]
 
     per_elec_supply = elec_supply.parallel_apply(
-        lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[1]]),
+        lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[2]]),
         axis=1,
     ).fillna(0)
 
@@ -1187,7 +1225,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[1], x.name[6], scenario, x.name[2]],
+                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
                 x,
                 scenario,
                 data_start_year,
@@ -1216,7 +1254,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     ]
                     .groupby("Region")
                     .sum()
-                    .loc[x.name[1]]
+                    .loc[x.name[2]]
                 ),
                 axis=1,
             )
@@ -1236,7 +1274,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     ]
                     .groupby("Region")
                     .sum()
-                    .loc[x.name[1]]
+                    .loc[x.name[2]]
                 ),
                 axis=1,
             )
@@ -1266,7 +1304,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     ]
                     .groupby("Region")
                     .sum()
-                    .loc[x.name[1]]
+                    .loc[x.name[2]]
                 ),
                 axis=1,
             )
@@ -1287,7 +1325,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     ]
                     .groupby("Region")
                     .sum()
-                    .loc[x.name[1]]
+                    .loc[x.name[2]]
                 ),
                 axis=1,
             )
@@ -1325,8 +1363,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     lambda x: x.multiply(
                         nonrenewable_to_renewable.groupby("Region")
                         .sum(0)
-                        .loc[x.name[1]]
-                        + elec_supply.groupby("Region").sum(0).loc[x.name[1]]
+                        .loc[x.name[2]]
+                        + elec_supply.groupby("Region").sum(0).loc[x.name[2]]
                     ),
                     axis=1,
                 )
@@ -1352,37 +1390,39 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     energy_post_electrification.set_index(
         [
+            "Model",
             "Scenario",
             "Region",
             "Sector",
-            "Subsector",
             "Product_category",
             "Product_long",
             "Product",
             "Flow_category",
             "Flow_long",
             "Flow",
+            "Unit",
             "Hydrogen",
             "Flexible",
-            "Non-Energy Use",
+            "Nonenergy",
         ]
     )
 
     energy_post_electrification = energy_post_electrification.groupby(
         [
+            "Model",
             "Scenario",
             "Region",
             "Sector",
-            "Subsector",
             "Product_category",
             "Product_long",
             "Product",
             "Flow_category",
             "Flow_long",
             "Flow",
+            "Unit",
             "Hydrogen",
             "Flexible",
-            "Non-Energy Use",
+            "Nonenergy",
         ]
     ).sum()
 
@@ -1390,7 +1430,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Recalculate percent of total consumption each technology meets
     per_elec_supply = elec_supply.parallel_apply(
-        lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[1]]),
+        lambda x: x.divide(elec_supply.groupby(["Region"]).sum(0).loc[x.name[2]]),
         axis=1,
     ).fillna(0)
 
@@ -1411,29 +1451,17 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     renewables = ["GEOTHERM", "SOLARTH"]
 
     # For each region, for each subsector ('Low Temperature', 'High Temperature'), find the percent of total heat consumption met by each renewable product. heat_supply is 'Heat output' from the 'Electricity and Heat' product category, plus other products that are consumed within residential, commercial, and industrial sectors directly for heat.
-    heat_supply = energy_post_electrification.loc[
-        [scenario],
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        ["Heat output"],
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        ["N"],
-        :,
+    heat_supply = energy_post_electrification[
+        (
+            (
+                energy_post_electrification.reset_index().Flow_category == "Heat output"
+            ).values
+        )
+        & ((energy_post_electrification.reset_index().Nonenergy == "N").values)
     ]
 
     per_heat_supply = heat_supply.parallel_apply(
-        lambda x: x.divide(
-            heat_supply.groupby(["Region", "Subsector"])
-            .sum(0)
-            .loc[x.name[1], x.name[3]]
-        ),
+        lambda x: x.divide(heat_supply.groupby(["Region"]).sum(0).loc[x.name[2]]),
         axis=1,
     ).fillna(0)
 
@@ -1442,7 +1470,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         per_heat_supply[per_heat_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[1], x.name[6], scenario, x.name[2]],
+                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
                 x,
                 scenario,
                 data_start_year,
@@ -1461,25 +1489,20 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ].parallel_apply(
             lambda x: x.multiply(
                 heat_supply[heat_supply.index.get_level_values(6).isin(renewables)]
-                .groupby(["Region", "Subsector"])
+                .groupby(["Region"])
                 .sum(0)
-                .loc[x.name[1], x.name[3]]
+                .loc[x.name[2]]
             ),
             axis=1,
         )
     )
 
     # Recalculate percent of total consumption each technology meets
-    """
     per_heat_supply = heat_supply.parallel_apply(
-        lambda x: x.divide(
-            heat_supply.groupby(["Region", "Subsector"])
-            .sum(0)
-            .loc[x.name[1], x.name[3]]
-        ),
+        lambda x: x.divide(heat_supply.groupby(["Region"]).sum(0).loc[x.name[2]]),
         axis=1,
     ).fillna(0)
-    """
+
     # Update energy_post electrification with new renewables technology mix values
     energy_post_electrification.update(heat_supply)
 
@@ -1493,31 +1516,20 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     renewables = ["HYDROGEN"]
 
-    # For each region, for each subsector ('Light', 'Medium', 'Heavy', 'Two- and three-wheeled'), find the percent of total nonelectric energy consumption met by each product.
-
-    transport_supply = energy_post_electrification.loc[
-        [scenario],
-        slice(None),
-        ["Transportation"],
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        ["Final consumption"],
-        slice(None),
-        slice(None),
-        slice(None),
-        slice(None),
-        ["N"],
-        :,
+    # For each region, find the percent of total nonelectric energy consumption met by each product.
+    transport_supply = energy_post_electrification[
+        ((energy_post_electrification.reset_index().Sector == "Transportation").values)
+        & (
+            (
+                energy_post_electrification.reset_index().Flow_category
+                == "Final consumption"
+            ).values
+        )
+        & ((energy_post_electrification.reset_index().Nonenergy == "N").values)
     ]
 
     per_transport_supply = transport_supply.parallel_apply(
-        lambda x: x.divide(
-            transport_supply.groupby(["Region", "Subsector"])
-            .sum(0)
-            .loc[x.name[1], x.name[3]]
-        ),
+        lambda x: x.divide(transport_supply.groupby(["Region"]).sum(0).loc[x.name[2]]),
         axis=1,
     ).fillna(0)
 
@@ -1528,7 +1540,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[1], x.name[6], scenario, x.name[2]],
+                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
                 x,
                 scenario,
                 data_start_year,
@@ -1549,9 +1561,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 transport_supply[
                     transport_supply.index.get_level_values(6).isin(renewables)
                 ]
-                .groupby(["Region", "Subsector"])
+                .groupby(["Region"])
                 .sum(0)
-                .loc[x.name[1], x.name[3]]
+                .loc[x.name[2]]
             ),
             axis=1,
         )
@@ -1559,11 +1571,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Recalculate percent of total consumption each technology meets
     per_transport_supply = transport_supply.parallel_apply(
-        lambda x: x.divide(
-            transport_supply.groupby(["Region", "Subsector"])
-            .sum(0)
-            .loc[x.name[1], x.name[3]]
-        ),
+        lambda x: x.divide(transport_supply.groupby(["Region"]).sum(0).loc[x.name[2]]),
         axis=1,
     ).fillna(0)
 
@@ -1580,19 +1588,20 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Load shipment historical data
     index = [
+        "Model",
         "Scenario",
         "Region",
         "Sector",
-        "Subsector",
         "Product_category",
         "Product_long",
         "Product",
         "Flow_category",
         "Flow_long",
         "Flow",
+        "Unit",
         "Hydrogen",
         "Flexible",
-        "Non-Energy Use",
+        "Nonenergy",
         "Source",
     ]
 
@@ -1635,6 +1644,22 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
+    # Drop rows that have all zeros
+    energy_post_upstream = energy_post_upstream[energy_post_upstream.sum(axis=1) != 0]
+    energy_post_addtl_eff = energy_post_addtl_eff[
+        energy_post_addtl_eff.sum(axis=1) != 0
+    ]
+    energy_electrified = energy_electrified[energy_electrified.sum(axis=1) != 0]
+    energy_reduced_electrified = energy_reduced_electrified[
+        energy_reduced_electrified.sum(axis=1) != 0
+    ]
+    energy_post_electrification = energy_post_electrification[
+        energy_post_electrification.sum(axis=1) != 0
+    ]
+    per_elec_supply = per_elec_supply[per_elec_supply.sum(axis=1) != 0]
+    per_heat_supply = per_heat_supply[per_heat_supply.sum(axis=1) != 0]
+    per_transport_supply = per_transport_supply[per_transport_supply.sum(axis=1) != 0]
+
     # Energy after removing upstream fossil fuel demand
     energy_post_upstream.to_csv("podi/data/energy_post_upstream.csv")
 
@@ -1657,6 +1682,28 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Shipments
     shipments.to_csv("podi/data/shipments_projected.csv")
+
+    # endregion
+
+    ############################
+    #  CONVERT TO IAMC FORMAT  #
+    ############################
+
+    # region
+
+    # Concat Sector, Subsector, Product, Flow
+    energy_post_electrification_pyam = pyam.IamDataFrame(
+        energy_post_electrification.reset_index().drop(
+            columns=[
+                "Product_category",
+                "Product_long",
+                "Flow_category",
+                "Flow_long",
+                "Nonenergy",
+            ]
+        ),
+        variable=["Sector", "Product", "Flow", "Hydrogen", "Flexible"],
+    )
 
     # endregion
 

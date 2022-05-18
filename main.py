@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 from podi.energy import energy
 from podi.afolu import afolu
-from podi.afolu2030 import afolu2030
 from podi.emissions import emissions
 from podi.results_analysis import results_analysis
 from podi.cdr.cdr_main import cdr_mix
@@ -34,9 +33,10 @@ import fair
 from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
 from fair.constants import radeff
-import hvplot.pandas
 import pyam
 import random
+import hvplot.pandas
+import panel as pn
 
 pd.options.display.float_format = "{:,.0f}".format
 
@@ -85,7 +85,7 @@ if recalc_energy is True:
         "Flow",
         "Hydrogen",
         "Flexible",
-        "Non-Energy Use",
+        "Nonenergy",
     ]
 
     energy_baseline = pd.DataFrame(
@@ -139,7 +139,7 @@ else:
         "Flow",
         "Hydrogen",
         "Flexible",
-        "Non-Energy Use",
+        "Nonenergy",
     ]
 
     energy_baseline = pd.DataFrame(
@@ -187,12 +187,13 @@ else:
 # AFOLU #
 #########
 
+recalc_afolu = False
 # region
 
+if recalc_afolu is True:
+    afolu(scenario, data_start_year, data_end_year, proj_end_year)
+
 index = pyam.IAMC_IDX
-
-afolu(scenario, data_start_year, data_end_year, proj_end_year)
-
 afolu_adoption = pd.DataFrame(pd.read_csv("podi/data/afolu_adoption.csv")).set_index(index)
 afolu_adoption.columns = afolu_adoption.columns.astype(int)
 
@@ -202,27 +203,15 @@ afolu_adoption.columns = afolu_adoption.columns.astype(int)
 # EMISSIONS #
 #############
 
+recalc_emissions = False
 # region
 
-emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_end_year, proj_end_year)
+if recalc_emissions is True:
+    emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_end_year, proj_end_year)
 
-emissions = pd.DataFrame(pd.read_csv("podi/data/emissions.csv")).set_index(index)
-emissions.columns = emissions.columns.astype(int)
-
-em_pathway, em_targets_pathway, em_hist = emissions(
-    "pathway",
-    energy_demand,
-    elec_consump,
-    heat_consump,
-    heat_per_adoption,
-    transport_consump,
-    afolu_em,
-    "podi/data/emissions_additional.csv",
-    "podi/data/iamc_data.csv",
-    data_start_year,
-    data_end_year,
-)
-
+index = pyam.IAMC_IDX
+emissions_output = pd.DataFrame(pd.read_csv("podi/data/emissions_output.csv")).set_index(index)
+emissions_output.columns = emissions_output.columns.astype(int)
 
 # endregion
 
@@ -2003,13 +1992,13 @@ flow_category = slice(None)
 nonenergyuse = ['N']
 
 # Fix EV electricity percent
-energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1057).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1057).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.6388).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.6388).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1278).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1278).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1277).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1277).values
 
 
 # Percent of transport energy that is electric or nonelectric renewables
@@ -2581,13 +2570,13 @@ flow_category = slice(None)
 nonenergyuse = ['N']
 
 # Fix EV electricity percent
-energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1057).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1057).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.6388).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.6388).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1278).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1278).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1277).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1277).values
 
 
 # Percent of transport energy that is electric or nonelectric renewables
@@ -4367,13 +4356,13 @@ flow_category = slice(None)
 nonenergyuse = ['N']
 
 # Fix EV electricity percent
-energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1057).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1057).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.6388).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.6388).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1278).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1278).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1277).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1277).values
 
 # Percent of transport energy that is electric or nonelectric renewables
 transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['ELECTR', 'HYDROGEN'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), ["ROAD"], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long']).sum().sum(0)) * 100
@@ -4497,13 +4486,13 @@ flow_category = slice(None)
 nonenergyuse = ['N']
 
 # Fix EV electricity percent
-energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1057).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Two- and three-wheeled'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1057).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.6388).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Light'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.6388).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1278).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Medium'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region', 'Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1278).values
 
-energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use']).sum() * 0.1277).values
+energy_pathway.loc[scenario, region, ['Transportation'], ['Heavy'], product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse] = (energy_pathway.loc[scenario, region, ['Transportation'], slice(None), product_category, slice(None), ['ELECTR'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].groupby(['Scenario', 'Region','Sector', 'Product_category', 'Product_long', 'Product', 'Flow_category', 'Flow_long', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy']).sum() * 0.1277).values
 
 # Percent of transport energy that is electric or nonelectric renewables
 transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), ['ELECTR', 'HYDROGEN'], flow_category, slice(None),["ROAD"], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long']).sum().divide(energy_pathway.loc[scenario, region, ['Transportation'], subsector, product_category, slice(None), slice(None), slice(None), slice(None), ["ROAD"], slice(None), slice(None), nonenergyuse].loc[:, start_year:end_year].groupby(['Sector','Subsector','Product_long']).sum().sum(0)) * 100
@@ -8848,7 +8837,7 @@ product_category = slice(None)
 product = slice(None)
 flow_category = "Final consumption"  # Choose 'Final consumption' (applicable to Industrial/Transportation/Commercial/Residential); 'Energy industry own use and Losses' (applicable to Electric Power/Industrial/Transportation); 'Supply'(applicable to Transportation); 'Transformation processes'(applicable to Electric Power/Industrial); 'Electricity output'(applicable to Electric Power/Industrial); 'Heat output'(applicable to Industrial)
 flow = slice(None)
-groupby = "Product_long"  # Choose 'Subsector', 'Product_category', 'Product', 'Flow', 'Hydrogen', 'Flexible', 'Non-Energy Use'
+groupby = "Product_long"  # Choose 'Subsector', 'Product_category', 'Product', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy'
 
 for sector in energy_pathway.index.get_level_values(2).unique():
     # Calculate wedge due to removal of upstream demand 
@@ -8865,7 +8854,7 @@ for sector in energy_pathway.index.get_level_values(2).unique():
         "Flow",
         "Hydrogen",
         "Flexible",
-        "Non-Energy Use",
+        "Nonenergy",
     ]
 
     energy_demand_post_upstream = pd.DataFrame(

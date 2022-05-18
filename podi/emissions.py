@@ -14,153 +14,32 @@ import aneris
 # endregion
 
 
-def emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_end_year, proj_end_year):
+def emissions(
+    scenario,
+    energy_adoption,
+    afolu_adoption,
+    data_start_year,
+    data_end_year,
+    proj_end_year,
+):
 
-    ##########################################
-    #  CALCULATE EMISSIONS FROM ELECTRICITY  #
-    ##########################################
+    #####################################
+    #  CALCULATE EMISSIONS FROM ENERGY  #
+    #####################################
 
     # region
 
     # Load emissions factors
-    em_factors = pd.read_csv("podi/data/emissions_factors.csv").set_index(pyam.IAMC_IDX)
-    em_factors.columns = em_factors.columns.astype(int)
-    em_factors = em_factors.loc[:, data_start_year:proj_end_year]
-
-    elec_consump = (
-        pd.concat(
-            [elec_consump], keys=["Electricity"], names=["Sector"]
-        ).reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-    ).loc[slice(None), slice(None), slice(None), scenario]
-
-    elec_consump2 = []
-
-    for i in ["CO2"]:
-        elec_consump2 = pd.DataFrame(elec_consump2).append(
-            pd.concat([elec_consump], keys=[i], names=["Gas"]).reorder_levels(
-                ["Region", "Sector", "Metric", "Gas"]
-            )
-        )
-
-    elec_em = (
-        elec_consump2 * em_factors[em_factors.index.isin(elec_consump2.index.values)]
+    emission_factors = pd.read_csv("podi/data/emission_factors.csv").set_index(
+        pyam.IAMC_IDX
     )
+    emission_factors.columns = emission_factors.columns.astype(int)
+    emission_factors = emission_factors.loc[:, data_start_year:proj_end_year]
 
-    # endregion
-
-    ########################################
-    #  CALCULATE EMISSIONS FROM TRANSPORT  #
-    ########################################
-
-    # region
-
-    transport_consump = (
-        pd.concat([transport_consump], keys=["Transport"], names=["Sector"])
-        .reorder_levels(["Region", "Sector", "Metric", "Scenario"])
-        .loc[slice(None), slice(None), slice(None), scenario]
+    emissions_output = energy_adoption.timeseries().multiply(emission_factors)
+    emissions_output.index = emissions_output.index.set_levels(
+        emissions_output.index.levels[4].str.replace("MtCO2/TJ", "MtCO2"), level=4
     )
-
-    transport_consump2 = []
-
-    for i in ["CO2"]:
-        transport_consump2 = pd.DataFrame(transport_consump2).append(
-            pd.concat([transport_consump], keys=[i], names=["Gas"]).reorder_levels(
-                ["Region", "Sector", "Metric", "Gas"]
-            )
-        )
-
-    transport_em = (
-        transport_consump2
-        * em_factors[em_factors.index.isin(transport_consump2.index.values)]
-    ).drop(index=["Bioenergy", "Oil", "Other fuels"], level=2)
-
-    # endregion
-
-    ########################################
-    #  CALCULATE EMISSIONS FROM BUILDINGS  #
-    ########################################
-
-    # region
-
-    # add 'Electricity' to energy_demand here to toggle emissions from Electricity to Buildings
-    buildings_consump = (
-        energy_demand.loc[slice(None), "Buildings", ["Heat"], scenario]
-        .groupby("IEA Region")
-        .sum()
-    )
-    buildings_consump.index.name = "Region"
-
-    buildings_consump = (
-        buildings_consump
-        * heat_per_adoption.loc[slice(None), ["Fossil fuels"], scenario]
-        .groupby("Region")
-        .sum()
-    )
-
-    buildings_consump = pd.concat(
-        [buildings_consump], keys=["Buildings"], names=["Sector"]
-    )
-    buildings_consump = pd.concat(
-        [buildings_consump], keys=["Fossil fuels"], names=["Metric"]
-    ).reorder_levels(["Region", "Sector", "Metric"])
-
-    buildings_consump2 = []
-
-    for i in ["CO2"]:
-        buildings_consump2 = pd.DataFrame(buildings_consump2).append(
-            pd.concat([buildings_consump], keys=[i], names=["Gas"]).reorder_levels(
-                ["Region", "Sector", "Metric", "Gas"]
-            )
-        )
-
-    buildings_em = (
-        buildings_consump2
-        * em_factors[em_factors.index.isin(buildings_consump2.index.values)]
-    ).loc[:, data_start_year:proj_end_year]
-
-    # endregion
-
-    ########################################
-    #  CALCULATE EMISSIONS FROM INDUSTRY  #
-    ########################################
-
-    # region
-
-    # add 'Electricity' to energy_demand here to toggle emissions from Electricity to Industry
-    industry_consump = (
-        energy_demand.loc[slice(None), "Industry", ["Heat"], scenario]
-        .groupby("IEA Region")
-        .sum()
-    )
-    industry_consump.index.name = "Region"
-
-    industry_consump = (
-        industry_consump
-        * heat_per_adoption.loc[slice(None), ["Fossil fuels"], scenario]
-        .groupby("Region")
-        .sum()
-    )
-
-    industry_consump = pd.concat(
-        [industry_consump], keys=["Industry"], names=["Sector"]
-    )
-    industry_consump = pd.concat(
-        [industry_consump], keys=["Fossil fuels"], names=["Metric"]
-    ).reorder_levels(["Region", "Sector", "Metric"])
-
-    industry_consump2 = []
-
-    for i in ["CO2"]:
-        industry_consump2 = pd.DataFrame(industry_consump2).append(
-            pd.concat([industry_consump], keys=[i], names=["Gas"]).reorder_levels(
-                ["Region", "Sector", "Metric", "Gas"]
-            )
-        )
-
-    industry_em = (
-        industry_consump2
-        * em_factors[em_factors.index.isin(industry_consump2.index.values)]
-    ).loc[:, data_start_year:proj_end_year]
 
     # endregion
 
@@ -1309,7 +1188,7 @@ def emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_e
 
     # region
 
-    https://github.com/GranthamImperial/silicone/tree/master/notebooks
+    # https://github.com/GranthamImperial/silicone/tree/master/notebooks
 
     # endregion
 
@@ -1484,7 +1363,7 @@ def emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_e
 
     # Harmonize modeled emissions projections with observed historical emissions
 
-    https://aneris.readthedocs.io/en/latest/index.html
+    # https://aneris.readthedocs.io/en/latest/index.html
 
     # endregion
 
@@ -1493,7 +1372,7 @@ def emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_e
     #################
 
     # region
-    emissions.to_csv("podi/data/emissions.csv")
+    emissions.to_csv("podi/data/emissions_output.csv")
 
     # endregion
 
