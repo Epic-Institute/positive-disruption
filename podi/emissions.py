@@ -1,7 +1,7 @@
 # region
 
 import pandas as pd
-from numpy import NaN
+from numpy import NaN, concatenate
 import numpy as np
 import pyam
 import os.path
@@ -10,6 +10,11 @@ import matplotlib.pyplot as plt
 import silicone.database_crunchers
 from silicone.utils import download_or_load_sr15
 import aneris
+from pandarallel import pandarallel
+
+from podi.afolu import afolu
+
+pandarallel.initialize(nb_workers=4)
 
 # endregion
 
@@ -23,201 +28,207 @@ def emissions(
     proj_end_year,
 ):
 
-    #####################################
-    #  CALCULATE EMISSIONS FROM ENERGY  #
-    #####################################
+    #########################################
+    #  CALCULATE CO2 EMISSIONS FROM ENERGY  #
+    #########################################
 
+    recalc_emissions_energy = False
     # region
+    if recalc_emissions_energy == True:
+        # Load emissions factors (currently a manually produced file, with duplicates in products/flows that were split to form more detailed streams for ROAD,RAIL,DOMESAIR,NONCRUDE,etc., so duplicates are dropped, but this can be removed once emission_factors is improved)
+        emission_factors = pd.read_csv("podi/data/emission_factors.csv").set_index(
+            pyam.IAMC_IDX
+        )
+        emission_factors = emission_factors[~emission_factors.index.duplicated()]
+        emission_factors.columns = emission_factors.columns.astype(int)
+        emission_factors = emission_factors.loc[:, data_start_year:proj_end_year]
 
-    # Load emissions factors
-    emission_factors = pd.read_csv("podi/data/emission_factors.csv").set_index(
-        pyam.IAMC_IDX
-    )
-    emission_factors.columns = emission_factors.columns.astype(int)
-    emission_factors = emission_factors.loc[:, data_start_year:proj_end_year]
+        # Multiply energy by emission factors to get emissions estimates
+        emissions_energy = energy_adoption.parallel_apply(
+            lambda x: x
+            * (
+                (
+                    emission_factors.loc[
+                        x.name[0],
+                        x.name[1],
+                        x.name[2],
+                        "|".join([x.name[6], x.name[9]]),
+                    ]
+                ).squeeze()
+            ),
+            axis=1,
+        )
 
-    emissions_output = energy_adoption.timeseries().multiply(emission_factors)
-    emissions_output.index = emissions_output.index.set_levels(
-        emissions_output.index.levels[4].str.replace("MtCO2/TJ", "MtCO2"), level=4
-    )
+        emissions_energy.index = emissions_energy.index.set_levels(
+            emissions_energy.index.levels[10].str.replace("TJ", "MtCO2"), level=10
+        )
+
+        # Save to CSV file
+        emissions_energy.to_csv("podi/data/emissions_energy.csv")
+
+    index = [
+        "Model",
+        "Scenario",
+        "Region",
+        "Sector",
+        "Product_category",
+        "Product_long",
+        "Product",
+        "Flow_category",
+        "Flow_long",
+        "Flow",
+        "Unit",
+        "Hydrogen",
+        "Flexible",
+        "Nonenergy",
+    ]
+
+    emissions_energy = pd.DataFrame(
+        pd.read_csv("podi/data/emissions_energy.csv")
+    ).set_index(index)
+    emissions_energy.columns = emissions_energy.columns.astype(int)
 
     # endregion
 
-    ####################################
-    #  CALCULATE EMISSIONS FROM AFOLU  #
-    ####################################
+    ########################################
+    #  CALCULATE GHG EMISSIONS FROM AFOLU  #
+    ########################################
 
     # region
 
-    # Load historical AFOLU emissions
-    afolu_em_hist = (
-        pd.read_csv("podi/data/emissions_additional.csv")
-        .set_index(["Region", "Sector", "Metric", "Gas", "Scenario"])
-        .loc[
-            slice(None),
-            ["Forests & Wetlands", "Regenerative Agriculture"],
-            slice(None),
-            slice(None),
-            scenario,
-        ]
-        .groupby(["Region", "Sector", "Metric", "Gas"])
-        .sum()
-    )
-
-    afolu_em_hist.columns = afolu_em_hist.columns.astype(int)
-    afolu_em_hist = afolu_em_hist.loc[:, data_start_year:]
-
-    # CO2 F&W (F&W only has CO2 at this point)
-
-    co2_fw = []
-
-    for subv in [
-        "Avoided Coastal Impacts",
-        "Avoided Peat Impacts",
-        "Avoided Forest Conversion",
-        "Coastal Restoration",
-        "Improved Forest Mgmt",
-        "Natural Regeneration",
-        "Peat Restoration",
-    ]:
-        co2_fw = pd.concat(
-            [pd.DataFrame(co2_fw), pd.DataFrame(adoption.loc[slice(None), [subv], :])]
-        )
-
-    co2_fw = pd.concat([co2_fw], names=["Sector"], keys=["Forests & Wetlands"])
-    co2_fw = pd.concat([co2_fw], names=["Scenario"], keys=[scenario])
-    co2_fw = pd.concat([co2_fw], names=["Gas"], keys=["CO2"])
-    co2_fw = co2_fw.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
-
-    # CO2 Agriculture
-
-    co2_ag = []
-
-    for subv in [
-        "Biochar",
-        "Cropland Soil Health",
-        "Optimal Intensity",
-        "Silvopasture",
-        "Trees in Croplands",
-    ]:
-        co2_ag = pd.concat(
-            [pd.DataFrame(co2_ag), pd.DataFrame(adoption.loc[slice(None), [subv], :])]
-        )
-
-    co2_ag = pd.concat([co2_ag], names=["Sector"], keys=["Regenerative Agriculture"])
-    co2_ag = pd.concat([co2_ag], names=["Scenario"], keys=[scenario])
-    co2_ag = pd.concat([co2_ag], names=["Gas"], keys=["CO2"])
-    co2_ag = co2_ag.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
-
-    # CH4 Agriculture
-
-    ch4_ag = []
-
-    for subv in ["Improved Rice", "Animal Mgmt"]:
-        ch4_ag = pd.concat(
-            [pd.DataFrame(ch4_ag), pd.DataFrame(adoption.loc[slice(None), [subv], :])]
-        )
-
-    # Improved rice mitigation is 58% from CH4 and 42% from N2O (see NCS)
-    ch4_ag.loc[slice(None), ["Improved Rice"], :].update(
-        ch4_ag.loc[slice(None), ["Improved Rice"], :] * 0.58
-    )
-
-    ch4_ag = pd.concat([ch4_ag], names=["Sector"], keys=["Regenerative Agriculture"])
-    ch4_ag = pd.concat([ch4_ag], names=["Scenario"], keys=[scenario])
-    ch4_ag = pd.concat([ch4_ag], names=["Gas"], keys=["CH4"])
-    ch4_ag = ch4_ag.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
-
-    # N2O Agriculture
-
-    n2o_ag = []
-
-    for subv in [
-        "Improved Rice",
-        "Nitrogen Fertilizer Management",
-    ]:
-        n2o_ag = pd.concat(
-            [pd.DataFrame(n2o_ag), pd.DataFrame(adoption.loc[slice(None), [subv], :])]
-        )
-
-    # Improved rice mitigation is 58% from CH4 and 42% from N2O (see NCS)
-    n2o_ag.loc[slice(None), ["Improved Rice"], :].update(
-        n2o_ag.loc[slice(None), ["Improved Rice"], :] * 0.42
-    )
-
-    n2o_ag = pd.concat([n2o_ag], names=["Sector"], keys=["Regenerative Agriculture"])
-    n2o_ag = pd.concat([n2o_ag], names=["Scenario"], keys=[scenario])
-    n2o_ag = pd.concat([n2o_ag], names=["Gas"], keys=["N2O"])
-    n2o_ag = n2o_ag.reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
-
-    # Add mitigation estimates to historical and projected emissions to get net emissions
-
-    # region
-
-    # estimated mitigation
-    afolu_em_mit = -(pd.concat([co2_fw, co2_ag, ch4_ag, n2o_ag]))
-    afolu_em_mit.columns = afolu_em_mit.columns.astype(int)
-    afolu_em_mit.loc[:, :data_end_year] = 0
-
-    # shift mitigation values by data_end_year+1 value
-    afolu_em_mit = afolu_em_mit.parallel_apply(
-        lambda x: x.subtract(
-            (
-                afolu_em_mit.loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
-                .loc[:, data_end_year + 1]
-                .values[0]
-            )
-        ),
-        axis=1,
-    ).clip(upper=0)
-
-    # combine emissions and mitigation
-
-    afolu_em = (
-        pd.concat(
-            [
-                afolu_em_mit.groupby(["Region", "Sector", "Subvector", "Gas"]).sum(),
-                afolu_em_hist,
+    # Load historical AFOLU emissions and baseline estimates (retrieved from FAOSTAT)
+    emissions_afolu = (
+        pd.read_csv("podi/data/FAO/Emissions_Totals_E_All_Data_NOFLAG.csv")
+        .drop(
+            columns=[
+                "Area Code",
+                "Item Code",
+                "Element Code",
+                "Source Code",
+                "Source",
             ]
         )
-        .groupby(["Region", "Sector", "Subvector", "Gas"])
-        .sum()
+        .rename(
+            columns={
+                "Area": "Region",
+                "Item": "Product_long",
+                "Element": "Flow_category",
+            }
+        )
+        .set_index("Region")
     )
+    emissions_afolu.columns = emissions_afolu.columns.str.replace("Y", "")
 
-    # Add scenario label
-    afolu_em = pd.concat(
-        [afolu_em], names=["Scenario"], keys=[scenario]
-    ).reorder_levels(["Region", "Sector", "Subvector", "Gas", "Scenario"])
+    # Change FAO region names to IEA
+    regions = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/region_categories.csv",
+                usecols=["WEB Region", "FAO Region"],
+            ).dropna(axis=0)
+        )
+        .set_index(["FAO Region"])
+        .rename_axis(index={"FAO Region": "Region"})
+    )
+    regions["WEB Region"] = (regions["WEB Region"]).str.lower()
 
-    afolu_em.loc[
-        slice(None),
-        slice(None),
+    # Add Model and Scenario indices
+    emissions_afolu["Model"] = "PD22"
+    emissions_afolu["Scenario"] = "baseline"
+
+    # Add Sector index
+    def addsector(x):
+        if x["Product_long"] in [
+            "Enteric Fermentation",
+            "Manure Management",
+            "Rice Cultivation",
+            "Synthetic Fertilizers",
+            "Manure applied to Soils",
+            "Manure left on Pasture",
+            "Crop Residues",
+            "Burning - Crop residues",
+        ]:
+            return "Agriculture"
+        elif x["Product_long"] in [
+            "Net Forest conversion",
+            "Forestland",
+            "Savanna fires",
+            "Fires in humid tropical forests",
+            "Forest fires",
+            "Fires in organic soils",
+            "Drained organic soils (CO2)",
+            "Drained organic soils (N2O)",
+        ]:
+            return "Forests & Wetlands"
+
+    emissions_afolu["Sector"] = emissions_afolu.apply(lambda x: addsector(x), axis=1)
+
+    # Split Emissions and Gas into separate columns
+    def splitgas(x):
+        if x["Flow_category"] in ["Emissions (CO2)"]:
+            return "CO2"
+        elif x["Flow_category"] in ["Emissions (CH4)"]:
+            return "CH4"
+        elif x["Flow_category"] in ["Emissions (N2O)"]:
+            return "N2O"
+
+    emissions_afolu["Flow_long"] = emissions_afolu.apply(lambda x: splitgas(x), axis=1)
+
+    emissions_afolu["Flow_category"] = "Emissions"
+
+    emissions_afolu = (
+        (
+            emissions_afolu.reset_index()
+            .set_index(["Region"])
+            .merge(regions, on=["Region"])
+        )
+        .reset_index()
+        .set_index(
+            [
+                "Model",
+                "Scenario",
+                "WEB Region",
+                "Sector",
+                "Product_long",
+                "Flow_category",
+                "Flow_long",
+                "Unit",
+            ]
+        )
+        .rename_axis(index={"WEB Region": "Region"})
+    ).drop(columns="Region")
+
+    # Select data between data_start_year and proj_end_year
+    emissions_afolu.columns = emissions_afolu.columns.astype(int)
+    emissions_afolu = emissions_afolu.loc[:, data_start_year:proj_end_year]
+
+    # Change unit to Mt
+    emissions_afolu.update(emissions_afolu / 1e6)
+    emissions_afolu = emissions_afolu.rename(index={"kilotonnes": "Mt"})
+
+    # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
+    emissions_afolu = emissions_afolu[
+        ~(
+            (emissions_afolu.index.get_level_values(1).isna())
+            | (emissions_afolu.index.get_level_values(4).isna())
+            | (emissions_afolu.isna().all(axis=1))
+        )
+    ]
+
+    # Interpolate between data_end_year and projections in 2030, 2050
+    emissions_afolu.interpolate(method="linear", axis=1, inplace=True)
+    emissions_afolu.fillna(method="bfill", inplace=True)
+
+    # Add Sector, Product_long, Flow_category, Flow_long indices to NCS
+
+    # Combine historical and baseline emissions with NCS estimates
+    emissions_afolu = pd.concat(
         [
-            "Deforestation",
-            "3B_Manure-management",
-            "3D_Rice-Cultivation",
-            "3D_Soil-emissions",
-            "3E_Enteric-fermentation",
-            "3I_Agriculture-other",
-        ],
-        slice(None),
-        "baseline",
-    ] = afolu_em.loc[
-        slice(None),
-        slice(None),
-        [
-            "Deforestation",
-            "3B_Manure-management",
-            "3D_Rice-Cultivation",
-            "3D_Soil-emissions",
-            "3E_Enteric-fermentation",
-            "3I_Agriculture-other",
-        ],
-        slice(None),
-        "pathway",
-    ].values
-
-    # endregion
+            emissions_afolu,
+            emissions_afolu.rename(index={"baseline": scenario}),
+            -emissions_afolu_mitigated,
+        ]
+    )
 
     # endregion
 
@@ -370,15 +381,15 @@ def emissions(
 
     def rgroup(data, gas, sector):
 
-        # Adds Sector, Metric, Gas, and Scenario labels to data, and duplicates data to allow for 'Baseline' and 'Pathway' scenarios to be made.
-        data = pd.concat([data], names=["Metric"], keys=[gas])
+        # Adds Sector, Variable, Gas, and Scenario labels to data, and duplicates data to allow for 'Baseline' and 'Pathway' scenarios to be made.
+        data = pd.concat([data], names=["Variable"], keys=[gas])
         data = pd.concat([data], names=["Gas"], keys=[gas])
         data = pd.concat([data], names=["Scenario"], keys=["baseline"]).reorder_levels(
-            ["Region", "Sector", "Metric", "Gas", "Scenario"]
+            ["Region", "Sector", "Variable", "Gas", "Scenario"]
         )
         data2 = data.droplevel("Scenario")
         data2 = pd.concat([data2], names=["Scenario"], keys=["pathway"]).reorder_levels(
-            ["Region", "Sector", "Metric", "Gas", "Scenario"]
+            ["Region", "Sector", "Variable", "Gas", "Scenario"]
         )
         data = pd.concat([data, data2])
 
@@ -412,14 +423,14 @@ def emissions(
             left_on=["Region", "Scenario"],
         )
 
-        data = pd.concat([data], keys=[metric], names=["Metric"])
+        data = pd.concat([data], keys=[metric], names=["Variable"])
         data = pd.concat([data], keys=[gas], names=["Gas"])
         data = pd.concat([data], keys=[sector], names=["Sector"]).reorder_levels(
-            ["Region", "Sector", "Metric", "Gas", "Scenario"]
+            ["Region", "Sector", "Variable", "Gas", "Scenario"]
         )
 
         data.index.set_names(
-            ["Region", "Sector", "Metric", "Gas", "Scenario"], inplace=True
+            ["Region", "Sector", "Variable", "Gas", "Scenario"], inplace=True
         )
 
         return data
@@ -433,7 +444,7 @@ def emissions(
         ra_em = ra_em.interpolate(axis=1, method="quadratic")
 
         ra_em = rgroup(ra_em, "CO2")
-        ra_em = ra_em.droplevel(["Metric", "Gas"])
+        ra_em = ra_em.droplevel(["Variable", "Gas"])
 
         data_per_change = (
             ra_em.loc[:, data_end_year - 1 :]
@@ -456,13 +467,13 @@ def emissions(
             left_on=["Region", "Scenario"],
         )
 
-        data = pd.concat([data], keys=[metric], names=["Metric"])
+        data = pd.concat([data], keys=[metric], names=["Variable"])
         data = pd.concat([data], keys=[gas], names=["Gas"])
         data = pd.concat([data], keys=[sector], names=["Sector"]).reorder_levels(
-            ["Region", "Sector", "Metric", "Gas", "Scenario"]
+            ["Region", "Sector", "Variable", "Gas", "Scenario"]
         )
         data.index.set_names(
-            ["Region", "Sector", "Metric", "Gas", "Scenario"], inplace=True
+            ["Region", "Sector", "Variable", "Gas", "Scenario"], inplace=True
         )
 
         return data
@@ -539,7 +550,7 @@ def emissions(
     for sub in ind_co2:
         co2_ind3 = pd.DataFrame(co2_ind3).append(
             proj(
-                co2_ind2.loc[slice(None), [sub], :], "Industry", sub, "CO2"
+                co2_ind2.loc[slice(None), [sub], :], "Industrial", sub, "CO2"
             ).drop_duplicates()
         )
 
@@ -585,7 +596,10 @@ def emissions(
     for sub in build_co2:
         co2_build3 = pd.DataFrame(co2_build3).append(
             proj(
-                co2_build2.loc[slice(None), [sub], :], "Buildings", sub, "CO2"
+                co2_build2.loc[slice(None), [sub], :],
+                ["Residential", "Commercial"],
+                sub,
+                "CO2",
             ).drop_duplicates()
         )
 
@@ -609,7 +623,7 @@ def emissions(
         co2_ag3 = pd.DataFrame(co2_ag3).append(
             proj_afolu(
                 co2_ag2.loc[slice(None), [sub], :],
-                "Regenerative Agriculture",
+                "Agriculture",
                 sub,
                 "CO2",
             )
@@ -715,7 +729,7 @@ def emissions(
     for sub in ind:
         ch4_ind3 = pd.DataFrame(ch4_ind3).append(
             proj(
-                ch4_ind2.loc[slice(None), [sub], :], "Industry", sub, "CH4"
+                ch4_ind2.loc[slice(None), [sub], :], "Industrial", sub, "CH4"
             ).drop_duplicates()
         )
 
@@ -773,7 +787,10 @@ def emissions(
     for sub in build:
         ch4_build3 = pd.DataFrame(ch4_build3).append(
             proj(
-                ch4_build2.loc[slice(None), [sub], :], "Buildings", sub, "CH4"
+                ch4_build2.loc[slice(None), [sub], :],
+                ["Residential", "Commercial"],
+                sub,
+                "CH4",
             ).drop_duplicates()
         )
 
@@ -797,7 +814,7 @@ def emissions(
         ch4_ag3 = pd.DataFrame(ch4_ag3).append(
             proj_afolu(
                 ch4_ag2.loc[slice(None), [sub], :],
-                "Regenerative Agriculture",
+                "Agriculture",
                 sub,
                 "CH4",
             )
@@ -886,7 +903,7 @@ def emissions(
     for sub in ind:
         n2o_ind3 = pd.DataFrame(n2o_ind3).append(
             proj(
-                n2o_ind2.loc[slice(None), [sub], :], "Industry", sub, "N2O"
+                n2o_ind2.loc[slice(None), [sub], :], "Industrial", sub, "N2O"
             ).drop_duplicates()
         )
 
@@ -936,7 +953,10 @@ def emissions(
     for sub in build:
         n2o_build3 = pd.DataFrame(n2o_build3).append(
             proj(
-                n2o_build2.loc[slice(None), [sub], :], "Buildings", sub, "N2O"
+                n2o_build2.loc[slice(None), [sub], :],
+                ["Residential", "Commercial"],
+                sub,
+                "N2O",
             ).drop_duplicates()
         )
 
@@ -956,7 +976,7 @@ def emissions(
         n2o_ag3 = pd.DataFrame(n2o_ag3).append(
             proj_afolu(
                 n2o_ag2.loc[slice(None), [sub], :],
-                "Regenerative Agriculture",
+                "Agriculture",
                 sub,
                 "N2O",
             )
@@ -1008,9 +1028,9 @@ def emissions(
         .merge(regions, left_on=["Region"], right_on=["ISO"])
     ).set_index(["Region", "Sector"])
 
-    fgas_ind = rgroup(fgas * 1, "F-gases", "Industry")
+    fgas_ind = rgroup(fgas * 1, "F-gases", "Industrial")
 
-    fgas_ind = proj(fgas_ind, "Industry", "F-gases", "F-gases")
+    fgas_ind = proj(fgas_ind, "Industrial", "F-gases", "F-gases")
 
     # endregion
 
@@ -1043,7 +1063,7 @@ def emissions(
     addtl_em = (
         (
             pd.read_csv("podi/data/emissions_additional.csv").set_index(
-                ["Region", "Sector", "Metric", "Gas", "Scenario"]
+                ["Region", "Sector", "Variable", "Gas", "Scenario"]
             )
         )
         .loc[slice(None), slice(None), slice(None), slice(None), scenario]
@@ -1051,7 +1071,7 @@ def emissions(
             [
                 "Region",
                 "Sector",
-                "Metric",
+                "Variable",
                 "Gas",
             ]
         )
@@ -1062,7 +1082,14 @@ def emissions(
     # remove AFOLU to avoid double counting
     addtl_em = addtl_em.loc[
         slice(None),
-        ["Electricity", "Industry", "Buildings", "Transport", "Other"],
+        [
+            "Electricity",
+            "Industrial",
+            "Residential",
+            "Commercial",
+            "Transport",
+            "Other",
+        ],
         slice(None),
         slice(None),
     ]
@@ -1091,13 +1118,13 @@ def emissions(
                 .cumprod(axis=1)
                 .loc[:, 2020:]
             ),
-            right_on=["Region", "Sector", "Metric", "Gas"],
-            left_on=["Region", "Sector", "Metric", "Gas"],
+            right_on=["Region", "Sector", "Variable", "Gas"],
+            left_on=["Region", "Sector", "Variable", "Gas"],
         )
     )
 
     per_change_ind = (
-        industry_em.loc[slice(None), "Industry", "Fossil fuels", "CO2"]
+        industry_em.loc[slice(None), "Industrial", "Fossil fuels", "CO2"]
         .loc[:, 2019:]
         .pct_change(axis=1)
         .replace(NaN, 0)
@@ -1106,26 +1133,28 @@ def emissions(
     )
 
     addtl_em_ind = (
-        addtl_em.loc[slice(None), ["Industry"], slice(None), slice(None), :]
+        addtl_em.loc[slice(None), ["Industrial"], slice(None), slice(None), :]
         .loc[:, :2019]
         .merge(
             (
                 pd.DataFrame(
                     addtl_em.loc[
-                        slice(None), ["Industry"], slice(None), slice(None), :
+                        slice(None), ["Industrial"], slice(None), slice(None), :
                     ].loc[:, 2019]
                 )
                 .combine_first(per_change_ind.loc[:, 2020:])
                 .cumprod(axis=1)
                 .loc[:, 2020:]
             ),
-            right_on=["Region", "Sector", "Metric", "Gas"],
-            left_on=["Region", "Sector", "Metric", "Gas"],
+            right_on=["Region", "Sector", "Variable", "Gas"],
+            left_on=["Region", "Sector", "Variable", "Gas"],
         )
     )
 
     per_change_build = (
-        buildings_em.loc[slice(None), "Buildings", "Fossil fuels", "CO2"]
+        buildings_em.loc[
+            slice(None), ["Residential", "Commercial"], "Fossil fuels", "CO2"
+        ]
         .loc[:, 2019:]
         .pct_change(axis=1)
         .replace(NaN, 0)
@@ -1134,21 +1163,27 @@ def emissions(
     )
 
     addtl_em_build = (
-        addtl_em.loc[slice(None), ["Buildings"], slice(None), slice(None), :]
+        addtl_em.loc[
+            slice(None), ["Residential", "Commercial"], slice(None), slice(None), :
+        ]
         .loc[:, :2019]
         .merge(
             (
                 pd.DataFrame(
                     addtl_em.loc[
-                        slice(None), ["Buildings"], slice(None), slice(None), :
+                        slice(None),
+                        ["Residential", "Commercial"],
+                        slice(None),
+                        slice(None),
+                        :,
                     ].loc[:, 2019]
                 )
                 .combine_first(per_change_build.loc[:, 2020:])
                 .cumprod(axis=1)
                 .loc[:, 2020:]
             ),
-            right_on=["Region", "Sector", "Metric", "Gas"],
-            left_on=["Region", "Sector", "Metric", "Gas"],
+            right_on=["Region", "Sector", "Variable", "Gas"],
+            left_on=["Region", "Sector", "Variable", "Gas"],
         )
     )
 
@@ -1175,8 +1210,8 @@ def emissions(
                 .cumprod(axis=1)
                 .loc[:, 2020:]
             ),
-            right_on=["Region", "Sector", "Metric", "Gas"],
-            left_on=["Region", "Sector", "Metric", "Gas"],
+            right_on=["Region", "Sector", "Variable", "Gas"],
+            left_on=["Region", "Sector", "Variable", "Gas"],
         )
     )
 
@@ -1187,6 +1222,8 @@ def emissions(
     ############################################################
 
     # region
+
+    # At this point its likely that we want to limit Flow_categories to 'Final consumption' that is not Electricity or Heat, 'Energy industry own use and Losses', 'Electricity output', and 'Heat output', to avoid double counting
 
     # https://github.com/GranthamImperial/silicone/tree/master/notebooks
 
@@ -1213,7 +1250,7 @@ def emissions(
     )
 
     em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
-        ["Region", "Sector", "Metric", "Gas", "Scenario"]
+        ["Region", "Sector", "Variable", "Gas", "Scenario"]
     )
 
     em = (
@@ -1277,7 +1314,7 @@ def emissions(
                 "3I_Agriculture-other": "Other Agricultural",
             }
         )
-        .groupby(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        .groupby(["Region", "Sector", "Variable", "Gas", "Scenario"])
         .sum()
     )
     """
@@ -1342,7 +1379,7 @@ def emissions(
                 "3I_Agriculture-other": "Other Agricultural",
             }
         )
-        .groupby(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        .groupby(["Region", "Sector", "Variable", "Gas", "Scenario"])
         .sum()
     )
     """

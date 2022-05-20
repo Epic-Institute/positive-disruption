@@ -73,16 +73,17 @@ recalc_energy = False
 if recalc_energy is True:
     energy(scenario, data_start_year, data_end_year, proj_end_year)
     index = [
+        "Model",
         "Scenario",
         "Region",
         "Sector",
-        "Subsector",
         "Product_category",
         "Product_long",
         "Product",
         "Flow_category",
         "Flow_long",
         "Flow",
+        "Unit",
         "Hydrogen",
         "Flexible",
         "Nonenergy",
@@ -127,16 +128,17 @@ if recalc_energy is True:
 
 else:
     index = [
+        "Model",
         "Scenario",
         "Region",
         "Sector",
-        "Subsector",
         "Product_category",
         "Product_long",
         "Product",
         "Flow_category",
         "Flow_long",
         "Flow",
+        "Unit",
         "Hydrogen",
         "Flexible",
         "Nonenergy",
@@ -177,7 +179,6 @@ else:
     shipments = (
         pd.DataFrame(pd.read_csv("podi/data/shipments_projected.csv"))
         .set_index(index)
-        .drop(columns="Source")
     )
     shipments.columns = shipments.columns.astype(int)
 
@@ -407,6 +408,28 @@ for i in range(0, len(region_list)):
         em_ndc = []
 
     em_mit_ndc = pd.DataFrame(em_mit_ndc).append(em_ndc)
+
+# endregion
+
+############################
+#  CONVERT TO IAMC FORMAT  #
+############################
+
+# region
+
+# Concat Sector, Subsector, Product, Flow
+energy_post_electrification_pyam = pyam.IamDataFrame(
+    energy_post_electrification.reset_index().drop(
+        columns=[
+            "Product_category",
+            "Product_long",
+            "Flow_category",
+            "Flow_long",
+            "Nonenergy",
+        ]
+    ),
+    variable=["Sector", "Product", "Flow", "Hydrogen", "Flexible"],
+)
 
 # endregion
 

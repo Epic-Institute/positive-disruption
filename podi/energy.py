@@ -1225,12 +1225,11 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
                 x,
-                scenario,
-                data_start_year,
-                data_end_year,
+                data_end_year + 1,
                 proj_end_year,
+                "logistic",
+                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
             ),
             axis=1,
         )
@@ -1470,12 +1469,11 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         per_heat_supply[per_heat_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
                 x,
-                scenario,
-                data_start_year,
-                data_end_year,
+                data_end_year + 1,
                 proj_end_year,
+                "logistic",
+                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
             ),
             axis=1,
         )
@@ -1540,12 +1538,11 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ]
         .parallel_apply(
             lambda x: adoption_curve(
-                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
                 x,
-                scenario,
-                data_start_year,
-                data_end_year,
+                data_end_year + 1,
                 proj_end_year,
+                "logistic",
+                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
             ),
             axis=1,
         )
@@ -1682,28 +1679,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Shipments
     shipments.to_csv("podi/data/shipments_projected.csv")
-
-    # endregion
-
-    ############################
-    #  CONVERT TO IAMC FORMAT  #
-    ############################
-
-    # region
-
-    # Concat Sector, Subsector, Product, Flow
-    energy_post_electrification_pyam = pyam.IamDataFrame(
-        energy_post_electrification.reset_index().drop(
-            columns=[
-                "Product_category",
-                "Product_long",
-                "Flow_category",
-                "Flow_long",
-                "Nonenergy",
-            ]
-        ),
-        variable=["Sector", "Product", "Flow", "Hydrogen", "Flexible"],
-    )
 
     # endregion
 

@@ -426,6 +426,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Multiply this by the estimated maximum extent and average mitigation potential flux to get emissions mitigated
+
     afolu_adoption.update(
         afolu_adoption.parallel_apply(
             lambda x: x.multiply(
@@ -435,9 +436,15 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     [x.name[2]],
                     [x.name[3].replace("Observed adoption", "Max extent")],
                 ]
-            )
-            .squeeze()
-            .multiply(
+            ).squeeze(),
+            axis=1,
+        ).fillna(0)
+    )
+
+    emissions_afolu_mitigated = afolu_adoption.copy()
+    emissions_afolu_mitigated.update(
+        emissions_afolu_mitigated.parallel_apply(
+            lambda x: x.multiply(
                 flux.loc[
                     slice(None),
                     slice(None),
@@ -448,20 +455,22 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         )
                     ],
                 ]
-            )
-            .squeeze(),
+            ).squeeze(),
             axis=1,
         ).fillna(0)
     )
 
     # Plot
-    afolu_adoption.T.plot(legend=False, title="AFOLU Adoption [tCO2e mitigated]")
+    afolu_adoption.T.plot(legend=False, title="AFOLU Adoption [% of max extent]")
+    emissions_afolu_mitigated.T.plot(
+        legend=False, title="AFOLU Adoption [tCO2e mitigated]"
+    )
 
     # Estimate emissions mitigated by avoided pathways
 
     # region
 
-    avoided = (
+    emissions_afolu_avoided = (
         pd.DataFrame(
             pd.read_csv("podi/data/afolu_avoided_pathways_input.csv").drop(
                 columns=[
@@ -484,52 +493,69 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .loc[slice(None), [scenario], slice(None), slice(None), slice(None), :]
     )
 
-    avoided.columns = avoided.columns.astype(int)
-    avoided = avoided.loc[:, :proj_end_year]
-    avoided.loc[:, :data_end_year] = 0
+    emissions_afolu_avoided.columns = emissions_afolu_avoided.columns.astype(int)
+    emissions_afolu_avoided = emissions_afolu_avoided.loc[:, :proj_end_year]
+    emissions_afolu_avoided.loc[:, :data_end_year] = 0
 
-    avoided.loc[:, data_end_year + 1 :] = -avoided.loc[
+    emissions_afolu_avoided.loc[:, data_end_year + 1 :] = -emissions_afolu_avoided.loc[
         :, data_end_year + 1 :
     ].parallel_apply(
         lambda x: x.subtract(
-            avoided.loc[x.name[0], x.name[1], x.name[2], x.name[3], :][
+            emissions_afolu_avoided.loc[x.name[0], x.name[1], x.name[2], x.name[3], :][
                 data_end_year + 1
             ].values[0]
         ),
         axis=1,
     )
 
-    avoided_per = -avoided.parallel_apply(
+    avoided_adoption = -emissions_afolu_avoided.parallel_apply(
         lambda x: ((x[data_end_year] - x) / x.max()).fillna(0), axis=1
     )
-    avoided = avoided.droplevel(
+    emissions_afolu_avoided = emissions_afolu_avoided.droplevel(
         [
             "Initial Loss Rate (%)",
             "Rate of Improvement",
         ]
     )
-    avoided_per = avoided_per.droplevel(
+    avoided_adoption = avoided_adoption.droplevel(
         [
             "Initial Loss Rate (%)",
             "Rate of Improvement",
         ]
     )
 
-    avoided.T.plot(legend=False, title="Avoided [Mha]")
-    avoided_per.T.plot(legend=False, title="Avoided Percent [%]")
+    # Plot
+    avoided_adoption.T.plot(legend=False, title="Avoided Emissions [% of max extent]")
+    emissions_afolu_avoided.T.plot(legend=False, title="Avoided Emissions [Mha]")
 
     # endregion
 
-    # Combine 'avoided' pathways with other pathways
-    afolu_adoption = pd.concat([afolu_baseline, afolu_adoption, avoided])
+    # Combine 'avoided_adoption' pathways with other pathways
+    afolu_adoption = pd.concat([afolu_baseline, afolu_adoption, avoided_adoption])
+
+    emissions_afolu_mitigated = pd.concat(
+        [emissions_afolu_mitigated, emissions_afolu_avoided]
+    )
 
     # endregion
 
-    ##########################
-    #  UPDATE REGION LABELS  #
-    ##########################
+    #################################
+    #  UPDATE REGION & UNIT LABELS  #
+    #################################
 
     # region
+
+    # Replace unit label with MtCO2e
+    emissions_afolu_mitigated.update(emissions_afolu_mitigated / 1e6)
+    emissions_afolu_mitigated.rename(
+        index={
+            "Mha": "MtCO2e",
+            "Mha/yr": "MtCO2e",
+            "Tg dm /yr": "MtCO2e",
+            "m3/yr": "MtCO2e",
+        },
+        inplace=True,
+    )
 
     # Replace ISO code with WEB region labels
     regions = pd.DataFrame(
@@ -542,11 +568,86 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     ).set_index(["ISO"])
     regions["region"] = regions["region"].str.lower()
 
-    afolu_adoption = (
-        afolu_adoption.reset_index()
-        .set_index(["region"])
-        .merge(regions, left_on=["region"], right_on=["ISO"])
-    ).set_index(pyam.IAMC_IDX)
+    for each in [afolu_adoption, emissions_afolu_mitigated]:
+        each = (
+            each.reset_index()
+            .set_index(["region"])
+            .merge(regions, left_on=["region"], right_on=["ISO"])
+        ).set_index(pyam.IAMC_IDX)
+
+        # Add Sector, Product_long, Flow_category, Flow_long indices
+        def addsector(x):
+            if x["Product_long"] in [
+                "Biochar",
+                "Cropland Soil Health",
+                "Nitrogen Fertilizer Management",
+                "Silvopasture",
+                "Trees in Croplands",
+                "Improved Rice",
+                "Optimal Intensity",
+            ]:
+                return "Agriculture"
+            elif x["Product_long"] in [
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Peat Restoration",
+            ]:
+                return "Forests & Wetlands"
+
+        each["Sector"] = each.apply(lambda x: addsector(x), axis=1)
+
+        each["Flow_category"] = "Emissions"
+
+        def addgas(x):
+            if x["Product_long"] in [
+                "Biochar",
+                "Cropland Soil Health",
+                "Silvopasture",
+                "Trees in Croplands",
+                "Optimal Intensity",
+            ]:
+                return "CO2"
+            if x["Product_long"] in [
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Peat Restoration",
+                "Improved Rice",
+            ]:
+                return "CH4"
+            if x["Product_long"] in [
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+            ]:
+                return "N2O"
+
+        each["Flow_long"] = each.apply(lambda x: addgas(x), axis=1)
+
+        # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
+        each[
+            (each["Product_long"] == "Improved Rice") & (each["Flow_long"] == "CH4")
+        ] = (
+            each[
+                (each["Product_long"] == "Improved Rice") & (each["Flow_long"] == "CH4")
+            ]
+            * 0.58
+        )
+
+        each[
+            (each["Product_long"] == "Improved Rice") & (each["Flow_long"] == "N2O")
+        ] = (
+            each[
+                (each["Product_long"] == "Improved Rice") & (each["Flow_long"] == "N2O")
+            ]
+            * 0.42
+        )
 
     # endregion
 
@@ -556,8 +657,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # AFOLU net emissions
+    # AFOLU adoption
     afolu_adoption.to_csv("podi/data/afolu_adoption.csv")
+
+    # AFOLU emissions mitigated
+    emissions_afolu_mitigated.to_csv("podi/data/emissions_afolu_mitigated.csv")
 
     # endregion
 

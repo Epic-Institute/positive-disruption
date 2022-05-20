@@ -3,7 +3,6 @@
 import pandas as pd
 import numpy as np
 from scipy.optimize import differential_evolution
-from numpy import NaN
 import os
 
 # endregion
@@ -119,9 +118,6 @@ def adoption_projection(
             y[y >= input_data.loc[input_data.last_valid_index()]],
         ]
     )
-
-    # Compare modeled to actual
-    # pd.DataFrame([y, y2]).T.plot()
 
     # Save projections to logfile
     pd.DataFrame(input_data.name).to_csv(
