@@ -149,3 +149,5 @@ podi/data/energy_demand_reduced_electrified.csv
 podi/data/energy_demand_subtract_electrified.csv
 podi/data/emissions_output.csv
 podi/data/emission_factors.csv
+podi/data/CEDS
+podi/data/EDGAR

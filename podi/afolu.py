@@ -1,5 +1,6 @@
 # region
 
+from errno import EADV
 from matplotlib.pyplot import axis, title, xlabel
 import pandas as pd
 from podi.adoption_projection import adoption_projection
@@ -526,7 +527,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Plot
     avoided_adoption.T.plot(legend=False, title="Avoided Emissions [% of max extent]")
-    emissions_afolu_avoided.T.plot(legend=False, title="Avoided Emissions [Mha]")
+    emissions_afolu_avoided.T.plot(legend=False, title="Avoided Emissions [tCO2e]")
 
     # endregion
 
@@ -568,14 +569,16 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     ).set_index(["ISO"])
     regions["region"] = regions["region"].str.lower()
 
-    for each in [afolu_adoption, emissions_afolu_mitigated]:
+    def addindices(each):
         each = (
             each.reset_index()
             .set_index(["region"])
             .merge(regions, left_on=["region"], right_on=["ISO"])
-        ).set_index(pyam.IAMC_IDX)
+        )
 
         # Add Sector, Product_long, Flow_category, Flow_long indices
+        each["Product_long"] = each["variable"].str.split("|", expand=True)[0].values
+
         def addsector(x):
             if x["Product_long"] in [
                 "Biochar",
@@ -598,7 +601,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ]:
                 return "Forests & Wetlands"
 
-        each["Sector"] = each.apply(lambda x: addsector(x), axis=1)
+        each["sector"] = each.apply(lambda x: addsector(x), axis=1)
 
         each["Flow_category"] = "Emissions"
 
@@ -630,24 +633,54 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         each["Flow_long"] = each.apply(lambda x: addgas(x), axis=1)
 
+        each = each.set_index(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "Product_long",
+                "Flow_category",
+                "Flow_long",
+                "unit",
+            ]
+        ).drop(columns=["variable"])
+
         # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
+
         each[
-            (each["Product_long"] == "Improved Rice") & (each["Flow_long"] == "CH4")
+            (
+                (each.reset_index().Product_long == "Improved Rice")
+                & (each.reset_index().Flow_long == "CH4")
+            ).values
         ] = (
             each[
-                (each["Product_long"] == "Improved Rice") & (each["Flow_long"] == "CH4")
+                (
+                    (each.reset_index().Product_long == "Improved Rice")
+                    & (each.reset_index().Flow_long == "CH4")
+                ).values
             ]
             * 0.58
         )
 
         each[
-            (each["Product_long"] == "Improved Rice") & (each["Flow_long"] == "N2O")
+            (
+                (each.reset_index().Product_long == "Improved Rice")
+                & (each.reset_index().Flow_long == "N2O")
+            ).values
         ] = (
             each[
-                (each["Product_long"] == "Improved Rice") & (each["Flow_long"] == "N2O")
+                (
+                    (each.reset_index().Product_long == "Improved Rice")
+                    & (each.reset_index().Flow_long == "N2O")
+                ).values
             ]
             * 0.42
         )
+        return each
+
+    afolu_adoption = addindices(afolu_adoption)
+    emissions_afolu_mitigated = addindices(emissions_afolu_mitigated)
 
     # endregion
 
