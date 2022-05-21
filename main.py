@@ -198,6 +198,9 @@ index = pyam.IAMC_IDX
 afolu_adoption = pd.DataFrame(pd.read_csv("podi/data/afolu_adoption.csv")).set_index(index)
 afolu_adoption.columns = afolu_adoption.columns.astype(int)
 
+emissions_afolu_mitigated = pd.DataFrame(pd.read_csv("podi/data/emissions_afolu_mitigated.csv")).set_index(index)
+emissions_afolu_mitigated.columns = emissions_afolu_mitigated.columns.astype(int)
+
 # endregion
 
 #############

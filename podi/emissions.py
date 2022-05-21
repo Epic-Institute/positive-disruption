@@ -11,6 +11,7 @@ import silicone.database_crunchers
 from silicone.utils import download_or_load_sr15
 import aneris
 from pandarallel import pandarallel
+import globalwarmingpotentials as gwp
 
 from podi.afolu import afolu
 
@@ -22,7 +23,7 @@ pandarallel.initialize(nb_workers=4)
 def emissions(
     scenario,
     energy_adoption,
-    afolu_adoption,
+    emissions_afolu_mitigated,
     data_start_year,
     data_end_year,
     proj_end_year,
@@ -209,15 +210,15 @@ def emissions(
     # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
     emissions_afolu = emissions_afolu[
         ~(
-            (emissions_afolu.index.get_level_values(1).isna())
-            | (emissions_afolu.index.get_level_values(4).isna())
+            (emissions_afolu.index.get_level_values(3).isna())
+            | (emissions_afolu.index.get_level_values(6).isna())
             | (emissions_afolu.isna().all(axis=1))
         )
     ]
 
     # Interpolate between data_end_year and projections in 2030, 2050
     emissions_afolu[np.arange(2021, 2030, 1)] = NaN
-    emissions_afolu[np.arange(2031, data_end_year, 1)] = NaN
+    emissions_afolu[np.arange(2031, proj_end_year, 1)] = NaN
     emissions_afolu = emissions_afolu.sort_index(axis=1)
     emissions_afolu.interpolate(method="linear", axis=1, inplace=True)
     emissions_afolu.fillna(method="bfill", inplace=True)
@@ -244,9 +245,16 @@ def emissions(
 
     emissions_additional = pd.DataFrame([])
     for gas in gas_ceds:
-        emissions_additional = pd.concat([emissions_additional, pd.read_csv(
-                "podi/data/CEDS/"+ gas+"_CEDS_emissions_by_sector_country_2021_04_21.csv"
-            )])
+        emissions_additional = pd.concat(
+            [
+                emissions_additional,
+                pd.read_csv(
+                    "podi/data/CEDS/"
+                    + gas
+                    + "_CEDS_emissions_by_sector_country_2021_04_21.csv"
+                ),
+            ]
+        )
     emissions_additional.columns = emissions_additional.columns.str.replace("X", "")
 
     # Change ISO region names to IEA
@@ -261,110 +269,97 @@ def emissions(
         .rename_axis(index={"ISO": "country"})
     )
     regions["WEB Region"] = (regions["WEB Region"]).str.lower()
+    regions.index = (regions.index).str.lower()
 
-    # Add Model and Scenario indices
+    # Add Model, Scenario, and Flow_category indices
     emissions_additional["model"] = "PD22"
     emissions_additional["scenario"] = "baseline"
+    emissions_additional["Flow_category"] = "Emissions"
 
-    # Change sector index to Product_long
-    emissions_additional.rename(columns={'sector':'Product_long'}, inplace=True)
+    # Change sector index to Product_long and 'em' to 'Flow_long'
+    emissions_additional.rename(
+        columns={"sector": "Product_long", "em": "Flow_long"}, inplace=True
+    )
 
     # Add Sector index
     def addsector(x):
         if x["Product_long"] in [
-        '1A1a_Electricity-autoproducer',
-        '1A1a_Electricity-public',
-        '1A1a_Heat-production',
-        '1A1bc_Other-transformation',
-        '1B1_Fugitive-solid-fuels',
-        '1B2_Fugitive-petr', 
-        '1B2b_Fugitive-NG-distr',
-        '1B2b_Fugitive-NG-prod',
-        '1B2d_Fugitive-other-energy',
-        '7A_Fossil-fuel-fires'
+            "1A1a_Electricity-autoproducer",
+            "1A1a_Electricity-public",
+            "1A1a_Heat-production",
+            "1A1bc_Other-transformation",
+            "1B1_Fugitive-solid-fuels",
+            "1B2_Fugitive-petr",
+            "1B2b_Fugitive-NG-distr",
+            "1B2b_Fugitive-NG-prod",
+            "1B2d_Fugitive-other-energy",
+            "7A_Fossil-fuel-fires",
         ]:
             return "Electric Power"
         elif x["Product_long"] in [
-        '1A3b_Road', 
-        '1A3c_Rail',
-        '1A3di_Oil_Tanker_Loading',
-        '1A3dii_Domestic-navigation',
-        '1A3eii_Other-transp', 
-        '1A3ai_International-aviation',
-        '1A3aii_Domestic-aviation',
-        '1A3di_International-shipping'
+            "1A3b_Road",
+            "1A3c_Rail",
+            "1A3di_Oil_Tanker_Loading",
+            "1A3dii_Domestic-navigation",
+            "1A3eii_Other-transp",
+            "1A3ai_International-aviation",
+            "1A3aii_Domestic-aviation",
+            "1A3di_International-shipping",
         ]:
             return "Transport"
-        elif x["Product_long"] in [
-        '1A4b_Residential'
-        ]:
+        elif x["Product_long"] in ["1A4b_Residential"]:
             return "Residential"
-        elif x["Product_long"] in [
-        '1A4a_Commercial-institutional'
-        ]:
+        elif x["Product_long"] in ["1A4a_Commercial-institutional"]:
             return "Commercial"
         elif x["Product_long"] in [
-        '1A2a_Ind-Comb-Iron-steel',
-        '1A2b_Ind-Comb-Non-ferrous-metals',
-        '1A2c_Ind-Comb-Chemicals',
-        '1A2d_Ind-Comb-Pulp-paper',
-        '1A2e_Ind-Comb-Food-tobacco',
-        '1A2f_Ind-Comb-Non-metalic-minerals',
-        '1A2g_Ind-Comb-Construction',
-        '1A2g_Ind-Comb-machinery',
-        '1A2g_Ind-Comb-mining-quarying',
-        '1A2g_Ind-Comb-other',
-        '1A2g_Ind-Comb-textile-leather',
-        '1A2g_Ind-Comb-transpequip',
-        '1A2g_Ind-Comb-wood-products',
-        '1A4c_Agriculture-forestry-fishing',
-        '1A5_Other-unspecified',
-        '2A1_Cement-production', 
-        '2A2_Lime-production',
-        '2Ax_Other-minerals',
-        '2B_Chemical-industry',
-        '2B2_Chemicals-Nitric-acid',
-        '2B3_Chemicals-Adipic-acid',
-        '2C_Metal-production',
-        '2D_Chemical-products-manufacture-processing',
-        '2D_Degreasing-Cleaning', 
-        '2D_Other-product-use',
-        '2D_Paint-application',
-        '2H_Pulp-and-paper-food-beverage-wood',
-        '2L_Other-process-emissions', 
-        '5A_Solid-waste-disposal', 
-        '5C_Waste-combustion',
-        '5D_Wastewater-handling',
-        '5E_Other-waste-handling',
-        '6A_Other-in-total',
-        '7BC_Indirect-N2O-non-agricultural-N'
+            "1A2a_Ind-Comb-Iron-steel",
+            "1A2b_Ind-Comb-Non-ferrous-metals",
+            "1A2c_Ind-Comb-Chemicals",
+            "1A2d_Ind-Comb-Pulp-paper",
+            "1A2e_Ind-Comb-Food-tobacco",
+            "1A2f_Ind-Comb-Non-metalic-minerals",
+            "1A2g_Ind-Comb-Construction",
+            "1A2g_Ind-Comb-machinery",
+            "1A2g_Ind-Comb-mining-quarying",
+            "1A2g_Ind-Comb-other",
+            "1A2g_Ind-Comb-textile-leather",
+            "1A2g_Ind-Comb-transpequip",
+            "1A2g_Ind-Comb-wood-products",
+            "1A4c_Agriculture-forestry-fishing",
+            "1A5_Other-unspecified",
+            "2A1_Cement-production",
+            "2A2_Lime-production",
+            "2Ax_Other-minerals",
+            "2B_Chemical-industry",
+            "2B2_Chemicals-Nitric-acid",
+            "2B3_Chemicals-Adipic-acid",
+            "2C_Metal-production",
+            "2D_Chemical-products-manufacture-processing",
+            "2D_Degreasing-Cleaning",
+            "2D_Other-product-use",
+            "2D_Paint-application",
+            "2H_Pulp-and-paper-food-beverage-wood",
+            "2L_Other-process-emissions",
+            "5A_Solid-waste-disposal",
+            "5C_Waste-combustion",
+            "5D_Wastewater-handling",
+            "5E_Other-waste-handling",
+            "6A_Other-in-total",
+            "7BC_Indirect-N2O-non-agricultural-N",
         ]:
             return "Industrial"
         elif x["Product_long"] in [
-        '3B_Manure-management',
-        '3D_Rice-Cultivation',
-        '3D_Soil-emissions',
-        '3E_Enteric-fermentation',
-        '3I_Agriculture-other'
+            "3B_Manure-management",
+            "3D_Rice-Cultivation",
+            "3D_Soil-emissions",
+            "3E_Enteric-fermentation",
+            "3I_Agriculture-other",
         ]:
             return "Agriculture"
 
-    emissions_additional["sector"] = emissions_additional.apply(lambda x: addsector(x), axis=1)
-
-    # Split Emissions and Gas into separate columns
-    def splitgas(x):
-        if x["Flow_category"] in ["Emissions (CO2)"]:
-            return "CO2"
-        elif x["Flow_category"] in ["Emissions (CH4)"]:
-            return "CH4"
-        elif x["Flow_category"] in ["Emissions (N2O)"]:
-            return "N2O"
-
-    emissions_additional["Flow_long"] = emissions_additional.apply(lambda x: splitgas(x), axis=1)
-
-    emissions_additional["Flow_category"] = "Emissions"
-
-    emissions_additional['Flow_long'] = gas
+    emissions_additional["sector"] = emissions_additional.apply(
+        lambda x: addsector(x), axis=1
+    )
 
     emissions_additional = (
         (
@@ -385,8 +380,8 @@ def emissions(
                 "units",
             ]
         )
-        .rename_axis(index={"country": "region", "units": "unit"})
-    ).drop(columns="Region")
+        .rename_axis(index={"WEB Region": "region", "units": "unit"})
+    ).drop(columns=["country", "index"])
 
     # Select data between data_start_year and proj_end_year
     emissions_additional.columns = emissions_additional.columns.astype(int)
@@ -394,7 +389,19 @@ def emissions(
 
     # Change unit from kt to Mt
     emissions_additional.update(emissions_additional / 1e6)
-    emissions_additional = emissions_additional.rename(index={"kt": "Mt"})
+    emissions_additional = emissions_additional.rename(
+        index={
+            "ktC": "Mt",
+            "ktCO": "Mt",
+            "ktCH4": "Mt",
+            "ktCO2": "Mt",
+            "ktN2O": "Mt",
+            "ktNH3": "Mt",
+            "ktNO2": "Mt",
+            "ktSO2": "Mt",
+            "ktNMVOC": "Mt",
+        }
+    )
 
     # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
     emissions_additional = emissions_additional[
@@ -407,59 +414,115 @@ def emissions(
 
     # Interpolate between data_end_year and projections in 2030, 2050
     emissions_additional[np.arange(2021, 2030, 1)] = NaN
-    emissions_additional[np.arange(2031, data_end_year, 1)] = NaN
+    emissions_additional[np.arange(2031, proj_end_year, 1)] = NaN
     emissions_additional = emissions_additional.sort_index(axis=1)
     emissions_additional.interpolate(method="linear", axis=1, inplace=True)
     emissions_additional.fillna(method="bfill", inplace=True)
 
     # Drop CO2 that was already estimated in energy module
-    if x["Product_long"] in [
-        '1A1a_Electricity-autoproducer',
-        '1A1a_Electricity-public',
-        '1A1a_Heat-production',
-        '1A1bc_Other-transformation',
-        '1A2a_Ind-Comb-Iron-steel',
-        '1A2b_Ind-Comb-Non-ferrous-metals',
-        '1A2c_Ind-Comb-Chemicals',
-        '1A2d_Ind-Comb-Pulp-paper',
-        '1A2e_Ind-Comb-Food-tobacco',
-        '1A2f_Ind-Comb-Non-metalic-minerals',
-        '1A2g_Ind-Comb-Construction',
-        '1A2g_Ind-Comb-machinery',
-        '1A2g_Ind-Comb-mining-quarying',
-        '1A2g_Ind-Comb-other',
-        '1A2g_Ind-Comb-textile-leather',
-        '1A2g_Ind-Comb-transpequip',
-        '1A2g_Ind-Comb-wood-products',
-        '1A3b_Road',
-        '1A3c_Rail',
-        '1A3aii_Domestic-aviation',
-        '1A3dii_Domestic-navigation',
-        '1A3eii_Other-transp',
-        '1A3ai_International-aviation',
-        '1A3di_International-shipping'
-        '1A4a_Commercial-institutional',
-        '1A4b_Residential',
-        '1A4c_Agriculture-forestry-fishing',
-        '1A5_Other-unspecified'
-        ] and gas == 'CO2':
+    def remove_doublcount(x):
+        if (
+            x["Product_long"]
+            in [
+                "1A1a_Electricity-autoproducer",
+                "1A1a_Electricity-public",
+                "1A1a_Heat-production",
+                "1A1bc_Other-transformation",
+                "1A2a_Ind-Comb-Iron-steel",
+                "1A2b_Ind-Comb-Non-ferrous-metals",
+                "1A2c_Ind-Comb-Chemicals",
+                "1A2d_Ind-Comb-Pulp-paper",
+                "1A2e_Ind-Comb-Food-tobacco",
+                "1A2f_Ind-Comb-Non-metalic-minerals",
+                "1A2g_Ind-Comb-Construction",
+                "1A2g_Ind-Comb-machinery",
+                "1A2g_Ind-Comb-mining-quarying",
+                "1A2g_Ind-Comb-other",
+                "1A2g_Ind-Comb-textile-leather",
+                "1A2g_Ind-Comb-transpequip",
+                "1A2g_Ind-Comb-wood-products",
+                "1A3b_Road",
+                "1A3c_Rail",
+                "1A3aii_Domestic-aviation",
+                "1A3dii_Domestic-navigation",
+                "1A3eii_Other-transp",
+                "1A3ai_International-aviation",
+                "1A3di_International-shipping" "1A4a_Commercial-institutional",
+                "1A4b_Residential",
+                "1A4c_Agriculture-forestry-fishing",
+                "1A5_Other-unspecified",
+            ]
+            and x["Flow_long"] == "CO2"
+        ):
+            return x * 0
 
-    # Drop CO2, CH4, N2O that was already estimated in FAO historical data
-    if x["Product_long"] in [
-    '3B_Manure-management',
-    '3D_Rice-Cultivation',
-    '3D_Soil-emissions',
-    '3E_Enteric-fermentation',
-    '3I_Agriculture-other'] and gas in ['CO2', 'CH4', 'N2O']:
+        # Drop CO2, CH4, N2O that was already estimated in FAO historical data
+        if x["Product_long"] in [
+            "3B_Manure-management",
+            "3D_Rice-Cultivation",
+            "3D_Soil-emissions",
+            "3E_Enteric-fermentation",
+            "3I_Agriculture-other",
+        ] and x[Flow_long] in ["CO2", "CH4", "N2O"]:
+            return x * 0
+
+    emissions_additional = emissions_additional.apply(remove_doublcount(x), axis=1)
 
     # Get F-Gas data
-    gas_edgar = ['C2F6', 'C3F8', 'C4F10', 'C5F12', 'C6F14', 'c-C4F8', 'CF4', 'HCFC-141b', 'HCFC-142b', 'HFC-23', 'HFC-32', 'HFC-41', 'HFC-43-10-mee', 'HFC-125', 'HFC-134', 'HFC-134a', 'HFC-143', 'HFC-143a', 'HFC-152a', 'HFC-227ea', 'HFC-236fa', 'HFC-245fa', 'HFC-365mfc', 'NF3', 'SF6']
+    gas_edgar = [
+        "C2F6",
+        "C3F8",
+        "C4F10",
+        "C5F12",
+        "C6F14",
+        "c-C4F8",
+        "CF4",
+        "HCFC-141b",
+        "HCFC-142b",
+        "HFC-23",
+        "HFC-32",
+        "HFC-41",
+        "HFC-43-10-mee",
+        "HFC-125",
+        "HFC-134",
+        "HFC-134a",
+        "HFC-143",
+        "HFC-143a",
+        "HFC-152a",
+        "HFC-227ea",
+        "HFC-236fa",
+        "HFC-245fa",
+        "HFC-365mfc",
+        "NF3",
+        "SF6",
+    ]
 
     emissions_additional_fgas = pd.DataFrame([])
     for gas in gas_edgar:
-        emissions_additional_fgas = pd.concat([emissions_additional_fgas, pd.read_excel(io= "podi/data/EDGAR/" + gas + "_1990_2018.xlsx", sheet_name = "v6.0_EM_" + gas + "_IPCC2006", skiprows = 9)]).drop(columns=['IPCC_annex', 'C_group_IM24_sh', 'Name', 'ipcc_code_2006_for_standard_report', 'fossil_bio'])
-    emissions_additional_fgas.columns = emissions_additional_fgas.columns.str.replace("Y_","")
-    emissions_additional_fgas.columns = emissions_additional_fgas.columns.str.replace("ipcc_code_2006_for_standard_report_name", "Product_long")
+        emissions_additional_fgas = pd.concat(
+            [
+                emissions_additional_fgas,
+                pd.read_excel(
+                    io="podi/data/EDGAR/" + gas + "_1990_2018.xlsx",
+                    sheet_name="v6.0_EM_" + gas + "_IPCC2006",
+                    skiprows=9,
+                ),
+            ]
+        ).drop(
+            columns=[
+                "IPCC_annex",
+                "C_group_IM24_sh",
+                "Name",
+                "ipcc_code_2006_for_standard_report",
+                "fossil_bio",
+            ]
+        )
+    emissions_additional_fgas.columns = emissions_additional_fgas.columns.str.replace(
+        "Y_", ""
+    )
+    emissions_additional_fgas.columns = emissions_additional_fgas.columns.str.replace(
+        "ipcc_code_2006_for_standard_report_name", "Product_long"
+    )
 
     # Change ISO region names to IEA
     regions = (
@@ -481,19 +544,21 @@ def emissions(
     # Add Sector index
     def addsector(x):
         if x["Product_long"] in [
-        'Metal Industry',
-        'Other Product Manufacture and Use',
-        'Electronics Industry',
-        'Chemical Industry',
-        'Product Uses as Substitutes for Ozone Depleting Substances'
+            "Metal Industry",
+            "Other Product Manufacture and Use",
+            "Electronics Industry",
+            "Chemical Industry",
+            "Product Uses as Substitutes for Ozone Depleting Substances",
         ]:
             return "Industrial"
 
-    emissions_additional_fgas["sector"] = emissions_additional_fgas.apply(lambda x: addsector(x), axis=1)
+    emissions_additional_fgas["sector"] = emissions_additional_fgas.apply(
+        lambda x: addsector(x), axis=1
+    )
 
     emissions_additional_fgas["Flow_category"] = "Emissions"
 
-    emissions_additional_fgas['Flow_long'] = gas
+    emissions_additional_fgas["Flow_long"] = gas
 
     emissions_additional_fgas = (
         (
@@ -519,7 +584,9 @@ def emissions(
 
     # Select data between data_start_year and proj_end_year
     emissions_additional_fgas.columns = emissions_additional_fgas.columns.astype(int)
-    emissions_additional_fgas = emissions_additional_fgas.loc[:, data_start_year:proj_end_year]
+    emissions_additional_fgas = emissions_additional_fgas.loc[
+        :, data_start_year:proj_end_year
+    ]
 
     # Change unit from kt to Mt
     emissions_additional_fgas.update(emissions_additional_fgas / 1e6)
@@ -536,7 +603,7 @@ def emissions(
 
     # Interpolate between data_end_year and projections in 2030, 2050
     emissions_additional_fgas[np.arange(2021, 2030, 1)] = NaN
-    emissions_additional_fgas[np.arange(2031, data_end_year, 1)] = NaN
+    emissions_additional_fgas[np.arange(2031, proj_end_year, 1)] = NaN
     emissions_additional_fgas = emissions_additional_fgas.sort_index(axis=1)
     emissions_additional_fgas.interpolate(method="linear", axis=1, inplace=True)
     emissions_additional_fgas.fillna(method="bfill", inplace=True)
@@ -544,11 +611,19 @@ def emissions(
     # Combine all gases
     emissions_additional = pd.concat([emissions_additional, emissions_additional_fgas])
 
+    # Create baseline and pathway scenarios
+    emissions_additional = pd.concat(
+        [
+            emissions_additional,
+            emissions_additional.rename(index={"baseline": scenario}),
+        ]
+    )
+
     # Project additional emissions using percent change in each sector
-    def proj(data, sector, metric, gas):
+    def proj(data):
 
         data_per_change = (
-            energy_pathway.loc[slice(None), slice(None), "Industrial"]
+            data.loc[slice(None), slice(None), "Industrial"]
             .groupby(["Scenario", "Region"])
             .mean()
             .loc[:, data_end_year - 1 :]
@@ -560,7 +635,7 @@ def emissions(
                 right_on=["Scenario", "Region"],
                 left_on=["Scenario", "Region"],
             )
-            .reindex(sorted(energy_pathway.columns), axis=1)
+            .reindex(sorted(data.columns), axis=1)
         )
 
         data = data_per_change.loc[:, : data_end_year - 1].merge(
@@ -571,796 +646,144 @@ def emissions(
             left_on=["Region", "Scenario"],
         )
 
-        data = pd.concat([data], keys=[metric], names=["Variable"])
-        data = pd.concat([data], keys=[gas], names=["Gas"])
-        data = pd.concat([data], keys=[sector], names=["Sector"]).reorder_levels(
-            ["Region", "Sector", "Variable", "Gas", "Scenario"]
-        )
-
-        data.index.set_names(
-            ["Region", "Sector", "Variable", "Gas", "Scenario"], inplace=True
-        )
-
         return data
 
-    def proj_afolu(data, sector, metric, gas):
-
-        # Makes projections for gas emissions using the percent change in sector
-
-        ra_em = pd.read_csv("podi/data/emissions_agriculture.csv").set_index("Region")
-        ra_em.columns = ra_em.columns.astype(int)
-        ra_em = ra_em.interpolate(axis=1, method="quadratic")
-
-        ra_em = rgroup(ra_em, "CO2")
-        ra_em = ra_em.droplevel(["Variable", "Gas"])
-
-        data_per_change = (
-            ra_em.loc[:, data_end_year - 1 :]
-            .pct_change(axis=1)
-            .dropna(axis=1)
-            .apply(lambda x: x + 1, axis=1)
-            .merge(
-                data,
-                right_on=["Region", "Scenario"],
-                left_on=["Region", "Scenario"],
-            )
-            .reindex(sorted(energy_pathway.columns), axis=1)
-        )
-
-        data = data_per_change.loc[:, : data_end_year - 1].merge(
-            data_per_change.loc[:, data_end_year - 1 :]
-            .cumprod(axis=1)
-            .loc[:, data_end_year:],
-            right_on=["Region", "Scenario"],
-            left_on=["Region", "Scenario"],
-        )
-
-        data = pd.concat([data], keys=[metric], names=["Variable"])
-        data = pd.concat([data], keys=[gas], names=["Gas"])
-        data = pd.concat([data], keys=[sector], names=["Sector"]).reorder_levels(
-            ["Region", "Sector", "Variable", "Gas", "Scenario"]
-        )
-        data.index.set_names(
-            ["Region", "Sector", "Variable", "Gas", "Scenario"], inplace=True
-        )
-
-        return data
-
-    #######
-    # CO2 #
-    #######
-
-    # region
-
-    co2 = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/emissions_CEDS_CO2_by_sector_country_2021_02_05.csv"
-            ).drop(columns=["Em", "Units"])
-        ).set_index(["Region", "Sector"])
-        / 1000
-    )
-    co2.columns = co2.columns.astype(int)
-
-    # Replace ISO code with WEB region labels
-    regions = pd.DataFrame(
-        pd.read_csv(
-            "podi/data/region_categories.csv",
-            usecols=["WEB Region", "ISO"],
-        )
-        .dropna(axis=0)
-        .rename(columns={"WEB Region": "Region"})
-    ).set_index(["ISO"])
-    regions.index = regions.index.str.lower()
-    regions["Region"] = regions["Region"].str.lower()
-
-    co2 = (
-        co2.reset_index()
-        .set_index(["Region"])
-        .merge(regions, left_on=["Region"], right_on=["ISO"])
-    ).set_index(["Region", "Sector"])
-
-    # Electricity
-
-    # region
-
-    co2_elec = co2.loc[slice(None), elec_co2, :]
-    co2_elec2 = []
-    co2_elec3 = []
-
-    for sub in elec_co2:
-        co2_elec2 = pd.DataFrame(co2_elec2).append(
-            rgroup(co2_elec.loc[slice(None), [sub], :], "CO2", sub)
-        )
-    for sub in elec_co2:
-        co2_elec3 = pd.DataFrame(co2_elec3).append(
-            proj(
-                co2_elec2.loc[slice(None), [sub], :], "Electricity", sub, "CO2"
-            ).drop_duplicates()
-        )
-
-    co2_elec = co2_elec3
-
-    # endregion
-
-    # Industry
-
-    # region
-
-    co2_ind = co2.loc[slice(None), ind_co2, :]
-    co2_ind2 = []
-    co2_ind3 = []
-
-    for sub in ind_co2:
-        co2_ind2 = pd.DataFrame(co2_ind2).append(
-            rgroup(co2_ind.loc[slice(None), [sub], :], "CO2", sub)
-        )
-    for sub in ind_co2:
-        co2_ind3 = pd.DataFrame(co2_ind3).append(
-            proj(
-                co2_ind2.loc[slice(None), [sub], :], "Industrial", sub, "CO2"
-            ).drop_duplicates()
-        )
-
-    co2_ind = co2_ind3
-
-    # endregion
-
-    # Transport
-
-    # region
-
-    co2_trans = co2.loc[slice(None), trans_co2, :]
-    co2_trans2 = []
-    co2_trans3 = []
-
-    for sub in trans_co2:
-        co2_trans2 = pd.DataFrame(co2_trans2).append(
-            rgroup(co2_trans.loc[slice(None), [sub], :], "CO2", sub)
-        )
-    for sub in trans_co2:
-        co2_trans3 = pd.DataFrame(co2_trans3).append(
-            proj(
-                co2_trans2.loc[slice(None), [sub], :], "Transport", sub, "CO2"
-            ).drop_duplicates()
-        )
-
-    co2_trans = co2_trans3
-
-    # endregion
-
-    # Buildings
-
-    # region
-
-    co2_build = co2.loc[slice(None), build_co2, :]
-    co2_build2 = []
-    co2_build3 = []
-
-    for sub in build_co2:
-        co2_build2 = pd.DataFrame(co2_build2).append(
-            rgroup(co2_build.loc[slice(None), [sub], :], "CO2", sub)
-        )
-    for sub in build_co2:
-        co2_build3 = pd.DataFrame(co2_build3).append(
-            proj(
-                co2_build2.loc[slice(None), [sub], :],
-                ["Residential", "Commercial"],
-                sub,
-                "CO2",
-            ).drop_duplicates()
-        )
-
-    co2_build = co2_build3
-
-    # endregion
-
-    # Agriculture
-
-    # region
-
-    co2_ag = co2.loc[slice(None), ag_co2, :]
-    co2_ag2 = []
-    co2_ag3 = []
-
-    for sub in ag_co2:
-        co2_ag2 = pd.DataFrame(co2_ag2).append(
-            rgroup(co2_ag.loc[slice(None), [sub], :], "CO2", sub)
-        )
-    for sub in ag_co2:
-        co2_ag3 = pd.DataFrame(co2_ag3).append(
-            proj_afolu(
-                co2_ag2.loc[slice(None), [sub], :],
-                "Agriculture",
-                sub,
-                "CO2",
-            )
-        )
-
-    co2_ag = co2_ag3
-
-    # endregion
-
-    # Forests & Wetlands
-
-    # region
-
-    gas_fw = (
-        pd.read_csv("podi/data/emissions_fw_historical.csv")
-        .set_index(["Region", "Sector", "Gas", "Unit"])
-        .droplevel("Unit")
-        .groupby(["Region", "Sector", "Gas"])
-        .sum()
-    )
-    gas_fw.columns = gas_fw.columns[::-1].astype(int)
-
-    co2_fw = gas_fw.loc[slice(None), slice(None), "CO2"]
-
-    co2_fw = rgroup(co2_fw, "CO2", "Forests & Wetlands")
-
-    co2_fw = proj_afolu(co2_fw, "Forests & Wetlands", "Deforestation", "CO2")
-
-    # endregion
-
-    # endregion
-
-    #######
-    # CH4 #
-    #######
-
-    # region
-
-    ch4 = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/emissions_CEDS_CH4_by_sector_country_2021_02_05.csv"
-            ).drop(columns=["Em", "Units"])
-        ).set_index(["Region", "Sector"])
-        / 1000
-        * 25
-    )
-    ch4.columns = ch4.columns.astype(int)
-
-    # Replace ISO code with WEB region labels
-    regions = pd.DataFrame(
-        pd.read_csv(
-            "podi/data/region_categories.csv",
-            usecols=["WEB Region", "ISO"],
-        )
-        .dropna(axis=0)
-        .rename(columns={"WEB Region": "Region"})
-    ).set_index(["ISO"])
-    regions.index = regions.index.str.lower()
-    regions["Region"] = regions["Region"].str.lower()
-
-    ch4 = (
-        ch4.reset_index()
-        .set_index(["Region"])
-        .merge(regions, left_on=["Region"], right_on=["ISO"])
-    ).set_index(["Region", "Sector"])
-
-    # Electricity
-
-    # region
-
-    ch4_elec = ch4.loc[slice(None), elec, :]
-    ch4_elec2 = []
-    ch4_elec3 = []
-
-    for sub in elec:
-        ch4_elec2 = pd.DataFrame(ch4_elec2).append(
-            rgroup(ch4_elec.loc[slice(None), [sub], :], "CH4", sub)
-        )
-    for sub in elec:
-        ch4_elec3 = pd.DataFrame(ch4_elec3).append(
-            proj(
-                ch4_elec2.loc[slice(None), [sub], :], "Electricity", sub, "CH4"
-            ).drop_duplicates()
-        )
-
-    ch4_elec = ch4_elec3
-
-    # endregion
-
-    # Industry
-
-    # region
-
-    ch4_ind = ch4.loc[slice(None), ind, :]
-    ch4_ind2 = []
-    ch4_ind3 = []
-
-    for sub in ind:
-        ch4_ind2 = pd.DataFrame(ch4_ind2).append(
-            rgroup(ch4_ind.loc[slice(None), [sub], :], "CH4", sub)
-        )
-    for sub in ind:
-        ch4_ind3 = pd.DataFrame(ch4_ind3).append(
-            proj(
-                ch4_ind2.loc[slice(None), [sub], :], "Industrial", sub, "CH4"
-            ).drop_duplicates()
-        )
-
-    ch4_ind = ch4_ind3
-
-    # endregion
-
-    # Transport
-
-    # region
-
-    ch4_trans = ch4.loc[slice(None), trans, :]
-    ch4_trans2 = []
-    ch4_trans3 = []
-
-    for sub in [
-        "1A3b_Road",
-        "1A3c_Rail",
-        "1A3di_Oil_Tanker_Loading",
-        "1A3dii_Domestic-navigation",
-        "1A3eii_Other-transp",
-    ]:
-        ch4_trans2 = pd.DataFrame(ch4_trans2).append(
-            rgroup(ch4_trans.loc[slice(None), [sub], :], "CH4", sub)
-        )
-    for sub in [
-        "1A3b_Road",
-        "1A3c_Rail",
-        "1A3di_Oil_Tanker_Loading",
-        "1A3dii_Domestic-navigation",
-        "1A3eii_Other-transp",
-    ]:
-        ch4_trans3 = pd.DataFrame(ch4_trans3).append(
-            proj(
-                ch4_trans2.loc[slice(None), [sub], :], "Transport", sub, "CH4"
-            ).drop_duplicates()
-        )
-
-    ch4_trans = ch4_trans3
-
-    # endregion
-
-    # Buildings
-
-    # region
-
-    ch4_build = ch4.loc[slice(None), build, :]
-    ch4_build2 = []
-    ch4_build3 = []
-
-    for sub in build:
-        ch4_build2 = pd.DataFrame(ch4_build2).append(
-            rgroup(ch4_build.loc[slice(None), [sub], :], "CH4", sub)
-        )
-    for sub in build:
-        ch4_build3 = pd.DataFrame(ch4_build3).append(
-            proj(
-                ch4_build2.loc[slice(None), [sub], :],
-                ["Residential", "Commercial"],
-                sub,
-                "CH4",
-            ).drop_duplicates()
-        )
-
-    ch4_build = ch4_build3
-
-    # endregion
-
-    # Agriculture
-
-    # region
-
-    ch4_ag = ch4.loc[slice(None), ag, :]
-    ch4_ag2 = []
-    ch4_ag3 = []
-
-    for sub in ag:
-        ch4_ag2 = pd.DataFrame(ch4_ag2).append(
-            rgroup(ch4_ag.loc[slice(None), [sub], :], "CH4", sub)
-        )
-    for sub in ag:
-        ch4_ag3 = pd.DataFrame(ch4_ag3).append(
-            proj_afolu(
-                ch4_ag2.loc[slice(None), [sub], :],
-                "Agriculture",
-                sub,
-                "CH4",
-            )
-        )
-
-    ch4_ag = ch4_ag3
-
-    # endregion
-
-    # Forests & Wetlands
-
-    # region
-
-    ch4_fw = gas_fw.loc[slice(None), slice(None), "CH4"]
-
-    ch4_fw = rgroup(ch4_fw, "CH4", "Forests & Wetlands")
-
-    ch4_fw = proj_afolu(ch4_fw, "Forests & Wetlands", "Deforestation", "CH4")
-
-    # endregion
-
-    # endregion
-
-    #######
-    # N2O #
-    #######
-
-    # region
-
-    n2o = (
-        pd.read_csv("podi/data/emissions_CEDS_N2O_by_sector_country_2021_02_05.csv")
-        .drop(columns=["Em", "Units"])
-        .set_index(["Region", "Sector"])
-        / 1000
-        * 298
-    )
-    n2o.columns = n2o.columns.astype(int)
-
-    # Replace ISO code with WEB region labels
-    regions = pd.DataFrame(
-        pd.read_csv(
-            "podi/data/region_categories.csv",
-            usecols=["WEB Region", "ISO"],
-        )
-        .dropna(axis=0)
-        .rename(columns={"WEB Region": "Region"})
-    ).set_index(["ISO"])
-    regions.index = regions.index.str.lower()
-    regions["Region"] = regions["Region"].str.lower()
-
-    n2o = (
-        n2o.reset_index()
-        .set_index(["Region"])
-        .merge(regions, left_on=["Region"], right_on=["ISO"])
-    ).set_index(["Region", "Sector"])
-
-    # Electricity
-
-    n2o_elec = n2o.loc[slice(None), elec, :]
-    n2o_elec2 = []
-    n2o_elec3 = []
-
-    for sub in elec:
-        n2o_elec2 = pd.DataFrame(n2o_elec2).append(
-            rgroup(n2o_elec.loc[slice(None), [sub], :], "N2O", sub)
-        )
-    for sub in elec:
-        n2o_elec3 = pd.DataFrame(n2o_elec3).append(
-            proj(
-                n2o_elec2.loc[slice(None), [sub], :], "Electricity", sub, "N2O"
-            ).drop_duplicates()
-        )
-
-    n2o_elec = n2o_elec3
-
-    # Industry
-
-    n2o_ind = n2o.loc[slice(None), ind, :]
-    n2o_ind2 = []
-    n2o_ind3 = []
-
-    for sub in ind:
-        n2o_ind2 = pd.DataFrame(n2o_ind2).append(
-            rgroup(n2o_ind.loc[slice(None), [sub], :], "N2O", sub, "ISO")
-        )
-    for sub in ind:
-        n2o_ind3 = pd.DataFrame(n2o_ind3).append(
-            proj(
-                n2o_ind2.loc[slice(None), [sub], :], "Industrial", sub, "N2O"
-            ).drop_duplicates()
-        )
-
-    n2o_ind = n2o_ind3
-
-    # Transport
-
-    n2o_trans = n2o.loc[slice(None), trans, :]
-    n2o_trans2 = []
-    n2o_trans3 = []
-
-    for sub in [
-        "1A3b_Road",
-        "1A3c_Rail",
-        "1A3di_Oil_Tanker_Loading",
-        "1A3dii_Domestic-navigation",
-        "1A3eii_Other-transp",
-    ]:
-        n2o_trans2 = pd.DataFrame(n2o_trans2).append(
-            rgroup(n2o_trans.loc[slice(None), [sub], :], "N2O", sub)
-        )
-    for sub in [
-        "1A3b_Road",
-        "1A3c_Rail",
-        "1A3di_Oil_Tanker_Loading",
-        "1A3dii_Domestic-navigation",
-        "1A3eii_Other-transp",
-    ]:
-        n2o_trans3 = pd.DataFrame(n2o_trans3).append(
-            proj(
-                n2o_trans2.loc[slice(None), [sub], :], "Transport", sub, "N2O"
-            ).drop_duplicates()
-        )
-
-    n2o_trans = n2o_trans3
-
-    # Buildings
-
-    n2o_build = n2o.loc[slice(None), build, :]
-    n2o_build2 = []
-    n2o_build3 = []
-
-    for sub in build:
-        n2o_build2 = pd.DataFrame(n2o_build2).append(
-            rgroup(n2o_build.loc[slice(None), [sub], :], "N2O", sub)
-        )
-    for sub in build:
-        n2o_build3 = pd.DataFrame(n2o_build3).append(
-            proj(
-                n2o_build2.loc[slice(None), [sub], :],
-                ["Residential", "Commercial"],
-                sub,
-                "N2O",
-            ).drop_duplicates()
-        )
-
-    n2o_build = n2o_build3
-
-    # Agriculture
-
-    n2o_ag = n2o.loc[slice(None), ag, :]
-    n2o_ag2 = []
-    n2o_ag3 = []
-
-    for sub in ag:
-        n2o_ag2 = pd.DataFrame(n2o_ag2).append(
-            rgroup(n2o_ag.loc[slice(None), [sub], :], "N2O", sub)
-        )
-    for sub in ag:
-        n2o_ag3 = pd.DataFrame(n2o_ag3).append(
-            proj_afolu(
-                n2o_ag2.loc[slice(None), [sub], :],
-                "Agriculture",
-                sub,
-                "N2O",
-            )
-        )
-
-    n2o_ag = n2o_ag3
-
-    # Forests & Wetlands
-
-    n2o_fw = gas_fw.loc[slice(None), slice(None), "N2O"]
-
-    n2o_fw = rgroup(n2o_fw, "N2O", "Forests & Wetlands")
-
-    n2o_fw = proj_afolu(n2o_fw, "Forests & Wetlands", "Deforestation", "N2O")
-
-    # endregion
-
-    ###########
-    # F-gases #
-    ###########
-
-    # region
-
-    fgas = (
-        pd.read_csv("podi/data/emissions_historical_fgas.csv")
-        .drop(columns=["Gas", "Unit"])
-        .set_index("Region")
-    )
-
-    fgas = fgas[fgas.columns[::-1]]
-
-    fgas.columns = fgas.columns.astype(int)
-
-    # Replace ISO code with WEB region labels
-    regions = pd.DataFrame(
-        pd.read_csv(
-            "podi/data/region_categories.csv",
-            usecols=["WEB Region", "ISO"],
-        )
-        .dropna(axis=0)
-        .rename(columns={"WEB Region": "Region"})
-    ).set_index(["ISO"])
-    regions.index = regions.index.str.lower()
-    regions["Region"] = regions["Region"].str.lower()
-
-    fgas = (
-        fgas.reset_index()
-        .set_index(["Region"])
-        .merge(regions, left_on=["Region"], right_on=["ISO"])
-    ).set_index(["Region", "Sector"])
-
-    fgas_ind = rgroup(fgas * 1, "F-gases", "Industrial")
-
-    fgas_ind = proj(fgas_ind, "Industrial", "F-gases", "F-gases")
-
-    # endregion
-
-    # combine
-
-    addtl_em = pd.concat(
-        [
-            co2_elec,
-            co2_ind,
-            co2_ag,
-            co2_fw,
-            ch4_elec,
-            ch4_ind,
-            ch4_trans,
-            ch4_build,
-            ch4_ag,
-            ch4_fw,
-            n2o_elec,
-            n2o_ind,
-            n2o_trans,
-            n2o_build,
-            n2o_ag,
-            n2o_fw,
-            fgas_ind,
-        ]
-    )
-
-    addtl_em.to_csv("podi/data/emissions_additional.csv", index=True)
-
-    addtl_em = (
-        (
-            pd.read_csv("podi/data/emissions_additional.csv").set_index(
-                ["Region", "Sector", "Variable", "Gas", "Scenario"]
-            )
-        )
-        .loc[slice(None), slice(None), slice(None), slice(None), scenario]
-        .reorder_levels(
+    emissions_additional = proj(emissions_additional)
+
+    # Rename Product_long values
+    simple_index = {
+        "Fossil fuels": "Fossil Fuel Heat",
+        "1A1a_Electricity-autoproducer": "Fossil Fuels",
+        "1A1a_Electricity-public": "Fossil Fuels",
+        "1A1a_Heat-production": "Fossil Fuel Heat",
+        "1A1bc_Other-transformation": "Other Fossil Transformation",
+        "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels",
+        "1B2_Fugitive-petr": "Fugitive Petroleum",
+        "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution",
+        "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production",
+        "1B2d_Fugitive-other-energy": "Fugitive Fossil Fuels, Other",
+        "7A_Fossil-fuel-fires": "Fossil Fuel Fires",
+        "1A2a_Ind-Comb-Iron-steel": "Other Industrial",
+        "1A2b_Ind-Comb-Non-ferrous-metals": "Other Industrial",
+        "1A2c_Ind-Comb-Chemicals": "Chemical Production",
+        "1A2d_Ind-Comb-Pulp-paper": "Other Industrial",
+        "1A2e_Ind-Comb-Food-tobacco": "Other Industrial",
+        "1A2f_Ind-Comb-Non-metalic-minerals": "Other Industrial",
+        "1A2g_Ind-Comb-Construction": "Other Industrial",
+        "1A2g_Ind-Comb-machinery": "Other Industrial",
+        "1A2g_Ind-Comb-mining-quarying": "Other Industrial",
+        "1A2g_Ind-Comb-other": "Other Industrial",
+        "1A2g_Ind-Comb-textile-leather": "Other Industrial",
+        "1A2g_Ind-Comb-transpequip": "Other Industrial",
+        "1A2g_Ind-Comb-wood-products": "Other Industrial",
+        "2A1_Cement-production": "Cement Production",
+        "2A2_Lime-production": "Lime Production",
+        "2Ax_Other-minerals": "Other Industrial",
+        "2B_Chemical-industry": "Chemical Production",
+        "2B2_Chemicals-Nitric-acid": "Other Industrial",
+        "2B3_Chemicals-Adipic-acid": "Other Industrial",
+        "2C_Metal-production": "Metal Production",
+        "2D_Chemical-products-manufacture-processing": "Chemical Production",
+        "2D_Degreasing-Cleaning": "Chemical Production",
+        "2D_Other-product-use": "Chemical Production",
+        "2D_Paint-application": "Chemical Production",
+        "2H_Pulp-and-paper-food-beverage-wood": "Other Industrial",
+        "2L_Other-process-emissions": "Other Industrial",
+        "5A_Solid-waste-disposal": "Solid Waste Disposal",
+        "5C_Waste-combustion": "Other Industrial",
+        "5D_Wastewater-handling": "Wastewater Handling",
+        "5E_Other-waste-handling": "Other Industrial",
+        "7BC_Indirect-N2O-non-agricultural-N": "Other Industrial",
+        "1A5_Other-unspecified": "Other Industrial",
+        "6A_Other-in-total": "Other Industrial",
+        "1A3b_Road": "Road Transport",
+        "1A3c_Rail": "Rail Transport",
+        "1A3di_Oil_Tanker_Loading": "Maritime Transport",
+        "1A3dii_Domestic-navigation": "Maritime Transport",
+        "1A3eii_Other-transp": "Other Transport",
+        "1A4a_Commercial-institutional": "Commercial Buildings",
+        "1A4b_Residential": "Residential Buildings",
+        "3B_Manure-management": "Manure Management",
+        "3D_Rice-Cultivation": "Rice Cultivation",
+        "3D_Soil-emissions": "Fertilized Soils",
+        "3E_Enteric-fermentation": "Enteric Fermentation",
+        "3I_Agriculture-other": "Other Agricultural",
+    }
+
+    detailed_index = {
+        "Fossil fuels": "Fossil fuel Heat",
+        "1A1a_Electricity-autoproducer": "Fossil Fuels",
+        "1A1a_Electricity-public": "Fossil Fuels",
+        "1A1a_Heat-production": "Fossil fuel Heat",
+        "1A1bc_Other-transformation": "Other Fossil Transformation",
+        "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels",
+        "1B2_Fugitive-petr": "Fugitive Petroleum",
+        "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution",
+        "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production",
+        "1B2d_Fugitive-other-energy": "Fugitive Fossil Fuels, Other",
+        "7A_Fossil-fuel-fires": "Fossil Fuel Fires",
+        "1A2a_Ind-Comb-Iron-steel": "Steel Production",
+        "1A2b_Ind-Comb-Non-ferrous-metals": "Non-ferrous Metal Production",
+        "1A2c_Ind-Comb-Chemicals": "Chemical Production",
+        "1A2d_Ind-Comb-Pulp-paper": "Pulp-Paper Production",
+        "1A2e_Ind-Comb-Food-tobacco": "Food Production",
+        "1A2f_Ind-Comb-Non-metalic-minerals": "Non-metalic Mineral Production",
+        "1A2g_Ind-Comb-Construction": "Construction",
+        "1A2g_Ind-Comb-machinery": "Machinery",
+        "1A2g_Ind-Comb-mining-quarying": "Mining, Quarying",
+        "1A2g_Ind-Comb-other": "Other Industrial",
+        "1A2g_Ind-Comb-textile-leather": "Textile, Leather Production",
+        "1A2g_Ind-Comb-transpequip": "Transportation Equipment Production",
+        "1A2g_Ind-Comb-wood-products": "Wood Production",
+        "2A1_Cement-production": "Cement Production",
+        "2A2_Lime-production": "Lime Production",
+        "2Ax_Other-minerals": "Other Mineral Production",
+        "2B_Chemical-industry": "Chemical Production",
+        "2B2_Chemicals-Nitric-acid": "Nitric Acid Production",
+        "2B3_Chemicals-Adipic-acid": "Adipic Acid Production",
+        "2C_Metal-production": "Metal Production",
+        "2D_Chemical-products-manufacture-processing": "Chemical Production",
+        "2D_Degreasing-Cleaning": "Chemical Production",
+        "2D_Other-product-use": "Chemical Production",
+        "2D_Paint-application": "Chemical Production",
+        "2H_Pulp-and-paper-food-beverage-wood": "Food Production",
+        "2L_Other-process-emissions": "Other Industrial",
+        "5A_Solid-waste-disposal": "Solid Waste Disposal",
+        "5C_Waste-combustion": "Waste Combustion",
+        "5D_Wastewater-handling": "Wastewater Handling",
+        "5E_Other-waste-handling": "Waste Combustion",
+        "7BC_Indirect-N2O-non-agricultural-N": "Indirect N2O from Non-Ag N",
+        "1A5_Other-unspecified": "Other Industrial",
+        "6A_Other-in-total": "Other Industrial",
+        "1A3b_Road": "Road Transport",
+        "1A3c_Rail": "Rail Transport",
+        "1A3di_Oil_Tanker_Loading": "Maritime Transport",
+        "1A3dii_Domestic-navigation": "Maritime Transport",
+        "1A3eii_Other-transp": "Other Transport",
+        "1A4a_Commercial-institutional": "Commercial Buildings",
+        "1A4b_Residential": "Residential Buildings",
+        "3B_Manure-management": "Manure Management",
+        "3D_Rice-Cultivation": "Rice Cultivation",
+        "3D_Soil-emissions": "Fertilized Soils",
+        "3E_Enteric-fermentation": "Enteric Fermentation",
+        "3I_Agriculture-other": "Other Agricultural",
+    }
+
+    emissions_additional = (
+        emissions_additional.rename(index=detailed_index)
+        .groupby(
             [
-                "Region",
-                "Sector",
-                "Variable",
-                "Gas",
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "Product_long",
+                "Flow_category",
+                "Flow_long",
+                "unit",
             ]
         )
-    )
-    addtl_em.columns = addtl_em.columns.astype(int)
-    addtl_em = addtl_em.loc[:, data_start_year:proj_end_year]
-
-    # remove AFOLU to avoid double counting
-    addtl_em = addtl_em.loc[
-        slice(None),
-        [
-            "Electricity",
-            "Industrial",
-            "Residential",
-            "Commercial",
-            "Transport",
-            "Other",
-        ],
-        slice(None),
-        slice(None),
-    ]
-
-    # Set emissions change to follow sector emissions
-    per_change_elec = (
-        elec_em.loc[slice(None), "Electricity", "Fossil fuels", "CO2"]
-        .loc[:, 2019:]
-        .pct_change(axis=1)
-        .replace(NaN, 0)
-        .dropna(axis=1)
-        .apply(lambda x: x + 1, axis=1)
-    )
-
-    addtl_em_elec = (
-        addtl_em.loc[slice(None), ["Electricity"], slice(None), slice(None), :]
-        .loc[:, :2019]
-        .merge(
-            (
-                pd.DataFrame(
-                    addtl_em.loc[
-                        slice(None), ["Electricity"], slice(None), slice(None), :
-                    ].loc[:, 2019]
-                )
-                .combine_first(per_change_elec.loc[:, 2020:])
-                .cumprod(axis=1)
-                .loc[:, 2020:]
-            ),
-            right_on=["Region", "Sector", "Variable", "Gas"],
-            left_on=["Region", "Sector", "Variable", "Gas"],
-        )
-    )
-
-    per_change_ind = (
-        industry_em.loc[slice(None), "Industrial", "Fossil fuels", "CO2"]
-        .loc[:, 2019:]
-        .pct_change(axis=1)
-        .replace(NaN, 0)
-        .dropna(axis=1)
-        .apply(lambda x: x + 1, axis=1)
-    )
-
-    addtl_em_ind = (
-        addtl_em.loc[slice(None), ["Industrial"], slice(None), slice(None), :]
-        .loc[:, :2019]
-        .merge(
-            (
-                pd.DataFrame(
-                    addtl_em.loc[
-                        slice(None), ["Industrial"], slice(None), slice(None), :
-                    ].loc[:, 2019]
-                )
-                .combine_first(per_change_ind.loc[:, 2020:])
-                .cumprod(axis=1)
-                .loc[:, 2020:]
-            ),
-            right_on=["Region", "Sector", "Variable", "Gas"],
-            left_on=["Region", "Sector", "Variable", "Gas"],
-        )
-    )
-
-    per_change_build = (
-        buildings_em.loc[
-            slice(None), ["Residential", "Commercial"], "Fossil fuels", "CO2"
-        ]
-        .loc[:, 2019:]
-        .pct_change(axis=1)
-        .replace(NaN, 0)
-        .dropna(axis=1)
-        .apply(lambda x: x + 1, axis=1)
-    )
-
-    addtl_em_build = (
-        addtl_em.loc[
-            slice(None), ["Residential", "Commercial"], slice(None), slice(None), :
-        ]
-        .loc[:, :2019]
-        .merge(
-            (
-                pd.DataFrame(
-                    addtl_em.loc[
-                        slice(None),
-                        ["Residential", "Commercial"],
-                        slice(None),
-                        slice(None),
-                        :,
-                    ].loc[:, 2019]
-                )
-                .combine_first(per_change_build.loc[:, 2020:])
-                .cumprod(axis=1)
-                .loc[:, 2020:]
-            ),
-            right_on=["Region", "Sector", "Variable", "Gas"],
-            left_on=["Region", "Sector", "Variable", "Gas"],
-        )
-    )
-
-    per_change_trans = (
-        transport_em.loc[slice(None), "Transport", "Fossil fuels", "CO2"]
-        .loc[:, 2019:]
-        .pct_change(axis=1)
-        .replace(NaN, 0)
-        .dropna(axis=1)
-        .apply(lambda x: x + 1, axis=1)
-    )
-
-    addtl_em_trans = (
-        addtl_em.loc[slice(None), ["Transport"], slice(None), slice(None), :]
-        .loc[:, :2019]
-        .merge(
-            (
-                pd.DataFrame(
-                    addtl_em.loc[
-                        slice(None), ["Transport"], slice(None), slice(None), :
-                    ].loc[:, 2019]
-                )
-                .combine_first(per_change_trans.loc[:, 2020:])
-                .cumprod(axis=1)
-                .loc[:, 2020:]
-            ),
-            right_on=["Region", "Sector", "Variable", "Gas"],
-            left_on=["Region", "Sector", "Variable", "Gas"],
-        )
+        .sum()
     )
 
     # endregion
@@ -1373,166 +796,13 @@ def emissions(
 
     # At this point its likely that we want to limit Flow_categories to 'Final consumption' that is not Electricity or Heat, 'Energy industry own use and Losses', 'Electricity output', and 'Heat output', to avoid double counting
 
+    emissions_output = pd.concat(
+        [emissions_energy, emissions_afolu, emissions_additional]
+    )
+
     # Looking to estimate aerosols, PM, etc
 
     # https://github.com/GranthamImperial/silicone/tree/master/notebooks
-
-    # endregion
-
-    ###########################
-    #  COMBINE ALL & RELABEL  #
-    ###########################
-
-    # region
-
-    em = pd.concat(
-        [
-            elec_em,
-            transport_em,
-            buildings_em,
-            industry_em,
-            afolu_em,
-            addtl_em_elec,
-            addtl_em_ind,
-            addtl_em_build,
-            addtl_em_trans,
-        ]
-    )
-
-    em = pd.concat([em], keys=[scenario], names=["Scenario"]).reorder_levels(
-        ["Region", "Sector", "Variable", "Gas", "Scenario"]
-    )
-
-    em = (
-        em.rename(
-            index={
-                "Fossil fuels": "Fossil Fuel Heat",
-                "1A1a_Electricity-autoproducer": "Fossil Fuels",
-                "1A1a_Electricity-public": "Fossil Fuels",
-                "1A1a_Heat-production": "Fossil Fuel Heat",
-                "1A1bc_Other-transformation": "Other Fossil Transformation",
-                "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels",
-                "1B2_Fugitive-petr": "Fugitive Petroleum",
-                "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution",
-                "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production",
-                "1B2d_Fugitive-other-energy": "Fugitive Fossil Fuels, Other",
-                "7A_Fossil-fuel-fires": "Fossil Fuel Fires",
-                "1A2a_Ind-Comb-Iron-steel": "Other Industrial",
-                "1A2b_Ind-Comb-Non-ferrous-metals": "Other Industrial",
-                "1A2c_Ind-Comb-Chemicals": "Chemical Production",
-                "1A2d_Ind-Comb-Pulp-paper": "Other Industrial",
-                "1A2e_Ind-Comb-Food-tobacco": "Other Industrial",
-                "1A2f_Ind-Comb-Non-metalic-minerals": "Other Industrial",
-                "1A2g_Ind-Comb-Construction": "Other Industrial",
-                "1A2g_Ind-Comb-machinery": "Other Industrial",
-                "1A2g_Ind-Comb-mining-quarying": "Other Industrial",
-                "1A2g_Ind-Comb-other": "Other Industrial",
-                "1A2g_Ind-Comb-textile-leather": "Other Industrial",
-                "1A2g_Ind-Comb-transpequip": "Other Industrial",
-                "1A2g_Ind-Comb-wood-products": "Other Industrial",
-                "2A1_Cement-production": "Cement Production",
-                "2A2_Lime-production": "Lime Production",
-                "2Ax_Other-minerals": "Other Industrial",
-                "2B_Chemical-industry": "Chemical Production",
-                "2B2_Chemicals-Nitric-acid": "Other Industrial",
-                "2B3_Chemicals-Adipic-acid": "Other Industrial",
-                "2C_Metal-production": "Metal Production",
-                "2D_Chemical-products-manufacture-processing": "Chemical Production",
-                "2D_Degreasing-Cleaning": "Chemical Production",
-                "2D_Other-product-use": "Chemical Production",
-                "2D_Paint-application": "Chemical Production",
-                "2H_Pulp-and-paper-food-beverage-wood": "Other Industrial",
-                "2L_Other-process-emissions": "Other Industrial",
-                "5A_Solid-waste-disposal": "Solid Waste Disposal",
-                "5C_Waste-combustion": "Other Industrial",
-                "5D_Wastewater-handling": "Wastewater Handling",
-                "5E_Other-waste-handling": "Other Industrial",
-                "7BC_Indirect-N2O-non-agricultural-N": "Other Industrial",
-                "1A5_Other-unspecified": "Other Industrial",
-                "6A_Other-in-total": "Other Industrial",
-                "1A3b_Road": "Road Transport",
-                "1A3c_Rail": "Rail Transport",
-                "1A3di_Oil_Tanker_Loading": "Maritime Transport",
-                "1A3dii_Domestic-navigation": "Maritime Transport",
-                "1A3eii_Other-transp": "Other Transport",
-                "1A4a_Commercial-institutional": "Commercial Buildings",
-                "1A4b_Residential": "Residential Buildings",
-                "3B_Manure-management": "Manure Management",
-                "3D_Rice-Cultivation": "Rice Cultivation",
-                "3D_Soil-emissions": "Fertilized Soils",
-                "3E_Enteric-fermentation": "Enteric Fermentation",
-                "3I_Agriculture-other": "Other Agricultural",
-            }
-        )
-        .groupby(["Region", "Sector", "Variable", "Gas", "Scenario"])
-        .sum()
-    )
-    """
-    em = (
-        em.rename(
-            index={
-                "Fossil fuels": "Fossil fuel Heat",
-                "1A1a_Electricity-autoproducer": "Fossil Fuels",
-                "1A1a_Electricity-public": "Fossil Fuels",
-                "1A1a_Heat-production": "Fossil fuel Heat",
-                "1A1bc_Other-transformation": "Other Fossil Transformation",
-                "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels",
-                "1B2_Fugitive-petr": "Fugitive Petroleum",
-                "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution",
-                "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production",
-                "1B2d_Fugitive-other-energy": "Fugitive Fossil Fuels, Other",
-                "7A_Fossil-fuel-fires": "Fossil Fuel Fires",
-                "1A2a_Ind-Comb-Iron-steel": "Steel Production",
-                "1A2b_Ind-Comb-Non-ferrous-metals": "Non-ferrous Metal Production",
-                "1A2c_Ind-Comb-Chemicals": "Chemical Production",
-                "1A2d_Ind-Comb-Pulp-paper": "Pulp-Paper Production",
-                "1A2e_Ind-Comb-Food-tobacco": "Food Production",
-                "1A2f_Ind-Comb-Non-metalic-minerals": "Non-metalic Mineral Production",
-                "1A2g_Ind-Comb-Construction": "Construction",
-                "1A2g_Ind-Comb-machinery": "Machinery",
-                "1A2g_Ind-Comb-mining-quarying": "Mining, Quarying",
-                "1A2g_Ind-Comb-other": "Other Industrial",
-                "1A2g_Ind-Comb-textile-leather": "Textile, Leather Production",
-                "1A2g_Ind-Comb-transpequip": "Transportation Equipment Production",
-                "1A2g_Ind-Comb-wood-products": "Wood Production",
-                "2A1_Cement-production": "Cement Production",
-                "2A2_Lime-production": "Lime Production",
-                "2Ax_Other-minerals": "Other Mineral Production",
-                "2B_Chemical-industry": "Chemical Production",
-                "2B2_Chemicals-Nitric-acid": "Nitric Acid Production",
-                "2B3_Chemicals-Adipic-acid": "Adipic Acid Production",
-                "2C_Metal-production": "Metal Production",
-                "2D_Chemical-products-manufacture-processing": "Chemical Production",
-                "2D_Degreasing-Cleaning": "Chemical Production",
-                "2D_Other-product-use": "Chemical Production",
-                "2D_Paint-application": "Chemical Production",
-                "2H_Pulp-and-paper-food-beverage-wood": "Food Production",
-                "2L_Other-process-emissions": "Other Industrial",
-                "5A_Solid-waste-disposal": "Solid Waste Disposal",
-                "5C_Waste-combustion": "Waste Combustion",
-                "5D_Wastewater-handling": "Wastewater Handling",
-                "5E_Other-waste-handling": "Waste Combustion",
-                "7BC_Indirect-N2O-non-agricultural-N": "Indirect N2O from Non-Ag N",
-                "1A5_Other-unspecified": "Other Industrial",
-                "6A_Other-in-total": "Other Industrial",
-                "1A3b_Road": "Road Transport",
-                "1A3c_Rail": "Rail Transport",
-                "1A3di_Oil_Tanker_Loading": "Maritime Transport",
-                "1A3dii_Domestic-navigation": "Maritime Transport",
-                "1A3eii_Other-transp": "Other Transport",
-                "1A4a_Commercial-institutional": "Commercial Buildings",
-                "1A4b_Residential": "Residential Buildings",
-                "3B_Manure-management": "Manure Management",
-                "3D_Rice-Cultivation": "Rice Cultivation",
-                "3D_Soil-emissions": "Fertilized Soils",
-                "3E_Enteric-fermentation": "Enteric Fermentation",
-                "3I_Agriculture-other": "Other Agricultural",
-            }
-        )
-        .groupby(["Region", "Sector", "Variable", "Gas", "Scenario"])
-        .sum()
-    )
-    """
 
     # endregion
 
@@ -1554,12 +824,32 @@ def emissions(
 
     # endregion
 
+    ################################################
+    #  CREATE A VERSION OF OUTPUT THAT IS IN CO2e  #
+    ################################################
+
+    # region
+    emissions_output_co2e = emissions_output.copy()
+
+    # Define global warming potential of all GHGs
+    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
+
+    # TODO check gas names match with gwp dict
+
+    emissions_output_co2e = emissions_output_co2e.apply(
+        lambda x: x.mul(gwp.data[version][x.name(6)]), axis=1
+    )
+
+    # endregion
+
     #################
     #  SAVE OUTPUT  #
     #################
 
     # region
     emissions_output.to_csv("podi/data/emissions_output.csv")
+
+    emissions_output_co2e.to_csv("podi/data/emissions_output_co2e.csv")
 
     # endregion
 
