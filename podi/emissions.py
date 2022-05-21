@@ -412,61 +412,67 @@ def emissions(
         )
     ]
 
-    # Interpolate between data_end_year and projections in 2030, 2050
-    emissions_additional[np.arange(2021, 2030, 1)] = NaN
-    emissions_additional[np.arange(2031, proj_end_year, 1)] = NaN
+    # Create projections by applying most durrent data value to all future years
+    emissions_additional[np.arange(data_end_year, proj_end_year + 1, 1)] = NaN
     emissions_additional = emissions_additional.sort_index(axis=1)
-    emissions_additional.interpolate(method="linear", axis=1, inplace=True)
-    emissions_additional.fillna(method="bfill", inplace=True)
+    emissions_additional.fillna(method="ffill", axis=1, inplace=True)
 
-    # Drop CO2 that was already estimated in energy module
+    # Drop double counted emissions
     def remove_doublcount(x):
-        if (
-            x["Product_long"]
-            in [
-                "1A1a_Electricity-autoproducer",
-                "1A1a_Electricity-public",
-                "1A1a_Heat-production",
-                "1A1bc_Other-transformation",
-                "1A2a_Ind-Comb-Iron-steel",
-                "1A2b_Ind-Comb-Non-ferrous-metals",
-                "1A2c_Ind-Comb-Chemicals",
-                "1A2d_Ind-Comb-Pulp-paper",
-                "1A2e_Ind-Comb-Food-tobacco",
-                "1A2f_Ind-Comb-Non-metalic-minerals",
-                "1A2g_Ind-Comb-Construction",
-                "1A2g_Ind-Comb-machinery",
-                "1A2g_Ind-Comb-mining-quarying",
-                "1A2g_Ind-Comb-other",
-                "1A2g_Ind-Comb-textile-leather",
-                "1A2g_Ind-Comb-transpequip",
-                "1A2g_Ind-Comb-wood-products",
-                "1A3b_Road",
-                "1A3c_Rail",
-                "1A3aii_Domestic-aviation",
-                "1A3dii_Domestic-navigation",
-                "1A3eii_Other-transp",
-                "1A3ai_International-aviation",
-                "1A3di_International-shipping" "1A4a_Commercial-institutional",
-                "1A4b_Residential",
-                "1A4c_Agriculture-forestry-fishing",
-                "1A5_Other-unspecified",
-            ]
-            and x["Flow_long"] == "CO2"
-        ):
-            return x * 0
+        # Drop CO2 that was already estimated in energy module
+        if x.name[4] in [
+            "1A1a_Electricity-autoproducer",
+            "1A1a_Electricity-public",
+            "1A1a_Heat-production",
+            "1A1bc_Other-transformation",
+            "1A2a_Ind-Comb-Iron-steel",
+            "1A2b_Ind-Comb-Non-ferrous-metals",
+            "1A2c_Ind-Comb-Chemicals",
+            "1A2d_Ind-Comb-Pulp-paper",
+            "1A2e_Ind-Comb-Food-tobacco",
+            "1A2f_Ind-Comb-Non-metalic-minerals",
+            "1A2g_Ind-Comb-Construction",
+            "1A2g_Ind-Comb-machinery",
+            "1A2g_Ind-Comb-mining-quarying",
+            "1A2g_Ind-Comb-other",
+            "1A2g_Ind-Comb-textile-leather",
+            "1A2g_Ind-Comb-transpequip",
+            "1A2g_Ind-Comb-wood-products",
+            "1A3b_Road",
+            "1A3c_Rail",
+            "1A3aii_Domestic-aviation",
+            "1A3dii_Domestic-navigation",
+            "1A3eii_Other-transp",
+            "1A3ai_International-aviation",
+            "1A3di_International-shipping" "1A4a_Commercial-institutional",
+            "1A4b_Residential",
+            "1A4c_Agriculture-forestry-fishing",
+            "1A5_Other-unspecified",
+        ] and x.name[6] in ["CO2"]:
+            x.rename(
+                ("NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN"), inplace=True
+            )
 
         # Drop CO2, CH4, N2O that was already estimated in FAO historical data
-        if x["Product_long"] in [
+        if x.name[4] in [
             "3B_Manure-management",
             "3D_Rice-Cultivation",
             "3D_Soil-emissions",
             "3E_Enteric-fermentation",
             "3I_Agriculture-other",
-        ] and x[Flow_long] in ["CO2", "CH4", "N2O"]:
-            return x * 0
+        ] and x.name[6] in ["CO2", "CH4", "N2O"]:
+            x.rename(
+                ("NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN"), inplace=True
+            )
 
-    emissions_additional = emissions_additional.apply(remove_doublcount(x), axis=1)
+        return x
+
+    emissions_additional = emissions_additional.apply(
+        lambda x: remove_doublcount(x), axis=1
+    )
+    emissions_additional = emissions_additional.loc[
+        emissions_additional.index.dropna(how="any"), :
+    ]
 
     # Get F-Gas data
     gas_edgar = [
@@ -591,15 +597,6 @@ def emissions(
     # Change unit from kt to Mt
     emissions_additional_fgas.update(emissions_additional_fgas / 1e6)
     emissions_additional_fgas = emissions_additional_fgas.rename(index={"kt": "Mt"})
-
-    # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
-    emissions_additional_fgas = emissions_additional_fgas[
-        ~(
-            (emissions_additional_fgas.index.get_level_values(1).isna())
-            | (emissions_additional_fgas.index.get_level_values(4).isna())
-            | (emissions_additional_fgas.isna().all(axis=1))
-        )
-    ]
 
     # Interpolate between data_end_year and projections in 2030, 2050
     emissions_additional_fgas[np.arange(2021, 2030, 1)] = NaN
