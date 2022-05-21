@@ -139,15 +139,18 @@ dmypy.json
 .DS_STORE
 
 # Large files
-iamc_data.csv
-podi/data/energy_demand_electrified.csv
-podi/data/energy_demand_pathway.csv
-podi/data/energy_demand_post_addtl_eff.csv
-podi/data/energy_demand_post_upstream.csv
-podi/data/energy_demand_reduced_electrified.csv
-podi/data/energy_demand_subtract_electrified.csv
-podi/data/emissions_output.csv
-emission_factors.csv
+CEDS/
+EDGAR/
+EIA/
+FAO/
 IEA/
-CEDS
-EDGAR
+IRENA/
+iamc_data.csv
+energy_demand_electrified.csv
+energy_demand_pathway.csv
+energy_demand_post_addtl_eff.csv
+energy_demand_post_upstream.csv
+energy_demand_reduced_electrified.csv
+energy_demand_subtract_electrified.csv
+emissions_output.csv
+emission_factors.csv
