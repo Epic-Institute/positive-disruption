@@ -22,7 +22,7 @@ pandarallel.initialize(nb_workers=4)
 
 def emissions(
     scenario,
-    energy_adoption,
+    energy_output,
     emissions_afolu_mitigated,
     data_start_year,
     data_end_year,
@@ -45,7 +45,7 @@ def emissions(
         emission_factors = emission_factors.loc[:, data_start_year:proj_end_year]
 
         # Multiply energy by emission factors to get emissions estimates
-        emissions_energy = energy_adoption.parallel_apply(
+        emissions_energy = energy_output.parallel_apply(
             lambda x: x
             * (
                 (

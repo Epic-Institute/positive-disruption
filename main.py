@@ -119,7 +119,7 @@ if recalc_energy is True:
     ).set_index(index)
     energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
-    energy_adoption = pd.concat([energy_baseline, energy_pathway])
+    energy_output = pd.concat([energy_baseline, energy_pathway])
 
     shipments = pd.DataFrame(
         pd.read_csv("podi/data/shipments_projected.csv")
@@ -174,13 +174,18 @@ else:
     ).set_index(index)
     energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
-    energy_adoption = pd.concat([energy_baseline, energy_pathway])
+    energy_output = pd.concat([energy_baseline, energy_pathway])
 
     shipments = (
         pd.DataFrame(pd.read_csv("podi/data/shipments_projected.csv"))
         .set_index(index)
     )
     shipments.columns = shipments.columns.astype(int)
+
+# Save as regional-level files
+for output in ['energy_output', 'afolu_output', 'emissions_output']
+    for region in output.reset_index().Region.unique():
+        output[(output.reset_index().Region == region).values].to_csv('podi/data/output/' + output + "_" + region + ".csv")
 
 # endregion
 
@@ -194,7 +199,16 @@ recalc_afolu = False
 if recalc_afolu is True:
     afolu(scenario, data_start_year, data_end_year, proj_end_year)
 
-index = pyam.IAMC_IDX
+index = [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        "Product_long",
+        "Flow_category",
+        "Flow_long",
+        "unit"
+    ]
 afolu_adoption = pd.DataFrame(pd.read_csv("podi/data/afolu_adoption.csv")).set_index(index)
 afolu_adoption.columns = afolu_adoption.columns.astype(int)
 
@@ -211,7 +225,7 @@ recalc_emissions = False
 # region
 
 if recalc_emissions is True:
-    emissions(scenario, energy_adoption, afolu_adoption, data_start_year, data_end_year, proj_end_year)
+    emissions(scenario, energy_output, afolu_adoption, data_start_year, data_end_year, proj_end_year)
 
 index = pyam.IAMC_IDX
 emissions_output = pd.DataFrame(pd.read_csv("podi/data/emissions_output.csv")).set_index(index)
