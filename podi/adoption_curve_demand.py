@@ -39,12 +39,6 @@ def adoption_curve_demand(
 
     y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
 
-    pd.DataFrame(y_data).T.to_csv(
-        "podi/data/y_data.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/y_data.csv"),
-    )
-
     # Load search bounds for logistic function parameters
     search_bounds = [
         (

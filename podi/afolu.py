@@ -691,7 +691,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     # AFOLU adoption
-    afolu_adoption.to_csv("podi/data/afolu_adoption.csv")
+    afolu_adoption.to_csv("podi/data/output/afolu_output.csv")
 
     # AFOLU emissions mitigated
     emissions_afolu_mitigated.to_csv("podi/data/emissions_afolu_mitigated.csv")

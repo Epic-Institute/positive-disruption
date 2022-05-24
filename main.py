@@ -72,120 +72,55 @@ recalc_energy = False
 
 if recalc_energy is True:
     energy(scenario, data_start_year, data_end_year, proj_end_year)
-    index = [
-        "Model",
-        "Scenario",
-        "Region",
-        "Sector",
-        "Product_category",
-        "Product_long",
-        "Product",
-        "Flow_category",
-        "Flow_long",
-        "Flow",
-        "Unit",
-        "Hydrogen",
-        "Flexible",
-        "Nonenergy",
-    ]
+index = [
+    "Model",
+    "Scenario",
+    "Region",
+    "Sector",
+    "Product_category",
+    "Product_long",
+    "Product",
+    "Flow_category",
+    "Flow_long",
+    "Flow",
+    "Unit"
+]
 
-    energy_baseline = pd.DataFrame(
-        pd.read_csv("podi/data/energy_baseline.csv")
-    ).set_index(index)
-    energy_baseline.columns = energy_baseline.columns.astype(int)
+energy_post_upstream = pd.DataFrame(
+    pd.read_csv("podi/data/energy_post_upstream.csv")
+).set_index(index)
+energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
 
-    energy_pathway = pd.DataFrame(
-        pd.read_csv("podi/data/energy_" + scenario + ".csv")
-    ).set_index(index)
-    energy_pathway.columns = energy_pathway.columns.astype(int)
+energy_post_addtl_eff = pd.DataFrame(
+    pd.read_csv("podi/data/energy_post_addtl_eff.csv")
+).set_index(index)
+energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
-    energy_percent = pd.DataFrame(
-        pd.read_csv("podi/data/energy_percent.csv")
-    ).set_index(index)
-    energy_percent.columns = energy_percent.columns.astype(int)
+energy_electrified = pd.DataFrame(
+    pd.read_csv("podi/data/energy_electrified.csv")
+).set_index(index)
+energy_electrified.columns = energy_electrified.columns.astype(int)
 
-    energy_electrified = pd.DataFrame(
-        pd.read_csv("podi/data/energy_electrified.csv")
-    ).set_index(index)
-    energy_electrified.columns = energy_electrified.columns.astype(int)
+energy_reduced_electrified = pd.DataFrame(
+    pd.read_csv("podi/data/energy_reduced_electrified.csv")
+).set_index(index)
+energy_reduced_electrified.columns = energy_reduced_electrified.columns.astype(int)
 
-    energy_post_upstream = pd.DataFrame(
-        pd.read_csv("podi/data/energy_post_upstream.csv")
-    ).set_index(index)
-    energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
+energy_output = pd.DataFrame(
+    pd.read_csv("podi/data/energy_output.csv")
+).set_index(index)
+energy_output.columns = energy_output.columns.astype(int)
 
-    energy_post_addtl_eff = pd.DataFrame(
-        pd.read_csv("podi/data/energy_post_addtl_eff.csv")
-    ).set_index(index)
-    energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
+energy_percent = pd.DataFrame(
+    pd.read_csv("podi/data/energy_percent.csv")
+).set_index(index)
+energy_percent.columns = energy_percent.columns.astype(int)
 
-    energy_output = pd.concat([energy_baseline, energy_pathway])
-
-    shipments = pd.DataFrame(
-        pd.read_csv("podi/data/shipments_projected.csv")
-    ).set_index(index)
-    shipments.columns = shipments.columns.astype(int)
-
-else:
-    index = [
-        "Model",
-        "Scenario",
-        "Region",
-        "Sector",
-        "Product_category",
-        "Product_long",
-        "Product",
-        "Flow_category",
-        "Flow_long",
-        "Flow",
-        "Unit",
-        "Hydrogen",
-        "Flexible",
-        "Nonenergy",
-    ]
-
-    energy_baseline = pd.DataFrame(
-        pd.read_csv("podi/data/energy_baseline.csv")
-    ).set_index(index)
-    energy_baseline.columns = energy_baseline.columns.astype(int)
-
-    energy_pathway = pd.DataFrame(
-        pd.read_csv("podi/data/energy_" + scenario + ".csv")
-    ).set_index(index)
-    energy_pathway.columns = energy_pathway.columns.astype(int)
-
-    energy_percent = pd.DataFrame(
-        pd.read_csv("podi/data/energy_percent.csv")
-    ).set_index(index)
-    energy_percent.columns = energy_percent.columns.astype(int)
-
-    energy_electrified = pd.DataFrame(
-        pd.read_csv("podi/data/energy_electrified.csv")
-    ).set_index(index)
-    energy_electrified.columns = energy_electrified.columns.astype(int)
-
-    energy_post_upstream = pd.DataFrame(
-        pd.read_csv("podi/data/energy_post_upstream.csv")
-    ).set_index(index)
-    energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
-
-    energy_post_addtl_eff = pd.DataFrame(
-        pd.read_csv("podi/data/energy_post_addtl_eff.csv")
-    ).set_index(index)
-    energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
-
-    energy_output = pd.concat([energy_baseline, energy_pathway])
-
-    shipments = (
-        pd.DataFrame(pd.read_csv("podi/data/shipments_projected.csv"))
-        .set_index(index)
-    )
-    shipments.columns = shipments.columns.astype(int)
-
-# Save as regional-level files
-for output in ['energy_output', 'afolu_output', 'emissions_output']
-    for region in output.reset_index().Region.unique():
-        output[(output.reset_index().Region == region).values].to_csv('podi/data/output/' + output + "_" + region + ".csv")
+shipments = (
+    pd.DataFrame(pd.read_csv("podi/data/shipments.csv"))
+    .set_index(index)
+)
+shipments.columns = shipments.columns.astype(int)
 
 # endregion
 
@@ -209,8 +144,8 @@ index = [
         "Flow_long",
         "unit"
     ]
-afolu_adoption = pd.DataFrame(pd.read_csv("podi/data/afolu_adoption.csv")).set_index(index)
-afolu_adoption.columns = afolu_adoption.columns.astype(int)
+afolu_output = pd.DataFrame(pd.read_csv("podi/data/output/afolu_output.csv")).set_index(index)
+afolu_output.columns = afolu_output.columns.astype(int)
 
 emissions_afolu_mitigated = pd.DataFrame(pd.read_csv("podi/data/emissions_afolu_mitigated.csv")).set_index(index)
 emissions_afolu_mitigated.columns = emissions_afolu_mitigated.columns.astype(int)
@@ -225,10 +160,10 @@ recalc_emissions = False
 # region
 
 if recalc_emissions is True:
-    emissions(scenario, energy_output, afolu_adoption, data_start_year, data_end_year, proj_end_year)
+    emissions(scenario, energy_output, afolu_output, data_start_year, data_end_year, proj_end_year)
 
 index = pyam.IAMC_IDX
-emissions_output = pd.DataFrame(pd.read_csv("podi/data/emissions_output.csv")).set_index(index)
+emissions_output = pd.DataFrame(pd.read_csv("podi/data/output/emissions_output.csv")).set_index(index)
 emissions_output.columns = emissions_output.columns.astype(int)
 
 # endregion
@@ -447,6 +382,27 @@ energy_post_electrification_pyam = pyam.IamDataFrame(
     ),
     variable=["Sector", "Product", "Flow", "Hydrogen", "Flexible"],
 )
+
+# endregion
+
+#################################
+#  SAVE AS REGIONAL-LEVEL FILES #
+#################################
+
+# region
+
+
+for output in [
+    (energy_output, "energy_output")
+]:
+    for region in output[0].reset_index().Region.unique():
+        output[0][(output[0].reset_index().Region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")
+
+for output in [
+    (energy_output, "energy_output")
+]:
+    for region in output[0].reset_index().Region.unique():
+        pyam.IamDataFrame(output[0][(output[0].reset_index().Region == region).values].reset_index(), variable = ['Sector','Product_category', 'Product_long','Product', 'Flow_category', 'Flow_long','Flow']).to_csv('podi/data/output/' + output[1] + "_" + region + "_IAMC.csv")
 
 # endregion
 

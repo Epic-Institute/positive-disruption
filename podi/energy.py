@@ -1657,28 +1657,34 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     per_heat_supply = per_heat_supply[per_heat_supply.sum(axis=1) != 0]
     per_transport_supply = per_transport_supply[per_transport_supply.sum(axis=1) != 0]
 
-    # Energy after removing upstream fossil fuel demand
-    energy_post_upstream.to_csv("podi/data/energy_post_upstream.csv")
+    # Combine percent output for electricity, heat, transport
+    energy_percent = pd.concat([per_elec_supply, per_heat_supply, per_transport_supply])
 
-    # Energy after additional efficiency measure are applied
-    energy_post_addtl_eff.to_csv("podi/data/energy_post_addtl_eff.csv")
+    # Combine baseline and pathway energy output:
+    energy_output = pd.concat([energy_baseline, energy_post_electrification])
 
-    # Energy from fossil fuels that gets replaced by (a reduced amount of) electrical energy
-    energy_electrified.to_csv("podi/data/energy_electrified.csv")
+    # Drop 'Hydrogen', 'Flexible', and 'Nonenergy' rows
+    for output in [
+        energy_post_upstream,
+        energy_post_addtl_eff,
+        energy_electrified,
+        energy_reduced_electrified,
+        energy_output,
+        energy_percent,
+        shipments,
+    ]:
+        output.index = output.index.droplevel(["Hydrogen", "Flexible", "Nonenergy"])
 
-    # The reduced amount of electrical energy that represents an equivalent amount of work to combustion based energy
-    energy_reduced_electrified.to_csv("podi/data/energy_reduced_electrified.csv")
-
-    # Energy supply mix that meets energy_reduced_electrified
-    energy_post_electrification.to_csv("podi/data/energy_" + scenario + ".csv")
-
-    # Energy percent of total by region, electricity/heat/nonelectric transport, and subsector
-    pd.concat([per_elec_supply, per_heat_supply, per_transport_supply]).to_csv(
-        "podi/data/energy_percent.csv"
-    )
-
-    # Shipments
-    shipments.to_csv("podi/data/shipments_projected.csv")
+    for output in [
+        (energy_post_upstream, "energy_post_upstream"),
+        (energy_post_addtl_eff, "energy_post_addtl_eff"),
+        (energy_electrified, "energy_electrified"),
+        (energy_reduced_electrified, "energy_reduced_electrified"),
+        (energy_output, "energy_output"),
+        (energy_percent, "energy_percent"),
+        (shipments, "shipments"),
+    ]:
+        output[0].to_csv("podi/data/" + output[1] + ".csv")
 
     # endregion
 
