@@ -2,7 +2,7 @@ from mdutils.mdutils import MdUtils
 import pandas as pd
 
 scenario = "pathway"
-regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "Region"})
+regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "region"})
 
 for scen in ["dau"]:
 

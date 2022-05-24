@@ -22,7 +22,7 @@ def iea_weo_etl(region_list_i, gcam_region_list_i):
 
         df.insert(
             0,
-            "Sector",
+            "sector",
             [
                 "TPED",
                 "TPED",
@@ -83,7 +83,7 @@ def iea_weo_etl(region_list_i, gcam_region_list_i):
 
         df.insert(
             0,
-            "Sector",
+            "sector",
             [
                 "TPED",
                 "TPED",
@@ -141,7 +141,7 @@ def iea_weo_etl(region_list_i, gcam_region_list_i):
 
     energy_demand = df.iloc[:, 0:8]
 
-    energy_demand = pd.DataFrame(energy_demand.set_index(["Sector", "Metric"]))
+    energy_demand = pd.DataFrame(energy_demand.set_index(["sector", "Metric"]))
 
     xnew = np.linspace(
         energy_demand.columns.values.astype(int).min(),
@@ -168,7 +168,7 @@ def iea_weo_etl(region_list_i, gcam_region_list_i):
             region_list_i,
         ],
         names=["IEA Region"],
-    ).reorder_levels(["IEA Region", "Sector", "Metric"])
+    ).reorder_levels(["IEA Region", "sector", "Metric"])
 
     energy_demand = pd.concat(
         [energy_demand],
@@ -176,7 +176,7 @@ def iea_weo_etl(region_list_i, gcam_region_list_i):
             gcam_region_list_i,
         ],
         names=["GCAM Region"],
-    ).reorder_levels(["IEA Region", "GCAM Region", "Sector", "Metric"])
+    ).reorder_levels(["IEA Region", "GCAM Region", "sector", "Metric"])
 
     return energy_demand
 

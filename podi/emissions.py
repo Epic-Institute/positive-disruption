@@ -68,17 +68,17 @@ def emissions(
         emissions_energy.to_csv("podi/data/emissions_energy.csv")
 
     index = [
-        "Model",
-        "Scenario",
-        "Region",
-        "Sector",
-        "Product_category",
-        "Product_long",
-        "Product",
-        "Flow_category",
-        "Flow_long",
-        "Flow",
-        "Unit",
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        "product_category",
+        "product_long",
+        "product",
+        "flow_category",
+        "flow_long",
+        "flow",
+        "unit",
         "Hydrogen",
         "Flexible",
         "Nonenergy",
@@ -111,12 +111,12 @@ def emissions(
         )
         .rename(
             columns={
-                "Area": "Region",
-                "Item": "Product_long",
-                "Element": "Flow_category",
+                "Area": "region",
+                "Item": "product_long",
+                "Element": "flow_category",
             }
         )
-        .set_index("Region")
+        .set_index("region")
     )
     emissions_afolu.columns = emissions_afolu.columns.str.replace("Y", "")
 
@@ -129,7 +129,7 @@ def emissions(
             ).dropna(axis=0)
         )
         .set_index(["FAO Region"])
-        .rename_axis(index={"FAO Region": "Region"})
+        .rename_axis(index={"FAO Region": "region"})
     )
     regions["WEB Region"] = (regions["WEB Region"]).str.lower()
 
@@ -139,7 +139,7 @@ def emissions(
 
     # Add Sector index
     def addsector(x):
-        if x["Product_long"] in [
+        if x["product_long"] in [
             "Enteric Fermentation",
             "Manure Management",
             "Rice Cultivation",
@@ -150,7 +150,7 @@ def emissions(
             "Burning - Crop residues",
         ]:
             return "Agriculture"
-        elif x["Product_long"] in [
+        elif x["product_long"] in [
             "Net Forest conversion",
             "Forestland",
             "Savanna fires",
@@ -166,22 +166,22 @@ def emissions(
 
     # Split Emissions and Gas into separate columns
     def splitgas(x):
-        if x["Flow_category"] in ["Emissions (CO2)"]:
+        if x["flow_category"] in ["Emissions (CO2)"]:
             return "CO2"
-        elif x["Flow_category"] in ["Emissions (CH4)"]:
+        elif x["flow_category"] in ["Emissions (CH4)"]:
             return "CH4"
-        elif x["Flow_category"] in ["Emissions (N2O)"]:
+        elif x["flow_category"] in ["Emissions (N2O)"]:
             return "N2O"
 
-    emissions_afolu["Flow_long"] = emissions_afolu.apply(lambda x: splitgas(x), axis=1)
+    emissions_afolu["flow_long"] = emissions_afolu.apply(lambda x: splitgas(x), axis=1)
 
-    emissions_afolu["Flow_category"] = "Emissions"
+    emissions_afolu["flow_category"] = "Emissions"
 
     emissions_afolu = (
         (
             emissions_afolu.reset_index()
-            .set_index(["Region"])
-            .merge(regions, on=["Region"])
+            .set_index(["region"])
+            .merge(regions, on=["region"])
         )
         .reset_index()
         .set_index(
@@ -190,14 +190,14 @@ def emissions(
                 "scenario",
                 "WEB Region",
                 "sector",
-                "Product_long",
-                "Flow_category",
-                "Flow_long",
-                "Unit",
+                "product_long",
+                "flow_category",
+                "flow_long",
+                "unit",
             ]
         )
-        .rename_axis(index={"WEB Region": "region", "Unit": "unit"})
-    ).drop(columns="Region")
+        .rename_axis(index={"WEB Region": "region", "unit": "unit"})
+    ).drop(columns="region")
 
     # Select data between data_start_year and proj_end_year
     emissions_afolu.columns = emissions_afolu.columns.astype(int)
@@ -274,16 +274,16 @@ def emissions(
     # Add Model, Scenario, and Flow_category indices
     emissions_additional["model"] = "PD22"
     emissions_additional["scenario"] = "baseline"
-    emissions_additional["Flow_category"] = "Emissions"
+    emissions_additional["flow_category"] = "Emissions"
 
     # Change sector index to Product_long and 'em' to 'Flow_long'
     emissions_additional.rename(
-        columns={"sector": "Product_long", "em": "Flow_long"}, inplace=True
+        columns={"sector": "product_long", "em": "flow_long"}, inplace=True
     )
 
     # Add Sector index
     def addsector(x):
-        if x["Product_long"] in [
+        if x["product_long"] in [
             "1A1a_Electricity-autoproducer",
             "1A1a_Electricity-public",
             "1A1a_Heat-production",
@@ -296,7 +296,7 @@ def emissions(
             "7A_Fossil-fuel-fires",
         ]:
             return "Electric Power"
-        elif x["Product_long"] in [
+        elif x["product_long"] in [
             "1A3b_Road",
             "1A3c_Rail",
             "1A3di_Oil_Tanker_Loading",
@@ -307,11 +307,11 @@ def emissions(
             "1A3di_International-shipping",
         ]:
             return "Transport"
-        elif x["Product_long"] in ["1A4b_Residential"]:
+        elif x["product_long"] in ["1A4b_Residential"]:
             return "Residential"
-        elif x["Product_long"] in ["1A4a_Commercial-institutional"]:
+        elif x["product_long"] in ["1A4a_Commercial-institutional"]:
             return "Commercial"
-        elif x["Product_long"] in [
+        elif x["product_long"] in [
             "1A2a_Ind-Comb-Iron-steel",
             "1A2b_Ind-Comb-Non-ferrous-metals",
             "1A2c_Ind-Comb-Chemicals",
@@ -348,7 +348,7 @@ def emissions(
             "7BC_Indirect-N2O-non-agricultural-N",
         ]:
             return "Industrial"
-        elif x["Product_long"] in [
+        elif x["product_long"] in [
             "3B_Manure-management",
             "3D_Rice-Cultivation",
             "3D_Soil-emissions",
@@ -374,9 +374,9 @@ def emissions(
                 "scenario",
                 "WEB Region",
                 "sector",
-                "Product_long",
-                "Flow_category",
-                "Flow_long",
+                "product_long",
+                "flow_category",
+                "flow_long",
                 "units",
             ]
         )
@@ -527,7 +527,7 @@ def emissions(
         "Y_", ""
     )
     emissions_additional_fgas.columns = emissions_additional_fgas.columns.str.replace(
-        "ipcc_code_2006_for_standard_report_name", "Product_long"
+        "ipcc_code_2006_for_standard_report_name", "product_long"
     )
 
     # Change ISO region names to IEA
@@ -549,7 +549,7 @@ def emissions(
 
     # Add Sector index
     def addsector(x):
-        if x["Product_long"] in [
+        if x["product_long"] in [
             "Metal Industry",
             "Other Product Manufacture and Use",
             "Electronics Industry",
@@ -562,9 +562,9 @@ def emissions(
         lambda x: addsector(x), axis=1
     )
 
-    emissions_additional_fgas["Flow_category"] = "Emissions"
+    emissions_additional_fgas["flow_category"] = "Emissions"
 
-    emissions_additional_fgas["Flow_long"] = gas
+    emissions_additional_fgas["flow_long"] = gas
 
     emissions_additional_fgas = (
         (
@@ -579,14 +579,14 @@ def emissions(
                 "scenario",
                 "WEB Region",
                 "sector",
-                "Product_long",
-                "Flow_category",
-                "Flow_long",
-                "Unit",
+                "product_long",
+                "flow_category",
+                "flow_long",
+                "unit",
             ]
         )
         .rename_axis(index={"Country_code_A3": "region", "units": "unit"})
-    ).drop(columns="Region")
+    ).drop(columns="region")
 
     # Select data between data_start_year and proj_end_year
     emissions_additional_fgas.columns = emissions_additional_fgas.columns.astype(int)
@@ -621,7 +621,7 @@ def emissions(
 
         data_per_change = (
             data.loc[slice(None), slice(None), "Industrial"]
-            .groupby(["Scenario", "Region"])
+            .groupby(["scenario", "region"])
             .mean()
             .loc[:, data_end_year - 1 :]
             .pct_change(axis=1)
@@ -629,8 +629,8 @@ def emissions(
             .apply(lambda x: x + 1, axis=1)
             .merge(
                 data,
-                right_on=["Scenario", "Region"],
-                left_on=["Scenario", "Region"],
+                right_on=["scenario", "region"],
+                left_on=["scenario", "region"],
             )
             .reindex(sorted(data.columns), axis=1)
         )
@@ -639,8 +639,8 @@ def emissions(
             data_per_change.loc[:, data_end_year - 1 :]
             .cumprod(axis=1)
             .loc[:, data_end_year:],
-            right_on=["Region", "Scenario"],
-            left_on=["Region", "Scenario"],
+            right_on=["region", "scenario"],
+            left_on=["region", "scenario"],
         )
 
         return data
@@ -774,9 +774,9 @@ def emissions(
                 "scenario",
                 "region",
                 "sector",
-                "Product_long",
-                "Flow_category",
-                "Flow_long",
+                "product_long",
+                "flow_category",
+                "flow_long",
                 "unit",
             ]
         )

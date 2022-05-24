@@ -6,8 +6,8 @@ import pandas as pd
 def climate(scenario, data_source):
     climate = (
         pd.read_csv(data_source)
-        .set_index(["Region", "Sector", "Metric", "Scenario"])
-        .drop(columns=["Unit"])
+        .set_index(["region", "sector", "Metric", "scenario"])
+        .drop(columns=["unit"])
         .loc[slice(None), slice(None), slice(None), scenario]
     )
 

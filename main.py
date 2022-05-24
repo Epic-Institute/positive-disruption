@@ -51,7 +51,7 @@ start_year = 1990
 scenario = "pathway"
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
-regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "Region"})
+regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "region"})
 
 
 data_start_year = 1990
@@ -73,17 +73,17 @@ recalc_energy = False
 if recalc_energy is True:
     energy(scenario, data_start_year, data_end_year, proj_end_year)
 index = [
-    "Model",
-    "Scenario",
-    "Region",
-    "Sector",
-    "Product_category",
-    "Product_long",
-    "Product",
-    "Flow_category",
-    "Flow_long",
-    "Flow",
-    "Unit"
+    "model",
+    "scenario",
+    "region",
+    "sector",
+    "product_category",
+    "product_long",
+    "product",
+    "flow_category",
+    "flow_long",
+    "flow",
+    "unit"
 ]
 
 energy_post_upstream = pd.DataFrame(
@@ -139,9 +139,9 @@ index = [
         "scenario",
         "region",
         "sector",
-        "Product_long",
-        "Flow_category",
-        "Flow_long",
+        "product_long",
+        "flow_category",
+        "flow_long",
         "unit"
     ]
 afolu_output = pd.DataFrame(pd.read_csv("podi/data/output/afolu_output.csv")).set_index(index)
@@ -175,7 +175,7 @@ emissions_output.columns = emissions_output.columns.astype(int)
 # region
 
 cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").set_index(
-    ["Region", "Sector", "Scenario"]
+    ["region", "sector", "scenario"]
 )
 cdr_pathway.columns = cdr_pathway.columns.astype(int)
 
@@ -211,7 +211,7 @@ for scenario in ["pathway"]:
     )
 
     cdr_subvs = pd.DataFrame(cdr_subvs).append(
-        pd.concat([cdr_pathway2], keys=["World "], names=["Region"])
+        pd.concat([cdr_pathway2], keys=["World "], names=["region"])
     )
 
     cdr_subvs = (
@@ -223,16 +223,16 @@ for scenario in ["pathway"]:
     cdr_subvs = curve_smooth(cdr_subvs, "quadratic", 9).clip(lower=0)
 
     cdr_subvs = pd.concat(
-        [cdr_subvs], names=["Sector"], keys=["Carbon Dioxide Removal"]
+        [cdr_subvs], names=["sector"], keys=["Carbon Dioxide Removal"]
     )
-    cdr_subvs["Scenario"] = "pathway"
+    cdr_subvs["scenario"] = "pathway"
     cdr_subvs = cdr_subvs.reset_index().set_index(
-        ["Region", "Sector", "Metric", "Scenario"]
+        ["region", "sector", "Metric", "scenario"]
     )
-    cdr_subvs_baseline = (cdr_subvs * 0).droplevel("Scenario")
-    cdr_subvs_baseline["Scenario"] = "baseline"
+    cdr_subvs_baseline = (cdr_subvs * 0).droplevel("scenario")
+    cdr_subvs_baseline["scenario"] = "baseline"
     cdr_subvs_baseline = cdr_subvs_baseline.reset_index().set_index(
-        ["Region", "Sector", "Metric", "Scenario"]
+        ["region", "sector", "Metric", "scenario"]
     )
     cdr_subvs = cdr_subvs.append(cdr_subvs_baseline)
 
@@ -344,7 +344,7 @@ for i in range(0, len(region_list)):
     ]:
         em_ndc = (
             pd.read_csv("podi/data/emissions_ndcs.csv")
-            .set_index(["Region"])
+            .set_index(["region"])
             .loc[region_list[i]]
         )
 
@@ -355,7 +355,7 @@ for i in range(0, len(region_list)):
             - (em_ndc).values
         ).rename(index={0: 2025, 1: 2030, 2: 2050}, columns={0: "em_mit"})
 
-        em_ndc["Region"] = region_list[i]
+        em_ndc["region"] = region_list[i]
     else:
         em_ndc = []
 
@@ -373,14 +373,14 @@ for i in range(0, len(region_list)):
 energy_post_electrification_pyam = pyam.IamDataFrame(
     energy_post_electrification.reset_index().drop(
         columns=[
-            "Product_category",
-            "Product_long",
-            "Flow_category",
-            "Flow_long",
+            "product_category",
+            "product_long",
+            "flow_category",
+            "flow_long",
             "Nonenergy",
         ]
     ),
-    variable=["Sector", "Product", "Flow", "Hydrogen", "Flexible"],
+    variable=["sector", "product", "flow", "Hydrogen", "Flexible"],
 )
 
 # endregion
@@ -561,7 +561,7 @@ energy_balance = (
     energy_pathway.loc[scenario, region, :]
     .loc[:, [year]]
     .groupby(
-        ["Sector", "Product_category", "Product_long", "Flow_category", "Flow_long"]
+        ["sector", "product_category", "product_long", "flow_category", "flow_long"]
     )
     .sum()
 )
@@ -569,13 +569,13 @@ energy_balance = (
 # Create energy balance table structure
 energy_balance = (
     energy_balance.groupby(
-        ["Product_category", "Product_long", "Flow_category", "Flow_long"]
+        ["product_category", "product_long", "flow_category", "flow_long"]
     )
     .sum()
     .reset_index()
     .pivot(
-        index=["Flow_category", "Flow_long"],
-        columns=["Product_category", "Product_long"],
+        index=["flow_category", "flow_long"],
+        columns=["product_category", "product_long"],
         values=2019,
     )
     .fillna(0)
@@ -607,7 +607,7 @@ energy_balance = (
 # Create Product categories (columns)
 energy_balance = pd.concat(
     [
-        energy_balance.groupby("Product_category", axis="columns")
+        energy_balance.groupby("product_category", axis="columns")
         .sum()[
             [
                 "Coal",
@@ -1003,7 +1003,7 @@ sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
 flow_category = ['Final consumption', 'Supply']
-groupby = "Product_category"
+groupby = "product_category"
 nonenergyuse = ['Y','N']
 
 fig = ((
@@ -1220,7 +1220,7 @@ sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
 flow_category = ['Final consumption', 'Supply']
-groupby = "Product_long"
+groupby = "product_long"
 nonenergyuse = ['Y', 'N']
 
 fig = ((
@@ -1307,7 +1307,7 @@ sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
 flow_category = ['Final consumption', 'Supply']
-groupby = "Sector"
+groupby = "sector"
 nonenergyuse = ['Y','N']
 
 fig = ((
@@ -1395,7 +1395,7 @@ subsector = slice(None)
 product_category = slice(None)
 product = 'Electricity'
 flow_category = ['Final consumption', 'Supply']
-groupby = "Flow_long" # 'Sector' for sectors, 'Flow_long' for subsectors
+groupby = "flow_long" # 'Sector' for sectors, 'Flow_long' for subsectors
 nonenergyuse = ['N']
 
 fig = ((
@@ -1483,7 +1483,7 @@ subsector = slice(None)
 product_category = slice(None)
 product = 'Electricity'
 flow_category = ['Final consumption', 'Supply']
-groupby = "Flow_long" # 'Sector' for sectors, 'Flow_long' for subsectors
+groupby = "flow_long" # 'Sector' for sectors, 'Flow_long' for subsectors
 nonenergyuse = ['N']
 
 fig = ((
@@ -1701,7 +1701,7 @@ sector = slice(None)
 subsector = slice(None)
 product_category = slice(None)
 flow_category = ['Electricity output']
-groupby = "Product_long"
+groupby = "product_long"
 nonenergyuse = ['N']
 
 fig = ((
@@ -1815,7 +1815,7 @@ for sector in fig2['Sector'].unique():
     fig = go.Figure()
 
     if (fig2.columns.values == 'Flow_long').any():     
-        for flow in fig2["Flow_long"].unique(): 
+        for flow in fig2["flow_long"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -1824,7 +1824,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=flow,
@@ -1838,14 +1838,14 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=flow,
                 showlegend=False
             )
         )
     elif (fig2.columns.values == 'Product_long').any():  
-        for product in fig2["Product_long"].unique(): 
+        for product in fig2["product_long"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -1854,7 +1854,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=product,
@@ -1868,14 +1868,14 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=product,
                 showlegend=False
             )
         )
     elif (fig2.columns.values == 'Product_category').any():     
-        for product in fig2["Product_category"].unique(): 
+        for product in fig2["product_category"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -1884,7 +1884,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Product_category'].unique()).set_index(0).index.get_loc(product)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=product,
@@ -1898,7 +1898,7 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=product,
                 showlegend=False
@@ -1914,7 +1914,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=subsector,
@@ -1928,7 +1928,7 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=subsector,
                 showlegend=False))
@@ -2004,7 +2004,7 @@ transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, 
 fig = transport[transport.sum(axis=1)>0.05].T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -2022,8 +2022,8 @@ for sector in fig2['Sector'].unique():
                     name=str(flow).replace('Domestic navigation','Shipping').replace('Domestic aviation','Aviation').replace('Transport not elsewhere specified','Other') + ", " + str(subsector).replace('na','All').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
                     line=dict(width=1, color=colors[
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)+ random.randrange(20)]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(flow) + ", " + str(subsector).replace('na','All').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
@@ -2035,8 +2035,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(subsector).replace('na',''),
                 showlegend=False
@@ -2109,7 +2109,7 @@ for sector in fig2['Sector'].unique():
 
     for product in np.array(['Municipal waste (renewable)', 'Geothermal', 'Solar thermal', 'Electricity'], dtype=object):
 
-        for flow in fig2["Flow_long"].unique(): 
+        for flow in fig2["flow_long"].unique(): 
 
             # Make projected trace
             fig.add_trace(
@@ -2117,8 +2117,8 @@ for sector in fig2['Sector'].unique():
                     name=str(flow).replace('Commercial and public services','Commercial') + ", " + str(product).replace('na','All'),
                     line=dict(width=1, color=colors[
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)+ random.randrange(50)]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(flow).replace('Commercial and public services','Commercial') + ", " + str(product).replace('na','All'),
@@ -2130,8 +2130,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(product).replace('na',''),
                 showlegend=False
@@ -2205,7 +2205,7 @@ for sector in fig2['Sector'].unique():
     fig = go.Figure()
 
     if (fig2.columns.values == 'Flow_long').any():     
-        for flow in fig2["Flow_long"].unique(): 
+        for flow in fig2["flow_long"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2214,7 +2214,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=flow,
@@ -2228,14 +2228,14 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=flow,
                 showlegend=False
             )
         )
     elif (fig2.columns.values == 'Product_long').any():  
-        for product in fig2["Product_long"].unique(): 
+        for product in fig2["product_long"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2244,7 +2244,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=product,
@@ -2258,14 +2258,14 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=product,
                 showlegend=False
             )
         )
     elif (fig2.columns.values == 'Product_category').any():     
-        for product in fig2["Product_category"].unique(): 
+        for product in fig2["product_category"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2274,7 +2274,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Product_category'].unique()).set_index(0).index.get_loc(product)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=product,
@@ -2288,7 +2288,7 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=product,
                 showlegend=False
@@ -2304,7 +2304,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=subsector,
@@ -2318,7 +2318,7 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=subsector,
                 showlegend=False))
@@ -2392,7 +2392,7 @@ for sector in fig2['Sector'].unique():
     fig = go.Figure()
 
     if (fig2.columns.values == 'Flow_long').any():     
-        for flow in fig2["Flow_long"].unique(): 
+        for flow in fig2["flow_long"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2401,7 +2401,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=flow,
@@ -2415,14 +2415,14 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=flow,
                 showlegend=False
             )
         )
     elif (fig2.columns.values == 'Product_long').any():  
-        for product in fig2["Product_long"].unique(): 
+        for product in fig2["product_long"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2431,7 +2431,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=product,
@@ -2445,14 +2445,14 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=product,
                 showlegend=False
             )
         )
     elif (fig2.columns.values == 'Product_category').any():     
-        for product in fig2["Product_category"].unique(): 
+        for product in fig2["product_category"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2461,7 +2461,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Product_category'].unique()).set_index(0).index.get_loc(product)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=product,
@@ -2475,7 +2475,7 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=product,
                 showlegend=False
@@ -2491,7 +2491,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=subsector,
@@ -2505,7 +2505,7 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=subsector,
                 showlegend=False))
@@ -2582,7 +2582,7 @@ transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, 
 fig = transport[transport.sum(axis=1)>0.05].T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -2600,8 +2600,8 @@ for sector in fig2['Sector'].unique():
                     name=str(flow).replace('Domestic navigation','Shipping').replace('Domestic aviation','Aviation').replace('Transport not elsewhere specified','Other') + ", " + str(subsector).replace('na','All').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
                     line=dict(width=1, color=colors[
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)+ random.randrange(20)]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(flow) + ", " + str(subsector).replace('na','All').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
@@ -2613,8 +2613,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(subsector).replace('na',''),
                 showlegend=False
@@ -2688,7 +2688,7 @@ for sector in fig2['Sector'].unique():
 
     for product in np.array(['Municipal waste (renewable)', 'Geothermal', 'Solar thermal', 'Electricity'], dtype=object):
 
-        for flow in fig2["Flow_long"].unique(): 
+        for flow in fig2["flow_long"].unique(): 
 
             # Make projected trace
             fig.add_trace(
@@ -2696,8 +2696,8 @@ for sector in fig2['Sector'].unique():
                     name=str(flow).replace('Commercial and public services','Commercial') + ", " + str(product).replace('na','All'),
                     line=dict(width=1, color=colors[
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)+ random.randrange(50)]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(flow).replace('Commercial and public services','Commercial') + ", " + str(product).replace('na','All'),
@@ -2709,8 +2709,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(product).replace('na',''),
                 showlegend=False
@@ -2785,7 +2785,7 @@ for sector in fig2['Sector'].unique():
     fig = go.Figure()
 
     if (fig2.columns.values == 'Flow_long').any():     
-        for flow in fig2["Flow_long"].unique(): 
+        for flow in fig2["flow_long"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2794,7 +2794,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=flow,
@@ -2808,14 +2808,14 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=flow,
                 showlegend=False
             )
         )
     elif (fig2.columns.values == 'Product_long').any():  
-        for product in fig2["Product_long"].unique(): 
+        for product in fig2["product_long"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2824,7 +2824,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=product,
@@ -2838,14 +2838,14 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=product,
                 showlegend=False
             )
         )
     elif (fig2.columns.values == 'Product_category').any():     
-        for product in fig2["Product_category"].unique(): 
+        for product in fig2["product_category"].unique(): 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
@@ -2854,7 +2854,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Product_category'].unique()).set_index(0).index.get_loc(product)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=product,
@@ -2868,7 +2868,7 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=product,
                 showlegend=False
@@ -2884,7 +2884,7 @@ for sector in fig2['Sector'].unique():
                         pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)
                     ]),
                     x=fig2["Year"].unique(),
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=subsector,
@@ -2898,7 +2898,7 @@ for sector in fig2['Sector'].unique():
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
                 x=fig2["Year"].unique()[fig2["Year"].unique()<=data_end_year],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=subsector,
                 showlegend=False))
@@ -2974,13 +2974,13 @@ industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, prod
 fig = electricity.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category"], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_category"].unique(): 
+    for product in fig2["product_category"].unique(): 
         # Make projected trace
         fig.add_trace(
             go.Scatter(
@@ -2988,8 +2988,8 @@ for sector in fig2['Sector'].unique():
                 line=dict(width=1, color=colors[
                     pd.DataFrame(fig2['Product_category'].unique()).set_index(0).index.get_loc(product)
                 ]),
-                x=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["Year"],
-                y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                x=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["Year"],
+                y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=product,
@@ -3002,8 +3002,8 @@ for sector in fig2['Sector'].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
             stackgroup="one",
             legendgroup=product,
             showlegend=False
@@ -3047,7 +3047,7 @@ for sector in fig2['Sector'].unique():
 fig = transport.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -3064,8 +3064,8 @@ for sector in fig2['Sector'].unique():
                     name=str(flow) + ": " + str(subsector).replace('na',"All"). replace("Two- and three-wheeled",'Two/Three-wheelers'),
                     line=dict(width=1, color=colors[
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(flow) + "-" + str(subsector) + "-" + str(product).replace('na','All'),
@@ -3077,8 +3077,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -3122,11 +3122,11 @@ for sector in fig2['Sector'].unique():
 fig = buildings.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category", "flow_long"], value_name="% Adoption")
 
 fig = go.Figure()
 i=0
-for product in fig2["Product_category"].unique(): 
+for product in fig2["product_category"].unique(): 
 
     for flow in fig2['Flow_long'].unique():
 
@@ -3135,8 +3135,8 @@ for product in fig2["Product_category"].unique():
             go.Scatter(
                 name=str(product) + "-" + str(flow),
                 line=dict(width=1, color=colors[i]),
-                x=fig2[(fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=str(product) + "-" + str(flow),
@@ -3148,8 +3148,8 @@ for product in fig2["Product_category"].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
             stackgroup="one",
             legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
             showlegend=False
@@ -3193,14 +3193,14 @@ if save_figs is True:
 fig = industry.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category", "flow_long"], value_name="% Adoption")
 i=0
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_category"].unique(): 
+    for product in fig2["product_category"].unique(): 
 
         for flow in fig2['Flow_long'].unique():
 
@@ -3209,8 +3209,8 @@ for sector in fig2['Sector'].unique():
                 go.Scatter(
                     name=str(product) + "-" + str(flow),
                     line=dict(width=1, color=colors[i]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(product) + "-" + str(flow),
@@ -3222,8 +3222,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -3297,13 +3297,13 @@ industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, prod
 fig = electricity.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category"], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_category"].unique(): 
+    for product in fig2["product_category"].unique(): 
         # Make projected trace
         fig.add_trace(
             go.Scatter(
@@ -3311,8 +3311,8 @@ for sector in fig2['Sector'].unique():
                 line=dict(width=1, color=colors[
                     pd.DataFrame(fig2['Product_category'].unique()).set_index(0).index.get_loc(product)
                 ]),
-                x=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["Year"],
-                y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                x=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["Year"],
+                y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=product,
@@ -3325,8 +3325,8 @@ for sector in fig2['Sector'].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
             stackgroup="one",
             legendgroup=product,
             showlegend=False
@@ -3370,7 +3370,7 @@ for sector in fig2['Sector'].unique():
 fig = transport.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -3387,8 +3387,8 @@ for sector in fig2['Sector'].unique():
                     name=str(flow) + ": " + str(subsector).replace('na',"All"). replace("Two- and three-wheeled",'Two/Three-wheelers'),
                     line=dict(width=1, color=colors[
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(flow) + "-" + str(subsector) + "-" + str(product).replace('na','All'),
@@ -3400,8 +3400,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -3445,11 +3445,11 @@ for sector in fig2['Sector'].unique():
 fig = buildings.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category", "flow_long"], value_name="% Adoption")
 
 fig = go.Figure()
 i=0
-for product in fig2["Product_category"].unique(): 
+for product in fig2["product_category"].unique(): 
 
     for flow in fig2['Flow_long'].unique():
 
@@ -3458,8 +3458,8 @@ for product in fig2["Product_category"].unique():
             go.Scatter(
                 name=str(product) + "-" + str(flow),
                 line=dict(width=1, color=colors[i]),
-                x=fig2[(fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=str(product) + "-" + str(flow),
@@ -3471,8 +3471,8 @@ for product in fig2["Product_category"].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
             stackgroup="one",
             legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
             showlegend=False
@@ -3516,14 +3516,14 @@ if save_figs is True:
 fig = industry.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category", "flow_long"], value_name="% Adoption")
 i=0
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_category"].unique(): 
+    for product in fig2["product_category"].unique(): 
 
         for flow in fig2['Flow_long'].unique():
 
@@ -3532,8 +3532,8 @@ for sector in fig2['Sector'].unique():
                 go.Scatter(
                     name=str(product) + "-" + str(flow),
                     line=dict(width=1, color=colors[i]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(product) + "-" + str(flow),
@@ -3545,8 +3545,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -3620,13 +3620,13 @@ industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, prod
 fig = electricity.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category"], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_category"].unique(): 
+    for product in fig2["product_category"].unique(): 
         # Make projected trace
         fig.add_trace(
             go.Scatter(
@@ -3634,8 +3634,8 @@ for sector in fig2['Sector'].unique():
                 line=dict(width=1, color=colors[
                     pd.DataFrame(fig2['Product_category'].unique()).set_index(0).index.get_loc(product)
                 ]),
-                x=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["Year"],
-                y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                x=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["Year"],
+                y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=product,
@@ -3648,8 +3648,8 @@ for sector in fig2['Sector'].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
             stackgroup="one",
             legendgroup=product,
             showlegend=False
@@ -3693,7 +3693,7 @@ for sector in fig2['Sector'].unique():
 fig = transport.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -3710,8 +3710,8 @@ for sector in fig2['Sector'].unique():
                     name=str(flow) + ": " + str(subsector).replace('na',"All"). replace("Two- and three-wheeled",'Two/Three-wheelers'),
                     line=dict(width=1, color=colors[
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(flow) + "-" + str(subsector) + "-" + str(product).replace('na','All'),
@@ -3723,8 +3723,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -3768,11 +3768,11 @@ for sector in fig2['Sector'].unique():
 fig = buildings.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category", "flow_long"], value_name="% Adoption")
 
 fig = go.Figure()
 i=0
-for product in fig2["Product_category"].unique(): 
+for product in fig2["product_category"].unique(): 
 
     for flow in fig2['Flow_long'].unique():
 
@@ -3781,8 +3781,8 @@ for product in fig2["Product_category"].unique():
             go.Scatter(
                 name=str(product) + "-" + str(flow),
                 line=dict(width=1, color=colors[i]),
-                x=fig2[(fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=str(product) + "-" + str(flow),
@@ -3794,8 +3794,8 @@ for product in fig2["Product_category"].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
             stackgroup="one",
             legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
             showlegend=False
@@ -3839,14 +3839,14 @@ if save_figs is True:
 fig = industry.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category", "flow_long"], value_name="% Adoption")
 i=0
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_category"].unique(): 
+    for product in fig2["product_category"].unique(): 
 
         for flow in fig2['Flow_long'].unique():
 
@@ -3855,8 +3855,8 @@ for sector in fig2['Sector'].unique():
                 go.Scatter(
                     name=str(product) + "-" + str(flow),
                     line=dict(width=1, color=colors[i]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(product) + "-" + str(flow),
@@ -3868,8 +3868,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -3943,13 +3943,13 @@ industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, prod
 fig = pd.concat([electricity, transport, buildings, industry]).T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_long"], value_name="% Adoption")
 
 for vertical in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for subvertical in fig2["Product_long"].unique(): 
+    for subvertical in fig2["product_long"].unique(): 
         # Make projected trace
         fig.add_trace(
             go.Scatter(
@@ -3957,8 +3957,8 @@ for vertical in fig2['Sector'].unique():
                 line=dict(width=1, color=colors[
                     pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(subvertical)
                 ]),
-                x=fig2[(fig2["Sector"] == vertical) & (fig2["Product_long"] == subvertical)]["Year"],
-                y=fig2[(fig2["Sector"] == vertical) & (fig2["Product_long"] == subvertical)]["% Adoption"],
+                x=fig2[(fig2["sector"] == vertical) & (fig2["product_long"] == subvertical)]["Year"],
+                y=fig2[(fig2["sector"] == vertical) & (fig2["product_long"] == subvertical)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=subvertical,
@@ -3971,8 +3971,8 @@ for vertical in fig2['Sector'].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == vertical) & (fig2["Product_long"] == subvertical)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == vertical) & (fig2["Product_long"] == subvertical)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == vertical) & (fig2["product_long"] == subvertical)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == vertical) & (fig2["product_long"] == subvertical)]["% Adoption"],
             stackgroup="one",
             legendgroup=subvertical,
             showlegend=False
@@ -4044,13 +4044,13 @@ industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, prod
 fig = electricity.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category"], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_category"].unique(): 
+    for product in fig2["product_category"].unique(): 
         # Make projected trace
         fig.add_trace(
             go.Scatter(
@@ -4058,8 +4058,8 @@ for sector in fig2['Sector'].unique():
                 line=dict(width=1, color=colors[
                     pd.DataFrame(fig2['Product_category'].unique()).set_index(0).index.get_loc(product)
                 ]),
-                x=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["Year"],
-                y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+                x=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["Year"],
+                y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=product,
@@ -4072,8 +4072,8 @@ for sector in fig2['Sector'].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product)]["% Adoption"],
             stackgroup="one",
             legendgroup=product,
             showlegend=False
@@ -4117,7 +4117,7 @@ for sector in fig2['Sector'].unique():
 fig = transport.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', 'Flow_long'], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -4134,8 +4134,8 @@ for sector in fig2['Sector'].unique():
                     name=str(flow) + ": " + str(subsector).replace('na',"All"). replace("Two- and three-wheeled",'Two/Three-wheelers'),
                     line=dict(width=1, color=colors[
                         pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(flow) + "-" + str(subsector) + "-" + str(product).replace('na','All'),
@@ -4147,8 +4147,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -4192,11 +4192,11 @@ for sector in fig2['Sector'].unique():
 fig = buildings.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category", "flow_long"], value_name="% Adoption")
 
 fig = go.Figure()
 i=0
-for product in fig2["Product_category"].unique(): 
+for product in fig2["product_category"].unique(): 
 
     for flow in fig2['Flow_long'].unique():
 
@@ -4205,8 +4205,8 @@ for product in fig2["Product_category"].unique():
             go.Scatter(
                 name=str(product) + "-" + str(flow),
                 line=dict(width=1, color=colors[i]),
-                x=fig2[(fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 fill="tonexty",
                 stackgroup="two",
                 legendgroup=str(product) + "-" + str(flow),
@@ -4218,8 +4218,8 @@ for product in fig2["Product_category"].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=1, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
             stackgroup="one",
             legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
             showlegend=False
@@ -4263,14 +4263,14 @@ if save_figs is True:
 fig = industry.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_category", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_category", "flow_long"], value_name="% Adoption")
 i=0
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_category"].unique(): 
+    for product in fig2["product_category"].unique(): 
 
         for flow in fig2['Flow_long'].unique():
 
@@ -4279,8 +4279,8 @@ for sector in fig2['Sector'].unique():
                 go.Scatter(
                     name=str(product) + "-" + str(flow),
                     line=dict(width=1, color=colors[i]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(product) + "-" + str(flow),
@@ -4292,8 +4292,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_category"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_category"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -4367,7 +4367,7 @@ transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, 
 fig = transport.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', "Product_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', "product_long"], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -4388,15 +4388,15 @@ for sector in fig2['Sector'].unique():
 
     for subsector in ['Two- and three-wheeled', 'Light','Medium','Heavy']:
 
-        for product in fig2["Product_long"].unique(): 
+        for product in fig2["product_long"].unique(): 
 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
                     name=str(subsector).replace('na','All').replace('Heavy','Trucks').replace('Medium','Buses').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
                     line=dict(width=1),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(subsector).replace('na','All'),
@@ -4408,8 +4408,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(subsector).replace('na',''),
                 showlegend=False
@@ -4497,7 +4497,7 @@ transport = energy_pathway.loc[scenario, region, ['Transportation'], subsector, 
 fig = transport.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', "Product_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', "product_long"], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -4505,15 +4505,15 @@ for sector in fig2['Sector'].unique():
 
     for subsector in ['Two- and three-wheeled', 'Light','Medium','Heavy']:
 
-        for product in fig2["Product_long"].unique(): 
+        for product in fig2["product_long"].unique(): 
 
             # Make projected trace
             fig.add_trace(
                 go.Scatter(
                     name=str(subsector).replace('na','All').replace('Heavy','Trucks').replace('Medium','Buses').replace('Light','Light-duty').replace('Two- and three-wheeled','Two/Three-wheeler'),
                     line=dict(width=1),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product)]["% Adoption"],
                     fill="tonexty",
                     stackgroup="two",
                     legendgroup=str(subsector).replace('na','All'),
@@ -4525,8 +4525,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=1, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product)]["% Adoption"],
                 stackgroup="one",
                 legendgroup=str(subsector).replace('na',''),
                 showlegend=False
@@ -4626,13 +4626,13 @@ industry =  energy_pathway.loc[scenario, region, ['Industrial'], subsector, prod
 fig = electricity.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_long"], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_long"].unique(): 
+    for product in fig2["product_long"].unique(): 
         # Make projected trace
         fig.add_trace(
             go.Scatter(
@@ -4640,8 +4640,8 @@ for sector in fig2['Sector'].unique():
                 line=dict(width=2, color=colors[
                     pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product)
                 ]),
-                x=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["Year"],
-                y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+                x=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product)]["Year"],
+                y=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
                 fill=None,
                 stackgroup=None,
                 legendgroup=product,
@@ -4654,8 +4654,8 @@ for sector in fig2['Sector'].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=2, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product)]["% Adoption"],
             stackgroup=None,
             legendgroup=product,
             showlegend=False
@@ -4698,7 +4698,7 @@ for sector in fig2['Sector'].unique():
 fig = transport.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", 'Subsector', "Product_long", 'Flow_long'], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", 'Subsector', "product_long", 'Flow_long'], value_name="% Adoption")
 
 for sector in fig2['Sector'].unique():
 
@@ -4706,7 +4706,7 @@ for sector in fig2['Sector'].unique():
 
     for subsector in fig2['Subsector'].unique():
 
-        for product in fig2["Product_long"].unique(): 
+        for product in fig2["product_long"].unique(): 
         
             for flow in fig2['Flow_long'].unique():
 
@@ -4716,8 +4716,8 @@ for sector in fig2['Sector'].unique():
                         name=str(product) + "-" + str(flow) + "-" + str(subsector).replace('na','All'),
                         line=dict(width=2, color=colors[
                             pd.DataFrame(fig2['Flow_long'].unique()).set_index(0).index.get_loc(flow) + pd.DataFrame(fig2['Product_long'].unique()).set_index(0).index.get_loc(product) + pd.DataFrame(fig2['Subsector'].unique()).set_index(0).index.get_loc(subsector)]),
-                        x=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                        y=fig2[(fig2["Sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                        x=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                        y=fig2[(fig2["sector"] == sector) & (fig2["Subsector"] == subsector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                         fill=None,
                         stackgroup=None,
                         legendgroup=str(product) + "-" + str(flow) + "-" + str(subsector).replace('na','All'),
@@ -4729,8 +4729,8 @@ for sector in fig2['Sector'].unique():
                 go.Scatter(
                     name="Historical",
                     line=dict(width=2, color="#1c352d"),
-                    x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["Subsector"] == flow) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                     stackgroup=None,
                     legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                     showlegend=False
@@ -4773,11 +4773,11 @@ for sector in fig2['Sector'].unique():
 fig = buildings.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_long", "flow_long"], value_name="% Adoption")
 
 fig = go.Figure()
 i=0
-for product in fig2["Product_long"].unique(): 
+for product in fig2["product_long"].unique(): 
 
     for flow in fig2['Flow_long'].unique():
 
@@ -4786,8 +4786,8 @@ for product in fig2["Product_long"].unique():
             go.Scatter(
                 name=str(product) + "-" + str(flow),
                 line=dict(width=2, color=colors[i]),
-                x=fig2[(fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 fill=None,
                 stackgroup=None,
                 legendgroup=str(product) + "-" + str(flow),
@@ -4799,8 +4799,8 @@ for product in fig2["Product_long"].unique():
         go.Scatter(
             name="Historical",
             line=dict(width=2, color="#1c352d"),
-            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+            x=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+            y=fig2[(fig2["Year"] <= data_end_year) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
             stackgroup=None,
             legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
             showlegend=False
@@ -4843,14 +4843,14 @@ auto_open=False)
 fig = industry.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name=["Sector", "Product_long", "Flow_long"], value_name="% Adoption")
+fig2 = pd.melt(fig, id_vars="Year", var_name=["sector", "product_long", "flow_long"], value_name="% Adoption")
 i=0
 
 for sector in fig2['Sector'].unique():
 
     fig = go.Figure()
 
-    for product in fig2["Product_long"].unique(): 
+    for product in fig2["product_long"].unique(): 
 
         for flow in fig2['Flow_long'].unique():
 
@@ -4859,8 +4859,8 @@ for sector in fig2['Sector'].unique():
                 go.Scatter(
                     name=str(product) + "-" + str(flow),
                     line=dict(width=2, color=colors[i]),
-                    x=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                    y=fig2[(fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                    x=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                    y=fig2[(fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                     fill=None,
                     stackgroup=None,
                     legendgroup=str(product) + "-" + str(flow),
@@ -4872,8 +4872,8 @@ for sector in fig2['Sector'].unique():
             go.Scatter(
                 name="Historical",
                 line=dict(width=2, color="#1c352d"),
-                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["Year"],
-                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["Sector"] == sector) & (fig2["Product_long"] == product) & (fig2["Flow_long"] == flow)]["% Adoption"],
+                x=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["Year"],
+                y=fig2[(fig2["Year"] <= data_end_year) & (fig2["sector"] == sector) & (fig2["product_long"] == product) & (fig2["flow_long"] == flow)]["% Adoption"],
                 stackgroup=None,
                 legendgroup=str(flow) + "-" + str(subsector).replace('na',''),
                 showlegend=False
@@ -5040,13 +5040,13 @@ for i in range(0, len(region_list)):
         .append(em_fw)
     )
 
-    fig = ((em2.groupby("Sector").sum()) / 1000).loc[:, start_year:]
+    fig = ((em2.groupby("sector").sum()) / 1000).loc[:, start_year:]
 
     fig = fig.T
     fig.index.name = "Year"
     fig.reset_index(inplace=True)
     fig2 = pd.melt(
-        fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+        fig, id_vars="Year", var_name="sector", value_name="Emissions, GtCO2e"
     )
 
     fig = go.Figure()
@@ -5056,7 +5056,7 @@ for i in range(0, len(region_list)):
             name="V6: Forests & Wetlands",
             line=dict(width=0.5, color=cl["V6: Forests & Wetlands"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tozeroy",
             stackgroup="fw",
             fillcolor=cl["V6: Forests & Wetlands"][0],
@@ -5064,10 +5064,10 @@ for i in range(0, len(region_list)):
     )
 
     if (
-        fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+        fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
     ).any() == True:
         if (
-            fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+            fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
         ).all() == True:
             fill = "tozeroy"
             stackgroup = "two"
@@ -5083,7 +5083,7 @@ for i in range(0, len(region_list)):
             name="V5: Agriculture",
             line=dict(width=0.5, color=cl["V5: Agriculture"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
             stackgroup=stackgroup,
             fillcolor=cl["V5: Agriculture"][0],
@@ -5098,7 +5098,7 @@ for i in range(0, len(region_list)):
             name="V4: Industry",
             line=dict(width=0.5, color=cl["V4: Industry"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
             fillcolor=cl["V4: Industry"][0],
@@ -5110,7 +5110,7 @@ for i in range(0, len(region_list)):
             name="V3: Buildings",
             line=dict(width=0.5, color=cl["V3: Buildings"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
             fillcolor=cl["V3: Buildings"][0],
@@ -5122,7 +5122,7 @@ for i in range(0, len(region_list)):
             name="V2: Transport",
             line=dict(width=0.5, color=cl["V2: Transport"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
             fillcolor=cl["V2: Transport"][0],
@@ -5134,7 +5134,7 @@ for i in range(0, len(region_list)):
             name="V1: Electricity",
             line=dict(width=0.5, color=cl["V1: Electricity"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
             fillcolor=cl["V1: Electricity"][0],
@@ -5516,13 +5516,13 @@ for i in range(0, len(region_list)):
         .append(em_fw)
     )
 
-    fig = ((em2.groupby("Sector").sum()) / 1000).loc[:, start_year:]
+    fig = ((em2.groupby("sector").sum()) / 1000).loc[:, start_year:]
 
     fig = fig.T
     fig.index.name = "Year"
     fig.reset_index(inplace=True)
     fig2 = pd.melt(
-        fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+        fig, id_vars="Year", var_name="sector", value_name="Emissions, GtCO2e"
     )
 
     fig = go.Figure()
@@ -5532,7 +5532,7 @@ for i in range(0, len(region_list)):
             name="V6: Forests & Wetlands",
             line=dict(width=0.5, color=cl["V6: Forests & Wetlands"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tozeroy",
             stackgroup="fw",
             fillcolor=cl["V6: Forests & Wetlands"][0],
@@ -5540,10 +5540,10 @@ for i in range(0, len(region_list)):
     )
 
     if (
-        fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+        fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
     ).any() == True:
         if (
-            fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+            fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
         ).all() == True:
             fill = "tozeroy"
             stackgroup = "two"
@@ -5559,7 +5559,7 @@ for i in range(0, len(region_list)):
             name="V5: Agriculture",
             line=dict(width=0.5, color=cl["V5: Agriculture"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
             stackgroup=stackgroup,
             fillcolor=cl["V5: Agriculture"][0],
@@ -5574,7 +5574,7 @@ for i in range(0, len(region_list)):
             name="V4: Industry",
             line=dict(width=0.5, color=cl["V4: Industry"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
             fillcolor=cl["V4: Industry"][0],
@@ -5586,7 +5586,7 @@ for i in range(0, len(region_list)):
             name="V3: Buildings",
             line=dict(width=0.5, color=cl["V3: Buildings"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
             fillcolor=cl["V3: Buildings"][0],
@@ -5598,7 +5598,7 @@ for i in range(0, len(region_list)):
             name="V2: Transport",
             line=dict(width=0.5, color=cl["V2: Transport"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
             fillcolor=cl["V2: Transport"][0],
@@ -5610,7 +5610,7 @@ for i in range(0, len(region_list)):
             name="V1: Electricity",
             line=dict(width=0.5, color=cl["V1: Electricity"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
             fillcolor=cl["V1: Electricity"][0],
@@ -5932,7 +5932,7 @@ for i in range(0, len(region_list)):
     em_electricity = (
         em_electricity.loc[~(em_electricity == 0).all(axis=1)]
         .rename(index={"Fossil Fuel Heat": "Fossil Fuels"})
-        .groupby(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        .groupby(["region", "sector", "Metric", "Gas", "scenario"])
         .sum()
     )
 
@@ -6193,7 +6193,7 @@ for i in range(0, len(region_list)):
             [pd.concat([em_cdr], names=["Gas"], keys=["CO2"])],
             names=["Metric"],
             keys=["Carbon Dioxide Removal"],
-        ).reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        ).reorder_levels(["region", "sector", "Metric", "Gas", "scenario"])
 
         em2 = (
             em_electricity.append(em_transport)
@@ -6374,7 +6374,7 @@ for i in range(0, len(region_list)):
             [pd.concat([em_cdr], names=["Gas"], keys=["CO2"])],
             names=["Metric"],
             keys=["Carbon Dioxide Removal"],
-        ).reorder_levels(["Region", "Sector", "Metric", "Gas", "Scenario"])
+        ).reorder_levels(["region", "sector", "Metric", "Gas", "scenario"])
 
         em2 = (
             em_electricity.append(em_transport)
@@ -6398,7 +6398,7 @@ for i in range(0, len(region_list)):
         fig = (
             (
                 em2.loc[region_list[i], slice(None), slice(None), gas, scenario, :]
-                .groupby("Sector")
+                .groupby("sector")
                 .sum()
             )
             / 1000
@@ -6420,7 +6420,7 @@ for i in range(0, len(region_list)):
                         width=0.5,
                         color=colors[
                             pd.DataFrame(em2.index.get_level_values(1).unique())
-                            .set_index("Sector")
+                            .set_index("sector")
                             .index.get_loc(j)
                         ],
                     ),
@@ -6560,7 +6560,7 @@ em2 = em2.loc[~(em2 == 0).all(axis=1)]
 fig = (
     (
         em2.loc[slice(None), slice(None), ["Fossil Fuel Heat"], slice(None), scenario]
-        .groupby(["Region", "Metric"])
+        .groupby(["region", "Metric"])
         .sum()
     )
     / 1000
@@ -6692,14 +6692,14 @@ for i in range(0, len(region_list)):
         .append(em_fw)
     )
 
-    fig = ((em2.groupby("Sector").sum()) / 1000).loc[:, start_year:]
+    fig = ((em2.groupby("sector").sum()) / 1000).loc[:, start_year:]
     fig = fig.clip(lower=0)
 
     fig = fig.T
     fig.index.name = "Year"
     fig.reset_index(inplace=True)
     fig2 = pd.melt(
-        fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+        fig, id_vars="Year", var_name="sector", value_name="Emissions, GtCO2e"
     )
 
     fig = go.Figure()
@@ -6709,7 +6709,7 @@ for i in range(0, len(region_list)):
             name="V6: Forests & Wetlands",
             line=dict(width=0.5, color="#54A24B"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tozeroy",
             stackgroup="fw",
             groupnorm="percent",
@@ -6717,10 +6717,10 @@ for i in range(0, len(region_list)):
     )
 
     if (
-        fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+        fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
     ).any() == True:
         if (
-            fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
+            fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"] < 0
         ).all() == True:
             fill = "tozeroy"
             stackgroup = "two"
@@ -6736,7 +6736,7 @@ for i in range(0, len(region_list)):
             name="V5: Agriculture",
             line=dict(width=0.5, color="#EECA3B"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
             stackgroup=stackgroup,
             groupnorm="percent",
@@ -6751,7 +6751,7 @@ for i in range(0, len(region_list)):
             name="V4: Industry",
             line=dict(width=0.5, color="#60738C"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
         )
@@ -6762,7 +6762,7 @@ for i in range(0, len(region_list)):
             name="V3: Buildings",
             line=dict(width=0.5, color="#F58518"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
         )
@@ -6773,7 +6773,7 @@ for i in range(0, len(region_list)):
             name="V2: Transport",
             line=dict(width=0.5, color="#7AA8B8"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
         )
@@ -6784,7 +6784,7 @@ for i in range(0, len(region_list)):
             name="V1: Electricity",
             line=dict(width=0.5, color="#B279A2"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup=stackgroup2,
         )
@@ -6848,7 +6848,7 @@ start_year = start_year
 altscen = str()
 
 em_targets = pd.read_csv("podi/data/iamc_data.csv").set_index(
-    ["Model", "Region", "Scenario", "Variable", "Unit"]
+    ["model", "region", "scenario", "variable", "unit"]
 )
 em_targets.columns = em_targets.columns.astype(int)
 em_targets = em_targets.loc[
@@ -6856,7 +6856,7 @@ em_targets = em_targets.loc[
     "World ",
     ["SSP2-Baseline", "SSP2-19", "SSP2-26"],
     "Emissions|Kyoto Gases",
-].droplevel("Unit")
+].droplevel("unit")
 
 ndcs = [
     [(2030, 2050), (24, 0), ("50% by 2030", "Net-zero by 2050")],
@@ -6933,7 +6933,7 @@ for i in range(0, len(region_list)):
 
         cdr2 = (
             pd.read_csv("podi/data/cdr_curve.csv")
-            .set_index(["Region", "Sector", "Scenario"])
+            .set_index(["region", "sector", "scenario"])
             .fillna(0)
         )
         cdr2.columns = cdr2.columns.astype(int)
@@ -6983,7 +6983,7 @@ for i in range(0, len(region_list)):
     elif region_list[i] in ["US ", "CHINA ", "EUR "]:
         cdr2 = (
             pd.read_csv("podi/data/cdr_curve.csv")
-            .set_index(["Region", "Sector", "Scenario"])
+            .set_index(["region", "sector", "scenario"])
             .fillna(0)
         )
         cdr2.columns = cdr2.columns.astype(int)
@@ -7058,7 +7058,7 @@ for i in range(0, len(region_list)):
 
     spacer = (
         pd.Series(
-            em_baseline.groupby("Region").sum().loc[region_list[i]] - em_mit.sum()
+            em_baseline.groupby("region").sum().loc[region_list[i]] - em_mit.sum()
         )
         .replace(nan, 0)
         .rename("")
@@ -7094,7 +7094,7 @@ for i in range(0, len(region_list)):
     fig.index.name = "Year"
     fig.reset_index(inplace=True)
     fig2 = pd.melt(
-        fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+        fig, id_vars="Year", var_name="sector", value_name="Emissions, GtCO2e"
     )
 
     fig = go.Figure()
@@ -7104,7 +7104,7 @@ for i in range(0, len(region_list)):
             name="",
             line=dict(width=0.5, color="rgba(230, 236, 245, 0)"),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == ""]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == ""]["Emissions, GtCO2e"],
             fill="tozeroy",
             stackgroup="one",
             showlegend=False,
@@ -7117,7 +7117,7 @@ for i in range(0, len(region_list)):
                 name="V7: CDR",
                 line=dict(width=0.5, color=cl["V7: CDR"][0]),
                 x=fig2["Year"],
-                y=fig2[fig2["Sector"] == "CDR"]["Emissions, GtCO2e"],
+                y=fig2[fig2["sector"] == "CDR"]["Emissions, GtCO2e"],
                 fill="tonexty",
                 stackgroup="one",
                 fillcolor=cl["V7: CDR"][0],
@@ -7127,7 +7127,7 @@ for i in range(0, len(region_list)):
         fig.add_annotation(
             text="Cumulative CDR 2020-2030: "
             + str(
-                fig2[(fig2["Sector"] == "CDR") & (fig2["Year"] < 2031)][
+                fig2[(fig2["sector"] == "CDR") & (fig2["Year"] < 2031)][
                     "Emissions, GtCO2e"
                 ]
                 .values.sum()
@@ -7150,7 +7150,7 @@ for i in range(0, len(region_list)):
             text="Cumulative CDR 2030-2040: "
             + str(
                 fig2[
-                    (fig2["Sector"] == "CDR")
+                    (fig2["sector"] == "CDR")
                     & (fig2["Year"] > 2030)
                     & (fig2["Year"] < 2041)
                 ]["Emissions, GtCO2e"]
@@ -7174,7 +7174,7 @@ for i in range(0, len(region_list)):
             text="Cumulative CDR 2040-2050: "
             + str(
                 fig2[
-                    (fig2["Sector"] == "CDR")
+                    (fig2["sector"] == "CDR")
                     & (fig2["Year"] > 2040)
                     & (fig2["Year"] < 2051)
                 ]["Emissions, GtCO2e"]
@@ -7198,7 +7198,7 @@ for i in range(0, len(region_list)):
             text="Cumulative CDR 2050-2060: "
             + str(
                 fig2[
-                    (fig2["Sector"] == "CDR")
+                    (fig2["sector"] == "CDR")
                     & (fig2["Year"] > 2050)
                     & (fig2["Year"] < 2061)
                 ]["Emissions, GtCO2e"]
@@ -7223,7 +7223,7 @@ for i in range(0, len(region_list)):
             name="V6: Forests & Wetlands",
             line=dict(width=0.5, color=cl["V6: Forests & Wetlands"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Forests & Wetlands"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup="one",
             fillcolor=cl["V6: Forests & Wetlands"][0],
@@ -7234,7 +7234,7 @@ for i in range(0, len(region_list)):
             name="V5: Agriculture",
             line=dict(width=0.5, color=cl["V5: Agriculture"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Agriculture"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup="one",
             fillcolor=cl["V5: Agriculture"][0],
@@ -7245,7 +7245,7 @@ for i in range(0, len(region_list)):
             name="V4: Industry",
             line=dict(width=0.5, color=cl["V4: Industry"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Industry"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Industry"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup="one",
             fillcolor=cl["V4: Industry"][0],
@@ -7256,7 +7256,7 @@ for i in range(0, len(region_list)):
             name="V3: Buildings",
             line=dict(width=0.5, color=cl["V3: Buildings"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Buildings"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Buildings"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup="one",
             fillcolor=cl["V3: Buildings"][0],
@@ -7267,7 +7267,7 @@ for i in range(0, len(region_list)):
             name="V2: Transport",
             line=dict(width=0.5, color=cl["V2: Transport"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Transport"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Transport"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup="one",
             fillcolor=cl["V2: Transport"][0],
@@ -7278,7 +7278,7 @@ for i in range(0, len(region_list)):
             name="V1: Electricity",
             line=dict(width=0.5, color=cl["V1: Electricity"][0]),
             x=fig2["Year"],
-            y=fig2[fig2["Sector"] == "Electricity"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Electricity"]["Emissions, GtCO2e"],
             fill="tonexty",
             stackgroup="one",
             fillcolor=cl["V1: Electricity"][0],
@@ -7446,7 +7446,7 @@ for i in range(0, len(region_list)):
             x=pd.Series(em_targets.loc["SSP2-26", near_proj_start_year:].index.values),
             y=pd.Series(
                 em_baseline.loc[:, near_proj_start_year:]
-                .groupby("Region")
+                .groupby("region")
                 .sum()
                 .loc[region_list[i]]
                 / 1000
@@ -7672,7 +7672,7 @@ for i in range(0, len(region_list)):
 
     spacer = (
         pd.Series(
-            em_baseline.groupby("Region").sum().loc[region_list[i]] - em_mit.sum()
+            em_baseline.groupby("region").sum().loc[region_list[i]] - em_mit.sum()
         )
         .replace(nan, 0)
         .rename("")
@@ -7701,7 +7701,7 @@ for i in range(0, len(region_list)):
         fig.index.name = "Year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(
-            fig, id_vars="Year", var_name="Sector", value_name="Emissions, GtCO2e"
+            fig, id_vars="Year", var_name="sector", value_name="Emissions, GtCO2e"
         )
 
         fig = go.Figure()
@@ -7711,7 +7711,7 @@ for i in range(0, len(region_list)):
                 name="",
                 line=dict(width=0.5, color="rgba(230, 236, 245, 0)"),
                 x=fig2["Year"],
-                y=fig2[fig2["Sector"] == ""]["Emissions, GtCO2e"],
+                y=fig2[fig2["sector"] == ""]["Emissions, GtCO2e"],
                 fill="tozeroy",
                 stackgroup="one",
                 showlegend=False,
@@ -8275,7 +8275,7 @@ for year in [2030, 2050]:
                     type="line",
                     x0=(
                         pd.Series(
-                            em_baseline.groupby("Region")
+                            em_baseline.groupby("region")
                             .sum()
                             .loc[region_list[i]][year]
                             / 1e3
@@ -8285,7 +8285,7 @@ for year in [2030, 2050]:
                     y0=-0.5,
                     x1=(
                         pd.Series(
-                            em_baseline.groupby("Region")
+                            em_baseline.groupby("region")
                             .sum()
                             .loc[region_list[i]][year]
                             / 1e3
@@ -8380,7 +8380,7 @@ for year in [2030, 2050]:
                 type="line",
                 x0=(
                     pd.Series(
-                        em_baseline.groupby("Region").sum().loc[region_list[i]][year]
+                        em_baseline.groupby("region").sum().loc[region_list[i]][year]
                         / 1e3
                         - ndcs[i][1][j]
                     ).values[0]
@@ -8388,7 +8388,7 @@ for year in [2030, 2050]:
                 y0=-0.5,
                 x1=(
                     pd.Series(
-                        em_baseline.groupby("Region").sum().loc[region_list[i]][year]
+                        em_baseline.groupby("region").sum().loc[region_list[i]][year]
                         / 1e3
                         - ndcs[i][1][j]
                     ).values[0]
@@ -8461,7 +8461,7 @@ for year in [2030, 2050]:
                     ].values.sum()
                     / 1e3
                 ) / (
-                    em_baseline.groupby("Region").sum().loc[region_list[i]][year] / 1e3
+                    em_baseline.groupby("region").sum().loc[region_list[i]][year] / 1e3
                     - ndcs[i][1][j]
                 )
 
@@ -8486,7 +8486,7 @@ for year in [2030, 2050]:
                     + " GtCO2e  /  "
                     + str(
                         (
-                            em_baseline.groupby("Region")
+                            em_baseline.groupby("region")
                             .sum()
                             .loc[region_list[i]][year]
                             / 1e3
@@ -8513,7 +8513,7 @@ for year in [2030, 2050]:
                 ].values.sum()
                 / 1e3
             ) / (
-                em_baseline.groupby("Region").sum().loc[region_list[i]][year] / 1e3
+                em_baseline.groupby("region").sum().loc[region_list[i]][year] / 1e3
                 - ipcc[i][1][j]
             )
 
@@ -8539,7 +8539,7 @@ for year in [2030, 2050]:
                 + "  /  "
                 + str(
                     (
-                        em_baseline.groupby("Region").sum().loc[region_list[i]][year]
+                        em_baseline.groupby("region").sum().loc[region_list[i]][year]
                         / 1e3
                         - ipcc[i][1][j]
                     ).round(decimals=2)
@@ -8706,7 +8706,7 @@ for i in range(0, len(region_list)):
 
     spacer = (
         pd.Series(
-            em_baseline.groupby("Region").sum().loc[region_list[i]]
+            em_baseline.groupby("region").sum().loc[region_list[i]]
             - em_mit.loc[
                 ["V1: Electricity", "V2: Transport", "V3: Buildings", "V4: Industry"], :
             ].sum()
@@ -8833,21 +8833,21 @@ product_category = slice(None)
 product = slice(None)
 flow_category = "Final consumption"  # Choose 'Final consumption' (applicable to Industrial/Transportation/Commercial/Residential); 'Energy industry own use and Losses' (applicable to Electric Power/Industrial/Transportation); 'Supply'(applicable to Transportation); 'Transformation processes'(applicable to Electric Power/Industrial); 'Electricity output'(applicable to Electric Power/Industrial); 'Heat output'(applicable to Industrial)
 flow = slice(None)
-groupby = "Product_long"  # Choose 'Subsector', 'Product_category', 'Product', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy'
+groupby = "product_long"  # Choose 'Subsector', 'Product_category', 'Product', 'Flow', 'Hydrogen', 'Flexible', 'Nonenergy'
 
 for sector in energy_pathway.index.get_level_values(2).unique():
     # Calculate wedge due to removal of upstream demand 
         index = [
-        "Scenario",
-        "Region",
-        "Sector",
+        "scenario",
+        "region",
+        "sector",
         "Subsector",
-        "Product_category",
-        "Product_long",
-        "Product",
-        "Flow_category",
-        "Flow_long",
-        "Flow",
+        "product_category",
+        "product_long",
+        "product",
+        "flow_category",
+        "flow_long",
+        "flow",
         "Hydrogen",
         "Flexible",
         "Nonenergy",
@@ -8950,14 +8950,14 @@ em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 
 hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
-    ["Region", "Metric", "Units", "Scenario"]
+    ["region", "Metric", "Units", "scenario"]
 )
 hist.columns = hist.columns.astype(int)
 hist = hist.loc["World ", "Atm conc CO2", "ppm", "pathway"].T.dropna()
 
 cdr2 = (
     pd.read_csv("podi/data/cdr_curve.csv")
-    .set_index(["Region", "Sector", "Scenario"])
+    .set_index(["region", "sector", "scenario"])
     .fillna(0)
 )
 cdr2.columns = cdr2.columns.astype(int)
@@ -9265,7 +9265,7 @@ em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 
 hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
-    ["Region", "Metric", "Units", "Scenario"]
+    ["region", "Metric", "Units", "scenario"]
 )
 hist.columns = hist.columns.astype(int)
 hist = hist.loc["World ", "Equivalent CO2", "ppm", "pathway"].T.dropna()
@@ -9928,7 +9928,7 @@ T19 = T.loc[
 
 cdr2 = (
     pd.read_csv("podi/data/cdr_curve.csv")
-    .set_index(["Region", "Sector", "Scenario"])
+    .set_index(["region", "sector", "scenario"])
     .fillna(0)
 )
 cdr2.columns = cdr2.columns.astype(int)
@@ -10408,7 +10408,7 @@ if save_figs is True:
 # region
 
 cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").set_index(
-    ["Region", "Sector", "Scenario"]
+    ["region", "sector", "scenario"]
 )
 cdr_pathway.columns = cdr_pathway.columns.astype(int)
 
@@ -10432,7 +10432,7 @@ for scen in ["pathway"]:
 costs.columns = np.arange(2020, 2101, 1)
 costs = (curve_smooth(-costs, "quadratic", 7)).clip(lower=0) / 1e6
 costs.rename(index={"pathway": "DAU21", "dauffi": "V4", "daupl": "PL"}, inplace=True)
-costs.index.name = "Scenario"
+costs.index.name = "scenario"
 
 cdr_costs = costs
 
@@ -10462,7 +10462,7 @@ afolu_em_mit_dau21 = (
                 "baseline",
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
             - afolu_em1.loc[
                 "World ",
                 ["Regenerative Agriculture", "Forests & Wetlands"],
@@ -10471,9 +10471,9 @@ afolu_em_mit_dau21 = (
                 "pathway",
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
         )
-        .groupby(["Region", "Sector", "Metric"])
+        .groupby(["region", "sector", "Metric"])
         .sum()
     )
     .multiply(costs_fwra.T.values, "index")
@@ -10491,7 +10491,7 @@ afolu_em_mit_v4 = (
                 "baseline",
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
             - afolu_em1.loc[
                 "World ",
                 ["Regenerative Agriculture", "Forests & Wetlands"],
@@ -10500,11 +10500,11 @@ afolu_em_mit_v4 = (
                 "pathway",
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
         )
         * 0
     )
-    .groupby(["Region", "Sector", "Metric"])
+    .groupby(["region", "sector", "Metric"])
     .sum()
     .sum()
 )
@@ -10516,12 +10516,12 @@ afolu_em_mit_v5 = (
                 "World ", ["Forests & Wetlands"], slice(None), slice(None), "baseline"
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
             - afolu_em1.loc[
                 "World ", ["Forests & Wetlands"], slice(None), slice(None), "pathway"
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
         ).append(
             afolu_em.loc[
                 "World ",
@@ -10531,7 +10531,7 @@ afolu_em_mit_v5 = (
                 "baseline",
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
             - afolu_em.loc[
                 "World ",
                 ["Regenerative Agriculture"],
@@ -10540,10 +10540,10 @@ afolu_em_mit_v5 = (
                 "pathway",
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
         )
     )
-    .groupby(["Region", "Sector", "Metric"])
+    .groupby(["region", "sector", "Metric"])
     .sum()
 ).multiply(costs_fwra.T.values, "index").sum() - afolu_em_mit_dau21
 
@@ -10554,12 +10554,12 @@ afolu_em_mit_v6 = (
                 "World ", ["Forests & Wetlands"], slice(None), slice(None), "baseline"
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
             - afolu_em.loc[
                 "World ", ["Forests & Wetlands"], slice(None), slice(None), "pathway"
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
         ).append(
             afolu_em1.loc[
                 "World ",
@@ -10569,7 +10569,7 @@ afolu_em_mit_v6 = (
                 "baseline",
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
             - afolu_em1.loc[
                 "World ",
                 ["Regenerative Agriculture"],
@@ -10578,10 +10578,10 @@ afolu_em_mit_v6 = (
                 "pathway",
             ]
             .loc[:, 2020:]
-            .droplevel("Scenario")
+            .droplevel("scenario")
         )
     )
-    .groupby(["Region", "Sector", "Metric"])
+    .groupby(["region", "sector", "Metric"])
     .sum()
 ).multiply(costs_fwra.T.values, "index").sum() - afolu_em_mit_dau21
 
@@ -10595,7 +10595,7 @@ afolu_em_mit_v5v6 = (
             "baseline",
         ]
         .loc[:, 2020:]
-        .droplevel("Scenario")
+        .droplevel("scenario")
         - afolu_em.loc[
             "World ",
             ["Forests & Wetlands", "Regenerative Agriculture"],
@@ -10604,9 +10604,9 @@ afolu_em_mit_v5v6 = (
             "pathway",
         ]
         .loc[:, 2020:]
-        .droplevel("Scenario")
+        .droplevel("scenario")
     )
-    .groupby(["Region", "Sector", "Metric"])
+    .groupby(["region", "sector", "Metric"])
     .sum()
 ).multiply(costs_fwra.T.values, "index").sum() - afolu_em_mit_dau21
 
@@ -10634,19 +10634,19 @@ afolu_costs = (
     / 1e6
 )
 
-afolu_costs.index.name = "Scenario"
+afolu_costs.index.name = "scenario"
 
 # endregion
 
-costs = cdr_costs.append(afolu_costs).groupby("Scenario").sum()
+costs = cdr_costs.append(afolu_costs).groupby("scenario").sum()
 
-cdr_costs = pd.DataFrame(pd.read_csv("cdr costs line28228.csv")).set_index("Scenario")
+cdr_costs = pd.DataFrame(pd.read_csv("cdr costs line28228.csv")).set_index("scenario")
 
 afolu_costs = pd.DataFrame(pd.read_csv("afolu costs line28228.csv")).set_index(
-    "Scenario"
+    "scenario"
 )
 
-costs = pd.DataFrame(pd.read_csv("costs line28228.csv")).set_index("Scenario")
+costs = pd.DataFrame(pd.read_csv("costs line28228.csv")).set_index("scenario")
 
 costs.columns = costs.columns.astype(int)
 show_figs = True
@@ -10666,24 +10666,24 @@ fig = afolu_costs.clip(lower=0)
 fig = fig.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+fig2 = pd.melt(fig, id_vars="Year", var_name="scenario", value_name="Cost")
 
 fig = go.Figure()
 
-for x in fig2["Scenario"].unique():
+for x in fig2["scenario"].unique():
     fig.add_trace(
         go.Scatter(
             name=x,
             line=dict(
                 width=3,
                 color=colors[
-                    pd.DataFrame(fig2["Scenario"].unique())
+                    pd.DataFrame(fig2["scenario"].unique())
                     .set_index(0)
                     .index.get_loc(x)
                 ],
             ),
             x=fig2["Year"],
-            y=fig2[fig2["Scenario"] == x]["Cost"],
+            y=fig2[fig2["scenario"] == x]["Cost"],
             fill="none",
             stackgroup=x,
             legendgroup=x,
@@ -10729,24 +10729,24 @@ fig = cdr_costs.clip(lower=0)
 fig = fig.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+fig2 = pd.melt(fig, id_vars="Year", var_name="scenario", value_name="Cost")
 
 fig = go.Figure()
 
-for x in fig2["Scenario"].unique():
+for x in fig2["scenario"].unique():
     fig.add_trace(
         go.Scatter(
             name=x,
             line=dict(
                 width=3,
                 color=colors[
-                    pd.DataFrame(fig2["Scenario"].unique())
+                    pd.DataFrame(fig2["scenario"].unique())
                     .set_index(0)
                     .index.get_loc(x)
                 ],
             ),
             x=fig2["Year"],
-            y=fig2[fig2["Scenario"] == x]["Cost"],
+            y=fig2[fig2["scenario"] == x]["Cost"],
             fill="none",
             stackgroup=x,
             legendgroup=x,
@@ -10792,24 +10792,24 @@ fig = cdr_costs.clip(lower=0)/cdr_pathway.loc["World ", "Carbon Dioxide Removal"
 fig = fig.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+fig2 = pd.melt(fig, id_vars="Year", var_name="scenario", value_name="Cost")
 
 fig = go.Figure()
 
-for x in fig2["Scenario"].unique():
+for x in fig2["scenario"].unique():
     fig.add_trace(
         go.Scatter(
             name=x,
             line=dict(
                 width=3,
                 color=colors[
-                    pd.DataFrame(fig2["Scenario"].unique())
+                    pd.DataFrame(fig2["scenario"].unique())
                     .set_index(0)
                     .index.get_loc(x)
                 ],
             ),
             x=fig2["Year"],
-            y=fig2[fig2["Scenario"] == x]["Cost"],
+            y=fig2[fig2["scenario"] == x]["Cost"],
             fill="none",
             stackgroup=x,
             legendgroup=x,
@@ -10855,24 +10855,24 @@ fig = costs.clip(lower=0)
 fig = fig.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+fig2 = pd.melt(fig, id_vars="Year", var_name="scenario", value_name="Cost")
 
 fig = go.Figure()
 
-for x in fig2["Scenario"].unique():
+for x in fig2["scenario"].unique():
     fig.add_trace(
         go.Scatter(
             name=x,
             line=dict(
                 width=3,
                 color=colors[
-                    pd.DataFrame(fig2["Scenario"].unique())
+                    pd.DataFrame(fig2["scenario"].unique())
                     .set_index(0)
                     .index.get_loc(x)
                 ],
             ),
             x=fig2["Year"],
-            y=fig2[fig2["Scenario"] == x]["Cost"],
+            y=fig2[fig2["scenario"] == x]["Cost"],
             fill="none",
             stackgroup=x,
             legendgroup=x,
@@ -10920,24 +10920,24 @@ fig.loc["DAU21"] = fig.loc["DAU21"] + 0.06
 fig = fig.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+fig2 = pd.melt(fig, id_vars="Year", var_name="scenario", value_name="Cost")
 
 fig = go.Figure()
 
-for x in fig2["Scenario"].unique():
+for x in fig2["scenario"].unique():
     fig.add_trace(
         go.Scatter(
             name=x,
             line=dict(
                 width=3,
                 color=colors[
-                    pd.DataFrame(fig2["Scenario"].unique())
+                    pd.DataFrame(fig2["scenario"].unique())
                     .set_index(0)
                     .index.get_loc(x)
                 ],
             ),
             x=fig2["Year"],
-            y=fig2[fig2["Scenario"] == x]["Cost"],
+            y=fig2[fig2["scenario"] == x]["Cost"],
             fill="none",
             stackgroup=x,
             legendgroup=x,
@@ -10983,24 +10983,24 @@ fig = cdr_costs.clip(lower=0).cumsum(axis=1).loc[:, :2060]
 fig = fig.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+fig2 = pd.melt(fig, id_vars="Year", var_name="scenario", value_name="Cost")
 
 fig = go.Figure()
 
-for x in fig2["Scenario"].unique():
+for x in fig2["scenario"].unique():
     fig.add_trace(
         go.Scatter(
             name=x,
             line=dict(
                 width=3,
                 color=colors[
-                    pd.DataFrame(fig2["Scenario"].unique())
+                    pd.DataFrame(fig2["scenario"].unique())
                     .set_index(0)
                     .index.get_loc(x)
                 ],
             ),
             x=fig2["Year"],
-            y=fig2[fig2["Scenario"] == x]["Cost"],
+            y=fig2[fig2["scenario"] == x]["Cost"],
             fill="none",
             stackgroup=x,
             legendgroup=x,
@@ -11046,24 +11046,24 @@ fig = costs.clip(lower=0).cumsum(axis=1).loc[:, :2060]
 fig = fig.T
 fig.index.name = "Year"
 fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="Year", var_name="Scenario", value_name="Cost")
+fig2 = pd.melt(fig, id_vars="Year", var_name="scenario", value_name="Cost")
 
 fig = go.Figure()
 
-for x in fig2["Scenario"].unique():
+for x in fig2["scenario"].unique():
     fig.add_trace(
         go.Scatter(
             name=x,
             line=dict(
                 width=3,
                 color=colors[
-                    pd.DataFrame(fig2["Scenario"].unique())
+                    pd.DataFrame(fig2["scenario"].unique())
                     .set_index(0)
                     .index.get_loc(x)
                 ],
             ),
             x=fig2["Year"],
-            y=fig2[fig2["Scenario"] == x]["Cost"],
+            y=fig2[fig2["scenario"] == x]["Cost"],
             fill="none",
             stackgroup=x,
             legendgroup=x,

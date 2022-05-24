@@ -11,24 +11,24 @@ def wws_etl(data_source):
     )
 
     elec_gen = (
-        elec_gen.merge(region_categories, right_on=["WWS Region"], left_on=["Region"])
+        elec_gen.merge(region_categories, right_on=["WWS Region"], left_on=["region"])
         .dropna()
-        .drop(columns=["Region", "WWS Region"])
-        .rename(columns={"WEB Region": "Region"})
+        .drop(columns=["region", "WWS Region"])
+        .rename(columns={"WEB Region": "region"})
     )
-    elec_gen["Region"] = elec_gen["Region"].str.lower()
-    elec_gen.set_index("Region", inplace=True)
+    elec_gen["region"] = elec_gen["region"].str.lower()
+    elec_gen.set_index("region", inplace=True)
 
     # Reformat for insertion in tech_parameters.csv
     elec_gen = pd.melt(
-        elec_gen, var_name="Product", value_name="Value", ignore_index=False
+        elec_gen, var_name="product", value_name="Value", ignore_index=False
     )
     elec_gen["Metric"] = "saturation point"
-    elec_gen["Sector"] = "Electric Power"
-    elec_gen["Scenario"] = "pathway"
+    elec_gen["sector"] = "Electric Power"
+    elec_gen["scenario"] = "pathway"
     elec_gen["Source"] = "wws"
     elec_gen.set_index(
-        ["Product", "Scenario", "Sector", "Metric"], append=True, inplace=True
+        ["product", "scenario", "sector", "Metric"], append=True, inplace=True
     )
 
     # Add to tech_parameters

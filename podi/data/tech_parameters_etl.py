@@ -7,7 +7,7 @@ import pandas as pd
 tech_parameters = pd.read_csv("podi/data/tech_parameters.csv")
 regions = (
     pd.read_fwf("podi/data/IEA/Regions.txt")
-    .rename(columns={"REGION": "Region"})
+    .rename(columns={"REGION": "region"})
     .squeeze()
 ).str.lower()
 

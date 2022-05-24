@@ -577,10 +577,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
 
         # Add Sector, Product_long, Flow_category, Flow_long indices
-        each["Product_long"] = each["variable"].str.split("|", expand=True)[0].values
+        each["product_long"] = each["variable"].str.split("|", expand=True)[0].values
 
         def addsector(x):
-            if x["Product_long"] in [
+            if x["product_long"] in [
                 "Biochar",
                 "Cropland Soil Health",
                 "Nitrogen Fertilizer Management",
@@ -590,7 +590,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Optimal Intensity",
             ]:
                 return "Agriculture"
-            elif x["Product_long"] in [
+            elif x["product_long"] in [
                 "Improved Forest Mgmt",
                 "Natural Regeneration",
                 "Avoided Coastal Impacts",
@@ -603,10 +603,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         each["sector"] = each.apply(lambda x: addsector(x), axis=1)
 
-        each["Flow_category"] = "Emissions"
+        each["flow_category"] = "Emissions"
 
         def addgas(x):
-            if x["Product_long"] in [
+            if x["product_long"] in [
                 "Biochar",
                 "Cropland Soil Health",
                 "Silvopasture",
@@ -614,7 +614,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Optimal Intensity",
             ]:
                 return "CO2"
-            if x["Product_long"] in [
+            if x["product_long"] in [
                 "Improved Forest Mgmt",
                 "Natural Regeneration",
                 "Avoided Coastal Impacts",
@@ -625,13 +625,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Improved Rice",
             ]:
                 return "CH4"
-            if x["Product_long"] in [
+            if x["product_long"] in [
                 "Improved Rice",
                 "Nitrogen Fertilizer Management",
             ]:
                 return "N2O"
 
-        each["Flow_long"] = each.apply(lambda x: addgas(x), axis=1)
+        each["flow_long"] = each.apply(lambda x: addgas(x), axis=1)
 
         each = each.set_index(
             [
@@ -639,9 +639,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "scenario",
                 "region",
                 "sector",
-                "Product_long",
-                "Flow_category",
-                "Flow_long",
+                "product_long",
+                "flow_category",
+                "flow_long",
                 "unit",
             ]
         ).drop(columns=["variable"])

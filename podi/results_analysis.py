@@ -92,7 +92,7 @@ def results_analysis(
                     region2, ["Fossil fuels", "Other fuels"], scenario, :
                 ]
             )
-            .groupby("Region")
+            .groupby("region")
             .sum()
             .sum()
         ).div(
@@ -371,11 +371,11 @@ def results_analysis(
     adoption_curves = adoption_curves.append(cdr_decarb.loc[:, data_start_year:2100])
     adoption_curves = adoption_curves.append(other_decarb.loc[:, data_start_year:2100])
 
-    adoption_curves.index.name = "Sector"
-    adoption_curves["Region"] = region
-    adoption_curves["Scenario"] = scenario
+    adoption_curves.index.name = "sector"
+    adoption_curves["region"] = region
+    adoption_curves["scenario"] = scenario
     adoption_curves.reset_index(inplace=True)
-    adoption_curves.set_index(["Region", "Sector", "Scenario"], inplace=True)
+    adoption_curves.set_index(["region", "sector", "scenario"], inplace=True)
 
     # endregion
 
@@ -402,8 +402,8 @@ def results_analysis(
     sgrid_decarb = sgrid_decarb.append(pd.DataFrame(sgrid_decarb.loc[['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave']].sum()).T.rename(index={0:'Other ren'})).drop(index=['Biomass and waste', 'Geothermal', 'Hydroelectricity', 'Nuclear', 'Tide and wave'])
     """
 
-    sgrid_decarb = pd.concat([sgrid_decarb], keys=["Electricity"], names=["Sector"])
-    sgrid_decarb = pd.concat([sgrid_decarb], keys=[region], names=["Region"])
+    sgrid_decarb = pd.concat([sgrid_decarb], keys=["Electricity"], names=["sector"])
+    sgrid_decarb = pd.concat([sgrid_decarb], keys=[region], names=["region"])
 
     # endregion
 
@@ -464,9 +464,9 @@ def results_analysis(
     stransport_decarb.index.name = "Metric"
 
     stransport_decarb = pd.concat(
-        [stransport_decarb], keys=["Transport"], names=["Sector"]
+        [stransport_decarb], keys=["Transport"], names=["sector"]
     )
-    stransport_decarb = pd.concat([stransport_decarb], keys=[region], names=["Region"])
+    stransport_decarb = pd.concat([stransport_decarb], keys=[region], names=["region"])
 
     # endregion
 
@@ -500,9 +500,9 @@ def results_analysis(
     sbuilding_decarb.index.name = "Metric"
 
     sbuilding_decarb = pd.concat(
-        [sbuilding_decarb], keys=["Buildings"], names=["Sector"]
+        [sbuilding_decarb], keys=["Buildings"], names=["sector"]
     )
-    sbuilding_decarb = pd.concat([sbuilding_decarb], keys=[region], names=["Region"])
+    sbuilding_decarb = pd.concat([sbuilding_decarb], keys=[region], names=["region"])
 
     # endregion
 
@@ -551,9 +551,9 @@ def results_analysis(
     sindustry_decarb.index.name = "Metric"
 
     sindustry_decarb = pd.concat(
-        [sindustry_decarb], keys=["Industry"], names=["Sector"]
+        [sindustry_decarb], keys=["Industry"], names=["sector"]
     )
-    sindustry_decarb = pd.concat([sindustry_decarb], keys=[region], names=["Region"])
+    sindustry_decarb = pd.concat([sindustry_decarb], keys=[region], names=["region"])
 
     # endregion
 
@@ -566,8 +566,8 @@ def results_analysis(
     ).append((other_decarb * 0.3).rename(index={"Other Gases": "Indirect Non-ag N20"}))
 
     sother_decarb.index.name = "Metric"
-    sother_decarb = pd.concat([sother_decarb], keys=["Other Gases"], names=["Sector"])
-    sother_decarb = pd.concat([sother_decarb], keys=[region], names=["Region"])
+    sother_decarb = pd.concat([sother_decarb], keys=["Other Gases"], names=["sector"])
+    sother_decarb = pd.concat([sother_decarb], keys=[region], names=["region"])
 
     # endregion
 
@@ -628,9 +628,9 @@ def results_analysis(
     sra_decarb.columns = sra_decarb.columns.astype(int)
     sra_decarb.index.name = "Metric"
     sra_decarb = pd.concat(
-        [sra_decarb], keys=["Regenerative Agriculture"], names=["Sector"]
+        [sra_decarb], keys=["Regenerative Agriculture"], names=["sector"]
     )
-    sra_decarb = pd.concat([sra_decarb], keys=[region], names=["Region"])
+    sra_decarb = pd.concat([sra_decarb], keys=[region], names=["region"])
 
     # endregion
 
@@ -689,8 +689,8 @@ def results_analysis(
 
     sfw_decarb.columns = sfw_decarb.columns.astype(int)
     sfw_decarb.index.name = "Metric"
-    sfw_decarb = pd.concat([sfw_decarb], keys=["Forests & Wetlands"], names=["Sector"])
-    sfw_decarb = pd.concat([sfw_decarb], keys=[region], names=["Region"])
+    sfw_decarb = pd.concat([sfw_decarb], keys=["Forests & Wetlands"], names=["sector"])
+    sfw_decarb = pd.concat([sfw_decarb], keys=[region], names=["region"])
 
     # endregion
 
@@ -705,10 +705,10 @@ def results_analysis(
                 axis=1,
             )
         )
-        scdr_decarb["Region"] = region
-        scdr_decarb["Sector"] = "Carbon Dioxide Removal"
+        scdr_decarb["region"] = region
+        scdr_decarb["sector"] = "Carbon Dioxide Removal"
         scdr_decarb = scdr_decarb.reset_index().set_index(
-            ["Region", "Sector", "Metric"]
+            ["region", "sector", "Metric"]
         )
 
     else:
@@ -718,10 +718,10 @@ def results_analysis(
                 axis=1,
             )
         )
-        scdr_decarb["Region"] = region
-        scdr_decarb["Sector"] = "Carbon Dioxide Removal"
+        scdr_decarb["region"] = region
+        scdr_decarb["sector"] = "Carbon Dioxide Removal"
         scdr_decarb = scdr_decarb.reset_index().set_index(
-            ["Region", "Sector", "Metric"]
+            ["region", "sector", "Metric"]
         )
 
     # endregion
@@ -762,12 +762,12 @@ def results_analysis(
         sother_decarb.loc[:, data_start_year:2100]
     )
 
-    sadoption_curves.index.name = "Sector"
-    sadoption_curves["Region"] = region
+    sadoption_curves.index.name = "sector"
+    sadoption_curves["region"] = region
     """
-    sadoption_curves["Scenario"] = scenario
+    sadoption_curves["scenario"] = scenario
     sadoption_curves.reset_index(inplace=True)
-    sadoption_curves.set_index(["Region", "Sector", "Metric", "Scenario"], inplace=True)
+    sadoption_curves.set_index(["region", "sector", "Metric", "scenario"], inplace=True)
 
     # endregion
 
