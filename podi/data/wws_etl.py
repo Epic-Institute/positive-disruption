@@ -5,7 +5,7 @@ from numpy import NaN
 
 
 def wws_etl(data_source):
-    elec_gen = pd.read_csv("podi/data/wws.csv")
+    elec_gen = pd.read_csv("podi/data/tech_saturation_points.csv")
     region_categories = pd.read_csv(
         "podi/data/region_categories.csv", usecols=["WWS Region", "WEB Region"]
     )
@@ -21,14 +21,14 @@ def wws_etl(data_source):
 
     # Reformat for insertion in tech_parameters.csv
     elec_gen = pd.melt(
-        elec_gen, var_name="product", value_name="Value", ignore_index=False
+        elec_gen, var_name="product_short", value_name="Value", ignore_index=False
     )
     elec_gen["Metric"] = "saturation point"
     elec_gen["sector"] = "Electric Power"
     elec_gen["scenario"] = "pathway"
     elec_gen["Source"] = "wws"
     elec_gen.set_index(
-        ["product", "scenario", "sector", "Metric"], append=True, inplace=True
+        ["product_short", "scenario", "sector", "Metric"], append=True, inplace=True
     )
 
     # Add to tech_parameters

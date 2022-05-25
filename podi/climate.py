@@ -3,22 +3,6 @@
 import pandas as pd
 
 
-def climate(scenario, data_source):
-    climate = (
-        pd.read_csv(data_source)
-        .set_index(["region", "sector", "Metric", "scenario"])
-        .drop(columns=["unit"])
-        .loc[slice(None), slice(None), slice(None), scenario]
-    )
+def climate(emissions, data_start_year, proj_end_year):
 
-    conc = climate.loc[
-        slice(None), slice(None), ["Atmospheric concentration", "Equivalent CO2"]
-    ]
-
-    temp = climate.loc[
-        slice(None), slice(None), ["Temperature change from preindustrial"]
-    ]
-
-    sea_lvl = climate.loc[slice(None), slice(None), ["Sea level rise from 2000"]]
-
-    return conc, temp, sea_lvl
+    return

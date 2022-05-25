@@ -514,7 +514,7 @@ def results_analysis(
         (industry_decarb * 0.34)
         .rename(index={"Industry": "Electrification"})
         .append(industry_decarb * 0.31)
-        .rename(index={"Industry": "Hydrogen"})
+        .rename(index={"Industry": "hydrogen"})
         .append(industry_decarb * 0.35)
         .rename(index={"Industry": "Efficiency"})
     )

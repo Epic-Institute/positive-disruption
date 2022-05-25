@@ -29,7 +29,7 @@ def adoption_curve(
     y_data[:11] = input_data.loc[
         input_data.last_valid_index() - 10 : input_data.last_valid_index()
     ]
-    y_data[-1] = change_parameters.loc["saturation point"].Value.astype(float)
+    y_data[-1] = change_parameters.loc["saturation point"].value.astype(float)
 
     # Handle cases where saturation point is below current value, by making saturation point equidistant from current value but in positive direction
     if y_data[10] > y_data[-1]:
@@ -50,16 +50,16 @@ def adoption_curve(
     # Load search bounds for logistic function parameters
     search_bounds = [
         (
-            pd.to_numeric(change_parameters.loc["parameter a min"].Value),
-            pd.to_numeric(change_parameters.loc["parameter a max"].Value),
+            pd.to_numeric(change_parameters.loc["parameter a min"].value),
+            pd.to_numeric(change_parameters.loc["parameter a max"].value),
         ),
         (
-            pd.to_numeric(change_parameters.loc["parameter b min"].Value),
-            pd.to_numeric(change_parameters.loc["parameter b max"].Value),
+            pd.to_numeric(change_parameters.loc["parameter b min"].value),
+            pd.to_numeric(change_parameters.loc["parameter b max"].value),
         ),
         (
-            pd.to_numeric(change_parameters.loc["saturation point"].Value),
-            pd.to_numeric(change_parameters.loc["saturation point"].Value),
+            pd.to_numeric(change_parameters.loc["saturation point"].value),
+            pd.to_numeric(change_parameters.loc["saturation point"].value),
         ),
         (
             y_data[10],

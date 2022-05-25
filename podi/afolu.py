@@ -262,12 +262,12 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             axis=1,
         ).clip(upper=1)
 
-        afolu_baseline.to_csv("podi/data/afolu_baseline.csv")
+        afolu_baseline.to_csv("podi/data/afolu_output.csv")
     else:
         index = pyam.IAMC_IDX
 
         afolu_baseline = pd.DataFrame(
-            pd.read_csv("podi/data/afolu_baseline.csv")
+            pd.read_csv("podi/data/afolu_output.csv")
         ).set_index(index)
         afolu_baseline.columns = afolu_baseline.columns.astype(int)
 
@@ -343,7 +343,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     afolu_analogs = (
         pd.DataFrame(pd.read_csv("podi/data/afolu_analogs.csv"))
-        .drop(columns=["Note", "Units", "Actual start year"])
+        .drop(columns=["Note", "unit", "Actual start year"])
         .set_index(["Analog name", "Max (Mha)"])
     )
     afolu_analogs.columns.rename("Year", inplace=True)
@@ -650,14 +650,14 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         each[
             (
-                (each.reset_index().Product_long == "Improved Rice")
-                & (each.reset_index().Flow_long == "CH4")
+                (each.reset_index().product_long == "Improved Rice")
+                & (each.reset_index().flow_long == "CH4")
             ).values
         ] = (
             each[
                 (
-                    (each.reset_index().Product_long == "Improved Rice")
-                    & (each.reset_index().Flow_long == "CH4")
+                    (each.reset_index().product_long == "Improved Rice")
+                    & (each.reset_index().flow_long == "CH4")
                 ).values
             ]
             * 0.58
@@ -665,14 +665,14 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         each[
             (
-                (each.reset_index().Product_long == "Improved Rice")
-                & (each.reset_index().Flow_long == "N2O")
+                (each.reset_index().product_long == "Improved Rice")
+                & (each.reset_index().flow_long == "N2O")
             ).values
         ] = (
             each[
                 (
-                    (each.reset_index().Product_long == "Improved Rice")
-                    & (each.reset_index().Flow_long == "N2O")
+                    (each.reset_index().product_long == "Improved Rice")
+                    & (each.reset_index().flow_long == "N2O")
                 ).values
             ]
             * 0.42

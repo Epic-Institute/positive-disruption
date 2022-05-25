@@ -35,23 +35,23 @@ def adoption_curve_demand(
     y_data[:] = np.NaN
     y_data = y_data.squeeze().astype(float)
     y_data[0] = 0
-    y_data[-1] = parameters.loc["saturation point"].Value.astype(float)
+    y_data[-1] = parameters.loc["saturation point"].value.astype(float)
 
     y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
 
     # Load search bounds for logistic function parameters
     search_bounds = [
         (
-            pd.to_numeric(parameters.loc["parameter a min"].Value),
-            pd.to_numeric(parameters.loc["parameter a max"].Value),
+            pd.to_numeric(parameters.loc["parameter a min"].value),
+            pd.to_numeric(parameters.loc["parameter a max"].value),
         ),
         (
-            pd.to_numeric(parameters.loc["parameter b min"].Value),
-            pd.to_numeric(parameters.loc["parameter b max"].Value),
+            pd.to_numeric(parameters.loc["parameter b min"].value),
+            pd.to_numeric(parameters.loc["parameter b max"].value),
         ),
         (
-            pd.to_numeric(parameters.loc["saturation point"].Value),
-            pd.to_numeric(parameters.loc["saturation point"].Value),
+            pd.to_numeric(parameters.loc["saturation point"].value),
+            pd.to_numeric(parameters.loc["saturation point"].value),
         ),
         (
             0,

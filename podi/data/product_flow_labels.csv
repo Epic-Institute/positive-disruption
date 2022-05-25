@@ -1,4 +1,4 @@
-Product,Flow,Sector,EIA Product,WWS EF Product,WWS Upstream Product,WWS Addtl Efficiency,Low Temp Heat,High Temp Heat,Hydrogen,Flexible,Nonenergy
+product_short,flow_short,sector,EIA Product,WWS EF Product,WWS Upstream Product,WWS Addtl Efficiency,Low Temp Heat,High Temp Heat,hydrogen,flexible,nonenergy
 ANTCOAL,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 AVGAS,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BIODIESEL,AGRICULT,Industrial,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N

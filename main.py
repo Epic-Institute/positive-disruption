@@ -79,10 +79,10 @@ index = [
     "sector",
     "product_category",
     "product_long",
-    "product",
+    "product_short",
     "flow_category",
     "flow_long",
-    "flow",
+    "flow_short",
     "unit"
 ]
 
@@ -116,11 +116,11 @@ energy_percent = pd.DataFrame(
 ).set_index(index)
 energy_percent.columns = energy_percent.columns.astype(int)
 
-shipments = (
-    pd.DataFrame(pd.read_csv("podi/data/shipments.csv"))
+adoption_historical = (
+    pd.DataFrame(pd.read_csv("podi/data/adoption_historical.csv"))
     .set_index(index)
 )
-shipments.columns = shipments.columns.astype(int)
+adoption_historical.columns = adoption_historical.columns.astype(int)
 
 # endregion
 
@@ -260,12 +260,7 @@ if (
 
 # region
 
-conc_baseline, temp_baseline, sea_lvl_baseline = climate(
-    "baseline", "podi/data/climate.csv"
-)
-conc_pathway, temp_pathway, sea_lvl_pathway = climate(
-    "pathway", "podi/data/climate.csv"
-)
+climate_output = climate(emissions_output, data_start_year, proj_end_year)
 
 # endregion
 
@@ -377,10 +372,10 @@ energy_post_electrification_pyam = pyam.IamDataFrame(
             "product_long",
             "flow_category",
             "flow_long",
-            "Nonenergy",
+            "nonenergy",
         ]
     ),
-    variable=["sector", "product", "flow", "Hydrogen", "Flexible"],
+    variable=["sector", "product_short", "flow_short", "hydrogen", "flexible"],
 )
 
 # endregion
@@ -395,14 +390,14 @@ energy_post_electrification_pyam = pyam.IamDataFrame(
 for output in [
     (energy_output, "energy_output")
 ]:
-    for region in output[0].reset_index().Region.unique():
-        output[0][(output[0].reset_index().Region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")
+    for region in output[0].reset_index().region.unique():
+        output[0][(output[0].reset_index().region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")
 
 for output in [
     (energy_output, "energy_output")
 ]:
-    for region in output[0].reset_index().Region.unique():
-        pyam.IamDataFrame(output[0][(output[0].reset_index().Region == region).values].reset_index(), variable = ['Sector','Product_category', 'Product_long','Product', 'Flow_category', 'Flow_long','Flow']).to_csv('podi/data/output/' + output[1] + "_" + region + "_IAMC.csv")
+    for region in output[0].reset_index().region.unique():
+        pyam.IamDataFrame(output[0][(output[0].reset_index().region == region).values].reset_index(), variable = ['Sector','Product_category', 'Product_long','Product', 'Flow_category', 'Flow_long','Flow']).to_csv('podi/data/output/' + output[1] + "_" + region + "_IAMC.csv")
 
 # endregion
 
@@ -4379,7 +4374,7 @@ for sector in fig2['Sector'].unique():
         name="EV Stock (RHS)",
         line=dict(width=1, color="#1c352d"),
         x=fig2["Year"].unique(),
-        y=shipments.loc[:,start_year:end_year].fillna(0).groupby(['Sector','Product_long', 'Flow_long']).sum().loc[sector, 'Electricity','Road'],
+        y=adoption_historical.loc[:,start_year:end_year].fillna(0).groupby(['Sector','Product_long', 'Flow_long']).sum().loc[sector, 'Electricity','Road'],
         fill="none",
         stackgroup="EV Stock",
         legendgroup='EV Stock',
@@ -6847,7 +6842,7 @@ scenario = "pathway"
 start_year = start_year
 altscen = str()
 
-em_targets = pd.read_csv("podi/data/iamc_data.csv").set_index(
+em_targets = pd.read_csv("podi/data/external/iamc_data.csv").set_index(
     ["model", "region", "scenario", "variable", "unit"]
 )
 em_targets.columns = em_targets.columns.astype(int)
@@ -8844,13 +8839,13 @@ for sector in energy_pathway.index.get_level_values(2).unique():
         "Subsector",
         "product_category",
         "product_long",
-        "product",
+        "product_short",
         "flow_category",
         "flow_long",
-        "flow",
-        "Hydrogen",
-        "Flexible",
-        "Nonenergy",
+        "flow_short",
+        "hydrogen",
+        "flexible",
+        "nonenergy",
     ]
 
     energy_demand_post_upstream = pd.DataFrame(
@@ -8963,7 +8958,7 @@ cdr2 = (
 cdr2.columns = cdr2.columns.astype(int)
 
 results = (
-    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    pd.DataFrame(pd.read_csv("podi/data/external/SSP_IAM_V2_201811.csv"))
     .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
     .droplevel(["UNIT"])
 )
@@ -9271,7 +9266,7 @@ hist.columns = hist.columns.astype(int)
 hist = hist.loc["World ", "Equivalent CO2", "ppm", "pathway"].T.dropna()
 
 results = (
-    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    pd.DataFrame(pd.read_csv("podi/data/external/SSP_IAM_V2_201811.csv"))
     .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
     .droplevel(["UNIT"])
 )
@@ -9581,11 +9576,11 @@ em_b = pd.DataFrame(rcp85.Emissions.emissions)
 em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 
-hist = pd.read_csv("podi/data/forcing.csv")
+hist = pd.read_csv("podi/data/radiative_forcing_historical.csv")
 hist.columns = hist.columns.astype(int)
 
 F = (
-    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    pd.DataFrame(pd.read_csv("podi/data/external/SSP_IAM_V2_201811.csv"))
     .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
     .droplevel(["UNIT"])
 )
@@ -9895,11 +9890,11 @@ em_b = pd.DataFrame(rcp85.Emissions.emissions)
 em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
 em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
 
-hist = pd.read_csv("podi/data/temp.csv")
+hist = pd.read_csv("podi/data/temperature_change_historical.csv")
 hist.columns = hist.columns.astype(int)
 
 T = (
-    pd.DataFrame(pd.read_csv("podi/data/SSP_IAM_V2_201811.csv"))
+    pd.DataFrame(pd.read_csv("podi/data/external/SSP_IAM_V2_201811.csv"))
     .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
     .droplevel(["UNIT"])
 )
@@ -10194,7 +10189,7 @@ fig.add_trace(
 # Historical
 # region
 
-temp_range = pd.read_csv("podi/data/temp_range.csv").set_index("Range")
+temp_range = pd.read_csv("podi/data/temperature_change_range_historical.csv").set_index("Range")
 temp_range.columns = temp_range.columns.astype(int)
 
 fig.add_trace(
@@ -10318,7 +10313,7 @@ fig.add_trace(
 # DAU21 expanding
 # region
 
-tproj_err = pd.read_csv("podi/data/temp_range.csv").set_index("Range")
+tproj_err = pd.read_csv("podi/data/temperature_change_range_historical.csv").set_index("Range")
 tproj_err.columns = temp_range.columns.astype(int)
 
 fig.add_trace(

@@ -74,14 +74,14 @@ def emissions(
         "sector",
         "product_category",
         "product_long",
-        "product",
+        "product_short",
         "flow_category",
         "flow_long",
-        "flow",
+        "flow_short",
         "unit",
-        "Hydrogen",
-        "Flexible",
-        "Nonenergy",
+        "hydrogen",
+        "flexible",
+        "nonenergy",
     ]
 
     emissions_energy = pd.DataFrame(
@@ -810,9 +810,9 @@ def emissions(
     # region
 
     # Load historical emissions data from external source
-    emissions_historical = pd.read_csv("podi/data/emissions_historical.csv").set_index(
-        pyam.IAMC_IDX
-    )
+    emissions_historical = pd.read_csv(
+        "podi/data/ClimateTRACE/emissions_historical.csv"
+    ).set_index(pyam.IAMC_IDX)
     emissions_historical.columns = emissions_historical.columns.astype(int)
 
     # Harmonize modeled emissions projections with observed historical emissions
