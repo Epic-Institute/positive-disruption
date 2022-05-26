@@ -38,8 +38,6 @@ import random
 import hvplot.pandas
 import panel as pn
 
-pd.options.display.float_format = "{:,.0f}".format
-
 unit_name = ["TJ", "TWh", "GW"]
 unit_val = [1, 0.0002777, 0.2777/8760]
 unit = [unit_name[0], unit_val[0]]
@@ -128,7 +126,7 @@ adoption_historical.columns = adoption_historical.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = False
+recalc_afolu = True
 # region
 
 if recalc_afolu is True:
@@ -160,7 +158,7 @@ recalc_emissions = False
 # region
 
 if recalc_emissions is True:
-    emissions(scenario, energy_output, afolu_output, data_start_year, data_end_year, proj_end_year)
+    emissions(scenario, energy_output, emissions_afolu_mitigated, data_start_year, data_end_year, proj_end_year)
 
 index = pyam.IAMC_IDX
 emissions_output = pd.DataFrame(pd.read_csv("podi/data/output/emissions_output.csv")).set_index(index)

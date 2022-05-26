@@ -21,7 +21,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #  LOAD HISTORICAL NCS ADOPTION  #
     ##################################
 
-    recalc_afolu_historical = False
+    recalc_afolu_historical = True
     # region
     def step2curve(name, variable):
         name = pd.read_csv("podi/data/afolu_max_extent_and_flux.csv")
@@ -239,7 +239,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #  ESTIMATE BASELINE NCS ADOPTION  #
     ####################################
 
-    recalc_afolu_baseline = False
+    recalc_afolu_baseline = True
     # region
 
     if recalc_afolu_baseline == True:
@@ -394,7 +394,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
     ).set_index(["variable"])
 
-    afolu_adoption = (
+    afolu_output = (
         (
             afolu_baseline.reset_index()
             .set_index(["variable"])
@@ -418,18 +418,18 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         x.update(x0)
         return x
 
-    afolu_adoption.update(afolu_adoption.apply(rep, result_type="broadcast", axis=1))
-    afolu_adoption = afolu_adoption.droplevel("Analog Name")
+    afolu_output.update(afolu_output.apply(rep, result_type="broadcast", axis=1))
+    afolu_output = afolu_output.droplevel("Analog Name")
 
     # Plot
-    afolu_adoption.T.plot(legend=False, title="AFOLU Adoption [%]")
+    afolu_output.T.plot(legend=False, title="AFOLU Adoption [%]")
 
     # endregion
 
     # Multiply this by the estimated maximum extent and average mitigation potential flux to get emissions mitigated
 
-    afolu_adoption.update(
-        afolu_adoption.parallel_apply(
+    afolu_output.update(
+        afolu_output.parallel_apply(
             lambda x: x.multiply(
                 max_extent.loc[
                     slice(None),
@@ -442,7 +442,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         ).fillna(0)
     )
 
-    emissions_afolu_mitigated = afolu_adoption.copy()
+    emissions_afolu_mitigated = afolu_output.copy()
     emissions_afolu_mitigated.update(
         emissions_afolu_mitigated.parallel_apply(
             lambda x: x.multiply(
@@ -462,7 +462,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Plot
-    afolu_adoption.T.plot(legend=False, title="AFOLU Adoption [% of max extent]")
+    afolu_output.T.plot(legend=False, title="AFOLU Adoption [% of max extent]")
     emissions_afolu_mitigated.T.plot(
         legend=False, title="AFOLU Adoption [tCO2e mitigated]"
     )
@@ -532,7 +532,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Combine 'avoided_adoption' pathways with other pathways
-    afolu_adoption = pd.concat([afolu_baseline, afolu_adoption, avoided_adoption])
+    afolu_output = pd.concat([afolu_baseline, afolu_output, avoided_adoption])
 
     emissions_afolu_mitigated = pd.concat(
         [emissions_afolu_mitigated, emissions_afolu_avoided]
@@ -679,7 +679,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
         return each
 
-    afolu_adoption = addindices(afolu_adoption)
+    afolu_output = addindices(afolu_output)
     emissions_afolu_mitigated = addindices(emissions_afolu_mitigated)
 
     # endregion
@@ -691,7 +691,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     # AFOLU adoption
-    afolu_adoption.to_csv("podi/data/output/afolu_output.csv")
+    afolu_output.to_csv("podi/data/output/afolu_output.csv")
 
     # AFOLU emissions mitigated
     emissions_afolu_mitigated.to_csv("podi/data/emissions_afolu_mitigated.csv")
