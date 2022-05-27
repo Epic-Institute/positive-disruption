@@ -200,8 +200,8 @@ def emissions(
     emissions_afolu.columns = emissions_afolu.columns.astype(int)
     emissions_afolu = emissions_afolu.loc[:, data_start_year:proj_end_year]
 
-    # Change unit to Mt
-    emissions_afolu.update(emissions_afolu / 1e6)
+    # Change unit from kt to Mt
+    emissions_afolu.update(emissions_afolu / 1e3)
     emissions_afolu = emissions_afolu.rename(index={"kilotonnes": "Mt"})
 
     # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
@@ -224,11 +224,13 @@ def emissions(
     # Define global warming potential of all GHGs
     version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
 
-    emissions_afolu_mitigated.update(emissions_afolu_mitigated[(emissions_afolu_mitigated.reset_index().flow_long != 'CO2').values].apply(
-        lambda x: x.divide(gwp.data[version][x.name[6]]), axis=1
-    ))
+    emissions_afolu_mitigated.update(
+        emissions_afolu_mitigated[
+            (emissions_afolu_mitigated.reset_index().flow_long != "CO2").values
+        ].apply(lambda x: x.divide(gwp.data[version][x.name[6]]), axis=1)
+    )
 
-    emissions_afolu_mitigated.rename(index={'MtCO2e': 'Mt'}, inplace=True)
+    emissions_afolu_mitigated.rename(index={"MtCO2e": "Mt"}, inplace=True)
 
     # Combine historical and baseline emissions with NCS estimates
     emissions_afolu = pd.concat(
@@ -240,11 +242,25 @@ def emissions(
     )
 
     # Add indices product_category, product_short, flow_short
-    emissions_afolu['product_category'] = 'Emissions'
-    emissions_afolu['product_short'] = 'EM'
-    emissions_afolu['flow_short'] = 'AFOLU'
+    emissions_afolu["product_category"] = "Emissions"
+    emissions_afolu["product_short"] = "EM"
+    emissions_afolu["flow_short"] = "AFOLU"
 
-    emissions_afolu = emissions_afolu.reset_index().set_index(['model', 'scenario', 'region', 'sector', 'product_category', 'product_long', 'product_short', 'flow_category', 'flow_long', 'flow_short', 'unit'])
+    emissions_afolu = emissions_afolu.reset_index().set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
+    )
 
     # endregion
 
@@ -320,7 +336,7 @@ def emissions(
             "1A3aii_Domestic-aviation",
             "1A3di_International-shipping",
         ]:
-            return "Transport"
+            return "Transportation"
         elif x["product_long"] in ["1A4b_Residential"]:
             return "Residential"
         elif x["product_long"] in ["1A4a_Commercial-institutional"]:
@@ -402,7 +418,7 @@ def emissions(
     emissions_additional = emissions_additional.loc[:, data_start_year:proj_end_year]
 
     # Change unit from kt to Mt
-    emissions_additional.update(emissions_additional / 1e6)
+    emissions_additional.update(emissions_additional / 1e3)
     emissions_additional = emissions_additional.rename(
         index={
             "ktC": "Mt",
@@ -519,15 +535,10 @@ def emissions(
 
     emissions_additional_fgas = pd.DataFrame([])
     for gas in gas_edgar:
-        emissions_additional_fgas = pd.concat(
-            [
-                emissions_additional_fgas,
-                pd.read_excel(
-                    io="podi/data/EDGAR/" + gas + "_1990_2018.xlsx",
-                    sheet_name="v6.0_EM_" + gas + "_IPCC2006",
-                    skiprows=9,
-                ),
-            ]
+        emissions_additional_fgas_new = pd.read_excel(
+            io="podi/data/EDGAR/" + gas + "_1990_2018.xlsx",
+            sheet_name="v6.0_EM_" + gas + "_IPCC2006",
+            skiprows=9,
         ).drop(
             columns=[
                 "IPCC_annex",
@@ -537,6 +548,13 @@ def emissions(
                 "fossil_bio",
             ]
         )
+
+        emissions_additional_fgas_new["flow_long"] = gas
+
+        emissions_additional_fgas = pd.concat(
+            [emissions_additional_fgas, emissions_additional_fgas_new]
+        )
+
     emissions_additional_fgas.columns = emissions_additional_fgas.columns.str.replace(
         "Y_", ""
     )
@@ -545,7 +563,7 @@ def emissions(
     )
 
     # Add in column for units kT
-    emissions_additional_fgas['unit'] = 'kT'
+    emissions_additional_fgas["unit"] = "kT"
 
     # Change ISO region names to IEA
     regions = (
@@ -581,8 +599,6 @@ def emissions(
 
     emissions_additional_fgas["flow_category"] = "Emissions"
 
-    emissions_additional_fgas["flow_long"] = gas
-
     emissions_additional_fgas = (
         (
             emissions_additional_fgas.reset_index()
@@ -603,7 +619,7 @@ def emissions(
             ]
         )
         .rename_axis(index={"WEB Region": "region", "units": "unit"})
-    ).drop(columns=["Country_code_A3", 'index'])
+    ).drop(columns=["Country_code_A3", "index"])
 
     # Select data between data_start_year and proj_end_year
     emissions_additional_fgas.columns = emissions_additional_fgas.columns.astype(int)
@@ -612,12 +628,12 @@ def emissions(
     ]
 
     # Change unit from kt to Mt
-    emissions_additional_fgas.update(emissions_additional_fgas / 1e6)
+    emissions_additional_fgas.update(emissions_additional_fgas / 1e3)
     emissions_additional_fgas = emissions_additional_fgas.rename(index={"kT": "Mt"})
 
     # Interpolate between data_end_year and projections in 2030, 2050
     emissions_additional_fgas[np.arange(2021, 2030, 1)] = NaN
-    emissions_additional_fgas[np.arange(2031, proj_end_year+1, 1)] = NaN
+    emissions_additional_fgas[np.arange(2031, proj_end_year + 1, 1)] = NaN
     emissions_additional_fgas = emissions_additional_fgas.sort_index(axis=1)
     emissions_additional_fgas.interpolate(method="linear", axis=1, inplace=True)
     emissions_additional_fgas.fillna(method="bfill", inplace=True)
@@ -634,11 +650,34 @@ def emissions(
     )
 
     # Project additional emissions using percent change in energy emissions in the Industrial sector
-    percent_change = emissions_energy.groupby(['model', 'scenario', 'region', 'sector']).mean().loc[slice(None), slice(None), slice(None), 'Industrial'].loc[:,data_end_year:].pct_change(axis = 1).replace(NaN, 0).divide(100).add(1)
+    percent_change = (
+        emissions_energy.groupby(["model", "scenario", "region", "sector"])
+        .mean()
+        .loc[slice(None), slice(None), slice(None), "Industrial"]
+        .loc[:, data_end_year:]
+        .pct_change(axis=1)
+        .replace(NaN, 0)
+        .divide(100)
+        .add(1)
+    )
 
-    emissions_additional = emissions_additional.loc[:,data_start_year:data_end_year].reset_index().set_index(['model', 'scenario', 'region']).merge(percent_change.loc[:,data_end_year+1:], on=['model', 'scenario', 'region']).set_index(['sector', 'product_long', 'flow_category', 'flow_long', 'unit'], append= True)
+    emissions_additional = (
+        emissions_additional.loc[:, data_start_year:data_end_year]
+        .reset_index()
+        .set_index(["model", "scenario", "region"])
+        .merge(
+            percent_change.loc[:, data_end_year + 1 :],
+            on=["model", "scenario", "region"],
+        )
+        .set_index(
+            ["sector", "product_long", "flow_category", "flow_long", "unit"],
+            append=True,
+        )
+    )
 
-    emissions_additional.loc[:,data_end_year:] = emissions_additional.loc[:,data_end_year:].cumprod(axis=1)
+    emissions_additional.loc[:, data_end_year:] = emissions_additional.loc[
+        :, data_end_year:
+    ].cumprod(axis=1)
 
     # Rename product_long values
     simple_index = {
@@ -777,43 +816,25 @@ def emissions(
     )
 
     # Add indices product_category, product_short, flow_short
-    emissions_additional['product_category'] = 'Emissions'
-    emissions_additional['product_short'] = 'EM'
-    emissions_additional['flow_short'] = 'IND'
+    emissions_additional["product_category"] = "Emissions"
+    emissions_additional["product_short"] = "EM"
+    emissions_additional["flow_short"] = "IND"
 
-    emissions_additional = emissions_additional.reset_index().set_index(['model', 'scenario', 'region', 'sector', 'product_category', 'product_long', 'product_short', 'flow_category', 'flow_long', 'flow_short', 'unit'])
-
-    # endregion
-
-    ##################################################################
-    #  MODEL EMISSIONS OF OTHER GHGS FROM CO2/CH4/N2O/F-GAS RESULTS  #
-    ##################################################################
-
-    # region
-
-    # Combine emissions from energy, AFOLU, and additional sources
-    emissions_output = pd.concat(
-        [emissions_energy, emissions_afolu, emissions_additional]
+    emissions_additional = emissions_additional.reset_index().set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
     )
-
-    # Select flow_categories 'Final consumption' that are not 'Electricity or Heat', 'Energy industry own use and Losses', 'Electricity output', and 'Heat output', to avoid double counting
-    emissions_output[
-        (emissions_output.reset_index().flow_category == "Final consumption")
-        & ~(
-            emissions_output.reset_index().product_category.isin(
-                [
-                    "Electricity and Heat",
-                    "Energy industry own use and Losses",
-                    "Electricity output",
-                    "Heat output",
-                ]
-            )
-        )
-    ]
-
-    # Looking to estimate aerosols, PM, etc
-
-    # https://github.com/GranthamImperial/silicone/tree/master/notebooks
 
     # endregion
 
@@ -823,30 +844,231 @@ def emissions(
 
     # region
 
-    # Load historical emissions data from external source
-    emissions_historical = pd.read_csv(
-        "podi/data/ClimateTRACE/emissions_historical.csv"
-    ).set_index(pyam.IAMC_IDX)
-    emissions_historical.columns = emissions_historical.columns.astype(int)
+    # Combine emissions from energy, afolu, and additional sources
+    emissions_output = pd.concat(
+        [emissions_energy, emissions_afolu, emissions_additional]
+    )
 
     # Harmonize modeled emissions projections with observed historical emissions
 
     # https://aneris.readthedocs.io/en/latest/index.html
 
-    # endregion
+    # Load historical emissions data from ClimateTRACE
+    emissions_historical = pd.concat(
+        [
+            pd.read_csv(
+                "podi/data/ClimateTRACE/climatetrace_emissions_by_subsector_timeseries_interval_year_since_2015_to_2020.csv",
+                usecols=["Tonnes Co2e", "country", "sector", "subsector", "start"],
+            ),
+            pd.read_csv(
+                "podi/data/ClimateTRACE/climatetrace_emissions_by_subsector_timeseries_sector_forests_since_2015_to_2020_interval_year.csv",
+                usecols=["Tonnes Co2e", "country", "sector", "subsector", "start"],
+            ),
+        ]
+    )
 
-    ################################################
-    #  CREATE A VERSION OF OUTPUT THAT IS IN CO2e  #
-    ################################################
+    # Change ISO region names to IEA
+    regions = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/region_categories.csv",
+                usecols=["WEB Region", "ISO"],
+            ).dropna(axis=0)
+        )
+        .set_index(["ISO"])
+        .rename_axis(index={"ISO": "country"})
+    )
+    regions["WEB Region"] = (regions["WEB Region"]).str.lower()
 
-    # region
+    # Add model, scenario, and flow_category indices
+    emissions_historical["model"] = "PD22"
+    emissions_historical["scenario"] = "baseline"
+    emissions_historical["product_category"] = "Emissions"
+    emissions_historical["product_short"] = "EM"
+    emissions_historical["flow_category"] = "Emissions"
+    emissions_historical["flow_long"] = "Emissions"
+    emissions_historical["flow_short"] = "EM"
+    emissions_historical["unit"] = "MtCO2e"
+
+    # Change unit from t to Mt
+    emissions_historical["Tonnes Co2e"] = emissions_historical["Tonnes Co2e"] / 1e6
+
+    # Change 'sector' index to 'product_long' and 'subsector' to 'flow_long' and 'start' to 'year'
+    emissions_historical.rename(
+        columns={"Tonnes Co2e": "value", "subsector": "product_long", "start": "year"},
+        inplace=True,
+    )
+
+    # Change 'year' format
+    emissions_historical["year"] = (
+        emissions_historical["year"].str.split("-", expand=True)[0].values.astype(int)
+    )
+
+    # Update Sector index
+    def addsector(x):
+        if x["sector"] in ["power"]:
+            return "Electric Power"
+        elif x["sector"] in ["transport", "maritime"]:
+            return "Transportation"
+        elif x["sector"] in ["buildings"]:
+            return "Buildings"
+        elif x["sector"] in ["extraction", "manufacturing", "oil and gas", "waste"]:
+            return "Industrial"
+        elif x["sector"] in ["agriculture"]:
+            return "Agriculture"
+        elif x["sector"] in ["forests"]:
+            return "Forests & Wetlands"
+
+    emissions_historical["sector"] = emissions_historical.apply(
+        lambda x: addsector(x), axis=1
+    )
+
+    emissions_historical = (
+        (
+            emissions_historical.reset_index()
+            .set_index(["country"])
+            .merge(regions, on=["country"])
+        )
+        .reset_index()
+        .set_index(
+            [
+                "model",
+                "scenario",
+                "WEB Region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+            ]
+        )
+        .rename_axis(index={"WEB Region": "region"})
+    ).drop(columns=["country", "index"])
+
+    # Pivot from long to wide
+    emissions_historical = emissions_historical.reset_index().pivot(
+        index=[
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ],
+        columns="year",
+        values="value",
+    )
+
+    # Select data between data_start_year and data_end_year
+    emissions_historical.columns = emissions_historical.columns.astype(int)
+    emissions_historical = emissions_historical.loc[:, data_start_year:data_end_year]
+
+    # Group modeled emissions into CO2e
     emissions_output_co2e = emissions_output.copy()
 
-    # TODO check gas names match with gwp dict
+    # Remove dashes from gas names
+    emissions_output_co2e = emissions_output_co2e.rename(
+        index={
+            "HCFC-141b": "HCFC141b",
+            "HCFC-142b": "HCFC142b",
+            "HFC-125": "HFC125",
+            "HFC-134a": "HFC134a",
+            "HFC-143a": "HFC143a",
+            "HFC-152a": "HFC152a",
+            "HFC-227ea": "HFC227ea",
+            "HFC-245fa": "HFC245fa",
+            "HFC-32": "HFC32",
+            "HFC-365mfc": "HFC365mfc",
+            "HFC-23": "HFC23",
+            "c-C4F8": "cC4F8",
+            "HFC-134": "HFC134",
+            "HFC-143": "HFC143",
+            "HFC-236fa": "HFC236fa",
+            "HFC-41": "HFC41",
+            "HFC-43-10-mee": "HFC4310mee",
+        }
+    )
+
+    # Update emissions that don't list gas in flow_long
+    emissions_output_co2e.reset_index(inplace=True)
+
+    # Select emissions that don't list gas in flow_long (all list unit as 'MtCO2')
+    emissions_output_co2e_new = emissions_output_co2e[
+        (emissions_output_co2e.unit == "MtCO2").values
+    ]
+
+    # Remove the subset above from full emissions list
+    emissions_output_co2e = emissions_output_co2e[
+        ~(emissions_output_co2e.unit == "MtCO2").values
+    ]
+
+    # Replace 'flow_long' value with 'CO2'
+    emissions_output_co2e_new.drop(columns="flow_long", inplace=True)
+    emissions_output_co2e_new["flow_long"] = "CO2"
+
+    # Add the updated subset back into the original df
+    emissions_output_co2e = pd.concat(
+        [emissions_output_co2e, emissions_output_co2e_new]
+    )
+
+    emissions_output_co2e = emissions_output_co2e.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
+    )
+
+    # Add missing GWP values
+    gwp.data[version].update(
+        {
+            "CO2": 1,
+            "BC": 2240,
+            "CO": 0,
+            "NH3": 0,
+            "NMVOC": 0,
+            "NOx": 0,
+            "OC": 0,
+            "SO2": 0,
+        }
+    )
 
     emissions_output_co2e = emissions_output_co2e.apply(
-        lambda x: x.mul(gwp.data[version][x.name[6]), axis=1
+        lambda x: x.mul(gwp.data[version][x.name[8]]), axis=1
     )
+
+    # Match modeled (emissions_output_co2e) and observed emissions (emissions_historical) categories across 'model', 'region', 'sector'
+
+    emissions_output_co2e_compare = (
+        emissions_output_co2e.rename(
+            index={"Residential": "Buildings", "Commercial": "Buildings"}
+        )
+        .groupby(["model", "region", "sector"])
+        .sum()
+    )
+    emissions_historical_compare = emissions_historical.groupby(
+        ["model", "region", "sector"]
+    ).sum()
+
+    # Calculate error between modeled and observed
+
+    # Plot
 
     # endregion
 

@@ -8970,13 +8970,7 @@ results19 = curve_smooth(
     "quadratic",
     30,
 )
-"""
-results19 = pd.DataFrame(
-    results.loc[
-        "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-    ].loc[2010:]
-).T
-"""
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
