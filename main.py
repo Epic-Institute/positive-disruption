@@ -160,9 +160,24 @@ recalc_emissions = False
 if recalc_emissions is True:
     emissions(scenario, energy_output, emissions_afolu_mitigated, data_start_year, data_end_year, proj_end_year)
 
-index = pyam.IAMC_IDX
-emissions_output = pd.DataFrame(pd.read_csv("podi/data/output/emissions_output.csv")).set_index(index)
+index = [
+    "model",
+    "scenario",
+    "region",
+    "sector",
+    "product_category",
+    "product_long",
+    "product_short",
+    "flow_category",
+    "flow_long",
+    "flow_short",
+    "unit"
+]
+emissions_output = pd.DataFrame(pd.read_csv("podi/data/emissions_output.csv")).set_index(index)
 emissions_output.columns = emissions_output.columns.astype(int)
+
+emissions_output_co2e = pd.DataFrame(pd.read_csv("podi/data/emissions_output_co2e.csv")).set_index(index)
+emissions_output_co2e.columns = emissions_output_co2e.columns.astype(int)
 
 # endregion
 
@@ -398,9 +413,9 @@ for output in [
 
 # endregion
 
-##########
-# CHARTS #
-##########
+#####################
+# DIAGNOSTIC CHARTS #
+#####################
 
 # region
 

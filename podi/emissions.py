@@ -1067,9 +1067,15 @@ def emissions(
     ).sum()
 
     # Calculate error between modeled and observed
+    emissions_error = abs(
+        (emissions_historical_compare - emissions_output_co2e_compare)
+        / emissions_historical_compare
+    )
 
     # Plot
-
+    emissions_error.T.plot(
+        legend=False, title="Error between PD22 and ClimateTRACE emissions", y="%"
+    )
     # endregion
 
     #################
@@ -1077,8 +1083,8 @@ def emissions(
     #################
 
     # region
-    emissions_output.to_csv("podi/data/emissions_output.csv")
 
+    emissions_output.to_csv("podi/data/emissions_output.csv")
     emissions_output_co2e.to_csv("podi/data/emissions_output_co2e.csv")
 
     # endregion
