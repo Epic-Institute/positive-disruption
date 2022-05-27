@@ -1,9 +1,22 @@
 #!/usr/bin/env python
 
+import numpy as np
 import pandas as pd
+import globalwarmingpotentials as gwp
+import fair
+from fair.forward import fair_scm
+from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
+from fair.SSPs import ssp119
+from fair.constants import radeff
 
 
-def climate(emissions_output, data_start_year, proj_end_year):
+def climate(emissions_output, data_start_year, data_end_year, proj_end_year):
+
+    ############################################
+    # PREPARE EMISSIONS DATA FOR CLIMATE MODEL #
+    ############################################
+
+    # region
 
     # Gases that FAIR climate model takes as input, with associated units
     fair_input_gases = {
@@ -48,6 +61,41 @@ def climate(emissions_output, data_start_year, proj_end_year):
         "CH3Cl": "kt/yr",
     }
 
+    # Gases that FAIR climate model provides as output, with associated units
+    fair_output_gases = {
+        "CO2": "ppm",
+        "CH4": "ppb",
+        "N2O": "ppb",
+        "CF4": "ppt",
+        "C2F6": "ppt",
+        "C6F14": "ppt",
+        "HFC23": "ppt",
+        "HFC32": "ppt",
+        "HFC43-10": "ppt",
+        "HFC125": "ppt",
+        "HFC134a": "ppt",
+        "HFC143a": "ppt",
+        "HFC227ea": "ppt",
+        "HFC245fa": "ppt",
+        "SF6": "ppt",
+        "CFC11": "ppt",
+        "CFC12": "ppt",
+        "CFC113": "ppt",
+        "CFC114": "ppt",
+        "CFC115": "ppt",
+        "CCl4": "ppt",
+        "Methyl chloroform": "ppt",
+        "HCFC22": "ppt",
+        "HCFC141b": "ppt",
+        "HCFC142b": "ppt",
+        "Halon 1211": "ppt",
+        "Halon 1202": "ppt",
+        "Halon 1301": "ppt",
+        "Halon 2401": "ppt",
+        "CH3Br": "ppt",
+        "CH3Cl": "ppt",
+    }
+
     # Align gas names that are different between FAIR and emissions_output
     # SO2 to SOx
 
@@ -78,5 +126,206 @@ def climate(emissions_output, data_start_year, proj_end_year):
             )
         ).values
     ]
+
+    # Split CO2 into CO2-fossil and CO2-landuse
+
+    emissions_output[
+        (
+            (emissions_output.reset_index().flow_long == "CO2")
+            & (
+                emissions_output.reset_index().sector
+                in [
+                    "Electric Power",
+                    "Transportation",
+                    "Residential",
+                    "Commercial",
+                    "Industrial",
+                ]
+            )
+        ).values
+    ]
+
+    emissions_output[
+        (
+            (emissions_output.reset_index().flow_long == "CO2")
+            & (
+                emissions_output.reset_index().sector
+                in ["Agriculture", "Forests & Wetlands"]
+            )
+        ).values
+    ]
+
+    # Convert units from emissions_output to assumed units for FAIR model input
+
+    emissions_output = emissions_output.apply(
+        lambda x: x.multiply(
+            pd.read_csv(
+                "podi/data/climate_unit_conversions.csv", usecols=["value", "gas"]
+            ).set_index("gas")[x.name[8]]
+        ),
+        axis=1,
+    )
+
+    # endregion
+
+    ################################################
+    # ESTIMATE CONCENTRATION, FORCING, TEMPERATURE #
+    ################################################
+
+    # region
+
+    # Load RCP emissions, then swap in emissions_output
+
+    # Run the climate model
+    C, F, T = fair.forward.fair_scm(emissions=emissions_output)
+
+    climate_output_concentration = (
+        pd.DataFrame(C)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, proj_end_year + 1, 1))
+    )
+
+    climate_output_forcing = (
+        pd.DataFrame(F)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, proj_end_year + 1, 1))
+    )
+
+    climate_output_temperature = (
+        pd.DataFrame(T)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, proj_end_year + 1, 1))
+    )
+
+    # Create version of climate_output_concentration with units CO2e
+    # Add missing GWP values to gwp
+    gwp.data[version].update(
+        {
+            "CO2": 1,
+            "BC": 2240,
+            "CO": 0,
+            "NH3": 0,
+            "NMVOC": 0,
+            "NOx": 0,
+            "OC": 0,
+            "SO2": 0,
+        }
+    )
+
+    # Choose version of GWP values
+    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
+
+    climate_output_concentration_co2e = climate_output_concentration.apply(
+        lambda x: x.mul(gwp.data[version[x.name[8]]]), axis=1
+    )
+
+    # endregion
+
+    ######################################################
+    #  LOAD HISTORICAL DATA & COMPARE TO MODELED RESULTS #
+    ######################################################
+
+    # region
+
+    # Load GHG concentration data from external source
+    climate_concentration_historical = pd.DataFrame(
+        pd.read_csv(
+            "podi/data/external/climate-change.csv",
+            usecols=[
+                "Entity",
+                "Year",
+                "CO2 concentrations",
+                "CH4 concentrations",
+                "N2O concentrations",
+            ],
+        )
+    )
+
+    # Select World-level data
+    climate_concentration_historical = climate_concentration_historical[
+        (climate_concentration_historical["Entity"] == "World").values
+    ].drop(columns="Entity")
+
+    # Update column names
+    climate_concentration_historical = climate_concentration_historical.rename(
+        {
+            "CO2 concentrations": "CO2",
+            "CH4 concentrations": "CH4",
+            "N2O concentrations": "N2O",
+        },
+        axis="columns",
+    )
+
+    climate_concentration_historical = (
+        climate_concentration_historical[
+            (climate_concentration_historical["Year"] >= data_start_year).values
+        ]
+        .rename(columns={"Year": "year"})
+        .set_index("year")
+    )
+
+    # Load radiative forcing data from external source
+    climate_forcing_historical = pd.DataFrame(
+        pd.read_csv("podi/data/external/radiative_forcing_historical.csv")
+    )
+    climate_forcing_historical.columns = climate_forcing_historical.columns.astype(int)
+    climate_forcing_historical = climate_forcing_historical.loc[
+        :, data_start_year:data_end_year
+    ]
+
+    # Load temperature change data from external source
+    climate_temperature_historical = pd.DataFrame(
+        pd.read_csv("podi/data/external/temperature_change_historical.csv")
+    )
+    climate_temperature_historical.columns = (
+        climate_temperature_historical.columns.astype(int)
+    )
+    climate_temperature_historical = climate_temperature_historical.loc[
+        :, data_start_year:data_end_year
+    ]
+
+    # Create annual timeseries df and merge with decadal climate_historical df
+    climate_historical = pd.DataFrame(
+        index=climate_historical2.index,
+        columns=np.arange(data_start_year, data_end_year + 1, 1),
+    )
+
+    climate_historical.update(climate_historical2.loc[:, :data_end_year])
+    climate_historical = climate_historical.astype(float)
+    climate_historical.interpolate(axis=1, limit_area="inside", inplace=True)
+
+    # Calculate error between modeled and observed
+    climate_error = abs((climate_historical - climate_historical) / climate_historical)
+
+    # Plot
+    climate_error.T.plot(
+        legend=False, title="Error between PD22 and NOAA GHG Concentrations", ylabel="%"
+    )
+
+    climate_error.T.plot(
+        legend=False, title="Error between PD22 and NOAA Radiative Forcing", ylabel="%"
+    )
+
+    climate_error.T.plot(
+        legend=False, title="Error between PD22 and NOAA Temperature Change", ylabel="%"
+    )
+
+    # endregion
+
+    #################
+    #  SAVE OUTPUT  #
+    #################
+
+    # region
+
+    pd.concat(
+        [
+            climate_output_concentration,
+            climate_output_forcing,
+            climate_output_temperature,
+        ]
+    ).to_csv("podi/data/climate_output.csv")
+
+    # endregion
 
     return

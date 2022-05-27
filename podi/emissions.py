@@ -221,7 +221,22 @@ def emissions(
     emissions_afolu.fillna(method="bfill", inplace=True)
 
     # Convert emissions_afolu_mitigated from MtCO2e to Mt
-    # Define global warming potential of all GHGs
+
+    # Add missing GWP values to gwp
+    gwp.data[version].update(
+        {
+            "CO2": 1,
+            "BC": 2240,
+            "CO": 0,
+            "NH3": 0,
+            "NMVOC": 0,
+            "NOx": 0,
+            "OC": 0,
+            "SO2": 0,
+        }
+    )
+
+    # Choose version of GWP values
     version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
 
     emissions_afolu_mitigated.update(
@@ -1035,20 +1050,6 @@ def emissions(
         ]
     )
 
-    # Add missing GWP values
-    gwp.data[version].update(
-        {
-            "CO2": 1,
-            "BC": 2240,
-            "CO": 0,
-            "NH3": 0,
-            "NMVOC": 0,
-            "NOx": 0,
-            "OC": 0,
-            "SO2": 0,
-        }
-    )
-
     emissions_output_co2e = emissions_output_co2e.apply(
         lambda x: x.mul(gwp.data[version][x.name[8]]), axis=1
     )
@@ -1074,7 +1075,7 @@ def emissions(
 
     # Plot
     emissions_error.T.plot(
-        legend=False, title="Error between PD22 and ClimateTRACE emissions", y="%"
+        legend=False, title="Error between PD22 and ClimateTRACE emissions", ylabel="%"
     )
     # endregion
 

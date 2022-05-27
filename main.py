@@ -126,7 +126,7 @@ adoption_historical.columns = adoption_historical.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = True
+recalc_afolu = False
 # region
 
 if recalc_afolu is True:
@@ -185,95 +185,132 @@ emissions_output_co2e.columns = emissions_output_co2e.columns.astype(int)
 # CDR #
 #######
 
+recalc_cdr = False
 # region
-
-cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").set_index(
-    ["region", "sector", "scenario"]
-)
-cdr_pathway.columns = cdr_pathway.columns.astype(int)
-
-cdr_subvs = []
-
-for scenario in ["pathway"]:
-
-    cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
-        cdr_pathway.loc["World ", "Carbon Dioxide Removal", scenario]
-        .loc[2010:]
-        .to_list(),
-        grid_em_def,
-        heat_em_def,
-        transport_em_def,
-        fuel_em_def,
-        2010,
-        2100,
+    
+if recalc_cdr is True:
+    cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").set_index(
+        ["region", "sector", "scenario"]
     )
+    cdr_pathway.columns = cdr_pathway.columns.astype(int)
 
-    cdr_pathway2 = (
-        pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
-        .T.fillna(0)
-        .drop(
-            index=pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
-            .T.fillna(0)
-            .iloc[
-                pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
-                .T.fillna(0)
-                .index.str.contains("Deficit", na=False)
-            ]
-            .index
+    cdr_subvs = []
+
+    for scenario in ["pathway"]:
+
+        cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
+            cdr_pathway.loc["World ", "Carbon Dioxide Removal", scenario]
+            .loc[2010:]
+            .to_list(),
+            grid_em_def,
+            heat_em_def,
+            transport_em_def,
+            fuel_em_def,
+            2010,
+            2100,
         )
-    )
 
-    cdr_subvs = pd.DataFrame(cdr_subvs).append(
-        pd.concat([cdr_pathway2], keys=["World "], names=["region"])
-    )
+        cdr_pathway2 = (
+            pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
+            .T.fillna(0)
+            .drop(
+                index=pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
+                .T.fillna(0)
+                .iloc[
+                    pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
+                    .T.fillna(0)
+                    .index.str.contains("Deficit", na=False)
+                ]
+                .index
+            )
+        )
 
-    cdr_subvs = (
-        cdr_subvs.droplevel(1)
-        .assign(Metric=["Enhanced Weathering", "Other", "LTSSDAC", "HTLSDAC"])
-        .set_index("Metric", append=True)
-    )
+        cdr_subvs = pd.DataFrame(cdr_subvs).append(
+            pd.concat([cdr_pathway2], keys=["World "], names=["region"])
+        )
 
-    cdr_subvs = curve_smooth(cdr_subvs, "quadratic", 9).clip(lower=0)
+        cdr_subvs = (
+            cdr_subvs.droplevel(1)
+            .assign(Metric=["Enhanced Weathering", "Other", "LTSSDAC", "HTLSDAC"])
+            .set_index("Metric", append=True)
+        )
 
-    cdr_subvs = pd.concat(
-        [cdr_subvs], names=["sector"], keys=["Carbon Dioxide Removal"]
-    )
-    cdr_subvs["scenario"] = "pathway"
-    cdr_subvs = cdr_subvs.reset_index().set_index(
-        ["region", "sector", "Metric", "scenario"]
-    )
-    cdr_subvs_baseline = (cdr_subvs * 0).droplevel("scenario")
-    cdr_subvs_baseline["scenario"] = "baseline"
-    cdr_subvs_baseline = cdr_subvs_baseline.reset_index().set_index(
-        ["region", "sector", "Metric", "scenario"]
-    )
-    cdr_subvs = cdr_subvs.append(cdr_subvs_baseline)
+        cdr_subvs = curve_smooth(cdr_subvs, "quadratic", 9).clip(lower=0)
+
+        cdr_subvs = pd.concat(
+            [cdr_subvs], names=["sector"], keys=["Carbon Dioxide Removal"]
+        )
+        cdr_subvs["scenario"] = "pathway"
+        cdr_subvs = cdr_subvs.reset_index().set_index(
+            ["region", "sector", "Metric", "scenario"]
+        )
+        cdr_subvs_baseline = (cdr_subvs * 0).droplevel("scenario")
+        cdr_subvs_baseline["scenario"] = "baseline"
+        cdr_subvs_baseline = cdr_subvs_baseline.reset_index().set_index(
+            ["region", "sector", "Metric", "scenario"]
+        )
+        cdr_subvs = cdr_subvs.append(cdr_subvs_baseline)
 
 
-cdr_fill = cdr_subvs.loc[:, 2011:2030] * 0
-cdr_fill.columns = np.arange(1990, 2010, 1)
-cdr = cdr_fill.join(cdr_subvs)
+    cdr_fill = cdr_subvs.loc[:, 2011:2030] * 0
+    cdr_fill.columns = np.arange(1990, 2010, 1)
+    cdr = cdr_fill.join(cdr_subvs)
 
-# check if energy oversupply is at least energy demand needed for CDR
-"""
-if (
-    sum(
-        elec_consump_cdr_pathway,
-        heat_consump_cdr_pathway,
-    )
-    > cdr_energy_pathway
-):
-    print("Electricity oversupply does not meet CDR energy demand for pathway Scenario")
-"""
+    # check if energy oversupply is at least energy demand needed for CDR
+    """
+    if (
+        sum(
+            elec_consump_cdr_pathway,
+            heat_consump_cdr_pathway,
+        )
+        > cdr_energy_pathway
+    ):
+        print("Electricity oversupply does not meet CDR energy demand for pathway Scenario")
+    """
+
+index = [
+    "model",
+    "scenario",
+    "region",
+    "sector",
+    "product_category",
+    "product_long",
+    "product_short",
+    "flow_category",
+    "flow_long",
+    "flow_short",
+    "unit"
+]
+cdr_output = pd.DataFrame(pd.read_csv("podi/data/cdr_output.csv")).set_index(index)
+cdr_output.columns = cdr_output.columns.astype(int)
+
 # endregion
 
 ###########
 # CLIMATE #
 ###########
 
+recalc_climate = False
 # region
 
-climate_output = climate(emissions_output, data_start_year, proj_end_year)
+if recalc_climate = True:
+    climate_output = climate(emissions_output, data_start_year, data_end_year, proj_end_year)
+
+index = [
+    "model",
+    "scenario",
+    "region",
+    "sector",
+    "product_category",
+    "product_long",
+    "product_short",
+    "flow_category",
+    "flow_long",
+    "flow_short",
+    "unit"
+]
+climate_output = pd.DataFrame(pd.read_csv("podi/data/climate_output.csv")).set_index(index)
+climate_output.columns = climate_output.columns.astype(int)
 
 # endregion
 
@@ -9560,6 +9597,76 @@ fig.add_annotation(
     opacity=1,
 )
 """
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/ghgconc-" + "World " + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+
+#########################################
+# GHG ATMOSPHERIC CONCENTRATION, IN PPM # (V2)
+#########################################
+
+# region
+
+data_start_year = data_start_year
+data_end_year = data_end_year
+proj_end_year = proj_end_year
+
+df = climate_output[(climate_output.reset_index().product_long == 'concentration').values]
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        name="Historical",
+        line=dict(width=3, color="black"),
+        x=np.arange(data_start_year, data_end_year + 1, 1),
+        y=df.loc[:,data_start_year, data_end_year],
+        fill="none",
+        stackgroup="hist",
+        legendgroup="hist",
+    )
+)
+
+for scenario in [climate_output.reset_index().scenario.unique()]:
+    for gas in [climate_output.reset_index().gas.unique()]
+        fig.add_trace(
+            go.Scatter(
+                name=scenario,
+                line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
+                x=np.arange(data_end_year, proj_end_year + 1, 1),
+                y=df[((df.reset_index().scenario == scenario) & (df.reset_index().gas == gas)).values].loc[:,data_end_year:],
+                fill="none",
+                stackgroup=gas,
+                legendgroup=gas,
+            )
+        )
+
+fig.update_layout(
+    title={
+        "text": "Atmospheric GHG Concentration",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "ppm CO2e"},
+)
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.01, x=0.12, font=dict(size=10)),
+    margin_b=0,
+    margin_t=60,
+    margin_l=15,
+    margin_r=15,
+    yaxis=dict(tickmode="linear", tick0=350, dtick=25),
+)
+
 if show_figs is True:
     fig.show()
 if save_figs is True:
