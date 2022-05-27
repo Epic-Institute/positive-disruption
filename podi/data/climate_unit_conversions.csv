@@ -1,0 +1,33 @@
+value,gas,emissions_output to FAIR
+0.0002659574,CO2,MtCO2 to GtC
+0.001571339,N2O,MtN2O to MtN2
+0.002,SOx,MtSOx to MtS
+0.003286231,NOx,MtNOx to MtN
+0.001,CF4,Mt to kt
+0.001,C2F6,Mt to kt
+0.001,C6F14,Mt to kt
+0.001,HFC23,Mt to kt
+0.001,HFC32,Mt to kt
+0.001,HFC43-10,Mt to kt
+0.001,HFC125,Mt to kt
+0.001,HFC134a,Mt to kt
+0.001,HFC143a,Mt to kt
+0.001,HFC227ea,Mt to kt
+0.001,HFC245fa,Mt to kt
+0.001,SF6,Mt to kt
+0.001,CFC11,Mt to kt
+0.001,CFC12,Mt to kt
+0.001,CFC113,Mt to kt
+0.001,CFC114,Mt to kt
+0.001,CFC115,Mt to kt
+0.001,CCl4,Mt to kt
+0.001,Methyl chloroform,Mt to kt
+0.001,HCFC22,Mt to kt
+0.001,HCFC141b,Mt to kt
+0.001,HCFC142b,Mt to kt
+0.001,Halon 1211,Mt to kt
+0.001,Halon 1202,Mt to kt
+0.001,Halon 1301,Mt to kt
+0.001,Halon 2401,Mt to kt
+0.001,CH3Br,Mt to kt
+0.001,CH3Cl,Mt to kt
