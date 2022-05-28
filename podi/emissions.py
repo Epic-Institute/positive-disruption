@@ -321,7 +321,7 @@ def emissions(
     emissions_additional["scenario"] = "baseline"
     emissions_additional["flow_category"] = "Emissions"
 
-    # Change sector index to Product_long and 'em' to 'Flow_long'
+    # Change sector index to Product_long and 'em' to 'flow_long'
     emissions_additional.rename(
         columns={"sector": "product_long", "em": "flow_long"}, inplace=True
     )

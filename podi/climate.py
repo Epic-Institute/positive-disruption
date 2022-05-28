@@ -10,7 +10,9 @@ from fair.SSPs import ssp119
 from fair.constants import radeff
 
 
-def climate(emissions_output, data_start_year, data_end_year, proj_end_year):
+def climate(
+    emissions_output, cdr_output, data_start_year, data_end_year, proj_end_year
+):
 
     ############################################
     # PREPARE EMISSIONS DATA FOR CLIMATE MODEL #

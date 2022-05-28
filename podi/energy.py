@@ -1587,78 +1587,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    ########################
-    #  ESTIMATE SHIPMENTS  #
-    ########################
-
-    # region
-
-    # Load shipment historical data
-    index = [
-        "model",
-        "scenario",
-        "region",
-        "sector",
-        "product_category",
-        "product_long",
-        "product_short",
-        "flow_category",
-        "flow_long",
-        "flow_short",
-        "unit",
-    ]
-
-    adoption_historical = (
-        pd.DataFrame(pd.read_csv("podi/data/adoption_historical.csv"))
-        .set_index(index)
-        .dropna(axis=0, how="all")
-    )
-    adoption_historical.columns = adoption_historical.columns.astype(int)
-
-    # Project future growth based on percentage growth of energy demand
-    adoption_historical = (
-        pd.concat(
-            [
-                adoption_historical.loc[:, data_start_year : data_end_year - 1],
-                pd.concat(
-                    [
-                        adoption_historical.loc[:, data_end_year],
-                        energy_post_electrification.droplevel(
-                            ["hydrogen", "flexible", "nonenergy"]
-                        )
-                        .groupby(
-                            [
-                                "model",
-                                "scenario",
-                                "region",
-                                "sector",
-                                "product_category",
-                                "product_long",
-                                "product_short",
-                                "flow_category",
-                                "flow_long",
-                                "flow_short",
-                                "unit",
-                            ]
-                        )
-                        .sum()
-                        .loc[:, data_end_year:]
-                        .pct_change(axis=1)
-                        .dropna(axis=1, how="all")
-                        .add(1)
-                        .clip(upper=2),
-                    ],
-                    axis=1,
-                ).cumprod(axis=1),
-            ],
-            axis=1,
-        )
-        .replace(np.inf, 0)
-        .replace(-np.inf, 0)
-    )
-
-    # endregion
-
     #################
     #  SAVE OUTPUT  #
     #################
@@ -1698,7 +1626,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         (energy_reduced_electrified, "energy_reduced_electrified"),
         (energy_output, "energy_output"),
         (energy_percent, "energy_percent"),
-        (adoption_historical, "adoption_historical"),
     ]:
         output[0].groupby(
             [
