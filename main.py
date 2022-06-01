@@ -324,9 +324,9 @@ analysis_output.columns = analysis_output.columns.astype(int)
 
 # endregion
 
-############################
-#  CONVERT TO IAMC FORMAT  #
-############################
+##########################
+# CONVERT TO IAMC FORMAT #
+##########################
 
 # region
 
@@ -346,9 +346,9 @@ energy_post_electrification_pyam = pyam.IamDataFrame(
 
 # endregion
 
-#################################
-#  SAVE AS REGIONAL-LEVEL FILES #
-#################################
+################################
+# SAVE AS REGIONAL-LEVEL FILES #
+################################
 
 # region
 
@@ -1708,7 +1708,7 @@ if show_figs is True:
 # endregion
 
 ########################################
-# ADOPTION RATES, STACKED, ELECTRICITY [%] # (V1)
+# PD INDEX, STACKED, ELECTRICITY [%] # (V1)
 ########################################
 
 # region
@@ -1875,7 +1875,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ###########################################
-# ADOPTION RATES, STACKED, TRANSPORTATION [%] # (V2)
+# PD INDEX, STACKED, TRANSPORTATION [%] # (V2)
 ###########################################
 
 # region
@@ -1973,7 +1973,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ######################################
-# ADOPTION RATES, STACKED, BUILDINGS [%] # (V3)
+# PD INDEX, STACKED, BUILDINGS [%] # (V3)
 ######################################
 
 # region
@@ -2067,7 +2067,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 #####################################
-# ADOPTION RATES, STACKED, INDUSTRY [%] # (V4)
+# PD INDEX, STACKED, INDUSTRY [%] # (V4)
 #####################################
 
 # region
@@ -2228,7 +2228,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ########################################
-# ADOPTION RATES, STACKED, ELECTRICITY [TWh] # (V1)
+# PD INDEX, STACKED, ELECTRICITY [TWh] # (V1)
 ########################################
 
 # region
@@ -2387,7 +2387,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ###########################################
-# ADOPTION RATES, STACKED, TRANSPORTATION [TJ] # (V2)
+# PD INDEX, STACKED, TRANSPORTATION [TJ] # (V2)
 ###########################################
 
 # region
@@ -2482,7 +2482,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ######################################
-# ADOPTION RATES, STACKED, BUILDINGS [TJ] # (V3)
+# PD INDEX, STACKED, BUILDINGS [TJ] # (V3)
 ######################################
 
 # region
@@ -2577,7 +2577,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 #####################################
-# ADOPTION RATES, STACKED, INDUSTRY [TJ] # (V4)
+# PD INDEX, STACKED, INDUSTRY [TJ] # (V4)
 #####################################
 
 # region
@@ -2739,7 +2739,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ############################
-# ADOPTION RATES BY SECTOR #
+# PD INDEX BY SECTOR #
 ############################
 
 # region
@@ -3058,7 +3058,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ######################################
-# ADOPTION RATES BY PRODUCT CATEGORY #
+# PD INDEX BY PRODUCT CATEGORY #
 ######################################
 
 # region
@@ -3379,7 +3379,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 #############################
-# ADOPTION RATES BY PRODUCT #
+# PD INDEX BY PRODUCT #
 #############################
 
 # region
@@ -3481,7 +3481,7 @@ for vertical in fig2['sector'].unique():
 # endregion
 
 ##########################
-# ADOPTION RATES BY FLOW #
+# PD INDEX BY FLOW #
 ##########################
 
 # region
@@ -3802,7 +3802,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ###############################################
-# ADOPTION RATES, STACKED, W DATA OVERLAY [%] # (V2)
+# PD INDEX, STACKED, W DATA OVERLAY [%] # (V2)
 ###############################################
 
 # region
@@ -3918,7 +3918,7 @@ for sector in fig2['sector'].unique():
 # endregion
 
 ####################################################
-# ADOPTION RATES, STACKED, W TOPLINE TOTAL EVS [%] # (V2)
+# PD INDEX, STACKED, W TOPLINE TOTAL EVS [%] # (V2)
 ####################################################
 
 # region

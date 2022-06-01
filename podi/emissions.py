@@ -1029,6 +1029,9 @@ def emissions(
     emissions_output_co2e_new.drop(columns="flow_long", inplace=True)
     emissions_output_co2e_new["flow_long"] = "CO2"
 
+    # Update units from 'MtCO2' to 'Mt'
+    emissions_output_co2e_new = emissions_output_co2e_new.replace("MtCO2", "Mt")
+
     # Add the updated subset back into the original df
     emissions_output_co2e = pd.concat(
         [emissions_output_co2e, emissions_output_co2e_new]

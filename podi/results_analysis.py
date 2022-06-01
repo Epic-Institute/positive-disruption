@@ -19,6 +19,349 @@ def results_analysis(
 ):
 
     ##############
+    #  PD INDEX  #
+    ##############
+
+    # region
+
+    # Percent of electric power that is renewables
+    electricity = (
+        energy_output.loc[
+            model,
+            scenario,
+            region,
+            ["Electric Power"],
+            product_category,
+            slice(None),
+            [
+                "GEOTHERM",
+                "HYDRO",
+                "SOLARPV",
+                "ROOFTOP",
+                "SOLARTH",
+                "OFFSHORE",
+                "ONSHORE",
+                "TIDE",
+                "NUCLEAR",
+            ],
+            ["Electricity output"],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(groupby)
+        .sum()
+        .divide(
+            energy_output.loc[
+                model,
+                scenario,
+                region,
+                ["Electric Power"],
+                product_category,
+                slice(None),
+                slice(None),
+                ["Electricity output"],
+            ]
+            .loc[:, start_year:end_year]
+            .groupby(groupby)
+            .sum()
+            .sum(0)
+        )
+        * 100
+    ).reindex(
+        axis="index",
+        level=2,
+        labels=[
+            "Nuclear",
+            "Hydro",
+            "Onshore wind energy",
+            "Offshore wind energy",
+            "Utility solar photovoltaics",
+            "Rooftop solar photovoltaics",
+            "Solar thermal",
+            "Tide, wave and ocean",
+            "Geothermal",
+        ],
+    )
+
+    # Percent of transport energy that is electric or nonelectric renewables
+    transport = (
+        energy_output.loc[
+            model,
+            scenario,
+            region,
+            ["Transportation"],
+            product_category,
+            slice(None),
+            ["BIODIESEL", "BIOGASOL", "BIOGASES", "OBIOLIQ", "ELECTR", "HYDROGEN"],
+            flow_category,
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(groupby)
+        .sum()
+        .divide(
+            energy_output.loc[
+                model, scenario, region, ["Transportation"], product_category
+            ]
+            .loc[:, start_year:end_year]
+            .groupby(groupby)
+            .sum()
+            .sum(0)
+        )
+        * 100
+    )
+
+    # Percent of buildings energy that is electric or nonelectric renewables
+    buildings = (
+        energy_output.loc[
+            model,
+            scenario,
+            region,
+            ["Commercial", "Residential"],
+            product_category,
+            slice(None),
+            ["ELECTR", "SOLARTH", "MUNWASTER", "GEOTHERM"],
+            flow_category,
+            slice(None),
+            ["RESIDENT", "COMMPUB"],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(groupby)
+        .sum()
+        .divide(
+            energy_output.loc[
+                model, scenario, region, ["Commercial", "Residential"], product_category
+            ]
+            .loc[:, start_year:end_year]
+            .groupby(groupby)
+            .sum()
+            .sum(0)
+        )
+        * 100
+    )
+
+    # Percent of industry energy that is electric or nonelectric renewables
+    industry = (
+        energy_output.loc[
+            model,
+            scenario,
+            region,
+            ["Industrial"],
+            product_category,
+            slice(None),
+            ["ELECTR", "SOLARTH", "HYDROGEN", "MUNWASTER", "GEOTHERM"],
+            "Final consumption",
+            [
+                "Agriculture/forestry",
+                "Chemical and petrochemical",
+                "Construction",
+                "Final consumption not elsewhere specified",
+                "Fishing",
+                "Food and tobacco",
+                "Industry not elsewhere specified",
+                "Iron and steel",
+                "Machinery",
+                "Mining and quarrying",
+                "Non-ferrous metals",
+                "Non-metallic minerals",
+                "Paper, pulp, and print",
+                "Textile and leather",
+                "Transport equipment",
+                "Wood and wood products",
+            ],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(groupby)
+        .sum()
+        .divide(
+            energy_output.loc[
+                model,
+                scenario,
+                region,
+                ["Industrial"],
+                product_category,
+                slice(None),
+                slice(None),
+                "Final consumption",
+            ]
+            .loc[:, start_year:end_year]
+            .groupby(groupby)
+            .sum()
+            .sum(0)
+        )
+        * 100
+    )
+
+    # Percent of agriculture mitigation compared to max extent
+    agriculture = (
+        energy_output.loc[
+            model,
+            scenario,
+            region,
+            ["Agriculture"],
+            product_category,
+            slice(None),
+            ["ELECTR", "SOLARTH", "HYDROGEN", "MUNWASTER", "GEOTHERM"],
+            "Final consumption",
+            [
+                "Agriculture/forestry",
+                "Chemical and petrochemical",
+                "Construction",
+                "Final consumption not elsewhere specified",
+                "Fishing",
+                "Food and tobacco",
+                "Industry not elsewhere specified",
+                "Iron and steel",
+                "Machinery",
+                "Mining and quarrying",
+                "Non-ferrous metals",
+                "Non-metallic minerals",
+                "Paper, pulp, and print",
+                "Textile and leather",
+                "Transport equipment",
+                "Wood and wood products",
+            ],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(groupby)
+        .sum()
+        .divide(
+            energy_output.loc[
+                model,
+                scenario,
+                region,
+                ["Agriculture"],
+                product_category,
+                slice(None),
+                slice(None),
+                "Final consumption",
+            ]
+            .loc[:, start_year:end_year]
+            .groupby(groupby)
+            .sum()
+            .sum(0)
+        )
+        * 100
+    )
+
+    # Percent of forests & wetlands mitigation compared to max extent
+    forestswetlands = (
+        energy_output.loc[
+            model,
+            scenario,
+            region,
+            ["Forests & Wetlands"],
+            product_category,
+            slice(None),
+            ["ELECTR", "SOLARTH", "HYDROGEN", "MUNWASTER", "GEOTHERM"],
+            "Final consumption",
+            [
+                "Agriculture/forestry",
+                "Chemical and petrochemical",
+                "Construction",
+                "Final consumption not elsewhere specified",
+                "Fishing",
+                "Food and tobacco",
+                "Industry not elsewhere specified",
+                "Iron and steel",
+                "Machinery",
+                "Mining and quarrying",
+                "Non-ferrous metals",
+                "Non-metallic minerals",
+                "Paper, pulp, and print",
+                "Textile and leather",
+                "Transport equipment",
+                "Wood and wood products",
+            ],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(groupby)
+        .sum()
+        .divide(
+            energy_output.loc[
+                model,
+                scenario,
+                region,
+                ["Forests & Wetlands"],
+                product_category,
+                slice(None),
+                slice(None),
+                "Final consumption",
+            ]
+            .loc[:, start_year:end_year]
+            .groupby(groupby)
+            .sum()
+            .sum(0)
+        )
+        * 100
+    )
+
+    # Percent of cdr sequestration compared to max extent
+    cdr = (
+        cdr_output.loc[
+            model,
+            scenario,
+            region,
+            ["CDR"],
+            product_category,
+            slice(None),
+            ["ELECTR", "SOLARTH", "HYDROGEN", "MUNWASTER", "GEOTHERM"],
+            "Final consumption",
+            [
+                "Agriculture/forestry",
+                "Chemical and petrochemical",
+                "Construction",
+                "Final consumption not elsewhere specified",
+                "Fishing",
+                "Food and tobacco",
+                "Industry not elsewhere specified",
+                "Iron and steel",
+                "Machinery",
+                "Mining and quarrying",
+                "Non-ferrous metals",
+                "Non-metallic minerals",
+                "Paper, pulp, and print",
+                "Textile and leather",
+                "Transport equipment",
+                "Wood and wood products",
+            ],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(groupby)
+        .sum()
+        .divide(
+            energy_output.loc[
+                model,
+                scenario,
+                region,
+                ["CDR"],
+                product_category,
+                slice(None),
+                slice(None),
+                "Final consumption",
+            ]
+            .loc[:, start_year:end_year]
+            .groupby(groupby)
+            .sum()
+            .sum(0)
+        )
+        * 100
+    )
+
+    # Combine all verticals
+    pdindex_output = pd.concat(
+        [
+            "electricity",
+            "transport",
+            "buildings",
+            "industry",
+            "agriculture",
+            "forestswetlands",
+            "cdr",
+        ]
+    )
+
+    # endregion
+
+    ##############
     #  ADOPTION  #
     ##############
 
@@ -136,6 +479,8 @@ def results_analysis(
     # region
 
     adoption_output.to_csv("podi/data/adoption_output.csv")
+
+    pdindex_output.to_csv("podi/data/pdindex_output.csv")
 
     analysis_output.to_csv("podi/data/analysis_output.csv")
 

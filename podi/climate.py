@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# region
+
 import numpy as np
 import pandas as pd
 import globalwarmingpotentials as gwp
@@ -8,6 +10,8 @@ from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
 from fair.SSPs import ssp119
 from fair.constants import radeff
+
+# endregion
 
 
 def climate(
@@ -99,7 +103,9 @@ def climate(
     }
 
     # Align gas names that are different between FAIR and emissions_output
+
     # SO2 to SOx
+    emissions_output.rename(index={"SO2": "SOx"}, inplace=True)
 
     # Drop dashes
     for gas in [
@@ -113,12 +119,12 @@ def climate(
         "HCFC-141b",
         "HCFC142b",
     ]:
-        gas = gas.replace("-", "")
-        return gas
+        emissions_output.rename(index={gas: gas.replace("-", "")}, inplace=True)
 
     #'HFC-43-10-mee' to 'HFC43-10'
+    emissions_output.rename(index={"HFC-43-10-mee": "HFC43-10"}, inplace=True)
 
-    # Add 'CFC11', 'CFC12', 'CFC113', 'CFC114', 'CFC115', 'CCl4', 'Methyl chloroform', 'HCFC22', 'Halon 1211', 'Halon 1202', 'Halon 1301', 'Halon 2401', 'CH3Br', 'CH3Cl'
+    # Add 'CFC11', 'CFC12', 'CFC113', 'CFC114', 'CFC115', 'CCl4', 'Methyl chloroform', 'HCFC22', 'Halon 1211', 'Halon 1202', 'Halon 1301', 'Halon 2401', 'CH3Br', 'CH3Cl' to emissions_output
 
     # Drop 'Electricity output' and 'Heat output' to avoid double counting when summing emissions
     emissions_output = emissions_output[
@@ -129,33 +135,75 @@ def climate(
         ).values
     ]
 
-    # Split CO2 into CO2-fossil and CO2-landuse
+    # Update emissions that don't list gas in flow_long
+    emissions_output.reset_index(inplace=True)
 
-    emissions_output[
+    # Select emissions that don't list gas in flow_long (all list unit as 'MtCO2')
+    emissions_output_co2 = emissions_output[(emissions_output.unit == "MtCO2").values]
+
+    # Remove the subset above from full emissions list
+    emissions_output = emissions_output[~(emissions_output.unit == "MtCO2").values]
+
+    # Replace 'flow_long' value with 'CO2'
+    emissions_output_co2.drop(columns="flow_long", inplace=True)
+    emissions_output_co2["flow_long"] = "CO2"
+
+    # Replace 'CO2' with 'CO2-fossil' for subset
+    emissions_output_fossil = emissions_output_co2[
         (
-            (emissions_output.reset_index().flow_long == "CO2")
+            (emissions_output_co2.flow_long == "CO2")
             & (
-                emissions_output.reset_index().sector
-                in [
-                    "Electric Power",
-                    "Transportation",
-                    "Residential",
-                    "Commercial",
-                    "Industrial",
-                ]
+                emissions_output_co2.sector.isin(
+                    [
+                        "Electric Power",
+                        "Transportation",
+                        "Residential",
+                        "Commercial",
+                        "Industrial",
+                    ]
+                )
             )
         ).values
-    ]
+    ].drop(columns="flow_long")
 
-    emissions_output[
+    emissions_output_fossil["flow_long"] = "CO2-fossil"
+
+    # Replace 'CO2' with 'CO-landuse' for subset
+    emissions_output_landuse = emissions_output_co2[
         (
-            (emissions_output.reset_index().flow_long == "CO2")
-            & (
-                emissions_output.reset_index().sector
-                in ["Agriculture", "Forests & Wetlands"]
-            )
+            (emissions_output_co2.flow_long == "CO2")
+            & (emissions_output_co2.sector.isin(["Agriculture", "Forests & Wetlands"]))
         ).values
-    ]
+    ].drop(columns="flow_long")
+
+    emissions_output_landuse["flow_long"] = "CO2-landuse"
+
+    # Recombine <ADD EMISSIONS_CDR_OUTPUT HERE>
+    emissions_output_co2 = pd.concat(
+        [emissions_output_fossil, emissions_output_landuse]
+    )
+
+    # Update units from 'MtCO2' to 'Mt'
+    emissions_output_co2 = emissions_output_co2.replace("MtCO2", "Mt")
+
+    # Add the updated subset back into the original df
+    emissions_output = pd.concat([emissions_output, emissions_output_co2])
+
+    emissions_output = emissions_output.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
+    )
 
     # Convert units from emissions_output to assumed units for FAIR model input
 
@@ -163,7 +211,10 @@ def climate(
         lambda x: x.multiply(
             pd.read_csv(
                 "podi/data/climate_unit_conversions.csv", usecols=["value", "gas"]
-            ).set_index("gas")[x.name[8]]
+            )
+            .set_index("gas")
+            .loc[x.name[8]]
+            .values[0]
         ),
         axis=1,
     )

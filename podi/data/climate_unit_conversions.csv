@@ -1,8 +1,15 @@
 value,gas,emissions_output to FAIR
-0.0002659574,CO2,MtCO2 to GtC
+0.0002659574,CO2-fossil,MtCO2 to GtC
+0.0002659574,CO2-landuse,MtCO2 to GtC
+1,CH4,-
 0.001571339,N2O,MtN2O to MtN2
 0.002,SOx,MtSOx to MtS
+1,CO,-
+1,NMVOC,-
 0.003286231,NOx,MtNOx to MtN
+1,BC,-
+1,OC,-
+1,NH3,-
 0.001,CF4,Mt to kt
 0.001,C2F6,Mt to kt
 0.001,C6F14,Mt to kt
