@@ -276,7 +276,7 @@ recalc_climate = False
 # region
 
 if recalc_climate is True:
-    climate_output = climate(emissions_output, cdr_output, data_start_year, data_end_year, proj_end_year)
+    climate_output = climate(emissions_output, emissions_output_co2e, cdr_output, data_start_year, data_end_year, proj_end_year)
 
 index = [
     "model",

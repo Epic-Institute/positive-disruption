@@ -1,4 +1,5 @@
 value,gas,emissions_output to FAIR
+0.0002659574,CO2e,MtCO2e to GtC
 0.0002659574,CO2-fossil,MtCO2 to GtC
 0.0002659574,CO2-landuse,MtCO2 to GtC
 1,CH4,-
@@ -10,17 +11,27 @@ value,gas,emissions_output to FAIR
 1,BC,-
 1,OC,-
 1,NH3,-
+1,NF3,-
 0.001,CF4,Mt to kt
 0.001,C2F6,Mt to kt
+1,C3F8,-
+1,C4F10,-
+1,C5F12,-
 0.001,C6F14,Mt to kt
 0.001,HFC23,Mt to kt
 0.001,HFC32,Mt to kt
+1,HFC-41,-
 0.001,HFC43-10,Mt to kt
 0.001,HFC125,Mt to kt
+1,HFC-134,-
 0.001,HFC134a,Mt to kt
+1,HFC-143,-
 0.001,HFC143a,Mt to kt
+1,HFC-152a,-
 0.001,HFC227ea,Mt to kt
+1,HFC-236fa,#VALUE!
 0.001,HFC245fa,Mt to kt
+1,HFC-365mfc,-
 0.001,SF6,Mt to kt
 0.001,CFC11,Mt to kt
 0.001,CFC12,Mt to kt
@@ -38,3 +49,4 @@ value,gas,emissions_output to FAIR
 0.001,Halon 2401,Mt to kt
 0.001,CH3Br,Mt to kt
 0.001,CH3Cl,Mt to kt
+1,c-C4F8,-

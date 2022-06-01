@@ -223,6 +223,9 @@ def emissions(
     # Convert emissions_afolu_mitigated from MtCO2e to Mt
 
     # Add missing GWP values to gwp
+    # Choose version of GWP values
+    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
+
     gwp.data[version].update(
         {
             "CO2": 1,
@@ -235,9 +238,6 @@ def emissions(
             "SO2": 0,
         }
     )
-
-    # Choose version of GWP values
-    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
 
     emissions_afolu_mitigated.update(
         emissions_afolu_mitigated[
@@ -989,7 +989,7 @@ def emissions(
     # Group modeled emissions into CO2e
     emissions_output_co2e = emissions_output.copy()
 
-    # Remove dashes from gas names
+    # Remove dashes from gas names to match naming in gwp library
     emissions_output_co2e = emissions_output_co2e.rename(
         index={
             "HCFC-141b": "HCFC141b",
@@ -1012,17 +1012,95 @@ def emissions(
         }
     )
 
-    # Update emissions that don't list gas in flow_long
+    # Update emissions that don't list gas in flow_long (these are all CO2)
     emissions_output_co2e.reset_index(inplace=True)
 
-    # Select emissions that don't list gas in flow_long (all list unit as 'MtCO2')
+    # Select CO2 emissions
     emissions_output_co2e_new = emissions_output_co2e[
-        (emissions_output_co2e.unit == "MtCO2").values
+        ~(
+            emissions_output_co2e.flow_long.isin(
+                [
+                    "CH4",
+                    "N2O",
+                    "BC",
+                    "CO",
+                    "NH3",
+                    "NMVOC",
+                    "NOx",
+                    "OC",
+                    "SO2",
+                    "HCFC141b",
+                    "HCFC142b",
+                    "HFC125",
+                    "HFC134a",
+                    "HFC143a",
+                    "HFC152a",
+                    "HFC227ea",
+                    "HFC245fa",
+                    "HFC32",
+                    "HFC365mfc",
+                    "SF6",
+                    "HFC23",
+                    "C2F6",
+                    "CF4",
+                    "C3F8",
+                    "C4F10",
+                    "NF3",
+                    "cC4F8",
+                    "HFC134",
+                    "HFC143",
+                    "HFC236fa",
+                    "HFC41",
+                    "HFC4310mee",
+                    "C5F12",
+                    "C6F14",
+                ]
+            )
+        ).values
     ]
 
-    # Remove the subset above from full emissions list
+    # Remove CO2 emissions from full emissions list
     emissions_output_co2e = emissions_output_co2e[
-        ~(emissions_output_co2e.unit == "MtCO2").values
+        (
+            emissions_output_co2e.flow_long.isin(
+                [
+                    "CH4",
+                    "N2O",
+                    "BC",
+                    "CO",
+                    "NH3",
+                    "NMVOC",
+                    "NOx",
+                    "OC",
+                    "SO2",
+                    "HCFC141b",
+                    "HCFC142b",
+                    "HFC125",
+                    "HFC134a",
+                    "HFC143a",
+                    "HFC152a",
+                    "HFC227ea",
+                    "HFC245fa",
+                    "HFC32",
+                    "HFC365mfc",
+                    "SF6",
+                    "HFC23",
+                    "C2F6",
+                    "CF4",
+                    "C3F8",
+                    "C4F10",
+                    "NF3",
+                    "cC4F8",
+                    "HFC134",
+                    "HFC143",
+                    "HFC236fa",
+                    "HFC41",
+                    "HFC4310mee",
+                    "C5F12",
+                    "C6F14",
+                ]
+            )
+        ).values
     ]
 
     # Replace 'flow_long' value with 'CO2'
@@ -1055,6 +1133,26 @@ def emissions(
 
     emissions_output_co2e = emissions_output_co2e.apply(
         lambda x: x.mul(gwp.data[version][x.name[8]]), axis=1
+    )
+
+    # Update all flow_long values to 'CO2e'
+    emissions_output_co2e = emissions_output_co2e.droplevel("flow_long").reset_index()
+    emissions_output_co2e["flow_long"] = "CO2e"
+
+    emissions_output_co2e = emissions_output_co2e.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
     )
 
     # Match modeled (emissions_output_co2e) and observed emissions (emissions_historical) categories across 'model', 'region', 'sector'
