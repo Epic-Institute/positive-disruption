@@ -431,47 +431,6 @@ def results_analysis(
 
     # endregion
 
-    ########
-    # NDCs #
-    ########
-
-    # region
-
-    em_mit_ndc = []
-
-    for i in range(0, len(region_list)):
-        if region_list[i] in [
-            "World ",
-            "US ",
-            "EUR ",
-            "SAFR ",
-            "RUS ",
-            "JPN ",
-            "CHINA ",
-            "BRAZIL ",
-            "INDIA ",
-        ]:
-            em_ndc = (
-                pd.read_csv("podi/data/emissions_ndcs.csv")
-                .set_index(["region"])
-                .loc[region_list[i]]
-            )
-
-            em_ndc = pd.DataFrame(
-                (
-                    em_baseline.loc[region_list[i]].sum().loc[[2025, 2030, 2050]] / 1000
-                ).values
-                - (em_ndc).values
-            ).rename(index={0: 2025, 1: 2030, 2: 2050}, columns={0: "em_mit"})
-
-            em_ndc["region"] = region_list[i]
-        else:
-            em_ndc = []
-
-        em_mit_ndc = pd.DataFrame(em_mit_ndc).append(em_ndc)
-
-    # endregion
-
     #######################
     # MODELED VS MEASURED #
     #######################
@@ -491,11 +450,9 @@ def results_analysis(
 
     # region
 
-    adoption_output.to_csv("podi/data/adoption_output.csv")
-
     pdindex_output.to_csv("podi/data/pdindex_output.csv")
 
-    analysis_output.to_csv("podi/data/analysis_output.csv")
+    adoption_output.to_csv("podi/data/adoption_output.csv")
 
     # endregion
 

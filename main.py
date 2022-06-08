@@ -294,6 +294,9 @@ index = [
 climate_output = pd.DataFrame(pd.read_csv("podi/data/climate_output.csv")).set_index(index)
 climate_output.columns = climate_output.columns.astype(int)
 
+climate_historical = pd.DataFrame(pd.read_csv("podi/data/climate_historical.csv")).set_index(index)
+climate_historical.columns = climate_historical.columns.astype(int)
+
 # endregion
 
 ####################
@@ -324,15 +327,16 @@ analysis_output.columns = analysis_output.columns.astype(int)
 
 # endregion
 
-##########################
-# CONVERT TO IAMC FORMAT #
-##########################
+##################################
+# REFORMAT AND SAVE OUTPUT FILES #
+##################################
 
 # region
 
-# Concat sector, product, flow
-energy_post_electrification_pyam = pyam.IamDataFrame(
-    energy_post_electrification.reset_index().drop(
+# Create copy of results in IAMC format
+'''
+energy_output_pyam = pyam.IamDataFrame(
+    energy_output.reset_index().drop(
         columns=[
             "product_category",
             "product_long",
@@ -343,26 +347,15 @@ energy_post_electrification_pyam = pyam.IamDataFrame(
     ),
     variable=["sector", "product_short", "flow_short"],
 )
+'''
 
-# endregion
-
-################################
-# SAVE AS REGIONAL-LEVEL FILES #
-################################
-
-# region
-
+# Save as regional-level files
 for output in [
     (energy_output, "energy_output")
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")
 
-for output in [
-    (energy_output, "energy_output")
-]:
-    for region in output[0].reset_index().region.unique():
-        pyam.IamDataFrame(output[0][(output[0].reset_index().region == region).values].reset_index(), variable = ['sector','product_category', 'product_long','product_short', 'flow_category', 'flow_long','flow_short']).to_csv('podi/data/output/' + output[1] + "_" + region + "_IAMC.csv")
 
 # endregion
 

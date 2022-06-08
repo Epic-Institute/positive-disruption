@@ -9,7 +9,6 @@ from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
 import pyam
 import panel as pn
-import holoviews as hv
 import hvplot.pandas
 
 pandarallel.initialize()
@@ -191,31 +190,27 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         # region
 
-        df = afolu_historical.droplevel(["model", "scenario"])
+        df = afolu_historical.droplevel(["model", "scenario", "unit"])
         df = pd.melt(
             df.reset_index(),
-            id_vars=["region", "variable", "unit"],
+            id_vars=["region", "variable"],
             var_name="year",
             value_name="Adoption",
-        ).dropna()
+        )
 
         select_region = pn.widgets.Select(
             options=df.region.unique().tolist(), name="Region"
         )
 
-        # for units in ['m3','Mha','Tg dm']:
-        df = df[df.unit == "m3"].drop(columns="unit")
-
         @pn.depends(select_region)
         def exp_plot(select_region):
             return (
-                df[df.region == select_region]
+                df[(df.region == select_region)]
                 .sort_values(by="year")
-                .hvplot(x="year", y="Adoption", by=["variable"])
+                .hvplot(x="year", y="Variable")
             )
 
-        fig = pn.Column(select_region, exp_plot).embed()
-        panel.save("podi/data/afolu_historical_output.html", resources=fig)
+        pn.Column(select_region, exp_plot).embed()
 
         # endregion
 
