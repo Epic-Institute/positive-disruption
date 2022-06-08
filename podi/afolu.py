@@ -12,6 +12,8 @@ import panel as pn
 import holoviews as hv
 import hvplot.pandas
 
+hvplot.extension("plotly")
+
 pandarallel.initialize()
 
 # endregion
@@ -214,8 +216,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 .hvplot(x="year", y="Adoption", by=["variable"])
             )
 
-        fig = pn.Column(select_region, exp_plot).embed()
-        panel.save("podi/data/afolu_historical_output.html", resources=fig)
+        pn.Column(select_region, exp_plot)
 
         # endregion
 
