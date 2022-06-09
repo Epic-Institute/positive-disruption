@@ -51,7 +51,6 @@ scenario = "pathway"
 warnings.simplefilter(action="ignore", category=FutureWarning)
 regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "region"})
 
-
 data_start_year = 1990
 data_end_year = 2020
 proj_end_year = 2050
@@ -2731,9 +2730,9 @@ for sector in fig2['sector'].unique():
 
 # endregion
 
-############################
+######################
 # PD INDEX BY SECTOR #
-############################
+######################
 
 # region
 
@@ -3050,9 +3049,9 @@ for sector in fig2['sector'].unique():
 
 # endregion
 
-######################################
+################################
 # PD INDEX BY PRODUCT CATEGORY #
-######################################
+################################
 
 # region
 
@@ -3371,9 +3370,9 @@ for sector in fig2['sector'].unique():
 
 # endregion
 
-#############################
+#######################
 # PD INDEX BY PRODUCT #
-#############################
+#######################
 
 # region
 
@@ -3473,9 +3472,9 @@ for vertical in fig2['sector'].unique():
 
 # endregion
 
-##########################
+####################
 # PD INDEX BY FLOW #
-##########################
+####################
 
 # region
 
@@ -4021,6 +4020,85 @@ for sector in fig2['sector'].unique():
             + ".html"
         ).replace(" ",""),
         auto_open=False)
+
+# endregion
+
+###########################
+# AFOLU DIAGNOSTIC CHARTS #
+###########################
+
+# region
+
+# Historical Adoption
+# region
+
+start_year = data_start_year
+end_year = proj_end_year
+model='PD22'
+scenario = scenario
+
+fig = afolu_historical.droplevel(['model','scenario','unit']).T
+fig.index.name = "year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="year", var_name=["region", "variable"], value_name="Historical Adoption")
+
+for subvertical in fig2['variable'].unique():
+
+    fig = go.Figure()
+
+    for region in fig2['region'].unique():
+
+        # Make modeled trace
+        fig.add_trace(
+            go.Scatter(
+                name=region,
+                line=dict(width=1, color=colors[
+                    pd.DataFrame(fig2['variable'].unique()).set_index(0).index.get_loc(subvertical) + pd.DataFrame(fig2['region'].unique()).set_index(0).index.get_loc(region))
+                ]),
+                x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Historical Adoption"],
+                legendgroup=region,
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Historical Adoption, " + subvertical.replace('|Observed adoption',''),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "Adoption"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+    
+    if show_figs is True:
+        fig.show()
+    
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/afolu_historical-"
+        + str(subvertical).replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
+
+# endregion
+
+# Maximum Extent
+# region
+
+# endregion
+
+# Average Mitigation Flux
+# region
+
+# endregion
 
 # endregion
 
