@@ -4053,8 +4053,7 @@ for subvertical in fig2['variable'].unique():
             go.Scatter(
                 name=region,
                 line=dict(width=1, color=colors[
-                    pd.DataFrame(fig2['variable'].unique()).set_index(0).index.get_loc(subvertical) + pd.DataFrame(fig2['region'].unique()).set_index(0).index.get_loc(region))
-                ]),
+                    pd.DataFrame(fig2['variable'].unique()).set_index(0).index.get_loc(subvertical) + random.randrange(20)]),
                 x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
                 y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Historical Adoption"],
                 legendgroup=region,
