@@ -1,7 +1,11 @@
+# region
+
 import hvplot.pandas
 import panel as pn
 from plotly import graph_objects as go
 from bokeh.resources import INLINE, CDN
+
+# endregion
 
 ############
 #  ENERGY  #
@@ -50,11 +54,52 @@ def _energy_chart():
         select_region,
         select_sector,
         exp_plot,
-    )
+    ).embed()
 
 
 app = _energy_chart()
 app.save("./charts/energy_chart.html", resources=CDN)
+
+
+# endregion
+
+
+############
+#  AFOLU  #
+############
+
+# region
+
+
+def _afolu_historical():
+    df = afolu_historical.droplevel(["model", "scenario", "unit"])
+    df = pd.melt(
+        df.reset_index(),
+        id_vars=["region", "variable"],
+        var_name="year",
+        value_name="Adoption",
+    ).fillna(0)
+
+    select_region = pn.widgets.Select(
+        options=df.region.unique().tolist(), name="Region"
+    )
+    select_subvertical = pn.widgets.Select(
+        options=df.variable.unique().tolist(), name="Subvertical"
+    )
+
+    @pn.depends(select_region, select_subvertical)
+    def exp_plot(select_region, select_subvertical):
+        return (
+            df[(df.region == select_region) & (df.sector == select_subvertical)]
+            .sort_values(by="year")
+            .hvplot(x="year", y="Adoption", by=["variable"])
+        )
+
+    return pn.Column(select_region, select_subvertical, exp_plot).embed()
+
+
+app = _afolu_historical()
+app.save("./charts/afolu_historical.html", resources=CDN)
 
 
 # endregion

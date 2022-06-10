@@ -71,7 +71,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         name["Duration 1 (Years)"] = np.where(
             (
                 (name["Duration 1 (Years)"].isna())
-                | (name["Duration 1 (Years)"] > proj_end_year - afolu_historical.columns[0])
+                | (
+                    name["Duration 1 (Years)"]
+                    > proj_end_year - afolu_historical.columns[0]
+                )
             ),
             proj_end_year - afolu_historical.columns[0],
             name["Duration 1 (Years)"],
@@ -318,9 +321,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
 
     # endregion
-
-    # Save
-    afolu_historical.to_csv("podi/data/afolu_historical_postprocess.csv")
 
     # endregion
 

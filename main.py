@@ -4029,13 +4029,8 @@ for sector in fig2['sector'].unique():
 
 # region
 
-# Historical Adoption
+# Historical Adoption [% of Max Extent]
 # region
-
-start_year = data_start_year
-end_year = proj_end_year
-model='PD22'
-scenario = scenario
 
 fig = afolu_historical.droplevel(['model','scenario','unit']).T
 fig.index.name = "year"
@@ -4054,7 +4049,7 @@ for subvertical in fig2['variable'].unique():
                 name=region,
                 line=dict(width=1),
                 x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Historical Adoption"],
+                y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Historical Adoption"] * 100,
                 legendgroup=region,
                 showlegend=True,
             )
@@ -4067,7 +4062,7 @@ for subvertical in fig2['variable'].unique():
             "x": 0.5,
             "y": 0.99,
         },
-        yaxis={"title": "Adoption"},
+        yaxis={"title": "% of Max Extent"},
         margin_b=0,
         margin_t=20,
         margin_l=10,
@@ -4088,7 +4083,7 @@ for subvertical in fig2['variable'].unique():
 
 # endregion
 
-# Maximum Extent
+# Maximum Extent [Mha, m3]
 # region
 
 # endregion
