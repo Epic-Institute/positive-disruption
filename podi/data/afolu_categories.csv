@@ -1,16 +1,17 @@
 Vector,variable,Region/country,S-curve/linear,Analog Name
-Regenerative Agriculture,Animal Mgmt|Observed adoption,World,S-curve,FAO CA
+Agriculture,Animal Mgmt|Observed adoption,World,S-curve,FAO CA
 Forests & Wetlands,Avoided Coastal Impacts|Observed adoption,World,Linear,90 percentile across countries
 Forests & Wetlands,Avoided Forest Conversion|Observed adoption,World,Linear,90 percentile across countries
 Forests & Wetlands,Avoided Peat Impacts|Observed adoption,World,Linear,90 percentile across countries
-Regenerative Agriculture,Biochar|Observed adoption,World,S-curve,FAO CA
+Agriculture,Biochar|Observed adoption,World,S-curve,FAO CA
 Forests & Wetlands,Coastal Restoration|Observed adoption,World,S-curve,US Wetlands 2002-2014
-Regenerative Agriculture,Cropland Soil Health|Observed adoption,World,S-curve,FAO CA
+Agriculture,Cropland Soil Health|Observed adoption,World,S-curve,FAO CA
 Forests & Wetlands,Improved Forest Mgmt|Observed adoption,World,S-curve,FSC global adoption
-Regenerative Agriculture,Improved Rice|Observed adoption,World,S-curve,FAO CA
+Agriculture,Improved Rice|Observed adoption,World,S-curve,FAO CA
 Forests & Wetlands,Natural Regeneration|Observed adoption,World,S-curve,Spanish Reforestation
-Regenerative Agriculture,Nitrogen Fertilizer Management|Observed adoption,World,S-curve,FAO CA
-Regenerative Agriculture,Optimal Intensity|Observed adoption,World,S-curve,FAO CA
+Agriculture,Nitrogen Fertilizer Management|Observed adoption,World,S-curve,FAO CA
+Agriculture,Optimal Intensity|Observed adoption,World,S-curve,FAO CA
 Forests & Wetlands,Peat Restoration|Observed adoption,World,S-curve,US Wetlands 2002-2014
-Regenerative Agriculture,Silvopasture|Observed adoption,World,S-curve,FAO CA
-Regenerative Agriculture,Trees in Croplands|Observed adoption,World,S-curve,FAO CA
+Agriculture,Silvopasture|Observed adoption,World,S-curve,FAO CA
+Agriculture,Trees in Croplands|Observed adoption,World,S-curve,FAO CA
+Agriculture,Agroforestry|Observed adoption,World,S-curve,FAO CA

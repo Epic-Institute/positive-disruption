@@ -4192,7 +4192,7 @@ for i in range(0, len(region_list)):
             "Legumes",
             "Optimal Intensity",
             "Silvopasture",
-            "Regenerative Agriculture",
+            "Agriculture",
         ],
         slice(None),
         slice(None),
@@ -4269,7 +4269,7 @@ for i in range(0, len(region_list)):
             name="V5: Agriculture",
             line=dict(width=0.5, color=cl["V5: Agriculture"][0]),
             x=fig2["year"],
-            y=fig2[fig2["sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
             stackgroup=stackgroup,
             fillcolor=cl["V5: Agriculture"][0],
@@ -4668,7 +4668,7 @@ for i in range(0, len(region_list)):
             "Legumes",
             "Optimal Intensity",
             "Silvopasture",
-            "Regenerative Agriculture",
+            "Agriculture",
         ],
         slice(None),
         slice(None),
@@ -4745,7 +4745,7 @@ for i in range(0, len(region_list)):
             name="V5: Agriculture",
             line=dict(width=0.5, color=cl["V5: Agriculture"][0]),
             x=fig2["year"],
-            y=fig2[fig2["sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
             stackgroup=stackgroup,
             fillcolor=cl["V5: Agriculture"][0],
@@ -5140,7 +5140,7 @@ for i in range(0, len(region_list)):
     em_industry = em_industry.loc[~(em_industry == 0).all(axis=1)]
 
     em_ra = em.loc[
-        region_list[i], ["Regenerative Agriculture"], slice(None), slice(None), scenario
+        region_list[i], ["Agriculture"], slice(None), slice(None), scenario
     ].loc[:, start_year:long_proj_end_year]
     em_ra = em_ra.loc[~(em_ra == 0).all(axis=1)]
 
@@ -5181,7 +5181,7 @@ for i in range(0, len(region_list)):
             fig3 = fig2[fig2["Metric"] == "Fossil Fuel Heat"]
             fig2 = fig3.append(fig2[fig2["Metric"] != "Fossil Fuel Heat"])
 
-        if sector == "Regenerative Agriculture":
+        if sector == "Agriculture":
             fig3 = fig2[
                 (fig2["Metric"] != "Cropland Soil Health")
                 & (fig2["Metric"] != "Trees in Croplands")
@@ -5347,7 +5347,7 @@ for i in range(0, len(region_list)):
             "Legumes",
             "Optimal Intensity",
             "Silvopasture",
-            "Regenerative Agriculture",
+            "Agriculture",
         ],
         slice(None),
         slice(None),
@@ -5528,7 +5528,7 @@ for i in range(0, len(region_list)):
             "Legumes",
             "Optimal Intensity",
             "Silvopasture",
-            "Regenerative Agriculture",
+            "Agriculture",
         ],
         slice(None),
         slice(None),
@@ -5844,7 +5844,7 @@ for i in range(0, len(region_list)):
             "Legumes",
             "Optimal Intensity",
             "Silvopasture",
-            "Regenerative Agriculture",
+            "Agriculture",
         ],
         slice(None),
         slice(None),
@@ -5922,7 +5922,7 @@ for i in range(0, len(region_list)):
             name="V5: Agriculture",
             line=dict(width=0.5, color="#EECA3B"),
             x=fig2["year"],
-            y=fig2[fig2["sector"] == "Regenerative Agriculture"]["Emissions, GtCO2e"],
+            y=fig2[fig2["sector"] == "Agriculture"]["Emissions, GtCO2e"],
             fill=fill,
             stackgroup=stackgroup,
             groupnorm="percent",
@@ -6108,7 +6108,7 @@ for i in range(0, len(region_list)):
     em_mit_industry = em_mitigated.loc[region_list[i], "Industry", slice(None)].sum()
 
     em_mit_ra = em_mitigated.loc[
-        region_list[i], ["Regenerative Agriculture"], slice(None), slice(None)
+        region_list[i], ["Agriculture"], slice(None), slice(None)
     ].sum()
 
     em_mit_fw = em_mitigated.loc[
@@ -6825,7 +6825,7 @@ for i in range(0, len(region_list)):
     em_mit_industry = em_mitigated.loc[region_list[i], "Industry", slice(None)]
 
     em_mit_ra = em_mitigated.loc[
-        region_list[i], "Regenerative Agriculture", slice(None), slice(None)
+        region_list[i], "Agriculture", slice(None), slice(None)
     ]
 
     em_mit_fw = em_mitigated.loc[
@@ -7103,7 +7103,7 @@ for year in [2030, 2050]:
         ].sum()
 
         em_mit_ra = em_mitigated.loc[
-            region_list[i], "Regenerative Agriculture", slice(None), slice(None)
+            region_list[i], "Agriculture", slice(None), slice(None)
         ].sum()
 
         em_mit_fw = em_mitigated.loc[
@@ -7863,7 +7863,7 @@ for i in range(0, len(region_list)):
     em_mit_industry = em_mitigated.loc[region_list[i], "Industry", slice(None)].sum()
 
     em_mit_ra = em_mitigated.loc[
-        region_list[i], ["Regenerative Agriculture"], slice(None), slice(None)
+        region_list[i], ["Agriculture"], slice(None), slice(None)
     ].sum()
 
     em_mit_fw = em_mitigated.loc[
@@ -8207,7 +8207,7 @@ em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "baseline",
@@ -8219,7 +8219,7 @@ em_pd.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "pathway",
@@ -8231,7 +8231,7 @@ em_cdr.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "pathway",
@@ -8525,7 +8525,7 @@ em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "baseline",
@@ -8537,7 +8537,7 @@ em_pd.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "pathway",
@@ -8549,7 +8549,7 @@ em_cdr.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "pathway",
@@ -8905,7 +8905,7 @@ em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "baseline",
@@ -8917,7 +8917,7 @@ em_pd.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "pathway",
@@ -8929,7 +8929,7 @@ em_cdr.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "pathway",
@@ -9223,7 +9223,7 @@ em_b.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "baseline",
@@ -9235,7 +9235,7 @@ em_pd.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "pathway",
@@ -9247,7 +9247,7 @@ em_cdr.loc[225:335, 2] = (
     em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
     .loc[
         "World ",
-        ["Forests & Wetlands", "Regenerative Agriculture"],
+        ["Forests & Wetlands", "Agriculture"],
         slice(None),
         "CO2",
         "pathway",
@@ -9703,7 +9703,7 @@ afolu_em_mit_dau21 = (
         (
             afolu_em1.loc[
                 "World ",
-                ["Regenerative Agriculture", "Forests & Wetlands"],
+                ["Agriculture", "Forests & Wetlands"],
                 slice(None),
                 slice(None),
                 "baseline",
@@ -9712,7 +9712,7 @@ afolu_em_mit_dau21 = (
             .droplevel("scenario")
             - afolu_em1.loc[
                 "World ",
-                ["Regenerative Agriculture", "Forests & Wetlands"],
+                ["Agriculture", "Forests & Wetlands"],
                 slice(None),
                 slice(None),
                 "pathway",
@@ -9732,7 +9732,7 @@ afolu_em_mit_v4 = (
         (
             afolu_em1.loc[
                 "World ",
-                ["Regenerative Agriculture", "Forests & Wetlands"],
+                ["Agriculture", "Forests & Wetlands"],
                 slice(None),
                 slice(None),
                 "baseline",
@@ -9741,7 +9741,7 @@ afolu_em_mit_v4 = (
             .droplevel("scenario")
             - afolu_em1.loc[
                 "World ",
-                ["Regenerative Agriculture", "Forests & Wetlands"],
+                ["Agriculture", "Forests & Wetlands"],
                 slice(None),
                 slice(None),
                 "pathway",
@@ -9772,7 +9772,7 @@ afolu_em_mit_v5 = (
         ).append(
             afolu_em.loc[
                 "World ",
-                ["Regenerative Agriculture"],
+                ["Agriculture"],
                 slice(None),
                 slice(None),
                 "baseline",
@@ -9781,7 +9781,7 @@ afolu_em_mit_v5 = (
             .droplevel("scenario")
             - afolu_em.loc[
                 "World ",
-                ["Regenerative Agriculture"],
+                ["Agriculture"],
                 slice(None),
                 slice(None),
                 "pathway",
@@ -9810,7 +9810,7 @@ afolu_em_mit_v6 = (
         ).append(
             afolu_em1.loc[
                 "World ",
-                ["Regenerative Agriculture"],
+                ["Agriculture"],
                 slice(None),
                 slice(None),
                 "baseline",
@@ -9819,7 +9819,7 @@ afolu_em_mit_v6 = (
             .droplevel("scenario")
             - afolu_em1.loc[
                 "World ",
-                ["Regenerative Agriculture"],
+                ["Agriculture"],
                 slice(None),
                 slice(None),
                 "pathway",
@@ -9836,7 +9836,7 @@ afolu_em_mit_v5v6 = (
     (
         afolu_em.loc[
             "World ",
-            ["Forests & Wetlands", "Regenerative Agriculture"],
+            ["Forests & Wetlands", "Agriculture"],
             slice(None),
             slice(None),
             "baseline",
@@ -9845,7 +9845,7 @@ afolu_em_mit_v5v6 = (
         .droplevel("scenario")
         - afolu_em.loc[
             "World ",
-            ["Forests & Wetlands", "Regenerative Agriculture"],
+            ["Forests & Wetlands", "Agriculture"],
             slice(None),
             slice(None),
             "pathway",

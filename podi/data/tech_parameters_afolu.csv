@@ -261,20 +261,20 @@ PD22,pathway,World ,Peat Restoration|parameter b min,none,39.84
 PD22,baseline,World ,Peat Restoration|parameter b min,none,0
 PD22,pathway,World ,Peat Restoration|saturation point,none,1
 PD22,baseline,World ,Peat Restoration|saturation point,none,1
-PD22,pathway,World ,Regenerative Agriculture|Floor,none,0
-PD22,baseline,World ,Regenerative Agriculture|Floor,none,0
-PD22,pathway,World ,Regenerative Agriculture|Max annual growth,none,100
-PD22,baseline,World ,Regenerative Agriculture|Max annual growth,none,100
-PD22,pathway,World ,Regenerative Agriculture|parameter a max,none,0.5
-PD22,baseline,World ,Regenerative Agriculture|parameter a max,none,100
-PD22,pathway,World ,Regenerative Agriculture|parameter a min,none,0
-PD22,baseline,World ,Regenerative Agriculture|parameter a min,none,0
-PD22,pathway,World ,Regenerative Agriculture|parameter b max,none,100
-PD22,baseline,World ,Regenerative Agriculture|parameter b max,none,100
-PD22,pathway,World ,Regenerative Agriculture|parameter b min,none,0
-PD22,baseline,World ,Regenerative Agriculture|parameter b min,none,0
-PD22,pathway,World ,Regenerative Agriculture|saturation point,none,1
-PD22,baseline,World ,Regenerative Agriculture|saturation point,none,1
+PD22,pathway,World ,Agriculture|Floor,none,0
+PD22,baseline,World ,Agriculture|Floor,none,0
+PD22,pathway,World ,Agriculture|Max annual growth,none,100
+PD22,baseline,World ,Agriculture|Max annual growth,none,100
+PD22,pathway,World ,Agriculture|parameter a max,none,0.5
+PD22,baseline,World ,Agriculture|parameter a max,none,100
+PD22,pathway,World ,Agriculture|parameter a min,none,0
+PD22,baseline,World ,Agriculture|parameter a min,none,0
+PD22,pathway,World ,Agriculture|parameter b max,none,100
+PD22,baseline,World ,Agriculture|parameter b max,none,100
+PD22,pathway,World ,Agriculture|parameter b min,none,0
+PD22,baseline,World ,Agriculture|parameter b min,none,0
+PD22,pathway,World ,Agriculture|saturation point,none,1
+PD22,baseline,World ,Agriculture|saturation point,none,1
 PD22,pathway,World ,Silvopasture|Floor,none,0
 PD22,baseline,World ,Silvopasture|Floor,none,0
 PD22,pathway,World ,Silvopasture|Max annual growth,none,100
@@ -303,3 +303,17 @@ PD22,pathway,World ,Trees in Croplands|parameter b min,none,40
 PD22,baseline,World ,Trees in Croplands|parameter b min,none,0
 PD22,pathway,World ,Trees in Croplands|saturation point,none,1
 PD22,baseline,World ,Trees in Croplands|saturation point,none,1
+PD22,pathway,World ,Agroforestry|Floor,none,0
+PD22,baseline,World ,Agroforestry|Floor,none,0
+PD22,pathway,World ,Agroforestry|Max annual growth,none,100
+PD22,baseline,World ,Agroforestry|Max annual growth,none,100
+PD22,pathway,World ,Agroforestry|parameter a max,none,0.10618
+PD22,baseline,World ,Agroforestry|parameter a max,none,100
+PD22,pathway,World ,Agroforestry|parameter a min,none,0.10618
+PD22,baseline,World ,Agroforestry|parameter a min,none,0
+PD22,pathway,World ,Agroforestry|parameter b max,none,36
+PD22,baseline,World ,Agroforestry|parameter b max,none,100
+PD22,pathway,World ,Agroforestry|parameter b min,none,40
+PD22,baseline,World ,Agroforestry|parameter b min,none,0
+PD22,pathway,World ,Agroforestry|saturation point,none,1
+PD22,baseline,World ,Agroforestry|saturation point,none,1

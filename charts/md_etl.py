@@ -94,7 +94,7 @@ for scen in ["dau"]:
                     "Transport",
                     "Buildings",
                     "Industry",
-                    "Regenerative Agriculture",
+                    "Agriculture",
                     "Forests & Wetlands",
                 ]:
                     path = (
@@ -120,7 +120,7 @@ for scen in ["dau"]:
                 for m in ["emsub"]:
                     for sector in [
                         "Industry",
-                        "Regenerative Agriculture",
+                        "Agriculture",
                         "Forests & Wetlands",
                     ]:
                         path = (
@@ -281,7 +281,7 @@ for scen in ["dau"]:
         for j in ["pathway"]:
             for k in [
                 "Industry",
-                "Regenerative Agriculture",
+                "Agriculture",
                 "Forests & Wetlands",
             ]:
                 path = (
@@ -305,7 +305,7 @@ for scen in ["dau"]:
 
         for j in ["pathway"]:
             for k in [
-                "Regenerative Agriculture",
+                "Agriculture",
             ]:
                 for subvector in [
                     "Biochar",
