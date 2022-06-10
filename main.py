@@ -4052,8 +4052,7 @@ for subvertical in fig2['variable'].unique():
         fig.add_trace(
             go.Scatter(
                 name=region,
-                line=dict(width=1, color=colors[
-                    pd.DataFrame(fig2['variable'].unique()).set_index(0).index.get_loc(subvertical) + random.randrange(20)]),
+                line=dict(width=1),
                 x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
                 y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Historical Adoption"],
                 legendgroup=region,
@@ -4082,7 +4081,7 @@ for subvertical in fig2['variable'].unique():
     fig,
     file=(
         "./charts/afolu_historical-"
-        + str(subvertical).replace("slice(None, None, None)", "All")
+        + str(subvertical.replace('|Observed adoption','')).replace("slice(None, None, None)", "All")
         + ".html"
     ).replace(" ",""),
     auto_open=False)

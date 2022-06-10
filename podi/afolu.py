@@ -25,7 +25,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #  LOAD HISTORICAL NCS ADOPTION  #
     ##################################
 
-    recalc_afolu_historical = True
     # region
     def step2curve(name, variable):
 
@@ -135,187 +134,145 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         return name
 
-    if recalc_afolu_historical == True:
-        # Load the 'Historical Observations' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
-        afolu_historical = (
-            pd.DataFrame(pd.read_csv("podi/data/afolu_historical.csv"))
-            .drop(columns=["Region", "Country"])
-            .rename(
-                columns={
-                    "iso": "region",
-                    "Model": "model",
-                    "Scenario": "scenario",
-                    "Unit": "unit",
-                }
-            )
-            .replace("Pathway", scenario)
+    # Load the 'Historical Observations' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
+    afolu_historical = (
+        pd.DataFrame(pd.read_csv("podi/data/afolu_historical.csv"))
+        .drop(columns=["Region", "Country"])
+        .rename(
+            columns={
+                "iso": "region",
+                "Model": "model",
+                "Scenario": "scenario",
+                "Unit": "unit",
+            }
         )
+        .replace("Pathway", scenario)
+    )
 
-        # Create a 'variable' column that concatenates the 'Subvector' and 'Metric' columns
-        afolu_historical["variable"] = afolu_historical.apply(
-            lambda x: "|".join([x["Subvector"], x["Metric"]]), axis=1
-        )
-        afolu_historical.drop(columns=["Subvector", "Metric"], inplace=True)
+    # Create a 'variable' column that concatenates the 'Subvector' and 'Metric' columns
+    afolu_historical["variable"] = afolu_historical.apply(
+        lambda x: "|".join([x["Subvector"], x["Metric"]]), axis=1
+    )
+    afolu_historical.drop(columns=["Subvector", "Metric"], inplace=True)
 
-        # Set the index to IAMC format
-        afolu_historical = afolu_historical.set_index(pyam.IAMC_IDX)
+    # Set the index to IAMC format
+    afolu_historical = afolu_historical.set_index(pyam.IAMC_IDX)
 
-        afolu_historical.columns = afolu_historical.columns.astype(int)
+    afolu_historical.columns = afolu_historical.columns.astype(int)
 
-        # For rows with no historical data prior to data_start_year, set data_start_year to zero
-        """
-        afolu_historical.update(
-            afolu_historical.loc[
-                afolu_historical.loc[:, :data_start_year].isna().all(axis=1), :
-            ]
-            .loc[:, data_start_year]
-            .fillna(0)
-        )
+    # For subvertical/region combos that have at least two data points, interpolate between data points to fill data gaps, then apply the adoption curve of the corresponding historical analogy to estimate 'modeled' historical adoption data, using the single historical data point as the most recent year for data
+    afolu_historical.interpolate(axis=1, limit_area="inside", inplace=True)
 
-        # Set first year to 0 to allow for interpolation
-        afolu_historical.update(afolu_historical.iloc[:, 0].fillna(0))
-        
-        # For rows with no historical data prior to data_end_year, set data_end_year to 0
-        afolu_historical.update(
-            afolu_historical.loc[
-                afolu_historical.loc[:, data_start_year + 1 : data_end_year]
-                .isna()
-                .all(axis=1),
-                :,
-            ]
-            .loc[:, data_end_year]
-            .fillna(0)
-        )
-        """
-        # Interpolate to fill historical data gaps, noting this only adds data for subvertical/region combos that have at least two data points
-        afolu_historical.interpolate(axis=1, limit_area="inside", inplace=True)
+    # For subvertical/region combos that have one data point, apply the adoption curve of the corresponding historical analogy to estimate 'modeled' historical adoption data, using the single historical data point as the most recent year for data
 
-        # Plot
+    # Plot
+    # region
 
-        for subvertical in ["Biochar|Observed adoption"]:
-            afolu_historicalplot = afolu_historical.copy()
-            afolu_historicalplot[
-                afolu_historicalplot.index.get_level_values(3).isin([subvertical])
-            ].T.plot(
-                legend=False,
-                title="Historical Adoption, "
-                + subvertical.replace("|Observed adoption", ""),
-                ylabel="Tg dm",
-                xlabel="Year",
-            )
-
-        for subvertical in [
-            "Avoided Coastal Impacts|Observed adoption",
-            "Avoided Forest Conversion|Observed adoption",
-            "Avoided Peat Impacts|Observed adoption",
-            "Coastal Restoration|Observed adoption",
-            "Cropland Soil Health|Observed adoption",
-            "Improved Rice|Observed adoption",
-            "Natural Regeneration|Observed adoption",
-            "Nitrogen Fertilizer Management|Observed adoption",
-            "Optimal Intensity|Observed adoption",
-            "Peat Restoration|Observed adoption",
-            "Agroforestry|Observed adoption",
-        ]:
-            afolu_historicalplot = afolu_historical.copy()
-            afolu_historicalplot[
-                afolu_historicalplot.index.get_level_values(3).isin([subvertical])
-            ].T.plot(
-                legend=False,
-                title="Historical Adoption, "
-                + subvertical.replace("|Observed adoption", ""),
-                ylabel="Mha",
-                xlabel="Year",
-            )
-
+    for subvertical in ["Biochar|Observed adoption"]:
+        afolu_historicalplot = afolu_historical.copy()
         afolu_historicalplot[
-            afolu_historicalplot.index.get_level_values(3).isin(
-                ["Improved Forest Mgmt|Observed adoption"]
-            )
+            afolu_historicalplot.index.get_level_values(3).isin([subvertical])
         ].T.plot(
             legend=False,
             title="Historical Adoption, "
             + subvertical.replace("|Observed adoption", ""),
-            ylabel="m3",
+            ylabel="Tg dm",
             xlabel="Year",
         )
 
-        # Create a timeseries of maximum extent of each subvertical
-        # region
-        max_extent = step2curve("max_extent", "Max extent")
-
-        # Plot
-        max_extentplot = max_extent.copy()
-        max_extentplot.columns = max_extentplot.columns - data_start_year
-
-        for subvertical in [
-            "Avoided Peat Impacts|Max extent",
-            "Biochar|Max extent",
-            "Coastal Restoration|Max extent",
-            "Cropland Soil Health|Max extent",
-            "Improved Rice|Max extent",
-            "Natural Regeneration|Max extent",
-            "Nitrogen Fertilizer Management|Max extent",
-            "Optimal Intensity|Max extent",
-            "Peat Restoration|Max extent",
-            "Agroforestry|Max extent",
-        ]:
-            max_extentplot[
-                max_extentplot.index.get_level_values(3).isin([subvertical])
-            ].T.plot(
-                legend=False,
-                title="Maximum Extent, " + subvertical.replace("|Max extent", ""),
-                ylabel="Mha",
-                xlabel="Years from implementation",
-            )
-
-        max_extentplot[
-            max_extentplot.index.get_level_values(3).isin(
-                ["Improved Forest Mgmt|Max extent"]
-            )
+    for subvertical in [
+        "Avoided Coastal Impacts|Observed adoption",
+        "Avoided Forest Conversion|Observed adoption",
+        "Avoided Peat Impacts|Observed adoption",
+        "Coastal Restoration|Observed adoption",
+        "Cropland Soil Health|Observed adoption",
+        "Improved Rice|Observed adoption",
+        "Natural Regeneration|Observed adoption",
+        "Nitrogen Fertilizer Management|Observed adoption",
+        "Optimal Intensity|Observed adoption",
+        "Peat Restoration|Observed adoption",
+        "Agroforestry|Observed adoption",
+    ]:
+        afolu_historicalplot = afolu_historical.copy()
+        afolu_historicalplot[
+            afolu_historicalplot.index.get_level_values(3).isin([subvertical])
         ].T.plot(
             legend=False,
-            title="Maximum Extent, " + "Improved Forest Mgmt",
-            ylabel="m3",
+            title="Historical Adoption, "
+            + subvertical.replace("|Observed adoption", ""),
+            ylabel="Mha",
+            xlabel="Year",
+        )
+
+    afolu_historicalplot[
+        afolu_historicalplot.index.get_level_values(3).isin(
+            ["Improved Forest Mgmt|Observed adoption"]
+        )
+    ].T.plot(
+        legend=False,
+        title="Historical Adoption, Improved Forest Mgmt",
+        ylabel="m3",
+        xlabel="Year",
+    )
+
+    # endregion
+
+    # Create a timeseries of maximum extent of each subvertical
+    # region
+    max_extent = step2curve("max_extent", "Max extent")
+
+    # Plot
+    max_extentplot = max_extent.copy()
+    max_extentplot.columns = max_extentplot.columns - data_start_year
+
+    for subvertical in [
+        "Avoided Peat Impacts|Max extent",
+        "Agroforestry|Max extent",
+        "Biochar|Max extent",
+        "Coastal Restoration|Max extent",
+        "Cropland Soil Health|Max extent",
+        "Improved Rice|Max extent",
+        "Natural Regeneration|Max extent",
+        "Nitrogen Fertilizer Management|Max extent",
+        "Optimal Intensity|Max extent",
+        "Peat Restoration|Max extent",
+    ]:
+        max_extentplot[
+            max_extentplot.index.get_level_values(3).isin([subvertical])
+        ].T.plot(
+            legend=False,
+            title="Maximum Extent, " + subvertical.replace("|Max extent", ""),
+            ylabel="Mha",
             xlabel="Years from implementation",
         )
 
-        # endregion
-
-        # Drop 'Avoided' subverticals (which will be addressed later)
-        afolu_historical = afolu_historical[
-            afolu_historical.index.get_level_values(3).str.contains(
-                "Biochar|Coastal Restoration|Cropland Soil Health|Improved Forest Mgmt|Improved Rice|Natural Regeneration|Nitrogen Fertilizer Management|Optimal Intensity|Peat Restoration|Agroforestry"
-            )
-        ]
-
-        # For rows that are all NaN (mostly due to zero values for max extent or average mitigation flux), set all data to zero
-        afolu_historical.update(
-            afolu_historical.loc[
-                afolu_historical.loc[:, data_start_year:data_end_year]
-                .isna()
-                .all(axis=1),
-                :,
-            ]
-            .loc[:, data_start_year:data_end_year]
-            .fillna(0)
+    max_extentplot[
+        max_extentplot.index.get_level_values(3).isin(
+            ["Improved Forest Mgmt|Max extent"]
         )
+    ].T.plot(
+        legend=False,
+        title="Maximum Extent, " + "Improved Forest Mgmt",
+        ylabel="m3",
+        xlabel="Years from implementation",
+    )
 
-        # Save
-        afolu_historical.to_csv("podi/data/afolu_historical_postprocess.csv")
+    # Drop 'Avoided' subverticals (which will be addressed later)
+    afolu_historical = afolu_historical[
+        afolu_historical.index.get_level_values(3).str.contains(
+            "Biochar|Coastal Restoration|Cropland Soil Health|Improved Forest Mgmt|Improved Rice|Natural Regeneration|Nitrogen Fertilizer Management|Optimal Intensity|Peat Restoration|Agroforestry"
+        )
+    ]
 
-    else:
-        index = pyam.IAMC_IDX
-
-        afolu_historical = pd.DataFrame(
-            pd.read_csv("podi/data/afolu_historical_postprocess.csv")
-        ).set_index(index)
-        afolu_historical.columns = afolu_historical.columns.astype(int)
-
-        max_extent = step2curve("max_extent", "Max extent")
-
-    # Plot
-    afolu_historical.T.plot(legend=False, title="AFOLU Historical [MHa, Tgdm, m3]")
+    # For subvertical/region combos that have no data ('NA'), assume no adoption, up to the most recent year
+    afolu_historical.update(
+        afolu_historical.loc[
+            afolu_historical.loc[:, data_start_year:data_end_year].isna().all(axis=1),
+            :,
+        ]
+        .loc[:, data_start_year:data_end_year]
+        .fillna(0)
+    )
 
     # Calculate afolu_historical as a % of max_extent. For Improved Forest Mgmt, which has a time-varying max extent over ten years, % of max extent is measured relative to the first year, but the mitigation flux will be reduced to account for this time-varying decrease in max_extent
     afolu_historical = (
@@ -335,7 +292,35 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Plot as % of max extent
-    afolu_historical.T.plot(legend=False, title="AFOLU Historical [% of max extent]")
+    # region
+
+    for subvertical in [
+        "Agroforestry|Observed adoption",
+        "Biochar|Observed adoption",
+        "Coastal Restoration|Observed adoption",
+        "Cropland Soil Health|Observed adoption",
+        "Improved Forest Mgmt|Observed adoption",
+        "Improved Rice|Observed adoption",
+        "Natural Regeneration|Observed adoption",
+        "Nitrogen Fertilizer Management|Observed adoption",
+        "Optimal Intensity|Observed adoption",
+        "Peat Restoration|Observed adoption",
+    ]:
+        afolu_historicalplot = afolu_historical.copy() * 100
+        afolu_historicalplot[
+            afolu_historicalplot.index.get_level_values(3).isin([subvertical])
+        ].T.plot(
+            legend=False,
+            title="Historical Adoption, "
+            + subvertical.replace("|Observed adoption", ""),
+            ylabel="% of Max Extent",
+            xlabel="Year",
+        )
+
+    # endregion
+
+    # Save
+    afolu_historical.to_csv("podi/data/afolu_historical_postprocess.csv")
 
     # endregion
 
@@ -343,7 +328,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #  ESTIMATE BASELINE NCS ADOPTION  #
     ####################################
 
-    recalc_afolu_baseline = True
     # region
 
     if recalc_afolu_baseline == True:
@@ -368,11 +352,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         afolu_baseline.to_csv("podi/data/afolu_output.csv")
     else:
-        index = pyam.IAMC_IDX
-
         afolu_baseline = pd.DataFrame(
             pd.read_csv("podi/data/afolu_output.csv")
-        ).set_index(index)
+        ).set_index(pyam.IAMC_IDX)
         afolu_baseline.columns = afolu_baseline.columns.astype(int)
 
     afolu_baseline.T.plot(legend=False, title="AFOLU Baseline [% of max extent]")
