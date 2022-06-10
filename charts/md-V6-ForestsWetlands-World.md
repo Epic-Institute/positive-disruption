@@ -18,6 +18,6 @@ title: V6:Forests/Wetlands
 
 <br/><br/>
 
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-PeatRegeneration.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-PeatRestoration.html" height='500' width='150%'></iframe>
 
 <br/><br/>
