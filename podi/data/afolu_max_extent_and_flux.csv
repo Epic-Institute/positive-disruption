@@ -1319,7 +1319,7 @@ NCL,Improved Forest Mgmt,Avg mitigation potential flux,PD21,Pathway,OAS-M,New Ca
 NCL,Improved Forest Mgmt,Max extent,PD21,Pathway,OAS-M,New Caledonia,m3,14700,30,0,70,NA,NA
 NZL,Improved Forest Mgmt,Avg mitigation potential flux,PD22,Pathway,ANUZ,New Zealand,tCO2e/m3/yr,NA,NA,NA,NA,NA,NA
 NZL,Improved Forest Mgmt,Max extent,PD22,Pathway,ANUZ,New Zealand,m3,NA,NA,NA,NA,NA,NA
-NIC,Improved Forest Mgmt,Avg mitigation potential flux,PD21,Pathway,LAM-L,Nicaragua,tCO2e/m3/yr,1.6704,NA,NA,NA,NA,NA
+NIC,Improved Forest Mgmt,Avg mitigation potential flux,PD21,Pathway,LAM-L,Nicaragua,tCO2e/m3/yr,1.6704,30,0,70,NA,NA
 NIC,Improved Forest Mgmt,Max extent,PD21,Pathway,LAM-L,Nicaragua,m3,0,NA,NA,NA,NA,NA
 NER,Improved Forest Mgmt,Avg mitigation potential flux,PD21,Pathway,SSA-L,Niger,tCO2e/m3/yr,1.6224,30,0,70,NA,NA
 NER,Improved Forest Mgmt,Max extent,PD21,Pathway,SSA-L,Niger,m3,701000,30,0,70,NA,NA
