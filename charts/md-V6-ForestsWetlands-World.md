@@ -21,3 +21,22 @@ title: V6:Forests/Wetlands
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-PeatRestoration.html" height='500' width='150%'></iframe>
 
 <br/><br/>
+
+### Max Extent
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-CoastalRestoration.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-ImprovedForestMgmt.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-NaturalRegeneration.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-PeatRestoration.html" height='500' width='150%'></iframe>
+
+<br/><br/>

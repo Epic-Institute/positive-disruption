@@ -4085,6 +4085,58 @@ for subvertical in fig2['variable'].unique():
 
 # Maximum Extent [Mha, m3]
 # region
+fig = max_extent.droplevel(['model','scenario','unit']).T
+fig.index.name = "year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="year", var_name=["region", "variable"], value_name="Max Extent")
+
+for subvertical in fig2['variable'].unique():
+
+    fig = go.Figure()
+
+    for region in fig2['region'].unique():
+
+        # Make modeled trace
+        fig.add_trace(
+            go.Scatter(
+                name=region,
+                line=dict(width=1),
+                x=fig2[(fig2["variable"] == subvertical)]["year"].unique() - fig2[(fig2["variable"] == subvertical)]["year"].unique().min(),
+                y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Max Extent"],
+                legendgroup=region,
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Max Extent, " + subvertical.replace('|Max extent',''),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "Mha"},
+        xaxis={"title": "Years from implementation"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+    
+    if subvertical == 'Improved Forest Mgmt|Max extent':
+        fig.update_layout(yaxis={"title": "m3"})
+
+    if show_figs is True:
+        fig.show()
+    
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/afolu_max_extent-"
+        + str(subvertical.replace('|Max extent','')).replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
 
 # endregion
 
