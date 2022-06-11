@@ -28,7 +28,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
-    def piecewise_to_continuous(name, variable):
+    def piecewise_to_continuous(variable):
 
         # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
         name = (
@@ -89,7 +89,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         # If Duration 3 is 'NA', set to Duration 2
         name["Duration 3 (Years)"] = np.where(
-            name["Duration 3 (Years)"].isna(),
+            (name["Duration 3 (Years)"].isna()),
             name["Duration 2 (Years)"],
             name["Duration 3 (Years)"],
         )
@@ -118,7 +118,12 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             x0 = x
             x0.loc[afolu_historical.columns[0]] = x.name[5]
             x0.loc[afolu_historical.columns[0] + x.name[6]] = x.name[7]
-            x0.loc[afolu_historical.columns[0] + x.name[6] + x.name[8]] = x.name[9]
+            x0.loc[
+                min(
+                    afolu_historical.columns[0] + x.name[6] + x.name[8],
+                    proj_end_year - afolu_historical.columns[0],
+                )
+            ] = x.name[9]
             x0.interpolate(axis=0, limit_area="inside", inplace=True)
             x.update(x0)
             return x
@@ -229,11 +234,66 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Create a timeseries of maximum extent of each subvertical
-    max_extent = piecewise_to_continuous("max_extent", "Max extent")
+    max_extent = piecewise_to_continuous("Max extent")
+
+    # Shift Improved Forest Mgmt's start year to 2022, all prior years to 2022 value
+    max_extent.update(
+        (
+            max_extent[
+                (
+                    max_extent.reset_index().variable.str.contains(
+                        "Improved Forest Mgmt"
+                    )
+                ).values
+            ].loc[:, data_end_year + 1 :]
+            * 0
+        ).apply(
+            lambda x: x
+            + (
+                max_extent[
+                    (
+                        max_extent.reset_index().variable.str.contains(
+                            "Improved Forest Mgmt"
+                        )
+                    ).values
+                ]
+                .loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
+                .iloc[0 : proj_end_year - data_end_year]
+                .values
+            ),
+            axis=1,
+        )
+    )
+
+    max_extent.update(
+        (
+            max_extent[
+                (
+                    max_extent.reset_index().variable.str.contains(
+                        "Improved Forest Mgmt"
+                    )
+                ).values
+            ].loc[:, :data_end_year]
+            * 0
+        ).apply(
+            lambda x: x
+            + (
+                max_extent[
+                    (
+                        max_extent.reset_index().variable.str.contains(
+                            "Improved Forest Mgmt"
+                        )
+                    ).values
+                ]
+                .loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
+                .iloc[0]
+            ),
+            axis=1,
+        )
+    )
 
     # Plot
     max_extentplot = max_extent.copy()
-    max_extentplot.columns = max_extentplot.columns - afolu_historical.columns[0]
 
     for subvertical in [
         "Avoided Peat Impacts|Max extent",
@@ -253,7 +313,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             legend=False,
             title="Maximum Extent, " + subvertical.replace("|Max extent", ""),
             ylabel="Mha",
-            xlabel="Years from implementation",
         )
 
     max_extentplot[
@@ -264,7 +323,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         legend=False,
         title="Maximum Extent of Adoption, " + "Improved Forest Mgmt",
         ylabel="m3",
-        xlabel="Years from implementation",
     )
 
     # For subvertical/region combos that have no data ('NA'), assume no adoption, up to the most recent year
@@ -391,36 +449,31 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    flux = piecewise_to_continuous("flux", "Avg mitigation potential flux")
-
-    # Change flux units [ha] to [Mha] to match max extent
-    flux.update(flux.divide(1e6))
+    flux = piecewise_to_continuous("Avg mitigation potential flux")
 
     # Plot
     fluxplot = flux.copy()
-    fluxplot.columns = fluxplot.columns - data_start_year
-    fluxplot[
-        fluxplot.index.get_level_values(3).isin(
-            [
-                "Biochar|Avg mitigation potential flux",
-                "Coastal Restoration|Avg mitigation potential flux",
-                "Cropland Soil Health|Avg mitigation potential flux",
-                "Improved Rice|Avg mitigation potential flux",
-                "Natural Regeneration|Avg mitigation potential flux",
-                "Nitrogen Fertilizer Management|Avg mitigation potential flux",
-                "Optimal Intensity|Avg mitigation potential flux",
-                "Peat Restoration|Avg mitigation potential flux",
-                "Silvopasture|Avg mitigation potential flux",
-                "Trees in Croplands|Avg mitigation potential flux",
-                "Avoided Peat Impacts|Avg mitigation potential flux",
-                "Agroforestry|Avg mitigation potential flux",
-            ]
+    fluxplot.columns = fluxplot.columns - flux.columns[0]
+
+    for subvertical in [
+        "Biochar|Avg mitigation potential flux",
+        "Coastal Restoration|Avg mitigation potential flux",
+        "Cropland Soil Health|Avg mitigation potential flux",
+        "Improved Rice|Avg mitigation potential flux",
+        "Natural Regeneration|Avg mitigation potential flux",
+        "Nitrogen Fertilizer Management|Avg mitigation potential flux",
+        "Optimal Intensity|Avg mitigation potential flux",
+        "Peat Restoration|Avg mitigation potential flux",
+        "Avoided Peat Impacts|Avg mitigation potential flux",
+        "Agroforestry|Avg mitigation potential flux",
+    ]:
+        fluxplot[fluxplot.index.get_level_values(3).isin([subvertical])].T.plot(
+            legend=False,
+            title="Avg Mitigation Flux, "
+            + subvertical.replace("|Avg mitigation potential flux", ""),
+            xlabel="Years from implementation",
+            ylabel="tCO2e/ha/yr",
         )
-    ].T.plot(
-        legend=False,
-        title="Avg Mitigation Flux [tCO2e/ha/yr]",
-        xlabel="Years from implementation",
-    )
 
     fluxplot[
         fluxplot.index.get_level_values(3).isin(
@@ -428,8 +481,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
     ].T.plot(
         legend=False,
-        title="Avg Mitigation Flux [tCO2e/m3/yr]",
+        title="Avg Mitigation Flux [tCO2e/m3/yr], "
+        + subvertical.replace("|Avg mitigation potential flux", ""),
         xlabel="Years from implementation",
+        ylabel="tCO2e/m3/yr",
     )
 
     # endregion
@@ -524,6 +579,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Multiply this by the estimated maximum extent and average mitigation potential flux to get emissions mitigated
+
+    # Change flux units [ha] to [Mha] to match max extent
+    flux.update(
+        flux[(flux.reset_index().unit.isin(["tCO2e/ha/yr"])).values]
+        .divide(1e6)
+        .rename(index={"tCO2e/ha/y": "tCO2e/Mha/y"})
+    )
 
     afolu_output.update(
         afolu_output.parallel_apply(

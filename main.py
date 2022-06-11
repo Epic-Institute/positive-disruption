@@ -4101,7 +4101,7 @@ for subvertical in fig2['variable'].unique():
             go.Scatter(
                 name=region,
                 line=dict(width=1),
-                x=fig2[(fig2["variable"] == subvertical)]["year"].unique() - fig2[(fig2["variable"] == subvertical)]["year"].unique().min(),
+                x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
                 y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Max Extent"],
                 legendgroup=region,
                 showlegend=True,
@@ -4116,7 +4116,6 @@ for subvertical in fig2['variable'].unique():
             "y": 0.99,
         },
         yaxis={"title": "Mha"},
-        xaxis={"title": "Years from implementation"},
         margin_b=0,
         margin_t=20,
         margin_l=10,
@@ -4140,8 +4139,60 @@ for subvertical in fig2['variable'].unique():
 
 # endregion
 
-# Average Mitigation Flux
+# Average Mitigation Flux [tCO2e/ha/yr, tCO2e/m3/yr]
 # region
+fig = flux.droplevel(['model','scenario','unit']).T
+fig.index.name = "year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="year", var_name=["region", "variable"], value_name="Avg mitigation potential flux")
+
+for subvertical in fig2['variable'].unique():
+
+    fig = go.Figure()
+
+    for region in fig2['region'].unique():
+
+        # Make modeled trace
+        fig.add_trace(
+            go.Scatter(
+                name=region,
+                line=dict(width=1),
+                x=fig2[(fig2["variable"] == subvertical)]["year"].unique() - fig2[(fig2["variable"] == subvertical)]["year"].unique().min(),
+                y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Avg mitigation potential flux"],
+                legendgroup=region,
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Average Mitigation Potential Flux, " + subvertical.replace('|Avg mitigation potential flux',''),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "tCO2e/ha/yr"},
+        xaxis={"title": "Years from implementation"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+    
+    if subvertical == 'Improved Forest Mgmt|Avg mitigation potential flux':
+        fig.update_layout(yaxis={"title": "tCO2e/m3/yr"})
+
+    if show_figs is True:
+        fig.show()
+    
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/afolu_flux-"
+        + str(subvertical.replace('|Avg mitigation potential flux','')).replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
 
 # endregion
 

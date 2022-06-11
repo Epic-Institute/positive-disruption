@@ -56,3 +56,30 @@ title: V5:Agriculture
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-OptimalIntensity.html" height='500' width='150%'></iframe>
 
 <br/><br/>
+
+### Average Mitigation Potential Flux
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Agroforestry.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Biochar.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-CroplandSoilHealth.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-ImprovedRice.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-OptimalIntensity.html" height='500' width='150%'></iframe>
+
+<br/><br/>

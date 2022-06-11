@@ -40,3 +40,22 @@ title: V6:Forests/Wetlands
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-PeatRestoration.html" height='500' width='150%'></iframe>
 
 <br/><br/>
+
+### Average Mitigation Potential Flux
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-CoastalRestoration.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-ImprovedForestMgmt.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-NaturalRegeneration.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-PeatRestoration.html" height='500' width='150%'></iframe>
+
+<br/><br/>
