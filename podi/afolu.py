@@ -335,7 +335,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .fillna(0)
     )
 
-    # Calculate afolu_historical as a % of max_extent. For Improved Forest Mgmt, which has a time-varying max extent over ten years, % of max extent is measured relative to the first year, but the mitigation flux will be reduced to account for this time-varying decrease in max_extent
+    # Calculate afolu_historical as a % of max_extent. For Improved Forest Mgmt
     afolu_historical = (
         afolu_historical.apply(
             lambda x: x.divide(
@@ -351,6 +351,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .replace(np.inf, NaN)
         .dropna(axis=0, how="all")
     )
+
+    # List all historical values higher than max extent
+    afolu_historical_toohigh = afolu_historical[
+        (afolu_historical.values > 1).any(axis=1)
+    ]
 
     # Plot as % of max extent
     # region
@@ -630,72 +635,28 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    emissions_afolu_avoided = (
-        pd.DataFrame(
-            pd.read_csv("podi/data/afolu_avoided_pathways_input.csv").drop(
-                columns=[
-                    "Initial Extent (Mha)",
-                    "Mitigation (Mg CO2/ha)",
-                ]
-            )
+    # Load the 'Avoided Pathways Input' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
+    afolu_avoided = pd.DataFrame(
+        pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
+        .drop(columns=["Region", "Country"])
+        .rename(
+            columns={
+                "iso": "region",
+                "Model": "model",
+                "Scenario": "scenario",
+                "Unit": "unit",
+            }
         )
-        .set_index(
-            [
-                "model",
-                "scenario",
-                "region",
-                "variable",
-                "unit",
-                "Initial Loss Rate (%)",
-                "Rate of Improvement",
-            ]
-        )
-        .loc[slice(None), [scenario], slice(None), slice(None), slice(None), :]
-    )
-
-    emissions_afolu_avoided.columns = emissions_afolu_avoided.columns.astype(int)
-    emissions_afolu_avoided = emissions_afolu_avoided.loc[:, :proj_end_year]
-    emissions_afolu_avoided.loc[:, :data_end_year] = 0
-
-    emissions_afolu_avoided.loc[:, data_end_year + 1 :] = -emissions_afolu_avoided.loc[
-        :, data_end_year + 1 :
-    ].parallel_apply(
-        lambda x: x.subtract(
-            emissions_afolu_avoided.loc[x.name[0], x.name[1], x.name[2], x.name[3], :][
-                data_end_year + 1
-            ].values[0]
-        ),
-        axis=1,
-    )
-
-    avoided_adoption = -emissions_afolu_avoided.parallel_apply(
-        lambda x: ((x[data_end_year] - x) / x.max()).fillna(0), axis=1
-    )
-    emissions_afolu_avoided = emissions_afolu_avoided.droplevel(
-        [
-            "Initial Loss Rate (%)",
-            "Rate of Improvement",
-        ]
-    )
-    avoided_adoption = avoided_adoption.droplevel(
-        [
-            "Initial Loss Rate (%)",
-            "Rate of Improvement",
-        ]
+        .replace("Pathway", scenario)
     )
 
     # Plot
-    avoided_adoption.T.plot(legend=False, title="Avoided Emissions [% of max extent]")
-    emissions_afolu_avoided.T.plot(legend=False, title="Avoided Emissions [tCO2e]")
+    afolu_avoided.T.plot(legend=False, title="Avoided Emissions [tCO2e]")
 
     # endregion
 
     # Combine 'avoided_adoption' pathways with other pathways
-    afolu_output = pd.concat([afolu_baseline, afolu_output, avoided_adoption])
-
-    emissions_afolu_mitigated = pd.concat(
-        [emissions_afolu_mitigated, emissions_afolu_avoided]
-    )
+    afolu_output = pd.concat([afolu_output, afolu_avoided])
 
     # endregion
 
