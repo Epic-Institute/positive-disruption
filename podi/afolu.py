@@ -3,7 +3,7 @@
 from matplotlib.pyplot import axis, title, xlabel, ylabel
 import pandas as pd
 from podi.adoption_projection import adoption_projection
-from numpy import NaN, divide
+from numpy import NaN, cumsum, divide
 import numpy as np
 from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
@@ -159,10 +159,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .replace("Pathway", scenario)
     )
 
-    # Drop 'Avoided' subverticals, which do not have historical adoption data, and will be addressed in a section below
-    afolu_historical = afolu_historical[
-        ~afolu_historical.Subvector.str.contains("Avoided")
-    ]
+    # 'Avoided Peat Impacts', 'Avoided Forest Conversion', and 'Avoided Coastal Impacts' subverticals do not have historical adoption data, so these are set to zero
+    afolu_historical.update(
+        afolu_historical[afolu_historical.Subvector.str.contains("Avoided")].fillna(0)
+    )
 
     # Create a 'variable' column that concatenates the 'Subvector' and 'Metric' columns
     afolu_historical["variable"] = afolu_historical.apply(
@@ -199,6 +199,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
 
     for subvertical in [
+        "Avoided Peat Impacts|Observed adoption",
+        "Avoided Coastal Impacts|Observed adoption",
+        "Avoided Forest Conversion|Observed adoption",
         "Coastal Restoration|Observed adoption",
         "Cropland Soil Health|Observed adoption",
         "Improved Rice|Observed adoption",
@@ -292,10 +295,70 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
     )
 
+    # Define the max extent of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
+    afolu_avoided = pd.DataFrame(
+        pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
+        .drop(columns=["Region", "Country"])
+        .rename(
+            columns={
+                "iso": "region",
+                "Model": "model",
+                "Scenario": "scenario",
+                "Subvector": "variable",
+                "Unit": "unit",
+            }
+        )
+        .replace("Pathway", scenario)
+    ).fillna(0)
+
+    # Max extent is defined by the initial extent, which represents the amount of land that could be lost in future years.
+    max_extent_avoided = pd.concat(
+        [
+            pd.DataFrame(
+                0,
+                index=afolu_avoided.set_index(pyam.IAMC_IDX).index,
+                columns=max_extent.columns[max_extent.columns <= data_end_year],
+            ),
+            pd.concat(
+                [
+                    afolu_avoided.drop(
+                        columns=[
+                            "Initial Loss Rate (%)",
+                            "Rate of Improvement",
+                            "Mitigation (Mg CO2/ha)",
+                            "Duration",
+                        ]
+                    ),
+                    pd.DataFrame(
+                        columns=max_extent.columns,
+                    ),
+                ]
+            )
+            .set_index(pyam.IAMC_IDX)
+            .apply(
+                lambda x: x[max_extent.columns[0:]][
+                    x[max_extent.columns[0:]].index > data_end_year
+                ].fillna(x["Initial Extent (Mha)"]),
+                axis=1,
+            ),
+        ],
+        axis=1,
+    ).rename(
+        index={
+            "Avoided Coastal Impacts": "Avoided Coastal Impacts|Max extent",
+            "Avoided Forest Conversion": "Avoided Forest Conversion|Max extent",
+        }
+    )
+
+    # Combine max extents
+    max_extent = pd.concat([max_extent, max_extent_avoided])
+
     # Plot
     max_extentplot = max_extent.copy()
 
     for subvertical in [
+        "Avoided Coastal Impacts|Max extent",
+        "Avoided Forest Conversion|Max extent",
         "Avoided Peat Impacts|Max extent",
         "Agroforestry|Max extent",
         "Biochar|Max extent",
@@ -325,26 +388,21 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         ylabel="m3",
     )
 
-    # For subvertical/region combos that have no data ('NA'), assume no adoption, up to the most recent year
-    afolu_historical.update(
-        afolu_historical.loc[
-            afolu_historical.loc[:, data_start_year:data_end_year].isna().all(axis=1),
-            :,
-        ]
-        .loc[:, data_start_year:data_end_year]
-        .fillna(0)
-    )
-
-    # Calculate afolu_historical as a % of max_extent. For Improved Forest Mgmt
+    # Calculate afolu_historical as a % of max_extent
     afolu_historical = (
         afolu_historical.apply(
             lambda x: x.divide(
                 max_extent[
                     (max_extent.index.get_level_values(2) == x.name[2])
-                    & (max_extent.index.get_level_values(3).str.contains(x.name[3]))
+                    & (
+                        max_extent.index.get_level_values(3).str.contains(
+                            x.name[3].replace("Observed adoption", "Max extent")
+                        )
+                    )
                 ]
+                .loc[:, x.index.values]
+                .fillna(0)
                 .squeeze()
-                .loc[:data_end_year]
             ),
             axis=1,
         )
@@ -361,6 +419,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     for subvertical in [
+        "Avoided Coastal Impacts|Observed adoption",
+        "Avoided Forest Conversion|Observed adoption",
+        "Avoided Peat Impacts|Observed adoption",
         "Agroforestry|Observed adoption",
         "Biochar|Observed adoption",
         "Coastal Restoration|Observed adoption",
@@ -649,6 +710,14 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
         .replace("Pathway", scenario)
     )
+
+    # Avoided Peat Impacts has a time-varying average mitigation potential flux, so apply that to estimate avoided emissions
+    afolu_avoided["Avoided Peat Impacts"] = max_extent[
+        (max_extent.reset_index().variable.str.contains("Avoided Peat Impacts")).values
+    ]
+
+    # There is no historical adoption of avoided pathways, so set all years prior to present to zero
+    afolu_avoided[:, data_start_year:data_end_year] = 0
 
     # Plot
     afolu_avoided.T.plot(legend=False, title="Avoided Emissions [tCO2e]")

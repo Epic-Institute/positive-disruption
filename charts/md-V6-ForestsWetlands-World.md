@@ -60,6 +60,14 @@ title: V6:Forests/Wetlands
 
 <br/><br/>
 
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-AvoidedCoastalImpacts.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-AvoidedForestConversion.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-AvoidedPeatImpacts.html" height='500' width='150%'></iframe>
 
 <br/><br/>
