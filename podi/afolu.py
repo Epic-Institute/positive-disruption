@@ -540,11 +540,62 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     flux = piecewise_to_continuous("Avg mitigation potential flux")
 
+    # Define the flux of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
+    afolu_avoided = pd.DataFrame(
+        pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
+        .drop(columns=["Region", "Country"])
+        .rename(
+            columns={
+                "iso": "region",
+                "Model": "model",
+                "Scenario": "scenario",
+                "Subvector": "variable",
+                "Unit": "unit",
+            }
+        )
+        .replace("Pathway", scenario)
+    ).fillna(0)
+
+    flux_avoided = (
+        pd.concat(
+            [
+                afolu_avoided.drop(
+                    columns=[
+                        "Initial Extent (Mha)",
+                        "Initial Loss Rate (%)",
+                        "Rate of Improvement",
+                        "Duration",
+                    ]
+                ),
+                pd.DataFrame(
+                    columns=flux.columns,
+                ),
+            ]
+        )
+        .set_index(pyam.IAMC_IDX)
+        .apply(
+            lambda x: x[flux.columns[0:]].fillna(x["Mitigation (Mg CO2/ha)"]),
+            axis=1,
+        )
+        .rename(
+            index={
+                "Avoided Coastal Impacts": "Avoided Coastal Impacts|Avg mitigation potential flux",
+                "Avoided Forest Conversion": "Avoided Forest Conversion|Avg mitigation potential flux",
+                "Mha": "tCO2e/ha/yr",
+            }
+        )
+    )
+
+    # Combine flux estimates
+    flux = pd.concat([flux, flux_avoided])
+
     # Plot
     fluxplot = flux.copy()
     fluxplot.columns = fluxplot.columns - flux.columns[0]
 
     for subvertical in [
+        "Avoided Coastal Impacts|Avg mitigation potential flux",
+        "Avoided Forest Conversion|Avg mitigation potential flux",
         "Biochar|Avg mitigation potential flux",
         "Coastal Restoration|Avg mitigation potential flux",
         "Cropland Soil Health|Avg mitigation potential flux",
