@@ -389,25 +389,48 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Calculate afolu_historical as a % of max_extent
-    afolu_historical = (
-        afolu_historical.apply(
-            lambda x: x.divide(
-                max_extent[
-                    (max_extent.index.get_level_values(2) == x.name[2])
-                    & (
-                        max_extent.index.get_level_values(3).str.contains(
-                            x.name[3].replace("Observed adoption", "Max extent")
-                        )
+    afolu_historical = afolu_historical.apply(
+        lambda x: x.divide(
+            max_extent[
+                (max_extent.index.get_level_values(2) == x.name[2])
+                & (
+                    max_extent.index.get_level_values(3).str.contains(
+                        x.name[3].replace("|Observed adoption", "")
                     )
-                ]
-                .loc[:, x.index.values]
-                .fillna(0)
-                .squeeze()
-            ),
-            axis=1,
+                )
+            ]
+            .loc[:, x.index.values]
+            .fillna(0)
+            .squeeze()
+        ),
+        axis=1,
+    ).replace(np.inf, NaN)
+
+    # Make Avoided Coastal Impacts and Avoided Forest Conversion all zero instead of NA, for consistency with Avoided Peat Impacts
+    afolu_historical[
+        (
+            afolu_historical.index.get_level_values(3).str.contains(
+                "Avoided Coastal Impacts"
+            )
         )
-        .replace(np.inf, NaN)
-        .dropna(axis=0, how="all")
+        | (
+            afolu_historical.index.get_level_values(3).str.contains(
+                "Avoided Forest Conversion"
+            )
+        )
+    ] = afolu_historical[
+        (
+            afolu_historical.index.get_level_values(3).str.contains(
+                "Avoided Coastal Impacts"
+            )
+        )
+        | (
+            afolu_historical.index.get_level_values(3).str.contains(
+                "Avoided Forest Conversion"
+            )
+        )
+    ].fillna(
+        0
     )
 
     # List all historical values higher than max extent
