@@ -119,6 +119,16 @@ def adoption_projection(
         ]
     )
 
+    # If y2.loc[input_data.last_valid_index() + 1] == y2.loc[input_data.last_valid_index()], shift all up by y2.loc[input_data.last_valid_index() + 2]
+    if (
+        y2[input_data.last_valid_index() + 1 - input_data.first_valid_index()]
+        == y2[input_data.last_valid_index() - input_data.first_valid_index()]
+    ):
+        y2[input_data.last_valid_index() + 1 - input_data.first_valid_index() :] = (
+            y2[input_data.last_valid_index() + 1 - input_data.first_valid_index() :]
+            + y2[input_data.last_valid_index() + 2 - input_data.first_valid_index()]
+        )
+
     # Save projections to logfile
     pd.DataFrame(input_data.name).to_csv(
         "podi/data/adoption_projection_logfile2.csv",

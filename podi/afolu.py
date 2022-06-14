@@ -29,6 +29,12 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
     def piecewise_to_continuous(variable):
+        """
+        It takes a variable name as input, and returns a dataframe with the variable's values for each
+        region, model, and scenario
+
+        :param variable: the name of the variable you want to convert
+        """
 
         # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
         name = (
@@ -479,18 +485,25 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     afolu_baseline = afolu_historical.copy()
 
+    # For rows will all 'NA', replace with zeros
+    afolu_baseline[afolu_baseline.isna().all(axis=1).values] = 0
+
     parameters = pd.read_csv("podi/data/tech_parameters_afolu.csv").sort_index()
 
     # Remove clip(upper=1) here to allow % to go beyond max_extent
     afolu_baseline = afolu_baseline.parallel_apply(
         lambda x: adoption_projection(
             input_data=x,
-            output_start_date=data_end_year + 1,
+            output_start_date=x.last_valid_index(),
             output_end_date=proj_end_year,
             change_model="linear",
             change_parameters=parameters[
                 (parameters.scenario == "baseline")
-                & (parameters.variable.str.contains(x.name[3]))
+                & (
+                    parameters.variable.str.contains(
+                        x.name[3].replace("|Observed adoption", "")
+                    )
+                )
             ],
         ),
         axis=1,
@@ -500,6 +513,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     for subvertical in [
+        "Avoided Coastal Impacts|Observed adoption",
+        "Avoided Forest Conversion|Observed adoption",
         "Agroforestry|Observed adoption",
         "Biochar|Observed adoption",
         "Coastal Restoration|Observed adoption",

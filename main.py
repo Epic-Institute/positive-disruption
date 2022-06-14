@@ -4196,6 +4196,116 @@ for subvertical in fig2['variable'].unique():
 
 # endregion
 
+# Baseline Adoption [% of Max Extent]
+# region
+
+fig = afolu_baseline.droplevel(['model','scenario','unit']).T
+fig.index.name = "year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="year", var_name=["region", "variable"], value_name="Adoption")
+
+for subvertical in fig2['variable'].unique():
+
+    fig = go.Figure()
+
+    for region in fig2['region'].unique():
+
+        # Make modeled trace
+        fig.add_trace(
+            go.Scatter(
+                name=region,
+                line=dict(width=1),
+                x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Adoption"] * 100,
+                legendgroup=region,
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Adoption, Baseline, " + subvertical.replace('|Observed adoption',''),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "% of Max Extent"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+    
+    if show_figs is True:
+        fig.show()
+    
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/afolu_baseline-"
+        + str(subvertical.replace('|Observed adoption','')).replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
+
+# endregion
+
+# Pathway Adoption [% of Max Extent]
+# region
+
+fig = afolu_output.droplevel(['model','scenario','unit']).T
+fig.index.name = "year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="year", var_name=["region", "variable"], value_name="Adoption")
+
+for subvertical in fig2['variable'].unique():
+
+    fig = go.Figure()
+
+    for region in fig2['region'].unique():
+
+        # Make modeled trace
+        fig.add_trace(
+            go.Scatter(
+                name=region,
+                line=dict(width=1),
+                x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Adoption"] * 100,
+                legendgroup=region,
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Adoption, PD22, " + subvertical.replace('|Observed adoption',''),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "% of Max Extent"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+    
+    if show_figs is True:
+        fig.show()
+    
+    pio.write_html(
+    fig,
+    file=(
+        "./charts/afolu_output-"
+        + str(subvertical.replace('|Observed adoption','')).replace("slice(None, None, None)", "All")
+        + ".html"
+    ).replace(" ",""),
+    auto_open=False)
+
+# endregion
+
+
+
 # endregion
 
 #################
