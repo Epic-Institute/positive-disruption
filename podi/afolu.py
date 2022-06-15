@@ -192,22 +192,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Plot
     # region
 
-    for subvertical in ["Biochar|Observed adoption"]:
-        afolu_historicalplot = afolu_historical.copy()
-        afolu_historicalplot[
-            afolu_historicalplot.index.get_level_values(3).isin([subvertical])
-        ].T.plot(
-            legend=False,
-            title="Historical Adoption, "
-            + subvertical.replace("|Observed adoption", ""),
-            ylabel="Tg dm",
-            xlabel="Year",
-        )
-
     for subvertical in [
         "Avoided Peat Impacts|Observed adoption",
         "Avoided Coastal Impacts|Observed adoption",
         "Avoided Forest Conversion|Observed adoption",
+        "Biochar|Observed adoption",
         "Coastal Restoration|Observed adoption",
         "Cropland Soil Health|Observed adoption",
         "Improved Rice|Observed adoption",
@@ -538,9 +527,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # Save
-    afolu_baseline.to_csv("podi/data/afolu_output.csv")
-
     # endregion
 
     ##################################
@@ -650,10 +636,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     afolu_analogs = (
         pd.DataFrame(pd.read_csv("podi/data/afolu_analogs.csv"))
-        .drop(columns=["Note", "unit", "Actual start year"])
-        .set_index(["Analog name", "Max (Mha)"])
+        .drop(columns=["Note", "Unit", "Actual start year"])
+        .set_index(["Analog Name", "Max Extent"])
     )
     afolu_analogs.columns.rename("Year", inplace=True)
+    afolu_analogs.loc[:, afolu_analogs.columns[0]] = afolu_analogs.loc[
+        :, afolu_analogs.columns[0]
+    ].fillna(0)
     afolu_analogs.interpolate(axis=1, limit_area="inside", inplace=True)
     afolu_analogs = afolu_analogs.parallel_apply(
         lambda x: x / x.name[1], axis=1
@@ -675,7 +664,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     afolu_analogs = afolu_analogs.apply(
         lambda x: adoption_projection(
             input_data=x,
-            output_start_date=data_end_year + 1,
+            output_start_date=x.last_valid_index() + 1,
             output_end_date=proj_end_year,
             change_model="logistic",
             change_parameters=parameters[
@@ -684,10 +673,62 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ],
         ),
         axis=1,
-    ).droplevel("Max (Mha)")
+    ).droplevel("Max Extent")
+
+    # Add analogs for 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
+    afolu_analogs_avoided = (
+        pd.DataFrame(
+            pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
+            .drop(
+                columns=[
+                    "Model",
+                    "Scenario",
+                    "iso",
+                    "Region",
+                    "Country",
+                    "Unit",
+                    "Duration",
+                    "Initial Extent (Mha)",
+                    "Initial Loss Rate (%)",
+                    "Mitigation (Mg CO2/ha)",
+                ]
+            )
+            .rename(columns={"Subvector": "Analog name"})
+        )
+        .fillna(0)
+        .drop_duplicates()
+    )
+
+    afolu_analogs_avoided = (
+        pd.concat(
+            [
+                afolu_analogs_avoided,
+                pd.DataFrame(
+                    columns=afolu_analogs.columns,
+                ),
+            ]
+        )
+        .set_index("Analog name")
+        .apply(
+            lambda x: x[afolu_analogs.columns[0:]]
+            .fillna(x["Rate of Improvement"])
+            .cumsum(),
+            axis=1,
+        )
+        .rename(
+            index={
+                "Avoided Coastal Impacts": "Avoided Coastal Impacts|90 percentile across countries",
+                "Avoided Forest Conversion": "Avoided Forest Conversion|90 percentile across countries",
+            }
+        )
+    )
+
+    afolu_analogs = pd.concat([afolu_analogs, afolu_analogs_avoided])
 
     # Plot
-    afolu_analogs.T.plot(title="Historical Analog Adoption [%]")
+    afolu_analogs.multiply(100).T.plot(
+        title="Historical Analog Adoption", ylabel="% of max extent"
+    )
 
     # endregion
 
@@ -697,8 +738,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     subvertical = pd.DataFrame(
         pd.read_csv(
-            "podi/data/afolu_categories.csv", usecols=["variable", "Analog Name"]
-        )
+            "podi/data/afolu_categories.csv", usecols=["Subvertical", "Analog Name"]
+        ).rename(columns={"Subvertical": "variable"})
     ).set_index(["variable"])
 
     afolu_output = (
@@ -730,6 +771,42 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Plot
     afolu_output.T.plot(legend=False, title="AFOLU Adoption [%]")
+
+    afolu_outputplot = afolu_output.copy()
+
+    for subvertical in [
+        "Avoided Coastal Impacts|Avg mitigation potential flux",
+        "Avoided Forest Conversion|Avg mitigation potential flux",
+        "Biochar|Avg mitigation potential flux",
+        "Coastal Restoration|Avg mitigation potential flux",
+        "Cropland Soil Health|Avg mitigation potential flux",
+        "Improved Rice|Avg mitigation potential flux",
+        "Natural Regeneration|Avg mitigation potential flux",
+        "Nitrogen Fertilizer Management|Avg mitigation potential flux",
+        "Optimal Intensity|Avg mitigation potential flux",
+        "Peat Restoration|Avg mitigation potential flux",
+        "Avoided Peat Impacts|Avg mitigation potential flux",
+        "Agroforestry|Avg mitigation potential flux",
+    ]:
+        afolu_outputplot[
+            afolu_outputplot.index.get_level_values(3).isin([subvertical])
+        ].T.plot(
+            legend=False,
+            title="Avg Mitigation Flux, "
+            + subvertical.replace("|Avg mitigation potential flux", ""),
+            ylabel="tCO2e/ha/yr",
+        )
+
+    afolu_outputplot[
+        afolu_outputplot.index.get_level_values(3).isin(
+            ["Improved Forest Mgmt|Avg mitigation potential flux"]
+        )
+    ].T.plot(
+        legend=False,
+        title="Avg Mitigation Flux [tCO2e/m3/yr], "
+        + subvertical.replace("|Avg mitigation potential flux", ""),
+        ylabel="tCO2e/m3/yr",
+    )
 
     # endregion
 
@@ -776,45 +853,62 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Plot
-    afolu_output.T.plot(legend=False, title="AFOLU Adoption [% of max extent]")
-    emissions_afolu_mitigated.T.plot(
-        legend=False, title="AFOLU Adoption [tCO2e mitigated]"
-    )
+    afolu_outputplot = afolu_output.copy()
 
-    # Estimate emissions mitigated by avoided pathways
-
-    # region
-
-    # Load the 'Avoided Pathways Input' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
-    afolu_avoided = pd.DataFrame(
-        pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
-        .drop(columns=["Region", "Country"])
-        .rename(
-            columns={
-                "iso": "region",
-                "Model": "model",
-                "Scenario": "scenario",
-                "Unit": "unit",
-            }
+    for subvertical in [
+        "Avoided Coastal Impacts|Avg mitigation potential flux",
+        "Avoided Forest Conversion|Avg mitigation potential flux",
+        "Biochar|Avg mitigation potential flux",
+        "Coastal Restoration|Avg mitigation potential flux",
+        "Cropland Soil Health|Avg mitigation potential flux",
+        "Improved Rice|Avg mitigation potential flux",
+        "Natural Regeneration|Avg mitigation potential flux",
+        "Nitrogen Fertilizer Management|Avg mitigation potential flux",
+        "Optimal Intensity|Avg mitigation potential flux",
+        "Peat Restoration|Avg mitigation potential flux",
+        "Avoided Peat Impacts|Avg mitigation potential flux",
+        "Agroforestry|Avg mitigation potential flux",
+        "Improved Forest Mgmt|Avg mitigation potential flux",
+    ]:
+        afolu_outputplot[
+            afolu_outputplot.index.get_level_values(3).isin([subvertical])
+        ].T.plot(
+            legend=False,
+            title="AFOLU Adoption, "
+            + subvertical.replace("|Avg mitigation potential flux", ""),
+            ylabel="% of max extent",
         )
-        .replace("Pathway", scenario)
+
+    emissions_afolu_mitigated_outputplot = afolu_output.copy()
+    emissions_afolu_mitigated_outputplot.columns = (
+        emissions_afolu_mitigated_outputplot.columns - afolu_output.columns[0]
     )
 
-    # Avoided Peat Impacts has a time-varying average mitigation potential flux, so apply that to estimate avoided emissions
-    afolu_avoided["Avoided Peat Impacts"] = max_extent[
-        (max_extent.reset_index().variable.str.contains("Avoided Peat Impacts")).values
-    ]
-
-    # There is no historical adoption of avoided pathways, so set all years prior to present to zero
-    afolu_avoided[:, data_start_year:data_end_year] = 0
-
-    # Plot
-    afolu_avoided.T.plot(legend=False, title="Avoided Emissions [tCO2e]")
-
-    # endregion
-
-    # Combine 'avoided_adoption' pathways with other pathways
-    afolu_output = pd.concat([afolu_output, afolu_avoided])
+    for subvertical in [
+        "Avoided Coastal Impacts|Avg mitigation potential flux",
+        "Avoided Forest Conversion|Avg mitigation potential flux",
+        "Biochar|Avg mitigation potential flux",
+        "Coastal Restoration|Avg mitigation potential flux",
+        "Cropland Soil Health|Avg mitigation potential flux",
+        "Improved Rice|Avg mitigation potential flux",
+        "Natural Regeneration|Avg mitigation potential flux",
+        "Nitrogen Fertilizer Management|Avg mitigation potential flux",
+        "Optimal Intensity|Avg mitigation potential flux",
+        "Peat Restoration|Avg mitigation potential flux",
+        "Avoided Peat Impacts|Avg mitigation potential flux",
+        "Agroforestry|Avg mitigation potential flux",
+        "Improved Forest Mgmt|Avg mitigation potential flux",
+    ]:
+        emissions_afolu_mitigated_outputplot[
+            emissions_afolu_mitigated_outputplot.index.get_level_values(3).isin(
+                [subvertical]
+            )
+        ].T.plot(
+            legend=False,
+            title="AFOLU Adoption, "
+            + subvertical.replace("|Avg mitigation potential flux", ""),
+            ylabel="tCO2e mitigated",
+        )
 
     # endregion
 
@@ -829,7 +923,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     emissions_afolu_mitigated.rename(
         index={
             "Mha": "MtCO2e",
-            "Tg dm": "MtCO2e",
             "m3": "MtCO2e",
         },
         inplace=True,

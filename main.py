@@ -350,7 +350,7 @@ energy_output_pyam = pyam.IamDataFrame(
 
 # Save as regional-level files
 for output in [
-    (energy_output, "energy_output")
+    (energy_output, "energy_output"), (afolu_output, "afolu_output") 
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")

@@ -1618,6 +1618,15 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ["hydrogen", "flexible", "nonenergy"]
     )
 
+    # Combine 'Residential' and 'Commercial' sectors into 'Buildings' sector
+    energy_output[
+        energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
+    ] = energy_output[
+        energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
+    ].rename(
+        index={"Commercial": "Buildings", "Residential": "Buildings"}
+    )
+
     # Drop 'hydrogen', 'flexible', 'nonenergy' flags and save
     for output in [
         (energy_post_upstream, "energy_post_upstream"),

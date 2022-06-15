@@ -109,7 +109,7 @@ def adoption_projection(
             mutation=(0, 1.99),
         ).x
 
-        y = np.array(logistic(np.arange(0, 200, 1), *genetic_parameters))
+        y = np.array(logistic(np.arange(0, 300, 1), *genetic_parameters))
 
     # Rejoin with input data at point where projection results in smooth growth
     y2 = np.concatenate(
@@ -120,6 +120,7 @@ def adoption_projection(
     )
 
     # If y2.loc[input_data.last_valid_index() + 1] == y2.loc[input_data.last_valid_index()], shift all up by y2.loc[input_data.last_valid_index() + 2]
+    """
     if (
         y2[input_data.last_valid_index() + 1 - input_data.first_valid_index()]
         == y2[input_data.last_valid_index() - input_data.first_valid_index()]
@@ -128,6 +129,7 @@ def adoption_projection(
             y2[input_data.last_valid_index() + 1 - input_data.first_valid_index() :]
             + y2[input_data.last_valid_index() + 2 - input_data.first_valid_index()]
         )
+    """
 
     # Save projections to logfile
     pd.DataFrame(input_data.name).to_csv(
