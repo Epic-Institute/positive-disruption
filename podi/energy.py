@@ -1587,6 +1587,16 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
+    #############################
+    # ESTIMATE STORAGE CAPACITY #
+    #############################
+
+    # region
+    """
+    energy_post_electrification["Storage"] = energy_post_electrification["Electricity output"].multiply(0.2)
+    """
+    # endregion
+
     #################
     #  SAVE OUTPUT  #
     #################

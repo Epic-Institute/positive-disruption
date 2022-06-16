@@ -350,7 +350,7 @@ energy_output_pyam = pyam.IamDataFrame(
 
 # Save as regional-level files
 for output in [
-    (energy_output, "energy_output"), (afolu_output, "afolu_output") 
+    (energy_output, "energy_output"), (afolu_output, "afolu_output"), (emissions_afolu_mitigated, "emissions_afolu_mitigated")
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")
@@ -4196,61 +4196,7 @@ for subvertical in fig2['variable'].unique():
 
 # endregion
 
-# Baseline Adoption [% of Max Extent]
-# region
-
-fig = afolu_baseline.droplevel(['model','scenario','unit']).T
-fig.index.name = "year"
-fig.reset_index(inplace=True)
-fig2 = pd.melt(fig, id_vars="year", var_name=["region", "variable"], value_name="Adoption")
-
-for subvertical in fig2['variable'].unique():
-
-    fig = go.Figure()
-
-    for region in fig2['region'].unique():
-
-        # Make modeled trace
-        fig.add_trace(
-            go.Scatter(
-                name=region,
-                line=dict(width=1),
-                x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                y=fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)]["Adoption"] * 100,
-                legendgroup=region,
-                showlegend=True,
-            )
-        )
-
-    fig.update_layout(
-        title={
-            "text": "Adoption, Baseline, " + subvertical.replace('|Observed adoption',''),
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        yaxis={"title": "% of Max Extent"},
-        margin_b=0,
-        margin_t=20,
-        margin_l=10,
-        margin_r=10,
-    )
-    
-    if show_figs is True:
-        fig.show()
-    
-    pio.write_html(
-    fig,
-    file=(
-        "./charts/afolu_baseline-"
-        + str(subvertical.replace('|Observed adoption','')).replace("slice(None, None, None)", "All")
-        + ".html"
-    ).replace(" ",""),
-    auto_open=False)
-
-# endregion
-
-# Pathway Adoption [% of Max Extent]
+# Adoption [% of Max Extent]
 # region
 
 fig = afolu_output.droplevel(['model','scenario','unit']).T
@@ -4304,7 +4250,61 @@ for subvertical in fig2['variable'].unique():
 
 # endregion
 
+# Emissions Mitigated [tCO2e]
+# region
 
+fig = emissions_afolu_mitigated.droplevel(['model', 'sector', 'flow_category', 'flow_long', 'unit']).T
+fig.index.name = "year"
+fig.reset_index(inplace=True)
+fig2 = pd.melt(fig, id_vars="year", var_name=["scenario", "region", "product_long"], value_name="Adoption")
+
+for scenario in fig2['scenario'].unique():
+
+    for subvertical in fig2['product_long'].unique():
+
+        fig = go.Figure()
+
+        for region in fig2['region'].unique():
+
+            # Make modeled trace
+            fig.add_trace(
+                go.Scatter(
+                    name=region,
+                    line=dict(width=1),
+                    x=fig2[(fig2["product_long"] == subvertical)]["year"].unique(),
+                    y=fig2[(fig2["product_long"] == subvertical) & (fig2["region"] == region) & (fig2["scenario"] == scenario)]["Adoption"] * 100,
+                    legendgroup=region,
+                    showlegend=True,
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Emissions Mitigated, PD22, " + subvertical.replace('|Observed adoption','') + ", " + scenario.capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "tCO2e"},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+        
+        if show_figs is True:
+            fig.show()
+        
+        pio.write_html(
+        fig,
+        file=(
+            "./charts/emissions_afolu_mitigated-"
+            + str(subvertical.replace('|Observed adoption','')).replace("slice(None, None, None)", "All")
+            + ".html"
+        ).replace(" ",""),
+        auto_open=False)
+
+# endregion
 
 # endregion
 
