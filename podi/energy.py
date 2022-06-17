@@ -3,8 +3,7 @@
 import pandas as pd
 import numpy as np
 from numpy import NaN
-from podi.adoption_curve_demand import adoption_curve_demand
-from podi.adoption_curve import adoption_curve
+from podi.adoption_projection import adoption_curve_demand, adoption_curve
 from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
 import os

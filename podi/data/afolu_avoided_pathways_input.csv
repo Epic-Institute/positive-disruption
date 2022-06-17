@@ -121,7 +121,7 @@ PD22,Pathway,EFTA,NOR,Norway,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
 PD22,Pathway,EFTA,NOR,Norway,Avoided Forest Conversion,Mha,12.872,NA,0.0002,NA,#VALUE!
 PD22,Pathway,MEA-H,OMN,Oman,Avoided Forest Conversion,Mha,0,NA,0.0002,NA,#VALUE!
 PD22,Pathway,PAK,PAK,Pakistan,Avoided Forest Conversion,Mha,1.3707,NA,0.0002,NA,#VALUE!
-PD22,Pathway,LAM-M,PRY,Paraguay,Avoided Forest Conversion,Mha,0,NA,0.0002,NA,#VALUE!
+PD22,Pathway,LAM-M,PRY,Paraguay,Avoided Forest Conversion,Mha,0.2813,-1.4099,0.0002,NA,#VALUE!
 PD22,Pathway,LAM-M,PRY,Paraguay,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
 PD22,Pathway,EU12-H,POL,Poland,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
 PD22,Pathway,EU12-H,POL,Poland,Avoided Forest Conversion,Mha,11.4471,NA,0.0002,NA,#VALUE!

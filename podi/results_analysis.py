@@ -444,6 +444,39 @@ def results_analysis(
 
     # endregion
 
+    ####################
+    # EMISSIONS WEDGES #
+    ####################
+
+    # region
+    emissions_wedges = (
+        emissions_output_co2e[
+            (emissions_output_co2e.reset_index().scenario == "baseline").values
+        ]
+        .rename(index={"baseline": scenario}, level=1)
+        .groupby(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+            ]
+        )
+        .subtract(
+            emissions_output_co2e[
+                (emissions_output_co2e.reset_index().scenario == scenario).values
+            ]
+        )
+    )
+
+    # endregion
+
     #################
     #  SAVE OUTPUT  #
     #################
@@ -451,6 +484,8 @@ def results_analysis(
     # region
 
     pdindex_output.to_csv("podi/data/pdindex_output.csv")
+
+    adoption_output.to_csv("podi/data/adoption_output.csv")
 
     adoption_output.to_csv("podi/data/adoption_output.csv")
 

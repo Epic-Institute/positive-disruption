@@ -93,7 +93,254 @@ def emissions(
 
     # region
 
-    # Load historical AFOLU emissions and baseline estimates (retrieved from FAOSTAT)
+    # Create emissions factors using timeseries of average mitigation potential flux of each subvertical
+    # region
+
+    # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
+    def piecewise_to_continuous(variable):
+        """
+        It takes a variable name as input, and returns a dataframe with the variable's values for each
+        region, model, and scenario
+
+        :param variable: the name of the variable you want to convert
+        """
+
+        # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
+        name = (
+            pd.read_csv("podi/data/afolu_max_extent_and_flux.csv")
+            .drop(columns=["Region", "Country"])
+            .rename(
+                columns={
+                    "iso": "region",
+                    "Model": "model",
+                    "Scenario": "scenario",
+                    "Unit": "unit",
+                }
+            )
+            .replace("Pathway", scenario)
+        )
+
+        # Create a 'variable' column that concatenates the 'Subvector' and 'Metric' columns
+        name["variable"] = name.apply(
+            lambda x: "|".join([x["Subvector"], x["Metric"]]), axis=1
+        )
+        name.drop(columns=["Subvector", "Metric"], inplace=True)
+
+        # Filter for rows that have 'variable' (either 'Max extent' or 'Avg mitigation potential flux')
+        name = name[name["variable"].str.contains(variable)]
+
+        # If Value 1 is 'NA', set to 0
+        name["Value 1"] = np.where(name["Value 1"].isna(), 0, name["Value 1"])
+
+        # If Value 2 is 'NA', set to Value 1
+        name["Value 2"] = np.where(
+            name["Value 2"].isna(), name["Value 1"], name["Value 2"]
+        )
+
+        # If Value 3 is 'NA', set to Value 2
+        name["Value 3"] = np.where(
+            name["Value 3"].isna(), name["Value 2"], name["Value 3"]
+        )
+
+        # If Duration 1 is 'NA' or longer than proj_end_year - afolu_historical.columns[0], set to proj_end_year - afolu_historical.columns[0]
+        name["Duration 1 (Years)"] = np.where(
+            (
+                (name["Duration 1 (Years)"].isna())
+                | (
+                    name["Duration 1 (Years)"]
+                    > proj_end_year - afolu_historical.columns[0]
+                )
+            ),
+            proj_end_year - afolu_historical.columns[0],
+            name["Duration 1 (Years)"],
+        )
+
+        # If Duration 2 is 'NA', set to Duration 1
+        name["Duration 2 (Years)"] = np.where(
+            (name["Duration 2 (Years)"].isna()),
+            name["Duration 1 (Years)"],
+            name["Duration 2 (Years)"],
+        )
+
+        # If Duration 3 is 'NA', set to Duration 2
+        name["Duration 3 (Years)"] = np.where(
+            (name["Duration 3 (Years)"].isna()),
+            name["Duration 2 (Years)"],
+            name["Duration 3 (Years)"],
+        )
+
+        # Create dataframe with timeseries columns
+        name = pd.DataFrame(
+            index=[
+                name["model"],
+                name["scenario"],
+                name["region"],
+                name["variable"],
+                name["unit"],
+                name["Value 1"],
+                name["Duration 1 (Years)"],
+                name["Value 2"],
+                name["Duration 2 (Years)"],
+                name["Value 3"],
+                name["Duration 3 (Years)"],
+            ],
+            columns=np.arange(afolu_historical.columns[0], proj_end_year + 1, 1),
+            dtype=float,
+        )
+
+        # Define a function that places values in each timeseries for the durations specified, and interpolates
+        def rep(x):
+            x0 = x
+            x0.loc[afolu_historical.columns[0]] = x.name[5]
+            x0.loc[afolu_historical.columns[0] + x.name[6]] = x.name[7]
+            x0.loc[
+                min(
+                    afolu_historical.columns[0] + x.name[6] + x.name[8],
+                    proj_end_year - afolu_historical.columns[0],
+                )
+            ] = x.name[9]
+            x0.interpolate(axis=0, limit_area="inside", inplace=True)
+            x.update(x0)
+            return x
+
+        name.update(name.apply(rep, axis=1))
+
+        # Drop 'Value' and 'Duration' columns now that the timeseries have been created
+        name = name.droplevel(
+            [
+                "Value 1",
+                "Duration 1 (Years)",
+                "Value 2",
+                "Duration 2 (Years)",
+                "Value 3",
+                "Duration 3 (Years)",
+            ]
+        ).fillna(0)
+
+        return name
+
+    flux = piecewise_to_continuous("Avg mitigation potential flux")
+
+    # Define the flux of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
+    afolu_avoided = pd.DataFrame(
+        pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
+        .drop(columns=["Region", "Country"])
+        .rename(
+            columns={
+                "iso": "region",
+                "Model": "model",
+                "Scenario": "scenario",
+                "Subvector": "variable",
+                "Unit": "unit",
+            }
+        )
+        .replace("Pathway", scenario)
+    ).fillna(0)
+
+    flux_avoided = (
+        pd.concat(
+            [
+                afolu_avoided.drop(
+                    columns=[
+                        "Initial Extent (Mha)",
+                        "Initial Loss Rate (%)",
+                        "Rate of Improvement",
+                        "Duration",
+                    ]
+                ),
+                pd.DataFrame(
+                    columns=flux.columns,
+                ),
+            ]
+        )
+        .set_index(pyam.IAMC_IDX)
+        .apply(
+            lambda x: x[flux.columns[0:]].fillna(x["Mitigation (Mg CO2/ha)"]),
+            axis=1,
+        )
+        .rename(
+            index={
+                "Avoided Coastal Impacts": "Avoided Coastal Impacts|Avg mitigation potential flux",
+                "Avoided Forest Conversion": "Avoided Forest Conversion|Avg mitigation potential flux",
+                "Mha": "tCO2e/ha/yr",
+            }
+        )
+    )
+
+    # Combine flux estimates
+    flux = pd.concat([flux, flux_avoided])
+
+    # Change flux units from tCO2e/ha to tCO2e/Mha to match max extent
+    flux = pd.concat(
+        [
+            flux[~(flux.reset_index().unit.isin(["tCO2e/ha/yr"])).values],
+            flux[(flux.reset_index().unit.isin(["tCO2e/ha/yr"])).values]
+            .multiply(1e6)
+            .rename(index={"tCO2e/ha/yr": "tCO2e/Mha/yr"}),
+        ]
+    )
+
+    # Change ISO region names to IEA
+    regions = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/region_categories.csv",
+                usecols=["WEB Region", "ISO"],
+            ).dropna(axis=0)
+        )
+        .set_index(["ISO"])
+        .rename_axis(index={"ISO": "region"})
+    )
+    regions["WEB Region"] = (regions["WEB Region"]).str.lower()
+
+    flux = (
+        (flux.reset_index().set_index(["region"]).merge(regions, on=["region"]))
+        .reset_index()
+        .set_index(
+            [
+                "model",
+                "scenario",
+                "WEB Region",
+                "variable",
+                "unit",
+            ]
+        )
+        .rename_axis(index={"WEB Region": "region"})
+    ).drop(columns="region")
+
+    # Plot
+    fluxplot = flux.copy()
+    fluxplot.columns = fluxplot.columns - flux.columns[0]
+
+    for subvertical in (
+        fluxplot[(fluxplot.reset_index().unit == "tCO2e/Mha/yr").values]
+        .reset_index()
+        .variable.unique()
+    ):
+        fluxplot[fluxplot.index.get_level_values(3).isin([subvertical])].T.plot(
+            legend=False,
+            title="Avg Mitigation Flux, "
+            + subvertical.replace("|Avg mitigation potential flux", ""),
+            xlabel="Years from implementation",
+            ylabel="tCO2e/Mha/yr",
+        )
+
+    fluxplot[
+        fluxplot.index.get_level_values(3).isin(
+            ["Improved Forest Mgmt|Avg mitigation potential flux"]
+        )
+    ].T.plot(
+        legend=False,
+        title="Avg Mitigation Flux, "
+        + subvertical.replace("|Avg mitigation potential flux", ""),
+        xlabel="Years from implementation",
+        ylabel="tCO2e/m3/yr",
+    )
+
+    # endregion
+
+    # Load historical and baseline emissions estimates (retrieved from FAOSTAT)
+    # region
     emissions_afolu = (
         pd.read_csv("podi/data/FAO/Emissions_Totals_E_All_Data_NOFLAG.csv")
         .drop(
@@ -220,7 +467,87 @@ def emissions(
     emissions_afolu.interpolate(method="linear", axis=1, inplace=True)
     emissions_afolu.fillna(method="bfill", inplace=True)
 
-    # Convert emissions_afolu_mitigated from MtCO2e to Mt
+    # Plot emissions_afolu [Mt]
+    for subvertical in emissions_afolu.reset_index().product_long.unique():
+        emissions_afolu[
+            emissions_afolu.index.get_level_values(4).isin([subvertical])
+        ].T.plot(
+            legend=False,
+            title="Emissions, " + subvertical,
+            ylabel="Mt",
+        )
+
+    # endregion
+
+    # Multiply afolu_output by emissions factors to get emissions estimates.
+    # region
+
+    # Calculate emissions mitigated by multiplying adoption by avg mitigtation potential flux for each year. Average mitigation potential flux is unique to each year vintage.
+    emissions_afolu_mitigated = pd.DataFrame(
+        index=afolu_output.index, columns=afolu_output.columns
+    )
+    emissions_afolu_mitigated.reset_index(inplace=True)
+    emissions_afolu_mitigated.unit = emissions_afolu_mitigated.unit.str.replace(
+        "Mha", "tCO2e"
+    ).replace("m3", "tCO2e")
+    emissions_afolu_mitigated.set_index(afolu_output.index.names, inplace=True)
+
+    for year in afolu_output.columns:
+
+        # Find new adoption in year, multiply by flux and a 'baseline' copy of flux
+        emissions_afolu_mitigated_year = (
+            pd.concat([flux, flux.rename(index={scenario: "baseline"}, level=1)])
+            .parallel_apply(
+                lambda x: x
+                * (
+                    afolu_output.loc[
+                        slice(None),
+                        [x.name[1]],
+                        [x.name[2]],
+                        slice(None),
+                        [x.name[3].replace("|Avg mitigation potential flux", "")],
+                    ].loc[:, year]
+                ).squeeze(),
+                axis=1,
+            )
+            .fillna(0)
+        )
+
+        # Update variable and unit indices
+        emissions_afolu_mitigated_year.reset_index(inplace=True)
+        emissions_afolu_mitigated_year.variable = (
+            emissions_afolu_mitigated_year.variable.str.replace(
+                "Avg mitigation potential flux", "Observed adoption"
+            )
+        )
+        emissions_afolu_mitigated_year.unit = (
+            emissions_afolu_mitigated_year.unit.str.replace(
+                "tCO2e/m3/yr", "tCO2e"
+            ).replace("tCO2e/Mha/yr", "tCO2e")
+        )
+        emissions_afolu_mitigated_year.set_index(pyam.IAMC_IDX, inplace=True)
+
+        # Update timerseries to start at 'year'
+        emissions_afolu_mitigated_year.columns = np.arange(
+            year, year + len(flux.columns), 1
+        )
+
+        # Add to cumulative count
+        emissions_afolu_mitigated = emissions_afolu_mitigated_year.fillna(0).add(
+            emissions_afolu_mitigated, fill_value=0
+        )
+
+    # Cut output to data_start_year : proj_end_year
+    emissions_afolu_mitigated = emissions_afolu_mitigated.loc[
+        :, data_start_year:proj_end_year
+    ]
+
+    # Replace unit label with MtCO2e
+    emissions_afolu_mitigated.update(emissions_afolu_mitigated.divide(1e6))
+    emissions_afolu_mitigated.rename(
+        index={"tCO2e": "MtCO2e"},
+        inplace=True,
+    )
 
     # Add missing GWP values to gwp
     # Choose version of GWP values
@@ -239,6 +566,7 @@ def emissions(
         }
     )
 
+    # Convert units from MtCO2e to Mt
     emissions_afolu_mitigated.update(
         emissions_afolu_mitigated[
             (emissions_afolu_mitigated.reset_index().flow_long != "CO2").values
@@ -247,7 +575,38 @@ def emissions(
 
     emissions_afolu_mitigated.rename(index={"MtCO2e": "Mt"}, inplace=True)
 
-    # Combine historical and baseline emissions with NCS estimates
+    # Plot emissions_afolu_mitigated [tCO2]
+    emissions_afolu_mitigated_outputplot = emissions_afolu_mitigated.copy()
+
+    for (
+        scenario
+    ) in emissions_afolu_mitigated_outputplot.reset_index().scenario.unique():
+        for (
+            subvertical
+        ) in emissions_afolu_mitigated_outputplot.reset_index().variable.unique():
+            emissions_afolu_mitigated_outputplot[
+                (
+                    emissions_afolu_mitigated_outputplot.index.get_level_values(3).isin(
+                        [subvertical]
+                    )
+                )
+                & (
+                    emissions_afolu_mitigated_outputplot.index.get_level_values(1).isin(
+                        [scenario]
+                    )
+                )
+            ].T.plot(
+                legend=False,
+                title="AFOLU Adoption, "
+                + subvertical.replace("|Observed adoption", "")
+                + ", "
+                + scenario.capitalize(),
+                ylabel="tCO2 mitigated",
+            )
+
+    # endregion
+
+    # Combine additional emissions sources with emissions mitigated from NCS
     emissions_afolu = pd.concat(
         [
             emissions_afolu,
