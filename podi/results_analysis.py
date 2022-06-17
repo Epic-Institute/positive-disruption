@@ -11,6 +11,7 @@ def results_analysis(
     energy_output,
     afolu_output,
     emissions_output,
+    emissions_output_co2e,
     cdr_output,
     climate_output,
     data_start_year,
@@ -464,15 +465,51 @@ def results_analysis(
                 "product_long",
                 "product_short",
                 "flow_category",
-                "flow_long",
                 "flow_short",
+                "unit",
             ]
         )
+        .sum()
         .subtract(
             emissions_output_co2e[
                 (emissions_output_co2e.reset_index().scenario == scenario).values
             ]
+            .groupby(
+                [
+                    "model",
+                    "scenario",
+                    "region",
+                    "sector",
+                    "product_category",
+                    "product_long",
+                    "product_short",
+                    "flow_category",
+                    "flow_short",
+                    "unit",
+                ]
+            )
+            .sum()
         )
+    )
+
+    # Add flow_long back into index
+    emissions_wedges = emissions_wedges.reset_index()
+    emissions_wedges["flow_long"] = "CO2e"
+
+    emissions_wedges = emissions_wedges.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
     )
 
     # endregion
@@ -487,7 +524,7 @@ def results_analysis(
 
     adoption_output.to_csv("podi/data/adoption_output.csv")
 
-    adoption_output.to_csv("podi/data/adoption_output.csv")
+    emissions_wedges.to_csv("podi/data/emissions_wedges.csv")
 
     # endregion
 

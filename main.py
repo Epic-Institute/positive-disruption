@@ -135,7 +135,7 @@ index = [
         "flow_long",
         "unit"
     ]
-afolu_output = pd.DataFrame(pd.read_csv("podi/data/output/afolu_output.csv")).set_index(index)
+afolu_output = pd.DataFrame(pd.read_csv("podi/data/afolu_output.csv")).set_index(index)
 afolu_output.columns = afolu_output.columns.astype(int)
 
 # endregion
@@ -144,11 +144,11 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = False
+recalc_emissions = True
 # region
 
 if recalc_emissions is True:
-    emissions(scenario, energy_output, emissions_afolu_mitigated, data_start_year, data_end_year, proj_end_year)
+    emissions(scenario, energy_output, afolu_output, data_start_year, data_end_year, proj_end_year)
 
 index = [
     "model",
@@ -303,7 +303,7 @@ recalc_analysis = False
 # region
 
 if recalc_analysis is True:
-    analysis_output = results_analysis(energy_output, afolu_output, emissions_output, cdr_output, climate_output, data_start_year, data_end_year, proj_end_year)
+    results_analysis(energy_output, afolu_output, emissions_output, emissions_output_co2e, cdr_output, climate_output, data_start_year, data_end_year, proj_end_year)
 
 index = [
     "model",
@@ -318,8 +318,14 @@ index = [
     "flow_short",
     "unit"
 ]
-analysis_output = pd.DataFrame(pd.read_csv("podi/data/analysis_output.csv")).set_index(index)
-analysis_output.columns = analysis_output.columns.astype(int)
+pdindex_output = pd.DataFrame(pd.read_csv("podi/data/pdindex_output.csv")).set_index(index)
+pdindex_output.columns = pdindex_output.columns.astype(int)
+
+adoption_output = pd.DataFrame(pd.read_csv("podi/data/adoption_output.csv")).set_index(index)
+adoption_output.columns = adoption_output.columns.astype(int)
+
+emissions_wedges = pd.DataFrame(pd.read_csv("podi/data/emissions_wedges.csv")).set_index(index)
+emissions_wedges.columns = emissions_wedges.columns.astype(int)
 
 # endregion
 
@@ -347,7 +353,7 @@ energy_output_pyam = pyam.IamDataFrame(
 
 # Save as regional-level files
 for output in [
-    (energy_output, "energy_output"), (afolu_output, "afolu_output"), (emissions_afolu_mitigated, "emissions_afolu_mitigated")
+    (energy_output, "energy_output"), (afolu_output, "afolu_output"), (emissions_output, "emissions_output"), (emissions_output_co2e, "emissions_output_co2e"), (emissions_wedges, "emissions_wedges") 
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")

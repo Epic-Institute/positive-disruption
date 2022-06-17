@@ -22,7 +22,7 @@ pandarallel.initialize(nb_workers=4)
 def emissions(
     scenario,
     energy_output,
-    emissions_afolu_mitigated,
+    afolu_output,
     data_start_year,
     data_end_year,
     proj_end_year,
@@ -60,7 +60,7 @@ def emissions(
         )
 
         emissions_energy.index = emissions_energy.index.set_levels(
-            emissions_energy.index.levels[10].str.replace("TJ", "MtCO2"), level=10
+            emissions_energy.index.levels[10].str.replace("TJ", "Mt"), level=10
         )
 
         # Save to CSV file
@@ -142,16 +142,13 @@ def emissions(
             name["Value 3"].isna(), name["Value 2"], name["Value 3"]
         )
 
-        # If Duration 1 is 'NA' or longer than proj_end_year - afolu_historical.columns[0], set to proj_end_year - afolu_historical.columns[0]
+        # If Duration 1 is 'NA' or longer than proj_end_year - afolu_output.columns[0], set to proj_end_year - afolu_output.columns[0]
         name["Duration 1 (Years)"] = np.where(
             (
                 (name["Duration 1 (Years)"].isna())
-                | (
-                    name["Duration 1 (Years)"]
-                    > proj_end_year - afolu_historical.columns[0]
-                )
+                | (name["Duration 1 (Years)"] > proj_end_year - afolu_output.columns[0])
             ),
-            proj_end_year - afolu_historical.columns[0],
+            proj_end_year - afolu_output.columns[0],
             name["Duration 1 (Years)"],
         )
 
@@ -184,19 +181,19 @@ def emissions(
                 name["Value 3"],
                 name["Duration 3 (Years)"],
             ],
-            columns=np.arange(afolu_historical.columns[0], proj_end_year + 1, 1),
+            columns=np.arange(afolu_output.columns[0], proj_end_year + 1, 1),
             dtype=float,
         )
 
         # Define a function that places values in each timeseries for the durations specified, and interpolates
         def rep(x):
             x0 = x
-            x0.loc[afolu_historical.columns[0]] = x.name[5]
-            x0.loc[afolu_historical.columns[0] + x.name[6]] = x.name[7]
+            x0.loc[afolu_output.columns[0]] = x.name[5]
+            x0.loc[afolu_output.columns[0] + x.name[6]] = x.name[7]
             x0.loc[
                 min(
-                    afolu_historical.columns[0] + x.name[6] + x.name[8],
-                    proj_end_year - afolu_historical.columns[0],
+                    afolu_output.columns[0] + x.name[6] + x.name[8],
+                    proj_end_year - afolu_output.columns[0],
                 )
             ] = x.name[9]
             x0.interpolate(axis=0, limit_area="inside", inplace=True)
@@ -448,7 +445,7 @@ def emissions(
     emissions_afolu = emissions_afolu.loc[:, data_start_year:proj_end_year]
 
     # Change unit from kt to Mt
-    emissions_afolu.update(emissions_afolu / 1e3)
+    emissions_afolu.update(emissions_afolu.divide(1e3))
     emissions_afolu = emissions_afolu.rename(index={"kilotonnes": "Mt"})
 
     # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
@@ -484,13 +481,16 @@ def emissions(
 
     # Calculate emissions mitigated by multiplying adoption by avg mitigtation potential flux for each year. Average mitigation potential flux is unique to each year vintage.
     emissions_afolu_mitigated = pd.DataFrame(
-        index=afolu_output.index, columns=afolu_output.columns
+        index=flux.index, columns=afolu_output.columns
     )
     emissions_afolu_mitigated.reset_index(inplace=True)
     emissions_afolu_mitigated.unit = emissions_afolu_mitigated.unit.str.replace(
-        "Mha", "tCO2e"
-    ).replace("m3", "tCO2e")
-    emissions_afolu_mitigated.set_index(afolu_output.index.names, inplace=True)
+        "tCO2e/m3/yr", "tCO2e"
+    ).replace("tCO2e/Mha/yr", "tCO2e")
+    emissions_afolu_mitigated.variable = emissions_afolu_mitigated.variable.str.replace(
+        "\|Avg mitigation potential flux", ""
+    )
+    emissions_afolu_mitigated.set_index(flux.index.names, inplace=True)
 
     for year in afolu_output.columns:
 
@@ -517,7 +517,7 @@ def emissions(
         emissions_afolu_mitigated_year.reset_index(inplace=True)
         emissions_afolu_mitigated_year.variable = (
             emissions_afolu_mitigated_year.variable.str.replace(
-                "Avg mitigation potential flux", "Observed adoption"
+                "\|Avg mitigation potential flux", ""
             )
         )
         emissions_afolu_mitigated_year.unit = (
@@ -548,6 +548,118 @@ def emissions(
         index={"tCO2e": "MtCO2e"},
         inplace=True,
     )
+
+    # Add sector, product_long, flow_category, flow_long labels
+    def addindices(each):
+        each = each.reset_index().set_index(["region"])
+
+        # Add Sector, Product_long, Flow_category, Flow_long indices
+        each["product_long"] = each["variable"]
+
+        def addsector(x):
+            if x["product_long"] in [
+                "Biochar",
+                "Cropland Soil Health",
+                "Nitrogen Fertilizer Management",
+                "Improved Rice",
+                "Optimal Intensity",
+                "Agroforestry",
+            ]:
+                return "Agriculture"
+            elif x["product_long"] in [
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Peat Restoration",
+            ]:
+                return "Forests & Wetlands"
+
+        each["sector"] = each.apply(lambda x: addsector(x), axis=1)
+
+        each["flow_category"] = "Emissions"
+
+        def addgas(x):
+            if x["product_long"] in [
+                "Biochar",
+                "Cropland Soil Health",
+                "Optimal Intensity",
+                "Agroforestry",
+                "Improved Forest Mgmt",
+                "Natural Regeneration",
+                "Avoided Coastal Impacts",
+                "Avoided Forest Conversion",
+                "Avoided Peat Impacts",
+                "Coastal Restoration",
+                "Peat Restoration",
+            ]:
+                return "CO2"
+            if x["product_long"] in [
+                "Improved Rice",
+            ]:
+                return "CH4"
+            if x["product_long"] in [
+                "Improved Rice",
+                "Nitrogen Fertilizer Management",
+            ]:
+                return "N2O"
+
+        each["flow_long"] = each.apply(lambda x: addgas(x), axis=1)
+
+        each = (
+            each.reset_index()
+            .set_index(
+                [
+                    "model",
+                    "scenario",
+                    "region",
+                    "sector",
+                    "product_long",
+                    "flow_category",
+                    "flow_long",
+                    "unit",
+                ]
+            )
+            .drop(columns=["variable"])
+        )
+
+        # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
+
+        each[
+            (
+                (each.reset_index().product_long == "Improved Rice")
+                & (each.reset_index().flow_long == "CH4")
+            ).values
+        ] = (
+            each[
+                (
+                    (each.reset_index().product_long == "Improved Rice")
+                    & (each.reset_index().flow_long == "CH4")
+                ).values
+            ]
+            * 0.58
+        )
+
+        each[
+            (
+                (each.reset_index().product_long == "Improved Rice")
+                & (each.reset_index().flow_long == "N2O")
+            ).values
+        ] = (
+            each[
+                (
+                    (each.reset_index().product_long == "Improved Rice")
+                    & (each.reset_index().flow_long == "N2O")
+                ).values
+            ]
+            * 0.42
+        )
+
+        return each
+
+    emissions_afolu_mitigated = addindices(emissions_afolu_mitigated)
 
     # Add missing GWP values to gwp
     # Choose version of GWP values
@@ -583,10 +695,10 @@ def emissions(
     ) in emissions_afolu_mitigated_outputplot.reset_index().scenario.unique():
         for (
             subvertical
-        ) in emissions_afolu_mitigated_outputplot.reset_index().variable.unique():
+        ) in emissions_afolu_mitigated_outputplot.reset_index().product_long.unique():
             emissions_afolu_mitigated_outputplot[
                 (
-                    emissions_afolu_mitigated_outputplot.index.get_level_values(3).isin(
+                    emissions_afolu_mitigated_outputplot.index.get_level_values(4).isin(
                         [subvertical]
                     )
                 )
@@ -597,8 +709,8 @@ def emissions(
                 )
             ].T.plot(
                 legend=False,
-                title="AFOLU Adoption, "
-                + subvertical.replace("|Observed adoption", "")
+                title="AFOLU Emissions Mitigated, "
+                + subvertical
                 + ", "
                 + scenario.capitalize(),
                 ylabel="tCO2 mitigated",
@@ -1212,9 +1324,9 @@ def emissions(
 
     # endregion
 
-    ##############################################################
-    #  LOAD HISTORICAL EMISSIONS & COMPARE TO MODELED EMISSIONS  #
-    ##############################################################
+    ###########################
+    #  COMBINE ALL EMISSIONS  #
+    ###########################
 
     # region
 
@@ -1222,6 +1334,14 @@ def emissions(
     emissions_output = pd.concat(
         [emissions_energy, emissions_afolu, emissions_additional]
     )
+
+    # endregion
+
+    ##############################################################
+    #  LOAD HISTORICAL EMISSIONS & COMPARE TO MODELED EMISSIONS  #
+    ##############################################################
+
+    # region
 
     # Harmonize modeled emissions projections with observed historical emissions
 
@@ -1265,7 +1385,9 @@ def emissions(
     emissions_historical["unit"] = "MtCO2e"
 
     # Change unit from t to Mt
-    emissions_historical["Tonnes Co2e"] = emissions_historical["Tonnes Co2e"] / 1e6
+    emissions_historical["Tonnes Co2e"] = emissions_historical["Tonnes Co2e"].divide(
+        1e6
+    )
 
     # Change 'sector' index to 'product_long' and 'subsector' to 'flow_long' and 'start' to 'year'
     emissions_historical.rename(
@@ -1466,9 +1588,6 @@ def emissions(
     emissions_output_co2e_new.drop(columns="flow_long", inplace=True)
     emissions_output_co2e_new["flow_long"] = "CO2"
 
-    # Update units from 'MtCO2' to 'Mt'
-    emissions_output_co2e_new = emissions_output_co2e_new.replace("MtCO2", "Mt")
-
     # Add the updated subset back into the original df
     emissions_output_co2e = pd.concat(
         [emissions_output_co2e, emissions_output_co2e_new]
@@ -1529,13 +1648,22 @@ def emissions(
 
     # Calculate error between modeled and observed
     emissions_error = abs(
-        (emissions_historical_compare - emissions_output_co2e_compare)
-        / emissions_historical_compare
+        (
+            emissions_historical_compare
+            - emissions_output_co2e_compare.loc[:, emissions_historical_compare.columns]
+        )
+        / emissions_historical_compare.loc[:, emissions_historical_compare.columns]
     )
 
-    # Plot
-    emissions_error.T.plot(
-        legend=False, title="Error between PD22 and ClimateTRACE emissions", ylabel="%"
+    # Drop observed emissions that are all zero
+    emissions_error.replace([np.inf, -np.inf], np.nan, inplace=True)
+    emissions_error.dropna(how="all", inplace=True)
+
+    # Plot difference in modeled and measured emissions [%]
+    emissions_error.multiply(100).T.plot(
+        legend=False,
+        title="Difference between PD22 and ClimateTRACE emissions",
+        ylabel="%",
     )
     # endregion
 
