@@ -144,7 +144,7 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = True
+recalc_emissions = False
 # region
 
 if recalc_emissions is True:
@@ -176,8 +176,7 @@ emissions_output_co2e.columns = emissions_output_co2e.columns.astype(int)
 #######
 
 recalc_cdr = False
-# region   
-
+# region
 if recalc_cdr is True:
     cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").set_index(
         ["region", "sector", "scenario"]
@@ -259,7 +258,7 @@ index = [
     "flow_short",
     "unit"
 ]
-cdr_output = pd.DataFrame(pd.read_csv("podi/data/cdr_output.csv")).set_index(index)
+cdr_output = pd.DataFrame(0, index=emissions_output.index, columns = emissions_output.columns)
 cdr_output.columns = cdr_output.columns.astype(int)
 
 # endregion
@@ -272,26 +271,10 @@ recalc_climate = False
 # region
 
 if recalc_climate is True:
-    climate_output = climate(emissions_output, emissions_output_co2e, cdr_output, data_start_year, data_end_year, proj_end_year)
+    climate_output = climate(scenario, emissions_output, emissions_output_co2e, cdr_output, data_start_year, data_end_year, proj_end_year)
 
-index = [
-    "model",
-    "scenario",
-    "region",
-    "sector",
-    "product_category",
-    "product_long",
-    "product_short",
-    "flow_category",
-    "flow_long",
-    "flow_short",
-    "unit"
-]
-climate_output = pd.DataFrame(pd.read_csv("podi/data/climate_output.csv")).set_index(index)
+climate_output = pd.DataFrame(pd.read_csv("podi/data/output/climate_output.csv")).set_index(pyam.IAMC_IDX)
 climate_output.columns = climate_output.columns.astype(int)
-
-climate_historical = pd.DataFrame(pd.read_csv("podi/data/climate_historical.csv")).set_index(index)
-climate_historical.columns = climate_historical.columns.astype(int)
 
 # endregion
 
@@ -329,9 +312,39 @@ emissions_wedges.columns = emissions_wedges.columns.astype(int)
 
 # endregion
 
-##################################
-# REFORMAT AND SAVE OUTPUT FILES #
-##################################
+#######################################
+# SAVE OUTPUT FILES FOR DATA EXPLORER #
+#######################################
+
+# region
+
+# Cut data_start_year to 2010
+energy_output = energy_output.loc[:,2010:]
+
+# For energy_output, groupby product_category, except for products in the Electricity and Heat product_category 
+energy_output_temp = energy_output[(energy_output.reset_index().product_category != 'Electricity and Heat').values].reset_index()
+
+energy_output_temp['product_long'] = energy_output_temp['product_category']
+energy_output_temp['product_short'] = energy_output_temp['product_category']
+energy_output_temp.set_index(energy_output.index.names, inplace=True)
+energy_output = pd.concat([energy_output[(energy_output.reset_index().product_category == 'Electricity and Heat').values], energy_output_temp])
+
+# Drop flow_categories 'Supply', 'Transformation processes', 'Energy industry own use and Losses'
+energy_output = energy_output[~(energy_output.reset_index().flow_category.isin(['Supply', 'Transformation Processes', 'Energy industry own use and Losses'])).values]
+
+# Save as regional-level files
+for output in [
+    (energy_output, "energy_output"), (afolu_output, "afolu_output"), (emissions_output, "emissions_output"), (emissions_output_co2e, "emissions_output_co2e"), (emissions_wedges, "emissions_wedges") 
+]:
+    for region in output[0].reset_index().region.unique():
+        output[0][(output[0].reset_index().region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")
+
+
+# endregion
+
+####################
+# REFORMAT TO IAMC #
+####################
 
 # region
 
@@ -350,20 +363,11 @@ energy_output_pyam = pyam.IamDataFrame(
     variable=["sector", "product_short", "flow_short"],
 )
 '''
-
-# Save as regional-level files
-for output in [
-    (energy_output, "energy_output"), (afolu_output, "afolu_output"), (emissions_output, "emissions_output"), (emissions_output_co2e, "emissions_output_co2e"), (emissions_wedges, "emissions_wedges") 
-]:
-    for region in output[0].reset_index().region.unique():
-        output[0][(output[0].reset_index().region == region).values].to_csv('podi/data/output/' + output[1] + "_" + region + ".csv")
-
-
 # endregion
 
-##########
-# CHARTS #
-##########
+#####################
+# DIAGNOSTIC CHARTS #
+#####################
 
 # region
 
@@ -8802,7 +8806,7 @@ if save_figs is True:
 # endregion
 
 #################################
-# GHG ATMOSPHERIC CONCENTRATION #
+# GHG ATMOSPHERIC CONCENTRATION # (OLD)
 #################################
 
 # region
@@ -8844,13 +8848,7 @@ results19 = curve_smooth(
     "quadratic",
     19,
 )
-"""
-results19 = pd.DataFrame(
-    results.loc[
-        "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
-    ].loc[2010:]
-).T
-"""
+
 results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
 
 # CO2
@@ -9118,9 +9116,9 @@ if save_figs is True:
 
 # endregion
 
-#########################################
-# GHG ATMOSPHERIC CONCENTRATION, IN PPM # (V2)
-#########################################
+##############################################
+# GHG ATMOSPHERIC CONCENTRATION, CO2/CH4/N2O # (NEW)
+##############################################
 
 # region
 
@@ -9128,32 +9126,100 @@ data_start_year = data_start_year
 data_end_year = data_end_year
 proj_end_year = proj_end_year
 
-df = climate_output[(climate_output.reset_index().product_long == 'concentration').values]
+df = climate_output[(climate_output.reset_index().variable.str.contains('Concentration')).values].loc['PD22',slice(None),'world']
 
 fig = go.Figure()
 
-fig.add_trace(
-    go.Scatter(
-        name="Historical",
-        line=dict(width=3, color="black"),
-        x=np.arange(data_start_year, data_end_year + 1, 1),
-        y=df.loc[:,data_start_year, data_end_year],
-        fill="none",
-        stackgroup="hist",
-        legendgroup="hist",
+for gas in df.loc['historical'].reset_index().variable.str.replace("Concentration\|","").unique():
+    fig.add_trace(
+        go.Scatter(
+            name="Historical, " + gas,
+            line=dict(width=3),
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=df[((df.reset_index().scenario == 'historical').values) & ((df.reset_index().variable.str.contains(gas)).values)].squeeze(),
+            fill="none",
+            legendgroup= gas,
+        )
     )
-)
 
-for scenario in [climate_output.reset_index().scenario.unique()]:
-    for gas in [climate_output.reset_index().gas.unique()]
+for scenario in df.loc[~(df.reset_index().scenario == 'historical').values].reset_index().scenario.unique():
+    for gas in ['CO2','CH4','N2O']:
         fig.add_trace(
             go.Scatter(
-                name=scenario,
-                line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
-                x=np.arange(data_end_year, proj_end_year + 1, 1),
-                y=df[((df.reset_index().scenario == scenario) & (df.reset_index().gas == gas)).values].loc[:,data_end_year:],
+                name=scenario.capitalize() + ", " + gas,
+                line=dict(width=3, dash=cl["Baseline"][1]),
+                x=np.arange(data_start_year, proj_end_year + 1, 1),
+                y=df[((df.reset_index().scenario == scenario).values) & ((df.reset_index().variable.str.contains(gas)).values)].squeeze(),
                 fill="none",
-                stackgroup=gas,
+                legendgroup= gas,
+            )
+        )
+
+fig.update_layout(
+    legend=dict(orientation="h", yanchor="bottom", y=1.0, x=0.12, font=dict(size=10)),
+    margin_b=0,
+    margin_t=60,
+    margin_l=15,
+    margin_r=15,
+    yaxis=dict(tickmode="linear", tick0=0.5, dtick=0.25)
+)
+
+fig.update_layout(
+    title={
+        "text": "Atmospheric GHG Concentration",
+        "xanchor": "center",
+        "x": 0.5,
+        "y": 0.99,
+    },
+    yaxis={"title": "ppm CO2e"},
+)
+
+if show_figs is True:
+    fig.show()
+if save_figs is True:
+    pio.write_html(
+        fig,
+        file=("./charts/ghgconc-" + "World " + ".html").replace(" ", ""),
+        auto_open=False,
+    )
+
+# endregion
+
+###########################################
+# GHG ATMOSPHERIC CONCENTRATION, ALL GHGs # (NEW)
+###########################################
+
+# region
+
+data_start_year = data_start_year
+data_end_year = data_end_year
+proj_end_year = proj_end_year
+
+df = climate_output[(climate_output.reset_index().variable.str.contains('Concentration')).values].loc['PD22',slice(None),'world']
+
+fig = go.Figure()
+
+for gas in df.loc['historical'].reset_index().variable.str.replace("Concentration\|","").unique():
+    fig.add_trace(
+        go.Scatter(
+            name="Historical, " + gas,
+            line=dict(width=3),
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=df[((df.reset_index().scenario == 'historical').values) & ((df.reset_index().variable.str.contains(gas)).values)].squeeze(),
+            fill="none",
+            legendgroup=gas,
+        )
+    )
+
+for scenario in df.reset_index().scenario.unique():
+    for gas in df.reset_index().variable.str.replace("Concentration\|","").unique():
+        fig.add_trace(
+            go.Scatter(
+                name=scenario.capitalize() + ", " + gas,
+                line=dict(width=3, dash=cl["Baseline"][1]),
+                x=np.arange(data_end_year, proj_end_year + 1, 1),
+                y=df[((df.reset_index().scenario == scenario).values) & ((df.reset_index().variable.str.contains(gas)).values)].squeeze(),
+                fill="none",
                 legendgroup=gas,
             )
         )
@@ -9166,15 +9232,6 @@ fig.update_layout(
         "y": 0.99,
     },
     yaxis={"title": "ppm CO2e"},
-)
-
-fig.update_layout(
-    legend=dict(orientation="h", yanchor="bottom", y=1.01, x=0.12, font=dict(size=10)),
-    margin_b=0,
-    margin_t=60,
-    margin_l=15,
-    margin_r=15,
-    yaxis=dict(tickmode="linear", tick0=350, dtick=25),
 )
 
 if show_figs is True:

@@ -26,13 +26,14 @@ def results_analysis(
     # region
 
     # Percent of electric power that is renewables
+
     electricity = (
         energy_output.loc[
-            model,
-            scenario,
-            region,
+            slice(None),
+            slice(None),
+            slice(None),
             ["Electric Power"],
-            product_category,
+            slice(None),
             slice(None),
             [
                 "GEOTHERM",
@@ -47,40 +48,23 @@ def results_analysis(
             ],
             ["Electricity output"],
         ]
-        .loc[:, start_year:end_year]
-        .groupby(groupby)
+        .groupby(["model", "scenario", "region", "sector"])
         .sum()
         .divide(
             energy_output.loc[
-                model,
-                scenario,
-                region,
+                slice(None),
+                slice(None),
+                slice(None),
                 ["Electric Power"],
-                product_category,
+                slice(None),
                 slice(None),
                 slice(None),
                 ["Electricity output"],
             ]
-            .loc[:, start_year:end_year]
-            .groupby(groupby)
+            .groupby(["model", "scenario", "region", "sector"])
             .sum()
-            .sum(0)
         )
         * 100
-    ).reindex(
-        axis="index",
-        level=2,
-        labels=[
-            "Nuclear",
-            "Hydro",
-            "Onshore wind energy",
-            "Offshore wind energy",
-            "Utility solar photovoltaics",
-            "Rooftop solar photovoltaics",
-            "Solar thermal",
-            "Tide, wave and ocean",
-            "Geothermal",
-        ],
     )
 
     # Percent of transport energy that is electric or nonelectric renewables

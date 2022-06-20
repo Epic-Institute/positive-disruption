@@ -17,6 +17,7 @@ import pyam
 
 
 def climate(
+    scenario,
     emissions_output,
     emissions_output_co2e,
     cdr_output,
@@ -512,17 +513,6 @@ def climate(
         .set_index("year")
     )
 
-    # Reformat to IAMC format
-    climate_historical_concentration = climate_historical_concentration.T
-    climate_historical_concentration["model"] = "PD22"
-    climate_historical_concentration["scenario"] = scenario
-    climate_historical_concentration["region"] = "world"
-    climate_historical_concentration["variable"] = "Concentration"
-    climate_historical_concentration["unit"] = "PPM"
-    climate_historical_concentration.set_index(
-        pyam.IAMC_IDX, variable=[variable, climate_historical_concentration.index]
-    )
-
     # Load radiative forcing data from external source
     climate_historical_forcing = pd.DataFrame(
         pd.read_csv("podi/data/external/radiative_forcing_historical.csv")
@@ -598,6 +588,68 @@ def climate(
 
     # endregion
 
+    ##############
+    #  REFORMAT  #
+    ##############
+
+    # region
+
+    climate_historical_concentration = climate_historical_concentration.T
+    climate_historical_concentration["model"] = "PD22"
+    climate_historical_concentration["scenario"] = "historical"
+    climate_historical_concentration["region"] = "world"
+    climate_historical_concentration["variable"] = (
+        "Concentration|" + climate_historical_concentration.index
+    )
+    climate_historical_concentration["unit"] = "PPM"
+    climate_historical_concentration.set_index(pyam.IAMC_IDX, inplace=True)
+
+    climate_historical_forcing = climate_historical_forcing.T
+    climate_historical_forcing["model"] = "PD22"
+    climate_historical_forcing["scenario"] = "historical"
+    climate_historical_forcing["region"] = "world"
+    climate_historical_forcing["variable"] = "Radiative forcing"
+    climate_historical_forcing["unit"] = "W/m2"
+    climate_historical_forcing.set_index(pyam.IAMC_IDX, inplace=True)
+
+    climate_historical_temperature = climate_historical_temperature.T
+    climate_historical_temperature["model"] = "PD22"
+    climate_historical_temperature["scenario"] = "historical"
+    climate_historical_temperature["region"] = "world"
+    climate_historical_temperature["variable"] = "Temperature change"
+    climate_historical_temperature["unit"] = "F"
+    climate_historical_temperature.set_index(pyam.IAMC_IDX, inplace=True)
+
+    climate_output_concentration = climate_output_concentration.T
+    climate_output_concentration["model"] = "PD22"
+    climate_output_concentration["scenario"] = scenario
+    climate_output_concentration["region"] = "world"
+    climate_output_concentration["variable"] = (
+        "Concentration|" + climate_output_concentration.index
+    )
+    climate_output_concentration["unit"] = "PPM"
+    climate_output_concentration.set_index(pyam.IAMC_IDX, inplace=True)
+
+    climate_output_forcing = climate_output_forcing.T
+    climate_output_forcing["model"] = "PD22"
+    climate_output_forcing["scenario"] = scenario
+    climate_output_forcing["region"] = "world"
+    climate_output_forcing["variable"] = (
+        "Radiative forcing|" + climate_output_forcing.index
+    )
+    climate_output_forcing["unit"] = "W/m2"
+    climate_output_forcing.set_index(pyam.IAMC_IDX, inplace=True)
+
+    climate_output_temperature = climate_output_temperature.T
+    climate_output_temperature["model"] = "PD22"
+    climate_output_temperature["scenario"] = scenario
+    climate_output_temperature["region"] = "world"
+    climate_output_temperature["variable"] = climate_output_temperature.index
+    climate_output_temperature["unit"] = "F"
+    climate_output_temperature.set_index(pyam.IAMC_IDX, inplace=True)
+
+    # endregion
+
     #################
     #  SAVE OUTPUT  #
     #################
@@ -606,19 +658,14 @@ def climate(
 
     pd.concat(
         [
+            climate_historical_concentration,
+            climate_historical_forcing,
+            climate_historical_temperature,
             climate_output_concentration,
             climate_output_forcing,
             climate_output_temperature,
         ]
-    ).to_csv("podi/data/climate_output.csv")
-
-    pd.concat(
-        [
-            climate_historical_concentration,
-            climate_historical_forcing,
-            climate_historical_temperature,
-        ]
-    ).to_csv("podi/data/climate_historical.csv")
+    ).to_csv("podi/data/output/climate_output.csv")
 
     # endregion
 

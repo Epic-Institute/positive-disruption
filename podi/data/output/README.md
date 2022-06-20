@@ -9,3 +9,5 @@ emissions_output_co2e: Same as emissions_output, but all values have been conver
 emissions_wedges: emissions_output_co2e 'baseline' results subtracted from emissions_output_co2e 'pathway' results. This represents the difference in emissions for each region/product/flow.
 
 energy_ouput: energy results, in units TJ
+
+climate_output: Global GHG concentration, Radiative forcing, and Temperature change for 'historical' scenario (from external sources) and 'pathway' scenario
