@@ -3,7 +3,7 @@ layout: default
 title: V5:Agriculture
 ---
 
-### Historical Adoption
+### Historical Adoption [Mha, m3]
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-Agroforestry.html" height='500' width='150%'></iframe>
@@ -30,7 +30,34 @@ title: V5:Agriculture
 
 <br/><br/>
 
-### Max Extent
+### Historical Adoption [% of Max Extent]
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-Agroforestry.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-Biochar.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-CroplandSoilHealth.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-ImprovedRice.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-OptimalIntensity.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+### Max Extent [Mha, m3]
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-Agroforestry.html" height='500' width='150%'></iframe>
@@ -57,7 +84,7 @@ title: V5:Agriculture
 
 <br/><br/>
 
-### Average Mitigation Potential Flux
+### Average Mitigation Potential Flux [tCO2e/Mha/yr, tCO2e/m3/yr]
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Agroforestry.html" height='500' width='150%'></iframe>

@@ -3,7 +3,7 @@ layout: default
 title: V6:Forests/Wetlands
 ---
 
-### Historical Adoption
+### Historical Adoption [Mha, m3]
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-CoastalRestoration.html" height='500' width='150%'></iframe>
@@ -34,7 +34,38 @@ title: V6:Forests/Wetlands
 
 <br/><br/>
 
-### Max Extent
+### Historical Adoption [% of Max Extent]
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-CoastalRestoration.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-ImprovedForestMgmt.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-NaturalRegeneration.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-PeatRestoration.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-AvoidedCoastalImpacts.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-AvoidedForestConversion.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-AvoidedPeatImpacts.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+### Max Extent [Mha, m3]
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-CoastalRestoration.html" height='500' width='150%'></iframe>
@@ -65,7 +96,7 @@ title: V6:Forests/Wetlands
 
 <br/><br/>
 
-### Average Mitigation Potential Flux
+### Average Mitigation Potential Flux [tCO2e/Mha/yr, tCO2e/m3/yr]
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-CoastalRestoration.html" height='500' width='150%'></iframe>
