@@ -113,9 +113,12 @@ index = [
     "scenario",
     "region",
     "sector",
+    "product_category",
     "product_long",
+    "product_short",
     "flow_category",
     "flow_long",
+    "flow_short",
     "unit",
 ]
 afolu_output = pd.DataFrame(pd.read_csv("podi/data/afolu_output.csv")).set_index(index)

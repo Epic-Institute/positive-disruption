@@ -803,17 +803,21 @@ def results_analysis(
                     .replace("Domestic navigation", "Shipping")
                     .replace("Domestic aviation", "Aviation")
                     .replace("Transport not elsewhere specified", "Other"),
-                    line=dict(width=1, 
-                    x=fig2[
-                        (fig2["sector"] == sector) & (fig2["flow_long"] == flow_long)
-                    ]["year"],
-                    y=fig2[
-                        (fig2["sector"] == sector) & (fig2["flow_long"] == flow_long)
-                    ]["% Adoption"],
-                    fill="tonexty",
-                    stackgroup="two",
-                    legendgroup=str(flow_long) + ", ",
-                    showlegend=True,
+                    line=dict(
+                        width=1,
+                        x=fig2[
+                            (fig2["sector"] == sector)
+                            & (fig2["flow_long"] == flow_long)
+                        ]["year"],
+                        y=fig2[
+                            (fig2["sector"] == sector)
+                            & (fig2["flow_long"] == flow_long)
+                        ]["% Adoption"],
+                        fill="tonexty",
+                        stackgroup="two",
+                        legendgroup=str(flow_long) + ", ",
+                        showlegend=True,
+                    ),
                 )
             )
 
@@ -1802,17 +1806,21 @@ def results_analysis(
                     .replace("Domestic navigation", "Shipping")
                     .replace("Domestic aviation", "Aviation")
                     .replace("Transport not elsewhere specified", "Other"),
-                    line=dict(width=1, 
-                    x=fig2[
-                        (fig2["sector"] == sector) & (fig2["flow_long"] == flow_long)
-                    ]["year"],
-                    y=fig2[
-                        (fig2["sector"] == sector) & (fig2["flow_long"] == flow_long)
-                    ]["% Adoption"],
-                    fill="tonexty",
-                    stackgroup="two",
-                    legendgroup=str(flow_long) + ", ",
-                    showlegend=True,
+                    line=dict(
+                        width=1,
+                        x=fig2[
+                            (fig2["sector"] == sector)
+                            & (fig2["flow_long"] == flow_long)
+                        ]["year"],
+                        y=fig2[
+                            (fig2["sector"] == sector)
+                            & (fig2["flow_long"] == flow_long)
+                        ]["% Adoption"],
+                        fill="tonexty",
+                        stackgroup="two",
+                        legendgroup=str(flow_long) + ", ",
+                        showlegend=True,
+                    ),
                 )
             )
 
@@ -3571,7 +3579,7 @@ def results_analysis(
                 go.Scatter(
                     name=subvertical,
                     line=dict(
-                        width=1,,
+                        width=1,
                     ),
                     x=fig2[
                         (fig2["sector"] == vertical)
@@ -5218,7 +5226,9 @@ def results_analysis(
                     type="line",
                     x0=(
                         pd.Series(
-                            em_baseline.groupby("region").sum().loc[region_list[i]][year]
+                            em_baseline.groupby("region")
+                            .sum()
+                            .loc[region_list[i]][year]
                             / 1e3
                             - ndcs[i][1][j]
                         ).values[0]
@@ -5226,7 +5236,9 @@ def results_analysis(
                     y0=-0.5,
                     x1=(
                         pd.Series(
-                            em_baseline.groupby("region").sum().loc[region_list[i]][year]
+                            em_baseline.groupby("region")
+                            .sum()
+                            .loc[region_list[i]][year]
                             / 1e3
                             - ndcs[i][1][j]
                         ).values[0]
@@ -5299,7 +5311,8 @@ def results_analysis(
                         ].values.sum()
                         / 1e3
                     ) / (
-                        em_baseline.groupby("region").sum().loc[region_list[i]][year] / 1e3
+                        em_baseline.groupby("region").sum().loc[region_list[i]][year]
+                        / 1e3
                         - ndcs[i][1][j]
                     )
 
@@ -5377,7 +5390,9 @@ def results_analysis(
                     + "  /  "
                     + str(
                         (
-                            em_baseline.groupby("region").sum().loc[region_list[i]][year]
+                            em_baseline.groupby("region")
+                            .sum()
+                            .loc[region_list[i]][year]
                             / 1e3
                             - ipcc[i][1][j]
                         ).round(decimals=2)
@@ -5399,7 +5414,10 @@ def results_analysis(
                 )
 
             figure.update_layout(
-                title="Climate Mitigation Potential, " + str(year) + ", " + region_list[i],
+                title="Climate Mitigation Potential, "
+                + str(year)
+                + ", "
+                + region_list[i],
                 title_x=0.5,
                 title_y=0.95,
                 xaxis={"title": "GtCO2e mitigated in " + str(year)},
@@ -5440,7 +5458,10 @@ def results_analysis(
     # region
 
     bar_emissions_goal = [
-        ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
+        (
+            "of 50% reduction in the year 2030.",
+            "of net-zero emissions in the year 2050.",
+        ),
         ("x",),
         (
             "determined through linear extrapolation using the U.S’s 2005 <br>emissions and the NDC set in 2015, which set an emissions goal for 2025.",
@@ -5451,7 +5472,10 @@ def results_analysis(
             "set in Brazil’s 2015 NDC.",
             "determined through linear extrapolation using Brazil’s 2025 and <br>2030 emissions goals set in their 2015 NDC.",
         ),
-        ("of 50% reduction in the year 2030.", "of net-zero emissions in the year 2050."),
+        (
+            "of 50% reduction in the year 2030.",
+            "of net-zero emissions in the year 2050.",
+        ),
         ("x",),
         (
             "set in South Africa’s 2015 NDC.",
@@ -5508,11 +5532,17 @@ def results_analysis(
             region_list[i], "Electricity", slice(None)
         ].sum()
 
-        em_mit_transport = em_mitigated.loc[region_list[i], "Transport", slice(None)].sum()
+        em_mit_transport = em_mitigated.loc[
+            region_list[i], "Transport", slice(None)
+        ].sum()
 
-        em_mit_buildings = em_mitigated.loc[region_list[i], "Buildings", slice(None)].sum()
+        em_mit_buildings = em_mitigated.loc[
+            region_list[i], "Buildings", slice(None)
+        ].sum()
 
-        em_mit_industry = em_mitigated.loc[region_list[i], "Industry", slice(None)].sum()
+        em_mit_industry = em_mitigated.loc[
+            region_list[i], "Industry", slice(None)
+        ].sum()
 
         em_mit_ra = em_mitigated.loc[
             region_list[i], ["Agriculture"], slice(None), slice(None)
@@ -5546,7 +5576,13 @@ def results_analysis(
             pd.Series(
                 em_baseline.groupby("region").sum().loc[region_list[i]]
                 - em_mit.loc[
-                    ["V1: Electricity", "V2: Transport", "V3: Buildings", "V4: Industry"], :
+                    [
+                        "V1: Electricity",
+                        "V2: Transport",
+                        "V3: Buildings",
+                        "V4: Industry",
+                    ],
+                    :,
                 ].sum()
             )
             .replace(nan, 0)
@@ -5650,7 +5686,13 @@ def results_analysis(
         pio.write_html(
             figure,
             file=(
-                "./charts/ncsbar-" + "pathway" + "-" + str(year) + "-" + "World" + ".html"
+                "./charts/ncsbar-"
+                + "pathway"
+                + "-"
+                + str(year)
+                + "-"
+                + "World"
+                + ".html"
             ).replace(" ", ""),
             auto_open=False,
         )
@@ -5678,7 +5720,9 @@ def results_analysis(
 
     for scen in ["pathway"]:
         cdr_i, cdr_cost_i, cdr_energy_i = cdr_mix(
-            cdr_pathway.loc["World ", "Carbon Dioxide Removal", scen].loc[2020:].to_list(),
+            cdr_pathway.loc["World ", "Carbon Dioxide Removal", scen]
+            .loc[2020:]
+            .to_list(),
             grid_em_def,
             heat_em_def,
             transport_em_def,
@@ -5693,7 +5737,9 @@ def results_analysis(
 
     costs.columns = np.arange(2020, 2101, 1)
     costs = (curve_smooth(-costs, "quadratic", 7)).clip(lower=0) / 1e6
-    costs.rename(index={"pathway": "DAU21", "dauffi": "V4", "daupl": "PL"}, inplace=True)
+    costs.rename(
+        index={"pathway": "DAU21", "dauffi": "V4", "daupl": "PL"}, inplace=True
+    )
     costs.index.name = "scenario"
 
     cdr_costs = costs
@@ -5711,7 +5757,6 @@ def results_analysis(
     costs_rafw = pd.Series(
         [0, 0, 0, 0, 0, 55, 55, 22, 30, 5, 30, 55, 55, 22, 24, 22, 55, 0, 30, 55, 36]
     )
-
 
     afolu_em_mit_dau21 = (
         (
@@ -5775,12 +5820,20 @@ def results_analysis(
         (
             (
                 afolu_em1.loc[
-                    "World ", ["Forests & Wetlands"], slice(None), slice(None), "baseline"
+                    "World ",
+                    ["Forests & Wetlands"],
+                    slice(None),
+                    slice(None),
+                    "baseline",
                 ]
                 .loc[:, 2020:]
                 .droplevel("scenario")
                 - afolu_em1.loc[
-                    "World ", ["Forests & Wetlands"], slice(None), slice(None), "pathway"
+                    "World ",
+                    ["Forests & Wetlands"],
+                    slice(None),
+                    slice(None),
+                    "pathway",
                 ]
                 .loc[:, 2020:]
                 .droplevel("scenario")
@@ -5813,12 +5866,20 @@ def results_analysis(
         (
             (
                 afolu_em.loc[
-                    "World ", ["Forests & Wetlands"], slice(None), slice(None), "baseline"
+                    "World ",
+                    ["Forests & Wetlands"],
+                    slice(None),
+                    slice(None),
+                    "baseline",
                 ]
                 .loc[:, 2020:]
                 .droplevel("scenario")
                 - afolu_em.loc[
-                    "World ", ["Forests & Wetlands"], slice(None), slice(None), "pathway"
+                    "World ",
+                    ["Forests & Wetlands"],
+                    slice(None),
+                    slice(None),
+                    "pathway",
                 ]
                 .loc[:, 2020:]
                 .droplevel("scenario")
@@ -5902,7 +5963,9 @@ def results_analysis(
 
     costs = cdr_costs.append(afolu_costs).groupby("scenario").sum()
 
-    cdr_costs = pd.DataFrame(pd.read_csv("cdr costs line28228.csv")).set_index("scenario")
+    cdr_costs = pd.DataFrame(pd.read_csv("cdr costs line28228.csv")).set_index(
+        "scenario"
+    )
 
     afolu_costs = pd.DataFrame(pd.read_csv("afolu costs line28228.csv")).set_index(
         "scenario"
@@ -5964,7 +6027,9 @@ def results_analysis(
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)
+        ),
         margin_b=0,
         margin_t=70,
         margin_l=15,
@@ -6027,7 +6092,9 @@ def results_analysis(
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)
+        ),
         margin_b=0,
         margin_t=70,
         margin_l=15,
@@ -6094,7 +6161,9 @@ def results_analysis(
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)
+        ),
         margin_b=0,
         margin_t=70,
         margin_l=15,
@@ -6157,7 +6226,9 @@ def results_analysis(
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)
+        ),
         margin_b=0,
         margin_t=70,
         margin_l=15,
@@ -6222,7 +6293,9 @@ def results_analysis(
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)
+        ),
         margin_b=0,
         margin_t=70,
         margin_l=15,
@@ -6285,7 +6358,9 @@ def results_analysis(
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.05, x=0.2, font=dict(size=10)
+        ),
         margin_b=0,
         margin_t=70,
         margin_l=15,
@@ -6348,7 +6423,9 @@ def results_analysis(
     )
 
     fig.update_layout(
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0.3, font=dict(size=10)),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.05, x=0.3, font=dict(size=10)
+        ),
         margin_b=0,
         margin_t=70,
         margin_l=15,
