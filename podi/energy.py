@@ -11,6 +11,8 @@ import pyam
 
 pandarallel.initialize(nb_workers=4)
 
+show_figs = False
+
 # endregion
 
 
@@ -663,13 +665,846 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         energy_historical.index.get_level_values(9).isin(["AVBUNK", "MARBUNK"])
     ].abs()
 
+    # Plot energy_historical
+    if show_figs is True:
+        ###################
+        # ENERGY BALANCES #
+        ###################
+
+        # region
+
+        region = slice(None)
+        year = data_start_year
+        df = energy_historical
+
+        # Filter for region and year
+        energy_balance = (
+            df.loc[slice(None), slice(None), region]
+            .loc[:, [year]]
+            .groupby(
+                [
+                    "sector",
+                    "product_category",
+                    "product_long",
+                    "flow_category",
+                    "flow_long",
+                ]
+            )
+            .sum()
+        )
+
+        # Create energy balance table structure
+        energy_balance = (
+            energy_balance.groupby(
+                ["product_category", "product_long", "flow_category", "flow_long"]
+            )
+            .sum()
+            .reset_index()
+            .pivot(
+                index=["flow_category", "flow_long"],
+                columns=["product_category", "product_long"],
+                values=start_year,
+            )
+            .fillna(0)
+            .reindex(
+                axis="index",
+                level=0,
+                labels=[
+                    "Supply",
+                    "Transformation processes",
+                    "Energy industry own use and Losses",
+                    "Final consumption",
+                ],
+            )
+            .reindex(
+                axis="columns",
+                level=0,
+                labels=[
+                    "Coal",
+                    "Crude, NGL, refinery feedstocks",
+                    "Oil products",
+                    "Natural gas",
+                    "Biofuels and Waste",
+                    "Electricity and Heat",
+                ],
+            )
+            .astype(int)
+        )
+
+        # Create Product categories (columns)
+        energy_balance = pd.concat(
+            [
+                energy_balance.groupby("product_category", axis="columns")
+                .sum()[
+                    [
+                        "Coal",
+                        "Crude, NGL, refinery feedstocks",
+                        "Oil products",
+                        "Natural gas",
+                        "Biofuels and Waste",
+                    ]
+                ]
+                .rename(columns={"Crude, NGL, refinery feedstocks": "Crude oil"}),
+                energy_balance.loc[:, "Electricity and Heat"].loc[
+                    :,
+                    [
+                        "Nuclear",
+                        "Hydro",
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                    ],
+                ],
+                energy_balance.loc[:, "Electricity and Heat"]
+                .drop(
+                    [
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                        "Nuclear",
+                        "Hydro",
+                    ],
+                    1,
+                )
+                .sum(axis=1)
+                .to_frame()
+                .rename(columns={0: "Wind, solar, etc."}),
+            ],
+            axis=1,
+        ).reindex(
+            axis="columns",
+            labels=[
+                "Coal",
+                "Crude oil",
+                "Oil products",
+                "Natural gas",
+                "Nuclear",
+                "Hydro",
+                "Wind, solar, etc.",
+                "Biofuels and Waste",
+                "Electricity",
+                "Heat – High Temperature",
+                "Heat – Low Temperature",
+            ],
+        )
+
+        energy_balance = pd.concat(
+            [
+                energy_balance,
+                pd.DataFrame(energy_balance.sum(axis=1)).rename(columns={0: "Total"}),
+            ],
+            axis=1,
+        )
+
+        # Create Flow categories (rows)
+        bunkers = (
+            energy_balance.loc["Supply", :]
+            .loc[
+                energy_balance.loc["Supply", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "International marine bunkers",
+                        "International aviation bunkers",
+                    ]
+                ),
+                :,
+            ]
+            .iloc[::-1]
+        )
+
+        electricity_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer electricity plants",
+                        "Main activity producer electricity plants",
+                        "Chemical heat for electricity production",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Electricity plants"})
+        )
+
+        chp_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Autoproducer CHP", "Main activity producer CHP plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "CHP plants"})
+        )
+
+        heat_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer heat plants",
+                        "Main activity producer heat plants",
+                        "Electric boilers",
+                        "Heat pumps",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Heat plants"})
+        )
+
+        gas_works = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas works", "For blended natural gas"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Gas works"})
+        )
+        gas_works["Natural gas"] = gas_works["Natural gas"] * 0.5
+        gas_works["Total"] = gas_works.loc[:, ["Coal", "Natural gas"]].sum(1)
+
+        oil_refineries = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Oil refineries"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Oil refineries"})
+        )
+
+        coal_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Blast furnaces",
+                        "Coke ovens",
+                        "Patent fuel plants",
+                        "BKB/peat briquette plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Coal transformation"})
+        )
+
+        liquifaction_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas-to-liquids (GTL) plants", "Coal liquefaction plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Liquifaction plants"})
+        )
+
+        other_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-specified (transformation)",
+                        "Charcoal production plants",
+                        "Petrochemical plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Other transformation"})
+        )
+
+        own_use = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Energy industry own use",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Energy industry own use"})
+        )
+
+        losses = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(["Losses"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Losses"})
+        )
+
+        industry = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Chemical and petrochemical",
+                        "Construction",
+                        "Food and tobacco",
+                        "Industry not elsewhere specified",
+                        "Iron and steel",
+                        "Machinery",
+                        "Mining and quarrying",
+                        "Non-ferrous metals",
+                        "Non-metallic minerals",
+                        "Paper, pulp, and print",
+                        "Textile and leather",
+                        "Transport equipment",
+                        "Wood and wood products",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Industry"})
+        )
+
+        transport = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Domestic aviation",
+                        "Domestic navigation",
+                        "Pipeline transport",
+                        "Rail",
+                        "Road",
+                        "Transport not elsewhere specified",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Transport"})
+        )
+
+        residential = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Residential"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Residential"})
+        )
+
+        commercial = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Commercial and public services"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Commercial and public services"})
+        )
+
+        agriculture = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Agriculture/forestry"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Agriculture / forestry"})
+        )
+
+        fishing = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Fishing"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Fishing"})
+        )
+
+        nonspecified = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Final consumption not elsewhere specified"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-specified"})
+        )
+
+        nonenergyuse = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-energy use in other",
+                        "Non-energy use in transport",
+                        "Non-energy use industry/transformation/energy",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-energy use"})
+        )
+
+        energy_balance = pd.concat(
+            [
+                bunkers,
+                electricity_plants,
+                chp_plants,
+                heat_plants,
+                gas_works,
+                oil_refineries,
+                coal_transformation,
+                liquifaction_plants,
+                other_transformation,
+                own_use,
+                losses,
+                industry,
+                transport,
+                residential,
+                commercial,
+                agriculture,
+                fishing,
+                nonspecified,
+                nonenergyuse,
+            ]
+        )
+
+        energy_balance.astype(int)
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SOURCE #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        df = energy_historical
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "product_category"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        end_year = data_end_year
+        df = energy_historical
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(product_category).replace(
+                    "slice(None, None, None)", "All Sources"
+                )
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # ELECTRICITY CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        start_year = data_start_year
+        df = energy_historical
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = "Electricity"
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit_val[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ####################################
+        # ELECTRICITY GENERATION BY SOURCE #
+        ####################################
+
+        # region
+
+        # Breakdown 'Electricity and Heat' product_category
+
+        # region
+
+        energy_historical_plot = energy_historical[
+            (
+                energy_historical.reset_index().product_category
+                == "Electricity and Heat"
+            ).values
+        ].reset_index()
+
+        energy_historical_plot["product_category"] = energy_historical_plot[
+            "product_long"
+        ]
+
+        energy_historical_plot.set_index(energy_historical.index.names, inplace=True)
+
+        # endregion
+
+        start_year = data_start_year
+        df = pd.concat(
+            [
+                energy_historical[
+                    ~(
+                        energy_historical.reset_index().product_category
+                        == "Electricity and Heat"
+                    ).values
+                ],
+                energy_historical_plot,
+            ]
+        )
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Electricity output"]
+        groupby = "product_category"
+
+        fig = (
+            df.loc[
+                model,
+                scenario,
+                region,
+                sector,
+                product_category,
+                slice(None),
+                slice(None),
+                flow_category,
+                slice(None),
+                slice(None),
+                slice(None),
+            ]
+            .groupby([groupby])
+            .sum()
+        ).loc[:, start_year:] * unit_val[1]
+
+        fig = fig[fig.sum(axis=1) != 0]
+        fig = fig.T
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Generation, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
     # endregion
 
     #############################
     #  PROJECT BASELINE ENERGY  #
     #############################
 
-    recalc_energy_baseline = True
+    recalc_energy_baseline = False
     # region
 
     if recalc_energy_baseline == True:
@@ -759,6 +1594,836 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     ).set_index(index)
     energy_baseline.columns = energy_baseline.columns.astype(int)
 
+    # Plot energy_baseline
+    if show_figs is True:
+        ###################
+        # ENERGY BALANCES #
+        ###################
+
+        # region
+
+        region = slice(None)
+        year = proj_end_year
+        df = energy_baseline
+
+        # Filter for region and year
+        energy_balance = (
+            df.loc[slice(None), slice(None), region]
+            .loc[:, [year]]
+            .groupby(
+                [
+                    "sector",
+                    "product_category",
+                    "product_long",
+                    "flow_category",
+                    "flow_long",
+                ]
+            )
+            .sum()
+        )
+
+        # Create energy balance table structure
+        energy_balance = (
+            energy_balance.groupby(
+                ["product_category", "product_long", "flow_category", "flow_long"]
+            )
+            .sum()
+            .reset_index()
+            .pivot(
+                index=["flow_category", "flow_long"],
+                columns=["product_category", "product_long"],
+                values=year,
+            )
+            .fillna(0)
+            .reindex(
+                axis="index",
+                level=0,
+                labels=[
+                    "Supply",
+                    "Transformation processes",
+                    "Energy industry own use and Losses",
+                    "Final consumption",
+                ],
+            )
+            .reindex(
+                axis="columns",
+                level=0,
+                labels=[
+                    "Coal",
+                    "Crude, NGL, refinery feedstocks",
+                    "Oil products",
+                    "Natural gas",
+                    "Biofuels and Waste",
+                    "Electricity and Heat",
+                ],
+            )
+            .astype(int)
+        )
+
+        # Create Product categories (columns)
+        energy_balance = pd.concat(
+            [
+                energy_balance.groupby("product_category", axis="columns")
+                .sum()[
+                    [
+                        "Coal",
+                        "Crude, NGL, refinery feedstocks",
+                        "Oil products",
+                        "Natural gas",
+                        "Biofuels and Waste",
+                    ]
+                ]
+                .rename(columns={"Crude, NGL, refinery feedstocks": "Crude oil"}),
+                energy_balance.loc[:, "Electricity and Heat"].loc[
+                    :,
+                    [
+                        "Nuclear",
+                        "Hydro",
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                    ],
+                ],
+                energy_balance.loc[:, "Electricity and Heat"]
+                .drop(
+                    [
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                        "Nuclear",
+                        "Hydro",
+                    ],
+                    1,
+                )
+                .sum(axis=1)
+                .to_frame()
+                .rename(columns={0: "Wind, solar, etc."}),
+            ],
+            axis=1,
+        ).reindex(
+            axis="columns",
+            labels=[
+                "Coal",
+                "Crude oil",
+                "Oil products",
+                "Natural gas",
+                "Nuclear",
+                "Hydro",
+                "Wind, solar, etc.",
+                "Biofuels and Waste",
+                "Electricity",
+                "Heat – High Temperature",
+                "Heat – Low Temperature",
+            ],
+        )
+
+        energy_balance = pd.concat(
+            [
+                energy_balance,
+                pd.DataFrame(energy_balance.sum(axis=1)).rename(columns={0: "Total"}),
+            ],
+            axis=1,
+        )
+
+        # Create Flow categories (rows)
+        bunkers = (
+            energy_balance.loc["Supply", :]
+            .loc[
+                energy_balance.loc["Supply", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "International marine bunkers",
+                        "International aviation bunkers",
+                    ]
+                ),
+                :,
+            ]
+            .iloc[::-1]
+        )
+
+        electricity_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer electricity plants",
+                        "Main activity producer electricity plants",
+                        "Chemical heat for electricity production",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Electricity plants"})
+        )
+
+        chp_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Autoproducer CHP", "Main activity producer CHP plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "CHP plants"})
+        )
+
+        heat_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer heat plants",
+                        "Main activity producer heat plants",
+                        "Electric boilers",
+                        "Heat pumps",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Heat plants"})
+        )
+
+        gas_works = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas works", "For blended natural gas"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Gas works"})
+        )
+        gas_works["Natural gas"] = gas_works["Natural gas"] * 0.5
+        gas_works["Total"] = gas_works.loc[:, ["Coal", "Natural gas"]].sum(1)
+
+        oil_refineries = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Oil refineries"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Oil refineries"})
+        )
+
+        coal_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Blast furnaces",
+                        "Coke ovens",
+                        "Patent fuel plants",
+                        "BKB/peat briquette plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Coal transformation"})
+        )
+
+        liquifaction_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas-to-liquids (GTL) plants", "Coal liquefaction plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Liquifaction plants"})
+        )
+
+        other_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-specified (transformation)",
+                        "Charcoal production plants",
+                        "Petrochemical plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Other transformation"})
+        )
+
+        own_use = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Energy industry own use",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Energy industry own use"})
+        )
+
+        losses = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(["Losses"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Losses"})
+        )
+
+        industry = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Chemical and petrochemical",
+                        "Construction",
+                        "Food and tobacco",
+                        "Industry not elsewhere specified",
+                        "Iron and steel",
+                        "Machinery",
+                        "Mining and quarrying",
+                        "Non-ferrous metals",
+                        "Non-metallic minerals",
+                        "Paper, pulp, and print",
+                        "Textile and leather",
+                        "Transport equipment",
+                        "Wood and wood products",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Industry"})
+        )
+
+        transport = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Domestic aviation",
+                        "Domestic navigation",
+                        "Pipeline transport",
+                        "Rail",
+                        "Road",
+                        "Transport not elsewhere specified",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Transport"})
+        )
+
+        residential = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Residential"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Residential"})
+        )
+
+        commercial = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Commercial and public services"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Commercial and public services"})
+        )
+
+        agriculture = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Agriculture/forestry"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Agriculture / forestry"})
+        )
+
+        fishing = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Fishing"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Fishing"})
+        )
+
+        nonspecified = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Final consumption not elsewhere specified"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-specified"})
+        )
+
+        nonenergyuse = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-energy use in other",
+                        "Non-energy use in transport",
+                        "Non-energy use industry/transformation/energy",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-energy use"})
+        )
+
+        energy_balance = pd.concat(
+            [
+                bunkers,
+                electricity_plants,
+                chp_plants,
+                heat_plants,
+                gas_works,
+                oil_refineries,
+                coal_transformation,
+                liquifaction_plants,
+                other_transformation,
+                own_use,
+                losses,
+                industry,
+                transport,
+                residential,
+                commercial,
+                agriculture,
+                fishing,
+                nonspecified,
+                nonenergyuse,
+            ]
+        )
+
+        energy_balance.astype(int)
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SOURCE #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        df = energy_baseline
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "product_category"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        end_year = data_end_year
+        df = energy_baseline
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(product_category).replace(
+                    "slice(None, None, None)", "All Sources"
+                )
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # ELECTRICITY CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        start_year = data_start_year
+        df = energy_baseline
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = "Electricity"
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit_val[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ####################################
+        # ELECTRICITY GENERATION BY SOURCE #
+        ####################################
+
+        # region
+
+        # Breakdown 'Electricity and Heat' product_category
+
+        # region
+
+        energy_baseline_plot = energy_baseline[
+            (
+                energy_baseline.reset_index().product_category == "Electricity and Heat"
+            ).values
+        ].reset_index()
+
+        energy_baseline_plot["product_category"] = energy_baseline_plot["product_long"]
+
+        energy_baseline_plot.set_index(energy_baseline.index.names, inplace=True)
+
+        # endregion
+
+        start_year = data_start_year
+        df = pd.concat(
+            [
+                energy_baseline[
+                    ~(
+                        energy_baseline.reset_index().product_category
+                        == "Electricity and Heat"
+                    ).values
+                ],
+                energy_baseline_plot,
+            ]
+        )
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Electricity output"]
+        groupby = "product_category"
+
+        fig = (
+            df.loc[
+                model,
+                scenario,
+                region,
+                sector,
+                product_category,
+                slice(None),
+                slice(None),
+                flow_category,
+                slice(None),
+                slice(None),
+                slice(None),
+            ]
+            .groupby([groupby])
+            .sum()
+        ).loc[:, start_year:] * unit_val[1]
+
+        fig = fig[fig.sum(axis=1) != 0]
+        fig = fig.T
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Generation, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
     # endregion
 
     ##############################################
@@ -768,6 +2433,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     # Calculate 'electrification factors' that scale down energy over time due to the lower energy required to produce an equivalent amount of work via electricity
+
+    # region
 
     # Load saturation points for energy reduction ratios
     ef_ratio = (
@@ -934,7 +2601,12 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # Remove duplicate indices
     ef_ratios = ef_ratios[~ef_ratios.index.duplicated()]
 
+    # endregion
+
     # Calculate 'upstream ratios' that scale down energy over time due to the lower energy required for fossil fuel/biofuel/bioenergy/uranium mining/transport/processing. Note that not all upstream fossil energy is eliminiated, since some upstream energy is expected to remain to produce fossil fuel flows for non-energy use.
+
+    # region
+
     upstream_ratios = ef_ratios.copy()
 
     upstream_ratios.update(
@@ -950,7 +2622,12 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     upstream_ratios[upstream_ratios.index.get_level_values(4) == "N"] = 1
     upstream_ratios = upstream_ratios.sort_index()
 
+    # endregion
+
     # Reduce energy by the upstream energy reductions from fossil fuel/biofuel/bioenergy/uranium mining/transport/processing
+
+    # region
+
     energy_post_upstream = energy_baseline.parallel_apply(
         lambda x: x.mul(
             upstream_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze()
@@ -959,7 +2636,12 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     )
     energy_post_upstream.rename(index={"baseline": scenario}, inplace=True)
 
+    # endregion
+
     # Apply percentage reduction attributed to additional energy efficiency measures
+
+    # region
+
     addtl_eff = pd.DataFrame(pd.read_csv("podi/data/ef_ratios.csv")).set_index(
         ["scenario", "region", "sector", "product_short"]
     )
@@ -1006,6 +2688,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ),
         axis=1,
     )
+
+    # endregion
 
     # Estimate energy reduction and fuel shifts due to electrification
 
@@ -1448,6 +3132,1294 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # Update energy_post electrification with new renewables technology mix values
     energy_post_electrification.update(elec_supply)
 
+    # Plot energy_post_electrification
+    if show_figs is True:
+        ###################
+        # ENERGY BALANCES #
+        ###################
+
+        # region
+
+        region = slice(None)
+        year = proj_end_year
+        df = energy_post_electrification
+
+        # Filter for region and year
+        energy_balance = (
+            df.loc[slice(None), slice(None), region]
+            .loc[:, [year]]
+            .groupby(
+                [
+                    "sector",
+                    "product_category",
+                    "product_long",
+                    "flow_category",
+                    "flow_long",
+                ]
+            )
+            .sum()
+        )
+
+        # Create energy balance table structure
+        energy_balance = (
+            energy_balance.groupby(
+                ["product_category", "product_long", "flow_category", "flow_long"]
+            )
+            .sum()
+            .reset_index()
+            .pivot(
+                index=["flow_category", "flow_long"],
+                columns=["product_category", "product_long"],
+                values=year,
+            )
+            .fillna(0)
+            .reindex(
+                axis="index",
+                level=0,
+                labels=[
+                    "Supply",
+                    "Transformation processes",
+                    "Energy industry own use and Losses",
+                    "Final consumption",
+                ],
+            )
+            .reindex(
+                axis="columns",
+                level=0,
+                labels=[
+                    "Coal",
+                    "Crude, NGL, refinery feedstocks",
+                    "Oil products",
+                    "Natural gas",
+                    "Biofuels and Waste",
+                    "Electricity and Heat",
+                ],
+            )
+            .astype(int)
+        )
+
+        # Create Product categories (columns)
+        energy_balance = pd.concat(
+            [
+                energy_balance.groupby("product_category", axis="columns")
+                .sum()[
+                    [
+                        "Coal",
+                        "Crude, NGL, refinery feedstocks",
+                        "Oil products",
+                        "Natural gas",
+                        "Biofuels and Waste",
+                    ]
+                ]
+                .rename(columns={"Crude, NGL, refinery feedstocks": "Crude oil"}),
+                energy_balance.loc[:, "Electricity and Heat"].loc[
+                    :,
+                    [
+                        "Nuclear",
+                        "Hydro",
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                    ],
+                ],
+                energy_balance.loc[:, "Electricity and Heat"]
+                .drop(
+                    [
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                        "Nuclear",
+                        "Hydro",
+                    ],
+                    1,
+                )
+                .sum(axis=1)
+                .to_frame()
+                .rename(columns={0: "Wind, solar, etc."}),
+            ],
+            axis=1,
+        ).reindex(
+            axis="columns",
+            labels=[
+                "Coal",
+                "Crude oil",
+                "Oil products",
+                "Natural gas",
+                "Nuclear",
+                "Hydro",
+                "Wind, solar, etc.",
+                "Biofuels and Waste",
+                "Electricity",
+                "Heat – High Temperature",
+                "Heat – Low Temperature",
+            ],
+        )
+
+        energy_balance = pd.concat(
+            [
+                energy_balance,
+                pd.DataFrame(energy_balance.sum(axis=1)).rename(columns={0: "Total"}),
+            ],
+            axis=1,
+        )
+
+        # Create Flow categories (rows)
+        bunkers = (
+            energy_balance.loc["Supply", :]
+            .loc[
+                energy_balance.loc["Supply", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "International marine bunkers",
+                        "International aviation bunkers",
+                    ]
+                ),
+                :,
+            ]
+            .iloc[::-1]
+        )
+
+        electricity_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer electricity plants",
+                        "Main activity producer electricity plants",
+                        "Chemical heat for electricity production",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Electricity plants"})
+        )
+
+        chp_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Autoproducer CHP", "Main activity producer CHP plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "CHP plants"})
+        )
+
+        heat_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer heat plants",
+                        "Main activity producer heat plants",
+                        "Electric boilers",
+                        "Heat pumps",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Heat plants"})
+        )
+
+        gas_works = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas works", "For blended natural gas"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Gas works"})
+        )
+        gas_works["Natural gas"] = gas_works["Natural gas"] * 0.5
+        gas_works["Total"] = gas_works.loc[:, ["Coal", "Natural gas"]].sum(1)
+
+        oil_refineries = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Oil refineries"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Oil refineries"})
+        )
+
+        coal_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Blast furnaces",
+                        "Coke ovens",
+                        "Patent fuel plants",
+                        "BKB/peat briquette plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Coal transformation"})
+        )
+
+        liquifaction_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas-to-liquids (GTL) plants", "Coal liquefaction plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Liquifaction plants"})
+        )
+
+        other_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-specified (transformation)",
+                        "Charcoal production plants",
+                        "Petrochemical plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Other transformation"})
+        )
+
+        own_use = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Energy industry own use",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Energy industry own use"})
+        )
+
+        losses = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(["Losses"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Losses"})
+        )
+
+        industry = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Chemical and petrochemical",
+                        "Construction",
+                        "Food and tobacco",
+                        "Industry not elsewhere specified",
+                        "Iron and steel",
+                        "Machinery",
+                        "Mining and quarrying",
+                        "Non-ferrous metals",
+                        "Non-metallic minerals",
+                        "Paper, pulp, and print",
+                        "Textile and leather",
+                        "Transport equipment",
+                        "Wood and wood products",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Industry"})
+        )
+
+        transport = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Domestic aviation",
+                        "Domestic navigation",
+                        "Pipeline transport",
+                        "Rail",
+                        "Road",
+                        "Transport not elsewhere specified",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Transport"})
+        )
+
+        residential = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Residential"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Residential"})
+        )
+
+        commercial = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Commercial and public services"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Commercial and public services"})
+        )
+
+        agriculture = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Agriculture/forestry"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Agriculture / forestry"})
+        )
+
+        fishing = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Fishing"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Fishing"})
+        )
+
+        nonspecified = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Final consumption not elsewhere specified"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-specified"})
+        )
+
+        nonenergyuse = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-energy use in other",
+                        "Non-energy use in transport",
+                        "Non-energy use industry/transformation/energy",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-energy use"})
+        )
+
+        energy_balance = pd.concat(
+            [
+                bunkers,
+                electricity_plants,
+                chp_plants,
+                heat_plants,
+                gas_works,
+                oil_refineries,
+                coal_transformation,
+                liquifaction_plants,
+                other_transformation,
+                own_use,
+                losses,
+                industry,
+                transport,
+                residential,
+                commercial,
+                agriculture,
+                fishing,
+                nonspecified,
+                nonenergyuse,
+            ]
+        )
+
+        energy_balance.astype(int)
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SOURCE #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "product_category"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ################################################
+        # TOTAL FINAL CONSUMPTION BY SOURCE, W/ WEDGES #
+        ################################################
+
+        # region
+
+        start_year = data_start_year
+        end_year = proj_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = "pathway"
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "product_category"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[2]
+        )
+
+        bwedges = (
+            (
+                energy_electrified.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        bwedges.index.name = "year"
+        bwedges.reset_index(inplace=True)
+        bwedges2 = pd.melt(
+            bwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        addtleffwedges = (
+            (
+                (energy_post_upstream - energy_post_addtl_eff)
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        addtleffwedges.index.name = "year"
+        addtleffwedges.reset_index(inplace=True)
+        addtleffwedges2 = pd.melt(
+            addtleffwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        upstreamwedges = (
+            (
+                (
+                    energy_post_upstream
+                    - energy_output[
+                        (energy_output.reset_index().scenario == "baseline").values
+                    ]
+                )
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        upstreamwedges.index.name = "year"
+        upstreamwedges.reset_index(inplace=True)
+        upstreamwedges2 = pd.melt(
+            upstreamwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[2]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in bwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=bwedges2["year"],
+                    y=bwedges2[bwedges2[groupby] == sub]["TFC, " + unit_name[2]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in addtleffwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Efficiency reduction of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=addtleffwedges2["year"],
+                    y=addtleffwedges2[addtleffwedges2[groupby] == sub][
+                        "TFC, " + unit_name[2]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in upstreamwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of upstream " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=upstreamwedges2["year"],
+                    y=upstreamwedges2[upstreamwedges2[groupby] == sub][
+                        "TFC, " + unit_name[2]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World")
+                + ", "
+                + str(scenario).capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[2]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        end_year = data_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(product_category).replace(
+                    "slice(None, None, None)", "All Sources"
+                )
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # ELECTRICITY CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        start_year = data_start_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = "Electricity"
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit_val[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ####################################
+        # ELECTRICITY GENERATION BY SOURCE #
+        ####################################
+
+        # region
+
+        # Breakdown 'Electricity and Heat' product_category
+
+        # region
+
+        energy_post_electrification_plot = energy_post_electrification[
+            (
+                energy_post_electrification.reset_index().product_category
+                == "Electricity and Heat"
+            ).values
+        ].reset_index()
+
+        energy_post_electrification_plot[
+            "product_category"
+        ] = energy_post_electrification_plot["product_long"]
+
+        energy_post_electrification_plot.set_index(
+            energy_post_electrification.index.names, inplace=True
+        )
+
+        # endregion
+
+        start_year = data_start_year
+        df = pd.concat(
+            [
+                energy_post_electrification[
+                    ~(
+                        energy_post_electrification.reset_index().product_category
+                        == "Electricity and Heat"
+                    ).values
+                ],
+                energy_post_electrification_plot,
+            ]
+        )
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Electricity output"]
+        groupby = "product_category"
+
+        fig = (
+            df.loc[
+                model,
+                scenario,
+                region,
+                sector,
+                product_category,
+                slice(None),
+                slice(None),
+                flow_category,
+                slice(None),
+                slice(None),
+                slice(None),
+            ]
+            .groupby([groupby])
+            .sum()
+        ).loc[:, start_year:] * unit_val[1]
+
+        fig = fig[fig.sum(axis=1) != 0]
+        fig = fig.T
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Generation, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ################################################
+        # ELECTRICITY CONSUMPTION BY SECTOR, W/ WEDGES #
+        ################################################
+
+        # region
+
+        start_year = data_start_year
+        end_year = proj_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = "pathway"
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = "Electricity"
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "flow_long"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        bwedges = (
+            (
+                energy_electrified.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        bwedges.index.name = "year"
+        bwedges.reset_index(inplace=True)
+        bwedges2 = pd.melt(
+            bwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        addtleffwedges = (
+            (
+                (energy_post_upstream - energy_post_addtl_eff)
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        addtleffwedges.index.name = "year"
+        addtleffwedges.reset_index(inplace=True)
+        addtleffwedges2 = pd.melt(
+            addtleffwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        upstreamwedges = (
+            (
+                (
+                    energy_post_upstream
+                    - energy_output[
+                        (energy_output.reset_index().scenario == "baseline").values
+                    ]
+                )
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        upstreamwedges.index.name = "year"
+        upstreamwedges.reset_index(inplace=True)
+        upstreamwedges2 = pd.melt(
+            upstreamwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in bwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=bwedges2["year"],
+                    y=bwedges2[bwedges2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in addtleffwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Efficiency reduction of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=addtleffwedges2["year"],
+                    y=addtleffwedges2[addtleffwedges2[groupby] == sub][
+                        "TFC, " + unit_name[1]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in upstreamwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of upstream " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=upstreamwedges2["year"],
+                    y=upstreamwedges2[upstreamwedges2[groupby] == sub][
+                        "TFC, " + unit_name[1]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
     # endregion
 
     ##############################
@@ -1512,6 +4484,1306 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Update energy_post electrification with new renewables technology mix values
     energy_post_electrification.update(heat_supply)
+
+    # Plot energy_post_electrification
+    if show_figs is True:
+        ###################
+        # ENERGY BALANCES #
+        ###################
+
+        # region
+
+        region = slice(None)
+        year = proj_end_year
+        df = energy_post_electrification
+
+        # Filter for region and year
+        energy_balance = (
+            df.loc[slice(None), slice(None), region]
+            .loc[:, [year]]
+            .groupby(
+                [
+                    "sector",
+                    "product_category",
+                    "product_long",
+                    "flow_category",
+                    "flow_long",
+                ]
+            )
+            .sum()
+        )
+
+        # Create energy balance table structure
+        energy_balance = (
+            energy_balance.groupby(
+                ["product_category", "product_long", "flow_category", "flow_long"]
+            )
+            .sum()
+            .reset_index()
+            .pivot(
+                index=["flow_category", "flow_long"],
+                columns=["product_category", "product_long"],
+                values=year,
+            )
+            .fillna(0)
+            .reindex(
+                axis="index",
+                level=0,
+                labels=[
+                    "Supply",
+                    "Transformation processes",
+                    "Energy industry own use and Losses",
+                    "Final consumption",
+                ],
+            )
+            .reindex(
+                axis="columns",
+                level=0,
+                labels=[
+                    "Coal",
+                    "Crude, NGL, refinery feedstocks",
+                    "Oil products",
+                    "Natural gas",
+                    "Biofuels and Waste",
+                    "Electricity and Heat",
+                ],
+            )
+            .astype(int)
+        )
+
+        # Create Product categories (columns)
+        energy_balance = pd.concat(
+            [
+                energy_balance.groupby("product_category", axis="columns")
+                .sum()[
+                    [
+                        "Coal",
+                        "Crude, NGL, refinery feedstocks",
+                        "Oil products",
+                        "Natural gas",
+                        "Biofuels and Waste",
+                    ]
+                ]
+                .rename(columns={"Crude, NGL, refinery feedstocks": "Crude oil"}),
+                energy_balance.loc[:, "Electricity and Heat"].loc[
+                    :,
+                    [
+                        "Nuclear",
+                        "Hydro",
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                    ],
+                ],
+                energy_balance.loc[:, "Electricity and Heat"]
+                .drop(
+                    [
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                        "Nuclear",
+                        "Hydro",
+                    ],
+                    1,
+                )
+                .sum(axis=1)
+                .to_frame()
+                .rename(columns={0: "Wind, solar, etc."}),
+            ],
+            axis=1,
+        ).reindex(
+            axis="columns",
+            labels=[
+                "Coal",
+                "Crude oil",
+                "Oil products",
+                "Natural gas",
+                "Nuclear",
+                "Hydro",
+                "Wind, solar, etc.",
+                "Biofuels and Waste",
+                "Electricity",
+                "Heat – High Temperature",
+                "Heat – Low Temperature",
+            ],
+        )
+
+        energy_balance = pd.concat(
+            [
+                energy_balance,
+                pd.DataFrame(energy_balance.sum(axis=1)).rename(columns={0: "Total"}),
+            ],
+            axis=1,
+        )
+
+        # Create Flow categories (rows)
+        bunkers = (
+            energy_balance.loc["Supply", :]
+            .loc[
+                energy_balance.loc["Supply", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "International marine bunkers",
+                        "International aviation bunkers",
+                    ]
+                ),
+                :,
+            ]
+            .iloc[::-1]
+        )
+
+        electricity_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer electricity plants",
+                        "Main activity producer electricity plants",
+                        "Chemical heat for electricity production",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Electricity plants"})
+        )
+
+        chp_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Autoproducer CHP", "Main activity producer CHP plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "CHP plants"})
+        )
+
+        heat_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer heat plants",
+                        "Main activity producer heat plants",
+                        "Electric boilers",
+                        "Heat pumps",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Heat plants"})
+        )
+
+        gas_works = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas works", "For blended natural gas"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Gas works"})
+        )
+        gas_works["Natural gas"] = gas_works["Natural gas"] * 0.5
+        gas_works["Total"] = gas_works.loc[:, ["Coal", "Natural gas"]].sum(1)
+
+        oil_refineries = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Oil refineries"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Oil refineries"})
+        )
+
+        coal_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Blast furnaces",
+                        "Coke ovens",
+                        "Patent fuel plants",
+                        "BKB/peat briquette plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Coal transformation"})
+        )
+
+        liquifaction_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas-to-liquids (GTL) plants", "Coal liquefaction plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Liquifaction plants"})
+        )
+
+        other_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-specified (transformation)",
+                        "Charcoal production plants",
+                        "Petrochemical plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Other transformation"})
+        )
+
+        own_use = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Energy industry own use",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Energy industry own use"})
+        )
+
+        losses = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(["Losses"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Losses"})
+        )
+
+        industry = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Chemical and petrochemical",
+                        "Construction",
+                        "Food and tobacco",
+                        "Industry not elsewhere specified",
+                        "Iron and steel",
+                        "Machinery",
+                        "Mining and quarrying",
+                        "Non-ferrous metals",
+                        "Non-metallic minerals",
+                        "Paper, pulp, and print",
+                        "Textile and leather",
+                        "Transport equipment",
+                        "Wood and wood products",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Industry"})
+        )
+
+        transport = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Domestic aviation",
+                        "Domestic navigation",
+                        "Pipeline transport",
+                        "Rail",
+                        "Road",
+                        "Transport not elsewhere specified",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Transport"})
+        )
+
+        residential = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Residential"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Residential"})
+        )
+
+        commercial = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Commercial and public services"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Commercial and public services"})
+        )
+
+        agriculture = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Agriculture/forestry"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Agriculture / forestry"})
+        )
+
+        fishing = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Fishing"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Fishing"})
+        )
+
+        nonspecified = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Final consumption not elsewhere specified"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-specified"})
+        )
+
+        nonenergyuse = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-energy use in other",
+                        "Non-energy use in transport",
+                        "Non-energy use industry/transformation/energy",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-energy use"})
+        )
+
+        energy_balance = pd.concat(
+            [
+                bunkers,
+                electricity_plants,
+                chp_plants,
+                heat_plants,
+                gas_works,
+                oil_refineries,
+                coal_transformation,
+                liquifaction_plants,
+                other_transformation,
+                own_use,
+                losses,
+                industry,
+                transport,
+                residential,
+                commercial,
+                agriculture,
+                fishing,
+                nonspecified,
+                nonenergyuse,
+            ]
+        )
+
+        energy_balance.astype(int)
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SOURCE #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "product_category"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ################################################
+        # TOTAL FINAL CONSUMPTION BY SOURCE, W/ WEDGES #
+        ################################################
+
+        # region
+
+        start_year = data_start_year
+        end_year = proj_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = "pathway"
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "product_category"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[2]
+        )
+
+        bwedges = (
+            (
+                energy_electrified.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        bwedges.index.name = "year"
+        bwedges.reset_index(inplace=True)
+        bwedges2 = pd.melt(
+            bwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        addtleffwedges = (
+            (
+                (energy_post_upstream - energy_post_addtl_eff)
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        addtleffwedges.index.name = "year"
+        addtleffwedges.reset_index(inplace=True)
+        addtleffwedges2 = pd.melt(
+            addtleffwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        upstreamwedges = (
+            (
+                (
+                    energy_post_upstream
+                    - energy_output[
+                        (energy_output.reset_index().scenario == "baseline").values
+                    ]
+                )
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        upstreamwedges.index.name = "year"
+        upstreamwedges.reset_index(inplace=True)
+        upstreamwedges2 = pd.melt(
+            upstreamwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[2]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in bwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=bwedges2["year"],
+                    y=bwedges2[bwedges2[groupby] == sub]["TFC, " + unit_name[2]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in addtleffwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Efficiency reduction of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=addtleffwedges2["year"],
+                    y=addtleffwedges2[addtleffwedges2[groupby] == sub][
+                        "TFC, " + unit_name[2]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in upstreamwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of upstream " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=upstreamwedges2["year"],
+                    y=upstreamwedges2[upstreamwedges2[groupby] == sub][
+                        "TFC, " + unit_name[2]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World")
+                + ", "
+                + str(scenario).capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[2]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        end_year = data_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(product_category).replace(
+                    "slice(None, None, None)", "All Sources"
+                )
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ##############################
+        # HEAT CONSUMPTION BY SECTOR #
+        ##############################
+
+        # region
+
+        start_year = data_start_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = [
+            "Solar thermal",
+            "Heat – High Temperature",
+            "Heat – Low Temperature",
+            "Heat output from non-specified combustible fuels – High Temperature",
+            "Heat output from non-specified combustible fuels – Low Temperature",
+        ]
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit_val[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Heat Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #############################
+        # HEAT GENERATION BY SOURCE #
+        #############################
+
+        # region
+
+        # Breakdown 'Electricity and Heat' product_category
+
+        # region
+
+        energy_post_electrification_plot = energy_post_electrification[
+            (
+                energy_post_electrification.reset_index().product_category
+                == "Electricity and Heat"
+            ).values
+        ].reset_index()
+
+        energy_post_electrification_plot[
+            "product_category"
+        ] = energy_post_electrification_plot["product_long"]
+
+        energy_post_electrification_plot.set_index(
+            energy_post_electrification.index.names, inplace=True
+        )
+
+        # endregion
+
+        start_year = data_start_year
+        df = pd.concat(
+            [
+                energy_post_electrification[
+                    ~(
+                        energy_post_electrification.reset_index().product_category
+                        == "Electricity and Heat"
+                    ).values
+                ],
+                energy_post_electrification_plot,
+            ]
+        )
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Heat output"]
+        groupby = "product_category"
+
+        fig = (
+            df.loc[
+                model,
+                scenario,
+                region,
+                sector,
+                product_category,
+                slice(None),
+                slice(None),
+                flow_category,
+                slice(None),
+                slice(None),
+                slice(None),
+            ]
+            .groupby([groupby])
+            .sum()
+        ).loc[:, start_year:] * unit_val[1]
+
+        fig = fig[fig.sum(axis=1) != 0]
+        fig = fig.T
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Heat Generation, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #########################################
+        # HEAT CONSUMPTION BY SECTOR, W/ WEDGES #
+        #########################################
+
+        # region
+
+        start_year = data_start_year
+        end_year = proj_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = "pathway"
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = [
+            "Solar thermal",
+            "Heat – High Temperature",
+            "Heat – Low Temperature",
+            "Heat output from non-specified combustible fuels – High Temperature",
+            "Heat output from non-specified combustible fuels – Low Temperature",
+        ]
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "flow_long"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        bwedges = (
+            (
+                energy_electrified.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        bwedges.index.name = "year"
+        bwedges.reset_index(inplace=True)
+        bwedges2 = pd.melt(
+            bwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        addtleffwedges = (
+            (
+                (energy_post_upstream - energy_post_addtl_eff)
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        addtleffwedges.index.name = "year"
+        addtleffwedges.reset_index(inplace=True)
+        addtleffwedges2 = pd.melt(
+            addtleffwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        upstreamwedges = (
+            (
+                (
+                    energy_post_upstream
+                    - energy_output[
+                        (energy_output.reset_index().scenario == "baseline").values
+                    ]
+                )
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        upstreamwedges.index.name = "year"
+        upstreamwedges.reset_index(inplace=True)
+        upstreamwedges2 = pd.melt(
+            upstreamwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in bwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=bwedges2["year"],
+                    y=bwedges2[bwedges2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in addtleffwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Efficiency reduction of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=addtleffwedges2["year"],
+                    y=addtleffwedges2[addtleffwedges2[groupby] == sub][
+                        "TFC, " + unit_name[1]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in upstreamwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of upstream " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=upstreamwedges2["year"],
+                    y=upstreamwedges2[upstreamwedges2[groupby] == sub][
+                        "TFC, " + unit_name[1]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Heat Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
 
     # endregion
 
@@ -1584,6 +5856,1294 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # Update energy_post electrification with new renewables technology mix values
     energy_post_electrification.update(transport_supply)
 
+    # Plot energy_post_electrification
+    if show_figs is True:
+        ###################
+        # ENERGY BALANCES #
+        ###################
+
+        # region
+
+        region = slice(None)
+        year = proj_end_year
+        df = energy_post_electrification
+
+        # Filter for region and year
+        energy_balance = (
+            df.loc[slice(None), slice(None), region]
+            .loc[:, [year]]
+            .groupby(
+                [
+                    "sector",
+                    "product_category",
+                    "product_long",
+                    "flow_category",
+                    "flow_long",
+                ]
+            )
+            .sum()
+        )
+
+        # Create energy balance table structure
+        energy_balance = (
+            energy_balance.groupby(
+                ["product_category", "product_long", "flow_category", "flow_long"]
+            )
+            .sum()
+            .reset_index()
+            .pivot(
+                index=["flow_category", "flow_long"],
+                columns=["product_category", "product_long"],
+                values=year,
+            )
+            .fillna(0)
+            .reindex(
+                axis="index",
+                level=0,
+                labels=[
+                    "Supply",
+                    "Transformation processes",
+                    "Energy industry own use and Losses",
+                    "Final consumption",
+                ],
+            )
+            .reindex(
+                axis="columns",
+                level=0,
+                labels=[
+                    "Coal",
+                    "Crude, NGL, refinery feedstocks",
+                    "Oil products",
+                    "Natural gas",
+                    "Biofuels and Waste",
+                    "Electricity and Heat",
+                ],
+            )
+            .astype(int)
+        )
+
+        # Create Product categories (columns)
+        energy_balance = pd.concat(
+            [
+                energy_balance.groupby("product_category", axis="columns")
+                .sum()[
+                    [
+                        "Coal",
+                        "Crude, NGL, refinery feedstocks",
+                        "Oil products",
+                        "Natural gas",
+                        "Biofuels and Waste",
+                    ]
+                ]
+                .rename(columns={"Crude, NGL, refinery feedstocks": "Crude oil"}),
+                energy_balance.loc[:, "Electricity and Heat"].loc[
+                    :,
+                    [
+                        "Nuclear",
+                        "Hydro",
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                    ],
+                ],
+                energy_balance.loc[:, "Electricity and Heat"]
+                .drop(
+                    [
+                        "Electricity",
+                        "Heat – High Temperature",
+                        "Heat – Low Temperature",
+                        "Nuclear",
+                        "Hydro",
+                    ],
+                    1,
+                )
+                .sum(axis=1)
+                .to_frame()
+                .rename(columns={0: "Wind, solar, etc."}),
+            ],
+            axis=1,
+        ).reindex(
+            axis="columns",
+            labels=[
+                "Coal",
+                "Crude oil",
+                "Oil products",
+                "Natural gas",
+                "Nuclear",
+                "Hydro",
+                "Wind, solar, etc.",
+                "Biofuels and Waste",
+                "Electricity",
+                "Heat – High Temperature",
+                "Heat – Low Temperature",
+            ],
+        )
+
+        energy_balance = pd.concat(
+            [
+                energy_balance,
+                pd.DataFrame(energy_balance.sum(axis=1)).rename(columns={0: "Total"}),
+            ],
+            axis=1,
+        )
+
+        # Create Flow categories (rows)
+        bunkers = (
+            energy_balance.loc["Supply", :]
+            .loc[
+                energy_balance.loc["Supply", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "International marine bunkers",
+                        "International aviation bunkers",
+                    ]
+                ),
+                :,
+            ]
+            .iloc[::-1]
+        )
+
+        electricity_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer electricity plants",
+                        "Main activity producer electricity plants",
+                        "Chemical heat for electricity production",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Electricity plants"})
+        )
+
+        chp_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Autoproducer CHP", "Main activity producer CHP plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "CHP plants"})
+        )
+
+        heat_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Autoproducer heat plants",
+                        "Main activity producer heat plants",
+                        "Electric boilers",
+                        "Heat pumps",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Heat plants"})
+        )
+
+        gas_works = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas works", "For blended natural gas"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Gas works"})
+        )
+        gas_works["Natural gas"] = gas_works["Natural gas"] * 0.5
+        gas_works["Total"] = gas_works.loc[:, ["Coal", "Natural gas"]].sum(1)
+
+        oil_refineries = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Oil refineries"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Oil refineries"})
+        )
+
+        coal_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Blast furnaces",
+                        "Coke ovens",
+                        "Patent fuel plants",
+                        "BKB/peat briquette plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Coal transformation"})
+        )
+
+        liquifaction_plants = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(["Gas-to-liquids (GTL) plants", "Coal liquefaction plants"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Liquifaction plants"})
+        )
+
+        other_transformation = (
+            energy_balance.loc["Transformation processes", :]
+            .loc[
+                energy_balance.loc["Transformation processes", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-specified (transformation)",
+                        "Charcoal production plants",
+                        "Petrochemical plants",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Other transformation"})
+        )
+
+        own_use = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Energy industry own use",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Energy industry own use"})
+        )
+
+        losses = (
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .loc[
+                energy_balance.loc["Energy industry own use and Losses", :]
+                .index.get_level_values(0)
+                .isin(["Losses"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Losses"})
+        )
+
+        industry = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Chemical and petrochemical",
+                        "Construction",
+                        "Food and tobacco",
+                        "Industry not elsewhere specified",
+                        "Iron and steel",
+                        "Machinery",
+                        "Mining and quarrying",
+                        "Non-ferrous metals",
+                        "Non-metallic minerals",
+                        "Paper, pulp, and print",
+                        "Textile and leather",
+                        "Transport equipment",
+                        "Wood and wood products",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Industry"})
+        )
+
+        transport = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Domestic aviation",
+                        "Domestic navigation",
+                        "Pipeline transport",
+                        "Rail",
+                        "Road",
+                        "Transport not elsewhere specified",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Transport"})
+        )
+
+        residential = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Residential"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Residential"})
+        )
+
+        commercial = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Commercial and public services"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Commercial and public services"})
+        )
+
+        agriculture = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Agriculture/forestry"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Agriculture / forestry"})
+        )
+
+        fishing = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Fishing"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Fishing"})
+        )
+
+        nonspecified = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(["Final consumption not elsewhere specified"]),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-specified"})
+        )
+
+        nonenergyuse = (
+            energy_balance.loc["Final consumption", :]
+            .loc[
+                energy_balance.loc["Final consumption", :]
+                .index.get_level_values(0)
+                .isin(
+                    [
+                        "Non-energy use in other",
+                        "Non-energy use in transport",
+                        "Non-energy use industry/transformation/energy",
+                    ]
+                ),
+                :,
+            ]
+            .sum()
+            .to_frame()
+            .T.rename(index={0: "Non-energy use"})
+        )
+
+        energy_balance = pd.concat(
+            [
+                bunkers,
+                electricity_plants,
+                chp_plants,
+                heat_plants,
+                gas_works,
+                oil_refineries,
+                coal_transformation,
+                liquifaction_plants,
+                other_transformation,
+                own_use,
+                losses,
+                industry,
+                transport,
+                residential,
+                commercial,
+                agriculture,
+                fishing,
+                nonspecified,
+                nonenergyuse,
+            ]
+        )
+
+        energy_balance.astype(int)
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SOURCE #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "product_category"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ################################################
+        # TOTAL FINAL CONSUMPTION BY SOURCE, W/ WEDGES #
+        ################################################
+
+        # region
+
+        start_year = data_start_year
+        end_year = proj_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = "pathway"
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "product_category"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[2]
+        )
+
+        bwedges = (
+            (
+                energy_electrified.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        bwedges.index.name = "year"
+        bwedges.reset_index(inplace=True)
+        bwedges2 = pd.melt(
+            bwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        addtleffwedges = (
+            (
+                (energy_post_upstream - energy_post_addtl_eff)
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        addtleffwedges.index.name = "year"
+        addtleffwedges.reset_index(inplace=True)
+        addtleffwedges2 = pd.melt(
+            addtleffwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        upstreamwedges = (
+            (
+                (
+                    energy_post_upstream
+                    - energy_output[
+                        (energy_output.reset_index().scenario == "baseline").values
+                    ]
+                )
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[2]
+        ).T
+
+        upstreamwedges.index.name = "year"
+        upstreamwedges.reset_index(inplace=True)
+        upstreamwedges2 = pd.melt(
+            upstreamwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[2],
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[2]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in bwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=bwedges2["year"],
+                    y=bwedges2[bwedges2[groupby] == sub]["TFC, " + unit_name[2]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in addtleffwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Efficiency reduction of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=addtleffwedges2["year"],
+                    y=addtleffwedges2[addtleffwedges2[groupby] == sub][
+                        "TFC, " + unit_name[2]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in upstreamwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of upstream " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=upstreamwedges2["year"],
+                    y=upstreamwedges2[upstreamwedges2[groupby] == sub][
+                        "TFC, " + unit_name[2]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World")
+                + ", "
+                + str(scenario).capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[2]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # TOTAL FINAL CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        unit_name = ["TJ", "TWh", "GW"]
+        unit_val = [1, 0.0002777, 0.2777 / 8760]
+        unit = [unit_name[0], unit_val[0]]
+
+        start_year = data_start_year
+        end_year = data_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit[0]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit[0]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Total Final Consumption, "
+                + str(product_category).replace(
+                    "slice(None, None, None)", "All Sources"
+                )
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit[0]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        #####################################
+        # ELECTRICITY CONSUMPTION BY SECTOR #
+        #####################################
+
+        # region
+
+        start_year = data_start_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = "Electricity"
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "sector"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:]
+            * unit_val[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ####################################
+        # ELECTRICITY GENERATION BY SOURCE #
+        ####################################
+
+        # region
+
+        # Breakdown 'Electricity and Heat' product_category
+
+        # region
+
+        energy_post_electrification_plot = energy_post_electrification[
+            (
+                energy_post_electrification.reset_index().product_category
+                == "Electricity and Heat"
+            ).values
+        ].reset_index()
+
+        energy_post_electrification_plot[
+            "product_category"
+        ] = energy_post_electrification_plot["product_long"]
+
+        energy_post_electrification_plot.set_index(
+            energy_post_electrification.index.names, inplace=True
+        )
+
+        # endregion
+
+        start_year = data_start_year
+        df = pd.concat(
+            [
+                energy_post_electrification[
+                    ~(
+                        energy_post_electrification.reset_index().product_category
+                        == "Electricity and Heat"
+                    ).values
+                ],
+                energy_post_electrification_plot,
+            ]
+        )
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Electricity output"]
+        groupby = "product_category"
+
+        fig = (
+            df.loc[
+                model,
+                scenario,
+                region,
+                sector,
+                product_category,
+                slice(None),
+                slice(None),
+                flow_category,
+                slice(None),
+                slice(None),
+                slice(None),
+            ]
+            .groupby([groupby])
+            .sum()
+        ).loc[:, start_year:] * unit_val[1]
+
+        fig = fig[fig.sum(axis=1) != 0]
+        fig = fig.T
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Generation, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
+        ################################################
+        # ELECTRICITY CONSUMPTION BY SECTOR, W/ WEDGES #
+        ################################################
+
+        # region
+
+        start_year = data_start_year
+        end_year = proj_end_year
+        df = energy_post_electrification
+        model = "PD22"
+        scenario = "pathway"
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = "Electricity"
+        flow_category = ["Final consumption", "Supply"]
+        groupby = "flow_long"
+
+        fig = (
+            (
+                df.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        bwedges = (
+            (
+                energy_electrified.loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    slice(None),
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        bwedges.index.name = "year"
+        bwedges.reset_index(inplace=True)
+        bwedges2 = pd.melt(
+            bwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        addtleffwedges = (
+            (
+                (energy_post_upstream - energy_post_addtl_eff)
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        addtleffwedges.index.name = "year"
+        addtleffwedges.reset_index(inplace=True)
+        addtleffwedges2 = pd.melt(
+            addtleffwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        upstreamwedges = (
+            (
+                (
+                    energy_post_upstream
+                    - energy_output[
+                        (energy_output.reset_index().scenario == "baseline").values
+                    ]
+                )
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    slice(None),
+                    flow_category,
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby([groupby])
+                .sum()
+            ).loc[:, start_year:end_year]
+            * unit_val[1]
+        ).T
+
+        upstreamwedges.index.name = "year"
+        upstreamwedges.reset_index(inplace=True)
+        upstreamwedges2 = pd.melt(
+            upstreamwedges,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + unit_name[1],
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in bwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=bwedges2["year"],
+                    y=bwedges2[bwedges2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in addtleffwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Efficiency reduction of " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=addtleffwedges2["year"],
+                    y=addtleffwedges2[addtleffwedges2[groupby] == sub][
+                        "TFC, " + unit_name[1]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        for sub in upstreamwedges2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name="Avoided use of upstream " + sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=upstreamwedges2["year"],
+                    y=upstreamwedges2[upstreamwedges2[groupby] == sub][
+                        "TFC, " + unit_name[1]
+                    ],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Consumption, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
     # endregion
 
     #############################
@@ -1591,9 +7151,132 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     #############################
 
     # region
-    """
-    energy_post_electrification["Storage"] = energy_post_electrification["Electricity output"].multiply(0.2)
-    """
+
+    # Current setting to 20% of electricity generation
+
+    energy_storage = (
+        energy_post_electrification[
+            (
+                energy_post_electrification.reset_index().flow_category
+                == "Electricity output"
+            ).values
+        ]
+        .groupby(energy_post_electrification.index.names)
+        .sum()
+        .multiply(0.2)
+        .reset_index()
+    )
+
+    energy_storage["product_long"] = "Storage"
+    energy_storage["product_short"] = "STOR"
+
+    energy_storage.set_index(energy_post_electrification.index.names, inplace=True)
+
+    energy_post_electrification = pd.concat(
+        [energy_post_electrification, energy_storage]
+    )
+
+    # Plot energy_post_electrification
+    if show_figs is True:
+        #######################
+        # ELECTRICITY STORAGE #
+        #######################
+
+        # region
+
+        # region
+
+        energy_post_electrification_plot = energy_post_electrification[
+            (
+                energy_post_electrification.reset_index().product_category
+                == "Electricity and Heat"
+            ).values
+        ].reset_index()
+
+        energy_post_electrification_plot[
+            "product_category"
+        ] = energy_post_electrification_plot["product_long"]
+
+        energy_post_electrification_plot.set_index(
+            energy_post_electrification.index.names, inplace=True
+        )
+
+        # endregion
+
+        start_year = data_start_year
+        df = energy_storage
+        model = "PD22"
+        scenario = slice(None)
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        product_long = slice(None)
+        flow_category = slice(None)
+        groupby = "product_long"
+
+        fig = (
+            df.loc[
+                model,
+                scenario,
+                region,
+                sector,
+                product_category,
+                product_long,
+                slice(None),
+                flow_category,
+                slice(None),
+                slice(None),
+                slice(None),
+            ]
+            .groupby([groupby])
+            .sum()
+        ).loc[:, start_year:] * unit_val[1]
+
+        fig = fig[fig.sum(axis=1) != 0]
+        fig = fig.T
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Energy Storage, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "TFC, " + unit_name[1]},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
     # endregion
 
     #################

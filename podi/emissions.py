@@ -305,34 +305,74 @@ def emissions(
         .rename_axis(index={"WEB Region": "region"})
     ).drop(columns="region")
 
-    # Plot
-    fluxplot = flux.copy()
-    fluxplot.columns = fluxplot.columns - flux.columns[0]
-
-    for subvertical in (
-        fluxplot[(fluxplot.reset_index().unit == "tCO2e/Mha/yr").values]
-        .reset_index()
-        .variable.unique()
-    ):
-        fluxplot[fluxplot.index.get_level_values(3).isin([subvertical])].T.plot(
-            legend=False,
-            title="Avg Mitigation Flux, "
-            + subvertical.replace("|Avg mitigation potential flux", ""),
-            xlabel="Years from implementation",
-            ylabel="tCO2e/Mha/yr",
-        )
-
-    fluxplot[
-        fluxplot.index.get_level_values(3).isin(
-            ["Improved Forest Mgmt|Avg mitigation potential flux"]
-        )
-    ].T.plot(
-        legend=False,
-        title="Avg Mitigation Flux, "
-        + subvertical.replace("|Avg mitigation potential flux", ""),
-        xlabel="Years from implementation",
-        ylabel="tCO2e/m3/yr",
+    # Plot Average Mitigation Flux [tCO2e/ha/yr, tCO2e/m3/yr]
+    # region
+    fig = flux.droplevel(["model", "scenario", "unit"]).T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig,
+        id_vars="year",
+        var_name=["region", "variable"],
+        value_name="Avg mitigation potential flux",
     )
+
+    for subvertical in fig2["variable"].unique():
+
+        fig = go.Figure()
+
+        for region in fig2["region"].unique():
+
+            # Make modeled trace
+            fig.add_trace(
+                go.Scatter(
+                    name=region,
+                    line=dict(width=1),
+                    x=fig2[(fig2["variable"] == subvertical)]["year"].unique()
+                    - fig2[(fig2["variable"] == subvertical)]["year"].unique().min(),
+                    y=fig2[
+                        (fig2["variable"] == subvertical) & (fig2["region"] == region)
+                    ]["Avg mitigation potential flux"],
+                    legendgroup=region,
+                    showlegend=True,
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Average Mitigation Potential Flux, "
+                + subvertical.replace("|Avg mitigation potential flux", ""),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "tCO2e/ha/yr"},
+            xaxis={"title": "Years from implementation"},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        if subvertical == "Improved Forest Mgmt|Avg mitigation potential flux":
+            fig.update_layout(yaxis={"title": "tCO2e/m3/yr"})
+
+        if show_figs is True:
+            fig.show()
+
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/afolu_flux-"
+                + str(
+                    subvertical.replace("|Avg mitigation potential flux", "")
+                ).replace("slice(None, None, None)", "All")
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
+
+    # endregion
 
     # endregion
 
@@ -687,34 +727,79 @@ def emissions(
 
     emissions_afolu_mitigated.rename(index={"MtCO2e": "Mt"}, inplace=True)
 
-    # Plot emissions_afolu_mitigated [tCO2]
-    emissions_afolu_mitigated_outputplot = emissions_afolu_mitigated.copy()
+    # Plot Emissions Mitigated [tCO2e]
+    # region
 
-    for (
-        scenario
-    ) in emissions_afolu_mitigated_outputplot.reset_index().scenario.unique():
-        for (
-            subvertical
-        ) in emissions_afolu_mitigated_outputplot.reset_index().product_long.unique():
-            emissions_afolu_mitigated_outputplot[
-                (
-                    emissions_afolu_mitigated_outputplot.index.get_level_values(4).isin(
-                        [subvertical]
+    fig = emissions_afolu_mitigated.droplevel(
+        ["model", "sector", "flow_category", "flow_long", "unit"]
+    ).T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig,
+        id_vars="year",
+        var_name=["scenario", "region", "product_long"],
+        value_name="Adoption",
+    )
+
+    for scenario in fig2["scenario"].unique():
+
+        for subvertical in fig2["product_long"].unique():
+
+            fig = go.Figure()
+
+            for region in fig2["region"].unique():
+
+                # Make modeled trace
+                fig.add_trace(
+                    go.Scatter(
+                        name=region,
+                        line=dict(width=1),
+                        x=fig2[(fig2["product_long"] == subvertical)]["year"].unique(),
+                        y=fig2[
+                            (fig2["product_long"] == subvertical)
+                            & (fig2["region"] == region)
+                            & (fig2["scenario"] == scenario)
+                        ]["Adoption"]
+                        * 100,
+                        legendgroup=region,
+                        showlegend=True,
                     )
                 )
-                & (
-                    emissions_afolu_mitigated_outputplot.index.get_level_values(1).isin(
-                        [scenario]
-                    )
-                )
-            ].T.plot(
-                legend=False,
-                title="AFOLU Emissions Mitigated, "
-                + subvertical
-                + ", "
-                + scenario.capitalize(),
-                ylabel="tCO2 mitigated",
+
+            fig.update_layout(
+                title={
+                    "text": "Emissions Mitigated, PD22, "
+                    + subvertical.replace("|Observed adoption", "")
+                    + ", "
+                    + scenario.capitalize(),
+                    "xanchor": "center",
+                    "x": 0.5,
+                    "y": 0.99,
+                },
+                yaxis={"title": "tCO2e"},
+                margin_b=0,
+                margin_t=20,
+                margin_l=10,
+                margin_r=10,
             )
+
+            if show_figs is True:
+                fig.show()
+            if save_figs is True:
+                pio.write_html(
+                    fig,
+                    file=(
+                        "./charts/emissions_afolu_mitigated-"
+                        + str(subvertical.replace("|Observed adoption", "")).replace(
+                            "slice(None, None, None)", "All"
+                        )
+                        + ".html"
+                    ).replace(" ", ""),
+                    auto_open=False,
+                )
+
+    # endregion
 
     # endregion
 

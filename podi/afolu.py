@@ -16,6 +16,9 @@ hvplot.extension("plotly")
 
 pandarallel.initialize()
 
+show_figs = False
+save_figs = False
+
 # endregion
 
 
@@ -148,20 +151,68 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         (afolu_historical.values > 1).any(axis=1)
     ]
 
-    # Plot afolu_historical [% of max_extent]
+    # Plot Adoption [% of Max Extent]
     # region
-    afolu_historicalplot = afolu_historical.copy().multiply(100)
 
-    for subvertical in afolu_historicalplot.reset_index().variable.unique():
-        afolu_historicalplot[
-            afolu_historicalplot.index.get_level_values(3).isin([subvertical])
-        ].T.plot(
-            legend=False,
-            title="Historical Adoption, "
-            + subvertical.replace("|Observed adoption", ""),
-            ylabel="% of Max Extent",
-            xlabel="Year",
+    fig = afolu_output.droplevel(["model", "scenario", "unit"]).T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="year", var_name=["region", "variable"], value_name="Adoption"
+    )
+
+    for subvertical in fig2["variable"].unique():
+
+        fig = go.Figure()
+
+        for region in fig2["region"].unique():
+
+            # Make modeled trace
+            fig.add_trace(
+                go.Scatter(
+                    name=region,
+                    line=dict(width=1),
+                    x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                    y=fig2[
+                        (fig2["variable"] == subvertical) & (fig2["region"] == region)
+                    ]["Adoption"]
+                    * 100,
+                    legendgroup=region,
+                    showlegend=True,
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Adoption, PD22, "
+                + subvertical.replace("|Observed adoption", ""),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "% of Max Extent"},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
         )
+
+        if show_figs is True:
+            fig.show()
+
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/afolu_output-"
+                + str(subvertical.replace("|Observed adoption", "")).replace(
+                    "slice(None, None, None)", "All"
+                )
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=False,
+        )
+
+    # endregion
 
     # endregion
 
@@ -606,30 +657,67 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     max_extent = pd.concat([max_extent, max_extent_avoided])
 
     # Plot max_extent [Mha, m3]
-    max_extentplot = max_extent.copy()
-
-    for subvertical in (
-        max_extent[(max_extent.reset_index().unit == "Mha").values]
-        .reset_index()
-        .variable.unique()
-    ):
-        max_extentplot[
-            max_extentplot.index.get_level_values(3).isin([subvertical])
-        ].T.plot(
-            legend=False,
-            title="Maximum Extent, " + subvertical.replace("|Max extent", ""),
-            ylabel="Mha",
-        )
-
-    max_extentplot[
-        max_extentplot.index.get_level_values(3).isin(
-            ["Improved Forest Mgmt|Max extent"]
-        )
-    ].T.plot(
-        legend=False,
-        title="Maximum Extent of Adoption, " + "Improved Forest Mgmt",
-        ylabel="m3",
+    # region
+    fig = max_extent.droplevel(["model", "scenario", "unit"]).T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig, id_vars="year", var_name=["region", "variable"], value_name="Max Extent"
     )
+
+    for subvertical in fig2["variable"].unique():
+
+        fig = go.Figure()
+
+        for region in fig2["region"].unique():
+
+            # Make modeled trace
+            fig.add_trace(
+                go.Scatter(
+                    name=region,
+                    line=dict(width=1),
+                    x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                    y=fig2[
+                        (fig2["variable"] == subvertical) & (fig2["region"] == region)
+                    ]["Max Extent"],
+                    legendgroup=region,
+                    showlegend=True,
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Max Extent, " + subvertical.replace("|Max extent", ""),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "Mha"},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        if subvertical == "Improved Forest Mgmt|Max extent":
+            fig.update_layout(yaxis={"title": "m3"})
+
+        if show_figs is True:
+            fig.show()
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/afolu_max_extent-"
+                    + str(subvertical.replace("|Max extent", "")).replace(
+                        "slice(None, None, None)", "All"
+                    )
+                    + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
+
+    # endregion
 
     # endregion
 
