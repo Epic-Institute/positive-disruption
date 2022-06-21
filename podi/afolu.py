@@ -18,8 +18,8 @@ hvplot.extension("plotly")
 
 pandarallel.initialize()
 
-show_figs = True
-save_figs = True
+show_figs = False
+save_figs = False
 
 # endregion
 
@@ -105,7 +105,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
             fig.update_layout(
                 title={
-                    "text": "Adoption, PD22, "
+                    "text": "Historical Adoption, "
                     + subvertical.replace("|Observed adoption", ""),
                     "xanchor": "center",
                     "x": 0.5,
@@ -535,7 +535,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
             fig.update_layout(
                 title={
-                    "text": "Adoption, PD22, "
+                    "text": "Historical Adoption, "
                     + subvertical.replace("|Observed adoption", ""),
                     "xanchor": "center",
                     "x": 0.5,
@@ -788,18 +788,18 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Plot afolu_output [% of max extent]
     # region
     if show_figs is True:
-        fig = afolu_output.droplevel(["model", "unit"]).T
+        fig = afolu_output.droplevel(["model", "sector", "product_category", "unit"]).T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(
             fig,
             id_vars="year",
-            var_name=["scenario", "region", "variable"],
+            var_name=["scenario", "region", "product_long"],
             value_name="Adoption",
         )
 
         for scenario in fig2["scenario"].unique():
-            for subvertical in fig2["variable"].unique():
+            for subvertical in fig2["product_long"].unique():
 
                 fig = go.Figure()
 
@@ -810,9 +810,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         go.Scatter(
                             name=region,
                             line=dict(width=1),
-                            x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                            x=fig2[(fig2["product_long"] == subvertical)][
+                                "year"
+                            ].unique(),
                             y=fig2[
-                                (fig2["variable"] == subvertical)
+                                (fig2["product_long"] == subvertical)
                                 & (fig2["region"] == region)
                                 & (fig2["scenario"] == scenario)
                             ]["Adoption"]
@@ -825,7 +827,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 fig.update_layout(
                     title={
                         "text": "Adoption, "
-                        + scenario
+                        + scenario.capitalize()
                         + ", "
                         + subvertical.replace("|Observed adoption", ""),
                         "xanchor": "center",
@@ -841,20 +843,20 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
                 fig.show()
 
-            if save_figs is True:
-                pio.write_html(
-                    fig,
-                    file=(
-                        "./charts/afolu_output_percent-"
-                        + str(subvertical.replace("|Observed adoption", "")).replace(
-                            "slice(None, None, None)", "All"
-                        )
-                        + "-"
-                        + scenario
-                        + ".html"
-                    ).replace(" ", ""),
-                    auto_open=False,
-                )
+                if save_figs is True:
+                    pio.write_html(
+                        fig,
+                        file=(
+                            "./charts/afolu_output_percent-"
+                            + str(
+                                subvertical.replace("|Observed adoption", "")
+                            ).replace("slice(None, None, None)", "All")
+                            + "-"
+                            + scenario.capitalize()
+                            + ".html"
+                        ).replace(" ", ""),
+                        auto_open=False,
+                    )
 
     # endregion
 
@@ -878,18 +880,18 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # region
     if show_figs is True:
 
-        fig = afolu_output.droplevel(["model", "unit"]).T
+        fig = afolu_output.droplevel(["model", "sector", "product_category", "unit"]).T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(
             fig,
             id_vars="year",
-            var_name=["scenario", "region", "variable"],
+            var_name=["scenario", "region", "product_long"],
             value_name="Adoption",
         )
 
         for scenario in fig2["scenario"].unique():
-            for subvertical in fig2["variable"].unique():
+            for subvertical in fig2["product_long"].unique():
 
                 fig = go.Figure()
 
@@ -900,9 +902,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         go.Scatter(
                             name=region,
                             line=dict(width=1),
-                            x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                            x=fig2[(fig2["product_long"] == subvertical)][
+                                "year"
+                            ].unique(),
                             y=fig2[
-                                (fig2["variable"] == subvertical)
+                                (fig2["product_long"] == subvertical)
                                 & (fig2["region"] == region)
                                 & (fig2["scenario"] == scenario)
                             ]["Adoption"],
@@ -914,7 +918,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 fig.update_layout(
                     title={
                         "text": "Adoption, "
-                        + scenario
+                        + scenario.capitalize()
                         + ", "
                         + subvertical.replace("|Observed adoption", ""),
                         "xanchor": "center",
@@ -942,7 +946,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                                 subvertical.replace("|Observed adoption", "")
                             ).replace("slice(None, None, None)", "All")
                             + "-"
-                            + scenario
+                            + scenario.capitalize()
                             + ".html"
                         ).replace(" ", ""),
                         auto_open=False,
