@@ -12,6 +12,11 @@ from fair.SSPs import ssp119
 from fair.constants import radeff
 from scipy.stats import gamma
 import pyam
+import plotly.io as pio
+import plotly.graph_objects as go
+
+show_figs = True
+save_figs = False
 
 # endregion
 
@@ -465,6 +470,1322 @@ def climate(
         columns=list(["CO2e"]),
     )
     climate_output_concentration_co2e.index.set_names("year", inplace=True)
+
+    # Plot concentration, forcing, temperature
+
+    # region
+
+    #################################
+    # CO2 ATMOSPHERIC CONCENTRATION #
+    #################################
+
+    # region
+
+    # Load RCP data, then swap in PD for main GHGs
+    em_b = pd.DataFrame(rcp60.Emissions.emissions)
+    em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
+    em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
+
+    hist = pd.DataFrame(pd.read_csv("podi/data/emissions_conc_PD20.csv")).set_index(
+        ["region", "Metric", "Units", "scenario"]
+    )
+    hist.columns = hist.columns.astype(int)
+    hist = hist.loc["World ", "Atm conc CO2", "ppm", "pathway"].T.dropna()
+
+    cdr2 = (
+        pd.read_csv("podi/data/cdr_curve.csv")
+        .set_index(["region", "sector", "scenario"])
+        .fillna(0)
+    )
+    cdr2.columns = cdr2.columns.astype(int)
+
+    results = (
+        pd.DataFrame(pd.read_csv("podi/data/external/SSP_IAM_V2_201811.csv"))
+        .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
+        .droplevel(["UNIT"])
+    )
+    results.columns = results.columns.astype(int)
+
+    results19 = curve_smooth(
+        pd.DataFrame(
+            results.loc[
+                "GCAM4", "SSP2-19", "World", "Diagnostics|MAGICC6|Concentration|CO2"
+            ].loc[2010:]
+        ).T,
+        "quadratic",
+        30,
+    )
+
+    results19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
+
+    # CO2
+    em_b.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "baseline",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_pd.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_cdr.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
+
+    em_b.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "baseline",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_pd.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_cdr.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+
+    # CH4
+    em_b.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+    em_pd.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+    em_cdr.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+
+    # N2O
+    em_b.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+    em_pd.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+    em_cdr.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+
+    em_b = em_b.values
+    em_pd = em_pd.values
+    em_cdr = em_cdr.values
+
+    other_rf = np.zeros(em_pd.shape[0])
+    for x in range(0, em_pd.shape[0]):
+        other_rf[x] = 0.5 * np.sin(2 * np.pi * (x) / 14.0)
+
+    # run the model
+    Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b, other_rf=other_rf)
+    Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd, other_rf=other_rf)
+    Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
+
+    Cb = (
+        pd.DataFrame(Cb)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+    Cpd = (
+        pd.DataFrame(Cpd)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+    Ccdr = (
+        pd.DataFrame(Ccdr)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+
+    # CO2e conversion (not needed here for just CO2)
+    Cb["CO2"] = Cb.loc[:, 0]
+    Cpd["CO2"] = Cpd.loc[:, 0]
+    Ccdr["CO2"] = Ccdr.loc[:, 0]
+
+    C19 = results19 * (hist[2021] / results19.loc[:, 2021].values[0])
+    Cb = Cb * (hist[2021] / Cb.loc[2021, "CO2"])
+    Cpd = Cpd * (hist[2021] / Cpd.loc[2021, "CO2"])
+    Ccdr = Ccdr * (hist[2021] / Ccdr.loc[2021, "CO2"])
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=3, color="black"),
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=Cpd.loc[:, "CO2"],
+            fill="none",
+            stackgroup="hist",
+            legendgroup="hist",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Baseline",
+            line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Cb.loc[data_end_year:, "CO2"],
+            fill="none",
+            stackgroup="baseline",
+            legendgroup="baseline",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="DAU21",
+            line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Cpd.loc[data_end_year:, "CO2"],
+            fill="none",
+            stackgroup="pd21",
+            legendgroup="pd21",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="SSP2-RCP1.9",
+            line=dict(width=3, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]),
+            x=results19.loc[:, 2020:2100].columns,
+            y=results19.loc[:, 2020:2100].squeeze(),
+            fill="none",
+            stackgroup="19",
+            legendgroup="19",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="SR1.5",
+            line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Ccdr.loc[data_end_year:, "CO2"],
+            fill="none",
+            stackgroup="26",
+            legendgroup="26",
+        )
+    )
+
+    fig.update_layout(
+        title={
+            "text": "Atmospheric CO2 Concentration",
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        # xaxis={"title": "year"},
+        yaxis={"title": "ppm CO2"},
+    )
+
+    fig.update_layout(
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.01, x=0.12, font=dict(size=10)
+        ),
+        margin_b=0,
+        margin_t=60,
+        margin_l=15,
+        margin_r=15,
+        yaxis=dict(tickmode="linear", tick0=325, dtick=25),
+    )
+    """
+    fig.add_annotation(
+        text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
+        xref="paper",
+        yref="paper",
+        x=0,
+        y=-0.27,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="center",
+        borderpad=4,
+        borderwidth=2,
+        bgcolor="#ffffff",
+        opacity=1,
+    )
+    """
+
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/co2conc-" + "World " + ".html").replace(" ", ""),
+            auto_open=False,
+        )
+
+    # endregion
+
+    ##############################################
+    # GHG ATMOSPHERIC CONCENTRATION, CO2/CH4/N2O #
+    ##############################################
+
+    # region
+
+    data_start_year = data_start_year
+    data_end_year = data_end_year
+    proj_end_year = proj_end_year
+
+    df = climate_output[
+        (climate_output.reset_index().variable.str.contains("Concentration")).values
+    ].loc["PD22", slice(None), "world"]
+
+    fig = go.Figure()
+
+    for gas in (
+        df.loc["historical"]
+        .reset_index()
+        .variable.str.replace("Concentration\|", "")
+        .unique()
+    ):
+        fig.add_trace(
+            go.Scatter(
+                name="Historical, " + gas,
+                line=dict(width=3),
+                x=np.arange(data_start_year, data_end_year + 1, 1),
+                y=df[
+                    ((df.reset_index().scenario == "historical").values)
+                    & ((df.reset_index().variable.str.contains(gas)).values)
+                ].squeeze(),
+                fill="none",
+                legendgroup=gas,
+            )
+        )
+
+    for scenario in (
+        df.loc[~(df.reset_index().scenario == "historical").values]
+        .reset_index()
+        .scenario.unique()
+    ):
+        for gas in ["CO2", "CH4", "N2O"]:
+            fig.add_trace(
+                go.Scatter(
+                    name=scenario.capitalize() + ", " + gas,
+                    line=dict(width=3, dash=cl["Baseline"][1]),
+                    x=np.arange(data_start_year, proj_end_year + 1, 1),
+                    y=df[
+                        ((df.reset_index().scenario == scenario).values)
+                        & ((df.reset_index().variable.str.contains(gas)).values)
+                    ].squeeze(),
+                    fill="none",
+                    legendgroup=gas,
+                )
+            )
+
+    fig.update_layout(
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.0, x=0.12, font=dict(size=10)
+        ),
+        margin_b=0,
+        margin_t=60,
+        margin_l=15,
+        margin_r=15,
+        yaxis=dict(tickmode="linear", tick0=0.5, dtick=0.25),
+    )
+
+    fig.update_layout(
+        title={
+            "text": "Atmospheric GHG Concentration",
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "ppm CO2e"},
+    )
+
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/ghgconc-" + "World " + ".html").replace(" ", ""),
+            auto_open=False,
+        )
+
+    # endregion
+
+    ###########################################
+    # GHG ATMOSPHERIC CONCENTRATION, ALL GHGs #
+    ###########################################
+
+    # region
+
+    data_start_year = data_start_year
+    data_end_year = data_end_year
+    proj_end_year = proj_end_year
+
+    df = climate_output[
+        (climate_output.reset_index().variable.str.contains("Concentration")).values
+    ].loc["PD22", slice(None), "world"]
+
+    fig = go.Figure()
+
+    for gas in (
+        df.loc["historical"]
+        .reset_index()
+        .variable.str.replace("Concentration\|", "")
+        .unique()
+    ):
+        fig.add_trace(
+            go.Scatter(
+                name="Historical, " + gas,
+                line=dict(width=3),
+                x=np.arange(data_start_year, data_end_year + 1, 1),
+                y=df[
+                    ((df.reset_index().scenario == "historical").values)
+                    & ((df.reset_index().variable.str.contains(gas)).values)
+                ].squeeze(),
+                fill="none",
+                legendgroup=gas,
+            )
+        )
+
+    for scenario in df.reset_index().scenario.unique():
+        for gas in (
+            df.reset_index().variable.str.replace("Concentration\|", "").unique()
+        ):
+            fig.add_trace(
+                go.Scatter(
+                    name=scenario.capitalize() + ", " + gas,
+                    line=dict(width=3, dash=cl["Baseline"][1]),
+                    x=np.arange(data_end_year, proj_end_year + 1, 1),
+                    y=df[
+                        ((df.reset_index().scenario == scenario).values)
+                        & ((df.reset_index().variable.str.contains(gas)).values)
+                    ].squeeze(),
+                    fill="none",
+                    legendgroup=gas,
+                )
+            )
+
+    fig.update_layout(
+        title={
+            "text": "Atmospheric GHG Concentration",
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "ppm CO2e"},
+    )
+
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/ghgconc-" + "World " + ".html").replace(" ", ""),
+            auto_open=False,
+        )
+
+    # endregion
+
+    #########################
+    # GHG RADIATIVE FORCING #
+    #########################
+
+    # region
+
+    # Load RCP data, then swap in PD for main GHGs
+    em_b = pd.DataFrame(rcp85.Emissions.emissions)
+    em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
+    em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
+
+    hist = pd.read_csv("podi/data/radiative_forcing_historical.csv")
+    hist.columns = hist.columns.astype(int)
+
+    F = (
+        pd.DataFrame(pd.read_csv("podi/data/external/SSP_IAM_V2_201811.csv"))
+        .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
+        .droplevel(["UNIT"])
+    )
+    F.columns = F.columns.astype(int)
+    """
+    F19 = curve_smooth(
+        pd.DataFrame(
+            F.loc[
+                "GCAM4",
+                "SSP2-19",
+                "World",
+                ["Diagnostics|MAGICC6|Forcing"],
+            ].loc[:, 2010:]
+        ),
+        "quadratic",
+        6,
+    )
+
+    """
+    F19 = pd.DataFrame(
+        F.loc[
+            "GCAM4",
+            "SSP2-19",
+            "World",
+            ["Diagnostics|MAGICC6|Forcing"],
+        ].loc[:, 2010:]
+    )
+
+    # CO2
+    em_b.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "baseline",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_pd.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_cdr.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
+
+    em_b.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "baseline",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_pd.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_cdr.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+
+    # CH4
+    em_b.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+    em_pd.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+    em_cdr.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+
+    # N2O
+    em_b.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+    em_pd.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+    em_cdr.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+
+    em_b = em_b.values
+    em_pd = em_pd.values
+    em_cdr = em_cdr.values
+
+    other_rf = np.zeros(em_pd.shape[0])
+
+    # run the model
+    Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b)
+    Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd)
+    Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr)
+    """
+    Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b, other_rf=other_rf)
+    Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd, other_rf=other_rf)
+    Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
+    """
+    Fb = (
+        pd.DataFrame(Fb)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+    Fpd = (
+        pd.DataFrame(Fpd)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+    Fcdr = (
+        pd.DataFrame(Fcdr)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+
+    # CO2e conversion
+
+    Fb["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fb, axis=1)).T, "quadratic", 6).T
+    Fpd["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fpd, axis=1)).T, "quadratic", 6).T
+    Fcdr["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Fcdr, axis=1)).T, "quadratic", 6).T
+    """
+    Fb['CO2e'] = np.sum(Fb, axis=1)
+    Fpd['CO2e'] = np.sum(Fpd, axis=1)
+    Fcdr['CO2e'] = np.sum(Fcdr, axis=1)
+    """
+
+    F19 = F19 * (hist.loc[:, 2020].values[0] / F19.loc[:, 2020].values[0])
+    Fb = Fb * (hist.loc[:, data_end_year].values[0] / Fb.loc[data_end_year, "CO2e"])
+    Fpd = Fpd * (hist.loc[:, data_end_year].values[0] / Fpd.loc[data_end_year, "CO2e"])
+    Fcdr = Fcdr * (
+        hist.loc[:, data_end_year].values[0] / Fcdr.loc[data_end_year, "CO2e"]
+    )
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=3, color="black"),
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=hist.loc[:, data_start_year:long_proj_end_year].squeeze(),
+            fill="none",
+            stackgroup="hist",
+            legendgroup="hist",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Baseline",
+            line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Fb.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="baseline",
+            legendgroup="baseline",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="DAU21",
+            line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Fpd.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="pd21",
+            legendgroup="pd21",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="SSP2-RCP1.9",
+            line=dict(width=3, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]),
+            x=F19.loc[:, 2020:2100].columns,
+            y=F19.loc[:, 2020:2100].squeeze(),
+            fill="none",
+            stackgroup="19",
+            legendgroup="19",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="SR1.5",
+            line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Fcdr.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="26",
+            legendgroup="26",
+        )
+    )
+
+    fig.update_layout(
+        title={"text": "Radiative Forcing", "xanchor": "center", "x": 0.5, "y": 0.99},
+        # xaxis={"title": "year"},
+        yaxis={"title": "W/m2"},
+    )
+
+    fig.update_layout(
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.01, x=0.12, font=dict(size=10)
+        ),
+        margin_b=0,
+        margin_t=60,
+        margin_l=15,
+        margin_r=15,
+        yaxis=dict(tickmode="linear", tick0=0, dtick=0.5),
+    )
+
+    """
+    fig.add_annotation(
+        text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
+        xref="paper",
+        yref="paper",
+        x=0,
+        y=-0.27,
+        showarrow=False,
+        font=dict(size=10, color="#2E3F5C"),
+        align="center",
+        borderpad=4,
+        borderwidth=2,
+        bgcolor="#ffffff",
+        opacity=1,
+    )
+    """
+
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/forcing-" + "World" + ".html").replace(" ", ""),
+            auto_open=False,
+        )
+
+    # endregion
+
+    ######################
+    # TEMPERATURE CHANGE #
+    ######################
+
+    # region
+
+    # Load RCP data, then swap in PD for main GHGs
+    em_b = pd.DataFrame(rcp85.Emissions.emissions)
+    em_pd = pd.DataFrame(rcp3pd.Emissions.emissions)
+    em_cdr = pd.DataFrame(rcp3pd.Emissions.emissions * 1.001)
+
+    hist = pd.read_csv("podi/data/temperature_change_historical.csv")
+    hist.columns = hist.columns.astype(int)
+
+    T = (
+        pd.DataFrame(pd.read_csv("podi/data/external/SSP_IAM_V2_201811.csv"))
+        .set_index(["MODEL", "SCENARIO", "REGION", "VARIABLE", "UNIT"])
+        .droplevel(["UNIT"])
+    )
+    T.columns = T.columns.astype(int)
+    """
+    T19 = curve_smooth(
+        pd.DataFrame(
+            T.loc[
+                "GCAM4",
+                "SSP1-19",
+                "World",
+                ["Diagnostics|MAGICC6|Temperature|Global Mean"],
+            ].loc[:, 2010:]
+        ),
+        "quadratic",
+        6,
+    )
+
+    """
+    T19 = T.loc[
+        "GCAM4",
+        "SSP1-19",
+        "World",
+        ["Diagnostics|MAGICC6|Temperature|Global Mean"],
+    ].loc[:, 2010:]
+
+    cdr2 = (
+        pd.read_csv("podi/data/cdr_curve.csv")
+        .set_index(["region", "sector", "scenario"])
+        .fillna(0)
+    )
+    cdr2.columns = cdr2.columns.astype(int)
+
+    # CO2
+    em_b.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "baseline",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_pd.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_cdr.loc[225:335, 1] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Electricity", "Transport", "Buildings", "Industry"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values - (cdr2.loc["World ", "Carbon Dioxide Removal", "pathway"] / 3670).values
+
+    em_b.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "baseline",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_pd.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+    em_cdr.loc[225:335, 2] = (
+        em[~em.index.get_level_values(3).isin(["CH4", "N2O", "F-gases"])]
+        .loc[
+            "World ",
+            ["Forests & Wetlands", "Agriculture"],
+            slice(None),
+            "CO2",
+            "pathway",
+        ]
+        .sum()
+        / 3670
+    ).values
+
+    # CH4
+    em_b.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+    em_pd.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+    em_cdr.loc[225:335, 3] = (
+        em[em.index.get_level_values(3).isin(["CH4"])]
+        .loc["World ", slice(None), slice(None), "CH4", "pathway"]
+        .sum()
+        / (25)
+    ).values
+
+    # N2O
+    em_b.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+    em_pd.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+    em_cdr.loc[225:335, 4] = (
+        em[em.index.get_level_values(3).isin(["N2O"])]
+        .loc["World ", slice(None), slice(None), "N2O", "pathway"]
+        .sum()
+        / (298)
+    ).values
+
+    em_b = em_b.values
+    em_pd = em_pd.values
+    em_cdr = em_cdr.values
+
+    other_rf = np.zeros(em_pd.shape[0])
+
+    # run the model
+    Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b)
+    Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd)
+    Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr)
+    """
+    Cb, Fb, Tb = fair.forward.fair_scm(emissions=em_b, other_rf=other_rf)
+    Cpd, Fpd, Tpd = fair.forward.fair_scm(emissions=em_pd, other_rf=other_rf)
+    Ccdr, Fcdr, Tcdr = fair.forward.fair_scm(emissions=em_cdr, other_rf=other_rf)
+    """
+    Tb = (
+        pd.DataFrame(Tb)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+    Tpd = (
+        pd.DataFrame(Tpd)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+    Tcdr = (
+        pd.DataFrame(Tcdr)
+        .loc[225:335]
+        .set_index(np.arange(data_start_year, (long_proj_end_year + 1), 1))
+    )
+
+    # CO2e conversion
+
+    Tb["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tb, axis=1)).T, "quadratic", 6).T
+    Tpd["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tpd, axis=1)).T, "quadratic", 6).T
+    Tcdr["CO2e"] = curve_smooth(pd.DataFrame(np.sum(Tcdr, axis=1)).T, "quadratic", 6).T
+    """
+    Tb['CO2e'] = np.sum(Tb, axis=1)
+    Tpd['CO2e'] = np.sum(Tpd, axis=1)
+    Tcdr['CO2e'] = np.sum(Tcdr, axis=1)
+    """
+
+    T19 = T19 * (hist.loc[:, 2020].values[0] / T19.loc[:, 2020].values[0])
+    Tb = Tb * (hist.loc[:, data_end_year].values[0] / Tb.loc[data_end_year, "CO2e"])
+    Tpd = Tpd * (hist.loc[:, data_end_year].values[0] / Tpd.loc[data_end_year, "CO2e"])
+    Tcdr = Tcdr * (
+        hist.loc[:, data_end_year].values[0] / Tcdr.loc[data_end_year, "CO2e"]
+    )
+
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=3, color="black"),
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=hist.loc[:, data_start_year:long_proj_end_year].squeeze(),
+            fill="none",
+            stackgroup="hist",
+            legendgroup="hist",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=3, color="black"),
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=hist.loc[:, data_start_year:long_proj_end_year].squeeze(),
+            fill="none",
+            stackgroup="hist",
+            legendgroup="hist",
+            showlegend=False,
+        ),
+        secondary_y=True,
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Baseline",
+            line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tb.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="baseline",
+            legendgroup="baseline",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Baseline",
+            line=dict(width=3, color=cl["Baseline"][0], dash=cl["Baseline"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tb.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="baseline",
+            legendgroup="baseline",
+            showlegend=False,
+        ),
+        secondary_y=True,
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="DAU21",
+            line=dict(width=3, color=cl["DAU21"][0], dash=cl["DAU21"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tpd.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="pd21",
+            legendgroup="pd21",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="SSP2-RCP1.9",
+            line=dict(width=3, color=cl["SSP2-RCP1.9"][0], dash=cl["SSP2-RCP1.9"][1]),
+            x=T19.loc[:, 2020:2100].columns,
+            y=T19.loc[:, 2020:2100].squeeze(),
+            fill="none",
+            stackgroup="19",
+            legendgroup="19",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="SR1.5",
+            line=dict(width=3, color=cl["DAU21+CDR"][0], dash=cl["DAU21+CDR"][1]),
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tcdr.loc[data_end_year:, "CO2e"],
+            fill="none",
+            stackgroup="26",
+            legendgroup="26",
+        )
+    )
+
+    # temp range
+
+    # region
+
+    # Historical
+    # region
+
+    temp_range = pd.read_csv(
+        "podi/data/temperature_change_range_historical.csv"
+    ).set_index("Range")
+    temp_range.columns = temp_range.columns.astype(int)
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical_upper",
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=temp_range.loc["83p", data_start_year:data_end_year].squeeze(),
+            mode="lines",
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            showlegend=False,
+        ),
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical_upper",
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=temp_range.loc["83p", data_start_year:data_end_year].squeeze(),
+            mode="lines",
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            showlegend=False,
+        ),
+        secondary_y=True,
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Est. range",
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=temp_range.loc["17p", data_start_year:data_end_year].squeeze(),
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            mode="lines",
+            fillcolor="rgba(255,155,5,0.15)",
+            fill="tonexty",
+            showlegend=False,
+        ),
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical_lower",
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=temp_range.loc["17p", data_start_year:data_end_year].squeeze(),
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            mode="lines",
+            fillcolor="rgba(255,155,5,0.15)",
+            fill="tonexty",
+            showlegend=False,
+        ),
+        secondary_y=True,
+    )
+    # endregion
+
+    # SR1.5
+    # region
+
+    fig.add_trace(
+        go.Scatter(
+            name="sr1.5_upper",
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tcdr.loc[data_end_year:, "CO2e"] * 1.2,
+            mode="lines",
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            showlegend=False,
+        ),
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="sr1.5_lower",
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tcdr.loc[data_end_year:, "CO2e"] * 0.8,
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            mode="lines",
+            fillcolor="rgba(51,102,204,0.15)",
+            fill="tonexty",
+            showlegend=False,
+        ),
+    )
+
+    # endregion
+
+    """
+    # DAU21
+    # region
+    fig.add_trace(
+        go.Scatter(
+            name="dau21_upper",
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tpd.loc[data_end_year:, "CO2e"] * 1.2,
+            mode="lines",
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            showlegend=False,
+        ),
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="dau21_lower",
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tpd.loc[data_end_year:, "CO2e"] * 0.8,
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            mode="lines",
+            fillcolor="rgba(153,0,153,0.15)",
+            fill="tonexty",
+            showlegend=False,
+        ),
+    )
+
+    # endregion
+    """
+
+    # DAU21 expanding
+    # region
+
+    tproj_err = pd.read_csv(
+        "podi/data/temperature_change_range_historical.csv"
+    ).set_index("Range")
+    tproj_err.columns = temp_range.columns.astype(int)
+
+    fig.add_trace(
+        go.Scatter(
+            name="dau21_upper",
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tpd.loc[data_end_year:, "CO2e"] * 1.2
+            + temp_range.loc["dau21_upper", data_end_year:long_proj_end_year].squeeze(),
+            mode="lines",
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            showlegend=False,
+        ),
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="dau21_lower",
+            x=np.arange(data_end_year, long_proj_end_year + 1, 1),
+            y=Tpd.loc[data_end_year:, "CO2e"] * 0.8
+            + temp_range.loc["dau21_lower", data_end_year:long_proj_end_year].squeeze(),
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            mode="lines",
+            fillcolor="rgba(153,0,153,0.15)",
+            fill="tonexty",
+            showlegend=False,
+        ),
+    )
+
+    # endregion
+
+    # endregion
+
+    fig.update_layout(
+        title={
+            "text": "Global Mean Temperature",
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        # xaxis={"title": "year"},
+        yaxis={"title": "Deg. C over pre-industrial (1850-1900 mean)"},
+    )
+
+    fig.update_layout(
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.01, x=0.1, font=dict(size=10)
+        ),
+        margin_b=0,
+        margin_t=60,
+        margin_l=15,
+        margin_r=15,
+        yaxis=dict(tickmode="linear", tick0=0.5, dtick=0.25),
+        yaxis2=dict(tickmode="linear", tick0=0.5, dtick=0.25),
+    )
+
+    if show_annotations is True:
+        """
+        fig.add_annotation(
+            text="Historical data is from NASA; projected data is from projected emissions input into the FAIR v1.3 climate model.",
+            xref="paper",
+            yref="paper",
+            x=0,
+            y=-0.27,
+            showarrow=False,
+            font=dict(size=10, color="#2E3F5C"),
+            align="center",
+            borderpad=4,
+            borderwidth=2,
+            bgcolor="#ffffff",
+            opacity=1,
+        )
+        """
+    if show_figs is True:
+        fig.show()
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/temp-" + "World" + ".html").replace(" ", ""),
+            auto_open=False,
+        )
+
+    # endregion
+
+    # endregion
 
     # endregion
 

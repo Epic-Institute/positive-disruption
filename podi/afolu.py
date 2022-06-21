@@ -11,6 +11,8 @@ import pyam
 import panel as pn
 import holoviews as hv
 import hvplot.pandas
+import plotly.io as pio
+import plotly.graph_objects as go
 
 hvplot.extension("plotly")
 

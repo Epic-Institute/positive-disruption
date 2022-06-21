@@ -8,10 +8,13 @@ from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
 import os
 import pyam
+import plotly.io as pio
+import plotly.graph_objects as go
 
 pandarallel.initialize(nb_workers=4)
 
-show_figs = False
+show_figs = True
+save_figs = False
 
 # endregion
 
