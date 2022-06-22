@@ -1154,7 +1154,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_historical
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -1165,7 +1164,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -1239,7 +1238,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_historical
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -1250,7 +1248,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -1321,7 +1319,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_historical
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -1333,7 +1330,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -1431,7 +1428,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -1441,7 +1437,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig = (
             df.loc[
                 model,
-                scenario,
+                slice(None),
                 region,
                 sector,
                 product_category,
@@ -2083,7 +2079,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_baseline
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -2094,7 +2089,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -2138,7 +2133,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Total Final Consumption, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", Baseline",
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -2168,7 +2164,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_baseline
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -2179,7 +2174,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -2225,7 +2220,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     "slice(None, None, None)", "All Sources"
                 )
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", Baseline",
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -2250,7 +2246,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_baseline
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -2262,7 +2257,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -2306,7 +2301,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Electricity Consumption, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", Baseline",
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -2357,7 +2353,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -2367,7 +2362,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig = (
             df.loc[
                 model,
-                scenario,
+                slice(None),
                 region,
                 sector,
                 product_category,
@@ -2411,7 +2406,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Electricity Generation, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", Baseline",
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -3621,7 +3617,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -3632,7 +3627,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -3676,7 +3671,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Total Final Consumption, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -3799,12 +3796,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         upstreamwedges = (
             (
-                (
-                    energy_post_upstream
-                    - energy_output[
-                        (energy_output.reset_index().scenario == "baseline").values
-                    ]
-                )
+                (energy_post_upstream - energy_baseline)
                 .loc[
                     model,
                     scenario,
@@ -3902,6 +3894,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 + ", "
                 + str(region).replace("slice(None, None, None)", "World")
                 + ", "
+                + str(scenario).capitalize()
+                + ", "
                 + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
@@ -3932,7 +3926,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -3943,7 +3936,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -3989,7 +3982,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     "slice(None, None, None)", "All Sources"
                 )
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -4014,7 +4009,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -4026,7 +4020,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -4070,7 +4064,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Electricity Consumption, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -4126,7 +4122,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -4136,7 +4131,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig = (
             df.loc[
                 model,
-                scenario,
+                slice(None),
                 region,
                 sector,
                 product_category,
@@ -4180,7 +4175,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Electricity Generation, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -4304,12 +4301,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         upstreamwedges = (
             (
-                (
-                    energy_post_upstream
-                    - energy_output[
-                        (energy_output.reset_index().scenario == "baseline").values
-                    ]
-                )
+                (energy_post_upstream - energy_baseline)
                 .loc[
                     model,
                     scenario,
@@ -4974,7 +4966,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -4985,7 +4976,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -5029,7 +5020,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Total Final Consumption, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -5152,12 +5145,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         upstreamwedges = (
             (
-                (
-                    energy_post_upstream
-                    - energy_output[
-                        (energy_output.reset_index().scenario == "baseline").values
-                    ]
-                )
+                (energy_post_upstream - energy_baseline)
                 .loc[
                     model,
                     scenario,
@@ -5285,7 +5273,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -5296,7 +5283,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -5342,7 +5329,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     "slice(None, None, None)", "All Sources"
                 )
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -5367,7 +5356,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -5385,7 +5373,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -5429,7 +5417,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Heat Consumption, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -5485,7 +5475,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -5495,7 +5484,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig = (
             df.loc[
                 model,
-                scenario,
+                slice(None),
                 region,
                 sector,
                 product_category,
@@ -5539,7 +5528,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Heat Generation, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -5669,12 +5660,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         upstreamwedges = (
             (
-                (
-                    energy_post_upstream
-                    - energy_output[
-                        (energy_output.reset_index().scenario == "baseline").values
-                    ]
-                )
+                (energy_post_upstream - energy_baseline)
                 .loc[
                     model,
                     scenario,
@@ -6345,7 +6331,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -6356,7 +6341,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -6523,12 +6508,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         upstreamwedges = (
             (
-                (
-                    energy_post_upstream
-                    - energy_output[
-                        (energy_output.reset_index().scenario == "baseline").values
-                    ]
-                )
+                (energy_post_upstream - energy_baseline)
                 .loc[
                     model,
                     scenario,
@@ -6656,7 +6636,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -6667,7 +6646,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -6738,7 +6717,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_post_electrification
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -6750,7 +6728,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    scenario,
+                    slice(None),
                     region,
                     sector,
                     product_category,
@@ -6850,7 +6828,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -6860,7 +6837,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig = (
             df.loc[
                 model,
-                scenario,
+                slice(None),
                 region,
                 sector,
                 product_category,
@@ -7028,12 +7005,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         upstreamwedges = (
             (
-                (
-                    energy_post_upstream
-                    - energy_output[
-                        (energy_output.reset_index().scenario == "baseline").values
-                    ]
-                )
+                (energy_post_upstream - energy_baseline)
                 .loc[
                     model,
                     scenario,
@@ -7209,7 +7181,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_storage
         model = "PD22"
-        scenario = slice(None)
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -7220,7 +7191,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig = (
             df.loc[
                 model,
-                scenario,
+                slice(None),
                 region,
                 sector,
                 product_category,
@@ -7264,7 +7235,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Energy Storage, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
