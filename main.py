@@ -21,16 +21,6 @@ from podi.cdr.cdr_util import (
 
 import pyam
 
-unit_name = ["TJ", "TWh", "GW"]
-unit_val = [1, 0.0002777, 0.2777 / 8760]
-unit = [unit_name[0], unit_val[0]]
-
-save_figs = False
-show_figs = True
-show_annotations = True
-start_year = 1990
-scenario = "pathway"
-
 warnings.simplefilter(action="ignore", category=FutureWarning)
 regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "region"})
 

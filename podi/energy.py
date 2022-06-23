@@ -660,7 +660,475 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ].multiply(3.6)
     )
 
-    # Convert AVBUNK & AVMAR to be positive (they were negative by convention representing an 'export' to an international region WORLDAV and WORLDMAR)
+    # Diagnostic check for Energy Balance
+    # region
+
+    region = slice(None)
+    year = data_start_year
+    df = energy_historical
+
+    # Filter for region and year
+    energy_balance = (
+        df.loc[slice(None), slice(None), region]
+        .loc[:, [year]]
+        .groupby(
+            [
+                "sector",
+                "product_category",
+                "product_long",
+                "flow_category",
+                "flow_long",
+            ]
+        )
+        .sum()
+    )
+
+    # Create energy balance table structure
+    energy_balance = (
+        energy_balance.groupby(
+            ["product_category", "product_long", "flow_category", "flow_long"]
+        )
+        .sum()
+        .reset_index()
+        .pivot(
+            index=["flow_category", "flow_long"],
+            columns=["product_category", "product_long"],
+            values=start_year,
+        )
+        .fillna(0)
+        .reindex(
+            axis="index",
+            level=0,
+            labels=[
+                "Supply",
+                "Transformation processes",
+                "Energy industry own use and Losses",
+                "Final consumption",
+            ],
+        )
+        .reindex(
+            axis="columns",
+            level=0,
+            labels=[
+                "Coal",
+                "Crude, NGL, refinery feedstocks",
+                "Oil products",
+                "Natural gas",
+                "Biofuels and Waste",
+                "Electricity and Heat",
+            ],
+        )
+        .astype(int)
+    )
+
+    # Create Product categories (columns)
+    energy_balance = pd.concat(
+        [
+            energy_balance.groupby("product_category", axis="columns")
+            .sum()[
+                [
+                    "Coal",
+                    "Crude, NGL, refinery feedstocks",
+                    "Oil products",
+                    "Natural gas",
+                    "Biofuels and Waste",
+                ]
+            ]
+            .rename(columns={"Crude, NGL, refinery feedstocks": "Crude oil"}),
+            energy_balance.loc[:, "Electricity and Heat"].loc[
+                :,
+                [
+                    "Nuclear",
+                    "Hydro",
+                    "Electricity",
+                    "Heat – High Temperature",
+                    "Heat – Low Temperature",
+                ],
+            ],
+            energy_balance.loc[:, "Electricity and Heat"]
+            .drop(
+                [
+                    "Electricity",
+                    "Heat – High Temperature",
+                    "Heat – Low Temperature",
+                    "Nuclear",
+                    "Hydro",
+                ],
+                1,
+            )
+            .sum(axis=1)
+            .to_frame()
+            .rename(columns={0: "Wind, solar, etc."}),
+        ],
+        axis=1,
+    ).reindex(
+        axis="columns",
+        labels=[
+            "Coal",
+            "Crude oil",
+            "Oil products",
+            "Natural gas",
+            "Nuclear",
+            "Hydro",
+            "Wind, solar, etc.",
+            "Biofuels and Waste",
+            "Electricity",
+            "Heat – High Temperature",
+            "Heat – Low Temperature",
+        ],
+    )
+
+    energy_balance = pd.concat(
+        [
+            energy_balance,
+            pd.DataFrame(energy_balance.sum(axis=1)).rename(columns={0: "Total"}),
+        ],
+        axis=1,
+    )
+
+    # Create Flow categories (rows)
+    bunkers = (
+        energy_balance.loc["Supply", :]
+        .loc[
+            energy_balance.loc["Supply", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "International marine bunkers",
+                    "International aviation bunkers",
+                ]
+            ),
+            :,
+        ]
+        .iloc[::-1]
+    )
+
+    electricity_plants = (
+        energy_balance.loc["Transformation processes", :]
+        .loc[
+            energy_balance.loc["Transformation processes", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "Autoproducer electricity plants",
+                    "Main activity producer electricity plants",
+                    "Chemical heat for electricity production",
+                ]
+            ),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Electricity plants"})
+    )
+
+    chp_plants = (
+        energy_balance.loc["Transformation processes", :]
+        .loc[
+            energy_balance.loc["Transformation processes", :]
+            .index.get_level_values(0)
+            .isin(["Autoproducer CHP", "Main activity producer CHP plants"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "CHP plants"})
+    )
+
+    heat_plants = (
+        energy_balance.loc["Transformation processes", :]
+        .loc[
+            energy_balance.loc["Transformation processes", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "Autoproducer heat plants",
+                    "Main activity producer heat plants",
+                    "Electric boilers",
+                    "Heat pumps",
+                ]
+            ),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Heat plants"})
+    )
+
+    gas_works = (
+        energy_balance.loc["Transformation processes", :]
+        .loc[
+            energy_balance.loc["Transformation processes", :]
+            .index.get_level_values(0)
+            .isin(["Gas works", "For blended natural gas"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Gas works"})
+    )
+    gas_works["Natural gas"] = gas_works["Natural gas"] * 0.5
+    gas_works["Total"] = gas_works.loc[:, ["Coal", "Natural gas"]].sum(1)
+
+    oil_refineries = (
+        energy_balance.loc["Transformation processes", :]
+        .loc[
+            energy_balance.loc["Transformation processes", :]
+            .index.get_level_values(0)
+            .isin(["Oil refineries"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Oil refineries"})
+    )
+
+    coal_transformation = (
+        energy_balance.loc["Transformation processes", :]
+        .loc[
+            energy_balance.loc["Transformation processes", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "Blast furnaces",
+                    "Coke ovens",
+                    "Patent fuel plants",
+                    "BKB/peat briquette plants",
+                ]
+            ),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Coal transformation"})
+    )
+
+    liquifaction_plants = (
+        energy_balance.loc["Transformation processes", :]
+        .loc[
+            energy_balance.loc["Transformation processes", :]
+            .index.get_level_values(0)
+            .isin(["Gas-to-liquids (GTL) plants", "Coal liquefaction plants"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Liquifaction plants"})
+    )
+
+    other_transformation = (
+        energy_balance.loc["Transformation processes", :]
+        .loc[
+            energy_balance.loc["Transformation processes", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "Non-specified (transformation)",
+                    "Charcoal production plants",
+                    "Petrochemical plants",
+                ]
+            ),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Other transformation"})
+    )
+
+    own_use = (
+        energy_balance.loc["Energy industry own use and Losses", :]
+        .loc[
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "Energy industry own use",
+                ]
+            ),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Energy industry own use"})
+    )
+
+    losses = (
+        energy_balance.loc["Energy industry own use and Losses", :]
+        .loc[
+            energy_balance.loc["Energy industry own use and Losses", :]
+            .index.get_level_values(0)
+            .isin(["Losses"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Losses"})
+    )
+
+    industry = (
+        energy_balance.loc["Final consumption", :]
+        .loc[
+            energy_balance.loc["Final consumption", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "Chemical and petrochemical",
+                    "Construction",
+                    "Food and tobacco",
+                    "Industry not elsewhere specified",
+                    "Iron and steel",
+                    "Machinery",
+                    "Mining and quarrying",
+                    "Non-ferrous metals",
+                    "Non-metallic minerals",
+                    "Paper, pulp, and print",
+                    "Textile and leather",
+                    "Transport equipment",
+                    "Wood and wood products",
+                ]
+            ),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Industry"})
+    )
+
+    transport = (
+        energy_balance.loc["Final consumption", :]
+        .loc[
+            energy_balance.loc["Final consumption", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "Domestic aviation",
+                    "Domestic navigation",
+                    "Pipeline transport",
+                    "Rail",
+                    "Road",
+                    "Transport not elsewhere specified",
+                ]
+            ),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Transport"})
+    )
+
+    residential = (
+        energy_balance.loc["Final consumption", :]
+        .loc[
+            energy_balance.loc["Final consumption", :]
+            .index.get_level_values(0)
+            .isin(["Residential"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Residential"})
+    )
+
+    commercial = (
+        energy_balance.loc["Final consumption", :]
+        .loc[
+            energy_balance.loc["Final consumption", :]
+            .index.get_level_values(0)
+            .isin(["Commercial and public services"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Commercial and public services"})
+    )
+
+    agriculture = (
+        energy_balance.loc["Final consumption", :]
+        .loc[
+            energy_balance.loc["Final consumption", :]
+            .index.get_level_values(0)
+            .isin(["Agriculture/forestry"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Agriculture / forestry"})
+    )
+
+    fishing = (
+        energy_balance.loc["Final consumption", :]
+        .loc[
+            energy_balance.loc["Final consumption", :]
+            .index.get_level_values(0)
+            .isin(["Fishing"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Fishing"})
+    )
+
+    nonspecified = (
+        energy_balance.loc["Final consumption", :]
+        .loc[
+            energy_balance.loc["Final consumption", :]
+            .index.get_level_values(0)
+            .isin(["Final consumption not elsewhere specified"]),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Non-specified"})
+    )
+
+    nonenergyuse = (
+        energy_balance.loc["Final consumption", :]
+        .loc[
+            energy_balance.loc["Final consumption", :]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "Non-energy use in other",
+                    "Non-energy use in transport",
+                    "Non-energy use industry/transformation/energy",
+                ]
+            ),
+            :,
+        ]
+        .sum()
+        .to_frame()
+        .T.rename(index={0: "Non-energy use"})
+    )
+
+    energy_balance = pd.concat(
+        [
+            bunkers,
+            electricity_plants,
+            chp_plants,
+            heat_plants,
+            gas_works,
+            oil_refineries,
+            coal_transformation,
+            liquifaction_plants,
+            other_transformation,
+            own_use,
+            losses,
+            industry,
+            transport,
+            residential,
+            commercial,
+            agriculture,
+            fishing,
+            nonspecified,
+            nonenergyuse,
+        ]
+    )
+
+    energy_balance.astype(int)
+
+    # endregion
+
+    # Convert AVBUNK & MARBUNK to be positive (they were negative by convention representing an 'export' to an international region WORLDAV and WORLDMAR) and change their flow_category to Final consumption,
 
     energy_historical[
         energy_historical.index.get_level_values(9).isin(["AVBUNK", "MARBUNK"])
@@ -668,479 +1136,45 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         energy_historical.index.get_level_values(9).isin(["AVBUNK", "MARBUNK"])
     ].abs()
 
+    energy_historical_index = energy_historical.index.names
+    energy_historical.reset_index(inplace=True)
+    energy_historical = energy_historical.replace("Supply", "Final consumption")
+    energy_historical.set_index(energy_historical_index, inplace=True)
+
+    # Some flows in flow_category 'Transformation processes' are negative, representing the ‘loss’ of a product as it transforms into another product. The positive values represent production of a product. This is switched to be consistent with positive values representing the consumption of a product. Flow_category is also changed to Final consumption.
+    energy_historical[
+        energy_historical.index.get_level_values(7).isin(["Transformation processes"])
+    ] = energy_historical[
+        energy_historical.index.get_level_values(7).isin(["Transformation processes"])
+    ].abs()
+
+    energy_historical_index = energy_historical.index.names
+    energy_historical.reset_index(inplace=True)
+    energy_historical = energy_historical.replace(
+        "Transformation processes", "Final consumption"
+    )
+    energy_historical.set_index(energy_historical_index, inplace=True)
+
+    # All flows in flow_category 'Energy industry own use and Losses' are negative, representing the 'loss' of a product as the energy industry uses it to transform one product into another. This is switched to be consistent with positive values representing the consumption of a product. Flow_category is also changed to Final consumption.
+    energy_historical[
+        energy_historical.index.get_level_values(7).isin(
+            ["Energy industry own use and Losses"]
+        )
+    ] = energy_historical[
+        energy_historical.index.get_level_values(7).isin(
+            ["Energy industry own use and Losses"]
+        )
+    ].abs()
+
+    energy_historical_index = energy_historical.index.names
+    energy_historical.reset_index(inplace=True)
+    energy_historical = energy_historical.replace(
+        "Energy industry own use and Losses", "Final consumption"
+    )
+    energy_historical.set_index(energy_historical_index, inplace=True)
+
     # Plot energy_historical
     if show_figs is True:
-        ###################
-        # ENERGY BALANCES #
-        ###################
-
-        # region
-
-        region = slice(None)
-        year = data_start_year
-        df = energy_historical
-
-        # Filter for region and year
-        energy_balance = (
-            df.loc[slice(None), slice(None), region]
-            .loc[:, [year]]
-            .groupby(
-                [
-                    "sector",
-                    "product_category",
-                    "product_long",
-                    "flow_category",
-                    "flow_long",
-                ]
-            )
-            .sum()
-        )
-
-        # Create energy balance table structure
-        energy_balance = (
-            energy_balance.groupby(
-                ["product_category", "product_long", "flow_category", "flow_long"]
-            )
-            .sum()
-            .reset_index()
-            .pivot(
-                index=["flow_category", "flow_long"],
-                columns=["product_category", "product_long"],
-                values=start_year,
-            )
-            .fillna(0)
-            .reindex(
-                axis="index",
-                level=0,
-                labels=[
-                    "Supply",
-                    "Transformation processes",
-                    "Energy industry own use and Losses",
-                    "Final consumption",
-                ],
-            )
-            .reindex(
-                axis="columns",
-                level=0,
-                labels=[
-                    "Coal",
-                    "Crude, NGL, refinery feedstocks",
-                    "Oil products",
-                    "Natural gas",
-                    "Biofuels and Waste",
-                    "Electricity and Heat",
-                ],
-            )
-            .astype(int)
-        )
-
-        # Create Product categories (columns)
-        energy_balance = pd.concat(
-            [
-                energy_balance.groupby("product_category", axis="columns")
-                .sum()[
-                    [
-                        "Coal",
-                        "Crude, NGL, refinery feedstocks",
-                        "Oil products",
-                        "Natural gas",
-                        "Biofuels and Waste",
-                    ]
-                ]
-                .rename(columns={"Crude, NGL, refinery feedstocks": "Crude oil"}),
-                energy_balance.loc[:, "Electricity and Heat"].loc[
-                    :,
-                    [
-                        "Nuclear",
-                        "Hydro",
-                        "Electricity",
-                        "Heat – High Temperature",
-                        "Heat – Low Temperature",
-                    ],
-                ],
-                energy_balance.loc[:, "Electricity and Heat"]
-                .drop(
-                    [
-                        "Electricity",
-                        "Heat – High Temperature",
-                        "Heat – Low Temperature",
-                        "Nuclear",
-                        "Hydro",
-                    ],
-                    1,
-                )
-                .sum(axis=1)
-                .to_frame()
-                .rename(columns={0: "Wind, solar, etc."}),
-            ],
-            axis=1,
-        ).reindex(
-            axis="columns",
-            labels=[
-                "Coal",
-                "Crude oil",
-                "Oil products",
-                "Natural gas",
-                "Nuclear",
-                "Hydro",
-                "Wind, solar, etc.",
-                "Biofuels and Waste",
-                "Electricity",
-                "Heat – High Temperature",
-                "Heat – Low Temperature",
-            ],
-        )
-
-        energy_balance = pd.concat(
-            [
-                energy_balance,
-                pd.DataFrame(energy_balance.sum(axis=1)).rename(columns={0: "Total"}),
-            ],
-            axis=1,
-        )
-
-        # Create Flow categories (rows)
-        bunkers = (
-            energy_balance.loc["Supply", :]
-            .loc[
-                energy_balance.loc["Supply", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "International marine bunkers",
-                        "International aviation bunkers",
-                    ]
-                ),
-                :,
-            ]
-            .iloc[::-1]
-        )
-
-        electricity_plants = (
-            energy_balance.loc["Transformation processes", :]
-            .loc[
-                energy_balance.loc["Transformation processes", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "Autoproducer electricity plants",
-                        "Main activity producer electricity plants",
-                        "Chemical heat for electricity production",
-                    ]
-                ),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Electricity plants"})
-        )
-
-        chp_plants = (
-            energy_balance.loc["Transformation processes", :]
-            .loc[
-                energy_balance.loc["Transformation processes", :]
-                .index.get_level_values(0)
-                .isin(["Autoproducer CHP", "Main activity producer CHP plants"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "CHP plants"})
-        )
-
-        heat_plants = (
-            energy_balance.loc["Transformation processes", :]
-            .loc[
-                energy_balance.loc["Transformation processes", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "Autoproducer heat plants",
-                        "Main activity producer heat plants",
-                        "Electric boilers",
-                        "Heat pumps",
-                    ]
-                ),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Heat plants"})
-        )
-
-        gas_works = (
-            energy_balance.loc["Transformation processes", :]
-            .loc[
-                energy_balance.loc["Transformation processes", :]
-                .index.get_level_values(0)
-                .isin(["Gas works", "For blended natural gas"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Gas works"})
-        )
-        gas_works["Natural gas"] = gas_works["Natural gas"] * 0.5
-        gas_works["Total"] = gas_works.loc[:, ["Coal", "Natural gas"]].sum(1)
-
-        oil_refineries = (
-            energy_balance.loc["Transformation processes", :]
-            .loc[
-                energy_balance.loc["Transformation processes", :]
-                .index.get_level_values(0)
-                .isin(["Oil refineries"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Oil refineries"})
-        )
-
-        coal_transformation = (
-            energy_balance.loc["Transformation processes", :]
-            .loc[
-                energy_balance.loc["Transformation processes", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "Blast furnaces",
-                        "Coke ovens",
-                        "Patent fuel plants",
-                        "BKB/peat briquette plants",
-                    ]
-                ),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Coal transformation"})
-        )
-
-        liquifaction_plants = (
-            energy_balance.loc["Transformation processes", :]
-            .loc[
-                energy_balance.loc["Transformation processes", :]
-                .index.get_level_values(0)
-                .isin(["Gas-to-liquids (GTL) plants", "Coal liquefaction plants"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Liquifaction plants"})
-        )
-
-        other_transformation = (
-            energy_balance.loc["Transformation processes", :]
-            .loc[
-                energy_balance.loc["Transformation processes", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "Non-specified (transformation)",
-                        "Charcoal production plants",
-                        "Petrochemical plants",
-                    ]
-                ),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Other transformation"})
-        )
-
-        own_use = (
-            energy_balance.loc["Energy industry own use and Losses", :]
-            .loc[
-                energy_balance.loc["Energy industry own use and Losses", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "Energy industry own use",
-                    ]
-                ),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Energy industry own use"})
-        )
-
-        losses = (
-            energy_balance.loc["Energy industry own use and Losses", :]
-            .loc[
-                energy_balance.loc["Energy industry own use and Losses", :]
-                .index.get_level_values(0)
-                .isin(["Losses"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Losses"})
-        )
-
-        industry = (
-            energy_balance.loc["Final consumption", :]
-            .loc[
-                energy_balance.loc["Final consumption", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "Chemical and petrochemical",
-                        "Construction",
-                        "Food and tobacco",
-                        "Industry not elsewhere specified",
-                        "Iron and steel",
-                        "Machinery",
-                        "Mining and quarrying",
-                        "Non-ferrous metals",
-                        "Non-metallic minerals",
-                        "Paper, pulp, and print",
-                        "Textile and leather",
-                        "Transport equipment",
-                        "Wood and wood products",
-                    ]
-                ),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Industry"})
-        )
-
-        transport = (
-            energy_balance.loc["Final consumption", :]
-            .loc[
-                energy_balance.loc["Final consumption", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "Domestic aviation",
-                        "Domestic navigation",
-                        "Pipeline transport",
-                        "Rail",
-                        "Road",
-                        "Transport not elsewhere specified",
-                    ]
-                ),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Transport"})
-        )
-
-        residential = (
-            energy_balance.loc["Final consumption", :]
-            .loc[
-                energy_balance.loc["Final consumption", :]
-                .index.get_level_values(0)
-                .isin(["Residential"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Residential"})
-        )
-
-        commercial = (
-            energy_balance.loc["Final consumption", :]
-            .loc[
-                energy_balance.loc["Final consumption", :]
-                .index.get_level_values(0)
-                .isin(["Commercial and public services"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Commercial and public services"})
-        )
-
-        agriculture = (
-            energy_balance.loc["Final consumption", :]
-            .loc[
-                energy_balance.loc["Final consumption", :]
-                .index.get_level_values(0)
-                .isin(["Agriculture/forestry"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Agriculture / forestry"})
-        )
-
-        fishing = (
-            energy_balance.loc["Final consumption", :]
-            .loc[
-                energy_balance.loc["Final consumption", :]
-                .index.get_level_values(0)
-                .isin(["Fishing"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Fishing"})
-        )
-
-        nonspecified = (
-            energy_balance.loc["Final consumption", :]
-            .loc[
-                energy_balance.loc["Final consumption", :]
-                .index.get_level_values(0)
-                .isin(["Final consumption not elsewhere specified"]),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Non-specified"})
-        )
-
-        nonenergyuse = (
-            energy_balance.loc["Final consumption", :]
-            .loc[
-                energy_balance.loc["Final consumption", :]
-                .index.get_level_values(0)
-                .isin(
-                    [
-                        "Non-energy use in other",
-                        "Non-energy use in transport",
-                        "Non-energy use industry/transformation/energy",
-                    ]
-                ),
-                :,
-            ]
-            .sum()
-            .to_frame()
-            .T.rename(index={0: "Non-energy use"})
-        )
-
-        energy_balance = pd.concat(
-            [
-                bunkers,
-                electricity_plants,
-                chp_plants,
-                heat_plants,
-                gas_works,
-                oil_refineries,
-                coal_transformation,
-                liquifaction_plants,
-                other_transformation,
-                own_use,
-                losses,
-                industry,
-                transport,
-                residential,
-                commercial,
-                agriculture,
-                fishing,
-                nonspecified,
-                nonenergyuse,
-            ]
-        )
-
-        energy_balance.astype(int)
-
-        # endregion
-
         #####################################
         # TOTAL FINAL CONSUMPTION BY SOURCE #
         #####################################
@@ -1323,7 +1357,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         sector = slice(None)
         product_category = slice(None)
         product_long = "Electricity"
-        flow_category = ["Final consumption", "Supply"]
+        flow_category = ["Final consumption"]
         groupby = "sector"
 
         fig = (
@@ -1452,7 +1486,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .sum()
         ).loc[:, start_year:] * unit_val[1]
 
-        fig = fig[fig.sum(axis=1) != 0]
         fig = fig.T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
@@ -2377,7 +2410,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .sum()
         ).loc[:, start_year:] * unit_val[1]
 
-        fig = fig[fig.sum(axis=1) != 0]
         fig = fig.T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
@@ -4146,7 +4178,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .sum()
         ).loc[:, start_year:] * unit_val[1]
 
-        fig = fig[fig.sum(axis=1) != 0]
         fig = fig.T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
@@ -5499,7 +5530,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .sum()
         ).loc[:, start_year:] * unit_val[1]
 
-        fig = fig[fig.sum(axis=1) != 0]
         fig = fig.T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
@@ -6852,7 +6882,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .sum()
         ).loc[:, start_year:] * unit_val[1]
 
-        fig = fig[fig.sum(axis=1) != 0]
         fig = fig.T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
@@ -7206,7 +7235,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .sum()
         ).loc[:, start_year:] * unit_val[1]
 
-        fig = fig[fig.sum(axis=1) != 0]
         fig = fig.T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
