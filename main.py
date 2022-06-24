@@ -21,8 +21,7 @@ from podi.cdr.cdr_util import (
 
 import pyam
 
-warnings.simplefilter(action="ignore", category=FutureWarning)
-regions = pd.read_fwf("podi/data/IEA/Regions.txt").rename(columns={"REGION": "region"})
+# warnings.simplefilter(action="ignore", category=FutureWarning)
 
 data_start_year = 1990
 data_end_year = 2020
@@ -356,39 +355,12 @@ energy_output = pd.concat(
     ]
 )
 
-# Drop flow_categories 'Supply', 'Transformation processes', 'Energy industry own use and Losses'
-energy_output = energy_output[
-    ~(
-        energy_output.reset_index().flow_category.isin(
-            [
-                "NECHEM",
-                "NECONSTRUC",
-                "NEFOODPRO",
-                "NEIND",
-                "NEINONSPEC",
-                "NEINTREN",
-                "NEIRONSTL",
-                "NEMACHINE",
-                "NEMINING",
-                "NENONFERR",
-                "NENONMET",
-                "NEOTHER",
-                "NEPAPERPRO",
-                "NETEXTILES",
-                "NETRANS",
-                "NETRANSEQ",
-                "NEWOODPRO",
-                "NONENUSE",
-            ]
-        )
-    ).values
-]
 
-# Drop flows to Non-energy use (these are effectively already dropped from emissions output data becasue their emissions factors are set to zero)
+# Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
 energy_output = energy_output[
     ~(
         energy_output.reset_index().flow_short.isin(
-            ["Supply", "Transformation Processes", "Energy industry own use and Losses"]
+            ["Transformation Processes", "Energy industry own use and Losses"]
         )
     ).values
 ]
