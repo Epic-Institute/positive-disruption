@@ -3634,7 +3634,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         product_category = slice(None)
         product_long = "Electricity"
         flow_category = ["Final consumption"]
-        groupby = "sector"
+        groupby = "flow_long"
 
         fig = (
             (

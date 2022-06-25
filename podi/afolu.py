@@ -266,7 +266,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     max_extent = piecewise_to_continuous("Max extent")
 
-    # Shift Improved Forest Mgmt's start year to 2022, all prior years to 2022 value
+    # Shift Improved Forest Mgmt's start year to 2018, all prior years to 2018 value
     max_extent.update(
         (
             max_extent[
@@ -275,7 +275,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         "Improved Forest Mgmt"
                     )
                 ).values
-            ].loc[:, data_end_year + 1 :]
+            ].loc[:, 2018 :]
             * 0
         ).apply(
             lambda x: x
@@ -288,7 +288,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     ).values
                 ]
                 .loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
-                .iloc[0 : proj_end_year - data_end_year]
+                .iloc[0 : 33]
                 .values
             ),
             axis=1,
@@ -303,7 +303,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         "Improved Forest Mgmt"
                     )
                 ).values
-            ].loc[:, :data_end_year]
+            ].loc[:, :2018]
             * 0
         ).apply(
             lambda x: x
