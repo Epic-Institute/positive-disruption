@@ -664,7 +664,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     region = slice(None)
-    year = data_start_year
+    start_year = data_start_year
     df = energy_historical
 
     # Filter for region and year
@@ -2261,6 +2261,99 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         # endregion
 
+
+        #######################################
+        # ELECTRICITY GENERATION BY SOURCE, % #
+        #######################################
+
+        # region
+
+        elec_supply = energy_baseline[
+            (
+                (
+                    energy_baseline.reset_index().flow_category
+                    == "Electricity output"
+                ).values
+            )
+            & ((energy_baseline.reset_index().nonenergy == "N").values)
+        ]
+
+        per_elec_supply = elec_supply.parallel_apply(
+            lambda x: x.divide(elec_supply.groupby(["region"]).sum(0).loc[x.name[2]]),
+            axis=1,
+        ).fillna(0)
+
+        start_year = data_start_year
+        df = per_elec_supply.loc[slice(None), ['baseline'], ['usa']]
+        model = "PD22"
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Electricity output"]
+        groupby = "product_category"
+
+        fig = (
+            df.loc[
+                model,
+                slice(None),
+                region,
+                sector,
+                product_category,
+                slice(None),
+                slice(None),
+                flow_category,
+                slice(None),
+                slice(None),
+                slice(None),
+            ]
+            .groupby([groupby])
+            .sum()
+        ).loc[:, start_year:] * 100
+
+        fig = fig.T
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Generation, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", Baseline, "
+                + 'USA',
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "%"},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
         ################################################
         # ENERGY INDUSTRY OWN USE AND LOSSES BY SOURCE #
         ################################################
@@ -3001,18 +3094,16 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     file.close()
 
     per_elec_supply.update(
-        per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
-        .parallel_apply(
+        per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]        .parallel_apply(
             lambda x: adoption_curve(
-                x,
+                x.loc[:data_end_year],
                 data_end_year + 1,
                 proj_end_year,
                 "logistic",
                 parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
             ),
             axis=1,
-        )
-        .clip(upper=1)
+        )        .clip(upper=1)
     )
 
     # Estimate the rate of nonrenewable electricity generation being replaced by renewable electricity generation
@@ -3229,6 +3320,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         unit_name = ["TJ", "TWh", "GW"]
         unit_val = [1, 0.0002777, 0.2777 / 8760]
         unit = [unit_name[0], unit_val[0]]
+
 
         start_year = data_start_year
         df = energy_post_electrification
@@ -3812,6 +3904,83 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         # endregion
 
+        #######################################
+        # ELECTRICITY GENERATION BY SOURCE, % #
+        #######################################
+
+        # region
+
+        start_year = data_start_year
+        df = per_elec_supply.loc[slice(None), ['pathway'], ['usa']]
+        model = "PD22"
+        region = slice(None)
+        sector = slice(None)
+        product_category = slice(None)
+        flow_category = ["Electricity output"]
+        groupby = "product_long"
+
+        fig = (
+            df.loc[
+                model,
+                slice(None),
+                region,
+                sector,
+                product_category,
+                slice(None),
+                slice(None),
+                flow_category,
+                slice(None),
+                slice(None),
+                slice(None),
+            ]
+            .groupby([groupby])
+            .sum()
+        ).loc[:, start_year:] * 100
+
+        fig = fig.T
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, %"
+        )
+
+        fig = go.Figure()
+
+        for sub in fig2[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=fig2["year"],
+                    y=fig2[fig2[groupby] == sub]["TFC, %"],
+                    fill="tonexty",
+                    stackgroup="1",
+                )
+            )
+
+        fig.update_layout(
+            title={
+                "text": "Electricity Generation, "
+                + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", " + str(scenario).capitalize()
+                + ', USA',
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": "%"},
+            margin_b=0,
+            margin_t=20,
+            margin_l=10,
+            margin_r=10,
+        )
+
+        fig.show()
+
+        # endregion
+
         ################################################
         # ELECTRICITY CONSUMPTION BY SECTOR, W/ WEDGES #
         ################################################
@@ -4064,7 +4233,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         per_heat_supply[per_heat_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                x,
+                x.loc[:data_end_year],
                 data_end_year + 1,
                 proj_end_year,
                 "logistic",
@@ -4955,7 +5124,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ]
         .parallel_apply(
             lambda x: adoption_curve(
-                x,
+                x.loc[:data_end_year],
                 data_end_year + 1,
                 proj_end_year,
                 "logistic",
