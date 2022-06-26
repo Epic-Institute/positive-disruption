@@ -670,7 +670,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # Filter for region and year
     energy_balance = (
         df.loc[slice(None), slice(None), region]
-        .loc[:, [year]]
+        .loc[:, [data_start_year]]
         .groupby(
             [
                 "sector",
@@ -2261,7 +2261,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         # endregion
 
-
         #######################################
         # ELECTRICITY GENERATION BY SOURCE, % #
         #######################################
@@ -2271,8 +2270,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         elec_supply = energy_baseline[
             (
                 (
-                    energy_baseline.reset_index().flow_category
-                    == "Electricity output"
+                    energy_baseline.reset_index().flow_category == "Electricity output"
                 ).values
             )
             & ((energy_baseline.reset_index().nonenergy == "N").values)
@@ -2284,7 +2282,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         ).fillna(0)
 
         start_year = data_start_year
-        df = per_elec_supply.loc[slice(None), ['baseline'], ['usa']]
+        df = per_elec_supply.loc[slice(None), ["baseline"], ["usa"]]
         model = "PD22"
         region = slice(None)
         sector = slice(None)
@@ -2338,7 +2336,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Electricity Generation, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", Baseline, "
-                + 'USA',
+                + "USA",
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -3094,7 +3092,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     file.close()
 
     per_elec_supply.update(
-        per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]        .parallel_apply(
+        per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
+        .parallel_apply(
             lambda x: adoption_curve(
                 x.loc[:data_end_year],
                 data_end_year + 1,
@@ -3103,7 +3102,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
             ),
             axis=1,
-        )        .clip(upper=1)
+        )
+        .clip(upper=1)
     )
 
     # Estimate the rate of nonrenewable electricity generation being replaced by renewable electricity generation
@@ -3320,7 +3320,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         unit_name = ["TJ", "TWh", "GW"]
         unit_val = [1, 0.0002777, 0.2777 / 8760]
         unit = [unit_name[0], unit_val[0]]
-
 
         start_year = data_start_year
         df = energy_post_electrification
@@ -3911,7 +3910,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         # region
 
         start_year = data_start_year
-        df = per_elec_supply.loc[slice(None), ['pathway'], ['usa']]
+        df = per_elec_supply.loc[slice(None), ["pathway"], ["usa"]]
         model = "PD22"
         region = slice(None)
         sector = slice(None)
@@ -3940,9 +3939,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig = fig.T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
-        fig2 = pd.melt(
-            fig, id_vars="year", var_name=[groupby], value_name="TFC, %"
-        )
+        fig2 = pd.melt(fig, id_vars="year", var_name=[groupby], value_name="TFC, %")
 
         fig = go.Figure()
 
@@ -3964,8 +3961,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             title={
                 "text": "Electricity Generation, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
-                + ", " + str(scenario).capitalize()
-                + ', USA',
+                + ", "
+                + str(scenario).capitalize()
+                + ", USA",
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -5973,23 +5971,35 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Current setting to 20% of electricity generation
 
-    energy_storage = (
-        energy_post_electrification[
-            (
-                energy_post_electrification.reset_index().flow_category
-                == "Electricity output"
-            ).values
+    energy_storage = pd.concat(
+        [
+            energy_post_electrification[
+                (
+                    energy_post_electrification.reset_index().flow_category
+                    == "Electricity output"
+                ).values
+            ]
+            .groupby(energy_post_electrification.index.names)
+            .sum()
+            .multiply(0.2),
+            energy_baseline[
+                (
+                    energy_baseline.reset_index().flow_category == "Electricity output"
+                ).values
+            ]
+            .groupby(energy_baseline.index.names)
+            .sum()
+            .multiply(0.2),
         ]
-        .groupby(energy_post_electrification.index.names)
-        .sum()
-        .multiply(0.2)
-        .reset_index()
-    )
+    ).reset_index()
 
+    energy_storage["product_category"] = "Storage"
     energy_storage["product_long"] = "Storage"
     energy_storage["product_short"] = "STOR"
 
     energy_storage.set_index(energy_post_electrification.index.names, inplace=True)
+
+    energy_storage = energy_storage.groupby(energy_storage.index.names).sum()
 
     energy_post_electrification = pd.concat(
         [energy_post_electrification, energy_storage]

@@ -34,7 +34,7 @@ def emissions(
     #  CALCULATE CO2 EMISSIONS FROM ENERGY  #
     #########################################
 
-    recalc_emissions_energy = False
+    recalc_emissions_energy = True
     # region
     if recalc_emissions_energy == True:
         # Load emissions factors (currently a manually produced file)
@@ -320,7 +320,7 @@ def emissions(
     # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
     def piecewise_to_continuous(variable):
         """
-        It takes a variable name as input, and returns a dataframe with the variable's values for each
+        Takes a variable name as input, and returns a dataframe with the variable's values for each
         region, model, and scenario
 
         :param variable: the name of the variable you want to convert
@@ -622,6 +622,17 @@ def emissions(
     )
     emissions_afolu.columns = emissions_afolu.columns.str.replace("Y", "")
 
+    # Drop redundant emissions
+    emissions_afolu = emissions_afolu[
+        emissions_afolu.flow_category.isin(
+            [
+                "Emissions (CO2eq) from CH4 (AR5)",
+                "Emissions (CO2eq) from N2O (AR5)",
+                "Emissions (CO2)",
+            ]
+        )
+    ]
+
     # Change FAO region names to IEA
     regions = (
         pd.DataFrame(
@@ -670,9 +681,9 @@ def emissions(
     def splitgas(x):
         if x["flow_category"] in ["Emissions (CO2)"]:
             return "CO2"
-        elif x["flow_category"] in ["Emissions (CH4)"]:
+        elif x["flow_category"] in ["Emissions (CO2eq) from CH4 (AR5)"]:
             return "CH4"
-        elif x["flow_category"] in ["Emissions (N2O)"]:
+        elif x["flow_category"] in ["Emissions (CO2eq) from N2O (AR5)"]:
             return "N2O"
 
     emissions_afolu["flow_long"] = emissions_afolu.apply(lambda x: splitgas(x), axis=1)
@@ -727,7 +738,7 @@ def emissions(
 
     # endregion
 
-    # Multiply afolu_output by emissions factors to get emissions estimates.
+    # Multiply afolu_output by emissions factors to get emissions estimates
     # region
 
     # Calculate emissions mitigated by multiplying adoption by avg mitigtation potential flux for each year. Average mitigation potential flux is unique to each year vintage.
@@ -913,32 +924,6 @@ def emissions(
 
     emissions_afolu_mitigated = addindices(emissions_afolu_mitigated)
 
-    # Add missing GWP values to gwp
-    # Choose version of GWP values
-    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
-
-    gwp.data[version].update(
-        {
-            "CO2": 1,
-            "BC": 2240,
-            "CO": 0,
-            "NH3": 0,
-            "NMVOC": 0,
-            "NOx": 0,
-            "OC": 0,
-            "SO2": 0,
-        }
-    )
-
-    # Convert units from MtCO2e to Mt
-    emissions_afolu_mitigated.update(
-        emissions_afolu_mitigated[
-            (emissions_afolu_mitigated.reset_index().flow_long != "CO2").values
-        ].apply(lambda x: x.divide(gwp.data[version][x.name[6]]), axis=1)
-    )
-
-    emissions_afolu_mitigated.rename(index={"MtCO2e": "Mt"}, inplace=True)
-
     # endregion
 
     # Combine additional emissions sources with emissions mitigated from NCS
@@ -1011,9 +996,9 @@ def emissions(
                         line=dict(width=2, color="black"),
                         x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
                         y=pd.Series(
-                            emissions_afolu.loc[model, scenario, slice(None), sector]
-                            .loc[:, :data_end_year]
-                            .sum(),
+                            emissions_afolu.loc[
+                                model, scenario, slice(None), sector
+                            ].sum(),
                             index=emissions_afolu.columns,
                         ).loc[:data_end_year],
                         fill="none",
@@ -1022,17 +1007,18 @@ def emissions(
                     )
                 )
 
-                for product_long in fig2["product_long"].unique():
+                for product_long in fig2.sort_values("Emissions", ascending=False)[
+                    "product_long"
+                ].unique():
                     fig.add_trace(
                         go.Scatter(
                             name=product_long,
                             line=dict(width=0.5),
-                            x=fig2[fig2["year"] >= data_end_year]["year"].unique(),
+                            x=fig2["year"].unique(),
                             y=fig2[
                                 (fig2["scenario"] == scenario)
                                 & (fig2["sector"] == sector)
                                 & (fig2["product_long"] == product_long)
-                                & (fig2["year"] >= data_end_year)
                             ]["Emissions"],
                             fill="tonexty",
                             stackgroup="one",
@@ -1042,10 +1028,7 @@ def emissions(
                 fig.update_layout(
                     title={
                         "text": "Emissions, "
-                        + str(region)
-                        .capitalize()
-                        .replace("Slice(none, none, none)", "World")
-                        + ", "
+                        + "World, "
                         + str(sector).capitalize()
                         + ", "
                         + str(scenario).capitalize(),
@@ -1156,10 +1139,7 @@ def emissions(
             fig.update_layout(
                 title={
                     "text": "Emissions Mitigated, "
-                    + str(region)
-                    .capitalize()
-                    .replace("Slice(none, none, none)", "World")
-                    + ", "
+                    + "World, "
                     + str(sector).capitalize()
                     + ", "
                     + str(scenario).capitalize(),
@@ -2293,6 +2273,32 @@ def emissions(
             "unit",
         ]
     )
+
+    # Add missing GWP values to gwp
+    # Choose version of GWP values
+    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
+
+    gwp.data[version].update(
+        {
+            "CO2": 1,
+            "BC": 2240,
+            "CO": 0,
+            "NH3": 0,
+            "NMVOC": 0,
+            "NOx": 0,
+            "OC": 0,
+            "SO2": 0,
+        }
+    )
+
+    # Convert units from MtCO2e to Mt
+    emissions_output_co2e.update(
+        emissions_output_co2e[
+            (emissions_output_co2e.reset_index().flow_long != "CO2").values
+        ].apply(lambda x: x.divide(gwp.data[version][x.name[6]]), axis=1)
+    )
+
+    emissions_output_co2e.rename(index={"MtCO2e": "Mt"}, inplace=True)
 
     # Match modeled (emissions_output_co2e) and observed emissions (emissions_historical) categories across 'model', 'region', 'sector'
 
