@@ -370,8 +370,6 @@ for output in [
     (energy_output, "energy_output"),
     (afolu_output, "afolu_output"),
     (emissions_output, "emissions_output"),
-    (emissions_output_co2e, "emissions_output_co2e"),
-    (emissions_wedges, "emissions_wedges"),
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].to_csv(
