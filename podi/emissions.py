@@ -34,7 +34,7 @@ def emissions(
     #  CALCULATE CO2 EMISSIONS FROM ENERGY  #
     #########################################
 
-    recalc_emissions_energy = True
+    recalc_emissions_energy = False
     # region
     if recalc_emissions_energy == True:
         # Load emissions factors (currently a manually produced file)
@@ -97,7 +97,7 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = start_year
+        start_year = data_start_year
         model = "PD22"
 
         fig = (
@@ -157,10 +157,7 @@ def emissions(
 
                 fig.update_layout(
                     title={
-                        "text": "Emissions, "
-                        + str(region)
-                        .capitalize()
-                        .replace("Slice(none, none, none)", "World")
+                        "text": "Emissions, World"
                         + ", "
                         + str(sector).capitalize()
                         + ", "
@@ -197,7 +194,7 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = start_year
+        start_year = data_start_year
         model = "PD22"
 
         fig = (
@@ -271,10 +268,7 @@ def emissions(
 
             fig.update_layout(
                 title={
-                    "text": "Emissions Mitigated, "
-                    + str(region)
-                    .capitalize()
-                    .replace("Slice(none, none, none)", "World")
+                    "text": "Emissions Mitigated, World"
                     + ", "
                     + str(sector).capitalize()
                     + ", "
@@ -626,8 +620,8 @@ def emissions(
     emissions_afolu = emissions_afolu[
         emissions_afolu.flow_category.isin(
             [
-                "Emissions (CO2eq) from CH4 (AR5)",
-                "Emissions (CO2eq) from N2O (AR5)",
+                "Emissions (CH4)",
+                "Emissions (N2O)",
                 "Emissions (CO2)",
             ]
         )
@@ -681,9 +675,9 @@ def emissions(
     def splitgas(x):
         if x["flow_category"] in ["Emissions (CO2)"]:
             return "CO2"
-        elif x["flow_category"] in ["Emissions (CO2eq) from CH4 (AR5)"]:
+        elif x["flow_category"] in ["Emissions (CH4)"]:
             return "CH4"
-        elif x["flow_category"] in ["Emissions (CO2eq) from N2O (AR5)"]:
+        elif x["flow_category"] in ["Emissions (N2O)"]:
             return "N2O"
 
     emissions_afolu["flow_long"] = emissions_afolu.apply(lambda x: splitgas(x), axis=1)
@@ -966,7 +960,7 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = start_year
+        start_year = data_start_year
         model = "PD22"
 
         fig = (
@@ -1047,118 +1041,6 @@ def emissions(
                 fig,
                 file=(
                     "./charts/emissions-"
-                    + str(scenario).capitalize()
-                    + "-"
-                    + +str(sector).capitalize()
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-            )
-
-        # endregion
-
-        ###################################
-        # GHG EMISSIONS MITIGATION WEDGES #
-        ###################################
-
-        # region
-
-        scenario = "pathway"
-        start_year = start_year
-        model = "PD22"
-
-        fig = (
-            (
-                emissions_afolu.loc[model, "baseline"].subtract(
-                    emissions_afolu.loc[model, scenario]
-                )
-            )
-            .groupby(["sector", "product_long"])
-            .sum()
-        ).T
-        fig.index.name = "year"
-        fig.reset_index(inplace=True)
-        fig2 = pd.melt(
-            fig,
-            id_vars="year",
-            var_name=["sector", "product_long"],
-            value_name="Emissions",
-        )
-
-        for sector in fig2["sector"].unique():
-
-            fig = go.Figure()
-
-            spacer = emissions_afolu.loc[model, scenario, slice(None), sector].sum()
-
-            fig.add_trace(
-                go.Scatter(
-                    name="",
-                    line=dict(width=0),
-                    x=spacer.index.values[spacer.index.values >= data_end_year],
-                    y=spacer[spacer.index.values >= data_end_year],
-                    fill="none",
-                    stackgroup="one",
-                    showlegend=False,
-                )
-            )
-
-            fig.add_trace(
-                go.Scatter(
-                    name="Historical",
-                    line=dict(width=2, color="black"),
-                    x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
-                    y=pd.Series(
-                        emissions_afolu[emissions_afolu.sum(axis=1) > 0]
-                        .loc[model, scenario, slice(None), sector]
-                        .loc[:, :data_end_year]
-                        .sum(),
-                        index=emissions_afolu.columns,
-                    ).loc[:data_end_year],
-                    fill="none",
-                    stackgroup="two",
-                    showlegend=True,
-                )
-            )
-
-            for product_long in fig2["product_long"].unique():
-                fig.add_trace(
-                    go.Scatter(
-                        name=product_long,
-                        line=dict(width=0.5),
-                        x=fig2[fig2["year"] > data_end_year]["year"].unique(),
-                        y=fig2[
-                            (fig2["sector"] == sector)
-                            & (fig2["product_long"] == product_long)
-                            & (fig2["year"] > data_end_year)
-                        ]["Emissions"],
-                        fill="tonexty",
-                        stackgroup="one",
-                    )
-                )
-
-            fig.update_layout(
-                title={
-                    "text": "Emissions Mitigated, "
-                    + "World, "
-                    + str(sector).capitalize()
-                    + ", "
-                    + str(scenario).capitalize(),
-                    "xanchor": "center",
-                    "x": 0.5,
-                    "y": 0.9,
-                },
-                yaxis={"title": "MtCO2e"},
-                legend=dict(font=dict(size=8)),
-            )
-
-            fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/mwedges-"
                     + str(scenario).capitalize()
                     + "-"
                     + +str(sector).capitalize()
@@ -1541,7 +1423,9 @@ def emissions(
     emissions_additional_fgas = emissions_additional_fgas.rename(index={"kT": "Mt"})
 
     # Interpolate between data_end_year and projections in 2030, 2050
-    emissions_additional_fgas[np.arange(2021, 2030, 1)] = NaN
+    emissions_additional_fgas[
+        np.arange(emissions_additional_fgas.columns.max() + 1, 2030, 1)
+    ] = NaN
     emissions_additional_fgas[np.arange(2031, proj_end_year + 1, 1)] = NaN
     emissions_additional_fgas = emissions_additional_fgas.sort_index(axis=1)
     emissions_additional_fgas.interpolate(method="linear", axis=1, inplace=True)
@@ -1755,7 +1639,7 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = start_year
+        start_year = data_start_year
         model = "PD22"
 
         fig = (
@@ -1846,119 +1730,7 @@ def emissions(
 
         # endregion
 
-        ###################################
-        # GHG EMISSIONS MITIGATION WEDGES #
-        ###################################
-
-        # region
-
-        scenario = "pathway"
-        start_year = start_year
-        model = "PD22"
-
-        fig = (
-            (
-                emissions_additional.loc[model, "baseline"].subtract(
-                    emissions_additional.loc[model, scenario]
-                )
-            )
-            .groupby(["sector", "product_long"])
-            .sum()
-        ).T
-        fig.index.name = "year"
-        fig.reset_index(inplace=True)
-        fig2 = pd.melt(
-            fig,
-            id_vars="year",
-            var_name=["sector", "product_long"],
-            value_name="Emissions",
-        )
-
-        for sector in fig2["sector"].unique():
-
-            fig = go.Figure()
-
-            spacer = emissions_additional.loc[
-                model, scenario, slice(None), sector
-            ].sum()
-
-            fig.add_trace(
-                go.Scatter(
-                    name="",
-                    line=dict(width=0),
-                    x=spacer.index.values[spacer.index.values >= data_end_year],
-                    y=spacer[spacer.index.values >= data_end_year],
-                    fill="none",
-                    stackgroup="one",
-                    showlegend=False,
-                )
-            )
-
-            fig.add_trace(
-                go.Scatter(
-                    name="Historical",
-                    line=dict(width=2, color="black"),
-                    x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
-                    y=pd.Series(
-                        emissions_additional[emissions_additional.sum(axis=1) > 0]
-                        .loc[model, scenario, slice(None), sector]
-                        .loc[:, :data_end_year]
-                        .sum(),
-                        index=emissions_additional.columns,
-                    ).loc[:data_end_year],
-                    fill="none",
-                    stackgroup="two",
-                    showlegend=True,
-                )
-            )
-
-            for product_long in fig2["product_long"].unique():
-                fig.add_trace(
-                    go.Scatter(
-                        name=product_long,
-                        line=dict(width=0.5),
-                        x=fig2[fig2["year"] > data_end_year]["year"].unique(),
-                        y=fig2[
-                            (fig2["sector"] == sector)
-                            & (fig2["product_long"] == product_long)
-                            & (fig2["year"] > data_end_year)
-                        ]["Emissions"],
-                        fill="tonexty",
-                        stackgroup="one",
-                    )
-                )
-
-            fig.update_layout(
-                title={
-                    "text": "Emissions Mitigated, "
-                    + "World, "
-                    + str(sector).capitalize()
-                    + ", "
-                    + str(scenario).capitalize(),
-                    "xanchor": "center",
-                    "x": 0.5,
-                    "y": 0.9,
-                },
-                yaxis={"title": "MtCO2e"},
-                legend=dict(font=dict(size=8)),
-            )
-
-            fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/mwedges-"
-                    + str(scenario).capitalize()
-                    + "-"
-                    + +str(sector).capitalize()
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-            )
-
-        # endregion
+    # endregion
 
     # endregion
 
@@ -1973,7 +1745,195 @@ def emissions(
         [emissions_energy, emissions_afolu, emissions_additional]
     )
 
-    # Plot emissions_output
+    # Make emissions_output_co2e
+    # region
+
+    # Group modeled emissions into CO2e
+    emissions_output_co2e = emissions_output.copy()
+
+    # Remove dashes from gas names to match naming in gwp library
+    emissions_output_co2e = emissions_output_co2e.rename(
+        index={
+            "HCFC-141b": "HCFC141b",
+            "HCFC-142b": "HCFC142b",
+            "HFC-125": "HFC125",
+            "HFC-134a": "HFC134a",
+            "HFC-143a": "HFC143a",
+            "HFC-152a": "HFC152a",
+            "HFC-227ea": "HFC227ea",
+            "HFC-245fa": "HFC245fa",
+            "HFC-32": "HFC32",
+            "HFC-365mfc": "HFC365mfc",
+            "HFC-23": "HFC23",
+            "c-C4F8": "cC4F8",
+            "HFC-134": "HFC134",
+            "HFC-143": "HFC143",
+            "HFC-236fa": "HFC236fa",
+            "HFC-41": "HFC41",
+            "HFC-43-10-mee": "HFC4310mee",
+        }
+    )
+
+    # Update emissions that don't list gas in flow_long (these are all CO2)
+    emissions_output_co2e.reset_index(inplace=True)
+
+    # Select CO2 emissions
+    emissions_output_co2e_new = emissions_output_co2e[
+        ~(
+            emissions_output_co2e.flow_long.isin(
+                [
+                    "CH4",
+                    "N2O",
+                    "BC",
+                    "CO",
+                    "NH3",
+                    "NMVOC",
+                    "NOx",
+                    "OC",
+                    "SO2",
+                    "HCFC141b",
+                    "HCFC142b",
+                    "HFC125",
+                    "HFC134a",
+                    "HFC143a",
+                    "HFC152a",
+                    "HFC227ea",
+                    "HFC245fa",
+                    "HFC32",
+                    "HFC365mfc",
+                    "SF6",
+                    "HFC23",
+                    "C2F6",
+                    "CF4",
+                    "C3F8",
+                    "C4F10",
+                    "NF3",
+                    "cC4F8",
+                    "HFC134",
+                    "HFC143",
+                    "HFC236fa",
+                    "HFC41",
+                    "HFC4310mee",
+                    "C5F12",
+                    "C6F14",
+                ]
+            )
+        ).values
+    ]
+
+    # Remove CO2 emissions from full emissions list
+    emissions_output_co2e = emissions_output_co2e[
+        (
+            emissions_output_co2e.flow_long.isin(
+                [
+                    "CH4",
+                    "N2O",
+                    "BC",
+                    "CO",
+                    "NH3",
+                    "NMVOC",
+                    "NOx",
+                    "OC",
+                    "SO2",
+                    "HCFC141b",
+                    "HCFC142b",
+                    "HFC125",
+                    "HFC134a",
+                    "HFC143a",
+                    "HFC152a",
+                    "HFC227ea",
+                    "HFC245fa",
+                    "HFC32",
+                    "HFC365mfc",
+                    "SF6",
+                    "HFC23",
+                    "C2F6",
+                    "CF4",
+                    "C3F8",
+                    "C4F10",
+                    "NF3",
+                    "cC4F8",
+                    "HFC134",
+                    "HFC143",
+                    "HFC236fa",
+                    "HFC41",
+                    "HFC4310mee",
+                    "C5F12",
+                    "C6F14",
+                ]
+            )
+        ).values
+    ]
+
+    # Replace 'flow_long' value with 'CO2'
+    emissions_output_co2e_new.drop(columns="flow_long", inplace=True)
+    emissions_output_co2e_new["flow_long"] = "CO2"
+
+    # Add the updated subset back into the original df
+    emissions_output_co2e = pd.concat(
+        [emissions_output_co2e, emissions_output_co2e_new]
+    )
+
+    emissions_output_co2e = emissions_output_co2e.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
+    )
+
+    # Add missing GWP values to gwp
+    # Choose version of GWP values
+    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
+
+    gwp.data[version].update(
+        {
+            "CO2": 1,
+            "BC": 2240,
+            "CO": 0,
+            "NH3": 0,
+            "NMVOC": 0,
+            "NOx": 0,
+            "OC": 0,
+            "SO2": 0,
+        }
+    )
+
+    emissions_output_co2e = emissions_output_co2e.apply(
+        lambda x: x.mul(gwp.data[version][x.name[8]]), axis=1
+    )
+
+    # Update all flow_long values to 'CO2e'
+    emissions_output_co2e = emissions_output_co2e.droplevel("flow_long").reset_index()
+    emissions_output_co2e["flow_long"] = "CO2e"
+
+    emissions_output_co2e = emissions_output_co2e.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
+    )
+
+    # endregion
+
+    # Plot emissions_output_co2e
     # region
     if show_figs is True:
         #################
@@ -1983,11 +1943,11 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = start_year
+        start_year = data_start_year
         model = "PD22"
 
         fig = (
-            emissions_output.loc[model]
+            emissions_output_co2e.loc[model]
             .groupby(["scenario", "sector", "product_long"])
             .sum()
             .T
@@ -2029,10 +1989,12 @@ def emissions(
                         line=dict(width=2, color="black"),
                         x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
                         y=pd.Series(
-                            emissions_output.loc[model, scenario, slice(None), sector]
+                            emissions_output_co2e.loc[
+                                model, scenario, slice(None), sector
+                            ]
                             .loc[:, :data_end_year]
                             .sum(),
-                            index=emissions_output.columns,
+                            index=emissions_output_co2e.columns,
                         ).loc[:data_end_year],
                         fill="none",
                         stackgroup="two",
@@ -2080,13 +2042,13 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = start_year
+        start_year = data_start_year
         model = "PD22"
 
         fig = (
             (
-                emissions_output.loc[model, "baseline"].subtract(
-                    emissions_output.loc[model, scenario]
+                emissions_output_co2e.loc[model, "baseline"].subtract(
+                    emissions_output_co2e.loc[model, scenario]
                 )
             )
             .groupby(["sector", "product_long"])
@@ -2105,7 +2067,9 @@ def emissions(
 
             fig = go.Figure()
 
-            spacer = emissions_output.loc[model, scenario, slice(None), sector].sum()
+            spacer = emissions_output_co2e.loc[
+                model, scenario, slice(None), sector
+            ].sum()
 
             fig.add_trace(
                 go.Scatter(
@@ -2125,10 +2089,10 @@ def emissions(
                     line=dict(width=2, color="black"),
                     x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
                     y=pd.Series(
-                        emissions_output.loc[model, scenario, slice(None), sector]
+                        emissions_output_co2e.loc[model, scenario, slice(None), sector]
                         .loc[:, :data_end_year]
                         .sum(),
-                        index=emissions_output.columns,
+                        index=emissions_output_co2e.columns,
                     ).loc[:data_end_year],
                     fill="none",
                     stackgroup="two",
@@ -2154,7 +2118,7 @@ def emissions(
 
             fig.update_layout(
                 title={
-                    "text": "Emissions Mitigated, "
+                    "text": "Emissions, "
                     + "World"
                     + ", "
                     + str(sector).capitalize()
@@ -2318,198 +2282,6 @@ def emissions(
     # Select data between data_start_year and data_end_year
     emissions_historical.columns = emissions_historical.columns.astype(int)
     emissions_historical = emissions_historical.loc[:, data_start_year:data_end_year]
-
-    # Group modeled emissions into CO2e
-    emissions_output_co2e = emissions_output.copy()
-
-    # Remove dashes from gas names to match naming in gwp library
-    emissions_output_co2e = emissions_output_co2e.rename(
-        index={
-            "HCFC-141b": "HCFC141b",
-            "HCFC-142b": "HCFC142b",
-            "HFC-125": "HFC125",
-            "HFC-134a": "HFC134a",
-            "HFC-143a": "HFC143a",
-            "HFC-152a": "HFC152a",
-            "HFC-227ea": "HFC227ea",
-            "HFC-245fa": "HFC245fa",
-            "HFC-32": "HFC32",
-            "HFC-365mfc": "HFC365mfc",
-            "HFC-23": "HFC23",
-            "c-C4F8": "cC4F8",
-            "HFC-134": "HFC134",
-            "HFC-143": "HFC143",
-            "HFC-236fa": "HFC236fa",
-            "HFC-41": "HFC41",
-            "HFC-43-10-mee": "HFC4310mee",
-        }
-    )
-
-    # Update emissions that don't list gas in flow_long (these are all CO2)
-    emissions_output_co2e.reset_index(inplace=True)
-
-    # Select CO2 emissions
-    emissions_output_co2e_new = emissions_output_co2e[
-        ~(
-            emissions_output_co2e.flow_long.isin(
-                [
-                    "CH4",
-                    "N2O",
-                    "BC",
-                    "CO",
-                    "NH3",
-                    "NMVOC",
-                    "NOx",
-                    "OC",
-                    "SO2",
-                    "HCFC141b",
-                    "HCFC142b",
-                    "HFC125",
-                    "HFC134a",
-                    "HFC143a",
-                    "HFC152a",
-                    "HFC227ea",
-                    "HFC245fa",
-                    "HFC32",
-                    "HFC365mfc",
-                    "SF6",
-                    "HFC23",
-                    "C2F6",
-                    "CF4",
-                    "C3F8",
-                    "C4F10",
-                    "NF3",
-                    "cC4F8",
-                    "HFC134",
-                    "HFC143",
-                    "HFC236fa",
-                    "HFC41",
-                    "HFC4310mee",
-                    "C5F12",
-                    "C6F14",
-                ]
-            )
-        ).values
-    ]
-
-    # Remove CO2 emissions from full emissions list
-    emissions_output_co2e = emissions_output_co2e[
-        (
-            emissions_output_co2e.flow_long.isin(
-                [
-                    "CH4",
-                    "N2O",
-                    "BC",
-                    "CO",
-                    "NH3",
-                    "NMVOC",
-                    "NOx",
-                    "OC",
-                    "SO2",
-                    "HCFC141b",
-                    "HCFC142b",
-                    "HFC125",
-                    "HFC134a",
-                    "HFC143a",
-                    "HFC152a",
-                    "HFC227ea",
-                    "HFC245fa",
-                    "HFC32",
-                    "HFC365mfc",
-                    "SF6",
-                    "HFC23",
-                    "C2F6",
-                    "CF4",
-                    "C3F8",
-                    "C4F10",
-                    "NF3",
-                    "cC4F8",
-                    "HFC134",
-                    "HFC143",
-                    "HFC236fa",
-                    "HFC41",
-                    "HFC4310mee",
-                    "C5F12",
-                    "C6F14",
-                ]
-            )
-        ).values
-    ]
-
-    # Replace 'flow_long' value with 'CO2'
-    emissions_output_co2e_new.drop(columns="flow_long", inplace=True)
-    emissions_output_co2e_new["flow_long"] = "CO2"
-
-    # Add the updated subset back into the original df
-    emissions_output_co2e = pd.concat(
-        [emissions_output_co2e, emissions_output_co2e_new]
-    )
-
-    emissions_output_co2e = emissions_output_co2e.set_index(
-        [
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
-        ]
-    )
-
-    emissions_output_co2e = emissions_output_co2e.apply(
-        lambda x: x.mul(gwp.data[version][x.name[8]]), axis=1
-    )
-
-    # Update all flow_long values to 'CO2e'
-    emissions_output_co2e = emissions_output_co2e.droplevel("flow_long").reset_index()
-    emissions_output_co2e["flow_long"] = "CO2e"
-
-    emissions_output_co2e = emissions_output_co2e.set_index(
-        [
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
-        ]
-    )
-
-    # Add missing GWP values to gwp
-    # Choose version of GWP values
-    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
-
-    gwp.data[version].update(
-        {
-            "CO2": 1,
-            "BC": 2240,
-            "CO": 0,
-            "NH3": 0,
-            "NMVOC": 0,
-            "NOx": 0,
-            "OC": 0,
-            "SO2": 0,
-        }
-    )
-
-    # Convert units from MtCO2e to Mt
-    emissions_output_co2e.update(
-        emissions_output_co2e[
-            (emissions_output_co2e.reset_index().flow_long != "CO2").values
-        ].apply(lambda x: x.divide(gwp.data[version][x.name[6]]), axis=1)
-    )
-
-    emissions_output_co2e.rename(index={"MtCO2e": "Mt"}, inplace=True)
 
     # Match modeled (emissions_output_co2e) and observed emissions (emissions_historical) categories across 'model', 'region', 'sector'
 

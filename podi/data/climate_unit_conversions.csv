@@ -29,7 +29,7 @@ value,gas,emissions_output to FAIR
 0.001,HFC143a,Mt to kt
 1,HFC-152a,-
 0.001,HFC227ea,Mt to kt
-1,HFC-236fa,#VALUE!
+1,HFC-236fa,-
 0.001,HFC245fa,Mt to kt
 1,HFC-365mfc,-
 0.001,SF6,Mt to kt
