@@ -37,7 +37,7 @@ def emissions(
     recalc_emissions_energy = False
     # region
     if recalc_emissions_energy == True:
-        # Load emissions factors (currently a manually produced file)
+        # Load emissions factors (currently a manually produced file). Emissions factors attribute emissions to the sector where the emissions are generated, e.g. electricity use in Buildings/Industry is zero emissions since those emissions are attributed to the Electric Power sector. Heat not produced on-site in Buildings/Industry is zero emissions since those emissions are attributed to the Industrial sector.
         emission_factors = pd.read_csv("podi/data/emission_factors.csv").set_index(
             pyam.IAMC_IDX
         )
@@ -47,8 +47,7 @@ def emissions(
 
         # Multiply energy by emission factors to get emissions estimates. Note that emission factors for non-energy use flows are set to 0
         emissions_energy = energy_output.parallel_apply(
-            lambda x: x
-            * (
+            lambda x: x.multiply(
                 (
                     emission_factors.loc[
                         x.name[0],
@@ -56,7 +55,7 @@ def emissions(
                         x.name[2],
                         "|".join([x.name[6], x.name[9]]),
                     ]
-                ).squeeze()
+                ).squeeze().rename(x.name)
             ),
             axis=1,
         )
@@ -121,6 +120,22 @@ def emissions(
 
                 fig = go.Figure()
 
+                for flow_long in fig2["flow_long"].unique():
+                    fig.add_trace(
+                        go.Scatter(
+                            name=flow_long,
+                            line=dict(width=0.5),
+                            x=fig2["year"].unique(),
+                            y=fig2[
+                                (fig2["scenario"] == scenario)
+                                & (fig2["sector"] == sector)
+                                & (fig2["flow_long"] == flow_long)
+                            ]["Emissions"],
+                            fill="tonexty",
+                            stackgroup="one",
+                        )
+                    )
+
                 fig.add_trace(
                     go.Scatter(
                         name="Historical",
@@ -137,23 +152,6 @@ def emissions(
                         showlegend=True,
                     )
                 )
-
-                for flow_long in fig2["flow_long"].unique():
-                    fig.add_trace(
-                        go.Scatter(
-                            name=flow_long,
-                            line=dict(width=0.5),
-                            x=fig2[fig2["year"] >= data_end_year]["year"].unique(),
-                            y=fig2[
-                                (fig2["scenario"] == scenario)
-                                & (fig2["sector"] == sector)
-                                & (fig2["flow_long"] == flow_long)
-                                & (fig2["year"] >= data_end_year)
-                            ]["Emissions"],
-                            fill="tonexty",
-                            stackgroup="one",
-                        )
-                    )
 
                 fig.update_layout(
                     title={

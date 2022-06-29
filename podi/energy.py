@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 
 pandarallel.initialize(nb_workers=4)
 
-show_figs = True
+show_figs = False
 save_figs = False
 
 # endregion
@@ -2090,7 +2090,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         product_category = slice(None)
         product_long = "Electricity"
         flow_category = ["Final consumption"]
-        groupby = "sector"
+        groupby = "flow_long"
 
         fig = (
             (
@@ -6137,15 +6137,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     energy_output = pd.concat([energy_baseline, energy_post_electrification])
     energy_output.index = energy_output.index.droplevel(
         ["hydrogen", "flexible", "nonenergy"]
-    )
-
-    # Combine 'Residential' and 'Commercial' sectors into 'Buildings' sector
-    energy_output[
-        energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
-    ] = energy_output[
-        energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
-    ].rename(
-        index={"Commercial": "Buildings", "Residential": "Buildings"}
     )
 
     # Drop 'hydrogen', 'flexible', 'nonenergy' flags and save

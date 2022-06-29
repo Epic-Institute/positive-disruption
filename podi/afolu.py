@@ -275,7 +275,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         "Improved Forest Mgmt"
                     )
                 ).values
-            ].loc[:, 2018 :]
+            ].loc[:, 2018:]
             * 0
         ).apply(
             lambda x: x
@@ -288,7 +288,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     ).values
                 ]
                 .loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
-                .iloc[0 : 33]
+                .iloc[0:33]
                 .values
             ),
             axis=1,
@@ -788,18 +788,18 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Plot afolu_output [% of max extent]
     # region
     if show_figs is True:
-        fig = afolu_output.droplevel(["model", "sector", "product_category", "unit"]).T
+        fig = afolu_output.droplevel(["model", "unit"]).T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(
             fig,
             id_vars="year",
-            var_name=["scenario", "region", "product_long"],
+            var_name=["scenario", "region", "variable"],
             value_name="Adoption",
         )
 
         for scenario in fig2["scenario"].unique():
-            for subvertical in fig2["product_long"].unique():
+            for subvertical in fig2["variable"].unique():
 
                 fig = go.Figure()
 
@@ -810,11 +810,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         go.Scatter(
                             name=region,
                             line=dict(width=1),
-                            x=fig2[(fig2["product_long"] == subvertical)][
-                                "year"
-                            ].unique(),
+                            x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
                             y=fig2[
-                                (fig2["product_long"] == subvertical)
+                                (fig2["variable"] == subvertical)
                                 & (fig2["region"] == region)
                                 & (fig2["scenario"] == scenario)
                             ]["Adoption"]
@@ -879,19 +877,18 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Plot afolu_output [Mha, m3]
     # region
     if show_figs is True:
-
-        fig = afolu_output.droplevel(["model", "sector", "product_category", "unit"]).T
+        fig = afolu_output.droplevel(["model", "unit"]).T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(
             fig,
             id_vars="year",
-            var_name=["scenario", "region", "product_long"],
+            var_name=["scenario", "region", "variable"],
             value_name="Adoption",
         )
 
         for scenario in fig2["scenario"].unique():
-            for subvertical in fig2["product_long"].unique():
+            for subvertical in fig2["variable"].unique():
 
                 fig = go.Figure()
 
@@ -902,11 +899,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         go.Scatter(
                             name=region,
                             line=dict(width=1),
-                            x=fig2[(fig2["product_long"] == subvertical)][
-                                "year"
-                            ].unique(),
+                            x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
                             y=fig2[
-                                (fig2["product_long"] == subvertical)
+                                (fig2["variable"] == subvertical)
                                 & (fig2["region"] == region)
                                 & (fig2["scenario"] == scenario)
                             ]["Adoption"],

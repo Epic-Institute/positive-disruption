@@ -355,6 +355,42 @@ energy_output = pd.concat(
     ]
 )
 
+# Combine 'Residential' and 'Commercial' sectors into 'Buildings' sector
+energy_output[
+    energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
+] = energy_output[
+    energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
+].rename(
+    index={"Commercial": "Buildings", "Residential": "Buildings"}
+)
+
+# Change region codes to full names
+energy_output.reset_index(inplace=True)
+energy_output["region"] = energy_output["region"].replace(
+    pd.DataFrame(
+        pd.read_csv(
+            "podi/data/region_categories.csv", usecols=["WEB Region Lower", "ISO Name"]
+        )
+    )
+    .set_index("WEB Region Lower")
+    .to_dict()["ISO Name"]
+)
+energy_output.set_index(
+    [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        "product_category",
+        "product_long",
+        "product_short",
+        "flow_category",
+        "flow_long",
+        "flow_short",
+        "unit",
+    ],
+    inplace=True,
+)
 
 # Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
 energy_output = energy_output[
