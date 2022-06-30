@@ -3725,7 +3725,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         product_category = slice(None)
         product_long = "Electricity"
         flow_category = ["Final consumption"]
-        groupby = "flow_long"
+        groupby = "sector"
 
         fig = (
             (
@@ -5966,31 +5966,92 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     #############################
     # ESTIMATE STORAGE CAPACITY #
     #############################
-
+    """
     # region
 
     # Current setting to 20% of electricity generation
 
     energy_storage = pd.concat(
         [
-            energy_post_electrification[
-                (
-                    energy_post_electrification.reset_index().flow_category
-                    == "Electricity output"
-                ).values
-            ]
-            .groupby(energy_post_electrification.index.names)
-            .sum()
-            .multiply(0.2),
-            energy_baseline[
-                (
-                    energy_baseline.reset_index().flow_category == "Electricity output"
-                ).values
-            ]
-            .groupby(energy_baseline.index.names)
-            .sum()
-            .multiply(0.2),
-        ]
+            pd.concat(
+                [
+                    energy_post_electrification[
+                        (
+                            energy_post_electrification.reset_index().flow_category
+                            == "Electricity output"
+                        ).values
+                    ]
+                    .groupby(energy_post_electrification.index.names)
+                    .sum()
+                    .multiply(0.2)
+                    .loc[:, :data_end_year],
+                    energy_baseline[
+                        (
+                            energy_baseline.reset_index().flow_category
+                            == "Electricity output"
+                        ).values
+                    ]
+                    .groupby(energy_baseline.index.names)
+                    .sum()
+                    .multiply(0.2),
+                ]
+            ),
+            pd.concat(
+                [
+                    energy_post_electrification[
+                        (
+                            energy_post_electrification.reset_index().flow_category
+                            == "Electricity output"
+                        ).values
+                    ]
+                    .groupby(energy_post_electrification.index.names)
+                    .sum()
+                    .multiply(0.2)
+                    .multiply(
+                        energy_post_electrification[
+                            (
+                                energy_post_electrification.reset_index().flow_category
+                                == "Electricity output"
+                            ).values
+                        ]
+                        .groupby(energy_post_electrification.index.names)
+                        .sum()
+                        .multiply(0.2)
+                        .pct_change()
+                        .fillna(0)
+                        .replace(np.inf, 0)
+                        .add(1)
+                        .cumprod()
+                    ),
+                    energy_baseline[
+                        (
+                            energy_baseline.reset_index().flow_category
+                            == "Electricity output"
+                        ).values
+                    ]
+                    .groupby(energy_baseline.index.names)
+                    .sum()
+                    .multiply(0.2)
+                    .multiply(
+                        energy_baseline[
+                            (
+                                energy_baseline.reset_index().flow_category
+                                == "Electricity output"
+                            ).values
+                        ]
+                        .groupby(energy_baseline.index.names)
+                        .sum()
+                        .multiply(0.1)
+                        .pct_change()
+                        .fillna(0)
+                        .replace(np.inf, 0)
+                        .add(1)
+                        .cumprod()
+                    ),
+                ]
+            ).loc[:, data_end_year + 1 :],
+        ],
+        axis=1,
     ).reset_index()
 
     energy_storage["product_category"] = "Storage"
@@ -6013,25 +6074,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         # region
 
-        # region
-
-        energy_post_electrification_plot = energy_post_electrification[
-            (
-                energy_post_electrification.reset_index().product_category
-                == "Electricity and Heat"
-            ).values
-        ].reset_index()
-
-        energy_post_electrification_plot[
-            "product_category"
-        ] = energy_post_electrification_plot["product_long"]
-
-        energy_post_electrification_plot.set_index(
-            energy_post_electrification.index.names, inplace=True
-        )
-
-        # endregion
-
         start_year = data_start_year
         df = energy_storage
         model = "PD22"
@@ -6040,7 +6082,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         product_category = slice(None)
         product_long = slice(None)
         flow_category = slice(None)
-        groupby = "product_long"
+        groupby = ["scenario", "product_long"]
 
         fig = (
             df.loc[
@@ -6056,7 +6098,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 slice(None),
                 slice(None),
             ]
-            .groupby([groupby])
+            .groupby(groupby)
             .sum()
         ).loc[:, start_year:] * unit_val[1]
 
@@ -6064,50 +6106,56 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig.index.name = "year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(
-            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+            fig, id_vars="year", var_name=groupby, value_name="TFC, " + unit_name[1]
         )
 
-        fig = go.Figure()
+        for scenario in fig2["scenario"].unique():
+            fig = go.Figure()
 
-        for sub in fig2[groupby].unique():
-            fig.add_trace(
-                go.Scatter(
-                    name=sub,
-                    line=dict(
-                        width=0.5,
-                    ),
-                    x=fig2["year"],
-                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
-                    fill="tonexty",
-                    stackgroup="1",
+            for sub in fig2["product_long"].unique():
+                fig.add_trace(
+                    go.Scatter(
+                        name=sub,
+                        line=dict(
+                            width=0.5,
+                        ),
+                        x=fig2["year"],
+                        y=fig2[
+                            (fig2["scenario"] == scenario)
+                            & (fig2["product_long"] == sub)
+                        ]["TFC, " + unit_name[1]],
+                        fill="tonexty",
+                        stackgroup="1",
+                    )
                 )
+
+            fig.update_layout(
+                title={
+                    "text": "Energy Storage, "
+                    + str(sector).replace("slice(None, None, None)", "All Sectors")
+                    + ", "
+                    + str(region)
+                    .replace("slice(None, None, None)", "World")
+                    .capitalize()
+                    + ", "
+                    + str(scenario).capitalize(),
+                    "xanchor": "center",
+                    "x": 0.5,
+                    "y": 0.99,
+                },
+                yaxis={"title": "TFC, " + unit_name[1]},
+                margin_b=0,
+                margin_t=20,
+                margin_l=10,
+                margin_r=10,
             )
 
-        fig.update_layout(
-            title={
-                "text": "Energy Storage, "
-                + str(sector).replace("slice(None, None, None)", "All Sectors")
-                + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize()
-                + ", "
-                + str(scenario).capitalize(),
-                "xanchor": "center",
-                "x": 0.5,
-                "y": 0.99,
-            },
-            yaxis={"title": "TFC, " + unit_name[1]},
-            margin_b=0,
-            margin_t=20,
-            margin_l=10,
-            margin_r=10,
-        )
-
-        fig.show()
+            fig.show()
 
         # endregion
 
     # endregion
-
+    """
     #################
     #  SAVE OUTPUT  #
     #################
