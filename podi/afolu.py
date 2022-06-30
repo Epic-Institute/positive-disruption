@@ -1034,21 +1034,25 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         each["flow_long"] = each.apply(lambda x: addgas(x), axis=1)
         each["flow_short"] = each["flow_long"]
 
-        each = each.set_index(
-            [
-                "model",
-                "scenario",
-                "region",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_long",
-                "flow_short",
-                "unit",
-            ]
-        ).drop(columns=["variable"])
+        each = (
+            each.reset_index()
+            .set_index(
+                [
+                    "model",
+                    "scenario",
+                    "region",
+                    "sector",
+                    "product_category",
+                    "product_long",
+                    "product_short",
+                    "flow_category",
+                    "flow_long",
+                    "flow_short",
+                    "unit",
+                ]
+            )
+            .drop(columns=["variable"])
+        )
 
         # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
 

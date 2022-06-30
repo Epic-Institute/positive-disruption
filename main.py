@@ -358,10 +358,27 @@ energy_output = pd.concat(
 # Combine 'Residential' and 'Commercial' sectors into 'Buildings' sector
 energy_output[
     energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
-] = energy_output[
-    energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
-].rename(
-    index={"Commercial": "Buildings", "Residential": "Buildings"}
+] = (
+    energy_output[
+        energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
+    ]
+    .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
+    .groupby(
+        level=[
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
+    )
+    .sum()
 )
 
 # Change region codes to full names
@@ -406,6 +423,7 @@ for output in [
     (energy_output, "energy_output"),
     (afolu_output, "afolu_output"),
     (emissions_output, "emissions_output"),
+    (emissions_wedges, "emissions_wedges"),
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].to_csv(

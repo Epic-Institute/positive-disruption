@@ -4455,6 +4455,8 @@ def results_analysis(
         ]
     )
 
+    # endregion
+
     #####################################
     # GHG EMISSIONS MITIGATION BARCHART #
     #####################################
@@ -5502,8 +5504,6 @@ def results_analysis(
             ).replace(" ", ""),
             auto_open=False,
         )
-
-    # endregion
 
     # endregion
 
