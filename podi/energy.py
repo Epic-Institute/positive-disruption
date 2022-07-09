@@ -1812,7 +1812,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     recalc_energy_baseline = True
     # region
 
-    if recalc_energy_baseline == True:
+    if recalc_energy_baseline is True:
         # Load EIA energy projections
         energy_projection = (
             pd.read_excel(
@@ -6298,6 +6298,15 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         fig.show()
 
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/energy-TFC-productcategory-" + str(scenario) + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
+
         # endregion
 
         ################################################
@@ -6407,7 +6416,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         upstreamwedges = (
             (
-                (energy_post_upstream - energy_baseline)
+                (energy_post_upstream - energy_output.loc[slice(None), ["baseline"], :])
                 .loc[
                     model,
                     scenario,
@@ -6535,6 +6544,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_output
         model = "PD22"
+        scenario = scenario
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -6545,7 +6555,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    slice(None),
+                    scenario,
                     region,
                     sector,
                     product_category,
@@ -6591,7 +6601,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     "slice(None, None, None)", "All Sources"
                 )
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + scenario,
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -6605,6 +6617,15 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         fig.show()
 
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=("./charts/energy-TFC-sector-" + str(scenario) + ".html").replace(
+                    " ", ""
+                ),
+                auto_open=False,
+            )
+
         # endregion
 
         #####################################
@@ -6616,6 +6637,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_output
         model = "PD22"
+        scenario = scenario
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -6627,7 +6649,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             (
                 df.loc[
                     model,
-                    slice(None),
+                    scenario,
                     region,
                     sector,
                     product_category,
@@ -6671,7 +6693,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Electricity Consumption, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + scenario.capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -6685,6 +6709,15 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
         fig.show()
 
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/energy-electricity-sector-" + str(scenario) + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
+
         # endregion
 
         ####################################
@@ -6694,7 +6727,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         # region
 
         # Breakdown 'Electricity and Heat' product_category
-
         # region
 
         energy_output_plot = energy_output[
@@ -6722,6 +6754,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         model = "PD22"
+        scenario = scenario
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -6731,7 +6764,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         fig = (
             df.loc[
                 model,
-                slice(None),
+                scenario,
                 region,
                 sector,
                 product_category,
@@ -6787,6 +6820,15 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         )
 
         fig.show()
+
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/energy-electricity-product-" + str(scenario) + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
 
         # endregion
 
