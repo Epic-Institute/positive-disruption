@@ -2199,18 +2199,18 @@ def emissions(
 
             fig.show()
 
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/emissions-wedges-"
-                    + str(sector)
-                    + "-"
-                    + str(scenario)
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-            )
+            if save_figs is True:
+                pio.write_html(
+                    fig,
+                    file=(
+                        "./charts/emissions-wedges-"
+                        + str(sector)
+                        + "-"
+                        + str(scenario)
+                        + ".html"
+                    ).replace(" ", ""),
+                    auto_open=False,
+                )
 
         # endregion
 
