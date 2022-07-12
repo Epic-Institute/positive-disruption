@@ -1402,13 +1402,13 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 .groupby([groupby])
                 .sum()
             ).loc[:, start_year:]
-            * unit_val[1]
+            * unit_val[0]
         ).T
 
         fig.index.name = "year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(
-            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[1]
+            fig, id_vars="year", var_name=[groupby], value_name="TFC, " + unit_name[0]
         )
 
         fig = go.Figure()
@@ -1421,7 +1421,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                         width=0.5,
                     ),
                     x=fig2["year"],
-                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[1]],
+                    y=fig2[fig2[groupby] == sub]["TFC, " + unit_name[0]],
                     fill="tonexty",
                     stackgroup="1",
                 )
@@ -1437,7 +1437,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "x": 0.5,
                 "y": 0.99,
             },
-            yaxis={"title": "TFC, " + unit_name[1]},
+            yaxis={"title": "TFC, " + unit_name[0]},
             margin_b=0,
             margin_t=20,
             margin_l=10,
@@ -1809,7 +1809,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     #  PROJECT BASELINE ENERGY  #
     #############################
 
-    recalc_energy_baseline = True
+    recalc_energy_baseline = False
     # region
 
     if recalc_energy_baseline is True:
