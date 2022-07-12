@@ -34,7 +34,7 @@ def emissions(
     #  CALCULATE CO2 EMISSIONS FROM ENERGY  #
     #########################################
 
-    recalc_emissions_energy = False
+    recalc_emissions_energy = True
     # region
     if recalc_emissions_energy is True:
         # Load emissions factors (currently a manually produced file). Emissions factors attribute emissions to the sector where the emissions are generated, e.g. electricity use in Buildings/Industry is zero emissions since those emissions are attributed to the Electric Power sector. Heat not produced on-site in Buildings/Industry is zero emissions since those emissions are attributed to the Industrial sector.
@@ -64,6 +64,19 @@ def emissions(
 
         emissions_energy.index = emissions_energy.index.set_levels(
             emissions_energy.index.levels[10].str.replace("TJ", "Mt"), level=10
+        )
+
+        # Drop flow_category 'Transformation processes' in sector 'Electric Power' to avoid double counting with flow_category 'electricity output'
+        emissions_energy.update(
+            emissions_energy[
+                (
+                    (emissions_energy.reset_index().sector == "Electric Power")
+                    & (
+                        emissions_energy.reset_index().flow_category
+                        == "Transformation processes"
+                    )
+                ).values
+            ].multiply(0)
         )
 
         # Save to CSV file
@@ -175,9 +188,9 @@ def emissions(
         if save_figs is True:
             pio.write_html(
                 fig,
-                file=(
-                    "./charts/emissions-energy-" + str(scenario).capitalize() + ".html"
-                ).replace(" ", ""),
+                file=("./charts/emissions-energy-" + str(scenario) + ".html").replace(
+                    " ", ""
+                ),
                 auto_open=False,
             )
 
@@ -1286,67 +1299,52 @@ def emissions(
     # Drop double counted emissions
     def remove_doublecount(x):
         # Drop CO2 that was already estimated in energy module
-        if (
-            x.name[4]
-            in [
-                "1A1a_Electricity-autoproducer",
-                "1A1a_Electricity-public",
-                "1A1a_Heat-production",
-                "1A1bc_Other-transformation",
-                "1A2a_Ind-Comb-Iron-steel",
-                "1A2b_Ind-Comb-Non-ferrous-metals",
-                "1A2c_Ind-Comb-Chemicals",
-                "1A2d_Ind-Comb-Pulp-paper",
-                "1A2e_Ind-Comb-Food-tobacco",
-                "1A2f_Ind-Comb-Non-metalic-minerals",
-                "1A2g_Ind-Comb-Construction",
-                "1A2g_Ind-Comb-machinery",
-                "1A2g_Ind-Comb-mining-quarying",
-                "1A2g_Ind-Comb-other",
-                "1A2g_Ind-Comb-textile-leather",
-                "1A2g_Ind-Comb-transpequip",
-                "1A2g_Ind-Comb-wood-products",
-                "1A3b_Road",
-                "1A3c_Rail",
-                "1A3aii_Domestic-aviation",
-                "1A3dii_Domestic-navigation",
-                "1A3eii_Other-transp",
-                "1A3ai_International-aviation",
-                "1A3di_International-shipping" "1A4a_Commercial-institutional",
-                "1A4b_Residential",
-                "1A4c_Agriculture-forestry-fishing",
-                "1A5_Other-unspecified",
-            ]
-            and x.name[6] in ["CO2"]
-        ):
-            x.rename(
-                ("NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN"), inplace=True
-            )
+        if x.name[4] in [
+            "1A1a_Electricity-autoproducer",
+            "1A1a_Electricity-public",
+            "1A1a_Heat-production",
+            "1A1bc_Other-transformation",
+            "1A2a_Ind-Comb-Iron-steel",
+            "1A2b_Ind-Comb-Non-ferrous-metals",
+            "1A2c_Ind-Comb-Chemicals",
+            "1A2d_Ind-Comb-Pulp-paper",
+            "1A2e_Ind-Comb-Food-tobacco",
+            "1A2f_Ind-Comb-Non-metalic-minerals",
+            "1A2g_Ind-Comb-Construction",
+            "1A2g_Ind-Comb-machinery",
+            "1A2g_Ind-Comb-mining-quarying",
+            "1A2g_Ind-Comb-other",
+            "1A2g_Ind-Comb-textile-leather",
+            "1A2g_Ind-Comb-transpequip",
+            "1A2g_Ind-Comb-wood-products",
+            "1A3b_Road",
+            "1A3c_Rail",
+            "1A3aii_Domestic-aviation",
+            "1A3dii_Domestic-navigation",
+            "1A3eii_Other-transp",
+            "1A3ai_International-aviation",
+            "1A3di_International-shipping" "1A4a_Commercial-institutional",
+            "1A4b_Residential",
+            "1A4c_Agriculture-forestry-fishing",
+            "1A5_Other-unspecified",
+        ] and x.name[6] in ["CO2"]:
+            x = x.multiply(0)
 
         # Drop CO2, CH4, N2O that was already estimated in FAO historical data
-        if (
-            x.name[4]
-            in [
-                "3B_Manure-management",
-                "3D_Rice-Cultivation",
-                "3D_Soil-emissions",
-                "3E_Enteric-fermentation",
-                "3I_Agriculture-other",
-            ]
-            and x.name[6] in ["CO2", "CH4", "N2O"]
-        ):
-            x.rename(
-                ("NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN"), inplace=True
-            )
+        if x.name[4] in [
+            "3B_Manure-management",
+            "3D_Rice-Cultivation",
+            "3D_Soil-emissions",
+            "3E_Enteric-fermentation",
+            "3I_Agriculture-other",
+        ] and x.name[6] in ["CO2", "CH4", "N2O"]:
+            x = x.multiply(0)
 
         return x
 
     emissions_additional = emissions_additional.apply(
         lambda x: remove_doublecount(x), axis=1
     )
-    emissions_additional = emissions_additional.loc[
-        emissions_additional.index.dropna(how="any"), :
-    ]
 
     # Get F-Gas data
     gas_edgar = [
@@ -1487,6 +1485,9 @@ def emissions(
     # Combine all additional gases
     emissions_additional = pd.concat([emissions_additional, emissions_additional_fgas])
 
+    # Drop rows with all zero values
+    emissions_additional = emissions_additional[emissions_additional.sum(axis=1) != 0]
+
     # Create baseline and pathway scenarios
     emissions_additional = pd.concat(
         [
@@ -1498,12 +1499,11 @@ def emissions(
     # Project additional emissions using percent change in energy emissions in the Industrial sector
     percent_change = (
         emissions_energy.groupby(["model", "scenario", "region", "sector"])
-        .mean()
+        .sum()
         .loc[slice(None), slice(None), slice(None), "Industrial"]
         .loc[:, data_end_year:]
         .pct_change(axis=1)
         .replace(NaN, 0)
-        .divide(100)
         .add(1)
     )
 
@@ -1551,6 +1551,7 @@ def emissions(
         "1A2g_Ind-Comb-textile-leather": "Other Industrial",
         "1A2g_Ind-Comb-transpequip": "Other Industrial",
         "1A2g_Ind-Comb-wood-products": "Other Industrial",
+        "1A4c_Agriculture-forestry-fishing": "Agriculture, Forestry, Fishing",
         "2A1_Cement-production": "Cement Production",
         "2A2_Lime-production": "Lime Production",
         "2Ax_Other-minerals": "Other Industrial",
@@ -1610,6 +1611,7 @@ def emissions(
         "1A2g_Ind-Comb-textile-leather": "Textile, Leather Production",
         "1A2g_Ind-Comb-transpequip": "Transportation Equipment Production",
         "1A2g_Ind-Comb-wood-products": "Wood Production",
+        "1A4c_Agriculture-forestry-fishing": "Agriculture, Forestry, Fishing",
         "2A1_Cement-production": "Cement Production",
         "2A2_Lime-production": "Lime Production",
         "2Ax_Other-minerals": "Other Mineral Production",
@@ -1744,10 +1746,11 @@ def emissions(
                             y=fig2[
                                 (fig2["scenario"] == scenario)
                                 & (fig2["sector"] == sector)
-                                & (fig2["product_long"] == product_long)
                                 & (fig2["flow_long"] == gas)
                                 & (fig2["year"] <= data_end_year)
-                            ]["Emissions"],
+                            ]
+                            .groupby(["year"])
+                            .sum()["Emissions"],
                             fill="none",
                             stackgroup="two",
                             showlegend=True,
@@ -1778,9 +1781,9 @@ def emissions(
                     fig,
                     file=(
                         "./charts/emissions-"
-                        + str(scenario).capitalize()
+                        + str(scenario)
                         + "-"
-                        + +str(sector).capitalize()
+                        + str(sector)
                         + ".html"
                     ).replace(" ", ""),
                     auto_open=False,
@@ -1989,6 +1992,11 @@ def emissions(
         ]
     )
 
+    # Drop rows with all zero values
+    emissions_output_co2e = emissions_output_co2e[
+        emissions_output_co2e.sum(axis=1) != 0
+    ]
+
     # endregion
 
     # Plot emissions_output_co2e
@@ -2049,9 +2057,10 @@ def emissions(
                         y=fig2[
                             (fig2["scenario"] == scenario)
                             & (fig2["sector"] == sector)
-                            & (fig2["product_long"] == product_long)
                             & (fig2["year"] <= data_end_year)
-                        ]["Emissions"],
+                        ]
+                        .groupby(["year"])
+                        .sum()["Emissions"],
                         fill="none",
                         stackgroup="two",
                         showlegend=True,
@@ -2076,14 +2085,18 @@ def emissions(
 
                 fig.show()
 
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/emissions-" + str(sector) + "-" + str(scenario) + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-            )
+                if save_figs is True:
+                    pio.write_html(
+                        fig,
+                        file=(
+                            "./charts/emissions-"
+                            + str(sector)
+                            + "-"
+                            + str(scenario)
+                            + ".html"
+                        ).replace(" ", ""),
+                        auto_open=False,
+                    )
 
         # endregion
 

@@ -1051,7 +1051,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     "unit",
                 ]
             )
-            .drop(columns=["variable"])
+            .drop(columns=["variable", "index"])
         )
 
         # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
