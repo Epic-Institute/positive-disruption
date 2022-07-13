@@ -18,8 +18,8 @@ hvplot.extension("plotly")
 
 pandarallel.initialize()
 
-show_figs = False
-save_figs = False
+show_figs = True
+save_figs = True
 
 # endregion
 

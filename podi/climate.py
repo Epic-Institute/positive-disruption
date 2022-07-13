@@ -710,7 +710,7 @@ def climate(
     if save_figs is True:
         pio.write_html(
             fig,
-            file=("./charts/co2conc-" + "World " + ".html").replace(" ", ""),
+            file=("./charts/climate-ghg-concentration.html").replace(" ", ""),
             auto_open=False,
         )
 
@@ -778,7 +778,9 @@ def climate(
         if save_figs is True:
             pio.write_html(
                 fig,
-                file=("./charts/co2conc-" + "World " + ".html").replace(" ", ""),
+                file=(
+                    "./charts/climate-" + gas.lower() + "-concentration.html"
+                ).replace(" ", ""),
                 auto_open=False,
             )
 
@@ -847,7 +849,7 @@ def climate(
     if save_figs is True:
         pio.write_html(
             fig,
-            file=("./charts/co2conc-" + "World " + ".html").replace(" ", ""),
+            file=("./charts/climate-radiativeforcing.html").replace(" ", ""),
             auto_open=False,
         )
 
@@ -1160,7 +1162,7 @@ def climate(
     if save_figs is True:
         pio.write_html(
             fig,
-            file=("./charts/temp-" + "World" + ".html").replace(" ", ""),
+            file=("./charts/temperature.html").replace(" ", ""),
             auto_open=False,
         )
 

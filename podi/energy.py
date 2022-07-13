@@ -6603,7 +6603,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 + ", "
                 + str(region).replace("slice(None, None, None)", "World").capitalize()
                 + ", "
-                + scenario,
+                + scenario.capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -6807,7 +6807,9 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "text": "Electricity Generation, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
                 + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize(),
+                + str(region).replace("slice(None, None, None)", "World").capitalize()
+                + ", "
+                + str(scenario).capitalize(),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
