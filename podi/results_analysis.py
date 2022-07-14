@@ -19,6 +19,149 @@ def results_analysis(
     proj_end_year,
 ):
 
+    ######################
+    # HISTORICAL ANALOGS #
+    ######################
+
+    # region
+
+    analog = pd.read_csv(
+        "podi/data/external/CHATTING_SPLICED.csv",
+        usecols=["label", "iso3c", "year", "value"],
+    )
+
+
+    def percent_change(x):
+        xnew = (
+            x.value
+            / analog[(analog.label == x.label) & (analog.iso3c == x.iso3c)].value.max()
+        )
+        x.value = xnew
+        return x
+
+
+    labels = [
+        "Combine harvesters - threshers in use",
+        "Land agricultural land area 1000 ha",
+        "Agricultural tractors in use",
+        "Total vehicles (OICA)",
+        "Aluminum primary production, in metric tons",
+        "Land arable land area 1000 ha",
+        "ATMs",
+        "Air transport, passengers carried",
+        "Civil aviation passenger-KM traveled",
+        "Civil aviation ton-KM of cargo carried",
+        "Households that subscribe to cable",
+        "Cellular subscriptions",
+        "Personal computers",
+        "Electricity from coal (TWH)",
+        "Electric power consumption (KWH)",
+        "Electricity from gas (TWH)",
+        "Electricity from hydro (TWH)",
+        "Electricity from nuclear (TWH)",
+        "Electricity from oil (TWH)",
+        "Electricity from other renewables (TWH)",
+        "Electricity from solar (TWH)",
+        "Electricity from wind (TWH)",
+        "Gross output of electric energy (TWH)",
+        "Electricity Generating Capacity, 1000 kilowatts",
+        "Fertilizer ammonium nitrate (AN) agricultural use tonnes",
+        "Fertilizer ammonium sulphate agricultural use tonnes",
+        "Fertilizer diammonium phosphate (DAP) agricultural use tonnes",
+        "Fertilizer potassium chloride (muriate of potash) (MOP) agricultural use tonnes",
+        "Fertilizer NPK fertilizers agricultural use tonnes",
+        "Fertilizer other NP compounds agricultural use tonnes",
+        "Fertilizer superphosphates above 35 percent agricultural use tonnes",
+        "Fertilizer potassium sulphate (sulphate of potash) (SOP) agricultural use tonnes",
+        "Aggregate kg of fertilizer consumed",
+        "Fertilizer urea agricultural use tonnes",
+        "Land naturally regenerating forest area 1000 ha",
+        "Land planted forest area 1000 ha",
+        "People with internet access",
+        "Area equipped to provide water to crops",
+        "Automatic looms",
+        "Ordinary and automatic looms",
+        "Items mailed or received",
+        "% Arable land share in agricultural land",
+        "% Irrigated area as a share of cultivated land",
+        "Pesticide fungicides and bactericides agricultural use tonnes",
+        "Pesticide herbicides agricultural use tonnes",
+        "Pesticide insecticides agricultural use tonnes",
+        "Pesticide mineral oils agricultural use tonnes",
+        "Pesticide other pesticides nes agricultural use tonnes",
+        "Pesticide rodenticides agricultural use tonnes",
+        "Total metric tons of pesticides in agricultural use",
+        "Radios",
+        "Geographical/route lengths of line open at the end of the year",
+        "Rail lines (total route-km)",
+        "Thousands of passenger journeys by railway",
+        "Passenger journeys by railway (passenger-km)",
+        "Metric tons of freight carried on railways (excluding livestock and passenger baggage)",
+        "Freight carried on railways (excluding livestock and passenger baggage) (ton-km)",
+        "Length of Paved Road (km)",
+        "Secure internet servers",
+        "Ships of all kinds",
+        "Tonnage of ships of all kinds",
+        "Tonnage of sail ships",
+        "Tonnage of steam ships",
+        "Tonnage of steam and motor ships",
+        "Mule spindles",
+        "Ring spindles",
+        "Steel demand in thousand metric tons",
+        "Steel production in thousand metric tons",
+        "Stainless steel production",
+        "Telegrams",
+        "Fixed telephone subscriptions",
+        "Television sets",
+        "Weight of artificial fibers in spindles",
+        "Weight of other fibers in spindles",
+        "Weight of synthetic fibers in spindles",
+        "Weight of all fibers in spindles",
+        "Passenger car vehicles",
+        "Passenger cars (BTS)",
+        "Commercial vehicles (bus, taxi)",
+        "Commercial vehicles (BTS)",
+        "Total vehicles (BTS)",
+    ]
+
+    analog = analog[(analog.iso3c == "USA") & (analog.label.isin(labels))].apply(
+        percent_change, axis=1
+    )
+
+    fig = go.Figure()
+
+    for label in analog["label"].unique():
+
+        # Make modeled trace
+        fig.add_trace(
+            go.Scatter(
+                name=label,
+                line=dict(width=1),
+                x=analog[(analog["label"] == label)]["year"].unique(),
+                y=analog[(analog["label"] == label)]["value"],
+                legendgroup=label,
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Historical Analogs",
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "% of max"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+    )
+
+    fig.show()
+
+    # endregion
+
     ##############
     #  ADOPTION  #
     ##############
