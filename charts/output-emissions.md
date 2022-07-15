@@ -36,6 +36,10 @@ title: Emissions
 
 ## Emissions Wedges
 
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-wedges-All-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-wedges-ElectricPower-pathway.html" height='500' width='150%'></iframe>
 
 <br/><br/>
