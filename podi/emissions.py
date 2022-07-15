@@ -1528,11 +1528,10 @@ def emissions(
         ]
     )
 
-    # Project additional emissions using percent change in energy emissions in the Industrial sector
+    # Project additional emissions using percent change in energy emissions in the energy sector
     percent_change = (
         emissions_energy.groupby(["model", "scenario", "region", "sector"])
         .sum()
-        .loc[slice(None), slice(None), slice(None), "Industrial"]
         .loc[:, data_end_year:]
         .pct_change(axis=1)
         .replace(NaN, 0)
@@ -1542,13 +1541,13 @@ def emissions(
     emissions_additional = (
         emissions_additional.loc[:, data_start_year:data_end_year]
         .reset_index()
-        .set_index(["model", "scenario", "region"])
+        .set_index(["model", "scenario", "region", "sector"])
         .merge(
             percent_change.loc[:, data_end_year + 1 :],
-            on=["model", "scenario", "region"],
+            on=["model", "scenario", "region", "sector"],
         )
         .set_index(
-            ["sector", "product_long", "flow_category", "flow_long", "unit"],
+            ["product_long", "flow_category", "flow_long", "unit"],
             append=True,
         )
     )
@@ -1678,8 +1677,68 @@ def emissions(
         "3I_Agriculture-other": "Other Agricultural",
     }
 
+    detailed_index_with_addtl = {
+        "Fossil fuels": "Fossil fuel Heat, Addtl Emissions",
+        "1A1a_Electricity-autoproducer": "Fossil Fuels, Addtl Emissions",
+        "1A1a_Electricity-public": "Fossil Fuels, Addtl Emissions",
+        "1A1a_Heat-production": "Fossil fuel Heat, Addtl Emissions",
+        "1A1bc_Other-transformation": "Other Fossil Transformation, Addtl Emissions",
+        "1B1_Fugitive-solid-fuels": "Fugitive Solid Fuels, Addtl Emissions",
+        "1B2_Fugitive-petr": "Fugitive Petroleum, Addtl Emissions",
+        "1B2b_Fugitive-NG-distr": "Fugitive Natural Gas, Distribution, Addtl Emissions",
+        "1B2b_Fugitive-NG-prod": "Fugitive Natural Gas, Production, Addtl Emissions",
+        "1B2d_Fugitive-other-energy": "Fugitive Fossil Fuels, Other, Addtl Emissions",
+        "7A_Fossil-fuel-fires": "Fossil Fuel Fires, Addtl Emissions",
+        "1A2a_Ind-Comb-Iron-steel": "Steel Production, Addtl Emissions",
+        "1A2b_Ind-Comb-Non-ferrous-metals": "Non-ferrous Metal Production, Addtl Emissions",
+        "1A2c_Ind-Comb-Chemicals": "Chemical Production, Addtl Emissions",
+        "1A2d_Ind-Comb-Pulp-paper": "Pulp-Paper Production, Addtl Emissions",
+        "1A2e_Ind-Comb-Food-tobacco": "Food Production, Addtl Emissions",
+        "1A2f_Ind-Comb-Non-metalic-minerals": "Non-metalic Mineral Production, Addtl Emissions",
+        "1A2g_Ind-Comb-Construction": "Construction, Addtl Emissions",
+        "1A2g_Ind-Comb-machinery": "Machinery, Addtl Emissions",
+        "1A2g_Ind-Comb-mining-quarying": "Mining, Quarying, Addtl Emissions",
+        "1A2g_Ind-Comb-other": "Other Industrial, Addtl Emissions",
+        "1A2g_Ind-Comb-textile-leather": "Textile, Leather Production, Addtl Emissions",
+        "1A2g_Ind-Comb-transpequip": "Transportation Equipment Production, Addtl Emissions",
+        "1A2g_Ind-Comb-wood-products": "Wood Production, Addtl Emissions",
+        "1A4c_Agriculture-forestry-fishing": "Agriculture, Forestry, Fishing, Addtl Emissions",
+        "2A1_Cement-production": "Cement Production, Addtl Emissions",
+        "2A2_Lime-production": "Lime Production, Addtl Emissions",
+        "2Ax_Other-minerals": "Other Mineral Production, Addtl Emissions",
+        "2B_Chemical-industry": "Chemical Production, Addtl Emissions",
+        "2B2_Chemicals-Nitric-acid": "Nitric Acid Production, Addtl Emissions",
+        "2B3_Chemicals-Adipic-acid": "Adipic Acid Production, Addtl Emissions",
+        "2C_Metal-production": "Metal Production, Addtl Emissions",
+        "2D_Chemical-products-manufacture-processing": "Chemical Production, Addtl Emissions",
+        "2D_Degreasing-Cleaning": "Chemical Production, Addtl Emissions",
+        "2D_Other-product-use": "Chemical Production, Addtl Emissions",
+        "2D_Paint-application": "Chemical Production, Addtl Emissions",
+        "2H_Pulp-and-paper-food-beverage-wood": "Food Production, Addtl Emissions",
+        "2L_Other-process-emissions": "Other Industrial, Addtl Emissions",
+        "5A_Solid-waste-disposal": "Solid Waste Disposal, Addtl Emissions",
+        "5C_Waste-combustion": "Waste Combustion, Addtl Emissions",
+        "5D_Wastewater-handling": "Wastewater Handling, Addtl Emissions",
+        "5E_Other-waste-handling": "Waste Combustion, Addtl Emissions",
+        "7BC_Indirect-N2O-non-agricultural-N": "Indirect N2O from Non-Ag N, Addtl Emissions",
+        "1A5_Other-unspecified": "Other Industrial, Addtl Emissions",
+        "6A_Other-in-total": "Other Industrial, Addtl Emissions",
+        "1A3b_Road": "Road Transport, Addtl Emissions",
+        "1A3c_Rail": "Rail Transport, Addtl Emissions",
+        "1A3di_Oil_Tanker_Loading": "Maritime Transport, Addtl Emissions",
+        "1A3dii_Domestic-navigation": "Maritime Transport, Addtl Emissions",
+        "1A3eii_Other-transp": "Other Transport, Addtl Emissions",
+        "1A4a_Commercial-institutional": "Addtl Emissions",
+        "1A4b_Residential": "Addtl Emissions",
+        "3B_Manure-management": "Manure Management, Addtl Emissions",
+        "3D_Rice-Cultivation": "Rice Cultivation, Addtl Emissions",
+        "3D_Soil-emissions": "Fertilized Soils, Addtl Emissions",
+        "3E_Enteric-fermentation": "Enteric Fermentation, Addtl Emissions",
+        "3I_Agriculture-other": "Other Agricultural, Addtl Emissions",
+    }
+
     emissions_additional = (
-        emissions_additional.rename(index=detailed_index)
+        emissions_additional.rename(index=detailed_index_with_addtl)
         .groupby(
             [
                 "model",

@@ -166,6 +166,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "TOTIND",
                 "TOTTRANF",
                 "TOTTRANS",
+                "TOTENGY",
                 "OWNUSE",
             ]
         )
