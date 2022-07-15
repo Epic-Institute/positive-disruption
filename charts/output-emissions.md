@@ -29,7 +29,7 @@ title: Emissions
 
 <br/><br/>
 
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Forests&wetlands-pathway.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>
 
 <br/><br/>
 
@@ -56,4 +56,4 @@ title: Emissions
 
 <br/><br/>
 
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-wedges-Forests&wetlands-pathway.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-wedges-Forests&Wetlands-pathway.html" height='500' width='150%'></iframe>
