@@ -111,7 +111,6 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = data_start_year
         model = "PD22"
 
         fig = (
@@ -203,7 +202,6 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = data_start_year
         model = "PD22"
 
         fig = (
@@ -1038,7 +1036,6 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = data_start_year
         model = "PD22"
 
         fig = (
@@ -1357,7 +1354,8 @@ def emissions(
             "1A3dii_Domestic-navigation",
             "1A3eii_Other-transp",
             "1A3ai_International-aviation",
-            "1A3di_International-shipping" "1A4a_Commercial-institutional",
+            "1A3di_International-shipping",
+            "1A4a_Commercial-institutional",
             "1A4b_Residential",
             "1A4c_Agriculture-forestry-fishing",
             "1A5_Other-unspecified",
@@ -1729,13 +1727,9 @@ def emissions(
 
         scenario = "pathway"
         model = "PD22"
+        df = emissions_additional.loc[model, slice(None), slice(None), ["Residential"]]
 
-        fig = (
-            emissions_additional.loc[model]
-            .groupby(["scenario", "sector", "product_long", "flow_long"])
-            .sum()
-            .T
-        )
+        fig = df.groupby(["scenario", "sector", "product_long", "flow_long"]).sum().T
         fig.index.name = "year"
         fig.reset_index(inplace=True)
         fig2 = pd.melt(
@@ -2006,6 +2000,7 @@ def emissions(
     )
 
     # Update all flow_long values to 'CO2e'
+    """
     emissions_output_co2e = emissions_output_co2e.droplevel("flow_long").reset_index()
     emissions_output_co2e["flow_long"] = "CO2e"
 
@@ -2024,7 +2019,7 @@ def emissions(
             "unit",
         ]
     )
-
+    """
     # Drop rows with all zero values
     emissions_output_co2e = emissions_output_co2e[
         emissions_output_co2e.sum(axis=1) != 0
@@ -2088,23 +2083,23 @@ def emissions(
                             )
                         )
 
-                    fig.add_trace(
-                        go.Scatter(
-                            name="Historical",
-                            line=dict(width=2, color="black"),
-                            x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
-                            y=fig2[
-                                (fig2["scenario"] == scenario)
-                                & (fig2["sector"] == sector)
-                                & (fig2["year"] <= data_end_year)
-                            ]
-                            .groupby(["year"])
-                            .sum()["Emissions"],
-                            fill="none",
-                            stackgroup="two",
-                            showlegend=True,
-                        )
+                fig.add_trace(
+                    go.Scatter(
+                        name="Historical",
+                        line=dict(width=2, color="black"),
+                        x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
+                        y=fig2[
+                            (fig2["scenario"] == scenario)
+                            & (fig2["sector"] == sector)
+                            & (fig2["year"] <= data_end_year)
+                        ]
+                        .groupby(["year"])
+                        .sum()["Emissions"],
+                        fill="none",
+                        stackgroup="two",
+                        showlegend=True,
                     )
+                )
 
                 fig.update_layout(
                     title={
@@ -2146,7 +2141,6 @@ def emissions(
         # region
 
         scenario = "pathway"
-        start_year = data_start_year
         model = "PD22"
 
         fig = (
@@ -2257,9 +2251,9 @@ def emissions(
 
     # endregion
 
-    ##############################################################
-    #  LOAD HISTORICAL EMISSIONS & COMPARE TO MODELED EMISSIONS  #
-    ##############################################################
+    #########################################
+    #  LOAD & COMPARE TO MODELED EMISSIONS  #
+    #########################################
 
     # region
 
