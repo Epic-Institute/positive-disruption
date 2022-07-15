@@ -1096,7 +1096,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #################
 
     # region
-    afolu_output.to_csv("podi/data/afolu_output.csv")
+    afolu_output.sort_index().to_csv("podi/data/afolu_output.csv")
 
     # endregion
 

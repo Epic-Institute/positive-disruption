@@ -27,7 +27,9 @@ def curve_smooth(data, method, sr):
     curve2 = []
 
     for i in range(0, len(curve.index)):
-        curve2 = pd.DataFrame(curve2).append((pd.DataFrame(curve[curve.index[i]]).T))
+        curve2 = pd.concat(
+            [pd.DataFrame(curve2), pd.DataFrame(curve[curve.index[i]]).T]
+        )
 
     curve2 = pd.DataFrame(curve2.set_index(curve.index))
 

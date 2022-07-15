@@ -34,72 +34,61 @@ def emissions(
     #  CALCULATE CO2 EMISSIONS FROM ENERGY  #
     #########################################
 
-    recalc_emissions_energy = True
     # region
-    if recalc_emissions_energy is True:
-        # Load emissions factors (currently a manually produced file). Emissions factors attribute emissions to the sector where the emissions are generated, e.g. electricity use in Buildings/Industry is zero emissions since those emissions are attributed to the Electric Power sector. Heat not produced on-site in Buildings/Industry is zero emissions since those emissions are attributed to the Industrial sector.
-        emission_factors = pd.read_csv("podi/data/emission_factors.csv").set_index(
-            pyam.IAMC_IDX
-        )
-        emission_factors = emission_factors[~emission_factors.index.duplicated()]
-        emission_factors.columns = emission_factors.columns.astype(int)
-        emission_factors = emission_factors.loc[:, data_start_year:proj_end_year]
 
-        # Multiply energy by emission factors to get emissions estimates. Note that emission factors for non-energy use flows are set to 0
-        emissions_energy = energy_output.parallel_apply(
-            lambda x: x.multiply(
-                (
-                    emission_factors.loc[
-                        x.name[0],
-                        x.name[1],
-                        x.name[2],
-                        "|".join([x.name[6], x.name[9]]),
-                    ]
-                )
-                .squeeze()
-                .rename(x.name)
-            ),
-            axis=1,
-        )
+    # Load emissions factors (currently a manually produced file). Emissions factors attribute emissions to the sector where the emissions are generated, e.g. electricity use in Buildings/Industry is zero emissions since those emissions are attributed to the Electric Power sector. Heat not produced on-site in Buildings/Industry is zero emissions since those emissions are attributed to the Industrial sector.
+    emission_factors = pd.read_csv("podi/data/emission_factors.csv").set_index(
+        pyam.IAMC_IDX
+    )
+    emission_factors = emission_factors[~emission_factors.index.duplicated()]
+    emission_factors.columns = emission_factors.columns.astype(int)
+    emission_factors = emission_factors.loc[
+        :, data_start_year:proj_end_year
+    ].sort_index()
 
-        emissions_energy.index = emissions_energy.index.set_levels(
-            emissions_energy.index.levels[10].str.replace("TJ", "Mt"), level=10
-        )
+    # Multiply energy by emission factors to get emissions estimates. Note that emission factors for non-energy use flows are set to 0
+    emissions_energy = energy_output.parallel_apply(
+        lambda x: x.multiply(
+            (
+                emission_factors.loc[
+                    x.name[0],
+                    x.name[1],
+                    x.name[2],
+                    "|".join([x.name[6], x.name[9]]),
+                ]
+            )
+            .squeeze()
+            .rename(x.name)
+        ),
+        axis=1,
+    )
 
-        # Drop flow_category 'Transformation processes' in sector 'Electric Power' to avoid double counting with flow_category 'electricity output'
-        emissions_energy.update(
-            emissions_energy[
-                (
-                    (emissions_energy.reset_index().sector == "Electric Power")
-                    & (
-                        emissions_energy.reset_index().flow_category
-                        == "Transformation processes"
-                    )
-                ).values
-            ].multiply(0)
-        )
+    emissions_energy.index = emissions_energy.index.set_levels(
+        emissions_energy.index.levels[10].str.replace("TJ", "Mt"), level=10
+    )
 
-        # Save to CSV file
-        emissions_energy.to_csv("podi/data/emissions_energy.csv")
+    # Drop flow_category 'Transformation processes' to avoid double counting
+    emissions_energy.update(
+        emissions_energy[
+            (
+                emissions_energy.reset_index().flow_category
+                == "Transformation processes"
+            ).values
+        ].multiply(0)
+    )
 
-    index = [
-        "model",
-        "scenario",
-        "region",
-        "sector",
-        "product_category",
-        "product_long",
-        "product_short",
-        "flow_category",
-        "flow_long",
-        "flow_short",
-        "unit",
-    ]
+    # Drop flow_category 'Heat output' in sector 'Industry' to avoid double counting
+    emissions_energy.update(
+        emissions_energy[
+            (
+                (emissions_energy.reset_index().sector == "Industrial")
+                & (emissions_energy.reset_index().flow_category == "Heat output")
+            ).values
+        ].multiply(0)
+    )
 
-    emissions_energy = pd.DataFrame(
-        pd.read_csv("podi/data/emissions_energy.csv")
-    ).set_index(index)
-    emissions_energy.columns = emissions_energy.columns.astype(int)
+    # Save to CSV file
+    emissions_energy.to_csv("podi/data/emissions_energy.csv")
 
     # Plot emissions_energy
     # region
@@ -438,23 +427,27 @@ def emissions(
 
         return name
 
-    flux = piecewise_to_continuous("Avg mitigation potential flux")
+    flux = piecewise_to_continuous("Avg mitigation potential flux").sort_index()
 
     # Define the flux of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
-    afolu_avoided = pd.DataFrame(
-        pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
-        .drop(columns=["Region", "Country"])
-        .rename(
-            columns={
-                "iso": "region",
-                "Model": "model",
-                "Scenario": "scenario",
-                "Subvector": "variable",
-                "Unit": "unit",
-            }
+    afolu_avoided = (
+        pd.DataFrame(
+            pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
+            .drop(columns=["Region", "Country"])
+            .rename(
+                columns={
+                    "iso": "region",
+                    "Model": "model",
+                    "Scenario": "scenario",
+                    "Subvector": "variable",
+                    "Unit": "unit",
+                }
+            )
+            .replace("Pathway", scenario)
         )
-        .replace("Pathway", scenario)
-    ).fillna(0)
+        .fillna(0)
+        .sort_index()
+    )
 
     flux_avoided = (
         pd.concat(
@@ -625,7 +618,7 @@ def emissions(
         )
         .set_index("region")
     )
-    emissions_afolu.columns = emissions_afolu.columns.str.replace("Y", "")
+    emissions_afolu.columns = emissions_afolu.columns.str.replace("Y", "", regex=True)
 
     # Drop redundant emissions
     emissions_afolu = emissions_afolu[
@@ -758,10 +751,10 @@ def emissions(
     )
     emissions_afolu_mitigated.reset_index(inplace=True)
     emissions_afolu_mitigated.unit = emissions_afolu_mitigated.unit.str.replace(
-        "tCO2e/m3/yr", "tCO2e"
-    ).replace("tCO2e/Mha/yr", "tCO2e")
+        "tCO2e/m3/yr", "tCO2e", regex=True
+    ).replace("tCO2e/Mha/yr", "tCO2e", regex=True)
     emissions_afolu_mitigated.variable = emissions_afolu_mitigated.variable.str.replace(
-        "\|Avg mitigation potential flux", ""
+        "\|Avg mitigation potential flux", "", regex=True
     )
     emissions_afolu_mitigated.set_index(flux.index.names, inplace=True)
 
@@ -791,13 +784,13 @@ def emissions(
         emissions_afolu_mitigated_year.reset_index(inplace=True)
         emissions_afolu_mitigated_year.variable = (
             emissions_afolu_mitigated_year.variable.str.replace(
-                "\|Avg mitigation potential flux", ""
+                "\|Avg mitigation potential flux", "", regex=True
             )
         )
         emissions_afolu_mitigated_year.unit = (
             emissions_afolu_mitigated_year.unit.str.replace(
-                "tCO2e/m3/yr", "tCO2e"
-            ).replace("tCO2e/Mha/yr", "tCO2e")
+                "tCO2e/m3/yr", "tCO2e", regex=True
+            ).replace("tCO2e/Mha/yr", "tCO2e", regex=True)
         )
         emissions_afolu_mitigated_year.set_index(pyam.IAMC_IDX, inplace=True)
 
@@ -1759,20 +1752,24 @@ def emissions(
     emissions_additional["product_short"] = "EM"
     emissions_additional["flow_short"] = "IND"
 
-    emissions_additional = emissions_additional.reset_index().set_index(
-        [
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
-        ]
+    emissions_additional = (
+        emissions_additional.reset_index()
+        .set_index(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+            ]
+        )
+        .sort_index()
     )
 
     # Plot emissions_additional
@@ -1890,7 +1887,7 @@ def emissions(
     # Combine emissions from energy, afolu, and additional sources
     emissions_output = pd.concat(
         [emissions_energy, emissions_afolu, emissions_additional]
-    )
+    ).sort_index()
 
     # Make emissions_output_co2e
     # region
@@ -2082,7 +2079,7 @@ def emissions(
     # Drop rows with all zero values
     emissions_output_co2e = emissions_output_co2e[
         emissions_output_co2e.sum(axis=1) != 0
-    ]
+    ].sort_index()
 
     # endregion
 
@@ -2139,6 +2136,8 @@ def emissions(
                                 ]["Emissions"],
                                 fill="tonexty",
                                 stackgroup="one",
+                                hovertemplate="<b>Year</b>: %{x}"
+                                + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
                             )
                         )
 
@@ -2157,6 +2156,8 @@ def emissions(
                         fill="none",
                         stackgroup="two",
                         showlegend=True,
+                        hovertemplate="<b>Year</b>: %{x}"
+                        + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
                     )
                 )
 
@@ -2237,6 +2238,8 @@ def emissions(
                     fill="none",
                     stackgroup="one",
                     showlegend=False,
+                    hovertemplate="<b>Year</b>: %{x}"
+                    + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
                 )
             )
 
@@ -2254,6 +2257,8 @@ def emissions(
                     fill="none",
                     stackgroup="two",
                     showlegend=True,
+                    hovertemplate="<b>Year</b>: %{x}"
+                    + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
                 )
             )
 
@@ -2300,6 +2305,108 @@ def emissions(
                         + "-"
                         + str(scenario)
                         + ".html"
+                    ).replace(" ", ""),
+                    auto_open=False,
+                )
+
+        # endregion
+
+        #############################
+        # GHG EMISSIONS ALL SECTORS #
+        #############################
+
+        # region
+
+        scenario = "pathway"
+        model = "PD22"
+        df = emissions_output_co2e  # emissions_output[(emissions_output.reset_index().sector == 'Forests & Wetlands').values]
+
+        fig = (
+            df.loc[model]
+            .groupby(["scenario", "sector", "product_long", "flow_long"])
+            .sum()
+            .T
+        )
+        fig.index.name = "year"
+        fig.reset_index(inplace=True)
+        fig2 = pd.melt(
+            fig,
+            id_vars="year",
+            var_name=["scenario", "sector", "product_long", "flow_long"],
+            value_name="Emissions",
+        )
+
+        for scenario in fig2["scenario"].unique():
+
+            fig = go.Figure()
+
+            for sector in fig2["sector"].unique():
+
+                for product_long in fig2.sort_values("Emissions", ascending=False)[
+                    "product_long"
+                ].unique():
+
+                    for flow_long in fig2["flow_long"].unique():
+
+                        fig.add_trace(
+                            go.Scatter(
+                                name=sector + ", " + product_long + ", " + flow_long,
+                                line=dict(width=0.5),
+                                x=fig2["year"].unique(),
+                                y=fig2[
+                                    (fig2["scenario"] == scenario)
+                                    & (fig2["sector"] == sector)
+                                    & (fig2["product_long"] == product_long)
+                                    & (fig2["flow_long"] == flow_long)
+                                ]["Emissions"],
+                                fill="tonexty",
+                                stackgroup="one",
+                                hovertemplate="<b>Year</b>: %{x}"
+                                + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+                            )
+                        )
+
+            fig.add_trace(
+                go.Scatter(
+                    name="Historical",
+                    line=dict(width=2, color="black"),
+                    x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
+                    y=fig2[
+                        (fig2["scenario"] == scenario) & (fig2["year"] <= data_end_year)
+                    ]
+                    .groupby(["year"])
+                    .sum()["Emissions"],
+                    fill="none",
+                    stackgroup="two",
+                    showlegend=True,
+                    hovertemplate="<b>Year</b>: %{x}"
+                    + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+                )
+            )
+
+            fig.update_layout(
+                title={
+                    "text": "Emissions, "
+                    + "World"
+                    + ", "
+                    + "All Sectors"
+                    + ", "
+                    + str(scenario).capitalize(),
+                    "xanchor": "center",
+                    "x": 0.5,
+                    "y": 0.9,
+                },
+                yaxis={"title": "MtCO2e"},
+                legend=dict(font=dict(size=8)),
+            )
+
+            fig.show()
+
+            if save_figs is True:
+                pio.write_html(
+                    fig,
+                    file=(
+                        "./charts/emissions-" + "All" + "-" + str(scenario) + ".html"
                     ).replace(" ", ""),
                     auto_open=False,
                 )

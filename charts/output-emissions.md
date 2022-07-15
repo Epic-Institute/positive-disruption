@@ -5,6 +5,10 @@ title: Emissions
 
 <br/><br/>
 
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-All-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-ElectricPower-pathway.html" height='500' width='150%'></iframe>
 
 <br/><br/>

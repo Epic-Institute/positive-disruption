@@ -21,7 +21,7 @@ from podi.cdr.cdr_util import (
 
 import pyam
 
-# warnings.simplefilter(action="ignore", category=FutureWarning)
+warnings.simplefilter(action="ignore", category=FutureWarning)
 
 data_start_year = 1990
 data_end_year = 2020

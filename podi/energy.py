@@ -1810,95 +1810,73 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     #  PROJECT BASELINE ENERGY  #
     #############################
 
-    recalc_energy_baseline = False
     # region
 
-    if recalc_energy_baseline is True:
-        # Load EIA energy projections
-        energy_projection = (
-            pd.read_excel(
-                pd.ExcelFile("podi/data/EIA/EIA_IEO.xlsx", engine="openpyxl"), header=0
-            )
-            .dropna(axis="index", how="all")
-            .dropna(axis="columns", thresh=2)
-        ).loc[:, :proj_end_year]
-
-        # Strip preceding space in EIA Sector values
-        energy_projection["EIA Product"] = energy_projection["EIA Product"].str.strip()
-
-        # create dataframe of energy projections as annual % change
-        energy_projection = (
-            pd.DataFrame(energy_projection).set_index(
-                ["EIA Region", "sector", "EIA Product"]
-            )
-        ).pct_change(axis=1).replace(NaN, 0) + 1
-        energy_projection.iloc[:, 0] = energy_projection.iloc[:, 1]
-
-        # Merge historical and projected energy
-        energy_baseline = (
-            (
-                energy_historical.reset_index()
-                .set_index(["EIA Region", "sector", "EIA Product"])
-                .merge(energy_projection, on=["EIA Region", "sector", "EIA Product"])
-            )
-            .reset_index()
-            .set_index(
-                [
-                    "model",
-                    "scenario",
-                    "region",
-                    "sector",
-                    "product_category",
-                    "product_long",
-                    "product_short",
-                    "flow_category",
-                    "flow_long",
-                    "flow_short",
-                    "unit",
-                    "hydrogen",
-                    "flexible",
-                    "nonenergy",
-                    "EIA Region",
-                    "EIA Product",
-                ]
-            )
-            .droplevel(["EIA Region", "EIA Product"])
+    # Load EIA energy projections
+    energy_projection = (
+        pd.read_excel(
+            pd.ExcelFile("podi/data/EIA/EIA_IEO.xlsx", engine="openpyxl"), header=0
         )
+        .dropna(axis="index", how="all")
+        .dropna(axis="columns", thresh=2)
+    ).loc[:, :proj_end_year]
 
-        # Calculate projections by cumulative product
-        energy_baseline = energy_baseline.loc[:, : data_end_year - 2].join(
-            energy_baseline.loc[:, data_end_year - 1 :].cumprod(axis=1).fillna(0)
+    # Strip preceding space in EIA Sector values
+    energy_projection["EIA Product"] = energy_projection["EIA Product"].str.strip()
+
+    # create dataframe of energy projections as annual % change
+    energy_projection = (
+        pd.DataFrame(energy_projection).set_index(
+            ["EIA Region", "sector", "EIA Product"]
         )
+    ).pct_change(axis=1).replace(NaN, 0) + 1
+    energy_projection.iloc[:, 0] = energy_projection.iloc[:, 1]
 
-        # Curve smooth projections
-        energy_baseline = energy_baseline.loc[:, : data_end_year - 1].join(
-            curve_smooth(energy_baseline.loc[:, data_end_year:], "linear", 2)
+    # Merge historical and projected energy
+    energy_baseline = (
+        (
+            energy_historical.reset_index()
+            .set_index(["EIA Region", "sector", "EIA Product"])
+            .merge(energy_projection, on=["EIA Region", "sector", "EIA Product"])
         )
+        .reset_index()
+        .set_index(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+                "hydrogen",
+                "flexible",
+                "nonenergy",
+                "EIA Region",
+                "EIA Product",
+            ]
+        )
+        .droplevel(["EIA Region", "EIA Product"])
+    )
 
-        # Save to CSV file
-        energy_baseline.to_csv("podi/data/energy_baseline.csv")
+    # Calculate projections by cumulative product
+    energy_baseline = energy_baseline.loc[:, : data_end_year - 2].join(
+        energy_baseline.loc[:, data_end_year - 1 :].cumprod(axis=1).fillna(0)
+    )
 
-    index = [
-        "model",
-        "scenario",
-        "region",
-        "sector",
-        "product_category",
-        "product_long",
-        "product_short",
-        "flow_category",
-        "flow_long",
-        "flow_short",
-        "unit",
-        "hydrogen",
-        "flexible",
-        "nonenergy",
-    ]
+    # Curve smooth projections
+    energy_baseline = (
+        energy_baseline.loc[:, : data_end_year - 1]
+        .join(curve_smooth(energy_baseline.loc[:, data_end_year:], "linear", 2))
+        .sort_index()
+    )
 
-    energy_baseline = pd.DataFrame(
-        pd.read_csv("podi/data/energy_baseline.csv")
-    ).set_index(index)
-    energy_baseline.columns = energy_baseline.columns.astype(int)
+    # Save to CSV file
+    energy_baseline.to_csv("podi/data/energy_baseline.csv")
 
     # Plot energy_baseline
     if show_figs is True:
@@ -2706,7 +2684,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             axis=1,
         )
         .set_index(["region", "sector", "product_short", "scenario"])
-    )
+    ).sort_index()
 
     # Prepare df for multiplication with energy
     ef_ratios = ef_ratios.parallel_apply(
@@ -6211,7 +6189,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                 "flow_short",
                 "unit",
             ]
-        ).sum().to_csv("podi/data/" + output[1] + ".csv")
+        ).sum().sort_index().to_csv("podi/data/" + output[1] + ".csv")
 
     # Plot energy_output
     if show_figs is True:
