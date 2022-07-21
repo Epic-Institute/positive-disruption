@@ -2144,19 +2144,15 @@ def emissions(
                                 name=product_long + ", " + flow_long,
                                 line=dict(
                                     width=0.5,
-                                    color=np.concatenate(
-                                        (
-                                            px.colors.qualitative.Dark24,
-                                            px.colors.qualitative.Dark24,
-                                            px.colors.qualitative.Dark24,
-                                            px.colors.qualitative.Dark24,
-                                            px.colors.qualitative.Dark24,
-                                        )
-                                    )[
+                                    color=(px.colors.qualitative.Dark24 * 100)[
                                         fig2["product_long"]
                                         .unique()
                                         .tolist()
                                         .index(product_long)
+                                        + fig2["flow_long"]
+                                        .unique()
+                                        .tolist()
+                                        .index(flow_long)
                                     ],
                                 ),
                                 x=fig2["year"].unique(),
