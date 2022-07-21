@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from pandarallel import pandarallel
 import globalwarmingpotentials as gwp
 from podi.afolu import afolu
+import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 
@@ -1059,7 +1060,20 @@ def emissions(
                         fig.add_trace(
                             go.Scatter(
                                 name=product_long,
-                                line=dict(width=0.5),
+                                line=dict(
+                                    width=0.5,
+                                    color=np.concatenate(
+                                        (
+                                            px.colors.qualitative.Dark24,
+                                            px.colors.qualitative.Dark24,
+                                        )
+                                    )[
+                                        fig2["product_long"]
+                                        .unique()
+                                        .tolist()
+                                        .index(product_long)
+                                    ],
+                                ),
                                 x=fig2["year"].unique(),
                                 y=fig2[
                                     (fig2["scenario"] == scenario)
@@ -2128,7 +2142,23 @@ def emissions(
                         fig.add_trace(
                             go.Scatter(
                                 name=product_long + ", " + flow_long,
-                                line=dict(width=0.5),
+                                line=dict(
+                                    width=0.5,
+                                    color=np.concatenate(
+                                        (
+                                            px.colors.qualitative.Dark24,
+                                            px.colors.qualitative.Dark24,
+                                            px.colors.qualitative.Dark24,
+                                            px.colors.qualitative.Dark24,
+                                            px.colors.qualitative.Dark24,
+                                        )
+                                    )[
+                                        fig2["product_long"]
+                                        .unique()
+                                        .tolist()
+                                        .index(product_long)
+                                    ],
+                                ),
                                 x=fig2["year"].unique(),
                                 y=fig2[
                                     (fig2["scenario"] == scenario)
