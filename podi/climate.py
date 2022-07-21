@@ -358,7 +358,7 @@ def climate(
     # Filter emissions_output to contain only inputs for fair_input_gases
     emissions_output = emissions_output[
         (emissions_output.reset_index().flow_long.isin(fair_input_gases.keys())).values
-    ]
+    ].sort_index()
 
     # Convert units from emissions_output to assumed units for FAIR model input
     emissions_output = emissions_output.apply(
@@ -554,7 +554,7 @@ def climate(
                 ["Electricity output", "Heat output"]
             )
         ).values
-    ]
+    ].sort_index()
 
     # Convert units from emissions_output to assumed units for FAIR model input
     emissions_output_co2e = emissions_output_co2e.apply(

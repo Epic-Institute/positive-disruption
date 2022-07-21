@@ -6,6 +6,57 @@ title: AFOLU
 # Agriculture
 <br/><br/>
 
+### Emissions
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Agriculture-CO2-baseline.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Agriculture-CO2-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Agriculture-CH4-baseline.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Agriculture-CH4-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Agriculture-N2O-baseline.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Agriculture-N2O-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Forests&wetlands-CO2-baseline.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Forests&wetlands-CO2-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Forests&wetlands-CH4-baseline.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Forests&wetlands-CH4-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Forests&wetlands-N2O-baseline.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Forests&wetlands-N2O-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
 ### Historical Adoption [Mha, m3]
 <br/><br/>
 

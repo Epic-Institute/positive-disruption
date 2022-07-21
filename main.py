@@ -36,7 +36,7 @@ scenario = "pathway"
 # ENERGY #
 ##########
 
-recalc_energy = True
+recalc_energy = False
 # region
 
 if recalc_energy is True:

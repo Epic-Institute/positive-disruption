@@ -25,20 +25,14 @@ def results_analysis(
 
     # region
 
+    # As percent of maximum value
+
+    # region
+
     analog = pd.read_csv(
         "podi/data/external/CHATTING_SPLICED.csv",
         usecols=["label", "iso3c", "year", "value"],
     )
-
-
-    def percent_change(x):
-        xnew = (
-            x.value
-            / analog[(analog.label == x.label) & (analog.iso3c == x.iso3c)].value.max()
-        )
-        x.value = xnew
-        return x
-
 
     labels = [
         "Combine harvesters - threshers in use",
@@ -124,6 +118,14 @@ def results_analysis(
         "Total vehicles (BTS)",
     ]
 
+    def percent_change(x):
+        xnew = (
+            x.value
+            / analog[(analog.label == x.label) & (analog.iso3c == x.iso3c)].value.max()
+        ) * 100
+        x.value = xnew
+        return x
+
     analog = analog[(analog.iso3c == "USA") & (analog.label.isin(labels))].apply(
         percent_change, axis=1
     )
@@ -137,6 +139,7 @@ def results_analysis(
             go.Scatter(
                 name=label,
                 line=dict(width=1),
+                mode="lines",
                 x=analog[(analog["label"] == label)]["year"].unique(),
                 y=analog[(analog["label"] == label)]["value"],
                 legendgroup=label,
@@ -156,9 +159,188 @@ def results_analysis(
         margin_t=20,
         margin_l=10,
         margin_r=10,
+        legend=dict(yanchor="top", y=-0.1, xanchor="left", x=0.01),
+    )
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="left",
+                buttons=list(
+                    [
+                        dict(
+                            args=[{"yaxis.type": "linear"}],
+                            label="LINEAR",
+                            method="relayout",
+                        ),
+                        dict(
+                            args=[{"yaxis.type": "log"}], label="LOG", method="relayout"
+                        ),
+                    ]
+                ),
+            )
+        ]
     )
 
     fig.show()
+
+    pio.write_html(
+        fig,
+        file=("./charts/historicalanalogs-percent.html").replace(" ", ""),
+        auto_open=False,
+    )
+
+    # endregion
+
+    # As absolute value
+
+    # region
+
+    analog = pd.read_csv(
+        "podi/data/external/CHATTING_SPLICED.csv",
+        usecols=["label", "iso3c", "year", "value"],
+    )
+
+    analog = analog[(analog.iso3c == "USA") & (analog.label.isin(labels))]
+
+    fig = go.Figure()
+
+    for label in analog["label"].unique():
+
+        # Make modeled trace
+        fig.add_trace(
+            go.Scatter(
+                name=label,
+                line=dict(width=1),
+                mode="lines",
+                x=analog[(analog["label"] == label)]["year"].unique(),
+                y=analog[(analog["label"] == label)]["value"],
+                legendgroup=label,
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Historical Analogs",
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "various"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+        legend=dict(yanchor="top", y=-0.1, xanchor="left", x=0.01),
+    )
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="left",
+                buttons=list(
+                    [
+                        dict(
+                            args=[{"yaxis.type": "linear"}],
+                            label="LINEAR",
+                            method="relayout",
+                        ),
+                        dict(
+                            args=[{"yaxis.type": "log"}], label="LOG", method="relayout"
+                        ),
+                    ]
+                ),
+            )
+        ]
+    )
+
+    fig.show()
+
+    pio.write_html(
+        fig,
+        file=("./charts/historicalanalogs-absolutevalue.html").replace(" ", ""),
+        auto_open=False,
+    )
+
+    # endregion
+
+    # As percent change
+
+    # region
+
+    analog = pd.read_csv(
+        "podi/data/external/CHATTING_SPLICED.csv",
+        usecols=["label", "iso3c", "year", "value"],
+    )
+
+    analog = analog[(analog.iso3c == "USA") & (analog.label.isin(labels))]
+
+    fig = go.Figure()
+
+    for label in analog["label"].unique():
+
+        # Make modeled trace
+        fig.add_trace(
+            go.Scatter(
+                name=label,
+                line=dict(width=1),
+                mode="lines",
+                x=analog[(analog["label"] == label)]["year"].unique(),
+                y=analog[(analog["label"] == label)]["value"].pct_change() * 100,
+                legendgroup=label,
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Historical Analogs",
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.99,
+        },
+        yaxis={"title": "%"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+        legend=dict(yanchor="top", y=-0.1, xanchor="left", x=0.01),
+    )
+
+    # Add Linear and Log buttons
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="left",
+                buttons=list(
+                    [
+                        dict(
+                            args=[{"yaxis.type": "linear"}],
+                            label="LINEAR",
+                            method="relayout",
+                        ),
+                        dict(
+                            args=[{"yaxis.type": "log"}], label="LOG", method="relayout"
+                        ),
+                    ]
+                ),
+            )
+        ]
+    )
+
+    fig.show()
+
+    pio.write_html(
+        fig,
+        file=("./charts/historicalanalogs-percentchange.html").replace(" ", ""),
+        auto_open=False,
+    )
+
+    # endregion
 
     # endregion
 
