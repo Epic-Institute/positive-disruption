@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import numpy as np
+from numpy import NaN
 
 show_figs = True
 save_figs = False
@@ -3109,6 +3111,786 @@ def results_analysis(
             )
 
     # endregion
+
+    # endregion
+
+    # endregion
+
+    ###########################
+    #  FIND PD INDEX LEADERS  #
+    ###########################
+
+    # region
+
+    ###############################
+    # PD INDEX, ELECTRICITY [TJ] #
+    ###############################
+
+    # region
+
+    start_year = data_start_year
+    end_year = 2030
+    scenario = scenario
+    region = slice(None)
+    sector = slice(None)
+    product_category = slice(None)
+    flow_category = slice(None)
+
+    electricity = (
+        energy_output.loc[
+            slice(None),
+            scenario,
+            slice(None),
+            ["Electric Power"],
+            product_category,
+            slice(None),
+            [
+                "GEOTHERM",
+                "HYDRO",
+                "SOLARPV",
+                "ROOFTOP",
+                "SOLARTH",
+                "OFFSHORE",
+                "ONSHORE",
+                "TIDE",
+                "NUCLEAR",
+            ],
+            ["Electricity output"],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(["region", "sector", "product_category", "product_long"])
+        .sum()
+    )
+
+    # Sort by slope from first nonzero year to data_end_year
+    electricity_sorted = (
+        electricity.replace(0, NaN)
+        .dropna(how="all")
+        .apply(
+            lambda x: (
+                x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
+                - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
+            )
+            / (
+                x.replace(0, NaN).last_valid_index()
+                - x.replace(0, NaN).first_valid_index()
+            ),
+            axis=1,
+        )
+        .fillna(0)
+        .to_frame()
+        .sort_values(0, ascending=True)
+    )
+
+    electricity = electricity.reindex(electricity_sorted.index)
+
+    fig = electricity.T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig,
+        id_vars="year",
+        var_name=["region", "sector", "product_category", "product_long"],
+        value_name="% Adoption",
+    )
+
+    fig = go.Figure()
+
+    for index in (
+        fig2[["region", "sector", "product_category", "product_long"]]
+        .drop_duplicates()
+        .index
+    ):
+        # Make projected trace
+        fig.add_trace(
+            go.Scatter(
+                name=fig2.iloc[index]["region"].capitalize()
+                + ", "
+                + fig2.iloc[index]["product_long"],
+                line=dict(
+                    width=1,
+                ),
+                x=fig2["year"].unique(),
+                y=fig2[
+                    (fig2["region"] == fig2.iloc[index]["region"])
+                    & (fig2["product_long"] == fig2.iloc[index]["product_long"])
+                ]["% Adoption"],
+                legendgroup=fig2.iloc[index]["region"]
+                + ", "
+                + fig2.iloc[index]["product_long"],
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Total Adoption, "
+            + "Electricity"
+            + ", "
+            + "All Countries"
+            + ", "
+            + scenario.capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 1,
+        },
+        yaxis={"title": "TJ"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+        legend={"traceorder": "reversed"},
+        xaxis={"range": [start_year, end_year]},
+    )
+
+    if show_figs is True:
+        fig.show()
+
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/pdindexleaders-" + scenario + "-" + "Electricity" + ".html"
+            ).replace(" ", ""),
+            auto_open=True,
+        )
+
+    # endregion
+
+    ################################
+    # PD INDEX,TRANSPORTATION [TJ] #
+    ################################
+
+    # region
+
+    start_year = data_start_year
+    end_year = data_end_year
+    scenario = scenario
+    region = slice(None)
+    sector = slice(None)
+    product_category = slice(None)
+    flow_category = slice(None)
+
+    transport = (
+        energy_output.loc[
+            slice(None),
+            scenario,
+            slice(None),
+            ["Transportation"],
+            product_category,
+            slice(None),
+            ["ELECTR", "HYDROGEN"],
+            flow_category,
+            [
+                "Road – 2&3-wheel",
+                "Road – Buses&Vans",
+                "Road – Light-duty vehicles",
+                "Road – Trucks",
+                "Rail – Heavy-duty",
+                "Rail – Light-duty",
+                "Transport not elsewhere specified",
+                "Domestic navigation",
+                "International marine bunkers",
+                "Domestic aviation – Long-range",
+                "Domestic aviation – Short-range",
+                "International aviation bunkers",
+                "Non-energy use in transport",
+                "Pipeline transport",
+                "Losses",
+                "Memo: Non-energy use in transport equipment",
+            ],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(["region", "sector", "flow_long"])
+        .sum()
+    )
+
+    # Sort by slope from first nonzero year to data_end_year
+    transport_sorted = (
+        transport.replace(0, NaN)
+        .dropna(how="all")
+        .apply(
+            lambda x: (
+                x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
+                - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
+            )
+            / (
+                x.replace(0, NaN).last_valid_index()
+                - x.replace(0, NaN).first_valid_index()
+            ),
+            axis=1,
+        )
+        .fillna(0)
+        .to_frame()
+        .sort_values(0, ascending=True)
+    )
+
+    transport = transport.reindex(transport_sorted.index)
+
+    fig = transport.T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig,
+        id_vars="year",
+        var_name=["region", "sector", "flow_long"],
+        value_name="% Adoption",
+    )
+
+    fig = go.Figure()
+
+    for index in fig2[["region", "sector", "flow_long"]].drop_duplicates().index:
+        # Make projected trace
+        fig.add_trace(
+            go.Scatter(
+                name=fig2.iloc[index]["region"].capitalize()
+                + ", "
+                + fig2.iloc[index]["flow_long"],
+                line=dict(
+                    width=1,
+                ),
+                x=fig2["year"].unique(),
+                y=fig2[
+                    (fig2["region"] == fig2.iloc[index]["region"])
+                    & (fig2["flow_long"] == fig2.iloc[index]["flow_long"])
+                ]["% Adoption"],
+                legendgroup=fig2.iloc[index]["region"]
+                + ", "
+                + fig2.iloc[index]["flow_long"],
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Total Adoption, "
+            + "Transportation"
+            + ", "
+            + "All Countries"
+            + ", "
+            + scenario.capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 1,
+        },
+        yaxis={"title": "TJ"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+        legend={"traceorder": "reversed"},
+        xaxis={"range": [data_start_year, data_end_year]},
+    )
+
+    if show_figs is True:
+        fig.show()
+
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/pdindexleaders-" + scenario + "-" + "Transportation" + ".html"
+            ).replace(" ", ""),
+            auto_open=True,
+        )
+
+    # endregion
+
+    ############################
+    # PD INDEX, BUILDINGS [TJ] #
+    ############################
+
+    # region
+
+    start_year = data_start_year
+    end_year = data_end_year
+    scenario = scenario
+    region = slice(None)
+    sector = slice(None)
+    product_category = slice(None)
+    flow_category = slice(None)
+
+    buildings = (
+        energy_output.loc[
+            slice(None),
+            scenario,
+            slice(None),
+            ["Commercial", "Residential"],
+            product_category,
+            slice(None),
+            ["ELECTR", "SOLARTH", "MUNWASTER", "GEOTHERM"],
+            flow_category,
+            slice(None),
+            ["RESIDENT", "COMMPUB"],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(["region", "sector", "product_long", "flow_long"])
+        .sum()
+    )
+
+    # Sort by slope from first nonzero year to data_end_year
+    buildings_sorted = (
+        buildings.replace(0, NaN)
+        .dropna(how="all")
+        .apply(
+            lambda x: (
+                x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
+                - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
+            )
+            / (
+                x.replace(0, NaN).last_valid_index()
+                - x.replace(0, NaN).first_valid_index()
+            ),
+            axis=1,
+        )
+        .fillna(0)
+        .to_frame()
+        .sort_values(0, ascending=True)
+    )
+
+    buildings = buildings.reindex(buildings_sorted.index)
+
+    fig = buildings.T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig,
+        id_vars="year",
+        var_name=["region", "sector", "product_long", "flow_long"],
+        value_name="% Adoption",
+    )
+    fig2["sector"] = "Buildings"
+
+    fig = go.Figure()
+
+    for index in (
+        fig2[["region", "sector", "product_long", "flow_long"]].drop_duplicates().index
+    ):
+        # Make projected trace
+        fig.add_trace(
+            go.Scatter(
+                name=fig2.iloc[index]["region"].capitalize()
+                + ", "
+                + fig2.iloc[index]["product_long"]
+                + ", "
+                + fig2.iloc[index]["flow_long"],
+                line=dict(
+                    width=1,
+                ),
+                x=fig2["year"].unique(),
+                y=fig2[
+                    (fig2["region"] == fig2.iloc[index]["region"])
+                    & (fig2["product_long"] == fig2.iloc[index]["product_long"])
+                    & (fig2["flow_long"] == fig2.iloc[index]["flow_long"])
+                ]["% Adoption"],
+                legendgroup=fig2.iloc[index]["region"]
+                + ", "
+                + fig2.iloc[index]["product_long"]
+                + ", "
+                + fig2.iloc[index]["flow_long"],
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Total Adoption, "
+            + "Buildings"
+            + ", "
+            + "All Countries"
+            + ", "
+            + scenario.capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 1,
+        },
+        yaxis={"title": "TJ"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+        legend={"traceorder": "reversed"},
+        xaxis={"range": [start_year, end_year]},
+    )
+
+    if show_figs is True:
+        fig.show()
+
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/pdindexleaders-" + scenario + "-" + "Buildings" + ".html"
+            ).replace(" ", ""),
+            auto_open=True,
+        )
+
+    # endregion
+
+    ###########################
+    # PD INDEX, INDUSTRY [TJ] #
+    ###########################
+
+    # region
+
+    start_year = data_start_year
+    end_year = data_end_year
+    scenario = scenario
+    region = slice(None)
+    sector = slice(None)
+    product_category = slice(None)
+    flow_category = slice(None)
+
+    industry = (
+        energy_output.loc[
+            slice(None),
+            scenario,
+            slice(None),
+            ["Industrial"],
+            product_category,
+            slice(None),
+            ["ELECTR", "SOLARTH", "HYDROGEN", "MUNWASTER", "GEOTHERM"],
+            "Final consumption",
+            [
+                "Machinery",
+                "Non-ferrous metals",
+                "Final consumption not elsewhere specified",
+                "Food and tobacco",
+                "Agriculture/forestry",
+                "Non-metallic minerals",
+                "Chemical and petrochemical",
+                "Iron and steel",
+                "Industry not elsewhere specified",
+                "Paper, pulp, and print",
+                "Fishing",
+                "Wood and wood products",
+                "Transport equipment",
+                "Textile and leather",
+                "Construction",
+                "Mining and quarrying",
+            ],
+        ]
+        .loc[:, start_year:end_year]
+        .groupby(["region", "sector", "flow_long"])
+        .sum()
+    )
+
+    # Sort by slope from first nonzero year to data_end_year
+    industry_sorted = (
+        industry.replace(0, NaN)
+        .dropna(how="all")
+        .apply(
+            lambda x: (
+                x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
+                - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
+            )
+            / (
+                x.replace(0, NaN).last_valid_index()
+                - x.replace(0, NaN).first_valid_index()
+            ),
+            axis=1,
+        )
+        .fillna(0)
+        .to_frame()
+        .sort_values(0, ascending=True)
+    )
+
+    industry = industry.reindex(industry_sorted.index)
+
+    fig = industry.T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig,
+        id_vars="year",
+        var_name=["region", "sector", "flow_long"],
+        value_name="% Adoption",
+    )
+
+    fig = go.Figure()
+
+    for index in fig2[["region", "sector", "flow_long"]].drop_duplicates().index:
+        # Make projected trace
+        fig.add_trace(
+            go.Scatter(
+                name=fig2.iloc[index]["region"].capitalize()
+                + ", "
+                + fig2.iloc[index]["flow_long"],
+                line=dict(
+                    width=1,
+                ),
+                x=fig2["year"].unique(),
+                y=fig2[
+                    (fig2["region"] == fig2.iloc[index]["region"])
+                    & (fig2["flow_long"] == fig2.iloc[index]["flow_long"])
+                ]["% Adoption"],
+                legendgroup=fig2.iloc[index]["region"]
+                + ", "
+                + fig2.iloc[index]["flow_long"],
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Total Adoption, "
+            + "Industry"
+            + ", "
+            + "All Countries"
+            + ", "
+            + scenario.capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 1,
+        },
+        yaxis={"title": "TJ"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+        legend={"traceorder": "reversed"},
+        xaxis={"range": [start_year, end_year]},
+    )
+
+    if show_figs is True:
+        fig.show()
+
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/pdindexleaders-" + scenario + "-" + "Industry" + ".html"
+            ).replace(" ", ""),
+            auto_open=True,
+        )
+
+    # endregion
+
+    ###############################
+    # PD INDEX, AGRICULTURE [MHA] #
+    ###############################
+
+    # region
+
+    start_year = data_start_year
+    end_year = data_end_year
+    scenario = scenario
+    region = slice(None)
+    sector = slice(None)
+    product_category = slice(None)
+    flow_category = slice(None)
+
+    agriculture = (
+        afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
+        .loc[:, start_year:end_year]
+        .groupby(["region", "sector", "product_long"])
+        .sum()
+    )
+
+    # Sort by slope from first nonzero year to data_end_year
+    agriculture_sorted = (
+        agriculture.replace(0, NaN)
+        .dropna(how="all")
+        .apply(
+            lambda x: (
+                x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
+                - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
+            )
+            / (
+                x.replace(0, NaN).last_valid_index()
+                - x.replace(0, NaN).first_valid_index()
+            ),
+            axis=1,
+        )
+        .fillna(0)
+        .to_frame()
+        .sort_values(0, ascending=True)
+    )
+
+    agriculture = agriculture.reindex(agriculture_sorted.index)
+
+    fig = agriculture.T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig,
+        id_vars="year",
+        var_name=["region", "sector", "product_long"],
+        value_name="% Adoption",
+    )
+
+    fig = go.Figure()
+
+    for index in fig2[["region", "sector", "product_long"]].drop_duplicates().index:
+        # Make projected trace
+        fig.add_trace(
+            go.Scatter(
+                name=fig2.iloc[index]["region"].capitalize()
+                + ", "
+                + fig2.iloc[index]["product_long"],
+                line=dict(
+                    width=1,
+                ),
+                x=fig2["year"].unique(),
+                y=fig2[
+                    (fig2["region"] == fig2.iloc[index]["region"])
+                    & (fig2["product_long"] == fig2.iloc[index]["product_long"])
+                ]["% Adoption"],
+                legendgroup=fig2.iloc[index]["region"]
+                + ", "
+                + fig2.iloc[index]["product_long"],
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Total Adoption, "
+            + "Agriculture"
+            + ", "
+            + "All Countries"
+            + ", "
+            + scenario.capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 1,
+        },
+        yaxis={"title": "Mha"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+        legend={"traceorder": "reversed"},
+        xaxis={"range": [start_year, end_year]},
+    )
+
+    if show_figs is True:
+        fig.show()
+
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/pdindexleaders-" + scenario + "-" + "Agriculture" + ".html"
+            ).replace(" ", ""),
+            auto_open=True,
+        )
+
+    # endregion
+
+    ######################################
+    # PD INDEX, FORESTS & WETLANDS [MHA] #
+    ######################################
+
+    # region
+
+    start_year = data_start_year
+    end_year = data_end_year
+    scenario = scenario
+    region = slice(None)
+    sector = slice(None)
+    product_category = slice(None)
+    flow_category = slice(None)
+
+    forestswetlands = (
+        afolu_output.loc[slice(None), scenario, slice(None), ["Forests & Wetlands"]]
+        .loc[:, start_year:end_year]
+        .groupby(["region", "sector", "product_long"])
+        .sum()
+    )
+
+    # Sort by slope from first nonzero year to data_end_year
+    forestswetlands_sorted = (
+        forestswetlands.replace(0, NaN)
+        .dropna(how="all")
+        .apply(
+            lambda x: (
+                x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
+                - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
+            )
+            / (
+                x.replace(0, NaN).last_valid_index()
+                - x.replace(0, NaN).first_valid_index()
+            ),
+            axis=1,
+        )
+        .fillna(0)
+        .to_frame()
+        .sort_values(0, ascending=True)
+    )
+
+    forestswetlands = forestswetlands.reindex(forestswetlands_sorted.index)
+
+    fig = forestswetlands.T
+    fig.index.name = "year"
+    fig.reset_index(inplace=True)
+    fig2 = pd.melt(
+        fig,
+        id_vars="year",
+        var_name=["region", "sector", "product_long"],
+        value_name="% Adoption",
+    )
+
+    fig = go.Figure()
+
+    for index in fig2[["region", "sector", "product_long"]].drop_duplicates().index:
+        # Make projected trace
+        fig.add_trace(
+            go.Scatter(
+                name=fig2.iloc[index]["region"].capitalize()
+                + ", "
+                + fig2.iloc[index]["product_long"],
+                line=dict(
+                    width=1,
+                ),
+                x=fig2["year"].unique(),
+                y=fig2[
+                    (fig2["region"] == fig2.iloc[index]["region"])
+                    & (fig2["product_long"] == fig2.iloc[index]["product_long"])
+                ]["% Adoption"],
+                legendgroup=fig2.iloc[index]["region"]
+                + ", "
+                + fig2.iloc[index]["product_long"],
+                showlegend=True,
+            )
+        )
+
+    fig.update_layout(
+        title={
+            "text": "Total Adoption, "
+            + "Forests & Wetlands"
+            + ", "
+            + "All Countries"
+            + ", "
+            + scenario.capitalize(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 1,
+        },
+        yaxis={"title": "Mha"},
+        margin_b=0,
+        margin_t=20,
+        margin_l=10,
+        margin_r=10,
+        legend={"traceorder": "reversed"},
+        xaxis={"range": [start_year, end_year]},
+    )
+
+    if show_figs is True:
+        fig.show()
+
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=(
+                "./charts/pdindexleaders-"
+                + scenario
+                + "-"
+                + "Forests&wetlands"
+                + ".html"
+            ).replace(" ", ""),
+            auto_open=True,
+        )
 
     # endregion
 
