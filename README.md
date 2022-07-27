@@ -1,4 +1,4 @@
-# Model Flow Chart
+# Electricity Flow Chart
 
 ```mermaid
 graph LR;
@@ -15,6 +15,24 @@ graph LR;
    I-->M[Total Consumption];
    I-->K[Storage]-->G;
    G--> H[Own Use];
+```
+
+# Heat Flow Chart
+
+```mermaid
+graph LR
+    A[Combustible Fuels]--> G[Gross Production]
+    B[Nuclear] --> G
+    C[Geothermal]--> G
+    E[Solar]--> G
+    F[Electric Boilers] --> G
+    Z[Heat Pumps] --> G
+    Other[Other] --> G
+    G --> I[Net Production]
+    I-->O[Transmission & Distribution Losses]
+    I-->M[Total Consumption]
+    I-->K[Storage]-->G
+    G--> H[Own Use]
 ```
 
 # Project Organization
