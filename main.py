@@ -381,6 +381,7 @@ energy_output[
     .sum()
 )
 
+"""
 # Change region codes to full names
 energy_output.reset_index(inplace=True)
 energy_output["region"] = energy_output["region"].replace(
@@ -408,6 +409,7 @@ energy_output.set_index(
     ],
     inplace=True,
 )
+"""
 
 # Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
 energy_output = energy_output[
@@ -418,7 +420,7 @@ energy_output = energy_output[
     ).values
 ]
 
-# Save as regional-level files
+# Save as regional-level files and a global-level file
 for output in [
     (energy_output, "energy_output"),
     (afolu_output, "afolu_output"),
@@ -429,7 +431,43 @@ for output in [
         output[0][(output[0].reset_index().region == region).values].to_csv(
             "podi/data/output/" + output[1] + "_" + region + ".csv"
         )
-
+    output_global = (
+        output[0]
+        .groupby(
+            [
+                "model",
+                "scenario",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+            ]
+        )
+        .sum()
+    )
+    output_global.reset_index(inplace=True)
+    output_global["region"] = "world"
+    output_global.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ],
+        inplace=True,
+    )
+    output_global.to_csv("podi/data/output/" + output[1] + "_" + "world" + ".csv")
 
 # endregion
 

@@ -63,11 +63,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .replace(["x"], NaN)
         )
 
-        # Change values to float and replace regions that are all NaN with all zeros
+        # Change values to float
         energy_historical["value"] = energy_historical["value"].astype(float)
-
-        if energy_historical["value"].isna().all() == True:
-            energy_historical["value"].fillna(0, inplace=True)
 
         # Change from all caps to lowercase
         energy_historical["region"] = energy_historical["region"].str.lower()
@@ -87,23 +84,31 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             data=NaN,
         ).combine_first(energy_historical)
 
-        # Filter for data start_year and data_end_year, which can be different depending on region/product/flow because data becomes available at different times
-        energy_historical = energy_historical.loc[:, data_start_year:data_end_year]
-
-        # Backfill missing data using oldest data point
-        energy_historical = energy_historical.fillna(method="backfill", axis=1)
-
         # Save a dataframe that records the last_valid_index for each timeseries, then extrapolate all timeseries to data_end_year
         data_end_year_df = energy_historical.apply(
             lambda x: x.last_valid_index(), axis=1
         ).to_frame()
         data_end_year_df2 = pd.concat([data_end_year_df2, data_end_year_df])
 
+        # Backfill missing data using oldest data point
+        energy_historical = energy_historical.fillna(method="backfill", axis=1)
+
+        # For rows with data only prior to data_start_year, front fill to data_start_year
+        energy_historical.update(
+            energy_historical[energy_historical.loc[:, data_start_year].isna()]
+            .loc[:, :data_start_year]
+            .fillna(method="ffill", axis=1)
+        )
+
         # Remove duplicate regions created due to name overlaps
         energy_historical = energy_historical.loc[[region.lower()], :]
 
+        # Filter for data start_year and data_end_year, which can be different depending on region/product/flow because data becomes available at different times
+        energy_historical = energy_historical.loc[:, data_start_year:data_end_year]
+
         # Build dataframe consisting of all regions
         energy_historical2 = pd.concat([energy_historical2, energy_historical])
+
     energy_historical = energy_historical2
     data_end_year_df = data_end_year_df2
 
@@ -1868,6 +1873,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         + 1
     ).loc[:, data_end_year + 1 :]
 
+    # Took 113 min
     # Merge historical and projected energy
     energy_baseline = (
         (
@@ -1913,7 +1919,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     parameters.rename(columns={0: "Unnamed: 5"}, inplace=True)
     parameters.reset_index(inplace=True)
 
-    energy_baseline = energy_baseline.parallel_apply(
+    energy_baseline = energy_baseline.apply(
         lambda x: pd.concat(
             [
                 x.loc[:data_end_year].fillna(0) * 0
@@ -1962,7 +1968,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_baseline
         model = "PD22"
-        region = slice(None)
+        region = "usa"
         sector = slice(None)
         product_category = slice(None)
         flow_category = ["Final consumption"]
@@ -2047,11 +2053,12 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_baseline
         model = "PD22"
-        region = slice(None)
+        region = "usa"
         sector = slice(None)
         product_category = slice(None)
+        product_long = slice(None)
         flow_category = ["Final consumption"]
-        groupby = "sector"
+        groupby = "product_long"
 
         fig = (
             (
@@ -2061,7 +2068,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     region,
                     sector,
                     product_category,
-                    slice(None),
+                    product_long,
                     slice(None),
                     flow_category,
                     slice(None),
