@@ -9,7 +9,7 @@ import os
 
 
 def linear(x, a, b, c, d):
-    return a * x + b
+    return a * x + d
 
 
 def logistic(x, a, b, c, d):
@@ -83,11 +83,11 @@ def adoption_projection(
             search_bounds,
             seed=3,
             polish=False,
-            mutation=(0, 1.99),
+            updating="immediate",
+            mutation=(0, 1),
         ).x
 
-        y = np.array(linear(np.arange(0, 300, 1), *genetic_parameters))
-
+        y = np.array(linear(np.arange(0, 500, 1), *genetic_parameters))
     else:
 
         def sum_of_squared_error(change_parameters):
@@ -107,7 +107,8 @@ def adoption_projection(
             search_bounds,
             seed=3,
             polish=False,
-            mutation=(0, 1.99),
+            updating="immediate",
+            mutation=(0, 1),
         ).x
 
         y = np.array(logistic(np.arange(0, 300, 1), *genetic_parameters))
@@ -116,9 +117,9 @@ def adoption_projection(
     y2 = np.concatenate(
         [
             input_data.loc[: input_data.last_valid_index()].values,
-            y[y >= input_data.loc[input_data.last_valid_index()]],
+            y[y > (input_data.loc[input_data.last_valid_index()] - 1e-1)][1:].squeeze(),
         ]
-    )
+    )[: (output_end_date - input_data.first_valid_index() + 1)]
 
     # If y2.loc[input_data.last_valid_index() + 1] == y2.loc[input_data.last_valid_index()], shift all up by y2.loc[input_data.last_valid_index() + 2]
     """

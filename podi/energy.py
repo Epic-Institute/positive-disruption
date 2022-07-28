@@ -3,7 +3,11 @@
 import pandas as pd
 import numpy as np
 from numpy import NaN
-from podi.adoption_projection import adoption_curve_demand, adoption_curve
+from podi.adoption_projection import (
+    adoption_curve_demand,
+    adoption_curve,
+    adoption_projection,
+)
 from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
 import os
@@ -29,6 +33,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
 
     regions = pd.read_csv("podi/data/IEA/Regions.txt").squeeze("columns")
     energy_historical2 = pd.DataFrame([])
+    data_end_year_df2 = pd.DataFrame([])
     for region in regions:
         # Handle "x", "c", ".." qualifiers. IEA documentation is not clear on what "x" represents; "c" represents "confidential", ".." represents "not available"
         energy_historical = (
@@ -58,11 +63,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             .replace(["x"], NaN)
         )
 
-        # Filter for data start_year and data_end_year, which can be different depending on region/product/flow because data becomes available at different times
-        energy_historical = energy_historical[
-            energy_historical["year"] >= data_start_year
-        ]
-
         # Change values to float and replace regions that are all NaN with all zeros
         energy_historical["value"] = energy_historical["value"].astype(float)
 
@@ -80,8 +80,24 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             columns="year",
         )
 
-        # Replace leading NaNs with zeros
-        energy_historical = energy_historical.fillna(method="bfill", axis=1)
+        # Not all regions have placeholders for all years, so they need to be created
+        energy_historical = pd.DataFrame(
+            index=energy_historical.index,
+            columns=np.arange(data_start_year, data_end_year + 1, 1),
+            data=NaN,
+        ).combine_first(energy_historical)
+
+        # Filter for data start_year and data_end_year, which can be different depending on region/product/flow because data becomes available at different times
+        energy_historical = energy_historical.loc[:, data_start_year:data_end_year]
+
+        # Backfill missing data using oldest data point
+        energy_historical = energy_historical.fillna(method="backfill", axis=1)
+
+        # Save a dataframe that records the last_valid_index for each timeseries, then extrapolate all timeseries to data_end_year
+        data_end_year_df = energy_historical.apply(
+            lambda x: x.last_valid_index(), axis=1
+        ).to_frame()
+        data_end_year_df2 = pd.concat([data_end_year_df2, data_end_year_df])
 
         # Remove duplicate regions created due to name overlaps
         energy_historical = energy_historical.loc[[region.lower()], :]
@@ -89,6 +105,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         # Build dataframe consisting of all regions
         energy_historical2 = pd.concat([energy_historical2, energy_historical])
     energy_historical = energy_historical2
+    data_end_year_df = data_end_year_df2
 
     # Add model and scenario indices
     energy_historical = pd.concat(
@@ -1207,9 +1224,11 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     energy_historical_nonenergy.reset_index(inplace=True)
     energy_historical_nonenergy.flow_category = "Non-energy use"
     energy_historical_nonenergy.set_index(energy_historical.index.names, inplace=True)
-    energy_historical = pd.concat(
-        [energy_historical, energy_historical_nonenergy]
-    ).sort_index()
+    energy_historical = (
+        pd.concat([energy_historical, energy_historical_nonenergy])
+        .loc[:, data_start_year:data_end_year]
+        .sort_index()
+    )
 
     # Plot energy_historical
     if show_figs is True:
@@ -1880,48 +1899,43 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         .droplevel(["EIA Region", "EIA Product"])
     ).sort_index()
 
-    def create_baseline(x):
-        x1 = x.loc[
-            : max(
-                energy_historical.loc[x.name].squeeze().last_valid_index() - 1,
-                data_start_year,
-            )
-        ]
+    parameters = pd.DataFrame(
+        index=[
+            "parameter a min",
+            "parameter a max",
+            "parameter b min",
+            "parameter b max",
+            "saturation point",
+        ],
+        data=[1e4, 1e6, 0, 1e3, 1e6],
+    )
+    parameters.index.name = "variable"
+    parameters.rename(columns={0: "Unnamed: 5"}, inplace=True)
+    parameters.reset_index(inplace=True)
 
-        # If energy_historical's last_valid_index is prior to data_end_year - 3, all years prior to data_end_year - 3 are filled using the most recent data point, to avoid overestimating historical growth
-        if energy_historical.loc[x.name].squeeze().last_valid_index() < (
-            data_end_year - 3
-        ):
-            x.loc[
-                : max(
-                    data_end_year - 3,
-                    data_start_year,
-                )
-            ].fillna(method="ffill", inplace=True)
-            x2 = (
-                x.loc[
-                    max(
-                        data_end_year - 3, data_start_year
-                    ) :
-                ]
-                .fillna(method="bfill")
-                .cumprod()
-            )
-        else:
-            x2 = (
-                x.loc[
-                    max(
-                        energy_historical.loc[x.name].squeeze().last_valid_index(),
-                        data_start_year,
-                    ) :
-                ]
-                .fillna(method="bfill")
-                .cumprod()
-            )
+    energy_baseline = energy_baseline.parallel_apply(
+        lambda x: pd.concat(
+            [
+                x.loc[:data_end_year].fillna(0) * 0
+                + adoption_projection(
+                    x.loc[:data_end_year].dropna(),
+                    data_end_year - 1,
+                    data_end_year,
+                    "linear",
+                    parameters,
+                ),
+                x.loc[data_end_year + 1 :],
+            ]
+        ),
+        axis=1,
+    )
 
-        return pd.concat([x1, x2])
-
-    energy_baseline = energy_baseline.parallel_apply(create_baseline, axis=1)
+    energy_baseline = energy_baseline.parallel_apply(
+        lambda x: pd.concat(
+            [x.loc[: data_end_year - 1], x.loc[data_end_year:].cumprod()]
+        ),
+        axis=1,
+    )
 
     # Curve smooth projections
     energy_baseline = (

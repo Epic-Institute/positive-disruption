@@ -285,7 +285,7 @@ def climate(
 
     emissions_output_landuse["flow_long"] = "CO2-landuse"
 
-    # Recombine <ADD EMISSIONS_CDR_OUTPUT HERE>
+    # Recombine
     emissions_output_co2 = pd.concat(
         [emissions_output_fossil, emissions_output_landuse]
     )

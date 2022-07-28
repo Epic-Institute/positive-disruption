@@ -3129,15 +3129,16 @@ def results_analysis(
     # region
 
     start_year = data_start_year
-    end_year = 2030
-    scenario = scenario
+    end_year = data_end_year
+    df = energy_baseline
+    scenario = 'baseline'
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
     flow_category = slice(None)
 
     electricity = (
-        energy_output.loc[
+        df.loc[
             slice(None),
             scenario,
             slice(None),

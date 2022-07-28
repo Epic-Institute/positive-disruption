@@ -60,9 +60,7 @@ def _energy_chart():
 app = _energy_chart()
 app.save("./charts/energy_chart.html", resources=CDN)
 
-
 # endregion
-
 
 ############
 #  AFOLU  #

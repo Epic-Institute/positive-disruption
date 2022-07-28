@@ -4,7 +4,7 @@ graph LR
    A[Configuration files]--> G[main.py]
    B[Historical Data] --> G
    G --> I[Output files]
-   I-->J[Output dataviz]
+   I-->J[Result figures]
    I-->O[Data Explorer]
 ```
 
