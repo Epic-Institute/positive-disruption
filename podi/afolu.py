@@ -14,8 +14,6 @@ import hvplot.pandas
 import plotly.io as pio
 import plotly.graph_objects as go
 
-hvplot.extension("plotly")
-
 pandarallel.initialize()
 
 show_figs = True
