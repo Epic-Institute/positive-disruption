@@ -1873,7 +1873,6 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         + 1
     ).loc[:, data_end_year + 1 :]
 
-    # Took 113 min
     # Merge historical and projected energy
     energy_baseline = (
         (
@@ -1905,7 +1904,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         .droplevel(["EIA Region", "EIA Product"])
     ).sort_index()
 
-    parameters = pd.DataFrame(
+    change_parameters = pd.DataFrame(
         index=[
             "parameter a min",
             "parameter a max",
@@ -1913,11 +1912,11 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             "parameter b max",
             "saturation point",
         ],
-        data=[1e4, 1e6, 0, 1e3, 1e6],
+        data=[-1e3, 1e3, 0, 0, 0],
     )
-    parameters.index.name = "variable"
-    parameters.rename(columns={0: "Unnamed: 5"}, inplace=True)
-    parameters.reset_index(inplace=True)
+    change_parameters.index.name = "variable"
+    change_parameters.rename(columns={0: "Unnamed: 5"}, inplace=True)
+    change_parameters.reset_index(inplace=True)
 
     energy_baseline = energy_baseline.apply(
         lambda x: pd.concat(
@@ -1928,7 +1927,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
                     data_end_year - 1,
                     data_end_year,
                     "linear",
-                    parameters,
+                    change_parameters,
                 ),
                 x.loc[data_end_year + 1 :],
             ]
@@ -3150,8 +3149,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                x.loc[:data_end_year],
-                data_end_year + 1,
+                x.loc[:data_end_year-1],
+                data_end_year,
                 proj_end_year,
                 "logistic",
                 parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
@@ -6809,7 +6808,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         model = "PD22"
-        scenario = scenario
+        scenario = 'pathway'
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)

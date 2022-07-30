@@ -7,8 +7,10 @@ from plotly.subplots import make_subplots
 import numpy as np
 from numpy import NaN
 
+from podi.curve_smooth import curve_smooth
+
 show_figs = True
-save_figs = False
+save_figs = True
 
 # endregion
 
@@ -2474,11 +2476,13 @@ def results_analysis(
 
     # region
 
-    agriculture = (
+    agriculture = curve_smooth(
         afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
         .loc[:, data_start_year:proj_end_year]
         .groupby(["sector", "product_long"])
-        .sum()
+        .sum(),
+        "quadratic",
+        29,
     )
 
     fig = agriculture.T
@@ -3129,9 +3133,9 @@ def results_analysis(
     # region
 
     start_year = data_start_year
-    end_year = data_end_year
-    df = energy_baseline
-    scenario = 'baseline'
+    end_year = proj_end_year
+    df = energy_output
+    scenario = "pathway"
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)

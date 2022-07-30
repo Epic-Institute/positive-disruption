@@ -972,7 +972,7 @@ def emissions(
     )
 
     # SOME AFOLU RESULTS LOOK INCORRECT, FIX THEM HERE WHILE WAITING FOR TNC FEEDBACK
-    fix_afolu = False
+    fix_afolu = True
     if fix_afolu is True:
         # Fix Biochar
         emissions_afolu.update(

@@ -16,8 +16,8 @@ import plotly.graph_objects as go
 
 pandarallel.initialize()
 
-show_figs = True
-save_figs = True
+show_figs = False
+save_figs = False
 
 # endregion
 

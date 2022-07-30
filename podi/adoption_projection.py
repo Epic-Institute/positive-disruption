@@ -27,13 +27,6 @@ def adoption_projection(
         y.interpolate(method="linear", limit_area="inside", axis=1).dropna(axis=1)
     )
 
-    # Save intermediate projections to logfile
-    pd.DataFrame(input_data.name).to_csv(
-        "podi/data/adoption_projection_logfile1.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/adoption_projection_logfile1.csv"),
-    )
-
     # Load search bounds function parameters
     search_bounds = [
         (
@@ -66,28 +59,18 @@ def adoption_projection(
     # Define sum of squared error function and use differential_evolution() to compute genetic parameters
     if change_model == "linear":
 
-        def sum_of_squared_error(change_parameters):
-            return np.sum(
-                (
-                    y[0]
-                    - linear(
-                        np.arange(0, len(y[0] + 1), 1),
-                        *change_parameters,
-                    )
-                )
-                ** 2.0
-            )
-
-        genetic_parameters = differential_evolution(
-            sum_of_squared_error,
-            search_bounds,
-            seed=3,
-            polish=False,
-            updating="immediate",
-            mutation=(0, 1),
-        ).x
+        genetic_parameters = [(y[0][-1] - y[0][0]) / len(y[0]), 0, 0, y[0][-1]]
 
         y = np.array(linear(np.arange(0, 500, 1), *genetic_parameters))
+
+        # Rejoin with input data at point where projection results in smooth growth
+        y2 = np.concatenate(
+            [
+                input_data.loc[: input_data.last_valid_index()].values,
+                y[1:].squeeze(),
+            ]
+        )[: (output_end_date - input_data.first_valid_index() + 1)]
+
     else:
 
         def sum_of_squared_error(change_parameters):
@@ -111,61 +94,16 @@ def adoption_projection(
             mutation=(0, 1),
         ).x
 
-        y = np.array(logistic(np.arange(0, 300, 1), *genetic_parameters))
+        y = np.array(logistic(np.arange(0, 500, 1), *genetic_parameters))
 
-    # Rejoin with input data at point where projection results in smooth growth
-    y2 = np.concatenate(
-        [
-            input_data.loc[: input_data.last_valid_index()].values,
-            y[y > (input_data.loc[input_data.last_valid_index()] - 1e-1)][1:].squeeze(),
-        ]
-    )[: (output_end_date - input_data.first_valid_index() + 1)]
-
-    # If y2.loc[input_data.last_valid_index() + 1] == y2.loc[input_data.last_valid_index()], shift all up by y2.loc[input_data.last_valid_index() + 2]
-    """
-    if (
-        y2[input_data.last_valid_index() + 1 - input_data.first_valid_index()]
-        == y2[input_data.last_valid_index() - input_data.first_valid_index()]
-    ):
-        y2[input_data.last_valid_index() + 1 - input_data.first_valid_index() :] = (
-            y2[input_data.last_valid_index() + 1 - input_data.first_valid_index() :]
-            + y2[input_data.last_valid_index() + 2 - input_data.first_valid_index()]
-        )
-    """
-
-    # Save projections to logfile
-    pd.DataFrame(input_data.name).to_csv(
-        "podi/data/adoption_projection_logfile2.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/adoption_projection_logfile2.csv"),
-    )
-
-    # Save logistic function parameters to output file for inspection
-    pd.DataFrame(
-        (
-            input_data.name[0],
-            genetic_parameters[0],
-            genetic_parameters[1],
-            genetic_parameters[2],
-        )
-    ).T.to_csv(
-        "podi/data/adoption_curve_parameters.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/adoption_curve_parameters.csv"),
-    )
-
-    # Save model to output file
-    pd.Series(
-        data=y[
-            : len(np.arange(input_data.first_valid_index(), output_end_date + 1, 1))
-        ],
-        index=np.arange(input_data.first_valid_index(), output_end_date + 1, 1),
-        name=input_data.name,
-    ).T.to_csv(
-        "podi/data/adoption_curve_models.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/adoption_curve_models.csv"),
-    )
+        # Rejoin with input data at point where projection results in smooth growth
+        y2 = np.concatenate(
+            [
+                input_data.loc[: input_data.last_valid_index()].values,
+                y[y > (input_data.loc[input_data.last_valid_index()])].squeeze(),
+            ]
+        )[: (output_end_date - input_data.first_valid_index() + 1)]
+        pd.DataFrame(y2).plot()
 
     return pd.Series(
         data=y2[
