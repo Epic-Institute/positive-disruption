@@ -1,4 +1,4 @@
-Model,Scenario,Region,iso,Country,Subvector,Unit,Initial Extent (Mha),Initial Loss Rate (%),Rate of Improvement,Mitigation (Mg CO2/ha),Duration
+Model,Scenario,Region,iso,Country,Subvector,Unit,Initial Extent (Mha),Initial Loss Rate (%),Rate of Improvement,Mitigation (MtCO2e/ha),Duration
 PD22,Pathway,PAK,AFG,Afghanistan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
 PD22,Pathway,EEU,ALB,Albania,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,0.0000,#VALUE!
 PD22,Pathway,NAF,DZA,Algeria,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
