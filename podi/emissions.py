@@ -287,7 +287,7 @@ def emissions(
                     "./charts/mwedges-"
                     + str(scenario).capitalize()
                     + "-"
-                    + +str(sector).capitalize()
+                    + str(sector).capitalize()
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
@@ -468,7 +468,7 @@ def emissions(
         )
         .set_index(pyam.IAMC_IDX)
         .apply(
-            lambda x: x[flux.columns[0:]].fillna(x["Mitigation (Mg CO2/ha)"]),
+            lambda x: x[flux.columns[0:]].fillna(x["Mitigation (MtCO2e/ha)"]),
             axis=1,
         )
         .rename(
@@ -576,6 +576,9 @@ def emissions(
 
             if subvertical == "Improved Forest Mgmt|Avg mitigation potential flux":
                 fig.update_layout(yaxis={"title": "tCO2e/m3/yr"})
+
+            if subvertical == "Nitrogen Fertilizer Management|Avg mitigation potential flux":
+                fig.update_layout(yaxis={"title": "MtCO2e/percentile improvement"})
 
             if show_figs is True:
                 fig.show()

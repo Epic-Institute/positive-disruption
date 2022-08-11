@@ -93,7 +93,7 @@ title: AFOLU
 
 ### Average Mitigation Potential Flux
 - [MtCO2e/percentile improvement] for Nitrogen Fertilizer Management
-- [tCO2e/Mha/yr] for all others
+- [tCO2e/ha/yr] for all others
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Agroforestry.html" height='500' width='150%'></iframe>
@@ -124,7 +124,7 @@ title: AFOLU
 <br/><br/>
 
 ### Historical Adoption
-- [m3] for Natural Regeneration
+- [m3] for Improved Forest Mgmt
 - [Mha] for all others
 <br/><br/>
 
@@ -188,7 +188,7 @@ title: AFOLU
 <br/><br/>
 
 ### Max Extent
-- [m3] for Natural Regeneration
+- [m3] for Improved Forest Mgmt
 - [Mha] for all others
 <br/><br/>
 
@@ -221,8 +221,8 @@ title: AFOLU
 <br/><br/>
 
 ### Average Mitigation Potential Flux
-- [tCO2e/m3/yr] for Natural Regeneration
-- [tCO2e/Mha/yr] for all others
+- [tCO2e/m3/yr] for Improved Forest Mgmt
+- [tCO2e/ha/yr] for all others
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-CoastalRestoration.html" height='500' width='150%'></iframe>
