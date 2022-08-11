@@ -29,18 +29,19 @@ proj_end_year = 2050
 
 # endregion
 
-# Choose a scenario name
+# Select model and choose a scenario name
+model = "PD22"
 scenario = "pathway"
 
 ##########
 # ENERGY #
 ##########
 
-recalc_energy = True
+recalc_energy = False
 # region
 
 if recalc_energy is True:
-    energy(scenario, data_start_year, data_end_year, proj_end_year)
+    energy(model, scenario, data_start_year, data_end_year, proj_end_year)
 index = [
     "model",
     "scenario",
@@ -91,7 +92,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = True
+recalc_afolu = False
 # region
 
 if recalc_afolu is True:

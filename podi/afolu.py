@@ -69,7 +69,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # For subvertical/region combos that have at least two data points, interpolate between data points to fill data gaps
     afolu_historical.interpolate(axis=1, limit_area="inside", inplace=True)
 
-    # Plot afolu_historical [Mha, m3]
+    # Plot afolu_historical [Mha, m3, % of Max Extent]
     # region
     if show_figs is True:
 
@@ -118,6 +118,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
             if subvertical == "Improved Forest Mgmt|Observed adoption":
                 fig.update_layout(yaxis={"title": "m3"})
+
+            if subvertical == "Nitrogen Fertilizer Management|Observed adoption":
+                fig.update_layout(yaxis={"title": "% of Max Extent"})
 
             fig.show()
 
@@ -320,7 +323,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
     )
 
-    # Define the max extent of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
+    # Define the max extent of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion' by loading the 'Avoided Pathways Input' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
     afolu_avoided = pd.DataFrame(
         pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
         .drop(columns=["Region", "Country"])
@@ -350,7 +353,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         columns=[
                             "Initial Loss Rate (%)",
                             "Rate of Improvement",
-                            "Mitigation (Mg CO2/ha)",
+                            "Mitigation (MtCO2e/ha)",
                             "Duration",
                         ]
                     ),
@@ -378,7 +381,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Combine max extents
     max_extent = pd.concat([max_extent, max_extent_avoided])
 
-    # Plot max_extent [Mha, m3]
+    # Plot max_extent [Mha, m3, MtCO2e]
     # region
     if show_figs is True:
 
@@ -430,6 +433,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             if subvertical == "Improved Forest Mgmt|Max extent":
                 fig.update_layout(yaxis={"title": "m3"})
 
+            if subvertical == "Nitrogen Fertilizer Management|Max extent":
+                fig.update_layout(yaxis={"title": "MtCO2e"})
+
             fig.show()
 
             if save_figs is True:
@@ -449,23 +455,47 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # Calculate afolu_historical as a % of max_extent
-    afolu_historical = afolu_historical.apply(
-        lambda x: x.divide(
-            max_extent[
-                (max_extent.index.get_level_values(2) == x.name[2])
-                & (
-                    max_extent.index.get_level_values(3).str.contains(
-                        x.name[3].replace("|Observed adoption", "")
+    # Calculate afolu_historical as a % of max_extent, excluding Nitrogen Fertilizer Management, since its historical adoption is already reported in % of Max Extent.
+    afolu_historical[
+        afolu_historical.index.get_level_values(3).str.contains(
+            "Nitrogen Fertilizer Management"
+        )
+    ] = afolu_historical[
+        afolu_historical.index.get_level_values(3).str.contains(
+            "Nitrogen Fertilizer Management"
+        )
+    ].divide(
+        100
+    )
+
+    afolu_historical[
+        ~afolu_historical.index.get_level_values(3).str.contains(
+            "Nitrogen Fertilizer Management"
+        )
+    ] = (
+        afolu_historical[
+            ~afolu_historical.index.get_level_values(3).str.contains(
+                "Nitrogen Fertilizer Management"
+            )
+        ]
+        .apply(
+            lambda x: x.divide(
+                max_extent[
+                    (max_extent.index.get_level_values(2) == x.name[2])
+                    & (
+                        max_extent.index.get_level_values(3).str.contains(
+                            x.name[3].replace("|Observed adoption", "")
+                        )
                     )
-                )
-            ]
-            .loc[:, x.index.values]
-            .fillna(0)
-            .squeeze()
-        ),
-        axis=1,
-    ).replace(np.inf, NaN)
+                ]
+                .loc[:, x.index.values]
+                .fillna(0)
+                .squeeze()
+            ),
+            axis=1,
+        )
+        .replace(np.inf, NaN)
+    )
 
     # Make Avoided Coastal Impacts and Avoided Forest Conversion all zero instead of NA, for consistency with Avoided Peat Impacts
     afolu_historical[
@@ -659,7 +689,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     "Duration",
                     "Initial Extent (Mha)",
                     "Initial Loss Rate (%)",
-                    "Mitigation (Mg CO2/ha)",
+                    "Mitigation (MtCO2e/ha)",
                 ]
             )
             .rename(columns={"Subvector": "Analog name"})
@@ -872,7 +902,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     ).fillna(0)
 
-    # Plot afolu_output [Mha, m3]
+    # Plot afolu_output [Mha, m3, MtCO2e]
     # region
     if show_figs is True:
         fig = afolu_output.droplevel(["model", "unit"]).T
@@ -927,6 +957,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
                 if subvertical == "Improved Forest Mgmt|Observed adoption":
                     fig.update_layout(yaxis={"title": "m3"})
+
+                if subvertical == "Nitrogen Fertilizer Management|Observed adoption":
+                    fig.update_layout(yaxis={"title": "MtCO2e"})
 
                 fig.show()
 

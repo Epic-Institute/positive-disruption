@@ -18,12 +18,12 @@ import plotly.graph_objects as go
 pandarallel.initialize(nb_workers=4)
 
 show_figs = False
-save_figs = False
+save_figs = True
 
 # endregion
 
 
-def energy(scenario, data_start_year, data_end_year, proj_end_year):
+def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     ############################
     #  LOAD HISTORICAL ENERGY  #
@@ -209,13 +209,40 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         slice(None), slice(None), slice(None), products, flows
     ]
 
-    # Add IRENA data for select electricity technologies
+    # Add IRENA data for select electricity technologies by downloading for all regions, all technologies, and all years from https://pxweb.irena.org/pxweb/en/IRENASTAT/IRENASTAT__Power%20Capacity%20and%20Generation/RE-ELECGEN_2022_cycle2.px/. Select the download option 'Comma delimited with heading' and save as a csv file in podi/data/IRENA/ . Change the header in column A from 'Region/country/area' to 'region'. Double check that the filename is 'RE-ELECGEN_20220805-204524.csv' and if not, update the filename below.
 
     # region
-    irena = pd.read_csv(
-        "podi/data/IRENA/electricity_supply_historical.csv", index_col="region"
+    irena = pd.read_csv("podi/data/IRENA/RE-ELECGEN_20220805-204524.csv", header=2)
+
+    # Filter for technologies that are not overlapping, and rename 'Technology' index to 'product_short'
+    irena = irena.loc[
+        irena["Technology"].isin(["Onshore wind energy", "Offshore wind energy"])
+    ].replace(
+        {
+            "Technology": {
+                "Onshore wind energy": "ONSHORE",
+                "Offshore wind energy": "OFFSHORE",
+            }
+        }
+    )
+    irena.rename(columns={"Technology": "product_short"}, inplace=True)
+
+    # Add index flow_short
+    irena["flow_short"] = "ELMAINE"
+
+    # Replace ".." with NaN
+    irena.replace("..", 0, inplace=True)
+
+    # Add index labels for model, scenario, unit (in GWh but will be converted to TJ later in this section with the other 'Electricity Ouput' variables)
+    irena["model"] = model
+    irena["scenario"] = "baseline"
+    irena["unit"] = "TJ"
+    irena.set_index(
+        ["model", "scenario", "region", "product_short", "flow_short", "unit"],
+        inplace=True,
     )
 
+    # Add WEB region names
     regions = (
         pd.DataFrame(
             pd.read_csv(
@@ -228,18 +255,32 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     irena = (
-        irena.merge(regions, on=["region"])
-        .reset_index()
-        .set_index(["WEB Region", "region"])
+        irena.reset_index()
+        .merge(regions, left_on=["region"], right_on=["region"])
+        .set_index(
+            [
+                "model",
+                "scenario",
+                "WEB Region",
+                "region",
+                "product_short",
+                "flow_short",
+                "unit",
+            ]
+        )
         .droplevel("region")
         .rename_axis(index={"WEB Region": "region"})
     )
-    irena.index = irena.index.str.lower()
-    irena = irena.reset_index().set_index(
-        ["model", "scenario", "region", "product_short", "flow_short", "unit"]
-    )
+    irena.index = irena.index.set_levels(irena.index.levels[2].str.lower(), level=2)
 
+    # Set column type
     irena.columns = irena.columns.astype(int)
+
+    # Add missing years between first_valid_index and data_start_year
+    irena[np.arange(data_start_year, irena.columns.min(), 1)] = 0
+    irena = irena.reindex(sorted(irena.columns), axis=1)
+
+    # Filter for data_start_year and data_end_year
     irena = irena.loc[:, data_start_year:data_end_year]
 
     # Drop IEA WIND and SOLARPV to avoid duplication with IRENA ONSHORE/OFFSHORE
@@ -687,7 +728,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Convert Electricity output flow category from GWh to TJ
-
+    energy_historical = energy_historical.astype(float)
     energy_historical.update(
         energy_historical[
             energy_historical.index.get_level_values(7) == "Electricity output"
@@ -1967,7 +2008,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_baseline
         model = "PD22"
-        region = "usa"
+        region = slice(None)
         sector = slice(None)
         product_category = slice(None)
         flow_category = ["Final consumption"]
@@ -2052,7 +2093,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_baseline
         model = "PD22"
-        region = "usa"
+        region = slice(None)
         sector = slice(None)
         product_category = slice(None)
         product_long = slice(None)
@@ -2472,6 +2513,8 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             title={
                 "text": "Energy industry own use and Losses, "
                 + str(sector).replace("slice(None, None, None)", "All Sectors")
+                + ", "
+                + "Baseline"
                 + ", "
                 + str(region).replace("slice(None, None, None)", "World").capitalize(),
                 "xanchor": "center",
@@ -3149,7 +3192,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_curve(
-                x.loc[:data_end_year-1],
+                x.loc[: data_end_year - 1],
                 data_end_year,
                 proj_end_year,
                 "logistic",
@@ -6808,7 +6851,7 @@ def energy(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         model = "PD22"
-        scenario = 'pathway'
+        scenario = "pathway"
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
