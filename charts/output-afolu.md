@@ -6,7 +6,9 @@ title: AFOLU
 # Agriculture
 <br/><br/>
 
-### Historical Adoption [Mha, m3]
+### Historical Adoption
+- [% of Max Extent] for Nitrogen Fertilizer Management
+- [Mha] for all others
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-Agroforestry.html" height='500' width='150%'></iframe>
@@ -60,7 +62,9 @@ title: AFOLU
 
 <br/><br/>
 
-### Max Extent [Mha, m3]
+### Max Extent
+- [MtCO2e] for Nitrogen Fertilizer Management
+- [Mha] for all others
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-Agroforestry.html" height='500' width='150%'></iframe>
@@ -87,7 +91,9 @@ title: AFOLU
 
 <br/><br/>
 
-### Average Mitigation Potential Flux [tCO2e/Mha/yr, tCO2e/m3/yr]
+### Average Mitigation Potential Flux
+- [MtCO2e/percentile improvement] for Nitrogen Fertilizer Management
+- [tCO2e/Mha/yr] for all others
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Agroforestry.html" height='500' width='150%'></iframe>
@@ -117,7 +123,9 @@ title: AFOLU
 # Forests & Wetlands
 <br/><br/>
 
-### Historical Adoption [Mha, m3]
+### Historical Adoption
+- [m3] for Natural Regeneration
+- [Mha] for all others
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-CoastalRestoration.html" height='500' width='150%'></iframe>
@@ -179,7 +187,9 @@ title: AFOLU
 
 <br/><br/>
 
-### Max Extent [Mha, m3]
+### Max Extent
+- [m3] for Natural Regeneration
+- [Mha] for all others
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-CoastalRestoration.html" height='500' width='150%'></iframe>
@@ -210,7 +220,9 @@ title: AFOLU
 
 <br/><br/>
 
-### Average Mitigation Potential Flux [tCO2e/Mha/yr, tCO2e/m3/yr]
+### Average Mitigation Potential Flux
+- [tCO2e/m3/yr] for Natural Regeneration
+- [tCO2e/Mha/yr] for all others
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-CoastalRestoration.html" height='500' width='150%'></iframe>
