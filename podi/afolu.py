@@ -267,7 +267,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     max_extent = piecewise_to_continuous("Max extent")
 
-    # Shift Improved Forest Mgmt's start year to 2018, all prior years to 2018 value
+    # Shift Improved Forest Mgmt's start year to 2018, and give all years prior to 2018 the value in 2018
     max_extent.update(
         (
             max_extent[
@@ -376,6 +376,17 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             "Avoided Coastal Impacts": "Avoided Coastal Impacts|Max extent",
             "Avoided Forest Conversion": "Avoided Forest Conversion|Max extent",
         }
+    )
+
+    # Like 'Avoided Forest Conversion' and 'Avoided Coastal Impacts', 'Avoided Peat Impacts' max extent should be set to zero for historical years
+    max_extent.update(
+        max_extent[
+            (
+                max_extent.reset_index().variable == "Avoided Peat Impacts|Max extent"
+            ).values
+        ]
+        .loc[:, :data_end_year]
+        .apply(lambda x: x * 0)
     )
 
     # Combine max extents

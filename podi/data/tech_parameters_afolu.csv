@@ -3,63 +3,63 @@ PD22,pathway,World ,Spanish Reforestation|Floor,none,0
 PD22,pathway,World ,Spanish Reforestation|Max annual growth,none,100
 PD22,pathway,World ,Spanish Reforestation|parameter a max,none,0.2
 PD22,pathway,World ,Spanish Reforestation|parameter a min,none,0.001
-PD22,pathway,World ,Spanish Reforestation|parameter b max,none,100
+PD22,pathway,World ,Spanish Reforestation|parameter b max,none,50
 PD22,pathway,World ,Spanish Reforestation|parameter b min,none,10
 PD22,pathway,World ,Spanish Reforestation|saturation point,none,1
 PD22,pathway,World ,FAO CA|Floor,none,0
 PD22,pathway,World ,FAO CA|Max annual growth,none,100
 PD22,pathway,World ,FAO CA|parameter a max,none,0.2
 PD22,pathway,World ,FAO CA|parameter a min,none,0.001
-PD22,pathway,World ,FAO CA|parameter b max,none,100
+PD22,pathway,World ,FAO CA|parameter b max,none,50
 PD22,pathway,World ,FAO CA|parameter b min,none,10
 PD22,pathway,World ,FAO CA|saturation point,none,1
 PD22,pathway,World ,Brazil No Till|Floor,none,0
 PD22,pathway,World ,Brazil No Till|Max annual growth,none,100
 PD22,pathway,World ,Brazil No Till|parameter a max,none,0.2
 PD22,pathway,World ,Brazil No Till|parameter a min,none,0.001
-PD22,pathway,World ,Brazil No Till|parameter b max,none,100
+PD22,pathway,World ,Brazil No Till|parameter b max,none,50
 PD22,pathway,World ,Brazil No Till|parameter b min,none,10
 PD22,pathway,World ,Brazil No Till|saturation point,none,1
 PD22,pathway,World ,Brazil Avoided Deforestation|Floor,none,0
 PD22,pathway,World ,Brazil Avoided Deforestation|Max annual growth,none,100
 PD22,pathway,World ,Brazil Avoided Deforestation|parameter a max,none,0.2
 PD22,pathway,World ,Brazil Avoided Deforestation|parameter a min,none,0.001
-PD22,pathway,World ,Brazil Avoided Deforestation|parameter b max,none,100
+PD22,pathway,World ,Brazil Avoided Deforestation|parameter b max,none,50
 PD22,pathway,World ,Brazil Avoided Deforestation|parameter b min,none,10
 PD22,pathway,World ,Brazil Avoided Deforestation|saturation point,none,1
 PD22,pathway,World ,US Wetlands 2002-2014|Floor,none,0
 PD22,pathway,World ,US Wetlands 2002-2014|Max annual growth,none,100
 PD22,pathway,World ,US Wetlands 2002-2014|parameter a max,none,0.2
 PD22,pathway,World ,US Wetlands 2002-2014|parameter a min,none,0.001
-PD22,pathway,World ,US Wetlands 2002-2014|parameter b max,none,100
+PD22,pathway,World ,US Wetlands 2002-2014|parameter b max,none,50
 PD22,pathway,World ,US Wetlands 2002-2014|parameter b min,none,10
 PD22,pathway,World ,US Wetlands 2002-2014|saturation point,none,1
 PD22,pathway,World ,Certification adoption|Floor,none,0
 PD22,pathway,World ,Certification adoption|Max annual growth,none,100
 PD22,pathway,World ,Certification adoption|parameter a max,none,0.2
 PD22,pathway,World ,Certification adoption|parameter a min,none,0.001
-PD22,pathway,World ,Certification adoption|parameter b max,none,100
+PD22,pathway,World ,Certification adoption|parameter b max,none,50
 PD22,pathway,World ,Certification adoption|parameter b min,none,10
 PD22,pathway,World ,Certification adoption|saturation point,none,1
 PD22,pathway,World ,Solomon Islands Mangrove Restoration|Floor,none,0
 PD22,pathway,World ,Solomon Islands Mangrove Restoration|Max annual growth,none,100
 PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter a max,none,0.2
 PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter a min,none,0.001
-PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter b max,none,100
+PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter b max,none,50
 PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter b min,none,10
 PD22,pathway,World ,Solomon Islands Mangrove Restoration|saturation point,none,1
 PD22,pathway,World ,Nepal Avoided Deforestation|Floor,none,0
 PD22,pathway,World ,Nepal Avoided Deforestation|Max annual growth,none,100
 PD22,pathway,World ,Nepal Avoided Deforestation|parameter a max,none,0.2
 PD22,pathway,World ,Nepal Avoided Deforestation|parameter a min,none,0.001
-PD22,pathway,World ,Nepal Avoided Deforestation|parameter b max,none,100
+PD22,pathway,World ,Nepal Avoided Deforestation|parameter b max,none,50
 PD22,pathway,World ,Nepal Avoided Deforestation|parameter b min,none,10
 PD22,pathway,World ,Nepal Avoided Deforestation|saturation point,none,1
 PD22,pathway,World ,Comoros Avoided Coastal Impacts|Floor,none,0
 PD22,pathway,World ,Comoros Avoided Coastal Impacts|Max annual growth,none,100
 PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter a max,none,0.2
 PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter a min,none,0.001
-PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter b max,none,100
+PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter b max,none,50
 PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter b min,none,10
 PD22,pathway,World ,Comoros Avoided Coastal Impacts|saturation point,none,1
 PD22,pathway,World ,Animal Mgmt|Floor,none,0

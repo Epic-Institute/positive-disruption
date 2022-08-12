@@ -577,7 +577,10 @@ def emissions(
             if subvertical == "Improved Forest Mgmt|Avg mitigation potential flux":
                 fig.update_layout(yaxis={"title": "tCO2e/m3/yr"})
 
-            if subvertical == "Nitrogen Fertilizer Management|Avg mitigation potential flux":
+            if (
+                subvertical
+                == "Nitrogen Fertilizer Management|Avg mitigation potential flux"
+            ):
                 fig.update_layout(yaxis={"title": "MtCO2e/percentile improvement"})
 
             if show_figs is True:
@@ -977,47 +980,24 @@ def emissions(
     # SOME AFOLU RESULTS LOOK INCORRECT, FIX THEM HERE WHILE WAITING FOR TNC FEEDBACK
     fix_afolu = False
     if fix_afolu is True:
-        # Fix Biochar
-        emissions_afolu.update(
-            emissions_afolu[
-                (emissions_afolu.reset_index().product_long == "Biochar").values
-            ].multiply(0.1)
-        )
-
-        # Fix Natural Regeneration
-        emissions_afolu.update(
-            emissions_afolu[
-                (
-                    emissions_afolu.reset_index().product_long == "Natural Regeneration"
-                ).values
-            ].multiply(0.1)
-        )
-
-        # Fix Nitrogen Fertilizer Management
+        # Fix Avoided Forest Conversion (flux looks too high by 1e6)
         emissions_afolu.update(
             emissions_afolu[
                 (
                     emissions_afolu.reset_index().product_long
-                    == "Nitrogen Fertilizer Management"
+                    == "Avoided Forest Conversion"
                 ).values
-            ].multiply(1e-5)
+            ].multiply(1e-6)
         )
 
-        # Fix Avoided Coastal Impacts
+        # Fix Avoided Coastal Impacts (flux looks too high by 1e6)
         emissions_afolu.update(
             emissions_afolu[
                 (
                     emissions_afolu.reset_index().product_long
                     == "Avoided Coastal Impacts"
                 ).values
-            ].multiply(0.01)
-        )
-
-        # Fix Improved Rice
-        emissions_afolu.update(
-            emissions_afolu[
-                (emissions_afolu.reset_index().product_long == "Improved Rice").values
-            ].multiply(0.01)
+            ].multiply(1e-6)
         )
 
     # Drop rows with NaN in all year columns, representing duplicate regions and/or emissions

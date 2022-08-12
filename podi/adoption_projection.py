@@ -53,7 +53,7 @@ def adoption_projection(
                 change_parameters.variable.str.contains("saturation point")
             ]["Unnamed: 5"].values[0],
         ),
-        (y[0][-1], y[0][-1]),
+        (y[0][-1] - 0.15, y[0][-1] - 0.15),
     ]
 
     # Define sum of squared error function and use differential_evolution() to compute genetic parameters
@@ -94,7 +94,7 @@ def adoption_projection(
             mutation=(0, 1),
         ).x
 
-        y = np.array(logistic(np.arange(0, 500, 1), *genetic_parameters))
+        y = np.array(logistic(np.arange(0, 200, 1), *genetic_parameters))
 
         # Rejoin with input data at point where projection results in smooth growth
         y2 = np.concatenate(
@@ -103,7 +103,6 @@ def adoption_projection(
                 y[y > (input_data.loc[input_data.last_valid_index()])].squeeze(),
             ]
         )[: (output_end_date - input_data.first_valid_index() + 1)]
-        pd.DataFrame(y2).plot()
 
     return pd.Series(
         data=y2[
