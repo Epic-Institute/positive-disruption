@@ -493,6 +493,24 @@ def emissions(
         ]
     )
 
+    # Change flux units for Nitrogen Fertilizer Management from MtCO2e/percentile improvement to tCO2e/percentile improvement, to match other subverticals
+    flux = pd.concat(
+        [
+            flux[
+                ~(
+                    flux.reset_index().unit.isin(["MtCO2e/percentile improvement"])
+                ).values
+            ],
+            flux[
+                (flux.reset_index().unit.isin(["MtCO2e/percentile improvement"])).values
+            ]
+            .multiply(1e6)
+            .rename(
+                index={"MtCO2e/percentile improvement": "tCO2e/percentile improvement"}
+            ),
+        ]
+    )
+
     # Change ISO region names to IEA
     regions = (
         pd.DataFrame(
@@ -521,7 +539,7 @@ def emissions(
         .rename_axis(index={"WEB Region": "region"})
     ).drop(columns="region")
 
-    # Plot Average Mitigation Flux [tCO2e/ha/yr, tCO2e/m3/yr]
+    # Plot Average Mitigation Flux [tCO2e/Mha/yr, tCO2e/m3/yr, tCo2e/percentile improvement]
     # region
     if show_figs is True:
         fig = flux.droplevel(["model", "scenario", "unit"]).T
@@ -566,7 +584,7 @@ def emissions(
                     "x": 0.5,
                     "y": 0.99,
                 },
-                yaxis={"title": "tCO2e/ha/yr"},
+                yaxis={"title": "tCO2e/Mha/yr"},
                 xaxis={"title": "Years from implementation"},
                 margin_b=0,
                 margin_t=20,
@@ -581,7 +599,7 @@ def emissions(
                 subvertical
                 == "Nitrogen Fertilizer Management|Avg mitigation potential flux"
             ):
-                fig.update_layout(yaxis={"title": "MtCO2e/percentile improvement"})
+                fig.update_layout(yaxis={"title": "tCO2e/percentile improvement"})
 
             if show_figs is True:
                 fig.show()
@@ -757,9 +775,11 @@ def emissions(
         index=flux.index, columns=afolu_output.columns
     )
     emissions_afolu_mitigated.reset_index(inplace=True)
-    emissions_afolu_mitigated.unit = emissions_afolu_mitigated.unit.str.replace(
-        "tCO2e/m3/yr", "tCO2e", regex=True
-    ).replace("tCO2e/Mha/yr", "tCO2e", regex=True)
+    emissions_afolu_mitigated.unit = (
+        emissions_afolu_mitigated.unit.str.replace("tCO2e/m3/yr", "tCO2e", regex=True)
+        .replace("tCO2e/Mha/yr", "tCO2e", regex=True)
+        .replace("tCO2e/percentile improvement", "tCO2e", regex=True)
+    )
     emissions_afolu_mitigated.variable = emissions_afolu_mitigated.variable.str.replace(
         "\|Avg mitigation potential flux", "", regex=True
     )
@@ -768,6 +788,22 @@ def emissions(
     for year in afolu_output.columns:
 
         # Find new adoption in year, multiply by flux and a 'baseline' copy of flux
+        emissions_afolu_mitigated_year = afolu_output.parallel_apply(
+            lambda x: x
+            * (
+                pd.concat([flux, flux.rename(index={scenario: "baseline"}, level=1)])
+                .loc[
+                    slice(None),
+                    [x.name[1]],
+                    [x.name[2]],
+                    [x.name[5] + "|Avg mitigation potential flux"],
+                ]
+                .loc[:, year]
+            ).squeeze(),
+            axis=1,
+        ).fillna(0)
+
+        """
         emissions_afolu_mitigated_year = (
             pd.concat([flux, flux.rename(index={scenario: "baseline"}, level=1)])
             .parallel_apply(
@@ -786,7 +822,7 @@ def emissions(
             )
             .fillna(0)
         )
-
+        
         # Update variable and unit indices
         emissions_afolu_mitigated_year.reset_index(inplace=True)
         emissions_afolu_mitigated_year.variable = (
@@ -797,10 +833,12 @@ def emissions(
         emissions_afolu_mitigated_year.unit = (
             emissions_afolu_mitigated_year.unit.str.replace(
                 "tCO2e/m3/yr", "tCO2e", regex=True
-            ).replace("tCO2e/Mha/yr", "tCO2e", regex=True)
+            )
+            .replace("tCO2e/Mha/yr", "tCO2e", regex=True)
+            .replace("tCO2e/percentile improvement", "tCO2e", regex=True)
         )
         emissions_afolu_mitigated_year.set_index(pyam.IAMC_IDX, inplace=True)
-
+        """
         # Update timerseries to start at 'year'
         emissions_afolu_mitigated_year.columns = np.arange(
             year, year + len(flux.columns), 1
@@ -815,13 +853,6 @@ def emissions(
     emissions_afolu_mitigated = emissions_afolu_mitigated.loc[
         :, data_start_year:proj_end_year
     ]
-
-    # Replace unit label with MtCO2e
-    emissions_afolu_mitigated.update(emissions_afolu_mitigated.divide(1e6))
-    emissions_afolu_mitigated.rename(
-        index={"tCO2e": "MtCO2e"},
-        inplace=True,
-    )
 
     # Add sector, product_long, flow_category, flow_long labels
     def addindices(each):
@@ -935,6 +966,34 @@ def emissions(
 
     emissions_afolu_mitigated = addindices(emissions_afolu_mitigated)
 
+    # Convert from tCO2e to Mt
+    emissions_afolu_mitigated.update(emissions_afolu_mitigated.divide(1e6))
+    emissions_afolu_mitigated.rename(
+        index={"tCO2e": "Mt"},
+        inplace=True,
+    )
+
+    # Add missing GWP values to gwp
+    # Choose version of GWP values
+    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
+
+    gwp.data[version].update(
+        {
+            "CO2": 1,
+            "BC": 500,
+            "CO": 0,
+            "NH3": 0,
+            "NMVOC": 0,
+            "NOx": 0,
+            "OC": 0,
+            "SO2": 0,
+        }
+    )
+
+    emissions_afolu_mitigated = emissions_afolu_mitigated.apply(
+        lambda x: x.divide(gwp.data[version][x.name[6]]), axis=1
+    )
+
     # Assume emissions mitigated start at current year
     emissions_afolu_mitigated.update(
         emissions_afolu_mitigated.loc[:, data_end_year:].apply(
@@ -996,6 +1055,15 @@ def emissions(
                 (
                     emissions_afolu.reset_index().product_long
                     == "Avoided Coastal Impacts"
+                ).values
+            ].multiply(1e-6)
+        )
+
+        # Fix Natural Regeneration (flux looks too high by 1e6)
+        emissions_afolu.update(
+            emissions_afolu[
+                (
+                    emissions_afolu.reset_index().product_long == "Natural Regeneration"
                 ).values
             ].multiply(1e-6)
         )
@@ -2031,23 +2099,6 @@ def emissions(
             "flow_short",
             "unit",
         ]
-    )
-
-    # Add missing GWP values to gwp
-    # Choose version of GWP values
-    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
-
-    gwp.data[version].update(
-        {
-            "CO2": 1,
-            "BC": 500,
-            "CO": 0,
-            "NH3": 0,
-            "NMVOC": 0,
-            "NOx": 0,
-            "OC": 0,
-            "SO2": 0,
-        }
     )
 
     emissions_output_co2e = emissions_output_co2e.apply(

@@ -53,7 +53,7 @@ def adoption_projection(
                 change_parameters.variable.str.contains("saturation point")
             ]["Unnamed: 5"].values[0],
         ),
-        (y[0][-1] - 0.15, y[0][-1] - 0.15),
+        (y[0][-1], y[0][-1]),
     ]
 
     # Define sum of squared error function and use differential_evolution() to compute genetic parameters
