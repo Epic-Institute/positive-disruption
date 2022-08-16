@@ -1,16 +1,12 @@
 # region
 
-from matplotlib.pyplot import axis, title, xlabel, ylabel
 import pandas as pd
 from podi.adoption_projection import adoption_projection
-from numpy import NaN, cumsum, divide
+from numpy import NaN
 import numpy as np
 from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
 import pyam
-import panel as pn
-import holoviews as hv
-import hvplot.pandas
 import plotly.io as pio
 import plotly.graph_objects as go
 
@@ -60,15 +56,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     afolu_historical = afolu_historical.set_index(pyam.IAMC_IDX)
 
     afolu_historical.columns = afolu_historical.columns.astype(int)
-
-    # For subvertical/region combos that have one data point, assume the first year of input data is 50% of this value, and interpolate, using the single historical data point as the most recent year for data
-    afolu_historical.update(
-        afolu_historical[afolu_historical.count(axis=1) == 1].iloc[:, 0].fillna(0)
-        + afolu_historical[afolu_historical.count(axis=1) == 1]
-        .sum(axis=1)
-        .divide(2)
-        .values
-    )
 
     # For subvertical/region combos that have at least two data points, interpolate between data points to fill data gaps
     afolu_historical.interpolate(axis=1, limit_area="inside", inplace=True)
@@ -626,6 +613,26 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
+    # For rows will all 'NA', replace with zero at data_end_year
+    afolu_historical.update(
+        afolu_historical[afolu_historical.isna().all(axis=1).values]
+        .loc[:, data_end_year]
+        .fillna(0)
+    )
+
+    # For subvertical/region combos that have one data point, assume the prior year of input data is 95% of this value
+    afolu_historical.update(
+        afolu_historical[afolu_historical.count(axis=1) == 1].apply(
+            lambda x: x.combine_first(
+                pd.Series(
+                    data=[x.loc[x.first_valid_index()] * 0.95],
+                    index=[x.first_valid_index() - 1],
+                )
+            ),
+            axis=1,
+        )
+    )
+
     # endregion
 
     ###########################
@@ -640,8 +647,12 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     afolu_baseline.scenario = afolu_baseline.scenario.str.replace(scenario, "baseline")
     afolu_baseline.set_index(pyam.IAMC_IDX, inplace=True)
 
-    # For rows will all 'NA', replace with zeros
-    afolu_baseline[afolu_baseline.isna().all(axis=1).values] = 0
+    # For subvertical/region combos that have one data point, assume the first year of input data is 50% of this value, and interpolate, using the single historical data point as the most recent year for data
+    afolu_baseline.update(
+        afolu_baseline[afolu_baseline.count(axis=1) == 1].iloc[:, 0].fillna(0)
+        + afolu_baseline[afolu_baseline.count(axis=1) == 1].sum(axis=1).divide(2).values
+    )
+    afolu_baseline.interpolate(axis=1, limit_area="inside", inplace=True)
 
     # Load input parameters for estimating NCS subvertical growth
     parameters = pd.read_csv("podi/data/tech_parameters_afolu.csv").sort_index()
@@ -843,14 +854,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Join historical analog model with historical data at point where projection curve results in smooth growth (since historical analogs are at different points on their modeled adoption curve than the NCS pathways to which they are being compared)
 
     def rep(x):
-        print(x.name)
         x0 = x
         if x0.isna().all():
-            x0 = x0.fillna(0)
+            x0.iloc[-1] = 0
         x0 = (
             afolu_analogs.loc[x.name[5]][
                 afolu_analogs.loc[x.name[5]]
-                >= min(max(x0.loc[x0.last_valid_index()], 0), 1)
+                >= min(max(x0.loc[x0.last_valid_index()], 1e-5), 1)
             ]
             .iloc[: proj_end_year - x0.last_valid_index()]
             .reset_index()
@@ -866,11 +876,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             x1 = (
                 afolu_analogs.loc[x.name[5]][
                     afolu_analogs.loc[x.name[5]]
-                    <= min(max(x.loc[x.first_valid_index()], 0), 1)
+                    <= min(max(x.loc[x.first_valid_index()], 1e-5), 1)
                 ]
-                .iloc[: x.first_valid_index() - data_start_year]
+                .tail(x.first_valid_index() - x.index[0])
                 .reset_index()
-                .set_index(np.arange(data_start_year, x.first_valid_index(), 1))
+                .set_index(np.arange(x.index[0], x.first_valid_index(), 1))
                 .drop(columns=["index"])
                 .squeeze()
                 .rename(x.name)
@@ -899,7 +909,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         value_name="Adoption",
     )
 
-    for scenario in fig2["scenario"].unique():
+    for scenario in ["pathway"]:
         for subvertical in fig2["variable"].unique():
 
             fig = go.Figure()

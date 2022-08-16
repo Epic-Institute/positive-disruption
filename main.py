@@ -3,8 +3,8 @@
 # region
 import warnings
 import numpy as np
-from numpy import NaN
 import pandas as pd
+import pyam
 from podi.energy import energy
 from podi.afolu import afolu
 from podi.emissions import emissions
@@ -18,8 +18,6 @@ from podi.cdr.cdr_util import (
     transport_em_def,
     fuel_em_def,
 )
-
-import pyam
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
@@ -187,15 +185,13 @@ if recalc_cdr is True:
         )
 
         cdr_pathway2 = (
-            pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
+            pd.DataFrame(cdr_pathway2, index=emissions.loc[:, 2010:].columns)
             .T.fillna(0)
             .drop(
-                index=pd.DataFrame(
-                    cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns
-                )
+                index=pd.DataFrame(cdr_pathway2, index=emissions.loc[:, 2010:].columns)
                 .T.fillna(0)
                 .iloc[
-                    pd.DataFrame(cdr_pathway2, index=em_mitigated.loc[:, 2010:].columns)
+                    pd.DataFrame(cdr_pathway2, index=emissions.loc[:, 2010:].columns)
                     .T.fillna(0)
                     .index.str.contains("Deficit", na=False)
                 ]
