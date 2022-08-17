@@ -4,6 +4,7 @@ import hvplot.pandas
 import panel as pn
 from plotly import graph_objects as go
 from bokeh.resources import INLINE, CDN
+import datapane as dp
 
 # endregion
 
@@ -98,6 +99,5 @@ def _afolu_historical():
 
 app = _afolu_historical()
 app.save("./charts/afolu_historical.html", resources=CDN)
-
 
 # endregion

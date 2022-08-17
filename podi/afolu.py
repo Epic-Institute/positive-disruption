@@ -1,7 +1,6 @@
 # region
 
 import pandas as pd
-from podi.adoption_projection import adoption_projection
 from numpy import NaN
 import numpy as np
 from podi.curve_smooth import curve_smooth
@@ -10,7 +9,7 @@ import pyam
 import plotly.io as pio
 import plotly.graph_objects as go
 
-pandarallel.initialize()
+pandarallel.initialize(progress_bar=True)
 
 show_figs = True
 save_figs = True
@@ -76,20 +75,60 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         for region in fig2["region"].unique():
 
             # Make modeled trace
-            fig.add_trace(
-                go.Scatter(
-                    name=region,
-                    line=dict(width=1),
-                    x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                    y=fig2[
-                        (fig2["variable"] == subvertical) & (fig2["region"] == region)
-                    ]["Adoption"],
-                    legendgroup=region,
-                    showlegend=True,
+            if (
+                fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)][
+                    "Adoption"
+                ].count()
+                < 2
+            ):
+                fig.add_trace(
+                    go.Scatter(
+                        name=region,
+                        mode="markers",
+                        marker=dict(size=5),
+                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                        y=fig2[
+                            (fig2["variable"] == subvertical)
+                            & (fig2["region"] == region)
+                        ]["Adoption"],
+                        legendgroup=region,
+                        showlegend=True,
+                    )
                 )
-            )
+            else:
+                fig.add_trace(
+                    go.Scatter(
+                        name=region,
+                        line=dict(width=1),
+                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                        y=fig2[
+                            (fig2["variable"] == subvertical)
+                            & (fig2["region"] == region)
+                        ]["Adoption"],
+                        legendgroup=region,
+                        showlegend=True,
+                    )
+                )
+        buttons = []
+
+        for i, region in enumerate(fig2["region"].unique()):
+            args = [False] * len(fig2["region"].unique())
+            args[i] = True
+            button = dict(label=region, method="update", args=[{"visible": args}])
+            buttons.append(button)
 
         fig.update_layout(
+            updatemenus=[
+                dict(
+                    active=0,
+                    type="dropdown",
+                    buttons=buttons,
+                    x=1.05,
+                    y=1.02,
+                    xanchor="right",
+                    yanchor="bottom",
+                )
+            ],
             title={
                 "text": "Historical Adoption, "
                 + subvertical.replace("|Observed adoption", ""),
@@ -99,9 +138,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             },
             yaxis={"title": "Mha"},
             margin_b=0,
-            margin_t=20,
+            margin_t=80,
             margin_l=10,
             margin_r=10,
+            xaxis1_rangeslider_visible=True,
         )
 
         if subvertical == "Improved Forest Mgmt|Observed adoption":
@@ -538,7 +578,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     ]
 
     # FIX PEAT RESTORATION; historical values higher than max extent
-    fix_afolu = True
+    fix_afolu = False
     if fix_afolu is True:
         afolu_historical.update(
             afolu_historical[
@@ -566,19 +606,42 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         for region in fig2["region"].unique():
 
             # Make modeled trace
-            fig.add_trace(
-                go.Scatter(
-                    name=region,
-                    line=dict(width=1),
-                    x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                    y=fig2[
-                        (fig2["variable"] == subvertical) & (fig2["region"] == region)
-                    ]["Adoption"]
-                    * 100,
-                    legendgroup=region,
-                    showlegend=True,
+            if (
+                fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)][
+                    "Adoption"
+                ].count()
+                < 2
+            ):
+                fig.add_trace(
+                    go.Scatter(
+                        name=region,
+                        mode="markers",
+                        marker=dict(size=5),
+                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                        y=fig2[
+                            (fig2["variable"] == subvertical)
+                            & (fig2["region"] == region)
+                        ]["Adoption"]
+                        * 100,
+                        legendgroup=region,
+                        showlegend=True,
+                    )
                 )
-            )
+            else:
+                fig.add_trace(
+                    go.Scatter(
+                        name=region,
+                        line=dict(width=1),
+                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
+                        y=fig2[
+                            (fig2["variable"] == subvertical)
+                            & (fig2["region"] == region)
+                        ]["Adoption"]
+                        * 100,
+                        legendgroup=region,
+                        showlegend=True,
+                    )
+                )
 
         fig.update_layout(
             title={
@@ -641,87 +704,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # Create afolu_baseline by copying afolu_historical and changing the scenario name to 'baseline'
-    afolu_baseline = afolu_historical.copy()
-    afolu_baseline.reset_index(inplace=True)
-    afolu_baseline.scenario = afolu_baseline.scenario.str.replace(scenario, "baseline")
-    afolu_baseline.set_index(pyam.IAMC_IDX, inplace=True)
-
-    # For subvertical/region combos that have one data point, assume the first year of input data is 50% of this value, and interpolate, using the single historical data point as the most recent year for data
-    afolu_baseline.update(
-        afolu_baseline[afolu_baseline.count(axis=1) == 1].iloc[:, 0].fillna(0)
-        + afolu_baseline[afolu_baseline.count(axis=1) == 1].sum(axis=1).divide(2).values
-    )
-    afolu_baseline.interpolate(axis=1, limit_area="inside", inplace=True)
-
-    # Load input parameters for estimating NCS subvertical growth
-    parameters = pd.read_csv("podi/data/tech_parameters_afolu.csv").sort_index()
-
-    # Estimate 'baseline' scenario NCS subvertical growth. (Remove clip(upper=1) here to allow % to go beyond max_extent.)
-    afolu_baseline = afolu_baseline.parallel_apply(
-        lambda x: adoption_projection(
-            input_data=x,
-            output_start_date=x.last_valid_index(),
-            output_end_date=proj_end_year,
-            change_model="linear",
-            change_parameters=parameters[
-                (parameters.scenario == "baseline")
-                & (
-                    parameters.variable.str.contains(
-                        x.name[3].replace("|Observed adoption", "")
-                    )
-                )
-            ],
-        ),
-        axis=1,
-    ).clip(upper=1)
-
     # Compute adoption curves of the set of historical analogs that have been supplied to estimate the potential future growth of subverticals
 
     # region
-    """
-    afolu_analogs = (
-        pd.DataFrame(pd.read_csv("podi/data/afolu_analogs.csv"))
-        .drop(columns=["Note", "Unit", "Actual start year"])
-        .set_index(["Analog Name", "Max Extent"])
-    )
-    afolu_analogs.columns.rename("Year", inplace=True)
-    afolu_analogs.loc[:, afolu_analogs.columns[0]] = afolu_analogs.loc[
-        :, afolu_analogs.columns[0]
-    ].fillna(0)
-    afolu_analogs.interpolate(axis=1, limit_area="inside", inplace=True)
-    afolu_analogs = afolu_analogs.parallel_apply(
-        lambda x: x / x.name[1], axis=1
-    ).parallel_apply(lambda x: x - x.min(), axis=1)
-    afolu_analogs.columns = np.arange(
-        data_start_year, data_start_year + len(afolu_analogs.columns), 1
-    )
-
-    afolu_analogs2 = pd.DataFrame(
-        columns=np.arange(data_start_year, proj_end_year + 1, 1),
-        index=afolu_analogs.index,
-    )
-
-    afolu_analogs2.update(afolu_analogs)
-    afolu_analogs = afolu_analogs2.astype(float)
-
-    parameters = pd.read_csv("podi/data/tech_parameters_afolu.csv").sort_index()
-
-    afolu_analogs = afolu_analogs.apply(
-        lambda x: adoption_projection(
-            input_data=x,
-            output_start_date=x.last_valid_index() + 1,
-            output_end_date=proj_end_year,
-            change_model="logistic",
-            change_parameters=parameters[parameters.variable.str.contains(x.name[0])],
-        ),
-        axis=1,
-    ).droplevel("Max Extent")
-
-
-    # Curve smooth
-    afolu_analogs = curve_smooth(afolu_analogs, "quadratic", 6)
-    """
     afolu_analogs = pd.DataFrame(
         pd.read_csv("podi/data/afolu_analogs_modeled.csv")
     ).set_index(["Analog Name"])
@@ -894,8 +879,51 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # Combine all scenarios
-    afolu_output = pd.concat([afolu_baseline, afolu_output])
+    # Create afolu_baseline by copying afolu_historical and changing the scenario name to 'baseline'
+    afolu_baseline = afolu_historical.copy()
+    afolu_baseline.reset_index(inplace=True)
+    afolu_baseline.scenario = afolu_baseline.scenario.str.replace(scenario, "baseline")
+    afolu_baseline.set_index(pyam.IAMC_IDX, inplace=True)
+
+    # Estimate 'baseline' scenario NCS subvertical growth
+    def rep(x):
+        x0 = pd.Series(
+            data=max(0, x.iloc[-1] - x.iloc[-2]),
+            index=np.arange(x.last_valid_index() + 1, proj_end_year + 1, 1),
+            name=x.name,
+        )
+        x0 = pd.concat(
+            [
+                pd.Series(
+                    data=x[x.last_valid_index()],
+                    index=[x.last_valid_index()],
+                    name=x.name,
+                ),
+                afolu_output.loc[x.name].loc[x.last_valid_index() + 1 :],
+            ]
+        ).cumsum()
+
+        x = x.combine_first(x0)
+
+        return x
+
+    afolu_baseline = pd.DataFrame(data=afolu_baseline.apply(rep, axis=1))
+
+    # Combine all scenarios, updating historical data for afolu_baseline to match afolu_output
+    afolu_output = pd.concat(
+        [
+            pd.concat(
+                [
+                    afolu_output.loc[:, :data_end_year].rename(
+                        index={scenario: "baseline"}
+                    ),
+                    afolu_baseline.loc[:, data_end_year + 1 :],
+                ],
+                axis=1,
+            ),
+            afolu_output,
+        ]
+    )
 
     # Plot afolu_output [% of max extent]
     # region
@@ -909,7 +937,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         value_name="Adoption",
     )
 
-    for scenario in ["pathway"]:
+    for scenario in fig2["scenario"].unique():
         for subvertical in fig2["variable"].unique():
 
             fig = go.Figure()
@@ -1203,6 +1231,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         return each
 
     afolu_output = addindices(afolu_output)
+
+    # Filter to data_start_year
+    afolu_output = afolu_output.loc[:, data_start_year:proj_end_year]
 
     # endregion
 

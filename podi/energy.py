@@ -15,7 +15,7 @@ import pyam
 import plotly.io as pio
 import plotly.graph_objects as go
 
-pandarallel.initialize(nb_workers=4)
+pandarallel.initialize(progress_bar=True)
 
 show_figs = False
 save_figs = True
