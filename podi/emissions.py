@@ -1,15 +1,11 @@
 # region
 
 import pandas as pd
-from numpy import NaN, concatenate
+from numpy import NaN
 import numpy as np
 import pyam
-import os.path
-import traceback
-import matplotlib.pyplot as plt
 from pandarallel import pandarallel
 import globalwarmingpotentials as gwp
-from podi.afolu import afolu
 import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
@@ -539,7 +535,7 @@ def emissions(
         .rename_axis(index={"WEB Region": "region"})
     ).drop(columns="region")
 
-    # Plot Average Mitigation Flux [tCO2e/Mha/yr, tCO2e/m3/yr, tCo2e/percentile improvement]
+    # Plot Average Mitigation Flux [tCO2e/ha/yr, tCO2e/m3/yr, tCo2e/percentile improvement]
     # region
     if show_figs is True:
         fig = flux.droplevel(["model", "scenario", "unit"]).T
@@ -584,7 +580,7 @@ def emissions(
                     "x": 0.5,
                     "y": 0.99,
                 },
-                yaxis={"title": "tCO2e/Mha/yr"},
+                yaxis={"title": "tCO2e/ha/yr"},
                 xaxis={"title": "Years from implementation"},
                 margin_b=0,
                 margin_t=20,
