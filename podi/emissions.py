@@ -830,6 +830,8 @@ def emissions(
                 "\|Avg mitigation potential flux", "", regex=True
             )
         )
+        """
+        emissions_afolu_mitigated_year.reset_index(inplace=True)
         emissions_afolu_mitigated_year.unit = (
             emissions_afolu_mitigated_year.unit.str.replace(
                 "tCO2e/m3/yr", "tCO2e", regex=True
@@ -838,7 +840,7 @@ def emissions(
             .replace("tCO2e/percentile improvement", "tCO2e", regex=True)
         )
         emissions_afolu_mitigated_year.set_index(pyam.IAMC_IDX, inplace=True)
-        """
+
         # Update timerseries to start at 'year'
         emissions_afolu_mitigated_year.columns = np.arange(
             year, year + len(flux.columns), 1
