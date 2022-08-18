@@ -3,127 +3,8 @@ layout: default
 title: AFOLU
 ---
 
-# Agriculture
-<br/><br/>
-
-### Historical Adoption
+# Historical Adoption
 - [% of Max Extent] for Nitrogen Fertilizer Management
-- [Mha] for all others
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-Agroforestry.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-Biochar.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-CroplandSoilHealth.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-ImprovedRice.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-OptimalIntensity.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-### Historical Adoption [% of Max Extent]
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-Agroforestry.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-Biochar.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-CroplandSoilHealth.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-ImprovedRice.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-OptimalIntensity.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-### Max Extent
-- [MtCO2e] for Nitrogen Fertilizer Management
-- [Mha] for all others
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-Agroforestry.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-Biochar.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-CroplandSoilHealth.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-ImprovedRice.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-OptimalIntensity.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-### Average Mitigation Potential Flux
-- [MtCO2e/percentile improvement] for Nitrogen Fertilizer Management
-- [tCO2e/ha/yr] for all others
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Agroforestry.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Biochar.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-CroplandSoilHealth.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-ImprovedRice.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-OptimalIntensity.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-# Forests & Wetlands
-<br/><br/>
-
-### Historical Adoption
 - [m3] for Improved Forest Mgmt
 - [Mha] for all others
 <br/><br/>
@@ -153,6 +34,30 @@ title: AFOLU
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-AvoidedPeatImpacts.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-Agroforestry.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-Biochar.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-CroplandSoilHealth.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-ImprovedRice.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-OptimalIntensity.html" height='500' width='150%'></iframe>
 
 <br/><br/>
 
@@ -187,7 +92,32 @@ title: AFOLU
 
 <br/><br/>
 
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-Agroforestry.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-Biochar.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-CroplandSoilHealth.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-ImprovedRice.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-OptimalIntensity.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
 ### Max Extent
+- [MtCO2e] for Nitrogen Fertilizer Management
 - [m3] for Improved Forest Mgmt
 - [Mha] for all others
 <br/><br/>
@@ -220,7 +150,32 @@ title: AFOLU
 
 <br/><br/>
 
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-Agroforestry.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-Biochar.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-CroplandSoilHealth.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-ImprovedRice.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-OptimalIntensity.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
 ### Average Mitigation Potential Flux
+- [MtCO2e/percentile improvement] for Nitrogen Fertilizer Management
 - [tCO2e/m3/yr] for Improved Forest Mgmt
 - [tCO2e/ha/yr] for all others
 <br/><br/>
@@ -250,5 +205,29 @@ title: AFOLU
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-AvoidedPeatImpacts.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Agroforestry.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-Biochar.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-CroplandSoilHealth.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-ImprovedRice.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-NitrogenFertilizerManagement.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-OptimalIntensity.html" height='500' width='150%'></iframe>
 
 <br/><br/>

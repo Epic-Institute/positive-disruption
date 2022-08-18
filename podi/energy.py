@@ -6,12 +6,9 @@ from numpy import NaN
 from podi.adoption_projection import (
     adoption_curve_demand,
     adoption_curve,
-    adoption_projection,
 )
 from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
-import os
-import pyam
 import plotly.io as pio
 import plotly.graph_objects as go
 
@@ -1963,7 +1960,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         lambda x: pd.concat(
             [
                 x.loc[:data_end_year].fillna(0) * 0
-                + adoption_projection(
+                + adoption_curve(
                     x.loc[:data_end_year].dropna(),
                     data_end_year - 1,
                     data_end_year,

@@ -3,7 +3,6 @@
 import pandas as pd
 from numpy import NaN
 import numpy as np
-from podi.curve_smooth import curve_smooth
 from pandarallel import pandarallel
 import pyam
 import plotly.io as pio
@@ -945,6 +944,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     for scenario in fig2["scenario"].unique():
+
         for subvertical in fig2["variable"].unique():
 
             fig = go.Figure()
