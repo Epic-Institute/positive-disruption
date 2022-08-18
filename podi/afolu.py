@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 
 pandarallel.initialize(progress_bar=True)
 
-show_figs = True
+show_figs = False
 save_figs = True
 
 # endregion
@@ -880,6 +880,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Create afolu_baseline by copying afolu_historical and changing the scenario name to 'baseline'
+
+    # region
+
     afolu_baseline = afolu_historical.copy()
     afolu_baseline.reset_index(inplace=True)
     afolu_baseline.scenario = afolu_baseline.scenario.str.replace(scenario, "baseline")
@@ -899,7 +902,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     index=[x.last_valid_index()],
                     name=x.name,
                 ),
-                afolu_output.loc[x.name].loc[x.last_valid_index() + 1 :],
+                afolu_output.loc[
+                    x.name[0], scenario, x.name[2], x.name[3], x.name[4]
+                ].loc[x.last_valid_index() + 1 :],
             ]
         ).cumsum()
 
@@ -908,6 +913,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         return x
 
     afolu_baseline = pd.DataFrame(data=afolu_baseline.apply(rep, axis=1))
+
+    # endregion
 
     # Combine all scenarios, updating historical data for afolu_baseline to match afolu_output
     afolu_output = pd.concat(
