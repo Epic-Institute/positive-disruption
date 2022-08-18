@@ -306,12 +306,6 @@ def emissions(
 
     # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
     def piecewise_to_continuous(variable):
-        """
-        Takes a variable name as input, and returns a dataframe with the variable's values for each
-        region, model, and scenario
-
-        :param variable: the name of the variable you want to convert
-        """
 
         # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
         name = (
@@ -446,6 +440,7 @@ def emissions(
         .sort_index()
     )
 
+    # FIX "Mitigation (MtCO2e/ha)" to be "(tCO2e/ha)" once TNC confirms that this is the correct unit (i.e. the data is already in tCO2e/ha, just mislabeled)
     flux_avoided = (
         pd.concat(
             [
@@ -478,16 +473,6 @@ def emissions(
 
     # Combine flux estimates
     flux = pd.concat([flux, flux_avoided])
-
-    # Change flux units from tCO2e/ha to tCO2e/Mha to match max extent
-    flux = pd.concat(
-        [
-            flux[~(flux.reset_index().unit.isin(["tCO2e/ha/yr"])).values],
-            flux[(flux.reset_index().unit.isin(["tCO2e/ha/yr"])).values]
-            .multiply(1e6)
-            .rename(index={"tCO2e/ha/yr": "tCO2e/Mha/yr"}),
-        ]
-    )
 
     # Change flux units for Nitrogen Fertilizer Management from MtCO2e/percentile improvement to tCO2e/percentile improvement, to match other subverticals
     flux = pd.concat(
@@ -712,6 +697,10 @@ def emissions(
 
     emissions_afolu["flow_category"] = "Emissions"
 
+    emissions_afolu["product_category"] = "AFOLU"
+    emissions_afolu["product_short"] = emissions_afolu["product_long"]
+    emissions_afolu["flow_short"] = emissions_afolu["flow_long"]
+
     emissions_afolu = (
         (
             emissions_afolu.reset_index()
@@ -725,9 +714,12 @@ def emissions(
                 "scenario",
                 "WEB Region",
                 "sector",
+                "product_category",
                 "product_long",
+                "product_short",
                 "flow_category",
                 "flow_long",
+                "flow_short",
                 "unit",
             ]
         )
@@ -739,14 +731,13 @@ def emissions(
     emissions_afolu = emissions_afolu.loc[:, data_start_year:proj_end_year]
 
     # Change unit from kt to Mt
-    emissions_afolu.update(emissions_afolu.divide(1e3))
+    emissions_afolu = emissions_afolu.divide(1e3)
     emissions_afolu = emissions_afolu.rename(index={"kilotonnes": "Mt"})
 
     # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
     emissions_afolu = emissions_afolu[
         ~(
             (emissions_afolu.index.get_level_values(3).isna())
-            | (emissions_afolu.index.get_level_values(6).isna())
             | (emissions_afolu.isna().all(axis=1))
         )
     ]
@@ -755,9 +746,9 @@ def emissions(
     emissions_afolu[np.arange(2021, 2030, 1)] = NaN
     emissions_afolu[np.arange(2031, proj_end_year, 1)] = NaN
     emissions_afolu = emissions_afolu.sort_index(axis=1)
-    emissions_afolu.loc[:, data_start_year].where(
-        ~emissions_afolu.loc[:, data_start_year].isna(), 0, inplace=True
-    )
+    emissions_afolu.loc[:, data_start_year] = emissions_afolu.loc[
+        :, data_start_year
+    ].where(~emissions_afolu.loc[:, data_start_year].isna(), 0)
     emissions_afolu.interpolate(method="linear", axis=1, inplace=True)
     emissions_afolu.fillna(method="bfill", inplace=True)
 
@@ -766,80 +757,80 @@ def emissions(
     # Multiply afolu_output by emissions factors to get emissions estimates
     # region
 
-    # Calculate emissions mitigated by multiplying adoption by avg mitigtation potential flux for each year. Average mitigation potential flux is unique to each year vintage.
+    # Calculate emissions mitigated by multiplying adoption in each year by avg mitigtation potential flux (over the entire range of year to proj_end_year), to represent the time-dependent mitigation flux for adoption in each year
     emissions_afolu_mitigated = pd.DataFrame(
-        index=flux.index, columns=afolu_output.columns
+        index=afolu_output.index, columns=afolu_output.columns
     )
     emissions_afolu_mitigated.reset_index(inplace=True)
     emissions_afolu_mitigated.unit = (
-        emissions_afolu_mitigated.unit.str.replace("tCO2e/m3/yr", "tCO2e", regex=True)
-        .replace("tCO2e/Mha/yr", "tCO2e", regex=True)
-        .replace("tCO2e/percentile improvement", "tCO2e", regex=True)
+        emissions_afolu_mitigated.unit.str.replace("ha", "tCO2e", regex=True)
+        .replace("m3", "tCO2e", regex=True)
+        .replace("Percent adoption", "tCO2e", regex=True)
     )
-    emissions_afolu_mitigated.variable = emissions_afolu_mitigated.variable.str.replace(
-        "\|Avg mitigation potential flux", "", regex=True
+    emissions_afolu_mitigated.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ],
+        inplace=True,
     )
-    emissions_afolu_mitigated.set_index(flux.index.names, inplace=True)
 
     for year in afolu_output.columns:
 
         # Find new adoption in year, multiply by flux and a 'baseline' copy of flux
         emissions_afolu_mitigated_year = afolu_output.parallel_apply(
-            lambda x: x
+            lambda x: x.loc[year]
             * (
-                pd.concat([flux, flux.rename(index={scenario: "baseline"}, level=1)])
-                .loc[
+                pd.concat(
+                    [flux, flux.rename(index={scenario: "baseline"}, level=1)]
+                ).loc[
                     slice(None),
                     [x.name[1]],
                     [x.name[2]],
                     [x.name[5] + "|Avg mitigation potential flux"],
                 ]
-                .loc[:, year]
-            ).squeeze(),
+            )
+            .squeeze()
+            .rename(x.name),
             axis=1,
         ).fillna(0)
 
-        """
-        emissions_afolu_mitigated_year = (
-            pd.concat([flux, flux.rename(index={scenario: "baseline"}, level=1)])
-            .parallel_apply(
-                lambda x: x
-                * (
-                    afolu_output.loc[
-                        slice(None),
-                        [x.name[1]],
-                        [x.name[2]],
-                        slice(None),
-                        slice(None),
-                        [x.name[3].replace("|Avg mitigation potential flux", "")],
-                    ].loc[:, year]
-                ).squeeze(),
-                axis=1,
-            )
-            .fillna(0)
-        )
-        
-        # Update variable and unit indices
-        emissions_afolu_mitigated_year.reset_index(inplace=True)
-        emissions_afolu_mitigated_year.variable = (
-            emissions_afolu_mitigated_year.variable.str.replace(
-                "\|Avg mitigation potential flux", "", regex=True
-            )
-        )
-        """
         emissions_afolu_mitigated_year.reset_index(inplace=True)
         emissions_afolu_mitigated_year.unit = (
-            emissions_afolu_mitigated_year.unit.str.replace(
-                "tCO2e/m3/yr", "tCO2e", regex=True
-            )
-            .replace("tCO2e/Mha/yr", "tCO2e", regex=True)
-            .replace("tCO2e/percentile improvement", "tCO2e", regex=True)
+            emissions_afolu_mitigated_year.unit.str.replace("m3", "tCO2e", regex=True)
+            .replace("ha", "tCO2e", regex=True)
+            .replace("Percent adoption", "tCO2e", regex=True)
         )
-        emissions_afolu_mitigated_year.set_index(pyam.IAMC_IDX, inplace=True)
+
+        emissions_afolu_mitigated_year.set_index(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+            ],
+            inplace=True,
+        )
 
         # Update timerseries to start at 'year'
         emissions_afolu_mitigated_year.columns = np.arange(
-            year, year + len(flux.columns), 1
+            year, year + len(afolu_output.columns), 1
         )
 
         # Add to cumulative count
@@ -852,84 +843,8 @@ def emissions(
         :, data_start_year:proj_end_year
     ]
 
-    # Add sector, product_long, flow_category, flow_long labels
-    def addindices(each):
-        each = each.reset_index().set_index(["region"])
-
-        # Add Sector, Product_long, Flow_category, Flow_long indices
-        each["product_long"] = each["variable"]
-
-        def addsector(x):
-            if x["product_long"] in [
-                "Biochar",
-                "Cropland Soil Health",
-                "Nitrogen Fertilizer Management",
-                "Improved Rice",
-                "Optimal Intensity",
-                "Agroforestry",
-            ]:
-                return "Agriculture"
-            elif x["product_long"] in [
-                "Improved Forest Mgmt",
-                "Natural Regeneration",
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Peat Restoration",
-            ]:
-                return "Forests & Wetlands"
-
-        each["sector"] = each.apply(lambda x: addsector(x), axis=1)
-
-        each["flow_category"] = "Emissions"
-
-        def addgas(x):
-            if x["product_long"] in [
-                "Biochar",
-                "Cropland Soil Health",
-                "Optimal Intensity",
-                "Agroforestry",
-                "Improved Forest Mgmt",
-                "Natural Regeneration",
-                "Avoided Coastal Impacts",
-                "Avoided Forest Conversion",
-                "Avoided Peat Impacts",
-                "Coastal Restoration",
-                "Peat Restoration",
-            ]:
-                return "CO2"
-            if x["product_long"] in [
-                "Improved Rice",
-            ]:
-                return "CH4"
-            if x["product_long"] in [
-                "Improved Rice",
-                "Nitrogen Fertilizer Management",
-            ]:
-                return "N2O"
-
-        each["flow_long"] = each.apply(lambda x: addgas(x), axis=1)
-
-        each = (
-            each.reset_index()
-            .set_index(
-                [
-                    "model",
-                    "scenario",
-                    "region",
-                    "sector",
-                    "product_long",
-                    "flow_category",
-                    "flow_long",
-                    "unit",
-                ]
-            )
-            .drop(columns=["variable"])
-        )
-
-        # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
-
+    # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
+    def improvedrice(each):
         each[
             (
                 (each.reset_index().product_long == "Improved Rice")
@@ -962,10 +877,10 @@ def emissions(
 
         return each
 
-    emissions_afolu_mitigated = addindices(emissions_afolu_mitigated)
+    emissions_afolu_mitigated = improvedrice(emissions_afolu_mitigated)
 
     # Convert from tCO2e to Mt
-    emissions_afolu_mitigated.update(emissions_afolu_mitigated.divide(1e6))
+    emissions_afolu_mitigated = emissions_afolu_mitigated.divide(1e6)
     emissions_afolu_mitigated.rename(
         index={"tCO2e": "Mt"},
         inplace=True,
@@ -989,7 +904,7 @@ def emissions(
     )
 
     emissions_afolu_mitigated = emissions_afolu_mitigated.apply(
-        lambda x: x.divide(gwp.data[version][x.name[6]]), axis=1
+        lambda x: x.divide(gwp.data[version][x.name[8]]), axis=1
     )
 
     # Assume emissions mitigated start at current year
@@ -1014,11 +929,12 @@ def emissions(
     )
 
     # Add indices product_category, product_short, flow_short
+    emissions_afolu.reset_index(inplace=True)
     emissions_afolu["product_category"] = "Emissions"
     emissions_afolu["product_short"] = "EM"
     emissions_afolu["flow_short"] = "AFOLU"
 
-    emissions_afolu = emissions_afolu.reset_index().set_index(
+    emissions_afolu = emissions_afolu.set_index(
         [
             "model",
             "scenario",
@@ -1078,7 +994,7 @@ def emissions(
 
         # region
 
-        scenario = "pathway"
+        scenario = scenario
         model = "PD22"
 
         fig = (
@@ -1195,10 +1111,7 @@ def emissions(
                             ).replace(" ", ""),
                             auto_open=False,
                         )
-
         # endregion
-
-    # endregion
 
     # endregion
 
