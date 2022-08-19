@@ -962,16 +962,6 @@ def emissions(
     # SOME AFOLU RESULTS LOOK INCORRECT, FIX THEM HERE WHILE WAITING FOR TNC FEEDBACK
     fix_afolu = False
     if fix_afolu is True:
-        # Fix Avoided Forest Conversion (flux looks too high by 1e6)
-        emissions_afolu.update(
-            emissions_afolu[
-                (
-                    emissions_afolu.reset_index().product_long
-                    == "Avoided Forest Conversion"
-                ).values
-            ].multiply(1e-6)
-        )
-
         # Fix Avoided Coastal Impacts (flux looks too high by 1e6)
         emissions_afolu.update(
             emissions_afolu[
@@ -982,13 +972,13 @@ def emissions(
             ].multiply(1e-6)
         )
 
-        # Fix Natural Regeneration (flux looks too high by 1e6)
+        # Fix Natural Regeneration (flux looks too high by 1e1)
         emissions_afolu.update(
             emissions_afolu[
                 (
                     emissions_afolu.reset_index().product_long == "Natural Regeneration"
                 ).values
-            ].multiply(1e-6)
+            ].multiply(1e-1)
         )
 
     # Drop rows with NaN in all year columns, representing duplicate regions and/or emissions
