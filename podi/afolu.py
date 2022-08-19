@@ -896,18 +896,27 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
         x0 = pd.concat(
             [
-                pd.Series(
-                    data=x[x.last_valid_index()],
-                    index=[x.last_valid_index()],
-                    name=x.name,
-                ),
                 afolu_output.loc[
                     x.name[0], scenario, x.name[2], x.name[3], x.name[4]
-                ].loc[x.last_valid_index() + 1 :],
+                ].loc[: x.last_valid_index() - 1],
+                pd.concat(
+                    [
+                        pd.Series(
+                            data=afolu_output.loc[
+                                x.name[0], scenario, x.name[2], x.name[3], x.name[4]
+                            ].loc[x.last_valid_index()],
+                            index=[x.last_valid_index()],
+                            name=x.name,
+                        ),
+                        x0,
+                    ]
+                ).cumsum(),
             ]
-        ).cumsum()
+        )
 
-        x = x.combine_first(x0)
+        x = x.combine_first(x0).rename(
+            afolu_output.loc[x.name[0], scenario, x.name[2], x.name[3], x.name[4]].name
+        )
 
         return x
 
@@ -916,20 +925,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # endregion
 
     # Combine all scenarios, updating historical data for afolu_baseline to match afolu_output
-    afolu_output = pd.concat(
-        [
-            pd.concat(
-                [
-                    afolu_output.loc[:, :data_end_year].rename(
-                        index={scenario: "baseline"}
-                    ),
-                    afolu_baseline.loc[:, data_end_year + 1 :],
-                ],
-                axis=1,
-            ),
-            afolu_output,
-        ]
-    )
+    afolu_output = pd.concat([afolu_baseline, afolu_output])
 
     # Plot afolu_output [% of max extent]
     # region
