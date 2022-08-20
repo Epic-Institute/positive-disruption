@@ -793,11 +793,11 @@ def emissions(
         inplace=True,
     )
 
-    for year in afolu_output.columns:
+    for year in afolu_output.loc[:, data_end_year:proj_end_year].columns:
 
         # Find new adoption in year, multiply by flux and a 'baseline' copy of flux
         emissions_afolu_mitigated_year = afolu_output.parallel_apply(
-            lambda x: x.loc[year]
+            lambda x: (x.loc[year] - x.loc[year - 1])
             * (
                 pd.concat(
                     [flux, flux.rename(index={scenario: "baseline"}, level=1)]
@@ -970,15 +970,6 @@ def emissions(
                     == "Avoided Coastal Impacts"
                 ).values
             ].multiply(1e-6)
-        )
-
-        # Fix Natural Regeneration (flux looks too high by 1e1)
-        emissions_afolu.update(
-            emissions_afolu[
-                (
-                    emissions_afolu.reset_index().product_long == "Natural Regeneration"
-                ).values
-            ].multiply(1e-1)
         )
 
     # Drop rows with NaN in all year columns, representing duplicate regions and/or emissions
