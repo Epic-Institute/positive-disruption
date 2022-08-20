@@ -172,13 +172,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
     def piecewise_to_continuous(variable):
-        """
-        It takes a variable name as input, and returns a dataframe with the variable's values for each
-        region, model, and scenario
-
-        :param variable: the name of the variable you want to convert
-        """
-
         # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
         name = (
             pd.read_csv("podi/data/afolu_max_extent_and_flux.csv")
@@ -576,7 +569,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         (afolu_historical.values > 1).any(axis=1)
     ]
 
-    # FIX PEAT RESTORATION; historical values higher than max extent
+    # FIX historical values higher than max extent
     fix_afolu = False
     if fix_afolu is True:
         afolu_historical.update(
@@ -588,6 +581,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 ).values
             ].multiply(1e-2)
         )
+
+        afolu_historical = afolu_historical.clip(upper=1)
 
     # Plot afolu_historical [% of Max Extent]
     # region
