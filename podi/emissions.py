@@ -2307,17 +2307,28 @@ def emissions(
 
             fig = go.Figure()
 
-            for sector in fig2.sort_values("Emissions", ascending=False)[
-                "sector"
-            ].unique():
+            for sector in (
+                fig2[(fig2["scenario"] == scenario) & (fig2["year"] == proj_end_year)]
+                .sort_values("Emissions", ascending=False)["sector"]
+                .unique()
+            ):
 
-                for product_long in fig2.sort_values("Emissions", ascending=False)[
-                    "product_long"
-                ].unique():
+                for product_long in (
+                    fig2[
+                        (fig2["scenario"] == scenario) & (fig2["year"] == proj_end_year)
+                    ]
+                    .sort_values("Emissions", ascending=False)["product_long"]
+                    .unique()
+                ):
 
-                    for flow_long in fig2.sort_values("Emissions", ascending=False)[
-                        "flow_long"
-                    ].unique():
+                    for flow_long in (
+                        fig2[
+                            (fig2["scenario"] == scenario)
+                            & (fig2["year"] == proj_end_year)
+                        ]
+                        .sort_values("Emissions", ascending=False)["flow_long"]
+                        .unique()
+                    ):
 
                         fig.add_trace(
                             go.Scatter(
