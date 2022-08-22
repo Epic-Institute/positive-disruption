@@ -90,7 +90,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = False
+recalc_afolu = True
 # region
 
 if recalc_afolu is True:
@@ -118,7 +118,7 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = True
+recalc_emissions = False
 # region
 
 if recalc_emissions is True:

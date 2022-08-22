@@ -793,7 +793,7 @@ def emissions(
         inplace=True,
     )
 
-    for year in afolu_output.loc[:, data_end_year:proj_end_year].columns:
+    for year in afolu_output.loc[:, data_start_year + 1 : proj_end_year].columns:
 
         # Find new adoption in year, multiply by flux and a 'baseline' copy of flux
         emissions_afolu_mitigated_year = afolu_output.parallel_apply(
@@ -960,16 +960,16 @@ def emissions(
     )
 
     # SOME AFOLU RESULTS LOOK INCORRECT, FIX THEM HERE WHILE WAITING FOR TNC FEEDBACK
-    fix_afolu = False
+    fix_afolu = True
     if fix_afolu is True:
-        # Fix Avoided Coastal Impacts (flux looks too high by 1e6)
+        # Fix Avoided Coastal Impacts (flux looks too high by 1e2)
         emissions_afolu.update(
             emissions_afolu[
                 (
                     emissions_afolu.reset_index().product_long
                     == "Avoided Coastal Impacts"
                 ).values
-            ].multiply(1e-6)
+            ].multiply(1e-2)
         )
 
     # Drop rows with NaN in all year columns, representing duplicate regions and/or emissions

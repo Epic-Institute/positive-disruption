@@ -570,7 +570,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     ]
 
     # FIX historical values higher than max extent
-    fix_afolu = False
+    fix_afolu = True
     if fix_afolu is True:
         afolu_historical.update(
             afolu_historical[
@@ -582,7 +582,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ].multiply(1e-2)
         )
 
-        afolu_historical = afolu_historical.clip(upper=1)
+    afolu_historical = afolu_historical.clip(upper=1)
 
     # Plot afolu_historical [% of Max Extent]
     # region
@@ -677,13 +677,16 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .fillna(0)
     )
 
-    # For subvertical/region combos that have one data point, assume the prior year of input data is 95% of this value
+    # For subvertical/region combos that have one data point, assume the prior year of input data is 95% of this value. If the value is zero, set a minimum slope.
     afolu_historical.update(
         afolu_historical[afolu_historical.count(axis=1) == 1].apply(
-            lambda x: x.combine_first(
+            lambda x: x.update(
                 pd.Series(
-                    data=[x.loc[x.first_valid_index()] * 0.95],
-                    index=[x.first_valid_index() - 1],
+                    data=[
+                        min(x.loc[x.first_valid_index()], 1e-3) * 0.95,
+                        min(x.loc[x.first_valid_index()], 1e-3),
+                    ],
+                    index=[x.first_valid_index() - 1, x.first_valid_index()],
                 )
             ),
             axis=1,

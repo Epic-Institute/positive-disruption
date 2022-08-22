@@ -2,7 +2,6 @@
 
 import numpy as np
 import pandas as pd
-import globalwarmingpotentials as gwp
 import fair
 from fair.forward import fair_scm
 from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
@@ -15,7 +14,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 show_figs = True
-save_figs = False
+save_figs = True
 
 # endregion
 
