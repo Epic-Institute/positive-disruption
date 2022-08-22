@@ -2229,7 +2229,11 @@ def emissions(
                 )
             )
 
-            for product_long in fig2["product_long"].unique():
+            for product_long in (
+                fig2[(fig2["sector"] == sector) & (fig2["year"] == proj_end_year)]
+                .sort_values("Emissions", ascending=False)["product_long"]
+                .unique()
+            ):
                 fig.add_trace(
                     go.Scatter(
                         name=product_long,
