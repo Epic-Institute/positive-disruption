@@ -2010,27 +2010,6 @@ def emissions(
         lambda x: x.mul(gwp.data[version][x.name[8]]), axis=1
     )
 
-    # Update all flow_long values to 'CO2e'
-    """
-    emissions_output_co2e = emissions_output_co2e.droplevel("flow_long").reset_index()
-    emissions_output_co2e["flow_long"] = "CO2e"
-
-    emissions_output_co2e = emissions_output_co2e.set_index(
-        [
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
-        ]
-    )
-    """
     # Drop rows with all zero values
     emissions_output_co2e = emissions_output_co2e[
         emissions_output_co2e.sum(axis=1) != 0
@@ -2290,7 +2269,7 @@ def emissions(
 
         scenario = "pathway"
         model = "PD22"
-        df = emissions_output_co2e  # emissions_output[(emissions_output.reset_index().sector == 'Forests & Wetlands').values]
+        df = emissions_output_co2e
 
         fig = (
             df.loc[model]

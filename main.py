@@ -253,7 +253,7 @@ cdr_output.columns = cdr_output.columns.astype(int)
 # CLIMATE #
 ###########
 
-recalc_climate = True
+recalc_climate = False
 # region
 
 if recalc_climate is True:

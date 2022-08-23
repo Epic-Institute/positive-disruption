@@ -289,9 +289,6 @@ def climate(
         [emissions_output_fossil, emissions_output_landuse]
     )
 
-    # Update units from 'MtCO2' to 'Mt'
-    emissions_output_co2 = emissions_output_co2.replace("MtCO2", "Mt")
-
     # Add the updated subset back into the original df
     emissions_output = pd.concat([emissions_output, emissions_output_co2])
 
@@ -372,6 +369,80 @@ def climate(
         axis=1,
     )
 
+    # Plot emissions
+    # region
+
+    #####################
+    # EMISSIONS, BY GAS #
+    #####################
+
+    # region
+
+    for gas in fair_input_gases.keys():  # emissions_output.index.levels[8]
+
+        fig = go.Figure()
+
+        for scenario in emissions_output.index.levels[1]:
+            fig.add_trace(
+                go.Scatter(
+                    name=scenario + ", " + gas,
+                    line=dict(width=3),
+                    x=emissions_output.columns[
+                        emissions_output.columns >= data_end_year
+                    ],
+                    y=emissions_output[
+                        (emissions_output.index.get_level_values(1) == scenario)
+                        & (emissions_output.index.get_level_values(8) == gas)
+                    ]
+                    .loc[:, (emissions_output.columns >= data_end_year)]
+                    .sum()
+                    .squeeze(),
+                    fill="none",
+                )
+            )
+
+        fig.add_trace(
+            go.Scatter(
+                name="Historical",
+                line=dict(width=3, color="black"),
+                x=emissions_output.columns[emissions_output.columns <= data_end_year],
+                y=emissions_output[
+                    (emissions_output.index.get_level_values(1) == scenario)
+                    & (emissions_output.index.get_level_values(8) == gas)
+                ]
+                .loc[:, (emissions_output.columns <= data_end_year)]
+                .sum()
+                .squeeze(),
+                fill="none",
+            )
+        )
+
+        fig.update_layout(
+            title={
+                "text": "Emissions, " + scenario + ", " + gas,
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            yaxis={"title": fair_input_gases[gas] + " " + gas},
+        )
+
+        fig.update_layout(
+            legend=dict(
+                orientation="h", yanchor="bottom", y=1.01, x=0.12, font=dict(size=10)
+            ),
+            margin_b=0,
+            margin_t=60,
+            margin_l=15,
+            margin_r=15,
+        )
+
+        fig.show()
+
+    # endregion
+
+    # endregion
+
     # endregion
 
     ################################################
@@ -389,34 +460,38 @@ def climate(
     for scenario in emissions_output.reset_index().scenario.unique():
 
         # Add in remaining gases needed for fair_input_gases and format for input into FAIR
-        emissions_output_fair = pd.concat(
-            [
-                emissions_output.loc[slice(None), scenario, :]
-                .groupby(["flow_long"])
-                .sum()
-                .T,
-                pd.DataFrame(
-                    index=emissions_output.columns,
-                    columns=[
-                        "CFC11",
-                        "CFC12",
-                        "CFC113",
-                        "CFC114",
-                        "CFC115",
-                        "CCl4",
-                        "Methyl chloroform",
-                        "HCFC22",
-                        "Halon 1211",
-                        "Halon 1202",
-                        "Halon 1301",
-                        "Halon 2401",
-                        "CH3Br",
-                        "CH3Cl",
-                    ],
-                ).fillna(0),
-            ],
-            axis=1,
-        ).reset_index()
+        emissions_output_fair = (
+            pd.concat(
+                [
+                    emissions_output.loc[slice(None), scenario, :]
+                    .groupby(["flow_long"])
+                    .sum()
+                    .T,
+                    pd.DataFrame(
+                        index=emissions_output.columns,
+                        columns=[
+                            "CFC11",
+                            "CFC12",
+                            "CFC113",
+                            "CFC114",
+                            "CFC115",
+                            "CCl4",
+                            "Methyl chloroform",
+                            "HCFC22",
+                            "Halon 1211",
+                            "Halon 1202",
+                            "Halon 1301",
+                            "Halon 2401",
+                            "CH3Br",
+                            "CH3Cl",
+                        ],
+                    ),
+                ],
+                axis=1,
+            )
+            .fillna(0)
+            .reset_index()
+        )
 
         emissions_output_fair = np.array(
             emissions_output_fair[list(["index"]) + list(fair_input_gases.keys())]
@@ -425,10 +500,10 @@ def climate(
         C_temp, F_temp, T_temp = fair.forward.fair_scm(
             emissions=emissions_output_fair,
             natural=np.zeros((len(emissions_output_fair), 2)),
-            F_solar=0.1
+            F_solar=1e-3
             * np.sin(2 * np.pi * np.arange(len(emissions_output_fair)) / 11.5),
             F_volcanic=-gamma.rvs(
-                0.2, size=len(emissions_output_fair), random_state=100
+                1e-6, size=len(emissions_output_fair), random_state=100
             ),
         )
 
@@ -555,7 +630,11 @@ def climate(
         ).values
     ].sort_index()
 
-    # Convert units from emissions_output to assumed units for FAIR model input
+    emissions_output_co2e.reset_index(inplace=True)
+    emissions_output_co2e["flow_long"] = "CO2"
+    emissions_output_co2e.set_index(emissions_output.index.names, inplace=True)
+
+    # Convert units from emissions_output_co2e to assumed units for FAIR model input
     emissions_output_co2e = emissions_output_co2e.apply(
         lambda x: x.multiply(
             pd.read_csv(
@@ -575,7 +654,6 @@ def climate(
 
     climate_output_concentration_co2e = pd.DataFrame()
     climate_output_forcing_co2e = pd.DataFrame()
-    climate_output_temperature_co2e = pd.DataFrame()
 
     for scenario in emissions_output_co2e.reset_index().scenario.unique():
 
@@ -589,10 +667,10 @@ def climate(
         C_co2e_temp, F_co2e_temp, T_co2e_temp = fair.forward.fair_scm(
             emissions=emissions_output_co2e_fair,
             natural=np.zeros((len(emissions_output_co2e), 2)),
-            F_solar=0.1
+            F_solar=1e-3
             * np.sin(2 * np.pi * np.arange(len(emissions_output_co2e)) / 11.5),
             F_volcanic=-gamma.rvs(
-                0.2, size=len(emissions_output_co2e), random_state=100
+                1e-3, size=len(emissions_output_co2e), random_state=100
             ),
             useMultigas=False,
         )
@@ -655,7 +733,7 @@ def climate(
     fig.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=3),
+            line=dict(width=3, color="red", dash="dot"),
             x=climate_output_concentration_co2e.columns[
                 climate_output_concentration_co2e.columns >= data_end_year
             ],
@@ -671,7 +749,7 @@ def climate(
     fig.add_trace(
         go.Scatter(
             name="PD22",
-            line=dict(width=3),
+            line=dict(width=3, color="purple", dash="dashdot"),
             x=climate_output_concentration_co2e.columns[
                 climate_output_concentration_co2e.columns >= data_end_year
             ],
@@ -696,7 +774,12 @@ def climate(
 
     fig.update_layout(
         legend=dict(
-            orientation="h", yanchor="bottom", y=1.01, x=0.12, font=dict(size=10)
+            orientation="h",
+            yanchor="bottom",
+            y=1.01,
+            xanchor="center",
+            x=0.5,
+            font=dict(size=10),
         ),
         margin_b=0,
         margin_t=60,
@@ -793,21 +876,35 @@ def climate(
 
     fig = go.Figure()
 
-    for scenario in climate_output_forcing_co2e.index.levels[0]:
-        fig.add_trace(
-            go.Scatter(
-                name=scenario.capitalize(),
-                line=dict(width=3),
-                x=climate_output_forcing_co2e.columns[
-                    climate_output_forcing_co2e.columns >= data_end_year
-                ],
-                y=climate_output_forcing_co2e.loc[scenario]
-                .loc[:, data_end_year:]
-                .squeeze(),
-                fill="none",
-                legendgroup=scenario,
-            )
+    fig.add_trace(
+        go.Scatter(
+            name="Baseline",
+            line=dict(width=3, color="red", dash="dot"),
+            x=climate_output_forcing_co2e.columns[
+                climate_output_forcing_co2e.columns >= data_end_year
+            ],
+            y=climate_output_forcing_co2e.loc["baseline"]
+            .loc[:, data_end_year:]
+            .squeeze(),
+            fill="none",
+            legendgroup="baseline",
         )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name=scenario.capitalize(),
+            line=dict(width=3, color="purple", dash="dashdot"),
+            x=climate_output_forcing_co2e.columns[
+                climate_output_forcing_co2e.columns >= data_end_year
+            ],
+            y=climate_output_forcing_co2e.loc[scenario]
+            .loc[:, data_end_year:]
+            .squeeze(),
+            fill="none",
+            legendgroup=scenario,
+        )
+    )
 
     fig.add_trace(
         go.Scatter(
@@ -835,7 +932,12 @@ def climate(
 
     fig.update_layout(
         legend=dict(
-            orientation="h", yanchor="bottom", y=1.01, x=0.12, font=dict(size=10)
+            orientation="h",
+            yanchor="bottom",
+            y=1.01,
+            xanchor="center",
+            x=0.5,
+            font=dict(size=10),
         ),
         margin_b=0,
         margin_t=60,
@@ -937,9 +1039,9 @@ def climate(
             name="Historical",
             line=dict(width=3, color="black"),
             x=np.arange(data_start_year, data_end_year + 1, 1),
-            y=climate_historical_temperature.loc[data_start_year:data_end_year]
-            .squeeze()
-            .squeeze(),
+            y=climate_historical_temperature.loc[
+                data_start_year:data_end_year
+            ].squeeze(),
             fill="none",
             legendgroup="hist",
         )
@@ -950,9 +1052,9 @@ def climate(
             name="Historical",
             line=dict(width=3, color="black"),
             x=np.arange(data_start_year, data_end_year + 1, 1),
-            y=climate_historical_temperature.loc[data_start_year:data_end_year]
-            .squeeze()
-            .squeeze(),
+            y=climate_historical_temperature.loc[
+                data_start_year:data_end_year
+            ].squeeze(),
             fill="none",
             legendgroup="hist",
             showlegend=False,
@@ -963,23 +1065,40 @@ def climate(
     fig.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=3),
+            line=dict(width=3, color="red", dash="dot"),
             x=np.arange(data_end_year, proj_end_year + 1, 1),
-            y=climate_output_temperature.loc["baseline"].loc[:, data_end_year:],
+            y=(
+                climate_output_temperature.loc["baseline"].loc[:, data_end_year:]
+                + (
+                    climate_historical_temperature.loc[data_end_year].values[0]
+                    - climate_output_temperature.loc["baseline"]
+                    .loc[:, data_end_year]
+                    .values[0]
+                )
+            ).squeeze(),
             fill="none",
             legendgroup="baseline",
+            showlegend=False,
         )
     )
 
     fig.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=3),
+            line=dict(width=3, color="red", dash="dot"),
             x=np.arange(data_end_year, proj_end_year + 1, 1),
-            y=climate_output_temperature.loc["baseline"].loc[:, data_end_year:],
+            y=(
+                climate_output_temperature.loc["baseline"].loc[:, data_end_year:]
+                + (
+                    climate_historical_temperature.loc[data_end_year].values[0]
+                    - climate_output_temperature.loc["baseline"]
+                    .loc[:, data_end_year]
+                    .values[0]
+                )
+            ).squeeze(),
             fill="none",
             legendgroup="baseline",
-            showlegend=False,
+            showlegend=True,
         ),
         secondary_y=True,
     )
@@ -987,9 +1106,17 @@ def climate(
     fig.add_trace(
         go.Scatter(
             name=scenario.capitalize(),
-            line=dict(width=3),
+            line=dict(width=3, color="purple", dash="dashdot"),
             x=np.arange(data_end_year, proj_end_year + 1, 1),
-            y=climate_output_temperature.loc[scenario].loc[:, data_end_year:],
+            y=(
+                climate_output_temperature.loc[scenario].loc[:, data_end_year:]
+                + (
+                    climate_historical_temperature.loc[data_end_year].values[0]
+                    - climate_output_temperature.loc[scenario]
+                    .loc[:, data_end_year]
+                    .values[0]
+                )
+            ).squeeze(),
             fill="none",
             legendgroup="pd22",
         )
@@ -998,7 +1125,7 @@ def climate(
     # Show temperature uncertainty range
 
     # region
-    range = "pd22"
+    range = "other"
     # Historical
     # region
 
@@ -1070,7 +1197,17 @@ def climate(
             go.Scatter(
                 name="dau21_upper",
                 x=np.arange(data_end_year, proj_end_year + 1, 1),
-                y=climate_output_temperature.loc[scenario].loc[:, data_end_year:] * 1.2,
+                y=(
+                    (climate_output_temperature.loc[scenario].loc[:, data_end_year:])
+                    + (
+                        climate_historical_temperature.loc[data_end_year].values[0]
+                        - climate_output_temperature.loc[scenario]
+                        .loc[:, data_end_year]
+                        .values[0]
+                    )
+                )
+                .multiply(1.2)
+                .squeeze(),
                 mode="lines",
                 marker=dict(color="#444"),
                 line=dict(width=0),
@@ -1082,7 +1219,17 @@ def climate(
             go.Scatter(
                 name="dau21_lower",
                 x=np.arange(data_end_year, proj_end_year + 1, 1),
-                y=climate_output_temperature.loc[scenario].loc[:, data_end_year:] * 0.8,
+                y=(
+                    (climate_output_temperature.loc[scenario].loc[:, data_end_year:])
+                    + (
+                        climate_historical_temperature.loc[data_end_year].values[0]
+                        - climate_output_temperature.loc[scenario]
+                        .loc[:, data_end_year]
+                        .values[0]
+                    )
+                )
+                .multiply(0.8)
+                .squeeze(),
                 marker=dict(color="#444"),
                 line=dict(width=0),
                 mode="lines",
@@ -1097,17 +1244,29 @@ def climate(
         # PD22 expanding
         # region
 
-        tproj_err = pd.read_csv(
-            "podi/data/temperature_change_range_historical.csv"
-        ).set_index("Range")
+        tproj_err = pd.read_csv("podi/data/temperature_change_range.csv").set_index(
+            "Range"
+        )
         tproj_err.columns = temp_range.columns.astype(int)
 
         fig.add_trace(
             go.Scatter(
                 name="dau21_upper",
                 x=np.arange(data_end_year, proj_end_year + 1, 1),
-                y=climate_output_temperature.loc[scenario].loc[:, data_end_year:] * 1.2
-                + temp_range.loc["dau21_upper", data_end_year:proj_end_year].squeeze(),
+                y=(
+                    (
+                        climate_output_temperature.loc[scenario].loc[:, data_end_year:]
+                        + temp_range.loc["dau21_upper", data_end_year:proj_end_year]
+                    )
+                    + (
+                        climate_historical_temperature.loc[data_end_year].values[0]
+                        - climate_output_temperature.loc[scenario]
+                        .loc[:, data_end_year]
+                        .values[0]
+                    )
+                )
+                .multiply(1.2)
+                .squeeze(),
                 mode="lines",
                 marker=dict(color="#444"),
                 line=dict(width=0),
@@ -1119,8 +1278,20 @@ def climate(
             go.Scatter(
                 name="dau21_lower",
                 x=np.arange(data_end_year, proj_end_year + 1, 1),
-                y=climate_output_temperature.loc[scenario].loc[:, data_end_year:] * 0.8
-                + temp_range.loc["dau21_lower", data_end_year:proj_end_year].squeeze(),
+                y=(
+                    (
+                        climate_output_temperature.loc[scenario].loc[:, data_end_year:]
+                        + temp_range.loc["dau21_lower", data_end_year:proj_end_year]
+                    )
+                    + (
+                        climate_historical_temperature.loc[data_end_year].values[0]
+                        - climate_output_temperature.loc[scenario]
+                        .loc[:, data_end_year]
+                        .values[0]
+                    )
+                )
+                .multiply(0.8)
+                .squeeze(),
                 marker=dict(color="#444"),
                 line=dict(width=0),
                 mode="lines",
@@ -1146,7 +1317,12 @@ def climate(
 
     fig.update_layout(
         legend=dict(
-            orientation="h", yanchor="bottom", y=1.01, x=0.1, font=dict(size=10)
+            orientation="h",
+            yanchor="bottom",
+            y=1.01,
+            xanchor="center",
+            x=0.5,
+            font=dict(size=10),
         ),
         margin_b=0,
         margin_t=60,
@@ -1182,7 +1358,11 @@ def climate(
         abs(
             (
                 climate_historical_concentration
-                - climate_output_concentration[climate_historical_concentration.columns]
+                - climate_output_concentration.loc[
+                    scenario, climate_historical_concentration.columns.values, :
+                ]
+                .droplevel("scenario")
+                .T
             ).dropna()
             / climate_historical_concentration
         )
@@ -1194,7 +1374,7 @@ def climate(
             (
                 climate_historical_forcing
                 - pd.DataFrame(
-                    climate_output_forcing.sum(axis=1)[climate_historical_forcing.index]
+                    climate_output_forcing.sum(axis=0)[climate_historical_forcing.index]
                 )
             ).dropna()
             / climate_historical_forcing
@@ -1207,7 +1387,7 @@ def climate(
             (
                 climate_historical_temperature
                 - pd.DataFrame(
-                    climate_output_temperature.sum(axis=1)[
+                    climate_output_temperature.sum(axis=0)[
                         climate_historical_temperature.index
                     ]
                 )
@@ -1219,7 +1399,7 @@ def climate(
 
     # Plot error
     climate_error_concentration.plot(
-        legend=False, title="Error between PD22 and NOAA GHG Concentrations", ylabel="%"
+        legend=True, title="Error between PD22 and NOAA GHG Concentrations", ylabel="%"
     )
 
     climate_error_forcing.plot(
@@ -1264,33 +1444,41 @@ def climate(
     climate_historical_temperature["unit"] = "F"
     climate_historical_temperature.set_index(pyam.IAMC_IDX, inplace=True)
 
-    climate_output_concentration = climate_output_concentration.T
     climate_output_concentration["model"] = "PD22"
-    climate_output_concentration["scenario"] = scenario
     climate_output_concentration["region"] = "world"
     climate_output_concentration["variable"] = (
-        "Concentration|" + climate_output_concentration.index
-    )
+        "Concentration|" + climate_output_concentration.reset_index().product_long
+    ).values
     climate_output_concentration["unit"] = "PPM"
-    climate_output_concentration.set_index(pyam.IAMC_IDX, inplace=True)
+    climate_output_concentration = (
+        climate_output_concentration.droplevel("product_long")
+        .reset_index()
+        .set_index(pyam.IAMC_IDX)
+    )
 
-    climate_output_forcing = climate_output_forcing.T
     climate_output_forcing["model"] = "PD22"
-    climate_output_forcing["scenario"] = scenario
     climate_output_forcing["region"] = "world"
     climate_output_forcing["variable"] = (
-        "Radiative forcing|" + climate_output_forcing.index
-    )
+        "Radiative forcing|" + climate_output_forcing.reset_index().product_long
+    ).values
     climate_output_forcing["unit"] = "W/m2"
-    climate_output_forcing.set_index(pyam.IAMC_IDX, inplace=True)
+    climate_output_forcing = (
+        climate_output_forcing.droplevel("product_long")
+        .reset_index()
+        .set_index(pyam.IAMC_IDX)
+    )
 
-    climate_output_temperature = climate_output_temperature.T
     climate_output_temperature["model"] = "PD22"
-    climate_output_temperature["scenario"] = scenario
     climate_output_temperature["region"] = "world"
-    climate_output_temperature["variable"] = climate_output_temperature.index
+    climate_output_temperature["variable"] = (
+        "Temperature change|" + climate_output_temperature.reset_index().product_long
+    ).values
     climate_output_temperature["unit"] = "F"
-    climate_output_temperature.set_index(pyam.IAMC_IDX, inplace=True)
+    climate_output_temperature = (
+        climate_output_temperature.droplevel("product_long")
+        .reset_index()
+        .set_index(pyam.IAMC_IDX)
+    )
 
     # endregion
 
