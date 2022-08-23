@@ -1497,7 +1497,7 @@ def climate(
             climate_output_forcing,
             climate_output_temperature,
         ]
-    ).to_csv("podi/data/output/climate_output.csv")
+    ).to_csv("podi/data/output/climate/climate_output.csv")
 
     # endregion
 

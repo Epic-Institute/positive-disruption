@@ -21,8 +21,6 @@ def adoption_curve(
 ):
     """Given input data of arbitrary start/end date, and desired output start/end date, and model to fit to this data (linear/logistic/generalized logistic), this function provides output that combines input data with projected change in that data"""
 
-    print(x.name)
-
     # Take 10 years prior data to fit logistic function
     x_data = np.arange(0, output_end_date - input_data.last_valid_index() + 11, 1)
     y_data = np.zeros((1, len(x_data)))
@@ -41,13 +39,6 @@ def adoption_curve(
         neg = False
 
     y_data = np.array((pd.DataFrame(y_data).interpolate(method="linear")).squeeze())
-
-    # Save intermediate projections to logfile
-    pd.DataFrame(y_data).T.to_csv(
-        "podi/data/adoption_projection_logfile1.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/adoption_projection_logfile1.csv"),
-    )
 
     # Load search bounds for logistic function parameters
     search_bounds = [
@@ -102,41 +93,6 @@ def adoption_curve(
             y[y >= input_data.loc[input_data.last_valid_index()]].squeeze(),
         ]
     )[: (output_end_date - input_data.first_valid_index() + 1)]
-
-    # Save projections to logfile
-    pd.DataFrame(y).to_csv(
-        "podi/data/adoption_projection_logfile2.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/adoption_projection_logfile2.csv"),
-    )
-
-    # Save logistic function parameters to output file for inspection
-    pd.DataFrame(
-        (
-            input_data.name[0],
-            genetic_parameters[0],
-            genetic_parameters[1],
-            genetic_parameters[2],
-            genetic_parameters[3],
-        )
-    ).T.to_csv(
-        "podi/data/adoption_curve_parameters.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/adoption_curve_parameters.csv"),
-    )
-
-    # Save model to output file
-    pd.Series(
-        data=y[
-            : len(np.arange(input_data.first_valid_index(), output_end_date + 1, 1))
-        ],
-        index=np.arange(input_data.first_valid_index(), output_end_date + 1, 1),
-        name=input_data.name,
-    ).T.to_csv(
-        "podi/data/adoption_curve_models.csv",
-        mode="a",
-        header=not os.path.exists("podi/data/adoption_curve_models.csv"),
-    )
 
     return pd.Series(
         data=y[

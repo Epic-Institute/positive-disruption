@@ -2760,10 +2760,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     ef_ratio = ef_ratio[ef_ratio.index.get_level_values(4) == "floor"].sort_index()
 
-    # Clear adoption curve demand file before running adoption_curve_demand()
-    file = open("podi/data/energy_adoption_curves.csv", "w")
-    file.close()
-
     # Run adoption_curve_demand() to calculate logistics curves for energy reduction ratios
     ef_ratio.parallel_apply(
         lambda x: adoption_curve_demand(
@@ -3179,10 +3175,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         usecols=["region", "product_short", "scenario", "sector", "metric", "value"],
     ).set_index(["region", "product_short", "scenario", "sector", "metric"])
     parameters = parameters.sort_index()
-
-    # Clear parameter output file before running adoption_curve()
-    file = open("podi/data/adoption_curve_parameters.csv", "w")
-    file.close()
 
     per_elec_supply.update(
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]

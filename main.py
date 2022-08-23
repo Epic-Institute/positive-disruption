@@ -35,7 +35,7 @@ scenario = "pathway"
 # ENERGY #
 ##########
 
-recalc_energy = False
+recalc_energy = True
 # region
 
 if recalc_energy is True:
@@ -90,7 +90,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = False
+recalc_afolu = True
 # region
 
 if recalc_afolu is True:
@@ -118,7 +118,7 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = False
+recalc_emissions = True
 # region
 
 if recalc_emissions is True:
@@ -253,7 +253,7 @@ cdr_output.columns = cdr_output.columns.astype(int)
 # CLIMATE #
 ###########
 
-recalc_climate = False
+recalc_climate = True
 # region
 
 if recalc_climate is True:
