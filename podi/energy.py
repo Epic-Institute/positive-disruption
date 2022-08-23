@@ -1942,7 +1942,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         .droplevel(["EIA Region", "EIA Product"])
     ).sort_index()
 
-    change_parameters = pd.DataFrame(
+    """change_parameters = pd.DataFrame(
         index=[
             "parameter a min",
             "parameter a max",
@@ -1953,25 +1953,24 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         data=[-1e3, 1e3, 0, 0, 0],
     )
     change_parameters.index.name = "variable"
-    change_parameters.rename(columns={0: "Unnamed: 5"}, inplace=True)
-    change_parameters.reset_index(inplace=True)
+    change_parameters.rename(columns={0: "value"}, inplace=True)
 
     energy_baseline = energy_baseline.apply(
         lambda x: pd.concat(
             [
                 x.loc[:data_end_year].fillna(0) * 0
                 + adoption_curve(
-                    x.loc[:data_end_year].dropna(),
-                    data_end_year - 1,
-                    data_end_year,
-                    "linear",
-                    change_parameters,
+                    input_data=x.loc[:data_end_year-1],
+                    output_start_date=data_end_year - 1,
+                    output_end_date=data_end_year,
+                    change_model="linear",
+                    change_parameters=change_parameters,
                 ),
                 x.loc[data_end_year + 1 :],
             ]
         ),
         axis=1,
-    )
+    )"""
 
     energy_baseline = energy_baseline.parallel_apply(
         lambda x: pd.concat(

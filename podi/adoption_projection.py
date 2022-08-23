@@ -21,6 +21,8 @@ def adoption_curve(
 ):
     """Given input data of arbitrary start/end date, and desired output start/end date, and model to fit to this data (linear/logistic/generalized logistic), this function provides output that combines input data with projected change in that data"""
 
+    print(x.name)
+
     # Take 10 years prior data to fit logistic function
     x_data = np.arange(0, output_end_date - input_data.last_valid_index() + 11, 1)
     y_data = np.zeros((1, len(x_data)))
@@ -78,6 +80,7 @@ def adoption_curve(
             min(0.04, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
             0,
             0,
+            y_data[10],
         )
         genetic_parameters = [0, 0, 0, 0]
     else:

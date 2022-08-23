@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 pandarallel.initialize(progress_bar=True)
 
 show_figs = False
-save_figs = True
+save_figs = False
 
 # endregion
 
@@ -310,7 +310,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     ).values
                 ]
                 .loc[x.name[0], x.name[1], x.name[2], x.name[3], x.name[4]]
-                .iloc[0:33]
+                .iloc[0 : proj_end_year - 2018 + 1]
                 .values
             ),
             axis=1,

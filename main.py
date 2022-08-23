@@ -23,7 +23,7 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 
 data_start_year = 1990
 data_end_year = 2020
-proj_end_year = 2050
+proj_end_year = 2100
 
 # endregion
 
@@ -268,7 +268,7 @@ if recalc_climate is True:
     )
 
 climate_output = pd.DataFrame(
-    pd.read_csv("podi/data/output/climate_output.csv")
+    pd.read_csv("podi/data/output/climate/climate_output.csv")
 ).set_index(pyam.IAMC_IDX)
 climate_output.columns = climate_output.columns.astype(int)
 
@@ -420,14 +420,14 @@ energy_output = energy_output[
 
 # Save as regional-level files and a global-level file
 for output in [
-    (energy_output, "energy_output"),
-    (afolu_output, "afolu_output"),
-    (emissions_output, "emissions_output"),
+    (energy_output, "energy"),
+    (afolu_output, "afolu"),
+    (emissions_output, "emissions"),
     (emissions_wedges, "emissions_wedges"),
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].to_csv(
-            "podi/data/output/" + output[1] + "_" + region + ".csv"
+            "podi/data/output/" + output[1] + "/" + region + ".csv"
         )
     output_global = (
         output[0]
@@ -465,7 +465,7 @@ for output in [
         ],
         inplace=True,
     )
-    output_global.to_csv("podi/data/output/" + output[1] + "_" + "world" + ".csv")
+    output_global.to_csv("podi/data/output/" + output[1] + "/" + "world" + ".csv")
 
 # endregion
 

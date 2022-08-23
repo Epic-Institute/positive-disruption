@@ -14,7 +14,7 @@ import datapane as dp
 
 from podi.curve_smooth import curve_smooth
 
-show_figs = True
+show_figs = False
 save_figs = True
 
 # endregion
