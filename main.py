@@ -283,6 +283,7 @@ recalc_analysis = False
 
 if recalc_analysis is True:
     results_analysis(
+        scenario,
         energy_output,
         afolu_output,
         emissions_output,
