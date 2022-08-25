@@ -494,7 +494,7 @@ def climate(
         )
 
         emissions_output_fair = np.array(
-            emissions_output_fair[list(["index"]) + list(fair_input_gases.keys())]
+            emissions_output_fair[list(["year"]) + list(fair_input_gases.keys())]
         )
 
         C_temp, F_temp, T_temp = fair.forward.fair_scm(
@@ -1129,9 +1129,9 @@ def climate(
     # Historical
     # region
 
-    temp_range = pd.read_csv("podi/data/temperature_change_range.csv").set_index(
-        "Range"
-    )
+    temp_range = pd.read_csv(
+        "podi/data/climate_temperature_change_range.csv"
+    ).set_index("Range")
     temp_range.columns = temp_range.columns.astype(int)
 
     fig.add_trace(
@@ -1244,9 +1244,9 @@ def climate(
         # PD22 expanding
         # region
 
-        tproj_err = pd.read_csv("podi/data/temperature_change_range.csv").set_index(
-            "Range"
-        )
+        tproj_err = pd.read_csv(
+            "podi/data/climate_temperature_change_range.csv"
+        ).set_index("Range")
         tproj_err.columns = temp_range.columns.astype(int)
 
         fig.add_trace(

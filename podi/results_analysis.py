@@ -12,8 +12,6 @@ from plotly import graph_objects as go
 from bokeh.resources import INLINE, CDN
 import datapane as dp
 
-from podi.curve_smooth import curve_smooth
-
 show_figs = False
 save_figs = True
 
@@ -2482,14 +2480,7 @@ def results_analysis(
 
     # region
 
-    agriculture = curve_smooth(
-        afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
-        .loc[:, data_start_year:proj_end_year]
-        .groupby(["sector", "product_long"])
-        .sum(),
-        "quadratic",
-        29,
-    )
+    agriculture = afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]].loc[:, data_start_year:proj_end_year].groupby(["sector", "product_long"]).sum()
 
     fig = agriculture.T
     fig.index.name = "year"

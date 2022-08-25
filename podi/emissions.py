@@ -34,7 +34,7 @@ def emissions(
     # region
 
     # Load emissions factors (currently a manually produced file). Emissions factors attribute emissions to the sector where the emissions are generated, e.g. electricity use in Buildings/Industry is zero emissions since those emissions are attributed to the Electric Power sector. Heat not produced on-site in Buildings/Industry is zero emissions since those emissions are attributed to the Industrial sector.
-    emission_factors = pd.read_csv("podi/data/emission_factors.csv").set_index(
+    emission_factors = pd.read_csv("podi/data/emissions_factors.csv").set_index(
         pyam.IAMC_IDX
     )
     emission_factors = emission_factors[~emission_factors.index.duplicated()]
@@ -52,7 +52,7 @@ def emissions(
                     x.name[1],
                     x.name[2],
                     "|".join([x.name[6], x.name[9]]),
-                ]
+                ].loc[:, data_start_year:proj_end_year]
             )
             .squeeze()
             .rename(x.name)
@@ -309,11 +309,11 @@ def emissions(
 
         # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
         name = (
-            pd.read_csv("podi/data/afolu_max_extent_and_flux.csv")
-            .drop(columns=["Region", "Country"])
+            pd.read_csv("podi/data/TNC/flux.csv")
+            .drop(columns=["Region Group", "Region"])
             .rename(
                 columns={
-                    "iso": "region",
+                    "ISO": "region",
                     "Model": "model",
                     "Scenario": "scenario",
                     "Unit": "unit",
@@ -322,11 +322,11 @@ def emissions(
             .replace("Pathway", scenario)
         )
 
-        # Create a 'variable' column that concatenates the 'Subvector' and 'Metric' columns
+        # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
         name["variable"] = name.apply(
-            lambda x: "|".join([x["Subvector"], x["Metric"]]), axis=1
+            lambda x: "|".join([x["Subvertical"], x["Metric"]]), axis=1
         )
-        name.drop(columns=["Subvector", "Metric"], inplace=True)
+        name.drop(columns=["Subvertical", "Metric"], inplace=True)
 
         # Filter for rows that have 'variable' (either 'Max extent' or 'Avg mitigation potential flux')
         name = name[name["variable"].str.contains(variable)]
@@ -423,14 +423,14 @@ def emissions(
     # Define the flux of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
     afolu_avoided = (
         pd.DataFrame(
-            pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
-            .drop(columns=["Region", "Country"])
+            pd.read_csv("podi/data/TNC/avoided_subverticals_input.csv")
+            .drop(columns=["Region Group", "Region"])
             .rename(
                 columns={
-                    "iso": "region",
+                    "ISO": "region",
                     "Model": "model",
                     "Scenario": "scenario",
-                    "Subvector": "variable",
+                    "Subvertical": "variable",
                     "Unit": "unit",
                 }
             )
@@ -583,7 +583,10 @@ def emissions(
                 margin_r=10,
             )
 
-            if subvertical == "Improved Forest Mgmt|Avg mitigation potential flux":
+            if (
+                subvertical
+                == "Improved Forest Management|Avg mitigation potential flux"
+            ):
                 fig.update_layout(yaxis={"title": "tCO2e/m3/yr"})
 
             if (
@@ -2492,7 +2495,7 @@ def emissions(
         #########################################################
         # GHG EMISSIONS MITIGATION WEDGES ALL SECTORS ANIMATION #
         #########################################################
-
+        """
         # region
 
         scenario = "pathway"
@@ -2621,7 +2624,7 @@ def emissions(
             )
 
         # endregion
-
+        """
     # endregion
 
     # endregion

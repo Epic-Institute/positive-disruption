@@ -24,13 +24,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # Load the 'Historical Observations' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
+    # Load the 'Historical Observations' tab of TNC's 'Positive Disruption NCS Verticals' google spreadsheet
     afolu_historical = (
-        pd.DataFrame(pd.read_csv("podi/data/afolu_historical.csv"))
-        .drop(columns=["Region", "Country"])
+        pd.DataFrame(pd.read_csv("podi/data/TNC/historical_observations.csv"))
+        .drop(columns=["Region Group", "Region"])
         .rename(
             columns={
-                "iso": "region",
+                "ISO": "region",
                 "Model": "model",
                 "Scenario": "scenario",
                 "Unit": "unit",
@@ -41,14 +41,14 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # 'Avoided Peat Impacts', 'Avoided Forest Conversion', and 'Avoided Coastal Impacts' subverticals do not have historical adoption data, so these are set to zero
     afolu_historical.update(
-        afolu_historical[afolu_historical.Subvector.str.contains("Avoided")].fillna(0)
+        afolu_historical[afolu_historical.Subvertical.str.contains("Avoided")].fillna(0)
     )
 
-    # Create a 'variable' column that concatenates the 'Subvector' and 'Metric' columns
+    # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
     afolu_historical["variable"] = afolu_historical.apply(
-        lambda x: "|".join([x["Subvector"], x["Metric"]]), axis=1
+        lambda x: "|".join([x["Subvertical"], x["Metric"]]), axis=1
     )
-    afolu_historical.drop(columns=["Subvector", "Metric"], inplace=True)
+    afolu_historical.drop(columns=["Subvertical", "Metric"], inplace=True)
 
     # Set the index to IAMC format
     afolu_historical = afolu_historical.set_index(pyam.IAMC_IDX)
@@ -143,7 +143,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             xaxis1_rangeslider_visible=True,
         )
 
-        if subvertical == "Improved Forest Mgmt|Observed adoption":
+        if subvertical == "Improved Forest Management|Observed adoption":
             fig.update_layout(yaxis={"title": "m3"})
 
         if subvertical == "Nitrogen Fertilizer Management|Observed adoption":
@@ -172,13 +172,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
     def piecewise_to_continuous(variable):
-        # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
+        # Load the 'Max Extent' tab of TNC's 'Positive Disruption NCS Verticals' google spreadsheet
         name = (
-            pd.read_csv("podi/data/afolu_max_extent_and_flux.csv")
-            .drop(columns=["Region", "Country"])
+            pd.read_csv("podi/data/TNC/max_extent.csv")
+            .drop(columns=["Region Group", "Region"])
             .rename(
                 columns={
-                    "iso": "region",
+                    "ISO": "region",
                     "Model": "model",
                     "Scenario": "scenario",
                     "Unit": "unit",
@@ -187,11 +187,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             .replace("Pathway", scenario)
         )
 
-        # Create a 'variable' column that concatenates the 'Subvector' and 'Metric' columns
+        # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
         name["variable"] = name.apply(
-            lambda x: "|".join([x["Subvector"], x["Metric"]]), axis=1
+            lambda x: "|".join([x["Subvertical"], x["Metric"]]), axis=1
         )
-        name.drop(columns=["Subvector", "Metric"], inplace=True)
+        name.drop(columns=["Subvertical", "Metric"], inplace=True)
 
         # Filter for rows that have 'variable' (either 'Max extent' or 'Avg mitigation potential flux')
         name = name[name["variable"].str.contains(variable)]
@@ -288,13 +288,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     max_extent = piecewise_to_continuous("Max extent")
 
-    # Shift Improved Forest Mgmt's start year to 2018, and give all years prior to 2018 the value in 2018
+    # Shift Improved Forest Management's start year to 2018, and give all years prior to 2018 the value in 2018
     max_extent.update(
         (
             max_extent[
                 (
                     max_extent.reset_index().variable.str.contains(
-                        "Improved Forest Mgmt"
+                        "Improved Forest Management"
                     )
                 ).values
             ].loc[:, 2018:]
@@ -305,7 +305,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 max_extent[
                     (
                         max_extent.reset_index().variable.str.contains(
-                            "Improved Forest Mgmt"
+                            "Improved Forest Management"
                         )
                     ).values
                 ]
@@ -322,7 +322,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             max_extent[
                 (
                     max_extent.reset_index().variable.str.contains(
-                        "Improved Forest Mgmt"
+                        "Improved Forest Management"
                     )
                 ).values
             ].loc[:, :2018]
@@ -333,7 +333,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 max_extent[
                     (
                         max_extent.reset_index().variable.str.contains(
-                            "Improved Forest Mgmt"
+                            "Improved Forest Management"
                         )
                     ).values
                 ]
@@ -344,16 +344,16 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
     )
 
-    # Define the max extent of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion' by loading the 'Avoided Pathways Input' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
+    # Define the max extent of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion' by loading the 'Avoided Subverticals Input' tab of TNC's 'Positive Disruption NCS Verticals' google spreadsheet
     afolu_avoided = pd.DataFrame(
-        pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
-        .drop(columns=["Region", "Country"])
+        pd.read_csv("podi/data/TNC/avoided_subverticals_input.csv")
+        .drop(columns=["Region Group", "Region"])
         .rename(
             columns={
-                "iso": "region",
+                "ISO": "region",
                 "Model": "model",
                 "Scenario": "scenario",
-                "Subvector": "variable",
+                "Subvertical": "variable",
                 "Unit": "unit",
             }
         )
@@ -459,7 +459,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             margin_r=10,
         )
 
-        if subvertical == "Improved Forest Mgmt|Max extent":
+        if subvertical == "Improved Forest Management|Max extent":
             fig.update_layout(yaxis={"title": "m3"})
 
         if subvertical == "Nitrogen Fertilizer Management|Max extent":
@@ -705,7 +705,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
     afolu_analogs = pd.DataFrame(
-        pd.read_csv("podi/data/afolu_analogs_modeled.csv")
+        pd.read_csv("podi/data/TNC/analogs_modeled.csv")
     ).set_index(["Analog Name"])
     afolu_analogs.columns.rename("Year", inplace=True)
     afolu_analogs.columns = np.arange(
@@ -717,14 +717,14 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Add analogs for 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
     afolu_analogs_avoided = (
         pd.DataFrame(
-            pd.read_csv("podi/data/afolu_avoided_pathways_input.csv")
+            pd.read_csv("podi/data/TNC/avoided_subverticals_input.csv")
             .drop(
                 columns=[
                     "Model",
                     "Scenario",
-                    "iso",
+                    "Region Group",
+                    "ISO",
                     "Region",
-                    "Country",
                     "Unit",
                     "Duration",
                     "Initial Extent (Mha)",
@@ -732,7 +732,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     "Mitigation (MtCO2e/ha)",
                 ]
             )
-            .rename(columns={"Subvector": "Analog name"})
+            .rename(columns={"Subvertical": "Analog name"})
         )
         .fillna(0)
         .drop_duplicates()
@@ -815,7 +815,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # region
     subvertical = pd.DataFrame(
         pd.read_csv(
-            "podi/data/afolu_categories.csv", usecols=["Subvertical", "Analog Name"]
+            "podi/data/TNC/analog_mapping.csv", usecols=["Subvertical", "Analog Name"]
         ).rename(columns={"Subvertical": "variable"})
     )
     subvertical["variable"] = subvertical["variable"] + "|Observed adoption"
@@ -1067,7 +1067,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 margin_r=10,
             )
 
-            if subvertical == "Improved Forest Mgmt|Observed adoption":
+            if subvertical == "Improved Forest Management|Observed adoption":
                 fig.update_layout(yaxis={"title": "m3"})
 
             if subvertical == "Nitrogen Fertilizer Management|Observed adoption":
@@ -1136,7 +1136,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ]:
                 return "Agriculture"
             elif x["product_long"] in [
-                "Improved Forest Mgmt",
+                "Improved Forest Management",
                 "Natural Regeneration",
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",
@@ -1156,7 +1156,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Cropland Soil Health",
                 "Optimal Intensity",
                 "Agroforestry",
-                "Improved Forest Mgmt",
+                "Improved Forest Management",
                 "Natural Regeneration",
                 "Avoided Coastal Impacts",
                 "Avoided Forest Conversion",

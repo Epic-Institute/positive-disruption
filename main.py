@@ -10,7 +10,6 @@ from podi.afolu import afolu
 from podi.emissions import emissions
 from podi.results_analysis import results_analysis
 from podi.cdr.cdr_main import cdr_mix
-from podi.curve_smooth import curve_smooth
 from podi.climate import climate
 from podi.cdr.cdr_util import (
     grid_em_def,
@@ -208,8 +207,6 @@ if recalc_cdr is True:
             .assign(Metric=["Enhanced Weathering", "Other", "LTSSDAC", "HTLSDAC"])
             .set_index("Metric", append=True)
         )
-
-        cdr_subvs = curve_smooth(cdr_subvs, "quadratic", 9).clip(lower=0)
 
         cdr_subvs = pd.concat(
             [cdr_subvs], names=["sector"], keys=["Carbon Dioxide Removal"]

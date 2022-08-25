@@ -146,6 +146,8 @@ adoption_curve_models.csv
 emissions_output.csv
 emissions_output_co2e.csv
 emissions_wedges.csv
-emission_factors.csv
+emissions_factors.csv
 emissions_energy.csv
 energy_baseline.csv
+energy_ef_ratios.csv
+energy_output.csv

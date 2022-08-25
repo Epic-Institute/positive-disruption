@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 from numpy import NaN
+from scipy.interpolate import interp1d
 from podi.adoption_projection import (
     adoption_curve_demand,
     adoption_curve,
@@ -14,8 +15,8 @@ import plotly.graph_objects as go
 
 pandarallel.initialize(progress_bar=True)
 
-show_figs = False
-save_figs = True
+show_figs = True
+save_figs = False
 
 # endregion
 
@@ -1942,48 +1943,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         .droplevel(["EIA Region", "EIA Product"])
     ).sort_index()
 
-    """change_parameters = pd.DataFrame(
-        index=[
-            "parameter a min",
-            "parameter a max",
-            "parameter b min",
-            "parameter b max",
-            "saturation point",
-        ],
-        data=[-1e3, 1e3, 0, 0, 0],
-    )
-    change_parameters.index.name = "variable"
-    change_parameters.rename(columns={0: "value"}, inplace=True)
-
-    energy_baseline = energy_baseline.apply(
-        lambda x: pd.concat(
-            [
-                x.loc[:data_end_year].fillna(0) * 0
-                + adoption_curve(
-                    input_data=x.loc[:data_end_year-1],
-                    output_start_date=data_end_year - 1,
-                    output_end_date=data_end_year,
-                    change_model="linear",
-                    change_parameters=change_parameters,
-                ),
-                x.loc[data_end_year + 1 :],
-            ]
-        ),
-        axis=1,
-    )"""
-
     energy_baseline = energy_baseline.parallel_apply(
         lambda x: pd.concat(
             [x.loc[: data_end_year - 1], x.loc[data_end_year:].cumprod()]
         ),
         axis=1,
-    )
-
-    # Curve smooth projections
-    energy_baseline = (
-        energy_baseline.loc[:, :data_end_year]
-        .join(curve_smooth(energy_baseline.loc[:, data_end_year + 1 :], "linear", 2))
-        .sort_index()
     )
 
     # Save to CSV file
@@ -2811,7 +2775,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     ef_ratios = ef_ratios.loc[:, : energy_baseline.columns[-1]]
     ef_ratios = ef_ratios.sort_index()
 
-    ef_ratios.to_csv("podi/data/ef_ratios.csv")
+    ef_ratios.to_csv("podi/data/energy_ef_ratios.csv")
 
     # Add labels to ef_ratios
     labels = (
@@ -2908,9 +2872,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    addtl_eff = pd.DataFrame(pd.read_csv("podi/data/ef_ratios.csv")).set_index(
-        ["scenario", "region", "sector", "product_short"]
-    )
+    addtl_eff = pd.DataFrame(
+        pd.read_csv("podi/data/energy_ef_ratios.csv")
+    ).set_index(["scenario", "region", "sector", "product_short"])
     addtl_eff.columns = addtl_eff.columns.astype(int)
 
     labels = (
@@ -3184,7 +3148,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 data_end_year,
                 proj_end_year,
                 "logistic",
-                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
+                change_parameters=parameters.loc[
+                    x.name[2], x.name[6], scenario, x.name[3]
+                ],
             ),
             axis=1,
         )
