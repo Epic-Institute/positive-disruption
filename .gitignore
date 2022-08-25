@@ -137,17 +137,19 @@ dmypy.json
 
 # Large files
 CEDS/
+ClimateTRACE/
 EDGAR/
 EIA/
+external/
 FAO/
 IEA/
 IRENA/
-adoption_curve_models.csv
-emissions_output.csv
-emissions_output_co2e.csv
-emissions_wedges.csv
-emissions_factors.csv
-emissions_energy.csv
-energy_baseline.csv
-energy_ef_ratios.csv
-energy_output.csv
+TNC/
+WWS/
+podi/data/emissions_output.csv
+podi/data/emissions_output_co2e.csv
+podi/data/emissions_wedges.csv
+podi/data/energy_baseline.csv
+podi/data/energy_ef_ratios.csv
+podi/data/energy_output.csv
+podi/data/emissions_energy.csv
