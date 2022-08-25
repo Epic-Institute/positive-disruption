@@ -1,0 +1,16 @@
+Vertical,Subvertical,Region,Growth Rate,Analog Name
+Forests & Wetlands,Avoided Coastal Impacts,All,Linear,Comoros Avoided Coastal Impacts
+Forests & Wetlands,Avoided Forest Conversion,All,Linear,Nepal Avoided Deforestation
+Forests & Wetlands,Avoided Peat Impacts,All,Linear,Nepal Avoided Deforestation
+Agriculture,Biochar,All,S-curve,FAO CA
+Forests & Wetlands,Coastal Restoration,All,Linear,Solomon Islands Mangrove Restoration
+Agriculture,Cropland Soil Health,All,S-curve,FAO CA
+Forests & Wetlands,Improved Forest Management,All,S-curve,Certification Adoption
+Agriculture,Improved Rice,All,S-curve,FAO CA
+Forests & Wetlands,Natural Regeneration,All,S-curve,Spanish Reforestation
+Agriculture,Nitrogen Fertilizer Management,All,S-curve,FAO CA
+Agriculture,Optimal Intensity,All,S-curve,FAO CA
+Forests & Wetlands,Peat Restoration,All,S-curve,US Wetlands 2002-2014
+Agriculture,Silvopasture,All,S-curve,FAO CA
+Agriculture,Trees in Croplands,All,S-curve,FAO CA
+Agriculture,Agroforestry,All,S-curve,FAO CA
