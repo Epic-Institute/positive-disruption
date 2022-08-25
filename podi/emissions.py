@@ -33,31 +33,32 @@ def emissions(
 
     # region
 
-    # Load emissions factors (currently a manually produced file). Emissions factors attribute emissions to the sector where the emissions are generated, e.g. electricity use in Buildings/Industry is zero emissions since those emissions are attributed to the Electric Power sector. Heat not produced on-site in Buildings/Industry is zero emissions since those emissions are attributed to the Industrial sector.
-    emission_factors = pd.read_csv("podi/data/emissions_factors.csv").set_index(
-        pyam.IAMC_IDX
+    # Load emissions factors from https://www.ipcc-nggip.iges.or.jp/EFDB/find_ef.php?reset= , select 'Energy' and then 'Export to XLS' and save as emissions_factors.csv in podi/data/external/.
+    # Emissions factors attribute emissions to the sector where the emissions are generated, e.g. electricity use in Buildings/Industry is zero emissions since those emissions are attributed to the Electric Power sector. Heat not produced on-site in Buildings/Industry is zero emissions since those emissions are attributed to the Industrial sector.
+
+    # Load new df with index matching energy_output
+    emissions_factors = pd.DataFrame(
+        index=energy_output.index, columns=energy_output.columns
+    ).fillna(0)
+
+    # Load EFDB emissions factors to fill into emissions_factors df
+    emissions_factors_efdb = pd.read_csv(
+        "podi/data/external/emissions_factors_efdb.csv",
+        usecols=["product_long", "value"],
     )
-    emission_factors = emission_factors[~emission_factors.index.duplicated()]
-    emission_factors.columns = emission_factors.columns.astype(int)
-    emission_factors = emission_factors.loc[
-        :, data_start_year:proj_end_year
-    ].sort_index()
+
+    emissions_factors = emissions_factors.parallel_apply(
+        lambda x: x.add(
+            emissions_factors_efdb[
+                emissions_factors_efdb["product_long"] == x.name[5]
+            ].squeeze()["value"]
+        ),
+        axis=1,
+    )
 
     # Multiply energy by emission factors to get emissions estimates. Note that emission factors for non-energy use flows are set to 0
     emissions_energy = energy_output.parallel_apply(
-        lambda x: x.multiply(
-            (
-                emission_factors.loc[
-                    x.name[0],
-                    x.name[1],
-                    x.name[2],
-                    "|".join([x.name[6], x.name[9]]),
-                ].loc[:, data_start_year:proj_end_year]
-            )
-            .squeeze()
-            .rename(x.name)
-        ),
-        axis=1,
+        lambda x: x.multiply(emissions_factors.loc[x.name]), axis=1
     )
 
     emissions_energy.index = emissions_energy.index.set_levels(
@@ -170,15 +171,6 @@ def emissions(
 
                 fig.show()
 
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=("./charts/emissions-energy-" + str(scenario) + ".html").replace(
-                    " ", ""
-                ),
-                auto_open=False,
-            )
-
         # endregion
 
         ###################################
@@ -275,19 +267,6 @@ def emissions(
             )
 
             fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/mwedges-"
-                    + str(scenario).capitalize()
-                    + "-"
-                    + str(sector).capitalize()
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-            )
 
         # endregion
 

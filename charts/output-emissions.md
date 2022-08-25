@@ -17,6 +17,10 @@ title: Emissions
 
 <br/><br/>
 
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Industrial-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-Residential-pathway.html" height='500' width='150%'></iframe>
 
 <br/><br/>
@@ -55,6 +59,10 @@ title: Emissions
 <br/><br/>
 
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-wedges-Transportation-pathway.html" height='500' width='150%'></iframe>
+
+<br/><br/>
+
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "emissions-wedges-Industrial-pathway.html" height='500' width='150%'></iframe>
 
 <br/><br/>
 

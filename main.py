@@ -34,7 +34,7 @@ scenario = "pathway"
 # ENERGY #
 ##########
 
-recalc_energy = True
+recalc_energy = False
 # region
 
 if recalc_energy is True:
@@ -89,7 +89,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = True
+recalc_afolu = False
 # region
 
 if recalc_afolu is True:

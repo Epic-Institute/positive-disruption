@@ -3,7 +3,6 @@
 import pandas as pd
 import numpy as np
 from scipy.optimize import differential_evolution
-import os
 
 # endregion
 
@@ -16,7 +15,7 @@ def logistic(x, a, b, c, d):
     return c / (1 + np.exp(-a * (x - b))) + d
 
 
-def adoption_curve(
+def adoption_projection(
     input_data, output_start_date, output_end_date, change_model, change_parameters
 ):
     """Given input data of arbitrary start/end date, and desired output start/end date, and model to fit to this data (linear/logistic/generalized logistic), this function provides output that combines input data with projected change in that data"""
@@ -103,7 +102,7 @@ def adoption_curve(
     )
 
 
-def adoption_curve_demand(
+def adoption_projection_demand(
     parameters,
     value,
     scenario,

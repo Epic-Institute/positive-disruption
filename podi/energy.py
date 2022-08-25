@@ -3,15 +3,14 @@
 import pandas as pd
 import numpy as np
 from numpy import NaN
-from scipy.interpolate import interp1d
 from podi.adoption_projection import (
-    adoption_curve_demand,
-    adoption_curve,
+    adoption_projection_demand,
+    adoption_projection,
 )
-from podi.curve_smooth import curve_smooth
-from pandarallel import pandarallel
 import plotly.io as pio
 import plotly.graph_objects as go
+
+from pandarallel import pandarallel
 
 pandarallel.initialize(progress_bar=True)
 
@@ -2724,9 +2723,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     ef_ratio = ef_ratio[ef_ratio.index.get_level_values(4) == "floor"].sort_index()
 
-    # Run adoption_curve_demand() to calculate logistics curves for energy reduction ratios
+    # Run adoption_projection_demand() to calculate logistics curves for energy reduction ratios
     ef_ratio.parallel_apply(
-        lambda x: adoption_curve_demand(
+        lambda x: adoption_projection_demand(
             parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
             x,
             scenario,
@@ -2872,9 +2871,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    addtl_eff = pd.DataFrame(
-        pd.read_csv("podi/data/energy_ef_ratios.csv")
-    ).set_index(["scenario", "region", "sector", "product_short"])
+    addtl_eff = pd.DataFrame(pd.read_csv("podi/data/energy_ef_ratios.csv")).set_index(
+        ["scenario", "region", "sector", "product_short"]
+    )
     addtl_eff.columns = addtl_eff.columns.astype(int)
 
     labels = (
@@ -3143,7 +3142,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     per_elec_supply.update(
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
-            lambda x: adoption_curve(
+            lambda x: adoption_projection(
                 x.loc[: data_end_year - 1],
                 data_end_year,
                 proj_end_year,
@@ -3269,7 +3268,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         lambda x: (x + nonrenew.loc[x.name]).clip(lower=0), axis=1
     )
 
-    # Set renewables generation to meet RELECTR in the proportion estimated by adoption_curve(), and nonrenewable electricity generation that shifts to renewable generation
+    # Set renewables generation to meet RELECTR in the proportion estimated by adoption_projection(), and nonrenewable electricity generation that shifts to renewable generation
     elec_supply.update(
         pd.concat(
             [
@@ -4281,7 +4280,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     per_heat_supply.update(
         per_heat_supply[per_heat_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
-            lambda x: adoption_curve(
+            lambda x: adoption_projection(
                 x.loc[:data_end_year],
                 data_end_year + 1,
                 proj_end_year,
@@ -5172,7 +5171,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             per_transport_supply.index.get_level_values(6).isin(renewables)
         ]
         .parallel_apply(
-            lambda x: adoption_curve(
+            lambda x: adoption_projection(
                 x.loc[:data_end_year],
                 data_end_year + 1,
                 proj_end_year,
