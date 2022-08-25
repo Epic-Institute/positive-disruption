@@ -177,20 +177,20 @@ PD22,pathway,World ,Forests & Wetlands|parameter b min,none,0
 PD22,baseline,World ,Forests & Wetlands|parameter b min,none,0
 PD22,pathway,World ,Forests & Wetlands|saturation point,none,1
 PD22,baseline,World ,Forests & Wetlands|saturation point,none,1
-PD22,pathway,World ,Improved Forest Mgmt|Floor,none,0
-PD22,baseline,World ,Improved Forest Mgmt|Floor,none,0
-PD22,pathway,World ,Improved Forest Mgmt|Max annual growth,none,100
-PD22,baseline,World ,Improved Forest Mgmt|Max annual growth,none,100
-PD22,pathway,World ,Improved Forest Mgmt|parameter a max,none,0.11776
-PD22,baseline,World ,Improved Forest Mgmt|parameter a max,none,100
-PD22,pathway,World ,Improved Forest Mgmt|parameter a min,none,0.11776
-PD22,baseline,World ,Improved Forest Mgmt|parameter a min,none,0
-PD22,pathway,World ,Improved Forest Mgmt|parameter b max,none,37.1
-PD22,baseline,World ,Improved Forest Mgmt|parameter b max,none,100
-PD22,pathway,World ,Improved Forest Mgmt|parameter b min,none,37.1
-PD22,baseline,World ,Improved Forest Mgmt|parameter b min,none,0
-PD22,pathway,World ,Improved Forest Mgmt|saturation point,none,1
-PD22,baseline,World ,Improved Forest Mgmt|saturation point,none,1
+PD22,pathway,World ,Improved Forest Management|Floor,none,0
+PD22,baseline,World ,Improved Forest Management|Floor,none,0
+PD22,pathway,World ,Improved Forest Management|Max annual growth,none,100
+PD22,baseline,World ,Improved Forest Management|Max annual growth,none,100
+PD22,pathway,World ,Improved Forest Management|parameter a max,none,0.11776
+PD22,baseline,World ,Improved Forest Management|parameter a max,none,100
+PD22,pathway,World ,Improved Forest Management|parameter a min,none,0.11776
+PD22,baseline,World ,Improved Forest Management|parameter a min,none,0
+PD22,pathway,World ,Improved Forest Management|parameter b max,none,37.1
+PD22,baseline,World ,Improved Forest Management|parameter b max,none,100
+PD22,pathway,World ,Improved Forest Management|parameter b min,none,37.1
+PD22,baseline,World ,Improved Forest Management|parameter b min,none,0
+PD22,pathway,World ,Improved Forest Management|saturation point,none,1
+PD22,baseline,World ,Improved Forest Management|saturation point,none,1
 PD22,pathway,World ,Improved Rice|Floor,none,0
 PD22,baseline,World ,Improved Rice|Floor,none,0
 PD22,pathway,World ,Improved Rice|Max annual growth,none,100
