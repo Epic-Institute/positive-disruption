@@ -302,7 +302,7 @@ def emissions(
         )
 
         # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
-        name["variable"] = name.apply(
+        name["variable"] = name.parallel_apply(
             lambda x: "|".join([x["Subvertical"], x["Metric"]]), axis=1
         )
         name.drop(columns=["Subvertical", "Metric"], inplace=True)
@@ -381,7 +381,7 @@ def emissions(
             x.update(x0)
             return x
 
-        name.update(name.apply(rep, axis=1))
+        name.update(name.parallel_apply(rep, axis=1))
 
         # Drop 'Value' and 'Duration' columns now that the timeseries have been created
         name = name.droplevel(
@@ -437,7 +437,7 @@ def emissions(
             ]
         )
         .set_index(pyam.IAMC_IDX)
-        .apply(
+        .parallel_apply(
             lambda x: x[flux.columns[0:]].fillna(x["Mitigation (MtCO2e/ha)"]),
             axis=1,
         )
@@ -674,7 +674,9 @@ def emissions(
         ]:
             return "Forests & Wetlands"
 
-    emissions_afolu["sector"] = emissions_afolu.apply(lambda x: addsector(x), axis=1)
+    emissions_afolu["sector"] = emissions_afolu.parallel_apply(
+        lambda x: addsector(x), axis=1
+    )
 
     # Split Emissions and Gas into separate columns
     def splitgas(x):
@@ -685,7 +687,9 @@ def emissions(
         elif x["flow_category"] in ["Emissions (N2O)"]:
             return "N2O"
 
-    emissions_afolu["flow_long"] = emissions_afolu.apply(lambda x: splitgas(x), axis=1)
+    emissions_afolu["flow_long"] = emissions_afolu.parallel_apply(
+        lambda x: splitgas(x), axis=1
+    )
 
     emissions_afolu["flow_category"] = "Emissions"
     emissions_afolu["product_category"] = "AFOLU"
@@ -894,13 +898,13 @@ def emissions(
         }
     )
 
-    emissions_afolu_mitigated = emissions_afolu_mitigated.apply(
+    emissions_afolu_mitigated = emissions_afolu_mitigated.parallel_apply(
         lambda x: x.divide(gwp.data[version][x.name[8]]), axis=1
     )
 
     # Assume emissions mitigated start at current year
     emissions_afolu_mitigated.update(
-        emissions_afolu_mitigated.loc[:, data_end_year:].apply(
+        emissions_afolu_mitigated.loc[:, data_end_year:].parallel_apply(
             lambda x: x.subtract(x.loc[data_end_year]), axis=1
         )
     )
@@ -1139,7 +1143,7 @@ def emissions(
     )
 
     # Add Sector index
-    def addsector(x):
+    def addsector2(x):
         if x["product_long"] in [
             "1A1a_Electricity-autoproducer",
             "1A1a_Electricity-public",
@@ -1214,8 +1218,8 @@ def emissions(
         ]:
             return "Agriculture"
 
-    emissions_additional["sector"] = emissions_additional.apply(
-        lambda x: addsector(x), axis=1
+    emissions_additional["sector"] = emissions_additional.parallel_apply(
+        lambda x: addsector2(x), axis=1
     )
 
     emissions_additional = (
@@ -1321,7 +1325,7 @@ def emissions(
 
         return x
 
-    emissions_additional = emissions_additional.apply(
+    emissions_additional = emissions_additional.parallel_apply(
         lambda x: remove_doublecount(x), axis=1
     )
 
@@ -1404,7 +1408,7 @@ def emissions(
     emissions_additional_fgas["scenario"] = "baseline"
 
     # Add Sector index
-    def addsector(x):
+    def addsector3(x):
         if x["product_long"] in [
             "Metal Industry",
             "Other Product Manufacture and Use",
@@ -1414,8 +1418,8 @@ def emissions(
         ]:
             return "Industrial"
 
-    emissions_additional_fgas["sector"] = emissions_additional_fgas.apply(
-        lambda x: addsector(x), axis=1
+    emissions_additional_fgas["sector"] = emissions_additional_fgas.parallel_apply(
+        lambda x: addsector3(x), axis=1
     )
 
     emissions_additional_fgas["flow_category"] = "Emissions"
@@ -1504,6 +1508,7 @@ def emissions(
     ].cumprod(axis=1)
 
     # Rename product_long values
+    """
     simple_index = {
         "Fossil fuels": "Fossil Fuel Heat",
         "1A1a_Electricity-autoproducer": "Fossil Fuels",
@@ -1623,7 +1628,7 @@ def emissions(
         "3E_Enteric-fermentation": "Enteric Fermentation",
         "3I_Agriculture-other": "Other Agricultural",
     }
-
+    """
     detailed_index_with_addtl = {
         "Fossil fuels": "Fossil fuel Heat, Addtl Emissions",
         "1A1a_Electricity-autoproducer": "Fossil Fuels, Addtl Emissions",
@@ -1988,7 +1993,7 @@ def emissions(
         ]
     )
 
-    emissions_output_co2e = emissions_output_co2e.apply(
+    emissions_output_co2e = emissions_output_co2e.parallel_apply(
         lambda x: x.mul(gwp.data[version][x.name[8]]), axis=1
     )
 
@@ -2672,7 +2677,7 @@ def emissions(
     )
 
     # Update Sector index
-    def addsector(x):
+    def addsector4(x):
         if x["sector"] in ["power"]:
             return "Electric Power"
         elif x["sector"] in ["transport", "maritime"]:
@@ -2686,8 +2691,8 @@ def emissions(
         elif x["sector"] in ["forests"]:
             return "Forests & Wetlands"
 
-    emissions_historical["sector"] = emissions_historical.apply(
-        lambda x: addsector(x), axis=1
+    emissions_historical["sector"] = emissions_historical.parallel_apply(
+        lambda x: addsector4(x), axis=1
     )
 
     emissions_historical = (

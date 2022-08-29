@@ -138,9 +138,9 @@ def results_analysis(
         x.value = xnew
         return x
 
-    analog = analog[(analog.iso3c == "USA") & (analog.label.isin(labels))].apply(
-        percent_change, axis=1
-    )
+    analog = analog[
+        (analog.iso3c == "USA") & (analog.label.isin(labels))
+    ].parallel_apply(percent_change, axis=1)
 
     fig = go.Figure()
 
@@ -688,7 +688,7 @@ def results_analysis(
         .loc[:, data_start_year:proj_end_year]
         .groupby(["sector", "product_long"])
         .sum()
-        .apply(
+        .parallel_apply(
             lambda x: x.divide(
                 afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
                 .loc[:, data_start_year:proj_end_year]
@@ -708,7 +708,7 @@ def results_analysis(
         .loc[:, data_start_year:proj_end_year]
         .groupby(["sector", "product_long"])
         .sum()
-        .apply(
+        .parallel_apply(
             lambda x: x.divide(
                 afolu_output.loc[
                     slice(None), scenario, slice(None), ["Forests & Wetlands"]
@@ -2480,7 +2480,12 @@ def results_analysis(
 
     # region
 
-    agriculture = afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]].loc[:, data_start_year:proj_end_year].groupby(["sector", "product_long"]).sum()
+    agriculture = (
+        afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
+        .loc[:, data_start_year:proj_end_year]
+        .groupby(["sector", "product_long"])
+        .sum()
+    )
 
     fig = agriculture.T
     fig.index.name = "year"
@@ -3168,7 +3173,7 @@ def results_analysis(
     electricity_sorted = (
         electricity.replace(0, NaN)
         .dropna(how="all")
-        .apply(
+        .parallel_apply(
             lambda x: (
                 x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
                 - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
@@ -3311,7 +3316,7 @@ def results_analysis(
     transport_sorted = (
         transport.replace(0, NaN)
         .dropna(how="all")
-        .apply(
+        .parallel_apply(
             lambda x: (
                 x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
                 - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
@@ -3434,7 +3439,7 @@ def results_analysis(
     buildings_sorted = (
         buildings.replace(0, NaN)
         .dropna(how="all")
-        .apply(
+        .parallel_apply(
             lambda x: (
                 x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
                 - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
@@ -3581,7 +3586,7 @@ def results_analysis(
     industry_sorted = (
         industry.replace(0, NaN)
         .dropna(how="all")
-        .apply(
+        .parallel_apply(
             lambda x: (
                 x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
                 - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
@@ -3693,7 +3698,7 @@ def results_analysis(
     agriculture_sorted = (
         agriculture.replace(0, NaN)
         .dropna(how="all")
-        .apply(
+        .parallel_apply(
             lambda x: (
                 x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
                 - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]
@@ -3805,7 +3810,7 @@ def results_analysis(
     forestswetlands_sorted = (
         forestswetlands.replace(0, NaN)
         .dropna(how="all")
-        .apply(
+        .parallel_apply(
             lambda x: (
                 x.replace(0, NaN)[x.replace(0, NaN).last_valid_index()]
                 - x.replace(0, NaN)[x.replace(0, NaN).first_valid_index()]

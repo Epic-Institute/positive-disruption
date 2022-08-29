@@ -22,7 +22,7 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 
 data_start_year = 1990
 data_end_year = 2020
-proj_end_year = 2100
+proj_end_year = 2050
 
 # endregion
 

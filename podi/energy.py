@@ -1,18 +1,16 @@
 # region
 
+import os
 import pandas as pd
 import numpy as np
 from numpy import NaN
-from podi.adoption_projection import (
-    adoption_projection_demand,
-    adoption_projection,
-)
+from scipy.optimize import differential_evolution
 import plotly.io as pio
 import plotly.graph_objects as go
 
 from pandarallel import pandarallel
 
-pandarallel.initialize(progress_bar=True)
+pandarallel.initialize(progress_bar=True, nb_workers=8)
 
 show_figs = True
 save_figs = False
@@ -82,7 +80,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         ).combine_first(energy_historical)
 
         # Save a dataframe that records the last_valid_index for each timeseries, then extrapolate all timeseries to data_end_year
-        data_end_year_df = energy_historical.apply(
+        data_end_year_df = energy_historical.parallel_apply(
             lambda x: x.last_valid_index(), axis=1
         ).to_frame()
         data_end_year_df2 = pd.concat([data_end_year_df2, data_end_year_df])
@@ -280,13 +278,24 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Filter for data_start_year and data_end_year
     irena = irena.loc[:, data_start_year:data_end_year]
 
-    # Drop IEA WIND and SOLARPV to avoid duplication with IRENA ONSHORE/OFFSHORE
-    energy_historical = energy_historical.drop(labels="WIND", level=3)
-
+    # IRENA data starts at 2000, so if data_start_year is <2000, use IEA data for WIND, assuming it is onshore. Then. Drop IEA WIND and SOLARPV to avoid duplication with IRENA ONSHORE/OFFSHORE
     energy_historical = pd.concat(
         [
-            energy_historical,
-            irena[irena.index.get_level_values(3).isin(["ONSHORE", "OFFSHORE"])],
+            energy_historical.drop(labels="WIND", level=3),
+            pd.concat(
+                [
+                    energy_historical[
+                        energy_historical.index.get_level_values(3).isin(["WIND"])
+                    ]
+                    .loc[:, :2000]
+                    .rename(index={"WIND": "ONSHORE"}),
+                    irena[irena.index.get_level_values(3).isin(["ONSHORE"])].loc[
+                        :, 2001:
+                    ],
+                ],
+                axis=1,
+            ),
+            irena[irena.index.get_level_values(3).isin(["OFFSHORE"])],
         ]
     )
 
@@ -1950,6 +1959,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Save to CSV file
+    os.remove("podi/data/energy_baseline.csv")
     energy_baseline.to_csv("podi/data/energy_baseline.csv")
 
     # Plot energy_baseline
@@ -2723,14 +2733,106 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     ef_ratio = ef_ratio[ef_ratio.index.get_level_values(4) == "floor"].sort_index()
 
-    # Run adoption_projection_demand() to calculate logistics curves for energy reduction ratios
+    # Clear energy_adoption_curves.csv, and run adoption_projection_demand() to calculate logistics curves for energy reduction ratios
+
+    # Clear energy_adoption_curves.csv and energy_ef_ratio.csv
+    os.remove("podi/data/energy_adoption_curves.csv")
+    os.remove("podi/data/energy_ef_ratios.csv")
+
+    def adoption_projection_demand(
+        parameters,
+        value,
+        scenario,
+        data_start_year,
+        data_end_year,
+        proj_end_year,
+    ):
+        def linear(x, a, b, c, d):
+            return a * x + d
+
+        def logistic(x, a, b, c, d):
+            return c / (1 + np.exp(-a * (x - b))) + d
+
+        # Create x array (year) and y array (linear scale from zero to saturation value)
+        x_data = np.arange(0, proj_end_year - data_end_year + 1, 1)
+        y_data = np.zeros((1, len(x_data)))
+        y_data[:] = np.NaN
+        y_data = y_data.squeeze().astype(float)
+        y_data[0] = 0
+        y_data[-1] = parameters.loc["saturation point"].value.astype(float)
+
+        y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
+
+        # Load search bounds for logistic function parameters
+        search_bounds = [
+            (
+                pd.to_numeric(parameters.loc["parameter a min"].value),
+                pd.to_numeric(parameters.loc["parameter a max"].value),
+            ),
+            (
+                pd.to_numeric(parameters.loc["parameter b min"].value),
+                pd.to_numeric(parameters.loc["parameter b max"].value),
+            ),
+            (
+                pd.to_numeric(parameters.loc["saturation point"].value),
+                pd.to_numeric(parameters.loc["saturation point"].value),
+            ),
+            (
+                0,
+                0,
+            ),
+        ]
+
+        # Define sum of squared error function
+        def sum_of_squared_error(parameters):
+            return np.sum((y_data - logistic(x_data, *parameters)) ** 2.0)
+
+        # Generate genetic_parameters. For baseline scenarios, projections are linear
+        if scenario == "baseline":
+            y = linear(
+                x_data,
+                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                (y_data[-1]),
+            )
+            genetic_parameters = [0, 0, 0, 0]
+        else:
+            genetic_parameters = differential_evolution(
+                sum_of_squared_error,
+                search_bounds,
+                seed=3,
+                polish=False,
+                updating="immediate",
+                mutation=(0, 1),
+            ).x
+
+        y = np.array(logistic(x_data, *genetic_parameters))
+
+        pd.concat(
+            [
+                pd.DataFrame(
+                    np.array(
+                        [value.name[0], value.name[1], value.name[2], value.name[3]]
+                    )
+                ).T,
+                pd.DataFrame(y).T,
+            ],
+            axis=1,
+        ).to_csv(
+            "podi/data/energy_adoption_curves.csv",
+            mode="a",
+            header=None,
+            index=False,
+        )
+
+        return
+
     ef_ratio.parallel_apply(
         lambda x: adoption_projection_demand(
             parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
             x,
             scenario,
             data_start_year,
-            data_end_year,
+            data_end_year + 1,
             proj_end_year,
         ),
         axis=1,
@@ -2746,9 +2848,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                     ).T,
                     pd.DataFrame(
                         np.linspace(
-                            data_end_year,
+                            data_end_year + 1,
                             proj_end_year,
-                            proj_end_year - data_end_year + 1,
+                            proj_end_year - data_end_year,
                         ).astype(int)
                     ).T,
                 ],
@@ -2768,7 +2870,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         pd.DataFrame(
             1,
             index=ef_ratios.index,
-            columns=np.arange(data_start_year, data_end_year, 1),
+            columns=np.arange(data_start_year, data_end_year + 1, 1),
         )
     ).join(ef_ratios)
     ef_ratios = ef_ratios.loc[:, : energy_baseline.columns[-1]]
@@ -3139,14 +3241,103 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     ).set_index(["region", "product_short", "scenario", "sector", "metric"])
     parameters = parameters.sort_index()
 
+    def adoption_projection(
+        input_data, output_start_date, output_end_date, change_model, change_parameters
+    ):
+        """Given input data of arbitrary start/end date, and desired output start/end date, and model to fit to this data (linear/logistic/generalized logistic), this function provides output that combines input data with projected change in that data"""
+
+        def linear(x, a, b, c, d):
+            return a * x + d
+
+        def logistic(x, a, b, c, d):
+            return c / (1 + np.exp(-a * (x - b))) + d
+
+        # Take 10 years prior data to fit logistic function
+        x_data = np.arange(0, output_end_date - input_data.last_valid_index() + 11, 1)
+        y_data = np.zeros((1, len(x_data)))
+        y_data[:, :] = np.NaN
+        y_data = y_data.squeeze().astype(float)
+        y_data[:11] = input_data.loc[
+            input_data.last_valid_index() - 10 : input_data.last_valid_index()
+        ]
+        y_data[-1] = change_parameters.loc["saturation point"].value.astype(float)
+
+        # Handle cases where saturation point is below current value, by making saturation point equidistant from current value but in positive direction
+        if y_data[10] > y_data[-1]:
+            y_data[-1] = y_data[10] + abs(y_data[-1] - y_data[10])
+
+        y_data = np.array((pd.DataFrame(y_data).interpolate(method="linear")).squeeze())
+
+        # Load search bounds for logistic function parameters
+        search_bounds = [
+            (
+                pd.to_numeric(change_parameters.loc["parameter a min"].value),
+                pd.to_numeric(change_parameters.loc["parameter a max"].value),
+            ),
+            (
+                pd.to_numeric(change_parameters.loc["parameter b min"].value),
+                pd.to_numeric(change_parameters.loc["parameter b max"].value),
+            ),
+            (
+                pd.to_numeric(change_parameters.loc["saturation point"].value),
+                pd.to_numeric(change_parameters.loc["saturation point"].value),
+            ),
+            (
+                y_data[10],
+                y_data[10],
+            ),
+        ]
+
+        # Define sum of squared error function
+        def sum_of_squared_error(change_parameters):
+            return np.sum((y_data - logistic(x_data, *change_parameters)) ** 2.0)
+
+        # Generate genetic_parameters. For baseline scenarios, projections are linear
+        if change_model == "linear":
+            y = linear(
+                x_data,
+                min(0.04, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                0,
+                0,
+                y_data[10],
+            )
+            genetic_parameters = [0, 0, 0, 0]
+        else:
+            genetic_parameters = differential_evolution(
+                sum_of_squared_error,
+                search_bounds,
+                seed=3,
+                polish=False,
+                updating="immediate",
+                mutation=(0, 1),
+            ).x
+
+            y = np.array(logistic(np.arange(0, 200, 1), *genetic_parameters))
+
+        # Rejoin with input data at point where projection curve results in smooth growth
+        y = np.concatenate(
+            [
+                input_data.loc[: input_data.last_valid_index()].values,
+                y[y >= input_data.loc[input_data.last_valid_index()]].squeeze(),
+            ]
+        )[: (output_end_date + 1 - input_data.first_valid_index())]
+
+        return pd.Series(
+            data=y[
+                : len(np.arange(input_data.first_valid_index(), output_end_date + 1, 1))
+            ],
+            index=np.arange(input_data.first_valid_index(), output_end_date + 1, 1),
+            name=input_data.name,
+        )
+
     per_elec_supply.update(
         per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_projection(
-                x.loc[: data_end_year - 1],
-                data_end_year,
-                proj_end_year,
-                "logistic",
+                input_data=x.loc[:data_end_year],
+                output_start_date=data_end_year + 1,
+                output_end_date=proj_end_year,
+                change_model="logistic",
                 change_parameters=parameters.loc[
                     x.name[2], x.name[6], scenario, x.name[3]
                 ],

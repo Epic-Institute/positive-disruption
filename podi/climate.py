@@ -357,7 +357,7 @@ def climate(
     ].sort_index()
 
     # Convert units from emissions_output to assumed units for FAIR model input
-    emissions_output = emissions_output.apply(
+    emissions_output = emissions_output.parallel_apply(
         lambda x: x.multiply(
             pd.read_csv(
                 "podi/data/climate_unit_conversions.csv", usecols=["value", "gas"]
@@ -635,7 +635,7 @@ def climate(
     emissions_output_co2e.set_index(emissions_output.index.names, inplace=True)
 
     # Convert units from emissions_output_co2e to assumed units for FAIR model input
-    emissions_output_co2e = emissions_output_co2e.apply(
+    emissions_output_co2e = emissions_output_co2e.parallel_apply(
         lambda x: x.multiply(
             pd.read_csv(
                 "podi/data/climate_unit_conversions.csv", usecols=["value", "gas"]

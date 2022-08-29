@@ -45,7 +45,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
-    afolu_historical["variable"] = afolu_historical.apply(
+    afolu_historical["variable"] = afolu_historical.parallel_apply(
         lambda x: "|".join([x["Subvertical"], x["Metric"]]), axis=1
     )
     afolu_historical.drop(columns=["Subvertical", "Metric"], inplace=True)
@@ -188,7 +188,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
 
         # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
-        name["variable"] = name.apply(
+        name["variable"] = name.parallel_apply(
             lambda x: "|".join([x["Subvertical"], x["Metric"]]), axis=1
         )
         name.drop(columns=["Subvertical", "Metric"], inplace=True)
@@ -270,7 +270,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             x.update(x0)
             return x
 
-        name.update(name.apply(rep, axis=1))
+        name.update(name.parallel_apply(rep, axis=1))
 
         # Drop 'Value' and 'Duration' columns now that the timeseries have been created
         name = name.droplevel(
@@ -299,7 +299,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 ).values
             ].loc[:, 2018:]
             * 0
-        ).apply(
+        ).parallel_apply(
             lambda x: x
             + (
                 max_extent[
@@ -327,7 +327,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 ).values
             ].loc[:, :2018]
             * 0
-        ).apply(
+        ).parallel_apply(
             lambda x: x
             + (
                 max_extent[
@@ -384,7 +384,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 ]
             )
             .set_index(pyam.IAMC_IDX)
-            .apply(
+            .parallel_apply(
                 lambda x: x[max_extent.columns[0:]][
                     x[max_extent.columns[0:]].index > data_end_year
                 ].fillna(x["Initial Extent (Mha)"]),
@@ -407,7 +407,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ).values
         ]
         .loc[:, :data_end_year]
-        .apply(lambda x: x * 0)
+        .parallel_apply(lambda x: x * 0)
     )
 
     # Combine max extents
@@ -508,7 +508,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Nitrogen Fertilizer Management"
             )
         ]
-        .apply(
+        .parallel_apply(
             lambda x: x.divide(
                 max_extent[
                     (max_extent.index.get_level_values(2) == x.name[2])
@@ -679,7 +679,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # For subvertical/region combos that have one data point, assume the prior year of input data is 95% of this value. If the value is zero, set a minimum slope.
     afolu_historical.update(
-        afolu_historical[afolu_historical.count(axis=1) == 1].apply(
+        afolu_historical[afolu_historical.count(axis=1) == 1].parallel_apply(
             lambda x: x.update(
                 pd.Series(
                     data=[
@@ -748,7 +748,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ]
         )
         .set_index("Analog name")
-        .apply(
+        .parallel_apply(
             lambda x: x[afolu_analogs.columns[0:]]
             .fillna(x["Rate of Improvement"])
             .cumsum(),
@@ -871,7 +871,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         return x
 
-    afolu_output = pd.DataFrame(data=afolu_output.apply(rep, axis=1))
+    afolu_output = pd.DataFrame(data=afolu_output.parallel_apply(rep, axis=1))
     afolu_output = afolu_output.droplevel("Analog Name")
 
     # endregion
@@ -918,7 +918,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         return x
 
-    afolu_baseline = pd.DataFrame(data=afolu_baseline.apply(rep, axis=1))
+    afolu_baseline = pd.DataFrame(data=afolu_baseline.parallel_apply(rep, axis=1))
 
     # endregion
 
@@ -1146,7 +1146,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ]:
                 return "Forests & Wetlands"
 
-        each["sector"] = each.apply(lambda x: addsector(x), axis=1)
+        each["sector"] = each.parallel_apply(lambda x: addsector(x), axis=1)
 
         each["flow_category"] = "Emissions"
 
@@ -1175,7 +1175,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ]:
                 return "N2O"
 
-        each["flow_long"] = each.apply(lambda x: addgas(x), axis=1)
+        each["flow_long"] = each.parallel_apply(lambda x: addgas(x), axis=1)
         each["flow_short"] = each["flow_long"]
 
         each = (
