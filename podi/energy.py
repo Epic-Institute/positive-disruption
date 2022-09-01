@@ -10,9 +10,9 @@ import plotly.graph_objects as go
 
 from pandarallel import pandarallel
 
-pandarallel.initialize(progress_bar=True, nb_workers=8)
+pandarallel.initialize(progress_bar=True, nb_workers=6)
 
-show_figs = True
+show_figs = False
 save_figs = False
 
 # endregion

@@ -1,0 +1,66 @@
+product_long,value,unit
+Charcoal,0.000112,Mt CO2/TJ
+Primary solid biofuels,0.0001,Mt CO2/TJ
+Anthracite,0.0000983,Mt CO2/TJ
+Lignite,0.000101,Mt CO2/TJ
+Electricity,0,Mt CO2/TJ
+Solar thermal,0,Mt CO2/TJ
+Natural gas,0.0000561,Mt CO2/TJ
+Fuel oil,0.0000774,Mt CO2/TJ
+Gas/diesel oil excl. biofuels,0.0000741,Mt CO2/TJ
+Liquified petroleum gases (LPG),0.0000631,Mt CO2/TJ
+Motor gasoline excl. biofuels,0.0000693,Mt CO2/TJ
+Other kerosene,0.0000719,Mt CO2/TJ
+Other oil products,0.0000733,Mt CO2/TJ
+Hydro,0,Mt CO2/TJ
+Offshore wind energy,0,Mt CO2/TJ
+Onshore wind energy,0,Mt CO2/TJ
+Rooftop solar photovoltaics,0,Mt CO2/TJ
+Utility solar photovoltaics,0,Mt CO2/TJ
+BKB,0.0000975,Mt CO2/TJ
+Blast furnace gas,0.00026,Mt CO2/TJ
+Coke oven coke,0.000107,Mt CO2/TJ
+Coking coal,0.0000946,Mt CO2/TJ
+Other bituminous coal,0.0000946,Mt CO2/TJ
+Crude oil,0.0000733,Mt CO2/TJ
+Natural gas liquids,0.0000642,Mt CO2/TJ
+Other hydrocarbons,0.0000642,Mt CO2/TJ
+Heat – High Temperature,0,Mt CO2/TJ
+Heat – Low Temperature,0,Mt CO2/TJ
+Hydrogen,0,Mt CO2/TJ
+Bitumen,0.0000807,Mt CO2/TJ
+Kerosene type jet fuel excl. biofuels,0.0000715,Mt CO2/TJ
+Lubricants,0.0000733,Mt CO2/TJ
+Petroleum coke,0.0000975,Mt CO2/TJ
+Refinery gas,0.0000576,Mt CO2/TJ
+White spirit & industrial spirit (SBP),0.0000733,Mt CO2/TJ
+Biodiesels,0.0000708,Mt CO2/TJ
+Gas works gas,0.000044,Mt CO2/TJ
+Coke oven gas,0.000044,Mt CO2/TJ
+Ethane,0.0000616,Mt CO2/TJ
+Aviation gasoline,0.00007,Mt CO2/TJ
+Biogases,0.0000708,Mt CO2/TJ
+Nuclear,0,Mt CO2/TJ
+Coal tar,0.0000807,Mt CO2/TJ
+Additives/blending components,0.0000733,Mt CO2/TJ
+Refinery feedstocks,0.0000733,Mt CO2/TJ
+Paraffin waxes,0.0000733,Mt CO2/TJ
+Biogasoline,0.0000708,Mt CO2/TJ
+Patent fuel,0.0000975,Mt CO2/TJ
+Gasoline type jet fuel,0.00007,Mt CO2/TJ
+Sub-bituminous coal,0.0000961,Mt CO2/TJ
+Elec/heat from manufactured gases,0.0000576,Mt CO2/TJ
+Geothermal,0,Mt CO2/TJ
+Industrial waste,0.000143,Mt CO2/TJ
+Gas coke,0.000107,Mt CO2/TJ
+Municipal waste (non-renewable),0.0000917,Mt CO2/TJ
+Municipal waste (renewable),0,Mt CO2/TJ
+Other liquid biofuels,0.0000796,Mt CO2/TJ
+Other recovered gases,0.0000576,Mt CO2/TJ
+Heat output from non-specified combustible fuels – High Temperature,0,Mt CO2/TJ
+Heat output from non-specified combustible fuels – Low Temperature,0,Mt CO2/TJ
+Peat,0.000106,Mt CO2/TJ
+Peat products,0.000106,Mt CO2/TJ
+Other sources,0.00001,Mt CO2/TJ
+Oil shale and oil sands,0.000107,Mt CO2/TJ
+"Tide, wave and ocean",0,Mt CO2/TJ

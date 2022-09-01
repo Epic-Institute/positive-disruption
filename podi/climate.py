@@ -3,11 +3,6 @@
 import numpy as np
 import pandas as pd
 import fair
-from fair.forward import fair_scm
-from fair.RCPs import rcp26, rcp45, rcp60, rcp85, rcp3pd
-from fair.SSPs import ssp119
-from fair.constants import radeff
-from scipy.stats import gamma
 import pyam
 import plotly.io as pio
 import plotly.graph_objects as go

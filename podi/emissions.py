@@ -12,8 +12,8 @@ import plotly.graph_objects as go
 
 pandarallel.initialize(progress_bar=True)
 
-show_figs = True
-save_figs = True
+show_figs = False
+save_figs = False
 
 # endregion
 
@@ -1458,7 +1458,7 @@ def emissions(
 
     # Interpolate between data_end_year and projections in 2030, 2050
     emissions_additional_fgas[
-        np.arange(emissions_additional_fgas.columns.max() + 1, 2030, 1)
+        np.arange(emissions_additional_fgas.columns.max() + 1, 2031, 1)
     ] = NaN
     emissions_additional_fgas[np.arange(2031, proj_end_year + 1, 1)] = NaN
     emissions_additional_fgas = emissions_additional_fgas.sort_index(axis=1)
@@ -1844,9 +1844,11 @@ def emissions(
     # region
 
     # Combine emissions from energy, afolu, and additional sources
-    emissions_output = pd.concat(
-        [emissions_energy, emissions_afolu, emissions_additional]
-    ).sort_index()
+    emissions_output = (
+        pd.concat([emissions_energy, emissions_afolu, emissions_additional])
+        .sort_index()
+        .fillna(0)
+    )
 
     # Make emissions_output_co2e
     # region
