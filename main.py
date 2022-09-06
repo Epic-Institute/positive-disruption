@@ -20,21 +20,20 @@ from podi.cdr.cdr_util import (
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
-data_start_year = 1990
-data_end_year = 2020
-proj_end_year = 2050
-
 # endregion
 
 # Select model and choose a scenario name
 model = "PD22"
 scenario = "pathway"
+data_start_year = 1990
+data_end_year = 2020
+proj_end_year = 2100
 
 ##########
 # ENERGY #
 ##########
 
-recalc_energy = True
+recalc_energy = False
 # region
 
 if recalc_energy is True:
@@ -89,7 +88,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = True
+recalc_afolu = False
 # region
 
 if recalc_afolu is True:

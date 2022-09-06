@@ -58,7 +58,7 @@ def emissions(
 
     # Multiply energy by emission factors to get emissions estimates. Note that emission factors for non-energy use flows are set to 0
     emissions_energy = energy_output.parallel_apply(
-        lambda x: x.multiply(emissions_factors.loc[x.name]), axis=1
+        lambda x: x.multiply(emissions_factors.loc[x.name]).fillna(0).squeeze(), axis=1
     )
 
     emissions_energy.index = emissions_energy.index.set_levels(
@@ -739,7 +739,10 @@ def emissions(
 
     # Interpolate between data_end_year and projections in 2030, 2050
     emissions_afolu[np.arange(2021, 2030, 1)] = NaN
-    emissions_afolu[np.arange(2031, proj_end_year, 1)] = NaN
+    emissions_afolu[np.arange(2031, 2050, 1)] = NaN
+    if proj_end_year > 2050:
+        emissions_afolu[proj_end_year] = emissions_afolu[2050]
+        emissions_afolu[np.arange(2051, proj_end_year, 1)] = NaN
     emissions_afolu = emissions_afolu.sort_index(axis=1)
     emissions_afolu.loc[:, data_start_year] = emissions_afolu.loc[
         :, data_start_year
@@ -1273,8 +1276,13 @@ def emissions(
         )
     ]
 
+    # Save last valid index for emissions_additional (it changes, but the value here is used later)
+    emissions_additional_last_valid_index = emissions_additional.columns.max()
+
     # Create projections by applying most current data value to all future years
-    emissions_additional[np.arange(data_end_year, proj_end_year + 1, 1)] = NaN
+    emissions_additional[
+        np.arange(emissions_additional_last_valid_index, proj_end_year + 1, 1)
+    ] = NaN
     emissions_additional = emissions_additional.sort_index(axis=1)
     emissions_additional.fillna(method="ffill", axis=1, inplace=True)
 
@@ -1483,18 +1491,21 @@ def emissions(
     percent_change = (
         emissions_energy.groupby(["model", "scenario", "region", "sector"])
         .sum()
-        .loc[:, data_end_year:]
+        .loc[:, emissions_additional_last_valid_index:]
         .pct_change(axis=1)
         .replace(NaN, 0)
+        .replace(np.inf, 0)
         .add(1)
     )
 
     emissions_additional = (
-        emissions_additional.loc[:, data_start_year:data_end_year]
+        emissions_additional.loc[
+            :, data_start_year:emissions_additional_last_valid_index
+        ]
         .reset_index()
         .set_index(["model", "scenario", "region", "sector"])
         .merge(
-            percent_change.loc[:, data_end_year + 1 :],
+            percent_change.loc[:, emissions_additional_last_valid_index + 1 :],
             on=["model", "scenario", "region", "sector"],
         )
         .set_index(
@@ -1503,9 +1514,11 @@ def emissions(
         )
     )
 
-    emissions_additional.loc[:, data_end_year:] = emissions_additional.loc[
-        :, data_end_year:
-    ].cumprod(axis=1)
+    emissions_additional.loc[
+        :, emissions_additional_last_valid_index:
+    ] = emissions_additional.loc[:, emissions_additional_last_valid_index:].cumprod(
+        axis=1
+    )
 
     # Rename product_long values
     """
@@ -1742,7 +1755,9 @@ def emissions(
 
         scenario = "pathway"
         model = "PD22"
-        df = emissions_additional.loc[model, slice(None), slice(None), ["Residential"]]
+        df = emissions_additional.loc[
+            model, slice(None), slice(None), ["Electric Power"]
+        ]
 
         fig = df.groupby(["scenario", "sector", "product_long", "flow_long"]).sum().T
         fig.index.name = "year"

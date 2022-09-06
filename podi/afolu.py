@@ -565,9 +565,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # List all historical values higher than max extent
-    afolu_historical_toohigh = afolu_historical[
-        (afolu_historical.values > 1).any(axis=1)
-    ]
+    # afolu_historical_toohigh = afolu_historical[(afolu_historical.values > 1).any(axis=1)]
 
     # FIX historical values higher than max extent
     fix_afolu = True

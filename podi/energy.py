@@ -4096,7 +4096,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             ]
             .groupby([groupby])
             .sum()
-        ).loc[:, start_year:] * unit_val[1]
+        ).loc[:, start_year:] * unit_val[0]
 
         fig = fig.T
         fig.index.name = "year"
@@ -4133,7 +4133,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "x": 0.5,
                 "y": 0.99,
             },
-            yaxis={"title": "TFC, " + unit_name[1]},
+            yaxis={"title": "TFC, " + unit_name[0]},
             margin_b=0,
             margin_t=20,
             margin_l=10,
@@ -6452,6 +6452,26 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "unit",
             ]
         ).sum().sort_index().to_csv("podi/data/" + output[1] + ".csv")
+
+    energy_output = (
+        energy_output.groupby(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+            ]
+        )
+        .sum()
+        .sort_index()
+    )
 
     # Plot energy_output
     if show_figs is True:
