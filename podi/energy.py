@@ -2736,8 +2736,10 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Clear energy_adoption_curves.csv, and run adoption_projection_demand() to calculate logistics curves for energy reduction ratios
 
     # Clear energy_adoption_curves.csv and energy_ef_ratio.csv
-    os.remove("podi/data/energy_adoption_curves.csv")
-    os.remove("podi/data/energy_ef_ratios.csv")
+    if os.path.exists("podi/data/energy_adoption_curves.csv"):
+        os.remove("podi/data/energy_adoption_curves.csv")
+    if os.path.exists("podi/data/energy_ef_ratios.csv"):
+        os.remove("podi/data/energy_ef_ratios.csv")
 
     def adoption_projection_demand(
         parameters,
@@ -3052,9 +3054,18 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Find the reduced amount of electrical energy that represents an equivalent amount of work to that of the energy that undergoes electrification.
+    """
     energy_reduced_electrified = energy_electrified[
         energy_electrified.index.get_level_values(7) != "Electricity output"
     ].parallel_apply(
+        lambda x: x.mul(
+            ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze().iloc[-1]
+        ),
+        axis=1,
+    )
+    """
+
+    energy_reduced_electrified = energy_electrified.parallel_apply(
         lambda x: x.mul(
             ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze().iloc[-1]
         ),
@@ -4096,7 +4107,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             ]
             .groupby([groupby])
             .sum()
-        ).loc[:, start_year:] * unit_val[0]
+        ).loc[:, start_year:] * unit_val[1]
 
         fig = fig.T
         fig.index.name = "year"
@@ -4133,7 +4144,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "x": 0.5,
                 "y": 0.99,
             },
-            yaxis={"title": "TFC, " + unit_name[0]},
+            yaxis={"title": "TFC, " + unit_name[1]},
             margin_b=0,
             margin_t=20,
             margin_l=10,

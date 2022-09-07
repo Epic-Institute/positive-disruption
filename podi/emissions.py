@@ -56,6 +56,18 @@ def emissions(
         axis=1,
     )
 
+    # Have emissions factors decrease by 1% per year from data_end_year to proj_end_year
+    emissions_factors = emissions_factors.parallel_apply(
+        lambda x: x.subtract(
+            pd.Series(
+                (x[x.first_valid_index()] * 0.005)
+                * (np.arange(data_start_year, proj_end_year + 1) - data_start_year),
+                index=x.index,
+            ).rename(x.name)
+        ).clip(lower=0),
+        axis=1,
+    )
+
     # Multiply energy by emission factors to get emissions estimates. Note that emission factors for non-energy use flows are set to 0
     emissions_energy = energy_output.parallel_apply(
         lambda x: x.multiply(emissions_factors.loc[x.name]).fillna(0).squeeze(), axis=1

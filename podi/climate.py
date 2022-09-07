@@ -7,6 +7,7 @@ import pyam
 import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from scipy.stats import gamma
 
 show_figs = True
 save_figs = True
@@ -123,7 +124,7 @@ def climate(
     ]:
         emissions_output.rename(index={gas: gas.replace("-", "")}, inplace=True)
 
-    #'HFC-43-10-mee' to 'HFC43-10'
+    # 'HFC-43-10-mee' to 'HFC43-10'
     emissions_output.rename(index={"HFC-43-10-mee": "HFC43-10"}, inplace=True)
 
     # Update emissions that don't list gas in flow_long (these are all CO2)
@@ -488,9 +489,14 @@ def climate(
             .reset_index()
         )
 
-        emissions_output_fair = np.array(
-            emissions_output_fair[list(["year"]) + list(fair_input_gases.keys())]
-        )
+        if pd.Series(["year"]).isin(emissions_output_fair.columns.values).any():
+            emissions_output_fair = np.array(
+                emissions_output_fair[list(["year"]) + list(fair_input_gases.keys())]
+            )
+        else:
+            emissions_output_fair = np.array(
+                emissions_output_fair[list(["index"]) + list(fair_input_gases.keys())]
+            )
 
         C_temp, F_temp, T_temp = fair.forward.fair_scm(
             emissions=emissions_output_fair,
