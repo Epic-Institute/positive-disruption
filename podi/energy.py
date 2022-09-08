@@ -1959,7 +1959,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Save to CSV file
-    os.remove("podi/data/energy_baseline.csv")
+    if os.path.exists("podi/data/energy_baseline.csv"):
+        os.remove("podi/data/energy_baseline.csv")
     energy_baseline.to_csv("podi/data/energy_baseline.csv")
 
     # Plot energy_baseline
@@ -2743,10 +2744,10 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     def adoption_projection_demand(
         parameters,
-        value,
+        input_data,
         scenario,
-        data_start_year,
         data_end_year,
+        saturation_year,
         proj_end_year,
     ):
         def linear(x, a, b, c, d):
@@ -2761,7 +2762,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         y_data[:] = np.NaN
         y_data = y_data.squeeze().astype(float)
         y_data[0] = 0
-        y_data[-1] = parameters.loc["saturation point"].value.astype(float)
+        y_data[saturation_year - data_end_year] = parameters.loc[
+            "saturation point"
+        ].value.astype(float)
 
         y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
 
@@ -2813,7 +2816,12 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             [
                 pd.DataFrame(
                     np.array(
-                        [value.name[0], value.name[1], value.name[2], value.name[3]]
+                        [
+                            input_data.name[0],
+                            input_data.name[1],
+                            input_data.name[2],
+                            input_data.name[3],
+                        ]
                     )
                 ).T,
                 pd.DataFrame(y).T,
@@ -2830,12 +2838,12 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     ef_ratio.parallel_apply(
         lambda x: adoption_projection_demand(
-            parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
-            x,
-            scenario,
-            data_start_year,
-            data_end_year + 1,
-            proj_end_year,
+            parameters=parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
+            input_data=x,
+            scenario=scenario,
+            data_end_year=data_end_year + 1,
+            saturation_year=2050,
+            proj_end_year=proj_end_year,
         ),
         axis=1,
     )
@@ -3054,17 +3062,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     # Find the reduced amount of electrical energy that represents an equivalent amount of work to that of the energy that undergoes electrification.
-    """
-    energy_reduced_electrified = energy_electrified[
-        energy_electrified.index.get_level_values(7) != "Electricity output"
-    ].parallel_apply(
-        lambda x: x.mul(
-            ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze().iloc[-1]
-        ),
-        axis=1,
-    )
-    """
-
     energy_reduced_electrified = energy_electrified.parallel_apply(
         lambda x: x.mul(
             ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze().iloc[-1]
@@ -3253,10 +3250,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     parameters = parameters.sort_index()
 
     def adoption_projection(
-        input_data, output_start_date, output_end_date, change_model, change_parameters
+        input_data, saturation_date, output_end_date, change_model, change_parameters
     ):
-        """Given input data of arbitrary start/end date, and desired output start/end date, and model to fit to this data (linear/logistic/generalized logistic), this function provides output that combines input data with projected change in that data"""
-
         def linear(x, a, b, c, d):
             return a * x + d
 
@@ -3271,7 +3266,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         y_data[:11] = input_data.loc[
             input_data.last_valid_index() - 10 : input_data.last_valid_index()
         ]
-        y_data[-1] = change_parameters.loc["saturation point"].value.astype(float)
+        y_data[saturation_date - input_data.last_valid_index()] = change_parameters.loc[
+            "saturation point"
+        ].value.astype(float)
 
         # Handle cases where saturation point is below current value, by making saturation point equidistant from current value but in positive direction
         if y_data[10] > y_data[-1]:
@@ -3323,7 +3320,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 mutation=(0, 1),
             ).x
 
-            y = np.array(logistic(np.arange(0, 200, 1), *genetic_parameters))
+            y = np.array(logistic(np.arange(0, 500, 1), *genetic_parameters))
 
         # Rejoin with input data at point where projection curve results in smooth growth
         y = np.concatenate(
@@ -3346,7 +3343,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         .parallel_apply(
             lambda x: adoption_projection(
                 input_data=x.loc[:data_end_year],
-                output_start_date=data_end_year + 1,
+                saturation_date=2070,
                 output_end_date=proj_end_year,
                 change_model="logistic",
                 change_parameters=parameters.loc[
@@ -3549,14 +3546,39 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     energy_post_electrification.drop(labels="RELECTR", level=6, inplace=True)
 
+    # Drop RELECTR now that it has been reallocated to the specific set of renewables
+    elec_supply.drop(labels="RELECTR", level=6, inplace=True)
+
     # Recalculate percent of total consumption each technology meets
     per_elec_supply = elec_supply.parallel_apply(
         lambda x: x.divide(elec_supply.groupby(["region"]).sum(0).loc[x.name[2]]),
         axis=1,
     ).fillna(0)
 
-    # Drop RELECTR now that it has been reallocated to the specific set of renewables
-    elec_supply.drop(labels="RELECTR", level=6, inplace=True)
+    # Recalculate elec_supply to cover energy_post_electrification product_long = "Electricity" flow_category = "Final consumption"
+    elec_supply = per_elec_supply.parallel_apply(
+        lambda x: x.multiply(
+            energy_post_electrification[
+                (
+                    (
+                        energy_post_electrification.reset_index().product_long
+                        == "Electricity"
+                    ).values
+                )
+                & (
+                    (
+                        energy_post_electrification.reset_index().flow_category
+                        == "Final consumption"
+                    ).values
+                )
+                & ((energy_post_electrification.reset_index().nonenergy == "N").values)
+            ]
+            .groupby(["model", "scenario", "region"])
+            .sum()
+            .loc[x.name[0], x.name[1], x.name[2]]
+        ),
+        axis=1,
+    )
 
     # Update energy_post electrification with new renewables technology mix values
     energy_post_electrification.update(elec_supply)
@@ -3993,6 +4015,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                     slice(None),
                     slice(None),
                     slice(None),
+                    slice(None),
+                    slice(None),
+                    ["N"],
                 ]
                 .groupby([groupby])
                 .sum()
@@ -4483,11 +4508,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         per_heat_supply[per_heat_supply.index.get_level_values(6).isin(renewables)]
         .parallel_apply(
             lambda x: adoption_projection(
-                x.loc[:data_end_year],
-                data_end_year + 1,
-                proj_end_year,
-                "logistic",
-                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
+                input_data=x.loc[:data_end_year],
+                saturation_date=2040,
+                output_end_date=proj_end_year,
+                change_model="logistic",
+                parameters=parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
             ),
             axis=1,
         )
@@ -5374,11 +5399,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         ]
         .parallel_apply(
             lambda x: adoption_projection(
-                x.loc[:data_end_year],
-                data_end_year + 1,
-                proj_end_year,
-                "logistic",
-                parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
+                input_data=x.loc[:data_end_year],
+                saturation_date=2040,
+                output_end_date=proj_end_year,
+                change_model="logistic",
+                parameters=parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
             ),
             axis=1,
         )

@@ -27,7 +27,7 @@ model = "PD22"
 scenario = "pathway"
 data_start_year = 1990
 data_end_year = 2020
-proj_end_year = 2050
+proj_end_year = 2070
 
 ##########
 # ENERGY #
