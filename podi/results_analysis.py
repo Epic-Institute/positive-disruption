@@ -6,11 +6,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
 from numpy import NaN
-import hvplot.pandas
 import panel as pn
-from plotly import graph_objects as go
-from bokeh.resources import INLINE, CDN
-import datapane as dp
 
 show_figs = False
 save_figs = True
@@ -431,7 +427,6 @@ def results_analysis(
 
     # region
 
-    model = "PD22"
     scenario = scenario
     region = slice(None)
     sector = slice(None)
@@ -798,7 +793,6 @@ def results_analysis(
 
     # region
 
-    model = "PD22"
     scenario = scenario
     region = slice(None)
     sector = slice(None)
@@ -1722,7 +1716,6 @@ def results_analysis(
 
     data_start_year = data_start_year
     proj_end_year = proj_end_year
-    model = "PD22"
     scenario = scenario
     region = slice(None)
     sector = slice(None)
@@ -2088,7 +2081,6 @@ def results_analysis(
 
     data_start_year = 2010
     proj_end_year = proj_end_year
-    model = "PD22"
     scenario = scenario
     region = slice(None)
     sector = slice(None)
@@ -2243,7 +2235,6 @@ def results_analysis(
 
     data_start_year = data_start_year
     proj_end_year = proj_end_year
-    model = "PD22"
     scenario = scenario
     region = slice(None)
     sector = slice(None)
@@ -2840,7 +2831,6 @@ def results_analysis(
 
     data_start_year = 2010
     proj_end_year = proj_end_year
-    model = "PD22"
     scenario = scenario
     region = slice(None)
     sector = slice(None)
@@ -2989,7 +2979,6 @@ def results_analysis(
 
     data_start_year = 2010
     proj_end_year = proj_end_year
-    model = "PD22"
     scenario = scenario
     region = slice(None)
     sector = slice(None)
@@ -4027,7 +4016,7 @@ def results_analysis(
         ).embed()
 
     app = _energy_chart()
-    app.save("./charts/energy_chart.html", resources=CDN)
+    app.save("./charts/energy_chart.html")
 
     # endregion
 
@@ -4038,7 +4027,9 @@ def results_analysis(
     # region
 
     def _afolu_historical():
-        df = afolu_historical.droplevel(["model", "scenario", "unit"])
+        df = afolu_output.loc[:, :data_end_year].droplevel(
+            ["model", "scenario", "unit"]
+        )
         df = pd.melt(
             df.reset_index(),
             id_vars=["region", "variable"],
@@ -4064,7 +4055,7 @@ def results_analysis(
         return pn.Column(select_region, select_subvertical, exp_plot).embed()
 
     app = _afolu_historical()
-    app.save("./charts/afolu_historical.html", resources=CDN)
+    app.save("./charts/afolu_historical.html")
 
     # endregion
 

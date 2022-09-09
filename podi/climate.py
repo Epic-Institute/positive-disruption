@@ -9,8 +9,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from scipy.stats import gamma
 
-show_figs = True
-save_figs = True
+show_figs = False
+save_figs = False
 
 # endregion
 

@@ -3343,7 +3343,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         .parallel_apply(
             lambda x: adoption_projection(
                 input_data=x.loc[:data_end_year],
-                saturation_date=2070,
+                saturation_date=2050,
                 output_end_date=proj_end_year,
                 change_model="logistic",
                 change_parameters=parameters.loc[
@@ -4509,10 +4509,12 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         .parallel_apply(
             lambda x: adoption_projection(
                 input_data=x.loc[:data_end_year],
-                saturation_date=2040,
+                saturation_date=2050,
                 output_end_date=proj_end_year,
                 change_model="logistic",
-                parameters=parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
+                change_parameters=parameters.loc[
+                    x.name[2], x.name[6], scenario, x.name[3]
+                ],
             ),
             axis=1,
         )
@@ -5400,10 +5402,12 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         .parallel_apply(
             lambda x: adoption_projection(
                 input_data=x.loc[:data_end_year],
-                saturation_date=2040,
+                saturation_date=2050,
                 output_end_date=proj_end_year,
                 change_model="logistic",
-                parameters=parameters.loc[x.name[2], x.name[6], scenario, x.name[3]],
+                change_parameters=parameters.loc[
+                    x.name[2], x.name[6], scenario, x.name[3]
+                ],
             ),
             axis=1,
         )

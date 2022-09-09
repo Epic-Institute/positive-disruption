@@ -38,7 +38,10 @@ def emissions(
 
     # Load new df with index matching energy_output
     emissions_factors = pd.DataFrame(
-        index=energy_output.index, columns=energy_output.columns
+        index=energy_output[
+            ~(energy_output.reset_index().flow_category == "Non-energy use").values
+        ].index,
+        columns=energy_output.columns,
     ).fillna(0)
 
     # Load EFDB emissions factors to fill into emissions_factors df
@@ -69,7 +72,9 @@ def emissions(
     )
 
     # Multiply energy by emission factors to get emissions estimates. Note that emission factors for non-energy use flows are set to 0
-    emissions_energy = energy_output.parallel_apply(
+    emissions_energy = energy_output[
+        ~(energy_output.reset_index().flow_category == "Non-energy use").values
+    ].parallel_apply(
         lambda x: x.multiply(emissions_factors.loc[x.name]).fillna(0).squeeze(), axis=1
     )
 
@@ -963,14 +968,39 @@ def emissions(
     # SOME AFOLU RESULTS LOOK INCORRECT, FIX THEM HERE WHILE WAITING FOR TNC FEEDBACK
     fix_afolu = True
     if fix_afolu is True:
-        # Fix Avoided Coastal Impacts (flux looks too high by 1e2)
+        # Fix Avoided Coastal Impacts (flux looks too high by 10)
         emissions_afolu.update(
             emissions_afolu[
                 (
                     emissions_afolu.reset_index().product_long
                     == "Avoided Coastal Impacts"
                 ).values
-            ].multiply(1e-2)
+            ].multiply(1e-1)
+        )
+        # Fix Avoided Forest Conversion (looks too low by 10)
+        emissions_afolu.update(
+            emissions_afolu[
+                (
+                    emissions_afolu.reset_index().product_long
+                    == "Avoided Forest Conversion"
+                ).values
+            ].multiply(1e1)
+        )
+        # Fix Avoided Peat Impacts (looks too low by 1e5)
+        emissions_afolu.update(
+            emissions_afolu[
+                (
+                    emissions_afolu.reset_index().product_long == "Avoided Peat Impacts"
+                ).values
+            ].multiply(1e5)
+        )
+        # Fix Avoided Cropland Soil Health (looks too low by 1e1)
+        emissions_afolu.update(
+            emissions_afolu[
+                (
+                    emissions_afolu.reset_index().product_long == "Cropland Soil Health"
+                ).values
+            ].multiply(1e1)
         )
 
     # Drop rows with NaN in all year columns, representing duplicate regions and/or emissions
@@ -1501,13 +1531,29 @@ def emissions(
 
     # Project additional emissions using percent change in energy emissions in the energy sector
     percent_change = (
-        emissions_energy.groupby(["model", "scenario", "region", "sector"])
+        emissions_energy[
+            (
+                emissions_energy.reset_index().flow_category == "Electricity output"
+            ).values
+        ]
+        .groupby(["model", "scenario", "region", "sector"])
         .sum()
         .loc[:, emissions_additional_last_valid_index:]
         .pct_change(axis=1)
         .replace(NaN, 0)
         .replace(np.inf, 0)
         .add(1)
+    )
+
+    percent_change.update(
+        percent_change.parallel_apply(
+            lambda x: x.clip(
+                upper=percent_change.loc[x.name[0], "baseline", x.name[2], x.name[3]]
+                .squeeze()
+                .rename(x.name)
+            ),
+            axis=1,
+        )
     )
 
     emissions_additional = (
@@ -2044,7 +2090,7 @@ def emissions(
 
         scenario = "pathway"
         model = "PD22"
-        df = emissions_output_co2e  # emissions_output[(emissions_output.reset_index().sector == 'Forests & Wetlands').values]
+        df = emissions_output_co2e
 
         fig = (
             df.loc[model]
@@ -2067,9 +2113,13 @@ def emissions(
 
                 fig = go.Figure()
 
-                for product_long in fig2.sort_values("Emissions", ascending=False)[
-                    "product_long"
-                ].unique():
+                for product_long in (
+                    fig2[fig2.scenario == scenario]
+                    .groupby(["product_long"])
+                    .sum()
+                    .sort_values("Emissions", ascending=False)
+                    .index.unique()
+                ):
 
                     for flow_long in fig2["flow_long"].unique():
 
@@ -2225,9 +2275,11 @@ def emissions(
             )
 
             for product_long in (
-                fig2[(fig2["sector"] == sector) & (fig2["year"] == proj_end_year)]
-                .sort_values("Emissions", ascending=False)["product_long"]
-                .unique()
+                fig2[fig2["sector"] == sector]
+                .groupby(["product_long"])
+                .sum()
+                .sort_values("Emissions", ascending=False)
+                .index.unique()
             ):
                 fig.add_trace(
                     go.Scatter(
@@ -2307,26 +2359,31 @@ def emissions(
             fig = go.Figure()
 
             for sector in (
-                fig2[(fig2["scenario"] == scenario) & (fig2["year"] == proj_end_year)]
-                .sort_values("Emissions", ascending=False)["sector"]
-                .unique()
+                fig2[fig2["scenario"] == scenario]
+                .groupby(["sector", "product_long", "flow_long"])
+                .sum()
+                .sort_values("Emissions", ascending=False)
+                .index.unique()
             ):
 
                 for product_long in (
-                    fig2[
-                        (fig2["scenario"] == scenario) & (fig2["year"] == proj_end_year)
-                    ]
-                    .sort_values("Emissions", ascending=False)["product_long"]
-                    .unique()
+                    fig2[(fig2["scenario"] == scenario) & (fig2["sector"] == sector)]
+                    .groupby(["product_long", "flow_long"])
+                    .sum()
+                    .sort_values("Emissions", ascending=False)
+                    .index.unique()
                 ):
 
                     for flow_long in (
                         fig2[
                             (fig2["scenario"] == scenario)
-                            & (fig2["year"] == proj_end_year)
+                            & (fig2["sector"] == sector)
+                            & (fig2["product_long"] == product_long)
                         ]
-                        .sort_values("Emissions", ascending=False)["flow_long"]
-                        .unique()
+                        .groupby(["flow_long"])
+                        .sum()
+                        .sort_values("Emissions", ascending=False)
+                        .index.unique()
                     ):
 
                         fig.add_trace(
