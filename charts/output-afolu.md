@@ -13,7 +13,7 @@ title: AFOLU
 
 <br/><br/>
 
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-ImprovedForestMgmt.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical-ImprovedForestManagement.html" height='500' width='150%'></iframe>
 
 <br/><br/>
 
@@ -68,7 +68,7 @@ title: AFOLU
 
 <br/><br/>
 
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-ImprovedForestMgmt.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_historical_percent-ImprovedForestManagement.html" height='500' width='150%'></iframe>
 
 <br/><br/>
 
@@ -126,7 +126,7 @@ title: AFOLU
 
 <br/><br/>
 
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-ImprovedForestMgmt.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_max_extent-ImprovedForestManagement.html" height='500' width='150%'></iframe>
 
 <br/><br/>
 
@@ -184,7 +184,7 @@ title: AFOLU
 
 <br/><br/>
 
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-ImprovedForestMgmt.html" height='500' width='150%'></iframe>
+<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "afolu_flux-ImprovedForestManagement.html" height='500' width='150%'></iframe>
 
 <br/><br/>
 
