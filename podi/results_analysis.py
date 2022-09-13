@@ -8,8 +8,8 @@ import numpy as np
 from numpy import NaN
 import panel as pn
 
-show_figs = False
-save_figs = True
+show_figs = True
+save_figs = False
 
 # endregion
 
@@ -456,7 +456,7 @@ def results_analysis(
             ["Electricity output"],
         ]
         .loc[:, data_start_year:proj_end_year]
-        .groupby(["sector", "product_category", "product_long"])
+        .groupby(["region", "sector", "product_category", "product_long"])
         .sum()
         .divide(
             energy_output.loc[
@@ -470,7 +470,7 @@ def results_analysis(
                 ["Electricity output"],
             ]
             .loc[:, data_start_year:proj_end_year]
-            .groupby(["sector", "product_category", "product_long"])
+            .groupby(["region", "sector", "product_category", "product_long"])
             .sum()
             .sum(0)
         )
@@ -508,7 +508,7 @@ def results_analysis(
             ],
         ]
         .loc[:, data_start_year:proj_end_year]
-        .groupby(["sector", "flow_long"])
+        .groupby(["region", "sector", "flow_long"])
         .sum()
         .divide(
             energy_output.loc[
@@ -540,7 +540,7 @@ def results_analysis(
                 ],
             ]
             .loc[:, proj_end_year]
-            .groupby(["sector", "flow_long"])
+            .groupby(["region", "sector", "flow_long"])
             .sum()
             .sum(0)
         )
@@ -562,7 +562,7 @@ def results_analysis(
             ["RESIDENT", "COMMPUB"],
         ]
         .loc[:, data_start_year:proj_end_year]
-        .groupby(["sector", "product_long", "flow_long"])
+        .groupby(["region", "sector", "product_long", "flow_long"])
         .sum()
         .divide(
             energy_output.loc[
@@ -577,7 +577,7 @@ def results_analysis(
                 slice(None),
             ]
             .loc[:, data_start_year:proj_end_year]
-            .groupby(["sector", "product_long", "flow_long"])
+            .groupby(["region", "sector", "product_long", "flow_long"])
             .sum()
             .sum(0)
         )
@@ -608,7 +608,7 @@ def results_analysis(
             ],
         ]
         .loc[:, data_start_year:proj_end_year]
-        .groupby(["sector", "flow_long"])
+        .groupby(["region", "sector", "flow_long"])
         .sum()
         .divide(
             energy_output.loc[
@@ -622,7 +622,7 @@ def results_analysis(
                 "Final consumption",
             ]
             .loc[:, data_start_year:proj_end_year]
-            .groupby(["sector", "flow_long"])
+            .groupby(["region", "sector", "flow_long"])
             .sum()
             .sum(0)
         )
@@ -650,7 +650,7 @@ def results_analysis(
             ],
         ]
         .loc[:, data_start_year:proj_end_year]
-        .groupby(["sector"])
+        .groupby(["region", "sector"])
         .sum()
         .divide(
             energy_output.loc[
@@ -665,7 +665,7 @@ def results_analysis(
                 slice(None),
             ]
             .loc[:, data_start_year:proj_end_year]
-            .groupby("sector")
+            .groupby(["region", "sector"])
             .sum()
             .sum(0)
         )
@@ -673,7 +673,7 @@ def results_analysis(
     )
     industry_other = pd.concat(
         [industry_other], keys=["Other"], names=["flow_long"]
-    ).reorder_levels(["sector", "flow_long"])
+    ).reorder_levels(["region", "sector", "flow_long"])
 
     industry = pd.concat([industry, industry_other])
 
@@ -681,13 +681,13 @@ def results_analysis(
     agriculture = (
         afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
         .loc[:, data_start_year:proj_end_year]
-        .groupby(["sector", "product_long"])
+        .groupby(["region", "sector", "product_long"])
         .sum()
         .parallel_apply(
             lambda x: x.divide(
                 afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
                 .loc[:, data_start_year:proj_end_year]
-                .groupby(["sector", "product_long"])
+                .groupby(["region", "sector", "product_long"])
                 .sum()
                 .sum()
                 .max()
@@ -701,7 +701,7 @@ def results_analysis(
     forestswetlands = (
         afolu_output.loc[slice(None), scenario, slice(None), ["Forests & Wetlands"]]
         .loc[:, data_start_year:proj_end_year]
-        .groupby(["sector", "product_long"])
+        .groupby(["region", "sector", "product_long"])
         .sum()
         .parallel_apply(
             lambda x: x.divide(
@@ -709,7 +709,7 @@ def results_analysis(
                     slice(None), scenario, slice(None), ["Forests & Wetlands"]
                 ]
                 .loc[:, data_start_year:proj_end_year]
-                .groupby(["sector", "product_long"])
+                .groupby(["region", "sector", "product_long"])
                 .sum()
                 .sum()
                 .max()

@@ -10,7 +10,7 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 
-pandarallel.initialize(progress_bar=True)
+pandarallel.initialize(progress_bar=True, nb_workers=6)
 
 show_figs = False
 save_figs = False
@@ -968,7 +968,7 @@ def emissions(
     # SOME AFOLU RESULTS LOOK INCORRECT, FIX THEM HERE WHILE WAITING FOR TNC FEEDBACK
     fix_afolu = True
     if fix_afolu is True:
-        # Fix Avoided Coastal Impacts (flux looks too high by 10)
+        # Avoided Coastal Impacts (flux looks too high by 10)
         emissions_afolu.update(
             emissions_afolu[
                 (
@@ -977,7 +977,7 @@ def emissions(
                 ).values
             ].multiply(1e-1)
         )
-        # Fix Avoided Forest Conversion (looks too low by 10)
+        # Avoided Forest Conversion (looks too low by 10)
         emissions_afolu.update(
             emissions_afolu[
                 (
@@ -986,7 +986,7 @@ def emissions(
                 ).values
             ].multiply(1e1)
         )
-        # Fix Avoided Peat Impacts (looks too low by 1e5)
+        # Avoided Peat Impacts (looks too low by 1e5)
         emissions_afolu.update(
             emissions_afolu[
                 (
@@ -994,7 +994,7 @@ def emissions(
                 ).values
             ].multiply(1e5)
         )
-        # Fix Avoided Cropland Soil Health (looks too low by 1e1)
+        # Avoided Cropland Soil Health (looks too low by 1e1)
         emissions_afolu.update(
             emissions_afolu[
                 (
@@ -1536,7 +1536,7 @@ def emissions(
                 emissions_energy.reset_index().flow_category == "Electricity output"
             ).values
         ]
-        .groupby(["model", "scenario", "region", "sector"])
+        .groupby(["model", "scenario", "region"])
         .sum()
         .loc[:, emissions_additional_last_valid_index:]
         .pct_change(axis=1)
@@ -1548,7 +1548,7 @@ def emissions(
     percent_change.update(
         percent_change.parallel_apply(
             lambda x: x.clip(
-                upper=percent_change.loc[x.name[0], "baseline", x.name[2], x.name[3]]
+                upper=percent_change.loc[x.name[0], "baseline", x.name[2]]
                 .squeeze()
                 .rename(x.name)
             ),
@@ -1561,13 +1561,13 @@ def emissions(
             :, data_start_year:emissions_additional_last_valid_index
         ]
         .reset_index()
-        .set_index(["model", "scenario", "region", "sector"])
+        .set_index(["model", "scenario", "region"])
         .merge(
             percent_change.loc[:, emissions_additional_last_valid_index + 1 :],
-            on=["model", "scenario", "region", "sector"],
+            on=["model", "scenario", "region"],
         )
         .set_index(
-            ["product_long", "flow_category", "flow_long", "unit"],
+            ["sector", "product_long", "flow_category", "flow_long", "unit"],
             append=True,
         )
     )

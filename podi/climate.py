@@ -623,7 +623,7 @@ def climate(
     # region
 
     # Drop 'Electricity output' and 'Heat output' to avoid double counting when summing emissions
-    emissions_output_co2e = emissions_output_co2e[
+    emissions_output_co2e_fair = emissions_output_co2e[
         ~(
             emissions_output_co2e.reset_index().flow_category.isin(
                 ["Electricity output", "Heat output"]
@@ -631,12 +631,12 @@ def climate(
         ).values
     ].sort_index()
 
-    emissions_output_co2e.reset_index(inplace=True)
-    emissions_output_co2e["flow_long"] = "CO2"
-    emissions_output_co2e.set_index(emissions_output.index.names, inplace=True)
+    emissions_output_co2e_fair.reset_index(inplace=True)
+    emissions_output_co2e_fair["flow_long"] = "CO2"
+    emissions_output_co2e_fair.set_index(emissions_output.index.names, inplace=True)
 
-    # Convert units from emissions_output_co2e to assumed units for FAIR model input
-    emissions_output_co2e = emissions_output_co2e.parallel_apply(
+    # Convert units from emissions_output_co2e_fair to assumed units for FAIR model input
+    emissions_output_co2e_fair = emissions_output_co2e_fair.parallel_apply(
         lambda x: x.multiply(
             pd.read_csv(
                 "podi/data/climate_unit_conversions.csv", usecols=["value", "gas"]
@@ -649,29 +649,29 @@ def climate(
     )
 
     # Convert units from emissions_output to assumed units for FAIR model input
-    emissions_output_co2e = emissions_output_co2e.groupby(
+    emissions_output_co2e_fair = emissions_output_co2e_fair.groupby(
         ["scenario", "flow_long"]
     ).sum()
 
     climate_output_concentration_co2e = pd.DataFrame()
     climate_output_forcing_co2e = pd.DataFrame()
 
-    for scenario in emissions_output_co2e.reset_index().scenario.unique():
+    for scenario in emissions_output_co2e_fair.reset_index().scenario.unique():
 
-        emissions_output_co2e_fair = (
-            emissions_output_co2e.loc[scenario, :]
+        emissions_output_co2e_fair2 = (
+            emissions_output_co2e_fair.loc[scenario, :]
             .groupby(["flow_long"])
             .sum()
             .values[0]
         )
 
         C_co2e_temp, F_co2e_temp, T_co2e_temp = fair.forward.fair_scm(
-            emissions=emissions_output_co2e_fair,
-            natural=np.zeros((len(emissions_output_co2e), 2)),
+            emissions=emissions_output_co2e_fair2,
+            natural=np.zeros((len(emissions_output_co2e_fair), 2)),
             F_solar=1e-3
-            * np.sin(2 * np.pi * np.arange(len(emissions_output_co2e)) / 11.5),
+            * np.sin(2 * np.pi * np.arange(len(emissions_output_co2e_fair)) / 11.5),
             F_volcanic=-gamma.rvs(
-                1e-3, size=len(emissions_output_co2e), random_state=100
+                1e-3, size=len(emissions_output_co2e_fair), random_state=100
             ),
             useMultigas=False,
         )
@@ -856,16 +856,8 @@ def climate(
             margin_r=15,
         )
 
-        fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/climate-" + gas.lower() + "-concentration.html"
-                ).replace(" ", ""),
-                auto_open=False,
-            )
+        if show_figs is True:
+            fig.show()
 
     # endregion
 
@@ -1014,16 +1006,8 @@ def climate(
             margin_r=15,
         )
 
-        fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=("./charts/radiativeforcing-" + "World " + ".html").replace(
-                    " ", ""
-                ),
-                auto_open=False,
-            )
+        if show_figs is True:
+            fig.show()
 
     # endregion
 
@@ -1168,7 +1152,36 @@ def climate(
             marker=dict(color="#444"),
             line=dict(width=0),
             mode="lines",
-            fillcolor="rgba(255,155,5,0.15)",
+            fillcolor="rgba(255,155,5,0.07)",
+            fill="tonexty",
+            showlegend=False,
+        ),
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Est. range",
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=temp_range.loc["17p", data_start_year:data_end_year].squeeze(),
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            mode="lines",
+            fillcolor="rgba(255,155,5,0.07)",
+            fill="tonexty",
+            showlegend=False,
+        ),
+        secondary_y=True,
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical_lower",
+            x=np.arange(data_start_year, data_end_year + 1, 1),
+            y=temp_range.loc["17p", data_start_year:data_end_year].squeeze(),
+            marker=dict(color="#444"),
+            line=dict(width=0),
+            mode="lines",
+            fillcolor="rgba(255,155,5,0.07)",
             fill="tonexty",
             showlegend=False,
         ),
@@ -1182,7 +1195,7 @@ def climate(
             marker=dict(color="#444"),
             line=dict(width=0),
             mode="lines",
-            fillcolor="rgba(255,155,5,0.15)",
+            fillcolor="rgba(255,155,5,0.07)",
             fill="tonexty",
             showlegend=False,
         ),
@@ -1234,7 +1247,7 @@ def climate(
                 marker=dict(color="#444"),
                 line=dict(width=0),
                 mode="lines",
-                fillcolor="rgba(153,0,153,0.15)",
+                fillcolor="rgba(153,0,153,0.07)",
                 fill="tonexty",
                 showlegend=False,
             ),
@@ -1277,6 +1290,32 @@ def climate(
 
         fig.add_trace(
             go.Scatter(
+                name="dau21_upper",
+                x=np.arange(data_end_year, proj_end_year + 1, 1),
+                y=(
+                    (
+                        climate_output_temperature.loc[scenario].loc[:, data_end_year:]
+                        + temp_range.loc["dau21_upper", data_end_year:proj_end_year]
+                    )
+                    + (
+                        climate_historical_temperature.loc[data_end_year].values[0]
+                        - climate_output_temperature.loc[scenario]
+                        .loc[:, data_end_year]
+                        .values[0]
+                    )
+                )
+                .multiply(1.2)
+                .squeeze(),
+                mode="lines",
+                marker=dict(color="#444"),
+                line=dict(width=0),
+                showlegend=False,
+            ),
+            secondary_y=True,
+        )
+
+        fig.add_trace(
+            go.Scatter(
                 name="dau21_lower",
                 x=np.arange(data_end_year, proj_end_year + 1, 1),
                 y=(
@@ -1296,10 +1335,38 @@ def climate(
                 marker=dict(color="#444"),
                 line=dict(width=0),
                 mode="lines",
-                fillcolor="rgba(153,0,153,0.15)",
+                fillcolor="rgba(153,0,153,0.07)",
                 fill="tonexty",
                 showlegend=False,
             ),
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                name="dau21_lower",
+                x=np.arange(data_end_year, proj_end_year + 1, 1),
+                y=(
+                    (
+                        climate_output_temperature.loc[scenario].loc[:, data_end_year:]
+                        + temp_range.loc["dau21_lower", data_end_year:proj_end_year]
+                    )
+                    + (
+                        climate_historical_temperature.loc[data_end_year].values[0]
+                        - climate_output_temperature.loc[scenario]
+                        .loc[:, data_end_year]
+                        .values[0]
+                    )
+                )
+                .multiply(0.8)
+                .squeeze(),
+                marker=dict(color="#444"),
+                line=dict(width=0),
+                mode="lines",
+                fillcolor="rgba(153,0,153,0.07)",
+                fill="tonexty",
+                showlegend=False,
+            ),
+            secondary_y=True,
         )
 
         # endregion
@@ -1338,7 +1405,7 @@ def climate(
     if save_figs is True:
         pio.write_html(
             fig,
-            file=("./charts/temperature.html").replace(" ", ""),
+            file=("./charts/climate-temperature.html").replace(" ", ""),
             auto_open=False,
         )
 
