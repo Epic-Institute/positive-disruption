@@ -327,8 +327,10 @@ emissions_wedges.columns = emissions_wedges.columns.astype(int)
 
 # region
 
-# Cut data_start_year to 2010
-energy_output = energy_output.loc[:, 2010:]
+# Select output_start_date and output_end_date
+output_start_date = 2010
+output_end_date = 2070
+energy_output = energy_output.loc[:, output_start_date:]
 
 # For energy_output, groupby product_category, except for products in the Electricity and Heat product_category
 energy_output_temp = energy_output[
@@ -422,9 +424,9 @@ for output in [
     (emissions_wedges, "emissions_wedges"),
 ]:
     for region in output[0].reset_index().region.unique():
-        output[0][(output[0].reset_index().region == region).values].to_csv(
-            "podi/data/output/" + output[1] + "/" + region + ".csv"
-        )
+        output[0][(output[0].reset_index().region == region).values].loc[
+            :, output_start_date:output_end_date
+        ].to_csv("podi/data/output/" + output[1] + "/" + region + ".csv")
     output_global = (
         output[0]
         .groupby(
@@ -459,6 +461,23 @@ for output in [
             "flow_short",
             "unit",
         ],
+        inplace=True,
+    )
+    output_global.to_csv("podi/data/output/" + output[1] + "/" + "world" + ".csv")
+
+# Save as regional-level files and a global-level file
+for output in [
+    (pdindex_output, "pdindex_output"),
+]:
+    for region in output[0].reset_index().region.unique():
+        output[0][(output[0].reset_index().region == region).values].loc[
+            :, output_start_date:output_end_date
+        ].to_csv("podi/data/output/" + output[1] + "/" + region + ".csv")
+    output_global = output[0].groupby(["sector", "subvertical", "unit"]).sum()
+    output_global.reset_index(inplace=True)
+    output_global["region"] = "world"
+    output_global.set_index(
+        ["region", "sector", "subvertical", "unit"],
         inplace=True,
     )
     output_global.to_csv("podi/data/output/" + output[1] + "/" + "world" + ".csv")

@@ -427,20 +427,14 @@ def results_analysis(
 
     # region
 
-    scenario = scenario
-    region = slice(None)
-    sector = slice(None)
-    product_category = slice(None)
-    flow_category = slice(None)
-
     # Percent of electric power that is renewables
     electricity = (
         energy_output.loc[
             slice(None),
-            scenario,
+            slice(None),
             slice(None),
             ["Electric Power"],
-            product_category,
+            slice(None),
             slice(None),
             [
                 "GEOTHERM",
@@ -455,39 +449,48 @@ def results_analysis(
             ],
             ["Electricity output"],
         ]
-        .loc[:, data_start_year:proj_end_year]
-        .groupby(["region", "sector", "product_category", "product_long"])
-        .sum()
-        .divide(
-            energy_output.loc[
-                slice(None),
-                scenario,
-                slice(None),
-                ["Electric Power"],
-                product_category,
-                slice(None),
-                slice(None),
-                ["Electricity output"],
+        .groupby(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
             ]
-            .loc[:, data_start_year:proj_end_year]
-            .groupby(["region", "sector", "product_category", "product_long"])
-            .sum()
-            .sum(0)
         )
-        * 100
+        .sum()
+        .parallel_apply(
+            lambda x: x.divide(
+                energy_output.loc[
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    ["Electric Power"],
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    ["Electricity output"],
+                ]
+                .groupby(["model", "scenario", "region"])
+                .sum()
+                .loc[x.name[0], x.name[1], x.name[2]]
+            ),
+            axis=1,
+        )
     )
 
     # Percent of transport energy that is electric or nonelectric renewables
     transport = (
         energy_output.loc[
             slice(None),
-            scenario,
+            slice(None),
             slice(None),
             ["Transportation"],
-            product_category,
+            slice(None),
             slice(None),
             ["ELECTR", "HYDROGEN"],
-            flow_category,
+            slice(None),
             [
                 "Road – 2&3-wheel",
                 "Road – Buses&Vans",
@@ -507,91 +510,88 @@ def results_analysis(
                 "Memo: Non-energy use in transport equipment",
             ],
         ]
-        .loc[:, data_start_year:proj_end_year]
-        .groupby(["region", "sector", "flow_long"])
+        .groupby(["model", "scenario", "region", "sector", "flow_long"])
         .sum()
-        .divide(
-            energy_output.loc[
-                slice(None),
-                scenario,
-                slice(None),
-                ["Transportation"],
-                product_category,
-                slice(None),
-                slice(None),
-                slice(None),
-                [
-                    "Road – 2&3-wheel",
-                    "Road – Buses&Vans",
-                    "Road – Light-duty vehicles",
-                    "Road – Trucks",
-                    "Rail – Heavy-duty",
-                    "Rail – Light-duty",
-                    "Transport not elsewhere specified",
-                    "Domestic navigation",
-                    "International marine bunkers",
-                    "Domestic aviation – Long-range",
-                    "Domestic aviation – Short-range",
-                    "International aviation bunkers",
-                    "Non-energy use in transport",
-                    "Pipeline transport",
-                    "Losses",
-                    "Memo: Non-energy use in transport equipment",
-                ],
-            ]
-            .loc[:, proj_end_year]
-            .groupby(["region", "sector", "flow_long"])
-            .sum()
-            .sum(0)
+        .parallel_apply(
+            lambda x: x.divide(
+                energy_output.loc[
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    ["Transportation"],
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    [
+                        "Road – 2&3-wheel",
+                        "Road – Buses&Vans",
+                        "Road – Light-duty vehicles",
+                        "Road – Trucks",
+                        "Rail – Heavy-duty",
+                        "Rail – Light-duty",
+                        "Transport not elsewhere specified",
+                        "Domestic navigation",
+                        "International marine bunkers",
+                        "Domestic aviation – Long-range",
+                        "Domestic aviation – Short-range",
+                        "International aviation bunkers",
+                        "Non-energy use in transport",
+                        "Pipeline transport",
+                        "Losses",
+                        "Memo: Non-energy use in transport equipment",
+                    ],
+                ]
+                .groupby(["model", "scenario", "region"])
+                .sum()
+                .loc[x.name[0], x.name[1], x.name[2]]
+            ),
+            axis=1,
         )
-        * 100
     )
 
     # Percent of buildings energy that is electric or nonelectric renewables
     buildings = (
         energy_output.loc[
             slice(None),
-            scenario,
+            slice(None),
             slice(None),
             ["Commercial", "Residential"],
-            product_category,
+            slice(None),
             slice(None),
             ["ELECTR", "SOLARTH", "MUNWASTER", "GEOTHERM"],
-            flow_category,
+            slice(None),
             slice(None),
             ["RESIDENT", "COMMPUB"],
         ]
-        .loc[:, data_start_year:proj_end_year]
         .groupby(["region", "sector", "product_long", "flow_long"])
         .sum()
         .divide(
             energy_output.loc[
                 slice(None),
-                scenario,
+                slice(None),
                 slice(None),
                 ["Commercial", "Residential"],
-                product_category,
+                slice(None),
                 slice(None),
                 slice(None),
                 slice(None),
                 slice(None),
             ]
-            .loc[:, data_start_year:proj_end_year]
             .groupby(["region", "sector", "product_long", "flow_long"])
             .sum()
             .sum(0)
         )
-        * 100
     )
 
     # Percent of industry energy that is electric or nonelectric renewables
     industry = (
         energy_output.loc[
             slice(None),
-            scenario,
+            slice(None),
             slice(None),
             ["Industrial"],
-            product_category,
+            slice(None),
             slice(None),
             ["ELECTR", "SOLARTH", "HYDROGEN", "MUNWASTER", "GEOTHERM"],
             "Final consumption",
@@ -607,35 +607,32 @@ def results_analysis(
                 "Industry not elsewhere specified",
             ],
         ]
-        .loc[:, data_start_year:proj_end_year]
         .groupby(["region", "sector", "flow_long"])
         .sum()
         .divide(
             energy_output.loc[
                 slice(None),
-                scenario,
+                slice(None),
                 slice(None),
                 ["Industrial"],
-                product_category,
+                slice(None),
                 slice(None),
                 slice(None),
                 "Final consumption",
             ]
-            .loc[:, data_start_year:proj_end_year]
             .groupby(["region", "sector", "flow_long"])
             .sum()
             .sum(0)
         )
-        * 100
     ).sort_values(by=[2050], axis=0)
 
     industry_other = (
         energy_output.loc[
             slice(None),
-            scenario,
+            slice(None),
             slice(None),
             ["Industrial"],
-            product_category,
+            slice(None),
             slice(None),
             ["ELECTR", "SOLARTH", "HYDROGEN", "MUNWASTER", "GEOTHERM"],
             "Final consumption",
@@ -649,27 +646,24 @@ def results_analysis(
                 "Mining and quarrying",
             ],
         ]
-        .loc[:, data_start_year:proj_end_year]
         .groupby(["region", "sector"])
         .sum()
         .divide(
             energy_output.loc[
                 slice(None),
-                scenario,
+                slice(None),
                 slice(None),
                 ["Industrial"],
-                product_category,
+                slice(None),
                 slice(None),
                 slice(None),
                 "Final consumption",
                 slice(None),
             ]
-            .loc[:, data_start_year:proj_end_year]
             .groupby(["region", "sector"])
             .sum()
             .sum(0)
         )
-        * 100
     )
     industry_other = pd.concat(
         [industry_other], keys=["Other"], names=["flow_long"]
@@ -679,14 +673,12 @@ def results_analysis(
 
     # Percent of agriculture mitigation compared to max extent
     agriculture = (
-        afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
-        .loc[:, data_start_year:proj_end_year]
+        afolu_output.loc[slice(None), slice(None), slice(None), ["Agriculture"]]
         .groupby(["region", "sector", "product_long"])
         .sum()
         .parallel_apply(
             lambda x: x.divide(
-                afolu_output.loc[slice(None), scenario, slice(None), ["Agriculture"]]
-                .loc[:, data_start_year:proj_end_year]
+                afolu_output.loc[slice(None), slice(None), slice(None), ["Agriculture"]]
                 .groupby(["region", "sector", "product_long"])
                 .sum()
                 .sum()
@@ -694,21 +686,18 @@ def results_analysis(
             ),
             axis=1,
         )
-        * 100
     )
 
     # Percent of forests & wetlands mitigation compared to max extent
     forestswetlands = (
-        afolu_output.loc[slice(None), scenario, slice(None), ["Forests & Wetlands"]]
-        .loc[:, data_start_year:proj_end_year]
+        afolu_output.loc[slice(None), slice(None), slice(None), ["Forests & Wetlands"]]
         .groupby(["region", "sector", "product_long"])
         .sum()
         .parallel_apply(
             lambda x: x.divide(
                 afolu_output.loc[
-                    slice(None), scenario, slice(None), ["Forests & Wetlands"]
+                    slice(None), slice(None), slice(None), ["Forests & Wetlands"]
                 ]
-                .loc[:, data_start_year:proj_end_year]
                 .groupby(["region", "sector", "product_long"])
                 .sum()
                 .sum()
@@ -716,7 +705,6 @@ def results_analysis(
             ),
             axis=1,
         )
-        * 100
     )
 
     # Percent of cdr sequestration compared to max extent
@@ -724,7 +712,7 @@ def results_analysis(
     cdr = (
         cdr_output.loc[
             slice(None),
-            scenario,
+            slice(None),
             slice(None),
             ["CDR"],
             product_category,
@@ -755,7 +743,7 @@ def results_analysis(
         .divide(
             energy_output.loc[
                 slice(None),
-                scenario,
+                slice(None),
                 slice(None),
                 ["CDR"],
                 product_category,
@@ -767,7 +755,7 @@ def results_analysis(
             .sum()
             .sum(0)
         )
-        * 100
+        
     )
     """
 
@@ -782,7 +770,7 @@ def results_analysis(
             forestswetlands,
             # "cdr",
         ]
-    )
+    ).multiply(100)
 
     # Plot pdindex_output
     # region
@@ -801,7 +789,7 @@ def results_analysis(
 
     fig = electricity.reindex(
         axis="index",
-        level=2,
+        level=4,
         labels=[
             "Nuclear",
             "Hydro",
@@ -820,7 +808,7 @@ def results_analysis(
     fig2 = pd.melt(
         fig,
         id_vars="year",
-        var_name=["sector", "product_category", "product_long"],
+        var_name=["scenario", "sector", "product_category", "product_long"],
         value_name="% Adoption",
     )
 
@@ -4229,6 +4217,34 @@ def results_analysis(
     #################
 
     # region
+
+    # Subverticals are defined by flow_long for Transport, Buildings & Industry and product_long for Electric Power, Agriculture and Forests & Wetlands. Rename index names to 'subvertical' for consistency.
+    transport.index = transport.index.rename({"flow_long": "subvertical"})
+    buildings.index = buildings.index.rename({"flow_long": "subvertical"}).droplevel(
+        "product_long"
+    )
+    industry.index = industry.index.rename({"flow_long": "subvertical"})
+    electricity.index = electricity.index.rename(
+        {"product_long": "subvertical"}
+    ).droplevel("product_category")
+    agriculture.index = agriculture.index.rename({"product_long": "subvertical"})
+    forestswetlands.index = forestswetlands.index.rename(
+        {"product_long": "subvertical"}
+    )
+
+    pdindex_output = pd.concat(
+        [
+            electricity,
+            transport,
+            buildings,
+            industry,
+            agriculture,
+            forestswetlands,
+            # "cdr",
+        ]
+    ).multiply(100)
+    pdindex_output["unit"] = "% Adoption"
+    pdindex_output.set_index("unit", append=True, inplace=True)
 
     pdindex_output.to_csv("podi/data/pdindex_output.csv")
 
