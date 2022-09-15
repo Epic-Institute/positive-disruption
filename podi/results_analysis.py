@@ -585,6 +585,11 @@ def results_analysis(
             axis=1,
         )
     )
+    buildings = (
+        buildings.rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
+        .groupby(buildings.index.names)
+        .sum()
+    )
 
     # Percent of industry energy that is electric or nonelectric renewables
     industry = (

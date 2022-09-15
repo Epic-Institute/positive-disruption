@@ -360,26 +360,48 @@ energy_output = pd.concat(
             .values
         ]
         .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
-        .groupby(
-            level=[
-                "model",
-                "scenario",
-                "region",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_long",
-                "flow_short",
-                "unit",
-            ]
-        )
+        .groupby(energy_output.index.names)
         .sum(),
     ]
 )
 energy_output = energy_output[
     ~(energy_output.reset_index().sector.isin(["Residential", "Commercial"])).values
+]
+
+emissions_output = pd.concat(
+    [
+        emissions_output,
+        emissions_output[
+            emissions_output.reset_index()
+            .sector.isin(["Residential", "Commercial"])
+            .values
+        ]
+        .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
+        .groupby(emissions_output.index.names)
+        .sum(),
+    ]
+)
+emissions_output = emissions_output[
+    ~(emissions_output.reset_index().sector.isin(["Residential", "Commercial"])).values
+]
+
+emissions_output_co2e = pd.concat(
+    [
+        emissions_output_co2e,
+        emissions_output_co2e[
+            emissions_output_co2e.reset_index()
+            .sector.isin(["Residential", "Commercial"])
+            .values
+        ]
+        .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
+        .groupby(emissions_output_co2e.index.names)
+        .sum(),
+    ]
+)
+emissions_output_co2e = emissions_output_co2e[
+    ~(
+        emissions_output_co2e.reset_index().sector.isin(["Residential", "Commercial"])
+    ).values
 ]
 
 # Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
@@ -434,6 +456,7 @@ for output in [
         ].to_csv("podi/data/output/" + output[1] + "/" + region + ".csv")
     output_global = (
         output[0]
+        .loc[:, output_start_date:output_end_date]
         .groupby(
             [
                 "model",
@@ -479,7 +502,10 @@ for output in [
             :, output_start_date:output_end_date
         ].to_csv("podi/data/output/" + output[1] + "/" + region + ".csv")
     output_global = (
-        output[0].groupby(["model", "scenario", "sector", "product_long", "unit"]).sum()
+        output[0]
+        .loc[:, output_start_date:output_end_date]
+        .groupby(["model", "scenario", "sector", "product_long", "unit"])
+        .mean()
     )
     output_global.reset_index(inplace=True)
     output_global["region"] = "world"
