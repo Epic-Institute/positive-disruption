@@ -436,7 +436,7 @@ def emissions(
         .sort_index()
     )
 
-    # FIX "Mitigation (MtCO2e/ha)" to be "(tCO2e/ha)" once TNC confirms that this is the correct unit (i.e. the data is already in tCO2e/ha, just mislabeled)
+    # Update Mitigation units from MtCO2e/ha to tCO2e/ha
     flux_avoided = (
         pd.concat(
             [
@@ -458,6 +458,7 @@ def emissions(
             lambda x: x[flux.columns[0:]].fillna(x["Mitigation (MtCO2e/ha)"]),
             axis=1,
         )
+        .multiply(1e6)
         .rename(
             index={
                 "Avoided Coastal Impacts": "Avoided Coastal Impacts|Avg mitigation potential flux",
@@ -966,7 +967,7 @@ def emissions(
     )
 
     # SOME AFOLU RESULTS LOOK INCORRECT, FIX THEM HERE WHILE WAITING FOR TNC FEEDBACK
-    fix_afolu = True
+    fix_afolu = False
     if fix_afolu is True:
         # Avoided Coastal Impacts (flux looks too high by 10)
         emissions_afolu.update(
@@ -994,7 +995,7 @@ def emissions(
                 ).values
             ].multiply(1e5)
         )
-        # Avoided Cropland Soil Health (looks too low by 1e1)
+        # Cropland Soil Health (looks too low by 1e1)
         emissions_afolu.update(
             emissions_afolu[
                 (

@@ -564,22 +564,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         0
     )
 
-    # List all historical values higher than max extent
-    # afolu_historical_toohigh = afolu_historical[(afolu_historical.values > 1).any(axis=1)]
-
-    # FIX historical values higher than max extent
-    fix_afolu = True
-    if fix_afolu is True:
-        afolu_historical.update(
-            afolu_historical[
-                (
-                    afolu_historical.reset_index().variable.str.contains(
-                        "Peat Restoration"
-                    )
-                ).values
-            ].multiply(1e-2)
-        )
-
+    # Set max extent to 1 (100%) for historical years
     afolu_historical = afolu_historical.clip(upper=1)
 
     # Plot afolu_historical [% of Max Extent]
@@ -774,7 +759,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             go.Scatter(
                 name=analog,
                 line=dict(width=1),
-                x=fig2.index.unique(),
+                x=np.arange(0, fig2.index.unique().max() + 1, 1),
                 y=fig2.loc[:, analog].multiply(100),
                 legendgroup=analog,
                 showlegend=True,

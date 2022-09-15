@@ -311,7 +311,7 @@ PD22,Pathway,OAS-L,MMR,Myanmar,Agroforestry,Max extent,Mha,13.2170,100,NA,NA,NA,
 PD22,Pathway,LAM-M,ARG,Argentina,Natural Regeneration,Max extent,Mha,5.9948,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,MOZ,Mozambique,Optimal Intensity,Max extent,Mha,12.8206,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,ETH,Ethiopia,Cropland Soil Health,Max extent,Mha,12.5110,100,NA,NA,NA,NA
-PD22,Pathway,IDN,IDN,Indonesia,Peat Restoration,Max extent,Mha,12.4900,100,NA,NA,NA,NA
+PD22,Pathway,PAK,AFG,Afghanistan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,PRY,Paraguay,Agroforestry,Max extent,Mha,12.4248,100,NA,NA,NA,NA
 PD22,Pathway,MEX,MEX,Mexico,Biochar,Max extent,Mha,12.2632,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,BOL,Bolivia,Optimal Intensity,Max extent,Mha,12.2248,100,NA,NA,NA,NA
@@ -353,7 +353,7 @@ PD22,Pathway,EU15,FRA,France (except French Guiana),Optimal Intensity,Max extent
 PD22,Pathway,OAS-CPA,VNM,Vietnam,Agroforestry,Max extent,Mha,9.1926,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,BGD,Bangladesh,Biochar,Max extent,Mha,9.1648,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,CIV,Cote d'Ivoire,Agroforestry,Max extent,Mha,9.1260,100,NA,NA,NA,NA
-PD22,Pathway,RUS,RUS,Russia,Peat Restoration,Max extent,Mha,9.0600,100,NA,NA,NA,NA
+PD22,Pathway,EEU,ALB,Albania,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,GHA,Ghana,Agroforestry,Max extent,Mha,9.0231,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,BGD,Bangladesh,Agroforestry,Max extent,Mha,8.9995,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,MMR,Myanmar,Optimal Intensity,Max extent,Mha,8.8723,100,NA,NA,NA,NA
@@ -436,7 +436,7 @@ PD22,Pathway,OAS-L,PHL,Philippines,Agroforestry,Max extent,Mha,4.8800,100,NA,NA,
 PD22,Pathway,EU15,PRT,Portugal,Agroforestry,Max extent,Mha,4.8503,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,BGD,Bangladesh,Cropland Soil Health,Max extent,Mha,4.8356,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Agroforestry,Max extent,Mha,4.8255,100,NA,NA,NA,NA
-PD22,Pathway,EU15,FIN,Finland,Peat Restoration,Max extent,Mha,4.7568,100,NA,NA,NA,NA
+PD22,Pathway,NAF,DZA,Algeria,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EU15,GRC,Greece,Agroforestry,Max extent,Mha,4.7540,100,NA,NA,NA,NA
 PD22,Pathway,EU15,GRC,Greece,Cropland Soil Health,Max extent,Mha,4.7435,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,BEN,Benin,Natural Regeneration,Max extent,Mha,0.0032,100,NA,NA,NA,NA
@@ -565,7 +565,7 @@ PD22,Pathway,EU15,GRC,Greece,Optimal Intensity,Max extent,Mha,2.0649,100,NA,NA,N
 PD22,Pathway,SSA-L,BEN,Benin,Biochar,Max extent,Mha,2.0431,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,MYS,Malaysia,Nitrogen Fertilizer Management,Max extent,MtCO2e,2.0300,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,BLZ,Belize,Natural Regeneration,Max extent,Mha,0.1615,100,NA,NA,NA,NA
-PD22,Pathway,CHN,CHN,China,Peat Restoration,Max extent,Mha,2.0020,100,NA,NA,NA,NA
+PD22,Pathway,SSA-M,AGO,Angola,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,MYS,Malaysia,Agroforestry,Max extent,Mha,2.0001,100,NA,NA,NA,NA
 PD22,Pathway,EEU-FSU,BLR,Belarus,Biochar,Max extent,Mha,1.9873,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,TGO,Togo,Agroforestry,Max extent,Mha,1.9769,100,NA,NA,NA,NA
@@ -585,7 +585,7 @@ PD22,Pathway,SSA-L,ZWE,Zimbabwe,Biochar,Max extent,Mha,1.8384,100,NA,NA,NA,NA
 PD22,Pathway,EU15,FIN,Finland,Cropland Soil Health,Max extent,Mha,1.8370,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,GIN,Guinea,Cropland Soil Health,Max extent,Mha,1.8164,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,YEM,Yemen,Cropland Soil Health,Max extent,Mha,1.8138,100,NA,NA,NA,NA
-PD22,Pathway,EU15,GBR,United Kingdom,Peat Restoration,Max extent,Mha,1.8088,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,ARG,Argentina,Peat Restoration,Max extent,Mha,0.0185,100,NA,NA,NA,NA
 PD22,Pathway,EU12-M,LTU,Lithuania,Cropland Soil Health,Max extent,Mha,1.8027,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,MRT,Mauritania,Cropland Soil Health,Max extent,Mha,1.7971,100,NA,NA,NA,NA
 PD22,Pathway,JPN,JPN,Japan,Biochar,Max extent,Mha,1.7924,100,NA,NA,NA,NA
@@ -593,7 +593,7 @@ PD22,Pathway,EU12-M,ROU,Romania,Optimal Intensity,Max extent,Mha,1.7748,100,NA,N
 PD22,Pathway,EU12-H,SVK,Slovakia,Cropland Soil Health,Max extent,Mha,1.7377,100,NA,NA,NA,NA
 PD22,Pathway,CAS,ARM,Armenia,Agroforestry,Max extent,Mha,1.7104,100,NA,NA,NA,NA
 PD22,Pathway,EU15,DNK,Denmark (except Greenland),Cropland Soil Health,Max extent,Mha,1.7048,100,NA,NA,NA,NA
-PD22,Pathway,EEU-FSU,BLR,Belarus,Peat Restoration,Max extent,Mha,1.6970,100,NA,NA,NA,NA
+PD22,Pathway,CAS,ARM,Armenia,Peat Restoration,Max extent,Mha,0.0020,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,NPL,Nepal,Cropland Soil Health,Max extent,Mha,1.6913,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,CZE,Czech Republic,Biochar,Max extent,Mha,1.6883,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,DOM,Dominican Republic,Agroforestry,Max extent,Mha,1.6796,100,NA,NA,NA,NA
@@ -601,7 +601,7 @@ PD22,Pathway,OAS-CPA,LAO,Laos,Cropland Soil Health,Max extent,Mha,1.6237,100,NA,
 PD22,Pathway,EU15,BEL,Belgium,Agroforestry,Max extent,Mha,1.6210,100,NA,NA,NA,NA
 PD22,Pathway,EEU,BIH,Bosnia and Herzegovina,Agroforestry,Max extent,Mha,1.6091,100,NA,NA,NA,NA
 PD22,Pathway,BRA,BRA,Brazil,Natural Regeneration,Max extent,Mha,46.7980,100,NA,NA,NA,NA
-PD22,Pathway,EU15,DEU,Germany,Peat Restoration,Max extent,Mha,1.5978,100,NA,NA,NA,NA
+PD22,Pathway,ANUZ,AUS,Australia,Peat Restoration,Max extent,Mha,0.1870,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,PER,Peru,Cropland Soil Health,Max extent,Mha,1.5925,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,GTM,Guatemala,Biochar,Max extent,Mha,1.5797,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,TGO,Togo,Biochar,Max extent,Mha,1.5710,100,NA,NA,NA,NA
@@ -640,7 +640,7 @@ PD22,Pathway,OAS-M,LKA,Sri Lanka,Biochar,Max extent,Mha,1.2810,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Optimal Intensity,Max extent,Mha,1.2694,100,NA,NA,NA,NA
 PD22,Pathway,EU15,AUT,Austria,Optimal Intensity,Max extent,Mha,1.2674,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,PAN,Panama,Agroforestry,Max extent,Mha,1.2651,100,NA,NA,NA,NA
-PD22,Pathway,EU12-H,POL,Poland,Peat Restoration,Max extent,Mha,1.2560,100,NA,NA,NA,NA
+PD22,Pathway,EU15,AUT,Austria,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,TUR,TUN,Tunisia,Optimal Intensity,Max extent,Mha,1.2525,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,RWA,Rwanda,Biochar,Max extent,Mha,1.2522,100,NA,NA,NA,NA
 PD22,Pathway,EEU-FSU,UKR,Ukraine,Optimal Intensity,Max extent,Mha,1.2518,100,NA,NA,NA,NA
@@ -651,7 +651,7 @@ PD22,Pathway,OAS-M,LKA,Sri Lanka,Nitrogen Fertilizer Management,Max extent,MtCO2
 PD22,Pathway,EEU,SRB,Serbia,Nitrogen Fertilizer Management,Max extent,MtCO2e,1.2100,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Improved Rice,Max extent,Mha,1.2051,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,MDG,Madagascar,Improved Rice,Max extent,Mha,1.1998,100,NA,NA,NA,NA
-PD22,Pathway,EU15,IRL,Ireland,Peat Restoration,Max extent,Mha,1.1972,100,NA,NA,NA,NA
+PD22,Pathway,CAS,AZE,Azerbaijan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,USA,USA,United States (except Alaska),Improved Rice,Max extent,Mha,1.1827,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,TGO,Togo,Cropland Soil Health,Max extent,Mha,1.1763,100,NA,NA,NA,NA
 PD22,Pathway,BRA,BRA,Brazil,Coastal Restoration,Max extent,Mha,1.1747,100,NA,NA,NA,NA
@@ -662,7 +662,7 @@ PD22,Pathway,EU15,SWE,Sweden,Optimal Intensity,Max extent,Mha,1.1511,100,NA,NA,N
 PD22,Pathway,IDN,IDN,Indonesia,Avoided Peat Impacts,Max extent,Mha,1.1440,100,NA,NA,NA,NA
 PD22,Pathway,EFTA,CHE,Switzerland,Optimal Intensity,Max extent,Mha,1.1411,100,NA,NA,NA,NA
 PD22,Pathway,EU12-M,BGR,Bulgaria,Nitrogen Fertilizer Management,Max extent,MtCO2e,1.1400,100,NA,NA,NA,NA
-PD22,Pathway,EU15,SWE,Sweden,Peat Restoration,Max extent,Mha,1.1397,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,BHS,Bahamas,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,TUR,TUN,Tunisia,Biochar,Max extent,Mha,1.1394,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SLE,Sierra Leone,Biochar,Max extent,Mha,1.1355,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Cropland Soil Health,Max extent,Mha,1.1339,100,NA,NA,NA,NA
@@ -674,9 +674,9 @@ PD22,Pathway,LAM-L,HTI,Haiti,Agroforestry,Max extent,Mha,1.0854,100,NA,NA,NA,NA
 PD22,Pathway,CAS,AZE,Azerbaijan,Biochar,Max extent,Mha,1.0837,100,NA,NA,NA,NA
 PD22,Pathway,OAS-CPA,LAO,Laos,Biochar,Max extent,Mha,1.0790,100,NA,NA,NA,NA
 PD22,Pathway,ANUZ,AUS,Australia,Coastal Restoration,Max extent,Mha,1.0528,100,NA,NA,NA,NA
-PD22,Pathway,USA,USA,United States (except Alaska),Peat Restoration,Max extent,Mha,1.0516,100,NA,NA,NA,NA
+PD22,Pathway,OAS-L,BGD,Bangladesh,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,CAS,ARM,Armenia,Cropland Soil Health,Max extent,Mha,1.0343,100,NA,NA,NA,NA
-PD22,Pathway,CAN,CAN,Canada,Peat Restoration,Max extent,Mha,1.0252,100,NA,NA,NA,NA
+PD22,Pathway,EEU-FSU,BLR,Belarus,Peat Restoration,Max extent,Mha,1.6970,100,NA,NA,NA,NA
 PD22,Pathway,EU15,IRL,Ireland,Optimal Intensity,Max extent,Mha,1.0246,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CHL,Chile,Natural Regeneration,Max extent,Mha,1.5219,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CRI,Costa Rica,Agroforestry,Max extent,Mha,1.0200,100,NA,NA,NA,NA
@@ -707,7 +707,7 @@ PD22,Pathway,EFTA,NOR,Norway,Cropland Soil Health,Max extent,Mha,0.8840,100,NA,N
 PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Biochar,Max extent,Mha,0.8805,100,NA,NA,NA,NA
 PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Nitrogen Fertilizer Management,Max extent,MtCO2e,0.8800,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,URY,Uruguay,Cropland Soil Health,Max extent,Mha,0.8510,100,NA,NA,NA,NA
-PD22,Pathway,OAS-M,MYS,Malaysia,Peat Restoration,Max extent,Mha,0.8440,100,NA,NA,NA,NA
+PD22,Pathway,EU15,BEL,Belgium,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EU15,BEL,Belgium,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.8400,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,ECU,Ecuador,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.8300,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,GNB,Guinea-Bissau,Agroforestry,Max extent,Mha,0.8245,100,NA,NA,NA,NA
@@ -741,7 +741,7 @@ PD22,Pathway,SSA-L,BDI,Burundi,Agroforestry,Max extent,Mha,0.7106,100,NA,NA,NA,N
 PD22,Pathway,EEU,HRV,Croatia,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.7100,100,NA,NA,NA,NA
 PD22,Pathway,NAF,LBY,Libya,Optimal Intensity,Max extent,Mha,0.7093,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,MLI,Mali,Improved Rice,Max extent,Mha,0.7078,100,NA,NA,NA,NA
-PD22,Pathway,EEU-FSU,UKR,Ukraine,Peat Restoration,Max extent,Mha,0.7000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-L,BLZ,Belize,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,NGA,Nigeria,Coastal Restoration,Max extent,Mha,0.6997,100,NA,NA,NA,NA
 PD22,Pathway,CAS,KGZ,Kyrgyzstan,Biochar,Max extent,Mha,0.6963,100,NA,NA,NA,NA
 PD22,Pathway,EEU,ALB,Albania,Agroforestry,Max extent,Mha,0.6930,100,NA,NA,NA,NA
@@ -768,7 +768,7 @@ PD22,Pathway,EU12-H,CZE,Czech Republic,Optimal Intensity,Max extent,Mha,0.6005,1
 PD22,Pathway,EEU,BIH,Bosnia and Herzegovina,Optimal Intensity,Max extent,Mha,0.6002,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,IRN,Iran,Improved Rice,Max extent,Mha,0.5964,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,CZE,Czech Republic,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.5900,100,NA,NA,NA,NA
-PD22,Pathway,EU12-H,EST,Estonia,Peat Restoration,Max extent,Mha,0.5900,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,BEN,Benin,Peat Restoration,Max extent,Mha,0.0050,100,NA,NA,NA,NA
 PD22,Pathway,OAS-CPA,KHM,Cambodia,Optimal Intensity,Max extent,Mha,0.5892,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,CPV,Cape Verde,Natural Regeneration,Max extent,Mha,0.1806,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SWZ,Swaziland,Cropland Soil Health,Max extent,Mha,0.5655,100,NA,NA,NA,NA
@@ -792,7 +792,7 @@ PD22,Pathway,LAM-L,GTM,Guatemala,Optimal Intensity,Max extent,Mha,0.5252,100,NA,
 PD22,Pathway,EFTA,NOR,Norway,Optimal Intensity,Max extent,Mha,0.5175,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SSD,South Sudan,Biochar,Max extent,Mha,0.5154,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,JOR,Jordan,Cropland Soil Health,Max extent,Mha,0.5064,100,NA,NA,NA,NA
-PD22,Pathway,EU12-M,LVA,Latvia,Peat Restoration,Max extent,Mha,0.5051,100,NA,NA,NA,NA
+PD22,Pathway,OAS-M,BTN,Bhutan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,LBN,Lebanon,Cropland Soil Health,Max extent,Mha,0.5046,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Agroforestry,Max extent,Mha,0.5037,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,PRK,Democratic People's Republic of Korea (North Korea),Improved Rice,Max extent,Mha,0.4968,100,NA,NA,NA,NA
@@ -831,7 +831,7 @@ PD22,Pathway,LAM-M,PER,Peru,Improved Rice,Max extent,Mha,0.3974,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SWZ,Swaziland,Optimal Intensity,Max extent,Mha,0.3971,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,IRQ,Iraq,Optimal Intensity,Max extent,Mha,0.3870,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,EST,Estonia,Biochar,Max extent,Mha,0.3855,100,NA,NA,NA,NA
-PD22,Pathway,EU15,NLD,Netherlands,Peat Restoration,Max extent,Mha,0.3805,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,BOL,Bolivia,Peat Restoration,Max extent,Mha,0.0015,100,NA,NA,NA,NA
 PD22,Pathway,EU12-M,ROU,Romania,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.3800,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,IRQ,Iraq,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.3700,100,NA,NA,NA,NA
 PD22,Pathway,NAF,LBY,Libya,Biochar,Max extent,Mha,0.3683,100,NA,NA,NA,NA
@@ -841,7 +841,7 @@ PD22,Pathway,MEA-M,SYR,Syria,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.
 PD22,Pathway,LAM-M,URY,Uruguay,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.3500,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CUB,Cuba,Coastal Restoration,Max extent,Mha,0.3485,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,MOZ,Mozambique,Coastal Restoration,Max extent,Mha,0.3475,100,NA,NA,NA,NA
-PD22,Pathway,EU12-M,LTU,Lithuania,Peat Restoration,Max extent,Mha,0.3449,100,NA,NA,NA,NA
+PD22,Pathway,EEU,BIH,Bosnia and Herzegovina,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,CYP,Cyprus,Natural Regeneration,Max extent,Mha,0.0493,100,NA,NA,NA,NA
 PD22,Pathway,EEU-FSU,BLR,Belarus,Optimal Intensity,Max extent,Mha,0.3435,100,NA,NA,NA,NA
 PD22,Pathway,OAS-CPA,MNG,Mongolia,Biochar,Max extent,Mha,0.3401,100,NA,NA,NA,NA
@@ -873,7 +873,7 @@ PD22,Pathway,LAM-M,ECU,Ecuador,Natural Regeneration,Max extent,Mha,2.1171,100,NA
 PD22,Pathway,EFTA,CHE,Switzerland,Cropland Soil Health,Max extent,Mha,0.3053,100,NA,NA,NA,NA
 PD22,Pathway,NAF,EGY,Egypt,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,VEN,Venezuela,Coastal Restoration,Max extent,Mha,0.3020,100,NA,NA,NA,NA
-PD22,Pathway,BRA,BRA,Brazil,Peat Restoration,Max extent,Mha,0.3003,100,NA,NA,NA,NA
+PD22,Pathway,SSA-M,BWA,Botswana,Peat Restoration,Max extent,Mha,0.0100,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,ERI,Eritrea,Natural Regeneration,Max extent,Mha,0.0009,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Coastal Restoration,Max extent,Mha,0.2957,100,NA,NA,NA,NA
 PD22,Pathway,NAF,ESH,Western Sahara,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
@@ -890,7 +890,7 @@ PD22,Pathway,EU12-M,LTU,Lithuania,Optimal Intensity,Max extent,Mha,0.2787,100,NA
 PD22,Pathway,EU12-H,CYP,Cyprus,Agroforestry,Max extent,Mha,0.2703,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,FJI,Fiji,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,NAF,LBY,Libya,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.2700,100,NA,NA,NA,NA
-PD22,Pathway,EFTA,ISL,Iceland,Peat Restoration,Max extent,Mha,0.2681,100,NA,NA,NA,NA
+PD22,Pathway,BRA,BRA,Brazil,Peat Restoration,Max extent,Mha,0.3003,100,NA,NA,NA,NA
 PD22,Pathway,NA,FLK,Falkland Islands,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,NAM,Namibia,Biochar,Max extent,Mha,0.2680,100,NA,NA,NA,NA
 PD22,Pathway,EU15,FRA,France (except French Guiana),Natural Regeneration,Max extent,Mha,3.4152,100,NA,NA,NA,NA
@@ -909,7 +909,7 @@ PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Biochar,Max extent,Mha,0.2484,100
 PD22,Pathway,SSA-L,GHA,Ghana,Natural Regeneration,Max extent,Mha,2.2769,100,NA,NA,NA,NA
 PD22,Pathway,USA,PRI,Puerto Rico,Agroforestry,Max extent,Mha,0.2476,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,GIN,Guinea,Natural Regeneration,Max extent,Mha,0.2822,100,NA,NA,NA,NA
-PD22,Pathway,EFTA,NOR,Norway,Peat Restoration,Max extent,Mha,0.2458,100,NA,NA,NA,NA
+PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Peat Restoration,Max extent,Mha,0.0140,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,GLP,Guadeloupe,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,ARG,Argentina,Improved Rice,Max extent,Mha,0.2441,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,GMB,"Gambia, The",Natural Regeneration,Max extent,Mha,0.0185,100,NA,NA,NA,NA
@@ -944,8 +944,8 @@ PD22,Pathway,EU12-H,HUN,Hungary,Natural Regeneration,Max extent,Mha,0.9321,100,N
 PD22,Pathway,LAM-L,NIC,Nicaragua,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.2200,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,SVK,Slovakia,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.2200,100,NA,NA,NA,NA
 PD22,Pathway,IDN,IDN,Indonesia,Natural Regeneration,Max extent,Mha,12.8669,100,NA,NA,NA,NA
-PD22,Pathway,EU12-M,ROU,Romania,Peat Restoration,Max extent,Mha,0.2170,100,NA,NA,NA,NA
-PD22,Pathway,EU15,FRA,France (except French Guiana),Peat Restoration,Max extent,Mha,0.2166,100,NA,NA,NA,NA
+PD22,Pathway,EU12-M,BGR,Bulgaria,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,BFA,Burkina Faso,Peat Restoration,Max extent,Mha,0.0050,100,NA,NA,NA,NA
 PD22,Pathway,IND,IND,India,Natural Regeneration,Max extent,Mha,27.1239,100,NA,NA,NA,NA
 PD22,Pathway,CHN,CHN,China,Avoided Peat Impacts,Max extent,Mha,0.2148,100,NA,NA,NA,NA
 PD22,Pathway,EU15,IRL,Ireland,Natural Regeneration,Max extent,Mha,0.8980,100,NA,NA,NA,NA
@@ -967,7 +967,7 @@ PD22,Pathway,MEA-H,ARE,United Arab Emirates,Nitrogen Fertilizer Management,Max e
 PD22,Pathway,EEU,MNE,Montenegro,Agroforestry,Max extent,Mha,0.1995,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,JAM,Jamaica,Natural Regeneration,Max extent,Mha,0.3060,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,VEN,Venezuela,Improved Rice,Max extent,Mha,0.1988,100,NA,NA,NA,NA
-PD22,Pathway,EU15,DNK,Denmark (except Greenland),Peat Restoration,Max extent,Mha,0.1983,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,BDI,Burundi,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,BOL,Bolivia,Improved Rice,Max extent,Mha,0.1982,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,JOR,Jordan,Natural Regeneration,Max extent,Mha,0.0004,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,CMR,Cameroon,Coastal Restoration,Max extent,Mha,0.1931,100,NA,NA,NA,NA
@@ -980,7 +980,7 @@ PD22,Pathway,SSA-L,GHA,Ghana,Improved Rice,Max extent,Mha,0.1882,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,DOM,Dominican Republic,Improved Rice,Max extent,Mha,0.1880,100,NA,NA,NA,NA
 PD22,Pathway,EU12-M,BGR,Bulgaria,Optimal Intensity,Max extent,Mha,0.1870,100,NA,NA,NA,NA
 PD22,Pathway,CAS,KGZ,Kyrgyzstan,Natural Regeneration,Max extent,Mha,0.0651,100,NA,NA,NA,NA
-PD22,Pathway,ANUZ,AUS,Australia,Peat Restoration,Max extent,Mha,0.1870,100,NA,NA,NA,NA
+PD22,Pathway,OAS-CPA,KHM,Cambodia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-CPA,KHM,Cambodia,Natural Regeneration,Max extent,Mha,2.3756,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,PAN,Panama,Biochar,Max extent,Mha,0.1865,100,NA,NA,NA,NA
 PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Natural Regeneration,Max extent,Mha,0.3290,100,NA,NA,NA,NA
@@ -996,7 +996,7 @@ PD22,Pathway,SSA-L,LBR,Liberia,Natural Regeneration,Max extent,Mha,0.2465,100,NA
 PD22,Pathway,MEA-H,KWT,Kuwait,Agroforestry,Max extent,Mha,0.1733,100,NA,NA,NA,NA
 PD22,Pathway,NAF,LBY,Libya,Natural Regeneration,Max extent,Mha,0.0294,100,NA,NA,NA,NA
 PD22,Pathway,CAS,GEO,Georgia,Biochar,Max extent,Mha,0.1701,100,NA,NA,NA,NA
-PD22,Pathway,OAS-L,MMR,Myanmar,Peat Restoration,Max extent,Mha,0.1700,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,CMR,Cameroon,Peat Restoration,Max extent,Mha,0.0100,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,LKA,Sri Lanka,Natural Regeneration,Max extent,Mha,0.1742,100,NA,NA,NA,NA
 PD22,Pathway,EFTA,CHE,Switzerland,Biochar,Max extent,Mha,0.1689,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,MRT,Mauritania,Biochar,Max extent,Mha,0.1677,100,NA,NA,NA,NA
@@ -1025,7 +1025,7 @@ PD22,Pathway,SSA-L,MLI,Mali,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA
 PD22,Pathway,SSA-L,CMR,Cameroon,Improved Rice,Max extent,Mha,0.1519,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,MMR,Myanmar,Natural Regeneration,Max extent,Mha,13.3271,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CUB,Cuba,Improved Rice,Max extent,Mha,0.1512,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,ZMB,Zambia,Peat Restoration,Max extent,Mha,0.1508,100,NA,NA,NA,NA
+PD22,Pathway,CAN,CAN,Canada,Peat Restoration,Max extent,Mha,1.0252,100,NA,NA,NA,NA
 PD22,Pathway,EEU,MNE,Montenegro,Optimal Intensity,Max extent,Mha,0.1506,100,NA,NA,NA,NA
 PD22,Pathway,EEU,MNE,Montenegro,Natural Regeneration,Max extent,Mha,0.1300,100,NA,NA,NA,NA
 PD22,Pathway,EEU,ALB,Albania,Biochar,Max extent,Mha,0.1503,100,NA,NA,NA,NA
@@ -1056,7 +1056,7 @@ PD22,Pathway,EU15,LUX,Luxembourg,Agroforestry,Max extent,Mha,0.1324,100,NA,NA,NA
 PD22,Pathway,SSA-L,NER,Niger,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SEN,Senegal,Improved Rice,Max extent,Mha,0.1314,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,NGA,Nigeria,Natural Regeneration,Max extent,Mha,3.8042,100,NA,NA,NA,NA
-PD22,Pathway,OAS-CPA,VNM,Vietnam,Peat Restoration,Max extent,Mha,0.1310,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,CPV,Cape Verde,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,SVN,Slovenia,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.1300,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,NIC,Nicaragua,Natural Regeneration,Max extent,Mha,1.3503,100,NA,NA,NA,NA
 PD22,Pathway,EU15,NLD,Netherlands,Natural Regeneration,Max extent,Mha,0.3181,100,NA,NA,NA,NA
@@ -1098,12 +1098,12 @@ PD22,Pathway,MEX,MEX,Mexico,Improved Rice,Max extent,Mha,0.1016,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,PRY,Paraguay,Natural Regeneration,Max extent,Mha,5.5317,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SLE,Sierra Leone,Optimal Intensity,Max extent,Mha,0.1007,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,PAN,Panama,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.1000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,ETH,Ethiopia,Peat Restoration,Max extent,Mha,0.1000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,CAF,Central African Republic,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,PYF,French Polynesia,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,GUY,Guyana,Peat Restoration,Max extent,Mha,0.1000,100,NA,NA,NA,NA
-PD22,Pathway,MEX,MEX,Mexico,Peat Restoration,Max extent,Mha,0.1000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,TCD,Chad,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,CHL,Chile,Peat Restoration,Max extent,Mha,0.0083,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,QAT,Qatar,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,MOZ,Mozambique,Peat Restoration,Max extent,Mha,0.1000,100,NA,NA,NA,NA
+PD22,Pathway,CHN,CHN,China,Peat Restoration,Max extent,Mha,2.0020,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,NIC,Nicaragua,Improved Rice,Max extent,Mha,0.0998,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,REU,Reunion,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Optimal Intensity,Max extent,Mha,0.0992,100,NA,NA,NA,NA
@@ -1112,7 +1112,7 @@ PD22,Pathway,OAS-L,VUT,Vanuatu,Biochar,Max extent,Mha,0.0965,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,SVN,Slovenia,Biochar,Max extent,Mha,0.0956,100,NA,NA,NA,NA
 PD22,Pathway,RUS,RUS,Russia,Natural Regeneration,Max extent,Mha,46.4800,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,RWA,Rwanda,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,MDG,Madagascar,Peat Restoration,Max extent,Mha,0.0926,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,COL,Colombia,Peat Restoration,Max extent,Mha,0.0427,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,SAU,Saudi Arabia,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,UGA,Uganda,Avoided Peat Impacts,Max extent,Mha,0.0925,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,GUY,Guyana,Cropland Soil Health,Max extent,Mha,0.0924,100,NA,NA,NA,NA
@@ -1120,7 +1120,7 @@ PD22,Pathway,SSA-L,SDN,Sudan,Natural Regeneration,Max extent,Mha,0.0000,100,NA,N
 PD22,Pathway,LAM-M,PRY,Paraguay,Improved Rice,Max extent,Mha,0.0913,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,GMB,"Gambia, The",Optimal Intensity,Max extent,Mha,0.0910,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SEN,Senegal,Natural Regeneration,Max extent,Mha,0.0028,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,VEN,Venezuela,Peat Restoration,Max extent,Mha,0.0901,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,COM,Comoros,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,TUR,TUN,Tunisia,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0900,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,CMR,Cameroon,Avoided Peat Impacts,Max extent,Mha,0.0889,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,BWA,Botswana,Biochar,Max extent,Mha,0.0861,100,NA,NA,NA,NA
@@ -1148,12 +1148,12 @@ PD22,Pathway,LAM-M,SUR,Suriname,Agroforestry,Max extent,Mha,0.0692,100,NA,NA,NA,
 PD22,Pathway,SSA-L,COM,Comoros,Biochar,Max extent,Mha,0.0691,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,SLB,Solomon Islands,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,PAK,PAK,Pakistan,Coastal Restoration,Max extent,Mha,0.0678,100,NA,NA,NA,NA
-PD22,Pathway,EU12-H,HUN,Hungary,Peat Restoration,Max extent,Mha,0.0677,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,CRI,Costa Rica,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,JAM,Jamaica,Optimal Intensity,Max extent,Mha,0.0653,100,NA,NA,NA,NA
 PD22,Pathway,EU15,PRT,Portugal,Improved Rice,Max extent,Mha,0.0650,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,TGO,Togo,Improved Rice,Max extent,Mha,0.0647,100,NA,NA,NA,NA
 PD22,Pathway,OAS-CPA,KHM,Cambodia,Coastal Restoration,Max extent,Mha,0.0644,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,CUB,Cuba,Peat Restoration,Max extent,Mha,0.0644,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,CIV,Cote d'Ivoire,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,SUR,Suriname,Biochar,Max extent,Mha,0.0637,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SLE,Sierra Leone,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,GMB,"Gambia, The",Coastal Restoration,Max extent,Mha,0.0626,100,NA,NA,NA,NA
@@ -1161,7 +1161,7 @@ PD22,Pathway,EU15,LUX,Luxembourg,Optimal Intensity,Max extent,Mha,0.0608,100,NA,
 PD22,Pathway,SSA-L,ZMB,Zambia,Avoided Peat Impacts,Max extent,Mha,0.0607,100,NA,NA,NA,NA
 PD22,Pathway,EFTA,ISL,Iceland,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0600,100,NA,NA,NA,NA
 PD22,Pathway,OAS-CPA,MNG,Mongolia,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0600,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Peat Restoration,Max extent,Mha,0.0600,100,NA,NA,NA,NA
+PD22,Pathway,EEU,HRV,Croatia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CRI,Costa Rica,Improved Rice,Max extent,Mha,0.0590,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,JAM,Jamaica,Cropland Soil Health,Max extent,Mha,0.0584,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,JOR,Jordan,Biochar,Max extent,Mha,0.0582,100,NA,NA,NA,NA
@@ -1172,8 +1172,8 @@ PD22,Pathway,LAM-M,GUF,French Guiana (France),Coastal Restoration,Max extent,Mha
 PD22,Pathway,LAM-M,SLV,El Salvador,Natural Regeneration,Max extent,Mha,0.3763,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,FJI,Fiji,Coastal Restoration,Max extent,Mha,0.0557,100,NA,NA,NA,NA
 PD22,Pathway,CAS,UZB,Uzbekistan,Improved Rice,Max extent,Mha,0.0553,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,RWA,Rwanda,Peat Restoration,Max extent,Mha,0.0552,100,NA,NA,NA,NA
-PD22,Pathway,OAS-M,THA,Thailand,Peat Restoration,Max extent,Mha,0.0540,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,CUB,Cuba,Peat Restoration,Max extent,Mha,0.0644,100,NA,NA,NA,NA
+PD22,Pathway,EU12-H,CYP,Cyprus,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,IRQ,Iraq,Improved Rice,Max extent,Mha,0.0539,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,SLB,Solomon Islands,Coastal Restoration,Max extent,Mha,0.0529,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,BEN,Benin,Improved Rice,Max extent,Mha,0.0528,100,NA,NA,NA,NA
@@ -1190,7 +1190,7 @@ PD22,Pathway,SSA-L,MWI,Malawi,Improved Rice,Max extent,Mha,0.0468,100,NA,NA,NA,N
 PD22,Pathway,SSA-L,MDG,Madagascar,Avoided Peat Impacts,Max extent,Mha,0.0440,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,NCL,New Caledonia,Optimal Intensity,Max extent,Mha,0.0431,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,EST,Estonia,Avoided Peat Impacts,Max extent,Mha,0.0431,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,COL,Colombia,Peat Restoration,Max extent,Mha,0.0427,100,NA,NA,NA,NA
+PD22,Pathway,EU12-H,CZE,Czech Republic,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,BTN,Bhutan,Biochar,Max extent,Mha,0.0426,100,NA,NA,NA,NA
 PD22,Pathway,EU15,LUX,Luxembourg,Cropland Soil Health,Max extent,Mha,0.0415,100,NA,NA,NA,NA
 PD22,Pathway,USA,PRI,Puerto Rico,Cropland Soil Health,Max extent,Mha,0.0413,100,NA,NA,NA,NA
@@ -1208,7 +1208,7 @@ PD22,Pathway,EU12-H,CYP,Cyprus,Optimal Intensity,Max extent,Mha,0.0390,100,NA,NA
 PD22,Pathway,LAM-M,SLV,El Salvador,Coastal Restoration,Max extent,Mha,0.0389,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CRI,Costa Rica,Coastal Restoration,Max extent,Mha,0.0383,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,AGO,Angola,Coastal Restoration,Max extent,Mha,0.0382,100,NA,NA,NA,NA
-PD22,Pathway,LAM-L,HND,Honduras,Peat Restoration,Max extent,Mha,0.0375,100,NA,NA,NA,NA
+PD22,Pathway,OAS-L,PRK,Democratic People's Republic of Korea (North Korea),Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,REU,Reunion,Cropland Soil Health,Max extent,Mha,0.0371,100,NA,NA,NA,NA
 PD22,Pathway,EU15,FRA,France (except French Guiana),Avoided Peat Impacts,Max extent,Mha,0.0369,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,OMN,Oman,Optimal Intensity,Max extent,Mha,0.0363,100,NA,NA,NA,NA
@@ -1229,14 +1229,14 @@ PD22,Pathway,SSA-M,AGO,Angola,Improved Rice,Max extent,Mha,0.0304,100,NA,NA,NA,N
 PD22,Pathway,LAM-L,BLZ,Belize,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0300,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,KWT,Kuwait,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0300,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SEN,Senegal,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0300,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,NGA,Nigeria,Peat Restoration,Max extent,Mha,0.0300,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Peat Restoration,Max extent,Mha,0.0600,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Agroforestry,Max extent,Mha,0.0293,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,TLS,Timor-Leste,Improved Rice,Max extent,Mha,0.0290,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SSD,South Sudan,Natural Regeneration,Max extent,Mha,0.0019,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,CYP,Cyprus,Biochar,Max extent,Mha,0.0281,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,GTM,Guatemala,Coastal Restoration,Max extent,Mha,0.0277,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,LBR,Liberia,Coastal Restoration,Max extent,Mha,0.0273,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,SUR,Suriname,Peat Restoration,Max extent,Mha,0.0267,100,NA,NA,NA,NA
+PD22,Pathway,EU15,DNK,Denmark (except Greenland),Peat Restoration,Max extent,Mha,0.1983,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COM,Comoros,Improved Rice,Max extent,Mha,0.0266,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,WSM,Samoa,Biochar,Max extent,Mha,0.0265,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,SUR,Suriname,Cropland Soil Health,Max extent,Mha,0.0260,100,NA,NA,NA,NA
@@ -1252,29 +1252,29 @@ PD22,Pathway,SSA-L,ZMB,Zambia,Improved Rice,Max extent,Mha,0.0230,100,NA,NA,NA,N
 PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Agroforestry,Max extent,Mha,0.0228,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Natural Regeneration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,CHN,CHN,China,Coastal Restoration,Max extent,Mha,0.0221,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,TZA,Tanzania,Peat Restoration,Max extent,Mha,0.0221,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,DJI,Djibouti,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EU15,DEU,Germany,Avoided Peat Impacts,Max extent,Mha,0.0219,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,SLV,El Salvador,Optimal Intensity,Max extent,Mha,0.0218,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,LKA,Sri Lanka,Coastal Restoration,Max extent,Mha,0.0215,100,NA,NA,NA,NA
-PD22,Pathway,EFTA,CHE,Switzerland,Peat Restoration,Max extent,Mha,0.0213,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,DOM,Dominican Republic,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CHL,Chile,Avoided Peat Impacts,Max extent,Mha,0.0209,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CRI,Costa Rica,Optimal Intensity,Max extent,Mha,0.0208,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,KEN,Kenya,Peat Restoration,Max extent,Mha,0.0208,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,ECU,Ecuador,Peat Restoration,Max extent,Mha,0.0100,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,GHA,Ghana,Coastal Restoration,Max extent,Mha,0.0208,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,UGA,Uganda,Peat Restoration,Max extent,Mha,0.0204,100,NA,NA,NA,NA
+PD22,Pathway,NAF,EGY,Egypt,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,PYF,French Polynesia,Biochar,Max extent,Mha,0.0203,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,CPV,Cape Verde,Cropland Soil Health,Max extent,Mha,0.0202,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,NAM,Namibia,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0200,100,NA,NA,NA,NA
 PD22,Pathway,EU12-M,BGR,Bulgaria,Improved Rice,Max extent,Mha,0.0198,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Peat Restoration,Max extent,Mha,0.0198,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,SLV,El Salvador,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Cropland Soil Health,Max extent,Mha,0.0197,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,SLB,Solomon Islands,Cropland Soil Health,Max extent,Mha,0.0195,100,NA,NA,NA,NA
 PD22,Pathway,EU15,FRA,France (except French Guiana),Improved Rice,Max extent,Mha,0.0194,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,KEN,Kenya,Improved Rice,Max extent,Mha,0.0193,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,HTI,Haiti,Coastal Restoration,Max extent,Mha,0.0185,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,GLP,Guadeloupe,Cropland Soil Health,Max extent,Mha,0.0185,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,ARG,Argentina,Peat Restoration,Max extent,Mha,0.0185,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,PER,Peru,Peat Restoration,Max extent,Mha,0.0185,100,NA,NA,NA,NA
+PD22,Pathway,SSA-M,GNQ,Equatorial Guinea,Peat Restoration,Max extent,Mha,0.0008,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,ERI,Eritrea,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,RWA,Rwanda,Improved Rice,Max extent,Mha,0.0181,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COM,Comoros,Agroforestry,Max extent,Mha,0.0181,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,GTM,Guatemala,Improved Rice,Max extent,Mha,0.0178,100,NA,NA,NA,NA
@@ -1283,14 +1283,14 @@ PD22,Pathway,LAM-M,SUR,Suriname,Natural Regeneration,Max extent,Mha,0.0632,100,N
 PD22,Pathway,MEA-H,ARE,United Arab Emirates,Coastal Restoration,Max extent,Mha,0.0156,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,VUT,Vanuatu,Cropland Soil Health,Max extent,Mha,0.0153,100,NA,NA,NA,NA
 PD22,Pathway,NAF,EGY,Egypt,Optimal Intensity,Max extent,Mha,0.0151,100,NA,NA,NA,NA
-PD22,Pathway,EU29,ESP,Spain,Peat Restoration,Max extent,Mha,0.0150,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,SDN,Sudan,Peat Restoration,Max extent,Mha,0.0150,100,NA,NA,NA,NA
+PD22,Pathway,EU12-H,EST,Estonia,Peat Restoration,Max extent,Mha,0.5900,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,ETH,Ethiopia,Peat Restoration,Max extent,Mha,0.1000,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,SVK,Slovakia,Natural Regeneration,Max extent,Mha,0.3174,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Avoided Peat Impacts,Max extent,Mha,0.0147,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,LBR,Liberia,Agroforestry,Max extent,Mha,0.0147,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,GUF,French Guiana (France),Avoided Peat Impacts,Max extent,Mha,0.0146,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Coastal Restoration,Max extent,Mha,0.0143,100,NA,NA,NA,NA
-PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Peat Restoration,Max extent,Mha,0.0140,100,NA,NA,NA,NA
+PD22,Pathway,NA,FLK,Falkland Islands,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,CAS,KGZ,Kyrgyzstan,Improved Rice,Max extent,Mha,0.0139,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,SLB,Solomon Islands,Agroforestry,Max extent,Mha,0.0138,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,HUN,Hungary,Avoided Peat Impacts,Max extent,Mha,0.0137,100,NA,NA,NA,NA
@@ -1309,10 +1309,10 @@ PD22,Pathway,NAF,MAR,Morocco,Improved Rice,Max extent,Mha,0.0108,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,BOL,Bolivia,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0100,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,GAB,Gabon,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0100,100,NA,NA,NA,NA
 PD22,Pathway,EEU,MNE,Montenegro,Nitrogen Fertilizer Management,Max extent,MtCO2e,0.0100,100,NA,NA,NA,NA
-PD22,Pathway,SSA-M,BWA,Botswana,Peat Restoration,Max extent,Mha,0.0100,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,CMR,Cameroon,Peat Restoration,Max extent,Mha,0.0100,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,ECU,Ecuador,Peat Restoration,Max extent,Mha,0.0100,100,NA,NA,NA,NA
-PD22,Pathway,OAS-CPA,LAO,Laos,Peat Restoration,Max extent,Mha,0.0100,100,NA,NA,NA,NA
+PD22,Pathway,NA,FRO,Faroe Islands,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,OAS-L,FJI,Fiji,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU15,FIN,Finland,Peat Restoration,Max extent,Mha,4.7568,100,NA,NA,NA,NA
+PD22,Pathway,EU15,FRA,France (except French Guiana),Peat Restoration,Max extent,Mha,0.2166,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Biochar,Max extent,Mha,0.0099,100,NA,NA,NA,NA
 PD22,Pathway,USA,PRI,Puerto Rico,Optimal Intensity,Max extent,Mha,0.0098,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,JAM,Jamaica,Coastal Restoration,Max extent,Mha,0.0097,100,NA,NA,NA,NA
@@ -1323,14 +1323,14 @@ PD22,Pathway,OAS-M,THA,Thailand,Avoided Peat Impacts,Max extent,Mha,0.0090,100,N
 PD22,Pathway,MEA-H,SAU,Saudi Arabia,Coastal Restoration,Max extent,Mha,0.0089,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,IRN,Iran,Coastal Restoration,Max extent,Mha,0.0084,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,VUT,Vanuatu,Coastal Restoration,Max extent,Mha,0.0084,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,CHL,Chile,Peat Restoration,Max extent,Mha,0.0083,100,NA,NA,NA,NA
-PD22,Pathway,OAS-L,PHL,Philippines,Peat Restoration,Max extent,Mha,0.0080,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,GUF,French Guiana (France),Peat Restoration,Max extent,Mha,0.0020,100,NA,NA,NA,NA
+PD22,Pathway,OAS-M,PYF,French Polynesia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,BLZ,Belize,Optimal Intensity,Max extent,Mha,0.0079,100,NA,NA,NA,NA
 PD22,Pathway,SAF,ZAF,South Africa,Avoided Peat Impacts,Max extent,Mha,0.0077,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Cropland Soil Health,Max extent,Mha,0.0076,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,CUB,Cuba,Avoided Peat Impacts,Max extent,Mha,0.0075,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,ERI,Eritrea,Coastal Restoration,Max extent,Mha,0.0072,100,NA,NA,NA,NA
-PD22,Pathway,SAF,ZAF,South Africa,Peat Restoration,Max extent,Mha,0.0071,100,NA,NA,NA,NA
+PD22,Pathway,SSA-M,GAB,Gabon,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,DJI,Djibouti,Biochar,Max extent,Mha,0.0069,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,GUF,French Guiana (France),Cropland Soil Health,Max extent,Mha,0.0068,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,CIV,Cote d'Ivoire,Coastal Restoration,Max extent,Mha,0.0066,100,NA,NA,NA,NA
@@ -1348,9 +1348,9 @@ PD22,Pathway,LAM-M,GLP,Guadeloupe,Coastal Restoration,Max extent,Mha,0.0053,100,
 PD22,Pathway,OAS-CPA,LAO,Laos,Avoided Peat Impacts,Max extent,Mha,0.0052,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,OMN,Oman,Biochar,Max extent,Mha,0.0051,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,BHS,Bahamas,Cropland Soil Health,Max extent,Mha,0.0050,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,BEN,Benin,Peat Restoration,Max extent,Mha,0.0050,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,BFA,Burkina Faso,Peat Restoration,Max extent,Mha,0.0050,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,MLI,Mali,Peat Restoration,Max extent,Mha,0.0050,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,GMB,"Gambia, The",Peat Restoration,Max extent,Mha,0.0020,100,NA,NA,NA,NA
+PD22,Pathway,CAS,GEO,Georgia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU15,DEU,Germany,Peat Restoration,Max extent,Mha,1.5978,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SDN,Sudan,Coastal Restoration,Max extent,Mha,0.0050,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,GUY,Guyana,Avoided Peat Impacts,Max extent,Mha,0.0049,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,BLZ,Belize,Improved Rice,Max extent,Mha,0.0045,100,NA,NA,NA,NA
@@ -1366,7 +1366,7 @@ PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Cropland Soil Health,Max extent,Mha
 PD22,Pathway,LAM-M,SUR,Suriname,Avoided Peat Impacts,Max extent,Mha,0.0034,100,NA,NA,NA,NA
 PD22,Pathway,EEU,MKD,Macedonia (The Former Yugoslav Republic of Macedonia),Improved Rice,Max extent,Mha,0.0033,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,DJI,Djibouti,Cropland Soil Health,Max extent,Mha,0.0031,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,MRT,Mauritania,Peat Restoration,Max extent,Mha,0.0031,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,GHA,Ghana,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,CAF,Central African Republic,Avoided Peat Impacts,Max extent,Mha,0.0031,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,FJI,Fiji,Improved Rice,Max extent,Mha,0.0030,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Improved Rice,Max extent,Mha,0.0027,100,NA,NA,NA,NA
@@ -1381,10 +1381,10 @@ PD22,Pathway,SSA-L,SOM,Somalia,Coastal Restoration,Max extent,Mha,0.0022,100,NA,
 PD22,Pathway,MEA-H,OMN,Oman,Coastal Restoration,Max extent,Mha,0.0021,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,ARE,United Arab Emirates,Optimal Intensity,Max extent,Mha,0.0021,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Improved Rice,Max extent,Mha,0.0020,100,NA,NA,NA,NA
-PD22,Pathway,CAS,ARM,Armenia,Peat Restoration,Max extent,Mha,0.0020,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,GUF,French Guiana (France),Peat Restoration,Max extent,Mha,0.0020,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,GMB,"Gambia, The",Peat Restoration,Max extent,Mha,0.0020,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,PRY,Paraguay,Peat Restoration,Max extent,Mha,0.0020,100,NA,NA,NA,NA
+PD22,Pathway,EU15,GRC,Greece,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU15,GRL,Greenland (Denmark),Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,GLP,Guadeloupe,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-L,GTM,Guatemala,Peat Restoration,Max extent,Mha,0.0015,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,BFA,Burkina Faso,Avoided Peat Impacts,Max extent,Mha,0.0020,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,SYR,Syria,Natural Regeneration,Max extent,Mha,0.1329,100,NA,NA,NA,NA
 PD22,Pathway,NA,FRO,Faroe Islands,Cropland Soil Health,Max extent,Mha,0.0019,100,NA,NA,NA,NA
@@ -1393,8 +1393,8 @@ PD22,Pathway,MEA-M,YEM,Yemen,Coastal Restoration,Max extent,Mha,0.0018,100,NA,NA
 PD22,Pathway,LAM-M,MTQ,Martinique,Coastal Restoration,Max extent,Mha,0.0017,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,SLB,Solomon Islands,Improved Rice,Max extent,Mha,0.0017,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,QAT,Qatar,Optimal Intensity,Max extent,Mha,0.0015,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,BOL,Bolivia,Peat Restoration,Max extent,Mha,0.0015,100,NA,NA,NA,NA
-PD22,Pathway,LAM-L,GTM,Guatemala,Peat Restoration,Max extent,Mha,0.0015,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,GIN,Guinea,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,GNB,Guinea-Bissau,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,KWT,Kuwait,Optimal Intensity,Max extent,Mha,0.0014,100,NA,NA,NA,NA
 PD22,Pathway,NAF,EGY,Egypt,Coastal Restoration,Max extent,Mha,0.0014,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,KWT,Kuwait,Biochar,Max extent,Mha,0.0013,100,NA,NA,NA,NA
@@ -1404,17 +1404,17 @@ PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Agroforestry,Max extent,Mha,0.0012,
 PD22,Pathway,SAF,ZAF,South Africa,Improved Rice,Max extent,Mha,0.0011,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,PHL,Philippines,Optimal Intensity,Max extent,Mha,0.0011,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Biochar,Max extent,Mha,0.0010,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,CAF,Central African Republic,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,CRI,Costa Rica,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
-PD22,Pathway,CAS,KAZ,Kazakhstan,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,NER,Niger,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,SOM,Somalia,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,GUY,Guyana,Peat Restoration,Max extent,Mha,0.1000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-L,HTI,Haiti,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-L,HND,Honduras,Peat Restoration,Max extent,Mha,0.0375,100,NA,NA,NA,NA
+PD22,Pathway,EU12-H,HUN,Hungary,Peat Restoration,Max extent,Mha,0.0677,100,NA,NA,NA,NA
+PD22,Pathway,EFTA,ISL,Iceland,Peat Restoration,Max extent,Mha,0.2681,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,GNQ,Equatorial Guinea,Avoided Peat Impacts,Max extent,Mha,0.0010,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,TLS,Timor-Leste,Coastal Restoration,Max extent,Mha,0.0009,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,TCD,Chad,Natural Regeneration,Max extent,Mha,0.0224,100,NA,NA,NA,NA
-PD22,Pathway,SSA-M,GNQ,Equatorial Guinea,Peat Restoration,Max extent,Mha,0.0008,100,NA,NA,NA,NA
+PD22,Pathway,IND,IND,India,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,MUS,Mauritius,Coastal Restoration,Max extent,Mha,0.0007,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,SEN,Senegal,Peat Restoration,Max extent,Mha,0.0007,100,NA,NA,NA,NA
+PD22,Pathway,IDN,IDN,Indonesia,Peat Restoration,Max extent,Mha,12.4900,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,COM,Comoros,Coastal Restoration,Max extent,Mha,0.0006,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Improved Rice,Max extent,Mha,0.0006,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,GNQ,Equatorial Guinea,Optimal Intensity,Max extent,Mha,0.0006,100,NA,NA,NA,NA
@@ -1431,7 +1431,7 @@ PD22,Pathway,SSA-M,MUS,Mauritius,Optimal Intensity,Max extent,Mha,0.0003,100,NA,
 PD22,Pathway,OAS-L,TLS,Timor-Leste,Optimal Intensity,Max extent,Mha,0.0003,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,BEN,Benin,Coastal Restoration,Max extent,Mha,0.0002,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,QAT,Qatar,Biochar,Max extent,Mha,0.0002,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Peat Restoration,Max extent,Mha,0.0002,100,NA,NA,NA,NA
+PD22,Pathway,MEA-M,IRN,Iran,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,MLI,Mali,Avoided Peat Impacts,Max extent,Mha,0.0002,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SEN,Senegal,Avoided Peat Impacts,Max extent,Mha,0.0002,100,NA,NA,NA,NA
 PD22,Pathway,NA,FRO,Faroe Islands,Biochar,Max extent,Mha,0.0001,100,NA,NA,NA,NA
@@ -1745,108 +1745,108 @@ PD22,Pathway,LAM-M,MTQ,Martinique,Optimal Intensity,Max extent,Mha,0.0000,100,NA
 PD22,Pathway,OAS-L,WSM,Samoa,Optimal Intensity,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Optimal Intensity,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,NAF,ESH,Western Sahara,Optimal Intensity,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,PAK,AFG,Afghanistan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EEU,ALB,Albania,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,NAF,DZA,Algeria,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-M,AGO,Angola,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EU15,AUT,Austria,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,CAS,AZE,Azerbaijan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,BHS,Bahamas,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,OAS-L,BGD,Bangladesh,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EU15,BEL,Belgium,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,LAM-L,BLZ,Belize,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,OAS-M,BTN,Bhutan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EEU,BIH,Bosnia and Herzegovina,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EU12-M,BGR,Bulgaria,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,BDI,Burundi,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,OAS-CPA,KHM,Cambodia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,CPV,Cape Verde,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,TCD,Chad,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,COM,Comoros,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,CIV,Cote d'Ivoire,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EEU,HRV,Croatia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EU12-H,CYP,Cyprus,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EU12-H,CZE,Czech Republic,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,OAS-L,PRK,Democratic People's Republic of Korea (North Korea),Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,DJI,Djibouti,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,DOM,Dominican Republic,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,NAF,EGY,Egypt,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,SLV,El Salvador,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,ERI,Eritrea,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,NA,FLK,Falkland Islands,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,NA,FRO,Faroe Islands,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,OAS-L,FJI,Fiji,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,OAS-M,PYF,French Polynesia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-M,GAB,Gabon,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,CAS,GEO,Georgia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,GHA,Ghana,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EU15,GRC,Greece,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,EU15,GRL,Greenland (Denmark),Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,LAM-M,GLP,Guadeloupe,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,GIN,Guinea,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,SSA-L,GNB,Guinea-Bissau,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,LAM-L,HTI,Haiti,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,IND,IND,India,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
-PD22,Pathway,MEA-M,IRN,Iran,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,IRQ,Iraq,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU15,IRL,Ireland,Peat Restoration,Max extent,Mha,1.1972,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,ISR,Israel,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EU15,ITA,Italy,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,JAM,Jamaica,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,JPN,JPN,Japan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,JOR,Jordan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,CAS,KAZ,Kazakhstan,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,KEN,Kenya,Peat Restoration,Max extent,Mha,0.0208,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,KWT,Kuwait,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,CAS,KGZ,Kyrgyzstan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,OAS-CPA,LAO,Laos,Peat Restoration,Max extent,Mha,0.0100,100,NA,NA,NA,NA
+PD22,Pathway,EU12-M,LVA,Latvia,Peat Restoration,Max extent,Mha,0.5051,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,LBN,Lebanon,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,LSO,Lesotho,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,LBR,Liberia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,NAF,LBY,Libya,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU12-M,LTU,Lithuania,Peat Restoration,Max extent,Mha,0.3449,100,NA,NA,NA,NA
 PD22,Pathway,EU15,LUX,Luxembourg,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EEU,MKD,Macedonia (The Former Yugoslav Republic of Macedonia),Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,MDG,Madagascar,Peat Restoration,Max extent,Mha,0.0926,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,MWI,Malawi,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,OAS-M,MYS,Malaysia,Peat Restoration,Max extent,Mha,0.8440,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,MLI,Mali,Peat Restoration,Max extent,Mha,0.0050,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,MTQ,Martinique,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,MRT,Mauritania,Peat Restoration,Max extent,Mha,0.0031,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,MUS,Mauritius,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,MEX,MEX,Mexico,Peat Restoration,Max extent,Mha,0.1000,100,NA,NA,NA,NA
 PD22,Pathway,EEU-FSA,MDA,Moldova,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-CPA,MNG,Mongolia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EEU,MNE,Montenegro,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,NAF,MAR,Morocco,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,MOZ,Mozambique,Peat Restoration,Max extent,Mha,0.1000,100,NA,NA,NA,NA
+PD22,Pathway,OAS-L,MMR,Myanmar,Peat Restoration,Max extent,Mha,0.1700,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,NAM,Namibia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,NPL,Nepal,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU15,NLD,Netherlands,Peat Restoration,Max extent,Mha,0.3805,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,NCL,New Caledonia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,ANUZ,NZL,New Zealand,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-L,NIC,Nicaragua,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,NER,Niger,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,NGA,Nigeria,Peat Restoration,Max extent,Mha,0.0300,100,NA,NA,NA,NA
+PD22,Pathway,EFTA,NOR,Norway,Peat Restoration,Max extent,Mha,0.2458,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,OMN,Oman,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,PAK,PAK,Pakistan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,PAN,Panama,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,PNG,Papua New Guinea,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,PRY,Paraguay,Peat Restoration,Max extent,Mha,0.0020,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,PER,Peru,Peat Restoration,Max extent,Mha,0.0185,100,NA,NA,NA,NA
+PD22,Pathway,OAS-L,PHL,Philippines,Peat Restoration,Max extent,Mha,0.0080,100,NA,NA,NA,NA
+PD22,Pathway,EU12-H,POL,Poland,Peat Restoration,Max extent,Mha,1.2560,100,NA,NA,NA,NA
 PD22,Pathway,EU15,PRT,Portugal,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,USA,PRI,Puerto Rico,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,QAT,Qatar,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Peat Restoration,Max extent,Mha,0.0198,100,NA,NA,NA,NA
 PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-M,REU,Reunion,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU12-M,ROU,Romania,Peat Restoration,Max extent,Mha,0.2170,100,NA,NA,NA,NA
+PD22,Pathway,RUS,RUS,Russia,Peat Restoration,Max extent,Mha,9.0600,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,RWA,Rwanda,Peat Restoration,Max extent,Mha,0.0552,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,WSM,Samoa,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,SAU,Saudi Arabia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,SEN,Senegal,Peat Restoration,Max extent,Mha,0.0007,100,NA,NA,NA,NA
 PD22,Pathway,EEU,SRB,Serbia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SLE,Sierra Leone,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,SVK,Slovakia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EU12-H,SVN,Slovenia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,SLB,Solomon Islands,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,SOM,Somalia,Peat Restoration,Max extent,Mha,0.0010,100,NA,NA,NA,NA
+PD22,Pathway,SAF,ZAF,South Africa,Peat Restoration,Max extent,Mha,0.0071,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SSD,South Sudan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU29,ESP,Spain,Peat Restoration,Max extent,Mha,0.0150,100,NA,NA,NA,NA
 PD22,Pathway,OAS-M,LKA,Sri Lanka,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,SDN,Sudan,Peat Restoration,Max extent,Mha,0.0150,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,SUR,Suriname,Peat Restoration,Max extent,Mha,0.0267,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,SWZ,Swaziland,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU15,SWE,Sweden,Peat Restoration,Max extent,Mha,1.1397,100,NA,NA,NA,NA
+PD22,Pathway,EFTA,CHE,Switzerland,Peat Restoration,Max extent,Mha,0.0213,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,SYR,Syria,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,CAS,TJK,Tajikistan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,TZA,Tanzania,Peat Restoration,Max extent,Mha,0.0221,100,NA,NA,NA,NA
+PD22,Pathway,OAS-M,THA,Thailand,Peat Restoration,Max extent,Mha,0.0540,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,TLS,Timor-Leste,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,TGO,Togo,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Peat Restoration,Max extent,Mha,0.0002,100,NA,NA,NA,NA
 PD22,Pathway,TUR,TUN,Tunisia,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,TUR,TUR,Turkey,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,CAS,TKM,Turkmenistan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,UGA,Uganda,Peat Restoration,Max extent,Mha,0.0204,100,NA,NA,NA,NA
+PD22,Pathway,EEU-FSU,UKR,Ukraine,Peat Restoration,Max extent,Mha,0.7000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-H,ARE,United Arab Emirates,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,EU15,GBR,United Kingdom,Peat Restoration,Max extent,Mha,1.8088,100,NA,NA,NA,NA
+PD22,Pathway,USA,USA,United States (except Alaska),Peat Restoration,Max extent,Mha,1.0516,100,NA,NA,NA,NA
 PD22,Pathway,LAM-M,URY,Uruguay,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,CAS,UZB,Uzbekistan,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,OAS-L,VUT,Vanuatu,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,LAM-M,VEN,Venezuela,Peat Restoration,Max extent,Mha,0.0901,100,NA,NA,NA,NA
+PD22,Pathway,OAS-CPA,VNM,Vietnam,Peat Restoration,Max extent,Mha,0.1310,100,NA,NA,NA,NA
 PD22,Pathway,NAF,ESH,Western Sahara,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,MEA-M,YEM,Yemen,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
+PD22,Pathway,SSA-L,ZMB,Zambia,Peat Restoration,Max extent,Mha,0.1508,100,NA,NA,NA,NA
 PD22,Pathway,SSA-L,ZWE,Zimbabwe,Peat Restoration,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,PAK,AFG,Afghanistan,Avoided Peat Impacts,Max extent,Mha,0.0000,100,NA,NA,NA,NA
 PD22,Pathway,EEU,ALB,Albania,Avoided Peat Impacts,Max extent,Mha,0.0000,100,NA,NA,NA,NA
