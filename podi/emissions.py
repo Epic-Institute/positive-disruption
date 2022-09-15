@@ -2364,7 +2364,8 @@ def emissions(
                 .groupby(["sector", "product_long", "flow_long"])
                 .sum()
                 .sort_values("Emissions", ascending=False)
-                .index.unique()
+                .index.get_level_values(0)
+                .unique()
             ):
 
                 for product_long in (
@@ -2372,7 +2373,8 @@ def emissions(
                     .groupby(["product_long", "flow_long"])
                     .sum()
                     .sort_values("Emissions", ascending=False)
-                    .index.unique()
+                    .index.get_level_values(0)
+                    .unique()
                 ):
 
                     for flow_long in (
@@ -2384,7 +2386,8 @@ def emissions(
                         .groupby(["flow_long"])
                         .sum()
                         .sort_values("Emissions", ascending=False)
-                        .index.unique()
+                        .index.get_level_values(0)
+                        .unique()
                     ):
 
                         fig.add_trace(

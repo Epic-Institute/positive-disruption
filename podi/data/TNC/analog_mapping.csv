@@ -1,6 +1,6 @@
 Vertical,Subvertical,Region,Growth Rate,Analog Name
-Forests & Wetlands,Avoided Coastal Impacts,All,Linear,Comoros Avoided Coastal Impacts
-Forests & Wetlands,Avoided Forest Conversion,All,Linear,Nepal Avoided Deforestation
+Forests & Wetlands,Avoided Coastal Impacts,All,Linear,Avoided Coastal Impacts|90 percentile across countries
+Forests & Wetlands,Avoided Forest Conversion,All,Linear,Avoided Forest Conversion|90 percentile across countries
 Forests & Wetlands,Avoided Peat Impacts,All,Linear,Nepal Avoided Deforestation
 Agriculture,Biochar,All,S-curve,FAO CA
 Forests & Wetlands,Coastal Restoration,All,Linear,Solomon Islands Mangrove Restoration
