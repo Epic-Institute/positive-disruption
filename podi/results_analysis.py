@@ -455,7 +455,6 @@ def results_analysis(
                 "scenario",
                 "region",
                 "sector",
-                "product_category",
                 "product_long",
             ]
         )
@@ -564,23 +563,26 @@ def results_analysis(
             slice(None),
             ["RESIDENT", "COMMPUB"],
         ]
-        .groupby(["region", "sector", "product_long", "flow_long"])
+        .groupby(["model", "scenario", "region", "sector", "flow_long"])
         .sum()
-        .divide(
-            energy_output.loc[
-                slice(None),
-                slice(None),
-                slice(None),
-                ["Commercial", "Residential"],
-                slice(None),
-                slice(None),
-                slice(None),
-                slice(None),
-                slice(None),
-            ]
-            .groupby(["region", "sector", "product_long", "flow_long"])
-            .sum()
-            .sum(0)
+        .parallel_apply(
+            lambda x: x.divide(
+                energy_output.loc[
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    ["Commercial", "Residential"],
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                ]
+                .groupby(["model", "scenario", "region", "sector"])
+                .sum()
+                .loc[x.name[0], x.name[1], x.name[2], x.name[3]]
+            ),
+            axis=1,
         )
     )
 
@@ -607,24 +609,28 @@ def results_analysis(
                 "Industry not elsewhere specified",
             ],
         ]
-        .groupby(["region", "sector", "flow_long"])
+        .groupby(["model", "scenario", "region", "sector", "flow_long"])
         .sum()
-        .divide(
-            energy_output.loc[
-                slice(None),
-                slice(None),
-                slice(None),
-                ["Industrial"],
-                slice(None),
-                slice(None),
-                slice(None),
-                "Final consumption",
-            ]
-            .groupby(["region", "sector", "flow_long"])
-            .sum()
-            .sum(0)
+        .parallel_apply(
+            lambda x: x.divide(
+                energy_output.loc[
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    ["Industrial"],
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    "Final consumption",
+                ]
+                .groupby(["model", "scenario", "region", "sector"])
+                .sum()
+                .loc[x.name[0], x.name[1], x.name[2], x.name[3]]
+            ),
+            axis=1,
         )
-    ).sort_values(by=[2050], axis=0)
+        .sort_values(by=[2050], axis=0)
+    )
 
     industry_other = (
         energy_output.loc[
@@ -646,44 +652,49 @@ def results_analysis(
                 "Mining and quarrying",
             ],
         ]
-        .groupby(["region", "sector"])
+        .groupby(["model", "scenario", "region", "sector"])
         .sum()
-        .divide(
-            energy_output.loc[
-                slice(None),
-                slice(None),
-                slice(None),
-                ["Industrial"],
-                slice(None),
-                slice(None),
-                slice(None),
-                "Final consumption",
-                slice(None),
-            ]
-            .groupby(["region", "sector"])
-            .sum()
-            .sum(0)
+        .parallel_apply(
+            lambda x: x.divide(
+                energy_output.loc[
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    ["Industrial"],
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    "Final consumption",
+                    slice(None),
+                ]
+                .groupby(["model", "scenario", "region", "sector"])
+                .sum()
+                .loc[x.name[0], x.name[1], x.name[2], x.name[3]]
+            ),
+            axis=1,
         )
+        .sort_values(by=[2050], axis=0)
     )
+
     industry_other = pd.concat(
         [industry_other], keys=["Other"], names=["flow_long"]
-    ).reorder_levels(["region", "sector", "flow_long"])
+    ).reorder_levels(["model", "scenario", "region", "sector", "flow_long"])
 
     industry = pd.concat([industry, industry_other])
 
     # Percent of agriculture mitigation compared to max extent
     agriculture = (
         afolu_output.loc[slice(None), slice(None), slice(None), ["Agriculture"]]
-        .groupby(["region", "sector", "product_long"])
+        .groupby(["model", "scenario", "region", "sector", "product_long"])
         .sum()
         .parallel_apply(
             lambda x: x.divide(
                 afolu_output.loc[slice(None), slice(None), slice(None), ["Agriculture"]]
-                .groupby(["region", "sector", "product_long"])
+                .groupby(["model", "scenario", "region", "sector", "product_long"])
                 .sum()
-                .sum()
+                .loc[x.name]
                 .max()
-            ),
+            ).fillna(0),
             axis=1,
         )
     )
@@ -691,168 +702,78 @@ def results_analysis(
     # Percent of forests & wetlands mitigation compared to max extent
     forestswetlands = (
         afolu_output.loc[slice(None), slice(None), slice(None), ["Forests & Wetlands"]]
-        .groupby(["region", "sector", "product_long"])
+        .groupby(["model", "scenario", "region", "sector", "product_long"])
         .sum()
         .parallel_apply(
             lambda x: x.divide(
                 afolu_output.loc[
                     slice(None), slice(None), slice(None), ["Forests & Wetlands"]
                 ]
-                .groupby(["region", "sector", "product_long"])
+                .groupby(["model", "scenario", "region", "sector", "product_long"])
                 .sum()
-                .sum()
+                .loc[x.name]
                 .max()
-            ),
+            ).fillna(0),
             axis=1,
         )
     )
 
-    # Percent of cdr sequestration compared to max extent
-    """
-    cdr = (
-        cdr_output.loc[
-            slice(None),
-            slice(None),
-            slice(None),
-            ["CDR"],
-            product_category,
-            slice(None),
-            ["ELECTR", "SOLARTH", "HYDROGEN", "MUNWASTER", "GEOTHERM"],
-            "Final consumption",
-            [
-                "Agriculture/forestry",
-                "Chemical and petrochemical",
-                "Construction",
-                "Final consumption not elsewhere specified",
-                "Fishing",
-                "Food and tobacco",
-                "Industry not elsewhere specified",
-                "Iron and steel",
-                "Machinery",
-                "Mining and quarrying",
-                "Non-ferrous metals",
-                "Non-metallic minerals",
-                "Paper, pulp, and print",
-                "Textile and leather",
-                "Transport equipment",
-                "Wood and wood products",
-            ],
-        ]
-        .groupby(groupby)
-        .sum()
-        .divide(
-            energy_output.loc[
-                slice(None),
-                slice(None),
-                slice(None),
-                ["CDR"],
-                product_category,
-                slice(None),
-                slice(None),
-                "Final consumption",
-            ]
-            .groupby(groupby)
-            .sum()
-            .sum(0)
-        )
-        
-    )
-    """
-
     # Combine all verticals
     pdindex_output = pd.concat(
-        [
-            electricity,
-            transport,
-            buildings,
-            industry,
-            agriculture,
-            forestswetlands,
-            # "cdr",
-        ]
+        [electricity, transport, buildings, industry, agriculture, forestswetlands]
     ).multiply(100)
+
+    pdindex_output["unit"] = "% Adoption"
+    pdindex_output.set_index("unit", append=True, inplace=True)
 
     # Plot pdindex_output
     # region
 
-    ######################################
-    # PD INDEX, STACKED, ELECTRICITY [%] #
-    ######################################
+    #################
+    # PD INDEX, [%] #
+    #################
 
     # region
 
-    scenario = scenario
-    region = slice(None)
-    sector = slice(None)
-    product_category = slice(None)
-    flow_category = slice(None)
+    region = "usa"
 
-    fig = electricity.reindex(
-        axis="index",
-        level=4,
-        labels=[
-            "Nuclear",
-            "Hydro",
-            "Onshore wind energy",
-            "Offshore wind energy",
-            "Utility solar photovoltaics",
-            "Rooftop solar photovoltaics",
-            "Solar thermal",
-            "Tide, wave and ocean",
-            "Geothermal",
-        ],
-    ).T
+    fig = (
+        pdindex_output.loc[slice(None), slice(None), region]
+        .groupby(["scenario", "sector", "product_long"])
+        .sum()
+        .reindex(
+            axis="index",
+            level=2,
+            labels=[
+                "Nuclear",
+                "Hydro",
+                "Onshore wind energy",
+                "Offshore wind energy",
+                "Utility solar photovoltaics",
+                "Rooftop solar photovoltaics",
+                "Solar thermal",
+                "Tide, wave and ocean",
+                "Geothermal",
+            ],
+        )
+        .T
+    )
 
     fig.index.name = "year"
     fig.reset_index(inplace=True)
     fig2 = pd.melt(
         fig,
         id_vars="year",
-        var_name=["scenario", "sector", "product_category", "product_long"],
+        var_name=["scenario", "sector", "product_long"],
         value_name="% Adoption",
     )
 
-    for sector in fig2["sector"].unique():
+    for scenario in fig2["scenario"].unique():
 
         fig = go.Figure()
 
-        if (fig2.columns.values == "flow_long").any():
-            for flow in fig2["flow_long"].unique():
-                # Make projected trace
-                fig.add_trace(
-                    go.Scatter(
-                        name=flow,
-                        line=dict(
-                            width=1,
-                        ),
-                        x=fig2["year"].unique(),
-                        y=fig2[
-                            (fig2["sector"] == sector) & (fig2["flow_long"] == flow)
-                        ]["% Adoption"],
-                        fill="tonexty",
-                        stackgroup="two",
-                        legendgroup=flow,
-                        showlegend=True,
-                    )
-                )
+        for sector in fig2["sector"].unique():
 
-                # Make historical trace
-                fig.add_trace(
-                    go.Scatter(
-                        name="Historical",
-                        line=dict(width=1, color="#1c352d"),
-                        x=fig2["year"].unique()[fig2["year"].unique() <= data_end_year],
-                        y=fig2[
-                            (fig2["year"] <= data_end_year)
-                            & (fig2["sector"] == sector)
-                            & (fig2["flow_long"] == flow)
-                        ]["% Adoption"],
-                        stackgroup="one",
-                        legendgroup=flow,
-                        showlegend=False,
-                    )
-                )
-        elif (fig2.columns.values == "product_long").any():
             for product in fig2["product_long"].unique():
                 # Make projected trace
                 fig.add_trace(
@@ -863,7 +784,8 @@ def results_analysis(
                         ),
                         x=fig2["year"].unique(),
                         y=fig2[
-                            (fig2["sector"] == sector)
+                            (fig2["scenario"] == scenario)
+                            & (fig2["sector"] == sector)
                             & (fig2["product_long"] == product)
                         ]["% Adoption"],
                         fill="tonexty",
@@ -881,45 +803,9 @@ def results_analysis(
                         x=fig2["year"].unique()[fig2["year"].unique() <= data_end_year],
                         y=fig2[
                             (fig2["year"] <= data_end_year)
-                            & (fig2["sector"] == sector)
                             & (fig2["product_long"] == product)
-                        ]["% Adoption"],
-                        stackgroup="one",
-                        legendgroup=product,
-                        showlegend=False,
-                    )
-                )
-        elif (fig2.columns.values == "product_category").any():
-            for product in fig2["product_category"].unique():
-                # Make projected trace
-                fig.add_trace(
-                    go.Scatter(
-                        name=product,
-                        line=dict(
-                            width=1,
-                        ),
-                        x=fig2["year"].unique(),
-                        y=fig2[
-                            (fig2["sector"] == sector)
-                            & (fig2["product_category"] == product)
-                        ]["% Adoption"],
-                        fill="tonexty",
-                        stackgroup="two",
-                        legendgroup=product,
-                        showlegend=True,
-                    )
-                )
-
-                # Make historical trace
-                fig.add_trace(
-                    go.Scatter(
-                        name="Historical",
-                        line=dict(width=1, color="#1c352d"),
-                        x=fig2["year"].unique()[fig2["year"].unique() <= data_end_year],
-                        y=fig2[
-                            (fig2["year"] <= data_end_year)
+                            & (fig2["scenario"] == scenario)
                             & (fig2["sector"] == sector)
-                            & (fig2["product_category"] == product)
                         ]["% Adoption"],
                         stackgroup="one",
                         legendgroup=product,
@@ -927,44 +813,29 @@ def results_analysis(
                     )
                 )
 
-        fig.update_layout(
-            title={
-                "text": "Percent of Total Adoption, "
-                + sector
-                + ", "
-                + str(region).replace("slice(None, None, None)", "World").capitalize()
-                + ", "
-                + str(scenario).capitalize(),
-                "xanchor": "center",
-                "x": 0.5,
-                "y": 0.99,
-            },
-            yaxis={"title": "% Adoption"},
-            margin_b=0,
-            margin_t=20,
-            margin_l=10,
-            margin_r=10,
-            legend={"traceorder": "reversed"},
-            xaxis={"range": [data_start_year, proj_end_year]},
-        )
-
-        if show_figs is True:
-            fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/acurves-"
-                    + scenario
-                    + "-"
-                    + str(region).replace("slice(None, None, None)", "World")
-                    + "-"
-                    + str(sector).replace("slice(None, None, None)", "All")
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
+            fig.update_layout(
+                title={
+                    "text": "Percent of Total Adoption, Electric Power, "
+                    + str(region)
+                    + ", "
+                    + str(sector)
+                    + ", "
+                    + str(scenario).capitalize(),
+                    "xanchor": "center",
+                    "x": 0.5,
+                    "y": 0.99,
+                },
+                yaxis={"title": "% Adoption"},
+                margin_b=0,
+                margin_t=20,
+                margin_l=10,
+                margin_r=10,
+                legend={"traceorder": "reversed"},
+                xaxis={"range": [data_start_year, proj_end_year]},
             )
+
+            if show_figs is True:
+                fig.show()
 
     # endregion
 
@@ -4217,34 +4088,6 @@ def results_analysis(
     #################
 
     # region
-
-    # Subverticals are defined by flow_long for Transport, Buildings & Industry and product_long for Electric Power, Agriculture and Forests & Wetlands. Rename index names to 'subvertical' for consistency.
-    transport.index = transport.index.rename({"flow_long": "subvertical"})
-    buildings.index = buildings.index.rename({"flow_long": "subvertical"}).droplevel(
-        "product_long"
-    )
-    industry.index = industry.index.rename({"flow_long": "subvertical"})
-    electricity.index = electricity.index.rename(
-        {"product_long": "subvertical"}
-    ).droplevel("product_category")
-    agriculture.index = agriculture.index.rename({"product_long": "subvertical"})
-    forestswetlands.index = forestswetlands.index.rename(
-        {"product_long": "subvertical"}
-    )
-
-    pdindex_output = pd.concat(
-        [
-            electricity,
-            transport,
-            buildings,
-            industry,
-            agriculture,
-            forestswetlands,
-            # "cdr",
-        ]
-    ).multiply(100)
-    pdindex_output["unit"] = "% Adoption"
-    pdindex_output.set_index("unit", append=True, inplace=True)
 
     pdindex_output.to_csv("podi/data/pdindex_output.csv")
 

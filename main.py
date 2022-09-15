@@ -330,7 +330,6 @@ emissions_wedges.columns = emissions_wedges.columns.astype(int)
 # Select output_start_date and output_end_date
 output_start_date = 2010
 output_end_date = 2070
-energy_output = energy_output.loc[:, output_start_date:]
 
 # For energy_output, groupby product_category, except for products in the Electricity and Heat product_category
 energy_output_temp = energy_output[
@@ -352,30 +351,45 @@ energy_output = pd.concat(
 )
 
 # Combine 'Residential' and 'Commercial' sectors into 'Buildings' sector
-energy_output[
-    energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
-] = (
-    energy_output[
-        energy_output.reset_index().sector.isin(["Residential", "Commercial"]).values
-    ]
-    .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
-    .groupby(
-        level=[
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
+energy_output = pd.concat(
+    [
+        energy_output,
+        energy_output[
+            energy_output.reset_index()
+            .sector.isin(["Residential", "Commercial"])
+            .values
         ]
-    )
-    .sum()
+        .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
+        .groupby(
+            level=[
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+            ]
+        )
+        .sum(),
+    ]
 )
+energy_output = energy_output[
+    ~(energy_output.reset_index().sector.isin(["Residential", "Commercial"])).values
+]
+
+# Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
+energy_output = energy_output[
+    ~(
+        energy_output.reset_index().flow_short.isin(
+            ["Transformation Processes", "Energy industry own use and Losses"]
+        )
+    ).values
+]
 
 """
 # Change region codes to full names
@@ -406,15 +420,6 @@ energy_output.set_index(
     inplace=True,
 )
 """
-
-# Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
-energy_output = energy_output[
-    ~(
-        energy_output.reset_index().flow_short.isin(
-            ["Transformation Processes", "Energy industry own use and Losses"]
-        )
-    ).values
-]
 
 # Save as regional-level files and a global-level file
 for output in [
@@ -473,11 +478,13 @@ for output in [
         output[0][(output[0].reset_index().region == region).values].loc[
             :, output_start_date:output_end_date
         ].to_csv("podi/data/output/" + output[1] + "/" + region + ".csv")
-    output_global = output[0].groupby(["sector", "subvertical", "unit"]).sum()
+    output_global = (
+        output[0].groupby(["model", "scenario", "sector", "product_long", "unit"]).sum()
+    )
     output_global.reset_index(inplace=True)
     output_global["region"] = "world"
     output_global.set_index(
-        ["region", "sector", "subvertical", "unit"],
+        ["model", "scenario", "region", "sector", "product_long", "unit"],
         inplace=True,
     )
     output_global.to_csv("podi/data/output/" + output[1] + "/" + "world" + ".csv")
