@@ -871,7 +871,15 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Estimate 'baseline' scenario NCS subvertical growth
     def rep(x):
         x0 = pd.Series(
-            data=max(0, x.iloc[-1] - x.iloc[-2]),
+            data=max(
+                0,
+                afolu_output.loc[
+                    x.name[0], scenario, x.name[2], x.name[3], x.name[4]
+                ].loc[x.last_valid_index() - 1]
+                - afolu_output.loc[
+                    x.name[0], scenario, x.name[2], x.name[3], x.name[4]
+                ].loc[x.last_valid_index() - 2],
+            ),
             index=np.arange(x.last_valid_index() + 1, proj_end_year + 1, 1),
             name=x.name,
         )
@@ -1181,40 +1189,19 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             .drop(columns=["variable", "index"])
         )
 
-        # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
-
-        each[
-            (
-                (each.reset_index().product_long == "Improved Rice")
-                & (each.reset_index().flow_long == "CH4")
-            ).values
-        ] = (
-            each[
-                (
-                    (each.reset_index().product_long == "Improved Rice")
-                    & (each.reset_index().flow_long == "CH4")
-                ).values
-            ]
-            * 0.58
-        )
-
-        each[
-            (
-                (each.reset_index().product_long == "Improved Rice")
-                & (each.reset_index().flow_long == "N2O")
-            ).values
-        ] = (
-            each[
-                (
-                    (each.reset_index().product_long == "Improved Rice")
-                    & (each.reset_index().flow_long == "N2O")
-                ).values
-            ]
-            * 0.42
-        )
         return each
 
     afolu_output = addindices(afolu_output)
+
+    # Duplicate Improved Rice adoption and change gas from CH4 to N2O
+    afolu_output = pd.concat(
+        [
+            afolu_output,
+            afolu_output[
+                (afolu_output.reset_index().product_long == "Improved Rice").values
+            ].rename(index={"CH4": "N2O"}),
+        ]
+    )
 
     # Filter to data_start_year
     afolu_output = afolu_output.loc[:, data_start_year:proj_end_year]

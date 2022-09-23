@@ -27,7 +27,7 @@ model = "PD22"
 scenario = "pathway"
 data_start_year = 1990
 data_end_year = 2020
-proj_end_year = 2100
+proj_end_year = 2050
 
 ##########
 # ENERGY #
@@ -254,6 +254,7 @@ recalc_climate = False
 
 if recalc_climate is True:
     climate_output = climate(
+        model,
         scenario,
         emissions_output,
         emissions_output_co2e,

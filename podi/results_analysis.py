@@ -1580,7 +1580,6 @@ def results_analysis(
 
     data_start_year = data_start_year
     proj_end_year = proj_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -1805,7 +1804,6 @@ def results_analysis(
 
     start_year = 2010
     end_year = proj_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -1945,7 +1943,6 @@ def results_analysis(
 
     data_start_year = 2010
     proj_end_year = proj_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -2099,7 +2096,6 @@ def results_analysis(
 
     data_start_year = data_start_year
     proj_end_year = proj_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -2695,7 +2691,6 @@ def results_analysis(
 
     data_start_year = 2010
     proj_end_year = proj_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -2843,7 +2838,6 @@ def results_analysis(
 
     data_start_year = 2010
     proj_end_year = proj_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -3125,7 +3119,6 @@ def results_analysis(
 
     start_year = data_start_year
     end_year = data_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -3264,7 +3257,6 @@ def results_analysis(
 
     start_year = data_start_year
     end_year = data_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -3395,7 +3387,6 @@ def results_analysis(
 
     start_year = data_start_year
     end_year = data_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -3534,7 +3525,6 @@ def results_analysis(
 
     start_year = data_start_year
     end_year = data_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)
@@ -3646,7 +3636,6 @@ def results_analysis(
 
     start_year = data_start_year
     end_year = data_end_year
-    scenario = scenario
     region = slice(None)
     sector = slice(None)
     product_category = slice(None)

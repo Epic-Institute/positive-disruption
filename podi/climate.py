@@ -1,5 +1,6 @@
 # region
 
+from re import I
 import numpy as np
 import pandas as pd
 import fair
@@ -16,6 +17,7 @@ save_figs = False
 
 
 def climate(
+    model,
     scenario,
     emissions_output,
     emissions_output_co2e,
@@ -788,7 +790,8 @@ def climate(
         margin_r=15,
     )
 
-    fig.show()
+    if show_figs is True:
+        fig.show()
 
     if save_figs is True:
         pio.write_html(
@@ -938,7 +941,8 @@ def climate(
         margin_r=15,
     )
 
-    fig.show()
+    if show_figs is True:
+        fig.show()
 
     if save_figs is True:
         pio.write_html(
@@ -1400,7 +1404,8 @@ def climate(
         yaxis2=dict(tickmode="linear", tick0=0.5, dtick=0.25),
     )
 
-    fig.show()
+    if show_figs is True:
+        fig.show()
 
     if save_figs is True:
         pio.write_html(
@@ -1466,17 +1471,24 @@ def climate(
     )
 
     # Plot error
-    climate_error_concentration.plot(
-        legend=True, title="Error between PD22 and NOAA GHG Concentrations", ylabel="%"
-    )
+    if show_figs is True:
+        climate_error_concentration.plot(
+            legend=True,
+            title="Error between PD22 and NOAA GHG Concentrations",
+            ylabel="%",
+        )
 
-    climate_error_forcing.plot(
-        legend=False, title="Error between PD22 and NOAA Radiative Forcing", ylabel="%"
-    )
+        climate_error_forcing.plot(
+            legend=False,
+            title="Error between PD22 and NOAA Radiative Forcing",
+            ylabel="%",
+        )
 
-    climate_error_temperature.plot(
-        legend=False, title="Error between PD22 and NOAA Temperature Change", ylabel="%"
-    )
+        climate_error_temperature.plot(
+            legend=False,
+            title="Error between PD22 and NOAA Temperature Change",
+            ylabel="%",
+        )
 
     # endregion
 
@@ -1548,6 +1560,34 @@ def climate(
         .set_index(pyam.IAMC_IDX)
     )
 
+    climate_output_concentration_co2e.reset_index(inplace=True)
+    climate_output_concentration_co2e["model"] = model
+    climate_output_concentration_co2e["region"] = "world"
+    climate_output_concentration_co2e.rename(
+        columns={"product_long": "variable"}, inplace=True
+    )
+    climate_output_concentration_co2e["unit"] = "PPM"
+    climate_output_concentration_co2e.set_index(
+        ["model", "scenario", "region", "variable", "unit"], inplace=True
+    )
+    climate_output_concentration_co2e.rename(
+        index={"CO2e": "GHG Concentration|GHG Concentration"}, inplace=True
+    )
+
+    climate_output_forcing_co2e.reset_index(inplace=True)
+    climate_output_forcing_co2e["model"] = model
+    climate_output_forcing_co2e["region"] = "world"
+    climate_output_forcing_co2e.rename(
+        columns={"product_long": "variable"}, inplace=True
+    )
+    climate_output_forcing_co2e["unit"] = "W/m2"
+    climate_output_forcing_co2e.set_index(
+        ["model", "scenario", "region", "variable", "unit"], inplace=True
+    )
+    climate_output_forcing_co2e.rename(
+        index={"CO2e": "Radiative Forcing|Radiative Forcing"}, inplace=True
+    )
+
     # endregion
 
     #################
@@ -1566,6 +1606,14 @@ def climate(
             climate_output_temperature,
         ]
     ).to_csv("podi/data/output/climate/climate_output.csv")
+
+    pd.concat(
+        [
+            climate_output_concentration_co2e,
+            climate_output_forcing_co2e,
+            climate_output_temperature,
+        ]
+    ).to_csv("podi/data/output/climate/climate_output_co2e.csv")
 
     # endregion
 

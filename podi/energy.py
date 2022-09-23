@@ -6845,7 +6845,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         end_year = data_end_year
         df = energy_output
         model = "PD22"
-        scenario = scenario
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
@@ -6938,7 +6937,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         start_year = data_start_year
         df = energy_output
         model = "PD22"
-        scenario = scenario
         region = slice(None)
         sector = slice(None)
         product_category = slice(None)
