@@ -5,22 +5,6 @@ title: Adoption
 
 <br/><br/>
 
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-ElectricPower.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Transportation.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Buildings.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
-<iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Industrial.html" height='500' width='150%'></iframe>
-
-<br/><br/>
-
 <iframe id='igraph' scrolling='no' style='border:none' seamless='seamless' src= "acurves-pathway-World-Agriculture.html" height='500' width='150%'></iframe>
 
 <br/><br/>

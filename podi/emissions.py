@@ -1864,6 +1864,7 @@ def emissions(
                             & (fig2["flow_long"] == gas)
                             & (fig2["year"] <= data_end_year)
                         ]
+                        .clip(lower=0)
                         .groupby(["year"])
                         .sum()["Emissions"],
                         fill="none",
@@ -2159,6 +2160,7 @@ def emissions(
                         & (fig2["sector"] == sector)
                         & (fig2["year"] <= data_end_year)
                     ]
+                    .clip(lower=0)
                     .groupby(["year"])
                     .sum()["Emissions"],
                     fill="none",
@@ -2258,6 +2260,7 @@ def emissions(
                 y=pd.Series(
                     emissions_output_co2e.loc[model, scenario, slice(None), sector]
                     .loc[:, :data_end_year]
+                    .clip(lower=0)
                     .sum(),
                     index=emissions_output_co2e.columns,
                 ).loc[:data_end_year],
@@ -2384,31 +2387,100 @@ def emissions(
                     .index.get_level_values(0)
                     .unique()
                 ):
-
-                    fig.add_trace(
-                        go.Scatter(
-                            name=sector + ", " + product_long + ", " + flow_long,
-                            line=dict(width=0.5),
-                            x=fig2["year"].unique(),
-                            y=fig2[
-                                (fig2["scenario"] == scenario)
-                                & (fig2["sector"] == sector)
-                                & (fig2["product_long"] == product_long)
-                                & (fig2["flow_long"] == flow_long)
-                            ]["Emissions"],
-                            fill="tonexty",
-                            stackgroup="one",
-                            hovertemplate="<b>Year</b>: %{x}"
-                            + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+                    if (
+                        fig2[
+                            (fig2["scenario"] == scenario)
+                            & (fig2["sector"] == sector)
+                            & (fig2["product_long"] == product_long)
+                            & (fig2["flow_long"] == flow_long)
+                        ]["Emissions"].sum()
+                        > 0
+                    ):
+                        fig.add_trace(
+                            go.Scatter(
+                                name=sector + ", " + product_long + ", " + flow_long,
+                                line=dict(width=0.5),
+                                x=fig2["year"].unique(),
+                                y=fig2[
+                                    (fig2["scenario"] == scenario)
+                                    & (fig2["sector"] == sector)
+                                    & (fig2["product_long"] == product_long)
+                                    & (fig2["flow_long"] == flow_long)
+                                ]["Emissions"],
+                                fill="tonexty",
+                                stackgroup="one",
+                                hovertemplate="<b>Year</b>: %{x}"
+                                + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+                            )
                         )
-                    )
+
+        for sector in (
+            fig2[fig2["scenario"] == scenario]
+            .groupby(["sector", "product_long", "flow_long"])
+            .sum()
+            .sort_values("Emissions", ascending=False)
+            .index.get_level_values(0)
+            .unique()
+        ):
+
+            for product_long in (
+                fig2[(fig2["scenario"] == scenario) & (fig2["sector"] == sector)]
+                .groupby(["product_long", "flow_long"])
+                .sum()
+                .sort_values("Emissions", ascending=False)
+                .index.get_level_values(0)
+                .unique()
+            ):
+
+                for flow_long in (
+                    fig2[
+                        (fig2["scenario"] == scenario)
+                        & (fig2["sector"] == sector)
+                        & (fig2["product_long"] == product_long)
+                    ]
+                    .groupby(["flow_long"])
+                    .sum()
+                    .sort_values("Emissions", ascending=False)
+                    .index.get_level_values(0)
+                    .unique()
+                ):
+                    if (
+                        fig2[
+                            (fig2["scenario"] == scenario)
+                            & (fig2["sector"] == sector)
+                            & (fig2["product_long"] == product_long)
+                            & (fig2["flow_long"] == flow_long)
+                        ]["Emissions"].sum()
+                        < 0
+                    ):
+                        fig.add_trace(
+                            go.Scatter(
+                                name=sector + ", " + product_long + ", " + flow_long,
+                                line=dict(width=0.5),
+                                x=fig2["year"].unique(),
+                                y=fig2[
+                                    (fig2["scenario"] == scenario)
+                                    & (fig2["sector"] == sector)
+                                    & (fig2["product_long"] == product_long)
+                                    & (fig2["flow_long"] == flow_long)
+                                ]["Emissions"],
+                                fill="tonexty",
+                                stackgroup="one",
+                                hovertemplate="<b>Year</b>: %{x}"
+                                + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+                            )
+                        )
 
         fig.add_trace(
             go.Scatter(
                 name="Historical",
                 line=dict(width=2, color="black"),
                 x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
-                y=fig2[(fig2["scenario"] == scenario) & (fig2["year"] <= data_end_year)]
+                y=fig2[
+                    (fig2["scenario"] == scenario)
+                    & (fig2["year"] <= data_end_year)
+                    & (fig2["Emissions"] > 0)
+                ]
                 .groupby(["year"])
                 .sum()["Emissions"],
                 fill="none",
@@ -2478,7 +2550,7 @@ def emissions(
 
     fig = go.Figure()
 
-    spacer = emissions_output_co2e.loc[model, scenario, slice(None)].sum()
+    spacer = emissions_output_co2e.loc[model, scenario, slice(None)].clip(lower=0).sum()
 
     fig.add_trace(
         go.Scatter(
@@ -2500,6 +2572,7 @@ def emissions(
             y=pd.Series(
                 emissions_output_co2e.loc[model, scenario, slice(None)]
                 .loc[:, :data_end_year]
+                .clip(lower=0)
                 .sum(),
                 index=emissions_output_co2e.columns,
             ).loc[:data_end_year],
@@ -2590,7 +2663,7 @@ def emissions(
 
     fig = go.Figure()
 
-    spacer = emissions_output_co2e.loc[model, scenario, slice(None)].sum()
+    spacer = emissions_output_co2e.loc[model, scenario, slice(None)].clip(lower=0).sum()
 
     fig.add_trace(
         go.Scatter(
