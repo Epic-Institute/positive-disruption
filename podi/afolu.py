@@ -875,10 +875,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 0,
                 afolu_output.loc[
                     x.name[0], scenario, x.name[2], x.name[3], x.name[4]
-                ].loc[x.last_valid_index() - 1]
+                ].loc[x.last_valid_index()]
                 - afolu_output.loc[
                     x.name[0], scenario, x.name[2], x.name[3], x.name[4]
-                ].loc[x.last_valid_index() - 2],
+                ].loc[x.last_valid_index() - 1],
             ),
             index=np.arange(x.last_valid_index() + 1, proj_end_year + 1, 1),
             name=x.name,
@@ -909,7 +909,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         return x
 
-    afolu_baseline = pd.DataFrame(data=afolu_baseline.parallel_apply(rep, axis=1))
+    afolu_baseline = pd.DataFrame(data=afolu_baseline.parallel_apply(rep, axis=1)).clip(
+        upper=1
+    )
 
     # endregion
 

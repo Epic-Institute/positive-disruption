@@ -1,6 +1,5 @@
 # region
 
-from re import I
 import numpy as np
 import pandas as pd
 import fair
@@ -435,7 +434,8 @@ def climate(
             margin_r=15,
         )
 
-        fig.show()
+        if show_figs is True:
+            fig.show()
 
     # endregion
 
