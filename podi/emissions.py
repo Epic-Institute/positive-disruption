@@ -2160,7 +2160,6 @@ def emissions(
                         & (fig2["sector"] == sector)
                         & (fig2["year"] <= data_end_year)
                     ]
-                    .clip(lower=0)
                     .groupby(["year"])
                     .sum()["Emissions"],
                     fill="none",
@@ -2260,7 +2259,6 @@ def emissions(
                 y=pd.Series(
                     emissions_output_co2e.loc[model, scenario, slice(None), sector]
                     .loc[:, :data_end_year]
-                    .clip(lower=0)
                     .sum(),
                     index=emissions_output_co2e.columns,
                 ).loc[:data_end_year],
@@ -2394,7 +2392,7 @@ def emissions(
                             & (fig2["product_long"] == product_long)
                             & (fig2["flow_long"] == flow_long)
                         ]["Emissions"].sum()
-                        > 0
+                        >= 0
                     ):
                         fig.add_trace(
                             go.Scatter(
@@ -2476,11 +2474,7 @@ def emissions(
                 name="Historical",
                 line=dict(width=2, color="black"),
                 x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
-                y=fig2[
-                    (fig2["scenario"] == scenario)
-                    & (fig2["year"] <= data_end_year)
-                    & (fig2["Emissions"] > 0)
-                ]
+                y=fig2[(fig2["scenario"] == scenario) & (fig2["year"] <= data_end_year)]
                 .groupby(["year"])
                 .sum()["Emissions"],
                 fill="none",
@@ -2550,7 +2544,7 @@ def emissions(
 
     fig = go.Figure()
 
-    spacer = emissions_output_co2e.loc[model, scenario, slice(None)].clip(lower=0).sum()
+    spacer = emissions_output_co2e.loc[model, scenario, slice(None)].sum()
 
     fig.add_trace(
         go.Scatter(
@@ -2572,7 +2566,6 @@ def emissions(
             y=pd.Series(
                 emissions_output_co2e.loc[model, scenario, slice(None)]
                 .loc[:, :data_end_year]
-                .clip(lower=0)
                 .sum(),
                 index=emissions_output_co2e.columns,
             ).loc[:data_end_year],
@@ -2634,140 +2627,6 @@ def emissions(
 
     # endregion
 
-    #########################################################
-    # GHG EMISSIONS MITIGATION WEDGES ALL SECTORS ANIMATION #
-    #########################################################
-    """
-    # region
-
-    scenario = "pathway"
-    model = "PD22"
-
-    fig = (
-        (
-            emissions_output_co2e.loc[model, "baseline"].subtract(
-                emissions_output_co2e.loc[model, scenario]
-            )
-        )
-        .groupby(["sector", "product_long"])
-        .sum()
-    ).T
-    fig.index.name = "year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig,
-        id_vars="year",
-        var_name=["sector", "product_long"],
-        value_name="Emissions",
-    )
-
-    fig = go.Figure()
-
-    spacer = emissions_output_co2e.loc[model, scenario, slice(None)].clip(lower=0).sum()
-
-    fig.add_trace(
-        go.Scatter(
-            name="",
-            line=dict(width=0),
-            x=spacer.index.values[spacer.index.values >= data_end_year],
-            y=spacer[spacer.index.values >= data_end_year],
-            fill="none",
-            stackgroup="one",
-            showlegend=False,
-        )
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            name="Historical",
-            line=dict(width=2, color="black"),
-            x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
-            y=pd.Series(
-                emissions_output_co2e.loc[model, scenario, slice(None)]
-                .loc[:, :data_end_year]
-                .sum(),
-                index=emissions_output_co2e.columns,
-            ).loc[:data_end_year],
-            fill="none",
-            stackgroup="two",
-            showlegend=True,
-            hovertemplate="<b>Year</b>: %{x}"
-            + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
-        )
-    )
-
-    for sector in fig2["sector"].unique():
-
-        for product_long in fig2["product_long"].unique():
-            fig.add_trace(
-                go.Scatter(
-                    name=product_long,
-                    line=dict(width=0.5),
-                    x=fig2[fig2["year"] > data_end_year]["year"].unique(),
-                    y=fig2[
-                        (fig2["sector"] == sector)
-                        & (fig2["product_long"] == product_long)
-                        & (fig2["year"] > data_end_year)
-                    ]["Emissions"],
-                    fill="tonexty",
-                    stackgroup="one",
-                    hovertemplate="<b>Year</b>: %{x}"
-                    + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
-                )
-            )
-
-    fig.update_layout(
-        title={
-            "text": "Emissions, "
-            + "World"
-            + ", "
-            + "All"
-            + ", "
-            + str(scenario).capitalize(),
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.9,
-        },
-        yaxis={"title": "MtCO2e"},
-        legend=dict(font=dict(size=8)),
-    )
-
-    # Play button and animation frames
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type="buttons",
-                buttons=[dict(label="Play", method="animate", args=[None])],
-            )
-        ],
-        frames=[
-            go.Frame(data=[go.Scatter(x=[1, 2], y=[1, 2])]),
-            go.Frame(data=[go.Scatter(x=[1, 4], y=[1, 4])]),
-            go.Frame(
-                data=[go.Scatter(x=[3, 4], y=[3, 4])],
-                layout=go.Layout(title_text="End Title"),
-            ),
-        ],
-    )
-
-    if show_figs is True:
-        fig.show()
-
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=(
-                "./charts/emissions-wedges-animation-"
-                + "All"
-                + "-"
-                + str(scenario)
-                + ".html"
-            ).replace(" ", ""),
-            auto_open=False,
-        )
-
-    # endregion
-    """
     # endregion
 
     # endregion
