@@ -740,7 +740,7 @@ def results_analysis(
 
     # region
 
-    region = "usa"
+    region = slice(None)
 
     fig = (
         pdindex_output.loc[slice(None), slice(None), region]
@@ -842,6 +842,21 @@ def results_analysis(
             if show_figs is True:
                 fig.show()
 
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/acurves-"
+                    + scenario
+                    + "-"
+                    + str(region).replace("slice(None, None, None)", "World")
+                    + "-"
+                    + str(sector).replace("slice(None, None, None)", "All")
+                    + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+            )
+
     # endregion
 
     #########################################
@@ -855,6 +870,7 @@ def results_analysis(
     fig2 = pd.melt(
         fig, id_vars="year", var_name=["sector", "flow_long"], value_name="% Adoption"
     )
+    fig2["sector"] = "Transportation"
 
     for sector in fig2["sector"].unique():
 
@@ -928,7 +944,7 @@ def results_analysis(
             pio.write_html(
                 fig,
                 file=(
-                    "./charts/acurves-marketdata-"
+                    "./charts/acurves-"
                     + scenario
                     + "-"
                     + str(region).replace("slice(None, None, None)", "World")
@@ -1076,6 +1092,7 @@ def results_analysis(
     fig2 = pd.melt(
         fig, id_vars="year", var_name=["sector", "flow_long"], value_name="% Adoption"
     )
+    fig2["sector"] = "Industrial"
 
     for sector in fig2["sector"].unique():
 
@@ -1246,6 +1263,7 @@ def results_analysis(
         var_name=["sector", "product_long"],
         value_name="% Adoption",
     )
+    fig2["sector"] = "Agriculture"
 
     for sector in fig2["sector"].unique():
 
@@ -1416,6 +1434,7 @@ def results_analysis(
         var_name=["sector", "product_long"],
         value_name="% Adoption",
     )
+    fig2["sector"] = "Forests & Wetlands"
 
     for sector in fig2["sector"].unique():
 
