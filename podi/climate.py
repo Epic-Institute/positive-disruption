@@ -862,6 +862,15 @@ def climate(
         if show_figs is True:
             fig.show()
 
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=("./charts/climate-" + gas + "-concentration.html").replace(
+                    " ", ""
+                ),
+                auto_open=False,
+            )
+
     # endregion
 
     ###########################

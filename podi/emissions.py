@@ -2174,11 +2174,11 @@ def emissions(
                 go.Scatter(
                     name="Net Projected",
                     line=dict(width=2, color="black", dash="dot"),
-                    x=fig2[fig2["year"] > data_end_year]["year"].unique(),
+                    x=fig2[fig2["year"] >= data_end_year]["year"].unique(),
                     y=fig2[
                         (fig2["scenario"] == scenario)
                         & (fig2["sector"] == sector)
-                        & (fig2["year"] > data_end_year)
+                        & (fig2["year"] >= data_end_year)
                     ]
                     .groupby(["year"])
                     .sum()["Emissions"],
@@ -2294,13 +2294,13 @@ def emissions(
             go.Scatter(
                 name="Net Projected",
                 line=dict(width=2, color="black", dash="dot"),
-                x=fig2[fig2["year"] > data_end_year]["year"].unique(),
+                x=fig2[fig2["year"] >= data_end_year]["year"].unique(),
                 y=pd.Series(
                     emissions_output_co2e.loc[model, scenario, slice(None), sector]
-                    .loc[:, data_end_year + 1 :]
+                    .loc[:, data_end_year:]
                     .sum(),
                     index=emissions_output_co2e.columns,
-                ).loc[data_end_year + 1 :],
+                ).loc[data_end_year:],
                 fill="none",
                 stackgroup="three",
                 showlegend=True,
@@ -2528,8 +2528,8 @@ def emissions(
             go.Scatter(
                 name="Net Projected",
                 line=dict(width=2, color="black", dash="dot"),
-                x=fig2[fig2["year"] > data_end_year]["year"].unique(),
-                y=fig2[(fig2["scenario"] == scenario) & (fig2["year"] > data_end_year)]
+                x=fig2[fig2["year"] >= data_end_year]["year"].unique(),
+                y=fig2[(fig2["scenario"] == scenario) & (fig2["year"] >= data_end_year)]
                 .groupby(["year"])
                 .sum()["Emissions"],
                 fill="none",
@@ -2636,13 +2636,13 @@ def emissions(
         go.Scatter(
             name="Net Projected",
             line=dict(width=2, color="black", dash="dot"),
-            x=fig2[fig2["year"] > data_end_year]["year"].unique(),
+            x=fig2[fig2["year"] >= data_end_year]["year"].unique(),
             y=pd.Series(
                 emissions_output_co2e.loc[model, scenario, slice(None)]
-                .loc[:, data_end_year + 1 :]
+                .loc[:, data_end_year:]
                 .sum(),
                 index=emissions_output_co2e.columns,
-            ).loc[data_end_year + 1 :],
+            ).loc[data_end_year:],
             fill="none",
             stackgroup="three",
             showlegend=True,
