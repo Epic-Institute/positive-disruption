@@ -1254,131 +1254,56 @@ def results_analysis(
     ######################################
 
     # region
-    fig = agriculture.T
+    fig = agriculture.groupby(["model", "scenario", "sector", "product_long"]).sum().T
     fig.index.name = "year"
     fig.reset_index(inplace=True)
     fig2 = pd.melt(
         fig,
         id_vars="year",
-        var_name=["sector", "product_long"],
+        var_name=["model", "scenario", "sector", "product_long"],
         value_name="% Adoption",
     )
-    fig2["sector"] = "Agriculture"
 
-    for sector in fig2["sector"].unique():
+    for scenario in fig2["scenario"].unique():
 
         fig = go.Figure()
 
-        if (fig2.columns.values == "flow_long").any():
-            for flow in fig2["flow_long"].unique():
-                # Make projected trace
-                fig.add_trace(
-                    go.Scatter(
-                        name=flow,
-                        line=dict(
-                            width=1,
-                        ),
-                        x=fig2["year"].unique(),
-                        y=fig2[
-                            (fig2["sector"] == sector) & (fig2["flow_long"] == flow)
-                        ]["% Adoption"],
-                        fill="tonexty",
-                        stackgroup="two",
-                        legendgroup=flow,
-                        showlegend=True,
-                    )
+        for product in fig2["product_long"].unique():
+            # Make projected trace
+            fig.add_trace(
+                go.Scatter(
+                    name=product,
+                    line=dict(
+                        width=1,
+                    ),
+                    x=fig2["year"].unique(),
+                    y=fig2[
+                        (fig2["scenario"] == scenario)
+                        & (fig2["product_long"] == product)
+                    ]["% Adoption"],
+                    fill="tonexty",
+                    stackgroup="two",
+                    legendgroup=product,
+                    showlegend=True,
                 )
+            )
 
-                # Make historical trace
-                fig.add_trace(
-                    go.Scatter(
-                        name="Historical",
-                        line=dict(width=1, color="#1c352d"),
-                        x=fig2["year"].unique()[fig2["year"].unique() <= data_end_year],
-                        y=fig2[
-                            (fig2["year"] <= data_end_year)
-                            & (fig2["sector"] == sector)
-                            & (fig2["flow_long"] == flow)
-                        ]["% Adoption"],
-                        stackgroup="one",
-                        legendgroup=flow,
-                        showlegend=False,
-                    )
+            # Make historical trace
+            fig.add_trace(
+                go.Scatter(
+                    name="Historical",
+                    line=dict(width=1, color="#1c352d"),
+                    x=fig2["year"].unique()[fig2["year"].unique() <= data_end_year],
+                    y=fig2[
+                        (fig2["year"] <= data_end_year)
+                        & (fig2["scenario"] == scenario)
+                        & (fig2["product_long"] == product)
+                    ]["% Adoption"],
+                    stackgroup="one",
+                    legendgroup=product,
+                    showlegend=False,
                 )
-        elif (fig2.columns.values == "product_long").any():
-            for product in fig2["product_long"].unique():
-                # Make projected trace
-                fig.add_trace(
-                    go.Scatter(
-                        name=product,
-                        line=dict(
-                            width=1,
-                        ),
-                        x=fig2["year"].unique(),
-                        y=fig2[
-                            (fig2["sector"] == sector)
-                            & (fig2["product_long"] == product)
-                        ]["% Adoption"],
-                        fill="tonexty",
-                        stackgroup="two",
-                        legendgroup=product,
-                        showlegend=True,
-                    )
-                )
-
-                # Make historical trace
-                fig.add_trace(
-                    go.Scatter(
-                        name="Historical",
-                        line=dict(width=1, color="#1c352d"),
-                        x=fig2["year"].unique()[fig2["year"].unique() <= data_end_year],
-                        y=fig2[
-                            (fig2["year"] <= data_end_year)
-                            & (fig2["sector"] == sector)
-                            & (fig2["product_long"] == product)
-                        ]["% Adoption"],
-                        stackgroup="one",
-                        legendgroup=product,
-                        showlegend=False,
-                    )
-                )
-        elif (fig2.columns.values == "product_category").any():
-            for product in fig2["product_category"].unique():
-                # Make projected trace
-                fig.add_trace(
-                    go.Scatter(
-                        name=product,
-                        line=dict(
-                            width=1,
-                        ),
-                        x=fig2["year"].unique(),
-                        y=fig2[
-                            (fig2["sector"] == sector)
-                            & (fig2["product_category"] == product)
-                        ]["% Adoption"],
-                        fill="tonexty",
-                        stackgroup="two",
-                        legendgroup=product,
-                        showlegend=True,
-                    )
-                )
-
-                # Make historical trace
-                fig.add_trace(
-                    go.Scatter(
-                        name="Historical",
-                        line=dict(width=1, color="#1c352d"),
-                        x=fig2["year"].unique()[fig2["year"].unique() <= data_end_year],
-                        y=fig2[
-                            (fig2["year"] <= data_end_year)
-                            & (fig2["sector"] == sector)
-                            & (fig2["product_category"] == product)
-                        ]["% Adoption"],
-                        stackgroup="one",
-                        legendgroup=product,
-                        showlegend=False,
-                    )
-                )
+            )
 
         fig.update_layout(
             title={

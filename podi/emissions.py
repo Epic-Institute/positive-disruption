@@ -2170,6 +2170,26 @@ def emissions(
                 )
             )
 
+            fig.add_trace(
+                go.Scatter(
+                    name="Net Projected",
+                    line=dict(width=2, color="black", dash="dot"),
+                    x=fig2[fig2["year"] > data_end_year]["year"].unique(),
+                    y=fig2[
+                        (fig2["scenario"] == scenario)
+                        & (fig2["sector"] == sector)
+                        & (fig2["year"] > data_end_year)
+                    ]
+                    .groupby(["year"])
+                    .sum()["Emissions"],
+                    fill="none",
+                    stackgroup="three",
+                    showlegend=True,
+                    hovertemplate="<b>Year</b>: %{x}"
+                    + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+                )
+            )
+
             fig.update_layout(
                 title={
                     "text": "Emissions, "
@@ -2264,6 +2284,25 @@ def emissions(
                 ).loc[:data_end_year],
                 fill="none",
                 stackgroup="two",
+                showlegend=True,
+                hovertemplate="<b>Year</b>: %{x}"
+                + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+            )
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                name="Net Projected",
+                line=dict(width=2, color="black", dash="dot"),
+                x=fig2[fig2["year"] > data_end_year]["year"].unique(),
+                y=pd.Series(
+                    emissions_output_co2e.loc[model, scenario, slice(None), sector]
+                    .loc[:, data_end_year + 1 :]
+                    .sum(),
+                    index=emissions_output_co2e.columns,
+                ).loc[data_end_year + 1 :],
+                fill="none",
+                stackgroup="three",
                 showlegend=True,
                 hovertemplate="<b>Year</b>: %{x}"
                 + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
@@ -2485,6 +2524,22 @@ def emissions(
             )
         )
 
+        fig.add_trace(
+            go.Scatter(
+                name="Net Projected",
+                line=dict(width=2, color="black", dash="dot"),
+                x=fig2[fig2["year"] > data_end_year]["year"].unique(),
+                y=fig2[(fig2["scenario"] == scenario) & (fig2["year"] > data_end_year)]
+                .groupby(["year"])
+                .sum()["Emissions"],
+                fill="none",
+                stackgroup="three",
+                showlegend=True,
+                hovertemplate="<b>Year</b>: %{x}"
+                + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+            )
+        )
+
         fig.update_layout(
             title={
                 "text": "Emissions, "
@@ -2571,6 +2626,25 @@ def emissions(
             ).loc[:data_end_year],
             fill="none",
             stackgroup="two",
+            showlegend=True,
+            hovertemplate="<b>Year</b>: %{x}"
+            + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Net Projected",
+            line=dict(width=2, color="black", dash="dot"),
+            x=fig2[fig2["year"] > data_end_year]["year"].unique(),
+            y=pd.Series(
+                emissions_output_co2e.loc[model, scenario, slice(None)]
+                .loc[:, data_end_year + 1 :]
+                .sum(),
+                index=emissions_output_co2e.columns,
+            ).loc[data_end_year + 1 :],
+            fill="none",
+            stackgroup="three",
             showlegend=True,
             hovertemplate="<b>Year</b>: %{x}"
             + "<br><b>Emissions</b>: %{y:,.0f} MtCO2e<br>",
