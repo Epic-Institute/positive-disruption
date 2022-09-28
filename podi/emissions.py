@@ -1864,7 +1864,6 @@ def emissions(
                             & (fig2["flow_long"] == gas)
                             & (fig2["year"] <= data_end_year)
                         ]
-                        .clip(lower=0)
                         .groupby(["year"])
                         .sum()["Emissions"],
                         fill="none",

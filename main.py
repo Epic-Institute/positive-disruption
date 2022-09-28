@@ -414,36 +414,6 @@ energy_output = energy_output[
     ).values
 ]
 
-"""
-# Change region codes to full names
-energy_output.reset_index(inplace=True)
-energy_output["region"] = energy_output["region"].replace(
-    pd.DataFrame(
-        pd.read_csv(
-            "podi/data/region_categories.csv", usecols=["WEB Region Lower", "ISO Name"]
-        )
-    )
-    .set_index("WEB Region Lower")
-    .to_dict()["ISO Name"]
-)
-energy_output.set_index(
-    [
-        "model",
-        "scenario",
-        "region",
-        "sector",
-        "product_category",
-        "product_long",
-        "product_short",
-        "flow_category",
-        "flow_long",
-        "flow_short",
-        "unit",
-    ],
-    inplace=True,
-)
-"""
-
 # Save as regional-level files and a global-level file
 for output in [
     (energy_output, "energy"),
