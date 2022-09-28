@@ -517,26 +517,3 @@ for output in [
     output_global.to_csv("podi/data/output/" + output[1] + "/" + "world" + ".csv")
 
 # endregion
-
-####################
-# REFORMAT TO IAMC #
-####################
-
-# region
-
-# Create copy of results in IAMC format
-"""
-energy_output_pyam = pyam.IamDataFrame(
-    energy_output.reset_index().drop(
-        columns=[
-            "product_category",
-            "product_long",
-            "flow_category",
-            "flow_long",
-            "nonenergy",
-        ]
-    ),
-    variable=["sector", "product_short", "flow_short"],
-)
-"""
-# endregion
