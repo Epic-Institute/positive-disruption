@@ -813,19 +813,34 @@ def climate(
         fig = go.Figure()
 
         for scenario in climate_output_concentration.index.levels[0]:
-            fig.add_trace(
-                go.Scatter(
-                    name=scenario + ", " + gas,
-                    line=dict(width=3),
-                    x=climate_output_concentration.columns[
-                        climate_output_concentration.columns >= data_end_year
-                    ],
-                    y=climate_output_concentration.loc[scenario, gas]
-                    .loc[data_end_year:]
-                    .squeeze(),
-                    fill="none",
+            if scenario == "baseline":
+                fig.add_trace(
+                    go.Scatter(
+                        name=scenario + ", " + gas,
+                        line=dict(width=3, color="red", dash="dot"),
+                        x=climate_output_concentration.columns[
+                            climate_output_concentration.columns >= data_end_year
+                        ],
+                        y=climate_output_concentration.loc[scenario, gas]
+                        .loc[data_end_year:]
+                        .squeeze(),
+                        fill="none",
+                    )
                 )
-            )
+            else:
+                fig.add_trace(
+                    go.Scatter(
+                        name=scenario + ", " + gas,
+                        line=dict(width=3, color="purple", dash="dashdot"),
+                        x=climate_output_concentration.columns[
+                            climate_output_concentration.columns >= data_end_year
+                        ],
+                        y=climate_output_concentration.loc[scenario, gas]
+                        .loc[data_end_year:]
+                        .squeeze(),
+                        fill="none",
+                    )
+                )
 
         fig.add_trace(
             go.Scatter(
