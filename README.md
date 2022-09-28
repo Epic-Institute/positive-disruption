@@ -1,45 +1,48 @@
-# Model Workflow
-```mermaid
-graph LR
-   A[Configuration files]--> G[main.py]
-   B[Historical Data] --> G
-   G --> I[Output files]
-   I-->J[Result figures]
-   I-->O[Data Explorer]
-```
+# Positive Disruption Model
+___
 
-# Electricity Flow Chart
+![](docs/pd_model_screenshot.png)
+___
 
-```mermaid
-graph LR
-   A[Combustible Fuels]--> G[Gross Production]
-   B[Hydro] --> G
-   C[Geothermal]--> G
-   D[Nuclear]--> G
-   E[Solar]--> G
-   F[Tide, Wave or Ocean] --> G
-   G --> I[Net Production]
-   I-->J[Heat Pumps & Electric Boilers]
-   I-->O[Transmission & Distribution Losses]
-   I-->M[Total Consumption]
-   I-->K[Storage]-->G
-   G--> H[Own Use]
-```
+## What is Positive Disruption?
 
-# Heat Flow Chart
+Positive Disruption is a framework for exploring potential scenarios in which technologies and practices that impact GHG emissions, referred to as ‘climate solution verticals', might be adopted between now and the end of the century, globally and by nation, and estimating their impact on GHG emissions.
 
-```mermaid
-graph LR
-    A[Combustible Fuels]--> G[Gross Production]
-    B[Nuclear] --> G
-    C[Geothermal]--> G
-    E[Solar]--> G
-    F[Electric Boilers] --> G
-    Z[Heat Pumps] --> G
-    Other[Other] --> G
-    G --> I[Net Production]
-    I-->O[Transmission & Distribution Losses]
-    I-->M[Total Consumption]
-    I-->K[Storage]-->G
-    G--> H[Own Use]
-```
+The Positive Disruption model explores how the adoption of a set of climate solution verticals, when assumed to have optionality for nonlinear adoption curves, can impact GHG emissions. It provides timeseries estimates of global progress as a summation of national progress.
+
+Suggested uses for the model include:
+
+- To explore climate trajectories that are influenced by technology market disruption
+- To understand options for applying additional market acceleration efforts
+
+___
+
+## Documentation
+
+Additional model documentation is located in our [Wiki](https://github.com/Epic-Institute/positive-disruption/wiki/Positive-Disruption-Model-Supplemental-Information).
+
+___
+
+## How to install
+
+clone the repository, run main.py. Output charts will be available in the charts directory.
+___
+
+## How to contribute
+
+We are open to contributions; our aim is to develop a transparent and easy to reproduce model. Please submit pull requests bugs identified and/or fixed, new feature suggestions. Or contact us through GitHub (https://github.com/Epic-Institute) or by email (info@epicinstitute.org).
+___
+
+## Feedback
+
+Please contact info@epicinstitute.org
+___
+
+## Copyright
+
+Copyright (c) 2022 Epic Institute
+___
+
+## License
+
+See our <b>License</b> file 
