@@ -3,7 +3,6 @@
 import numpy as np
 import pandas as pd
 import fair
-import pyam
 import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -1526,62 +1525,68 @@ def climate(
     climate_historical_concentration["model"] = "PD22"
     climate_historical_concentration["scenario"] = "historical"
     climate_historical_concentration["region"] = "world"
-    climate_historical_concentration["variable"] = (
-        "Concentration|" + climate_historical_concentration.index
-    )
+    climate_historical_concentration["variable"] = "Concentration"
+    climate_historical_concentration["gas"] = climate_historical_concentration.index
     climate_historical_concentration["unit"] = "PPM"
-    climate_historical_concentration.set_index(pyam.IAMC_IDX, inplace=True)
+    climate_historical_concentration.set_index(
+        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+    )
 
     climate_historical_forcing = climate_historical_forcing.T
     climate_historical_forcing["model"] = "PD22"
     climate_historical_forcing["scenario"] = "historical"
     climate_historical_forcing["region"] = "world"
     climate_historical_forcing["variable"] = "Radiative forcing"
+    climate_historical_forcing["gas"] = climate_historical_forcing.index
     climate_historical_forcing["unit"] = "W/m2"
-    climate_historical_forcing.set_index(pyam.IAMC_IDX, inplace=True)
+    climate_historical_forcing.set_index(
+        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+    )
 
     climate_historical_temperature = climate_historical_temperature.T
     climate_historical_temperature["model"] = "PD22"
     climate_historical_temperature["scenario"] = "historical"
     climate_historical_temperature["region"] = "world"
     climate_historical_temperature["variable"] = "Temperature change"
+    climate_historical_temperature["gas"] = climate_historical_temperature.index
     climate_historical_temperature["unit"] = "F"
-    climate_historical_temperature.set_index(pyam.IAMC_IDX, inplace=True)
+    climate_historical_temperature.set_index(
+        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+    )
 
     climate_output_concentration["model"] = "PD22"
     climate_output_concentration["region"] = "world"
-    climate_output_concentration["variable"] = (
-        "Concentration|" + climate_output_concentration.reset_index().product_long
-    ).values
+    climate_output_concentration["variable"] = "Concentration"
+    climate_output_concentration[
+        "gas"
+    ] = climate_output_concentration.index.get_level_values(1)
     climate_output_concentration["unit"] = "PPM"
     climate_output_concentration = (
         climate_output_concentration.droplevel("product_long")
         .reset_index()
-        .set_index(pyam.IAMC_IDX)
+        .set_index(["model", "scenario", "region", "variable", "gas", "unit"])
     )
 
     climate_output_forcing["model"] = "PD22"
     climate_output_forcing["region"] = "world"
-    climate_output_forcing["variable"] = (
-        "Radiative forcing|" + climate_output_forcing.reset_index().product_long
-    ).values
+    climate_output_forcing["variable"] = "Radiative forcing"
+    climate_output_forcing["gas"] = climate_output_forcing.index.get_level_values(1)
     climate_output_forcing["unit"] = "W/m2"
     climate_output_forcing = (
         climate_output_forcing.droplevel("product_long")
         .reset_index()
-        .set_index(pyam.IAMC_IDX)
+        .set_index(["model", "scenario", "region", "variable", "gas", "unit"])
     )
 
     climate_output_temperature["model"] = "PD22"
     climate_output_temperature["region"] = "world"
-    climate_output_temperature["variable"] = (
-        "Temperature change|" + climate_output_temperature.reset_index().product_long
-    ).values
+    climate_output_temperature["variable"] = "Temperature change"
+    climate_output_temperature["gas"] = 0
     climate_output_temperature["unit"] = "F"
     climate_output_temperature = (
         climate_output_temperature.droplevel("product_long")
         .reset_index()
-        .set_index(pyam.IAMC_IDX)
+        .set_index(["model", "scenario", "region", "variable", "gas", "unit"])
     )
 
     climate_output_concentration_co2e.reset_index(inplace=True)
@@ -1590,12 +1595,14 @@ def climate(
     climate_output_concentration_co2e.rename(
         columns={"product_long": "variable"}, inplace=True
     )
+    climate_output_concentration_co2e["gas"] = 0
+    climate_output_concentration_co2e.replace(
+        {"CO2e": "GHG Concentration"}, inplace=True
+    )
+    climate_output_concentration_co2e["gas"] = "CO2e"
     climate_output_concentration_co2e["unit"] = "PPM"
     climate_output_concentration_co2e.set_index(
-        ["model", "scenario", "region", "variable", "unit"], inplace=True
-    )
-    climate_output_concentration_co2e.rename(
-        index={"CO2e": "GHG Concentration|GHG Concentration"}, inplace=True
+        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
     )
 
     climate_output_forcing_co2e.reset_index(inplace=True)
@@ -1604,12 +1611,12 @@ def climate(
     climate_output_forcing_co2e.rename(
         columns={"product_long": "variable"}, inplace=True
     )
+    climate_output_forcing_co2e["gas"] = 0
+    climate_output_forcing_co2e.replace({"CO2e": "Radiative Forcing"}, inplace=True)
+    climate_output_forcing_co2e["gas"] = "CO2e"
     climate_output_forcing_co2e["unit"] = "W/m2"
     climate_output_forcing_co2e.set_index(
-        ["model", "scenario", "region", "variable", "unit"], inplace=True
-    )
-    climate_output_forcing_co2e.rename(
-        index={"CO2e": "Radiative Forcing|Radiative Forcing"}, inplace=True
+        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
     )
 
     # endregion
