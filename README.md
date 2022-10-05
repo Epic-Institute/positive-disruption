@@ -1,6 +1,6 @@
 # Project Organization
 
-    ├── LICENSE
+    ├── LICENSE test update
     ├── Makefile           <- Makefile with commands like `make data`
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
