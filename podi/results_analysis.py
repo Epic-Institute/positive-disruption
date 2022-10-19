@@ -198,6 +198,8 @@ def results_analysis(
         fig,
         file=("./charts/historicalanalogs-percent.html").replace(" ", ""),
         auto_open=False,
+        full_html=False,
+        include_plotlyjs="cdn",
     )
 
     # endregion
@@ -273,6 +275,8 @@ def results_analysis(
         fig,
         file=("./charts/historicalanalogs-absolutevalue.html").replace(" ", ""),
         auto_open=False,
+        full_html=False,
+        include_plotlyjs="cdn",
     )
 
     # endregion
@@ -349,6 +353,8 @@ def results_analysis(
         fig,
         file=("./charts/historicalanalogs-percentchange.html").replace(" ", ""),
         auto_open=False,
+        full_html=False,
+        include_plotlyjs="cdn",
     )
 
     # endregion
@@ -858,6 +864,8 @@ def results_analysis(
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -956,6 +964,8 @@ def results_analysis(
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -1080,6 +1090,8 @@ def results_analysis(
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -1248,6 +1260,8 @@ def results_analysis(
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -1344,6 +1358,8 @@ def results_analysis(
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -1515,6 +1531,8 @@ def results_analysis(
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -1661,6 +1679,8 @@ def results_analysis(
                 "./charts/pdindexleaders-" + scenario + "-" + "Electricity" + ".html"
             ).replace(" ", ""),
             auto_open=True,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -1799,6 +1819,8 @@ def results_analysis(
                 "./charts/pdindexleaders-" + scenario + "-" + "Transportation" + ".html"
             ).replace(" ", ""),
             auto_open=True,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -1929,6 +1951,8 @@ def results_analysis(
                 "./charts/pdindexleaders-" + scenario + "-" + "Buildings" + ".html"
             ).replace(" ", ""),
             auto_open=True,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -2067,6 +2091,8 @@ def results_analysis(
                 "./charts/pdindexleaders-" + scenario + "-" + "Industry" + ".html"
             ).replace(" ", ""),
             auto_open=True,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -2178,6 +2204,8 @@ def results_analysis(
                 "./charts/pdindexleaders-" + scenario + "-" + "Agriculture" + ".html"
             ).replace(" ", ""),
             auto_open=True,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -2292,7 +2320,9 @@ def results_analysis(
                 + "Forests&wetlands"
                 + ".html"
             ).replace(" ", ""),
-            auto_open=True,
+            auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion

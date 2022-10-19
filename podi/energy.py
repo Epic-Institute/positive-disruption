@@ -6421,6 +6421,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "./charts/energy-TFC-productcategory-" + str(scenario) + ".html"
             ).replace(" ", ""),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -6739,6 +6741,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 " ", ""
             ),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -6831,6 +6835,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "./charts/energy-electricity-sector-" + str(scenario) + ".html"
             ).replace(" ", ""),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -6944,6 +6950,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "./charts/energy-electricity-product-" + str(scenario) + ".html"
             ).replace(" ", ""),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion

@@ -163,6 +163,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -479,6 +481,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -649,6 +653,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -788,6 +794,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             fig,
             file=("./charts/afolu_historical_analogs.html"),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
     # endregion
 
@@ -988,6 +996,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         + ".html"
                     ).replace(" ", ""),
                     auto_open=False,
+                    full_html=False,
+                    include_plotlyjs="cdn",
                 )
 
     # endregion
@@ -1082,6 +1092,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                         + ".html"
                     ).replace(" ", ""),
                     auto_open=False,
+                    full_html=False,
+                    include_plotlyjs="cdn",
                 )
 
         # endregion

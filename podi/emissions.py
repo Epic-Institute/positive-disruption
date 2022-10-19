@@ -598,6 +598,8 @@ def emissions(
                 + ".html"
             ).replace(" ", ""),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -1136,6 +1138,8 @@ def emissions(
                             + ".html"
                         ).replace(" ", ""),
                         auto_open=False,
+                        full_html=False,
+                        include_plotlyjs="cdn",
                     )
 
     # endregion
@@ -1899,6 +1903,8 @@ def emissions(
                     "./charts/emissions-" + str(scenario) + "-" + str(sector) + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -2219,6 +2225,8 @@ def emissions(
                         + ".html"
                     ).replace(" ", ""),
                     auto_open=False,
+                    full_html=False,
+                    include_plotlyjs="cdn",
                 )
 
     # endregion
@@ -2360,6 +2368,8 @@ def emissions(
                     + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -2565,6 +2575,8 @@ def emissions(
                     "./charts/emissions-" + "All" + "-" + str(scenario) + ".html"
                 ).replace(" ", ""),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -2696,6 +2708,8 @@ def emissions(
                 "./charts/emissions-wedges-" + "All" + "-" + str(scenario) + ".html"
             ).replace(" ", ""),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion

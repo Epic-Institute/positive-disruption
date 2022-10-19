@@ -797,6 +797,8 @@ def climate(
             fig,
             file=("./charts/climate-ghg-concentration.html").replace(" ", ""),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -883,6 +885,8 @@ def climate(
                     " ", ""
                 ),
                 auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
             )
 
     # endregion
@@ -972,6 +976,8 @@ def climate(
             fig,
             file=("./charts/climate-radiativeforcing.html").replace(" ", ""),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
@@ -1435,6 +1441,8 @@ def climate(
             fig,
             file=("./charts/climate-temperature.html").replace(" ", ""),
             auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
         )
 
     # endregion
