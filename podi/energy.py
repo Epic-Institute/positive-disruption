@@ -2064,7 +2064,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     end_year = data_end_year
     df = energy_baseline
     model = "PD22"
-    region = slice(None)
+    region = "usa"
     sector = slice(None)
     product_category = slice(None)
     product_long = slice(None)

@@ -4,7 +4,6 @@
 import warnings
 import numpy as np
 import pandas as pd
-import pyam
 from podi.energy import energy
 from podi.afolu import afolu
 from podi.emissions import emissions
@@ -27,7 +26,7 @@ model = "PD22"
 scenario = "pathway"
 data_start_year = 1990
 data_end_year = 2020
-proj_end_year = 2100
+proj_end_year = 2070
 
 ##########
 # ENERGY #
@@ -266,7 +265,7 @@ if recalc_climate is True:
 
 climate_output = pd.DataFrame(
     pd.read_csv("podi/data/output/climate/climate_output.csv")
-).set_index(pyam.IAMC_IDX)
+).set_index(["model", "scenario", "region", "variable", "unit", "gas"])
 climate_output.columns = climate_output.columns.astype(int)
 
 # endregion
@@ -306,7 +305,14 @@ index = [
     "unit",
 ]
 pdindex_output = pd.DataFrame(pd.read_csv("podi/data/pdindex_output.csv")).set_index(
-    index
+    [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        "product_long",
+        "unit",
+    ]
 )
 pdindex_output.columns = pdindex_output.columns.astype(int)
 
@@ -408,9 +414,16 @@ emissions_output_co2e = emissions_output_co2e[
 # Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
 energy_output = energy_output[
     ~(
-        energy_output.reset_index().flow_short.isin(
+        energy_output.reset_index().flow_long.isin(
             ["Transformation Processes", "Energy industry own use and Losses"]
         )
+    ).values
+]
+
+# Drop Nitrogen Fertilizer Management
+afolu_output = afolu_output[
+    ~(
+        afolu_output.reset_index().product_long.isin(["Nitrogen Fertilizer Management"])
     ).values
 ]
 
