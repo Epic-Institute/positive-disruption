@@ -427,6 +427,13 @@ afolu_output = afolu_output[
     ).values
 ]
 
+# Drop Improved Forest Management
+afolu_output = afolu_output[
+    ~(
+        afolu_output.reset_index().product_long.isin(["Improved Forest Management"])
+    ).values
+]
+
 # Save as regional-level files and a global-level file
 for output in [
     (energy_output, "energy"),
