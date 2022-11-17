@@ -439,6 +439,7 @@ for output in [
     (energy_output, "energy"),
     (afolu_output, "afolu"),
     (emissions_output, "emissions"),
+    (emissions_output_co2e, "emissions_co2e"),
     (emissions_wedges, "emissions_wedges"),
 ]:
     for region in output[0].reset_index().region.unique():
