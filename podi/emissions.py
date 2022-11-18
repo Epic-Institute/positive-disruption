@@ -588,19 +588,20 @@ def emissions(
         if show_figs is True:
             fig.show()
 
-        pio.write_html(
-            fig,
-            file=(
-                "./charts/afolu_flux-"
-                + str(
-                    subvertical.replace("|Avg mitigation potential flux", "")
-                ).replace("slice(None, None, None)", "All")
-                + ".html"
-            ).replace(" ", ""),
-            auto_open=False,
-            full_html=False,
-            include_plotlyjs="cdn",
-        )
+        if save_figs is True:
+            pio.write_html(
+                fig,
+                file=(
+                    "./charts/afolu_flux-"
+                    + str(
+                        subvertical.replace("|Avg mitigation potential flux", "")
+                    ).replace("slice(None, None, None)", "All")
+                    + ".html"
+                ).replace(" ", ""),
+                auto_open=False,
+                full_html=False,
+                include_plotlyjs="cdn",
+            )
 
     # endregion
 

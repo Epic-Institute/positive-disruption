@@ -26,13 +26,13 @@ model = "PD22"
 scenario = "pathway"
 data_start_year = 1990
 data_end_year = 2020
-proj_end_year = 2070
+proj_end_year = 2100
 
 ##########
 # ENERGY #
 ##########
 
-recalc_energy = False
+recalc_energy = True
 # region
 
 if recalc_energy is True:
@@ -87,7 +87,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = False
+recalc_afolu = True
 # region
 
 if recalc_afolu is True:
@@ -115,7 +115,7 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = False
+recalc_emissions = True
 # region
 
 if recalc_emissions is True:
@@ -248,7 +248,7 @@ cdr_output.columns = cdr_output.columns.astype(int)
 # CLIMATE #
 ###########
 
-recalc_climate = False
+recalc_climate = True
 # region
 
 if recalc_climate is True:
@@ -274,7 +274,7 @@ climate_output.columns = climate_output.columns.astype(int)
 # RESULTS ANALYSIS #
 ####################
 
-recalc_analysis = False
+recalc_analysis = True
 # region
 
 if recalc_analysis is True:

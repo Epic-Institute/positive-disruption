@@ -3,7 +3,6 @@
 import pandas as pd
 import plotly.io as pio
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import numpy as np
 from numpy import NaN
 import panel as pn
@@ -349,13 +348,14 @@ def results_analysis(
     if show_figs is True:
         fig.show()
 
-    pio.write_html(
-        fig,
-        file=("./charts/historicalanalogs-percentchange.html").replace(" ", ""),
-        auto_open=False,
-        full_html=False,
-        include_plotlyjs="cdn",
-    )
+    if save_figs is True:
+        pio.write_html(
+            fig,
+            file=("./charts/historicalanalogs-percentchange.html").replace(" ", ""),
+            auto_open=False,
+            full_html=False,
+            include_plotlyjs="cdn",
+        )
 
     # endregion
 
