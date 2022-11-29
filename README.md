@@ -27,7 +27,9 @@ Please submit pull requests for any bugs identified and/or fixed, as well as new
 
 ## Feedback
 
-Please contact info@epicinstitute.org
+Feedback in the form of suggested improvements to the data or code are welcome, just submit a pull request.
+
+Feel free to share any other feedback on our [Discussions](https://github.com/Epic-Institute/positive-disruption/discussions) page.
 
 ## Copyright
 
