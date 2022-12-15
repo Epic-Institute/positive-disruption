@@ -311,6 +311,7 @@ def update_graph(
                 y=filtered_df[filtered_df[groupby] == sub]["TFC, " + str(yaxis_unit)],
                 fill=chart_type,
                 stackgroup=stack_type[chart_type],
+                showlegend=True,
             )
         )
 

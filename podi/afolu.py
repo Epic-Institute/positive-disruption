@@ -682,6 +682,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
     )
 
+    afolu_historical.to_csv("podi/data/TNC/afolu_historical.csv")
+
     # endregion
 
     ###########################
