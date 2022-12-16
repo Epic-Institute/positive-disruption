@@ -2,7 +2,9 @@ from dash import Dash, dcc, html, Input, Output
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv("~/Documents/positive-disruption/podi/data/emissions_output_co2e.csv")
+data_end_year = 2020
+
+df = pd.read_csv("~/positive-disruption/podi/data/emissions_output_co2e.csv")
 
 app = Dash(__name__)
 
@@ -10,6 +12,8 @@ app.layout = html.Div(
     [
         html.Div(
             children=[
+                dcc.Graph(id="indicator-graphic"),
+                dcc.Graph(id="indicator-graphic2"),
                 html.Label("Dataset"),
                 html.Div(
                     [
@@ -19,6 +23,62 @@ app.layout = html.Div(
                             ],
                             "emissions_output_co2e",
                             id="dataset",
+                        ),
+                    ],
+                ),
+                html.Br(),
+                html.Label("Unit"),
+                html.Div(
+                    [
+                        dcc.RadioItems(
+                            ["Mt", "Gt"],
+                            "Mt",
+                            id="yaxis_unit",
+                        ),
+                    ],
+                ),
+                html.Br(),
+                html.Label("Y Axis Type"),
+                html.Div(
+                    [
+                        dcc.RadioItems(
+                            ["Linear", "Log"],
+                            "Linear",
+                            id="yaxis_type",
+                            inline=True,
+                        ),
+                    ],
+                ),
+                html.Br(),
+                html.Label("Group by"),
+                html.Div(
+                    [
+                        dcc.RadioItems(
+                            [
+                                "model",
+                                "scenario",
+                                "region",
+                                "sector",
+                                "product_category",
+                                "product_long",
+                                "product_short",
+                                "flow_category",
+                                "flow_long",
+                                "flow_short",
+                            ],
+                            "product_long",
+                            id="groupby",
+                        ),
+                    ],
+                ),
+                html.Br(),
+                html.Label("Chart Type"),
+                html.Div(
+                    [
+                        dcc.RadioItems(
+                            {"none": "line", "tonexty": "area"},
+                            "tonexty",
+                            id="chart_type",
                         ),
                     ],
                 ),
@@ -40,7 +100,7 @@ app.layout = html.Div(
                     [
                         dcc.Dropdown(
                             df.scenario.unique().tolist(),
-                            df.scenario.unique().tolist()[0],
+                            "pathway",
                             id="scenario",
                             multi=True,
                         ),
@@ -55,6 +115,10 @@ app.layout = html.Div(
                             df.region.unique().tolist(),
                             id="region",
                             multi=True,
+                            style={
+                                "max-height": "100px",
+                                "overflow-y": "scroll",
+                            },
                         ),
                     ],
                 ),
@@ -91,6 +155,7 @@ app.layout = html.Div(
                             df.product_long.unique().tolist(),
                             id="product_long",
                             multi=True,
+                            style={"max-height": "100px", "overflow-y": "scroll"},
                         ),
                     ],
                 ),
@@ -112,7 +177,7 @@ app.layout = html.Div(
                     [
                         dcc.Dropdown(
                             df.flow_category.unique().tolist(),
-                            "Final consumption",
+                            df.flow_category.unique().tolist(),
                             id="flow_category",
                             multi=True,
                         ),
@@ -142,70 +207,16 @@ app.layout = html.Div(
                         ),
                     ],
                 ),
-                html.Br(),
-                html.Label("Unit"),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            ["Mt", "Gt"],
-                            "Mt",
-                            id="yaxis_unit",
-                        ),
-                    ],
-                ),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            ["Linear", "Log"],
-                            "Linear",
-                            id="yaxis_type",
-                            inline=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Group by"),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            [
-                                "model",
-                                "scenario",
-                                "region",
-                                "sector",
-                                "product_category",
-                                "product_long",
-                                "product_short",
-                                "flow_category",
-                                "flow_long",
-                                "flow_short",
-                            ],
-                            "flow_short",
-                            id="groupby",
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Chart Type"),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            {"none": "line", "tonexty": "area"},
-                            "tonexty",
-                            id="chart_type",
-                        ),
-                    ],
-                ),
             ]
         ),
-        html.Br(),
-        dcc.Graph(id="indicator-graphic"),
-    ]
+    ],
+    style={"padding": "10px", "flex": "1 1 auto"},
 )
 
 
 @app.callback(
     Output("indicator-graphic", "figure"),
+    Output("indicator-graphic2", "figure"),
     Input("dataset", "value"),
     Input("model", "value"),
     Input("scenario", "value"),
@@ -243,7 +254,7 @@ def update_graph(
     unit_val = {"Mt": 1, "Gt": 1e-3}
     stack_type = {"none": None, "tonexty": "1"}
 
-    df = pd.read_csv("~/Documents/positive-disruption/podi/data/" + dataset + ".csv")
+    df = pd.read_csv("~/positive-disruption/podi/data/" + dataset + ".csv")
 
     df.drop(
         df.filter(["hydrogen", "flexible", "nonenergy", "unit"]), inplace=True, axis=1
@@ -292,7 +303,9 @@ def update_graph(
 
     fig = go.Figure()
 
-    for sub in filtered_df[groupby].unique():
+    for sub in filtered_df.sort_values(str(yaxis_unit), ascending=False)[
+        groupby
+    ].unique():
         fig.add_trace(
             go.Scatter(
                 name=sub,
@@ -307,18 +320,29 @@ def update_graph(
             )
         )
 
+    fig.add_trace(
+        go.Scatter(
+            name="Net Emissions",
+            line=dict(width=3, color="black", dash="dash"),
+            x=filtered_df["year"],
+            y=filtered_df.groupby("year").sum()[str(yaxis_unit)],
+            showlegend=True,
+        )
+    )
+
     fig.update_layout(
         title={
-            "text": "Emissions",
+            "text": "EMISSIONS, " + str(dataset).upper(),
             "xanchor": "center",
             "x": 0.5,
-            "y": 0.99,
+            "y": 0.93,
+            "font": dict(size=12),
         },
-        margin_b=0,
-        margin_t=20,
-        margin_l=10,
-        margin_r=10,
         xaxis1_rangeslider_visible=True,
+        width=1700,
+        height=950,
+        legend=dict(font=dict(size=12)),
+        template="plotly_white",
     )
 
     fig.update_yaxes(
@@ -326,7 +350,151 @@ def update_graph(
         type="linear" if yaxis_type == "Linear" else "log",
     )
 
-    return fig
+    # Wedges chart
+
+    filtered_df2 = (
+        (
+            pd.DataFrame(df)
+            .set_index(
+                [
+                    "model",
+                    "scenario",
+                    "region",
+                    "sector",
+                    "product_category",
+                    "product_long",
+                    "product_short",
+                    "flow_category",
+                    "flow_long",
+                    "flow_short",
+                ]
+            )
+            .loc[
+                model,
+                "baseline",
+                region,
+                sector,
+                product_category,
+                product_long,
+                product_short,
+                flow_category,
+                flow_long,
+                flow_short,
+            ]
+            .subtract(
+                pd.DataFrame(df)
+                .set_index(
+                    [
+                        "model",
+                        "scenario",
+                        "region",
+                        "sector",
+                        "product_category",
+                        "product_long",
+                        "product_short",
+                        "flow_category",
+                        "flow_long",
+                        "flow_short",
+                    ]
+                )
+                .loc[
+                    model,
+                    "pathway",
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    product_short,
+                    flow_category,
+                    flow_long,
+                    flow_short,
+                ]
+            )
+            .groupby([groupby])
+            .sum()
+        )
+        * unit_val[str(yaxis_unit)]
+    ).T.fillna(0)
+
+    filtered_df2.index.name = "year"
+    filtered_df2.reset_index(inplace=True)
+    filtered_df2 = pd.melt(
+        filtered_df2, id_vars="year", var_name=[groupby], value_name=str(yaxis_unit)
+    )
+
+    filtered_df2.year = filtered_df2.year.astype(int)
+
+    fig2 = go.Figure()
+
+    spacer = df.loc[model, "pathway", slice(None), sector].sum()
+
+    for sector in filtered_df2["sector"].unique():
+
+        fig2.add_trace(
+            go.Scatter(
+                name="",
+                line=dict(width=0),
+                x=spacer.index.values[spacer.index.values >= data_end_year],
+                y=spacer[spacer.index.values >= data_end_year],
+                fill="none",
+                stackgroup="one",
+                showlegend=False,
+            )
+        )
+
+        fig2.add_trace(
+            go.Scatter(
+                name="Historical",
+                line=dict(width=2, color="black"),
+                x=filtered_df2[filtered_df2["year"] <= data_end_year]["year"].unique(),
+                y=pd.Series(
+                    filtered_df2[filtered_df2.model == model][
+                        filtered_df2.scenario == "pathway"
+                    ][filtered_df2.sector == sector][
+                        filtered_df2.columns <= data_end_year
+                    ].sum(),
+                    index=df.columns,
+                ).loc[:data_end_year],
+                fill="none",
+                stackgroup="two",
+                showlegend=True,
+            )
+        )
+
+        for flow_long in filtered_df2["flow_long"].unique():
+            fig2.add_trace(
+                go.Scatter(
+                    name=sector + ", " + flow_long,
+                    line=dict(width=0.5),
+                    x=filtered_df2[filtered_df2["year"] > data_end_year][
+                        "year"
+                    ].unique(),
+                    y=filtered_df2[
+                        (filtered_df2["sector"] == sector)
+                        & (filtered_df2["flow_long"] == flow_long)
+                        & (filtered_df2["year"] > data_end_year)
+                    ]["Emissions"],
+                    fill="tonexty",
+                    stackgroup="one",
+                )
+            )
+
+        fig2.update_layout(
+            title={
+                "text": "Emissions Mitigated, World"
+                + ", "
+                + str(sector).capitalize()
+                + ", "
+                + str("pathway").capitalize(),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.9,
+            },
+            yaxis={"title": "MtCO2e"},
+            legend=dict(font=dict(size=8)),
+        )
+
+    return fig, fig2
 
 
 if __name__ == "__main__":

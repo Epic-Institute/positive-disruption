@@ -108,86 +108,6 @@ def emissions(
     # Plot emissions_energy
     # region
 
-    #################
-    # GHG EMISSIONS #
-    #################
-
-    # region
-
-    scenario = "pathway"
-    model = "PD22"
-
-    fig = (
-        emissions_energy.loc[model].groupby(["scenario", "sector", "flow_long"]).sum().T
-    )
-    fig.index.name = "year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig,
-        id_vars="year",
-        var_name=["scenario", "sector", "flow_long"],
-        value_name="Emissions",
-    )
-
-    for scenario in fig2["scenario"].unique():
-
-        for sector in fig2["sector"].unique():
-
-            fig = go.Figure()
-
-            for flow_long in fig2["flow_long"].unique():
-                fig.add_trace(
-                    go.Scatter(
-                        name=flow_long,
-                        line=dict(width=0.5),
-                        x=fig2["year"].unique(),
-                        y=fig2[
-                            (fig2["scenario"] == scenario)
-                            & (fig2["sector"] == sector)
-                            & (fig2["flow_long"] == flow_long)
-                        ]["Emissions"],
-                        fill="tonexty",
-                        stackgroup="one",
-                    )
-                )
-
-            fig.add_trace(
-                go.Scatter(
-                    name="Historical",
-                    line=dict(width=2, color="black"),
-                    x=fig2[fig2["year"] <= data_end_year]["year"].unique(),
-                    y=pd.Series(
-                        emissions_energy.loc[model, scenario, slice(None), sector]
-                        .loc[:, :data_end_year]
-                        .sum(),
-                        index=emissions_energy.columns,
-                    ).loc[:data_end_year],
-                    fill="none",
-                    stackgroup="two",
-                    showlegend=True,
-                )
-            )
-
-            fig.update_layout(
-                title={
-                    "text": "Emissions, World"
-                    + ", "
-                    + str(sector).capitalize()
-                    + ", "
-                    + str(scenario).capitalize(),
-                    "xanchor": "center",
-                    "x": 0.5,
-                    "y": 0.9,
-                },
-                yaxis={"title": "MtCO2e"},
-                legend=dict(font=dict(size=8)),
-            )
-
-            if show_figs is True:
-                fig.show()
-
-    # endregion
-
     ###################################
     # GHG EMISSIONS MITIGATION WEDGES #
     ###################################
@@ -2716,6 +2636,23 @@ def emissions(
     # endregion
 
     # endregion
+
+    # endregion
+
+    #################################
+    #  REDUCE ENTERIC FERMENTATION  #
+    #################################
+
+    # region
+
+    def logistic_timeseries(initial_value, x, p):
+
+        # Define the logistic function
+        def logistic(t):
+            return initial_value * p * (1 - p) ** t
+
+        # Generate and return the timeseries
+        return [logistic(t) for t in range(x)]
 
     # endregion
 
