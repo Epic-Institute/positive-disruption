@@ -260,6 +260,10 @@ def update_graph(
         df.filter(["hydrogen", "flexible", "nonenergy", "unit"]), inplace=True, axis=1
     )
 
+    hovertemplate = (
+        "<b>Year</b>: %{x}" + "<br><b>Emissions</b>: %{y:,.0f} " + yaxis_unit + "<br>"
+    )
+
     filtered_df = (
         (
             pd.DataFrame(df)
@@ -301,6 +305,8 @@ def update_graph(
         filtered_df, id_vars="year", var_name=[groupby], value_name=str(yaxis_unit)
     )
 
+    filtered_df.year = filtered_df.year.astype(int)
+
     fig = go.Figure()
 
     for sub in filtered_df.sort_values(str(yaxis_unit), ascending=False)[
@@ -317,16 +323,33 @@ def update_graph(
                 fill=chart_type,
                 stackgroup=stack_type[chart_type],
                 showlegend=True,
+                hovertemplate=hovertemplate,
             )
         )
 
     fig.add_trace(
         go.Scatter(
-            name="Net Emissions",
-            line=dict(width=3, color="black", dash="dash"),
-            x=filtered_df["year"],
-            y=filtered_df.groupby("year").sum()[str(yaxis_unit)],
+            name="Net Projected",
+            line=dict(width=3, color="magenta", dash="dash"),
+            x=filtered_df[filtered_df["year"] >= data_end_year]["year"],
+            y=filtered_df[filtered_df["year"] >= data_end_year]
+            .groupby("year")
+            .sum()[str(yaxis_unit)],
             showlegend=True,
+            hovertemplate=hovertemplate,
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=3, color="black"),
+            x=filtered_df[filtered_df["year"] <= data_end_year]["year"],
+            y=filtered_df[filtered_df["year"] <= data_end_year]
+            .groupby("year")
+            .sum()[str(yaxis_unit)],
+            showlegend=True,
+            hovertemplate=hovertemplate,
         )
     )
 
@@ -354,34 +377,7 @@ def update_graph(
 
     filtered_df2 = (
         (
-            pd.DataFrame(df)
-            .set_index(
-                [
-                    "model",
-                    "scenario",
-                    "region",
-                    "sector",
-                    "product_category",
-                    "product_long",
-                    "product_short",
-                    "flow_category",
-                    "flow_long",
-                    "flow_short",
-                ]
-            )
-            .loc[
-                model,
-                "baseline",
-                region,
-                sector,
-                product_category,
-                product_long,
-                product_short,
-                flow_category,
-                flow_long,
-                flow_short,
-            ]
-            .subtract(
+            (
                 pd.DataFrame(df)
                 .set_index(
                     [
@@ -399,7 +395,7 @@ def update_graph(
                 )
                 .loc[
                     model,
-                    "pathway",
+                    "baseline",
                     region,
                     sector,
                     product_category,
@@ -409,9 +405,40 @@ def update_graph(
                     flow_long,
                     flow_short,
                 ]
+                .groupby([groupby])
+                .sum()
+                - (
+                    pd.DataFrame(df)
+                    .set_index(
+                        [
+                            "model",
+                            "scenario",
+                            "region",
+                            "sector",
+                            "product_category",
+                            "product_long",
+                            "product_short",
+                            "flow_category",
+                            "flow_long",
+                            "flow_short",
+                        ]
+                    )
+                    .loc[
+                        model,
+                        "pathway",
+                        region,
+                        sector,
+                        product_category,
+                        product_long,
+                        product_short,
+                        flow_category,
+                        flow_long,
+                        flow_short,
+                    ]
+                    .groupby([groupby])
+                    .sum()
+                )
             )
-            .groupby([groupby])
-            .sum()
         )
         * unit_val[str(yaxis_unit)]
     ).T.fillna(0)
@@ -426,73 +453,155 @@ def update_graph(
 
     fig2 = go.Figure()
 
-    spacer = df.loc[model, "pathway", slice(None), sector].sum()
+    spacer = (
+        pd.DataFrame(df)
+        .set_index(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+            ]
+        )
+        .loc[
+            model,
+            "pathway",
+            region,
+            sector,
+            product_category,
+            product_long,
+            product_short,
+            flow_category,
+            flow_long,
+            flow_short,
+        ]
+        .sum()
+    )
 
-    for sector in filtered_df2["sector"].unique():
+    spacer.index = spacer.index.astype(int)
+
+    fig2.add_trace(
+        go.Scatter(
+            name="",
+            line=dict(width=0),
+            x=spacer.index.values[spacer.index.values >= data_end_year],
+            y=spacer[spacer.index.values >= data_end_year],
+            fill="none",
+            stackgroup="one",
+            showlegend=False,
+        )
+    )
+
+    for groupby_value in filtered_df2.sort_values(str(yaxis_unit), ascending=False)[
+        groupby
+    ].unique():
 
         fig2.add_trace(
             go.Scatter(
-                name="",
-                line=dict(width=0),
-                x=spacer.index.values[spacer.index.values >= data_end_year],
-                y=spacer[spacer.index.values >= data_end_year],
-                fill="none",
+                name=groupby_value,
+                line=dict(width=0.5),
+                x=filtered_df2[filtered_df2["year"] > data_end_year]["year"].unique(),
+                y=filtered_df2[
+                    (filtered_df2[groupby] == groupby_value)
+                    & (filtered_df2["year"] > data_end_year)
+                ][yaxis_unit].values,
+                fill="tonexty",
                 stackgroup="one",
-                showlegend=False,
+                legendgroup=groupby_value,
+                hovertemplate=hovertemplate,
             )
         )
 
-        fig2.add_trace(
-            go.Scatter(
-                name="Historical",
-                line=dict(width=2, color="black"),
-                x=filtered_df2[filtered_df2["year"] <= data_end_year]["year"].unique(),
-                y=pd.Series(
-                    filtered_df2[filtered_df2.model == model][
-                        filtered_df2.scenario == "pathway"
-                    ][filtered_df2.sector == sector][
-                        filtered_df2.columns <= data_end_year
-                    ].sum(),
-                    index=df.columns,
-                ).loc[:data_end_year],
-                fill="none",
-                stackgroup="two",
-                showlegend=True,
-            )
+    fig2.add_trace(
+        go.Scatter(
+            name="Pathway",
+            line=dict(width=3, color="magenta", dash="dash"),
+            x=filtered_df[filtered_df["year"] >= data_end_year]["year"].unique(),
+            y=pd.Series(
+                filtered_df[filtered_df.year >= data_end_year]
+                .groupby("year")
+                .sum()[yaxis_unit]
+                .values,
+                index=filtered_df[filtered_df["year"] >= data_end_year][
+                    "year"
+                ].unique(),
+            ).loc[data_end_year:],
+            fill="none",
+            stackgroup="pathway",
+            showlegend=True,
+            hovertemplate=hovertemplate,
         )
+    )
 
-        for flow_long in filtered_df2["flow_long"].unique():
-            fig2.add_trace(
-                go.Scatter(
-                    name=sector + ", " + flow_long,
-                    line=dict(width=0.5),
-                    x=filtered_df2[filtered_df2["year"] > data_end_year][
-                        "year"
-                    ].unique(),
-                    y=filtered_df2[
-                        (filtered_df2["sector"] == sector)
-                        & (filtered_df2["flow_long"] == flow_long)
-                        & (filtered_df2["year"] > data_end_year)
-                    ]["Emissions"],
-                    fill="tonexty",
-                    stackgroup="one",
-                )
-            )
-
-        fig2.update_layout(
-            title={
-                "text": "Emissions Mitigated, World"
-                + ", "
-                + str(sector).capitalize()
-                + ", "
-                + str("pathway").capitalize(),
-                "xanchor": "center",
-                "x": 0.5,
-                "y": 0.9,
-            },
-            yaxis={"title": "MtCO2e"},
-            legend=dict(font=dict(size=8)),
+    fig2.add_trace(
+        go.Scatter(
+            name="Baseline",
+            line=dict(width=3, color="red", dash="dash"),
+            x=filtered_df[filtered_df["year"] >= data_end_year]["year"].unique(),
+            y=pd.Series(
+                filtered_df[(filtered_df.year >= data_end_year)]
+                .groupby("year")
+                .sum()[yaxis_unit]
+                .values
+                * 0,
+                index=filtered_df[filtered_df["year"] >= data_end_year][
+                    "year"
+                ].unique(),
+            ).loc[data_end_year:],
+            fill="none",
+            stackgroup="one",
+            showlegend=True,
+            hovertemplate=hovertemplate,
         )
+    )
+
+    fig2.add_trace(
+        go.Scatter(
+            name="Historical",
+            line=dict(width=2, color="black"),
+            x=filtered_df[filtered_df["year"] <= data_end_year]["year"].unique(),
+            y=pd.Series(
+                filtered_df[filtered_df.year <= data_end_year]
+                .groupby("year")
+                .sum()[yaxis_unit]
+                .values,
+                index=filtered_df[filtered_df["year"] <= data_end_year][
+                    "year"
+                ].unique(),
+            ).loc[:data_end_year],
+            fill="none",
+            stackgroup="historical",
+            showlegend=True,
+            hovertemplate=hovertemplate,
+        )
+    )
+
+    fig2.update_layout(
+        title={
+            "text": "EMISSIONS MITIGATED, " + str(dataset).upper(),
+            "xanchor": "center",
+            "x": 0.5,
+            "y": 0.93,
+            "font": dict(size=12),
+        },
+        xaxis1_rangeslider_visible=True,
+        width=1700,
+        height=950,
+        legend=dict(font=dict(size=12)),
+        template="plotly_white",
+        legend_traceorder="reversed",
+    )
+
+    fig2.update_yaxes(
+        title=str(yaxis_unit),
+        type="linear" if yaxis_type == "Linear" else "log",
+    )
 
     return fig, fig2
 

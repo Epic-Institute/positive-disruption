@@ -415,6 +415,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Combine max extents
     max_extent = pd.concat([max_extent, max_extent_avoided])
 
+    max_extent.to_csv("podi/data/TNC/max_extent_output.csv")
+
     # Plot max_extent [Mha, m3, MtCO2e]
     # region
     fig = max_extent.droplevel(["model", "scenario", "unit"]).T
@@ -681,8 +683,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             axis=1,
         )
     )
-
-    afolu_historical.to_csv("podi/data/TNC/afolu_historical.csv")
 
     # endregion
 
@@ -1208,6 +1208,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         return each
 
     afolu_output = addindices(afolu_output)
+    afolu_historical = addindices(afolu_historical)
 
     # Duplicate Improved Rice adoption and change gas from CH4 to N2O
     afolu_output = pd.concat(
@@ -1229,6 +1230,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #################
 
     # region
+    afolu_historical.to_csv("podi/data/TNC/afolu_historical.csv")
     afolu_output.sort_index().to_csv("podi/data/afolu_output.csv")
 
     # endregion

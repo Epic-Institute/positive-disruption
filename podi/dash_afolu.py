@@ -207,9 +207,21 @@ app.layout = html.Div(
         html.Div(
             [
                 dcc.RadioItems(
-                    ["afolu_historical"],
+                    ["afolu_historical", "flux_output", "max_extent_output"],
                     "afolu_historical",
                     id="dataset2",
+                ),
+            ],
+        ),
+        html.Br(),
+        html.Label("Model"),
+        html.Div(
+            [
+                dcc.Dropdown(
+                    df2.model.unique().tolist(),
+                    df2.model.unique().tolist()[0],
+                    id="model2",
+                    multi=True,
                 ),
             ],
         ),
@@ -254,7 +266,8 @@ app.layout = html.Div(
         html.Div(
             [
                 dcc.RadioItems(
-                    df2.unit.unique().tolist(),
+                    df2.unit.unique().tolist()
+                    + ["tCO2e/m3/yr", "tCO2e/percentile improvement", "tCO2e/Mha/yr"],
                     df2.unit.unique().tolist()[0],
                     id="unit",
                 ),
@@ -299,6 +312,7 @@ app.layout = html.Div(
     Input("dataset", "value"),
     Input("dataset2", "value"),
     Input("model", "value"),
+    Input("model2", "value"),
     Input("scenario", "value"),
     Input("scenario2", "value"),
     Input("region", "value"),
@@ -323,6 +337,7 @@ def update_graph(
     dataset,
     dataset2,
     model,
+    model2,
     scenario,
     scenario2,
     region,
@@ -439,7 +454,7 @@ def update_graph(
         (
             pd.DataFrame(df2)
             .set_index(["model", "scenario", "region", "variable", "unit"])
-            .loc[model, scenario2, region2, variable, unit]
+            .loc[model2, scenario2, region2, variable, unit]
             .groupby([groupby2])
             .sum()
         )
@@ -451,7 +466,7 @@ def update_graph(
         filtered_df2,
         id_vars="year",
         var_name=[groupby2],
-        value_name="Adoption, " + str(unit),
+        value_name=unit,
     )
 
     fig2 = go.Figure()
@@ -464,7 +479,7 @@ def update_graph(
                     width=0.5,
                 ),
                 x=filtered_df2["year"],
-                y=filtered_df2[filtered_df2[groupby2] == sub]["Adoption, " + str(unit)],
+                y=filtered_df2[filtered_df2[groupby2] == sub][unit],
                 fill=chart_type2,
                 stackgroup=stack_type[chart_type2],
                 showlegend=True,
@@ -473,12 +488,12 @@ def update_graph(
 
     fig2.update_layout(
         title={
-            "text": "Adoption",
+            "text": dataset2,
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
         },
-        yaxis={"title": "Adoption, " + str(unit)},
+        yaxis={"title": str(unit)},
         margin_b=0,
         margin_t=20,
         margin_l=10,
@@ -487,7 +502,7 @@ def update_graph(
     )
 
     fig2.update_yaxes(
-        title="Adoption, " + str(unit),
+        title=str(unit),
         type="linear" if yaxis_type == "Linear" else "log",
     )
 
