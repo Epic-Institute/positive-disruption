@@ -1,333 +1,347 @@
-model,scenario,region,variable,unit,
-PD22,pathway,World ,Spanish Reforestation|Floor,none,0
-PD22,pathway,World ,Spanish Reforestation|Max annual growth,none,100
-PD22,pathway,World ,Spanish Reforestation|parameter a max,none,0.2
-PD22,pathway,World ,Spanish Reforestation|parameter a min,none,0.001
-PD22,pathway,World ,Spanish Reforestation|parameter b max,none,50
-PD22,pathway,World ,Spanish Reforestation|parameter b min,none,10
-PD22,pathway,World ,Spanish Reforestation|saturation point,none,1
-PD22,pathway,World ,FAO CA|Floor,none,0
-PD22,pathway,World ,FAO CA|Max annual growth,none,100
-PD22,pathway,World ,FAO CA|parameter a max,none,0.2
-PD22,pathway,World ,FAO CA|parameter a min,none,0.001
-PD22,pathway,World ,FAO CA|parameter b max,none,50
-PD22,pathway,World ,FAO CA|parameter b min,none,10
-PD22,pathway,World ,FAO CA|saturation point,none,1
-PD22,pathway,World ,Brazil No Till|Floor,none,0
-PD22,pathway,World ,Brazil No Till|Max annual growth,none,100
-PD22,pathway,World ,Brazil No Till|parameter a max,none,0.2
-PD22,pathway,World ,Brazil No Till|parameter a min,none,0.001
-PD22,pathway,World ,Brazil No Till|parameter b max,none,50
-PD22,pathway,World ,Brazil No Till|parameter b min,none,10
-PD22,pathway,World ,Brazil No Till|saturation point,none,1
-PD22,pathway,World ,Brazil Avoided Deforestation|Floor,none,0
-PD22,pathway,World ,Brazil Avoided Deforestation|Max annual growth,none,100
-PD22,pathway,World ,Brazil Avoided Deforestation|parameter a max,none,0.2
-PD22,pathway,World ,Brazil Avoided Deforestation|parameter a min,none,0.001
-PD22,pathway,World ,Brazil Avoided Deforestation|parameter b max,none,50
-PD22,pathway,World ,Brazil Avoided Deforestation|parameter b min,none,10
-PD22,pathway,World ,Brazil Avoided Deforestation|saturation point,none,1
-PD22,pathway,World ,US Wetlands 2002-2014|Floor,none,0
-PD22,pathway,World ,US Wetlands 2002-2014|Max annual growth,none,100
-PD22,pathway,World ,US Wetlands 2002-2014|parameter a max,none,0.2
-PD22,pathway,World ,US Wetlands 2002-2014|parameter a min,none,0.001
-PD22,pathway,World ,US Wetlands 2002-2014|parameter b max,none,50
-PD22,pathway,World ,US Wetlands 2002-2014|parameter b min,none,10
-PD22,pathway,World ,US Wetlands 2002-2014|saturation point,none,1
-PD22,pathway,World ,Certification adoption|Floor,none,0
-PD22,pathway,World ,Certification adoption|Max annual growth,none,100
-PD22,pathway,World ,Certification adoption|parameter a max,none,0.2
-PD22,pathway,World ,Certification adoption|parameter a min,none,0.001
-PD22,pathway,World ,Certification adoption|parameter b max,none,50
-PD22,pathway,World ,Certification adoption|parameter b min,none,10
-PD22,pathway,World ,Certification adoption|saturation point,none,1
-PD22,pathway,World ,Solomon Islands Mangrove Restoration|Floor,none,0
-PD22,pathway,World ,Solomon Islands Mangrove Restoration|Max annual growth,none,100
-PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter a max,none,0.2
-PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter a min,none,0.001
-PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter b max,none,50
-PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter b min,none,10
-PD22,pathway,World ,Solomon Islands Mangrove Restoration|saturation point,none,1
-PD22,pathway,World ,Nepal Avoided Deforestation|Floor,none,0
-PD22,pathway,World ,Nepal Avoided Deforestation|Max annual growth,none,100
-PD22,pathway,World ,Nepal Avoided Deforestation|parameter a max,none,0.2
-PD22,pathway,World ,Nepal Avoided Deforestation|parameter a min,none,0.001
-PD22,pathway,World ,Nepal Avoided Deforestation|parameter b max,none,50
-PD22,pathway,World ,Nepal Avoided Deforestation|parameter b min,none,10
-PD22,pathway,World ,Nepal Avoided Deforestation|saturation point,none,1
-PD22,pathway,World ,Comoros Avoided Coastal Impacts|Floor,none,0
-PD22,pathway,World ,Comoros Avoided Coastal Impacts|Max annual growth,none,100
-PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter a max,none,0.2
-PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter a min,none,0.001
-PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter b max,none,50
-PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter b min,none,10
-PD22,pathway,World ,Comoros Avoided Coastal Impacts|saturation point,none,1
-PD22,pathway,World ,Animal Mgmt|Floor,none,0
-PD22,baseline,World ,Animal Mgmt|Floor,none,0
-PD22,pathway,World ,Animal Mgmt|Max annual growth,none,100
-PD22,baseline,World ,Animal Mgmt|Max annual growth,none,100
-PD22,pathway,World ,Animal Mgmt|parameter a max,none,0.10618
-PD22,baseline,World ,Animal Mgmt|parameter a max,none,100
-PD22,pathway,World ,Animal Mgmt|parameter a min,none,0.10618
-PD22,baseline,World ,Animal Mgmt|parameter a min,none,0
-PD22,pathway,World ,Animal Mgmt|parameter b max,none,40
-PD22,baseline,World ,Animal Mgmt|parameter b max,none,100
-PD22,pathway,World ,Animal Mgmt|parameter b min,none,40
-PD22,baseline,World ,Animal Mgmt|parameter b min,none,0
-PD22,pathway,World ,Animal Mgmt|saturation point,none,1
-PD22,baseline,World ,Animal Mgmt|saturation point,none,1
-PD22,pathway,World ,Avoided Coastal Impacts|Floor,none,0
-PD22,baseline,World ,Avoided Coastal Impacts|Floor,none,0
-PD22,pathway,World ,Avoided Coastal Impacts|Max annual growth,none,100
-PD22,baseline,World ,Avoided Coastal Impacts|Max annual growth,none,100
-PD22,pathway,World ,Avoided Coastal Impacts|parameter a max,none,0.0263
-PD22,baseline,World ,Avoided Coastal Impacts|parameter a max,none,100
-PD22,pathway,World ,Avoided Coastal Impacts|parameter a min,none,0
-PD22,baseline,World ,Avoided Coastal Impacts|parameter a min,none,0
-PD22,pathway,World ,Avoided Coastal Impacts|parameter b max,none,100
-PD22,baseline,World ,Avoided Coastal Impacts|parameter b max,none,100
-PD22,pathway,World ,Avoided Coastal Impacts|parameter b min,none,0
-PD22,baseline,World ,Avoided Coastal Impacts|parameter b min,none,0
-PD22,pathway,World ,Avoided Coastal Impacts|saturation point,none,1
-PD22,baseline,World ,Avoided Coastal Impacts|saturation point,none,1
-PD22,pathway,World ,Avoided Forest Conversion|Floor,none,0
-PD22,baseline,World ,Avoided Forest Conversion|Floor,none,0
-PD22,pathway,World ,Avoided Forest Conversion|Max annual growth,none,100
-PD22,baseline,World ,Avoided Forest Conversion|Max annual growth,none,100
-PD22,pathway,World ,Avoided Forest Conversion|parameter a max,none,0.025
-PD22,baseline,World ,Avoided Forest Conversion|parameter a max,none,100
-PD22,pathway,World ,Avoided Forest Conversion|parameter a min,none,0
-PD22,baseline,World ,Avoided Forest Conversion|parameter a min,none,0
-PD22,pathway,World ,Avoided Forest Conversion|parameter b max,none,100
-PD22,baseline,World ,Avoided Forest Conversion|parameter b max,none,100
-PD22,pathway,World ,Avoided Forest Conversion|parameter b min,none,0
-PD22,baseline,World ,Avoided Forest Conversion|parameter b min,none,0
-PD22,pathway,World ,Avoided Forest Conversion|saturation point,none,1
-PD22,baseline,World ,Avoided Forest Conversion|saturation point,none,1
-PD22,baseline,World ,Avoided Forest Conversion|saturation point,none,1
-PD22,pathway,World ,Avoided Peat Impacts|Floor,none,0
-PD22,baseline,World ,Avoided Peat Impacts|Floor,none,0
-PD22,pathway,World ,Avoided Peat Impacts|Max annual growth,none,100
-PD22,baseline,World ,Avoided Peat Impacts|Max annual growth,none,100
-PD22,pathway,World ,Avoided Peat Impacts|parameter a max,none,0.0263
-PD22,baseline,World ,Avoided Peat Impacts|parameter a max,none,100
-PD22,pathway,World ,Avoided Peat Impacts|parameter a min,none,0
-PD22,baseline,World ,Avoided Peat Impacts|parameter a min,none,0
-PD22,pathway,World ,Avoided Peat Impacts|parameter b max,none,100
-PD22,baseline,World ,Avoided Peat Impacts|parameter b max,none,100
-PD22,pathway,World ,Avoided Peat Impacts|parameter b min,none,0
-PD22,baseline,World ,Avoided Peat Impacts|parameter b min,none,0
-PD22,pathway,World ,Avoided Peat Impacts|saturation point,none,1
-PD22,baseline,World ,Avoided Peat Impacts|saturation point,none,1
-PD22,pathway,World ,Avoided Peat Impacts|saturation point,none,1
-PD22,baseline,World ,Avoided Peat Impacts|saturation point,none,1
-PD22,pathway,World ,Biochar|Floor,none,0
-PD22,baseline,World ,Biochar|Floor,none,0
-PD22,pathway,World ,Biochar|Max annual growth,none,100
-PD22,baseline,World ,Biochar|Max annual growth,none,100
-PD22,pathway,World ,Biochar|parameter a max,none,0.10618
-PD22,baseline,World ,Biochar|parameter a max,none,100
-PD22,pathway,World ,Biochar|parameter a min,none,0.10618
-PD22,baseline,World ,Biochar|parameter a min,none,0
-PD22,pathway,World ,Biochar|parameter b max,none,80
-PD22,baseline,World ,Biochar|parameter b max,none,100
-PD22,pathway,World ,Biochar|parameter b min,none,80
-PD22,baseline,World ,Biochar|parameter b min,none,0
-PD22,pathway,World ,Biochar|saturation point,none,1
-PD22,baseline,World ,Biochar|saturation point,none,1
-PD22,pathway,World ,Coastal Restoration|Floor,none,0
-PD22,baseline,World ,Coastal Restoration|Floor,none,0
-PD22,pathway,World ,Coastal Restoration|Max annual growth,none,100
-PD22,baseline,World ,Coastal Restoration|Max annual growth,none,100
-PD22,pathway,World ,Coastal Restoration|parameter a max,none,0.1157
-PD22,baseline,World ,Coastal Restoration|parameter a max,none,100
-PD22,pathway,World ,Coastal Restoration|parameter a min,none,0.1157
-PD22,baseline,World ,Coastal Restoration|parameter a min,none,0
-PD22,pathway,World ,Coastal Restoration|parameter b max,none,40.46
-PD22,baseline,World ,Coastal Restoration|parameter b max,none,100
-PD22,pathway,World ,Coastal Restoration|parameter b min,none,40.46
-PD22,baseline,World ,Coastal Restoration|parameter b min,none,0
-PD22,pathway,World ,Coastal Restoration|saturation point,none,1
-PD22,baseline,World ,Coastal Restoration|saturation point,none,1
-PD22,pathway,World ,Cropland Soil Health|Floor,none,0
-PD22,baseline,World ,Cropland Soil Health|Floor,none,0
-PD22,pathway,World ,Cropland Soil Health|Max annual growth,none,100
-PD22,baseline,World ,Cropland Soil Health|Max annual growth,none,100
-PD22,pathway,World ,Cropland Soil Health|parameter a max,none,0.10618
-PD22,baseline,World ,Cropland Soil Health|parameter a max,none,100
-PD22,pathway,World ,Cropland Soil Health|parameter a min,none,0.10618
-PD22,baseline,World ,Cropland Soil Health|parameter a min,none,0
-PD22,pathway,World ,Cropland Soil Health|parameter b max,none,35
-PD22,baseline,World ,Cropland Soil Health|parameter b max,none,100
-PD22,pathway,World ,Cropland Soil Health|parameter b min,none,35
-PD22,baseline,World ,Cropland Soil Health|parameter b min,none,0
-PD22,pathway,World ,Cropland Soil Health|saturation point,none,1
-PD22,baseline,World ,Cropland Soil Health|saturation point,none,1
-PD22,pathway,World ,Forests & Wetlands|Floor,none,0
-PD22,baseline,World ,Forests & Wetlands|Floor,none,0
-PD22,pathway,World ,Forests & Wetlands|Max annual growth,none,100
-PD22,baseline,World ,Forests & Wetlands|Max annual growth,none,100
-PD22,pathway,World ,Forests & Wetlands|parameter a max,none,0.5
-PD22,baseline,World ,Forests & Wetlands|parameter a max,none,100
-PD22,pathway,World ,Forests & Wetlands|parameter a min,none,0
-PD22,baseline,World ,Forests & Wetlands|parameter a min,none,0
-PD22,pathway,World ,Forests & Wetlands|parameter b max,none,100
-PD22,baseline,World ,Forests & Wetlands|parameter b max,none,100
-PD22,pathway,World ,Forests & Wetlands|parameter b min,none,0
-PD22,baseline,World ,Forests & Wetlands|parameter b min,none,0
-PD22,pathway,World ,Forests & Wetlands|saturation point,none,1
-PD22,baseline,World ,Forests & Wetlands|saturation point,none,1
-PD22,pathway,World ,Improved Forest Management|Floor,none,0
-PD22,baseline,World ,Improved Forest Management|Floor,none,0
-PD22,pathway,World ,Improved Forest Management|Max annual growth,none,100
-PD22,baseline,World ,Improved Forest Management|Max annual growth,none,100
-PD22,pathway,World ,Improved Forest Management|parameter a max,none,0.11776
-PD22,baseline,World ,Improved Forest Management|parameter a max,none,100
-PD22,pathway,World ,Improved Forest Management|parameter a min,none,0.11776
-PD22,baseline,World ,Improved Forest Management|parameter a min,none,0
-PD22,pathway,World ,Improved Forest Management|parameter b max,none,37.1
-PD22,baseline,World ,Improved Forest Management|parameter b max,none,100
-PD22,pathway,World ,Improved Forest Management|parameter b min,none,37.1
-PD22,baseline,World ,Improved Forest Management|parameter b min,none,0
-PD22,pathway,World ,Improved Forest Management|saturation point,none,1
-PD22,baseline,World ,Improved Forest Management|saturation point,none,1
-PD22,pathway,World ,Improved Rice|Floor,none,0
-PD22,baseline,World ,Improved Rice|Floor,none,0
-PD22,pathway,World ,Improved Rice|Max annual growth,none,100
-PD22,baseline,World ,Improved Rice|Max annual growth,none,100
-PD22,pathway,World ,Improved Rice|parameter a max,none,0.10618
-PD22,baseline,World ,Improved Rice|parameter a max,none,100
-PD22,pathway,World ,Improved Rice|parameter a min,none,0.10618
-PD22,baseline,World ,Improved Rice|parameter a min,none,0
-PD22,pathway,World ,Improved Rice|parameter b max,none,50
-PD22,baseline,World ,Improved Rice|parameter b max,none,100
-PD22,pathway,World ,Improved Rice|parameter b min,none,50
-PD22,baseline,World ,Improved Rice|parameter b min,none,0
-PD22,pathway,World ,Improved Rice|saturation point,none,1
-PD22,baseline,World ,Improved Rice|saturation point,none,1
-PD22,pathway,World ,Legumes|Floor,none,0
-PD22,baseline,World ,Legumes|Floor,none,0
-PD22,pathway,World ,Legumes|Max annual growth,none,100
-PD22,baseline,World ,Legumes|Max annual growth,none,100
-PD22,pathway,World ,Legumes|parameter a max,none,0.10618
-PD22,baseline,World ,Legumes|parameter a max,none,100
-PD22,pathway,World ,Legumes|parameter a min,none,0.10618
-PD22,baseline,World ,Legumes|parameter a min,none,0
-PD22,pathway,World ,Legumes|parameter b max,none,44
-PD22,baseline,World ,Legumes|parameter b max,none,100
-PD22,pathway,World ,Legumes|parameter b min,none,44
-PD22,baseline,World ,Legumes|parameter b min,none,0
-PD22,pathway,World ,Legumes|saturation point,none,1
-PD22,baseline,World ,Legumes|saturation point,none,1
-PD22,pathway,World ,Natural Regeneration|Floor,none,0
-PD22,baseline,World ,Natural Regeneration|Floor,none,0
-PD22,pathway,World ,Natural Regeneration|Max annual growth,none,100
-PD22,baseline,World ,Natural Regeneration|Max annual growth,none,100
-PD22,pathway,World ,Natural Regeneration|parameter a max,none,0.08
-PD22,baseline,World ,Natural Regeneration|parameter a max,none,100
-PD22,pathway,World ,Natural Regeneration|parameter a min,none,0.08
-PD22,baseline,World ,Natural Regeneration|parameter a min,none,0
-PD22,pathway,World ,Natural Regeneration|parameter b max,none,60
-PD22,baseline,World ,Natural Regeneration|parameter b max,none,100
-PD22,pathway,World ,Natural Regeneration|parameter b min,none,60
-PD22,baseline,World ,Natural Regeneration|parameter b min,none,0
-PD22,pathway,World ,Natural Regeneration|saturation point,none,1
-PD22,baseline,World ,Natural Regeneration|saturation point,none,1
-PD22,pathway,World ,Nitrogen Fertilizer Management|Floor,none,0
-PD22,baseline,World ,Nitrogen Fertilizer Management|Floor,none,0
-PD22,pathway,World ,Nitrogen Fertilizer Management|Max annual growth,none,100
-PD22,baseline,World ,Nitrogen Fertilizer Management|Max annual growth,none,100
-PD22,pathway,World ,Nitrogen Fertilizer Management|parameter a max,none,0.1
-PD22,baseline,World ,Nitrogen Fertilizer Management|parameter a max,none,100
-PD22,pathway,World ,Nitrogen Fertilizer Management|parameter a min,none,0.1
-PD22,baseline,World ,Nitrogen Fertilizer Management|parameter a min,none,0
-PD22,pathway,World ,Nitrogen Fertilizer Management|parameter b max,none,50
-PD22,baseline,World ,Nitrogen Fertilizer Management|parameter b max,none,100
-PD22,pathway,World ,Nitrogen Fertilizer Management|parameter b min,none,50
-PD22,baseline,World ,Nitrogen Fertilizer Management|parameter b min,none,0
-PD22,pathway,World ,Nitrogen Fertilizer Management|saturation point,none,1
-PD22,baseline,World ,Nitrogen Fertilizer Management|saturation point,none,1
-PD22,pathway,World ,Optimal Intensity|Floor,none,0
-PD22,baseline,World ,Optimal Intensity|Floor,none,0
-PD22,pathway,World ,Optimal Intensity|Max annual growth,none,100
-PD22,baseline,World ,Optimal Intensity|Max annual growth,none,100
-PD22,pathway,World ,Optimal Intensity|parameter a max,none,0.10618
-PD22,baseline,World ,Optimal Intensity|parameter a max,none,100
-PD22,pathway,World ,Optimal Intensity|parameter a min,none,0.10618
-PD22,baseline,World ,Optimal Intensity|parameter a min,none,0
-PD22,pathway,World ,Optimal Intensity|parameter b max,none,44
-PD22,baseline,World ,Optimal Intensity|parameter b max,none,100
-PD22,pathway,World ,Optimal Intensity|parameter b min,none,44
-PD22,baseline,World ,Optimal Intensity|parameter b min,none,0
-PD22,pathway,World ,Optimal Intensity|saturation point,none,1
-PD22,baseline,World ,Optimal Intensity|saturation point,none,1
-PD22,pathway,World ,Peat Restoration|Floor,none,0
-PD22,baseline,World ,Peat Restoration|Floor,none,0
-PD22,pathway,World ,Peat Restoration|Max annual growth,none,100
-PD22,baseline,World ,Peat Restoration|Max annual growth,none,100
-PD22,pathway,World ,Peat Restoration|parameter a max,none,0.11599
-PD22,baseline,World ,Peat Restoration|parameter a max,none,100
-PD22,pathway,World ,Peat Restoration|parameter a min,none,0.11599
-PD22,baseline,World ,Peat Restoration|parameter a min,none,0
-PD22,pathway,World ,Peat Restoration|parameter b max,none,39.84
-PD22,baseline,World ,Peat Restoration|parameter b max,none,100
-PD22,pathway,World ,Peat Restoration|parameter b min,none,39.84
-PD22,baseline,World ,Peat Restoration|parameter b min,none,0
-PD22,pathway,World ,Peat Restoration|saturation point,none,1
-PD22,baseline,World ,Peat Restoration|saturation point,none,1
-PD22,pathway,World ,Agriculture|Floor,none,0
-PD22,baseline,World ,Agriculture|Floor,none,0
-PD22,pathway,World ,Agriculture|Max annual growth,none,100
-PD22,baseline,World ,Agriculture|Max annual growth,none,100
-PD22,pathway,World ,Agriculture|parameter a max,none,0.5
-PD22,baseline,World ,Agriculture|parameter a max,none,100
-PD22,pathway,World ,Agriculture|parameter a min,none,0
-PD22,baseline,World ,Agriculture|parameter a min,none,0
-PD22,pathway,World ,Agriculture|parameter b max,none,100
-PD22,baseline,World ,Agriculture|parameter b max,none,100
-PD22,pathway,World ,Agriculture|parameter b min,none,0
-PD22,baseline,World ,Agriculture|parameter b min,none,0
-PD22,pathway,World ,Agriculture|saturation point,none,1
-PD22,baseline,World ,Agriculture|saturation point,none,1
-PD22,pathway,World ,Silvopasture|Floor,none,0
-PD22,baseline,World ,Silvopasture|Floor,none,0
-PD22,pathway,World ,Silvopasture|Max annual growth,none,100
-PD22,baseline,World ,Silvopasture|Max annual growth,none,100
-PD22,pathway,World ,Silvopasture|parameter a max,none,0.10618
-PD22,baseline,World ,Silvopasture|parameter a max,none,100
-PD22,pathway,World ,Silvopasture|parameter a min,none,0.10618
-PD22,baseline,World ,Silvopasture|parameter a min,none,0
-PD22,pathway,World ,Silvopasture|parameter b max,none,35
-PD22,baseline,World ,Silvopasture|parameter b max,none,100
-PD22,pathway,World ,Silvopasture|parameter b min,none,35
-PD22,baseline,World ,Silvopasture|parameter b min,none,0
-PD22,pathway,World ,Silvopasture|saturation point,none,1
-PD22,baseline,World ,Silvopasture|saturation point,none,1
-PD22,pathway,World ,Trees in Croplands|Floor,none,0
-PD22,baseline,World ,Trees in Croplands|Floor,none,0
-PD22,pathway,World ,Trees in Croplands|Max annual growth,none,100
-PD22,baseline,World ,Trees in Croplands|Max annual growth,none,100
-PD22,pathway,World ,Trees in Croplands|parameter a max,none,0.10618
-PD22,baseline,World ,Trees in Croplands|parameter a max,none,100
-PD22,pathway,World ,Trees in Croplands|parameter a min,none,0.10618
-PD22,baseline,World ,Trees in Croplands|parameter a min,none,0
-PD22,pathway,World ,Trees in Croplands|parameter b max,none,36
-PD22,baseline,World ,Trees in Croplands|parameter b max,none,100
-PD22,pathway,World ,Trees in Croplands|parameter b min,none,40
-PD22,baseline,World ,Trees in Croplands|parameter b min,none,0
-PD22,pathway,World ,Trees in Croplands|saturation point,none,1
-PD22,baseline,World ,Trees in Croplands|saturation point,none,1
-PD22,pathway,World ,Agroforestry|Floor,none,0
-PD22,baseline,World ,Agroforestry|Floor,none,0
-PD22,pathway,World ,Agroforestry|Max annual growth,none,100
-PD22,baseline,World ,Agroforestry|Max annual growth,none,100
-PD22,pathway,World ,Agroforestry|parameter a max,none,0.10618
-PD22,baseline,World ,Agroforestry|parameter a max,none,100
-PD22,pathway,World ,Agroforestry|parameter a min,none,0.10618
-PD22,baseline,World ,Agroforestry|parameter a min,none,0
-PD22,pathway,World ,Agroforestry|parameter b max,none,36
-PD22,baseline,World ,Agroforestry|parameter b max,none,100
-PD22,pathway,World ,Agroforestry|parameter b min,none,40
-PD22,baseline,World ,Agroforestry|parameter b min,none,0
-PD22,pathway,World ,Agroforestry|saturation point,none,1
-PD22,baseline,World ,Agroforestry|saturation point,none,1
+model,scenario,region,variable,value
+PD22,pathway,World ,Spanish Reforestation|Floor,0
+PD22,pathway,World ,Spanish Reforestation|Max annual growth,100
+PD22,pathway,World ,Spanish Reforestation|parameter a max,0.2
+PD22,pathway,World ,Spanish Reforestation|parameter a min,0.001
+PD22,pathway,World ,Spanish Reforestation|parameter b max,50
+PD22,pathway,World ,Spanish Reforestation|parameter b min,10
+PD22,pathway,World ,Spanish Reforestation|saturation point,1
+PD22,pathway,World ,FAO CA|Floor,0
+PD22,pathway,World ,FAO CA|Max annual growth,100
+PD22,pathway,World ,FAO CA|parameter a max,0.2
+PD22,pathway,World ,FAO CA|parameter a min,0.001
+PD22,pathway,World ,FAO CA|parameter b max,50
+PD22,pathway,World ,FAO CA|parameter b min,10
+PD22,pathway,World ,FAO CA|saturation point,1
+PD22,pathway,World ,Brazil No Till|Floor,0
+PD22,pathway,World ,Brazil No Till|Max annual growth,100
+PD22,pathway,World ,Brazil No Till|parameter a max,0.2
+PD22,pathway,World ,Brazil No Till|parameter a min,0.001
+PD22,pathway,World ,Brazil No Till|parameter b max,50
+PD22,pathway,World ,Brazil No Till|parameter b min,10
+PD22,pathway,World ,Brazil No Till|saturation point,1
+PD22,pathway,World ,Brazil Avoided Deforestation|Floor,0
+PD22,pathway,World ,Brazil Avoided Deforestation|Max annual growth,100
+PD22,pathway,World ,Brazil Avoided Deforestation|parameter a max,0.2
+PD22,pathway,World ,Brazil Avoided Deforestation|parameter a min,0.001
+PD22,pathway,World ,Brazil Avoided Deforestation|parameter b max,50
+PD22,pathway,World ,Brazil Avoided Deforestation|parameter b min,10
+PD22,pathway,World ,Brazil Avoided Deforestation|saturation point,1
+PD22,pathway,World ,US Wetlands 2002-2014|Floor,0
+PD22,pathway,World ,US Wetlands 2002-2014|Max annual growth,100
+PD22,pathway,World ,US Wetlands 2002-2014|parameter a max,0.2
+PD22,pathway,World ,US Wetlands 2002-2014|parameter a min,0.001
+PD22,pathway,World ,US Wetlands 2002-2014|parameter b max,50
+PD22,pathway,World ,US Wetlands 2002-2014|parameter b min,10
+PD22,pathway,World ,US Wetlands 2002-2014|saturation point,1
+PD22,pathway,World ,Certification adoption|Floor,0
+PD22,pathway,World ,Certification adoption|Max annual growth,100
+PD22,pathway,World ,Certification adoption|parameter a max,0.2
+PD22,pathway,World ,Certification adoption|parameter a min,0.001
+PD22,pathway,World ,Certification adoption|parameter b max,50
+PD22,pathway,World ,Certification adoption|parameter b min,10
+PD22,pathway,World ,Certification adoption|saturation point,1
+PD22,pathway,World ,Solomon Islands Mangrove Restoration|Floor,0
+PD22,pathway,World ,Solomon Islands Mangrove Restoration|Max annual growth,100
+PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter a max,0.2
+PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter a min,0.001
+PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter b max,50
+PD22,pathway,World ,Solomon Islands Mangrove Restoration|parameter b min,10
+PD22,pathway,World ,Solomon Islands Mangrove Restoration|saturation point,1
+PD22,pathway,World ,Nepal Avoided Deforestation|Floor,0
+PD22,pathway,World ,Nepal Avoided Deforestation|Max annual growth,100
+PD22,pathway,World ,Nepal Avoided Deforestation|parameter a max,0.2
+PD22,pathway,World ,Nepal Avoided Deforestation|parameter a min,0.001
+PD22,pathway,World ,Nepal Avoided Deforestation|parameter b max,50
+PD22,pathway,World ,Nepal Avoided Deforestation|parameter b min,10
+PD22,pathway,World ,Nepal Avoided Deforestation|saturation point,1
+PD22,pathway,World ,Comoros Avoided Coastal Impacts|Floor,0
+PD22,pathway,World ,Comoros Avoided Coastal Impacts|Max annual growth,100
+PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter a max,0.2
+PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter a min,0.001
+PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter b max,50
+PD22,pathway,World ,Comoros Avoided Coastal Impacts|parameter b min,10
+PD22,pathway,World ,Comoros Avoided Coastal Impacts|saturation point,1
+PD22,pathway,World ,Animal Mgmt|Floor,0
+PD22,baseline,World ,Animal Mgmt|Floor,0
+PD22,pathway,World ,Animal Mgmt|Max annual growth,100
+PD22,baseline,World ,Animal Mgmt|Max annual growth,100
+PD22,pathway,World ,Animal Mgmt|parameter a max,0.10618
+PD22,baseline,World ,Animal Mgmt|parameter a max,100
+PD22,pathway,World ,Animal Mgmt|parameter a min,0.10618
+PD22,baseline,World ,Animal Mgmt|parameter a min,0
+PD22,pathway,World ,Animal Mgmt|parameter b max,40
+PD22,baseline,World ,Animal Mgmt|parameter b max,100
+PD22,pathway,World ,Animal Mgmt|parameter b min,40
+PD22,baseline,World ,Animal Mgmt|parameter b min,0
+PD22,pathway,World ,Animal Mgmt|saturation point,1
+PD22,baseline,World ,Animal Mgmt|saturation point,1
+PD22,pathway,World ,Avoided Coastal Impacts|Floor,0
+PD22,baseline,World ,Avoided Coastal Impacts|Floor,0
+PD22,pathway,World ,Avoided Coastal Impacts|Max annual growth,100
+PD22,baseline,World ,Avoided Coastal Impacts|Max annual growth,100
+PD22,pathway,World ,Avoided Coastal Impacts|parameter a max,0.0263
+PD22,baseline,World ,Avoided Coastal Impacts|parameter a max,100
+PD22,pathway,World ,Avoided Coastal Impacts|parameter a min,0
+PD22,baseline,World ,Avoided Coastal Impacts|parameter a min,0
+PD22,pathway,World ,Avoided Coastal Impacts|parameter b max,100
+PD22,baseline,World ,Avoided Coastal Impacts|parameter b max,100
+PD22,pathway,World ,Avoided Coastal Impacts|parameter b min,0
+PD22,baseline,World ,Avoided Coastal Impacts|parameter b min,0
+PD22,pathway,World ,Avoided Coastal Impacts|saturation point,1
+PD22,baseline,World ,Avoided Coastal Impacts|saturation point,1
+PD22,pathway,World ,Avoided Forest Conversion|Floor,0
+PD22,baseline,World ,Avoided Forest Conversion|Floor,0
+PD22,pathway,World ,Avoided Forest Conversion|Max annual growth,100
+PD22,baseline,World ,Avoided Forest Conversion|Max annual growth,100
+PD22,pathway,World ,Avoided Forest Conversion|parameter a max,0.025
+PD22,baseline,World ,Avoided Forest Conversion|parameter a max,100
+PD22,pathway,World ,Avoided Forest Conversion|parameter a min,0
+PD22,baseline,World ,Avoided Forest Conversion|parameter a min,0
+PD22,pathway,World ,Avoided Forest Conversion|parameter b max,100
+PD22,baseline,World ,Avoided Forest Conversion|parameter b max,100
+PD22,pathway,World ,Avoided Forest Conversion|parameter b min,0
+PD22,baseline,World ,Avoided Forest Conversion|parameter b min,0
+PD22,pathway,World ,Avoided Forest Conversion|saturation point,1
+PD22,baseline,World ,Avoided Forest Conversion|saturation point,1
+PD22,baseline,World ,Avoided Forest Conversion|saturation point,1
+PD22,pathway,World ,Avoided Peat Impacts|Floor,0
+PD22,baseline,World ,Avoided Peat Impacts|Floor,0
+PD22,pathway,World ,Avoided Peat Impacts|Max annual growth,100
+PD22,baseline,World ,Avoided Peat Impacts|Max annual growth,100
+PD22,pathway,World ,Avoided Peat Impacts|parameter a max,0.0263
+PD22,baseline,World ,Avoided Peat Impacts|parameter a max,100
+PD22,pathway,World ,Avoided Peat Impacts|parameter a min,0
+PD22,baseline,World ,Avoided Peat Impacts|parameter a min,0
+PD22,pathway,World ,Avoided Peat Impacts|parameter b max,100
+PD22,baseline,World ,Avoided Peat Impacts|parameter b max,100
+PD22,pathway,World ,Avoided Peat Impacts|parameter b min,0
+PD22,baseline,World ,Avoided Peat Impacts|parameter b min,0
+PD22,pathway,World ,Avoided Peat Impacts|saturation point,1
+PD22,baseline,World ,Avoided Peat Impacts|saturation point,1
+PD22,pathway,World ,Avoided Peat Impacts|saturation point,1
+PD22,baseline,World ,Avoided Peat Impacts|saturation point,1
+PD22,pathway,World ,Biochar|Floor,0
+PD22,baseline,World ,Biochar|Floor,0
+PD22,pathway,World ,Biochar|Max annual growth,100
+PD22,baseline,World ,Biochar|Max annual growth,100
+PD22,pathway,World ,Biochar|parameter a max,0.10618
+PD22,baseline,World ,Biochar|parameter a max,100
+PD22,pathway,World ,Biochar|parameter a min,0.10618
+PD22,baseline,World ,Biochar|parameter a min,0
+PD22,pathway,World ,Biochar|parameter b max,80
+PD22,baseline,World ,Biochar|parameter b max,100
+PD22,pathway,World ,Biochar|parameter b min,80
+PD22,baseline,World ,Biochar|parameter b min,0
+PD22,pathway,World ,Biochar|saturation point,1
+PD22,baseline,World ,Biochar|saturation point,1
+PD22,pathway,World ,Coastal Restoration|Floor,0
+PD22,baseline,World ,Coastal Restoration|Floor,0
+PD22,pathway,World ,Coastal Restoration|Max annual growth,100
+PD22,baseline,World ,Coastal Restoration|Max annual growth,100
+PD22,pathway,World ,Coastal Restoration|parameter a max,0.1157
+PD22,baseline,World ,Coastal Restoration|parameter a max,100
+PD22,pathway,World ,Coastal Restoration|parameter a min,0.1157
+PD22,baseline,World ,Coastal Restoration|parameter a min,0
+PD22,pathway,World ,Coastal Restoration|parameter b max,40.46
+PD22,baseline,World ,Coastal Restoration|parameter b max,100
+PD22,pathway,World ,Coastal Restoration|parameter b min,40.46
+PD22,baseline,World ,Coastal Restoration|parameter b min,0
+PD22,pathway,World ,Coastal Restoration|saturation point,1
+PD22,baseline,World ,Coastal Restoration|saturation point,1
+PD22,pathway,World ,Cropland Soil Health|Floor,0
+PD22,baseline,World ,Cropland Soil Health|Floor,0
+PD22,pathway,World ,Cropland Soil Health|Max annual growth,100
+PD22,baseline,World ,Cropland Soil Health|Max annual growth,100
+PD22,pathway,World ,Cropland Soil Health|parameter a max,0.10618
+PD22,baseline,World ,Cropland Soil Health|parameter a max,100
+PD22,pathway,World ,Cropland Soil Health|parameter a min,0.10618
+PD22,baseline,World ,Cropland Soil Health|parameter a min,0
+PD22,pathway,World ,Cropland Soil Health|parameter b max,35
+PD22,baseline,World ,Cropland Soil Health|parameter b max,100
+PD22,pathway,World ,Cropland Soil Health|parameter b min,35
+PD22,baseline,World ,Cropland Soil Health|parameter b min,0
+PD22,pathway,World ,Cropland Soil Health|saturation point,1
+PD22,baseline,World ,Cropland Soil Health|saturation point,1
+PD22,pathway,World ,Forests & Wetlands|Floor,0
+PD22,baseline,World ,Forests & Wetlands|Floor,0
+PD22,pathway,World ,Forests & Wetlands|Max annual growth,100
+PD22,baseline,World ,Forests & Wetlands|Max annual growth,100
+PD22,pathway,World ,Forests & Wetlands|parameter a max,0.5
+PD22,baseline,World ,Forests & Wetlands|parameter a max,100
+PD22,pathway,World ,Forests & Wetlands|parameter a min,0
+PD22,baseline,World ,Forests & Wetlands|parameter a min,0
+PD22,pathway,World ,Forests & Wetlands|parameter b max,100
+PD22,baseline,World ,Forests & Wetlands|parameter b max,100
+PD22,pathway,World ,Forests & Wetlands|parameter b min,0
+PD22,baseline,World ,Forests & Wetlands|parameter b min,0
+PD22,pathway,World ,Forests & Wetlands|saturation point,1
+PD22,baseline,World ,Forests & Wetlands|saturation point,1
+PD22,pathway,World ,Improved Forest Management|Floor,0
+PD22,baseline,World ,Improved Forest Management|Floor,0
+PD22,pathway,World ,Improved Forest Management|Max annual growth,100
+PD22,baseline,World ,Improved Forest Management|Max annual growth,100
+PD22,pathway,World ,Improved Forest Management|parameter a max,0.11776
+PD22,baseline,World ,Improved Forest Management|parameter a max,100
+PD22,pathway,World ,Improved Forest Management|parameter a min,0.11776
+PD22,baseline,World ,Improved Forest Management|parameter a min,0
+PD22,pathway,World ,Improved Forest Management|parameter b max,37.1
+PD22,baseline,World ,Improved Forest Management|parameter b max,100
+PD22,pathway,World ,Improved Forest Management|parameter b min,37.1
+PD22,baseline,World ,Improved Forest Management|parameter b min,0
+PD22,pathway,World ,Improved Forest Management|saturation point,1
+PD22,baseline,World ,Improved Forest Management|saturation point,1
+PD22,pathway,World ,Improved Rice|Floor,0
+PD22,baseline,World ,Improved Rice|Floor,0
+PD22,pathway,World ,Improved Rice|Max annual growth,100
+PD22,baseline,World ,Improved Rice|Max annual growth,100
+PD22,pathway,World ,Improved Rice|parameter a max,0.10618
+PD22,baseline,World ,Improved Rice|parameter a max,100
+PD22,pathway,World ,Improved Rice|parameter a min,0.10618
+PD22,baseline,World ,Improved Rice|parameter a min,0
+PD22,pathway,World ,Improved Rice|parameter b max,50
+PD22,baseline,World ,Improved Rice|parameter b max,100
+PD22,pathway,World ,Improved Rice|parameter b min,50
+PD22,baseline,World ,Improved Rice|parameter b min,0
+PD22,pathway,World ,Improved Rice|saturation point,1
+PD22,baseline,World ,Improved Rice|saturation point,1
+PD22,pathway,World ,Legumes|Floor,0
+PD22,baseline,World ,Legumes|Floor,0
+PD22,pathway,World ,Legumes|Max annual growth,100
+PD22,baseline,World ,Legumes|Max annual growth,100
+PD22,pathway,World ,Legumes|parameter a max,0.10618
+PD22,baseline,World ,Legumes|parameter a max,100
+PD22,pathway,World ,Legumes|parameter a min,0.10618
+PD22,baseline,World ,Legumes|parameter a min,0
+PD22,pathway,World ,Legumes|parameter b max,44
+PD22,baseline,World ,Legumes|parameter b max,100
+PD22,pathway,World ,Legumes|parameter b min,44
+PD22,baseline,World ,Legumes|parameter b min,0
+PD22,pathway,World ,Legumes|saturation point,1
+PD22,baseline,World ,Legumes|saturation point,1
+PD22,pathway,World ,Natural Regeneration|Floor,0
+PD22,baseline,World ,Natural Regeneration|Floor,0
+PD22,pathway,World ,Natural Regeneration|Max annual growth,100
+PD22,baseline,World ,Natural Regeneration|Max annual growth,100
+PD22,pathway,World ,Natural Regeneration|parameter a max,0.08
+PD22,baseline,World ,Natural Regeneration|parameter a max,100
+PD22,pathway,World ,Natural Regeneration|parameter a min,0.08
+PD22,baseline,World ,Natural Regeneration|parameter a min,0
+PD22,pathway,World ,Natural Regeneration|parameter b max,60
+PD22,baseline,World ,Natural Regeneration|parameter b max,100
+PD22,pathway,World ,Natural Regeneration|parameter b min,60
+PD22,baseline,World ,Natural Regeneration|parameter b min,0
+PD22,pathway,World ,Natural Regeneration|saturation point,1
+PD22,baseline,World ,Natural Regeneration|saturation point,1
+PD22,pathway,World ,Nitrogen Fertilizer Management|Floor,0
+PD22,baseline,World ,Nitrogen Fertilizer Management|Floor,0
+PD22,pathway,World ,Nitrogen Fertilizer Management|Max annual growth,100
+PD22,baseline,World ,Nitrogen Fertilizer Management|Max annual growth,100
+PD22,pathway,World ,Nitrogen Fertilizer Management|parameter a max,0.1
+PD22,baseline,World ,Nitrogen Fertilizer Management|parameter a max,100
+PD22,pathway,World ,Nitrogen Fertilizer Management|parameter a min,0.1
+PD22,baseline,World ,Nitrogen Fertilizer Management|parameter a min,0
+PD22,pathway,World ,Nitrogen Fertilizer Management|parameter b max,50
+PD22,baseline,World ,Nitrogen Fertilizer Management|parameter b max,100
+PD22,pathway,World ,Nitrogen Fertilizer Management|parameter b min,50
+PD22,baseline,World ,Nitrogen Fertilizer Management|parameter b min,0
+PD22,pathway,World ,Nitrogen Fertilizer Management|saturation point,1
+PD22,baseline,World ,Nitrogen Fertilizer Management|saturation point,1
+PD22,pathway,World ,Optimal Intensity|Floor,0
+PD22,baseline,World ,Optimal Intensity|Floor,0
+PD22,pathway,World ,Optimal Intensity|Max annual growth,100
+PD22,baseline,World ,Optimal Intensity|Max annual growth,100
+PD22,pathway,World ,Optimal Intensity|parameter a max,0.10618
+PD22,baseline,World ,Optimal Intensity|parameter a max,100
+PD22,pathway,World ,Optimal Intensity|parameter a min,0.10618
+PD22,baseline,World ,Optimal Intensity|parameter a min,0
+PD22,pathway,World ,Optimal Intensity|parameter b max,44
+PD22,baseline,World ,Optimal Intensity|parameter b max,100
+PD22,pathway,World ,Optimal Intensity|parameter b min,44
+PD22,baseline,World ,Optimal Intensity|parameter b min,0
+PD22,pathway,World ,Optimal Intensity|saturation point,1
+PD22,baseline,World ,Optimal Intensity|saturation point,1
+PD22,pathway,World ,Peat Restoration|Floor,0
+PD22,baseline,World ,Peat Restoration|Floor,0
+PD22,pathway,World ,Peat Restoration|Max annual growth,100
+PD22,baseline,World ,Peat Restoration|Max annual growth,100
+PD22,pathway,World ,Peat Restoration|parameter a max,0.11599
+PD22,baseline,World ,Peat Restoration|parameter a max,100
+PD22,pathway,World ,Peat Restoration|parameter a min,0.11599
+PD22,baseline,World ,Peat Restoration|parameter a min,0
+PD22,pathway,World ,Peat Restoration|parameter b max,39.84
+PD22,baseline,World ,Peat Restoration|parameter b max,100
+PD22,pathway,World ,Peat Restoration|parameter b min,39.84
+PD22,baseline,World ,Peat Restoration|parameter b min,0
+PD22,pathway,World ,Peat Restoration|saturation point,1
+PD22,baseline,World ,Peat Restoration|saturation point,1
+PD22,pathway,World ,Agriculture|Floor,0
+PD22,baseline,World ,Agriculture|Floor,0
+PD22,pathway,World ,Agriculture|Max annual growth,100
+PD22,baseline,World ,Agriculture|Max annual growth,100
+PD22,pathway,World ,Agriculture|parameter a max,0.5
+PD22,baseline,World ,Agriculture|parameter a max,100
+PD22,pathway,World ,Agriculture|parameter a min,0
+PD22,baseline,World ,Agriculture|parameter a min,0
+PD22,pathway,World ,Agriculture|parameter b max,100
+PD22,baseline,World ,Agriculture|parameter b max,100
+PD22,pathway,World ,Agriculture|parameter b min,0
+PD22,baseline,World ,Agriculture|parameter b min,0
+PD22,pathway,World ,Agriculture|saturation point,1
+PD22,baseline,World ,Agriculture|saturation point,1
+PD22,pathway,World ,Silvopasture|Floor,0
+PD22,baseline,World ,Silvopasture|Floor,0
+PD22,pathway,World ,Silvopasture|Max annual growth,100
+PD22,baseline,World ,Silvopasture|Max annual growth,100
+PD22,pathway,World ,Silvopasture|parameter a max,0.10618
+PD22,baseline,World ,Silvopasture|parameter a max,100
+PD22,pathway,World ,Silvopasture|parameter a min,0.10618
+PD22,baseline,World ,Silvopasture|parameter a min,0
+PD22,pathway,World ,Silvopasture|parameter b max,35
+PD22,baseline,World ,Silvopasture|parameter b max,100
+PD22,pathway,World ,Silvopasture|parameter b min,35
+PD22,baseline,World ,Silvopasture|parameter b min,0
+PD22,pathway,World ,Silvopasture|saturation point,1
+PD22,baseline,World ,Silvopasture|saturation point,1
+PD22,pathway,World ,Trees in Croplands|Floor,0
+PD22,baseline,World ,Trees in Croplands|Floor,0
+PD22,pathway,World ,Trees in Croplands|Max annual growth,100
+PD22,baseline,World ,Trees in Croplands|Max annual growth,100
+PD22,pathway,World ,Trees in Croplands|parameter a max,0.10618
+PD22,baseline,World ,Trees in Croplands|parameter a max,100
+PD22,pathway,World ,Trees in Croplands|parameter a min,0.10618
+PD22,baseline,World ,Trees in Croplands|parameter a min,0
+PD22,pathway,World ,Trees in Croplands|parameter b max,36
+PD22,baseline,World ,Trees in Croplands|parameter b max,100
+PD22,pathway,World ,Trees in Croplands|parameter b min,40
+PD22,baseline,World ,Trees in Croplands|parameter b min,0
+PD22,pathway,World ,Trees in Croplands|saturation point,1
+PD22,baseline,World ,Trees in Croplands|saturation point,1
+PD22,pathway,World ,Agroforestry|Floor,0
+PD22,baseline,World ,Agroforestry|Floor,0
+PD22,pathway,World ,Agroforestry|Max annual growth,100
+PD22,baseline,World ,Agroforestry|Max annual growth,100
+PD22,pathway,World ,Agroforestry|parameter a max,0.10618
+PD22,baseline,World ,Agroforestry|parameter a max,100
+PD22,pathway,World ,Agroforestry|parameter a min,0.10618
+PD22,baseline,World ,Agroforestry|parameter a min,0
+PD22,pathway,World ,Agroforestry|parameter b max,36
+PD22,baseline,World ,Agroforestry|parameter b max,100
+PD22,pathway,World ,Agroforestry|parameter b min,40
+PD22,baseline,World ,Agroforestry|parameter b min,0
+PD22,pathway,World ,Agroforestry|saturation point,1
+PD22,baseline,World ,Agroforestry|saturation point,1
+PD22,pathway,World ,Enteric Fermentation|Floor,0
+PD22,baseline,World ,Enteric Fermentation|Floor,0
+PD22,pathway,World ,Enteric Fermentation|Max annual growth,100
+PD22,baseline,World ,Enteric Fermentation|Max annual growth,0
+PD22,pathway,World ,Enteric Fermentation|parameter a max,0.5
+PD22,baseline,World ,Enteric Fermentation|parameter a max,0
+PD22,pathway,World ,Enteric Fermentation|parameter a min,0
+PD22,baseline,World ,Enteric Fermentation|parameter a min,0
+PD22,pathway,World ,Enteric Fermentation|parameter b max,2
+PD22,baseline,World ,Enteric Fermentation|parameter b max,100
+PD22,pathway,World ,Enteric Fermentation|parameter b min,0
+PD22,baseline,World ,Enteric Fermentation|parameter b min,0
+PD22,pathway,World ,Enteric Fermentation|saturation point,0.6
+PD22,baseline,World ,Enteric Fermentation|saturation point,0

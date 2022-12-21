@@ -1,5 +1,6 @@
 # region
 
+import os
 import pandas as pd
 from numpy import NaN
 import numpy as np
@@ -8,6 +9,7 @@ from pandarallel import pandarallel
 import globalwarmingpotentials as gwp
 import plotly.io as pio
 import plotly.graph_objects as go
+from scipy.optimize import differential_evolution
 
 pandarallel.initialize(progress_bar=True, nb_workers=6)
 
@@ -1675,14 +1677,226 @@ def emissions(
 
     # region
 
-    def logistic_timeseries(initial_value, x, p):
+    # Calculate reduction factors that scale down enteric fermentation over time
 
-        # Define the logistic function
-        def logistic(t):
-            return initial_value * p * (1 - p) ** t
+    # Load saturation points for reduction ratios
+    ef_ratio = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/tech_parameters_afolu.csv",
+            )
+        )
+        .set_index(["model", "scenario", "region", "variable"])
+        .loc[
+            slice(None),
+            "pathway",
+            slice(None),
+            [
+                "Enteric Fermentation|Floor",
+                "Enteric Fermentation|Max annual growth",
+                "Enteric Fermentation|parameter a max",
+                "Enteric Fermentation|parameter a min",
+                "Enteric Fermentation|parameter b max",
+                "Enteric Fermentation|parameter b min",
+                "Enteric Fermentation|saturation point",
+            ],
+        ]
+    )
 
-        # Generate and return the timeseries
-        return [logistic(t) for t in range(x)]
+    parameters = ef_ratio
+
+    ef_ratio = ef_ratio[
+        ef_ratio.index.get_level_values(3) == "Enteric Fermentation|Floor"
+    ].sort_index()
+
+    # Clear afolu_adoption_curves.csv, and run adoption_projection_demand() to calculate logistics curves for energy reduction ratios
+
+    # Clear afolu_adoption_curves.csv and energy_ef_ratio.csv
+    if os.path.exists("podi/data/afolu_adoption_curves.csv"):
+        os.remove("podi/data/afolu_adoption_curves.csv")
+    if os.path.exists("podi/data/afolu_ef_ratios.csv"):
+        os.remove("podi/data/afolu_ef_ratios.csv")
+
+    def adoption_projection_demand(
+        parameters,
+        input_data,
+        scenario,
+        data_end_year,
+        saturation_year,
+        proj_end_year,
+    ):
+        def linear(x, a, b, c, d):
+            return a * x + d
+
+        def logistic(x, a, b, c, d):
+            return c / (1 + np.exp(-a * (x - b))) + d
+
+        # Create x array (year) and y array (linear scale from zero to saturation value)
+        x_data = np.arange(0, proj_end_year - data_end_year + 1, 1)
+        y_data = np.zeros((1, len(x_data)))
+        y_data[:] = np.NaN
+        y_data = y_data.squeeze().astype(float)
+        y_data[0] = 0
+        y_data[saturation_year - data_end_year] = parameters.loc[
+            "Enteric Fermentation|saturation point",
+        ].values[0]
+
+        y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
+
+        # Load search bounds for logistic function parameters
+        search_bounds = [
+            (
+                pd.to_numeric(
+                    parameters.loc["Enteric Fermentation|parameter a min"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Enteric Fermentation|parameter a max"].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc["Enteric Fermentation|parameter b min"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Enteric Fermentation|parameter b max"].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc["Enteric Fermentation|saturation point"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Enteric Fermentation|saturation point"].value
+                ),
+            ),
+            (
+                0,
+                0,
+            ),
+        ]
+
+        # Define sum of squared error function
+        def sum_of_squared_error(parameters):
+            return np.sum((y_data - logistic(x_data, *parameters)) ** 2.0)
+
+        # Generate genetic_parameters. For baseline scenarios, projections are linear
+        if scenario == "baseline":
+            y = linear(
+                x_data,
+                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                (y_data[-1]),
+            )
+            genetic_parameters = [0, 0, 0, 0]
+        else:
+            genetic_parameters = differential_evolution(
+                sum_of_squared_error,
+                search_bounds,
+                seed=3,
+                polish=False,
+                updating="immediate",
+                mutation=(0, 1),
+            ).x
+
+        y = np.array(logistic(x_data, *genetic_parameters))
+
+        pd.concat(
+            [
+                pd.DataFrame(
+                    np.array(
+                        [
+                            input_data.name[0],
+                            input_data.name[1],
+                            input_data.name[2],
+                            input_data.name[3],
+                        ]
+                    )
+                ).T,
+                pd.DataFrame(y).T,
+            ],
+            axis=1,
+        ).to_csv(
+            "podi/data/afolu_adoption_curves.csv",
+            mode="a",
+            header=None,
+            index=False,
+        )
+
+        return
+
+    ef_ratio.apply(
+        lambda x: adoption_projection_demand(
+            parameters=parameters.loc[x.name[0], x.name[1], x.name[2]],
+            input_data=x,
+            scenario=scenario,
+            data_end_year=data_end_year + 1,
+            saturation_year=2043,
+            proj_end_year=proj_end_year,
+        ),
+        axis=1,
+    )
+
+    ef_ratios = (
+        pd.DataFrame(pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None))
+        .set_axis(
+            pd.concat(
+                [
+                    pd.DataFrame(
+                        np.array(["model", "scenario", "region", "product_short"])
+                    ).T,
+                    pd.DataFrame(
+                        np.linspace(
+                            data_end_year + 1,
+                            proj_end_year,
+                            proj_end_year - data_end_year,
+                        ).astype(int)
+                    ).T,
+                ],
+                axis=1,
+            ).squeeze(),
+            axis=1,
+        )
+        .set_index(["model", "scenario", "region", "product_short"])
+    ).sort_index()
+
+    # Prepare df for multiplication with energy
+    ef_ratios = ef_ratios.parallel_apply(
+        lambda x: 1 - (1 - x.max()) * (x - x.min()) / x.max(), axis=1
+    )
+
+    ef_ratios = (
+        pd.DataFrame(
+            1,
+            index=ef_ratios.index,
+            columns=np.arange(data_start_year, data_end_year + 1, 1),
+        )
+    ).join(ef_ratios)
+    ef_ratios = ef_ratios.loc[:, : emissions_output_co2e.columns[-1]]
+    ef_ratios = ef_ratios.sort_index()
+
+    ef_ratios.to_csv("podi/data/afolu_ef_ratios.csv")
+
+    ef_ratios.update(
+        ef_ratios.parallel_apply(
+            lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1
+        ).fillna(0)
+    )
+
+    emissions_output_co2e.update(
+        emissions_output_co2e[
+            (
+                (emissions_output_co2e.reset_index().scenario == "pathway")
+                & (
+                    emissions_output_co2e.reset_index().product_long
+                    == "Enteric Fermentation"
+                )
+            ).values
+        ]
+        .loc[:, data_end_year:]
+        .parallel_apply(
+            lambda x: x.mul(ef_ratios.loc[:, data_end_year:].squeeze().values),
+            axis=1,
+        )
+    )
 
     # endregion
 
