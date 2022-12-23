@@ -359,13 +359,13 @@ def update_graph(
             "xanchor": "center",
             "x": 0.5,
             "y": 0.93,
-            "font": dict(size=12),
+            # "font": dict(size=12),
         },
         xaxis1_rangeslider_visible=True,
-        width=1700,
+        width=1850,
         height=950,
-        legend=dict(font=dict(size=12)),
-        template="plotly_white",
+        # legend=dict(font=dict(size=12)),
+        template="presentation",
     )
 
     fig.update_yaxes(
@@ -588,13 +588,13 @@ def update_graph(
             "xanchor": "center",
             "x": 0.5,
             "y": 0.93,
-            "font": dict(size=12),
+            # "font": dict(size=12),
         },
         xaxis1_rangeslider_visible=True,
-        width=1700,
+        width=1850,
         height=950,
-        legend=dict(font=dict(size=12)),
-        template="plotly_white",
+        # legend=dict(font=dict(size=12)),
+        template="presentation",
         legend_traceorder="reversed",
     )
 

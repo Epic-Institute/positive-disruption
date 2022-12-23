@@ -7,14 +7,9 @@ import numpy as np
 import pyam
 from pandarallel import pandarallel
 import globalwarmingpotentials as gwp
-import plotly.io as pio
-import plotly.graph_objects as go
 from scipy.optimize import differential_evolution
 
 pandarallel.initialize(progress_bar=True, nb_workers=6)
-
-show_figs = False
-save_figs = False
 
 # endregion
 
@@ -346,84 +341,6 @@ def emissions(
     ).drop(columns="region")
 
     flux.to_csv("podi/data/TNC/flux_output.csv")
-
-    # Plot Average Mitigation Flux [tCO2e/Mha/yr, tCO2e/m3/yr, tCo2e/percentile improvement]
-    # region
-    fig = flux.droplevel(["model", "scenario", "unit"]).T
-    fig.index.name = "year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig,
-        id_vars="year",
-        var_name=["region", "variable"],
-        value_name="Avg mitigation potential flux",
-    )
-
-    for subvertical in fig2["variable"].unique():
-
-        fig = go.Figure()
-
-        for region in fig2["region"].unique():
-
-            # Make modeled trace
-            fig.add_trace(
-                go.Scatter(
-                    name=region,
-                    line=dict(width=1),
-                    x=fig2[(fig2["variable"] == subvertical)]["year"].unique()
-                    - fig2[(fig2["variable"] == subvertical)]["year"].unique().min(),
-                    y=fig2[
-                        (fig2["variable"] == subvertical) & (fig2["region"] == region)
-                    ]["Avg mitigation potential flux"],
-                    legendgroup=region,
-                    showlegend=True,
-                )
-            )
-
-        fig.update_layout(
-            title={
-                "text": "Average Mitigation Potential Flux, "
-                + subvertical.replace("|Avg mitigation potential flux", ""),
-                "xanchor": "center",
-                "x": 0.5,
-                "y": 0.99,
-            },
-            yaxis={"title": "tCO2e/Mha/yr"},
-            xaxis={"title": "Years from implementation"},
-            margin_b=0,
-            margin_t=20,
-            margin_l=10,
-            margin_r=10,
-        )
-
-        if subvertical == "Improved Forest Management|Avg mitigation potential flux":
-            fig.update_layout(yaxis={"title": "tCO2e/m3/yr"})
-
-        if (
-            subvertical
-            == "Nitrogen Fertilizer Management|Avg mitigation potential flux"
-        ):
-            fig.update_layout(yaxis={"title": "tCO2e/percentile improvement"})
-
-        if show_figs is True:
-            fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/afolu_flux-"
-                    + str(
-                        subvertical.replace("|Avg mitigation potential flux", "")
-                    ).replace("slice(None, None, None)", "All")
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-                full_html=False,
-                include_plotlyjs="cdn",
-            )
-
-    # endregion
 
     # endregion
 
@@ -1829,7 +1746,7 @@ def emissions(
             input_data=x,
             scenario=scenario,
             data_end_year=data_end_year + 1,
-            saturation_year=2043,
+            saturation_year=2034,
             proj_end_year=proj_end_year,
         ),
         axis=1,
