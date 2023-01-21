@@ -338,7 +338,8 @@ emissions_wedges.columns = emissions_wedges.columns.astype(int)
 output_start_date = 2010
 output_end_date = 2070
 
-# For energy_output, groupby product_category, except for products in the Electricity and Heat product_category
+# For energy_output, groupby product_category, except for products in the Electricity
+# and Heat product_category
 energy_output_temp = energy_output[
     (energy_output.reset_index().product_category != "Electricity and Heat").values
 ].reset_index()

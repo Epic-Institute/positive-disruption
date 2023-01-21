@@ -5,13 +5,8 @@ from numpy import NaN
 import numpy as np
 from pandarallel import pandarallel
 import pyam
-import plotly.io as pio
-import plotly.graph_objects as go
 
 pandarallel.initialize(progress_bar=True, nb_workers=6)
-
-show_figs = False
-save_figs = False
 
 # endregion
 
@@ -24,7 +19,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # Load the 'Historical Observations' tab of TNC's 'Positive Disruption NCS Verticals' google spreadsheet
+    # Load the 'Historical Observations' tab of TNC's 'Positive Disruption NCS
+    # Verticals' google spreadsheet
     afolu_historical = (
         pd.DataFrame(pd.read_csv("podi/data/TNC/historical_observations.csv"))
         .drop(columns=["Region Group", "Region"])
@@ -39,7 +35,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .replace("Pathway", scenario)
     )
 
-    # 'Avoided Peat Impacts', 'Avoided Forest Conversion', and 'Avoided Coastal Impacts' subverticals do not have historical adoption data, so these are set to zero
+    # 'Avoided Peat Impacts', 'Avoided Forest Conversion', and 'Avoided Coastal Impacts'
+    #  subverticals do not have historical adoption data, so these are set to zero
     afolu_historical.update(
         afolu_historical[afolu_historical.Subvertical.str.contains("Avoided")].fillna(0)
     )
@@ -55,126 +52,19 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     afolu_historical.columns = afolu_historical.columns.astype(int)
 
-    # For subvertical/region combos that have at least two data points, interpolate between data points to fill data gaps
+    # For subvertical/region combos that have at least two data points, interpolate
+    # between data points to fill data gaps
     afolu_historical.interpolate(axis=1, limit_area="inside", inplace=True)
-
-    # Plot afolu_historical [Mha, m3, Percent adoption]
-    # region
-    fig = afolu_historical.droplevel(["model", "scenario", "unit"]).T
-    fig.index.name = "year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig, id_vars="year", var_name=["region", "variable"], value_name="Adoption"
-    )
-
-    for subvertical in fig2["variable"].unique():
-
-        fig = go.Figure()
-
-        for region in fig2["region"].unique():
-
-            # Make modeled trace
-            if (
-                fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)][
-                    "Adoption"
-                ].count()
-                < 2
-            ):
-                fig.add_trace(
-                    go.Scatter(
-                        name=region,
-                        mode="markers",
-                        marker=dict(size=5),
-                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                        y=fig2[
-                            (fig2["variable"] == subvertical)
-                            & (fig2["region"] == region)
-                        ]["Adoption"],
-                        legendgroup=region,
-                        showlegend=True,
-                    )
-                )
-            else:
-                fig.add_trace(
-                    go.Scatter(
-                        name=region,
-                        line=dict(width=1),
-                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                        y=fig2[
-                            (fig2["variable"] == subvertical)
-                            & (fig2["region"] == region)
-                        ]["Adoption"],
-                        legendgroup=region,
-                        showlegend=True,
-                    )
-                )
-        buttons = []
-
-        for i, region in enumerate(fig2["region"].unique()):
-            args = [False] * len(fig2["region"].unique())
-            args[i] = True
-            button = dict(label=region, method="update", args=[{"visible": args}])
-            buttons.append(button)
-
-        fig.update_layout(
-            updatemenus=[
-                dict(
-                    active=0,
-                    type="dropdown",
-                    buttons=buttons,
-                    x=1.05,
-                    y=1.02,
-                    xanchor="right",
-                    yanchor="bottom",
-                )
-            ],
-            title={
-                "text": "Historical Adoption, "
-                + subvertical.replace("|Observed adoption", ""),
-                "xanchor": "center",
-                "x": 0.5,
-                "y": 0.99,
-            },
-            yaxis={"title": "Mha"},
-            margin_b=0,
-            margin_t=80,
-            margin_l=10,
-            margin_r=10,
-            xaxis1_rangeslider_visible=True,
-        )
-
-        if subvertical == "Improved Forest Management|Observed adoption":
-            fig.update_layout(yaxis={"title": "m3"})
-
-        if subvertical == "Nitrogen Fertilizer Management|Observed adoption":
-            fig.update_layout(yaxis={"title": "Percent adoption"})
-
-        if show_figs is True:
-            fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/afolu_historical-"
-                    + str(subvertical.replace("|Observed adoption", "")).replace(
-                        "slice(None, None, None)", "All"
-                    )
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-                full_html=False,
-                include_plotlyjs="cdn",
-            )
-
-    # endregion
 
     # Create a timeseries of maximum extent of each subvertical
     # region
 
-    # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
+    # Define a function that takes piecewise functions as input and outputs a continuous
+    # timeseries (this is used for input data provided for (1) maximum extent, and (2)
+    # average mitigation potential flux)
     def piecewise_to_continuous(variable):
-        # Load the 'Max Extent' tab of TNC's 'Positive Disruption NCS Verticals' google spreadsheet
+        # Load the 'Max Extent' tab of TNC's 'Positive Disruption NCS Verticals' google
+        # spreadsheet
         name = (
             pd.read_csv("podi/data/TNC/max_extent.csv")
             .drop(columns=["Region Group", "Region"])
@@ -189,13 +79,15 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             .replace("Pathway", scenario)
         )
 
-        # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
+        # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric'
+        # columns
         name["variable"] = name.parallel_apply(
             lambda x: "|".join([x["Subvertical"], x["Metric"]]), axis=1
         )
         name.drop(columns=["Subvertical", "Metric"], inplace=True)
 
-        # Filter for rows that have 'variable' (either 'Max extent' or 'Avg mitigation potential flux')
+        # Filter for rows that have 'variable' (either 'Max extent' or 'Avg mitigation
+        # potential flux')
         name = name[name["variable"].str.contains(variable)]
 
         # If Value 1 is 'NA', set to 0
@@ -211,7 +103,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             name["Value 3"].isna(), name["Value 2"], name["Value 3"]
         )
 
-        # If Duration 1 is 'NA' or longer than proj_end_year - afolu_historical.columns[0], set to proj_end_year - afolu_historical.columns[0]
+        # If Duration 1 is 'NA' or longer than proj_end_year -
+        # afolu_historical.columns[0], set to proj_end_year - afolu_historical.columns[0]
         name["Duration 1 (Years)"] = np.where(
             (
                 (name["Duration 1 (Years)"].isna())
@@ -257,7 +150,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             dtype=float,
         )
 
-        # Define a function that places values in each timeseries for the durations specified, and interpolates
+        # Define a function that places values in each timeseries for the durations
+        # specified, and interpolates
         def rep(x):
             x0 = x
             x0.loc[afolu_historical.columns[0]] = x.name[5]
@@ -290,7 +184,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     max_extent = piecewise_to_continuous("Max extent")
 
-    # Shift Improved Forest Management's start year to 2018, and give all years prior to 2018 the value in 2018
+    # Shift Improved Forest Management's start year to 2018, and give all years prior to
+    # 2018 the value in 2018
     max_extent.update(
         (
             max_extent[
@@ -346,7 +241,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
     )
 
-    # Define the max extent of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion' by loading the 'Avoided Subverticals Input' tab of TNC's 'Positive Disruption NCS Verticals' google spreadsheet
+    # Define the max extent of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
+    # by loading the 'Avoided Subverticals Input' tab of TNC's 'Positive Disruption NCS
+    # Verticals' google spreadsheet
     afolu_avoided = pd.DataFrame(
         pd.read_csv("podi/data/TNC/avoided_subverticals_input.csv")
         .drop(columns=["Region Group", "Region"])
@@ -362,7 +259,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .replace("Pathway", scenario)
     ).fillna(0)
 
-    # Max extent is defined by the initial extent, which represents the amount of land that could be lost in future years.
+    # Max extent is defined by the initial extent, which represents the amount of land
+    # that could be lost in future years.
     max_extent_avoided = pd.concat(
         [
             pd.DataFrame(
@@ -401,7 +299,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         }
     )
 
-    # Like 'Avoided Forest Conversion' and 'Avoided Coastal Impacts', 'Avoided Peat Impacts' max extent should be set to zero for historical years
+    # Like 'Avoided Forest Conversion' and 'Avoided Coastal Impacts',
+    # 'Avoided Peat Impacts' max extent should be set to zero for historical years
     max_extent.update(
         max_extent[
             (
@@ -417,81 +316,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     max_extent.to_csv("podi/data/TNC/max_extent_output.csv")
 
-    # Plot max_extent [Mha, m3, MtCO2e]
-    # region
-    fig = max_extent.droplevel(["model", "scenario", "unit"]).T
-    fig.index.name = "year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig,
-        id_vars="year",
-        var_name=["region", "variable"],
-        value_name="Max Extent",
-    )
-
-    for subvertical in fig2["variable"].unique():
-
-        fig = go.Figure()
-
-        for region in fig2["region"].unique():
-
-            # Make modeled trace
-            fig.add_trace(
-                go.Scatter(
-                    name=region,
-                    line=dict(width=1),
-                    x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                    y=fig2[
-                        (fig2["variable"] == subvertical) & (fig2["region"] == region)
-                    ]["Max Extent"],
-                    legendgroup=region,
-                    showlegend=True,
-                )
-            )
-
-        fig.update_layout(
-            title={
-                "text": "Max Extent, " + subvertical.replace("|Max extent", ""),
-                "xanchor": "center",
-                "x": 0.5,
-                "y": 0.99,
-            },
-            yaxis={"title": "Mha"},
-            margin_b=0,
-            margin_t=20,
-            margin_l=10,
-            margin_r=10,
-        )
-
-        if subvertical == "Improved Forest Management|Max extent":
-            fig.update_layout(yaxis={"title": "m3"})
-
-        if subvertical == "Nitrogen Fertilizer Management|Max extent":
-            fig.update_layout(yaxis={"title": "MtCO2e"})
-
-        if show_figs is True:
-            fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/afolu_max_extent-"
-                    + str(subvertical.replace("|Max extent", "")).replace(
-                        "slice(None, None, None)", "All"
-                    )
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-                full_html=False,
-                include_plotlyjs="cdn",
-            )
-
     # endregion
 
-    # endregion
-
-    # Calculate afolu_historical as a % of max_extent, excluding Nitrogen Fertilizer Management, since its historical adoption is already reported in Percent adoption.
+    # Calculate afolu_historical as a % of max_extent, excluding Nitrogen Fertilizer
+    # Management, since its historical adoption is already reported in Percent adoption.
     afolu_historical[
         afolu_historical.index.get_level_values(3).str.contains(
             "Nitrogen Fertilizer Management"
@@ -573,94 +401,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # Set max extent to 1 (100%) for historical years
     afolu_historical = afolu_historical.clip(upper=1)
 
-    # Plot afolu_historical [% of Max Extent]
-    # region
-    fig = afolu_historical.droplevel(["model", "scenario", "unit"]).T
-    fig.index.name = "year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig, id_vars="year", var_name=["region", "variable"], value_name="Adoption"
-    )
-
-    for subvertical in fig2["variable"].unique():
-
-        fig = go.Figure()
-
-        for region in fig2["region"].unique():
-
-            # Make modeled trace
-            if (
-                fig2[(fig2["variable"] == subvertical) & (fig2["region"] == region)][
-                    "Adoption"
-                ].count()
-                < 2
-            ):
-                fig.add_trace(
-                    go.Scatter(
-                        name=region,
-                        mode="markers",
-                        marker=dict(size=5),
-                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                        y=fig2[
-                            (fig2["variable"] == subvertical)
-                            & (fig2["region"] == region)
-                        ]["Adoption"]
-                        * 100,
-                        legendgroup=region,
-                        showlegend=True,
-                    )
-                )
-            else:
-                fig.add_trace(
-                    go.Scatter(
-                        name=region,
-                        line=dict(width=1),
-                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                        y=fig2[
-                            (fig2["variable"] == subvertical)
-                            & (fig2["region"] == region)
-                        ]["Adoption"]
-                        * 100,
-                        legendgroup=region,
-                        showlegend=True,
-                    )
-                )
-
-        fig.update_layout(
-            title={
-                "text": "Historical Adoption, "
-                + subvertical.replace("|Observed adoption", ""),
-                "xanchor": "center",
-                "x": 0.5,
-                "y": 0.99,
-            },
-            yaxis={"title": "% of Max Extent"},
-            margin_b=0,
-            margin_t=20,
-            margin_l=10,
-            margin_r=10,
-        )
-
-        if show_figs is True:
-            fig.show()
-
-        if save_figs is True:
-            pio.write_html(
-                fig,
-                file=(
-                    "./charts/afolu_historical_percent-"
-                    + str(subvertical.replace("|Observed adoption", "")).replace(
-                        "slice(None, None, None)", "All"
-                    )
-                    + ".html"
-                ).replace(" ", ""),
-                auto_open=False,
-                full_html=False,
-                include_plotlyjs="cdn",
-            )
-
-    # endregion
-
     # For rows will all 'NA', replace with zero at data_end_year
     afolu_historical.update(
         afolu_historical[afolu_historical.isna().all(axis=1).values]
@@ -668,7 +408,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .fillna(0)
     )
 
-    # For subvertical/region combos that have one data point, assume the prior year of input data is 95% of this value. If the value is zero, set a minimum slope.
+    # For subvertical/region combos that have one data point, assume the prior year of
+    # input data is 95% of this value. If the value is zero, set a minimum slope.
     afolu_historical.update(
         afolu_historical[afolu_historical.count(axis=1) == 1].parallel_apply(
             lambda x: x.update(
@@ -692,7 +433,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # Compute adoption curves of the set of historical analogs that have been supplied to estimate the potential future growth of subverticals
+    # Compute adoption curves of the set of historical analogs that have been supplied
+    # to estimate the potential future growth of subverticals
 
     # region
     afolu_analogs = pd.DataFrame(
@@ -755,52 +497,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     afolu_analogs = pd.concat([afolu_analogs, afolu_analogs_avoided])
 
-    # Plot afolu_analogs [% of max extent]
-    # region
-    fig2 = afolu_analogs.T
-
-    fig = go.Figure()
-
-    for analog in fig2.columns.unique():
-
-        fig.add_trace(
-            go.Scatter(
-                name=analog,
-                line=dict(width=1),
-                x=np.arange(0, fig2.index.unique().max() + 1, 1),
-                y=fig2.loc[:, analog].multiply(100),
-                legendgroup=analog,
-                showlegend=True,
-            )
-        )
-
-    fig.update_layout(
-        title={
-            "text": "Historical Analog Adoption",
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        yaxis={"title": "% of Max Extent"},
-        margin_b=0,
-        margin_t=20,
-        margin_l=10,
-        margin_r=10,
-    )
-
-    if show_figs is True:
-        fig.show()
-
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=("./charts/afolu_historical_analogs.html"),
-            auto_open=False,
-            full_html=False,
-            include_plotlyjs="cdn",
-        )
-    # endregion
-
     # endregion
 
     # Match historical analogs to each subvertical
@@ -826,7 +522,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
     ).rename(index={"baseline": scenario})
 
-    # Join historical analog model with historical data at point where projection curve results in smooth growth (since historical analogs are at different points on their modeled adoption curve than the NCS pathways to which they are being compared)
+    # Join historical analog model with historical data at point where projection curve
+    # results in smooth growth (since historical analogs are at different points on their
+    # modeled adoption curve than the NCS pathways to which they are being compared)
 
     def rep(x):
         x0 = x
@@ -869,7 +567,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # Create afolu_baseline by copying afolu_historical and changing the scenario name to 'baseline'
+    # Create afolu_baseline by copying afolu_historical and changing the scenario name to
+    # 'baseline'
 
     # region
 
@@ -925,86 +624,12 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # Combine all scenarios, updating historical data for afolu_baseline to match afolu_output
+    # Combine all scenarios, updating historical data for afolu_baseline to match
+    # afolu_output
     afolu_output = pd.concat([afolu_baseline, afolu_output])
 
-    # Plot afolu_output [% of max extent]
-    # region
-    fig = afolu_output.droplevel(["model", "unit"]).T
-    fig.index.name = "year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig,
-        id_vars="year",
-        var_name=["scenario", "region", "variable"],
-        value_name="Adoption",
-    )
-
-    for scenario in fig2["scenario"].unique():
-
-        for subvertical in fig2["variable"].unique():
-
-            fig = go.Figure()
-
-            for region in fig2["region"].unique():
-
-                # Make modeled trace
-                fig.add_trace(
-                    go.Scatter(
-                        name=region,
-                        line=dict(width=1),
-                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                        y=fig2[
-                            (fig2["variable"] == subvertical)
-                            & (fig2["region"] == region)
-                            & (fig2["scenario"] == scenario)
-                        ]["Adoption"]
-                        * 100,
-                        legendgroup=region,
-                        showlegend=True,
-                    )
-                )
-
-            fig.update_layout(
-                title={
-                    "text": "Adoption, "
-                    + scenario.capitalize()
-                    + ", "
-                    + subvertical.replace("|Observed adoption", ""),
-                    "xanchor": "center",
-                    "x": 0.5,
-                    "y": 0.99,
-                },
-                yaxis={"title": "% of Max Extent"},
-                margin_b=0,
-                margin_t=20,
-                margin_l=10,
-                margin_r=10,
-            )
-
-            if show_figs is True:
-                fig.show()
-
-            if save_figs is True:
-                pio.write_html(
-                    fig,
-                    file=(
-                        "./charts/afolu_output_percent-"
-                        + str(subvertical.replace("|Observed adoption", "")).replace(
-                            "slice(None, None, None)", "All"
-                        )
-                        + "-"
-                        + scenario.capitalize()
-                        + ".html"
-                    ).replace(" ", ""),
-                    auto_open=False,
-                    full_html=False,
-                    include_plotlyjs="cdn",
-                )
-
-    # endregion
-
-    # Multiply afolu_ouput by the estimated maximum extent to get afolu_output in units of land area & forest volume
+    # Multiply afolu_ouput by the estimated maximum extent to get afolu_output in units
+    # of land area & forest volume
 
     afolu_output = afolu_output.parallel_apply(
         lambda x: x.multiply(
@@ -1019,86 +644,6 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         ).squeeze(),
         axis=1,
     ).fillna(0)
-
-    # Plot afolu_output [Mha, m3, Percent adoption]
-    # region
-    fig = afolu_output.droplevel(["model", "unit"]).T
-    fig.index.name = "year"
-    fig.reset_index(inplace=True)
-    fig2 = pd.melt(
-        fig,
-        id_vars="year",
-        var_name=["scenario", "region", "variable"],
-        value_name="Adoption",
-    )
-
-    for scenario in fig2["scenario"].unique():
-        for subvertical in fig2["variable"].unique():
-
-            fig = go.Figure()
-
-            for region in fig2["region"].unique():
-
-                # Make modeled trace
-                fig.add_trace(
-                    go.Scatter(
-                        name=region,
-                        line=dict(width=1),
-                        x=fig2[(fig2["variable"] == subvertical)]["year"].unique(),
-                        y=fig2[
-                            (fig2["variable"] == subvertical)
-                            & (fig2["region"] == region)
-                            & (fig2["scenario"] == scenario)
-                        ]["Adoption"],
-                        legendgroup=region,
-                        showlegend=True,
-                    )
-                )
-
-            fig.update_layout(
-                title={
-                    "text": "Adoption, "
-                    + scenario.capitalize()
-                    + ", "
-                    + subvertical.replace("|Observed adoption", ""),
-                    "xanchor": "center",
-                    "x": 0.5,
-                    "y": 0.99,
-                },
-                yaxis={"title": "Mha"},
-                margin_b=0,
-                margin_t=20,
-                margin_l=10,
-                margin_r=10,
-            )
-
-            if subvertical == "Improved Forest Management|Observed adoption":
-                fig.update_layout(yaxis={"title": "m3"})
-
-            if subvertical == "Nitrogen Fertilizer Management|Observed adoption":
-                fig.update_layout(yaxis={"title": "Percent adoption"})
-
-            if show_figs is True:
-                fig.show()
-
-            if save_figs is True:
-                pio.write_html(
-                    fig,
-                    file=(
-                        "./charts/afolu_output-"
-                        + str(subvertical.replace("|Observed adoption", "")).replace(
-                            "slice(None, None, None)", "All"
-                        )
-                        + "-"
-                        + scenario.capitalize()
-                        + ".html"
-                    ).replace(" ", ""),
-                    auto_open=False,
-                    full_html=False,
-                    include_plotlyjs="cdn",
-                )
-
-        # endregion
 
     # endregion
 
@@ -1126,7 +671,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             .merge(regions, left_on=["region"], right_on=["ISO"])
         )
 
-        # Add sector, product_category, product_long, product_short, flow_category, flow_long, flow_short indices
+        # Add sector, product_category, product_long, product_short, flow_category,
+        # flow_long, flow_short indices
         each["product_category"] = "AFOLU"
 
         each["product_long"] = each["variable"].str.split("|", expand=True)[0].values

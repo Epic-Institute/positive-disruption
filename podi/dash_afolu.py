@@ -207,7 +207,11 @@ app.layout = html.Div(
         html.Div(
             [
                 dcc.RadioItems(
-                    ["afolu_historical", "flux_output", "max_extent_output"],
+                    [
+                        "afolu_historical",
+                        "flux_output",
+                        "max_extent_output",
+                    ],
                     "afolu_historical",
                     id="dataset2",
                 ),

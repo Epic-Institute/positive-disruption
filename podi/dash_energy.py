@@ -245,7 +245,7 @@ def update_graph(
     chart_type,
 ):
 
-    unit_val = {"TJ": 1, "TWh": 0.0002777}
+    unit_val = {"TJ": 1, "TWh": 0.0002777, "percent of total": 1}
     stack_type = {"none": None, "tonexty": "1"}
 
     df = pd.read_csv("~/positive-disruption/podi/data/" + dataset + ".csv")
@@ -254,66 +254,131 @@ def update_graph(
         df.filter(["hydrogen", "flexible", "nonenergy", "unit"]), inplace=True, axis=1
     )
 
-    filtered_df = (
-        (
-            pd.DataFrame(df)
-            .set_index(
-                [
-                    "model",
-                    "scenario",
-                    "region",
-                    "sector",
-                    "product_category",
-                    "product_long",
-                    "product_short",
-                    "flow_category",
-                    "flow_long",
-                    "flow_short",
-                ]
-            )
-            .loc[
-                model,
-                scenario,
-                region,
-                sector,
-                product_category,
-                product_long,
-                product_short,
-                flow_category,
-                flow_long,
-                flow_short,
-            ]
-            .groupby([groupby])
-            .sum()
-        )
-        * unit_val[yaxis_unit]
-    ).T.fillna(0)
-
-    filtered_df.index.name = "year"
-    filtered_df.reset_index(inplace=True)
-    filtered_df = pd.melt(
-        filtered_df,
-        id_vars="year",
-        var_name=[groupby],
-        value_name="TFC, " + str(yaxis_unit),
-    )
-
     fig = go.Figure()
 
-    for sub in filtered_df[groupby].unique():
-        fig.add_trace(
-            go.Scatter(
-                name=sub,
-                line=dict(
-                    width=0.5,
-                ),
-                x=filtered_df["year"],
-                y=filtered_df[filtered_df[groupby] == sub]["TFC, " + str(yaxis_unit)],
-                fill=chart_type,
-                stackgroup=stack_type[chart_type],
-                showlegend=True,
+    if yaxis_unit == "percent of total":
+        filtered_df = (
+            (
+                pd.DataFrame(df)
+                .set_index(
+                    [
+                        "model",
+                        "scenario",
+                        "region",
+                        "sector",
+                        "product_category",
+                        "product_long",
+                        "product_short",
+                        "flow_category",
+                        "flow_long",
+                        "flow_short",
+                    ]
+                )
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    product_short,
+                    flow_category,
+                    flow_long,
+                    flow_short,
+                ]
+                .groupby([groupby])
+                .sum()
             )
+            * unit_val[yaxis_unit]
+        ).T.fillna(0)
+
+        #calculate the percent of total for each groupby for each year
+        filtered_df = filtered_df.apply(lambda x: x / filtered_df.sum(axis=0), axis=1)
+
+        filtered_df.index.name = "year"
+        filtered_df.reset_index(inplace=True)
+        filtered_df = pd.melt(
+            filtered_df,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + str(yaxis_unit),
         )
+
+        for sub in filtered_df[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=filtered_df["year"],
+                    y=filtered_df[filtered_df[groupby] == sub]["TFC, " + 
+                    str(yaxis_unit)],
+                    fill=chart_type,
+                    stackgroup=stack_type[chart_type],
+                    showlegend=True,
+                )
+            )
+    else:
+        filtered_df = (
+            (
+                pd.DataFrame(df)
+                .set_index(
+                    [
+                        "model",
+                        "scenario",
+                        "region",
+                        "sector",
+                        "product_category",
+                        "product_long",
+                        "product_short",
+                        "flow_category",
+                        "flow_long",
+                        "flow_short",
+                    ]
+                )
+                .loc[
+                    model,
+                    scenario,
+                    region,
+                    sector,
+                    product_category,
+                    product_long,
+                    product_short,
+                    flow_category,
+                    flow_long,
+                    flow_short,
+                ]
+                .groupby([groupby])
+                .sum()
+            )
+            * unit_val[yaxis_unit]
+        ).T.fillna(0)
+
+        filtered_df.index.name = "year"
+        filtered_df.reset_index(inplace=True)
+        filtered_df = pd.melt(
+            filtered_df,
+            id_vars="year",
+            var_name=[groupby],
+            value_name="TFC, " + str(yaxis_unit),
+        )
+
+        for sub in filtered_df[groupby].unique():
+            fig.add_trace(
+                go.Scatter(
+                    name=sub,
+                    line=dict(
+                        width=0.5,
+                    ),
+                    x=filtered_df["year"],
+                    y=filtered_df[filtered_df[groupby] == sub]["TFC, " + 
+                    str(yaxis_unit)],
+                    fill=chart_type,
+                    stackgroup=stack_type[chart_type],
+                    showlegend=True,
+                )
+            )
 
     fig.update_layout(
         title={

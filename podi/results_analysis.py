@@ -5,7 +5,6 @@ import plotly.io as pio
 import plotly.graph_objects as go
 import numpy as np
 from numpy import NaN
-import panel as pn
 
 show_figs = False
 save_figs = False
@@ -29,10 +28,6 @@ def results_analysis(
     ######################
     # HISTORICAL ANALOGS #
     ######################
-
-    # region
-
-    # As percent of maximum value
 
     # region
 
@@ -125,7 +120,7 @@ def results_analysis(
         "Total vehicles (BTS)",
     ]
 
-    def percent_change(x):
+    def percent_of_max(x):
         xnew = (
             x.value
             / analog[(analog.label == x.label) & (analog.iso3c == x.iso3c)].value.max()
@@ -133,231 +128,43 @@ def results_analysis(
         x.value = xnew
         return x
 
-    analog = analog[
-        (analog.iso3c == "USA") & (analog.label.isin(labels))
-    ].parallel_apply(percent_change, axis=1)
+    # define function that calculates cumulative distribution function
+    def percent_of_total(x):
+        xnew = (
+            analog[
+                (analog.label == x.label)
+                & (analog.iso3c == x.iso3c)
+                & (analog.year <= x.year)
+            ]
+            .sum()
+            .value
+            / analog[(analog.label == x.label) & (analog.iso3c == x.iso3c)].value.sum()
+        ) * 100
+        x.value = xnew
+        return x
 
-    fig = go.Figure()
+    analog_output = []
 
-    for label in analog["label"].unique():
+    for unit in ["percent of max", "percent of total", "absolute"]:
+        if unit == "percent of max":
+            analog_output_temp = analog[
+                (analog.iso3c == "USA") & (analog.label.isin(labels))
+            ].parallel_apply(percent_of_max, axis=1)
+            analog_output_temp["unit"] = unit
+        elif unit == "percent of total":
+            analog_output_temp = analog[
+                (analog.iso3c == "USA") & (analog.label.isin(labels))
+            ].parallel_apply(percent_of_total, axis=1)
+            analog_output_temp["unit"] = unit
+        else:
+            analog_output_temp = analog[
+                (analog.iso3c == "USA") & (analog.label.isin(labels))
+            ]
+            analog_output_temp["unit"] = unit
 
-        # Make modeled trace
-        fig.add_trace(
-            go.Scatter(
-                name=label,
-                line=dict(width=1),
-                mode="lines",
-                x=analog[(analog["label"] == label)]["year"].unique(),
-                y=analog[(analog["label"] == label)]["value"],
-                legendgroup=label,
-                showlegend=True,
-            )
+        analog_output = pd.concat(
+            [pd.DataFrame(analog_output), pd.DataFrame(analog_output_temp)]
         )
-
-    fig.update_layout(
-        title={
-            "text": "Historical Analogs",
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        yaxis={"title": "% of max"},
-        margin_b=0,
-        margin_t=20,
-        margin_l=10,
-        margin_r=10,
-        legend=dict(yanchor="top", y=-0.1, xanchor="left", x=0.01),
-    )
-
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type="buttons",
-                direction="left",
-                buttons=list(
-                    [
-                        dict(
-                            args=[{"yaxis.type": "linear"}],
-                            label="LINEAR",
-                            method="relayout",
-                        ),
-                        dict(
-                            args=[{"yaxis.type": "log"}], label="LOG", method="relayout"
-                        ),
-                    ]
-                ),
-            )
-        ]
-    )
-
-    if show_figs is True:
-        fig.show()
-
-    pio.write_html(
-        fig,
-        file=("./charts/historicalanalogs-percent.html").replace(" ", ""),
-        auto_open=False,
-        full_html=False,
-        include_plotlyjs="cdn",
-    )
-
-    # endregion
-
-    # As absolute value
-
-    # region
-
-    analog = pd.read_csv(
-        "podi/data/external/CHATTING_SPLICED.csv",
-        usecols=["label", "iso3c", "year", "value"],
-    )
-
-    analog = analog[(analog.iso3c == "USA") & (analog.label.isin(labels))]
-
-    fig = go.Figure()
-
-    for label in analog["label"].unique():
-
-        # Make modeled trace
-        fig.add_trace(
-            go.Scatter(
-                name=label,
-                line=dict(width=1),
-                mode="lines",
-                x=analog[(analog["label"] == label)]["year"].unique(),
-                y=analog[(analog["label"] == label)]["value"],
-                legendgroup=label,
-                showlegend=True,
-            )
-        )
-
-    fig.update_layout(
-        title={
-            "text": "Historical Analogs",
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        yaxis={"title": "various"},
-        margin_b=0,
-        margin_t=20,
-        margin_l=10,
-        margin_r=10,
-        legend=dict(yanchor="top", y=-0.1, xanchor="left", x=0.01),
-    )
-
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type="buttons",
-                direction="left",
-                buttons=list(
-                    [
-                        dict(
-                            args=[{"yaxis.type": "linear"}],
-                            label="LINEAR",
-                            method="relayout",
-                        ),
-                        dict(
-                            args=[{"yaxis.type": "log"}], label="LOG", method="relayout"
-                        ),
-                    ]
-                ),
-            )
-        ]
-    )
-
-    if show_figs is True:
-        fig.show()
-
-    pio.write_html(
-        fig,
-        file=("./charts/historicalanalogs-absolutevalue.html").replace(" ", ""),
-        auto_open=False,
-        full_html=False,
-        include_plotlyjs="cdn",
-    )
-
-    # endregion
-
-    # As percent change
-
-    # region
-
-    analog = pd.read_csv(
-        "podi/data/external/CHATTING_SPLICED.csv",
-        usecols=["label", "iso3c", "year", "value"],
-    )
-
-    analog = analog[(analog.iso3c == "USA") & (analog.label.isin(labels))]
-
-    fig = go.Figure()
-
-    for label in analog["label"].unique():
-
-        # Make modeled trace
-        fig.add_trace(
-            go.Scatter(
-                name=label,
-                line=dict(width=1),
-                mode="lines",
-                x=analog[(analog["label"] == label)]["year"].unique(),
-                y=analog[(analog["label"] == label)]["value"].pct_change() * 100,
-                legendgroup=label,
-                showlegend=True,
-            )
-        )
-
-    fig.update_layout(
-        title={
-            "text": "Historical Analogs",
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        yaxis={"title": "%"},
-        margin_b=0,
-        margin_t=20,
-        margin_l=10,
-        margin_r=10,
-        legend=dict(yanchor="top", y=-0.1, xanchor="left", x=0.01),
-    )
-
-    # Add Linear and Log buttons
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type="buttons",
-                direction="left",
-                buttons=list(
-                    [
-                        dict(
-                            args=[{"yaxis.type": "linear"}],
-                            label="LINEAR",
-                            method="relayout",
-                        ),
-                        dict(
-                            args=[{"yaxis.type": "log"}], label="LOG", method="relayout"
-                        ),
-                    ]
-                ),
-            )
-        ]
-    )
-
-    if show_figs is True:
-        fig.show()
-
-    if save_figs is True:
-        pio.write_html(
-            fig,
-            file=("./charts/historicalanalogs-percentchange.html").replace(" ", ""),
-            auto_open=False,
-            full_html=False,
-            include_plotlyjs="cdn",
-        )
-
-    # endregion
 
     # endregion
 
@@ -2398,279 +2205,17 @@ def results_analysis(
 
     # endregion
 
-    #############################
-    # HVPLOT EXPLORATORY CHARTS #
-    #############################
-
-    # region
-
-    ############
-    #  ENERGY  #
-    ############
-
-    # region
-
-    def _energy_chart():
-        df = energy_output.droplevel(
-            ["model", "product_category", "product_short", "flow_short", "unit"]
-        )
-        df = pd.melt(
-            df.reset_index(),
-            id_vars=[
-                "scenario",
-                "region",
-                "sector",
-                "product_long",
-                "flow_category",
-                "flow_long",
-            ],
-            var_name="year",
-            value_name="TFC",
-        )
-
-        df = df[(df.scenario == "pathway") & (df.year < 2021)]
-
-        select_region = pn.widgets.Select(
-            options=df.region.unique().tolist(), name="Region"
-        )
-        select_sector = pn.widgets.Select(
-            options=df.sector.unique().tolist(), name="Sector"
-        )
-
-        @pn.depends(select_region, select_sector)
-        def exp_plot(select_region, select_sector):
-            return (
-                df[(df.region == select_region) & (df.sector == select_sector)]
-                .sort_values(by="year")
-                .hvplot(x="year", y="TFC", by=["flow_long"])
-            )
-
-        return pn.Column(
-            pn.Row(pn.pane.Markdown("##Energy Output")),
-            select_region,
-            select_sector,
-            exp_plot,
-        ).embed()
-
-    app = _energy_chart()
-    app.save("./charts/energy_chart.html")
-
-    # endregion
-
-    ############
-    #  AFOLU  #
-    ############
-
-    # region
-
-    def _afolu_historical():
-        df = afolu_output.loc[:, :data_end_year].droplevel(
-            ["model", "scenario", "unit"]
-        )
-        df = pd.melt(
-            df.reset_index(),
-            id_vars=["region", "variable"],
-            var_name="year",
-            value_name="Adoption",
-        ).fillna(0)
-
-        select_region = pn.widgets.Select(
-            options=df.region.unique().tolist(), name="Region"
-        )
-        select_subvertical = pn.widgets.Select(
-            options=df.variable.unique().tolist(), name="Subvertical"
-        )
-
-        @pn.depends(select_region, select_subvertical)
-        def exp_plot(select_region, select_subvertical):
-            return (
-                df[(df.region == select_region) & (df.sector == select_subvertical)]
-                .sort_values(by="year")
-                .hvplot(x="year", y="Adoption", by=["variable"])
-            )
-
-        return pn.Column(select_region, select_subvertical, exp_plot).embed()
-
-    app = _afolu_historical()
-    app.save("./charts/afolu_historical.html")
-
-    # endregion
-
-    #############
-    # ANIMATION #
-    #############
-
-    # region
-
-    url = "https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv"
-    dataset = pd.read_csv(url)
-
-    years = [
-        "1952",
-        "1962",
-        "1967",
-        "1972",
-        "1977",
-        "1982",
-        "1987",
-        "1992",
-        "1997",
-        "2002",
-        "2007",
-    ]
-
-    # make list of continents
-    continents = []
-    for continent in dataset["continent"]:
-        if continent not in continents:
-            continents.append(continent)
-    # make figure
-    fig_dict = {"data": [], "layout": {}, "frames": []}
-
-    # fill in most of layout
-    fig_dict["layout"]["xaxis"] = {"range": [30, 85], "title": "Life Expectancy"}
-    fig_dict["layout"]["yaxis"] = {"title": "GDP per Capita", "type": "log"}
-    fig_dict["layout"]["hovermode"] = "closest"
-    fig_dict["layout"]["updatemenus"] = [
-        {
-            "buttons": [
-                {
-                    "args": [
-                        None,
-                        {
-                            "frame": {"duration": 500, "redraw": False},
-                            "fromcurrent": True,
-                            "transition": {
-                                "duration": 300,
-                                "easing": "quadratic-in-out",
-                            },
-                        },
-                    ],
-                    "label": "Play",
-                    "method": "animate",
-                },
-                {
-                    "args": [
-                        [None],
-                        {
-                            "frame": {"duration": 0, "redraw": False},
-                            "mode": "immediate",
-                            "transition": {"duration": 0},
-                        },
-                    ],
-                    "label": "Pause",
-                    "method": "animate",
-                },
-            ],
-            "direction": "left",
-            "pad": {"r": 10, "t": 87},
-            "showactive": False,
-            "type": "buttons",
-            "x": 0.1,
-            "xanchor": "right",
-            "y": 0,
-            "yanchor": "top",
-        }
-    ]
-
-    sliders_dict = {
-        "active": 0,
-        "yanchor": "top",
-        "xanchor": "left",
-        "currentvalue": {
-            "font": {"size": 20},
-            "prefix": "Year:",
-            "visible": True,
-            "xanchor": "right",
-        },
-        "transition": {"duration": 300, "easing": "cubic-in-out"},
-        "pad": {"b": 10, "t": 50},
-        "len": 0.9,
-        "x": 0.1,
-        "y": 0,
-        "steps": [],
-    }
-
-    # make data
-    year = 1952
-    for continent in continents:
-        dataset_by_year = dataset[dataset["year"] == year]
-        dataset_by_year_and_cont = dataset_by_year[
-            dataset_by_year["continent"] == continent
-        ]
-
-        data_dict = {
-            "x": list(dataset_by_year_and_cont["lifeExp"]),
-            "y": list(dataset_by_year_and_cont["gdpPercap"]),
-            "mode": "markers",
-            "text": list(dataset_by_year_and_cont["country"]),
-            "marker": {
-                "sizemode": "area",
-                "sizeref": 200000,
-                "size": list(dataset_by_year_and_cont["pop"]),
-            },
-            "name": continent,
-        }
-        fig_dict["data"].append(data_dict)
-
-    # make frames
-    for year in years:
-        frame = {"data": [], "name": str(year)}
-        for continent in continents:
-            dataset_by_year = dataset[dataset["year"] == int(year)]
-            dataset_by_year_and_cont = dataset_by_year[
-                dataset_by_year["continent"] == continent
-            ]
-
-            data_dict = {
-                "x": list(dataset_by_year_and_cont["lifeExp"]),
-                "y": list(dataset_by_year_and_cont["gdpPercap"]),
-                "mode": "markers",
-                "text": list(dataset_by_year_and_cont["country"]),
-                "marker": {
-                    "sizemode": "area",
-                    "sizeref": 200000,
-                    "size": list(dataset_by_year_and_cont["pop"]),
-                },
-                "name": continent,
-            }
-            frame["data"].append(data_dict)
-
-        fig_dict["frames"].append(frame)
-        slider_step = {
-            "args": [
-                [year],
-                {
-                    "frame": {"duration": 300, "redraw": False},
-                    "mode": "immediate",
-                    "transition": {"duration": 300},
-                },
-            ],
-            "label": year,
-            "method": "animate",
-        }
-        sliders_dict["steps"].append(slider_step)
-
-    fig_dict["layout"]["sliders"] = [sliders_dict]
-
-    fig = go.Figure(fig_dict)
-
-    if show_figs is True:
-        fig.show()
-
-    # endregion
-
-    # endregion
-
     #################
     #  SAVE OUTPUT  #
     #################
 
     # region
 
-    pdindex_output.to_csv("podi/data/pdindex_output.csv")
+    analog_output.to_csv("podi/data/historical_analogs_output.csv", index=False)
 
     adoption_output.to_csv("podi/data/adoption_output.csv")
+
+    pdindex_output.to_csv("podi/data/pdindex_output.csv")
 
     emissions_wedges.to_csv("podi/data/emissions_wedges.csv")
 
