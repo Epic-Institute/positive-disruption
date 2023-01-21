@@ -7,7 +7,7 @@ import pandas as pd
 from podi.energy import energy
 from podi.afolu import afolu
 from podi.emissions import emissions
-from podi.results_analysis import results_analysis
+from podi.results_analysis.results_analysis import results_analysis
 from podi.cdr.cdr_main import cdr_mix
 from podi.climate import climate
 from podi.cdr.cdr_util import (

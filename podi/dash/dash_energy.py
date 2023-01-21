@@ -292,7 +292,7 @@ def update_graph(
             * unit_val[yaxis_unit]
         ).T.fillna(0)
 
-        #calculate the percent of total for each groupby for each year
+        # calculate the percent of total for each groupby for each year
         filtered_df = filtered_df.apply(lambda x: x / filtered_df.sum(axis=0), axis=1)
 
         filtered_df.index.name = "year"
@@ -312,8 +312,9 @@ def update_graph(
                         width=0.5,
                     ),
                     x=filtered_df["year"],
-                    y=filtered_df[filtered_df[groupby] == sub]["TFC, " + 
-                    str(yaxis_unit)],
+                    y=filtered_df[filtered_df[groupby] == sub][
+                        "TFC, " + str(yaxis_unit)
+                    ],
                     fill=chart_type,
                     stackgroup=stack_type[chart_type],
                     showlegend=True,
@@ -372,8 +373,9 @@ def update_graph(
                         width=0.5,
                     ),
                     x=filtered_df["year"],
-                    y=filtered_df[filtered_df[groupby] == sub]["TFC, " + 
-                    str(yaxis_unit)],
+                    y=filtered_df[filtered_df[groupby] == sub][
+                        "TFC, " + str(yaxis_unit)
+                    ],
                     fill=chart_type,
                     stackgroup=stack_type[chart_type],
                     showlegend=True,
