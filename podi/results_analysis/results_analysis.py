@@ -18,9 +18,9 @@ def results_analysis(
     proj_end_year,
 ):
 
-    ######################
-    # HISTORICAL ANALOGS #
-    ######################
+    ###############################
+    # ADOPTION ANALOGS HISTORICAL #
+    ###############################
 
     # region
 
@@ -136,7 +136,7 @@ def results_analysis(
         x.value = xnew
         return x
 
-    analog_output = []
+    adoption_analog_output_historical = []
 
     for unit in ["percent of max", "percent of total", "absolute"]:
         if unit == "percent of max":
@@ -155,15 +155,22 @@ def results_analysis(
             ]
             analog_output_temp["unit"] = unit
 
-        analog_output = pd.concat(
-            [pd.DataFrame(analog_output), pd.DataFrame(analog_output_temp)]
+        adoption_analog_output_historical = pd.concat(
+            [
+                pd.DataFrame(adoption_analog_output_historical),
+                pd.DataFrame(analog_output_temp),
+            ]
         )
+
+    adoption_analog_output_historical.to_csv(
+        "podi/data/adoption_analog_output_historical.csv", index=False
+    )
 
     # endregion
 
-    ##########################
-    #  MARKET ADOPTION DATA  #
-    ##########################
+    #########################
+    #  ADOPTION HISTORICAL  #
+    #########################
 
     # region
 
@@ -190,7 +197,7 @@ def results_analysis(
     adoption_historical.columns = adoption_historical.columns.astype(int)
 
     # Project future growth based on percentage growth of energy demand
-    adoption_output = (
+    adoption_output_historical = (
         pd.concat(
             [
                 adoption_historical.loc[:, data_start_year : data_end_year - 1],
@@ -228,11 +235,13 @@ def results_analysis(
         .replace(-np.inf, 0)
     )
 
+    adoption_output_historical.to_csv("podi/data/adoption_output_historical.csv")
+
     # endregion
 
-    ##############
-    #  PD INDEX  #
-    ##############
+    #########################
+    # ADOPTION PROJECTIONS  #
+    #########################
 
     # region
 
@@ -533,12 +542,14 @@ def results_analysis(
     )
 
     # Combine all verticals
-    pdindex_output = pd.concat(
+    adoption_output_projections = pd.concat(
         [electricity, transport, buildings, industry, agriculture, forestswetlands]
     ).multiply(100)
 
-    pdindex_output["unit"] = "% Adoption"
-    pdindex_output.set_index("unit", append=True, inplace=True)
+    adoption_output_projections["unit"] = "% Adoption"
+    adoption_output_projections.set_index("unit", append=True, inplace=True)
+
+    adoption_output_projections.to_csv("podi/data/adoption_output_projections.csv")
 
     # endregion
 
@@ -608,20 +619,6 @@ def results_analysis(
             "unit",
         ]
     )
-
-    # endregion
-
-    #################
-    #  SAVE OUTPUT  #
-    #################
-
-    # region
-
-    analog_output.to_csv("podi/data/historical_analogs_output.csv", index=False)
-
-    adoption_output.to_csv("podi/data/adoption_output.csv")
-
-    pdindex_output.to_csv("podi/data/pdindex_output.csv")
 
     emissions_wedges.to_csv("podi/data/emissions_wedges.csv")
 

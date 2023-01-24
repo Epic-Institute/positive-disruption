@@ -2,9 +2,11 @@ from dash import Dash, dcc, html, Input, Output
 import plotly.graph_objects as go
 import pandas as pd
 
-df = pd.read_csv("~/positive-disruption/podi/data/historical_analogs_output.csv")
-df2 = pd.read_csv("~/positive-disruption/podi/data/adoption_output.csv")
-df3 = pd.read_csv("~/positive-disruption/podi/data/pdindex_output.csv")
+df = pd.read_csv(
+    "~/positive-disruption/podi/data/adoption_analog_output_historical.csv"
+)
+df2 = pd.read_csv("~/positive-disruption/podi/data/adoption_output_historical.csv")
+df3 = pd.read_csv("~/positive-disruption/podi/data/adoption_output_projections.csv")
 
 app = Dash(__name__)
 
@@ -18,9 +20,9 @@ app.layout = html.Div(
                     [
                         dcc.RadioItems(
                             [
-                                "historical_analogs_output",
+                                "adoption_analog_output_historical",
                             ],
-                            "historical_analogs_output",
+                            "adoption_analog_output_historical",
                             id="dataset",
                         ),
                     ],
@@ -100,9 +102,9 @@ app.layout = html.Div(
                     [
                         dcc.RadioItems(
                             [
-                                "adoption_output",
+                                "adoption_output_historical",
                             ],
-                            "adoption_output",
+                            "adoption_output_historical",
                             id="dataset2",
                         ),
                     ],
@@ -295,9 +297,9 @@ app.layout = html.Div(
                     [
                         dcc.RadioItems(
                             [
-                                "pdindex_output",
+                                "adoption_output_projections",
                             ],
-                            "pdindex_output",
+                            "adoption_output_projections",
                             id="dataset3",
                         ),
                     ],
