@@ -1,30 +1,23 @@
-from dash import Dash, dcc, html, Output
+from dash import Dash, dcc, html, Output, Input
 import pandas as pd
 import plotly.graph_objects as go
 
+data_start_year = 1990
+data_end_year = 2100
 
 datasets = ["energy_output"]
 
-df = (
-    pd.read_csv("~/positive-disruption/podi/data/energy_output.csv")
-    .melt(
-        id_vars=[
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
-        ],
-        var_name="year",
-        value_name="value",
-    )
-    .drop(columns=["product_short", "flow_short"])
+df = pd.read_csv("~/positive-disruption/podi/data/energy_output.csv")
+
+clst = df.columns[
+    ~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1))
+].tolist()
+
+df.set_index(
+    df.columns[
+        ~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1))
+    ].tolist(),
+    inplace=True,
 )
 
 app = Dash(__name__)
@@ -35,10 +28,19 @@ lst = [
     html.Br(),
 ]
 
-for column in df.columns.drop(["value"]):
-    lst.append(html.Label(column))
+for level in df.index.names:
+    lst.append(html.Label(level))
     lst.append(
-        html.Div([dcc.Dropdown(df[column].unique(), df[column].unique(), id=column)])
+        html.Div(
+            [
+                dcc.Dropdown(
+                    df.reset_index()[level].unique().tolist(),
+                    df.reset_index()[level].unique().tolist(),
+                    id=level,
+                    multi=True,
+                )
+            ]
+        )
     )
     lst.append(html.Br())
 
@@ -50,7 +52,15 @@ app.layout = html.Div(
         html.Div([dcc.RadioItems(["Linear", "Log"], "Linear", id="yaxis_type")]),
         html.Br(),
         html.Label("Group By"),
-        html.Div([dcc.RadioItems(df.columns, id="Group By")]),
+        html.Div(
+            [
+                dcc.RadioItems(
+                    df.index.names,
+                    df.index.names[-3],
+                    id="groupby",
+                )
+            ]
+        ),
         html.Br(),
         html.Label("Chart Type"),
         html.Div(
@@ -65,113 +75,69 @@ app.layout = html.Div(
     ]
 )
 
-clst = []
-for column in [
-    ["dataset"]
-    + df.columns.drop(["value"]).tolist()
-    + ["yaxis_type", "groupby", "chart_type"],
-][0]:
-    clst.append('Input("' + column + '", ' + '"value")')
-
 
 @app.callback(
-    Output("indicator-graphic", "figure"),
-    clst,
+    output=Output("indicator-graphic", "figure"),
+    inputs=[
+        Input("dataset", "value"),
+        Input("yaxis_type", "value"),
+        Input("groupby", "value"),
+        Input("chart_type", "value"),
+    ]
+    + [Input(component_id=i, component_property="value") for i in df.index.names],
 )
-def update_graph(clst):
+def update_graph(
+    dataset,
+    yaxis_type,
+    groupby,
+    chart_type,
+    *clst,
+    data_start_year=1990,
+    data_end_year=2100,
+):
 
-    unit_val = {"TJ": 1, "TWh": 0.0002777, "percent of total": 1}
     stack_type = {"none": None, "tonexty": "1"}
-
-    df = (
-        pd.read_csv("~/positive-disruption/podi/data/" + dataset + ".csv")
-        .melt(
-            id_vars=[
-                "model",
-                "scenario",
-                "region",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_long",
-                "flow_short",
-                "unit",
-            ],
-            var_name="year",
-            value_name="value",
-        )
-        .drop(columns=["product_short", "flow_short"])
-    )
 
     fig = go.Figure()
 
-    filtered_df = (
-        (
-            pd.DataFrame(df)
-            .set_index(
-                [
-                    "model",
-                    "scenario",
-                    "region",
-                    "sector",
-                    "product_category",
-                    "product_long",
-                    "flow_category",
-                    "flow_long",
-                ]
-            )
-            .loc[
-                dlst.model,
-                dlst.scenario,
-                dlst.region,
-                dlst.sector,
-                dlst.product_category,
-                dlst.product_long,
-                dlst.flow_category,
-                dlst.flow_long,
-            ]
-            .groupby([dlst.groupby])
-            .sum()
-        )
-        * unit_val[dlst.yaxis_unit]
-    ).T.fillna(0)
-
-    filtered_df.index.name = "year"
-    filtered_df.reset_index(inplace=True)
-    filtered_df = pd.melt(
-        filtered_df,
-        id_vars="year",
-        var_name=[dlst.groupby],
-        value_name="TFC, " + str(dlst.yaxis_unit),
+    df = pd.read_csv("~/positive-disruption/podi/data/" + dataset + ".csv")
+    df.set_index(
+        df.columns[
+            ~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1))
+        ].tolist(),
+        inplace=True,
     )
+    filtered_df = df.loc[clst, :].groupby([groupby]).sum(numeric_only=True)
 
-    for sub in filtered_df[dlst.groupby].unique():
+    filtered_df.to_csv("test.csv")
+
+    for sub in filtered_df.reset_index()[groupby].unique().tolist():
         fig.add_trace(
             go.Scatter(
                 name=sub,
                 line=dict(
                     width=0.5,
                 ),
-                x=filtered_df["year"],
-                y=filtered_df[filtered_df[dlst.groupby] == sub][
-                    "TFC, " + str(dlst.yaxis_unit)
-                ],
-                fill=dlst.chart_type,
-                stackgroup=stack_type[dlst.chart_type],
+                x=filtered_df.columns.astype(int),
+                y=filtered_df.loc[sub],
+                fill=chart_type,
+                stackgroup=stack_type[chart_type],
                 showlegend=True,
             )
         )
 
     fig.update_layout(
         title={
-            "text": "Total Final Consumption",
+            "text": dataset
+            + " by "
+            + groupby
+            + ", "
+            + str(df.reset_index().unit.unique()[0]),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
         },
-        yaxis={"title": "TFC, " + str(dlst.yaxis_unit)},
+        yaxis={"title": str(df.reset_index().unit.unique()[0])},
         margin_b=0,
         margin_t=20,
         margin_l=10,
@@ -180,8 +146,8 @@ def update_graph(clst):
     )
 
     fig.update_yaxes(
-        title="TFC, " + str(dlst.yaxis_unit),
-        type="linear" if dlst.yaxis_type == "Linear" else "log",
+        title=str(str(df.reset_index().unit.unique()[0])),
+        type="linear" if yaxis_type == "Linear" else "log",
     )
 
     return fig

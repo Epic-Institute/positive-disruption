@@ -305,7 +305,9 @@ index = [
     "flow_short",
     "unit",
 ]
-pdindex_output = pd.DataFrame(pd.read_csv("podi/data/pdindex_output.csv")).set_index(
+adoption_output_projections = pd.DataFrame(
+    pd.read_csv("podi/data/adoption_output_projections.csv")
+).set_index(
     [
         "model",
         "scenario",
@@ -315,12 +317,7 @@ pdindex_output = pd.DataFrame(pd.read_csv("podi/data/pdindex_output.csv")).set_i
         "unit",
     ]
 )
-pdindex_output.columns = pdindex_output.columns.astype(int)
-
-adoption_output = pd.DataFrame(pd.read_csv("podi/data/adoption_output.csv")).set_index(
-    index
-)
-adoption_output.columns = adoption_output.columns.astype(int)
+adoption_output_projections.columns = adoption_output_projections.columns.astype(int)
 
 emissions_wedges = pd.DataFrame(
     pd.read_csv("podi/data/emissions_wedges.csv")
@@ -489,7 +486,7 @@ for output in [
 
 # Save as regional-level files and a global-level file
 for output in [
-    (pdindex_output, "pdindex_output"),
+    (adoption_output_projections, "adoption_output_projections"),
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].loc[
