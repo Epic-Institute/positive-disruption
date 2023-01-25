@@ -1,19 +1,20 @@
-from dash import Dash, dcc, html, Input, Output
+import dash
+from dash import dcc, html, callback, Input, Output
 import plotly.graph_objects as go
 import pandas as pd
+
+dash.register_page(__name__, path="/Emissions", title="Emissions", name="Emissions")
 
 data_end_year = 2020
 
 df = pd.read_csv("~/positive-disruption/podi/data/emissions_output_co2e.csv")
 
-app = Dash(__name__)
-
-app.layout = html.Div(
+layout = html.Div(
     [
         html.Div(
             children=[
-                dcc.Graph(id="indicator-graphic"),
-                dcc.Graph(id="indicator-graphic2"),
+                dcc.Graph(id="graphic-emissions"),
+                dcc.Graph(id="graphic-emissions-2"),
                 html.Label("Dataset"),
                 html.Div(
                     [
@@ -214,9 +215,9 @@ app.layout = html.Div(
 )
 
 
-@app.callback(
-    Output("indicator-graphic", "figure"),
-    Output("indicator-graphic2", "figure"),
+@callback(
+    Output("graphic-emissions", "figure"),
+    Output("graphic-emissions-2", "figure"),
     Input("dataset", "value"),
     Input("model", "value"),
     Input("scenario", "value"),
@@ -604,7 +605,3 @@ def update_graph(
     )
 
     return fig, fig2
-
-
-if __name__ == "__main__":
-    app.run_server(debug=True)

@@ -1,6 +1,11 @@
-from dash import Dash, dcc, html, Input, Output
+import dash
+from dash import dcc, html, callback, Input, Output
 import plotly.graph_objects as go
 import pandas as pd
+
+dash.register_page(
+    __name__, path="/ResultsAnalysis", title="Results Analysis", name="Results Analysis"
+)
 
 df = pd.read_csv(
     "~/positive-disruption/podi/data/adoption_analog_output_historical.csv"
@@ -8,9 +13,7 @@ df = pd.read_csv(
 df2 = pd.read_csv("~/positive-disruption/podi/data/adoption_output_historical.csv")
 df3 = pd.read_csv("~/positive-disruption/podi/data/adoption_output_projections.csv")
 
-app = Dash(__name__)
-
-app.layout = html.Div(
+layout = html.Div(
     [
         # Historical Analogs
         html.Div(
@@ -93,7 +96,7 @@ app.layout = html.Div(
             ]
         ),
         html.Br(),
-        dcc.Graph(id="indicator-graphic"),
+        dcc.Graph(id="graphic-resultsanalysis"),
         # Adoption fit to energy demand growth rate
         html.Div(
             children=[
@@ -287,7 +290,7 @@ app.layout = html.Div(
             ]
         ),
         html.Br(),
-        dcc.Graph(id="indicator-graphic2"),
+        dcc.Graph(id="graphic-resultsanalysis-2"),
         html.Br(),
         # PD Index
         html.Div(
@@ -417,15 +420,15 @@ app.layout = html.Div(
             ]
         ),
         html.Br(),
-        dcc.Graph(id="indicator-graphic3"),
+        dcc.Graph(id="graphic-resultsanalysis-3"),
     ]
 )
 
 
-@app.callback(
-    Output("indicator-graphic", "figure"),
-    Output("indicator-graphic2", "figure"),
-    Output("indicator-graphic3", "figure"),
+@callback(
+    Output("graphic-resultsanalysis", "figure"),
+    Output("graphic-resultsanalysis-2", "figure"),
+    Output("graphic-resultsanalysis-3", "figure"),
     Input("dataset", "value"),
     Input("label", "value"),
     Input("iso3c", "value"),
@@ -845,7 +848,3 @@ def update_graph(
     )
 
     return fig, fig2, fig3
-
-
-if __name__ == "__main__":
-    app.run_server(debug=True)

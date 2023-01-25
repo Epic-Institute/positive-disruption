@@ -1,12 +1,13 @@
-from dash import Dash, dcc, html, Input, Output
+import dash
+from dash import dcc, html, callback, Input, Output
 import plotly.graph_objects as go
 import pandas as pd
 
+dash.register_page(__name__, path="/Climate", title="Climate", name="Climate")
+
 df = pd.read_csv("~/positive-disruption/podi/data/output/climate/climate_output.csv")
 
-app = Dash(__name__)
-
-app.layout = html.Div(
+layout = html.Div(
     [
         html.Div(
             children=[
@@ -138,13 +139,13 @@ app.layout = html.Div(
             ]
         ),
         html.Br(),
-        dcc.Graph(id="indicator-graphic"),
+        dcc.Graph(id="graphic-climate"),
     ]
 )
 
 
-@app.callback(
-    Output("indicator-graphic", "figure"),
+@callback(
+    Output("graphic-climate", "figure"),
     Input("dataset", "value"),
     Input("model", "value"),
     Input("scenario", "value"),
@@ -248,7 +249,3 @@ def update_graph(
     )
 
     return fig
-
-
-if __name__ == "__main__":
-    app.run_server(debug=True)

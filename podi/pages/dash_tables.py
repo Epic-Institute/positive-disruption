@@ -1,12 +1,14 @@
-from dash import Dash, dcc, html, Input, Output
-import plotly.graph_objects as go
+import dash
+from dash import dcc, html, callback, Input, Output
 import pandas as pd
+
+dash.register_page(
+    __name__, path="/EnergyBalances", title="Energy Balances", name="Energy Balances"
+)
 
 df = pd.read_csv("/home/n/positive-disruption/podi/data/energy_historical.csv")
 
-app = Dash(__name__)
-
-app.layout = html.Div(
+layout = html.Div(
     [
         html.Div(
             children=[
@@ -213,13 +215,13 @@ app.layout = html.Div(
             ]
         ),
         html.Br(),
-        dcc.Graph(id="indicator-graphic"),
+        dcc.Graph(id="graphic-tables"),
     ]
 )
 
 
-@app.callback(
-    Output("indicator-graphic", "figure"),
+@callback(
+    Output("graphic-tables", "figure"),
     Input("model", "value"),
     Input("scenario", "value"),
     Input("region", "value"),
@@ -714,7 +716,3 @@ def update_graph(
     )
 
     return energy_balance.astype(int)
-
-
-if __name__ == "__main__":
-    app.run_server(debug=True)

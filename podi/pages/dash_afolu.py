@@ -1,13 +1,14 @@
-from dash import Dash, dcc, html, Input, Output
+import dash
+from dash import callback, dcc, html, Input, Output
 import plotly.graph_objects as go
 import pandas as pd
+
+dash.register_page(__name__, path="/AFOLU", title="AFOLU", name="AFOLU")
 
 df = pd.read_csv("~/positive-disruption/podi/data/afolu_output.csv")
 df2 = pd.read_csv("~/positive-disruption/podi/data/TNC/afolu_historical.csv")
 
-app = Dash(__name__)
-
-app.layout = html.Div(
+layout = html.Div(
     [
         html.Div(
             children=[
@@ -200,7 +201,7 @@ app.layout = html.Div(
             ]
         ),
         html.Br(),
-        dcc.Graph(id="indicator-graphic"),
+        dcc.Graph(id="graphic-afolu"),
         html.Br(),
         html.Label("DATASET 2", style={"font-weight": "bold"}),
         html.Br(),
@@ -305,14 +306,14 @@ app.layout = html.Div(
                 ),
             ],
         ),
-        dcc.Graph(id="indicator-graphic2"),
+        dcc.Graph(id="graphic-afolu-2"),
     ]
 )
 
 
-@app.callback(
-    Output("indicator-graphic", "figure"),
-    Output("indicator-graphic2", "figure"),
+@callback(
+    Output("graphic-afolu", "figure"),
+    Output("graphic-afolu-2", "figure"),
     Input("dataset", "value"),
     Input("dataset2", "value"),
     Input("model", "value"),
@@ -511,7 +512,3 @@ def update_graph(
     )
 
     return fig, fig2
-
-
-if __name__ == "__main__":
-    app.run_server(debug=True)
