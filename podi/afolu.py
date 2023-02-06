@@ -523,8 +523,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     ).rename(index={"baseline": scenario})
 
     # Join historical analog model with historical data at point where projection curve
-    # results in smooth growth (since historical analogs are at different points on their
-    # modeled adoption curve than the NCS pathways to which they are being compared)
+    # results in smooth growth (since historical analogs are at different points on
+    # their modeled adoption curve than the NCS pathways to which they are being
+    # compared)
 
     def rep(x):
         x0 = x
@@ -567,8 +568,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     # endregion
 
-    # Create afolu_baseline by copying afolu_historical and changing the scenario name to
-    # 'baseline'
+    # Create afolu_baseline by copying afolu_historical and changing the scenario name
+    # to 'baseline'
 
     # region
 

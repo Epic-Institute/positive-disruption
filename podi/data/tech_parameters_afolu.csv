@@ -345,3 +345,45 @@ PD22,pathway,World ,Enteric Fermentation|parameter b min,0
 PD22,baseline,World ,Enteric Fermentation|parameter b min,0
 PD22,pathway,World ,Enteric Fermentation|saturation point,0.6
 PD22,baseline,World ,Enteric Fermentation|saturation point,0
+PD22,pathway,World ,Manure left on Pasture|Floor,0
+PD22,baseline,World ,Manure left on Pasture|Floor,0
+PD22,pathway,World ,Manure left on Pasture|Max annual growth,100
+PD22,baseline,World ,Manure left on Pasture|Max annual growth,0
+PD22,pathway,World ,Manure left on Pasture|parameter a max,0.5
+PD22,baseline,World ,Manure left on Pasture|parameter a max,0
+PD22,pathway,World ,Manure left on Pasture|parameter a min,0
+PD22,baseline,World ,Manure left on Pasture|parameter a min,0
+PD22,pathway,World ,Manure left on Pasture|parameter b max,2
+PD22,baseline,World ,Manure left on Pasture|parameter b max,100
+PD22,pathway,World ,Manure left on Pasture|parameter b min,0
+PD22,baseline,World ,Manure left on Pasture|parameter b min,0
+PD22,pathway,World ,Manure left on Pasture|saturation point,0.6
+PD22,baseline,World ,Manure left on Pasture|saturation point,0
+PD22,pathway,World ,Manure Management|Floor,0
+PD22,baseline,World ,Manure Management|Floor,0
+PD22,pathway,World ,Manure Management|Max annual growth,100
+PD22,baseline,World ,Manure Management|Max annual growth,0
+PD22,pathway,World ,Manure Management|parameter a max,0.5
+PD22,baseline,World ,Manure Management|parameter a max,0
+PD22,pathway,World ,Manure Management|parameter a min,0
+PD22,baseline,World ,Manure Management|parameter a min,0
+PD22,pathway,World ,Manure Management|parameter b max,2
+PD22,baseline,World ,Manure Management|parameter b max,100
+PD22,pathway,World ,Manure Management|parameter b min,0
+PD22,baseline,World ,Manure Management|parameter b min,0
+PD22,pathway,World ,Manure Management|saturation point,0.6
+PD22,baseline,World ,Manure Management|saturation point,0
+PD22,pathway,World ,Manure applied to Soils|Floor,0
+PD22,baseline,World ,Manure applied to Soils|Floor,0
+PD22,pathway,World ,Manure applied to Soils|Max annual growth,100
+PD22,baseline,World ,Manure applied to Soils|Max annual growth,0
+PD22,pathway,World ,Manure applied to Soils|parameter a max,0.5
+PD22,baseline,World ,Manure applied to Soils|parameter a max,0
+PD22,pathway,World ,Manure applied to Soils|parameter a min,0
+PD22,baseline,World ,Manure applied to Soils|parameter a min,0
+PD22,pathway,World ,Manure applied to Soils|parameter b max,2
+PD22,baseline,World ,Manure applied to Soils|parameter b max,100
+PD22,pathway,World ,Manure applied to Soils|parameter b min,0
+PD22,baseline,World ,Manure applied to Soils|parameter b min,0
+PD22,pathway,World ,Manure applied to Soils|saturation point,0.6
+PD22,baseline,World ,Manure applied to Soils|saturation point,0

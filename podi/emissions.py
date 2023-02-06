@@ -29,8 +29,14 @@ def emissions(
 
     # region
 
-    # Load emissions factors from https://www.ipcc-nggip.iges.or.jp/EFDB/find_ef.php?reset= , select 'Energy' and then 'Export to XLS' and save as emissions_factors.csv in podi/data/external/.
-    # Emissions factors attribute emissions to the sector where the emissions are generated, e.g. electricity use in Buildings/Industry is zero emissions since those emissions are attributed to the Electric Power sector. Heat not produced on-site in Buildings/Industry is zero emissions since those emissions are attributed to the Industrial sector.
+    # Load emissions factors from
+    # https://www.ipcc-nggip.iges.or.jp/EFDB/find_ef.php?reset= , select 'Energy' and
+    # then 'Export to XLS' and save as emissions_factors.csv in podi/data/external/.
+    # Emissions factors attribute emissions to the sector where the emissions are
+    # generated, e.g. electricity use in Buildings/Industry is zero emissions since
+    # those emissions are attributed to the Electric Power sector. Heat not
+    # produced on-site in Buildings/Industry is zero emissions since those emissions
+    # are attributed to the Industrial sector.
 
     # Load new df with index matching energy_output
     emissions_factors = pd.DataFrame(
@@ -67,7 +73,8 @@ def emissions(
         axis=1,
     )
 
-    # Multiply energy by emission factors to get emissions estimates. Note that emission factors for non-energy use flows are set to 0
+    # Multiply energy by emission factors to get emissions estimates. Note that
+    # emission factors for non-energy use flows are set to 0
     emissions_energy = energy_output[
         ~(energy_output.reset_index().flow_category == "Non-energy use").values
     ].parallel_apply(
@@ -109,13 +116,17 @@ def emissions(
 
     # region
 
-    # Create emissions factors using timeseries of average mitigation potential flux of each subvertical
+    # Create emissions factors using timeseries of average mitigation potential flux
+    # of each subvertical
     # region
 
-    # Define a function that takes piecewise functions as input and outputs a continuous timeseries (this is used for input data provided for (1) maximum extent, and (2) average mitigation potential flux)
+    # Define a function that takes piecewise functions as input and outputs a
+    # continuous timeseries (this is used for input data provided for (1) maximum
+    # extent, and (2) average mitigation potential flux)
     def piecewise_to_continuous(variable):
 
-        # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors' google spreadsheet
+        # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors'
+        # google spreadsheet
         name = (
             pd.read_csv("podi/data/TNC/flux.csv")
             .drop(columns=["Region Group", "Region"])
@@ -130,13 +141,15 @@ def emissions(
             .replace("Pathway", scenario)
         )
 
-        # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
+        # Create a 'variable' column that concatenates the 'Subvertical' and
+        # 'Metric' columns
         name["variable"] = name.parallel_apply(
             lambda x: "|".join([x["Subvertical"], x["Metric"]]), axis=1
         )
         name.drop(columns=["Subvertical", "Metric"], inplace=True)
 
-        # Filter for rows that have 'variable' (either 'Max extent' or 'Avg mitigation potential flux')
+        # Filter for rows that have 'variable' (either 'Max extent' or 'Avg
+        # mitigation potential flux')
         name = name[name["variable"].str.contains(variable)]
 
         # If Value 1 is 'NA', set to 0
@@ -152,7 +165,8 @@ def emissions(
             name["Value 3"].isna(), name["Value 2"], name["Value 3"]
         )
 
-        # If Duration 1 is 'NA' or longer than proj_end_year - afolu_output.columns[0], set to proj_end_year - afolu_output.columns[0]
+        # If Duration 1 is 'NA' or longer than proj_end_year -
+        # afolu_output.columns[0], set to proj_end_year - afolu_output.columns[0]
         name["Duration 1 (Years)"] = np.where(
             (
                 (name["Duration 1 (Years)"].isna())
@@ -195,7 +209,8 @@ def emissions(
             dtype=float,
         )
 
-        # Define a function that places values in each timeseries for the durations specified, and interpolates
+        # Define a function that places values in each timeseries for the
+        # durations specified, and interpolates
         def rep(x):
             x0 = x
             x0.loc[afolu_output.columns[0]] = x.name[5]
@@ -284,7 +299,8 @@ def emissions(
     # Combine flux estimates
     flux = pd.concat([flux, flux_avoided])
 
-    # Change flux units for Nitrogen Fertilizer Management from MtCO2e/percentile improvement to tCO2e/percentile improvement, to match other subverticals
+    # Change flux units for Nitrogen Fertilizer Management from MtCO2e/percentile
+    # improvement to tCO2e/percentile improvement, to match other subverticals
     flux = pd.concat(
         [
             flux[
@@ -302,7 +318,8 @@ def emissions(
         ]
     )
 
-    # Change flux units for tCO2e/ha to tCO2e/Mha, which matches the current units for afolu_output (Mha)
+    # Change flux units for tCO2e/ha to tCO2e/Mha, which matches the current units
+    # for afolu_output (Mha)
     flux = pd.concat(
         [
             flux[~(flux.reset_index().unit.isin(["tCO2e/ha/yr"])).values],
@@ -480,7 +497,8 @@ def emissions(
     emissions_afolu = emissions_afolu.multiply(1e-3)
     emissions_afolu = emissions_afolu.rename(index={"kilotonnes": "Mt"})
 
-    # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
+    # Drop rows with NaN in index and/or all year columns, representing duplicate
+    # regions and/or emissions
     emissions_afolu = emissions_afolu[
         ~(
             (emissions_afolu.index.get_level_values(3).isna())
@@ -506,7 +524,9 @@ def emissions(
     # Multiply afolu_output by emissions factors to get emissions estimates
     # region
 
-    # Calculate emissions mitigated by multiplying adoption in each year by avg mitigtation potential flux (over the entire range of year to proj_end_year), to represent the time-dependent mitigation flux for adoption in each year
+    # Calculate emissions mitigated by multiplying adoption in each year by avg
+    # mitigtation potential flux (over the entire range of year to proj_end_year), to
+    # represent the time-dependent mitigation flux for adoption in each year
     emissions_afolu_mitigated = pd.DataFrame(
         index=afolu_output.index, columns=afolu_output.columns
     )
@@ -637,7 +657,9 @@ def emissions(
 
     # Add missing GWP values to gwp
     # Choose version of GWP values
-    version = "AR6GWP100"  # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100', 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
+    version = "AR6GWP100"
+    # Choose from ['SARGWP100', 'AR4GWP100', 'AR5GWP100', 'AR5CCFGWP100', 'AR6GWP100',
+    # 'AR6GWP20', 'AR6GWP500', 'AR6GTP100']
 
     gwp.data[version].update(
         {
@@ -922,7 +944,8 @@ def emissions(
         }
     )
 
-    # Drop rows with NaN in index and/or all year columns, representing duplicate regions and/or emissions
+    # Drop rows with NaN in index and/or all year columns, representing duplicate
+    # regions and/or emissions
     emissions_additional = emissions_additional[
         ~(
             (emissions_additional.index.get_level_values(1).isna())
@@ -931,7 +954,8 @@ def emissions(
         )
     ]
 
-    # Save last valid index for emissions_additional (it changes, but the value here is used later)
+    # Save last valid index for emissions_additional (it changes, but the value here
+    # is used later)
     emissions_additional_last_valid_index = emissions_additional.columns.max()
 
     # Create projections by applying most current data value to all future years
@@ -1142,7 +1166,8 @@ def emissions(
         ]
     )
 
-    # Project additional emissions using percent change in energy emissions in the energy sector
+    # Project additional emissions using percent change in energy emissions in the
+    # energy sector
     percent_change = (
         emissions_energy[
             (
@@ -1626,9 +1651,10 @@ def emissions(
         ef_ratio.index.get_level_values(3) == "Enteric Fermentation|Floor"
     ].sort_index()
 
-    # Clear afolu_adoption_curves.csv, and run adoption_projection_demand() to calculate logistics curves for energy reduction ratios
+    # Clear afolu_adoption_curves.csv, and run adoption_projection_demand() to
+    # calculate logistics curves for afolu reduction ratios
 
-    # Clear afolu_adoption_curves.csv and energy_ef_ratio.csv
+    # Clear afolu_adoption_curves.csv and afolu_ef_ratio.csv
     if os.path.exists("podi/data/afolu_adoption_curves.csv"):
         os.remove("podi/data/afolu_adoption_curves.csv")
     if os.path.exists("podi/data/afolu_ef_ratios.csv"):
@@ -1746,7 +1772,7 @@ def emissions(
             input_data=x,
             scenario=scenario,
             data_end_year=data_end_year + 1,
-            saturation_year=2034,
+            saturation_year=2043,
             proj_end_year=proj_end_year,
         ),
         axis=1,
@@ -1775,7 +1801,7 @@ def emissions(
         .set_index(["model", "scenario", "region", "product_short"])
     ).sort_index()
 
-    # Prepare df for multiplication with energy
+    # Prepare df for multiplication with emissions
     ef_ratios = ef_ratios.parallel_apply(
         lambda x: 1 - (1 - x.max()) * (x - x.min()) / x.max(), axis=1
     )
@@ -1805,6 +1831,696 @@ def emissions(
                 & (
                     emissions_output_co2e.reset_index().product_long
                     == "Enteric Fermentation"
+                )
+            ).values
+        ]
+        .loc[:, data_end_year:]
+        .parallel_apply(
+            lambda x: x.mul(ef_ratios.loc[:, data_end_year:].squeeze().values),
+            axis=1,
+        )
+    )
+
+    # endregion
+
+    ###################################
+    #  REDUCE MANURE LEFT ON PASTURE  #
+    ###################################
+
+    # region
+
+    # Calculate reduction factors that scale down Manure left on Pasture over time
+
+    # Load saturation points for reduction ratios
+    ef_ratio = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/tech_parameters_afolu.csv",
+            )
+        )
+        .set_index(["model", "scenario", "region", "variable"])
+        .loc[
+            slice(None),
+            "pathway",
+            slice(None),
+            [
+                "Manure left on Pasture|Floor",
+                "Manure left on Pasture|Max annual growth",
+                "Manure left on Pasture|parameter a max",
+                "Manure left on Pasture|parameter a min",
+                "Manure left on Pasture|parameter b max",
+                "Manure left on Pasture|parameter b min",
+                "Manure left on Pasture|saturation point",
+            ],
+        ]
+    )
+
+    parameters = ef_ratio
+
+    ef_ratio = ef_ratio[
+        ef_ratio.index.get_level_values(3) == "Manure left on Pasture|Floor"
+    ].sort_index()
+
+    # Clear afolu_adoption_curves.csv, and run adoption_projection_demand() to
+    # calculate logistics curves for afolu reduction ratios
+
+    # Clear afolu_adoption_curves.csv and afolu_ef_ratio.csv
+    if os.path.exists("podi/data/afolu_adoption_curves.csv"):
+        os.remove("podi/data/afolu_adoption_curves.csv")
+    if os.path.exists("podi/data/afolu_ef_ratios.csv"):
+        os.remove("podi/data/afolu_ef_ratios.csv")
+
+    def adoption_projection_demand(
+        parameters,
+        input_data,
+        scenario,
+        data_end_year,
+        saturation_year,
+        proj_end_year,
+    ):
+        def linear(x, a, b, c, d):
+            return a * x + d
+
+        def logistic(x, a, b, c, d):
+            return c / (1 + np.exp(-a * (x - b))) + d
+
+        # Create x array (year) and y array (linear scale from zero to saturation value)
+        x_data = np.arange(0, proj_end_year - data_end_year + 1, 1)
+        y_data = np.zeros((1, len(x_data)))
+        y_data[:] = np.NaN
+        y_data = y_data.squeeze().astype(float)
+        y_data[0] = 0
+        y_data[saturation_year - data_end_year] = parameters.loc[
+            "Manure left on Pasture|saturation point",
+        ].values[0]
+
+        y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
+
+        # Load search bounds for logistic function parameters
+        search_bounds = [
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure left on Pasture|parameter a min"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure left on Pasture|parameter a max"].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure left on Pasture|parameter b min"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure left on Pasture|parameter b max"].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure left on Pasture|saturation point"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure left on Pasture|saturation point"].value
+                ),
+            ),
+            (
+                0,
+                0,
+            ),
+        ]
+
+        # Define sum of squared error function
+        def sum_of_squared_error(parameters):
+            return np.sum((y_data - logistic(x_data, *parameters)) ** 2.0)
+
+        # Generate genetic_parameters. For baseline scenarios, projections are linear
+        if scenario == "baseline":
+            y = linear(
+                x_data,
+                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                (y_data[-1]),
+            )
+            genetic_parameters = [0, 0, 0, 0]
+        else:
+            genetic_parameters = differential_evolution(
+                sum_of_squared_error,
+                search_bounds,
+                seed=3,
+                polish=False,
+                updating="immediate",
+                mutation=(0, 1),
+            ).x
+
+        y = np.array(logistic(x_data, *genetic_parameters))
+
+        pd.concat(
+            [
+                pd.DataFrame(
+                    np.array(
+                        [
+                            input_data.name[0],
+                            input_data.name[1],
+                            input_data.name[2],
+                            input_data.name[3],
+                        ]
+                    )
+                ).T,
+                pd.DataFrame(y).T,
+            ],
+            axis=1,
+        ).to_csv(
+            "podi/data/afolu_adoption_curves.csv",
+            mode="a",
+            header=None,
+            index=False,
+        )
+
+        return
+
+    ef_ratio.apply(
+        lambda x: adoption_projection_demand(
+            parameters=parameters.loc[x.name[0], x.name[1], x.name[2]],
+            input_data=x,
+            scenario=scenario,
+            data_end_year=data_end_year + 1,
+            saturation_year=2043,
+            proj_end_year=proj_end_year,
+        ),
+        axis=1,
+    )
+
+    ef_ratios = (
+        pd.DataFrame(pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None))
+        .set_axis(
+            pd.concat(
+                [
+                    pd.DataFrame(
+                        np.array(["model", "scenario", "region", "product_short"])
+                    ).T,
+                    pd.DataFrame(
+                        np.linspace(
+                            data_end_year + 1,
+                            proj_end_year,
+                            proj_end_year - data_end_year,
+                        ).astype(int)
+                    ).T,
+                ],
+                axis=1,
+            ).squeeze(),
+            axis=1,
+        )
+        .set_index(["model", "scenario", "region", "product_short"])
+    ).sort_index()
+
+    # Prepare df for multiplication with emissions
+    ef_ratios = ef_ratios.parallel_apply(
+        lambda x: 1 - (1 - x.max()) * (x - x.min()) / x.max(), axis=1
+    )
+
+    ef_ratios = (
+        pd.DataFrame(
+            1,
+            index=ef_ratios.index,
+            columns=np.arange(data_start_year, data_end_year + 1, 1),
+        )
+    ).join(ef_ratios)
+    ef_ratios = ef_ratios.loc[:, : emissions_output_co2e.columns[-1]]
+    ef_ratios = ef_ratios.sort_index()
+
+    ef_ratios.to_csv("podi/data/afolu_ef_ratios.csv")
+
+    ef_ratios.update(
+        ef_ratios.parallel_apply(
+            lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1
+        ).fillna(0)
+    )
+
+    emissions_output_co2e.update(
+        emissions_output_co2e[
+            (
+                (emissions_output_co2e.reset_index().scenario == "pathway")
+                & (
+                    emissions_output_co2e.reset_index().product_long
+                    == "Manure left on Pasture"
+                )
+            ).values
+        ]
+        .loc[:, data_end_year:]
+        .parallel_apply(
+            lambda x: x.mul(ef_ratios.loc[:, data_end_year:].squeeze().values),
+            axis=1,
+        )
+    )
+
+    # endregion
+
+    ##############################
+    #  REDUCE MANURE MANAGEMENT  #
+    ##############################
+
+    # region
+
+    # Calculate reduction factors that scale down Manure Management over time
+
+    # Load saturation points for reduction ratios
+    ef_ratio = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/tech_parameters_afolu.csv",
+            )
+        )
+        .set_index(["model", "scenario", "region", "variable"])
+        .loc[
+            slice(None),
+            "pathway",
+            slice(None),
+            [
+                "Manure Management|Floor",
+                "Manure Management|Max annual growth",
+                "Manure Management|parameter a max",
+                "Manure Management|parameter a min",
+                "Manure Management|parameter b max",
+                "Manure Management|parameter b min",
+                "Manure Management|saturation point",
+            ],
+        ]
+    )
+
+    parameters = ef_ratio
+
+    ef_ratio = ef_ratio[
+        ef_ratio.index.get_level_values(3) == "Manure Management|Floor"
+    ].sort_index()
+
+    # Clear afolu_adoption_curves.csv, and run adoption_projection_demand() to
+    # calculate logistics curves for afolu reduction ratios
+
+    # Clear afolu_adoption_curves.csv and afolu_ef_ratio.csv
+    if os.path.exists("podi/data/afolu_adoption_curves.csv"):
+        os.remove("podi/data/afolu_adoption_curves.csv")
+    if os.path.exists("podi/data/afolu_ef_ratios.csv"):
+        os.remove("podi/data/afolu_ef_ratios.csv")
+
+    def adoption_projection_demand(
+        parameters,
+        input_data,
+        scenario,
+        data_end_year,
+        saturation_year,
+        proj_end_year,
+    ):
+        def linear(x, a, b, c, d):
+            return a * x + d
+
+        def logistic(x, a, b, c, d):
+            return c / (1 + np.exp(-a * (x - b))) + d
+
+        # Create x array (year) and y array (linear scale from zero to saturation value)
+        x_data = np.arange(0, proj_end_year - data_end_year + 1, 1)
+        y_data = np.zeros((1, len(x_data)))
+        y_data[:] = np.NaN
+        y_data = y_data.squeeze().astype(float)
+        y_data[0] = 0
+        y_data[saturation_year - data_end_year] = parameters.loc[
+            "Manure Management|saturation point",
+        ].values[0]
+
+        y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
+
+        # Load search bounds for logistic function parameters
+        search_bounds = [
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure Management|parameter a min"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure Management|parameter a max"].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure Management|parameter b min"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure Management|parameter b max"].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure Management|saturation point"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure Management|saturation point"].value
+                ),
+            ),
+            (
+                0,
+                0,
+            ),
+        ]
+
+        # Define sum of squared error function
+        def sum_of_squared_error(parameters):
+            return np.sum((y_data - logistic(x_data, *parameters)) ** 2.0)
+
+        # Generate genetic_parameters. For baseline scenarios, projections are linear
+        if scenario == "baseline":
+            y = linear(
+                x_data,
+                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                (y_data[-1]),
+            )
+            genetic_parameters = [0, 0, 0, 0]
+        else:
+            genetic_parameters = differential_evolution(
+                sum_of_squared_error,
+                search_bounds,
+                seed=3,
+                polish=False,
+                updating="immediate",
+                mutation=(0, 1),
+            ).x
+
+        y = np.array(logistic(x_data, *genetic_parameters))
+
+        pd.concat(
+            [
+                pd.DataFrame(
+                    np.array(
+                        [
+                            input_data.name[0],
+                            input_data.name[1],
+                            input_data.name[2],
+                            input_data.name[3],
+                        ]
+                    )
+                ).T,
+                pd.DataFrame(y).T,
+            ],
+            axis=1,
+        ).to_csv(
+            "podi/data/afolu_adoption_curves.csv",
+            mode="a",
+            header=None,
+            index=False,
+        )
+
+        return
+
+    ef_ratio.apply(
+        lambda x: adoption_projection_demand(
+            parameters=parameters.loc[x.name[0], x.name[1], x.name[2]],
+            input_data=x,
+            scenario=scenario,
+            data_end_year=data_end_year + 1,
+            saturation_year=2043,
+            proj_end_year=proj_end_year,
+        ),
+        axis=1,
+    )
+
+    ef_ratios = (
+        pd.DataFrame(pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None))
+        .set_axis(
+            pd.concat(
+                [
+                    pd.DataFrame(
+                        np.array(["model", "scenario", "region", "product_short"])
+                    ).T,
+                    pd.DataFrame(
+                        np.linspace(
+                            data_end_year + 1,
+                            proj_end_year,
+                            proj_end_year - data_end_year,
+                        ).astype(int)
+                    ).T,
+                ],
+                axis=1,
+            ).squeeze(),
+            axis=1,
+        )
+        .set_index(["model", "scenario", "region", "product_short"])
+    ).sort_index()
+
+    # Prepare df for multiplication with emissions
+    ef_ratios = ef_ratios.parallel_apply(
+        lambda x: 1 - (1 - x.max()) * (x - x.min()) / x.max(), axis=1
+    )
+
+    ef_ratios = (
+        pd.DataFrame(
+            1,
+            index=ef_ratios.index,
+            columns=np.arange(data_start_year, data_end_year + 1, 1),
+        )
+    ).join(ef_ratios)
+    ef_ratios = ef_ratios.loc[:, : emissions_output_co2e.columns[-1]]
+    ef_ratios = ef_ratios.sort_index()
+
+    ef_ratios.to_csv("podi/data/afolu_ef_ratios.csv")
+
+    ef_ratios.update(
+        ef_ratios.parallel_apply(
+            lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1
+        ).fillna(0)
+    )
+
+    emissions_output_co2e.update(
+        emissions_output_co2e[
+            (
+                (emissions_output_co2e.reset_index().scenario == "pathway")
+                & (
+                    emissions_output_co2e.reset_index().product_long
+                    == "Manure Management"
+                )
+            ).values
+        ]
+        .loc[:, data_end_year:]
+        .parallel_apply(
+            lambda x: x.mul(ef_ratios.loc[:, data_end_year:].squeeze().values),
+            axis=1,
+        )
+    )
+
+    # endregion
+
+    ####################################
+    #  REDUCE MANURE APPLIED TO SOILS  #
+    ####################################
+
+    # region
+
+    # Calculate reduction factors that scale down Manure applied to Soils over time
+
+    # Load saturation points for reduction ratios
+    ef_ratio = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/tech_parameters_afolu.csv",
+            )
+        )
+        .set_index(["model", "scenario", "region", "variable"])
+        .loc[
+            slice(None),
+            "pathway",
+            slice(None),
+            [
+                "Manure applied to Soils|Floor",
+                "Manure applied to Soils|Max annual growth",
+                "Manure applied to Soils|parameter a max",
+                "Manure applied to Soils|parameter a min",
+                "Manure applied to Soils|parameter b max",
+                "Manure applied to Soils|parameter b min",
+                "Manure applied to Soils|saturation point",
+            ],
+        ]
+    )
+
+    parameters = ef_ratio
+
+    ef_ratio = ef_ratio[
+        ef_ratio.index.get_level_values(3) == "Manure applied to Soils|Floor"
+    ].sort_index()
+
+    # Clear afolu_adoption_curves.csv, and run adoption_projection_demand() to
+    # calculate logistics curves for afolu reduction ratios
+
+    # Clear afolu_adoption_curves.csv and afolu_ef_ratio.csv
+    if os.path.exists("podi/data/afolu_adoption_curves.csv"):
+        os.remove("podi/data/afolu_adoption_curves.csv")
+    if os.path.exists("podi/data/afolu_ef_ratios.csv"):
+        os.remove("podi/data/afolu_ef_ratios.csv")
+
+    def adoption_projection_demand(
+        parameters,
+        input_data,
+        scenario,
+        data_end_year,
+        saturation_year,
+        proj_end_year,
+    ):
+        def linear(x, a, b, c, d):
+            return a * x + d
+
+        def logistic(x, a, b, c, d):
+            return c / (1 + np.exp(-a * (x - b))) + d
+
+        # Create x array (year) and y array (linear scale from zero to saturation value)
+        x_data = np.arange(0, proj_end_year - data_end_year + 1, 1)
+        y_data = np.zeros((1, len(x_data)))
+        y_data[:] = np.NaN
+        y_data = y_data.squeeze().astype(float)
+        y_data[0] = 0
+        y_data[saturation_year - data_end_year] = parameters.loc[
+            "Manure applied to Soils|saturation point",
+        ].values[0]
+
+        y_data = np.array((pd.DataFrame(y_data).interpolate()).squeeze())
+
+        # Load search bounds for logistic function parameters
+        search_bounds = [
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure applied to Soils|parameter a min"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure applied to Soils|parameter a max"].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure applied to Soils|parameter b min"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure applied to Soils|parameter b max"].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc["Manure applied to Soils|saturation point"].value
+                ),
+                pd.to_numeric(
+                    parameters.loc["Manure applied to Soils|saturation point"].value
+                ),
+            ),
+            (
+                0,
+                0,
+            ),
+        ]
+
+        # Define sum of squared error function
+        def sum_of_squared_error(parameters):
+            return np.sum((y_data - logistic(x_data, *parameters)) ** 2.0)
+
+        # Generate genetic_parameters. For baseline scenarios, projections are linear
+        if scenario == "baseline":
+            y = linear(
+                x_data,
+                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                (y_data[-1]),
+            )
+            genetic_parameters = [0, 0, 0, 0]
+        else:
+            genetic_parameters = differential_evolution(
+                sum_of_squared_error,
+                search_bounds,
+                seed=3,
+                polish=False,
+                updating="immediate",
+                mutation=(0, 1),
+            ).x
+
+        y = np.array(logistic(x_data, *genetic_parameters))
+
+        pd.concat(
+            [
+                pd.DataFrame(
+                    np.array(
+                        [
+                            input_data.name[0],
+                            input_data.name[1],
+                            input_data.name[2],
+                            input_data.name[3],
+                        ]
+                    )
+                ).T,
+                pd.DataFrame(y).T,
+            ],
+            axis=1,
+        ).to_csv(
+            "podi/data/afolu_adoption_curves.csv",
+            mode="a",
+            header=None,
+            index=False,
+        )
+
+        return
+
+    ef_ratio.apply(
+        lambda x: adoption_projection_demand(
+            parameters=parameters.loc[x.name[0], x.name[1], x.name[2]],
+            input_data=x,
+            scenario=scenario,
+            data_end_year=data_end_year + 1,
+            saturation_year=2043,
+            proj_end_year=proj_end_year,
+        ),
+        axis=1,
+    )
+
+    ef_ratios = (
+        pd.DataFrame(pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None))
+        .set_axis(
+            pd.concat(
+                [
+                    pd.DataFrame(
+                        np.array(["model", "scenario", "region", "product_short"])
+                    ).T,
+                    pd.DataFrame(
+                        np.linspace(
+                            data_end_year + 1,
+                            proj_end_year,
+                            proj_end_year - data_end_year,
+                        ).astype(int)
+                    ).T,
+                ],
+                axis=1,
+            ).squeeze(),
+            axis=1,
+        )
+        .set_index(["model", "scenario", "region", "product_short"])
+    ).sort_index()
+
+    # Prepare df for multiplication with emissions
+    ef_ratios = ef_ratios.parallel_apply(
+        lambda x: 1 - (1 - x.max()) * (x - x.min()) / x.max(), axis=1
+    )
+
+    ef_ratios = (
+        pd.DataFrame(
+            1,
+            index=ef_ratios.index,
+            columns=np.arange(data_start_year, data_end_year + 1, 1),
+        )
+    ).join(ef_ratios)
+    ef_ratios = ef_ratios.loc[:, : emissions_output_co2e.columns[-1]]
+    ef_ratios = ef_ratios.sort_index()
+
+    ef_ratios.to_csv("podi/data/afolu_ef_ratios.csv")
+
+    ef_ratios.update(
+        ef_ratios.parallel_apply(
+            lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1
+        ).fillna(0)
+    )
+
+    emissions_output_co2e.update(
+        emissions_output_co2e[
+            (
+                (emissions_output_co2e.reset_index().scenario == "pathway")
+                & (
+                    emissions_output_co2e.reset_index().product_long
+                    == "Manure applied to Soils"
                 )
             ).values
         ]
@@ -1869,7 +2585,8 @@ def emissions(
         1e6
     )
 
-    # Change 'sector' index to 'product_long' and 'subsector' to 'flow_long' and 'start' to 'year'
+    # Change 'sector' index to 'product_long' and 'subsector' to 'flow_long' and
+    # 'start' to 'year'
     emissions_historical.rename(
         columns={"Tonnes Co2e": "value", "subsector": "product_long", "start": "year"},
         inplace=True,
@@ -1947,7 +2664,8 @@ def emissions(
     emissions_historical.columns = emissions_historical.columns.astype(int)
     emissions_historical = emissions_historical.loc[:, data_start_year:data_end_year]
 
-    # Match modeled (emissions_output_co2e) and observed emissions (emissions_historical) categories across 'model', 'region', 'sector'
+    # Match modeled (emissions_output_co2e) and observed emissions
+    # (emissions_historical) categories across 'model', 'region', 'sector'
 
     emissions_output_co2e_compare = (
         emissions_output_co2e.rename(
