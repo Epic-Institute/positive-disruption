@@ -98,9 +98,10 @@ layout = html.Div(
         html.Br(),
         dcc.Graph(id="graphic-resultsanalysis"),
         # Adoption fit to energy demand growth rate
+        html.Br(),
         html.Div(
             children=[
-                html.Label("Dataset"),
+                html.Label("Dataset 2"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -295,7 +296,7 @@ layout = html.Div(
         # PD Index
         html.Div(
             children=[
-                html.Label("Dataset"),
+                html.Label("Dataset 3"),
                 html.Div(
                     [
                         dcc.RadioItems(

@@ -13,19 +13,26 @@ dataset = ["energy_output"]
 df = pd.read_csv("~/positive-disruption/podi/data/" + dataset[0] + ".csv")
 
 clst = df.columns[
-    ~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1))
+    (~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1)))
+    & (~df.columns.isin(["product_short", "flow_short"]))
 ].tolist()
 
 df.set_index(
     df.columns[
-        ~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1))
+        (~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1)))
+        & (~df.columns.isin(["product_short", "flow_short"]))
     ].tolist(),
     inplace=True,
 )
 
 lst = []
 for level in df.index.names:
-    lst.append(html.Label(level))
+    lst.append(
+        html.Label(
+            level.replace("_", " ").replace("long", "").title(),
+            className="select-label",
+        )
+    )
     lst.append(
         html.Div(
             [
@@ -34,8 +41,8 @@ for level in df.index.names:
                     df.reset_index()[level].unique().tolist(),
                     id=level,
                     multi=True,
-                )
-            ]
+                ),
+            ],
         )
     )
     lst.append(html.Br())
@@ -43,16 +50,21 @@ for level in df.index.names:
 
 layout = html.Div(
     children=[
-        html.Label("Dataset"),
-        html.Div(dcc.RadioItems(dataset, dataset[0], id="dataset")),
-        html.Br(),
+        html.Label("Dataset", className="select-label"),
+        html.Div(
+            dcc.RadioItems(
+                dataset,
+                dataset[0],
+                id="dataset",
+                style={"margin-right": "20px"},
+            )
+        ),
         html.Br(),
         html.Div(lst),
-        html.Br(),
-        html.Label("Y-Axis Type"),
+        html.Label("Y-Axis Type", className="select-label"),
         html.Div([dcc.RadioItems(["Linear", "Log"], "Linear", id="yaxis_type")]),
         html.Br(),
-        html.Label("Y-Axis Unit"),
+        html.Label("Y-Axis Unit", className="select-label"),
         html.Div(
             [
                 dcc.RadioItems(
@@ -63,7 +75,7 @@ layout = html.Div(
             ]
         ),
         html.Br(),
-        html.Label("Group By"),
+        html.Label("Group By", className="select-label"),
         html.Div(
             [
                 dcc.RadioItems(
@@ -74,17 +86,20 @@ layout = html.Div(
             ]
         ),
         html.Br(),
-        html.Label("Chart Type"),
+        html.Label("Chart Type", className="select-label"),
         html.Div(
             [
                 dcc.RadioItems(
-                    {"none": "line", "tonexty": "area"}, "tonexty", id="chart_type"
+                    {"none": "line", "tonexty": "area"},
+                    "tonexty",
+                    id="chart_type",
                 )
             ]
         ),
         html.Br(),
         dcc.Graph(id="graphic-energy"),
-    ]
+        html.Br(),
+    ],
 )
 
 
@@ -118,7 +133,12 @@ def update_graph(
     df = pd.read_csv("~/positive-disruption/podi/data/" + dataset + ".csv")
     df.set_index(
         df.columns[
-            ~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1))
+            (
+                ~df.columns.isin(
+                    f"{i}" for i in range(data_start_year, data_end_year + 1)
+                )
+            )
+            & (~df.columns.isin(["product_short", "flow_short"]))
         ].tolist(),
         inplace=True,
     )

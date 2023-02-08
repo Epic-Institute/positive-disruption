@@ -7,7 +7,6 @@ app = Dash(
     use_pages=True,
 )
 
-
 app.layout = html.Div(
     [
         html.Meta(
@@ -164,80 +163,31 @@ app.layout = html.Div(
                                             className="col-4 select-output",
                                             children=[
                                                 html.Span(
-                                                    "Positive Disruption model output",
+                                                    "Model Output",
                                                     className="select-label",
                                                 ),
                                                 html.Div(
-                                                    dcc.Dropdown(
+                                                    children=html.Div(
                                                         [
-                                                            "AFOLU",
-                                                            "Energy",
-                                                            "Climate",
-                                                            "Emissions",
-                                                            "Energy",
-                                                            "Results Analysis",
-                                                            "Energy Balances",
-                                                        ]
-                                                    ),
-                                                    className="buttons",
-                                                    id="buttons-vector",
-                                                ),
-                                            ],
-                                        ),
-                                        html.Div(
-                                            className="col-3 select-country",
-                                            children=[
-                                                html.Span(
-                                                    "Region", className="select-label"
-                                                ),
-                                                html.Div(
-                                                    className="dropdown",
-                                                    id="dropdown-region",
-                                                    children=[
-                                                        html.Div(
-                                                            className="dropbtn",
-                                                            id="dropbtn-region",
-                                                        ),
-                                                        html.Div(
-                                                            className="dropdown-content",
-                                                            id="regions-search",
-                                                            children=[
-                                                                dcc.Input(
-                                                                    type="text",
-                                                                    id="search-box",
-                                                                    placeholder="Search...",
-                                                                ),
-                                                            ],
-                                                        ),
-                                                        html.Div(
-                                                            id="regions-menu",
-                                                            className="dropdown-content",
-                                                        ),
-                                                    ],
-                                                ),
-                                            ],
-                                        ),
-                                        html.Div(
-                                            className="col-2 select-scenario",
-                                            children=[
-                                                html.Span(
-                                                    "Scenario", className="select-label"
-                                                ),
-                                                html.Div(
-                                                    className="buttons",
-                                                    id="buttons-scenario",
-                                                ),
-                                            ],
-                                        ),
-                                        html.Div(
-                                            className="col-3 select-scenario",
-                                            children=[
-                                                html.Span(
-                                                    "Date", className="select-label"
-                                                ),
-                                                html.Div(
-                                                    className="buttons",
-                                                    id="time-slider",
+                                                            dcc.Dropdown(
+                                                                [
+                                                                    {
+                                                                        "label": dcc.Link(
+                                                                            f"{page['name']}",
+                                                                            href=page[
+                                                                                "relative_path"
+                                                                            ],
+                                                                            className="select-label",
+                                                                        ),
+                                                                        "value": page[
+                                                                            "relative_path"
+                                                                        ],
+                                                                    }
+                                                                    for page in dash.page_registry.values()
+                                                                ],
+                                                            )
+                                                        ],
+                                                    )
                                                 ),
                                             ],
                                         ),
@@ -248,67 +198,8 @@ app.layout = html.Div(
                     ],
                 ),
                 html.Div(className="row ei-border-bottom"),
-                # Results
-                html.Div(
-                    className="row outputs",
-                    children=[
-                        html.Div(
-                            className="col-4",
-                            id="region-details",
-                            children=[
-                                html.Div(
-                                    className="row",
-                                    children=[
-                                        html.Span(id="region-flag"),
-                                        html.Span(id="region-name"),
-                                    ],
-                                ),
-                                html.Div(className="row cia-indicators"),
-                            ],
-                        ),
-                        html.Div(
-                            className="col-8",
-                            id="chart-options-container",
-                            children=[
-                                html.Div(
-                                    id="chart-options",
-                                    children=[
-                                        html.Span(
-                                            "Chart Type",
-                                            className="select-label",
-                                            id="select-chart",
-                                        ),
-                                        html.Div(id="chart-types"),
-                                        html.Div(
-                                            id="filters-col",
-                                            children=[
-                                                html.Div(
-                                                    "Graph options",
-                                                    id="show-filters",
-                                                    className="select-label",
-                                                ),
-                                                html.Div(id="graph-filters"),
-                                            ],
-                                        ),
-                                    ],
-                                ),
-                                html.Div(className="row", id="chart"),
-                            ],
-                        ),
-                    ],
-                ),
             ],
         ),
-        # original
-        html.Div(
-            children=html.Div(
-                [
-                    html.Div(dcc.Link(f"{page['name']}", href=page["relative_path"]))
-                    for page in dash.page_registry.values()
-                ]
-            )
-        ),
-        html.Br(),
         html.Br(),
         dash.page_container,
     ]
