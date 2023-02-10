@@ -97,6 +97,14 @@ layout = html.Div(
             ]
         ),
         html.Br(),
+        dcc.Textarea(
+            id="question",
+            value="Ask a question about the data",
+            style={"width": "50%", "height": 50},
+        ),
+        html.Br(),
+        html.Div(id="answer", style={"whiteSpace": "pre-line"}),
+        html.Br(),
         dcc.Graph(id="graphic-energy"),
         html.Br(),
     ],
@@ -142,6 +150,18 @@ def update_graph(
         ].tolist(),
         inplace=True,
     )
+
+    """
+    # Choose clst from question
+    os.environ["SKETCH_MAX_COLUMNS"] = "20"
+    os.environ["SKETCH_USE_REMOTE_LAMBDAPROMPT"] = "False"
+    os.environ["OPENAI_API_KEY"] = "OPENAI_API_KEY"
+    import sketch
+
+    sketch
+    answer = df.loc[:, "2010":"2015"].sketch.ask(question)
+    """
+
     filtered_df = (
         df.loc[clst, :].groupby([groupby]).sum(numeric_only=True) * unit_val[yaxis_unit]
     )

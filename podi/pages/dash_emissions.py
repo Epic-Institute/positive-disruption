@@ -366,7 +366,7 @@ def update_graph(
         width=1850,
         height=950,
         # legend=dict(font=dict(size=12)),
-        # template="presentation",
+        template="presentation",
     )
 
     fig.update_yaxes(
@@ -595,7 +595,7 @@ def update_graph(
         width=1850,
         height=950,
         # legend=dict(font=dict(size=12)),
-        # template="presentation",
+        template="presentation",
         legend_traceorder="reversed",
     )
 

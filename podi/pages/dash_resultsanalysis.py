@@ -96,7 +96,7 @@ layout = html.Div(
             ]
         ),
         html.Br(),
-        dcc.Graph(id="graphic-resultsanalysis"),
+        dcc.Loading(dcc.Graph(id="graphic-resultsanalysis"), type="default"),
         # Adoption fit to energy demand growth rate
         html.Br(),
         html.Div(
