@@ -21,7 +21,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # Download IEA World Energy Balances. As of Q4 2022, this dataset must be purchased.
+    # Download IEA World Energy Balances. As of Q1 2023, this dataset must be purchased.
     # Choose the ZIP format of the 'World energy balances' file available
     # [here](https://www.iea.org/data-and-statistics/data-product/world-energy-balances).
     # Download the file to `pd/data/IEA` on your local machine and extract the file.
@@ -130,6 +130,18 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         [pd.concat([energy_historical], keys=["baseline"], names=["scenario"])],
         keys=["PD22"],
         names=["model"],
+        
+    )
+
+    # set energy_historical index 'model' and 'scenario' to dtype 'category'
+    energy_historical.index = energy_historical.index.set_levels(
+        energy_historical.index.levels[0].astype("category"),
+        level=0,
+    )
+
+    energy_historical.index = energy_historical.index.set_levels(
+        energy_historical.index.levels[1].astype("category"),
+        level=1,
     )
 
     # Filter product categories that are redundant or unused
@@ -879,15 +891,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         "podi/data/energy_historical.csv"
     )
 
-    # melt energy_historical to long format
-    """
-    energy_historical = energy_historical.reset_index().melt(
-        id_vars=energy_historical.index.names,
-        var_name="year",
-        value_name="value",
-    )
-    """
-
     # endregion
 
     #############################
@@ -957,15 +960,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         ),
         axis=1,
     )
-
-    # melt energy_baseline to long format
-    """
-    energy_baseline = energy_baseline.reset_index().melt(
-        id_vars=energy_baseline.index.names,
-        var_name="year",
-        value_name="value",
-    )
-    """
 
     # Save to CSV file
     if os.path.exists("podi/data/energy_baseline.csv"):
@@ -2090,38 +2084,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     energy_output.index = energy_output.index.droplevel(
         ["hydrogen", "flexible", "nonenergy"]
     )
-
-    """
-    # Drop 'hydrogen', 'flexible', 'nonenergy' flags, melt output to long format, 
-    # and save
-    for output in [
-        (energy_post_upstream, "energy_post_upstream"),
-        (energy_post_addtl_eff, "energy_post_addtl_eff"),
-        (energy_electrified, "energy_electrified"),
-        (energy_reduced_electrified, "energy_reduced_electrified"),
-        (energy_output, "energy_output"),
-        (energy_percent, "energy_percent"),
-    ]:
-        output[0].groupby(
-            [
-                "model",
-                "scenario",
-                "region",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_long",
-                "flow_short",
-                "unit",
-            ]
-        ).sum().sort_index().reset_index().melt(
-        id_vars=energy_historical.index.names,
-        var_name="year",
-        value_name="value",
-    ).to_csv("podi/data/" + output[1] + ".csv")
-    """
 
     # Drop 'hydrogen', 'flexible', 'nonenergy' flags and save
     for output in [

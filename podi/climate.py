@@ -1,9 +1,10 @@
 # region
 
-import numpy as np
 import pandas as pd
 import fair
-from scipy.stats import gamma
+from fair import FAIR
+from fair.io import read_properties
+from fair.interface import fill, initialise
 
 # endregion
 
@@ -90,7 +91,8 @@ def climate(
 
     # region
 
-    # Drop 'Electricity output' and 'Heat output' to avoid double counting when summing emissions
+    # Drop 'Electricity output' and 'Heat output' to avoid double counting when
+    # summing emissions
     emissions_output = emissions_output[
         ~(
             emissions_output.reset_index().flow_category.isin(
@@ -101,25 +103,17 @@ def climate(
 
     # Rename emissions_output gases to match required inputs for FAIR
 
-    # SO2 to SOx
-    emissions_output.rename(index={"SO2": "SOx"}, inplace=True)
+    # SO2 to Sulfur
+    emissions_output.rename(index={"SO2": "Sulfur"}, inplace=True)
+    emissions_output_co2e.rename(index={"SO2": "Sulfur"}, inplace=True)
 
-    # Drop dashes
-    for gas in [
-        "HFC-23",
-        "HFC-32",
-        "HFC-125",
-        "HFC-134a",
-        "HFC-143a",
-        "HFC-227ea",
-        "HFC-245fa",
-        "HCFC-141b",
-        "HCFC-142b",
-    ]:
-        emissions_output.rename(index={gas: gas.replace("-", "")}, inplace=True)
+    # NMVOC to VOC
+    emissions_output.rename(index={"NMVOC": "VOC"}, inplace=True)
+    emissions_output_co2e.rename(index={"NMVOC": "VOC"}, inplace=True)
 
-    # 'HFC-43-10-mee' to 'HFC43-10'
-    emissions_output.rename(index={"HFC-43-10-mee": "HFC43-10"}, inplace=True)
+    # 'HFC-43-10-mee' to 'HFC-4310mee'
+    emissions_output.rename(index={"HFC-43-10-mee": "HFC-4310mee"}, inplace=True)
+    emissions_output_co2e.rename(index={"HFC-43-10-mee": "HFC-4310mee"}, inplace=True)
 
     # Update emissions that don't list gas in flow_long (these are all CO2)
     emissions_output.reset_index(inplace=True)
@@ -128,56 +122,13 @@ def climate(
     emissions_output_co2 = emissions_output[
         ~(
             emissions_output.flow_long.isin(
-                [
-                    "CH4",
-                    "N2O",
-                    "SOx",
-                    "CO",
-                    "NMVOC",
-                    "NOx",
-                    "BC",
-                    "OC",
-                    "NH3",
-                    "CF4",
-                    "C2F6",
-                    "C6F14",
-                    "HFC23",
-                    "HFC32",
-                    "HFC43-10",
-                    "HFC125",
-                    "HFC134a",
-                    "HFC143a",
-                    "HFC227ea",
-                    "HFC245fa",
-                    "SF6",
-                    "CFC11",
-                    "CFC12",
-                    "CFC113",
-                    "CFC114",
-                    "CFC115",
-                    "CCl4",
-                    "Methyl chloroform",
-                    "HCFC22",
-                    "HCFC141b",
-                    "HCFC142b",
-                    "Halon 1211",
-                    "Halon 1202",
-                    "Halon 1301",
-                    "Halon 2401",
-                    "CH3Br",
-                    "CH3Cl",
-                    "HFC-365mfc",
-                    "C3F8",
-                    "C4F10",
-                    "NF3",
-                    "c-C4F8",
-                    "HFC-134",
-                    "HFC-143",
-                    "HFC-152a",
-                    "HFC-236fa",
-                    "HFC-41",
-                    "C5F12",
-                ]
+                (
+                    {
+                        key: value
+                        for key, value in fair.structure.units.desired_emissions_units.items()
+                        if key not in ["CO2 FFI", "CO2 AFOLU", "CO2"]
+                    }
+                ).keys()
             )
         ).values
     ]
@@ -186,56 +137,13 @@ def climate(
     emissions_output = emissions_output[
         (
             emissions_output.flow_long.isin(
-                [
-                    "CH4",
-                    "N2O",
-                    "SOx",
-                    "CO",
-                    "NMVOC",
-                    "NOx",
-                    "BC",
-                    "OC",
-                    "NH3",
-                    "CF4",
-                    "C2F6",
-                    "C6F14",
-                    "HFC23",
-                    "HFC32",
-                    "HFC43-10",
-                    "HFC125",
-                    "HFC134a",
-                    "HFC143a",
-                    "HFC227ea",
-                    "HFC245fa",
-                    "SF6",
-                    "CFC11",
-                    "CFC12",
-                    "CFC113",
-                    "CFC114",
-                    "CFC115",
-                    "CCl4",
-                    "Methyl chloroform",
-                    "HCFC22",
-                    "HCFC141b",
-                    "HCFC142b",
-                    "Halon 1211",
-                    "Halon 1202",
-                    "Halon 1301",
-                    "Halon 2401",
-                    "CH3Br",
-                    "CH3Cl",
-                    "HFC-365mfc",
-                    "C3F8",
-                    "C4F10",
-                    "NF3",
-                    "c-C4F8",
-                    "HFC-134",
-                    "HFC-143",
-                    "HFC-152a",
-                    "HFC-236fa",
-                    "HFC-41",
-                    "C5F12",
-                ]
+                (
+                    {
+                        key: value
+                        for key, value in fair.structure.units.desired_emissions_units.items()
+                        if key not in ["CO2 FFI", "CO2 AFOLU", "CO2"]
+                    }
+                ).keys()
             )
         ).values
     ]
@@ -244,7 +152,7 @@ def climate(
     emissions_output_co2.drop(columns="flow_long", inplace=True)
     emissions_output_co2["flow_long"] = "CO2"
 
-    # Replace 'CO2' with 'CO2-fossil' for subset
+    # Replace 'CO2' with 'CO2 FFI' for subset
     emissions_output_fossil = emissions_output_co2[
         (
             (emissions_output_co2.flow_long == "CO2")
@@ -262,9 +170,9 @@ def climate(
         ).values
     ].drop(columns="flow_long")
 
-    emissions_output_fossil["flow_long"] = "CO2-fossil"
+    emissions_output_fossil["flow_long"] = "CO2 FFI"
 
-    # Replace 'CO2' with 'CO-landuse' for subset
+    # Replace 'CO2' with 'CO2 AFOLU' for subset
     emissions_output_landuse = emissions_output_co2[
         (
             (emissions_output_co2.flow_long == "CO2")
@@ -272,7 +180,7 @@ def climate(
         ).values
     ].drop(columns="flow_long")
 
-    emissions_output_landuse["flow_long"] = "CO2-landuse"
+    emissions_output_landuse["flow_long"] = "CO2 AFOLU"
 
     # Recombine
     emissions_output_co2 = pd.concat(
@@ -298,52 +206,14 @@ def climate(
         ]
     )
 
-    # List gases that FAIR climate model takes as input, with associated units
-    fair_input_gases = {
-        "CO2-fossil": "GtC/yr",
-        "CO2-landuse": "GtC/yr",
-        "CH4": "Mt/yr",
-        "N2O": "MtN2/yr",
-        "SOx": "MtS/yr",
-        "CO": "Mt/yr",
-        "NMVOC": "Mt/yr",
-        "NOx": "MtN/yr",
-        "BC": "Mt/yr",
-        "OC": "Mt/yr",
-        "NH3": "Mt/yr",
-        "CF4": "kt/yr",
-        "C2F6": "kt/yr",
-        "C6F14": "kt/yr",
-        "HFC23": "kt/yr",
-        "HFC32": "kt/yr",
-        "HFC43-10": "kt/yr",
-        "HFC125": "kt/yr",
-        "HFC134a": "kt/yr",
-        "HFC143a": "kt/yr",
-        "HFC227ea": "kt/yr",
-        "HFC245fa": "kt/yr",
-        "SF6": "kt/yr",
-        "CFC11": "kt/yr",
-        "CFC12": "kt/yr",
-        "CFC113": "kt/yr",
-        "CFC114": "kt/yr",
-        "CFC115": "kt/yr",
-        "CCl4": "kt/yr",
-        "Methyl chloroform": "kt/yr",
-        "HCFC22": "kt/yr",
-        "HCFC141b": "kt/yr",
-        "HCFC142b": "kt/yr",
-        "Halon 1211": "kt/yr",
-        "Halon 1202": "kt/yr",
-        "Halon 1301": "kt/yr",
-        "Halon 2401": "kt/yr",
-        "CH3Br": "kt/yr",
-        "CH3Cl": "kt/yr",
-    }
-
-    # Filter emissions_output to contain only inputs for fair_input_gases
+    # Filter emissions_output to contain only inputs for
+    # fair.structure.units.desired_emissions_units
     emissions_output = emissions_output[
-        (emissions_output.reset_index().flow_long.isin(fair_input_gases.keys())).values
+        (
+            emissions_output.reset_index().flow_long.isin(
+                fair.structure.units.desired_emissions_units.keys()
+            )
+        ).values
     ].sort_index()
 
     # Convert units from emissions_output to assumed units for FAIR model input
@@ -377,158 +247,137 @@ def climate(
 
     for scenario in emissions_output.reset_index().scenario.unique():
 
-        # Add in remaining gases needed for fair_input_gases and format for input into FAIR
+        # Format for input into FAIR
         emissions_output_fair = (
-            pd.concat(
-                [
-                    emissions_output.loc[slice(None), scenario, :]
-                    .groupby(["flow_long"])
-                    .sum()
-                    .T,
-                    pd.DataFrame(
-                        index=emissions_output.columns,
-                        columns=[
-                            "CFC11",
-                            "CFC12",
-                            "CFC113",
-                            "CFC114",
-                            "CFC115",
-                            "CCl4",
-                            "Methyl chloroform",
-                            "HCFC22",
-                            "Halon 1211",
-                            "Halon 1202",
-                            "Halon 1301",
-                            "Halon 2401",
-                            "CH3Br",
-                            "CH3Cl",
-                        ],
-                    ),
-                ],
-                axis=1,
-            )
-            .fillna(0)
-            .reset_index()
+            emissions_output.loc[slice(None), scenario, :]
+            .groupby(["flow_long"])
+            .sum()
+            .T.fillna(0)
+            .rename_axis("year")
         )
 
-        if pd.Series(["year"]).isin(emissions_output_fair.columns.values).any():
-            emissions_output_fair = np.array(
-                emissions_output_fair[list(["year"]) + list(fair_input_gases.keys())]
-            )
-        else:
-            emissions_output_fair = np.array(
-                emissions_output_fair[list(["index"]) + list(fair_input_gases.keys())]
-            )
+        f = FAIR()
+        f.define_time(data_end_year, proj_end_year, 1)
+        f.define_scenarios([scenario])
+        f.define_configs(["high", "central", "low"])
+        species, properties = read_properties()
+        species = list(
+            set(species) & set(emissions_output_fair.columns.tolist())
+        ) + list(["CO2"])
+        properties = {k: v for k, v in properties.items() if k in species}
+        f.define_species(species, properties)
+        f.ghg_method = "leach2021"
+        f.ch4_method = "leach2021"
+        f.allocate()
 
-        C_temp, F_temp, T_temp = fair.forward.fair_scm(
-            emissions=emissions_output_fair,
-            natural=np.zeros((len(emissions_output_fair), 2)),
-            F_solar=1e-3
-            * np.sin(2 * np.pi * np.arange(len(emissions_output_fair)) / 11.5),
-            F_volcanic=-gamma.rvs(
-                1e-6, size=len(emissions_output_fair), random_state=100
-            ),
-        )
-
-        # Gases that FAIR provides as output, with associated units
-        fair_output_gases = {
-            "CO2": "ppm",
-            "CH4": "ppb",
-            "N2O": "ppb",
-            "CF4": "ppt",
-            "C2F6": "ppt",
-            "C6F14": "ppt",
-            "HFC23": "ppt",
-            "HFC32": "ppt",
-            "HFC43-10": "ppt",
-            "HFC125": "ppt",
-            "HFC134a": "ppt",
-            "HFC143a": "ppt",
-            "HFC227ea": "ppt",
-            "HFC245fa": "ppt",
-            "SF6": "ppt",
-            "CFC11": "ppt",
-            "CFC12": "ppt",
-            "CFC113": "ppt",
-            "CFC114": "ppt",
-            "CFC115": "ppt",
-            "CCl4": "ppt",
-            "Methyl chloroform": "ppt",
-            "HCFC22": "ppt",
-            "HCFC141b": "ppt",
-            "HCFC142b": "ppt",
-            "Halon 1211": "ppt",
-            "Halon 1202": "ppt",
-            "Halon 1301": "ppt",
-            "Halon 2401": "ppt",
-            "CH3Br": "ppt",
-            "CH3Cl": "ppt",
-        }
-
-        # Forcing that FAIR provides as output
-        fair_output_forcing = [
-            "CO2",
-            "CH4",
-            "N2O",
-            "All other well-mixed GHGs",
-            "Tropospheric O3",
-            "Stratospheric O3",
-            "Stratospheric water vapour from CH4 oxidation",
-            "Contrails",
-            "Aerosols",
-            "Black carbon on snow",
-            "Land use change",
-            "Volcanic",
-            "Solar",
-        ]
-
-        climate_output_concentration_temp = pd.DataFrame(
-            data=C_temp.T,
-            columns=np.arange(data_start_year, proj_end_year + 1, 1),
-            index=pd.MultiIndex.from_frame(
-                pd.concat(
-                    [
-                        pd.Series(
-                            np.full(len(list(fair_output_gases.keys())), scenario)
-                        ),
-                        pd.Series(fair_output_gases.keys()),
-                    ],
-                    axis=1,
+        # Fill emissions with emissions from Emissions module
+        for config in f.configs:
+            for specie in list(
+                (
+                    pd.DataFrame(f.species)[
+                        ~pd.DataFrame(f.species).isin(["CO2"])
+                    ].dropna()
+                )[0]
+            ):
+                fill(
+                    f.emissions,
+                    emissions_output_fair.loc[int(data_end_year + 1) :][specie].values,
+                    scenario=scenario,
+                    config=config,
+                    specie=specie,
                 )
-            ),
+
+        # Define first timestep
+        initialise(f.forcing, 0)
+        initialise(f.temperature, 0)
+        initialise(f.cumulative_emissions, 0)
+        initialise(f.airborne_emissions, 0)
+
+        # Fill climate configs
+        fill(f.climate_configs["ocean_heat_transfer"], [0.6, 1.3, 1.0], config="high")
+        fill(f.climate_configs["ocean_heat_capacity"], [5, 15, 80], config="high")
+        fill(f.climate_configs["deep_ocean_efficacy"], 1.29, config="high")
+
+        fill(
+            f.climate_configs["ocean_heat_transfer"], [1.1, 1.6, 0.9], config="central"
         )
+        fill(f.climate_configs["ocean_heat_capacity"], [8, 14, 100], config="central")
+        fill(f.climate_configs["deep_ocean_efficacy"], 1.1, config="central")
+
+        fill(f.climate_configs["ocean_heat_transfer"], [1.7, 2.0, 1.1], config="low")
+        fill(f.climate_configs["ocean_heat_capacity"], [6, 11, 75], config="low")
+        fill(f.climate_configs["deep_ocean_efficacy"], 0.8, config="low")
+
+        # Fill species configs with default values
+        FAIR.fill_species_configs(f)
+
+        # Run
+        f.run()
+
+        # Plot
+        pl.plot(
+            f.timebounds,
+            f.temperature.loc[dict(scenario="pathway", layer=0)],
+            label=f.configs,
+        )
+        pl.title("Ramp scenario: temperature")
+        pl.xlabel("year")
+        pl.ylabel("Temperature anomaly (K)")
+        pl.legend()
+
+        for specie in species:
+            pl.figure()
+            pl.plot(
+                f.timebounds,
+                f.concentration.loc[dict(scenario="pathway", specie=specie)],
+                label=f.configs,
+            )
+            pl.title(str(specie) + " concentration")
+            pl.xlabel("year")
+            pl.ylabel("(ppm)")
+            pl.legend()
+
+        # Write to DataFrame
+        climate_output_concentration_temp = (
+            f.concentration.to_dataframe(name="Concentration")
+            .unstack(level=0)
+            .droplevel(level=0, axis=1)
+        )
+        climate_output_concentration_temp.columns = (
+            climate_output_concentration_temp.columns.astype(int)
+        )
+        climate_output_concentration_temp.columns.name = None
         climate_output_concentration_temp.index.set_names(
-            ["scenario", "product_long"], inplace=True
+            "product_long", level=2, inplace=True
         )
 
-        climate_output_forcing_temp = pd.DataFrame(
-            data=F_temp.T,
-            columns=np.arange(data_start_year, proj_end_year + 1, 1),
-            index=pd.MultiIndex.from_frame(
-                pd.concat(
-                    [
-                        pd.Series(np.full(len(list(fair_output_forcing)), scenario)),
-                        pd.Series(fair_output_forcing),
-                    ],
-                    axis=1,
-                )
-            ),
+        climate_output_forcing_temp = (
+            f.forcing.to_dataframe(name="Forcing")
+            .unstack(level=0)
+            .droplevel(level=0, axis=1)
         )
+        climate_output_forcing_temp.columns = (
+            climate_output_forcing_temp.columns.astype(int)
+        )
+        climate_output_forcing_temp.columns.name = None
         climate_output_forcing_temp.index.set_names(
-            ["scenario", "product_long"], inplace=True
+            "product_long", level=2, inplace=True
         )
 
-        climate_output_temperature_temp = pd.DataFrame(
-            data=[T_temp],
-            columns=np.arange(data_start_year, proj_end_year + 1, 1),
-            index=pd.MultiIndex.from_frame(
-                pd.concat(
-                    [pd.Series(scenario), pd.Series("Temperature change")], axis=1
-                )
-            ),
+        climate_output_temperature_temp = (
+            f.temperature.to_dataframe(name="Temperature")
+            .unstack(level=0)
+            .droplevel(level=0, axis=1)
         )
+        climate_output_temperature_temp.columns = (
+            climate_output_temperature_temp.columns.astype(int)
+        )
+        climate_output_temperature_temp.columns.name = None
+        climate_output_temperature_temp = climate_output_temperature_temp[
+            (climate_output_temperature_temp.reset_index().layer == 0).values
+        ]
         climate_output_temperature_temp.index.set_names(
-            ["scenario", "product_long"], inplace=True
+            "product_long", level=2, inplace=True
         )
 
         climate_output_concentration = pd.concat(
@@ -572,60 +421,156 @@ def climate(
 
     # Convert units from emissions_output to assumed units for FAIR model input
     emissions_output_co2e_fair = emissions_output_co2e_fair.groupby(
-        ["scenario", "flow_long"]
+        ["model", "scenario", "flow_long"]
     ).sum()
 
     climate_output_concentration_co2e = pd.DataFrame()
     climate_output_forcing_co2e = pd.DataFrame()
+    climate_output_temperature_co2e = pd.DataFrame()
 
     for scenario in emissions_output_co2e_fair.reset_index().scenario.unique():
 
+        # Format for input into FAIR
         emissions_output_co2e_fair2 = (
-            emissions_output_co2e_fair.loc[scenario, :]
+            emissions_output_co2e_fair.loc[slice(None), scenario, :]
             .groupby(["flow_long"])
             .sum()
-            .values[0]
+            .T.fillna(0)
+            .rename_axis("year")
         )
 
-        C_co2e_temp, F_co2e_temp, T_co2e_temp = fair.forward.fair_scm(
-            emissions=emissions_output_co2e_fair2,
-            natural=np.zeros((len(emissions_output_co2e_fair), 2)),
-            F_solar=1e-3
-            * np.sin(2 * np.pi * np.arange(len(emissions_output_co2e_fair)) / 11.5),
-            F_volcanic=-gamma.rvs(
-                1e-3, size=len(emissions_output_co2e_fair), random_state=100
-            ),
-            useMultigas=False,
-        )
+        f = FAIR()
+        f.define_time(data_end_year, proj_end_year, 1)
+        f.define_scenarios([scenario])
+        f.define_configs(["high", "central", "low"])
+        species, properties = read_properties()
+        species = list(set(species) & set(emissions_output_co2e_fair2.columns.tolist()))
+        properties = {k: v for k, v in properties.items() if k in species}
+        f.define_species(species, properties)
+        f.ghg_method = "leach2021"
+        f.ch4_method = "leach2021"
+        f.allocate()
 
-        climate_output_concentration_co2e_temp = pd.DataFrame(
-            data=[C_co2e_temp],
-            columns=np.arange(data_start_year, proj_end_year + 1, 1),
-            index=pd.MultiIndex.from_frame(
-                pd.concat([pd.Series(scenario), pd.Series("CO2e")], axis=1)
-            ),
+        # Fill emissions with emissions from Emissions module
+        for config in f.configs:
+            for specie in list(
+                (
+                    pd.DataFrame(f.species)[
+                        ~pd.DataFrame(f.species).isin(["CO2"])
+                    ].dropna()
+                )[0]
+            ):
+                fill(
+                    f.emissions,
+                    emissions_output_co2e_fair2.loc[int(data_end_year + 1) :][
+                        specie
+                    ].values,
+                    scenario=scenario,
+                    config=config,
+                    specie=specie,
+                )
+
+        # Define first timestep
+        initialise(f.forcing, 0)
+        initialise(f.temperature, 0)
+        initialise(f.cumulative_emissions, 0)
+        initialise(f.airborne_emissions, 0)
+
+        # Fill climate configs
+        fill(f.climate_configs["ocean_heat_transfer"], [0.6, 1.3, 1.0], config="high")
+        fill(f.climate_configs["ocean_heat_capacity"], [5, 15, 80], config="high")
+        fill(f.climate_configs["deep_ocean_efficacy"], 1.29, config="high")
+
+        fill(
+            f.climate_configs["ocean_heat_transfer"], [1.1, 1.6, 0.9], config="central"
         )
+        fill(f.climate_configs["ocean_heat_capacity"], [8, 14, 100], config="central")
+        fill(f.climate_configs["deep_ocean_efficacy"], 1.1, config="central")
+
+        fill(f.climate_configs["ocean_heat_transfer"], [1.7, 2.0, 1.1], config="low")
+        fill(f.climate_configs["ocean_heat_capacity"], [6, 11, 75], config="low")
+        fill(f.climate_configs["deep_ocean_efficacy"], 0.8, config="low")
+
+        # Fill species configs with default values
+        FAIR.fill_species_configs(f)
+
+        # Run
+        f.run()
+
+        # Plot
+        pl.plot(
+            f.timebounds,
+            f.temperature.loc[dict(scenario="pathway", layer=0)],
+            label=f.configs,
+        )
+        pl.title("Ramp scenario: temperature")
+        pl.xlabel("year")
+        pl.ylabel("Temperature anomaly (K)")
+        pl.legend()
+
+        for specie in species:
+            pl.figure()
+            pl.plot(
+                f.timebounds,
+                f.concentration.loc[dict(scenario="pathway", specie=specie)],
+                label=f.configs,
+            )
+            pl.title(str(specie) + " concentration")
+            pl.xlabel("year")
+            pl.ylabel("(ppm)")
+            pl.legend()
+
+        # Write to DataFrame
+        climate_output_concentration_co2e_temp = (
+            f.concentration.to_dataframe(name="Concentration")
+            .unstack(level=0)
+            .droplevel(level=0, axis=1)
+        )
+        climate_output_concentration_co2e_temp.columns = (
+            climate_output_concentration_co2e_temp.columns.astype(int)
+        )
+        climate_output_concentration_co2e_temp.columns.name = None
         climate_output_concentration_co2e_temp.index.set_names(
-            ["scenario", "product_long"], inplace=True
+            "product_long", level=2, inplace=True
         )
 
-        climate_output_concentration_co2e = pd.concat(
+        climate_output_forcing_co2e_temp = (
+            f.forcing.to_dataframe(name="Forcing")
+            .unstack(level=0)
+            .droplevel(level=0, axis=1)
+        )
+        climate_output_forcing_co2e_temp.columns = (
+            climate_output_forcing_co2e_temp.columns.astype(int)
+        )
+        climate_output_forcing_co2e_temp.columns.name = None
+        climate_output_forcing_co2e_temp.index.set_names(
+            "product_long", level=2, inplace=True
+        )
+
+        climate_output_temperature_co2e_temp = (
+            f.temperature.to_dataframe(name="Temperature")
+            .unstack(level=0)
+            .droplevel(level=0, axis=1)
+        )
+        climate_output_temperature_co2e_temp.columns = (
+            climate_output_temperature_co2e_temp.columns.astype(int)
+        )
+        climate_output_temperature_co2e_temp.columns.name = None
+        climate_output_temperature_co2e_temp = climate_output_temperature_co2e_temp[
+            (climate_output_temperature_co2e_temp.reset_index().layer == 0).values
+        ]
+        climate_output_temperature_co2e_temp.index.set_names(
+            "product_long", level=2, inplace=True
+        )
+
+        climate_output_concentration = pd.concat(
             [climate_output_concentration_co2e_temp, climate_output_concentration_co2e]
         )
-
-        climate_output_forcing_co2e_temp = pd.DataFrame(
-            data=[F_co2e_temp],
-            columns=np.arange(data_start_year, proj_end_year + 1, 1),
-            index=pd.MultiIndex.from_frame(
-                pd.concat([pd.Series(scenario), pd.Series("CO2e")], axis=1)
-            ),
-        )
-        climate_output_forcing_co2e_temp.index.set_names(
-            ["scenario", "product_long"], inplace=True
-        )
-
-        climate_output_forcing_co2e = pd.concat(
+        climate_output_forcing = pd.concat(
             [climate_output_forcing_co2e_temp, climate_output_forcing_co2e]
+        )
+        climate_output_temperature = pd.concat(
+            [climate_output_temperature_co2e_temp, climate_output_temperature_co2e]
         )
 
     # endregion

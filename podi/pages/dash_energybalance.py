@@ -98,14 +98,14 @@ energy_balance = pd.concat(
         ],
         energy_balance.loc[:, "Electricity and Heat"]
         .drop(
-            [
+            labels=[
                 "Electricity",
                 "Heat – High Temperature",
                 "Heat – Low Temperature",
                 "Nuclear",
                 "Hydro",
             ],
-            1,
+            axis=1,
         )
         .sum(axis=1)
         .to_frame()
@@ -652,14 +652,14 @@ def update_graph(
             ],
             energy_balance.loc[:, "Electricity and Heat"]
             .drop(
-                [
+                labels=[
                     "Electricity",
                     "Heat – High Temperature",
                     "Heat – Low Temperature",
                     "Nuclear",
                     "Hydro",
                 ],
-                1,
+                axis=1,
             )
             .sum(axis=1)
             .to_frame()

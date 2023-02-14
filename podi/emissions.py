@@ -1016,7 +1016,7 @@ def emissions(
         lambda x: remove_doublecount(x), axis=1
     )
 
-    # Get F-Gas data
+    # Get F-Gas data (Difference between EDGAR and FAIR: No HFC-41 or HFC-143, HFC-43-10-mee is HFC-4310mee)
     gas_edgar = [
         "C2F6",
         "C3F8",
@@ -1461,7 +1461,7 @@ def emissions(
     # Group modeled emissions into CO2e
     emissions_output_co2e = emissions_output.copy()
 
-    # Remove dashes from gas names to match naming in gwp library
+    # Change gas names to match naming in gwp library
     emissions_output_co2e = emissions_output_co2e.rename(
         index={
             "HCFC-141b": "HCFC141b",
@@ -1608,6 +1608,29 @@ def emissions(
     emissions_output_co2e = emissions_output_co2e[
         emissions_output_co2e.sum(axis=1) != 0
     ].sort_index()
+
+    # Change back gas names to match original
+    emissions_output_co2e = emissions_output_co2e.rename(
+        index={
+            "HCFC141b": "HCFC-141b",
+            "HCFC142b": "HCFC-142b",
+            "HFC125": "HFC-125",
+            "HFC134a": "HFC-134a",
+            "HFC143a": "HFC-143a",
+            "HFC152a": "HFC-152a",
+            "HFC227ea": "HFC-227ea",
+            "HFC245fa": "HFC-245fa",
+            "HFC32": "HFC-32",
+            "HFC365mfc": "HFC-365mfc",
+            "HFC23": "HFC-23",
+            "cC4F8": "c-C4F8",
+            "HFC134": "HFC-134",
+            "HFC143": "HFC-143",
+            "HFC236fa": "HFC-236fa",
+            "HFC41": "HFC-41",
+            "HFC43-10-mee": "HFC-4310mee",
+        }
+    )
 
     # endregion
 
@@ -2533,163 +2556,13 @@ def emissions(
 
     # endregion
 
-    #########################################
-    #  LOAD & COMPARE TO MODELED EMISSIONS  #
-    #########################################
+    #####################################
+    #  HARMONIZE TO OBSERVED EMISSIONS  #
+    #####################################
 
     # region
 
-    # Harmonize modeled emissions projections with observed historical emissions
-
     # https://aneris.readthedocs.io/en/latest/index.html
-
-    # Load historical emissions data from ClimateTRACE
-    emissions_historical = pd.concat(
-        [
-            pd.read_csv(
-                "podi/data/ClimateTRACE/climatetrace_emissions_by_subsector_timeseries_interval_year_since_2015_to_2020.csv",
-                usecols=["Tonnes Co2e", "country", "sector", "subsector", "start"],
-            ),
-            pd.read_csv(
-                "podi/data/ClimateTRACE/climatetrace_emissions_by_subsector_timeseries_sector_forests_since_2015_to_2020_interval_year.csv",
-                usecols=["Tonnes Co2e", "country", "sector", "subsector", "start"],
-            ),
-        ]
-    )
-
-    # Change ISO region names to IEA
-    regions = (
-        pd.DataFrame(
-            pd.read_csv(
-                "podi/data/region_categories.csv",
-                usecols=["WEB Region", "ISO"],
-            ).dropna(axis=0)
-        )
-        .set_index(["ISO"])
-        .rename_axis(index={"ISO": "country"})
-    )
-    regions["WEB Region"] = (regions["WEB Region"]).str.lower()
-
-    # Add model, scenario, and flow_category indices
-    emissions_historical["model"] = "PD22"
-    emissions_historical["scenario"] = "baseline"
-    emissions_historical["product_category"] = "Emissions"
-    emissions_historical["product_short"] = "EM"
-    emissions_historical["flow_category"] = "Emissions"
-    emissions_historical["flow_long"] = "Emissions"
-    emissions_historical["flow_short"] = "EM"
-    emissions_historical["unit"] = "MtCO2e"
-
-    # Change unit from t to Mt
-    emissions_historical["Tonnes Co2e"] = emissions_historical["Tonnes Co2e"].divide(
-        1e6
-    )
-
-    # Change 'sector' index to 'product_long' and 'subsector' to 'flow_long' and
-    # 'start' to 'year'
-    emissions_historical.rename(
-        columns={"Tonnes Co2e": "value", "subsector": "product_long", "start": "year"},
-        inplace=True,
-    )
-
-    # Change 'year' format
-    emissions_historical["year"] = (
-        emissions_historical["year"].str.split("-", expand=True)[0].values.astype(int)
-    )
-
-    # Update Sector index
-    def addsector4(x):
-        if x["sector"] in ["power"]:
-            return "Electric Power"
-        elif x["sector"] in ["transport", "maritime"]:
-            return "Transportation"
-        elif x["sector"] in ["buildings"]:
-            return "Buildings"
-        elif x["sector"] in ["extraction", "manufacturing", "oil and gas", "waste"]:
-            return "Industrial"
-        elif x["sector"] in ["agriculture"]:
-            return "Agriculture"
-        elif x["sector"] in ["forests"]:
-            return "Forests & Wetlands"
-
-    emissions_historical["sector"] = emissions_historical.parallel_apply(
-        lambda x: addsector4(x), axis=1
-    )
-
-    emissions_historical = (
-        (
-            emissions_historical.reset_index()
-            .set_index(["country"])
-            .merge(regions, on=["country"])
-        )
-        .reset_index()
-        .set_index(
-            [
-                "model",
-                "scenario",
-                "WEB Region",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_long",
-                "flow_short",
-                "unit",
-            ]
-        )
-        .rename_axis(index={"WEB Region": "region"})
-    ).drop(columns=["country", "index"])
-
-    # Pivot from long to wide
-    emissions_historical = emissions_historical.reset_index().pivot(
-        index=[
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
-        ],
-        columns="year",
-        values="value",
-    )
-
-    # Select data between data_start_year and data_end_year
-    emissions_historical.columns = emissions_historical.columns.astype(int)
-    emissions_historical = emissions_historical.loc[:, data_start_year:data_end_year]
-
-    # Match modeled (emissions_output_co2e) and observed emissions
-    # (emissions_historical) categories across 'model', 'region', 'sector'
-
-    emissions_output_co2e_compare = (
-        emissions_output_co2e.rename(
-            index={"Residential": "Buildings", "Commercial": "Buildings"}
-        )
-        .groupby(["model", "region", "sector"])
-        .sum()
-    )
-    emissions_historical_compare = emissions_historical.groupby(
-        ["model", "region", "sector"]
-    ).sum()
-
-    # Calculate error between modeled and observed
-    emissions_error = abs(
-        (
-            emissions_historical_compare
-            - emissions_output_co2e_compare.loc[:, emissions_historical_compare.columns]
-        )
-        / emissions_historical_compare.loc[:, emissions_historical_compare.columns]
-    )
-
-    # Drop observed emissions that are all zero
-    emissions_error.replace([np.inf, -np.inf], np.nan, inplace=True)
-    emissions_error.dropna(how="all", inplace=True)
 
     # endregion
 
