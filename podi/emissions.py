@@ -94,19 +94,11 @@ def emissions(
             ).values
         ].multiply(0)
     )
-    """
-    # Drop flow_category 'Heat output' in sector 'Industry' to avoid double counting
-    emissions_energy.update(
-        emissions_energy[
-            (
-                (emissions_energy.reset_index().sector == "Industrial")
-                & (emissions_energy.reset_index().flow_category == "Heat output")
-            ).values
-        ].multiply(0)
-    )
-    """
-    # Save to CSV file
-    emissions_energy.to_csv("podi/data/emissions_energy.csv")
+
+    # Save
+    emissions_energy.columns = emissions_energy.columns.astype(str)
+    emissions_energy.to_parquet("podi/data/emissions_energy.parquet")
+    emissions_energy.columns = emissions_energy.columns.astype(int)
 
     # endregion
 
@@ -2572,8 +2564,11 @@ def emissions(
 
     # region
 
-    emissions_output.to_csv("podi/data/emissions_output.csv")
-    emissions_output_co2e.to_csv("podi/data/emissions_output_co2e.csv")
+    emissions_output.columns = emissions_output.columns.astype(str)
+    emissions_output.to_parquet("podi/data/emissions_output.parquet")
+
+    emissions_output_co2e.columns = emissions_output_co2e.columns.astype(str)
+    emissions_output_co2e.to_parquet("podi/data/emissions_output_co2e.parquet")
 
     # endregion
 

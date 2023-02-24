@@ -10,7 +10,9 @@ dash.register_page(
 df = pd.read_csv(
     "~/positive-disruption/podi/data/adoption_analog_output_historical.csv"
 )
-df2 = pd.read_csv("~/positive-disruption/podi/data/adoption_output_historical.csv")
+df2 = pd.read_parquet(
+    "~/positive-disruption/podi/data/adoption_output_historical.parquet"
+).reset_index()
 df3 = pd.read_csv("~/positive-disruption/podi/data/adoption_output_projections.csv")
 
 layout = html.Div(

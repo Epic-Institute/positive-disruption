@@ -52,34 +52,24 @@ index = [
     "unit",
 ]
 
-energy_post_upstream = pd.DataFrame(
-    pd.read_csv("podi/data/energy_post_upstream.csv")
-).set_index(index)
+energy_post_upstream = pd.read_parquet("podi/data/energy_post_upstream.parquet")
 energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
 
-energy_post_addtl_eff = pd.DataFrame(
-    pd.read_csv("podi/data/energy_post_addtl_eff.csv")
-).set_index(index)
+energy_post_addtl_eff = pd.read_parquet("podi/data/energy_post_addtl_eff.parquet")
 energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
-energy_electrified = pd.DataFrame(
-    pd.read_csv("podi/data/energy_electrified.csv")
-).set_index(index)
+energy_electrified = pd.read_parquet("podi/data/energy_electrified.parquet")
 energy_electrified.columns = energy_electrified.columns.astype(int)
 
-energy_reduced_electrified = pd.DataFrame(
-    pd.read_csv("podi/data/energy_reduced_electrified.csv")
-).set_index(index)
+energy_reduced_electrified = pd.read_parquet(
+    "podi/data/energy_reduced_electrified.parquet"
+)
 energy_reduced_electrified.columns = energy_reduced_electrified.columns.astype(int)
 
-energy_output = pd.DataFrame(pd.read_csv("podi/data/energy_output.csv")).set_index(
-    index
-)
+energy_output = pd.read_parquet("podi/data/energy_output.parquet")
 energy_output.columns = energy_output.columns.astype(int)
 
-energy_percent = pd.DataFrame(pd.read_csv("podi/data/energy_percent.csv")).set_index(
-    index
-)
+energy_percent = pd.read_parquet("podi/data/energy_percent.parquet")
 energy_percent.columns = energy_percent.columns.astype(int)
 
 # endregion
@@ -142,14 +132,10 @@ index = [
     "flow_short",
     "unit",
 ]
-emissions_output = pd.DataFrame(
-    pd.read_csv("podi/data/emissions_output.csv")
-).set_index(index)
+emissions_output = pd.read_parquet("podi/data/emissions_output.parquet")
 emissions_output.columns = emissions_output.columns.astype(int)
 
-emissions_output_co2e = pd.DataFrame(
-    pd.read_csv("podi/data/emissions_output_co2e.csv")
-).set_index(index)
+emissions_output_co2e = pd.read_parquet("podi/data/emissions_output_co2e.parquet")
 emissions_output_co2e.columns = emissions_output_co2e.columns.astype(int)
 
 # endregion
@@ -319,9 +305,7 @@ adoption_output_projections = pd.DataFrame(
 )
 adoption_output_projections.columns = adoption_output_projections.columns.astype(int)
 
-emissions_wedges = pd.DataFrame(
-    pd.read_csv("podi/data/emissions_wedges.csv")
-).set_index(index)
+emissions_wedges = pd.read_parquet("podi/data/emissions_wedges.parquet")
 emissions_wedges.columns = emissions_wedges.columns.astype(int)
 
 # endregion

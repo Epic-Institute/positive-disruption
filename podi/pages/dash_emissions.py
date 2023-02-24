@@ -2,12 +2,16 @@ import dash
 from dash import dcc, html, callback, Input, Output
 import plotly.graph_objects as go
 import pandas as pd
+import itertools
+import plotly.express as px
 
 dash.register_page(__name__, path="/Emissions", title="Emissions", name="Emissions")
 
 data_end_year = 2020
 
-df = pd.read_csv("~/positive-disruption/podi/data/emissions_output_co2e.csv")
+df = pd.read_parquet(
+    "~/positive-disruption/podi/data/emissions_output_co2e.parquet"
+).reset_index()
 
 layout = html.Div(
     [
@@ -255,11 +259,7 @@ def update_graph(
     unit_val = {"Mt": 1, "Gt": 1e-3}
     stack_type = {"none": None, "tonexty": "1"}
 
-    df = pd.read_csv("~/positive-disruption/podi/data/" + dataset + ".csv")
-
-    df.drop(
-        df.filter(["hydrogen", "flexible", "nonenergy", "unit"]), inplace=True, axis=1
-    )
+    df = pd.read_parquet("~/positive-disruption/podi/data/" + dataset + ".parquet")
 
     hovertemplate = (
         "<b>Year</b>: %{x}" + "<br><b>Emissions</b>: %{y:,.0f} " + yaxis_unit + "<br>"
@@ -267,22 +267,7 @@ def update_graph(
 
     filtered_df = (
         (
-            pd.DataFrame(df)
-            .set_index(
-                [
-                    "model",
-                    "scenario",
-                    "region",
-                    "sector",
-                    "product_category",
-                    "product_long",
-                    "product_short",
-                    "flow_category",
-                    "flow_long",
-                    "flow_short",
-                ]
-            )
-            .loc[
+            df.loc[
                 model,
                 scenario,
                 region,
@@ -325,6 +310,21 @@ def update_graph(
                 stackgroup=stack_type[chart_type],
                 showlegend=True,
                 hovertemplate=hovertemplate,
+                fillcolor=list(
+                    itertools.chain.from_iterable(
+                        itertools.repeat(
+                            px.colors.qualitative.Prism
+                            + px.colors.qualitative.Antique
+                            + px.colors.qualitative.Dark24
+                            + px.colors.qualitative.Pastel1
+                            + px.colors.qualitative.Pastel2
+                            + px.colors.qualitative.Set1
+                            + px.colors.qualitative.Set2
+                            + px.colors.qualitative.Set3,
+                            10,
+                        )
+                    )
+                )[filtered_df.reset_index()[groupby].unique().tolist().index(sub)],
             )
         )
 
@@ -379,22 +379,7 @@ def update_graph(
     filtered_df2 = (
         (
             (
-                pd.DataFrame(df)
-                .set_index(
-                    [
-                        "model",
-                        "scenario",
-                        "region",
-                        "sector",
-                        "product_category",
-                        "product_long",
-                        "product_short",
-                        "flow_category",
-                        "flow_long",
-                        "flow_short",
-                    ]
-                )
-                .loc[
+                df.loc[
                     model,
                     "baseline",
                     region,
@@ -409,22 +394,7 @@ def update_graph(
                 .groupby([groupby])
                 .sum()
                 - (
-                    pd.DataFrame(df)
-                    .set_index(
-                        [
-                            "model",
-                            "scenario",
-                            "region",
-                            "sector",
-                            "product_category",
-                            "product_long",
-                            "product_short",
-                            "flow_category",
-                            "flow_long",
-                            "flow_short",
-                        ]
-                    )
-                    .loc[
+                    df.loc[
                         model,
                         "pathway",
                         region,
@@ -454,36 +424,18 @@ def update_graph(
 
     fig2 = go.Figure()
 
-    spacer = (
-        pd.DataFrame(df)
-        .set_index(
-            [
-                "model",
-                "scenario",
-                "region",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_long",
-                "flow_short",
-            ]
-        )
-        .loc[
-            model,
-            "pathway",
-            region,
-            sector,
-            product_category,
-            product_long,
-            product_short,
-            flow_category,
-            flow_long,
-            flow_short,
-        ]
-        .sum()
-    )
+    spacer = df.loc[
+        model,
+        "pathway",
+        region,
+        sector,
+        product_category,
+        product_long,
+        product_short,
+        flow_category,
+        flow_long,
+        flow_short,
+    ].sum()
 
     spacer.index = spacer.index.astype(int)
 
@@ -516,6 +468,26 @@ def update_graph(
                 stackgroup="one",
                 legendgroup=groupby_value,
                 hovertemplate=hovertemplate,
+                fillcolor=list(
+                    itertools.chain.from_iterable(
+                        itertools.repeat(
+                            px.colors.qualitative.Prism
+                            + px.colors.qualitative.Antique
+                            + px.colors.qualitative.Dark24
+                            + px.colors.qualitative.Pastel1
+                            + px.colors.qualitative.Pastel2
+                            + px.colors.qualitative.Set1
+                            + px.colors.qualitative.Set2
+                            + px.colors.qualitative.Set3,
+                            10,
+                        )
+                    )
+                )[
+                    filtered_df2.sort_values(str(yaxis_unit), ascending=False)[groupby]
+                    .unique()
+                    .tolist()
+                    .index(groupby_value)
+                ],
             )
         )
 

@@ -130,7 +130,6 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         [pd.concat([energy_historical], keys=["baseline"], names=["scenario"])],
         keys=["PD22"],
         names=["model"],
-        
     )
 
     # set energy_historical index 'model' and 'scenario' to dtype 'category'
@@ -961,10 +960,12 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
-    # Save to CSV file
-    if os.path.exists("podi/data/energy_baseline.csv"):
-        os.remove("podi/data/energy_baseline.csv")
-    energy_baseline.to_csv("podi/data/energy_baseline.csv")
+    # Save
+    if os.path.exists("podi/data/energy_baseline.parquet"):
+        os.remove("podi/data/energy_baseline.parquet")
+    energy_baseline.columns = energy_baseline.columns.astype(str)
+    energy_baseline.to_parquet("podi/data/energy_baseline.parquet")
+    energy_baseline.columns = energy_baseline.columns.astype(int)
 
     # endregion
 
@@ -2094,6 +2095,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         (energy_output, "energy_output"),
         (energy_percent, "energy_percent"),
     ]:
+        output[0].columns = output[0].columns.astype(str)
         output[0].groupby(
             [
                 "model",
@@ -2108,7 +2110,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "flow_short",
                 "unit",
             ]
-        ).sum().sort_index().to_csv("podi/data/" + output[1] + ".csv")
+        ).sum().sort_index().to_parquet("podi/data/" + output[1] + ".parquet")
+        output[0].columns = output[0].columns.astype(int)
 
     energy_output = (
         energy_output.groupby(

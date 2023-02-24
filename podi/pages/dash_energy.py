@@ -2,6 +2,8 @@ import dash
 from dash import dcc, html, callback, Output, Input
 import pandas as pd
 import plotly.graph_objects as go
+import plotly.express as px
+import itertools
 
 dash.register_page(__name__, path="/Energy", title="Energy", name="Energy")
 
@@ -10,7 +12,9 @@ data_end_year = 2100
 
 dataset = ["energy_output"]
 
-df = pd.read_csv("~/positive-disruption/podi/data/" + dataset[0] + ".csv")
+df = pd.read_parquet(
+    "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
+).reset_index()
 
 clst = df.columns[
     (~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1)))
@@ -159,6 +163,21 @@ def update_graph(
                 fill=chart_type,
                 stackgroup=stack_type[chart_type],
                 showlegend=True,
+                fillcolor=list(
+                    itertools.chain.from_iterable(
+                        itertools.repeat(
+                            px.colors.qualitative.Prism
+                            + px.colors.qualitative.Antique
+                            + px.colors.qualitative.Dark24
+                            + px.colors.qualitative.Pastel1
+                            + px.colors.qualitative.Pastel2
+                            + px.colors.qualitative.Set1
+                            + px.colors.qualitative.Set2
+                            + px.colors.qualitative.Set3,
+                            10,
+                        )
+                    )
+                )[filtered_df.reset_index()[groupby].unique().tolist().index(sub)],
             )
         )
 

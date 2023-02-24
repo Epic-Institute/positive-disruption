@@ -235,7 +235,12 @@ def results_analysis(
         .replace(-np.inf, 0)
     )
 
-    adoption_output_historical.to_csv("podi/data/adoption_output_historical.csv")
+    # save adoption_output_historical to parquet, update columns to be strings
+    adoption_output_historical.columns = adoption_output_historical.columns.astype(str)
+    adoption_output_historical.to_parquet(
+        "podi/data/adoption_output_historical.parquet"
+    )
+    adoption_output_historical.columns = adoption_output_historical.columns.astype(int)
 
     # endregion
 
@@ -620,7 +625,10 @@ def results_analysis(
         ]
     )
 
-    emissions_wedges.to_csv("podi/data/emissions_wedges.csv")
+    # change columns to str and save as parquet
+    emissions_wedges.columns = emissions_wedges.columns.astype(str)
+    emissions_wedges.to_parquet("podi/data/emissions_wedges.parquet")
+    emissions_wedges.columns = emissions_wedges.columns.astype(int)
 
     # endregion
 
@@ -791,7 +799,6 @@ def results_analysis(
 
     # Calculate cumulative emissions mitigated by 2050
     emissions_output_co2e.loc[:, emissions_output_co2e.columns <= 2050].cumsum(axis=1)
-    
 
     # endregion
 
