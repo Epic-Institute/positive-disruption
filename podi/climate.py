@@ -62,6 +62,7 @@ def climate(
         .rename(columns={"Year": "year"})
         .set_index("year")
     )
+    climate_historical_concentration.rename(columns={0: "All"}, inplace=True)
 
     # Load radiative forcing data from external source
     climate_historical_forcing = pd.DataFrame(
@@ -69,19 +70,36 @@ def climate(
     )
     climate_historical_forcing.columns = climate_historical_forcing.columns.astype(int)
     climate_historical_forcing = climate_historical_forcing.loc[
-        :, data_start_year:data_end_year
+        :, data_start_year:proj_end_year
     ].T
+    climate_historical_forcing.rename(columns={0: "All"}, inplace=True)
 
-    # Load temperature change data from external source
+    # Load temperature change data from external source (https://www.eea.europa.eu/data-and-maps/daviz/global-average-air-temperature-anomalies-6/#tab-dashboard-01)
     climate_historical_temperature = pd.DataFrame(
-        pd.read_csv("podi/data/external/temperature_change_historical.csv")
+        pd.read_csv(
+            "podi/data/external/temperature_change_historical.csv",
+            usecols=["Year:number", "NOAA GlobalTemp v5:number", "Type:text"],
+        )
+    ).dropna()
+    climate_historical_temperature.rename(
+        columns={
+            "Year:number": "year",
+            "NOAA GlobalTemp v5:number": "All",
+            "Type:text": "type",
+        },
+        inplace=True,
     )
-    climate_historical_temperature.columns = (
-        climate_historical_temperature.columns.astype(int)
+    climate_historical_temperature = climate_historical_temperature[
+        climate_historical_temperature["type"] == "Global annual"
+    ]
+    climate_historical_temperature = climate_historical_temperature.drop(columns="type")
+    climate_historical_temperature.year = climate_historical_temperature.year.astype(
+        int
     )
+    climate_historical_temperature.set_index("year", inplace=True)
     climate_historical_temperature = climate_historical_temperature.loc[
-        :, data_start_year:data_end_year
-    ].T
+        data_start_year:
+    ]
 
     # endregion
 
@@ -90,16 +108,6 @@ def climate(
     ############################################
 
     # region
-
-    # Drop 'Electricity output' and 'Heat output' to avoid double counting when
-    # summing emissions
-    emissions_output = emissions_output[
-        ~(
-            emissions_output.reset_index().flow_category.isin(
-                ["Electricity output", "Heat output"]
-            )
-        ).values
-    ]
 
     # Rename emissions_output gases to match required inputs for FAIR
 
@@ -237,9 +245,7 @@ def climate(
 
     # region
 
-    # Run the climate model for each scenario. Note that natural emissions of
-    # CH4 and N2O is set to zero, and volcanic and solar forcing are provided
-    # externally and estimated here
+    # Run the climate model for each scenario
 
     climate_output_concentration = pd.DataFrame()
     climate_output_forcing = pd.DataFrame()
@@ -259,15 +265,14 @@ def climate(
         f = FAIR()
         f.define_time(data_end_year, proj_end_year, 1)
         f.define_scenarios([scenario])
-        f.define_configs(["high", "central", "low"])
+        f.define_configs(["default"])
         species, properties = read_properties()
         species = list(
             set(species) & set(emissions_output_fair.columns.tolist())
         ) + list(["CO2"])
         properties = {k: v for k, v in properties.items() if k in species}
         f.define_species(species, properties)
-        f.ghg_method = "leach2021"
-        f.ch4_method = "leach2021"
+        f.ghg_method = "myhre1998"
         f.allocate()
 
         # Fill emissions with emissions from Emissions module
@@ -288,54 +293,36 @@ def climate(
                 )
 
         # Define first timestep
-        initialise(f.forcing, 0)
-        initialise(f.temperature, 0)
-        initialise(f.cumulative_emissions, 0)
-        initialise(f.airborne_emissions, 0)
+
+        initialise(
+            f.concentration,
+            climate_historical_concentration["CO2"].loc[data_end_year],
+            specie="CO2",
+        )
+        initialise(
+            f.concentration,
+            climate_historical_concentration["CH4"].loc[data_end_year],
+            specie="CH4",
+        )
+        initialise(
+            f.concentration,
+            climate_historical_concentration["N2O"].loc[data_end_year],
+            specie="N2O",
+        )
+        initialise(f.temperature, 1.14)
 
         # Fill climate configs
-        fill(f.climate_configs["ocean_heat_transfer"], [0.6, 1.3, 1.0], config="high")
-        fill(f.climate_configs["ocean_heat_capacity"], [5, 15, 80], config="high")
-        fill(f.climate_configs["deep_ocean_efficacy"], 1.29, config="high")
-
         fill(
-            f.climate_configs["ocean_heat_transfer"], [1.1, 1.6, 0.9], config="central"
+            f.climate_configs["ocean_heat_transfer"], [0.6, 1.3, 1.0], config="default"
         )
-        fill(f.climate_configs["ocean_heat_capacity"], [8, 14, 100], config="central")
-        fill(f.climate_configs["deep_ocean_efficacy"], 1.1, config="central")
-
-        fill(f.climate_configs["ocean_heat_transfer"], [1.7, 2.0, 1.1], config="low")
-        fill(f.climate_configs["ocean_heat_capacity"], [6, 11, 75], config="low")
-        fill(f.climate_configs["deep_ocean_efficacy"], 0.8, config="low")
+        fill(f.climate_configs["ocean_heat_capacity"], [5, 15, 80], config="default")
+        fill(f.climate_configs["deep_ocean_efficacy"], 1.29, config="default")
 
         # Fill species configs with default values
         FAIR.fill_species_configs(f)
 
         # Run
         f.run()
-
-        # Plot
-        pl.plot(
-            f.timebounds,
-            f.temperature.loc[dict(scenario="pathway", layer=0)],
-            label=f.configs,
-        )
-        pl.title("Ramp scenario: temperature")
-        pl.xlabel("year")
-        pl.ylabel("Temperature anomaly (K)")
-        pl.legend()
-
-        for specie in species:
-            pl.figure()
-            pl.plot(
-                f.timebounds,
-                f.concentration.loc[dict(scenario="pathway", specie=specie)],
-                label=f.configs,
-            )
-            pl.title(str(specie) + " concentration")
-            pl.xlabel("year")
-            pl.ylabel("(ppm)")
-            pl.legend()
 
         # Write to DataFrame
         climate_output_concentration_temp = (
@@ -393,15 +380,7 @@ def climate(
     # Create version of climate_output_concentration with units CO2e
     # region
 
-    # Drop 'Electricity output' and 'Heat output' to avoid double counting when summing emissions
-    emissions_output_co2e_fair = emissions_output_co2e[
-        ~(
-            emissions_output_co2e.reset_index().flow_category.isin(
-                ["Electricity output", "Heat output"]
-            )
-        ).values
-    ].sort_index()
-
+    emissions_output_co2e_fair = emissions_output_co2e.sort_index()
     emissions_output_co2e_fair.reset_index(inplace=True)
     emissions_output_co2e_fair["flow_long"] = "CO2"
     emissions_output_co2e_fair.set_index(emissions_output.index.names, inplace=True)
@@ -426,7 +405,6 @@ def climate(
 
     climate_output_concentration_co2e = pd.DataFrame()
     climate_output_forcing_co2e = pd.DataFrame()
-    climate_output_temperature_co2e = pd.DataFrame()
 
     for scenario in emissions_output_co2e_fair.reset_index().scenario.unique():
 
@@ -443,9 +421,16 @@ def climate(
         f.define_time(data_end_year, proj_end_year, 1)
         f.define_scenarios([scenario])
         f.define_configs(["high", "central", "low"])
-        species, properties = read_properties()
-        species = list(set(species) & set(emissions_output_co2e_fair2.columns.tolist()))
-        properties = {k: v for k, v in properties.items() if k in species}
+        species = list(["CO2"])
+        properties = {
+            "CO2": {
+                "type": "co2",
+                "input_mode": "emissions",
+                "greenhouse_gas": True,
+                "aerosol_chemistry_from_emissions": False,
+                "aerosol_chemistry_from_concentration": False,
+            }
+        }
         f.define_species(species, properties)
         f.ghg_method = "leach2021"
         f.ch4_method = "leach2021"
@@ -453,13 +438,7 @@ def climate(
 
         # Fill emissions with emissions from Emissions module
         for config in f.configs:
-            for specie in list(
-                (
-                    pd.DataFrame(f.species)[
-                        ~pd.DataFrame(f.species).isin(["CO2"])
-                    ].dropna()
-                )[0]
-            ):
+            for specie in list(["CO2"]):
                 fill(
                     f.emissions,
                     emissions_output_co2e_fair2.loc[int(data_end_year + 1) :][
@@ -497,29 +476,6 @@ def climate(
         # Run
         f.run()
 
-        # Plot
-        pl.plot(
-            f.timebounds,
-            f.temperature.loc[dict(scenario="pathway", layer=0)],
-            label=f.configs,
-        )
-        pl.title("Ramp scenario: temperature")
-        pl.xlabel("year")
-        pl.ylabel("Temperature anomaly (K)")
-        pl.legend()
-
-        for specie in species:
-            pl.figure()
-            pl.plot(
-                f.timebounds,
-                f.concentration.loc[dict(scenario="pathway", specie=specie)],
-                label=f.configs,
-            )
-            pl.title(str(specie) + " concentration")
-            pl.xlabel("year")
-            pl.ylabel("(ppm)")
-            pl.legend()
-
         # Write to DataFrame
         climate_output_concentration_co2e_temp = (
             f.concentration.to_dataframe(name="Concentration")
@@ -547,30 +503,11 @@ def climate(
             "product_long", level=2, inplace=True
         )
 
-        climate_output_temperature_co2e_temp = (
-            f.temperature.to_dataframe(name="Temperature")
-            .unstack(level=0)
-            .droplevel(level=0, axis=1)
-        )
-        climate_output_temperature_co2e_temp.columns = (
-            climate_output_temperature_co2e_temp.columns.astype(int)
-        )
-        climate_output_temperature_co2e_temp.columns.name = None
-        climate_output_temperature_co2e_temp = climate_output_temperature_co2e_temp[
-            (climate_output_temperature_co2e_temp.reset_index().layer == 0).values
-        ]
-        climate_output_temperature_co2e_temp.index.set_names(
-            "product_long", level=2, inplace=True
-        )
-
-        climate_output_concentration = pd.concat(
+        climate_output_concentration_co2e = pd.concat(
             [climate_output_concentration_co2e_temp, climate_output_concentration_co2e]
         )
-        climate_output_forcing = pd.concat(
+        climate_output_forcing_co2e = pd.concat(
             [climate_output_forcing_co2e_temp, climate_output_forcing_co2e]
-        )
-        climate_output_temperature = pd.concat(
-            [climate_output_temperature_co2e_temp, climate_output_temperature_co2e]
         )
 
     # endregion
@@ -611,11 +548,12 @@ def climate(
     climate_historical_temperature["region"] = "world"
     climate_historical_temperature["variable"] = "Temperature change"
     climate_historical_temperature["gas"] = climate_historical_temperature.index
-    climate_historical_temperature["unit"] = "F"
+    climate_historical_temperature["unit"] = "C"
     climate_historical_temperature.set_index(
         ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
     )
 
+    climate_output_concentration = climate_output_concentration.droplevel(1)
     climate_output_concentration["model"] = "PD22"
     climate_output_concentration["region"] = "world"
     climate_output_concentration["variable"] = "Concentration"
@@ -628,7 +566,9 @@ def climate(
         .reset_index()
         .set_index(["model", "scenario", "region", "variable", "gas", "unit"])
     )
+    climate_output_concentration.columns.name = "year"
 
+    climate_output_forcing = climate_output_forcing.droplevel(1)
     climate_output_forcing["model"] = "PD22"
     climate_output_forcing["region"] = "world"
     climate_output_forcing["variable"] = "Radiative forcing"
@@ -640,24 +580,26 @@ def climate(
         .set_index(["model", "scenario", "region", "variable", "gas", "unit"])
     )
 
+    climate_output_temperature = climate_output_temperature.droplevel(1)
     climate_output_temperature["model"] = "PD22"
     climate_output_temperature["region"] = "world"
     climate_output_temperature["variable"] = "Temperature change"
-    climate_output_temperature["gas"] = 0
-    climate_output_temperature["unit"] = "F"
+    climate_output_temperature["gas"] = "All"
+    climate_output_temperature["unit"] = "C"
     climate_output_temperature = (
         climate_output_temperature.droplevel("product_long")
         .reset_index()
         .set_index(["model", "scenario", "region", "variable", "gas", "unit"])
     )
 
+    climate_output_concentration_co2e = climate_output_concentration_co2e.droplevel(1)
     climate_output_concentration_co2e.reset_index(inplace=True)
     climate_output_concentration_co2e["model"] = model
     climate_output_concentration_co2e["region"] = "world"
     climate_output_concentration_co2e.rename(
         columns={"product_long": "variable"}, inplace=True
     )
-    climate_output_concentration_co2e["gas"] = 0
+    climate_output_concentration_co2e["gas"] = "All"
     climate_output_concentration_co2e.replace({"CO2e": "Concentration"}, inplace=True)
     climate_output_concentration_co2e["gas"] = "CO2e"
     climate_output_concentration_co2e["unit"] = "PPM"
@@ -665,18 +607,128 @@ def climate(
         ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
     )
 
+    climate_output_forcing_co2e = climate_output_forcing_co2e.droplevel(1)
     climate_output_forcing_co2e.reset_index(inplace=True)
     climate_output_forcing_co2e["model"] = model
     climate_output_forcing_co2e["region"] = "world"
     climate_output_forcing_co2e.rename(
         columns={"product_long": "variable"}, inplace=True
     )
-    climate_output_forcing_co2e["gas"] = 0
+    climate_output_forcing_co2e["gas"] = "All"
     climate_output_forcing_co2e.replace({"CO2e": "Radiative forcing"}, inplace=True)
     climate_output_forcing_co2e["gas"] = "CO2e"
     climate_output_forcing_co2e["unit"] = "W/m2"
     climate_output_forcing_co2e.set_index(
         ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+    )
+
+    # combine historical and output
+    climate_output_concentration.update(
+        climate_output_concentration[
+            (
+                climate_output_concentration.reset_index().gas.isin(
+                    ["CO2", "CH4", "N2O"]
+                )
+            ).values
+        ].apply(
+            lambda x: x.loc[data_end_year + 3 :]
+            + abs(
+                (
+                    climate_historical_concentration.loc[
+                        x.name[0], "historical", x.name[2], x.name[3], x.name[4]
+                    ][data_end_year + 2]
+                    - x.loc[data_end_year + 2]
+                )
+            ).squeeze(),
+            axis=1,
+        )
+    )
+    climate_output_concentration = pd.concat(
+        [
+            pd.concat(
+                [
+                    climate_historical_concentration.rename(
+                        index={"historical": "baseline"}
+                    ),
+                    climate_historical_concentration.rename(
+                        index={"historical": scenario}
+                    ),
+                ]
+            ),
+            climate_output_concentration.loc[:, data_end_year + 3 :],
+        ],
+        axis=1,
+    )
+
+    climate_output_forcing = pd.concat(
+        [
+            pd.concat(
+                [
+                    climate_historical_forcing.rename(index={"historical": "baseline"}),
+                    climate_historical_forcing.rename(index={"historical": scenario}),
+                ]
+            ),
+            climate_output_forcing.loc[:, data_end_year + 3 :],
+        ]
+    )
+
+    climate_output_temperature.update(
+        climate_output_temperature.apply(
+            lambda x: x.loc[data_end_year + 3 :]
+            + abs(
+                (
+                    climate_historical_temperature.loc[
+                        x.name[0], "historical", x.name[2], x.name[3], x.name[4]
+                    ]
+                    .iloc[-1]
+                    .iloc[-1]
+                    - x.loc[data_end_year + 2]
+                )
+            ).squeeze(),
+            axis=1,
+        )
+    )
+    climate_output_temperature = pd.concat(
+        [
+            pd.concat(
+                [
+                    climate_historical_temperature.rename(
+                        index={"historical": "baseline"}
+                    ),
+                    climate_historical_temperature.rename(
+                        index={"historical": scenario}
+                    ),
+                ]
+            ),
+            climate_output_temperature.loc[:, data_end_year + 3 :],
+        ]
+    )
+
+    climate_output_concentration_co2e = pd.concat(
+        [
+            pd.concat(
+                [
+                    climate_historical_concentration.rename(
+                        index={"historical": "baseline"}
+                    ),
+                    climate_historical_concentration.rename(
+                        index={"historical": scenario}
+                    ),
+                ]
+            ),
+            climate_output_concentration_co2e.loc[:, data_end_year + 3 :],
+        ]
+    )
+    climate_output_forcing_co2e = pd.concat(
+        [
+            pd.concat(
+                [
+                    climate_historical_forcing.rename(index={"historical": "baseline"}),
+                    climate_historical_forcing.rename(index={"historical": scenario}),
+                ]
+            ),
+            climate_output_forcing_co2e.loc[:, data_end_year + 3 :],
+        ]
     )
 
     # endregion
@@ -689,9 +741,6 @@ def climate(
 
     pd.concat(
         [
-            climate_historical_concentration,
-            climate_historical_forcing,
-            climate_historical_temperature,
             climate_output_concentration,
             climate_output_forcing,
             climate_output_temperature,

@@ -94,7 +94,7 @@ def emissions(
             ).values
         ].multiply(0)
     )
-
+    """
     # Drop flow_category 'Heat output' in sector 'Industry' to avoid double counting
     emissions_energy.update(
         emissions_energy[
@@ -104,7 +104,7 @@ def emissions(
             ).values
         ].multiply(0)
     )
-
+    """
     # Save to CSV file
     emissions_energy.to_csv("podi/data/emissions_energy.csv")
 
@@ -753,8 +753,8 @@ def emissions(
 
     # Add indices product_category, product_short, flow_short
     emissions_afolu.reset_index(inplace=True)
-    emissions_afolu["product_category"] = "Emissions"
-    emissions_afolu["product_short"] = "EM"
+    emissions_afolu["product_category"] = "AFOLU Emissions"
+    emissions_afolu["product_short"] = "AFEM"
     emissions_afolu["flow_short"] = "AFOLU"
 
     emissions_afolu = emissions_afolu.set_index(
@@ -972,7 +972,7 @@ def emissions(
             "1A1a_Electricity-autoproducer",
             "1A1a_Electricity-public",
             "1A1a_Heat-production",
-            "1A1bc_Other-transformation",
+            # "1A1bc_Other-transformation",
             "1A2a_Ind-Comb-Iron-steel",
             "1A2b_Ind-Comb-Non-ferrous-metals",
             "1A2c_Ind-Comb-Chemicals",
@@ -995,8 +995,8 @@ def emissions(
             "1A3di_International-shipping",
             "1A4a_Commercial-institutional",
             "1A4b_Residential",
-            "1A4c_Agriculture-forestry-fishing",
-            "1A5_Other-unspecified",
+            # "1A4c_Agriculture-forestry-fishing",
+            # "1A5_Other-unspecified",
         ] and x.name[6] in ["CO2"]:
             x = x.multiply(0)
 
@@ -1416,8 +1416,8 @@ def emissions(
     )
 
     # Add indices product_category, product_short, flow_short
-    emissions_additional["product_category"] = "Emissions"
-    emissions_additional["product_short"] = "EM"
+    emissions_additional["product_category"] = "Additional Industrial Emissions"
+    emissions_additional["product_short"] = "ADEM"
     emissions_additional["flow_short"] = "IND"
 
     emissions_additional = (
