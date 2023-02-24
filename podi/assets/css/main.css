@@ -1,0 +1,17 @@
+.tab {
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 10px;
+  width: fit-content;
+}
+
+.tab.chosen {
+  text-decoration: underline;
+}
+
+.btn {
+  display: inline-block;
+  margin-right: 10px;
+  width: fit-content;
+}
