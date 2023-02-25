@@ -574,7 +574,9 @@ def update_graph(
 
     stack_type = {"none": None, "tonexty": "1"}
 
-    df2 = pd.read_csv("~/positive-disruption/podi/data/" + dataset2 + ".csv")
+    df2 = pd.read_parquet(
+        "~/positive-disruption/podi/data/" + dataset2 + ".parquet"
+    ).reset_index()
 
     fig2 = go.Figure()
 
