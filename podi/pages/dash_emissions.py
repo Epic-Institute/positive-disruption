@@ -19,6 +19,7 @@ layout = html.Div(
             children=[
                 dcc.Graph(id="graphic-emissions"),
                 dcc.Graph(id="graphic-emissions-2"),
+                html.Br(),
                 html.Label("Dataset"),
                 html.Div(
                     [
@@ -47,7 +48,7 @@ layout = html.Div(
                 html.Div(
                     [
                         dcc.RadioItems(
-                            ["Linear", "Log"],
+                            ["Linear", "Log", "Cumulative"],
                             "Linear",
                             id="yaxis_type",
                             inline=True,
@@ -58,7 +59,7 @@ layout = html.Div(
                 html.Label("Group by"),
                 html.Div(
                     [
-                        dcc.RadioItems(
+                        dcc.Dropdown(
                             [
                                 "model",
                                 "scenario",
@@ -71,8 +72,9 @@ layout = html.Div(
                                 "flow_long",
                                 "flow_short",
                             ],
-                            "product_long",
+                            ["sector", "product_category"],
                             id="groupby",
+                            multi=True,
                         ),
                     ],
                 ),
@@ -259,11 +261,50 @@ def update_graph(
     unit_val = {"Mt": 1, "Gt": 1e-3}
     stack_type = {"none": None, "tonexty": "1"}
 
+    chart_template = {
+        "linecolor": list(
+            itertools.chain.from_iterable(
+                itertools.repeat(
+                    px.colors.qualitative.Prism
+                    + px.colors.qualitative.Antique
+                    + px.colors.qualitative.Dark24
+                    + px.colors.qualitative.Pastel1
+                    + px.colors.qualitative.Pastel2
+                    + px.colors.qualitative.Set1
+                    + px.colors.qualitative.Set2
+                    + px.colors.qualitative.Set3,
+                    200,
+                )
+            )
+        ),
+        "fillcolor": list(
+            itertools.chain.from_iterable(
+                itertools.repeat(
+                    px.colors.qualitative.Prism
+                    + px.colors.qualitative.Antique
+                    + px.colors.qualitative.Dark24
+                    + px.colors.qualitative.Pastel1
+                    + px.colors.qualitative.Pastel2
+                    + px.colors.qualitative.Set1
+                    + px.colors.qualitative.Set2
+                    + px.colors.qualitative.Set3,
+                    200,
+                )
+            )
+        ),
+        "hovertemplate": (
+            "<b>Year</b>: %{x}"
+            + "<br><b>Emissions</b>: %{y:,.0f} "
+            + yaxis_unit
+            + "<br>"
+        ),
+    }
+
     df = pd.read_parquet("~/positive-disruption/podi/data/" + dataset + ".parquet")
 
-    hovertemplate = (
-        "<b>Year</b>: %{x}" + "<br><b>Emissions</b>: %{y:,.0f} " + yaxis_unit + "<br>"
-    )
+    # make groupby an array if it is not already
+    if not isinstance(groupby, list):
+        groupby = [groupby] if groupby else []
 
     filtered_df = (
         (
@@ -279,65 +320,65 @@ def update_graph(
                 flow_long,
                 flow_short,
             ]
-            .groupby([groupby])
+            .groupby(groupby)
             .sum()
         )
         * unit_val[str(yaxis_unit)]
     ).T.fillna(0)
 
+    if yaxis_type == "Cumulative":
+        filtered_df = filtered_df.loc[str(data_end_year) :].cumsum()
+
     filtered_df.index.name = "year"
     filtered_df.reset_index(inplace=True)
     filtered_df = pd.melt(
-        filtered_df, id_vars="year", var_name=[groupby], value_name=str(yaxis_unit)
-    )
-
-    filtered_df.year = filtered_df.year.astype(int)
+        filtered_df, id_vars="year", var_name=groupby, value_name=str(yaxis_unit)
+    ).astype({k: "category" for k in groupby} | {"year": "int", yaxis_unit: "float32"})
 
     fig = go.Figure()
 
-    for sub in filtered_df.sort_values(str(yaxis_unit), ascending=False)[
-        groupby
-    ].unique():
+    i = 0
+
+    for sub in (
+        filtered_df.sort_values(str(yaxis_unit), ascending=False)[groupby]
+        .drop_duplicates()
+        .squeeze()
+        .values
+    ):
+
+        if isinstance(sub, str):
+            name = str(sub).capitalize()
+        else:
+            name = ", ".join(str(x).capitalize() for x in sub)
+
         fig.add_trace(
             go.Scatter(
-                name=sub,
-                line=dict(
-                    width=0.5,
-                ),
-                x=filtered_df["year"],
-                y=filtered_df[filtered_df[groupby] == sub][str(yaxis_unit)],
+                name=name,
+                line=dict(width=0.5, color=chart_template["linecolor"][i]),
+                x=filtered_df["year"].drop_duplicates(),
+                y=pd.DataFrame(filtered_df)
+                .set_index(groupby)
+                .loc[[sub]][yaxis_unit]
+                .values,
                 fill=chart_type,
                 stackgroup=stack_type[chart_type],
                 showlegend=True,
-                hovertemplate=hovertemplate,
-                fillcolor=list(
-                    itertools.chain.from_iterable(
-                        itertools.repeat(
-                            px.colors.qualitative.Prism
-                            + px.colors.qualitative.Antique
-                            + px.colors.qualitative.Dark24
-                            + px.colors.qualitative.Pastel1
-                            + px.colors.qualitative.Pastel2
-                            + px.colors.qualitative.Set1
-                            + px.colors.qualitative.Set2
-                            + px.colors.qualitative.Set3,
-                            10,
-                        )
-                    )
-                )[filtered_df.reset_index()[groupby].unique().tolist().index(sub)],
+                hovertemplate=chart_template["hovertemplate"],
+                fillcolor=chart_template["fillcolor"][i],
             )
         )
+        i += 1
 
     fig.add_trace(
         go.Scatter(
             name="Net Projected",
-            line=dict(width=3, color="magenta", dash="dash"),
+            line=dict(width=5, color="magenta", dash="dashdot"),
             x=filtered_df[filtered_df["year"] >= data_end_year]["year"],
             y=filtered_df[filtered_df["year"] >= data_end_year]
             .groupby("year")
             .sum()[str(yaxis_unit)],
             showlegend=True,
-            hovertemplate=hovertemplate,
+            hovertemplate=chart_template["hovertemplate"],
         )
     )
 
@@ -350,7 +391,7 @@ def update_graph(
             .groupby("year")
             .sum()[str(yaxis_unit)],
             showlegend=True,
-            hovertemplate=hovertemplate,
+            hovertemplate=chart_template["hovertemplate"],
         )
     )
 
@@ -360,18 +401,18 @@ def update_graph(
             "xanchor": "center",
             "x": 0.5,
             "y": 0.93,
-            # "font": dict(size=12),
         },
         xaxis1_rangeslider_visible=True,
         width=1850,
         height=950,
-        # legend=dict(font=dict(size=12)),
         template="presentation",
     )
 
     fig.update_yaxes(
         title=str(yaxis_unit),
-        type="linear" if yaxis_type == "Linear" else "log",
+        type="linear"
+        if yaxis_type == "Linear" or yaxis_type == "Cumulative"
+        else "log",
     )
 
     # Wedges chart
@@ -391,7 +432,7 @@ def update_graph(
                     flow_long,
                     flow_short,
                 ]
-                .groupby([groupby])
+                .groupby(groupby)
                 .sum()
                 - (
                     df.loc[
@@ -406,7 +447,7 @@ def update_graph(
                         flow_long,
                         flow_short,
                     ]
-                    .groupby([groupby])
+                    .groupby(groupby)
                     .sum()
                 )
             )
@@ -414,13 +455,14 @@ def update_graph(
         * unit_val[str(yaxis_unit)]
     ).T.fillna(0)
 
+    if yaxis_type == "Cumulative":
+        filtered_df2 = filtered_df2.loc[str(data_end_year) :].cumsum()
+
     filtered_df2.index.name = "year"
     filtered_df2.reset_index(inplace=True)
     filtered_df2 = pd.melt(
-        filtered_df2, id_vars="year", var_name=[groupby], value_name=str(yaxis_unit)
-    )
-
-    filtered_df2.year = filtered_df2.year.astype(int)
+        filtered_df2, id_vars="year", var_name=groupby, value_name=str(yaxis_unit)
+    ).astype({k: "category" for k in groupby} | {"year": "int", yaxis_unit: "float32"})
 
     fig2 = go.Figure()
 
@@ -451,51 +493,49 @@ def update_graph(
         )
     )
 
-    for groupby_value in filtered_df2.sort_values(str(yaxis_unit), ascending=False)[
-        groupby
-    ].unique():
+    i = 0
+
+    for groupby_value in (
+        filtered_df2.sort_values(str(yaxis_unit), ascending=False)[groupby]
+        .drop_duplicates()
+        .squeeze()
+        .values
+    ):
+
+        if isinstance(groupby_value, str):
+            name = str(groupby_value).capitalize()
+        else:
+            name = ", ".join(str(x).capitalize() for x in groupby_value)
 
         fig2.add_trace(
             go.Scatter(
-                name=groupby_value,
-                line=dict(width=0.5),
-                x=filtered_df2[filtered_df2["year"] > data_end_year]["year"].unique(),
-                y=filtered_df2[
-                    (filtered_df2[groupby] == groupby_value)
-                    & (filtered_df2["year"] > data_end_year)
-                ][yaxis_unit].values,
+                name=name,
+                line=dict(
+                    width=0.5,
+                    color=chart_template["linecolor"][i],
+                ),
+                x=filtered_df2[filtered_df2["year"] > data_end_year][
+                    "year"
+                ].drop_duplicates(),
+                y=pd.DataFrame(filtered_df2[filtered_df2.year > data_end_year])
+                .set_index(groupby)
+                .loc[[groupby_value]][yaxis_unit]
+                .values,
                 fill="tonexty",
                 stackgroup="one",
-                legendgroup=groupby_value,
-                hovertemplate=hovertemplate,
-                fillcolor=list(
-                    itertools.chain.from_iterable(
-                        itertools.repeat(
-                            px.colors.qualitative.Prism
-                            + px.colors.qualitative.Antique
-                            + px.colors.qualitative.Dark24
-                            + px.colors.qualitative.Pastel1
-                            + px.colors.qualitative.Pastel2
-                            + px.colors.qualitative.Set1
-                            + px.colors.qualitative.Set2
-                            + px.colors.qualitative.Set3,
-                            10,
-                        )
-                    )
-                )[
-                    filtered_df2.sort_values(str(yaxis_unit), ascending=False)[groupby]
-                    .unique()
-                    .tolist()
-                    .index(groupby_value)
-                ],
+                hovertemplate=chart_template["hovertemplate"],
+                fillcolor=chart_template["fillcolor"][i],
             )
         )
+        i += 1
 
     fig2.add_trace(
         go.Scatter(
             name="Pathway",
-            line=dict(width=3, color="magenta", dash="dash"),
-            x=filtered_df[filtered_df["year"] >= data_end_year]["year"].unique(),
+            line=dict(width=5, color="magenta", dash="dashdot"),
+            x=filtered_df[filtered_df["year"] >= data_end_year][
+                "year"
+            ].drop_duplicates(),
             y=pd.Series(
                 filtered_df[filtered_df.year >= data_end_year]
                 .groupby("year")
@@ -503,20 +543,22 @@ def update_graph(
                 .values,
                 index=filtered_df[filtered_df["year"] >= data_end_year][
                     "year"
-                ].unique(),
+                ].drop_duplicates(),
             ).loc[data_end_year:],
             fill="none",
             stackgroup="pathway",
             showlegend=True,
-            hovertemplate=hovertemplate,
+            hovertemplate=chart_template["hovertemplate"],
         )
     )
 
     fig2.add_trace(
         go.Scatter(
             name="Baseline",
-            line=dict(width=3, color="red", dash="dash"),
-            x=filtered_df[filtered_df["year"] >= data_end_year]["year"].unique(),
+            line=dict(width=5, color="red", dash="dashdot"),
+            x=filtered_df[filtered_df["year"] >= data_end_year][
+                "year"
+            ].drop_duplicates(),
             y=pd.Series(
                 filtered_df[(filtered_df.year >= data_end_year)]
                 .groupby("year")
@@ -525,20 +567,22 @@ def update_graph(
                 * 0,
                 index=filtered_df[filtered_df["year"] >= data_end_year][
                     "year"
-                ].unique(),
+                ].drop_duplicates(),
             ).loc[data_end_year:],
             fill="none",
             stackgroup="one",
             showlegend=True,
-            hovertemplate=hovertemplate,
+            hovertemplate=chart_template["hovertemplate"],
         )
     )
 
     fig2.add_trace(
         go.Scatter(
             name="Historical",
-            line=dict(width=2, color="black"),
-            x=filtered_df[filtered_df["year"] <= data_end_year]["year"].unique(),
+            line=dict(width=3, color="black"),
+            x=filtered_df[filtered_df["year"] <= data_end_year][
+                "year"
+            ].drop_duplicates(),
             y=pd.Series(
                 filtered_df[filtered_df.year <= data_end_year]
                 .groupby("year")
@@ -546,12 +590,12 @@ def update_graph(
                 .values,
                 index=filtered_df[filtered_df["year"] <= data_end_year][
                     "year"
-                ].unique(),
+                ].drop_duplicates(),
             ).loc[:data_end_year],
             fill="none",
             stackgroup="historical",
             showlegend=True,
-            hovertemplate=hovertemplate,
+            hovertemplate=chart_template["hovertemplate"],
         )
     )
 
@@ -561,12 +605,10 @@ def update_graph(
             "xanchor": "center",
             "x": 0.5,
             "y": 0.93,
-            # "font": dict(size=12),
         },
         xaxis1_rangeslider_visible=True,
         width=1850,
         height=950,
-        # legend=dict(font=dict(size=12)),
         template="presentation",
         legend_traceorder="reversed",
     )
@@ -576,4 +618,7 @@ def update_graph(
         type="linear" if yaxis_type == "Linear" else "log",
     )
 
-    return fig, fig2
+    return (
+        fig,
+        fig2,
+    )

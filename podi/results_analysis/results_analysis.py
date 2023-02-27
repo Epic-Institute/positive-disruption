@@ -788,18 +788,4 @@ def results_analysis(
 
     # endregion
 
-    ##############################################
-    #  CALCULATE CUMULATIVE EMISSIONS MITIGATED  #
-    ##############################################
-
-    # region
-
-    # Calculate cumulative emissions mitigated by 2030
-    emissions_output_co2e.loc[:, emissions_output_co2e.columns <= 2030].cumsum(axis=1)
-
-    # Calculate cumulative emissions mitigated by 2050
-    emissions_output_co2e.loc[:, emissions_output_co2e.columns <= 2050].cumsum(axis=1)
-
-    # endregion
-
     return
