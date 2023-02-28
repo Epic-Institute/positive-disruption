@@ -1,6 +1,6 @@
-from dash import Dash, html, dcc
-import dash_bootstrap_components as dbc
 import dash
+import dash_bootstrap_components as dbc
+from dash import Dash, dcc, html
 
 app = Dash(
     __name__,
@@ -31,7 +31,9 @@ app.layout = html.Div(
         html.Link(rel="stylesheet", href="css/bootstrap.min.css"),
         html.Link(rel="stylesheet", href="css/homepage.css"),
         html.Meta(name="twitter:card", content="summary_large_image"),
-        html.Meta(name="twitter:title", content="Positive Disruption Data Explorer"),
+        html.Meta(
+            name="twitter:title", content="Positive Disruption Data Explorer"
+        ),
         html.Meta(
             name="twitter:description",
             content="The Positive Disruption model examines how adoption of low- and no-carbon technologies and practices can be expected to grow over the next 30 years.",
@@ -55,7 +57,9 @@ app.layout = html.Div(
                                     target="_blank",
                                     children=[
                                         html.Img(
-                                            src=app.get_asset_url("img/epic-logo.png")
+                                            src=app.get_asset_url(
+                                                "img/epic-logo.png"
+                                            )
                                         )
                                     ],
                                 )
@@ -90,7 +94,9 @@ app.layout = html.Div(
                             [
                                 html.A(
                                     html.Img(
-                                        src=app.get_asset_url("img/epic-logo.png")
+                                        src=app.get_asset_url(
+                                            "img/epic-logo.png"
+                                        )
                                     ),
                                     href="https://epicinstitute.org/",
                                     target="_blank",

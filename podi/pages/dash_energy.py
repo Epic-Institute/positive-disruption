@@ -1,9 +1,10 @@
-import dash
-from dash import dcc, html, callback, Output, Input
-import pandas as pd
-import plotly.graph_objects as go
-import plotly.express as px
 import itertools
+
+import dash
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from dash import Input, Output, callback, dcc, html
 
 dash.register_page(__name__, path="/Energy", title="Energy", name="Energy")
 
@@ -17,13 +18,21 @@ df = pd.read_parquet(
 ).reset_index()
 
 clst = df.columns[
-    (~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1)))
+    (
+        ~df.columns.isin(
+            f"{i}" for i in range(data_start_year, data_end_year + 1)
+        )
+    )
     & (~df.columns.isin(["product_short", "flow_short"]))
 ].tolist()
 
 df.set_index(
     df.columns[
-        (~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1)))
+        (
+            ~df.columns.isin(
+                f"{i}" for i in range(data_start_year, data_end_year + 1)
+            )
+        )
         & (~df.columns.isin(["product_short", "flow_short"]))
     ].tolist(),
     inplace=True,
@@ -66,7 +75,9 @@ layout = html.Div(
         html.Br(),
         html.Div(lst),
         html.Label("Y-Axis Type", className="select-label"),
-        html.Div([dcc.RadioItems(["Linear", "Log"], "Linear", id="yaxis_type")]),
+        html.Div(
+            [dcc.RadioItems(["Linear", "Log"], "Linear", id="yaxis_type")]
+        ),
         html.Br(),
         html.Label("Y-Axis Unit", className="select-label"),
         html.Div(
@@ -116,7 +127,10 @@ layout = html.Div(
         Input("groupby", "value"),
         Input("chart_type", "value"),
     ]
-    + [Input(component_id=i, component_property="value") for i in df.index.names],
+    + [
+        Input(component_id=i, component_property="value")
+        for i in df.index.names
+    ],
 )
 def update_graph(
     dataset,
@@ -128,7 +142,6 @@ def update_graph(
     data_start_year=1990,
     data_end_year=2100,
 ):
-
     unit_val = {"TJ": 1, "TWh": 0.0002777, "percent of total": 1}
     stack_type = {"none": None, "tonexty": "1"}
 
@@ -151,7 +164,8 @@ def update_graph(
     )
 
     filtered_df = (
-        df.loc[clst, :].groupby([groupby]).sum(numeric_only=True) * unit_val[yaxis_unit]
+        df.loc[clst, :].groupby([groupby]).sum(numeric_only=True)
+        * unit_val[yaxis_unit]
     )
 
     for sub in filtered_df.reset_index()[groupby].unique().tolist():
@@ -180,7 +194,12 @@ def update_graph(
                             10,
                         )
                     )
-                )[filtered_df.reset_index()[groupby].unique().tolist().index(sub)],
+                )[
+                    filtered_df.reset_index()[groupby]
+                    .unique()
+                    .tolist()
+                    .index(sub)
+                ],
             )
         )
 

@@ -1,11 +1,13 @@
 import dash
-from dash import dcc, html, callback, Input, Output
-import plotly.graph_objects as go
 import pandas as pd
+import plotly.graph_objects as go
+from dash import Input, Output, callback, dcc, html
 
 dash.register_page(__name__, path="/Climate", title="Climate", name="Climate")
 
-df = pd.read_csv("~/positive-disruption/podi/data/output/climate/climate_output.csv")
+df = pd.read_csv(
+    "~/positive-disruption/podi/data/output/climate/climate_output.csv"
+)
 
 layout = html.Div(
     [
@@ -169,7 +171,6 @@ def update_graph(
     groupby,
     chart_type,
 ):
-
     stack_type = {"none": None, "tonexty": "1"}
 
     df = pd.read_csv(

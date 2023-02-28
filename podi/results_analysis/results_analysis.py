@@ -1,7 +1,7 @@
 # region
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 # endregion
 
@@ -17,7 +17,6 @@ def results_analysis(
     data_end_year,
     proj_end_year,
 ):
-
     ###############################
     # ADOPTION ANALOGS HISTORICAL #
     ###############################
@@ -116,7 +115,9 @@ def results_analysis(
     def percent_of_max(x):
         xnew = (
             x.value
-            / analog[(analog.label == x.label) & (analog.iso3c == x.iso3c)].value.max()
+            / analog[
+                (analog.label == x.label) & (analog.iso3c == x.iso3c)
+            ].value.max()
         ) * 100
         x.value = xnew
         return x
@@ -131,7 +132,9 @@ def results_analysis(
             ]
             .sum()
             .value
-            / analog[(analog.label == x.label) & (analog.iso3c == x.iso3c)].value.sum()
+            / analog[
+                (analog.label == x.label) & (analog.iso3c == x.iso3c)
+            ].value.sum()
         ) * 100
         x.value = xnew
         return x
@@ -200,7 +203,9 @@ def results_analysis(
     adoption_output_historical = (
         pd.concat(
             [
-                adoption_historical.loc[:, data_start_year : data_end_year - 1],
+                adoption_historical.loc[
+                    :, data_start_year : data_end_year - 1
+                ],
                 pd.concat(
                     [
                         adoption_historical.loc[:, data_end_year],
@@ -236,11 +241,15 @@ def results_analysis(
     )
 
     # save adoption_output_historical to parquet, update columns to be strings
-    adoption_output_historical.columns = adoption_output_historical.columns.astype(str)
+    adoption_output_historical.columns = (
+        adoption_output_historical.columns.astype(str)
+    )
     adoption_output_historical.to_parquet(
         "podi/data/adoption_output_historical.parquet"
     )
-    adoption_output_historical.columns = adoption_output_historical.columns.astype(int)
+    adoption_output_historical.columns = (
+        adoption_output_historical.columns.astype(int)
+    )
 
     # endregion
 
@@ -409,7 +418,9 @@ def results_analysis(
         )
     )
     buildings = (
-        buildings.rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
+        buildings.rename(
+            index={"Commercial": "Buildings", "Residential": "Buildings"}
+        )
         .groupby(buildings.index.names)
         .sum()
     )
@@ -512,13 +523,19 @@ def results_analysis(
 
     # Percent of agriculture mitigation compared to max extent
     agriculture = (
-        afolu_output.loc[slice(None), slice(None), slice(None), ["Agriculture"]]
+        afolu_output.loc[
+            slice(None), slice(None), slice(None), ["Agriculture"]
+        ]
         .groupby(["model", "scenario", "region", "sector", "product_long"])
         .sum()
         .parallel_apply(
             lambda x: x.divide(
-                afolu_output.loc[slice(None), slice(None), slice(None), ["Agriculture"]]
-                .groupby(["model", "scenario", "region", "sector", "product_long"])
+                afolu_output.loc[
+                    slice(None), slice(None), slice(None), ["Agriculture"]
+                ]
+                .groupby(
+                    ["model", "scenario", "region", "sector", "product_long"]
+                )
                 .sum()
                 .loc[x.name]
                 .max()
@@ -529,15 +546,22 @@ def results_analysis(
 
     # Percent of forests & wetlands mitigation compared to max extent
     forestswetlands = (
-        afolu_output.loc[slice(None), slice(None), slice(None), ["Forests & Wetlands"]]
+        afolu_output.loc[
+            slice(None), slice(None), slice(None), ["Forests & Wetlands"]
+        ]
         .groupby(["model", "scenario", "region", "sector", "product_long"])
         .sum()
         .parallel_apply(
             lambda x: x.divide(
                 afolu_output.loc[
-                    slice(None), slice(None), slice(None), ["Forests & Wetlands"]
+                    slice(None),
+                    slice(None),
+                    slice(None),
+                    ["Forests & Wetlands"],
                 ]
-                .groupby(["model", "scenario", "region", "sector", "product_long"])
+                .groupby(
+                    ["model", "scenario", "region", "sector", "product_long"]
+                )
                 .sum()
                 .loc[x.name]
                 .max()
@@ -548,13 +572,22 @@ def results_analysis(
 
     # Combine all verticals
     adoption_output_projections = pd.concat(
-        [electricity, transport, buildings, industry, agriculture, forestswetlands]
+        [
+            electricity,
+            transport,
+            buildings,
+            industry,
+            agriculture,
+            forestswetlands,
+        ]
     ).multiply(100)
 
     adoption_output_projections["unit"] = "% Adoption"
     adoption_output_projections.set_index("unit", append=True, inplace=True)
 
-    adoption_output_projections.to_csv("podi/data/adoption_output_projections.csv")
+    adoption_output_projections.to_csv(
+        "podi/data/adoption_output_projections.csv"
+    )
 
     # endregion
 
@@ -585,7 +618,9 @@ def results_analysis(
         .sum()
         .subtract(
             emissions_output_co2e[
-                (emissions_output_co2e.reset_index().scenario == scenario).values
+                (
+                    emissions_output_co2e.reset_index().scenario == scenario
+                ).values
             ]
             .groupby(
                 [
@@ -643,11 +678,23 @@ def results_analysis(
         [
             pd.read_csv(
                 "podi/data/ClimateTRACE/climatetrace_emissions_by_subsector_timeseries_interval_year_since_2015_to_2020.csv",
-                usecols=["Tonnes Co2e", "country", "sector", "subsector", "start"],
+                usecols=[
+                    "Tonnes Co2e",
+                    "country",
+                    "sector",
+                    "subsector",
+                    "start",
+                ],
             ),
             pd.read_csv(
                 "podi/data/ClimateTRACE/climatetrace_emissions_by_subsector_timeseries_sector_forests_since_2015_to_2020_interval_year.csv",
-                usecols=["Tonnes Co2e", "country", "sector", "subsector", "start"],
+                usecols=[
+                    "Tonnes Co2e",
+                    "country",
+                    "sector",
+                    "subsector",
+                    "start",
+                ],
             ),
         ]
     )
@@ -676,20 +723,26 @@ def results_analysis(
     emissions_historical["unit"] = "MtCO2e"
 
     # Change unit from t to Mt
-    emissions_historical["Tonnes Co2e"] = emissions_historical["Tonnes Co2e"].divide(
-        1e6
-    )
+    emissions_historical["Tonnes Co2e"] = emissions_historical[
+        "Tonnes Co2e"
+    ].divide(1e6)
 
     # Change 'sector' index to 'product_long' and 'subsector' to 'flow_long' and
     # 'start' to 'year'
     emissions_historical.rename(
-        columns={"Tonnes Co2e": "value", "subsector": "product_long", "start": "year"},
+        columns={
+            "Tonnes Co2e": "value",
+            "subsector": "product_long",
+            "start": "year",
+        },
         inplace=True,
     )
 
     # Change 'year' format
     emissions_historical["year"] = (
-        emissions_historical["year"].str.split("-", expand=True)[0].values.astype(int)
+        emissions_historical["year"]
+        .str.split("-", expand=True)[0]
+        .values.astype(int)
     )
 
     # Update Sector index
@@ -700,7 +753,12 @@ def results_analysis(
             return "Transportation"
         elif x["sector"] in ["buildings"]:
             return "Buildings"
-        elif x["sector"] in ["extraction", "manufacturing", "oil and gas", "waste"]:
+        elif x["sector"] in [
+            "extraction",
+            "manufacturing",
+            "oil and gas",
+            "waste",
+        ]:
             return "Industrial"
         elif x["sector"] in ["agriculture"]:
             return "Agriculture"
@@ -757,7 +815,9 @@ def results_analysis(
 
     # Select data between data_start_year and data_end_year
     emissions_historical.columns = emissions_historical.columns.astype(int)
-    emissions_historical = emissions_historical.loc[:, data_start_year:data_end_year]
+    emissions_historical = emissions_historical.loc[
+        :, data_start_year:data_end_year
+    ]
 
     # Match modeled (emissions_output_co2e) and observed emissions
     # (emissions_historical) categories across 'model', 'region', 'sector'
@@ -777,9 +837,13 @@ def results_analysis(
     emissions_error = abs(
         (
             emissions_historical_compare
-            - emissions_output_co2e_compare.loc[:, emissions_historical_compare.columns]
+            - emissions_output_co2e_compare.loc[
+                :, emissions_historical_compare.columns
+            ]
         )
-        / emissions_historical_compare.loc[:, emissions_historical_compare.columns]
+        / emissions_historical_compare.loc[
+            :, emissions_historical_compare.columns
+        ]
     )
 
     # Drop observed emissions that are all zero

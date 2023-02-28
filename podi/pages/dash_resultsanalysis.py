@@ -1,10 +1,13 @@
 import dash
-from dash import dcc, html, callback, Input, Output
-import plotly.graph_objects as go
 import pandas as pd
+import plotly.graph_objects as go
+from dash import Input, Output, callback, dcc, html
 
 dash.register_page(
-    __name__, path="/ResultsAnalysis", title="Results Analysis", name="Results Analysis"
+    __name__,
+    path="/ResultsAnalysis",
+    title="Results Analysis",
+    name="Results Analysis",
 )
 
 df = pd.read_csv(
@@ -13,7 +16,9 @@ df = pd.read_csv(
 df2 = pd.read_parquet(
     "~/positive-disruption/podi/data/adoption_output_historical.parquet"
 ).reset_index()
-df3 = pd.read_csv("~/positive-disruption/podi/data/adoption_output_projections.csv")
+df3 = pd.read_csv(
+    "~/positive-disruption/podi/data/adoption_output_projections.csv"
+)
 
 layout = html.Div(
     [
@@ -497,7 +502,6 @@ def update_graph(
     groupby3,
     chart_type3,
 ):
-
     {"none": None, "tonexty": "1"}
 
     df = pd.read_csv("~/positive-disruption/podi/data/" + dataset + ".csv")

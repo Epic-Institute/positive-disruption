@@ -8,8 +8,8 @@ used in the cdr optimization module.
 __author__ = "Zach Birnholz"
 __version__ = "08.10.20"
 
-from functools import wraps
 import math
+from functools import wraps
 
 import numpy as np
 
@@ -250,7 +250,9 @@ Used here in tCO2/t*km (using 1/(1000 * 1.46) conversion factor).
 TRUCKING_RAT, SHIPPING_RAT, RAIL_RAT = 30.7, 10.5, 2.4
 
 transport_em_def = [
-    np.average([0.202, 0.059, 0.023], weights=[TRUCKING_RAT, SHIPPING_RAT, RAIL_RAT])
+    np.average(
+        [0.202, 0.059, 0.023], weights=[TRUCKING_RAT, SHIPPING_RAT, RAIL_RAT]
+    )
     / (1000 * 1.46)
     * (END_YEAR - t)
     / (END_YEAR - START_YEAR)
@@ -303,8 +305,8 @@ MAX_HTLSDAC = 11500  # MtCO2/yr deployment
 # Enhanced weathering constants #
 #################################
 
-A_WARM = 5.128 * (10 ** 6)  # km2, total available warm ag area
-A_TEMP = 2.774 * (10 ** 6)  # km2, total available temperate ag area
+A_WARM = 5.128 * (10**6)  # km2, total available warm ag area
+A_TEMP = 2.774 * (10**6)  # km2, total available temperate ag area
 
 SPREADING_DENSITY = 15000  # t rock/km2 ag land (M)
 
@@ -328,7 +330,7 @@ HTLSDAC_T = 318.15  # K, for compression
 COMPRESS_EFF = 0.8  # isoentropic efficiency
 
 PIPELINE_LENGTH = 100  # mi
-PIPELINE_CAPACITY = 10 * (10 ** 6)  # tCO2/yr
+PIPELINE_CAPACITY = 10 * (10**6)  # tCO2/yr
 
 PIPELINE_COST = 0.0234 * PIPELINE_LENGTH  # $/tCO2
 
@@ -346,9 +348,11 @@ RESERVOIR_LEAKAGE_RATE = 0.0001  # 0.01%/yr
 #####################
 
 
-def logistic_inverse_slope(M: float, a: float, b: float, cumul_adopt: int) -> float:
+def logistic_inverse_slope(
+    M: float, a: float, b: float, cumul_adopt: int
+) -> float:
     """Annual adoption limit for logistic function"""
-    return b * (cumul_adopt - cumul_adopt ** 2 / M)
+    return b * (cumul_adopt - cumul_adopt**2 / M)
 
 
 def learning(
@@ -382,7 +386,7 @@ class NotEnoughCDRError(Exception):
 
 
 class PQEntry:
-    """ For bundling capture/storage class priority queue entries """
+    """For bundling capture/storage class priority queue entries"""
 
     def __init__(self, capture_class, storage_class, storage_params):
         self.storage_class = storage_class

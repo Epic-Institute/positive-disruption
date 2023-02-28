@@ -1,6 +1,6 @@
 import dash
-from dash import dcc, html
 import pandas as pd
+from dash import dcc, html
 
 dash.register_page(__name__, path="/AMA", title="AMA", name="AMA")
 
@@ -15,13 +15,21 @@ df = pd.read_parquet(
 
 
 clst = df.columns[
-    (~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1)))
+    (
+        ~df.columns.isin(
+            f"{i}" for i in range(data_start_year, data_end_year + 1)
+        )
+    )
     & (~df.columns.isin(["product_short", "flow_short"]))
 ].tolist()
 
 df.set_index(
     df.columns[
-        (~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1)))
+        (
+            ~df.columns.isin(
+                f"{i}" for i in range(data_start_year, data_end_year + 1)
+            )
+        )
         & (~df.columns.isin(["product_short", "flow_short"]))
     ].tolist(),
     inplace=True,

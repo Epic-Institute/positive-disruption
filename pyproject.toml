@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "positive-disruption"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.23.3",
+"pandas>=1.5.0",
+"scipy>=1.9.0",
+"pandarallel>=1.6.3",
+"pyam-iamc>=1.7.0",
+"globalwarmingpotentials>=0.9.3",
+"fair>=2.1.0",
+"dash>=2.8.1",
+"dash-bootstrap-components>=1.4.0",
+"parquet>=1.3.1",
+"pyarrow>=11.0.0",
+"fastparquet>=2023.2.0"]
+
+[project.optional-dependencies]
+dev = [
+  "black>=22.10.0",
+  "pytest>=7.2.0",
+  "pytest-cov>=4.0.0",
+  "ruff>=0.0.219",
+  "watchdog>=2.1.9",
+  "httpx>=0.23.2",
+]
+
+[tool.ruff]
+ignore = ["E501", "F811"]
+select = ["E", "F", "I", "W"]
+line-length = 79
+fixable = ["I"]
+exclude = [".env", ".venv", "venv", "notebooks"]
+show-source = true
+
+[tool.coverage.paths]
+source = ["src"]
+
+[tool.coverage.run]
+branch = true
+relative_files = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
+
+[tool.black]
+line-length = 79
+extend-exclude = '''
+/(
+  | .env
+  | .venv
+  | venv
+  | notebooks
+)/
+'''

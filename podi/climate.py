@@ -1,10 +1,10 @@
 # region
 
-import pandas as pd
 import fair
+import pandas as pd
 from fair import FAIR
-from fair.io import read_properties
 from fair.interface import fill, initialise
+from fair.io import read_properties
 
 # endregion
 
@@ -19,7 +19,6 @@ def climate(
     data_end_year,
     proj_end_year,
 ):
-
     ########################
     # LOAD HISTORICAL DATA #
     ########################
@@ -57,7 +56,9 @@ def climate(
 
     climate_historical_concentration = (
         climate_historical_concentration[
-            (climate_historical_concentration["Year"] >= data_start_year).values
+            (
+                climate_historical_concentration["Year"] >= data_start_year
+            ).values
         ]
         .rename(columns={"Year": "year"})
         .set_index("year")
@@ -68,7 +69,9 @@ def climate(
     climate_historical_forcing = pd.DataFrame(
         pd.read_csv("podi/data/external/radiative_forcing_historical.csv")
     )
-    climate_historical_forcing.columns = climate_historical_forcing.columns.astype(int)
+    climate_historical_forcing.columns = (
+        climate_historical_forcing.columns.astype(int)
+    )
     climate_historical_forcing = climate_historical_forcing.loc[
         :, data_start_year:proj_end_year
     ].T
@@ -92,9 +95,11 @@ def climate(
     climate_historical_temperature = climate_historical_temperature[
         climate_historical_temperature["type"] == "Global annual"
     ]
-    climate_historical_temperature = climate_historical_temperature.drop(columns="type")
-    climate_historical_temperature.year = climate_historical_temperature.year.astype(
-        int
+    climate_historical_temperature = climate_historical_temperature.drop(
+        columns="type"
+    )
+    climate_historical_temperature.year = (
+        climate_historical_temperature.year.astype(int)
     )
     climate_historical_temperature.set_index("year", inplace=True)
     climate_historical_temperature = climate_historical_temperature.loc[
@@ -120,8 +125,12 @@ def climate(
     emissions_output_co2e.rename(index={"NMVOC": "VOC"}, inplace=True)
 
     # 'HFC-43-10-mee' to 'HFC-4310mee'
-    emissions_output.rename(index={"HFC-43-10-mee": "HFC-4310mee"}, inplace=True)
-    emissions_output_co2e.rename(index={"HFC-43-10-mee": "HFC-4310mee"}, inplace=True)
+    emissions_output.rename(
+        index={"HFC-43-10-mee": "HFC-4310mee"}, inplace=True
+    )
+    emissions_output_co2e.rename(
+        index={"HFC-43-10-mee": "HFC-4310mee"}, inplace=True
+    )
 
     # Update emissions that don't list gas in flow_long (these are all CO2)
     emissions_output.reset_index(inplace=True)
@@ -184,7 +193,11 @@ def climate(
     emissions_output_landuse = emissions_output_co2[
         (
             (emissions_output_co2.flow_long == "CO2")
-            & (emissions_output_co2.sector.isin(["Agriculture", "Forests & Wetlands"]))
+            & (
+                emissions_output_co2.sector.isin(
+                    ["Agriculture", "Forests & Wetlands"]
+                )
+            )
         ).values
     ].drop(columns="flow_long")
 
@@ -228,7 +241,8 @@ def climate(
     emissions_output = emissions_output.parallel_apply(
         lambda x: x.multiply(
             pd.read_csv(
-                "podi/data/climate_unit_conversions.csv", usecols=["value", "gas"]
+                "podi/data/climate_unit_conversions.csv",
+                usecols=["value", "gas"],
             )
             .set_index("gas")
             .loc[x.name[8]]
@@ -252,7 +266,6 @@ def climate(
     climate_output_temperature = pd.DataFrame()
 
     for scenario in emissions_output.reset_index().scenario.unique():
-
         # Format for input into FAIR
         emissions_output_fair = (
             emissions_output.loc[slice(None), scenario, :]
@@ -286,7 +299,9 @@ def climate(
             ):
                 fill(
                     f.emissions,
-                    emissions_output_fair.loc[int(data_end_year + 1) :][specie].values,
+                    emissions_output_fair.loc[int(data_end_year + 1) :][
+                        specie
+                    ].values,
                     scenario=scenario,
                     config=config,
                     specie=specie,
@@ -313,9 +328,15 @@ def climate(
 
         # Fill climate configs
         fill(
-            f.climate_configs["ocean_heat_transfer"], [0.6, 1.3, 1.0], config="default"
+            f.climate_configs["ocean_heat_transfer"],
+            [0.6, 1.3, 1.0],
+            config="default",
         )
-        fill(f.climate_configs["ocean_heat_capacity"], [5, 15, 80], config="default")
+        fill(
+            f.climate_configs["ocean_heat_capacity"],
+            [5, 15, 80],
+            config="default",
+        )
         fill(f.climate_configs["deep_ocean_efficacy"], 1.29, config="default")
 
         # Fill species configs with default values
@@ -383,13 +404,16 @@ def climate(
     emissions_output_co2e_fair = emissions_output_co2e.sort_index()
     emissions_output_co2e_fair.reset_index(inplace=True)
     emissions_output_co2e_fair["flow_long"] = "CO2"
-    emissions_output_co2e_fair.set_index(emissions_output.index.names, inplace=True)
+    emissions_output_co2e_fair.set_index(
+        emissions_output.index.names, inplace=True
+    )
 
     # Convert units from emissions_output_co2e_fair to assumed units for FAIR model input
     emissions_output_co2e_fair = emissions_output_co2e_fair.parallel_apply(
         lambda x: x.multiply(
             pd.read_csv(
-                "podi/data/climate_unit_conversions.csv", usecols=["value", "gas"]
+                "podi/data/climate_unit_conversions.csv",
+                usecols=["value", "gas"],
             )
             .set_index("gas")
             .loc[x.name[8]]
@@ -407,7 +431,6 @@ def climate(
     climate_output_forcing_co2e = pd.DataFrame()
 
     for scenario in emissions_output_co2e_fair.reset_index().scenario.unique():
-
         # Format for input into FAIR
         emissions_output_co2e_fair2 = (
             emissions_output_co2e_fair.loc[slice(None), scenario, :]
@@ -456,18 +479,38 @@ def climate(
         initialise(f.airborne_emissions, 0)
 
         # Fill climate configs
-        fill(f.climate_configs["ocean_heat_transfer"], [0.6, 1.3, 1.0], config="high")
-        fill(f.climate_configs["ocean_heat_capacity"], [5, 15, 80], config="high")
+        fill(
+            f.climate_configs["ocean_heat_transfer"],
+            [0.6, 1.3, 1.0],
+            config="high",
+        )
+        fill(
+            f.climate_configs["ocean_heat_capacity"],
+            [5, 15, 80],
+            config="high",
+        )
         fill(f.climate_configs["deep_ocean_efficacy"], 1.29, config="high")
 
         fill(
-            f.climate_configs["ocean_heat_transfer"], [1.1, 1.6, 0.9], config="central"
+            f.climate_configs["ocean_heat_transfer"],
+            [1.1, 1.6, 0.9],
+            config="central",
         )
-        fill(f.climate_configs["ocean_heat_capacity"], [8, 14, 100], config="central")
+        fill(
+            f.climate_configs["ocean_heat_capacity"],
+            [8, 14, 100],
+            config="central",
+        )
         fill(f.climate_configs["deep_ocean_efficacy"], 1.1, config="central")
 
-        fill(f.climate_configs["ocean_heat_transfer"], [1.7, 2.0, 1.1], config="low")
-        fill(f.climate_configs["ocean_heat_capacity"], [6, 11, 75], config="low")
+        fill(
+            f.climate_configs["ocean_heat_transfer"],
+            [1.7, 2.0, 1.1],
+            config="low",
+        )
+        fill(
+            f.climate_configs["ocean_heat_capacity"], [6, 11, 75], config="low"
+        )
         fill(f.climate_configs["deep_ocean_efficacy"], 0.8, config="low")
 
         # Fill species configs with default values
@@ -504,7 +547,10 @@ def climate(
         )
 
         climate_output_concentration_co2e = pd.concat(
-            [climate_output_concentration_co2e_temp, climate_output_concentration_co2e]
+            [
+                climate_output_concentration_co2e_temp,
+                climate_output_concentration_co2e,
+            ]
         )
         climate_output_forcing_co2e = pd.concat(
             [climate_output_forcing_co2e_temp, climate_output_forcing_co2e]
@@ -525,10 +571,13 @@ def climate(
     climate_historical_concentration["scenario"] = "historical"
     climate_historical_concentration["region"] = "world"
     climate_historical_concentration["variable"] = "Concentration"
-    climate_historical_concentration["gas"] = climate_historical_concentration.index
+    climate_historical_concentration[
+        "gas"
+    ] = climate_historical_concentration.index
     climate_historical_concentration["unit"] = "PPM"
     climate_historical_concentration.set_index(
-        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+        ["model", "scenario", "region", "variable", "gas", "unit"],
+        inplace=True,
     )
 
     climate_historical_forcing = climate_historical_forcing.T
@@ -539,7 +588,8 @@ def climate(
     climate_historical_forcing["gas"] = climate_historical_forcing.index
     climate_historical_forcing["unit"] = "W/m2"
     climate_historical_forcing.set_index(
-        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+        ["model", "scenario", "region", "variable", "gas", "unit"],
+        inplace=True,
     )
 
     climate_historical_temperature = climate_historical_temperature.T
@@ -547,10 +597,13 @@ def climate(
     climate_historical_temperature["scenario"] = "historical"
     climate_historical_temperature["region"] = "world"
     climate_historical_temperature["variable"] = "Temperature change"
-    climate_historical_temperature["gas"] = climate_historical_temperature.index
+    climate_historical_temperature[
+        "gas"
+    ] = climate_historical_temperature.index
     climate_historical_temperature["unit"] = "C"
     climate_historical_temperature.set_index(
-        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+        ["model", "scenario", "region", "variable", "gas", "unit"],
+        inplace=True,
     )
 
     climate_output_concentration = climate_output_concentration.droplevel(1)
@@ -572,7 +625,9 @@ def climate(
     climate_output_forcing["model"] = "PD22"
     climate_output_forcing["region"] = "world"
     climate_output_forcing["variable"] = "Radiative forcing"
-    climate_output_forcing["gas"] = climate_output_forcing.index.get_level_values(1)
+    climate_output_forcing[
+        "gas"
+    ] = climate_output_forcing.index.get_level_values(1)
     climate_output_forcing["unit"] = "W/m2"
     climate_output_forcing = (
         climate_output_forcing.droplevel("product_long")
@@ -592,7 +647,9 @@ def climate(
         .set_index(["model", "scenario", "region", "variable", "gas", "unit"])
     )
 
-    climate_output_concentration_co2e = climate_output_concentration_co2e.droplevel(1)
+    climate_output_concentration_co2e = (
+        climate_output_concentration_co2e.droplevel(1)
+    )
     climate_output_concentration_co2e.reset_index(inplace=True)
     climate_output_concentration_co2e["model"] = model
     climate_output_concentration_co2e["region"] = "world"
@@ -600,11 +657,14 @@ def climate(
         columns={"product_long": "variable"}, inplace=True
     )
     climate_output_concentration_co2e["gas"] = "All"
-    climate_output_concentration_co2e.replace({"CO2e": "Concentration"}, inplace=True)
+    climate_output_concentration_co2e.replace(
+        {"CO2e": "Concentration"}, inplace=True
+    )
     climate_output_concentration_co2e["gas"] = "CO2e"
     climate_output_concentration_co2e["unit"] = "PPM"
     climate_output_concentration_co2e.set_index(
-        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+        ["model", "scenario", "region", "variable", "gas", "unit"],
+        inplace=True,
     )
 
     climate_output_forcing_co2e = climate_output_forcing_co2e.droplevel(1)
@@ -615,11 +675,14 @@ def climate(
         columns={"product_long": "variable"}, inplace=True
     )
     climate_output_forcing_co2e["gas"] = "All"
-    climate_output_forcing_co2e.replace({"CO2e": "Radiative forcing"}, inplace=True)
+    climate_output_forcing_co2e.replace(
+        {"CO2e": "Radiative forcing"}, inplace=True
+    )
     climate_output_forcing_co2e["gas"] = "CO2e"
     climate_output_forcing_co2e["unit"] = "W/m2"
     climate_output_forcing_co2e.set_index(
-        ["model", "scenario", "region", "variable", "gas", "unit"], inplace=True
+        ["model", "scenario", "region", "variable", "gas", "unit"],
+        inplace=True,
     )
 
     # combine historical and output
@@ -635,7 +698,11 @@ def climate(
             + abs(
                 (
                     climate_historical_concentration.loc[
-                        x.name[0], "historical", x.name[2], x.name[3], x.name[4]
+                        x.name[0],
+                        "historical",
+                        x.name[2],
+                        x.name[3],
+                        x.name[4],
                     ][data_end_year + 2]
                     - x.loc[data_end_year + 2]
                 )
@@ -664,8 +731,12 @@ def climate(
         [
             pd.concat(
                 [
-                    climate_historical_forcing.rename(index={"historical": "baseline"}),
-                    climate_historical_forcing.rename(index={"historical": scenario}),
+                    climate_historical_forcing.rename(
+                        index={"historical": "baseline"}
+                    ),
+                    climate_historical_forcing.rename(
+                        index={"historical": scenario}
+                    ),
                 ]
             ),
             climate_output_forcing.loc[:, data_end_year + 3 :],
@@ -678,7 +749,11 @@ def climate(
             + abs(
                 (
                     climate_historical_temperature.loc[
-                        x.name[0], "historical", x.name[2], x.name[3], x.name[4]
+                        x.name[0],
+                        "historical",
+                        x.name[2],
+                        x.name[3],
+                        x.name[4],
                     ]
                     .iloc[-1]
                     .iloc[-1]
@@ -723,8 +798,12 @@ def climate(
         [
             pd.concat(
                 [
-                    climate_historical_forcing.rename(index={"historical": "baseline"}),
-                    climate_historical_forcing.rename(index={"historical": scenario}),
+                    climate_historical_forcing.rename(
+                        index={"historical": "baseline"}
+                    ),
+                    climate_historical_forcing.rename(
+                        index={"historical": scenario}
+                    ),
                 ]
             ),
             climate_output_forcing_co2e.loc[:, data_end_year + 3 :],

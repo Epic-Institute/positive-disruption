@@ -1,12 +1,13 @@
 # region
 
-import os
-import pandas as pd
-import numpy as np
-from numpy import NaN
-from scipy.optimize import differential_evolution
 import multiprocessing
+import os
+
+import numpy as np
+import pandas as pd
+from numpy import NaN
 from pandarallel import pandarallel
+from scipy.optimize import differential_evolution
 
 pandarallel.initialize(progress_bar=True, nb_workers=6)
 
@@ -14,7 +15,6 @@ pandarallel.initialize(progress_bar=True, nb_workers=6)
 
 
 def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
-
     ############################
     #  LOAD HISTORICAL ENERGY  #
     ############################
@@ -71,10 +71,14 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             )
 
             # Change values to float
-            energy_historical["value"] = energy_historical["value"].astype(float)
+            energy_historical["value"] = energy_historical["value"].astype(
+                float
+            )
 
             # Change from all caps to lowercase
-            energy_historical["region"] = energy_historical["region"].str.lower()
+            energy_historical["region"] = energy_historical[
+                "region"
+            ].str.lower()
 
             # Format as a dataframe with timeseries as rows
             energy_historical = pd.pivot_table(
@@ -92,11 +96,15 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             ).combine_first(energy_historical)
 
             # Backfill missing data using oldest data point
-            energy_historical = energy_historical.fillna(method="backfill", axis=1)
+            energy_historical = energy_historical.fillna(
+                method="backfill", axis=1
+            )
 
             # For rows with data only prior to data_start_year, front fill to data_start_year
             energy_historical.update(
-                energy_historical[energy_historical.loc[:, data_start_year].isna()]
+                energy_historical[
+                    energy_historical.loc[:, data_start_year].isna()
+                ]
                 .loc[:, :data_start_year]
                 .fillna(method="ffill", axis=1)
             )
@@ -105,7 +113,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             energy_historical = energy_historical.loc[[region.lower()], :]
 
             # Filter for data start_year and data_end_year, which can be different depending on region/product/flow because data becomes available at different times
-            energy_historical = energy_historical.loc[:, data_start_year:data_end_year]
+            energy_historical = energy_historical.loc[
+                :, data_start_year:data_end_year
+            ]
 
             # Build dataframe consisting of all regions
             energy_historical_temp = pd.concat(
@@ -119,7 +129,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             pool.map(
                 process_df_function,
                 np.array_split(
-                    pd.read_csv("podi/data/IEA/Regions.txt").squeeze("columns"),
+                    pd.read_csv("podi/data/IEA/Regions.txt").squeeze(
+                        "columns"
+                    ),
                     multiprocessing.cpu_count(),
                 ),
             )
@@ -127,7 +139,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # Add model and scenario indices
     energy_historical = pd.concat(
-        [pd.concat([energy_historical], keys=["baseline"], names=["scenario"])],
+        [
+            pd.concat(
+                [energy_historical], keys=["baseline"], names=["scenario"]
+            )
+        ],
         keys=["PD22"],
         names=["model"],
     )
@@ -149,7 +165,10 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             pd.read_csv(
                 "podi/data/IEA/Other/IEA_Product_Definitions.csv",
                 usecols=["product_category", "product_short"],
-                dtype={"product_category": "category", "product_short": "category"},
+                dtype={
+                    "product_category": "category",
+                    "product_short": "category",
+                },
             )
         )
         .set_index("product_category")
@@ -244,12 +263,16 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # if not, update the filename below.
 
     # region
-    irena = pd.read_csv("podi/data/IRENA/RE-ELECGEN_20220805-204524.csv", header=2)
+    irena = pd.read_csv(
+        "podi/data/IRENA/RE-ELECGEN_20220805-204524.csv", header=2
+    )
 
     # Filter for technologies that are not overlapping, and rename 'Technology' index
     # to 'product_short'
     irena = irena.loc[
-        irena["Technology"].isin(["Onshore wind energy", "Offshore wind energy"])
+        irena["Technology"].isin(
+            ["Onshore wind energy", "Offshore wind energy"]
+        )
     ].replace(
         {
             "Technology": {
@@ -329,13 +352,15 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             pd.concat(
                 [
                     energy_historical[
-                        energy_historical.index.get_level_values(3).isin(["WIND"])
+                        energy_historical.index.get_level_values(3).isin(
+                            ["WIND"]
+                        )
                     ]
                     .loc[:, :2000]
                     .rename(index={"WIND": "ONSHORE"}),
-                    irena[irena.index.get_level_values(3).isin(["ONSHORE"])].loc[
-                        :, 2001:
-                    ],
+                    irena[
+                        irena.index.get_level_values(3).isin(["ONSHORE"])
+                    ].loc[:, 2001:],
                 ],
                 axis=1,
             ),
@@ -407,12 +432,18 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Create Two- and three-wheeled Flow (TTROAD) using estimate of the fraction of
     # ROAD that is Two- and three-wheeled
     ttroad = (
-        energy_historical[(energy_historical.reset_index().flow_short == "ROAD").values]
+        energy_historical[
+            (energy_historical.reset_index().flow_short == "ROAD").values
+        ]
         .parallel_apply(
             lambda x: x
             * (
                 subsector_props.loc[
-                    x.name[2], "ROAD", "baseline", x.name[3], "Two- and three-wheeled"
+                    x.name[2],
+                    "ROAD",
+                    "baseline",
+                    x.name[3],
+                    "Two- and three-wheeled",
                 ].values
             ),
             axis=1,
@@ -423,7 +454,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Create Light-duty Flow (LIGHTROAD) using estimate of the fraction of ROAD that is
     # Light-duty vehicles
     lightroad = (
-        energy_historical[(energy_historical.reset_index().flow_short == "ROAD").values]
+        energy_historical[
+            (energy_historical.reset_index().flow_short == "ROAD").values
+        ]
         .parallel_apply(
             lambda x: x
             * (
@@ -439,7 +472,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Create Medium-duty Flow (MEDIUMROAD) using estimate of the fraction of ROAD that
     # is Medium-duty vehicles (Buses and Vans)
     mediumroad = (
-        energy_historical[(energy_historical.reset_index().flow_short == "ROAD").values]
+        energy_historical[
+            (energy_historical.reset_index().flow_short == "ROAD").values
+        ]
         .parallel_apply(
             lambda x: x
             * (
@@ -455,7 +490,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Create Heavy-duty Flow (HEAVYROAD) using estimate of the fraction of ROAD that is
     # Heavy-duty vehicles (Trucks)
     heavyroad = (
-        energy_historical[(energy_historical.reset_index().flow_short == "ROAD").values]
+        energy_historical[
+            (energy_historical.reset_index().flow_short == "ROAD").values
+        ]
         .parallel_apply(
             lambda x: x
             * (
@@ -523,7 +560,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # Drop DOMESAIR Flow and add SDOMESAIR and LDOMESAIR
     energy_historical = pd.concat(
-        [energy_historical.drop(labels=["DOMESAIR"], level=5), sdomesair, ldomesair]
+        [
+            energy_historical.drop(labels=["DOMESAIR"], level=5),
+            sdomesair,
+            ldomesair,
+        ]
     )
 
     # endregion
@@ -535,7 +576,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Create Light-duty Flow (LIGHTRAIL) using estimate of the fraction of RAIL that is
     # Light-duty
     lightrail = (
-        energy_historical[(energy_historical.reset_index().flow_short == "RAIL").values]
+        energy_historical[
+            (energy_historical.reset_index().flow_short == "RAIL").values
+        ]
         .parallel_apply(
             lambda x: x
             * (
@@ -551,7 +594,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Create Heavy-duty Flow (HEAVYRAIL) using estimate of the fraction of RAIL that is
     # Heavy-duty
     heavyrail = (
-        energy_historical[(energy_historical.reset_index().flow_short == "RAIL").values]
+        energy_historical[
+            (energy_historical.reset_index().flow_short == "RAIL").values
+        ]
         .parallel_apply(
             lambda x: x
             * (
@@ -566,7 +611,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # Drop RAIL Flow and add LIGHTRAIL and HEAVYRAIL
     energy_historical = pd.concat(
-        [energy_historical.drop(labels=["RAIL"], level=5), lightrail, heavyrail]
+        [
+            energy_historical.drop(labels=["RAIL"], level=5),
+            lightrail,
+            heavyrail,
+        ]
     )
 
     # endregion
@@ -589,7 +638,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             lambda x: x
             * (
                 subsector_props.loc[
-                    "world", x.name[4], "baseline", x.name[5], "Low Temperature"
+                    "world",
+                    x.name[4],
+                    "baseline",
+                    x.name[5],
+                    "Low Temperature",
                 ].values
             ),
             axis=1,
@@ -611,7 +664,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             * (
                 1
                 - subsector_props.loc[
-                    "world", x.name[4], "baseline", x.name[5], "Low Temperature"
+                    "world",
+                    x.name[4],
+                    "baseline",
+                    x.name[5],
+                    "Low Temperature",
                 ].values
             ),
             axis=1,
@@ -621,7 +678,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # Drop HEAT, HEATNS Products and add LHEAT, LHEATNS, HHEAT, HHEATNS
     energy_historical = pd.concat(
-        [energy_historical.drop(labels=["HEAT", "HEATNS"], level=4), lheat, hheat]
+        [
+            energy_historical.drop(labels=["HEAT", "HEATNS"], level=4),
+            lheat,
+            hheat,
+        ]
     )
 
     # endregion
@@ -634,7 +695,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # that is Hydrogen
     hydrogen = (
         energy_historical[
-            (energy_historical.reset_index().product_short == "NONCRUDE").values
+            (
+                energy_historical.reset_index().product_short == "NONCRUDE"
+            ).values
         ]
         .parallel_apply(
             lambda x: x
@@ -664,7 +727,11 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # Drop old NONCRUDE Product and add HYDROGEN and new NONCRUDE
     energy_historical = pd.concat(
-        [energy_historical.drop(labels=["NONCRUDE"], level=4), hydrogen, noncrude]
+        [
+            energy_historical.drop(labels=["NONCRUDE"], level=4),
+            hydrogen,
+            noncrude,
+        ]
     )
 
     # endregion
@@ -683,7 +750,10 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             energy_historical,
             (
                 energy_historical[
-                    (energy_historical.reset_index().product_short == "SOLARPV").values
+                    (
+                        energy_historical.reset_index().product_short
+                        == "SOLARPV"
+                    ).values
                 ].parallel_apply(lambda x: x * 0.4, axis=1)
             ).rename(
                 index={
@@ -809,7 +879,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     energy_historical_index = energy_historical.index.names
     energy_historical.reset_index(inplace=True)
-    energy_historical = energy_historical.replace("Supply", "Final consumption")
+    energy_historical = energy_historical.replace(
+        "Supply", "Final consumption"
+    )
     energy_historical.set_index(energy_historical_index, inplace=True)
 
     # Some flows in flow_category 'Transformation processes' are negative, representing
@@ -818,14 +890,22 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Values that were already positive (representing production of a product) are
     # dropped to avoid double counting with flow_category 'Final consumption'.
     energy_historical[
-        (energy_historical.index.get_level_values(7).isin(["Transformation processes"]))
+        (
+            energy_historical.index.get_level_values(7).isin(
+                ["Transformation processes"]
+            )
+        )
         & (energy_historical.sum(axis=1) > 0)
     ] = 0
 
     energy_historical[
-        energy_historical.index.get_level_values(7).isin(["Transformation processes"])
+        energy_historical.index.get_level_values(7).isin(
+            ["Transformation processes"]
+        )
     ] = energy_historical[
-        energy_historical.index.get_level_values(7).isin(["Transformation processes"])
+        energy_historical.index.get_level_values(7).isin(
+            ["Transformation processes"]
+        )
     ].abs()
 
     # All flows in flow_category 'Energy industry own use and Losses' are negative,
@@ -870,11 +950,15 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             )
         ).values
     ]
-    energy_historical = energy_historical.drop(energy_historical_nonenergy.index)
+    energy_historical = energy_historical.drop(
+        energy_historical_nonenergy.index
+    )
 
     energy_historical_nonenergy.reset_index(inplace=True)
     energy_historical_nonenergy.flow_category = "Non-energy use"
-    energy_historical_nonenergy.set_index(energy_historical.index.names, inplace=True)
+    energy_historical_nonenergy.set_index(
+        energy_historical.index.names, inplace=True
+    )
     energy_historical = (
         pd.concat([energy_historical, energy_historical_nonenergy])
         .loc[:, data_start_year:data_end_year]
@@ -901,14 +985,17 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Load EIA energy projections
     energy_projection = (
         pd.read_excel(
-            pd.ExcelFile("podi/data/EIA/EIA_IEO.xlsx", engine="openpyxl"), header=0
+            pd.ExcelFile("podi/data/EIA/EIA_IEO.xlsx", engine="openpyxl"),
+            header=0,
         )
         .dropna(axis="index", how="all")
         .dropna(axis="columns", thresh=2)
     ).loc[:, :proj_end_year]
 
     # Strip preceding space in EIA Sector values
-    energy_projection["EIA Product"] = energy_projection["EIA Product"].str.strip()
+    energy_projection["EIA Product"] = energy_projection[
+        "EIA Product"
+    ].str.strip()
 
     # create dataframe of energy projections as annual % change
     energy_projection = (
@@ -927,7 +1014,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         (
             energy_historical.reset_index()
             .set_index(["EIA Region", "sector", "EIA Product"])
-            .merge(energy_projection, on=["EIA Region", "sector", "EIA Product"])
+            .merge(
+                energy_projection, on=["EIA Region", "sector", "EIA Product"]
+            )
         )
         .reset_index()
         .set_index(
@@ -1032,7 +1121,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     parameters = ef_ratio
 
-    ef_ratio = ef_ratio[ef_ratio.index.get_level_values(4) == "floor"].sort_index()
+    ef_ratio = ef_ratio[
+        ef_ratio.index.get_level_values(4) == "floor"
+    ].sort_index()
 
     # Clear energy_adoption_curves.csv, and run adoption_projection_demand() to
     # calculate logistics curves for energy reduction ratios
@@ -1097,7 +1188,10 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         if scenario == "baseline":
             y = linear(
                 x_data,
-                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                min(
+                    0.0018,
+                    max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data))),
+                ),
                 (y_data[-1]),
             )
             genetic_parameters = [0, 0, 0, 0]
@@ -1139,7 +1233,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     ef_ratio.parallel_apply(
         lambda x: adoption_projection_demand(
-            parameters=parameters.loc[x.name[0], x.name[1], x.name[2], x.name[3]],
+            parameters=parameters.loc[
+                x.name[0], x.name[1], x.name[2], x.name[3]
+            ],
             input_data=x,
             scenario=scenario,
             data_end_year=data_end_year + 1,
@@ -1150,12 +1246,16 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     ef_ratios = (
-        pd.DataFrame(pd.read_csv("podi/data/energy_adoption_curves.csv", header=None))
+        pd.DataFrame(
+            pd.read_csv("podi/data/energy_adoption_curves.csv", header=None)
+        )
         .set_axis(
             pd.concat(
                 [
                     pd.DataFrame(
-                        np.array(["region", "product_short", "scenario", "sector"])
+                        np.array(
+                            ["region", "product_short", "scenario", "sector"]
+                        )
                     ).T,
                     pd.DataFrame(
                         np.linspace(
@@ -1257,7 +1357,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     upstream_ratios.update(
         upstream_ratios[upstream_ratios.index.get_level_values(4) == "Y"]
-        .parallel_apply(lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1)
+        .parallel_apply(
+            lambda x: 1 - (x.max() - x) / (x.max() - x.min()), axis=1
+        )
         .fillna(0)
     )
 
@@ -1277,7 +1379,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     energy_post_upstream = energy_baseline.parallel_apply(
         lambda x: x.mul(
-            upstream_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze()
+            upstream_ratios.loc[
+                x.name[2], x.name[3], x.name[6], x.name[9]
+            ].squeeze()
         ),
         axis=1,
     )
@@ -1289,9 +1393,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    addtl_eff = pd.DataFrame(pd.read_csv("podi/data/energy_ef_ratios.csv")).set_index(
-        ["scenario", "region", "sector", "product_short"]
-    )
+    addtl_eff = pd.DataFrame(
+        pd.read_csv("podi/data/energy_ef_ratios.csv")
+    ).set_index(["scenario", "region", "sector", "product_short"])
     addtl_eff.columns = addtl_eff.columns.astype(int)
 
     labels = (
@@ -1376,7 +1480,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # of work to that of the energy that undergoes electrification.
     energy_reduced_electrified = energy_electrified.parallel_apply(
         lambda x: x.mul(
-            ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]].squeeze().iloc[-1]
+            ef_ratios.loc[x.name[2], x.name[3], x.name[6], x.name[9]]
+            .squeeze()
+            .iloc[-1]
         ),
         axis=1,
     )
@@ -1552,7 +1658,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     ]
 
     per_elec_supply = elec_supply.parallel_apply(
-        lambda x: x.divide(elec_supply.groupby(["region"]).sum(0).loc[x.name[2]]),
+        lambda x: x.divide(
+            elec_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+        ),
         axis=1,
     ).fillna(0)
 
@@ -1560,12 +1668,23 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # product to estimate projected percent of total electricity consumption each meets
     parameters = pd.read_csv(
         "podi/data/tech_parameters.csv",
-        usecols=["region", "product_short", "scenario", "sector", "metric", "value"],
+        usecols=[
+            "region",
+            "product_short",
+            "scenario",
+            "sector",
+            "metric",
+            "value",
+        ],
     ).set_index(["region", "product_short", "scenario", "sector", "metric"])
     parameters = parameters.sort_index()
 
     def adoption_projection(
-        input_data, saturation_date, output_end_date, change_model, change_parameters
+        input_data,
+        saturation_date,
+        output_end_date,
+        change_model,
+        change_parameters,
     ):
         def linear(x, a, b, c, d):
             return a * x + d
@@ -1574,23 +1693,27 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             return c / (1 + np.exp(-a * (x - b))) + d
 
         # Take 10 years prior data to fit logistic function
-        x_data = np.arange(0, output_end_date - input_data.last_valid_index() + 11, 1)
+        x_data = np.arange(
+            0, output_end_date - input_data.last_valid_index() + 11, 1
+        )
         y_data = np.zeros((1, len(x_data)))
         y_data[:, :] = np.NaN
         y_data = y_data.squeeze().astype(float)
         y_data[:11] = input_data.loc[
             input_data.last_valid_index() - 10 : input_data.last_valid_index()
         ]
-        y_data[saturation_date - input_data.last_valid_index()] = change_parameters.loc[
-            "saturation point"
-        ].value.astype(float)
+        y_data[
+            saturation_date - input_data.last_valid_index()
+        ] = change_parameters.loc["saturation point"].value.astype(float)
 
         # Handle cases where saturation point is below current value, by making
         # saturation point equidistant from current value but in positive direction
         if y_data[10] > y_data[-1]:
             y_data[-1] = y_data[10] + abs(y_data[-1] - y_data[10])
 
-        y_data = np.array((pd.DataFrame(y_data).interpolate(method="linear")).squeeze())
+        y_data = np.array(
+            (pd.DataFrame(y_data).interpolate(method="linear")).squeeze()
+        )
 
         # Load search bounds for logistic function parameters
         search_bounds = [
@@ -1614,13 +1737,18 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
         # Define sum of squared error function
         def sum_of_squared_error(change_parameters):
-            return np.sum((y_data - logistic(x_data, *change_parameters)) ** 2.0)
+            return np.sum(
+                (y_data - logistic(x_data, *change_parameters)) ** 2.0
+            )
 
         # Generate genetic_parameters. For baseline scenarios, projections are linear
         if change_model == "linear":
             y = linear(
                 x_data,
-                min(0.04, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                min(
+                    0.04,
+                    max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data))),
+                ),
                 0,
                 0,
                 y_data[10],
@@ -1643,20 +1771,30 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         y = np.concatenate(
             [
                 input_data.loc[: input_data.last_valid_index()].values,
-                y[y >= input_data.loc[input_data.last_valid_index()]].squeeze(),
+                y[
+                    y >= input_data.loc[input_data.last_valid_index()]
+                ].squeeze(),
             ]
         )[: (output_end_date + 1 - input_data.first_valid_index())]
 
         return pd.Series(
             data=y[
-                : len(np.arange(input_data.first_valid_index(), output_end_date + 1, 1))
+                : len(
+                    np.arange(
+                        input_data.first_valid_index(), output_end_date + 1, 1
+                    )
+                )
             ],
-            index=np.arange(input_data.first_valid_index(), output_end_date + 1, 1),
+            index=np.arange(
+                input_data.first_valid_index(), output_end_date + 1, 1
+            ),
             name=input_data.name,
         )
 
     per_elec_supply.update(
-        per_elec_supply[per_elec_supply.index.get_level_values(6).isin(renewables)]
+        per_elec_supply[
+            per_elec_supply.index.get_level_values(6).isin(renewables)
+        ]
         .parallel_apply(
             lambda x: adoption_projection(
                 input_data=x.loc[:data_end_year],
@@ -1685,7 +1823,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 lambda x: x.multiply(
                     per_elec_supply[
                         per_elec_supply.index.get_level_values(6).isin(
-                            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                            pd.concat(
+                                [pd.Series(renewables), pd.Series("RELECTR")]
+                            )
                         )
                     ]
                     .groupby("region")
@@ -1705,7 +1845,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 lambda x: x.multiply(
                     per_elec_supply[
                         per_elec_supply.index.get_level_values(6).isin(
-                            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                            pd.concat(
+                                [pd.Series(renewables), pd.Series("RELECTR")]
+                            )
                         )
                     ]
                     .groupby("region")
@@ -1735,7 +1877,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                     1
                     - per_elec_supply[
                         per_elec_supply.index.get_level_values(6).isin(
-                            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                            pd.concat(
+                                [pd.Series(renewables), pd.Series("RELECTR")]
+                            )
                         )
                     ]
                     .groupby("region")
@@ -1756,7 +1900,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                     1
                     - per_elec_supply[
                         per_elec_supply.index.get_level_values(6).isin(
-                            pd.concat([pd.Series(renewables), pd.Series("RELECTR")])
+                            pd.concat(
+                                [pd.Series(renewables), pd.Series("RELECTR")]
+                            )
                         )
                     ]
                     .groupby("region")
@@ -1791,9 +1937,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     elec_supply.update(
         pd.concat(
             [
-                elec_supply[elec_supply.index.get_level_values(6).isin(renewables)].loc[
-                    :, :data_end_year
-                ],
+                elec_supply[
+                    elec_supply.index.get_level_values(6).isin(renewables)
+                ].loc[:, :data_end_year],
                 +per_elec_supply[
                     per_elec_supply.index.get_level_values(6).isin(renewables)
                 ]
@@ -1820,7 +1966,10 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     ] = (
         energy_post_electrification[
             (energy_post_electrification["product_short"] == "RELECTR")
-            & (energy_post_electrification["flow_category"] == "Final consumption")
+            & (
+                energy_post_electrification["flow_category"]
+                == "Final consumption"
+            )
         ]
         .replace({"RELECTR": "ELECTR"})
         .replace({"Renewable Electricity": "Electricity"})
@@ -1871,7 +2020,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # Recalculate percent of total consumption each technology meets
     per_elec_supply = elec_supply.parallel_apply(
-        lambda x: x.divide(elec_supply.groupby(["region"]).sum(0).loc[x.name[2]]),
+        lambda x: x.divide(
+            elec_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+        ),
         axis=1,
     ).fillna(0)
 
@@ -1892,7 +2043,12 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                         == "Final consumption"
                     ).values
                 )
-                & ((energy_post_electrification.reset_index().nonenergy == "N").values)
+                & (
+                    (
+                        energy_post_electrification.reset_index().nonenergy
+                        == "N"
+                    ).values
+                )
             ]
             .groupby(["model", "scenario", "region"])
             .sum()
@@ -1922,21 +2078,26 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     heat_supply = energy_post_electrification[
         (
             (
-                energy_post_electrification.reset_index().flow_category == "Heat output"
+                energy_post_electrification.reset_index().flow_category
+                == "Heat output"
             ).values
         )
         & ((energy_post_electrification.reset_index().nonenergy == "N").values)
     ]
 
     per_heat_supply = heat_supply.parallel_apply(
-        lambda x: x.divide(heat_supply.groupby(["region"]).sum(0).loc[x.name[2]]),
+        lambda x: x.divide(
+            heat_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+        ),
         axis=1,
     ).fillna(0)
 
     # Use the historical percent of total heat consumption met by each renewable
     # product to estimate projected percent of total heat consumption each meets
     per_heat_supply.update(
-        per_heat_supply[per_heat_supply.index.get_level_values(6).isin(renewables)]
+        per_heat_supply[
+            per_heat_supply.index.get_level_values(6).isin(renewables)
+        ]
         .parallel_apply(
             lambda x: adoption_projection(
                 input_data=x.loc[:data_end_year],
@@ -1959,7 +2120,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             per_heat_supply.index.get_level_values(6).isin(renewables)
         ].parallel_apply(
             lambda x: x.multiply(
-                heat_supply[heat_supply.index.get_level_values(6).isin(renewables)]
+                heat_supply[
+                    heat_supply.index.get_level_values(6).isin(renewables)
+                ]
                 .groupby(["region"])
                 .sum(0)
                 .loc[x.name[2]]
@@ -1970,7 +2133,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # Recalculate percent of total consumption each technology meets
     per_heat_supply = heat_supply.parallel_apply(
-        lambda x: x.divide(heat_supply.groupby(["region"]).sum(0).loc[x.name[2]]),
+        lambda x: x.divide(
+            heat_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+        ),
         axis=1,
     ).fillna(0)
 
@@ -1990,7 +2155,12 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # For each region, find the percent of total nonelectric energy consumption met by
     # each product.
     transport_supply = energy_post_electrification[
-        ((energy_post_electrification.reset_index().sector == "Transportation").values)
+        (
+            (
+                energy_post_electrification.reset_index().sector
+                == "Transportation"
+            ).values
+        )
         & (
             (
                 energy_post_electrification.reset_index().flow_category
@@ -2001,7 +2171,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     ]
 
     per_transport_supply = transport_supply.parallel_apply(
-        lambda x: x.divide(transport_supply.groupby(["region"]).sum(0).loc[x.name[2]]),
+        lambda x: x.divide(
+            transport_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+        ),
         axis=1,
     ).fillna(0)
 
@@ -2046,7 +2218,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # Recalculate percent of total consumption each technology meets
     per_transport_supply = transport_supply.parallel_apply(
-        lambda x: x.divide(transport_supply.groupby(["region"]).sum(0).loc[x.name[2]]),
+        lambda x: x.divide(
+            transport_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+        ),
         axis=1,
     ).fillna(0)
 
@@ -2062,11 +2236,15 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # region
 
     # Drop rows that have all zeros
-    energy_post_upstream = energy_post_upstream[energy_post_upstream.sum(axis=1) != 0]
+    energy_post_upstream = energy_post_upstream[
+        energy_post_upstream.sum(axis=1) != 0
+    ]
     energy_post_addtl_eff = energy_post_addtl_eff[
         energy_post_addtl_eff.sum(axis=1) != 0
     ]
-    energy_electrified = energy_electrified[energy_electrified.sum(axis=1) != 0]
+    energy_electrified = energy_electrified[
+        energy_electrified.sum(axis=1) != 0
+    ]
     energy_reduced_electrified = energy_reduced_electrified[
         energy_reduced_electrified.sum(axis=1) != 0
     ]
@@ -2075,10 +2253,14 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     ]
     per_elec_supply = per_elec_supply[per_elec_supply.sum(axis=1) != 0]
     per_heat_supply = per_heat_supply[per_heat_supply.sum(axis=1) != 0]
-    per_transport_supply = per_transport_supply[per_transport_supply.sum(axis=1) != 0]
+    per_transport_supply = per_transport_supply[
+        per_transport_supply.sum(axis=1) != 0
+    ]
 
     # Combine percent output for electricity, heat, transport
-    energy_percent = pd.concat([per_elec_supply, per_heat_supply, per_transport_supply])
+    energy_percent = pd.concat(
+        [per_elec_supply, per_heat_supply, per_transport_supply]
+    )
 
     # Combine baseline and pathway energy output:
     energy_output = pd.concat([energy_baseline, energy_post_electrification])
