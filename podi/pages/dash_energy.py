@@ -12,8 +12,9 @@ data_end_year = 2100
 
 dataset = ["energy_output"]
 
-df = pd.read_parquet("~/positive-disruption/podi/data/" + dataset[0] + ".parquet")
-df.reset_index(inplace=True)
+df = pd.read_parquet(
+    "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
+).reset_index()
 
 clst = df.columns[
     (~df.columns.isin(f"{i}" for i in range(data_start_year, data_end_year + 1)))
