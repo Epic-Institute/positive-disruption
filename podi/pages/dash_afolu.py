@@ -1,7 +1,7 @@
 import dash
-from dash import callback, dcc, html, Input, Output
-import plotly.graph_objects as go
 import pandas as pd
+import plotly.graph_objects as go
+from dash import Input, Output, callback, dcc, html
 
 dash.register_page(__name__, path="/AFOLU", title="AFOLU", name="AFOLU")
 
@@ -272,7 +272,11 @@ layout = html.Div(
             [
                 dcc.RadioItems(
                     df2.unit.unique().tolist()
-                    + ["tCO2e/m3/yr", "tCO2e/percentile improvement", "tCO2e/Mha/yr"],
+                    + [
+                        "tCO2e/m3/yr",
+                        "tCO2e/percentile improvement",
+                        "tCO2e/Mha/yr",
+                    ],
                     df2.unit.unique().tolist()[0],
                     id="unit",
                 ),
@@ -363,7 +367,6 @@ def update_graph(
     variable,
     unit,
 ):
-
     # unit_val = {"Mha": 1, "ha": 1e6, "km2": 1e4}
     stack_type = {"none": None, "tonexty": "1"}
 
@@ -453,7 +456,9 @@ def update_graph(
         type="linear" if yaxis_type == "Linear" else "log",
     )
 
-    df2 = pd.read_csv("~/positive-disruption/podi/data/TNC/" + dataset2 + ".csv")
+    df2 = pd.read_csv(
+        "~/positive-disruption/podi/data/TNC/" + dataset2 + ".csv"
+    )
 
     filtered_df2 = (
         (

@@ -1,12 +1,13 @@
 # region
 
 import os
-import pandas as pd
-from numpy import NaN
-import numpy as np
-import pyam
-from pandarallel import pandarallel
+
 import globalwarmingpotentials as gwp
+import numpy as np
+import pandas as pd
+import pyam
+from numpy import NaN
+from pandarallel import pandarallel
 from scipy.optimize import differential_evolution
 
 pandarallel.initialize(progress_bar=True, nb_workers=6)
@@ -22,7 +23,6 @@ def emissions(
     data_end_year,
     proj_end_year,
 ):
-
     #########################################
     #  CALCULATE CO2 EMISSIONS FROM ENERGY  #
     #########################################
@@ -41,7 +41,9 @@ def emissions(
     # Load new df with index matching energy_output
     emissions_factors = pd.DataFrame(
         index=energy_output[
-            ~(energy_output.reset_index().flow_category == "Non-energy use").values
+            ~(
+                energy_output.reset_index().flow_category == "Non-energy use"
+            ).values
         ].index,
         columns=energy_output.columns,
     ).fillna(0)
@@ -66,7 +68,10 @@ def emissions(
         lambda x: x.subtract(
             pd.Series(
                 (x[x.first_valid_index()] * 0.005)
-                * (np.arange(data_start_year, proj_end_year + 1) - data_start_year),
+                * (
+                    np.arange(data_start_year, proj_end_year + 1)
+                    - data_start_year
+                ),
                 index=x.index,
             ).rename(x.name)
         ).clip(lower=0),
@@ -78,7 +83,10 @@ def emissions(
     emissions_energy = energy_output[
         ~(energy_output.reset_index().flow_category == "Non-energy use").values
     ].parallel_apply(
-        lambda x: x.multiply(emissions_factors.loc[x.name]).fillna(0).squeeze(), axis=1
+        lambda x: x.multiply(emissions_factors.loc[x.name])
+        .fillna(0)
+        .squeeze(),
+        axis=1,
     )
 
     emissions_energy.index = emissions_energy.index.set_levels(
@@ -116,7 +124,6 @@ def emissions(
     # continuous timeseries (this is used for input data provided for (1) maximum
     # extent, and (2) average mitigation potential flux)
     def piecewise_to_continuous(variable):
-
         # Load the 'Input Data' tab of TNC's 'Positive Disruption NCS Vectors'
         # google spreadsheet
         name = (
@@ -162,7 +169,10 @@ def emissions(
         name["Duration 1 (Years)"] = np.where(
             (
                 (name["Duration 1 (Years)"].isna())
-                | (name["Duration 1 (Years)"] > proj_end_year - afolu_output.columns[0])
+                | (
+                    name["Duration 1 (Years)"]
+                    > proj_end_year - afolu_output.columns[0]
+                )
             ),
             proj_end_year - afolu_output.columns[0],
             name["Duration 1 (Years)"],
@@ -233,7 +243,9 @@ def emissions(
 
         return name
 
-    flux = piecewise_to_continuous("Avg mitigation potential flux").sort_index()
+    flux = piecewise_to_continuous(
+        "Avg mitigation potential flux"
+    ).sort_index()
 
     # Define the flux of 'Avoided Coastal Impacts' and 'Avoided Forest Conversion'
     afolu_avoided = (
@@ -274,7 +286,9 @@ def emissions(
         )
         .set_index(pyam.IAMC_IDX)
         .parallel_apply(
-            lambda x: x[flux.columns[0:]].fillna(x["Mitigation (MtCO2e/ha)"], limit=1),
+            lambda x: x[flux.columns[0:]].fillna(
+                x["Mitigation (MtCO2e/ha)"], limit=1
+            ),
             axis=1,
         )
         .fillna(0)
@@ -297,15 +311,23 @@ def emissions(
         [
             flux[
                 ~(
-                    flux.reset_index().unit.isin(["MtCO2e/percentile improvement"])
+                    flux.reset_index().unit.isin(
+                        ["MtCO2e/percentile improvement"]
+                    )
                 ).values
             ],
             flux[
-                (flux.reset_index().unit.isin(["MtCO2e/percentile improvement"])).values
+                (
+                    flux.reset_index().unit.isin(
+                        ["MtCO2e/percentile improvement"]
+                    )
+                ).values
             ]
             .multiply(1e6)
             .rename(
-                index={"MtCO2e/percentile improvement": "tCO2e/percentile improvement"}
+                index={
+                    "MtCO2e/percentile improvement": "tCO2e/percentile improvement"
+                }
             ),
         ]
     )
@@ -335,7 +357,11 @@ def emissions(
     regions["WEB Region"] = (regions["WEB Region"]).str.lower()
 
     flux = (
-        (flux.reset_index().set_index(["region"]).merge(regions, on=["region"]))
+        (
+            flux.reset_index()
+            .set_index(["region"])
+            .merge(regions, on=["region"])
+        )
         .reset_index()
         .set_index(
             [
@@ -376,7 +402,9 @@ def emissions(
         )
         .set_index("region")
     )
-    emissions_afolu.columns = emissions_afolu.columns.str.replace("Y", "", regex=True)
+    emissions_afolu.columns = emissions_afolu.columns.str.replace(
+        "Y", "", regex=True
+    )
 
     # Drop redundant emissions
     emissions_afolu = emissions_afolu[
@@ -545,8 +573,9 @@ def emissions(
         inplace=True,
     )
 
-    for year in afolu_output.loc[:, data_start_year + 1 : proj_end_year].columns:
-
+    for year in afolu_output.loc[
+        :, data_start_year + 1 : proj_end_year
+    ].columns:
         # Find new adoption in year, multiply by flux and a 'baseline' copy of flux
         emissions_afolu_mitigated_year = afolu_output.parallel_apply(
             lambda x: max((x.loc[year] - x.loc[year - 1]), 0)
@@ -567,7 +596,9 @@ def emissions(
 
         emissions_afolu_mitigated_year.reset_index(inplace=True)
         emissions_afolu_mitigated_year.unit = (
-            emissions_afolu_mitigated_year.unit.str.replace("m3", "tCO2e", regex=True)
+            emissions_afolu_mitigated_year.unit.str.replace(
+                "m3", "tCO2e", regex=True
+            )
             .replace("Mha", "tCO2e", regex=True)
             .replace("Percent adoption", "tCO2e", regex=True)
         )
@@ -595,9 +626,9 @@ def emissions(
         )
 
         # Add to cumulative count
-        emissions_afolu_mitigated = emissions_afolu_mitigated_year.fillna(0).add(
-            emissions_afolu_mitigated, fill_value=0
-        )
+        emissions_afolu_mitigated = emissions_afolu_mitigated_year.fillna(
+            0
+        ).add(emissions_afolu_mitigated, fill_value=0)
 
     # Cut output to data_start_year : proj_end_year
     emissions_afolu_mitigated = emissions_afolu_mitigated.loc[
@@ -774,7 +805,18 @@ def emissions(
     # region
 
     # Load historical addtional emissions datasets
-    gas_ceds = ["BC", "CO", "OC", "CH4", "CO2", "N2O", "NH3", "NOx", "SO2", "NMVOC"]
+    gas_ceds = [
+        "BC",
+        "CO",
+        "OC",
+        "CH4",
+        "CO2",
+        "N2O",
+        "NH3",
+        "NOx",
+        "SO2",
+        "NMVOC",
+    ]
 
     emissions_additional = pd.DataFrame([])
     for gas in gas_ceds:
@@ -788,7 +830,9 @@ def emissions(
                 ),
             ]
         )
-    emissions_additional.columns = emissions_additional.columns.str.replace("X", "")
+    emissions_additional.columns = emissions_additional.columns.str.replace(
+        "X", ""
+    )
 
     # Change ISO region names to IEA
     regions = (
@@ -918,7 +962,9 @@ def emissions(
 
     # Select data between data_start_year and proj_end_year
     emissions_additional.columns = emissions_additional.columns.astype(int)
-    emissions_additional = emissions_additional.loc[:, data_start_year:proj_end_year]
+    emissions_additional = emissions_additional.loc[
+        :, data_start_year:proj_end_year
+    ]
 
     # Change unit from kt to Mt
     emissions_additional.update(emissions_additional / 1e3)
@@ -1059,11 +1105,13 @@ def emissions(
             [emissions_additional_fgas, emissions_additional_fgas_new]
         )
 
-    emissions_additional_fgas.columns = emissions_additional_fgas.columns.str.replace(
-        "Y_", ""
+    emissions_additional_fgas.columns = (
+        emissions_additional_fgas.columns.str.replace("Y_", "")
     )
-    emissions_additional_fgas.columns = emissions_additional_fgas.columns.str.replace(
-        "ipcc_code_2006_for_standard_report_name", "product_long"
+    emissions_additional_fgas.columns = (
+        emissions_additional_fgas.columns.str.replace(
+            "ipcc_code_2006_for_standard_report_name", "product_long"
+        )
     )
 
     # Add in column for units kT
@@ -1097,7 +1145,9 @@ def emissions(
         ]:
             return "Industrial"
 
-    emissions_additional_fgas["sector"] = emissions_additional_fgas.parallel_apply(
+    emissions_additional_fgas[
+        "sector"
+    ] = emissions_additional_fgas.parallel_apply(
         lambda x: addsector3(x), axis=1
     )
 
@@ -1126,14 +1176,18 @@ def emissions(
     ).drop(columns=["Country_code_A3", "index"])
 
     # Select data between data_start_year and proj_end_year
-    emissions_additional_fgas.columns = emissions_additional_fgas.columns.astype(int)
+    emissions_additional_fgas.columns = (
+        emissions_additional_fgas.columns.astype(int)
+    )
     emissions_additional_fgas = emissions_additional_fgas.loc[
         :, data_start_year:proj_end_year
     ]
 
     # Change unit from kt to Mt
     emissions_additional_fgas.update(emissions_additional_fgas / 1e3)
-    emissions_additional_fgas = emissions_additional_fgas.rename(index={"kT": "Mt"})
+    emissions_additional_fgas = emissions_additional_fgas.rename(
+        index={"kT": "Mt"}
+    )
 
     # Interpolate between data_end_year and projections in 2030, 2050
     emissions_additional_fgas[
@@ -1141,14 +1195,20 @@ def emissions(
     ] = NaN
     emissions_additional_fgas[np.arange(2031, proj_end_year + 1, 1)] = NaN
     emissions_additional_fgas = emissions_additional_fgas.sort_index(axis=1)
-    emissions_additional_fgas.interpolate(method="linear", axis=1, inplace=True)
+    emissions_additional_fgas.interpolate(
+        method="linear", axis=1, inplace=True
+    )
     emissions_additional_fgas.fillna(method="bfill", inplace=True)
 
     # Combine all additional gases
-    emissions_additional = pd.concat([emissions_additional, emissions_additional_fgas])
+    emissions_additional = pd.concat(
+        [emissions_additional, emissions_additional_fgas]
+    )
 
     # Drop rows with all zero values
-    emissions_additional = emissions_additional[emissions_additional.sum(axis=1) != 0]
+    emissions_additional = emissions_additional[
+        emissions_additional.sum(axis=1) != 0
+    ]
 
     # Create baseline and pathway scenarios
     emissions_additional = pd.concat(
@@ -1163,7 +1223,8 @@ def emissions(
     percent_change = (
         emissions_energy[
             (
-                emissions_energy.reset_index().flow_category == "Electricity output"
+                emissions_energy.reset_index().flow_category
+                == "Electricity output"
             ).values
         ]
         .groupby(["model", "scenario", "region"])
@@ -1204,7 +1265,9 @@ def emissions(
 
     emissions_additional.loc[
         :, emissions_additional_last_valid_index:
-    ] = emissions_additional.loc[:, emissions_additional_last_valid_index:].cumprod(
+    ] = emissions_additional.loc[
+        :, emissions_additional_last_valid_index:
+    ].cumprod(
         axis=1
     )
 
@@ -1408,7 +1471,9 @@ def emissions(
     )
 
     # Add indices product_category, product_short, flow_short
-    emissions_additional["product_category"] = "Additional Industrial Emissions"
+    emissions_additional[
+        "product_category"
+    ] = "Additional Industrial Emissions"
     emissions_additional["product_short"] = "ADEM"
     emissions_additional["flow_short"] = "IND"
 
@@ -1705,26 +1770,38 @@ def emissions(
         search_bounds = [
             (
                 pd.to_numeric(
-                    parameters.loc["Enteric Fermentation|parameter a min"].value
+                    parameters.loc[
+                        "Enteric Fermentation|parameter a min"
+                    ].value
                 ),
                 pd.to_numeric(
-                    parameters.loc["Enteric Fermentation|parameter a max"].value
-                ),
-            ),
-            (
-                pd.to_numeric(
-                    parameters.loc["Enteric Fermentation|parameter b min"].value
-                ),
-                pd.to_numeric(
-                    parameters.loc["Enteric Fermentation|parameter b max"].value
+                    parameters.loc[
+                        "Enteric Fermentation|parameter a max"
+                    ].value
                 ),
             ),
             (
                 pd.to_numeric(
-                    parameters.loc["Enteric Fermentation|saturation point"].value
+                    parameters.loc[
+                        "Enteric Fermentation|parameter b min"
+                    ].value
                 ),
                 pd.to_numeric(
-                    parameters.loc["Enteric Fermentation|saturation point"].value
+                    parameters.loc[
+                        "Enteric Fermentation|parameter b max"
+                    ].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc[
+                        "Enteric Fermentation|saturation point"
+                    ].value
+                ),
+                pd.to_numeric(
+                    parameters.loc[
+                        "Enteric Fermentation|saturation point"
+                    ].value
                 ),
             ),
             (
@@ -1741,7 +1818,10 @@ def emissions(
         if scenario == "baseline":
             y = linear(
                 x_data,
-                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                min(
+                    0.0018,
+                    max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data))),
+                ),
                 (y_data[-1]),
             )
             genetic_parameters = [0, 0, 0, 0]
@@ -1794,12 +1874,16 @@ def emissions(
     )
 
     ef_ratios = (
-        pd.DataFrame(pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None))
+        pd.DataFrame(
+            pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None)
+        )
         .set_axis(
             pd.concat(
                 [
                     pd.DataFrame(
-                        np.array(["model", "scenario", "region", "product_short"])
+                        np.array(
+                            ["model", "scenario", "region", "product_short"]
+                        )
                     ).T,
                     pd.DataFrame(
                         np.linspace(
@@ -1935,26 +2019,38 @@ def emissions(
         search_bounds = [
             (
                 pd.to_numeric(
-                    parameters.loc["Manure left on Pasture|parameter a min"].value
+                    parameters.loc[
+                        "Manure left on Pasture|parameter a min"
+                    ].value
                 ),
                 pd.to_numeric(
-                    parameters.loc["Manure left on Pasture|parameter a max"].value
-                ),
-            ),
-            (
-                pd.to_numeric(
-                    parameters.loc["Manure left on Pasture|parameter b min"].value
-                ),
-                pd.to_numeric(
-                    parameters.loc["Manure left on Pasture|parameter b max"].value
+                    parameters.loc[
+                        "Manure left on Pasture|parameter a max"
+                    ].value
                 ),
             ),
             (
                 pd.to_numeric(
-                    parameters.loc["Manure left on Pasture|saturation point"].value
+                    parameters.loc[
+                        "Manure left on Pasture|parameter b min"
+                    ].value
                 ),
                 pd.to_numeric(
-                    parameters.loc["Manure left on Pasture|saturation point"].value
+                    parameters.loc[
+                        "Manure left on Pasture|parameter b max"
+                    ].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc[
+                        "Manure left on Pasture|saturation point"
+                    ].value
+                ),
+                pd.to_numeric(
+                    parameters.loc[
+                        "Manure left on Pasture|saturation point"
+                    ].value
                 ),
             ),
             (
@@ -1971,7 +2067,10 @@ def emissions(
         if scenario == "baseline":
             y = linear(
                 x_data,
-                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                min(
+                    0.0018,
+                    max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data))),
+                ),
                 (y_data[-1]),
             )
             genetic_parameters = [0, 0, 0, 0]
@@ -2024,12 +2123,16 @@ def emissions(
     )
 
     ef_ratios = (
-        pd.DataFrame(pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None))
+        pd.DataFrame(
+            pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None)
+        )
         .set_axis(
             pd.concat(
                 [
                     pd.DataFrame(
-                        np.array(["model", "scenario", "region", "product_short"])
+                        np.array(
+                            ["model", "scenario", "region", "product_short"]
+                        )
                     ).T,
                     pd.DataFrame(
                         np.linspace(
@@ -2201,7 +2304,10 @@ def emissions(
         if scenario == "baseline":
             y = linear(
                 x_data,
-                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                min(
+                    0.0018,
+                    max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data))),
+                ),
                 (y_data[-1]),
             )
             genetic_parameters = [0, 0, 0, 0]
@@ -2254,12 +2360,16 @@ def emissions(
     )
 
     ef_ratios = (
-        pd.DataFrame(pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None))
+        pd.DataFrame(
+            pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None)
+        )
         .set_axis(
             pd.concat(
                 [
                     pd.DataFrame(
-                        np.array(["model", "scenario", "region", "product_short"])
+                        np.array(
+                            ["model", "scenario", "region", "product_short"]
+                        )
                     ).T,
                     pd.DataFrame(
                         np.linspace(
@@ -2395,26 +2505,38 @@ def emissions(
         search_bounds = [
             (
                 pd.to_numeric(
-                    parameters.loc["Manure applied to Soils|parameter a min"].value
+                    parameters.loc[
+                        "Manure applied to Soils|parameter a min"
+                    ].value
                 ),
                 pd.to_numeric(
-                    parameters.loc["Manure applied to Soils|parameter a max"].value
-                ),
-            ),
-            (
-                pd.to_numeric(
-                    parameters.loc["Manure applied to Soils|parameter b min"].value
-                ),
-                pd.to_numeric(
-                    parameters.loc["Manure applied to Soils|parameter b max"].value
+                    parameters.loc[
+                        "Manure applied to Soils|parameter a max"
+                    ].value
                 ),
             ),
             (
                 pd.to_numeric(
-                    parameters.loc["Manure applied to Soils|saturation point"].value
+                    parameters.loc[
+                        "Manure applied to Soils|parameter b min"
+                    ].value
                 ),
                 pd.to_numeric(
-                    parameters.loc["Manure applied to Soils|saturation point"].value
+                    parameters.loc[
+                        "Manure applied to Soils|parameter b max"
+                    ].value
+                ),
+            ),
+            (
+                pd.to_numeric(
+                    parameters.loc[
+                        "Manure applied to Soils|saturation point"
+                    ].value
+                ),
+                pd.to_numeric(
+                    parameters.loc[
+                        "Manure applied to Soils|saturation point"
+                    ].value
                 ),
             ),
             (
@@ -2431,7 +2553,10 @@ def emissions(
         if scenario == "baseline":
             y = linear(
                 x_data,
-                min(0.0018, max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data)))),
+                min(
+                    0.0018,
+                    max(0.00001, ((y_data[-1] - y_data[0]) / len(y_data))),
+                ),
                 (y_data[-1]),
             )
             genetic_parameters = [0, 0, 0, 0]
@@ -2484,12 +2609,16 @@ def emissions(
     )
 
     ef_ratios = (
-        pd.DataFrame(pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None))
+        pd.DataFrame(
+            pd.read_csv("podi/data/afolu_adoption_curves.csv", header=None)
+        )
         .set_axis(
             pd.concat(
                 [
                     pd.DataFrame(
-                        np.array(["model", "scenario", "region", "product_short"])
+                        np.array(
+                            ["model", "scenario", "region", "product_short"]
+                        )
                     ).T,
                     pd.DataFrame(
                         np.linspace(

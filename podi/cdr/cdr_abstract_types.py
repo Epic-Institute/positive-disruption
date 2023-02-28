@@ -14,9 +14,10 @@ __author__ = "Zach Birnholz"
 __version__ = "08.14.20"
 
 
-from abc import ABC, abstractmethod
 import inspect
 import math
+from abc import ABC, abstractmethod
+
 import numpy as np
 
 import podi.cdr.cdr_util as util
@@ -34,7 +35,9 @@ class CDRStrategy(ABC):
     start_year = curr_year = util.START_YEAR  # available to all CDR types
 
     default_lifetime = None  # to be overridden by subclasses
-    levelizing_lifetime = None  # for subclasses with infinite (float('inf')) lifetimes
+    levelizing_lifetime = (
+        None  # for subclasses with infinite (float('inf')) lifetimes
+    )
 
     # values from model, to be set when the CDR process actual runs
     GRID_EM = None
@@ -63,7 +66,9 @@ class CDRStrategy(ABC):
         self.__class__.remaining_deployment -= capacity
         self.__class__.active_deployment += capacity
         self.capacity = capacity
-        self.deployment_level = self.__class__.cumul_deployment  # includes this project
+        self.deployment_level = (
+            self.__class__.cumul_deployment
+        )  # includes this project
         self.lifetime = self.__class__.default_lifetime
         self.age = 0
 

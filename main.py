@@ -3,17 +3,18 @@
 # region
 import numpy as np
 import pandas as pd
-from podi.energy import energy
+
 from podi.afolu import afolu
-from podi.emissions import emissions
 from podi.cdr.cdr_main import cdr_mix
 from podi.cdr.cdr_util import (
+    fuel_em_def,
     grid_em_def,
     heat_em_def,
     transport_em_def,
-    fuel_em_def,
 )
 from podi.climate import climate
+from podi.emissions import emissions
+from podi.energy import energy
 from podi.results_analysis.results_analysis import results_analysis
 
 # import warnings
@@ -52,10 +53,14 @@ index = [
     "unit",
 ]
 
-energy_post_upstream = pd.read_parquet("podi/data/energy_post_upstream.parquet")
+energy_post_upstream = pd.read_parquet(
+    "podi/data/energy_post_upstream.parquet"
+)
 energy_post_upstream.columns = energy_post_upstream.columns.astype(int)
 
-energy_post_addtl_eff = pd.read_parquet("podi/data/energy_post_addtl_eff.parquet")
+energy_post_addtl_eff = pd.read_parquet(
+    "podi/data/energy_post_addtl_eff.parquet"
+)
 energy_post_addtl_eff.columns = energy_post_addtl_eff.columns.astype(int)
 
 energy_electrified = pd.read_parquet("podi/data/energy_electrified.parquet")
@@ -64,7 +69,9 @@ energy_electrified.columns = energy_electrified.columns.astype(int)
 energy_reduced_electrified = pd.read_parquet(
     "podi/data/energy_reduced_electrified.parquet"
 )
-energy_reduced_electrified.columns = energy_reduced_electrified.columns.astype(int)
+energy_reduced_electrified.columns = energy_reduced_electrified.columns.astype(
+    int
+)
 
 energy_output = pd.read_parquet("podi/data/energy_output.parquet")
 energy_output.columns = energy_output.columns.astype(int)
@@ -97,7 +104,9 @@ index = [
     "flow_short",
     "unit",
 ]
-afolu_output = pd.DataFrame(pd.read_csv("podi/data/afolu_output.csv")).set_index(index)
+afolu_output = pd.DataFrame(
+    pd.read_csv("podi/data/afolu_output.csv")
+).set_index(index)
 afolu_output.columns = afolu_output.columns.astype(int)
 
 # endregion
@@ -135,7 +144,9 @@ index = [
 emissions_output = pd.read_parquet("podi/data/emissions_output.parquet")
 emissions_output.columns = emissions_output.columns.astype(int)
 
-emissions_output_co2e = pd.read_parquet("podi/data/emissions_output_co2e.parquet")
+emissions_output_co2e = pd.read_parquet(
+    "podi/data/emissions_output_co2e.parquet"
+)
 emissions_output_co2e.columns = emissions_output_co2e.columns.astype(int)
 
 # endregion
@@ -155,7 +166,6 @@ if recalc_cdr is True:
     cdr_subvs = []
 
     for scenario in ["pathway"]:
-
         cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
             cdr_pathway.loc["World ", "Carbon Dioxide Removal", scenario]
             .loc[2010:]
@@ -172,10 +182,14 @@ if recalc_cdr is True:
             pd.DataFrame(cdr_pathway2, index=emissions.loc[:, 2010:].columns)
             .T.fillna(0)
             .drop(
-                index=pd.DataFrame(cdr_pathway2, index=emissions.loc[:, 2010:].columns)
+                index=pd.DataFrame(
+                    cdr_pathway2, index=emissions.loc[:, 2010:].columns
+                )
                 .T.fillna(0)
                 .iloc[
-                    pd.DataFrame(cdr_pathway2, index=emissions.loc[:, 2010:].columns)
+                    pd.DataFrame(
+                        cdr_pathway2, index=emissions.loc[:, 2010:].columns
+                    )
                     .T.fillna(0)
                     .index.str.contains("Deficit", na=False)
                 ]
@@ -189,7 +203,9 @@ if recalc_cdr is True:
 
         cdr_subvs = (
             cdr_subvs.droplevel(1)
-            .assign(Metric=["Enhanced Weathering", "Other", "LTSSDAC", "HTLSDAC"])
+            .assign(
+                Metric=["Enhanced Weathering", "Other", "LTSSDAC", "HTLSDAC"]
+            )
             .set_index("Metric", append=True)
         )
 
@@ -303,7 +319,9 @@ adoption_output_projections = pd.DataFrame(
         "unit",
     ]
 )
-adoption_output_projections.columns = adoption_output_projections.columns.astype(int)
+adoption_output_projections.columns = (
+    adoption_output_projections.columns.astype(int)
+)
 
 emissions_wedges = pd.read_parquet("podi/data/emissions_wedges.parquet")
 emissions_wedges.columns = emissions_wedges.columns.astype(int)
@@ -323,7 +341,9 @@ output_end_date = 2070
 # For energy_output, groupby product_category, except for products in the Electricity
 # and Heat product_category
 energy_output_temp = energy_output[
-    (energy_output.reset_index().product_category != "Electricity and Heat").values
+    (
+        energy_output.reset_index().product_category != "Electricity and Heat"
+    ).values
 ].reset_index()
 
 energy_output_temp["product_long"] = energy_output_temp["product_category"]
@@ -333,7 +353,8 @@ energy_output = pd.concat(
     [
         energy_output[
             (
-                energy_output.reset_index().product_category == "Electricity and Heat"
+                energy_output.reset_index().product_category
+                == "Electricity and Heat"
             ).values
         ],
         energy_output_temp,
@@ -355,7 +376,9 @@ energy_output = pd.concat(
     ]
 )
 energy_output = energy_output[
-    ~(energy_output.reset_index().sector.isin(["Residential", "Commercial"])).values
+    ~(
+        energy_output.reset_index().sector.isin(["Residential", "Commercial"])
+    ).values
 ]
 
 emissions_output = pd.concat(
@@ -372,7 +395,11 @@ emissions_output = pd.concat(
     ]
 )
 emissions_output = emissions_output[
-    ~(emissions_output.reset_index().sector.isin(["Residential", "Commercial"])).values
+    ~(
+        emissions_output.reset_index().sector.isin(
+            ["Residential", "Commercial"]
+        )
+    ).values
 ]
 
 emissions_output_co2e = pd.concat(
@@ -390,7 +417,9 @@ emissions_output_co2e = pd.concat(
 )
 emissions_output_co2e = emissions_output_co2e[
     ~(
-        emissions_output_co2e.reset_index().sector.isin(["Residential", "Commercial"])
+        emissions_output_co2e.reset_index().sector.isin(
+            ["Residential", "Commercial"]
+        )
     ).values
 ]
 
@@ -406,14 +435,18 @@ energy_output = energy_output[
 # Drop Nitrogen Fertilizer Management
 afolu_output = afolu_output[
     ~(
-        afolu_output.reset_index().product_long.isin(["Nitrogen Fertilizer Management"])
+        afolu_output.reset_index().product_long.isin(
+            ["Nitrogen Fertilizer Management"]
+        )
     ).values
 ]
 
 # Drop Improved Forest Management
 afolu_output = afolu_output[
     ~(
-        afolu_output.reset_index().product_long.isin(["Improved Forest Management"])
+        afolu_output.reset_index().product_long.isin(
+            ["Improved Forest Management"]
+        )
     ).values
 ]
 
@@ -466,7 +499,9 @@ for output in [
         ],
         inplace=True,
     )
-    output_global.to_csv("podi/data/output/" + output[1] + "/" + "world" + ".csv")
+    output_global.to_csv(
+        "podi/data/output/" + output[1] + "/" + "world" + ".csv"
+    )
 
 # Save as regional-level files and a global-level file
 for output in [
@@ -488,6 +523,8 @@ for output in [
         ["model", "scenario", "region", "sector", "product_long", "unit"],
         inplace=True,
     )
-    output_global.to_csv("podi/data/output/" + output[1] + "/" + "world" + ".csv")
+    output_global.to_csv(
+        "podi/data/output/" + output[1] + "/" + "world" + ".csv"
+    )
 
 # endregion

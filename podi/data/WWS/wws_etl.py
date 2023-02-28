@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import pandas as pd
-from numpy import NaN
 
 
 def wws_etl(data_source):
@@ -11,7 +10,9 @@ def wws_etl(data_source):
     )
 
     elec_gen = (
-        elec_gen.merge(region_categories, right_on=["WWS Region"], left_on=["region"])
+        elec_gen.merge(
+            region_categories, right_on=["WWS Region"], left_on=["region"]
+        )
         .dropna()
         .drop(columns=["region", "WWS Region"])
         .rename(columns={"WEB Region": "region"})
@@ -21,14 +22,19 @@ def wws_etl(data_source):
 
     # Reformat for insertion in tech_parameters.csv
     elec_gen = pd.melt(
-        elec_gen, var_name="product_short", value_name="Value", ignore_index=False
+        elec_gen,
+        var_name="product_short",
+        value_name="Value",
+        ignore_index=False,
     )
     elec_gen["Metric"] = "saturation point"
     elec_gen["sector"] = "Electric Power"
     elec_gen["scenario"] = "pathway"
     elec_gen["Source"] = "wws"
     elec_gen.set_index(
-        ["product_short", "scenario", "sector", "Metric"], append=True, inplace=True
+        ["product_short", "scenario", "sector", "Metric"],
+        append=True,
+        inplace=True,
     )
 
     # Add to tech_parameters

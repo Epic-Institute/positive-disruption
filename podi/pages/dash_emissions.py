@@ -1,11 +1,14 @@
-import dash
-from dash import dcc, html, callback, Input, Output
-import plotly.graph_objects as go
-import pandas as pd
 import itertools
-import plotly.express as px
 
-dash.register_page(__name__, path="/Emissions", title="Emissions", name="Emissions")
+import dash
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from dash import Input, Output, callback, dcc, html
+
+dash.register_page(
+    __name__, path="/Emissions", title="Emissions", name="Emissions"
+)
 
 data_start_year = 1990
 data_end_year = 2020
@@ -45,7 +48,9 @@ layout = html.Div(
                             value=[data_start_year, proj_end_year],
                             marks={
                                 str(year): str(year)
-                                for year in range(data_start_year, proj_end_year + 1, 5)
+                                for year in range(
+                                    data_start_year, proj_end_year + 1, 5
+                                )
                             },
                         ),
                     ],
@@ -179,7 +184,10 @@ layout = html.Div(
                             df.product_long.unique().tolist(),
                             id="product_long",
                             multi=True,
-                            style={"max-height": "100px", "overflow-y": "scroll"},
+                            style={
+                                "max-height": "100px",
+                                "overflow-y": "scroll",
+                            },
                         ),
                     ],
                 ),
@@ -276,7 +284,6 @@ def update_graph(
     groupby,
     chart_type,
 ):
-
     unit_val = {"Mt": 1, "Gt": 1e-3}
     stack_type = {"none": None, "tonexty": "1"}
 
@@ -321,7 +328,9 @@ def update_graph(
         ),
     }
 
-    df = pd.read_parquet("~/positive-disruption/podi/data/" + dataset + ".parquet")
+    df = pd.read_parquet(
+        "~/positive-disruption/podi/data/" + dataset + ".parquet"
+    )
 
     # make groupby an array if it is not already
     if not isinstance(groupby, list):
@@ -366,8 +375,14 @@ def update_graph(
     filtered_df.index.name = "year"
     filtered_df.reset_index(inplace=True)
     filtered_df = pd.melt(
-        filtered_df, id_vars="year", var_name=groupby, value_name=str(yaxis_unit)
-    ).astype({k: "category" for k in groupby} | {"year": "int", yaxis_unit: "float32"})
+        filtered_df,
+        id_vars="year",
+        var_name=groupby,
+        value_name=str(yaxis_unit),
+    ).astype(
+        {k: "category" for k in groupby}
+        | {"year": "int", yaxis_unit: "float32"}
+    )
 
     fig = go.Figure()
 
@@ -379,7 +394,6 @@ def update_graph(
         .squeeze()
         .values
     ):
-
         if isinstance(sub, str):
             name = str(sub).capitalize()
         else:
@@ -528,13 +542,18 @@ def update_graph(
     filtered_df2.index.name = "year"
     filtered_df2.reset_index(inplace=True)
     filtered_df2 = pd.melt(
-        filtered_df2, id_vars="year", var_name=groupby, value_name=str(yaxis_unit)
-    ).astype({k: "category" for k in groupby} | {"year": "int", yaxis_unit: "float32"})
+        filtered_df2,
+        id_vars="year",
+        var_name=groupby,
+        value_name=str(yaxis_unit),
+    ).astype(
+        {k: "category" for k in groupby}
+        | {"year": "int", yaxis_unit: "float32"}
+    )
 
     fig2 = go.Figure()
 
     if yaxis_type not in ["Log", "Cumulative", "% of Total"]:
-
         spacer = (
             df.loc[
                 model,
@@ -575,7 +594,6 @@ def update_graph(
         .squeeze()
         .values
     ):
-
         if isinstance(groupby_value, str):
             name = str(groupby_value).capitalize()
         else:
@@ -605,7 +623,6 @@ def update_graph(
         i += 1
 
     if yaxis_type not in ["Log", "Cumulative", "% of Total"]:
-
         fig2.add_trace(
             go.Scatter(
                 name="Pathway",
@@ -720,6 +737,8 @@ def update_graph(
     if yaxis_type == "% of Total":
         fig2.update_yaxes(title="% of Total")
     elif yaxis_type == "Cumulative":
-        fig2.update_yaxes(title="Cumulative Emissions Mitigated, " + str(yaxis_unit))
+        fig2.update_yaxes(
+            title="Cumulative Emissions Mitigated, " + str(yaxis_unit)
+        )
 
     return (fig, fig2)

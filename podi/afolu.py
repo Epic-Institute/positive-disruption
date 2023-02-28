@@ -1,10 +1,10 @@
 # region
 
-import pandas as pd
-from numpy import NaN
 import numpy as np
-from pandarallel import pandarallel
+import pandas as pd
 import pyam
+from numpy import NaN
+from pandarallel import pandarallel
 
 pandarallel.initialize(progress_bar=True, nb_workers=6)
 
@@ -12,7 +12,6 @@ pandarallel.initialize(progress_bar=True, nb_workers=6)
 
 
 def afolu(scenario, data_start_year, data_end_year, proj_end_year):
-
     ##################################
     #  LOAD HISTORICAL NCS ADOPTION  #
     ##################################
@@ -38,7 +37,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # 'Avoided Peat Impacts', 'Avoided Forest Conversion', and 'Avoided Coastal Impacts'
     #  subverticals do not have historical adoption data, so these are set to zero
     afolu_historical.update(
-        afolu_historical[afolu_historical.Subvertical.str.contains("Avoided")].fillna(0)
+        afolu_historical[
+            afolu_historical.Subvertical.str.contains("Avoided")
+        ].fillna(0)
     )
 
     # Create a 'variable' column that concatenates the 'Subvertical' and 'Metric' columns
@@ -146,7 +147,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 name["Value 3"],
                 name["Duration 3 (Years)"],
             ],
-            columns=np.arange(afolu_historical.columns[0], proj_end_year + 1, 1),
+            columns=np.arange(
+                afolu_historical.columns[0], proj_end_year + 1, 1
+            ),
             dtype=float,
         )
 
@@ -266,7 +269,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             pd.DataFrame(
                 0,
                 index=afolu_avoided.set_index(pyam.IAMC_IDX).index,
-                columns=max_extent.columns[max_extent.columns <= data_end_year],
+                columns=max_extent.columns[
+                    max_extent.columns <= data_end_year
+                ],
             ),
             pd.concat(
                 [
@@ -304,7 +309,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     max_extent.update(
         max_extent[
             (
-                max_extent.reset_index().variable == "Avoided Peat Impacts|Max extent"
+                max_extent.reset_index().variable
+                == "Avoided Peat Impacts|Max extent"
             ).values
         ]
         .loc[:, :data_end_year]
@@ -504,7 +510,8 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     # region
     subvertical = pd.DataFrame(
         pd.read_csv(
-            "podi/data/TNC/analog_mapping.csv", usecols=["Subvertical", "Analog Name"]
+            "podi/data/TNC/analog_mapping.csv",
+            usecols=["Subvertical", "Analog Name"],
         ).rename(columns={"Subvertical": "variable"})
     )
     subvertical["variable"] = subvertical["variable"] + "|Observed adoption"
@@ -516,7 +523,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             .set_index(["variable"])
             .merge(subvertical, left_on="variable", right_on="variable")
         )
-        .set_index(["model", "scenario", "region", "unit", "Analog Name"], append=True)
+        .set_index(
+            ["model", "scenario", "region", "unit", "Analog Name"], append=True
+        )
         .reorder_levels(
             ["model", "scenario", "region", "variable", "unit", "Analog Name"]
         )
@@ -538,7 +547,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             ]
             .iloc[: proj_end_year - x0.last_valid_index()]
             .reset_index()
-            .set_index(np.arange(x0.last_valid_index() + 1, proj_end_year + 1, 1))
+            .set_index(
+                np.arange(x0.last_valid_index() + 1, proj_end_year + 1, 1)
+            )
             .drop(columns=["index"])
             .squeeze()
             .rename(x.name)
@@ -575,7 +586,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
     afolu_baseline = afolu_historical.copy()
     afolu_baseline.reset_index(inplace=True)
-    afolu_baseline.scenario = afolu_baseline.scenario.str.replace(scenario, "baseline")
+    afolu_baseline.scenario = afolu_baseline.scenario.str.replace(
+        scenario, "baseline"
+    )
     afolu_baseline.set_index(pyam.IAMC_IDX, inplace=True)
 
     # Estimate 'baseline' scenario NCS subvertical growth
@@ -602,7 +615,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                     [
                         pd.Series(
                             data=afolu_output.loc[
-                                x.name[0], scenario, x.name[2], x.name[3], x.name[4]
+                                x.name[0],
+                                scenario,
+                                x.name[2],
+                                x.name[3],
+                                x.name[4],
                             ].loc[x.last_valid_index()],
                             index=[x.last_valid_index()],
                             name=x.name,
@@ -614,14 +631,16 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         )
 
         x = x.combine_first(x0).rename(
-            afolu_output.loc[x.name[0], scenario, x.name[2], x.name[3], x.name[4]].name
+            afolu_output.loc[
+                x.name[0], scenario, x.name[2], x.name[3], x.name[4]
+            ].name
         )
 
         return x
 
-    afolu_baseline = pd.DataFrame(data=afolu_baseline.parallel_apply(rep, axis=1)).clip(
-        upper=1
-    )
+    afolu_baseline = pd.DataFrame(
+        data=afolu_baseline.parallel_apply(rep, axis=1)
+    ).clip(upper=1)
 
     # endregion
 
@@ -635,7 +654,10 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     afolu_output = afolu_output.parallel_apply(
         lambda x: x.multiply(
             pd.concat(
-                [max_extent, max_extent.rename(index={scenario: "baseline"}, level=1)]
+                [
+                    max_extent,
+                    max_extent.rename(index={scenario: "baseline"}, level=1),
+                ]
             ).loc[
                 slice(None),
                 [x.name[1]],
@@ -676,7 +698,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         # flow_long, flow_short indices
         each["product_category"] = "AFOLU"
 
-        each["product_long"] = each["variable"].str.split("|", expand=True)[0].values
+        each["product_long"] = (
+            each["variable"].str.split("|", expand=True)[0].values
+        )
         each["product_short"] = each["product_long"]
 
         def addsector(x):
@@ -762,7 +786,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         [
             afolu_output,
             afolu_output[
-                (afolu_output.reset_index().product_long == "Improved Rice").values
+                (
+                    afolu_output.reset_index().product_long == "Improved Rice"
+                ).values
             ].rename(index={"CH4": "N2O"}),
         ]
     )

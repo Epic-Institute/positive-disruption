@@ -18,8 +18,8 @@ import math
 
 from scipy import integrate
 
-from podi.cdr.cdr_abstract_types import CDRStrategy, ECR
 import podi.cdr.cdr_util as util
+from podi.cdr.cdr_abstract_types import ECR, CDRStrategy
 
 ###################################################################
 # THIS FILE IS FOR SPECIFIC ECR (engineered) STRATEGIES.          #
@@ -188,7 +188,9 @@ class LTSSDAC(ECR):
         )
         opex = capex_new * 0.037
         energy_basis = self.marginal_energy_use()
-        energy = energy_basis[0] * util.ELEC_COST + energy_basis[1] * util.HEAT_COST
+        energy = (
+            energy_basis[0] * util.ELEC_COST + energy_basis[1] * util.HEAT_COST
+        )
         return capex + opex + energy
 
     @util.cacheit
@@ -202,10 +204,13 @@ class LTSSDAC(ECR):
     # LTSSDAC uses default ECR incidental_emissions function
 
     def _capex_new(self):
-        """ Returns current CAPEX, adjusted for one-factor learning """
+        """Returns current CAPEX, adjusted for one-factor learning"""
         # assume maximum of 90% overall capex cost reductions via learning (10% capex floor)
         return 979 * util.learning(
-            self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.15, floor=0.1
+            self.deployment_level,
+            util.LTSSDAC_FIRST_DEPLOYMENT,
+            0.15,
+            floor=0.1,
         )
 
 
@@ -252,7 +257,9 @@ class HTLSDAC(ECR):
         )
         opex = capex_new * 0.037
         energy_basis = self.marginal_energy_use()
-        energy = energy_basis[0] * util.ELEC_COST + energy_basis[1] * util.HEAT_COST
+        energy = (
+            energy_basis[0] * util.ELEC_COST + energy_basis[1] * util.HEAT_COST
+        )
         return capex + opex + energy
 
     def marginal_energy_use(self) -> tuple:
@@ -261,10 +268,13 @@ class HTLSDAC(ECR):
     # HTLSDAC uses default ECR incidental_emissions function
 
     def _capex_new(self):
-        """ Returns current CAPEX, adjusted for one-factor learning """
+        """Returns current CAPEX, adjusted for one-factor learning"""
         # assume maximum of 90% overall capex cost reductions via learning (10% capex floor)
         return 1132 * util.learning(
-            self.deployment_level, util.LTSSDAC_FIRST_DEPLOYMENT, 0.1, floor=0.1
+            self.deployment_level,
+            util.LTSSDAC_FIRST_DEPLOYMENT,
+            0.1,
+            floor=0.1,
         )
 
 
@@ -285,7 +295,10 @@ class ExSituEW(ECR):
             return max(
                 1.0,
                 util.logistic_inverse_slope(
-                    util.MAX_EX_SITU_EW, -6.258, 0.0994, cls.active_deployment + 9.5
+                    util.MAX_EX_SITU_EW,
+                    -6.258,
+                    0.0994,
+                    cls.active_deployment + 9.5,
                 ),
             )
 
@@ -296,7 +309,9 @@ class ExSituEW(ECR):
         if self.age == 0:
             return self.marginal_levelized_cost()
         else:
-            return ExSituEW._d(util.GRAIN_SIZE) * self.marginal_levelized_cost()
+            return (
+                ExSituEW._d(util.GRAIN_SIZE) * self.marginal_levelized_cost()
+            )
 
     @util.cacheit
     def marginal_levelized_cost(self) -> float:
@@ -326,7 +341,7 @@ class ExSituEW(ECR):
         at the time of its deployment."""
         elec = (
             1839
-            * (util.GRAIN_SIZE ** -1.168)
+            * (util.GRAIN_SIZE**-1.168)
             * util.learning(12828 + self.deployment_level, 12828, 0.08)
         )
         heat = 0
@@ -361,18 +376,30 @@ class ExSituEW(ECR):
         transportation = (
             self._total_transport_per_t_rock()
             * util.TRANSPORT_COST
-            * (0.75 + 0.25 * util.learning(109 + self.deployment_level, 109, 0.21))
+            * (
+                0.75
+                + 0.25 * util.learning(109 + self.deployment_level, 109, 0.21)
+            )
         )
         spreading = 21 * util.FUEL_COST
         return (
-            mining + grinding_capex_opex + grinding_energy + transportation + spreading
+            mining
+            + grinding_capex_opex
+            + grinding_energy
+            + transportation
+            + spreading
         )
 
     @staticmethod
     def _d(grain_size: float) -> float:
         """calculates dissolution rate (1/yr) for basalt"""
         return (
-            69.18 * (grain_size ** -1.24) * (10 ** -10.53) * 140.7 * 3.155 * (10 ** 7)
+            69.18
+            * (grain_size**-1.24)
+            * (10**-10.53)
+            * 140.7
+            * 3.155
+            * (10**7)
         )
 
     @staticmethod
@@ -382,7 +409,8 @@ class ExSituEW(ECR):
         (1) m_rock = (A_warm + A_temp) * M
         (2) R_CO2 = (0.95 * A_warm + 0.35 * A_temp) * M * P * d(x)
         (3) A_warm / A_temp = util.A_WARM / util.A_TEMP
-            (i.e. rock is applied to land regions proportionally to their availability)"""
+            (i.e. rock is applied to land regions proportionally to their availability)
+        """
         num = tCO2 * (1 + util.A_WARM / util.A_TEMP)
         denom = (
             util.CO2_PER_ROCK
@@ -396,9 +424,9 @@ class ExSituEW(ECR):
         """Computes total t*km of transportation required for this project
         to achieve its stated tCO2/yr capacity in its first year"""
         # capacity is in MtCO2 but we need tCO2
-        rock_new = ExSituEW._rock_needed(self.capacity * (10 ** 6))
+        rock_new = ExSituEW._rock_needed(self.capacity * (10**6))
         rock_init = ExSituEW._rock_needed(
-            (self.deployment_level - self.capacity) * (10 ** 6)
+            (self.deployment_level - self.capacity) * (10**6)
         )
         warm_transport = ExSituEW._warm_transport(rock_new, rock_init)
         temp_transport = ExSituEW._temperate_transport(rock_new, rock_init)
@@ -429,7 +457,9 @@ class ExSituEW(ECR):
             # where distance = 8.3052 km * e^(m / (M*A_temp))
             lambda m_rock: 8.3052
             * math.exp(
-                4.5962 * m_rock / (util.SPREADING_DENSITY * (util.A_TEMP + util.A_WARM))
+                4.5962
+                * m_rock
+                / (util.SPREADING_DENSITY * (util.A_TEMP + util.A_WARM))
             ),
             rock_init,
             rock_new + rock_init,
@@ -440,7 +470,9 @@ class GeologicStorage(ECR):
     """Traditional geologic storage paired with an
     engineered capture approach"""
 
-    default_lifetime = float("inf")  # lifetime depends on paired project from __init__
+    default_lifetime = float(
+        "inf"
+    )  # lifetime depends on paired project from __init__
 
     def __init__(
         self,
@@ -475,7 +507,9 @@ class GeologicStorage(ECR):
                 100.8 * util.crf(self.get_levelizing_lifetime()) + 3.9
             ) / 10
             compress_energy = (
-                self._calc_compression_energy(self.compress_temp, self.compress_pres)
+                self._calc_compression_energy(
+                    self.compress_temp, self.compress_pres
+                )
                 * util.ELEC_COST
             )
             compress_cost = compress_capex_opex + compress_energy
@@ -495,14 +529,20 @@ class GeologicStorage(ECR):
         transport_scale_factor = util.PIPELINE_LENGTH / util.PIPELINE_CAPACITY
         pipeline_elec = 837900 * transport_scale_factor
         pipeline_transport = (
-            494940 * util.TRANSPORT_KWH_PER_TKM / self.lifetime * transport_scale_factor
+            494940
+            * util.TRANSPORT_KWH_PER_TKM
+            / self.lifetime
+            * transport_scale_factor
         )  # 1.5 * 2.26 * 10^5 (sh ton-mile) = 494940 tonne*km
         pipeline_fuel = (
             5343.16 * util.KWH_PER_GJ / self.lifetime * transport_scale_factor
         )
         inject_elec = self._calc_compression_energy(util.WELLHEAD_T, 10.7, 15)
         inject_transport = (
-            67819920 / util.WELL_CAPACITY * util.TRANSPORT_KWH_PER_TKM / self.lifetime
+            67819920
+            / util.WELL_CAPACITY
+            * util.TRANSPORT_KWH_PER_TKM
+            / self.lifetime
         )
 
         # combine into total energy usages
@@ -513,15 +553,17 @@ class GeologicStorage(ECR):
 
     @util.once_per_year
     def incidental_emissions(self) -> float:
-        """ Emissions are energy emissions plus pipeline leakage """
+        """Emissions are energy emissions plus pipeline leakage"""
         pipeline_leakage = (
-            util.PIPELINE_LEAKAGE * util.PIPELINE_LENGTH / util.PIPELINE_CAPACITY
+            util.PIPELINE_LEAKAGE
+            * util.PIPELINE_LENGTH
+            / util.PIPELINE_CAPACITY
         )
         return super().incidental_emissions() + pipeline_leakage
 
     @staticmethod
     def _calc_compression_energy(temp, p1=util.AIR_P, p2=11):
-        """ Calculates minimum compression energy (kWh/tCO2) at the given temperature """
+        """Calculates minimum compression energy (kWh/tCO2) at the given temperature"""
         t1 = 0.9942 * 8.3145 * temp / 44.01
         t2 = 4 * 1.293759 / (1.293759 - 1)
         t3 = math.pow(p2 / p1, ((1.293759 - 1) / (4 * 1.293759))) - 1
