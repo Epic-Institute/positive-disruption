@@ -22,7 +22,7 @@ layout = html.Div(
                 dcc.Graph(id="graphic-emissions"),
                 dcc.Graph(id="graphic-emissions-2"),
                 html.Br(),
-                html.Label("Dataset"),
+                html.Label("Dataset", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -35,18 +35,22 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Date Range"),
+                html.Label("Date Range", className="select-label"),
                 html.Div(
                     [
                         dcc.RangeSlider(
                             id="date_range",
-                            min=data_end_year,
+                            min=data_start_year,
                             max=proj_end_year,
-                            value=[data_end_year, proj_end_year],
+                            value=[data_start_year, proj_end_year],
+                            marks={
+                                str(year): str(year)
+                                for year in range(data_start_year, proj_end_year + 1, 5)
+                            },
                         ),
                     ],
                 ),
-                html.Label("Unit"),
+                html.Label("Unit", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -57,7 +61,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Y Axis Type"),
+                html.Label("Y Axis Type", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -69,7 +73,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Chart Type"),
+                html.Label("Chart Type", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -80,7 +84,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Group by"),
+                html.Label("Group by", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -103,7 +107,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Model"),
+                html.Label("Model", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -115,7 +119,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Scenario"),
+                html.Label("Scenario", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -127,7 +131,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Region"),
+                html.Label("Region", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -143,7 +147,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Sector"),
+                html.Label("Sector", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -155,7 +159,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Product Category"),
+                html.Label("Product Category", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -167,7 +171,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Product"),
+                html.Label("Product", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -180,7 +184,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Product Short"),
+                html.Label("Product Short", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -192,7 +196,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Flow Category"),
+                html.Label("Flow Category", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -204,7 +208,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Flow"),
+                html.Label("Flow", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -216,7 +220,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Flow Short"),
+                html.Label("Flow Short", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -343,7 +347,7 @@ def update_graph(
             ]
             .groupby(groupby)
             .sum()
-        )
+        ).loc[:, str(date_range[0]) : str(date_range[1])]
         * unit_val[str(yaxis_unit)]
     ).T.fillna(0)
 
@@ -505,7 +509,7 @@ def update_graph(
                     .sum(numeric_only=True)
                 )
             )
-        )
+        ).loc[:, str(date_range[0]) : str(date_range[1])]
         * unit_val[str(yaxis_unit)]
     ).T.fillna(0)
 
@@ -531,18 +535,22 @@ def update_graph(
 
     if yaxis_type not in ["Log", "Cumulative", "% of Total"]:
 
-        spacer = df.loc[
-            model,
-            "pathway",
-            region,
-            sector,
-            product_category,
-            product_long,
-            product_short,
-            flow_category,
-            flow_long,
-            flow_short,
-        ].sum()
+        spacer = (
+            df.loc[
+                model,
+                "pathway",
+                region,
+                sector,
+                product_category,
+                product_long,
+                product_short,
+                flow_category,
+                flow_long,
+                flow_short,
+            ]
+            .loc[:, str(date_range[0]) : str(date_range[1])]
+            .sum()
+        )
 
         spacer.index = spacer.index.astype(int)
 

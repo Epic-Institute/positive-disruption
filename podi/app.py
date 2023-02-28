@@ -6,7 +6,7 @@ app = Dash(
     __name__,
     use_pages=True,
 )
-server = app.server
+
 
 app.layout = html.Div(
     [
