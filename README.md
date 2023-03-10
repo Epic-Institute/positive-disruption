@@ -19,7 +19,31 @@ Additional model documentation is located in our [Wiki](https://github.com/Epic-
 
 ## How to install
 
-Clone the repository, then run main.py. This will produce output datasets in /positive-disruption/podi/data/output and visualizations in /positive-disruption/charts/ .
+1. Clone this repository and open the directory on your local machine.
+
+2. Create and activate a virtual environment. 
+
+```shell
+$ python3 -m venv .env
+$ python3 source .env/bin/activate
+```
+3. Install dependencies
+
+```shell
+(.env) $ make install
+```
+
+4. Run main.py. This will produce output datasets in /positive-disruption/podi/data/output and visualizations in /positive-disruption/charts/ .
+
+```shell
+(.env) $ python3 main.py
+```
+
+5. To view the interactive Data Explorer, run podi/app.py and click the link that appears to open it in a web browswer.
+
+```shell
+(.env) $ python3 podi/app.py
+```
 
 ## How to contribute
 
