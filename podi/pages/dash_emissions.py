@@ -355,11 +355,11 @@ def update_graph(
                 flow_short,
             ]
             .groupby(groupby)
-            .sum()
+            .sum(numeric_only=True)
         ).loc[:, str(date_range[0]) : str(date_range[1])]
         * unit_val[str(yaxis_unit)]
     ).T.fillna(0)
-    
+
     if yaxis_type == "Cumulative":
         filtered_df = filtered_df.loc[
             str(date_range[0]) : str(date_range[1])
@@ -489,7 +489,7 @@ def update_graph(
         else "log",
         spikemode="toaxis",
     )
-    
+
     fig.update_xaxes(spikemode="toaxis")
 
     if yaxis_type == "% of Total":

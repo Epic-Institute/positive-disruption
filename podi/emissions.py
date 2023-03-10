@@ -1228,7 +1228,7 @@ def emissions(
             ).values
         ]
         .groupby(["model", "scenario", "region"])
-        .sum()
+        .sum(numeric_only=True)
         .loc[:, emissions_additional_last_valid_index:]
         .pct_change(axis=1)
         .replace(NaN, 0)
@@ -1467,7 +1467,7 @@ def emissions(
                 "unit",
             ]
         )
-        .sum()
+        .sum(numeric_only=True)
     )
 
     # Add indices product_category, product_short, flow_short

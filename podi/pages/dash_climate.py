@@ -13,7 +13,7 @@ layout = html.Div(
     [
         html.Div(
             children=[
-                html.Label("Dataset"),
+                html.Label("Dataset", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -27,7 +27,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Model"),
+                html.Label("Model", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -39,7 +39,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Scenario"),
+                html.Label("Scenario", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -51,7 +51,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Region"),
+                html.Label("Region", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -63,7 +63,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Variable"),
+                html.Label("Variable", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -75,7 +75,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Gas"),
+                html.Label("Gas", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -83,18 +83,6 @@ layout = html.Div(
                             df.gas.unique().tolist() + ["CO2e"],
                             id="gas",
                             multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Unit"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.unit.unique().tolist(),
-                            df.unit.unique().tolist()[0],
-                            id="yaxis_unit",
-                            multi=False,
                         ),
                     ],
                 ),
@@ -110,7 +98,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Group by"),
+                html.Label("Group by", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -128,7 +116,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Chart Type"),
+                html.Label("Chart Type", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -154,7 +142,6 @@ layout = html.Div(
     Input("region", "value"),
     Input("variable", "value"),
     Input("gas", "value"),
-    Input("yaxis_unit", "value"),
     Input("yaxis_type", "value"),
     Input("groupby", "value"),
     Input("chart_type", "value"),
@@ -166,12 +153,17 @@ def update_graph(
     region,
     variable,
     gas,
-    yaxis_unit,
     yaxis_type,
     groupby,
     chart_type,
 ):
     stack_type = {"none": None, "tonexty": "1"}
+
+    yaxis_title = {
+        "Concentration": "PPM",
+        "Temperature change": "C",
+        "Radiative forcing": "W/m2",
+    }
 
     df = pd.read_csv(
         "~/positive-disruption/podi/data/output/climate/" + dataset + ".csv"
@@ -192,16 +184,9 @@ def update_graph(
                     "unit",
                 ]
             )
-            .loc[
-                model,
-                scenario,
-                region,
-                variable,
-                gas,
-                yaxis_unit,
-            ]
+            .loc[model, scenario, region, variable, gas]
             .groupby([groupby])
-            .sum()
+            .sum(numeric_only=True)
         )
     ).T.fillna(0)
 
@@ -211,7 +196,7 @@ def update_graph(
         filtered_df,
         id_vars="year",
         var_name=[groupby],
-        value_name=yaxis_unit,
+        value_name="value",
     )
 
     for sub in filtered_df[groupby].unique():
@@ -220,7 +205,7 @@ def update_graph(
                 name=sub,
                 line=dict(width=2, dash="dash"),
                 x=filtered_df["year"].unique().astype(int),
-                y=filtered_df[filtered_df[groupby] == sub][yaxis_unit].values,
+                y=filtered_df[filtered_df[groupby] == sub]["value"].values,
                 fill=chart_type,
                 stackgroup=stack_type[chart_type],
                 showlegend=True,
@@ -234,7 +219,7 @@ def update_graph(
                 x=filtered_df["year"]
                 .unique()
                 .astype(int)[filtered_df["year"].unique().astype(int) <= 2022],
-                y=filtered_df[filtered_df[groupby] == sub][yaxis_unit].values,
+                y=filtered_df[filtered_df[groupby] == sub]["value"].values,
                 fill=chart_type,
                 stackgroup=stack_type[chart_type],
                 showlegend=False,
@@ -249,7 +234,7 @@ def update_graph(
             "x": 0.5,
             "y": 0.99,
         },
-        yaxis={"title": str(groupby) + ", " + str(yaxis_unit)},
+        yaxis={"title": str(groupby) + ", " + str(yaxis_title[variable])},
         margin_b=0,
         margin_t=20,
         margin_l=10,
@@ -257,14 +242,8 @@ def update_graph(
         xaxis1_rangeslider_visible=True,
     )
 
-    yaxis_title = {
-        "PPM": "Concentration, ",
-        "C": "Temperature Anomaly, ",
-        "W/m2": "Radiative Forcing, ",
-    }
-
     fig.update_yaxes(
-        title=yaxis_title[yaxis_unit] + str(yaxis_unit),
+        title=yaxis_title[variable],
         type="linear" if yaxis_type == "Linear" else "log",
     )
 

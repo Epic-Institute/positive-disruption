@@ -1565,7 +1565,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "nonenergy",
             ]
         )
-        .sum()
+        .sum(numeric_only=True)
         .reset_index()
     )
 
@@ -1634,7 +1634,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "nonenergy",
             ]
         )
-        .sum()
+        .sum(numeric_only=True)
     )
     # endregion
 
@@ -1829,7 +1829,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                         )
                     ]
                     .groupby("region")
-                    .sum()
+                    .sum(numeric_only=True)
                     .loc[x.name[2]]
                 ),
                 axis=1,
@@ -1851,7 +1851,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                         )
                     ]
                     .groupby("region")
-                    .sum()
+                    .sum(numeric_only=True)
                     .loc[x.name[2]]
                 ),
                 axis=1,
@@ -1883,7 +1883,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                         )
                     ]
                     .groupby("region")
-                    .sum()
+                    .sum(numeric_only=True)
                     .loc[x.name[2]]
                 ),
                 axis=1,
@@ -1906,7 +1906,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                         )
                     ]
                     .groupby("region")
-                    .sum()
+                    .sum(numeric_only=True)
                     .loc[x.name[2]]
                 ),
                 axis=1,
@@ -2011,7 +2011,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             "flexible",
             "nonenergy",
         ]
-    ).sum()
+    ).sum(numeric_only=True)
 
     energy_post_electrification.drop(labels="RELECTR", level=6, inplace=True)
 
@@ -2051,7 +2051,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 )
             ]
             .groupby(["model", "scenario", "region"])
-            .sum()
+            .sum(numeric_only=True)
             .loc[x.name[0], x.name[1], x.name[2]]
         ),
         axis=1,
@@ -2292,7 +2292,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "flow_short",
                 "unit",
             ]
-        ).sum().sort_index().to_parquet("podi/data/" + output[1] + ".parquet")
+        ).sum(numeric_only=True).sort_index().to_parquet(
+            "podi/data/" + output[1] + ".parquet"
+        )
         output[0].columns = output[0].columns.astype(int)
 
     energy_output = (
@@ -2311,7 +2313,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "unit",
             ]
         )
-        .sum()
+        .sum(numeric_only=True)
         .sort_index()
     )
 

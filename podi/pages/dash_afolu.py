@@ -12,7 +12,7 @@ layout = html.Div(
     [
         html.Div(
             children=[
-                html.Label("DATASET 1"),
+                html.Label("DATASET 1", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -25,7 +25,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Model"),
+                html.Label("Model", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -37,7 +37,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Scenario"),
+                html.Label("Scenario", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -49,7 +49,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Region"),
+                html.Label("Region", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -61,7 +61,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Sector"),
+                html.Label("Sector", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -73,7 +73,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Product Category"),
+                html.Label("Product Category", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -85,7 +85,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Product"),
+                html.Label("Product", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -97,7 +97,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Product Short"),
+                html.Label("Product Short", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -109,7 +109,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Flow Category"),
+                html.Label("Flow Category", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -121,7 +121,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Flow"),
+                html.Label("Flow", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -133,7 +133,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Flow Short"),
+                html.Label("Flow Short", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -145,7 +145,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Unit"),
+                html.Label("Unit", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -166,7 +166,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Group by"),
+                html.Label("Group by", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -188,7 +188,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Chart Type"),
+                html.Label("Chart Type", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -203,7 +203,7 @@ layout = html.Div(
         html.Br(),
         dcc.Graph(id="graphic-afolu"),
         html.Br(),
-        html.Label("DATASET 2", style={"font-weight": "bold"}),
+        html.Label("DATASET 2", className="select-label"),
         html.Br(),
         html.Div(
             [
@@ -219,7 +219,7 @@ layout = html.Div(
             ],
         ),
         html.Br(),
-        html.Label("Model"),
+        html.Label("Model", className="select-label"),
         html.Div(
             [
                 dcc.Dropdown(
@@ -231,7 +231,7 @@ layout = html.Div(
             ],
         ),
         html.Br(),
-        html.Label("Scenario"),
+        html.Label("Scenario", className="select-label"),
         html.Div(
             [
                 dcc.Dropdown(
@@ -243,7 +243,7 @@ layout = html.Div(
             ],
         ),
         html.Br(),
-        html.Label("Region"),
+        html.Label("Region", className="select-label"),
         html.Div(
             [
                 dcc.Dropdown(
@@ -255,7 +255,7 @@ layout = html.Div(
             ],
         ),
         html.Br(),
-        html.Label("Variable"),
+        html.Label("Variable", className="select-label"),
         html.Div(
             [
                 dcc.Dropdown(
@@ -267,7 +267,7 @@ layout = html.Div(
             ],
         ),
         html.Br(),
-        html.Label("Unit"),
+        html.Label("Unit", className="select-label"),
         html.Div(
             [
                 dcc.RadioItems(
@@ -283,7 +283,7 @@ layout = html.Div(
             ],
         ),
         html.Br(),
-        html.Label("Group by"),
+        html.Label("Group by", className="select-label"),
         html.Div(
             [
                 dcc.RadioItems(
@@ -300,7 +300,7 @@ layout = html.Div(
             ],
         ),
         html.Br(),
-        html.Label("Chart Type"),
+        html.Label("Chart Type", className="select-label"),
         html.Div(
             [
                 dcc.RadioItems(
@@ -404,7 +404,7 @@ def update_graph(
                 yaxis_unit,
             ]
             .groupby([groupby])
-            .sum()
+            .sum(numeric_only=True)
         )
     ).T.fillna(0)
 
@@ -466,7 +466,7 @@ def update_graph(
             .set_index(["model", "scenario", "region", "variable", "unit"])
             .loc[model2, scenario2, region2, variable, unit]
             .groupby([groupby2])
-            .sum()
+            .sum(numeric_only=True)
         )
     ).T.fillna(0)
 

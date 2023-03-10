@@ -372,7 +372,7 @@ energy_output = pd.concat(
         ]
         .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
         .groupby(energy_output.index.names)
-        .sum(),
+        .sum(numeric_only=True),
     ]
 )
 energy_output = energy_output[
@@ -391,7 +391,7 @@ emissions_output = pd.concat(
         ]
         .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
         .groupby(emissions_output.index.names)
-        .sum(),
+        .sum(numeric_only=True),
     ]
 )
 emissions_output = emissions_output[
@@ -412,7 +412,7 @@ emissions_output_co2e = pd.concat(
         ]
         .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
         .groupby(emissions_output_co2e.index.names)
-        .sum(),
+        .sum(numeric_only=True),
     ]
 )
 emissions_output_co2e = emissions_output_co2e[
@@ -479,7 +479,7 @@ for output in [
                 "unit",
             ]
         )
-        .sum()
+        .sum(numeric_only=True)
     )
     output_global.reset_index(inplace=True)
     output_global["region"] = "world"

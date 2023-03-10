@@ -270,7 +270,7 @@ def climate(
         emissions_output_fair = (
             emissions_output.loc[slice(None), scenario, :]
             .groupby(["flow_long"])
-            .sum()
+            .sum(numeric_only=True)
             .T.fillna(0)
             .rename_axis("year")
         )
@@ -425,7 +425,7 @@ def climate(
     # Convert units from emissions_output to assumed units for FAIR model input
     emissions_output_co2e_fair = emissions_output_co2e_fair.groupby(
         ["model", "scenario", "flow_long"]
-    ).sum()
+    ).sum(numeric_only=True)
 
     climate_output_concentration_co2e = pd.DataFrame()
     climate_output_forcing_co2e = pd.DataFrame()
@@ -435,7 +435,7 @@ def climate(
         emissions_output_co2e_fair2 = (
             emissions_output_co2e_fair.loc[slice(None), scenario, :]
             .groupby(["flow_long"])
-            .sum()
+            .sum(numeric_only=True)
             .T.fillna(0)
             .rename_axis("year")
         )

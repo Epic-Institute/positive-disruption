@@ -39,7 +39,7 @@ energy_balance = (
             "flow_long",
         ]
     )
-    .sum()
+    .sum(numeric_only=True)
 )
 
 # Create energy balance table structure
@@ -47,7 +47,7 @@ energy_balance = (
     energy_balance.groupby(
         ["product_category", "product_long", "flow_category", "flow_long"]
     )
-    .sum()
+    .sum(numeric_only=True)
     .reset_index()
     .pivot(
         index=["flow_category", "flow_long"],
@@ -83,7 +83,7 @@ energy_balance = (
 energy_balance = pd.concat(
     [
         energy_balance.groupby("product_category", axis="columns")
-        .sum()[
+        .sum(numeric_only=True)[
             [
                 "Coal",
                 "Crude, NGL, refinery feedstocks",
@@ -489,7 +489,7 @@ layout = html.Div(
     [
         html.Div(
             children=[
-                html.Label("Model"),
+                html.Label("Model", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -500,7 +500,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Scenario"),
+                html.Label("Scenario", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -511,7 +511,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Region"),
+                html.Label("Region", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -523,7 +523,7 @@ layout = html.Div(
                     ],
                 ),
                 html.Br(),
-                html.Label("Year"),
+                html.Label("Year", className="select-label"),
                 html.Div(
                     [
                         dcc.Dropdown(
