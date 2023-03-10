@@ -517,16 +517,20 @@ def update_graph(
 
     filtered_df = (
         (
-            pd.DataFrame(df)
-            .loc[
-                label,
-                iso3c,
-                yaxis_unit,
-            ]
-            .groupby([groupby])
-            .sum()
+            (
+                pd.DataFrame(df)
+                .loc[
+                    label,
+                    iso3c,
+                    yaxis_unit,
+                ]
+                .groupby([groupby])
+                .sum(numeric_only=True)
+            )
         )
-    ).T.replace(0, None)
+        .T.replace(0, np.nan)
+        .interpolate(method="linear", limit_area="inside", axis=0)
+    )
 
     filtered_df.index.name = "year"
     filtered_df.reset_index(inplace=True)
@@ -542,7 +546,7 @@ def update_graph(
             go.Scatter(
                 name=sub,
                 line=dict(
-                    width=0.5,
+                    width=1,
                 ),
                 x=filtered_df["year"].unique().astype(int),
                 y=filtered_df[filtered_df[groupby] == sub][yaxis_unit].values,
