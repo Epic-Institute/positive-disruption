@@ -359,9 +359,11 @@ def update_graph(
         ).loc[:, str(date_range[0]) : str(date_range[1])]
         * unit_val[str(yaxis_unit)]
     ).T.fillna(0)
-
+    
     if yaxis_type == "Cumulative":
-        filtered_df = filtered_df.loc[str(data_end_year) :].cumsum()
+        filtered_df = filtered_df.loc[
+            str(date_range[0]) : str(date_range[1])
+        ].cumsum()
 
     if yaxis_type == "% of Total":
         groupnorm = "percent"
@@ -423,18 +425,23 @@ def update_graph(
             go.Scatter(
                 name="Net Emissions",
                 line=dict(width=5, color="magenta", dash="dashdot"),
-                x=filtered_df[filtered_df["year"] >= data_end_year][
-                    "year"
-                ].drop_duplicates(),
+                x=filtered_df[
+                    (filtered_df["year"] >= date_range[0])
+                    & (filtered_df["year"] <= date_range[1])
+                ]["year"].drop_duplicates(),
                 y=pd.Series(
-                    filtered_df[(filtered_df.year >= data_end_year)]
+                    filtered_df[
+                        (filtered_df.year >= date_range[0])
+                        & (filtered_df.year <= date_range[1])
+                    ]
                     .groupby("year")
                     .sum(numeric_only=True)[yaxis_unit]
                     .values
                     * 0,
-                    index=filtered_df[filtered_df["year"] >= data_end_year][
-                        "year"
-                    ].drop_duplicates(),
+                    index=filtered_df[
+                        (filtered_df["year"] >= date_range[0])
+                        & (filtered_df["year"] <= date_range[1])
+                    ]["year"].drop_duplicates(),
                 ),
                 fill="none",
                 stackgroup=stack_type[chart_type],
@@ -446,8 +453,8 @@ def update_graph(
 
     # add shaded region to indicate Projection
     fig.add_vrect(
-        x0=data_end_year,
-        x1=proj_end_year,
+        x0=max(data_end_year, date_range[0]),
+        x1=date_range[1],
         y0=0,
         y1=1,
         fillcolor="LightGrey",
@@ -480,7 +487,10 @@ def update_graph(
         or yaxis_type == "Cumulative"
         or yaxis_type == "% of Total"
         else "log",
+        spikemode="toaxis",
     )
+    
+    fig.update_xaxes(spikemode="toaxis")
 
     if yaxis_type == "% of Total":
         fig.update_yaxes(title="% of Total")
@@ -528,7 +538,9 @@ def update_graph(
     ).T.fillna(0)
 
     if yaxis_type == "Cumulative":
-        filtered_df2 = filtered_df2.loc[str(data_end_year) :].cumsum()
+        filtered_df2 = filtered_df2.loc[
+            str(date_range[0]) : str(date_range[1])
+        ].cumsum()
 
     if yaxis_type == "% of Total":
         groupnorm = "percent"
@@ -577,8 +589,14 @@ def update_graph(
             go.Scatter(
                 name="",
                 line=dict(width=0),
-                x=spacer.index.values[spacer.index.values >= data_end_year],
-                y=spacer[spacer.index.values >= data_end_year],
+                x=spacer.index.values[
+                    (spacer.index.values >= data_end_year)
+                    & (spacer.index.values <= date_range[1])
+                ],
+                y=spacer[
+                    (spacer.index.values >= data_end_year)
+                    & (spacer.index.values <= date_range[1])
+                ],
                 fill="none",
                 stackgroup="one",
                 showlegend=False,
@@ -606,10 +624,16 @@ def update_graph(
                     width=3,
                     color=chart_template["linecolor"][i],
                 ),
-                x=filtered_df2[filtered_df2["year"] > data_end_year][
-                    "year"
-                ].drop_duplicates(),
-                y=pd.DataFrame(filtered_df2[filtered_df2.year > data_end_year])
+                x=filtered_df2[
+                    (filtered_df2["year"] > data_end_year)
+                    & ((filtered_df2["year"] <= date_range[1]))
+                ]["year"].drop_duplicates(),
+                y=pd.DataFrame(
+                    filtered_df2[
+                        (filtered_df2.year > data_end_year)
+                        & (filtered_df2.year <= date_range[1])
+                    ]
+                )
                 .set_index(groupby)
                 .loc[[groupby_value]][yaxis_unit]
                 .values,
@@ -627,18 +651,23 @@ def update_graph(
             go.Scatter(
                 name="Pathway",
                 line=dict(width=5, color="magenta", dash="dashdot"),
-                x=filtered_df[filtered_df["year"] >= data_end_year][
-                    "year"
-                ].drop_duplicates(),
+                x=filtered_df[
+                    (filtered_df["year"] >= data_end_year)
+                    & (filtered_df["year"] <= date_range[1])
+                ]["year"].drop_duplicates(),
                 y=pd.Series(
-                    filtered_df[filtered_df.year >= data_end_year]
+                    filtered_df[
+                        (filtered_df.year >= data_end_year)
+                        & (filtered_df.year <= date_range[1])
+                    ]
                     .groupby("year")
                     .sum(numeric_only=True)[yaxis_unit]
                     .values,
-                    index=filtered_df[filtered_df["year"] >= data_end_year][
-                        "year"
-                    ].drop_duplicates(),
-                ).loc[data_end_year:],
+                    index=filtered_df[
+                        (filtered_df["year"] >= data_end_year)
+                        & (filtered_df["year"] <= date_range[1])
+                    ]["year"].drop_duplicates(),
+                ).loc[data_end_year : date_range[1]],
                 fill="none",
                 stackgroup="pathway",
                 showlegend=True,
@@ -697,8 +726,8 @@ def update_graph(
 
     # add shaded region to indicate Projection
     fig2.add_vrect(
-        x0=data_end_year,
-        x1=proj_end_year,
+        x0=max(data_end_year, date_range[0]),
+        x1=date_range[1],
         y0=0,
         y1=1,
         fillcolor="LightGrey",
@@ -741,4 +770,4 @@ def update_graph(
             title="Cumulative Emissions Mitigated, " + str(yaxis_unit)
         )
 
-    return (fig, fig2)
+    return fig, fig2
