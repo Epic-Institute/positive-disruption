@@ -2,9 +2,11 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Dash, dcc, html
 
+dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 app = Dash(
     __name__,
     use_pages=True,
+    external_stylesheets=[dbc.themes.BOOTSTRAP, dbc_css],
 )
 
 
@@ -209,7 +211,8 @@ app.layout = html.Div(
         ),
         html.Br(),
         dash.page_container,
-    ]
+    ],
+    className="dbc",
 )
 
 
