@@ -8,29 +8,52 @@ from dash import Input, Output, callback, dcc, html
 
 dash.register_page(__name__, path="/Energy", title="Energy", name="Energy")
 
+# define year ranges of data and projections
 data_start_year = 1990
-data_end_year = 2100
+data_end_year = 2020
+proj_end_year = 2100
 
+# define dataset options
 dataset = ["energy_output"]
 
-df = pd.read_parquet(
-    "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
-).reset_index()
+# read in data
+df = (
+    pd.read_parquet(
+        "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
+    )
+    .reset_index()
+    .astype(
+        {
+            k: "category"
+            for k in pd.read_parquet(
+                "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
+            ).index.names
+        }
+        | {
+            j: "float32"
+            for j in pd.read_parquet(
+                "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
+            ).columns
+        }
+    )
+)
 
+# define list of columns to use as index
 clst = df.columns[
     (
         ~df.columns.isin(
-            f"{i}" for i in range(data_start_year, data_end_year + 1)
+            f"{i}" for i in range(data_start_year, proj_end_year + 1)
         )
     )
     & (~df.columns.isin(["product_short", "flow_short"]))
 ].tolist()
 
+# set index
 df.set_index(
     df.columns[
         (
             ~df.columns.isin(
-                f"{i}" for i in range(data_start_year, data_end_year + 1)
+                f"{i}" for i in range(data_start_year, proj_end_year + 1)
             )
         )
         & (~df.columns.isin(["product_short", "flow_short"]))
@@ -38,6 +61,10 @@ df.set_index(
     inplace=True,
 )
 
+# drop unused columns
+df.drop(columns=["product_short", "flow_short"], inplace=True)
+
+# define list of controls
 lst = []
 for level in df.index.names:
     lst.append(
@@ -69,7 +96,6 @@ layout = html.Div(
                 dataset,
                 dataset[0],
                 id="dataset",
-                style={"margin-right": "20px"},
             )
         ),
         html.Br(),
@@ -140,7 +166,7 @@ def update_graph(
     chart_type,
     *clst,
     data_start_year=1990,
-    data_end_year=2100,
+    proj_end_year=2100,
 ):
     unit_val = {"TJ": 1, "TWh": 0.0002777, "percent of total": 1}
     stack_type = {"none": None, "tonexty": "1"}
@@ -155,7 +181,7 @@ def update_graph(
         df.columns[
             (
                 ~df.columns.isin(
-                    f"{i}" for i in range(data_start_year, data_end_year + 1)
+                    f"{i}" for i in range(data_start_year, proj_end_year + 1)
                 )
             )
             & (~df.columns.isin(["product_short", "flow_short"]))

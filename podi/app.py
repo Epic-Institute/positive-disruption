@@ -46,46 +46,6 @@ app.layout = html.Div(
         ),
         # make a header
         html.Div(
-            [
-                html.Div(
-                    id="mobile-popup",
-                    children=[
-                        html.Div(
-                            id="mobile-logo",
-                            className="row",
-                            children=[
-                                html.A(
-                                    href="https://epicinstitute.org/",
-                                    target="_blank",
-                                    children=[
-                                        html.Img(
-                                            src=app.get_asset_url(
-                                                "img/epic-logo.png"
-                                            )
-                                        )
-                                    ],
-                                )
-                            ],
-                        ),
-                        html.Div(
-                            id="mobile-title",
-                            className="row",
-                            children=[html.Span("Data Explorer")],
-                        ),
-                        html.Div(
-                            id="mobile-text",
-                            className="row",
-                            children=[
-                                html.P(
-                                    "Visit on a larger screen \n to explore the data"
-                                )
-                            ],
-                        ),
-                    ],
-                )
-            ]
-        ),
-        html.Div(
             className="row",
             id="data-explorer",
             children=[
