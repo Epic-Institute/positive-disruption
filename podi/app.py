@@ -119,57 +119,31 @@ app.layout = html.Div(
                 ),
                 html.Div(className="row ei-border-bottom"),
                 # Filters
+                html.Br(),
                 html.Div(
-                    className="row filters",
-                    children=[
-                        html.Div(
-                            className="col-12",
-                            children=[
-                                html.Div(
-                                    className="row select",
-                                    children=[
-                                        html.Div(
-                                            className="col-4 select-output",
-                                            children=[
-                                                html.Span(
-                                                    "Model Output",
-                                                    className="select-label",
-                                                ),
-                                                html.Div(
-                                                    children=html.Div(
-                                                        [
-                                                            dcc.Dropdown(
-                                                                [
-                                                                    {
-                                                                        "label": dcc.Link(
-                                                                            f"{page['name']}",
-                                                                            href=page[
-                                                                                "relative_path"
-                                                                            ],
-                                                                            className="select-label",
-                                                                        ),
-                                                                        "value": page[
-                                                                            "relative_path"
-                                                                        ],
-                                                                    }
-                                                                    for page in dash.page_registry.values()
-                                                                ],
-                                                            )
-                                                        ],
-                                                    )
-                                                ),
-                                            ],
-                                        ),
-                                    ],
-                                )
+                    [
+                        dcc.Dropdown(
+                            [
+                                {
+                                    "label": dcc.Link(
+                                        f"{page['name']}",
+                                        href=page["relative_path"],
+                                        className="select-label",
+                                    ),
+                                    "value": page["relative_path"],
+                                }
+                                for page in dash.page_registry.values()
                             ],
+                            placeholder="Select Model Output",
                         )
                     ],
+                    style={"width": "25%", "margin": "auto"},
+                    className="mb-3",
                 ),
                 html.Div(className="row ei-border-bottom"),
+                html.Br(),
             ],
         ),
-        html.Br(),
         dash.page_container,
     ],
     className="dbc",
