@@ -25,7 +25,7 @@ Additional model documentation is located in our [Wiki](https://github.com/Epic-
 
 ```shell
 $ python3 -m venv .env
-$ python3 source .env/bin/activate
+$ source .env/bin/activate
 ```
 3. Install dependencies
 
