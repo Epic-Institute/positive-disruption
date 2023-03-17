@@ -3,12 +3,12 @@
 ## Install for production
 install:
 	@echo ">> Installing dependencies"
-	python -m pip install --upgrade pip
-	python -m pip install -e .
+	python3 -m pip install --upgrade pip
+	python3 -m pip install -e .
 
 ## Install for development 
 install-dev: install
-	python -m pip install -e ".[dev]"
+	python3 -m pip install -e ".[dev]"
 
 ## Build dependencies
 build: 
@@ -46,7 +46,7 @@ check:
 
 ## Run api
 api:
-	python -m uvicorn src.api.main:app --reload
+	python3 -m uvicorn src.api.main:app --reload
 
 
 #################################################################################

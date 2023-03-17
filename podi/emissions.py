@@ -10,7 +10,7 @@ from numpy import NaN
 from pandarallel import pandarallel
 from scipy.optimize import differential_evolution
 
-pandarallel.initialize(progress_bar=True, nb_workers=6)
+pandarallel.initialize(progress_bar=True)
 
 # endregion
 
@@ -1227,7 +1227,7 @@ def emissions(
                 == "Electricity output"
             ).values
         ]
-        .groupby(["model", "scenario", "region"])
+        .groupby(["model", "scenario", "region"], observed=True)
         .sum(numeric_only=True)
         .loc[:, emissions_additional_last_valid_index:]
         .pct_change(axis=1)
@@ -1465,7 +1465,8 @@ def emissions(
                 "flow_category",
                 "flow_long",
                 "unit",
-            ]
+            ],
+            observed=True,
         )
         .sum(numeric_only=True)
     )

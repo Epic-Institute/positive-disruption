@@ -1,519 +1,542 @@
+import itertools
+
 import dash
+import dash_bootstrap_components as dbc
 import pandas as pd
+import plotly.express as px
 import plotly.graph_objects as go
 from dash import Input, Output, callback, dcc, html
 
 dash.register_page(__name__, path="/AFOLU", title="AFOLU", name="AFOLU")
 
-df = pd.read_csv("~/positive-disruption/podi/data/afolu_output.csv")
-df2 = pd.read_csv("~/positive-disruption/podi/data/TNC/afolu_historical.csv")
+# define year ranges of data and projections
+data_start_year = 1990
+data_end_year = 2020
+proj_end_year = 2100
 
-layout = html.Div(
+# define dataset options
+dataset = ["afolu_output"]
+
+# define chart output options
+chart_output = ["AFOLU (Mha)", "AFOLU (m^3)", "AFOLU (Percent adoption)"]
+
+# read in data
+df = (
+    pd.read_parquet(
+        "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
+    )
+    .reset_index()
+    .astype(
+        {
+            k: "category"
+            for k in pd.read_parquet(
+                "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
+            ).index.names
+        }
+        | {
+            j: "float32"
+            for j in pd.read_parquet(
+                "~/positive-disruption/podi/data/" + dataset[0] + ".parquet"
+            ).columns
+        }
+    )
+)
+
+# define dataset index options that should not be used
+index_exclude = ["product_short", "flow_short", "unit"]
+
+# define list of columns to use as index
+clst = df.columns[
+    (
+        ~df.columns.isin(
+            f"{i}" for i in range(data_start_year, proj_end_year + 1)
+        )
+    )
+    & (~df.columns.isin(index_exclude))
+].tolist()
+
+# make a dictionary of clst that uses common names for keys
+clst_dict = {
+    "model": "Model",
+    "scenario": "Scenario",
+    "region": "Region",
+    "sector": "Sector",
+    "product_category": "Product Category",
+    "product_long": "Product",
+    "flow_category": "Flow Category",
+    "flow_long": "Flow",
+    "unit": "Unit",
+}
+
+
+# define dataset index options that should be default singular or
+# multi-selected
+clst_multi = {
+    "model": False,
+    "scenario": False,
+    "region": True,
+    "sector": True,
+    "product_category": True,
+    "product_long": True,
+    "flow_category": True,
+    "flow_long": True,
+    # "unit": False,
+}
+
+# set index
+df.set_index(
+    df.columns[
+        (
+            ~df.columns.isin(
+                f"{i}" for i in range(data_start_year, proj_end_year + 1)
+            )
+        )
+        & (~df.columns.isin(index_exclude))
+    ].tolist(),
+    inplace=True,
+)
+
+# drop unused columns
+df.drop(columns=index_exclude, inplace=True)
+
+# define list of controls
+lst = []
+for level in df.index.names:
+    lst.append(
+        html.Label(
+            level.replace("_", " ").replace("long", "").title(),
+            className="select-label",
+        )
+    )
+    lst.append(
+        html.Div(
+            [
+                dcc.Dropdown(
+                    df.reset_index()[level].unique().tolist(),
+                    df.reset_index()[level].unique().tolist()
+                    if clst_multi[level]
+                    else df.reset_index()[level].unique().tolist()[-1],
+                    id=level,
+                    multi=True,
+                    style={
+                        "maxHeight": "45.5px",
+                        "overflow-y": "scroll",
+                        "border": "1px solid #d6d6d6",
+                        "border-radius": "5px",
+                        "outline": "none",
+                    },
+                ),
+            ],
+            className="mb-3",
+        )
+    )
+
+# define data_controls layout
+data_controls = dbc.Card(
     [
-        html.Div(
-            children=[
-                html.Label("DATASET 1", className="select-label"),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            [
-                                "afolu_output",
-                            ],
-                            "afolu_output",
-                            id="dataset",
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Model", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.model.unique().tolist(),
-                            df.model.unique().tolist(),
-                            id="model",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Scenario", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.scenario.unique().tolist(),
-                            df.scenario.unique().tolist()[0],
-                            id="scenario",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Region", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.region.unique().tolist(),
-                            df.region.unique().tolist(),
-                            id="region",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Sector", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.sector.unique().tolist(),
-                            df.sector.unique().tolist(),
-                            id="sector",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Product Category", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.product_category.unique().tolist(),
-                            df.product_category.unique().tolist(),
-                            id="product_category",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Product", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.product_long.unique().tolist(),
-                            df.product_long.unique().tolist(),
-                            id="product_long",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Product Short", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.product_short.unique().tolist(),
-                            df.product_short.unique().tolist(),
-                            id="product_short",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Flow Category", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.flow_category.unique().tolist(),
-                            df.flow_category.unique().tolist(),
-                            id="flow_category",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Flow", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.flow_long.unique().tolist(),
-                            df.flow_long.unique().tolist(),
-                            id="flow_long",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Flow Short", className="select-label"),
-                html.Div(
-                    [
-                        dcc.Dropdown(
-                            df.flow_short.unique().tolist(),
-                            df.flow_short.unique().tolist(),
-                            id="flow_short",
-                            multi=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Unit", className="select-label"),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            ["Mha", "m3", "Percent adoption"],
-                            "Mha",
-                            id="yaxis_unit",
-                        ),
-                    ],
-                ),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            ["Linear", "Log"],
-                            "Linear",
-                            id="yaxis_type",
-                            inline=True,
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Group by", className="select-label"),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            [
-                                "model",
-                                "scenario",
-                                "region",
-                                "sector",
-                                "product_category",
-                                "product_long",
-                                "product_short",
-                                "flow_category",
-                                "flow_long",
-                                "flow_short",
-                            ],
-                            "flow_short",
-                            id="groupby",
-                        ),
-                    ],
-                ),
-                html.Br(),
-                html.Label("Chart Type", className="select-label"),
-                html.Div(
-                    [
-                        dcc.RadioItems(
-                            {"none": "line", "tonexty": "area"},
-                            "tonexty",
-                            id="chart_type",
-                        ),
-                    ],
-                ),
-            ]
-        ),
-        html.Br(),
-        dcc.Graph(id="graphic-afolu"),
-        html.Br(),
-        html.Label("DATASET 2", className="select-label"),
-        html.Br(),
-        html.Div(
-            [
-                dcc.RadioItems(
-                    [
-                        "afolu_historical",
-                        "flux_output",
-                        "max_extent_output",
-                    ],
-                    "afolu_historical",
-                    id="dataset2",
-                ),
-            ],
-        ),
-        html.Br(),
-        html.Label("Model", className="select-label"),
+        html.Label("Model Output", className="select-label"),
         html.Div(
             [
                 dcc.Dropdown(
-                    df2.model.unique().tolist(),
-                    df2.model.unique().tolist()[0],
-                    id="model2",
-                    multi=True,
+                    dataset,
+                    dataset[0],
+                    id="dataset",
                 ),
             ],
+            className="mb-2",
         ),
-        html.Br(),
-        html.Label("Scenario", className="select-label"),
+        html.Label("Date Range", className="select-label"),
         html.Div(
             [
-                dcc.Dropdown(
-                    df2.scenario.unique().tolist(),
-                    df2.scenario.unique().tolist()[0],
-                    id="scenario2",
-                    multi=True,
+                dcc.RangeSlider(
+                    id="date_range",
+                    min=data_start_year,
+                    max=proj_end_year,
+                    value=[data_start_year, proj_end_year],
+                    marks={
+                        str(year): str(year)
+                        for year in range(
+                            data_start_year, proj_end_year + 1, 10
+                        )
+                    },
                 ),
             ],
+            className="mb-2",
         ),
-        html.Br(),
-        html.Label("Region", className="select-label"),
-        html.Div(
+        html.Div(lst),
+    ],
+    body=True,
+)
+
+# define chart controls layout
+chart_controls = dbc.Card(
+    dbc.Row(
+        [
+            dbc.Col(
+                [
+                    html.Label("Chart Output", className="select-label"),
+                    html.Div(
+                        [
+                            dcc.Dropdown(
+                                chart_output,
+                                chart_output[0],
+                                id="chart_output",
+                            ),
+                        ],
+                        className="mb-2",
+                    ),
+                    html.Label("Group By", className="select-label"),
+                    html.Div(
+                        [
+                            dcc.Dropdown(
+                                [
+                                    {"label": clst_dict[i], "value": i}
+                                    for i in clst
+                                ],
+                                id="groupby",
+                                multi=True,
+                            ),
+                        ],
+                        className="mb-2",
+                    ),
+                ]
+            ),
+            dbc.Col(
+                [
+                    html.Label("Y-Axis Type", className="select-label"),
+                    html.Div(
+                        [
+                            dcc.Dropdown(
+                                [
+                                    "Linear",
+                                    "Log",
+                                    "Cumulative",
+                                    "% of Total",
+                                ],
+                                "Linear",
+                                id="yaxis_type",
+                            ),
+                        ],
+                        className="mb-2",
+                    ),
+                    html.Label("Chart Type", className="select-label"),
+                    html.Div(
+                        [
+                            dcc.Dropdown(
+                                {"none": "line", "tonexty": "area"},
+                                "tonexty",
+                                id="chart_type",
+                            ),
+                        ],
+                        className="mb-2",
+                    ),
+                ]
+            ),
+        ]
+    ),
+    body=True,
+)
+
+
+# define layout
+layout = dbc.Container(
+    [
+        dbc.Row(
             [
-                dcc.Dropdown(
-                    df2.region.unique().tolist(),
-                    df2.region.unique().tolist(),
-                    id="region2",
-                    multi=True,
-                ),
-            ],
-        ),
-        html.Br(),
-        html.Label("Variable", className="select-label"),
-        html.Div(
-            [
-                dcc.Dropdown(
-                    df2.variable.unique().tolist(),
-                    df2.variable.unique().tolist(),
-                    id="variable",
-                    multi=True,
-                ),
-            ],
-        ),
-        html.Br(),
-        html.Label("Unit", className="select-label"),
-        html.Div(
-            [
-                dcc.RadioItems(
-                    df2.unit.unique().tolist()
-                    + [
-                        "tCO2e/m3/yr",
-                        "tCO2e/percentile improvement",
-                        "tCO2e/Mha/yr",
-                    ],
-                    df2.unit.unique().tolist()[0],
-                    id="unit",
-                ),
-            ],
-        ),
-        html.Br(),
-        html.Label("Group by", className="select-label"),
-        html.Div(
-            [
-                dcc.RadioItems(
+                dbc.Col(data_controls, md=3),
+                dbc.Col(
                     [
-                        "model",
-                        "scenario",
-                        "region",
-                        "variable",
-                        "unit",
+                        dbc.Card(chart_controls),
+                        html.Br(),
+                        dbc.Card(
+                            dcc.Graph(
+                                id="graphic-afolu",
+                                style={"height": "100%"},
+                            ),
+                            style={"height": "77.2%"},
+                        ),
                     ],
-                    "unit",
-                    id="groupby2",
+                    md=9,
                 ),
             ],
-        ),
-        html.Br(),
-        html.Label("Chart Type", className="select-label"),
-        html.Div(
-            [
-                dcc.RadioItems(
-                    {"none": "line", "tonexty": "area"},
-                    "tonexty",
-                    id="chart_type2",
-                ),
-            ],
-        ),
-        dcc.Graph(id="graphic-afolu-2"),
-    ]
+        )
+    ],
+    fluid=True,
 )
 
 
 @callback(
     Output("graphic-afolu", "figure"),
-    Output("graphic-afolu-2", "figure"),
-    Input("dataset", "value"),
-    Input("dataset2", "value"),
-    Input("model", "value"),
-    Input("model2", "value"),
-    Input("scenario", "value"),
-    Input("scenario2", "value"),
-    Input("region", "value"),
-    Input("region2", "value"),
-    Input("sector", "value"),
-    Input("product_category", "value"),
-    Input("product_long", "value"),
-    Input("product_short", "value"),
-    Input("flow_category", "value"),
-    Input("flow_long", "value"),
-    Input("flow_short", "value"),
-    Input("yaxis_unit", "value"),
-    Input("yaxis_type", "value"),
-    Input("groupby", "value"),
-    Input("groupby2", "value"),
-    Input("chart_type", "value"),
-    Input("chart_type2", "value"),
-    Input("variable", "value"),
-    Input("unit", "value"),
+    inputs=[
+        Input("dataset", "value"),
+        Input("date_range", "value"),
+        Input("chart_output", "value"),
+        Input("groupby", "value"),
+        Input("yaxis_type", "value"),
+        Input("chart_type", "value"),
+    ]
+    + [
+        Input(component_id=i, component_property="value")
+        for i in df.index.names
+    ],
 )
 def update_graph(
     dataset,
-    dataset2,
-    model,
-    model2,
-    scenario,
-    scenario2,
-    region,
-    region2,
-    sector,
-    product_category,
-    product_long,
-    product_short,
-    flow_category,
-    flow_long,
-    flow_short,
-    yaxis_unit,
-    yaxis_type,
+    date_range,
+    chart_output,
     groupby,
-    groupby2,
+    yaxis_type,
     chart_type,
-    chart_type2,
-    variable,
-    unit,
+    *clst,
 ):
-    # unit_val = {"Mha": 1, "ha": 1e6, "km2": 1e4}
+    # define dictionaires used for chart formatting
+
     stack_type = {"none": None, "tonexty": "1"}
-
-    df = pd.read_csv("~/positive-disruption/podi/data/" + dataset + ".csv")
-
-    filtered_df = (
-        (
-            pd.DataFrame(df)
-            .set_index(
-                [
-                    "model",
-                    "scenario",
-                    "region",
-                    "sector",
-                    "product_category",
-                    "product_long",
-                    "product_short",
-                    "flow_category",
-                    "flow_long",
-                    "flow_short",
-                    "unit",
-                ]
+    chart_template = {
+        "linecolor": list(
+            itertools.chain.from_iterable(
+                itertools.repeat(
+                    px.colors.qualitative.Prism
+                    + px.colors.qualitative.Antique
+                    + px.colors.qualitative.Dark24
+                    + px.colors.qualitative.Pastel1
+                    + px.colors.qualitative.Pastel2
+                    + px.colors.qualitative.Set1
+                    + px.colors.qualitative.Set2
+                    + px.colors.qualitative.Set3,
+                    200,
+                )
             )
-            .loc[
-                model,
-                scenario,
-                region,
-                sector,
-                product_category,
-                product_long,
-                product_short,
-                flow_category,
-                flow_long,
-                flow_short,
-                yaxis_unit,
-            ]
-            .groupby([groupby])
-            .sum(numeric_only=True)
-        )
+        ),
+        "fillcolor": list(
+            itertools.chain.from_iterable(
+                itertools.repeat(
+                    px.colors.qualitative.Prism
+                    + px.colors.qualitative.Antique
+                    + px.colors.qualitative.Dark24
+                    + px.colors.qualitative.Pastel1
+                    + px.colors.qualitative.Pastel2
+                    + px.colors.qualitative.Set1
+                    + px.colors.qualitative.Set2
+                    + px.colors.qualitative.Set3,
+                    200,
+                )
+            )
+        ),
+        "hovertemplate": (
+            "<b>Year</b>: %{x}" + "<br><b>Energy</b>: %{y:,.0f} " + "<br>"
+        ),
+    }
+
+    # read in data
+    df = pd.read_parquet(
+        "~/positive-disruption/podi/data/" + dataset + ".parquet"
+    ).reset_index()
+
+    # filter data for chart_output selection
+    if chart_output == "AFOLU (Mha)":
+        df = df[df.unit == "Mha"]
+    elif chart_output == "AFOLU (m^3)":
+        df = df[df.unit == "m3"]
+    elif chart_output == "AFOLU (Percent adoption)":
+        df = df[df.unit == "Percent adoption"]
+
+    # set index
+    df.set_index(
+        df.columns[
+            (
+                ~df.columns.isin(
+                    f"{i}" for i in range(data_start_year, proj_end_year + 1)
+                )
+            )
+            & (~df.columns.isin(index_exclude))
+        ].tolist(),
+        inplace=True,
+    )
+
+    # drop unused columns
+    df.drop(columns=index_exclude, inplace=True)
+
+    # make groupby an array if it is not already
+    if not isinstance(groupby, list):
+        groupby = [groupby] if groupby else []
+
+    # prevent error if groupby is empty
+    if not groupby:
+        groupby = ["product_long"]
+
+    # choose chart_output
+    filtered_df = (
+        df.loc[df.index.isin(clst, level=1)]
+        .groupby(groupby)
+        .sum(numeric_only=True)
+        .loc[:, str(date_range[0]) : str(date_range[1])]
     ).T.fillna(0)
+
+    if yaxis_type == "Cumulative":
+        filtered_df = filtered_df.loc[
+            str(date_range[0]) : str(date_range[1])
+        ].cumsum()
+
+    if yaxis_type == "% of Total":
+        groupnorm = "percent"
+        filtered_df[filtered_df < 0] = 0
+    else:
+        groupnorm = None
+
+    if yaxis_type == "Log":
+        filtered_df[filtered_df < 0] = 0
 
     filtered_df.index.name = "year"
     filtered_df.reset_index(inplace=True)
     filtered_df = pd.melt(
         filtered_df,
         id_vars="year",
-        var_name=[groupby],
-        value_name="Adoption, " + str(yaxis_unit),
+        var_name=groupby,
+        value_name="value",
+    ).astype(
+        {k: "category" for k in groupby} | {"year": "int", "value": "float32"}
+    )
+
+    filtered_df = (
+        df.loc[df.index.isin(clst, level=1)]
+        .groupby(groupby)
+        .sum(numeric_only=True)
+        .loc[:, str(date_range[0]) : str(date_range[1])]
+    ).T.fillna(0)
+
+    if yaxis_type == "Cumulative":
+        filtered_df = filtered_df.loc[
+            str(date_range[0]) : str(date_range[1])
+        ].cumsum()
+
+    if yaxis_type == "% of Total":
+        groupnorm = "percent"
+        filtered_df[filtered_df < 0] = 0
+    else:
+        groupnorm = None
+
+    if yaxis_type == "Log":
+        filtered_df[filtered_df < 0] = 0
+
+    filtered_df.index.name = "year"
+    filtered_df.reset_index(inplace=True)
+    filtered_df = pd.melt(
+        filtered_df,
+        id_vars="year",
+        var_name=groupby,
+        value_name="value",
+    ).astype(
+        {k: "category" for k in groupby} | {"year": "int", "value": "float32"}
     )
 
     fig = go.Figure()
 
-    for sub in filtered_df[groupby].unique():
+    i = 0
+
+    for sub in (
+        filtered_df.sort_values("value", ascending=False)[groupby]
+        .drop_duplicates()
+        .squeeze()
+        .values
+    ):
+        if isinstance(sub, str):
+            name = str(sub).capitalize()
+        else:
+            name = ", ".join(str(x).capitalize() for x in sub)
+
         fig.add_trace(
             go.Scatter(
-                name=sub,
-                line=dict(
-                    width=0.5,
-                ),
-                x=filtered_df["year"],
-                y=filtered_df[filtered_df[groupby] == sub][
-                    "Adoption, " + str(yaxis_unit)
-                ],
+                name=name,
+                line=dict(width=3, color=chart_template["linecolor"][i]),
+                x=filtered_df["year"].drop_duplicates(),
+                y=pd.DataFrame(filtered_df)
+                .set_index(groupby)
+                .loc[[sub]]["value"]
+                .values,
                 fill=chart_type,
                 stackgroup=stack_type[chart_type],
                 showlegend=True,
+                hovertemplate=chart_template["hovertemplate"],
+                fillcolor=chart_template["fillcolor"][i],
+                groupnorm=groupnorm,
             )
         )
+        i += 1
+
+    if chart_type not in ["none"]:
+        fig.add_trace(
+            go.Scatter(
+                name="AFOLU",
+                line=dict(width=5, color="magenta", dash="dashdot"),
+                x=filtered_df[
+                    (filtered_df["year"] >= date_range[0])
+                    & (filtered_df["year"] <= date_range[1])
+                ]["year"].drop_duplicates(),
+                y=pd.Series(
+                    filtered_df[
+                        (filtered_df.year >= date_range[0])
+                        & (filtered_df.year <= date_range[1])
+                    ]
+                    .groupby("year")
+                    .sum(numeric_only=True)["value"]
+                    .values
+                    * 0,
+                    index=filtered_df[
+                        (filtered_df["year"] >= date_range[0])
+                        & (filtered_df["year"] <= date_range[1])
+                    ]["year"].drop_duplicates(),
+                ),
+                fill="none",
+                stackgroup=stack_type[chart_type],
+                showlegend=True,
+                hovertemplate=chart_template["hovertemplate"],
+                groupnorm=groupnorm,
+            )
+        )
+
+    # add shaded region to indicate Projection
+    fig.add_vrect(
+        x0=max(data_end_year, date_range[0]),
+        x1=date_range[1],
+        y0=0,
+        y1=1,
+        fillcolor="LightGrey",
+        opacity=0.25,
+        layer="above",
+        line_width=0,
+        annotation_text="Projection",
+        annotation_position="top left",
+    )
 
     fig.update_layout(
         title={
-            "text": "Adoption",
+            "text": "<b>AFOLU</b>, grouped by "
+            + "<b>"
+            + " & ".join(str(x).capitalize() for x in groupby),
             "xanchor": "center",
             "x": 0.5,
             "y": 0.99,
         },
-        yaxis={"title": "Adoption, " + str(yaxis_unit)},
-        margin_b=0,
-        margin_t=20,
-        margin_l=10,
-        margin_r=10,
-        xaxis1_rangeslider_visible=True,
+        template="plotly_white",
+        margin=dict(t=25, b=0, l=0, r=0),
     )
 
     fig.update_yaxes(
-        title="Adoption, " + str(yaxis_unit),
-        type="linear" if yaxis_type == "Linear" else "log",
+        title="TJ",
+        type="linear"
+        if yaxis_type == "Linear"
+        or yaxis_type == "Cumulative"
+        or yaxis_type == "% of Total"
+        else "log",
+        spikemode="toaxis",
     )
 
-    df2 = pd.read_csv(
-        "~/positive-disruption/podi/data/TNC/" + dataset2 + ".csv"
-    )
+    fig.update_xaxes(spikemode="toaxis")
 
-    filtered_df2 = (
-        (
-            pd.DataFrame(df2)
-            .set_index(["model", "scenario", "region", "variable", "unit"])
-            .loc[model2, scenario2, region2, variable, unit]
-            .groupby([groupby2])
-            .sum(numeric_only=True)
-        )
-    ).T.fillna(0)
+    if yaxis_type == "% of Total":
+        fig.update_yaxes(title="% of Total")
+    elif yaxis_type == "Cumulative":
+        fig.update_yaxes(title="Cumulative")
 
-    filtered_df2.index.name = "year"
-    filtered_df2.reset_index(inplace=True)
-    filtered_df2 = pd.melt(
-        filtered_df2,
-        id_vars="year",
-        var_name=[groupby2],
-        value_name=unit,
-    )
-
-    fig2 = go.Figure()
-
-    for sub in filtered_df2[groupby2].unique():
-        fig2.add_trace(
-            go.Scatter(
-                name=sub,
-                line=dict(
-                    width=0.5,
-                ),
-                x=filtered_df2["year"],
-                y=filtered_df2[filtered_df2[groupby2] == sub][unit],
-                fill=chart_type2,
-                stackgroup=stack_type[chart_type2],
-                showlegend=True,
-            )
-        )
-
-    fig2.update_layout(
-        title={
-            "text": dataset2,
-            "xanchor": "center",
-            "x": 0.5,
-            "y": 0.99,
-        },
-        yaxis={"title": str(unit)},
-        margin_b=0,
-        margin_t=20,
-        margin_l=10,
-        margin_r=10,
-        xaxis1_rangeslider_visible=True,
-    )
-
-    fig2.update_yaxes(
-        title=str(unit),
-        type="linear" if yaxis_type == "Linear" else "log",
-    )
-
-    return fig, fig2
+    return fig

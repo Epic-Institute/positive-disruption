@@ -269,7 +269,7 @@ def climate(
         # Format for input into FAIR
         emissions_output_fair = (
             emissions_output.loc[slice(None), scenario, :]
-            .groupby(["flow_long"])
+            .groupby(["flow_long"], observed=True)
             .sum(numeric_only=True)
             .T.fillna(0)
             .rename_axis("year")
@@ -424,7 +424,7 @@ def climate(
 
     # Convert units from emissions_output to assumed units for FAIR model input
     emissions_output_co2e_fair = emissions_output_co2e_fair.groupby(
-        ["model", "scenario", "flow_long"]
+        ["model", "scenario", "flow_long"], observed=True
     ).sum(numeric_only=True)
 
     climate_output_concentration_co2e = pd.DataFrame()
@@ -434,7 +434,7 @@ def climate(
         # Format for input into FAIR
         emissions_output_co2e_fair2 = (
             emissions_output_co2e_fair.loc[slice(None), scenario, :]
-            .groupby(["flow_long"])
+            .groupby(["flow_long"], observed=True)
             .sum(numeric_only=True)
             .T.fillna(0)
             .rename_axis("year")
@@ -818,21 +818,22 @@ def climate(
 
     # region
 
-    pd.concat(
-        [
-            climate_output_concentration,
-            climate_output_forcing,
-            climate_output_temperature,
-        ]
-    ).to_csv("podi/data/output/climate/climate_output.csv")
-
-    pd.concat(
-        [
+    # save climate output_concentration, climate_output_forcing,
+    # climate_output_temperature as parquet
+    for output in [
+        (climate_output_concentration, "climate_output_concentration"),
+        (climate_output_forcing, "climate_output_forcing"),
+        (climate_output_temperature, "climate_output_temperature"),
+        (
             climate_output_concentration_co2e,
-            climate_output_forcing_co2e,
-            climate_output_temperature,
-        ]
-    ).to_csv("podi/data/output/climate/climate_output_co2e.csv")
+            "climate_output_concentration_co2e",
+        ),
+        (climate_output_forcing_co2e, "climate_output_forcing_co2e"),
+    ]:
+        output[0].columns = output[0].columns.astype(str)
+        output[0].to_parquet(
+            "podi/data/output/climate/" + output[1] + ".parquet"
+        )
 
     # endregion
 

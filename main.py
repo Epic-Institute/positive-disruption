@@ -34,7 +34,7 @@ proj_end_year = 2100
 # ENERGY #
 ##########
 
-recalc_energy = False
+recalc_energy = True
 # region
 
 if recalc_energy is True:
@@ -85,7 +85,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = False
+recalc_afolu = True
 # region
 
 if recalc_afolu is True:
@@ -104,9 +104,7 @@ index = [
     "flow_short",
     "unit",
 ]
-afolu_output = pd.DataFrame(
-    pd.read_csv("podi/data/afolu_output.csv")
-).set_index(index)
+afolu_output = pd.read_parquet("podi/data/afolu_output.parquet")
 afolu_output.columns = afolu_output.columns.astype(int)
 
 # endregion
@@ -115,7 +113,7 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = False
+recalc_emissions = True
 # region
 
 if recalc_emissions is True:
@@ -251,7 +249,7 @@ cdr_output.columns = cdr_output.columns.astype(int)
 # CLIMATE #
 ###########
 
-recalc_climate = False
+recalc_climate = True
 # region
 
 if recalc_climate is True:
@@ -266,10 +264,25 @@ if recalc_climate is True:
         proj_end_year,
     )
 
-climate_output = pd.DataFrame(
-    pd.read_csv("podi/data/output/climate/climate_output.csv")
-).set_index(["model", "scenario", "region", "variable", "unit", "gas"])
-climate_output.columns = climate_output.columns.astype(int)
+
+# load climate_output_concentration, climate_output_temperature, climate_output_forcing from parquet
+climate_output_concentration = pd.read_parquet(
+    "podi/data/climate_output_concentration.parquet"
+)
+climate_output_concentration.columns = (
+    climate_output_concentration.columns.astype(int)
+)
+climate_output_temperature = pd.read_parquet(
+    "podi/data/climate_output_temperature.parquet"
+)
+climate_output_temperature.columns = climate_output_temperature.columns.astype(
+    int
+)
+climate_output_forcing = pd.read_parquet(
+    "podi/data/climate_output_forcing.parquet"
+)
+climate_output_forcing.columns = climate_output_forcing.columns.astype(int)
+
 
 # endregion
 
@@ -277,7 +290,7 @@ climate_output.columns = climate_output.columns.astype(int)
 # RESULTS ANALYSIS #
 ####################
 
-recalc_analysis = False
+recalc_analysis = True
 # region
 
 if recalc_analysis is True:
@@ -288,7 +301,9 @@ if recalc_analysis is True:
         emissions_output,
         emissions_output_co2e,
         cdr_output,
-        climate_output,
+        climate_output_concentration,
+        climate_output_temperature,
+        climate_output_forcing,
         data_start_year,
         data_end_year,
         proj_end_year,
@@ -338,8 +353,8 @@ emissions_wedges.columns = emissions_wedges.columns.astype(int)
 output_start_date = 2010
 output_end_date = 2070
 
-# For energy_output, groupby product_category, except for products in the Electricity
-# and Heat product_category
+# For energy_output, groupby product_category, except for products in the
+# Electricity and Heat product_category
 energy_output_temp = energy_output[
     (
         energy_output.reset_index().product_category != "Electricity and Heat"
@@ -371,7 +386,7 @@ energy_output = pd.concat(
             .values
         ]
         .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
-        .groupby(energy_output.index.names)
+        .groupby(energy_output.index.names, observed=True)
         .sum(numeric_only=True),
     ]
 )
@@ -390,7 +405,7 @@ emissions_output = pd.concat(
             .values
         ]
         .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
-        .groupby(emissions_output.index.names)
+        .groupby(emissions_output.index.names, observed=True)
         .sum(numeric_only=True),
     ]
 )
@@ -411,7 +426,7 @@ emissions_output_co2e = pd.concat(
             .values
         ]
         .rename(index={"Commercial": "Buildings", "Residential": "Buildings"})
-        .groupby(emissions_output_co2e.index.names)
+        .groupby(emissions_output_co2e.index.names, observed=True)
         .sum(numeric_only=True),
     ]
 )
@@ -477,7 +492,8 @@ for output in [
                 "flow_long",
                 "flow_short",
                 "unit",
-            ]
+            ],
+            observed=True,
         )
         .sum(numeric_only=True)
     )
@@ -514,7 +530,10 @@ for output in [
     output_global = (
         output[0]
         .loc[:, output_start_date:output_end_date]
-        .groupby(["model", "scenario", "sector", "product_long", "unit"])
+        .groupby(
+            ["model", "scenario", "sector", "product_long", "unit"],
+            observed=True,
+        )
         .mean()
     )
     output_global.reset_index(inplace=True)

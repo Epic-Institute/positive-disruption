@@ -13,6 +13,9 @@ def results_analysis(
     emissions_output,
     emissions_output_co2e,
     cdr_output,
+    climate_output_concentration,
+    climate_output_temperature,
+    climate_output_forcing,
     data_start_year,
     data_end_year,
     proj_end_year,
@@ -288,7 +291,8 @@ def results_analysis(
                 "region",
                 "sector",
                 "product_long",
-            ]
+            ],
+            observed=True,
         )
         .sum(numeric_only=True)
         .parallel_apply(
@@ -303,7 +307,7 @@ def results_analysis(
                     slice(None),
                     ["Electricity output"],
                 ]
-                .groupby(["model", "scenario", "region"])
+                .groupby(["model", "scenario", "region"], observed=True)
                 .sum(numeric_only=True)
                 .loc[x.name[0], x.name[1], x.name[2]]
             ),
@@ -341,7 +345,10 @@ def results_analysis(
                 "Memo: Non-energy use in transport equipment",
             ],
         ]
-        .groupby(["model", "scenario", "region", "sector", "flow_long"])
+        .groupby(
+            ["model", "scenario", "region", "sector", "flow_long"],
+            observed=True,
+        )
         .sum(numeric_only=True)
         .parallel_apply(
             lambda x: x.divide(
@@ -373,7 +380,7 @@ def results_analysis(
                         "Memo: Non-energy use in transport equipment",
                     ],
                 ]
-                .groupby(["model", "scenario", "region"])
+                .groupby(["model", "scenario", "region"], observed=True)
                 .sum(numeric_only=True)
                 .loc[x.name[0], x.name[1], x.name[2]]
             ),
@@ -395,7 +402,10 @@ def results_analysis(
             slice(None),
             ["RESIDENT", "COMMPUB"],
         ]
-        .groupby(["model", "scenario", "region", "sector", "flow_long"])
+        .groupby(
+            ["model", "scenario", "region", "sector", "flow_long"],
+            observed=True,
+        )
         .sum(numeric_only=True)
         .parallel_apply(
             lambda x: x.divide(
@@ -410,7 +420,9 @@ def results_analysis(
                     slice(None),
                     slice(None),
                 ]
-                .groupby(["model", "scenario", "region", "sector"])
+                .groupby(
+                    ["model", "scenario", "region", "sector"], observed=True
+                )
                 .sum(numeric_only=True)
                 .loc[x.name[0], x.name[1], x.name[2], x.name[3]]
             ),
@@ -421,7 +433,7 @@ def results_analysis(
         buildings.rename(
             index={"Commercial": "Buildings", "Residential": "Buildings"}
         )
-        .groupby(buildings.index.names)
+        .groupby(buildings.index.names, observed=True)
         .sum(numeric_only=True)
     )
 
@@ -448,7 +460,10 @@ def results_analysis(
                 "Industry not elsewhere specified",
             ],
         ]
-        .groupby(["model", "scenario", "region", "sector", "flow_long"])
+        .groupby(
+            ["model", "scenario", "region", "sector", "flow_long"],
+            observed=True,
+        )
         .sum(numeric_only=True)
         .parallel_apply(
             lambda x: x.divide(
@@ -462,7 +477,9 @@ def results_analysis(
                     slice(None),
                     "Final consumption",
                 ]
-                .groupby(["model", "scenario", "region", "sector"])
+                .groupby(
+                    ["model", "scenario", "region", "sector"], observed=True
+                )
                 .sum(numeric_only=True)
                 .loc[x.name[0], x.name[1], x.name[2], x.name[3]]
             ),
@@ -491,7 +508,7 @@ def results_analysis(
                 "Mining and quarrying",
             ],
         ]
-        .groupby(["model", "scenario", "region", "sector"])
+        .groupby(["model", "scenario", "region", "sector"], observed=True)
         .sum(numeric_only=True)
         .parallel_apply(
             lambda x: x.divide(
@@ -506,7 +523,9 @@ def results_analysis(
                     "Final consumption",
                     slice(None),
                 ]
-                .groupby(["model", "scenario", "region", "sector"])
+                .groupby(
+                    ["model", "scenario", "region", "sector"], observed=True
+                )
                 .sum(numeric_only=True)
                 .loc[x.name[0], x.name[1], x.name[2], x.name[3]]
             ),
@@ -526,7 +545,10 @@ def results_analysis(
         afolu_output.loc[
             slice(None), slice(None), slice(None), ["Agriculture"]
         ]
-        .groupby(["model", "scenario", "region", "sector", "product_long"])
+        .groupby(
+            ["model", "scenario", "region", "sector", "product_long"],
+            observed=True,
+        )
         .sum(numeric_only=True)
         .parallel_apply(
             lambda x: x.divide(
@@ -534,7 +556,8 @@ def results_analysis(
                     slice(None), slice(None), slice(None), ["Agriculture"]
                 ]
                 .groupby(
-                    ["model", "scenario", "region", "sector", "product_long"]
+                    ["model", "scenario", "region", "sector", "product_long"],
+                    observed=True,
                 )
                 .sum(numeric_only=True)
                 .loc[x.name]
@@ -549,7 +572,10 @@ def results_analysis(
         afolu_output.loc[
             slice(None), slice(None), slice(None), ["Forests & Wetlands"]
         ]
-        .groupby(["model", "scenario", "region", "sector", "product_long"])
+        .groupby(
+            ["model", "scenario", "region", "sector", "product_long"],
+            observed=True,
+        )
         .sum(numeric_only=True)
         .parallel_apply(
             lambda x: x.divide(
@@ -560,7 +586,8 @@ def results_analysis(
                     ["Forests & Wetlands"],
                 ]
                 .groupby(
-                    ["model", "scenario", "region", "sector", "product_long"]
+                    ["model", "scenario", "region", "sector", "product_long"],
+                    observed=True,
                 )
                 .sum(numeric_only=True)
                 .loc[x.name]
@@ -613,7 +640,8 @@ def results_analysis(
                 "flow_category",
                 "flow_short",
                 "unit",
-            ]
+            ],
+            observed=True,
         )
         .sum(numeric_only=True)
         .subtract(
@@ -634,7 +662,8 @@ def results_analysis(
                     "flow_category",
                     "flow_short",
                     "unit",
-                ]
+                ],
+                observed=True,
             )
             .sum(numeric_only=True)
         )
@@ -826,11 +855,11 @@ def results_analysis(
         emissions_output_co2e.rename(
             index={"Residential": "Buildings", "Commercial": "Buildings"}
         )
-        .groupby(["model", "region", "sector"])
+        .groupby(["model", "region", "sector"], observed=True)
         .sum(numeric_only=True)
     )
     emissions_historical_compare = emissions_historical.groupby(
-        ["model", "region", "sector"]
+        ["model", "region", "sector"], observed=True
     ).sum(numeric_only=True)
 
     # Calculate error between modeled and observed

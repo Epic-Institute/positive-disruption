@@ -1,4 +1,5 @@
 import dash
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from dash import Input, Output, callback, dcc, html
@@ -25,7 +26,7 @@ layout = html.Div(
         # Historical Analogs
         html.Div(
             children=[
-                html.Label("Dataset", className="select-label"),
+                html.Label("Model Output", className="select-label"),
                 html.Div(
                     [
                         dcc.RadioItems(
@@ -524,7 +525,7 @@ def update_graph(
                     iso3c,
                     yaxis_unit,
                 ]
-                .groupby([groupby])
+                .groupby([groupby], observed=True)
                 .sum(numeric_only=True)
             )
         )
@@ -618,7 +619,7 @@ def update_graph(
                     flow_long,
                     flow_short,
                 ]
-                .groupby([groupby2])
+                .groupby([groupby2], observed=True)
                 .sum(numeric_only=True)
             )
         ).T.fillna(0)
@@ -681,7 +682,7 @@ def update_graph(
                     flow_long,
                     flow_short,
                 ]
-                .groupby([groupby2])
+                .groupby([groupby2], observed=True)
                 .sum(numeric_only=True)
             )
         ).T.fillna(0)
@@ -758,7 +759,7 @@ def update_graph(
                     sector3,
                     product_long3,
                 ]
-                .groupby([groupby3])
+                .groupby([groupby3], observed=True)
                 .sum(numeric_only=True)
             )
         ).T.fillna(0)
@@ -811,7 +812,7 @@ def update_graph(
                     sector3,
                     product_long3,
                 ]
-                .groupby([groupby3])
+                .groupby([groupby3], observed=True)
                 .sum(numeric_only=True)
             )
         ).T.fillna(0)

@@ -9,9 +9,98 @@ from numpy import NaN
 from pandarallel import pandarallel
 from scipy.optimize import differential_evolution
 
-pandarallel.initialize(progress_bar=True, nb_workers=6)
+pandarallel.initialize(progress_bar=True)
 
 # endregion
+
+
+# define a function to process the dataframes in parallel
+def process_df_function(regions, data_start_year, data_end_year):
+    energy_historical_temp = pd.DataFrame([])
+
+    for region in regions:
+        # Handle "x", "c", ".." qualifiers. IEA documentation is not clear on what
+        # "x" represents; "c" represents "confidential",
+        # ".." represents "not available"
+        energy_historical = (
+            pd.DataFrame(
+                pd.read_fwf(
+                    str("podi/data/IEA/" + region + ".txt"),
+                    colspecs=[
+                        (0, 15),
+                        (16, 31),
+                        (32, 47),
+                        (48, 63),
+                        (64, 70),
+                        (71, -1),
+                    ],
+                    names=[
+                        "region",
+                        "product_short",
+                        "year",
+                        "flow_short",
+                        "unit",
+                        "value",
+                    ],
+                    dtype={
+                        "region": "category",
+                        "product_short": "category",
+                        "year": "int",
+                        "flow_short": "category",
+                        "unit": "category",
+                    },
+                )
+            )
+            .replace(["c"], NaN)
+            .replace([".."], NaN)
+            .replace(["x"], NaN)
+        )
+
+        # Change values to float
+        energy_historical["value"] = energy_historical["value"].astype(float)
+
+        # Change from all caps to lowercase
+        energy_historical["region"] = energy_historical["region"].str.lower()
+
+        # Format as a dataframe with timeseries as rows
+        energy_historical = pd.pivot_table(
+            energy_historical,
+            values="value",
+            index=["region", "product_short", "flow_short", "unit"],
+            columns="year",
+        )
+
+        # Not all regions have placeholders for all years, so they need to be created
+        energy_historical = pd.DataFrame(
+            index=energy_historical.index,
+            columns=np.arange(data_start_year, data_end_year + 1, 1),
+            data=NaN,
+        ).combine_first(energy_historical)
+
+        # Backfill missing data using oldest data point
+        energy_historical = energy_historical.fillna(method="backfill", axis=1)
+
+        # For rows with data only prior to data_start_year, front fill to data_start_year
+        energy_historical.update(
+            energy_historical[energy_historical.loc[:, data_start_year].isna()]
+            .loc[:, :data_start_year]
+            .fillna(method="ffill", axis=1)
+        )
+
+        # Remove duplicate regions created due to name overlaps
+        energy_historical = energy_historical.loc[[region.lower()], :]
+
+        # Filter for data start_year and data_end_year, which can be different depending on region/product/flow because data becomes available at different times
+        energy_historical = energy_historical.loc[
+            :, data_start_year:data_end_year
+        ]
+
+        # Build dataframe consisting of all regions
+        energy_historical_temp = pd.concat(
+            [energy_historical_temp, energy_historical]
+        )
+
+    return energy_historical_temp
 
 
 def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
@@ -21,118 +110,28 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     # region
 
-    # Download IEA World Energy Balances. As of Q1 2023, this dataset must be purchased.
-    # Choose the ZIP format of the 'World energy balances' file available
-    # [here](https://www.iea.org/data-and-statistics/data-product/world-energy-balances).
-    # Download the file to `pd/data/IEA` on your local machine and extract the file.
-    # Run the 'splitregion.sh' script, which splits the data by region and saves each to
-    # a .txt file with the filename matching the region name.
+    # Download IEA World Energy Balances. As of Q1 2023, this dataset must be
+    # purchased. Choose the ZIP format of the 'World energy balances' file
+    # available [here](https://www.iea.org/data-and-statistics/data-product/
+    # world-energy-balances). Download the file to `pd/data/IEA` on your local
+    # machine and extract the file. Run the 'splitregion.sh' script, which
+    # splits the data by region and saves each to a .txt file with the
+    # filename matching the region name.
 
     # Load historical energy data for each region.
-    def process_df_function(regions):
-        energy_historical_temp = pd.DataFrame([])
-
-        for region in regions:
-            # Handle "x", "c", ".." qualifiers. IEA documentation is not clear on what
-            # "x" represents; "c" represents "confidential",
-            # ".." represents "not available"
-            energy_historical = (
-                pd.DataFrame(
-                    pd.read_fwf(
-                        str("podi/data/IEA/" + region + ".txt"),
-                        colspecs=[
-                            (0, 15),
-                            (16, 31),
-                            (32, 47),
-                            (48, 63),
-                            (64, 70),
-                            (71, -1),
-                        ],
-                        names=[
-                            "region",
-                            "product_short",
-                            "year",
-                            "flow_short",
-                            "unit",
-                            "value",
-                        ],
-                        dtype={
-                            "region": "category",
-                            "product_short": "category",
-                            "year": "int",
-                            "flow_short": "category",
-                            "unit": "category",
-                        },
-                    )
-                )
-                .replace(["c"], NaN)
-                .replace([".."], NaN)
-                .replace(["x"], NaN)
-            )
-
-            # Change values to float
-            energy_historical["value"] = energy_historical["value"].astype(
-                float
-            )
-
-            # Change from all caps to lowercase
-            energy_historical["region"] = energy_historical[
-                "region"
-            ].str.lower()
-
-            # Format as a dataframe with timeseries as rows
-            energy_historical = pd.pivot_table(
-                energy_historical,
-                values="value",
-                index=["region", "product_short", "flow_short", "unit"],
-                columns="year",
-            )
-
-            # Not all regions have placeholders for all years, so they need to be created
-            energy_historical = pd.DataFrame(
-                index=energy_historical.index,
-                columns=np.arange(data_start_year, data_end_year + 1, 1),
-                data=NaN,
-            ).combine_first(energy_historical)
-
-            # Backfill missing data using oldest data point
-            energy_historical = energy_historical.fillna(
-                method="backfill", axis=1
-            )
-
-            # For rows with data only prior to data_start_year, front fill to data_start_year
-            energy_historical.update(
-                energy_historical[
-                    energy_historical.loc[:, data_start_year].isna()
-                ]
-                .loc[:, :data_start_year]
-                .fillna(method="ffill", axis=1)
-            )
-
-            # Remove duplicate regions created due to name overlaps
-            energy_historical = energy_historical.loc[[region.lower()], :]
-
-            # Filter for data start_year and data_end_year, which can be different depending on region/product/flow because data becomes available at different times
-            energy_historical = energy_historical.loc[
-                :, data_start_year:data_end_year
-            ]
-
-            # Build dataframe consisting of all regions
-            energy_historical_temp = pd.concat(
-                [energy_historical_temp, energy_historical]
-            )
-
-        return energy_historical_temp
+    regions_list = np.array_split(
+        pd.read_csv("podi/data/IEA/Regions.txt").squeeze("columns"),
+        multiprocessing.cpu_count(),
+    )
 
     with multiprocessing.Pool() as pool:
         energy_historical = pd.concat(
-            pool.map(
+            pool.starmap(
                 process_df_function,
-                np.array_split(
-                    pd.read_csv("podi/data/IEA/Regions.txt").squeeze(
-                        "columns"
-                    ),
-                    multiprocessing.cpu_count(),
+                zip(
+                    regions_list,
+                    [(data_start_year) for _ in regions_list],
+                    [(data_end_year) for _ in regions_list],
                 ),
             )
         )
@@ -1426,7 +1425,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     )
 
     addtl_eff = addtl_eff.groupby(
-        ["region", "sector", "IEA Product", "flow_short"]
+        ["region", "sector", "IEA Product", "flow_short"], observed=True
     ).mean()
 
     # Remove duplicate indices
@@ -1563,7 +1562,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "hydrogen",
                 "flexible",
                 "nonenergy",
-            ]
+            ],
+            observed=True,
         )
         .sum(numeric_only=True)
         .reset_index()
@@ -1632,7 +1632,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "hydrogen",
                 "flexible",
                 "nonenergy",
-            ]
+            ],
+            observed=True,
         )
         .sum(numeric_only=True)
     )
@@ -1659,7 +1660,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     per_elec_supply = elec_supply.parallel_apply(
         lambda x: x.divide(
-            elec_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+            elec_supply.groupby(["region"], observed=True)
+            .sum(0)
+            .loc[x.name[2]]
         ),
         axis=1,
     ).fillna(0)
@@ -1828,7 +1831,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                             )
                         )
                     ]
-                    .groupby("region")
+                    .groupby(["region"], observed=True)
                     .sum(numeric_only=True)
                     .loc[x.name[2]]
                 ),
@@ -1850,7 +1853,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                             )
                         )
                     ]
-                    .groupby("region")
+                    .groupby(["region"], observed=True)
                     .sum(numeric_only=True)
                     .loc[x.name[2]]
                 ),
@@ -1882,7 +1885,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                             )
                         )
                     ]
-                    .groupby("region")
+                    .groupby(["region"], observed=True)
                     .sum(numeric_only=True)
                     .loc[x.name[2]]
                 ),
@@ -1905,7 +1908,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                             )
                         )
                     ]
-                    .groupby("region")
+                    .groupby(["region"], observed=True)
                     .sum(numeric_only=True)
                     .loc[x.name[2]]
                 ),
@@ -1945,10 +1948,14 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 ]
                 .parallel_apply(
                     lambda x: x.multiply(
-                        nonrenewable_to_renewable.groupby("region")
+                        nonrenewable_to_renewable.groupby(
+                            ["region"], observed=True
+                        )
                         .sum(0)
                         .loc[x.name[2]]
-                        + elec_supply.groupby("region").sum(0).loc[x.name[2]]
+                        + elec_supply.groupby(["region"], observed=True)
+                        .sum(0)
+                        .loc[x.name[2]]
                     ),
                     axis=1,
                 )
@@ -2010,7 +2017,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             "hydrogen",
             "flexible",
             "nonenergy",
-        ]
+        ],
+        observed=True,
     ).sum(numeric_only=True)
 
     energy_post_electrification.drop(labels="RELECTR", level=6, inplace=True)
@@ -2021,7 +2029,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Recalculate percent of total consumption each technology meets
     per_elec_supply = elec_supply.parallel_apply(
         lambda x: x.divide(
-            elec_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+            elec_supply.groupby(["region"], observed=True)
+            .sum(0)
+            .loc[x.name[2]]
         ),
         axis=1,
     ).fillna(0)
@@ -2050,7 +2060,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                     ).values
                 )
             ]
-            .groupby(["model", "scenario", "region"])
+            .groupby(["model", "scenario", "region"], observed=True)
             .sum(numeric_only=True)
             .loc[x.name[0], x.name[1], x.name[2]]
         ),
@@ -2087,7 +2097,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     per_heat_supply = heat_supply.parallel_apply(
         lambda x: x.divide(
-            heat_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+            heat_supply.groupby(["region"], observed=True)
+            .sum(0)
+            .loc[x.name[2]]
         ),
         axis=1,
     ).fillna(0)
@@ -2123,7 +2135,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 heat_supply[
                     heat_supply.index.get_level_values(6).isin(renewables)
                 ]
-                .groupby(["region"])
+                .groupby(["region"], observed=True)
                 .sum(0)
                 .loc[x.name[2]]
             ),
@@ -2134,7 +2146,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Recalculate percent of total consumption each technology meets
     per_heat_supply = heat_supply.parallel_apply(
         lambda x: x.divide(
-            heat_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+            heat_supply.groupby(["region"], observed=True)
+            .sum(0)
+            .loc[x.name[2]]
         ),
         axis=1,
     ).fillna(0)
@@ -2172,7 +2186,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
 
     per_transport_supply = transport_supply.parallel_apply(
         lambda x: x.divide(
-            transport_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+            transport_supply.groupby(["region"], observed=True)
+            .sum(0)
+            .loc[x.name[2]]
         ),
         axis=1,
     ).fillna(0)
@@ -2208,7 +2224,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 transport_supply[
                     transport_supply.index.get_level_values(6).isin(renewables)
                 ]
-                .groupby(["region"])
+                .groupby(["region"], observed=True)
                 .sum(0)
                 .loc[x.name[2]]
             ),
@@ -2219,7 +2235,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     # Recalculate percent of total consumption each technology meets
     per_transport_supply = transport_supply.parallel_apply(
         lambda x: x.divide(
-            transport_supply.groupby(["region"]).sum(0).loc[x.name[2]]
+            transport_supply.groupby(["region"], observed=True)
+            .sum(0)
+            .loc[x.name[2]]
         ),
         axis=1,
     ).fillna(0)
@@ -2262,13 +2280,13 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         [per_elec_supply, per_heat_supply, per_transport_supply]
     )
 
-    # Combine baseline and pathway energy output:
+    # Combine baseline and pathway energy output, drop 'hydrogen', 'flexible', 'nonenergy' flags:
     energy_output = pd.concat([energy_baseline, energy_post_electrification])
     energy_output.index = energy_output.index.droplevel(
         ["hydrogen", "flexible", "nonenergy"]
     )
 
-    # Drop 'hydrogen', 'flexible', 'nonenergy' flags and save
+    # Save
     for output in [
         (energy_post_upstream, "energy_post_upstream"),
         (energy_post_addtl_eff, "energy_post_addtl_eff"),
@@ -2291,7 +2309,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "flow_long",
                 "flow_short",
                 "unit",
-            ]
+            ],
+            observed=True,
         ).sum(numeric_only=True).sort_index().to_parquet(
             "podi/data/" + output[1] + ".parquet"
         )
@@ -2311,7 +2330,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
                 "flow_long",
                 "flow_short",
                 "unit",
-            ]
+            ],
+            observed=True,
         )
         .sum(numeric_only=True)
         .sort_index()

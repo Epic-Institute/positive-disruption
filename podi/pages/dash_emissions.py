@@ -44,6 +44,9 @@ df = (
     )
 )
 
+# define dataset index options that should not be used
+index_exclude = ["product_short", "flow_short", "unit"]
+
 # define list of columns to use as index
 clst = df.columns[
     (
@@ -51,10 +54,25 @@ clst = df.columns[
             str(f"{i}") for i in range(data_start_year, proj_end_year + 1)
         )
     )
-    & (~df.columns.isin(["product_short", "flow_short"]))
+    & (~df.columns.isin(index_exclude))
 ].tolist()
 
-# define dataset index options that should be default singular or multi-selected
+# make a dictionary of clst that uses common names for keys
+clst_dict = {
+    "model": "Model",
+    "scenario": "Scenario",
+    "region": "Region",
+    "sector": "Sector",
+    "product_category": "Product Category",
+    "product_long": "Product",
+    "flow_category": "Flow Category",
+    "flow_long": "Flow",
+    "unit": "Unit",
+}
+
+
+# define dataset index options that should be default singular or
+# multi-selected
 clst_multi = {
     "model": False,
     "scenario": False,
@@ -64,7 +82,7 @@ clst_multi = {
     "product_long": True,
     "flow_category": True,
     "flow_long": True,
-    "unit": False,
+    # "unit": False,
 }
 
 # set index
@@ -75,13 +93,13 @@ df.set_index(
                 str(f"{i}") for i in range(data_start_year, proj_end_year + 1)
             )
         )
-        & (~df.columns.isin(["product_short", "flow_short"]))
+        & (~df.columns.isin(index_exclude))
     ].tolist(),
     inplace=True,
 )
 
 # drop unused columns
-df.drop(columns=["product_short", "flow_short"], inplace=True)
+df.drop(columns=index_exclude, inplace=True)
 
 # define list of data controls
 lst = []
@@ -103,7 +121,7 @@ for level in df.index.names:
                     id=level,
                     multi=True,
                     style={
-                        "maxHeight": "46.5px",
+                        "maxHeight": "45.5px",
                         "overflow-y": "scroll",
                         "border": "1px solid #d6d6d6",
                         "border-radius": "5px",
@@ -111,14 +129,14 @@ for level in df.index.names:
                     },
                 ),
             ],
-            className="mb-2",
+            className="mb-3",
         )
     )
 
 # define data_controls layout
 data_controls = dbc.Card(
     [
-        html.Label("Dataset", className="select-label"),
+        html.Label("Model Output", className="select-label"),
         html.Div(
             [
                 dcc.Dropdown(
@@ -173,10 +191,13 @@ chart_controls = dbc.Card(
                     html.Div(
                         [
                             dcc.Dropdown(
-                                clst,
+                                [
+                                    {"label": clst_dict[i], "value": i}
+                                    for i in clst
+                                ],
                                 id="groupby",
                                 multi=True,
-                            ),
+                            )
                         ],
                         className="mb-2",
                     ),
@@ -246,7 +267,7 @@ layout = dbc.Container(
 
 
 @callback(
-    Output("graphic-emissions", "figure"),
+    output=Output("graphic-emissions", "figure"),
     inputs=[
         Input("dataset", "value"),
         Input("date_range", "value"),
@@ -321,13 +342,13 @@ def update_graph(
                     for i in range(data_start_year, proj_end_year + 1)
                 )
             )
-            & (~df.columns.isin(["product_short", "flow_short"]))
+            & (~df.columns.isin(index_exclude))
         ].tolist(),
         inplace=True,
     )
 
     # drop unused columns
-    df.drop(columns=["product_short", "flow_short"], inplace=True)
+    df.drop(columns=index_exclude, inplace=True)
 
     # make groupby an array if it is not already
     if not isinstance(groupby, list):

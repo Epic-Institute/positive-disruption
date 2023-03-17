@@ -6,7 +6,7 @@ import pyam
 from numpy import NaN
 from pandarallel import pandarallel
 
-pandarallel.initialize(progress_bar=True, nb_workers=6)
+pandarallel.initialize(progress_bar=True)
 
 # endregion
 
@@ -803,8 +803,12 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
     #################
 
     # region
-    afolu_historical.to_csv("podi/data/TNC/afolu_historical.csv")
-    afolu_output.sort_index().to_csv("podi/data/afolu_output.csv")
+    for output in [
+        (afolu_historical, "afolu_historical"),
+        (afolu_output, "afolu_output"),
+    ]:
+        output[0].columns = output[0].columns.astype(str)
+        output[0].to_parquet(f"podi/data/{output[1]}.parquet")
 
     # endregion
 

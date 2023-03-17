@@ -60,6 +60,6 @@ for level in df.index.names:
 
 layout = html.Div(
     children=[
-        html.Label("Dataset", className="select-label"),
+        html.Label("Model Output", className="select-label"),
     ],
 )

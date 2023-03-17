@@ -33,13 +33,19 @@ $ source .env/bin/activate
 (.env) $ make install
 ```
 
-4. Run main.py. This will produce output datasets in /positive-disruption/podi/data/output and visualizations in /positive-disruption/charts/ .
+4. Run podi/data/IEA/splitregions.sh. This will produce input data in /positive-disruption/podi/data/IEA .
+
+```shell
+(.env) $ bash podi/data/IEA/splitregions.sh
+```
+
+5. Run main.py. This will produce output datasets in /positive-disruption/podi/data/output .
 
 ```shell
 (.env) $ python3 main.py
 ```
 
-5. To view the interactive Data Explorer, run podi/app.py and click the link that appears to open it in a web browswer.
+6. To view the interactive Data Explorer, run podi/app.py and click the link that appears to open it in a web browswer.
 
 ```shell
 (.env) $ python3 podi/app.py

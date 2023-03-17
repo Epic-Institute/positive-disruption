@@ -82,7 +82,9 @@ energy_balance = (
 # Create Product categories (columns)
 energy_balance = pd.concat(
     [
-        energy_balance.groupby("product_category", axis="columns")
+        energy_balance.groupby(
+            "product_category", axis="columns", observed=True
+        )
         .sum(numeric_only=True)[
             [
                 "Coal",
@@ -594,7 +596,8 @@ def update_graph(
                 "product_long",
                 "flow_category",
                 "flow_long",
-            ]
+            ],
+            observed=True,
         )
         .sum()
     )
@@ -602,7 +605,8 @@ def update_graph(
     # Create energy balance table structure
     energy_balance = (
         energy_balance.groupby(
-            ["product_category", "product_long", "flow_category", "flow_long"]
+            ["product_category", "product_long", "flow_category", "flow_long"],
+            observed=True,
         )
         .sum()
         .reset_index()
@@ -639,7 +643,9 @@ def update_graph(
     # Create Product categories (columns)
     energy_balance = pd.concat(
         [
-            energy_balance.groupby("product_category", axis="columns")
+            energy_balance.groupby(
+                "product_category", axis="columns", observed=True
+            )
             .sum()[
                 [
                     "Coal",
