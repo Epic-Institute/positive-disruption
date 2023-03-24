@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, State, dcc, html
+from dash import Input, Output, dcc, html
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -35,7 +35,7 @@ model_output = {
     "climate_output_concentration": "GHG Concentration",
     "climate_output_temperature": "Temperature Change",
     "climate_output_forcing": "Radiative Forcing",
-    "adoption_output": "Adoption Rates",
+    "adoption_output_historical": "Adoption Rates",
 }
 
 app.layout = html.Div(
@@ -260,7 +260,7 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": ["GHG Concentration"],
         "climate_output_temperature": ["Temperature Change"],
         "climate_output_forcing": ["Radiative Forcing"],
-        "adoption_output": ["Adoption Rates"],
+        "adoption_output_historical": ["Adoption Rates"],
     }
 
     # define graph output default value
@@ -271,7 +271,7 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": "GHG Concentration",
         "climate_output_temperature": "Temperature Change",
         "climate_output_forcing": "Radiative Forcing",
-        "adoption_output": "Adoption Rates",
+        "adoption_output_historical": "Adoption Rates",
     }
 
     # define groupby_set options
@@ -321,7 +321,7 @@ def set_data_and_chart_control_options(model_output):
             "variable",
             "gas",
         ],
-        "adoption_output": [
+        "adoption_output_historical": [
             "model",
             "scenario",
             "region",
@@ -340,7 +340,7 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": "scenario",
         "climate_output_temperature": "scenario",
         "climate_output_forcing": "scenario",
-        "adoption_output": "product_long",
+        "adoption_output_historical": "product_long",
     }
 
     # define yaxis_type options
@@ -351,7 +351,12 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": ["Linear", "Log"],
         "climate_output_temperature": ["Linear", "Log"],
         "climate_output_forcing": ["Linear", "Log"],
-        "adoption_output": ["Linear", "Log", "Cumulative", "% of Total"],
+        "adoption_output_historical": [
+            "Linear",
+            "Log",
+            "Cumulative",
+            "% of Total",
+        ],
     }
 
     # define yaxis_type default value
@@ -362,7 +367,7 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": "Linear",
         "climate_output_temperature": "Linear",
         "climate_output_forcing": "Linear",
-        "adoption_output": "Linear",
+        "adoption_output_historical": "Linear",
     }
 
     # define graph_type options
@@ -370,30 +375,37 @@ def set_data_and_chart_control_options(model_output):
         "energy_output": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
         ],
         "emissions_output_co2e": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
         ],
         "afolu_output": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
         ],
         "climate_output_concentration": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
         ],
         "climate_output_temperature": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
         ],
         "climate_output_forcing": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
         ],
-        "adoption_output": [
+        "adoption_output_historical": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
         ],
     }
 
@@ -405,7 +417,7 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": "none",
         "climate_output_temperature": "none",
         "climate_output_forcing": "none",
-        "adoption_output": "none",
+        "adoption_output_historical": "none",
     }
 
     graph_output_options = graph_output_dict[model_output]
@@ -458,7 +470,7 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": ["unit"],
         "climate_output_temperature": ["unit"],
         "climate_output_forcing": ["unit"],
-        "adoption_output": ["product_short", "flow_short", "unit"],
+        "adoption_output_historical": ["product_short", "flow_short", "unit"],
     }
 
     # define model_output index options that should be default singular or
@@ -484,8 +496,11 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": ["GHG Concentration"],
         "climate_output_temperature": ["Temperature Change"],
         "climate_output_forcing": ["Radiative Forcing"],
-        "adoption_output": ["Adoption Rates"],
+        "adoption_output_historical": ["Adoption Rates"],
     }
+
+    # store units before dropping
+    units = df["unit"].unique().tolist()
 
     # set index
     df.set_index(
@@ -624,26 +639,26 @@ def set_data_and_chart_control_options(model_output):
     ],
     inputs=[
         Input("data_controls", "children"),
-        Input("graph_controls", "children"),
+        # Input("graph_controls", "children"),
         Input("model_output", "value"),
         Input("date_range", "value"),
         Input("graph_output", "value"),
         Input("groupby_set", "value"),
         Input("yaxis_type", "value"),
         Input("graph_type", "value"),
-        Input("df_index_names", "data"),
+        # Input("df_index_names", "data"),
     ],
 )
 def update_output_graph(
-    data_controls_children,
-    graph_controls_children,
+    data_controls_values,
+    # graph_controls_children,
     model_output,
     date_range,
     graph_output,
     groupby_set,
     yaxis_type,
     graph_type,
-    df_index_names,
+    # df_index_names,
 ):
     # define dictionaries used for graph formatting
     stack_type = {"none": None, "tonexty": "1"}
@@ -683,6 +698,16 @@ def update_output_graph(
         ),
     }
 
+    model_output_dict = {
+        "energy_output": "Energy Supply & Demand",
+        "emissions_output_co2e": "GHG Emissions",
+        "afolu_output": "AFOLU Adoption",
+        "climate_output_concentration": "GHG Concentration",
+        "climate_output_temperature": "Temperature Change",
+        "climate_output_forcing": "Radiative Forcing",
+        "adoption_output_historical": "Adoption Rates",
+    }
+
     # define model_output index options that should not be used
     df_index_exclude_dict = {
         "energy_output": ["product_short", "flow_short", "unit"],
@@ -691,7 +716,7 @@ def update_output_graph(
         "climate_output_concentration": ["unit"],
         "climate_output_temperature": ["unit"],
         "climate_output_forcing": ["unit"],
-        "adoption_output": ["product_short", "flow_short", "unit"],
+        "adoption_output_historical": ["product_short", "flow_short", "unit"],
     }
 
     # read in data
@@ -724,10 +749,10 @@ def update_output_graph(
     if not isinstance(groupby_set, list):
         groupby_set = [groupby_set] if groupby_set else []
 
-    # filter df based on data_controls_children
+    # filter df based on data_controls_values
     data_controls_selection = []
 
-    for child in data_controls_children["props"]["children"]:
+    for child in data_controls_values["props"]["children"]:
         # check if the child has its own children
         if "children" in child["props"]:
             # loop through the child's children
@@ -742,7 +767,7 @@ def update_output_graph(
                     # append the value to the array of arrays
                     data_controls_selection.append(value)
 
-    # filter df based on data_controls_children
+    # filter df based on data_controls_values
     df = df.loc[tuple([*data_controls_selection])]
 
     # choose graph_output
@@ -777,6 +802,27 @@ def update_output_graph(
         {k: "category" for k in groupby_set}
         | {"year": "int", "value": "float32"}
     )
+
+    # if graph_type is 'Table', return a table
+    if graph_type == "Table":
+        fig = go.Figure(
+            data=[
+                go.Table(
+                    header=dict(
+                        values=list(filtered_df.columns),
+                        fill_color="paleturquoise",
+                        align="left",
+                    ),
+                    cells=dict(
+                        values=[filtered_df[k] for k in filtered_df.columns],
+                        fill_color="lavender",
+                        align="left",
+                    ),
+                )
+            ]
+        )
+
+        return (fig,)
 
     # create graph based graph_output selection
     if graph_output == "Emissions":
@@ -893,9 +939,14 @@ def update_output_graph(
 
         fig.update_layout(
             title={
-                "text": "<b>Emissions</b>, grouped by "
+                "text": "<b>"
+                + model_output_dict[model_output]
+                + "</b>, grouped by "
                 + "<b>"
-                + " & ".join(str(x).capitalize() for x in groupby_set),
+                + " & ".join(
+                    str(x.replace("_long", "")).capitalize()
+                    for x in groupby_set
+                ),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
@@ -1114,15 +1165,19 @@ def update_output_graph(
 
         fig.update_layout(
             title={
-                "text": "<b>Emissions Mitigated</b>, grouped by "
+                "text": "<b>"
+                + graph_output
+                + "</b>, grouped by "
                 + "<b>"
-                + " & ".join(str(x).capitalize() for x in groupby_set),
+                + " & ".join(
+                    str(x.replace("_long", "")).capitalize()
+                    for x in groupby_set
+                ),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
             },
             template="plotly_white",
-            legend_traceorder="reversed",
             margin=dict(t=25, b=0, l=0, r=0),
         )
 
@@ -1253,9 +1308,14 @@ def update_output_graph(
 
         fig.update_layout(
             title={
-                "text": "<b>Emissions</b>, grouped by "
+                "text": "<b>"
+                + model_output_dict[model_output]
+                + "</b>, grouped by "
                 + "<b>"
-                + " & ".join(str(x).capitalize() for x in groupby_set),
+                + " & ".join(
+                    str(x.replace("_long", "")).capitalize()
+                    for x in groupby_set
+                ),
                 "xanchor": "center",
                 "x": 0.5,
                 "y": 0.99,
