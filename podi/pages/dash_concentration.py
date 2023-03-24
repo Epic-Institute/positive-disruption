@@ -34,7 +34,7 @@ for i in dataset.values():
         [
             df,
             pd.read_parquet(
-                "~/positive-disruption/podi/data/output/climate/climate_output_"
+                "~/positive-disruption/podi/data/climate_output_"
                 + i
                 + ".parquet"
             ),
@@ -334,7 +334,7 @@ def update_graph(
 
     # read in data
     df = pd.read_parquet(
-        "~/positive-disruption/podi/data/output/climate/climate_output_"
+        "~/positive-disruption/podi/data/climate_output_"
         + dataset
         + ".parquet"
     ).reset_index()

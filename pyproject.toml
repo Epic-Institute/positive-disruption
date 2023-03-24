@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "positive-disruption"
 version = "0.1.0"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 dependencies = ["numpy>=1.23.3",
 "pandas>=1.5.0",
 "scipy>=1.9.0",
