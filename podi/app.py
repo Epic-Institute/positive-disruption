@@ -6,6 +6,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dash import Input, Output, dcc, html
+from dash.exceptions import PreventUpdate
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -26,7 +27,6 @@ data_start_year = 1990
 data_end_year = 2020
 proj_end_year = 2100
 
-
 # make dictionary of model_output options that uses common names for keys
 model_output = {
     "energy_output": "Energy Supply & Demand",
@@ -38,6 +38,18 @@ model_output = {
     "adoption_output_historical": "Adoption Rates",
 }
 
+index_names = [
+    "model",
+    "scenario",
+    "region",
+    "sector",
+    "product_category",
+    "product_long",
+    "flow_category",
+    "flow_long",
+]
+
+# make layout
 app.layout = html.Div(
     [
         html.Meta(
@@ -219,12 +231,14 @@ app.layout = html.Div(
                         dbc.Col(
                             [
                                 dbc.Card(
-                                    html.Div(id="graph_controls"), body=True
+                                    html.Div(id="graph_controls"),
+                                    body=True,
                                 ),
                                 html.Br(),
                                 dbc.Card(
                                     dcc.Graph(
                                         id="output_graph",
+                                        figure={},
                                         style={"height": "100%"},
                                     ),
                                     style={"height": "77%"},
@@ -237,17 +251,20 @@ app.layout = html.Div(
             ],
             fluid=True,
         ),
-        dcc.Store(id="df_index_names", storage_type="session"),
+        dcc.ConfirmDialog(
+            id="groupby-mismatch",
+            message="Too few options selected for groupby. Please select at least two options.",
+        ),
     ],
     className="dbc",
 )
 
 
+# populate data and graph control options based on model output selection
 @app.callback(
     output=[
         Output("data_controls", "children"),
         Output("graph_controls", "children"),
-        Output("df_index_names", "data"),
     ],
     inputs=[Input("model_output", "value")],
 )
@@ -630,35 +647,32 @@ def set_data_and_chart_control_options(model_output):
         ),
     )
 
-    return (data_controls, graph_controls, df.index.names)
+    return (data_controls, graph_controls)
 
 
+# update graph
 @app.callback(
-    output=[
-        Output("output_graph", "figure"),
-    ],
+    output=[Output("output_graph", "figure")],
     inputs=[
         Input("data_controls", "children"),
-        # Input("graph_controls", "children"),
         Input("model_output", "value"),
         Input("date_range", "value"),
         Input("graph_output", "value"),
         Input("groupby_set", "value"),
         Input("yaxis_type", "value"),
         Input("graph_type", "value"),
-        # Input("df_index_names", "data"),
+        *[Input(f"{level}", "value") for level in index_names],
     ],
 )
 def update_output_graph(
     data_controls_values,
-    # graph_controls_children,
     model_output,
     date_range,
     graph_output,
     groupby_set,
     yaxis_type,
     graph_type,
-    # df_index_names,
+    *index_values,
 ):
     # define dictionaries used for graph formatting
     stack_type = {"none": None, "tonexty": "1"}
@@ -743,13 +757,32 @@ def update_output_graph(
 
     # prevent error if groupby_set is empty
     if not groupby_set:
-        groupby_set = [""]
+        fig = go.Figure()
+        fig.update_layout(
+            annotations=[
+                dict(
+                    text="Select a variable to group by in the 'GROUP BY' menu above",
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(
+                        size=24,
+                        color="rgba(128, 128, 128, 0.5)",
+                    ),
+                    align="center",
+                )
+            ],
+        )
+        return (fig,)
 
     # make groupby_set an array if it is not already
     if not isinstance(groupby_set, list):
         groupby_set = [groupby_set] if groupby_set else []
 
     # filter df based on data_controls_values
+
     data_controls_selection = []
 
     for child in data_controls_values["props"]["children"]:
@@ -768,7 +801,59 @@ def update_output_graph(
                     data_controls_selection.append(value)
 
     # filter df based on data_controls_values
-    df = df.loc[tuple([*data_controls_selection])]
+    df = df.loc[tuple([*index_values])]
+
+    # prevent error if any data_controls dropdown is empty
+    if not all(index_values):
+        fig = go.Figure()
+        fig.update_layout(
+            annotations=[
+                dict(
+                    text="All dropdown menus must have at least one option selected",
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(
+                        size=24,
+                        color="rgba(128, 128, 128, 0.5)",
+                    ),
+                    align="center",
+                )
+            ],
+        )
+        return (fig,)
+
+    # make an array of numbers for the ordered location of each item of groupby_set in df.index
+    groupby_set_index = [
+        df.index.names.index(groupby_set[i]) for i in range(len(groupby_set))
+    ]
+    print(groupby_set_index)
+
+    if all(
+        len(index_values[df.index.names.index(groupby_name)]) <= 1
+        for groupby_name in groupby_set
+    ):
+        fig = go.Figure()
+        fig.update_layout(
+            annotations=[
+                dict(
+                    text="At least one of the selections in the 'GROUP BY' menu must have more than one option with nonzero data.",
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(
+                        size=24,
+                        color="rgba(128, 128, 128, 0.5)",
+                    ),
+                    align="center",
+                )
+            ],
+        )
+        return (fig,)
 
     # choose graph_output
     filtered_df = (
