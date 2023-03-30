@@ -248,7 +248,7 @@ def results_analysis(
         adoption_output_historical.columns.astype(str)
     )
     adoption_output_historical.to_parquet(
-        "podi/data/adoption_output_historical.parquet"
+        "podi/data/adoption_output_historical.parquet", compression="brotli"
     )
     adoption_output_historical.columns = (
         adoption_output_historical.columns.astype(int)
@@ -691,7 +691,9 @@ def results_analysis(
 
     # change columns to str and save as parquet
     emissions_wedges.columns = emissions_wedges.columns.astype(str)
-    emissions_wedges.to_parquet("podi/data/emissions_wedges.parquet")
+    emissions_wedges.to_parquet(
+        "podi/data/emissions_wedges.parquet", compression="brotli"
+    )
     emissions_wedges.columns = emissions_wedges.columns.astype(int)
 
     # endregion

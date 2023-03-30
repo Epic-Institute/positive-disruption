@@ -1052,7 +1052,9 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
     if os.path.exists("podi/data/energy_baseline.parquet"):
         os.remove("podi/data/energy_baseline.parquet")
     energy_baseline.columns = energy_baseline.columns.astype(str)
-    energy_baseline.to_parquet("podi/data/energy_baseline.parquet")
+    energy_baseline.to_parquet(
+        "podi/data/energy_baseline.parquet", compression="brotli"
+    )
     energy_baseline.columns = energy_baseline.columns.astype(int)
 
     # endregion
@@ -2296,6 +2298,8 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         (energy_percent, "energy_percent"),
     ]:
         output[0].columns = output[0].columns.astype(str)
+        for col in output[0].select_dtypes(include="float64").columns:
+            output[0][col] = output[0][col].astype("float32")
         output[0].groupby(
             [
                 "model",
@@ -2312,7 +2316,7 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
             ],
             observed=True,
         ).sum(numeric_only=True).sort_index().to_parquet(
-            "podi/data/" + output[1] + ".parquet"
+            "podi/data/" + output[1] + ".parquet", compression="brotli"
         )
         output[0].columns = output[0].columns.astype(int)
 

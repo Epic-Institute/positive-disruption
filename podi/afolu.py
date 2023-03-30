@@ -808,7 +808,9 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         (afolu_output, "afolu_output"),
     ]:
         output[0].columns = output[0].columns.astype(str)
-        output[0].to_parquet(f"podi/data/{output[1]}.parquet")
+        output[0].to_parquet(
+            f"podi/data/{output[1]}.parquet", compression="brotli"
+        )
 
     # endregion
 

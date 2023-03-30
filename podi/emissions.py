@@ -105,7 +105,9 @@ def emissions(
 
     # Save
     emissions_energy.columns = emissions_energy.columns.astype(str)
-    emissions_energy.to_parquet("podi/data/emissions_energy.parquet")
+    emissions_energy.to_parquet(
+        "podi/data/emissions_energy.parquet", compression="brotli"
+    )
     emissions_energy.columns = emissions_energy.columns.astype(int)
 
     # endregion
@@ -2695,10 +2697,20 @@ def emissions(
     # region
 
     emissions_output.columns = emissions_output.columns.astype(str)
-    emissions_output.to_parquet("podi/data/emissions_output.parquet")
+    for col in emissions_output.select_dtypes(include="float64").columns:
+        emissions_output[col] = emissions_output[col].astype("float32")
+    emissions_output.to_parquet(
+        "podi/data/emissions_output.parquet", compression="brotli"
+    )
 
     emissions_output_co2e.columns = emissions_output_co2e.columns.astype(str)
-    emissions_output_co2e.to_parquet("podi/data/emissions_output_co2e.parquet")
+    for col in emissions_output_co2e.select_dtypes(include="float64").columns:
+        emissions_output_co2e[col] = emissions_output_co2e[col].astype(
+            "float32"
+        )
+    emissions_output_co2e.to_parquet(
+        "podi/data/emissions_output_co2e.parquet", compression="brotli"
+    )
 
     # endregion
 

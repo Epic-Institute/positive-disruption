@@ -831,7 +831,9 @@ def climate(
         (climate_output_forcing_co2e, "climate_output_forcing_co2e"),
     ]:
         output[0].columns = output[0].columns.astype(str)
-        output[0].to_parquet("podi/data/" + output[1] + ".parquet")
+        output[0].to_parquet(
+            "podi/data/" + output[1] + ".parquet", compression="brotli"
+        )
 
     # endregion
 

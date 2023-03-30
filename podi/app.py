@@ -6,7 +6,6 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dash import Input, Output, dcc, html
-from dash.exceptions import PreventUpdate
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -17,6 +16,7 @@ app = dash.Dash(
     external_stylesheets=[external_stylesheet],
     title="Data Explorer",
     suppress_callback_exceptions=True,
+    assets_folder="assets",
 )
 
 # Expose Flask instance
@@ -455,25 +455,19 @@ def set_data_and_chart_control_options(model_output):
 
     # read in data
     df = (
-        pd.read_parquet(
-            "~/positive-disruption/podi/data/" + model_output + ".parquet"
-        )
+        pd.read_parquet("./data/" + model_output + ".parquet")
         .reset_index()
         .astype(
             {
                 k: "category"
                 for k in pd.read_parquet(
-                    "~/positive-disruption/podi/data/"
-                    + model_output
-                    + ".parquet"
+                    "./data/" + model_output + ".parquet"
                 ).index.names
             }
             | {
                 j: "float32"
                 for j in pd.read_parquet(
-                    "~/positive-disruption/podi/data/"
-                    + model_output
-                    + ".parquet"
+                    "./data/" + model_output + ".parquet"
                 ).columns
             }
         )
@@ -734,9 +728,7 @@ def update_output_graph(
     }
 
     # read in data
-    df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
-    ).reset_index()
+    df = pd.read_parquet("./data/" + model_output + ".parquet").reset_index()
 
     # set index
     df.set_index(
@@ -825,14 +817,9 @@ def update_output_graph(
         )
         return (fig,)
 
-    # make an array of numbers for the ordered location of each item of groupby_set in df.index
-    groupby_set_index = [
-        df.index.names.index(groupby_set[i]) for i in range(len(groupby_set))
-    ]
-    print(groupby_set_index)
-
+    # prevent error if all of the groupby_set selections each have less than 2 options
     if all(
-        len(index_values[df.index.names.index(groupby_name)]) <= 1
+        len(index_values[df.index.names.index(groupby_name)]) < 2
         for groupby_name in groupby_set
     ):
         fig = go.Figure()
@@ -1057,6 +1044,28 @@ def update_output_graph(
         elif yaxis_type == "Cumulative":
             fig.update_yaxes(title="Cumulative Emissions")
     elif graph_output == "Emissions Mitigated":
+        # prevent confusing output if two scenarios are not selected
+        if all(len(index_values[df.index.names.index("scenario")]) < 2):
+            fig = go.Figure()
+            fig.update_layout(
+                annotations=[
+                    dict(
+                        text="Choose two scenarios to compare",
+                        xref="paper",
+                        yref="paper",
+                        x=0.5,
+                        y=0.5,
+                        showarrow=False,
+                        font=dict(
+                            size=24,
+                            color="rgba(128, 128, 128, 0.5)",
+                        ),
+                        align="center",
+                    )
+                ],
+            )
+            return (fig,)
+
         filtered_df2 = (
             (
                 (
