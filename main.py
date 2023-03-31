@@ -34,7 +34,7 @@ proj_end_year = 2100
 # ENERGY #
 ##########
 
-recalc_energy = True
+recalc_energy = False
 # region
 
 if recalc_energy is True:
@@ -85,7 +85,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = True
+recalc_afolu = False
 # region
 
 if recalc_afolu is True:
@@ -113,7 +113,7 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = True
+recalc_emissions = False
 # region
 
 if recalc_emissions is True:
@@ -249,7 +249,7 @@ cdr_output.columns = cdr_output.columns.astype(int)
 # CLIMATE #
 ###########
 
-recalc_climate = True
+recalc_climate = False
 # region
 
 if recalc_climate is True:
@@ -290,7 +290,7 @@ climate_output_forcing.columns = climate_output_forcing.columns.astype(int)
 # RESULTS ANALYSIS #
 ####################
 
-recalc_analysis = True
+recalc_analysis = False
 # region
 
 if recalc_analysis is True:
@@ -322,24 +322,12 @@ index = [
     "flow_short",
     "unit",
 ]
-adoption_output_projections = pd.DataFrame(
-    pd.read_csv("podi/data/adoption_output_projections.csv")
-).set_index(
-    [
-        "model",
-        "scenario",
-        "region",
-        "sector",
-        "product_long",
-        "unit",
-    ]
+technology_adoption_output = pd.read_parquet(
+    "podi/data/technology_adoption_output.parquet"
 )
-adoption_output_projections.columns = (
-    adoption_output_projections.columns.astype(int)
+technology_adoption_output.columns = technology_adoption_output.columns.astype(
+    int
 )
-
-emissions_wedges = pd.read_parquet("podi/data/emissions_wedges.parquet")
-emissions_wedges.columns = emissions_wedges.columns.astype(int)
 
 # endregion
 
@@ -471,7 +459,6 @@ for output in [
     (afolu_output, "afolu"),
     (emissions_output, "emissions"),
     (emissions_output_co2e, "emissions_co2e"),
-    (emissions_wedges, "emissions_wedges"),
 ]:
     for region in output[0].reset_index().region.unique():
         output[0][(output[0].reset_index().region == region).values].loc[
@@ -513,33 +500,6 @@ for output in [
             "flow_short",
             "unit",
         ],
-        inplace=True,
-    )
-    output_global.to_csv(
-        "podi/data/output/" + output[1] + "/" + "world" + ".csv"
-    )
-
-# Save as regional-level files and a global-level file
-for output in [
-    (adoption_output_projections, "adoption_output_projections"),
-]:
-    for region in output[0].reset_index().region.unique():
-        output[0][(output[0].reset_index().region == region).values].loc[
-            :, output_start_date:output_end_date
-        ].to_csv("podi/data/output/" + output[1] + "/" + region + ".csv")
-    output_global = (
-        output[0]
-        .loc[:, output_start_date:output_end_date]
-        .groupby(
-            ["model", "scenario", "sector", "product_long", "unit"],
-            observed=True,
-        )
-        .mean()
-    )
-    output_global.reset_index(inplace=True)
-    output_global["region"] = "world"
-    output_global.set_index(
-        ["model", "scenario", "region", "sector", "product_long", "unit"],
         inplace=True,
     )
     output_global.to_csv(

@@ -21,14 +21,16 @@ def results_analysis(
     proj_end_year,
 ):
     ###############################
-    # ADOPTION ANALOGS HISTORICAL #
+    #  TECHNOLOGY ADOPTION RATES  #
     ###############################
 
     # region
 
+    # Load external dataset of technology adoption rates
+
     analog = pd.read_csv(
         "podi/data/external/CHATTING_SPLICED.csv",
-        usecols=["label", "iso3c", "year", "value"],
+        usecols=["variable", "label", "iso3c", "year", "category", "value"],
     )
 
     labels = [
@@ -115,152 +117,109 @@ def results_analysis(
         "Total vehicles (BTS)",
     ]
 
-    def percent_of_max(x):
-        xnew = (
-            x.value
-            / analog[
-                (analog.label == x.label) & (analog.iso3c == x.iso3c)
-            ].value.max()
-        ) * 100
-        x.value = xnew
-        return x
+    # create dataframe of analog where label is in labels
+    analog = analog.loc[analog["label"].isin(labels)]
 
-    # define function that calculates cumulative distribution function
-    def percent_of_total(x):
-        xnew = (
-            analog[
-                (analog.label == x.label)
-                & (analog.iso3c == x.iso3c)
-                & (analog.year <= x.year)
-            ]
-            .sum()
-            .value
-            / analog[
-                (analog.label == x.label) & (analog.iso3c == x.iso3c)
-            ].value.sum()
-        ) * 100
-        x.value = xnew
-        return x
-
-    adoption_analog_output_historical = []
-
-    for unit in ["percent of max", "percent of total", "absolute"]:
-        if unit == "percent of max":
-            analog_output_temp = analog[
-                (analog.iso3c == "USA") & (analog.label.isin(labels))
-            ].parallel_apply(percent_of_max, axis=1)
-            analog_output_temp["unit"] = unit
-        elif unit == "percent of total":
-            analog_output_temp = analog[
-                (analog.iso3c == "USA") & (analog.label.isin(labels))
-            ].parallel_apply(percent_of_total, axis=1)
-            analog_output_temp["unit"] = unit
-        else:
-            analog_output_temp = analog[
-                (analog.iso3c == "USA") & (analog.label.isin(labels))
-            ]
-            analog_output_temp["unit"] = unit
-
-        adoption_analog_output_historical = pd.concat(
-            [
-                pd.DataFrame(adoption_analog_output_historical),
-                pd.DataFrame(analog_output_temp),
-            ]
-        )
-
-    adoption_analog_output_historical.to_csv(
-        "podi/data/adoption_analog_output_historical.csv", index=False
+    # reformat to match energy_output
+    analog = analog.rename(
+        columns={
+            "variable": "product_short",
+            "label": "product_long",
+            "iso3c": "region",
+            "year": "year",
+            "category": "product_category",
+            "value": "value",
+        }
+    )
+    # make year column rows
+    analog = analog.pivot_table(
+        index=[
+            "region",
+            "product_category",
+            "product_long",
+            "product_short",
+        ],
+        columns="year",
+        values="value",
+    )
+    # add index for model and scenario
+    analog = analog.assign(
+        model="PD22",
+        scenario="baseline",
+        sector="energy",
+        flow_category="technology",
+        flow_long="technology",
+        flow_short="technology",
+        unit="n/a",
+    )
+    # replace region ISO codes with region names from the 'WEB Region Lower' column of region_categories.csv
+    region_categories = pd.read_csv(
+        "podi/data/region_categories.csv",
+        usecols=["WEB Region Lower", "ISO"],
+    )
+    analog = analog.reset_index().merge(
+        region_categories[["WEB Region Lower", "ISO"]],
+        left_on="region",
+        right_on="ISO",
     )
 
-    # endregion
-
-    #########################
-    #  ADOPTION HISTORICAL  #
-    #########################
-
-    # region
-
-    # Load historical adoption data
-    index = [
-        "model",
-        "scenario",
-        "region",
-        "sector",
-        "product_category",
-        "product_long",
-        "product_short",
-        "flow_category",
-        "flow_long",
-        "flow_short",
-        "unit",
-    ]
-
-    adoption_historical = (
-        pd.DataFrame(pd.read_csv("podi/data/adoption_historical.csv"))
-        .set_index(index)
-        .dropna(axis=0, how="all")
-    )
-    adoption_historical.columns = adoption_historical.columns.astype(int)
-
-    # Project future growth based on percentage growth of energy demand
-    adoption_output_historical = (
-        pd.concat(
-            [
-                adoption_historical.loc[
-                    :, data_start_year : data_end_year - 1
-                ],
-                pd.concat(
-                    [
-                        adoption_historical.loc[:, data_end_year],
-                        energy_output.groupby(
-                            [
-                                "model",
-                                "scenario",
-                                "region",
-                                "sector",
-                                "product_category",
-                                "product_long",
-                                "product_short",
-                                "flow_category",
-                                "flow_long",
-                                "flow_short",
-                                "unit",
-                            ]
-                        )
-                        .sum(numeric_only=True)
-                        .loc[:, data_end_year:]
-                        .pct_change(axis=1)
-                        .dropna(axis=1, how="all")
-                        .add(1)
-                        .clip(upper=2),
-                    ],
-                    axis=1,
-                ).cumprod(axis=1),
-            ],
-            axis=1,
-        )
-        .replace(np.inf, 0)
-        .replace(-np.inf, 0)
+    # drop region column and rename WEB Region Lower to region
+    analog = analog.drop(columns=["region", "ISO"])
+    analog = analog.rename(columns={"WEB Region Lower": "region"})
+    # drop rows where region is NaN
+    analog = analog.dropna(subset=["region"])
+    analog = analog.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
     )
 
-    # save adoption_output_historical to parquet, update columns to be strings
-    adoption_output_historical.columns = (
-        adoption_output_historical.columns.astype(str)
+    # concat a copy of analog to analog, except 'baseline' is replaced with 'pathway'
+    analog_pathway = analog.copy()
+    analog_pathway = analog_pathway.reset_index()
+    analog_pathway["scenario"] = "pathway"
+    analog_pathway = analog_pathway.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ]
     )
-    adoption_output_historical.to_parquet(
-        "podi/data/adoption_output_historical.parquet", compression="brotli"
-    )
-    adoption_output_historical.columns = (
-        adoption_output_historical.columns.astype(int)
+    analog = pd.concat([analog, analog_pathway])
+
+    # Combine analog, afolu_output and energy_output
+    technology_adoption_output = pd.concat(
+        [analog, afolu_output, energy_output]
     )
 
-    # endregion
+    # reduce memory usage
+    technology_adoption_output = technology_adoption_output.astype("float32")
 
-    #########################
-    # ADOPTION PROJECTIONS  #
-    #########################
-
-    # region
+    # save to parquet, update columns to be strings
+    technology_adoption_output.columns = (
+        technology_adoption_output.columns.astype(str)
+    )
+    technology_adoption_output.to_parquet(
+        "podi/data/technology_adoption_output.parquet", compression="brotli"
+    )
 
     # Percent of electric power that is renewables
     electricity = (
@@ -618,89 +577,9 @@ def results_analysis(
 
     # endregion
 
-    ####################
-    # EMISSIONS WEDGES #
-    ####################
-
-    # region
-    emissions_wedges = (
-        emissions_output_co2e[
-            (emissions_output_co2e.reset_index().scenario == "baseline").values
-        ]
-        .rename(index={"baseline": scenario}, level=1)
-        .groupby(
-            [
-                "model",
-                "scenario",
-                "region",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_short",
-                "unit",
-            ],
-            observed=True,
-        )
-        .sum(numeric_only=True)
-        .subtract(
-            emissions_output_co2e[
-                (
-                    emissions_output_co2e.reset_index().scenario == scenario
-                ).values
-            ]
-            .groupby(
-                [
-                    "model",
-                    "scenario",
-                    "region",
-                    "sector",
-                    "product_category",
-                    "product_long",
-                    "product_short",
-                    "flow_category",
-                    "flow_short",
-                    "unit",
-                ],
-                observed=True,
-            )
-            .sum(numeric_only=True)
-        )
-    )
-
-    # Add flow_long back into index
-    emissions_wedges = emissions_wedges.reset_index()
-    emissions_wedges["flow_long"] = "CO2e"
-
-    emissions_wedges = emissions_wedges.set_index(
-        [
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
-        ]
-    )
-
-    # change columns to str and save as parquet
-    emissions_wedges.columns = emissions_wedges.columns.astype(str)
-    emissions_wedges.to_parquet(
-        "podi/data/emissions_wedges.parquet", compression="brotli"
-    )
-    emissions_wedges.columns = emissions_wedges.columns.astype(int)
-
-    # endregion
-
-    #########################################
-    #  LOAD & COMPARE TO MODELED EMISSIONS  #
-    #########################################
+    ###########################################
+    #  COMPARE OBSERVED TO MODELED EMISSIONS  #
+    ###########################################
 
     # region
 

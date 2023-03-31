@@ -141,16 +141,13 @@ dmypy.json
 data/*
 !data/energy_output.parquet
 !data/emissions_output_co2e.parquet
-!data/afolu_output.parquet
 !data/climate_output_concentration.parquet
 !data/climate_output_temperature.parquet
 !data/climate_output_forcing.parquet
-!data/adoption_output_historical.parquet
+!data/technology_adoption_output.parquet
 cdr/
-pages/
 results_analysis/
 afolu.py
 climate.py
 emissions/py
 energy.py
-app_local.py
