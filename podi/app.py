@@ -2,6 +2,7 @@ import itertools
 
 import dash
 import dash_bootstrap_components as dbc
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -33,7 +34,7 @@ model_output = {
     "emissions_output_co2e": "GHG Emissions",
     "climate_output_concentration": "GHG Concentration",
     "climate_output_temperature": "Temperature Change",
-    "climate_output_forcing": "Radiative Forcing",
+    # "climate_output_forcing": "Radiative Forcing",
     "technology_adoption_output": "Technology Adoption Rates",
 }
 
@@ -170,92 +171,224 @@ app.layout = html.Div(
             ],
         ),
         html.Br(),
-        dbc.Container(
-            [
-                dbc.Row(
-                    [
-                        dbc.Col(
+        html.Div(
+            children=[
+                dbc.Container(
+                    fluid=True,
+                    children=[
+                        dbc.Row(
                             [
-                                dbc.Card(
+                                dbc.Col(
                                     [
-                                        html.Label(
-                                            "Model Output",
-                                            className="select-label",
-                                        ),
-                                        dcc.Dropdown(
-                                            id="model_output",
-                                            options=[
-                                                {
-                                                    "label": model_output[i],
-                                                    "value": i,
-                                                }
-                                                for i in model_output
-                                            ],
-                                            value=list(model_output.keys())[0],
-                                            clearable=False,
-                                            className="mb-2",
-                                        ),
-                                        html.Label(
-                                            "Date Range",
-                                            className="select-label",
-                                        ),
-                                        html.Div(
+                                        dbc.Card(
                                             [
-                                                dcc.RangeSlider(
-                                                    id="date_range",
-                                                    min=data_start_year,
-                                                    max=proj_end_year,
-                                                    value=[
-                                                        data_start_year,
-                                                        proj_end_year,
-                                                    ],
-                                                    marks={
-                                                        str(year): str(year)
-                                                        for year in range(
-                                                            data_start_year,
-                                                            proj_end_year + 1,
-                                                            10,
-                                                        )
-                                                    },
+                                                html.Label(
+                                                    "Model Output",
+                                                    className="select-label",
                                                 ),
+                                                dcc.Dropdown(
+                                                    id="model_output",
+                                                    options=[
+                                                        {
+                                                            "label": model_output[
+                                                                i
+                                                            ],
+                                                            "value": i,
+                                                        }
+                                                        for i in model_output
+                                                    ],
+                                                    value=list(
+                                                        model_output.keys()
+                                                    )[0],
+                                                    clearable=False,
+                                                    className="mb-2",
+                                                ),
+                                                html.Label(
+                                                    "Date Range",
+                                                    className="select-label",
+                                                ),
+                                                html.Div(
+                                                    [
+                                                        dcc.RangeSlider(
+                                                            id="date_range",
+                                                            min=data_start_year,
+                                                            max=proj_end_year,
+                                                            value=[
+                                                                data_start_year,
+                                                                proj_end_year,
+                                                            ],
+                                                            marks={
+                                                                str(year): {
+                                                                    "label": str(
+                                                                        year
+                                                                    ),
+                                                                    "style": {
+                                                                        "color": "black",
+                                                                        "font-size": "12px",
+                                                                        "white-space": "nowrap",
+                                                                        "transform": "rotate(45deg)",
+                                                                        # "font-weight": "bold",
+                                                                    },
+                                                                }
+                                                                for year in range(
+                                                                    data_start_year,
+                                                                    proj_end_year
+                                                                    + 1,
+                                                                    10,
+                                                                )
+                                                            },
+                                                        ),
+                                                    ],
+                                                    className="mb-3",
+                                                ),
+                                                html.Div(id="data_controls"),
                                             ],
-                                            className="mb-3",
+                                            className="mb-2",
+                                            body=True,
                                         ),
-                                        html.Div(id="data_controls"),
                                     ],
-                                    className="mb-2",
-                                    body=True,
+                                    md=3,
+                                    style={
+                                        "display": "flex",
+                                        "flexDirection": "column",
+                                    },
+                                ),
+                                dbc.Col(
+                                    [
+                                        dbc.Card(
+                                            [
+                                                dbc.Tabs(
+                                                    children=[
+                                                        dbc.Tab(
+                                                            label="Data",
+                                                            tab_id="data-tab",
+                                                            children=[
+                                                                dbc.Card(
+                                                                    html.Div(
+                                                                        id="graph_controls"
+                                                                    ),
+                                                                    body=True,
+                                                                ),
+                                                                html.Br(),
+                                                                dbc.Card(
+                                                                    dcc.Graph(
+                                                                        id="output_graph",
+                                                                        figure={},
+                                                                    ),
+                                                                ),
+                                                            ],
+                                                        ),
+                                                        dbc.Tab(
+                                                            label="Additional",
+                                                            tab_id="additional-tab",
+                                                            children=[
+                                                                html.Div(
+                                                                    children=[
+                                                                        html.Div(
+                                                                            children=[
+                                                                                html.Iframe(
+                                                                                    src="https://www.metaculus.com/questions/embed/2563/?theme=theme-light",
+                                                                                    style={
+                                                                                        "width": "600px",
+                                                                                        "height": "300px",
+                                                                                        "border": "none",
+                                                                                    },
+                                                                                ),
+                                                                            ],
+                                                                            style={
+                                                                                "display": "inline-block",
+                                                                                "vertical-align": "top",
+                                                                                "margin-right": "10px",
+                                                                            },
+                                                                        ),
+                                                                        html.Div(
+                                                                            children=[
+                                                                                html.Iframe(
+                                                                                    src="https://www.metaculus.com/questions/embed/3742/?theme=theme-light",
+                                                                                    style={
+                                                                                        "width": "600px",
+                                                                                        "height": "300px",
+                                                                                        "border": "none",
+                                                                                    },
+                                                                                ),
+                                                                            ],
+                                                                            style={
+                                                                                "display": "inline-block",
+                                                                                "vertical-align": "top",
+                                                                            },
+                                                                        ),
+                                                                        html.Div(
+                                                                            children=[
+                                                                                html.Iframe(
+                                                                                    src="https://forecasts.kalshi.com/events/GTEMP-23/forecast_card",
+                                                                                    style={
+                                                                                        "width": "600px",
+                                                                                        "height": "400px",
+                                                                                        "border": "none",
+                                                                                    },
+                                                                                ),
+                                                                            ],
+                                                                            style={
+                                                                                "display": "inline-block",
+                                                                                "vertical-align": "top",
+                                                                            },
+                                                                        ),
+                                                                        html.Div(
+                                                                            children=[
+                                                                                html.Iframe(
+                                                                                    src="https://metaforecast.org/questions/embed/goodjudgmentopen-2590",
+                                                                                    style={
+                                                                                        "width": "600px",
+                                                                                        "height": "300px",
+                                                                                        "border": "none",
+                                                                                    },
+                                                                                ),
+                                                                            ],
+                                                                            style={
+                                                                                "display": "inline-block",
+                                                                                "vertical-align": "top",
+                                                                            },
+                                                                        ),
+                                                                    ],
+                                                                    style={
+                                                                        "textAlign": "center"
+                                                                    },
+                                                                )
+                                                            ],
+                                                        ),
+                                                    ]
+                                                )
+                                            ]
+                                        ),
+                                    ],
+                                    md=9,
+                                    style={
+                                        "display": "flex",
+                                        "flexDirection": "column",
+                                    },
                                 ),
                             ],
-                            md=3,
-                        ),
-                        dbc.Col(
-                            [
-                                dbc.Card(
-                                    html.Div(id="graph_controls"),
-                                    body=True,
-                                ),
-                                html.Br(),
-                                dbc.Card(
-                                    dcc.Graph(
-                                        id="output_graph",
-                                        figure={},
-                                        style={"height": "100%"},
-                                    ),
-                                    style={"height": "77%"},
-                                ),
-                            ],
-                            md=9,
+                            style={"height": "100vh", "display": "flex"},
                         ),
                     ],
-                )
+                ),
+                # Add hidden divs for unused data controls
+                html.Div(id="unused_data_controls", style={"display": "none"}),
             ],
-            fluid=True,
+            className="dbc",
+            style={
+                "height": "100vh",
+                "display": "flex",
+                "flexDirection": "column",
+            },
         ),
-        # add hidden divs for unused data controls
-        html.Div(id="unused_data_controls", style={"display": "none"}),
     ],
     className="dbc",
+    style={
+        "height": "100vh",
+        "display": "flex",
+        "flexDirection": "column",
+    },
 )
 
 
@@ -273,7 +406,10 @@ def set_data_and_chart_control_options(model_output):
     graph_output_dict = {
         "energy_output": ["Energy Supply & Demand"],
         "emissions_output_co2e": ["Emissions", "Emissions Mitigated"],
-        "climate_output_concentration": ["GHG Concentration"],
+        "climate_output_concentration": [
+            "GHG Concentration",
+            "CO2 Concentration Community Prediction",
+        ],
         "climate_output_temperature": ["Temperature Change"],
         "climate_output_forcing": ["Radiative Forcing"],
         "technology_adoption_output": ["Technology Adoption Rates"],
@@ -357,17 +493,48 @@ def set_data_and_chart_control_options(model_output):
 
     # define yaxis_type options
     yaxis_type_options_dict = {
-        "energy_output": ["Linear", "Log", "Cumulative", "% of Total"],
-        "emissions_output_co2e": ["Linear", "Log", "Cumulative", "% of Total"],
-        "afolu_output": ["Linear", "Log", "Cumulative", "% of Total"],
-        "climate_output_concentration": ["Linear", "Log"],
-        "climate_output_temperature": ["Linear", "Log"],
-        "climate_output_forcing": ["Linear", "Log"],
+        "energy_output": [
+            "Linear",
+            "Log",
+            "Cumulative",
+            "% of Cumulative at Final Year",
+            "% of Annual Total",
+            "% Change YOY",
+            "% of Maximum Value",
+            "% of Final Year Value",
+        ],
+        "emissions_output_co2e": [
+            "Linear",
+            "Log",
+            "Cumulative",
+            "% of Cumulative at Final Year",
+            "% of Annual Total",
+            "% Change YOY",
+            "% of Maximum Value",
+            "% of Final Year Value",
+        ],
+        "afolu_output": [
+            "Linear",
+            "Log",
+            "Cumulative",
+            "% of Cumulative at Final Year",
+            "% of Annual Total",
+            "% Change YOY",
+            "% of Maximum Value",
+            "% of Final Year Value",
+        ],
+        "climate_output_concentration": ["Linear", "Log", "% Change YOY"],
+        "climate_output_temperature": ["Linear", "Log", "% Change YOY"],
+        "climate_output_forcing": ["Linear", "Log", "% Change YOY"],
         "technology_adoption_output": [
             "Linear",
             "Log",
             "Cumulative",
-            "% of Total",
+            "% of Cumulative at Final Year",
+            "% of Annual Total",
+            "% Change YOY",
+            "% of Maximum Value",
+            "% of Final Year Value",
         ],
     }
 
@@ -379,7 +546,7 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_concentration": "Linear",
         "climate_output_temperature": "Linear",
         "climate_output_forcing": "Linear",
-        "technology_adoption_output": "Linear",
+        "technology_adoption_output": "% of Cumulative at Final Year",
     }
 
     # define graph_type options
@@ -472,24 +639,11 @@ def set_data_and_chart_control_options(model_output):
         df_index_custom_default = {}
 
     # read in data
-    df = (
-        pd.read_parquet("./data/" + model_output + ".parquet")
-        .reset_index()
-        .astype(
-            {
-                k: "category"
-                for k in pd.read_parquet(
-                    "./data/" + model_output + ".parquet"
-                ).index.names
-            }
-            | {
-                j: "float32"
-                for j in pd.read_parquet(
-                    "./data/" + model_output + ".parquet"
-                ).columns
-            }
-        )
-    )
+    df = pd.read_parquet("./data/" + model_output + ".parquet")
+    index_dtypes = {k: "category" for k in df.index.names}
+    column_dtypes = {j: "float32" for j in df.columns}
+    dtypes = {**index_dtypes, **column_dtypes}
+    df = df.reset_index().astype(dtypes)
 
     # define model_output index options that should not be used
     df_index_exclude_dict = {
@@ -763,7 +917,7 @@ def update_output_graph(
             )
         ),
         "hovertemplate": (
-            "<b>Year</b>: %{x}" + "<br><b>Emissions</b>: %{y:,.0f} " + "<br>"
+            "<b>Year</b>: %{x}" + "<br><b>Value</b>: %{y:,.0f} " + "<br>"
         ),
     }
 
@@ -785,6 +939,17 @@ def update_output_graph(
         "climate_output_temperature": ["unit"],
         "climate_output_forcing": ["unit"],
         "technology_adoption_output": ["product_short", "flow_short", "unit"],
+    }
+
+    # define dict of definitions of each subvertical
+    subvertical_dict = {
+        "Electric Power": "This is the electricity sector. It includes generation, transmission, and distribution of electricity. It also includes the use of electricity in the residential, commercial, and industrial sectors.",
+        "Residential": "This is the residential sector. It includes the use of electricity in the residential sector.",
+        "Commercial": "This is the commercial sector. It includes the use of electricity in the commercial sector.",
+        "Industrial": "This is the industrial sector. It includes the use of electricity in the industrial sector.",
+        "Transportation": "This is the transportation sector. It includes the use of electricity in the transportation sector.",
+        "Agriculture": "This is the agriculture sector. It includes the use of electricity in the agriculture sector.",
+        "Forests & Wetlands": "This is the forests & wetlands sector. It includes the use of electricity in the forests & wetlands sector.",
     }
 
     # drop empty arrays from index_values
@@ -850,27 +1015,11 @@ def update_output_graph(
     if not isinstance(groupby_set, list):
         groupby_set = [groupby_set] if groupby_set else []
 
-    # filter df based on data_controls_values
-
-    data_controls_selection = []
-
-    for child in data_controls_values["props"]["children"]:
-        # check if the child has its own children
-        if "children" in child["props"]:
-            # loop through the child's children
-            for grandchild in child["props"]["children"]:
-                # check if the grandchild is a dropdown component
-                if (
-                    isinstance(grandchild, dict)
-                    and grandchild.get("type") == "Dropdown"
-                ):
-                    # extract the value of the dropdown
-                    value = grandchild["props"]["value"]
-                    # append the value to the array of arrays
-                    data_controls_selection.append(value)
-
-    # filter df based on data_controls_values
-    df = df.loc[tuple([*index_values])]
+    # filter df based on index_values. Retain the old behavior, use `series.index.isin(sequence, level=1)` if `index_values` is a list of lists
+    if isinstance(index_values[0], list):
+        df = df[df.index.isin(index_values, level=1)]
+    else:
+        df = df.loc[tuple([*index_values])]
 
     # prevent error if any data_controls dropdown is empty
     if not all(index_values):
@@ -928,15 +1077,50 @@ def update_output_graph(
     ).T.fillna(0)
 
     if yaxis_type == "Cumulative":
-        filtered_df = filtered_df.loc[
-            str(date_range[0]) : str(date_range[1])
-        ].cumsum()
+        filtered_df = filtered_df.cumsum()
 
-    if yaxis_type == "% of Total":
+    if yaxis_type == "% of Cumulative at Final Year":
+        filtered_df = (
+            filtered_df.cumsum()
+            .div(filtered_df.sum(axis=0), axis=1)
+            .replace([np.inf, -np.inf, 0], np.nan)
+            * 100
+        )
+
+    if yaxis_type == "% of Annual Total":
         groupnorm = "percent"
         filtered_df[filtered_df < 0] = 0
+        if graph_type == "Line":
+            # Find the percent of the annual total for each year
+            filtered_df = (
+                filtered_df.div(filtered_df.sum(axis=1), axis=0).replace(
+                    [np.inf, -np.inf, 0], np.nan
+                )
+                * 100
+            )
     else:
         groupnorm = None
+
+    if yaxis_type == "% Change YOY":
+        filtered_df = (
+            filtered_df.pct_change().replace([np.inf, -np.inf], np.nan) * 100
+        )
+
+    if yaxis_type == "% of Maximum Value":
+        filtered_df = (
+            filtered_df.div(filtered_df.max(axis=0), axis=1).replace(
+                [np.inf, -np.inf, 0], np.nan
+            )
+            * 100
+        )
+
+    if yaxis_type == "% of Final Year Value":
+        filtered_df = (
+            filtered_df.div(filtered_df.iloc[-1], axis=1).replace(
+                [np.inf, -np.inf, 0], np.nan
+            )
+            * 100
+        )
 
     if yaxis_type == "Log":
         filtered_df[filtered_df < 0] = 0
@@ -961,12 +1145,12 @@ def update_output_graph(
                     header=dict(
                         values=list(filtered_df.columns),
                         fill_color="paleturquoise",
-                        align="left",
+                        align="center",
                     ),
                     cells=dict(
                         values=[filtered_df[k] for k in filtered_df.columns],
                         fill_color="lavender",
-                        align="left",
+                        align="center",
                     ),
                 )
             ]
@@ -975,39 +1159,171 @@ def update_output_graph(
         return (fig,)
 
     # create graph based graph_output selection
-    if graph_output == "Emissions":
-        filtered_df = (
-            df.groupby(groupby_set)
-            .sum(numeric_only=True)
-            .loc[:, str(date_range[0]) : str(date_range[1])]
-        ).T.fillna(0)
+    if graph_output == "Energy Supply & Demand":
+        fig = go.Figure()
 
-        if yaxis_type == "Cumulative":
-            filtered_df = filtered_df.loc[
-                str(date_range[0]) : str(date_range[1])
-            ].cumsum()
+        i = 0
 
-        if yaxis_type == "% of Total":
-            groupnorm = "percent"
-            filtered_df[filtered_df < 0] = 0
-        else:
-            groupnorm = None
+        for sub in (
+            filtered_df.sort_values("value", ascending=False)[groupby_set]
+            .drop_duplicates()
+            .squeeze()
+            .values
+        ):
+            if isinstance(sub, str):
+                name = str(sub).capitalize()
+            else:
+                name = ", ".join(str(x).capitalize() for x in sub)
 
-        if yaxis_type == "Log":
-            filtered_df[filtered_df < 0] = 0
+            # Define trace_string as all of the values that match any string in subvertical_dict
+            trace_string = [
+                k for k in subvertical_dict.keys() if any(x in k for x in sub)
+            ]
 
-        filtered_df.index.name = "year"
-        filtered_df.reset_index(inplace=True)
-        filtered_df = pd.melt(
-            filtered_df,
-            id_vars="year",
-            var_name=groupby_set,
-            value_name="value",
-        ).astype(
-            {k: "category" for k in groupby_set}
-            | {"year": "int", "value": "float32"}
+            # if the graph_type is line, add a trace to fig that is solid up to data_end_year or the last year of historical data and dashdot after (if projections exist)
+            if graph_type == "none":
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3,
+                            color=graph_template["linecolor"][i],
+                            dash="solid",
+                        ),
+                        x=pd.DataFrame(filtered_df)
+                        .set_index(groupby_set)
+                        .loc[[sub], : str(data_end_year)]["year"]
+                        .values.dropna(),
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(groupby_set)
+                        .loc[[sub], : str(data_end_year)]["value"]
+                        .values.dropna(),
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=True,
+                        hovertemplate=graph_template["hovertemplate"]
+                        + f"{trace_string}",
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                        legendgroup=name,
+                    )
+                )
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3,
+                            color=graph_template["linecolor"][i],
+                            dash="dashdot",
+                        ),
+                        x=pd.DataFrame(filtered_df)
+                        .set_index(groupby_set)
+                        .loc[[sub], str(data_end_year) : str(proj_end_year)][
+                            "year"
+                        ]
+                        .values,
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(groupby_set)
+                        .loc[[sub], str(data_end_year) : str(proj_end_year)][
+                            "value"
+                        ]
+                        .values,
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=False,
+                        hovertemplate=graph_template["hovertemplate"]
+                        + f"{trace_string}",
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                        legendgroup=name,
+                    )
+                )
+            else:
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3, color=graph_template["linecolor"][i]
+                        ),
+                        x=filtered_df["year"].drop_duplicates(),
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(groupby_set)
+                        .loc[[sub]]["value"]
+                        .values,
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=True,
+                        hovertemplate=graph_template["hovertemplate"]
+                        + "<br>"
+                        + f"{trace_string}",
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                    )
+                )
+            i += 1
+
+        # add shaded region to indicate Projection
+        fig.add_vrect(
+            x0=max(data_end_year, date_range[0]),
+            x1=date_range[1],
+            y0=0,
+            y1=1,
+            fillcolor="LightGrey",
+            opacity=0.25,
+            layer="above",
+            line_width=0,
+            annotation_text="Projection",
+            annotation_position="top left",
         )
 
+        fig.update_layout(
+            title={
+                "text": "<b>"
+                + model_output_dict[model_output]
+                + "</b>, grouped by "
+                + "<b>"
+                + " & ".join(
+                    str(x.replace("_long", "")).capitalize()
+                    for x in groupby_set
+                ),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            template="plotly_white",
+            margin=dict(t=25, b=0, l=0, r=0),
+        )
+
+        fig.update_yaxes(
+            title=str(units[0]),
+            type="log" if yaxis_type == "Log" else "linear",
+            spikemode="toaxis",
+        )
+
+        fig.update_xaxes(spikemode="toaxis")
+
+        if yaxis_type == "Cumulative":
+            fig.update_yaxes(title="Cumulative " + str(units[0]))
+        elif yaxis_type == "% of Cumulative at Final Year":
+            fig.update_yaxes(
+                title="% of Cumulative at Final Year " + str(units[0])
+            )
+        elif yaxis_type == "% of Annual Total":
+            fig.update_yaxes(title="% of Annual Total")
+        elif yaxis_type == "% Change YOY":
+            fig.update_yaxes(title="% Change YOY")
+        elif yaxis_type == "% of Maximum Value":
+            fig.update_yaxes(title="% of Maximum Value")
+        elif yaxis_type == "% of Final Year Value":
+            fig.update_yaxes(title="% of Final Year Value")
+
+    elif graph_output == "Emissions":
         fig = go.Figure()
 
         i = 0
@@ -1027,7 +1343,9 @@ def update_output_graph(
             if graph_type == "none":
                 fig.add_trace(
                     go.Scatter(
-                        name=name,
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1051,7 +1369,9 @@ def update_output_graph(
                 )
                 fig.add_trace(
                     go.Scatter(
-                        name=name,
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1074,7 +1394,9 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name,
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -1159,20 +1481,26 @@ def update_output_graph(
 
         fig.update_yaxes(
             title=str(units[0]),
-            type="linear"
-            if yaxis_type == "Linear"
-            or yaxis_type == "Cumulative"
-            or yaxis_type == "% of Total"
-            else "log",
+            type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
 
         fig.update_xaxes(spikemode="toaxis")
 
-        if yaxis_type == "% of Total":
-            fig.update_yaxes(title="% of Total")
-        elif yaxis_type == "Cumulative":
+        if yaxis_type == "Cumulative":
             fig.update_yaxes(title="Cumulative " + str(units[0]))
+        elif yaxis_type == "% of Cumulative at Final Year":
+            fig.update_yaxes(
+                title="% of Cumulative at Final Year " + str(units[0])
+            )
+        elif yaxis_type == "% of Annual Total":
+            fig.update_yaxes(title="% of Annual Total")
+        elif yaxis_type == "% Change YOY":
+            fig.update_yaxes(title="% Change YOY")
+        elif yaxis_type == "% of Maximum Value":
+            fig.update_yaxes(title="% of Maximum Value")
+        elif yaxis_type == "% of Final Year Value":
+            fig.update_yaxes(title="% of Final Year Value")
 
     elif graph_output == "Emissions Mitigated":
         # prevent confusing output if two scenarios are not selected
@@ -1233,16 +1561,50 @@ def update_output_graph(
             ).loc[:, str(date_range[0]) : str(date_range[1])]
         ).T.fillna(0)
 
-        if yaxis_type == "Cumulative":
-            filtered_df2 = filtered_df2.loc[
-                str(date_range[0]) : str(date_range[1])
-            ].cumsum()
+        filtered_df2 = (
+            df.groupby(groupby_set)
+            .sum(numeric_only=True)
+            .loc[:, str(date_range[0]) : str(date_range[1])]
+        ).T.fillna(0)
 
-        if yaxis_type == "% of Total":
+        if yaxis_type == "Cumulative":
+            filtered_df2 = filtered_df2.cumsum()
+
+        if yaxis_type == "% of Cumulative at Final Year":
+            filtered_df2 = (
+                filtered_df2.div(filtered_df2.sum(axis=0), axis=1).replace(
+                    [np.inf, -np.inf, 0], np.nan
+                )
+                * 100
+            )
+
+        if yaxis_type == "% of Annual Total":
             groupnorm = "percent"
             filtered_df2[filtered_df2 < 0] = 0
         else:
             groupnorm = None
+
+        if yaxis_type == "% Change YOY":
+            filtered_df2 = (
+                filtered_df2.pct_change().replace([np.inf, -np.inf], np.nan)
+                * 100
+            )
+
+        if yaxis_type == "% of Maximum Value":
+            filtered_df2 = (
+                filtered_df2.div(filtered_df2.max(axis=0), axis=1).replace(
+                    [np.inf, -np.inf, 0], np.nan
+                )
+                * 100
+            )
+
+        if yaxis_type == "% of Final Year Value":
+            filtered_df2 = (
+                filtered_df2.div(filtered_df2.iloc[-1], axis=1).replace(
+                    [np.inf, -np.inf, 0], np.nan
+                )
+                * 100
+            )
 
         if yaxis_type == "Log":
             filtered_df2[filtered_df2 < 0] = 0
@@ -1259,9 +1621,32 @@ def update_output_graph(
             | {"year": "int", "value": "float32"}
         )
 
+        # if graph_type is 'Table', return a table
+        if graph_type == "Table":
+            fig = go.Figure(
+                data=[
+                    go.Table(
+                        header=dict(
+                            values=list(filtered_df2.columns),
+                            fill_color="paleturquoise",
+                            align="left",
+                        ),
+                        cells=dict(
+                            values=[
+                                filtered_df2[k] for k in filtered_df2.columns
+                            ],
+                            fill_color="lavender",
+                            align="left",
+                        ),
+                    )
+                ]
+            )
+
+            return (fig,)
+
         fig = go.Figure()
 
-        if yaxis_type not in ["Log", "Cumulative", "% of Total"]:
+        if yaxis_type not in ["Log", "Cumulative", "% of Annual Total"]:
             spacer = (
                 df[(df.reset_index().scenario == "pathway").values]
                 .loc[:, str(date_range[0]) : str(date_range[1])]
@@ -1327,7 +1712,9 @@ def update_output_graph(
 
             fig.add_trace(
                 go.Scatter(
-                    name=name,
+                    name=name.replace("Co2", "CO<sub>2</sub>")
+                    .replace("Ch4", "CH<sub>4</sub>")
+                    .replace("N2o", "N<sub>2</sub>O"),
                     line=dict(
                         width=3,
                         color=graph_template["linecolor"][i],
@@ -1354,7 +1741,7 @@ def update_output_graph(
             )
             i += 1
 
-        if yaxis_type not in ["Log", "Cumulative", "% of Total"]:
+        if yaxis_type not in ["Log", "Cumulative", "% of Annual Total"]:
             fig.add_trace(
                 go.Scatter(
                     name="Baseline",
@@ -1429,51 +1816,46 @@ def update_output_graph(
 
         fig.update_yaxes(
             title=str(units[0]),
-            type="linear"
-            if yaxis_type == "Linear"
-            or yaxis_type == "Cumulative"
-            or yaxis_type == "% of Total"
-            else "log",
+            type="log" if yaxis_type == "Log" else "linear",
+            spikemode="toaxis",
         )
 
-        if yaxis_type == "% of Total":
-            fig.update_yaxes(title="% of Total")
-        elif yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative Emissions Mitigated")
-
-    elif graph_output == "Energy Supply & Demand":
-        filtered_df = (
-            df.groupby(groupby_set)
-            .sum(numeric_only=True)
-            .loc[:, str(date_range[0]) : str(date_range[1])]
-        ).T.fillna(0)
+        fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            filtered_df = filtered_df.loc[
-                str(date_range[0]) : str(date_range[1])
-            ].cumsum()
+            fig.update_yaxes(title="Cumulative " + str(units[0]))
+        elif yaxis_type == "% of Cumulative at Final Year":
+            fig.update_yaxes(
+                title="% of Cumulative at Final Year " + str(units[0])
+            )
+        elif yaxis_type == "% of Annual Total":
+            fig.update_yaxes(title="% of Annual Total")
+        elif yaxis_type == "% Change YOY":
+            fig.update_yaxes(title="% Change YOY")
+        elif yaxis_type == "% of Maximum Value":
+            fig.update_yaxes(title="% of Maximum Value")
+        elif yaxis_type == "% of Final Year Value":
+            fig.update_yaxes(title="% of Final Year Value")
 
-        if yaxis_type == "% of Total":
-            groupnorm = "percent"
-            filtered_df[filtered_df < 0] = 0
-        else:
-            groupnorm = None
+    elif graph_output == "CO2 Concentration Community Prediction":
+        fig = go.Figure()
 
-        if yaxis_type == "Log":
-            filtered_df[filtered_df < 0] = 0
-
-        filtered_df.index.name = "year"
-        filtered_df.reset_index(inplace=True)
-        filtered_df = pd.melt(
-            filtered_df,
-            id_vars="year",
-            var_name=groupby_set,
-            value_name="value",
-        ).astype(
-            {k: "category" for k in groupby_set}
-            | {"year": "int", "value": "float32"}
+        fig.add_layout_image(
+            dict(
+                source="https://www.metaculus.com/questions/embed/2563/",
+                xref="x",
+                yref="y",
+                x=0,
+                y=10,
+                sizex=2,
+                sizey=2,
+                sizing="stretch",
+                opacity=1,
+                layer="above",
+            )
         )
 
+    elif graph_output == "Technology Adoption Rates":
         fig = go.Figure()
 
         i = 0
@@ -1494,18 +1876,32 @@ def update_output_graph(
                 fig.add_trace(
                     go.Scatter(
                         name=name,
+                        mode="lines",
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
-                            dash="solid",
+                            dash="dashdot",
                         ),
-                        x=filtered_df["year"][
-                            filtered_df["year"] <= data_end_year
-                        ].drop_duplicates(),
-                        y=pd.DataFrame(filtered_df)
+                        x=pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                >= max(data_end_year, date_range[0])
+                            ]
+                        )
                         .set_index(groupby_set)
-                        .loc[[sub], : str(data_end_year)]["value"]
-                        .values,
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["year"],
+                        y=pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                >= max(data_end_year, date_range[0])
+                            ]
+                        )
+                        .set_index(groupby_set)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1515,19 +1911,36 @@ def update_output_graph(
                         legendgroup=name,
                     )
                 )
+
                 fig.add_trace(
                     go.Scatter(
                         name=name,
+                        mode="lines",
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
-                            dash="dashdot",
+                            dash="solid",
                         ),
-                        x=filtered_df["year"].drop_duplicates(),
-                        y=pd.DataFrame(filtered_df)
+                        x=pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                <= min(data_end_year, date_range[1])
+                            ]
+                        )
                         .set_index(groupby_set)
-                        .loc[[sub]]["value"]
-                        .values,
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["year"],
+                        y=pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                <= min(data_end_year, date_range[1])
+                            ]
+                        )
+                        .set_index(groupby_set)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=False,
@@ -1537,6 +1950,10 @@ def update_output_graph(
                         legendgroup=name,
                     )
                 )
+
+                if i == 1:
+                    fig.update_layout(legend=dict(traceorder="reversed"))
+
             else:
                 fig.add_trace(
                     go.Scatter(
@@ -1544,11 +1961,16 @@ def update_output_graph(
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
-                        x=filtered_df["year"].drop_duplicates(),
+                        x=pd.DataFrame(filtered_df)
+                        .set_index(groupby_set)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["year"],
                         y=pd.DataFrame(filtered_df)
                         .set_index(groupby_set)
-                        .loc[[sub]]["value"]
-                        .values,
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1593,54 +2015,28 @@ def update_output_graph(
 
         fig.update_yaxes(
             title=str(units[0]),
-            type="linear"
-            if yaxis_type == "Linear"
-            or yaxis_type == "Cumulative"
-            or yaxis_type == "% of Total"
-            else "log",
+            type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
 
         fig.update_xaxes(spikemode="toaxis")
 
-        if yaxis_type == "% of Total":
-            fig.update_yaxes(title="% of Total")
-        elif yaxis_type == "Cumulative":
+        if yaxis_type == "Cumulative":
             fig.update_yaxes(title="Cumulative " + str(units[0]))
+        elif yaxis_type == "% of Cumulative at Final Year":
+            fig.update_yaxes(
+                title="% of Cumulative at Final Year " + str(units[0])
+            )
+        elif yaxis_type == "% of Annual Total":
+            fig.update_yaxes(title="% of Annual Total")
+        elif yaxis_type == "% Change YOY":
+            fig.update_yaxes(title="% Change YOY")
+        elif yaxis_type == "% of Maximum Value":
+            fig.update_yaxes(title="% of Maximum Value")
+        elif yaxis_type == "% of Final Year Value":
+            fig.update_yaxes(title="% of Final Year Value")
 
     else:
-        filtered_df = (
-            df.groupby(groupby_set)
-            .sum(numeric_only=True)
-            .loc[:, str(date_range[0]) : str(date_range[1])]
-        ).T.fillna(0)
-
-        if yaxis_type == "Cumulative":
-            filtered_df = filtered_df.loc[
-                str(date_range[0]) : str(date_range[1])
-            ].cumsum()
-
-        if yaxis_type == "% of Total":
-            groupnorm = "percent"
-            filtered_df[filtered_df < 0] = 0
-        else:
-            groupnorm = None
-
-        if yaxis_type == "Log":
-            filtered_df[filtered_df < 0] = 0
-
-        filtered_df.index.name = "year"
-        filtered_df.reset_index(inplace=True)
-        filtered_df = pd.melt(
-            filtered_df,
-            id_vars="year",
-            var_name=groupby_set,
-            value_name="value",
-        ).astype(
-            {k: "category" for k in groupby_set}
-            | {"year": "int", "value": "float32"}
-        )
-
         fig = go.Figure()
 
         i = 0
@@ -1660,19 +2056,28 @@ def update_output_graph(
             if graph_type == "none":
                 fig.add_trace(
                     go.Scatter(
-                        name=name,
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
-                            dash="solid",
+                            dash="dashdot",
                         ),
-                        x=filtered_df["year"][
-                            filtered_df["year"] <= data_end_year
-                        ].drop_duplicates(),
-                        y=pd.DataFrame(filtered_df)
+                        x=pd.DataFrame(
+                            filtered_df[filtered_df["year"] >= data_end_year]
+                        )
                         .set_index(groupby_set)
-                        .loc[[sub], : str(data_end_year)]["value"]
-                        .values,
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["year"],
+                        y=pd.DataFrame(
+                            filtered_df[filtered_df["year"] >= data_end_year]
+                        )
+                        .set_index(groupby_set)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1685,30 +2090,45 @@ def update_output_graph(
 
                 fig.add_trace(
                     go.Scatter(
-                        name=name,
+                        name="Historical",
                         line=dict(
                             width=3,
-                            color=graph_template["linecolor"][i],
-                            dash="dashdot",
+                            color="black",
+                            dash="solid",
                         ),
-                        x=filtered_df["year"].drop_duplicates(),
-                        y=pd.DataFrame(filtered_df)
+                        x=pd.DataFrame(
+                            filtered_df[filtered_df["year"] <= data_end_year]
+                        )
                         .set_index(groupby_set)
-                        .loc[[sub]]["value"]
-                        .values,
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["year"],
+                        y=pd.DataFrame(
+                            filtered_df[filtered_df["year"] <= data_end_year]
+                        )
+                        .set_index(groupby_set)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
-                        showlegend=False,
+                        showlegend=True if i == 1 else False,
                         hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
-                        legendgroup=name,
+                        legendgroup="Historical",
                     )
                 )
+
+                if i == 1:
+                    fig.update_layout(legend=dict(traceorder="reversed"))
+
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name,
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -1761,25 +2181,33 @@ def update_output_graph(
 
         fig.update_yaxes(
             title=str(units[0]),
-            type="linear"
-            if yaxis_type == "Linear"
-            or yaxis_type == "Cumulative"
-            or yaxis_type == "% of Total"
-            else "log",
+            type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
 
         fig.update_xaxes(spikemode="toaxis")
 
-        if yaxis_type == "% of Total":
-            fig.update_yaxes(title="% of Total")
-        elif yaxis_type == "Cumulative":
+        if yaxis_type == "Cumulative":
             fig.update_yaxes(title="Cumulative " + str(units[0]))
+        elif yaxis_type == "% of Cumulative at Final Year":
+            fig.update_yaxes(
+                title="% of Cumulative at Final Year " + str(units[0])
+            )
+        elif yaxis_type == "% of Annual Total":
+            fig.update_yaxes(title="% of Annual Total")
+        elif yaxis_type == "% Change YOY":
+            fig.update_yaxes(title="% Change YOY")
+        elif yaxis_type == "% of Maximum Value":
+            fig.update_yaxes(title="% of Maximum Value")
+        elif yaxis_type == "% of Final Year Value":
+            fig.update_yaxes(title="% of Final Year Value")
 
     return (fig,)
 
 
 if __name__ == "__main__":
     app.run_server(
-        debug=True, host="0.0.0.0", port=8050, dev_tools_hot_reload=False
+        debug=True,
+        host="0.0.0.0",
+        port=8050,  # dev_tools_hot_reload=False
     )

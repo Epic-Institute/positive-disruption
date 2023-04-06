@@ -220,7 +220,7 @@ def results_analysis(
     technology_adoption_output.to_parquet(
         "podi/data/technology_adoption_output.parquet", compression="brotli"
     )
-
+    """
     # Percent of electric power that is renewables
     electricity = (
         energy_output.loc[
@@ -574,7 +574,7 @@ def results_analysis(
     adoption_output_projections.to_csv(
         "podi/data/adoption_output_projections.csv"
     )
-
+    """
     # endregion
 
     ###########################################
