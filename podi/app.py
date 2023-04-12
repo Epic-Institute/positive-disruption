@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, dcc, html
+from dash import Input, Output, State, dcc, html
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -184,7 +184,16 @@ app.layout = html.Div(
                                             [
                                                 html.Label(
                                                     "Model Output",
+                                                    id="model-output",
                                                     className="select-label",
+                                                ),
+                                                dbc.Tooltip(
+                                                    "Select the model output to view",
+                                                    target="model-output",
+                                                    placement="top",
+                                                    style={
+                                                        "font-size": "0.8rem"
+                                                    },
                                                 ),
                                                 dcc.Dropdown(
                                                     id="model_output",
@@ -205,7 +214,16 @@ app.layout = html.Div(
                                                 ),
                                                 html.Label(
                                                     "Date Range",
+                                                    id="date-range",
                                                     className="select-label",
+                                                ),
+                                                dbc.Tooltip(
+                                                    "Select the date range to view",
+                                                    target="date-range",
+                                                    placement="top",
+                                                    style={
+                                                        "font-size": "0.8rem"
+                                                    },
                                                 ),
                                                 html.Div(
                                                     [
@@ -441,6 +459,7 @@ def set_data_and_chart_control_options(model_output):
             {"label": "Sector", "value": "sector"},
             {"label": "Product Category", "value": "product_category"},
             {"label": "Product", "value": "product_long"},
+            {"label": "Flow Category", "value": "flow_category"},
             {"label": "Flow", "value": "flow_long"},
         ],
         "afolu_output": [
@@ -531,7 +550,6 @@ def set_data_and_chart_control_options(model_output):
             "Log",
             "Cumulative",
             "% of Cumulative at Final Year",
-            "% of Annual Total",
             "% Change YOY",
             "% of Maximum Value",
             "% of Final Year Value",
@@ -615,7 +633,7 @@ def set_data_and_chart_control_options(model_output):
 
     graph_type_default = graph_type_default_dict[model_output]
 
-    # define flow_category default value
+    # define custom default value
     df_index_custom_default_dict = {
         "energy_output": {"flow_category": ["Final consumption"]},
         "climate_output_concentration": {
@@ -639,7 +657,9 @@ def set_data_and_chart_control_options(model_output):
         df_index_custom_default = {}
 
     # read in data
-    df = pd.read_parquet("./data/" + model_output + ".parquet")
+    df = pd.read_parquet(
+        "~/positive-disruption/podi/data/" + model_output + ".parquet"
+    )
     index_dtypes = {k: "category" for k in df.index.names}
     column_dtypes = {j: "float32" for j in df.columns}
     dtypes = {**index_dtypes, **column_dtypes}
@@ -679,6 +699,24 @@ def set_data_and_chart_control_options(model_output):
         "climate_output_temperature": ["Temperature Change"],
         "climate_output_forcing": ["Radiative Forcing"],
         "technology_adoption_output": ["Technology Adoption Rates"],
+    }
+
+    # define tooltip descriptions of data controls and graph_controls dropdowns
+    tooltip_dict = {
+        "model": "Select the model to view",
+        "scenario": "Select the scenario to view",
+        "region": "Select the region to view",
+        "sector": "A category of industries or ecosystems that share common characteristics.",
+        "product_category": "The product category filter is offered to enable visualizations that are simplified by 'bundling up' products with similar characteristics into a smaller number of categories",
+        "product_long": "A good or service, which may be tangible (e.g. coal) or intangible (e.g. avoided peat impacts)",
+        "flow_category": "The flow category filter is offered to enable visualizations that are simplified by 'bundling up' flows with similar characteristics into a smaller number of categories.",
+        "flow_long": "The path that a product takes. It can be thought of as 'where the product ends up when it is used'.",
+        "variable": "<>",
+        "gas": "Select the gas to view",
+        "group-by": "The graph will display data aggregated by the items selected here",
+        "yaxis-type": "Select the y-axis type to view",
+        "graph-type": "Select the graph type to view",
+        "graph-output": "Select the graph output to view",
     }
 
     # drop the columns that are numerical and not in the range of data_start_year to proj_end_year
@@ -748,7 +786,20 @@ def set_data_and_chart_control_options(model_output):
         index_to_data_controls_labels.append(
             html.Label(
                 level.replace("_", " ").replace("long", "").title(),
+                id=level + "-label",
                 className="select-label",
+            )
+        )
+
+    # make tooltips for each data control label
+    index_to_data_controls_tooltips = []
+    for level in df.index.names:
+        index_to_data_controls_tooltips.append(
+            dbc.Tooltip(
+                tooltip_dict[level],
+                target=level + "-label",
+                placement="top",
+                style={"font-size": "0.8rem"},
             )
         )
 
@@ -757,11 +808,15 @@ def set_data_and_chart_control_options(model_output):
         [
             element
             for pair in zip(
-                index_to_data_controls_labels, index_to_data_controls
+                index_to_data_controls_labels,
+                index_to_data_controls_tooltips,
+                index_to_data_controls,
             )
             for element in pair
         ]
     )
+
+    #
 
     # define graph controls layout
     graph_controls = html.Div(
@@ -769,7 +824,17 @@ def set_data_and_chart_control_options(model_output):
             [
                 dbc.Col(
                     [
-                        html.Label("Graph Output", className="select-label"),
+                        html.Label(
+                            "Graph Output",
+                            id="graph-output",
+                            className="select-label",
+                        ),
+                        dbc.Tooltip(
+                            tooltip_dict["graph-output"],
+                            target="graph-output",
+                            placement="top",
+                            style={"font-size": "0.8rem"},
+                        ),
                         html.Div(
                             [
                                 dcc.Dropdown(
@@ -781,7 +846,15 @@ def set_data_and_chart_control_options(model_output):
                             ],
                             className="mb-2",
                         ),
-                        html.Label("Group By", className="select-label"),
+                        html.Label(
+                            "Group By", id="group-by", className="select-label"
+                        ),
+                        dbc.Tooltip(
+                            tooltip_dict["group-by"],
+                            target="group-by",
+                            placement="top",
+                            style={"font-size": "0.8rem"},
+                        ),
                         html.Div(
                             [
                                 dcc.Dropdown(
@@ -798,7 +871,17 @@ def set_data_and_chart_control_options(model_output):
                 ),
                 dbc.Col(
                     [
-                        html.Label("Y-Axis Type", className="select-label"),
+                        html.Label(
+                            "Y-Axis Type",
+                            id="yaxis-type",
+                            className="select-label",
+                        ),
+                        dbc.Tooltip(
+                            tooltip_dict["yaxis-type"],
+                            target="yaxis-type",
+                            placement="top",
+                            style={"font-size": "0.8rem"},
+                        ),
                         html.Div(
                             [
                                 dcc.Dropdown(
@@ -810,7 +893,17 @@ def set_data_and_chart_control_options(model_output):
                             ],
                             className="mb-2",
                         ),
-                        html.Label("Graph Type", className="select-label"),
+                        html.Label(
+                            "Graph Type",
+                            id="graph-type",
+                            className="select-label",
+                        ),
+                        dbc.Tooltip(
+                            tooltip_dict["graph-type"],
+                            target="graph-type",
+                            placement="top",
+                            style={"font-size": "0.8rem"},
+                        ),
                         html.Div(
                             [
                                 dcc.Dropdown(
@@ -855,6 +948,198 @@ def set_data_and_chart_control_options(model_output):
     )
 
     return (data_controls, unused_data_controls, graph_controls)
+
+
+"""
+# update data controls based on selections in other data controls
+@app.callback(
+    output=[
+        Output("data_controls", "children", allow_duplicate=True),
+        Output("unused_data_controls", "children", allow_duplicate=True),
+    ],
+    inputs=[
+        Input("model_output", "value"),
+        Input("data_controls", "children"),
+    ],
+    state=[*[State(f"{level}", "value") for level in index_names]],
+    prevent_initial_call=True,
+)
+def update_data_controls(
+    model_output,
+    data_controls_values,
+    *index_values,
+):
+    # read in data
+    df = pd.read_parquet(
+        "~/positive-disruption/podi/data/" + model_output + ".parquet"
+    )
+    index_dtypes = {k: "category" for k in df.index.names}
+    column_dtypes = {j: "float32" for j in df.columns}
+    dtypes = {**index_dtypes, **column_dtypes}
+    df = df.reset_index().astype(dtypes)
+
+    # define model_output index options that should not be used
+    df_index_exclude_dict = {
+        "energy_output": ["product_short", "flow_short", "unit"],
+        "emissions_output_co2e": ["product_short", "flow_short", "unit"],
+        "afolu_output": ["product_short", "flow_short", "unit"],
+        "climate_output_concentration": ["unit"],
+        "climate_output_temperature": ["unit"],
+        "climate_output_forcing": ["unit"],
+        "technology_adoption_output": ["product_short", "flow_short", "unit"],
+    }
+
+    # define tooltip descriptions of data controls and graph_controls dropdowns
+    tooltip_dict = {
+        "model": "Select the model to view",
+        "scenario": "Select the scenario to view",
+        "region": "Select the region to view",
+        "sector": "A category of industries or ecosystems that share common characteristics.",
+        "product_category": "The product category filter is offered to enable visualizations that are simplified by 'bundling up' products with similar characteristics into a smaller number of categories",
+        "product_long": "A good or service, which may be tangible (e.g. coal) or intangible (e.g. avoided peat impacts)",
+        "flow_category": "The flow category filter is offered to enable visualizations that are simplified by 'bundling up' flows with similar characteristics into a smaller number of categories.",
+        "flow_long": "The path that a product takes. It can be thought of as 'where the product ends up when it is used'.",
+        "variable": "<>",
+        "gas": "Select the gas to view",
+        "group-by": "The graph will display data aggregated by the items selected here",
+        "yaxis-type": "Select the y-axis type to view",
+        "graph-type": "Select the graph type to view",
+        "graph-output": "Select the graph output to view",
+    }
+
+    # drop the columns that are numerical and not in the range of data_start_year to proj_end_year
+    df.drop(
+        columns=[
+            col
+            for col in df.columns
+            if col.isdigit()
+            and int(col) not in range(data_start_year, proj_end_year + 1)
+        ],
+        inplace=True,
+    )
+
+    # set index
+    df.set_index(
+        df.columns[
+            (
+                ~df.columns.isin(
+                    str(f"{i}")
+                    for i in range(data_start_year, proj_end_year + 1)
+                )
+            )
+            & (~df.columns.isin(df_index_exclude_dict[model_output]))
+        ].tolist(),
+        inplace=True,
+    )
+
+    # drop unused columns
+    df.drop(columns=df_index_exclude_dict[model_output], inplace=True)
+
+    # filter df based on index_values. Retain the old behavior, use `series.index.isin(sequence, level=1)` if `index_values` is a list of lists
+    # drop empty arrays from index_values
+    index_values = [x for x in index_values if x]
+
+    # index_values is split into half its length since state values are stored there and not needed
+    # df_selected = df.loc[tuple([*index_values[: len(index_values) // 2]])]
+    df_selected = df.loc[tuple([*index_values])]
+
+    # define list of data controls
+    index_to_data_controls = []
+    for level in df.index.names:
+        # if df.reset_index()[level].unique().tolist() is one item, define default_value as the string inside the list:
+        if len(df_selected.reset_index()[level].unique().tolist()) == 1:
+            selected_values = (
+                df_selected.reset_index()[level].unique().tolist()[0]
+            )
+        else:
+            selected_values = (
+                df_selected.reset_index()[level].unique().tolist()
+            )
+
+        index_to_data_controls.append(
+            html.Div(
+                [
+                    dcc.Dropdown(
+                        df.reset_index()[level].unique().tolist(),
+                        selected_values,
+                        id=level,
+                        multi=True,
+                        style={
+                            "maxHeight": "45px",
+                            "overflow-y": "scroll",
+                            "border": "1px solid #d6d6d6",
+                            "border-radius": "5px",
+                            "outline": "none",
+                        },
+                    ),
+                ],
+                className="mb-0" if level == df.index.names[-1] else "mb-3",
+            )
+        )
+
+    index_to_data_controls_labels = []
+    for level in df.index.names:
+        index_to_data_controls_labels.append(
+            html.Label(
+                level.replace("_", " ").replace("long", "").title(),
+                id=level + "-label",
+                className="select-label",
+            )
+        )
+
+    # make tooltips for each data control label
+    index_to_data_controls_tooltips = []
+    for level in df.index.names:
+        index_to_data_controls_tooltips.append(
+            dbc.Tooltip(
+                tooltip_dict[level],
+                target=level + "-label",
+                placement="top",
+                style={"font-size": "0.8rem"},
+            )
+        )
+
+    # define data_controls layout
+    data_controls = html.Div(
+        [
+            element
+            for pair in zip(
+                index_to_data_controls_labels,
+                index_to_data_controls_tooltips,
+                index_to_data_controls,
+            )
+            for element in pair
+        ]
+    )
+
+    # define unused data controls layout as the values in index_names that are not in df.index.names
+    unused_data_controls = html.Div(
+        [
+            html.Div(
+                [
+                    dcc.Dropdown(
+                        [],
+                        [],
+                        id=level,
+                        multi=True,
+                        style={
+                            "maxHeight": "45px",
+                            "overflow-y": "scroll",
+                            "border": "1px solid #d6d6d6",
+                            "border-radius": "5px",
+                            "outline": "none",
+                        },
+                    ),
+                ],
+                className="mb-0",
+            )
+            for level in index_names
+            if level not in df.index.names
+        ]
+    )
+
+    return (data_controls, unused_data_controls)
+"""
 
 
 # update graph
@@ -952,11 +1237,13 @@ def update_output_graph(
         "Forests & Wetlands": "This is the forests & wetlands sector. It includes the use of electricity in the forests & wetlands sector.",
     }
 
-    # drop empty arrays from index_values
-    index_values = [x for x in index_values if x]
+    # drop empty index_values
+    index_values = [value for value in index_values if value]
 
     # read in data
-    df = pd.read_parquet("./data/" + model_output + ".parquet").reset_index()
+    df = pd.read_parquet(
+        "~/positive-disruption/podi/data/" + model_output + ".parquet"
+    ).reset_index()
 
     # store units before dropping
     units = df["unit"].unique().tolist()
@@ -988,6 +1275,30 @@ def update_output_graph(
 
     # drop unused columns
     df.drop(columns=df_index_exclude_dict[model_output], inplace=True)
+
+    # check if df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
+    try:
+        df.loc[tuple([*index_values])]
+    except KeyError:
+        fig = go.Figure()
+        fig.update_layout(
+            annotations=[
+                dict(
+                    text="No data available for the selected values",
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(
+                        size=24,
+                        color="rgba(128, 128, 128, 0.5)",
+                    ),
+                    align="center",
+                )
+            ],
+        )
+        return (fig,)
 
     # prevent error if groupby_set is empty
     if not groupby_set:
@@ -1021,30 +1332,7 @@ def update_output_graph(
     else:
         df = df.loc[tuple([*index_values])]
 
-    # prevent error if any data_controls dropdown is empty
-    if not all(index_values):
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="All dropdown menus must have at least one option selected",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
-
     # prevent error if all of the groupby_set selections each have less than 2 options
-
     if all(
         len(index_values[df.index.names.index(groupby_name)]) < 2
         for groupby_name in groupby_set
@@ -1069,12 +1357,62 @@ def update_output_graph(
         )
         return (fig,)
 
+    # check if filtered_df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
+    try:
+        filtered_df = (
+            df.groupby(groupby_set)
+            .sum(numeric_only=True)
+            .loc[:, str(date_range[0]) : str(date_range[1])]
+        ).T.fillna(0)
+    except KeyError:
+        fig = go.Figure()
+        fig.update_layout(
+            annotations=[
+                dict(
+                    text="No data available for the selected index values",
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(
+                        size=24,
+                        color="rgba(128, 128, 128, 0.5)",
+                    ),
+                    align="center",
+                )
+            ],
+        )
+        return (fig,)
+
     # choose graph_output
     filtered_df = (
         df.groupby(groupby_set)
         .sum(numeric_only=True)
         .loc[:, str(date_range[0]) : str(date_range[1])]
     ).T.fillna(0)
+
+    # check if filtered_df raises an error
+    if filtered_df.empty:
+        fig = go.Figure()
+        fig.update_layout(
+            annotations=[
+                dict(
+                    text="No data available for the selected index values",
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(
+                        size=24,
+                        color="rgba(128, 128, 128, 0.5)",
+                    ),
+                    align="center",
+                )
+            ],
+        )
+        return (fig,)
 
     if yaxis_type == "Cumulative":
         filtered_df = filtered_df.cumsum()
@@ -2207,7 +2545,5 @@ def update_output_graph(
 
 if __name__ == "__main__":
     app.run_server(
-        debug=True,
-        host="0.0.0.0",
-        port=8050,  # dev_tools_hot_reload=False
+        debug=True, host="0.0.0.0", port=8050, dev_tools_hot_reload=False
     )

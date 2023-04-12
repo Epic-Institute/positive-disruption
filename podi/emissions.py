@@ -103,6 +103,13 @@ def emissions(
         ].multiply(0)
     )
 
+    # Set flow_short to 'CO2' for all rows
+    emissions_energy_reset = emissions_energy.reset_index()
+    emissions_energy_reset.iloc[:, 9] = "CO2"
+    emissions_energy = emissions_energy_reset.set_index(
+        emissions_energy.index.names
+    )
+
     # Save
     emissions_energy.columns = emissions_energy.columns.astype(str)
     emissions_energy.to_parquet(
@@ -477,14 +484,14 @@ def emissions(
         elif x["flow_category"] in ["Emissions (N2O)"]:
             return "N2O"
 
-    emissions_afolu["flow_long"] = emissions_afolu.parallel_apply(
+    emissions_afolu["flow_short"] = emissions_afolu.parallel_apply(
         lambda x: splitgas(x), axis=1
     )
 
-    emissions_afolu["flow_category"] = "Emissions"
-    emissions_afolu["product_category"] = "AFOLU"
+    emissions_afolu["flow_category"] = "AFOLU Emissions"
+    emissions_afolu["product_category"] = "AFOLU Emissions"
     emissions_afolu["product_short"] = emissions_afolu["product_long"]
-    emissions_afolu["flow_short"] = emissions_afolu["flow_long"]
+    emissions_afolu["flow_long"] = emissions_afolu["product_long"]
 
     emissions_afolu = (
         (
@@ -642,13 +649,13 @@ def emissions(
         each[
             (
                 (each.reset_index().product_long == "Improved Rice")
-                & (each.reset_index().flow_long == "CH4")
+                & (each.reset_index().flow_short == "CH4")
             ).values
         ] = (
             each[
                 (
                     (each.reset_index().product_long == "Improved Rice")
-                    & (each.reset_index().flow_long == "CH4")
+                    & (each.reset_index().flow_short == "CH4")
                 ).values
             ]
             * 0.58
@@ -657,13 +664,13 @@ def emissions(
         each[
             (
                 (each.reset_index().product_long == "Improved Rice")
-                & (each.reset_index().flow_long == "N2O")
+                & (each.reset_index().flow_short == "N2O")
             ).values
         ] = (
             each[
                 (
                     (each.reset_index().product_long == "Improved Rice")
-                    & (each.reset_index().flow_long == "N2O")
+                    & (each.reset_index().flow_short == "N2O")
                 ).values
             ]
             * 0.42
@@ -700,7 +707,7 @@ def emissions(
     )
 
     emissions_afolu_mitigated = emissions_afolu_mitigated.parallel_apply(
-        lambda x: x.divide(gwp.data[version][x.name[8]]), axis=1
+        lambda x: x.divide(gwp.data[version][x.name[9]]), axis=1
     )
 
     """
@@ -780,7 +787,6 @@ def emissions(
     emissions_afolu.reset_index(inplace=True)
     emissions_afolu["product_category"] = "AFOLU Emissions"
     emissions_afolu["product_short"] = "AFEM"
-    emissions_afolu["flow_short"] = "AFOLU"
 
     emissions_afolu = emissions_afolu.set_index(
         [
@@ -853,16 +859,16 @@ def emissions(
     # Add Model, Scenario, and Flow_category indices
     emissions_additional["model"] = "PD22"
     emissions_additional["scenario"] = "baseline"
-    emissions_additional["flow_category"] = "Emissions"
+    emissions_additional["flow_category"] = "Additional Emissions"
 
-    # Change sector index to Product_long and 'em' to 'flow_long'
+    # Change sector index to flow_long and 'em' to 'flow_short'
     emissions_additional.rename(
-        columns={"sector": "product_long", "em": "flow_long"}, inplace=True
+        columns={"sector": "flow_long", "em": "flow_short"}, inplace=True
     )
 
     # Add Sector index
     def addsector2(x):
-        if x["product_long"] in [
+        if x["flow_long"] in [
             "1A1a_Electricity-autoproducer",
             "1A1a_Electricity-public",
             "1A1a_Heat-production",
@@ -875,7 +881,7 @@ def emissions(
             "7A_Fossil-fuel-fires",
         ]:
             return "Electric Power"
-        elif x["product_long"] in [
+        elif x["flow_long"] in [
             "1A3b_Road",
             "1A3c_Rail",
             "1A3di_Oil_Tanker_Loading",
@@ -886,11 +892,11 @@ def emissions(
             "1A3di_International-shipping",
         ]:
             return "Transportation"
-        elif x["product_long"] in ["1A4b_Residential"]:
+        elif x["flow_long"] in ["1A4b_Residential"]:
             return "Residential"
-        elif x["product_long"] in ["1A4a_Commercial-institutional"]:
+        elif x["flow_long"] in ["1A4a_Commercial-institutional"]:
             return "Commercial"
-        elif x["product_long"] in [
+        elif x["flow_long"] in [
             "1A2a_Ind-Comb-Iron-steel",
             "1A2b_Ind-Comb-Non-ferrous-metals",
             "1A2c_Ind-Comb-Chemicals",
@@ -927,7 +933,7 @@ def emissions(
             "7BC_Indirect-N2O-non-agricultural-N",
         ]:
             return "Industrial"
-        elif x["product_long"] in [
+        elif x["flow_long"] in [
             "3B_Manure-management",
             "3D_Rice-Cultivation",
             "3D_Soil-emissions",
@@ -953,9 +959,9 @@ def emissions(
                 "scenario",
                 "WEB Region",
                 "sector",
-                "product_long",
                 "flow_category",
                 "flow_long",
+                "flow_short",
                 "units",
             ]
         )
@@ -989,7 +995,7 @@ def emissions(
     emissions_additional = emissions_additional[
         ~(
             (emissions_additional.index.get_level_values(1).isna())
-            | (emissions_additional.index.get_level_values(4).isna())
+            | (emissions_additional.index.get_level_values(6).isna())
             | (emissions_additional.isna().all(axis=1))
         )
     ]
@@ -1008,7 +1014,7 @@ def emissions(
     # Drop double counted emissions
     def remove_doublecount(x):
         # Drop CO2 that was already estimated in energy module
-        if x.name[4] in [
+        if x.name[5] in [
             "1A1a_Electricity-autoproducer",
             "1A1a_Electricity-public",
             "1A1a_Heat-production",
@@ -1041,7 +1047,7 @@ def emissions(
             x = x.multiply(0)
 
         # Drop CO2, CH4, N2O that was already estimated in FAO historical data
-        if x.name[4] in [
+        if x.name[5] in [
             "3B_Manure-management",
             "3D_Rice-Cultivation",
             "3D_Soil-emissions",
@@ -1101,7 +1107,7 @@ def emissions(
             ]
         )
 
-        emissions_additional_fgas_new["flow_long"] = gas
+        emissions_additional_fgas_new["flow_short"] = gas
 
         emissions_additional_fgas = pd.concat(
             [emissions_additional_fgas, emissions_additional_fgas_new]
@@ -1112,7 +1118,7 @@ def emissions(
     )
     emissions_additional_fgas.columns = (
         emissions_additional_fgas.columns.str.replace(
-            "ipcc_code_2006_for_standard_report_name", "product_long"
+            "ipcc_code_2006_for_standard_report_name", "flow_long"
         )
     )
 
@@ -1138,7 +1144,7 @@ def emissions(
 
     # Add Sector index
     def addsector3(x):
-        if x["product_long"] in [
+        if x["flow_long"] in [
             "Metal Industry",
             "Other Product Manufacture and Use",
             "Electronics Industry",
@@ -1153,7 +1159,7 @@ def emissions(
         lambda x: addsector3(x), axis=1
     )
 
-    emissions_additional_fgas["flow_category"] = "Emissions"
+    emissions_additional_fgas["flow_category"] = "Additional F-Gas Emissions"
 
     emissions_additional_fgas = (
         (
@@ -1168,9 +1174,9 @@ def emissions(
                 "scenario",
                 "WEB Region",
                 "sector",
-                "product_long",
                 "flow_category",
                 "flow_long",
+                "flow_short",
                 "unit",
             ]
         )
@@ -1260,7 +1266,7 @@ def emissions(
             on=["model", "scenario", "region"],
         )
         .set_index(
-            ["sector", "product_long", "flow_category", "flow_long", "unit"],
+            ["sector", "flow_category", "flow_long", "flow_short", "unit"],
             append=True,
         )
     )
@@ -1273,7 +1279,7 @@ def emissions(
         axis=1
     )
 
-    # Rename product_long values
+    # Rename flow_long values
     """
     simple_index = {
         "Fossil fuels": "Fossil Fuel Heat",
@@ -1463,9 +1469,9 @@ def emissions(
                 "scenario",
                 "region",
                 "sector",
-                "product_long",
                 "flow_category",
                 "flow_long",
+                "flow_short",
                 "unit",
             ],
             observed=True,
@@ -1473,12 +1479,12 @@ def emissions(
         .sum(numeric_only=True)
     )
 
-    # Add indices product_category, product_short, flow_short
+    # Add indices product_category, product_long, product_short
     emissions_additional[
         "product_category"
     ] = "Additional Industrial Emissions"
+    emissions_additional["product_long"] = "Additional Industrial Emissions"
     emissions_additional["product_short"] = "ADEM"
-    emissions_additional["flow_short"] = "IND"
 
     emissions_additional = (
         emissions_additional.reset_index()
@@ -1544,13 +1550,13 @@ def emissions(
         }
     )
 
-    # Update emissions that don't list gas in flow_long (these are all CO2)
+    # Update emissions that don't list gas in flow_short (these are all CO2)
     emissions_output_co2e.reset_index(inplace=True)
 
     # Select CO2 emissions
     emissions_output_co2e_new = emissions_output_co2e[
         ~(
-            emissions_output_co2e.flow_long.isin(
+            emissions_output_co2e.flow_short.isin(
                 [
                     "CH4",
                     "N2O",
@@ -1594,7 +1600,7 @@ def emissions(
     # Remove CO2 emissions from full emissions list
     emissions_output_co2e = emissions_output_co2e[
         (
-            emissions_output_co2e.flow_long.isin(
+            emissions_output_co2e.flow_short.isin(
                 [
                     "CH4",
                     "N2O",
@@ -1635,9 +1641,9 @@ def emissions(
         ).values
     ]
 
-    # Replace 'flow_long' value with 'CO2'
-    emissions_output_co2e_new.drop(columns="flow_long", inplace=True)
-    emissions_output_co2e_new["flow_long"] = "CO2"
+    # Replace 'flow_short' value with 'CO2'
+    emissions_output_co2e_new.drop(columns="flow_short", inplace=True)
+    emissions_output_co2e_new["flow_short"] = "CO2"
 
     # Add the updated subset back into the original df
     emissions_output_co2e = pd.concat(
@@ -1661,7 +1667,7 @@ def emissions(
     )
 
     emissions_output_co2e = emissions_output_co2e.parallel_apply(
-        lambda x: x.mul(gwp.data[version][x.name[8]]), axis=1
+        lambda x: x.mul(gwp.data[version][x.name[9]]), axis=1
     )
 
     # Drop rows with all zero values
@@ -1931,7 +1937,7 @@ def emissions(
             (
                 (emissions_output_co2e.reset_index().scenario == "pathway")
                 & (
-                    emissions_output_co2e.reset_index().product_long
+                    emissions_output_co2e.reset_index().flow_long
                     == "Enteric Fermentation"
                 )
             ).values
@@ -2180,7 +2186,7 @@ def emissions(
             (
                 (emissions_output_co2e.reset_index().scenario == "pathway")
                 & (
-                    emissions_output_co2e.reset_index().product_long
+                    emissions_output_co2e.reset_index().flow_long
                     == "Manure left on Pasture"
                 )
             ).values
@@ -2417,7 +2423,7 @@ def emissions(
             (
                 (emissions_output_co2e.reset_index().scenario == "pathway")
                 & (
-                    emissions_output_co2e.reset_index().product_long
+                    emissions_output_co2e.reset_index().flow_long
                     == "Manure Management"
                 )
             ).values
@@ -2666,7 +2672,7 @@ def emissions(
             (
                 (emissions_output_co2e.reset_index().scenario == "pathway")
                 & (
-                    emissions_output_co2e.reset_index().product_long
+                    emissions_output_co2e.reset_index().flow_long
                     == "Manure applied to Soils"
                 )
             ).values

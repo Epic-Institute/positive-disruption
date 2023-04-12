@@ -726,7 +726,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         each["sector"] = each.parallel_apply(lambda x: addsector(x), axis=1)
 
-        each["flow_category"] = "Emissions"
+        each["flow_category"] = "AFOLU Negative Emissions"
 
         def addgas(x):
             if x["product_long"] in [

@@ -132,13 +132,13 @@ def climate(
         index={"HFC-43-10-mee": "HFC-4310mee"}, inplace=True
     )
 
-    # Update emissions that don't list gas in flow_long (these are all CO2)
+    # Update emissions that don't list gas in flow_short (these are all CO2)
     emissions_output.reset_index(inplace=True)
 
     # Select CO2 emissions
     emissions_output_co2 = emissions_output[
         ~(
-            emissions_output.flow_long.isin(
+            emissions_output.flow_short.isin(
                 (
                     {
                         key: value
@@ -153,7 +153,7 @@ def climate(
     # Remove CO2 emissions from full emissions list
     emissions_output = emissions_output[
         (
-            emissions_output.flow_long.isin(
+            emissions_output.flow_short.isin(
                 (
                     {
                         key: value
@@ -165,14 +165,14 @@ def climate(
         ).values
     ]
 
-    # Replace 'flow_long' value with 'CO2'
-    emissions_output_co2.drop(columns="flow_long", inplace=True)
-    emissions_output_co2["flow_long"] = "CO2"
+    # Replace 'flow_short' value with 'CO2'
+    emissions_output_co2.drop(columns="flow_short", inplace=True)
+    emissions_output_co2["flow_short"] = "CO2"
 
     # Replace 'CO2' with 'CO2 FFI' for subset
     emissions_output_fossil = emissions_output_co2[
         (
-            (emissions_output_co2.flow_long == "CO2")
+            (emissions_output_co2.flow_short == "CO2")
             & (
                 emissions_output_co2.sector.isin(
                     [
@@ -185,23 +185,23 @@ def climate(
                 )
             )
         ).values
-    ].drop(columns="flow_long")
+    ].drop(columns="flow_short")
 
-    emissions_output_fossil["flow_long"] = "CO2 FFI"
+    emissions_output_fossil["flow_short"] = "CO2 FFI"
 
     # Replace 'CO2' with 'CO2 AFOLU' for subset
     emissions_output_landuse = emissions_output_co2[
         (
-            (emissions_output_co2.flow_long == "CO2")
+            (emissions_output_co2.flow_short == "CO2")
             & (
                 emissions_output_co2.sector.isin(
                     ["Agriculture", "Forests & Wetlands"]
                 )
             )
         ).values
-    ].drop(columns="flow_long")
+    ].drop(columns="flow_short")
 
-    emissions_output_landuse["flow_long"] = "CO2 AFOLU"
+    emissions_output_landuse["flow_short"] = "CO2 AFOLU"
 
     # Recombine
     emissions_output_co2 = pd.concat(
@@ -221,7 +221,7 @@ def climate(
             "product_long",
             "product_short",
             "flow_category",
-            "flow_long",
+            "flow_short",
             "flow_short",
             "unit",
         ]
@@ -231,7 +231,7 @@ def climate(
     # fair.structure.units.desired_emissions_units
     emissions_output = emissions_output[
         (
-            emissions_output.reset_index().flow_long.isin(
+            emissions_output.reset_index().flow_short.isin(
                 fair.structure.units.desired_emissions_units.keys()
             )
         ).values
@@ -269,7 +269,7 @@ def climate(
         # Format for input into FAIR
         emissions_output_fair = (
             emissions_output.loc[slice(None), scenario, :]
-            .groupby(["flow_long"], observed=True)
+            .groupby(["flow_short"], observed=True)
             .sum(numeric_only=True)
             .T.fillna(0)
             .rename_axis("year")
@@ -403,7 +403,7 @@ def climate(
 
     emissions_output_co2e_fair = emissions_output_co2e.sort_index()
     emissions_output_co2e_fair.reset_index(inplace=True)
-    emissions_output_co2e_fair["flow_long"] = "CO2"
+    emissions_output_co2e_fair["flow_short"] = "CO2"
     emissions_output_co2e_fair.set_index(
         emissions_output.index.names, inplace=True
     )
@@ -424,7 +424,7 @@ def climate(
 
     # Convert units from emissions_output to assumed units for FAIR model input
     emissions_output_co2e_fair = emissions_output_co2e_fair.groupby(
-        ["model", "scenario", "flow_long"], observed=True
+        ["model", "scenario", "flow_short"], observed=True
     ).sum(numeric_only=True)
 
     climate_output_concentration_co2e = pd.DataFrame()
@@ -434,7 +434,7 @@ def climate(
         # Format for input into FAIR
         emissions_output_co2e_fair2 = (
             emissions_output_co2e_fair.loc[slice(None), scenario, :]
-            .groupby(["flow_long"], observed=True)
+            .groupby(["flow_short"], observed=True)
             .sum(numeric_only=True)
             .T.fillna(0)
             .rename_axis("year")
