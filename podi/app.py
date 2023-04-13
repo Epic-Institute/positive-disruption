@@ -657,9 +657,7 @@ def set_data_and_chart_control_options(model_output):
         df_index_custom_default = {}
 
     # read in data
-    df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
-    )
+    df = pd.read_parquet("/data/" + model_output + ".parquet")
     index_dtypes = {k: "category" for k in df.index.names}
     column_dtypes = {j: "float32" for j in df.columns}
     dtypes = {**index_dtypes, **column_dtypes}
@@ -971,7 +969,7 @@ def update_data_controls(
 ):
     # read in data
     df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
+        "/data/" + model_output + ".parquet"
     )
     index_dtypes = {k: "category" for k in df.index.names}
     column_dtypes = {j: "float32" for j in df.columns}
@@ -1241,9 +1239,7 @@ def update_output_graph(
     index_values = [value for value in index_values if value]
 
     # read in data
-    df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
-    ).reset_index()
+    df = pd.read_parquet("/data/" + model_output + ".parquet").reset_index()
 
     # store units before dropping
     units = df["unit"].unique().tolist()
@@ -1333,6 +1329,32 @@ def update_output_graph(
         df = df.loc[tuple([*index_values])]
 
     # prevent error if all of the groupby_set selections each have less than 2 options
+    try:
+        all(
+            len(df.index.get_level_values(groupby_name).unique()) < 2
+            for groupby_name in groupby_set
+        )
+    except IndexError:
+        fig = go.Figure()
+        fig.update_layout(
+            annotations=[
+                dict(
+                    text="At least one of the selections in the 'GROUP BY' menu must have more than one option with nonzero data.",
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(
+                        size=24,
+                        color="rgba(128, 128, 128, 0.5)",
+                    ),
+                    align="center",
+                )
+            ],
+        )
+        return (fig,)
+
     if all(
         len(index_values[df.index.names.index(groupby_name)]) < 2
         for groupby_name in groupby_set
