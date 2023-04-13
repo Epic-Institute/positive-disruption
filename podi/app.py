@@ -657,7 +657,7 @@ def set_data_and_chart_control_options(model_output):
         df_index_custom_default = {}
 
     # read in data
-    df = pd.read_parquet("~/data/" + model_output + ".parquet")
+    df = pd.read_parquet("data/" + model_output + ".parquet")
     index_dtypes = {k: "category" for k in df.index.names}
     column_dtypes = {j: "float32" for j in df.columns}
     dtypes = {**index_dtypes, **column_dtypes}
@@ -969,7 +969,7 @@ def update_data_controls(
 ):
     # read in data
     df = pd.read_parquet(
-        "~/data/" + model_output + ".parquet"
+        "data/" + model_output + ".parquet"
     )
     index_dtypes = {k: "category" for k in df.index.names}
     column_dtypes = {j: "float32" for j in df.columns}
@@ -1239,7 +1239,7 @@ def update_output_graph(
     index_values = [value for value in index_values if value]
 
     # read in data
-    df = pd.read_parquet("~/data/" + model_output + ".parquet").reset_index()
+    df = pd.read_parquet("data/" + model_output + ".parquet").reset_index()
 
     # store units before dropping
     units = df["unit"].unique().tolist()
