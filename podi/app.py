@@ -291,7 +291,12 @@ app.layout = html.Div(
                                                                 dbc.Card(
                                                                     dcc.Graph(
                                                                         id="output_graph",
-                                                                        figure={},
+                                                                        figure={
+                                                                            "layout": {
+                                                                                "plot_bgcolor": 'rgba(0, 0, 0, 0)',
+                                                                                "paper_bgcolor": 'rgba(0, 0, 0, 0)',
+                                                                            }
+                                                                        },
                                                                     ),
                                                                 ),
                                                             ],
@@ -1297,6 +1302,8 @@ def update_output_graph(
                     align="center",
                 )
             ],
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
         return (fig,)
 
@@ -1319,6 +1326,8 @@ def update_output_graph(
                     align="center",
                 )
             ],
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
         return (fig,)
 
@@ -1356,6 +1365,8 @@ def update_output_graph(
                     align="center",
                 )
             ],
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
         return (fig,)
 
@@ -1380,6 +1391,8 @@ def update_output_graph(
                     align="center",
                 )
             ],
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
         return (fig,)
 
@@ -1408,6 +1421,8 @@ def update_output_graph(
                     align="center",
                 )
             ],
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
         return (fig,)
 
@@ -1437,6 +1452,8 @@ def update_output_graph(
                     align="center",
                 )
             ],
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
         return (fig,)
 
@@ -1662,6 +1679,8 @@ def update_output_graph(
             },
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)'
         )
 
         fig.update_yaxes(
@@ -1841,6 +1860,8 @@ def update_output_graph(
             },
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
 
         fig.update_yaxes(
@@ -1886,6 +1907,8 @@ def update_output_graph(
                         align="center",
                     )
                 ],
+                plot_bgcolor='rgba(0, 0, 0, 0)',
+                paper_bgcolor='rgba(0, 0, 0, 0)',
             )
             return (fig,)
         # prevent confusing output if groupby contains scenario
@@ -1907,6 +1930,8 @@ def update_output_graph(
                         align="center",
                     )
                 ],
+                plot_bgcolor='rgba(0, 0, 0, 0)',
+                paper_bgcolor='rgba(0, 0, 0, 0)',
             )
             return (fig,)
 
@@ -2176,6 +2201,8 @@ def update_output_graph(
             },
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
 
         fig.update_yaxes(
@@ -2375,6 +2402,8 @@ def update_output_graph(
             },
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
 
         fig.update_yaxes(
@@ -2541,6 +2570,8 @@ def update_output_graph(
             },
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgba(0, 0, 0, 0)',
         )
 
         fig.update_yaxes(
