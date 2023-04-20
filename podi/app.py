@@ -658,7 +658,7 @@ def set_data_and_chart_control_options(model_output):
 
     # read in data
     df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
+        "data/" + model_output + ".parquet"
     )
     index_dtypes = {k: "category" for k in df.index.names}
     column_dtypes = {j: "float32" for j in df.columns}
@@ -1242,7 +1242,7 @@ def update_output_graph(
 
     # read in data
     df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
+        "data/" + model_output + ".parquet"
     ).reset_index()
 
     # store units before dropping

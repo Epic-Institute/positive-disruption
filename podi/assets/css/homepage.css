@@ -8,6 +8,19 @@ body {
   margin: 0 auto;
 }
 
+.card {
+  background-color: var(--ei-background);
+}
+
+/* .main-svg {
+  background: green;
+} */
+
+.nav-link {
+  background-color: var(--ei-background);
+  border: 1px solid #165163;
+}
+
 .header {
   font-family: 'Josefin Sans', sans-serif;
   color: #FFF;
