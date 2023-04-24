@@ -838,9 +838,14 @@ label {
 
 /* Dash app */
 
-.Select-value, .dash-dropdown .Select-control, .dash-dropdown .Select-control .Select-input input,
+.dash-dropdown .Select-control, .dash-dropdown .Select-control .Select-input input,
 .nav-link, .Select-menu-outer *, .VirtualizedSelectOption {
   background-color: var(--ei-background) !important;
+}
+
+.Select-value, .Select-menu-outer {
+  border: 1px solid #165163 !important;
+  background-color: var(--ei-100);
 }
 
 .nav-link, .Select-value .Select-value-label, .Select-value-icon, .rc-slider-mark-text, .Select-menu-outer *, VirtualizedSelectOption {
@@ -850,7 +855,11 @@ label {
   font-weight: 300; */
 }
 
+.VirtualizedSelectOption {
+  background-color: var(--ei-100) !important;
+}
+
 .VirtualizedSelectOption:hover {
-  color: blue !important;
-  background-color: yellow !important;
+  color: var(--bs-light) !important;
+  background-color: var(--ei-200) !important;
 }
