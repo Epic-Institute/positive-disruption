@@ -835,3 +835,16 @@ label {
     display: none;
   }
 }
+
+/* Dash app */
+
+.Select-value, .dash-dropdown .Select-control, .dash-dropdown .Select-control .Select-input input, .nav-link {
+  background-color: var(--ei-background) !important;
+}
+
+.nav-link, .Select-value .Select-value-label, .Select-value-icon {
+  color: var(--bs-light) !important;
+  /* font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 300; */
+}
