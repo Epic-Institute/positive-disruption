@@ -863,3 +863,11 @@ label {
   color: var(--bs-light) !important;
   background-color: var(--ei-200) !important;
 }
+
+.Select-value-icon, .Select-value-label {
+  background-color: var(--ei-100);
+}
+
+.dbc .Select--multi .Select-value {
+  border: 1px solid #0ed1d6 !important;
+}
