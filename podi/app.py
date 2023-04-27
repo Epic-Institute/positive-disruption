@@ -1,4 +1,5 @@
 import itertools
+import os
 
 import dash
 import dash_bootstrap_components as dbc
@@ -6,7 +7,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, State, dcc, html
+from dash import Input, Output, dcc, html
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -167,10 +168,8 @@ app.layout = html.Div(
                         ),
                     ],
                 ),
-                html.Div(className="row ei-border-bottom"),
             ],
         ),
-        html.Br(),
         html.Div(
             children=[
                 dbc.Container(
@@ -369,7 +368,8 @@ app.layout = html.Div(
                                                                         ),
                                                                     ],
                                                                     style={
-                                                                        "textAlign": "center"
+                                                                        "textAlign": "center",
+                                                                        "border": "none",
                                                                     },
                                                                 )
                                                             ],
@@ -377,6 +377,28 @@ app.layout = html.Div(
                                                     ]
                                                 )
                                             ]
+                                        ),
+                                        html.Br(),
+                                        dbc.Card(
+                                            children=[
+                                                html.Div(
+                                                    children=[
+                                                        html.Iframe(
+                                                            src="https://app.wonderchat.io/chatbot/clgo3z4gv00k1mc0kplyvv4j6",
+                                                            style={
+                                                                "width": "100%",
+                                                                "height": "300px",
+                                                                "border": "none",
+                                                                "border-radius": "30px",
+                                                            },
+                                                        ),
+                                                    ],
+                                                )
+                                            ],  # make the card corner radius larger and transparent background
+                                            style={
+                                                "border-radius": "10px",
+                                                "background-color": "rgba(0,0,0,0)",
+                                            },
                                         ),
                                     ],
                                     md=9,
@@ -633,9 +655,16 @@ def set_data_and_chart_control_options(model_output):
 
     graph_type_default = graph_type_default_dict[model_output]
 
-    # define custom default value
+    # define custom default selections for data_controls
     df_index_custom_default_dict = {
         "energy_output": {"flow_category": ["Final consumption"]},
+        # "emissions_output_co2e": {
+        #     "region": [],
+        #     "sector": [],
+        #     "product_long": [],
+        #     "flow_category": [],
+        #     "flow_long": [],
+        # },
         "climate_output_concentration": {
             "scenario": ["baseline", "pathway"],
             "gas": ["CO2", "CH4", "N2O"],
@@ -657,9 +686,21 @@ def set_data_and_chart_control_options(model_output):
         df_index_custom_default = {}
 
     # read in data
-    df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
-    )
+    expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
+    if os.path.isdir(expanded_home_path):
+        data_path = expanded_home_path
+    elif os.path.isdir("data/"):
+        data_path = "data/"
+    else:
+        raise FileNotFoundError("Data directory not found")
+
+    df = pd.read_parquet(os.path.join(data_path, model_output + ".parquet"))
+    index_dtypes = {k: "category" for k in df.index.names}
+    column_dtypes = {j: "float32" for j in df.columns}
+    dtypes = {**index_dtypes, **column_dtypes}
+    df = df.reset_index().astype(dtypes)
+
+    df = pd.read_parquet(os.path.join(data_path, model_output + ".parquet"))
     index_dtypes = {k: "category" for k in df.index.names}
     column_dtypes = {j: "float32" for j in df.columns}
     dtypes = {**index_dtypes, **column_dtypes}
@@ -667,13 +708,33 @@ def set_data_and_chart_control_options(model_output):
 
     # define model_output index options that should not be used
     df_index_exclude_dict = {
-        "energy_output": ["product_short", "flow_short", "unit"],
-        "emissions_output_co2e": ["product_short", "flow_short", "unit"],
+        "energy_output": [
+            "product_category",
+            "flow_category",
+            "product_short",
+            "flow_short",
+            "unit",
+        ],
+        "emissions_output_co2e": [
+            "product_category",
+            "flow_category",
+            # "flow_long",
+            "product_short",
+            "flow_short",
+            "unit",
+        ],
         "afolu_output": ["product_short", "flow_short", "unit"],
         "climate_output_concentration": ["unit"],
         "climate_output_temperature": ["unit"],
         "climate_output_forcing": ["unit"],
-        "technology_adoption_output": ["product_short", "flow_short", "unit"],
+        "technology_adoption_output": [
+            "product_category",
+            "flow_category",
+            "flow_long",
+            "product_short",
+            "flow_short",
+            "unit",
+        ],
     }
 
     # define model_output index options that should be default singular or
@@ -769,10 +830,10 @@ def set_data_and_chart_control_options(model_output):
                         id=level,
                         multi=True,
                         style={
-                            "maxHeight": "45px",
-                            "overflow-y": "scroll",
-                            "border": "1px solid #d6d6d6",
-                            "border-radius": "5px",
+                            # "maxHeight": "45px",
+                            # "overflow-y": "scroll",
+                            # "border": "1px solid #d6d6d6",
+                            # "border-radius": "5px",
                             "outline": "none",
                         },
                     ),
@@ -970,24 +1031,22 @@ def update_data_controls(
     *index_values,
 ):
     # read in data
+    expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
+    if os.path.isdir(expanded_home_path):
+        data_path = expanded_home_path
+    elif os.path.isdir("data/"):
+        data_path = "data/"
+    else:
+        raise FileNotFoundError("Data directory not found")
+
     df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
+        os.path.join(data_path, model_output + ".parquet")
     )
     index_dtypes = {k: "category" for k in df.index.names}
     column_dtypes = {j: "float32" for j in df.columns}
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
-    # define model_output index options that should not be used
-    df_index_exclude_dict = {
-        "energy_output": ["product_short", "flow_short", "unit"],
-        "emissions_output_co2e": ["product_short", "flow_short", "unit"],
-        "afolu_output": ["product_short", "flow_short", "unit"],
-        "climate_output_concentration": ["unit"],
-        "climate_output_temperature": ["unit"],
-        "climate_output_forcing": ["unit"],
-        "technology_adoption_output": ["product_short", "flow_short", "unit"],
-    }
 
     # define tooltip descriptions of data controls and graph_controls dropdowns
     tooltip_dict = {
@@ -1217,13 +1276,33 @@ def update_output_graph(
 
     # define model_output index options that should not be used
     df_index_exclude_dict = {
-        "energy_output": ["product_short", "flow_short", "unit"],
-        "emissions_output_co2e": ["product_short", "flow_short", "unit"],
+        "energy_output": [
+            "product_category",
+            "flow_category",
+            "product_short",
+            "flow_short",
+            "unit",
+        ],
+        "emissions_output_co2e": [
+            "product_category",
+            "flow_category",
+            # "flow_long",
+            "product_short",
+            "flow_short",
+            "unit",
+        ],
         "afolu_output": ["product_short", "flow_short", "unit"],
         "climate_output_concentration": ["unit"],
         "climate_output_temperature": ["unit"],
         "climate_output_forcing": ["unit"],
-        "technology_adoption_output": ["product_short", "flow_short", "unit"],
+        "technology_adoption_output": [
+            "product_category",
+            "flow_category",
+            "flow_long",
+            "product_short",
+            "flow_short",
+            "unit",
+        ],
     }
 
     # define dict of definitions of each subvertical
@@ -1241,9 +1320,19 @@ def update_output_graph(
     index_values = [value for value in index_values if value]
 
     # read in data
-    df = pd.read_parquet(
-        "~/positive-disruption/podi/data/" + model_output + ".parquet"
-    ).reset_index()
+    expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
+    if os.path.isdir(expanded_home_path):
+        data_path = expanded_home_path
+    elif os.path.isdir("data/"):
+        data_path = "data/"
+    else:
+        raise FileNotFoundError("Data directory not found")
+
+    df = pd.read_parquet(os.path.join(data_path, model_output + ".parquet"))
+    index_dtypes = {k: "category" for k in df.index.names}
+    column_dtypes = {j: "float32" for j in df.columns}
+    dtypes = {**index_dtypes, **column_dtypes}
+    df = df.reset_index().astype(dtypes)
 
     # store units before dropping
     units = df["unit"].unique().tolist()
@@ -1284,7 +1373,7 @@ def update_output_graph(
         fig.update_layout(
             annotations=[
                 dict(
-                    text="No data available for the selected values",
+                    text="No data available for the current set of dropdown selections",
                     xref="paper",
                     yref="paper",
                     x=0.5,
@@ -1395,7 +1484,7 @@ def update_output_graph(
         fig.update_layout(
             annotations=[
                 dict(
-                    text="No data available for the selected index values",
+                    text="No data available for the current set of dropdown selections",
                     xref="paper",
                     yref="paper",
                     x=0.5,
@@ -1424,7 +1513,7 @@ def update_output_graph(
         fig.update_layout(
             annotations=[
                 dict(
-                    text="No data available for the selected index values",
+                    text="No data available for the current set of dropdown selections",
                     xref="paper",
                     yref="paper",
                     x=0.5,
