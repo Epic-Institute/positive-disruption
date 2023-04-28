@@ -39,7 +39,8 @@ model_output = {
     "technology_adoption_output": "Technology Adoption Rates",
 }
 
-index_names = [
+# list all possible index names from all model_outputs, to define unused_data_controls
+all_possible_index_values = [
     "model",
     "scenario",
     "region",
@@ -50,7 +51,89 @@ index_names = [
     "flow_long",
     "variable",
     "gas",
+    "unit",
 ]
+
+# define model_output index levels that should be included as dropdowns in data_controls
+data_controls_dropdowns = {
+    "energy_output": [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        # "product_category",
+        "product_long",
+        # "product_short",
+        # "flow_category",
+        "flow_long",
+        # "flow_short",
+        # "unit",
+    ],
+    "emissions_output_co2e": [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        # "product_category",
+        "product_long",
+        # "product_short",
+        # "flow_category",
+        "flow_long",
+        # "flow_short",
+        # "unit",
+    ],
+    "afolu_output": [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        "product_category",
+        # "product_long",
+        # "product_short",
+        "flow_category",
+        "flow_long",
+        # "flow_short",
+        # "unit"
+    ],
+    "climate_output_concentration": [
+        "model",
+        "scenario",
+        "region",
+        "variable",
+        "gas",
+        # "unit"
+    ],
+    "climate_output_temperature": [
+        "model",
+        "scenario",
+        "region",
+        "variable",
+        "gas",
+        # "unit"
+    ],
+    "climate_output_forcing": [
+        "model",
+        "scenario",
+        "region",
+        "variable",
+        "gas",
+        "unit",
+    ],
+    "technology_adoption_output": [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        # "product_category",
+        "product_long",
+        # "product_short",
+        # "flow_category",
+        # "flow_long",
+        # "flow_short",
+        # "unit",
+    ],
+}
+
 
 # make layout
 app.layout = html.Div(
@@ -432,7 +515,7 @@ app.layout = html.Div(
 )
 
 
-# populate data and graph control options based on model output selection
+# given an input value for model_output, create lists for data_controls and graph_controls. unused_data_controls is needed to store the unused data controls in a hidden div
 @app.callback(
     output=[
         Output("data_controls", "children"),
@@ -441,11 +524,17 @@ app.layout = html.Div(
     ],
     inputs=[Input("model_output", "value")],
 )
-def set_data_and_chart_control_options(model_output):
-    # define graph output options
-    graph_output_dict = {
+def set_data_and_chart_control_options(
+    model_output, all_possible_index_values=all_possible_index_values
+):
+    # define graph_output_dropdown_values
+    graph_output_dropdown_values = {
         "energy_output": ["Energy Supply & Demand"],
-        "emissions_output_co2e": ["Emissions", "Emissions Mitigated"],
+        "emissions_output_co2e": [
+            "All Emissions",
+            "Negative Emissions",
+            "Emissions Mitigated",
+        ],
         "climate_output_concentration": [
             "GHG Concentration",
             "CO2 Concentration Community Prediction",
@@ -455,8 +544,8 @@ def set_data_and_chart_control_options(model_output):
         "technology_adoption_output": ["Technology Adoption Rates"],
     }
 
-    # define graph output default value
-    graph_output_default_dict = {
+    # define graph_output_dropdown_values_default
+    graph_output_dropdown_values_default = {
         "energy_output": "Energy Supply & Demand",
         "emissions_output_co2e": "Emissions",
         "climate_output_concentration": "GHG Concentration",
@@ -465,8 +554,13 @@ def set_data_and_chart_control_options(model_output):
         "technology_adoption_output": "Technology Adoption Rates",
     }
 
-    # define groupby_set options
-    groupby_set_options_dict = {
+    graph_output_dropdown_values = graph_output_dropdown_values[model_output]
+    graph_output_dropdown_values_default = (
+        graph_output_dropdown_values_default[model_output]
+    )
+
+    # define group_by_dropdown_values
+    group_by_dropdown_values = {
         "energy_output": [
             {"label": "Scenario", "value": "scenario"},
             {"label": "Region", "value": "region"},
@@ -521,10 +615,10 @@ def set_data_and_chart_control_options(model_output):
         ],
     }
 
-    # define groupby_set default value
-    groupby_set_default_dict = {
+    # define group_by_dropdown_values_default
+    group_by_dropdown_values_default = {
         "energy_output": ["sector", "product_long"],
-        "emissions_output_co2e": ["sector", "product_long"],
+        "emissions_output_co2e": ["product_long"],
         "afolu_output": "flow_long",
         "climate_output_concentration": ["scenario", "gas"],
         "climate_output_temperature": "scenario",
@@ -532,8 +626,20 @@ def set_data_and_chart_control_options(model_output):
         "technology_adoption_output": "product_long",
     }
 
-    # define yaxis_type options
-    yaxis_type_options_dict = {
+    group_by_dropdown_values = group_by_dropdown_values[model_output]
+    group_by_dropdown_values_default = group_by_dropdown_values_default[
+        model_output
+    ]
+
+    # remove group_by_dropdown_values that are not in data_controls_dropdowns[model_output]
+    group_by_dropdown_values = [
+        i
+        for i in group_by_dropdown_values
+        if i["value"] in data_controls_dropdowns[model_output]
+    ]
+
+    # define y_axis_type_dropdown_values
+    y_axis_type_dropdown_values = {
         "energy_output": [
             "Linear",
             "Log",
@@ -578,8 +684,8 @@ def set_data_and_chart_control_options(model_output):
         ],
     }
 
-    # define yaxis_type default value
-    yaxis_type_default_dict = {
+    # define y_axis_type_dropdown_default
+    y_axis_type_dropdown_default = {
         "energy_output": "Linear",
         "emissions_output_co2e": "Linear",
         "afolu_output": "Linear",
@@ -589,8 +695,11 @@ def set_data_and_chart_control_options(model_output):
         "technology_adoption_output": "% of Cumulative at Final Year",
     }
 
-    # define graph_type options
-    graph_type_options_dict = {
+    y_axis_type_dropdown_values = y_axis_type_dropdown_values[model_output]
+    y_axis_type_dropdown_default = y_axis_type_dropdown_default[model_output]
+
+    # define graph_type_dropdown_values
+    graph_type_dropdown_values = {
         "energy_output": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
@@ -628,8 +737,8 @@ def set_data_and_chart_control_options(model_output):
         ],
     }
 
-    # define graph_type default value
-    graph_type_default_dict = {
+    # define graph_type_dropdown_default
+    graph_type_dropdown_default = {
         "energy_output": "tonexty",
         "emissions_output_co2e": "tonexty",
         "afolu_output": "tonexty",
@@ -639,24 +748,11 @@ def set_data_and_chart_control_options(model_output):
         "technology_adoption_output": "none",
     }
 
-    graph_output_options = graph_output_dict[model_output]
+    graph_type_dropdown_values = graph_type_dropdown_values[model_output]
+    graph_type_dropdown_default = graph_type_dropdown_default[model_output]
 
-    graph_output_default = graph_output_default_dict[model_output]
-
-    groupby_set_options = groupby_set_options_dict[model_output]
-
-    groupby_set_default = groupby_set_default_dict[model_output]
-
-    yaxis_type_options = yaxis_type_options_dict[model_output]
-
-    yaxis_type_default = yaxis_type_default_dict[model_output]
-
-    graph_type_options = graph_type_options_dict[model_output]
-
-    graph_type_default = graph_type_default_dict[model_output]
-
-    # define custom default selections for data_controls
-    df_index_custom_default_dict = {
+    # define data_controls_default for a given model_output
+    data_controls_default = {
         "energy_output": {"flow_category": ["Final consumption"]},
         # "emissions_output_co2e": {
         #     "region": [],
@@ -679,13 +775,13 @@ def set_data_and_chart_control_options(model_output):
         },
     }
 
-    # if model_output has a custom default value, use it
-    if model_output in df_index_custom_default_dict:
-        df_index_custom_default = df_index_custom_default_dict[model_output]
+    # if model_output is in data_controls_default, use that, otherwise use empty dict
+    if model_output in data_controls_default:
+        df_index_custom_default = data_controls_default[model_output]
     else:
         df_index_custom_default = {}
 
-    # read in data
+    # read model_output data
     expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
     if os.path.isdir(expanded_home_path):
         data_path = expanded_home_path
@@ -700,46 +796,8 @@ def set_data_and_chart_control_options(model_output):
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
-    df = pd.read_parquet(os.path.join(data_path, model_output + ".parquet"))
-    index_dtypes = {k: "category" for k in df.index.names}
-    column_dtypes = {j: "float32" for j in df.columns}
-    dtypes = {**index_dtypes, **column_dtypes}
-    df = df.reset_index().astype(dtypes)
-
-    # define model_output index options that should not be used
-    df_index_exclude_dict = {
-        "energy_output": [
-            "product_category",
-            "flow_category",
-            "product_short",
-            "flow_short",
-            "unit",
-        ],
-        "emissions_output_co2e": [
-            "product_category",
-            "flow_category",
-            # "flow_long",
-            "product_short",
-            "flow_short",
-            "unit",
-        ],
-        "afolu_output": ["product_short", "flow_short", "unit"],
-        "climate_output_concentration": ["unit"],
-        "climate_output_temperature": ["unit"],
-        "climate_output_forcing": ["unit"],
-        "technology_adoption_output": [
-            "product_category",
-            "flow_category",
-            "flow_long",
-            "product_short",
-            "flow_short",
-            "unit",
-        ],
-    }
-
-    # define model_output index options that should be default singular or
-    # multi-selected
-    df_index_multi = {
+    # define data_controls_dropdowns that should allow for multi-selection
+    data_controls_dropdowns_multiselect = {
         "model": False,
         "scenario": False,
         "region": True,
@@ -749,17 +807,7 @@ def set_data_and_chart_control_options(model_output):
         "flow_category": True,
         "flow_long": True,
         "variable": False,
-        "gas": True,
-    }
-
-    # define graph output options
-    graph_output_dict = {
-        "energy_output": ["Energy Supply & Demand"],
-        "emissions_output_co2e": ["Emissions", "Emissions Mitigated"],
-        "climate_output_concentration": ["GHG Concentration"],
-        "climate_output_temperature": ["Temperature Change"],
-        "climate_output_forcing": ["Radiative Forcing"],
-        "technology_adoption_output": ["Technology Adoption Rates"],
+        "gas": False,
     }
 
     # define tooltip descriptions of data controls and graph_controls dropdowns
@@ -800,13 +848,20 @@ def set_data_and_chart_control_options(model_output):
                     for i in range(data_start_year, proj_end_year + 1)
                 )
             )
-            & (~df.columns.isin(df_index_exclude_dict[model_output]))
+            & (df.columns.isin(data_controls_dropdowns[model_output]))
         ].tolist(),
         inplace=True,
     )
 
-    # drop unused columns
-    df.drop(columns=df_index_exclude_dict[model_output], inplace=True)
+    # drop unused columns (at this point all columns that are not numerical)
+    df.drop(
+        columns=df.columns[
+            ~df.columns.isin(
+                str(f"{i}") for i in range(data_start_year, proj_end_year + 1)
+            )
+        ].tolist(),
+        inplace=True,
+    )
 
     # define list of data controls
     index_to_data_controls = []
@@ -816,7 +871,7 @@ def set_data_and_chart_control_options(model_output):
         # default_value
         if df_index_custom_default and level in df_index_custom_default:
             default_value = df_index_custom_default[level]
-        elif df_index_multi[level]:
+        elif data_controls_dropdowns_multiselect[level]:
             default_value = df.reset_index()[level].unique().tolist()
         else:
             default_value = df.reset_index()[level].unique().tolist()[-1]
@@ -899,8 +954,8 @@ def set_data_and_chart_control_options(model_output):
                         html.Div(
                             [
                                 dcc.Dropdown(
-                                    graph_output_options,
-                                    value=graph_output_default,
+                                    graph_output_dropdown_values,
+                                    value=graph_output_dropdown_values_default,
                                     id="graph_output",
                                     clearable=False,
                                 ),
@@ -919,9 +974,9 @@ def set_data_and_chart_control_options(model_output):
                         html.Div(
                             [
                                 dcc.Dropdown(
-                                    groupby_set_options,
-                                    value=groupby_set_default,
-                                    id="groupby_set",
+                                    group_by_dropdown_values,
+                                    value=group_by_dropdown_values_default,
+                                    id="group_by_dropdown_values",
                                     multi=True,
                                     clearable=False,
                                 )
@@ -946,8 +1001,8 @@ def set_data_and_chart_control_options(model_output):
                         html.Div(
                             [
                                 dcc.Dropdown(
-                                    yaxis_type_options,
-                                    yaxis_type_default,
+                                    y_axis_type_dropdown_values,
+                                    y_axis_type_dropdown_default,
                                     id="yaxis_type",
                                     clearable=False,
                                 ),
@@ -968,8 +1023,8 @@ def set_data_and_chart_control_options(model_output):
                         html.Div(
                             [
                                 dcc.Dropdown(
-                                    graph_type_options,
-                                    graph_type_default,
+                                    graph_type_dropdown_values,
+                                    graph_type_dropdown_default,
                                     id="graph_type",
                                     clearable=False,
                                 ),
@@ -982,7 +1037,7 @@ def set_data_and_chart_control_options(model_output):
         ),
     )
 
-    # define unused data controls layout as the values in index_names that are not in df.index.names
+    # define unused data controls layout as the values in all_possible_index_values that are not in df.index.names
     unused_data_controls = html.Div(
         [
             html.Div(
@@ -1003,7 +1058,7 @@ def set_data_and_chart_control_options(model_output):
                 ],
                 className="mb-0",
             )
-            for level in index_names
+            for level in all_possible_index_values
             if level not in df.index.names
         ]
     )
@@ -1022,7 +1077,7 @@ def set_data_and_chart_control_options(model_output):
         Input("model_output", "value"),
         Input("data_controls", "children"),
     ],
-    state=[*[State(f"{level}", "value") for level in index_names]],
+    state=[*[State(f"{level}", "value") for level in all_possible_index_values]],
     prevent_initial_call=True,
 )
 def update_data_controls(
@@ -1030,7 +1085,7 @@ def update_data_controls(
     data_controls_values,
     *index_values,
 ):
-    # read in data
+    # read model_output data
     expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
     if os.path.isdir(expanded_home_path):
         data_path = expanded_home_path
@@ -1086,13 +1141,20 @@ def update_data_controls(
                     for i in range(data_start_year, proj_end_year + 1)
                 )
             )
-            & (~df.columns.isin(df_index_exclude_dict[model_output]))
+            & (df.columns.isin(data_controls_dropdowns[model_output]))
         ].tolist(),
         inplace=True,
     )
 
-    # drop unused columns
-    df.drop(columns=df_index_exclude_dict[model_output], inplace=True)
+    # drop unused columns (at this point all columns that are not numerical)
+    df.drop(
+        columns=df.columns[
+            ~df.columns.isin(
+                str(f"{i}") for i in range(data_start_year, proj_end_year + 1)
+            )
+        ].tolist(),
+        inplace=True,
+    )
 
     # filter df based on index_values. Retain the old behavior, use `series.index.isin(sequence, level=1)` if `index_values` is a list of lists
     # drop empty arrays from index_values
@@ -1171,7 +1233,7 @@ def update_data_controls(
         ]
     )
 
-    # define unused data controls layout as the values in index_names that are not in df.index.names
+    # define unused data controls layout as the values in all_possible_index_values that are not in df.index.names
     unused_data_controls = html.Div(
         [
             html.Div(
@@ -1192,7 +1254,7 @@ def update_data_controls(
                 ],
                 className="mb-0",
             )
-            for level in index_names
+            for level in all_possible_index_values
             if level not in df.index.names
         ]
     )
@@ -1210,10 +1272,10 @@ def update_data_controls(
         Input("model_output", "value"),
         Input("date_range", "value"),
         Input("graph_output", "value"),
-        Input("groupby_set", "value"),
+        Input("group_by_dropdown_values", "value"),
         Input("yaxis_type", "value"),
         Input("graph_type", "value"),
-        *[Input(f"{level}", "value") for level in index_names],
+        *[Input(f"{level}", "value") for level in all_possible_index_values],
     ],
 )
 def update_output_graph(
@@ -1222,7 +1284,7 @@ def update_output_graph(
     model_output,
     date_range,
     graph_output,
-    groupby_set,
+    group_by_dropdown_values,
     yaxis_type,
     graph_type,
     *index_values,
@@ -1274,38 +1336,6 @@ def update_output_graph(
         "technology_adoption_output": "Technology Adoption Rates",
     }
 
-    # define model_output index options that should not be used
-    df_index_exclude_dict = {
-        "energy_output": [
-            "product_category",
-            "flow_category",
-            "product_short",
-            "flow_short",
-            "unit",
-        ],
-        "emissions_output_co2e": [
-            "product_category",
-            "flow_category",
-            # "flow_long",
-            "product_short",
-            "flow_short",
-            "unit",
-        ],
-        "afolu_output": ["product_short", "flow_short", "unit"],
-        "climate_output_concentration": ["unit"],
-        "climate_output_temperature": ["unit"],
-        "climate_output_forcing": ["unit"],
-        "technology_adoption_output": [
-            "product_category",
-            "flow_category",
-            "flow_long",
-            "product_short",
-            "flow_short",
-            "unit",
-        ],
-    }
-
-    # define dict of definitions of each subvertical
     subvertical_dict = {
         "Electric Power": "This is the electricity sector. It includes generation, transmission, and distribution of electricity. It also includes the use of electricity in the residential, commercial, and industrial sectors.",
         "Residential": "This is the residential sector. It includes the use of electricity in the residential sector.",
@@ -1319,7 +1349,7 @@ def update_output_graph(
     # drop empty index_values
     index_values = [value for value in index_values if value]
 
-    # read in data
+    # read model_output data
     expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
     if os.path.isdir(expanded_home_path):
         data_path = expanded_home_path
@@ -1334,7 +1364,7 @@ def update_output_graph(
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
-    # store units before dropping
+    # store units for use in graph axis label
     units = df["unit"].unique().tolist()
 
     # drop the columns that are numerical and not in the range of data_start_year to proj_end_year
@@ -1357,13 +1387,27 @@ def update_output_graph(
                     for i in range(data_start_year, proj_end_year + 1)
                 )
             )
-            & (~df.columns.isin(df_index_exclude_dict[model_output]))
+            & (df.columns.isin(data_controls_dropdowns[model_output]))
         ].tolist(),
         inplace=True,
     )
 
-    # drop unused columns
-    df.drop(columns=df_index_exclude_dict[model_output], inplace=True)
+    # drop unused columns (at this point all columns that are not numerical)
+    df.drop(
+        columns=df.columns[
+            ~df.columns.isin(
+                str(f"{i}") for i in range(data_start_year, proj_end_year + 1)
+            )
+        ].tolist(),
+        inplace=True,
+    )
+
+    # remove index values at locations where df.index.names is not in data_controls_dropdowns[model_output]
+    index_values = [
+        value
+        for value, name in zip(index_values, df.index.names)
+        if name in data_controls_dropdowns[model_output]
+    ]
 
     # check if df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
@@ -1389,8 +1433,8 @@ def update_output_graph(
         )
         return (fig,)
 
-    # prevent error if groupby_set is empty
-    if not groupby_set:
+    # prevent error if group_by_dropdown_values is empty
+    if not group_by_dropdown_values:
         fig = go.Figure()
         fig.update_layout(
             annotations=[
@@ -1411,9 +1455,11 @@ def update_output_graph(
         )
         return (fig,)
 
-    # make groupby_set an array if it is not already
-    if not isinstance(groupby_set, list):
-        groupby_set = [groupby_set] if groupby_set else []
+    # make group_by_dropdown_values an array if it is not already
+    if not isinstance(group_by_dropdown_values, list):
+        group_by_dropdown_values = (
+            [group_by_dropdown_values] if group_by_dropdown_values else []
+        )
 
     # filter df based on index_values. Retain the old behavior, use `series.index.isin(sequence, level=1)` if `index_values` is a list of lists
     if isinstance(index_values[0], list):
@@ -1421,11 +1467,11 @@ def update_output_graph(
     else:
         df = df.loc[tuple([*index_values])]
 
-    # prevent error if all of the groupby_set selections each have less than 2 options
+    # prevent error if all of the group_by_dropdown_values selections each have less than 2 options
     try:
         all(
             len(df.index.get_level_values(groupby_name).unique()) < 2
-            for groupby_name in groupby_set
+            for groupby_name in group_by_dropdown_values
         )
     except IndexError:
         fig = go.Figure()
@@ -1450,7 +1496,7 @@ def update_output_graph(
 
     if all(
         len(index_values[df.index.names.index(groupby_name)]) < 2
-        for groupby_name in groupby_set
+        for groupby_name in group_by_dropdown_values
     ):
         fig = go.Figure()
         fig.update_layout(
@@ -1475,7 +1521,7 @@ def update_output_graph(
     # check if filtered_df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
         filtered_df = (
-            df.groupby(groupby_set)
+            df.groupby(group_by_dropdown_values)
             .sum(numeric_only=True)
             .loc[:, str(date_range[0]) : str(date_range[1])]
         ).T.fillna(0)
@@ -1502,7 +1548,7 @@ def update_output_graph(
 
     # choose graph_output
     filtered_df = (
-        df.groupby(groupby_set)
+        df.groupby(group_by_dropdown_values)
         .sum(numeric_only=True)
         .loc[:, str(date_range[0]) : str(date_range[1])]
     ).T.fillna(0)
@@ -1583,12 +1629,38 @@ def update_output_graph(
     filtered_df = pd.melt(
         filtered_df,
         id_vars="year",
-        var_name=groupby_set,
+        var_name=group_by_dropdown_values,
         value_name="value",
     ).astype(
-        {k: "category" for k in groupby_set}
+        {k: "category" for k in group_by_dropdown_values}
         | {"year": "int", "value": "float32"}
     )
+
+    # prevent error if all of the group_by_dropdown_values selections each have less than 2 options
+    try:
+        filtered_df.sort_values("value", ascending=False)[
+            group_by_dropdown_values
+        ].drop_duplicates().squeeze().values
+    except AttributeError:
+        fig = go.Figure()
+        fig.update_layout(
+            annotations=[
+                dict(
+                    text="At least one of the selections in the 'GROUP BY' menu must have more than one option with nonzero data.",
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(
+                        size=24,
+                        color="rgba(128, 128, 128, 0.5)",
+                    ),
+                    align="center",
+                )
+            ],
+        )
+        return (fig,)
 
     # if graph_type is 'Table', return a table
     if graph_type == "Table":
@@ -1618,7 +1690,9 @@ def update_output_graph(
         i = 0
 
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[groupby_set]
+            filtered_df.sort_values("value", ascending=False)[
+                group_by_dropdown_values
+            ]
             .drop_duplicates()
             .squeeze()
             .values
@@ -1646,11 +1720,11 @@ def update_output_graph(
                             dash="solid",
                         ),
                         x=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub], : str(data_end_year)]["year"]
                         .values.dropna(),
                         y=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub], : str(data_end_year)]["value"]
                         .values.dropna(),
                         fill=graph_type,
@@ -1674,13 +1748,13 @@ def update_output_graph(
                             dash="dashdot",
                         ),
                         x=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub], str(data_end_year) : str(proj_end_year)][
                             "year"
                         ]
                         .values,
                         y=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub], str(data_end_year) : str(proj_end_year)][
                             "value"
                         ]
@@ -1706,7 +1780,7 @@ def update_output_graph(
                         ),
                         x=filtered_df["year"].drop_duplicates(),
                         y=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]["value"]
                         .values,
                         fill=graph_type,
@@ -1743,7 +1817,7 @@ def update_output_graph(
                 + "<b>"
                 + " & ".join(
                     str(x.replace("_long", "")).capitalize()
-                    for x in groupby_set
+                    for x in group_by_dropdown_values
                 ),
                 "xanchor": "center",
                 "x": 0.5,
@@ -1782,7 +1856,9 @@ def update_output_graph(
         i = 0
 
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[groupby_set]
+            filtered_df.sort_values("value", ascending=False)[
+                group_by_dropdown_values
+            ]
             .drop_duplicates()
             .squeeze()
             .values
@@ -1808,7 +1884,7 @@ def update_output_graph(
                             filtered_df["year"] <= data_end_year
                         ].drop_duplicates(),
                         y=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub], : str(data_end_year)]["value"]
                         .values,
                         fill=graph_type,
@@ -1832,7 +1908,7 @@ def update_output_graph(
                         ),
                         x=filtered_df["year"].drop_duplicates(),
                         y=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]["value"]
                         .values,
                         fill=graph_type,
@@ -1855,7 +1931,7 @@ def update_output_graph(
                         ),
                         x=filtered_df["year"].drop_duplicates(),
                         y=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]["value"]
                         .values,
                         fill=graph_type,
@@ -1922,7 +1998,197 @@ def update_output_graph(
                 + "<b>"
                 + " & ".join(
                     str(x.replace("_long", "")).capitalize()
-                    for x in groupby_set
+                    for x in group_by_dropdown_values
+                ),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            template="plotly_white",
+            margin=dict(t=25, b=0, l=0, r=0),
+        )
+
+        fig.update_yaxes(
+            title=str(units[0]),
+            type="log" if yaxis_type == "Log" else "linear",
+            spikemode="toaxis",
+        )
+
+        fig.update_xaxes(spikemode="toaxis")
+
+        if yaxis_type == "Cumulative":
+            fig.update_yaxes(title="Cumulative " + str(units[0]))
+        elif yaxis_type == "% of Cumulative at Final Year":
+            fig.update_yaxes(
+                title="% of Cumulative at Final Year " + str(units[0])
+            )
+        elif yaxis_type == "% of Annual Total":
+            fig.update_yaxes(title="% of Annual Total")
+        elif yaxis_type == "% Change YOY":
+            fig.update_yaxes(title="% Change YOY")
+        elif yaxis_type == "% of Maximum Value":
+            fig.update_yaxes(title="% of Maximum Value")
+        elif yaxis_type == "% of Final Year Value":
+            fig.update_yaxes(title="% of Final Year Value")
+
+    elif graph_output == "Negative Emissions":
+        fig = go.Figure()
+
+        i = 0
+
+        for sub in (
+            filtered_df.sort_values("value", ascending=False)[
+                group_by_dropdown_values
+            ]
+            .drop_duplicates()
+            .squeeze()
+            .values
+        ):
+            if all(
+                x >= 0
+                for x in pd.DataFrame(filtered_df)
+                .set_index(group_by_dropdown_values)
+                .loc[[sub]]["value"]
+                .values
+            ):
+                continue
+
+            if isinstance(sub, str):
+                name = str(sub).capitalize()
+            else:
+                name = ", ".join(str(x).capitalize() for x in sub)
+
+            # if the graph_type is line, add a trace to fig that is solid up to data_end_year and dashdot after
+            if graph_type == "none":
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3,
+                            color=graph_template["linecolor"][i],
+                            dash="solid",
+                        ),
+                        x=filtered_df["year"][
+                            filtered_df["year"] <= data_end_year
+                        ].drop_duplicates(),
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub], : str(data_end_year)]["value"]
+                        .values,
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=True,
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                        legendgroup=name,
+                    )
+                )
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3,
+                            color=graph_template["linecolor"][i],
+                            dash="dashdot",
+                        ),
+                        x=filtered_df["year"].drop_duplicates(),
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]["value"]
+                        .values,
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=False,
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                        legendgroup=name,
+                    )
+                )
+            else:
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3, color=graph_template["linecolor"][i]
+                        ),
+                        x=filtered_df["year"].drop_duplicates(),
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]["value"]
+                        .values,
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=True,
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                    )
+                )
+
+            i += 1
+
+        if graph_type not in ["none"]:
+            fig.add_trace(
+                go.Scatter(
+                    name="Net Emissions",
+                    line=dict(width=5, color="magenta", dash="dashdot"),
+                    x=filtered_df[
+                        (filtered_df["year"] >= date_range[0])
+                        & (filtered_df["year"] <= date_range[1])
+                    ]["year"].drop_duplicates(),
+                    y=pd.Series(
+                        filtered_df[
+                            (filtered_df.year >= date_range[0])
+                            & (filtered_df.year <= date_range[1])
+                        ]
+                        .groupby("year")
+                        .sum(numeric_only=True)["value"]
+                        .values
+                        * 0,
+                        index=filtered_df[
+                            (filtered_df["year"] >= date_range[0])
+                            & (filtered_df["year"] <= date_range[1])
+                        ]["year"].drop_duplicates(),
+                    ),
+                    fill="none",
+                    stackgroup=stack_type[graph_type],
+                    showlegend=True,
+                    hovertemplate=graph_template["hovertemplate"],
+                    groupnorm=groupnorm,
+                )
+            )
+
+        # add shaded region to indicate Projection
+        fig.add_vrect(
+            x0=max(data_end_year, date_range[0]),
+            x1=date_range[1],
+            y0=0,
+            y1=1,
+            fillcolor="LightGrey",
+            opacity=0.25,
+            layer="above",
+            line_width=0,
+            annotation_text="Projection",
+            annotation_position="top left",
+        )
+
+        fig.update_layout(
+            title={
+                "text": "<b>"
+                + model_output_dict[model_output]
+                + "</b>, grouped by "
+                + "<b>"
+                + " & ".join(
+                    str(x.replace("_long", "")).capitalize()
+                    for x in group_by_dropdown_values
                 ),
                 "xanchor": "center",
                 "x": 0.5,
@@ -1978,7 +2244,7 @@ def update_output_graph(
             )
             return (fig,)
         # prevent confusing output if groupby contains scenario
-        if "scenario" in groupby_set:
+        if "scenario" in group_by_dropdown_values:
             fig = go.Figure()
             fig.update_layout(
                 annotations=[
@@ -2003,21 +2269,15 @@ def update_output_graph(
             (
                 (
                     df[(df.reset_index().scenario == "baseline").values]
-                    .groupby(groupby_set)
+                    .groupby(group_by_dropdown_values)
                     .sum(numeric_only=True)
                     - (
                         df[(df.reset_index().scenario == "pathway").values]
-                        .groupby(groupby_set)
+                        .groupby(group_by_dropdown_values)
                         .sum(numeric_only=True)
                     )
                 )
             ).loc[:, str(date_range[0]) : str(date_range[1])]
-        ).T.fillna(0)
-
-        filtered_df2 = (
-            df.groupby(groupby_set)
-            .sum(numeric_only=True)
-            .loc[:, str(date_range[0]) : str(date_range[1])]
         ).T.fillna(0)
 
         if yaxis_type == "Cumulative":
@@ -2067,10 +2327,10 @@ def update_output_graph(
         filtered_df2 = pd.melt(
             filtered_df2,
             id_vars="year",
-            var_name=groupby_set,
+            var_name=group_by_dropdown_values,
             value_name="value",
         ).astype(
-            {k: "category" for k in groupby_set}
+            {k: "category" for k in group_by_dropdown_values}
             | {"year": "int", "value": "float32"}
         )
 
@@ -2151,7 +2411,9 @@ def update_output_graph(
         i = 0
 
         for groupby_set_value in (
-            filtered_df2.sort_values("value", ascending=False)[groupby_set]
+            filtered_df2.sort_values("value", ascending=False)[
+                group_by_dropdown_values
+            ]
             .drop_duplicates()
             .squeeze()
             .values
@@ -2182,7 +2444,7 @@ def update_output_graph(
                             & (filtered_df2.year <= date_range[1])
                         ]
                     )
-                    .set_index(groupby_set)
+                    .set_index(group_by_dropdown_values)
                     .loc[[groupby_set_value]]["value"]
                     .values,
                     fill="tonexty",
@@ -2199,17 +2461,17 @@ def update_output_graph(
                 go.Scatter(
                     name="Baseline",
                     line=dict(width=5, color="red", dash="dashdot"),
-                    x=filtered_df[filtered_df["year"] >= data_end_year][
+                    x=filtered_df2[filtered_df2["year"] >= data_end_year][
                         "year"
                     ].drop_duplicates(),
                     y=pd.Series(
-                        filtered_df[(filtered_df.year >= data_end_year)]
+                        filtered_df2[(filtered_df2.year >= data_end_year)]
                         .groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
-                        index=filtered_df[
-                            filtered_df["year"] >= data_end_year
+                        index=filtered_df2[
+                            filtered_df2["year"] >= data_end_year
                         ]["year"].drop_duplicates(),
                     ).loc[data_end_year:],
                     fill="none",
@@ -2224,7 +2486,7 @@ def update_output_graph(
                 go.Scatter(
                     name="Historical",
                     line=dict(width=3, color="black"),
-                    x=filtered_df[filtered_df["year"] <= data_end_year][
+                    x=filtered_df2[filtered_df2["year"] <= data_end_year][
                         "year"
                     ].drop_duplicates(),
                     y=spacer[spacer.index.values <= data_end_year],
@@ -2257,7 +2519,7 @@ def update_output_graph(
                 + "<b>"
                 + " & ".join(
                     str(x.replace("_long", "")).capitalize()
-                    for x in groupby_set
+                    for x in group_by_dropdown_values
                 ),
                 "xanchor": "center",
                 "x": 0.5,
@@ -2290,31 +2552,15 @@ def update_output_graph(
         elif yaxis_type == "% of Final Year Value":
             fig.update_yaxes(title="% of Final Year Value")
 
-    elif graph_output == "CO2 Concentration Community Prediction":
-        fig = go.Figure()
-
-        fig.add_layout_image(
-            dict(
-                source="https://www.metaculus.com/questions/embed/2563/",
-                xref="x",
-                yref="y",
-                x=0,
-                y=10,
-                sizex=2,
-                sizey=2,
-                sizing="stretch",
-                opacity=1,
-                layer="above",
-            )
-        )
-
     elif graph_output == "Technology Adoption Rates":
         fig = go.Figure()
 
         i = 0
 
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[groupby_set]
+            filtered_df.sort_values("value", ascending=False)[
+                group_by_dropdown_values
+            ]
             .drop_duplicates()
             .squeeze()
             .values
@@ -2341,7 +2587,7 @@ def update_output_graph(
                                 >= max(data_end_year, date_range[0])
                             ]
                         )
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["year"],
@@ -2351,7 +2597,7 @@ def update_output_graph(
                                 >= max(data_end_year, date_range[0])
                             ]
                         )
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["value"],
@@ -2380,7 +2626,7 @@ def update_output_graph(
                                 <= min(data_end_year, date_range[1])
                             ]
                         )
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["year"],
@@ -2390,7 +2636,7 @@ def update_output_graph(
                                 <= min(data_end_year, date_range[1])
                             ]
                         )
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["value"],
@@ -2415,12 +2661,12 @@ def update_output_graph(
                             width=3, color=graph_template["linecolor"][i]
                         ),
                         x=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["year"],
                         y=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["value"],
@@ -2456,7 +2702,7 @@ def update_output_graph(
                 + "<b>"
                 + " & ".join(
                     str(x.replace("_long", "")).capitalize()
-                    for x in groupby_set
+                    for x in group_by_dropdown_values
                 ),
                 "xanchor": "center",
                 "x": 0.5,
@@ -2495,7 +2741,9 @@ def update_output_graph(
         i = 0
 
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[groupby_set]
+            filtered_df.sort_values("value", ascending=False)[
+                group_by_dropdown_values
+            ]
             .drop_duplicates()
             .squeeze()
             .values
@@ -2520,14 +2768,14 @@ def update_output_graph(
                         x=pd.DataFrame(
                             filtered_df[filtered_df["year"] >= data_end_year]
                         )
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["year"],
                         y=pd.DataFrame(
                             filtered_df[filtered_df["year"] >= data_end_year]
                         )
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["value"],
@@ -2552,14 +2800,14 @@ def update_output_graph(
                         x=pd.DataFrame(
                             filtered_df[filtered_df["year"] <= data_end_year]
                         )
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["year"],
                         y=pd.DataFrame(
                             filtered_df[filtered_df["year"] <= data_end_year]
                         )
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]
                         .replace(0, np.nan)
                         .dropna()["value"],
@@ -2587,7 +2835,7 @@ def update_output_graph(
                         ),
                         x=filtered_df["year"].drop_duplicates(),
                         y=pd.DataFrame(filtered_df)
-                        .set_index(groupby_set)
+                        .set_index(group_by_dropdown_values)
                         .loc[[sub]]["value"]
                         .values,
                         fill=graph_type,
@@ -2622,7 +2870,7 @@ def update_output_graph(
                 + "<b>"
                 + " & ".join(
                     str(x.replace("_long", "")).capitalize()
-                    for x in groupby_set
+                    for x in group_by_dropdown_values
                 ),
                 "xanchor": "center",
                 "x": 0.5,
