@@ -823,33 +823,62 @@ def set_data_and_chart_control_options(model_output):
             default_value = df.reset_index()[level].unique().tolist()[-1]
 
         div_elements.append(
-            html.Div(
-                [
-                    dcc.Dropdown(
-                        df.reset_index()[level].unique().tolist(),
-                        default_value,
-                        id=level,
-                        multi=True,
-                        style={
-                            # "maxHeight": "45px",
-                            # "overflow-y": "scroll",
-                            # "border": "1px solid #d6d6d6",
-                            # "border-radius": "5px",
-                            "outline": "none",
-                        },
-                    ),
-                ],
-                className="mb-0" if level == df.index.names[-1] else "mb-3",
-            )
-        )
-
-        div_elements.append(
             html.Label(
                 level.replace("_", " ").replace("long", "").title(),
                 id=level + "-label",
                 className="select-label",
             )
         )
+
+        if not type(default_value) is list:
+            default_value = [default_value]
+
+        div_elements.append(
+            html.Div(
+                [
+                    # dcc.Checklist(
+                    #     id="all-or-none",
+                    #     options=[{"label": "Select All", "value": "All"}],
+                    #     value=[],
+                    #     labelStyle={"display": "inline-block"},
+                    # ),
+                    dcc.Checklist(
+                        id=level,
+                        options=df.reset_index()[level].unique().tolist(),
+                        value=default_value,
+                        labelStyle={"display": "block"},
+                    ),
+                ],
+                style={
+                    "maxHeight": "200px",
+                    "overflow-y": "scroll",
+                    "border": "1px solid #d6d6d6",
+                }
+            )
+        )
+
+        
+
+        # div_elements.append(
+        #     html.Div(
+        #         [
+        #             dcc.Dropdown(
+        #                 df.reset_index()[level].unique().tolist(),
+        #                 default_value,
+        #                 id=level,
+        #                 multi=True,
+        #                 style={
+        #                     # "maxHeight": "45px",
+        #                     # "overflow-y": "scroll",
+        #                     # "border": "1px solid #d6d6d6",
+        #                     # "border-radius": "5px",
+        #                     "outline": "none",
+        #                 },
+        #             ),
+        #         ],
+        #         className="mb-0" if level == df.index.names[-1] else "mb-3",
+        #     )
+        # )
 
         div_elements.append(
             dbc.Tooltip(
