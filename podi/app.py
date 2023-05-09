@@ -846,7 +846,10 @@ def set_data_and_chart_control_options(model_output):
                         id=level,
                         options=df.reset_index()[level].unique().tolist(),
                         value=default_value,
-                        labelStyle={"display": "block"},
+                        labelStyle={
+                            "display": "block",
+                            "color": "black"
+                        },
                     ),
                 ],
                 style={
