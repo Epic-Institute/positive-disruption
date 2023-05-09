@@ -809,9 +809,7 @@ def set_data_and_chart_control_options(model_output):
     df.drop(columns=df_index_exclude_dict[model_output], inplace=True)
 
     # define list of data controls, labels, and tooltips
-    index_to_data_controls = []
-    index_to_data_controls_labels = []
-    index_to_data_controls_tooltips = []
+    div_elements = []
 
     for level in df.index.names:
         # if df_index_custom_default is defined and level is in
@@ -824,7 +822,7 @@ def set_data_and_chart_control_options(model_output):
         else:
             default_value = df.reset_index()[level].unique().tolist()[-1]
 
-        index_to_data_controls.append(
+        div_elements.append(
             html.Div(
                 [
                     dcc.Dropdown(
@@ -845,7 +843,7 @@ def set_data_and_chart_control_options(model_output):
             )
         )
 
-        index_to_data_controls_labels.append(
+        div_elements.append(
             html.Label(
                 level.replace("_", " ").replace("long", "").title(),
                 id=level + "-label",
@@ -853,7 +851,7 @@ def set_data_and_chart_control_options(model_output):
             )
         )
 
-        index_to_data_controls_tooltips.append(
+        div_elements.append(
             dbc.Tooltip(
                 tooltip_dict[level],
                 target=level + "-label",
@@ -864,26 +862,8 @@ def set_data_and_chart_control_options(model_output):
 
     # define data_controls layout
     data_controls = html.Div(
-        [
-            element
-            for pair in zip(
-                index_to_data_controls_labels,
-                index_to_data_controls_tooltips,
-                index_to_data_controls,
-            )
-            for element in pair
-        ]
+        div_elements
     )
-
-    print([
-            element
-            for pair in zip(
-                index_to_data_controls_labels,
-                index_to_data_controls_tooltips,
-                index_to_data_controls,
-            )
-            for element in pair
-        ])
 
     #
 
