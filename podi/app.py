@@ -1436,10 +1436,10 @@ def update_output_graph(
         groupby_set = [groupby_set] if groupby_set else []
 
     # filter df based on index_values. Retain the old behavior, use `series.index.isin(sequence, level=1)` if `index_values` is a list of lists
-    if isinstance(index_values[0], list):
-        df = df[df.index.isin(index_values, level=1)]
-    else:
-        df = df.loc[tuple([*index_values])]
+    # if isinstance(index_values[0], list):
+    #     df = df[df.index.isin(index_values, level=1)]
+    # else:
+    df = df.loc[tuple([*index_values])]
 
     # prevent error if all of the groupby_set selections each have less than 2 options
     try:
