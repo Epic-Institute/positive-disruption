@@ -823,6 +823,14 @@ def set_data_and_chart_control_options(model_output):
             default_value = df.reset_index()[level].unique().tolist()[-1]
 
         div_elements.append(
+            html.Label(
+                level.replace("_", " ").replace("long", "").title(),
+                id=level + "-label",
+                className="select-label",
+            )
+        )
+
+        div_elements.append(
             html.Div(
                 [
                     dcc.Dropdown(
@@ -840,14 +848,6 @@ def set_data_and_chart_control_options(model_output):
                     ),
                 ],
                 className="mb-0" if level == df.index.names[-1] else "mb-3",
-            )
-        )
-
-        div_elements.append(
-            html.Label(
-                level.replace("_", " ").replace("long", "").title(),
-                id=level + "-label",
-                className="select-label",
             )
         )
 
