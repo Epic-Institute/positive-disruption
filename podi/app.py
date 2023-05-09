@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, dcc, html
+from dash import Input, Output, State, dcc, html, ctx
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -51,6 +51,8 @@ index_names = [
     "variable",
     "gas",
 ]
+
+default_values = {}
 
 # make layout
 app.layout = html.Div(
@@ -833,18 +835,28 @@ def set_data_and_chart_control_options(model_output):
         if not type(default_value) is list:
             default_value = [default_value]
 
+        default_values[level] = default_value
+
         div_elements.append(
             html.Div(
                 [
-                    # dcc.Checklist(
-                    #     id="all-or-none",
-                    #     options=[{"label": "Select All", "value": "All"}],
-                    #     value=[],
-                    #     labelStyle={"display": "inline-block"},
-                    # ),
+                    html.Div(
+                        [
+                            html.Button(
+                                "Select all",
+                                id=level + "-select-all",
+                                className="select-all-option",
+                            ),
+                            html.Button(
+                                "Deselect all",
+                                id=level + "-deselect-all",
+                                className="deselect-all-option",
+                            )
+                        ]
+                    ),
                     dcc.Checklist(
                         id=level,
-                        options=df.reset_index()[level].unique().tolist(),
+                        options=[{'label': i, 'value': i} for i in df.reset_index()[level].unique().tolist()],
                         value=default_value,
                         labelStyle={
                             "display": "block",
@@ -1220,6 +1232,27 @@ def update_data_controls(
     return (data_controls, unused_data_controls)
 """
 
+for level in index_names[:-2]:
+    @app.callback(
+        Output(f"{level}", "value"),
+        [
+            Input(f"{level}-select-all", "n_clicks"),
+            Input(f"{level}-deselect-all", "n_clicks")
+        ],
+        [State(f"{level}", "options")],
+        prevent_initial_call=True
+    )
+    def update_options(
+        btn1,
+        btn2,
+        options
+    ):
+        selected = default_values[level]
+        if ctx.triggered_id.endswith("-select-all"):
+            selected = [option['value'] for option in options]
+        elif ctx.triggered_id.endswith("-select-all"):
+            selected = []
+        return selected
 
 # update graph
 @app.callback(
@@ -1467,6 +1500,8 @@ def update_output_graph(
             ],
         )
         return (fig,)
+    
+    print(index_values)
 
     if all(
         len(index_values[df.index.names.index(groupby_name)]) < 2
