@@ -150,7 +150,7 @@ def results_analysis(
         flow_category="technology",
         flow_long="technology",
         flow_short="technology",
-        unit="n/a",
+        unit="multiple (hover over a time series to see units)",
     )
     # replace region ISO codes with region names from the 'WEB Region Lower' column of region_categories.csv
     region_categories = pd.read_csv(
@@ -575,6 +575,77 @@ def results_analysis(
         "podi/data/adoption_output_projections.csv"
     )
     """
+    # endregion
+
+    ###################
+    #  BIOCHAR STUDY  #
+    ###################
+
+    # region
+
+    # filter emissions_output_co2e for biochar
+    emissions_output_co2e_biochar = emissions_output_co2e.loc[
+        (
+            emissions_output_co2e.reset_index().flow_long.isin(
+                [
+                    "Biochar",
+                ]
+            )
+        ).values
+    ]
+
+    # change flow_long index values from 'Biochar' to "CharPallets"
+    emissions_output_co2e_biochar.reset_index(inplace=True)
+    emissions_output_co2e_biochar["flow_long"] = "CharPallets"
+    emissions_output_co2e_biochar.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ],
+        inplace=True,
+    )
+
+    # change units from Mt CO2e to CharPallets
+    mtco2e_per_charpallet = 22e-6
+    charpallet_adoption = (
+        emissions_output_co2e_biochar / -mtco2e_per_charpallet
+    )
+
+    # add charpallet_adoption to adoption_output_projections
+    technology_adoption_output.columns = (
+        technology_adoption_output.columns.astype(int)
+    )
+    technology_adoption_output = pd.concat(
+        [technology_adoption_output, charpallet_adoption]
+    )
+
+    # reduce memory usage
+    technology_adoption_output = technology_adoption_output.astype("float32")
+
+    # save to parquet, update columns to be strings
+    technology_adoption_output.columns = (
+        technology_adoption_output.columns.astype(str)
+    )
+    technology_adoption_output.to_parquet(
+        "podi/data/technology_adoption_output.parquet", compression="brotli"
+    )
+
+    # Estimate flux and max extent for Priority Markets for High-Temp Biochar identified by APL:
+
+    # Carbon Removal & Sequestration
+    # Water Filtration
+    # Activated Carbon Market (low end)
+    # Construction Materials
+
     # endregion
 
     ###########################################

@@ -698,13 +698,13 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         # flow_long, flow_short indices
         each["product_category"] = "AFOLU"
 
-        each["product_long"] = (
+        each["flow_long"] = (
             each["variable"].str.split("|", expand=True)[0].values
         )
-        each["product_short"] = each["product_long"]
+        each["flow_short"] = each["flow_long"]
 
         def addsector(x):
-            if x["product_long"] in [
+            if x["flow_long"] in [
                 "Biochar",
                 "Cropland Soil Health",
                 "Nitrogen Fertilizer Management",
@@ -713,7 +713,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Agroforestry",
             ]:
                 return "Agriculture"
-            elif x["product_long"] in [
+            elif x["flow_long"] in [
                 "Improved Forest Management",
                 "Natural Regeneration",
                 "Avoided Coastal Impacts",
@@ -729,7 +729,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         each["flow_category"] = "AFOLU Negative Emissions"
 
         def addgas(x):
-            if x["product_long"] in [
+            if x["flow_long"] in [
                 "Biochar",
                 "Cropland Soil Health",
                 "Optimal Intensity",
@@ -742,19 +742,19 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 "Coastal Restoration",
                 "Peat Restoration",
             ]:
-                return "CO2"
-            if x["product_long"] in [
+                return "CO2 (from AFOLU)"
+            if x["flow_long"] in [
                 "Improved Rice",
             ]:
-                return "CH4"
-            if x["product_long"] in [
+                return "CH4 (from AFOLU)"
+            if x["flow_long"] in [
                 "Improved Rice",
                 "Nitrogen Fertilizer Management",
             ]:
-                return "N2O"
+                return "N2O (from AFOLU)"
 
-        each["flow_long"] = each.parallel_apply(lambda x: addgas(x), axis=1)
-        each["flow_short"] = each["flow_long"]
+        each["product_long"] = each.parallel_apply(lambda x: addgas(x), axis=1)
+        each["product_short"] = each["product_long"]
 
         each = (
             each.reset_index()
@@ -787,7 +787,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
             afolu_output,
             afolu_output[
                 (
-                    afolu_output.reset_index().product_long == "Improved Rice"
+                    afolu_output.reset_index().flow_long == "Improved Rice"
                 ).values
             ].rename(index={"CH4": "N2O"}),
         ]
