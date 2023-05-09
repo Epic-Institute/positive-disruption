@@ -137,6 +137,3 @@ dmypy.json
 
 # Large files
 IEA/
-
-# Other
-perspective_test.ipynb
