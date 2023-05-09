@@ -128,7 +128,7 @@ data_controls_dropdowns = {
         "product_long",
         # "product_short",
         # "flow_category",
-        # "flow_long",
+        "flow_long",
         # "flow_short",
         # "unit",
     ],
@@ -531,8 +531,9 @@ def set_data_and_chart_control_options(
     graph_output_dropdown_values = {
         "energy_output": ["Energy Supply & Demand"],
         "emissions_output_co2e": [
-            "All Emissions",
+            "Emissions Sources",
             "Negative Emissions",
+            "Net Emissions",
             "Emissions Mitigated",
         ],
         "climate_output_concentration": [
@@ -547,7 +548,7 @@ def set_data_and_chart_control_options(
     # define graph_output_dropdown_values_default
     graph_output_dropdown_values_default = {
         "energy_output": "Energy Supply & Demand",
-        "emissions_output_co2e": "Emissions",
+        "emissions_output_co2e": "Emissions Sources",
         "climate_output_concentration": "GHG Concentration",
         "climate_output_temperature": "Temperature Change",
         "climate_output_forcing": "Radiative Forcing",
@@ -618,12 +619,12 @@ def set_data_and_chart_control_options(
     # define group_by_dropdown_values_default
     group_by_dropdown_values_default = {
         "energy_output": ["sector", "product_long"],
-        "emissions_output_co2e": ["product_long"],
+        "emissions_output_co2e": ["flow_long"],
         "afolu_output": "flow_long",
         "climate_output_concentration": ["scenario", "gas"],
         "climate_output_temperature": "scenario",
         "climate_output_forcing": "scenario",
-        "technology_adoption_output": "product_long",
+        "technology_adoption_output": "flow_long",
     }
 
     group_by_dropdown_values = group_by_dropdown_values[model_output]
@@ -1467,57 +1468,6 @@ def update_output_graph(
     else:
         df = df.loc[tuple([*index_values])]
 
-    # prevent error if all of the group_by_dropdown_values selections each have less than 2 options
-    try:
-        all(
-            len(df.index.get_level_values(groupby_name).unique()) < 2
-            for groupby_name in group_by_dropdown_values
-        )
-    except IndexError:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="At least one of the selections in the 'GROUP BY' menu must have more than one option with nonzero data.",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
-
-    if all(
-        len(index_values[df.index.names.index(groupby_name)]) < 2
-        for groupby_name in group_by_dropdown_values
-    ):
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="At least one of the selections in the 'GROUP BY' menu must have more than one option with nonzero data.",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
-
     # check if filtered_df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
         filtered_df = (
@@ -1636,32 +1586,6 @@ def update_output_graph(
         | {"year": "int", "value": "float32"}
     )
 
-    # prevent error if all of the group_by_dropdown_values selections each have less than 2 options
-    try:
-        filtered_df.sort_values("value", ascending=False)[
-            group_by_dropdown_values
-        ].drop_duplicates().squeeze().values
-    except AttributeError:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="At least one of the selections in the 'GROUP BY' menu must have more than one option with nonzero data.",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
-
     # if graph_type is 'Table', return a table
     if graph_type == "Table":
         fig = go.Figure(
@@ -1689,13 +1613,20 @@ def update_output_graph(
 
         i = 0
 
+        # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
+        group_by_dropdown_values = (
+            [group_by_dropdown_values]
+            if isinstance(group_by_dropdown_values, str)
+            else group_by_dropdown_values
+        )
+        sorted_df = filtered_df.sort_values("value", ascending=False)[
+            group_by_dropdown_values
+        ].drop_duplicates()
+
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[
-                group_by_dropdown_values
-            ]
-            .drop_duplicates()
-            .squeeze()
-            .values
+            sorted_df.iloc[:, 0].tolist()
+            if len(group_by_dropdown_values) == 1
+            else sorted_df.to_records(index=False).tolist()
         ):
             if isinstance(sub, str):
                 name = str(sub).capitalize()
@@ -1713,7 +1644,15 @@ def update_output_graph(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>"),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1741,7 +1680,15 @@ def update_output_graph(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>"),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1773,6 +1720,11 @@ def update_output_graph(
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
@@ -1850,19 +1802,35 @@ def update_output_graph(
         elif yaxis_type == "% of Final Year Value":
             fig.update_yaxes(title="% of Final Year Value")
 
-    elif graph_output == "Emissions":
+    elif graph_output == "Emissions Sources":
         fig = go.Figure()
 
         i = 0
 
+        # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
+        group_by_dropdown_values = (
+            [group_by_dropdown_values]
+            if isinstance(group_by_dropdown_values, str)
+            else group_by_dropdown_values
+        )
+        sorted_df = filtered_df.sort_values("value", ascending=False)[
+            group_by_dropdown_values
+        ].drop_duplicates()
+
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[
-                group_by_dropdown_values
-            ]
-            .drop_duplicates()
-            .squeeze()
-            .values
+            sorted_df.iloc[:, 0].tolist()
+            if len(group_by_dropdown_values) == 1
+            else sorted_df.to_records(index=False).tolist()
         ):
+            if any(
+                x < 0
+                for x in pd.DataFrame(filtered_df)
+                .set_index(group_by_dropdown_values)
+                .loc[[sub]]["value"]
+                .values
+            ):
+                continue
+
             if isinstance(sub, str):
                 name = str(sub).capitalize()
             else:
@@ -1873,6 +1841,11 @@ def update_output_graph(
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
@@ -1900,6 +1873,11 @@ def update_output_graph(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
                             width=3,
@@ -1924,6 +1902,11 @@ def update_output_graph(
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
@@ -2036,13 +2019,20 @@ def update_output_graph(
 
         i = 0
 
+        # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
+        group_by_dropdown_values = (
+            [group_by_dropdown_values]
+            if isinstance(group_by_dropdown_values, str)
+            else group_by_dropdown_values
+        )
+        sorted_df = filtered_df.sort_values("value", ascending=False)[
+            group_by_dropdown_values
+        ].drop_duplicates()
+
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[
-                group_by_dropdown_values
-            ]
-            .drop_duplicates()
-            .squeeze()
-            .values
+            sorted_df.iloc[:, 0].tolist()
+            if len(group_by_dropdown_values) == 1
+            else sorted_df.to_records(index=False).tolist()
         ):
             if all(
                 x >= 0
@@ -2063,6 +2053,11 @@ def update_output_graph(
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
@@ -2090,6 +2085,11 @@ def update_output_graph(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
                             width=3,
@@ -2114,6 +2114,214 @@ def update_output_graph(
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3, color=graph_template["linecolor"][i]
+                        ),
+                        x=filtered_df["year"].drop_duplicates(),
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]["value"]
+                        .values,
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=True,
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                    )
+                )
+
+            i += 1
+
+        if graph_type not in ["none"]:
+            fig.add_trace(
+                go.Scatter(
+                    name="Net Emissions",
+                    line=dict(width=5, color="magenta", dash="dashdot"),
+                    x=filtered_df[
+                        (filtered_df["year"] >= date_range[0])
+                        & (filtered_df["year"] <= date_range[1])
+                    ]["year"].drop_duplicates(),
+                    y=pd.Series(
+                        filtered_df[
+                            (filtered_df.year >= date_range[0])
+                            & (filtered_df.year <= date_range[1])
+                        ]
+                        .groupby("year")
+                        .sum(numeric_only=True)["value"]
+                        .values
+                        * 0,
+                        index=filtered_df[
+                            (filtered_df["year"] >= date_range[0])
+                            & (filtered_df["year"] <= date_range[1])
+                        ]["year"].drop_duplicates(),
+                    ),
+                    fill="none",
+                    stackgroup=stack_type[graph_type],
+                    showlegend=True,
+                    hovertemplate=graph_template["hovertemplate"],
+                    groupnorm=groupnorm,
+                )
+            )
+
+        # add shaded region to indicate Projection
+        fig.add_vrect(
+            x0=max(data_end_year, date_range[0]),
+            x1=date_range[1],
+            y0=0,
+            y1=1,
+            fillcolor="LightGrey",
+            opacity=0.25,
+            layer="above",
+            line_width=0,
+            annotation_text="Projection",
+            annotation_position="top left",
+        )
+
+        fig.update_layout(
+            title={
+                "text": "<b>"
+                + model_output_dict[model_output]
+                + "</b>, grouped by "
+                + "<b>"
+                + " & ".join(
+                    str(x.replace("_long", "")).capitalize()
+                    for x in group_by_dropdown_values
+                ),
+                "xanchor": "center",
+                "x": 0.5,
+                "y": 0.99,
+            },
+            template="plotly_white",
+            margin=dict(t=25, b=0, l=0, r=0),
+        )
+
+        fig.update_yaxes(
+            title=str(units[0]),
+            type="log" if yaxis_type == "Log" else "linear",
+            spikemode="toaxis",
+        )
+
+        fig.update_xaxes(spikemode="toaxis")
+
+        if yaxis_type == "Cumulative":
+            fig.update_yaxes(title="Cumulative " + str(units[0]))
+        elif yaxis_type == "% of Cumulative at Final Year":
+            fig.update_yaxes(
+                title="% of Cumulative at Final Year " + str(units[0])
+            )
+        elif yaxis_type == "% of Annual Total":
+            fig.update_yaxes(title="% of Annual Total")
+        elif yaxis_type == "% Change YOY":
+            fig.update_yaxes(title="% Change YOY")
+        elif yaxis_type == "% of Maximum Value":
+            fig.update_yaxes(title="% of Maximum Value")
+        elif yaxis_type == "% of Final Year Value":
+            fig.update_yaxes(title="% of Final Year Value")
+
+    elif graph_output == "Net Emissions":
+        fig = go.Figure()
+
+        i = 0
+
+        # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
+        group_by_dropdown_values = (
+            [group_by_dropdown_values]
+            if isinstance(group_by_dropdown_values, str)
+            else group_by_dropdown_values
+        )
+        sorted_df = filtered_df.sort_values("value", ascending=False)[
+            group_by_dropdown_values
+        ].drop_duplicates()
+
+        for sub in (
+            sorted_df.iloc[:, 0].tolist()
+            if len(group_by_dropdown_values) == 1
+            else sorted_df.to_records(index=False).tolist()
+        ):
+            if isinstance(sub, str):
+                name = str(sub).capitalize()
+            else:
+                name = ", ".join(str(x).capitalize() for x in sub)
+
+            # if the graph_type is line, add a trace to fig that is solid up to data_end_year and dashdot after
+            if graph_type == "none":
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3,
+                            color=graph_template["linecolor"][i],
+                            dash="solid",
+                        ),
+                        x=filtered_df["year"][
+                            filtered_df["year"] <= data_end_year
+                        ].drop_duplicates(),
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub], : str(data_end_year)]["value"]
+                        .values,
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=True,
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                        legendgroup=name,
+                    )
+                )
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3,
+                            color=graph_template["linecolor"][i],
+                            dash="dashdot",
+                        ),
+                        x=filtered_df["year"].drop_duplicates(),
+                        y=pd.DataFrame(filtered_df)
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]["value"]
+                        .values,
+                        fill=graph_type,
+                        stackgroup=stack_type[graph_type],
+                        showlegend=False,
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                        legendgroup=name,
+                    )
+                )
+            else:
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
@@ -2410,13 +2618,20 @@ def update_output_graph(
 
         i = 0
 
+        # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
+        group_by_dropdown_values = (
+            [group_by_dropdown_values]
+            if isinstance(group_by_dropdown_values, str)
+            else group_by_dropdown_values
+        )
+        sorted_df = filtered_df2.sort_values("value", ascending=False)[
+            group_by_dropdown_values
+        ].drop_duplicates()
+
         for groupby_set_value in (
-            filtered_df2.sort_values("value", ascending=False)[
-                group_by_dropdown_values
-            ]
-            .drop_duplicates()
-            .squeeze()
-            .values
+            sorted_df.iloc[:, 0].tolist()
+            if len(group_by_dropdown_values) == 1
+            else sorted_df.to_records(index=False).tolist()
         ):
             if isinstance(groupby_set_value, str):
                 name = str(groupby_set_value).capitalize()
@@ -2428,6 +2643,11 @@ def update_output_graph(
             fig.add_trace(
                 go.Scatter(
                     name=name.replace("Co2", "CO<sub>2</sub>")
+                    .replace("Ch4", "CH<sub>4</sub>")
+                    .replace("N2o", "N<sub>2</sub>O")
+                    .replace("Nh3", "NH<sub>3</sub>")
+                    .replace("Nox", "NO<sub>x</sub>")
+                    .replace("So2", "SO<sub>2</sub>")
                     .replace("Ch4", "CH<sub>4</sub>")
                     .replace("N2o", "N<sub>2</sub>O"),
                     line=dict(
@@ -2557,13 +2777,20 @@ def update_output_graph(
 
         i = 0
 
+        # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
+        group_by_dropdown_values = (
+            [group_by_dropdown_values]
+            if isinstance(group_by_dropdown_values, str)
+            else group_by_dropdown_values
+        )
+        sorted_df = filtered_df.sort_values("value", ascending=False)[
+            group_by_dropdown_values
+        ].drop_duplicates()
+
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[
-                group_by_dropdown_values
-            ]
-            .drop_duplicates()
-            .squeeze()
-            .values
+            sorted_df.iloc[:, 0].tolist()
+            if len(group_by_dropdown_values) == 1
+            else sorted_df.to_records(index=False).tolist()
         ):
             if isinstance(sub, str):
                 name = str(sub).capitalize()
@@ -2604,7 +2831,9 @@ def update_output_graph(
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
-                        hovertemplate=graph_template["hovertemplate"],
+                        customdata=[str(units[0])],
+                        hovertemplate=graph_template["hovertemplate"]
+                        + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
                         legendgroup=name,
@@ -2643,7 +2872,9 @@ def update_output_graph(
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=False,
-                        hovertemplate=graph_template["hovertemplate"],
+                        customdata=[str(units[0])],
+                        hovertemplate=graph_template["hovertemplate"]
+                        + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
                         legendgroup=name,
@@ -2673,7 +2904,9 @@ def update_output_graph(
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
-                        hovertemplate=graph_template["hovertemplate"],
+                        customdata=[str(units[0])],
+                        hovertemplate=graph_template["hovertemplate"]
+                        + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
                     )
@@ -2740,13 +2973,20 @@ def update_output_graph(
 
         i = 0
 
+        # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
+        group_by_dropdown_values = (
+            [group_by_dropdown_values]
+            if isinstance(group_by_dropdown_values, str)
+            else group_by_dropdown_values
+        )
+        sorted_df = filtered_df.sort_values("value", ascending=False)[
+            group_by_dropdown_values
+        ].drop_duplicates()
+
         for sub in (
-            filtered_df.sort_values("value", ascending=False)[
-                group_by_dropdown_values
-            ]
-            .drop_duplicates()
-            .squeeze()
-            .values
+            sorted_df.iloc[:, 0].tolist()
+            if len(group_by_dropdown_values) == 1
+            else sorted_df.to_records(index=False).tolist()
         ):
             if isinstance(sub, str):
                 name = str(sub).capitalize()
@@ -2758,6 +2998,11 @@ def update_output_graph(
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(
@@ -2828,6 +3073,11 @@ def update_output_graph(
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
                         .replace("Ch4", "CH<sub>4</sub>")
                         .replace("N2o", "N<sub>2</sub>O"),
                         line=dict(

@@ -290,7 +290,7 @@ climate_output_forcing.columns = climate_output_forcing.columns.astype(int)
 # RESULTS ANALYSIS #
 ####################
 
-recalc_analysis = False
+recalc_analysis = True
 # region
 
 if recalc_analysis is True:
