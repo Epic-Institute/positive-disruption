@@ -754,6 +754,7 @@ def set_data_and_chart_control_options(
 
     # define data_controls_default for a given model_output
     data_controls_default = {
+
         "energy_output": {"flow_category": ["Final consumption"]},
         # "emissions_output_co2e": {
         #     "region": [],
@@ -796,6 +797,7 @@ def set_data_and_chart_control_options(
     column_dtypes = {j: "float32" for j in df.columns}
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
+
 
     # define data_controls_dropdowns that should allow for multi-selection
     data_controls_dropdowns_multiselect = {
@@ -864,8 +866,9 @@ def set_data_and_chart_control_options(
         inplace=True,
     )
 
-    # define list of data controls
-    index_to_data_controls = []
+    # define list of data controls, labels, and tooltips
+    div_elements = []
+
     for level in df.index.names:
         # if df_index_custom_default is defined and level is in
         # df_index_custom_default, use df_index_custom_default[level] as
@@ -877,7 +880,15 @@ def set_data_and_chart_control_options(
         else:
             default_value = df.reset_index()[level].unique().tolist()[-1]
 
-        index_to_data_controls.append(
+        div_elements.append(
+            html.Label(
+                level.replace("_", " ").replace("long", "").title(),
+                id=level + "-label",
+                className="select-label",
+            )
+        )
+
+        div_elements.append(
             html.Div(
                 [
                     dcc.Dropdown(
@@ -898,20 +909,7 @@ def set_data_and_chart_control_options(
             )
         )
 
-    index_to_data_controls_labels = []
-    for level in df.index.names:
-        index_to_data_controls_labels.append(
-            html.Label(
-                level.replace("_", " ").replace("long", "").title(),
-                id=level + "-label",
-                className="select-label",
-            )
-        )
-
-    # make tooltips for each data control label
-    index_to_data_controls_tooltips = []
-    for level in df.index.names:
-        index_to_data_controls_tooltips.append(
+        div_elements.append(
             dbc.Tooltip(
                 tooltip_dict[level],
                 target=level + "-label",
@@ -922,15 +920,7 @@ def set_data_and_chart_control_options(
 
     # define data_controls layout
     data_controls = html.Div(
-        [
-            element
-            for pair in zip(
-                index_to_data_controls_labels,
-                index_to_data_controls_tooltips,
-                index_to_data_controls,
-            )
-            for element in pair
-        ]
+        div_elements
     )
 
     #
@@ -1086,6 +1076,7 @@ def update_data_controls(
     data_controls_values,
     *index_values,
 ):
+
     # read model_output data
     expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
     if os.path.isdir(expanded_home_path):
@@ -1349,6 +1340,7 @@ def update_output_graph(
 
     # drop empty index_values
     index_values = [value for value in index_values if value]
+
 
     # read model_output data
     expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
