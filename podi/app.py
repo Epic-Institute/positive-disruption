@@ -808,8 +808,11 @@ def set_data_and_chart_control_options(model_output):
     # drop unused columns
     df.drop(columns=df_index_exclude_dict[model_output], inplace=True)
 
-    # define list of data controls
+    # define list of data controls, labels, and tooltips
     index_to_data_controls = []
+    index_to_data_controls_labels = []
+    index_to_data_controls_tooltips = []
+
     for level in df.index.names:
         # if df_index_custom_default is defined and level is in
         # df_index_custom_default, use df_index_custom_default[level] as
@@ -842,8 +845,6 @@ def set_data_and_chart_control_options(model_output):
             )
         )
 
-    index_to_data_controls_labels = []
-    for level in df.index.names:
         index_to_data_controls_labels.append(
             html.Label(
                 level.replace("_", " ").replace("long", "").title(),
@@ -852,9 +853,6 @@ def set_data_and_chart_control_options(model_output):
             )
         )
 
-    # make tooltips for each data control label
-    index_to_data_controls_tooltips = []
-    for level in df.index.names:
         index_to_data_controls_tooltips.append(
             dbc.Tooltip(
                 tooltip_dict[level],
@@ -876,6 +874,16 @@ def set_data_and_chart_control_options(model_output):
             for element in pair
         ]
     )
+
+    print([
+            element
+            for pair in zip(
+                index_to_data_controls_labels,
+                index_to_data_controls_tooltips,
+                index_to_data_controls,
+            )
+            for element in pair
+        ])
 
     #
 
