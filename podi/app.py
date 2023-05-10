@@ -852,7 +852,8 @@ def set_data_and_chart_control_options(model_output):
                                 id=level + "-deselect-all",
                                 className="deselect-all-option",
                             )
-                        ]
+                        ],
+                        className="select-all-container"
                     ),
                     dcc.Checklist(
                         id=level,
