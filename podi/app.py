@@ -24,6 +24,9 @@ app = dash.Dash(
 # Expose Flask instance
 server = app.server
 
+# define data
+data = {}
+
 # define year ranges of data and projections
 data_start_year = 1990
 data_end_year = 2020
@@ -798,6 +801,8 @@ def set_data_and_chart_control_options(
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
+    # store units for use in graph axis label
+    data['units'] = df["unit"].unique().tolist()
 
     # define data_controls_dropdowns that should allow for multi-selection
     data_controls_dropdowns_multiselect = {
@@ -865,6 +870,9 @@ def set_data_and_chart_control_options(
         ].tolist(),
         inplace=True,
     )
+
+    # set global dataframe
+    data['df'] = df
 
     # define list of data controls, labels, and tooltips
     div_elements = []
@@ -1350,50 +1358,9 @@ def update_output_graph(
         data_path = "data/"
     else:
         raise FileNotFoundError("Data directory not found")
-
-    df = pd.read_parquet(os.path.join(data_path, model_output + ".parquet"))
-    index_dtypes = {k: "category" for k in df.index.names}
-    column_dtypes = {j: "float32" for j in df.columns}
-    dtypes = {**index_dtypes, **column_dtypes}
-    df = df.reset_index().astype(dtypes)
-
-    # store units for use in graph axis label
-    units = df["unit"].unique().tolist()
-
-    # drop the columns that are numerical and not in the range of data_start_year to proj_end_year
-    df.drop(
-        columns=[
-            col
-            for col in df.columns
-            if col.isdigit()
-            and int(col) not in range(data_start_year, proj_end_year + 1)
-        ],
-        inplace=True,
-    )
-
-    # set index
-    df.set_index(
-        df.columns[
-            (
-                ~df.columns.isin(
-                    str(f"{i}")
-                    for i in range(data_start_year, proj_end_year + 1)
-                )
-            )
-            & (df.columns.isin(data_controls_dropdowns[model_output]))
-        ].tolist(),
-        inplace=True,
-    )
-
-    # drop unused columns (at this point all columns that are not numerical)
-    df.drop(
-        columns=df.columns[
-            ~df.columns.isin(
-                str(f"{i}") for i in range(data_start_year, proj_end_year + 1)
-            )
-        ].tolist(),
-        inplace=True,
-    )
+    
+    df = data['df']
+    units = data['units']
 
     # remove index values at locations where df.index.names is not in data_controls_dropdowns[model_output]
     index_values = [
