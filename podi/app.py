@@ -1056,32 +1056,6 @@ def set_data_and_chart_control_options(
         ),
     )
 
-    # define unused data controls layout as the values in all_possible_index_values that are not in df.index.names
-    # unused_data_controls = html.Div(
-    #     [
-    #         html.Div(
-    #             [
-    #                 dcc.Dropdown(
-    #                     [],
-    #                     [],
-    #                     id=level,
-    #                     multi=True,
-    #                     style={
-    #                         "maxHeight": "45px",
-    #                         "overflow-y": "scroll",
-    #                         "border": "1px solid #d6d6d6",
-    #                         "border-radius": "5px",
-    #                         "outline": "none",
-    #                     },
-    #                 ),
-    #             ],
-    #             className="mb-0",
-    #         )
-    #         for level in all_possible_index_values
-    #         if level not in df.index.names
-    #     ]
-    # )
-
     return (data_controls, graph_controls)
 
 
@@ -1386,7 +1360,6 @@ def update_output_graph(
     }
 
     # drop empty index_values
-    print(index_values)
     index_values = [value for value in index_values if value]
 
 
