@@ -496,8 +496,6 @@ app.layout = html.Div(
                         ),
                     ],
                 ),
-                # Add hidden divs for unused data controls
-                html.Div(id="unused_data_controls", style={"display": "none"}),
             ],
             className="dbc",
             style={
@@ -520,7 +518,6 @@ app.layout = html.Div(
 @app.callback(
     output=[
         Output("data_controls", "children"),
-        Output("unused_data_controls", "children"),
         Output("graph_controls", "children"),
     ],
     inputs=[Input("model_output", "value")],
@@ -826,6 +823,7 @@ def set_data_and_chart_control_options(
         "flow_long": "The path that a product takes. It can be thought of as 'where the product ends up when it is used'.",
         "variable": "<>",
         "gas": "Select the gas to view",
+        "unit": "Units",
         "group-by": "The graph will display data aggregated by the items selected here",
         "yaxis-type": "Select the y-axis type to view",
         "graph-type": "Select the graph type to view",
@@ -870,22 +868,30 @@ def set_data_and_chart_control_options(
     # define list of data controls, labels, and tooltips
     div_elements = []
 
-    for level in df.index.names:
+    for level in all_possible_index_values:
         # if df_index_custom_default is defined and level is in
         # df_index_custom_default, use df_index_custom_default[level] as
         # default_value
-        if df_index_custom_default and level in df_index_custom_default:
+        if level not in df.index.names:
+            default_value = []
+        elif df_index_custom_default and level in df_index_custom_default:
             default_value = df_index_custom_default[level]
         elif data_controls_dropdowns_multiselect[level]:
             default_value = df.reset_index()[level].unique().tolist()
         else:
             default_value = df.reset_index()[level].unique().tolist()[-1]
 
+        values = [] if level not in df.index.names else df.reset_index()[level].unique().tolist()
+        display = "none" if level not in df.index.names else "block"
+
         div_elements.append(
             html.Label(
                 level.replace("_", " ").replace("long", "").title(),
                 id=level + "-label",
                 className="select-label",
+                style={
+                    "display": display
+                }
             )
         )
 
@@ -914,7 +920,7 @@ def set_data_and_chart_control_options(
                     ),
                     dcc.Checklist(
                         id=level,
-                        options=[{'label': i, 'value': i} for i in df.reset_index()[level].unique().tolist()],
+                        options=[{'label': i, 'value': i} for i in values],
                         value=default_value,
                         labelStyle={
                             "display": "block",
@@ -926,6 +932,7 @@ def set_data_and_chart_control_options(
                     "maxHeight": "200px",
                     "overflow-y": "scroll",
                     "border": "1px solid #d6d6d6",
+                    "display": display
                 }
             )
         )
@@ -1050,32 +1057,32 @@ def set_data_and_chart_control_options(
     )
 
     # define unused data controls layout as the values in all_possible_index_values that are not in df.index.names
-    unused_data_controls = html.Div(
-        [
-            html.Div(
-                [
-                    dcc.Dropdown(
-                        [],
-                        [],
-                        id=level,
-                        multi=True,
-                        style={
-                            "maxHeight": "45px",
-                            "overflow-y": "scroll",
-                            "border": "1px solid #d6d6d6",
-                            "border-radius": "5px",
-                            "outline": "none",
-                        },
-                    ),
-                ],
-                className="mb-0",
-            )
-            for level in all_possible_index_values
-            if level not in df.index.names
-        ]
-    )
+    # unused_data_controls = html.Div(
+    #     [
+    #         html.Div(
+    #             [
+    #                 dcc.Dropdown(
+    #                     [],
+    #                     [],
+    #                     id=level,
+    #                     multi=True,
+    #                     style={
+    #                         "maxHeight": "45px",
+    #                         "overflow-y": "scroll",
+    #                         "border": "1px solid #d6d6d6",
+    #                         "border-radius": "5px",
+    #                         "outline": "none",
+    #                     },
+    #                 ),
+    #             ],
+    #             className="mb-0",
+    #         )
+    #         for level in all_possible_index_values
+    #         if level not in df.index.names
+    #     ]
+    # )
 
-    return (data_controls, unused_data_controls, graph_controls)
+    return (data_controls, graph_controls)
 
 
 """
@@ -1302,7 +1309,6 @@ for level in all_possible_index_values[:-3]:
     output=[Output("output_graph", "figure")],
     inputs=[
         Input("data_controls", "children"),
-        Input("unused_data_controls", "children"),
         Input("model_output", "value"),
         Input("date_range", "value"),
         Input("graph_output", "value"),
@@ -1314,7 +1320,6 @@ for level in all_possible_index_values[:-3]:
 )
 def update_output_graph(
     data_controls_values,
-    unused_data_controls_values,
     model_output,
     date_range,
     graph_output,
@@ -1381,6 +1386,7 @@ def update_output_graph(
     }
 
     # drop empty index_values
+    print(index_values)
     index_values = [value for value in index_values if value]
 
 
