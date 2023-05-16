@@ -24,6 +24,9 @@ app = dash.Dash(
 # Expose Flask instance
 server = app.server
 
+# define data
+data = {}
+
 # define year ranges of data and projections
 data_start_year = 1990
 data_end_year = 2020
@@ -796,6 +799,8 @@ def set_data_and_chart_control_options(
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
+    # store units for use in graph axis label
+    data['units'] = df["unit"].unique().tolist()
 
     # define data_controls_dropdowns that should allow for multi-selection
     data_controls_dropdowns_multiselect = {
@@ -864,6 +869,9 @@ def set_data_and_chart_control_options(
         ].tolist(),
         inplace=True,
     )
+
+    # set global dataframe
+    data['df'] = df
 
     # define list of data controls, labels, and tooltips
     div_elements = []
@@ -1371,50 +1379,9 @@ def update_output_graph(
         data_path = "data/"
     else:
         raise FileNotFoundError("Data directory not found")
-
-    df = pd.read_parquet(os.path.join(data_path, model_output + ".parquet"))
-    index_dtypes = {k: "category" for k in df.index.names}
-    column_dtypes = {j: "float32" for j in df.columns}
-    dtypes = {**index_dtypes, **column_dtypes}
-    df = df.reset_index().astype(dtypes)
-
-    # store units for use in graph axis label
-    units = df["unit"].unique().tolist()
-
-    # drop the columns that are numerical and not in the range of data_start_year to proj_end_year
-    df.drop(
-        columns=[
-            col
-            for col in df.columns
-            if col.isdigit()
-            and int(col) not in range(data_start_year, proj_end_year + 1)
-        ],
-        inplace=True,
-    )
-
-    # set index
-    df.set_index(
-        df.columns[
-            (
-                ~df.columns.isin(
-                    str(f"{i}")
-                    for i in range(data_start_year, proj_end_year + 1)
-                )
-            )
-            & (df.columns.isin(data_controls_dropdowns[model_output]))
-        ].tolist(),
-        inplace=True,
-    )
-
-    # drop unused columns (at this point all columns that are not numerical)
-    df.drop(
-        columns=df.columns[
-            ~df.columns.isin(
-                str(f"{i}") for i in range(data_start_year, proj_end_year + 1)
-            )
-        ].tolist(),
-        inplace=True,
-    )
+    
+    df = data['df']
+    units = data['units']
 
     # remove index values at locations where df.index.names is not in data_controls_dropdowns[model_output]
     index_values = [
@@ -1653,6 +1620,7 @@ def update_output_graph(
 
             # if the graph_type is line, add a trace to fig that is solid up to data_end_year or the last year of historical data and dashdot after (if projections exist)
             if graph_type == "none":
+                data_plot = pd.DataFrame(filtered_df).set_index(group_by_dropdown_values).loc[[sub], : str(data_end_year)]
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
@@ -1671,14 +1639,8 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="solid",
                         ),
-                        x=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub], : str(data_end_year)]["year"]
-                        .values.dropna(),
-                        y=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub], : str(data_end_year)]["value"]
-                        .values.dropna(),
+                        x=data_plot["year"].values.dropna(),
+                        y=data_plot["value"].values.dropna(),
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1689,6 +1651,7 @@ def update_output_graph(
                         legendgroup=name,
                     )
                 )
+                data_plot = pd.DataFrame(filtered_df).set_index(group_by_dropdown_values).loc[[sub], str(data_end_year) : str(proj_end_year)]
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
@@ -1707,18 +1670,8 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="dashdot",
                         ),
-                        x=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub], str(data_end_year) : str(proj_end_year)][
-                            "year"
-                        ]
-                        .values,
-                        y=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub], str(data_end_year) : str(proj_end_year)][
-                            "value"
-                        ]
-                        .values,
+                        x=data_plot["year"].values,
+                        y=data_plot["value"].values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=False,
@@ -1942,27 +1895,22 @@ def update_output_graph(
             i += 1
 
         if graph_type not in ["none"]:
+            plot_data = filtered_df[
+                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+            ]
+
             fig.add_trace(
                 go.Scatter(
                     name="Net Emissions",
                     line=dict(width=5, color="magenta", dash="dashdot"),
-                    x=filtered_df[
-                        (filtered_df["year"] >= date_range[0])
-                        & (filtered_df["year"] <= date_range[1])
-                    ]["year"].drop_duplicates(),
+                    x=plot_data["year"].drop_duplicates(),
                     y=pd.Series(
-                        filtered_df[
-                            (filtered_df.year >= date_range[0])
-                            & (filtered_df.year <= date_range[1])
-                        ]
+                        plot_data
                         .groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
-                        index=filtered_df[
-                            (filtered_df["year"] >= date_range[0])
-                            & (filtered_df["year"] <= date_range[1])
-                        ]["year"].drop_duplicates(),
+                        index=plot_data["year"].drop_duplicates(),
                     ),
                     fill="none",
                     stackgroup=stack_type[graph_type],
@@ -2154,27 +2102,21 @@ def update_output_graph(
             i += 1
 
         if graph_type not in ["none"]:
+            data_plot = filtered_df[
+                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+            ]
             fig.add_trace(
                 go.Scatter(
                     name="Net Emissions",
                     line=dict(width=5, color="magenta", dash="dashdot"),
-                    x=filtered_df[
-                        (filtered_df["year"] >= date_range[0])
-                        & (filtered_df["year"] <= date_range[1])
-                    ]["year"].drop_duplicates(),
+                    x=data_plot["year"].drop_duplicates(),
                     y=pd.Series(
-                        filtered_df[
-                            (filtered_df.year >= date_range[0])
-                            & (filtered_df.year <= date_range[1])
-                        ]
+                        data_plot
                         .groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
-                        index=filtered_df[
-                            (filtered_df["year"] >= date_range[0])
-                            & (filtered_df["year"] <= date_range[1])
-                        ]["year"].drop_duplicates(),
+                        index=data_plot["year"].drop_duplicates(),
                     ),
                     fill="none",
                     stackgroup=stack_type[graph_type],
@@ -2357,27 +2299,21 @@ def update_output_graph(
             i += 1
 
         if graph_type not in ["none"]:
+            data_plot = filtered_df[
+                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+            ]
             fig.add_trace(
                 go.Scatter(
                     name="Net Emissions",
                     line=dict(width=5, color="magenta", dash="dashdot"),
-                    x=filtered_df[
-                        (filtered_df["year"] >= date_range[0])
-                        & (filtered_df["year"] <= date_range[1])
-                    ]["year"].drop_duplicates(),
+                    x=data_plot["year"].drop_duplicates(),
                     y=pd.Series(
-                        filtered_df[
-                            (filtered_df.year >= date_range[0])
-                            & (filtered_df.year <= date_range[1])
-                        ]
+                        data_plot
                         .groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
-                        index=filtered_df[
-                            (filtered_df["year"] >= date_range[0])
-                            & (filtered_df["year"] <= date_range[1])
-                        ]["year"].drop_duplicates(),
+                        index=data_plot["year"].drop_duplicates(),
                     ),
                     fill="none",
                     stackgroup=stack_type[graph_type],
@@ -2653,6 +2589,9 @@ def update_output_graph(
                     str(x).capitalize() for x in groupby_set_value
                 )
 
+            data_plot = filtered_df2[
+                (data_end_year < filtered_df2["year"]) & ((filtered_df2["year"] <= date_range[1]))
+            ]
             fig.add_trace(
                 go.Scatter(
                     name=name.replace("Co2", "CO<sub>2</sub>")
@@ -2667,16 +2606,8 @@ def update_output_graph(
                         width=3,
                         color=graph_template["linecolor"][i],
                     ),
-                    x=filtered_df2[
-                        (filtered_df2["year"] > data_end_year)
-                        & ((filtered_df2["year"] <= date_range[1]))
-                    ]["year"].drop_duplicates(),
-                    y=pd.DataFrame(
-                        filtered_df2[
-                            (filtered_df2.year > data_end_year)
-                            & (filtered_df2.year <= date_range[1])
-                        ]
-                    )
+                    x=data_plot["year"].drop_duplicates(),
+                    y=pd.DataFrame(data_plot)
                     .set_index(group_by_dropdown_values)
                     .loc[[groupby_set_value]]["value"]
                     .values,
@@ -2690,22 +2621,19 @@ def update_output_graph(
             i += 1
 
         if yaxis_type not in ["Log", "Cumulative", "% of Annual Total"]:
+            data_plot = filtered_df2[filtered_df2["year"] >= data_end_year]
             fig.add_trace(
                 go.Scatter(
                     name="Baseline",
                     line=dict(width=5, color="red", dash="dashdot"),
-                    x=filtered_df2[filtered_df2["year"] >= data_end_year][
-                        "year"
-                    ].drop_duplicates(),
+                    x=data_plot["year"].drop_duplicates(),
                     y=pd.Series(
-                        filtered_df2[(filtered_df2.year >= data_end_year)]
+                        data_plot
                         .groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
-                        index=filtered_df2[
-                            filtered_df2["year"] >= data_end_year
-                        ]["year"].drop_duplicates(),
+                        index=data_plot["year"].drop_duplicates(),
                     ).loc[data_end_year:],
                     fill="none",
                     stackgroup="one",
@@ -2812,6 +2740,18 @@ def update_output_graph(
 
             # if the graph_type is line, add a trace to fig that is solid up to data_end_year and dashdot after
             if graph_type == "none":
+                data_plot = (
+                    pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                >= max(data_end_year, date_range[0])
+                            ]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name=name,
@@ -2821,26 +2761,8 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="dashdot",
                         ),
-                        x=pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                >= max(data_end_year, date_range[0])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                >= max(data_end_year, date_range[0])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -2853,6 +2775,18 @@ def update_output_graph(
                     )
                 )
 
+                data_plot = (
+                    pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                <= min(data_end_year, date_range[1])
+                            ]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name=name,
@@ -2862,26 +2796,8 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="solid",
                         ),
-                        x=pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                <= min(data_end_year, date_range[1])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                <= min(data_end_year, date_range[1])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=False,
@@ -2898,22 +2814,21 @@ def update_output_graph(
                     fig.update_layout(legend=dict(traceorder="reversed"))
 
             else:
+                data_plot = (
+                    pd.DataFrame(filtered_df)
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name=name,
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
-                        x=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -3008,6 +2923,15 @@ def update_output_graph(
 
             # if the graph_type is line, add a trace to fig that is solid up to data_end_year and dashdot after
             if graph_type == "none":
+                data_plot = (
+                    pd.DataFrame(
+                            filtered_df[filtered_df["year"] >= data_end_year]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name=name.replace("Co2", "CO<sub>2</sub>")
@@ -3023,20 +2947,8 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="dashdot",
                         ),
-                        x=pd.DataFrame(
-                            filtered_df[filtered_df["year"] >= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(
-                            filtered_df[filtered_df["year"] >= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -3047,6 +2959,15 @@ def update_output_graph(
                     )
                 )
 
+                data_plot = (
+                    pd.DataFrame(
+                            filtered_df[filtered_df["year"] <= data_end_year]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name="Historical",
@@ -3055,20 +2976,8 @@ def update_output_graph(
                             color="black",
                             dash="solid",
                         ),
-                        x=pd.DataFrame(
-                            filtered_df[filtered_df["year"] <= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(
-                            filtered_df[filtered_df["year"] <= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True if i == 1 else False,
