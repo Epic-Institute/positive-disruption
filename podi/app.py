@@ -1282,7 +1282,7 @@ def update_data_controls(
     return (data_controls, unused_data_controls)
 """
 
-for level in all_possible_index_values[:-3]:
+for level in all_possible_index_values:
     @app.callback(
         Output(f"{level}", "value"),
         [
