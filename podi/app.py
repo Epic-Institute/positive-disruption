@@ -1455,13 +1455,6 @@ def update_output_graph(
         )
         return (fig,)
 
-    # choose graph_output
-    filtered_df = (
-        df.groupby(group_by_dropdown_values)
-        .sum(numeric_only=True)
-        .loc[:, str(date_range[0]) : str(date_range[1])]
-    ).T.fillna(0)
-
     # check if filtered_df raises an error
     if filtered_df.empty:
         fig = go.Figure()
