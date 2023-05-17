@@ -56,6 +56,22 @@ def get_empty_fig(label):
 
 no_data_fig = get_empty_fig("No data available for the current set of dropdown selections")
 
+def clean_gas_name(gas_name):
+    clean_name = (
+        gas_name.replace("Co2", "CO<sub>2</sub>")
+            .replace("Ch4", "CH<sub>4</sub>")
+            .replace("N2o", "N<sub>2</sub>O")
+            .replace("Nh3", "NH<sub>3</sub>")
+            .replace("Nox", "NO<sub>x</sub>")
+            .replace("So2", "SO<sub>2</sub>")
+            .replace("Ch4", "CH<sub>4</sub>")
+            .replace("N2o", "N<sub>2</sub>O")
+            .replace("Nh3", "NH<sub>3</sub>")
+            .replace("Nox", "NO<sub>x</sub>")
+            .replace("So2", "SO<sub>2</sub>")
+    )
+    return clean_name
+
 # make dictionary of model_output options that uses common names for keys
 model_output = {
     "energy_output": "Energy Supply & Demand",
@@ -1547,17 +1563,7 @@ def update_output_graph(
                 data_plot = pd.DataFrame(filtered_df).set_index(group_by_dropdown_values).loc[[sub], : str(data_end_year)]
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1578,17 +1584,7 @@ def update_output_graph(
                 data_plot = pd.DataFrame(filtered_df).set_index(group_by_dropdown_values).loc[[sub], str(data_end_year) : str(proj_end_year)]
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1609,14 +1605,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -1730,14 +1719,7 @@ def update_output_graph(
             if graph_type == "none":
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1761,14 +1743,7 @@ def update_output_graph(
                 )
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1791,14 +1766,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -1937,14 +1905,7 @@ def update_output_graph(
             if graph_type == "none":
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1968,14 +1929,7 @@ def update_output_graph(
                 )
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1998,14 +1952,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -2134,14 +2081,7 @@ def update_output_graph(
             if graph_type == "none":
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -2165,14 +2105,7 @@ def update_output_graph(
                 )
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -2195,14 +2128,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -2482,14 +2408,7 @@ def update_output_graph(
             ]
             fig.add_trace(
                 go.Scatter(
-                    name=name.replace("Co2", "CO<sub>2</sub>")
-                    .replace("Ch4", "CH<sub>4</sub>")
-                    .replace("N2o", "N<sub>2</sub>O")
-                    .replace("Nh3", "NH<sub>3</sub>")
-                    .replace("Nox", "NO<sub>x</sub>")
-                    .replace("So2", "SO<sub>2</sub>")
-                    .replace("Ch4", "CH<sub>4</sub>")
-                    .replace("N2o", "N<sub>2</sub>O"),
+                    name=clean_gas_name(name),
                     line=dict(
                         width=3,
                         color=graph_template["linecolor"][i],
@@ -2822,14 +2741,7 @@ def update_output_graph(
                 )
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -2882,14 +2794,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
