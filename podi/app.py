@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, dcc, html
+from dash import Input, Output, State, dcc, html, ctx
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -92,6 +92,7 @@ all_possible_index_values = [
     "unit",
 ]
 
+default_values = {}
 # define model_output index levels that should be included as dropdowns in data_controls
 data_controls_dropdowns = {
     "energy_output": [
@@ -533,8 +534,6 @@ app.layout = html.Div(
                         ),
                     ],
                 ),
-                # Add hidden divs for unused data controls
-                html.Div(id="unused_data_controls", style={"display": "none"}),
             ],
             className="dbc",
             style={
@@ -557,7 +556,6 @@ app.layout = html.Div(
 @app.callback(
     output=[
         Output("data_controls", "children"),
-        Output("unused_data_controls", "children"),
         Output("graph_controls", "children"),
     ],
     inputs=[Input("model_output", "value")],
@@ -865,6 +863,7 @@ def set_data_and_chart_control_options(
         "flow_long": "The path that a product takes. It can be thought of as 'where the product ends up when it is used'.",
         "variable": "<>",
         "gas": "Select the gas to view",
+        "unit": "Units",
         "group-by": "The graph will display data aggregated by the items selected here",
         "yaxis-type": "Select the y-axis type to view",
         "graph-type": "Select the graph type to view",
@@ -912,43 +911,72 @@ def set_data_and_chart_control_options(
     # define list of data controls, labels, and tooltips
     div_elements = []
 
-    for level in df.index.names:
+    for level in all_possible_index_values:
         # if df_index_custom_default is defined and level is in
         # df_index_custom_default, use df_index_custom_default[level] as
         # default_value
-        if df_index_custom_default and level in df_index_custom_default:
+        if level not in df.index.names:
+            default_value = []
+        elif df_index_custom_default and level in df_index_custom_default:
             default_value = df_index_custom_default[level]
         elif data_controls_dropdowns_multiselect[level]:
             default_value = df.reset_index()[level].unique().tolist()
         else:
             default_value = df.reset_index()[level].unique().tolist()[-1]
 
+        values = [] if level not in df.index.names else df.reset_index()[level].unique().tolist()
+        display = "none" if level not in df.index.names else "block"
+
         div_elements.append(
             html.Label(
                 level.replace("_", " ").replace("long", "").title(),
                 id=level + "-label",
                 className="select-label",
+                style={
+                    "display": display
+                }
             )
         )
+
+        if not type(default_value) is list:
+            default_value = [default_value]
+
+        default_values[level] = default_value
 
         div_elements.append(
             html.Div(
                 [
-                    dcc.Dropdown(
-                        df.reset_index()[level].unique().tolist(),
-                        default_value,
+                    html.Div(
+                        [
+                            html.Button(
+                                "Select all",
+                                id=level + "-select-all",
+                                className="select-all-option",
+                            ),
+                            html.Button(
+                                "Deselect all",
+                                id=level + "-deselect-all",
+                                className="deselect-all-option",
+                            )
+                        ],
+                        className="select-all-container"
+                    ),
+                    dcc.Checklist(
                         id=level,
-                        multi=True,
-                        style={
-                            # "maxHeight": "45px",
-                            # "overflow-y": "scroll",
-                            # "border": "1px solid #d6d6d6",
-                            # "border-radius": "5px",
-                            "outline": "none",
+                        options=[{'label': i, 'value': i} for i in values],
+                        value=default_value,
+                        labelStyle={
+                            "display": "block",
+                            "color": "black"
                         },
                     ),
                 ],
-                className="mb-0" if level == df.index.names[-1] else "mb-3",
+                style={
+                    "maxHeight": "200px",
+                    "overflow-y": "scroll",
+                    "border": "1px solid #d6d6d6",
+                    "display": display
+                }
             )
         )
 
@@ -1071,33 +1099,7 @@ def set_data_and_chart_control_options(
         ),
     )
 
-    # define unused data controls layout as the values in all_possible_index_values that are not in df.index.names
-    unused_data_controls = html.Div(
-        [
-            html.Div(
-                [
-                    dcc.Dropdown(
-                        [],
-                        [],
-                        id=level,
-                        multi=True,
-                        style={
-                            "maxHeight": "45px",
-                            "overflow-y": "scroll",
-                            "border": "1px solid #d6d6d6",
-                            "border-radius": "5px",
-                            "outline": "none",
-                        },
-                    ),
-                ],
-                className="mb-0",
-            )
-            for level in all_possible_index_values
-            if level not in df.index.names
-        ]
-    )
-
-    return (data_controls, unused_data_controls, graph_controls)
+    return (data_controls, graph_controls)
 
 
 """
@@ -1297,13 +1299,33 @@ def update_data_controls(
     return (data_controls, unused_data_controls)
 """
 
+for level in all_possible_index_values:
+    @app.callback(
+        Output(f"{level}", "value"),
+        [
+            Input(f"{level}-select-all", "n_clicks"),
+            Input(f"{level}-deselect-all", "n_clicks")
+        ],
+        [State(f"{level}", "options")],
+        prevent_initial_call=True
+    )
+    def update_options(
+        btn1,
+        btn2,
+        options
+    ):
+        selected = default_values[level]
+        if ctx.triggered_id.endswith("-select-all"):
+            selected = [option['value'] for option in options]
+        elif ctx.triggered_id.endswith("-select-all"):
+            selected = []
+        return selected
 
 # update graph
 @app.callback(
     output=[Output("output_graph", "figure")],
     inputs=[
         Input("data_controls", "children"),
-        Input("unused_data_controls", "children"),
         Input("model_output", "value"),
         Input("date_range", "value"),
         Input("graph_output", "value"),
@@ -1315,7 +1337,6 @@ def update_data_controls(
 )
 def update_output_graph(
     data_controls_values,
-    unused_data_controls_values,
     model_output,
     date_range,
     graph_output,
@@ -1421,10 +1442,10 @@ def update_output_graph(
         )
 
     # filter df based on index_values. Retain the old behavior, use `series.index.isin(sequence, level=1)` if `index_values` is a list of lists
-    if isinstance(index_values[0], list):
-        df = df[df.index.isin(index_values, level=1)]
-    else:
-        df = df.loc[tuple([*index_values])]
+    # if isinstance(index_values[0], list):
+    #     df = df[df.index.isin(index_values, level=1)]
+    # else:
+    df = df.loc[tuple([*index_values])]
 
     # check if filtered_df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
