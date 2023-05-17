@@ -32,6 +32,30 @@ data_start_year = 1990
 data_end_year = 2020
 proj_end_year = 2100
 
+# definen empy figure
+def get_empty_fig(label):
+    fig = go.Figure()
+    fig.update_layout(
+        annotations=[
+            dict(
+                text=label,
+                xref="paper",
+                yref="paper",
+                x=0.5,
+                y=0.5,
+                showarrow=False,
+                font=dict(
+                    size=24,
+                    color="rgba(128, 128, 128, 0.5)",
+                ),
+                align="center",
+            )
+        ],
+    )
+    return fig
+
+no_data_fig = get_empty_fig("No data available for the current set of dropdown selections")
+
 # make dictionary of model_output options that uses common names for keys
 model_output = {
     "energy_output": "Energy Supply & Demand",
@@ -1373,47 +1397,11 @@ def update_output_graph(
     try:
         df.loc[tuple([*index_values])]
     except KeyError:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="No data available for the current set of dropdown selections",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
+        return (no_data_fig,)
 
     # prevent error if group_by_dropdown_values is empty
     if not group_by_dropdown_values:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="Select a variable to group by in the 'GROUP BY' menu above",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
+        return (get_empty_fig("Select a variable to group by in the 'GROUP BY' menu above"),)
 
     # make group_by_dropdown_values an array if it is not already
     if not isinstance(group_by_dropdown_values, list):
@@ -1435,47 +1423,11 @@ def update_output_graph(
             .loc[:, str(date_range[0]) : str(date_range[1])]
         ).T.fillna(0)
     except KeyError:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="No data available for the current set of dropdown selections",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
+        return (no_data_fig,)
 
     # check if filtered_df raises an error
     if filtered_df.empty:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="No data available for the current set of dropdown selections",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
+        return (no_data_fig,)
 
     if yaxis_type == "Cumulative":
         filtered_df = filtered_df.cumsum()
@@ -2353,46 +2305,10 @@ def update_output_graph(
     elif graph_output == "Emissions Mitigated":
         # prevent confusing output if two scenarios are not selected
         if len(df.index.get_level_values("scenario").unique()) < 2:
-            fig = go.Figure()
-            fig.update_layout(
-                annotations=[
-                    dict(
-                        text="Choose two scenarios to compare",
-                        xref="paper",
-                        yref="paper",
-                        x=0.5,
-                        y=0.5,
-                        showarrow=False,
-                        font=dict(
-                            size=24,
-                            color="rgba(128, 128, 128, 0.5)",
-                        ),
-                        align="center",
-                    )
-                ],
-            )
-            return (fig,)
+            return (get_empty_fig("Choose two scenarios to compare"),)
         # prevent confusing output if groupby contains scenario
         if "scenario" in group_by_dropdown_values:
-            fig = go.Figure()
-            fig.update_layout(
-                annotations=[
-                    dict(
-                        text="Remove 'scenario' option from GROUP BY",
-                        xref="paper",
-                        yref="paper",
-                        x=0.5,
-                        y=0.5,
-                        showarrow=False,
-                        font=dict(
-                            size=24,
-                            color="rgba(128, 128, 128, 0.5)",
-                        ),
-                        align="center",
-                    )
-                ],
-            )
-            return (fig,)
+            return (get_empty_fig("Remove 'scenario' option from GROUP BY",),)
 
         filtered_df2 = (
             (
