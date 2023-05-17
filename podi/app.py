@@ -64,11 +64,6 @@ def clean_gas_name(gas_name):
             .replace("Nh3", "NH<sub>3</sub>")
             .replace("Nox", "NO<sub>x</sub>")
             .replace("So2", "SO<sub>2</sub>")
-            .replace("Ch4", "CH<sub>4</sub>")
-            .replace("N2o", "N<sub>2</sub>O")
-            .replace("Nh3", "NH<sub>3</sub>")
-            .replace("Nox", "NO<sub>x</sub>")
-            .replace("So2", "SO<sub>2</sub>")
     )
     return clean_name
 
