@@ -870,4 +870,5 @@ label {
 
 .dbc .Select--multi .Select-value {
   border: 1px solid #0ed1d6 !important;
+  background-color: var(--ei-100);
 }
