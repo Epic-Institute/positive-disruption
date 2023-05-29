@@ -26,6 +26,9 @@ server = app.server
 
 # define data
 data = {}
+all_values = {}
+default_values = {}
+
 
 # define year ranges of data and projections
 data_start_year = 1990
@@ -92,7 +95,6 @@ all_possible_index_values = [
     "unit",
 ]
 
-default_values = {}
 # define model_output index levels that should be included as dropdowns in data_controls
 data_controls_dropdowns = {
     "energy_output": [
@@ -942,10 +944,25 @@ def set_data_and_chart_control_options(
             default_value = [default_value]
 
         default_values[level] = default_value
+        all_values[level] = [{'label': i, 'value': i} for i in values]
 
         div_elements.append(
             html.Div(
                 [
+                    html.Div(
+                        [
+                            dcc.Input(
+                                id=level+'-search-box',
+                                value='',
+                                type='text',
+                                placeholder='Search...'
+                            ),
+                            html.Button(
+                                "clear search",
+                                id=level+'-clear-search'
+                            )
+                        ]
+                    ),
                     html.Div(
                         [
                             html.Button(
@@ -963,7 +980,7 @@ def set_data_and_chart_control_options(
                     ),
                     dcc.Checklist(
                         id=level,
-                        options=[{'label': i, 'value': i} for i in values],
+                        options=all_values[level],
                         value=default_value,
                         labelStyle={
                             "display": "block",
@@ -1320,6 +1337,31 @@ for level in all_possible_index_values:
         elif ctx.triggered_id.endswith("-select-all"):
             selected = []
         return selected
+
+for level in all_possible_index_values:
+    @app.callback(
+        Output(f"{level}", "options"),
+        Input(f"{level}-search-box", "value"),
+        prevent_initial_call=True
+    )
+    def update_checklist_values(
+        search_value
+    ):
+        this_level = ctx.triggered_id.split('-')[0]
+        values = [] if this_level not in data['df'].index.names else data['df'].reset_index()[this_level].unique().tolist()
+        options = [{'label': i, 'value': i} for i in values if search_value.lower() in i.lower()]
+        return options
+    
+for level in all_possible_index_values:
+    @app.callback(
+        Output(f"{level}-search-box", "value"),
+        Input(f"{level}-clear-search", "n_clicks"),
+        prevent_initial_call=True
+    )
+    def update_options(
+        btn
+    ):
+        return ''
 
 # update graph
 @app.callback(
