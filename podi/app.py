@@ -26,7 +26,6 @@ server = app.server
 
 # define data
 data = {}
-all_values = {}
 default_values = {}
 
 
@@ -944,7 +943,6 @@ def set_data_and_chart_control_options(
             default_value = [default_value]
 
         default_values[level] = default_value
-        all_values[level] = [{'label': i, 'value': i} for i in values]
 
         div_elements.append(
             html.Div(
@@ -980,7 +978,7 @@ def set_data_and_chart_control_options(
                     ),
                     dcc.Checklist(
                         id=level,
-                        options=all_values[level],
+                        options=[{'label': i, 'value': i} for i in values],
                         value=default_value,
                         labelStyle={
                             "display": "block",
