@@ -27,6 +27,8 @@ server = app.server
 
 # define data
 data = {}
+default_values = {}
+
 
 # define year ranges of data and projections
 data_start_year = 1990
@@ -93,7 +95,6 @@ all_possible_index_names = [
     "unit",
 ]
 
-default_values = {}
 # define model_output index levels that should be included as dropdowns in data_controls
 data_controls_dropdowns = {
     "energy_output": [
@@ -314,7 +315,7 @@ app.layout = html.Div(
                                                     target="model-output",
                                                     placement="top",
                                                     style={
-                                                        "font-size": "0.8rem"
+                                                        "fontSize": "0.8rem"
                                                     },
                                                 ),
                                                 dcc.Dropdown(
@@ -344,7 +345,7 @@ app.layout = html.Div(
                                                     target="date-range",
                                                     placement="top",
                                                     style={
-                                                        "font-size": "0.8rem"
+                                                        "fontSize": "0.8rem"
                                                     },
                                                 ),
                                                 html.Div(
@@ -364,8 +365,8 @@ app.layout = html.Div(
                                                                     ),
                                                                     "style": {
                                                                         "color": "black",
-                                                                        "font-size": "12px",
-                                                                        "white-space": "nowrap",
+                                                                        "fontSize": "12px",
+                                                                        "whiteSpace": "nowrap",
                                                                         "transform": "rotate(45deg)",
                                                                         # "font-weight": "bold",
                                                                     },
@@ -437,8 +438,8 @@ app.layout = html.Div(
                                                                             ],
                                                                             style={
                                                                                 "display": "inline-block",
-                                                                                "vertical-align": "top",
-                                                                                "margin-right": "10px",
+                                                                                "verticalAlign": "top",
+                                                                                "marginRight": "10px",
                                                                             },
                                                                         ),
                                                                         html.Div(
@@ -454,7 +455,7 @@ app.layout = html.Div(
                                                                             ],
                                                                             style={
                                                                                 "display": "inline-block",
-                                                                                "vertical-align": "top",
+                                                                                "verticalAlign": "top",
                                                                             },
                                                                         ),
                                                                         html.Div(
@@ -470,7 +471,7 @@ app.layout = html.Div(
                                                                             ],
                                                                             style={
                                                                                 "display": "inline-block",
-                                                                                "vertical-align": "top",
+                                                                                "verticalAlign": "top",
                                                                             },
                                                                         ),
                                                                         html.Div(
@@ -486,7 +487,7 @@ app.layout = html.Div(
                                                                             ],
                                                                             style={
                                                                                 "display": "inline-block",
-                                                                                "vertical-align": "top",
+                                                                                "verticalAlign": "top",
                                                                             },
                                                                         ),
                                                                     ],
@@ -512,7 +513,7 @@ app.layout = html.Div(
                                                                 "width": "100%",
                                                                 "height": "300px",
                                                                 "border": "none",
-                                                                "border-radius": "30px",
+                                                                "borderRadius": "30px",
                                                             },
                                                         ),
                                                         html.Div(
@@ -531,8 +532,8 @@ app.layout = html.Div(
                                                 )
                                             ],  # make the card corner radius larger and transparent background
                                             style={
-                                                "border-radius": "10px",
-                                                "background-color": "rgba(0,0,0,0)",
+                                                "borderRadius": "10px",
+                                                "backgroundColor": "rgba(0,0,0,0)",
                                             },
                                         ),
                                     ],
@@ -962,6 +963,20 @@ def set_data_and_chart_control_options(
                 [
                     html.Div(
                         [
+                            dcc.Input(
+                                id=level+'-search-box',
+                                value='',
+                                type='text',
+                                placeholder='Search...'
+                            ),
+                            html.Button(
+                                "clear search",
+                                id=level+'-clear-search'
+                            )
+                        ]
+                    ),
+                    html.Div(
+                        [
                             html.Button(
                                 "Select all",
                                 id=level + "-select-all",
@@ -987,7 +1002,7 @@ def set_data_and_chart_control_options(
                 ],
                 style={
                     "maxHeight": "200px",
-                    "overflow-y": "scroll",
+                    "overflowY": "scroll",
                     "border": "1px solid #d6d6d6",
                     "display": display
                 }
@@ -999,7 +1014,7 @@ def set_data_and_chart_control_options(
                 tooltip_dict[level],
                 target=level + "-label",
                 placement="top",
-                style={"font-size": "0.8rem"},
+                style={"fontSize": "0.8rem"},
             )
         )
 
@@ -1023,7 +1038,7 @@ def set_data_and_chart_control_options(
                             tooltip_dict["graph-output"],
                             target="graph-output",
                             placement="top",
-                            style={"font-size": "0.8rem"},
+                            style={"fontSize": "0.8rem"},
                         ),
                         html.Div(
                             [
@@ -1043,7 +1058,7 @@ def set_data_and_chart_control_options(
                             tooltip_dict["group-by"],
                             target="group-by",
                             placement="top",
-                            style={"font-size": "0.8rem"},
+                            style={"fontSize": "0.8rem"},
                         ),
                         html.Div(
                             [
@@ -1070,7 +1085,7 @@ def set_data_and_chart_control_options(
                             tooltip_dict["yaxis-type"],
                             target="yaxis-type",
                             placement="top",
-                            style={"font-size": "0.8rem"},
+                            style={"fontSize": "0.8rem"},
                         ),
                         html.Div(
                             [
@@ -1092,7 +1107,7 @@ def set_data_and_chart_control_options(
                             tooltip_dict["graph-type"],
                             target="graph-type",
                             placement="top",
-                            style={"font-size": "0.8rem"},
+                            style={"fontSize": "0.8rem"},
                         ),
                         html.Div(
                             [
@@ -1263,9 +1278,9 @@ def update_data_controls(
                         multi=True,
                         style={
                             "maxHeight": "45px",
-                            "overflow-y": "scroll",
+                            "overflowY": "scroll",
                             "border": "1px solid #d6d6d6",
-                            "border-radius": "5px",
+                            "borderRadius": "5px",
                             "outline": "none",
                         },
                     ),
@@ -1292,7 +1307,7 @@ def update_data_controls(
                 tooltip_dict[level],
                 target=level + "-label",
                 placement="top",
-                style={"font-size": "0.8rem"},
+                style={"fontSize": "0.8rem"},
             )
         )
 
@@ -1321,9 +1336,9 @@ def update_data_controls(
                         multi=True,
                         style={
                             "maxHeight": "45px",
-                            "overflow-y": "scroll",
+                            "overflowY": "scroll",
                             "border": "1px solid #d6d6d6",
-                            "border-radius": "5px",
+                            "borderRadius": "5px",
                             "outline": "none",
                         },
                     ),
@@ -1359,6 +1374,31 @@ for level in all_possible_index_values:
         elif ctx.triggered_id.endswith("-select-all"):
             selected = []
         return selected
+
+for level in all_possible_index_values:
+    @app.callback(
+        Output(f"{level}", "options"),
+        Input(f"{level}-search-box", "value"),
+        prevent_initial_call=True
+    )
+    def update_checklist_values(
+        search_value
+    ):
+        this_level = ctx.triggered_id.split('-')[0]
+        values = [] if this_level not in data['df'].index.names else data['df'].reset_index()[this_level].unique().tolist()
+        options = [{'label': i, 'value': i} for i in values if search_value.lower() in i.lower()]
+        return options
+    
+for level in all_possible_index_values:
+    @app.callback(
+        Output(f"{level}-search-box", "value"),
+        Input(f"{level}-clear-search", "n_clicks"),
+        prevent_initial_call=True
+    )
+    def update_options(
+        btn
+    ):
+        return ''
 
 # update graph
 @app.callback(
