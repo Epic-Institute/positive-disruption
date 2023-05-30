@@ -3,6 +3,7 @@ import os
 
 import dash
 import dash_bootstrap_components as dbc
+import dask.dataframe as dd
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -78,7 +79,7 @@ model_output = {
 }
 
 # list all possible index names from all model_outputs, to define unused_data_controls
-all_possible_index_values = [
+all_possible_index_names = [
     "model",
     "scenario",
     "region",
@@ -329,7 +330,7 @@ app.layout = html.Div(
                                                     ],
                                                     value=list(
                                                         model_output.keys()
-                                                    )[0],
+                                                    )[1],
                                                     clearable=False,
                                                     className="mb-2",
                                                 ),
@@ -514,6 +515,18 @@ app.layout = html.Div(
                                                                 "border-radius": "30px",
                                                             },
                                                         ),
+                                                        html.Div(
+                                                            [
+                                                                dcc.Input(
+                                                                    id="pandasai-input",
+                                                                    value="Have a question about the data?",
+                                                                    type="text",
+                                                                ),
+                                                                html.Div(
+                                                                    id="pandasai-output"
+                                                                ),
+                                                            ]
+                                                        ),
                                                     ],
                                                 )
                                             ],  # make the card corner radius larger and transparent background
@@ -561,7 +574,7 @@ app.layout = html.Div(
     inputs=[Input("model_output", "value")],
 )
 def set_data_and_chart_control_options(
-    model_output, all_possible_index_values=all_possible_index_values
+    model_output, all_possible_index_names=all_possible_index_names
 ):
     # define graph_output_dropdown_values
     graph_output_dropdown_values = {
@@ -574,7 +587,6 @@ def set_data_and_chart_control_options(
         ],
         "climate_output_concentration": [
             "GHG Concentration",
-            "CO2 Concentration Community Prediction",
         ],
         "climate_output_temperature": ["Temperature Change"],
         "climate_output_forcing": ["Radiative Forcing"],
@@ -614,6 +626,7 @@ def set_data_and_chart_control_options(
             {"label": "Product", "value": "product_long"},
             {"label": "Flow Category", "value": "flow_category"},
             {"label": "Flow", "value": "flow_long"},
+            {"label": "Unit", "value": "unit"},
         ],
         "afolu_output": [
             {"label": "Scenario", "value": "scenario"},
@@ -696,6 +709,7 @@ def set_data_and_chart_control_options(
             "% Change YOY",
             "% of Maximum Value",
             "% of Final Year Value",
+            "PPM",
         ],
         "afolu_output": [
             "Linear",
@@ -790,7 +804,6 @@ def set_data_and_chart_control_options(
 
     # define data_controls_default for a given model_output
     data_controls_default = {
-
         "energy_output": {"flow_category": ["Final consumption"]},
         # "emissions_output_co2e": {
         #     "region": [],
@@ -801,7 +814,7 @@ def set_data_and_chart_control_options(
         # },
         "climate_output_concentration": {
             "scenario": ["baseline", "pathway"],
-            "gas": ["CO2", "CH4", "N2O"],
+            "gas": ["CO2"],
         },
         "climate_output_temperature": {
             "scenario": ["baseline", "pathway"],
@@ -809,7 +822,7 @@ def set_data_and_chart_control_options(
         },
         "climate_output_forcing": {
             "scenario": ["baseline", "pathway"],
-            "gas": ["CO2", "CH4", "N2O"],
+            "gas": ["CO2"],
         },
     }
 
@@ -849,6 +862,7 @@ def set_data_and_chart_control_options(
         "flow_long": True,
         "variable": False,
         "gas": False,
+        "unit": True,
     }
 
     # define tooltip descriptions of data controls and graph_controls dropdowns
@@ -863,7 +877,7 @@ def set_data_and_chart_control_options(
         "flow_long": "The path that a product takes. It can be thought of as 'where the product ends up when it is used'.",
         "variable": "<>",
         "gas": "Select the gas to view",
-        "unit": "Units",
+        "unit": "Select the unit to view",
         "group-by": "The graph will display data aggregated by the items selected here",
         "yaxis-type": "Select the y-axis type to view",
         "graph-type": "Select the graph type to view",
@@ -990,9 +1004,7 @@ def set_data_and_chart_control_options(
         )
 
     # define data_controls layout
-    data_controls = html.Div(
-        div_elements
-    )
+    data_controls = html.Div(div_elements)
 
     #
 
@@ -1099,7 +1111,34 @@ def set_data_and_chart_control_options(
         ),
     )
 
-    return (data_controls, graph_controls)
+    # define unused data controls layout as the values in all_possible_index_names that are not in df.index.names
+    unused_data_controls = html.Div(
+        [
+            html.Div(
+                [
+                    dcc.Dropdown(
+                        [],
+                        [],
+                        id=level,
+                        multi=True,
+                        style={
+                            "maxHeight": "45px",
+                            "overflow-y": "scroll",
+                            "border": "1px solid #d6d6d6",
+                            "border-radius": "5px",
+                            "outline": "none",
+                        },
+                    ),
+                ],
+                className="mb-0",
+            )
+            for level in all_possible_index_names
+            if level not in df.index.names
+        ]
+    )
+
+    return (data_controls, unused_data_controls, graph_controls)
+
 
 
 """
@@ -1113,7 +1152,7 @@ def set_data_and_chart_control_options(
         Input("model_output", "value"),
         Input("data_controls", "children"),
     ],
-    state=[*[State(f"{level}", "value") for level in all_possible_index_values]],
+    state=[*[State(f"{level}", "value") for level in all_possible_index_names]],
     prevent_initial_call=True,
 )
 def update_data_controls(
@@ -1270,7 +1309,7 @@ def update_data_controls(
         ]
     )
 
-    # define unused data controls layout as the values in all_possible_index_values that are not in df.index.names
+    # define unused data controls layout as the values in all_possible_index_names that are not in df.index.names
     unused_data_controls = html.Div(
         [
             html.Div(
@@ -1291,7 +1330,7 @@ def update_data_controls(
                 ],
                 className="mb-0",
             )
-            for level in all_possible_index_values
+            for level in all_possible_index_names
             if level not in df.index.names
         ]
     )
@@ -1332,7 +1371,7 @@ for level in all_possible_index_values:
         Input("group_by_dropdown_values", "value"),
         Input("yaxis_type", "value"),
         Input("graph_type", "value"),
-        *[Input(f"{level}", "value") for level in all_possible_index_values],
+        *[Input(f"{level}", "value") for level in all_possible_index_names],
     ],
 )
 def update_output_graph(
@@ -1405,7 +1444,6 @@ def update_output_graph(
     # drop empty index_values
     index_values = [value for value in index_values if value]
 
-
     # read model_output data
     expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
     if os.path.isdir(expanded_home_path):
@@ -1442,18 +1480,30 @@ def update_output_graph(
         )
 
     # filter df based on index_values. Retain the old behavior, use `series.index.isin(sequence, level=1)` if `index_values` is a list of lists
-    # if isinstance(index_values[0], list):
-    #     df = df[df.index.isin(index_values, level=1)]
-    # else:
-    df = df.loc[tuple([*index_values])]
+    if isinstance(index_values[0], list):
+        filtered_df = df[df.index.isin(index_values, level=1)]
+        df = df[df.index.isin(index_values, level=1)]
+    else:
+        filtered_df = df.loc[tuple([*index_values])]
+        df = df.loc[tuple([*index_values])]
 
     # check if filtered_df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
+        # Resetting the index
+        df_reset = filtered_df.reset_index()
+
+        # Now apply the Dask operations
+        ddf = dd.from_pandas(df_reset, npartitions=16)
+
         filtered_df = (
-            df.groupby(group_by_dropdown_values)
-            .sum(numeric_only=True)
-            .loc[:, str(date_range[0]) : str(date_range[1])]
-        ).T.fillna(0)
+            (
+                ddf.groupby(group_by_dropdown_values)
+                .sum(numeric_only=True)
+                .loc[:, str(date_range[0]) : str(date_range[1])]
+            )
+            .compute()
+            .T.fillna(0)
+        )
     except KeyError:
         return (no_data_fig,)
 
@@ -1717,8 +1767,8 @@ def update_output_graph(
             if len(group_by_dropdown_values) == 1
             else sorted_df.to_records(index=False).tolist()
         ):
-            if any(
-                x < 0
+            if all(
+                x <= 0
                 for x in pd.DataFrame(filtered_df)
                 .set_index(group_by_dropdown_values)
                 .loc[[sub]]["value"]
@@ -1747,7 +1797,7 @@ def update_output_graph(
                         y=pd.DataFrame(filtered_df)
                         .set_index(group_by_dropdown_values)
                         .loc[[sub], : str(data_end_year)]["value"]
-                        .values,
+                        .values.clip(lower=0),
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1769,6 +1819,7 @@ def update_output_graph(
                         y=pd.DataFrame(filtered_df)
                         .set_index(group_by_dropdown_values)
                         .loc[[sub]]["value"]
+                        .clip(lower=0)
                         .values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
@@ -1790,6 +1841,7 @@ def update_output_graph(
                         y=pd.DataFrame(filtered_df)
                         .set_index(group_by_dropdown_values)
                         .loc[[sub]]["value"]
+                        .clip(lower=0)
                         .values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
@@ -2246,12 +2298,54 @@ def update_output_graph(
 
     elif graph_output == "Emissions Mitigated":
         # prevent confusing output if two scenarios are not selected
-        if len(df.index.get_level_values("scenario").unique()) < 2:
-            return (get_empty_fig("Choose two scenarios to compare"),)
+        # make index_values a list if it is not already
+        if not isinstance(index_values[1], list):
+            index_values[1] = [index_values[1]]
+
+        if len(index_values[1]) < 2:
+            fig = go.Figure()
+            fig.update_layout(
+                annotations=[
+                    dict(
+                        text="Choose two scenarios to compare",
+                        xref="paper",
+                        yref="paper",
+                        x=0.5,
+                        y=0.5,
+                        showarrow=False,
+                        font=dict(
+                            size=24,
+                            color="rgba(128, 128, 128, 0.5)",
+                        ),
+                        align="center",
+                    )
+                ],
+            )
+            return (fig,)
+
         # prevent confusing output if groupby contains scenario
         if "scenario" in group_by_dropdown_values:
             return (get_empty_fig("Remove 'scenario' option from GROUP BY",),)
 
+        if yaxis_type == "PPM":
+            units[0] = "PPM"
+            df.update(
+                df.loc[:, : str(data_end_year)].applymap(lambda x: x / 17.3e3)
+            )
+
+            df.update(
+                df.loc[:, str(data_end_year + 1) :].applymap(
+                    lambda x: x / 17.3e3
+                    if isinstance(x, float) and x != int(x) and x > 0
+                    else (
+                        x / 7.8e3
+                        if isinstance(x, float) and x != int(x) and x < 0
+                        else x
+                    )
+                )
+            )
+
+        # calculate difference between baseline and pathway filtered_df
         filtered_df2 = (
             (
                 (
@@ -2352,8 +2446,13 @@ def update_output_graph(
                 .loc[:, str(date_range[0]) : str(date_range[1])]
                 .sum()
             )
-
             spacer.index = spacer.index.astype(int)
+
+            if yaxis_type == "PPM":
+                # filter out negative values
+                spacer[spacer < 0] = 0
+                spacer = spacer.cumsum()
+                spacer = spacer + (415 - spacer.loc[data_end_year])
 
             fig.add_trace(
                 go.Scatter(
@@ -2374,28 +2473,8 @@ def update_output_graph(
                 )
             )
 
-            fig.add_trace(
-                go.Scatter(
-                    name="Pathway",
-                    line=dict(width=5, color="magenta", dash="dashdot"),
-                    x=filtered_df[
-                        (filtered_df["year"] >= data_end_year)
-                        & (filtered_df["year"] <= date_range[1])
-                    ]["year"].drop_duplicates(),
-                    y=spacer[
-                        (spacer.index.values >= data_end_year)
-                        & (spacer.index.values <= date_range[1])
-                    ]
-                    * 0,
-                    fill="none",
-                    stackgroup="one",
-                    showlegend=True,
-                    hovertemplate=graph_template["hovertemplate"],
-                    groupnorm=groupnorm,
-                )
-            )
-
         i = 0
+        j = 0
 
         # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
         group_by_dropdown_values = (
@@ -2406,6 +2485,15 @@ def update_output_graph(
         sorted_df = filtered_df2.sort_values("value", ascending=False)[
             group_by_dropdown_values
         ].drop_duplicates()
+
+        # if "Biochar" is in the name, then put it at the top of the list
+        if any("Biochar" in x for x in sorted_df.iloc[:, 0].tolist()):
+            sorted_df = sorted_df.iloc[
+                sorted_df.iloc[:, 0].str.contains("Biochar").argsort()
+            ]
+
+        # reverse sorted_df
+        sorted_df = sorted_df.iloc[::-1]
 
         for groupby_set_value in (
             sorted_df.iloc[:, 0].tolist()
@@ -2419,45 +2507,137 @@ def update_output_graph(
                     str(x).capitalize() for x in groupby_set_value
                 )
 
-            data_plot = filtered_df2[
-                (data_end_year < filtered_df2["year"]) & ((filtered_df2["year"] <= date_range[1]))
-            ]
-            fig.add_trace(
-                go.Scatter(
-                    name=clean_gas_name(name),
-                    line=dict(
-                        width=3,
-                        color=graph_template["linecolor"][i],
-                    ),
-                    x=data_plot["year"].drop_duplicates(),
-                    y=pd.DataFrame(data_plot)
+            # if name does not contain "Biochar", make name 'Carbon Removal from all other sources'
+            if "Biochar" not in name:
+                name = "Other Sources"
+                y = (
+                    -(
+                        pd.DataFrame(
+                            filtered_df2[
+                                (filtered_df2.year > data_end_year)
+                                & (filtered_df2.year <= date_range[1])
+                            ]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[groupby_set_value]]["value"]
+                    )
+                    * 0.1
+                )
+            else:
+                name = (
+                    name.replace("Biochar as ag soil amendment", "Biochar")
+                    .replace("Biochar for water treatment", "Biochar")
+                    .replace("Biochar as activated carbon", "Biochar")
+                    .replace("Biochar for construction materials", "Biochar")
+                    .replace(
+                        "Biochar for carbon removal & sequestration", "Biochar"
+                    )
+                )
+
+                y = -(
+                    pd.DataFrame(
+                        filtered_df2[
+                            (filtered_df2.year > data_end_year)
+                            & (filtered_df2.year <= date_range[1])
+                        ]
+                    )
                     .set_index(group_by_dropdown_values)
                     .loc[[groupby_set_value]]["value"]
-                    .values,
-                    fill="tonexty",
-                    stackgroup="one",
-                    hovertemplate=graph_template["hovertemplate"],
-                    fillcolor=graph_template["fillcolor"][i],
-                    groupnorm=groupnorm,
                 )
-            )
-            i += 1
+
+            if yaxis_type == "PPM":
+                y = y.cumsum()
+                fig.add_trace(
+                    go.Scatter(
+                        name="Carbon Removal from " + name,
+                        line=dict(
+                            width=3,
+                            color="green"
+                            if "Biochar" in name
+                            else "goldenrod",
+                        ),
+                        x=filtered_df2[
+                            (filtered_df2["year"] > data_end_year)
+                            & ((filtered_df2["year"] <= date_range[1]))
+                        ]["year"].drop_duplicates(),
+                        y=y,
+                        fill="tonexty",
+                        stackgroup="one",
+                        showlegend=True
+                        if (i == 0) & ("Biochar" not in name)
+                        or (j == 0) & ("Biochar" in name)
+                        else False,
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor="green"
+                        if "Biochar" in name
+                        else "goldenrod",
+                        groupnorm=groupnorm,
+                    )
+                )
+
+            else:
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3,
+                            color=graph_template["linecolor"][i],
+                        ),
+                        x=filtered_df2[
+                            (filtered_df2["year"] > data_end_year)
+                            & ((filtered_df2["year"] <= date_range[1]))
+                        ]["year"].drop_duplicates(),
+                        y=y,
+                        fill="tonexty",
+                        stackgroup="one",
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                    )
+                )
+
+            i += 1 if "Biochar" not in name else 0
+            j += 1 if "Biochar" in name else 0
 
         if yaxis_type not in ["Log", "Cumulative", "% of Annual Total"]:
-            data_plot = filtered_df2[filtered_df2["year"] >= data_end_year]
+            baseline = (
+                df[(df.reset_index().scenario == "baseline").values]
+                .loc[:, str(date_range[0]) : str(date_range[1])]
+                .sum()
+            )
+            baseline.index = baseline.index.astype(int)
+
+            baseline[baseline.index.values == data_end_year] = baseline[
+                baseline.index.values == data_end_year
+            ].values + (
+                spacer[spacer.index.values == data_end_year].values
+                - baseline[baseline.index.values == data_end_year].values
+            )
+
+            if yaxis_type == "PPM":
+                baseline = baseline.cumsum()
+                baseline = baseline + (415 - baseline.loc[data_end_year])
+
             fig.add_trace(
                 go.Scatter(
-                    name="Baseline",
-                    line=dict(width=5, color="red", dash="dashdot"),
-                    x=data_plot["year"].drop_duplicates(),
-                    y=pd.Series(
-                        data_plot
-                        .groupby("year")
-                        .sum(numeric_only=True)["value"]
-                        .values
-                        * 0,
-                        index=data_plot["year"].drop_duplicates(),
-                    ).loc[data_end_year:],
+                    name="2. Remove Past Emissions",
+                    line=dict(width=4, color="turquoise", dash="dashdot"),
+                    x=spacer.index.values[
+                        (spacer.index.values >= data_end_year)
+                        & (spacer.index.values <= date_range[1])
+                    ],
+                    y=spacer[
+                        (spacer.index.values >= data_end_year)
+                        & (spacer.index.values <= date_range[1])
+                    ]
+                    * 0,
                     fill="none",
                     stackgroup="one",
                     showlegend=True,
@@ -2468,11 +2648,83 @@ def update_output_graph(
 
             fig.add_trace(
                 go.Scatter(
+                    name="1. Stop Current Emissions",
+                    line=dict(width=4, color="red", dash="dashdot"),
+                    x=spacer.index.values[
+                        (spacer.index.values >= data_end_year)
+                        & (spacer.index.values <= date_range[1])
+                    ],
+                    y=spacer[
+                        (spacer.index.values >= data_end_year)
+                        & (spacer.index.values <= date_range[1])
+                    ],
+                    fill="none",
+                    stackgroup="three",
+                    showlegend=True,
+                    hovertemplate=graph_template["hovertemplate"],
+                    groupnorm=groupnorm,
+                )
+            )
+
+            # fig.add_trace(
+            #     go.Scatter(
+            #         name="Baseline",
+            #         line=dict(width=4, color="red", dash="dashdot"),
+            #         x=baseline.index.values[
+            #             (baseline.index.values >= data_end_year)
+            #             & (baseline.index.values <= date_range[1])
+            #         ],
+            #         y=baseline[
+            #             (baseline.index.values >= data_end_year)
+            #             & (baseline.index.values <= date_range[1])
+            #         ],
+            #         fill="none",
+            #         stackgroup="two",
+            #         showlegend=True,
+            #         hovertemplate=graph_template["hovertemplate"],
+            #         groupnorm=groupnorm,
+            #     )
+            # )
+
+            for m in [0.1, 0.2, 0.35, 0.5, 0.75, 0.9]:
+                fig.add_trace(
+                    go.Scatter(
+                        name="",
+                        line=dict(width=2, color="lightgreen", dash="dashdot"),
+                        x=baseline.index.values[
+                            (baseline.index.values >= data_end_year)
+                            & (baseline.index.values <= date_range[1])
+                        ],
+                        y=spacer[
+                            (spacer.index.values >= data_end_year)
+                            & (spacer.index.values <= date_range[1])
+                        ].values
+                        - (
+                            pd.DataFrame(
+                                filtered_df2[
+                                    (filtered_df2.year >= data_end_year)
+                                    & (filtered_df2.year <= date_range[1])
+                                ]
+                            )
+                            .set_index(group_by_dropdown_values)
+                            .loc[["Biochar as Ag Soil Amendment"]]["value"]
+                        ).cumsum()
+                        * (1 - m),
+                        fill="none",
+                        stackgroup=m,
+                        showlegend=False,
+                        hovertemplate=graph_template["hovertemplate"],
+                        groupnorm=groupnorm,
+                    )
+                )
+
+            fig.add_trace(
+                go.Scatter(
                     name="Historical",
                     line=dict(width=3, color="black"),
-                    x=filtered_df2[filtered_df2["year"] <= data_end_year][
-                        "year"
-                    ].drop_duplicates(),
+                    x=spacer[
+                        spacer.index.values <= data_end_year
+                    ].index.values,
                     y=spacer[spacer.index.values <= data_end_year],
                     fill="none",
                     stackgroup="historical",
@@ -2589,12 +2841,13 @@ def update_output_graph(
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
-                        customdata=[str(units[0])],
-                        hovertemplate=graph_template["hovertemplate"]
-                        + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
+                        customdata=[units],
+                        hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
-                        legendgroup=name,
+                        legendgroup="Biochar"
+                        if "Biochar" in name
+                        else "Total Emissions",
                     )
                 )
 
@@ -2623,13 +2876,27 @@ def update_output_graph(
                         y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
-                        showlegend=False,
-                        customdata=[str(units[0])],
-                        hovertemplate=graph_template["hovertemplate"]
-                        + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
+                        showlegend=True
+                        if pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                <= min(data_end_year, date_range[1])
+                            ]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["year"]
+                        .max()
+                        <= data_end_year
+                        else False,
+                        customdata=[units],
+                        hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
-                        legendgroup=name,
+                        legendgroup="Biochar"
+                        if "Biochar" in name
+                        else "Total Emissions",
                     )
                 )
 
@@ -2771,7 +3038,9 @@ def update_output_graph(
                         hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
-                        legendgroup=name,
+                        legendgroup="Biochar"
+                        if "Biochar" in name
+                        else "Total Emissions",
                     )
                 )
 
@@ -2886,6 +3155,16 @@ def update_output_graph(
 
     return (fig,)
 
+
+# # pandas ai
+# @app.callback(
+#     output= [Output("pandasai-output", "children")],
+#     input= [Input("pandasai-input", "value")],
+# )
+# def pandasai(input):
+
+
+#     return (input,)
 
 if __name__ == "__main__":
     app.run_server(

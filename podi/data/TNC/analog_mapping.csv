@@ -1,8 +1,7 @@
 Vertical,Subvertical,Region,Growth Rate,Analog Name
 Forests & Wetlands,Avoided Coastal Impacts,All,Linear,US Wetlands 2002-2014
-Forests & Wetlands,Avoided Forest Conversion,All,Linear,Avoided Forest Conversion|90 percentile across countries
+Forests & Wetlands,Avoided Forest Conversion,All,Linear,Certification Adoption
 Forests & Wetlands,Avoided Peat Impacts,All,Linear,Certification Adoption
-Agriculture,Biochar,All,S-curve,FAO CA
 Forests & Wetlands,Coastal Restoration,All,Linear,US Wetlands 2002-2014
 Agriculture,Cropland Soil Health,All,S-curve,FAO CA
 Forests & Wetlands,Improved Forest Management,All,S-curve,Certification Adoption
@@ -14,3 +13,9 @@ Forests & Wetlands,Peat Restoration,All,S-curve,Certification Adoption
 Agriculture,Silvopasture,All,S-curve,FAO CA
 Agriculture,Trees in Croplands,All,S-curve,FAO CA
 Agriculture,Agroforestry,All,S-curve,FAO CA
+Agriculture,Biochar,All,S-curve,US Wetlands 2002-2014
+Agriculture,Biochar for Carbon Removal & Sequestration,All,S-curve,US Wetlands 2002-2014
+Agriculture,Biochar for Water Treatment,All,S-curve,US Wetlands 2002-2014
+Agriculture,Biochar as Activated Carbon,All,S-curve,US Wetlands 2002-2014
+Agriculture,Biochar for Construction Materials,All,S-curve,US Wetlands 2002-2014
+Agriculture,Biochar as Ag Soil Amendment,All,S-curve,US Wetlands 2002-2014

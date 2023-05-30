@@ -1,7 +1,10 @@
 # region
+import os
 
 import numpy as np
 import pandas as pd
+from langchain.agents import create_pandas_dataframe_agent
+from langchain.llms import OpenAI
 
 # endregion
 
@@ -12,7 +15,6 @@ def results_analysis(
     afolu_output,
     emissions_output,
     emissions_output_co2e,
-    cdr_output,
     climate_output_concentration,
     climate_output_temperature,
     climate_output_forcing,
@@ -123,11 +125,11 @@ def results_analysis(
     # reformat to match energy_output
     analog = analog.rename(
         columns={
-            "variable": "product_short",
-            "label": "product_long",
+            "variable": "flow_short",
+            "label": "flow_long",
             "iso3c": "region",
             "year": "year",
-            "category": "product_category",
+            "category": "flow_category",
             "value": "value",
         }
     )
@@ -135,9 +137,9 @@ def results_analysis(
     analog = analog.pivot_table(
         index=[
             "region",
-            "product_category",
-            "product_long",
-            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
         ],
         columns="year",
         values="value",
@@ -146,10 +148,10 @@ def results_analysis(
     analog = analog.assign(
         model="PD22",
         scenario="baseline",
-        sector="energy",
-        flow_category="technology",
-        flow_long="technology",
-        flow_short="technology",
+        sector="Energy",
+        product_category="Technology",
+        product_long="Technology",
+        product_short="Technology",
         unit="multiple (hover over a time series to see units)",
     )
     # replace region ISO codes with region names from the 'WEB Region Lower' column of region_categories.csv
@@ -205,7 +207,16 @@ def results_analysis(
     )
     analog = pd.concat([analog, analog_pathway])
 
-    # Combine analog, afolu_output and energy_output
+    analog.columns = analog.columns.astype(int)
+
+    # list duplicate rows in pd.concat([analog, afolu_output, energy_output], axis=1, join="outer")
+    # Concatenate the DataFrames
+
+    afolu_output[
+        (afolu_output.index.duplicated())
+    ].reset_index().flow_short.unique()
+
+    # Combine analog, afolu_output and energy_output, using the same columns when available
     technology_adoption_output = pd.concat(
         [analog, afolu_output, energy_output]
     )
@@ -217,6 +228,12 @@ def results_analysis(
     technology_adoption_output.columns = (
         technology_adoption_output.columns.astype(str)
     )
+
+    # list duplicate values in technology_adoption_output.columns
+    duplicate_columns = technology_adoption_output.columns[
+        technology_adoption_output.columns.duplicated()
+    ]
+
     technology_adoption_output.to_parquet(
         "podi/data/technology_adoption_output.parquet", compression="brotli"
     )
@@ -583,12 +600,39 @@ def results_analysis(
 
     # region
 
-    # filter emissions_output_co2e for biochar
+    # load biochar study data
+    # biochar_study = pd.read_csv("podi/data/APL/apl_biochar_projections.csv")
+    # biochar_study.set_index(
+    #     [
+    #         "model",
+    #         "scenario",
+    #         "region",
+    #         "sector",
+    #         "product_category",
+    #         "product_long",
+    #         "product_short",
+    #         "flow_category",
+    #         "flow_long",
+    #         "flow_short",
+    #         "unit",
+    #     ],
+    #     inplace=True,
+    # )
+
+    # biochar_study.columns = biochar_study.columns.astype(int)
+
+    # emissions_output_co2e.update(biochar_study.astype(emissions_output_co2e.dtypes))
+
+    # To estimate the number of CharPallets, first filter emissions_output_co2e for all biochar flows
     emissions_output_co2e_biochar = emissions_output_co2e.loc[
         (
             emissions_output_co2e.reset_index().flow_long.isin(
                 [
-                    "Biochar",
+                    "Biochar as Ag Soil Amendment",
+                    "Biochar for Carbon Removal & Sequestration",
+                    "Biochar for Water Treatment",
+                    "Biochar as Activated Carbon",
+                    "Biochar for Construction Materials",
                 ]
             )
         ).values
@@ -596,7 +640,7 @@ def results_analysis(
 
     # change flow_long index values from 'Biochar' to "CharPallets"
     emissions_output_co2e_biochar.reset_index(inplace=True)
-    emissions_output_co2e_biochar["flow_long"] = "CharPallets"
+    emissions_output_co2e_biochar.loc[:, "flow_long"] = "CharPallets"
     emissions_output_co2e_biochar.set_index(
         [
             "model",
@@ -639,12 +683,187 @@ def results_analysis(
         "podi/data/technology_adoption_output.parquet", compression="brotli"
     )
 
-    # Estimate flux and max extent for Priority Markets for High-Temp Biochar identified by APL:
+    # endregion
 
-    # Carbon Removal & Sequestration
-    # Water Filtration
-    # Activated Carbon Market (low end)
-    # Construction Materials
+    ##################
+    #  ESTIMATE CDR  #
+    ##################
+
+    # region
+
+    # load historical CDR data from IEA https://www.iea.org/data-and-statistics/data-product/ccus-projects-database
+    emissions_cdr = pd.read_excel(
+        "podi/data/IEA/Other/IEA CCUS Projects Database 2023.xlsx",
+        sheet_name="CCUS Projects Database",
+        usecols="B,G,I,K,L,M",
+        header=0,
+        names=[
+            "region",
+            "start year",
+            "status",
+            "Mt low",
+            "Mt high",
+            "technology",
+        ],
+        engine="openpyxl",
+    ).dropna(how="all")
+
+    # add model, scenario, sector, product_category, product_long, product_short, flow_category, flow_long, flow_short, unit
+    emissions_cdr["model"] = "PD22"
+    emissions_cdr["scenario"] = "baseline"
+    emissions_cdr["sector"] = "CDR"
+    emissions_cdr["product_category"] = "CDR"
+    emissions_cdr["product_long"] = "CO2"
+    emissions_cdr["product_short"] = "CO2"
+    emissions_cdr["flow_category"] = "Carbon Dioxide Removal"
+    emissions_cdr["flow_long"] = "Carbon Dioxide Removal"
+    emissions_cdr["flow_short"] = "CDR"
+    emissions_cdr["unit"] = "Mt"
+    for year in range(data_start_year, proj_end_year + 1):
+        emissions_cdr[year] = np.NaN
+
+    emissions_cdr.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "sector",
+            "product_category",
+            "product_long",
+            "product_short",
+            "flow_category",
+            "flow_long",
+            "flow_short",
+            "unit",
+        ],
+        inplace=True,
+    )
+
+    # change start year column to int if value is not NaN
+    emissions_cdr["start year"] = (
+        emissions_cdr["start year"].fillna(data_end_year + 1).astype(int)
+    )
+
+    # filter for rows where status is "Planned", "Under Construction", "Operational"
+    emissions_cdr = emissions_cdr.loc[
+        emissions_cdr.reset_index()
+        .status.isin(["Planned", "Under Construction", "Operational"])
+        .values
+    ]
+
+    # filter for rows where technology is "Direct Air Capture"
+    emissions_cdr = emissions_cdr.loc[
+        emissions_cdr.reset_index()
+        .technology.isin(["Direct Air Capture"])
+        .values
+    ]
+
+    # fill nans for Mt low and Mt high with median of Mt low and Mt high
+    emissions_cdr["Mt low"] = emissions_cdr["Mt low"].fillna(
+        emissions_cdr["Mt low"].median()
+    )
+    emissions_cdr["Mt high"] = emissions_cdr["Mt high"].fillna(
+        emissions_cdr["Mt high"].median()
+    )
+
+    # for each row, put the median of the Mt low and Mt high values in the year column at the start year
+    emissions_cdr = emissions_cdr.apply(
+        lambda row: row.loc[row["start year"] : row["start year"]].fillna(
+            row[["Mt low", "Mt high"]].median()
+        )
+        if row["start year"] >= data_start_year
+        else row.loc[data_start_year:data_start_year].fillna(
+            row[["Mt low", "Mt high"]].median()
+        ),
+        axis=1,
+    )
+
+    # Change region names to IEA
+    regions = (
+        pd.DataFrame(
+            pd.read_csv(
+                "podi/data/region_categories.csv",
+                usecols=["WEB Region", "IEA_CCUS Region"],
+            ).dropna(axis=0)
+        )
+        .set_index(["IEA_CCUS Region"])
+        .rename_axis(index={"IEA_CCUS Region": "region"})
+    )
+    regions["WEB Region"] = (regions["WEB Region"]).str.lower()
+
+    emissions_cdr = (
+        (
+            emissions_cdr.reset_index()
+            .set_index(["region"])
+            .merge(regions, on=["region"])
+        )
+        .reset_index()
+        .set_index(
+            [
+                "model",
+                "scenario",
+                "WEB Region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+            ]
+        )
+        .rename_axis(index={"WEB Region": "region"})
+    ).drop(columns=["region"])
+
+    # estimate cdr needed using difference between 2100 ppm and target (e.g. 350 ppm) using 7.8GtCo2e per ppm
+
+    # fit adoption curve to cdr needed
+
+    # allocate across regions and sectors proportional to current CDR activity
+
+    # combine with emissions_output and emissions_output_co2e
+    # emissions_output = pd.concat(emissions_output, emissions_cdr)
+
+    # emissions_output_co2e = pd.concat(emissions_output_co2e, emissions_cdr)
+
+    # # save output
+
+    # emissions_output.columns = emissions_output.columns.astype(str)
+    # for col in emissions_output.select_dtypes(include="float64").columns:
+    #     emissions_output[col] = emissions_output[col].astype("float32")
+    # emissions_output.sort_index().to_parquet(
+    #     "podi/data/emissions_output.parquet", compression="brotli"
+    # )
+
+    # emissions_output_co2e.columns = emissions_output_co2e.columns.astype(str)
+    # for col in emissions_output_co2e.select_dtypes(include="float64").columns:
+    #     emissions_output_co2e[col] = emissions_output_co2e[col].astype(
+    #         "float32"
+    #     )
+    # emissions_output_co2e.sort_index().to_parquet(
+    #     "podi/data/emissions_output_co2e.parquet", compression="brotli"
+    # )
+
+    # endregion
+
+    ###################
+    # PANDAS DF AGENT #
+    ###################
+
+    # region
+
+    # set open_ai_key as environment variable
+    os.environ["OPENAI_API_KEY"] = ""
+
+    agent = create_pandas_dataframe_agent(
+        OpenAI(temperature=0),
+        emissions_output_co2e_biochar.T,
+        verbose=True,
+        chain_type="refine",
+    )
+
+    agent.run("how much co2 can biochar mitigate in 2030?")
 
     # endregion
 
