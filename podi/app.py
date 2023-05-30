@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, dcc, html
+from dash import Input, Output, State, dcc, html, ctx
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -25,10 +25,48 @@ app = dash.Dash(
 # Expose Flask instance
 server = app.server
 
+# define data
+data = {}
+
 # define year ranges of data and projections
 data_start_year = 1990
 data_end_year = 2020
 proj_end_year = 2100
+
+# definen empy figure
+def get_empty_fig(label):
+    fig = go.Figure()
+    fig.update_layout(
+        annotations=[
+            dict(
+                text=label,
+                xref="paper",
+                yref="paper",
+                x=0.5,
+                y=0.5,
+                showarrow=False,
+                font=dict(
+                    size=24,
+                    color="rgba(128, 128, 128, 0.5)",
+                ),
+                align="center",
+            )
+        ],
+    )
+    return fig
+
+no_data_fig = get_empty_fig("No data available for the current set of dropdown selections")
+
+def clean_gas_name(gas_name):
+    clean_name = (
+        gas_name.replace("Co2", "CO<sub>2</sub>")
+            .replace("Ch4", "CH<sub>4</sub>")
+            .replace("N2o", "N<sub>2</sub>O")
+            .replace("Nh3", "NH<sub>3</sub>")
+            .replace("Nox", "NO<sub>x</sub>")
+            .replace("So2", "SO<sub>2</sub>")
+    )
+    return clean_name
 
 # make dictionary of model_output options that uses common names for keys
 model_output = {
@@ -55,6 +93,7 @@ all_possible_index_names = [
     "unit",
 ]
 
+default_values = {}
 # define model_output index levels that should be included as dropdowns in data_controls
 data_controls_dropdowns = {
     "energy_output": [
@@ -508,8 +547,6 @@ app.layout = html.Div(
                         ),
                     ],
                 ),
-                # Add hidden divs for unused data controls
-                html.Div(id="unused_data_controls", style={"display": "none"}),
             ],
             className="dbc",
             style={
@@ -532,7 +569,6 @@ app.layout = html.Div(
 @app.callback(
     output=[
         Output("data_controls", "children"),
-        Output("unused_data_controls", "children"),
         Output("graph_controls", "children"),
     ],
     inputs=[Input("model_output", "value")],
@@ -811,6 +847,9 @@ def set_data_and_chart_control_options(
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
+    # store units for use in graph axis label
+    data['units'] = df["unit"].unique().tolist()
+
     # define data_controls_dropdowns that should allow for multi-selection
     data_controls_dropdowns_multiselect = {
         "model": False,
@@ -880,46 +919,78 @@ def set_data_and_chart_control_options(
         inplace=True,
     )
 
+    # set global dataframe
+    data['df'] = df
+
     # define list of data controls, labels, and tooltips
     div_elements = []
 
-    for level in df.index.names:
+    for level in all_possible_index_values:
         # if df_index_custom_default is defined and level is in
         # df_index_custom_default, use df_index_custom_default[level] as
         # default_value
-        if df_index_custom_default and level in df_index_custom_default:
+        if level not in df.index.names:
+            default_value = []
+        elif df_index_custom_default and level in df_index_custom_default:
             default_value = df_index_custom_default[level]
         elif data_controls_dropdowns_multiselect[level]:
             default_value = df.reset_index()[level].unique().tolist()
         else:
             default_value = df.reset_index()[level].unique().tolist()[-1]
 
+        values = [] if level not in df.index.names else df.reset_index()[level].unique().tolist()
+        display = "none" if level not in df.index.names else "block"
+
         div_elements.append(
             html.Label(
                 level.replace("_", " ").replace("long", "").title(),
                 id=level + "-label",
                 className="select-label",
+                style={
+                    "display": display
+                }
             )
         )
+
+        if not type(default_value) is list:
+            default_value = [default_value]
+
+        default_values[level] = default_value
 
         div_elements.append(
             html.Div(
                 [
-                    dcc.Dropdown(
-                        df.reset_index()[level].unique().tolist(),
-                        default_value,
+                    html.Div(
+                        [
+                            html.Button(
+                                "Select all",
+                                id=level + "-select-all",
+                                className="select-all-option",
+                            ),
+                            html.Button(
+                                "Deselect all",
+                                id=level + "-deselect-all",
+                                className="deselect-all-option",
+                            )
+                        ],
+                        className="select-all-container"
+                    ),
+                    dcc.Checklist(
                         id=level,
-                        multi=True,
-                        style={
-                            "maxHeight": "60px",
-                            "overflow-y": "scroll",
-                            "border": "1px solid #d6d6d6",
-                            "border-radius": "5px",
-                            "outline": "none",
+                        options=[{'label': i, 'value': i} for i in values],
+                        value=default_value,
+                        labelStyle={
+                            "display": "block",
+                            "color": "black"
                         },
                     ),
                 ],
-                className="mb-0" if level == df.index.names[-1] else "mb-3",
+                style={
+                    "maxHeight": "200px",
+                    "overflow-y": "scroll",
+                    "border": "1px solid #d6d6d6",
+                    "display": display
+                }
             )
         )
 
@@ -1067,6 +1138,7 @@ def set_data_and_chart_control_options(
     )
 
     return (data_controls, unused_data_controls, graph_controls)
+
 
 
 """
@@ -1266,13 +1338,33 @@ def update_data_controls(
     return (data_controls, unused_data_controls)
 """
 
+for level in all_possible_index_values:
+    @app.callback(
+        Output(f"{level}", "value"),
+        [
+            Input(f"{level}-select-all", "n_clicks"),
+            Input(f"{level}-deselect-all", "n_clicks")
+        ],
+        [State(f"{level}", "options")],
+        prevent_initial_call=True
+    )
+    def update_options(
+        btn1,
+        btn2,
+        options
+    ):
+        selected = default_values[level]
+        if ctx.triggered_id.endswith("-select-all"):
+            selected = [option['value'] for option in options]
+        elif ctx.triggered_id.endswith("-select-all"):
+            selected = []
+        return selected
 
 # update graph
 @app.callback(
     output=[Output("output_graph", "figure")],
     inputs=[
         Input("data_controls", "children"),
-        Input("unused_data_controls", "children"),
         Input("model_output", "value"),
         Input("date_range", "value"),
         Input("graph_output", "value"),
@@ -1284,7 +1376,6 @@ def update_data_controls(
 )
 def update_output_graph(
     data_controls_values,
-    unused_data_controls_values,
     model_output,
     date_range,
     graph_output,
@@ -1361,50 +1452,9 @@ def update_output_graph(
         data_path = "data/"
     else:
         raise FileNotFoundError("Data directory not found")
-
-    df = pd.read_parquet(os.path.join(data_path, model_output + ".parquet"))
-    index_dtypes = {k: "category" for k in df.index.names}
-    column_dtypes = {j: "float32" for j in df.columns}
-    dtypes = {**index_dtypes, **column_dtypes}
-    df = df.reset_index().astype(dtypes)
-
-    # store units for use in graph axis label
-    units = df["unit"].unique().tolist()
-
-    # drop the columns that are numerical and not in the range of data_start_year to proj_end_year
-    df.drop(
-        columns=[
-            col
-            for col in df.columns
-            if col.isdigit()
-            and int(col) not in range(data_start_year, proj_end_year + 1)
-        ],
-        inplace=True,
-    )
-
-    # set index
-    df.set_index(
-        df.columns[
-            (
-                ~df.columns.isin(
-                    str(f"{i}")
-                    for i in range(data_start_year, proj_end_year + 1)
-                )
-            )
-            & (df.columns.isin(data_controls_dropdowns[model_output]))
-        ].tolist(),
-        inplace=True,
-    )
-
-    # drop unused columns (at this point all columns that are not numerical)
-    df.drop(
-        columns=df.columns[
-            ~df.columns.isin(
-                str(f"{i}") for i in range(data_start_year, proj_end_year + 1)
-            )
-        ].tolist(),
-        inplace=True,
-    )
+    
+    df = data['df']
+    units = data['units']
 
     # remove index values at locations where df.index.names is not in data_controls_dropdowns[model_output]
     index_values = [
@@ -1417,47 +1467,11 @@ def update_output_graph(
     try:
         df.loc[tuple([*index_values])]
     except KeyError:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="No data available for the current set of dropdown selections",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
+        return (no_data_fig,)
 
     # prevent error if group_by_dropdown_values is empty
     if not group_by_dropdown_values:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="Select a variable to group by in the 'GROUP BY' menu above",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
+        return (get_empty_fig("Select a variable to group by in the 'GROUP BY' menu above"),)
 
     # make group_by_dropdown_values an array if it is not already
     if not isinstance(group_by_dropdown_values, list):
@@ -1491,47 +1505,11 @@ def update_output_graph(
             .T.fillna(0)
         )
     except KeyError:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="No data available for the current set of dropdown selections",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
+        return (no_data_fig,)
 
     # check if filtered_df raises an error
     if filtered_df.empty:
-        fig = go.Figure()
-        fig.update_layout(
-            annotations=[
-                dict(
-                    text="No data available for the current set of dropdown selections",
-                    xref="paper",
-                    yref="paper",
-                    x=0.5,
-                    y=0.5,
-                    showarrow=False,
-                    font=dict(
-                        size=24,
-                        color="rgba(128, 128, 128, 0.5)",
-                    ),
-                    align="center",
-                )
-            ],
-        )
-        return (fig,)
+        return (no_data_fig,)
 
     if yaxis_type == "Cumulative":
         filtered_df = filtered_df.cumsum()
@@ -1648,32 +1626,17 @@ def update_output_graph(
 
             # if the graph_type is line, add a trace to fig that is solid up to data_end_year or the last year of historical data and dashdot after (if projections exist)
             if graph_type == "none":
+                data_plot = pd.DataFrame(filtered_df).set_index(group_by_dropdown_values).loc[[sub], : str(data_end_year)]
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
                             dash="solid",
                         ),
-                        x=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub], : str(data_end_year)]["year"]
-                        .values.dropna(),
-                        y=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub], : str(data_end_year)]["value"]
-                        .values.dropna(),
+                        x=data_plot["year"].values.dropna(),
+                        y=data_plot["value"].values.dropna(),
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1684,36 +1647,17 @@ def update_output_graph(
                         legendgroup=name,
                     )
                 )
+                data_plot = pd.DataFrame(filtered_df).set_index(group_by_dropdown_values).loc[[sub], str(data_end_year) : str(proj_end_year)]
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
                             dash="dashdot",
                         ),
-                        x=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub], str(data_end_year) : str(proj_end_year)][
-                            "year"
-                        ]
-                        .values,
-                        y=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub], str(data_end_year) : str(proj_end_year)][
-                            "value"
-                        ]
-                        .values,
+                        x=data_plot["year"].values,
+                        y=data_plot["value"].values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=False,
@@ -1727,14 +1671,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -1848,14 +1785,7 @@ def update_output_graph(
             if graph_type == "none":
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1879,14 +1809,7 @@ def update_output_graph(
                 )
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -1910,14 +1833,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -1939,27 +1855,22 @@ def update_output_graph(
             i += 1
 
         if graph_type not in ["none"]:
+            plot_data = filtered_df[
+                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+            ]
+
             fig.add_trace(
                 go.Scatter(
                     name="Net Emissions",
                     line=dict(width=5, color="magenta", dash="dashdot"),
-                    x=filtered_df[
-                        (filtered_df["year"] >= date_range[0])
-                        & (filtered_df["year"] <= date_range[1])
-                    ]["year"].drop_duplicates(),
+                    x=plot_data["year"].drop_duplicates(),
                     y=pd.Series(
-                        filtered_df[
-                            (filtered_df.year >= date_range[0])
-                            & (filtered_df.year <= date_range[1])
-                        ]
+                        plot_data
                         .groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
-                        index=filtered_df[
-                            (filtered_df["year"] >= date_range[0])
-                            & (filtered_df["year"] <= date_range[1])
-                        ]["year"].drop_duplicates(),
+                        index=plot_data["year"].drop_duplicates(),
                     ),
                     fill="none",
                     stackgroup=stack_type[graph_type],
@@ -2062,14 +1973,7 @@ def update_output_graph(
             if graph_type == "none":
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -2093,14 +1997,7 @@ def update_output_graph(
                 )
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -2123,14 +2020,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -2151,27 +2041,21 @@ def update_output_graph(
             i += 1
 
         if graph_type not in ["none"]:
+            data_plot = filtered_df[
+                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+            ]
             fig.add_trace(
                 go.Scatter(
                     name="Net Emissions",
                     line=dict(width=5, color="magenta", dash="dashdot"),
-                    x=filtered_df[
-                        (filtered_df["year"] >= date_range[0])
-                        & (filtered_df["year"] <= date_range[1])
-                    ]["year"].drop_duplicates(),
+                    x=data_plot["year"].drop_duplicates(),
                     y=pd.Series(
-                        filtered_df[
-                            (filtered_df.year >= date_range[0])
-                            & (filtered_df.year <= date_range[1])
-                        ]
+                        data_plot
                         .groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
-                        index=filtered_df[
-                            (filtered_df["year"] >= date_range[0])
-                            & (filtered_df["year"] <= date_range[1])
-                        ]["year"].drop_duplicates(),
+                        index=data_plot["year"].drop_duplicates(),
                     ),
                     fill="none",
                     stackgroup=stack_type[graph_type],
@@ -2265,14 +2149,7 @@ def update_output_graph(
             if graph_type == "none":
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -2296,14 +2173,7 @@ def update_output_graph(
                 )
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
@@ -2326,14 +2196,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
@@ -2354,27 +2217,21 @@ def update_output_graph(
             i += 1
 
         if graph_type not in ["none"]:
+            data_plot = filtered_df[
+                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+            ]
             fig.add_trace(
                 go.Scatter(
                     name="Net Emissions",
                     line=dict(width=5, color="magenta", dash="dashdot"),
-                    x=filtered_df[
-                        (filtered_df["year"] >= date_range[0])
-                        & (filtered_df["year"] <= date_range[1])
-                    ]["year"].drop_duplicates(),
+                    x=data_plot["year"].drop_duplicates(),
                     y=pd.Series(
-                        filtered_df[
-                            (filtered_df.year >= date_range[0])
-                            & (filtered_df.year <= date_range[1])
-                        ]
+                        data_plot
                         .groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
-                        index=filtered_df[
-                            (filtered_df["year"] >= date_range[0])
-                            & (filtered_df["year"] <= date_range[1])
-                        ]["year"].drop_duplicates(),
+                        index=data_plot["year"].drop_duplicates(),
                     ),
                     fill="none",
                     stackgroup=stack_type[graph_type],
@@ -2465,27 +2322,10 @@ def update_output_graph(
                 ],
             )
             return (fig,)
+
         # prevent confusing output if groupby contains scenario
         if "scenario" in group_by_dropdown_values:
-            fig = go.Figure()
-            fig.update_layout(
-                annotations=[
-                    dict(
-                        text="Remove 'scenario' option from GROUP BY",
-                        xref="paper",
-                        yref="paper",
-                        x=0.5,
-                        y=0.5,
-                        showarrow=False,
-                        font=dict(
-                            size=24,
-                            color="rgba(128, 128, 128, 0.5)",
-                        ),
-                        align="center",
-                    )
-                ],
-            )
-            return (fig,)
+            return (get_empty_fig("Remove 'scenario' option from GROUP BY",),)
 
         if yaxis_type == "PPM":
             units[0] = "PPM"
@@ -2975,6 +2815,18 @@ def update_output_graph(
 
             # if the graph_type is line, add a trace to fig that is solid up to data_end_year and dashdot after
             if graph_type == "none":
+                data_plot = (
+                    pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                >= max(data_end_year, date_range[0])
+                            ]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name=name,
@@ -2984,26 +2836,8 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="dashdot",
                         ),
-                        x=pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                >= max(data_end_year, date_range[0])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                >= max(data_end_year, date_range[0])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -3017,6 +2851,18 @@ def update_output_graph(
                     )
                 )
 
+                data_plot = (
+                    pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                <= min(data_end_year, date_range[1])
+                            ]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name=name,
@@ -3026,26 +2872,8 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="solid",
                         ),
-                        x=pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                <= min(data_end_year, date_range[1])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                <= min(data_end_year, date_range[1])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True
@@ -3076,22 +2904,21 @@ def update_output_graph(
                     fig.update_layout(legend=dict(traceorder="reversed"))
 
             else:
+                data_plot = (
+                    pd.DataFrame(filtered_df)
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name=name,
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
-                        x=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -3186,35 +3013,25 @@ def update_output_graph(
 
             # if the graph_type is line, add a trace to fig that is solid up to data_end_year and dashdot after
             if graph_type == "none":
+                data_plot = (
+                    pd.DataFrame(
+                            filtered_df[filtered_df["year"] >= data_end_year]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3,
                             color=graph_template["linecolor"][i],
                             dash="dashdot",
                         ),
-                        x=pd.DataFrame(
-                            filtered_df[filtered_df["year"] >= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(
-                            filtered_df[filtered_df["year"] >= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -3227,6 +3044,15 @@ def update_output_graph(
                     )
                 )
 
+                data_plot = (
+                    pd.DataFrame(
+                            filtered_df[filtered_df["year"] <= data_end_year]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()
+                )
                 fig.add_trace(
                     go.Scatter(
                         name="Historical",
@@ -3235,20 +3061,8 @@ def update_output_graph(
                             color="black",
                             dash="solid",
                         ),
-                        x=pd.DataFrame(
-                            filtered_df[filtered_df["year"] <= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["year"],
-                        y=pd.DataFrame(
-                            filtered_df[filtered_df["year"] <= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()["value"],
+                        x=data_plot["year"],
+                        y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True if i == 1 else False,
@@ -3265,14 +3079,7 @@ def update_output_graph(
             else:
                 fig.add_trace(
                     go.Scatter(
-                        name=name.replace("Co2", "CO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O")
-                        .replace("Nh3", "NH<sub>3</sub>")
-                        .replace("Nox", "NO<sub>x</sub>")
-                        .replace("So2", "SO<sub>2</sub>")
-                        .replace("Ch4", "CH<sub>4</sub>")
-                        .replace("N2o", "N<sub>2</sub>O"),
+                        name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
