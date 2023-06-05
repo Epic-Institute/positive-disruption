@@ -20,7 +20,7 @@ proj_end_year = 2100
 # ENERGY #
 ##########
 
-recalc_energy = True
+recalc_energy = False
 # region
 
 if recalc_energy is True:
@@ -71,7 +71,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = True
+recalc_afolu = False
 # region
 
 if recalc_afolu is True:
@@ -99,7 +99,7 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = True
+recalc_emissions = False
 # region
 
 if recalc_emissions is True:
@@ -139,7 +139,7 @@ emissions_output_co2e.columns = emissions_output_co2e.columns.astype(int)
 # CLIMATE #
 ###########
 
-recalc_climate = True
+recalc_climate = False
 # region
 
 if recalc_climate is True:
