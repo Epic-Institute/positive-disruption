@@ -1606,9 +1606,11 @@ def update_output_graph(
         )
 
     # if index_values for scenario has more than one unique value, make graph_type = "none"
-    print(len(index_values[1]))
-    print()
-    if len(index_values[1]) > 1 and graph_type == "tonexty":
+    if (
+        pd.Series(index_values[1]).isin(["pathway"]).any()
+        and len(index_values[1]) > 1
+        and graph_type == "tonexty"
+    ):
         return (
             get_empty_fig(
                 "Reduce the number of scenarios or change the Graph Type away from 'Area'"
