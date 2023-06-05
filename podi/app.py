@@ -1605,6 +1605,16 @@ def update_output_graph(
             [group_by_dropdown_values] if group_by_dropdown_values else []
         )
 
+    # if index_values for scenario has more than one unique value, make graph_type = "none"
+    print(len(index_values[1]))
+    print()
+    if len(index_values[1]) > 1 and graph_type == "tonexty":
+        return (
+            get_empty_fig(
+                "Reduce the number of scenarios or change the Graph Type away from 'Area'"
+            ),
+        )
+
     filtered_df = df.loc[tuple([*index_values])]
     df = df.loc[tuple([*index_values])]
 
