@@ -2,7 +2,7 @@ product_short,flow_short,sector,EIA Product,WWS EF Product,WWS Upstream Product,
 ADDITIVE,NEINTREN,Industrial,Total,na,N,na,N,N,N,N,Y
 ADDITIVE,NONENUSE,Industrial,Total,na,N,na,N,N,N,N,Y
 ADDITIVE,TREFINER,Industrial,Total,na,N,na,N,N,N,N,Y
-ANTCOAL,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+ANTCOAL,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 ANTCOAL,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 ANTCOAL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ANTCOAL,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -50,7 +50,7 @@ ANTCOAL,TPATFUEL,Industrial,Coal,coal ef ratio,Y,coal addtl eff,N,N,N,N,N
 ANTCOAL,TRANSEQ,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 ANTCOAL,TRNONSPE,Transportation,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 ANTCOAL,WOODPRO,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-AVGAS,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+AVGAS,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 AVGAS,AVBUNK,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 AVGAS,CHEMICAL,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 AVGAS,COMMPUB,Commercial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,Y,N
@@ -75,7 +75,7 @@ AVGAS,TREFINER,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 AVGAS,TRNONSPE,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 AVGAS,TTROAD,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 AVGAS,WORLDAV,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
-BIODIESEL,AGRICULT,Industrial,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+BIODIESEL,AGRICULT,Agriculture,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 BIODIESEL,AUTOCHP,Industrial,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 BIODIESEL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIODIESEL,AVBUNK,Transportation,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -129,7 +129,7 @@ BIODIESEL,TTROAD,Transportation,Liquid fuels,biofuels_waste ef ratio,N,biofuels_
 BIODIESEL,WOODPRO,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BIODIESEL,WORLDAV,Transportation,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,Y,Y,N
 BIODIESEL,WORLDMAR,Transportation,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,Y,Y,N
-BIOGASES,AGRICULT,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+BIOGASES,AGRICULT,Agriculture,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 BIOGASES,AUTOCHP,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 BIOGASES,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIOGASES,AUTOHEAT,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -176,7 +176,7 @@ BIOGASES,TRANSEQ,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl
 BIOGASES,TRNONSPE,Transportation,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 BIOGASES,TTROAD,Transportation,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 BIOGASES,WOODPRO,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-BIOGASOL,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BIOGASOL,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BIOGASOL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BIOGASOL,CHEMICAL,Industrial,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 BIOGASOL,COMMPUB,Commercial,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,Y,N
@@ -208,7 +208,7 @@ BIOGASOL,TRANSEQ,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BIOGASOL,TRNONSPE,Transportation,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 BIOGASOL,TTROAD,Transportation,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 BIOGASOL,WOODPRO,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BITCOAL,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BITCOAL,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 BITCOAL,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 BITCOAL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BITCOAL,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -269,7 +269,7 @@ BITCOAL,TRANSEQ,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 BITCOAL,TRNONSPE,Transportation,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 BITCOAL,WOODPRO,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 BITCOAL,WORLDMAR,Transportation,Coal,coal ef ratio,N,coal addtl eff,N,N,Y,Y,N
-BITUMEN,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BITUMEN,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BITUMEN,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BITUMEN,CHEMICAL,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BITUMEN,COMMPUB,Commercial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,Y,N
@@ -321,7 +321,7 @@ BITUMEN,TPETCHEM,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BITUMEN,TREFINER,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BITUMEN,TRNONSPE,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 BITUMEN,TTROAD,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-BKB,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BKB,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 BKB,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 BKB,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 BKB,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -406,7 +406,7 @@ BLFURGS,TCOKEOVS,Industrial,Natural gas,natural gas ef ratio,Y,natural gas addtl
 BLFURGS,TNONSPEC,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 BLFURGS,TOTENGY,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 BLFURGS,TRANSEQ,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-CHARCOAL,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+CHARCOAL,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 CHARCOAL,CHEMICAL,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 CHARCOAL,COMMPUB,Commercial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,Y,N
 CHARCOAL,DISTLOSS,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -469,7 +469,7 @@ COALTAR,TNONSPEC,Industrial,Liquid fuels,coal ef ratio,N,coal addtl eff,N,N,N,N,
 COALTAR,TOTENGY,Industrial,Liquid fuels,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COALTAR,TRANSEQ,Industrial,Liquid fuels,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COALTAR,WOODPRO,Industrial,Liquid fuels,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-COKCOAL,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COKCOAL,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COKCOAL,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COKCOAL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COKCOAL,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -520,7 +520,7 @@ COKCOAL,TPATFUEL,Industrial,Coal,coal ef ratio,Y,coal addtl eff,N,N,N,N,N
 COKCOAL,TRANSEQ,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COKCOAL,TRNONSPE,Transportation,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 COKCOAL,WOODPRO,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-COKEOVGS,AGRICULT,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+COKEOVGS,AGRICULT,Agriculture,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 COKEOVGS,AUTOCHP,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 COKEOVGS,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 COKEOVGS,AUTOHEAT,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -568,7 +568,7 @@ COKEOVGS,TNONSPEC,Industrial,Natural gas,natural gas ef ratio,N,natural gas addt
 COKEOVGS,TOTENGY,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 COKEOVGS,TRANSEQ,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 COKEOVGS,WOODPRO,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-CRUDEOIL,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+CRUDEOIL,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 CRUDEOIL,AUTOCHP,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 CRUDEOIL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 CRUDEOIL,AUTOHEAT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -618,7 +618,7 @@ CRUDEOIL,TRANSEQ,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 CRUDEOIL,TREFINER,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 CRUDEOIL,TRNONSPE,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 CRUDEOIL,WOODPRO,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-ELECTR,AGRICULT,Industrial,Electricity,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+ELECTR,AGRICULT,Agriculture,Electricity,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ELECTR,AUTOCHP,Industrial,Electricity,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ELECTR,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ELECTR,CHEMICAL,Industrial,Electricity,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
@@ -702,7 +702,7 @@ GASCOKE,IRONSTL,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 GASCOKE,RESIDENT,Residential,Coal,coal ef ratio,N,coal addtl eff,N,N,N,Y,N
 GASCOKE,TGASWKS,Industrial,Coal,coal ef ratio,Y,coal addtl eff,N,N,N,N,N
 GASCOKE,TOTENGY,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-GASWKSGS,AGRICULT,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+GASWKSGS,AGRICULT,Agriculture,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 GASWKSGS,AUTOCHP,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 GASWKSGS,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 GASWKSGS,AUTOHEAT,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -742,7 +742,7 @@ GASWKSGS,TGASWKS,Industrial,Natural gas,natural gas ef ratio,Y,natural gas addtl
 GASWKSGS,TOTENGY,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 GASWKSGS,TRANSEQ,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 GASWKSGS,WOODPRO,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-GEOTHERM,AGRICULT,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+GEOTHERM,AGRICULT,Agriculture,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 GEOTHERM,AUTOCHP,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 GEOTHERM,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 GEOTHERM,AUTOHEAT,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
@@ -774,7 +774,7 @@ GEOTHERM,TEXTILES,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N
 GEOTHERM,TOTENGY,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 GEOTHERM,TRANSEQ,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 GEOTHERM,WOODPRO,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
-HEAT,AGRICULT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+HEAT,AGRICULT,Agriculture,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HEAT,AUTOCHP,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HEAT,AUTOHEAT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HEAT,CHEMICAL,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
@@ -821,7 +821,7 @@ HEAT,TNONSPEC,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HEAT,TOTENGY,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HEAT,TRANSEQ,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HEAT,WOODPRO,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
-HEATNS,AGRICULT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+HEATNS,AGRICULT,Agriculture,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HEATNS,AUTOCHP,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HEATNS,AUTOHEAT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HEATNS,CHEMICAL,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
@@ -867,7 +867,7 @@ HEATNS,TNONSPEC,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HEATNS,TOTENGY,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HEATNS,TRANSEQ,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HEATNS,WOODPRO,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
-HHEAT,AGRICULT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+HHEAT,AGRICULT,Agriculture,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HHEAT,AUTOCHP,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HHEAT,AUTOHEAT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HHEAT,CHEMICAL,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
@@ -914,7 +914,7 @@ HHEAT,TNONSPEC,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HHEAT,TOTENGY,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HHEAT,TRANSEQ,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HHEAT,WOODPRO,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
-HHEATNS,AGRICULT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+HHEATNS,AGRICULT,Agriculture,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 HHEATNS,AUTOCHP,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HHEATNS,AUTOHEAT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 HHEATNS,CHEMICAL,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
@@ -993,7 +993,7 @@ HYDROGEN,TNONSPEC,Industrial,Liquid fuels,na,N,na,N,N,Y,Y,N
 HYDROGEN,TREFINER,Industrial,Liquid fuels,na,N,na,N,N,Y,Y,N
 HYDROGEN,WORLDAV,Transportation,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
 HYDROGEN,WORLDMAR,Transportation,Liquid fuels,hydrogen ef ratio,N,oil addtl eff,N,N,Y,Y,N
-INDWASTE,AGRICULT,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+INDWASTE,AGRICULT,Agriculture,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 INDWASTE,AUTOCHP,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 INDWASTE,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 INDWASTE,AUTOHEAT,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -1046,7 +1046,7 @@ JETGAS,TOTENGY,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 JETGAS,TREFINER,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 JETGAS,WORLDAV,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 JETGAS,WORLDMAR,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
-LHEAT,AGRICULT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+LHEAT,AGRICULT,Agriculture,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 LHEAT,AUTOCHP,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 LHEAT,AUTOHEAT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 LHEAT,CHEMICAL,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
@@ -1093,7 +1093,7 @@ LHEAT,TNONSPEC,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 LHEAT,TOTENGY,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 LHEAT,TRANSEQ,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 LHEAT,WOODPRO,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
-LHEATNS,AGRICULT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+LHEATNS,AGRICULT,Agriculture,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
 LHEATNS,AUTOCHP,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 LHEATNS,AUTOHEAT,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 LHEATNS,CHEMICAL,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
@@ -1139,7 +1139,7 @@ LHEATNS,TNONSPEC,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 LHEATNS,TOTENGY,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 LHEATNS,TRANSEQ,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
 LHEATNS,WOODPRO,Industrial,Total,heat ef ratio,N,heat addtl eff,Y,N,N,N,N
-LIGNITE,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+LIGNITE,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 LIGNITE,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 LIGNITE,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 LIGNITE,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -1194,7 +1194,7 @@ LIGNITE,TPATFUEL,Industrial,Coal,coal ef ratio,Y,coal addtl eff,N,N,N,N,N
 LIGNITE,TRANSEQ,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 LIGNITE,TRNONSPE,Transportation,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 LIGNITE,WOODPRO,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-LPG,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+LPG,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 LPG,AUTOCHP,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 LPG,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 LPG,AUTOHEAT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -1272,7 +1272,7 @@ LPG,TRNONSPE,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 LPG,TTROAD,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 LPG,WOODPRO,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 LPG,WORLDAV,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
-LUBRIC,AGRICULT,Industrial,Total,na,N,na,N,N,N,N,Y
+LUBRIC,AGRICULT,Agriculture,Total,na,N,na,N,N,N,N,Y
 LUBRIC,CHEMICAL,Industrial,Total,na,N,na,N,N,N,N,Y
 LUBRIC,COMMPUB,Commercial,Total,na,N,na,N,N,N,Y,Y
 LUBRIC,CONSTRUC,Industrial,Total,na,N,na,N,N,N,N,Y
@@ -1341,7 +1341,7 @@ MANGAS,ELMAINC,Electric Power,Total,oil ef ratio,N,electricity addtl eff,N,N,N,N
 MANGAS,HEAUTOC,Industrial,Total,heat ef ratio,N,heat addtl eff,N,N,N,N,N
 MANGAS,HEAUTOH,Industrial,Total,heat ef ratio,N,heat addtl eff,N,N,N,N,N
 MANGAS,HEMAINC,Industrial,Total,heat ef ratio,N,heat addtl eff,N,N,N,N,N
-MUNWASTEN,AGRICULT,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTEN,AGRICULT,Agriculture,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTEN,AUTOCHP,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTEN,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MUNWASTEN,AUTOHEAT,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -1379,7 +1379,7 @@ MUNWASTEN,TEXTILES,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste add
 MUNWASTEN,TOTENGY,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTEN,TRANSEQ,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTEN,WOODPRO,Industrial,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-MUNWASTER,AGRICULT,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTER,AGRICULT,Agriculture,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTER,AUTOCHP,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTER,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 MUNWASTER,AUTOHEAT,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -1417,7 +1417,7 @@ MUNWASTER,TEXTILES,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_wast
 MUNWASTER,TOTENGY,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTER,TRANSEQ,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 MUNWASTER,WOODPRO,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
-NATGAS,AGRICULT,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NATGAS,AGRICULT,Agriculture,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 NATGAS,AUTOCHP,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 NATGAS,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NATGAS,AUTOHEAT,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -1489,7 +1489,7 @@ NATGAS,TRNONSPE,Transportation,Natural gas,natural gas ef ratio,N,natural gas ad
 NATGAS,TTROAD,Transportation,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 NATGAS,WOODPRO,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 NATGAS,WORLDMAR,Transportation,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,Y,Y,N
-NGL,AGRICULT,Industrial,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NGL,AGRICULT,Agriculture,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 NGL,AUTOCHP,Industrial,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 NGL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NGL,CHEMICAL,Industrial,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
@@ -1533,7 +1533,7 @@ NGL,TRANSEQ,Industrial,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff
 NGL,TREFINER,Industrial,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 NGL,TTROAD,Transportation,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 NGL,WOODPRO,Industrial,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-NONBIODIES,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIODIES,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIODIES,AUTOCHP,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIODIES,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIODIES,AUTOHEAT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -1615,7 +1615,7 @@ NONBIODIES,TTROAD,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N
 NONBIODIES,WOODPRO,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIODIES,WORLDAV,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIODIES,WORLDMAR,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
-NONBIOGASO,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOGASO,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOGASO,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NONBIOGASO,AVBUNK,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOGASO,CHEMICAL,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -1677,7 +1677,7 @@ NONBIOGASO,TTROAD,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N
 NONBIOGASO,WOODPRO,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOGASO,WORLDAV,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 NONBIOGASO,WORLDMAR,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
-NONBIOJETK,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOJETK,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOJETK,AUTOCHP,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOJETK,AVBUNK,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 NONBIOJETK,CHEMICAL,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -1763,7 +1763,7 @@ NUCLEAR,HEMAINH,Industrial,Electricity,nuclear ef ratio,N,electricity addtl eff,
 NUCLEAR,MAINCHP,Industrial,Electricity,nuclear ef ratio,N,electricity addtl eff,N,N,N,N,N
 NUCLEAR,MAINELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 NUCLEAR,MAINHEAT,Industrial,Total,nuclear ef ratio,N,heat addtl eff,N,N,N,N,N
-OBIOLIQ,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OBIOLIQ,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OBIOLIQ,AUTOCHP,Industrial,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 OBIOLIQ,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OBIOLIQ,AUTOHEAT,Industrial,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -1838,7 +1838,7 @@ OGASES,NONMET,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl ef
 OGASES,TBLASTFUR,Industrial,Natural gas,natural gas ef ratio,Y,natural gas addtl eff,N,N,N,N,N
 OGASES,TNONSPEC,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 OGASES,TOTENGY,Industrial,Natural gas,na,N,na,N,N,N,N,N
-OILSHALE,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OILSHALE,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OILSHALE,AUTOCHP,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OILSHALE,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OILSHALE,AUTOHEAT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -1870,7 +1870,7 @@ OILSHALE,TEXTILES,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OILSHALE,TGASWKS,Industrial,Liquid fuels,oil ef ratio,Y,oil addtl eff,N,N,N,N,N
 OILSHALE,TOTENGY,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OILSHALE,WOODPRO,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
-ONONSPEC,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+ONONSPEC,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 ONONSPEC,AUTOCHP,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 ONONSPEC,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 ONONSPEC,AUTOHEAT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -1970,7 +1970,7 @@ OTHER,HEMAINH,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OTHER,MAINCHP,Industrial,Liquid fuels,heat ef ratio,N,heat addtl eff,N,N,N,N,N
 OTHER,MAINELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OTHER,MAINHEAT,Industrial,Total,heat ef ratio,N,heat addtl eff,N,N,N,N,N
-OTHKERO,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OTHKERO,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OTHKERO,AUTOCHP,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OTHKERO,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OTHKERO,AUTOHEAT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -2047,7 +2047,7 @@ OTHKERO,TTROAD,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,
 OTHKERO,WOODPRO,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 OTHKERO,WORLDAV,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
 OTHKERO,WORLDMAR,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
-OVENCOKE,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+OVENCOKE,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 OVENCOKE,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 OVENCOKE,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 OVENCOKE,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2128,7 +2128,7 @@ PARWAX,RESIDENT,Residential,Total,na,N,na,N,N,N,Y,Y
 PARWAX,TOTENGY,Industrial,Total,na,N,na,N,N,N,N,Y
 PARWAX,TPETCHEM,Industrial,Total,na,N,na,N,N,N,N,Y
 PARWAX,TREFINER,Industrial,Total,na,N,na,N,N,N,N,Y
-PATFUEL,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PATFUEL,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PATFUEL,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PATFUEL,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PATFUEL,CHEMICAL,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2172,7 +2172,7 @@ PATFUEL,TOTENGY,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PATFUEL,TPATFUEL,Industrial,Coal,coal ef ratio,Y,coal addtl eff,N,N,N,N,N
 PATFUEL,TRANSEQ,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PATFUEL,WOODPRO,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PEAT,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEAT,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEAT,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEAT,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PEAT,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2217,7 +2217,7 @@ PEAT,TOTENGY,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEAT,TRANSEQ,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEAT,TRNONSPE,Transportation,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEAT,WOODPRO,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PEATPROD,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEATPROD,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEATPROD,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEATPROD,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEATPROD,CHEMICAL,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2261,7 +2261,7 @@ PEATPROD,TOTENGY,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEATPROD,TRANSEQ,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEATPROD,TRNONSPE,Transportation,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PEATPROD,WOODPRO,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PETCOKE,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PETCOKE,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PETCOKE,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PETCOKE,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PETCOKE,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2322,7 +2322,7 @@ PETCOKE,TPATFUEL,Industrial,Coal,coal ef ratio,Y,coal addtl eff,N,N,N,N,N
 PETCOKE,TPETCHEM,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PETCOKE,TRANSEQ,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 PETCOKE,TREFINER,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
-PRIMSBIO,AGRICULT,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+PRIMSBIO,AGRICULT,Agriculture,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 PRIMSBIO,AUTOCHP,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
 PRIMSBIO,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 PRIMSBIO,AUTOHEAT,Industrial,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
@@ -2419,7 +2419,7 @@ REFINGAS,TOTENGY,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl
 REFINGAS,TPETCHEM,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 REFINGAS,TREFINER,Industrial,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
 REFINGAS,TTROAD,Transportation,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
-RESFUEL,AGRICULT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+RESFUEL,AGRICULT,Agriculture,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 RESFUEL,AUTOCHP,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 RESFUEL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 RESFUEL,AUTOHEAT,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
@@ -2508,7 +2508,7 @@ SOLARPV,ELAUTOE,Electric Power,Total,electricity ef ratio,N,electricity addtl ef
 SOLARPV,ELMAINC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SOLARPV,ELMAINE,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SOLARPV,MAINELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
-SOLARTH,AGRICULT,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+SOLARTH,AGRICULT,Agriculture,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 SOLARTH,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SOLARTH,AUTOHEAT,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 SOLARTH,CHEMICAL,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
@@ -2541,7 +2541,7 @@ SOLARTH,TEXTILES,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,
 SOLARTH,TOTENGY,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 SOLARTH,TRANSEQ,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
 SOLARTH,WOODPRO,Industrial,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
-SUBCOAL,AGRICULT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+SUBCOAL,AGRICULT,Agriculture,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 SUBCOAL,AUTOCHP,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
 SUBCOAL,AUTOELEC,Electric Power,Total,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
 SUBCOAL,AUTOHEAT,Industrial,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
@@ -2641,3 +2641,48 @@ WHITESP,TRANSEQ,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 WHITESP,TREFINER,Industrial,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 WHITESP,TTROAD,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
 WHITESP,WORLDMAR,Transportation,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,Y,Y,N
+ANTCOAL,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+AVGAS,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BIODIESEL,AGRICULT,Forests & Wetlands,Liquid fuels,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+BIOGASES,AGRICULT,Forests & Wetlands,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+BIOGASOL,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BITCOAL,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+BITUMEN,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+BKB,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+CHARCOAL,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COKCOAL,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+COKEOVGS,AGRICULT,Forests & Wetlands,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+CRUDEOIL,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+ELECTR,AGRICULT,Forests & Wetlands,Electricity,electricity ef ratio,N,electricity addtl eff,N,N,N,N,N
+GASWKSGS,AGRICULT,Forests & Wetlands,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+GEOTHERM,AGRICULT,Forests & Wetlands,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+HEAT,AGRICULT,Forests & Wetlands,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+HEATNS,AGRICULT,Forests & Wetlands,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+HHEAT,AGRICULT,Forests & Wetlands,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+HHEATNS,AGRICULT,Forests & Wetlands,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+INDWASTE,AGRICULT,Forests & Wetlands,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+LHEAT,AGRICULT,Forests & Wetlands,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+LHEATNS,AGRICULT,Forests & Wetlands,Total,heat ef ratio,N,heat addtl eff,Y,N,N,Y,N
+LIGNITE,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+LPG,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+LUBRIC,AGRICULT,Forests & Wetlands,Total,na,N,na,N,N,N,N,Y
+MUNWASTEN,AGRICULT,Forests & Wetlands,Total,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+MUNWASTER,AGRICULT,Forests & Wetlands,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+NATGAS,AGRICULT,Forests & Wetlands,Natural gas,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NGL,AGRICULT,Forests & Wetlands,Liquid fuels,natural gas ef ratio,N,natural gas addtl eff,N,N,N,N,N
+NONBIODIES,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOGASO,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+NONBIOJETK,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OBIOLIQ,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OILSHALE,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+ONONSPEC,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OTHKERO,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+OVENCOKE,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PATFUEL,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEAT,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PEATPROD,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PETCOKE,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
+PRIMSBIO,AGRICULT,Forests & Wetlands,Renewables,biofuels_waste ef ratio,N,biofuels_waste addtl eff,N,N,N,N,N
+RESFUEL,AGRICULT,Forests & Wetlands,Liquid fuels,oil ef ratio,N,oil addtl eff,N,N,N,N,N
+SOLARTH,AGRICULT,Forests & Wetlands,Renewables,wws heat ef ratio,N,wws heat addtl eff,N,N,N,N,N
+SUBCOAL,AGRICULT,Forests & Wetlands,Coal,coal ef ratio,N,coal addtl eff,N,N,N,N,N
