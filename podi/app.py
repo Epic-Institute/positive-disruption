@@ -922,7 +922,7 @@ def set_data_and_chart_control_options(
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
-    # store unit_label for use in graph axis label
+    # store unit label for use in graph axis label
     data["units"] = df["unit"].unique().tolist()
 
     # define data_controls_dropdowns that should allow for multi-selection
@@ -1079,7 +1079,7 @@ def set_data_and_chart_control_options(
                     "border": "1px solid #d6d6d6",
                     "display": display,
                 },
-            )
+            ),
         )
 
         div_elements.append(
@@ -2982,10 +2982,7 @@ def update_output_graph(
             if graph_type == "none":
                 data_plot = (
                     pd.DataFrame(
-                        filtered_df[
-                            filtered_df["year"]
-                            >= max(data_end_year, date_range[0])
-                        ]
+                        filtered_df[filtered_df["year"] >= data_end_year]
                     )
                     .set_index(group_by_dropdown_values)
                     .loc[[sub]]
@@ -3006,28 +3003,33 @@ def update_output_graph(
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
-                        customdata=[unit_label],
+                        customdata=[units],
                         hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
-                        legendgroup="Biochar"
-                        if "Biochar" in name
-                        else "Total Emissions",
+                        legendgroup=name,
                     )
                 )
 
                 data_plot = (
                     pd.DataFrame(
-                        filtered_df[
-                            filtered_df["year"]
-                            <= min(data_end_year, date_range[1])
-                        ]
+                        filtered_df[filtered_df["year"] <= data_end_year]
                     )
                     .set_index(group_by_dropdown_values)
                     .loc[[sub]]
-                    .replace(0, np.nan)
+                    .replace(
+                        0,
+                        np.nan,
+                        limit=(
+                            filtered_df[filtered_df["year"] <= data_end_year]
+                            == 0
+                        ).idxmax(),
+                    )
                     .dropna()
                 )
+
+                # replace all leading zeros with NaN
+
                 fig.add_trace(
                     go.Scatter(
                         name=name,
@@ -3053,15 +3055,13 @@ def update_output_graph(
                         .replace(0, np.nan)
                         .dropna()["year"]
                         .max()
-                        <= data_end_year
+                        < data_end_year
                         else False,
-                        customdata=[unit_label],
+                        customdata=[units],
                         hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
-                        legendgroup="Biochar"
-                        if "Biochar" in name
-                        else "Total Emissions",
+                        legendgroup=name,
                     )
                 )
 
@@ -3086,7 +3086,7 @@ def update_output_graph(
                         y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
-                        showlegend=True,
+                        showlegend=False,
                         customdata=[str(units)],
                         hovertemplate=graph_template["hovertemplate"]
                         + "<b>Unit</b>: %{customdata[0]}<extra></extra>",

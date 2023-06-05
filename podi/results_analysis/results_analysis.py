@@ -32,7 +32,7 @@ def results_analysis(
 
     analog = pd.read_csv(
         "podi/data/external/CHATTING_SPLICED.csv",
-        usecols=["variable", "label", "iso3c", "year", "category", "value"],
+        # usecols=["variable", "label", "iso3c", "year", "category", "value"],
     )
 
     labels = [
@@ -49,17 +49,17 @@ def results_analysis(
         "Households that subscribe to cable",
         "Cellular subscriptions",
         "Personal computers",
-        "Electricity from coal (TWH)",
-        "Electric power consumption (KWH)",
-        "Electricity from gas (TWH)",
-        "Electricity from hydro (TWH)",
-        "Electricity from nuclear (TWH)",
-        "Electricity from oil (TWH)",
-        "Electricity from other renewables (TWH)",
-        "Electricity from solar (TWH)",
-        "Electricity from wind (TWH)",
-        "Gross output of electric energy (TWH)",
-        "Electricity Generating Capacity, 1000 kilowatts",
+        # "Electricity from coal (TWH)",
+        # "Electric power consumption (KWH)",
+        # "Electricity from gas (TWH)",
+        # "Electricity from hydro (TWH)",
+        # "Electricity from nuclear (TWH)",
+        # "Electricity from oil (TWH)",
+        # "Electricity from other renewables (TWH)",
+        # "Electricity from solar (TWH)",
+        # "Electricity from wind (TWH)",
+        # "Gross output of electric energy (TWH)",
+        # "Electricity Generating Capacity, 1000 kilowatts",
         "Fertilizer ammonium nitrate (AN) agricultural use tonnes",
         "Fertilizer ammonium sulphate agricultural use tonnes",
         "Fertilizer diammonium phosphate (DAP) agricultural use tonnes",
@@ -77,8 +77,8 @@ def results_analysis(
         "Automatic looms",
         "Ordinary and automatic looms",
         "Items mailed or received",
-        "% Arable land share in agricultural land",
-        "% Irrigated area as a share of cultivated land",
+        # "% Arable land share in agricultural land",
+        # "% Irrigated area as a share of cultivated land",
         "Pesticide fungicides and bactericides agricultural use tonnes",
         "Pesticide herbicides agricultural use tonnes",
         "Pesticide insecticides agricultural use tonnes",
@@ -850,7 +850,7 @@ def results_analysis(
     ###################
     # PANDAS DF AGENT #
     ###################
-
+    """
     # region
 
     # set open_ai_key as environment variable
@@ -866,7 +866,7 @@ def results_analysis(
     agent.run("how much co2 can biochar mitigate in 2030?")
 
     # endregion
-
+    """
     ###########################################
     #  COMPARE OBSERVED TO MODELED EMISSIONS  #
     ###########################################
