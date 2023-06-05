@@ -78,7 +78,8 @@ def clean_gas_name(gas_name):
 
 # make dictionary of model_output options that uses common names for keys
 model_output = {
-    "energy_output": "Energy Supply & Demand",
+    "energy_output_supply": "Energy Supply",
+    "energy_output_demand": "Energy Demand",
     "emissions_output_co2e": "GHG Emissions",
     "climate_output_concentration": "GHG Concentration",
     "climate_output_temperature": "Temperature Change",
@@ -103,7 +104,7 @@ all_possible_index_names = [
 
 # define model_output index levels that should be included as dropdowns in data_controls
 data_controls_dropdowns = {
-    "energy_output": [
+    "energy_output_supply": [
         "model",
         "scenario",
         "region",
@@ -111,7 +112,20 @@ data_controls_dropdowns = {
         # "product_category",
         "product_long",
         # "product_short",
-        # "flow_category",
+        "flow_category",
+        "flow_long",
+        # "flow_short",
+        # "unit",
+    ],
+    "energy_output_demand": [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        # "product_category",
+        "product_long",
+        # "product_short",
+        "flow_category",
         "flow_long",
         # "flow_short",
         # "unit",
@@ -128,19 +142,6 @@ data_controls_dropdowns = {
         "flow_long",
         # "flow_short",
         # "unit",
-    ],
-    "afolu_output": [
-        "model",
-        "scenario",
-        "region",
-        "sector",
-        "product_category",
-        # "product_long",
-        # "product_short",
-        "flow_category",
-        "flow_long",
-        # "flow_short",
-        # "unit"
     ],
     "climate_output_concentration": [
         "model",
@@ -337,7 +338,7 @@ app.layout = html.Div(
                                                     ],
                                                     value=list(
                                                         model_output.keys()
-                                                    )[1],
+                                                    )[2],
                                                     clearable=False,
                                                     className="mb-2",
                                                 ),
@@ -513,24 +514,33 @@ app.layout = html.Div(
                                             children=[
                                                 html.Div(
                                                     children=[
-                                                        html.Iframe(
-                                                            src="https://app.wonderchat.io/chatbot/clgo3z4gv00k1mc0kplyvv4j6",
-                                                            style={
-                                                                "width": "100%",
-                                                                "height": "300px",
-                                                                "border": "none",
-                                                                "borderRadius": "30px",
-                                                            },
-                                                        ),
+                                                        # html.Iframe(
+                                                        #     src="https://app.wonderchat.io/chatbot/clgo3z4gv00k1mc0kplyvv4j6",
+                                                        #     style={
+                                                        #         "width": "100%",
+                                                        #         "height": "300px",
+                                                        #         "border": "none",
+                                                        #         "borderRadius": "30px",
+                                                        #     },
+                                                        # ),
                                                         html.Div(
                                                             [
                                                                 dcc.Input(
                                                                     id="pandasai-input",
-                                                                    value="Have a question about the data?",
+                                                                    value="",
                                                                     type="text",
-                                                                ),
-                                                                html.Div(
-                                                                    id="pandasai-output"
+                                                                    placeholder="Enter your question here",
+                                                                    style={
+                                                                        "width": "100%",
+                                                                        "height": "50px",
+                                                                        "lineHeight": "50px",
+                                                                        "border": "2px solid #ccc",
+                                                                        "borderRadius": "5px",
+                                                                        "textAlign": "left",
+                                                                        "fontSize": "18px",
+                                                                        "fontFamily": "Arial",
+                                                                        "marginBottom": "10px",
+                                                                    },
                                                                 ),
                                                             ]
                                                         ),
@@ -585,7 +595,8 @@ def set_data_and_chart_control_options(
 ):
     # define graph_output_dropdown_values
     graph_output_dropdown_values = {
-        "energy_output": ["Energy Supply & Demand"],
+        "energy_output_supply": ["Energy Supply"],
+        "energy_output_demand": ["Energy Demand"],
         "emissions_output_co2e": [
             "Emissions Sources",
             "Negative Emissions",
@@ -602,7 +613,8 @@ def set_data_and_chart_control_options(
 
     # define graph_output_dropdown_values_default
     graph_output_dropdown_values_default = {
-        "energy_output": "Energy Supply & Demand",
+        "energy_output_supply": "Energy Supply",
+        "energy_output_demand": "Energy Demand",
         "emissions_output_co2e": "Emissions Sources",
         "climate_output_concentration": "GHG Concentration",
         "climate_output_temperature": "Temperature Change",
@@ -617,12 +629,22 @@ def set_data_and_chart_control_options(
 
     # define group_by_dropdown_values
     group_by_dropdown_values = {
-        "energy_output": [
+        "energy_output_supply": [
             {"label": "Scenario", "value": "scenario"},
             {"label": "Region", "value": "region"},
             {"label": "Sector", "value": "sector"},
             {"label": "Product Category", "value": "product_category"},
             {"label": "Product", "value": "product_long"},
+            {"label": "Flow Category", "value": "flow_category"},
+            {"label": "Flow", "value": "flow_long"},
+        ],
+        "energy_output_demand": [
+            {"label": "Scenario", "value": "scenario"},
+            {"label": "Region", "value": "region"},
+            {"label": "Sector", "value": "sector"},
+            {"label": "Product Category", "value": "product_category"},
+            {"label": "Product", "value": "product_long"},
+            {"label": "Flow Category", "value": "flow_category"},
             {"label": "Flow", "value": "flow_long"},
         ],
         "emissions_output_co2e": [
@@ -634,14 +656,6 @@ def set_data_and_chart_control_options(
             {"label": "Flow Category", "value": "flow_category"},
             {"label": "Flow", "value": "flow_long"},
             {"label": "Unit", "value": "unit"},
-        ],
-        "afolu_output": [
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow", "value": "flow_long"},
         ],
         "climate_output_concentration": [
             {"label": "Model", "value": "model"},
@@ -674,9 +688,9 @@ def set_data_and_chart_control_options(
 
     # define group_by_dropdown_values_default
     group_by_dropdown_values_default = {
-        "energy_output": ["sector", "product_long"],
+        "energy_output_supply": ["sector", "product_long"],
+        "energy_output_demand": ["sector", "product_long"],
         "emissions_output_co2e": ["flow_long"],
-        "afolu_output": "flow_long",
         "climate_output_concentration": ["scenario", "gas"],
         "climate_output_temperature": "scenario",
         "climate_output_forcing": "scenario",
@@ -697,7 +711,17 @@ def set_data_and_chart_control_options(
 
     # define y_axis_type_dropdown_values
     y_axis_type_dropdown_values = {
-        "energy_output": [
+        "energy_output_supply": [
+            "Linear",
+            "Log",
+            "Cumulative",
+            "% of Cumulative at Final Year",
+            "% of Annual Total",
+            "% Change YOY",
+            "% of Maximum Value",
+            "% of Final Year Value",
+        ],
+        "energy_output_demand": [
             "Linear",
             "Log",
             "Cumulative",
@@ -718,16 +742,6 @@ def set_data_and_chart_control_options(
             "% of Final Year Value",
             "PPM",
         ],
-        "afolu_output": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% of Annual Total",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-        ],
         "climate_output_concentration": ["Linear", "Log", "% Change YOY"],
         "climate_output_temperature": ["Linear", "Log", "% Change YOY"],
         "climate_output_forcing": ["Linear", "Log", "% Change YOY"],
@@ -744,9 +758,9 @@ def set_data_and_chart_control_options(
 
     # define y_axis_type_dropdown_default
     y_axis_type_dropdown_default = {
-        "energy_output": "Linear",
+        "energy_output_supply": "Linear",
+        "energy_output_demand": "Linear",
         "emissions_output_co2e": "Linear",
-        "afolu_output": "Linear",
         "climate_output_concentration": "Linear",
         "climate_output_temperature": "Linear",
         "climate_output_forcing": "Linear",
@@ -758,17 +772,17 @@ def set_data_and_chart_control_options(
 
     # define graph_type_dropdown_values
     graph_type_dropdown_values = {
-        "energy_output": [
+        "energy_output_supply": [
+            {"label": "Area", "value": "tonexty"},
+            {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
+        ],
+        "energy_output_demand": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
             {"label": "Table", "value": "Table"},
         ],
         "emissions_output_co2e": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "afolu_output": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
             {"label": "Table", "value": "Table"},
@@ -797,9 +811,9 @@ def set_data_and_chart_control_options(
 
     # define graph_type_dropdown_default
     graph_type_dropdown_default = {
-        "energy_output": "tonexty",
+        "energy_output_supply": "tonexty",
+        "energy_output_demand": "tonexty",
         "emissions_output_co2e": "tonexty",
-        "afolu_output": "tonexty",
         "climate_output_concentration": "none",
         "climate_output_temperature": "none",
         "climate_output_forcing": "none",
@@ -809,9 +823,63 @@ def set_data_and_chart_control_options(
     graph_type_dropdown_values = graph_type_dropdown_values[model_output]
     graph_type_dropdown_default = graph_type_dropdown_default[model_output]
 
+    # define units_dropdown_values
+    units_dropdown_values = {
+        "energy_output_supply": [
+            {"label": "TJ", "value": "TJ"},
+            {"label": "EJ", "value": "EJ"},
+            {"label": "GWh", "value": "GWh"},
+            {"label": "TWh", "value": "TWh"},
+        ],
+        "energy_output_demand": [
+            {"label": "TJ", "value": "TJ"},
+            {"label": "EJ", "value": "EJ"},
+            {"label": "GWh", "value": "GWh"},
+            {"label": "TWh", "value": "TWh"},
+        ],
+        "emissions_output_co2e": [
+            {"label": "MtCO2e", "value": "MtCO2e"},
+            {"label": "GtCO2e", "value": "GtCO2e"},
+        ],
+        "climate_output_concentration": [
+            {"label": "PPM", "value": "PPM"},
+            {"label": "PPB", "value": "PPB"},
+        ],
+        "climate_output_temperature": [
+            {"label": "C", "value": "C"},
+            {"label": "F", "value": "F"},
+        ],
+        "climate_output_forcing": [
+            {"label": "W/m^2", "value": "W/m^2"},
+        ],
+        "technology_adoption_output": [
+            {"label": "Multiple", "value": "Multiple"},
+        ],
+    }
+
+    # define units_dropdown_default
+    units_dropdown_default = {
+        "energy_output_supply": "TJ",
+        "energy_output_demand": "TJ",
+        "emissions_output_co2e": "MtCO2e",
+        "climate_output_concentration": "PPM",
+        "climate_output_temperature": "C",
+        "climate_output_forcing": "W/m^2",
+        "technology_adoption_output": "Multiple",
+    }
+
+    units_dropdown_values = units_dropdown_values[model_output]
+    units_dropdown_default = units_dropdown_default[model_output]
+
     # define data_controls_default for a given model_output
     data_controls_default = {
-        "energy_output": {"flow_category": ["Final consumption"]},
+        "energy_output_supply": {},
+        "energy_output_demand": {
+            "flow_category": [
+                "Final consumption",
+                "Energy industry own use and Losses",
+            ]
+        },
         # "emissions_output_co2e": {
         #     "region": [],
         #     "sector": [],
@@ -854,7 +922,7 @@ def set_data_and_chart_control_options(
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
-    # store units for use in graph axis label
+    # store unit_label for use in graph axis label
     data["units"] = df["unit"].unique().tolist()
 
     # define data_controls_dropdowns that should allow for multi-selection
@@ -889,6 +957,7 @@ def set_data_and_chart_control_options(
         "yaxis-type": "Select the y-axis type to view",
         "graph-type": "Select the graph type to view",
         "graph-output": "Select the graph output to view",
+        "units": "Select the unit to view",
     }
 
     # drop the columns that are numerical and not in the range of data_start_year to proj_end_year
@@ -1029,105 +1098,118 @@ def set_data_and_chart_control_options(
 
     # define graph controls layout
     graph_controls = html.Div(
-        dbc.Row(
-            [
-                dbc.Col(
-                    [
-                        html.Label(
-                            "Graph Output",
-                            id="graph-output",
-                            className="select-label",
-                        ),
-                        dbc.Tooltip(
-                            tooltip_dict["graph-output"],
-                            target="graph-output",
-                            placement="top",
-                            style={"fontSize": "0.8rem"},
-                        ),
-                        html.Div(
-                            [
-                                dcc.Dropdown(
-                                    graph_output_dropdown_values,
-                                    value=graph_output_dropdown_values_default,
-                                    id="graph_output",
-                                    clearable=False,
-                                ),
-                            ],
-                            className="mb-2",
-                        ),
-                        html.Label(
-                            "Group By", id="group-by", className="select-label"
-                        ),
-                        dbc.Tooltip(
-                            tooltip_dict["group-by"],
-                            target="group-by",
-                            placement="top",
-                            style={"fontSize": "0.8rem"},
-                        ),
-                        html.Div(
-                            [
-                                dcc.Dropdown(
-                                    group_by_dropdown_values,
-                                    value=group_by_dropdown_values_default,
-                                    id="group_by_dropdown_values",
-                                    multi=True,
-                                    clearable=False,
-                                )
-                            ],
-                            className="mb-2",
-                        ),
-                    ]
-                ),
-                dbc.Col(
-                    [
-                        html.Label(
-                            "Y-Axis Type",
-                            id="yaxis-type",
-                            className="select-label",
-                        ),
-                        dbc.Tooltip(
-                            tooltip_dict["yaxis-type"],
-                            target="yaxis-type",
-                            placement="top",
-                            style={"fontSize": "0.8rem"},
-                        ),
-                        html.Div(
-                            [
-                                dcc.Dropdown(
-                                    y_axis_type_dropdown_values,
-                                    y_axis_type_dropdown_default,
-                                    id="yaxis_type",
-                                    clearable=False,
-                                ),
-                            ],
-                            className="mb-2",
-                        ),
-                        html.Label(
-                            "Graph Type",
-                            id="graph-type",
-                            className="select-label",
-                        ),
-                        dbc.Tooltip(
-                            tooltip_dict["graph-type"],
-                            target="graph-type",
-                            placement="top",
-                            style={"fontSize": "0.8rem"},
-                        ),
-                        html.Div(
-                            [
-                                dcc.Dropdown(
-                                    graph_type_dropdown_values,
-                                    graph_type_dropdown_default,
-                                    id="graph_type",
-                                    clearable=False,
-                                ),
-                            ],
-                            className="mb-2",
-                        ),
-                    ]
-                ),
-            ]
-        ),
+        [
+            html.Div(
+                [
+                    html.Label(
+                        "Graph Output",
+                        id="graph-output",
+                        className="select-label",
+                    ),
+                    dbc.Tooltip(
+                        tooltip_dict["graph-output"],
+                        target="graph-output",
+                        placement="top",
+                        style={"fontSize": "0.8rem"},
+                    ),
+                    dcc.Dropdown(
+                        graph_output_dropdown_values,
+                        value=graph_output_dropdown_values_default,
+                        id="graph_output",
+                        clearable=False,
+                    ),
+                ],
+                className="col-md-4 mb-2",
+            ),
+            html.Div(
+                [
+                    html.Label(
+                        "Group By", id="group-by", className="select-label"
+                    ),
+                    dbc.Tooltip(
+                        tooltip_dict["group-by"],
+                        target="group-by",
+                        placement="top",
+                        style={"fontSize": "0.8rem"},
+                    ),
+                    dcc.Dropdown(
+                        group_by_dropdown_values,
+                        value=group_by_dropdown_values_default,
+                        id="group_by_dropdown_values",
+                        multi=True,
+                        clearable=False,
+                    ),
+                ],
+                className="col-md-4 mb-2",
+            ),
+            html.Div(
+                [
+                    html.Label(
+                        "Y-Axis Type",
+                        id="yaxis-type",
+                        className="select-label",
+                    ),
+                    dbc.Tooltip(
+                        tooltip_dict["yaxis-type"],
+                        target="yaxis-type",
+                        placement="top",
+                        style={"fontSize": "0.8rem"},
+                    ),
+                    dcc.Dropdown(
+                        y_axis_type_dropdown_values,
+                        y_axis_type_dropdown_default,
+                        id="yaxis_type",
+                        clearable=False,
+                    ),
+                ],
+                className="col-md-4 mb-2",
+            ),
+            html.Div(
+                [
+                    html.Label(
+                        "Graph Type",
+                        id="graph-type",
+                        className="select-label",
+                    ),
+                    dbc.Tooltip(
+                        tooltip_dict["graph-type"],
+                        target="graph-type",
+                        placement="top",
+                        style={"fontSize": "0.8rem"},
+                    ),
+                    dcc.Dropdown(
+                        graph_type_dropdown_values,
+                        graph_type_dropdown_default,
+                        id="graph_type",
+                        clearable=False,
+                    ),
+                ],
+                className="col-md-4 mb-2",
+            ),
+            html.Div(
+                [
+                    html.Label(
+                        "Units",
+                        id="units",
+                        className="select-label",
+                    ),
+                    dbc.Tooltip(
+                        tooltip_dict["units"],
+                        target="units",
+                        placement="top",
+                        style={"fontSize": "0.8rem"},
+                    ),
+                    dcc.Dropdown(
+                        units_dropdown_values,
+                        units_dropdown_default,
+                        id="units",
+                        clearable=False,
+                    ),
+                ],
+                className="col-md-4 mb-2",
+            ),
+        ],
+        className="row",
     )
 
     return (data_controls, graph_controls)
@@ -1394,6 +1476,7 @@ for level in all_possible_index_names:
         Input("group_by_dropdown_values", "value"),
         Input("yaxis_type", "value"),
         Input("graph_type", "value"),
+        Input("units", "value"),
         *[Input(f"{level}", "value") for level in all_possible_index_names],
     ],
 )
@@ -1405,6 +1488,7 @@ def update_output_graph(
     group_by_dropdown_values,
     yaxis_type,
     graph_type,
+    units,
     *index_values,
 ):
     # define dictionaries used for graph formatting
@@ -1446,7 +1530,8 @@ def update_output_graph(
     }
 
     model_output_dict = {
-        "energy_output": "Energy Supply & Demand",
+        "energy_output_supply": "Energy Supply",
+        "energy_output_demand": "Energy Demand",
         "emissions_output_co2e": "GHG Emissions",
         "climate_output_concentration": "GHG Concentration",
         "climate_output_temperature": "Temperature Change",
@@ -1464,6 +1549,21 @@ def update_output_graph(
         "Forests & Wetlands": "This is the forests & wetlands sector. It includes the use of electricity in the forests & wetlands sector.",
     }
 
+    units_dict = {
+        "TJ": 1,
+        "EJ": 1e-6,
+        "GWh": 2.78e-1,
+        "TWh": 2.78e-4,
+        "MtCO2e": 1,
+        "GtCO2e": 1e-3,
+        "PPM": 1,
+        "PPB": 1e3,
+        "C": 1,
+        "F": 9 / 5 + 32,
+        "W/m2": 1,
+        "Multiple": 1,
+    }
+
     # drop empty index_values
     index_values = [value for value in index_values if value]
 
@@ -1477,7 +1577,6 @@ def update_output_graph(
         raise FileNotFoundError("Data directory not found")
 
     df = data["df"]
-    units = data["units"]
 
     # remove index values at locations where df.index.names is not in data_controls_dropdowns[model_output]
     index_values = [
@@ -1508,6 +1607,10 @@ def update_output_graph(
 
     filtered_df = df.loc[tuple([*index_values])]
     df = df.loc[tuple([*index_values])]
+
+    # update units based on units dropdown
+    filtered_df = filtered_df * units_dict[units]
+    df = df * units_dict[units]
 
     # check if filtered_df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
@@ -1616,7 +1719,7 @@ def update_output_graph(
         return (fig,)
 
     # create graph based graph_output selection
-    if graph_output == "Energy Supply & Demand":
+    if graph_output == "Energy Supply" or graph_output == "Energy Demand":
         fig = go.Figure()
 
         i = 0
@@ -1651,8 +1754,13 @@ def update_output_graph(
                 data_plot = (
                     pd.DataFrame(filtered_df)
                     .set_index(group_by_dropdown_values)
-                    .loc[[sub], : str(data_end_year)]
+                    .loc[[sub]]
                 )
+
+                # if all values are zero, skip
+                if data_plot["value"].sum() == 0:
+                    continue
+
                 fig.add_trace(
                     go.Scatter(
                         name=clean_gas_name(name),
@@ -1661,8 +1769,12 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="solid",
                         ),
-                        x=data_plot["year"].values.dropna(),
-                        y=data_plot["value"].values.dropna(),
+                        x=data_plot[data_plot["year"] <= data_end_year][
+                            "year"
+                        ].values,
+                        y=data_plot[data_plot["year"] <= data_end_year][
+                            "value"
+                        ].values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1673,11 +1785,7 @@ def update_output_graph(
                         legendgroup=name,
                     )
                 )
-                data_plot = (
-                    pd.DataFrame(filtered_df)
-                    .set_index(group_by_dropdown_values)
-                    .loc[[sub], str(data_end_year) : str(proj_end_year)]
-                )
+
                 fig.add_trace(
                     go.Scatter(
                         name=clean_gas_name(name),
@@ -1686,8 +1794,12 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="dashdot",
                         ),
-                        x=data_plot["year"].values,
-                        y=data_plot["value"].values,
+                        x=data_plot[data_plot["year"] >= data_end_year][
+                            "year"
+                        ].values,
+                        y=data_plot[data_plot["year"] >= data_end_year][
+                            "value"
+                        ].values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=False,
@@ -1699,17 +1811,24 @@ def update_output_graph(
                     )
                 )
             else:
+                data_plot = (
+                    pd.DataFrame(filtered_df)
+                    .set_index(group_by_dropdown_values)
+                    .loc[[sub]]
+                )
+
+                # if all values are zero, skip
+                if data_plot["value"].sum() == 0:
+                    continue
+
                 fig.add_trace(
                     go.Scatter(
                         name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
-                        x=filtered_df["year"].drop_duplicates(),
-                        y=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]["value"]
-                        .values,
+                        x=data_plot["year"].values,
+                        y=data_plot["value"].values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1755,7 +1874,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -1763,10 +1882,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -1943,7 +2062,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -1951,10 +2070,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2128,7 +2247,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -2136,10 +2255,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2304,7 +2423,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -2312,10 +2431,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2362,7 +2481,7 @@ def update_output_graph(
             )
 
         if yaxis_type == "PPM":
-            units[0] = "PPM"
+            units = "PPM"
             df.update(
                 df.loc[:, : str(data_end_year)].applymap(lambda x: x / 17.3e3)
             )
@@ -2800,7 +2919,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -2808,10 +2927,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2875,7 +2994,7 @@ def update_output_graph(
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
-                        customdata=[units],
+                        customdata=[unit_label],
                         hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
@@ -2924,7 +3043,7 @@ def update_output_graph(
                         .max()
                         <= data_end_year
                         else False,
-                        customdata=[units],
+                        customdata=[unit_label],
                         hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
@@ -2956,7 +3075,7 @@ def update_output_graph(
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
-                        customdata=[str(units[0])],
+                        customdata=[str(units)],
                         hovertemplate=graph_template["hovertemplate"]
                         + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
                         fillcolor=graph_template["fillcolor"][i],
@@ -2998,7 +3117,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -3006,10 +3125,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -3165,7 +3284,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -3173,10 +3292,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")

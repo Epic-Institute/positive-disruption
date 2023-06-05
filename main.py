@@ -1,23 +1,11 @@
 # region
-import numpy as np
 import pandas as pd
 
 from podi.afolu import afolu
-from podi.cdr.cdr_main import cdr_mix
-from podi.cdr.cdr_util import (
-    fuel_em_def,
-    grid_em_def,
-    heat_em_def,
-    transport_em_def,
-)
 from podi.climate import climate
 from podi.emissions import emissions
 from podi.energy import energy
 from podi.results_analysis.results_analysis import results_analysis
-
-# import warnings
-
-# warnings.simplefilter(action="ignore", category=FutureWarning)
 
 # endregion
 
@@ -32,7 +20,7 @@ proj_end_year = 2100
 # ENERGY #
 ##########
 
-recalc_energy = False
+recalc_energy = True
 # region
 
 if recalc_energy is True:
@@ -83,7 +71,7 @@ energy_percent.columns = energy_percent.columns.astype(int)
 # AFOLU #
 #########
 
-recalc_afolu = False
+recalc_afolu = True
 # region
 
 if recalc_afolu is True:
@@ -111,7 +99,7 @@ afolu_output.columns = afolu_output.columns.astype(int)
 # EMISSIONS #
 #############
 
-recalc_emissions = False
+recalc_emissions = True
 # region
 
 if recalc_emissions is True:
@@ -151,7 +139,7 @@ emissions_output_co2e.columns = emissions_output_co2e.columns.astype(int)
 # CLIMATE #
 ###########
 
-recalc_climate = False
+recalc_climate = True
 # region
 
 if recalc_climate is True:
@@ -191,7 +179,7 @@ climate_output_forcing.columns = climate_output_forcing.columns.astype(int)
 # RESULTS ANALYSIS #
 ####################
 
-recalc_analysis = False
+recalc_analysis = True
 # region
 
 if recalc_analysis is True:
@@ -236,10 +224,6 @@ technology_adoption_output.columns = technology_adoption_output.columns.astype(
 #######################################
 
 # region
-
-# Select output_start_date and output_end_date
-output_start_date = 2010
-output_end_date = 2100
 
 # Combine 'Residential' and 'Commercial' sectors into 'Buildings' sector
 energy_output = pd.concat(
@@ -303,18 +287,34 @@ emissions_output_co2e = emissions_output_co2e[
     ).values
 ]
 
-# Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
-energy_output = energy_output[
-    ~(
-        energy_output.reset_index().flow_long.isin(
-            ["Transformation Processes", "Energy industry own use and Losses"]
+# Split energy_output into energy_output_supply and energy_output_demand
+energy_output_supply = energy_output[
+    (
+        energy_output.reset_index().flow_category.isin(
+            [
+                "Electricity output",
+                "Heat output",
+            ]
         )
     ).values
 ]
 
-# Save as regional-level files and a global-level file
+energy_output_demand = energy_output[
+    (
+        energy_output.reset_index().flow_category.isin(
+            [
+                "Final consumption",
+                "Transformation processes",
+                "Energy industry own use and Losses",
+            ]
+        )
+    ).values
+]
+
+# Save
 for output in [
-    (energy_output, "energy_output"),
+    (energy_output_supply, "energy_output_supply"),
+    (energy_output_demand, "energy_output_demand"),
     (emissions_output, "emissions_output"),
     (emissions_output_co2e, "emissions_output_co2e"),
 ]:

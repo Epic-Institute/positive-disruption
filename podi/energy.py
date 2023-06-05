@@ -410,6 +410,28 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         )
     )
 
+    # Flow AGRICULT was doubled to create sectors 'Agriculture' and 'Forests & Wetlands'. Scale down to estimate 80% in 'Agriculture' and 20% in 'Forests & Wetlands'
+
+    # region
+
+    energy_historical.loc[
+        (energy_historical.reset_index().sector == "Forests & Wetlands").values
+    ] = energy_historical.loc[
+        (energy_historical.reset_index().sector == "Forests & Wetlands").values
+    ].apply(
+        lambda x: x * 0.2
+    )
+
+    energy_historical.loc[
+        (energy_historical.reset_index().sector == "Agriculture").values
+    ] = energy_historical.loc[
+        (energy_historical.reset_index().sector == "Agriculture").values
+    ].apply(
+        lambda x: x * 0.8
+    )
+
+    # endregion
+
     # Split ROAD Flow into Two- and three-wheeled, Light, Medium (Buses), Heavy (Trucks)
 
     # region
@@ -836,6 +858,42 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         axis=1,
     )
 
+    # if flow_short is 'AGRICULT' and sector is 'Agriculture' then rename flow_long to 'Agriculture'
+    energy_historical = energy_historical.reset_index()
+    energy_historical.update(
+        energy_historical[
+            (
+                (energy_historical.flow_short == "AGRICULT")
+                & (energy_historical.sector == "Agriculture")
+            )
+        ].parallel_apply(
+            lambda x: x.replace(
+                {
+                    "Agriculture/forestry": "Agriculture",
+                }
+            ),
+            axis=1,
+        )
+    )
+
+    # if flow_short is 'AGRICULT' and sector is 'Forests & Wetlands' then rename flow_long to 'Forests & Wetlands' and rename flow_short to 'FOREST'
+    energy_historical.update(
+        energy_historical[
+            (
+                (energy_historical.flow_short == "AGRICULT")
+                & (energy_historical.sector == "Forests & Wetlands")
+            ).values
+        ].parallel_apply(
+            lambda x: x.replace(
+                {
+                    "AGRICULT": "FOREST",
+                    "Agriculture/forestry": "Forests & Wetlands",
+                }
+            ),
+            axis=1,
+        )
+    )
+
     energy_historical = energy_historical.reset_index().set_index(
         [
             "model",
@@ -1007,6 +1065,23 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         .replace(NaN, 0)
         + 1
     ).loc[:, data_end_year + 1 :]
+
+    # Make a copy of Industry values for Agriculture and Forests & Wetlands
+    energy_projection = pd.concat(
+        [
+            energy_projection,
+            energy_projection[
+                (
+                    energy_projection.reset_index().sector.isin(["Industrial"])
+                ).values
+            ].rename(index={"Industrial": "Agriculture"}),
+            energy_projection[
+                (
+                    energy_projection.reset_index().sector.isin(["Industrial"])
+                ).values
+            ].rename(index={"Industrial": "Forests & Wetlands"}),
+        ]
+    )
 
     # Merge historical and projected energy
     energy_baseline = (
@@ -1310,6 +1385,12 @@ def energy(model, scenario, data_start_year, data_end_year, proj_end_year):
         .rename_axis(index={"WWS EF Product": "product_short"})
         .rename(columns={"product_short": "IEA Product"})
     ).sort_index()
+
+    # for rows where sector is 'Forests & Wetlands', set flow_short to 'FOREST'
+    labels.loc[
+        labels.index.get_level_values("sector") == "Forests & Wetlands",
+        "flow_short",
+    ] = "FOREST"
 
     ef_ratios = (
         (
