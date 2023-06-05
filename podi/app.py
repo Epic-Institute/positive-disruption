@@ -953,11 +953,13 @@ def set_data_and_chart_control_options(
                                 id=level+'-search-box',
                                 value='',
                                 type='text',
-                                placeholder='Search...'
+                                placeholder='Search...',
+                                className='search-box-input'
                             ),
                             html.Button(
-                                "clear search",
-                                id=level+'-clear-search'
+                                "X",
+                                id=level+'-clear-search',
+                                className='clear-search'
                             )
                         ]
                     ),
