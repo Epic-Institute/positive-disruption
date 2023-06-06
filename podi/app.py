@@ -1041,17 +1041,17 @@ def set_data_and_chart_control_options(
                     html.Div(
                         [
                             dcc.Input(
-                                id=level+'-search-box',
-                                value='',
-                                type='text',
-                                placeholder='Search...',
-                                className='search-box-input'
+                                id=level + "-search-box",
+                                value="",
+                                type="text",
+                                placeholder="Search...",
+                                className="search-box-input",
                             ),
                             html.Button(
                                 "X",
-                                id=level+'-clear-search',
-                                className='clear-search'
-                            )
+                                id=level + "-clear-search",
+                                className="clear-search",
+                            ),
                         ]
                     ),
                     html.Div(
@@ -1101,7 +1101,6 @@ def set_data_and_chart_control_options(
 
     # define graph controls layout
     graph_controls = html.Div(
-
         dbc.Row(
             [
                 dbc.Col(
@@ -1197,33 +1196,32 @@ def set_data_and_chart_control_options(
                             ],
                             className="mb-2",
                         ),
-                      html.Div(
-                [
-                    html.Label(
-                        "Units",
-                        id="units",
-                        className="select-label",
-                    ),
-                    dbc.Tooltip(
-                        tooltip_dict["units"],
-                        target="units",
-                        placement="top",
-                        style={"fontSize": "0.8rem"},
-                    ),
-                    dcc.Dropdown(
-                        units_dropdown_values,
-                        units_dropdown_default,
-                        id="units",
-                        clearable=False,
-                    ),
-                ],
-                className="mb-2",
-            ),
+                        html.Div(
+                            [
+                                html.Label(
+                                    "Units",
+                                    id="units",
+                                    className="select-label",
+                                ),
+                                dbc.Tooltip(
+                                    tooltip_dict["units"],
+                                    target="units",
+                                    placement="top",
+                                    style={"fontSize": "0.8rem"},
+                                ),
+                                dcc.Dropdown(
+                                    units_dropdown_values,
+                                    units_dropdown_default,
+                                    id="units",
+                                    clearable=False,
+                                ),
+                            ],
+                            className="mb-2",
+                        ),
                     ]
                 ),
             ]
         ),
-        ],
     )
 
     return (data_controls, graph_controls)
@@ -1446,30 +1444,38 @@ for level in all_possible_index_names:
         return selected
 
 
-for level in all_possible_index_values:
+for level in all_possible_index_names:
+
     @app.callback(
         Output(f"{level}", "options"),
         Input(f"{level}-search-box", "value"),
-        prevent_initial_call=True
+        prevent_initial_call=True,
     )
-    def update_checklist_values(
-        search_value
-    ):
-        this_level = ctx.triggered_id.split('-')[0]
-        values = [] if this_level not in data['df'].index.names else data['df'].reset_index()[this_level].unique().tolist()
-        options = [{'label': i, 'value': i} for i in values if search_value.lower() in i.lower()]
+    def update_checklist_values(search_value):
+        this_level = ctx.triggered_id.split("-")[0]
+        values = (
+            []
+            if this_level not in data["df"].index.names
+            else data["df"].reset_index()[this_level].unique().tolist()
+        )
+        options = [
+            {"label": i, "value": i}
+            for i in values
+            if search_value.lower() in i.lower()
+        ]
         return options
-    
-for level in all_possible_index_values:
+
+
+for level in all_possible_index_names:
+
     @app.callback(
         Output(f"{level}-search-box", "value"),
         Input(f"{level}-clear-search", "n_clicks"),
-        prevent_initial_call=True
+        prevent_initial_call=True,
     )
-    def update_options(
-        btn
-    ):
-        return ''
+    def update_options(btn):
+        return ""
+
 
 # update graph
 @app.callback(
