@@ -1041,14 +1041,17 @@ def set_data_and_chart_control_options(
                     html.Div(
                         [
                             dcc.Input(
-                                id=level + "-search-box",
-                                value="",
-                                type="text",
-                                placeholder="Search...",
+                                id=level+'-search-box',
+                                value='',
+                                type='text',
+                                placeholder='Search...',
+                                className='search-box-input'
                             ),
                             html.Button(
-                                "clear search", id=level + "-clear-search"
-                            ),
+                                "X",
+                                id=level+'-clear-search',
+                                className='clear-search'
+                            )
                         ]
                     ),
                     html.Div(
@@ -1098,95 +1101,103 @@ def set_data_and_chart_control_options(
 
     # define graph controls layout
     graph_controls = html.Div(
-        [
-            html.Div(
-                [
-                    html.Label(
-                        "Graph Output",
-                        id="graph-output",
-                        className="select-label",
-                    ),
-                    dbc.Tooltip(
-                        tooltip_dict["graph-output"],
-                        target="graph-output",
-                        placement="top",
-                        style={"fontSize": "0.8rem"},
-                    ),
-                    dcc.Dropdown(
-                        graph_output_dropdown_values,
-                        value=graph_output_dropdown_values_default,
-                        id="graph_output",
-                        clearable=False,
-                    ),
-                ],
-                className="col-md-4 mb-2",
-            ),
-            html.Div(
-                [
-                    html.Label(
-                        "Group By", id="group-by", className="select-label"
-                    ),
-                    dbc.Tooltip(
-                        tooltip_dict["group-by"],
-                        target="group-by",
-                        placement="top",
-                        style={"fontSize": "0.8rem"},
-                    ),
-                    dcc.Dropdown(
-                        group_by_dropdown_values,
-                        value=group_by_dropdown_values_default,
-                        id="group_by_dropdown_values",
-                        multi=True,
-                        clearable=False,
-                    ),
-                ],
-                className="col-md-4 mb-2",
-            ),
-            html.Div(
-                [
-                    html.Label(
-                        "Y-Axis Type",
-                        id="yaxis-type",
-                        className="select-label",
-                    ),
-                    dbc.Tooltip(
-                        tooltip_dict["yaxis-type"],
-                        target="yaxis-type",
-                        placement="top",
-                        style={"fontSize": "0.8rem"},
-                    ),
-                    dcc.Dropdown(
-                        y_axis_type_dropdown_values,
-                        y_axis_type_dropdown_default,
-                        id="yaxis_type",
-                        clearable=False,
-                    ),
-                ],
-                className="col-md-4 mb-2",
-            ),
-            html.Div(
-                [
-                    html.Label(
-                        "Graph Type",
-                        id="graph-type",
-                        className="select-label",
-                    ),
-                    dbc.Tooltip(
-                        tooltip_dict["graph-type"],
-                        target="graph-type",
-                        placement="top",
-                        style={"fontSize": "0.8rem"},
-                    ),
-                    dcc.Dropdown(
-                        graph_type_dropdown_values,
-                        graph_type_dropdown_default,
-                        id="graph_type",
-                        clearable=False,
-                    ),
-                ],
-                className="col-md-4 mb-2",
-            ),
-            html.Div(
+
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Label(
+                            "Graph Output",
+                            id="graph-output",
+                            className="select-label",
+                        ),
+                        dbc.Tooltip(
+                            tooltip_dict["graph-output"],
+                            target="graph-output",
+                            placement="top",
+                            style={"fontSize": "0.8rem"},
+                        ),
+                        html.Div(
+                            [
+                                dcc.Dropdown(
+                                    graph_output_dropdown_values,
+                                    value=graph_output_dropdown_values_default,
+                                    id="graph_output",
+                                    clearable=False,
+                                ),
+                            ],
+                            className="mb-2",
+                        ),
+                        html.Label(
+                            "Group By", id="group-by", className="select-label"
+                        ),
+                        dbc.Tooltip(
+                            tooltip_dict["group-by"],
+                            target="group-by",
+                            placement="top",
+                            style={"fontSize": "0.8rem"},
+                        ),
+                        html.Div(
+                            [
+                                dcc.Dropdown(
+                                    group_by_dropdown_values,
+                                    value=group_by_dropdown_values_default,
+                                    id="group_by_dropdown_values",
+                                    multi=True,
+                                    clearable=False,
+                                )
+                            ],
+                            className="mb-2",
+                        ),
+                    ]
+                ),
+                dbc.Col(
+                    [
+                        html.Label(
+                            "Y-Axis Type",
+                            id="yaxis-type",
+                            className="select-label",
+                        ),
+                        dbc.Tooltip(
+                            tooltip_dict["yaxis-type"],
+                            target="yaxis-type",
+                            placement="top",
+                            style={"fontSize": "0.8rem"},
+                        ),
+                        html.Div(
+                            [
+                                dcc.Dropdown(
+                                    y_axis_type_dropdown_values,
+                                    y_axis_type_dropdown_default,
+                                    id="yaxis_type",
+                                    clearable=False,
+                                ),
+                            ],
+                            className="mb-2",
+                        ),
+                        html.Label(
+                            "Graph Type",
+                            id="graph-type",
+                            className="select-label",
+                        ),
+                        dbc.Tooltip(
+                            tooltip_dict["graph-type"],
+                            target="graph-type",
+                            placement="top",
+                            style={"fontSize": "0.8rem"},
+                        ),
+                        html.Div(
+                            [
+                                dcc.Dropdown(
+                                    graph_type_dropdown_values,
+                                    graph_type_dropdown_default,
+                                    id="graph_type",
+                                    clearable=False,
+                                ),
+                            ],
+                            className="mb-2",
+                        ),
+                      html.Div(
                 [
                     html.Label(
                         "Units",
@@ -1206,10 +1217,13 @@ def set_data_and_chart_control_options(
                         clearable=False,
                     ),
                 ],
-                className="col-md-4 mb-2",
+                className="mb-2",
             ),
+                    ]
+                ),
+            ]
+        ),
         ],
-        className="row",
     )
 
     return (data_controls, graph_controls)
@@ -1432,38 +1446,30 @@ for level in all_possible_index_names:
         return selected
 
 
-for level in all_possible_index_names:
-
+for level in all_possible_index_values:
     @app.callback(
         Output(f"{level}", "options"),
         Input(f"{level}-search-box", "value"),
-        prevent_initial_call=True,
+        prevent_initial_call=True
     )
-    def update_checklist_values(search_value):
-        this_level = ctx.triggered_id.split("-")[0]
-        values = (
-            []
-            if this_level not in data["df"].index.names
-            else data["df"].reset_index()[this_level].unique().tolist()
-        )
-        options = [
-            {"label": i, "value": i}
-            for i in values
-            if search_value.lower() in i.lower()
-        ]
+    def update_checklist_values(
+        search_value
+    ):
+        this_level = ctx.triggered_id.split('-')[0]
+        values = [] if this_level not in data['df'].index.names else data['df'].reset_index()[this_level].unique().tolist()
+        options = [{'label': i, 'value': i} for i in values if search_value.lower() in i.lower()]
         return options
-
-
-for level in all_possible_index_names:
-
+    
+for level in all_possible_index_values:
     @app.callback(
         Output(f"{level}-search-box", "value"),
         Input(f"{level}-clear-search", "n_clicks"),
-        prevent_initial_call=True,
+        prevent_initial_call=True
     )
-    def update_options(btn):
-        return ""
-
+    def update_options(
+        btn
+    ):
+        return ''
 
 # update graph
 @app.callback(
