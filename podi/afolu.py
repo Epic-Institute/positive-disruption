@@ -3,7 +3,6 @@
 import numpy as np
 import pandas as pd
 import pyam
-from numpy import NaN
 from pandarallel import pandarallel
 
 pandarallel.initialize(progress_bar=True)
@@ -262,8 +261,12 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .replace("Pathway", scenario)
     ).fillna(0)
 
-    # Max extent is defined by the initial extent, which represents the amount of land
-    # that could be lost in future years.
+    # divide afolu_avoided Initial Loss Rate by 100 to convert from % to fraction
+    afolu_avoided["Initial Loss Rate (%)"] = abs(
+        afolu_avoided["Initial Loss Rate (%)"] / 100
+    )
+
+    # Calculate the maximum extent of avoided emissions in each year. This is defined by the initial extent of forest/coast (Mha that can undergo conversion), the initial loss rate (% of the extent of forest/coast that undergoes conversion), and the 'rate of improvement' of that loss rate (% change in the % of extent of forest/coast that undergoes conversion).
     max_extent_avoided = pd.concat(
         [
             pd.DataFrame(
@@ -277,22 +280,23 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 [
                     afolu_avoided.drop(
                         columns=[
-                            "Initial Loss Rate (%)",
                             "Rate of Improvement",
                             "Mitigation (MtCO2e/ha)",
                             "Duration",
                         ]
                     ),
                     pd.DataFrame(
-                        columns=max_extent.columns,
+                        columns=max_extent.columns[
+                            max_extent.columns > data_end_year
+                        ],
                     ),
                 ]
             )
             .set_index(pyam.IAMC_IDX)
             .parallel_apply(
-                lambda x: x[max_extent.columns[0:]][
-                    x[max_extent.columns[0:]].index > data_end_year
-                ].fillna(x["Initial Extent (Mha)"]),
+                lambda x: x.fillna(1 - x["Initial Loss Rate (%)"])
+                .cumprod()
+                .drop(index=["Initial Loss Rate (%)", "Initial Extent (Mha)"]),
                 axis=1,
             ),
         ],
@@ -317,119 +321,174 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         .parallel_apply(lambda x: x * 0)
     )
 
+    # Calculate max extent for afolu_new_markets_historical
+    max_extent_new_markets_historical = pd.DataFrame(
+        pd.read_csv("podi/data/APL/max_extent.csv")
+    ).set_index(pyam.IAMC_IDX)
+    max_extent_new_markets_historical.columns = (
+        max_extent_new_markets_historical.columns.astype(int)
+    )
+
+    # Fill in missing years
+    max_extent_new_markets_historical = (
+        max_extent_new_markets_historical.apply(
+            lambda x: x.interpolate(method="linear", limit_area="inside"),
+            axis=1,
+        )
+    )
+
+    # Take the slope of the last two values, use it to extrapolate from last_valid_index to proj_end_year
+    def extrapolate_row(row, proj_end_year):
+        # Get the last two valid indices
+        last_valid_idx = row.last_valid_index()
+        penultimate_valid_idx = row.loc[:last_valid_idx].dropna().index[-2]
+
+        # Calculate the slope
+        slope = (row[last_valid_idx] - row[penultimate_valid_idx]) / (
+            last_valid_idx - penultimate_valid_idx
+        )
+
+        # Create new index range till proj_end_year
+        new_index = pd.RangeIndex(start=last_valid_idx, stop=proj_end_year + 1)
+
+        # Extrapolate the values based on slope
+        extrapolated_values = pd.Series(
+            data=row[last_valid_idx] + slope * (new_index - last_valid_idx),
+            index=new_index,
+        )
+
+        # Return the original row and the extrapolated values concatenated together
+        return row.combine_first(extrapolated_values)
+
+    max_extent_new_markets_historical = (
+        max_extent_new_markets_historical.apply(
+            extrapolate_row, axis=1, args=(proj_end_year,)
+        )
+    )
+
     # Combine max extents
-    max_extent = pd.concat([max_extent, max_extent_avoided])
+    max_extent = pd.concat(
+        [max_extent, max_extent_avoided, max_extent_new_markets_historical]
+    )
 
     max_extent.to_csv("podi/data/TNC/max_extent_output.csv")
 
     # endregion
 
+    # Estimate NCS-related adoption
+    # region
+
+    # There are subverticals that depend on inputs related to NCS, but have potential markets outside of AFOLU. Biochar is one example; it has potential markets in wasterwater filtration, construction materials, etc. Historical analogs in AFOLU (e.g. Conservation Agriculture as an analog for biochar used as a soil amendment) are not likely to be representative of these markets, so new ones are chosen here.
+
+    # Biochar as Ag Soil Amendment is covered in the current estimates for biochar, so here just change flow_long index values from 'Biochar' to "Biochar as Ag Soil Amendment"
+
+    max_extent = max_extent.rename(
+        index={"Biochar|Max extent": "Biochar as Ag Soil Amendment|Max extent"}
+    )
+
+    afolu_historical.reset_index(inplace=True)
+    afolu_historical.loc[
+        afolu_historical.variable == "Biochar|Observed adoption", "variable"
+    ] = "Biochar as Ag Soil Amendment|Observed adoption"
+    afolu_historical.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "variable",
+            "unit",
+        ],
+        inplace=True,
+    )
+
+    # Add in additional markets
+
+    afolu_new_markets_historical = pd.DataFrame(
+        pd.read_csv("podi/data/APL/historical_observations.csv")
+    )
+    afolu_new_markets_historical.set_index(
+        [
+            "model",
+            "scenario",
+            "region",
+            "variable",
+            "unit",
+        ],
+        inplace=True,
+    )
+    afolu_new_markets_historical.columns = (
+        afolu_new_markets_historical.columns.astype(int)
+    )
+
+    afolu_historical = pd.concat(
+        [afolu_historical, afolu_new_markets_historical]
+    )
+
+    # endregion
+
     # Calculate afolu_historical as a % of max_extent, excluding Nitrogen Fertilizer
     # Management, since its historical adoption is already reported in Percent adoption.
-    afolu_historical[
-        afolu_historical.index.get_level_values(3).str.contains(
-            "Nitrogen Fertilizer Management"
-        )
-    ] = afolu_historical[
-        afolu_historical.index.get_level_values(3).str.contains(
-            "Nitrogen Fertilizer Management"
-        )
-    ].divide(
-        100
-    )
 
-    afolu_historical[
-        ~afolu_historical.index.get_level_values(3).str.contains(
-            "Nitrogen Fertilizer Management"
-        )
-    ] = (
-        afolu_historical[
-            ~afolu_historical.index.get_level_values(3).str.contains(
-                "Nitrogen Fertilizer Management"
-            )
-        ]
-        .parallel_apply(
-            lambda x: x.divide(
-                max_extent[
-                    (max_extent.index.get_level_values(2) == x.name[2])
-                    & (
-                        max_extent.index.get_level_values(3).str.contains(
-                            x.name[3].replace("|Observed adoption", "")
-                        )
-                    )
-                ]
-                .loc[:, x.index.values]
-                .fillna(0)
-                .squeeze()
-            ),
-            axis=1,
-        )
-        .replace(np.inf, NaN)
-    )
+    # Divide afolu_historical by max_extent
+    afolu_historical = afolu_historical.parallel_apply(
+        lambda x: x.divide(
+            max_extent.loc[
+                slice(None),
+                [x.name[1]],
+                [x.name[2]],
+                [x.name[3].replace("Observed adoption", "Max extent")],
+            ]
+        ).squeeze(),
+        axis=1,
+    ).clip(upper=1)
 
-    # Make Avoided subverticals all zeros
-    afolu_historical[
-        (
-            afolu_historical.index.get_level_values(3).str.contains(
-                "Avoided Coastal Impacts"
-            )
-        )
-        | (
-            afolu_historical.index.get_level_values(3).str.contains(
-                "Avoided Forest Conversion"
-            )
-        )
-        | (
-            afolu_historical.index.get_level_values(3).str.contains(
-                "Avoided Peat Impacts"
-            )
-        )
-    ] = afolu_historical[
-        (
-            afolu_historical.index.get_level_values(3).str.contains(
-                "Avoided Coastal Impacts"
-            )
-        )
-        | (
-            afolu_historical.index.get_level_values(3).str.contains(
-                "Avoided Forest Conversion"
-            )
-        )
-        | (
-            afolu_historical.index.get_level_values(3).str.contains(
-                "Avoided Peat Impacts"
-            )
-        )
+    # Make Avoided subverticals all zeros until data_end_year
+    afolu_historical.loc[
+        afolu_historical.index.get_level_values(3).str.contains(
+            "Avoided Coastal Impacts|Avoided Forest Conversion|Avoided Peat Impacts"
+        ),
+        :data_end_year,
+    ] = afolu_historical.loc[
+        afolu_historical.index.get_level_values(3).str.contains(
+            "Avoided Coastal Impacts|Avoided Forest Conversion|Avoided Peat Impacts"
+        ),
+        :data_end_year,
     ].fillna(
         0
     )
 
-    # Set max extent to 1 (100%) for historical years
-    afolu_historical = afolu_historical.clip(upper=1)
-
-    # For rows will all 'NA', replace with zero at data_end_year
+    # For rows with all 'NA', replace with zero at data_end_year
     afolu_historical.update(
         afolu_historical[afolu_historical.isna().all(axis=1).values]
         .loc[:, data_end_year]
         .fillna(0)
     )
 
-    # For subvertical/region combos that have one data point, assume the prior year of
-    # input data is 95% of this value. If the value is zero, set a minimum slope.
-    afolu_historical.update(
-        afolu_historical[afolu_historical.count(axis=1) == 1].parallel_apply(
-            lambda x: x.update(
-                pd.Series(
-                    data=[
-                        min(x.loc[x.first_valid_index()], 1e-3) * 0.95,
-                        min(x.loc[x.first_valid_index()], 1e-3),
-                    ],
-                    index=[x.first_valid_index() - 1, x.first_valid_index()],
+    # For subvertical/region combos that have one data point, assume the year prior to this data point = max(95% of this data point, 0.001)
+    def update_row(row):
+        if row.count() == 1:
+            # Find the first valid value and its index
+            first_valid_value = row.loc[row.first_valid_index()]
+            first_valid_index = row.first_valid_index()
+
+            # If the value is 0, update it to 0.001
+            if first_valid_value == 0:
+                row.loc[first_valid_index] = 0.001
+                first_valid_value = (
+                    0.001  # Update the variable for the next step
                 )
-            ),
-            axis=1,
-        )
-    )
+
+            # If the previous year exists in the DataFrame
+            if first_valid_index - 1 in row.index:
+                # Update the value of the prior year
+                row.loc[first_valid_index - 1] = max(
+                    first_valid_value * 0.95, 0.0005
+                )
+
+        return row
+
+    # Apply this function to every row of your DataFrame
+    afolu_historical = afolu_historical.apply(update_row, axis=1)
 
     # endregion
 
@@ -705,7 +764,11 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         def addsector(x):
             if x["flow_long"] in [
-                "Biochar",
+                "Biochar as Ag Soil Amendment",
+                "Biochar for Carbon Removal & Sequestration",
+                "Biochar for Water Treatment",
+                "Biochar as Activated Carbon",
+                "Biochar for Construction Materials",
                 "Cropland Soil Health",
                 "Nitrogen Fertilizer Management",
                 "Improved Rice",
@@ -726,11 +789,15 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
 
         each["sector"] = each.parallel_apply(lambda x: addsector(x), axis=1)
 
-        each["flow_category"] = "AFOLU Negative Emissions"
+        each["flow_category"] = "AFOLU Emissions"
 
         def addgas(x):
             if x["flow_long"] in [
-                "Biochar",
+                "Biochar as Ag Soil Amendment",
+                "Biochar for Carbon Removal & Sequestration",
+                "Biochar for Water Treatment",
+                "Biochar as Activated Carbon",
+                "Biochar for Construction Materials",
                 "Cropland Soil Health",
                 "Optimal Intensity",
                 "Agroforestry",
@@ -779,7 +846,7 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
         return each
 
     afolu_output = addindices(afolu_output)
-    afolu_historical = addindices(afolu_historical)
+    afolu_historical = addindices(afolu_historical).sort_index()
 
     # Duplicate Improved Rice adoption and change gas from CH4 to N2O
     afolu_output = pd.concat(
@@ -789,12 +856,14 @@ def afolu(scenario, data_start_year, data_end_year, proj_end_year):
                 (
                     afolu_output.reset_index().flow_long == "Improved Rice"
                 ).values
-            ].rename(index={"CH4": "N2O"}),
+            ].rename(index={"CH4 (from AFOLU)": "N2O (from AFOLU)"}),
         ]
     )
 
     # Filter to data_start_year
-    afolu_output = afolu_output.loc[:, data_start_year:proj_end_year]
+    afolu_output = afolu_output.loc[
+        :, data_start_year:proj_end_year
+    ].sort_index()
 
     # endregion
 

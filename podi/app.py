@@ -3,11 +3,12 @@ import os
 
 import dash
 import dash_bootstrap_components as dbc
+import dask.dataframe as dd
 import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, State, dcc, html, ctx
+from dash import Input, Output, State, ctx, dcc, html
 
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
@@ -34,7 +35,8 @@ data_start_year = 1990
 data_end_year = 2020
 proj_end_year = 2100
 
-# definen empy figure
+
+# define empy figure
 def get_empty_fig(label):
     fig = go.Figure()
     fig.update_layout(
@@ -56,22 +58,28 @@ def get_empty_fig(label):
     )
     return fig
 
-no_data_fig = get_empty_fig("No data available for the current set of dropdown selections")
+
+no_data_fig = get_empty_fig(
+    "No data available for the current set of dropdown selections"
+)
+
 
 def clean_gas_name(gas_name):
     clean_name = (
         gas_name.replace("Co2", "CO<sub>2</sub>")
-            .replace("Ch4", "CH<sub>4</sub>")
-            .replace("N2o", "N<sub>2</sub>O")
-            .replace("Nh3", "NH<sub>3</sub>")
-            .replace("Nox", "NO<sub>x</sub>")
-            .replace("So2", "SO<sub>2</sub>")
+        .replace("Ch4", "CH<sub>4</sub>")
+        .replace("N2o", "N<sub>2</sub>O")
+        .replace("Nh3", "NH<sub>3</sub>")
+        .replace("Nox", "NO<sub>x</sub>")
+        .replace("So2", "SO<sub>2</sub>")
     )
     return clean_name
 
+
 # make dictionary of model_output options that uses common names for keys
 model_output = {
-    "energy_output": "Energy Supply & Demand",
+    "energy_output_supply": "Energy Supply",
+    "energy_output_demand": "Energy Demand",
     "emissions_output_co2e": "GHG Emissions",
     "climate_output_concentration": "GHG Concentration",
     "climate_output_temperature": "Temperature Change",
@@ -80,7 +88,7 @@ model_output = {
 }
 
 # list all possible index names from all model_outputs, to define unused_data_controls
-all_possible_index_values = [
+all_possible_index_names = [
     "model",
     "scenario",
     "region",
@@ -96,7 +104,7 @@ all_possible_index_values = [
 
 # define model_output index levels that should be included as dropdowns in data_controls
 data_controls_dropdowns = {
-    "energy_output": [
+    "energy_output_supply": [
         "model",
         "scenario",
         "region",
@@ -104,7 +112,20 @@ data_controls_dropdowns = {
         # "product_category",
         "product_long",
         # "product_short",
-        # "flow_category",
+        "flow_category",
+        "flow_long",
+        # "flow_short",
+        # "unit",
+    ],
+    "energy_output_demand": [
+        "model",
+        "scenario",
+        "region",
+        "sector",
+        # "product_category",
+        "product_long",
+        # "product_short",
+        "flow_category",
         "flow_long",
         # "flow_short",
         # "unit",
@@ -121,19 +142,6 @@ data_controls_dropdowns = {
         "flow_long",
         # "flow_short",
         # "unit",
-    ],
-    "afolu_output": [
-        "model",
-        "scenario",
-        "region",
-        "sector",
-        "product_category",
-        # "product_long",
-        # "product_short",
-        "flow_category",
-        "flow_long",
-        # "flow_short",
-        # "unit"
     ],
     "climate_output_concentration": [
         "model",
@@ -330,7 +338,7 @@ app.layout = html.Div(
                                                     ],
                                                     value=list(
                                                         model_output.keys()
-                                                    )[0],
+                                                    )[2],
                                                     clearable=False,
                                                     className="mb-2",
                                                 ),
@@ -506,14 +514,35 @@ app.layout = html.Div(
                                             children=[
                                                 html.Div(
                                                     children=[
-                                                        html.Iframe(
-                                                            src="https://app.wonderchat.io/chatbot/clgo3z4gv00k1mc0kplyvv4j6",
-                                                            style={
-                                                                "width": "100%",
-                                                                "height": "300px",
-                                                                "border": "none",
-                                                                "borderRadius": "30px",
-                                                            },
+                                                        # html.Iframe(
+                                                        #     src="https://app.wonderchat.io/chatbot/clgo3z4gv00k1mc0kplyvv4j6",
+                                                        #     style={
+                                                        #         "width": "100%",
+                                                        #         "height": "300px",
+                                                        #         "border": "none",
+                                                        #         "borderRadius": "30px",
+                                                        #     },
+                                                        # ),
+                                                        html.Div(
+                                                            [
+                                                                dcc.Input(
+                                                                    id="pandasai-input",
+                                                                    value="",
+                                                                    type="text",
+                                                                    placeholder="Enter your question here",
+                                                                    style={
+                                                                        "width": "100%",
+                                                                        "height": "50px",
+                                                                        "lineHeight": "50px",
+                                                                        "border": "2px solid #ccc",
+                                                                        "borderRadius": "5px",
+                                                                        "textAlign": "left",
+                                                                        "fontSize": "18px",
+                                                                        "fontFamily": "Arial",
+                                                                        "marginBottom": "10px",
+                                                                    },
+                                                                ),
+                                                            ]
                                                         ),
                                                     ],
                                                 )
@@ -562,11 +591,12 @@ app.layout = html.Div(
     inputs=[Input("model_output", "value")],
 )
 def set_data_and_chart_control_options(
-    model_output, all_possible_index_values=all_possible_index_values
+    model_output, all_possible_index_names=all_possible_index_names
 ):
     # define graph_output_dropdown_values
     graph_output_dropdown_values = {
-        "energy_output": ["Energy Supply & Demand"],
+        "energy_output_supply": ["Energy Supply"],
+        "energy_output_demand": ["Energy Demand"],
         "emissions_output_co2e": [
             "Emissions Sources",
             "Negative Emissions",
@@ -575,7 +605,6 @@ def set_data_and_chart_control_options(
         ],
         "climate_output_concentration": [
             "GHG Concentration",
-            "CO2 Concentration Community Prediction",
         ],
         "climate_output_temperature": ["Temperature Change"],
         "climate_output_forcing": ["Radiative Forcing"],
@@ -584,7 +613,8 @@ def set_data_and_chart_control_options(
 
     # define graph_output_dropdown_values_default
     graph_output_dropdown_values_default = {
-        "energy_output": "Energy Supply & Demand",
+        "energy_output_supply": "Energy Supply",
+        "energy_output_demand": "Energy Demand",
         "emissions_output_co2e": "Emissions Sources",
         "climate_output_concentration": "GHG Concentration",
         "climate_output_temperature": "Temperature Change",
@@ -599,12 +629,22 @@ def set_data_and_chart_control_options(
 
     # define group_by_dropdown_values
     group_by_dropdown_values = {
-        "energy_output": [
+        "energy_output_supply": [
             {"label": "Scenario", "value": "scenario"},
             {"label": "Region", "value": "region"},
             {"label": "Sector", "value": "sector"},
             {"label": "Product Category", "value": "product_category"},
             {"label": "Product", "value": "product_long"},
+            {"label": "Flow Category", "value": "flow_category"},
+            {"label": "Flow", "value": "flow_long"},
+        ],
+        "energy_output_demand": [
+            {"label": "Scenario", "value": "scenario"},
+            {"label": "Region", "value": "region"},
+            {"label": "Sector", "value": "sector"},
+            {"label": "Product Category", "value": "product_category"},
+            {"label": "Product", "value": "product_long"},
+            {"label": "Flow Category", "value": "flow_category"},
             {"label": "Flow", "value": "flow_long"},
         ],
         "emissions_output_co2e": [
@@ -615,14 +655,7 @@ def set_data_and_chart_control_options(
             {"label": "Product", "value": "product_long"},
             {"label": "Flow Category", "value": "flow_category"},
             {"label": "Flow", "value": "flow_long"},
-        ],
-        "afolu_output": [
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow", "value": "flow_long"},
+            {"label": "Unit", "value": "unit"},
         ],
         "climate_output_concentration": [
             {"label": "Model", "value": "model"},
@@ -655,9 +688,9 @@ def set_data_and_chart_control_options(
 
     # define group_by_dropdown_values_default
     group_by_dropdown_values_default = {
-        "energy_output": ["sector", "product_long"],
+        "energy_output_supply": ["sector", "product_long"],
+        "energy_output_demand": ["sector", "product_long"],
         "emissions_output_co2e": ["flow_long"],
-        "afolu_output": "flow_long",
         "climate_output_concentration": ["scenario", "gas"],
         "climate_output_temperature": "scenario",
         "climate_output_forcing": "scenario",
@@ -678,7 +711,17 @@ def set_data_and_chart_control_options(
 
     # define y_axis_type_dropdown_values
     y_axis_type_dropdown_values = {
-        "energy_output": [
+        "energy_output_supply": [
+            "Linear",
+            "Log",
+            "Cumulative",
+            "% of Cumulative at Final Year",
+            "% of Annual Total",
+            "% Change YOY",
+            "% of Maximum Value",
+            "% of Final Year Value",
+        ],
+        "energy_output_demand": [
             "Linear",
             "Log",
             "Cumulative",
@@ -697,16 +740,7 @@ def set_data_and_chart_control_options(
             "% Change YOY",
             "% of Maximum Value",
             "% of Final Year Value",
-        ],
-        "afolu_output": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% of Annual Total",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
+            "PPM",
         ],
         "climate_output_concentration": ["Linear", "Log", "% Change YOY"],
         "climate_output_temperature": ["Linear", "Log", "% Change YOY"],
@@ -724,9 +758,9 @@ def set_data_and_chart_control_options(
 
     # define y_axis_type_dropdown_default
     y_axis_type_dropdown_default = {
-        "energy_output": "Linear",
+        "energy_output_supply": "Linear",
+        "energy_output_demand": "Linear",
         "emissions_output_co2e": "Linear",
-        "afolu_output": "Linear",
         "climate_output_concentration": "Linear",
         "climate_output_temperature": "Linear",
         "climate_output_forcing": "Linear",
@@ -738,17 +772,17 @@ def set_data_and_chart_control_options(
 
     # define graph_type_dropdown_values
     graph_type_dropdown_values = {
-        "energy_output": [
+        "energy_output_supply": [
+            {"label": "Area", "value": "tonexty"},
+            {"label": "Line", "value": "none"},
+            {"label": "Table", "value": "Table"},
+        ],
+        "energy_output_demand": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
             {"label": "Table", "value": "Table"},
         ],
         "emissions_output_co2e": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "afolu_output": [
             {"label": "Area", "value": "tonexty"},
             {"label": "Line", "value": "none"},
             {"label": "Table", "value": "Table"},
@@ -777,9 +811,9 @@ def set_data_and_chart_control_options(
 
     # define graph_type_dropdown_default
     graph_type_dropdown_default = {
-        "energy_output": "tonexty",
+        "energy_output_supply": "tonexty",
+        "energy_output_demand": "tonexty",
         "emissions_output_co2e": "tonexty",
-        "afolu_output": "tonexty",
         "climate_output_concentration": "none",
         "climate_output_temperature": "none",
         "climate_output_forcing": "none",
@@ -789,10 +823,63 @@ def set_data_and_chart_control_options(
     graph_type_dropdown_values = graph_type_dropdown_values[model_output]
     graph_type_dropdown_default = graph_type_dropdown_default[model_output]
 
+    # define units_dropdown_values
+    units_dropdown_values = {
+        "energy_output_supply": [
+            {"label": "TJ", "value": "TJ"},
+            {"label": "EJ", "value": "EJ"},
+            {"label": "GWh", "value": "GWh"},
+            {"label": "TWh", "value": "TWh"},
+        ],
+        "energy_output_demand": [
+            {"label": "TJ", "value": "TJ"},
+            {"label": "EJ", "value": "EJ"},
+            {"label": "GWh", "value": "GWh"},
+            {"label": "TWh", "value": "TWh"},
+        ],
+        "emissions_output_co2e": [
+            {"label": "MtCO2e", "value": "MtCO2e"},
+            {"label": "GtCO2e", "value": "GtCO2e"},
+        ],
+        "climate_output_concentration": [
+            {"label": "PPM", "value": "PPM"},
+            {"label": "PPB", "value": "PPB"},
+        ],
+        "climate_output_temperature": [
+            {"label": "C", "value": "C"},
+            {"label": "F", "value": "F"},
+        ],
+        "climate_output_forcing": [
+            {"label": "W/m^2", "value": "W/m^2"},
+        ],
+        "technology_adoption_output": [
+            {"label": "Multiple", "value": "Multiple"},
+        ],
+    }
+
+    # define units_dropdown_default
+    units_dropdown_default = {
+        "energy_output_supply": "TJ",
+        "energy_output_demand": "TJ",
+        "emissions_output_co2e": "MtCO2e",
+        "climate_output_concentration": "PPM",
+        "climate_output_temperature": "C",
+        "climate_output_forcing": "W/m^2",
+        "technology_adoption_output": "Multiple",
+    }
+
+    units_dropdown_values = units_dropdown_values[model_output]
+    units_dropdown_default = units_dropdown_default[model_output]
+
     # define data_controls_default for a given model_output
     data_controls_default = {
-
-        "energy_output": {"flow_category": ["Final consumption"]},
+        "energy_output_supply": {},
+        "energy_output_demand": {
+            "flow_category": [
+                "Final consumption",
+                "Energy industry own use and Losses",
+            ]
+        },
         # "emissions_output_co2e": {
         #     "region": [],
         #     "sector": [],
@@ -802,7 +889,7 @@ def set_data_and_chart_control_options(
         # },
         "climate_output_concentration": {
             "scenario": ["baseline", "pathway"],
-            "gas": ["CO2", "CH4", "N2O"],
+            "gas": ["CO2"],
         },
         "climate_output_temperature": {
             "scenario": ["baseline", "pathway"],
@@ -810,7 +897,7 @@ def set_data_and_chart_control_options(
         },
         "climate_output_forcing": {
             "scenario": ["baseline", "pathway"],
-            "gas": ["CO2", "CH4", "N2O"],
+            "gas": ["CO2"],
         },
     }
 
@@ -835,8 +922,8 @@ def set_data_and_chart_control_options(
     dtypes = {**index_dtypes, **column_dtypes}
     df = df.reset_index().astype(dtypes)
 
-    # store units for use in graph axis label
-    data['units'] = df["unit"].unique().tolist()
+    # store unit label for use in graph axis label
+    data["units"] = df["unit"].unique().tolist()
 
     # define data_controls_dropdowns that should allow for multi-selection
     data_controls_dropdowns_multiselect = {
@@ -850,6 +937,7 @@ def set_data_and_chart_control_options(
         "flow_long": True,
         "variable": False,
         "gas": False,
+        "unit": True,
     }
 
     # define tooltip descriptions of data controls and graph_controls dropdowns
@@ -864,11 +952,12 @@ def set_data_and_chart_control_options(
         "flow_long": "The path that a product takes. It can be thought of as 'where the product ends up when it is used'.",
         "variable": "<>",
         "gas": "Select the gas to view",
-        "unit": "Units",
+        "unit": "Select the unit to view",
         "group-by": "The graph will display data aggregated by the items selected here",
         "yaxis-type": "Select the y-axis type to view",
         "graph-type": "Select the graph type to view",
         "graph-output": "Select the graph output to view",
+        "units": "Select the unit to view",
     }
 
     # drop the columns that are numerical and not in the range of data_start_year to proj_end_year
@@ -907,12 +996,12 @@ def set_data_and_chart_control_options(
     )
 
     # set global dataframe
-    data['df'] = df
+    data["df"] = df
 
     # define list of data controls, labels, and tooltips
     div_elements = []
 
-    for level in all_possible_index_values:
+    for level in all_possible_index_names:
         # if df_index_custom_default is defined and level is in
         # df_index_custom_default, use df_index_custom_default[level] as
         # default_value
@@ -925,7 +1014,11 @@ def set_data_and_chart_control_options(
         else:
             default_value = df.reset_index()[level].unique().tolist()[-1]
 
-        values = [] if level not in df.index.names else df.reset_index()[level].unique().tolist()
+        values = (
+            []
+            if level not in df.index.names
+            else df.reset_index()[level].unique().tolist()
+        )
         display = "none" if level not in df.index.names else "block"
 
         div_elements.append(
@@ -933,9 +1026,7 @@ def set_data_and_chart_control_options(
                 level.replace("_", " ").replace("long", "").title(),
                 id=level + "-label",
                 className="select-label",
-                style={
-                    "display": display
-                }
+                style={"display": display},
             )
         )
 
@@ -974,27 +1065,24 @@ def set_data_and_chart_control_options(
                                 "Deselect all",
                                 id=level + "-deselect-all",
                                 className="deselect-all-option",
-                            )
+                            ),
                         ],
-                        className="select-all-container"
+                        className="select-all-container",
                     ),
                     dcc.Checklist(
                         id=level,
-                        options=[{'label': i, 'value': i} for i in values],
+                        options=[{"label": i, "value": i} for i in values],
                         value=default_value,
-                        labelStyle={
-                            "display": "block",
-                            "color": "black"
-                        },
+                        labelStyle={"display": "block", "color": "black"},
                     ),
                 ],
                 style={
                     "maxHeight": "200px",
                     "overflowY": "scroll",
                     "border": "1px solid #d6d6d6",
-                    "display": display
-                }
-            )
+                    "display": display,
+                },
+            ),
         )
 
         div_elements.append(
@@ -1007,14 +1095,13 @@ def set_data_and_chart_control_options(
         )
 
     # define data_controls layout
-    data_controls = html.Div(
-        div_elements
-    )
+    data_controls = html.Div(div_elements)
 
     #
 
     # define graph controls layout
     graph_controls = html.Div(
+
         dbc.Row(
             [
                 dbc.Col(
@@ -1110,10 +1197,33 @@ def set_data_and_chart_control_options(
                             ],
                             className="mb-2",
                         ),
+                      html.Div(
+                [
+                    html.Label(
+                        "Units",
+                        id="units",
+                        className="select-label",
+                    ),
+                    dbc.Tooltip(
+                        tooltip_dict["units"],
+                        target="units",
+                        placement="top",
+                        style={"fontSize": "0.8rem"},
+                    ),
+                    dcc.Dropdown(
+                        units_dropdown_values,
+                        units_dropdown_default,
+                        id="units",
+                        clearable=False,
+                    ),
+                ],
+                className="mb-2",
+            ),
                     ]
                 ),
             ]
         ),
+        ],
     )
 
     return (data_controls, graph_controls)
@@ -1130,7 +1240,7 @@ def set_data_and_chart_control_options(
         Input("model_output", "value"),
         Input("data_controls", "children"),
     ],
-    state=[*[State(f"{level}", "value") for level in all_possible_index_values]],
+    state=[*[State(f"{level}", "value") for level in all_possible_index_names]],
     prevent_initial_call=True,
 )
 def update_data_controls(
@@ -1287,7 +1397,7 @@ def update_data_controls(
         ]
     )
 
-    # define unused data controls layout as the values in all_possible_index_values that are not in df.index.names
+    # define unused data controls layout as the values in all_possible_index_names that are not in df.index.names
     unused_data_controls = html.Div(
         [
             html.Div(
@@ -1308,7 +1418,7 @@ def update_data_controls(
                 ],
                 className="mb-0",
             )
-            for level in all_possible_index_values
+            for level in all_possible_index_names
             if level not in df.index.names
         ]
     )
@@ -1316,27 +1426,25 @@ def update_data_controls(
     return (data_controls, unused_data_controls)
 """
 
-for level in all_possible_index_values:
+for level in all_possible_index_names:
+
     @app.callback(
         Output(f"{level}", "value"),
         [
             Input(f"{level}-select-all", "n_clicks"),
-            Input(f"{level}-deselect-all", "n_clicks")
+            Input(f"{level}-deselect-all", "n_clicks"),
         ],
         [State(f"{level}", "options")],
-        prevent_initial_call=True
+        prevent_initial_call=True,
     )
-    def update_options(
-        btn1,
-        btn2,
-        options
-    ):
+    def update_options(btn1, btn2, options):
         selected = default_values[level]
         if ctx.triggered_id.endswith("-select-all"):
-            selected = [option['value'] for option in options]
+            selected = [option["value"] for option in options]
         elif ctx.triggered_id.endswith("-select-all"):
             selected = []
         return selected
+
 
 for level in all_possible_index_values:
     @app.callback(
@@ -1374,7 +1482,8 @@ for level in all_possible_index_values:
         Input("group_by_dropdown_values", "value"),
         Input("yaxis_type", "value"),
         Input("graph_type", "value"),
-        *[Input(f"{level}", "value") for level in all_possible_index_values],
+        Input("units", "value"),
+        *[Input(f"{level}", "value") for level in all_possible_index_names],
     ],
 )
 def update_output_graph(
@@ -1385,6 +1494,7 @@ def update_output_graph(
     group_by_dropdown_values,
     yaxis_type,
     graph_type,
+    units,
     *index_values,
 ):
     # define dictionaries used for graph formatting
@@ -1426,7 +1536,8 @@ def update_output_graph(
     }
 
     model_output_dict = {
-        "energy_output": "Energy Supply & Demand",
+        "energy_output_supply": "Energy Supply",
+        "energy_output_demand": "Energy Demand",
         "emissions_output_co2e": "GHG Emissions",
         "climate_output_concentration": "GHG Concentration",
         "climate_output_temperature": "Temperature Change",
@@ -1444,9 +1555,23 @@ def update_output_graph(
         "Forests & Wetlands": "This is the forests & wetlands sector. It includes the use of electricity in the forests & wetlands sector.",
     }
 
+    units_dict = {
+        "TJ": 1,
+        "EJ": 1e-6,
+        "GWh": 2.78e-1,
+        "TWh": 2.78e-4,
+        "MtCO2e": 1,
+        "GtCO2e": 1e-3,
+        "PPM": 1,
+        "PPB": 1e3,
+        "C": 1,
+        "F": 9 / 5 + 32,
+        "W/m2": 1,
+        "Multiple": 1,
+    }
+
     # drop empty index_values
     index_values = [value for value in index_values if value]
-
 
     # read model_output data
     expanded_home_path = os.path.expanduser("~/positive-disruption/podi/data/")
@@ -1456,9 +1581,8 @@ def update_output_graph(
         data_path = "data/"
     else:
         raise FileNotFoundError("Data directory not found")
-    
-    df = data['df']
-    units = data['units']
+
+    df = data["df"]
 
     # remove index values at locations where df.index.names is not in data_controls_dropdowns[model_output]
     index_values = [
@@ -1475,7 +1599,11 @@ def update_output_graph(
 
     # prevent error if group_by_dropdown_values is empty
     if not group_by_dropdown_values:
-        return (get_empty_fig("Select a variable to group by in the 'GROUP BY' menu above"),)
+        return (
+            get_empty_fig(
+                "Select a variable to group by in the 'GROUP BY' menu above"
+            ),
+        )
 
     # make group_by_dropdown_values an array if it is not already
     if not isinstance(group_by_dropdown_values, list):
@@ -1483,19 +1611,42 @@ def update_output_graph(
             [group_by_dropdown_values] if group_by_dropdown_values else []
         )
 
-    # filter df based on index_values. Retain the old behavior, use `series.index.isin(sequence, level=1)` if `index_values` is a list of lists
-    # if isinstance(index_values[0], list):
-    #     df = df[df.index.isin(index_values, level=1)]
-    # else:
+    # if index_values for scenario has more than one unique value, make graph_type = "none"
+    if (
+        pd.Series(index_values[1]).isin(["pathway"]).any()
+        and len(index_values[1]) > 1
+        and graph_type == "tonexty"
+    ):
+        return (
+            get_empty_fig(
+                "Reduce the number of scenarios or change the Graph Type away from 'Area'"
+            ),
+        )
+
+    filtered_df = df.loc[tuple([*index_values])]
     df = df.loc[tuple([*index_values])]
+
+    # update units based on units dropdown
+    filtered_df = filtered_df * units_dict[units]
+    df = df * units_dict[units]
 
     # check if filtered_df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
+        # Resetting the index
+        df_reset = filtered_df.reset_index()
+
+        # Now apply the Dask operations
+        ddf = dd.from_pandas(df_reset, npartitions=16)
+
         filtered_df = (
-            df.groupby(group_by_dropdown_values)
-            .sum(numeric_only=True)
-            .loc[:, str(date_range[0]) : str(date_range[1])]
-        ).T.fillna(0)
+            (
+                ddf.groupby(group_by_dropdown_values)
+                .sum(numeric_only=True)
+                .loc[:, str(date_range[0]) : str(date_range[1])]
+            )
+            .compute()
+            .T.fillna(0)
+        )
     except KeyError:
         return (no_data_fig,)
 
@@ -1586,7 +1737,7 @@ def update_output_graph(
         return (fig,)
 
     # create graph based graph_output selection
-    if graph_output == "Energy Supply & Demand":
+    if graph_output == "Energy Supply" or graph_output == "Energy Demand":
         fig = go.Figure()
 
         i = 0
@@ -1618,7 +1769,16 @@ def update_output_graph(
 
             # if the graph_type is line, add a trace to fig that is solid up to data_end_year or the last year of historical data and dashdot after (if projections exist)
             if graph_type == "none":
-                data_plot = pd.DataFrame(filtered_df).set_index(group_by_dropdown_values).loc[[sub], : str(data_end_year)]
+                data_plot = (
+                    pd.DataFrame(filtered_df)
+                    .set_index(group_by_dropdown_values)
+                    .loc[[sub]]
+                )
+
+                # if all values are zero, skip
+                if data_plot["value"].sum() == 0:
+                    continue
+
                 fig.add_trace(
                     go.Scatter(
                         name=clean_gas_name(name),
@@ -1627,8 +1787,12 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="solid",
                         ),
-                        x=data_plot["year"].values.dropna(),
-                        y=data_plot["value"].values.dropna(),
+                        x=data_plot[data_plot["year"] <= data_end_year][
+                            "year"
+                        ].values,
+                        y=data_plot[data_plot["year"] <= data_end_year][
+                            "value"
+                        ].values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1639,7 +1803,7 @@ def update_output_graph(
                         legendgroup=name,
                     )
                 )
-                data_plot = pd.DataFrame(filtered_df).set_index(group_by_dropdown_values).loc[[sub], str(data_end_year) : str(proj_end_year)]
+
                 fig.add_trace(
                     go.Scatter(
                         name=clean_gas_name(name),
@@ -1648,8 +1812,12 @@ def update_output_graph(
                             color=graph_template["linecolor"][i],
                             dash="dashdot",
                         ),
-                        x=data_plot["year"].values,
-                        y=data_plot["value"].values,
+                        x=data_plot[data_plot["year"] >= data_end_year][
+                            "year"
+                        ].values,
+                        y=data_plot[data_plot["year"] >= data_end_year][
+                            "value"
+                        ].values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=False,
@@ -1661,17 +1829,24 @@ def update_output_graph(
                     )
                 )
             else:
+                data_plot = (
+                    pd.DataFrame(filtered_df)
+                    .set_index(group_by_dropdown_values)
+                    .loc[[sub]]
+                )
+
+                # if all values are zero, skip
+                if data_plot["value"].sum() == 0:
+                    continue
+
                 fig.add_trace(
                     go.Scatter(
                         name=clean_gas_name(name),
                         line=dict(
                             width=3, color=graph_template["linecolor"][i]
                         ),
-                        x=filtered_df["year"].drop_duplicates(),
-                        y=pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]["value"]
-                        .values,
+                        x=data_plot["year"].values,
+                        y=data_plot["value"].values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1717,7 +1892,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -1725,10 +1900,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -1759,8 +1934,8 @@ def update_output_graph(
             if len(group_by_dropdown_values) == 1
             else sorted_df.to_records(index=False).tolist()
         ):
-            if any(
-                x < 0
+            if all(
+                x <= 0
                 for x in pd.DataFrame(filtered_df)
                 .set_index(group_by_dropdown_values)
                 .loc[[sub]]["value"]
@@ -1789,7 +1964,7 @@ def update_output_graph(
                         y=pd.DataFrame(filtered_df)
                         .set_index(group_by_dropdown_values)
                         .loc[[sub], : str(data_end_year)]["value"]
-                        .values,
+                        .values.clip(lower=0),
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
@@ -1811,6 +1986,7 @@ def update_output_graph(
                         y=pd.DataFrame(filtered_df)
                         .set_index(group_by_dropdown_values)
                         .loc[[sub]]["value"]
+                        .clip(lower=0)
                         .values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
@@ -1832,6 +2008,7 @@ def update_output_graph(
                         y=pd.DataFrame(filtered_df)
                         .set_index(group_by_dropdown_values)
                         .loc[[sub]]["value"]
+                        .clip(lower=0)
                         .values,
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
@@ -1846,7 +2023,8 @@ def update_output_graph(
 
         if graph_type not in ["none"]:
             plot_data = filtered_df[
-                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+                (date_range[0] <= filtered_df["year"])
+                & (filtered_df["year"] <= date_range[1])
             ]
 
             fig.add_trace(
@@ -1855,8 +2033,7 @@ def update_output_graph(
                     line=dict(width=5, color="magenta", dash="dashdot"),
                     x=plot_data["year"].drop_duplicates(),
                     y=pd.Series(
-                        plot_data
-                        .groupby("year")
+                        plot_data.groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
@@ -1903,7 +2080,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -1911,10 +2088,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2032,7 +2209,8 @@ def update_output_graph(
 
         if graph_type not in ["none"]:
             data_plot = filtered_df[
-                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+                (date_range[0] <= filtered_df["year"])
+                & (filtered_df["year"] <= date_range[1])
             ]
             fig.add_trace(
                 go.Scatter(
@@ -2040,8 +2218,7 @@ def update_output_graph(
                     line=dict(width=5, color="magenta", dash="dashdot"),
                     x=data_plot["year"].drop_duplicates(),
                     y=pd.Series(
-                        data_plot
-                        .groupby("year")
+                        data_plot.groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
@@ -2088,7 +2265,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -2096,10 +2273,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2208,7 +2385,8 @@ def update_output_graph(
 
         if graph_type not in ["none"]:
             data_plot = filtered_df[
-                (date_range[0] <= filtered_df["year"]) & (filtered_df["year"] <= date_range[1])
+                (date_range[0] <= filtered_df["year"])
+                & (filtered_df["year"] <= date_range[1])
             ]
             fig.add_trace(
                 go.Scatter(
@@ -2216,8 +2394,7 @@ def update_output_graph(
                     line=dict(width=5, color="magenta", dash="dashdot"),
                     x=data_plot["year"].drop_duplicates(),
                     y=pd.Series(
-                        data_plot
-                        .groupby("year")
+                        data_plot.groupby("year")
                         .sum(numeric_only=True)["value"]
                         .values
                         * 0,
@@ -2264,7 +2441,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -2272,10 +2449,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2288,12 +2465,58 @@ def update_output_graph(
 
     elif graph_output == "Emissions Mitigated":
         # prevent confusing output if two scenarios are not selected
-        if len(df.index.get_level_values("scenario").unique()) < 2:
-            return (get_empty_fig("Choose two scenarios to compare"),)
+        # make index_values a list if it is not already
+        if not isinstance(index_values[1], list):
+            index_values[1] = [index_values[1]]
+
+        if len(index_values[1]) < 2:
+            fig = go.Figure()
+            fig.update_layout(
+                annotations=[
+                    dict(
+                        text="Choose two scenarios to compare",
+                        xref="paper",
+                        yref="paper",
+                        x=0.5,
+                        y=0.5,
+                        showarrow=False,
+                        font=dict(
+                            size=24,
+                            color="rgba(128, 128, 128, 0.5)",
+                        ),
+                        align="center",
+                    )
+                ],
+            )
+            return (fig,)
+
         # prevent confusing output if groupby contains scenario
         if "scenario" in group_by_dropdown_values:
-            return (get_empty_fig("Remove 'scenario' option from GROUP BY",),)
+            return (
+                get_empty_fig(
+                    "Remove 'scenario' option from GROUP BY",
+                ),
+            )
 
+        if yaxis_type == "PPM":
+            units = "PPM"
+            df.update(
+                df.loc[:, : str(data_end_year)].applymap(lambda x: x / 17.3e3)
+            )
+
+            df.update(
+                df.loc[:, str(data_end_year + 1) :].applymap(
+                    lambda x: x / 17.3e3
+                    if isinstance(x, float) and x != int(x) and x > 0
+                    else (
+                        x / 7.8e3
+                        if isinstance(x, float) and x != int(x) and x < 0
+                        else x
+                    )
+                )
+            )
+
+        # calculate difference between baseline and pathway filtered_df
         filtered_df2 = (
             (
                 (
@@ -2394,8 +2617,13 @@ def update_output_graph(
                 .loc[:, str(date_range[0]) : str(date_range[1])]
                 .sum()
             )
-
             spacer.index = spacer.index.astype(int)
+
+            if yaxis_type == "PPM":
+                # filter out negative values
+                spacer[spacer < 0] = 0
+                spacer = spacer.cumsum()
+                spacer = spacer + (415 - spacer.loc[data_end_year])
 
             fig.add_trace(
                 go.Scatter(
@@ -2416,28 +2644,8 @@ def update_output_graph(
                 )
             )
 
-            fig.add_trace(
-                go.Scatter(
-                    name="Pathway",
-                    line=dict(width=5, color="magenta", dash="dashdot"),
-                    x=filtered_df[
-                        (filtered_df["year"] >= data_end_year)
-                        & (filtered_df["year"] <= date_range[1])
-                    ]["year"].drop_duplicates(),
-                    y=spacer[
-                        (spacer.index.values >= data_end_year)
-                        & (spacer.index.values <= date_range[1])
-                    ]
-                    * 0,
-                    fill="none",
-                    stackgroup="one",
-                    showlegend=True,
-                    hovertemplate=graph_template["hovertemplate"],
-                    groupnorm=groupnorm,
-                )
-            )
-
         i = 0
+        j = 0
 
         # convert group_by_dropdown_values to list if it is a string, before using it in the for loop
         group_by_dropdown_values = (
@@ -2448,6 +2656,15 @@ def update_output_graph(
         sorted_df = filtered_df2.sort_values("value", ascending=False)[
             group_by_dropdown_values
         ].drop_duplicates()
+
+        # if "Biochar" is in the name, then put it at the top of the list
+        if any("Biochar" in x for x in sorted_df.iloc[:, 0].tolist()):
+            sorted_df = sorted_df.iloc[
+                sorted_df.iloc[:, 0].str.contains("Biochar").argsort()
+            ]
+
+        # reverse sorted_df
+        sorted_df = sorted_df.iloc[::-1]
 
         for groupby_set_value in (
             sorted_df.iloc[:, 0].tolist()
@@ -2461,45 +2678,137 @@ def update_output_graph(
                     str(x).capitalize() for x in groupby_set_value
                 )
 
-            data_plot = filtered_df2[
-                (data_end_year < filtered_df2["year"]) & ((filtered_df2["year"] <= date_range[1]))
-            ]
-            fig.add_trace(
-                go.Scatter(
-                    name=clean_gas_name(name),
-                    line=dict(
-                        width=3,
-                        color=graph_template["linecolor"][i],
-                    ),
-                    x=data_plot["year"].drop_duplicates(),
-                    y=pd.DataFrame(data_plot)
+            # if name does not contain "Biochar", make name 'Carbon Removal from all other sources'
+            if "Biochar" not in name:
+                name = "Other Sources"
+                y = (
+                    -(
+                        pd.DataFrame(
+                            filtered_df2[
+                                (filtered_df2.year > data_end_year)
+                                & (filtered_df2.year <= date_range[1])
+                            ]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[groupby_set_value]]["value"]
+                    )
+                    * 0.1
+                )
+            else:
+                name = (
+                    name.replace("Biochar as ag soil amendment", "Biochar")
+                    .replace("Biochar for water treatment", "Biochar")
+                    .replace("Biochar as activated carbon", "Biochar")
+                    .replace("Biochar for construction materials", "Biochar")
+                    .replace(
+                        "Biochar for carbon removal & sequestration", "Biochar"
+                    )
+                )
+
+                y = -(
+                    pd.DataFrame(
+                        filtered_df2[
+                            (filtered_df2.year > data_end_year)
+                            & (filtered_df2.year <= date_range[1])
+                        ]
+                    )
                     .set_index(group_by_dropdown_values)
                     .loc[[groupby_set_value]]["value"]
-                    .values,
-                    fill="tonexty",
-                    stackgroup="one",
-                    hovertemplate=graph_template["hovertemplate"],
-                    fillcolor=graph_template["fillcolor"][i],
-                    groupnorm=groupnorm,
                 )
-            )
-            i += 1
+
+            if yaxis_type == "PPM":
+                y = y.cumsum()
+                fig.add_trace(
+                    go.Scatter(
+                        name="Carbon Removal from " + name,
+                        line=dict(
+                            width=3,
+                            color="green"
+                            if "Biochar" in name
+                            else "goldenrod",
+                        ),
+                        x=filtered_df2[
+                            (filtered_df2["year"] > data_end_year)
+                            & ((filtered_df2["year"] <= date_range[1]))
+                        ]["year"].drop_duplicates(),
+                        y=y,
+                        fill="tonexty",
+                        stackgroup="one",
+                        showlegend=True
+                        if (i == 0) & ("Biochar" not in name)
+                        or (j == 0) & ("Biochar" in name)
+                        else False,
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor="green"
+                        if "Biochar" in name
+                        else "goldenrod",
+                        groupnorm=groupnorm,
+                    )
+                )
+
+            else:
+                fig.add_trace(
+                    go.Scatter(
+                        name=name.replace("Co2", "CO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O")
+                        .replace("Nh3", "NH<sub>3</sub>")
+                        .replace("Nox", "NO<sub>x</sub>")
+                        .replace("So2", "SO<sub>2</sub>")
+                        .replace("Ch4", "CH<sub>4</sub>")
+                        .replace("N2o", "N<sub>2</sub>O"),
+                        line=dict(
+                            width=3,
+                            color=graph_template["linecolor"][i],
+                        ),
+                        x=filtered_df2[
+                            (filtered_df2["year"] > data_end_year)
+                            & ((filtered_df2["year"] <= date_range[1]))
+                        ]["year"].drop_duplicates(),
+                        y=y,
+                        fill="tonexty",
+                        stackgroup="one",
+                        hovertemplate=graph_template["hovertemplate"],
+                        fillcolor=graph_template["fillcolor"][i],
+                        groupnorm=groupnorm,
+                    )
+                )
+
+            i += 1 if "Biochar" not in name else 0
+            j += 1 if "Biochar" in name else 0
 
         if yaxis_type not in ["Log", "Cumulative", "% of Annual Total"]:
-            data_plot = filtered_df2[filtered_df2["year"] >= data_end_year]
+            baseline = (
+                df[(df.reset_index().scenario == "baseline").values]
+                .loc[:, str(date_range[0]) : str(date_range[1])]
+                .sum()
+            )
+            baseline.index = baseline.index.astype(int)
+
+            baseline[baseline.index.values == data_end_year] = baseline[
+                baseline.index.values == data_end_year
+            ].values + (
+                spacer[spacer.index.values == data_end_year].values
+                - baseline[baseline.index.values == data_end_year].values
+            )
+
+            if yaxis_type == "PPM":
+                baseline = baseline.cumsum()
+                baseline = baseline + (415 - baseline.loc[data_end_year])
+
             fig.add_trace(
                 go.Scatter(
-                    name="Baseline",
-                    line=dict(width=5, color="red", dash="dashdot"),
-                    x=data_plot["year"].drop_duplicates(),
-                    y=pd.Series(
-                        data_plot
-                        .groupby("year")
-                        .sum(numeric_only=True)["value"]
-                        .values
-                        * 0,
-                        index=data_plot["year"].drop_duplicates(),
-                    ).loc[data_end_year:],
+                    name="2. Remove Past Emissions",
+                    line=dict(width=4, color="turquoise", dash="dashdot"),
+                    x=spacer.index.values[
+                        (spacer.index.values >= data_end_year)
+                        & (spacer.index.values <= date_range[1])
+                    ],
+                    y=spacer[
+                        (spacer.index.values >= data_end_year)
+                        & (spacer.index.values <= date_range[1])
+                    ]
+                    * 0,
                     fill="none",
                     stackgroup="one",
                     showlegend=True,
@@ -2510,11 +2819,83 @@ def update_output_graph(
 
             fig.add_trace(
                 go.Scatter(
+                    name="1. Stop Current Emissions",
+                    line=dict(width=4, color="red", dash="dashdot"),
+                    x=spacer.index.values[
+                        (spacer.index.values >= data_end_year)
+                        & (spacer.index.values <= date_range[1])
+                    ],
+                    y=spacer[
+                        (spacer.index.values >= data_end_year)
+                        & (spacer.index.values <= date_range[1])
+                    ],
+                    fill="none",
+                    stackgroup="three",
+                    showlegend=True,
+                    hovertemplate=graph_template["hovertemplate"],
+                    groupnorm=groupnorm,
+                )
+            )
+
+            # fig.add_trace(
+            #     go.Scatter(
+            #         name="Baseline",
+            #         line=dict(width=4, color="red", dash="dashdot"),
+            #         x=baseline.index.values[
+            #             (baseline.index.values >= data_end_year)
+            #             & (baseline.index.values <= date_range[1])
+            #         ],
+            #         y=baseline[
+            #             (baseline.index.values >= data_end_year)
+            #             & (baseline.index.values <= date_range[1])
+            #         ],
+            #         fill="none",
+            #         stackgroup="two",
+            #         showlegend=True,
+            #         hovertemplate=graph_template["hovertemplate"],
+            #         groupnorm=groupnorm,
+            #     )
+            # )
+
+            for m in [0.1, 0.2, 0.35, 0.5, 0.75, 0.9]:
+                fig.add_trace(
+                    go.Scatter(
+                        name="",
+                        line=dict(width=2, color="lightgreen", dash="dashdot"),
+                        x=baseline.index.values[
+                            (baseline.index.values >= data_end_year)
+                            & (baseline.index.values <= date_range[1])
+                        ],
+                        y=spacer[
+                            (spacer.index.values >= data_end_year)
+                            & (spacer.index.values <= date_range[1])
+                        ].values
+                        - (
+                            pd.DataFrame(
+                                filtered_df2[
+                                    (filtered_df2.year >= data_end_year)
+                                    & (filtered_df2.year <= date_range[1])
+                                ]
+                            )
+                            .set_index(group_by_dropdown_values)
+                            .loc[["Biochar as Ag Soil Amendment"]]["value"]
+                        ).cumsum()
+                        * (1 - m),
+                        fill="none",
+                        stackgroup=m,
+                        showlegend=False,
+                        hovertemplate=graph_template["hovertemplate"],
+                        groupnorm=groupnorm,
+                    )
+                )
+
+            fig.add_trace(
+                go.Scatter(
                     name="Historical",
                     line=dict(width=3, color="black"),
-                    x=filtered_df2[filtered_df2["year"] <= data_end_year][
-                        "year"
-                    ].drop_duplicates(),
+                    x=spacer[
+                        spacer.index.values <= data_end_year
+                    ].index.values,
                     y=spacer[spacer.index.values <= data_end_year],
                     fill="none",
                     stackgroup="historical",
@@ -2556,7 +2937,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -2564,10 +2945,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2607,15 +2988,12 @@ def update_output_graph(
             if graph_type == "none":
                 data_plot = (
                     pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                >= max(data_end_year, date_range[0])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()
+                        filtered_df[filtered_df["year"] >= data_end_year]
+                    )
+                    .set_index(group_by_dropdown_values)
+                    .loc[[sub]]
+                    .replace(0, np.nan)
+                    .dropna()
                 )
                 fig.add_trace(
                     go.Scatter(
@@ -2631,9 +3009,8 @@ def update_output_graph(
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
                         showlegend=True,
-                        customdata=[str(units[0])],
-                        hovertemplate=graph_template["hovertemplate"]
-                        + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
+                        customdata=[units],
+                        hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
                         legendgroup=name,
@@ -2642,16 +3019,23 @@ def update_output_graph(
 
                 data_plot = (
                     pd.DataFrame(
-                            filtered_df[
-                                filtered_df["year"]
-                                <= min(data_end_year, date_range[1])
-                            ]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()
+                        filtered_df[filtered_df["year"] <= data_end_year]
+                    )
+                    .set_index(group_by_dropdown_values)
+                    .loc[[sub]]
+                    .replace(
+                        0,
+                        np.nan,
+                        limit=(
+                            filtered_df[filtered_df["year"] <= data_end_year]
+                            == 0
+                        ).idxmax(),
+                    )
+                    .dropna()
                 )
+
+                # replace all leading zeros with NaN
+
                 fig.add_trace(
                     go.Scatter(
                         name=name,
@@ -2665,10 +3049,22 @@ def update_output_graph(
                         y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
-                        showlegend=False,
-                        customdata=[str(units[0])],
-                        hovertemplate=graph_template["hovertemplate"]
-                        + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
+                        showlegend=True
+                        if pd.DataFrame(
+                            filtered_df[
+                                filtered_df["year"]
+                                <= min(data_end_year, date_range[1])
+                            ]
+                        )
+                        .set_index(group_by_dropdown_values)
+                        .loc[[sub]]
+                        .replace(0, np.nan)
+                        .dropna()["year"]
+                        .max()
+                        < data_end_year
+                        else False,
+                        customdata=[units],
+                        hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
                         legendgroup=name,
@@ -2681,10 +3077,10 @@ def update_output_graph(
             else:
                 data_plot = (
                     pd.DataFrame(filtered_df)
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()
+                    .set_index(group_by_dropdown_values)
+                    .loc[[sub]]
+                    .replace(0, np.nan)
+                    .dropna()
                 )
                 fig.add_trace(
                     go.Scatter(
@@ -2696,8 +3092,8 @@ def update_output_graph(
                         y=data_plot["value"],
                         fill=graph_type,
                         stackgroup=stack_type[graph_type],
-                        showlegend=True,
-                        customdata=[str(units[0])],
+                        showlegend=False,
+                        customdata=[str(units)],
                         hovertemplate=graph_template["hovertemplate"]
                         + "<b>Unit</b>: %{customdata[0]}<extra></extra>",
                         fillcolor=graph_template["fillcolor"][i],
@@ -2739,7 +3135,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -2747,10 +3143,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2790,12 +3186,12 @@ def update_output_graph(
             if graph_type == "none":
                 data_plot = (
                     pd.DataFrame(
-                            filtered_df[filtered_df["year"] >= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()
+                        filtered_df[filtered_df["year"] >= data_end_year]
+                    )
+                    .set_index(group_by_dropdown_values)
+                    .loc[[sub]]
+                    .replace(0, np.nan)
+                    .dropna()
                 )
                 fig.add_trace(
                     go.Scatter(
@@ -2813,18 +3209,20 @@ def update_output_graph(
                         hovertemplate=graph_template["hovertemplate"],
                         fillcolor=graph_template["fillcolor"][i],
                         groupnorm=groupnorm,
-                        legendgroup=name,
+                        legendgroup="Biochar"
+                        if "Biochar" in name
+                        else "Total Emissions",
                     )
                 )
 
                 data_plot = (
                     pd.DataFrame(
-                            filtered_df[filtered_df["year"] <= data_end_year]
-                        )
-                        .set_index(group_by_dropdown_values)
-                        .loc[[sub]]
-                        .replace(0, np.nan)
-                        .dropna()
+                        filtered_df[filtered_df["year"] <= data_end_year]
+                    )
+                    .set_index(group_by_dropdown_values)
+                    .loc[[sub]]
+                    .replace(0, np.nan)
+                    .dropna()
                 )
                 fig.add_trace(
                     go.Scatter(
@@ -2904,7 +3302,7 @@ def update_output_graph(
         )
 
         fig.update_yaxes(
-            title=str(units[0]),
+            title=str(units),
             type="log" if yaxis_type == "Log" else "linear",
             spikemode="toaxis",
         )
@@ -2912,10 +3310,10 @@ def update_output_graph(
         fig.update_xaxes(spikemode="toaxis")
 
         if yaxis_type == "Cumulative":
-            fig.update_yaxes(title="Cumulative " + str(units[0]))
+            fig.update_yaxes(title="Cumulative " + str(units))
         elif yaxis_type == "% of Cumulative at Final Year":
             fig.update_yaxes(
-                title="% of Cumulative at Final Year " + str(units[0])
+                title="% of Cumulative at Final Year " + str(units)
             )
         elif yaxis_type == "% of Annual Total":
             fig.update_yaxes(title="% of Annual Total")
@@ -2928,6 +3326,16 @@ def update_output_graph(
 
     return (fig,)
 
+
+# # pandas ai
+# @app.callback(
+#     output= [Output("pandasai-output", "children")],
+#     input= [Input("pandasai-input", "value")],
+# )
+# def pandasai(input):
+
+
+#     return (input,)
 
 if __name__ == "__main__":
     app.run_server(
