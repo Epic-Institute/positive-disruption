@@ -1,25 +1,11 @@
-#!/usr/bin/env python
-
 # region
-import numpy as np
 import pandas as pd
 
 from podi.afolu import afolu
-from podi.cdr.cdr_main import cdr_mix
-from podi.cdr.cdr_util import (
-    fuel_em_def,
-    grid_em_def,
-    heat_em_def,
-    transport_em_def,
-)
 from podi.climate import climate
 from podi.emissions import emissions
 from podi.energy import energy
 from podi.results_analysis.results_analysis import results_analysis
-
-# import warnings
-
-# warnings.simplefilter(action="ignore", category=FutureWarning)
 
 # endregion
 
@@ -149,102 +135,6 @@ emissions_output_co2e.columns = emissions_output_co2e.columns.astype(int)
 
 # endregion
 
-#######
-# CDR #
-#######
-
-recalc_cdr = False
-# region
-if recalc_cdr is True:
-    cdr_pathway = pd.read_csv("podi/data/cdr_curve.csv").set_index(
-        ["region", "sector", "scenario"]
-    )
-    cdr_pathway.columns = cdr_pathway.columns.astype(int)
-
-    cdr_subvs = []
-
-    for scenario in ["pathway"]:
-        cdr_pathway2, cdr_cost_pathway, cdr_energy_pathway = cdr_mix(
-            cdr_pathway.loc["World ", "Carbon Dioxide Removal", scenario]
-            .loc[2010:]
-            .to_list(),
-            grid_em_def,
-            heat_em_def,
-            transport_em_def,
-            fuel_em_def,
-            2010,
-            2100,
-        )
-
-        cdr_pathway2 = (
-            pd.DataFrame(cdr_pathway2, index=emissions.loc[:, 2010:].columns)
-            .T.fillna(0)
-            .drop(
-                index=pd.DataFrame(
-                    cdr_pathway2, index=emissions.loc[:, 2010:].columns
-                )
-                .T.fillna(0)
-                .iloc[
-                    pd.DataFrame(
-                        cdr_pathway2, index=emissions.loc[:, 2010:].columns
-                    )
-                    .T.fillna(0)
-                    .index.str.contains("Deficit", na=False)
-                ]
-                .index
-            )
-        )
-
-        cdr_subvs = pd.DataFrame(cdr_subvs).append(
-            pd.concat([cdr_pathway2], keys=["World "], names=["region"])
-        )
-
-        cdr_subvs = (
-            cdr_subvs.droplevel(1)
-            .assign(
-                Metric=["Enhanced Weathering", "Other", "LTSSDAC", "HTLSDAC"]
-            )
-            .set_index("Metric", append=True)
-        )
-
-        cdr_subvs = pd.concat(
-            [cdr_subvs], names=["sector"], keys=["Carbon Dioxide Removal"]
-        )
-        cdr_subvs["scenario"] = "pathway"
-        cdr_subvs = cdr_subvs.reset_index().set_index(
-            ["region", "sector", "Metric", "scenario"]
-        )
-        cdr_subvs_baseline = (cdr_subvs * 0).droplevel("scenario")
-        cdr_subvs_baseline["scenario"] = "baseline"
-        cdr_subvs_baseline = cdr_subvs_baseline.reset_index().set_index(
-            ["region", "sector", "Metric", "scenario"]
-        )
-        cdr_subvs = cdr_subvs.append(cdr_subvs_baseline)
-
-    cdr_fill = cdr_subvs.loc[:, 2011:2030] * 0
-    cdr_fill.columns = np.arange(1990, 2010, 1)
-    cdr_output = cdr_fill.join(cdr_subvs)
-
-index = [
-    "model",
-    "scenario",
-    "region",
-    "sector",
-    "product_category",
-    "product_long",
-    "product_short",
-    "flow_category",
-    "flow_long",
-    "flow_short",
-    "unit",
-]
-cdr_output = pd.DataFrame(
-    0, index=emissions_output.index, columns=emissions_output.columns
-)
-cdr_output.columns = cdr_output.columns.astype(int)
-
-# endregion
-
 ###########
 # CLIMATE #
 ###########
@@ -258,7 +148,6 @@ if recalc_climate is True:
         scenario,
         emissions_output,
         emissions_output_co2e,
-        cdr_output,
         data_start_year,
         data_end_year,
         proj_end_year,
@@ -290,7 +179,7 @@ climate_output_forcing.columns = climate_output_forcing.columns.astype(int)
 # RESULTS ANALYSIS #
 ####################
 
-recalc_analysis = False
+recalc_analysis = True
 # region
 
 if recalc_analysis is True:
@@ -300,7 +189,6 @@ if recalc_analysis is True:
         afolu_output,
         emissions_output,
         emissions_output_co2e,
-        cdr_output,
         climate_output_concentration,
         climate_output_temperature,
         climate_output_forcing,
@@ -336,33 +224,6 @@ technology_adoption_output.columns = technology_adoption_output.columns.astype(
 #######################################
 
 # region
-
-# Select output_start_date and output_end_date
-output_start_date = 2010
-output_end_date = 2070
-
-# For energy_output, groupby product_category, except for products in the
-# Electricity and Heat product_category
-energy_output_temp = energy_output[
-    (
-        energy_output.reset_index().product_category != "Electricity and Heat"
-    ).values
-].reset_index()
-
-energy_output_temp["product_long"] = energy_output_temp["product_category"]
-energy_output_temp["product_short"] = energy_output_temp["product_category"]
-energy_output_temp.set_index(energy_output.index.names, inplace=True)
-energy_output = pd.concat(
-    [
-        energy_output[
-            (
-                energy_output.reset_index().product_category
-                == "Electricity and Heat"
-            ).values
-        ],
-        energy_output_temp,
-    ]
-)
 
 # Combine 'Residential' and 'Commercial' sectors into 'Buildings' sector
 energy_output = pd.concat(
@@ -426,84 +287,40 @@ emissions_output_co2e = emissions_output_co2e[
     ).values
 ]
 
-# Drop flow_categories 'Transformation processes', 'Energy industry own use and Losses'
-energy_output = energy_output[
-    ~(
-        energy_output.reset_index().flow_long.isin(
-            ["Transformation Processes", "Energy industry own use and Losses"]
-        )
-    ).values
-]
-
-# Drop Nitrogen Fertilizer Management
-afolu_output = afolu_output[
-    ~(
-        afolu_output.reset_index().product_long.isin(
-            ["Nitrogen Fertilizer Management"]
-        )
-    ).values
-]
-
-# Drop Improved Forest Management
-afolu_output = afolu_output[
-    ~(
-        afolu_output.reset_index().product_long.isin(
-            ["Improved Forest Management"]
-        )
-    ).values
-]
-
-# Save as regional-level files and a global-level file
-for output in [
-    (energy_output, "energy"),
-    (afolu_output, "afolu"),
-    (emissions_output, "emissions"),
-    (emissions_output_co2e, "emissions_co2e"),
-]:
-    for region in output[0].reset_index().region.unique():
-        output[0][(output[0].reset_index().region == region).values].loc[
-            :, output_start_date:output_end_date
-        ].to_csv("podi/data/output/" + output[1] + "/" + region + ".csv")
-    output_global = (
-        output[0]
-        .loc[:, output_start_date:output_end_date]
-        .groupby(
+# Split energy_output into energy_output_supply and energy_output_demand
+energy_output_supply = energy_output[
+    (
+        energy_output.reset_index().flow_category.isin(
             [
-                "model",
-                "scenario",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_long",
-                "flow_short",
-                "unit",
-            ],
-            observed=True,
+                "Electricity output",
+                "Heat output",
+            ]
         )
-        .sum(numeric_only=True)
-    )
-    output_global.reset_index(inplace=True)
-    output_global["region"] = "world"
-    output_global.set_index(
-        [
-            "model",
-            "scenario",
-            "region",
-            "sector",
-            "product_category",
-            "product_long",
-            "product_short",
-            "flow_category",
-            "flow_long",
-            "flow_short",
-            "unit",
-        ],
-        inplace=True,
-    )
-    output_global.to_csv(
-        "podi/data/output/" + output[1] + "/" + "world" + ".csv"
-    )
+    ).values
+]
+
+energy_output_demand = energy_output[
+    (
+        energy_output.reset_index().flow_category.isin(
+            [
+                "Final consumption",
+                "Transformation processes",
+                "Energy industry own use and Losses",
+            ]
+        )
+    ).values
+]
+
+# Save
+for output in [
+    (energy_output_supply, "energy_output_supply"),
+    (energy_output_demand, "energy_output_demand"),
+    (emissions_output, "emissions_output"),
+    (emissions_output_co2e, "emissions_output_co2e"),
+]:
+    # change columns to str
+    output[0].columns = output[0].columns.astype(str)
+    # save as parquet
+    output[0].to_parquet(f"podi/data/{output[1]}.parquet")
 
 # endregion

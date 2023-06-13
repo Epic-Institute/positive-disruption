@@ -1,363 +1,363 @@
 Model,Scenario,Region Group,ISO,Region,Subvertical,Unit,Initial Extent (Mha),Initial Loss Rate (%),Rate of Improvement,Mitigation (MtCO2e/ha),Duration
-PD22,Pathway,PAK,AFG,Afghanistan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EEU,ALB,Albania,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,0.0000,#VALUE!
-PD22,Pathway,NAF,DZA,Algeria,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-M,AGO,Angola,Avoided Coastal Impacts,Mha,0.0375,-0.6882,0.00196,0.0016,145.2982371
-PD22,Pathway,LAM-M,ARG,Argentina,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,CAS,ARM,Armenia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,ANUZ,AUS,Australia,Avoided Coastal Impacts,Mha,0.9953,-0.6155,0.00196,0.0014,162.474776
-PD22,Pathway,EU15,AUT,Austria,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,CAS,AZE,Azerbaijan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-M,BHS,Bahamas,Avoided Coastal Impacts,Mha,0.1079,-1.4147,0.00196,0.0023,70.68457253
-PD22,Pathway,OAS-L,BGD,Bangladesh,Avoided Coastal Impacts,Mha,0.4099,-0.4617,0.00196,0.0008,216.6061795
-PD22,Pathway,EEU-FSU,BLR,Belarus,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,BEL,Belgium,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-L,BLZ,Belize,Avoided Coastal Impacts,Mha,0.0534,-4.9932,0.00196,0.0015,20.02712275
 PD22,Pathway,SSA-L,BEN,Benin,Avoided Coastal Impacts,Mha,0.0001,-16.6173,0.00196,0.0011,6.017816805
-PD22,Pathway,OAS-M,BTN,Bhutan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-M,BOL,Bolivia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EEU,BIH,Bosnia and Herzegovina,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-M,BWA,Botswana,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,BRA,BRA,Brazil,Avoided Coastal Impacts,Mha,1.1241,-0.7060,0.00196,0.0014,141.6525105
-PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Avoided Coastal Impacts,Mha,0.0109,-0.5019,0.00196,0.0022,199.2507486
-PD22,Pathway,EU12-M,BGR,Bulgaria,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,BFA,Burkina Faso,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,BDI,Burundi,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-CPA,KHM,Cambodia,Avoided Coastal Impacts,Mha,0.0633,-1.3266,0.00196,0.0013,75.38216311
-PD22,Pathway,SSA-L,CMR,Cameroon,Avoided Coastal Impacts,Mha,0.1886,-0.3121,0.00196,0.0017,320.3625941
-PD22,Pathway,CAN,CAN,Canada,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,CPV,Cape Verde,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,CAF,Central African Republic,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,TCD,Chad,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-M,CHL,Chile,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,CHN,CHN,China,Avoided Coastal Impacts,Mha,0.0158,-2.3719,0.00196,0.0010,42.15957852
-PD22,Pathway,LAM-M,COL,Colombia,Avoided Coastal Impacts,Mha,0.2470,-1.2891,0.00196,0.0020,77.57451813
-PD22,Pathway,SSA-L,COM,Comoros,Avoided Coastal Impacts,Mha,0.0001,-0.0278,0.00196,0.0018,3601.937886
-PD22,Pathway,LAM-M,CRI,Costa Rica,Avoided Coastal Impacts,Mha,0.0375,-0.5676,0.00196,0.0014,176.1838595
-PD22,Pathway,SSA-L,CIV,Cote d'Ivoire,Avoided Coastal Impacts,Mha,0.0063,-1.2626,0.00196,0.0013,79.201967
-PD22,Pathway,EEU,HRV,Croatia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-M,CUB,Cuba,Avoided Coastal Impacts,Mha,0.3517,-0.7385,0.00196,0.0018,135.4106112
-PD22,Pathway,EU12-H,CYP,Cyprus,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU12-H,CZE,Czech Republic,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-L,PRK,Democratic People's Republic of Korea (North Korea),Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Avoided Coastal Impacts,Mha,0.0275,-0.5176,0.00196,0.0017,193.188444
-PD22,Pathway,EU15,DNK,Denmark (except Greenland),Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,DJI,Djibouti,Avoided Coastal Impacts,Mha,0.0005,-0.3046,0.00196,0.0013,328.3118938
-PD22,Pathway,LAM-M,DOM,Dominican Republic,Avoided Coastal Impacts,Mha,0.0197,-0.6817,0.00196,0.0016,146.6958802
-PD22,Pathway,LAM-M,ECU,Ecuador,Avoided Coastal Impacts,Mha,0.1451,-0.7727,0.00196,0.0016,129.4177099
-PD22,Pathway,NAF,EGY,Egypt,Avoided Coastal Impacts,Mha,0.0002,-0.7381,0.00196,0.0011,135.474238
-PD22,Pathway,LAM-M,SLV,El Salvador,Avoided Coastal Impacts,Mha,0.0383,-1.0511,0.00196,0.0012,95.14173976
-PD22,Pathway,SSA-M,GNQ,Equatorial Guinea,Avoided Coastal Impacts,Mha,0.0251,-0.3830,0.00196,0.0016,261.0845536
-PD22,Pathway,SSA-L,ERI,Eritrea,Avoided Coastal Impacts,Mha,0.0071,-0.5286,0.00196,0.0014,189.1703164
-PD22,Pathway,EU12-H,EST,Estonia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,ETH,Ethiopia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,,FLK,Falkland Islands,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,,FRO,Faroe Islands,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-L,FJI,Fiji,Avoided Coastal Impacts,Mha,0.0514,-0.2693,0.00196,0.0018,371.3375424
-PD22,Pathway,EU15,FIN,Finland,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,FRA,France (except French Guiana),Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-M,GUF,French Guiana (France),Avoided Coastal Impacts,Mha,0.0434,-1.5564,0.00196,0.0011,64.24913227
-PD22,Pathway,OAS-M,PYF,French Polynesia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-M,GAB,Gabon,Avoided Coastal Impacts,Mha,0.1779,-0.3222,0.00196,0.0019,310.3773198
-PD22,Pathway,SSA-L,GMB,"Gambia, The",Avoided Coastal Impacts,Mha,0.0595,-0.7123,0.00196,0.0010,140.3951195
-PD22,Pathway,CAS,GEO,Georgia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,DEU,Germany,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,GHA,Ghana,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,0.0011,#VALUE!
-PD22,Pathway,EU15,GRC,Greece,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,GRL,Greenland (Denmark),Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-M,GLP,Guadeloupe,Avoided Coastal Impacts,Mha,0.0037,-0.1092,0.00196,0.0019,915.6990429
+PD22,Pathway,LAM-L,BLZ,Belize,Avoided Coastal Impacts,Mha,0.0534,-4.9932,0.00196,0.0015,20.02712275
+PD22,Pathway,OAS-M,LKA,Sri Lanka,Avoided Coastal Impacts,Mha,0.0221,-3.6263,0.00196,0.0015,27.5764076
+PD22,Pathway,MEX,MEX,Mexico,Avoided Coastal Impacts,Mha,1.0521,-3.0839,0.00196,0.0013,32.42599402
+PD22,Pathway,CHN,CHN,China,Avoided Coastal Impacts,Mha,0.0158,-2.3719,0.00196,0.001,42.15957852
+PD22,Pathway,LAM-L,HND,Honduras,Avoided Coastal Impacts,Mha,0.0663,-2.3287,0.00196,0.0016,42.94206236
+PD22,Pathway,USA,USA,United States (except Alaska),Avoided Coastal Impacts,Mha,0.2089,-2.0716,0.00196,0.0023,48.27204707
+PD22,Pathway,OAS-CPA,KHM,Cambodia,Avoided Forest Conversion,Mha,10.6671,-2.0324,0.002,0.0008,49.2028136
+PD22,Pathway,LAM-M,SUR,Suriname,Avoided Coastal Impacts,Mha,0.0731,-1.9383,0.00196,0.0014,51.59114915
+PD22,Pathway,OAS-M,MYS,Malaysia,Avoided Forest Conversion,Mha,29.2664,-1.8439,0.002,0.0009,54.23351516
+PD22,Pathway,OAS-CPA,VNM,Vietnam,Avoided Coastal Impacts,Mha,0.1707,-1.8149,0.00196,0.0011,55.10071118
+PD22,Pathway,LAM-L,NIC,Nicaragua,Avoided Coastal Impacts,Mha,0.0774,-1.7783,0.00196,0.0015,56.2348929
 PD22,Pathway,LAM-L,GTM,Guatemala,Avoided Coastal Impacts,Mha,0.0247,-1.7164,0.00196,0.0012,58.26028386
-PD22,Pathway,SSA-L,GIN,Guinea,Avoided Coastal Impacts,Mha,0.2243,-0.3478,0.00196,0.0010,287.5130627
-PD22,Pathway,SSA-L,GNB,Guinea-Bissau,Avoided Coastal Impacts,Mha,0.2568,-0.3196,0.00196,0.0012,312.8528433
+PD22,Pathway,LAM-M,GUF,French Guiana (France),Avoided Coastal Impacts,Mha,0.0434,-1.5564,0.00196,0.0011,64.24913227
+PD22,Pathway,MEA-H,OMN,Oman,Avoided Coastal Impacts,Mha,0.0001,-1.5151,0.00196,0.0011,66.00308233
+PD22,Pathway,OAS-L,MMR,Myanmar,Avoided Coastal Impacts,Mha,0.5385,-1.4816,0.00196,0.0013,67.49537734
+PD22,Pathway,LAM-M,BHS,Bahamas,Avoided Coastal Impacts,Mha,0.1079,-1.4147,0.00196,0.0023,70.68457253
+PD22,Pathway,LAM-M,PRY,Paraguay,Avoided Forest Conversion,Mha,0.2813,-1.4099,0.002,NA,70.9272782
+PD22,Pathway,SSA-L,MOZ,Mozambique,Avoided Coastal Impacts,Mha,0.3194,-1.334,0.00196,0.001,74.96301999
+PD22,Pathway,OAS-CPA,KHM,Cambodia,Avoided Coastal Impacts,Mha,0.0633,-1.3266,0.00196,0.0013,75.38216311
+PD22,Pathway,LAM-M,COL,Colombia,Avoided Coastal Impacts,Mha,0.247,-1.2891,0.00196,0.002,77.57451813
+PD22,Pathway,LAM-M,PER,Peru,Avoided Coastal Impacts,Mha,0.0036,-1.2769,0.00196,0.0014,78.31281407
+PD22,Pathway,SSA-L,CIV,Cote d'Ivoire,Avoided Coastal Impacts,Mha,0.0063,-1.2626,0.00196,0.0013,79.201967
+PD22,Pathway,MEA-H,ARE,United Arab Emirates,Avoided Coastal Impacts,Mha,0.0079,-1.2558,0.00196,0.0015,79.63367167
+PD22,Pathway,SSA-L,SOM,Somalia,Avoided Coastal Impacts,Mha,0.0022,-1.2439,0.00196,0.0012,80.3928071
+PD22,Pathway,OAS-M,THA,Thailand,Avoided Coastal Impacts,Mha,0.2364,-1.2227,0.00196,0.0013,81.78617927
+PD22,Pathway,SSA-L,KEN,Kenya,Avoided Coastal Impacts,Mha,0.0555,-1.1643,0.00196,0.0015,85.88666029
 PD22,Pathway,LAM-M,GUY,Guyana,Avoided Coastal Impacts,Mha,0.0295,-1.1301,0.00196,0.0016,88.48510876
 PD22,Pathway,LAM-L,HTI,Haiti,Avoided Coastal Impacts,Mha,0.0165,-1.1243,0.00196,0.0018,88.94178767
-PD22,Pathway,LAM-L,HND,Honduras,Avoided Coastal Impacts,Mha,0.0663,-2.3287,0.00196,0.0016,42.94206236
-PD22,Pathway,EU12-H,HUN,Hungary,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EFTA,ISL,Iceland,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,IND,IND,India,Avoided Coastal Impacts,Mha,0.3629,-0.7821,0.00196,0.0009,127.8687328
-PD22,Pathway,IDN,IDN,Indonesia,Avoided Coastal Impacts,Mha,2.8240,-0.8785,0.00196,0.0022,113.8296131
-PD22,Pathway,MEA-M,IRN,Iran,Avoided Coastal Impacts,Mha,0.0079,-0.4217,0.00196,0.0014,237.1337432
-PD22,Pathway,MEA-M,IRQ,Iraq,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,IRL,Ireland,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,MEA-H,ISR,Israel,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,ITA,Italy,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
+PD22,Pathway,MEA-H,SAU,Saudi Arabia,Avoided Coastal Impacts,Mha,0.0069,-1.065,0.00196,0.0013,93.89321382
+PD22,Pathway,LAM-M,SLV,El Salvador,Avoided Coastal Impacts,Mha,0.0383,-1.0511,0.00196,0.0012,95.14173976
 PD22,Pathway,LAM-M,JAM,Jamaica,Avoided Coastal Impacts,Mha,0.0101,-1.0213,0.00196,0.0016,97.91640969
-PD22,Pathway,JPN,JPN,Japan,Avoided Coastal Impacts,Mha,0.0010,-0.2054,0.00196,0.0016,486.7383275
-PD22,Pathway,MEA-M,JOR,Jordan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,CAS,KAZ,Kazakhstan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,KEN,Kenya,Avoided Coastal Impacts,Mha,0.0555,-1.1643,0.00196,0.0015,85.88666029
-PD22,Pathway,MEA-H,KWT,Kuwait,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,CAS,KGZ,Kyrgyzstan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-CPA,LAO,Laos,Avoided Coastal Impacts,Mha,0.0000,0.0000,0.00196,NA,#DIV/0!
-PD22,Pathway,EU12-M,LVA,Latvia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,MEA-M,LBN,Lebanon,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,LSO,Lesotho,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,LBR,Liberia,Avoided Coastal Impacts,Mha,0.0193,-0.5333,0.00196,0.0011,187.5159248
-PD22,Pathway,NAF,LBY,Libya,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU12-M,LTU,Lithuania,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,LUX,Luxembourg,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EEU,MKD,Macedonia (The Former Yugoslav Republic of Macedonia),Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,MDG,Madagascar,Avoided Coastal Impacts,Mha,0.2621,-0.5357,0.00196,0.0012,186.6762949
-PD22,Pathway,SSA-L,MWI,Malawi,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-M,MYS,Malaysia,Avoided Coastal Impacts,Mha,0.5218,-0.6209,0.00196,0.0020,161.046403
-PD22,Pathway,SSA-L,MLI,Mali,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-M,MTQ,Martinique,Avoided Coastal Impacts,Mha,0.0017,-0.0500,0.00196,0.0017,2001.809315
-PD22,Pathway,SSA-L,MRT,Mauritania,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-M,MUS,Mauritius,Avoided Coastal Impacts,Mha,0.0007,-0.3874,0.00196,0.0017,258.1015222
-PD22,Pathway,MEX,MEX,Mexico,Avoided Coastal Impacts,Mha,1.0521,-3.0839,0.00196,0.0013,32.42599402
-PD22,Pathway,EEU-FSA,MDA,Moldova,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-CPA,MNG,Mongolia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EEU,MNE,Montenegro,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,NAF,MAR,Morocco,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,MOZ,Mozambique,Avoided Coastal Impacts,Mha,0.3194,-1.3340,0.00196,0.0010,74.96301999
-PD22,Pathway,OAS-L,MMR,Myanmar,Avoided Coastal Impacts,Mha,0.5385,-1.4816,0.00196,0.0013,67.49537734
-PD22,Pathway,SSA-M,NAM,Namibia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-L,NPL,Nepal,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,NLD,Netherlands,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-M,NCL,New Caledonia,Avoided Coastal Impacts,Mha,0.0302,-0.5114,0.00196,0.0013,195.5275815
-PD22,Pathway,ANUZ,NZL,New Zealand,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-L,NIC,Nicaragua,Avoided Coastal Impacts,Mha,0.0774,-1.7783,0.00196,0.0015,56.2348929
-PD22,Pathway,SSA-L,NER,Niger,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,NGA,Nigeria,Avoided Coastal Impacts,Mha,0.6988,-0.3252,0.00196,0.0016,307.5211225
-PD22,Pathway,EFTA,NOR,Norway,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,MEA-H,OMN,Oman,Avoided Coastal Impacts,Mha,0.0001,-1.5151,0.00196,0.0011,66.00308233
-PD22,Pathway,PAK,PAK,Pakistan,Avoided Coastal Impacts,Mha,0.0677,-0.7684,0.00196,0.0011,130.1472041
-PD22,Pathway,LAM-M,PAN,Panama,Avoided Coastal Impacts,Mha,0.1552,-0.2971,0.00196,0.0017,336.5947242
-PD22,Pathway,OAS-L,PNG,Papua New Guinea,Avoided Coastal Impacts,Mha,0.4727,-0.4254,0.00196,0.0020,235.0511599
-PD22,Pathway,LAM-M,PRY,Paraguay,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,LAM-M,PER,Peru,Avoided Coastal Impacts,Mha,0.0036,-1.2769,0.00196,0.0014,78.31281407
-PD22,Pathway,OAS-L,PHL,Philippines,Avoided Coastal Impacts,Mha,0.2820,-0.8966,0.00196,0.0018,111.5366149
-PD22,Pathway,EU12-H,POL,Poland,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,PRT,Portugal,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,USA,PRI,Puerto Rico,Avoided Coastal Impacts,Mha,0.0092,-0.7979,0.00196,0.0016,125.3259438
-PD22,Pathway,MEA-H,QAT,Qatar,Avoided Coastal Impacts,Mha,0.0004,-0.9215,0.00196,0.0014,108.5189303
-PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-M,REU,Reunion,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU12-M,ROU,Romania,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,RUS,RUS,Russia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,RWA,Rwanda,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-L,WSM,Samoa,Avoided Coastal Impacts,Mha,0.0003,-0.0334,0.00196,NA,2996.192469
-PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,MEA-H,SAU,Saudi Arabia,Avoided Coastal Impacts,Mha,0.0069,-1.0650,0.00196,0.0013,93.89321382
-PD22,Pathway,SSA-L,SEN,Senegal,Avoided Coastal Impacts,Mha,0.1300,-0.9909,0.00196,0.0012,100.9160233
-PD22,Pathway,EEU,SRB,Serbia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,SLE,Sierra Leone,Avoided Coastal Impacts,Mha,0.1269,-0.1941,0.00196,0.0011,515.2113312
-PD22,Pathway,EU12-H,SVK,Slovakia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU12-H,SVN,Slovenia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-L,SLB,Solomon Islands,Avoided Coastal Impacts,Mha,0.0536,-0.2851,0.00196,0.0020,350.7802841
-PD22,Pathway,SSA-L,SOM,Somalia,Avoided Coastal Impacts,Mha,0.0022,-1.2439,0.00196,0.0012,80.3928071
+PD22,Pathway,OAS-CPA,VNM,Vietnam,Avoided Forest Conversion,Mha,18.4649,-1.0076,0.002,0.0007,99.2480255
+PD22,Pathway,SSA-L,SEN,Senegal,Avoided Coastal Impacts,Mha,0.13,-0.9909,0.00196,0.0012,100.9160233
+PD22,Pathway,IDN,IDN,Indonesia,Avoided Forest Conversion,Mha,162.7072,-0.9805,0.002,0.0008,101.9854429
 PD22,Pathway,SAF,ZAF,South Africa,Avoided Coastal Impacts,Mha,0.0027,-0.9778,0.00196,0.0013,102.2677259
-PD22,Pathway,SSA-L,SSD,South Sudan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU17,ESP,Spain,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-M,LKA,Sri Lanka,Avoided Coastal Impacts,Mha,0.0221,-3.6263,0.00196,0.0015,27.5764076
-PD22,Pathway,SSA-L,SDN,Sudan,Avoided Coastal Impacts,Mha,0.0004,-0.1066,0.00196,0.0012,937.789563
-PD22,Pathway,LAM-M,SUR,Suriname,Avoided Coastal Impacts,Mha,0.0731,-1.9383,0.00196,0.0014,51.59114915
-PD22,Pathway,SSA-L,SWZ,Swaziland,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EU15,SWE,Sweden,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EFTA,CHE,Switzerland,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,MEA-M,SYR,Syria,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,CAS,TJK,Tajikistan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,TZA,Tanzania,Avoided Coastal Impacts,Mha,0.1144,-0.6615,0.00196,0.0014,151.1745095
-PD22,Pathway,OAS-M,THA,Thailand,Avoided Coastal Impacts,Mha,0.2364,-1.2227,0.00196,0.0013,81.78617927
-PD22,Pathway,OAS-L,TLS,Timor-Leste,Avoided Coastal Impacts,Mha,0.0010,-0.3194,0.00196,0.0015,313.0764638
-PD22,Pathway,SSA-L,TGO,Togo,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
 PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Avoided Coastal Impacts,Mha,0.0057,-0.9325,0.00196,0.0016,107.2394976
-PD22,Pathway,TUR,TUN,Tunisia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,TUR,TUR,Turkey,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,CAS,TKM,Turkmenistan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,UGA,Uganda,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,EEU-FSU,UKR,Ukraine,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,MEA-H,ARE,United Arab Emirates,Avoided Coastal Impacts,Mha,0.0079,-1.2558,0.00196,0.0015,79.63367167
-PD22,Pathway,EU15,GBR,United Kingdom,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,USA,USA,United States (except Alaska),Avoided Coastal Impacts,Mha,0.2089,-2.0716,0.00196,0.0023,48.27204707
-PD22,Pathway,LAM-M,URY,Uruguay,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,CAS,UZB,Uzbekistan,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,OAS-L,VUT,Vanuatu,Avoided Coastal Impacts,Mha,0.0018,-0.2062,0.00196,0.0016,485.0035331
-PD22,Pathway,LAM-M,VEN,Venezuela,Avoided Coastal Impacts,Mha,0.2855,-0.5980,0.00196,0.0015,167.2330848
-PD22,Pathway,OAS-CPA,VNM,Vietnam,Avoided Coastal Impacts,Mha,0.1707,-1.8149,0.00196,0.0011,55.10071118
-PD22,Pathway,NAF,ESH,Western Sahara,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
+PD22,Pathway,MEA-H,QAT,Qatar,Avoided Coastal Impacts,Mha,0.0004,-0.9215,0.00196,0.0014,108.5189303
+PD22,Pathway,OAS-L,PHL,Philippines,Avoided Coastal Impacts,Mha,0.282,-0.8966,0.00196,0.0018,111.5366149
+PD22,Pathway,IDN,IDN,Indonesia,Avoided Coastal Impacts,Mha,2.824,-0.8785,0.00196,0.0022,113.8296131
+PD22,Pathway,USA,PRI,Puerto Rico,Avoided Coastal Impacts,Mha,0.0092,-0.7979,0.00196,0.0016,125.3259438
+PD22,Pathway,IND,IND,India,Avoided Coastal Impacts,Mha,0.3629,-0.7821,0.00196,0.0009,127.8687328
+PD22,Pathway,LAM-M,ECU,Ecuador,Avoided Coastal Impacts,Mha,0.1451,-0.7727,0.00196,0.0016,129.4177099
+PD22,Pathway,PAK,PAK,Pakistan,Avoided Coastal Impacts,Mha,0.0677,-0.7684,0.00196,0.0011,130.1472041
+PD22,Pathway,LAM-M,CUB,Cuba,Avoided Coastal Impacts,Mha,0.3517,-0.7385,0.00196,0.0018,135.4106112
+PD22,Pathway,NAF,EGY,Egypt,Avoided Coastal Impacts,Mha,0.0002,-0.7381,0.00196,0.0011,135.474238
+PD22,Pathway,SSA-L,GMB,"Gambia, The",Avoided Coastal Impacts,Mha,0.0595,-0.7123,0.00196,0.001,140.3951195
+PD22,Pathway,BRA,BRA,Brazil,Avoided Coastal Impacts,Mha,1.1241,-0.706,0.00196,0.0014,141.6525105
+PD22,Pathway,SSA-M,AGO,Angola,Avoided Coastal Impacts,Mha,0.0375,-0.6882,0.00196,0.0016,145.2982371
+PD22,Pathway,LAM-M,DOM,Dominican Republic,Avoided Coastal Impacts,Mha,0.0197,-0.6817,0.00196,0.0016,146.6958802
+PD22,Pathway,SSA-L,TZA,Tanzania,Avoided Coastal Impacts,Mha,0.1144,-0.6615,0.00196,0.0014,151.1745095
+PD22,Pathway,OAS-M,MYS,Malaysia,Avoided Coastal Impacts,Mha,0.5218,-0.6209,0.00196,0.002,161.046403
+PD22,Pathway,LAM-M,ARG,Argentina,Avoided Forest Conversion,Mha,45.6232,-0.6202,0.002,0.0004,161.2289843
+PD22,Pathway,ANUZ,AUS,Australia,Avoided Coastal Impacts,Mha,0.9953,-0.6155,0.00196,0.0014,162.474776
+PD22,Pathway,LAM-M,VEN,Venezuela,Avoided Coastal Impacts,Mha,0.2855,-0.598,0.00196,0.0015,167.2330848
+PD22,Pathway,OAS-CPA,LAO,Laos,Avoided Forest Conversion,Mha,20.1274,-0.581,0.002,0.0008,172.106994
+PD22,Pathway,LAM-M,CRI,Costa Rica,Avoided Coastal Impacts,Mha,0.0375,-0.5676,0.00196,0.0014,176.1838595
+PD22,Pathway,SSA-L,MDG,Madagascar,Avoided Coastal Impacts,Mha,0.2621,-0.5357,0.00196,0.0012,186.6762949
+PD22,Pathway,SSA-L,LBR,Liberia,Avoided Coastal Impacts,Mha,0.0193,-0.5333,0.00196,0.0011,187.5159248
+PD22,Pathway,SSA-L,ERI,Eritrea,Avoided Coastal Impacts,Mha,0.0071,-0.5286,0.00196,0.0014,189.1703164
+PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Avoided Coastal Impacts,Mha,0.0275,-0.5176,0.00196,0.0017,193.188444
+PD22,Pathway,OAS-M,NCL,New Caledonia,Avoided Coastal Impacts,Mha,0.0302,-0.5114,0.00196,0.0013,195.5275815
+PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Avoided Coastal Impacts,Mha,0.0109,-0.5019,0.00196,0.0022,199.2507486
+PD22,Pathway,OAS-L,BGD,Bangladesh,Avoided Coastal Impacts,Mha,0.4099,-0.4617,0.00196,0.0008,216.6061795
+PD22,Pathway,OAS-L,PNG,Papua New Guinea,Avoided Coastal Impacts,Mha,0.4727,-0.4254,0.00196,0.002,235.0511599
+PD22,Pathway,MEA-M,IRN,Iran,Avoided Coastal Impacts,Mha,0.0079,-0.4217,0.00196,0.0014,237.1337432
+PD22,Pathway,LAM-M,BOL,Bolivia,Avoided Forest Conversion,Mha,67.8469,-0.3886,0.002,0.0007,257.313845
+PD22,Pathway,SSA-M,MUS,Mauritius,Avoided Coastal Impacts,Mha,0.0007,-0.3874,0.00196,0.0017,258.1015222
+PD22,Pathway,SSA-M,GNQ,Equatorial Guinea,Avoided Coastal Impacts,Mha,0.0251,-0.383,0.00196,0.0016,261.0845536
+PD22,Pathway,BRA,BRA,Brazil,Avoided Forest Conversion,Mha,568.3118,-0.3776,0.002,0.0008,264.8361061
+PD22,Pathway,SSA-L,GIN,Guinea,Avoided Coastal Impacts,Mha,0.2243,-0.3478,0.00196,0.001,287.5130627
+PD22,Pathway,SSA-L,NGA,Nigeria,Avoided Coastal Impacts,Mha,0.6988,-0.3252,0.00196,0.0016,307.5211225
+PD22,Pathway,SSA-M,GAB,Gabon,Avoided Coastal Impacts,Mha,0.1779,-0.3222,0.00196,0.0019,310.3773198
+PD22,Pathway,LAM-L,BLZ,Belize,Avoided Forest Conversion,Mha,1.6853,-0.3199,0.002,0.0007,312.5668375
+PD22,Pathway,SSA-L,GNB,Guinea-Bissau,Avoided Coastal Impacts,Mha,0.2568,-0.3196,0.00196,0.0012,312.8528433
+PD22,Pathway,OAS-L,TLS,Timor-Leste,Avoided Coastal Impacts,Mha,0.001,-0.3194,0.00196,0.0015,313.0764638
+PD22,Pathway,SSA-L,CMR,Cameroon,Avoided Coastal Impacts,Mha,0.1886,-0.3121,0.00196,0.0017,320.3625941
+PD22,Pathway,SSA-L,DJI,Djibouti,Avoided Coastal Impacts,Mha,0.0005,-0.3046,0.00196,0.0013,328.3118938
 PD22,Pathway,MEA-M,YEM,Yemen,Avoided Coastal Impacts,Mha,0.0017,-0.3014,0.00196,0.0012,331.756706
-PD22,Pathway,SSA-L,ZMB,Zambia,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,ZWE,Zimbabwe,Avoided Coastal Impacts,Mha,0.0000,NA,0.00196,NA,#VALUE!
-PD22,Pathway,SSA-L,SSD,South Sudan,Avoided Forest Conversion,Mha,60.7168,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,SWE,Sweden,Avoided Forest Conversion,Mha,29.4291,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,FIN,Finland,Avoided Forest Conversion,Mha,22.8289,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,MLI,Mali,Avoided Forest Conversion,Mha,20.1825,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,FRA,France (except French Guiana),Avoided Forest Conversion,Mha,18.9549,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,SDN,Sudan,Avoided Forest Conversion,Mha,18.9133,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU18,ESP,Spain,Avoided Forest Conversion,Mha,15.2956,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU-FSU,UKR,Ukraine,Avoided Forest Conversion,Mha,14.2436,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,DEU,Germany,Avoided Forest Conversion,Mha,13.8062,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-M,NAM,Namibia,Avoided Forest Conversion,Mha,13.6217,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EFTA,NOR,Norway,Avoided Forest Conversion,Mha,12.8720,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-H,POL,Poland,Avoided Forest Conversion,Mha,11.4471,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,ITA,Italy,Avoided Forest Conversion,Mha,11.1985,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,SOM,Somalia,Avoided Forest Conversion,Mha,10.8700,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU-FSU,BLR,Belarus,Avoided Forest Conversion,Mha,9.8104,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-M,ROU,Romania,Avoided Forest Conversion,Mha,8.7579,NA,0.0002,NA,#VALUE!
-PD22,Pathway,OAS-L,PRK,Democratic People's Republic of Korea (North Korea),Avoided Forest Conversion,Mha,6.0446,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,GBR,United Kingdom,Avoided Forest Conversion,Mha,4.6070,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-M,BGR,Bulgaria,Avoided Forest Conversion,Mha,4.6063,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,AUT,Austria,Avoided Forest Conversion,Mha,4.5760,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-M,LVA,Latvia,Avoided Forest Conversion,Mha,3.7344,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU,SRB,Serbia,Avoided Forest Conversion,Mha,3.5731,NA,0.0002,NA,#VALUE!
-PD22,Pathway,CAS,GEO,Georgia,Avoided Forest Conversion,Mha,3.4540,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-H,CZE,Czech Republic,Avoided Forest Conversion,Mha,3.2918,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,PRT,Portugal,Avoided Forest Conversion,Mha,3.2903,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU,BIH,Bosnia and Herzegovina,Avoided Forest Conversion,Mha,2.9737,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-H,EST,Estonia,Avoided Forest Conversion,Mha,2.8004,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU,HRV,Croatia,Avoided Forest Conversion,Mha,2.7601,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-H,SVK,Slovakia,Avoided Forest Conversion,Mha,2.5147,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-M,LTU,Lithuania,Avoided Forest Conversion,Mha,2.4562,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-H,HUN,Hungary,Avoided Forest Conversion,Mha,2.3699,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-M,IRN,Iran,Avoided Forest Conversion,Mha,2.1211,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EFTA,CHE,Switzerland,Avoided Forest Conversion,Mha,1.6851,NA,0.0002,NA,#VALUE!
-PD22,Pathway,PAK,PAK,Pakistan,Avoided Forest Conversion,Mha,1.3707,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-H,SVN,Slovenia,Avoided Forest Conversion,Mha,1.3503,NA,0.0002,NA,#VALUE!
-PD22,Pathway,CAS,KGZ,Kyrgyzstan,Avoided Forest Conversion,Mha,1.1213,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,IRL,Ireland,Avoided Forest Conversion,Mha,1.1203,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,BEL,Belgium,Avoided Forest Conversion,Mha,1.0338,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU,MKD,Macedonia (The Former Yugoslav Republic of Macedonia),Avoided Forest Conversion,Mha,0.9960,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU,ALB,Albania,Avoided Forest Conversion,Mha,0.9400,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,NLD,Netherlands,Avoided Forest Conversion,Mha,0.8121,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,DNK,Denmark (except Greenland),Avoided Forest Conversion,Mha,0.7951,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,NER,Niger,Avoided Forest Conversion,Mha,0.7512,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU,MNE,Montenegro,Avoided Forest Conversion,Mha,0.7258,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,LSO,Lesotho,Avoided Forest Conversion,Mha,0.5982,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EEU-FSA,MDA,Moldova,Avoided Forest Conversion,Mha,0.5201,NA,0.0002,NA,#VALUE!
-PD22,Pathway,PAK,AFG,Afghanistan,Avoided Forest Conversion,Mha,0.4113,NA,0.0002,NA,#VALUE!
-PD22,Pathway,CAS,ARM,Armenia,Avoided Forest Conversion,Mha,0.3733,NA,0.0002,NA,#VALUE!
-PD22,Pathway,CAS,UZB,Uzbekistan,Avoided Forest Conversion,Mha,0.3411,NA,0.0002,NA,#VALUE!
-PD22,Pathway,LAM-M,PRY,Paraguay,Avoided Forest Conversion,Mha,0.2813,-1.4099,0.0002,NA,70.9272782
-PD22,Pathway,CAS,TJK,Tajikistan,Avoided Forest Conversion,Mha,0.2513,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU12-H,CYP,Cyprus,Avoided Forest Conversion,Mha,0.2040,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-M,SYR,Syria,Avoided Forest Conversion,Mha,0.1934,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,COM,Comoros,Avoided Forest Conversion,Mha,0.1592,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,LUX,Luxembourg,Avoided Forest Conversion,Mha,0.1096,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-M,YEM,Yemen,Avoided Forest Conversion,Mha,0.0977,NA,0.0002,NA,#VALUE!
-PD22,Pathway,LAM-M,GLP,Guadeloupe,Avoided Forest Conversion,Mha,0.0966,NA,0.0002,NA,#VALUE!
-PD22,Pathway,LAM-M,MTQ,Martinique,Avoided Forest Conversion,Mha,0.0766,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,MRT,Mauritania,Avoided Forest Conversion,Mha,0.0430,NA,0.0002,NA,#VALUE!
-PD22,Pathway,CAS,TKM,Turkmenistan,Avoided Forest Conversion,Mha,0.0339,NA,0.0002,NA,#VALUE!
-PD22,Pathway,NAF,LBY,Libya,Avoided Forest Conversion,Mha,0.0319,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-M,IRQ,Iraq,Avoided Forest Conversion,Mha,0.0114,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,CPV,Cape Verde,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,DJI,Djibouti,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,ERI,Eritrea,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,,FLK,Falkland Islands,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,,FRO,Faroe Islands,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,OAS-M,PYF,French Polynesia,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EU15,GRL,Greenland (Denmark),Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,EFTA,ISL,Iceland,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-M,JOR,Jordan,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-H,KWT,Kuwait,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-H,OMN,Oman,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-H,QAT,Qatar,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,OAS-L,WSM,Samoa,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-H,SAU,Saudi Arabia,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,MEA-H,ARE,United Arab Emirates,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,NAF,ESH,Western Sahara,Avoided Forest Conversion,Mha,0.0000,NA,0.0002,NA,#VALUE!
-PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Avoided Forest Conversion,Mha,229.8778,-0.0150,0.0002,0.0012,6652.330009
-PD22,Pathway,LAM-M,GUF,French Guiana (France),Avoided Forest Conversion,Mha,8.0685,-0.0116,0.0002,0.0011,8591.192979
-PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Avoided Forest Conversion,Mha,34.0133,-0.0060,0.0002,0.0011,16546.37452
-PD22,Pathway,SSA-L,SWZ,Swaziland,Avoided Forest Conversion,Mha,1.6900,-0.0033,0.0002,0.0011,30488.52991
-PD22,Pathway,SSA-M,GAB,Gabon,Avoided Forest Conversion,Mha,25.8252,-0.0063,0.0002,0.0011,15788.13335
-PD22,Pathway,LAM-M,PER,Peru,Avoided Forest Conversion,Mha,80.1694,-0.0529,0.0002,0.0011,1890.023216
-PD22,Pathway,LAM-M,SUR,Suriname,Avoided Forest Conversion,Mha,13.7136,-0.0100,0.0002,0.0011,10002.51463
-PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Avoided Forest Conversion,Mha,0.4241,-0.1758,0.0002,0.0011,568.9556561
-PD22,Pathway,OAS-L,SLB,Solomon Islands,Avoided Forest Conversion,Mha,2.7517,-0.0415,0.0002,0.0011,2407.133801
-PD22,Pathway,SSA-L,UGA,Uganda,Avoided Forest Conversion,Mha,20.3492,-0.0223,0.0002,0.0010,4489.197151
-PD22,Pathway,OAS-L,PNG,Papua New Guinea,Avoided Forest Conversion,Mha,43.4804,-0.0082,0.0002,0.0010,12148.65335
-PD22,Pathway,SSA-L,CAF,Central African Republic,Avoided Forest Conversion,Mha,62.1658,-0.0004,0.0002,0.0010,228559.9353
-PD22,Pathway,LAM-M,COL,Colombia,Avoided Forest Conversion,Mha,86.1382,-0.0683,0.0002,0.0010,1463.874648
-PD22,Pathway,OAS-L,VUT,Vanuatu,Avoided Forest Conversion,Mha,1.1858,-0.0140,0.0002,0.0009,7157.474751
-PD22,Pathway,OAS-M,MYS,Malaysia,Avoided Forest Conversion,Mha,29.2664,-1.8439,0.0002,0.0009,54.23351516
-PD22,Pathway,SSA-L,GNB,Guinea-Bissau,Avoided Forest Conversion,Mha,2.4122,-0.0257,0.0002,0.0009,3889.13371
-PD22,Pathway,SSA-L,ZMB,Zambia,Avoided Forest Conversion,Mha,71.7797,-0.0053,0.0002,0.0009,18729.79757
-PD22,Pathway,LAM-L,HND,Honduras,Avoided Forest Conversion,Mha,8.7174,-0.1244,0.0002,0.0009,803.5851146
-PD22,Pathway,OAS-L,PHL,Philippines,Avoided Forest Conversion,Mha,20.2294,-0.1965,0.0002,0.0009,508.8939394
-PD22,Pathway,OAS-M,BTN,Bhutan,Avoided Forest Conversion,Mha,2.6260,-0.0290,0.0002,0.0009,3453.705444
-PD22,Pathway,LAM-M,PAN,Panama,Avoided Forest Conversion,Mha,5.8421,-0.0111,0.0002,0.0009,8978.77158
-PD22,Pathway,LAM-L,NIC,Nicaragua,Avoided Forest Conversion,Mha,8.4983,-0.0608,0.0002,0.0008,1644.063533
-PD22,Pathway,SSA-L,CMR,Cameroon,Avoided Forest Conversion,Mha,44.7761,-0.0197,0.0002,0.0008,5071.7341
-PD22,Pathway,OAS-L,TLS,Timor-Leste,Avoided Forest Conversion,Mha,0.9054,-0.0162,0.0002,0.0008,6154.836988
-PD22,Pathway,IDN,IDN,Indonesia,Avoided Forest Conversion,Mha,162.7072,-0.9805,0.0002,0.0008,101.9854429
-PD22,Pathway,OAS-CPA,KHM,Cambodia,Avoided Forest Conversion,Mha,10.6671,-2.0324,0.0002,0.0008,49.2028136
-PD22,Pathway,LAM-M,GUY,Guyana,Avoided Forest Conversion,Mha,19.3139,-0.0042,0.0002,0.0008,23720.55479
-PD22,Pathway,SSA-L,MWI,Malawi,Avoided Forest Conversion,Mha,9.3720,-0.0074,0.0002,0.0008,13535.37497
-PD22,Pathway,SSA-L,KEN,Kenya,Avoided Forest Conversion,Mha,22.1920,-0.0204,0.0002,0.0008,4894.493802
-PD22,Pathway,OAS-CPA,LAO,Laos,Avoided Forest Conversion,Mha,20.1274,-0.5810,0.0002,0.0008,172.106994
-PD22,Pathway,OAS-M,THA,Thailand,Avoided Forest Conversion,Mha,22.3733,-0.2761,0.0002,0.0008,362.1765314
-PD22,Pathway,BRA,BRA,Brazil,Avoided Forest Conversion,Mha,568.3118,-0.3776,0.0002,0.0008,264.8361061
-PD22,Pathway,OAS-L,FJI,Fiji,Avoided Forest Conversion,Mha,1.6374,-0.0384,0.0002,0.0008,2601.705751
-PD22,Pathway,SSA-M,GNQ,Equatorial Guinea,Avoided Forest Conversion,Mha,2.5949,-0.0416,0.0002,0.0008,2401.327185
-PD22,Pathway,OAS-L,MMR,Myanmar,Avoided Forest Conversion,Mha,45.3080,-0.2655,0.0002,0.0007,376.6376374
-PD22,Pathway,LAM-M,CRI,Costa Rica,Avoided Forest Conversion,Mha,4.1372,-0.0035,0.0002,0.0007,28276.17681
-PD22,Pathway,SSA-L,GIN,Guinea,Avoided Forest Conversion,Mha,24.0479,-0.0721,0.0002,0.0007,1386.838352
-PD22,Pathway,OAS-CPA,MNG,Mongolia,Avoided Forest Conversion,Mha,6.7146,0.0000,0.0002,0.0007,#DIV/0!
-PD22,Pathway,LAM-M,VEN,Venezuela,Avoided Forest Conversion,Mha,59.8511,-0.0301,0.0002,0.0007,3320.525072
-PD22,Pathway,USA,PRI,Puerto Rico,Avoided Forest Conversion,Mha,0.5818,-0.0386,0.0002,0.0007,2593.670676
-PD22,Pathway,IND,IND,India,Avoided Forest Conversion,Mha,47.5449,-0.0061,0.0002,0.0007,16420.97063
-PD22,Pathway,SSA-M,AGO,Angola,Avoided Forest Conversion,Mha,115.9739,-0.0030,0.0002,0.0007,33491.02022
-PD22,Pathway,OAS-L,NPL,Nepal,Avoided Forest Conversion,Mha,5.6795,-0.0037,0.0002,0.0007,27248.87707
-PD22,Pathway,SSA-L,ETH,Ethiopia,Avoided Forest Conversion,Mha,59.2896,-0.0009,0.0002,0.0007,117593.6575
-PD22,Pathway,LAM-M,BOL,Bolivia,Avoided Forest Conversion,Mha,67.8469,-0.3886,0.0002,0.0007,257.313845
-PD22,Pathway,OAS-CPA,VNM,Vietnam,Avoided Forest Conversion,Mha,18.4649,-1.0076,0.0002,0.0007,99.2480255
-PD22,Pathway,LAM-L,BLZ,Belize,Avoided Forest Conversion,Mha,1.6853,-0.3199,0.0002,0.0007,312.5668375
-PD22,Pathway,SAF,ZAF,South Africa,Avoided Forest Conversion,Mha,46.1130,-0.0174,0.0002,0.0007,5732.307762
-PD22,Pathway,ANUZ,NZL,New Zealand,Avoided Forest Conversion,Mha,11.7739,-0.0204,0.0002,0.0007,4907.753136
-PD22,Pathway,SSA-L,CIV,Cote d'Ivoire,Avoided Forest Conversion,Mha,32.0447,-0.0361,0.0002,0.0006,2769.92527
-PD22,Pathway,SSA-L,TGO,Togo,Avoided Forest Conversion,Mha,5.5303,-0.0002,0.0002,0.0006,451043.7152
-PD22,Pathway,SSA-L,LBR,Liberia,Avoided Forest Conversion,Mha,9.5123,-0.1284,0.0002,0.0006,778.8919897
-PD22,Pathway,OAS-L,BGD,Bangladesh,Avoided Forest Conversion,Mha,2.3141,-0.0383,0.0002,0.0006,2613.150665
-PD22,Pathway,SSA-L,GHA,Ghana,Avoided Forest Conversion,Mha,22.9262,-0.0224,0.0002,0.0006,4463.197212
-PD22,Pathway,SSA-L,SEN,Senegal,Avoided Forest Conversion,Mha,9.0613,-0.0013,0.0002,0.0006,74922.1933
-PD22,Pathway,LAM-M,SLV,El Salvador,Avoided Forest Conversion,Mha,1.1970,-0.0101,0.0002,0.0006,9928.052397
-PD22,Pathway,TUR,TUN,Tunisia,Avoided Forest Conversion,Mha,0.3391,-0.1054,0.0002,0.0006,948.6805741
-PD22,Pathway,LAM-M,CHL,Chile,Avoided Forest Conversion,Mha,21.1978,-0.0470,0.0002,0.0006,2127.778232
-PD22,Pathway,LAM-M,ECU,Ecuador,Avoided Forest Conversion,Mha,20.2110,-0.0029,0.0002,0.0006,34707.65224
-PD22,Pathway,SSA-L,BDI,Burundi,Avoided Forest Conversion,Mha,2.4470,-0.0121,0.0002,0.0006,8234.327892
-PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Avoided Forest Conversion,Mha,0.3883,-0.0032,0.0002,0.0006,31689.67443
-PD22,Pathway,SSA-L,MDG,Madagascar,Avoided Forest Conversion,Mha,49.8329,-0.0406,0.0002,0.0006,2462.790923
-PD22,Pathway,JPN,JPN,Japan,Avoided Forest Conversion,Mha,27.3605,-0.0001,0.0002,0.0006,902649.2756
-PD22,Pathway,OAS-M,LKA,Sri Lanka,Avoided Forest Conversion,Mha,4.4166,-0.0730,0.0002,0.0006,1370.305923
-PD22,Pathway,LAM-L,HTI,Haiti,Avoided Forest Conversion,Mha,1.1946,-0.0049,0.0002,0.0005,20385.28598
-PD22,Pathway,LAM-M,JAM,Jamaica,Avoided Forest Conversion,Mha,0.8092,0.0000,0.0002,0.0005,#DIV/0!
-PD22,Pathway,SSA-L,RWA,Rwanda,Avoided Forest Conversion,Mha,2.3468,-0.0233,0.0002,0.0005,4299.011374
-PD22,Pathway,EU15,GRC,Greece,Avoided Forest Conversion,Mha,5.3429,-0.0002,0.0002,0.0005,538045.1743
-PD22,Pathway,SSA-L,TZA,Tanzania,Avoided Forest Conversion,Mha,81.9639,-0.0054,0.0002,0.0005,18682.86197
-PD22,Pathway,LAM-M,CUB,Cuba,Avoided Forest Conversion,Mha,4.4784,-0.0334,0.0002,0.0005,2990.372585
-PD22,Pathway,LAM-M,DOM,Dominican Republic,Avoided Forest Conversion,Mha,2.9880,-0.0563,0.0002,0.0005,1777.420903
-PD22,Pathway,LAM-M,URY,Uruguay,Avoided Forest Conversion,Mha,1.9745,-0.0660,0.0002,0.0005,1516.22429
-PD22,Pathway,LAM-L,GTM,Guatemala,Avoided Forest Conversion,Mha,8.6059,-0.1085,0.0002,0.0005,922.057383
-PD22,Pathway,NAF,DZA,Algeria,Avoided Forest Conversion,Mha,1.8671,-0.1136,0.0002,0.0005,880.0593435
-PD22,Pathway,MEA-M,LBN,Lebanon,Avoided Forest Conversion,Mha,0.1168,-0.2327,0.0002,0.0005,429.7868671
-PD22,Pathway,CHN,CHN,China,Avoided Forest Conversion,Mha,201.1951,-0.0092,0.0002,0.0005,10889.84519
-PD22,Pathway,RUS,RUS,Russia,Avoided Forest Conversion,Mha,909.3295,-0.0002,0.0002,0.0005,521868.917
-PD22,Pathway,SSA-L,MOZ,Mozambique,Avoided Forest Conversion,Mha,77.0694,-0.0016,0.0002,0.0005,61895.81943
-PD22,Pathway,SSA-L,NGA,Nigeria,Avoided Forest Conversion,Mha,66.4272,-0.0233,0.0002,0.0005,4293.257662
-PD22,Pathway,SSA-M,MUS,Mauritius,Avoided Forest Conversion,Mha,0.1798,-0.0065,0.0002,0.0005,15456.97782
-PD22,Pathway,SSA-L,SLE,Sierra Leone,Avoided Forest Conversion,Mha,6.5673,-0.1363,0.0002,0.0005,733.4784618
-PD22,Pathway,OAS-M,NCL,New Caledonia,Avoided Forest Conversion,Mha,1.6466,-0.0218,0.0002,0.0004,4592.37273
-PD22,Pathway,SSA-L,GMB,"Gambia, The",Avoided Forest Conversion,Mha,0.8413,-0.0100,0.0002,0.0004,9951.721215
-PD22,Pathway,SSA-M,REU,Reunion,Avoided Forest Conversion,Mha,0.2288,-0.0253,0.0002,0.0004,3957.337214
-PD22,Pathway,TUR,TUR,Turkey,Avoided Forest Conversion,Mha,14.0328,-0.0125,0.0002,0.0004,8005.494331
-PD22,Pathway,USA,USA,United States (except Alaska),Avoided Forest Conversion,Mha,334.8046,-0.0408,0.0002,0.0004,2452.882037
-PD22,Pathway,MEX,MEX,Mexico,Avoided Forest Conversion,Mha,70.3735,-0.0475,0.0002,0.0004,2106.05499
-PD22,Pathway,NAF,EGY,Egypt,Avoided Forest Conversion,Mha,1.9800,-0.0016,0.0002,0.0004,62240.49603
-PD22,Pathway,SSA-L,BEN,Benin,Avoided Forest Conversion,Mha,11.4266,-0.0017,0.0002,0.0004,58436.02979
-PD22,Pathway,SSA-L,ZWE,Zimbabwe,Avoided Forest Conversion,Mha,33.1565,-0.0007,0.0002,0.0004,148306.1216
-PD22,Pathway,LAM-M,ARG,Argentina,Avoided Forest Conversion,Mha,45.6232,-0.6202,0.0002,0.0004,161.2289843
-PD22,Pathway,NAF,MAR,Morocco,Avoided Forest Conversion,Mha,1.2762,-0.0984,0.0002,0.0003,1015.997232
-PD22,Pathway,SSA-L,TCD,Chad,Avoided Forest Conversion,Mha,29.1503,-0.0012,0.0002,0.0003,85071.19608
-PD22,Pathway,LAM-M,BHS,Bahamas,Avoided Forest Conversion,Mha,0.2850,-0.0834,0.0002,0.0003,1199.31743
-PD22,Pathway,SSA-L,BFA,Burkina Faso,Avoided Forest Conversion,Mha,14.0585,-0.0009,0.0002,0.0003,115395.2229
-PD22,Pathway,CAN,CAN,Canada,Avoided Forest Conversion,Mha,483.6015,-0.0031,0.0002,0.0003,32021.91836
-PD22,Pathway,CAS,KAZ,Kazakhstan,Avoided Forest Conversion,Mha,6.6915,NA,0.0002,0.0003,#VALUE!
-PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Avoided Forest Conversion,Mha,5.8507,-0.0236,0.0002,0.0003,4245.848558
-PD22,Pathway,ANUZ,AUS,Australia,Avoided Forest Conversion,Mha,118.1412,-0.0328,0.0002,0.0003,3050.810858
-PD22,Pathway,CAS,AZE,Azerbaijan,Avoided Forest Conversion,Mha,1.6075,-0.0006,0.0002,0.0002,170817.8245
-PD22,Pathway,SSA-M,BWA,Botswana,Avoided Forest Conversion,Mha,19.3143,-0.0002,0.0002,0.0001,550882.2379
-PD22,Pathway,MEA-H,ISR,Israel,Avoided Forest Conversion,Mha,0.0623,-0.0338,0.0002,0.0000,2959.440571
+PD22,Pathway,LAM-M,PAN,Panama,Avoided Coastal Impacts,Mha,0.1552,-0.2971,0.00196,0.0017,336.5947242
+PD22,Pathway,OAS-L,SLB,Solomon Islands,Avoided Coastal Impacts,Mha,0.0536,-0.2851,0.00196,0.002,350.7802841
+PD22,Pathway,OAS-M,THA,Thailand,Avoided Forest Conversion,Mha,22.3733,-0.2761,0.002,0.0008,362.1765314
+PD22,Pathway,OAS-L,FJI,Fiji,Avoided Coastal Impacts,Mha,0.0514,-0.2693,0.00196,0.0018,371.3375424
+PD22,Pathway,OAS-L,MMR,Myanmar,Avoided Forest Conversion,Mha,45.308,-0.2655,0.002,0.0007,376.6376374
+PD22,Pathway,MEA-M,LBN,Lebanon,Avoided Forest Conversion,Mha,0.1168,-0.2327,0.002,0.0005,429.7868671
+PD22,Pathway,OAS-L,VUT,Vanuatu,Avoided Coastal Impacts,Mha,0.0018,-0.2062,0.00196,0.0016,485.0035331
+PD22,Pathway,JPN,JPN,Japan,Avoided Coastal Impacts,Mha,0.001,-0.2054,0.00196,0.0016,486.7383275
+PD22,Pathway,OAS-L,PHL,Philippines,Avoided Forest Conversion,Mha,20.2294,-0.1965,0.002,0.0009,508.8939394
+PD22,Pathway,SSA-L,SLE,Sierra Leone,Avoided Coastal Impacts,Mha,0.1269,-0.1941,0.00196,0.0011,515.2113312
+PD22,Pathway,OAS-M,BRN,Brunei Darussalam,Avoided Forest Conversion,Mha,0.4241,-0.1758,0.002,0.0011,568.9556561
+PD22,Pathway,SSA-L,SLE,Sierra Leone,Avoided Forest Conversion,Mha,6.5673,-0.1363,0.002,0.0005,733.4784618
+PD22,Pathway,SSA-L,LBR,Liberia,Avoided Forest Conversion,Mha,9.5123,-0.1284,0.002,0.0006,778.8919897
+PD22,Pathway,LAM-L,HND,Honduras,Avoided Forest Conversion,Mha,8.7174,-0.1244,0.002,0.0009,803.5851146
+PD22,Pathway,NAF,DZA,Algeria,Avoided Forest Conversion,Mha,1.8671,-0.1136,0.002,0.0005,880.0593435
+PD22,Pathway,LAM-M,GLP,Guadeloupe,Avoided Coastal Impacts,Mha,0.0037,-0.1092,0.00196,0.0019,915.6990429
+PD22,Pathway,LAM-L,GTM,Guatemala,Avoided Forest Conversion,Mha,8.6059,-0.1085,0.002,0.0005,922.057383
+PD22,Pathway,SSA-L,SDN,Sudan,Avoided Coastal Impacts,Mha,0.0004,-0.1066,0.00196,0.0012,937.789563
+PD22,Pathway,TUR,TUN,Tunisia,Avoided Forest Conversion,Mha,0.3391,-0.1054,0.002,0.0006,948.6805741
+PD22,Pathway,NAF,MAR,Morocco,Avoided Forest Conversion,Mha,1.2762,-0.0984,0.002,0.0003,1015.997232
+PD22,Pathway,LAM-M,BHS,Bahamas,Avoided Forest Conversion,Mha,0.285,-0.0834,0.002,0.0003,1199.31743
+PD22,Pathway,OAS-M,LKA,Sri Lanka,Avoided Forest Conversion,Mha,4.4166,-0.073,0.002,0.0006,1370.305923
+PD22,Pathway,SSA-L,GIN,Guinea,Avoided Forest Conversion,Mha,24.0479,-0.0721,0.002,0.0007,1386.838352
+PD22,Pathway,LAM-M,COL,Colombia,Avoided Forest Conversion,Mha,86.1382,-0.0683,0.002,0.001,1463.874648
+PD22,Pathway,LAM-M,URY,Uruguay,Avoided Forest Conversion,Mha,1.9745,-0.066,0.002,0.0005,1516.22429
+PD22,Pathway,LAM-L,NIC,Nicaragua,Avoided Forest Conversion,Mha,8.4983,-0.0608,0.002,0.0008,1644.063533
+PD22,Pathway,LAM-M,DOM,Dominican Republic,Avoided Forest Conversion,Mha,2.988,-0.0563,0.002,0.0005,1777.420903
+PD22,Pathway,LAM-M,PER,Peru,Avoided Forest Conversion,Mha,80.1694,-0.0529,0.002,0.0011,1890.023216
+PD22,Pathway,LAM-M,MTQ,Martinique,Avoided Coastal Impacts,Mha,0.0017,-0.05,0.00196,0.0017,2001.809315
+PD22,Pathway,MEX,MEX,Mexico,Avoided Forest Conversion,Mha,70.3735,-0.0475,0.002,0.0004,2106.05499
+PD22,Pathway,LAM-M,CHL,Chile,Avoided Forest Conversion,Mha,21.1978,-0.047,0.002,0.0006,2127.778232
+PD22,Pathway,SSA-M,GNQ,Equatorial Guinea,Avoided Forest Conversion,Mha,2.5949,-0.0416,0.002,0.0008,2401.327185
+PD22,Pathway,OAS-L,SLB,Solomon Islands,Avoided Forest Conversion,Mha,2.7517,-0.0415,0.002,0.0011,2407.133801
+PD22,Pathway,USA,USA,United States (except Alaska),Avoided Forest Conversion,Mha,334.8046,-0.0408,0.002,0.0004,2452.882037
+PD22,Pathway,SSA-L,MDG,Madagascar,Avoided Forest Conversion,Mha,49.8329,-0.0406,0.002,0.0006,2462.790923
+PD22,Pathway,USA,PRI,Puerto Rico,Avoided Forest Conversion,Mha,0.5818,-0.0386,0.002,0.0007,2593.670676
+PD22,Pathway,OAS-L,FJI,Fiji,Avoided Forest Conversion,Mha,1.6374,-0.0384,0.002,0.0008,2601.705751
+PD22,Pathway,OAS-L,BGD,Bangladesh,Avoided Forest Conversion,Mha,2.3141,-0.0383,0.002,0.0006,2613.150665
+PD22,Pathway,SSA-L,CIV,Cote d'Ivoire,Avoided Forest Conversion,Mha,32.0447,-0.0361,0.002,0.0006,2769.92527
+PD22,Pathway,MEA-H,ISR,Israel,Avoided Forest Conversion,Mha,0.0623,-0.0338,0.002,0,2959.440571
+PD22,Pathway,LAM-M,CUB,Cuba,Avoided Forest Conversion,Mha,4.4784,-0.0334,0.002,0.0005,2990.372585
+PD22,Pathway,OAS-L,WSM,Samoa,Avoided Coastal Impacts,Mha,0.0003,-0.0334,0.00196,NA,2996.192469
+PD22,Pathway,ANUZ,AUS,Australia,Avoided Forest Conversion,Mha,118.1412,-0.0328,0.002,0.0003,3050.810858
+PD22,Pathway,LAM-M,VEN,Venezuela,Avoided Forest Conversion,Mha,59.8511,-0.0301,0.002,0.0007,3320.525072
+PD22,Pathway,OAS-M,BTN,Bhutan,Avoided Forest Conversion,Mha,2.626,-0.029,0.002,0.0009,3453.705444
+PD22,Pathway,SSA-L,COM,Comoros,Avoided Coastal Impacts,Mha,0.0001,-0.0278,0.00196,0.0018,3601.937886
+PD22,Pathway,SSA-L,GNB,Guinea-Bissau,Avoided Forest Conversion,Mha,2.4122,-0.0257,0.002,0.0009,3889.13371
+PD22,Pathway,SSA-M,REU,Reunion,Avoided Forest Conversion,Mha,0.2288,-0.0253,0.002,0.0004,3957.337214
+PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Avoided Forest Conversion,Mha,5.8507,-0.0236,0.002,0.0003,4245.848558
+PD22,Pathway,SSA-L,NGA,Nigeria,Avoided Forest Conversion,Mha,66.4272,-0.0233,0.002,0.0005,4293.257662
+PD22,Pathway,SSA-L,RWA,Rwanda,Avoided Forest Conversion,Mha,2.3468,-0.0233,0.002,0.0005,4299.011374
+PD22,Pathway,SSA-L,GHA,Ghana,Avoided Forest Conversion,Mha,22.9262,-0.0224,0.002,0.0006,4463.197212
+PD22,Pathway,SSA-L,UGA,Uganda,Avoided Forest Conversion,Mha,20.3492,-0.0223,0.002,0.001,4489.197151
+PD22,Pathway,OAS-M,NCL,New Caledonia,Avoided Forest Conversion,Mha,1.6466,-0.0218,0.002,0.0004,4592.37273
+PD22,Pathway,SSA-L,KEN,Kenya,Avoided Forest Conversion,Mha,22.192,-0.0204,0.002,0.0008,4894.493802
+PD22,Pathway,ANUZ,NZL,New Zealand,Avoided Forest Conversion,Mha,11.7739,-0.0204,0.002,0.0007,4907.753136
+PD22,Pathway,SSA-L,CMR,Cameroon,Avoided Forest Conversion,Mha,44.7761,-0.0197,0.002,0.0008,5071.7341
+PD22,Pathway,SAF,ZAF,South Africa,Avoided Forest Conversion,Mha,46.113,-0.0174,0.002,0.0007,5732.307762
+PD22,Pathway,OAS-L,TLS,Timor-Leste,Avoided Forest Conversion,Mha,0.9054,-0.0162,0.002,0.0008,6154.836988
+PD22,Pathway,SSA-L,COD,Democratic Republic of the Congo (DRC),Avoided Forest Conversion,Mha,229.8778,-0.015,0.002,0.0012,6652.330009
+PD22,Pathway,OAS-L,VUT,Vanuatu,Avoided Forest Conversion,Mha,1.1858,-0.014,0.002,0.0009,7157.474751
+PD22,Pathway,TUR,TUR,Turkey,Avoided Forest Conversion,Mha,14.0328,-0.0125,0.002,0.0004,8005.494331
+PD22,Pathway,SSA-L,BDI,Burundi,Avoided Forest Conversion,Mha,2.447,-0.0121,0.002,0.0006,8234.327892
+PD22,Pathway,LAM-M,GUF,French Guiana (France),Avoided Forest Conversion,Mha,8.0685,-0.0116,0.002,0.0011,8591.192979
+PD22,Pathway,LAM-M,PAN,Panama,Avoided Forest Conversion,Mha,5.8421,-0.0111,0.002,0.0009,8978.77158
+PD22,Pathway,LAM-M,SLV,El Salvador,Avoided Forest Conversion,Mha,1.197,-0.0101,0.002,0.0006,9928.052397
+PD22,Pathway,LAM-M,SUR,Suriname,Avoided Forest Conversion,Mha,13.7136,-0.01,0.002,0.0011,10002.51463
+PD22,Pathway,SSA-L,GMB,"Gambia, The",Avoided Forest Conversion,Mha,0.8413,-0.01,0.002,0.0004,9951.721215
+PD22,Pathway,CHN,CHN,China,Avoided Forest Conversion,Mha,201.1951,-0.0092,0.002,0.0005,10889.84519
+PD22,Pathway,OAS-L,PNG,Papua New Guinea,Avoided Forest Conversion,Mha,43.4804,-0.0082,0.002,0.001,12148.65335
+PD22,Pathway,SSA-L,MWI,Malawi,Avoided Forest Conversion,Mha,9.372,-0.0074,0.002,0.0008,13535.37497
+PD22,Pathway,SSA-M,MUS,Mauritius,Avoided Forest Conversion,Mha,0.1798,-0.0065,0.002,0.0005,15456.97782
+PD22,Pathway,SSA-M,GAB,Gabon,Avoided Forest Conversion,Mha,25.8252,-0.0063,0.002,0.0011,15788.13335
+PD22,Pathway,IND,IND,India,Avoided Forest Conversion,Mha,47.5449,-0.0061,0.002,0.0007,16420.97063
+PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Avoided Forest Conversion,Mha,34.0133,-0.006,0.002,0.0011,16546.37452
+PD22,Pathway,SSA-L,TZA,Tanzania,Avoided Forest Conversion,Mha,81.9639,-0.0054,0.002,0.0005,18682.86197
+PD22,Pathway,SSA-L,ZMB,Zambia,Avoided Forest Conversion,Mha,71.7797,-0.0053,0.002,0.0009,18729.79757
+PD22,Pathway,LAM-L,HTI,Haiti,Avoided Forest Conversion,Mha,1.1946,-0.0049,0.002,0.0005,20385.28598
+PD22,Pathway,LAM-M,GUY,Guyana,Avoided Forest Conversion,Mha,19.3139,-0.0042,0.002,0.0008,23720.55479
+PD22,Pathway,OAS-L,NPL,Nepal,Avoided Forest Conversion,Mha,5.6795,-0.0037,0.002,0.0007,27248.87707
+PD22,Pathway,LAM-M,CRI,Costa Rica,Avoided Forest Conversion,Mha,4.1372,-0.0035,0.002,0.0007,28276.17681
+PD22,Pathway,SSA-L,SWZ,Swaziland,Avoided Forest Conversion,Mha,1.69,-0.0033,0.002,0.0011,30488.52991
+PD22,Pathway,LAM-M,TTO,Trinidad and Tobago,Avoided Forest Conversion,Mha,0.3883,-0.0032,0.002,0.0006,31689.67443
+PD22,Pathway,CAN,CAN,Canada,Avoided Forest Conversion,Mha,483.6015,-0.0031,0.002,0.0003,32021.91836
+PD22,Pathway,SSA-M,AGO,Angola,Avoided Forest Conversion,Mha,115.9739,-0.003,0.002,0.0007,33491.02022
+PD22,Pathway,LAM-M,ECU,Ecuador,Avoided Forest Conversion,Mha,20.211,-0.0029,0.002,0.0006,34707.65224
+PD22,Pathway,SSA-L,BEN,Benin,Avoided Forest Conversion,Mha,11.4266,-0.0017,0.002,0.0004,58436.02979
+PD22,Pathway,SSA-L,MOZ,Mozambique,Avoided Forest Conversion,Mha,77.0694,-0.0016,0.002,0.0005,61895.81943
+PD22,Pathway,NAF,EGY,Egypt,Avoided Forest Conversion,Mha,1.98,-0.0016,0.002,0.0004,62240.49603
+PD22,Pathway,SSA-L,SEN,Senegal,Avoided Forest Conversion,Mha,9.0613,-0.0013,0.002,0.0006,74922.1933
+PD22,Pathway,SSA-L,TCD,Chad,Avoided Forest Conversion,Mha,29.1503,-0.0012,0.002,0.0003,85071.19608
+PD22,Pathway,SSA-L,ETH,Ethiopia,Avoided Forest Conversion,Mha,59.2896,-0.0009,0.002,0.0007,117593.6575
+PD22,Pathway,SSA-L,BFA,Burkina Faso,Avoided Forest Conversion,Mha,14.0585,-0.0009,0.002,0.0003,115395.2229
+PD22,Pathway,SSA-L,ZWE,Zimbabwe,Avoided Forest Conversion,Mha,33.1565,-0.0007,0.002,0.0004,148306.1216
+PD22,Pathway,CAS,AZE,Azerbaijan,Avoided Forest Conversion,Mha,1.6075,-0.0006,0.002,0.0002,170817.8245
+PD22,Pathway,SSA-L,CAF,Central African Republic,Avoided Forest Conversion,Mha,62.1658,-0.0004,0.002,0.001,228559.9353
+PD22,Pathway,RUS,RUS,Russia,Avoided Forest Conversion,Mha,909.3295,-0.0002,0.002,0.0005,521868.917
+PD22,Pathway,SSA-M,BWA,Botswana,Avoided Forest Conversion,Mha,19.3143,-0.0002,0.002,0.0001,550882.2379
+PD22,Pathway,SSA-L,TGO,Togo,Avoided Forest Conversion,Mha,5.5303,-0.0002,0.002,0.0006,451043.7152
+PD22,Pathway,EU15,GRC,Greece,Avoided Forest Conversion,Mha,5.3429,-0.0002,0.002,0.0005,538045.1743
+PD22,Pathway,JPN,JPN,Japan,Avoided Forest Conversion,Mha,27.3605,-0.0001,0.002,0.0006,902649.2756
+PD22,Pathway,OAS-CPA,MNG,Mongolia,Avoided Forest Conversion,Mha,6.7146,0,0.002,0.0007,#DIV/0!
+PD22,Pathway,LAM-M,JAM,Jamaica,Avoided Forest Conversion,Mha,0.8092,0,0.002,0.0005,#DIV/0!
+PD22,Pathway,OAS-CPA,LAO,Laos,Avoided Coastal Impacts,Mha,0,0,0.00196,NA,#DIV/0!
+PD22,Pathway,SSA-L,SSD,South Sudan,Avoided Forest Conversion,Mha,60.7168,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,SWE,Sweden,Avoided Forest Conversion,Mha,29.4291,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,FIN,Finland,Avoided Forest Conversion,Mha,22.8289,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,MLI,Mali,Avoided Forest Conversion,Mha,20.1825,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,FRA,France (except French Guiana),Avoided Forest Conversion,Mha,18.9549,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,SDN,Sudan,Avoided Forest Conversion,Mha,18.9133,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU18,ESP,Spain,Avoided Forest Conversion,Mha,15.2956,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU-FSU,UKR,Ukraine,Avoided Forest Conversion,Mha,14.2436,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,DEU,Germany,Avoided Forest Conversion,Mha,13.8062,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-M,NAM,Namibia,Avoided Forest Conversion,Mha,13.6217,NA,0.002,NA,#VALUE!
+PD22,Pathway,EFTA,NOR,Norway,Avoided Forest Conversion,Mha,12.872,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-H,POL,Poland,Avoided Forest Conversion,Mha,11.4471,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,ITA,Italy,Avoided Forest Conversion,Mha,11.1985,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,SOM,Somalia,Avoided Forest Conversion,Mha,10.87,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU-FSU,BLR,Belarus,Avoided Forest Conversion,Mha,9.8104,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-M,ROU,Romania,Avoided Forest Conversion,Mha,8.7579,NA,0.002,NA,#VALUE!
+PD22,Pathway,CAS,KAZ,Kazakhstan,Avoided Forest Conversion,Mha,6.6915,NA,0.002,0.0003,#VALUE!
+PD22,Pathway,OAS-L,PRK,Democratic People's Republic of Korea (North Korea),Avoided Forest Conversion,Mha,6.0446,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,GBR,United Kingdom,Avoided Forest Conversion,Mha,4.607,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-M,BGR,Bulgaria,Avoided Forest Conversion,Mha,4.6063,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,AUT,Austria,Avoided Forest Conversion,Mha,4.576,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-M,LVA,Latvia,Avoided Forest Conversion,Mha,3.7344,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU,SRB,Serbia,Avoided Forest Conversion,Mha,3.5731,NA,0.002,NA,#VALUE!
+PD22,Pathway,CAS,GEO,Georgia,Avoided Forest Conversion,Mha,3.454,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-H,CZE,Czech Republic,Avoided Forest Conversion,Mha,3.2918,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,PRT,Portugal,Avoided Forest Conversion,Mha,3.2903,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU,BIH,Bosnia and Herzegovina,Avoided Forest Conversion,Mha,2.9737,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-H,EST,Estonia,Avoided Forest Conversion,Mha,2.8004,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU,HRV,Croatia,Avoided Forest Conversion,Mha,2.7601,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-H,SVK,Slovakia,Avoided Forest Conversion,Mha,2.5147,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-M,LTU,Lithuania,Avoided Forest Conversion,Mha,2.4562,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-H,HUN,Hungary,Avoided Forest Conversion,Mha,2.3699,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-M,IRN,Iran,Avoided Forest Conversion,Mha,2.1211,NA,0.002,NA,#VALUE!
+PD22,Pathway,EFTA,CHE,Switzerland,Avoided Forest Conversion,Mha,1.6851,NA,0.002,NA,#VALUE!
+PD22,Pathway,PAK,PAK,Pakistan,Avoided Forest Conversion,Mha,1.3707,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-H,SVN,Slovenia,Avoided Forest Conversion,Mha,1.3503,NA,0.002,NA,#VALUE!
+PD22,Pathway,CAS,KGZ,Kyrgyzstan,Avoided Forest Conversion,Mha,1.1213,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,IRL,Ireland,Avoided Forest Conversion,Mha,1.1203,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,BEL,Belgium,Avoided Forest Conversion,Mha,1.0338,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU,MKD,Macedonia (The Former Yugoslav Republic of Macedonia),Avoided Forest Conversion,Mha,0.996,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU,ALB,Albania,Avoided Forest Conversion,Mha,0.94,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,NLD,Netherlands,Avoided Forest Conversion,Mha,0.8121,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,DNK,Denmark (except Greenland),Avoided Forest Conversion,Mha,0.7951,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,NER,Niger,Avoided Forest Conversion,Mha,0.7512,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU,MNE,Montenegro,Avoided Forest Conversion,Mha,0.7258,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,LSO,Lesotho,Avoided Forest Conversion,Mha,0.5982,NA,0.002,NA,#VALUE!
+PD22,Pathway,EEU-FSA,MDA,Moldova,Avoided Forest Conversion,Mha,0.5201,NA,0.002,NA,#VALUE!
+PD22,Pathway,PAK,AFG,Afghanistan,Avoided Forest Conversion,Mha,0.4113,NA,0.002,NA,#VALUE!
+PD22,Pathway,CAS,ARM,Armenia,Avoided Forest Conversion,Mha,0.3733,NA,0.002,NA,#VALUE!
+PD22,Pathway,CAS,UZB,Uzbekistan,Avoided Forest Conversion,Mha,0.3411,NA,0.002,NA,#VALUE!
+PD22,Pathway,CAS,TJK,Tajikistan,Avoided Forest Conversion,Mha,0.2513,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU12-H,CYP,Cyprus,Avoided Forest Conversion,Mha,0.204,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-M,SYR,Syria,Avoided Forest Conversion,Mha,0.1934,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,COM,Comoros,Avoided Forest Conversion,Mha,0.1592,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,LUX,Luxembourg,Avoided Forest Conversion,Mha,0.1096,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-M,YEM,Yemen,Avoided Forest Conversion,Mha,0.0977,NA,0.002,NA,#VALUE!
+PD22,Pathway,LAM-M,GLP,Guadeloupe,Avoided Forest Conversion,Mha,0.0966,NA,0.002,NA,#VALUE!
+PD22,Pathway,LAM-M,MTQ,Martinique,Avoided Forest Conversion,Mha,0.0766,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,MRT,Mauritania,Avoided Forest Conversion,Mha,0.043,NA,0.002,NA,#VALUE!
+PD22,Pathway,CAS,TKM,Turkmenistan,Avoided Forest Conversion,Mha,0.0339,NA,0.002,NA,#VALUE!
+PD22,Pathway,NAF,LBY,Libya,Avoided Forest Conversion,Mha,0.0319,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-M,IRQ,Iraq,Avoided Forest Conversion,Mha,0.0114,NA,0.002,NA,#VALUE!
+PD22,Pathway,PAK,AFG,Afghanistan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU,ALB,Albania,Avoided Coastal Impacts,Mha,0,NA,0.00196,0,#VALUE!
+PD22,Pathway,NAF,DZA,Algeria,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,LAM-M,ARG,Argentina,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAS,ARM,Armenia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,AUT,Austria,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAS,AZE,Azerbaijan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU-FSU,BLR,Belarus,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,BEL,Belgium,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,OAS-M,BTN,Bhutan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,LAM-M,BOL,Bolivia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU,BIH,Bosnia and Herzegovina,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-M,BWA,Botswana,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-M,BGR,Bulgaria,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,BFA,Burkina Faso,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,BDI,Burundi,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAN,CAN,Canada,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,CPV,Cape Verde,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,CAF,Central African Republic,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,TCD,Chad,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,LAM-M,CHL,Chile,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU,HRV,Croatia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-H,CYP,Cyprus,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-H,CZE,Czech Republic,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,OAS-L,PRK,Democratic People's Republic of Korea (North Korea),Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,DNK,Denmark (except Greenland),Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-H,EST,Estonia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,ETH,Ethiopia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,,FLK,Falkland Islands,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,,FRO,Faroe Islands,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,FIN,Finland,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,FRA,France (except French Guiana),Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,OAS-M,PYF,French Polynesia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAS,GEO,Georgia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,DEU,Germany,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,GHA,Ghana,Avoided Coastal Impacts,Mha,0,NA,0.00196,0.0011,#VALUE!
+PD22,Pathway,EU15,GRC,Greece,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,GRL,Greenland (Denmark),Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-H,HUN,Hungary,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EFTA,ISL,Iceland,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,MEA-M,IRQ,Iraq,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,IRL,Ireland,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,MEA-H,ISR,Israel,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,ITA,Italy,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,MEA-M,JOR,Jordan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAS,KAZ,Kazakhstan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,MEA-H,KWT,Kuwait,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAS,KGZ,Kyrgyzstan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-M,LVA,Latvia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,MEA-M,LBN,Lebanon,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,LSO,Lesotho,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,NAF,LBY,Libya,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-M,LTU,Lithuania,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,LUX,Luxembourg,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU,MKD,Macedonia (The Former Yugoslav Republic of Macedonia),Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,MWI,Malawi,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,MLI,Mali,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,MRT,Mauritania,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU-FSA,MDA,Moldova,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,OAS-CPA,MNG,Mongolia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU,MNE,Montenegro,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,NAF,MAR,Morocco,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-M,NAM,Namibia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,OAS-L,NPL,Nepal,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,NLD,Netherlands,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,ANUZ,NZL,New Zealand,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,NER,Niger,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EFTA,NOR,Norway,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,LAM-M,PRY,Paraguay,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-H,POL,Poland,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,PRT,Portugal,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,COG,Republic of Congo (ROC),Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,ANUZ,KOR,Republic of Korea (South Korea),Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-M,REU,Reunion,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-M,ROU,Romania,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,RUS,RUS,Russia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,RWA,Rwanda,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU,SRB,Serbia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-H,SVK,Slovakia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU12-H,SVN,Slovenia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,SSD,South Sudan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU17,ESP,Spain,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,SWZ,Swaziland,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,SWE,Sweden,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EFTA,CHE,Switzerland,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,MEA-M,SYR,Syria,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAS,TJK,Tajikistan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,TGO,Togo,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,TUR,TUN,Tunisia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,TUR,TUR,Turkey,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAS,TKM,Turkmenistan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,UGA,Uganda,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EEU-FSU,UKR,Ukraine,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,EU15,GBR,United Kingdom,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,LAM-M,URY,Uruguay,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,CAS,UZB,Uzbekistan,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,NAF,ESH,Western Sahara,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,ZMB,Zambia,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,ZWE,Zimbabwe,Avoided Coastal Impacts,Mha,0,NA,0.00196,NA,#VALUE!
+PD22,Pathway,SSA-L,CPV,Cape Verde,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,DJI,Djibouti,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,ERI,Eritrea,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,,FLK,Falkland Islands,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,,FRO,Faroe Islands,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,OAS-M,PYF,French Polynesia,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,EU15,GRL,Greenland (Denmark),Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,EFTA,ISL,Iceland,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-M,JOR,Jordan,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-H,KWT,Kuwait,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-H,OMN,Oman,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-H,QAT,Qatar,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,OAS-L,WSM,Samoa,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,SSA-L,STP,Sao Tome and Principe,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-H,SAU,Saudi Arabia,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,MEA-H,ARE,United Arab Emirates,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!
+PD22,Pathway,NAF,ESH,Western Sahara,Avoided Forest Conversion,Mha,0,NA,0.002,NA,#VALUE!

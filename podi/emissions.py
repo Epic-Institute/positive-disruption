@@ -64,11 +64,11 @@ def emissions(
         axis=1,
     )
 
-    # Have emissions factors decrease by 0.5% per year from data_end_year to proj_end_year
+    # Have emissions factors decrease by 1% per year from data_end_year to proj_end_year
     emissions_factors = emissions_factors.parallel_apply(
         lambda x: x.subtract(
             pd.Series(
-                (x[x.first_valid_index()] * 0.005)
+                (x[x.first_valid_index()] * 0.01)
                 * (
                     np.arange(data_start_year, proj_end_year + 1)
                     - data_start_year
@@ -307,15 +307,30 @@ def emissions(
         .multiply(1e6)
         .rename(
             index={
-                "Avoided Coastal Impacts": "Avoided Coastal Impacts|Avg mitigation potential flux",
-                "Avoided Forest Conversion": "Avoided Forest Conversion|Avg mitigation potential flux",
+                "Avoided Coastal Impacts": "Coastal Impacts|Avg mitigation potential flux",
+                "Avoided Forest Conversion": "Net Forest Conversion|Avg mitigation potential flux",
                 "Mha": "tCO2e/ha/yr",
             }
         )
     ).fillna(0)
 
+    flux = flux.rename(
+        index={
+            "Biochar|Avg mitigation potential flux": "Biochar as Ag Soil Amendment|Avg mitigation potential flux",
+            "Improved Rice|Avg mitigation potential flux": "Rice Cultivation|Avg mitigation potential flux",
+            "Avoided Peat Impacts|Avg mitigation potential flux": "Peat Impacts|Avg mitigation potential flux",
+        }
+    )
+
+    # Add flux for new markets
+    flux_new_markets = pd.DataFrame(
+        pd.read_csv("podi/data/APL/flux.csv")
+    ).set_index(pyam.IAMC_IDX)
+    flux_new_markets.columns = flux_new_markets.columns.astype(int)
+    flux_new_markets = flux_new_markets.loc[:, data_start_year:proj_end_year]
+
     # Combine flux estimates
-    flux = pd.concat([flux, flux_avoided])
+    flux = pd.concat([flux, flux_avoided, flux_new_markets])
 
     # Change flux units for Nitrogen Fertilizer Management from MtCO2e/percentile
     # improvement to tCO2e/percentile improvement, to match other subverticals
@@ -559,6 +574,56 @@ def emissions(
     emissions_afolu.interpolate(method="linear", axis=1, inplace=True)
     emissions_afolu.fillna(method="bfill", inplace=True)
 
+    # Have emissions decrease by 1% per year from data_end_year to proj_end_year
+    emissions_afolu = emissions_afolu.parallel_apply(
+        lambda x: x.subtract(
+            pd.Series(
+                (x[x.first_valid_index()] * 0.01)
+                * (
+                    np.arange(data_start_year, proj_end_year + 1)
+                    - data_start_year
+                ),
+                index=x.index,
+            ).rename(x.name)
+        ).clip(lower=0),
+        axis=1,
+    )
+
+    # Relabel Net forest conversion, Drained organic soils, synthetic fertilizers, rice cultivation, fires, crop residues, burning crop residues; these have associated NCS negative emissions that effectively reduce them.
+    emissions_afolu = emissions_afolu.rename(
+        index={
+            "Net Forest conversion": "Net Forest Conversion",
+            "Avoided Forest Conversion": "Net Forest Conversion",
+            "Drained organic soils": "Coastal Impacts",
+            "Avoided Coastal Impacts": "Coastal Impacts",
+            "Synthetic Fertilizers": "Nitrogen Fertilizer Management",
+            "Improved Rice": "Rice Cultivation",
+            "Fires in humid tropical forests": "Net Forest Conversion",
+            "Fires in organic soils": "Peat Impacts",
+            "Avoided Peat Impacts": "Peat Impacts",
+            "Forest fires": "Net Forest Conversion",
+            # "Crop Residues": "Biochar as Ag Soil Amendment",
+            # "Burning - Crop residues": "Biochar as Ag Soil Amendment",
+        }
+    )
+
+    afolu_output = afolu_output.rename(
+        index={
+            "Net Forest conversion": "Net Forest Conversion",
+            "Avoided Forest Conversion": "Net Forest Conversion",
+            "Drained organic soils": "Coastal Impacts",
+            "Avoided Coastal Impacts": "Coastal Impacts",
+            "Synthetic Fertilizers": "Nitrogen Fertilizer Management",
+            "Improved Rice": "Rice Cultivation",
+            "Fires in humid tropical forests": "Net Forest Conversion",
+            "Fires in organic soils": "Peat Impacts",
+            "Avoided Peat Impacts": "Peat Impacts",
+            "Forest fires": "Net Forest Conversion",
+            # "Crop Residues": "Biochar as Ag Soil Amendment",
+            # "Burning - Crop residues": "Biochar as Ag Soil Amendment",
+        }
+    )
+
     # endregion
 
     # Multiply afolu_output by emissions factors to get emissions estimates
@@ -567,15 +632,57 @@ def emissions(
     # Calculate emissions mitigated by multiplying adoption in each year by avg
     # mitigtation potential flux (over the entire range of year to proj_end_year), to
     # represent the time-dependent mitigation flux for adoption in each year
+    afolu_output.columns = afolu_output.columns.astype(int)
+
     emissions_afolu_mitigated = pd.DataFrame(
         index=afolu_output.index, columns=afolu_output.columns
     )
-    emissions_afolu_mitigated.reset_index(inplace=True)
-    emissions_afolu_mitigated.unit = (
-        emissions_afolu_mitigated.unit.str.replace("Mha", "tCO2e", regex=True)
-        .replace("m3", "tCO2e", regex=True)
-        .replace("Percent adoption", "tCO2e", regex=True)
+    # drop index level unit
+    emissions_afolu_mitigated.index = (
+        emissions_afolu_mitigated.index.droplevel("unit")
     )
+
+    for year in afolu_output.loc[
+        :, data_start_year + 1 : proj_end_year
+    ].columns:
+        # Find new adoption in year, multiply by flux and a 'baseline' copy of flux
+        emissions_afolu_mitigated_year = afolu_output.droplevel(
+            "unit"
+        ).parallel_apply(
+            lambda x: max((x.loc[year] - x.loc[year - 1]), 0)
+            * (
+                pd.concat(
+                    [flux.rename(index={scenario: "baseline"}, level=1), flux]
+                ).loc[
+                    slice(None),
+                    [x.name[1]],
+                    [x.name[2]],
+                    [x.name[8] + "|Avg mitigation potential flux"],
+                ]
+            )
+            .squeeze()
+            .rename(x.name),
+            axis=1,
+        )
+
+        # Update timerseries to start at 'year'
+        emissions_afolu_mitigated_year.columns = np.arange(
+            year, year + len(afolu_output.columns), 1
+        )
+
+        # Add to cumulative count
+        emissions_afolu_mitigated = emissions_afolu_mitigated_year.add(
+            emissions_afolu_mitigated, fill_value=0
+        )
+
+    # Cut output to data_start_year : proj_end_year
+    emissions_afolu_mitigated = emissions_afolu_mitigated.loc[
+        :, data_start_year:proj_end_year
+    ].fillna(0)
+
+    # add back in the unit index level
+    emissions_afolu_mitigated.reset_index(inplace=True)
+    emissions_afolu_mitigated["unit"] = "tCO2e"
     emissions_afolu_mitigated.set_index(
         [
             "model",
@@ -593,82 +700,17 @@ def emissions(
         inplace=True,
     )
 
-    afolu_output.columns = afolu_output.columns.astype(int)
-
-    for year in afolu_output.loc[
-        :, data_start_year + 1 : proj_end_year
-    ].columns:
-        # Find new adoption in year, multiply by flux and a 'baseline' copy of flux
-        emissions_afolu_mitigated_year = afolu_output.parallel_apply(
-            lambda x: max((x.loc[year] - x.loc[year - 1]), 0)
-            * (
-                pd.concat(
-                    [flux, flux.rename(index={scenario: "baseline"}, level=1)]
-                ).loc[
-                    slice(None),
-                    [x.name[1]],
-                    [x.name[2]],
-                    [x.name[8] + "|Avg mitigation potential flux"],
-                ]
-            )
-            .squeeze()
-            .rename(x.name),
-            axis=1,
-        )
-
-        emissions_afolu_mitigated_year.reset_index(inplace=True)
-
-        emissions_afolu_mitigated_year.unit = (
-            emissions_afolu_mitigated_year.unit.str.replace(
-                "m3", "tCO2e", regex=True
-            )
-            .replace("Mha", "tCO2e", regex=True)
-            .replace("Percent adoption", "tCO2e", regex=True)
-        )
-
-        emissions_afolu_mitigated_year.set_index(
-            [
-                "model",
-                "scenario",
-                "region",
-                "sector",
-                "product_category",
-                "product_long",
-                "product_short",
-                "flow_category",
-                "flow_long",
-                "flow_short",
-                "unit",
-            ],
-            inplace=True,
-        )
-
-        # Update timerseries to start at 'year'
-        emissions_afolu_mitigated_year.columns = np.arange(
-            year, year + len(afolu_output.columns), 1
-        )
-
-        # Add to cumulative count
-        emissions_afolu_mitigated = emissions_afolu_mitigated_year.fillna(
-            0
-        ).add(emissions_afolu_mitigated, fill_value=0)
-
-    # Cut output to data_start_year : proj_end_year
-    emissions_afolu_mitigated = emissions_afolu_mitigated.loc[
-        :, data_start_year:proj_end_year
-    ]
-
-    # Scale improved rice mitigation to be 58% from CH4 and 42% from N2O
+    # Scale Rice Cultivation mitigation to be 58% from CH4 and 42% from N2O
     def improvedrice(each):
         each[
             (
-                (each.reset_index().flow_long == "Improved Rice")
+                (each.reset_index().flow_long == "Rice Cultivation")
                 & (each.reset_index().product_short == "CH4 (from AFOLU)")
             ).values
         ] = (
             each[
                 (
-                    (each.reset_index().flow_long == "Improved Rice")
+                    (each.reset_index().flow_long == "Rice Cultivation")
                     & (each.reset_index().product_short == "CH4 (from AFOLU)")
                 ).values
             ]
@@ -677,13 +719,13 @@ def emissions(
 
         each[
             (
-                (each.reset_index().flow_long == "Improved Rice")
+                (each.reset_index().flow_long == "Rice Cultivation")
                 & (each.reset_index().product_short == "N2O (from AFOLU)")
             ).values
         ] = (
             each[
                 (
-                    (each.reset_index().flow_long == "Improved Rice")
+                    (each.reset_index().flow_long == "Rice Cultivation")
                     & (each.reset_index().product_short == "N2O (from AFOLU)")
                 ).values
             ]
@@ -746,6 +788,21 @@ def emissions(
         inplace=True,
     )
 
+    # 'Avoided' emissions should be cumulative (Peat Impacts already does this so it is not included here)
+    emissions_afolu_mitigated.update(
+        emissions_afolu_mitigated[
+            (
+                emissions_afolu_mitigated.reset_index().flow_long.isin(
+                    [
+                        "Net Forest Conversion",
+                        "Coastal Impacts",
+                        "Peat Impacts",
+                    ]
+                )
+            ).values
+        ].cumsum(axis=1)
+    )
+
     # endregion
 
     # Combine additional emissions sources with emissions mitigated from NCS
@@ -780,6 +837,25 @@ def emissions(
             "flow_short",
             "unit",
         ]
+    )
+    emissions_afolu = (
+        emissions_afolu.groupby(
+            [
+                "model",
+                "scenario",
+                "region",
+                "sector",
+                "product_category",
+                "product_long",
+                "product_short",
+                "flow_category",
+                "flow_long",
+                "flow_short",
+                "unit",
+            ]
+        )
+        .sum()
+        .sort_index()
     )
 
     # endregion
@@ -1676,6 +1752,23 @@ def emissions(
     # Make emissions_output_co2e
     # region
 
+    # for positive-negative emissions 'pairs', clip the net emissions at zero
+    emissions_output.update(
+        emissions_output[
+            (
+                emissions_output.reset_index().flow_long.isin(
+                    [
+                        "Net Forest Conversion",
+                        "Coastal Impacts",
+                        "Peat Impacts",
+                        "Nitrogen Fertilizer Management",
+                        "Rice Cultivation",
+                    ]
+                )
+            ).values
+        ].clip(lower=0)
+    )
+
     # Group modeled emissions into CO2e
     emissions_output_co2e = emissions_output.copy()
 
@@ -1705,11 +1798,6 @@ def emissions(
     emissions_output_co2e = emissions_output_co2e.parallel_apply(
         lambda x: x.mul(gwp.data[version][x.name[6]]), axis=1
     )
-
-    # # Drop rows with all zero values
-    # emissions_output_co2e = emissions_output_co2e[
-    #     emissions_output_co2e.sum(axis=1) != 0
-    # ].sort_index()
 
     # Change back gas names to match original
     emissions_output_co2e = emissions_output_co2e.rename(
@@ -1971,8 +2059,7 @@ def emissions(
     emissions_output_co2e.update(
         emissions_output_co2e[
             (
-                (emissions_output_co2e.reset_index().scenario == "pathway")
-                & (
+                 (
                     emissions_output_co2e.reset_index().flow_long
                     == "Enteric Fermentation"
                 )
@@ -2220,8 +2307,7 @@ def emissions(
     emissions_output_co2e.update(
         emissions_output_co2e[
             (
-                (emissions_output_co2e.reset_index().scenario == "pathway")
-                & (
+                 (
                     emissions_output_co2e.reset_index().flow_long
                     == "Manure left on Pasture"
                 )
@@ -2457,8 +2543,7 @@ def emissions(
     emissions_output_co2e.update(
         emissions_output_co2e[
             (
-                (emissions_output_co2e.reset_index().scenario == "pathway")
-                & (
+                 (
                     emissions_output_co2e.reset_index().flow_long
                     == "Manure Management"
                 )
@@ -2706,8 +2791,7 @@ def emissions(
     emissions_output_co2e.update(
         emissions_output_co2e[
             (
-                (emissions_output_co2e.reset_index().scenario == "pathway")
-                & (
+                (
                     emissions_output_co2e.reset_index().flow_long
                     == "Manure applied to Soils"
                 )
@@ -2731,7 +2815,7 @@ def emissions(
     emissions_output.columns = emissions_output.columns.astype(str)
     for col in emissions_output.select_dtypes(include="float64").columns:
         emissions_output[col] = emissions_output[col].astype("float32")
-    emissions_output.to_parquet(
+    emissions_output.sort_index().to_parquet(
         "podi/data/emissions_output.parquet", compression="brotli"
     )
 
@@ -2740,7 +2824,7 @@ def emissions(
         emissions_output_co2e[col] = emissions_output_co2e[col].astype(
             "float32"
         )
-    emissions_output_co2e.to_parquet(
+    emissions_output_co2e.sort_index().to_parquet(
         "podi/data/emissions_output_co2e.parquet", compression="brotli"
     )
 

@@ -822,6 +822,38 @@ label {
   z-index: 100;
 }
 
+.select-all-container {
+  text-align: end;
+}
+
+.select-all-option, .deselect-all-option {
+  border: none;
+  background: none;
+  font-style: italic;
+  text-decoration: underline;
+  color: var(--bs-gray-500);
+}
+
+.search-box-input {
+  width: 90%;
+  color: var(--bs-gray-500);
+  /* background-color: var(--ei-100); */
+  padding: 4px 8px;
+  border: 1.5px solid var(--bs-gray-500);
+  border-radius: 5px;
+  font-style: italic;
+}
+
+.clear-search {
+  border: none;
+  background: none;
+  /* font-style: italic;
+  text-decoration: underline; */
+  color: darkgray;
+  margin-left: -24px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 @media (max-width: 1040px) {
   body {
     max-width: 100vw;
