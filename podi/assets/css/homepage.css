@@ -811,6 +811,7 @@ label {
 
 .select-all-container {
   text-align: end;
+  display: inline-block;
 }
 
 .select-all-option, .deselect-all-option {
@@ -821,14 +822,23 @@ label {
   color: var(--bs-gray-500);
 }
 
+.select-all-option {
+  padding: 0 4px 0 18px;
+}
+
+.deselect-all-option {
+  padding: 0;
+}
+
 .search-box-input {
-  width: 90%;
+  width: 70%;
   color: var(--bs-gray-500);
   /* background-color: var(--ei-100); */
   padding: 4px 8px;
   border: 1.5px solid var(--bs-gray-500);
   border-radius: 5px;
   font-style: italic;
+  display: inline-block;
 }
 
 .clear-search {
