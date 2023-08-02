@@ -1041,8 +1041,8 @@ def get_url(href: str):
             else:
                 data['args'][key] = f.args[key]
 
-    if 'model' in f.args.keys():
-        return f.args['model']
+    if 'model_output' in f.args.keys():
+        return f.args['model_output']
     else:
         return "energy_output_supply"
 
@@ -1231,7 +1231,9 @@ def set_data_and_chart_control_options(
         # if df_index_custom_default is defined and level is in
         # df_index_custom_default, use df_index_custom_default[level] as
         # default_value
-        if level not in df.index.names:
+        if data['initial_load'] and (level in data['args'].keys()):
+            default_value = data['args'][level]
+        elif level not in df.index.names:
             default_value = []
         elif df_index_custom_default and level in df_index_custom_default:
             default_value = df_index_custom_default[level]
