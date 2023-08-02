@@ -1029,14 +1029,18 @@ app.layout = html.Div(
               Input('url', 'href'))
 def get_url(href: str):
     f = furl(href)
+    data['initial_load'] = True
+    data['args'] = {}
 
     for key in f.args.keys():
         if ',' in f.args[key]:
-            all_args = f.args[key]
-            print(all_args.split(','))
-            f.args[key] = all_args.split(',')
+            data['args'][key] = f.args[key].split(',')
+        else:
+            if (key == 'groupby'):
+                data['args'][key] = [f.args[key]]
+            else:
+                data['args'][key] = f.args[key]
 
-    print(f.args)
 
     if 'model' in f.args.keys():
         return f.args['model']
@@ -1057,14 +1061,36 @@ def set_data_and_chart_control_options(
 ):
     
     graph_output_dropdown_values = graph_output_dropdown_values_all[model_output]
-    graph_output_dropdown_values_default = (
-        graph_output_dropdown_values_default_all[model_output]
-    )
+    if data['initial_load'] and ('graph_output' in data['args'].keys()):
+        if data['args']['graph_output'] in graph_output_dropdown_values:
+            graph_output_dropdown_values_default = data['args']['graph_output']
+        else:
+            graph_output_dropdown_values_default = (
+                graph_output_dropdown_values_default_all[model_output]
+            )
+    else :
+        graph_output_dropdown_values_default = (
+            graph_output_dropdown_values_default_all[model_output]
+        )
 
     group_by_dropdown_values = group_by_dropdown_values_all[model_output]
-    group_by_dropdown_values_default = group_by_dropdown_values_default_all[
-        model_output
-    ]
+    if data['initial_load'] and ('groupby' in data['args'].keys()):
+        valid_inputs = []
+        for groupby_key in data['args']['groupby']:
+            filtered = list(filter(lambda x: x['value'] == groupby_key, group_by_dropdown_values))
+            if len(filtered) == 1:
+                valid_inputs.append(groupby_key)
+
+        if len(valid_inputs) > 0:
+            group_by_dropdown_values_default = valid_inputs
+        else:
+            group_by_dropdown_values_default = group_by_dropdown_values_default_all[
+                model_output
+            ]
+    else:
+        group_by_dropdown_values_default = group_by_dropdown_values_default_all[
+            model_output
+        ]
 
     # remove group_by_dropdown_values that are not in data_controls_dropdowns[model_output]
     group_by_dropdown_values = [
