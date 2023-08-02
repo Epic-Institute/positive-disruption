@@ -10,6 +10,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash import Input, Output, State, ctx, dcc, html
 
+from furl import furl
+
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
 # Create Dash App
@@ -345,6 +347,7 @@ data_controls_dropdowns = {
 # make layout
 app.layout = html.Div(
     [
+        dcc.Location(id='url', refresh=False),
         html.Meta(
             charSet="utf-8",
         ),
@@ -740,6 +743,15 @@ app.layout = html.Div(
     },
 )
 
+@app.callback(Output("model_output", "value"),
+              Input('url', 'href'))
+def get_url(href: str):
+    f = furl(href)
+
+    if 'model' in f.args.keys():
+        return f.args['model']
+    else:
+        return "energy_output_supply"
 
 # given an input value for model_output, create lists for data_controls and graph_controls. unused_data_controls is needed to store the unused data controls in a hidden div
 @app.callback(
@@ -748,6 +760,7 @@ app.layout = html.Div(
         Output("graph_controls", "children"),
     ],
     inputs=[Input("model_output", "value")],
+    prevent_initial_call=True,
 )
 def set_data_and_chart_control_options(
     model_output, all_possible_index_names=all_possible_index_names
