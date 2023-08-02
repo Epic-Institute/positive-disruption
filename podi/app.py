@@ -1041,7 +1041,6 @@ def get_url(href: str):
             else:
                 data['args'][key] = f.args[key]
 
-
     if 'model' in f.args.keys():
         return f.args['model']
     else:
@@ -1099,14 +1098,34 @@ def set_data_and_chart_control_options(
         if i["value"] in data_controls_dropdowns[model_output]
     ]
 
+    y_axis_type_dropdown_values = y_axis_type_dropdown_values_all[model_output]
+    if data['initial_load'] and ('yaxis_type' in data['args'].keys()):
+        if data['args']['yaxis_type'] in y_axis_type_dropdown_values:
+            y_axis_type_dropdown_default = data['args']['yaxis_type']
+        else:
+            y_axis_type_dropdown_default = y_axis_type_dropdown_default_all[model_output]
+    else :
+        y_axis_type_dropdown_default = y_axis_type_dropdown_default_all[model_output]
+
     units_dropdown_values = units_dropdown_values_all[model_output]
-    units_dropdown_default = units_dropdown_default_all[model_output]
+    if data['initial_load'] and ('units' in data['args'].keys()):
+        filtered = list(filter(lambda x: x['value'] == data['args']['units'], units_dropdown_values))
+        if len(filtered) == 1:
+            units_dropdown_default = data['args']['units']
+        else:
+            units_dropdown_default = units_dropdown_default_all[model_output]
+    else:
+        units_dropdown_default = units_dropdown_default_all[model_output]
 
     graph_type_dropdown_values = graph_type_dropdown_values_all[model_output]
-    graph_type_dropdown_default = graph_type_dropdown_default_all[model_output]
-
-    y_axis_type_dropdown_values = y_axis_type_dropdown_values_all[model_output]
-    y_axis_type_dropdown_default = y_axis_type_dropdown_default_all[model_output]
+    if data['initial_load'] and ('graph_type' in data['args'].keys()):
+        filtered = list(filter(lambda x: x['value'] == data['args']['graph_type'], graph_type_dropdown_values))
+        if len(filtered) == 1:
+            graph_type_dropdown_default = data['args']['graph_type']
+        else:
+            graph_type_dropdown_default = graph_type_dropdown_default_all[model_output]
+    else:
+        graph_type_dropdown_default = graph_type_dropdown_default_all[model_output]
 
     # if model_output is in data_controls_default, use that, otherwise use empty dict
     if model_output in data_controls_default:
@@ -1431,6 +1450,8 @@ def set_data_and_chart_control_options(
             ]
         ),
     )
+
+    data['initial_load'] = False
 
     return (data_controls, graph_controls)
 
