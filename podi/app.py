@@ -343,6 +343,288 @@ data_controls_dropdowns = {
     ],
 }
 
+# define graph_output_dropdown_values
+graph_output_dropdown_values_all = {
+    "energy_output_supply": ["Energy Supply"],
+    "energy_output_demand": ["Energy Demand"],
+    "emissions_output_co2e": [
+        "Emissions Sources",
+        "Negative Emissions",
+        "Net Emissions",
+        "Emissions Mitigated",
+    ],
+    "climate_output_concentration": [
+        "GHG Concentration",
+    ],
+    "climate_output_temperature": ["Temperature Change"],
+    "climate_output_forcing": ["Radiative Forcing"],
+    "technology_adoption_output": ["Technology Adoption Rates"],
+}
+
+# define graph_output_dropdown_values_default
+graph_output_dropdown_values_default_all = {
+    "energy_output_supply": "Energy Supply",
+    "energy_output_demand": "Energy Demand",
+    "emissions_output_co2e": "Emissions Sources",
+    "climate_output_concentration": "GHG Concentration",
+    "climate_output_temperature": "Temperature Change",
+    "climate_output_forcing": "Radiative Forcing",
+    "technology_adoption_output": "Technology Adoption Rates",
+}
+
+# define group_by_dropdown_values
+group_by_dropdown_values_all = {
+    "energy_output_supply": [
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Sector", "value": "sector"},
+        {"label": "Product Category", "value": "product_category"},
+        {"label": "Product", "value": "product_long"},
+        {"label": "Flow Category", "value": "flow_category"},
+        {"label": "Flow", "value": "flow_long"},
+    ],
+    "energy_output_demand": [
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Sector", "value": "sector"},
+        {"label": "Product Category", "value": "product_category"},
+        {"label": "Product", "value": "product_long"},
+        {"label": "Flow Category", "value": "flow_category"},
+        {"label": "Flow", "value": "flow_long"},
+    ],
+    "emissions_output_co2e": [
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Sector", "value": "sector"},
+        {"label": "Product Category", "value": "product_category"},
+        {"label": "Product", "value": "product_long"},
+        {"label": "Flow Category", "value": "flow_category"},
+        {"label": "Flow", "value": "flow_long"},
+        {"label": "Unit", "value": "unit"},
+    ],
+    "climate_output_concentration": [
+        {"label": "Model", "value": "model"},
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Gas", "value": "gas"},
+    ],
+    "climate_output_temperature": [
+        {"label": "Model", "value": "model"},
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Gas", "value": "gas"},
+    ],
+    "climate_output_forcing": [
+        {"label": "Model", "value": "model"},
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Gas", "value": "gas"},
+    ],
+    "technology_adoption_output": [
+        {"label": "Model", "value": "model"},
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Sector", "value": "sector"},
+        {"label": "Product Category", "value": "product_category"},
+        {"label": "Product", "value": "product_long"},
+        {"label": "Flow", "value": "flow_long"},
+    ],
+}
+
+# define group_by_dropdown_values_default
+group_by_dropdown_values_default_all = {
+    "energy_output_supply": ["sector", "product_long"],
+    "energy_output_demand": ["sector", "product_long"],
+    "emissions_output_co2e": ["flow_long"],
+    "climate_output_concentration": ["scenario", "gas"],
+    "climate_output_temperature": "scenario",
+    "climate_output_forcing": "scenario",
+    "technology_adoption_output": "flow_long",
+}
+
+# define y_axis_type_dropdown_values
+y_axis_type_dropdown_values_all = {
+    "energy_output_supply": [
+        "Linear",
+        "Log",
+        "Cumulative",
+        "% of Cumulative at Final Year",
+        "% of Annual Total",
+        "% Change YOY",
+        "% of Maximum Value",
+        "% of Final Year Value",
+    ],
+    "energy_output_demand": [
+        "Linear",
+        "Log",
+        "Cumulative",
+        "% of Cumulative at Final Year",
+        "% of Annual Total",
+        "% Change YOY",
+        "% of Maximum Value",
+        "% of Final Year Value",
+    ],
+    "emissions_output_co2e": [
+        "Linear",
+        "Log",
+        "Cumulative",
+        "% of Cumulative at Final Year",
+        "% of Annual Total",
+        "% Change YOY",
+        "% of Maximum Value",
+        "% of Final Year Value",
+        "PPM",
+    ],
+    "climate_output_concentration": ["Linear", "Log", "% Change YOY"],
+    "climate_output_temperature": ["Linear", "Log", "% Change YOY"],
+    "climate_output_forcing": ["Linear", "Log", "% Change YOY"],
+    "technology_adoption_output": [
+        "Linear",
+        "Log",
+        "Cumulative",
+        "% of Cumulative at Final Year",
+        "% Change YOY",
+        "% of Maximum Value",
+        "% of Final Year Value",
+    ],
+}
+
+# define y_axis_type_dropdown_default
+y_axis_type_dropdown_default_all = {
+    "energy_output_supply": "Linear",
+    "energy_output_demand": "Linear",
+    "emissions_output_co2e": "Linear",
+    "climate_output_concentration": "Linear",
+    "climate_output_temperature": "Linear",
+    "climate_output_forcing": "Linear",
+    "technology_adoption_output": "% of Cumulative at Final Year",
+}
+
+# define graph_type_dropdown_values
+graph_type_dropdown_values_all = {
+    "energy_output_supply": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "energy_output_demand": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "emissions_output_co2e": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "climate_output_concentration": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "climate_output_temperature": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "climate_output_forcing": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "technology_adoption_output": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+}
+
+# define graph_type_dropdown_default
+graph_type_dropdown_default_all = {
+    "energy_output_supply": "tonexty",
+    "energy_output_demand": "tonexty",
+    "emissions_output_co2e": "tonexty",
+    "climate_output_concentration": "none",
+    "climate_output_temperature": "none",
+    "climate_output_forcing": "none",
+    "technology_adoption_output": "none",
+}
+
+# define units_dropdown_values
+units_dropdown_values_all = {
+    "energy_output_supply": [
+        {"label": "TJ", "value": "TJ"},
+        {"label": "EJ", "value": "EJ"},
+        {"label": "GWh", "value": "GWh"},
+        {"label": "TWh", "value": "TWh"},
+    ],
+    "energy_output_demand": [
+        {"label": "TJ", "value": "TJ"},
+        {"label": "EJ", "value": "EJ"},
+        {"label": "GWh", "value": "GWh"},
+        {"label": "TWh", "value": "TWh"},
+    ],
+    "emissions_output_co2e": [
+        {"label": "MtCO2e", "value": "MtCO2e"},
+        {"label": "GtCO2e", "value": "GtCO2e"},
+    ],
+    "climate_output_concentration": [
+        {"label": "PPM", "value": "PPM"},
+        {"label": "PPB", "value": "PPB"},
+    ],
+    "climate_output_temperature": [
+        {"label": "C", "value": "C"},
+        {"label": "F", "value": "F"},
+    ],
+    "climate_output_forcing": [
+        {"label": "W/m^2", "value": "W/m^2"},
+    ],
+    "technology_adoption_output": [
+        {"label": "Multiple", "value": "Multiple"},
+    ],
+}
+
+# define units_dropdown_default
+units_dropdown_default_all = {
+    "energy_output_supply": "TJ",
+    "energy_output_demand": "TJ",
+    "emissions_output_co2e": "MtCO2e",
+        "climate_output_concentration": "PPM",
+        "climate_output_temperature": "C",
+        "climate_output_forcing": "W/m^2",
+        "technology_adoption_output": "Multiple",
+}
+
+# define data_controls_default for a given model_output
+data_controls_default = {
+    "energy_output_supply": {},
+    "energy_output_demand": {
+        "flow_category": [
+            "Final consumption",
+            "Energy industry own use and Losses",
+        ]
+    },
+    # "emissions_output_co2e": {
+    #     "region": [],
+    #     "sector": [],
+    #     "product_long": [],
+    #     "flow_category": [],
+    #     "flow_long": [],
+    # },
+    "climate_output_concentration": {
+        "scenario": ["baseline", "pathway"],
+        "gas": ["CO2"],
+    },
+    "climate_output_temperature": {
+        "scenario": ["baseline", "pathway"],
+        "gas": ["All"],
+    },
+    "climate_output_forcing": {
+        "scenario": ["baseline", "pathway"],
+        "gas": ["CO2"],
+    },
+}
+
 
 # make layout
 app.layout = html.Div(
@@ -748,6 +1030,14 @@ app.layout = html.Div(
 def get_url(href: str):
     f = furl(href)
 
+    for key in f.args.keys():
+        if ',' in f.args[key]:
+            all_args = f.args[key]
+            print(all_args.split(','))
+            f.args[key] = all_args.split(',')
+
+    print(f.args)
+
     if 'model' in f.args.keys():
         return f.args['model']
     else:
@@ -765,112 +1055,14 @@ def get_url(href: str):
 def set_data_and_chart_control_options(
     model_output, all_possible_index_names=all_possible_index_names
 ):
-    # define graph_output_dropdown_values
-    graph_output_dropdown_values = {
-        "energy_output_supply": ["Energy Supply"],
-        "energy_output_demand": ["Energy Demand"],
-        "emissions_output_co2e": [
-            "Emissions Sources",
-            "Negative Emissions",
-            "Net Emissions",
-            "Emissions Mitigated",
-        ],
-        "climate_output_concentration": [
-            "GHG Concentration",
-        ],
-        "climate_output_temperature": ["Temperature Change"],
-        "climate_output_forcing": ["Radiative Forcing"],
-        "technology_adoption_output": ["Technology Adoption Rates"],
-    }
-
-    # define graph_output_dropdown_values_default
-    graph_output_dropdown_values_default = {
-        "energy_output_supply": "Energy Supply",
-        "energy_output_demand": "Energy Demand",
-        "emissions_output_co2e": "Emissions Sources",
-        "climate_output_concentration": "GHG Concentration",
-        "climate_output_temperature": "Temperature Change",
-        "climate_output_forcing": "Radiative Forcing",
-        "technology_adoption_output": "Technology Adoption Rates",
-    }
-
-    graph_output_dropdown_values = graph_output_dropdown_values[model_output]
+    
+    graph_output_dropdown_values = graph_output_dropdown_values_all[model_output]
     graph_output_dropdown_values_default = (
-        graph_output_dropdown_values_default[model_output]
+        graph_output_dropdown_values_default_all[model_output]
     )
 
-    # define group_by_dropdown_values
-    group_by_dropdown_values = {
-        "energy_output_supply": [
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow Category", "value": "flow_category"},
-            {"label": "Flow", "value": "flow_long"},
-        ],
-        "energy_output_demand": [
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow Category", "value": "flow_category"},
-            {"label": "Flow", "value": "flow_long"},
-        ],
-        "emissions_output_co2e": [
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow Category", "value": "flow_category"},
-            {"label": "Flow", "value": "flow_long"},
-            {"label": "Unit", "value": "unit"},
-        ],
-        "climate_output_concentration": [
-            {"label": "Model", "value": "model"},
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Gas", "value": "gas"},
-        ],
-        "climate_output_temperature": [
-            {"label": "Model", "value": "model"},
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Gas", "value": "gas"},
-        ],
-        "climate_output_forcing": [
-            {"label": "Model", "value": "model"},
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Gas", "value": "gas"},
-        ],
-        "technology_adoption_output": [
-            {"label": "Model", "value": "model"},
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow", "value": "flow_long"},
-        ],
-    }
-
-    # define group_by_dropdown_values_default
-    group_by_dropdown_values_default = {
-        "energy_output_supply": ["sector", "product_long"],
-        "energy_output_demand": ["sector", "product_long"],
-        "emissions_output_co2e": ["flow_long"],
-        "climate_output_concentration": ["scenario", "gas"],
-        "climate_output_temperature": "scenario",
-        "climate_output_forcing": "scenario",
-        "technology_adoption_output": "flow_long",
-    }
-
-    group_by_dropdown_values = group_by_dropdown_values[model_output]
-    group_by_dropdown_values_default = group_by_dropdown_values_default[
+    group_by_dropdown_values = group_by_dropdown_values_all[model_output]
+    group_by_dropdown_values_default = group_by_dropdown_values_default_all[
         model_output
     ]
 
@@ -881,197 +1073,14 @@ def set_data_and_chart_control_options(
         if i["value"] in data_controls_dropdowns[model_output]
     ]
 
-    # define y_axis_type_dropdown_values
-    y_axis_type_dropdown_values = {
-        "energy_output_supply": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% of Annual Total",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-        ],
-        "energy_output_demand": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% of Annual Total",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-        ],
-        "emissions_output_co2e": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% of Annual Total",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-            "PPM",
-        ],
-        "climate_output_concentration": ["Linear", "Log", "% Change YOY"],
-        "climate_output_temperature": ["Linear", "Log", "% Change YOY"],
-        "climate_output_forcing": ["Linear", "Log", "% Change YOY"],
-        "technology_adoption_output": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-        ],
-    }
+    units_dropdown_values = units_dropdown_values_all[model_output]
+    units_dropdown_default = units_dropdown_default_all[model_output]
 
-    # define y_axis_type_dropdown_default
-    y_axis_type_dropdown_default = {
-        "energy_output_supply": "Linear",
-        "energy_output_demand": "Linear",
-        "emissions_output_co2e": "Linear",
-        "climate_output_concentration": "Linear",
-        "climate_output_temperature": "Linear",
-        "climate_output_forcing": "Linear",
-        "technology_adoption_output": "% of Cumulative at Final Year",
-    }
+    graph_type_dropdown_values = graph_type_dropdown_values_all[model_output]
+    graph_type_dropdown_default = graph_type_dropdown_default_all[model_output]
 
-    y_axis_type_dropdown_values = y_axis_type_dropdown_values[model_output]
-    y_axis_type_dropdown_default = y_axis_type_dropdown_default[model_output]
-
-    # define graph_type_dropdown_values
-    graph_type_dropdown_values = {
-        "energy_output_supply": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "energy_output_demand": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "emissions_output_co2e": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "climate_output_concentration": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "climate_output_temperature": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "climate_output_forcing": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "technology_adoption_output": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-    }
-
-    # define graph_type_dropdown_default
-    graph_type_dropdown_default = {
-        "energy_output_supply": "tonexty",
-        "energy_output_demand": "tonexty",
-        "emissions_output_co2e": "tonexty",
-        "climate_output_concentration": "none",
-        "climate_output_temperature": "none",
-        "climate_output_forcing": "none",
-        "technology_adoption_output": "none",
-    }
-
-    graph_type_dropdown_values = graph_type_dropdown_values[model_output]
-    graph_type_dropdown_default = graph_type_dropdown_default[model_output]
-
-    # define units_dropdown_values
-    units_dropdown_values = {
-        "energy_output_supply": [
-            {"label": "TJ", "value": "TJ"},
-            {"label": "EJ", "value": "EJ"},
-            {"label": "GWh", "value": "GWh"},
-            {"label": "TWh", "value": "TWh"},
-        ],
-        "energy_output_demand": [
-            {"label": "TJ", "value": "TJ"},
-            {"label": "EJ", "value": "EJ"},
-            {"label": "GWh", "value": "GWh"},
-            {"label": "TWh", "value": "TWh"},
-        ],
-        "emissions_output_co2e": [
-            {"label": "MtCO2e", "value": "MtCO2e"},
-            {"label": "GtCO2e", "value": "GtCO2e"},
-        ],
-        "climate_output_concentration": [
-            {"label": "PPM", "value": "PPM"},
-            {"label": "PPB", "value": "PPB"},
-        ],
-        "climate_output_temperature": [
-            {"label": "C", "value": "C"},
-            {"label": "F", "value": "F"},
-        ],
-        "climate_output_forcing": [
-            {"label": "W/m^2", "value": "W/m^2"},
-        ],
-        "technology_adoption_output": [
-            {"label": "Multiple", "value": "Multiple"},
-        ],
-    }
-
-    # define units_dropdown_default
-    units_dropdown_default = {
-        "energy_output_supply": "TJ",
-        "energy_output_demand": "TJ",
-        "emissions_output_co2e": "MtCO2e",
-        "climate_output_concentration": "PPM",
-        "climate_output_temperature": "C",
-        "climate_output_forcing": "W/m^2",
-        "technology_adoption_output": "Multiple",
-    }
-
-    units_dropdown_values = units_dropdown_values[model_output]
-    units_dropdown_default = units_dropdown_default[model_output]
-
-    # define data_controls_default for a given model_output
-    data_controls_default = {
-        "energy_output_supply": {},
-        "energy_output_demand": {
-            "flow_category": [
-                "Final consumption",
-                "Energy industry own use and Losses",
-            ]
-        },
-        # "emissions_output_co2e": {
-        #     "region": [],
-        #     "sector": [],
-        #     "product_long": [],
-        #     "flow_category": [],
-        #     "flow_long": [],
-        # },
-        "climate_output_concentration": {
-            "scenario": ["baseline", "pathway"],
-            "gas": ["CO2"],
-        },
-        "climate_output_temperature": {
-            "scenario": ["baseline", "pathway"],
-            "gas": ["All"],
-        },
-        "climate_output_forcing": {
-            "scenario": ["baseline", "pathway"],
-            "gas": ["CO2"],
-        },
-    }
+    y_axis_type_dropdown_values = y_axis_type_dropdown_values_all[model_output]
+    y_axis_type_dropdown_default = y_axis_type_dropdown_default_all[model_output]
 
     # if model_output is in data_controls_default, use that, otherwise use empty dict
     if model_output in data_controls_default:
