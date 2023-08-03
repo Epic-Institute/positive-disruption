@@ -694,7 +694,18 @@ app.layout = html.Div(
                                     "Data Explorer", className="header-item"
                                 )
                             ],
-                            className="col-9",
+                            className="col-8",
+                        ),
+                        html.Div(
+                            [
+                                html.Span(
+                                    "share",
+                                    className="header-item",
+                                    id='share-button'
+                                ),
+                                dcc.Clipboard(id="clipboard", style={"display": "inline-block"}),
+                            ],
+                            className="col-1",
                         ),
                         html.Div(
                             [
@@ -1031,6 +1042,7 @@ def get_url(href: str):
     f = furl(href)
     data['initial_load'] = True
     data['args'] = {}
+    data['args']['origin'] = f.origin
 
     for key in f.args.keys():
         if ',' in f.args[key]:
@@ -1654,6 +1666,45 @@ def update_data_controls(
 
     return (data_controls, unused_data_controls)
 """
+
+@app.callback(
+    Output("clipboard", "content"),
+    inputs=[Input("share-button", "n_clicks")],
+    state=[State("model_output", "value"),
+        State("date_range", "value"),
+        State("graph_output", "value"),
+        State("group_by_dropdown_values", "value"),
+        State("yaxis_type", "value"),
+        State("graph_type", "value"),
+        State("units", "value"),
+        *[State(f"{level}", "value") for level in all_possible_index_names]
+    ],
+    prevent_initial_call=True,
+)
+def get_sharing_url(btn_share, model_output, date_range, graph_output, groupby, yaxis_type, graph_type, units, *states):
+    query = '?'
+    for (param, value) in [("model_output", model_output), ("date_range", date_range),
+                           ("graph_output", graph_output), ("groupby", groupby), 
+                           ("yaxis_type", yaxis_type), ("graph_type", graph_type), 
+                           ("units", units)]:
+        if isinstance(value, list):
+            values = [str(x) for x in value]
+            values = ','.join(values)
+        else:
+            values = str(value)
+        query += param + '=' + values + "&"
+
+    for (state, label) in zip(states, all_possible_index_names):
+        if isinstance(state, list):
+            values = [str(x) for x in state]
+            values = ','.join(values)
+        else:
+            values = str(state)
+
+        if values != '':
+            query += label + '=' + values + "&"
+
+    return (data['args']['origin'] + query).replace(" ", "%20").strip("&")
 
 for level in all_possible_index_names:
 
