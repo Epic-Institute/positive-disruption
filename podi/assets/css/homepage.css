@@ -189,24 +189,33 @@ body {
 ::-webkit-input-placeholder {
   font-style: italic;
   color: var(--bs-gray-500);
+  background-color: var(--ei-100);
   font-weight: 300;
 }
 
 :-moz-placeholder {
   font-style: italic;
   color: var(--bs-gray-500);
+  background-color: var(--ei-100);
   font-weight: 300;
 }
 
 ::-moz-placeholder {
   font-style: italic;
   color: var(--bs-gray-500);
+  background-color: var(--ei-100);
   font-weight: 300;
+}
+
+.dbc input::placeholder {
+  color: var(--bs-gray-500) !important;
+  background-color: var(--ei-100) !important;
 }
 
 :-ms-input-placeholder {
   font-style: italic;
   color: var(--bs-gray-500);
+  background-color: var(--ei-100);
   font-weight: 300;
 }
 
@@ -845,13 +854,16 @@ label {
 
 .search-box-input {
   width: 70%;
-  color: var(--bs-gray-500);
-  /* background-color: var(--ei-100); */
   padding: 4px 8px;
   border: 1.5px solid var(--bs-gray-500);
   border-radius: 5px;
   font-style: italic;
   display: inline-block;
+}
+
+.dbc input:not([type=radio]):not([type=checkbox]) {
+  color: var(--bs-gray-500) !important;
+  background-color: var(--ei-100) !important;
 }
 
 .clear-search {
