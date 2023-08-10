@@ -209,7 +209,7 @@ def get_empty_fig(label):
                 showarrow=False,
                 font=dict(
                     size=24,
-                    color="rgba(128, 128, 128, 0.5)",
+                    color="var(--bs-light)",
                 ),
                 align="center",
             )
@@ -2037,7 +2037,7 @@ def update_output_graph(
             x1=date_range[1],
             y0=0,
             y1=1,
-            fillcolor="LightGrey",
+            fillcolor="rgb(22, 81, 99)",
             opacity=0.25,
             layer="above",
             line_width=0,
@@ -2061,7 +2061,8 @@ def update_output_graph(
             },
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
-            plot_bgcolor='rgba(0, 0, 0, 0)',
+            font_color="var(--bs-light)",
+            title_font_color="var(--bs-light)",
             paper_bgcolor='rgba(0, 0, 0, 0)'
         )
 
@@ -2227,7 +2228,7 @@ def update_output_graph(
             x1=date_range[1],
             y0=0,
             y1=1,
-            fillcolor="LightGrey",
+            fillcolor="rgb(22, 81, 99)",
             opacity=0.25,
             layer="above",
             line_width=0,
@@ -2252,6 +2253,8 @@ def update_output_graph(
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
             plot_bgcolor='rgba(0, 0, 0, 0)',
+            font_color="var(--bs-light)",
+            title_font_color="var(--bs-light)",
             paper_bgcolor='rgba(0, 0, 0, 0)',
         )
 
@@ -2414,7 +2417,7 @@ def update_output_graph(
             x1=date_range[1],
             y0=0,
             y1=1,
-            fillcolor="LightGrey",
+            fillcolor="rgb(22, 81, 99)",
             opacity=0.25,
             layer="above",
             line_width=0,
@@ -2437,6 +2440,8 @@ def update_output_graph(
                 "y": 0.99,
             },
             template="plotly_white",
+            font_color="var(--bs-light)",
+            title_font_color="var(--bs-light)",
             margin=dict(t=25, b=0, l=0, r=0),
         )
 
@@ -2590,7 +2595,7 @@ def update_output_graph(
             x1=date_range[1],
             y0=0,
             y1=1,
-            fillcolor="LightGrey",
+            fillcolor="rgb(22, 81, 99)",
             opacity=0.25,
             layer="above",
             line_width=0,
@@ -2613,6 +2618,8 @@ def update_output_graph(
                 "y": 0.99,
             },
             template="plotly_white",
+            font_color="var(--bs-light)",
+            title_font_color="var(--bs-light)",
             margin=dict(t=25, b=0, l=0, r=0),
         )
 
@@ -2661,6 +2668,8 @@ def update_output_graph(
                             color="rgba(128, 128, 128, 0.5)",
                         ),
                         align="center",
+                        font_color="var(--bs-light)",
+                        title_font_color="var(--bs-light)",
                     )
                 ],
             )
@@ -3086,7 +3095,7 @@ def update_output_graph(
             x1=date_range[1],
             y0=0,
             y1=1,
-            fillcolor="LightGrey",
+            fillcolor="rgb(22, 81, 99)",
             opacity=0.25,
             layer="above",
             line_width=0,
@@ -3111,6 +3120,8 @@ def update_output_graph(
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
             plot_bgcolor='rgba(0, 0, 0, 0)',
+            font_color="var(--bs-light)",
+            title_font_color="var(--bs-light)",
             paper_bgcolor='rgba(0, 0, 0, 0)',
         )
 
@@ -3286,7 +3297,7 @@ def update_output_graph(
             x1=date_range[1],
             y0=0,
             y1=1,
-            fillcolor="LightGrey",
+            fillcolor="rgb(22, 81, 99)",
             opacity=0.25,
             layer="above",
             line_width=0,
@@ -3311,6 +3322,8 @@ def update_output_graph(
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
             plot_bgcolor='rgba(0, 0, 0, 0)',
+            font_color="var(--bs-light)",
+            title_font_color="var(--bs-light)",
             paper_bgcolor='rgba(0, 0, 0, 0)',
         )
 
@@ -3455,7 +3468,7 @@ def update_output_graph(
             x1=date_range[1],
             y0=0,
             y1=1,
-            fillcolor="LightGrey",
+            fillcolor="rgb(22, 81, 99)",
             opacity=0.25,
             layer="above",
             line_width=0,
@@ -3480,6 +3493,8 @@ def update_output_graph(
             template="plotly_white",
             margin=dict(t=25, b=0, l=0, r=0),
             plot_bgcolor='rgba(0, 0, 0, 0)',
+            font_color="var(--bs-light)",
+            title_font_color="var(--bs-light)",
             paper_bgcolor='rgba(0, 0, 0, 0)',
         )
 

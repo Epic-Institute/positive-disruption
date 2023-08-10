@@ -866,6 +866,14 @@ label {
   background-color: var(--ei-100) !important;
 }
 
+.gtitle, .legendtext, .ytitle, .bg, .xtick text, .ytick text, .annotation-text{
+  fill: var(--bs-light) !important;
+}
+
+.xgrid.crisp, .ygrid.crisp {
+  opacity: 0.8;
+}
+
 .clear-search {
   border: none;
   background: none;
