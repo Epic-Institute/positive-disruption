@@ -870,8 +870,9 @@ label {
   fill: var(--bs-light) !important;
 }
 
-.xgrid.crisp, .ygrid.crisp {
-  opacity: 0.8;
+.xgrid, .ygrid {
+  stroke-opacity: 0.8 !important;
+  stroke-width: 0.5px !important;
 }
 
 .clear-search {
