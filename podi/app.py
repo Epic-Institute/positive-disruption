@@ -1217,22 +1217,22 @@ def set_data_and_chart_control_options(
                                 id=level + "-clear-search",
                                 className="clear-search",
                             ),
+                            html.Div(
+                                [
+                                    html.Button(
+                                        "All",
+                                        id=level + "-select-all",
+                                        className="select-all-option",
+                                    ),
+                                    html.Button(
+                                        "None",
+                                        id=level + "-deselect-all",
+                                        className="deselect-all-option",
+                                    ),
+                                ],
+                                className="select-all-container",
+                            )
                         ]
-                    ),
-                    html.Div(
-                        [
-                            html.Button(
-                                "Select all",
-                                id=level + "-select-all",
-                                className="select-all-option",
-                            ),
-                            html.Button(
-                                "Deselect all",
-                                id=level + "-deselect-all",
-                                className="deselect-all-option",
-                            ),
-                        ],
-                        className="select-all-container",
                     ),
                     dcc.Checklist(
                         id=level,
