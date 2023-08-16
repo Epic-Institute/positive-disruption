@@ -1061,6 +1061,7 @@ def get_url(href: str):
 # given an input value for model_output, create lists for data_controls and graph_controls. unused_data_controls is needed to store the unused data controls in a hidden div
 @app.callback(
     output=[
+        Output("date_range", "value"),
         Output("data_controls", "children"),
         Output("graph_controls", "children"),
     ],
@@ -1465,9 +1466,14 @@ def set_data_and_chart_control_options(
         ),
     )
 
+    if 'date_range' in data['args'].keys():
+        date_range = [int(date) for date in data['args']['date_range']]
+    else:
+        date_range = [data_start_year, proj_end_year]
+
     data['initial_load'] = False
 
-    return (data_controls, graph_controls)
+    return (date_range, data_controls, graph_controls)
 
 
 """
