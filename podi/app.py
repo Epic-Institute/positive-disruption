@@ -1045,8 +1045,8 @@ def get_url(href: str):
     data['args']['origin'] = f.origin
 
     for key in f.args.keys():
-        if ',' in f.args[key]:
-            data['args'][key] = f.args[key].split(',')
+        if ';' in f.args[key]:
+            data['args'][key] = f.args[key].split(';')
         else:
             if (key == 'groupby'):
                 data['args'][key] = [f.args[key]]
@@ -1695,7 +1695,7 @@ def get_sharing_url(btn_share, model_output, date_range, graph_output, groupby, 
                            ("units", units)]:
         if isinstance(value, list):
             values = [str(x) for x in value]
-            values = ','.join(values)
+            values = ';'.join(values)
         else:
             values = str(value)
         query += param + '=' + values + "&"
@@ -1703,7 +1703,7 @@ def get_sharing_url(btn_share, model_output, date_range, graph_output, groupby, 
     for (state, label) in zip(states, all_possible_index_names):
         if isinstance(state, list):
             values = [str(x) for x in state]
-            values = ','.join(values)
+            values = ';'.join(values)
         else:
             values = str(state)
 
@@ -1884,11 +1884,15 @@ def update_output_graph(
         for value, name in zip(index_values, df.index.names)
         if name in data_controls_dropdowns[model_output]
     ]
+    print(index_values)
 
     # check if df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
+        # print(df.columns, tuple([*index_values]))
         df.loc[tuple([*index_values])]
     except KeyError:
+        # print(df.columns, tuple([*index_values]))
+        # print(df.loc[tuple([*index_values])])
         return (no_data_fig,)
 
     # prevent error if group_by_dropdown_values is empty
