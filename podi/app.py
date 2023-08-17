@@ -718,8 +718,9 @@ app.layout = html.Div(
                                                 ),
                                             ],
                                             target="share-button",
+                                            id='share-tooltip',
                                             placement='bottom',
-                                            is_open=True,
+                                            is_open=False,
                                             className='share-tooltip',
                                             autohide=False
                                         )
@@ -764,10 +765,31 @@ app.layout = html.Div(
                                                         html.P(
                                                             "The Data Explorer is a web-based tool that allows for easy navigation through the Positive Disruption model results to examine how adoption of low- and no-carbon technologies and practices in the energy, agriculture, and land-use sectors can be expected to grow over the next 30 years, and the effect they will have on the process of reversing climate change."
                                                         ),
-                                                        
+                                                        html.P(
+                                                            "Positive Disruption",
+                                                            className="tooltip-subtitle",
+                                                        ),
+                                                        html.P(
+                                                            "The past several decades have seen extensive analysis of climate change science, and there is now an imminent need and remarkable opportunity to focus on climate solutions. While much of the existing climate science portrays the 1.5°C target as challenging given business-as-usual (BAU) emissions projected from the energy and land use sectors, there is strong evidence to suggest that the future will not be BAU. Rather, energy and land use will be disrupted by fast-emerging low- and negative-carbon technologies and practices. Governments, industries, and communities would benefit from decarbonization pathways that recognize this potential for PD speed of scaling."
+                                                        ),
+                                                        html.P(
+                                                            "The model",
+                                                            className="tooltip-subtitle",
+                                                        ),
+                                                        html.P(
+                                                            "For more information about the PD model and the definition of sectors, products, and flows, you can visit the project's GitHub wiki."
+                                                        ),
+                                                        html.P(
+                                                            "Feedback",
+                                                            className="tooltip-subtitle",
+                                                        ),
+                                                        html.P(
+                                                            "For suggested improvements to the data or code just submit a pull request. Feel free to share any other feedback on our Discussions page."
+                                                        ),
                                                     ],
                                                     target="about-button",
-                                                    is_open=True,
+                                                    placement='bottom',
+                                                    is_open=False,
                                                     className='about-tooltip',
                                                     autohide=False
                                                 )
@@ -1699,8 +1721,8 @@ def update_data_controls(
 """
 
 @app.callback(
-    Output("clipboard", "content"),
-    inputs=[Input("share-button", "n_clicks")],
+    Output("share-url", "children"),
+    inputs=[Input("share-tooltip", "is_open")],
     state=[State("model_output", "value"),
         State("date_range", "value"),
         State("graph_output", "value"),
