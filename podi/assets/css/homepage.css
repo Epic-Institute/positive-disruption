@@ -28,12 +28,17 @@ body {
   text-align: center;
   line-height: 64px;
   letter-spacing: 0.2rem;
+  color: var(--bs-light);
+  background-color: var(--ei-background);
+  border: none;
+  padding: 0;
 }
 
 .header-item:hover,
 .header-item a:hover {
   cursor: pointer;
   color: var(--ei-title);
+  background-color: var(--ei-background);
 }
 
 .ei-border-bracket {

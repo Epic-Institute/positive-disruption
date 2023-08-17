@@ -697,13 +697,32 @@ app.layout = html.Div(
                             className="col-8",
                         ),
                         html.Div(
-                            [
-                                html.Span(
+                            children=[
+                                dbc.Button(
                                     "share",
                                     className="header-item",
                                     id='share-button'
                                 ),
-                                dcc.Clipboard(id="clipboard", style={"display": "inline-block"}),
+                                html.Div(
+                                    id="share-details",
+                                    children=[
+                                        dbc.Tooltip(
+                                            children=[
+                                                html.P(
+                                                    "Copy the link below",
+                                                    className="share-subtitle",
+                                                ),
+                                                html.P(
+                                                    "",
+                                                    id='share-url'
+                                                ),
+                                            ],
+                                            target="share-button",
+                                            placement='bottom',
+                                            autohide=False
+                                        )
+                                    ],
+                                ),
                             ],
                             className="col-1",
                         ),
@@ -726,7 +745,7 @@ app.layout = html.Div(
                                 html.Div(
                                     id="dropdown-about",
                                     children=[
-                                        html.Span(
+                                        html.Button(
                                             "about",
                                             id="about-button",
                                             className="header-item",
