@@ -745,6 +745,7 @@ app.layout = html.Div(
                                                         ),
                                                     ],
                                                     target="about-button",
+                                                    autohide=False
                                                 )
                                             ],
                                         ),
