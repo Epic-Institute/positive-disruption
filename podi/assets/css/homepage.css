@@ -455,14 +455,51 @@ input[type="text"]:focus {
   border: 1px solid var(--ei-200);
 }
 
-.ei-popup {
-  max-width: 450px;
+.tooltip-inner {
   background-color: var(--ei-100);
-  padding: 10px 15px;
-  position: absolute;
+  position: relative;
   pointer-events: none;
-  border: 1px solid var(--ei-200);
+  border: 1px solid var(--ei-350);
+  opacity: 1;
+  overflow: scroll;
+  max-width: 400px;
+  width: 400px;
+  border-radius: 0;
+  padding: 20px 20px 10px;
+  font-weight: 300;
+}
+
+.about-tooltip .tooltip-inner {
+  top: -7px;
+  right: 41px;
+  text-align: left;
+}
+
+.share-tooltip .tooltip-inner {
+  top: -7px;
   text-align: center;
+}
+
+.tooltip-subtitle {
+  color: var(--ei-title);
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 0.3rem;
+}
+
+.tooltip.show {
+  opacity: 1 !important;
+}
+
+.tooltip-arrow {
+  display: none !important;
+}
+
+.ei-popup p {
+  background-color: var(--ei-100);
+  opacity: 1;
 }
 
 .legend-header {

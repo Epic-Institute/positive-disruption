@@ -710,7 +710,7 @@ app.layout = html.Div(
                                             children=[
                                                 html.P(
                                                     "Copy the link below",
-                                                    className="share-subtitle",
+                                                    className="tooltip-subtitle",
                                                 ),
                                                 html.P(
                                                     "",
@@ -719,6 +719,8 @@ app.layout = html.Div(
                                             ],
                                             target="share-button",
                                             placement='bottom',
+                                            is_open=True,
+                                            className='share-tooltip',
                                             autohide=False
                                         )
                                     ],
@@ -757,13 +759,16 @@ app.layout = html.Div(
                                                     children=[
                                                         html.P(
                                                             "Positive Disruption Data Explorer",
-                                                            className="about-subtitle",
+                                                            className="tooltip-subtitle",
                                                         ),
                                                         html.P(
                                                             "The Data Explorer is a web-based tool that allows for easy navigation through the Positive Disruption model results to examine how adoption of low- and no-carbon technologies and practices in the energy, agriculture, and land-use sectors can be expected to grow over the next 30 years, and the effect they will have on the process of reversing climate change."
                                                         ),
+                                                        
                                                     ],
                                                     target="about-button",
+                                                    is_open=True,
+                                                    className='about-tooltip',
                                                     autohide=False
                                                 )
                                             ],
