@@ -1931,15 +1931,11 @@ def update_output_graph(
         for value, name in zip(index_values, df.index.names)
         if name in data_controls_dropdowns[model_output]
     ]
-    print(index_values)
 
     # check if df.loc[tuple([*index_values])] raises a KeyError, and if so, return an empty figure
     try:
-        # print(df.columns, tuple([*index_values]))
         df.loc[tuple([*index_values])]
     except KeyError:
-        # print(df.columns, tuple([*index_values]))
-        # print(df.loc[tuple([*index_values])])
         return (no_data_fig,)
 
     # prevent error if group_by_dropdown_values is empty

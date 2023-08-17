@@ -462,8 +462,6 @@ input[type="text"]:focus {
   border: 1px solid var(--ei-350);
   opacity: 1;
   overflow: scroll;
-  max-width: 400px;
-  width: 400px;
   border-radius: 0;
   padding: 20px 20px 10px;
   font-weight: 300;
@@ -480,6 +478,8 @@ input[type="text"]:focus {
 .share-tooltip .tooltip-inner {
   top: -7px;
   text-align: center;
+  max-width: 600px;
+  width: 600px;
 }
 
 .tooltip-subtitle {
@@ -497,6 +497,12 @@ input[type="text"]:focus {
 
 .tooltip-arrow {
   display: none !important;
+}
+
+#share-url {
+  background-color: var(--ei-background);
+  padding: 10px;
+  border: 1px solid var(--ei-350);
 }
 
 .ei-popup p {
