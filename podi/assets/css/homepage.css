@@ -8,6 +8,19 @@ body {
   margin: 0 auto;
 }
 
+.card {
+  background-color: var(--ei-background);
+}
+
+/* .main-svg {
+  background: green;
+} */
+
+.nav-link {
+  background-color: var(--ei-background);
+  border: 1px solid #165163;
+}
+
 .header {
   font-family: 'Josefin Sans', sans-serif;
   color: #FFF;
@@ -176,24 +189,33 @@ body {
 ::-webkit-input-placeholder {
   font-style: italic;
   color: var(--bs-gray-500);
+  background-color: var(--ei-100);
   font-weight: 300;
 }
 
 :-moz-placeholder {
   font-style: italic;
   color: var(--bs-gray-500);
+  background-color: var(--ei-100);
   font-weight: 300;
 }
 
 ::-moz-placeholder {
   font-style: italic;
   color: var(--bs-gray-500);
+  background-color: var(--ei-100);
   font-weight: 300;
+}
+
+.dbc input::placeholder {
+  color: var(--bs-gray-500) !important;
+  background-color: var(--ei-100) !important;
 }
 
 :-ms-input-placeholder {
   font-style: italic;
   color: var(--bs-gray-500);
+  background-color: var(--ei-100);
   font-weight: 300;
 }
 
@@ -832,13 +854,25 @@ label {
 
 .search-box-input {
   width: 70%;
-  color: var(--bs-gray-500);
-  /* background-color: var(--ei-100); */
   padding: 4px 8px;
   border: 1.5px solid var(--bs-gray-500);
   border-radius: 5px;
   font-style: italic;
   display: inline-block;
+}
+
+.dbc input:not([type=radio]):not([type=checkbox]) {
+  color: var(--bs-gray-500) !important;
+  background-color: var(--ei-100) !important;
+}
+
+.gtitle, .legendtext, .ytitle, .bg, .xtick text, .ytick text, .annotation-text{
+  fill: var(--bs-light) !important;
+}
+
+.xgrid, .ygrid {
+  stroke-opacity: 0.8 !important;
+  stroke-width: 0.5px !important;
 }
 
 .clear-search {
@@ -863,4 +897,41 @@ label {
   #data-explorer {
     display: none;
   }
+}
+
+/* Dash app */
+
+.dash-dropdown .Select-control, .dash-dropdown .Select-control .Select-input input,
+.nav-link, .Select-menu-outer *, .VirtualizedSelectOption {
+  background-color: var(--ei-background) !important;
+}
+
+.Select-value, .Select-menu-outer {
+  border: 1px solid #165163 !important;
+  background-color: var(--ei-100);
+}
+
+.nav-link, .Select-value .Select-value-label, .Select-value-icon, .rc-slider-mark-text, .Select-menu-outer *, VirtualizedSelectOption {
+  color: var(--bs-light) !important;
+  /* font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 300; */
+}
+
+.VirtualizedSelectOption {
+  background-color: var(--ei-100) !important;
+}
+
+.VirtualizedSelectOption:hover {
+  color: var(--bs-light) !important;
+  background-color: var(--ei-200) !important;
+}
+
+.Select-value-icon, .Select-value-label {
+  background-color: var(--ei-100);
+}
+
+.dbc .Select--multi .Select-value {
+  border: 1px solid #0ed1d6 !important;
+  background-color: var(--ei-100);
 }
