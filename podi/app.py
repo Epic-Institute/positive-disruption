@@ -10,6 +10,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash import Input, Output, State, ctx, dcc, html
 
+from furl import furl
+
 external_stylesheet = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
 # Create Dash App
@@ -341,10 +343,293 @@ data_controls_dropdowns = {
     ],
 }
 
+# define graph_output_dropdown_values
+graph_output_dropdown_values_all = {
+    "energy_output_supply": ["Energy Supply"],
+    "energy_output_demand": ["Energy Demand"],
+    "emissions_output_co2e": [
+        "Emissions Sources",
+        "Negative Emissions",
+        "Net Emissions",
+        "Emissions Mitigated",
+    ],
+    "climate_output_concentration": [
+        "GHG Concentration",
+    ],
+    "climate_output_temperature": ["Temperature Change"],
+    "climate_output_forcing": ["Radiative Forcing"],
+    "technology_adoption_output": ["Technology Adoption Rates"],
+}
+
+# define graph_output_dropdown_values_default
+graph_output_dropdown_values_default_all = {
+    "energy_output_supply": "Energy Supply",
+    "energy_output_demand": "Energy Demand",
+    "emissions_output_co2e": "Emissions Sources",
+    "climate_output_concentration": "GHG Concentration",
+    "climate_output_temperature": "Temperature Change",
+    "climate_output_forcing": "Radiative Forcing",
+    "technology_adoption_output": "Technology Adoption Rates",
+}
+
+# define group_by_dropdown_values
+group_by_dropdown_values_all = {
+    "energy_output_supply": [
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Sector", "value": "sector"},
+        {"label": "Product Category", "value": "product_category"},
+        {"label": "Product", "value": "product_long"},
+        {"label": "Flow Category", "value": "flow_category"},
+        {"label": "Flow", "value": "flow_long"},
+    ],
+    "energy_output_demand": [
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Sector", "value": "sector"},
+        {"label": "Product Category", "value": "product_category"},
+        {"label": "Product", "value": "product_long"},
+        {"label": "Flow Category", "value": "flow_category"},
+        {"label": "Flow", "value": "flow_long"},
+    ],
+    "emissions_output_co2e": [
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Sector", "value": "sector"},
+        {"label": "Product Category", "value": "product_category"},
+        {"label": "Product", "value": "product_long"},
+        {"label": "Flow Category", "value": "flow_category"},
+        {"label": "Flow", "value": "flow_long"},
+        {"label": "Unit", "value": "unit"},
+    ],
+    "climate_output_concentration": [
+        {"label": "Model", "value": "model"},
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Gas", "value": "gas"},
+    ],
+    "climate_output_temperature": [
+        {"label": "Model", "value": "model"},
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Gas", "value": "gas"},
+    ],
+    "climate_output_forcing": [
+        {"label": "Model", "value": "model"},
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Gas", "value": "gas"},
+    ],
+    "technology_adoption_output": [
+        {"label": "Model", "value": "model"},
+        {"label": "Scenario", "value": "scenario"},
+        {"label": "Region", "value": "region"},
+        {"label": "Sector", "value": "sector"},
+        {"label": "Product Category", "value": "product_category"},
+        {"label": "Product", "value": "product_long"},
+        {"label": "Flow", "value": "flow_long"},
+    ],
+}
+
+# define group_by_dropdown_values_default
+group_by_dropdown_values_default_all = {
+    "energy_output_supply": ["sector", "product_long"],
+    "energy_output_demand": ["sector", "product_long"],
+    "emissions_output_co2e": ["flow_long"],
+    "climate_output_concentration": ["scenario", "gas"],
+    "climate_output_temperature": "scenario",
+    "climate_output_forcing": "scenario",
+    "technology_adoption_output": "flow_long",
+}
+
+# define y_axis_type_dropdown_values
+y_axis_type_dropdown_values_all = {
+    "energy_output_supply": [
+        "Linear",
+        "Log",
+        "Cumulative",
+        "% of Cumulative at Final Year",
+        "% of Annual Total",
+        "% Change YOY",
+        "% of Maximum Value",
+        "% of Final Year Value",
+    ],
+    "energy_output_demand": [
+        "Linear",
+        "Log",
+        "Cumulative",
+        "% of Cumulative at Final Year",
+        "% of Annual Total",
+        "% Change YOY",
+        "% of Maximum Value",
+        "% of Final Year Value",
+    ],
+    "emissions_output_co2e": [
+        "Linear",
+        "Log",
+        "Cumulative",
+        "% of Cumulative at Final Year",
+        "% of Annual Total",
+        "% Change YOY",
+        "% of Maximum Value",
+        "% of Final Year Value",
+        "PPM",
+    ],
+    "climate_output_concentration": ["Linear", "Log", "% Change YOY"],
+    "climate_output_temperature": ["Linear", "Log", "% Change YOY"],
+    "climate_output_forcing": ["Linear", "Log", "% Change YOY"],
+    "technology_adoption_output": [
+        "Linear",
+        "Log",
+        "Cumulative",
+        "% of Cumulative at Final Year",
+        "% Change YOY",
+        "% of Maximum Value",
+        "% of Final Year Value",
+    ],
+}
+
+# define y_axis_type_dropdown_default
+y_axis_type_dropdown_default_all = {
+    "energy_output_supply": "Linear",
+    "energy_output_demand": "Linear",
+    "emissions_output_co2e": "Linear",
+    "climate_output_concentration": "Linear",
+    "climate_output_temperature": "Linear",
+    "climate_output_forcing": "Linear",
+    "technology_adoption_output": "% of Cumulative at Final Year",
+}
+
+# define graph_type_dropdown_values
+graph_type_dropdown_values_all = {
+    "energy_output_supply": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "energy_output_demand": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "emissions_output_co2e": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "climate_output_concentration": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "climate_output_temperature": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "climate_output_forcing": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+    "technology_adoption_output": [
+        {"label": "Area", "value": "tonexty"},
+        {"label": "Line", "value": "none"},
+        {"label": "Table", "value": "Table"},
+    ],
+}
+
+# define graph_type_dropdown_default
+graph_type_dropdown_default_all = {
+    "energy_output_supply": "tonexty",
+    "energy_output_demand": "tonexty",
+    "emissions_output_co2e": "tonexty",
+    "climate_output_concentration": "none",
+    "climate_output_temperature": "none",
+    "climate_output_forcing": "none",
+    "technology_adoption_output": "none",
+}
+
+# define units_dropdown_values
+units_dropdown_values_all = {
+    "energy_output_supply": [
+        {"label": "TJ", "value": "TJ"},
+        {"label": "EJ", "value": "EJ"},
+        {"label": "GWh", "value": "GWh"},
+        {"label": "TWh", "value": "TWh"},
+    ],
+    "energy_output_demand": [
+        {"label": "TJ", "value": "TJ"},
+        {"label": "EJ", "value": "EJ"},
+        {"label": "GWh", "value": "GWh"},
+        {"label": "TWh", "value": "TWh"},
+    ],
+    "emissions_output_co2e": [
+        {"label": "MtCO2e", "value": "MtCO2e"},
+        {"label": "GtCO2e", "value": "GtCO2e"},
+    ],
+    "climate_output_concentration": [
+        {"label": "PPM", "value": "PPM"},
+        {"label": "PPB", "value": "PPB"},
+    ],
+    "climate_output_temperature": [
+        {"label": "C", "value": "C"},
+        {"label": "F", "value": "F"},
+    ],
+    "climate_output_forcing": [
+        {"label": "W/m^2", "value": "W/m^2"},
+    ],
+    "technology_adoption_output": [
+        {"label": "Multiple", "value": "Multiple"},
+    ],
+}
+
+# define units_dropdown_default
+units_dropdown_default_all = {
+    "energy_output_supply": "TJ",
+    "energy_output_demand": "TJ",
+    "emissions_output_co2e": "MtCO2e",
+        "climate_output_concentration": "PPM",
+        "climate_output_temperature": "C",
+        "climate_output_forcing": "W/m^2",
+        "technology_adoption_output": "Multiple",
+}
+
+# define data_controls_default for a given model_output
+data_controls_default = {
+    "energy_output_supply": {},
+    "energy_output_demand": {
+        "flow_category": [
+            "Final consumption",
+            "Energy industry own use and Losses",
+        ]
+    },
+    # "emissions_output_co2e": {
+    #     "region": [],
+    #     "sector": [],
+    #     "product_long": [],
+    #     "flow_category": [],
+    #     "flow_long": [],
+    # },
+    "climate_output_concentration": {
+        "scenario": ["baseline", "pathway"],
+        "gas": ["CO2"],
+    },
+    "climate_output_temperature": {
+        "scenario": ["baseline", "pathway"],
+        "gas": ["All"],
+    },
+    "climate_output_forcing": {
+        "scenario": ["baseline", "pathway"],
+        "gas": ["CO2"],
+    },
+}
+
 
 # make layout
 app.layout = html.Div(
     [
+        dcc.Location(id='url', refresh=False),
         html.Meta(
             charSet="utf-8",
         ),
@@ -409,7 +694,40 @@ app.layout = html.Div(
                                     "Data Explorer", className="header-item"
                                 )
                             ],
-                            className="col-9",
+                            className="col-8",
+                        ),
+                        html.Div(
+                            children=[
+                                dbc.Button(
+                                    "share",
+                                    className="header-item",
+                                    id='share-button'
+                                ),
+                                html.Div(
+                                    id="share-details",
+                                    children=[
+                                        dbc.Tooltip(
+                                            children=[
+                                                html.P(
+                                                    "Copy the link below",
+                                                    className="tooltip-subtitle",
+                                                ),
+                                                html.P(
+                                                    "",
+                                                    id='share-url'
+                                                ),
+                                            ],
+                                            target="share-button",
+                                            id='share-tooltip',
+                                            placement='bottom',
+                                            is_open=False,
+                                            className='share-tooltip',
+                                            autohide=False
+                                        )
+                                    ],
+                                ),
+                            ],
+                            className="col-1",
                         ),
                         html.Div(
                             [
@@ -430,7 +748,7 @@ app.layout = html.Div(
                                 html.Div(
                                     id="dropdown-about",
                                     children=[
-                                        html.Span(
+                                        html.Button(
                                             "about",
                                             id="about-button",
                                             className="header-item",
@@ -442,13 +760,38 @@ app.layout = html.Div(
                                                     children=[
                                                         html.P(
                                                             "Positive Disruption Data Explorer",
-                                                            className="about-subtitle",
+                                                            className="tooltip-subtitle",
                                                         ),
                                                         html.P(
                                                             "The Data Explorer is a web-based tool that allows for easy navigation through the Positive Disruption model results to examine how adoption of low- and no-carbon technologies and practices in the energy, agriculture, and land-use sectors can be expected to grow over the next 30 years, and the effect they will have on the process of reversing climate change."
                                                         ),
+                                                        html.P(
+                                                            "Positive Disruption",
+                                                            className="tooltip-subtitle",
+                                                        ),
+                                                        html.P(
+                                                            "The past several decades have seen extensive analysis of climate change science, and there is now an imminent need and remarkable opportunity to focus on climate solutions. While much of the existing climate science portrays the 1.5°C target as challenging given business-as-usual (BAU) emissions projected from the energy and land use sectors, there is strong evidence to suggest that the future will not be BAU. Rather, energy and land use will be disrupted by fast-emerging low- and negative-carbon technologies and practices. Governments, industries, and communities would benefit from decarbonization pathways that recognize this potential for PD speed of scaling."
+                                                        ),
+                                                        html.P(
+                                                            "The model",
+                                                            className="tooltip-subtitle",
+                                                        ),
+                                                        html.P(
+                                                            "For more information about the PD model and the definition of sectors, products, and flows, you can visit the project's GitHub wiki."
+                                                        ),
+                                                        html.P(
+                                                            "Feedback",
+                                                            className="tooltip-subtitle",
+                                                        ),
+                                                        html.P(
+                                                            "For suggested improvements to the data or code just submit a pull request. Feel free to share any other feedback on our Discussions page."
+                                                        ),
                                                     ],
                                                     target="about-button",
+                                                    placement='bottom',
+                                                    is_open=False,
+                                                    className='about-tooltip',
+                                                    autohide=False
                                                 )
                                             ],
                                         ),
@@ -745,126 +1088,73 @@ app.layout = html.Div(
     },
 )
 
+@app.callback(Output("model_output", "value"),
+              Input('url', 'href'))
+def get_url(href: str):
+    f = furl(href)
+    data['initial_load'] = True
+    data['args'] = {}
+    data['args']['origin'] = f.origin
+
+    for key in f.args.keys():
+        if ';' in f.args[key]:
+            data['args'][key] = f.args[key].split(';')
+        else:
+            if (key == 'groupby'):
+                data['args'][key] = [f.args[key]]
+            else:
+                data['args'][key] = f.args[key]
+
+    if 'model_output' in f.args.keys():
+        return f.args['model_output']
+    else:
+        return "energy_output_supply"
 
 # given an input value for model_output, create lists for data_controls and graph_controls. unused_data_controls is needed to store the unused data controls in a hidden div
 @app.callback(
     output=[
+        Output("date_range", "value"),
         Output("data_controls", "children"),
         Output("graph_controls", "children"),
     ],
     inputs=[Input("model_output", "value")],
+    prevent_initial_call=True,
 )
 def set_data_and_chart_control_options(
     model_output, all_possible_index_names=all_possible_index_names
 ):
-    # define graph_output_dropdown_values
-    graph_output_dropdown_values = {
-        "energy_output_supply": ["Energy Supply"],
-        "energy_output_demand": ["Energy Demand"],
-        "emissions_output_co2e": [
-            "Emissions Sources",
-            "Negative Emissions",
-            "Net Emissions",
-            "Emissions Mitigated",
-        ],
-        "climate_output_concentration": [
-            "GHG Concentration",
-        ],
-        "climate_output_temperature": ["Temperature Change"],
-        "climate_output_forcing": ["Radiative Forcing"],
-        "technology_adoption_output": ["Technology Adoption Rates"],
-    }
+    
+    graph_output_dropdown_values = graph_output_dropdown_values_all[model_output]
+    if data['initial_load'] and ('graph_output' in data['args'].keys()):
+        if data['args']['graph_output'] in graph_output_dropdown_values:
+            graph_output_dropdown_values_default = data['args']['graph_output']
+        else:
+            graph_output_dropdown_values_default = (
+                graph_output_dropdown_values_default_all[model_output]
+            )
+    else :
+        graph_output_dropdown_values_default = (
+            graph_output_dropdown_values_default_all[model_output]
+        )
 
-    # define graph_output_dropdown_values_default
-    graph_output_dropdown_values_default = {
-        "energy_output_supply": "Energy Supply",
-        "energy_output_demand": "Energy Demand",
-        "emissions_output_co2e": "Emissions Sources",
-        "climate_output_concentration": "GHG Concentration",
-        "climate_output_temperature": "Temperature Change",
-        "climate_output_forcing": "Radiative Forcing",
-        "technology_adoption_output": "Technology Adoption Rates",
-    }
+    group_by_dropdown_values = group_by_dropdown_values_all[model_output]
+    if data['initial_load'] and ('groupby' in data['args'].keys()):
+        valid_inputs = []
+        for groupby_key in data['args']['groupby']:
+            filtered = list(filter(lambda x: x['value'] == groupby_key, group_by_dropdown_values))
+            if len(filtered) == 1:
+                valid_inputs.append(groupby_key)
 
-    graph_output_dropdown_values = graph_output_dropdown_values[model_output]
-    graph_output_dropdown_values_default = (
-        graph_output_dropdown_values_default[model_output]
-    )
-
-    # define group_by_dropdown_values
-    group_by_dropdown_values = {
-        "energy_output_supply": [
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow Category", "value": "flow_category"},
-            {"label": "Flow", "value": "flow_long"},
-        ],
-        "energy_output_demand": [
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow Category", "value": "flow_category"},
-            {"label": "Flow", "value": "flow_long"},
-        ],
-        "emissions_output_co2e": [
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow Category", "value": "flow_category"},
-            {"label": "Flow", "value": "flow_long"},
-            {"label": "Unit", "value": "unit"},
-        ],
-        "climate_output_concentration": [
-            {"label": "Model", "value": "model"},
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Gas", "value": "gas"},
-        ],
-        "climate_output_temperature": [
-            {"label": "Model", "value": "model"},
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Gas", "value": "gas"},
-        ],
-        "climate_output_forcing": [
-            {"label": "Model", "value": "model"},
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Gas", "value": "gas"},
-        ],
-        "technology_adoption_output": [
-            {"label": "Model", "value": "model"},
-            {"label": "Scenario", "value": "scenario"},
-            {"label": "Region", "value": "region"},
-            {"label": "Sector", "value": "sector"},
-            {"label": "Product Category", "value": "product_category"},
-            {"label": "Product", "value": "product_long"},
-            {"label": "Flow", "value": "flow_long"},
-        ],
-    }
-
-    # define group_by_dropdown_values_default
-    group_by_dropdown_values_default = {
-        "energy_output_supply": ["sector", "product_long"],
-        "energy_output_demand": ["sector", "product_long"],
-        "emissions_output_co2e": ["flow_long"],
-        "climate_output_concentration": ["scenario", "gas"],
-        "climate_output_temperature": "scenario",
-        "climate_output_forcing": "scenario",
-        "technology_adoption_output": "flow_long",
-    }
-
-    group_by_dropdown_values = group_by_dropdown_values[model_output]
-    group_by_dropdown_values_default = group_by_dropdown_values_default[
-        model_output
-    ]
+        if len(valid_inputs) > 0:
+            group_by_dropdown_values_default = valid_inputs
+        else:
+            group_by_dropdown_values_default = group_by_dropdown_values_default_all[
+                model_output
+            ]
+    else:
+        group_by_dropdown_values_default = group_by_dropdown_values_default_all[
+            model_output
+        ]
 
     # remove group_by_dropdown_values that are not in data_controls_dropdowns[model_output]
     group_by_dropdown_values = [
@@ -873,197 +1163,34 @@ def set_data_and_chart_control_options(
         if i["value"] in data_controls_dropdowns[model_output]
     ]
 
-    # define y_axis_type_dropdown_values
-    y_axis_type_dropdown_values = {
-        "energy_output_supply": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% of Annual Total",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-        ],
-        "energy_output_demand": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% of Annual Total",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-        ],
-        "emissions_output_co2e": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% of Annual Total",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-            "PPM",
-        ],
-        "climate_output_concentration": ["Linear", "Log", "% Change YOY"],
-        "climate_output_temperature": ["Linear", "Log", "% Change YOY"],
-        "climate_output_forcing": ["Linear", "Log", "% Change YOY"],
-        "technology_adoption_output": [
-            "Linear",
-            "Log",
-            "Cumulative",
-            "% of Cumulative at Final Year",
-            "% Change YOY",
-            "% of Maximum Value",
-            "% of Final Year Value",
-        ],
-    }
+    y_axis_type_dropdown_values = y_axis_type_dropdown_values_all[model_output]
+    if data['initial_load'] and ('yaxis_type' in data['args'].keys()):
+        if data['args']['yaxis_type'] in y_axis_type_dropdown_values:
+            y_axis_type_dropdown_default = data['args']['yaxis_type']
+        else:
+            y_axis_type_dropdown_default = y_axis_type_dropdown_default_all[model_output]
+    else :
+        y_axis_type_dropdown_default = y_axis_type_dropdown_default_all[model_output]
 
-    # define y_axis_type_dropdown_default
-    y_axis_type_dropdown_default = {
-        "energy_output_supply": "Linear",
-        "energy_output_demand": "Linear",
-        "emissions_output_co2e": "Linear",
-        "climate_output_concentration": "Linear",
-        "climate_output_temperature": "Linear",
-        "climate_output_forcing": "Linear",
-        "technology_adoption_output": "% of Cumulative at Final Year",
-    }
+    units_dropdown_values = units_dropdown_values_all[model_output]
+    if data['initial_load'] and ('units' in data['args'].keys()):
+        filtered = list(filter(lambda x: x['value'] == data['args']['units'], units_dropdown_values))
+        if len(filtered) == 1:
+            units_dropdown_default = data['args']['units']
+        else:
+            units_dropdown_default = units_dropdown_default_all[model_output]
+    else:
+        units_dropdown_default = units_dropdown_default_all[model_output]
 
-    y_axis_type_dropdown_values = y_axis_type_dropdown_values[model_output]
-    y_axis_type_dropdown_default = y_axis_type_dropdown_default[model_output]
-
-    # define graph_type_dropdown_values
-    graph_type_dropdown_values = {
-        "energy_output_supply": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "energy_output_demand": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "emissions_output_co2e": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "climate_output_concentration": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "climate_output_temperature": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "climate_output_forcing": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-        "technology_adoption_output": [
-            {"label": "Area", "value": "tonexty"},
-            {"label": "Line", "value": "none"},
-            {"label": "Table", "value": "Table"},
-        ],
-    }
-
-    # define graph_type_dropdown_default
-    graph_type_dropdown_default = {
-        "energy_output_supply": "tonexty",
-        "energy_output_demand": "tonexty",
-        "emissions_output_co2e": "tonexty",
-        "climate_output_concentration": "none",
-        "climate_output_temperature": "none",
-        "climate_output_forcing": "none",
-        "technology_adoption_output": "none",
-    }
-
-    graph_type_dropdown_values = graph_type_dropdown_values[model_output]
-    graph_type_dropdown_default = graph_type_dropdown_default[model_output]
-
-    # define units_dropdown_values
-    units_dropdown_values = {
-        "energy_output_supply": [
-            {"label": "TJ", "value": "TJ"},
-            {"label": "EJ", "value": "EJ"},
-            {"label": "GWh", "value": "GWh"},
-            {"label": "TWh", "value": "TWh"},
-        ],
-        "energy_output_demand": [
-            {"label": "TJ", "value": "TJ"},
-            {"label": "EJ", "value": "EJ"},
-            {"label": "GWh", "value": "GWh"},
-            {"label": "TWh", "value": "TWh"},
-        ],
-        "emissions_output_co2e": [
-            {"label": "MtCO2e", "value": "MtCO2e"},
-            {"label": "GtCO2e", "value": "GtCO2e"},
-        ],
-        "climate_output_concentration": [
-            {"label": "PPM", "value": "PPM"},
-            {"label": "PPB", "value": "PPB"},
-        ],
-        "climate_output_temperature": [
-            {"label": "C", "value": "C"},
-            {"label": "F", "value": "F"},
-        ],
-        "climate_output_forcing": [
-            {"label": "W/m^2", "value": "W/m^2"},
-        ],
-        "technology_adoption_output": [
-            {"label": "Multiple", "value": "Multiple"},
-        ],
-    }
-
-    # define units_dropdown_default
-    units_dropdown_default = {
-        "energy_output_supply": "TJ",
-        "energy_output_demand": "TJ",
-        "emissions_output_co2e": "MtCO2e",
-        "climate_output_concentration": "PPM",
-        "climate_output_temperature": "C",
-        "climate_output_forcing": "W/m^2",
-        "technology_adoption_output": "Multiple",
-    }
-
-    units_dropdown_values = units_dropdown_values[model_output]
-    units_dropdown_default = units_dropdown_default[model_output]
-
-    # define data_controls_default for a given model_output
-    data_controls_default = {
-        "energy_output_supply": {},
-        "energy_output_demand": {
-            "flow_category": [
-                "Final consumption",
-                "Energy industry own use and Losses",
-            ]
-        },
-        # "emissions_output_co2e": {
-        #     "region": [],
-        #     "sector": [],
-        #     "product_long": [],
-        #     "flow_category": [],
-        #     "flow_long": [],
-        # },
-        "climate_output_concentration": {
-            "scenario": ["baseline", "pathway"],
-            "gas": ["CO2"],
-        },
-        "climate_output_temperature": {
-            "scenario": ["baseline", "pathway"],
-            "gas": ["All"],
-        },
-        "climate_output_forcing": {
-            "scenario": ["baseline", "pathway"],
-            "gas": ["CO2"],
-        },
-    }
+    graph_type_dropdown_values = graph_type_dropdown_values_all[model_output]
+    if data['initial_load'] and ('graph_type' in data['args'].keys()):
+        filtered = list(filter(lambda x: x['value'] == data['args']['graph_type'], graph_type_dropdown_values))
+        if len(filtered) == 1:
+            graph_type_dropdown_default = data['args']['graph_type']
+        else:
+            graph_type_dropdown_default = graph_type_dropdown_default_all[model_output]
+    else:
+        graph_type_dropdown_default = graph_type_dropdown_default_all[model_output]
 
     # if model_output is in data_controls_default, use that, otherwise use empty dict
     if model_output in data_controls_default:
@@ -1169,7 +1296,9 @@ def set_data_and_chart_control_options(
         # if df_index_custom_default is defined and level is in
         # df_index_custom_default, use df_index_custom_default[level] as
         # default_value
-        if level not in df.index.names:
+        if data['initial_load'] and (level in data['args'].keys()):
+            default_value = data['args'][level]
+        elif level not in df.index.names:
             default_value = []
         elif df_index_custom_default and level in df_index_custom_default:
             default_value = df_index_custom_default[level]
@@ -1390,7 +1519,14 @@ def set_data_and_chart_control_options(
         ),
     )
 
-    return (data_controls, graph_controls)
+    if 'date_range' in data['args'].keys():
+        date_range = [int(date) for date in data['args']['date_range']]
+    else:
+        date_range = [data_start_year, proj_end_year]
+
+    data['initial_load'] = False
+
+    return (date_range, data_controls, graph_controls)
 
 
 """
@@ -1589,6 +1725,45 @@ def update_data_controls(
 
     return (data_controls, unused_data_controls)
 """
+
+@app.callback(
+    Output("share-url", "children"),
+    inputs=[Input("share-tooltip", "is_open")],
+    state=[State("model_output", "value"),
+        State("date_range", "value"),
+        State("graph_output", "value"),
+        State("group_by_dropdown_values", "value"),
+        State("yaxis_type", "value"),
+        State("graph_type", "value"),
+        State("units", "value"),
+        *[State(f"{level}", "value") for level in all_possible_index_names]
+    ],
+    prevent_initial_call=True,
+)
+def get_sharing_url(btn_share, model_output, date_range, graph_output, groupby, yaxis_type, graph_type, units, *states):
+    query = '?'
+    for (param, value) in [("model_output", model_output), ("date_range", date_range),
+                           ("graph_output", graph_output), ("groupby", groupby), 
+                           ("yaxis_type", yaxis_type), ("graph_type", graph_type), 
+                           ("units", units)]:
+        if isinstance(value, list):
+            values = [str(x) for x in value]
+            values = ';'.join(values)
+        else:
+            values = str(value)
+        query += param + '=' + values + "&"
+
+    for (state, label) in zip(states, all_possible_index_names):
+        if isinstance(state, list):
+            values = [str(x) for x in state]
+            values = ';'.join(values)
+        else:
+            values = str(state)
+
+        if values != '':
+            query += label + '=' + values + "&"
+
+    return (data['args']['origin'] + query).replace(" ", "%20").strip("&")
 
 for level in all_possible_index_names:
 
